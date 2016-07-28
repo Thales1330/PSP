@@ -8,18 +8,36 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
-    <File Name="MainFrame.cpp"/>
-    <File Name="wxcrafter.cpp"/>
-    <File Name="wxcrafter_bitmaps.cpp"/>
+    <VirtualDirectory Name="model"/>
+    <VirtualDirectory Name="view">
+      <File Name="ArtMetro.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="controller">
+      <File Name="MainFrame.cpp"/>
+      <File Name="main.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
-    <File Name="MainFrame.h"/>
-    <File Name="wxcrafter.h"/>
+    <VirtualDirectory Name="model"/>
+    <VirtualDirectory Name="view">
+      <File Name="ArtMetro.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="controller">
+      <File Name="MainFrame.h"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
-    <File Name="wxcrafter.wxcp"/>
     <File Name="win_resources.rc"/>
+    <File Name="MainFrame.wxcp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="wxcrafter">
+    <VirtualDirectory Name="resources">
+      <File Name="MainFrameBitmaps.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="base">
+      <File Name="MainFrameBase.h"/>
+      <File Name="MainFrameBase.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -74,6 +92,7 @@
       <Compiler Options="-O2;-Wall;$(shell wx-config --cflags)" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <Preprocessor Value="NDEBUG"/>
+        <Preprocessor Value="UNICODE"/>
       </Compiler>
       <Linker Options="$(shell wx-config --libs);-mwindows" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>

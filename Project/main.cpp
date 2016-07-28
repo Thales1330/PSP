@@ -1,7 +1,8 @@
 #include <wx/app.h>
 #include <wx/event.h>
-#include "MainFrame.h"
 #include <wx/image.h>
+
+#include "MainFrame.h"
 
 // Define the MainApp
 class MainApp : public wxApp

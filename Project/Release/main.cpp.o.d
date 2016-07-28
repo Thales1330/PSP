@@ -85,20 +85,9 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/msw/app.h \
  C:/wxWidgets-3.1.0/include/wx/icon.h \
  C:/wxWidgets-3.1.0/include/wx/iconloc.h \
- C:/wxWidgets-3.1.0/include/wx/msw/icon.h MainFrame.h wxcrafter.h \
- C:/wxWidgets-3.1.0/include/wx/settings.h \
- C:/wxWidgets-3.1.0/include/wx/colour.h \
- C:/wxWidgets-3.1.0/include/wx/msw/colour.h \
- C:/wxWidgets-3.1.0/include/wx/font.h \
- C:/wxWidgets-3.1.0/include/wx/msw/font.h \
- C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
- C:/wxWidgets-3.1.0/include/wx/filesys.h \
- C:/wxWidgets-3.1.0/include/wx/stream.h \
- C:/wxWidgets-3.1.0/include/wx/filename.h \
- C:/wxWidgets-3.1.0/include/wx/file.h \
- C:/wxWidgets-3.1.0/include/wx/convauto.h \
- C:/wxWidgets-3.1.0/include/wx/bitmap.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/icon.h \
  C:/wxWidgets-3.1.0/include/wx/image.h \
+ C:/wxWidgets-3.1.0/include/wx/stream.h \
  C:/wxWidgets-3.1.0/include/wx/imagbmp.h \
  C:/wxWidgets-3.1.0/include/wx/imagpng.h \
  C:/wxWidgets-3.1.0/include/wx/imaggif.h \
@@ -108,7 +97,18 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/imagtiff.h \
  C:/wxWidgets-3.1.0/include/wx/imagpnm.h \
  C:/wxWidgets-3.1.0/include/wx/imagxpm.h \
- C:/wxWidgets-3.1.0/include/wx/imagiff.h \
+ C:/wxWidgets-3.1.0/include/wx/imagiff.h MainFrame.h MainFrameBase.h \
+ C:/wxWidgets-3.1.0/include/wx/settings.h \
+ C:/wxWidgets-3.1.0/include/wx/colour.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/colour.h \
+ C:/wxWidgets-3.1.0/include/wx/font.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/font.h \
+ C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
+ C:/wxWidgets-3.1.0/include/wx/filesys.h \
+ C:/wxWidgets-3.1.0/include/wx/filename.h \
+ C:/wxWidgets-3.1.0/include/wx/file.h \
+ C:/wxWidgets-3.1.0/include/wx/convauto.h \
+ C:/wxWidgets-3.1.0/include/wx/bitmap.h \
  C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
  C:/wxWidgets-3.1.0/include/wx/palette.h \
  C:/wxWidgets-3.1.0/include/wx/msw/palette.h \
@@ -140,18 +140,48 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h \
  C:/wxWidgets-3.1.0/include/wx/msw/frame.h \
  C:/wxWidgets-3.1.0/include/wx/sizer.h \
- C:/wxWidgets-3.1.0/include/wx/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/ribbon/bar.h \
+ C:/wxWidgets-3.1.0/include/wx/ribbon/control.h \
+ C:/wxWidgets-3.1.0/include/wx/ribbon/page.h \
+ C:/wxWidgets-3.1.0/include/wx/ribbon/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/ribbon/art.h \
+ C:/wxWidgets-3.1.0/include/wx/brush.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/brush.h \
+ C:/wxWidgets-3.1.0/include/wx/pen.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/pen.h \
+ C:/wxWidgets-3.1.0/include/wx/ribbon/buttonbar.h \
+ C:/wxWidgets-3.1.0/include/wx/aui/auibook.h \
+ C:/wxWidgets-3.1.0/include/wx/aui/tabart.h \
+ C:/wxWidgets-3.1.0/include/wx/aui/tabartmsw.h \
+ C:/wxWidgets-3.1.0/include/wx/aui/framemanager.h \
+ C:/wxWidgets-3.1.0/include/wx/timer.h \
+ C:/wxWidgets-3.1.0/include/wx/stopwatch.h \
+ C:/wxWidgets-3.1.0/include/wx/time.h \
+ C:/wxWidgets-3.1.0/include/wx/bookctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/withimages.h \
+ C:/wxWidgets-3.1.0/include/wx/notebook.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/notebook.h \
  C:/wxWidgets-3.1.0/include/wx/containr.h \
- C:/wxWidgets-3.1.0/include/wx/msw/panel.h \
- C:/wxWidgets-3.1.0/include/wx/menu.h \
- C:/wxWidgets-3.1.0/include/wx/menuitem.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
- C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h \
- C:/wxWidgets-3.1.0/include/wx/toolbar.h \
- C:/wxWidgets-3.1.0/include/wx/tbarbase.h \
- C:/wxWidgets-3.1.0/include/wx/msw/toolbar.h
+ C:/wxWidgets-3.1.0/include/wx/persist.h \
+ C:/wxWidgets-3.1.0/include/wx/confbase.h \
+ C:/wxWidgets-3.1.0/include/wx/base64.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/window.h \
+ C:/wxWidgets-3.1.0/include/wx/display.h \
+ C:/wxWidgets-3.1.0/include/wx/vidmode.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/bookctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/treebook.h \
+ C:/wxWidgets-3.1.0/include/wx/treebook.h \
+ C:/wxWidgets-3.1.0/include/wx/treectrl.h \
+ C:/wxWidgets-3.1.0/include/wx/treebase.h \
+ C:/wxWidgets-3.1.0/include/wx/itemid.h \
+ C:/wxWidgets-3.1.0/include/wx/textctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/textentry.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/textentry.h \
+ C:/wxWidgets-3.1.0/include/wx/ioswrap.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h
 
 C:/wxWidgets-3.1.0/include/wx/app.h:
 
@@ -331,35 +361,9 @@ C:/wxWidgets-3.1.0/include/wx/iconloc.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/icon.h:
 
-MainFrame.h:
-
-wxcrafter.h:
-
-C:/wxWidgets-3.1.0/include/wx/settings.h:
-
-C:/wxWidgets-3.1.0/include/wx/colour.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/colour.h:
-
-C:/wxWidgets-3.1.0/include/wx/font.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/font.h:
-
-C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h:
-
-C:/wxWidgets-3.1.0/include/wx/filesys.h:
+C:/wxWidgets-3.1.0/include/wx/image.h:
 
 C:/wxWidgets-3.1.0/include/wx/stream.h:
-
-C:/wxWidgets-3.1.0/include/wx/filename.h:
-
-C:/wxWidgets-3.1.0/include/wx/file.h:
-
-C:/wxWidgets-3.1.0/include/wx/convauto.h:
-
-C:/wxWidgets-3.1.0/include/wx/bitmap.h:
-
-C:/wxWidgets-3.1.0/include/wx/image.h:
 
 C:/wxWidgets-3.1.0/include/wx/imagbmp.h:
 
@@ -380,6 +384,32 @@ C:/wxWidgets-3.1.0/include/wx/imagpnm.h:
 C:/wxWidgets-3.1.0/include/wx/imagxpm.h:
 
 C:/wxWidgets-3.1.0/include/wx/imagiff.h:
+
+MainFrame.h:
+
+MainFrameBase.h:
+
+C:/wxWidgets-3.1.0/include/wx/settings.h:
+
+C:/wxWidgets-3.1.0/include/wx/colour.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/colour.h:
+
+C:/wxWidgets-3.1.0/include/wx/font.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/font.h:
+
+C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h:
+
+C:/wxWidgets-3.1.0/include/wx/filesys.h:
+
+C:/wxWidgets-3.1.0/include/wx/filename.h:
+
+C:/wxWidgets-3.1.0/include/wx/file.h:
+
+C:/wxWidgets-3.1.0/include/wx/convauto.h:
+
+C:/wxWidgets-3.1.0/include/wx/bitmap.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h:
 
@@ -443,26 +473,86 @@ C:/wxWidgets-3.1.0/include/wx/msw/frame.h:
 
 C:/wxWidgets-3.1.0/include/wx/sizer.h:
 
-C:/wxWidgets-3.1.0/include/wx/panel.h:
+C:/wxWidgets-3.1.0/include/wx/ribbon/bar.h:
+
+C:/wxWidgets-3.1.0/include/wx/ribbon/control.h:
+
+C:/wxWidgets-3.1.0/include/wx/ribbon/page.h:
+
+C:/wxWidgets-3.1.0/include/wx/ribbon/panel.h:
+
+C:/wxWidgets-3.1.0/include/wx/ribbon/art.h:
+
+C:/wxWidgets-3.1.0/include/wx/brush.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/brush.h:
+
+C:/wxWidgets-3.1.0/include/wx/pen.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/pen.h:
+
+C:/wxWidgets-3.1.0/include/wx/ribbon/buttonbar.h:
+
+C:/wxWidgets-3.1.0/include/wx/aui/auibook.h:
+
+C:/wxWidgets-3.1.0/include/wx/aui/tabart.h:
+
+C:/wxWidgets-3.1.0/include/wx/aui/tabartmsw.h:
+
+C:/wxWidgets-3.1.0/include/wx/aui/framemanager.h:
+
+C:/wxWidgets-3.1.0/include/wx/timer.h:
+
+C:/wxWidgets-3.1.0/include/wx/stopwatch.h:
+
+C:/wxWidgets-3.1.0/include/wx/time.h:
+
+C:/wxWidgets-3.1.0/include/wx/bookctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/withimages.h:
+
+C:/wxWidgets-3.1.0/include/wx/notebook.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/notebook.h:
 
 C:/wxWidgets-3.1.0/include/wx/containr.h:
 
-C:/wxWidgets-3.1.0/include/wx/msw/panel.h:
+C:/wxWidgets-3.1.0/include/wx/persist.h:
 
-C:/wxWidgets-3.1.0/include/wx/menu.h:
+C:/wxWidgets-3.1.0/include/wx/confbase.h:
 
-C:/wxWidgets-3.1.0/include/wx/menuitem.h:
+C:/wxWidgets-3.1.0/include/wx/base64.h:
 
-C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h:
+C:/wxWidgets-3.1.0/include/wx/persist/toplevel.h:
 
-C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
+C:/wxWidgets-3.1.0/include/wx/persist/window.h:
 
-C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
+C:/wxWidgets-3.1.0/include/wx/display.h:
 
-C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
+C:/wxWidgets-3.1.0/include/wx/vidmode.h:
 
-C:/wxWidgets-3.1.0/include/wx/toolbar.h:
+C:/wxWidgets-3.1.0/include/wx/persist/bookctrl.h:
 
-C:/wxWidgets-3.1.0/include/wx/tbarbase.h:
+C:/wxWidgets-3.1.0/include/wx/persist/treebook.h:
 
-C:/wxWidgets-3.1.0/include/wx/msw/toolbar.h:
+C:/wxWidgets-3.1.0/include/wx/treebook.h:
+
+C:/wxWidgets-3.1.0/include/wx/treectrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/treebase.h:
+
+C:/wxWidgets-3.1.0/include/wx/itemid.h:
+
+C:/wxWidgets-3.1.0/include/wx/textctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/textentry.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/textentry.h:
+
+C:/wxWidgets-3.1.0/include/wx/ioswrap.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns="http://www.wxwidgets.org/wxxrc">
+  <!-- Handler Generation is ON -->
+  <object class="wxBitmap" name="about32">data\images\ribbon\about32.png</object>
+  <object class="wxBitmap" name="add32">data\images\ribbon\add32.png</object>
+  <object class="wxBitmap" name="chart32">data\images\ribbon\chart32.png</object>
+  <object class="wxBitmap" name="close32">data\images\ribbon\close32.png</object>
+  <object class="wxBitmap" name="copy32">data\images\ribbon\copy32.png</object>
+  <object class="wxBitmap" name="dataReport32">data\images\ribbon\dataReport32.png</object>
+  <object class="wxBitmap" name="delete32">data\images\ribbon\delete32.png</object>
+  <object class="wxBitmap" name="drag32">data\images\ribbon\drag32.png</object>
+  <object class="wxBitmap" name="exit32">data\images\ribbon\exit32.png</object>
+  <object class="wxBitmap" name="fault32">data\images\ribbon\fault32.png</object>
+  <object class="wxBitmap" name="faultPower32">data\images\ribbon\faultPower32.png</object>
+  <object class="wxBitmap" name="fit32">data\images\ribbon\fit32.png</object>
+  <object class="wxBitmap" name="guide32">data\images\ribbon\guide32.png</object>
+  <object class="wxBitmap" name="impExp32">data\images\ribbon\impExp32.png</object>
+  <object class="wxBitmap" name="logo128">data\images\logo128.png</object>
+  <object class="wxBitmap" name="logo16">data\images\logo16.png</object>
+  <object class="wxBitmap" name="logo256">data\images\logo256.png</object>
+  <object class="wxBitmap" name="logo32">data\images\logo32.png</object>
+  <object class="wxBitmap" name="logo64">data\images\logo64.png</object>
+  <object class="wxBitmap" name="move32">data\images\ribbon\move32.png</object>
+  <object class="wxBitmap" name="new32">data\images\ribbon\new32.png</object>
+  <object class="wxBitmap" name="open32">data\images\ribbon\open32.png</object>
+  <object class="wxBitmap" name="paste32">data\images\ribbon\paste32.png</object>
+  <object class="wxBitmap" name="pauseRunning32">data\images\ribbon\pauseRunning32.png</object>
+  <object class="wxBitmap" name="playStopped32">data\images\ribbon\playStopped32.png</object>
+  <object class="wxBitmap" name="powerFLow32">data\images\ribbon\powerFLow32.png</object>
+  <object class="wxBitmap" name="redo32">data\images\ribbon\redo32.png</object>
+  <object class="wxBitmap" name="reset32">data\images\ribbon\reset32.png</object>
+  <object class="wxBitmap" name="save32">data\images\ribbon\save32.png</object>
+  <object class="wxBitmap" name="saveAs32">data\images\ribbon\saveAs32.png</object>
+  <object class="wxBitmap" name="settings32">data\images\ribbon\settings32.png</object>
+  <object class="wxBitmap" name="snap32">data\images\ribbon\snap32.png</object>
+  <object class="wxBitmap" name="undo32">data\images\ribbon\undo32.png</object>
+</resource>
