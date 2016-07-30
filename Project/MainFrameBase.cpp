@@ -141,7 +141,7 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ENABLESOL, _("Enable solution"), wxXmlResource::Get()->LoadBitmap(wxT("playStopped32")), _("Enables the power flow and fault (if exists) calculations after any circuit change"), wxRIBBON_BUTTON_TOGGLE);
     
-    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_DISABLESOL, _("Disable solution"), wxXmlResource::Get()->LoadBitmap(wxT("pauseRunning32")), _("Disables the power flow and fault calculations after any circuit changes"), wxRIBBON_BUTTON_TOGGLE);
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_DISABLESOL, _("Disable solution"), wxXmlResource::Get()->LoadBitmap(wxT("pauseStopped32")), _("Disables the power flow and fault calculations after any circuit changes"), wxRIBBON_BUTTON_TOGGLE);
     
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_RESETVOLT, _("Reset voltages"), wxXmlResource::Get()->LoadBitmap(wxT("reset32")), _("Reset all voltages to initial state"), wxRIBBON_BUTTON_NORMAL);
     m_ribbonButtonBarCircuit->Realize();
@@ -211,10 +211,10 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     boxSizer_lvl_1_1->Add(boxSizer_lvl_2_2, 1, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
-    m_auiBook->SetName(wxT("m_auiBook"));
+    m_auiNotebook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
+    m_auiNotebook->SetName(wxT("m_auiNotebook"));
     
-    boxSizer_lvl_2_2->Add(m_auiBook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer_lvl_2_2->Add(m_auiNotebook, 1, wxEXPAND, WXC_FROM_DIP(5));
     
     m_statusBar = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE);
     m_statusBar->SetFieldsCount(4);
@@ -222,10 +222,10 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     
     #if wxVERSION_NUMBER >= 2900
-    if(!wxPersistenceManager::Get().Find(m_auiBook)){
-        wxPersistenceManager::Get().RegisterAndRestore(m_auiBook);
+    if(!wxPersistenceManager::Get().Find(m_auiNotebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_auiNotebook);
     } else {
-        wxPersistenceManager::Get().Restore(m_auiBook);
+        wxPersistenceManager::Get().Restore(m_auiNotebook);
     }
     #endif
     

@@ -24,7 +24,7 @@
   <object class="wxBitmap" name="new32">data\images\ribbon\new32.png</object>
   <object class="wxBitmap" name="open32">data\images\ribbon\open32.png</object>
   <object class="wxBitmap" name="paste32">data\images\ribbon\paste32.png</object>
-  <object class="wxBitmap" name="pauseRunning32">data\images\ribbon\pauseRunning32.png</object>
+  <object class="wxBitmap" name="pauseStopped32">data\images\ribbon\pauseStopped32.png</object>
   <object class="wxBitmap" name="playStopped32">data\images\ribbon\playStopped32.png</object>
   <object class="wxBitmap" name="powerFLow32">data\images\ribbon\powerFLow32.png</object>
   <object class="wxBitmap" name="redo32">data\images\ribbon\redo32.png</object>

@@ -8,36 +8,48 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <VirtualDirectory Name="model"/>
+    <VirtualDirectory Name="model">
+      <File Name="Element.cpp"/>
+      <File Name="Bus.cpp"/>
+    </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
       <File Name="main.cpp"/>
+      <File Name="Workspace.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
-    <VirtualDirectory Name="model"/>
+    <VirtualDirectory Name="model">
+      <File Name="Element.h"/>
+      <File Name="Bus.h"/>
+    </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>
+      <File Name="Workspace.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
-    <File Name="MainFrame.wxcp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="wxcrafter">
     <VirtualDirectory Name="resources">
       <File Name="MainFrameBitmaps.cpp"/>
+      <File Name="WorkspaceBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
       <File Name="MainFrameBase.cpp"/>
+      <File Name="WorkspaceBase.h"/>
+      <File Name="WorkspaceBase.cpp"/>
     </VirtualDirectory>
+    <File Name="MainFrame.wxcp"/>
+    <File Name="Workspace.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -94,7 +106,7 @@
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="UNICODE"/>
       </Compiler>
-      <Linker Options="$(shell wx-config --libs);-mwindows" Required="yes"/>
+      <Linker Options="$(shell wx-config --libs gl);-mwindows" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/PSP-UFU" IntermediateDirectory="./Release" Command="./PSP-UFU" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>

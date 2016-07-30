@@ -98,7 +98,7 @@ protected:
     wxRibbonButtonBar* m_ribbonButtonBarStability;
     wxRibbonPanel* m_ribbonPanelData;
     wxRibbonButtonBar* m_ribbonButtonBarStabData;
-    wxAuiNotebook* m_auiBook;
+    wxAuiNotebook* m_auiNotebook;
     wxStatusBar* m_statusBar;
 
 protected:
@@ -135,7 +135,7 @@ protected:
 
 public:
     wxRibbonBar* GetRibbonBar() { return m_ribbonBar; }
-    wxAuiNotebook* GetAuiBook() { return m_auiBook; }
+    wxAuiNotebook* GetAuiNotebook() { return m_auiNotebook; }
     wxStatusBar* GetStatusBar() { return m_statusBar; }
     MainFrameBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("PSP-UFU"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBase();

@@ -1,7 +1,7 @@
 {
  "metadata": {
   "m_generatedFilesDir": ".",
-  "m_objCounter": 134,
+  "m_objCounter": 138,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxC9ED9InitBitmapResources",
   "m_bitmapsFile": "MainFrameBitmaps.cpp",
@@ -2646,7 +2646,7 @@
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/pauseRunning32.png"
+                   "m_path": "data/images/ribbon/pauseStopped32.png"
                   }, {
                    "type": "string",
                    "m_label": "Help String:",
@@ -4693,7 +4693,7 @@
           }, {
            "type": "string",
            "m_label": "Name:",
-           "m_value": "m_auiBook"
+           "m_value": "m_auiNotebook"
           }, {
            "type": "multi-string",
            "m_label": "Tooltip:",

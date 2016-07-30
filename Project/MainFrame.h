@@ -1,13 +1,30 @@
 #ifndef MAINFRAME_H
 #define MAINFRAME_H
 
+#include <wx/menu.h>
+#include <wx/msgdlg.h>
+
 #include "MainFrameBase.h"
 #include "ArtMetro.h"
+#include "Workspace.h"
+
+enum
+{
+    ID_ADDMENU_BUS = 20000,
+    ID_ADDMENU_LINE,
+    ID_ADDMENU_TRANSFORMER,
+    ID_ADDMENU_GENERATOR,
+    ID_ADDMENU_LOAD,
+    ID_ADDMENU_CAPACITOR,
+    ID_ADDMENU_INDUCTOR,
+    ID_ADDMENU_INDMOTOR,
+    ID_ADDMENU_SYNCCOMP
+};
 
 class MainFrame : public MainFrameBase
 {
    public:
-    MainFrame(wxWindow* parent);
+    MainFrame(wxWindow* parent, wxLocale* locale);
     ~MainFrame();
 
    protected:
@@ -21,7 +38,7 @@ class MainFrame : public MainFrameBase
     virtual void OnDisableSolutionClick(wxRibbonButtonBarEvent& event);
     virtual void OnDragClick(wxRibbonButtonBarEvent& event);
     virtual void OnEnableSolutionClick(wxRibbonButtonBarEvent& event);
-    virtual void OnExitClick(wxRibbonButtonBarEvent& event);
+    virtual void OnExitClick(wxRibbonButtonBarEvent& event) { this->Close(); };
     virtual void OnExpImpClick(wxRibbonButtonBarEvent& event);
     virtual void OnFaultClick(wxRibbonButtonBarEvent& event);
     virtual void OnFitClick(wxRibbonButtonBarEvent& event);
@@ -43,10 +60,18 @@ class MainFrame : public MainFrameBase
     virtual void OnNewClick(wxRibbonButtonBarEvent& event);
 
    private:
+    std::vector<Workspace*> m_workspaceList;
+	int m_projectNumber = 1;
+
     wxRibbonMetroArtProvider* m_artMetro;
+    wxMenu* m_addElementsMenu;
+    wxLocale* m_locale;
 
     void Init();
-	void EnableCurrentProjectRibbon(bool enable = true);
+    void EnableCurrentProjectRibbon(bool enable = true);
+    void CreateAddElementsMenu();
+
+    void OnAddElementsClick(wxCommandEvent& event);
 };
 
 #endif  // MAINFRAME_H

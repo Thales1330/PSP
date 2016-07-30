@@ -97,41 +97,60 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/imagtiff.h \
  C:/wxWidgets-3.1.0/include/wx/imagpnm.h \
  C:/wxWidgets-3.1.0/include/wx/imagxpm.h \
- C:/wxWidgets-3.1.0/include/wx/imagiff.h MainFrame.h MainFrameBase.h \
- C:/wxWidgets-3.1.0/include/wx/settings.h \
- C:/wxWidgets-3.1.0/include/wx/colour.h \
- C:/wxWidgets-3.1.0/include/wx/msw/colour.h \
+ C:/wxWidgets-3.1.0/include/wx/imagiff.h \
+ C:/wxWidgets-3.1.0/include/wx/stdpaths.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/stdpaths.h MainFrame.h \
+ C:/wxWidgets-3.1.0/include/wx/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/window.h \
  C:/wxWidgets-3.1.0/include/wx/font.h \
  C:/wxWidgets-3.1.0/include/wx/msw/font.h \
+ C:/wxWidgets-3.1.0/include/wx/colour.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/colour.h \
+ C:/wxWidgets-3.1.0/include/wx/region.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/region.h \
+ C:/wxWidgets-3.1.0/include/wx/validate.h \
+ C:/wxWidgets-3.1.0/include/wx/palette.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/palette.h \
+ C:/wxWidgets-3.1.0/include/wx/accel.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/accel.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/window.h \
+ C:/wxWidgets-3.1.0/include/wx/settings.h \
+ C:/wxWidgets-3.1.0/include/wx/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/bitmap.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
+ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/dialog.h \
+ C:/wxWidgets-3.1.0/include/wx/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h \
+ C:/wxWidgets-3.1.0/include/wx/iconbndl.h \
+ C:/wxWidgets-3.1.0/include/wx/weakref.h \
+ C:/wxWidgets-3.1.0/include/wx/meta/int2type.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/containr.h \
+ C:/wxWidgets-3.1.0/include/wx/sharedptr.h \
+ C:/wxWidgets-3.1.0/include/wx/atomic.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/dialog.h \
+ C:/wxWidgets-3.1.0/include/wx/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/stockitem.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h MainFrameBase.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
  C:/wxWidgets-3.1.0/include/wx/filesys.h \
  C:/wxWidgets-3.1.0/include/wx/filename.h \
  C:/wxWidgets-3.1.0/include/wx/file.h \
  C:/wxWidgets-3.1.0/include/wx/convauto.h \
- C:/wxWidgets-3.1.0/include/wx/bitmap.h \
- C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
- C:/wxWidgets-3.1.0/include/wx/palette.h \
- C:/wxWidgets-3.1.0/include/wx/msw/palette.h \
  C:/wxWidgets-3.1.0/include/wx/artprov.h \
- C:/wxWidgets-3.1.0/include/wx/iconbndl.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xmlreshandler.h \
  C:/wxWidgets-3.1.0/include/wx/imaglist.h \
  C:/wxWidgets-3.1.0/include/wx/msw/imaglist.h \
- C:/wxWidgets-3.1.0/include/wx/window.h \
- C:/wxWidgets-3.1.0/include/wx/region.h \
- C:/wxWidgets-3.1.0/include/wx/msw/region.h \
- C:/wxWidgets-3.1.0/include/wx/validate.h \
- C:/wxWidgets-3.1.0/include/wx/accel.h \
- C:/wxWidgets-3.1.0/include/wx/msw/accel.h \
- C:/wxWidgets-3.1.0/include/wx/msw/window.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xh_bmp.h \
  C:/wxWidgets-3.1.0/include/wx/frame.h \
- C:/wxWidgets-3.1.0/include/wx/toplevel.h \
- C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h \
- C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h \
- C:/wxWidgets-3.1.0/include/wx/weakref.h \
- C:/wxWidgets-3.1.0/include/wx/meta/int2type.h \
- C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h \
  C:/wxWidgets-3.1.0/include/wx/statusbr.h \
  C:/wxWidgets-3.1.0/include/wx/control.h \
  C:/wxWidgets-3.1.0/include/wx/msw/control.h \
@@ -161,7 +180,6 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/withimages.h \
  C:/wxWidgets-3.1.0/include/wx/notebook.h \
  C:/wxWidgets-3.1.0/include/wx/msw/notebook.h \
- C:/wxWidgets-3.1.0/include/wx/containr.h \
  C:/wxWidgets-3.1.0/include/wx/persist.h \
  C:/wxWidgets-3.1.0/include/wx/confbase.h \
  C:/wxWidgets-3.1.0/include/wx/base64.h \
@@ -181,7 +199,7 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/ioswrap.h \
  C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h \
  C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
- C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h ArtMetro.h
 
 C:/wxWidgets-3.1.0/include/wx/app.h:
 
@@ -385,19 +403,93 @@ C:/wxWidgets-3.1.0/include/wx/imagxpm.h:
 
 C:/wxWidgets-3.1.0/include/wx/imagiff.h:
 
+C:/wxWidgets-3.1.0/include/wx/stdpaths.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/stdpaths.h:
+
 MainFrame.h:
 
-MainFrameBase.h:
+C:/wxWidgets-3.1.0/include/wx/menu.h:
 
-C:/wxWidgets-3.1.0/include/wx/settings.h:
+C:/wxWidgets-3.1.0/include/wx/window.h:
+
+C:/wxWidgets-3.1.0/include/wx/font.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/font.h:
 
 C:/wxWidgets-3.1.0/include/wx/colour.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/colour.h:
 
-C:/wxWidgets-3.1.0/include/wx/font.h:
+C:/wxWidgets-3.1.0/include/wx/region.h:
 
-C:/wxWidgets-3.1.0/include/wx/msw/font.h:
+C:/wxWidgets-3.1.0/include/wx/msw/region.h:
+
+C:/wxWidgets-3.1.0/include/wx/validate.h:
+
+C:/wxWidgets-3.1.0/include/wx/palette.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/palette.h:
+
+C:/wxWidgets-3.1.0/include/wx/accel.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/accel.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/window.h:
+
+C:/wxWidgets-3.1.0/include/wx/settings.h:
+
+C:/wxWidgets-3.1.0/include/wx/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/bitmap.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h:
+
+C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/dialog.h:
+
+C:/wxWidgets-3.1.0/include/wx/toplevel.h:
+
+C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h:
+
+C:/wxWidgets-3.1.0/include/wx/iconbndl.h:
+
+C:/wxWidgets-3.1.0/include/wx/weakref.h:
+
+C:/wxWidgets-3.1.0/include/wx/meta/int2type.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h:
+
+C:/wxWidgets-3.1.0/include/wx/containr.h:
+
+C:/wxWidgets-3.1.0/include/wx/sharedptr.h:
+
+C:/wxWidgets-3.1.0/include/wx/atomic.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/dialog.h:
+
+C:/wxWidgets-3.1.0/include/wx/panel.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/panel.h:
+
+C:/wxWidgets-3.1.0/include/wx/stockitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
+
+MainFrameBase.h:
 
 C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h:
 
@@ -409,17 +501,7 @@ C:/wxWidgets-3.1.0/include/wx/file.h:
 
 C:/wxWidgets-3.1.0/include/wx/convauto.h:
 
-C:/wxWidgets-3.1.0/include/wx/bitmap.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h:
-
-C:/wxWidgets-3.1.0/include/wx/palette.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/palette.h:
-
 C:/wxWidgets-3.1.0/include/wx/artprov.h:
-
-C:/wxWidgets-3.1.0/include/wx/iconbndl.h:
 
 C:/wxWidgets-3.1.0/include/wx/xrc/xmlreshandler.h:
 
@@ -427,35 +509,9 @@ C:/wxWidgets-3.1.0/include/wx/imaglist.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/imaglist.h:
 
-C:/wxWidgets-3.1.0/include/wx/window.h:
-
-C:/wxWidgets-3.1.0/include/wx/region.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/region.h:
-
-C:/wxWidgets-3.1.0/include/wx/validate.h:
-
-C:/wxWidgets-3.1.0/include/wx/accel.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/accel.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/window.h:
-
 C:/wxWidgets-3.1.0/include/wx/xrc/xh_bmp.h:
 
 C:/wxWidgets-3.1.0/include/wx/frame.h:
-
-C:/wxWidgets-3.1.0/include/wx/toplevel.h:
-
-C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h:
-
-C:/wxWidgets-3.1.0/include/wx/weakref.h:
-
-C:/wxWidgets-3.1.0/include/wx/meta/int2type.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h:
 
 C:/wxWidgets-3.1.0/include/wx/statusbr.h:
 
@@ -515,8 +571,6 @@ C:/wxWidgets-3.1.0/include/wx/notebook.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/notebook.h:
 
-C:/wxWidgets-3.1.0/include/wx/containr.h:
-
 C:/wxWidgets-3.1.0/include/wx/persist.h:
 
 C:/wxWidgets-3.1.0/include/wx/confbase.h:
@@ -556,3 +610,5 @@ C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h:
 C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
+
+ArtMetro.h:
