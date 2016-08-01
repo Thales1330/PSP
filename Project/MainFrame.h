@@ -28,6 +28,8 @@ class MainFrame : public MainFrameBase
     ~MainFrame();
 
    protected:
+    virtual void NotebookPageClosed(wxAuiNotebookEvent& event);
+    virtual void NotebookPageClosing(wxAuiNotebookEvent& event);
     virtual void OnAboutClick(wxRibbonButtonBarEvent& event);
     virtual void OnAddElementDropdown(wxRibbonButtonBarEvent& event);
     virtual void OnChartsClick(wxRibbonButtonBarEvent& event);

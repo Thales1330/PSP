@@ -17,9 +17,10 @@
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
-      <File Name="main.cpp"/>
       <File Name="Workspace.cpp"/>
+      <File Name="MouseEventsHandler.cpp"/>
     </VirtualDirectory>
+    <File Name="main.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="model">
@@ -32,6 +33,7 @@
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>
       <File Name="Workspace.h"/>
+      <File Name="MouseEventsHandler.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">

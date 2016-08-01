@@ -277,6 +277,8 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_ribbonButtonBarStability->Connect(ID_RIBBON_STABSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
     m_ribbonButtonBarStability->Connect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL, this);
     m_ribbonButtonBarStabData->Connect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
+    m_auiNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosing), NULL, this);
+    m_auiNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosed), NULL, this);
     
 }
 
@@ -312,5 +314,7 @@ MainFrameBase::~MainFrameBase()
     m_ribbonButtonBarStability->Disconnect(ID_RIBBON_STABSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
     m_ribbonButtonBarStability->Disconnect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL, this);
     m_ribbonButtonBarStabData->Disconnect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
+    m_auiNotebook->Disconnect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosing), NULL, this);
+    m_auiNotebook->Disconnect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosed), NULL, this);
     
 }

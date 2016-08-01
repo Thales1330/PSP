@@ -1,9 +1,29 @@
 #include "Workspace.h"
+#include "MouseEventsHandler.h"
 
-Workspace::Workspace(wxWindow* parent, wxString name) : WorkspaceBase(parent)
+Camera::Camera()
+{
+	m_translation = wxPoint2DDouble(0,0);
+	m_scale = 1.0;
+}
+
+Camera::~Camera()
+{
+}
+
+wxPoint2DDouble Camera::ScreenToWorld(wxPoint2DDouble screenCoords)
+{
+	return wxPoint2DDouble(screenCoords.m_x / m_scale - m_translation.m_x,
+                           screenCoords.m_y / m_scale - m_translation.m_y);
+}
+
+Workspace::Workspace(wxWindow* parent, wxString name /*, int workspaceID*/) : WorkspaceBase(parent)
 {
     m_name = name;
+    // m_workspaceID = workspaceID;
     m_glContext = new wxGLContext(m_glCanvas);
+	m_mouseEventsHandler = new MouseEventsHandler(this);
+	m_camera = new Camera();
 }
 
 Workspace::~Workspace()
@@ -13,6 +33,9 @@ Workspace::~Workspace()
 	    if(!(*it)) delete *it;
 	    it++;
 	}
+	
+	delete m_camera;
+	delete m_mouseEventsHandler;
 }
 
 void Workspace::OnPaint(wxPaintEvent& event)
@@ -22,15 +45,16 @@ void Workspace::OnPaint(wxPaintEvent& event)
     SetViewport();
 
     // desenhar
-	std::vector<Element*>::iterator it = m_elementList.begin();
-	while(it != m_elementList.end()) {
+    std::vector<Element*>::iterator it = m_elementList.begin();
+    while(it != m_elementList.end()) {
 	    Element* element = *it;
-		element->Draw(wxPoint2DDouble(0,0), 1);
+	    element->Draw(m_camera->GetTranslation(), m_camera->GetScale());
 	    it++;
 	}
 
     glFlush();
     m_glCanvas->SwapBuffers();
+	event.Skip();
 }
 
 void Workspace::SetViewport()
@@ -56,9 +80,32 @@ void Workspace::SetViewport()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
+
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
-{ 
-	Bus* newBus = new Bus(event.GetPosition());
-	m_elementList.push_back(newBus);
-	Redraw();
+{
+    if(m_insertMode) m_insertMode = false;
+	event.Skip();
+}
+
+/*
+void Workspace::OnKeyDown(wxKeyEvent& event)
+{
+    if(event.GetKeyCode() == 'B' && !m_insertMode) {
+	    Bus* newBus = new Bus(m_camera->ScreenToWorld(event.GetPosition()));
+	    m_elementList.push_back(newBus);
+	    m_insertMode = true;
+	    Redraw();
+	}
+	event.Skip();
+}*/
+
+void Workspace::OnMouseMotion(wxMouseEvent& event)
+{
+	if(m_insertMode) {
+		std::vector<Element*>::iterator it = m_elementList.end() - 1;
+		Element* element = *it;
+		element->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
+		Redraw();
+	}
+	event.Skip();
 }

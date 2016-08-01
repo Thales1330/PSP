@@ -180,7 +180,8 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/ioswrap.h \
  C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h \
  C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
- C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Bus.h Element.h
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Bus.h Element.h \
+ MouseEventsHandler.h
 
 Workspace.h:
 
@@ -555,3 +556,5 @@ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
 Bus.h:
 
 Element.h:
+
+MouseEventsHandler.h:

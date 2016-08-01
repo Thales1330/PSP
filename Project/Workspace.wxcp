@@ -278,6 +278,20 @@
          "m_functionNameAndSignature": "OnLeftClickDown(wxMouseEvent& event)",
          "m_description": "Process a wxEVT_LEFT_DOWN event. The handler of this event should normally call event.Skip() to allow the default processing to take place as otherwise the window under mouse wouldn't get the focus.",
          "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_KEY_DOWN",
+         "m_eventClass": "wxKeyEvent",
+         "m_eventHandler": "wxKeyEventHandler",
+         "m_functionNameAndSignature": "OnKeyDown(wxKeyEvent& event)",
+         "m_description": "Process a wxEVT_KEY_DOWN event (any key has been pressed)",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MOTION",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMouseMotion(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MOTION event",
+         "m_noBody": false
         }],
        "m_children": []
       }]

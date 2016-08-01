@@ -3,8 +3,8 @@
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
 {
     m_locale = locale;
-	
-	Init();
+
+    Init();
 }
 MainFrame::~MainFrame()
 {
@@ -17,8 +17,8 @@ MainFrame::~MainFrame()
 }
 void MainFrame::Init()
 {
-	this->SetSize(800, 600);
-	
+    this->SetSize(800, 600);
+
     CreateAddElementsMenu();
 
     EnableCurrentProjectRibbon(false);
@@ -99,15 +99,19 @@ void MainFrame::CreateAddElementsMenu()
 
 void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 {
-	EnableCurrentProjectRibbon();
-	
-	Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber));
-	m_workspaceList.push_back(newWorkspace);
-	
-	m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName());
-	newWorkspace->Layout();
-	newWorkspace->Redraw();
-	m_projectNumber++;
+    EnableCurrentProjectRibbon();
+
+    Workspace* newWorkspace =
+        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber, m_projectNumber));
+    m_workspaceList.push_back(newWorkspace);
+
+    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, true);
+    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_ENABLESOL, false);
+
+    m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
+    newWorkspace->Layout();
+    newWorkspace->Redraw();
+    m_projectNumber++;
 }
 
 void MainFrame::OnAboutClick(wxRibbonButtonBarEvent& event) {}
@@ -152,32 +156,53 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 {
     switch(event.GetId())
 	{
-	case ID_ADDMENU_BUS:
-	    // inserir barra
-	    break;
-	case ID_ADDMENU_LINE:
-	    // inserir linha
-	    break;
-	case ID_ADDMENU_TRANSFORMER:
-	    // inserir transformador
-	    break;
-	case ID_ADDMENU_GENERATOR:
-	    // inserir gerador
-	    break;
-	case ID_ADDMENU_LOAD:
-	    // inserir larga
-	    break;
-	case ID_ADDMENU_CAPACITOR:
-	    // inserir capacitor
-	    break;
-	case ID_ADDMENU_INDUCTOR:
-	    // inserir indutor
-	    break;
-	case ID_ADDMENU_INDMOTOR:
-	    // inserir motor
-	    break;
-	case ID_ADDMENU_SYNCCOMP:
-	    // inserir compensador sincrono
-	    break;
+	    case ID_ADDMENU_BUS:
+		// inserir barra
+		break;
+	    case ID_ADDMENU_LINE:
+		// inserir linha
+		break;
+	    case ID_ADDMENU_TRANSFORMER:
+		// inserir transformador
+		break;
+	    case ID_ADDMENU_GENERATOR:
+		// inserir gerador
+		break;
+	    case ID_ADDMENU_LOAD:
+		// inserir larga
+		break;
+	    case ID_ADDMENU_CAPACITOR:
+		// inserir capacitor
+		break;
+	    case ID_ADDMENU_INDUCTOR:
+		// inserir indutor
+		break;
+	    case ID_ADDMENU_INDMOTOR:
+		// inserir motor
+		break;
+	    case ID_ADDMENU_SYNCCOMP:
+		// inserir compensador sincrono
+		break;
 	}
+}
+void MainFrame::NotebookPageClosed(wxAuiNotebookEvent& event)
+{	
+    if(m_auiNotebook->GetPageCount() == 0) EnableCurrentProjectRibbon(false);
+	//Memory leak?
+}
+void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
+{
+    std::vector<Workspace*>::iterator it = m_workspaceList.begin();
+    while(it != m_workspaceList.end()) {
+	    Workspace* workspace = *it;
+
+	    if(event.GetSelection() == m_auiNotebook->GetPageIndex(workspace)) {
+		    //delete workspace; //Memory leak?
+			m_workspaceList.erase(it);
+			wxMessageBox(wxString::Format("%d", m_workspaceList.size()));
+		    break;
+		}
+	    it++;
+	}
+	event.Skip();
 }

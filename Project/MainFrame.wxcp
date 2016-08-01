@@ -4735,7 +4735,21 @@
            "m_label": "Style:",
            "m_value": ""
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE",
+           "m_eventClass": "wxAuiNotebookEvent",
+           "m_eventHandler": "wxAuiNotebookEventHandler",
+           "m_functionNameAndSignature": "NotebookPageClosing(wxAuiNotebookEvent& event)",
+           "m_description": "A page is about to be closed",
+           "m_noBody": false
+          }, {
+           "m_eventName": "wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED",
+           "m_eventClass": "wxAuiNotebookEvent",
+           "m_eventHandler": "wxAuiNotebookEventHandler",
+           "m_functionNameAndSignature": "NotebookPageClosed(wxAuiNotebookEvent& event)",
+           "m_description": "A page has been closed",
+           "m_noBody": false
+          }],
          "m_children": []
         }]
       }]

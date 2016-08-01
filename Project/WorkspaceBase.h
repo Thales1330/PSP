@@ -39,6 +39,8 @@ protected:
 protected:
     virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
     virtual void OnLeftClickDown(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnKeyDown(wxKeyEvent& event) { event.Skip(); }
+    virtual void OnMouseMotion(wxMouseEvent& event) { event.Skip(); }
 
 public:
     wxGLCanvas* GetGlCanvas() { return m_glCanvas; }

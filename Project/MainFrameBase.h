@@ -132,6 +132,8 @@ protected:
     virtual void OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnRunStabilityClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnChartsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void NotebookPageClosing(wxAuiNotebookEvent& event) { event.Skip(); }
+    virtual void NotebookPageClosed(wxAuiNotebookEvent& event) { event.Skip(); }
 
 public:
     wxRibbonBar* GetRibbonBar() { return m_ribbonBar; }
