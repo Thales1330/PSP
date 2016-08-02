@@ -292,6 +292,34 @@
          "m_functionNameAndSignature": "OnMouseMotion(wxMouseEvent& event)",
          "m_description": "Process a wxEVT_MOTION event",
          "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MIDDLE_DOWN",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMiddleDown(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MIDDLE_DOWN event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MIDDLE_UP",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMiddleUp(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MIDDLE_UP event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_LEFT_UP",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnLeftClickUp(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_LEFT_UP event.",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MOUSEWHEEL",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnScroll(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MOUSEWHEEL event",
+         "m_noBody": false
         }],
        "m_children": []
       }]

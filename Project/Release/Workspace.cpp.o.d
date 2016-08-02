@@ -132,7 +132,13 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/msw/panel.h \
  C:/wxWidgets-3.1.0/include/wx/stockitem.h \
  C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
- C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h WorkspaceBase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/statusbr.h \
+ C:/wxWidgets-3.1.0/include/wx/control.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/control.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statusbar.h \
+ C:/wxWidgets-3.1.0/include/wx/tooltip.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h WorkspaceBase.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
  C:/wxWidgets-3.1.0/include/wx/filesys.h \
  C:/wxWidgets-3.1.0/include/wx/filename.h \
@@ -164,8 +170,6 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/vidmode.h \
  C:/wxWidgets-3.1.0/include/wx/persist/bookctrl.h \
  C:/wxWidgets-3.1.0/include/wx/bookctrl.h \
- C:/wxWidgets-3.1.0/include/wx/control.h \
- C:/wxWidgets-3.1.0/include/wx/msw/control.h \
  C:/wxWidgets-3.1.0/include/wx/withimages.h \
  C:/wxWidgets-3.1.0/include/wx/notebook.h \
  C:/wxWidgets-3.1.0/include/wx/msw/notebook.h \
@@ -180,8 +184,7 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/ioswrap.h \
  C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h \
  C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
- C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h MouseEventsHandler.h Bus.h \
- Element.h
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Bus.h Element.h
 
 Workspace.h:
 
@@ -455,6 +458,18 @@ C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
 
+C:/wxWidgets-3.1.0/include/wx/statusbr.h:
+
+C:/wxWidgets-3.1.0/include/wx/control.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/control.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statusbar.h:
+
+C:/wxWidgets-3.1.0/include/wx/tooltip.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h:
+
 WorkspaceBase.h:
 
 C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h:
@@ -519,10 +534,6 @@ C:/wxWidgets-3.1.0/include/wx/persist/bookctrl.h:
 
 C:/wxWidgets-3.1.0/include/wx/bookctrl.h:
 
-C:/wxWidgets-3.1.0/include/wx/control.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/control.h:
-
 C:/wxWidgets-3.1.0/include/wx/withimages.h:
 
 C:/wxWidgets-3.1.0/include/wx/notebook.h:
@@ -552,8 +563,6 @@ C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h:
 C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
-
-MouseEventsHandler.h:
 
 Bus.h:
 

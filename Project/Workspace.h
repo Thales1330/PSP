@@ -5,69 +5,79 @@
 #include <GL/glu.h>
 #include <wx/dcclient.h>
 #include <wx/msgdlg.h>
+#include <wx/statusbr.h>
 
 #include "WorkspaceBase.h"
 
-class MouseEventsHandler;
-class Element;
-class Bus;
-
-//#include "MouseEventsHandler.h"
-//#include "Bus.h"
-
 class Camera;
+class Element;
+
+enum WorkspaceMode
+{
+	MODE_EDIT = 0,
+	MODE_DRAG,
+	MODE_INSERT
+};
 
 class Workspace : public WorkspaceBase
 {
    protected:
+    virtual void OnLeftClickUp(wxMouseEvent& event);
+    virtual void OnScroll(wxMouseEvent& event);
+    virtual void OnMiddleDown(wxMouseEvent& event);
+    virtual void OnMiddleUp(wxMouseEvent& event);
     virtual void OnMouseMotion(wxMouseEvent& event);
-    virtual void OnKeyDown(wxKeyEvent& event) { event.Skip(); };
+    virtual void OnKeyDown(wxKeyEvent& event);
     virtual void OnLeftClickDown(wxMouseEvent& event);
     virtual void OnPaint(wxPaintEvent& event);
 
     void SetViewport();
 
     wxGLContext* m_glContext;
+	wxStatusBar* m_statusBar;
+    Camera* m_camera;
     wxString m_name;
 
-    bool m_insertMode = false;
-    bool m_dragMode = false;
+    //bool m_insertMode = false;
+    //bool m_dragMode = false;
+	WorkspaceMode m_mode = MODE_EDIT;
 
     std::vector<Element*> m_elementList;
+	
+	void UpdateStatusBar();
 
    public:
     Workspace();
-    Workspace(wxWindow* parent, wxString name = wxEmptyString);
+    Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL);
     ~Workspace();
-
-    MouseEventsHandler* m_mouseEventsHandler;
-    Camera* m_camera;  // why public?
 
     wxString GetName() const { return m_name; }
     void SetName(wxString name) { m_name = name; }
-    void SetDragMode(bool dragMode = true) { this->m_dragMode = dragMode; }
-    void SetInsertMode(bool insertMode = true) { this->m_insertMode = insertMode; }
-    bool IsDragMode() const { return m_dragMode; }
     std::vector<Element*> GetElementList() { return m_elementList; }
-    bool IsInsertMode() const { return m_insertMode; }
-    void Redraw() { this->Refresh(); }
+    void Redraw() { m_glCanvas->Refresh(); }
 };
 
 class Camera
 {
-   private:
+   protected:
     wxPoint2DDouble m_translation;
+    wxPoint2DDouble m_translationStartPt;
     double m_scale;
+	
+	wxPoint2DDouble m_mousePosition;
 
    public:
     Camera();
     ~Camera();
 
-    void SetScale(double scale) { this->m_scale = scale; }
-    void SetTranslation(const wxPoint2DDouble& translation) { this->m_translation = translation; }
+    void SetScale(wxPoint2DDouble screenPoint, double delta);
+    void SetTranslation(wxPoint2DDouble screenPoint);
+    void StartTranslation(wxPoint2DDouble startPoint) { this->m_translationStartPt = startPoint; }
+	void UpdateMousePosition(wxPoint2DDouble mousePosition) {this->m_mousePosition = mousePosition;}
     double GetScale() const { return m_scale; }
-    const wxPoint2DDouble GetTranslation() const { return m_translation; }
-    wxPoint2DDouble ScreenToWorld(wxPoint2DDouble screenCoords);
+    wxPoint2DDouble GetTranslation() const { return m_translation; }
+	wxPoint2DDouble GetMousePosition(bool worldCoords = true) const;
+    wxPoint2DDouble ScreenToWorld(wxPoint2DDouble screenCoords) const;
 };
 
 #endif  // WORKSPACE_H

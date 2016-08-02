@@ -104,7 +104,7 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
     EnableCurrentProjectRibbon();
 
     Workspace* newWorkspace =
-        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber));
+        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar());
     m_workspaceList.push_back(newWorkspace);
 
     m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, true);
@@ -201,7 +201,6 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 	    if(event.GetSelection() == m_auiNotebook->GetPageIndex(workspace)) {
 		    //delete workspace; //Memory leak?
 			m_workspaceList.erase(it);
-			wxMessageBox(wxString::Format("%d", m_workspaceList.size()));
 		    break;
 		}
 	    it++;

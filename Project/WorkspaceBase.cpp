@@ -47,6 +47,10 @@ WorkspaceBase::WorkspaceBase(wxWindow* parent, wxWindowID id, const wxPoint& pos
     m_glCanvas->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(WorkspaceBase::OnLeftClickDown), NULL, this);
     m_glCanvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(WorkspaceBase::OnKeyDown), NULL, this);
     m_glCanvas->Connect(wxEVT_MOTION, wxMouseEventHandler(WorkspaceBase::OnMouseMotion), NULL, this);
+    m_glCanvas->Connect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(WorkspaceBase::OnMiddleDown), NULL, this);
+    m_glCanvas->Connect(wxEVT_MIDDLE_UP, wxMouseEventHandler(WorkspaceBase::OnMiddleUp), NULL, this);
+    m_glCanvas->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(WorkspaceBase::OnLeftClickUp), NULL, this);
+    m_glCanvas->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(WorkspaceBase::OnScroll), NULL, this);
     
 }
 
@@ -56,5 +60,9 @@ WorkspaceBase::~WorkspaceBase()
     m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(WorkspaceBase::OnLeftClickDown), NULL, this);
     m_glCanvas->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(WorkspaceBase::OnKeyDown), NULL, this);
     m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(WorkspaceBase::OnMouseMotion), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(WorkspaceBase::OnMiddleDown), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(WorkspaceBase::OnMiddleUp), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(WorkspaceBase::OnLeftClickUp), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(WorkspaceBase::OnScroll), NULL, this);
     
 }

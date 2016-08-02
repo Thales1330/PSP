@@ -199,14 +199,7 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/ioswrap.h \
  C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h \
  C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
- C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h ArtMetro.h Workspace.h \
- C:/wxWidgets-3.1.0/include/wx/dcclient.h \
- C:/wxWidgets-3.1.0/include/wx/dc.h \
- C:/wxWidgets-3.1.0/include/wx/affinematrix2d.h \
- C:/wxWidgets-3.1.0/include/wx/affinematrix2dbase.h \
- C:/wxWidgets-3.1.0/include/wx/geometry.h WorkspaceBase.h \
- C:/wxWidgets-3.1.0/include/wx/glcanvas.h \
- C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h Bus.h Element.h
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h
 
 C:/wxWidgets-3.1.0/include/wx/app.h:
 
@@ -617,27 +610,3 @@ C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h:
 C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
-
-ArtMetro.h:
-
-Workspace.h:
-
-C:/wxWidgets-3.1.0/include/wx/dcclient.h:
-
-C:/wxWidgets-3.1.0/include/wx/dc.h:
-
-C:/wxWidgets-3.1.0/include/wx/affinematrix2d.h:
-
-C:/wxWidgets-3.1.0/include/wx/affinematrix2dbase.h:
-
-C:/wxWidgets-3.1.0/include/wx/geometry.h:
-
-WorkspaceBase.h:
-
-C:/wxWidgets-3.1.0/include/wx/glcanvas.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h:
-
-Bus.h:
-
-Element.h:
