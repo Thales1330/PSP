@@ -11,7 +11,7 @@ public:
 	MouseEventsHandler(Workspace* workspace);
 	~MouseEventsHandler();
 	
-	void OnKeyDown(wxKeyEvent& event);
+	virtual void OnKeyDown(wxKeyEvent& event);
 
 };
 

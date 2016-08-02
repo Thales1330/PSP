@@ -1,4 +1,6 @@
 #include "MainFrame.h"
+#include "ArtMetro.h"
+#include "Workspace.h"
 
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
 {
@@ -102,7 +104,7 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
     EnableCurrentProjectRibbon();
 
     Workspace* newWorkspace =
-        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber, m_projectNumber));
+        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber));
     m_workspaceList.push_back(newWorkspace);
 
     m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, true);

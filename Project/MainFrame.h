@@ -5,8 +5,10 @@
 #include <wx/msgdlg.h>
 
 #include "MainFrameBase.h"
-#include "ArtMetro.h"
-#include "Workspace.h"
+
+class MainFrameBase;
+class wxRibbonMetroArtProvider;
+class Workspace;
 
 enum
 {
