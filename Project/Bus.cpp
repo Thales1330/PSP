@@ -6,10 +6,12 @@ Bus::Bus(wxPoint2DDouble position) : Element()
     m_height = 5.0;
     SetPosition(position);
 }
+
 Bus::~Bus() {}
+
 void Bus::Draw(wxPoint2DDouble translation, double scale) const
 {
-    // Draw selection (behind)
+    // Draw selection (layer 1)
     if(m_selected) {
 	    // If the object is selected, the matrix is reset to remove scale effects applied to it, thus keeping the
 	    // edges with fixed sizes for all zoom levels.
@@ -34,7 +36,7 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
 	    DrawRectangle(pts);
 	    glPopMatrix();
 	}
-    // Draw element (middle)
+    // Draw element (layer 2)
     // Push the current matrix on stack.
     glPushMatrix();
     // Rotate the matrix around the object position.
@@ -47,7 +49,7 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
     // Pop the old matrix back.
     glPopMatrix();
 
-    // Draw pickbox (above)
+    // Draw pickbox (layer 3)
     if(m_showPickbox) {
 	    glPushMatrix();
 	    glLoadIdentity();
@@ -65,12 +67,35 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
 	    glPopMatrix();
 	}
 }
+
 bool Bus::Contains(wxPoint2DDouble position) const
 {
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
     return m_rect.Contains(ptR);
 }
-int Bus::PickboxContains(wxPoint2DDouble position) const { return 0; }
+
+bool Bus::PickboxContains(wxPoint2DDouble position)
+{
+	wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
+	
+    wxPoint2DDouble center(m_position.m_x + m_width / 2.0, m_position.m_y);
+    wxRect2DDouble rectRight(center.m_x - 5.0, center.m_y - 5.0, 10.0, 10.0);
+
+    center = wxPoint2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y);
+    wxRect2DDouble rectLeft(center.m_x - 5.0, center.m_y - 5.0, 10.0, 10.0);
+	
+    if(rectRight.Contains(ptR)){
+		m_activePickboxID = ID_PB_RIGHT;
+		return true;
+	}
+    else if(rectLeft.Contains(ptR)){
+		m_activePickboxID = ID_PB_LEFT;
+		return true;
+	}
+	
+	return false;
+}
+
 wxCursor Bus::GetBestPickboxCursor() const
 {
     double angle = m_angle;
@@ -87,7 +112,32 @@ wxCursor Bus::GetBestPickboxCursor() const
 
     return wxCursor(wxCURSOR_ARROW);
 }
-void Bus::MovePickbox(wxPoint2DDouble position, int pickboxID) {}
+
+void Bus::MovePickbox(wxPoint2DDouble position)
+{
+	wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
+
+    double dx = 0.0;
+    if(m_activePickboxID == ID_PB_RIGHT)
+	dx = ptR.m_x - m_position.m_x - m_width / 2.0;
+    else if(m_activePickboxID == ID_PB_LEFT)
+	dx = m_position.m_x - m_width / 2.0 - ptR.m_x ;
+
+    if(m_width + dx < 20.0) return;
+	
+	if(m_activePickboxID == ID_PB_RIGHT) {
+		m_position.m_x += (dx / 2.0) * std::cos(wxDegToRad(m_angle));
+		m_position.m_y += (dx / 2.0) * std::sin(wxDegToRad(m_angle));
+	}
+	else if(m_activePickboxID == ID_PB_LEFT) {
+		m_position.m_x -= (dx / 2.0) * std::cos(wxDegToRad(m_angle));
+		m_position.m_y -= (dx / 2.0) * std::sin(wxDegToRad(m_angle));
+	}
+    m_width += dx;
+
+    SetPosition(m_position);
+}
+
 void Bus::Rotate()
 {
     m_angle += 45.0;

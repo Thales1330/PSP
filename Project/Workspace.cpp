@@ -124,7 +124,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 		    Element* element = *it;
 		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
 			    element->SetSelected();
-				element->ShowPickbox();
+			    element->ShowPickbox();
 			}
 		    else if(!event.ControlDown())
 			{
@@ -138,7 +138,13 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     event.Skip();
 }
 
-void Workspace::OnLeftClickUp(wxMouseEvent& event) {}
+void Workspace::OnLeftClickUp(wxMouseEvent& event)
+{
+    if(m_mode == MODE_EDIT_ELEMENT) {
+	    m_mode = MODE_EDIT;
+	}
+}
+
 void Workspace::OnKeyDown(wxKeyEvent& event)
 {
     char key = event.GetUnicodeKey();
@@ -207,18 +213,41 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 		}
 		break;
 
+	    case MODE_EDIT_ELEMENT:
 	    case MODE_EDIT:
 		{
+		    bool foundPickbox = false;
 		    std::vector<Element*>::iterator it = m_elementList.begin();
 		    while(it != m_elementList.end()) {
 			    Element* element = *it;
 			    if(element->IsSelected()) {
-				    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				    // MODE_EDIT_ELEMENT is a flag which indicates that a pickbox is being dragged. He
+				    // will work like a shortcut to method Element::MovePickbox until a mouse button is
+				    // released.
+				    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition())) ||
+				       m_mode == MODE_EDIT_ELEMENT)
+					{
 					    element->ShowPickbox();
+					    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition())) ||
+					       m_mode == MODE_EDIT_ELEMENT)
+						{
+						    foundPickbox = true;
+						    SetCursor(element->GetBestPickboxCursor());
+						    if(event.Dragging()) {
+							    m_mode = MODE_EDIT_ELEMENT;
+							    element->MovePickbox(
+							        m_camera->ScreenToWorld(event.GetPosition()));
+							}
+						}
+					    else if(!foundPickbox)
+						{
+						    SetCursor(wxCURSOR_ARROW);
+						}
 					}
-				    else
+				    else if(!foundPickbox)
 					{
 					    element->ShowPickbox(false);
+					    SetCursor(wxCURSOR_ARROW);
 					}
 				}
 			    it++;
@@ -275,6 +304,7 @@ void Workspace::UpdateStatusBar()
 		}
 		break;
 
+	    case MODE_EDIT_ELEMENT:
 	    case MODE_EDIT:
 		{
 		    m_statusBar->SetStatusText(wxT(""));

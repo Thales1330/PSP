@@ -5,6 +5,17 @@
 #include <wx/cursor.h>
 #include <GL/gl.h>
 
+enum PickboxID
+{
+	ID_PB_NONE = 0,
+	ID_PB_RIGHT,
+	ID_PB_LEFT,
+	ID_PB_RIGHT_BOTTOM,
+	ID_PB_RIGHT_TOP,
+	ID_PB_LEFT_BOTTOM,
+	ID_PB_LEFT_TOP
+};
+
 class Element
 {
    public:
@@ -33,8 +44,8 @@ class Element
     virtual void Draw(wxPoint2DDouble translation, double scale) const = 0;
     virtual void Rotate() = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
-    virtual int PickboxContains(wxPoint2DDouble position) const = 0;
-    virtual void MovePickbox(wxPoint2DDouble position, int pickboxID) = 0;
+    virtual bool PickboxContains(wxPoint2DDouble position) = 0;
+    virtual void MovePickbox(wxPoint2DDouble position) = 0;
     virtual wxCursor GetBestPickboxCursor() const = 0;
 
     // General methods
@@ -59,6 +70,8 @@ class Element
     bool m_selected = false;
     bool m_dragging = false;
     bool m_showPickbox = false;
+	
+	PickboxID m_activePickboxID = ID_PB_NONE;
 };
 
 #endif  // ELEMENT_H

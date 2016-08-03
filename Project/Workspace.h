@@ -15,6 +15,7 @@ class Element;
 enum WorkspaceMode
 {
 	MODE_EDIT = 0,
+	MODE_EDIT_ELEMENT,
 	MODE_DRAG,
 	MODE_INSERT
 };
