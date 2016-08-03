@@ -63,3 +63,14 @@ wxPoint2DDouble Element::RotateAtPosition(wxPoint2DDouble pointToRotate, double 
                            std::sin(radAngle) * (pointToRotate.m_x - m_position.m_x) +
                                std::cos(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_y);
 }
+
+void Element::StartMove(wxPoint2DDouble position)
+{
+	this->m_moveStartPt = position;
+	this->m_movePos = m_position;
+}
+
+void Element::Move(wxPoint2DDouble position)
+{
+	SetPosition(m_movePos + position - m_moveStartPt);
+}

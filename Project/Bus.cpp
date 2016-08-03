@@ -1,5 +1,6 @@
 #include "Bus.h"
 
+Bus::Bus() : Element() {}
 Bus::Bus(wxPoint2DDouble position) : Element()
 {
     m_width = 100.0;
@@ -8,7 +9,6 @@ Bus::Bus(wxPoint2DDouble position) : Element()
 }
 
 Bus::~Bus() {}
-
 void Bus::Draw(wxPoint2DDouble translation, double scale) const
 {
     // Draw selection (layer 1)
@@ -76,24 +76,27 @@ bool Bus::Contains(wxPoint2DDouble position) const
 
 bool Bus::PickboxContains(wxPoint2DDouble position)
 {
-	wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
+	m_activePickboxID = ID_PB_NONE;
 	
+    wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
+
     wxPoint2DDouble center(m_position.m_x + m_width / 2.0, m_position.m_y);
     wxRect2DDouble rectRight(center.m_x - 5.0, center.m_y - 5.0, 10.0, 10.0);
 
     center = wxPoint2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y);
     wxRect2DDouble rectLeft(center.m_x - 5.0, center.m_y - 5.0, 10.0, 10.0);
-	
-    if(rectRight.Contains(ptR)){
-		m_activePickboxID = ID_PB_RIGHT;
-		return true;
+
+    if(rectRight.Contains(ptR)) {
+	    m_activePickboxID = ID_PB_RIGHT;
+	    return true;
 	}
-    else if(rectLeft.Contains(ptR)){
-		m_activePickboxID = ID_PB_LEFT;
-		return true;
+    if(rectLeft.Contains(ptR))
+	{
+	    m_activePickboxID = ID_PB_LEFT;
+	    return true;
 	}
 	
-	return false;
+    return false;
 }
 
 wxCursor Bus::GetBestPickboxCursor() const
@@ -115,23 +118,26 @@ wxCursor Bus::GetBestPickboxCursor() const
 
 void Bus::MovePickbox(wxPoint2DDouble position)
 {
-	wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
+	if(m_activePickboxID == ID_PB_NONE) return;
+	
+    wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
 
     double dx = 0.0;
     if(m_activePickboxID == ID_PB_RIGHT)
 	dx = ptR.m_x - m_position.m_x - m_width / 2.0;
     else if(m_activePickboxID == ID_PB_LEFT)
-	dx = m_position.m_x - m_width / 2.0 - ptR.m_x ;
+	dx = m_position.m_x - m_width / 2.0 - ptR.m_x;
 
     if(m_width + dx < 20.0) return;
-	
-	if(m_activePickboxID == ID_PB_RIGHT) {
-		m_position.m_x += (dx / 2.0) * std::cos(wxDegToRad(m_angle));
-		m_position.m_y += (dx / 2.0) * std::sin(wxDegToRad(m_angle));
+
+    if(m_activePickboxID == ID_PB_RIGHT) {
+	    m_position.m_x += (dx / 2.0) * std::cos(wxDegToRad(m_angle));
+	    m_position.m_y += (dx / 2.0) * std::sin(wxDegToRad(m_angle));
 	}
-	else if(m_activePickboxID == ID_PB_LEFT) {
-		m_position.m_x -= (dx / 2.0) * std::cos(wxDegToRad(m_angle));
-		m_position.m_y -= (dx / 2.0) * std::sin(wxDegToRad(m_angle));
+    else if(m_activePickboxID == ID_PB_LEFT)
+	{
+	    m_position.m_x -= (dx / 2.0) * std::cos(wxDegToRad(m_angle));
+	    m_position.m_y -= (dx / 2.0) * std::sin(wxDegToRad(m_angle));
 	}
     m_width += dx;
 

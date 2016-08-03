@@ -14,14 +14,24 @@ class Element;
 
 enum WorkspaceMode
 {
-	MODE_EDIT = 0,
-	MODE_EDIT_ELEMENT,
-	MODE_DRAG,
-	MODE_INSERT
+    MODE_EDIT = 0,
+    MODE_MOVE_ELEMENT,
+    MODE_MOVE_PICKBOX,
+    MODE_DRAG,
+    MODE_INSERT
 };
 
 class Workspace : public WorkspaceBase
 {
+   public:
+    Workspace();
+    Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL);
+    ~Workspace();
+
+    wxString GetName() const { return m_name; }
+    void SetName(wxString name) { m_name = name; }
+    std::vector<Element*> GetElementList() { return m_elementList; }
+    void Redraw() { m_glCanvas->Refresh(); }
    protected:
     virtual void OnLeftClickUp(wxMouseEvent& event);
     virtual void OnScroll(wxMouseEvent& event);
@@ -35,38 +45,19 @@ class Workspace : public WorkspaceBase
     void SetViewport();
 
     wxGLContext* m_glContext;
-	wxStatusBar* m_statusBar;
+    wxStatusBar* m_statusBar;
     Camera* m_camera;
     wxString m_name;
 
-    //bool m_insertMode = false;
-    //bool m_dragMode = false;
-	WorkspaceMode m_mode = MODE_EDIT;
+    WorkspaceMode m_mode = MODE_EDIT;
 
     std::vector<Element*> m_elementList;
-	
-	void UpdateStatusBar();
 
-   public:
-    Workspace();
-    Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL);
-    ~Workspace();
-
-    wxString GetName() const { return m_name; }
-    void SetName(wxString name) { m_name = name; }
-    std::vector<Element*> GetElementList() { return m_elementList; }
-    void Redraw() { m_glCanvas->Refresh(); }
+    void UpdateStatusBar();
 };
 
 class Camera
 {
-   protected:
-    wxPoint2DDouble m_translation;
-    wxPoint2DDouble m_translationStartPt;
-    double m_scale;
-	
-	wxPoint2DDouble m_mousePosition;
-
    public:
     Camera();
     ~Camera();
@@ -74,11 +65,18 @@ class Camera
     void SetScale(wxPoint2DDouble screenPoint, double delta);
     void SetTranslation(wxPoint2DDouble screenPoint);
     void StartTranslation(wxPoint2DDouble startPoint) { this->m_translationStartPt = startPoint; }
-	void UpdateMousePosition(wxPoint2DDouble mousePosition) {this->m_mousePosition = mousePosition;}
+    void UpdateMousePosition(wxPoint2DDouble mousePosition) { this->m_mousePosition = mousePosition; }
     double GetScale() const { return m_scale; }
     wxPoint2DDouble GetTranslation() const { return m_translation; }
-	wxPoint2DDouble GetMousePosition(bool worldCoords = true) const;
+    wxPoint2DDouble GetMousePosition(bool worldCoords = true) const;
     wxPoint2DDouble ScreenToWorld(wxPoint2DDouble screenCoords) const;
+
+   protected:
+    wxPoint2DDouble m_translation;
+    wxPoint2DDouble m_translationStartPt;
+    double m_scale;
+
+    wxPoint2DDouble m_mousePosition;
 };
 
 #endif  // WORKSPACE_H

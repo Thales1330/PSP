@@ -60,7 +60,6 @@ Workspace::~Workspace()
 	    if(!(*it)) delete *it;
 	    it++;
 	}
-    // if(!m_statusBar) delete m_statusBar;
     if(!m_camera) delete m_camera;
 }
 
@@ -119,18 +118,42 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 	}
     else
 	{
+	    bool clickPickbox = false;
 	    std::vector<Element*>::iterator it = m_elementList.begin();
 	    while(it != m_elementList.end()) {
 		    Element* element = *it;
+		    element->ResetPickboxes();  // Reset pickbox state.
+		    element->StartMove(m_camera->ScreenToWorld(event.GetPosition()));
+
 		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
 			    element->SetSelected();
 			    element->ShowPickbox();
+
+			    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				    m_mode = MODE_MOVE_PICKBOX;
+				    clickPickbox = true;
+				}
+			    if(!clickPickbox) {
+				    m_mode = MODE_MOVE_ELEMENT;
+				}
 			}
-		    else if(!event.ControlDown())
-			{
-			    element->SetSelected(false);
-			}
+		    /*else if(!event.ControlDown() && m_mode != MODE_MOVE_ELEMENT)
+		        {
+		            element->SetSelected(false);
+		        }*/
 		    it++;
+		}
+
+	    // Deselect elements.
+	    if(!event.ControlDown() && m_mode != MODE_MOVE_ELEMENT) {
+		    it = m_elementList.begin();
+		    while(it != m_elementList.end()) {
+			    Element* element = *it;
+			    if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				    element->SetSelected(false);
+				}
+			    it++;
+			}
 		}
 	}
     Redraw();
@@ -140,9 +163,137 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 void Workspace::OnLeftClickUp(wxMouseEvent& event)
 {
-    if(m_mode == MODE_EDIT_ELEMENT) {
-	    m_mode = MODE_EDIT;
+    m_mode = MODE_EDIT;
+
+    bool foundPickbox = false;
+    std::vector<Element*>::iterator it = m_elementList.begin();
+    while(it != m_elementList.end()) {
+	    Element* element = *it;
+
+	    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+		    foundPickbox = true;
+		}
+
+	    it++;
 	}
+
+    if(!foundPickbox) {
+	    SetCursor(wxCURSOR_ARROW);
+	}
+
+    UpdateStatusBar();
+}
+
+void Workspace::OnMouseMotion(wxMouseEvent& event)
+{
+    switch(m_mode)
+	{
+	    case MODE_INSERT:
+		{
+		    std::vector<Element*>::iterator it = m_elementList.end() - 1;
+		    Element* element = *it;
+		    element->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
+		    Redraw();
+		}
+		break;
+
+	    case MODE_DRAG:
+		{
+		    m_camera->SetTranslation(event.GetPosition());
+		    Redraw();
+		}
+		break;
+
+	    case MODE_EDIT:
+		{
+		    bool foundPickbox = false;
+		    bool redraw = false;
+		    std::vector<Element*>::iterator it = m_elementList.begin();
+		    while(it != m_elementList.end()) {
+			    Element* element = *it;
+			    if(element->IsSelected()) {
+				    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+					    element->ShowPickbox();
+					    redraw = true;
+
+					    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+						    foundPickbox = true;
+						    SetCursor(element->GetBestPickboxCursor());
+						}
+					    else if(!foundPickbox)
+						{
+						    SetCursor(wxCURSOR_ARROW);
+						}
+					}
+				    else if(!foundPickbox)
+					{
+					    if(element->IsPickboxShown()) redraw = true;
+
+					    element->ShowPickbox(false);
+					    SetCursor(wxCURSOR_ARROW);
+					}
+				}
+			    it++;
+			}
+		    if(redraw) Redraw();
+		}
+		break;
+
+	    case MODE_MOVE_PICKBOX:
+		{
+		    std::vector<Element*>::iterator it = m_elementList.begin();
+		    while(it != m_elementList.end()) {
+			    Element* element = *it;
+			    if(element->IsSelected()) {
+				    element->MovePickbox(m_camera->ScreenToWorld(event.GetPosition()));
+				    Redraw();
+				}
+			    it++;
+			}
+		}
+		break;
+
+	    case MODE_MOVE_ELEMENT:
+		{
+		    std::vector<Element*>::iterator it = m_elementList.begin();
+		    while(it != m_elementList.end()) {
+			    Element* element = *it;
+			    if(element->IsSelected()) {
+				    element->Move(m_camera->ScreenToWorld(event.GetPosition()));
+				    Redraw();
+				}
+			    it++;
+			}
+		}
+		break;
+	}
+    m_camera->UpdateMousePosition(event.GetPosition());
+    UpdateStatusBar();
+    event.Skip();
+}
+
+void Workspace::OnMiddleDown(wxMouseEvent& event)
+{
+    if(m_mode != MODE_INSERT) {
+	    m_mode = MODE_DRAG;
+	    m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
+	}
+    UpdateStatusBar();
+}
+void Workspace::OnMiddleUp(wxMouseEvent& event)
+{
+    m_mode = MODE_EDIT;
+    UpdateStatusBar();
+}
+void Workspace::OnScroll(wxMouseEvent& event)
+{
+    if(event.GetWheelRotation() > 0)
+	m_camera->SetScale(event.GetPosition(), +0.05);
+    else
+	m_camera->SetScale(event.GetPosition(), -0.05);
+
+    UpdateStatusBar();
+    Redraw();
 }
 
 void Workspace::OnKeyDown(wxKeyEvent& event)
@@ -193,101 +344,6 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
     event.Skip();
 }
 
-void Workspace::OnMouseMotion(wxMouseEvent& event)
-{
-    switch(m_mode)
-	{
-	    case MODE_INSERT:
-		{
-		    std::vector<Element*>::iterator it = m_elementList.end() - 1;
-		    Element* element = *it;
-		    element->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
-		    Redraw();
-		}
-		break;
-
-	    case MODE_DRAG:
-		{
-		    m_camera->SetTranslation(event.GetPosition());
-		    Redraw();
-		}
-		break;
-
-	    case MODE_EDIT_ELEMENT:
-	    case MODE_EDIT:
-		{
-		    bool foundPickbox = false;
-		    std::vector<Element*>::iterator it = m_elementList.begin();
-		    while(it != m_elementList.end()) {
-			    Element* element = *it;
-			    if(element->IsSelected()) {
-				    // MODE_EDIT_ELEMENT is a flag which indicates that a pickbox is being dragged. He
-				    // will work like a shortcut to method Element::MovePickbox until a mouse button is
-				    // released.
-				    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition())) ||
-				       m_mode == MODE_EDIT_ELEMENT)
-					{
-					    element->ShowPickbox();
-					    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition())) ||
-					       m_mode == MODE_EDIT_ELEMENT)
-						{
-						    foundPickbox = true;
-						    SetCursor(element->GetBestPickboxCursor());
-						    if(event.Dragging()) {
-							    m_mode = MODE_EDIT_ELEMENT;
-							    element->MovePickbox(
-							        m_camera->ScreenToWorld(event.GetPosition()));
-							}
-						}
-					    else if(!foundPickbox)
-						{
-						    SetCursor(wxCURSOR_ARROW);
-						}
-					}
-				    else if(!foundPickbox)
-					{
-					    element->ShowPickbox(false);
-					    SetCursor(wxCURSOR_ARROW);
-					}
-				}
-			    it++;
-			}
-		    Redraw();
-		}
-		break;
-
-	    default:
-		break;
-	}
-    m_camera->UpdateMousePosition(event.GetPosition());
-    UpdateStatusBar();
-    event.Skip();
-}
-
-void Workspace::OnMiddleDown(wxMouseEvent& event)
-{
-    if(m_mode != MODE_INSERT) {
-	    m_mode = MODE_DRAG;
-	    m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
-	}
-    UpdateStatusBar();
-}
-void Workspace::OnMiddleUp(wxMouseEvent& event)
-{
-    m_mode = MODE_EDIT;
-    UpdateStatusBar();
-}
-void Workspace::OnScroll(wxMouseEvent& event)
-{
-    if(event.GetWheelRotation() > 0)
-	m_camera->SetScale(event.GetPosition(), +0.05);
-    else
-	m_camera->SetScale(event.GetPosition(), -0.05);
-
-    UpdateStatusBar();
-    Redraw();
-}
-
 void Workspace::UpdateStatusBar()
 {
     switch(m_mode)
@@ -304,7 +360,8 @@ void Workspace::UpdateStatusBar()
 		}
 		break;
 
-	    case MODE_EDIT_ELEMENT:
+	    case MODE_MOVE_ELEMENT:
+	    case MODE_MOVE_PICKBOX:
 	    case MODE_EDIT:
 		{
 		    m_statusBar->SetStatusText(wxT(""));

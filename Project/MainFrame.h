@@ -26,6 +26,7 @@ enum
 class MainFrame : public MainFrameBase
 {
    public:
+    MainFrame();
     MainFrame(wxWindow* parent, wxLocale* locale);
     ~MainFrame();
 
@@ -65,7 +66,7 @@ class MainFrame : public MainFrameBase
 
    private:
     std::vector<Workspace*> m_workspaceList;
-	int m_projectNumber = 1;
+    int m_projectNumber = 1;
 
     wxRibbonMetroArtProvider* m_artMetro;
     wxMenu* m_addElementsMenu;

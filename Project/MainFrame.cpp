@@ -2,6 +2,10 @@
 #include "ArtMetro.h"
 #include "Workspace.h"
 
+MainFrame::MainFrame() : MainFrameBase(NULL)
+{
+}
+
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
 {
     m_locale = locale;

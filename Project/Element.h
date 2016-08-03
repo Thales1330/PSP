@@ -7,13 +7,13 @@
 
 enum PickboxID
 {
-	ID_PB_NONE = 0,
-	ID_PB_RIGHT,
-	ID_PB_LEFT,
-	ID_PB_RIGHT_BOTTOM,
-	ID_PB_RIGHT_TOP,
-	ID_PB_LEFT_BOTTOM,
-	ID_PB_LEFT_TOP
+    ID_PB_NONE = 0,
+    ID_PB_RIGHT,
+    ID_PB_LEFT,
+    ID_PB_RIGHT_BOTTOM,
+    ID_PB_RIGHT_TOP,
+    ID_PB_LEFT_BOTTOM,
+    ID_PB_LEFT_TOP
 };
 
 class Element
@@ -49,17 +49,20 @@ class Element
     virtual wxCursor GetBestPickboxCursor() const = 0;
 
     // General methods
+    virtual void StartMove(wxPoint2DDouble position);
+	virtual void Move(wxPoint2DDouble position);
+    void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
     wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
                                   double scale,
                                   double offsetX = 0.0,
                                   double offsetY = 0.0) const;
     void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
     void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
-	void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
-	void DrawPickbox(wxPoint2DDouble position) const;
+    void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
+    void DrawPickbox(wxPoint2DDouble position) const;
     wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;
-	
-	protected:
+
+   protected:
     wxRect2DDouble m_rect;
     wxPoint2DDouble m_position;
     double m_width = 0.0;
@@ -70,8 +73,11 @@ class Element
     bool m_selected = false;
     bool m_dragging = false;
     bool m_showPickbox = false;
-	
-	PickboxID m_activePickboxID = ID_PB_NONE;
+
+    int m_activePickboxID = ID_PB_NONE;
+
+    wxPoint2DDouble m_moveStartPt;
+	wxPoint2DDouble m_movePos;
 };
 
 #endif  // ELEMENT_H
