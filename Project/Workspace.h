@@ -18,7 +18,8 @@ enum WorkspaceMode
     MODE_MOVE_ELEMENT,
     MODE_MOVE_PICKBOX,
     MODE_DRAG,
-    MODE_INSERT
+    MODE_INSERT,
+	MODE_SELECTION_RECT
 };
 
 class Workspace : public WorkspaceBase
@@ -54,6 +55,10 @@ class Workspace : public WorkspaceBase
     std::vector<Element*> m_elementList;
 
     void UpdateStatusBar();
+
+   private:
+    wxRect2DDouble m_selectionRect;
+    wxPoint2DDouble m_startSelRect;
 };
 
 class Camera

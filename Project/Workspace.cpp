@@ -48,6 +48,7 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : 
     m_statusBar = statusBar;
     m_glContext = new wxGLContext(m_glCanvas);
     m_camera = new Camera();
+    m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 
     const int widths[4] = {-3, -1, 100, 100};
     m_statusBar->SetStatusWidths(4, widths);
@@ -74,12 +75,30 @@ void Workspace::OnPaint(wxPaintEvent& event)
     glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0);  // Translation
 
     // Draw
+
+    // Elements
     std::vector<Element*>::iterator it = m_elementList.begin();
     while(it != m_elementList.end()) {
 	    Element* element = *it;
 	    element->Draw(m_camera->GetTranslation(), m_camera->GetScale());
 	    it++;
 	}
+
+    // Selection rectangle
+    glColor4d(0.0, 0.5, 1.0, 1.0);
+    glBegin(GL_LINE_LOOP);
+    glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y);
+    glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y + m_selectionRect.m_height);
+    glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y + m_selectionRect.m_height);
+    glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y);
+    glEnd();
+    glColor4d(0.0, 0.5, 1.0, 0.3);
+    glBegin(GL_QUADS);
+    glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y);
+    glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y + m_selectionRect.m_height);
+    glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y + m_selectionRect.m_height);
+    glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y);
+    glEnd();
 
     glFlush();  // Sends all pending information directly to the GPU.
     m_glCanvas->SwapBuffers();
@@ -113,6 +132,7 @@ void Workspace::SetViewport()
 
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
+    bool foundElement = false;
     if(m_mode == MODE_INSERT) {
 	    m_mode = MODE_EDIT;
 	}
@@ -128,6 +148,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
 			    element->SetSelected();
 			    element->ShowPickbox();
+			    foundElement = true;
 
 			    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
 				    m_mode = MODE_MOVE_PICKBOX;
@@ -137,25 +158,14 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 				    m_mode = MODE_MOVE_ELEMENT;
 				}
 			}
-		    /*else if(!event.ControlDown() && m_mode != MODE_MOVE_ELEMENT)
-		        {
-		            element->SetSelected(false);
-		        }*/
 		    it++;
 		}
-
-	    // Deselect elements.
-	    if(!event.ControlDown() && m_mode != MODE_MOVE_ELEMENT) {
-		    it = m_elementList.begin();
-		    while(it != m_elementList.end()) {
-			    Element* element = *it;
-			    if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-				    element->SetSelected(false);
-				}
-			    it++;
-			}
-		}
 	}
+    if(!foundElement) {
+	    m_mode = MODE_SELECTION_RECT;
+	    m_startSelRect = m_camera->ScreenToWorld(event.GetPosition());
+	}
+
     Redraw();
     UpdateStatusBar();
     event.Skip();
@@ -163,24 +173,43 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 void Workspace::OnLeftClickUp(wxMouseEvent& event)
 {
-    m_mode = MODE_EDIT;
-
     bool foundPickbox = false;
     std::vector<Element*>::iterator it = m_elementList.begin();
     while(it != m_elementList.end()) {
 	    Element* element = *it;
 
-	    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
-		    foundPickbox = true;
+	    if(m_mode == MODE_SELECTION_RECT) {
+		    if(m_selectionRect.Intersects(element->GetRect())) {
+			    element->SetSelected();
+			}
+		    else
+			{
+			    element->SetSelected(false);
+			}
+		}
+	    else
+		{
+		    // Deselect
+		    if(!event.ControlDown()) {
+			    if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				    element->SetSelected(false);
+				}
+			}
+
+		    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+			    foundPickbox = true;
+			}
 		}
 
 	    it++;
 	}
-
     if(!foundPickbox) {
 	    SetCursor(wxCURSOR_ARROW);
 	}
 
+    m_mode = MODE_EDIT;
+    m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
+    Redraw();
     UpdateStatusBar();
 }
 
@@ -264,6 +293,34 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 				}
 			    it++;
 			}
+		}
+		break;
+
+	    case MODE_SELECTION_RECT:
+		{
+		    wxPoint2DDouble currentPos = m_camera->ScreenToWorld(event.GetPosition());
+		    double x, y, w, h;
+		    if(currentPos.m_x < m_startSelRect.m_x) {
+			    x = currentPos.m_x;
+			    w = m_startSelRect.m_x - currentPos.m_x;
+			}
+		    else
+			{
+			    x = m_startSelRect.m_x;
+			    w = currentPos.m_x - m_startSelRect.m_x;
+			}
+		    if(currentPos.m_y < m_startSelRect.m_y) {
+			    y = currentPos.m_y;
+			    h = m_startSelRect.m_y - currentPos.m_y;
+			}
+		    else
+			{
+			    y = m_startSelRect.m_y;
+			    h = currentPos.m_y - m_startSelRect.m_y;
+			}
+
+		    m_selectionRect = wxRect2DDouble(x, y, w, h);
+		    Redraw();
 		}
 		break;
 	}
@@ -362,6 +419,7 @@ void Workspace::UpdateStatusBar()
 
 	    case MODE_MOVE_ELEMENT:
 	    case MODE_MOVE_PICKBOX:
+	    case MODE_SELECTION_RECT:
 	    case MODE_EDIT:
 		{
 		    m_statusBar->SetStatusText(wxT(""));
