@@ -11,6 +11,8 @@
 
 class Camera;
 class Element;
+class Bus;
+class Line;
 
 enum WorkspaceMode
 {

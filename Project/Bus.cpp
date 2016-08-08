@@ -9,6 +9,7 @@ Bus::Bus(wxPoint2DDouble position) : Element()
 }
 
 Bus::~Bus() {}
+
 void Bus::Draw(wxPoint2DDouble translation, double scale) const
 {
     // Draw selection (layer 1)
@@ -74,11 +75,7 @@ bool Bus::Contains(wxPoint2DDouble position) const
     return m_rect.Contains(ptR);
 }
 
-bool Bus::Intersects(wxRect2DDouble rect) const
-{
-	return rect.Intersects(m_rect);
-}
-
+bool Bus::Intersects(wxRect2DDouble rect) const { return rect.Intersects(m_rect); }
 bool Bus::PickboxContains(wxPoint2DDouble position)
 {
     m_activePickboxID = ID_PB_NONE;

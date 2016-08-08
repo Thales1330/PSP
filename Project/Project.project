@@ -11,6 +11,7 @@
     <VirtualDirectory Name="model">
       <File Name="Element.cpp"/>
       <File Name="Bus.cpp"/>
+      <File Name="Line.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -25,6 +26,7 @@
     <VirtualDirectory Name="model">
       <File Name="Element.h"/>
       <File Name="Bus.h"/>
+      <File Name="Line.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>

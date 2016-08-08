@@ -41,6 +41,7 @@ class Element
     double GetAngle() const { return m_angle; }
     bool IsPickboxShown() const { return m_showPickbox; }
     // Pure-virtuals methods
+	virtual void Insert(Element* parent, wxPoint2DDouble position) = 0;
     virtual void Draw(wxPoint2DDouble translation, double scale) const = 0;
     virtual void Rotate() = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
