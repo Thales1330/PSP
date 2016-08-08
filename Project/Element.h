@@ -44,6 +44,7 @@ class Element
     virtual void Draw(wxPoint2DDouble translation, double scale) const = 0;
     virtual void Rotate() = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
+	virtual bool Intersects(wxRect2DDouble rect) const = 0;
     virtual bool PickboxContains(wxPoint2DDouble position) = 0;
     virtual void MovePickbox(wxPoint2DDouble position) = 0;
     virtual wxCursor GetBestPickboxCursor() const = 0;

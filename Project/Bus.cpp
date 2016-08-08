@@ -74,10 +74,15 @@ bool Bus::Contains(wxPoint2DDouble position) const
     return m_rect.Contains(ptR);
 }
 
+bool Bus::Intersects(wxRect2DDouble rect) const
+{
+	return rect.Intersects(m_rect);
+}
+
 bool Bus::PickboxContains(wxPoint2DDouble position)
 {
-	m_activePickboxID = ID_PB_NONE;
-	
+    m_activePickboxID = ID_PB_NONE;
+
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
 
     wxPoint2DDouble center(m_position.m_x + m_width / 2.0, m_position.m_y);
@@ -90,12 +95,11 @@ bool Bus::PickboxContains(wxPoint2DDouble position)
 	    m_activePickboxID = ID_PB_RIGHT;
 	    return true;
 	}
-    if(rectLeft.Contains(ptR))
-	{
+    if(rectLeft.Contains(ptR)) {
 	    m_activePickboxID = ID_PB_LEFT;
 	    return true;
 	}
-	
+
     return false;
 }
 
@@ -118,8 +122,8 @@ wxCursor Bus::GetBestPickboxCursor() const
 
 void Bus::MovePickbox(wxPoint2DDouble position)
 {
-	if(m_activePickboxID == ID_PB_NONE) return;
-	
+    if(m_activePickboxID == ID_PB_NONE) return;
+
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
 
     double dx = 0.0;

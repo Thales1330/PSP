@@ -10,6 +10,7 @@ class Bus : public Element
     Bus(wxPoint2DDouble position);
     ~Bus();
     virtual bool Contains(wxPoint2DDouble position) const;
+	virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void Rotate();
     virtual wxCursor GetBestPickboxCursor() const;
