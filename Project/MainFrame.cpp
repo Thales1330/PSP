@@ -14,8 +14,8 @@ MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
 }
 MainFrame::~MainFrame()
 {
-    if(!m_artMetro) delete m_artMetro;
-    if(!m_addElementsMenu) {
+    //if(m_artMetro) delete m_artMetro;
+    if(m_addElementsMenu) {
 	    m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED,
 	                                  wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
 	    delete m_addElementsMenu;

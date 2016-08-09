@@ -58,12 +58,11 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : 
 
 Workspace::~Workspace()
 {
-    std::vector<Element*>::iterator it = m_elementList.begin();
-    while(it != m_elementList.end()) {
-	    if(!(*it)) delete *it;
-	    it++;
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+	    if(*it) delete *it;
 	}
-    if(!m_camera) delete m_camera;
+    m_elementList.clear();
+    if(m_camera) delete m_camera;
 }
 
 void Workspace::OnPaint(wxPaintEvent& event)
@@ -79,11 +78,9 @@ void Workspace::OnPaint(wxPaintEvent& event)
     // Draw
 
     // Elements
-    std::vector<Element*>::iterator it = m_elementList.begin();
-    while(it != m_elementList.end()) {
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 	    Element* element = *it;
 	    element->Draw(m_camera->GetTranslation(), m_camera->GetScale());
-	    it++;
 	}
 
     // Selection rectangle
@@ -136,13 +133,31 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
     bool foundElement = false;
     if(m_mode == MODE_INSERT) {
-	    m_mode = MODE_EDIT;
+	    // Too confuse...
+	    Element* newElement = *(m_elementList.end() - 1);
+	    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+		    Element* element = *it;
+		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+			    if(typeid(*element) == typeid(Bus)) {
+				    element->SetSelected();
+				    foundElement = true;
+				    if(newElement->AddParent(element, m_camera->ScreenToWorld(event.GetPosition()))) {
+					    m_mode = MODE_EDIT;
+					}
+				}
+			}
+		}
+	    if(!foundElement) {
+		    if(typeid(*newElement) == typeid(Line)) {
+			    newElement->AddPoint(m_camera->ScreenToWorld(event.GetPosition()));
+			}
+		}
+	    foundElement = true;
 	}
     else
 	{
 	    bool clickPickbox = false;
-	    std::vector<Element*>::iterator it = m_elementList.begin();
-	    while(it != m_elementList.end()) {
+	    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 		    Element* element = *it;
 		    element->ResetPickboxes();  // Reset pickbox state.
 		    element->StartMove(m_camera->ScreenToWorld(event.GetPosition()));
@@ -162,9 +177,9 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 				    m_mode = MODE_MOVE_ELEMENT;
 				}
 			}
-		    it++;
 		}
 	}
+
     if(!foundElement) {
 	    m_mode = MODE_SELECTION_RECT;
 	    m_startSelRect = m_camera->ScreenToWorld(event.GetPosition());
@@ -178,8 +193,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 void Workspace::OnLeftClickUp(wxMouseEvent& event)
 {
     bool foundPickbox = false;
-    std::vector<Element*>::iterator it = m_elementList.begin();
-    while(it != m_elementList.end()) {
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 	    Element* element = *it;
 
 	    if(m_mode == MODE_SELECTION_RECT) {
@@ -208,14 +222,14 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
 			    element->ShowPickbox(false);
 			}
 		}
-
-	    it++;
 	}
     if(!foundPickbox) {
 	    SetCursor(wxCURSOR_ARROW);
 	}
 
-    m_mode = MODE_EDIT;
+    if(m_mode != MODE_INSERT) {
+	    m_mode = MODE_EDIT;
+	}
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
     Redraw();
     UpdateStatusBar();
@@ -227,9 +241,10 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	{
 	    case MODE_INSERT:
 		{
-		    std::vector<Element*>::iterator it = m_elementList.end() - 1;
-		    Element* element = *it;
-		    element->Insert(NULL, m_camera->ScreenToWorld(event.GetPosition()));
+		    Element* newElement = *(m_elementList.end() - 1);
+		    if(typeid(*newElement) == typeid(Bus)) {
+			    newElement->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
+			}
 		    Redraw();
 		}
 		break;
@@ -245,8 +260,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 		{
 		    bool foundPickbox = false;
 		    bool redraw = false;
-		    std::vector<Element*>::iterator it = m_elementList.begin();
-		    while(it != m_elementList.end()) {
+		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 			    Element* element = *it;
 			    if(element->IsSelected()) {
 				    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
@@ -270,7 +284,6 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 					    SetCursor(wxCURSOR_ARROW);
 					}
 				}
-			    it++;
 			}
 		    if(redraw) Redraw();
 		}
@@ -278,28 +291,24 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 	    case MODE_MOVE_PICKBOX:
 		{
-		    std::vector<Element*>::iterator it = m_elementList.begin();
-		    while(it != m_elementList.end()) {
+		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 			    Element* element = *it;
 			    if(element->IsSelected()) {
 				    element->MovePickbox(m_camera->ScreenToWorld(event.GetPosition()));
 				    Redraw();
 				}
-			    it++;
 			}
 		}
 		break;
 
 	    case MODE_MOVE_ELEMENT:
 		{
-		    std::vector<Element*>::iterator it = m_elementList.begin();
-		    while(it != m_elementList.end()) {
+		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 			    Element* element = *it;
 			    if(element->IsSelected()) {
 				    element->Move(m_camera->ScreenToWorld(event.GetPosition()));
 				    Redraw();
 				}
-			    it++;
 			}
 		}
 		break;
@@ -347,7 +356,9 @@ void Workspace::OnMiddleDown(wxMouseEvent& event)
 }
 void Workspace::OnMiddleUp(wxMouseEvent& event)
 {
-    m_mode = MODE_EDIT;
+    if(m_mode != MODE_INSERT) {
+	    m_mode = MODE_EDIT;
+	}
     UpdateStatusBar();
 }
 void Workspace::OnScroll(wxMouseEvent& event)
@@ -378,13 +389,11 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 			break;
 		    case 'R':  // Rotate the selected elements.
 			{
-			    std::vector<Element*>::iterator it = m_elementList.begin();
-			    while(it != m_elementList.end()) {
+			    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 				    Element* element = *it;
 				    if(element->IsSelected()) {
 					    element->Rotate();
 					}
-				    it++;
 				}
 			    Redraw();
 			}
