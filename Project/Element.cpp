@@ -46,8 +46,18 @@ void Element::DrawRectangle(wxPoint2DDouble* points, GLenum mode) const
     glEnd();
 }
 
+void Element::DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode) const
+{
+    glBegin(mode);
+    for(auto it = points.begin(); it != points.end(); ++it) {
+	    glVertex2d((*it).m_x, (*it).m_y);
+	}
+    glEnd();
+}
+
 void Element::DrawPickbox(wxPoint2DDouble position) const
 {
+    glLineWidth(1.0);
     glColor4d(1.0, 1.0, 1.0, 0.8);
     DrawRectangle(position, 8.0, 8.0);
     glColor4d(0.0, 0.0, 0.0, 1.0);
@@ -66,11 +76,29 @@ wxPoint2DDouble Element::RotateAtPosition(wxPoint2DDouble pointToRotate, double 
 
 void Element::StartMove(wxPoint2DDouble position)
 {
-	this->m_moveStartPt = position;
-	this->m_movePos = m_position;
+    this->m_moveStartPt = position;
+    this->m_movePos = m_position;
 }
 
-void Element::Move(wxPoint2DDouble position)
+void Element::Move(wxPoint2DDouble position) { SetPosition(m_movePos + position - m_moveStartPt); }
+wxPoint2DDouble Element::GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const
 {
-	SetPosition(m_movePos + position - m_moveStartPt);
+    double swLineSize = 25.0;
+    wxPoint2DDouble swPoint = wxPoint2DDouble(parentPoint.m_x, parentPoint.m_y - swLineSize);
+
+    // Rotate the second point (to compare).
+    double angle = parent->GetAngle();
+
+    secondPoint =
+        wxPoint2DDouble(std::cos(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) -
+                            std::sin(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
+                        std::sin(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) +
+                            std::cos(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+
+    // Rotate
+    if(secondPoint.m_y > parentPoint.m_y) angle -= 180.0;
+    return wxPoint2DDouble(std::cos(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) -
+                               std::sin(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
+                           std::sin(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) +
+                               std::cos(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
 }

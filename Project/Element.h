@@ -41,31 +41,42 @@ class Element
     double GetAngle() const { return m_angle; }
     bool IsPickboxShown() const { return m_showPickbox; }
     // Pure-virtuals methods
-	virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
+    virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
     virtual void Draw(wxPoint2DDouble translation, double scale) const = 0;
     virtual void Rotate() = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
-	virtual bool Intersects(wxRect2DDouble rect) const = 0;
+    virtual bool Intersects(wxRect2DDouble rect) const = 0;
     virtual bool PickboxContains(wxPoint2DDouble position) = 0;
     virtual void MovePickbox(wxPoint2DDouble position) = 0;
     virtual wxCursor GetBestPickboxCursor() const = 0;
 
     // General methods
-	virtual void AddPoint(wxPoint2DDouble point) {};
+    virtual void AddPoint(wxPoint2DDouble point){};
     virtual void StartMove(wxPoint2DDouble position);
-	virtual void Move(wxPoint2DDouble position);
-    void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
-    wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
-                                  double scale,
-                                  double offsetX = 0.0,
-                                  double offsetY = 0.0) const;
-    void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
-    void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
-    void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
-    void DrawPickbox(wxPoint2DDouble position) const;
-    wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;
+    virtual void Move(wxPoint2DDouble position);
+    virtual void MoveNode(Element* parent, wxPoint2DDouble position){};
+    virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
+                                           wxPoint2DDouble parentPoint,
+                                           wxPoint2DDouble secondPoint) const;
+    virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
+    virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
+                                          double scale,
+                                          double offsetX = 0.0,
+                                          double offsetY = 0.0) const;
+    virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
+    virtual void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
+    virtual void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
+    virtual void DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode = GL_LINE_STRIP) const;
+    virtual void DrawPickbox(wxPoint2DDouble position) const;
+    virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;
+	
+	virtual std::vector<Element*> GetParentList() const { return m_parentList; }
+	virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
+	virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
 
    protected:
+    std::vector<Element*> m_parentList;
+
     wxRect2DDouble m_rect;
     wxPoint2DDouble m_position;
     double m_width = 0.0;
@@ -80,7 +91,7 @@ class Element
     int m_activePickboxID = ID_PB_NONE;
 
     wxPoint2DDouble m_moveStartPt;
-	wxPoint2DDouble m_movePos;
+    wxPoint2DDouble m_movePos;
 };
 
 #endif  // ELEMENT_H

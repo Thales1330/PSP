@@ -133,20 +133,26 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
     bool foundElement = false;
     if(m_mode == MODE_INSERT) {
-	    // Too confuse...
+	    // Get the last element inserted on the list.
 	    Element* newElement = *(m_elementList.end() - 1);
 	    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 		    Element* element = *it;
+		    // Clicked in any element.
 		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+			    // Click at a bus.
 			    if(typeid(*element) == typeid(Bus)) {
+				    // Select the bus.
 				    element->SetSelected();
-				    foundElement = true;
+				    foundElement = true;  // Element found.
+				    // Add the new element's parent. If the element being inserted return true, return
+				    // to edit mode.
 				    if(newElement->AddParent(element, m_camera->ScreenToWorld(event.GetPosition()))) {
 					    m_mode = MODE_EDIT;
 					}
 				}
 			}
 		}
+	    // The line element can have an indefined number of points.
 	    if(!foundElement) {
 		    if(typeid(*newElement) == typeid(Line)) {
 			    newElement->AddPoint(m_camera->ScreenToWorld(event.GetPosition()));
@@ -160,19 +166,23 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 	    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 		    Element* element = *it;
 		    element->ResetPickboxes();  // Reset pickbox state.
-		    element->StartMove(m_camera->ScreenToWorld(event.GetPosition()));
+		    element->StartMove(m_camera->ScreenToWorld(
+		        event.GetPosition()));  // Set movement initial position (not necessarily will be moved).
 
+		    // Click at an element
 		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
 			    if(!foundElement) {
+				    // Select and show pickbox.
 				    element->SetSelected();
 				    element->ShowPickbox();
 				    foundElement = true;
 				}
-
+			    // If pickbox contains the click, move the pickbox
 			    if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
 				    m_mode = MODE_MOVE_PICKBOX;
 				    clickPickbox = true;
 				}
+			    // If didn't foud a pickbox, move the element
 			    if(!clickPickbox) {
 				    m_mode = MODE_MOVE_ELEMENT;
 				}
@@ -242,9 +252,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	    case MODE_INSERT:
 		{
 		    Element* newElement = *(m_elementList.end() - 1);
-		    if(typeid(*newElement) == typeid(Bus)) {
-			    newElement->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
-			}
+		    newElement->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
 		    Redraw();
 		}
 		break;
@@ -305,6 +313,16 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 		{
 		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 			    Element* element = *it;
+				//Parent's element moving...
+				for(int i=0; i<(int)element->GetParentList().size(); i++) {
+					//wxMessageBox(wxString::Format("%d", element->GetParentList().size()));
+					//Element* parent = *itp;
+					Element* parent = element->GetParentList()[i];
+					if(parent->IsSelected()) {
+						element->MoveNode(parent, m_camera->ScreenToWorld(event.GetPosition()));
+						//itp = element->GetParentList().end();//Exit the for because the element was already moved.
+					}
+				}
 			    if(element->IsSelected()) {
 				    element->Move(m_camera->ScreenToWorld(event.GetPosition()));
 				    Redraw();
