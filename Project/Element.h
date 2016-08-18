@@ -3,6 +3,7 @@
 
 #include <wx/geometry.h>
 #include <wx/cursor.h>
+#include <wx/menu.h>
 #include <GL/gl.h>
 
 enum PickboxID
@@ -14,6 +15,17 @@ enum PickboxID
     ID_PB_RIGHT_TOP,
     ID_PB_LEFT_BOTTOM,
     ID_PB_LEFT_TOP
+};
+
+enum ContextMenuID
+{
+    ID_EDIT_BUS = 0,
+    ID_EDIT_LINE,
+
+    ID_LINE_ADD_NODE,
+    ID_LINE_REMOVE_NODE,
+	
+	ID_ROTATE
 };
 
 class Element
@@ -51,15 +63,22 @@ class Element
     virtual wxCursor GetBestPickboxCursor() const = 0;
 
     // General methods
-    virtual void AddPoint(wxPoint2DDouble point){};
+    virtual bool GetContextMenu(wxMenu& menu) { return false; }
+    virtual void AddPoint(wxPoint2DDouble point) {}
     virtual void StartMove(wxPoint2DDouble position);
     virtual void Move(wxPoint2DDouble position);
     virtual void MoveNode(Element* parent, wxPoint2DDouble position){};
+    virtual void RotateNode(Element* parent) {}
     virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
                                            wxPoint2DDouble parentPoint,
                                            wxPoint2DDouble secondPoint) const;
     virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
     virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
+                                          double scale,
+                                          double offsetX = 0.0,
+                                          double offsetY = 0.0) const;
+    virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble position,
+                                          wxPoint2DDouble translation,
                                           double scale,
                                           double offsetX = 0.0,
                                           double offsetY = 0.0) const;
@@ -69,11 +88,10 @@ class Element
     virtual void DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode = GL_LINE_STRIP) const;
     virtual void DrawPickbox(wxPoint2DDouble position) const;
     virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;
-	
-	virtual std::vector<Element*> GetParentList() const { return m_parentList; }
-	virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
-	virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
 
+    virtual std::vector<Element*> GetParentList() const { return m_parentList; }
+    virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
+    virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
    protected:
     std::vector<Element*> m_parentList;
 
@@ -83,6 +101,7 @@ class Element
     double m_height = 0.0;
     double m_angle = 0.0;
     double m_borderSize = 2.0;
+    double m_rotationAngle = 45.0;
 
     bool m_selected = false;
     bool m_dragging = false;

@@ -57,7 +57,58 @@ Release/Bus.cpp.o: Bus.cpp Bus.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/cursor.h \
  C:/wxWidgets-3.1.0/include/wx/gdiobj.h \
  C:/wxWidgets-3.1.0/include/wx/msw/gdiimage.h \
- C:/wxWidgets-3.1.0/include/wx/msw/cursor.h
+ C:/wxWidgets-3.1.0/include/wx/msw/cursor.h \
+ C:/wxWidgets-3.1.0/include/wx/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/window.h \
+ C:/wxWidgets-3.1.0/include/wx/event.h \
+ C:/wxWidgets-3.1.0/include/wx/clntdata.h \
+ C:/wxWidgets-3.1.0/include/wx/dynarray.h \
+ C:/wxWidgets-3.1.0/include/wx/thread.h \
+ C:/wxWidgets-3.1.0/include/wx/tracker.h \
+ C:/wxWidgets-3.1.0/include/wx/typeinfo.h \
+ C:/wxWidgets-3.1.0/include/wx/any.h \
+ C:/wxWidgets-3.1.0/include/wx/datetime.h \
+ C:/wxWidgets-3.1.0/include/wx/anystr.h \
+ C:/wxWidgets-3.1.0/include/wx/variant.h \
+ C:/wxWidgets-3.1.0/include/wx/meta/convertible.h \
+ C:/wxWidgets-3.1.0/include/wx/meta/removeref.h \
+ C:/wxWidgets-3.1.0/include/wx/font.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/font.h \
+ C:/wxWidgets-3.1.0/include/wx/colour.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/colour.h \
+ C:/wxWidgets-3.1.0/include/wx/region.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/region.h \
+ C:/wxWidgets-3.1.0/include/wx/intl.h \
+ C:/wxWidgets-3.1.0/include/wx/translation.h \
+ C:/wxWidgets-3.1.0/include/wx/language.h \
+ C:/wxWidgets-3.1.0/include/wx/scopedptr.h \
+ C:/wxWidgets-3.1.0/include/wx/checkeddelete.h \
+ C:/wxWidgets-3.1.0/include/wx/validate.h \
+ C:/wxWidgets-3.1.0/include/wx/palette.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/palette.h \
+ C:/wxWidgets-3.1.0/include/wx/accel.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/accel.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/window.h \
+ C:/wxWidgets-3.1.0/include/wx/settings.h \
+ C:/wxWidgets-3.1.0/include/wx/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/bitmap.h \
+ C:/wxWidgets-3.1.0/include/wx/image.h \
+ C:/wxWidgets-3.1.0/include/wx/stream.h \
+ C:/wxWidgets-3.1.0/include/wx/imagbmp.h \
+ C:/wxWidgets-3.1.0/include/wx/imagpng.h \
+ C:/wxWidgets-3.1.0/include/wx/imaggif.h \
+ C:/wxWidgets-3.1.0/include/wx/imagpcx.h \
+ C:/wxWidgets-3.1.0/include/wx/imagjpeg.h \
+ C:/wxWidgets-3.1.0/include/wx/imagtga.h \
+ C:/wxWidgets-3.1.0/include/wx/imagtiff.h \
+ C:/wxWidgets-3.1.0/include/wx/imagpnm.h \
+ C:/wxWidgets-3.1.0/include/wx/imagxpm.h \
+ C:/wxWidgets-3.1.0/include/wx/imagiff.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
+ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 Bus.h:
 
@@ -182,3 +233,105 @@ C:/wxWidgets-3.1.0/include/wx/gdiobj.h:
 C:/wxWidgets-3.1.0/include/wx/msw/gdiimage.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/cursor.h:
+
+C:/wxWidgets-3.1.0/include/wx/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/window.h:
+
+C:/wxWidgets-3.1.0/include/wx/event.h:
+
+C:/wxWidgets-3.1.0/include/wx/clntdata.h:
+
+C:/wxWidgets-3.1.0/include/wx/dynarray.h:
+
+C:/wxWidgets-3.1.0/include/wx/thread.h:
+
+C:/wxWidgets-3.1.0/include/wx/tracker.h:
+
+C:/wxWidgets-3.1.0/include/wx/typeinfo.h:
+
+C:/wxWidgets-3.1.0/include/wx/any.h:
+
+C:/wxWidgets-3.1.0/include/wx/datetime.h:
+
+C:/wxWidgets-3.1.0/include/wx/anystr.h:
+
+C:/wxWidgets-3.1.0/include/wx/variant.h:
+
+C:/wxWidgets-3.1.0/include/wx/meta/convertible.h:
+
+C:/wxWidgets-3.1.0/include/wx/meta/removeref.h:
+
+C:/wxWidgets-3.1.0/include/wx/font.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/font.h:
+
+C:/wxWidgets-3.1.0/include/wx/colour.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/colour.h:
+
+C:/wxWidgets-3.1.0/include/wx/region.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/region.h:
+
+C:/wxWidgets-3.1.0/include/wx/intl.h:
+
+C:/wxWidgets-3.1.0/include/wx/translation.h:
+
+C:/wxWidgets-3.1.0/include/wx/language.h:
+
+C:/wxWidgets-3.1.0/include/wx/scopedptr.h:
+
+C:/wxWidgets-3.1.0/include/wx/checkeddelete.h:
+
+C:/wxWidgets-3.1.0/include/wx/validate.h:
+
+C:/wxWidgets-3.1.0/include/wx/palette.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/palette.h:
+
+C:/wxWidgets-3.1.0/include/wx/accel.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/accel.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/window.h:
+
+C:/wxWidgets-3.1.0/include/wx/settings.h:
+
+C:/wxWidgets-3.1.0/include/wx/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/bitmap.h:
+
+C:/wxWidgets-3.1.0/include/wx/image.h:
+
+C:/wxWidgets-3.1.0/include/wx/stream.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagbmp.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagpng.h:
+
+C:/wxWidgets-3.1.0/include/wx/imaggif.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagpcx.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagjpeg.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagtga.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagtiff.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagpnm.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagxpm.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagiff.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h:
+
+C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menu.h:

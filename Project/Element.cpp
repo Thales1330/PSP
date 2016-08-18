@@ -10,12 +10,6 @@ void Element::SetPosition(const wxPoint2DDouble position)
                        m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
 }
 
-wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
-{
-    return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *
-           scale;
-}
-
 void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode) const
 {
     glBegin(mode);
@@ -101,4 +95,16 @@ wxPoint2DDouble Element::GetSwitchPoint(Element* parent, wxPoint2DDouble parentP
                                std::sin(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
                            std::sin(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) +
                                std::cos(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+}
+
+wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
+{
+    return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *
+           scale;
+}
+
+wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble position, wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
+{
+	return wxPoint2DDouble(position.m_x + offsetX + translation.m_x, position.m_y + offsetY + translation.m_y) *
+           scale;
 }

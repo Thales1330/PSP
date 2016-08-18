@@ -184,7 +184,13 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/ioswrap.h \
  C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h \
  C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
- C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Element.h Bus.h Line.h
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Element.h \
+ C:/wxWidgets-3.1.0/include/wx/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h Line.h
 
 Workspace.h:
 
@@ -565,6 +571,18 @@ C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
 
 Element.h:
+
+C:/wxWidgets-3.1.0/include/wx/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
 
 Bus.h:
 

@@ -21,7 +21,7 @@ enum WorkspaceMode
     MODE_MOVE_PICKBOX,
     MODE_DRAG,
     MODE_INSERT,
-	MODE_SELECTION_RECT
+    MODE_SELECTION_RECT
 };
 
 class Workspace : public WorkspaceBase
@@ -35,7 +35,9 @@ class Workspace : public WorkspaceBase
     void SetName(wxString name) { m_name = name; }
     std::vector<Element*> GetElementList() { return m_elementList; }
     void Redraw() { m_glCanvas->Refresh(); }
+
    protected:
+    virtual void OnRightClickDown(wxMouseEvent& event);
     virtual void OnLeftClickUp(wxMouseEvent& event);
     virtual void OnScroll(wxMouseEvent& event);
     virtual void OnMiddleDown(wxMouseEvent& event);
@@ -44,6 +46,7 @@ class Workspace : public WorkspaceBase
     virtual void OnKeyDown(wxKeyEvent& event);
     virtual void OnLeftClickDown(wxMouseEvent& event);
     virtual void OnPaint(wxPaintEvent& event);
+    virtual void OnPopupClick(wxCommandEvent& event);
 
     void SetViewport();
 

@@ -110,7 +110,27 @@ Release/Line.cpp.o: Line.cpp Line.h \
  C:/wxWidgets-3.1.0/include/wx/stockitem.h \
  C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
  C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h Element.h \
- C:/wxWidgets-3.1.0/include/wx/geometry.h
+ C:/wxWidgets-3.1.0/include/wx/geometry.h \
+ C:/wxWidgets-3.1.0/include/wx/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/bitmap.h \
+ C:/wxWidgets-3.1.0/include/wx/image.h \
+ C:/wxWidgets-3.1.0/include/wx/stream.h \
+ C:/wxWidgets-3.1.0/include/wx/imagbmp.h \
+ C:/wxWidgets-3.1.0/include/wx/imagpng.h \
+ C:/wxWidgets-3.1.0/include/wx/imaggif.h \
+ C:/wxWidgets-3.1.0/include/wx/imagpcx.h \
+ C:/wxWidgets-3.1.0/include/wx/imagjpeg.h \
+ C:/wxWidgets-3.1.0/include/wx/imagtga.h \
+ C:/wxWidgets-3.1.0/include/wx/imagtiff.h \
+ C:/wxWidgets-3.1.0/include/wx/imagpnm.h \
+ C:/wxWidgets-3.1.0/include/wx/imagxpm.h \
+ C:/wxWidgets-3.1.0/include/wx/imagiff.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
+ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 Line.h:
 
@@ -341,3 +361,43 @@ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
 Element.h:
 
 C:/wxWidgets-3.1.0/include/wx/geometry.h:
+
+C:/wxWidgets-3.1.0/include/wx/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/bitmap.h:
+
+C:/wxWidgets-3.1.0/include/wx/image.h:
+
+C:/wxWidgets-3.1.0/include/wx/stream.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagbmp.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagpng.h:
+
+C:/wxWidgets-3.1.0/include/wx/imaggif.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagpcx.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagjpeg.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagtga.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagtiff.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagpnm.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagxpm.h:
+
+C:/wxWidgets-3.1.0/include/wx/imagiff.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h:
+
+C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menu.h:

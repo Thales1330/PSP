@@ -175,7 +175,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 		// inserir gerador
 		break;
 	    case ID_ADDMENU_LOAD:
-		// inserir larga
+		// inserir carga
 		break;
 	    case ID_ADDMENU_CAPACITOR:
 		// inserir capacitor

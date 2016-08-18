@@ -147,6 +147,13 @@ void Bus::MovePickbox(wxPoint2DDouble position)
 
 void Bus::Rotate()
 {
-    m_angle += 45.0;
+    m_angle += m_rotationAngle;
     if(m_angle >= 360.0) m_angle = 0.0;
+}
+
+bool Bus::GetContextMenu(wxMenu& menu)
+{
+	menu.Append(ID_EDIT_BUS, _("Edit bus"));
+	menu.Append(ID_ROTATE, _("Rotate"));
+	return true;
 }

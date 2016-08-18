@@ -320,6 +320,13 @@
          "m_functionNameAndSignature": "OnScroll(wxMouseEvent& event)",
          "m_description": "Process a wxEVT_MOUSEWHEEL event",
          "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_RIGHT_DOWN",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnRightClickDown(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_RIGHT_DOWN event",
+         "m_noBody": false
         }],
        "m_children": []
       }]

@@ -200,6 +200,26 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     event.Skip();
 }
 
+void Workspace::OnRightClickDown(wxMouseEvent& event)
+{
+    if(m_mode == MODE_EDIT) {
+	    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+		    Element* element = *it;
+		    if(element->IsSelected()) {
+			    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				    wxMenu menu;
+				    if(element->GetContextMenu(menu)) {
+					    menu.SetClientData(element);
+					    menu.Connect(wxEVT_COMMAND_MENU_SELECTED,
+					                 wxCommandEventHandler(Workspace::OnPopupClick), NULL, this);
+					    PopupMenu(&menu);
+					}
+				}
+			}
+		}
+	}
+}
+
 void Workspace::OnLeftClickUp(wxMouseEvent& event)
 {
     bool foundPickbox = false;
@@ -313,14 +333,11 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 		{
 		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 			    Element* element = *it;
-				//Parent's element moving...
-				for(int i=0; i<(int)element->GetParentList().size(); i++) {
-					//wxMessageBox(wxString::Format("%d", element->GetParentList().size()));
-					//Element* parent = *itp;
-					Element* parent = element->GetParentList()[i];
-					if(parent->IsSelected()) {
-						element->MoveNode(parent, m_camera->ScreenToWorld(event.GetPosition()));
-						//itp = element->GetParentList().end();//Exit the for because the element was already moved.
+			    // Parent's element moving...
+			    for(int i = 0; i < (int)element->GetParentList().size(); i++) {
+				    Element* parent = element->GetParentList()[i];
+				    if(parent->IsSelected()) {
+					    element->MoveNode(parent, m_camera->ScreenToWorld(event.GetPosition()));
 					}
 				}
 			    if(element->IsSelected()) {
@@ -409,6 +426,13 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 			{
 			    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 				    Element* element = *it;
+				    // Parent's element rotating...
+				    for(int i = 0; i < (int)element->GetParentList().size(); i++) {
+					    Element* parent = element->GetParentList()[i];
+					    if(parent->IsSelected()) {
+						    element->RotateNode(parent);
+						}
+					}
 				    if(element->IsSelected()) {
 					    element->Rotate();
 					}
@@ -478,4 +502,38 @@ void Workspace::UpdateStatusBar()
     m_statusBar->SetStatusText(
         wxString::Format(wxT("X: %.1f  Y: %.1f"), m_camera->GetMousePosition().m_x, m_camera->GetMousePosition().m_y),
         3);
+}
+
+void Workspace::OnPopupClick(wxCommandEvent& event)
+{
+    wxMenu* menu = (wxMenu*)event.GetEventObject();
+    Element* element = (Element*)menu->GetClientData();
+    switch(event.GetId())
+	{
+	    case ID_EDIT_BUS:
+		{
+		    wxMessageBox("Edit bus!");
+		}
+		break;
+	    case ID_EDIT_LINE:
+		{
+		    wxMessageBox("Edit line!");
+		}
+		break;
+	    case ID_ROTATE:
+		{
+			element->Rotate();
+		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+			    Element* nonEditedElement = *it;
+			    // Parent's element rotating...
+			    for(int i = 0; i < (int)nonEditedElement->GetParentList().size(); i++) {
+				    Element* parent = nonEditedElement->GetParentList()[i];
+				    if(parent == element) {
+					    nonEditedElement->RotateNode(parent);
+					}
+				}
+			}
+		    Redraw();
+		}
+	}
 }
