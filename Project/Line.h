@@ -24,10 +24,12 @@ class Line : public Element
 	virtual void RotateNode(Element* parent);
     virtual void AddPoint(wxPoint2DDouble point);
 	virtual bool GetContextMenu(wxMenu& menu);
+	virtual void RemoveNode(wxPoint2DDouble point);
+	virtual void AddNode(wxPoint2DDouble point);
 
 protected:
    void UpdateSwitchesPosition();
-   double PointToLineDistance(wxPoint2DDouble point) const;
+   double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
     std::vector<wxPoint2DDouble> m_pointList;
     bool m_inserted = false;
 	std::vector<wxPoint2DDouble> m_movePts;

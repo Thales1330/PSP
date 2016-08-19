@@ -32,7 +32,7 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
 	    if(pointList.size() > 0) {
 		    DrawCircle(pointList[0], 5.0 + m_borderSize, 10, GL_POLYGON);
 		    if(m_inserted) {
-			    DrawCircle(pointList[pointList.size() - 1], 5.0 + +m_borderSize, 10, GL_POLYGON);
+			    DrawCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize, 10, GL_POLYGON);
 			}
 		}
 	}
@@ -120,7 +120,7 @@ void Line::MovePickbox(wxPoint2DDouble position)
     for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
 	    if(m_activePickboxID == i) {
 		    m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
-			UpdateSwitchesPosition();
+		    UpdateSwitchesPosition();
 		}
 	}
 }
@@ -191,7 +191,7 @@ void Line::UpdateSwitchesPosition()
         GetSwitchPoint(m_parentList[1], m_pointList[m_pointList.size() - 1], m_pointList[m_pointList.size() - 3]);
 }
 
-double Line::PointToLineDistance(wxPoint2DDouble point) const
+double Line::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) const
 {
     //[Ref] http://geomalgorithms.com/a02-_lines.html
     double distance = 100.0;  // Big initial distance.
@@ -222,7 +222,10 @@ double Line::PointToLineDistance(wxPoint2DDouble point) const
 		                 p2.m_y * p1.m_x) /
 		        std::sqrt(std::pow(p2.m_y - p1.m_y, 2) + std::pow(p2.m_x - p1.m_x, 2));
 		}
-	    if(d < distance) distance = d;
+	    if(d < distance) {
+		    distance = d;
+		    if(segmentNumber) *segmentNumber = i;
+		}
 	}
 
     return distance;
@@ -230,6 +233,34 @@ double Line::PointToLineDistance(wxPoint2DDouble point) const
 
 bool Line::GetContextMenu(wxMenu& menu)
 {
-	menu.Append(ID_EDIT_LINE, _("Edit line"));
-	return true;
+    menu.Append(ID_EDIT_LINE, _("Edit line"));
+    if(m_activePickboxID == ID_PB_NONE) {
+	    menu.Append(ID_LINE_ADD_NODE, _("Insert node"));
+	}
+    else
+	{
+	    menu.Append(ID_LINE_REMOVE_NODE, _("Remove node"));
+	}
+    return true;
+}
+
+void Line::RemoveNode(wxPoint2DDouble point)
+{
+    if(PickboxContains(point)) {
+	    for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
+		    if(m_activePickboxID == i) {
+			    m_pointList.erase(m_pointList.begin() + i);
+			    break;
+			}
+		}
+	}
+}
+
+void Line::AddNode(wxPoint2DDouble point)
+{
+    int segmentNumber = 0;
+    PointToLineDistance(point, &segmentNumber);
+    if(segmentNumber > 0 && segmentNumber < (int)m_pointList.size() - 2) {
+	    m_pointList.insert(m_pointList.begin() + segmentNumber + 1, point);
+	}
 }

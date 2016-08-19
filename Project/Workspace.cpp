@@ -202,11 +202,13 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 void Workspace::OnRightClickDown(wxMouseEvent& event)
 {
+    bool redraw = false;
     if(m_mode == MODE_EDIT) {
 	    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 		    Element* element = *it;
 		    if(element->IsSelected()) {
 			    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				    element->ShowPickbox(false);
 				    wxMenu menu;
 				    if(element->GetContextMenu(menu)) {
 					    menu.SetClientData(element);
@@ -214,10 +216,13 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
 					                 wxCommandEventHandler(Workspace::OnPopupClick), NULL, this);
 					    PopupMenu(&menu);
 					}
+				    element->ResetPickboxes();
+				    redraw = true;
 				}
 			}
 		}
 	}
+    if(redraw) Redraw();
 }
 
 void Workspace::OnLeftClickUp(wxMouseEvent& event)
@@ -520,9 +525,23 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		    wxMessageBox("Edit line!");
 		}
 		break;
+	    case ID_LINE_ADD_NODE:
+		{
+			Line* line = (Line*)element;
+			line->AddNode(m_camera->GetMousePosition());
+			Redraw();
+		}
+		break;
+	    case ID_LINE_REMOVE_NODE:
+		{
+			Line* line = (Line*)element;
+			line->RemoveNode(m_camera->GetMousePosition());
+			Redraw();
+		}
+		break;
 	    case ID_ROTATE:
 		{
-			element->Rotate();
+		    element->Rotate();
 		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 			    Element* nonEditedElement = *it;
 			    // Parent's element rotating...
@@ -535,5 +554,6 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 			}
 		    Redraw();
 		}
+		break;
 	}
 }
