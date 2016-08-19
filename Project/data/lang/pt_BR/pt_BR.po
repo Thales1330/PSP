@@ -1,0 +1,384 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PSP-UFU pt_BR 0.0.1\n"
+"POT-Creation-Date: 2016-07-28 17:59-0300\n"
+"PO-Revision-Date: 2016-07-28 18:06-0300\n"
+"Last-Translator: \n"
+"Language-Team: Thales Lima Oliveira <thaleslima.ufu@gmail.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: MainFrame.cpp:71
+msgid "&Bus\tB"
+msgstr "&Barramento\tB"
+
+#: MainFrame.cpp:71
+msgid "Adds a bus to the circuit"
+msgstr ""
+
+#: MainFrame.cpp:74
+msgid "&Line\tL"
+msgstr "&Linha\tL"
+
+#: MainFrame.cpp:74
+msgid "Adds a power line to the circuit"
+msgstr ""
+
+#: MainFrame.cpp:75
+msgid "&Transformer\tT"
+msgstr ""
+
+#: MainFrame.cpp:76
+msgid "Adds a transformer to the circuit"
+msgstr ""
+
+#: MainFrame.cpp:77
+msgid "&Generator\tG"
+msgstr ""
+
+#: MainFrame.cpp:78
+msgid "Adds a generator to the circuit"
+msgstr ""
+
+#: MainFrame.cpp:79
+msgid "&Induction motor\tI"
+msgstr ""
+
+#: MainFrame.cpp:80 MainFrame.cpp:83
+msgid "Adds an induction motor to the circuit"
+msgstr ""
+
+#: MainFrame.cpp:82
+msgid "&Synchronous compensator \tK"
+msgstr ""
+
+#: MainFrame.cpp:85
+msgid "&Load\tShift-L"
+msgstr ""
+
+#: MainFrame.cpp:85
+msgid "Adds a load to the circuit"
+msgstr ""
+
+#: MainFrame.cpp:86
+msgid "&Capacitor\tShift-C"
+msgstr ""
+
+#: MainFrame.cpp:87
+msgid "Adds a shunt capacitor to the circuit"
+msgstr ""
+
+#: MainFrame.cpp:88
+msgid "&Inductor\tShift-I"
+msgstr ""
+
+#: MainFrame.cpp:89
+msgid "Adds a shunt inductor to the circuit"
+msgstr ""
+
+#: MainFrameBase.cpp:72 MainFrameBase.cpp:73
+msgid "File"
+msgstr ""
+
+#: MainFrameBase.cpp:76 MainFrameBase.cpp:77 MainFrameBase.cpp:80
+msgid "Projects"
+msgstr ""
+
+#: MainFrameBase.cpp:82
+msgid "New"
+msgstr ""
+
+#: MainFrameBase.cpp:82
+msgid "Create new project"
+msgstr ""
+
+#: MainFrameBase.cpp:84
+msgid "Open"
+msgstr ""
+
+#: MainFrameBase.cpp:84
+msgid "Open saved project"
+msgstr ""
+
+#: MainFrameBase.cpp:86
+msgid "Export Import"
+msgstr ""
+
+#: MainFrameBase.cpp:86
+msgid "Export or import projects"
+msgstr ""
+
+#: MainFrameBase.cpp:88
+msgid "Exit"
+msgstr ""
+
+#: MainFrameBase.cpp:88
+msgid "Closes the application"
+msgstr ""
+
+#: MainFrameBase.cpp:91 MainFrameBase.cpp:92
+msgid "Current project"
+msgstr ""
+
+#: MainFrameBase.cpp:96
+msgid "Project settings"
+msgstr ""
+
+#: MainFrameBase.cpp:96
+msgid "Opens a dialog to set the main settings of the current project"
+msgstr ""
+
+#: MainFrameBase.cpp:98
+msgid "Save"
+msgstr "Salvar"
+
+#: MainFrameBase.cpp:98
+msgid "Save the current project"
+msgstr ""
+
+#: MainFrameBase.cpp:100
+msgid "Save as..."
+msgstr "Salvar como..."
+
+#: MainFrameBase.cpp:100
+msgid "Save as the current project"
+msgstr ""
+
+#: MainFrameBase.cpp:102
+msgid "Close"
+msgstr ""
+
+#: MainFrameBase.cpp:102
+msgid "Close the current project"
+msgstr ""
+
+#: MainFrameBase.cpp:105 MainFrameBase.cpp:106 MainFrameBase.cpp:109
+msgid "Help"
+msgstr ""
+
+#: MainFrameBase.cpp:111
+msgid "PSP-UFU Guide"
+msgstr ""
+
+#: MainFrameBase.cpp:111
+msgid "Open PSP-UFU Guide"
+msgstr ""
+
+#: MainFrameBase.cpp:113
+msgid "About..."
+msgstr ""
+
+#: MainFrameBase.cpp:113
+msgid "About PSP-UFU"
+msgstr ""
+
+#: MainFrameBase.cpp:116 MainFrameBase.cpp:117
+msgid "Tools"
+msgstr ""
+
+#: MainFrameBase.cpp:119 MainFrameBase.cpp:120 MainFrameBase.cpp:123
+msgid "Clipboard"
+msgstr ""
+
+#: MainFrameBase.cpp:125
+msgid "Copy"
+msgstr ""
+
+#: MainFrameBase.cpp:125
+msgid "Copies the selected elements"
+msgstr ""
+
+#: MainFrameBase.cpp:127
+msgid "Paste"
+msgstr ""
+
+#: MainFrameBase.cpp:127
+msgid "Pastes the elements from clipboard"
+msgstr ""
+
+#: MainFrameBase.cpp:129
+msgid "Undo"
+msgstr ""
+
+#: MainFrameBase.cpp:129
+msgid "Undoes the last action"
+msgstr ""
+
+#: MainFrameBase.cpp:131
+msgid "Redo"
+msgstr ""
+
+#: MainFrameBase.cpp:131
+msgid "Redoes the last undo action"
+msgstr ""
+
+#: MainFrameBase.cpp:134 MainFrameBase.cpp:135 MainFrameBase.cpp:138
+msgid "Circuit"
+msgstr ""
+
+#: MainFrameBase.cpp:140
+msgid "Add element"
+msgstr ""
+
+#: MainFrameBase.cpp:140
+msgid "Add a new element in the project"
+msgstr ""
+
+#: MainFrameBase.cpp:142
+msgid "Enable solution"
+msgstr ""
+
+#: MainFrameBase.cpp:142
+msgid ""
+"Enables the power flow and fault (if exists) calculations after any circuit "
+"change"
+msgstr ""
+
+#: MainFrameBase.cpp:144
+msgid "Disable solution"
+msgstr ""
+
+#: MainFrameBase.cpp:144
+msgid ""
+"Disables the power flow and fault calculations after any circuit changes"
+msgstr ""
+
+#: MainFrameBase.cpp:146
+msgid "Reset voltages"
+msgstr ""
+
+#: MainFrameBase.cpp:146
+msgid "Reset all voltages to initial state"
+msgstr ""
+
+#: MainFrameBase.cpp:149 MainFrameBase.cpp:150 MainFrameBase.cpp:153
+msgid "Handling"
+msgstr ""
+
+#: MainFrameBase.cpp:155
+msgid "Drag"
+msgstr ""
+
+#: MainFrameBase.cpp:155
+msgid "Drag all the elements"
+msgstr ""
+
+#: MainFrameBase.cpp:157
+msgid "Move"
+msgstr ""
+
+#: MainFrameBase.cpp:157
+msgid "Move the selected elements"
+msgstr ""
+
+#: MainFrameBase.cpp:159
+msgid "Fit"
+msgstr ""
+
+#: MainFrameBase.cpp:159
+msgid "Applies the drag and zoom tools to show all elements in workspace"
+msgstr ""
+
+#: MainFrameBase.cpp:161
+msgid "Delete"
+msgstr ""
+
+#: MainFrameBase.cpp:161
+msgid "Removes all selected elements"
+msgstr ""
+
+#: MainFrameBase.cpp:164 MainFrameBase.cpp:165 MainFrameBase.cpp:168
+msgid "Calculations"
+msgstr ""
+
+#: MainFrameBase.cpp:170
+msgid "Power flow"
+msgstr ""
+
+#: MainFrameBase.cpp:170
+msgid "Calculate the circuit power flow"
+msgstr ""
+
+#: MainFrameBase.cpp:172
+msgid "Fault"
+msgstr ""
+
+#: MainFrameBase.cpp:172
+msgid "Calculate the circuit fault (if exists)"
+msgstr ""
+
+#: MainFrameBase.cpp:174
+msgid "Short-circuit power"
+msgstr ""
+
+#: MainFrameBase.cpp:174
+msgid "Calculate the short-circuit power in all buses"
+msgstr ""
+
+#: MainFrameBase.cpp:177 MainFrameBase.cpp:178
+msgid "Reports"
+msgstr ""
+
+#: MainFrameBase.cpp:182
+msgid "Data report"
+msgstr ""
+
+#: MainFrameBase.cpp:182
+msgid "Opens a data report"
+msgstr ""
+
+#: MainFrameBase.cpp:184
+msgid "Snapshot"
+msgstr ""
+
+#: MainFrameBase.cpp:184
+msgid "Capture a snapshot of the circuit"
+msgstr ""
+
+#: MainFrameBase.cpp:187 MainFrameBase.cpp:188 MainFrameBase.cpp:190
+#: MainFrameBase.cpp:191 MainFrameBase.cpp:194
+msgid "Stability"
+msgstr ""
+
+#: MainFrameBase.cpp:196
+msgid "Settings"
+msgstr ""
+
+#: MainFrameBase.cpp:196
+msgid "Opens the stability settings"
+msgstr ""
+
+#: MainFrameBase.cpp:198
+msgid "Run"
+msgstr ""
+
+#: MainFrameBase.cpp:198
+msgid "Run the stability calculations"
+msgstr ""
+
+#: MainFrameBase.cpp:201 MainFrameBase.cpp:202
+msgid "Data"
+msgstr ""
+
+#: MainFrameBase.cpp:205
+msgid "Stability data"
+msgstr ""
+
+#: MainFrameBase.cpp:207
+msgid "Charts"
+msgstr ""
+
+#: MainFrameBase.cpp:207
+msgid "Open the charts"
+msgstr ""
+
+#: MainFrameBase.h:140
+msgid "PSP-UFU"
+msgstr ""
