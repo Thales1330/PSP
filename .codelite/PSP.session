@@ -55,7 +55,7 @@
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Line.cpp" Name="FileName"/>
       <int Value="154" Name="FirstVisibleLine"/>
-      <int Value="172" Name="CurrentLine"/>
+      <int Value="167" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
