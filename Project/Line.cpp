@@ -163,20 +163,35 @@ void Line::StartMove(wxPoint2DDouble position)
 
 void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 {
-    // First bus.
-    if(parent == m_parentList[0]) {
-	    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
-	}
-    // Second bus.
-    else if(parent == m_parentList[1])
-	{
-	    m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
-	}
+    if(parent) {
+		//wxMessageBox("OK");
+	    // First bus.
+	    if(parent == m_parentList[0]) {
+		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
+		}
+	    // Second bus.
+	    else if(parent == m_parentList[1])
+		{
+		    m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
+		}
 
-    // If the line is selected, move all the points, except the switches and buses points.
-    if(m_selected) {
-	    for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
-		    m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
+	    // If the line is selected, move all the points, except the switches and buses points.
+	    if(m_selected) {
+		    for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
+			    m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
+			}
+		}
+	}
+    else
+	{
+	    if(m_activeNodeID == 1) {
+		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
+		    m_parentList[0] = NULL;
+		}
+	    else if(m_activeNodeID == 2)
+		{
+		    m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
+		    m_parentList[1] = NULL;
 		}
 	}
 
@@ -186,9 +201,21 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 
 void Line::UpdateSwitchesPosition()
 {
-    m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], m_pointList[2]);
-    m_pointList[m_pointList.size() - 2] =
-        GetSwitchPoint(m_parentList[1], m_pointList[m_pointList.size() - 1], m_pointList[m_pointList.size() - 3]);
+    if(m_parentList[0]) {
+	    m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], m_pointList[2]);
+	}
+    else
+	{
+	    m_pointList[1] = m_pointList[0];
+	}
+    if(m_parentList[1]) {
+	    m_pointList[m_pointList.size() - 2] = GetSwitchPoint(m_parentList[1], m_pointList[m_pointList.size() - 1],
+	                                                         m_pointList[m_pointList.size() - 3]);
+	}
+    else
+	{
+	    m_pointList[m_pointList.size() - 2] = m_pointList[m_pointList.size() - 1];
+	}
 }
 
 double Line::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) const
@@ -254,6 +281,7 @@ void Line::RemoveNode(wxPoint2DDouble point)
 			}
 		}
 	}
+    UpdateSwitchesPosition();
 }
 
 void Line::AddNode(wxPoint2DDouble point)
@@ -263,4 +291,76 @@ void Line::AddNode(wxPoint2DDouble point)
     if(segmentNumber > 0 && segmentNumber < (int)m_pointList.size() - 2) {
 	    m_pointList.insert(m_pointList.begin() + segmentNumber + 1, point);
 	}
+    UpdateSwitchesPosition();
+}
+
+bool Line::NodeContains(wxPoint2DDouble position)
+{
+    wxRect2DDouble nodeRect1(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
+                             10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+    wxRect2DDouble nodeRect2(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
+                             m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
+                             10 + 2.0 * m_borderSize);
+
+    if(nodeRect1.Contains(position)) {
+	    m_activeNodeID = 1;
+	    return true;
+	}
+    if(nodeRect2.Contains(position)) {
+	    m_activeNodeID = 2;
+	    return true;
+	}
+
+    m_activeNodeID = 0;
+    return false;
+}
+
+bool Line::SetNodeParent(Element* parent)
+{
+    if(m_activeNodeID == 1 && parent == m_parentList[0]) return false;
+    if(m_activeNodeID == 2 && parent == m_parentList[1]) return false;
+
+    if(parent && m_activeNodeID != 0) {
+	    wxRect2DDouble nodeRect(0, 0, 0, 0);
+	    if(m_activeNodeID == 1) {
+		    nodeRect =
+		        wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
+		                       10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+		}
+	    if(m_activeNodeID == 2) {
+		    nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
+		                              m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+		                              10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+		}
+
+	    if(parent->Intersects(nodeRect)) {
+		    if(m_activeNodeID == 1) {
+			    // if(m_parentList[1] == parent){
+			    //	m_activeNodeID = 0;
+			    //	return false;
+			    //}
+
+			    m_parentList[0] = parent;
+			    UpdateSwitchesPosition();
+			    return true;
+			}
+		    if(m_activeNodeID == 2) {
+			    // if(m_parentList[0] == parent) {
+			    //	m_activeNodeID = 0;
+			    //	return false;
+			    //}
+
+			    m_parentList[1] = parent;
+			    UpdateSwitchesPosition();
+			    return true;
+			}
+		}
+	    else
+		{
+		    if(m_activeNodeID == 1) m_parentList[0] = NULL;
+		    if(m_activeNodeID == 2) m_parentList[1] = NULL;
+		}
+	}
+    // m_activeNodeID = 0;
+    return false;
 }

@@ -24,8 +24,8 @@ enum ContextMenuID
 
     ID_LINE_ADD_NODE,
     ID_LINE_REMOVE_NODE,
-	
-	ID_ROTATE
+
+    ID_ROTATE
 };
 
 class Element
@@ -68,11 +68,14 @@ class Element
     virtual void StartMove(wxPoint2DDouble position);
     virtual void Move(wxPoint2DDouble position);
     virtual void MoveNode(Element* parent, wxPoint2DDouble position){};
+    virtual bool NodeContains(wxPoint2DDouble position) { return false; };
+	virtual bool SetNodeParent(Element* parent) { return false; };
     virtual void RotateNode(Element* parent) {}
     virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
                                            wxPoint2DDouble parentPoint,
                                            wxPoint2DDouble secondPoint) const;
     virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
+	virtual void ResetNodes() { m_activeNodeID= 0; }
     virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
                                           double scale,
                                           double offsetX = 0.0,
@@ -108,6 +111,7 @@ class Element
     bool m_showPickbox = false;
 
     int m_activePickboxID = ID_PB_NONE;
+    int m_activeNodeID = 0;
 
     wxPoint2DDouble m_moveStartPt;
     wxPoint2DDouble m_movePos;

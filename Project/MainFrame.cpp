@@ -39,28 +39,28 @@ void MainFrame::Init()
 void MainFrame::EnableCurrentProjectRibbon(bool enable)
 {
     m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ADDELEMENT, enable);
-    m_ribbonButtonBarStabData->EnableButton(ID_RIBBON_CHARTS, enable);
+    m_ribbonButtonBarReports->EnableButton(ID_RIBBON_CHARTS, enable);
     m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_CLOSE, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_COPY, enable);
     m_ribbonButtonBarReports->EnableButton(ID_RIBBON_DATAREPORT, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_DELETE, enable);
-    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_DISABLESOL, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_DRAG, enable);
-    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ENABLESOL, enable);
-    m_ribbonButtonBarCalculations->EnableButton(ID_RIBBON_FAULT, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_FIT, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_MOVE, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_DELETE, enable);
+    m_ribbonButtonBarContinuous->EnableButton(ID_RIBBON_DISABLESOL, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_DRAG, enable);
+    m_ribbonButtonBarContinuous->EnableButton(ID_RIBBON_ENABLESOL, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FAULT, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_FIT, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_MOVE, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_PASTE, enable);
-    m_ribbonButtonBarCalculations->EnableButton(ID_RIBBON_POWERFLOW, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_POWERFLOW, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_REDO, enable);
-    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_RESETVOLT, enable);
-    m_ribbonButtonBarStability->EnableButton(ID_RIBBON_RUNSTAB, enable);
+    m_ribbonButtonBarContinuous->EnableButton(ID_RIBBON_RESETVOLT, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_RUNSTAB, enable);
     m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_SAVE, enable);
     m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_SAVEAS, enable);
-    m_ribbonButtonBarCalculations->EnableButton(ID_RIBBON_SCPOWER, enable);
-    m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_SETTINGS, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_SCPOWER, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_PROJSETTINGS, enable);
     m_ribbonButtonBarReports->EnableButton(ID_RIBBON_SNAPSHOT, enable);
-    m_ribbonButtonBarStability->EnableButton(ID_RIBBON_STABSETTINGS, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_SIMULSETTINGS, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_UNDO, enable);
 }
 
@@ -111,8 +111,8 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
         new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar());
     m_workspaceList.push_back(newWorkspace);
 
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, true);
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_ENABLESOL, false);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 
     m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
     newWorkspace->Layout();
@@ -129,15 +129,15 @@ void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 {
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, true);
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_ENABLESOL, false);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 }
 
 void MainFrame::OnDragClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 {
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_ENABLESOL, true);
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, false);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, true);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, false);
 }
 
 void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
