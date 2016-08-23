@@ -9,7 +9,6 @@ Bus::Bus(wxPoint2DDouble position) : Element()
 }
 
 Bus::~Bus() {}
-
 void Bus::Draw(wxPoint2DDouble translation, double scale) const
 {
     // Draw selection (layer 1)
@@ -75,7 +74,27 @@ bool Bus::Contains(wxPoint2DDouble position) const
     return m_rect.Contains(ptR);
 }
 
-bool Bus::Intersects(wxRect2DDouble rect) const { return rect.Intersects(m_rect); }
+bool Bus::Intersects(wxRect2DDouble rect) const
+{
+    wxPoint2DDouble m_rectCorners[2] = {m_rect.GetLeftTop(), m_rect.GetRightBottom()};
+
+    wxPoint2DDouble rectCorners[2] = {rect.GetLeftTop(), rect.GetRightBottom()};
+
+    // Rotate the rect corners
+    for(int i = 0; i < 2; i++) {
+	    rectCorners[i] = RotateAtPosition(rectCorners[i], -m_angle);
+	}
+    //[Ref] http://stackoverflow.com/questions/306316/determine-if-two-rectangles-overlap-each-other
+	//[Ref2] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
+    // if (RectA.X1 < RectB.X2 && RectA.X2 > RectB.X1 && RectA.Y1 < RectB.Y2 && RectA.Y2 > RectB.Y1)
+
+    if(m_rectCorners[0].m_x < rectCorners[1].m_x && m_rectCorners[1].m_x > rectCorners[0].m_x &&
+       m_rectCorners[0].m_y < rectCorners[1].m_y && m_rectCorners[1].m_y > rectCorners[0].m_y)
+	return true;
+
+    return false;
+    // return rect.Intersects(m_rect);
+}
 bool Bus::PickboxContains(wxPoint2DDouble position)
 {
     m_activePickboxID = ID_PB_NONE;
@@ -153,7 +172,7 @@ void Bus::Rotate()
 
 bool Bus::GetContextMenu(wxMenu& menu)
 {
-	menu.Append(ID_EDIT_BUS, _("Edit bus"));
-	menu.Append(ID_ROTATE, _("Rotate"));
-	return true;
+    menu.Append(ID_EDIT_BUS, _("Edit bus"));
+    menu.Append(ID_ROTATE, _("Rotate"));
+    return true;
 }

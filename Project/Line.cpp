@@ -164,7 +164,6 @@ void Line::StartMove(wxPoint2DDouble position)
 void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {
-		//wxMessageBox("OK");
 	    // First bus.
 	    if(parent == m_parentList[0]) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;

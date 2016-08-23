@@ -492,8 +492,10 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				    // Parent's element rotating...
 				    for(int i = 0; i < (int)element->GetParentList().size(); i++) {
 					    Element* parent = element->GetParentList()[i];
-					    if(parent->IsSelected()) {
-						    element->RotateNode(parent);
+						if(parent) { // Check if parent is not null
+							if(parent->IsSelected()) {
+								element->RotateNode(parent);
+							}
 						}
 					}
 				    if(element->IsSelected()) {
