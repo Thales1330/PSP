@@ -76,23 +76,74 @@ bool Bus::Contains(wxPoint2DDouble position) const
 
 bool Bus::Intersects(wxRect2DDouble rect) const
 {
-    wxPoint2DDouble m_rectCorners[2] = {m_rect.GetLeftTop(), m_rect.GetRightBottom()};
+    if(m_angle == 0.0 || m_angle == 180.0) return m_rect.Intersects(rect);
 
-    wxPoint2DDouble rectCorners[2] = {rect.GetLeftTop(), rect.GetRightBottom()};
+    wxPoint2DDouble m_rectCorners[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
+                                        m_rect.GetRightTop()};
+    wxPoint2DDouble rectCorners[4] = {rect.GetLeftTop(), rect.GetLeftBottom(), rect.GetRightBottom(),
+                                      rect.GetRightTop()};
 
-    // Rotate the rect corners
-    for(int i = 0; i < 2; i++) {
-	    rectCorners[i] = RotateAtPosition(rectCorners[i], -m_angle);
+    // Rotate the m_rect corners
+    for(int i = 0; i < 4; i++) {
+	    m_rectCorners[i] = RotateAtPosition(m_rectCorners[i], m_angle);
 	}
-    //[Ref] http://stackoverflow.com/questions/306316/determine-if-two-rectangles-overlap-each-other
-	//[Ref2] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
-    // if (RectA.X1 < RectB.X2 && RectA.X2 > RectB.X1 && RectA.Y1 < RectB.Y2 && RectA.Y2 > RectB.Y1)
 
-    if(m_rectCorners[0].m_x < rectCorners[1].m_x && m_rectCorners[1].m_x > rectCorners[0].m_x &&
-       m_rectCorners[0].m_y < rectCorners[1].m_y && m_rectCorners[1].m_y > rectCorners[0].m_y)
-	return true;
+    //[Ref] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
 
-    return false;
+    // Find the rectangles axis to project
+    wxPoint2DDouble axis[4] = {m_rectCorners[3] - m_rectCorners[0], m_rectCorners[3] - m_rectCorners[2],
+                               rectCorners[3] - rectCorners[0], rectCorners[3] - rectCorners[2]};
+
+    // Calculate the projected points to each axis
+    wxPoint2DDouble m_rectProjPts[4][4];  // [axis][corner]
+    wxPoint2DDouble rectProjPts[4][4];    // [axis][corner]
+    for(int i = 0; i < 4; i++) {
+	    double den = axis[i].m_x * axis[i].m_x + axis[i].m_y * axis[i].m_y;
+	    for(int j = 0; j < 4; j++) {
+		    double m_rectProj = (m_rectCorners[j].m_x * axis[i].m_x + m_rectCorners[j].m_y * axis[i].m_y) / den;
+		    double rectProj = (rectCorners[j].m_x * axis[i].m_x + rectCorners[j].m_y * axis[i].m_y) / den;
+
+		    m_rectProjPts[i][j] = wxPoint2DDouble(m_rectProj * axis[i].m_x, m_rectProj * axis[i].m_y);
+		    rectProjPts[i][j] = wxPoint2DDouble(rectProj * axis[i].m_x, rectProj * axis[i].m_y);
+		}
+	}
+
+    // Calculate the scalar value to identify the max and min values on projections
+    double m_rectScalar[4][4];  //[axis][corner]
+    double rectScalar[4][4];    //[axis][corner]
+    for(int i = 0; i < 4; i++) {
+	    for(int j = 0; j < 4; j++) {
+		    m_rectScalar[i][j] = m_rectProjPts[i][j].m_x * axis[i].m_x + m_rectProjPts[i][j].m_y * axis[i].m_y;
+		    rectScalar[i][j] = rectProjPts[i][j].m_x * axis[i].m_x + rectProjPts[i][j].m_y * axis[i].m_y;
+		}
+	}
+    // Identify the max and min values
+    double m_rectMin[4];
+    double m_rectMax[4];
+    double rectMin[4];
+    double rectMax[4];
+
+    for(int i = 0; i < 4; i++) {
+	    m_rectMax[i] = m_rectScalar[i][0];
+	    rectMax[i] = rectScalar[i][0];
+	    m_rectMin[i] = m_rectScalar[i][0];
+	    rectMin[i] = rectScalar[i][0];
+
+	    for(int j = 1; j < 4; j++) {
+		    if(m_rectMax[i] < m_rectScalar[i][j]) m_rectMax[i] = m_rectScalar[i][j];
+		    if(rectMax[i] < rectScalar[i][j]) rectMax[i] = rectScalar[i][j];
+
+		    if(m_rectMin[i] > m_rectScalar[i][j]) m_rectMin[i] = m_rectScalar[i][j];
+		    if(rectMin[i] > rectScalar[i][j]) rectMin[i] = rectScalar[i][j];
+		}
+	}
+
+    // Check if any segment don't overlap
+    for(int i = 0; i < 4; i++) {
+	    if(!(rectMin[i] <= m_rectMax[i] && rectMax[i] >= m_rectMin[i])) return false;
+	}
+
+    return true;
     // return rect.Intersects(m_rect);
 }
 bool Bus::PickboxContains(wxPoint2DDouble position)

@@ -5,7 +5,7 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Workspace.cpp" Name="FileName"/>
-      <int Value="513" Name="FirstVisibleLine"/>
+      <int Value="493" Name="FirstVisibleLine"/>
       <int Value="494" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
@@ -19,8 +19,8 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Bus.cpp" Name="FileName"/>
-      <int Value="60" Name="FirstVisibleLine"/>
-      <int Value="87" Name="CurrentLine"/>
+      <int Value="72" Name="FirstVisibleLine"/>
+      <int Value="106" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
