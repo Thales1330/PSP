@@ -247,6 +247,27 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
     for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
 	    Element* element = *it;
 
+	    // The user was moving a pickbox.
+	    if(m_mode == MODE_MOVE_PICKBOX) {
+		    // Catch only the element that have the pickbox shown.
+		    if(element->IsPickboxShown()) {
+			    // If the element is a bus, check if a node is outside.
+			    if(typeid(*element) == typeid(Bus)) {
+				    // Get all the bus children.
+				    for(int i = 0; i < (int)m_elementList.size(); i++) {
+					    Element* child = m_elementList[i];
+					    for(int j = 0; j < (int)child->GetParentList().size(); j++) {
+						    Element* parent = child->GetParentList()[j];
+						    // The child have a parent that is the element.
+						    if(parent == element) {
+							    child->UpdateNodes();
+							}
+						}
+					}
+				}
+			}
+		}
+
 	    if(m_mode == MODE_SELECTION_RECT) {
 		    if(element->Intersects(m_selectionRect)) {
 			    element->SetSelected();
@@ -393,9 +414,10 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 			    // Parent's element moving...
 			    for(int i = 0; i < (int)element->GetParentList().size(); i++) {
 				    Element* parent = element->GetParentList()[i];
-					if(parent) {
-						if(parent->IsSelected()) {
-							element->MoveNode(parent, m_camera->ScreenToWorld(event.GetPosition()));
+				    if(parent) {
+					    if(parent->IsSelected()) {
+						    element->MoveNode(parent,
+						                      m_camera->ScreenToWorld(event.GetPosition()));
 						}
 					}
 				}
@@ -492,9 +514,9 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				    // Parent's element rotating...
 				    for(int i = 0; i < (int)element->GetParentList().size(); i++) {
 					    Element* parent = element->GetParentList()[i];
-						if(parent) { // Check if parent is not null
-							if(parent->IsSelected()) {
-								element->RotateNode(parent);
+					    if(parent) {  // Check if parent is not null
+						    if(parent->IsSelected()) {
+							    element->RotateNode(parent);
 							}
 						}
 					}

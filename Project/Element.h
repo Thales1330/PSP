@@ -67,9 +67,10 @@ class Element
     virtual void AddPoint(wxPoint2DDouble point) {}
     virtual void StartMove(wxPoint2DDouble position);
     virtual void Move(wxPoint2DDouble position);
-    virtual void MoveNode(Element* parent, wxPoint2DDouble position){};
-    virtual bool NodeContains(wxPoint2DDouble position) { return false; };
-	virtual bool SetNodeParent(Element* parent) { return false; };
+    virtual void MoveNode(Element* parent, wxPoint2DDouble position){}
+    virtual bool NodeContains(wxPoint2DDouble position) { return false; }
+	virtual void UpdateNodes() {}
+	virtual bool SetNodeParent(Element* parent) { return false; }
     virtual void RotateNode(Element* parent) {}
     virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
                                            wxPoint2DDouble parentPoint,

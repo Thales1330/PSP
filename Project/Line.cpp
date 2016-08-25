@@ -64,7 +64,24 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
 	}
 }
 
-wxCursor Line::GetBestPickboxCursor() const { return wxCURSOR_SIZING; }
+void Line::Move(wxPoint2DDouble position)
+{
+    if(!m_parentList[0]) {
+	    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
+	    UpdateSwitchesPosition();
+	}
+    if(!m_parentList[1]) {
+	    m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
+	    UpdateSwitchesPosition();
+	}
+
+    if(!m_parentList[0] && !m_parentList[1]) {
+	    for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
+		    m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
+		}
+	}
+}
+
 bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {
@@ -334,22 +351,38 @@ bool Line::SetNodeParent(Element* parent)
 
 	    if(parent->Intersects(nodeRect)) {
 		    if(m_activeNodeID == 1) {
-			    // if(m_parentList[1] == parent){
-			    //	m_activeNodeID = 0;
-			    //	return false;
-			    //}
+			    // Check if the user is trying to connect the same bus.
+			    if(m_parentList[1] == parent) {
+				    m_activeNodeID = 0;
+				    return false;
+				}
 
 			    m_parentList[0] = parent;
+
+			    // Centralize the node on bus.
+			    wxPoint2DDouble parentPt = parent->RotateAtPosition(
+			        m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
+			    parentPt.m_y = parent->GetPosition().m_y;  // Centralize on bus.
+			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+			    m_pointList[0] = parentPt;
+
 			    UpdateSwitchesPosition();
 			    return true;
 			}
 		    if(m_activeNodeID == 2) {
-			    // if(m_parentList[0] == parent) {
-			    //	m_activeNodeID = 0;
-			    //	return false;
-			    //}
+			    if(m_parentList[0] == parent) {
+				    m_activeNodeID = 0;
+				    return false;
+				}
 
 			    m_parentList[1] = parent;
+
+			    wxPoint2DDouble parentPt =
+			        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], -parent->GetAngle());
+			    parentPt.m_y = parent->GetPosition().m_y;
+			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+			    m_pointList[m_pointList.size() - 1] = parentPt;
+
 			    UpdateSwitchesPosition();
 			    return true;
 			}
@@ -362,4 +395,27 @@ bool Line::SetNodeParent(Element* parent)
 	}
     // m_activeNodeID = 0;
     return false;
+}
+
+void Line::UpdateNodes()
+{
+    if(m_parentList[0]) {
+	    wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
+	                            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+
+	    if(!m_parentList[0]->Intersects(nodeRect)) {
+		    m_parentList[0] = NULL;
+		    UpdateSwitchesPosition();
+		}
+	}
+    if(m_parentList[1]) {
+	    wxRect2DDouble nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
+	                                             m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+	                                             10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+
+	    if(!m_parentList[1]->Intersects(nodeRect)) {
+		    m_parentList[1] = NULL;
+		    UpdateSwitchesPosition();
+		}
+	}
 }
