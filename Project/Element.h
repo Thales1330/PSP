@@ -25,7 +25,8 @@ enum ContextMenuID
     ID_LINE_ADD_NODE,
     ID_LINE_REMOVE_NODE,
 
-    ID_ROTATE
+    ID_ROTATE,
+	ID_DELETE
 };
 
 class Element
@@ -71,6 +72,7 @@ class Element
     virtual bool NodeContains(wxPoint2DDouble position) { return false; }
 	virtual void UpdateNodes() {}
 	virtual bool SetNodeParent(Element* parent) { return false; }
+	virtual void RemoveParent(Element* parent) {}
     virtual void RotateNode(Element* parent) {}
     virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
                                            wxPoint2DDouble parentPoint,

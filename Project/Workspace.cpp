@@ -226,14 +226,21 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
 					    menu.Connect(wxEVT_COMMAND_MENU_SELECTED,
 					                 wxCommandEventHandler(Workspace::OnPopupClick), NULL, this);
 					    PopupMenu(&menu);
+						redraw = true;
 					}
 				    element->ResetPickboxes();
-				    redraw = true;
+					
+					if(redraw){
+						Redraw();
+						redraw = false;
+					}
+					// If the last element was removed using the menu, we must leave the "search for" to prevent error.
+					break;
 				}
 			}
+		    
 		}
 	}
-    if(redraw) Redraw();
 }
 
 void Workspace::OnLeftClickUp(wxMouseEvent& event)
@@ -507,6 +514,28 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 			}
 			break;
+		    case WXK_DELETE:  // Delete selected elements
+			{
+			    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+				    Element* element = *it;
+
+				    if(element->IsSelected()) {
+					    for(auto itp = m_elementList.begin(); itp != m_elementList.end(); ++itp) {
+						    Element* child = *itp;
+						    // Parent's element being deleted...
+						    for(int i = 0; i < (int)child->GetParentList().size(); i++) {
+							    Element* parent = child->GetParentList()[i];
+							    if(parent == element) {
+								    child->RemoveParent(parent);
+								}
+							}
+						}
+					    m_elementList.erase(it--);
+					}
+				}
+			    Redraw();
+			}
+			break;
 		    case 'R':  // Rotate the selected elements.
 			{
 			    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
@@ -626,17 +655,42 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		{
 		    element->Rotate();
 		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-			    Element* nonEditedElement = *it;
+			    Element* iElement = *it;
 			    // Parent's element rotating...
-			    for(int i = 0; i < (int)nonEditedElement->GetParentList().size(); i++) {
-				    Element* parent = nonEditedElement->GetParentList()[i];
+			    for(int i = 0; i < (int)iElement->GetParentList().size(); i++) {
+				    Element* parent = iElement->GetParentList()[i];
 				    if(parent == element) {
-					    nonEditedElement->RotateNode(parent);
+					    iElement->RotateNode(parent);
 					}
 				}
 			}
 		    Redraw();
 		}
 		break;
+	    case ID_DELETE:
+		{
+		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+			    Element* iElement = *it;
+
+			    if(element == iElement) {
+				    for(auto itp = m_elementList.begin(); itp != m_elementList.end(); ++itp) {
+					    Element* child = *itp;
+					    // Parent's element being deleted...
+					    for(int i = 0; i < (int)child->GetParentList().size(); i++) {
+						    Element* parent = child->GetParentList()[i];
+						    if(parent == element) {
+							    child->RemoveParent(parent);
+							}
+						}
+					}
+				    m_elementList.erase(it--);
+				}
+			}
+		    Redraw();
+		}
+		break;
 	}
+    delete menu;
 }
+
+void Workspace::DeleteElement(Element* element) {}

@@ -284,6 +284,7 @@ bool Line::GetContextMenu(wxMenu& menu)
 	{
 	    menu.Append(ID_LINE_REMOVE_NODE, _("Remove node"));
 	}
+	menu.Append(ID_DELETE, _("Delete line"));
     return true;
 }
 
@@ -416,6 +417,16 @@ void Line::UpdateNodes()
 	    if(!m_parentList[1]->Intersects(nodeRect)) {
 		    m_parentList[1] = NULL;
 		    UpdateSwitchesPosition();
+		}
+	}
+}
+
+void Line::RemoveParent(Element* parent)
+{
+	for(int i=0; i<2; i++) {
+		if(parent == m_parentList[i]) {
+			m_parentList[i] = NULL;
+			UpdateSwitchesPosition();
 		}
 	}
 }
