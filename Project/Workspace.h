@@ -13,6 +13,7 @@ class Camera;
 class Element;
 class Bus;
 class Line;
+class Transformer;
 
 enum WorkspaceMode
 {
@@ -36,7 +37,6 @@ class Workspace : public WorkspaceBase
     void SetName(wxString name) { m_name = name; }
     std::vector<Element*> GetElementList() { return m_elementList; }
     void Redraw() { m_glCanvas->Refresh(); }
-	void DeleteElement(Element* element);
 
    protected:
     virtual void OnRightClickDown(wxMouseEvent& event);

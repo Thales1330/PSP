@@ -190,7 +190,7 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h Line.h
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h Line.h Transformer.h
 
 Workspace.h:
 
@@ -587,3 +587,5 @@ C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
 Bus.h:
 
 Line.h:
+
+Transformer.h:

@@ -3,6 +3,7 @@
 #include "Element.h"
 #include "Bus.h"
 #include "Line.h"
+#include "Transformer.h"
 
 // Camera
 Camera::Camera()
@@ -578,6 +579,17 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 			}
 			break;
+			case 'T':  // Insert a transformer.
+			{
+			    if(m_mode != MODE_INSERT) {
+				    Transformer* newTransformer = new Transformer();
+				    m_elementList.push_back(newTransformer);
+				    m_mode = MODE_INSERT;
+				    m_statusBar->SetStatusText(_("Insert Transformer: Click on two buses, ESC to cancel."));
+				    Redraw();
+				}
+			}
+			break;
 		    default:
 			break;
 		}
@@ -692,5 +704,3 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 	}
     delete menu;
 }
-
-void Workspace::DeleteElement(Element* element) {}

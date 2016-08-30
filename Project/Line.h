@@ -1,8 +1,6 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include <wx/msgdlg.h>
-
 #include "Element.h"
 
 class Line : public Element

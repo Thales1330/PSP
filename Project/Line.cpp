@@ -284,7 +284,7 @@ bool Line::GetContextMenu(wxMenu& menu)
 	{
 	    menu.Append(ID_LINE_REMOVE_NODE, _("Remove node"));
 	}
-	menu.Append(ID_DELETE, _("Delete line"));
+	menu.Append(ID_DELETE, _("Delete"));
     return true;
 }
 

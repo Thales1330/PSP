@@ -59,9 +59,6 @@ class Element
     virtual void Rotate() = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
     virtual bool Intersects(wxRect2DDouble rect) const = 0;
-    virtual bool PickboxContains(wxPoint2DDouble position) = 0;
-    virtual void MovePickbox(wxPoint2DDouble position) = 0;
-    virtual wxCursor GetBestPickboxCursor() const = 0;
 
     // General methods
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
@@ -77,6 +74,9 @@ class Element
     virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
                                            wxPoint2DDouble parentPoint,
                                            wxPoint2DDouble secondPoint) const;
+	virtual bool PickboxContains(wxPoint2DDouble position) { return false;}
+    virtual void MovePickbox(wxPoint2DDouble position) {}
+    virtual wxCursor GetBestPickboxCursor() const {return wxCURSOR_ARROW;}
     virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
 	virtual void ResetNodes() { m_activeNodeID= 0; }
     virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,

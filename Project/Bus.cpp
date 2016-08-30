@@ -225,6 +225,6 @@ bool Bus::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_BUS, _("Edit bus"));
     menu.Append(ID_ROTATE, _("Rotate"));
-	menu.Append(ID_DELETE, _("Delete bus"));
+	menu.Append(ID_DELETE, _("Delete"));
     return true;
 }
