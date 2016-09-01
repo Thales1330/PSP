@@ -21,6 +21,7 @@ enum ContextMenuID
 {
     ID_EDIT_BUS = 0,
     ID_EDIT_LINE,
+	ID_EDIT_TRANSFORMER,
 
     ID_LINE_ADD_NODE,
     ID_LINE_REMOVE_NODE,
@@ -88,9 +89,11 @@ class Element
                                           double scale,
                                           double offsetX = 0.0,
                                           double offsetY = 0.0) const;
+	virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
     virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
     virtual void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
     virtual void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
+	virtual void DrawPoint(wxPoint2DDouble position, double size) const;
     virtual void DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode = GL_LINE_STRIP) const;
     virtual void DrawPickbox(wxPoint2DDouble position) const;
     virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;

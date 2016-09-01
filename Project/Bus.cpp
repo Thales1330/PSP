@@ -36,7 +36,7 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
 	    DrawRectangle(pts);
 	    glPopMatrix();
 	}
-    // Draw element (layer 2)
+    // Draw bus (layer 2)
     // Push the current matrix on stack.
     glPushMatrix();
     // Rotate the matrix around the object position.
@@ -77,8 +77,10 @@ bool Bus::Contains(wxPoint2DDouble position) const
 bool Bus::Intersects(wxRect2DDouble rect) const
 {
     if(m_angle == 0.0 || m_angle == 180.0) return m_rect.Intersects(rect);
+	
+	return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0);
 
-    wxPoint2DDouble m_rectCorners[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
+    /*wxPoint2DDouble m_rectCorners[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
                                         m_rect.GetRightTop()};
     wxPoint2DDouble rectCorners[4] = {rect.GetLeftTop(), rect.GetLeftBottom(), rect.GetRightBottom(),
                                       rect.GetRightTop()};
@@ -144,7 +146,7 @@ bool Bus::Intersects(wxRect2DDouble rect) const
 	}
 
     return true;
-    // return rect.Intersects(m_rect);
+    // return rect.Intersects(m_rect);*/
 }
 bool Bus::PickboxContains(wxPoint2DDouble position)
 {

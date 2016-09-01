@@ -698,9 +698,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 				    m_elementList.erase(it--);
 				}
 			}
-		    Redraw();
 		}
 		break;
 	}
-    delete menu;
 }
