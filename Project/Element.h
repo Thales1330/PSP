@@ -22,6 +22,7 @@ enum ContextMenuID
     ID_EDIT_BUS = 0,
     ID_EDIT_LINE,
 	ID_EDIT_TRANSFORMER,
+	ID_EDIT_GENERATOR,
 
     ID_LINE_ADD_NODE,
     ID_LINE_REMOVE_NODE,
@@ -57,11 +58,11 @@ class Element
     // Pure-virtuals methods
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
     virtual void Draw(wxPoint2DDouble translation, double scale) const = 0;
-    virtual void Rotate() = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
     virtual bool Intersects(wxRect2DDouble rect) const = 0;
 
     // General methods
+	virtual void Rotate() {}
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
     virtual void AddPoint(wxPoint2DDouble point) {}
     virtual void StartMove(wxPoint2DDouble position);

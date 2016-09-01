@@ -13,6 +13,7 @@
       <File Name="Bus.cpp"/>
       <File Name="Line.cpp"/>
       <File Name="Transformer.cpp"/>
+      <File Name="Generator.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -29,6 +30,7 @@
       <File Name="Bus.h"/>
       <File Name="Line.h"/>
       <File Name="Transformer.h"/>
+      <File Name="Generator.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>

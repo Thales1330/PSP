@@ -14,6 +14,7 @@ class Element;
 class Bus;
 class Line;
 class Transformer;
+class Generator;
 
 enum WorkspaceMode
 {

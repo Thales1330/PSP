@@ -30,9 +30,9 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
 
 	    // Draw nodes selection.
 	    if(pointList.size() > 0) {
-		    DrawCircle(pointList[0], 5.0 + m_borderSize, 10, GL_POLYGON);
+		    DrawCircle(pointList[0], 5.0 + m_borderSize / scale, 10, GL_POLYGON);
 		    if(m_inserted) {
-			    DrawCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize, 10, GL_POLYGON);
+			    DrawCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, 10, GL_POLYGON);
 			}
 		}
 	}
