@@ -4,6 +4,7 @@
 #include "Bus.h"
 #include "Line.h"
 #include "Transformer.h"
+#include "Generator.h"
 
 // Camera
 Camera::Camera()
@@ -590,6 +591,17 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 			}
 			break;
+			case 'G':  // Insert a generator.
+			{
+			    if(m_mode != MODE_INSERT) {
+				    Generator* newGenerator = new Generator();
+				    m_elementList.push_back(newGenerator);
+				    m_mode = MODE_INSERT;
+				    m_statusBar->SetStatusText(_("Insert Generator: Click on a buses, ESC to cancel."));
+				    Redraw();
+				}
+			}
+			break;
 		    default:
 			break;
 		}
@@ -647,6 +659,11 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 	    case ID_EDIT_LINE:
 		{
 		    wxMessageBox("Edit line!");
+		}
+		break;
+		case ID_EDIT_TRANSFORMER:
+		{
+		    wxMessageBox("Edit transformer!");
 		}
 		break;
 	    case ID_LINE_ADD_NODE:

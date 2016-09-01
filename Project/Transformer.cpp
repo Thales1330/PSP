@@ -88,9 +88,9 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
 
 		    // Draw nodes selection.
 		    if(m_pointList.size() > 0) {
-			    DrawCircle(m_pointList[0], 5.0 + m_borderSize, 10, GL_POLYGON);
+			    DrawCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, GL_POLYGON);
 			    if(m_inserted) {
-				    DrawCircle(m_pointList[m_pointList.size() - 1], 5.0 + m_borderSize, 10, GL_POLYGON);
+				    DrawCircle(m_pointList[m_pointList.size() - 1], 5.0 + m_borderSize / scale, 10, GL_POLYGON);
 				}
 			}
 		}
@@ -228,7 +228,6 @@ void Transformer::RemoveParent(Element* parent)
     for(int i = 0; i < 2; i++) {
 	    if(parent == m_parentList[i]) {
 		    m_parentList[i] = NULL;
-		    m_parentList[i] = NULL;
 		    UpdateSwitchesPosition();
 		}
 	}
@@ -359,6 +358,7 @@ void Transformer::RotateNode(Element* parent)
 bool Transformer::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_TRANSFORMER, _("Edit tranformer"));
+	menu.Append(ID_ROTATE, _("Rotate"));
     menu.Append(ID_DELETE, _("Delete"));
     return true;
 }
