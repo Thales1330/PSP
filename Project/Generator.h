@@ -28,6 +28,7 @@ class Generator : public Element
     std::vector<wxPoint2DDouble> m_pointList;
     void UpdateSwitchesPosition();
 	std::vector<wxPoint2DDouble> m_movePts;
+	std::vector<wxPoint2DDouble> m_sinePts;
 };
 
 #endif  // GENERATOR_H

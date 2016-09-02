@@ -10,10 +10,13 @@
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="model">
       <File Name="Element.cpp"/>
-      <File Name="Bus.cpp"/>
-      <File Name="Line.cpp"/>
-      <File Name="Transformer.cpp"/>
-      <File Name="Generator.cpp"/>
+      <VirtualDirectory Name="electrical">
+        <File Name="Bus.cpp"/>
+        <File Name="Generator.cpp"/>
+        <File Name="Line.cpp"/>
+        <File Name="Transformer.cpp"/>
+        <File Name="InductionMotor.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -27,10 +30,13 @@
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="model">
       <File Name="Element.h"/>
-      <File Name="Bus.h"/>
-      <File Name="Line.h"/>
-      <File Name="Transformer.h"/>
-      <File Name="Generator.h"/>
+      <VirtualDirectory Name="electrical">
+        <File Name="Bus.h"/>
+        <File Name="Generator.h"/>
+        <File Name="Line.h"/>
+        <File Name="Transformer.h"/>
+        <File Name="InductionMotor.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>

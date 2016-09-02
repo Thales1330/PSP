@@ -1,6 +1,18 @@
 #include "Generator.h"
 
-Generator::Generator() {}
+Generator::Generator() : Element()
+{
+    int numPtsSine = 10;
+    double mx = 15.0;
+    double my = 10.0;
+    double pi = 3.14159265359;
+
+    for(int i = 0; i <= numPtsSine; i++) {
+	    double x = (2.0 * pi / double(numPtsSine)) * double(i) - pi;
+	    double y = std::sin(x);
+	    m_sinePts.push_back(wxPoint2DDouble((x / pi) * mx, y * my));
+	}
+}
 Generator::~Generator() {}
 bool Generator::AddParent(Element* parent, wxPoint2DDouble position)
 {
@@ -53,6 +65,13 @@ void Generator::Draw(wxPoint2DDouble translation, double scale) const
 
 	    glColor4d(0.2, 0.2, 0.2, 1.0);
 	    DrawCircle(m_position, 25.0, 20);
+
+	    // Draw sine.
+	    std::vector<wxPoint2DDouble> sinePts;
+	    for(int i = 0; i < (int)m_sinePts.size(); i++) {
+		    sinePts.push_back(m_sinePts[i] + m_position);
+		}
+	    DrawLine(sinePts);
 	}
 }
 
