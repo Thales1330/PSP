@@ -190,8 +190,9 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h Line.h Transformer.h \
- SyncGenerator.h Machines.h IndMotor.h
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h Line.h Branch.h \
+ Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h Load.h \
+ Shunt.h
 
 Workspace.h:
 
@@ -589,6 +590,8 @@ Bus.h:
 
 Line.h:
 
+Branch.h:
+
 Transformer.h:
 
 SyncGenerator.h:
@@ -596,3 +599,9 @@ SyncGenerator.h:
 Machines.h:
 
 IndMotor.h:
+
+SyncMotor.h:
+
+Load.h:
+
+Shunt.h:

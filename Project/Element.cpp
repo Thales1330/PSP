@@ -20,6 +20,27 @@ void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegment
     glEnd();
 }
 
+void Element::DrawArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, GLenum mode) const
+{
+	double initAngRad = wxDegToRad(initAngle);
+	double finalAngRad = wxDegToRad(finalAngle);
+	glBegin(mode);
+    for(int i = 0; i <= numSegments; i++) {
+	    double theta = initAngRad + (finalAngRad - initAngRad) * double(i) / double(numSegments);
+	    glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
+	}
+    glEnd();
+}
+
+void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) const
+{
+	glBegin(mode);
+	for(int i=0; i<3; i++) {
+		glVertex2d(points[i].m_x, points[i].m_y);
+	}
+	glEnd();
+}
+
 void Element::DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode) const
 {
     glBegin(mode);  // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.

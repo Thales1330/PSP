@@ -6,6 +6,8 @@
 #include "Transformer.h"
 #include "SyncGenerator.h"
 #include "IndMotor.h"
+#include "SyncMotor.h"
+#include "Load.h"
 
 // Camera
 Camera::Camera()
@@ -610,6 +612,28 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				    m_elementList.push_back(newIndMotor);
 				    m_mode = MODE_INSERT;
 				    m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a buses, ESC to cancel."));
+				    Redraw();
+				}
+			}
+			break;
+			case 'K':  // Insert a synchronous condenser.
+			{
+			    if(m_mode != MODE_INSERT) {
+				    SyncMotor* newSyncCondenser = new SyncMotor();
+				    m_elementList.push_back(newSyncCondenser);
+				    m_mode = MODE_INSERT;
+				    m_statusBar->SetStatusText(_("Insert Synchronous Condenser: Click on a buses, ESC to cancel."));
+				    Redraw();
+				}
+			}
+			break;
+			case 'C':  // Insert a load.
+			{
+			    if(m_mode != MODE_INSERT) {
+				    Load* newLoad = new Load();
+				    m_elementList.push_back(newLoad);
+				    m_mode = MODE_INSERT;
+				    m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
 				    Redraw();
 				}
 			}

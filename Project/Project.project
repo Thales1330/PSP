@@ -18,6 +18,10 @@
         <File Name="SyncGenerator.cpp"/>
         <File Name="IndMotor.cpp"/>
         <File Name="Branch.cpp"/>
+        <File Name="SyncMotor.cpp"/>
+        <File Name="Shunt.cpp"/>
+        <File Name="Load.cpp"/>
+        <File Name="Inductor.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -40,6 +44,10 @@
         <File Name="SyncGenerator.h"/>
         <File Name="IndMotor.h"/>
         <File Name="Branch.h"/>
+        <File Name="SyncMotor.h"/>
+        <File Name="Shunt.h"/>
+        <File Name="Load.h"/>
+        <File Name="Inductor.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">

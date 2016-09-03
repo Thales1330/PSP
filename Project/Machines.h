@@ -23,7 +23,6 @@ public:
     virtual void UpdateNodes();
     virtual void Rotate();
 	virtual void DrawSymbol() const {}
-	virtual bool GetContextMenu(wxMenu& menu) { return false; }
 
    protected:
     void UpdateSwitchesPosition();

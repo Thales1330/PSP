@@ -16,6 +16,8 @@ class Line;
 class Transformer;
 class SyncGenerator;
 class IndMotor;
+class SyncMotor;
+class Load;
 
 enum WorkspaceMode
 {

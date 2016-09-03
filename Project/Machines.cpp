@@ -61,6 +61,7 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
 	    DrawCircle(m_position, 25.0, 20);
 
 	    // Draw machine symbol.
+		glLineWidth(2.0);
 	    DrawSymbol();
 	}
 }
