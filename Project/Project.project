@@ -12,10 +12,12 @@
       <File Name="Element.cpp"/>
       <VirtualDirectory Name="electrical">
         <File Name="Bus.cpp"/>
-        <File Name="Generator.cpp"/>
         <File Name="Line.cpp"/>
         <File Name="Transformer.cpp"/>
-        <File Name="InductionMotor.cpp"/>
+        <File Name="Machines.cpp"/>
+        <File Name="SyncGenerator.cpp"/>
+        <File Name="IndMotor.cpp"/>
+        <File Name="Branch.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -32,10 +34,12 @@
       <File Name="Element.h"/>
       <VirtualDirectory Name="electrical">
         <File Name="Bus.h"/>
-        <File Name="Generator.h"/>
         <File Name="Line.h"/>
         <File Name="Transformer.h"/>
-        <File Name="InductionMotor.h"/>
+        <File Name="Machines.h"/>
+        <File Name="SyncGenerator.h"/>
+        <File Name="IndMotor.h"/>
+        <File Name="Branch.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">

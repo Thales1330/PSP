@@ -1,21 +1,9 @@
 [{
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/Generator.cpp.o -MF./Release/Generator.cpp.o.d -MM Generator.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Generator.cpp"
+  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/Machines.cpp.o -MF./Release/Machines.cpp.o.d -MM Machines.cpp",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Machines.cpp"
  }, {
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Workspace.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Workspace.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Workspace.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/InductionMotor.cpp.o -MF./Release/InductionMotor.cpp.o.d -MM InductionMotor.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\InductionMotor.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Generator.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Generator.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Generator.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/InductionMotor.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/InductionMotor.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\InductionMotor.cpp"
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Machines.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Machines.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Machines.cpp"
  }]

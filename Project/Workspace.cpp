@@ -4,7 +4,8 @@
 #include "Bus.h"
 #include "Line.h"
 #include "Transformer.h"
-#include "Generator.h"
+#include "SyncGenerator.h"
+#include "IndMotor.h"
 
 // Camera
 Camera::Camera()
@@ -594,10 +595,21 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 			case 'G':  // Insert a generator.
 			{
 			    if(m_mode != MODE_INSERT) {
-				    Generator* newGenerator = new Generator();
+				    SyncGenerator* newGenerator = new SyncGenerator();
 				    m_elementList.push_back(newGenerator);
 				    m_mode = MODE_INSERT;
 				    m_statusBar->SetStatusText(_("Insert Generator: Click on a buses, ESC to cancel."));
+				    Redraw();
+				}
+			}
+			break;
+			case 'I':  // Insert an induction motor.
+			{
+			    if(m_mode != MODE_INSERT) {
+				    IndMotor* newIndMotor = new IndMotor();
+				    m_elementList.push_back(newIndMotor);
+				    m_mode = MODE_INSERT;
+				    m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a buses, ESC to cancel."));
 				    Redraw();
 				}
 			}

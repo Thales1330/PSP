@@ -14,7 +14,8 @@ class Element;
 class Bus;
 class Line;
 class Transformer;
-class Generator;
+class SyncGenerator;
+class IndMotor;
 
 enum WorkspaceMode
 {

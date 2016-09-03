@@ -191,7 +191,7 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h Line.h Transformer.h \
- Generator.h
+ SyncGenerator.h Machines.h IndMotor.h
 
 Workspace.h:
 
@@ -591,4 +591,8 @@ Line.h:
 
 Transformer.h:
 
-Generator.h:
+SyncGenerator.h:
+
+Machines.h:
+
+IndMotor.h:

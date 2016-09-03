@@ -1,4 +1,4 @@
-Release/Line.cpp.o: Line.cpp Line.h Element.h \
+Release/Line.cpp.o: Line.cpp Line.h Branch.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/geometry.h \
  C:/wxWidgets-3.1.0/include/wx/defs.h \
  C:/wxWidgets-3.1.0/include/wx/platform.h \
@@ -111,6 +111,8 @@ Release/Line.cpp.o: Line.cpp Line.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 Line.h:
+
+Branch.h:
 
 Element.h:
 

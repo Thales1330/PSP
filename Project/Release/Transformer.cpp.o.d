@@ -1,5 +1,5 @@
-Release/Transformer.cpp.o: Transformer.cpp Transformer.h Element.h \
- C:/wxWidgets-3.1.0/include/wx/geometry.h \
+Release/Transformer.cpp.o: Transformer.cpp Transformer.h Branch.h \
+ Element.h C:/wxWidgets-3.1.0/include/wx/geometry.h \
  C:/wxWidgets-3.1.0/include/wx/defs.h \
  C:/wxWidgets-3.1.0/include/wx/platform.h \
  C:/wxWidgets-3.1.0/include/wx/compiler.h \
@@ -111,6 +111,8 @@ Release/Transformer.cpp.o: Transformer.cpp Transformer.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 Transformer.h:
+
+Branch.h:
 
 Element.h:
 

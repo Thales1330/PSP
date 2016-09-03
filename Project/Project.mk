@@ -13,8 +13,8 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Thales
-Date                   :=02/09/2016
-CodeLitePath           :="C:/Program Files/CodeLite"
+Date                   :=03/09/2016
+CodeLitePath           :="C:/Program Files (x86)/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
 ObjectSuffix           :=.o
@@ -61,11 +61,12 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=C:\Program Files\CodeLite
+CodeLiteDir:=C:\Program Files (x86)\CodeLite
+UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
 WXWIN:=C:\wxWidgets-3.1.0
 WXCFG:=gcc_dll\mswu
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Generator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/InductionMotor.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) 
 
 
 
@@ -178,14 +179,6 @@ $(IntermediateDirectory)/Bus.cpp$(DependSuffix): Bus.cpp
 $(IntermediateDirectory)/Bus.cpp$(PreprocessSuffix): Bus.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Bus.cpp$(PreprocessSuffix)Bus.cpp
 
-$(IntermediateDirectory)/Generator.cpp$(ObjectSuffix): Generator.cpp $(IntermediateDirectory)/Generator.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Generator.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Generator.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Generator.cpp$(DependSuffix): Generator.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Generator.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Generator.cpp$(DependSuffix) -MM Generator.cpp
-
-$(IntermediateDirectory)/Generator.cpp$(PreprocessSuffix): Generator.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Generator.cpp$(PreprocessSuffix)Generator.cpp
-
 $(IntermediateDirectory)/Line.cpp$(ObjectSuffix): Line.cpp $(IntermediateDirectory)/Line.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Line.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Line.cpp$(DependSuffix): Line.cpp
@@ -202,13 +195,37 @@ $(IntermediateDirectory)/Transformer.cpp$(DependSuffix): Transformer.cpp
 $(IntermediateDirectory)/Transformer.cpp$(PreprocessSuffix): Transformer.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Transformer.cpp$(PreprocessSuffix)Transformer.cpp
 
-$(IntermediateDirectory)/InductionMotor.cpp$(ObjectSuffix): InductionMotor.cpp $(IntermediateDirectory)/InductionMotor.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/InductionMotor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/InductionMotor.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/InductionMotor.cpp$(DependSuffix): InductionMotor.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/InductionMotor.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/InductionMotor.cpp$(DependSuffix) -MM InductionMotor.cpp
+$(IntermediateDirectory)/Machines.cpp$(ObjectSuffix): Machines.cpp $(IntermediateDirectory)/Machines.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Machines.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Machines.cpp$(DependSuffix): Machines.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Machines.cpp$(DependSuffix) -MM Machines.cpp
 
-$(IntermediateDirectory)/InductionMotor.cpp$(PreprocessSuffix): InductionMotor.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/InductionMotor.cpp$(PreprocessSuffix)InductionMotor.cpp
+$(IntermediateDirectory)/Machines.cpp$(PreprocessSuffix): Machines.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Machines.cpp$(PreprocessSuffix)Machines.cpp
+
+$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix): SyncGenerator.cpp $(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/SyncGenerator.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix): SyncGenerator.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix) -MM SyncGenerator.cpp
+
+$(IntermediateDirectory)/SyncGenerator.cpp$(PreprocessSuffix): SyncGenerator.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SyncGenerator.cpp$(PreprocessSuffix)SyncGenerator.cpp
+
+$(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix): IndMotor.cpp $(IntermediateDirectory)/IndMotor.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/IndMotor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/IndMotor.cpp$(DependSuffix): IndMotor.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/IndMotor.cpp$(DependSuffix) -MM IndMotor.cpp
+
+$(IntermediateDirectory)/IndMotor.cpp$(PreprocessSuffix): IndMotor.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/IndMotor.cpp$(PreprocessSuffix)IndMotor.cpp
+
+$(IntermediateDirectory)/Branch.cpp$(ObjectSuffix): Branch.cpp $(IntermediateDirectory)/Branch.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Branch.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Branch.cpp$(DependSuffix): Branch.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Branch.cpp$(DependSuffix) -MM Branch.cpp
+
+$(IntermediateDirectory)/Branch.cpp$(PreprocessSuffix): Branch.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Branch.cpp$(PreprocessSuffix)Branch.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

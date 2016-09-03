@@ -1,5 +1,5 @@
 Release/InductionMotor.cpp.o: InductionMotor.cpp InductionMotor.h \
- Element.h C:/wxWidgets-3.1.0/include/wx/geometry.h \
+ Machines.h Element.h C:/wxWidgets-3.1.0/include/wx/geometry.h \
  C:/wxWidgets-3.1.0/include/wx/defs.h \
  C:/wxWidgets-3.1.0/include/wx/platform.h \
  C:/wxWidgets-3.1.0/include/wx/compiler.h \
@@ -111,6 +111,8 @@ Release/InductionMotor.cpp.o: InductionMotor.cpp InductionMotor.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 InductionMotor.h:
+
+Machines.h:
 
 Element.h:
 

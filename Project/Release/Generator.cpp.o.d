@@ -1,4 +1,4 @@
-Release/Generator.cpp.o: Generator.cpp Generator.h Element.h \
+Release/Generator.cpp.o: Generator.cpp Generator.h Machines.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/geometry.h \
  C:/wxWidgets-3.1.0/include/wx/defs.h \
  C:/wxWidgets-3.1.0/include/wx/platform.h \
@@ -111,6 +111,8 @@ Release/Generator.cpp.o: Generator.cpp Generator.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 Generator.h:
+
+Machines.h:
 
 Element.h:
 
