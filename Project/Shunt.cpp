@@ -127,3 +127,18 @@ void Shunt::RotateNode(Element* parent)
 	}
 }
 
+void Shunt::DrawGround(wxPoint2DDouble position) const
+{
+	std::vector<wxPoint2DDouble> groundPts;
+	groundPts.push_back(position);
+	groundPts.push_back(position + wxPoint2DDouble(0, 10));
+	groundPts.push_back(position + wxPoint2DDouble(-10, 10));
+	groundPts.push_back(position + wxPoint2DDouble(10, 10));
+	groundPts.push_back(position + wxPoint2DDouble(-6, 15));
+	groundPts.push_back(position + wxPoint2DDouble(6, 15));
+	groundPts.push_back(position + wxPoint2DDouble(-3, 20));
+	groundPts.push_back(position + wxPoint2DDouble(3, 20));
+	
+	DrawLine(groundPts, GL_LINES);
+}
+

@@ -17,7 +17,7 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
 
 	    m_pointList.push_back(parentPt);
 	    m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
-	    m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -15.0));
+	    m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -20.0));
 	    m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -10.0));
 
 	    m_triangPts.push_back(wxPoint2DDouble(-m_width / 2.0, -m_height / 2.0));

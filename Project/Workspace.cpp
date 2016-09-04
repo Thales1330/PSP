@@ -8,6 +8,7 @@
 #include "IndMotor.h"
 #include "SyncMotor.h"
 #include "Load.h"
+#include "Inductor.h"
 
 // Camera
 Camera::Camera()
@@ -572,13 +573,21 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 			}
 			break;
-		    case 'L':  // Insert a power line.
+		    case 'L':
 			{
 			    if(m_mode != MODE_INSERT) {
-				    Line* newLine = new Line();
-				    m_elementList.push_back(newLine);
-				    m_mode = MODE_INSERT;
-				    m_statusBar->SetStatusText(_("Insert Line: Click on two buses, ESC to cancel."));
+					if(event.GetModifiers() == wxMOD_SHIFT) { // Insert a load.
+						Load* newLoad = new Load();
+						m_elementList.push_back(newLoad);
+						m_mode = MODE_INSERT;
+						m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
+					}
+					else { // Insert a power line.
+						Line* newLine = new Line();
+						m_elementList.push_back(newLine);
+						m_mode = MODE_INSERT;
+						m_statusBar->SetStatusText(_("Insert Line: Click on two buses, ESC to cancel."));
+					}
 				    Redraw();
 				}
 			}
@@ -605,13 +614,22 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 			}
 			break;
-			case 'I':  // Insert an induction motor.
+			case 'I':
 			{
 			    if(m_mode != MODE_INSERT) {
-				    IndMotor* newIndMotor = new IndMotor();
-				    m_elementList.push_back(newIndMotor);
-				    m_mode = MODE_INSERT;
-				    m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a buses, ESC to cancel."));
+					if(event.GetModifiers() == wxMOD_SHIFT) { // Insert an inductor.
+						Inductor* newInductor = new Inductor();
+						m_elementList.push_back(newInductor);
+						m_mode = MODE_INSERT;
+						m_statusBar->SetStatusText(_("Insert Inductor: Click on a buses, ESC to cancel."));
+					}
+					else // Insert an induction motor.
+					{
+						IndMotor* newIndMotor = new IndMotor();
+						m_elementList.push_back(newIndMotor);
+						m_mode = MODE_INSERT;
+						m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a buses, ESC to cancel."));
+					}
 				    Redraw();
 				}
 			}
@@ -623,17 +641,6 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				    m_elementList.push_back(newSyncCondenser);
 				    m_mode = MODE_INSERT;
 				    m_statusBar->SetStatusText(_("Insert Synchronous Condenser: Click on a buses, ESC to cancel."));
-				    Redraw();
-				}
-			}
-			break;
-			case 'C':  // Insert a load.
-			{
-			    if(m_mode != MODE_INSERT) {
-				    Load* newLoad = new Load();
-				    m_elementList.push_back(newLoad);
-				    m_mode = MODE_INSERT;
-				    m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
 				    Redraw();
 				}
 			}

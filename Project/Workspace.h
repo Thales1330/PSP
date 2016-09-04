@@ -18,6 +18,7 @@ class SyncGenerator;
 class IndMotor;
 class SyncMotor;
 class Load;
+class Inductor;
 
 enum WorkspaceMode
 {

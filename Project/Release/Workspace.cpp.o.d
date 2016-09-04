@@ -192,7 +192,7 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h Line.h Branch.h \
  Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h Load.h \
- Shunt.h
+ Shunt.h Inductor.h
 
 Workspace.h:
 
@@ -605,3 +605,5 @@ SyncMotor.h:
 Load.h:
 
 Shunt.h:
+
+Inductor.h:

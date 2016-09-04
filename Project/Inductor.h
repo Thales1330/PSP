@@ -11,6 +11,8 @@ public:
 	
 	virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+	virtual bool Contains(wxPoint2DDouble position) const;
+	virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate();
     virtual bool GetContextMenu(wxMenu& menu);
 };
