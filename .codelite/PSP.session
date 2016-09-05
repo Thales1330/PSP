@@ -5,57 +5,71 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Workspace.cpp" Name="FileName"/>
-      <int Value="610" Name="FirstVisibleLine"/>
-      <int Value="646" Name="CurrentLine"/>
+      <int Value="217" Name="FirstVisibleLine"/>
+      <int Value="238" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Workspace.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="20" Name="CurrentLine"/>
+      <int Value="0" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Element.cpp" Name="FileName"/>
-      <int Value="187" Name="FirstVisibleLine"/>
-      <int Value="77" Name="CurrentLine"/>
+      <int Value="270" Name="FirstVisibleLine"/>
+      <int Value="292" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Element.h" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="24" Name="CurrentLine"/>
+      <int Value="27" Name="FirstVisibleLine"/>
+      <int Value="53" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
-      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Inductor.h" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="14" Name="CurrentLine"/>
+      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Line.cpp" Name="FileName"/>
+      <int Value="185" Name="FirstVisibleLine"/>
+      <int Value="211" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
-      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Inductor.cpp" Name="FileName"/>
-      <int Value="58" Name="FirstVisibleLine"/>
-      <int Value="85" Name="CurrentLine"/>
+      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Line.h" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="23" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
-      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Load.h" Name="FileName"/>
+      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Branch.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="11" Name="CurrentLine"/>
+      <int Value="30" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
-      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Load.cpp" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="6" Name="CurrentLine"/>
+      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Branch.cpp" Name="FileName"/>
+      <int Value="71" Name="FirstVisibleLine"/>
+      <int Value="82" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Transformer.cpp" Name="FileName"/>
+      <int Value="172" Name="FirstVisibleLine"/>
+      <int Value="197" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Machines.cpp" Name="FileName"/>
+      <int Value="112" Name="FirstVisibleLine"/>
+      <int Value="131" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
@@ -68,22 +82,8 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Shunt.cpp" Name="FileName"/>
-      <int Value="101" Name="FirstVisibleLine"/>
-      <int Value="141" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Capacitor.h" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="19" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Capacitor.cpp" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="11" Name="CurrentLine"/>
+      <int Value="86" Name="FirstVisibleLine"/>
+      <int Value="113" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

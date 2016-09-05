@@ -19,6 +19,7 @@ class IndMotor;
 class SyncMotor;
 class Load;
 class Inductor;
+class Capacitor;
 
 enum WorkspaceMode
 {
@@ -44,6 +45,7 @@ class Workspace : public WorkspaceBase
     void Redraw() { m_glCanvas->Refresh(); }
 
    protected:
+    virtual void OnLeftDoubleClick(wxMouseEvent& event);
     virtual void OnRightClickDown(wxMouseEvent& event);
     virtual void OnLeftClickUp(wxMouseEvent& event);
     virtual void OnScroll(wxMouseEvent& event);

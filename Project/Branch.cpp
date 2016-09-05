@@ -1,16 +1,10 @@
 #include "Branch.h"
 
-Branch::Branch() : Element()
-{
-}
-
-Branch::~Branch()
-{
-}
-
+Branch::Branch() : Element() {}
+Branch::~Branch() {}
 bool Branch::NodeContains(wxPoint2DDouble position)
 {
-	wxRect2DDouble nodeRect1(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
+    wxRect2DDouble nodeRect1(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
                              10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
     wxRect2DDouble nodeRect2(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
                              m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
@@ -31,7 +25,7 @@ bool Branch::NodeContains(wxPoint2DDouble position)
 
 bool Branch::SetNodeParent(Element* parent)
 {
-	if(m_activeNodeID == 1 && parent == m_parentList[0]) return false;
+    if(m_activeNodeID == 1 && parent == m_parentList[0]) return false;
     if(m_activeNodeID == 2 && parent == m_parentList[1]) return false;
 
     if(parent && m_activeNodeID != 0) {
@@ -96,9 +90,10 @@ bool Branch::SetNodeParent(Element* parent)
 
 void Branch::RemoveParent(Element* parent)
 {
-	for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 2; i++) {
 	    if(parent == m_parentList[i]) {
 		    m_parentList[i] = NULL;
+			m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}
@@ -106,12 +101,13 @@ void Branch::RemoveParent(Element* parent)
 
 void Branch::UpdateNodes()
 {
-	if(m_parentList[0]) {
+    if(m_parentList[0]) {
 	    wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
 	                            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
 
 	    if(!m_parentList[0]->Intersects(nodeRect)) {
 		    m_parentList[0] = NULL;
+			m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}
@@ -122,6 +118,7 @@ void Branch::UpdateNodes()
 
 	    if(!m_parentList[1]->Intersects(nodeRect)) {
 		    m_parentList[1] = NULL;
+			m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}
@@ -129,7 +126,7 @@ void Branch::UpdateNodes()
 
 void Branch::RotateNode(Element* parent)
 {
-	if(parent == m_parentList[0]) {
+    if(parent == m_parentList[0]) {
 	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], m_rotationAngle);
 	}
     else if(parent == m_parentList[1])
@@ -142,7 +139,7 @@ void Branch::RotateNode(Element* parent)
 
 void Branch::UpdateSwitchesPosition()
 {
-	if(m_parentList[0]) {
+    if(m_parentList[0]) {
 	    m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], m_pointList[2]);
 	}
     else
@@ -156,5 +153,22 @@ void Branch::UpdateSwitchesPosition()
     else
 	{
 	    m_pointList[m_pointList.size() - 2] = m_pointList[m_pointList.size() - 1];
+	}
+    UpdateSwitches();
+}
+
+void Branch::UpdateSwitches()
+{
+    wxPoint2DDouble swCenter = wxPoint2DDouble((m_pointList[0].m_x + m_pointList[1].m_x) / 2.0,
+                                               (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
+    m_switchRect[0] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize,
+                                     m_switchSize);
+
+    if(m_switchRect.size() > 1) {
+	    swCenter = wxPoint2DDouble(
+	        (m_pointList[m_pointList.size() - 1].m_x + m_pointList[m_pointList.size() - 2].m_x) / 2.0,
+	        (m_pointList[m_pointList.size() - 1].m_y + m_pointList[m_pointList.size() - 2].m_y) / 2.0);
+	    m_switchRect[1] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0,
+	                                     m_switchSize, m_switchSize);
 	}
 }

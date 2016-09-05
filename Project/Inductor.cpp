@@ -22,6 +22,11 @@ bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
 	    m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0));
 
 	    m_inserted = true;
+		
+		wxRect2DDouble genRect(0,0,0,0);
+	    m_switchRect.push_back(genRect);  // Push a general rectangle.
+		UpdateSwitches();		
+		
 	    return true;
 	}
     return false;
@@ -57,12 +62,15 @@ void Inductor::Draw(wxPoint2DDouble translation, double scale) const
 	    glColor4d(0.2, 0.2, 0.2, 1.0);
 	    DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
 	    DrawLine(m_pointList);
+		
+		DrawSwitches();
 
 	    glPushMatrix();
 	    glTranslated(m_position.m_x, m_position.m_y, 0.0);
 	    glRotated(m_angle, 0.0, 0.0, 1.0);
 	    glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
-
+		
+		glColor4d(0.2, 0.2, 0.2, 1.0);
 	    DrawArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), 10, 45, 270, 10, GL_LINE_STRIP);
 		DrawArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 25.0), 10, 45, 315, 10, GL_LINE_STRIP);
 		DrawArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 40.0), 10, 90, 315, 10, GL_LINE_STRIP);

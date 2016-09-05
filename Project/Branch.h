@@ -28,11 +28,10 @@ public:
     virtual void AddPoint(wxPoint2DDouble point) {};
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
 	virtual void UpdateSwitchesPosition();
+	virtual void UpdateSwitches();
 
    protected:
 	bool m_inserted = false;
-    std::vector<wxPoint2DDouble> m_pointList;
-    std::vector<wxPoint2DDouble> m_movePts;
 };
 
 #endif // BRANCH_H

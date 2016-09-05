@@ -17,6 +17,7 @@ void Shunt::UpdateSwitchesPosition()
 	{
 	    m_pointList[1] = m_pointList[0];
 	}
+	UpdateSwitches();
 }
 
 void Shunt::Move(wxPoint2DDouble position)
@@ -43,6 +44,7 @@ void Shunt::MoveNode(Element* element, wxPoint2DDouble position)
 	    if(m_activeNodeID == 1) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 		    m_parentList[0] = NULL;
+			m_online = false;
 		}
 	}
 
@@ -61,6 +63,7 @@ void Shunt::RemoveParent(Element* parent)
 {
     if(parent == m_parentList[0]) {
 	    m_parentList[0] = NULL;
+		m_online = false;
 	    UpdateSwitchesPosition();
 	}
 }
@@ -101,6 +104,7 @@ bool Shunt::SetNodeParent(Element* parent)
 	    else
 		{
 		    m_parentList[0] = NULL;
+			m_online = false;
 		}
 	}
     return false;
@@ -114,6 +118,7 @@ void Shunt::UpdateNodes()
 
 	    if(!m_parentList[0]->Intersects(nodeRect)) {
 		    m_parentList[0] = NULL;
+			m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}

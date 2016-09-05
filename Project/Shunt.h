@@ -24,8 +24,6 @@ public:
     void UpdateSwitchesPosition();
 	void DrawGround(wxPoint2DDouble position) const;
     bool m_inserted = false;
-    std::vector<wxPoint2DDouble> m_pointList;
-    std::vector<wxPoint2DDouble> m_movePts;
 
 };
 

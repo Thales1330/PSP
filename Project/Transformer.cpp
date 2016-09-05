@@ -15,6 +15,10 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 		    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 		    m_pointList.push_back(parentPt);                                    // First point
 		    m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
+			
+			wxRect2DDouble genRect(0,0,0,0);
+			m_switchRect.push_back(genRect);
+			
 		    return false;
 		}
 	    // Second bus.
@@ -51,6 +55,11 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 
 		    m_pointList.push_back(parentPt);  // Last point.
 		    m_inserted = true;
+			
+			wxRect2DDouble genRect(0,0,0,0);
+			m_switchRect.push_back(genRect);
+			UpdateSwitches();
+			
 		    return true;
 		}
 	}
@@ -78,7 +87,6 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
 		    glRotated(m_angle, 0.0, 0.0, 1.0);
 		    glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-		    // glColor4d(0.0, 0.5, 1.0, 0.5);
 		    DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale,
 		               20, GL_POLYGON);
 		    DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale,
@@ -109,7 +117,9 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
 			    DrawCircle(m_pointList[m_pointList.size() - 1], 5.0, 10, GL_POLYGON);
 			}
 		}
-
+		
+		DrawSwitches();
+		
 	    // Push the current matrix on stack.
 	    glPushMatrix();
 	    // Rotate the matrix around the object position.
@@ -185,11 +195,13 @@ void Transformer::MoveNode(Element* parent, wxPoint2DDouble position)
 	    if(m_activeNodeID == 1) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 		    m_parentList[0] = NULL;
+			m_online = false;
 		}
 	    else if(m_activeNodeID == 2)
 		{
 		    m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
 		    m_parentList[1] = NULL;
+			m_online = false;
 		}
 	}
 

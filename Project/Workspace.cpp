@@ -9,6 +9,7 @@
 #include "SyncMotor.h"
 #include "Load.h"
 #include "Inductor.h"
+#include "Capacitor.h"
 
 // Camera
 Camera::Camera()
@@ -184,7 +185,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 			    foundElement = true;
 			}
 
-		    // Click in an element
+		    // Click in an element.
 		    else if(element->Contains(m_camera->ScreenToWorld(event.GetPosition())))
 			{
 			    if(!foundElement) {
@@ -203,6 +204,11 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 				    m_mode = MODE_MOVE_ELEMENT;
 				}
 			}
+			
+			// Click in a switch.
+			else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				element->SetOnline(element->IsOnline() ? false : true);
+			}
 		}
 	}
 
@@ -214,6 +220,24 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     Redraw();
     UpdateStatusBar();
     event.Skip();
+}
+
+void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
+{
+	for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+		    Element* element = *it;
+
+		    // Click in an element.
+		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition())))
+			{
+			    //Open the form.
+			}
+			
+			// Click in a switch.
+			else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+				element->SetOnline(element->IsOnline() ? false : true);
+			}
+		}
 }
 
 void Workspace::OnRightClickDown(wxMouseEvent& event)
@@ -642,6 +666,19 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				    m_mode = MODE_INSERT;
 				    m_statusBar->SetStatusText(_("Insert Synchronous Condenser: Click on a buses, ESC to cancel."));
 				    Redraw();
+				}
+			}
+			break;
+			case 'C':
+			{
+			    if(m_mode != MODE_INSERT) {
+					if(event.GetModifiers() == wxMOD_SHIFT) { // Insert a capacitor.
+						Capacitor* newCapacitor = new Capacitor();
+						m_elementList.push_back(newCapacitor);
+						m_mode = MODE_INSERT;
+						m_statusBar->SetStatusText(_("Insert Capacitor: Click on a buses, ESC to cancel."));
+						Redraw();
+					}
 				}
 			}
 			break;

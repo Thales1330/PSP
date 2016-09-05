@@ -327,6 +327,13 @@
          "m_functionNameAndSignature": "OnRightClickDown(wxMouseEvent& event)",
          "m_description": "Process a wxEVT_RIGHT_DOWN event",
          "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_LEFT_DCLICK",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnLeftDoubleClick(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_LEFT_DCLICK event.",
+         "m_noBody": false
         }],
        "m_children": []
       }]

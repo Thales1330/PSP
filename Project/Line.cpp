@@ -41,6 +41,8 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
     glLineWidth(1.5);
     glColor4d(0.2, 0.2, 0.2, 1.0);
     DrawLine(pointList);
+	
+	DrawSwitches();
 
     // Draw nodes.
     if(pointList.size() > 0) {
@@ -95,6 +97,11 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 		    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 		    m_pointList.push_back(parentPt);                                    // First point
 		    m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
+			
+			wxRect2DDouble genRect(0,0,0,0);
+			m_switchRect.push_back(genRect);
+			UpdateSwitches();
+			
 		    return false;
 		}
 	    // Second bus.
@@ -117,6 +124,11 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 		    m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_pointList[m_pointList.size() - 1]));
 
 		    m_pointList.push_back(parentPt);  // Last point.
+			
+			wxRect2DDouble genRect(0,0,0,0);
+			m_switchRect.push_back(genRect);
+			UpdateSwitches();
+			
 		    m_inserted = true;
 		    return true;
 		}
@@ -191,11 +203,13 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 	    if(m_activeNodeID == 1) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 		    m_parentList[0] = NULL;
+			m_online = false;
 		}
 	    else if(m_activeNodeID == 2)
 		{
 		    m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
 		    m_parentList[1] = NULL;
+			m_online = false;
 		}
 	}
 
@@ -209,7 +223,7 @@ double Line::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) cons
     double distance = 100.0;  // Big initial distance.
     wxPoint2DDouble p0 = point;
 
-    for(int i = 0; i < (int)m_pointList.size() - 1; i++) {
+    for(int i = 1; i < (int)m_pointList.size() - 2; i++) {
 	    double d = 0.0;
 
 	    wxPoint2DDouble p1 = m_pointList[i];

@@ -1,13 +1,7 @@
 #include "Machines.h"
 
-Machines::Machines() : Element()
-{
-}
-
-Machines::~Machines()
-{
-}
-
+Machines::Machines() : Element() {}
+Machines::~Machines() {}
 bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {
@@ -26,6 +20,10 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 	    m_pointList.push_back(m_position + wxPoint2DDouble(35.0, 0.0));
 	    m_pointList.push_back(m_position + wxPoint2DDouble(25.0, 0.0));
 	    m_inserted = true;
+		
+		wxRect2DDouble genRect(0,0,0,0);
+	    m_switchRect.push_back(genRect);  // Push a general rectangle.
+		UpdateSwitches();
 	    return true;
 	}
     return false;
@@ -34,6 +32,7 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 void Machines::Draw(wxPoint2DDouble translation, double scale) const
 {
     if(m_inserted) {
+		
 	    // Draw Selection (layer 1).
 	    if(m_selected) {
 		    glLineWidth(1.5 + m_borderSize * 2.0);
@@ -53,6 +52,8 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
 	    DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
 
 	    DrawLine(m_pointList);
+		
+		DrawSwitches();
 
 	    glColor4d(1.0, 1.0, 1.0, 1.0);
 	    DrawCircle(m_position, 25.0, 20, GL_POLYGON);
@@ -61,7 +62,7 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
 	    DrawCircle(m_position, 25.0, 20);
 
 	    // Draw machine symbol.
-		glLineWidth(2.0);
+	    glLineWidth(2.0);
 	    DrawSymbol();
 	}
 }
@@ -75,6 +76,7 @@ void Machines::UpdateSwitchesPosition()
 	{
 	    m_pointList[1] = m_pointList[0];
 	}
+	UpdateSwitches();
 }
 
 void Machines::Move(wxPoint2DDouble position)
@@ -83,8 +85,8 @@ void Machines::Move(wxPoint2DDouble position)
     for(int i = 2; i < (int)m_pointList.size(); i++) {
 	    m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
 	}
-	if(!m_parentList[0]) {
-		 m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
+    if(!m_parentList[0]) {
+	    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 	}
     UpdateSwitchesPosition();
 }
@@ -101,6 +103,7 @@ void Machines::MoveNode(Element* element, wxPoint2DDouble position)
 	    if(m_activeNodeID == 1) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 		    m_parentList[0] = NULL;
+			m_online = false;
 		}
 	}
 
@@ -167,6 +170,7 @@ bool Machines::SetNodeParent(Element* parent)
 	    else
 		{
 		    m_parentList[0] = NULL;
+			m_online = false;
 		}
 	}
     return false;
@@ -180,6 +184,7 @@ void Machines::UpdateNodes()
 
 	    if(!m_parentList[0]->Intersects(nodeRect)) {
 		    m_parentList[0] = NULL;
+			m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}

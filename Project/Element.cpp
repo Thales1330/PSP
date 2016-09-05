@@ -20,11 +20,16 @@ void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegment
     glEnd();
 }
 
-void Element::DrawArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, GLenum mode) const
+void Element::DrawArc(wxPoint2DDouble position,
+                      double radius,
+                      double initAngle,
+                      double finalAngle,
+                      int numSegments,
+                      GLenum mode) const
 {
-	double initAngRad = wxDegToRad(initAngle);
-	double finalAngRad = wxDegToRad(finalAngle);
-	glBegin(mode);
+    double initAngRad = wxDegToRad(initAngle);
+    double finalAngRad = wxDegToRad(finalAngle);
+    glBegin(mode);
     for(int i = 0; i <= numSegments; i++) {
 	    double theta = initAngRad + (finalAngRad - initAngRad) * double(i) / double(numSegments);
 	    glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
@@ -34,11 +39,11 @@ void Element::DrawArc(wxPoint2DDouble position, double radius, double initAngle,
 
 void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) const
 {
-	glBegin(mode);
-	for(int i=0; i<3; i++) {
-		glVertex2d(points[i].m_x, points[i].m_y);
+    glBegin(mode);
+    for(int i = 0; i < 3; i++) {
+	    glVertex2d(points[i].m_x, points[i].m_y);
 	}
-	glEnd();
+    glEnd();
 }
 
 void Element::DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode) const
@@ -227,4 +232,63 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
 	}
 
     return true;
+}
+
+void Element::UpdateSwitches()
+{
+    // General method, to one switch only.
+    wxPoint2DDouble swCenter = wxPoint2DDouble((m_pointList[0].m_x + m_pointList[1].m_x) / 2.0,
+                                               (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
+    m_switchRect[0] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize,
+                                     m_switchSize);
+}
+
+void Element::DrawSwitches() const
+{
+    int i = 0;
+    for(auto it = m_parentList.begin(); it != m_parentList.end(); it++) {
+	    Element* parent = *it;
+	    if(parent) {
+		    if(m_online) {
+			    glColor4d(0.0, 0.4, 0.0, 1.0);  // green
+			}
+		    else
+			{
+			    glColor4d(1.0, 0.1, 0.1, 1.0);  // red
+			}
+
+		    glPushMatrix();
+		    glTranslated(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
+		                 m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0, 0.0);
+		    glRotated(parent->GetAngle(), 0.0, 0.0, 1.0);
+		    glTranslated(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
+		                 -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0, 0.0);
+
+		    DrawRectangle(
+		        m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
+		        m_switchSize, m_switchSize);
+
+		    glPopMatrix();
+		}
+	    i++;
+	}
+}
+
+bool Element::SwitchesContains(wxPoint2DDouble position) const
+{
+    for(int i = 0; i < (int)m_switchRect.size(); i++) {
+	    if(m_parentList[i]) {
+		    if(m_switchRect[i].Contains(position)) return true;
+		}
+	}
+    return false;
+}
+
+void Element::SetOnline(bool online)
+{
+    // Check if any parent is null.
+    for(auto it = m_parentList.begin(); it != m_parentList.end(); it++) {
+	    if(!(*it)) return;
+	}
+    m_online = online;
 }

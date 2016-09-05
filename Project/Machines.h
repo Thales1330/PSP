@@ -27,8 +27,6 @@ public:
    protected:
     void UpdateSwitchesPosition();
     bool m_inserted = false;
-    std::vector<wxPoint2DDouble> m_pointList;
-    std::vector<wxPoint2DDouble> m_movePts;
 
 };
 
