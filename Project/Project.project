@@ -22,6 +22,7 @@
         <File Name="Shunt.cpp"/>
         <File Name="Load.cpp"/>
         <File Name="Inductor.cpp"/>
+        <File Name="Capacitor.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -48,6 +49,7 @@
         <File Name="Shunt.h"/>
         <File Name="Load.h"/>
         <File Name="Inductor.h"/>
+        <File Name="Capacitor.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
