@@ -23,8 +23,7 @@ public:
     virtual bool Intersects(wxRect2DDouble rect) const { return false; }
     virtual void MovePickbox(wxPoint2DDouble position) {}
     virtual bool PickboxContains(wxPoint2DDouble position) { return false; }
-    virtual void Rotate() {}
-    virtual void RotateNode(Element* parent);
+    virtual void RotateNode(Element* parent, bool clockwise = true);
     virtual void AddPoint(wxPoint2DDouble point) {};
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
 	virtual void UpdateSwitchesPosition();

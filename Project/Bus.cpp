@@ -77,8 +77,8 @@ bool Bus::Contains(wxPoint2DDouble position) const
 bool Bus::Intersects(wxRect2DDouble rect) const
 {
     if(m_angle == 0.0 || m_angle == 180.0) return m_rect.Intersects(rect);
-	
-	return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0);
+
+    return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0);
 }
 
 bool Bus::PickboxContains(wxPoint2DDouble position)
@@ -150,16 +150,20 @@ void Bus::MovePickbox(wxPoint2DDouble position)
     SetPosition(m_position);
 }
 
-void Bus::Rotate()
+void Bus::Rotate(bool clockwise)
 {
-    m_angle += m_rotationAngle;
+    double rotAngle = m_rotationAngle;
+    if(!clockwise) rotAngle = -m_rotationAngle;
+
+    m_angle += rotAngle;
     if(m_angle >= 360.0) m_angle = 0.0;
 }
 
 bool Bus::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_BUS, _("Edit bus"));
-    menu.Append(ID_ROTATE, _("Rotate"));
-	menu.Append(ID_DELETE, _("Delete"));
+    menu.Append(ID_ROTATE_CLOCK, _("Rotate clockwise"));
+	menu.Append(ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
+    menu.Append(ID_DELETE, _("Delete"));
     return true;
 }

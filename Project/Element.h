@@ -32,7 +32,8 @@ enum ContextMenuID
     ID_LINE_ADD_NODE,
     ID_LINE_REMOVE_NODE,
 
-    ID_ROTATE,
+    ID_ROTATE_CLOCK,
+	ID_ROTATE_COUNTERCLOCK,
     ID_DELETE
 };
 
@@ -69,7 +70,7 @@ class Element
     virtual bool Intersects(wxRect2DDouble rect) const = 0;
 
     // General methods
-    virtual void Rotate() {}
+    virtual void Rotate(bool clockwise = true) {}
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
     virtual void AddPoint(wxPoint2DDouble point) {}
     virtual void StartMove(wxPoint2DDouble position);
@@ -79,7 +80,7 @@ class Element
     virtual void UpdateNodes() {}
     virtual bool SetNodeParent(Element* parent) { return false; }
     virtual void RemoveParent(Element* parent) {}
-    virtual void RotateNode(Element* parent) {}
+    virtual void RotateNode(Element* parent, bool clockwise = true) {}
     virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
                                            wxPoint2DDouble parentPoint,
                                            wxPoint2DDouble secondPoint) const;
@@ -124,6 +125,8 @@ class Element
     virtual std::vector<Element*> GetParentList() const { return m_parentList; }
     virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
     virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
+	
+	virtual void GeneralMenuItens(wxMenu& menu);
    protected:
     std::vector<Element*> m_parentList;
 

@@ -575,12 +575,24 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					    Element* parent = element->GetParentList()[i];
 					    if(parent) {  // Check if parent is not null
 						    if(parent->IsSelected()) {
-							    element->RotateNode(parent);
+								if(event.GetModifiers() == wxMOD_SHIFT) {
+									element->RotateNode(parent, false);
+								}
+								else
+								{
+									element->RotateNode(parent);
+								}
 							}
 						}
 					}
 				    if(element->IsSelected()) {
-					    element->Rotate();
+						if(event.GetModifiers() == wxMOD_SHIFT) {
+							element->Rotate(false);
+						}
+						else
+						{
+							element->Rotate();
+						}
 					}
 				}
 			    Redraw();
@@ -760,7 +772,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		    Redraw();
 		}
 		break;
-	    case ID_ROTATE:
+	    case ID_ROTATE_CLOCK:
 		{
 		    element->Rotate();
 		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
@@ -770,6 +782,22 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 				    Element* parent = iElement->GetParentList()[i];
 				    if(parent == element) {
 					    iElement->RotateNode(parent);
+					}
+				}
+			}
+		    Redraw();
+		}
+		break;
+		case ID_ROTATE_COUNTERCLOCK:
+		{
+		    element->Rotate(false);
+		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+			    Element* iElement = *it;
+			    // Parent's element rotating...
+			    for(int i = 0; i < (int)iElement->GetParentList().size(); i++) {
+				    Element* parent = iElement->GetParentList()[i];
+				    if(parent == element) {
+					    iElement->RotateNode(parent, false);
 					}
 				}
 			}

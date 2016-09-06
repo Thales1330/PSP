@@ -124,10 +124,13 @@ void Shunt::UpdateNodes()
 	}
 }
 
-void Shunt::RotateNode(Element* parent)
+void Shunt::RotateNode(Element* parent, bool clockwise)
 {
+	double rotAngle = m_rotationAngle;
+	if(!clockwise) rotAngle = -m_rotationAngle;
+	
     if(parent == m_parentList[0]) {
-	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], m_rotationAngle);
+	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
 	    UpdateSwitchesPosition();
 	}
 }

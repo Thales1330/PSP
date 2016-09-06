@@ -93,7 +93,7 @@ void Branch::RemoveParent(Element* parent)
     for(int i = 0; i < 2; i++) {
 	    if(parent == m_parentList[i]) {
 		    m_parentList[i] = NULL;
-			m_online = false;
+		    m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}
@@ -107,7 +107,7 @@ void Branch::UpdateNodes()
 
 	    if(!m_parentList[0]->Intersects(nodeRect)) {
 		    m_parentList[0] = NULL;
-			m_online = false;
+		    m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}
@@ -118,21 +118,24 @@ void Branch::UpdateNodes()
 
 	    if(!m_parentList[1]->Intersects(nodeRect)) {
 		    m_parentList[1] = NULL;
-			m_online = false;
+		    m_online = false;
 		    UpdateSwitchesPosition();
 		}
 	}
 }
 
-void Branch::RotateNode(Element* parent)
+void Branch::RotateNode(Element* parent, bool clockwise)
 {
+    double rotAngle = m_rotationAngle;
+    if(!clockwise) rotAngle = -m_rotationAngle;
+
     if(parent == m_parentList[0]) {
-	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], m_rotationAngle);
+	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
 	}
     else if(parent == m_parentList[1])
 	{
 	    m_pointList[m_pointList.size() - 1] =
-	        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], m_rotationAngle);
+	        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], rotAngle);
 	}
     UpdateSwitchesPosition();
 }

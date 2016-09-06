@@ -147,14 +147,17 @@ bool Transformer::Intersects(wxRect2DDouble rect) const
     return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0);
 }
 
-void Transformer::Rotate()
+void Transformer::Rotate(bool clockwise)
 {
-    m_angle += m_rotationAngle;
+	double rotAngle = m_rotationAngle;
+	if(!clockwise) rotAngle = -m_rotationAngle;
+	
+    m_angle += rotAngle;
     if(m_angle >= 360.0) m_angle = 0.0;
 
     // Rotate all the points, except the switches and buses points.
     for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
-	    m_pointList[i] = RotateAtPosition(m_pointList[i], m_rotationAngle);
+	    m_pointList[i] = RotateAtPosition(m_pointList[i], rotAngle);
 	}
 }
 
@@ -219,7 +222,8 @@ void Transformer::StartMove(wxPoint2DDouble position)
 bool Transformer::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_TRANSFORMER, _("Edit tranformer"));
-	menu.Append(ID_ROTATE, _("Rotate"));
+	menu.Append(ID_ROTATE_CLOCK, _("Rotate clockwise"));
+	menu.Append(ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
     menu.Append(ID_DELETE, _("Delete"));
     return true;
 }

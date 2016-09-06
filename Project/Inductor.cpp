@@ -81,18 +81,22 @@ void Inductor::Draw(wxPoint2DDouble translation, double scale) const
 	}
 }
 
-void Inductor::Rotate()
+void Inductor::Rotate(bool clockwise)
 {
-	m_angle += m_rotationAngle;
-    m_pointList[2] = RotateAtPosition(m_pointList[2], m_rotationAngle);
-    m_pointList[3] = RotateAtPosition(m_pointList[3], m_rotationAngle);
+	double rotAngle = m_rotationAngle;
+	if(!clockwise) rotAngle = -m_rotationAngle;
+	
+	m_angle += rotAngle;
+    m_pointList[2] = RotateAtPosition(m_pointList[2], rotAngle);
+    m_pointList[3] = RotateAtPosition(m_pointList[3], rotAngle);
     UpdateSwitchesPosition();
 }
 
 bool Inductor::GetContextMenu(wxMenu& menu)
 {
 	menu.Append(ID_EDIT_INDUCTOR, _("Edit Inductor"));
-    menu.Append(ID_ROTATE, _("Rotate"));
+    menu.Append(ID_ROTATE_CLOCK, _("Rotate clockwise"));
+	menu.Append(ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
     menu.Append(ID_DELETE, _("Delete"));
     return true;
 }

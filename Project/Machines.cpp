@@ -118,10 +118,13 @@ void Machines::StartMove(wxPoint2DDouble position)
     m_movePos = m_position;
 }
 
-void Machines::RotateNode(Element* parent)
+void Machines::RotateNode(Element* parent, bool clockwise)
 {
+	double rotAngle = m_rotationAngle;
+	if(!clockwise) rotAngle = -m_rotationAngle;
+	
     if(parent == m_parentList[0]) {
-	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], m_rotationAngle);
+	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
 	    UpdateSwitchesPosition();
 	}
 }
@@ -190,9 +193,12 @@ void Machines::UpdateNodes()
 	}
 }
 
-void Machines::Rotate()
+void Machines::Rotate(bool clockwise)
 {
-    m_pointList[2] = RotateAtPosition(m_pointList[2], m_rotationAngle);
-    m_pointList[3] = RotateAtPosition(m_pointList[3], m_rotationAngle);
+	double rotAngle = m_rotationAngle;
+	if(!clockwise) rotAngle = -m_rotationAngle;
+	
+    m_pointList[2] = RotateAtPosition(m_pointList[2], rotAngle);
+    m_pointList[3] = RotateAtPosition(m_pointList[3], rotAngle);
     UpdateSwitchesPosition();
 }

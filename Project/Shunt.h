@@ -14,7 +14,7 @@ public:
     virtual void Move(wxPoint2DDouble position);
     virtual void MoveNode(Element* element, wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
-    virtual void RotateNode(Element* parent);
+    virtual void RotateNode(Element* parent, bool clockwise = true);
     virtual void RemoveParent(Element* parent);
     virtual bool NodeContains(wxPoint2DDouble position);
     virtual bool SetNodeParent(Element* parent);

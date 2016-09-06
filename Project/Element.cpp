@@ -292,3 +292,7 @@ void Element::SetOnline(bool online)
 	}
     m_online = online;
 }
+
+void Element::GeneralMenuItens(wxMenu& menu)
+{
+}

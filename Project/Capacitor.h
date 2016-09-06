@@ -13,7 +13,7 @@ public:
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual bool Contains(wxPoint2DDouble position) const;
 	virtual bool Intersects(wxRect2DDouble rect) const;
-    virtual void Rotate();
+    virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
 
 };

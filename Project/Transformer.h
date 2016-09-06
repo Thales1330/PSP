@@ -13,7 +13,7 @@ public:
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
-    virtual void Rotate();
+    virtual void Rotate(bool clockwise = true);
 	virtual void Move(wxPoint2DDouble position);
 	virtual void MoveNode(Element* parent, wxPoint2DDouble position);
 	virtual void StartMove(wxPoint2DDouble position);

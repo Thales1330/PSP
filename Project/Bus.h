@@ -13,7 +13,7 @@ class Bus : public Element
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
-    virtual void Rotate();
+    virtual void Rotate(bool clockwise = true);
     virtual wxCursor GetBestPickboxCursor() const;
     virtual void MovePickbox(wxPoint2DDouble position);
     virtual bool PickboxContains(wxPoint2DDouble position);

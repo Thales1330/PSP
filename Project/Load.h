@@ -11,7 +11,7 @@ class Load : public Shunt
 
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
-    virtual void Rotate();
+    virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
 
    private:
