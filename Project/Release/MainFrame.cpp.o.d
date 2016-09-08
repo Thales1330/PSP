@@ -205,7 +205,9 @@ Release/MainFrame.cpp.o: MainFrame.cpp MainFrame.h \
  C:/wxWidgets-3.1.0/include/wx/log.h \
  C:/wxWidgets-3.1.0/include/wx/generic/logg.h \
  C:/wxWidgets-3.1.0/include/wx/msw/app.h \
- C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h
+ C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h Bus.h Element.h Line.h \
+ Branch.h Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h \
+ Load.h Shunt.h Inductor.h Capacitor.h
 
 MainFrame.h:
 
@@ -632,3 +634,29 @@ C:/wxWidgets-3.1.0/include/wx/generic/logg.h:
 C:/wxWidgets-3.1.0/include/wx/msw/app.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h:
+
+Bus.h:
+
+Element.h:
+
+Line.h:
+
+Branch.h:
+
+Transformer.h:
+
+SyncGenerator.h:
+
+Machines.h:
+
+IndMotor.h:
+
+SyncMotor.h:
+
+Load.h:
+
+Shunt.h:
+
+Inductor.h:
+
+Capacitor.h:

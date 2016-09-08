@@ -222,8 +222,6 @@ void Transformer::StartMove(wxPoint2DDouble position)
 bool Transformer::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_TRANSFORMER, _("Edit tranformer"));
-	menu.Append(ID_ROTATE_CLOCK, _("Rotate clockwise"));
-	menu.Append(ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    menu.Append(ID_DELETE, _("Delete"));
+	GeneralMenuItens(menu);
     return true;
 }

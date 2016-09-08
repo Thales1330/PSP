@@ -66,13 +66,15 @@ public:
         ID_RIBBON_PROJSETTINGS = 10022,
         ID_RIBBON_REDO = 10023,
         ID_RIBBON_RESETVOLT = 10024,
-        ID_RIBBON_RUNSTAB = 10025,
-        ID_RIBBON_SAVE = 10026,
-        ID_RIBBON_SAVEAS = 10027,
-        ID_RIBBON_SCPOWER = 10028,
-        ID_RIBBON_SIMULSETTINGS = 10029,
-        ID_RIBBON_SNAPSHOT = 10030,
-        ID_RIBBON_UNDO = 10031,
+        ID_RIBBON_ROTATEC = 10025,
+        ID_RIBBON_ROTATECC = 10026,
+        ID_RIBBON_RUNSTAB = 10027,
+        ID_RIBBON_SAVE = 10028,
+        ID_RIBBON_SAVEAS = 10029,
+        ID_RIBBON_SCPOWER = 10030,
+        ID_RIBBON_SIMULSETTINGS = 10031,
+        ID_RIBBON_SNAPSHOT = 10032,
+        ID_RIBBON_UNDO = 10033,
     };
 protected:
     wxRibbonBar* m_ribbonBar;
@@ -118,6 +120,8 @@ protected:
     virtual void OnMoveClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnDeleteClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnFitClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnRotClockClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnRotCounterClockClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnDataReportClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnChartsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSnapshotClick(wxRibbonButtonBarEvent& event) { event.Skip(); }

@@ -27,8 +27,6 @@ void SyncGenerator::DrawSymbol() const
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_SYNCGENERATOR, _("Edit Generator"));
-    menu.Append(ID_ROTATE_CLOCK, _("Rotate clockwise"));
-	menu.Append(ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    menu.Append(ID_DELETE, _("Delete"));
+    GeneralMenuItens(menu);
     return true;
 }

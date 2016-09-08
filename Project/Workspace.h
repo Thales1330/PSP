@@ -40,9 +40,16 @@ class Workspace : public WorkspaceBase
     ~Workspace();
 
     wxString GetName() const { return m_name; }
-    void SetName(wxString name) { m_name = name; }
-    std::vector<Element*> GetElementList() { return m_elementList; }
-    void Redraw() { m_glCanvas->Refresh(); }
+    std::vector<Element*> GetElementList() const { return m_elementList; }
+	WorkspaceMode GetWorkspaceMode() const { return m_mode; }
+	
+	void SetName(wxString name) { m_name = name; }
+	void SetElementList(std::vector<Element*> elementList) { m_elementList = elementList; }
+	void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
+	void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
+	
+	void Redraw() { m_glCanvas->Refresh(); }
+	void RotateSelectedElements(bool clockwise = true);
 
    protected:
     virtual void OnLeftDoubleClick(wxMouseEvent& event);

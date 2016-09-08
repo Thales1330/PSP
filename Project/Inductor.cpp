@@ -95,9 +95,7 @@ void Inductor::Rotate(bool clockwise)
 bool Inductor::GetContextMenu(wxMenu& menu)
 {
 	menu.Append(ID_EDIT_INDUCTOR, _("Edit Inductor"));
-    menu.Append(ID_ROTATE_CLOCK, _("Rotate clockwise"));
-	menu.Append(ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    menu.Append(ID_DELETE, _("Delete"));
+    GeneralMenuItens(menu);
     return true;
 }
 

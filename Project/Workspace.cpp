@@ -91,6 +91,7 @@ void Workspace::OnPaint(wxPaintEvent& event)
 	}
 
     // Selection rectangle
+    glLineWidth(1.0);
     glColor4d(0.0, 0.5, 1.0, 1.0);
     glBegin(GL_LINE_LOOP);
     glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y);
@@ -204,10 +205,11 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 				    m_mode = MODE_MOVE_ELEMENT;
 				}
 			}
-			
-			// Click in a switch.
-			else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
-				element->SetOnline(element->IsOnline() ? false : true);
+
+		    // Click in a switch.
+		    else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition())))
+			{
+			    element->SetOnline(element->IsOnline() ? false : true);
 			}
 		}
 	}
@@ -224,20 +226,20 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 {
-	for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-		    Element* element = *it;
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+	    Element* element = *it;
 
-		    // Click in an element.
-		    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition())))
-			{
-			    //Open the form.
-			}
-			
-			// Click in a switch.
-			else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
-				element->SetOnline(element->IsOnline() ? false : true);
-			}
+	    // Click in an element.
+	    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+		    // Open the form.
 		}
+
+	    // Click in a switch.
+	    else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition())))
+		{
+		    element->SetOnline(element->IsOnline() ? false : true);
+		}
+	}
 }
 
 void Workspace::OnRightClickDown(wxMouseEvent& event)
@@ -256,19 +258,19 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
 					    menu.Connect(wxEVT_COMMAND_MENU_SELECTED,
 					                 wxCommandEventHandler(Workspace::OnPopupClick), NULL, this);
 					    PopupMenu(&menu);
-						redraw = true;
+					    redraw = true;
 					}
 				    element->ResetPickboxes();
-					
-					if(redraw){
-						Redraw();
-						redraw = false;
+
+				    if(redraw) {
+					    Redraw();
+					    redraw = false;
 					}
-					// If the last element was removed using the menu, we must leave the "search for" to prevent error.
-					break;
+				    // If the last element was removed using the menu, we must leave the "search for" to
+				    // prevent error.
+				    break;
 				}
 			}
-		    
 		}
 	}
 }
@@ -568,34 +570,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 			break;
 		    case 'R':  // Rotate the selected elements.
 			{
-			    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-				    Element* element = *it;
-				    // Parent's element rotating...
-				    for(int i = 0; i < (int)element->GetParentList().size(); i++) {
-					    Element* parent = element->GetParentList()[i];
-					    if(parent) {  // Check if parent is not null
-						    if(parent->IsSelected()) {
-								if(event.GetModifiers() == wxMOD_SHIFT) {
-									element->RotateNode(parent, false);
-								}
-								else
-								{
-									element->RotateNode(parent);
-								}
-							}
-						}
-					}
-				    if(element->IsSelected()) {
-						if(event.GetModifiers() == wxMOD_SHIFT) {
-							element->Rotate(false);
-						}
-						else
-						{
-							element->Rotate();
-						}
-					}
-				}
-			    Redraw();
+				RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
 			}
 			break;
 		    case 'B':  // Insert a bus.
@@ -612,34 +587,38 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		    case 'L':
 			{
 			    if(m_mode != MODE_INSERT) {
-					if(event.GetModifiers() == wxMOD_SHIFT) { // Insert a load.
-						Load* newLoad = new Load();
-						m_elementList.push_back(newLoad);
-						m_mode = MODE_INSERT;
-						m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
+				    if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert a load.
+					    Load* newLoad = new Load();
+					    m_elementList.push_back(newLoad);
+					    m_mode = MODE_INSERT;
+					    m_statusBar->SetStatusText(
+					        _("Insert Load: Click on a buses, ESC to cancel."));
 					}
-					else { // Insert a power line.
-						Line* newLine = new Line();
-						m_elementList.push_back(newLine);
-						m_mode = MODE_INSERT;
-						m_statusBar->SetStatusText(_("Insert Line: Click on two buses, ESC to cancel."));
+				    else
+					{  // Insert a power line.
+					    Line* newLine = new Line();
+					    m_elementList.push_back(newLine);
+					    m_mode = MODE_INSERT;
+					    m_statusBar->SetStatusText(
+					        _("Insert Line: Click on two buses, ESC to cancel."));
 					}
 				    Redraw();
 				}
 			}
 			break;
-			case 'T':  // Insert a transformer.
+		    case 'T':  // Insert a transformer.
 			{
 			    if(m_mode != MODE_INSERT) {
 				    Transformer* newTransformer = new Transformer();
 				    m_elementList.push_back(newTransformer);
 				    m_mode = MODE_INSERT;
-				    m_statusBar->SetStatusText(_("Insert Transformer: Click on two buses, ESC to cancel."));
+				    m_statusBar->SetStatusText(
+				        _("Insert Transformer: Click on two buses, ESC to cancel."));
 				    Redraw();
 				}
 			}
 			break;
-			case 'G':  // Insert a generator.
+		    case 'G':  // Insert a generator.
 			{
 			    if(m_mode != MODE_INSERT) {
 				    SyncGenerator* newGenerator = new SyncGenerator();
@@ -650,46 +629,50 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 			}
 			break;
-			case 'I':
+		    case 'I':
 			{
 			    if(m_mode != MODE_INSERT) {
-					if(event.GetModifiers() == wxMOD_SHIFT) { // Insert an inductor.
-						Inductor* newInductor = new Inductor();
-						m_elementList.push_back(newInductor);
-						m_mode = MODE_INSERT;
-						m_statusBar->SetStatusText(_("Insert Inductor: Click on a buses, ESC to cancel."));
+				    if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert an inductor.
+					    Inductor* newInductor = new Inductor();
+					    m_elementList.push_back(newInductor);
+					    m_mode = MODE_INSERT;
+					    m_statusBar->SetStatusText(
+					        _("Insert Inductor: Click on a buses, ESC to cancel."));
 					}
-					else // Insert an induction motor.
+				    else  // Insert an induction motor.
 					{
-						IndMotor* newIndMotor = new IndMotor();
-						m_elementList.push_back(newIndMotor);
-						m_mode = MODE_INSERT;
-						m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a buses, ESC to cancel."));
+					    IndMotor* newIndMotor = new IndMotor();
+					    m_elementList.push_back(newIndMotor);
+					    m_mode = MODE_INSERT;
+					    m_statusBar->SetStatusText(
+					        _("Insert Induction Motor: Click on a buses, ESC to cancel."));
 					}
 				    Redraw();
 				}
 			}
 			break;
-			case 'K':  // Insert a synchronous condenser.
+		    case 'K':  // Insert a synchronous condenser.
 			{
 			    if(m_mode != MODE_INSERT) {
 				    SyncMotor* newSyncCondenser = new SyncMotor();
 				    m_elementList.push_back(newSyncCondenser);
 				    m_mode = MODE_INSERT;
-				    m_statusBar->SetStatusText(_("Insert Synchronous Condenser: Click on a buses, ESC to cancel."));
+				    m_statusBar->SetStatusText(
+				        _("Insert Synchronous Condenser: Click on a buses, ESC to cancel."));
 				    Redraw();
 				}
 			}
 			break;
-			case 'C':
+		    case 'C':
 			{
 			    if(m_mode != MODE_INSERT) {
-					if(event.GetModifiers() == wxMOD_SHIFT) { // Insert a capacitor.
-						Capacitor* newCapacitor = new Capacitor();
-						m_elementList.push_back(newCapacitor);
-						m_mode = MODE_INSERT;
-						m_statusBar->SetStatusText(_("Insert Capacitor: Click on a buses, ESC to cancel."));
-						Redraw();
+				    if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert a capacitor.
+					    Capacitor* newCapacitor = new Capacitor();
+					    m_elementList.push_back(newCapacitor);
+					    m_mode = MODE_INSERT;
+					    m_statusBar->SetStatusText(
+					        _("Insert Capacitor: Click on a buses, ESC to cancel."));
+					    Redraw();
 					}
 				}
 			}
@@ -753,7 +736,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		    wxMessageBox("Edit line!");
 		}
 		break;
-		case ID_EDIT_TRANSFORMER:
+	    case ID_EDIT_TRANSFORMER:
 		{
 		    wxMessageBox("Edit transformer!");
 		}
@@ -788,7 +771,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		    Redraw();
 		}
 		break;
-		case ID_ROTATE_COUNTERCLOCK:
+	    case ID_ROTATE_COUNTERCLOCK:
 		{
 		    element->Rotate(false);
 		    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
@@ -826,4 +809,28 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		}
 		break;
 	}
+}
+
+void Workspace::RotateSelectedElements(bool clockwise)
+{
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+	    Element* element = *it;
+	    // Parent's element rotating...
+	    for(int i = 0; i < (int)element->GetParentList().size(); i++) {
+		    Element* parent = element->GetParentList()[i];
+		    if(parent) {  // Check if parent is not null
+			    if(parent->IsSelected()) {
+				    element->RotateNode(parent, clockwise);
+				    // Update the positions used on motion action, the element will not be necessarily
+				    // moved.
+				    element->StartMove(m_camera->GetMousePosition());
+				}
+			}
+		}
+	    if(element->IsSelected()) {
+		    element->Rotate(clockwise);
+		    element->StartMove(m_camera->GetMousePosition());
+		}
+	}
+    Redraw();
 }

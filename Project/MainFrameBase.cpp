@@ -147,6 +147,10 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_FIT, _("Fit"), wxXmlResource::Get()->LoadBitmap(wxT("fit32")), _("Applies the drag and zoom tools to show all elements in workspace"), wxRIBBON_BUTTON_NORMAL);
     
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ROTATEC, _("Rotate Clockwise"), wxXmlResource::Get()->LoadBitmap(wxT("rotateClock32")), _("Rotate clockwise"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ROTATECC, _("Rotate Counter-clockwise"), wxXmlResource::Get()->LoadBitmap(wxT("rotateCounterClock32")), _("Rotate the selected elements counter-clockwise"), wxRIBBON_BUTTON_NORMAL);
+    
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_PROJSETTINGS, _("Project Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the main settings of the current project"), wxRIBBON_BUTTON_NORMAL);
     m_ribbonButtonBarCircuit->Realize();
     
@@ -253,6 +257,8 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_ribbonButtonBarCircuit->Connect(ID_RIBBON_MOVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnMoveClick), NULL, this);
     m_ribbonButtonBarCircuit->Connect(ID_RIBBON_DELETE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDeleteClick), NULL, this);
     m_ribbonButtonBarCircuit->Connect(ID_RIBBON_FIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFitClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_ROTATEC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotClockClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_ROTATECC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotCounterClockClick), NULL, this);
     m_ribbonButtonBarReports->Connect(ID_RIBBON_DATAREPORT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDataReportClick), NULL, this);
     m_ribbonButtonBarReports->Connect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
     m_ribbonButtonBarReports->Connect(ID_RIBBON_SNAPSHOT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSnapshotClick), NULL, this);
@@ -290,6 +296,8 @@ MainFrameBase::~MainFrameBase()
     m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_MOVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnMoveClick), NULL, this);
     m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_DELETE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDeleteClick), NULL, this);
     m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_FIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFitClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_ROTATEC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotClockClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_ROTATECC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotCounterClockClick), NULL, this);
     m_ribbonButtonBarReports->Disconnect(ID_RIBBON_DATAREPORT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDataReportClick), NULL, this);
     m_ribbonButtonBarReports->Disconnect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
     m_ribbonButtonBarReports->Disconnect(ID_RIBBON_SNAPSHOT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSnapshotClick), NULL, this);

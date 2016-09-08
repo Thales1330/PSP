@@ -101,8 +101,6 @@ void Load::Rotate(bool clockwise)
 bool Load::GetContextMenu(wxMenu& menu)
 {
 	menu.Append(ID_EDIT_LOAD, _("Edit Load"));
-    menu.Append(ID_ROTATE_CLOCK, _("Rotate clockwise"));
-	menu.Append(ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    menu.Append(ID_DELETE, _("Delete"));
+    GeneralMenuItens(menu);
     return true;
 }
