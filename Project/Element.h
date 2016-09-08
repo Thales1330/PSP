@@ -126,6 +126,8 @@ class Element
     virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
     virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
 	
+	virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
+	
 	virtual void GeneralMenuItens(wxMenu& menu);
    protected:
     std::vector<Element*> m_parentList;

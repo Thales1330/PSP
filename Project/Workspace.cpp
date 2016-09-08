@@ -37,8 +37,8 @@ void Camera::SetScale(wxPoint2DDouble screenPoint, double delta)
     m_scale += delta;
 
     // Limits: 5% - 300%
-    if(m_scale < 0.05) m_scale = 0.05;
-    if(m_scale > 3.0) m_scale = 3.0;
+    if(m_scale < m_zoomMin) m_scale = m_zoomMin;
+    if(m_scale > m_zoomMax) m_scale = m_zoomMax;
 
     m_translation += screenPoint * (1.0 - m_scale) / m_scale;
 }
@@ -140,7 +140,7 @@ void Workspace::SetViewport()
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
     bool foundElement = false;
-    if(m_mode == MODE_INSERT) {
+    if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT) {
 	    // Get the last element inserted on the list.
 	    Element* newElement = *(m_elementList.end() - 1);
 	    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
@@ -381,6 +381,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 		break;
 
 	    case MODE_DRAG:
+		case MODE_DRAG_INSERT:
 		{
 		    m_camera->SetTranslation(event.GetPosition());
 		    redraw = true;
@@ -505,18 +506,25 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 void Workspace::OnMiddleDown(wxMouseEvent& event)
 {
-    if(m_mode != MODE_INSERT) {
-	    // Set to drag mode.
+	// Set to drag mode.
+    if(m_mode != MODE_INSERT && m_mode != MODE_DRAG_INSERT) {
 	    m_mode = MODE_DRAG;
-	    m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
 	}
+	else
+	{
+		m_mode = MODE_DRAG_INSERT;
+	}
+	m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
 }
 void Workspace::OnMiddleUp(wxMouseEvent& event)
 {
-    if(m_mode != MODE_INSERT) {
+    if(m_mode != MODE_INSERT && m_mode != MODE_DRAG_INSERT) {
 	    // Set to edit mode back.
 	    m_mode = MODE_EDIT;
+	}
+	else if(m_mode == MODE_DRAG_INSERT) {
+		m_mode = MODE_INSERT;
 	}
     UpdateStatusBar();
 }
@@ -548,29 +556,19 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 			break;
 		    case WXK_DELETE:  // Delete selected elements
 			{
-			    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-				    Element* element = *it;
-
-				    if(element->IsSelected()) {
-					    for(auto itp = m_elementList.begin(); itp != m_elementList.end(); ++itp) {
-						    Element* child = *itp;
-						    // Parent's element being deleted...
-						    for(int i = 0; i < (int)child->GetParentList().size(); i++) {
-							    Element* parent = child->GetParentList()[i];
-							    if(parent == element) {
-								    child->RemoveParent(parent);
-								}
-							}
-						}
-					    m_elementList.erase(it--);
-					}
+			    DeleteSelectedElements();
+			}
+			break;
+		    case 'F':
+			{
+			    if(event.GetModifiers() == wxMOD_SHIFT) {
+				    Fit();
 				}
-			    Redraw();
 			}
 			break;
 		    case 'R':  // Rotate the selected elements.
 			{
-				RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
+			    RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
 			}
 			break;
 		    case 'B':  // Insert a bus.
@@ -594,8 +592,8 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					    m_statusBar->SetStatusText(
 					        _("Insert Load: Click on a buses, ESC to cancel."));
 					}
-				    else
-					{  // Insert a power line.
+				    else  // Insert a power line.
+					{
 					    Line* newLine = new Line();
 					    m_elementList.push_back(newLine);
 					    m_mode = MODE_INSERT;
@@ -697,6 +695,7 @@ void Workspace::UpdateStatusBar()
 		break;
 
 	    case MODE_INSERT:
+		case MODE_DRAG_INSERT:
 		{
 		    m_statusBar->SetStatusText(_("MODE: INSERT"), 1);
 		}
@@ -833,4 +832,63 @@ void Workspace::RotateSelectedElements(bool clockwise)
 		}
 	}
     Redraw();
+}
+
+void Workspace::DeleteSelectedElements()
+{
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+	    Element* element = *it;
+
+	    if(element->IsSelected()) {
+		    for(auto itp = m_elementList.begin(); itp != m_elementList.end(); ++itp) {
+			    Element* child = *itp;
+			    // Parent's element being deleted...
+			    for(int i = 0; i < (int)child->GetParentList().size(); i++) {
+				    Element* parent = child->GetParentList()[i];
+				    if(parent == element) {
+					    child->RemoveParent(parent);
+					}
+				}
+			}
+		    m_elementList.erase(it--);
+		}
+	}
+    Redraw();
+}
+
+void Workspace::Fit()
+{
+    if(m_elementList.size() > 0) {
+	    wxPoint2DDouble leftUpCorner(0, 0);
+	    wxPoint2DDouble rightDownCorner(0, 0);
+	    m_elementList[0]->CalculateBoundaries(leftUpCorner, rightDownCorner);
+
+	    for(auto it = m_elementList.begin() + 1; it != m_elementList.end(); it++) {
+		    Element* element = *it;
+		    wxPoint2DDouble leftUp;
+		    wxPoint2DDouble rightDown;
+		    element->CalculateBoundaries(leftUp, rightDown);
+		    if(leftUp.m_x < leftUpCorner.m_x) leftUpCorner.m_x = leftUp.m_x;
+		    if(leftUp.m_y < leftUpCorner.m_y) leftUpCorner.m_y = leftUp.m_y;
+		    if(rightDown.m_x > rightDownCorner.m_x) rightDownCorner.m_x = rightDown.m_x;
+		    if(rightDown.m_y > rightDownCorner.m_y) rightDownCorner.m_y = rightDown.m_y;
+		}
+
+	    int width = 0.0;
+	    int height = 0.0;
+	    GetSize(&width, &height);
+
+	    double scaleX = double(width) / (rightDownCorner.m_x - leftUpCorner.m_x);
+	    double scaleY = double(height) / (rightDownCorner.m_y - leftUpCorner.m_y);
+
+	    double scale = scaleX < scaleY ? scaleX : scaleY;
+	    if(scale > m_camera->GetZoomMax()) scale = m_camera->GetZoomMax();
+	    if(scale < m_camera->GetZoomMin()) scale = m_camera->GetZoomMin();
+
+	    m_camera->SetScale(scale);
+
+	    m_camera->StartTranslation(leftUpCorner);
+	    m_camera->SetTranslation(wxPoint2DDouble(0, 0));
+	    Redraw();
+	}
 }

@@ -3,6 +3,8 @@
 
 #include "Branch.h"
 
+#include <wx/log.h>
+
 class Line : public Branch
 {
    public:
@@ -22,6 +24,7 @@ class Line : public Branch
     virtual bool GetContextMenu(wxMenu& menu);
     virtual void RemoveNode(wxPoint2DDouble point);
     virtual void AddNode(wxPoint2DDouble point);
+	virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
 
    protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;

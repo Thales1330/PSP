@@ -28,6 +28,7 @@ enum WorkspaceMode
     MODE_MOVE_PICKBOX,
 	MODE_MOVE_NODE,
     MODE_DRAG,
+	MODE_DRAG_INSERT,
     MODE_INSERT,
     MODE_SELECTION_RECT
 };
@@ -42,6 +43,7 @@ class Workspace : public WorkspaceBase
     wxString GetName() const { return m_name; }
     std::vector<Element*> GetElementList() const { return m_elementList; }
 	WorkspaceMode GetWorkspaceMode() const { return m_mode; }
+	Camera* GetCamera() const { return m_camera; }
 	
 	void SetName(wxString name) { m_name = name; }
 	void SetElementList(std::vector<Element*> elementList) { m_elementList = elementList; }
@@ -50,6 +52,8 @@ class Workspace : public WorkspaceBase
 	
 	void Redraw() { m_glCanvas->Refresh(); }
 	void RotateSelectedElements(bool clockwise = true);
+	void DeleteSelectedElements();
+	void Fit();
 
    protected:
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
@@ -89,6 +93,7 @@ class Camera
     ~Camera();
 
     void SetScale(wxPoint2DDouble screenPoint, double delta);
+	void SetScale(double scale) { m_scale = scale; }
     void SetTranslation(wxPoint2DDouble screenPoint);
     void StartTranslation(wxPoint2DDouble startPoint) { this->m_translationStartPt = startPoint; }
     void UpdateMousePosition(wxPoint2DDouble mousePosition) { this->m_mousePosition = mousePosition; }
@@ -96,6 +101,8 @@ class Camera
     wxPoint2DDouble GetTranslation() const { return m_translation; }
     wxPoint2DDouble GetMousePosition(bool worldCoords = true) const;
     wxPoint2DDouble ScreenToWorld(wxPoint2DDouble screenCoords) const;
+	double GetZoomMin() const { return m_zoomMin; }
+	double GetZoomMax() const { return m_zoomMax; }
 
    protected:
     wxPoint2DDouble m_translation;
@@ -103,6 +110,9 @@ class Camera
     double m_scale;
 
     wxPoint2DDouble m_mousePosition;
+	
+	double m_zoomMin = 0.05;
+	double m_zoomMax = 3.0;
 };
 
 #endif  // WORKSPACE_H

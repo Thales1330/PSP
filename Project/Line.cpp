@@ -293,3 +293,18 @@ void Line::AddNode(wxPoint2DDouble point)
 	}
     UpdateSwitchesPosition();
 }
+
+void Line::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const
+{
+	if(m_pointList.size() > 0) {
+		// Check points list boundaries.
+		leftUp = m_pointList[0];
+		rightBottom = m_pointList[0];
+		for(int i = 1; i < (int)m_pointList.size(); i++) {
+			if(m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
+			if(m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
+			if(m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
+			if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
+		}
+	}
+}

@@ -134,7 +134,13 @@ void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+		workspace->DeleteSelectedElements();
+	}
+}
 void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 {
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
@@ -150,8 +156,40 @@ void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 
 void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+		workspace->Fit();
+	}
+}
+void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+	    auto elementList = workspace->GetElementList();
+	    // Calculate the average position of selected elements.
+	    wxPoint2DDouble averagePos(0, 0);
+	    int numSelElements = 0;
+	    for(auto it = elementList.begin(); it != elementList.end(); it++) {
+		    Element* element = *it;
+		    if(element->IsSelected()) {
+			    averagePos += element->GetPosition();
+			    numSelElements++;
+			}
+		}
+	    averagePos =
+	        wxPoint2DDouble(averagePos.m_x / double(numSelElements), averagePos.m_y / double(numSelElements));
+	    // Set the move position to the average of selected elements.
+	    for(auto it = elementList.begin(); it != elementList.end(); it++) {
+		    Element* element = *it;
+		    if(element->IsSelected()) {
+			    element->StartMove(averagePos);
+			}
+		}
+	    workspace->SetWorkspaceMode(MODE_MOVE_ELEMENT);
+	}
+}
 void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPasteClick(wxRibbonButtonBarEvent& event) {}
@@ -270,7 +308,7 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
     auto it = m_workspaceList.begin();
     while(it != m_workspaceList.end()) {
 	    if(*it == m_auiNotebook->GetCurrentPage()) {
-		    //delete *it; //Memory leak?
+		    // delete *it; //Memory leak?
 		    m_workspaceList.erase(it);
 		    break;
 		}
@@ -280,15 +318,15 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 }
 void MainFrame::OnRotClockClick(wxRibbonButtonBarEvent& event)
 {
-	Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
-	if(workspace) {
-		workspace->RotateSelectedElements();
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+	    workspace->RotateSelectedElements();
 	}
 }
 void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
 {
-	Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
-	if(workspace) {
-		workspace->RotateSelectedElements(false);
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+	    workspace->RotateSelectedElements(false);
 	}
 }

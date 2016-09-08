@@ -295,15 +295,44 @@ void Element::SetOnline(bool online)
 
 void Element::GeneralMenuItens(wxMenu& menu)
 {
-	wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
-	clockItem->SetBitmap(wxImage("data\\images\\menu\\rotateClock16.png"));
-	menu.Append(clockItem);
-	
-	wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-	counterClockItem->SetBitmap(wxImage("data\\images\\menu\\rotateCounterClock16.png"));
-	menu.Append(counterClockItem);
-	
+    wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
+    clockItem->SetBitmap(wxImage("data\\images\\menu\\rotateClock16.png"));
+    menu.Append(clockItem);
+
+    wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
+    counterClockItem->SetBitmap(wxImage("data\\images\\menu\\rotateCounterClock16.png"));
+    menu.Append(counterClockItem);
+
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-	deleteItem->SetBitmap(wxImage("data\\images\\menu\\delete16.png"));
-	menu.Append(deleteItem);
+    deleteItem->SetBitmap(wxImage("data\\images\\menu\\delete16.png"));
+    menu.Append(deleteItem);
+}
+
+void Element::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const
+{
+    // Check rect corners boundaries.
+
+    // Get rectangle corners
+    wxPoint2DDouble rectCorner[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
+                                     m_rect.GetRightTop()};
+    // Rotate corners.
+    for(int i = 0; i < 4; ++i) {
+	    rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle);
+	}
+    leftUp = rectCorner[0];
+    rightBottom = rectCorner[0];
+    for(int i = 1; i < 4; ++i) {
+	    if(rectCorner[i].m_x < leftUp.m_x) leftUp.m_x = rectCorner[i].m_x;
+	    if(rectCorner[i].m_y < leftUp.m_y) leftUp.m_y = rectCorner[i].m_y;
+	    if(rectCorner[i].m_x > rightBottom.m_x) rightBottom.m_x = rectCorner[i].m_x;
+	    if(rectCorner[i].m_y > rightBottom.m_y) rightBottom.m_y = rectCorner[i].m_y;
+	}
+
+    // Check points list boundaries.
+    for(int i = 0; i < (int)m_pointList.size(); i++) {
+	    if(m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
+	    if(m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
+	    if(m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
+	    if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
+	}
 }
