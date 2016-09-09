@@ -129,6 +129,8 @@ class Element
 	virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
 	
 	virtual void GeneralMenuItens(wxMenu& menu);
+	
+	virtual bool ShowForm(wxWindow* parent) { return false; }
    protected:
     std::vector<Element*> m_parentList;
 

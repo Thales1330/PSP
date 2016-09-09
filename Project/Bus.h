@@ -1,6 +1,7 @@
 #ifndef BUS_H
 #define BUS_H
 
+#include "BusForm.h"
 #include "Element.h"
 
 class Bus : public Element
@@ -18,6 +19,7 @@ class Bus : public Element
     virtual void MovePickbox(wxPoint2DDouble position);
     virtual bool PickboxContains(wxPoint2DDouble position);
     virtual bool GetContextMenu(wxMenu& menu);
+	virtual bool ShowForm(wxWindow* parent);
 };
 
 #endif  // BUS_H

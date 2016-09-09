@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Thales
-Date                   :=08/09/2016
+Date                   :=09/09/2016
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -64,9 +64,9 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 CodeLiteDir:=C:\Program Files\CodeLite
 WXWIN:=C:\wxWidgets-3.1.0
 WXCFG:=gcc_dll\mswu
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) 
 
 
 
@@ -155,6 +155,22 @@ $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(DependSuffix): WorkspaceBitmaps.c
 $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(PreprocessSuffix): WorkspaceBitmaps.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(PreprocessSuffix)WorkspaceBitmaps.cpp
 
+$(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix): BusFormBitmaps.cpp $(IntermediateDirectory)/BusFormBitmaps.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/BusFormBitmaps.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/BusFormBitmaps.cpp$(DependSuffix): BusFormBitmaps.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/BusFormBitmaps.cpp$(DependSuffix) -MM BusFormBitmaps.cpp
+
+$(IntermediateDirectory)/BusFormBitmaps.cpp$(PreprocessSuffix): BusFormBitmaps.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/BusFormBitmaps.cpp$(PreprocessSuffix)BusFormBitmaps.cpp
+
+$(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix): ElementFormBitmaps.cpp $(IntermediateDirectory)/ElementFormBitmaps.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/ElementFormBitmaps.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ElementFormBitmaps.cpp$(DependSuffix): ElementFormBitmaps.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ElementFormBitmaps.cpp$(DependSuffix) -MM ElementFormBitmaps.cpp
+
+$(IntermediateDirectory)/ElementFormBitmaps.cpp$(PreprocessSuffix): ElementFormBitmaps.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ElementFormBitmaps.cpp$(PreprocessSuffix)ElementFormBitmaps.cpp
+
 $(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix): MainFrameBase.cpp $(IntermediateDirectory)/MainFrameBase.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/MainFrameBase.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/MainFrameBase.cpp$(DependSuffix): MainFrameBase.cpp
@@ -170,6 +186,14 @@ $(IntermediateDirectory)/WorkspaceBase.cpp$(DependSuffix): WorkspaceBase.cpp
 
 $(IntermediateDirectory)/WorkspaceBase.cpp$(PreprocessSuffix): WorkspaceBase.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/WorkspaceBase.cpp$(PreprocessSuffix)WorkspaceBase.cpp
+
+$(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix): ElementForm.cpp $(IntermediateDirectory)/ElementForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/ElementForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ElementForm.cpp$(DependSuffix): ElementForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ElementForm.cpp$(DependSuffix) -MM ElementForm.cpp
+
+$(IntermediateDirectory)/ElementForm.cpp$(PreprocessSuffix): ElementForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ElementForm.cpp$(PreprocessSuffix)ElementForm.cpp
 
 $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix): Bus.cpp $(IntermediateDirectory)/Bus.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Bus.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IncludePath)
@@ -266,6 +290,14 @@ $(IntermediateDirectory)/Capacitor.cpp$(DependSuffix): Capacitor.cpp
 
 $(IntermediateDirectory)/Capacitor.cpp$(PreprocessSuffix): Capacitor.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Capacitor.cpp$(PreprocessSuffix)Capacitor.cpp
+
+$(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix): BusForm.cpp $(IntermediateDirectory)/BusForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/BusForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/BusForm.cpp$(DependSuffix): BusForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/BusForm.cpp$(DependSuffix) -MM BusForm.cpp
+
+$(IntermediateDirectory)/BusForm.cpp$(PreprocessSuffix): BusForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/BusForm.cpp$(PreprocessSuffix)BusForm.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

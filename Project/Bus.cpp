@@ -165,3 +165,16 @@ bool Bus::GetContextMenu(wxMenu& menu)
     GeneralMenuItens(menu);
     return true;
 }
+
+bool Bus::ShowForm(wxWindow* parent)
+{
+    BusForm* busForm  = new BusForm(parent);
+    if(busForm->ShowModal() == wxID_OK){
+		
+		busForm->Destroy();
+		return true;
+	}
+	
+	busForm->Destroy();
+    return false;
+}

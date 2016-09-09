@@ -8,10 +8,11 @@
 #include <wx/statusbr.h>
 
 #include "WorkspaceBase.h"
+#include "Bus.h"
 
 class Camera;
 class Element;
-class Bus;
+//class Bus;
 class Line;
 class Transformer;
 class SyncGenerator;

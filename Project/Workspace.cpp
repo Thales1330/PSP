@@ -1,7 +1,7 @@
 #include "Workspace.h"
 
 #include "Element.h"
-#include "Bus.h"
+//#include "Bus.h"
 #include "Line.h"
 #include "Transformer.h"
 #include "SyncGenerator.h"
@@ -231,7 +231,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 
 	    // Click in an element.
 	    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-		    // Open the form.
+		    element->ShowForm(this);
 		}
 
 	    // Click in a switch.

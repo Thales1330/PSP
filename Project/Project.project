@@ -31,6 +31,9 @@
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
       <File Name="Workspace.cpp"/>
+      <VirtualDirectory Name="element forms">
+        <File Name="BusForm.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
@@ -58,6 +61,9 @@
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>
       <File Name="Workspace.h"/>
+      <VirtualDirectory Name="element forms">
+        <File Name="BusForm.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
@@ -67,15 +73,20 @@
     <VirtualDirectory Name="resources">
       <File Name="MainFrameBitmaps.cpp"/>
       <File Name="WorkspaceBitmaps.cpp"/>
+      <File Name="BusFormBitmaps.cpp"/>
+      <File Name="ElementFormBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
       <File Name="MainFrameBase.cpp"/>
       <File Name="WorkspaceBase.h"/>
       <File Name="WorkspaceBase.cpp"/>
+      <File Name="ElementForm.h"/>
+      <File Name="ElementForm.cpp"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>
+    <File Name="ElementForm.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
