@@ -336,3 +336,31 @@ void Element::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& righ
 	    if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
 	}
 }
+
+bool Element::DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg)
+{
+	double dValue = 0.0;
+	
+	if(!strValue.ToDouble(&dValue)) {
+		wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		msgDialog.ShowModal();
+		return false;
+	}
+	
+	value = dValue;
+	return true;
+}
+
+bool Element::IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg)
+{
+	long int iValue = 0;
+	
+	if(!strValue.ToLong(&iValue)) {
+		wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		msgDialog.ShowModal();
+		return false;
+	}
+	
+	value = iValue;
+	return true;
+}

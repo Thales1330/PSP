@@ -148,6 +148,9 @@ Release/Bus.cpp.o: Bus.cpp Bus.h BusForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/ctrlsub.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ctrlsub.h \
  C:/wxWidgets-3.1.0/include/wx/msw/choice.h \
+ C:/wxWidgets-3.1.0/include/wx/checkbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h \
  C:/wxWidgets-3.1.0/include/wx/button.h \
  C:/wxWidgets-3.1.0/include/wx/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
@@ -480,6 +483,12 @@ C:/wxWidgets-3.1.0/include/wx/ctrlsub.h:
 C:/wxWidgets-3.1.0/include/wx/msw/ctrlsub.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/choice.h:
+
+C:/wxWidgets-3.1.0/include/wx/checkbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h:
 
 C:/wxWidgets-3.1.0/include/wx/button.h:
 

@@ -34,6 +34,22 @@ enum WorkspaceMode
     MODE_SELECTION_RECT
 };
 
+enum ElementID
+{
+	ID_BUS = 0,
+	ID_LINE,
+	ID_TRANSFORMER,
+	ID_SYNCGENERATOR,
+	ID_INDMOTOR,
+	ID_SYNCMOTOR,
+	ID_LOAD,
+	ID_CAPACITOR,
+	ID_INDUCTOR,
+	ID_TEXT,
+	
+	NUM_ELEMENTS
+};
+
 class Workspace : public WorkspaceBase
 {
    public:
@@ -55,6 +71,9 @@ class Workspace : public WorkspaceBase
 	void RotateSelectedElements(bool clockwise = true);
 	void DeleteSelectedElements();
 	void Fit();
+	
+	int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
+	void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
 
    protected:
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
@@ -79,6 +98,8 @@ class Workspace : public WorkspaceBase
     WorkspaceMode m_mode = MODE_EDIT;
 
     std::vector<Element*> m_elementList;
+	//int m_numElements = NUM_ELEMENTS;
+	int m_elementNumber[NUM_ELEMENTS];
 
     void UpdateStatusBar();
 

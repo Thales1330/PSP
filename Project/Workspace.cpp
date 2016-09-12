@@ -59,6 +59,10 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : 
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 
+    for(int i = 0; i < NUM_ELEMENTS; ++i) {
+	    m_elementNumber[i] = 1;
+	}
+
     const int widths[4] = {-3, -1, 100, 100};
     m_statusBar->SetStatusWidths(4, widths);
 }
@@ -231,7 +235,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 
 	    // Click in an element.
 	    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-		    element->ShowForm(this);
+		    element->ShowForm(this, element);
 		}
 
 	    // Click in a switch.
@@ -381,7 +385,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 		break;
 
 	    case MODE_DRAG:
-		case MODE_DRAG_INSERT:
+	    case MODE_DRAG_INSERT:
 		{
 		    m_camera->SetTranslation(event.GetPosition());
 		    redraw = true;
@@ -506,15 +510,15 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 void Workspace::OnMiddleDown(wxMouseEvent& event)
 {
-	// Set to drag mode.
+    // Set to drag mode.
     if(m_mode != MODE_INSERT && m_mode != MODE_DRAG_INSERT) {
 	    m_mode = MODE_DRAG;
 	}
-	else
+    else
 	{
-		m_mode = MODE_DRAG_INSERT;
+	    m_mode = MODE_DRAG_INSERT;
 	}
-	m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
+    m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
 }
 void Workspace::OnMiddleUp(wxMouseEvent& event)
@@ -523,8 +527,9 @@ void Workspace::OnMiddleUp(wxMouseEvent& event)
 	    // Set to edit mode back.
 	    m_mode = MODE_EDIT;
 	}
-	else if(m_mode == MODE_DRAG_INSERT) {
-		m_mode = MODE_INSERT;
+    else if(m_mode == MODE_DRAG_INSERT)
+	{
+	    m_mode = MODE_INSERT;
 	}
     UpdateStatusBar();
 }
@@ -574,7 +579,9 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		    case 'B':  // Insert a bus.
 			{
 			    if(m_mode != MODE_INSERT) {
-				    Bus* newBus = new Bus(m_camera->ScreenToWorld(event.GetPosition()));
+				    Bus* newBus = new Bus(m_camera->ScreenToWorld(event.GetPosition()),
+				                          wxString::Format(_("Bus %d"), GetElementNumber(ID_BUS)));
+				    IncrementElementNumber(ID_BUS);
 				    m_elementList.push_back(newBus);
 				    m_mode = MODE_INSERT;
 				    m_statusBar->SetStatusText(_("Insert Bus: Click to insert, ESC to cancel."));
@@ -695,7 +702,7 @@ void Workspace::UpdateStatusBar()
 		break;
 
 	    case MODE_INSERT:
-		case MODE_DRAG_INSERT:
+	    case MODE_DRAG_INSERT:
 		{
 		    m_statusBar->SetStatusText(_("MODE: INSERT"), 1);
 		}

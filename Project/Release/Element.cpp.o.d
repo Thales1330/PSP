@@ -108,7 +108,29 @@ Release/Element.cpp.o: Element.cpp Element.h \
  C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/dialog.h \
+ C:/wxWidgets-3.1.0/include/wx/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h \
+ C:/wxWidgets-3.1.0/include/wx/iconbndl.h \
+ C:/wxWidgets-3.1.0/include/wx/icon.h \
+ C:/wxWidgets-3.1.0/include/wx/iconloc.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/icon.h \
+ C:/wxWidgets-3.1.0/include/wx/weakref.h \
+ C:/wxWidgets-3.1.0/include/wx/meta/int2type.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/containr.h \
+ C:/wxWidgets-3.1.0/include/wx/sharedptr.h \
+ C:/wxWidgets-3.1.0/include/wx/atomic.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/wrapwin.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/dialog.h \
+ C:/wxWidgets-3.1.0/include/wx/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/stockitem.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h
 
 Element.h:
 
@@ -333,3 +355,47 @@ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
 C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/dialog.h:
+
+C:/wxWidgets-3.1.0/include/wx/toplevel.h:
+
+C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h:
+
+C:/wxWidgets-3.1.0/include/wx/iconbndl.h:
+
+C:/wxWidgets-3.1.0/include/wx/icon.h:
+
+C:/wxWidgets-3.1.0/include/wx/iconloc.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/icon.h:
+
+C:/wxWidgets-3.1.0/include/wx/weakref.h:
+
+C:/wxWidgets-3.1.0/include/wx/meta/int2type.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h:
+
+C:/wxWidgets-3.1.0/include/wx/containr.h:
+
+C:/wxWidgets-3.1.0/include/wx/sharedptr.h:
+
+C:/wxWidgets-3.1.0/include/wx/atomic.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/wrapwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/dialog.h:
+
+C:/wxWidgets-3.1.0/include/wx/panel.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/panel.h:
+
+C:/wxWidgets-3.1.0/include/wx/stockitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:

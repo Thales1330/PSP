@@ -136,9 +136,9 @@ void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
 {
-	Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
     if(workspace) {
-		workspace->DeleteSelectedElements();
+	    workspace->DeleteSelectedElements();
 	}
 }
 void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
@@ -158,9 +158,9 @@ void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
 {
-	Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
     if(workspace) {
-		workspace->Fit();
+	    workspace->Fit();
 	}
 }
 void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
@@ -218,7 +218,10 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 			{
 			    case ID_ADDMENU_BUS:
 				{
-				    Bus* newBus = new Bus(wxPoint2DDouble(0, 0));
+				    Bus* newBus =
+				        new Bus(wxPoint2DDouble(0, 0),
+				                wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
+				    workspace->IncrementElementNumber(ID_BUS);
 				    elementList.push_back(newBus);
 				    statusBarText = _("Insert Bus: Click to insert, ESC to cancel.");
 				    newElement = true;

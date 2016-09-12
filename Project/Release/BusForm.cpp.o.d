@@ -169,7 +169,18 @@ Release/BusForm.cpp.o: BusForm.cpp BusForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/treebase.h \
  C:/wxWidgets-3.1.0/include/wx/itemid.h \
  C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
- C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Bus.h Element.h \
+ C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/stockitem.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/geometry.h \
+ C:/wxWidgets-3.1.0/include/wx/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 BusForm.h:
 
@@ -518,3 +529,29 @@ C:/wxWidgets-3.1.0/include/wx/itemid.h:
 C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
+
+Bus.h:
+
+Element.h:
+
+C:/wxWidgets-3.1.0/include/wx/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/stockitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/geometry.h:
+
+C:/wxWidgets-3.1.0/include/wx/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menu.h:

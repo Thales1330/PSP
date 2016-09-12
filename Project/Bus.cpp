@@ -8,6 +8,15 @@ Bus::Bus(wxPoint2DDouble position) : Element()
     SetPosition(position);
 }
 
+Bus::Bus(wxPoint2DDouble position, wxString name)
+{
+    m_width = 100.0;
+    m_height = 5.0;
+    SetPosition(position);
+
+    m_electricalData.name = name;
+}
+
 Bus::~Bus() {}
 void Bus::Draw(wxPoint2DDouble translation, double scale) const
 {
@@ -166,15 +175,14 @@ bool Bus::GetContextMenu(wxMenu& menu)
     return true;
 }
 
-bool Bus::ShowForm(wxWindow* parent)
+bool Bus::ShowForm(wxWindow* parent, Element* element)
 {
-    BusForm* busForm  = new BusForm(parent);
-    if(busForm->ShowModal() == wxID_OK){
-		
-		busForm->Destroy();
-		return true;
+    BusForm* busForm = new BusForm(parent, this);
+    if(busForm->ShowModal() == wxID_OK) {
+	    busForm->Destroy();
+	    return true;
 	}
-	
-	busForm->Destroy();
+
+    busForm->Destroy();
     return false;
 }

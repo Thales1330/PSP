@@ -1,6 +1,7 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+#include <wx/msgdlg.h>
 #include <wx/geometry.h>
 #include <wx/cursor.h>
 #include <wx/menu.h>
@@ -35,6 +36,35 @@ enum ContextMenuID
     ID_ROTATE_CLOCK,
 	ID_ROTATE_COUNTERCLOCK,
     ID_DELETE
+};
+
+enum ElectricalUnit
+{
+	UNIT_PU = 0,
+	UNIT_V,
+	UNIT_kV,
+	UNIT_A,
+	UNIT_kA,
+	UNIT_W,
+	UNIT_kW,
+	UNIT_MW,
+	UNIT_VA,
+	UNIT_kVA,
+	UNIT_MVA,
+	UNIT_VAr,
+	UNIT_kVAr,
+	UNIT_MVAr
+};
+
+enum FaultData
+{
+	FAULT_THREEPHASE = 0,
+	FAULT_2LINE,
+	FAULT_2LINE_GROUND,
+	FAULT_LINE_GROUND,
+	FAULT_LINE_A,
+	FAULT_LINE_B,
+	FAULT_LINE_C
 };
 
 class Element
@@ -130,7 +160,11 @@ class Element
 	
 	virtual void GeneralMenuItens(wxMenu& menu);
 	
-	virtual bool ShowForm(wxWindow* parent) { return false; }
+	virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
+	
+	bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
+	bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
+	
    protected:
     std::vector<Element*> m_parentList;
 

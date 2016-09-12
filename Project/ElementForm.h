@@ -66,10 +66,30 @@ protected:
     wxStaticText* m_staticTextReactance;
     wxTextCtrl* m_textCtrlFaultReactance;
     wxStaticText* m_staticTextPU_2;
+    wxPanel* m_panelStability;
+    wxCheckBox* m_checkBoxPlotData;
+    wxCheckBox* m_checkBoxStabFault;
+    wxStaticText* m_staticTextStabFaultTime;
+    wxTextCtrl* m_textCtrlStabFaultTime;
+    wxStaticText* m_staticTextS_1;
+    wxStaticText* m_staticTextStabFaultLength;
+    wxTextCtrl* m_textCtrlStabFaultLength;
+    wxStaticText* m_staticTextS_2;
+    wxStaticText* m_staticTextStabFaultResistance;
+    wxTextCtrl* m_textCtrlStabFaultResistance;
+    wxStaticText* m_staticTextPU_3;
+    wxStaticText* m_staticTextStabFaultReactance;
+    wxTextCtrl* m_textCtrlStabFaultReactance;
+    wxStaticText* m_staticTextPU_4;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
 protected:
+    virtual void OnNominalVoltageChoice(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnControlledVoltageClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnInsertFaultClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnFaultTypeChoice(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnInsertStabFaultClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
 
@@ -96,6 +116,21 @@ public:
     wxTextCtrl* GetTextCtrlFaultReactance() { return m_textCtrlFaultReactance; }
     wxStaticText* GetStaticTextPU_2() { return m_staticTextPU_2; }
     wxPanel* GetPanelFault() { return m_panelFault; }
+    wxCheckBox* GetCheckBoxPlotData() { return m_checkBoxPlotData; }
+    wxCheckBox* GetCheckBoxStabFault() { return m_checkBoxStabFault; }
+    wxStaticText* GetStaticTextStabFaultTime() { return m_staticTextStabFaultTime; }
+    wxTextCtrl* GetTextCtrlStabFaultTime() { return m_textCtrlStabFaultTime; }
+    wxStaticText* GetStaticTextS_1() { return m_staticTextS_1; }
+    wxStaticText* GetStaticTextStabFaultLength() { return m_staticTextStabFaultLength; }
+    wxTextCtrl* GetTextCtrlStabFaultLength() { return m_textCtrlStabFaultLength; }
+    wxStaticText* GetStaticTextS_2() { return m_staticTextS_2; }
+    wxStaticText* GetStaticTextStabFaultResistance() { return m_staticTextStabFaultResistance; }
+    wxTextCtrl* GetTextCtrlStabFaultResistance() { return m_textCtrlStabFaultResistance; }
+    wxStaticText* GetStaticTextPU_3() { return m_staticTextPU_3; }
+    wxStaticText* GetStaticTextStabFaultReactance() { return m_staticTextStabFaultReactance; }
+    wxTextCtrl* GetTextCtrlStabFaultReactance() { return m_textCtrlStabFaultReactance; }
+    wxStaticText* GetStaticTextPU_4() { return m_staticTextPU_4; }
+    wxPanel* GetPanelStability() { return m_panelStability; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
