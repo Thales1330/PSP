@@ -37,39 +37,34 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
     m_panelGeneral->SetSizer(boxSizerLvl2_1);
     
-    wxFlexGridSizer* flexGridSizerLvl3_1 = new wxFlexGridSizer(4, 2, 0, 0);
-    flexGridSizerLvl3_1->SetFlexibleDirection( wxBOTH );
-    flexGridSizerLvl3_1->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-    flexGridSizerLvl3_1->AddGrowableCol(1);
+    m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextName->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
-    boxSizerLvl2_1->Add(flexGridSizerLvl3_1, 1, wxEXPAND, WXC_FROM_DIP(5));
-    
-    m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Name:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    
-    flexGridSizerLvl3_1->Add(m_staticTextName, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlName = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlName->SetHint(wxT(""));
     #endif
     
-    flexGridSizerLvl3_1->Add(m_textCtrlName, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    m_textCtrlName->SetMinSize(wxSize(200,-1));
+    boxSizerLvl2_1->Add(m_textCtrlName, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlName->SetMinSize(wxSize(300,-1));
     
-    m_staticTextNomVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal voltage:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNomVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNomVoltage->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
-    flexGridSizerLvl3_1->Add(m_staticTextNomVoltage, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(m_staticTextNomVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxHORIZONTAL);
     
-    flexGridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_textCtrlNomVoltage = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlNomVoltage->SetHint(wxT(""));
     #endif
     
-    boxSizerLvl4_1->Add(m_textCtrlNomVoltage, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl4_1->Add(m_textCtrlNomVoltage, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceNomVoltageArr;
     m_choiceNomVoltageArr.Add(wxT("V"));
@@ -77,23 +72,23 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     m_choiceNomVoltage = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceNomVoltageArr, 0);
     m_choiceNomVoltage->SetSelection(1);
     
-    boxSizerLvl4_1->Add(m_choiceNomVoltage, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizerLvl4_1->Add(m_choiceNomVoltage, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
     
-    m_checkBoxCtrlVoltage = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Controlled voltage:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxCtrlVoltage = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Controlled voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     m_checkBoxCtrlVoltage->SetValue(false);
     
-    flexGridSizerLvl3_1->Add(m_checkBoxCtrlVoltage, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(m_checkBoxCtrlVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxHORIZONTAL);
     
-    flexGridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_textCtrlCtrlVoltage = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlCtrlVoltage->SetHint(wxT(""));
     #endif
     
-    boxSizerLvl4_2->Add(m_textCtrlCtrlVoltage, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl4_2->Add(m_textCtrlCtrlVoltage, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceCtrlVoltageArr;
     m_choiceCtrlVoltageArr.Add(wxT("p.u."));
@@ -101,12 +96,12 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     m_choiceCtrlVoltage = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceCtrlVoltageArr, 0);
     m_choiceCtrlVoltage->SetSelection(0);
     
-    boxSizerLvl4_2->Add(m_choiceCtrlVoltage, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizerLvl4_2->Add(m_choiceCtrlVoltage, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
     
     m_checkBoxSlackBus = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Slack Bus"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     m_checkBoxSlackBus->SetValue(false);
     
-    flexGridSizerLvl3_1->Add(m_checkBoxSlackBus, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(m_checkBoxSlackBus, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_panelFault = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelFault, _("Fault"), false);
@@ -119,16 +114,10 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     
     boxSizerLvl2_2->Add(m_checkBoxFault, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    wxFlexGridSizer* flexGridSizerLvl3_2 = new wxFlexGridSizer(3, 2, 0, 0);
-    flexGridSizerLvl3_2->SetFlexibleDirection( wxBOTH );
-    flexGridSizerLvl3_2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-    flexGridSizerLvl3_2->AddGrowableCol(1);
+    m_staticTextFaultType = new wxStaticText(m_panelFault, wxID_ANY, _("Fault type"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    m_staticTextFaultType->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
-    boxSizerLvl2_2->Add(flexGridSizerLvl3_2, 1, wxEXPAND, WXC_FROM_DIP(5));
-    
-    m_staticTextFaultType = new wxStaticText(m_panelFault, wxID_ANY, _("Fault type:"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
-    
-    flexGridSizerLvl3_2->Add(m_staticTextFaultType, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(m_staticTextFaultType, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceFaultTypeArr;
     m_choiceFaultTypeArr.Add(wxT("Three-phase"));
@@ -138,11 +127,12 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     m_choiceFaultType = new wxChoice(m_panelFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), m_choiceFaultTypeArr, 0);
     m_choiceFaultType->SetSelection(0);
     
-    flexGridSizerLvl3_2->Add(m_choiceFaultType, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(m_choiceFaultType, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticTextFaultPlace = new wxStaticText(m_panelFault, wxID_ANY, _("Fault place:"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    m_staticTextFaultPlace = new wxStaticText(m_panelFault, wxID_ANY, _("Fault place"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    m_staticTextFaultPlace->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
-    flexGridSizerLvl3_2->Add(m_staticTextFaultPlace, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(m_staticTextFaultPlace, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceFaultPlaceArr;
     m_choiceFaultPlaceArr.Add(wxT("Line A"));
@@ -151,56 +141,47 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     m_choiceFaultPlace = new wxChoice(m_panelFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), m_choiceFaultPlaceArr, 0);
     m_choiceFaultPlace->SetSelection(0);
     
-    flexGridSizerLvl3_2->Add(m_choiceFaultPlace, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(m_choiceFaultPlace, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    wxStaticBoxSizer* staticBoxSizerFaultImpedance = new wxStaticBoxSizer( new wxStaticBox(m_panelFault, wxID_ANY, _("Fault impedance")), wxVERTICAL);
+    m_staticTextFaultResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Fault resistance (R)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    m_staticTextFaultResistance->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
-    boxSizerLvl2_2->Add(staticBoxSizerFaultImpedance, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxFlexGridSizer* flexGridSizerLvl3_3 = new wxFlexGridSizer(2, 2, 0, 0);
-    flexGridSizerLvl3_3->SetFlexibleDirection( wxBOTH );
-    flexGridSizerLvl3_3->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-    flexGridSizerLvl3_3->AddGrowableCol(1);
-    
-    staticBoxSizerFaultImpedance->Add(flexGridSizerLvl3_3, 1, wxEXPAND, WXC_FROM_DIP(5));
-    
-    m_staticTextFaultResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Resistance (R):"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
-    
-    flexGridSizerLvl3_3->Add(m_staticTextFaultResistance, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(m_staticTextFaultResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxHORIZONTAL);
     
-    flexGridSizerLvl3_3->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_textCtrlFaultResistance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlFaultResistance->SetHint(wxT(""));
     #endif
     
-    boxSizerLvl4_3->Add(m_textCtrlFaultResistance, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl4_3->Add(m_textCtrlFaultResistance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_staticTextPU_1 = new wxStaticText(m_panelFault, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
     
-    boxSizerLvl4_3->Add(m_staticTextPU_1, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl4_3->Add(m_staticTextPU_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticTextReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Reactance (Xl)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    m_staticTextReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Fault reactance (Xl)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    m_staticTextReactance->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
-    flexGridSizerLvl3_3->Add(m_staticTextReactance, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(m_staticTextReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxHORIZONTAL);
     
-    flexGridSizerLvl3_3->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_2->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_textCtrlFaultReactance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlFaultReactance->SetHint(wxT(""));
     #endif
     
-    boxSizerLvl4_4->Add(m_textCtrlFaultReactance, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl4_4->Add(m_textCtrlFaultReactance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_staticTextPU_2 = new wxStaticText(m_panelFault, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
     
-    boxSizerLvl4_4->Add(m_staticTextPU_2, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl4_4->Add(m_staticTextPU_2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerOkCancel = new wxBoxSizer(wxHORIZONTAL);
     

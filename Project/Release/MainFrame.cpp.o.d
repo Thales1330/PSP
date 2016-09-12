@@ -205,9 +205,22 @@ Release/MainFrame.cpp.o: MainFrame.cpp MainFrame.h \
  C:/wxWidgets-3.1.0/include/wx/log.h \
  C:/wxWidgets-3.1.0/include/wx/generic/logg.h \
  C:/wxWidgets-3.1.0/include/wx/msw/app.h \
- C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h Bus.h Element.h Line.h \
- Branch.h Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h \
- Load.h Shunt.h Inductor.h Capacitor.h
+ C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h Bus.h BusForm.h \
+ ElementForm.h C:/wxWidgets-3.1.0/include/wx/stattext.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/stattext.h \
+ C:/wxWidgets-3.1.0/include/wx/choice.h \
+ C:/wxWidgets-3.1.0/include/wx/ctrlsub.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ctrlsub.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/choice.h \
+ C:/wxWidgets-3.1.0/include/wx/checkbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h \
+ C:/wxWidgets-3.1.0/include/wx/button.h \
+ C:/wxWidgets-3.1.0/include/wx/anybutton.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/button.h Element.h Line.h Branch.h \
+ Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h Load.h \
+ Shunt.h Inductor.h Capacitor.h
 
 MainFrame.h:
 
@@ -636,6 +649,36 @@ C:/wxWidgets-3.1.0/include/wx/msw/app.h:
 C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h:
 
 Bus.h:
+
+BusForm.h:
+
+ElementForm.h:
+
+C:/wxWidgets-3.1.0/include/wx/stattext.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/stattext.h:
+
+C:/wxWidgets-3.1.0/include/wx/choice.h:
+
+C:/wxWidgets-3.1.0/include/wx/ctrlsub.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ctrlsub.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/choice.h:
+
+C:/wxWidgets-3.1.0/include/wx/checkbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h:
+
+C:/wxWidgets-3.1.0/include/wx/button.h:
+
+C:/wxWidgets-3.1.0/include/wx/anybutton.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/button.h:
 
 Element.h:
 

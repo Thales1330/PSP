@@ -151,8 +151,6 @@ Release/ElementForm.cpp.o: ElementForm.cpp ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/checkbox.h \
  C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h \
- C:/wxWidgets-3.1.0/include/wx/statbox.h \
- C:/wxWidgets-3.1.0/include/wx/msw/statbox.h \
  C:/wxWidgets-3.1.0/include/wx/button.h \
  C:/wxWidgets-3.1.0/include/wx/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
@@ -480,10 +478,6 @@ C:/wxWidgets-3.1.0/include/wx/checkbox.h:
 C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h:
-
-C:/wxWidgets-3.1.0/include/wx/statbox.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/statbox.h:
 
 C:/wxWidgets-3.1.0/include/wx/button.h:
 

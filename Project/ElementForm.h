@@ -22,7 +22,6 @@
 #include <wx/choice.h>
 #include <wx/arrstr.h>
 #include <wx/checkbox.h>
-#include <wx/statbox.h>
 #include <wx/button.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
