@@ -626,7 +626,9 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		    case 'G':  // Insert a generator.
 			{
 			    if(m_mode != MODE_INSERT) {
-				    SyncGenerator* newGenerator = new SyncGenerator();
+				    SyncGenerator* newGenerator = new SyncGenerator(
+				        wxString::Format(_("Generator %d"), GetElementNumber(ID_SYNCGENERATOR)));
+				    IncrementElementNumber(ID_SYNCGENERATOR);
 				    m_elementList.push_back(newGenerator);
 				    m_mode = MODE_INSERT;
 				    m_statusBar->SetStatusText(_("Insert Generator: Click on a buses, ESC to cancel."));

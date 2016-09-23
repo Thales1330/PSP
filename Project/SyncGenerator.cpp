@@ -2,7 +2,20 @@
 
 SyncGenerator::SyncGenerator() : Machines()
 {
-    int numPtsSine = 10;
+    Init();
+}
+
+SyncGenerator::SyncGenerator(wxString name) : Machines()
+{
+    Init();	
+	m_electricalData.name = name;
+}
+
+SyncGenerator::~SyncGenerator() {}
+
+void SyncGenerator::Init()
+{
+	int numPtsSine = 10;
     double mx = 15.0;
     double my = 10.0;
     double pi = 3.14159265359;
@@ -13,7 +26,6 @@ SyncGenerator::SyncGenerator() : Machines()
 	    m_sinePts.push_back(wxPoint2DDouble((x / pi) * mx, y * my));
 	}
 }
-SyncGenerator::~SyncGenerator() {}
 
 void SyncGenerator::DrawSymbol() const
 {
@@ -29,4 +41,16 @@ bool SyncGenerator::GetContextMenu(wxMenu& menu)
     menu.Append(ID_EDIT_SYNCGENERATOR, _("Edit Generator"));
     GeneralMenuItens(menu);
     return true;
+}
+
+bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
+{
+	GeneratorForm* generatorForm = new GeneratorForm(parent, this);
+    if(generatorForm->ShowModal() == wxID_OK) {
+	    generatorForm->Destroy();
+	    return true;
+	}
+
+    generatorForm->Destroy();
+    return false;
 }

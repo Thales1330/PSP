@@ -1,5 +1,5 @@
 Release/Load.cpp.o: Load.cpp Load.h Shunt.h Element.h \
- C:/wxWidgets-3.1.0/include/wx/geometry.h \
+ C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
  C:/wxWidgets-3.1.0/include/wx/defs.h \
  C:/wxWidgets-3.1.0/include/wx/platform.h \
  C:/wxWidgets-3.1.0/include/wx/compiler.h \
@@ -16,7 +16,11 @@ Release/Load.cpp.o: Load.cpp Load.h Shunt.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/windowid.h \
  C:/wxWidgets-3.1.0/include/wx/msw/winundef.h \
  C:/wxWidgets-3.1.0/include/wx/features.h \
- C:/wxWidgets-3.1.0/include/wx/utils.h \
+ C:/wxWidgets-3.1.0/include/wx/dialog.h \
+ C:/wxWidgets-3.1.0/include/wx/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h \
+ C:/wxWidgets-3.1.0/include/wx/window.h \
+ C:/wxWidgets-3.1.0/include/wx/event.h \
  C:/wxWidgets-3.1.0/include/wx/object.h \
  C:/wxWidgets-3.1.0/include/wx/memory.h \
  C:/wxWidgets-3.1.0/include/wx/string.h \
@@ -35,6 +39,10 @@ Release/Load.cpp.o: Load.cpp Load.h Shunt.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/xti.h C:/wxWidgets-3.1.0/include/wx/rtti.h \
  C:/wxWidgets-3.1.0/include/wx/flags.h \
  C:/wxWidgets-3.1.0/include/wx/xti2.h \
+ C:/wxWidgets-3.1.0/include/wx/clntdata.h \
+ C:/wxWidgets-3.1.0/include/wx/hashmap.h \
+ C:/wxWidgets-3.1.0/include/wx/wxcrt.h \
+ C:/wxWidgets-3.1.0/include/wx/gdicmn.h \
  C:/wxWidgets-3.1.0/include/wx/list.h \
  C:/wxWidgets-3.1.0/include/wx/vector.h \
  C:/wxWidgets-3.1.0/include/wx/scopeguard.h \
@@ -42,26 +50,20 @@ Release/Load.cpp.o: Load.cpp Load.h Shunt.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/meta/movable.h \
  C:/wxWidgets-3.1.0/include/wx/meta/pod.h \
  C:/wxWidgets-3.1.0/include/wx/meta/if.h \
- C:/wxWidgets-3.1.0/include/wx/filefn.h \
- C:/wxWidgets-3.1.0/include/wx/arrstr.h \
- C:/wxWidgets-3.1.0/include/wx/hashmap.h \
- C:/wxWidgets-3.1.0/include/wx/wxcrt.h \
- C:/wxWidgets-3.1.0/include/wx/versioninfo.h \
- C:/wxWidgets-3.1.0/include/wx/meta/implicitconversion.h \
- C:/wxWidgets-3.1.0/include/wx/gdicmn.h \
  C:/wxWidgets-3.1.0/include/wx/math.h \
- C:/wxWidgets-3.1.0/include/wx/mousestate.h \
- C:/wxWidgets-3.1.0/include/wx/kbdstate.h \
- C:/wxWidgets-3.1.0/include/wx/longlong.h \
- C:/wxWidgets-3.1.0/include/wx/platinfo.h \
  C:/wxWidgets-3.1.0/include/wx/cursor.h \
  C:/wxWidgets-3.1.0/include/wx/gdiobj.h \
  C:/wxWidgets-3.1.0/include/wx/msw/gdiimage.h \
  C:/wxWidgets-3.1.0/include/wx/msw/cursor.h \
- C:/wxWidgets-3.1.0/include/wx/menu.h \
- C:/wxWidgets-3.1.0/include/wx/window.h \
- C:/wxWidgets-3.1.0/include/wx/event.h \
- C:/wxWidgets-3.1.0/include/wx/clntdata.h \
+ C:/wxWidgets-3.1.0/include/wx/utils.h \
+ C:/wxWidgets-3.1.0/include/wx/filefn.h \
+ C:/wxWidgets-3.1.0/include/wx/arrstr.h \
+ C:/wxWidgets-3.1.0/include/wx/versioninfo.h \
+ C:/wxWidgets-3.1.0/include/wx/meta/implicitconversion.h \
+ C:/wxWidgets-3.1.0/include/wx/mousestate.h \
+ C:/wxWidgets-3.1.0/include/wx/kbdstate.h \
+ C:/wxWidgets-3.1.0/include/wx/longlong.h \
+ C:/wxWidgets-3.1.0/include/wx/platinfo.h \
  C:/wxWidgets-3.1.0/include/wx/dynarray.h \
  C:/wxWidgets-3.1.0/include/wx/thread.h \
  C:/wxWidgets-3.1.0/include/wx/tracker.h \
@@ -90,6 +92,26 @@ Release/Load.cpp.o: Load.cpp Load.h Shunt.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msw/accel.h \
  C:/wxWidgets-3.1.0/include/wx/msw/window.h \
  C:/wxWidgets-3.1.0/include/wx/settings.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h \
+ C:/wxWidgets-3.1.0/include/wx/iconbndl.h \
+ C:/wxWidgets-3.1.0/include/wx/icon.h \
+ C:/wxWidgets-3.1.0/include/wx/iconloc.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/icon.h \
+ C:/wxWidgets-3.1.0/include/wx/weakref.h \
+ C:/wxWidgets-3.1.0/include/wx/meta/int2type.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/containr.h \
+ C:/wxWidgets-3.1.0/include/wx/sharedptr.h \
+ C:/wxWidgets-3.1.0/include/wx/atomic.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/wrapwin.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/dialog.h \
+ C:/wxWidgets-3.1.0/include/wx/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/panel.h \
+ C:/wxWidgets-3.1.0/include/wx/stockitem.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/geometry.h \
+ C:/wxWidgets-3.1.0/include/wx/menu.h \
  C:/wxWidgets-3.1.0/include/wx/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/bitmap.h \
@@ -116,7 +138,7 @@ Shunt.h:
 
 Element.h:
 
-C:/wxWidgets-3.1.0/include/wx/geometry.h:
+C:/wxWidgets-3.1.0/include/wx/msgdlg.h:
 
 C:/wxWidgets-3.1.0/include/wx/defs.h:
 
@@ -150,7 +172,15 @@ C:/wxWidgets-3.1.0/include/wx/msw/winundef.h:
 
 C:/wxWidgets-3.1.0/include/wx/features.h:
 
-C:/wxWidgets-3.1.0/include/wx/utils.h:
+C:/wxWidgets-3.1.0/include/wx/dialog.h:
+
+C:/wxWidgets-3.1.0/include/wx/toplevel.h:
+
+C:/wxWidgets-3.1.0/include/wx/nonownedwnd.h:
+
+C:/wxWidgets-3.1.0/include/wx/window.h:
+
+C:/wxWidgets-3.1.0/include/wx/event.h:
 
 C:/wxWidgets-3.1.0/include/wx/object.h:
 
@@ -190,6 +220,14 @@ C:/wxWidgets-3.1.0/include/wx/flags.h:
 
 C:/wxWidgets-3.1.0/include/wx/xti2.h:
 
+C:/wxWidgets-3.1.0/include/wx/clntdata.h:
+
+C:/wxWidgets-3.1.0/include/wx/hashmap.h:
+
+C:/wxWidgets-3.1.0/include/wx/wxcrt.h:
+
+C:/wxWidgets-3.1.0/include/wx/gdicmn.h:
+
 C:/wxWidgets-3.1.0/include/wx/list.h:
 
 C:/wxWidgets-3.1.0/include/wx/vector.h:
@@ -204,29 +242,7 @@ C:/wxWidgets-3.1.0/include/wx/meta/pod.h:
 
 C:/wxWidgets-3.1.0/include/wx/meta/if.h:
 
-C:/wxWidgets-3.1.0/include/wx/filefn.h:
-
-C:/wxWidgets-3.1.0/include/wx/arrstr.h:
-
-C:/wxWidgets-3.1.0/include/wx/hashmap.h:
-
-C:/wxWidgets-3.1.0/include/wx/wxcrt.h:
-
-C:/wxWidgets-3.1.0/include/wx/versioninfo.h:
-
-C:/wxWidgets-3.1.0/include/wx/meta/implicitconversion.h:
-
-C:/wxWidgets-3.1.0/include/wx/gdicmn.h:
-
 C:/wxWidgets-3.1.0/include/wx/math.h:
-
-C:/wxWidgets-3.1.0/include/wx/mousestate.h:
-
-C:/wxWidgets-3.1.0/include/wx/kbdstate.h:
-
-C:/wxWidgets-3.1.0/include/wx/longlong.h:
-
-C:/wxWidgets-3.1.0/include/wx/platinfo.h:
 
 C:/wxWidgets-3.1.0/include/wx/cursor.h:
 
@@ -236,13 +252,23 @@ C:/wxWidgets-3.1.0/include/wx/msw/gdiimage.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/cursor.h:
 
-C:/wxWidgets-3.1.0/include/wx/menu.h:
+C:/wxWidgets-3.1.0/include/wx/utils.h:
 
-C:/wxWidgets-3.1.0/include/wx/window.h:
+C:/wxWidgets-3.1.0/include/wx/filefn.h:
 
-C:/wxWidgets-3.1.0/include/wx/event.h:
+C:/wxWidgets-3.1.0/include/wx/arrstr.h:
 
-C:/wxWidgets-3.1.0/include/wx/clntdata.h:
+C:/wxWidgets-3.1.0/include/wx/versioninfo.h:
+
+C:/wxWidgets-3.1.0/include/wx/meta/implicitconversion.h:
+
+C:/wxWidgets-3.1.0/include/wx/mousestate.h:
+
+C:/wxWidgets-3.1.0/include/wx/kbdstate.h:
+
+C:/wxWidgets-3.1.0/include/wx/longlong.h:
+
+C:/wxWidgets-3.1.0/include/wx/platinfo.h:
 
 C:/wxWidgets-3.1.0/include/wx/dynarray.h:
 
@@ -299,6 +325,46 @@ C:/wxWidgets-3.1.0/include/wx/msw/accel.h:
 C:/wxWidgets-3.1.0/include/wx/msw/window.h:
 
 C:/wxWidgets-3.1.0/include/wx/settings.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/nonownedwnd.h:
+
+C:/wxWidgets-3.1.0/include/wx/iconbndl.h:
+
+C:/wxWidgets-3.1.0/include/wx/icon.h:
+
+C:/wxWidgets-3.1.0/include/wx/iconloc.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/icon.h:
+
+C:/wxWidgets-3.1.0/include/wx/weakref.h:
+
+C:/wxWidgets-3.1.0/include/wx/meta/int2type.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/toplevel.h:
+
+C:/wxWidgets-3.1.0/include/wx/containr.h:
+
+C:/wxWidgets-3.1.0/include/wx/sharedptr.h:
+
+C:/wxWidgets-3.1.0/include/wx/atomic.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/wrapwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/dialog.h:
+
+C:/wxWidgets-3.1.0/include/wx/panel.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/panel.h:
+
+C:/wxWidgets-3.1.0/include/wx/stockitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/geometry.h:
+
+C:/wxWidgets-3.1.0/include/wx/menu.h:
 
 C:/wxWidgets-3.1.0/include/wx/menuitem.h:
 

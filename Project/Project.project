@@ -33,6 +33,8 @@
       <File Name="Workspace.cpp"/>
       <VirtualDirectory Name="element forms">
         <File Name="BusForm.cpp"/>
+        <File Name="GeneratorForm.cpp"/>
+        <File Name="GeneratorStabForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -63,6 +65,8 @@
       <File Name="Workspace.h"/>
       <VirtualDirectory Name="element forms">
         <File Name="BusForm.h"/>
+        <File Name="GeneratorForm.h"/>
+        <File Name="GeneratorStabForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

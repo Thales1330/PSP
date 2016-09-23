@@ -218,9 +218,13 @@ Release/MainFrame.cpp.o: MainFrame.cpp MainFrame.h \
  C:/wxWidgets-3.1.0/include/wx/button.h \
  C:/wxWidgets-3.1.0/include/wx/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
- C:/wxWidgets-3.1.0/include/wx/msw/button.h Element.h Line.h Branch.h \
- Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h Load.h \
- Shunt.h Inductor.h Capacitor.h
+ C:/wxWidgets-3.1.0/include/wx/msw/button.h \
+ C:/wxWidgets-3.1.0/include/wx/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/statline.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statline.h Element.h Line.h Branch.h \
+ Transformer.h SyncGenerator.h GeneratorForm.h Machines.h IndMotor.h \
+ SyncMotor.h Load.h Shunt.h Inductor.h Capacitor.h
 
 MainFrame.h:
 
@@ -680,6 +684,14 @@ C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/button.h:
 
+C:/wxWidgets-3.1.0/include/wx/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/statline.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statline.h:
+
 Element.h:
 
 Line.h:
@@ -689,6 +701,8 @@ Branch.h:
 Transformer.h:
 
 SyncGenerator.h:
+
+GeneratorForm.h:
 
 Machines.h:
 

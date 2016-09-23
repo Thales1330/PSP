@@ -38,7 +38,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     m_panelGeneral->SetSizer(boxSizerLvl2_1);
     
     m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    m_staticTextName->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl2_1->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -59,7 +58,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextNomVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    m_staticTextNomVoltage->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_1->Add(m_staticTextNomVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -88,7 +86,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     
     m_checkBoxCtrlVoltage = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Controlled voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     m_checkBoxCtrlVoltage->SetValue(false);
-    m_checkBoxCtrlVoltage->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_2->Add(m_checkBoxCtrlVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -136,7 +133,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_2->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextFaultType = new wxStaticText(m_panelFault, wxID_ANY, _("Fault type"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
-    m_staticTextFaultType->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_3->Add(m_staticTextFaultType, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -155,7 +151,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_2->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextFaultPlace = new wxStaticText(m_panelFault, wxID_ANY, _("Fault place"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
-    m_staticTextFaultPlace->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_4->Add(m_staticTextFaultPlace, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -173,7 +168,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_2->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextFaultResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Fault resistance (R)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
-    m_staticTextFaultResistance->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_5->Add(m_staticTextFaultResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -197,7 +191,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_2->Add(boxSizerLvl4_6, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Fault reactance (Xl)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
-    m_staticTextReactance->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_6->Add(m_staticTextReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -241,7 +234,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_3->Add(boxSizerLvl4_7, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextStabFaultTime = new wxStaticText(m_panelStability, wxID_ANY, _("Time"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
-    m_staticTextStabFaultTime->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_7->Add(m_staticTextStabFaultTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -265,7 +257,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_3->Add(boxSizerLvl4_8, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextStabFaultLength = new wxStaticText(m_panelStability, wxID_ANY, _("Fault length"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
-    m_staticTextStabFaultLength->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_8->Add(m_staticTextStabFaultLength, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -289,7 +280,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_3->Add(boxSizerLvl4_9, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextStabFaultResistance = new wxStaticText(m_panelStability, wxID_ANY, _("Fault resistance (R)"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
-    m_staticTextStabFaultResistance->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_9->Add(m_staticTextStabFaultResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -313,7 +303,6 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     gridSizerLvl3_3->Add(boxSizerLvl4_10, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextStabFaultReactance = new wxStaticText(m_panelStability, wxID_ANY, _("Fault reactance (Xl)"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
-    m_staticTextStabFaultReactance->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT));
     
     boxSizerLvl4_10->Add(m_staticTextStabFaultReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -359,9 +348,9 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
          GetSizer()->Fit(this);
     }
     if(GetParent()) {
-        CentreOnParent(wxBOTH);
+        CentreOnParent(wxVERTICAL);
     } else {
-        CentreOnScreen(wxBOTH);
+        CentreOnScreen(wxVERTICAL);
     }
 #if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
@@ -390,5 +379,903 @@ BusFormBase::~BusFormBase()
     m_checkBoxStabFault->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(BusFormBase::OnInsertStabFaultClick), NULL, this);
     m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(BusFormBase::OnButtonOKClick), NULL, this);
     m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(BusFormBase::OnButtonCancelClick), NULL, this);
+    
+}
+
+GeneratorFormBase::GeneratorFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlName = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlName->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_1->Add(m_textCtrlName, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlName->SetMinSize(wxSize(300,-1));
+    
+    wxGridSizer* gridSizerLvl3_1 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_1->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_5->Add(m_staticTextNominalPower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_5 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_5->Add(boxSizerLvl5_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlnominalPower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlnominalPower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_5->Add(m_textCtrlnominalPower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceNominalPowerArr;
+    m_choiceNominalPowerArr.Add(wxT("VA"));
+    m_choiceNominalPowerArr.Add(wxT("kVA"));
+    m_choiceNominalPowerArr.Add(wxT("MVA"));
+    m_choiceNominalPower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceNominalPowerArr, 0);
+    m_choiceNominalPower->SetSelection(2);
+    
+    boxSizerLvl5_5->Add(m_choiceNominalPower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    gridSizerLvl3_1->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextActivePower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Active power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextActivePower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_1->Add(boxSizerLvl5_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlActivePower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlActivePower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_1->Add(m_textCtrlActivePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceActivePowerArr;
+    m_choiceActivePowerArr.Add(wxT("p.u."));
+    m_choiceActivePowerArr.Add(wxT("W"));
+    m_choiceActivePowerArr.Add(wxT("kW"));
+    m_choiceActivePowerArr.Add(wxT("MW"));
+    m_choiceActivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceActivePowerArr, 0);
+    m_choiceActivePower->SetSelection(3);
+    
+    boxSizerLvl5_1->Add(m_choiceActivePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextReactivePower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Reactive power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextReactivePower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_2->Add(boxSizerLvl5_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlReactivePower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlReactivePower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_2->Add(m_textCtrlReactivePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceReactivePowerArr;
+    m_choiceReactivePowerArr.Add(wxT("p.u."));
+    m_choiceReactivePowerArr.Add(wxT("VAr"));
+    m_choiceReactivePowerArr.Add(wxT("kVAr"));
+    m_choiceReactivePowerArr.Add(wxT("MVAr"));
+    m_choiceReactivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceReactivePowerArr, 0);
+    m_choiceReactivePower->SetSelection(3);
+    
+    boxSizerLvl5_2->Add(m_choiceReactivePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxMaxReactive = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Max reactive power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxMaxReactive->SetValue(false);
+    
+    boxSizerLvl4_3->Add(m_checkBoxMaxReactive, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_3 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_3->Add(boxSizerLvl5_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlMaxRectivePower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlMaxRectivePower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_3->Add(m_textCtrlMaxRectivePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceMaxRectivePowerArr;
+    m_choiceMaxRectivePowerArr.Add(wxT("p.u."));
+    m_choiceMaxRectivePowerArr.Add(wxT("VAr"));
+    m_choiceMaxRectivePowerArr.Add(wxT("kVAr"));
+    m_choiceMaxRectivePowerArr.Add(wxT("MVAr"));
+    m_choiceMaxRectivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceMaxRectivePowerArr, 0);
+    m_choiceMaxRectivePower->SetSelection(3);
+    
+    boxSizerLvl5_3->Add(m_choiceMaxRectivePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxMinReactive = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Min reactive power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxMinReactive->SetValue(false);
+    
+    boxSizerLvl4_4->Add(m_checkBoxMinReactive, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_4 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_4->Add(boxSizerLvl5_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlMinRectivePower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlMinRectivePower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_4->Add(m_textCtrlMinRectivePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceMinRectivePowerArr;
+    m_choiceMinRectivePowerArr.Add(wxT("p.u."));
+    m_choiceMinRectivePowerArr.Add(wxT("VAr"));
+    m_choiceMinRectivePowerArr.Add(wxT("kVAr"));
+    m_choiceMinRectivePowerArr.Add(wxT("MVAr"));
+    m_choiceMinRectivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceMinRectivePowerArr, 0);
+    m_choiceMinRectivePower->SetSelection(3);
+    
+    boxSizerLvl5_4->Add(m_choiceMinRectivePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    m_checkBoxUseMachinePower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use machine nominal power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxUseMachinePower->SetValue(false);
+    
+    boxSizerLvl2_1->Add(m_checkBoxUseMachinePower, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_panelFault = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelFault, _("Fault"), false);
+    
+    wxBoxSizer* boxSizerLvl2_2 = new wxBoxSizer(wxVERTICAL);
+    m_panelFault->SetSizer(boxSizerLvl2_2);
+    
+    wxStaticBoxSizer* staticBoxSizerLvl3_1 = new wxStaticBoxSizer( new wxStaticBox(m_panelFault, wxID_ANY, _("Sequence impedances (p.u.)")), wxVERTICAL);
+    
+    boxSizerLvl2_2->Add(staticBoxSizerLvl3_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl4_2 = new wxGridSizer(0, 2, 0, 0);
+    
+    staticBoxSizerLvl3_1->Add(gridSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_6 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_2->Add(boxSizerLvl5_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPosResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Positive resistance (R1)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_6->Add(m_staticTextPosResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlPosResistance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPosResistance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_6->Add(m_textCtrlPosResistance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_7 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_2->Add(boxSizerLvl5_7, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPosReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Positive reactance (X1)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_7->Add(m_staticTextPosReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlPosReactance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPosReactance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_7->Add(m_textCtrlPosReactance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_8 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_2->Add(boxSizerLvl5_8, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextNegResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Negative resistance (R2)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_8->Add(m_staticTextNegResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlNegResistance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlNegResistance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_8->Add(m_textCtrlNegResistance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_9 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_2->Add(boxSizerLvl5_9, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextNegReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Negative reactance (X2)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_9->Add(m_staticTextNegReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlNegReactance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlNegReactance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_9->Add(m_textCtrlNegReactance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_10 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_2->Add(boxSizerLvl5_10, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextZeroResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Zero resistance (R0)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_10->Add(m_staticTextZeroResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlZeroResistance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlZeroResistance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_10->Add(m_textCtrlZeroResistance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_11 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_2->Add(boxSizerLvl5_11, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextZeroReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Zero reactance (X0)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_11->Add(m_staticTextZeroReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlZeroReactance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlZeroReactance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_11->Add(m_textCtrlZeroReactance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl3_3 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_2->Add(gridSizerLvl3_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_12 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_3->Add(boxSizerLvl4_12, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextGrdResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Ground resistance (p.u.)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_12->Add(m_staticTextGrdResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlGrdResistance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlGrdResistance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_12->Add(m_textCtrlGrdResistance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_13 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_3->Add(boxSizerLvl4_13, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextGrdReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Ground reactance (p.u.)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_13->Add(m_staticTextGrdReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlGrdReactance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlGrdReactance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_13->Add(m_textCtrlGrdReactance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_checkBoxGroundNeutral = new wxCheckBox(m_panelFault, wxID_ANY, _("Grounded neutral"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    m_checkBoxGroundNeutral->SetValue(true);
+    
+    boxSizerLvl2_2->Add(m_checkBoxGroundNeutral, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonStab = new wxButton(this, wxID_ANY, _("Stability"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonStab, 0, wxALL|wxALIGN_LEFT, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_ButtonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_ButtonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("GeneratorFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_checkBoxMaxReactive->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnCheckMaxReactive), NULL, this);
+    m_checkBoxMinReactive->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnCheckMinReactive), NULL, this);
+    m_buttonStab->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnStabilityButtonClick), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnOKButtonClick), NULL, this);
+    m_ButtonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+GeneratorFormBase::~GeneratorFormBase()
+{
+    m_checkBoxMaxReactive->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnCheckMaxReactive), NULL, this);
+    m_checkBoxMinReactive->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnCheckMinReactive), NULL, this);
+    m_buttonStab->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnStabilityButtonClick), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnOKButtonClick), NULL, this);
+    m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+GeneratorStabFormBase::GeneratorStabFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl1_1->Add(boxSizerLvl2_1, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxPlotSyncMachine = new wxCheckBox(this, wxID_ANY, _("Plot synchronous machine data"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxPlotSyncMachine->SetValue(false);
+    
+    boxSizerLvl2_1->Add(m_checkBoxPlotSyncMachine, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl3_1 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_1->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextInertia = new wxStaticText(this, wxID_ANY, _("Inertia (H)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextInertia, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_1->Add(boxSizerLvl5_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlInertia = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlInertia->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_1->Add(m_textCtrlInertia, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextS_1 = new wxStaticText(this, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_1->Add(m_staticTextS_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextDamping = new wxStaticText(this, wxID_ANY, _("Damping factor"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextDamping, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_2->Add(boxSizerLvl5_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlDamping = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlDamping->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_2->Add(m_textCtrlDamping, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_1 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_2->Add(m_staticTextPU_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxUseAVR = new wxCheckBox(this, wxID_ANY, _("Use AVR"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxUseAVR->SetValue(false);
+    
+    boxSizerLvl4_3->Add(m_checkBoxUseAVR, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_buttonEditAVR = new wxButton(this, wxID_ANY, _("Edit AVR"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_3->Add(m_buttonEditAVR, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxUseSG = new wxCheckBox(this, wxID_ANY, _("Use speed governor"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxUseSG->SetValue(false);
+    
+    boxSizerLvl4_4->Add(m_checkBoxUseSG, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_buttonEditSG = new wxButton(this, wxID_ANY, _("Edit speed governor"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_4->Add(m_buttonEditSG, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticLine_1 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxLI_HORIZONTAL);
+    
+    boxSizerLvl2_1->Add(m_staticLine_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl3_2 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_1->Add(gridSizerLvl3_2, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_2->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextRa = new wxStaticText(this, wxID_ANY, _("Armature resistance (Ra)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_5->Add(m_staticTextRa, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_3 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_5->Add(boxSizerLvl5_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlRa = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlRa->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_3->Add(m_textCtrlRa, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_2 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_3->Add(m_staticTextPU_2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_6 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_2->Add(boxSizerLvl4_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextXp = new wxStaticText(this, wxID_ANY, _("Potier reactance (Xp)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_6->Add(m_staticTextXp, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_14 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_6->Add(boxSizerLvl5_14, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlXp = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlXp->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_14->Add(m_textCtrlXp, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_9 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_14->Add(m_staticTextPU_9, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_7 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_2->Add(boxSizerLvl4_7, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSat = new wxStaticText(this, wxID_ANY, _("Saturation factor"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_7->Add(m_staticTextSat, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_15 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_7->Add(boxSizerLvl5_15, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSat = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSat->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_15->Add(m_textCtrlSat, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_10 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_15->Add(m_staticTextPU_10, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizerSyncronous = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Syncronous")), wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(staticBoxSizerSyncronous, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl4_3 = new wxGridSizer(0, 2, 0, 0);
+    
+    staticBoxSizerSyncronous->Add(gridSizerLvl4_3, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_4 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_3->Add(boxSizerLvl5_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSyncXd = new wxStaticText(this, wxID_ANY, _("Direct-axis reactance (Xd)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_4->Add(m_staticTextSyncXd, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_4->Add(boxSizerLvl6_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSyncXd = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSyncXd->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_1->Add(m_textCtrlSyncXd, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_3 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_1->Add(m_staticTextPU_3, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_5 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_3->Add(boxSizerLvl5_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSyncXq = new wxStaticText(this, wxID_ANY, _("Quadrature-axis reactance (Xq)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_5->Add(m_staticTextSyncXq, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_5->Add(boxSizerLvl6_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSyncXq = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSyncXq->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_2->Add(m_textCtrlSyncXq, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_4 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_2->Add(m_staticTextPU_4, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizerTransitory = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Transitory")), wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(staticBoxSizerTransitory, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl4_4 = new wxGridSizer(0, 2, 0, 0);
+    
+    staticBoxSizerTransitory->Add(gridSizerLvl4_4, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_6 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_4->Add(boxSizerLvl5_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTranXd = new wxStaticText(this, wxID_ANY, _("Direct-axis reactance (X'd)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_6->Add(m_staticTextTranXd, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_3 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_6->Add(boxSizerLvl6_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlTranXd = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTranXd->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_3->Add(m_textCtrlTranXd, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_5 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_3->Add(m_staticTextPU_5, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_7 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_4->Add(boxSizerLvl5_7, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTranXq = new wxStaticText(this, wxID_ANY, _("Quadrature-axis reactance (X'q)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_7->Add(m_staticTextTranXq, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_4 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_7->Add(boxSizerLvl6_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlTranXq = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTranXq->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_4->Add(m_textCtrlTranXq, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_6 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_4->Add(m_staticTextPU_6, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_8 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_4->Add(boxSizerLvl5_8, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTranTd0 = new wxStaticText(this, wxID_ANY, _("Direct-axis time constant (T'd0)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_8->Add(m_staticTextTranTd0, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_5 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_8->Add(boxSizerLvl6_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlTranTd0 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTranTd0->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_5->Add(m_textCtrlTranTd0, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextS_2 = new wxStaticText(this, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_5->Add(m_staticTextS_2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_9 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_4->Add(boxSizerLvl5_9, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTranTq0 = new wxStaticText(this, wxID_ANY, _("Quadrature-axis time constant (T'q0)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_9->Add(m_staticTextTranTq0, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_6 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_9->Add(boxSizerLvl6_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlTranTq0 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTranTq0->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_6->Add(m_textCtrlTranTq0, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextS_3 = new wxStaticText(this, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_6->Add(m_staticTextS_3, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizerSubtransitory = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Subtransitory")), wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(staticBoxSizerSubtransitory, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl4_5 = new wxGridSizer(0, 2, 0, 0);
+    
+    staticBoxSizerSubtransitory->Add(gridSizerLvl4_5, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_10 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_5->Add(boxSizerLvl5_10, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSubXd = new wxStaticText(this, wxID_ANY, _("Direct-axis reactance (X''d)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_10->Add(m_staticTextSubXd, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_7 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_10->Add(boxSizerLvl6_7, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSubXd = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSubXd->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_7->Add(m_textCtrlSubXd, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_7 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_7->Add(m_staticTextPU_7, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_11 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_5->Add(boxSizerLvl5_11, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSubXq = new wxStaticText(this, wxID_ANY, _("Quadrature-axis reactance (X''q)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_11->Add(m_staticTextSubXq, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_8 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_11->Add(boxSizerLvl6_8, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSubXq = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSubXq->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_8->Add(m_textCtrlSubXq, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_8 = new wxStaticText(this, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_8->Add(m_staticTextPU_8, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_12 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_5->Add(boxSizerLvl5_12, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSubTd0 = new wxStaticText(this, wxID_ANY, _("Direct-axis time constant (T''d0)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_12->Add(m_staticTextSubTd0, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_9 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_12->Add(boxSizerLvl6_9, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSubTd0 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSubTd0->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_9->Add(m_textCtrlSubTd0, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextS_4 = new wxStaticText(this, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_9->Add(m_staticTextS_4, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_13 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl4_5->Add(boxSizerLvl5_13, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSubTq0 = new wxStaticText(this, wxID_ANY, _("Quadrature-axis time constant (T''q0)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_13->Add(m_staticTextSubTq0, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl6_10 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl5_13->Add(boxSizerLvl6_10, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSubTq0 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSubTq0->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl6_10->Add(m_textCtrlSubTq0, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextS_5 = new wxStaticText(this, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl6_10->Add(m_staticTextS_5, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerVDivider = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(boxSizerVDivider, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerSection_2 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerVDivider->Add(boxSizerSection_2, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerSection_1 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerVDivider->Add(boxSizerSection_1, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonSwitching = new wxButton(this, wxID_ANY, _("Switching"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonSwitching, 0, wxALL|wxALIGN_LEFT, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_ButtonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_ButtonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    SetName(wxT("GeneratorStabFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_checkBoxUseAVR->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::UseAVRClick), NULL, this);
+    m_buttonEditAVR->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnEditAVRButtonClick), NULL, this);
+    m_checkBoxUseSG->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::UseSGClick), NULL, this);
+    m_buttonEditSG->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnSpeedGovernorButtonClick), NULL, this);
+    m_buttonSwitching->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnSwitchingButtonClick), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnOKButtonClick), NULL, this);
+    m_ButtonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+GeneratorStabFormBase::~GeneratorStabFormBase()
+{
+    m_checkBoxUseAVR->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::UseAVRClick), NULL, this);
+    m_buttonEditAVR->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnEditAVRButtonClick), NULL, this);
+    m_checkBoxUseSG->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::UseSGClick), NULL, this);
+    m_buttonEditSG->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnSpeedGovernorButtonClick), NULL, this);
+    m_buttonSwitching->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnSwitchingButtonClick), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnOKButtonClick), NULL, this);
+    m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnCancelButtonClick), NULL, this);
     
 }

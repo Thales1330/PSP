@@ -155,6 +155,10 @@ Release/BusForm.cpp.o: BusForm.cpp BusForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/button.h \
+ C:/wxWidgets-3.1.0/include/wx/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/statline.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statline.h \
  C:/wxWidgets-3.1.0/include/wx/persist.h \
  C:/wxWidgets-3.1.0/include/wx/confbase.h \
  C:/wxWidgets-3.1.0/include/wx/base64.h \
@@ -499,6 +503,14 @@ C:/wxWidgets-3.1.0/include/wx/anybutton.h:
 C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/button.h:
+
+C:/wxWidgets-3.1.0/include/wx/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/statline.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statline.h:
 
 C:/wxWidgets-3.1.0/include/wx/persist.h:
 

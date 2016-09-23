@@ -155,6 +155,10 @@ Release/Bus.cpp.o: Bus.cpp Bus.h BusForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/button.h \
+ C:/wxWidgets-3.1.0/include/wx/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/statline.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statline.h \
  C:/wxWidgets-3.1.0/include/wx/persist.h \
  C:/wxWidgets-3.1.0/include/wx/confbase.h \
  C:/wxWidgets-3.1.0/include/wx/base64.h \
@@ -170,6 +174,10 @@ Release/Bus.cpp.o: Bus.cpp Bus.h BusForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/itemid.h \
  C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
  C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Element.h \
+ C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/stockitem.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
  C:/wxWidgets-3.1.0/include/wx/geometry.h \
  C:/wxWidgets-3.1.0/include/wx/menu.h \
  C:/wxWidgets-3.1.0/include/wx/menuitem.h \
@@ -498,6 +506,14 @@ C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/button.h:
 
+C:/wxWidgets-3.1.0/include/wx/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/statline.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statline.h:
+
 C:/wxWidgets-3.1.0/include/wx/persist.h:
 
 C:/wxWidgets-3.1.0/include/wx/confbase.h:
@@ -529,6 +545,14 @@ C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
 
 Element.h:
+
+C:/wxWidgets-3.1.0/include/wx/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/stockitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
 
 C:/wxWidgets-3.1.0/include/wx/geometry.h:
 

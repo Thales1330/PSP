@@ -46,7 +46,7 @@ class Bus : public Element
     virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
 
-   private:
+   protected:
     BusElectricalData m_electricalData;
 };
 

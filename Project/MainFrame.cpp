@@ -245,7 +245,9 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				break;
 			    case ID_ADDMENU_GENERATOR:
 				{
-				    SyncGenerator* newGenerator = new SyncGenerator();
+				    SyncGenerator* newGenerator = new SyncGenerator(
+				        wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
+				    workspace->IncrementElementNumber(ID_SYNCGENERATOR);
 				    elementList.push_back(newGenerator);
 				    statusBarText = _("Insert Generator: Click on a buses, ESC to cancel.");
 				    newElement = true;

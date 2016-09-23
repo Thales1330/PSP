@@ -100,6 +100,77 @@ void BusForm::OnButtonOKClick(wxCommandEvent& event)
 	    data.controlledVoltageUnitChoice = m_choiceCtrlVoltage->GetSelection();
 	}
     data.slackBus = m_checkBoxSlackBus->GetValue();
+	
+	data.hasFault = m_checkBoxFault->GetValue();
+	switch(m_choiceFaultType->GetSelection())
+	{
+		case 0:
+		{
+			data.faultType = FAULT_THREEPHASE;
+		}
+		break;
+		case 1:
+		{
+			data.faultType = FAULT_2LINE;
+		}
+		break;
+		case 2:
+		{
+			data.faultType = FAULT_2LINE_GROUND;
+		}
+		break;
+		case 3:
+		{
+			data.faultType = FAULT_LINE_GROUND;
+		}
+		break;
+	}
+	
+	switch(m_choiceFaultPlace->GetSelection())
+	{
+		case 0:
+		{
+			data.faultLocation = FAULT_LINE_A;
+		}
+		break;
+		case 1:
+		{
+			data.faultLocation = FAULT_LINE_B;
+		}
+		break;
+		case 2:
+		{
+			data.faultLocation = FAULT_LINE_C;
+		}
+		break;
+	}
+	
+	if(!m_bus->DoubleFromString(m_parent, m_textCtrlFaultResistance->GetValue(), data.faultResistance,
+                                _("Value entered incorrectly in the field \"Fault resistance\".")))
+	return;
+	
+	if(!m_bus->DoubleFromString(m_parent, m_textCtrlFaultReactance->GetValue(), data.faultReactance,
+                                _("Value entered incorrectly in the field \"Fault reactance\".")))
+	return;
+	
+	data.plotBus = m_checkBoxPlotData->GetValue();
+	data.stabHasFault = m_checkBoxStabFault->GetValue();
+	
+	if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultTime->GetValue(), data.stabFaultTime,
+                                _("Value entered incorrectly in the field \"Time\".")))
+	return;
+	
+	if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultLength->GetValue(), data.stabFaultLength,
+                                _("Value entered incorrectly in the field \"Fault lenght\".")))
+	return;
+	
+	if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultResistance->GetValue(), data.stabFaultResistance,
+                                _("Value entered incorrectly in the field \"Fault resistence (stability)\".")))
+	return;
+	
+	if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultReactance->GetValue(), data.stabFaultReactance,
+                                _("Value entered incorrectly in the field \"Fault reactance (stability)\".")))
+	return;
 
     m_bus->SetElectricalData(data);
 

@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Thales
-Date                   :=12/09/2016
+Date                   :=23/09/2016
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -66,7 +66,7 @@ WXWIN:=C:\wxWidgets-3.1.0
 WXCFG:=gcc_dll\mswu
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) 
 
 
 
@@ -298,6 +298,22 @@ $(IntermediateDirectory)/BusForm.cpp$(DependSuffix): BusForm.cpp
 
 $(IntermediateDirectory)/BusForm.cpp$(PreprocessSuffix): BusForm.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/BusForm.cpp$(PreprocessSuffix)BusForm.cpp
+
+$(IntermediateDirectory)/GeneratorForm.cpp$(ObjectSuffix): GeneratorForm.cpp $(IntermediateDirectory)/GeneratorForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/GeneratorForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/GeneratorForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/GeneratorForm.cpp$(DependSuffix): GeneratorForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/GeneratorForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/GeneratorForm.cpp$(DependSuffix) -MM GeneratorForm.cpp
+
+$(IntermediateDirectory)/GeneratorForm.cpp$(PreprocessSuffix): GeneratorForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/GeneratorForm.cpp$(PreprocessSuffix)GeneratorForm.cpp
+
+$(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix): GeneratorStabForm.cpp $(IntermediateDirectory)/GeneratorStabForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/GeneratorStabForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/GeneratorStabForm.cpp$(DependSuffix): GeneratorStabForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/GeneratorStabForm.cpp$(DependSuffix) -MM GeneratorStabForm.cpp
+
+$(IntermediateDirectory)/GeneratorStabForm.cpp$(PreprocessSuffix): GeneratorStabForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/GeneratorStabForm.cpp$(PreprocessSuffix)GeneratorStabForm.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

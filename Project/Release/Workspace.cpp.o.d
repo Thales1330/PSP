@@ -197,15 +197,19 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/button.h \
  C:/wxWidgets-3.1.0/include/wx/anybutton.h \
  C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
- C:/wxWidgets-3.1.0/include/wx/msw/button.h Element.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/button.h \
+ C:/wxWidgets-3.1.0/include/wx/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/statline.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statline.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/menu.h \
  C:/wxWidgets-3.1.0/include/wx/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h Line.h Branch.h Transformer.h \
- SyncGenerator.h Machines.h IndMotor.h SyncMotor.h Load.h Shunt.h \
- Inductor.h Capacitor.h
+ SyncGenerator.h GeneratorForm.h Machines.h IndMotor.h SyncMotor.h Load.h \
+ Shunt.h Inductor.h Capacitor.h
 
 Workspace.h:
 
@@ -617,6 +621,14 @@ C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/button.h:
 
+C:/wxWidgets-3.1.0/include/wx/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/statline.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statline.h:
+
 Element.h:
 
 C:/wxWidgets-3.1.0/include/wx/menu.h:
@@ -638,6 +650,8 @@ Branch.h:
 Transformer.h:
 
 SyncGenerator.h:
+
+GeneratorForm.h:
 
 Machines.h:
 
