@@ -1279,3 +1279,316 @@ GeneratorStabFormBase::~GeneratorStabFormBase()
     m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneratorStabFormBase::OnCancelButtonClick), NULL, this);
     
 }
+
+LineFormBase::LineFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlName = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlName->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_1->Add(m_textCtrlName, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlName->SetMinSize(wxSize(300,-1));
+    
+    wxGridSizer* gridSizerLvl3_1 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_1->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_9 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_9, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextNominalVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_9->Add(m_staticTextNominalVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextNominalVoltageValue = new wxStaticText(m_panelGeneral, wxID_ANY, _("138 kV"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    wxFont m_staticTextNominalVoltageValueFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+    m_staticTextNominalVoltageValueFont.SetWeight(wxFONTWEIGHT_BOLD);
+    m_staticTextNominalVoltageValue->SetFont(m_staticTextNominalVoltageValueFont);
+    
+    boxSizerLvl4_9->Add(m_staticTextNominalVoltageValue, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_8 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_8, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_8->Add(m_staticTextNominalPower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_5 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_8->Add(boxSizerLvl5_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlNominalPower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlNominalPower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_5->Add(m_textCtrlNominalPower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceNominalPowerArr;
+    m_choiceNominalPowerArr.Add(wxT("VA"));
+    m_choiceNominalPowerArr.Add(wxT("kVA"));
+    m_choiceNominalPowerArr.Add(wxT("MVA"));
+    m_choiceNominalPower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceNominalPowerArr, 0);
+    m_choiceNominalPower->SetSelection(2);
+    
+    boxSizerLvl5_5->Add(m_choiceNominalPower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextResistance = new wxStaticText(m_panelGeneral, wxID_ANY, _("Resistance (R)"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_1->Add(boxSizerLvl5_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlResistance = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlResistance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_1->Add(m_textCtrlResistance, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceResistanceArr;
+    m_choiceResistanceArr.Add(wxT("p.u."));
+    m_choiceResistanceArr.Add(wxT("Ohm"));
+    m_choiceResistanceArr.Add(wxT("Ohm/km"));
+    m_choiceResistance = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceResistanceArr, 0);
+    m_choiceResistance->SetSelection(0);
+    
+    boxSizerLvl5_1->Add(m_choiceResistance, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextReactance = new wxStaticText(m_panelGeneral, wxID_ANY, _("Indutive reactance (XL)"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_2->Add(boxSizerLvl5_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlReactance = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlReactance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_2->Add(m_textCtrlReactance, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceReactanceArr;
+    m_choiceReactanceArr.Add(wxT("p.u."));
+    m_choiceReactanceArr.Add(wxT("Ohm"));
+    m_choiceReactanceArr.Add(wxT("Ohm/km"));
+    m_choiceReactance = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceReactanceArr, 0);
+    m_choiceReactance->SetSelection(0);
+    
+    boxSizerLvl5_2->Add(m_choiceReactance, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSusceptance = new wxStaticText(m_panelGeneral, wxID_ANY, _("Capacitive susceptance (B)"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_3->Add(m_staticTextSusceptance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_3 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_3->Add(boxSizerLvl5_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSusceptance = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSusceptance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_3->Add(m_textCtrlSusceptance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceSusceptanceArr;
+    m_choiceSusceptanceArr.Add(wxT("p.u."));
+    m_choiceSusceptanceArr.Add(wxT("S"));
+    m_choiceSusceptanceArr.Add(wxT("S/km"));
+    m_choiceSusceptance = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceSusceptanceArr, 0);
+    m_choiceSusceptance->SetSelection(0);
+    
+    boxSizerLvl5_3->Add(m_choiceSusceptance, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextLineSize = new wxStaticText(m_panelGeneral, wxID_ANY, _("Line size"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_4->Add(m_staticTextLineSize, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_4 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_4->Add(boxSizerLvl5_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlLineSize = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlLineSize->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_4->Add(m_textCtrlLineSize, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextKM = new wxStaticText(m_panelGeneral, wxID_ANY, _("km"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_4->Add(m_staticTextKM, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkUseLinePower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use line nominal power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkUseLinePower->SetValue(false);
+    
+    boxSizerLvl2_1->Add(m_checkUseLinePower, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_panelFault = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelFault, _("Fault"), false);
+    
+    wxBoxSizer* boxSizerLvl2_2 = new wxBoxSizer(wxVERTICAL);
+    m_panelFault->SetSizer(boxSizerLvl2_2);
+    
+    wxStaticBoxSizer* staticBoxSizerZeroImpSeq = new wxStaticBoxSizer( new wxStaticBox(m_panelFault, wxID_ANY, _("Zero-sequance impedances (p.u.)")), wxVERTICAL);
+    
+    boxSizerLvl2_2->Add(staticBoxSizerZeroImpSeq, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl3_2 = new wxGridSizer(0, 2, 0, 0);
+    
+    staticBoxSizerZeroImpSeq->Add(gridSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_2->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextZeroResistance = new wxStaticText(m_panelFault, wxID_ANY, _("Resistance (R0)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_5->Add(m_staticTextZeroResistance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlZeroResistance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlZeroResistance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_5->Add(m_textCtrlZeroResistance, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_6 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_2->Add(boxSizerLvl4_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextZeroReactance = new wxStaticText(m_panelFault, wxID_ANY, _("Indutive reactance (X0)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_6->Add(m_staticTextZeroReactance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlZeroReactance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlZeroReactance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_6->Add(m_textCtrlZeroReactance, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_7 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_2->Add(boxSizerLvl4_7, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextZeroSusceptance = new wxStaticText(m_panelFault, wxID_ANY, _("Capacitive susceptance (B0)"), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_7->Add(m_staticTextZeroSusceptance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlZeroSusceptance = new wxTextCtrl(m_panelFault, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlZeroSusceptance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_7->Add(m_textCtrlZeroSusceptance, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonStability = new wxButton(this, wxID_ANY, _("Stability"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonStability, 0, wxALL|wxALIGN_LEFT, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("LineFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonStability->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LineFormBase::OnStabilityButtonClick), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LineFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LineFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+LineFormBase::~LineFormBase()
+{
+    m_buttonStability->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LineFormBase::OnStabilityButtonClick), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LineFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LineFormBase::OnCancelButtonClick), NULL, this);
+    
+}

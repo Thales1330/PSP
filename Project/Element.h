@@ -53,7 +53,11 @@ enum ElectricalUnit
 	UNIT_MVA,
 	UNIT_VAr,
 	UNIT_kVAr,
-	UNIT_MVAr
+	UNIT_MVAr,
+	UNIT_OHM,
+	UNIT_OHM_km,
+	UNIT_S,
+	UNIT_S_km
 };
 
 enum FaultData

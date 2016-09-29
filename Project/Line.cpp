@@ -308,3 +308,14 @@ void Line::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBo
 		}
 	}
 }
+
+bool Line::ShowForm(wxWindow* parent, Element* element)
+{
+	LineForm* lineForm = new LineForm(parent, this);
+	if(lineForm->ShowModal() == wxID_OK) {
+		lineForm->Destroy();
+		return true;
+	}
+	lineForm->Destroy();
+	return false;
+}

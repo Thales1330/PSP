@@ -366,4 +366,83 @@ public:
     virtual ~GeneratorStabFormBase();
 };
 
+
+class LineFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextNominalVoltage;
+    wxStaticText* m_staticTextNominalVoltageValue;
+    wxStaticText* m_staticTextNominalPower;
+    wxTextCtrl* m_textCtrlNominalPower;
+    wxChoice* m_choiceNominalPower;
+    wxStaticText* m_staticTextResistance;
+    wxTextCtrl* m_textCtrlResistance;
+    wxChoice* m_choiceResistance;
+    wxStaticText* m_staticTextReactance;
+    wxTextCtrl* m_textCtrlReactance;
+    wxChoice* m_choiceReactance;
+    wxStaticText* m_staticTextSusceptance;
+    wxTextCtrl* m_textCtrlSusceptance;
+    wxChoice* m_choiceSusceptance;
+    wxStaticText* m_staticTextLineSize;
+    wxTextCtrl* m_textCtrlLineSize;
+    wxStaticText* m_staticTextKM;
+    wxCheckBox* m_checkUseLinePower;
+    wxPanel* m_panelFault;
+    wxStaticText* m_staticTextZeroResistance;
+    wxTextCtrl* m_textCtrlZeroResistance;
+    wxStaticText* m_staticTextZeroReactance;
+    wxTextCtrl* m_textCtrlZeroReactance;
+    wxStaticText* m_staticTextZeroSusceptance;
+    wxTextCtrl* m_textCtrlZeroSusceptance;
+    wxButton* m_buttonStability;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextNominalVoltage() { return m_staticTextNominalVoltage; }
+    wxStaticText* GetStaticTextNominalVoltageValue() { return m_staticTextNominalVoltageValue; }
+    wxStaticText* GetStaticTextNominalPower() { return m_staticTextNominalPower; }
+    wxTextCtrl* GetTextCtrlNominalPower() { return m_textCtrlNominalPower; }
+    wxChoice* GetChoiceNominalPower() { return m_choiceNominalPower; }
+    wxStaticText* GetStaticTextResistance() { return m_staticTextResistance; }
+    wxTextCtrl* GetTextCtrlResistance() { return m_textCtrlResistance; }
+    wxChoice* GetChoiceResistance() { return m_choiceResistance; }
+    wxStaticText* GetStaticTextReactance() { return m_staticTextReactance; }
+    wxTextCtrl* GetTextCtrlReactance() { return m_textCtrlReactance; }
+    wxChoice* GetChoiceReactance() { return m_choiceReactance; }
+    wxStaticText* GetStaticTextSusceptance() { return m_staticTextSusceptance; }
+    wxTextCtrl* GetTextCtrlSusceptance() { return m_textCtrlSusceptance; }
+    wxChoice* GetChoiceSusceptance() { return m_choiceSusceptance; }
+    wxStaticText* GetStaticTextLineSize() { return m_staticTextLineSize; }
+    wxTextCtrl* GetTextCtrlLineSize() { return m_textCtrlLineSize; }
+    wxStaticText* GetStaticTextKM() { return m_staticTextKM; }
+    wxCheckBox* GetCheckUseLinePower() { return m_checkUseLinePower; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxStaticText* GetStaticTextZeroResistance() { return m_staticTextZeroResistance; }
+    wxTextCtrl* GetTextCtrlZeroResistance() { return m_textCtrlZeroResistance; }
+    wxStaticText* GetStaticTextZeroReactance() { return m_staticTextZeroReactance; }
+    wxTextCtrl* GetTextCtrlZeroReactance() { return m_textCtrlZeroReactance; }
+    wxStaticText* GetStaticTextZeroSusceptance() { return m_staticTextZeroSusceptance; }
+    wxTextCtrl* GetTextCtrlZeroSusceptance() { return m_textCtrlZeroSusceptance; }
+    wxPanel* GetPanelFault() { return m_panelFault; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonStability() { return m_buttonStability; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    LineFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Line"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~LineFormBase();
+};
+
 #endif

@@ -35,6 +35,7 @@
         <File Name="BusForm.cpp"/>
         <File Name="GeneratorForm.cpp"/>
         <File Name="GeneratorStabForm.cpp"/>
+        <File Name="LineForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -67,6 +68,7 @@
         <File Name="BusForm.h"/>
         <File Name="GeneratorForm.h"/>
         <File Name="GeneratorStabForm.h"/>
+        <File Name="LineForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

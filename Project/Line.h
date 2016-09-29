@@ -1,9 +1,33 @@
 #ifndef LINE_H
 #define LINE_H
 
+#include "LineForm.h"
 #include "Branch.h"
 
-#include <wx/log.h>
+class LineForm;
+
+struct LineElectricalData
+{
+    // General
+    wxString name = "";
+    double nominalVoltage = 138.0;
+    ElectricalUnit nominalVoltageUnit = UNIT_kV;
+    double nominalPower = 100.0;
+    ElectricalUnit nominalPowerUnit = UNIT_MVA;
+    double resistance = 0.0;
+    ElectricalUnit resistanceUnit = UNIT_PU;
+    double indReactance = 1.0;
+    ElectricalUnit indReactanceUnit = UNIT_PU;
+    double capSusceptance = 0.0;
+    ElectricalUnit capSusceptanceUnit = UNIT_PU;
+    double lineSize = 100.0;
+    bool useLinePower = false;
+
+    // Fault
+    double zeroResistance = 0.0;
+    double zeroIndReactance = 1.0;
+    double zeroCapSusceptance = 0.0;
+};
 
 class Line : public Branch
 {
@@ -24,10 +48,13 @@ class Line : public Branch
     virtual bool GetContextMenu(wxMenu& menu);
     virtual void RemoveNode(wxPoint2DDouble point);
     virtual void AddNode(wxPoint2DDouble point);
-	virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
-
+    virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
+    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
+    virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }
    protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
+    LineElectricalData m_electricaData;
 };
 
 #endif  // LINE_H
