@@ -16518,7 +16518,7 @@
               }, {
                "type": "string",
                "m_label": "Label:",
-               "m_value": "Zero-sequance impedances (p.u.)"
+               "m_value": "Zero-sequence impedances (p.u.)"
               }],
              "m_events": [],
              "m_children": [{

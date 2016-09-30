@@ -2,6 +2,7 @@
 #define BRANCH_H
 
 #include "Element.h"
+#include "Bus.h"
 
 class Branch : public Element
 {

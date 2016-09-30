@@ -1481,7 +1481,7 @@ LineFormBase::LineFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     wxBoxSizer* boxSizerLvl2_2 = new wxBoxSizer(wxVERTICAL);
     m_panelFault->SetSizer(boxSizerLvl2_2);
     
-    wxStaticBoxSizer* staticBoxSizerZeroImpSeq = new wxStaticBoxSizer( new wxStaticBox(m_panelFault, wxID_ANY, _("Zero-sequance impedances (p.u.)")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizerZeroImpSeq = new wxStaticBoxSizer( new wxStaticBox(m_panelFault, wxID_ANY, _("Zero-sequence impedances (p.u.)")), wxVERTICAL);
     
     boxSizerLvl2_2->Add(staticBoxSizerZeroImpSeq, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     

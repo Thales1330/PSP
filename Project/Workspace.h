@@ -72,6 +72,9 @@ class Workspace : public WorkspaceBase
 	void DeleteSelectedElements();
 	void Fit();
 	
+	void ValidateBusesVoltages(Element* initialBus);
+	void ValidateElementsVoltages();
+	
 	int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
 	void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
 
@@ -98,7 +101,6 @@ class Workspace : public WorkspaceBase
     WorkspaceMode m_mode = MODE_EDIT;
 
     std::vector<Element*> m_elementList;
-	//int m_numElements = NUM_ELEMENTS;
 	int m_elementNumber[NUM_ELEMENTS];
 
     void UpdateStatusBar();

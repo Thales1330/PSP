@@ -130,7 +130,61 @@ Release/Branch.cpp.o: Branch.cpp Branch.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h BusForm.h ElementForm.h \
+ C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
+ C:/wxWidgets-3.1.0/include/wx/filesys.h \
+ C:/wxWidgets-3.1.0/include/wx/filename.h \
+ C:/wxWidgets-3.1.0/include/wx/file.h \
+ C:/wxWidgets-3.1.0/include/wx/convauto.h \
+ C:/wxWidgets-3.1.0/include/wx/artprov.h \
+ C:/wxWidgets-3.1.0/include/wx/xrc/xmlreshandler.h \
+ C:/wxWidgets-3.1.0/include/wx/imaglist.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/imaglist.h \
+ C:/wxWidgets-3.1.0/include/wx/xrc/xh_bmp.h \
+ C:/wxWidgets-3.1.0/include/wx/sizer.h \
+ C:/wxWidgets-3.1.0/include/wx/notebook.h \
+ C:/wxWidgets-3.1.0/include/wx/bookctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/control.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/control.h \
+ C:/wxWidgets-3.1.0/include/wx/withimages.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/notebook.h \
+ C:/wxWidgets-3.1.0/include/wx/stattext.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/stattext.h \
+ C:/wxWidgets-3.1.0/include/wx/textctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/textentry.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/textentry.h \
+ C:/wxWidgets-3.1.0/include/wx/ioswrap.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/choice.h \
+ C:/wxWidgets-3.1.0/include/wx/ctrlsub.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ctrlsub.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/choice.h \
+ C:/wxWidgets-3.1.0/include/wx/checkbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h \
+ C:/wxWidgets-3.1.0/include/wx/button.h \
+ C:/wxWidgets-3.1.0/include/wx/anybutton.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/button.h \
+ C:/wxWidgets-3.1.0/include/wx/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statbox.h \
+ C:/wxWidgets-3.1.0/include/wx/statline.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statline.h \
+ C:/wxWidgets-3.1.0/include/wx/persist.h \
+ C:/wxWidgets-3.1.0/include/wx/confbase.h \
+ C:/wxWidgets-3.1.0/include/wx/base64.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/toplevel.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/window.h \
+ C:/wxWidgets-3.1.0/include/wx/display.h \
+ C:/wxWidgets-3.1.0/include/wx/vidmode.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/bookctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/persist/treebook.h \
+ C:/wxWidgets-3.1.0/include/wx/treebook.h \
+ C:/wxWidgets-3.1.0/include/wx/treectrl.h \
+ C:/wxWidgets-3.1.0/include/wx/treebase.h \
+ C:/wxWidgets-3.1.0/include/wx/itemid.h \
+ C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h
 
 Branch.h:
 
@@ -401,3 +455,117 @@ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
 C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
+
+Bus.h:
+
+BusForm.h:
+
+ElementForm.h:
+
+C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h:
+
+C:/wxWidgets-3.1.0/include/wx/filesys.h:
+
+C:/wxWidgets-3.1.0/include/wx/filename.h:
+
+C:/wxWidgets-3.1.0/include/wx/file.h:
+
+C:/wxWidgets-3.1.0/include/wx/convauto.h:
+
+C:/wxWidgets-3.1.0/include/wx/artprov.h:
+
+C:/wxWidgets-3.1.0/include/wx/xrc/xmlreshandler.h:
+
+C:/wxWidgets-3.1.0/include/wx/imaglist.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/imaglist.h:
+
+C:/wxWidgets-3.1.0/include/wx/xrc/xh_bmp.h:
+
+C:/wxWidgets-3.1.0/include/wx/sizer.h:
+
+C:/wxWidgets-3.1.0/include/wx/notebook.h:
+
+C:/wxWidgets-3.1.0/include/wx/bookctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/control.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/control.h:
+
+C:/wxWidgets-3.1.0/include/wx/withimages.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/notebook.h:
+
+C:/wxWidgets-3.1.0/include/wx/stattext.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/stattext.h:
+
+C:/wxWidgets-3.1.0/include/wx/textctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/textentry.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/textentry.h:
+
+C:/wxWidgets-3.1.0/include/wx/ioswrap.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/textctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/choice.h:
+
+C:/wxWidgets-3.1.0/include/wx/ctrlsub.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ctrlsub.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/choice.h:
+
+C:/wxWidgets-3.1.0/include/wx/checkbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/checkbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrawnbutton.h:
+
+C:/wxWidgets-3.1.0/include/wx/button.h:
+
+C:/wxWidgets-3.1.0/include/wx/anybutton.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/anybutton.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/button.h:
+
+C:/wxWidgets-3.1.0/include/wx/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/statline.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statline.h:
+
+C:/wxWidgets-3.1.0/include/wx/persist.h:
+
+C:/wxWidgets-3.1.0/include/wx/confbase.h:
+
+C:/wxWidgets-3.1.0/include/wx/base64.h:
+
+C:/wxWidgets-3.1.0/include/wx/persist/toplevel.h:
+
+C:/wxWidgets-3.1.0/include/wx/persist/window.h:
+
+C:/wxWidgets-3.1.0/include/wx/display.h:
+
+C:/wxWidgets-3.1.0/include/wx/vidmode.h:
+
+C:/wxWidgets-3.1.0/include/wx/persist/bookctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/persist/treebook.h:
+
+C:/wxWidgets-3.1.0/include/wx/treebook.h:
+
+C:/wxWidgets-3.1.0/include/wx/treectrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/treebase.h:
+
+C:/wxWidgets-3.1.0/include/wx/itemid.h:
+
+C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:

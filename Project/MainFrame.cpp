@@ -229,8 +229,10 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				break;
 			    case ID_ADDMENU_LINE:
 				{
-				    Line* newLine = new Line();
+				    Line* newLine =
+				        new Line(wxString::Format(_("Line %d"), workspace->GetElementNumber(ID_LINE)));
 				    elementList.push_back(newLine);
+				    workspace->IncrementElementNumber(ID_LINE);
 				    statusBarText = _("Insert Line: Click on two buses, ESC to cancel.");
 				    newElement = true;
 				}

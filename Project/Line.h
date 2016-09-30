@@ -33,6 +33,7 @@ class Line : public Branch
 {
    public:
     Line();
+	Line(wxString name);
     ~Line();
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

@@ -235,7 +235,43 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 
 	    // Click in an element.
 	    if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+		    bool elementIsBus = false;
+		    Bus oldBus;
+		    if(typeid(*element) == typeid(Bus)) {
+			    elementIsBus = true;
+			    oldBus = *(Bus*)element;
+			}
 		    element->ShowForm(this, element);
+
+		    // If the edited element is a bus and was changed the nominal voltage, this voltage must be
+		    // propagated through the lines
+		    if(elementIsBus) {
+			    // The voltage was changed
+			    if(oldBus.GetEletricalData().nominalVoltage !=
+			           ((Bus*)element)->GetEletricalData().nominalVoltage ||
+			       oldBus.GetEletricalData().nominalVoltageUnit !=
+			           ((Bus*)element)->GetEletricalData().nominalVoltageUnit)
+				{
+				    // Check if the lines has this bus as parent
+				    for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
+					    Element* child = *it;
+
+					    bool elementIsParent = false;
+					    if(typeid(*child) == typeid(Line)) {
+						    for(int i = 0; i < (int)child->GetParentList().size(); i++) {
+							    Element* parent = child->GetParentList()[i];
+							    if(parent == element) {
+								    // TODO: Ask the user if he wants to change all
+								    // voltages
+								    ValidateBusesVoltages(element);
+								    elementIsParent = true;
+								}
+							}
+						}
+					    if(elementIsParent) break;
+					}
+				}
+			}
 		}
 
 	    // Click in a switch.
@@ -601,7 +637,9 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					}
 				    else  // Insert a power line.
 					{
-					    Line* newLine = new Line();
+					    Line* newLine =
+					        new Line(wxString::Format(_("Line %d"), GetElementNumber(ID_LINE)));
+					    IncrementElementNumber(ID_LINE);
 					    m_elementList.push_back(newLine);
 					    m_mode = MODE_INSERT;
 					    m_statusBar->SetStatusText(
@@ -900,4 +938,38 @@ void Workspace::Fit()
 	    m_camera->SetTranslation(wxPoint2DDouble(0, 0));
 	    Redraw();
 	}
+}
+
+void Workspace::ValidateBusesVoltages(Element* initialBus)
+{
+    double nominalVoltage = ((Bus*)initialBus)->GetEletricalData().nominalVoltage;
+    ElectricalUnit nominalVoltageUnit = ((Bus*)initialBus)->GetEletricalData().nominalVoltageUnit;
+
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
+	    Element* child = *it;
+
+	    if(typeid(*child) == typeid(Line)) {
+		    BusElectricalData data1 = ((Bus*)child->GetParentList()[0])->GetEletricalData();
+		    BusElectricalData data2 = ((Bus*)child->GetParentList()[1])->GetEletricalData();
+
+		    if(data1.nominalVoltage != data2.nominalVoltage ||
+		       data1.nominalVoltageUnit != data2.nominalVoltageUnit)
+			{
+			    data1.nominalVoltage = nominalVoltage;
+			    data2.nominalVoltage = nominalVoltage;
+			    data1.nominalVoltageUnit = nominalVoltageUnit;
+			    data2.nominalVoltageUnit = nominalVoltageUnit;
+
+			    ((Bus*)child->GetParentList()[0])->SetElectricalData(data1);
+			    ((Bus*)child->GetParentList()[1])->SetElectricalData(data2);
+				
+				it = m_elementList.begin();// Restart search.
+			}
+		}
+	}
+}
+
+void Workspace::ValidateElementsVoltages()
+{
+	//continua...
 }

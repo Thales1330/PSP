@@ -1,6 +1,7 @@
 #include "Line.h"
 
 Line::Line() : Branch() {}
+Line::Line(wxString name) : Branch() { m_electricaData.name = name; }
 Line::~Line() {}
 bool Line::Contains(wxPoint2DDouble position) const
 {
@@ -41,8 +42,8 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
     glLineWidth(1.5);
     glColor4d(0.2, 0.2, 0.2, 1.0);
     DrawLine(pointList);
-	
-	DrawSwitches();
+
+    if(m_inserted) DrawSwitches();
 
     // Draw nodes.
     if(pointList.size() > 0) {
@@ -97,16 +98,32 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 		    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 		    m_pointList.push_back(parentPt);                                    // First point
 		    m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
-			
-			wxRect2DDouble genRect(0,0,0,0);
-			m_switchRect.push_back(genRect);
-			UpdateSwitches();
-			
+
+		    wxRect2DDouble genRect(0, 0, 0, 0);
+		    m_switchRect.push_back(genRect);
+		    UpdateSwitches();
+
+		    Bus* parentBus = (Bus*)parent;
+		    m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
+		    m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
+
 		    return false;
 		}
 	    // Second bus.
 	    else if(parent != m_parentList[0])
 		{
+		    Bus* parentBus = (Bus*)parent;
+		    if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
+		       m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit)
+			{
+			    wxMessageDialog msgDialog(
+			        NULL, _("Unable to connect with a line two buses with different nominal voltages.\n"
+			                "Use a transformer or edit the bus properties."),
+			        _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+			    msgDialog.ShowModal();
+			    return false;
+			}
+
 		    m_parentList.push_back(parent);
 		    wxPoint2DDouble parentPt = parent->RotateAtPosition(
 		        position, -parent->GetAngle());        // Rotate click to horizontal position.
@@ -124,11 +141,11 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 		    m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_pointList[m_pointList.size() - 1]));
 
 		    m_pointList.push_back(parentPt);  // Last point.
-			
-			wxRect2DDouble genRect(0,0,0,0);
-			m_switchRect.push_back(genRect);
-			UpdateSwitches();
-			
+
+		    wxRect2DDouble genRect(0, 0, 0, 0);
+		    m_switchRect.push_back(genRect);
+		    UpdateSwitches();
+
 		    m_inserted = true;
 		    return true;
 		}
@@ -203,13 +220,13 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 	    if(m_activeNodeID == 1) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 		    m_parentList[0] = NULL;
-			m_online = false;
+		    m_online = false;
 		}
 	    else if(m_activeNodeID == 2)
 		{
 		    m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
 		    m_parentList[1] = NULL;
-			m_online = false;
+		    m_online = false;
 		}
 	}
 
@@ -267,7 +284,7 @@ bool Line::GetContextMenu(wxMenu& menu)
 	{
 	    menu.Append(ID_LINE_REMOVE_NODE, _("Remove node"));
 	}
-	menu.Append(ID_DELETE, _("Delete"));
+    menu.Append(ID_DELETE, _("Delete"));
     return true;
 }
 
@@ -296,26 +313,26 @@ void Line::AddNode(wxPoint2DDouble point)
 
 void Line::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const
 {
-	if(m_pointList.size() > 0) {
-		// Check points list boundaries.
-		leftUp = m_pointList[0];
-		rightBottom = m_pointList[0];
-		for(int i = 1; i < (int)m_pointList.size(); i++) {
-			if(m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
-			if(m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
-			if(m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
-			if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
+    if(m_pointList.size() > 0) {
+	    // Check points list boundaries.
+	    leftUp = m_pointList[0];
+	    rightBottom = m_pointList[0];
+	    for(int i = 1; i < (int)m_pointList.size(); i++) {
+		    if(m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
+		    if(m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
+		    if(m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
+		    if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
 		}
 	}
 }
 
 bool Line::ShowForm(wxWindow* parent, Element* element)
 {
-	LineForm* lineForm = new LineForm(parent, this);
-	if(lineForm->ShowModal() == wxID_OK) {
-		lineForm->Destroy();
-		return true;
+    LineForm* lineForm = new LineForm(parent, this);
+    if(lineForm->ShowModal() == wxID_OK) {
+	    lineForm->Destroy();
+	    return true;
 	}
-	lineForm->Destroy();
-	return false;
+    lineForm->Destroy();
+    return false;
 }

@@ -169,6 +169,8 @@ class Element
 	bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
 	bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
 	
+	virtual void 
+	
    protected:
     std::vector<Element*> m_parentList;
 
