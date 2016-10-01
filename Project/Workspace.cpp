@@ -949,27 +949,40 @@ void Workspace::ValidateBusesVoltages(Element* initialBus)
 	    Element* child = *it;
 
 	    if(typeid(*child) == typeid(Line)) {
-		    BusElectricalData data1 = ((Bus*)child->GetParentList()[0])->GetEletricalData();
-		    BusElectricalData data2 = ((Bus*)child->GetParentList()[1])->GetEletricalData();
+			if(child->GetParentList()[0] && child->GetParentList()[1]) {
+				BusElectricalData data1 = ((Bus*)child->GetParentList()[0])->GetEletricalData();
+				BusElectricalData data2 = ((Bus*)child->GetParentList()[1])->GetEletricalData();
 
-		    if(data1.nominalVoltage != data2.nominalVoltage ||
-		       data1.nominalVoltageUnit != data2.nominalVoltageUnit)
-			{
-			    data1.nominalVoltage = nominalVoltage;
-			    data2.nominalVoltage = nominalVoltage;
-			    data1.nominalVoltageUnit = nominalVoltageUnit;
-			    data2.nominalVoltageUnit = nominalVoltageUnit;
+				if(data1.nominalVoltage != data2.nominalVoltage ||
+				   data1.nominalVoltageUnit != data2.nominalVoltageUnit)
+				{
+					data1.nominalVoltage = nominalVoltage;
+					data2.nominalVoltage = nominalVoltage;
+					data1.nominalVoltageUnit = nominalVoltageUnit;
+					data2.nominalVoltageUnit = nominalVoltageUnit;
 
-			    ((Bus*)child->GetParentList()[0])->SetElectricalData(data1);
-			    ((Bus*)child->GetParentList()[1])->SetElectricalData(data2);
-				
-				it = m_elementList.begin();// Restart search.
+					((Bus*)child->GetParentList()[0])->SetElectricalData(data1);
+					((Bus*)child->GetParentList()[1])->SetElectricalData(data2);
+
+					it = m_elementList.begin();  // Restart search.
+				}
 			}
 		}
 	}
+
+    ValidateElementsVoltages();
 }
 
 void Workspace::ValidateElementsVoltages()
 {
-	//continua...
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
+	    Element* child = *it;
+	    for(int i = 0; i < (int)child->GetParentList().size(); i++) {
+		    Bus* parent = (Bus*)child->GetParentList()[i];
+		    if(parent) {
+			    child->SetNominalVoltage(parent->GetEletricalData().nominalVoltage,
+			                             parent->GetEletricalData().nominalVoltageUnit);
+			}
+		}
+	}
 }

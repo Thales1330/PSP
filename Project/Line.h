@@ -40,6 +40,7 @@ class Line : public Branch
     virtual void Move(wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
+	virtual bool SetNodeParent(Element* parent);
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_SIZING; }
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Intersects(wxRect2DDouble rect) const;
@@ -53,6 +54,7 @@ class Line : public Branch
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }
+	virtual void SetNominalVoltage(double nominalVoltage, ElectricalUnit nominalVoltageUnit);
    protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
     LineElectricalData m_electricaData;

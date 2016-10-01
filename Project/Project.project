@@ -9,7 +9,6 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="model">
-      <File Name="Element.cpp"/>
       <VirtualDirectory Name="electrical">
         <File Name="Bus.cpp"/>
         <File Name="Line.cpp"/>
@@ -23,6 +22,7 @@
         <File Name="Load.cpp"/>
         <File Name="Inductor.cpp"/>
         <File Name="Capacitor.cpp"/>
+        <File Name="Element.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -42,7 +42,6 @@
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="model">
-      <File Name="Element.h"/>
       <VirtualDirectory Name="electrical">
         <File Name="Bus.h"/>
         <File Name="Line.h"/>
@@ -56,6 +55,7 @@
         <File Name="Load.h"/>
         <File Name="Inductor.h"/>
         <File Name="Capacitor.h"/>
+        <File Name="Element.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">

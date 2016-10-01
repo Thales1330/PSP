@@ -169,7 +169,7 @@ class Element
 	bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
 	bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
 	
-	virtual void 
+	virtual void SetNominalVoltage(double nominalVoltage, ElectricalUnit nominalVoltageUnit) {}
 	
    protected:
     std::vector<Element*> m_parentList;

@@ -116,10 +116,10 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 		    if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
 		       m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit)
 			{
-			    wxMessageDialog msgDialog(
-			        NULL, _("Unable to connect with a line two buses with different nominal voltages.\n"
-			                "Use a transformer or edit the bus properties."),
-			        _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+			    wxMessageDialog msgDialog(NULL,
+			                              _("Unable to connect two buses with different nominal voltages.\n"
+			                                "Use a transformer or edit the bus properties."),
+			                              _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
 			    msgDialog.ShowModal();
 			    return false;
 			}
@@ -334,5 +334,95 @@ bool Line::ShowForm(wxWindow* parent, Element* element)
 	    return true;
 	}
     lineForm->Destroy();
+    return false;
+}
+
+void Line::SetNominalVoltage(double nominalVoltage, ElectricalUnit nominalVoltageUnit)
+{
+    m_electricaData.nominalVoltage = nominalVoltage;
+    m_electricaData.nominalVoltageUnit = nominalVoltageUnit;
+}
+
+bool Line::SetNodeParent(Element* parent)
+{
+    if(m_activeNodeID == 1 && parent == m_parentList[0]) return false;
+    if(m_activeNodeID == 2 && parent == m_parentList[1]) return false;
+
+    if(parent && m_activeNodeID != 0) {
+	    wxRect2DDouble nodeRect(0, 0, 0, 0);
+	    if(m_activeNodeID == 1) {
+		    nodeRect =
+		        wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
+		                       10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+		}
+	    if(m_activeNodeID == 2) {
+		    nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
+		                              m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+		                              10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+		}
+
+	    if(parent->Intersects(nodeRect)) {
+		    // If the line has no parents set the new nominal voltage, otherwise check if it's not connecting
+		    // two different voltages buses
+		    Bus* parentBus = (Bus*)parent;
+		    if(!m_parentList[0] && !m_parentList[1]) {
+			    m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
+			    m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
+			}
+		    else if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
+		            m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit)
+			{
+			    wxMessageDialog msgDialog(NULL,
+			                              _("Unable to connect two buses with different nominal voltages.\n"
+			                                "Use a transformer or edit the bus properties."),
+			                              _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+			    msgDialog.ShowModal();
+			    m_activeNodeID = 0;
+			    return false;
+			}
+
+		    if(m_activeNodeID == 1) {
+			    // Check if the user is trying to connect the same bus.
+			    if(m_parentList[1] == parent) {
+				    m_activeNodeID = 0;
+				    return false;
+				}
+
+			    m_parentList[0] = parent;
+
+			    // Centralize the node on bus.
+			    wxPoint2DDouble parentPt = parent->RotateAtPosition(
+			        m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
+			    parentPt.m_y = parent->GetPosition().m_y;  // Centralize on bus.
+			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+			    m_pointList[0] = parentPt;
+
+			    UpdateSwitchesPosition();
+			    return true;
+			}
+		    if(m_activeNodeID == 2) {
+			    if(m_parentList[0] == parent) {
+				    m_activeNodeID = 0;
+				    return false;
+				}
+
+			    m_parentList[1] = parent;
+
+			    wxPoint2DDouble parentPt =
+			        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], -parent->GetAngle());
+			    parentPt.m_y = parent->GetPosition().m_y;
+			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+			    m_pointList[m_pointList.size() - 1] = parentPt;
+
+			    UpdateSwitchesPosition();
+			    return true;
+			}
+		}
+	    else
+		{
+		    if(m_activeNodeID == 1) m_parentList[0] = NULL;
+		    if(m_activeNodeID == 2) m_parentList[1] = NULL;
+		}
+	}
     return false;
 }
