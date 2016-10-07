@@ -3,6 +3,7 @@
 #include "ElementForm.h"
 
 class Line;
+class SwitchingForm;
 
 class LineForm : public LineFormBase
 {

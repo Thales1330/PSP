@@ -1592,3 +1592,112 @@ LineFormBase::~LineFormBase()
     m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LineFormBase::OnCancelButtonClick), NULL, this);
     
 }
+
+SwitchingFormBase::SwitchingFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerLvl2_1, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_1 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(boxSizerLvl3_1, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_pgMgrSwitchingsPropArr;
+    wxUnusedVar(m_pgMgrSwitchingsPropArr);
+    wxArrayInt m_pgMgrSwitchingsPropIntArr;
+    wxUnusedVar(m_pgMgrSwitchingsPropIntArr);
+    m_pgMgrSwitchingsProp = new wxPropertyGridManager(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxPG_STATIC_LAYOUT|wxPG_SPLITTER_AUTO_CENTER|wxPG_BOLD_MODIFIED);
+    
+    boxSizerLvl3_1->Add(m_pgMgrSwitchingsProp, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_pgPropTitle = m_pgMgrSwitchingsProp->Append(  new wxPropertyCategory( _("Switching properties") ) );
+    m_pgPropTitle->SetHelpString(wxT(""));
+    
+    m_pgMgrSwitchingsPropArr.Clear();
+    m_pgMgrSwitchingsPropIntArr.Clear();
+    m_pgMgrSwitchingsPropArr.Add(_("Insert"));
+    m_pgMgrSwitchingsPropArr.Add(_("Remove"));
+    m_pgPropType = m_pgMgrSwitchingsProp->Append(  new wxEnumProperty( _("Type"), wxPG_LABEL, m_pgMgrSwitchingsPropArr, m_pgMgrSwitchingsPropIntArr, 0) );
+    m_pgPropType->SetHelpString(wxT(""));
+    
+    m_pgPropTime = m_pgMgrSwitchingsProp->Append(  new wxFloatProperty( _("Time (s)"), wxPG_LABEL, 0) );
+    m_pgPropTime->SetHelpString(wxT(""));
+    m_pgMgrSwitchingsProp->SetMinSize(wxSize(200,90));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonInsert = new wxButton(this, wxID_ANY, _("Insert"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_buttonInsert, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonRemove = new wxButton(this, wxID_ANY, _("Remove"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_buttonRemove, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_listCtrlSwitchings = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxLC_REPORT);
+    
+    boxSizerLvl2_1->Add(m_listCtrlSwitchings, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    SetName(wxT("SwitchingFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_pgMgrSwitchingsProp->Connect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(SwitchingFormBase::OnChangeProperties), NULL, this);
+    m_buttonInsert->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnInsertButtonClick), NULL, this);
+    m_buttonRemove->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnRemoveButtonClick), NULL, this);
+    m_listCtrlSwitchings->Connect(wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler(SwitchingFormBase::OnSelectItem), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+SwitchingFormBase::~SwitchingFormBase()
+{
+    m_pgMgrSwitchingsProp->Disconnect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(SwitchingFormBase::OnChangeProperties), NULL, this);
+    m_buttonInsert->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnInsertButtonClick), NULL, this);
+    m_buttonRemove->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnRemoveButtonClick), NULL, this);
+    m_listCtrlSwitchings->Disconnect(wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler(SwitchingFormBase::OnSelectItem), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnCancelButtonClick), NULL, this);
+    
+}

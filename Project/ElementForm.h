@@ -25,6 +25,10 @@
 #include <wx/button.h>
 #include <wx/statbox.h>
 #include <wx/statline.h>
+#include <wx/propgrid/manager.h>
+#include <wx/propgrid/property.h>
+#include <wx/propgrid/advprops.h>
+#include <wx/listctrl.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -443,6 +447,39 @@ public:
     wxButton* GetButtonCancel() { return m_buttonCancel; }
     LineFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Line"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~LineFormBase();
+};
+
+
+class SwitchingFormBase : public wxDialog
+{
+protected:
+    wxPropertyGridManager* m_pgMgrSwitchingsProp;
+    wxPGProperty* m_pgPropTitle;
+    wxPGProperty* m_pgPropType;
+    wxPGProperty* m_pgPropTime;
+    wxButton* m_buttonInsert;
+    wxButton* m_buttonRemove;
+    wxListCtrl* m_listCtrlSwitchings;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnChangeProperties(wxPropertyGridEvent& event) { event.Skip(); }
+    virtual void OnInsertButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnSelectItem(wxListEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxPropertyGridManager* GetPgMgrSwitchingsProp() { return m_pgMgrSwitchingsProp; }
+    wxButton* GetButtonInsert() { return m_buttonInsert; }
+    wxButton* GetButtonRemove() { return m_buttonRemove; }
+    wxListCtrl* GetListCtrlSwitchings() { return m_listCtrlSwitchings; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    SwitchingFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Switching"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~SwitchingFormBase();
 };
 
 #endif

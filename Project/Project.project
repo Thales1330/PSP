@@ -36,6 +36,7 @@
         <File Name="GeneratorForm.cpp"/>
         <File Name="GeneratorStabForm.cpp"/>
         <File Name="LineForm.cpp"/>
+        <File Name="SwitchingForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -69,6 +70,7 @@
         <File Name="GeneratorForm.h"/>
         <File Name="GeneratorStabForm.h"/>
         <File Name="LineForm.h"/>
+        <File Name="SwitchingForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
