@@ -1,3 +1,4 @@
+#include "TransformerForm.h"
 #include "Transformer.h"
 
 Transformer::Transformer() : Branch() {}
@@ -224,4 +225,15 @@ bool Transformer::GetContextMenu(wxMenu& menu)
     menu.Append(ID_EDIT_TRANSFORMER, _("Edit tranformer"));
 	GeneralMenuItens(menu);
     return true;
+}
+
+bool Transformer::ShowForm(wxWindow* parent, Element* element)
+{
+    TransformerForm* transfForm = new TransformerForm(parent, this);
+    if(transfForm->ShowModal() == wxID_OK) {
+	    transfForm->Destroy();
+	    return true;
+	}
+    transfForm->Destroy();
+    return false;
 }

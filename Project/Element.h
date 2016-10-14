@@ -71,6 +71,18 @@ enum FaultData
 	FAULT_LINE_C
 };
 
+enum SwitchingType
+{
+    SW_INSERT = 0,
+    SW_REMOVE
+};
+
+struct SwitchingData
+{
+    std::vector<SwitchingType> swType;
+    std::vector<double> swTime;
+};
+
 class Element
 {
    public:
@@ -169,7 +181,10 @@ class Element
 	bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
 	bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
 	
+    //Electrical only methods
 	virtual void SetNominalVoltage(double nominalVoltage, ElectricalUnit nominalVoltageUnit) {}
+    virtual void SetSwitchingData(SwitchingData data) { m_swData = data; }
+    virtual SwitchingData GetSwitchingData() { return m_swData; }
 	
    protected:
     std::vector<Element*> m_parentList;
@@ -199,6 +214,8 @@ class Element
     wxPoint2DDouble m_movePos;
 
     bool m_online = true;
+    
+    SwitchingData m_swData;
 };
 
 #endif  // ELEMENT_H

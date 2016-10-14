@@ -213,7 +213,17 @@ Release/SwitchingForm.cpp.o: SwitchingForm.cpp SwitchingForm.h \
  C:/wxWidgets-3.1.0/include/wx/treectrl.h \
  C:/wxWidgets-3.1.0/include/wx/treebase.h \
  C:/wxWidgets-3.1.0/include/wx/itemid.h \
- C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h
+ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Element.h \
+ C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/stockitem.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
+ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h
 
 SwitchingForm.h:
 
@@ -652,3 +662,25 @@ C:/wxWidgets-3.1.0/include/wx/treebase.h:
 C:/wxWidgets-3.1.0/include/wx/itemid.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
+
+Element.h:
+
+C:/wxWidgets-3.1.0/include/wx/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/stockitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h:
+
+C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/menu.h:

@@ -1,4 +1,5 @@
 #include "GeneratorStabForm.h"
+#include "SwitchingForm.h"
 #include "SyncGenerator.h"
 
 GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator) : GeneratorStabFormBase(parent)
@@ -46,7 +47,16 @@ void GeneratorStabForm::OnOKButtonClick(wxCommandEvent& event)
 }
 
 void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event) {}
-void GeneratorStabForm::OnSwitchingButtonClick(wxCommandEvent& event) {}
+void GeneratorStabForm::OnSwitchingButtonClick(wxCommandEvent& event)
+{
+    if(ValidateData()) {
+        SwitchingForm swForm(m_parent, m_syncGenerator);
+        swForm.SetTitle(_("Synchronous generator: Switching"));
+        swForm.ShowModal();
+        EndModal(wxID_OK);
+    }
+}
+
 bool GeneratorStabForm::ValidateData()
 {
     SyncGeneratorElectricalData data = m_syncGenerator->GetElectricalData();

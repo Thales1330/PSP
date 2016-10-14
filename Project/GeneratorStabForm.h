@@ -2,6 +2,8 @@
 #define GENERATORSTABFORM_H
 
 #include "ElementForm.h"
+
+class SwitchingForm;
 class SyncGenerator;
 
 class GeneratorStabForm : public GeneratorStabFormBase

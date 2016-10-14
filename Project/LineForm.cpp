@@ -118,7 +118,7 @@ void LineForm::OnOKButtonClick(wxCommandEvent& event)
 void LineForm::OnStabilityButtonClick(wxCommandEvent& event)
 {
     if(ValidateData()) {
-        SwitchingForm swForm(m_parent);
+        SwitchingForm swForm(m_parent, m_line);
         swForm.SetTitle(_("Line: Switching"));
         swForm.ShowModal();
         EndModal(wxID_OK);

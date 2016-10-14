@@ -37,6 +37,7 @@
         <File Name="GeneratorStabForm.cpp"/>
         <File Name="LineForm.cpp"/>
         <File Name="SwitchingForm.cpp"/>
+        <File Name="TransformerForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -71,6 +72,7 @@
         <File Name="GeneratorStabForm.h"/>
         <File Name="LineForm.h"/>
         <File Name="SwitchingForm.h"/>
+        <File Name="TransformerForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

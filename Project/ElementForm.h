@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
-#define PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
+#ifndef _PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
+#define _PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
 
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>
@@ -450,6 +450,105 @@ public:
 };
 
 
+class TransformerFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextNominalVoltage;
+    wxStaticText* m_staticTextNominalVoltageValue;
+    wxStaticText* m_staticTextBaseVoltage;
+    wxChoice* m_choiceBaseVoltage;
+    wxStaticText* m_staticTextNominalPower;
+    wxTextCtrl* m_textCtrlNominalPower;
+    wxChoice* m_choiceNominalPower;
+    wxStaticText* m_staticTextResistance;
+    wxTextCtrl* m_textCtrlResistance;
+    wxChoice* m_choiceResistance;
+    wxStaticText* m_staticTextReactance;
+    wxTextCtrl* m_textCtrlReactance;
+    wxChoice* m_choiceReactance;
+    wxStaticLine* m_staticLine_1;
+    wxStaticText* m_staticTextConnection;
+    wxChoice* m_choiceConnection;
+    wxStaticText* m_staticTextTurnsRatio;
+    wxTextCtrl* m_textCtrlTurnRatio;
+    wxStaticText* m_staticTextPhaseShift;
+    wxTextCtrl* m_textCtrlPhaseShift;
+    wxStaticText* m_staticTextDeg;
+    wxCheckBox* m_checkUseTransformerPower;
+    wxPanel* m_panelFault;
+    wxStaticText* m_staticTextZeroResistance;
+    wxTextCtrl* m_textCtrlZeroResistance;
+    wxStaticText* m_staticTextZeroReactance;
+    wxTextCtrl* m_textCtrlZeroReactance;
+    wxStaticText* m_staticTextPrimResistance;
+    wxTextCtrl* m_textCtrlPrimResistance;
+    wxStaticText* m_staticTextPrimReactance;
+    wxTextCtrl* m_textCtrlPrimReactance;
+    wxStaticText* m_staticTextSecResistance;
+    wxTextCtrl* m_textCtrlSecResistance;
+    wxStaticText* m_staticTextSecReactance;
+    wxTextCtrl* m_textCtrlSecReactance;
+    wxButton* m_buttonStability;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextNominalVoltage() { return m_staticTextNominalVoltage; }
+    wxStaticText* GetStaticTextNominalVoltageValue() { return m_staticTextNominalVoltageValue; }
+    wxStaticText* GetStaticTextBaseVoltage() { return m_staticTextBaseVoltage; }
+    wxChoice* GetChoiceBaseVoltage() { return m_choiceBaseVoltage; }
+    wxStaticText* GetStaticTextNominalPower() { return m_staticTextNominalPower; }
+    wxTextCtrl* GetTextCtrlNominalPower() { return m_textCtrlNominalPower; }
+    wxChoice* GetChoiceNominalPower() { return m_choiceNominalPower; }
+    wxStaticText* GetStaticTextResistance() { return m_staticTextResistance; }
+    wxTextCtrl* GetTextCtrlResistance() { return m_textCtrlResistance; }
+    wxChoice* GetChoiceResistance() { return m_choiceResistance; }
+    wxStaticText* GetStaticTextReactance() { return m_staticTextReactance; }
+    wxTextCtrl* GetTextCtrlReactance() { return m_textCtrlReactance; }
+    wxChoice* GetChoiceReactance() { return m_choiceReactance; }
+    wxStaticLine* GetStaticLine_1() { return m_staticLine_1; }
+    wxStaticText* GetStaticTextConnection() { return m_staticTextConnection; }
+    wxChoice* GetChoiceConnection() { return m_choiceConnection; }
+    wxStaticText* GetStaticTextTurnsRatio() { return m_staticTextTurnsRatio; }
+    wxTextCtrl* GetTextCtrlTurnRatio() { return m_textCtrlTurnRatio; }
+    wxStaticText* GetStaticTextPhaseShift() { return m_staticTextPhaseShift; }
+    wxTextCtrl* GetTextCtrlPhaseShift() { return m_textCtrlPhaseShift; }
+    wxStaticText* GetStaticTextDeg() { return m_staticTextDeg; }
+    wxCheckBox* GetCheckUseTransformerPower() { return m_checkUseTransformerPower; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxStaticText* GetStaticTextZeroResistance() { return m_staticTextZeroResistance; }
+    wxTextCtrl* GetTextCtrlZeroResistance() { return m_textCtrlZeroResistance; }
+    wxStaticText* GetStaticTextZeroReactance() { return m_staticTextZeroReactance; }
+    wxTextCtrl* GetTextCtrlZeroReactance() { return m_textCtrlZeroReactance; }
+    wxStaticText* GetStaticTextPrimResistance() { return m_staticTextPrimResistance; }
+    wxTextCtrl* GetTextCtrlPrimResistance() { return m_textCtrlPrimResistance; }
+    wxStaticText* GetStaticTextPrimReactance() { return m_staticTextPrimReactance; }
+    wxTextCtrl* GetTextCtrlPrimReactance() { return m_textCtrlPrimReactance; }
+    wxStaticText* GetStaticTextSecResistance() { return m_staticTextSecResistance; }
+    wxTextCtrl* GetTextCtrlSecResistance() { return m_textCtrlSecResistance; }
+    wxStaticText* GetStaticTextSecReactance() { return m_staticTextSecReactance; }
+    wxTextCtrl* GetTextCtrlSecReactance() { return m_textCtrlSecReactance; }
+    wxPanel* GetPanelFault() { return m_panelFault; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonStability() { return m_buttonStability; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    TransformerFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Transformer"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~TransformerFormBase();
+};
+
+
 class SwitchingFormBase : public wxDialog
 {
 protected:
@@ -459,6 +558,9 @@ protected:
     wxPGProperty* m_pgPropTime;
     wxButton* m_buttonInsert;
     wxButton* m_buttonRemove;
+    wxButton* m_buttonUp;
+    wxButton* m_buttonDown;
+    wxStaticText* m_staticTextSwList;
     wxListCtrl* m_listCtrlSwitchings;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
@@ -467,6 +569,8 @@ protected:
     virtual void OnChangeProperties(wxPropertyGridEvent& event) { event.Skip(); }
     virtual void OnInsertButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnUpButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnDownButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnSelectItem(wxListEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
@@ -475,6 +579,9 @@ public:
     wxPropertyGridManager* GetPgMgrSwitchingsProp() { return m_pgMgrSwitchingsProp; }
     wxButton* GetButtonInsert() { return m_buttonInsert; }
     wxButton* GetButtonRemove() { return m_buttonRemove; }
+    wxButton* GetButtonUp() { return m_buttonUp; }
+    wxButton* GetButtonDown() { return m_buttonDown; }
+    wxStaticText* GetStaticTextSwList() { return m_staticTextSwList; }
     wxListCtrl* GetListCtrlSwitchings() { return m_listCtrlSwitchings; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
