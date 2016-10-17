@@ -54,7 +54,7 @@ class Line : public Branch
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }
-	virtual void SetNominalVoltage(double nominalVoltage, ElectricalUnit nominalVoltageUnit);
+	virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
    protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
     LineElectricalData m_electricaData;

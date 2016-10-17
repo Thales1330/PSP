@@ -159,6 +159,47 @@ Release/Line.cpp.o: Line.cpp Line.h LineForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/msw/statbox.h \
  C:/wxWidgets-3.1.0/include/wx/statline.h \
  C:/wxWidgets-3.1.0/include/wx/msw/statline.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/manager.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/propgrid.h \
+ C:/wxWidgets-3.1.0/include/wx/dcclient.h \
+ C:/wxWidgets-3.1.0/include/wx/dc.h C:/wxWidgets-3.1.0/include/wx/brush.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/brush.h \
+ C:/wxWidgets-3.1.0/include/wx/pen.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/pen.h \
+ C:/wxWidgets-3.1.0/include/wx/affinematrix2d.h \
+ C:/wxWidgets-3.1.0/include/wx/affinematrix2dbase.h \
+ C:/wxWidgets-3.1.0/include/wx/geometry.h \
+ C:/wxWidgets-3.1.0/include/wx/scrolwin.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/scrolwin.h \
+ C:/wxWidgets-3.1.0/include/wx/recguard.h \
+ C:/wxWidgets-3.1.0/include/wx/tooltip.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h \
+ C:/wxWidgets-3.1.0/include/wx/time.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/property.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/propgriddefs.h \
+ C:/wxWidgets-3.1.0/include/wx/hashset.h \
+ C:/wxWidgets-3.1.0/include/wx/tokenzr.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/propgridiface.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/propgridpagestate.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/props.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/editors.h \
+ C:/wxWidgets-3.1.0/include/wx/listbox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/listbox.h \
+ C:/wxWidgets-3.1.0/include/wx/valtext.h \
+ C:/wxWidgets-3.1.0/include/wx/toolbar.h \
+ C:/wxWidgets-3.1.0/include/wx/tbarbase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/toolbar.h \
+ C:/wxWidgets-3.1.0/include/wx/headerctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/headercol.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/headerctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/propgrid/advprops.h \
+ C:/wxWidgets-3.1.0/include/wx/spinbutt.h \
+ C:/wxWidgets-3.1.0/include/wx/range.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/spinbutt.h \
+ C:/wxWidgets-3.1.0/include/wx/listctrl.h \
+ C:/wxWidgets-3.1.0/include/wx/listbase.h \
+ C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/listctrl.h \
  C:/wxWidgets-3.1.0/include/wx/persist.h \
  C:/wxWidgets-3.1.0/include/wx/confbase.h \
  C:/wxWidgets-3.1.0/include/wx/base64.h \
@@ -172,13 +213,11 @@ Release/Line.cpp.o: Line.cpp Line.h LineForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/treectrl.h \
  C:/wxWidgets-3.1.0/include/wx/treebase.h \
  C:/wxWidgets-3.1.0/include/wx/itemid.h \
- C:/wxWidgets-3.1.0/include/wx/systhemectrl.h \
  C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h Branch.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
  C:/wxWidgets-3.1.0/include/wx/stockitem.h \
  C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
  C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
- C:/wxWidgets-3.1.0/include/wx/geometry.h \
  C:/wxWidgets-3.1.0/include/wx/menu.h \
  C:/wxWidgets-3.1.0/include/wx/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
@@ -514,6 +553,90 @@ C:/wxWidgets-3.1.0/include/wx/statline.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/statline.h:
 
+C:/wxWidgets-3.1.0/include/wx/propgrid/manager.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/propgrid.h:
+
+C:/wxWidgets-3.1.0/include/wx/dcclient.h:
+
+C:/wxWidgets-3.1.0/include/wx/dc.h:
+
+C:/wxWidgets-3.1.0/include/wx/brush.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/brush.h:
+
+C:/wxWidgets-3.1.0/include/wx/pen.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/pen.h:
+
+C:/wxWidgets-3.1.0/include/wx/affinematrix2d.h:
+
+C:/wxWidgets-3.1.0/include/wx/affinematrix2dbase.h:
+
+C:/wxWidgets-3.1.0/include/wx/geometry.h:
+
+C:/wxWidgets-3.1.0/include/wx/scrolwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/scrolwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/recguard.h:
+
+C:/wxWidgets-3.1.0/include/wx/tooltip.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h:
+
+C:/wxWidgets-3.1.0/include/wx/time.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/property.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/propgriddefs.h:
+
+C:/wxWidgets-3.1.0/include/wx/hashset.h:
+
+C:/wxWidgets-3.1.0/include/wx/tokenzr.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/propgridiface.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/propgridpagestate.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/props.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/editors.h:
+
+C:/wxWidgets-3.1.0/include/wx/listbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/listbox.h:
+
+C:/wxWidgets-3.1.0/include/wx/valtext.h:
+
+C:/wxWidgets-3.1.0/include/wx/toolbar.h:
+
+C:/wxWidgets-3.1.0/include/wx/tbarbase.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/toolbar.h:
+
+C:/wxWidgets-3.1.0/include/wx/headerctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/headercol.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/headerctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/propgrid/advprops.h:
+
+C:/wxWidgets-3.1.0/include/wx/spinbutt.h:
+
+C:/wxWidgets-3.1.0/include/wx/range.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/spinbutt.h:
+
+C:/wxWidgets-3.1.0/include/wx/listctrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/listbase.h:
+
+C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/listctrl.h:
+
 C:/wxWidgets-3.1.0/include/wx/persist.h:
 
 C:/wxWidgets-3.1.0/include/wx/confbase.h:
@@ -540,8 +663,6 @@ C:/wxWidgets-3.1.0/include/wx/treebase.h:
 
 C:/wxWidgets-3.1.0/include/wx/itemid.h:
 
-C:/wxWidgets-3.1.0/include/wx/systhemectrl.h:
-
 C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
 
 Branch.h:
@@ -555,8 +676,6 @@ C:/wxWidgets-3.1.0/include/wx/stockitem.h:
 C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
-
-C:/wxWidgets-3.1.0/include/wx/geometry.h:
 
 C:/wxWidgets-3.1.0/include/wx/menu.h:
 

@@ -977,12 +977,16 @@ void Workspace::ValidateElementsVoltages()
 {
     for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
 	    Element* child = *it;
+        
+        std::vector<double> nominalVoltage;
+        std::vector<ElectricalUnit> nominalVoltageUnit;
 	    for(int i = 0; i < (int)child->GetParentList().size(); i++) {
 		    Bus* parent = (Bus*)child->GetParentList()[i];
 		    if(parent) {
-			    child->SetNominalVoltage(parent->GetEletricalData().nominalVoltage,
-			                             parent->GetEletricalData().nominalVoltageUnit);
+			    nominalVoltage.push_back(parent->GetEletricalData().nominalVoltage);
+                nominalVoltageUnit.push_back(parent->GetEletricalData().nominalVoltageUnit);
 			}
 		}
+        child->SetNominalVoltage(nominalVoltage, nominalVoltageUnit);
 	}
 }

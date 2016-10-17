@@ -81,7 +81,7 @@ struct SwitchingData
 {
     std::vector<SwitchingType> swType;
     std::vector<double> swTime;
-};
+}; 
 
 class Element
 {
@@ -182,7 +182,7 @@ class Element
 	bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
 	
     //Electrical only methods
-	virtual void SetNominalVoltage(double nominalVoltage, ElectricalUnit nominalVoltageUnit) {}
+	virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit) {}
     virtual void SetSwitchingData(SwitchingData data) { m_swData = data; }
     virtual SwitchingData GetSwitchingData() { return m_swData; }
 	

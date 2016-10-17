@@ -237,3 +237,17 @@ bool Transformer::ShowForm(wxWindow* parent, Element* element)
     transfForm->Destroy();
     return false;
 }
+
+void Transformer::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
+{
+    if(nominalVoltage.size() == 1) {
+        m_electricalData.primaryNominalVoltage = nominalVoltage[0];
+        m_electricalData.primaryNominalVoltageUnit = nominalVoltageUnit[0];
+    }
+    else if(nominalVoltage.size() == 2) {
+        m_electricalData.primaryNominalVoltage = nominalVoltage[0];
+        m_electricalData.primaryNominalVoltageUnit = nominalVoltageUnit[0];
+        m_electricalData.secondaryNominalVoltage = nominalVoltage[1];
+        m_electricalData.secondaryNominalVoltageUnit = nominalVoltageUnit[1];
+    }
+}
