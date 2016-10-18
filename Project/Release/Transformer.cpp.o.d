@@ -223,7 +223,9 @@ Release/Transformer.cpp.o: Transformer.cpp TransformerForm.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h BusForm.h
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/log.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/logg.h Bus.h BusForm.h
 
 TransformerForm.h:
 
@@ -688,6 +690,10 @@ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
 C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/log.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/logg.h:
 
 Bus.h:
 

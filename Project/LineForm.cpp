@@ -27,7 +27,7 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
 
     m_textCtrlName->SetValue(data.name);
 
-    wxString nominalVoltageStr = wxString::FromDouble(data.nominalVoltage);
+    wxString nominalVoltageStr = Line::StringFromDouble(data.nominalVoltage);
     switch(data.nominalVoltageUnit) {
         case UNIT_V: {
             nominalVoltageStr += " V";
@@ -40,7 +40,7 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
     }
     m_staticTextNominalVoltageValue->SetLabel(nominalVoltageStr);
 
-    m_textCtrlNominalPower->SetValue(wxString::FromDouble(data.nominalPower));
+    m_textCtrlNominalPower->SetValue(Line::StringFromDouble(data.nominalPower));
     switch(data.nominalPowerUnit) {
         case UNIT_VA: {
             m_choiceNominalPower->SetSelection(0);
@@ -55,7 +55,7 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
             break;
     }
 
-    m_textCtrlResistance->SetValue(wxString::FromDouble(data.resistance));
+    m_textCtrlResistance->SetValue(Line::StringFromDouble(data.resistance));
     switch(data.resistanceUnit) {
         case UNIT_PU: {
             m_choiceResistance->SetSelection(0);
@@ -70,7 +70,7 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
             break;
     }
 
-    m_textCtrlReactance->SetValue(wxString::FromDouble(data.indReactance));
+    m_textCtrlReactance->SetValue(Line::StringFromDouble(data.indReactance));
     switch(data.indReactanceUnit) {
         case UNIT_PU: {
             m_choiceReactance->SetSelection(0);
@@ -85,7 +85,7 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
             break;
     }
 
-    m_textCtrlSusceptance->SetValue(wxString::FromDouble(data.capSusceptance));
+    m_textCtrlSusceptance->SetValue(Line::StringFromDouble(data.capSusceptance));
     switch(data.capSusceptanceUnit) {
         case UNIT_PU: {
             m_choiceSusceptance->SetSelection(0);
@@ -100,12 +100,12 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
             break;
     }
 
-    m_textCtrlLineSize->SetValue(wxString::FromDouble(data.lineSize));
+    m_textCtrlLineSize->SetValue(Line::StringFromDouble(data.lineSize));
     m_checkUseLinePower->SetValue(data.useLinePower);
 
-    m_textCtrlZeroResistance->SetValue(wxString::FromDouble(data.zeroResistance));
-    m_textCtrlZeroReactance->SetValue(wxString::FromDouble(data.zeroIndReactance));
-    m_textCtrlZeroSusceptance->SetValue(wxString::FromDouble(data.zeroCapSusceptance));
+    m_textCtrlZeroResistance->SetValue(Line::StringFromDouble(data.zeroResistance));
+    m_textCtrlZeroReactance->SetValue(Line::StringFromDouble(data.zeroIndReactance));
+    m_textCtrlZeroSusceptance->SetValue(Line::StringFromDouble(data.zeroCapSusceptance));
 }
 
 LineForm::~LineForm() {}

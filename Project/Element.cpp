@@ -14,9 +14,9 @@ void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegment
 {
     glBegin(mode);
     for(int i = 0; i < numSegments; i++) {
-	    double theta = 2.0 * 3.1415926 * double(i) / double(numSegments);
-	    glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
-	}
+        double theta = 2.0 * 3.1415926 * double(i) / double(numSegments);
+        glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
+    }
     glEnd();
 }
 
@@ -31,9 +31,9 @@ void Element::DrawArc(wxPoint2DDouble position,
     double finalAngRad = wxDegToRad(finalAngle);
     glBegin(mode);
     for(int i = 0; i <= numSegments; i++) {
-	    double theta = initAngRad + (finalAngRad - initAngRad) * double(i) / double(numSegments);
-	    glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
-	}
+        double theta = initAngRad + (finalAngRad - initAngRad) * double(i) / double(numSegments);
+        glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
+    }
     glEnd();
 }
 
@@ -41,8 +41,8 @@ void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) con
 {
     glBegin(mode);
     for(int i = 0; i < 3; i++) {
-	    glVertex2d(points[i].m_x, points[i].m_y);
-	}
+        glVertex2d(points[i].m_x, points[i].m_y);
+    }
     glEnd();
 }
 
@@ -70,8 +70,8 @@ void Element::DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode) const
 {
     glBegin(mode);
     for(auto it = points.begin(); it != points.end(); ++it) {
-	    glVertex2d((*it).m_x, (*it).m_y);
-	}
+        glVertex2d((*it).m_x, (*it).m_y);
+    }
     glEnd();
 }
 
@@ -163,18 +163,18 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     double radAngle2 = wxDegToRad(angle2);
 
     for(int i = 0; i < 4; i++) {
-	    rect1Corners[i] =
-	        wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
-	                            std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
-	                        std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
-	                            std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
+        rect1Corners[i] =
+            wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
+                                std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
+                            std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
+                                std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
 
-	    rect2Corners[i] =
-	        wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
-	                            std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
-	                        std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
-	                            std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
-	}
+        rect2Corners[i] =
+            wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
+                                std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
+                            std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
+                                std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
+    }
 
     //[Ref] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
 
@@ -186,25 +186,25 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     wxPoint2DDouble rect1ProjPts[4][4];  // [axis][corner]
     wxPoint2DDouble rect2ProjPts[4][4];  // [axis][corner]
     for(int i = 0; i < 4; i++) {
-	    double den = axis[i].m_x * axis[i].m_x + axis[i].m_y * axis[i].m_y;
-	    for(int j = 0; j < 4; j++) {
-		    double m_rectProj = (rect1Corners[j].m_x * axis[i].m_x + rect1Corners[j].m_y * axis[i].m_y) / den;
-		    double rectProj = (rect2Corners[j].m_x * axis[i].m_x + rect2Corners[j].m_y * axis[i].m_y) / den;
+        double den = axis[i].m_x * axis[i].m_x + axis[i].m_y * axis[i].m_y;
+        for(int j = 0; j < 4; j++) {
+            double m_rectProj = (rect1Corners[j].m_x * axis[i].m_x + rect1Corners[j].m_y * axis[i].m_y) / den;
+            double rectProj = (rect2Corners[j].m_x * axis[i].m_x + rect2Corners[j].m_y * axis[i].m_y) / den;
 
-		    rect1ProjPts[i][j] = wxPoint2DDouble(m_rectProj * axis[i].m_x, m_rectProj * axis[i].m_y);
-		    rect2ProjPts[i][j] = wxPoint2DDouble(rectProj * axis[i].m_x, rectProj * axis[i].m_y);
-		}
-	}
+            rect1ProjPts[i][j] = wxPoint2DDouble(m_rectProj * axis[i].m_x, m_rectProj * axis[i].m_y);
+            rect2ProjPts[i][j] = wxPoint2DDouble(rectProj * axis[i].m_x, rectProj * axis[i].m_y);
+        }
+    }
 
     // Calculate the scalar value to identify the max and min values on projections
     double rect1Scalar[4][4];  //[axis][corner]
     double rect2Scalar[4][4];  //[axis][corner]
     for(int i = 0; i < 4; i++) {
-	    for(int j = 0; j < 4; j++) {
-		    rect1Scalar[i][j] = rect1ProjPts[i][j].m_x * axis[i].m_x + rect1ProjPts[i][j].m_y * axis[i].m_y;
-		    rect2Scalar[i][j] = rect2ProjPts[i][j].m_x * axis[i].m_x + rect2ProjPts[i][j].m_y * axis[i].m_y;
-		}
-	}
+        for(int j = 0; j < 4; j++) {
+            rect1Scalar[i][j] = rect1ProjPts[i][j].m_x * axis[i].m_x + rect1ProjPts[i][j].m_y * axis[i].m_y;
+            rect2Scalar[i][j] = rect2ProjPts[i][j].m_x * axis[i].m_x + rect2ProjPts[i][j].m_y * axis[i].m_y;
+        }
+    }
     // Identify the max and min scalar values
     double rect1Min[4];
     double rect1Max[4];
@@ -212,24 +212,24 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     double rect2Max[4];
 
     for(int i = 0; i < 4; i++) {
-	    rect1Max[i] = rect1Scalar[i][0];
-	    rect2Max[i] = rect2Scalar[i][0];
-	    rect1Min[i] = rect1Scalar[i][0];
-	    rect2Min[i] = rect2Scalar[i][0];
+        rect1Max[i] = rect1Scalar[i][0];
+        rect2Max[i] = rect2Scalar[i][0];
+        rect1Min[i] = rect1Scalar[i][0];
+        rect2Min[i] = rect2Scalar[i][0];
 
-	    for(int j = 1; j < 4; j++) {
-		    if(rect1Max[i] < rect1Scalar[i][j]) rect1Max[i] = rect1Scalar[i][j];
-		    if(rect2Max[i] < rect2Scalar[i][j]) rect2Max[i] = rect2Scalar[i][j];
+        for(int j = 1; j < 4; j++) {
+            if(rect1Max[i] < rect1Scalar[i][j]) rect1Max[i] = rect1Scalar[i][j];
+            if(rect2Max[i] < rect2Scalar[i][j]) rect2Max[i] = rect2Scalar[i][j];
 
-		    if(rect1Min[i] > rect1Scalar[i][j]) rect1Min[i] = rect1Scalar[i][j];
-		    if(rect2Min[i] > rect2Scalar[i][j]) rect2Min[i] = rect2Scalar[i][j];
-		}
-	}
+            if(rect1Min[i] > rect1Scalar[i][j]) rect1Min[i] = rect1Scalar[i][j];
+            if(rect2Min[i] > rect2Scalar[i][j]) rect2Min[i] = rect2Scalar[i][j];
+        }
+    }
 
     // Check if any segment don't overlap
     for(int i = 0; i < 4; i++) {
-	    if(!(rect2Min[i] <= rect1Max[i] && rect2Max[i] >= rect1Min[i])) return false;
-	}
+        if(!(rect2Min[i] <= rect1Max[i] && rect2Max[i] >= rect1Min[i])) return false;
+    }
 
     return true;
 }
@@ -247,40 +247,37 @@ void Element::DrawSwitches() const
 {
     int i = 0;
     for(auto it = m_parentList.begin(); it != m_parentList.end(); it++) {
-	    Element* parent = *it;
-	    if(parent) {
-		    if(m_online) {
-			    glColor4d(0.0, 0.4, 0.0, 1.0);  // green
-			}
-		    else
-			{
-			    glColor4d(1.0, 0.1, 0.1, 1.0);  // red
-			}
+        Element* parent = *it;
+        if(parent) {
+            if(m_online) {
+                glColor4d(0.0, 0.4, 0.0, 1.0);  // green
+            } else {
+                glColor4d(1.0, 0.1, 0.1, 1.0);  // red
+            }
 
-		    glPushMatrix();
-		    glTranslated(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
-		                 m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0, 0.0);
-		    glRotated(parent->GetAngle(), 0.0, 0.0, 1.0);
-		    glTranslated(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
-		                 -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0, 0.0);
+            glPushMatrix();
+            glTranslated(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
+                         m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0, 0.0);
+            glRotated(parent->GetAngle(), 0.0, 0.0, 1.0);
+            glTranslated(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
+                         -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0, 0.0);
 
-		    DrawRectangle(
-		        m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
-		        m_switchSize, m_switchSize);
+            DrawRectangle(m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
+                          m_switchSize, m_switchSize);
 
-		    glPopMatrix();
-		}
-	    i++;
-	}
+            glPopMatrix();
+        }
+        i++;
+    }
 }
 
 bool Element::SwitchesContains(wxPoint2DDouble position) const
 {
     for(int i = 0; i < (int)m_switchRect.size(); i++) {
-	    if(m_parentList[i]) {
-		    if(m_switchRect[i].Contains(position)) return true;
-		}
-	}
+        if(m_parentList[i]) {
+            if(m_switchRect[i].Contains(position)) return true;
+        }
+    }
     return false;
 }
 
@@ -288,8 +285,8 @@ void Element::SetOnline(bool online)
 {
     // Check if any parent is null.
     for(auto it = m_parentList.begin(); it != m_parentList.end(); it++) {
-	    if(!(*it)) return;
-	}
+        if(!(*it)) return;
+    }
     m_online = online;
 }
 
@@ -317,50 +314,76 @@ void Element::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& righ
                                      m_rect.GetRightTop()};
     // Rotate corners.
     for(int i = 0; i < 4; ++i) {
-	    rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle);
-	}
+        rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle);
+    }
     leftUp = rectCorner[0];
     rightBottom = rectCorner[0];
     for(int i = 1; i < 4; ++i) {
-	    if(rectCorner[i].m_x < leftUp.m_x) leftUp.m_x = rectCorner[i].m_x;
-	    if(rectCorner[i].m_y < leftUp.m_y) leftUp.m_y = rectCorner[i].m_y;
-	    if(rectCorner[i].m_x > rightBottom.m_x) rightBottom.m_x = rectCorner[i].m_x;
-	    if(rectCorner[i].m_y > rightBottom.m_y) rightBottom.m_y = rectCorner[i].m_y;
-	}
+        if(rectCorner[i].m_x < leftUp.m_x) leftUp.m_x = rectCorner[i].m_x;
+        if(rectCorner[i].m_y < leftUp.m_y) leftUp.m_y = rectCorner[i].m_y;
+        if(rectCorner[i].m_x > rightBottom.m_x) rightBottom.m_x = rectCorner[i].m_x;
+        if(rectCorner[i].m_y > rightBottom.m_y) rightBottom.m_y = rectCorner[i].m_y;
+    }
 
     // Check points list boundaries.
     for(int i = 0; i < (int)m_pointList.size(); i++) {
-	    if(m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
-	    if(m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
-	    if(m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
-	    if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
-	}
+        if(m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
+        if(m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
+        if(m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
+        if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
+    }
 }
 
 bool Element::DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg)
 {
-	double dValue = 0.0;
-	
-	if(!strValue.ToDouble(&dValue)) {
-		wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK|wxCENTRE|wxICON_ERROR);
-		msgDialog.ShowModal();
-		return false;
-	}
-	
-	value = dValue;
-	return true;
+    double dValue = 0.0;
+
+    if(!strValue.ToDouble(&dValue)) {
+        wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+        return false;
+    }
+
+    value = dValue;
+    return true;
 }
 
 bool Element::IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg)
 {
-	long int iValue = 0;
-	
-	if(!strValue.ToLong(&iValue)) {
-		wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK|wxCENTRE|wxICON_ERROR);
-		msgDialog.ShowModal();
-		return false;
-	}
-	
-	value = iValue;
-	return true;
+    long int iValue = 0;
+
+    if(!strValue.ToLong(&iValue)) {
+        wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+        return false;
+    }
+
+    value = iValue;
+    return true;
+}
+
+wxString Element::StringFromDouble(double value, int minDecimal)
+{
+    wxString str = wxString::FromCDouble(value, 13);
+    int cutNumber = 0;
+    int numDecimal = 0;
+    bool foundCut = false;
+    for(int i = (int)str.length() - 1; i >= 0; i--) {
+        if(str[i] != '0' && !foundCut) {
+            cutNumber = i;
+            foundCut = true;
+        }
+        if(str[i] == '.') {
+            numDecimal = i;
+            break;
+        }
+    }
+
+    wxString formatedStr = "";
+    if(cutNumber - numDecimal > minDecimal)
+        formatedStr = wxString::FromDouble(value, cutNumber - numDecimal);
+    else
+        formatedStr = wxString::FromDouble(value, minDecimal);
+
+    return formatedStr;
 }

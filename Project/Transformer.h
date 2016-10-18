@@ -51,6 +51,7 @@ class Transformer : public Branch
 {
 public:
    Transformer();
+   Transformer(wxString name);
     virtual ~Transformer();
 	
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);

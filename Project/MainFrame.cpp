@@ -22,10 +22,10 @@ MainFrame::~MainFrame()
 {
     // if(m_artMetro) delete m_artMetro;
     if(m_addElementsMenu) {
-	    m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED,
-	                                  wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
-	    delete m_addElementsMenu;
-	}
+        m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick),
+                                      NULL, this);
+        delete m_addElementsMenu;
+    }
 }
 void MainFrame::Init()
 {
@@ -138,8 +138,8 @@ void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
     if(workspace) {
-	    workspace->DeleteSelectedElements();
-	}
+        workspace->DeleteSelectedElements();
+    }
 }
 void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 {
@@ -160,35 +160,34 @@ void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
     if(workspace) {
-	    workspace->Fit();
-	}
+        workspace->Fit();
+    }
 }
 void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
     if(workspace) {
-	    auto elementList = workspace->GetElementList();
-	    // Calculate the average position of selected elements.
-	    wxPoint2DDouble averagePos(0, 0);
-	    int numSelElements = 0;
-	    for(auto it = elementList.begin(); it != elementList.end(); it++) {
-		    Element* element = *it;
-		    if(element->IsSelected()) {
-			    averagePos += element->GetPosition();
-			    numSelElements++;
-			}
-		}
-	    averagePos =
-	        wxPoint2DDouble(averagePos.m_x / double(numSelElements), averagePos.m_y / double(numSelElements));
-	    // Set the move position to the average of selected elements.
-	    for(auto it = elementList.begin(); it != elementList.end(); it++) {
-		    Element* element = *it;
-		    if(element->IsSelected()) {
-			    element->StartMove(averagePos);
-			}
-		}
-	    workspace->SetWorkspaceMode(MODE_MOVE_ELEMENT);
-	}
+        auto elementList = workspace->GetElementList();
+        // Calculate the average position of selected elements.
+        wxPoint2DDouble averagePos(0, 0);
+        int numSelElements = 0;
+        for(auto it = elementList.begin(); it != elementList.end(); it++) {
+            Element* element = *it;
+            if(element->IsSelected()) {
+                averagePos += element->GetPosition();
+                numSelElements++;
+            }
+        }
+        averagePos = wxPoint2DDouble(averagePos.m_x / double(numSelElements), averagePos.m_y / double(numSelElements));
+        // Set the move position to the average of selected elements.
+        for(auto it = elementList.begin(); it != elementList.end(); it++) {
+            Element* element = *it;
+            if(element->IsSelected()) {
+                element->StartMove(averagePos);
+            }
+        }
+        workspace->SetWorkspaceMode(MODE_MOVE_ELEMENT);
+    }
 }
 void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event) {}
@@ -209,101 +208,82 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
     Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
 
     if(workspace) {
-	    if(workspace->GetWorkspaceMode() != MODE_INSERT) {
-		    auto elementList = workspace->GetElementList();
-		    wxString statusBarText = "";
-		    bool newElement = false;
+        if(workspace->GetWorkspaceMode() != MODE_INSERT) {
+            auto elementList = workspace->GetElementList();
+            wxString statusBarText = "";
+            bool newElement = false;
 
-		    switch(event.GetId())
-			{
-			    case ID_ADDMENU_BUS:
-				{
-				    Bus* newBus =
-				        new Bus(wxPoint2DDouble(0, 0),
-				                wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
-				    workspace->IncrementElementNumber(ID_BUS);
-				    elementList.push_back(newBus);
-				    statusBarText = _("Insert Bus: Click to insert, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_LINE:
-				{
-				    Line* newLine =
-				        new Line(wxString::Format(_("Line %d"), workspace->GetElementNumber(ID_LINE)));
-				    elementList.push_back(newLine);
-				    workspace->IncrementElementNumber(ID_LINE);
-				    statusBarText = _("Insert Line: Click on two buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_TRANSFORMER:
-				{
-				    Transformer* newTransformer = new Transformer();
-				    elementList.push_back(newTransformer);
-				    statusBarText = _("Insert Transformer: Click on two buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_GENERATOR:
-				{
-				    SyncGenerator* newGenerator = new SyncGenerator(
-				        wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
-				    workspace->IncrementElementNumber(ID_SYNCGENERATOR);
-				    elementList.push_back(newGenerator);
-				    statusBarText = _("Insert Generator: Click on a buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_LOAD:
-				{
-				    Load* newLoad = new Load();
-				    elementList.push_back(newLoad);
-				    statusBarText = _("Insert Load: Click on a buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_CAPACITOR:
-				{
-				    Capacitor* newCapacitor = new Capacitor();
-				    elementList.push_back(newCapacitor);
-				    statusBarText = _("Insert Capacitor: Click on a buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_INDUCTOR:
-				{
-				    Inductor* newInductor = new Inductor();
-				    elementList.push_back(newInductor);
-				    statusBarText = _("Insert Inductor: Click on a buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_INDMOTOR:
-				{
-				    IndMotor* newIndMotor = new IndMotor();
-				    elementList.push_back(newIndMotor);
-				    statusBarText = _("Insert Induction Motor: Click on a buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			    case ID_ADDMENU_SYNCCOMP:
-				{
-				    SyncMotor* newSyncCondenser = new SyncMotor();
-				    elementList.push_back(newSyncCondenser);
-				    statusBarText = _("Insert Synchronous Condenser: Click on a buses, ESC to cancel.");
-				    newElement = true;
-				}
-				break;
-			}
-		    if(newElement) {
-			    workspace->SetElementList(elementList);
-			    workspace->SetWorkspaceMode(MODE_INSERT);
-			    workspace->SetStatusBarText(statusBarText);
-			    workspace->Redraw();
-			}
-		}
-	}
+            switch(event.GetId()) {
+                case ID_ADDMENU_BUS: {
+                    Bus* newBus = new Bus(wxPoint2DDouble(0, 0),
+                                          wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
+                    workspace->IncrementElementNumber(ID_BUS);
+                    elementList.push_back(newBus);
+                    statusBarText = _("Insert Bus: Click to insert, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_LINE: {
+                    Line* newLine = new Line(wxString::Format(_("Line %d"), workspace->GetElementNumber(ID_LINE)));
+                    elementList.push_back(newLine);
+                    workspace->IncrementElementNumber(ID_LINE);
+                    statusBarText = _("Insert Line: Click on two buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_TRANSFORMER: {
+                    Transformer* newTransformer =
+                        new Transformer(wxString::Format(_("Transformer %d"), workspace->GetElementNumber(ID_TRANSFORMER)));
+                    workspace->IncrementElementNumber(ID_TRANSFORMER);
+                    elementList.push_back(newTransformer);
+                    statusBarText = _("Insert Transformer: Click on two buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_GENERATOR: {
+                    SyncGenerator* newGenerator =
+                        new SyncGenerator(wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
+                    workspace->IncrementElementNumber(ID_SYNCGENERATOR);
+                    elementList.push_back(newGenerator);
+                    statusBarText = _("Insert Generator: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_LOAD: {
+                    Load* newLoad = new Load();
+                    elementList.push_back(newLoad);
+                    statusBarText = _("Insert Load: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_CAPACITOR: {
+                    Capacitor* newCapacitor = new Capacitor();
+                    elementList.push_back(newCapacitor);
+                    statusBarText = _("Insert Capacitor: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_INDUCTOR: {
+                    Inductor* newInductor = new Inductor();
+                    elementList.push_back(newInductor);
+                    statusBarText = _("Insert Inductor: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_INDMOTOR: {
+                    IndMotor* newIndMotor = new IndMotor();
+                    elementList.push_back(newIndMotor);
+                    statusBarText = _("Insert Induction Motor: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_SYNCCOMP: {
+                    SyncMotor* newSyncCondenser = new SyncMotor();
+                    elementList.push_back(newSyncCondenser);
+                    statusBarText = _("Insert Synchronous Condenser: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+            }
+            if(newElement) {
+                workspace->SetElementList(elementList);
+                workspace->SetWorkspaceMode(MODE_INSERT);
+                workspace->SetStatusBarText(statusBarText);
+                workspace->Redraw();
+            }
+        }
+    }
 }
 void MainFrame::NotebookPageClosed(wxAuiNotebookEvent& event)
 {
@@ -314,26 +294,26 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 {
     auto it = m_workspaceList.begin();
     while(it != m_workspaceList.end()) {
-	    if(*it == m_auiNotebook->GetCurrentPage()) {
-		    // delete *it; //Memory leak?
-		    m_workspaceList.erase(it);
-		    break;
-		}
-	    it++;
-	}
+        if(*it == m_auiNotebook->GetCurrentPage()) {
+            // delete *it; //Memory leak?
+            m_workspaceList.erase(it);
+            break;
+        }
+        it++;
+    }
     event.Skip();
 }
 void MainFrame::OnRotClockClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
     if(workspace) {
-	    workspace->RotateSelectedElements();
-	}
+        workspace->RotateSelectedElements();
+    }
 }
 void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
     if(workspace) {
-	    workspace->RotateSelectedElements(false);
-	}
+        workspace->RotateSelectedElements(false);
+    }
 }

@@ -7,6 +7,8 @@
 #include <wx/menu.h>
 #include <GL/gl.h>
 
+#include <wx/log.h>
+
 enum PickboxID
 {
     ID_PB_NONE = 0,
@@ -185,6 +187,9 @@ class Element
 	virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit) {}
     virtual void SetSwitchingData(SwitchingData data) { m_swData = data; }
     virtual SwitchingData GetSwitchingData() { return m_swData; }
+    
+    //Static methods
+    static wxString StringFromDouble(double value, int minDecimal = 1);
 	
    protected:
     std::vector<Element*> m_parentList;
