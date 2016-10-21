@@ -2121,3 +2121,172 @@ SwitchingFormBase::~SwitchingFormBase()
     m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SwitchingFormBase::OnCancelButtonClick), NULL, this);
     
 }
+
+LoadFormBase::LoadFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlName = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlName->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_1->Add(m_textCtrlName, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlName->SetMinSize(wxSize(300,-1));
+    
+    wxGridSizer* gridSizerLvl3_1 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_1->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextActivePower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Active power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextActivePower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_1->Add(boxSizerLvl5_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlActivePower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlActivePower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_1->Add(m_textCtrlActivePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceActivePowerArr;
+    m_choiceActivePowerArr.Add(wxT("p.u."));
+    m_choiceActivePowerArr.Add(wxT("W"));
+    m_choiceActivePowerArr.Add(wxT("kW"));
+    m_choiceActivePowerArr.Add(wxT("MW"));
+    m_choiceActivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceActivePowerArr, 0);
+    m_choiceActivePower->SetSelection(3);
+    
+    boxSizerLvl5_1->Add(m_choiceActivePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextReactivePower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Reactive power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextReactivePower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_2->Add(boxSizerLvl5_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlReactivePower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlReactivePower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_2->Add(m_textCtrlReactivePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceReactivePowerArr;
+    m_choiceReactivePowerArr.Add(wxT("p.u."));
+    m_choiceReactivePowerArr.Add(wxT("VAr"));
+    m_choiceReactivePowerArr.Add(wxT("kVAr"));
+    m_choiceReactivePowerArr.Add(wxT("MVAr"));
+    m_choiceReactivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceReactivePowerArr, 0);
+    m_choiceReactivePower->SetSelection(3);
+    
+    boxSizerLvl5_2->Add(m_choiceReactivePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    m_staticTextType = new wxStaticText(m_panelGeneral, wxID_ANY, _("Load type"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextType, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceTypeArr;
+    m_choiceTypeArr.Add(wxT("Constant power"));
+    m_choiceTypeArr.Add(wxT("Constant impedance"));
+    m_choiceType = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceTypeArr, 0);
+    m_choiceType->SetSelection(0);
+    
+    boxSizerLvl2_1->Add(m_choiceType, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonStabButton = new wxButton(this, wxID_ANY, _("Stability"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonStabButton, 0, wxALL|wxALIGN_LEFT, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_ButtonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_ButtonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("LoadFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonStabButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LoadFormBase::OnStabilityButtonClick), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LoadFormBase::OnOnButtonClick), NULL, this);
+    m_ButtonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LoadFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+LoadFormBase::~LoadFormBase()
+{
+    m_buttonStabButton->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LoadFormBase::OnStabilityButtonClick), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LoadFormBase::OnOnButtonClick), NULL, this);
+    m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LoadFormBase::OnCancelButtonClick), NULL, this);
+    
+}

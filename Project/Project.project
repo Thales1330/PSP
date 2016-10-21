@@ -38,6 +38,7 @@
         <File Name="LineForm.cpp"/>
         <File Name="SwitchingForm.cpp"/>
         <File Name="TransformerForm.cpp"/>
+        <File Name="LoadForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -73,6 +74,7 @@
         <File Name="LineForm.h"/>
         <File Name="SwitchingForm.h"/>
         <File Name="TransformerForm.h"/>
+        <File Name="LoadForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

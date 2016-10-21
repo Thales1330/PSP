@@ -589,4 +589,49 @@ public:
     virtual ~SwitchingFormBase();
 };
 
+
+class LoadFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextActivePower;
+    wxTextCtrl* m_textCtrlActivePower;
+    wxChoice* m_choiceActivePower;
+    wxStaticText* m_staticTextReactivePower;
+    wxTextCtrl* m_textCtrlReactivePower;
+    wxChoice* m_choiceReactivePower;
+    wxStaticText* m_staticTextType;
+    wxChoice* m_choiceType;
+    wxButton* m_buttonStabButton;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOnButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextActivePower() { return m_staticTextActivePower; }
+    wxTextCtrl* GetTextCtrlActivePower() { return m_textCtrlActivePower; }
+    wxChoice* GetChoiceActivePower() { return m_choiceActivePower; }
+    wxStaticText* GetStaticTextReactivePower() { return m_staticTextReactivePower; }
+    wxTextCtrl* GetTextCtrlReactivePower() { return m_textCtrlReactivePower; }
+    wxChoice* GetChoiceReactivePower() { return m_choiceReactivePower; }
+    wxStaticText* GetStaticTextType() { return m_staticTextType; }
+    wxChoice* GetChoiceType() { return m_choiceType; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonStabButton() { return m_buttonStabButton; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    LoadFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Load"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~LoadFormBase();
+};
+
 #endif

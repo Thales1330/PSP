@@ -11,8 +11,8 @@ GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenera
 
     m_checkBoxPlotSyncMachine->SetValue(data.plotSyncMachine);
 
-    m_textCtrlInertia->SetValue(wxString::FromDouble(data.inertia));
-    m_textCtrlDamping->SetValue(wxString::FromDouble(data.damping));
+    m_textCtrlInertia->SetValue(SyncGenerator::StringFromDouble(data.inertia));
+    m_textCtrlDamping->SetValue(SyncGenerator::StringFromDouble(data.damping));
 
     m_checkBoxUseAVR->SetValue(data.useAVR);
     m_buttonEditAVR->Enable(data.useAVR);
@@ -20,22 +20,22 @@ GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenera
     m_checkBoxUseSG->SetValue(data.useSpeedGovernor);
     m_buttonEditSG->Enable(data.useSpeedGovernor);
 
-    m_textCtrlRa->SetValue(wxString::FromDouble(data.armResistance));
-    m_textCtrlXp->SetValue(wxString::FromDouble(data.potierReactance));
-    m_textCtrlSat->SetValue(wxString::FromDouble(data.satFactor));
+    m_textCtrlRa->SetValue(SyncGenerator::StringFromDouble(data.armResistance));
+    m_textCtrlXp->SetValue(SyncGenerator::StringFromDouble(data.potierReactance));
+    m_textCtrlSat->SetValue(SyncGenerator::StringFromDouble(data.satFactor));
 
-    m_textCtrlSyncXd->SetValue(wxString::FromDouble(data.syncXd));
-    m_textCtrlSyncXq->SetValue(wxString::FromDouble(data.syncXq));
+    m_textCtrlSyncXd->SetValue(SyncGenerator::StringFromDouble(data.syncXd));
+    m_textCtrlSyncXq->SetValue(SyncGenerator::StringFromDouble(data.syncXq));
 
-    m_textCtrlTranXd->SetValue(wxString::FromDouble(data.transXd));
-    m_textCtrlTranXq->SetValue(wxString::FromDouble(data.transXq));
-    m_textCtrlTranTd0->SetValue(wxString::FromDouble(data.transTd0));
-    m_textCtrlTranTq0->SetValue(wxString::FromDouble(data.transTq0));
+    m_textCtrlTranXd->SetValue(SyncGenerator::StringFromDouble(data.transXd));
+    m_textCtrlTranXq->SetValue(SyncGenerator::StringFromDouble(data.transXq));
+    m_textCtrlTranTd0->SetValue(SyncGenerator::StringFromDouble(data.transTd0));
+    m_textCtrlTranTq0->SetValue(SyncGenerator::StringFromDouble(data.transTq0));
 
-    m_textCtrlSubXd->SetValue(wxString::FromDouble(data.subXd));
-    m_textCtrlSubXq->SetValue(wxString::FromDouble(data.subXq));
-    m_textCtrlSubTd0->SetValue(wxString::FromDouble(data.subTd0));
-    m_textCtrlSubTq0->SetValue(wxString::FromDouble(data.subTq0));
+    m_textCtrlSubXd->SetValue(SyncGenerator::StringFromDouble(data.subXd));
+    m_textCtrlSubXq->SetValue(SyncGenerator::StringFromDouble(data.subXq));
+    m_textCtrlSubTd0->SetValue(SyncGenerator::StringFromDouble(data.subTd0));
+    m_textCtrlSubTq0->SetValue(SyncGenerator::StringFromDouble(data.subTq0));
 }
 
 GeneratorStabForm::~GeneratorStabForm() {}
