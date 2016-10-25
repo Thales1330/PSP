@@ -4,8 +4,6 @@
 #include "LineForm.h"
 #include "Branch.h"
 
-class LineForm;
-
 struct LineElectricalData
 {
     // General

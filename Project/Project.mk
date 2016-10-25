@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Thales
-Date                   :=20/10/2016
+Date                   :=25/10/2016
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -67,7 +67,7 @@ WXCFG:=gcc_dll\mswu
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) 
 
 
 
@@ -339,6 +339,22 @@ $(IntermediateDirectory)/TransformerForm.cpp$(DependSuffix): TransformerForm.cpp
 
 $(IntermediateDirectory)/TransformerForm.cpp$(PreprocessSuffix): TransformerForm.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/TransformerForm.cpp$(PreprocessSuffix)TransformerForm.cpp
+
+$(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix): LoadForm.cpp $(IntermediateDirectory)/LoadForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/LoadForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/LoadForm.cpp$(DependSuffix): LoadForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/LoadForm.cpp$(DependSuffix) -MM LoadForm.cpp
+
+$(IntermediateDirectory)/LoadForm.cpp$(PreprocessSuffix): LoadForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/LoadForm.cpp$(PreprocessSuffix)LoadForm.cpp
+
+$(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix): ReactiveShuntElementForm.cpp $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/ReactiveShuntElementForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(DependSuffix): ReactiveShuntElementForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(DependSuffix) -MM ReactiveShuntElementForm.cpp
+
+$(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(PreprocessSuffix): ReactiveShuntElementForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(PreprocessSuffix)ReactiveShuntElementForm.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

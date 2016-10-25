@@ -39,6 +39,7 @@
         <File Name="SwitchingForm.cpp"/>
         <File Name="TransformerForm.cpp"/>
         <File Name="LoadForm.cpp"/>
+        <File Name="ReactiveShuntElementForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -75,6 +76,7 @@
         <File Name="SwitchingForm.h"/>
         <File Name="TransformerForm.h"/>
         <File Name="LoadForm.h"/>
+        <File Name="ReactiveShuntElementForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

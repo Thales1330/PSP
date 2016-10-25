@@ -584,12 +584,12 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             case 'L': {
                 if(m_mode != MODE_INSERT) {
                     if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert a load.
-                        Load* newLoad = new Load();
+                        Load* newLoad = new Load(wxString::Format(_("Load %d"), GetElementNumber(ID_LOAD)));
+                        IncrementElementNumber(ID_LOAD);
                         m_elementList.push_back(newLoad);
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
-                    } else  // Insert a power line.
-                    {
+                    } else {  // Insert a power line.
                         Line* newLine = new Line(wxString::Format(_("Line %d"), GetElementNumber(ID_LINE)));
                         IncrementElementNumber(ID_LINE);
                         m_elementList.push_back(newLine);
@@ -626,7 +626,8 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             case 'I': {
                 if(m_mode != MODE_INSERT) {
                     if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert an inductor.
-                        Inductor* newInductor = new Inductor();
+                        Inductor* newInductor = new Inductor(wxString::Format(_("Inductor %d"), GetElementNumber(ID_INDUCTOR)));
+                        IncrementElementNumber(ID_INDUCTOR);
                         m_elementList.push_back(newInductor);
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Inductor: Click on a buses, ESC to cancel."));
@@ -653,7 +654,8 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             case 'C': {
                 if(m_mode != MODE_INSERT) {
                     if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert a capacitor.
-                        Capacitor* newCapacitor = new Capacitor();
+                        Capacitor* newCapacitor = new Capacitor(wxString::Format(_("Capacitor %d"), GetElementNumber(ID_CAPACITOR)));
+                        IncrementElementNumber(ID_CAPACITOR);
                         m_elementList.push_back(newCapacitor);
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Capacitor: Click on a buses, ESC to cancel."));

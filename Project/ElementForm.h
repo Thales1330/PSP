@@ -634,4 +634,39 @@ public:
     virtual ~LoadFormBase();
 };
 
+
+class ReactiveShuntElementFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextReactivePower;
+    wxTextCtrl* m_textCtrlReactivePower;
+    wxChoice* m_choiceReactivePower;
+    wxButton* m_buttonStabButton;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextReactivePower() { return m_staticTextReactivePower; }
+    wxTextCtrl* GetTextCtrlReactivePower() { return m_textCtrlReactivePower; }
+    wxChoice* GetChoiceReactivePower() { return m_choiceReactivePower; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonStabButton() { return m_buttonStabButton; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    ReactiveShuntElementFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Reactive shunt element"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~ReactiveShuntElementFormBase();
+};
+
 #endif

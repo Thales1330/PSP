@@ -1,6 +1,15 @@
 #include "SwitchingForm.h"
 #include "Element.h"
 
+SwitchingForm::SwitchingForm(wxWindow* parent) : SwitchingFormBase(parent)
+{
+    m_listCtrlSwitchings->AppendColumn(_("Type"));
+    m_listCtrlSwitchings->AppendColumn(_("Time (s)"));
+
+    SetSize(GetBestSize());
+    Layout();
+}
+
 SwitchingForm::SwitchingForm(wxWindow* parent, Element* element) : SwitchingFormBase(parent)
 {
     m_listCtrlSwitchings->AppendColumn(_("Type"));

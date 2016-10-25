@@ -8,6 +8,7 @@ class Element;
 class SwitchingForm : public SwitchingFormBase
 {
 public:
+    SwitchingForm(wxWindow* parent);
     SwitchingForm(wxWindow* parent, Element* element);
     virtual ~SwitchingForm();
 protected:

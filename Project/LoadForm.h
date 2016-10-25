@@ -3,19 +3,22 @@
 #include "ElementForm.h"
 
 class Load;
+class SwitchingForm;
 
 class LoadForm : public LoadFormBase
 {
-public:
+   public:
     LoadForm(wxWindow* parent, Load* load);
     virtual ~LoadForm();
-    
-protected:
-    virtual void OnCancelButtonClick(wxCommandEvent& event);
+
+    virtual bool ValidateData();
+
+   protected:
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); };
     virtual void OnOnButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
-    
+
     wxWindow* m_parent;
     Load* m_load;
 };
-#endif // LOADFORM_H
+#endif  // LOADFORM_H

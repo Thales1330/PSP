@@ -230,8 +230,8 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                     newElement = true;
                 } break;
                 case ID_ADDMENU_TRANSFORMER: {
-                    Transformer* newTransformer =
-                        new Transformer(wxString::Format(_("Transformer %d"), workspace->GetElementNumber(ID_TRANSFORMER)));
+                    Transformer* newTransformer = new Transformer(
+                        wxString::Format(_("Transformer %d"), workspace->GetElementNumber(ID_TRANSFORMER)));
                     workspace->IncrementElementNumber(ID_TRANSFORMER);
                     elementList.push_back(newTransformer);
                     statusBarText = _("Insert Transformer: Click on two buses, ESC to cancel.");
@@ -239,26 +239,29 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                 } break;
                 case ID_ADDMENU_GENERATOR: {
                     SyncGenerator* newGenerator =
-                        new SyncGenerator(wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
+                        new SyncGenerator(wxString::Format(_("Generator %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
                     workspace->IncrementElementNumber(ID_SYNCGENERATOR);
                     elementList.push_back(newGenerator);
                     statusBarText = _("Insert Generator: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
                 case ID_ADDMENU_LOAD: {
-                    Load* newLoad = new Load();
+                    Load* newLoad = new Load(wxString::Format(_("Load %d"), workspace->GetElementNumber(ID_LOAD)));
+                    workspace->IncrementElementNumber(ID_LOAD);
                     elementList.push_back(newLoad);
                     statusBarText = _("Insert Load: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
                 case ID_ADDMENU_CAPACITOR: {
-                    Capacitor* newCapacitor = new Capacitor();
+                    Capacitor* newCapacitor = new Capacitor(wxString::Format(_("Capacitor %d"), workspace->GetElementNumber(ID_CAPACITOR)));
+                    workspace->IncrementElementNumber(ID_CAPACITOR);
                     elementList.push_back(newCapacitor);
                     statusBarText = _("Insert Capacitor: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
                 case ID_ADDMENU_INDUCTOR: {
-                    Inductor* newInductor = new Inductor();
+                    Inductor* newInductor = new Inductor(wxString::Format(_("Inductor %d"), workspace->GetElementNumber(ID_INDUCTOR)));
+                    workspace->IncrementElementNumber(ID_INDUCTOR);
                     elementList.push_back(newInductor);
                     statusBarText = _("Insert Inductor: Click on a buses, ESC to cancel.");
                     newElement = true;
