@@ -1,3 +1,4 @@
+#include "SyncMachineForm.h"
 #include "SyncGenerator.h"
 
 SyncGenerator::SyncGenerator() : Machines()
@@ -45,7 +46,8 @@ bool SyncGenerator::GetContextMenu(wxMenu& menu)
 
 bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
 {
-	GeneratorForm* generatorForm = new GeneratorForm(parent, this);
+	SyncMachineForm* generatorForm = new SyncMachineForm(parent, this);
+    generatorForm->SetTitle(_("Generator"));
     if(generatorForm->ShowModal() == wxID_OK) {
 	    generatorForm->Destroy();
 	    return true;

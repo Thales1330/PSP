@@ -3,14 +3,30 @@
 
 #include "Machines.h"
 
-class IndMotor : public Machines
-{
-public:
-	IndMotor();
-	~IndMotor();
-	
-	virtual void DrawSymbol() const;
-	virtual bool GetContextMenu(wxMenu& menu);
+class IndMotorForm;
+
+struct IndMotorElectricalData {
+    wxString name;
+    double activePower = 100.0;
+    ElectricalUnit activePowerUnit = UNIT_MW;
+    double reactivePower = 0.0;
+    ElectricalUnit reactivePowerUnit = UNIT_MVAr;
 };
 
-#endif // INDMOTOR_H
+class IndMotor : public Machines
+{
+   public:
+    IndMotor();
+    IndMotor(wxString name);
+    ~IndMotor();
+
+    virtual void DrawSymbol() const;
+    virtual bool GetContextMenu(wxMenu& menu);
+    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual IndMotorElectricalData GetElectricalData() { return m_electricalData; }
+    virtual void SetElectricalData(IndMotorElectricalData electricalData) { m_electricalData = electricalData; }
+   protected:
+    IndMotorElectricalData m_electricalData;
+};
+
+#endif  // INDMOTOR_H

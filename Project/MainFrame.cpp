@@ -267,13 +267,15 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                     newElement = true;
                 } break;
                 case ID_ADDMENU_INDMOTOR: {
-                    IndMotor* newIndMotor = new IndMotor();
+                    IndMotor* newIndMotor = new IndMotor(wxString::Format(_("Induction motor %d"), workspace->GetElementNumber(ID_INDMOTOR)));
+                    workspace->IncrementElementNumber(ID_INDMOTOR);
                     elementList.push_back(newIndMotor);
                     statusBarText = _("Insert Induction Motor: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
                 case ID_ADDMENU_SYNCCOMP: {
-                    SyncMotor* newSyncCondenser = new SyncMotor();
+                    SyncMotor* newSyncCondenser = new SyncMotor(wxString::Format(_("Synchronous condenser %d"), workspace->GetElementNumber(ID_SYNCMOTOR)));
+                    workspace->IncrementElementNumber(ID_SYNCMOTOR);
                     elementList.push_back(newSyncCondenser);
                     statusBarText = _("Insert Synchronous Condenser: Click on a buses, ESC to cancel.");
                     newElement = true;

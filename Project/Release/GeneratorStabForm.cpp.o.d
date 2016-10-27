@@ -215,7 +215,7 @@ Release/GeneratorStabForm.cpp.o: GeneratorStabForm.cpp \
  C:/wxWidgets-3.1.0/include/wx/treebase.h \
  C:/wxWidgets-3.1.0/include/wx/itemid.h \
  C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h SwitchingForm.h \
- SyncGenerator.h GeneratorForm.h Machines.h Element.h \
+ SyncGenerator.h Machines.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msgdlg.h \
  C:/wxWidgets-3.1.0/include/wx/stockitem.h \
  C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
@@ -670,8 +670,6 @@ C:/wxWidgets-3.1.0/include/wx/msw/treectrl.h:
 SwitchingForm.h:
 
 SyncGenerator.h:
-
-GeneratorForm.h:
 
 Machines.h:
 

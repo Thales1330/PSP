@@ -1,8 +1,9 @@
 #ifndef SYNCGENERATOR_H
 #define SYNCGENERATOR_H
 
-#include "GeneratorForm.h"
 #include "Machines.h"
+
+class SyncMachineForm;
 
 struct SyncGeneratorElectricalData
 {

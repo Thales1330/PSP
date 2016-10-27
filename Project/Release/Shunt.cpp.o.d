@@ -130,7 +130,9 @@ Release/Shunt.cpp.o: Shunt.cpp Shunt.h Element.h \
  C:/wxWidgets-3.1.0/include/wx/msw/bitmap.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h \
+ C:/wxWidgets-3.1.0/include/wx/log.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/logg.h
 
 Shunt.h:
 
@@ -401,3 +403,7 @@ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
 C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
+
+C:/wxWidgets-3.1.0/include/wx/log.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/logg.h:

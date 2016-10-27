@@ -633,7 +633,8 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                         m_statusBar->SetStatusText(_("Insert Inductor: Click on a buses, ESC to cancel."));
                     } else  // Insert an induction motor.
                     {
-                        IndMotor* newIndMotor = new IndMotor();
+                        IndMotor* newIndMotor = new IndMotor(wxString::Format(_("Induction motor %d"), GetElementNumber(ID_INDMOTOR)));
+                        IncrementElementNumber(ID_INDMOTOR);
                         m_elementList.push_back(newIndMotor);
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a buses, ESC to cancel."));
@@ -644,7 +645,8 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             case 'K':  // Insert a synchronous condenser.
             {
                 if(m_mode != MODE_INSERT) {
-                    SyncMotor* newSyncCondenser = new SyncMotor();
+                    SyncMotor* newSyncCondenser = new SyncMotor(wxString::Format(_("Synchronous condenser %d"), GetElementNumber(ID_SYNCMOTOR)));
+                    IncrementElementNumber(ID_SYNCMOTOR);
                     m_elementList.push_back(newSyncCondenser);
                     m_mode = MODE_INSERT;
                     m_statusBar->SetStatusText(_("Insert Synchronous Condenser: Click on a buses, ESC to cancel."));

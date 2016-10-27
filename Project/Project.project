@@ -33,13 +33,14 @@
       <File Name="Workspace.cpp"/>
       <VirtualDirectory Name="element forms">
         <File Name="BusForm.cpp"/>
-        <File Name="GeneratorForm.cpp"/>
         <File Name="GeneratorStabForm.cpp"/>
         <File Name="LineForm.cpp"/>
         <File Name="SwitchingForm.cpp"/>
         <File Name="TransformerForm.cpp"/>
         <File Name="LoadForm.cpp"/>
         <File Name="ReactiveShuntElementForm.cpp"/>
+        <File Name="IndMotorForm.cpp"/>
+        <File Name="SyncMachineForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -70,13 +71,14 @@
       <File Name="Workspace.h"/>
       <VirtualDirectory Name="element forms">
         <File Name="BusForm.h"/>
-        <File Name="GeneratorForm.h"/>
         <File Name="GeneratorStabForm.h"/>
         <File Name="LineForm.h"/>
         <File Name="SwitchingForm.h"/>
         <File Name="TransformerForm.h"/>
         <File Name="LoadForm.h"/>
         <File Name="ReactiveShuntElementForm.h"/>
+        <File Name="IndMotorForm.h"/>
+        <File Name="SyncMachineForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

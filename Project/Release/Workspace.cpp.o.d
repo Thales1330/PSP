@@ -238,8 +238,8 @@ Release/Workspace.cpp.o: Workspace.cpp Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h Line.h LineForm.h Branch.h \
- Transformer.h SyncGenerator.h GeneratorForm.h Machines.h IndMotor.h \
- SyncMotor.h Load.h LoadForm.h Shunt.h Inductor.h Capacitor.h
+ Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h Load.h \
+ LoadForm.h Shunt.h Inductor.h Capacitor.h
 
 Workspace.h:
 
@@ -742,8 +742,6 @@ Branch.h:
 Transformer.h:
 
 SyncGenerator.h:
-
-GeneratorForm.h:
 
 Machines.h:
 

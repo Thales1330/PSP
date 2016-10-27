@@ -145,7 +145,7 @@ public:
 };
 
 
-class GeneratorFormBase : public wxDialog
+class SyncMachineFormBase : public wxDialog
 {
 protected:
     wxNotebook* m_notebook;
@@ -239,8 +239,8 @@ public:
     wxButton* GetButtonStab() { return m_buttonStab; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    GeneratorFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Generator"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
-    virtual ~GeneratorFormBase();
+    SyncMachineFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Generator"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~SyncMachineFormBase();
 };
 
 
@@ -549,47 +549,6 @@ public:
 };
 
 
-class SwitchingFormBase : public wxDialog
-{
-protected:
-    wxPropertyGridManager* m_pgMgrSwitchingsProp;
-    wxPGProperty* m_pgPropTitle;
-    wxPGProperty* m_pgPropType;
-    wxPGProperty* m_pgPropTime;
-    wxButton* m_buttonInsert;
-    wxButton* m_buttonRemove;
-    wxButton* m_buttonUp;
-    wxButton* m_buttonDown;
-    wxStaticText* m_staticTextSwList;
-    wxListCtrl* m_listCtrlSwitchings;
-    wxButton* m_buttonOK;
-    wxButton* m_buttonCancel;
-
-protected:
-    virtual void OnChangeProperties(wxPropertyGridEvent& event) { event.Skip(); }
-    virtual void OnInsertButtonClick(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnUpButtonClick(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnDownButtonClick(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnSelectItem(wxListEvent& event) { event.Skip(); }
-    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
-
-public:
-    wxPropertyGridManager* GetPgMgrSwitchingsProp() { return m_pgMgrSwitchingsProp; }
-    wxButton* GetButtonInsert() { return m_buttonInsert; }
-    wxButton* GetButtonRemove() { return m_buttonRemove; }
-    wxButton* GetButtonUp() { return m_buttonUp; }
-    wxButton* GetButtonDown() { return m_buttonDown; }
-    wxStaticText* GetStaticTextSwList() { return m_staticTextSwList; }
-    wxListCtrl* GetListCtrlSwitchings() { return m_listCtrlSwitchings; }
-    wxButton* GetButtonOK() { return m_buttonOK; }
-    wxButton* GetButtonCancel() { return m_buttonCancel; }
-    SwitchingFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Switching"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
-    virtual ~SwitchingFormBase();
-};
-
-
 class LoadFormBase : public wxDialog
 {
 protected:
@@ -667,6 +626,88 @@ public:
     wxButton* GetButtonCancel() { return m_buttonCancel; }
     ReactiveShuntElementFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Reactive shunt element"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~ReactiveShuntElementFormBase();
+};
+
+
+class SwitchingFormBase : public wxDialog
+{
+protected:
+    wxPropertyGridManager* m_pgMgrSwitchingsProp;
+    wxPGProperty* m_pgPropTitle;
+    wxPGProperty* m_pgPropType;
+    wxPGProperty* m_pgPropTime;
+    wxButton* m_buttonInsert;
+    wxButton* m_buttonRemove;
+    wxButton* m_buttonUp;
+    wxButton* m_buttonDown;
+    wxStaticText* m_staticTextSwList;
+    wxListCtrl* m_listCtrlSwitchings;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnChangeProperties(wxPropertyGridEvent& event) { event.Skip(); }
+    virtual void OnInsertButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnUpButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnDownButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnSelectItem(wxListEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxPropertyGridManager* GetPgMgrSwitchingsProp() { return m_pgMgrSwitchingsProp; }
+    wxButton* GetButtonInsert() { return m_buttonInsert; }
+    wxButton* GetButtonRemove() { return m_buttonRemove; }
+    wxButton* GetButtonUp() { return m_buttonUp; }
+    wxButton* GetButtonDown() { return m_buttonDown; }
+    wxStaticText* GetStaticTextSwList() { return m_staticTextSwList; }
+    wxListCtrl* GetListCtrlSwitchings() { return m_listCtrlSwitchings; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    SwitchingFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Switching"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~SwitchingFormBase();
+};
+
+
+class IndMotorFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextActivePower;
+    wxTextCtrl* m_textCtrlActivePower;
+    wxChoice* m_choiceActivePower;
+    wxStaticText* m_staticTextReactivePower;
+    wxTextCtrl* m_textCtrlReactivePower;
+    wxChoice* m_choiceReactivePower;
+    wxButton* m_buttonStabButton;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextActivePower() { return m_staticTextActivePower; }
+    wxTextCtrl* GetTextCtrlActivePower() { return m_textCtrlActivePower; }
+    wxChoice* GetChoiceActivePower() { return m_choiceActivePower; }
+    wxStaticText* GetStaticTextReactivePower() { return m_staticTextReactivePower; }
+    wxTextCtrl* GetTextCtrlReactivePower() { return m_textCtrlReactivePower; }
+    wxChoice* GetChoiceReactivePower() { return m_choiceReactivePower; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonStabButton() { return m_buttonStabButton; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    IndMotorFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Motor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~IndMotorFormBase();
 };
 
 #endif
