@@ -4,8 +4,7 @@
 #include "LineForm.h"
 #include "Branch.h"
 
-struct LineElectricalData
-{
+struct LineElectricalData {
     // General
     wxString name = "";
     double nominalVoltage = 138.0;
@@ -21,6 +20,9 @@ struct LineElectricalData
     double lineSize = 100.0;
     bool useLinePower = false;
 
+    // Power flow
+    std::complex<double> powerFlow[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
+
     // Fault
     double zeroResistance = 0.0;
     double zeroIndReactance = 1.0;
@@ -31,14 +33,14 @@ class Line : public Branch
 {
    public:
     Line();
-	Line(wxString name);
+    Line(wxString name);
     ~Line();
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void Move(wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
-	virtual bool SetNodeParent(Element* parent);
+    virtual bool SetNodeParent(Element* parent);
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_SIZING; }
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Intersects(wxRect2DDouble rect) const;
@@ -52,7 +54,8 @@ class Line : public Branch
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }
-	virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
+    virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
+
    protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
     LineElectricalData m_electricaData;

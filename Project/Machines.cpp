@@ -54,6 +54,7 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
 	    DrawLine(m_pointList);
 		
 		DrawSwitches();
+        DrawPowerFlowPts();
 
 	    glColor4d(1.0, 1.0, 1.0, 1.0);
 	    DrawCircle(m_position, 25.0, 20, GL_POLYGON);
@@ -89,6 +90,12 @@ void Machines::Move(wxPoint2DDouble position)
 	    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 	}
     UpdateSwitchesPosition();
+    
+    //Power flow arrows
+    std::vector<wxPoint2DDouble> edges;
+    edges.push_back(m_pointList[1]);
+    edges.push_back(m_pointList[2]);
+    CalculatePowerFlowPts(edges);
 }
 
 void Machines::MoveNode(Element* element, wxPoint2DDouble position)

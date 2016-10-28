@@ -7,6 +7,8 @@
 #include <wx/menu.h>
 #include <GL/gl.h>
 
+#include <complex>
+
 #include <wx/log.h>
 
 enum PickboxID
@@ -135,6 +137,9 @@ class Element
     virtual bool SwitchesContains(wxPoint2DDouble position) const;
     virtual void UpdateSwitches();
     virtual void DrawSwitches() const;
+    
+    virtual void CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges);
+    virtual void DrawPowerFlowPts() const;
 
     virtual bool PickboxContains(wxPoint2DDouble position) { return false; }
     virtual void MovePickbox(wxPoint2DDouble position) {}
@@ -204,6 +209,7 @@ class Element
     double m_switchSize = 10.0;
 
     std::vector<wxRect2DDouble> m_switchRect;
+    std::vector< std::vector<wxPoint2DDouble> > m_powerFlowArrow;
 
     bool m_selected = false;
     bool m_dragging = false;
