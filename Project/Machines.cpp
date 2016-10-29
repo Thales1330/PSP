@@ -24,6 +24,7 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 		wxRect2DDouble genRect(0,0,0,0);
 	    m_switchRect.push_back(genRect);  // Push a general rectangle.
 		UpdateSwitches();
+        UpdatePowerFlowArrowsPosition();
 	    return true;
 	}
     return false;
@@ -90,12 +91,7 @@ void Machines::Move(wxPoint2DDouble position)
 	    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 	}
     UpdateSwitchesPosition();
-    
-    //Power flow arrows
-    std::vector<wxPoint2DDouble> edges;
-    edges.push_back(m_pointList[1]);
-    edges.push_back(m_pointList[2]);
-    CalculatePowerFlowPts(edges);
+    UpdatePowerFlowArrowsPosition();
 }
 
 void Machines::MoveNode(Element* element, wxPoint2DDouble position)
@@ -110,12 +106,14 @@ void Machines::MoveNode(Element* element, wxPoint2DDouble position)
 	    if(m_activeNodeID == 1) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 		    m_parentList[0] = NULL;
+            m_pfDirection = PF_NONE;
 			m_online = false;
 		}
 	}
 
     // Recalculate switches positions
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 void Machines::StartMove(wxPoint2DDouble position)
@@ -140,7 +138,9 @@ void Machines::RemoveParent(Element* parent)
 {
     if(parent == m_parentList[0]) {
 	    m_parentList[0] = NULL;
+        m_pfDirection = PF_NONE;
 	    UpdateSwitchesPosition();
+        UpdatePowerFlowArrowsPosition();
 	}
 }
 
@@ -175,11 +175,13 @@ bool Machines::SetNodeParent(Element* parent)
 		    m_pointList[0] = parentPt;
 
 		    UpdateSwitchesPosition();
+            UpdatePowerFlowArrowsPosition();
 		    return true;
 		}
 	    else
 		{
 		    m_parentList[0] = NULL;
+            m_pfDirection = PF_NONE;
 			m_online = false;
 		}
 	}
@@ -194,8 +196,10 @@ void Machines::UpdateNodes()
 
 	    if(!m_parentList[0]->Intersects(nodeRect)) {
 		    m_parentList[0] = NULL;
+            m_pfDirection = PF_NONE;
 			m_online = false;
 		    UpdateSwitchesPosition();
+            UpdatePowerFlowArrowsPosition();
 		}
 	}
 }
@@ -208,4 +212,27 @@ void Machines::Rotate(bool clockwise)
     m_pointList[2] = RotateAtPosition(m_pointList[2], rotAngle);
     m_pointList[3] = RotateAtPosition(m_pointList[3], rotAngle);
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
+}
+
+void Machines::UpdatePowerFlowArrowsPosition()
+{
+    std::vector<wxPoint2DDouble> edges;
+    switch(m_pfDirection) {
+        case PF_NONE: {
+            m_powerFlowArrow.clear();
+        } break;
+        case PF_TO_BUS: {
+            edges.push_back(m_pointList[2]);
+            edges.push_back(m_pointList[1]);
+        } break;
+        case PF_TO_ELEMENT: {
+            edges.push_back(m_pointList[1]);
+            edges.push_back(m_pointList[2]);
+        } break;
+        default:
+            break;
+    }
+    
+    CalculatePowerFlowPts(edges);
 }

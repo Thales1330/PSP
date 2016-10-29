@@ -50,6 +50,7 @@ class Line : public Branch
     virtual bool GetContextMenu(wxMenu& menu);
     virtual void RemoveNode(wxPoint2DDouble point);
     virtual void AddNode(wxPoint2DDouble point);
+    virtual void RotateNode(Element* parent, bool clockwise = true);
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
@@ -58,6 +59,7 @@ class Line : public Branch
 
    protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
+    void UpdatePowerFlowArrowsPosition();
     LineElectricalData m_electricaData;
 };
 

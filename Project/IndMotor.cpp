@@ -1,8 +1,11 @@
 #include "IndMotorForm.h"
 #include "IndMotor.h"
 
-IndMotor::IndMotor() : Machines() {}
-IndMotor::IndMotor(wxString name) : Machines() { m_electricalData.name = name; }
+IndMotor::IndMotor() : Machines() { }
+IndMotor::IndMotor(wxString name) : Machines()
+{
+    m_electricalData.name = name;
+}
 IndMotor::~IndMotor() {}
 void IndMotor::DrawSymbol() const
 {

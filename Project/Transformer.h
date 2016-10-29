@@ -5,8 +5,7 @@
 
 class TransformerForm;
 
-enum TransformerConnection
-{
+enum TransformerConnection {
     GWYE_GWYE = 0,
     WYE_GWYE,
     GWYE_WYE,
@@ -18,8 +17,7 @@ enum TransformerConnection
     DELTA_DELTA
 };
 
-struct TransformerElectricalData
-{
+struct TransformerElectricalData {
     // General
     wxString name = "";
     double primaryNominalVoltage = 138.0;
@@ -49,26 +47,29 @@ struct TransformerElectricalData
 
 class Transformer : public Branch
 {
-public:
-   Transformer();
-   Transformer(wxString name);
+   public:
+    Transformer();
+    Transformer(wxString name);
     virtual ~Transformer();
-	
+
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);
-	virtual void Move(wxPoint2DDouble position);
-	virtual void MoveNode(Element* parent, wxPoint2DDouble position);
-	virtual void StartMove(wxPoint2DDouble position);
-	virtual bool GetContextMenu(wxMenu& menu);
+    virtual void Move(wxPoint2DDouble position);
+    virtual void MoveNode(Element* parent, wxPoint2DDouble position);
+    virtual void StartMove(wxPoint2DDouble position);
+    virtual bool GetContextMenu(wxMenu& menu);
+    virtual void RotateNode(Element* parent, bool clockwise);
+    virtual bool SetNodeParent(Element* parent);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual TransformerElectricalData GetElectricalData() { return m_electricalData; }
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
-    
-protected:
+
+   protected:
+    void UpdatePowerFlowArrowsPosition();
     TransformerElectricalData m_electricalData;
 };
 

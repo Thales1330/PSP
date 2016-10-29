@@ -390,6 +390,8 @@ wxString Element::StringFromDouble(double value, int minDecimal)
 
 void Element::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 {
+    double arrowRate = 100.0;  // One arrow to each "arrowRate" distance in pixels.
+
     if(edges.size() < 2) return;
 
     // Clear all power flow points
@@ -401,26 +403,32 @@ void Element::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
         wxPoint2DDouble pt2 = edges[i];
 
         double angle = std::atan2(pt2.m_y - pt1.m_y, pt2.m_x - pt1.m_x);
-        
-        //wxLogMessage(wxString::Format("(%f, %f)  (%f, %f)"), pt1.m_x, pt1.m_y, pt2.m_x, pt2.m_y);
 
         wxPoint2DDouble rotPt2(
             std::cos(-angle) * (pt2.m_x - pt1.m_x) - std::sin(-angle) * (pt2.m_y - pt1.m_y) + pt1.m_x,
             std::sin(-angle) * (pt2.m_x - pt1.m_x) + std::cos(-angle) * (pt2.m_y - pt1.m_y) + pt1.m_y);
 
-        wxPoint2DDouble mid((rotPt2.m_x + pt1.m_x) / 2.0, (rotPt2.m_y + pt1.m_y) / 2.0);  // test
-        std::vector<wxPoint2DDouble> triPts;
-        triPts.push_back(mid + wxPoint2DDouble(5.0, 0.0));
-        triPts.push_back(mid + wxPoint2DDouble(-5.0, 5.0));
-        triPts.push_back(mid + wxPoint2DDouble(-5.0, -5.0));
+        int numArrows = std::abs(pt1.m_x - rotPt2.m_x) / arrowRate;
+        if(numArrows == 0) numArrows = 1;
 
-        // Rotate back.
-        for(int i = 0; i < 3; i++) {
-            triPts[i] = wxPoint2DDouble(
-                std::cos(angle) * (triPts[i].m_x - pt1.m_x) - std::sin(angle) * (triPts[i].m_y - pt1.m_y) + pt1.m_x,
-                std::sin(angle) * (triPts[i].m_x - pt1.m_x) + std::cos(angle) * (triPts[i].m_y - pt1.m_y) + pt1.m_y);
+        for(int i = 0; i < numArrows; i++) {
+            wxPoint2DDouble arrowCenter(pt1.m_x + ((rotPt2.m_x - pt1.m_x) / double(numArrows + 1)) * double(i + 1),
+                                        pt1.m_y + ((rotPt2.m_y - pt1.m_y) / double(numArrows + 1)) * double(i + 1));
+
+            std::vector<wxPoint2DDouble> triPts;
+            triPts.push_back(arrowCenter + wxPoint2DDouble(5.0, 0.0));
+            triPts.push_back(arrowCenter + wxPoint2DDouble(-5.0, 5.0));
+            triPts.push_back(arrowCenter + wxPoint2DDouble(-5.0, -5.0));
+
+            // Rotate back.
+            for(int i = 0; i < 3; i++) {
+                triPts[i] = wxPoint2DDouble(
+                    std::cos(angle) * (triPts[i].m_x - pt1.m_x) - std::sin(angle) * (triPts[i].m_y - pt1.m_y) + pt1.m_x,
+                    std::sin(angle) * (triPts[i].m_x - pt1.m_x) + std::cos(angle) * (triPts[i].m_y - pt1.m_y) +
+                        pt1.m_y);
+            }
+            m_powerFlowArrow.push_back(triPts);
         }
-        m_powerFlowArrow.push_back(triPts);
     }
 }
 

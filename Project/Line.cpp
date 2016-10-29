@@ -43,7 +43,10 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
     glColor4d(0.2, 0.2, 0.2, 1.0);
     DrawLine(pointList);
 
-    if(m_inserted) DrawSwitches();
+    if(m_inserted){
+        DrawSwitches();
+        DrawPowerFlowPts();
+    }
 
     // Draw nodes.
     if(pointList.size() > 0) {
@@ -72,10 +75,12 @@ void Line::Move(wxPoint2DDouble position)
     if(!m_parentList[0]) {
         m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
         UpdateSwitchesPosition();
+        UpdatePowerFlowArrowsPosition();
     }
     if(!m_parentList[1]) {
         m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
         UpdateSwitchesPosition();
+        UpdatePowerFlowArrowsPosition();
     }
 
     if(!m_parentList[0] && !m_parentList[1]) {
@@ -144,6 +149,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             UpdateSwitches();
 
             m_inserted = true;
+            UpdatePowerFlowArrowsPosition();
             return true;
         }
     }
@@ -164,6 +170,7 @@ void Line::MovePickbox(wxPoint2DDouble position)
         if(m_activePickboxID == i) {
             m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
             UpdateSwitchesPosition();
+            UpdatePowerFlowArrowsPosition();
         }
     }
 }
@@ -224,6 +231,7 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 
     // Recalculate switches positions
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 double Line::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) const
@@ -284,6 +292,7 @@ void Line::RemoveNode(wxPoint2DDouble point)
         }
     }
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 void Line::AddNode(wxPoint2DDouble point)
@@ -294,6 +303,7 @@ void Line::AddNode(wxPoint2DDouble point)
         m_pointList.insert(m_pointList.begin() + segmentNumber + 1, point);
     }
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 void Line::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const
@@ -381,6 +391,7 @@ bool Line::SetNodeParent(Element* parent)
                 m_pointList[0] = parentPt;
 
                 UpdateSwitchesPosition();
+                UpdatePowerFlowArrowsPosition();
                 return true;
             }
             if(m_activeNodeID == 2) {
@@ -398,6 +409,7 @@ bool Line::SetNodeParent(Element* parent)
                 m_pointList[m_pointList.size() - 1] = parentPt;
 
                 UpdateSwitchesPosition();
+                UpdatePowerFlowArrowsPosition();
                 return true;
             }
         } else {
@@ -406,4 +418,44 @@ bool Line::SetNodeParent(Element* parent)
         }
     }
     return false;
+}
+
+void Line::UpdatePowerFlowArrowsPosition()
+{
+    std::vector<wxPoint2DDouble> edges;
+    switch(m_pfDirection) {
+        case PF_NONE: {
+            m_powerFlowArrow.clear();
+        } break;
+        case PF_BUS1_TO_BUS2: {
+            for(int i = 1; i < (int)m_pointList.size() - 1; i++) {
+                edges.push_back(m_pointList[i]);
+            }
+        } break;
+        case PF_BUS2_TO_BUS1: {
+            for(int i = (int)m_pointList.size() - 2; i > 0; i--) {
+                edges.push_back(m_pointList[i]);
+            }
+        } break;
+        default:
+            break;
+    }
+    CalculatePowerFlowPts(edges);
+}
+
+void Line::RotateNode(Element* parent, bool clockwise)
+{
+    double rotAngle = m_rotationAngle;
+    if(!clockwise) rotAngle = -m_rotationAngle;
+
+    if(parent == m_parentList[0]) {
+	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
+	}
+    else if(parent == m_parentList[1])
+	{
+	    m_pointList[m_pointList.size() - 1] =
+	        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], rotAngle);
+	}
+    UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }

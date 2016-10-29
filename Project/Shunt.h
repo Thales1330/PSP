@@ -22,6 +22,7 @@ public:
 
    protected:
     void UpdateSwitchesPosition();
+    void UpdatePowerFlowArrowsPosition();
 	void DrawGround(wxPoint2DDouble position) const;
     bool m_inserted = false;
 

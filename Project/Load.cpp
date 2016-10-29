@@ -30,6 +30,8 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
         wxRect2DDouble genRect(0, 0, 0, 0);
         m_switchRect.push_back(genRect);  // Push a general rectangle.
         UpdateSwitches();
+        m_pfDirection = PF_TO_ELEMENT;
+        UpdatePowerFlowArrowsPosition();
 
         return true;
     }
@@ -73,6 +75,7 @@ void Load::Draw(wxPoint2DDouble translation, double scale) const
         DrawLine(m_pointList);
 
         DrawSwitches();
+        DrawPowerFlowPts();
 
         std::vector<wxPoint2DDouble> triangPts;
         for(int i = 0; i < 3; i++) {
@@ -97,6 +100,7 @@ void Load::Rotate(bool clockwise)
     m_pointList[2] = RotateAtPosition(m_pointList[2], rotAngle);
     m_pointList[3] = RotateAtPosition(m_pointList[3], rotAngle);
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 bool Load::GetContextMenu(wxMenu& menu)

@@ -59,6 +59,7 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             wxRect2DDouble genRect(0, 0, 0, 0);
             m_switchRect.push_back(genRect);
             UpdateSwitches();
+            UpdatePowerFlowArrowsPosition();
 
             return true;
         }
@@ -119,6 +120,7 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
         }
 
         DrawSwitches();
+        DrawPowerFlowPts();
 
         // Push the current matrix on stack.
         glPushMatrix();
@@ -159,6 +161,8 @@ void Transformer::Rotate(bool clockwise)
     for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
         m_pointList[i] = RotateAtPosition(m_pointList[i], rotAngle);
     }
+    UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 void Transformer::Move(wxPoint2DDouble position)
@@ -178,6 +182,7 @@ void Transformer::Move(wxPoint2DDouble position)
     }
 
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 void Transformer::MoveNode(Element* parent, wxPoint2DDouble position)
@@ -205,6 +210,7 @@ void Transformer::MoveNode(Element* parent, wxPoint2DDouble position)
 
     // Recalculate switches positions
     UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
 }
 
 void Transformer::StartMove(wxPoint2DDouble position)
@@ -243,4 +249,111 @@ void Transformer::SetNominalVoltage(std::vector<double> nominalVoltage, std::vec
         m_electricalData.secondaryNominalVoltage = nominalVoltage[1];
         m_electricalData.secondaryNominalVoltageUnit = nominalVoltageUnit[1];
     }
+}
+
+void Transformer::UpdatePowerFlowArrowsPosition()
+{
+    std::vector<wxPoint2DDouble> edges;
+    switch(m_pfDirection) {
+        case PF_NONE: {
+            m_powerFlowArrow.clear();
+        } break;
+        case PF_BUS1_TO_BUS2: {
+            for(int i = 1; i < (int)m_pointList.size() - 1; i++) {
+                edges.push_back(m_pointList[i]);
+            }
+        } break;
+        case PF_BUS2_TO_BUS1: {
+            for(int i = (int)m_pointList.size() - 2; i > 0; i--) {
+                edges.push_back(m_pointList[i]);
+            }
+        } break;
+        default:
+            break;
+    }
+    CalculatePowerFlowPts(edges);
+}
+
+void Transformer::RotateNode(Element* parent, bool clockwise)
+{
+    double rotAngle = m_rotationAngle;
+    if(!clockwise) rotAngle = -m_rotationAngle;
+
+    if(parent == m_parentList[0]) {
+	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
+	}
+    else if(parent == m_parentList[1])
+	{
+	    m_pointList[m_pointList.size() - 1] =
+	        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], rotAngle);
+	}
+    UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
+}
+
+bool Transformer::SetNodeParent(Element* parent)
+{
+    if(m_activeNodeID == 1 && parent == m_parentList[0]) return false;
+    if(m_activeNodeID == 2 && parent == m_parentList[1]) return false;
+
+    if(parent && m_activeNodeID != 0) {
+	    wxRect2DDouble nodeRect(0, 0, 0, 0);
+	    if(m_activeNodeID == 1) {
+		    nodeRect =
+		        wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
+		                       10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+		}
+	    if(m_activeNodeID == 2) {
+		    nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
+		                              m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+		                              10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+		}
+
+	    if(parent->Intersects(nodeRect)) {
+		    if(m_activeNodeID == 1) {
+			    // Check if the user is trying to connect the same bus.
+			    if(m_parentList[1] == parent) {
+				    m_activeNodeID = 0;
+				    return false;
+				}
+
+			    m_parentList[0] = parent;
+
+			    // Centralize the node on bus.
+			    wxPoint2DDouble parentPt = parent->RotateAtPosition(
+			        m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
+			    parentPt.m_y = parent->GetPosition().m_y;  // Centralize on bus.
+			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+			    m_pointList[0] = parentPt;
+
+			    UpdateSwitchesPosition();
+                UpdatePowerFlowArrowsPosition();
+			    return true;
+			}
+		    if(m_activeNodeID == 2) {
+			    if(m_parentList[0] == parent) {
+				    m_activeNodeID = 0;
+				    return false;
+				}
+
+			    m_parentList[1] = parent;
+
+			    wxPoint2DDouble parentPt =
+			        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], -parent->GetAngle());
+			    parentPt.m_y = parent->GetPosition().m_y;
+			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+			    m_pointList[m_pointList.size() - 1] = parentPt;
+
+			    UpdateSwitchesPosition();
+                UpdatePowerFlowArrowsPosition();
+			    return true;
+			}
+		}
+	    else
+		{
+		    if(m_activeNodeID == 1) m_parentList[0] = NULL;
+		    if(m_activeNodeID == 2) m_parentList[1] = NULL;
+		}
+	}
+    return false;
 }

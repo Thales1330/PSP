@@ -81,6 +81,15 @@ enum SwitchingType
     SW_REMOVE
 };
 
+enum PowerFlowDirection
+{
+    PF_NONE = 0,
+    PF_TO_BUS,
+    PF_TO_ELEMENT,
+    PF_BUS1_TO_BUS2,
+    PF_BUS2_TO_BUS1
+};
+
 struct SwitchingData
 {
     std::vector<SwitchingType> swType;
@@ -192,6 +201,8 @@ class Element
 	virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit) {}
     virtual void SetSwitchingData(SwitchingData data) { m_swData = data; }
     virtual SwitchingData GetSwitchingData() { return m_swData; }
+    virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection) { m_pfDirection = pfDirection; }
+    virtual PowerFlowDirection GetPowerFlowDirection() const { return m_pfDirection; }
     
     //Static methods
     static wxString StringFromDouble(double value, int minDecimal = 1);
@@ -209,7 +220,9 @@ class Element
     double m_switchSize = 10.0;
 
     std::vector<wxRect2DDouble> m_switchRect;
+    
     std::vector< std::vector<wxPoint2DDouble> > m_powerFlowArrow;
+    PowerFlowDirection m_pfDirection = PF_NONE;
 
     bool m_selected = false;
     bool m_dragging = false;

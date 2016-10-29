@@ -26,6 +26,7 @@ public:
 
    protected:
     void UpdateSwitchesPosition();
+    void UpdatePowerFlowArrowsPosition();
     bool m_inserted = false;
 
 };
