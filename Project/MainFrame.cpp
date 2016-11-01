@@ -192,7 +192,13 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
 void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPasteClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        workspace->RunPowerFlow();
+    }
+}
 void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}

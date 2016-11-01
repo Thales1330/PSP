@@ -33,6 +33,7 @@ class Load : public Shunt
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     LoadElectricalData GetElectricalData() { return m_electricalData; }
+    LoadElectricalData GetPUElectricalData(double systemPowerBase);
     void SetElectricalData(LoadElectricalData electricalData) { m_electricalData = electricalData; }
 
    private:

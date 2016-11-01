@@ -11,6 +11,8 @@
 #include "Inductor.h"
 #include "Capacitor.h"
 
+#include "PowerFlow.h"
+
 // Camera
 Camera::Camera()
 {
@@ -907,4 +909,12 @@ void Workspace::ValidateElementsVoltages()
         }
         child->SetNominalVoltage(nominalVoltage, nominalVoltageUnit);
     }
+}
+
+bool Workspace::RunPowerFlow()
+{
+    PowerFlow pf(m_elementList);
+    bool result = pf.RunGaussSeidel();
+    
+    return result;
 }

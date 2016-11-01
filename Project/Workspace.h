@@ -22,6 +22,8 @@ class Load;
 class Inductor;
 class Capacitor;
 
+class PowerFlow;
+
 enum WorkspaceMode
 {
     MODE_EDIT = 0,
@@ -77,6 +79,8 @@ class Workspace : public WorkspaceBase
 	
 	int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
 	void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
+    
+    bool RunPowerFlow();
 
    protected:
     virtual void OnLeftDoubleClick(wxMouseEvent& event);

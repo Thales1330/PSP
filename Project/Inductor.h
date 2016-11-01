@@ -26,6 +26,7 @@ class Inductor : public Shunt
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual InductorElectricalData GetElectricalData() { return m_electricalData; }
+    virtual InductorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(InductorElectricalData electricalData) { m_electricalData = electricalData; }
    protected:
     InductorElectricalData m_electricalData;

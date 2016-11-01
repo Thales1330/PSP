@@ -24,6 +24,10 @@
         <File Name="Capacitor.cpp"/>
         <File Name="Element.cpp"/>
       </VirtualDirectory>
+      <VirtualDirectory Name="calculations">
+        <File Name="ElectricCalculation.cpp"/>
+        <File Name="PowerFlow.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -61,6 +65,10 @@
         <File Name="Inductor.h"/>
         <File Name="Capacitor.h"/>
         <File Name="Element.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="calculations">
+        <File Name="ElectricCalculation.h"/>
+        <File Name="PowerFlow.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">

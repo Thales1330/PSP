@@ -119,3 +119,26 @@ bool Inductor::ShowForm(wxWindow* parent, Element* element)
     capacitorForm->Destroy();
     return false;
 }
+
+InductorElectricalData Inductor::GetPUElectricalData(double systemPowerBase)
+{
+    InductorElectricalData data = m_electricalData;
+    switch(data.reactivePowerUnit) {
+        case UNIT_VAr: {
+            data.reactivePower = data.reactivePower / systemPowerBase;
+            data.reactivePowerUnit = UNIT_PU;
+        } break;
+        case UNIT_kVAr: {
+            data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;
+            data.reactivePowerUnit = UNIT_PU;
+        } break;
+        case UNIT_MVAr: {
+            data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;
+            data.reactivePowerUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+    
+    return data;
+}

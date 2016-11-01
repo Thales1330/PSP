@@ -1,49 +1,9 @@
 [{
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/Transformer.cpp.o -MF./Release/Transformer.cpp.o.d -MM Transformer.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Transformer.cpp"
+  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/PowerFlow.cpp.o -MF./Release/PowerFlow.cpp.o.d -MM PowerFlow.cpp",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
  }, {
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/Load.cpp.o -MF./Release/Load.cpp.o.d -MM Load.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Load.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/Shunt.cpp.o -MF./Release/Shunt.cpp.o.d -MM Shunt.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Shunt.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/MainFrame.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/MainFrame.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\MainFrame.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Workspace.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Workspace.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Workspace.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Transformer.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Transformer.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Transformer.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Shunt.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Shunt.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Shunt.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Load.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Load.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Load.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Inductor.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Inductor.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Inductor.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Capacitor.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Capacitor.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Capacitor.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/ReactiveShuntElementForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/ReactiveShuntElementForm.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\ReactiveShuntElementForm.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/LoadForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/LoadForm.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\LoadForm.cpp"
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/PowerFlow.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/PowerFlow.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
  }]

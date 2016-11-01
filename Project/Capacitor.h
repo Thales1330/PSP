@@ -26,6 +26,7 @@ class Capacitor : public Shunt
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual CapacitorElectricalData GetElectricalData() { return m_electricalData; }
+    virtual CapacitorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(CapacitorElectricalData electricalData) { m_electricalData = electricalData; }
    protected:
     CapacitorElectricalData m_electricalData;

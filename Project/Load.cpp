@@ -120,3 +120,42 @@ bool Load::ShowForm(wxWindow* parent, Element* element)
     loadForm->Destroy();
     return false;
 }
+
+LoadElectricalData Load::GetPUElectricalData(double systemPowerBase)
+{
+    LoadElectricalData data = m_electricalData;
+    switch(data.activePowerUnit) {
+        case UNIT_W: {
+            data.activePower = data.activePower / systemPowerBase;
+            data.activePowerUnit = UNIT_PU;
+        } break;
+        case UNIT_kW: {
+            data.activePower = (data.activePower * 1e3) / systemPowerBase;
+            data.activePowerUnit = UNIT_PU;
+        } break;
+        case UNIT_MW: {
+            data.activePower = (data.activePower * 1e6) / systemPowerBase;
+            data.activePowerUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+    switch(data.reactivePowerUnit) {
+        case UNIT_VAr: {
+            data.reactivePower = data.reactivePower / systemPowerBase;
+            data.reactivePowerUnit = UNIT_PU;
+        } break;
+        case UNIT_kVAr: {
+            data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;
+            data.reactivePowerUnit = UNIT_PU;
+        } break;
+        case UNIT_MVAr: {
+            data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;
+            data.reactivePowerUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+
+    return data;
+}

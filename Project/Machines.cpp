@@ -106,7 +106,6 @@ void Machines::MoveNode(Element* element, wxPoint2DDouble position)
 	    if(m_activeNodeID == 1) {
 		    m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
 		    m_parentList[0] = NULL;
-            m_pfDirection = PF_NONE;
 			m_online = false;
 		}
 	}
@@ -138,7 +137,6 @@ void Machines::RemoveParent(Element* parent)
 {
     if(parent == m_parentList[0]) {
 	    m_parentList[0] = NULL;
-        m_pfDirection = PF_NONE;
 	    UpdateSwitchesPosition();
         UpdatePowerFlowArrowsPosition();
 	}
@@ -181,7 +179,6 @@ bool Machines::SetNodeParent(Element* parent)
 	    else
 		{
 		    m_parentList[0] = NULL;
-            m_pfDirection = PF_NONE;
 			m_online = false;
 		}
 	}
@@ -196,7 +193,6 @@ void Machines::UpdateNodes()
 
 	    if(!m_parentList[0]->Intersects(nodeRect)) {
 		    m_parentList[0] = NULL;
-            m_pfDirection = PF_NONE;
 			m_online = false;
 		    UpdateSwitchesPosition();
             UpdatePowerFlowArrowsPosition();
