@@ -4,16 +4,16 @@
 #include <vector>
 #include <complex>
 
-class Element;
-class Bus;
-class Capacitor;
-class IndMotor;
-class Inductor;
-class Line;
-class Load;
-class SyncGenerator;
-class SyncMotor;
-class Transformer;
+#include "Element.h"
+#include "Bus.h"
+#include "Capacitor.h"
+#include "IndMotor.h"
+#include "Inductor.h"
+#include "Line.h"
+#include "Load.h"
+#include "SyncGenerator.h"
+#include "SyncMotor.h"
+#include "Transformer.h"
 
 class ElectricCalculation
 {

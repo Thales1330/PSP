@@ -11,15 +11,15 @@ struct SyncMotorElectricalData {
     double nominalPower = 100.0;
     ElectricalUnit nominalPowerUnit = UNIT_MVA;
     double activePower = 100.0;
-    ElectricalUnit activePowerUnit = UNIT_MVA;
+    ElectricalUnit activePowerUnit = UNIT_MW;
     double reactivePower = 0.0;
-    ElectricalUnit reactivePowerUnit = UNIT_MVA;
+    ElectricalUnit reactivePowerUnit = UNIT_MVAr;
     bool haveMaxReactive = false;
     double maxReactive = 9999.0;
-    ElectricalUnit maxReactiveUnit = UNIT_MVA;
+    ElectricalUnit maxReactiveUnit = UNIT_MVAr;
     bool haveMinReactive = false;
     double minReactive = -9999.0;
-    ElectricalUnit minReactiveUnit = UNIT_MVA;
+    ElectricalUnit minReactiveUnit = UNIT_MVAr;
     bool useMachineBase = false;
 
     // Fault
@@ -66,6 +66,7 @@ class SyncMotor : public Machines
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual SyncMotorElectricalData GetElectricalData() { return m_electricalData; }
+	virtual SyncMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(SyncMotorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
 

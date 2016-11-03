@@ -1,14 +1,4 @@
 #include "ElectricCalculation.h"
-#include "Element.h"
-#include "Bus.h"
-#include "Capacitor.h"
-#include "IndMotor.h"
-#include "Inductor.h"
-#include "Line.h"
-#include "Load.h"
-#include "SyncGenerator.h"
-#include "SyncMotor.h"
-#include "Transformer.h"
 
 ElectricCalculation::ElectricCalculation() {}
 ElectricCalculation::~ElectricCalculation() {}
@@ -89,7 +79,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         // Load
         for(auto itlo = m_loadList.begin(); itlo != m_loadList.end(); itlo++) {
             Load* load = *itlo;
-            if(bus == load->GetParentList()[0]) {
+            if(bus == load->GetParentList()[0] &&  load->IsOnline()) {
                 LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
                 if(data.loadType == CONST_IMPEDANCE)
                     yBus[busNumber][busNumber] += std::complex<double>(data.activePower, -data.reactivePower);
@@ -99,7 +89,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         // Capacitor
         for(auto itca = m_capacitorList.begin(); itca != m_capacitorList.end(); itca++) {
             Capacitor* capacitor = *itca;
-            if(bus == capacitor->GetParentList()[0]) {
+            if(bus == capacitor->GetParentList()[0] && capacitor->IsOnline()) {
                 CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
                 yBus[busNumber][busNumber] += std::complex<double>(0.0, data.reactivePower);
             }
@@ -108,7 +98,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         // Inductor
         for(auto itin = m_inductorList.begin(); itin != m_inductorList.end(); itin++) {
             Inductor* inductor = *itin;
-            if(bus == inductor->GetParentList()[0]) {
+            if(bus == inductor->GetParentList()[0] && inductor->IsOnline()) {
                 InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
                 yBus[busNumber][busNumber] += std::complex<double>(0.0, -data.reactivePower);
             }

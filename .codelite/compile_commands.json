@@ -1,9 +1,9 @@
 [{
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/PowerFlow.cpp.o -MF./Release/PowerFlow.cpp.o.d -MM PowerFlow.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
+  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/ElectricCalculation.cpp.o -MF./Release/ElectricCalculation.cpp.o.d -MM ElectricCalculation.cpp",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\ElectricCalculation.cpp"
  }, {
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/PowerFlow.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/PowerFlow.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/ElectricCalculation.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/ElectricCalculation.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\ElectricCalculation.cpp"
  }]

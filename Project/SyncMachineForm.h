@@ -24,8 +24,8 @@ class SyncMachineForm : public SyncMachineFormBase
     virtual bool ValidateData();
     virtual void ReplaceStaticTextLabelChar(wxStaticText* staticText, wchar_t newChar);
 
-    SyncGenerator* m_syncGenerator;
-    SyncMotor* m_syncMotor;
+    SyncGenerator* m_syncGenerator = NULL;
+    SyncMotor* m_syncMotor = NULL;
     wxWindow* m_parent;
 };
 #endif  // SYNCMACHINEFORM_H

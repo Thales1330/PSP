@@ -12,15 +12,15 @@ struct SyncGeneratorElectricalData
     double nominalPower = 100.0;
     ElectricalUnit nominalPowerUnit = UNIT_MVA;
     double activePower = 100.0;
-    ElectricalUnit activePowerUnit = UNIT_MVA;
+    ElectricalUnit activePowerUnit = UNIT_MW;
     double reactivePower = 0.0;
-    ElectricalUnit reactivePowerUnit = UNIT_MVA;
+    ElectricalUnit reactivePowerUnit = UNIT_MVAr;
     bool haveMaxReactive = false;
     double maxReactive = 9999.0;
-    ElectricalUnit maxReactiveUnit = UNIT_MVA;
+    ElectricalUnit maxReactiveUnit = UNIT_MVAr;
     bool haveMinReactive = false;
     double minReactive = -9999.0;
-    ElectricalUnit minReactiveUnit = UNIT_MVA;
+    ElectricalUnit minReactiveUnit = UNIT_MVAr;
     bool useMachineBase = false;
 
     // Fault
@@ -69,6 +69,7 @@ class SyncGenerator : public Machines
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual SyncGeneratorElectricalData GetElectricalData() { return m_electricalData; }
+	virtual SyncGeneratorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(SyncGeneratorElectricalData electricalData) { m_electricalData = electricalData; }
    protected:
     std::vector<wxPoint2DDouble> m_sinePts;

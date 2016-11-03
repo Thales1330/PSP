@@ -5,7 +5,8 @@
 
 class IndMotorForm;
 
-struct IndMotorElectricalData {
+struct IndMotorElectricalData
+{
     wxString name;
     double activePower = 100.0;
     ElectricalUnit activePowerUnit = UNIT_MW;
@@ -24,6 +25,7 @@ class IndMotor : public Machines
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual IndMotorElectricalData GetElectricalData() { return m_electricalData; }
+    virtual IndMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(IndMotorElectricalData electricalData) { m_electricalData = electricalData; }
    protected:
     IndMotorElectricalData m_electricalData;
