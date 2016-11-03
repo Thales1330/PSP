@@ -1,9 +1,53 @@
 [{
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/PowerFlow.cpp.o -MF./Release/PowerFlow.cpp.o.d -MM PowerFlow.cpp",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
   "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/ElectricCalculation.cpp.o -MF./Release/ElectricCalculation.cpp.o.d -MM ElectricCalculation.cpp",
   "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\ElectricCalculation.cpp"
  }, {
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/MainFrame.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/MainFrame.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\MainFrame.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Workspace.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Workspace.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Workspace.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Bus.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Bus.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Bus.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Line.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Line.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Line.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Branch.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Branch.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Branch.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/PowerFlow.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/PowerFlow.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
   "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/ElectricCalculation.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/ElectricCalculation.cpp.o -I. -I.",
   "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\ElectricCalculation.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Transformer.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Transformer.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Transformer.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/LineForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/LineForm.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\LineForm.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/BusForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/BusForm.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\BusForm.cpp"
+ }, {
+  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
+  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/TransformerForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/TransformerForm.cpp.o -I. -I.",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\TransformerForm.cpp"
  }]

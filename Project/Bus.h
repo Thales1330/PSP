@@ -4,8 +4,7 @@
 #include "BusForm.h"
 #include "Element.h"
 
-struct BusElectricalData
-{
+struct BusElectricalData {
     wxString name = "";
     double nominalVoltage = 138.0;
     ElectricalUnit nominalVoltageUnit = UNIT_kV;
@@ -13,11 +12,18 @@ struct BusElectricalData
     double controlledVoltage = 1.0;
     int controlledVoltageUnitChoice = 0;  // 0 = p.u., 1 = same as nominalVoltageUnit (UNIT_V or UNIT_kV).
     bool slackBus = false;
+
+    // Power flow (p.u.)
+    std::complex<double> voltage = std::complex<double>(1.0, 0.0);
+
+    // Fault
     bool hasFault = false;
     FaultData faultType = FAULT_THREEPHASE;
     FaultData faultLocation = FAULT_LINE_A;
     double faultResistance = 0.0;
     double faultReactance = 0.0;
+
+    // Stability
     bool plotBus = false;
     bool stabHasFault = false;
     double stabFaultTime = 0.0;
@@ -31,7 +37,7 @@ class Bus : public Element
    public:
     Bus();
     Bus(wxPoint2DDouble position);
-	Bus(wxPoint2DDouble position, wxString name);
+    Bus(wxPoint2DDouble position, wxString name);
     ~Bus();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; }
     virtual bool Contains(wxPoint2DDouble position) const;

@@ -434,7 +434,7 @@ void Element::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 
 void Element::DrawPowerFlowPts() const
 {
-    glColor4d(1.0, 0.55, 0.0, 1.0);
+    glColor4d(1.0, 0.51, 0.0, 1.0);
     for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) {
         DrawTriangle(m_powerFlowArrow[i]);
     }

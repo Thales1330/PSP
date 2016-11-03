@@ -20,7 +20,8 @@ struct LineElectricalData {
     double lineSize = 100.0;
     bool useLinePower = false;
 
-    // Power flow
+    // Power flow (p.u.)
+    std::complex<double> current[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
     std::complex<double> powerFlow[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
 
     // Fault

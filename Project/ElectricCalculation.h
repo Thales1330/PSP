@@ -22,6 +22,7 @@ class ElectricCalculation
     ~ElectricCalculation();
     virtual void GetElementsFromList(std::vector<Element*> elementList);
     virtual bool GetYBus(std::vector<std::vector<std::complex<double> > >& yBus, double systemPowerBase);
+    virtual void ValidateElementsPowerFlow(std::vector<std::complex<double> > voltage, std::vector<std::complex<double> > power, double systemPowerBase);
 
    protected:
     std::vector<Bus*> m_busList;

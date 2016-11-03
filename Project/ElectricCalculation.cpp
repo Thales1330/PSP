@@ -13,7 +13,7 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
     m_syncGeneratorList.clear();
     m_syncMotorList.clear();
     m_transformerList.clear();
-    // Bad design?
+    // TODO: Bad design?
     for(auto it = elementList.begin(); it != elementList.end(); it++) {
         Element* element = *it;
         if(typeid(*element) == typeid(Bus))
@@ -79,7 +79,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         // Load
         for(auto itlo = m_loadList.begin(); itlo != m_loadList.end(); itlo++) {
             Load* load = *itlo;
-            if(bus == load->GetParentList()[0] &&  load->IsOnline()) {
+            if(bus == load->GetParentList()[0] && load->IsOnline()) {
                 LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
                 if(data.loadType == CONST_IMPEDANCE)
                     yBus[busNumber][busNumber] += std::complex<double>(data.activePower, -data.reactivePower);
@@ -176,4 +176,186 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     }
 
     return true;
+}
+
+void ElectricCalculation::ValidateElementsPowerFlow(std::vector<std::complex<double> > voltage,
+                                                    std::vector<std::complex<double> > power,
+                                                    double systemPowerBase)
+{
+    std::vector<std::vector<int> > lineMap;
+    std::vector<std::vector<int> > transfomerMap;
+    lineMap.resize(m_lineList.size());
+    transfomerMap.resize(m_transformerList.size());
+
+    // Bus voltage and connections maps
+    for(int i = 0; i < (int)m_busList.size(); i++) {
+        BusElectricalData data = m_busList[i]->GetEletricalData();
+        data.voltage = voltage[i];
+        m_busList[i]->SetElectricalData(data);
+
+        // Get power line  connection map
+        for(int j = 0; j < (int)m_lineList.size(); j++) {
+            for(int k = 0; k < (int)m_lineList[j]->GetParentList().size(); k++) {
+                if(bus == m_lineList[j]->GetParentList()[k]) lineMap[j].push_back(i);
+            }
+        }
+
+        // Get transformer connection map
+        for(int j = 0; j < (int)m_transformerList.size(); j++) {
+            for(int k = 0; k < (int)m_transformerList[j]->GetParentList().size(); k++) {
+                if(bus == m_transformerList[j]->GetParentList()[k]) transfomerMap[j].push_back(i);
+            }
+        }
+    }
+
+    // Power line
+    for(int i = 0; i < (int)m_lineList.size(); i++) {
+        if(m_lineList[i]->IsOnline()) {
+            LineElectricalData data = m_lineList[i]->GetEletricalData();
+            std::complex<double> v1 = voltage[lineMap[i][0]];
+            std::complex<double> v2 = voltage[lineMap[i][1]];
+
+            data.current[0] = (v1 - v2) / std::complex<double>(data.resistance, data.indReactance) +
+                              v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+            data.current[1] = (v2 - v1) / std::complex<double>(data.resistance, data.indReactance) +
+                              v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+
+            data.powerFlow[0] = v1 * std::conj(data.current[0]);
+            data.powerFlow[1] = v2 * std::conj(data.current[1]);
+
+            m_lineList[i]->SetElectricalData(data);
+        }
+    }
+
+    // Transformer
+    for(int i = 0; i < (int)m_transformerList.size(); i++) {
+        if(m_transformerList[i]->IsOnline()) {
+            TransformerElectricalData data = m_transformerList[i]->GetElectricalData();
+            std::complex<double> v1 = voltage[transfomerMap[i][0]];  // Primary voltage
+            std::complex<double> v2 = voltage[transfomerMap[i][1]];  // Secondary voltage
+
+            // Transformer admitance
+            std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
+
+            if(data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
+                data.current[0] = (v1 - v2) * y;
+                data.current[1] = (v2 - v1) * y;
+            } else {
+                double radPS = wxDegToRad(data.phaseShift);
+                std::complex<double> a =
+                    std::complex<double>(data.turnsRatio * std::cos(radPS), -data.turnsRatio * std::sin(radPS));
+
+                data.current[0] = v1 * (y / std::pow(std::abs(a), 2)) - v2 * (y / std::conj(a));
+                data.current[1] = -v1 * (y / a) + v2 * y;
+            }
+
+            data.powerFlow[0] = v1 * std::conj(data.current[0]);
+            data.powerFlow[1] = v2 * std::conj(data.current[1]);
+
+            m_transformerList[i]->SetElectricalData(data);
+        }
+    }
+
+    // Synchronous machines
+    for(int i = 0; i < (int)m_busList.size(); i++) {
+        Bus* bus = m_busList[i];
+        BusElectricalData data = bus->GetElectricalData();
+
+        // Get the synchronous machines connected and calculate the load power on the bus.
+        std::vector<SyncGenerator*> syncGeneratorsOnBus;
+        std::vector<SyncMotor*> syncMotorsOnBus;
+        std::complex<double> loadPower(0.0, 0.0);
+        for(auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
+            SyncGenerator* syncGenerator = *itsg;
+            if(bus == syncGenerator->GetParentList()[0]) syncGeneratorsOnBus.push_back(syncGenerator);
+        }
+        for(auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
+            SyncMotor* syncMotor = *itsm;
+            if(bus == syncMotor->GetParentList()[0]) {
+                syncMotorsOnBus.push_back(syncMotor);
+                SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
+                loadPower += std::complex<double>(childData.activePower, 0.0);
+            }
+        }
+        for(auto itlo = m_loadList.begin(); itlo != m_loadList.end(); itlo++) {
+            Load* load = itlo;
+            if(bus == load->GetParentList()[0]) {
+                LoadElectricalData childData = load->GetPUElectricalData(systemPowerBase);
+                loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
+            }
+        }
+        for(auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
+            IndMotor* indMotor = itim;
+            if(bus == indMotor->GetParentList()[0]) {
+                LoadElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
+                if(childData.loadType == CONST_POWER)
+                    loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
+                else if(childData.loadType == CONST_IMPEDANCE)
+                    loadPower += std::pow(std::abs(voltage[i]), 2) *
+                                 std::complex<double>(childData.activePower, childData.reactivePower);
+            }
+        }
+        for(auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
+            IndMotor* indMotor = itim;
+            if(bus == indMotor->GetParentList()[0]) {
+                IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
+                loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
+            }
+        }
+        for(auto itca = m_capacitorList.begin(); itca != m_capacitorList.end(); itca++) {
+            Capacitor* capacitor = itca;
+            if(bus == capacitor->GetParentList()[0]) {
+                CapacitorElectricalData childData = capacitor->GetPUElectricalData(systemPowerBase);
+                loadPower += std::pow(std::abs(voltage[i]), 2) * std::complex<double>(0.0, -childData.reactivePower);
+            }
+        }
+        for(auto itin = m_capacitorList.begin(); itin != m_capacitorList.end(); itin++) {
+            Inductor* inductor = itin;
+            if(bus == inductor->GetParentList()[0]) {
+                InductorElectricalData childData = inductor->GetPUElectricalData(systemPowerBase);
+                loadPower += std::pow(std::abs(voltage[i]), 2) * std::complex<double>(0.0, childData.reactivePower);
+            }
+        }
+        
+        // Set the sync generator power
+        for(auto itsg = syncGeneratorsOnBus.begin(); itsg != syncGeneratorsOnBus.end(); itsg++) {
+            SyncGenerator* generator = *itsg;
+            SyncGeneratorElectricalData childData = generator->GetElectricalData();
+
+            if(data.slackBus) {
+                double activePower =
+                    (power[i].real() + loadPower.real()) * systemPowerBase / (double)(syncGeneratorsOnBus.size());
+                    
+                switch(childData.activePowerUnit) {
+                    case UNIT_kW: {
+                        activePower /= 1e3;
+                    } break;
+                    case UNIT_MW: {
+                        activePower /= 1e6;
+                    } break;
+                    default: break;
+                }
+                childData.activePower = activePower;
+            }
+            double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
+                                   (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+            switch(childData.reactivePowerUnit) {
+                case UNIT_kVAr: {
+                    reactivePower /= 1e3;
+                } break;
+                case UNIT_MVAr: {
+                    reactivePower /= 1e6;
+                } break;
+                default: break;
+            }
+            childData.reactivePower = reactivePower;
+            
+            generator->SetElectricalData(childData);
+        }
+        
+        // continua...
+        // falta o compensador sincrono
+        // verificar se eh necessario os tipos de barra nesse metodo.
+        // Tavez soh pode mudar a potencia reative em maquinas conectadas em barras PV?? --> TESTAR
+    }
 }
