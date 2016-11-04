@@ -23,6 +23,7 @@ public:
     virtual void UpdateNodes();
     virtual void Rotate(bool clockwise = true);
 	virtual void DrawSymbol() const {}
+    virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
 
    protected:
     void UpdateSwitchesPosition();

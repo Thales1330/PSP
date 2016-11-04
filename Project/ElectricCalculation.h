@@ -15,6 +15,8 @@
 #include "SyncMotor.h"
 #include "Transformer.h"
 
+enum BusType { BUS_SLACK = 0, BUS_PV, BUS_PQ };
+
 class ElectricCalculation
 {
    public:
@@ -22,7 +24,10 @@ class ElectricCalculation
     ~ElectricCalculation();
     virtual void GetElementsFromList(std::vector<Element*> elementList);
     virtual bool GetYBus(std::vector<std::vector<std::complex<double> > >& yBus, double systemPowerBase);
-    virtual void ValidateElementsPowerFlow(std::vector<std::complex<double> > voltage, std::vector<std::complex<double> > power, double systemPowerBase);
+    virtual void ValidateElementsPowerFlow(std::vector<std::complex<double> > voltage,
+                                           std::vector<std::complex<double> > power,
+                                           std::vector<BusType> busType,
+                                           double systemPowerBase);
 
    protected:
     std::vector<Bus*> m_busList;

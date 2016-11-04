@@ -67,6 +67,7 @@ class Transformer : public Branch
     virtual bool GetContextMenu(wxMenu& menu);
     virtual void RotateNode(Element* parent, bool clockwise);
     virtual bool SetNodeParent(Element* parent);
+    virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual TransformerElectricalData GetElectricalData() { return m_electricalData; }
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }

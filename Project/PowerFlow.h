@@ -7,8 +7,6 @@
 #include <wx/intl.h>  //_()
 #include <wx/log.h>   //temp
 
-enum BusType { BUS_SLACK = 0, BUS_PV, BUS_PQ };
-
 class PowerFlow : public ElectricCalculation
 {
    public:

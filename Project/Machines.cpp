@@ -232,3 +232,9 @@ void Machines::UpdatePowerFlowArrowsPosition()
     
     CalculatePowerFlowPts(edges);
 }
+
+void Machines::SetPowerFlowDirection(PowerFlowDirection pfDirection)
+{
+    m_pfDirection = pfDirection;
+    UpdatePowerFlowArrowsPosition();
+}

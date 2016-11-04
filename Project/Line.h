@@ -53,6 +53,7 @@ class Line : public Branch
     virtual void AddNode(wxPoint2DDouble point);
     virtual void RotateNode(Element* parent, bool clockwise = true);
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
+    virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }

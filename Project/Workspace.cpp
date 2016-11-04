@@ -1021,6 +1021,8 @@ bool Workspace::RunPowerFlow()
 	    wxMessageDialog msgDialog(this, pf.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
 	    msgDialog.ShowModal();
 	}
+    
+    Redraw();
 
     return result;
 }

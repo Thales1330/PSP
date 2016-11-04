@@ -5,6 +5,7 @@
 #include "Element.h"
 
 struct BusElectricalData {
+    int number = 0;
     wxString name = "";
     double nominalVoltage = 138.0;
     ElectricalUnit nominalVoltageUnit = UNIT_kV;

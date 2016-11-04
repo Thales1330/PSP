@@ -420,6 +420,12 @@ bool Line::SetNodeParent(Element* parent)
     return false;
 }
 
+void Line::SetPowerFlowDirection(PowerFlowDirection pfDirection)
+{
+    m_pfDirection = pfDirection;
+    UpdatePowerFlowArrowsPosition();
+}
+
 void Line::UpdatePowerFlowArrowsPosition()
 {
     std::vector<wxPoint2DDouble> edges;

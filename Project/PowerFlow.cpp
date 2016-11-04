@@ -214,8 +214,8 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
         power[i] = sBus;
     }
 
-    /*wxString str = "";
-    for(int i = 0; i < numberOfBuses; i++) {
+    wxString str = "";
+    /*for(int i = 0; i < numberOfBuses; i++) {
             str += wxString::Format("%.5f/_%.2f\n", std::abs(voltage[i]), wxRadToDeg(std::arg(voltage[i])));
         }
     wxLogMessage(str);
@@ -228,7 +228,14 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
     wxLogMessage(wxString::Format("Num iteracoes = %d", iteration));*/
 
-    ValidateElementsPowerFlow(voltage, power, systemPowerBase);
+    ValidateElementsPowerFlow(voltage, power, busType, systemPowerBase);
+    
+    for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
+        Bus* bus = *itb;
+        BusElectricalData data = bus->GetEletricalData();
+        str += wxString::Format("%.5f/_%.2f\n", std::abs(data.voltage), wxRadToDeg(std::arg(data.voltage)));
+    }
+    wxLogMessage(str);
 
     return true;
 }

@@ -357,3 +357,9 @@ bool Transformer::SetNodeParent(Element* parent)
 	}
     return false;
 }
+
+void Transformer::SetPowerFlowDirection(PowerFlowDirection pfDirection)
+{
+    m_pfDirection = pfDirection;
+    UpdatePowerFlowArrowsPosition();
+}
