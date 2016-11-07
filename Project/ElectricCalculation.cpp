@@ -156,10 +156,10 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     return true;
 }
 
-void ElectricCalculation::ValidateElementsPowerFlow(std::vector<std::complex<double> > voltage,
-                                                    std::vector<std::complex<double> > power,
-                                                    std::vector<BusType> busType,
-                                                    double systemPowerBase)
+void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<double> > voltage,
+                                                  std::vector<std::complex<double> > power,
+                                                  std::vector<BusType> busType,
+                                                  double systemPowerBase)
 {
     // Buses voltages
     for(int i = 0; i < (int)m_busList.size(); i++) {
@@ -262,6 +262,11 @@ void ElectricCalculation::ValidateElementsPowerFlow(std::vector<std::complex<dou
                 LoadElectricalData childData = load->GetPUElectricalData(systemPowerBase);
                 if(childData.loadType == CONST_POWER)
                     loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
+
+                if(childData.activePower >= 0.0)
+                    load->SetPowerFlowDirection(PF_TO_ELEMENT);
+                else
+                    load->SetPowerFlowDirection(PF_TO_BUS);
             }
         }
         for(auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
@@ -269,72 +274,41 @@ void ElectricCalculation::ValidateElementsPowerFlow(std::vector<std::complex<dou
             if(bus == indMotor->GetParentList()[0] && indMotor->IsOnline()) {
                 IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
                 loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
+
+                if(childData.activePower >= 0.0)
+                    indMotor->SetPowerFlowDirection(PF_TO_ELEMENT);
+                else
+                    indMotor->SetPowerFlowDirection(PF_TO_BUS);
             }
         }
 
         // Set the sync generator power
-        if(busType[i] == BUS_SLACK || busType[i] == BUS_PV) {
-            for(auto itsg = syncGeneratorsOnBus.begin(); itsg != syncGeneratorsOnBus.end(); itsg++) {
-                SyncGenerator* generator = *itsg;
-                if(generator->IsOnline()) {
-                    SyncGeneratorElectricalData childData = generator->GetElectricalData();
+        for(auto itsg = syncGeneratorsOnBus.begin(); itsg != syncGeneratorsOnBus.end(); itsg++) {
+            SyncGenerator* generator = *itsg;
+            if(generator->IsOnline()) {
+                SyncGeneratorElectricalData childData = generator->GetElectricalData();
 
-                    if(busType[i] == BUS_SLACK) {
-                        double activePower = (power[i].real() + loadPower.real()) * systemPowerBase /
-                                             (double)(syncGeneratorsOnBus.size());
+                if(busType[i] == BUS_SLACK) {
+                    double activePower =
+                        (power[i].real() + loadPower.real()) * systemPowerBase / (double)(syncGeneratorsOnBus.size());
 
-                        switch(childData.activePowerUnit) {
-                            case UNIT_PU: {
-                                activePower /= systemPowerBase;
-                            } break;
-                            case UNIT_kW: {
-                                activePower /= 1e3;
-                            } break;
-                            case UNIT_MW: {
-                                activePower /= 1e6;
-                            } break;
-                            default:
-                                break;
-                        }
-
-                        if(activePower >= 0.0)
-                            generator->SetPowerFlowDirection(PF_TO_BUS);
-                        else
-                            generator->SetPowerFlowDirection(PF_TO_ELEMENT);
-
-                        childData.activePower = activePower;
-                    }
-                    if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-                        double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-                                               (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
-                        switch(childData.reactivePowerUnit) {
-                            case UNIT_PU: {
-                                reactivePower /= systemPowerBase;
-                            } break;
-                            case UNIT_kVAr: {
-                                reactivePower /= 1e3;
-                            } break;
-                            case UNIT_MVAr: {
-                                reactivePower /= 1e6;
-                            } break;
-                            default:
-                                break;
-                        }
-                        childData.reactivePower = reactivePower;
+                    switch(childData.activePowerUnit) {
+                        case UNIT_PU: {
+                            activePower /= systemPowerBase;
+                        } break;
+                        case UNIT_kW: {
+                            activePower /= 1e3;
+                        } break;
+                        case UNIT_MW: {
+                            activePower /= 1e6;
+                        } break;
+                        default:
+                            break;
                     }
 
-                    generator->SetElectricalData(childData);
+                    childData.activePower = activePower;
                 }
-            }
-        }
-
-        // Set the sync motor reactive power
-        if(busType[i] == BUS_PV) {
-            for(auto itmg = syncMotorsOnBus.begin(); itmg != syncMotorsOnBus.end(); itmg++) {
-                SyncMotor* syncMotor = *itmg;
-                if(syncMotor->IsOnline()) {
-                    SyncMotorElectricalData childData = syncMotor->GetElectricalData();
-
+                if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
                     double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
                                            (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
                     switch(childData.reactivePowerUnit) {
@@ -351,9 +325,48 @@ void ElectricCalculation::ValidateElementsPowerFlow(std::vector<std::complex<dou
                             break;
                     }
                     childData.reactivePower = reactivePower;
-
-                    syncMotor->SetElectricalData(childData);
                 }
+
+                if(childData.activePower >= 0.0)
+                    generator->SetPowerFlowDirection(PF_TO_BUS);
+                else
+                    generator->SetPowerFlowDirection(PF_TO_ELEMENT);
+
+                generator->SetElectricalData(childData);
+            }
+        }
+
+        // Set the sync motor reactive power
+        for(auto itmg = syncMotorsOnBus.begin(); itmg != syncMotorsOnBus.end(); itmg++) {
+            SyncMotor* syncMotor = *itmg;
+            if(syncMotor->IsOnline()) {
+                SyncMotorElectricalData childData = syncMotor->GetElectricalData();
+
+                if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
+                    double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
+                                           (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                    switch(childData.reactivePowerUnit) {
+                        case UNIT_PU: {
+                            reactivePower /= systemPowerBase;
+                        } break;
+                        case UNIT_kVAr: {
+                            reactivePower /= 1e3;
+                        } break;
+                        case UNIT_MVAr: {
+                            reactivePower /= 1e6;
+                        } break;
+                        default:
+                            break;
+                    }
+                    childData.reactivePower = reactivePower;
+                }
+
+                if(childData.activePower > 0.0)
+                    syncMotor->SetPowerFlowDirection(PF_TO_ELEMENT);
+                else
+                    syncMotor->SetPowerFlowDirection(PF_TO_BUS);
+
+                syncMotor->SetElectricalData(childData);
             }
         }
     }

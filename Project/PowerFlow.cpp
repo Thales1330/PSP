@@ -20,6 +20,9 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
     std::vector<BusType> busType;                // Bus type
     std::vector<std::complex<double> > voltage;  // Voltage of buses
     std::vector<std::complex<double> > power;    // Injected power
+    std::vector<ReactiveLimits> reactiveLimit;   // Limit of reactive power on PV buses
+
+    reactiveLimit.resize(numberOfBuses);
 
     int busNumber = 0;
     for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
@@ -66,6 +69,20 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
                 if(bus == syncGenerator->GetParentList()[0]) {
                     SyncGeneratorElectricalData childData = syncGenerator->GetPUElectricalData(systemPowerBase);
                     power[busNumber] += std::complex<double>(childData.activePower, childData.reactivePower);
+
+                    if(busType[busNumber] == BUS_PV) {
+                        if(childData.haveMaxReactive && reactiveLimit[busNumber].maxLimitType != RL_UNLIMITED_SOURCE) {
+                            reactiveLimit[busNumber].maxLimitType = RL_LIMITED;
+                            reactiveLimit[busNumber].maxLimit += childData.maxReactive;
+                        } else if(!childData.haveMaxReactive)
+                            reactiveLimit[busNumber].maxLimitType = RL_UNLIMITED_SOURCE;
+
+                        if(childData.haveMinReactive && reactiveLimit[busNumber].minLimitType != RL_UNLIMITED_SOURCE) {
+                            reactiveLimit[busNumber].minLimitType = RL_LIMITED;
+                            reactiveLimit[busNumber].minLimit += childData.minReactive;
+                        } else if(!childData.haveMinReactive)
+                            reactiveLimit[busNumber].minLimitType = RL_UNLIMITED_SOURCE;
+                    }
                 }
             }
         }
@@ -76,6 +93,20 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
                 if(bus == syncMotor->GetParentList()[0]) {
                     SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
                     power[busNumber] += std::complex<double>(-childData.activePower, childData.reactivePower);
+                    
+                    if(busType[busNumber] == BUS_PV) {
+                        if(childData.haveMaxReactive && reactiveLimit[busNumber].maxLimitType != RL_UNLIMITED_SOURCE) {
+                            reactiveLimit[busNumber].maxLimitType = RL_LIMITED;
+                            reactiveLimit[busNumber].maxLimit += childData.maxReactive;
+                        } else if(!childData.haveMaxReactive)
+                            reactiveLimit[busNumber].maxLimitType = RL_UNLIMITED_SOURCE;
+
+                        if(childData.haveMinReactive && reactiveLimit[busNumber].minLimitType != RL_UNLIMITED_SOURCE) {
+                            reactiveLimit[busNumber].minLimitType = RL_LIMITED;
+                            reactiveLimit[busNumber].minLimit += childData.minReactive;
+                        } else if(!childData.haveMinReactive)
+                            reactiveLimit[busNumber].minLimitType = RL_UNLIMITED_SOURCE;
+                    }
                 }
             }
         }
@@ -120,22 +151,24 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
             }
             haveSlackBus = true;
         }
-        if(!haveSlackBus) {
-            m_errorMsg = _("There is no slack bus on the system.");
-            return false;
-        }
-        if(!slackBusHaveGeneration) {
-            m_errorMsg = _("The slack bus don't have generation.");
-            return false;
-        }
+    }
+    if(!haveSlackBus) {
+        m_errorMsg = _("There is no slack bus on the system.");
+        return false;
+    }
+    if(!slackBusHaveGeneration) {
+        m_errorMsg = _("The slack bus don't have generation.");
+        return false;
     }
 
     // Gauss-Seidel method
     std::vector<std::complex<double> > oldVoltage;  // Old voltage array.
     oldVoltage.resize(voltage.size());
+    
+    auto oldBusType = busType;
 
     int iteration = 0;  // Current itaration number.
-
+    
     while(true) {
         // Reach the max number of iterations.
         if(iteration >= maxIteration) {
@@ -201,7 +234,28 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
             if(busError > iterationError) iterationError = busError;
         }
 
-        if(iterationError < error) break;
+        if(iterationError < error) {
+            bool limitReach = false;
+            for(int i = 0; i < numberOfBuses; i++) {
+                if(busType[i] == BUS_PV) {
+                    if(reactiveLimit[i].maxLimitType == RL_LIMITED) {
+                        if(power[i].imag() > reactiveLimit[i].maxLimit) {
+                            power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].maxLimit);
+                            busType[i] = BUS_PQ;
+                            limitReach = true;
+                        }
+                    }
+                    if(reactiveLimit[i].minLimitType == RL_LIMITED) {
+                        if(power[i].imag() < reactiveLimit[i].minLimit) {
+                            power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].minLimit);
+                            busType[i] = BUS_PQ;
+                            limitReach = true;
+                        }
+                    }
+                }
+            }
+            if(!limitReach) break;
+        }
 
         iteration++;
     }
@@ -214,22 +268,9 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
         power[i] = sBus;
     }
 
+    UpdateElementsPowerFlow(voltage, power, oldBusType, systemPowerBase);
+
     wxString str = "";
-    /*for(int i = 0; i < numberOfBuses; i++) {
-            str += wxString::Format("%.5f/_%.2f\n", std::abs(voltage[i]), wxRadToDeg(std::arg(voltage[i])));
-        }
-    wxLogMessage(str);
-
-    str = "";
-    for(int i = 0; i < numberOfBuses; i++) {
-            str += wxString::Format("%.5f + j%.5f\n", power[i].real(), power[i].imag());
-        }
-    wxLogMessage(str);
-
-    wxLogMessage(wxString::Format("Num iteracoes = %d", iteration));*/
-
-    ValidateElementsPowerFlow(voltage, power, busType, systemPowerBase);
-    
     for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
         Bus* bus = *itb;
         BusElectricalData data = bus->GetEletricalData();

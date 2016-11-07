@@ -7,6 +7,19 @@
 #include <wx/intl.h>  //_()
 #include <wx/log.h>   //temp
 
+enum ReactiveLimitsType {
+    RL_UNLIMITED = 0,     // The bus can generate any ammount of reactive power.
+    RL_LIMITED,           // The bus reactive power generation is limited.
+    RL_UNLIMITED_SOURCE,  // The bus have at least one source of infinite reative power.
+};
+
+struct ReactiveLimits {
+    double maxLimit = 0.0;
+    double minLimit = 0.0;
+    ReactiveLimitsType maxLimitType = RL_UNLIMITED;
+    ReactiveLimitsType minLimitType = RL_UNLIMITED;
+};
+
 class PowerFlow : public ElectricCalculation
 {
    public:

@@ -1,53 +1,9 @@
 [{
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/SyncGenerator.cpp.o -MF./Release/SyncGenerator.cpp.o.d -MM SyncGenerator.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\SyncGenerator.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/Machines.cpp.o -MF./Release/Machines.cpp.o.d -MM Machines.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Machines.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/MainFrame.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/MainFrame.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\MainFrame.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Workspace.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Workspace.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Workspace.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Machines.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Machines.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Machines.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/SyncGenerator.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/SyncGenerator.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\SyncGenerator.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/ElectricCalculation.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/ElectricCalculation.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\ElectricCalculation.cpp"
+  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/PowerFlow.cpp.o -MF./Release/PowerFlow.cpp.o.d -MM PowerFlow.cpp",
+  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
  }, {
   "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
   "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/PowerFlow.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/PowerFlow.cpp.o -I. -I.",
   "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\PowerFlow.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/SyncMotor.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/SyncMotor.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\SyncMotor.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/IndMotor.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/IndMotor.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\IndMotor.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/GeneratorStabForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/GeneratorStabForm.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\GeneratorStabForm.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/IndMotorForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/IndMotorForm.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\IndMotorForm.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/SyncMachineForm.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/SyncMachineForm.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\SyncMachineForm.cpp"
  }]
