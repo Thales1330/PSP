@@ -17,10 +17,11 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
     // Number of buses on the system.
     int numberOfBuses = (int)m_busList.size();
 
-    std::vector<BusType> busType;                // Bus type
-    std::vector<std::complex<double> > voltage;  // Voltage of buses
-    std::vector<std::complex<double> > power;    // Injected power
-    std::vector<ReactiveLimits> reactiveLimit;   // Limit of reactive power on PV buses
+    std::vector<BusType> busType;                  // Bus type
+    std::vector<std::complex<double> > voltage;    // Voltage of buses
+    std::vector<std::complex<double> > power;      // Injected power
+    std::vector<std::complex<double> > loadPower;  // Only the load power
+    std::vector<ReactiveLimits> reactiveLimit;     // Limit of reactive power on PV buses
 
     reactiveLimit.resize(numberOfBuses);
 
@@ -61,6 +62,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
         // Fill the power array
         power.push_back(std::complex<double>(0.0, 0.0));  // Initial value
+        loadPower.push_back(std::complex<double>(0.0, 0.0));
 
         // Synchronous generator
         for(auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
@@ -93,7 +95,8 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
                 if(bus == syncMotor->GetParentList()[0]) {
                     SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
                     power[busNumber] += std::complex<double>(-childData.activePower, childData.reactivePower);
-                    
+                    loadPower[busNumber] += std::complex<double>(-childData.activePower, 0.0);
+
                     if(busType[busNumber] == BUS_PV) {
                         if(childData.haveMaxReactive && reactiveLimit[busNumber].maxLimitType != RL_UNLIMITED_SOURCE) {
                             reactiveLimit[busNumber].maxLimitType = RL_LIMITED;
@@ -116,8 +119,10 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
             if(load->IsOnline()) {
                 if(bus == load->GetParentList()[0]) {
                     LoadElectricalData childData = load->GetPUElectricalData(systemPowerBase);
-                    if(childData.loadType == CONST_POWER)
+                    if(childData.loadType == CONST_POWER) {
                         power[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
+                        loadPower[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
+                    }
                 }
             }
         }
@@ -129,6 +134,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
                 if(bus == indMotor->GetParentList()[0]) {
                     IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
                     power[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
+                    loadPower[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
                 }
             }
         }
@@ -164,11 +170,11 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
     // Gauss-Seidel method
     std::vector<std::complex<double> > oldVoltage;  // Old voltage array.
     oldVoltage.resize(voltage.size());
-    
+
     auto oldBusType = busType;
 
     int iteration = 0;  // Current itaration number.
-    
+
     while(true) {
         // Reach the max number of iterations.
         if(iteration >= maxIteration) {
@@ -239,15 +245,15 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
             for(int i = 0; i < numberOfBuses; i++) {
                 if(busType[i] == BUS_PV) {
                     if(reactiveLimit[i].maxLimitType == RL_LIMITED) {
-                        if(power[i].imag() > reactiveLimit[i].maxLimit) {
-                            power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].maxLimit);
+                        if(power[i].imag() - loadPower[i].imag() > reactiveLimit[i].maxLimit) {
+                            power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].maxLimit + loadPower[i].imag());
                             busType[i] = BUS_PQ;
                             limitReach = true;
                         }
                     }
                     if(reactiveLimit[i].minLimitType == RL_LIMITED) {
-                        if(power[i].imag() < reactiveLimit[i].minLimit) {
-                            power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].minLimit);
+                        if(power[i].imag() - loadPower[i].imag() < reactiveLimit[i].minLimit) {
+                            power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].minLimit + loadPower[i].imag());
                             busType[i] = BUS_PQ;
                             limitReach = true;
                         }
