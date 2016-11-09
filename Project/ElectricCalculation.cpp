@@ -159,6 +159,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
 void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<double> > voltage,
                                                   std::vector<std::complex<double> > power,
                                                   std::vector<BusType> busType,
+                                                  std::vector<ReactiveLimits> reactiveLimit,
                                                   double systemPowerBase)
 {
     // Buses voltages
@@ -243,6 +244,7 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
         std::vector<SyncGenerator*> syncGeneratorsOnBus;
         std::vector<SyncMotor*> syncMotorsOnBus;
         std::complex<double> loadPower(0.0, 0.0);
+
         for(auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
             SyncGenerator* syncGenerator = *itsg;
             if(bus == syncGenerator->GetParentList()[0] && syncGenerator->IsOnline())
@@ -309,8 +311,21 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                     childData.activePower = activePower;
                 }
                 if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-                    double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-                                           (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                    // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
+                    //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                    SyncGeneratorElectricalData childData_PU = generator->GetPUElectricalData(systemPowerBase);
+
+                    double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase;
+
+                    if(reactiveLimit[i].limitReached == RL_MAX_REACHED)
+                        reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
+
+                    else if(reactiveLimit[i].limitReached == RL_MIN_REACHED)
+                        reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
+
+                    else
+                        reactivePower /= (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+
                     switch(childData.reactivePowerUnit) {
                         case UNIT_PU: {
                             reactivePower /= systemPowerBase;
@@ -343,8 +358,24 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                 SyncMotorElectricalData childData = syncMotor->GetElectricalData();
 
                 if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-                    double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-                                           (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                    // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
+                    //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+
+                    SyncMotorElectricalData childData_PU = syncMotor->GetPUElectricalData(systemPowerBase);
+
+                    double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase;
+                    
+                    // Bus reachd maximum reactive limit.
+                    if(reactiveLimit[i].limitReached == RL_MAX_REACHED)
+                        reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
+                    // Bus reached minimum reactive limit.
+                    else if(reactiveLimit[i].limitReached == RL_MIN_REACHED)
+                        reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
+                    // Bus didn't reach any limits
+                    else {
+                        reactivePower /= (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                    }
+
                     switch(childData.reactivePowerUnit) {
                         case UNIT_PU: {
                             reactivePower /= systemPowerBase;

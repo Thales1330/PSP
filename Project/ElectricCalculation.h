@@ -17,6 +17,23 @@
 
 enum BusType { BUS_SLACK = 0, BUS_PV, BUS_PQ };
 
+enum ReactiveLimitsType {
+    RL_UNLIMITED = 0,     // The bus can generate any ammount of reactive power.
+    RL_LIMITED,           // The bus reactive power generation is limited.
+    RL_UNLIMITED_SOURCE,  // The bus have at least one source of infinite reative power.
+    RL_MAX_REACHED,       // Max limit reached
+    RL_MIN_REACHED,       // Min limit reached
+    RL_NONE_REACHED       // No limits reached
+};
+
+struct ReactiveLimits {
+    double maxLimit = 0.0;
+    double minLimit = 0.0;
+    ReactiveLimitsType maxLimitType = RL_UNLIMITED;
+    ReactiveLimitsType minLimitType = RL_UNLIMITED;
+    ReactiveLimitsType limitReached = RL_NONE_REACHED;
+};
+
 class ElectricCalculation
 {
    public:
@@ -27,6 +44,7 @@ class ElectricCalculation
     virtual void UpdateElementsPowerFlow(std::vector<std::complex<double> > voltage,
                                          std::vector<std::complex<double> > power,
                                          std::vector<BusType> busType,
+                                         std::vector<ReactiveLimits> reactiveLimit,
                                          double systemPowerBase);
 
    protected:

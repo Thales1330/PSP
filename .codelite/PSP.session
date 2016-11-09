@@ -40,29 +40,29 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\ElectricCalculation.h" Name="FileName"/>
-      <int Value="4" Name="FirstVisibleLine"/>
-      <int Value="26" Name="CurrentLine"/>
+      <int Value="18" Name="FirstVisibleLine"/>
+      <int Value="29" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\ElectricCalculation.cpp" Name="FileName"/>
-      <int Value="274" Name="FirstVisibleLine"/>
-      <int Value="299" Name="CurrentLine"/>
+      <int Value="337" Name="FirstVisibleLine"/>
+      <int Value="354" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\PowerFlow.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="19" Name="CurrentLine"/>
+      <int Value="7" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\PowerFlow.cpp" Name="FileName"/>
-      <int Value="192" Name="FirstVisibleLine"/>
-      <int Value="216" Name="CurrentLine"/>
+      <int Value="228" Name="FirstVisibleLine"/>
+      <int Value="258" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

@@ -248,6 +248,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
                         if(power[i].imag() - loadPower[i].imag() > reactiveLimit[i].maxLimit) {
                             power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].maxLimit + loadPower[i].imag());
                             busType[i] = BUS_PQ;
+                            reactiveLimit[i].limitReached = RL_MAX_REACHED;
                             limitReach = true;
                         }
                     }
@@ -255,6 +256,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
                         if(power[i].imag() - loadPower[i].imag() < reactiveLimit[i].minLimit) {
                             power[i] = std::complex<double>(power[i].real(), reactiveLimit[i].minLimit + loadPower[i].imag());
                             busType[i] = BUS_PQ;
+                            reactiveLimit[i].limitReached = RL_MIN_REACHED;
                             limitReach = true;
                         }
                     }
@@ -274,7 +276,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
         power[i] = sBus;
     }
 
-    UpdateElementsPowerFlow(voltage, power, oldBusType, systemPowerBase);
+    UpdateElementsPowerFlow(voltage, power, oldBusType, reactiveLimit, systemPowerBase);
 
     wxString str = "";
     for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
