@@ -352,52 +352,75 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
         }
 
         // Set the sync motor reactive power
-        for(auto itmg = syncMotorsOnBus.begin(); itmg != syncMotorsOnBus.end(); itmg++) {
-            SyncMotor* syncMotor = *itmg;
-            if(syncMotor->IsOnline()) {
-                SyncMotorElectricalData childData = syncMotor->GetElectricalData();
+        double exceededReactive = 0.0;
+        int numMachines = syncGeneratorsOnBus.size() + syncMotorsOnBus.size();
+        for(auto itsm = syncMotorsOnBus.begin(); itsm != syncMotorsOnBus.end(); itsm++) {
+            SyncMotor* syncMotor = *itsm;
+            SyncMotorElectricalData childData = syncMotor->GetElectricalData();
 
-                if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-                    // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-                    //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+            bool reachedMachineLimit = false;
 
-                    SyncMotorElectricalData childData_PU = syncMotor->GetPUElectricalData(systemPowerBase);
+            if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
+                // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
+                //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
 
-                    double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase;
-                    
-                    // Bus reachd maximum reactive limit.
-                    if(reactiveLimit[i].limitReached == RL_MAX_REACHED)
-                        reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
-                    // Bus reached minimum reactive limit.
-                    else if(reactiveLimit[i].limitReached == RL_MIN_REACHED)
-                        reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
-                    // Bus didn't reach any limits
-                    else {
-                        reactivePower /= (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                SyncMotorElectricalData childData_PU = syncMotor->GetPUElectricalData(systemPowerBase);
+
+                double reactivePower = power[i].imag() + loadPower.imag();
+
+                // Bus reachd maximum reactive limit.
+                if(reactiveLimit[i].limitReached == RL_MAX_REACHED)
+                    reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
+                // Bus reached minimum reactive limit.
+                else if(reactiveLimit[i].limitReached == RL_MIN_REACHED)
+                    reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
+                // Bus didn't reach any limits
+                else {
+                    reactivePower /= (double)(numMachines);
+                    if(childData_PU.haveMaxReactive && (reactivePower > childData_PU.maxReactive)) {
+                        exceededReactive += reactivePower - childData_PU.maxReactive;
+                        reactivePower = childData_PU.maxReactive;
+                        reachedMachineLimit = true;
+                    } else if(childData_PU.haveMinReactive && (reactivePower < childData_PU.minReactive)) {
+                        exceededReactive += reactivePower - childData_PU.minReactive;
+                        reactivePower = childData_PU.minReactive;
+                        reachedMachineLimit = true;
+                    } else if((!childData_PU.haveMaxReactive && reactiveLimit[i].limitReached == RL_MAX_REACHED) ||
+                              (!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
+                              (!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
+                        reactivePower += exceededReactive;
+                        exceededReactive = 0.0;
                     }
-
-                    switch(childData.reactivePowerUnit) {
-                        case UNIT_PU: {
-                            reactivePower /= systemPowerBase;
-                        } break;
-                        case UNIT_kVAr: {
-                            reactivePower /= 1e3;
-                        } break;
-                        case UNIT_MVAr: {
-                            reactivePower /= 1e6;
-                        } break;
-                        default:
-                            break;
-                    }
-                    childData.reactivePower = reactivePower;
                 }
 
-                if(childData.activePower > 0.0)
-                    syncMotor->SetPowerFlowDirection(PF_TO_ELEMENT);
-                else
-                    syncMotor->SetPowerFlowDirection(PF_TO_BUS);
+                reactivePower *= systemPowerBase;
 
-                syncMotor->SetElectricalData(childData);
+                switch(childData.reactivePowerUnit) {
+                    case UNIT_PU: {
+                        reactivePower /= systemPowerBase;
+                    } break;
+                    case UNIT_kVAr: {
+                        reactivePower /= 1e3;
+                    } break;
+                    case UNIT_MVAr: {
+                        reactivePower /= 1e6;
+                    } break;
+                    default:
+                        break;
+                }
+                childData.reactivePower = reactivePower;
+            }
+
+            if(childData.activePower > 0.0)
+                syncMotor->SetPowerFlowDirection(PF_TO_ELEMENT);
+            else
+                syncMotor->SetPowerFlowDirection(PF_TO_BUS);
+
+            syncMotor->SetElectricalData(childData);
+
+            if(reachedMachineLimit) {
+                syncMotorsOnBus.erase(itsm);
+                itsm = syncMotorsOnBus.begin();
             }
         }
     }
