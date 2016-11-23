@@ -124,11 +124,11 @@ class Element
     bool IsOnline() const { return m_online; }
     // Pure-virtuals methods
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
-    virtual void Draw(wxPoint2DDouble translation, double scale) const = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
     virtual bool Intersects(wxRect2DDouble rect) const = 0;
 
     // General methods
+    virtual void Draw(wxPoint2DDouble translation, double scale) const {};
     virtual void Rotate(bool clockwise = true) {}
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
     virtual void AddPoint(wxPoint2DDouble point) {}

@@ -28,9 +28,11 @@
         <File Name="ElectricCalculation.cpp"/>
         <File Name="PowerFlow.cpp"/>
       </VirtualDirectory>
+      <File Name="Text.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
+      <File Name="wxGLString.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
@@ -70,9 +72,11 @@
         <File Name="ElectricCalculation.h"/>
         <File Name="PowerFlow.h"/>
       </VirtualDirectory>
+      <File Name="Text.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
+      <File Name="wxGLString.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>

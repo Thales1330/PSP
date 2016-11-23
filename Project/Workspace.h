@@ -22,6 +22,8 @@ class Load;
 class Inductor;
 class Capacitor;
 
+class Text;
+
 class PowerFlow;
 
 enum WorkspaceMode
@@ -33,6 +35,7 @@ enum WorkspaceMode
     MODE_DRAG,
 	MODE_DRAG_INSERT,
     MODE_INSERT,
+    MODE_INSERT_TEXT,
     MODE_SELECTION_RECT
 };
 
@@ -106,6 +109,8 @@ class Workspace : public WorkspaceBase
 
     std::vector<Element*> m_elementList;
 	int m_elementNumber[NUM_ELEMENTS];
+    
+    std::vector<Text*> m_textList;
 
     void UpdateStatusBar();
 
