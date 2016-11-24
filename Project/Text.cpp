@@ -10,11 +10,7 @@
 #include "Inductor.h"
 #include "Capacitor.h"
 
-Text::Text() : Element()
-{
-    SetText(m_text);
-}
-
+Text::Text() : Element() { SetText(m_text); }
 Text::Text(wxPoint2DDouble position) : Element()
 {
     SetText(m_text);
@@ -22,32 +18,41 @@ Text::Text(wxPoint2DDouble position) : Element()
 }
 
 Text::~Text() {}
-
 bool Text::Contains(wxPoint2DDouble position) const
 {
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
     return m_rect.Contains(ptR);
 }
 
-void Text::Draw(wxPoint2DDouble translation, double scale, wxDC& dc)
+void Text::Draw(wxPoint2DDouble translation, double scale)
 {
-    if(consolidate) {
-        glString.setFont(wxFont(10, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-        glString.consolidate(&dc);
-        //glString.bind();
-        consolidate = false;
-    }
-    /*if(m_selected) {
-        glColor4d(0.0, 0.5, 1.0, 0.5);
-        wxGLString backSelection(m_text);
-        backSelection.setFont(wxFont(10, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
-        backSelection.consolidate(&dc);
-        backSelection.bind();
-        backSelection.render(m_position.m_x, m_position.m_y);
-    }*/
+    wxScreenDC dc;
     
+    // Draw selection rectangle
+    
+    // Push the current matrix on stack.
+    glPushMatrix();
+    // Rotate the matrix around the object position.
+    glTranslated(m_position.m_x, m_position.m_y, 0.0);
+    glRotated(m_angle, 0.0, 0.0, 1.0);
+    glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
+    
+    if(m_selected) {
+        glColor4d(0.0, 0.5, 1.0, 0.5);
+        DrawRectangle(m_position + wxPoint2DDouble(m_borderSize / 2.0, m_borderSize / 2.0), m_rect.m_width,
+                      m_rect.m_height);
+    }
+    
+    // Draw text (layer 2)
+
     glColor4d(0.0, 0.0, 0.0, 1.0);
-    //glString.render(m_position.m_x, m_position.m_y);
+    wxGLString glString(m_text);
+    glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+    glString.consolidate(&dc);
+    glString.bind();
+    glString.render(m_position.m_x, m_position.m_y);
+    
+    glPopMatrix();
 }
 
 bool Text::Intersects(wxRect2DDouble rect) const
@@ -59,7 +64,23 @@ bool Text::Intersects(wxRect2DDouble rect) const
 void Text::SetText(wxString text)
 {
     m_text = text;
-    glString = text;
-    
-    consolidate = true;
+
+    // Generate a glString to get the text size.
+    wxGLString glString(m_text);
+    glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+    wxScreenDC dc;
+    glString.consolidate(&dc);
+    glString.bind();
+
+    m_width = glString.getWidth();
+    m_height = glString.getheight();
+}
+
+void Text::Rotate(bool clockwise)
+{
+    double rotAngle = m_rotationAngle;
+    if(!clockwise) rotAngle = -m_rotationAngle;
+
+    m_angle += rotAngle;
+    if(m_angle >= 360.0) m_angle = 0.0;
 }

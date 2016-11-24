@@ -101,7 +101,7 @@ void Workspace::OnPaint(wxPaintEvent& event)
     // Texts
     for(auto it = m_textList.begin(); it != m_textList.end(); ++it) {
         Text* text = *it;
-        text->Draw(m_camera->GetTranslation(), m_camera->GetScale(), dc);
+        text->Draw(m_camera->GetTranslation(), m_camera->GetScale());
     }
 
     // Selection rectangle
@@ -156,8 +156,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     bool foundElement = false;
     if(m_mode == MODE_INSERT_TEXT) {
         m_mode = MODE_EDIT;
-    }
-    else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT) {
+    } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT) {
         // Get the last element inserted on the list.
         Element* newElement = *(m_elementList.end() - 1);
         for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
@@ -222,6 +221,21 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
             // Click in a switch.
             else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
                 element->SetOnline(element->IsOnline() ? false : true);
+            }
+        }
+
+        // Text element
+        for(auto it = m_textList.begin(); it != m_textList.end(); it++) {
+            Text* text = *it;
+
+            text->StartMove(m_camera->ScreenToWorld(event.GetPosition()));
+
+            if(text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                if(!foundElement) {
+                    text->SetSelected();
+                    m_mode = MODE_MOVE_ELEMENT;
+                    foundElement = true;
+                }
             }
         }
     }
@@ -391,6 +405,23 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
             }
         }
     }
+
+    // Text element
+    for(auto it = m_textList.begin(); it != m_textList.end(); it++) {
+        Text* text = *it;
+        if(m_mode == MODE_SELECTION_RECT) {
+            if(text->Intersects(m_selectionRect)) {
+                text->SetSelected();
+            } else {
+                text->SetSelected(false);
+            }
+        } else if(!event.ControlDown()) {
+            if(!text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                text->SetSelected(false);
+            }
+        }
+    }
+
     if(findNewParent) {
         std::rotate(itnp, itnp + 1, m_elementList.end());
         updateVoltages = true;
@@ -499,6 +530,14 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
                     redraw = true;
                 }
             }
+            // Text element motion
+            for(auto it = m_textList.begin(); it != m_textList.end(); it++) {
+                Text* text = *it;
+                if(text->IsSelected()) {
+                    text->Move(m_camera->ScreenToWorld(event.GetPosition()));
+                    redraw = true;
+                }
+            }
         } break;
 
         case MODE_SELECTION_RECT: {
@@ -571,6 +610,11 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             {
                 if(m_mode == MODE_INSERT) {
                     m_elementList.pop_back();  // Removes the last element being inserted.
+                    m_mode = MODE_EDIT;
+                    Redraw();
+                }
+                else if(m_mode == MODE_INSERT_TEXT) {
+                    m_textList.pop_back();
                     m_mode = MODE_EDIT;
                     Redraw();
                 }
@@ -826,6 +870,15 @@ void Workspace::RotateSelectedElements(bool clockwise)
         if(element->IsSelected()) {
             element->Rotate(clockwise);
             element->StartMove(m_camera->GetMousePosition());
+        }
+    }
+    
+    //Rotate text element
+    for(auto it = m_textList.begin(); it != m_textList.end(); it++) {
+        Text* text = *it;
+        if(text->IsSelected()) {
+            text->Rotate(clockwise);
+            text->StartMove(m_camera->GetMousePosition());
         }
     }
     Redraw();
