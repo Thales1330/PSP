@@ -1,14 +1,7 @@
+#include "TextForm.h"
 #include "Text.h"
 
-#include "Bus.h"
-#include "Line.h"
-#include "Transformer.h"
-#include "SyncGenerator.h"
-#include "IndMotor.h"
-#include "SyncMotor.h"
-#include "Load.h"
-#include "Inductor.h"
-#include "Capacitor.h"
+#include "ElectricCalculation.h"
 
 Text::Text() : Element() { SetText(m_text); }
 Text::Text(wxPoint2DDouble position) : Element()
@@ -83,4 +76,15 @@ void Text::Rotate(bool clockwise)
 
     m_angle += rotAngle;
     if(m_angle >= 360.0) m_angle = 0.0;
+}
+
+bool Text::ShowForm(wxWindow* parent, std::vector<Element*> elementList)
+{
+    TextForm* textForm = new TextForm(parent, this, elementList);
+    if(textForm->ShowModal() == wxID_OK) {
+        textForm->Destroy();
+        return true;
+    }
+    textForm->Destroy();
+    return false;
 }

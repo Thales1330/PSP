@@ -47,6 +47,16 @@ class ElectricCalculation
                                          std::vector<ReactiveLimits> reactiveLimit,
                                          double systemPowerBase);
 
+    const std::vector<Bus*> GetBusList() const { return m_busList; }
+    const std::vector<Capacitor*> GetCapacitorList() const { return m_capacitorList; }
+    const std::vector<IndMotor*> GetIndMotorList() const { return m_indMotorList; }
+    const std::vector<Inductor*> GetInductorList() const { return m_inductorList; }
+    const std::vector<Line*> GetLineList() const { return m_lineList; }
+    const std::vector<Load*> GetLoadList() const { return m_loadList; }
+    const std::vector<SyncGenerator*> GetSyncGeneratorList() const { return m_syncGeneratorList; }
+    const std::vector<SyncMotor*> GetSyncMotorList() const { return m_syncMotorList; }
+    const std::vector<Transformer*> GetTransformerList() const { return m_transformerList; }
+    
    protected:
     std::vector<Bus*> m_busList;
     std::vector<Capacitor*> m_capacitorList;

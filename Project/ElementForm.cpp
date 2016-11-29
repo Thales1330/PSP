@@ -2575,3 +2575,208 @@ IndMotorFormBase::~IndMotorFormBase()
     m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IndMotorFormBase::OnCancelButtonClick), NULL, this);
     
 }
+
+TextFormBase::TextFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    wxGridSizer* gridSizerLvl3_1 = new wxGridSizer(0, 3, 0, 0);
+    
+    boxSizerLvl2_1->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextElement = new wxStaticText(m_panelGeneral, wxID_ANY, _("Element"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextElement, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceElementArr;
+    m_choiceElementArr.Add(wxT("Bus"));
+    m_choiceElementArr.Add(wxT("Generator"));
+    m_choiceElementArr.Add(wxT("Line"));
+    m_choiceElementArr.Add(wxT("Transformer"));
+    m_choiceElementArr.Add(wxT("Load"));
+    m_choiceElementArr.Add(wxT("Capacitor"));
+    m_choiceElementArr.Add(wxT("Inductor"));
+    m_choiceElementArr.Add(wxT("Synchronous compensator"));
+    m_choiceElementArr.Add(wxT("Induction motor"));
+    m_choiceElement = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceElementArr, 0);
+    m_choiceElement->SetSelection(0);
+    
+    boxSizerLvl4_1->Add(m_choiceElement, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Element name"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceNameArr;
+    m_choiceName = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceNameArr, 0);
+    
+    boxSizerLvl4_2->Add(m_choiceName, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextType = new wxStaticText(m_panelGeneral, wxID_ANY, _("Text type"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_3->Add(m_staticTextType, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceTextTypeArr;
+    m_choiceTextType = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceTextTypeArr, 0);
+    
+    boxSizerLvl4_3->Add(m_choiceTextType, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextFromBus = new wxStaticText(m_panelGeneral, wxID_ANY, _("From bus"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_4->Add(m_staticTextFromBus, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceTextFromBusArr;
+    m_choiceTextFromBus = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceTextFromBusArr, 0);
+    
+    boxSizerLvl4_4->Add(m_choiceTextFromBus, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextToBus = new wxStaticText(m_panelGeneral, wxID_ANY, _("To bus"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_5->Add(m_staticTextToBus, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceTextToBusArr;
+    m_choiceTextToBus = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceTextToBusArr, 0);
+    
+    boxSizerLvl4_5->Add(m_choiceTextToBus, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_6 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextUnit = new wxStaticText(m_panelGeneral, wxID_ANY, _("Unit"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_6->Add(m_staticTextUnit, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceTextUnitArr;
+    m_choiceTextUnit = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceTextUnitArr, 0);
+    
+    boxSizerLvl4_6->Add(m_choiceTextUnit, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl2_1->Add(boxSizerLvl3_2, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextDecimal = new wxStaticText(m_panelGeneral, wxID_ANY, _("Decimal places:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_2->Add(m_staticTextDecimal, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlDecimal = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("2"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), wxTE_PROCESS_ENTER);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlDecimal->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl3_2->Add(m_textCtrlDecimal, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    boxSizerLvl3_2->Add(0, 0, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_staticTextPreview = new wxStaticText(m_panelGeneral, wxID_ANY, _("Preview:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_2->Add(m_staticTextPreview, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlPreview = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), wxTE_CENTRE);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPreview->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl3_2->Add(m_textCtrlPreview, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_ButtonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_ButtonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("TextFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_choiceElement->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnElementChoiceSelected), NULL, this);
+    m_choiceName->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnNameChoiceSelected), NULL, this);
+    m_choiceTextType->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnTypeChoiceSelected), NULL, this);
+    m_choiceTextFromBus->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnFromBusChoiceSelected), NULL, this);
+    m_choiceTextToBus->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnToBusChoiceSelected), NULL, this);
+    m_textCtrlDecimal->Connect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(TextFormBase::OnTextEnter), NULL, this);
+    
+}
+
+TextFormBase::~TextFormBase()
+{
+    m_choiceElement->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnElementChoiceSelected), NULL, this);
+    m_choiceName->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnNameChoiceSelected), NULL, this);
+    m_choiceTextType->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnTypeChoiceSelected), NULL, this);
+    m_choiceTextFromBus->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnFromBusChoiceSelected), NULL, this);
+    m_choiceTextToBus->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnToBusChoiceSelected), NULL, this);
+    m_textCtrlDecimal->Disconnect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(TextFormBase::OnTextEnter), NULL, this);
+    
+}

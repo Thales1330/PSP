@@ -710,4 +710,62 @@ public:
     virtual ~IndMotorFormBase();
 };
 
+
+class TextFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextElement;
+    wxChoice* m_choiceElement;
+    wxStaticText* m_staticTextName;
+    wxChoice* m_choiceName;
+    wxStaticText* m_staticTextType;
+    wxChoice* m_choiceTextType;
+    wxStaticText* m_staticTextFromBus;
+    wxChoice* m_choiceTextFromBus;
+    wxStaticText* m_staticTextToBus;
+    wxChoice* m_choiceTextToBus;
+    wxStaticText* m_staticTextUnit;
+    wxChoice* m_choiceTextUnit;
+    wxStaticText* m_staticTextDecimal;
+    wxTextCtrl* m_textCtrlDecimal;
+    wxStaticText* m_staticTextPreview;
+    wxTextCtrl* m_textCtrlPreview;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnElementChoiceSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnNameChoiceSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnTypeChoiceSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnFromBusChoiceSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnToBusChoiceSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnTextEnter(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextElement() { return m_staticTextElement; }
+    wxChoice* GetChoiceElement() { return m_choiceElement; }
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxChoice* GetChoiceName() { return m_choiceName; }
+    wxStaticText* GetStaticTextType() { return m_staticTextType; }
+    wxChoice* GetChoiceTextType() { return m_choiceTextType; }
+    wxStaticText* GetStaticTextFromBus() { return m_staticTextFromBus; }
+    wxChoice* GetChoiceTextFromBus() { return m_choiceTextFromBus; }
+    wxStaticText* GetStaticTextToBus() { return m_staticTextToBus; }
+    wxChoice* GetChoiceTextToBus() { return m_choiceTextToBus; }
+    wxStaticText* GetStaticTextUnit() { return m_staticTextUnit; }
+    wxChoice* GetChoiceTextUnit() { return m_choiceTextUnit; }
+    wxStaticText* GetStaticTextDecimal() { return m_staticTextDecimal; }
+    wxTextCtrl* GetTextCtrlDecimal() { return m_textCtrlDecimal; }
+    wxStaticText* GetStaticTextPreview() { return m_staticTextPreview; }
+    wxTextCtrl* GetTextCtrlPreview() { return m_textCtrlPreview; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    TextFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Text"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~TextFormBase();
+};
+
 #endif

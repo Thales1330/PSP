@@ -156,7 +156,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     bool foundElement = false;
     if(m_mode == MODE_INSERT_TEXT) {
         m_mode = MODE_EDIT;
-    } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT) {
+    } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT || m_mode == MODE_DRAG_INSERT_TEXT) {
         // Get the last element inserted on the list.
         Element* newElement = *(m_elementList.end() - 1);
         for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
@@ -298,6 +298,14 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
         // Click in a switch.
         else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
             element->SetOnline(element->IsOnline() ? false : true);
+        }
+    }
+    
+    //Text element
+    for(auto it = m_textList.begin(); it != m_textList.end(); ++it) {
+        Text* text = *it;
+        if(text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+            text->ShowForm(this, m_elementList);
         }
     }
 }
@@ -459,7 +467,8 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
         } break;
 
         case MODE_DRAG:
-        case MODE_DRAG_INSERT: {
+        case MODE_DRAG_INSERT:
+        case MODE_DRAG_INSERT_TEXT: {
             m_camera->SetTranslation(event.GetPosition());
             redraw = true;
         } break;
@@ -572,24 +581,32 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 void Workspace::OnMiddleDown(wxMouseEvent& event)
 {
     // Set to drag mode.
-    if(m_mode != MODE_INSERT && m_mode != MODE_DRAG_INSERT) {
+    if(m_mode != MODE_INSERT && m_mode != MODE_INSERT_TEXT && m_mode != MODE_DRAG_INSERT &&
+       m_mode != MODE_DRAG_INSERT_TEXT) {
         m_mode = MODE_DRAG;
+    } else if(m_mode == MODE_INSERT_TEXT) {
+        m_mode = MODE_DRAG_INSERT_TEXT;
     } else {
         m_mode = MODE_DRAG_INSERT;
     }
     m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
 }
+
 void Workspace::OnMiddleUp(wxMouseEvent& event)
 {
-    if(m_mode != MODE_INSERT && m_mode != MODE_DRAG_INSERT) {
+    if(m_mode != MODE_INSERT && m_mode != MODE_INSERT_TEXT && m_mode != MODE_DRAG_INSERT &&
+       m_mode != MODE_DRAG_INSERT_TEXT) {
         // Set to edit mode back.
         m_mode = MODE_EDIT;
+    } else if(m_mode == MODE_DRAG_INSERT_TEXT) {
+        m_mode = MODE_INSERT_TEXT;
     } else if(m_mode == MODE_DRAG_INSERT) {
         m_mode = MODE_INSERT;
     }
     UpdateStatusBar();
 }
+
 void Workspace::OnScroll(wxMouseEvent& event)
 {
     if(event.GetWheelRotation() > 0)
@@ -603,6 +620,9 @@ void Workspace::OnScroll(wxMouseEvent& event)
 
 void Workspace::OnKeyDown(wxKeyEvent& event)
 {
+    bool insertingElement = false;
+    if(m_mode == MODE_INSERT || m_mode == MODE_INSERT_TEXT) insertingElement = true;
+
     char key = event.GetUnicodeKey();
     if(key != WXK_NONE) {
         switch(key) {
@@ -612,8 +632,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     m_elementList.pop_back();  // Removes the last element being inserted.
                     m_mode = MODE_EDIT;
                     Redraw();
-                }
-                else if(m_mode == MODE_INSERT_TEXT) {
+                } else if(m_mode == MODE_INSERT_TEXT) {
                     m_textList.pop_back();
                     m_mode = MODE_EDIT;
                     Redraw();
@@ -624,11 +643,13 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 DeleteSelectedElements();
             } break;
             case 'A': {
-                Text* newBus = new Text(m_camera->ScreenToWorld(event.GetPosition()));
-                m_textList.push_back(newBus);
-                m_mode = MODE_INSERT_TEXT;
-                m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
-                Redraw();
+                if(!insertingElement) {
+                    Text* newBus = new Text(m_camera->ScreenToWorld(event.GetPosition()));
+                    m_textList.push_back(newBus);
+                    m_mode = MODE_INSERT_TEXT;
+                    m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
+                    Redraw();
+                }
             }
             case 'F': {
                 if(event.GetModifiers() == wxMOD_SHIFT) {
@@ -641,7 +662,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'B':  // Insert a bus.
             {
-                if(m_mode != MODE_INSERT) {
+                if(!insertingElement) {
                     Bus* newBus = new Bus(m_camera->ScreenToWorld(event.GetPosition()),
                                           wxString::Format(_("Bus %d"), GetElementNumber(ID_BUS)));
                     IncrementElementNumber(ID_BUS);
@@ -652,7 +673,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
             } break;
             case 'L': {
-                if(m_mode != MODE_INSERT) {
+                if(!insertingElement) {
                     if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert a load.
                         Load* newLoad = new Load(wxString::Format(_("Load %d"), GetElementNumber(ID_LOAD)));
                         IncrementElementNumber(ID_LOAD);
@@ -671,7 +692,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'T':  // Insert a transformer.
             {
-                if(m_mode != MODE_INSERT) {
+                if(!insertingElement) {
                     Transformer* newTransformer =
                         new Transformer(wxString::Format(_("Transformer %d"), GetElementNumber(ID_TRANSFORMER)));
                     IncrementElementNumber(ID_TRANSFORMER);
@@ -683,7 +704,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'G':  // Insert a generator.
             {
-                if(m_mode != MODE_INSERT) {
+                if(!insertingElement) {
                     SyncGenerator* newGenerator =
                         new SyncGenerator(wxString::Format(_("Generator %d"), GetElementNumber(ID_SYNCGENERATOR)));
                     IncrementElementNumber(ID_SYNCGENERATOR);
@@ -694,7 +715,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
             } break;
             case 'I': {
-                if(m_mode != MODE_INSERT) {
+                if(!insertingElement) {
                     if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert an inductor.
                         Inductor* newInductor =
                             new Inductor(wxString::Format(_("Inductor %d"), GetElementNumber(ID_INDUCTOR)));
@@ -716,7 +737,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'K':  // Insert a synchronous condenser.
             {
-                if(m_mode != MODE_INSERT) {
+                if(!insertingElement) {
                     SyncMotor* newSyncCondenser =
                         new SyncMotor(wxString::Format(_("Synchronous condenser %d"), GetElementNumber(ID_SYNCMOTOR)));
                     IncrementElementNumber(ID_SYNCMOTOR);
@@ -727,7 +748,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
             } break;
             case 'C': {
-                if(m_mode != MODE_INSERT) {
+                if(!insertingElement) {
                     if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert a capacitor.
                         Capacitor* newCapacitor =
                             new Capacitor(wxString::Format(_("Capacitor %d"), GetElementNumber(ID_CAPACITOR)));
@@ -757,7 +778,8 @@ void Workspace::UpdateStatusBar()
 
         case MODE_INSERT:
         case MODE_INSERT_TEXT:
-        case MODE_DRAG_INSERT: {
+        case MODE_DRAG_INSERT:
+        case MODE_DRAG_INSERT_TEXT: {
             m_statusBar->SetStatusText(_("MODE: INSERT"), 1);
         } break;
 
@@ -872,8 +894,8 @@ void Workspace::RotateSelectedElements(bool clockwise)
             element->StartMove(m_camera->GetMousePosition());
         }
     }
-    
-    //Rotate text element
+
+    // Rotate text element
     for(auto it = m_textList.begin(); it != m_textList.end(); it++) {
         Text* text = *it;
         if(text->IsSelected()) {

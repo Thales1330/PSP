@@ -47,6 +47,7 @@
         <File Name="ReactiveShuntElementForm.cpp"/>
         <File Name="IndMotorForm.cpp"/>
         <File Name="SyncMachineForm.cpp"/>
+        <File Name="TextForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -91,6 +92,7 @@
         <File Name="ReactiveShuntElementForm.h"/>
         <File Name="IndMotorForm.h"/>
         <File Name="SyncMachineForm.h"/>
+        <File Name="TextForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
