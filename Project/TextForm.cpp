@@ -61,7 +61,102 @@ void TextForm::OnNameChoiceSelected(wxCommandEvent& event)
 
 void TextForm::OnTextEnter(wxCommandEvent& event) {}
 void TextForm::OnToBusChoiceSelected(wxCommandEvent& event) {}
-void TextForm::OnTypeChoiceSelected(wxCommandEvent& event) {}
+void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
+{
+    switch(m_text->GetElementType()) {
+        case TYPE_BUS: {
+            switch(m_choiceTextType->GetSelection()) {
+                case 0: {
+                    m_text->SetDataType(DATA_NAME);
+                } break;
+                case 1: {
+                    m_text->SetDataType(DATA_VOLTAGE);
+                } break;
+                case 2: {
+                    m_text->SetDataType(DATA_ANGLE);
+                } break;
+                case 3: {
+                    m_text->SetDataType(DATA_SC_CURRENT);
+                } break;
+                case 4: {
+                    m_text->SetDataType(DATA_SC_VOLTAGE);
+                } break;
+                case 5: {
+                    m_text->SetDataType(DATA_SC_POWER);
+                } break;
+            }
+        } break;
+        case TYPE_SYNC_GENERATOR: {
+            switch(m_choiceTextType->GetSelection()) {
+                case 0: {
+                    m_text->SetDataType(DATA_NAME);
+                } break;
+                case 1: {
+                    m_text->SetDataType(DATA_ACTIVE_POWER);
+                } break;
+                case 2: {
+                    m_text->SetDataType(DATA_REACTIVE_POWER);
+                } break;
+                case 3: {
+                    m_text->SetDataType(DATA_SC_CURRENT);
+                } break;
+            }
+        } break;
+        case TYPE_LINE:
+        case TYPE_TRANSFORMER: {
+            switch(m_choiceTextType->GetSelection()) {
+                case 0: {
+                    m_text->SetDataType(DATA_NAME);
+                } break;
+                case 1: {
+                    m_text->SetDataType(DATA_PF_ACTIVE);
+                } break;
+                case 2: {
+                    m_text->SetDataType(DATA_PF_REACTIVE);
+                } break;
+                case 3: {
+                    m_text->SetDataType(DATA_PF_LOSSES);
+                } break;
+                case 4: {
+                    m_text->SetDataType(DATA_PF_CURRENT);
+                } break;
+                case 5: {
+                    m_text->SetDataType(DATA_SC_CURRENT);
+                } break;
+            }
+        } break;
+        case TYPE_LOAD:
+        case TYPE_SYNC_MOTOR:
+        case TYPE_IND_MOTOR: {
+            switch(m_choiceTextType->GetSelection()) {
+                case 0: {
+                    m_text->SetDataType(DATA_NAME);
+                } break;
+                case 1: {
+                    m_text->SetDataType(DATA_PF_ACTIVE);
+                } break;
+                case 2: {
+                    m_text->SetDataType(DATA_PF_REACTIVE);
+                } break;
+            }
+        } break;
+        case TYPE_CAPACITOR:
+        case TYPE_INDUCTOR: {
+            switch(m_choiceTextType->GetSelection()) {
+                case 0: {
+                    m_text->SetDataType(DATA_NAME);
+                } break;
+                case 1: {
+                    m_text->SetDataType(DATA_PF_REACTIVE);
+                } break;
+            }
+        } break;
+        default:
+            break;
+    }
+    DataTypeChoice();
+}
+
 void TextForm::ElementTypeChoice()
 {
     m_choiceName->Clear();
@@ -136,56 +231,42 @@ void TextForm::ElementNumberChoice()
     switch(m_text->GetElementType()) {
         case TYPE_BUS: {
             arrayString.Add(_("Name"));
-			arrayString.Add(_("Voltage"));
-			arrayString.Add(_("Angle"));
-			arrayString.Add(_("Fault current"));
-			arrayString.Add(_("Fault voltage"));
-			arrayString.Add(_("Short-circuit power"));
+            arrayString.Add(_("Voltage"));
+            arrayString.Add(_("Angle"));
+            arrayString.Add(_("Fault current"));
+            arrayString.Add(_("Fault voltage"));
+            arrayString.Add(_("Short-circuit power"));
         } break;
         case TYPE_SYNC_GENERATOR: {
             arrayString.Add(_("Name"));
-			arrayString.Add(_("Active power"));
-			arrayString.Add(_("Reactive power"));
-			arrayString.Add(_("Fault current"));
+            arrayString.Add(_("Active power"));
+            arrayString.Add(_("Reactive power"));
+            arrayString.Add(_("Fault current"));
         } break;
-        case TYPE_LINE: {
-            arrayString.Add(_("Name"));
-			arrayString.Add(_("Active power flow"));
-			arrayString.Add(_("Reactive power flow"));
-			arrayString.Add(_("Losses"));
-			arrayString.Add(_("Current"));
-			arrayString.Add(_("Fault current"));
-        } break;
+        case TYPE_LINE:
         case TYPE_TRANSFORMER: {
             arrayString.Add(_("Name"));
-			arrayString.Add(_("Active power flow"));
-			arrayString.Add(_("Reactive power flow"));
-			arrayString.Add(_("Losses"));
-			arrayString.Add(_("Current"));
-			arrayString.Add(_("Fault current"));
+            arrayString.Add(_("Active power flow"));
+            arrayString.Add(_("Reactive power flow"));
+            arrayString.Add(_("Losses"));
+            arrayString.Add(_("Current"));
+            arrayString.Add(_("Fault current"));
         } break;
         case TYPE_LOAD: {
             arrayString.Add(_("Name"));
-			arrayString.Add(_("Active power"));
-			arrayString.Add(_("Reactive power"));
+            arrayString.Add(_("Active power"));
+            arrayString.Add(_("Reactive power"));
         } break;
-        case TYPE_CAPACITOR: {
-            arrayString.Add(_("Name"));
-			arrayString.Add(_("Reactive power"));
-        } break;
+        case TYPE_CAPACITOR:
         case TYPE_INDUCTOR: {
             arrayString.Add(_("Name"));
-			arrayString.Add(_("Reactive power"));
+            arrayString.Add(_("Reactive power"));
         } break;
-        case TYPE_SYNC_MOTOR: {
-            arrayString.Add(_("Name"));
-			arrayString.Add(_("Active power"));
-			arrayString.Add(_("Reactive power"));
-        } break;
+        case TYPE_SYNC_MOTOR:
         case TYPE_IND_MOTOR: {
             arrayString.Add(_("Name"));
-			arrayString.Add(_("Active power"));
-			arrayString.Add(_("Reactive power"));
+            arrayString.Add(_("Active power"));
+            arrayString.Add(_("Reactive power"));
         } break;
 
         default:
@@ -195,7 +276,107 @@ void TextForm::ElementNumberChoice()
     m_choiceTextType->Enable();
 }
 
-void TextForm::DataTypeChoice() {}
+void TextForm::DataTypeChoice()
+{
+    m_choiceTextToBus->Clear();
+    m_choiceTextFromBus->Clear();
+    m_choiceTextUnit->Clear();
+    m_choiceTextUnit->Enable();
+    wxArrayString arrayString;
+    switch(m_text->GetDataType()) {
+        case DATA_NAME: {
+            m_choiceTextUnit->Enable(false);
+            return;
+        } break;
+        case DATA_VOLTAGE:
+        case DATA_SC_VOLTAGE: {
+            arrayString.Add(_("p.u."));
+            arrayString.Add(_("V"));
+            arrayString.Add(_("kV"));
+        } break;
+        case DATA_ANGLE: {
+            arrayString.Add(_("Degrees"));
+            arrayString.Add(_("Radians"));
+        } break;
+        case DATA_SC_CURRENT:
+        case DATA_PF_CURRENT: {
+            arrayString.Add(_("p.u."));
+            arrayString.Add(_("A"));
+            arrayString.Add(_("kA"));
+        } break;
+        case DATA_SC_POWER: {
+            arrayString.Add(_("p.u."));
+            arrayString.Add(_("VA"));
+            arrayString.Add(_("kVA"));
+            arrayString.Add(_("MVA"));
+        } break;
+        case DATA_ACTIVE_POWER:
+        case DATA_PF_ACTIVE:
+        case DATA_PF_LOSSES: {
+            arrayString.Add(_("p.u."));
+            arrayString.Add(_("W"));
+            arrayString.Add(_("kW"));
+            arrayString.Add(_("MW"));
+            m_choiceTextUnit->Enable();
+        } break;
+        case DATA_REACTIVE_POWER:
+        case DATA_PF_REACTIVE: {
+            arrayString.Add(_("p.u."));
+            arrayString.Add(_("VAr"));
+            arrayString.Add(_("kVAr"));
+            arrayString.Add(_("MVAr"));
+        } break;
+        default:
+            break;
+    }
+    m_choiceTextUnit->Append(arrayString);
+
+    switch(m_text->GetElementType()) {
+        case TYPE_LINE: {
+            auto it = m_allElements.GetLineList().begin();
+            std::advance(it, m_text->GetElementNumber());
+            Line* line = *it;
+
+            Bus* bus1 = (Bus*)line->GetParentList()[0];
+            Bus* bus2 = (Bus*)line->GetParentList()[1];
+            wxString bus1Name = bus1->GetEletricalData().name;
+            wxString bus2Name = bus2->GetEletricalData().name;
+
+            m_choiceTextFromBus->Append(bus1Name);
+            m_choiceTextFromBus->Append(bus2Name);
+            m_choiceTextToBus->Append(bus2Name);
+            m_choiceTextToBus->Append(bus1Name);
+            m_choiceTextFromBus->SetSelection(0);
+            m_choiceTextToBus->SetSelection(0);
+
+            m_choiceTextFromBus->Enable();
+            m_choiceTextToBus->Enable();
+        } break;
+        case TYPE_TRANSFORMER: {
+            auto it = m_allElements.GetTransformerList().begin();
+            std::advance(it, m_text->GetElementNumber());
+            Transformer* transformer = *it;
+
+            Bus* bus1 = (Bus*)transformer->GetParentList()[0];
+            Bus* bus2 = (Bus*)transformer->GetParentList()[1];
+            wxString bus1Name = bus1->GetEletricalData().name;
+            wxString bus2Name = bus2->GetEletricalData().name;
+
+            m_choiceTextFromBus->Append(bus1Name);
+            m_choiceTextFromBus->Append(bus2Name);
+            m_choiceTextToBus->Append(bus2Name);
+            m_choiceTextToBus->Append(bus1Name);
+            m_choiceTextFromBus->SetSelection(0);
+            m_choiceTextToBus->SetSelection(0);
+
+            m_choiceTextFromBus->Enable();
+            m_choiceTextToBus->Enable();
+        } break;
+        default:
+            break;
+    }
+}
+
 void TextForm::FromChoice() {}
 void TextForm::ToChoice() {}
 void TextForm::UnitChoice() {}

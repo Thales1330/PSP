@@ -47,8 +47,8 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\Text.h" Name="FileName"/>
-      <int Value="48" Name="FirstVisibleLine"/>
-      <int Value="33" Name="CurrentLine"/>
+      <int Value="12" Name="FirstVisibleLine"/>
+      <int Value="21" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
@@ -75,8 +75,8 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Thales\Documents\GitHub\PSP\Project\TextForm.cpp" Name="FileName"/>
-      <int Value="160" Name="FirstVisibleLine"/>
-      <int Value="170" Name="CurrentLine"/>
+      <int Value="350" Name="FirstVisibleLine"/>
+      <int Value="373" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
