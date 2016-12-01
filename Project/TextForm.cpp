@@ -1,10 +1,12 @@
 #include "TextForm.h"
 
-TextForm::TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementList) : TextFormBase(parent)
+TextForm::TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementList, double systemPowerBase)
+    : TextFormBase(parent)
 {
     m_parent = parent;
     m_text = text;
     m_allElements.GetElementsFromList(elementList);
+    m_systemPowerBase = systemPowerBase;
 
     m_choiceName->Enable(false);
     m_choiceTextType->Enable(false);
@@ -52,7 +54,12 @@ void TextForm::OnElementChoiceSelected(wxCommandEvent& event)
     ElementTypeChoice();
 }
 
-void TextForm::OnFromBusChoiceSelected(wxCommandEvent& event) {}
+void TextForm::OnFromBusChoiceSelected(wxCommandEvent& event)
+{
+    m_text->SetDirection(m_choiceTextFromBus->GetSelection());
+    m_choiceTextToBus->SetSelection(m_choiceTextFromBus->GetSelection());
+}
+
 void TextForm::OnNameChoiceSelected(wxCommandEvent& event)
 {
     m_text->SetElementNumber(m_choiceName->GetSelection());
@@ -60,7 +67,12 @@ void TextForm::OnNameChoiceSelected(wxCommandEvent& event)
 }
 
 void TextForm::OnTextEnter(wxCommandEvent& event) {}
-void TextForm::OnToBusChoiceSelected(wxCommandEvent& event) {}
+void TextForm::OnToBusChoiceSelected(wxCommandEvent& event)
+{
+    m_text->SetDirection(m_choiceTextToBus->GetSelection());
+    m_choiceTextFromBus->SetSelection(m_choiceTextToBus->GetSelection());
+}
+
 void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
 {
     switch(m_text->GetElementType()) {
@@ -159,6 +171,15 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
 
 void TextForm::ElementTypeChoice()
 {
+    m_choiceTextType->Enable(false);
+    m_choiceTextFromBus->Enable(false);
+    m_choiceTextToBus->Enable(false);
+    m_choiceTextUnit->Enable(false);
+    m_choiceTextType->Clear();
+    m_choiceTextFromBus->Clear();
+    m_choiceTextToBus->Clear();
+    m_choiceTextUnit->Clear();
+
     m_choiceName->Clear();
     wxArrayString arrayString;
     switch(m_text->GetElementType()) {
@@ -226,10 +247,24 @@ void TextForm::ElementTypeChoice()
 
 void TextForm::ElementNumberChoice()
 {
+    m_choiceTextFromBus->Enable(false);
+    m_choiceTextToBus->Enable(false);
+    m_choiceTextUnit->Enable(false);
+    m_choiceTextFromBus->Clear();
+    m_choiceTextToBus->Clear();
+    m_choiceTextUnit->Clear();
+    
+    int index = m_choiceName->GetSelection();
+    m_text->SetElementNumber(index);
+
     m_choiceTextType->Clear();
     wxArrayString arrayString;
     switch(m_text->GetElementType()) {
         case TYPE_BUS: {
+            auto it = m_allElements.GetBusList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
             arrayString.Add(_("Name"));
             arrayString.Add(_("Voltage"));
             arrayString.Add(_("Angle"));
@@ -238,13 +273,33 @@ void TextForm::ElementNumberChoice()
             arrayString.Add(_("Short-circuit power"));
         } break;
         case TYPE_SYNC_GENERATOR: {
+            auto it = m_allElements.GetSyncGeneratorList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
             arrayString.Add(_("Fault current"));
         } break;
         case TYPE_LINE:
+         {
+            auto it = m_allElements.GetLineList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
+            arrayString.Add(_("Name"));
+            arrayString.Add(_("Active power flow"));
+            arrayString.Add(_("Reactive power flow"));
+            arrayString.Add(_("Losses"));
+            arrayString.Add(_("Current"));
+            arrayString.Add(_("Fault current"));
+        } break;
         case TYPE_TRANSFORMER: {
+            auto it = m_allElements.GetTransformerList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power flow"));
             arrayString.Add(_("Reactive power flow"));
@@ -253,17 +308,44 @@ void TextForm::ElementNumberChoice()
             arrayString.Add(_("Fault current"));
         } break;
         case TYPE_LOAD: {
+            auto it = m_allElements.GetLoadList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
         } break;
-        case TYPE_CAPACITOR:
-        case TYPE_INDUCTOR: {
+        case TYPE_CAPACITOR: {
+            auto it = m_allElements.GetCapacitorList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
             arrayString.Add(_("Name"));
             arrayString.Add(_("Reactive power"));
         } break;
-        case TYPE_SYNC_MOTOR:
+        case TYPE_INDUCTOR: {
+            auto it = m_allElements.GetInductorList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
+            arrayString.Add(_("Name"));
+            arrayString.Add(_("Reactive power"));
+        } break;
+        case TYPE_SYNC_MOTOR: {
+            auto it = m_allElements.GetSyncMotorList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
+            arrayString.Add(_("Name"));
+            arrayString.Add(_("Active power"));
+            arrayString.Add(_("Reactive power"));
+        } break;
         case TYPE_IND_MOTOR: {
+            auto it = m_allElements.GetIndMotorList().begin();
+            std::advance(it, index);
+            m_text->SetElement(*it);
+            
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
@@ -278,14 +360,19 @@ void TextForm::ElementNumberChoice()
 
 void TextForm::DataTypeChoice()
 {
+    m_choiceTextFromBus->Enable(false);
+    m_choiceTextToBus->Enable(false);
+
     m_choiceTextToBus->Clear();
     m_choiceTextFromBus->Clear();
     m_choiceTextUnit->Clear();
+
     m_choiceTextUnit->Enable();
     wxArrayString arrayString;
     switch(m_text->GetDataType()) {
         case DATA_NAME: {
             m_choiceTextUnit->Enable(false);
+            m_text->UpdateText(m_systemPowerBase);
             return;
         } break;
         case DATA_VOLTAGE:
@@ -333,50 +420,167 @@ void TextForm::DataTypeChoice()
 
     switch(m_text->GetElementType()) {
         case TYPE_LINE: {
-            auto it = m_allElements.GetLineList().begin();
-            std::advance(it, m_text->GetElementNumber());
-            Line* line = *it;
+            if(m_text->GetDataType() != DATA_PF_LOSSES) {
+                auto it = m_allElements.GetLineList().begin();
+                std::advance(it, m_text->GetElementNumber());
+                Line* line = *it;
 
-            Bus* bus1 = (Bus*)line->GetParentList()[0];
-            Bus* bus2 = (Bus*)line->GetParentList()[1];
-            wxString bus1Name = bus1->GetEletricalData().name;
-            wxString bus2Name = bus2->GetEletricalData().name;
+                Bus* bus1 = (Bus*)line->GetParentList()[0];
+                Bus* bus2 = (Bus*)line->GetParentList()[1];
+                wxString bus1Name = bus1->GetEletricalData().name;
+                wxString bus2Name = bus2->GetEletricalData().name;
 
-            m_choiceTextFromBus->Append(bus1Name);
-            m_choiceTextFromBus->Append(bus2Name);
-            m_choiceTextToBus->Append(bus2Name);
-            m_choiceTextToBus->Append(bus1Name);
-            m_choiceTextFromBus->SetSelection(0);
-            m_choiceTextToBus->SetSelection(0);
+                m_choiceTextFromBus->Append(bus1Name);
+                m_choiceTextFromBus->Append(bus2Name);
+                m_choiceTextToBus->Append(bus2Name);
+                m_choiceTextToBus->Append(bus1Name);
+                m_choiceTextFromBus->SetSelection(0);
+                m_choiceTextToBus->SetSelection(0);
+                m_text->SetDirection(0);
 
-            m_choiceTextFromBus->Enable();
-            m_choiceTextToBus->Enable();
+                m_choiceTextFromBus->Enable();
+                m_choiceTextToBus->Enable();
+            }
         } break;
         case TYPE_TRANSFORMER: {
-            auto it = m_allElements.GetTransformerList().begin();
-            std::advance(it, m_text->GetElementNumber());
-            Transformer* transformer = *it;
+            if(m_text->GetDataType() != DATA_PF_LOSSES) {
+                auto it = m_allElements.GetTransformerList().begin();
+                std::advance(it, m_text->GetElementNumber());
+                Transformer* transformer = *it;
 
-            Bus* bus1 = (Bus*)transformer->GetParentList()[0];
-            Bus* bus2 = (Bus*)transformer->GetParentList()[1];
-            wxString bus1Name = bus1->GetEletricalData().name;
-            wxString bus2Name = bus2->GetEletricalData().name;
+                Bus* bus1 = (Bus*)transformer->GetParentList()[0];
+                Bus* bus2 = (Bus*)transformer->GetParentList()[1];
+                wxString bus1Name = bus1->GetEletricalData().name;
+                wxString bus2Name = bus2->GetEletricalData().name;
 
-            m_choiceTextFromBus->Append(bus1Name);
-            m_choiceTextFromBus->Append(bus2Name);
-            m_choiceTextToBus->Append(bus2Name);
-            m_choiceTextToBus->Append(bus1Name);
-            m_choiceTextFromBus->SetSelection(0);
-            m_choiceTextToBus->SetSelection(0);
+                m_choiceTextFromBus->Append(bus1Name);
+                m_choiceTextFromBus->Append(bus2Name);
+                m_choiceTextToBus->Append(bus2Name);
+                m_choiceTextToBus->Append(bus1Name);
+                m_choiceTextFromBus->SetSelection(0);
+                m_choiceTextToBus->SetSelection(0);
+                m_text->SetDirection(0);
 
-            m_choiceTextFromBus->Enable();
-            m_choiceTextToBus->Enable();
+                m_choiceTextFromBus->Enable();
+                m_choiceTextToBus->Enable();
+            }
         } break;
         default:
             break;
     }
 }
 
-void TextForm::FromChoice() {}
-void TextForm::ToChoice() {}
-void TextForm::UnitChoice() {}
+void TextForm::UnitChoice()
+{
+    switch(m_text->GetDataType()) {
+        case DATA_NAME: {
+            m_choiceTextUnit->Enable(false);
+            return;
+        } break;
+        case DATA_VOLTAGE:
+        case DATA_SC_VOLTAGE: {
+            switch(m_choiceTextUnit->GetSelection()) {
+                case 0: {
+                    m_text->SetUnit(UNIT_PU);
+                } break;
+                case 1: {
+                    m_text->SetUnit(UNIT_V);
+                } break;
+                case 2: {
+                    m_text->SetUnit(UNIT_kV);
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case DATA_ANGLE: {
+            switch(m_choiceTextUnit->GetSelection()) {
+                case 0: {
+                    m_text->SetUnit(UNIT_DEGREE);
+                } break;
+                case 1: {
+                    m_text->SetUnit(UNIT_RADIAN);
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case DATA_SC_CURRENT:
+        case DATA_PF_CURRENT: {
+            switch(m_choiceTextUnit->GetSelection()) {
+                case 0: {
+                    m_text->SetUnit(UNIT_PU);
+                } break;
+                case 1: {
+                    m_text->SetUnit(UNIT_A);
+                } break;
+                case 2: {
+                    m_text->SetUnit(UNIT_kA);
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case DATA_SC_POWER: {
+            switch(m_choiceTextUnit->GetSelection()) {
+                case 0: {
+                    m_text->SetUnit(UNIT_PU);
+                } break;
+                case 1: {
+                    m_text->SetUnit(UNIT_VA);
+                } break;
+                case 2: {
+                    m_text->SetUnit(UNIT_kVA);
+                } break;
+                case 3: {
+                    m_text->SetUnit(UNIT_MVA);
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case DATA_ACTIVE_POWER:
+        case DATA_PF_ACTIVE:
+        case DATA_PF_LOSSES: {
+            switch(m_choiceTextUnit->GetSelection()) {
+                case 0: {
+                    m_text->SetUnit(UNIT_PU);
+                } break;
+                case 1: {
+                    m_text->SetUnit(UNIT_W);
+                } break;
+                case 2: {
+                    m_text->SetUnit(UNIT_kW);
+                } break;
+                case 3: {
+                    m_text->SetUnit(UNIT_MW);
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case DATA_REACTIVE_POWER:
+        case DATA_PF_REACTIVE: {
+            switch(m_choiceTextUnit->GetSelection()) {
+                case 0: {
+                    m_text->SetUnit(UNIT_PU);
+                } break;
+                case 1: {
+                    m_text->SetUnit(UNIT_VAr);
+                } break;
+                case 2: {
+                    m_text->SetUnit(UNIT_kVAr);
+                } break;
+                case 3: {
+                    m_text->SetUnit(UNIT_MVAr);
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        default:
+            break;
+    }
+    
+    m_text->UpdateText(m_systemPowerBase);
+}

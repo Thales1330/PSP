@@ -742,6 +742,8 @@ protected:
     virtual void OnFromBusChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnToBusChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnTextEnter(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
 public:
     wxStaticText* GetStaticTextElement() { return m_staticTextElement; }

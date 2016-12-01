@@ -6,6 +6,16 @@
 
 class TextForm;
 
+class Bus;
+class Line;
+class Transformer;
+class SyncGenerator;
+class IndMotor;
+class SyncMotor;
+class Load;
+class Inductor;
+class Capacitor;
+
 enum ElementType {
     TYPE_BUS,
     TYPE_CAPACITOR,
@@ -46,6 +56,7 @@ class Text : public Element
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);
     virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList);
+    virtual void UpdateText(double systemPowerBase);
     virtual wxString GetText() const { return m_text; }
     virtual void SetText(wxString text);
 
@@ -56,6 +67,7 @@ class Text : public Element
     void SetElementType(const ElementType elementType) { m_elementType = elementType; }
     void SetFontSize(int fontSize) { m_fontSize = fontSize; }
     void SetUnit(const ElectricalUnit unit) { m_unit = unit; }
+    void SetDecimalPlaces(int decimalPlaces) { m_decimalPlaces = decimalPlaces; }
     const DataType GetDataType() const { return m_dataType; }
     int GetDirection() const { return m_direction; }
     Element* GetElement() { return m_element; }
@@ -63,17 +75,19 @@ class Text : public Element
     const ElementType GetElementType() const { return m_elementType; }
     int GetFontSize() const { return m_fontSize; }
     const ElectricalUnit GetUnit() const { return m_unit; }
+    int GetDecimalPlaces() const { return m_decimalPlaces; }
     
    protected:
     wxString m_text = _("Text");
     int m_fontSize = 10;
 
-    Element* m_element;
+    Element* m_element = NULL;
     ElementType m_elementType;
     int m_elementNumber;
     DataType m_dataType;
     ElectricalUnit m_unit;
     int m_direction;
+    int m_decimalPlaces;
 };
 
 #endif  // TEXT_H

@@ -2,6 +2,15 @@
 #include "Text.h"
 
 #include "ElectricCalculation.h"
+#include "Bus.h"
+#include "Line.h"
+#include "Transformer.h"
+#include "SyncGenerator.h"
+#include "IndMotor.h"
+#include "SyncMotor.h"
+#include "Load.h"
+#include "Inductor.h"
+#include "Capacitor.h"
 
 Text::Text() : Element() { SetText(m_text); }
 Text::Text(wxPoint2DDouble position) : Element()
@@ -87,4 +96,45 @@ bool Text::ShowForm(wxWindow* parent, std::vector<Element*> elementList)
     }
     textForm->Destroy();
     return false;
+}
+
+void Text::UpdateText(double systemPowerBase)
+{
+    switch(m_elementType) {
+        case TYPE_BUS: {
+            Bus* bus = (Bus*)m_element;
+            if(bus) {
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(bus->GetEletricalData().name);
+                        wxLogMessage(m_text);
+                    } break;
+                }
+            }
+        } break;
+        case TYPE_SYNC_GENERATOR: {
+            
+        } break;
+        case TYPE_LINE: {
+            
+        } break;
+        case TYPE_TRANSFORMER: {
+            
+        } break;
+        case TYPE_LOAD: {
+            
+        } break;
+        case TYPE_SYNC_MOTOR: {
+            
+        } break;
+        case TYPE_IND_MOTOR: {
+            
+        } break;
+        case TYPE_CAPACITOR: {
+            
+        } break;
+        case TYPE_INDUCTOR: {
+            
+        } break;
+    }
 }

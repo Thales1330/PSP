@@ -61,7 +61,9 @@ enum ElectricalUnit
 	UNIT_OHM,
 	UNIT_OHM_km,
 	UNIT_S,
-	UNIT_S_km
+	UNIT_S_km,
+    UNIT_DEGREE,
+    UNIT_RADIAN
 };
 
 enum FaultData

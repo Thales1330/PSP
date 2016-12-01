@@ -2767,6 +2767,8 @@ TextFormBase::TextFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     m_choiceTextFromBus->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnFromBusChoiceSelected), NULL, this);
     m_choiceTextToBus->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnToBusChoiceSelected), NULL, this);
     m_textCtrlDecimal->Connect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(TextFormBase::OnTextEnter), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnOKButtonClick), NULL, this);
+    m_ButtonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnCancelButtonClick), NULL, this);
     
 }
 
@@ -2778,5 +2780,7 @@ TextFormBase::~TextFormBase()
     m_choiceTextFromBus->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnFromBusChoiceSelected), NULL, this);
     m_choiceTextToBus->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnToBusChoiceSelected), NULL, this);
     m_textCtrlDecimal->Disconnect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(TextFormBase::OnTextEnter), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnOKButtonClick), NULL, this);
+    m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnCancelButtonClick), NULL, this);
     
 }
