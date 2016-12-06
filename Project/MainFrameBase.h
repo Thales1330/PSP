@@ -56,22 +56,25 @@ public:
         ID_RIBBON_EXPIMP = 10012,
         ID_RIBBON_FAULT = 10013,
         ID_RIBBON_FIT = 10014,
-        ID_RIBBON_GUIDE = 10015,
-        ID_RIBBON_MOVE = 10016,
-        ID_RIBBON_NEW = 10017,
-        ID_RIBBON_OPEN = 10018,
-        ID_RIBBON_PASTE = 10019,
-        ID_RIBBON_POWERFLOW = 10020,
-        ID_RIBBON_REDO = 10021,
-        ID_RIBBON_RESETVOLT = 10022,
-        ID_RIBBON_RUNSTAB = 10023,
-        ID_RIBBON_SAVE = 10024,
-        ID_RIBBON_SAVEAS = 10025,
-        ID_RIBBON_SCPOWER = 10026,
-        ID_RIBBON_SETTINGS = 10027,
-        ID_RIBBON_SNAPSHOT = 10028,
-        ID_RIBBON_STABSETTINGS = 10029,
-        ID_RIBBON_UNDO = 10030,
+        ID_RIBBON_GENSETTINGS = 10015,
+        ID_RIBBON_GUIDE = 10016,
+        ID_RIBBON_MOVE = 10017,
+        ID_RIBBON_NEW = 10018,
+        ID_RIBBON_OPEN = 10019,
+        ID_RIBBON_PASTE = 10020,
+        ID_RIBBON_POWERFLOW = 10021,
+        ID_RIBBON_PROJSETTINGS = 10022,
+        ID_RIBBON_REDO = 10023,
+        ID_RIBBON_RESETVOLT = 10024,
+        ID_RIBBON_ROTATEC = 10025,
+        ID_RIBBON_ROTATECC = 10026,
+        ID_RIBBON_RUNSTAB = 10027,
+        ID_RIBBON_SAVE = 10028,
+        ID_RIBBON_SAVEAS = 10029,
+        ID_RIBBON_SCPOWER = 10030,
+        ID_RIBBON_SIMULSETTINGS = 10031,
+        ID_RIBBON_SNAPSHOT = 10032,
+        ID_RIBBON_UNDO = 10033,
     };
 protected:
     wxRibbonBar* m_ribbonBar;
@@ -87,17 +90,13 @@ protected:
     wxRibbonButtonBar* m_ribbonButtonBarClipboard;
     wxRibbonPanel* m_ribbonPanelCircuit;
     wxRibbonButtonBar* m_ribbonButtonBarCircuit;
-    wxRibbonPanel* m_ribbonPanelHandling;
-    wxRibbonButtonBar* m_ribbonButtonBarHandling;
-    wxRibbonPanel* m_ribbonPanelCalculations;
-    wxRibbonButtonBar* m_ribbonButtonBarCalculations;
     wxRibbonPanel* m_ribbonPanelReports;
     wxRibbonButtonBar* m_ribbonButtonBarReports;
-    wxRibbonPage* m_ribbonPageStability;
-    wxRibbonPanel* m_ribbonPanelStability;
-    wxRibbonButtonBar* m_ribbonButtonBarStability;
-    wxRibbonPanel* m_ribbonPanelData;
-    wxRibbonButtonBar* m_ribbonButtonBarStabData;
+    wxRibbonPage* m_ribbonPageSimulation;
+    wxRibbonPanel* m_ribbonPanelContinuous;
+    wxRibbonButtonBar* m_ribbonButtonBarContinuous;
+    wxRibbonPanel* m_ribbonPanelSimulations;
+    wxRibbonButtonBar* m_ribbonButtonBarSimulations;
     wxAuiNotebook* m_auiNotebook;
     wxStatusBar* m_statusBar;
 
@@ -105,8 +104,8 @@ protected:
     virtual void OnNewClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnOpenClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnExpImpClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnExitClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSaveClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSaveAsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnCloseClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
@@ -117,21 +116,23 @@ protected:
     virtual void OnUndoClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnRedoClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnAddElementDropdown(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnDragClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnMoveClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnDeleteClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnFitClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnRotClockClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnRotCounterClockClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnDataReportClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnChartsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnSnapshotClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnEnableSolutionClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnDisableSolutionClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnResetVoltagesClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnDragClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnMoveClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnFitClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnDeleteClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnPowerFlowClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnRunStabilityClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnFaultClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSCPowerClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnDataReportClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnSnapshotClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnRunStabilityClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnChartsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void NotebookPageClosing(wxAuiNotebookEvent& event) { event.Skip(); }
     virtual void NotebookPageClosed(wxAuiNotebookEvent& event) { event.Skip(); }
 

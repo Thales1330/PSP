@@ -31,6 +31,8 @@ class MainFrame : public MainFrameBase
     ~MainFrame();
 
    protected:
+    virtual void OnRotClockClick(wxRibbonButtonBarEvent& event);
+    virtual void OnRotCounterClockClick(wxRibbonButtonBarEvent& event);
     virtual void NotebookPageClosed(wxAuiNotebookEvent& event);
     virtual void NotebookPageClosing(wxAuiNotebookEvent& event);
     virtual void OnAboutClick(wxRibbonButtonBarEvent& event);

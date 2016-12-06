@@ -1,11 +1,17 @@
 #include "MainFrame.h"
 #include "ArtMetro.h"
 #include "Workspace.h"
+#include "Bus.h"
+#include "Line.h"
+#include "Transformer.h"
+#include "SyncGenerator.h"
+#include "IndMotor.h"
+#include "SyncMotor.h"
+#include "Load.h"
+#include "Inductor.h"
+#include "Capacitor.h"
 
-MainFrame::MainFrame() : MainFrameBase(NULL)
-{
-}
-
+MainFrame::MainFrame() : MainFrameBase(NULL) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
 {
     m_locale = locale;
@@ -14,12 +20,12 @@ MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
 }
 MainFrame::~MainFrame()
 {
-    //if(m_artMetro) delete m_artMetro;
+    // if(m_artMetro) delete m_artMetro;
     if(m_addElementsMenu) {
-	    m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED,
-	                                  wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
-	    delete m_addElementsMenu;
-	}
+        m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick),
+                                      NULL, this);
+        delete m_addElementsMenu;
+    }
 }
 void MainFrame::Init()
 {
@@ -39,29 +45,31 @@ void MainFrame::Init()
 void MainFrame::EnableCurrentProjectRibbon(bool enable)
 {
     m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ADDELEMENT, enable);
-    m_ribbonButtonBarStabData->EnableButton(ID_RIBBON_CHARTS, enable);
+    m_ribbonButtonBarReports->EnableButton(ID_RIBBON_CHARTS, enable);
     m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_CLOSE, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_COPY, enable);
     m_ribbonButtonBarReports->EnableButton(ID_RIBBON_DATAREPORT, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_DELETE, enable);
-    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_DISABLESOL, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_DRAG, enable);
-    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ENABLESOL, enable);
-    m_ribbonButtonBarCalculations->EnableButton(ID_RIBBON_FAULT, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_FIT, enable);
-    m_ribbonButtonBarHandling->EnableButton(ID_RIBBON_MOVE, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_DELETE, enable);
+    m_ribbonButtonBarContinuous->EnableButton(ID_RIBBON_DISABLESOL, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_DRAG, enable);
+    m_ribbonButtonBarContinuous->EnableButton(ID_RIBBON_ENABLESOL, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FAULT, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_FIT, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_MOVE, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_PASTE, enable);
-    m_ribbonButtonBarCalculations->EnableButton(ID_RIBBON_POWERFLOW, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_POWERFLOW, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_REDO, enable);
-    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_RESETVOLT, enable);
-    m_ribbonButtonBarStability->EnableButton(ID_RIBBON_RUNSTAB, enable);
+    m_ribbonButtonBarContinuous->EnableButton(ID_RIBBON_RESETVOLT, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_RUNSTAB, enable);
     m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_SAVE, enable);
     m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_SAVEAS, enable);
-    m_ribbonButtonBarCalculations->EnableButton(ID_RIBBON_SCPOWER, enable);
-    m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_SETTINGS, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_SCPOWER, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_PROJSETTINGS, enable);
     m_ribbonButtonBarReports->EnableButton(ID_RIBBON_SNAPSHOT, enable);
-    m_ribbonButtonBarStability->EnableButton(ID_RIBBON_STABSETTINGS, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_SIMULSETTINGS, enable);
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_UNDO, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATEC, enable);
+    m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATECC, enable);
 }
 
 void MainFrame::CreateAddElementsMenu()
@@ -111,8 +119,8 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
         new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar());
     m_workspaceList.push_back(newWorkspace);
 
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, true);
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_ENABLESOL, false);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 
     m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
     newWorkspace->Layout();
@@ -126,28 +134,71 @@ void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        workspace->DeleteSelectedElements();
+    }
+}
 void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 {
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, true);
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_ENABLESOL, false);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 }
 
 void MainFrame::OnDragClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 {
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_ENABLESOL, true);
-    m_ribbonButtonBarCircuit->ToggleButton(ID_RIBBON_DISABLESOL, false);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, true);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, false);
 }
 
 void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        workspace->Fit();
+    }
+}
+void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        auto elementList = workspace->GetElementList();
+        // Calculate the average position of selected elements.
+        wxPoint2DDouble averagePos(0, 0);
+        int numSelElements = 0;
+        for(auto it = elementList.begin(); it != elementList.end(); it++) {
+            Element* element = *it;
+            if(element->IsSelected()) {
+                averagePos += element->GetPosition();
+                numSelElements++;
+            }
+        }
+        averagePos = wxPoint2DDouble(averagePos.m_x / double(numSelElements), averagePos.m_y / double(numSelElements));
+        // Set the move position to the average of selected elements.
+        for(auto it = elementList.begin(); it != elementList.end(); it++) {
+            Element* element = *it;
+            if(element->IsSelected()) {
+                element->StartMove(averagePos);
+            }
+        }
+        workspace->SetWorkspaceMode(MODE_MOVE_ELEMENT);
+    }
+}
 void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPasteClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        workspace->RunPowerFlow();
+    }
+}
 void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}
@@ -160,54 +211,120 @@ void MainFrame::OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnUndoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 {
-    switch(event.GetId())
-	{
-	    case ID_ADDMENU_BUS:
-		// inserir barra
-		break;
-	    case ID_ADDMENU_LINE:
-		// inserir linha
-		break;
-	    case ID_ADDMENU_TRANSFORMER:
-		// inserir transformador
-		break;
-	    case ID_ADDMENU_GENERATOR:
-		// inserir gerador
-		break;
-	    case ID_ADDMENU_LOAD:
-		// inserir carga
-		break;
-	    case ID_ADDMENU_CAPACITOR:
-		// inserir capacitor
-		break;
-	    case ID_ADDMENU_INDUCTOR:
-		// inserir indutor
-		break;
-	    case ID_ADDMENU_INDMOTOR:
-		// inserir motor
-		break;
-	    case ID_ADDMENU_SYNCCOMP:
-		// inserir compensador sincrono
-		break;
-	}
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+
+    if(workspace) {
+        if(workspace->GetWorkspaceMode() != MODE_INSERT) {
+            auto elementList = workspace->GetElementList();
+            wxString statusBarText = "";
+            bool newElement = false;
+
+            switch(event.GetId()) {
+                case ID_ADDMENU_BUS: {
+                    Bus* newBus = new Bus(wxPoint2DDouble(0, 0),
+                                          wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
+                    workspace->IncrementElementNumber(ID_BUS);
+                    elementList.push_back(newBus);
+                    statusBarText = _("Insert Bus: Click to insert, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_LINE: {
+                    Line* newLine = new Line(wxString::Format(_("Line %d"), workspace->GetElementNumber(ID_LINE)));
+                    elementList.push_back(newLine);
+                    workspace->IncrementElementNumber(ID_LINE);
+                    statusBarText = _("Insert Line: Click on two buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_TRANSFORMER: {
+                    Transformer* newTransformer = new Transformer(
+                        wxString::Format(_("Transformer %d"), workspace->GetElementNumber(ID_TRANSFORMER)));
+                    workspace->IncrementElementNumber(ID_TRANSFORMER);
+                    elementList.push_back(newTransformer);
+                    statusBarText = _("Insert Transformer: Click on two buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_GENERATOR: {
+                    SyncGenerator* newGenerator =
+                        new SyncGenerator(wxString::Format(_("Generator %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
+                    workspace->IncrementElementNumber(ID_SYNCGENERATOR);
+                    elementList.push_back(newGenerator);
+                    statusBarText = _("Insert Generator: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_LOAD: {
+                    Load* newLoad = new Load(wxString::Format(_("Load %d"), workspace->GetElementNumber(ID_LOAD)));
+                    workspace->IncrementElementNumber(ID_LOAD);
+                    elementList.push_back(newLoad);
+                    statusBarText = _("Insert Load: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_CAPACITOR: {
+                    Capacitor* newCapacitor = new Capacitor(wxString::Format(_("Capacitor %d"), workspace->GetElementNumber(ID_CAPACITOR)));
+                    workspace->IncrementElementNumber(ID_CAPACITOR);
+                    elementList.push_back(newCapacitor);
+                    statusBarText = _("Insert Capacitor: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_INDUCTOR: {
+                    Inductor* newInductor = new Inductor(wxString::Format(_("Inductor %d"), workspace->GetElementNumber(ID_INDUCTOR)));
+                    workspace->IncrementElementNumber(ID_INDUCTOR);
+                    elementList.push_back(newInductor);
+                    statusBarText = _("Insert Inductor: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_INDMOTOR: {
+                    IndMotor* newIndMotor = new IndMotor(wxString::Format(_("Induction motor %d"), workspace->GetElementNumber(ID_INDMOTOR)));
+                    workspace->IncrementElementNumber(ID_INDMOTOR);
+                    elementList.push_back(newIndMotor);
+                    statusBarText = _("Insert Induction Motor: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+                case ID_ADDMENU_SYNCCOMP: {
+                    SyncMotor* newSyncCondenser = new SyncMotor(wxString::Format(_("Synchronous condenser %d"), workspace->GetElementNumber(ID_SYNCMOTOR)));
+                    workspace->IncrementElementNumber(ID_SYNCMOTOR);
+                    elementList.push_back(newSyncCondenser);
+                    statusBarText = _("Insert Synchronous Condenser: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
+            }
+            if(newElement) {
+                workspace->SetElementList(elementList);
+                workspace->SetWorkspaceMode(MODE_INSERT);
+                workspace->SetStatusBarText(statusBarText);
+                workspace->Redraw();
+            }
+        }
+    }
 }
 void MainFrame::NotebookPageClosed(wxAuiNotebookEvent& event)
-{	
+{
     if(m_auiNotebook->GetPageCount() == 0) EnableCurrentProjectRibbon(false);
-	//Memory leak?
+    // Memory leak?
 }
 void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 {
-    std::vector<Workspace*>::iterator it = m_workspaceList.begin();
+    auto it = m_workspaceList.begin();
     while(it != m_workspaceList.end()) {
-	    Workspace* workspace = *it;
-
-	    if(event.GetSelection() == m_auiNotebook->GetPageIndex(workspace)) {
-		    //delete workspace; //Memory leak?
-			m_workspaceList.erase(it);
-		    break;
-		}
-	    it++;
-	}
-	event.Skip();
+        if(*it == m_auiNotebook->GetCurrentPage()) {
+            // delete *it; //Memory leak?
+            m_workspaceList.erase(it);
+            break;
+        }
+        it++;
+    }
+    event.Skip();
+}
+void MainFrame::OnRotClockClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        workspace->RotateSelectedElements();
+    }
+}
+void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        workspace->RotateSelectedElements(false);
+    }
 }

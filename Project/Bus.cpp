@@ -8,8 +8,16 @@ Bus::Bus(wxPoint2DDouble position) : Element()
     SetPosition(position);
 }
 
-Bus::~Bus() {}
+Bus::Bus(wxPoint2DDouble position, wxString name)
+{
+    m_width = 100.0;
+    m_height = 5.0;
+    SetPosition(position);
 
+    m_electricalData.name = name;
+}
+
+Bus::~Bus() {}
 void Bus::Draw(wxPoint2DDouble translation, double scale) const
 {
     // Draw selection (layer 1)
@@ -37,7 +45,7 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
 	    DrawRectangle(pts);
 	    glPopMatrix();
 	}
-    // Draw element (layer 2)
+    // Draw bus (layer 2)
     // Push the current matrix on stack.
     glPushMatrix();
     // Rotate the matrix around the object position.
@@ -75,7 +83,13 @@ bool Bus::Contains(wxPoint2DDouble position) const
     return m_rect.Contains(ptR);
 }
 
-bool Bus::Intersects(wxRect2DDouble rect) const { return rect.Intersects(m_rect); }
+bool Bus::Intersects(wxRect2DDouble rect) const
+{
+    if(m_angle == 0.0 || m_angle == 180.0) return m_rect.Intersects(rect);
+
+    return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0);
+}
+
 bool Bus::PickboxContains(wxPoint2DDouble position)
 {
     m_activePickboxID = ID_PB_NONE;
@@ -145,15 +159,30 @@ void Bus::MovePickbox(wxPoint2DDouble position)
     SetPosition(m_position);
 }
 
-void Bus::Rotate()
+void Bus::Rotate(bool clockwise)
 {
-    m_angle += m_rotationAngle;
+    double rotAngle = m_rotationAngle;
+    if(!clockwise) rotAngle = -m_rotationAngle;
+
+    m_angle += rotAngle;
     if(m_angle >= 360.0) m_angle = 0.0;
 }
 
 bool Bus::GetContextMenu(wxMenu& menu)
 {
-	menu.Append(ID_EDIT_BUS, _("Edit bus"));
-	menu.Append(ID_ROTATE, _("Rotate"));
-	return true;
+    menu.Append(ID_EDIT_BUS, _("Edit bus"));
+    GeneralMenuItens(menu);
+    return true;
+}
+
+bool Bus::ShowForm(wxWindow* parent, Element* element)
+{
+    BusForm* busForm = new BusForm(parent, this);
+    if(busForm->ShowModal() == wxID_OK) {
+	    busForm->Destroy();
+	    return true;
+	}
+
+    busForm->Destroy();
+    return false;
 }

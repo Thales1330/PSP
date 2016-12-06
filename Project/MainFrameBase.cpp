@@ -85,6 +85,8 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_ribbonButtonBarProjects->AddButton(ID_RIBBON_EXPIMP, _("Export Import"), wxXmlResource::Get()->LoadBitmap(wxT("impExp32")), _("Export or import projects"), wxRIBBON_BUTTON_NORMAL);
     
+    m_ribbonButtonBarProjects->AddButton(ID_RIBBON_GENSETTINGS, _("General Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the main settings of the program"), wxRIBBON_BUTTON_NORMAL);
+    
     m_ribbonButtonBarProjects->AddButton(ID_RIBBON_EXIT, _("Exit"), wxXmlResource::Get()->LoadBitmap(wxT("exit32")), _("Closes the application"), wxRIBBON_BUTTON_NORMAL);
     m_ribbonButtonBarProjects->Realize();
     
@@ -93,11 +95,9 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_ribbonButtonBarCProject = new wxRibbonButtonBar(m_ribbonPanelCProject, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelCProject, wxSize(-1,-1)), 0);
     
-    m_ribbonButtonBarCProject->AddButton(ID_RIBBON_SETTINGS, _("Project settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the main settings of the current project"), wxRIBBON_BUTTON_NORMAL);
-    
     m_ribbonButtonBarCProject->AddButton(ID_RIBBON_SAVE, _("Save"), wxXmlResource::Get()->LoadBitmap(wxT("save32")), _("Save the current project"), wxRIBBON_BUTTON_NORMAL);
     
-    m_ribbonButtonBarCProject->AddButton(ID_RIBBON_SAVEAS, _("Save as..."), wxXmlResource::Get()->LoadBitmap(wxT("saveAs32")), _("Save as the current project"), wxRIBBON_BUTTON_NORMAL);
+    m_ribbonButtonBarCProject->AddButton(ID_RIBBON_SAVEAS, _("Save As..."), wxXmlResource::Get()->LoadBitmap(wxT("saveAs32")), _("Save as the current project"), wxRIBBON_BUTTON_NORMAL);
     
     m_ribbonButtonBarCProject->AddButton(ID_RIBBON_CLOSE, _("Close"), wxXmlResource::Get()->LoadBitmap(wxT("close32")), _("Close the current project"), wxRIBBON_BUTTON_NORMAL);
     m_ribbonButtonBarCProject->Realize();
@@ -137,75 +137,66 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_ribbonButtonBarCircuit = new wxRibbonButtonBar(m_ribbonPanelCircuit, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelCircuit, wxSize(-1,-1)), 0);
     m_ribbonButtonBarCircuit->SetToolTip(_("Circuit"));
     
-    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ADDELEMENT, _("Add element"), wxXmlResource::Get()->LoadBitmap(wxT("add32")), _("Add a new element in the project"), wxRIBBON_BUTTON_DROPDOWN);
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ADDELEMENT, _("Add Element"), wxXmlResource::Get()->LoadBitmap(wxT("add32")), _("Add a new element in the project"), wxRIBBON_BUTTON_DROPDOWN);
     
-    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ENABLESOL, _("Enable solution"), wxXmlResource::Get()->LoadBitmap(wxT("playStopped32")), _("Enables the power flow and fault (if exists) calculations after any circuit change"), wxRIBBON_BUTTON_TOGGLE);
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_DRAG, _("Drag"), wxXmlResource::Get()->LoadBitmap(wxT("drag32")), _("Drag all the elements"), wxRIBBON_BUTTON_NORMAL);
     
-    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_DISABLESOL, _("Disable solution"), wxXmlResource::Get()->LoadBitmap(wxT("pauseStopped32")), _("Disables the power flow and fault calculations after any circuit changes"), wxRIBBON_BUTTON_TOGGLE);
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_MOVE, _("Move"), wxXmlResource::Get()->LoadBitmap(wxT("move32")), _("Move the selected elements"), wxRIBBON_BUTTON_NORMAL);
     
-    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_RESETVOLT, _("Reset voltages"), wxXmlResource::Get()->LoadBitmap(wxT("reset32")), _("Reset all voltages to initial state"), wxRIBBON_BUTTON_NORMAL);
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_DELETE, _("Delete"), wxXmlResource::Get()->LoadBitmap(wxT("delete32")), _("Removes all selected elements"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_FIT, _("Fit"), wxXmlResource::Get()->LoadBitmap(wxT("fit32")), _("Applies the drag and zoom tools to show all elements in workspace"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ROTATEC, _("Rotate Clockwise"), wxXmlResource::Get()->LoadBitmap(wxT("rotateClock32")), _("Rotate clockwise"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ROTATECC, _("Rotate Counter-clockwise"), wxXmlResource::Get()->LoadBitmap(wxT("rotateCounterClock32")), _("Rotate the selected elements counter-clockwise"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_PROJSETTINGS, _("Project Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the main settings of the current project"), wxRIBBON_BUTTON_NORMAL);
     m_ribbonButtonBarCircuit->Realize();
-    
-    m_ribbonPanelHandling = new wxRibbonPanel(m_ribbonPageTools, wxID_ANY, _("Handling"), wxNullBitmap, wxDefaultPosition, wxDLG_UNIT(m_ribbonPageTools, wxSize(-1,-1)), wxRIBBON_PANEL_NO_AUTO_MINIMISE|wxRIBBON_PANEL_DEFAULT_STYLE);
-    m_ribbonPanelHandling->SetToolTip(_("Handling"));
-    
-    m_ribbonButtonBarHandling = new wxRibbonButtonBar(m_ribbonPanelHandling, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelHandling, wxSize(-1,-1)), 0);
-    m_ribbonButtonBarHandling->SetToolTip(_("Handling"));
-    
-    m_ribbonButtonBarHandling->AddButton(ID_RIBBON_DRAG, _("Drag"), wxXmlResource::Get()->LoadBitmap(wxT("drag32")), _("Drag all the elements"), wxRIBBON_BUTTON_NORMAL);
-    
-    m_ribbonButtonBarHandling->AddButton(ID_RIBBON_MOVE, _("Move"), wxXmlResource::Get()->LoadBitmap(wxT("move32")), _("Move the selected elements"), wxRIBBON_BUTTON_NORMAL);
-    
-    m_ribbonButtonBarHandling->AddButton(ID_RIBBON_FIT, _("Fit"), wxXmlResource::Get()->LoadBitmap(wxT("fit32")), _("Applies the drag and zoom tools to show all elements in workspace"), wxRIBBON_BUTTON_NORMAL);
-    
-    m_ribbonButtonBarHandling->AddButton(ID_RIBBON_DELETE, _("Delete"), wxXmlResource::Get()->LoadBitmap(wxT("delete32")), _("Removes all selected elements"), wxRIBBON_BUTTON_NORMAL);
-    m_ribbonButtonBarHandling->Realize();
-    
-    m_ribbonPanelCalculations = new wxRibbonPanel(m_ribbonPageTools, wxID_ANY, _("Calculations"), wxNullBitmap, wxDefaultPosition, wxDLG_UNIT(m_ribbonPageTools, wxSize(-1,-1)), wxRIBBON_PANEL_NO_AUTO_MINIMISE|wxRIBBON_PANEL_DEFAULT_STYLE);
-    m_ribbonPanelCalculations->SetToolTip(_("Calculations"));
-    
-    m_ribbonButtonBarCalculations = new wxRibbonButtonBar(m_ribbonPanelCalculations, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelCalculations, wxSize(-1,-1)), 0);
-    m_ribbonButtonBarCalculations->SetToolTip(_("Calculations"));
-    
-    m_ribbonButtonBarCalculations->AddButton(ID_RIBBON_POWERFLOW, _("Power flow"), wxXmlResource::Get()->LoadBitmap(wxT("powerFLow32")), _("Calculate the circuit power flow"), wxRIBBON_BUTTON_NORMAL);
-    
-    m_ribbonButtonBarCalculations->AddButton(ID_RIBBON_FAULT, _("Fault"), wxXmlResource::Get()->LoadBitmap(wxT("fault32")), _("Calculate the circuit fault (if exists)"), wxRIBBON_BUTTON_NORMAL);
-    
-    m_ribbonButtonBarCalculations->AddButton(ID_RIBBON_SCPOWER, _("Short-circuit power"), wxXmlResource::Get()->LoadBitmap(wxT("faultPower32")), _("Calculate the short-circuit power in all buses"), wxRIBBON_BUTTON_NORMAL);
-    m_ribbonButtonBarCalculations->Realize();
     
     m_ribbonPanelReports = new wxRibbonPanel(m_ribbonPageTools, wxID_ANY, _("Reports"), wxNullBitmap, wxDefaultPosition, wxDLG_UNIT(m_ribbonPageTools, wxSize(-1,-1)), wxRIBBON_PANEL_NO_AUTO_MINIMISE|wxRIBBON_PANEL_DEFAULT_STYLE);
     m_ribbonPanelReports->SetToolTip(_("Reports"));
     
     m_ribbonButtonBarReports = new wxRibbonButtonBar(m_ribbonPanelReports, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelReports, wxSize(-1,-1)), 0);
     
-    m_ribbonButtonBarReports->AddButton(ID_RIBBON_DATAREPORT, _("Data report"), wxXmlResource::Get()->LoadBitmap(wxT("dataReport32")), _("Opens a data report"), wxRIBBON_BUTTON_NORMAL);
+    m_ribbonButtonBarReports->AddButton(ID_RIBBON_DATAREPORT, _("Data Report"), wxXmlResource::Get()->LoadBitmap(wxT("dataReport32")), _("Opens a data report"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarReports->AddButton(ID_RIBBON_CHARTS, _("Charts"), wxXmlResource::Get()->LoadBitmap(wxT("chart32")), _("Open the charts"), wxRIBBON_BUTTON_NORMAL);
     
     m_ribbonButtonBarReports->AddButton(ID_RIBBON_SNAPSHOT, _("Snapshot"), wxXmlResource::Get()->LoadBitmap(wxT("snap32")), _("Capture a snapshot of the circuit"), wxRIBBON_BUTTON_NORMAL);
     m_ribbonButtonBarReports->Realize();
     
-    m_ribbonPageStability = new wxRibbonPage(m_ribbonBar, wxID_ANY, _("Stability"), wxNullBitmap, 0);
-    m_ribbonPageStability->SetToolTip(_("Stability"));
+    m_ribbonPageSimulation = new wxRibbonPage(m_ribbonBar, wxID_ANY, _("Simulation"), wxNullBitmap, 0);
+    m_ribbonPageSimulation->SetToolTip(_("Simulation"));
     
-    m_ribbonPanelStability = new wxRibbonPanel(m_ribbonPageStability, wxID_ANY, _("Stability"), wxNullBitmap, wxDefaultPosition, wxDLG_UNIT(m_ribbonPageStability, wxSize(-1,-1)), wxRIBBON_PANEL_NO_AUTO_MINIMISE|wxRIBBON_PANEL_DEFAULT_STYLE);
-    m_ribbonPanelStability->SetToolTip(_("Stability"));
+    m_ribbonPanelContinuous = new wxRibbonPanel(m_ribbonPageSimulation, wxID_ANY, _("Continuous"), wxNullBitmap, wxDefaultPosition, wxDLG_UNIT(m_ribbonPageSimulation, wxSize(-1,-1)), wxRIBBON_PANEL_DEFAULT_STYLE);
+    m_ribbonPanelContinuous->SetToolTip(_("Continuous"));
     
-    m_ribbonButtonBarStability = new wxRibbonButtonBar(m_ribbonPanelStability, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelStability, wxSize(-1,-1)), 0);
-    m_ribbonButtonBarStability->SetToolTip(_("Stability"));
+    m_ribbonButtonBarContinuous = new wxRibbonButtonBar(m_ribbonPanelContinuous, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelContinuous, wxSize(-1,-1)), 0);
     
-    m_ribbonButtonBarStability->AddButton(ID_RIBBON_STABSETTINGS, _("Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens the stability settings"), wxRIBBON_BUTTON_NORMAL);
+    m_ribbonButtonBarContinuous->AddButton(ID_RIBBON_ENABLESOL, _("Enable Solution"), wxXmlResource::Get()->LoadBitmap(wxT("playStopped32")), _("Enables the power flow and fault (if exists) calculations after any circuit change"), wxRIBBON_BUTTON_TOGGLE);
     
-    m_ribbonButtonBarStability->AddButton(ID_RIBBON_RUNSTAB, _("Run"), wxXmlResource::Get()->LoadBitmap(wxT("playStopped32")), _("Run the stability calculations"), wxRIBBON_BUTTON_NORMAL);
-    m_ribbonButtonBarStability->Realize();
+    m_ribbonButtonBarContinuous->AddButton(ID_RIBBON_DISABLESOL, _("Disable Solution"), wxXmlResource::Get()->LoadBitmap(wxT("pauseStopped32")), _("Disables the power flow and fault calculations after any circuit changes"), wxRIBBON_BUTTON_TOGGLE);
     
-    m_ribbonPanelData = new wxRibbonPanel(m_ribbonPageStability, wxID_ANY, _("Data"), wxNullBitmap, wxDefaultPosition, wxDLG_UNIT(m_ribbonPageStability, wxSize(-1,-1)), wxRIBBON_PANEL_NO_AUTO_MINIMISE|wxRIBBON_PANEL_DEFAULT_STYLE);
-    m_ribbonPanelData->SetToolTip(_("Data"));
+    m_ribbonButtonBarContinuous->AddButton(ID_RIBBON_RESETVOLT, _("Reset Voltages"), wxXmlResource::Get()->LoadBitmap(wxT("reset32")), _("Reset all voltages to initial state"), wxRIBBON_BUTTON_NORMAL);
+    m_ribbonButtonBarContinuous->Realize();
     
-    m_ribbonButtonBarStabData = new wxRibbonButtonBar(m_ribbonPanelData, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelData, wxSize(-1,-1)), 0);
-    m_ribbonButtonBarStabData->SetToolTip(_("Stability data"));
+    m_ribbonPanelSimulations = new wxRibbonPanel(m_ribbonPageSimulation, wxID_ANY, _("Simulations"), wxNullBitmap, wxDefaultPosition, wxDLG_UNIT(m_ribbonPageSimulation, wxSize(-1,-1)), wxRIBBON_PANEL_NO_AUTO_MINIMISE|wxRIBBON_PANEL_DEFAULT_STYLE);
+    m_ribbonPanelSimulations->SetToolTip(_("Simulations"));
     
-    m_ribbonButtonBarStabData->AddButton(ID_RIBBON_CHARTS, _("Charts"), wxXmlResource::Get()->LoadBitmap(wxT("chart32")), _("Open the charts"), wxRIBBON_BUTTON_NORMAL);
-    m_ribbonButtonBarStabData->Realize();
+    m_ribbonButtonBarSimulations = new wxRibbonButtonBar(m_ribbonPanelSimulations, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_ribbonPanelSimulations, wxSize(-1,-1)), 0);
+    m_ribbonButtonBarSimulations->SetToolTip(_("Simulations"));
+    
+    m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_POWERFLOW, _("Power Flow"), wxXmlResource::Get()->LoadBitmap(wxT("powerFLow32")), _("Calculate the circuit power flow"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_RUNSTAB, _("Run Stability"), wxXmlResource::Get()->LoadBitmap(wxT("playStopped32")), _("Run the stability calculations"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_FAULT, _("Fault"), wxXmlResource::Get()->LoadBitmap(wxT("fault32")), _("Calculate the circuit fault (if exists)"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_SCPOWER, _("Short-Circuit Power"), wxXmlResource::Get()->LoadBitmap(wxT("faultPower32")), _("Calculate the short-circuit power in all buses"), wxRIBBON_BUTTON_NORMAL);
+    
+    m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_SIMULSETTINGS, _("Simulation Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the settings of the simulations"), wxRIBBON_BUTTON_NORMAL);
+    m_ribbonButtonBarSimulations->Realize();
     m_ribbonBar->Realize();
     wxBoxSizer* boxSizer_lvl_2_2 = new wxBoxSizer(wxVERTICAL);
     
@@ -250,8 +241,8 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_NEW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnNewClick), NULL, this);
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_OPEN, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnOpenClick), NULL, this);
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_EXPIMP, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExpImpClick), NULL, this);
+    m_ribbonButtonBarProjects->Connect(ID_RIBBON_GENSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_EXIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExitClick), NULL, this);
-    m_ribbonButtonBarCProject->Connect(ID_RIBBON_SETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnProjectSettingsClick), NULL, this);
     m_ribbonButtonBarCProject->Connect(ID_RIBBON_SAVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSaveClick), NULL, this);
     m_ribbonButtonBarCProject->Connect(ID_RIBBON_SAVEAS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSaveAsClick), NULL, this);
     m_ribbonButtonBarCProject->Connect(ID_RIBBON_CLOSE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnCloseClick), NULL, this);
@@ -262,21 +253,23 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_ribbonButtonBarClipboard->Connect(ID_RIBBON_UNDO, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnUndoClick), NULL, this);
     m_ribbonButtonBarClipboard->Connect(ID_RIBBON_REDO, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRedoClick), NULL, this);
     m_ribbonButtonBarCircuit->Connect(ID_RIBBON_ADDELEMENT, wxEVT_COMMAND_RIBBONBUTTON_DROPDOWN_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnAddElementDropdown), NULL, this);
-    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_ENABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnEnableSolutionClick), NULL, this);
-    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_DISABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDisableSolutionClick), NULL, this);
-    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_RESETVOLT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnResetVoltagesClick), NULL, this);
-    m_ribbonButtonBarHandling->Connect(ID_RIBBON_DRAG, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDragClick), NULL, this);
-    m_ribbonButtonBarHandling->Connect(ID_RIBBON_MOVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnMoveClick), NULL, this);
-    m_ribbonButtonBarHandling->Connect(ID_RIBBON_FIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFitClick), NULL, this);
-    m_ribbonButtonBarHandling->Connect(ID_RIBBON_DELETE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDeleteClick), NULL, this);
-    m_ribbonButtonBarCalculations->Connect(ID_RIBBON_POWERFLOW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnPowerFlowClick), NULL, this);
-    m_ribbonButtonBarCalculations->Connect(ID_RIBBON_FAULT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFaultClick), NULL, this);
-    m_ribbonButtonBarCalculations->Connect(ID_RIBBON_SCPOWER, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSCPowerClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_DRAG, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDragClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_MOVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnMoveClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_DELETE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDeleteClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_FIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFitClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_ROTATEC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotClockClick), NULL, this);
+    m_ribbonButtonBarCircuit->Connect(ID_RIBBON_ROTATECC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotCounterClockClick), NULL, this);
     m_ribbonButtonBarReports->Connect(ID_RIBBON_DATAREPORT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDataReportClick), NULL, this);
+    m_ribbonButtonBarReports->Connect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
     m_ribbonButtonBarReports->Connect(ID_RIBBON_SNAPSHOT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSnapshotClick), NULL, this);
-    m_ribbonButtonBarStability->Connect(ID_RIBBON_STABSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
-    m_ribbonButtonBarStability->Connect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL, this);
-    m_ribbonButtonBarStabData->Connect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
+    m_ribbonButtonBarContinuous->Connect(ID_RIBBON_ENABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnEnableSolutionClick), NULL, this);
+    m_ribbonButtonBarContinuous->Connect(ID_RIBBON_DISABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDisableSolutionClick), NULL, this);
+    m_ribbonButtonBarContinuous->Connect(ID_RIBBON_RESETVOLT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnResetVoltagesClick), NULL, this);
+    m_ribbonButtonBarSimulations->Connect(ID_RIBBON_POWERFLOW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnPowerFlowClick), NULL, this);
+    m_ribbonButtonBarSimulations->Connect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL, this);
+    m_ribbonButtonBarSimulations->Connect(ID_RIBBON_FAULT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFaultClick), NULL, this);
+    m_ribbonButtonBarSimulations->Connect(ID_RIBBON_SCPOWER, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSCPowerClick), NULL, this);
+    m_ribbonButtonBarSimulations->Connect(ID_RIBBON_SIMULSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnProjectSettingsClick), NULL, this);
     m_auiNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosing), NULL, this);
     m_auiNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosed), NULL, this);
     
@@ -287,8 +280,8 @@ MainFrameBase::~MainFrameBase()
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_NEW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnNewClick), NULL, this);
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_OPEN, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnOpenClick), NULL, this);
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_EXPIMP, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExpImpClick), NULL, this);
+    m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_GENSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_EXIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExitClick), NULL, this);
-    m_ribbonButtonBarCProject->Disconnect(ID_RIBBON_SETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnProjectSettingsClick), NULL, this);
     m_ribbonButtonBarCProject->Disconnect(ID_RIBBON_SAVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSaveClick), NULL, this);
     m_ribbonButtonBarCProject->Disconnect(ID_RIBBON_SAVEAS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSaveAsClick), NULL, this);
     m_ribbonButtonBarCProject->Disconnect(ID_RIBBON_CLOSE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnCloseClick), NULL, this);
@@ -299,21 +292,23 @@ MainFrameBase::~MainFrameBase()
     m_ribbonButtonBarClipboard->Disconnect(ID_RIBBON_UNDO, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnUndoClick), NULL, this);
     m_ribbonButtonBarClipboard->Disconnect(ID_RIBBON_REDO, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRedoClick), NULL, this);
     m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_ADDELEMENT, wxEVT_COMMAND_RIBBONBUTTON_DROPDOWN_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnAddElementDropdown), NULL, this);
-    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_ENABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnEnableSolutionClick), NULL, this);
-    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_DISABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDisableSolutionClick), NULL, this);
-    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_RESETVOLT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnResetVoltagesClick), NULL, this);
-    m_ribbonButtonBarHandling->Disconnect(ID_RIBBON_DRAG, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDragClick), NULL, this);
-    m_ribbonButtonBarHandling->Disconnect(ID_RIBBON_MOVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnMoveClick), NULL, this);
-    m_ribbonButtonBarHandling->Disconnect(ID_RIBBON_FIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFitClick), NULL, this);
-    m_ribbonButtonBarHandling->Disconnect(ID_RIBBON_DELETE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDeleteClick), NULL, this);
-    m_ribbonButtonBarCalculations->Disconnect(ID_RIBBON_POWERFLOW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnPowerFlowClick), NULL, this);
-    m_ribbonButtonBarCalculations->Disconnect(ID_RIBBON_FAULT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFaultClick), NULL, this);
-    m_ribbonButtonBarCalculations->Disconnect(ID_RIBBON_SCPOWER, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSCPowerClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_DRAG, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDragClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_MOVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnMoveClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_DELETE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDeleteClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_FIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFitClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_ROTATEC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotClockClick), NULL, this);
+    m_ribbonButtonBarCircuit->Disconnect(ID_RIBBON_ROTATECC, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRotCounterClockClick), NULL, this);
     m_ribbonButtonBarReports->Disconnect(ID_RIBBON_DATAREPORT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDataReportClick), NULL, this);
+    m_ribbonButtonBarReports->Disconnect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
     m_ribbonButtonBarReports->Disconnect(ID_RIBBON_SNAPSHOT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSnapshotClick), NULL, this);
-    m_ribbonButtonBarStability->Disconnect(ID_RIBBON_STABSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
-    m_ribbonButtonBarStability->Disconnect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL, this);
-    m_ribbonButtonBarStabData->Disconnect(ID_RIBBON_CHARTS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnChartsClick), NULL, this);
+    m_ribbonButtonBarContinuous->Disconnect(ID_RIBBON_ENABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnEnableSolutionClick), NULL, this);
+    m_ribbonButtonBarContinuous->Disconnect(ID_RIBBON_DISABLESOL, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnDisableSolutionClick), NULL, this);
+    m_ribbonButtonBarContinuous->Disconnect(ID_RIBBON_RESETVOLT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnResetVoltagesClick), NULL, this);
+    m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_POWERFLOW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnPowerFlowClick), NULL, this);
+    m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL, this);
+    m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_FAULT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnFaultClick), NULL, this);
+    m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_SCPOWER, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSCPowerClick), NULL, this);
+    m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_SIMULSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnProjectSettingsClick), NULL, this);
     m_auiNotebook->Disconnect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosing), NULL, this);
     m_auiNotebook->Disconnect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(MainFrameBase::NotebookPageClosed), NULL, this);
     

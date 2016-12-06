@@ -1,7 +1,7 @@
 {
  "metadata": {
   "m_generatedFilesDir": ".",
-  "m_objCounter": 138,
+  "m_objCounter": 150,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxC9ED9InitBitmapResources",
   "m_bitmapsFile": "MainFrameBitmaps.cpp",
@@ -756,6 +756,97 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_GENSETTINGS"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonGenSettings"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "General Settings"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "General Settings"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/settings32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Opens a dialog to set the main settings of the program"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnStabilitySettingsClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
                    "m_winid": "ID_RIBBON_EXIT"
                   }, {
                    "type": "string",
@@ -989,97 +1080,6 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_SETTINGS"
-                  }, {
-                   "type": "string",
-                   "m_label": "Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Minimum Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Name:",
-                   "m_value": "m_ribbonButtonProjSettings"
-                  }, {
-                   "type": "multi-string",
-                   "m_label": "Tooltip:",
-                   "m_value": "Project Settings"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Bg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Fg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "font",
-                   "m_label": "Font:",
-                   "m_value": ""
-                  }, {
-                   "type": "bool",
-                   "m_label": "Hidden",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Disabled",
-                   "m_value": true
-                  }, {
-                   "type": "bool",
-                   "m_label": "Focused",
-                   "m_value": false
-                  }, {
-                   "type": "string",
-                   "m_label": "Class Name:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Include File:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Style:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Label:",
-                   "m_value": "Project settings"
-                  }, {
-                   "type": "bitmapPicker",
-                   "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/settings32.png"
-                  }, {
-                   "type": "string",
-                   "m_label": "Help String:",
-                   "m_value": "Opens a dialog to set the main settings of the current project"
-                  }, {
-                   "type": "choice",
-                   "m_label": "Kind:",
-                   "m_selection": 0,
-                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
-                  }],
-                 "m_events": [{
-                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
-                   "m_eventClass": "wxRibbonButtonBarEvent",
-                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnProjectSettingsClick(wxRibbonButtonBarEvent& event)",
-                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
-                   "m_noBody": false
-                  }],
-                 "m_children": []
-                }, {
-                 "m_type": 4492,
-                 "proportion": 0,
-                 "border": 5,
-                 "gbSpan": "1,1",
-                 "gbPosition": "0,0",
-                 "m_styles": [],
-                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-                 "m_properties": [{
-                   "type": "winid",
-                   "m_label": "ID:",
                    "m_winid": "ID_RIBBON_SAVE"
                   }, {
                    "type": "string",
@@ -1187,7 +1187,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": "Save as"
+                   "m_value": "Save As"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -1227,7 +1227,7 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Save as..."
+                   "m_value": "Save As..."
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
@@ -2420,7 +2420,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": "Add element"
+                   "m_value": "Add Element"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -2460,7 +2460,7 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Add element"
+                   "m_value": "Add Element"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
@@ -2485,421 +2485,6 @@
                   }],
                  "m_children": []
                 }, {
-                 "m_type": 4495,
-                 "proportion": 0,
-                 "border": 5,
-                 "gbSpan": "1,1",
-                 "gbPosition": "0,0",
-                 "m_styles": [],
-                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-                 "m_properties": [{
-                   "type": "winid",
-                   "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_ENABLESOL"
-                  }, {
-                   "type": "string",
-                   "m_label": "Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Minimum Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Name:",
-                   "m_value": "m_ribbonButtonEnableSol"
-                  }, {
-                   "type": "multi-string",
-                   "m_label": "Tooltip:",
-                   "m_value": "Enable solution"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Bg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Fg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "font",
-                   "m_label": "Font:",
-                   "m_value": ""
-                  }, {
-                   "type": "bool",
-                   "m_label": "Hidden",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Disabled",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Focused",
-                   "m_value": false
-                  }, {
-                   "type": "string",
-                   "m_label": "Class Name:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Include File:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Style:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Label:",
-                   "m_value": "Enable solution"
-                  }, {
-                   "type": "bitmapPicker",
-                   "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/playStopped32.png"
-                  }, {
-                   "type": "string",
-                   "m_label": "Help String:",
-                   "m_value": "Enables the power flow and fault (if exists) calculations after any circuit change"
-                  }, {
-                   "type": "choice",
-                   "m_label": "Kind:",
-                   "m_selection": 3,
-                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
-                  }],
-                 "m_events": [{
-                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
-                   "m_eventClass": "wxRibbonButtonBarEvent",
-                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnEnableSolutionClick(wxRibbonButtonBarEvent& event)",
-                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
-                   "m_noBody": false
-                  }],
-                 "m_children": []
-                }, {
-                 "m_type": 4495,
-                 "proportion": 0,
-                 "border": 5,
-                 "gbSpan": "1,1",
-                 "gbPosition": "0,0",
-                 "m_styles": [],
-                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-                 "m_properties": [{
-                   "type": "winid",
-                   "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_DISABLESOL"
-                  }, {
-                   "type": "string",
-                   "m_label": "Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Minimum Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Name:",
-                   "m_value": "m_ribbonButtonDisableSol"
-                  }, {
-                   "type": "multi-string",
-                   "m_label": "Tooltip:",
-                   "m_value": "Disable solution"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Bg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Fg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "font",
-                   "m_label": "Font:",
-                   "m_value": ""
-                  }, {
-                   "type": "bool",
-                   "m_label": "Hidden",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Disabled",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Focused",
-                   "m_value": false
-                  }, {
-                   "type": "string",
-                   "m_label": "Class Name:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Include File:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Style:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Label:",
-                   "m_value": "Disable solution"
-                  }, {
-                   "type": "bitmapPicker",
-                   "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/pauseStopped32.png"
-                  }, {
-                   "type": "string",
-                   "m_label": "Help String:",
-                   "m_value": "Disables the power flow and fault calculations after any circuit changes"
-                  }, {
-                   "type": "choice",
-                   "m_label": "Kind:",
-                   "m_selection": 3,
-                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
-                  }],
-                 "m_events": [{
-                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
-                   "m_eventClass": "wxRibbonButtonBarEvent",
-                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnDisableSolutionClick(wxRibbonButtonBarEvent& event)",
-                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
-                   "m_noBody": false
-                  }],
-                 "m_children": []
-                }, {
-                 "m_type": 4492,
-                 "proportion": 0,
-                 "border": 5,
-                 "gbSpan": "1,1",
-                 "gbPosition": "0,0",
-                 "m_styles": [],
-                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-                 "m_properties": [{
-                   "type": "winid",
-                   "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_RESETVOLT"
-                  }, {
-                   "type": "string",
-                   "m_label": "Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Minimum Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Name:",
-                   "m_value": "m_ribbonButtonResetVoltages"
-                  }, {
-                   "type": "multi-string",
-                   "m_label": "Tooltip:",
-                   "m_value": "Reset voltages"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Bg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Fg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "font",
-                   "m_label": "Font:",
-                   "m_value": ""
-                  }, {
-                   "type": "bool",
-                   "m_label": "Hidden",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Disabled",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Focused",
-                   "m_value": false
-                  }, {
-                   "type": "string",
-                   "m_label": "Class Name:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Include File:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Style:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Label:",
-                   "m_value": "Reset voltages"
-                  }, {
-                   "type": "bitmapPicker",
-                   "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/reset32.png"
-                  }, {
-                   "type": "string",
-                   "m_label": "Help String:",
-                   "m_value": "Reset all voltages to initial state"
-                  }, {
-                   "type": "choice",
-                   "m_label": "Kind:",
-                   "m_selection": 0,
-                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
-                  }],
-                 "m_events": [{
-                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
-                   "m_eventClass": "wxRibbonButtonBarEvent",
-                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnResetVoltagesClick(wxRibbonButtonBarEvent& event)",
-                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
-                   "m_noBody": false
-                  }],
-                 "m_children": []
-                }]
-              }]
-            }, {
-             "m_type": 4490,
-             "proportion": 0,
-             "border": 5,
-             "gbSpan": "1,1",
-             "gbPosition": "0,0",
-             "m_styles": ["wxRIBBON_PANEL_NO_AUTO_MINIMISE", "wxRIBBON_PANEL_DEFAULT_STYLE"],
-             "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-             "m_properties": [{
-               "type": "winid",
-               "m_label": "ID:",
-               "m_winid": "wxID_ANY"
-              }, {
-               "type": "string",
-               "m_label": "Size:",
-               "m_value": "-1,-1"
-              }, {
-               "type": "string",
-               "m_label": "Minimum Size:",
-               "m_value": "-1,-1"
-              }, {
-               "type": "string",
-               "m_label": "Name:",
-               "m_value": "m_ribbonPanelHandling"
-              }, {
-               "type": "multi-string",
-               "m_label": "Tooltip:",
-               "m_value": "Handling"
-              }, {
-               "type": "colour",
-               "m_label": "Bg Colour:",
-               "colour": "<Default>"
-              }, {
-               "type": "colour",
-               "m_label": "Fg Colour:",
-               "colour": "<Default>"
-              }, {
-               "type": "font",
-               "m_label": "Font:",
-               "m_value": ""
-              }, {
-               "type": "bool",
-               "m_label": "Hidden",
-               "m_value": false
-              }, {
-               "type": "bool",
-               "m_label": "Disabled",
-               "m_value": false
-              }, {
-               "type": "bool",
-               "m_label": "Focused",
-               "m_value": false
-              }, {
-               "type": "string",
-               "m_label": "Class Name:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Include File:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Style:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Label:",
-               "m_value": "Handling"
-              }, {
-               "type": "bitmapPicker",
-               "m_label": "Bitmap File:",
-               "m_path": ""
-              }],
-             "m_events": [],
-             "m_children": [{
-               "m_type": 4491,
-               "proportion": 0,
-               "border": 5,
-               "gbSpan": "1,1",
-               "gbPosition": "0,0",
-               "m_styles": [],
-               "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-               "m_properties": [{
-                 "type": "winid",
-                 "m_label": "ID:",
-                 "m_winid": "wxID_ANY"
-                }, {
-                 "type": "string",
-                 "m_label": "Size:",
-                 "m_value": "-1,-1"
-                }, {
-                 "type": "string",
-                 "m_label": "Minimum Size:",
-                 "m_value": "-1,-1"
-                }, {
-                 "type": "string",
-                 "m_label": "Name:",
-                 "m_value": "m_ribbonButtonBarHandling"
-                }, {
-                 "type": "multi-string",
-                 "m_label": "Tooltip:",
-                 "m_value": "Handling"
-                }, {
-                 "type": "colour",
-                 "m_label": "Bg Colour:",
-                 "colour": "<Default>"
-                }, {
-                 "type": "colour",
-                 "m_label": "Fg Colour:",
-                 "colour": "<Default>"
-                }, {
-                 "type": "font",
-                 "m_label": "Font:",
-                 "m_value": ""
-                }, {
-                 "type": "bool",
-                 "m_label": "Hidden",
-                 "m_value": false
-                }, {
-                 "type": "bool",
-                 "m_label": "Disabled",
-                 "m_value": false
-                }, {
-                 "type": "bool",
-                 "m_label": "Focused",
-                 "m_value": false
-                }, {
-                 "type": "string",
-                 "m_label": "Class Name:",
-                 "m_value": ""
-                }, {
-                 "type": "string",
-                 "m_label": "Include File:",
-                 "m_value": ""
-                }, {
-                 "type": "string",
-                 "m_label": "Style:",
-                 "m_value": ""
-                }],
-               "m_events": [],
-               "m_children": [{
                  "m_type": 4492,
                  "proportion": 0,
                  "border": 5,
@@ -3092,6 +2677,97 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_DELETE"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonDelete"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": ""
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Delete"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/delete32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Removes all selected elements"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnDeleteClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
                    "m_winid": "ID_RIBBON_FIT"
                   }, {
                    "type": "string",
@@ -3183,7 +2859,7 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_DELETE"
+                   "m_winid": "ID_RIBBON_ROTATEC"
                   }, {
                    "type": "string",
                    "m_label": "Size:",
@@ -3195,11 +2871,11 @@
                   }, {
                    "type": "string",
                    "m_label": "Name:",
-                   "m_value": "m_ribbonButtonDelete"
+                   "m_value": "m_ribbonButtonRotClock"
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": ""
+                   "m_value": "Rotate clockwise"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -3239,15 +2915,15 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Delete"
+                   "m_value": "Rotate Clockwise"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/delete32.png"
+                   "m_path": "data/images/ribbon/rotateClock32.png"
                   }, {
                    "type": "string",
                    "m_label": "Help String:",
-                   "m_value": "Removes all selected elements"
+                   "m_value": "Rotate clockwise"
                   }, {
                    "type": "choice",
                    "m_label": "Kind:",
@@ -3258,240 +2934,7 @@
                    "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnDeleteClick(wxRibbonButtonBarEvent& event)",
-                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
-                   "m_noBody": false
-                  }],
-                 "m_children": []
-                }]
-              }]
-            }, {
-             "m_type": 4490,
-             "proportion": 0,
-             "border": 5,
-             "gbSpan": "1,1",
-             "gbPosition": "0,0",
-             "m_styles": ["wxRIBBON_PANEL_NO_AUTO_MINIMISE", "wxRIBBON_PANEL_DEFAULT_STYLE"],
-             "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-             "m_properties": [{
-               "type": "winid",
-               "m_label": "ID:",
-               "m_winid": "wxID_ANY"
-              }, {
-               "type": "string",
-               "m_label": "Size:",
-               "m_value": "-1,-1"
-              }, {
-               "type": "string",
-               "m_label": "Minimum Size:",
-               "m_value": "-1,-1"
-              }, {
-               "type": "string",
-               "m_label": "Name:",
-               "m_value": "m_ribbonPanelCalculations"
-              }, {
-               "type": "multi-string",
-               "m_label": "Tooltip:",
-               "m_value": "Calculations"
-              }, {
-               "type": "colour",
-               "m_label": "Bg Colour:",
-               "colour": "<Default>"
-              }, {
-               "type": "colour",
-               "m_label": "Fg Colour:",
-               "colour": "<Default>"
-              }, {
-               "type": "font",
-               "m_label": "Font:",
-               "m_value": ""
-              }, {
-               "type": "bool",
-               "m_label": "Hidden",
-               "m_value": false
-              }, {
-               "type": "bool",
-               "m_label": "Disabled",
-               "m_value": false
-              }, {
-               "type": "bool",
-               "m_label": "Focused",
-               "m_value": false
-              }, {
-               "type": "string",
-               "m_label": "Class Name:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Include File:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Style:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Label:",
-               "m_value": "Calculations"
-              }, {
-               "type": "bitmapPicker",
-               "m_label": "Bitmap File:",
-               "m_path": ""
-              }],
-             "m_events": [],
-             "m_children": [{
-               "m_type": 4491,
-               "proportion": 0,
-               "border": 5,
-               "gbSpan": "1,1",
-               "gbPosition": "0,0",
-               "m_styles": [],
-               "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-               "m_properties": [{
-                 "type": "winid",
-                 "m_label": "ID:",
-                 "m_winid": "wxID_ANY"
-                }, {
-                 "type": "string",
-                 "m_label": "Size:",
-                 "m_value": "-1,-1"
-                }, {
-                 "type": "string",
-                 "m_label": "Minimum Size:",
-                 "m_value": "-1,-1"
-                }, {
-                 "type": "string",
-                 "m_label": "Name:",
-                 "m_value": "m_ribbonButtonBarCalculations"
-                }, {
-                 "type": "multi-string",
-                 "m_label": "Tooltip:",
-                 "m_value": "Calculations"
-                }, {
-                 "type": "colour",
-                 "m_label": "Bg Colour:",
-                 "colour": "<Default>"
-                }, {
-                 "type": "colour",
-                 "m_label": "Fg Colour:",
-                 "colour": "<Default>"
-                }, {
-                 "type": "font",
-                 "m_label": "Font:",
-                 "m_value": ""
-                }, {
-                 "type": "bool",
-                 "m_label": "Hidden",
-                 "m_value": false
-                }, {
-                 "type": "bool",
-                 "m_label": "Disabled",
-                 "m_value": false
-                }, {
-                 "type": "bool",
-                 "m_label": "Focused",
-                 "m_value": false
-                }, {
-                 "type": "string",
-                 "m_label": "Class Name:",
-                 "m_value": ""
-                }, {
-                 "type": "string",
-                 "m_label": "Include File:",
-                 "m_value": ""
-                }, {
-                 "type": "string",
-                 "m_label": "Style:",
-                 "m_value": ""
-                }],
-               "m_events": [],
-               "m_children": [{
-                 "m_type": 4492,
-                 "proportion": 0,
-                 "border": 5,
-                 "gbSpan": "1,1",
-                 "gbPosition": "0,0",
-                 "m_styles": [],
-                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-                 "m_properties": [{
-                   "type": "winid",
-                   "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_POWERFLOW"
-                  }, {
-                   "type": "string",
-                   "m_label": "Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Minimum Size:",
-                   "m_value": "-1,-1"
-                  }, {
-                   "type": "string",
-                   "m_label": "Name:",
-                   "m_value": "m_ribbonButtonPowerFlow"
-                  }, {
-                   "type": "multi-string",
-                   "m_label": "Tooltip:",
-                   "m_value": "Power flow"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Bg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "colour",
-                   "m_label": "Fg Colour:",
-                   "colour": "<Default>"
-                  }, {
-                   "type": "font",
-                   "m_label": "Font:",
-                   "m_value": ""
-                  }, {
-                   "type": "bool",
-                   "m_label": "Hidden",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Disabled",
-                   "m_value": false
-                  }, {
-                   "type": "bool",
-                   "m_label": "Focused",
-                   "m_value": false
-                  }, {
-                   "type": "string",
-                   "m_label": "Class Name:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Include File:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Style:",
-                   "m_value": ""
-                  }, {
-                   "type": "string",
-                   "m_label": "Label:",
-                   "m_value": "Power flow"
-                  }, {
-                   "type": "bitmapPicker",
-                   "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/powerFLow32.png"
-                  }, {
-                   "type": "string",
-                   "m_label": "Help String:",
-                   "m_value": "Calculate the circuit power flow"
-                  }, {
-                   "type": "choice",
-                   "m_label": "Kind:",
-                   "m_selection": 0,
-                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
-                  }],
-                 "m_events": [{
-                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
-                   "m_eventClass": "wxRibbonButtonBarEvent",
-                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnPowerFlowClick(wxRibbonButtonBarEvent& event)",
+                   "m_functionNameAndSignature": "OnRotClockClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],
@@ -3507,7 +2950,7 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_FAULT"
+                   "m_winid": "ID_RIBBON_ROTATECC"
                   }, {
                    "type": "string",
                    "m_label": "Size:",
@@ -3519,11 +2962,11 @@
                   }, {
                    "type": "string",
                    "m_label": "Name:",
-                   "m_value": "m_ribbonButtonFault"
+                   "m_value": "m_ribbonButtonRotCounterClock"
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": "Fault"
+                   "m_value": "Rotate the selected elements counter-clockwise"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -3563,15 +3006,15 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Fault"
+                   "m_value": "Rotate Counter-clockwise"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/fault32.png"
+                   "m_path": "data/images/ribbon/rotateCounterClock32.png"
                   }, {
                    "type": "string",
                    "m_label": "Help String:",
-                   "m_value": "Calculate the circuit fault (if exists)"
+                   "m_value": "Rotate the selected elements counter-clockwise"
                   }, {
                    "type": "choice",
                    "m_label": "Kind:",
@@ -3582,7 +3025,7 @@
                    "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnFaultClick(wxRibbonButtonBarEvent& event)",
+                   "m_functionNameAndSignature": "OnRotCounterClockClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],
@@ -3598,7 +3041,7 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_SCPOWER"
+                   "m_winid": "ID_RIBBON_PROJSETTINGS"
                   }, {
                    "type": "string",
                    "m_label": "Size:",
@@ -3610,11 +3053,11 @@
                   }, {
                    "type": "string",
                    "m_label": "Name:",
-                   "m_value": "m_ribbonButtonSCPower"
+                   "m_value": "m_ribbonButtonProjSettings"
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": "Short-circuit power"
+                   "m_value": "Project Settings"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -3654,29 +3097,22 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Short-circuit power"
+                   "m_value": "Project Settings"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/faultPower32.png"
+                   "m_path": "data/images/ribbon/settings32.png"
                   }, {
                    "type": "string",
                    "m_label": "Help String:",
-                   "m_value": "Calculate the short-circuit power in all buses"
+                   "m_value": "Opens a dialog to set the main settings of the current project"
                   }, {
                    "type": "choice",
                    "m_label": "Kind:",
                    "m_selection": 0,
                    "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
                   }],
-                 "m_events": [{
-                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
-                   "m_eventClass": "wxRibbonButtonBarEvent",
-                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnSCPowerClick(wxRibbonButtonBarEvent& event)",
-                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
-                   "m_noBody": false
-                  }],
+                 "m_events": [],
                  "m_children": []
                 }]
               }]
@@ -3847,7 +3283,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": "Data report"
+                   "m_value": "Data Report"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -3887,7 +3323,7 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Data report"
+                   "m_value": "Data Report"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
@@ -3907,6 +3343,97 @@
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
                    "m_functionNameAndSignature": "OnDataReportClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_CHARTS"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonCharts"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Charts"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Charts"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/chart32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Open the charts"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnChartsClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],
@@ -4028,11 +3555,11 @@
             }, {
              "type": "string",
              "m_label": "Name:",
-             "m_value": "m_ribbonPageStability"
+             "m_value": "m_ribbonPageSimulation"
             }, {
              "type": "multi-string",
              "m_label": "Tooltip:",
-             "m_value": "Stability"
+             "m_value": "Simulation"
             }, {
              "type": "colour",
              "m_label": "Bg Colour:",
@@ -4076,7 +3603,7 @@
             }, {
              "type": "string",
              "m_label": "Label:",
-             "m_value": "Stability"
+             "m_value": "Simulation"
             }, {
              "type": "bool",
              "m_label": "Selected",
@@ -4089,7 +3616,7 @@
              "border": 5,
              "gbSpan": "1,1",
              "gbPosition": "0,0",
-             "m_styles": ["wxRIBBON_PANEL_NO_AUTO_MINIMISE", "wxRIBBON_PANEL_DEFAULT_STYLE"],
+             "m_styles": ["wxRIBBON_PANEL_DEFAULT_STYLE"],
              "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
              "m_properties": [{
                "type": "winid",
@@ -4106,11 +3633,11 @@
               }, {
                "type": "string",
                "m_label": "Name:",
-               "m_value": "m_ribbonPanelStability"
+               "m_value": "m_ribbonPanelContinuous"
               }, {
                "type": "multi-string",
                "m_label": "Tooltip:",
-               "m_value": "Stability"
+               "m_value": "Continuous"
               }, {
                "type": "colour",
                "m_label": "Bg Colour:",
@@ -4150,7 +3677,7 @@
               }, {
                "type": "string",
                "m_label": "Label:",
-               "m_value": "Stability"
+               "m_value": "Continuous"
               }, {
                "type": "bitmapPicker",
                "m_label": "Bitmap File:",
@@ -4180,11 +3707,426 @@
                 }, {
                  "type": "string",
                  "m_label": "Name:",
-                 "m_value": "m_ribbonButtonBarStability"
+                 "m_value": "m_ribbonButtonBarContinuous"
                 }, {
                  "type": "multi-string",
                  "m_label": "Tooltip:",
-                 "m_value": "Stability"
+                 "m_value": ""
+                }, {
+                 "type": "colour",
+                 "m_label": "Bg Colour:",
+                 "colour": "<Default>"
+                }, {
+                 "type": "colour",
+                 "m_label": "Fg Colour:",
+                 "colour": "<Default>"
+                }, {
+                 "type": "font",
+                 "m_label": "Font:",
+                 "m_value": ""
+                }, {
+                 "type": "bool",
+                 "m_label": "Hidden",
+                 "m_value": false
+                }, {
+                 "type": "bool",
+                 "m_label": "Disabled",
+                 "m_value": false
+                }, {
+                 "type": "bool",
+                 "m_label": "Focused",
+                 "m_value": false
+                }, {
+                 "type": "string",
+                 "m_label": "Class Name:",
+                 "m_value": ""
+                }, {
+                 "type": "string",
+                 "m_label": "Include File:",
+                 "m_value": ""
+                }, {
+                 "type": "string",
+                 "m_label": "Style:",
+                 "m_value": ""
+                }],
+               "m_events": [],
+               "m_children": [{
+                 "m_type": 4495,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_ENABLESOL"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonEnableSol"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Enable Solution"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Enable Solution"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/playStopped32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Enables the power flow and fault (if exists) calculations after any circuit change"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 3,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnEnableSolutionClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4495,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_DISABLESOL"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonDisableSol"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Disable Solution"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Disable Solution"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/pauseStopped32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Disables the power flow and fault calculations after any circuit changes"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 3,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnDisableSolutionClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_RESETVOLT"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonResetVoltages"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Reset Voltages"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Reset Voltages"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/reset32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Reset all voltages to initial state"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnResetVoltagesClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }]
+              }]
+            }, {
+             "m_type": 4490,
+             "proportion": 0,
+             "border": 5,
+             "gbSpan": "1,1",
+             "gbPosition": "0,0",
+             "m_styles": ["wxRIBBON_PANEL_NO_AUTO_MINIMISE", "wxRIBBON_PANEL_DEFAULT_STYLE"],
+             "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+             "m_properties": [{
+               "type": "winid",
+               "m_label": "ID:",
+               "m_winid": "wxID_ANY"
+              }, {
+               "type": "string",
+               "m_label": "Size:",
+               "m_value": "-1,-1"
+              }, {
+               "type": "string",
+               "m_label": "Minimum Size:",
+               "m_value": "-1,-1"
+              }, {
+               "type": "string",
+               "m_label": "Name:",
+               "m_value": "m_ribbonPanelSimulations"
+              }, {
+               "type": "multi-string",
+               "m_label": "Tooltip:",
+               "m_value": "Simulations"
+              }, {
+               "type": "colour",
+               "m_label": "Bg Colour:",
+               "colour": "<Default>"
+              }, {
+               "type": "colour",
+               "m_label": "Fg Colour:",
+               "colour": "<Default>"
+              }, {
+               "type": "font",
+               "m_label": "Font:",
+               "m_value": ""
+              }, {
+               "type": "bool",
+               "m_label": "Hidden",
+               "m_value": false
+              }, {
+               "type": "bool",
+               "m_label": "Disabled",
+               "m_value": false
+              }, {
+               "type": "bool",
+               "m_label": "Focused",
+               "m_value": false
+              }, {
+               "type": "string",
+               "m_label": "Class Name:",
+               "m_value": ""
+              }, {
+               "type": "string",
+               "m_label": "Include File:",
+               "m_value": ""
+              }, {
+               "type": "string",
+               "m_label": "Style:",
+               "m_value": ""
+              }, {
+               "type": "string",
+               "m_label": "Label:",
+               "m_value": "Simulations"
+              }, {
+               "type": "bitmapPicker",
+               "m_label": "Bitmap File:",
+               "m_path": ""
+              }],
+             "m_events": [],
+             "m_children": [{
+               "m_type": 4491,
+               "proportion": 0,
+               "border": 5,
+               "gbSpan": "1,1",
+               "gbPosition": "0,0",
+               "m_styles": [],
+               "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+               "m_properties": [{
+                 "type": "winid",
+                 "m_label": "ID:",
+                 "m_winid": "wxID_ANY"
+                }, {
+                 "type": "string",
+                 "m_label": "Size:",
+                 "m_value": "-1,-1"
+                }, {
+                 "type": "string",
+                 "m_label": "Minimum Size:",
+                 "m_value": "-1,-1"
+                }, {
+                 "type": "string",
+                 "m_label": "Name:",
+                 "m_value": "m_ribbonButtonBarSimulations"
+                }, {
+                 "type": "multi-string",
+                 "m_label": "Tooltip:",
+                 "m_value": "Simulations"
                 }, {
                  "type": "colour",
                  "m_label": "Bg Colour:",
@@ -4234,7 +4176,7 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_STABSETTINGS"
+                   "m_winid": "ID_RIBBON_POWERFLOW"
                   }, {
                    "type": "string",
                    "m_label": "Size:",
@@ -4246,11 +4188,11 @@
                   }, {
                    "type": "string",
                    "m_label": "Name:",
-                   "m_value": "m_ribbonButtonStabSettings"
+                   "m_value": "m_ribbonButtonPowerFlow"
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": "Stability settings"
+                   "m_value": "Power flow"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -4290,15 +4232,15 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Settings"
+                   "m_value": "Power Flow"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/settings32.png"
+                   "m_path": "data/images/ribbon/powerFLow32.png"
                   }, {
                    "type": "string",
                    "m_label": "Help String:",
-                   "m_value": "Opens the stability settings"
+                   "m_value": "Calculate the circuit power flow"
                   }, {
                    "type": "choice",
                    "m_label": "Kind:",
@@ -4309,7 +4251,7 @@
                    "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnStabilitySettingsClick(wxRibbonButtonBarEvent& event)",
+                   "m_functionNameAndSignature": "OnPowerFlowClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],
@@ -4381,7 +4323,7 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Run"
+                   "m_value": "Run Stability"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
@@ -4405,149 +4347,7 @@
                    "m_noBody": false
                   }],
                  "m_children": []
-                }]
-              }]
-            }, {
-             "m_type": 4490,
-             "proportion": 0,
-             "border": 5,
-             "gbSpan": "1,1",
-             "gbPosition": "0,0",
-             "m_styles": ["wxRIBBON_PANEL_NO_AUTO_MINIMISE", "wxRIBBON_PANEL_DEFAULT_STYLE"],
-             "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-             "m_properties": [{
-               "type": "winid",
-               "m_label": "ID:",
-               "m_winid": "wxID_ANY"
-              }, {
-               "type": "string",
-               "m_label": "Size:",
-               "m_value": "-1,-1"
-              }, {
-               "type": "string",
-               "m_label": "Minimum Size:",
-               "m_value": "-1,-1"
-              }, {
-               "type": "string",
-               "m_label": "Name:",
-               "m_value": "m_ribbonPanelData"
-              }, {
-               "type": "multi-string",
-               "m_label": "Tooltip:",
-               "m_value": "Data"
-              }, {
-               "type": "colour",
-               "m_label": "Bg Colour:",
-               "colour": "<Default>"
-              }, {
-               "type": "colour",
-               "m_label": "Fg Colour:",
-               "colour": "<Default>"
-              }, {
-               "type": "font",
-               "m_label": "Font:",
-               "m_value": ""
-              }, {
-               "type": "bool",
-               "m_label": "Hidden",
-               "m_value": false
-              }, {
-               "type": "bool",
-               "m_label": "Disabled",
-               "m_value": false
-              }, {
-               "type": "bool",
-               "m_label": "Focused",
-               "m_value": false
-              }, {
-               "type": "string",
-               "m_label": "Class Name:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Include File:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Style:",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "Label:",
-               "m_value": "Data"
-              }, {
-               "type": "bitmapPicker",
-               "m_label": "Bitmap File:",
-               "m_path": ""
-              }],
-             "m_events": [],
-             "m_children": [{
-               "m_type": 4491,
-               "proportion": 0,
-               "border": 5,
-               "gbSpan": "1,1",
-               "gbPosition": "0,0",
-               "m_styles": [],
-               "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-               "m_properties": [{
-                 "type": "winid",
-                 "m_label": "ID:",
-                 "m_winid": "wxID_ANY"
                 }, {
-                 "type": "string",
-                 "m_label": "Size:",
-                 "m_value": "-1,-1"
-                }, {
-                 "type": "string",
-                 "m_label": "Minimum Size:",
-                 "m_value": "-1,-1"
-                }, {
-                 "type": "string",
-                 "m_label": "Name:",
-                 "m_value": "m_ribbonButtonBarStabData"
-                }, {
-                 "type": "multi-string",
-                 "m_label": "Tooltip:",
-                 "m_value": "Stability data"
-                }, {
-                 "type": "colour",
-                 "m_label": "Bg Colour:",
-                 "colour": "<Default>"
-                }, {
-                 "type": "colour",
-                 "m_label": "Fg Colour:",
-                 "colour": "<Default>"
-                }, {
-                 "type": "font",
-                 "m_label": "Font:",
-                 "m_value": ""
-                }, {
-                 "type": "bool",
-                 "m_label": "Hidden",
-                 "m_value": false
-                }, {
-                 "type": "bool",
-                 "m_label": "Disabled",
-                 "m_value": false
-                }, {
-                 "type": "bool",
-                 "m_label": "Focused",
-                 "m_value": false
-                }, {
-                 "type": "string",
-                 "m_label": "Class Name:",
-                 "m_value": ""
-                }, {
-                 "type": "string",
-                 "m_label": "Include File:",
-                 "m_value": ""
-                }, {
-                 "type": "string",
-                 "m_label": "Style:",
-                 "m_value": ""
-                }],
-               "m_events": [],
-               "m_children": [{
                  "m_type": 4492,
                  "proportion": 0,
                  "border": 5,
@@ -4558,7 +4358,7 @@
                  "m_properties": [{
                    "type": "winid",
                    "m_label": "ID:",
-                   "m_winid": "ID_RIBBON_CHARTS"
+                   "m_winid": "ID_RIBBON_FAULT"
                   }, {
                    "type": "string",
                    "m_label": "Size:",
@@ -4570,11 +4370,11 @@
                   }, {
                    "type": "string",
                    "m_label": "Name:",
-                   "m_value": "m_ribbonButtonCharts"
+                   "m_value": "m_ribbonButtonFault"
                   }, {
                    "type": "multi-string",
                    "m_label": "Tooltip:",
-                   "m_value": "Charts"
+                   "m_value": "Fault"
                   }, {
                    "type": "colour",
                    "m_label": "Bg Colour:",
@@ -4614,15 +4414,15 @@
                   }, {
                    "type": "string",
                    "m_label": "Label:",
-                   "m_value": "Charts"
+                   "m_value": "Fault"
                   }, {
                    "type": "bitmapPicker",
                    "m_label": "Bitmap File:",
-                   "m_path": "data/images/ribbon/chart32.png"
+                   "m_path": "data/images/ribbon/fault32.png"
                   }, {
                    "type": "string",
                    "m_label": "Help String:",
-                   "m_value": "Open the charts"
+                   "m_value": "Calculate the circuit fault (if exists)"
                   }, {
                    "type": "choice",
                    "m_label": "Kind:",
@@ -4633,7 +4433,189 @@
                    "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnChartsClick(wxRibbonButtonBarEvent& event)",
+                   "m_functionNameAndSignature": "OnFaultClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_SCPOWER"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonSCPower"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Short-circuit power"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Short-Circuit Power"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/faultPower32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Calculate the short-circuit power in all buses"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnSCPowerClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_SIMULSETTINGS"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonSimulSettings"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Simulation Settings"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": true
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Simulation Settings"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/settings32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Opens a dialog to set the settings of the simulations"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnProjectSettingsClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],

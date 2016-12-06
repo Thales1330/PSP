@@ -29,6 +29,8 @@
   <object class="wxBitmap" name="powerFLow32">data\images\ribbon\powerFLow32.png</object>
   <object class="wxBitmap" name="redo32">data\images\ribbon\redo32.png</object>
   <object class="wxBitmap" name="reset32">data\images\ribbon\reset32.png</object>
+  <object class="wxBitmap" name="rotateClock32">data\images\ribbon\rotateClock32.png</object>
+  <object class="wxBitmap" name="rotateCounterClock32">data\images\ribbon\rotateCounterClock32.png</object>
   <object class="wxBitmap" name="save32">data\images\ribbon\save32.png</object>
   <object class="wxBitmap" name="saveAs32">data\images\ribbon\saveAs32.png</object>
   <object class="wxBitmap" name="settings32">data\images\ribbon\settings32.png</object>

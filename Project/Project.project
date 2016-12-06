@@ -9,31 +9,91 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="model">
-      <File Name="Element.cpp"/>
-      <File Name="Bus.cpp"/>
-      <File Name="Line.cpp"/>
+      <VirtualDirectory Name="electrical">
+        <File Name="Bus.cpp"/>
+        <File Name="Line.cpp"/>
+        <File Name="Transformer.cpp"/>
+        <File Name="Machines.cpp"/>
+        <File Name="SyncGenerator.cpp"/>
+        <File Name="IndMotor.cpp"/>
+        <File Name="Branch.cpp"/>
+        <File Name="SyncMotor.cpp"/>
+        <File Name="Shunt.cpp"/>
+        <File Name="Load.cpp"/>
+        <File Name="Inductor.cpp"/>
+        <File Name="Capacitor.cpp"/>
+        <File Name="Element.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="calculations">
+        <File Name="ElectricCalculation.cpp"/>
+        <File Name="PowerFlow.cpp"/>
+      </VirtualDirectory>
+      <File Name="Text.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
+      <File Name="wxGLString.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
       <File Name="Workspace.cpp"/>
+      <VirtualDirectory Name="element forms">
+        <File Name="BusForm.cpp"/>
+        <File Name="GeneratorStabForm.cpp"/>
+        <File Name="LineForm.cpp"/>
+        <File Name="SwitchingForm.cpp"/>
+        <File Name="TransformerForm.cpp"/>
+        <File Name="LoadForm.cpp"/>
+        <File Name="ReactiveShuntElementForm.cpp"/>
+        <File Name="IndMotorForm.cpp"/>
+        <File Name="SyncMachineForm.cpp"/>
+        <File Name="TextForm.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="model">
-      <File Name="Element.h"/>
-      <File Name="Bus.h"/>
-      <File Name="Line.h"/>
+      <VirtualDirectory Name="electrical">
+        <File Name="Bus.h"/>
+        <File Name="Line.h"/>
+        <File Name="Transformer.h"/>
+        <File Name="Machines.h"/>
+        <File Name="SyncGenerator.h"/>
+        <File Name="IndMotor.h"/>
+        <File Name="Branch.h"/>
+        <File Name="SyncMotor.h"/>
+        <File Name="Shunt.h"/>
+        <File Name="Load.h"/>
+        <File Name="Inductor.h"/>
+        <File Name="Capacitor.h"/>
+        <File Name="Element.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="calculations">
+        <File Name="ElectricCalculation.h"/>
+        <File Name="PowerFlow.h"/>
+      </VirtualDirectory>
+      <File Name="Text.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
+      <File Name="wxGLString.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>
       <File Name="Workspace.h"/>
+      <VirtualDirectory Name="element forms">
+        <File Name="BusForm.h"/>
+        <File Name="GeneratorStabForm.h"/>
+        <File Name="LineForm.h"/>
+        <File Name="SwitchingForm.h"/>
+        <File Name="TransformerForm.h"/>
+        <File Name="LoadForm.h"/>
+        <File Name="ReactiveShuntElementForm.h"/>
+        <File Name="IndMotorForm.h"/>
+        <File Name="SyncMachineForm.h"/>
+        <File Name="TextForm.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
@@ -43,15 +103,20 @@
     <VirtualDirectory Name="resources">
       <File Name="MainFrameBitmaps.cpp"/>
       <File Name="WorkspaceBitmaps.cpp"/>
+      <File Name="BusFormBitmaps.cpp"/>
+      <File Name="ElementFormBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
       <File Name="MainFrameBase.cpp"/>
       <File Name="WorkspaceBase.h"/>
       <File Name="WorkspaceBase.cpp"/>
+      <File Name="ElementForm.h"/>
+      <File Name="ElementForm.cpp"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>
+    <File Name="ElementForm.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
