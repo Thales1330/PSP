@@ -11,8 +11,7 @@
 
 #include <wx/log.h>
 
-enum PickboxID
-{
+enum PickboxID {
     ID_PB_NONE = 0,
     ID_PB_RIGHT,
     ID_PB_LEFT,
@@ -22,8 +21,7 @@ enum PickboxID
     ID_PB_LEFT_TOP
 };
 
-enum ContextMenuID
-{
+enum ContextMenuID {
     ID_EDIT_BUS = 0,
     ID_EDIT_LINE,
     ID_EDIT_TRANSFORMER,
@@ -38,81 +36,67 @@ enum ContextMenuID
     ID_LINE_REMOVE_NODE,
 
     ID_ROTATE_CLOCK,
-	ID_ROTATE_COUNTERCLOCK,
+    ID_ROTATE_COUNTERCLOCK,
     ID_DELETE
 };
 
-enum ElectricalUnit
-{
-	UNIT_PU = 0,
-	UNIT_V,
-	UNIT_kV,
-	UNIT_A,
-	UNIT_kA,
-	UNIT_W,
-	UNIT_kW,
-	UNIT_MW,
-	UNIT_VA,
-	UNIT_kVA,
-	UNIT_MVA,
-	UNIT_VAr,
-	UNIT_kVAr,
-	UNIT_MVAr,
-	UNIT_OHM,
-	UNIT_OHM_km,
-	UNIT_S,
-	UNIT_S_km,
+enum ElectricalUnit {
+    UNIT_PU = 0,
+    UNIT_V,
+    UNIT_kV,
+    UNIT_A,
+    UNIT_kA,
+    UNIT_W,
+    UNIT_kW,
+    UNIT_MW,
+    UNIT_VA,
+    UNIT_kVA,
+    UNIT_MVA,
+    UNIT_VAr,
+    UNIT_kVAr,
+    UNIT_MVAr,
+    UNIT_OHM,
+    UNIT_OHM_km,
+    UNIT_S,
+    UNIT_S_km,
     UNIT_DEGREE,
     UNIT_RADIAN
 };
 
-enum FaultData
-{
-	FAULT_THREEPHASE = 0,
-	FAULT_2LINE,
-	FAULT_2LINE_GROUND,
-	FAULT_LINE_GROUND,
-	FAULT_LINE_A,
-	FAULT_LINE_B,
-	FAULT_LINE_C
+enum FaultData {
+    FAULT_THREEPHASE = 0,
+    FAULT_2LINE,
+    FAULT_2LINE_GROUND,
+    FAULT_LINE_GROUND,
+    FAULT_LINE_A,
+    FAULT_LINE_B,
+    FAULT_LINE_C
 };
 
-enum SwitchingType
-{
-    SW_INSERT = 0,
-    SW_REMOVE
-};
+enum SwitchingType { SW_INSERT = 0, SW_REMOVE };
 
-enum PowerFlowDirection
-{
-    PF_NONE = 0,
-    PF_TO_BUS,
-    PF_TO_ELEMENT,
-    PF_BUS1_TO_BUS2,
-    PF_BUS2_TO_BUS1
-};
+enum PowerFlowDirection { PF_NONE = 0, PF_TO_BUS, PF_TO_ELEMENT, PF_BUS1_TO_BUS2, PF_BUS2_TO_BUS1 };
 
-struct SwitchingData
-{
+struct SwitchingData {
     std::vector<SwitchingType> swType;
     std::vector<double> swTime;
-}; 
+};
 
 class Element
 {
-   public:
+public:
     Element();
     virtual ~Element();
 
     // Setters
-    void SetDragging(bool dragging = true) { this->m_dragging = dragging; }
-    void SetHeight(double height) { this->m_height = height; }
+    void SetDragging(bool dragging = true) { m_dragging = dragging; }
+    void SetHeight(double height) { m_height = height; }
     void SetPosition(const wxPoint2DDouble position);
-    void SetSelected(bool selected = true) { this->m_selected = selected; }
-    void SetWidth(double width) { this->m_width = width; }
-    void SetAngle(double angle) { this->m_angle = angle; }
-    void ShowPickbox(bool showPickbox = true) { this->m_showPickbox = showPickbox; }
-    void SetBorderSize(double borderSize) { this->m_borderSize = borderSize; }
+    void SetSelected(bool selected = true) { m_selected = selected; }
+    void SetWidth(double width) { m_width = width; }
+    void SetAngle(double angle) { m_angle = angle; }
+    void ShowPickbox(bool showPickbox = true) { m_showPickbox = showPickbox; }
+    void SetBorderSize(double borderSize) { m_borderSize = borderSize; }
     void SetOnline(bool online = true);
     // Getters
     wxRect2DDouble GetRect() const { return m_rect; }
@@ -142,13 +126,12 @@ class Element
     virtual bool SetNodeParent(Element* parent) { return false; }
     virtual void RemoveParent(Element* parent) {}
     virtual void RotateNode(Element* parent, bool clockwise = true) {}
-    virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
-                                           wxPoint2DDouble parentPoint,
-                                           wxPoint2DDouble secondPoint) const;
+    virtual wxPoint2DDouble
+    GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const;
     virtual bool SwitchesContains(wxPoint2DDouble position) const;
     virtual void UpdateSwitches();
     virtual void DrawSwitches() const;
-    
+
     virtual void CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges);
     virtual void DrawPowerFlowPts() const;
 
@@ -157,27 +140,23 @@ class Element
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_ARROW; }
     virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
     virtual void ResetNodes() { m_activeNodeID = 0; }
-    virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
-                                          double scale,
-                                          double offsetX = 0.0,
-                                          double offsetY = 0.0) const;
+    virtual wxPoint2DDouble
+    WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX = 0.0, double offsetY = 0.0) const;
     virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble position,
-                                          wxPoint2DDouble translation,
-                                          double scale,
-                                          double offsetX = 0.0,
-                                          double offsetY = 0.0) const;
-    virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1,
-                                             wxRect2DDouble rect2,
-                                             double angle1,
-                                             double angle2) const;
+        wxPoint2DDouble translation,
+        double scale,
+        double offsetX = 0.0,
+        double offsetY = 0.0) const;
+    virtual bool
+    RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
 
     virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
     virtual void DrawArc(wxPoint2DDouble position,
-                         double radius,
-                         double initAngle,
-                         double finalAngle,
-                         int numSegments,
-                         GLenum mode = GL_LINE_LOOP) const;
+        double radius,
+        double initAngle,
+        double finalAngle,
+        int numSegments,
+        GLenum mode = GL_LINE_LOOP) const;
     virtual void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
     virtual void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
     virtual void DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode = GL_TRIANGLES) const;
@@ -189,27 +168,29 @@ class Element
     virtual std::vector<Element*> GetParentList() const { return m_parentList; }
     virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
     virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
-	
-	virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
-	
-	virtual void GeneralMenuItens(wxMenu& menu);
-	
-	virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
-	
-	bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
-	bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
-	
-    //Electrical only methods
-	virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit) {}
+
+    virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
+
+    virtual void GeneralMenuItens(wxMenu& menu);
+
+    virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
+
+    bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
+    bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
+
+    // Electrical only methods
+    virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
+    {
+    }
     virtual void SetSwitchingData(SwitchingData data) { m_swData = data; }
     virtual SwitchingData GetSwitchingData() { return m_swData; }
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection) { m_pfDirection = pfDirection; }
     virtual PowerFlowDirection GetPowerFlowDirection() const { return m_pfDirection; }
-    
-    //Static methods
+
+    // Static methods
     static wxString StringFromDouble(double value, int minDecimal = 1);
-	
-   protected:
+
+protected:
     std::vector<Element*> m_parentList;
 
     wxRect2DDouble m_rect;
@@ -222,8 +203,8 @@ class Element
     double m_switchSize = 10.0;
 
     std::vector<wxRect2DDouble> m_switchRect;
-    
-    std::vector< std::vector<wxPoint2DDouble> > m_powerFlowArrow;
+
+    std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;
     PowerFlowDirection m_pfDirection = PF_NONE;
 
     bool m_selected = false;
@@ -240,8 +221,8 @@ class Element
     wxPoint2DDouble m_movePos;
 
     bool m_online = true;
-    
+
     SwitchingData m_swData;
 };
 
-#endif  // ELEMENT_H
+#endif // ELEMENT_H

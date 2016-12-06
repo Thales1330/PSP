@@ -17,6 +17,7 @@ class Inductor;
 class Capacitor;
 
 enum ElementType {
+    TYPE_NONE = 0,
     TYPE_BUS,
     TYPE_CAPACITOR,
     TYPE_IND_MOTOR,
@@ -82,12 +83,12 @@ class Text : public Element
     int m_fontSize = 10;
 
     Element* m_element = NULL;
-    ElementType m_elementType;
+    ElementType m_elementType = TYPE_NONE;
     int m_elementNumber;
     DataType m_dataType;
     ElectricalUnit m_unit;
-    int m_direction;
-    int m_decimalPlaces;
+    int m_direction = 0;
+    int m_decimalPlaces = 2;
 };
 
 #endif  // TEXT_H

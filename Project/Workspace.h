@@ -80,6 +80,8 @@ class Workspace : public WorkspaceBase
 	
 	void ValidateBusesVoltages(Element* initialBus);
 	void ValidateElementsVoltages();
+    
+    void UpdateTextElements();
 	
 	int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
 	void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }

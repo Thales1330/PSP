@@ -4,15 +4,26 @@ TextForm::TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementLi
     : TextFormBase(parent)
 {
     m_parent = parent;
-    m_text = text;
+    m_textToEdit = text;
     m_allElements.GetElementsFromList(elementList);
     m_systemPowerBase = systemPowerBase;
 
-    m_choiceName->Enable(false);
-    m_choiceTextType->Enable(false);
-    m_choiceTextFromBus->Enable(false);
-    m_choiceTextToBus->Enable(false);
-    m_choiceTextUnit->Enable(false);
+    m_text = new Text();
+    m_text->SetElementType(text->GetElementType());
+    m_text->SetElementNumber(text->GetElementNumber());
+    m_text->SetElement(text->GetElement());
+    m_text->SetDataType(text->GetDataType());
+    m_text->SetDirection(text->GetDirection());
+    m_text->SetUnit(text->GetUnit());
+    m_text->SetDecimalPlaces(text->GetDecimalPlaces());
+
+    if(!LoadChoices()) {
+        m_choiceName->Enable(false);
+        m_choiceTextType->Enable(false);
+        m_choiceTextFromBus->Enable(false);
+        m_choiceTextToBus->Enable(false);
+        m_choiceTextUnit->Enable(false);
+    }
 }
 
 TextForm::~TextForm() {}
@@ -66,11 +77,17 @@ void TextForm::OnNameChoiceSelected(wxCommandEvent& event)
     ElementNumberChoice();
 }
 
-void TextForm::OnTextEnter(wxCommandEvent& event) {}
+void TextForm::OnTextEnter(wxCommandEvent& event) { Preview(); }
 void TextForm::OnToBusChoiceSelected(wxCommandEvent& event)
 {
     m_text->SetDirection(m_choiceTextToBus->GetSelection());
     m_choiceTextFromBus->SetSelection(m_choiceTextToBus->GetSelection());
+}
+
+void TextForm::OnUnitChoiceSelected(wxCommandEvent& event)
+{
+    UnitChoice();
+    Preview();
 }
 
 void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
@@ -167,6 +184,573 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
             break;
     }
     DataTypeChoice();
+
+    if(m_text->GetDataType() == DATA_NAME) Preview();
+}
+
+bool TextForm::LoadChoices()
+{
+    if(m_text->GetElementType() == TYPE_NONE) return false;
+
+    // Fill the element possible choices.
+    ElementTypeChoice();
+    m_choiceName->SetSelection(m_text->GetElementNumber());
+    ElementNumberChoice();
+    DataTypeChoice();
+
+    // Select the saved choices.
+    switch(m_text->GetElementType()) {
+        case TYPE_BUS: {
+            m_choiceElement->SetSelection(0);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_VOLTAGE: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_V: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kV: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        default:
+                            break;
+                    }
+
+                } break;
+                case DATA_ANGLE: {
+                    m_choiceTextType->SetSelection(2);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_DEGREE: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_RADIAN: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_SC_CURRENT: {
+                    m_choiceTextType->SetSelection(3);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_A: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kA: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_SC_VOLTAGE: {
+                    m_choiceTextType->SetSelection(4);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_V: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kV: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_SC_POWER: {
+                    m_choiceTextType->SetSelection(5);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VA: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVA: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVA: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_SYNC_GENERATOR: {
+            m_choiceElement->SetSelection(1);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_ACTIVE_POWER: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_REACTIVE_POWER: {
+                    m_choiceTextType->SetSelection(2);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VAr: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVAr: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVAr: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_SC_CURRENT: {
+                    m_choiceTextType->SetSelection(3);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_A: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kA: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_LINE: {
+            m_choiceElement->SetSelection(2);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_PF_ACTIVE: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_REACTIVE: {
+                    m_choiceTextType->SetSelection(2);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VAr: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVAr: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVAr: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_LOSSES: {
+                    m_choiceTextType->SetSelection(3);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_CURRENT: {
+                    m_choiceTextType->SetSelection(4);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_A: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kA: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_SC_CURRENT: {
+                    m_choiceTextType->SetSelection(5);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_A: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kA: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_TRANSFORMER: {
+            m_choiceElement->SetSelection(3);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_PF_ACTIVE: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_REACTIVE: {
+                    m_choiceTextType->SetSelection(2);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VAr: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVAr: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVAr: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_LOSSES: {
+                    m_choiceTextType->SetSelection(3);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_CURRENT: {
+                    m_choiceTextType->SetSelection(4);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_A: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kA: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_SC_CURRENT: {
+                    m_choiceTextType->SetSelection(5);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_A: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kA: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_LOAD: {
+            m_choiceElement->SetSelection(4);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_PF_ACTIVE: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_REACTIVE: {
+                    m_choiceTextType->SetSelection(2);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VAr: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVAr: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVAr: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_CAPACITOR: {
+            m_choiceElement->SetSelection(5);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_PF_REACTIVE: {
+                    m_choiceTextType->SetSelection(1);
+
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_INDUCTOR: {
+            m_choiceElement->SetSelection(6);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_PF_REACTIVE: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VAr: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVAr: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVAr: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_SYNC_MOTOR: {
+            m_choiceElement->SetSelection(7);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_PF_ACTIVE: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_REACTIVE: {
+                    m_choiceTextType->SetSelection(2);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VAr: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVAr: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVAr: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        case TYPE_IND_MOTOR: {
+            m_choiceElement->SetSelection(8);
+            switch(m_text->GetDataType()) {
+                case DATA_NAME: {
+                    m_choiceTextType->SetSelection(0);
+                } break;
+                case DATA_PF_ACTIVE: {
+                    m_choiceTextType->SetSelection(1);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_W: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kW: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MW: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                case DATA_PF_REACTIVE: {
+                    m_choiceTextType->SetSelection(2);
+                    switch(m_text->GetUnit()) {
+                        case UNIT_PU: {
+                            m_choiceTextUnit->SetSelection(0);
+                        } break;
+                        case UNIT_VAr: {
+                            m_choiceTextUnit->SetSelection(1);
+                        } break;
+                        case UNIT_kVAr: {
+                            m_choiceTextUnit->SetSelection(2);
+                        } break;
+                        case UNIT_MVAr: {
+                            m_choiceTextUnit->SetSelection(3);
+                        } break;
+                        default:
+                            break;
+                    }
+                } break;
+                default:
+                    break;
+            }
+        } break;
+        default:
+            break;
+    }
+
+    m_textCtrlDecimal->SetValue(wxString::Format("%d", m_text->GetDecimalPlaces()));
+    Preview();
+
+    return true;
 }
 
 void TextForm::ElementTypeChoice()
@@ -253,7 +837,7 @@ void TextForm::ElementNumberChoice()
     m_choiceTextFromBus->Clear();
     m_choiceTextToBus->Clear();
     m_choiceTextUnit->Clear();
-    
+
     int index = m_choiceName->GetSelection();
     m_text->SetElementNumber(index);
 
@@ -264,7 +848,7 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetBusList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Voltage"));
             arrayString.Add(_("Angle"));
@@ -276,18 +860,17 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetSyncGeneratorList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
             arrayString.Add(_("Fault current"));
         } break;
-        case TYPE_LINE:
-         {
+        case TYPE_LINE: {
             auto it = m_allElements.GetLineList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power flow"));
             arrayString.Add(_("Reactive power flow"));
@@ -299,7 +882,7 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetTransformerList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power flow"));
             arrayString.Add(_("Reactive power flow"));
@@ -311,7 +894,7 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetLoadList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
@@ -320,7 +903,7 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetCapacitorList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Reactive power"));
         } break;
@@ -328,7 +911,7 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetInductorList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Reactive power"));
         } break;
@@ -336,7 +919,7 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetSyncMotorList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
@@ -345,7 +928,7 @@ void TextForm::ElementNumberChoice()
             auto it = m_allElements.GetIndMotorList().begin();
             std::advance(it, index);
             m_text->SetElement(*it);
-            
+
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
@@ -368,11 +951,11 @@ void TextForm::DataTypeChoice()
     m_choiceTextUnit->Clear();
 
     m_choiceTextUnit->Enable();
+
     wxArrayString arrayString;
     switch(m_text->GetDataType()) {
         case DATA_NAME: {
             m_choiceTextUnit->Enable(false);
-            m_text->UpdateText(m_systemPowerBase);
             return;
         } break;
         case DATA_VOLTAGE:
@@ -581,6 +1164,51 @@ void TextForm::UnitChoice()
         default:
             break;
     }
-    
+}
+
+void TextForm::Preview()
+{
+    double decimalPlaces = m_text->GetDecimalPlaces();
+    if(m_textCtrlDecimal->GetValue().ToDouble(&decimalPlaces)) m_text->SetDecimalPlaces(decimalPlaces);
+
     m_text->UpdateText(m_systemPowerBase);
+
+    m_textCtrlPreview->SetValue(m_text->GetText());
+}
+
+bool TextForm::ValidateData()
+{
+    if(m_choiceElement->GetSelection() == -1) return false;
+    if(m_choiceName->GetSelection() == -1) return false;
+    if(m_choiceTextType->GetSelection() == -1) return false;
+    if(m_text->GetDataType() !=  DATA_NAME && m_choiceTextUnit->GetSelection() == -1) return false;
+    if(m_text->GetElementType() == TYPE_LINE || m_text->GetElementType() == TYPE_TRANSFORMER) {
+        if(m_choiceTextFromBus->GetSelection() == -1) return false;
+        if(m_choiceTextToBus->GetSelection() == -1) return false;
+    }
+    
+    double decimalPlaces = m_text->GetDecimalPlaces();
+    if(m_textCtrlDecimal->GetValue().ToDouble(&decimalPlaces)) m_text->SetDecimalPlaces(decimalPlaces);
+    
+    m_textToEdit->SetElementType(m_text->GetElementType());
+    m_textToEdit->SetElementNumber(m_text->GetElementNumber());
+    m_textToEdit->SetElement(m_text->GetElement());
+    m_textToEdit->SetDataType(m_text->GetDataType());
+    m_textToEdit->SetDirection(m_text->GetDirection());
+    m_textToEdit->SetUnit(m_text->GetUnit());
+    m_textToEdit->SetDecimalPlaces(decimalPlaces);
+    m_textToEdit->UpdateText(m_systemPowerBase);
+    
+    return true;
+}
+
+void TextForm::OnOKButtonClick(wxCommandEvent& event)
+{
+    if(ValidateData()){
+        EndModal(wxID_OK);
+    } else {
+        wxString errorMsg = _("There are blank fields.");
+        wxMessageDialog msgDialog(m_parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+    }
 }

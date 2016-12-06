@@ -741,6 +741,7 @@ protected:
     virtual void OnTypeChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnFromBusChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnToBusChoiceSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnUnitChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnTextEnter(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
