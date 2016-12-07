@@ -51,13 +51,26 @@ void Text::Draw(wxPoint2DDouble translation, double scale)
     }
 
     // Draw text (layer 2)
-
     glColor4d(0.0, 0.0, 0.0, 1.0);
-    wxGLString glString(m_text);
-    glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-    glString.consolidate(&dc);
-    glString.bind();
-    glString.render(m_position.m_x, m_position.m_y);
+    if(!m_isMultlineText) { // Only one line
+        wxGLString glString(m_text);
+        glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+        glString.consolidate(&dc);
+        glString.bind();
+        glString.render(m_position.m_x, m_position.m_y);
+    } else { // Multiples lines
+        wxGLStringArray glStringArray;
+        // Fill the string array.
+        for(int i = 0; i < (int)m_multlineText.size(); i++) glStringArray.addString(m_multlineText[i]);
+        glStringArray.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+        glStringArray.consolidate(&dc);
+        glStringArray.bind();
+        // The text will be printed centralized.
+        for(int i = 0; i < (int)m_multlineText.size(); i++) {
+            glStringArray.get(i).render(m_position.m_x, m_position.m_y - m_height / 2.0 +
+                    glStringArray.get(i).getheight() * double(i) + glStringArray.get(i).getheight() / 2.0);
+        }
+    }
 
     glPopMatrix();
 }
@@ -73,14 +86,40 @@ void Text::SetText(wxString text)
     m_text = text;
 
     // Creating a glString to get the text size.
-    wxGLString glString(m_text);
-    glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-    wxScreenDC dc;
-    glString.consolidate(&dc);
-    glString.bind();
+    int numberOfLines = m_text.Freq('\n') + 1;
+    if(numberOfLines == 1) { // Only one line
+        m_isMultlineText = false;
+        wxGLString glString(m_text);
+        glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+        wxScreenDC dc;
+        glString.consolidate(&dc);
+        glString.bind();
 
-    m_width = glString.getWidth();
-    m_height = glString.getheight();
+        m_width = glString.getWidth();
+        m_height = glString.getheight();
+    } else {
+        m_isMultlineText = true;
+        m_multlineText.clear();
+        wxString text = m_text;
+        double w = 0.0, h = 0.0;
+        for(int i = 0; i < numberOfLines; ++i) {
+            wxString nextLine;
+            wxString currentLine = text.BeforeFirst('\n', &nextLine);
+            text = nextLine;
+            m_multlineText.push_back(currentLine);
+
+            wxGLString glString(currentLine);
+            glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+            wxScreenDC dc;
+            glString.consolidate(&dc);
+            glString.bind();
+
+            if(w < glString.getWidth()) w = glString.getWidth(); // Get the major width.
+            h = glString.getheight();
+        }
+        m_width = w;
+        m_height = h * (double)numberOfLines;
+    }
 
     // Update text rectangle.
     SetPosition(m_position);
@@ -115,26 +154,52 @@ void Text::UpdateText(double systemPowerBase)
             Bus* bus = (Bus*)m_element;
             if(bus) {
                 BusElectricalData data = bus->GetEletricalData();
+                double baseVoltage = data.nominalVoltage;
+                if(data.nominalVoltageUnit == UNIT_kV) baseVoltage *= 1e3;
+                double baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);
+
                 switch(m_dataType) {
                     case DATA_NAME: {
                         SetText(bus->GetEletricalData().name);
                     } break;
                     case DATA_VOLTAGE: {
-                        double baseVoltage = data.nominalVoltage;
-                        if(data.nominalVoltageUnit == UNIT_kV) baseVoltage *= 1e3;
                         double voltage = std::abs(data.voltage);
                         switch(m_unit) {
                             case UNIT_PU: {
-                                SetText(wxString::FromDouble(voltage, m_decimalPlaces) + _(" p.u."));
+                                SetText(wxString::FromDouble(voltage, m_decimalPlaces) + " p.u.");
                             } break;
                             case UNIT_V: {
-                                SetText(wxString::FromDouble(voltage * baseVoltage, m_decimalPlaces) + _(" V"));
+                                SetText(wxString::FromDouble(voltage * baseVoltage, m_decimalPlaces) + " V");
                             } break;
                             case UNIT_kV: {
-                                SetText(wxString::FromDouble(voltage * baseVoltage / 1e3, m_decimalPlaces) + _(" kV"));
+                                SetText(wxString::FromDouble(voltage * baseVoltage / 1e3, m_decimalPlaces) + " kV");
                             } break;
                         }
                     } break;
+                    case DATA_ANGLE: {
+                        double angle = std::arg(data.voltage);
+                        switch(m_unit) {
+                            case UNIT_RADIAN: {
+                                SetText(wxString::FromDouble(angle, m_decimalPlaces) + " rad");
+                            } break;
+                            case UNIT_DEGREE: {
+                                SetText(wxString::FromDouble(wxRadToDeg(angle), m_decimalPlaces) + "°");
+                            } break;
+                        }
+                    } break;
+                    case DATA_SC_CURRENT: {
+                        double faultCurrent[3] = { std::abs(data.faultCurrent[0]), std::abs(data.faultCurrent[1]),
+                            std::abs(data.faultCurrent[2]) };
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                wxString str =
+                                    "Ia = " + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + " p.u.";
+                                str += "\nIb = " + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + " p.u.";
+                                str += "\nIc = " + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + " p.u.";
+                                SetText(str);
+                            } break;
+                        }
+                    }
                 }
             }
         } break;

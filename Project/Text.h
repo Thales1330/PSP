@@ -80,6 +80,8 @@ class Text : public Element
     
    protected:
     wxString m_text = _("Text");
+    std::vector<wxString> m_multlineText;
+    bool m_isMultlineText = false;
     int m_fontSize = 10;
 
     Element* m_element = NULL;
