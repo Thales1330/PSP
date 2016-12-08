@@ -174,6 +174,8 @@ void Text::UpdateText(double systemPowerBase)
                             case UNIT_kV: {
                                 SetText(wxString::FromDouble(voltage * baseVoltage / 1e3, m_decimalPlaces) + " kV");
                             } break;
+                            default:
+                                break;
                         }
                     } break;
                     case DATA_ANGLE: {
@@ -183,8 +185,10 @@ void Text::UpdateText(double systemPowerBase)
                                 SetText(wxString::FromDouble(angle, m_decimalPlaces) + " rad");
                             } break;
                             case UNIT_DEGREE: {
-                                SetText(wxString::FromDouble(wxRadToDeg(angle), m_decimalPlaces) + "°");
+                                SetText(wxString::FromDouble(wxRadToDeg(angle), m_decimalPlaces) + (wxString)L'\u00B0');
                             } break;
+                            default:
+                                break;
                         }
                     } break;
                     case DATA_SC_CURRENT: {
@@ -198,19 +202,448 @@ void Text::UpdateText(double systemPowerBase)
                                 str += "\nIc = " + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + " p.u.";
                                 SetText(str);
                             } break;
+                            case UNIT_A: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) + " A";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent, m_decimalPlaces) + " A";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent, m_decimalPlaces) + " A";
+                                SetText(str);
+                            } break;
+                            case UNIT_kA: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(faultCurrent[0] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                SetText(str);
+                            } break;
+                            default:
+                                break;
                         }
-                    }
+                    } break;
+                    case DATA_SC_VOLTAGE: {
+                        double faultVoltage[3] = { std::abs(data.faultVoltage[0]), std::abs(data.faultVoltage[1]),
+                            std::abs(data.faultVoltage[2]) };
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                wxString str =
+                                    "Va = " + wxString::FromDouble(faultVoltage[0], m_decimalPlaces) + " p.u.";
+                                str += "\nVb = " + wxString::FromDouble(faultVoltage[1], m_decimalPlaces) + " p.u.";
+                                str += "\nVc = " + wxString::FromDouble(faultVoltage[2], m_decimalPlaces) + " p.u.";
+                                SetText(str);
+                            } break;
+                            case UNIT_V: {
+                                wxString str = "Va = " +
+                                    wxString::FromDouble(faultVoltage[0] * baseVoltage, m_decimalPlaces) + " V";
+                                str += "\nVb = " +
+                                    wxString::FromDouble(faultVoltage[1] * baseVoltage, m_decimalPlaces) + " V";
+                                str += "\nVc = " +
+                                    wxString::FromDouble(faultVoltage[2] * baseVoltage, m_decimalPlaces) + " V";
+                                SetText(str);
+                            } break;
+                            case UNIT_kV: {
+                                wxString str = "Va = " +
+                                    wxString::FromDouble(faultVoltage[0] * baseVoltage / 1e3, m_decimalPlaces) + " kV";
+                                str += "\nVb = " +
+                                    wxString::FromDouble(faultVoltage[1] * baseVoltage / 1e3, m_decimalPlaces) + " kV";
+                                str += "\nVc = " +
+                                    wxString::FromDouble(faultVoltage[2] * baseVoltage / 1e3, m_decimalPlaces) + " kV";
+                                SetText(str);
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_SC_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(data.scPower, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_VA: {
+                                SetText(wxString::FromDouble(data.scPower * systemPowerBase, m_decimalPlaces) + " VA");
+                            } break;
+                            case UNIT_kVA: {
+                                SetText(wxString::FromDouble(data.scPower * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVA");
+                            } break;
+                            case UNIT_MVA: {
+                                SetText(wxString::FromDouble(data.scPower * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVA");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
                 }
             }
         } break;
         case TYPE_SYNC_GENERATOR: {
-
+            SyncGenerator* syncGenerator = (SyncGenerator*)m_element;
+            if(syncGenerator) {
+                SyncGeneratorElectricalData data = syncGenerator->GetPUElectricalData(systemPowerBase);
+                double baseVoltage = data.nominalVoltage;
+                if(data.nominalVoltageUnit == UNIT_kV) baseVoltage *= 1e3;
+                double baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_ACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(data.activePower, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_W: {
+                                SetText(
+                                    wxString::FromDouble(data.activePower * systemPowerBase, m_decimalPlaces) + " W");
+                            } break;
+                            case UNIT_kW: {
+                                SetText(
+                                    wxString::FromDouble(data.activePower * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kW");
+                            } break;
+                            case UNIT_MW: {
+                                SetText(
+                                    wxString::FromDouble(data.activePower * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MW");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_REACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(data.reactivePower, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_VAr: {
+                                SetText(wxString::FromDouble(data.reactivePower * systemPowerBase, m_decimalPlaces) +
+                                    " VAr");
+                            } break;
+                            case UNIT_kVAr: {
+                                SetText(
+                                    wxString::FromDouble(data.reactivePower * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            } break;
+                            case UNIT_MVAr: {
+                                SetText(
+                                    wxString::FromDouble(data.reactivePower * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_SC_CURRENT: {
+                        double faultCurrent[3] = { std::abs(data.faultCurrent[0]), std::abs(data.faultCurrent[1]),
+                            std::abs(data.faultCurrent[2]) };
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                wxString str =
+                                    "Ia = " + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + " p.u.";
+                                str += "\nIb = " + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + " p.u.";
+                                str += "\nIc = " + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + " p.u.";
+                                SetText(str);
+                            } break;
+                            case UNIT_A: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) + " A";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent, m_decimalPlaces) + " A";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent, m_decimalPlaces) + " A";
+                                SetText(str);
+                            } break;
+                            case UNIT_kA: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(faultCurrent[0] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                SetText(str);
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
         case TYPE_LINE: {
-
+            Line* line = (Line*)m_element;
+            if(line) {
+                LineElectricalData data = line->GetElectricalData();
+                double baseVoltage = data.nominalVoltage;
+                if(data.nominalVoltageUnit == UNIT_kV) baseVoltage *= 1e3;
+                double baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_PF_ACTIVE: {
+                        double activePF = std::real(data.powerFlow[m_direction]);
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(activePF, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_W: {
+                                SetText(wxString::FromDouble(activePF * systemPowerBase, m_decimalPlaces) + " W");
+                            } break;
+                            case UNIT_kW: {
+                                SetText(
+                                    wxString::FromDouble(activePF * systemPowerBase / 1e3, m_decimalPlaces) + " kW");
+                            } break;
+                            case UNIT_MW: {
+                                SetText(
+                                    wxString::FromDouble(activePF * systemPowerBase / 1e6, m_decimalPlaces) + " MW");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_PF_REACTIVE: {
+                        double reactivePF = std::imag(data.powerFlow[m_direction]);
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_VAr: {
+                                SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + " VAr");
+                            } break;
+                            case UNIT_kVAr: {
+                                SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            } break;
+                            case UNIT_MVAr: {
+                                SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_PF_LOSSES: {
+                        double losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(losses, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_W: {
+                                SetText(wxString::FromDouble(losses * systemPowerBase, m_decimalPlaces) + " W");
+                            } break;
+                            case UNIT_kW: {
+                                SetText(wxString::FromDouble(losses * systemPowerBase / 1e3, m_decimalPlaces) + " kW");
+                            } break;
+                            case UNIT_MW: {
+                                SetText(wxString::FromDouble(losses * systemPowerBase / 1e6, m_decimalPlaces) + " MW");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_PF_CURRENT: {
+                        double current = std::abs(data.current[m_direction]);
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(current, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_A: {
+                                SetText(wxString::FromDouble(current * baseCurrent, m_decimalPlaces) + " A");
+                            } break;
+                            case UNIT_kA: {
+                                SetText(wxString::FromDouble(current * baseCurrent / 1e3, m_decimalPlaces) + " kA");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_SC_CURRENT: {
+                        double faultCurrent[3] = { std::abs(data.faultCurrent[m_direction][0]),
+                            std::abs(data.faultCurrent[m_direction][1]), std::abs(data.faultCurrent[m_direction][2]) };
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                wxString str =
+                                    "Ia = " + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + " p.u.";
+                                str += "\nIb = " + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + " p.u.";
+                                str += "\nIc = " + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + " p.u.";
+                                SetText(str);
+                            } break;
+                            case UNIT_A: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) + " A";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent, m_decimalPlaces) + " A";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent, m_decimalPlaces) + " A";
+                                SetText(str);
+                            } break;
+                            case UNIT_kA: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(faultCurrent[0] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent / 1e3, m_decimalPlaces) + " kA";
+                                SetText(str);
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
         case TYPE_TRANSFORMER: {
+            Transformer* transformer = (Transformer*)m_element;
+            if(transformer) {
+                TransformerElectricalData data = transformer->GetElectricalData();
+                double baseVoltage[2] = { data.primaryNominalVoltage, data.secondaryNominalVoltage };
 
+                if(data.primaryNominalVoltageUnit == UNIT_kV) baseVoltage[0] *= 1e3;
+                if(data.secondaryNominalVoltageUnit == UNIT_kV) baseVoltage[1] *= 1e3;
+
+                double baseCurrent[2] = { systemPowerBase / (std::sqrt(3.0) * baseVoltage[0]),
+                    systemPowerBase / (std::sqrt(3.0) * baseVoltage[1]) };
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_PF_ACTIVE: {
+                        double activePF = std::real(data.powerFlow[m_direction]);
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(activePF, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_W: {
+                                SetText(wxString::FromDouble(activePF * systemPowerBase, m_decimalPlaces) + " W");
+                            } break;
+                            case UNIT_kW: {
+                                SetText(
+                                    wxString::FromDouble(activePF * systemPowerBase / 1e3, m_decimalPlaces) + " kW");
+                            } break;
+                            case UNIT_MW: {
+                                SetText(
+                                    wxString::FromDouble(activePF * systemPowerBase / 1e6, m_decimalPlaces) + " MW");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_PF_REACTIVE: {
+                        double reactivePF = std::imag(data.powerFlow[m_direction]);
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_VAr: {
+                                SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + " VAr");
+                            } break;
+                            case UNIT_kVAr: {
+                                SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            } break;
+                            case UNIT_MVAr: {
+                                SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_PF_LOSSES: {
+                        double losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(losses, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_W: {
+                                SetText(wxString::FromDouble(losses * systemPowerBase, m_decimalPlaces) + " W");
+                            } break;
+                            case UNIT_kW: {
+                                SetText(wxString::FromDouble(losses * systemPowerBase / 1e3, m_decimalPlaces) + " kW");
+                            } break;
+                            case UNIT_MW: {
+                                SetText(wxString::FromDouble(losses * systemPowerBase / 1e6, m_decimalPlaces) + " MW");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_PF_CURRENT: {
+                        double current = std::abs(data.current[m_direction]);
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(current, m_decimalPlaces) + " p.u.");
+                            } break;
+                            case UNIT_A: {
+                                SetText(
+                                    wxString::FromDouble(current * baseCurrent[m_direction], m_decimalPlaces) + " A");
+                            } break;
+                            case UNIT_kA: {
+                                SetText(
+                                    wxString::FromDouble(current * baseCurrent[m_direction] / 1e3, m_decimalPlaces) +
+                                    " kA");
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_SC_CURRENT: {
+                        double faultCurrent[3] = { std::abs(data.faultCurrent[m_direction][0]),
+                            std::abs(data.faultCurrent[m_direction][1]), std::abs(data.faultCurrent[m_direction][2]) };
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                wxString str =
+                                    "Ia = " + wxString::FromDouble(faultCurrent[0], m_decimalPlaces) + " p.u.";
+                                str += "\nIb = " + wxString::FromDouble(faultCurrent[1], m_decimalPlaces) + " p.u.";
+                                str += "\nIc = " + wxString::FromDouble(faultCurrent[2], m_decimalPlaces) + " p.u.";
+                                SetText(str);
+                            } break;
+                            case UNIT_A: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(faultCurrent[0] * baseCurrent[m_direction], m_decimalPlaces) +
+                                    " A";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent[m_direction], m_decimalPlaces) +
+                                    " A";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent[m_direction], m_decimalPlaces) +
+                                    " A";
+                                SetText(str);
+                            } break;
+                            case UNIT_kA: {
+                                wxString str = "Ia = " +
+                                    wxString::FromDouble(
+                                                   faultCurrent[0] * baseCurrent[m_direction] / 1e3, m_decimalPlaces) +
+                                    " kA";
+                                str += "\nIb = " +
+                                    wxString::FromDouble(
+                                           faultCurrent[1] * baseCurrent[m_direction] / 1e3, m_decimalPlaces) +
+                                    " kA";
+                                str += "\nIc = " +
+                                    wxString::FromDouble(
+                                           faultCurrent[2] * baseCurrent[m_direction] / 1e3, m_decimalPlaces) +
+                                    " kA";
+                                SetText(str);
+                            } break;
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
         case TYPE_LOAD: {
 

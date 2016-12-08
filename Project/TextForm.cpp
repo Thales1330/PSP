@@ -747,6 +747,9 @@ bool TextForm::LoadChoices()
             break;
     }
 
+    if(m_choiceTextFromBus->IsEnabled()) m_choiceTextFromBus->SetSelection(m_text->GetDirection());
+    if(m_choiceTextToBus->IsEnabled()) m_choiceTextToBus->SetSelection(m_text->GetDirection());
+
     m_textCtrlDecimal->SetValue(wxString::Format("%d", m_text->GetDecimalPlaces()));
     Preview();
 
@@ -1019,7 +1022,6 @@ void TextForm::DataTypeChoice()
                 m_choiceTextToBus->Append(bus1Name);
                 m_choiceTextFromBus->SetSelection(0);
                 m_choiceTextToBus->SetSelection(0);
-                m_text->SetDirection(0);
 
                 m_choiceTextFromBus->Enable();
                 m_choiceTextToBus->Enable();
@@ -1042,7 +1044,6 @@ void TextForm::DataTypeChoice()
                 m_choiceTextToBus->Append(bus1Name);
                 m_choiceTextFromBus->SetSelection(0);
                 m_choiceTextToBus->SetSelection(0);
-                m_text->SetDirection(0);
 
                 m_choiceTextFromBus->Enable();
                 m_choiceTextToBus->Enable();
@@ -1181,15 +1182,19 @@ bool TextForm::ValidateData()
     if(m_choiceElement->GetSelection() == -1) return false;
     if(m_choiceName->GetSelection() == -1) return false;
     if(m_choiceTextType->GetSelection() == -1) return false;
-    if(m_text->GetDataType() !=  DATA_NAME && m_choiceTextUnit->GetSelection() == -1) return false;
+    if(m_text->GetDataType() != DATA_NAME && m_choiceTextUnit->GetSelection() == -1) return false;
     if(m_text->GetElementType() == TYPE_LINE || m_text->GetElementType() == TYPE_TRANSFORMER) {
-        if(m_choiceTextFromBus->GetSelection() == -1) return false;
-        if(m_choiceTextToBus->GetSelection() == -1) return false;
+        if(m_text->GetDataType() != DATA_PF_LOSSES) {
+            if(m_choiceTextFromBus->GetSelection() == -1) return false;
+            if(m_choiceTextToBus->GetSelection() == -1) return false;
+        }
     }
-    
+
+    if(m_choiceTextFromBus->IsEnabled() && m_choiceTextToBus->IsEnabled())
+        m_text->SetDirection(m_choiceTextFromBus->GetSelection());
     double decimalPlaces = m_text->GetDecimalPlaces();
     if(m_textCtrlDecimal->GetValue().ToDouble(&decimalPlaces)) m_text->SetDecimalPlaces(decimalPlaces);
-    
+
     m_textToEdit->SetElementType(m_text->GetElementType());
     m_textToEdit->SetElementNumber(m_text->GetElementNumber());
     m_textToEdit->SetElement(m_text->GetElement());
@@ -1198,17 +1203,17 @@ bool TextForm::ValidateData()
     m_textToEdit->SetUnit(m_text->GetUnit());
     m_textToEdit->SetDecimalPlaces(decimalPlaces);
     m_textToEdit->UpdateText(m_systemPowerBase);
-    
+
     return true;
 }
 
 void TextForm::OnOKButtonClick(wxCommandEvent& event)
 {
-    if(ValidateData()){
+    if(ValidateData()) {
         EndModal(wxID_OK);
     } else {
         wxString errorMsg = _("There are blank fields.");
-        wxMessageDialog msgDialog(m_parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        wxMessageDialog msgDialog(this, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
 }

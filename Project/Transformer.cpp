@@ -1,8 +1,25 @@
 #include "TransformerForm.h"
 #include "Transformer.h"
 
-Transformer::Transformer() : Branch() {}
-Transformer::Transformer(wxString name) : Branch() { m_electricalData.name = name; }
+Transformer::Transformer()
+    : Branch()
+{
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < 3; j++) {
+            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
+        }
+    }
+}
+Transformer::Transformer(wxString name)
+    : Branch()
+{
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < 3; j++) {
+            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
+        }
+    }
+    m_electricalData.name = name;
+}
 Transformer::~Transformer() {}
 bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 {
@@ -12,10 +29,10 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             m_position = position;
             m_parentList.push_back(parent);
             wxPoint2DDouble parentPt =
-                parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-            parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
-            m_pointList.push_back(parentPt);                                    // First point
+                parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
+            parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
+            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+            m_pointList.push_back(parentPt);                                   // First point
             m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
 
             wxRect2DDouble genRect(0, 0, 0, 0);
@@ -27,9 +44,9 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
         else if(parent != m_parentList[0]) {
             m_parentList.push_back(parent);
             wxPoint2DDouble parentPt =
-                parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-            parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
+                parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
+            parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
+            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
 
             // Get the average between the two bus points.
             m_position =
@@ -53,7 +70,7 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             // Set the second switch point.
             m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_pointList[m_pointList.size() - 1]));
 
-            m_pointList.push_back(parentPt);  // Last point.
+            m_pointList.push_back(parentPt); // Last point.
             m_inserted = true;
 
             wxRect2DDouble genRect(0, 0, 0, 0);
@@ -88,10 +105,10 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
             glRotated(m_angle, 0.0, 0.0, 1.0);
             glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-            DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20,
-                       GL_POLYGON);
-            DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20,
-                       GL_POLYGON);
+            DrawCircle(
+                m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, GL_POLYGON);
+            DrawCircle(
+                m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, GL_POLYGON);
 
             glPopMatrix();
 
@@ -280,13 +297,10 @@ void Transformer::RotateNode(Element* parent, bool clockwise)
     if(!clockwise) rotAngle = -m_rotationAngle;
 
     if(parent == m_parentList[0]) {
-	    m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
-	}
-    else if(parent == m_parentList[1])
-	{
-	    m_pointList[m_pointList.size() - 1] =
-	        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], rotAngle);
-	}
+        m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
+    } else if(parent == m_parentList[1]) {
+        m_pointList[m_pointList.size() - 1] = parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], rotAngle);
+    }
     UpdateSwitchesPosition();
     UpdatePowerFlowArrowsPosition();
 }
@@ -297,64 +311,61 @@ bool Transformer::SetNodeParent(Element* parent)
     if(m_activeNodeID == 2 && parent == m_parentList[1]) return false;
 
     if(parent && m_activeNodeID != 0) {
-	    wxRect2DDouble nodeRect(0, 0, 0, 0);
-	    if(m_activeNodeID == 1) {
-		    nodeRect =
-		        wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-		                       10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
-		}
-	    if(m_activeNodeID == 2) {
-		    nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
-		                              m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
-		                              10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
-		}
+        wxRect2DDouble nodeRect(0, 0, 0, 0);
+        if(m_activeNodeID == 1) {
+            nodeRect = wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
+                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+        }
+        if(m_activeNodeID == 2) {
+            nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
+                m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
+                10 + 2.0 * m_borderSize);
+        }
 
-	    if(parent->Intersects(nodeRect)) {
-		    if(m_activeNodeID == 1) {
-			    // Check if the user is trying to connect the same bus.
-			    if(m_parentList[1] == parent) {
-				    m_activeNodeID = 0;
-				    return false;
-				}
+        if(parent->Intersects(nodeRect)) {
+            if(m_activeNodeID == 1) {
+                // Check if the user is trying to connect the same bus.
+                if(m_parentList[1] == parent) {
+                    m_activeNodeID = 0;
+                    return false;
+                }
 
-			    m_parentList[0] = parent;
+                m_parentList[0] = parent;
 
-			    // Centralize the node on bus.
-			    wxPoint2DDouble parentPt = parent->RotateAtPosition(
-			        m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
-			    parentPt.m_y = parent->GetPosition().m_y;  // Centralize on bus.
-			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
-			    m_pointList[0] = parentPt;
+                // Centralize the node on bus.
+                wxPoint2DDouble parentPt = parent->RotateAtPosition(
+                    m_pointList[0], -parent->GetAngle()); // Rotate click to horizontal position.
+                parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+                parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+                m_pointList[0] = parentPt;
 
-			    UpdateSwitchesPosition();
+                UpdateSwitchesPosition();
                 UpdatePowerFlowArrowsPosition();
-			    return true;
-			}
-		    if(m_activeNodeID == 2) {
-			    if(m_parentList[0] == parent) {
-				    m_activeNodeID = 0;
-				    return false;
-				}
+                return true;
+            }
+            if(m_activeNodeID == 2) {
+                if(m_parentList[0] == parent) {
+                    m_activeNodeID = 0;
+                    return false;
+                }
 
-			    m_parentList[1] = parent;
+                m_parentList[1] = parent;
 
-			    wxPoint2DDouble parentPt =
-			        parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], -parent->GetAngle());
-			    parentPt.m_y = parent->GetPosition().m_y;
-			    parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
-			    m_pointList[m_pointList.size() - 1] = parentPt;
+                wxPoint2DDouble parentPt =
+                    parent->RotateAtPosition(m_pointList[m_pointList.size() - 1], -parent->GetAngle());
+                parentPt.m_y = parent->GetPosition().m_y;
+                parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
+                m_pointList[m_pointList.size() - 1] = parentPt;
 
-			    UpdateSwitchesPosition();
+                UpdateSwitchesPosition();
                 UpdatePowerFlowArrowsPosition();
-			    return true;
-			}
-		}
-	    else
-		{
-		    if(m_activeNodeID == 1) m_parentList[0] = NULL;
-		    if(m_activeNodeID == 2) m_parentList[1] = NULL;
-		}
-	}
+                return true;
+            }
+        } else {
+            if(m_activeNodeID == 1) m_parentList[0] = NULL;
+            if(m_activeNodeID == 2) m_parentList[1] = NULL;
+        }
+    }
     return false;
 }
 

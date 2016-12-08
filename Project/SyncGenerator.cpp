@@ -127,3 +127,11 @@ SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowe
 	
 	return data;
 }
+
+void SyncGenerator::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
+{
+    if(nominalVoltage.size() > 0) {
+        m_electricalData.nominalVoltage = nominalVoltage[0];
+        m_electricalData.nominalVoltageUnit = nominalVoltageUnit[0];
+    }
+}

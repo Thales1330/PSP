@@ -28,6 +28,8 @@ struct LineElectricalData {
     double zeroResistance = 0.0;
     double zeroIndReactance = 1.0;
     double zeroCapSusceptance = 0.0;
+    // p.u. fault data
+    std::complex<double> faultCurrent[2][3];
 };
 
 class Line : public Branch
