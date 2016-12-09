@@ -646,19 +646,251 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_LOAD: {
-
+            Load* load = (Load*)m_element;
+            if(load) {
+                LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
+                std::complex<double> sPower(data.activePower, data.reactivePower);
+                if(data.loadType == CONST_IMPEDANCE && load->IsOnline()) {
+                    std::complex<double> v = ((Bus*)load->GetParentList()[0])->GetEletricalData().voltage;
+                    sPower = std::pow(std::abs(v), 2) * sPower;
+                }
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_ACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(sPower.real(), m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_W: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase, m_decimalPlaces) + " W");
+                            }
+                            case UNIT_kW: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kW");
+                            }
+                            case UNIT_MW: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MW");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_REACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(sPower.imag(), m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_VAr: {
+                                SetText(
+                                    wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) + " VAr");
+                            }
+                            case UNIT_kVAr: {
+                                SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            }
+                            case UNIT_MVAr: {
+                                SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
         case TYPE_SYNC_MOTOR: {
-
+            SyncMotor* syncMotor = (SyncMotor*)m_element;
+            if(syncMotor) {
+                SyncMotorElectricalData data = syncMotor->GetPUElectricalData(systemPowerBase);
+                std::complex<double> sPower(data.activePower, data.reactivePower);
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_ACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(sPower.real(), m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_W: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase, m_decimalPlaces) + " W");
+                            }
+                            case UNIT_kW: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kW");
+                            }
+                            case UNIT_MW: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MW");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_REACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(sPower.imag(), m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_VAr: {
+                                SetText(
+                                    wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) + " VAr");
+                            }
+                            case UNIT_kVAr: {
+                                SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            }
+                            case UNIT_MVAr: {
+                                SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
         case TYPE_IND_MOTOR: {
-
+            IndMotor* indMotor = (IndMotor*)m_element;
+            if(indMotor) {
+                IndMotorElectricalData data = indMotor->GetPUElectricalData(systemPowerBase);
+                std::complex<double> sPower(data.activePower, data.reactivePower);
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_ACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(sPower.real(), m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_W: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase, m_decimalPlaces) + " W");
+                            }
+                            case UNIT_kW: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kW");
+                            }
+                            case UNIT_MW: {
+                                SetText(wxString::FromDouble(sPower.real() * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MW");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    case DATA_REACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(sPower.imag(), m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_VAr: {
+                                SetText(
+                                    wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) + " VAr");
+                            }
+                            case UNIT_kVAr: {
+                                SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            }
+                            case UNIT_MVAr: {
+                                SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
         case TYPE_CAPACITOR: {
-
+            Capacitor* capacitor = (Capacitor*)m_element;
+            if(capacitor) {
+                CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
+                double reativePower = -data.reactivePower;
+                if(capacitor->IsOnline()) {
+                    std::complex<double> v = ((Bus*)capacitor->GetParentList()[0])->GetEletricalData().voltage;
+                    reativePower *= std::pow(std::abs(v), 2);
+                }
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_REACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_VAr: {
+                                SetText(
+                                    wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
+                            }
+                            case UNIT_kVAr: {
+                                SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            }
+                            case UNIT_MVAr: {
+                                SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
         case TYPE_INDUCTOR: {
-
+            Inductor* inductor = (Inductor*)m_element;
+            if(inductor) {
+                InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
+                double reativePower = data.reactivePower;
+                if(inductor->IsOnline()) {
+                    std::complex<double> v = ((Bus*)inductor->GetParentList()[0])->GetEletricalData().voltage;
+                    reativePower *= std::pow(std::abs(v), 2);
+                }
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
+                    } break;
+                    case DATA_REACTIVE_POWER: {
+                        switch(m_unit) {
+                            case UNIT_PU: {
+                                SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + " p.u.");
+                            }
+                            case UNIT_VAr: {
+                                SetText(
+                                    wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
+                            }
+                            case UNIT_kVAr: {
+                                SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +
+                                    " kVAr");
+                            }
+                            case UNIT_MVAr: {
+                                SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e6, m_decimalPlaces) +
+                                    " MVAr");
+                            }
+                            default:
+                                break;
+                        }
+                    } break;
+                    default:
+                        break;
+                }
+            }
         } break;
     }
 }

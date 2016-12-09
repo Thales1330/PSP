@@ -162,10 +162,10 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
                     m_text->SetDataType(DATA_NAME);
                 } break;
                 case 1: {
-                    m_text->SetDataType(DATA_PF_ACTIVE);
+                    m_text->SetDataType(DATA_ACTIVE_POWER);
                 } break;
                 case 2: {
-                    m_text->SetDataType(DATA_PF_REACTIVE);
+                    m_text->SetDataType(DATA_REACTIVE_POWER);
                 } break;
             }
         } break;
@@ -176,7 +176,7 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
                     m_text->SetDataType(DATA_NAME);
                 } break;
                 case 1: {
-                    m_text->SetDataType(DATA_PF_REACTIVE);
+                    m_text->SetDataType(DATA_REACTIVE_POWER);
                 } break;
             }
         } break;
@@ -562,7 +562,7 @@ bool TextForm::LoadChoices()
                 case DATA_NAME: {
                     m_choiceTextType->SetSelection(0);
                 } break;
-                case DATA_PF_ACTIVE: {
+                case DATA_ACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
                         case UNIT_PU: {
@@ -581,7 +581,7 @@ bool TextForm::LoadChoices()
                             break;
                     }
                 } break;
-                case DATA_PF_REACTIVE: {
+                case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
                         case UNIT_PU: {
@@ -610,7 +610,7 @@ bool TextForm::LoadChoices()
                 case DATA_NAME: {
                     m_choiceTextType->SetSelection(0);
                 } break;
-                case DATA_PF_REACTIVE: {
+                case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
 
                 } break;
@@ -624,7 +624,7 @@ bool TextForm::LoadChoices()
                 case DATA_NAME: {
                     m_choiceTextType->SetSelection(0);
                 } break;
-                case DATA_PF_REACTIVE: {
+                case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
                         case UNIT_PU: {
@@ -653,7 +653,7 @@ bool TextForm::LoadChoices()
                 case DATA_NAME: {
                     m_choiceTextType->SetSelection(0);
                 } break;
-                case DATA_PF_ACTIVE: {
+                case DATA_ACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
                         case UNIT_PU: {
@@ -672,7 +672,7 @@ bool TextForm::LoadChoices()
                             break;
                     }
                 } break;
-                case DATA_PF_REACTIVE: {
+                case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
                         case UNIT_PU: {
@@ -701,7 +701,7 @@ bool TextForm::LoadChoices()
                 case DATA_NAME: {
                     m_choiceTextType->SetSelection(0);
                 } break;
-                case DATA_PF_ACTIVE: {
+                case DATA_ACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
                         case UNIT_PU: {
@@ -720,7 +720,7 @@ bool TextForm::LoadChoices()
                             break;
                     }
                 } break;
-                case DATA_PF_REACTIVE: {
+                case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
                         case UNIT_PU: {

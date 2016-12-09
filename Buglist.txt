@@ -2,12 +2,14 @@ BUG LIST [pt-br]
 
 PRIORIDADE 1:
 
+
 PRIORIDADE 2:
 -> Número do nome do transformador preenchido errado;
 -> Potência reativa não está sendo distribuída apropriadamente em barras de tensão controlada caso tenha mais de uma máquina síncrona (com valores de reativos máximos/mínimos acionados);
 -> Dados de elementos desconectados/offline não estão sendo zerados/reiniciados;
 -> É necessário perguntar ao usuário se ele deseja trocar a tensão de todo o trecho conectado por linhas (quando é trocada a tensão de uma barra);
--> Setas de fluxo de carga de linhas e transformadores não são atualizadas quando uma barra conectada é removida.
+-> Setas de fluxo de carga de linhas e transformadores não são atualizadas quando uma barra conectada é removida;
+-> Setas do  fluxo de carga das máquinas elétricas não são atualizadas quando a barra conectada é rotacionada.
 
 TODO LIST:
 -> Implementar dados em relação à base de potência do elemento (e não somente do sistema).
