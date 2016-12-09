@@ -11,7 +11,7 @@ struct BusElectricalData {
     ElectricalUnit nominalVoltageUnit = UNIT_kV;
     bool isVoltageControlled = false;
     double controlledVoltage = 1.0;
-    int controlledVoltageUnitChoice = 0;  // 0 = p.u., 1 = same as nominalVoltageUnit (UNIT_V or UNIT_kV).
+    int controlledVoltageUnitChoice = 0; // 0 = p.u., 1 = same as nominalVoltageUnit (UNIT_V or UNIT_kV).
     bool slackBus = false;
 
     // Power flow (p.u.)
@@ -21,8 +21,14 @@ struct BusElectricalData {
     bool hasFault = false;
     FaultData faultType = FAULT_THREEPHASE;
     FaultData faultLocation = FAULT_LINE_A;
+    // p.u. fault data
     double faultResistance = 0.0;
     double faultReactance = 0.0;
+    std::complex<double> faultCurrent[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
+        std::complex<double>(0.0, 0.0) };
+    std::complex<double> faultVoltage[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
+        std::complex<double>(0.0, 0.0) };
+    double scPower = 0.0;
 
     // Stability
     bool plotBus = false;
@@ -35,7 +41,7 @@ struct BusElectricalData {
 
 class Bus : public Element
 {
-   public:
+public:
     Bus();
     Bus(wxPoint2DDouble position);
     Bus(wxPoint2DDouble position, wxString name);
@@ -53,8 +59,8 @@ class Bus : public Element
     virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
 
-   protected:
+protected:
     BusElectricalData m_electricalData;
 };
 
-#endif  // BUS_H
+#endif // BUS_H

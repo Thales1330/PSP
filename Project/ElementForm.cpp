@@ -2623,7 +2623,6 @@ TextFormBase::TextFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     m_choiceElementArr.Add(wxT("Synchronous compensator"));
     m_choiceElementArr.Add(wxT("Induction motor"));
     m_choiceElement = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceElementArr, 0);
-    m_choiceElement->SetSelection(0);
     
     boxSizerLvl4_1->Add(m_choiceElement, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
@@ -2766,6 +2765,7 @@ TextFormBase::TextFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     m_choiceTextType->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnTypeChoiceSelected), NULL, this);
     m_choiceTextFromBus->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnFromBusChoiceSelected), NULL, this);
     m_choiceTextToBus->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnToBusChoiceSelected), NULL, this);
+    m_choiceTextUnit->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnUnitChoiceSelected), NULL, this);
     m_textCtrlDecimal->Connect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(TextFormBase::OnTextEnter), NULL, this);
     m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnOKButtonClick), NULL, this);
     m_ButtonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnCancelButtonClick), NULL, this);
@@ -2779,6 +2779,7 @@ TextFormBase::~TextFormBase()
     m_choiceTextType->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnTypeChoiceSelected), NULL, this);
     m_choiceTextFromBus->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnFromBusChoiceSelected), NULL, this);
     m_choiceTextToBus->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnToBusChoiceSelected), NULL, this);
+    m_choiceTextUnit->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(TextFormBase::OnUnitChoiceSelected), NULL, this);
     m_textCtrlDecimal->Disconnect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(TextFormBase::OnTextEnter), NULL, this);
     m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnOKButtonClick), NULL, this);
     m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(TextFormBase::OnCancelButtonClick), NULL, this);

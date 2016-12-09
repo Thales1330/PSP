@@ -117,7 +117,7 @@ void TransformerForm::OnStabilityButtonClick(wxCommandEvent& event)
 
 bool TransformerForm::ValidateData()
 {
-    TransformerElectricalData data;
+    TransformerElectricalData data = m_transformer->GetElectricalData();
 
     data.name = m_textCtrlName->GetValue();
     data.baseVoltage = m_choiceBaseVoltage->GetSelection();

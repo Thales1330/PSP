@@ -1,0 +1,25 @@
+BUG LIST [pt-br]
+
+PRIORIDADE 1:
+
+
+PRIORIDADE 2:
+-> Número do nome do transformador preenchido errado;
+-> Potência reativa não está sendo distribuída apropriadamente em barras de tensão controlada caso tenha mais de uma máquina síncrona (com valores de reativos máximos/mínimos acionados);
+-> Dados de elementos desconectados/offline não estão sendo zerados/reiniciados;
+-> É necessário perguntar ao usuário se ele deseja trocar a tensão de todo o trecho conectado por linhas (quando é trocada a tensão de uma barra);
+-> Setas de fluxo de carga de linhas e transformadores não são atualizadas quando uma barra conectada é removida;
+-> Setas do  fluxo de carga das máquinas elétricas não são atualizadas quando a barra conectada é rotacionada.
+
+TODO LIST:
+-> Implementar dados em relação à base de potência do elemento (e não somente do sistema).
+-> Implementar fluxo de carga pelo método numérico de Newton-Raphson;
+-> Textos vetorizados ou aumentar/diminuir a resolução das texturas de acordo com o zoom;
+-> Separar sistemas não conectados e resolvê-los separadamente (criar lista de barras de oscilação prioritárias).
+
+OBJETIVOS:
+-> Criar uma GUI amigável (wip);
+-> Cálculo de fluxo de carga (OK);
+-> Cálculo de faltas (curto simétrico e assimétrico / abertura de linhas);
+-> Criar GUI para definir controles genéricos;
+-> Cálculo eletromecânico.
