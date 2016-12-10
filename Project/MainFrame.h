@@ -3,12 +3,14 @@
 
 #include <wx/menu.h>
 #include <wx/msgdlg.h>
+#include <wx/filedlg.h>
 
 #include "MainFrameBase.h"
 
 class MainFrameBase;
 class wxRibbonMetroArtProvider;
 class Workspace;
+class FileHanding;
 
 enum
 {

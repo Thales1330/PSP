@@ -10,9 +10,14 @@
 #include "Load.h"
 #include "Inductor.h"
 #include "Capacitor.h"
+#include "FileHanding.h"
 
-MainFrame::MainFrame() : MainFrameBase(NULL) {}
-MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
+MainFrame::MainFrame()
+    : MainFrameBase(NULL)
+{
+}
+MainFrame::MainFrame(wxWindow* parent, wxLocale* locale)
+    : MainFrameBase(parent)
 {
     m_locale = locale;
 
@@ -22,8 +27,8 @@ MainFrame::~MainFrame()
 {
     // if(m_artMetro) delete m_artMetro;
     if(m_addElementsMenu) {
-        m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick),
-                                      NULL, this);
+        m_addElementsMenu->Disconnect(
+            wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
         delete m_addElementsMenu;
     }
 }
@@ -81,21 +86,20 @@ void MainFrame::CreateAddElementsMenu()
     // busElement->SetBitmap(wxArtProvider::GetBitmap(wxART_WARNING));
     wxMenuItem* lineElement =
         new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LINE, _("&Line\tL"), _("Adds a power line at the circuit"));
-    wxMenuItem* transformerElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TRANSFORMER, _("&Transformer\tT"),
-                                                    _("Adds a transformer at the circuit"));
-    wxMenuItem* generatorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_GENERATOR, _("&Generator\tG"),
-                                                  _("Adds a generator at the circuit"));
-    wxMenuItem* indMotorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDMOTOR, _("&Induction motor\tI"),
-                                                 _("Adds an induction motor at the circuit"));
-    wxMenuItem* syncCompElement =
-        new wxMenuItem(m_addElementsMenu, ID_ADDMENU_SYNCCOMP, _("&Synchronous compensator \tK"),
-                       _("Adds an induction motor at the circuit"));
+    wxMenuItem* transformerElement = new wxMenuItem(
+        m_addElementsMenu, ID_ADDMENU_TRANSFORMER, _("&Transformer\tT"), _("Adds a transformer at the circuit"));
+    wxMenuItem* generatorElement = new wxMenuItem(
+        m_addElementsMenu, ID_ADDMENU_GENERATOR, _("&Generator\tG"), _("Adds a generator at the circuit"));
+    wxMenuItem* indMotorElement = new wxMenuItem(
+        m_addElementsMenu, ID_ADDMENU_INDMOTOR, _("&Induction motor\tI"), _("Adds an induction motor at the circuit"));
+    wxMenuItem* syncCompElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_SYNCCOMP,
+        _("&Synchronous compensator \tK"), _("Adds an induction motor at the circuit"));
     wxMenuItem* loadElement =
         new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LOAD, _("&Load\tShift-L"), _("Adds a load at the circuit"));
-    wxMenuItem* capacitorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_CAPACITOR, _("&Capacitor\tShift-C"),
-                                                  _("Adds a shunt capacitor at the circuit"));
-    wxMenuItem* inductorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"),
-                                                 _("Adds a shunt inductor at the circuit"));
+    wxMenuItem* capacitorElement = new wxMenuItem(
+        m_addElementsMenu, ID_ADDMENU_CAPACITOR, _("&Capacitor\tShift-C"), _("Adds a shunt capacitor at the circuit"));
+    wxMenuItem* inductorElement = new wxMenuItem(
+        m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"), _("Adds a shunt inductor at the circuit"));
 
     m_addElementsMenu->Append(busElement);
     m_addElementsMenu->Append(lineElement);
@@ -107,8 +111,8 @@ void MainFrame::CreateAddElementsMenu()
     m_addElementsMenu->Append(capacitorElement);
     m_addElementsMenu->Append(inductorElement);
 
-    m_addElementsMenu->Connect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL,
-                               this);
+    m_addElementsMenu->Connect(
+        wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
 }
 
 void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
@@ -204,8 +208,46 @@ void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnSCPowerClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnSaveAsClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnSaveClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnSaveAsClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        FileHanding fileHandling(workspace);
+
+        wxFileDialog saveFileDialog(
+            this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+        if(saveFileDialog.ShowModal() == wxID_CANCEL) return;
+
+        fileHandling.SaveProject(saveFileDialog.GetPath());
+        wxFileName fileName(saveFileDialog.GetPath());
+        workspace->SetName(fileName.GetName());
+        m_auiNotebook->SetPageText(m_auiNotebook->GetPageIndex(workspace), workspace->GetName());
+        workspace->SetSavedPath(fileName);
+    }
+}
+
+void MainFrame::OnSaveClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    if(workspace) {
+        FileHanding fileHandling(workspace);
+
+        if(workspace->GetSavedPath().IsOk()) {
+            fileHandling.SaveProject(workspace->GetSavedPath());
+        } else {
+            wxFileDialog saveFileDialog(
+                this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+            if(saveFileDialog.ShowModal() == wxID_CANCEL) return;
+
+            fileHandling.SaveProject(saveFileDialog.GetPath());
+            wxFileName fileName(saveFileDialog.GetPath());
+            workspace->SetName(fileName.GetName());
+            m_auiNotebook->SetPageText(m_auiNotebook->GetPageIndex(workspace), workspace->GetName());
+            workspace->SetSavedPath(fileName);
+        }
+    }
+}
+
 void MainFrame::OnSnapshotClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnUndoClick(wxRibbonButtonBarEvent& event) {}
@@ -221,8 +263,8 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 
             switch(event.GetId()) {
                 case ID_ADDMENU_BUS: {
-                    Bus* newBus = new Bus(wxPoint2DDouble(0, 0),
-                                          wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
+                    Bus* newBus = new Bus(
+                        wxPoint2DDouble(0, 0), wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
                     workspace->IncrementElementNumber(ID_BUS);
                     elementList.push_back(newBus);
                     statusBarText = _("Insert Bus: Click to insert, ESC to cancel.");
@@ -244,8 +286,8 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                     newElement = true;
                 } break;
                 case ID_ADDMENU_GENERATOR: {
-                    SyncGenerator* newGenerator =
-                        new SyncGenerator(wxString::Format(_("Generator %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
+                    SyncGenerator* newGenerator = new SyncGenerator(
+                        wxString::Format(_("Generator %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
                     workspace->IncrementElementNumber(ID_SYNCGENERATOR);
                     elementList.push_back(newGenerator);
                     statusBarText = _("Insert Generator: Click on a buses, ESC to cancel.");
@@ -259,28 +301,32 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                     newElement = true;
                 } break;
                 case ID_ADDMENU_CAPACITOR: {
-                    Capacitor* newCapacitor = new Capacitor(wxString::Format(_("Capacitor %d"), workspace->GetElementNumber(ID_CAPACITOR)));
+                    Capacitor* newCapacitor =
+                        new Capacitor(wxString::Format(_("Capacitor %d"), workspace->GetElementNumber(ID_CAPACITOR)));
                     workspace->IncrementElementNumber(ID_CAPACITOR);
                     elementList.push_back(newCapacitor);
                     statusBarText = _("Insert Capacitor: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
                 case ID_ADDMENU_INDUCTOR: {
-                    Inductor* newInductor = new Inductor(wxString::Format(_("Inductor %d"), workspace->GetElementNumber(ID_INDUCTOR)));
+                    Inductor* newInductor =
+                        new Inductor(wxString::Format(_("Inductor %d"), workspace->GetElementNumber(ID_INDUCTOR)));
                     workspace->IncrementElementNumber(ID_INDUCTOR);
                     elementList.push_back(newInductor);
                     statusBarText = _("Insert Inductor: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
                 case ID_ADDMENU_INDMOTOR: {
-                    IndMotor* newIndMotor = new IndMotor(wxString::Format(_("Induction motor %d"), workspace->GetElementNumber(ID_INDMOTOR)));
+                    IndMotor* newIndMotor = new IndMotor(
+                        wxString::Format(_("Induction motor %d"), workspace->GetElementNumber(ID_INDMOTOR)));
                     workspace->IncrementElementNumber(ID_INDMOTOR);
                     elementList.push_back(newIndMotor);
                     statusBarText = _("Insert Induction Motor: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
                 case ID_ADDMENU_SYNCCOMP: {
-                    SyncMotor* newSyncCondenser = new SyncMotor(wxString::Format(_("Synchronous condenser %d"), workspace->GetElementNumber(ID_SYNCMOTOR)));
+                    SyncMotor* newSyncCondenser = new SyncMotor(
+                        wxString::Format(_("Synchronous condenser %d"), workspace->GetElementNumber(ID_SYNCMOTOR)));
                     workspace->IncrementElementNumber(ID_SYNCMOTOR);
                     elementList.push_back(newSyncCondenser);
                     statusBarText = _("Insert Synchronous Condenser: Click on a buses, ESC to cancel.");

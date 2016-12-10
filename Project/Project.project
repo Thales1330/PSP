@@ -49,6 +49,7 @@
         <File Name="SyncMachineForm.cpp"/>
         <File Name="TextForm.cpp"/>
       </VirtualDirectory>
+      <File Name="FileHanding.cpp"/>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
@@ -74,6 +75,12 @@
         <File Name="PowerFlow.h"/>
       </VirtualDirectory>
       <File Name="Text.h"/>
+      <VirtualDirectory Name="rapidXML">
+        <File Name="rapidXML/rapidxml.hpp"/>
+        <File Name="rapidXML/rapidxml_iterators.hpp"/>
+        <File Name="rapidXML/rapidxml_print.hpp"/>
+        <File Name="rapidXML/rapidxml_utils.hpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
@@ -94,6 +101,7 @@
         <File Name="SyncMachineForm.h"/>
         <File Name="TextForm.h"/>
       </VirtualDirectory>
+      <File Name="FileHanding.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">

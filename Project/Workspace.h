@@ -12,7 +12,7 @@
 
 class Camera;
 class Element;
-//class Bus;
+// class Bus;
 class Line;
 class Transformer;
 class SyncGenerator;
@@ -26,69 +26,71 @@ class Text;
 
 class PowerFlow;
 
-enum WorkspaceMode
-{
+enum WorkspaceMode {
     MODE_EDIT = 0,
     MODE_MOVE_ELEMENT,
     MODE_MOVE_PICKBOX,
-	MODE_MOVE_NODE,
+    MODE_MOVE_NODE,
     MODE_DRAG,
-	MODE_DRAG_INSERT,
+    MODE_DRAG_INSERT,
     MODE_DRAG_INSERT_TEXT,
     MODE_INSERT,
     MODE_INSERT_TEXT,
     MODE_SELECTION_RECT
 };
 
-enum ElementID
-{
-	ID_BUS = 0,
-	ID_LINE,
-	ID_TRANSFORMER,
-	ID_SYNCGENERATOR,
-	ID_INDMOTOR,
-	ID_SYNCMOTOR,
-	ID_LOAD,
-	ID_CAPACITOR,
-	ID_INDUCTOR,
-	ID_TEXT,
-	
-	NUM_ELEMENTS
+enum ElementID {
+    ID_BUS = 0,
+    ID_LINE,
+    ID_TRANSFORMER,
+    ID_SYNCGENERATOR,
+    ID_INDMOTOR,
+    ID_SYNCMOTOR,
+    ID_LOAD,
+    ID_CAPACITOR,
+    ID_INDUCTOR,
+    ID_TEXT,
+
+    NUM_ELEMENTS
 };
 
 class Workspace : public WorkspaceBase
 {
-   public:
+public:
     Workspace();
     Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL);
     ~Workspace();
 
     wxString GetName() const { return m_name; }
     std::vector<Element*> GetElementList() const { return m_elementList; }
-	WorkspaceMode GetWorkspaceMode() const { return m_mode; }
-	Camera* GetCamera() const { return m_camera; }
-	
-	void SetName(wxString name) { m_name = name; }
-	void SetElementList(std::vector<Element*> elementList) { m_elementList = elementList; }
-	void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
-	void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
-	
-	void Redraw() { m_glCanvas->Refresh(); }
-	void RotateSelectedElements(bool clockwise = true);
-	void DeleteSelectedElements();
-	void Fit();
-	
-	void ValidateBusesVoltages(Element* initialBus);
-	void ValidateElementsVoltages();
+    std::vector<Text*> GetTextList() const { return m_textList; }
+    WorkspaceMode GetWorkspaceMode() const { return m_mode; }
+    Camera* GetCamera() const { return m_camera; }
     
+    wxFileName GetSavedPath() const { return m_savedPath; }
+
+    void SetName(wxString name) { m_name = name; }
+    void SetElementList(std::vector<Element*> elementList) { m_elementList = elementList; }
+    void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
+    void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
+    void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
+
+    void Redraw() { m_glCanvas->Refresh(); }
+    void RotateSelectedElements(bool clockwise = true);
+    void DeleteSelectedElements();
+    void Fit();
+
+    void ValidateBusesVoltages(Element* initialBus);
+    void ValidateElementsVoltages();
+
     void UpdateTextElements();
-	
-	int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
-	void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
-    
+
+    int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
+    void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
+
     bool RunPowerFlow();
 
-   protected:
+protected:
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
     virtual void OnRightClickDown(wxMouseEvent& event);
     virtual void OnLeftClickUp(wxMouseEvent& event);
@@ -102,6 +104,7 @@ class Workspace : public WorkspaceBase
     virtual void OnPopupClick(wxCommandEvent& event);
 
     void SetViewport();
+    void UpdateStatusBar();
 
     wxGLContext* m_glContext;
     wxStatusBar* m_statusBar;
@@ -111,25 +114,25 @@ class Workspace : public WorkspaceBase
     WorkspaceMode m_mode = MODE_EDIT;
 
     std::vector<Element*> m_elementList;
-	int m_elementNumber[NUM_ELEMENTS];
-    
+    int m_elementNumber[NUM_ELEMENTS];
+
     std::vector<Text*> m_textList;
+    
+    wxFileName m_savedPath;
 
-    void UpdateStatusBar();
-
-   private:
+private:
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
 };
 
 class Camera
 {
-   public:
+public:
     Camera();
     ~Camera();
 
     void SetScale(wxPoint2DDouble screenPoint, double delta);
-	void SetScale(double scale) { m_scale = scale; }
+    void SetScale(double scale) { m_scale = scale; }
     void SetTranslation(wxPoint2DDouble screenPoint);
     void StartTranslation(wxPoint2DDouble startPoint) { this->m_translationStartPt = startPoint; }
     void UpdateMousePosition(wxPoint2DDouble mousePosition) { this->m_mousePosition = mousePosition; }
@@ -137,18 +140,18 @@ class Camera
     wxPoint2DDouble GetTranslation() const { return m_translation; }
     wxPoint2DDouble GetMousePosition(bool worldCoords = true) const;
     wxPoint2DDouble ScreenToWorld(wxPoint2DDouble screenCoords) const;
-	double GetZoomMin() const { return m_zoomMin; }
-	double GetZoomMax() const { return m_zoomMax; }
+    double GetZoomMin() const { return m_zoomMin; }
+    double GetZoomMax() const { return m_zoomMax; }
 
-   protected:
+protected:
     wxPoint2DDouble m_translation;
     wxPoint2DDouble m_translationStartPt;
     double m_scale;
 
     wxPoint2DDouble m_mousePosition;
-	
-	double m_zoomMin = 0.05;
-	double m_zoomMax = 3.0;
+
+    double m_zoomMin = 0.05;
+    double m_zoomMax = 3.0;
 };
 
-#endif  // WORKSPACE_H
+#endif // WORKSPACE_H
