@@ -36,6 +36,9 @@ protected:
     void SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, wxString value);
     void SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, int value);
     void SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, double value);
+    void SetNodeAttribute(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, const char* atrName, wxString value);
+    void SetNodeAttribute(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, const char* atrName, int value);
+    void SetNodeAttribute(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, const char* atrName, double value);
 };
 
 #endif // FILEHANDING_H

@@ -108,6 +108,8 @@ public:
     double GetAngle() const { return m_angle; }
     bool IsPickboxShown() const { return m_showPickbox; }
     bool IsOnline() const { return m_online; }
+    virtual std::vector<wxPoint2DDouble> GetPointList() const { return m_pointList; }
+    
     // Pure-virtuals methods
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
