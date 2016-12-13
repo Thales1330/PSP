@@ -106,6 +106,7 @@ public:
     bool IsSelected() const { return m_selected; }
     double GetWidth() const { return m_width; }
     double GetAngle() const { return m_angle; }
+    double GetRotationAngle() const { return m_rotationAngle; }
     bool IsPickboxShown() const { return m_showPickbox; }
     bool IsOnline() const { return m_online; }
     virtual std::vector<wxPoint2DDouble> GetPointList() const { return m_pointList; }

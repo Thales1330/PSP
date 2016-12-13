@@ -24,7 +24,7 @@ public:
     void SetWorkspace(Workspace* workspace) { m_workspace = workspace; }
 
     void SaveProject(wxFileName path);
-    void OpenProject(wxFileName path);
+    bool OpenProject(wxFileName path);
 
 protected:
     Workspace* m_workspace;
@@ -39,6 +39,9 @@ protected:
     void SetNodeAttribute(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, const char* atrName, wxString value);
     void SetNodeAttribute(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, const char* atrName, int value);
     void SetNodeAttribute(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, const char* atrName, double value);
+    double GetNodeValueDouble(rapidxml::xml_node<>* parent, const char* nodeName);
+    int GetNodeValueInt(rapidxml::xml_node<>* parent, const char* nodeName);
+    int GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* nodeName, const char* atrName);
 };
 
 #endif // FILEHANDING_H

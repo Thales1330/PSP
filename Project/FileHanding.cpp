@@ -121,6 +121,11 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, height, capacitor->GetHeight());
         auto angle = AppendNode(doc, cadProp, "Angle");
         SetNodeValue(doc, angle, capacitor->GetAngle());
+        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = AppendNode(doc, nodePos, "X");
+        SetNodeValue(doc, nodePosX, capacitor->GetPointList()[0].m_x);
+        auto nodePosY = AppendNode(doc, nodePos, "Y");
+        SetNodeValue(doc, nodePosY, capacitor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         Bus* parent = (Bus*)capacitor->GetParentList()[0];
         if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
@@ -167,6 +172,11 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, height, indMotor->GetHeight());
         auto angle = AppendNode(doc, cadProp, "Angle");
         SetNodeValue(doc, angle, indMotor->GetAngle());
+        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = AppendNode(doc, nodePos, "X");
+        SetNodeValue(doc, nodePosX, indMotor->GetPointList()[0].m_x);
+        auto nodePosY = AppendNode(doc, nodePos, "Y");
+        SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         SetNodeValue(doc, parentID, ((Bus*)indMotor->GetParentList()[0])->GetEletricalData().number);
 
@@ -720,7 +730,7 @@ void FileHanding::SaveProject(wxFileName path)
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     } //}
-    
+
     //{ Text
     auto textsNode = AppendNode(doc, elementsNode, "TextList");
     auto textList = m_workspace->GetTextList();
@@ -762,7 +772,137 @@ void FileHanding::SaveProject(wxFileName path)
     writeXML.close();
 }
 
-void FileHanding::OpenProject(wxFileName path) {}
+bool FileHanding::OpenProject(wxFileName path)
+{
+    rapidxml::xml_document<> doc;
+    rapidxml::file<> xmlFile(path.GetFullPath());
+
+    doc.parse<0>(xmlFile.data());
+
+    auto projectNode = doc.first_node("Project");
+    if(!projectNode) return false;
+    auto nameNode = projectNode->first_node("Name");
+    if(!nameNode) return false;
+    m_workspace->SetName(nameNode->value());
+
+    // Open elements
+    auto elementsNode = projectNode->first_node("Elements");
+    if(!elementsNode) return false;
+    std::vector<Element*> elementList;
+    std::vector<Bus*> busList; // To fill parents.
+
+    //{ Bus
+    auto busListNode = elementsNode->first_node("BusList");
+    if(!busListNode) return false;
+    auto busNode = busListNode->first_node("Bus");
+    while(busNode) {
+        auto cadPropNode = busNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        Bus* bus = new Bus(wxPoint2DDouble(posX, posY));
+
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        bus->SetWidth(width);
+        bus->SetHeight(height);
+        bus->SetPosition(bus->GetPosition()); // Update bus rectangle.
+        int numRot = angle / bus->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) bus->Rotate(clockwise);
+
+        BusElectricalData data = bus->GetEletricalData();
+        auto electricalProp = busNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        data.name = electricalProp->first_node("Name")->value();
+        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
+        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        data.isVoltageControlled = GetNodeValueInt(electricalProp, "IsVoltageControlled");
+        data.controlledVoltage = GetNodeValueDouble(electricalProp, "ControlledVoltage");
+        data.controlledVoltageUnitChoice = GetAttributeValueInt(electricalProp, "ControlledVoltage", "Choice");
+        data.slackBus = GetNodeValueInt(electricalProp, "SlackBus");
+        auto fault = electricalProp->first_node("Fault");
+        data.hasFault = GetNodeValueInt(fault, "HasFault");
+        data.faultType = (FaultData)GetNodeValueInt(fault, "Type");
+        data.faultLocation = (FaultData)GetNodeValueInt(fault, "Location");
+        data.faultResistance = GetNodeValueDouble(fault, "Resistance");
+        data.faultReactance = GetNodeValueDouble(fault, "Reactance");
+        auto stability = electricalProp->first_node("Stability");
+        data.plotBus = GetNodeValueInt(stability, "Plot");
+        data.stabHasFault = GetNodeValueInt(stability, "HasFault");
+        data.stabFaultTime = GetNodeValueDouble(stability, "FaultTime");
+        data.stabFaultLength = GetNodeValueDouble(stability, "FaultLength");
+        data.stabFaultResistance = GetNodeValueDouble(stability, "FaultResistance");
+        data.stabFaultReactance = GetNodeValueDouble(stability, "FaultReactance");
+
+        bus->SetElectricalData(data);
+        elementList.push_back(bus);
+        busList.push_back(bus);
+        busNode = busNode->next_sibling("Bus");
+    } //}
+    
+    //{ Capacitor
+    auto capacitorListNode = elementsNode->first_node("CapacitorList");
+    if(!capacitorListNode) return false;
+    auto capacitorNode = capacitorListNode->first_node("Capacitor");
+    while(capacitorNode) {
+        Capacitor* capacitor = new Capacitor();
+        
+        auto cadPropNode = capacitorNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        auto nodePosition = cadPropNode->first_node("NodePosition");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        if(parentID == -1) {
+            //WRONG!!!!!
+            Bus* parent = new Bus();
+            capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            capacitor->StartMove(capacitor->GetPosition());
+            capacitor->Move(wxPoint2DDouble(posX, posY));
+            capacitor->RemoveParent(parent);
+            delete parent;
+        } else {
+            Bus* parent = busList[parentID];
+            capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            capacitor->StartMove(capacitor->GetPosition());
+            capacitor->Move(wxPoint2DDouble(posX, posY));
+        }
+        capacitor->SetWidth(width);
+        capacitor->SetHeight(height);
+        
+        int numRot = angle / capacitor->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) capacitor->Rotate(clockwise);
+        
+        elementList.push_back(capacitor);
+        capacitorNode = capacitorNode->next_sibling("Capacitor");
+    }
+
+    m_workspace->SetElementList(elementList);
+    return true;
+}
 
 rapidxml::xml_node<>* FileHanding::AppendNode(rapidxml::xml_document<>& doc,
     rapidxml::xml_node<>* parentNode,
@@ -812,4 +952,37 @@ void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
 {
     node->append_attribute(
         doc.allocate_attribute(atrName, doc.allocate_string(wxString::FromCDouble(value, 13).mb_str())));
+}
+
+double FileHanding::GetNodeValueDouble(rapidxml::xml_node<>* parent, const char* nodeName)
+{
+    double dValue = 0.0;
+    if(parent) {
+        auto node = parent->first_node(nodeName);
+        if(node) wxString(node->value()).ToCDouble(&dValue);
+    }
+    return dValue;
+}
+
+int FileHanding::GetNodeValueInt(rapidxml::xml_node<>* parent, const char* nodeName)
+{
+    long iValue = -1;
+    if(parent) {
+        auto node = parent->first_node(nodeName);
+        if(node) wxString(node->value()).ToCLong(&iValue);
+    }
+    return (int)iValue;
+}
+
+int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* nodeName, const char* atrName)
+{
+    long iValue = -1;
+    if(parent) {
+        auto node = parent->first_node(nodeName);
+        if(node){
+            auto atr = node->first_attribute(atrName);
+            if(atr) wxString(atr->value()).ToCLong(&iValue);
+        }
+    }
+    return (int)iValue;
 }

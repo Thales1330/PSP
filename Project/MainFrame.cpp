@@ -193,7 +193,36 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
         workspace->SetWorkspaceMode(MODE_MOVE_ELEMENT);
     }
 }
-void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
+{
+    wxFileDialog openFileDialog(
+        this, _("Open PSP file"), "", "", "PSP files (*.psp)|*.psp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+    if(openFileDialog.ShowModal() == wxID_CANCEL) return;
+
+    wxFileName fileName(openFileDialog.GetPath());
+
+    EnableCurrentProjectRibbon();
+    Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar());
+
+    FileHanding fileHandling(newWorkspace);
+    if(fileHandling.OpenProject(fileName)) {
+        newWorkspace->SetSavedPath(fileName);
+
+        m_workspaceList.push_back(newWorkspace);
+
+        m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+        m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
+
+        m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
+        newWorkspace->Layout();
+        newWorkspace->Redraw();
+        m_projectNumber++;
+    } else {
+        // TODO: fail message.
+        delete newWorkspace;
+    }
+}
+
 void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPasteClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
