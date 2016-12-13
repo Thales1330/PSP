@@ -62,14 +62,12 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, name, data.name);
         auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
         SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        auto nominalVoltageUnit = AppendNode(doc, electricalProp, "NominalVoltageUnit");
-        SetNodeValue(doc, nominalVoltageUnit, data.nominalVoltageUnit);
+        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
         auto isVoltageControlled = AppendNode(doc, electricalProp, "IsVoltageControlled");
         SetNodeValue(doc, isVoltageControlled, data.isVoltageControlled);
         auto controlledVoltage = AppendNode(doc, electricalProp, "ControlledVoltage");
         SetNodeValue(doc, controlledVoltage, data.controlledVoltage);
-        auto controlledVoltageUnitChoice = AppendNode(doc, electricalProp, "ControlledVoltageUnitChoice");
-        SetNodeValue(doc, controlledVoltageUnitChoice, data.controlledVoltageUnitChoice);
+        SetNodeAttribute(doc, controlledVoltage, "Choice", data.controlledVoltageUnitChoice);
         auto slackBus = AppendNode(doc, electricalProp, "SlackBus");
         SetNodeValue(doc, slackBus, data.slackBus);
 
@@ -109,6 +107,7 @@ void FileHanding::SaveProject(wxFileName path)
     for(int i = 0; i < (int)capacitorList.size(); i++) {
         Capacitor* capacitor = capacitorList[i];
         auto capacitorNode = AppendNode(doc, capacitorsNode, "Capacitor");
+        SetNodeAttribute(doc, capacitorNode, "ID", i);
         auto cadProp = AppendNode(doc, capacitorNode, "CADProperties");
         auto position = AppendNode(doc, cadProp, "Position");
         auto posX = AppendNode(doc, position, "X");
@@ -134,8 +133,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, name, data.name);
         auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
         SetNodeValue(doc, reactivePower, data.reactivePower);
-        auto reactivePowerUnit = AppendNode(doc, electricalProp, "ReactivePowerUnit");
-        SetNodeValue(doc, reactivePowerUnit, data.reactivePowerUnit);
+        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
 
         auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = capacitor->GetSwitchingData();
@@ -155,6 +153,7 @@ void FileHanding::SaveProject(wxFileName path)
     for(int i = 0; i < (int)indMotorList.size(); i++) {
         IndMotor* indMotor = indMotorList[i];
         auto indMotorNode = AppendNode(doc, indMotorsNode, "IndMotor");
+        SetNodeAttribute(doc, indMotorNode, "ID", i);
         auto cadProp = AppendNode(doc, indMotorNode, "CADProperties");
         auto position = AppendNode(doc, cadProp, "Position");
         auto posX = AppendNode(doc, position, "X");
@@ -179,12 +178,10 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, name, data.name);
         auto activePower = AppendNode(doc, electricalProp, "ActivePower");
         SetNodeValue(doc, activePower, data.activePower);
-        auto activePowerUnit = AppendNode(doc, electricalProp, "ActivePowerUnit");
-        SetNodeValue(doc, activePowerUnit, data.activePowerUnit);
+        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
         auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
         SetNodeValue(doc, reactivePower, data.reactivePower);
-        auto reactivePowerUnit = AppendNode(doc, electricalProp, "ReactivePowerUnit");
-        SetNodeValue(doc, reactivePowerUnit, data.reactivePowerUnit);
+        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
     } //}
 
     //{ Inductor
@@ -193,6 +190,7 @@ void FileHanding::SaveProject(wxFileName path)
     for(int i = 0; i < (int)inductorList.size(); i++) {
         Inductor* inductor = inductorList[i];
         auto inductorNode = AppendNode(doc, inductorsNode, "Inductor");
+        SetNodeAttribute(doc, inductorNode, "ID", i);
         auto cadProp = AppendNode(doc, inductorNode, "CADProperties");
         auto position = AppendNode(doc, cadProp, "Position");
         auto posX = AppendNode(doc, position, "X");
@@ -223,8 +221,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, name, data.name);
         auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
         SetNodeValue(doc, reactivePower, data.reactivePower);
-        auto reactivePowerUnit = AppendNode(doc, electricalProp, "ReactivePowerUnit");
-        SetNodeValue(doc, reactivePowerUnit, data.reactivePowerUnit);
+        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
 
         auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = inductor->GetSwitchingData();
@@ -244,6 +241,7 @@ void FileHanding::SaveProject(wxFileName path)
     for(int i = 0; i < (int)lineList.size(); i++) {
         Line* line = lineList[i];
         auto lineNode = AppendNode(doc, linesNode, "Line");
+        SetNodeAttribute(doc, lineNode, "ID", i);
         auto cadProp = AppendNode(doc, lineNode, "CADProperties");
         auto nodeList = AppendNode(doc, cadProp, "NodeList");
         auto ptList = line->GetPointList();
@@ -278,29 +276,24 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, name, data.name);
         auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
         SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        auto nominalVoltageUnit = AppendNode(doc, electricalProp, "NominalVoltageUnit");
-        SetNodeValue(doc, nominalVoltageUnit, data.nominalVoltageUnit);
+        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
         auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
         SetNodeValue(doc, nominalPower, data.nominalPower);
-        auto nominalPowerUnit = AppendNode(doc, electricalProp, "NominalPowerUnit");
-        SetNodeValue(doc, nominalPowerUnit, data.nominalPowerUnit);
+        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
         auto resistance = AppendNode(doc, electricalProp, "Resistance");
         SetNodeValue(doc, resistance, data.resistance);
-        auto resistanceUnit = AppendNode(doc, electricalProp, "ResistanceUnit");
-        SetNodeValue(doc, resistanceUnit, data.resistanceUnit);
+        SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
         auto indReactance = AppendNode(doc, electricalProp, "IndReactance");
         SetNodeValue(doc, indReactance, data.indReactance);
-        auto indReactanceUnit = AppendNode(doc, electricalProp, "IndReactanceUnit");
-        SetNodeValue(doc, indReactanceUnit, data.indReactanceUnit);
+        SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
         auto capSusceptance = AppendNode(doc, electricalProp, "CapSusceptance");
         SetNodeValue(doc, capSusceptance, data.capSusceptance);
-        auto capSusceptanceUnit = AppendNode(doc, electricalProp, "CapSusceptanceUnit");
-        SetNodeValue(doc, capSusceptanceUnit, data.capSusceptanceUnit);
+        SetNodeAttribute(doc, capSusceptance, "UnitID", data.capSusceptanceUnit);
         auto lineSize = AppendNode(doc, electricalProp, "LineSize");
         SetNodeValue(doc, lineSize, data.lineSize);
         auto useLinePower = AppendNode(doc, electricalProp, "UseLinePower");
         SetNodeValue(doc, useLinePower, data.useLinePower);
-        
+
         auto fault = AppendNode(doc, electricalProp, "Fault");
         auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
         SetNodeValue(doc, zeroResistance, data.zeroResistance);
@@ -320,13 +313,14 @@ void FileHanding::SaveProject(wxFileName path)
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     } //}
-    
+
     //{ Load
     auto loadsNode = AppendNode(doc, elementsNode, "LoadList");
     auto loadList = allElements.GetLoadList();
     for(int i = 0; i < (int)loadList.size(); i++) {
         Load* load = loadList[i];
         auto loadNode = AppendNode(doc, loadsNode, "Load");
+        SetNodeAttribute(doc, loadNode, "ID", i);
         auto cadProp = AppendNode(doc, loadNode, "CADProperties");
         auto position = AppendNode(doc, cadProp, "Position");
         auto posX = AppendNode(doc, position, "X");
@@ -357,12 +351,10 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, name, data.name);
         auto activePower = AppendNode(doc, electricalProp, "ActivePower");
         SetNodeValue(doc, activePower, data.activePower);
-        auto activePowerUnit = AppendNode(doc, electricalProp, "ActivePowerUnit");
-        SetNodeValue(doc, activePowerUnit, data.activePowerUnit);
+        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
         auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
         SetNodeValue(doc, reactivePower, data.reactivePower);
-        auto reactivePowerUnit = AppendNode(doc, electricalProp, "ReactivePowerUnit");
-        SetNodeValue(doc, reactivePowerUnit, data.reactivePowerUnit);
+        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
         auto loadType = AppendNode(doc, electricalProp, "LoadType");
         SetNodeValue(doc, loadType, data.loadType);
 
@@ -377,13 +369,14 @@ void FileHanding::SaveProject(wxFileName path)
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     } //}
-    
+
     //{ SyncGenerator
     auto syncGeneratorsNode = AppendNode(doc, elementsNode, "SyncGeneratorList");
-    auto syncGeneratorList = allElements.GetLoadList();
+    auto syncGeneratorList = allElements.GetSyncGeneratorList();
     for(int i = 0; i < (int)syncGeneratorList.size(); i++) {
         SyncGenerator* syncGenerator = syncGeneratorList[i];
         auto syncGeneratorNode = AppendNode(doc, syncGeneratorsNode, "SyncGenerator");
+        SetNodeAttribute(doc, syncGeneratorNode, "ID", i);
         auto cadProp = AppendNode(doc, syncGeneratorNode, "CADProperties");
         auto position = AppendNode(doc, cadProp, "Position");
         auto posX = AppendNode(doc, position, "X");
@@ -412,59 +405,84 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, isOnline, syncGenerator->IsOnline());
         auto name = AppendNode(doc, electricalProp, "Name");
         SetNodeValue(doc, name, data.name);
-        
-        /*wxString name = "";
-        double nominalPower = 100.0;
-        ElectricalUnit nominalPowerUnit = UNIT_MVA;
-        double nominalVoltage = 13.8;
-        ElectricalUnit nominalVoltageUnit = UNIT_kV;
-        double activePower = 100.0;
-        ElectricalUnit activePowerUnit = UNIT_MW;
-        double reactivePower = 0.0;
-        ElectricalUnit reactivePowerUnit = UNIT_MVAr;
-        bool haveMaxReactive = false;
-        double maxReactive = 9999.0;
-        ElectricalUnit maxReactiveUnit = UNIT_MVAr;
-        bool haveMinReactive = false;
-        double minReactive = -9999.0;
-        ElectricalUnit minReactiveUnit = UNIT_MVAr;
-        bool useMachineBase = false;
+        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
+        SetNodeValue(doc, nominalPower, data.nominalPower);
+        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
+        auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
+        SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
+        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
+        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
+        SetNodeValue(doc, activePower, data.activePower);
+        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
+        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
+        SetNodeValue(doc, reactivePower, data.reactivePower);
+        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto haveMaxReactive = AppendNode(doc, electricalProp, "HaveMaxReactive");
+        SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
+        auto maxReactive = AppendNode(doc, electricalProp, "MaxReactive");
+        SetNodeValue(doc, maxReactive, data.maxReactive);
+        SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
+        auto haveMinReactive = AppendNode(doc, electricalProp, "HaveMinReactive");
+        SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
+        auto minReactive = AppendNode(doc, electricalProp, "MinReactive");
+        SetNodeValue(doc, minReactive, data.minReactive);
+        SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
+        auto useMachineBase = AppendNode(doc, electricalProp, "UseMachineBase");
+        SetNodeValue(doc, useMachineBase, data.useMachineBase);
 
-        // Fault
-        double positiveResistance = 0.0;
-        double positiveReactance = 1.0;
-        double negativeResistance = 0.0;
-        double negativeReactance = 1.0;
-        double zeroResistance = 0.0;
-        double zeroReactance = 1.0;
-        double groundResistance = 0.0;
-        double groundReactance = 0.0;
-        bool groundNeutral = true;
-        // p.u. fault data
-        std::complex<double> faultCurrent[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
-            std::complex<double>(0.0, 0.0) };
+        auto fault = AppendNode(doc, electricalProp, "Fault");
+        auto positiveResistance = AppendNode(doc, fault, "PositiveResistance");
+        SetNodeValue(doc, positiveResistance, data.positiveResistance);
+        auto positiveReactance = AppendNode(doc, fault, "PositiveReactance");
+        SetNodeValue(doc, positiveReactance, data.positiveReactance);
+        auto negativeResistance = AppendNode(doc, fault, "NegativeResistance");
+        SetNodeValue(doc, negativeResistance, data.negativeResistance);
+        auto negativeReactance = AppendNode(doc, fault, "NegativeReactance");
+        SetNodeValue(doc, negativeReactance, data.negativeReactance);
+        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
+        SetNodeValue(doc, zeroResistance, data.zeroResistance);
+        auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
+        SetNodeValue(doc, zeroReactance, data.zeroReactance);
+        auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
+        SetNodeValue(doc, groundNeutral, data.groundNeutral);
 
-        // Stability
-        bool plotSyncMachine = false;
-        double inertia = 0.0;
-        double damping = 0.0;
-        bool useAVR = false;
-        bool useSpeedGovernor = false;
-
-        double armResistance = 0.0;
-        double potierReactance = 0.0;
-        double satFactor = 0.0;
-
-        double syncXd = 0.0;
-        double syncXq = 0.0;
-        double transXd = 1.0;
-        double transXq = 0.0;
-        double transTd0 = 0.0;
-        double transTq0 = 0.0;
-        double subXd = 0.0;
-        double subXq = 0.0;
-        double subTd0 = 0.0;
-        double subTq0 = 0.0;*/
+        auto stability = AppendNode(doc, electricalProp, "Stability");
+        auto plotSyncMachine = AppendNode(doc, stability, "PlotSyncMachine");
+        SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
+        auto inertia = AppendNode(doc, stability, "Inertia");
+        SetNodeValue(doc, inertia, data.inertia);
+        auto damping = AppendNode(doc, stability, "Damping");
+        SetNodeValue(doc, damping, data.damping);
+        auto useAVR = AppendNode(doc, stability, "UseAVR");
+        SetNodeValue(doc, useAVR, data.useAVR);
+        auto useSpeedGovernor = AppendNode(doc, stability, "UseSpeedGovernor");
+        SetNodeValue(doc, useSpeedGovernor, data.useSpeedGovernor);
+        auto armResistance = AppendNode(doc, stability, "ArmResistance");
+        SetNodeValue(doc, armResistance, data.armResistance);
+        auto potierReactance = AppendNode(doc, stability, "PotierReactance");
+        SetNodeValue(doc, potierReactance, data.potierReactance);
+        auto satFactor = AppendNode(doc, stability, "SatFactor");
+        SetNodeValue(doc, satFactor, data.satFactor);
+        auto syncXd = AppendNode(doc, stability, "SyncXd");
+        SetNodeValue(doc, syncXd, data.syncXd);
+        auto syncXq = AppendNode(doc, stability, "SyncXq");
+        SetNodeValue(doc, syncXq, data.syncXq);
+        auto transXd = AppendNode(doc, stability, "TransXd");
+        SetNodeValue(doc, transXd, data.transXd);
+        auto transXq = AppendNode(doc, stability, "TransXq");
+        SetNodeValue(doc, transXq, data.transXq);
+        auto transTd0 = AppendNode(doc, stability, "TransTd0");
+        SetNodeValue(doc, transTd0, data.transTd0);
+        auto transTq0 = AppendNode(doc, stability, "TransTq0");
+        SetNodeValue(doc, transTq0, data.transTq0);
+        auto subXd = AppendNode(doc, stability, "SubXd");
+        SetNodeValue(doc, subXd, data.subXd);
+        auto subXq = AppendNode(doc, stability, "SubXq");
+        SetNodeValue(doc, subXq, data.subXq);
+        auto subTd0 = AppendNode(doc, stability, "SubTd0");
+        SetNodeValue(doc, subTd0, data.subTd0);
+        auto subTq0 = AppendNode(doc, stability, "SubTq0");
+        SetNodeValue(doc, subTq0, data.subTq0);
 
         auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = syncGenerator->GetSwitchingData();
@@ -477,6 +495,267 @@ void FileHanding::SaveProject(wxFileName path)
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     } //}
+
+    //{ SyncMotor
+    auto syncMotorsNode = AppendNode(doc, elementsNode, "SyncMotorList");
+    auto syncMotorList = allElements.GetSyncMotorList();
+    for(int i = 0; i < (int)syncMotorList.size(); i++) {
+        SyncMotor* syncMotor = syncMotorList[i];
+        auto syncMotorNode = AppendNode(doc, syncMotorsNode, "SyncMotor");
+        SetNodeAttribute(doc, syncMotorNode, "ID", i);
+        auto cadProp = AppendNode(doc, syncMotorNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, syncMotor->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, syncMotor->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, syncMotor->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, syncMotor->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, syncMotor->GetAngle());
+        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = AppendNode(doc, nodePos, "X");
+        SetNodeValue(doc, nodePosX, syncMotor->GetPointList()[0].m_x);
+        auto nodePosY = AppendNode(doc, nodePos, "Y");
+        SetNodeValue(doc, nodePosY, syncMotor->GetPointList()[0].m_y);
+        auto parentID = AppendNode(doc, cadProp, "ParentID");
+        Bus* parent = (Bus*)syncMotor->GetParentList()[0];
+        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+
+        SyncMotorElectricalData data = syncMotor->GetElectricalData();
+        auto electricalProp = AppendNode(doc, syncMotorNode, "ElectricalProperties");
+        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
+        SetNodeValue(doc, isOnline, syncMotor->IsOnline());
+        auto name = AppendNode(doc, electricalProp, "Name");
+        SetNodeValue(doc, name, data.name);
+        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
+        SetNodeValue(doc, nominalPower, data.nominalPower);
+        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
+        // auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
+        // SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
+        // SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
+        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
+        SetNodeValue(doc, activePower, data.activePower);
+        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
+        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
+        SetNodeValue(doc, reactivePower, data.reactivePower);
+        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto haveMaxReactive = AppendNode(doc, electricalProp, "HaveMaxReactive");
+        SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
+        auto maxReactive = AppendNode(doc, electricalProp, "MaxReactive");
+        SetNodeValue(doc, maxReactive, data.maxReactive);
+        SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
+        auto haveMinReactive = AppendNode(doc, electricalProp, "HaveMinReactive");
+        SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
+        auto minReactive = AppendNode(doc, electricalProp, "MinReactive");
+        SetNodeValue(doc, minReactive, data.minReactive);
+        SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
+        auto useMachineBase = AppendNode(doc, electricalProp, "UseMachineBase");
+        SetNodeValue(doc, useMachineBase, data.useMachineBase);
+
+        auto fault = AppendNode(doc, electricalProp, "Fault");
+        auto positiveResistance = AppendNode(doc, fault, "PositiveResistance");
+        SetNodeValue(doc, positiveResistance, data.positiveResistance);
+        auto positiveReactance = AppendNode(doc, fault, "PositiveReactance");
+        SetNodeValue(doc, positiveReactance, data.positiveReactance);
+        auto negativeResistance = AppendNode(doc, fault, "NegativeResistance");
+        SetNodeValue(doc, negativeResistance, data.negativeResistance);
+        auto negativeReactance = AppendNode(doc, fault, "NegativeReactance");
+        SetNodeValue(doc, negativeReactance, data.negativeReactance);
+        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
+        SetNodeValue(doc, zeroResistance, data.zeroResistance);
+        auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
+        SetNodeValue(doc, zeroReactance, data.zeroReactance);
+        auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
+        SetNodeValue(doc, groundNeutral, data.groundNeutral);
+
+        // To future use...
+        /*auto stability = AppendNode(doc, electricalProp, "Stability");
+        auto plotSyncMachine = AppendNode(doc, stability, "PlotSyncMotor");
+        SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
+        auto inertia = AppendNode(doc, stability, "Inertia");
+        SetNodeValue(doc, inertia, data.inertia);
+        auto damping = AppendNode(doc, stability, "Damping");
+        SetNodeValue(doc, damping, data.damping);
+        auto useAVR = AppendNode(doc, stability, "UseAVR");
+        SetNodeValue(doc, useAVR, data.useAVR);
+        auto armResistance = AppendNode(doc, stability, "ArmResistance");
+        SetNodeValue(doc, armResistance, data.armResistance);
+        auto potierReactance = AppendNode(doc, stability, "PotierReactance");
+        SetNodeValue(doc, potierReactance, data.potierReactance);
+        auto satFactor = AppendNode(doc, stability, "SatFactor");
+        SetNodeValue(doc, satFactor, data.satFactor);
+        auto syncXd = AppendNode(doc, stability, "SyncXd");
+        SetNodeValue(doc, syncXd, data.syncXd);
+        auto syncXq = AppendNode(doc, stability, "SyncXq");
+        SetNodeValue(doc, syncXq, data.syncXq);
+        auto transXd = AppendNode(doc, stability, "TransXd");
+        SetNodeValue(doc, transXd, data.transXd);
+        auto transXq = AppendNode(doc, stability, "TransXq");
+        SetNodeValue(doc, transXq, data.transXq);
+        auto transTd0 = AppendNode(doc, stability, "TransTd0");
+        SetNodeValue(doc, transTd0, data.transTd0);
+        auto transTq0 = AppendNode(doc, stability, "TransTq0");
+        SetNodeValue(doc, transTq0, data.transTq0);
+        auto subXd = AppendNode(doc, stability, "SubXd");
+        SetNodeValue(doc, subXd, data.subXd);
+        auto subXq = AppendNode(doc, stability, "SubXq");
+        SetNodeValue(doc, subXq, data.subXq);
+        auto subTd0 = AppendNode(doc, stability, "SubTd0");
+        SetNodeValue(doc, subTd0, data.subTd0);
+        auto subTq0 = AppendNode(doc, stability, "SubTq0");
+        SetNodeValue(doc, subTq0, data.subTq0);
+
+        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        SwitchingData swData = syncGenerator->GetSwitchingData();
+        for(int j = 0; j < (int)swData.swType.size(); j++) {
+            auto switching = AppendNode(doc, switchingList, "Switching");
+            SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = AppendNode(doc, switching, "Type");
+            SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = AppendNode(doc, switching, "Time");
+            SetNodeValue(doc, swTime, swData.swTime[j]);
+        }*/
+    } //}
+
+    //{ Transfomer
+    auto transformersNode = AppendNode(doc, elementsNode, "TransformerList");
+    auto transformerList = allElements.GetTransformerList();
+    for(int i = 0; i < (int)transformerList.size(); i++) {
+        Transformer* transfomer = transformerList[i];
+        auto transformerNode = AppendNode(doc, transformersNode, "Transfomer");
+        SetNodeAttribute(doc, transformerNode, "ID", i);
+        auto cadProp = AppendNode(doc, transformerNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, transfomer->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, transfomer->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, transfomer->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, transfomer->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, transfomer->GetAngle());
+        auto nodeList = AppendNode(doc, cadProp, "NodeList");
+        auto nodePos1 = AppendNode(doc, nodeList, "Node");
+        SetNodeAttribute(doc, nodePos1, "ID", 0);
+        auto nodePosX1 = AppendNode(doc, nodePos1, "X");
+        SetNodeValue(doc, nodePosX1, transfomer->GetPointList()[0].m_x);
+        auto nodePosY1 = AppendNode(doc, nodePos1, "Y");
+        SetNodeValue(doc, nodePosY1, transfomer->GetPointList()[0].m_y);
+        auto nodePos2 = AppendNode(doc, nodeList, "Node");
+        SetNodeAttribute(doc, nodePos2, "ID", 1);
+        auto nodePosX2 = AppendNode(doc, nodePos2, "X");
+        SetNodeValue(doc, nodePosX2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_x);
+        auto nodePosY2 = AppendNode(doc, nodePos2, "Y");
+        SetNodeValue(doc, nodePosY2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_y);
+
+        auto parentIDList = AppendNode(doc, cadProp, "ParentIDList");
+        for(int j = 0; j < (int)transfomer->GetParentList().size(); j++) {
+            Bus* parent = (Bus*)transfomer->GetParentList()[j];
+            if(parent) {
+                auto parentID = AppendNode(doc, parentIDList, "ParentID");
+                SetNodeAttribute(doc, parentID, "ID", j);
+                SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+            }
+        }
+
+        TransformerElectricalData data = transfomer->GetElectricalData();
+        auto electricalProp = AppendNode(doc, transformerNode, "ElectricalProperties");
+        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
+        SetNodeValue(doc, isOnline, transfomer->IsOnline());
+        auto name = AppendNode(doc, electricalProp, "Name");
+        SetNodeValue(doc, name, data.name);
+        auto primaryNominalVoltage = AppendNode(doc, electricalProp, "PrimaryNominalVoltage");
+        SetNodeValue(doc, primaryNominalVoltage, data.primaryNominalVoltage);
+        SetNodeAttribute(doc, primaryNominalVoltage, "UnitID", data.primaryNominalVoltageUnit);
+        auto secondaryNominalVoltage = AppendNode(doc, electricalProp, "SecondaryNominalVoltage");
+        SetNodeValue(doc, secondaryNominalVoltage, data.secondaryNominalVoltage);
+        SetNodeAttribute(doc, secondaryNominalVoltage, "UnitID", data.secondaryNominalVoltageUnit);
+        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
+        SetNodeValue(doc, nominalPower, data.nominalPower);
+        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
+        auto resistance = AppendNode(doc, electricalProp, "Resistance");
+        SetNodeValue(doc, resistance, data.resistance);
+        SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
+        auto indReactance = AppendNode(doc, electricalProp, "IndReactance");
+        SetNodeValue(doc, indReactance, data.indReactance);
+        SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
+        auto connection = AppendNode(doc, electricalProp, "Connection");
+        SetNodeValue(doc, connection, data.connection);
+        auto turnsRatio = AppendNode(doc, electricalProp, "TurnsRatio");
+        SetNodeValue(doc, turnsRatio, data.turnsRatio);
+        auto phaseShift = AppendNode(doc, electricalProp, "PhaseShift");
+        SetNodeValue(doc, phaseShift, data.phaseShift);
+        auto useTransformerPower = AppendNode(doc, electricalProp, "UseTransfomerPower");
+        SetNodeValue(doc, useTransformerPower, data.useTransformerPower);
+
+        auto fault = AppendNode(doc, electricalProp, "Fault");
+        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
+        SetNodeValue(doc, zeroResistance, data.zeroResistance);
+        auto zeroIndReactance = AppendNode(doc, fault, "ZeroIndReactance");
+        SetNodeValue(doc, zeroIndReactance, data.zeroIndReactance);
+        auto primaryGrndResistance = AppendNode(doc, fault, "PrimaryGrndResistance");
+        SetNodeValue(doc, primaryGrndResistance, data.primaryGrndResistance);
+        auto primaryGrndReactance = AppendNode(doc, fault, "PrimaryGrndReactance");
+        SetNodeValue(doc, primaryGrndReactance, data.primaryGrndReactance);
+        auto secondaryGrndResistance = AppendNode(doc, fault, "SecondaryGrndResistance");
+        SetNodeValue(doc, secondaryGrndResistance, data.secondaryGrndResistance);
+        auto secondaryGrndReactance = AppendNode(doc, fault, "SecondaryGrndReactance");
+        SetNodeValue(doc, secondaryGrndReactance, data.secondaryGrndReactance);
+
+        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        SwitchingData swData = transfomer->GetSwitchingData();
+        for(int j = 0; j < (int)swData.swType.size(); j++) {
+            auto switching = AppendNode(doc, switchingList, "Switching");
+            SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = AppendNode(doc, switching, "Type");
+            SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = AppendNode(doc, switching, "Time");
+            SetNodeValue(doc, swTime, swData.swTime[j]);
+        }
+    } //}
+    
+    //{ Text
+    auto textsNode = AppendNode(doc, elementsNode, "TextList");
+    auto textList = m_workspace->GetTextList();
+    for(int i = 0; i < (int)textList.size(); i++) {
+        Text* text = textList[i];
+        auto textNode = AppendNode(doc, textsNode, "Text");
+        SetNodeAttribute(doc, textNode, "ID", i);
+        auto cadProp = AppendNode(doc, textNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, text->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, text->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, text->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, text->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, text->GetAngle());
+        auto textProperties = AppendNode(doc, textNode, "TextProperties");
+        auto elementType = AppendNode(doc, textProperties, "ElementType");
+        SetNodeValue(doc, elementType, text->GetElementType());
+        auto elementNumber = AppendNode(doc, textProperties, "ElementNumber");
+        SetNodeValue(doc, elementNumber, text->GetElementNumber());
+        auto dataType = AppendNode(doc, textProperties, "DataType");
+        SetNodeValue(doc, dataType, text->GetDataType());
+        auto dataUnit = AppendNode(doc, textProperties, "DataUnit");
+        SetNodeValue(doc, dataUnit, text->GetUnit());
+        auto direction = AppendNode(doc, textProperties, "Direction");
+        SetNodeValue(doc, direction, text->GetDirection());
+        auto decimalPlaces = AppendNode(doc, textProperties, "DecimalPlaces");
+        SetNodeValue(doc, decimalPlaces, text->GetDecimalPlaces());
+    }
+    //}
 
     std::ofstream writeXML(path.GetFullPath());
     writeXML << doc;
