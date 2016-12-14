@@ -98,6 +98,7 @@ public:
     void ShowPickbox(bool showPickbox = true) { m_showPickbox = showPickbox; }
     void SetBorderSize(double borderSize) { m_borderSize = borderSize; }
     void SetOnline(bool online = true);
+    virtual void SetPointList(std::vector<wxPoint2DDouble> pointList) { m_pointList = pointList; }
     // Getters
     wxRect2DDouble GetRect() const { return m_rect; }
     wxPoint2DDouble GetPosition() const { return m_position; }

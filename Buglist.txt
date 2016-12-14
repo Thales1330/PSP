@@ -1,7 +1,6 @@
 BUG LIST [pt-br]
 
 PRIORIDADE 1:
--> Capacitor salvo sem parent é aberto com erro na posição do nó.
 
 PRIORIDADE 2:
 -> Calcular fit considerando os textos;

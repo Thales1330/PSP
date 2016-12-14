@@ -134,7 +134,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto electricalProp = AppendNode(doc, capacitorNode, "ElectricalProperties");
         auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
         SetNodeValue(doc, isOnline, capacitor->IsOnline());
-        auto name = AppendNode(doc, capacitorNode, "Name");
+        auto name = AppendNode(doc, electricalProp, "Name");
         SetNodeValue(doc, name, data.name);
         auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
         SetNodeValue(doc, reactivePower, data.reactivePower);
@@ -178,7 +178,8 @@ void FileHanding::SaveProject(wxFileName path)
         auto nodePosY = AppendNode(doc, nodePos, "Y");
         SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
-        SetNodeValue(doc, parentID, ((Bus*)indMotor->GetParentList()[0])->GetEletricalData().number);
+        Bus* parent = (Bus*)indMotor->GetParentList()[0];
+        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
 
         IndMotorElectricalData data = indMotor->GetElectricalData();
         auto electricalProp = AppendNode(doc, indMotorNode, "ElectricalProperties");
@@ -872,8 +873,8 @@ bool FileHanding::OpenProject(wxFileName path)
         double nodePosY = GetNodeValueDouble(nodePosition, "Y");
         int parentID = GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
-            //WRONG!!!!!
-            Bus* parent = new Bus();
+            //If the element has no parent, create a temporary one, remove and delete.
+            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
             capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
             capacitor->StartMove(capacitor->GetPosition());
             capacitor->Move(wxPoint2DDouble(posX, posY));
@@ -896,8 +897,269 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         for(int i = 0; i < numRot; i++) capacitor->Rotate(clockwise);
         
+        auto electricalProp = capacitorNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        capacitor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        CapacitorElectricalData data = capacitor->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        
+        SwitchingData swData;
+        auto switchingList = electricalProp->first_node("SwitchingList");
+        if(!switchingList) return false;
+        auto swNode = switchingList->first_node("Switching");
+        while(swNode) {
+            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swNode = swNode->next_sibling("Switching");
+        }
+        capacitor->SetSwitchingData(swData);
+        
+        capacitor->SetElectricalData(data);
         elementList.push_back(capacitor);
         capacitorNode = capacitorNode->next_sibling("Capacitor");
+    }
+    
+    //{ IndMotor
+    auto indMotorListNode = elementsNode->first_node("IndMotorList");
+    if(!indMotorListNode) return false;
+    auto indMotorNode = indMotorListNode->first_node("IndMotor");
+    while(indMotorNode) {
+        IndMotor* indMotor = new IndMotor();
+        
+        auto cadPropNode = indMotorNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        auto nodePosition = cadPropNode->first_node("NodePosition");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        if(parentID == -1) {
+            //If the element has no parent, create a temporary one, remove and delete.
+            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
+            indMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            indMotor->StartMove(indMotor->GetPosition());
+            indMotor->Move(wxPoint2DDouble(posX, posY));
+            indMotor->RemoveParent(parent);
+            delete parent;
+        } else {
+            Bus* parent = busList[parentID];
+            indMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            indMotor->StartMove(indMotor->GetPosition());
+            indMotor->Move(wxPoint2DDouble(posX, posY));
+        }
+        indMotor->SetWidth(width);
+        indMotor->SetHeight(height);
+        
+        int numRot = angle / indMotor->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) indMotor->Rotate(clockwise);
+        
+        auto electricalProp = indMotorNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        indMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        IndMotorElectricalData data = indMotor->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        
+        indMotor->SetElectricalData(data);
+        elementList.push_back(indMotor);
+        indMotorNode = indMotorNode->next_sibling("IndMotor");
+    }
+    
+    //{ Inductor
+    auto inductorListNode = elementsNode->first_node("InductorList");
+    if(!inductorListNode) return false;
+    auto inductorNode = inductorListNode->first_node("Inductor");
+    while(inductorNode) {
+        Inductor* inductor = new Inductor();
+        
+        auto cadPropNode = inductorNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        auto nodePosition = cadPropNode->first_node("NodePosition");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        if(parentID == -1) {
+            //If the element has no parent, create a temporary one, remove and delete.
+            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
+            inductor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            inductor->StartMove(inductor->GetPosition());
+            inductor->Move(wxPoint2DDouble(posX, posY));
+            inductor->RemoveParent(parent);
+            delete parent;
+        } else {
+            Bus* parent = busList[parentID];
+            inductor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            inductor->StartMove(inductor->GetPosition());
+            inductor->Move(wxPoint2DDouble(posX, posY));
+        }
+        inductor->SetWidth(width);
+        inductor->SetHeight(height);
+        
+        int numRot = angle / inductor->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) inductor->Rotate(clockwise);
+        
+        auto electricalProp = inductorNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        inductor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        InductorElectricalData data = inductor->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        
+        SwitchingData swData;
+        auto switchingList = electricalProp->first_node("SwitchingList");
+        if(!switchingList) return false;
+        auto swNode = switchingList->first_node("Switching");
+        while(swNode) {
+            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swNode = swNode->next_sibling("Switching");
+        }
+        inductor->SetSwitchingData(swData);
+        
+        inductor->SetElectricalData(data);
+        elementList.push_back(inductor);
+        inductorNode = inductorNode->next_sibling("Inductor");
+    }
+    
+    //{ Line
+    auto lineListNode = elementsNode->first_node("LineList");
+    if(!lineListNode) return false;
+    auto lineNode = lineListNode->first_node("Line");
+    while(lineNode) {
+        Line* line = new Line();
+        
+        auto cadPropNode = lineNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        // Get nodes points
+        std::vector<wxPoint2DDouble> ptsList;
+        auto nodePosList = cadPropNode->first_node("NodeList");
+        if(!nodePosList) return false;
+        auto nodePos = nodePosList->first_node("Node");
+        while(nodePos) {
+            double nodePosX = GetNodeValueDouble(nodePos, "X");
+            double nodePosY = GetNodeValueDouble(nodePos, "Y");
+            ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+            nodePos = nodePos->next_sibling("Node");
+        }
+        
+        // Get parents IDs
+        auto parentIDList = cadPropNode->first_node("ParentIDList");
+        if(!parentIDList) return false;
+        auto parentNode = parentIDList->first_node("ParentID");
+        long parentID[2] = {-1, -1};
+        while(parentNode) {
+            long index = 0;
+            wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
+            wxString(parentNode->value()).ToCLong(&parentID[index]);
+            parentNode = parentNode->next_sibling("ParentID");
+        }
+        
+        // Set parents (if have)
+        Bus* parent1, *parent2;
+        if(parentID[0] == -1) {
+            parent1 = new Bus(ptsList[0]);
+            line->AddParent(parent1, ptsList[0]);
+        } else {
+            parent1 = busList[parentID[0]];
+            line->AddParent(parent1, ptsList[0]);
+        }
+        if(parentID[1] == -1) {
+            parent2 = new Bus(ptsList[ptsList.size() - 1]);
+            line->AddParent(parent2, ptsList[ptsList.size() - 1]);
+        } else {
+            parent2 = busList[parentID[1]];
+            line->AddParent(parent2, ptsList[ptsList.size() - 1]);
+        }
+        
+        // Add the others nodes (if have)
+        std::vector<wxPoint2DDouble> midPts;
+        for(int i=1; i<(int)ptsList.size() - 1; i++) midPts.push_back(ptsList[i]);
+        std::vector<wxPoint2DDouble> edgesPts = line->GetPointList();
+        edgesPts.insert(edgesPts.begin() + 2, midPts.begin(), midPts.end());
+        line->SetPointList(edgesPts);
+        
+        if(parentID[0] == -1){
+            line->RemoveParent(parent1);
+            delete parent1;
+        }
+        if(parentID[1] == -1){
+            line->RemoveParent(parent2);
+            delete parent2;
+        }
+        
+        auto electricalProp = lineNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        line->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        LineElectricalData data = line->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
+        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        data.resistance = GetNodeValueDouble(electricalProp, "Resistance");
+        data.resistanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
+        data.indReactance = GetNodeValueDouble(electricalProp, "IndReactance");
+        data.indReactanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
+        data.capSusceptance = GetNodeValueDouble(electricalProp, "CapSusceptance");
+        data.capSusceptanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "CapSusceptance", "UnitID");
+        data.lineSize = GetNodeValueDouble(electricalProp, "LineSize");
+        data.useLinePower = GetNodeValueInt(electricalProp, "UseLinePower");
+        
+        auto fault = electricalProp->first_node("Fault");
+        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
+        data.zeroCapSusceptance = GetNodeValueDouble(fault, "ZeroCapSusceptance");
+        
+        SwitchingData swData;
+        auto switchingList = electricalProp->first_node("SwitchingList");
+        if(!switchingList) return false;
+        auto swNode = switchingList->first_node("Switching");
+        while(swNode) {
+            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swNode = swNode->next_sibling("Switching");
+        }
+        line->SetSwitchingData(swData);
+        
+        line->SetElectricalData(data);
+        elementList.push_back(line);
+        lineNode = lineNode->next_sibling("Line");
     }
 
     m_workspace->SetElementList(elementList);
