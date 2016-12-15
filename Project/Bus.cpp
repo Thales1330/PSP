@@ -165,7 +165,7 @@ void Bus::Rotate(bool clockwise)
     if(!clockwise) rotAngle = -m_rotationAngle;
 
     m_angle += rotAngle;
-    if(m_angle >= 360.0) m_angle = 0.0;
+    if(m_angle >= 360 || m_angle <= -360) m_angle = 0.0;
 }
 
 bool Bus::GetContextMenu(wxMenu& menu)

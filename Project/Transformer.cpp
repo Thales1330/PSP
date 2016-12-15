@@ -172,7 +172,7 @@ void Transformer::Rotate(bool clockwise)
     if(!clockwise) rotAngle = -m_rotationAngle;
 
     m_angle += rotAngle;
-    if(m_angle >= 360.0) m_angle = 0.0;
+    if(m_angle >= 360 || m_angle <= -360) m_angle = 0.0;
 
     // Rotate all the points, except the switches and buses points.
     for(int i = 2; i < (int)m_pointList.size() - 2; i++) {

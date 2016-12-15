@@ -129,7 +129,9 @@ Release/MainFrame.cpp.o: MainFrame.cpp MainFrame.h \
  C:/wxWidgets-3.1.0/include/wx/msw/panel.h \
  C:/wxWidgets-3.1.0/include/wx/stockitem.h \
  C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
- C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h MainFrameBase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/filedlg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/filedlg.h MainFrameBase.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
  C:/wxWidgets-3.1.0/include/wx/filesys.h \
  C:/wxWidgets-3.1.0/include/wx/filename.h \
@@ -253,7 +255,47 @@ Release/MainFrame.cpp.o: MainFrame.cpp MainFrame.h \
  C:/wxWidgets-3.1.0/include/wx/listbase.h \
  C:/wxWidgets-3.1.0/include/wx/msw/listctrl.h Element.h Line.h LineForm.h \
  Branch.h Transformer.h SyncGenerator.h Machines.h IndMotor.h SyncMotor.h \
- Load.h LoadForm.h Shunt.h Inductor.h Capacitor.h
+ Load.h LoadForm.h Shunt.h Inductor.h Capacitor.h FileHanding.h \
+ ElectricCalculation.h Text.h wxGLString.h \
+ C:/wxWidgets-3.1.0/include/wx/wx.h C:/wxWidgets-3.1.0/include/wx/hash.h \
+ C:/wxWidgets-3.1.0/include/wx/module.h \
+ C:/wxWidgets-3.1.0/include/wx/wxcrtvararg.h \
+ C:/wxWidgets-3.1.0/include/wx/dcmemory.h \
+ C:/wxWidgets-3.1.0/include/wx/dcprint.h \
+ C:/wxWidgets-3.1.0/include/wx/dcscreen.h \
+ C:/wxWidgets-3.1.0/include/wx/dataobj.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h \
+ C:/wxWidgets-3.1.0/include/wx/bmpbuttn.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/bmpbuttn.h \
+ C:/wxWidgets-3.1.0/include/wx/checklst.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/checklst.h \
+ C:/wxWidgets-3.1.0/include/wx/scrolbar.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/scrolbar.h \
+ C:/wxWidgets-3.1.0/include/wx/statbmp.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statbmp.h \
+ C:/wxWidgets-3.1.0/include/wx/radiobox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/radiobox.h \
+ C:/wxWidgets-3.1.0/include/wx/radiobut.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/radiobut.h \
+ C:/wxWidgets-3.1.0/include/wx/slider.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/slider.h \
+ C:/wxWidgets-3.1.0/include/wx/gauge.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/gauge.h \
+ C:/wxWidgets-3.1.0/include/wx/dirdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/dirdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/combobox.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/combobox.h \
+ C:/wxWidgets-3.1.0/include/wx/layout.h \
+ C:/wxWidgets-3.1.0/include/wx/choicdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/choicdgg.h \
+ C:/wxWidgets-3.1.0/include/wx/textdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/generic/textdlgg.h \
+ C:/wxWidgets-3.1.0/include/wx/mdi.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/mdi.h rapidXML/rapidxml.hpp \
+ rapidXML/rapidxml_print.hpp rapidXML/rapidxml.hpp \
+ rapidXML/rapidxml_utils.hpp
 
 MainFrame.h:
 
@@ -520,6 +562,10 @@ C:/wxWidgets-3.1.0/include/wx/stockitem.h:
 C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/filedlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/filedlg.h:
 
 MainFrameBase.h:
 
@@ -806,3 +852,95 @@ Shunt.h:
 Inductor.h:
 
 Capacitor.h:
+
+FileHanding.h:
+
+ElectricCalculation.h:
+
+Text.h:
+
+wxGLString.h:
+
+C:/wxWidgets-3.1.0/include/wx/wx.h:
+
+C:/wxWidgets-3.1.0/include/wx/hash.h:
+
+C:/wxWidgets-3.1.0/include/wx/module.h:
+
+C:/wxWidgets-3.1.0/include/wx/wxcrtvararg.h:
+
+C:/wxWidgets-3.1.0/include/wx/dcmemory.h:
+
+C:/wxWidgets-3.1.0/include/wx/dcprint.h:
+
+C:/wxWidgets-3.1.0/include/wx/dcscreen.h:
+
+C:/wxWidgets-3.1.0/include/wx/dataobj.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h:
+
+C:/wxWidgets-3.1.0/include/wx/bmpbuttn.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/bmpbuttn.h:
+
+C:/wxWidgets-3.1.0/include/wx/checklst.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/checklst.h:
+
+C:/wxWidgets-3.1.0/include/wx/scrolbar.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/scrolbar.h:
+
+C:/wxWidgets-3.1.0/include/wx/statbmp.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/statbmp.h:
+
+C:/wxWidgets-3.1.0/include/wx/radiobox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/radiobox.h:
+
+C:/wxWidgets-3.1.0/include/wx/radiobut.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/radiobut.h:
+
+C:/wxWidgets-3.1.0/include/wx/slider.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/slider.h:
+
+C:/wxWidgets-3.1.0/include/wx/gauge.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/gauge.h:
+
+C:/wxWidgets-3.1.0/include/wx/dirdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/dirdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/combobox.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/combobox.h:
+
+C:/wxWidgets-3.1.0/include/wx/layout.h:
+
+C:/wxWidgets-3.1.0/include/wx/choicdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/choicdgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/textdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/generic/textdlgg.h:
+
+C:/wxWidgets-3.1.0/include/wx/mdi.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/mdi.h:
+
+rapidXML/rapidxml.hpp:
+
+rapidXML/rapidxml_print.hpp:
+
+rapidXML/rapidxml.hpp:
+
+rapidXML/rapidxml_utils.hpp:

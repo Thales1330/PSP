@@ -91,6 +91,7 @@ void Capacitor::Rotate(bool clockwise)
     if(!clockwise) rotAngle = -m_rotationAngle;
 
     m_angle += rotAngle;
+    if(m_angle >= 360 || m_angle <= -360) m_angle = 0.0;
     m_pointList[2] = RotateAtPosition(m_pointList[2], rotAngle);
     m_pointList[3] = RotateAtPosition(m_pointList[3], rotAngle);
     UpdateSwitchesPosition();

@@ -60,6 +60,7 @@ class Line : public Branch
     virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
+    virtual void SetPointList(std::vector<wxPoint2DDouble> pointList);
 
    protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
