@@ -454,6 +454,10 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, zeroResistance, data.zeroResistance);
         auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
         SetNodeValue(doc, zeroReactance, data.zeroReactance);
+        auto groundResistance = AppendNode(doc, fault, "GroundResistance");
+        SetNodeValue(doc, groundResistance, data.groundResistance);
+        auto groundReactance = AppendNode(doc, fault, "GroundReactance");
+        SetNodeValue(doc, groundReactance, data.groundReactance);
         auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
         SetNodeValue(doc, groundNeutral, data.groundNeutral);
 
@@ -580,6 +584,10 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, zeroResistance, data.zeroResistance);
         auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
         SetNodeValue(doc, zeroReactance, data.zeroReactance);
+        auto groundResistance = AppendNode(doc, fault, "GroundResistance");
+        SetNodeValue(doc, groundResistance, data.groundResistance);
+        auto groundReactance = AppendNode(doc, fault, "GroundReactance");
+        SetNodeValue(doc, groundReactance, data.groundReactance);
         auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
         SetNodeValue(doc, groundNeutral, data.groundNeutral);
 
@@ -790,7 +798,17 @@ bool FileHanding::OpenProject(wxFileName path)
     auto elementsNode = projectNode->first_node("Elements");
     if(!elementsNode) return false;
     std::vector<Element*> elementList;
-    std::vector<Bus*> busList; // To fill parents.
+    // Save lists individually to get parents
+    std::vector<Bus*> busList;
+    std::vector<Capacitor*> capacitorList;
+    std::vector<IndMotor*> indMotorList;
+    std::vector<Inductor*> inductorList;
+    std::vector<Line*> lineList;
+    std::vector<Load*> loadList;
+    std::vector<SyncGenerator*> syncGeneratorList;
+    std::vector<SyncMotor*> syncMotorList;
+    std::vector<Transformer*> transformerList;
+    std::vector<Text*> textList;
 
     //{ Bus
     auto busListNode = elementsNode->first_node("BusList");
@@ -919,8 +937,9 @@ bool FileHanding::OpenProject(wxFileName path)
         
         capacitor->SetElectricalData(data);
         elementList.push_back(capacitor);
+        capacitorList.push_back(capacitor);
         capacitorNode = capacitorNode->next_sibling("Capacitor");
-    }
+    } //}
     
     //{ IndMotor
     auto indMotorListNode = elementsNode->first_node("IndMotorList");
@@ -981,8 +1000,9 @@ bool FileHanding::OpenProject(wxFileName path)
         
         indMotor->SetElectricalData(data);
         elementList.push_back(indMotor);
+        indMotorList.push_back(indMotor);
         indMotorNode = indMotorNode->next_sibling("IndMotor");
-    }
+    } //}
     
     //{ Inductor
     auto inductorListNode = elementsNode->first_node("InductorList");
@@ -1052,8 +1072,9 @@ bool FileHanding::OpenProject(wxFileName path)
         
         inductor->SetElectricalData(data);
         elementList.push_back(inductor);
+        inductorList.push_back(inductor);
         inductorNode = inductorNode->next_sibling("Inductor");
-    }
+    } //}
     
     //{ Line
     auto lineListNode = elementsNode->first_node("LineList");
@@ -1122,6 +1143,7 @@ bool FileHanding::OpenProject(wxFileName path)
             delete parent2;
         }
         
+        
         auto electricalProp = lineNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
         
@@ -1159,10 +1181,513 @@ bool FileHanding::OpenProject(wxFileName path)
         
         line->SetElectricalData(data);
         elementList.push_back(line);
+        lineList.push_back(line);
         lineNode = lineNode->next_sibling("Line");
-    }
-
+    } //}
+    
+    //{ Load
+    auto loadListNode = elementsNode->first_node("LoadList");
+    if(!loadListNode) return false;
+    auto loadNode = loadListNode->first_node("Load");
+    while(loadNode) {
+        Load* load = new Load();
+        
+        auto cadPropNode = loadNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        auto nodePosition = cadPropNode->first_node("NodePosition");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        if(parentID == -1) {
+            //If the element has no parent, create a temporary one, remove and delete.
+            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
+            load->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            load->StartMove(load->GetPosition());
+            load->Move(wxPoint2DDouble(posX, posY));
+            load->RemoveParent(parent);
+            delete parent;
+        } else {
+            Bus* parent = busList[parentID];
+            load->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            load->StartMove(load->GetPosition());
+            load->Move(wxPoint2DDouble(posX, posY));
+        }
+        load->SetWidth(width);
+        load->SetHeight(height);
+        
+        int numRot = angle / load->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) load->Rotate(clockwise);
+        
+        auto electricalProp = loadNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        load->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        LoadElectricalData data = load->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.loadType = (LoadType)GetNodeValueInt(electricalProp, "LoadType");
+        
+        SwitchingData swData;
+        auto switchingList = electricalProp->first_node("SwitchingList");
+        if(!switchingList) return false;
+        auto swNode = switchingList->first_node("Switching");
+        while(swNode) {
+            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swNode = swNode->next_sibling("Switching");
+        }
+        load->SetSwitchingData(swData);
+        
+        load->SetElectricalData(data);
+        elementList.push_back(load);
+        loadList.push_back(load);
+        loadNode = loadNode->next_sibling("Load");
+    } //}
+    
+    //{ SyncGenerator
+    auto syncGeneratorListNode = elementsNode->first_node("SyncGeneratorList");
+    if(!syncGeneratorListNode) return false;
+    auto syncGeneratorNode = syncGeneratorListNode->first_node("SyncGenerator");
+    while(syncGeneratorNode) {
+        SyncGenerator* syncGenerator = new SyncGenerator();
+        
+        auto cadPropNode = syncGeneratorNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        auto nodePosition = cadPropNode->first_node("NodePosition");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        if(parentID == -1) {
+            //If the element has no parent, create a temporary one, remove and delete.
+            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
+            syncGenerator->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            syncGenerator->StartMove(syncGenerator->GetPosition());
+            syncGenerator->Move(wxPoint2DDouble(posX, posY));
+            syncGenerator->RemoveParent(parent);
+            delete parent;
+        } else {
+            Bus* parent = busList[parentID];
+            syncGenerator->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            syncGenerator->StartMove(syncGenerator->GetPosition());
+            syncGenerator->Move(wxPoint2DDouble(posX, posY));
+        }
+        syncGenerator->SetWidth(width);
+        syncGenerator->SetHeight(height);
+        
+        int numRot = angle / syncGenerator->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) syncGenerator->Rotate(clockwise);
+        
+        auto electricalProp = syncGeneratorNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        syncGenerator->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
+        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.haveMaxReactive = GetNodeValueInt(electricalProp, "HaveMaxReactive");
+        data.maxReactive = GetNodeValueDouble(electricalProp, "MaxReactive");
+        data.maxReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
+        data.haveMinReactive = GetNodeValueInt(electricalProp, "HaveMinReactive");
+        data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
+        data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
+        data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
+        
+        auto fault = electricalProp->first_node("Fault");
+        if(!fault) return false;
+        data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
+        data.positiveReactance = GetNodeValueDouble(fault, "PositiveReactance");
+        data.negativeResistance = GetNodeValueDouble(fault, "NegativeResistance");
+        data.negativeReactance = GetNodeValueDouble(fault, "NegativeReactance");
+        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroReactance = GetNodeValueDouble(fault, "ZeroReactance");
+        data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
+        data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
+        data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
+        
+        auto stability = electricalProp->first_node("Stability");
+        if(!stability) return false;
+        data.plotSyncMachine = GetNodeValueInt(stability, "PlotSyncMachine");
+        data.inertia = GetNodeValueDouble(stability, "Inertia");
+        data.damping = GetNodeValueDouble(stability, "Damping");
+        data.useAVR = GetNodeValueInt(stability, "UseAVR");
+        data.useSpeedGovernor = GetNodeValueInt(stability, "UseSpeedGovernor");
+        data.armResistance = GetNodeValueDouble(stability, "ArmResistance");
+        data.potierReactance = GetNodeValueDouble(stability, "PotierReactance");
+        data.satFactor = GetNodeValueDouble(stability, "SatFactor");
+        data.syncXd = GetNodeValueDouble(stability, "SyncXd");
+        data.syncXq = GetNodeValueDouble(stability, "SyncXq");
+        data.transXd = GetNodeValueDouble(stability, "TransXd");
+        data.transXq = GetNodeValueDouble(stability, "TransXq");
+        data.transTd0 = GetNodeValueDouble(stability, "TransTd0");
+        data.transTq0 = GetNodeValueDouble(stability, "TransTq0");
+        data.subXd = GetNodeValueDouble(stability, "SubXd");
+        data.subXq = GetNodeValueDouble(stability, "SubXq");
+        data.subTd0 = GetNodeValueDouble(stability, "SubTd0");
+        data.subTq0 = GetNodeValueDouble(stability, "SubTq0");
+        
+        SwitchingData swData;
+        auto switchingList = electricalProp->first_node("SwitchingList");
+        if(!switchingList) return false;
+        auto swNode = switchingList->first_node("Switching");
+        while(swNode) {
+            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swNode = swNode->next_sibling("Switching");
+        }
+        syncGenerator->SetSwitchingData(swData);
+        
+        syncGenerator->SetElectricalData(data);
+        elementList.push_back(syncGenerator);
+        syncGeneratorList.push_back(syncGenerator);
+        syncGeneratorNode = syncGeneratorNode->next_sibling("SyncGenerator");
+    } //}
+    
+    //{ SyncMotor
+    auto syncMotorListNode = elementsNode->first_node("SyncMotorList");
+    if(!syncMotorListNode) return false;
+    auto syncMotorNode = syncMotorListNode->first_node("SyncMotor");
+    while(syncMotorNode) {
+        SyncMotor* syncMotor = new SyncMotor();
+        
+        auto cadPropNode = syncMotorNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        auto nodePosition = cadPropNode->first_node("NodePosition");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        if(parentID == -1) {
+            //If the element has no parent, create a temporary one, remove and delete.
+            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
+            syncMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            syncMotor->StartMove(syncMotor->GetPosition());
+            syncMotor->Move(wxPoint2DDouble(posX, posY));
+            syncMotor->RemoveParent(parent);
+            delete parent;
+        } else {
+            Bus* parent = busList[parentID];
+            syncMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
+            syncMotor->StartMove(syncMotor->GetPosition());
+            syncMotor->Move(wxPoint2DDouble(posX, posY));
+        }
+        syncMotor->SetWidth(width);
+        syncMotor->SetHeight(height);
+        
+        int numRot = angle / syncMotor->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) syncMotor->Rotate(clockwise);
+        
+        auto electricalProp = syncMotorNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        syncMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        SyncMotorElectricalData data = syncMotor->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        //data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
+        //data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.haveMaxReactive = GetNodeValueInt(electricalProp, "HaveMaxReactive");
+        data.maxReactive = GetNodeValueDouble(electricalProp, "MaxReactive");
+        data.maxReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
+        data.haveMinReactive = GetNodeValueInt(electricalProp, "HaveMinReactive");
+        data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
+        data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
+        data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
+        
+        auto fault = electricalProp->first_node("Fault");
+        if(!fault) return false;
+        data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
+        data.positiveReactance = GetNodeValueDouble(fault, "PositiveReactance");
+        data.negativeResistance = GetNodeValueDouble(fault, "NegativeResistance");
+        data.negativeReactance = GetNodeValueDouble(fault, "NegativeReactance");
+        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroReactance = GetNodeValueDouble(fault, "ZeroReactance");
+        data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
+        data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
+        data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
+        
+        /*SwitchingData swData;
+        auto switchingList = electricalProp->first_node("SwitchingList");
+        if(!switchingList) return false;
+        auto swNode = switchingList->first_node("Switching");
+        while(swNode) {
+            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swNode = swNode->next_sibling("Switching");
+        }
+        syncMotor->SetSwitchingData(swData);*/
+        
+        syncMotor->SetElectricalData(data);
+        elementList.push_back(syncMotor);
+        syncMotorList.push_back(syncMotor);
+        syncMotorNode = syncMotorNode->next_sibling("SyncMotor");
+    } //}
+    
+    //{ Transformer
+    auto transformerListNode = elementsNode->first_node("TransformerList");
+    if(!transformerListNode) return false;
+    auto transfomerNode = transformerListNode->first_node("Transfomer");
+    while(transfomerNode) {
+        Transformer* transformer = new Transformer();
+        
+        auto cadPropNode = transfomerNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        // Get nodes points
+        std::vector<wxPoint2DDouble> ptsList;
+        auto nodePosList = cadPropNode->first_node("NodeList");
+        if(!nodePosList) return false;
+        auto nodePos = nodePosList->first_node("Node");
+        while(nodePos) {
+            double nodePosX = GetNodeValueDouble(nodePos, "X");
+            double nodePosY = GetNodeValueDouble(nodePos, "Y");
+            ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+            nodePos = nodePos->next_sibling("Node");
+        }
+        
+        // Get parents IDs
+        auto parentIDList = cadPropNode->first_node("ParentIDList");
+        if(!parentIDList) return false;
+        auto parentNode = parentIDList->first_node("ParentID");
+        long parentID[2] = {-1, -1};
+        while(parentNode) {
+            long index = 0;
+            wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
+            wxString(parentNode->value()).ToCLong(&parentID[index]);
+            parentNode = parentNode->next_sibling("ParentID");
+        }
+        
+        // Set parents (if have)
+        Bus* parent1, *parent2;
+        if(parentID[0] == -1) {
+            parent1 = new Bus(ptsList[0]);
+            transformer->AddParent(parent1, ptsList[0]);
+        } else {
+            parent1 = busList[parentID[0]];
+            transformer->AddParent(parent1, ptsList[0]);
+        }
+        if(parentID[1] == -1) {
+            parent2 = new Bus(ptsList[ptsList.size() - 1]);
+            transformer->AddParent(parent2, ptsList[ptsList.size() - 1]);
+        } else {
+            parent2 = busList[parentID[1]];
+            transformer->AddParent(parent2, ptsList[ptsList.size() - 1]);
+        }
+        
+        transformer->StartMove(transformer->GetPosition());
+        transformer->Move(wxPoint2DDouble(posX, posY));
+        
+        if(parentID[0] == -1){
+            transformer->RemoveParent(parent1);
+            delete parent1;
+        }
+        if(parentID[1] == -1){
+            transformer->RemoveParent(parent2);
+            delete parent2;
+        }
+        
+        transformer->SetWidth(width);
+        transformer->SetHeight(height);
+        
+        int numRot = angle / transformer->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) transformer->Rotate(clockwise);
+        
+        auto electricalProp = transfomerNode->first_node("ElectricalProperties");
+        if(!electricalProp) return false;
+        
+        transformer->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        TransformerElectricalData data = transformer->GetElectricalData();
+        data.name = electricalProp->first_node("Name")->value();
+        data.primaryNominalVoltage = GetNodeValueDouble(electricalProp, "PrimaryNominalVoltage");
+        data.primaryNominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "PrimaryNominalVoltage", "UnitID");
+        data.secondaryNominalVoltage = GetNodeValueDouble(electricalProp, "SecondaryNominalVoltage");
+        data.secondaryNominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "SecondaryNominalVoltage", "UnitID");
+        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        data.resistance = GetNodeValueDouble(electricalProp, "Resistance");
+        data.resistanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
+        data.indReactance = GetNodeValueDouble(electricalProp, "IndReactance");
+        data.indReactanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
+        data.connection = (TransformerConnection) GetNodeValueInt(electricalProp, "Connection");
+        data.turnsRatio = GetNodeValueDouble(electricalProp, "TurnsRatio");
+        data.phaseShift = GetNodeValueDouble(electricalProp, "PhaseShift");
+        data.useTransformerPower = GetNodeValueInt(electricalProp, "UseTransfomerPower");
+        
+        auto fault = electricalProp->first_node("Fault");
+        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
+        data.primaryGrndResistance = GetNodeValueDouble(fault, "PrimaryGrndResistance");
+        data.primaryGrndReactance = GetNodeValueDouble(fault, "PrimaryGrndReactance");
+        data.secondaryGrndResistance = GetNodeValueDouble(fault, "SecondaryGrndResistance");
+        data.secondaryGrndReactance = GetNodeValueDouble(fault, "SecondaryGrndReactance");
+        
+        SwitchingData swData;
+        auto switchingList = electricalProp->first_node("SwitchingList");
+        if(!switchingList) return false;
+        auto swNode = switchingList->first_node("Switching");
+        while(swNode) {
+            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swNode = swNode->next_sibling("Switching");
+        }
+        transformer->SetSwitchingData(swData);
+        
+        transformer->SetElectricaData(data);
+        elementList.push_back(transformer);
+        transformerList.push_back(transformer);
+        transfomerNode = transfomerNode->next_sibling("Transfomer");
+    } //}
+    
+    //{ Text
+    auto textListNode = elementsNode->first_node("TextList");
+    if(!textListNode) return false;
+    auto textNode = textListNode->first_node("Text");
+    while(textNode) {
+        
+        auto cadPropNode = textNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size  = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        Text* text = new Text(wxPoint2DDouble(posX, posY));
+        
+        text->SetWidth(width);
+        text->SetHeight(height);
+        
+        auto textProperties = textNode->first_node("TextProperties");
+        if(!textProperties) return false;
+        text->SetElementType((ElementType)GetNodeValueDouble(textProperties, "ElementType"));
+        text->SetElementNumber(GetNodeValueInt(textProperties, "ElementNumber"));
+        switch(text->GetElementType()) {
+            case TYPE_NONE: break;
+            case TYPE_BUS: {
+                Bus* bus = busList[text->GetElementNumber()];
+                text->SetElement(bus);
+            } break;
+            case TYPE_CAPACITOR: {
+                Capacitor* capacitor = capacitorList[text->GetElementNumber()];
+                text->SetElement(capacitor);
+            } break;
+            case TYPE_IND_MOTOR: {
+                IndMotor* indMotor = indMotorList[text->GetElementNumber()];
+                text->SetElement(indMotor);
+            } break;
+            case TYPE_INDUCTOR: {
+                Inductor* inductor = inductorList[text->GetElementNumber()];
+                text->SetElement(inductor);
+            } break;
+            case TYPE_LINE: {
+                Line* line = lineList[text->GetElementNumber()];
+                text->SetElement(line);
+            } break;
+            case TYPE_LOAD: {
+                Load* load = loadList[text->GetElementNumber()];
+                text->SetElement(load);
+            } break;
+            case TYPE_SYNC_GENERATOR: {
+                SyncGenerator* syncGenerator = syncGeneratorList[text->GetElementNumber()];
+                text->SetElement(syncGenerator);
+            } break;
+            case TYPE_SYNC_MOTOR: {
+                SyncMotor* syncMotor = syncMotorList[text->GetElementNumber()];
+                text->SetElement(syncMotor);
+            } break;
+            case TYPE_TRANSFORMER: {
+                Transformer* transformer = transformerList[text->GetElementNumber()];
+                text->SetElement(transformer);
+            } break;
+        }
+        text->SetDataType((DataType)GetNodeValueDouble(textProperties, "DataType"));
+        text->SetUnit((ElectricalUnit)GetNodeValueDouble(textProperties, "DataUnit"));
+        text->SetDirection(GetNodeValueDouble(textProperties, "Direction"));
+        text->SetDecimalPlaces(GetNodeValueDouble(textProperties, "DecimalPlaces"));
+        
+        int numRot = angle / text->GetRotationAngle();
+        bool clockwise = true;
+        if(numRot < 0) {
+            numRot = std::abs(numRot);
+            clockwise = false;
+        }
+        for(int i = 0; i < numRot; i++) text->Rotate(clockwise);
+        
+        textList.push_back(text);
+        textNode = textNode->next_sibling("Text");
+    } //}
+    
     m_workspace->SetElementList(elementList);
+    m_workspace->SetTextList(textList);
+    m_workspace->UpdateTextElements();
     return true;
 }
 

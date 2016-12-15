@@ -480,3 +480,10 @@ void Line::RotateNode(Element* parent, bool clockwise)
     UpdateSwitchesPosition();
     UpdatePowerFlowArrowsPosition();
 }
+
+void Line::SetPointList(std::vector<wxPoint2DDouble> pointList)
+{
+    m_pointList = pointList;
+    UpdateSwitchesPosition();
+    UpdatePowerFlowArrowsPosition();
+}
