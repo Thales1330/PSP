@@ -233,7 +233,9 @@ Release/ElementDataObject.cpp.o: ElementDataObject.cpp \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h Workspace.h \
  C:/wxWidgets-3.1.0/include/wx/statusbr.h \
- C:/wxWidgets-3.1.0/include/wx/msw/statusbar.h WorkspaceBase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/statusbar.h \
+ C:/wxWidgets-3.1.0/include/wx/clipbrd.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h WorkspaceBase.h \
  C:/wxWidgets-3.1.0/include/wx/glcanvas.h \
  C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/eventfilter.h \
@@ -753,6 +755,10 @@ Workspace.h:
 C:/wxWidgets-3.1.0/include/wx/statusbr.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/statusbar.h:
+
+C:/wxWidgets-3.1.0/include/wx/clipbrd.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h:
 
 WorkspaceBase.h:
 

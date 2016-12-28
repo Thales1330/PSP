@@ -29,9 +29,11 @@ public:
     size_t GetDataSize() const override;
     bool GetDataHere(void* buf) const override;
     bool SetData(size_t len, const void* buf) override;
+    
+    ElementsLists* GetElementsLists() { return m_elementsLists; }
 
+protected:
     ElementsLists* m_elementsLists;
-    ElectricCalculation m_allElements;
 };
 
 #endif // ELEMENTDATAOBJECT_H

@@ -53,7 +53,7 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
     glRotated(m_angle, 0.0, 0.0, 1.0);
     glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-    glColor4d(0.0, 0.3, 1.0, 1.0);
+    glColor4dv(m_busColour->GetRGBA());
     DrawRectangle(m_position, m_width, m_height);
     // Pop the old matrix back.
     glPopMatrix();

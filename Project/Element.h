@@ -82,6 +82,19 @@ struct SwitchingData {
     std::vector<double> swTime;
 };
 
+class OpenGLColour
+{
+public:
+    OpenGLColour() {}
+    OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha) { SetRGBA(red, green, blue, alpha); }
+    virtual ~OpenGLColour() {}
+    void SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha);
+    GLdouble* GetRGBA() const { return rgba; }
+
+protected:
+    GLdouble* rgba = new GLdouble(4);
+};
+
 class Element
 {
 public:
@@ -111,7 +124,7 @@ public:
     bool IsPickboxShown() const { return m_showPickbox; }
     bool IsOnline() const { return m_online; }
     virtual std::vector<wxPoint2DDouble> GetPointList() const { return m_pointList; }
-    
+
     // Pure-virtuals methods
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
@@ -129,6 +142,7 @@ public:
     virtual void UpdateNodes() {}
     virtual bool SetNodeParent(Element* parent) { return false; }
     virtual void RemoveParent(Element* parent) {}
+    virtual void ReplaceParent(Element* oldParent, Element* newParent);
     virtual void RotateNode(Element* parent, bool clockwise = true) {}
     virtual wxPoint2DDouble
     GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const;
@@ -205,6 +219,14 @@ protected:
     double m_borderSize = 2.0;
     double m_rotationAngle = 45.0;
     double m_switchSize = 10.0;
+
+    OpenGLColour* m_busColour;
+    OpenGLColour* m_onlineElementColour;
+    OpenGLColour* m_offlineElementColour;
+    OpenGLColour* m_closedSwitchColour;
+    OpenGLColour* m_openedSwitchColour;
+    OpenGLColour* m_selectionColour;
+    OpenGLColour* m_powerFlowArrowColour;
 
     std::vector<wxRect2DDouble> m_switchRect;
 
