@@ -130,6 +130,11 @@ public:
 
     // General methods
     virtual Element* GetCopy() { return NULL; }
+    virtual void SetID(int id) { m_elementID = id; }
+    virtual int GetID() const { return m_elementID; }
+    virtual void AddChild(Element* child);
+    virtual void RemoveChild(Element* child);
+    virtual void ReplaceChild(Element* oldChild, Element* newChild);
     virtual void Draw(wxPoint2DDouble translation, double scale) const {};
     virtual void Rotate(bool clockwise = true) {}
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
@@ -183,6 +188,7 @@ public:
     virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;
 
     virtual std::vector<Element*> GetParentList() const { return m_parentList; }
+    virtual std::vector<Element*> GetChildList() const { return m_childList; }
     virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
     virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
@@ -205,7 +211,9 @@ public:
     static wxString StringFromDouble(double value, int minDecimal = 1);
 
 protected:
+    int m_elementID = 0;
     std::vector<Element*> m_parentList;
+    std::vector<Element*> m_childList;
 
     wxRect2DDouble m_rect;
     wxPoint2DDouble m_position;

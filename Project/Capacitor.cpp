@@ -15,6 +15,7 @@ bool Capacitor::AddParent(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {
         m_parentList.push_back(parent);
+        parent->AddChild(this);
         wxPoint2DDouble parentPt =
             parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
         parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.

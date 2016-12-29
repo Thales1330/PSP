@@ -91,7 +91,8 @@ public:
 
     void ValidateBusesVoltages(Element* initialBus);
     void ValidateElementsVoltages();
-
+    
+    void UpdateElementsID();
     void UpdateTextElements();
 
     int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
@@ -159,7 +160,7 @@ protected:
 
     wxPoint2DDouble m_mousePosition;
 
-    double m_zoomMin = 0.05;
+    double m_zoomMin = 0.01;
     double m_zoomMax = 3.0;
 };
 

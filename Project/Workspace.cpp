@@ -401,6 +401,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
                     Element* parent = m_elementList[i];
                     if(typeid(*parent) == typeid(Bus)) {
                         if(element->SetNodeParent(parent)) {
+                            parent->AddChild(element);
                             findNewParent = true;
                             itnp = it;
                             element->ResetNodes();
@@ -537,19 +538,15 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
         case MODE_MOVE_ELEMENT:
         case MODE_PASTE: {
-            for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+            for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
                 Element* element = *it;
-                // Parent's element moving...
-                for(int i = 0; i < (int)element->GetParentList().size(); i++) {
-                    Element* parent = element->GetParentList()[i];
-                    if(parent) {
-                        if(parent->IsSelected()) {
-                            element->MoveNode(parent, m_camera->ScreenToWorld(event.GetPosition()));
-                        }
-                    }
-                }
                 if(element->IsSelected()) {
                     element->Move(m_camera->ScreenToWorld(event.GetPosition()));
+                    // Move child nodes
+                    for(int i = 0; i < (int)element->GetChildList().size(); i++) {
+                        Element* child = element->GetChildList()[i];
+                        child->MoveNode(element, m_camera->ScreenToWorld(event.GetPosition()));
+                    }
                     redraw = true;
                 }
             }
@@ -688,13 +685,13 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'L': {
                 if(!insertingElement) {
-                    if(event.GetModifiers() == wxMOD_SHIFT) { // Insert a load.
+                    if(!event.ControlDown() && event.ShiftDown()) { // Insert a load.
                         Load* newLoad = new Load(wxString::Format(_("Load %d"), GetElementNumber(ID_LOAD)));
                         IncrementElementNumber(ID_LOAD);
                         m_elementList.push_back(newLoad);
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
-                    } else { // Insert a power line.
+                    } else if(!event.ControlDown() && !event.ShiftDown()) { // Insert a power line.
                         Line* newLine = new Line(wxString::Format(_("Line %d"), GetElementNumber(ID_LINE)));
                         IncrementElementNumber(ID_LINE);
                         m_elementList.push_back(newLine);
@@ -702,6 +699,14 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                         m_statusBar->SetStatusText(_("Insert Line: Click on two buses, ESC to cancel."));
                     }
                     Redraw();
+                }
+                // Tests - Ctrl + Shift + L
+                if(event.ControlDown() && event.ShiftDown()) {
+                    int numBus = 0;
+                    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+                        if(typeid(**it) == typeid(Bus)) numBus++;
+                    }
+                    wxMessageBox(wxString::Format("%d buses\n%d elements", numBus, m_elementList.size()));
                 }
             } break;
             case 'T': // Insert a transformer.
@@ -890,6 +895,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
                             Element* parent = child->GetParentList()[i];
                             if(parent == element) {
                                 child->RemoveParent(parent);
+                                parent->RemoveChild(child);
                             }
                         }
                     }
@@ -940,15 +946,16 @@ void Workspace::DeleteSelectedElements()
         Element* element = *it;
 
         if(element->IsSelected()) {
-            for(auto itp = m_elementList.begin(); itp != m_elementList.end(); ++itp) {
-                Element* child = *itp;
-                // Parent's element being deleted...
-                for(int i = 0; i < (int)child->GetParentList().size(); i++) {
-                    Element* parent = child->GetParentList()[i];
-                    if(parent == element) {
-                        child->RemoveParent(parent);
-                    }
-                }
+
+            // Remove itself from parent list
+            for(int i = 0; i < (int)element->GetParentList().size(); ++i) {
+                Element* parent = element->GetParentList()[i];
+                if(parent) parent->RemoveChild(element);
+            }
+            // Remove child parent.
+            for(int i = 0; i < (int)element->GetChildList().size(); ++i) {
+                Element* child = element->GetChildList()[i];
+                if(child) child->RemoveParent(element);
             }
 
             for(auto itt = m_textList.begin(); itt != m_textList.end(); ++itt) {
@@ -1092,6 +1099,7 @@ void Workspace::UpdateTextElements()
 
 void Workspace::CopySelection()
 {
+    UpdateElementsID();
     std::vector<Element*> selectedElements;
     // The buses need to be numerated to associate the child's parents to the copies.
     int busNumber = 0;
@@ -1149,9 +1157,9 @@ bool Workspace::Paste()
         for(auto it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {
             Element* copy = (*it)->GetCopy();
             if(copy) {
-                pastedElements.push_back((Bus*)copy);
+                pastedElements.push_back(copy);
                 pastedBusList.push_back((Bus*)copy);
-                m_elementList.push_back((Bus*)copy);
+                m_elementList.push_back(copy);
             }
         }
 
@@ -1180,12 +1188,14 @@ bool Workspace::Paste()
                     for(int j = 0; j < (int)copy->GetParentList().size(); j++) {
                         Bus* currentParent = (Bus*)copy->GetParentList()[j];
                         if(currentParent) {
-                            int parentNumber = currentParent->GetEletricalData().number;
+                            int parentID = currentParent->GetID();
                             bool parentCopied = false;
                             for(int k = 0; k < (int)pastedBusList.size(); k++) {
                                 Bus* newParent = pastedBusList[k];
-                                if(parentNumber == newParent->GetEletricalData().number)
+                                if(parentID == newParent->GetID()) {
                                     copy->ReplaceParent(currentParent, newParent);
+                                    break;
+                                }
                             }
                             if(!parentCopied) copy->RemoveParent(currentParent);
                         }
@@ -1194,6 +1204,24 @@ bool Workspace::Paste()
                     pastedElements.push_back(copy);
                     m_elementList.push_back(copy);
                 }
+            }
+        }
+
+        // Update buses childs
+        for(auto it = pastedBusList.begin(), itEnd = pastedBusList.end(); it != itEnd; ++it) {
+            Bus* bus = *it;
+            for(int i = 0; i < (int)bus->GetChildList().size(); ++i) {
+                Element* currentChild = bus->GetChildList()[i];
+                int childID = currentChild->GetID();
+                bool childCopied = false;
+                for(int j = 0; j < (int)pastedElements.size(); j++) {
+                    Element* newChild = pastedElements[j];
+                    if(childID == newChild->GetID()) {
+                        bus->ReplaceChild(currentChild, newChild);
+                        break;
+                    }
+                }
+                if(!childCopied) bus->RemoveChild(currentChild);
             }
         }
 
@@ -1218,10 +1246,11 @@ bool Workspace::Paste()
         return false;
     }
 
-    Redraw();
+    UpdateElementsID();
     m_mode = MODE_PASTE;
     m_statusBar->SetStatusText(_("Click to paste."));
     UpdateStatusBar();
+    Redraw();
     return true;
 }
 
@@ -1234,5 +1263,20 @@ void Workspace::UnselectAll()
     for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; it++) {
         Text* text = *it;
         text->SetSelected(false);
+    }
+}
+
+void Workspace::UpdateElementsID()
+{
+    int id = 0;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        Element* element = *it;
+        element->SetID(id);
+        id++;
+    }
+    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
+        Text* text = *it;
+        text->SetID(id);
+        id++;
     }
 }

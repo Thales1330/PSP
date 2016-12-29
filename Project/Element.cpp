@@ -456,6 +456,23 @@ void Element::ReplaceParent(Element* oldParent, Element* newParent)
     }
 }
 
+void Element::AddChild(Element* child) { m_childList.push_back(child); }
+
+void Element::RemoveChild(Element* child)
+{
+    for(auto it = m_childList.begin(); it != m_childList.end(); ++it) {
+        Element* element = *it;
+        if(element == child) m_childList.erase(it--);
+    }
+}
+
+void Element::ReplaceChild(Element* oldChild, Element* newChild)
+{
+    for(int i = 0; i < (int)m_childList.size(); i++) {
+        if(m_childList[i] == oldChild) m_childList[i] = newChild;
+    }
+}
+
 void OpenGLColour::SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
 {
     rgba[0] = red;

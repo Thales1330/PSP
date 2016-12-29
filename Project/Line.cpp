@@ -119,6 +119,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
         if(m_parentList.size() == 0) {
             m_position = position;
             m_parentList.push_back(parent);
+            parent->AddChild(this);
             wxPoint2DDouble parentPt =
                 parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
             parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
@@ -149,6 +150,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             }
 
             m_parentList.push_back(parent);
+            parent->AddChild(this);
             wxPoint2DDouble parentPt =
                 parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
             parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
@@ -240,14 +242,21 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
             }
         }
     } else {
+        // If parent is setted to NULL for the firts time, remove the parent child
         if(m_activeNodeID == 1) {
             m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
-            m_parentList[0] = NULL;
-            m_online = false;
+            if(m_parentList[0]) {
+                m_parentList[0]->RemoveChild(this);
+                m_parentList[0] = NULL;
+                m_online = false;
+            }
         } else if(m_activeNodeID == 2) {
             m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
-            m_parentList[1] = NULL;
-            m_online = false;
+            if(m_parentList[1]) {
+                m_parentList[1]->RemoveChild(this);
+                m_parentList[1] = NULL;
+                m_online = false;
+            }
         }
     }
 

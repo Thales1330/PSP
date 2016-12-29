@@ -139,8 +139,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
             else {
                 // Complex turns ratio
                 double radPhaseShift = wxDegToRad(data.phaseShift);
-                std::complex<double> a = std::complex<double>(data.turnsRatio * std::cos(radPhaseShift),
-                                                              -data.turnsRatio * std::sin(radPhaseShift));
+                std::complex<double> a = std::complex<double>(
+                    data.turnsRatio * std::cos(radPhaseShift), -data.turnsRatio * std::sin(radPhaseShift));
 
                 // Transformer admitance
                 std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -157,11 +157,15 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
 }
 
 void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<double> > voltage,
-                                                  std::vector<std::complex<double> > power,
-                                                  std::vector<BusType> busType,
-                                                  std::vector<ReactiveLimits> reactiveLimit,
-                                                  double systemPowerBase)
+    std::vector<std::complex<double> > power,
+    std::vector<BusType> busType,
+    std::vector<ReactiveLimits> reactiveLimit,
+    double systemPowerBase)
 {
+    for(int i = 0; i < (int)reactiveLimit.size(); ++i) {
+        if(reactiveLimit[i].maxLimit > -1e-5 && reactiveLimit[i].maxLimit < 1e-5) reactiveLimit[i].maxLimit = 1e-5;
+        if(reactiveLimit[i].minLimit > -1e-5 && reactiveLimit[i].minLimit < 1e-5) reactiveLimit[i].minLimit = 1e-5;
+    }
     // Buses voltages
     for(int i = 0; i < (int)m_busList.size(); i++) {
         Bus* bus = m_busList[i];
@@ -182,9 +186,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             std::complex<double> v2 = voltage[n2];
 
             data.current[0] = (v1 - v2) / std::complex<double>(data.resistance, data.indReactance) +
-                              v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+                v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
             data.current[1] = (v2 - v1) / std::complex<double>(data.resistance, data.indReactance) +
-                              v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+                v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
 
             data.powerFlow[0] = v1 * std::conj(data.current[0]);
             data.powerFlow[1] = v2 * std::conj(data.current[1]);
@@ -205,8 +209,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             TransformerElectricalData data = transformer->GetElectricalData();
             int n1 = ((Bus*)transformer->GetParentList()[0])->GetEletricalData().number;
             int n2 = ((Bus*)transformer->GetParentList()[1])->GetEletricalData().number;
-            std::complex<double> v1 = voltage[n1];  // Primary voltage
-            std::complex<double> v2 = voltage[n2];  // Secondary voltage
+            std::complex<double> v1 = voltage[n1]; // Primary voltage
+            std::complex<double> v2 = voltage[n2]; // Secondary voltage
 
             // Transformer admitance
             std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -386,8 +390,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                         reactivePower = childData_PU.minReactive;
                         reachedMachineLimit = true;
                     } else if((!childData_PU.haveMaxReactive && reactiveLimit[i].limitReached == RL_MAX_REACHED) ||
-                              (!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
-                              (!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
+                        (!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
+                        (!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
                         reactivePower += exceededReactive;
                         exceededReactive = 0.0;
                     }
