@@ -894,3 +894,10 @@ void Text::UpdateText(double systemPowerBase)
         } break;
     }
 }
+
+Element* Text::GetCopy()
+{
+	Text* copy = new Text();
+	*copy = *this;
+	return copy;
+}

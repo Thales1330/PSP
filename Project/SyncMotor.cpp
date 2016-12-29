@@ -97,3 +97,10 @@ SyncMotorElectricalData SyncMotor::GetPUElectricalData(double systemPowerBase)
 	
 	return data;
 }
+
+Element* SyncMotor::GetCopy()
+{
+	SyncMotor* copy = new SyncMotor();
+	*copy = *this;
+	return copy;
+}

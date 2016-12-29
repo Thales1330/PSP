@@ -62,7 +62,8 @@ class SyncMotor : public Machines
     SyncMotor();
     SyncMotor(wxString name);
     ~SyncMotor();
-
+	
+	virtual Element* GetCopy();
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual SyncMotorElectricalData GetElectricalData() { return m_electricalData; }

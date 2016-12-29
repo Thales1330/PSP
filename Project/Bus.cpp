@@ -53,7 +53,7 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
     glRotated(m_angle, 0.0, 0.0, 1.0);
     glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-    glColor4dv(m_busColour->GetRGBA());
+    glColor4dv(m_busColour.GetRGBA());
     DrawRectangle(m_position, m_width, m_height);
     // Pop the old matrix back.
     glPopMatrix();
@@ -185,4 +185,11 @@ bool Bus::ShowForm(wxWindow* parent, Element* element)
 
     busForm->Destroy();
     return false;
+}
+
+Element* Bus::GetCopy()
+{
+	Bus* copy = new Bus();
+	*copy = *this;
+	return copy;
 }

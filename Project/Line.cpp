@@ -31,7 +31,7 @@ bool Line::Contains(wxPoint2DDouble position) const
 
 void Line::Draw(wxPoint2DDouble translation, double scale) const
 {
-    OpenGLColour* elementColour;
+    OpenGLColour elementColour;
     if(m_online) elementColour = m_onlineElementColour;
     else elementColour = m_offlineElementColour;
     
@@ -48,7 +48,7 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
     // Line selected (Layer 1).
     if(m_selected) {
         glLineWidth(1.5 + m_borderSize * 2.0);
-        glColor4dv(m_selectionColour->GetRGBA());
+        glColor4dv(m_selectionColour.GetRGBA());
         DrawLine(pointList);
 
         // Draw nodes selection.
@@ -62,7 +62,7 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
 
     // Draw line (Layer 2)
     glLineWidth(1.5);
-    glColor4dv(elementColour->GetRGBA());
+    glColor4dv(elementColour.GetRGBA());
     DrawLine(pointList);
 
     if(m_inserted) {
@@ -72,7 +72,7 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
 
     // Draw nodes.
     if(pointList.size() > 0) {
-        glColor4dv(elementColour->GetRGBA());
+        glColor4dv(elementColour.GetRGBA());
         DrawCircle(pointList[0], 5.0, 10, GL_POLYGON);
         if(m_inserted) {
             DrawCircle(pointList[pointList.size() - 1], 5.0, 10, GL_POLYGON);
@@ -490,4 +490,11 @@ void Line::SetPointList(std::vector<wxPoint2DDouble> pointList)
     m_pointList = pointList;
     UpdateSwitchesPosition();
     UpdatePowerFlowArrowsPosition();
+}
+
+Element* Line::GetCopy()
+{
+	Line* copy = new Line();
+	*copy = *this;
+	return copy;
 }

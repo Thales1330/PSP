@@ -2,16 +2,18 @@
 
 Element::Element()
 {
-    m_busColour = new OpenGLColour(0.0, 0.3, 1.0, 1.0);
-    m_onlineElementColour = new OpenGLColour(0.2, 0.2, 0.2, 1.0);
-    m_offlineElementColour = new OpenGLColour(0.5, 0.5, 0.5, 1.0);
-    m_closedSwitchColour = new OpenGLColour(0.0, 0.4, 0.0, 1.0);
-    m_openedSwitchColour = new OpenGLColour(1.0, 0.1, 0.1, 1.0);
-    m_selectionColour = new OpenGLColour(0.0, 0.5, 1.0, 0.5);
-    m_powerFlowArrowColour = new OpenGLColour(1.0, 0.51, 0.0, 1.0);
+    m_busColour.SetRGBA(0.0, 0.3, 1.0, 1.0);
+    m_onlineElementColour.SetRGBA(0.2, 0.2, 0.2, 1.0);
+    m_offlineElementColour.SetRGBA(0.5, 0.5, 0.5, 1.0);
+    m_closedSwitchColour.SetRGBA(0.0, 0.4, 0.0, 1.0);
+    m_openedSwitchColour.SetRGBA(1.0, 0.1, 0.1, 1.0);
+    m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5);
+    m_powerFlowArrowColour.SetRGBA(1.0, 0.51, 0.0, 1.0);
 }
 
-Element::~Element() {}
+Element::~Element() 
+{
+}
 
 void Element::SetPosition(const wxPoint2DDouble position)
 {
@@ -257,9 +259,9 @@ void Element::DrawSwitches() const
         Element* parent = *it;
         if(parent) {
             if(m_online) {
-                glColor4dv(m_closedSwitchColour->GetRGBA());
+                glColor4dv(m_closedSwitchColour.GetRGBA());
             } else {
-                glColor4dv(m_openedSwitchColour->GetRGBA());
+                glColor4dv(m_openedSwitchColour.GetRGBA());
             }
 
             glPushMatrix();
@@ -442,7 +444,7 @@ void Element::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 void Element::DrawPowerFlowPts() const
 {
     if(m_online) {
-        glColor4dv(m_powerFlowArrowColour->GetRGBA());
+        glColor4dv(m_powerFlowArrowColour.GetRGBA());
         for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) {
             DrawTriangle(m_powerFlowArrow[i]);
         }
@@ -462,4 +464,14 @@ void OpenGLColour::SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble
     rgba[1] = green;
     rgba[2] = blue;
     rgba[3] = alpha;
+}
+
+OpenGLColour::OpenGLColour()
+{
+	SetRGBA(1.0, 1.0, 1.0, 1.0);
+}
+
+OpenGLColour::OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
+{
+	SetRGBA(red, green, blue, alpha);
 }

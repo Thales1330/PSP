@@ -35,7 +35,7 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 
 void Machines::Draw(wxPoint2DDouble translation, double scale) const
 {
-    OpenGLColour* elementColour;
+    OpenGLColour elementColour;
     if(m_online) elementColour = m_onlineElementColour;
     else elementColour = m_offlineElementColour;
     
@@ -43,7 +43,7 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
         // Draw Selection (layer 1).
         if(m_selected) {
             glLineWidth(1.5 + m_borderSize * 2.0);
-            glColor4dv(m_selectionColour->GetRGBA());
+            glColor4dv(m_selectionColour.GetRGBA());
             DrawCircle(m_position, 25.0 + (m_borderSize + 1.5) / scale, 20, GL_POLYGON);
             DrawLine(m_pointList);
 
@@ -55,7 +55,7 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
         glLineWidth(1.5);
 
         // Draw node.
-        glColor4dv(elementColour->GetRGBA());
+        glColor4dv(elementColour.GetRGBA());
         DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
 
         DrawLine(m_pointList);
@@ -66,7 +66,7 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
         glColor4d(1.0, 1.0, 1.0, 1.0);
         DrawCircle(m_position, 25.0, 20, GL_POLYGON);
 
-        glColor4dv(elementColour->GetRGBA());
+        glColor4dv(elementColour.GetRGBA());
         DrawCircle(m_position, 25.0, 20);
 
         // Draw machine symbol.

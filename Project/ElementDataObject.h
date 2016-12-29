@@ -1,29 +1,19 @@
 #ifndef ELEMENTDATAOBJECT_H
 #define ELEMENTDATAOBJECT_H
 
-#include <wx/dataobj.h>
 #include "Workspace.h"
-
-class ElectricCalculation;
+#include <wx/dataobj.h>
 
 struct ElementsLists {
-    std::vector<Bus*> busList;
-    std::vector<Capacitor*> capacitorList;
-    std::vector<IndMotor*> indMotorList;
-    std::vector<Inductor*> inductorList;
-    std::vector<Line*> lineList;
-    std::vector<Load*> loadList;
-    std::vector<Machines*> machinesList;
-    std::vector<SyncGenerator*> syncGeneratorList;
-    std::vector<SyncMotor*> syncMotorList;
-    std::vector<Transformer*> transformerList;
-    std::vector<Text*> textList;
+	std::vector<Element*> elementList;
+    std::vector<Bus*> parentList;
 };
 
 class ElementDataObject : public wxDataObjectSimple
 {
 public:
-    ElementDataObject(Workspace* workspace);
+	ElementDataObject();
+    ElementDataObject(std::vector<Element*> elementList);
     ~ElementDataObject();
 
     size_t GetDataSize() const override;

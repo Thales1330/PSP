@@ -67,7 +67,8 @@ public:
     SyncGenerator();
     SyncGenerator(wxString name);
     ~SyncGenerator();
-
+	
+	virtual Element* GetCopy();
     virtual void Init();
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);

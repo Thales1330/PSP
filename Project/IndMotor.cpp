@@ -75,3 +75,10 @@ IndMotorElectricalData IndMotor::GetPUElectricalData(double systemPowerBase)
 	
 	return data;
 }
+
+Element* IndMotor::GetCopy()
+{
+	IndMotor* copy = new IndMotor();
+	*copy = *this;
+	return copy;
+}

@@ -139,7 +139,9 @@ Release/main.cpp.o: main.cpp C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/msw/panel.h \
  C:/wxWidgets-3.1.0/include/wx/stockitem.h \
  C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h \
- C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h MainFrameBase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h \
+ C:/wxWidgets-3.1.0/include/wx/filedlg.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/filedlg.h MainFrameBase.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
  C:/wxWidgets-3.1.0/include/wx/filesys.h \
  C:/wxWidgets-3.1.0/include/wx/filename.h \
@@ -488,6 +490,10 @@ C:/wxWidgets-3.1.0/include/wx/stockitem.h:
 C:/wxWidgets-3.1.0/include/wx/generic/msgdlgg.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/msgdlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/filedlg.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/filedlg.h:
 
 MainFrameBase.h:
 

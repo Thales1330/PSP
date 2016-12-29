@@ -50,7 +50,8 @@ class Text : public Element
     Text();
     Text(wxPoint2DDouble position);
     ~Text();
-
+	
+	virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale);
