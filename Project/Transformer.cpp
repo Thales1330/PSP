@@ -92,12 +92,16 @@ bool Transformer::Contains(wxPoint2DDouble position) const
 
 void Transformer::Draw(wxPoint2DDouble translation, double scale) const
 {
+    OpenGLColour elementColour;
+    if(m_online) elementColour = m_onlineElementColour;
+    else elementColour = m_offlineElementColour;
+    
     if(m_inserted) {
         // Draw selection (layer 1).
         if(m_selected) {
             // Push the current matrix on stack.
             glLineWidth(1.5 + m_borderSize * 2.0);
-            glColor4d(0.0, 0.5, 1.0, 0.5);
+            glColor4dv(m_selectionColour.GetRGBA());
             DrawLine(m_pointList);
             glPushMatrix();
             // Rotate the matrix around the object position.
@@ -124,12 +128,12 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
         // Draw transformer (layer 2).
         // Transformer line
         glLineWidth(1.5);
-        glColor4d(0.2, 0.2, 0.2, 1.0);
+        glColor4dv(elementColour.GetRGBA());
         DrawLine(m_pointList);
 
         // Draw nodes.
         if(m_pointList.size() > 0) {
-            glColor4d(0.2, 0.2, 0.2, 1.0);
+            glColor4dv(elementColour.GetRGBA());
             DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
             if(m_inserted) {
                 DrawCircle(m_pointList[m_pointList.size() - 1], 5.0, 10, GL_POLYGON);
@@ -150,7 +154,7 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
         DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, GL_POLYGON);
         DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, GL_POLYGON);
 
-        glColor4d(0.2, 0.2, 0.2, 1.0);
+        glColor4dv(elementColour.GetRGBA());
         DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20);
         DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20);
 
@@ -373,4 +377,11 @@ void Transformer::SetPowerFlowDirection(PowerFlowDirection pfDirection)
 {
     m_pfDirection = pfDirection;
     UpdatePowerFlowArrowsPosition();
+}
+
+Element* Transformer::GetCopy()
+{
+	Transformer* copy = new Transformer();
+	*copy = *this;
+	return copy;
 }

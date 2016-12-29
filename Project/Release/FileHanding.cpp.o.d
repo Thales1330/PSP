@@ -138,7 +138,13 @@ Release/FileHanding.cpp.o: FileHanding.cpp FileHanding.h \
  C:/wxWidgets-3.1.0/include/wx/msw/control.h \
  C:/wxWidgets-3.1.0/include/wx/msw/statusbar.h \
  C:/wxWidgets-3.1.0/include/wx/tooltip.h \
- C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h WorkspaceBase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h \
+ C:/wxWidgets-3.1.0/include/wx/clipbrd.h \
+ C:/wxWidgets-3.1.0/include/wx/dataobj.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h WorkspaceBase.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
  C:/wxWidgets-3.1.0/include/wx/filesys.h \
  C:/wxWidgets-3.1.0/include/wx/filename.h \
@@ -251,10 +257,6 @@ Release/FileHanding.cpp.o: FileHanding.cpp FileHanding.h \
  C:/wxWidgets-3.1.0/include/wx/dcmemory.h \
  C:/wxWidgets-3.1.0/include/wx/dcprint.h \
  C:/wxWidgets-3.1.0/include/wx/dcscreen.h \
- C:/wxWidgets-3.1.0/include/wx/dataobj.h \
- C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h \
- C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h \
- C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h \
  C:/wxWidgets-3.1.0/include/wx/bmpbuttn.h \
  C:/wxWidgets-3.1.0/include/wx/msw/bmpbuttn.h \
  C:/wxWidgets-3.1.0/include/wx/checklst.h \
@@ -573,6 +575,18 @@ C:/wxWidgets-3.1.0/include/wx/tooltip.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/tooltip.h:
 
+C:/wxWidgets-3.1.0/include/wx/clipbrd.h:
+
+C:/wxWidgets-3.1.0/include/wx/dataobj.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h:
+
 WorkspaceBase.h:
 
 C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h:
@@ -834,14 +848,6 @@ C:/wxWidgets-3.1.0/include/wx/dcmemory.h:
 C:/wxWidgets-3.1.0/include/wx/dcprint.h:
 
 C:/wxWidgets-3.1.0/include/wx/dcscreen.h:
-
-C:/wxWidgets-3.1.0/include/wx/dataobj.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h:
-
-C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h:
 
 C:/wxWidgets-3.1.0/include/wx/bmpbuttn.h:
 

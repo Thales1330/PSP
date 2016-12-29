@@ -20,7 +20,8 @@ class IndMotor : public Machines
     IndMotor();
     IndMotor(wxString name);
     ~IndMotor();
-
+	
+	virtual Element* GetCopy();
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);

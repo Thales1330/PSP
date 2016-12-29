@@ -135,3 +135,10 @@ void SyncGenerator::SetNominalVoltage(std::vector<double> nominalVoltage, std::v
         m_electricalData.nominalVoltageUnit = nominalVoltageUnit[0];
     }
 }
+
+Element* SyncGenerator::GetCopy()
+{
+	SyncGenerator* copy = new SyncGenerator();
+	*copy = *this;
+	return copy;
+}

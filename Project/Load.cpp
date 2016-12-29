@@ -40,11 +40,15 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
 
 void Load::Draw(wxPoint2DDouble translation, double scale) const
 {
+    OpenGLColour elementColour;
+    if(m_online) elementColour = m_onlineElementColour;
+    else elementColour = m_offlineElementColour;
+    
     if(m_inserted) {
         // Draw Selection (layer 1).
         if(m_selected) {
             glLineWidth(1.5 + m_borderSize * 2.0);
-            glColor4d(0.0, 0.5, 1.0, 0.5);
+            glColor4dv(m_selectionColour.GetRGBA());
             std::vector<wxPoint2DDouble> selTriangPts;
             selTriangPts.push_back(m_triangPts[0] + m_position +
                                    wxPoint2DDouble(-m_borderSize / scale, -m_borderSize / scale));
@@ -69,7 +73,7 @@ void Load::Draw(wxPoint2DDouble translation, double scale) const
         glLineWidth(1.5);
 
         // Draw node.
-        glColor4d(0.2, 0.2, 0.2, 1.0);
+        glColor4dv(elementColour.GetRGBA());
         DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
 
         DrawLine(m_pointList);
@@ -85,7 +89,7 @@ void Load::Draw(wxPoint2DDouble translation, double scale) const
         glTranslated(m_position.m_x, m_position.m_y, 0.0);
         glRotated(m_angle, 0.0, 0.0, 1.0);
         glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
-        glColor4d(0.2, 0.2, 0.2, 1.0);
+        glColor4dv(elementColour.GetRGBA());
         DrawTriangle(triangPts);
         glPopMatrix();
     }
@@ -159,4 +163,11 @@ LoadElectricalData Load::GetPUElectricalData(double systemPowerBase)
     }
 
     return data;
+}
+
+Element* Load::GetCopy()
+{
+	Load* copy = new Load();
+	*copy = *this;
+	return copy;
 }

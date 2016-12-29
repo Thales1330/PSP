@@ -45,6 +45,7 @@ class Line : public Branch
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
     virtual bool SetNodeParent(Element* parent);
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_SIZING; }
+	virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void MovePickbox(wxPoint2DDouble position);

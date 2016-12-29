@@ -26,7 +26,8 @@ class Load : public Shunt
     Load();
     Load(wxString name);
     ~Load();
-
+	
+	virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void Rotate(bool clockwise = true);

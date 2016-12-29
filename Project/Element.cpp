@@ -1,13 +1,23 @@
 #include "Element.h"
 
-Element::Element() {}
+Element::Element()
+{
+    m_busColour.SetRGBA(0.0, 0.3, 1.0, 1.0);
+    m_onlineElementColour.SetRGBA(0.2, 0.2, 0.2, 1.0);
+    m_offlineElementColour.SetRGBA(0.5, 0.5, 0.5, 1.0);
+    m_closedSwitchColour.SetRGBA(0.0, 0.4, 0.0, 1.0);
+    m_openedSwitchColour.SetRGBA(1.0, 0.1, 0.1, 1.0);
+    m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5);
+    m_powerFlowArrowColour.SetRGBA(1.0, 0.51, 0.0, 1.0);
+}
+
 Element::~Element() {}
+
 void Element::SetPosition(const wxPoint2DDouble position)
 {
     m_position = position;
-    m_rect =
-        wxRect2DDouble(m_position.m_x - m_width / 2.0 - m_borderSize, m_position.m_y - m_height / 2.0 - m_borderSize,
-                       m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
+    m_rect = wxRect2DDouble(m_position.m_x - m_width / 2.0 - m_borderSize,
+        m_position.m_y - m_height / 2.0 - m_borderSize, m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
 }
 
 void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode) const
@@ -21,11 +31,11 @@ void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegment
 }
 
 void Element::DrawArc(wxPoint2DDouble position,
-                      double radius,
-                      double initAngle,
-                      double finalAngle,
-                      int numSegments,
-                      GLenum mode) const
+    double radius,
+    double initAngle,
+    double finalAngle,
+    int numSegments,
+    GLenum mode) const
 {
     double initAngRad = wxDegToRad(initAngle);
     double finalAngRad = wxDegToRad(finalAngle);
@@ -48,7 +58,7 @@ void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) con
 
 void Element::DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode) const
 {
-    glBegin(mode);  // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
+    glBegin(mode); // TODO: GL_QUADS Ã© obsoleto (OpenGL 3.0+), encontrar outra soluÃ§Ã£o.
     glVertex2d(position.m_x - width / 2.0, position.m_y - height / 2.0);
     glVertex2d(position.m_x - width / 2.0, position.m_y + height / 2.0);
     glVertex2d(position.m_x + width / 2.0, position.m_y + height / 2.0);
@@ -58,7 +68,7 @@ void Element::DrawRectangle(wxPoint2DDouble position, double width, double heigh
 
 void Element::DrawRectangle(wxPoint2DDouble* points, GLenum mode) const
 {
-    glBegin(mode);  // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
+    glBegin(mode); // TODO: GL_QUADS Ã© obsoleto (OpenGL 3.0+), encontrar outra soluÃ§Ã£o.
     glVertex2d(points[0].m_x, points[0].m_y);
     glVertex2d(points[1].m_x, points[1].m_y);
     glVertex2d(points[2].m_x, points[2].m_y);
@@ -89,9 +99,9 @@ wxPoint2DDouble Element::RotateAtPosition(wxPoint2DDouble pointToRotate, double 
     double radAngle = angle;
     if(degrees) radAngle = wxDegToRad(angle);
     return wxPoint2DDouble(std::cos(radAngle) * (pointToRotate.m_x - m_position.m_x) -
-                               std::sin(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_x,
-                           std::sin(radAngle) * (pointToRotate.m_x - m_position.m_x) +
-                               std::cos(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_y);
+            std::sin(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_x,
+        std::sin(radAngle) * (pointToRotate.m_x - m_position.m_x) +
+            std::cos(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_y);
 }
 
 void Element::StartMove(wxPoint2DDouble position)
@@ -109,31 +119,30 @@ wxPoint2DDouble Element::GetSwitchPoint(Element* parent, wxPoint2DDouble parentP
     // Rotate the second point (to compare).
     double angle = parent->GetAngle();
 
-    secondPoint =
-        wxPoint2DDouble(std::cos(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) -
-                            std::sin(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
-                        std::sin(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) +
-                            std::cos(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+    secondPoint = wxPoint2DDouble(std::cos(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) -
+            std::sin(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
+        std::sin(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) +
+            std::cos(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
 
     // Rotate
     if(secondPoint.m_y > parentPoint.m_y) angle -= 180.0;
     return wxPoint2DDouble(std::cos(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) -
-                               std::sin(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
-                           std::sin(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) +
-                               std::cos(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+            std::sin(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
+        std::sin(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) +
+            std::cos(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
 }
 
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
 {
     return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *
-           scale;
+        scale;
 }
 
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble position,
-                                       wxPoint2DDouble translation,
-                                       double scale,
-                                       double offsetX,
-                                       double offsetY) const
+    wxPoint2DDouble translation,
+    double scale,
+    double offsetX,
+    double offsetY) const
 {
     return wxPoint2DDouble(position.m_x + offsetX + translation.m_x, position.m_y + offsetY + translation.m_y) * scale;
 }
@@ -147,14 +156,14 @@ void Element::DrawPoint(wxPoint2DDouble position, double size) const
 }
 
 bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
-                                          wxRect2DDouble rect2,
-                                          double angle1,
-                                          double angle2) const
+    wxRect2DDouble rect2,
+    double angle1,
+    double angle2) const
 {
-    wxPoint2DDouble rect1Corners[4] = {rect1.GetLeftTop(), rect1.GetLeftBottom(), rect1.GetRightBottom(),
-                                       rect1.GetRightTop()};
-    wxPoint2DDouble rect2Corners[4] = {rect2.GetLeftTop(), rect2.GetLeftBottom(), rect2.GetRightBottom(),
-                                       rect2.GetRightTop()};
+    wxPoint2DDouble rect1Corners[4] = { rect1.GetLeftTop(), rect1.GetLeftBottom(), rect1.GetRightBottom(),
+        rect1.GetRightTop() };
+    wxPoint2DDouble rect2Corners[4] = { rect2.GetLeftTop(), rect2.GetLeftBottom(), rect2.GetRightBottom(),
+        rect2.GetRightTop() };
     wxPoint2DDouble rect1Center(rect1.m_x + rect1.m_width / 2.0, rect1.m_y + rect1.m_height / 2.0);
     wxPoint2DDouble rect2Center(rect2.m_x + rect2.m_width / 2.0, rect2.m_y + rect2.m_height / 2.0);
 
@@ -163,28 +172,26 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     double radAngle2 = wxDegToRad(angle2);
 
     for(int i = 0; i < 4; i++) {
-        rect1Corners[i] =
-            wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
-                                std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
-                            std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
-                                std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
+        rect1Corners[i] = wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
+                std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
+            std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
+                std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
 
-        rect2Corners[i] =
-            wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
-                                std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
-                            std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
-                                std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
+        rect2Corners[i] = wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
+                std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
+            std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
+                std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
     }
 
     //[Ref] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
 
     // Find the rectangles axis to project
-    wxPoint2DDouble axis[4] = {rect1Corners[3] - rect1Corners[0], rect1Corners[3] - rect1Corners[2],
-                               rect2Corners[3] - rect2Corners[0], rect2Corners[3] - rect2Corners[2]};
+    wxPoint2DDouble axis[4] = { rect1Corners[3] - rect1Corners[0], rect1Corners[3] - rect1Corners[2],
+        rect2Corners[3] - rect2Corners[0], rect2Corners[3] - rect2Corners[2] };
 
     // Calculate the projected points to each axis
-    wxPoint2DDouble rect1ProjPts[4][4];  // [axis][corner]
-    wxPoint2DDouble rect2ProjPts[4][4];  // [axis][corner]
+    wxPoint2DDouble rect1ProjPts[4][4]; // [axis][corner]
+    wxPoint2DDouble rect2ProjPts[4][4]; // [axis][corner]
     for(int i = 0; i < 4; i++) {
         double den = axis[i].m_x * axis[i].m_x + axis[i].m_y * axis[i].m_y;
         for(int j = 0; j < 4; j++) {
@@ -197,8 +204,8 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     }
 
     // Calculate the scalar value to identify the max and min values on projections
-    double rect1Scalar[4][4];  //[axis][corner]
-    double rect2Scalar[4][4];  //[axis][corner]
+    double rect1Scalar[4][4]; //[axis][corner]
+    double rect2Scalar[4][4]; //[axis][corner]
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             rect1Scalar[i][j] = rect1ProjPts[i][j].m_x * axis[i].m_x + rect1ProjPts[i][j].m_y * axis[i].m_y;
@@ -237,10 +244,10 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
 void Element::UpdateSwitches()
 {
     // General method, to one switch only.
-    wxPoint2DDouble swCenter = wxPoint2DDouble((m_pointList[0].m_x + m_pointList[1].m_x) / 2.0,
-                                               (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
-    m_switchRect[0] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize,
-                                     m_switchSize);
+    wxPoint2DDouble swCenter = wxPoint2DDouble(
+        (m_pointList[0].m_x + m_pointList[1].m_x) / 2.0, (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
+    m_switchRect[0] = wxRect2DDouble(
+        swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize, m_switchSize);
 }
 
 void Element::DrawSwitches() const
@@ -250,20 +257,20 @@ void Element::DrawSwitches() const
         Element* parent = *it;
         if(parent) {
             if(m_online) {
-                glColor4d(0.0, 0.4, 0.0, 1.0);  // green
+                glColor4dv(m_closedSwitchColour.GetRGBA());
             } else {
-                glColor4d(1.0, 0.1, 0.1, 1.0);  // red
+                glColor4dv(m_openedSwitchColour.GetRGBA());
             }
 
             glPushMatrix();
             glTranslated(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
-                         m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0, 0.0);
+                m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0, 0.0);
             glRotated(parent->GetAngle(), 0.0, 0.0, 1.0);
             glTranslated(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
-                         -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0, 0.0);
+                -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0, 0.0);
 
             DrawRectangle(m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
-                          m_switchSize, m_switchSize);
+                m_switchSize, m_switchSize);
 
             glPopMatrix();
         }
@@ -310,8 +317,8 @@ void Element::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& righ
     // Check rect corners boundaries.
 
     // Get rectangle corners
-    wxPoint2DDouble rectCorner[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
-                                     m_rect.GetRightTop()};
+    wxPoint2DDouble rectCorner[4] = { m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
+        m_rect.GetRightTop() };
     // Rotate corners.
     for(int i = 0; i < 4; ++i) {
         rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle);
@@ -390,7 +397,7 @@ wxString Element::StringFromDouble(double value, int minDecimal)
 
 void Element::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 {
-    double arrowRate = 100.0;  // One arrow to each "arrowRate" distance in pixels.
+    double arrowRate = 100.0; // One arrow to each "arrowRate" distance in pixels.
 
     if(edges.size() < 2) return;
 
@@ -413,7 +420,7 @@ void Element::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 
         for(int i = 0; i < numArrows; i++) {
             wxPoint2DDouble arrowCenter(pt1.m_x + ((rotPt2.m_x - pt1.m_x) / double(numArrows + 1)) * double(i + 1),
-                                        pt1.m_y + ((rotPt2.m_y - pt1.m_y) / double(numArrows + 1)) * double(i + 1));
+                pt1.m_y + ((rotPt2.m_y - pt1.m_y) / double(numArrows + 1)) * double(i + 1));
 
             std::vector<wxPoint2DDouble> triPts;
             triPts.push_back(arrowCenter + wxPoint2DDouble(5.0, 0.0));
@@ -434,8 +441,32 @@ void Element::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 
 void Element::DrawPowerFlowPts() const
 {
-    glColor4d(1.0, 0.51, 0.0, 1.0);
-    for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) {
-        DrawTriangle(m_powerFlowArrow[i]);
+    if(m_online) {
+        glColor4dv(m_powerFlowArrowColour.GetRGBA());
+        for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) {
+            DrawTriangle(m_powerFlowArrow[i]);
+        }
     }
+}
+
+void Element::ReplaceParent(Element* oldParent, Element* newParent)
+{
+    for(int i = 0; i < (int)m_parentList.size(); i++) {
+        if(m_parentList[i] == oldParent) m_parentList[i] = newParent;
+    }
+}
+
+void OpenGLColour::SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
+{
+    rgba[0] = red;
+    rgba[1] = green;
+    rgba[2] = blue;
+    rgba[3] = alpha;
+}
+
+OpenGLColour::OpenGLColour() { SetRGBA(1.0, 1.0, 1.0, 1.0); }
+
+OpenGLColour::OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
+{
+    SetRGBA(red, green, blue, alpha);
 }

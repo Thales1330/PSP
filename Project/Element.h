@@ -82,6 +82,18 @@ struct SwitchingData {
     std::vector<double> swTime;
 };
 
+class OpenGLColour
+{
+public:
+    OpenGLColour();
+    OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha);
+    virtual ~OpenGLColour() {}
+    void SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha);
+    const GLdouble* GetRGBA() const { return rgba; }
+protected:
+    GLdouble rgba[4];
+};
+
 class Element
 {
 public:
@@ -111,13 +123,13 @@ public:
     bool IsPickboxShown() const { return m_showPickbox; }
     bool IsOnline() const { return m_online; }
     virtual std::vector<wxPoint2DDouble> GetPointList() const { return m_pointList; }
-    
     // Pure-virtuals methods
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
     virtual bool Contains(wxPoint2DDouble position) const = 0;
     virtual bool Intersects(wxRect2DDouble rect) const = 0;
 
     // General methods
+    virtual Element* GetCopy() { return NULL; }
     virtual void Draw(wxPoint2DDouble translation, double scale) const {};
     virtual void Rotate(bool clockwise = true) {}
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
@@ -129,6 +141,7 @@ public:
     virtual void UpdateNodes() {}
     virtual bool SetNodeParent(Element* parent) { return false; }
     virtual void RemoveParent(Element* parent) {}
+    virtual void ReplaceParent(Element* oldParent, Element* newParent);
     virtual void RotateNode(Element* parent, bool clockwise = true) {}
     virtual wxPoint2DDouble
     GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const;
@@ -172,13 +185,11 @@ public:
     virtual std::vector<Element*> GetParentList() const { return m_parentList; }
     virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
     virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
-
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
 
     virtual void GeneralMenuItens(wxMenu& menu);
 
     virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
-
     bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
     bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
 
@@ -190,7 +201,6 @@ public:
     virtual SwitchingData GetSwitchingData() { return m_swData; }
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection) { m_pfDirection = pfDirection; }
     virtual PowerFlowDirection GetPowerFlowDirection() const { return m_pfDirection; }
-
     // Static methods
     static wxString StringFromDouble(double value, int minDecimal = 1);
 
@@ -205,6 +215,14 @@ protected:
     double m_borderSize = 2.0;
     double m_rotationAngle = 45.0;
     double m_switchSize = 10.0;
+
+    OpenGLColour m_busColour;
+    OpenGLColour m_onlineElementColour;
+    OpenGLColour m_offlineElementColour;
+    OpenGLColour m_closedSwitchColour;
+    OpenGLColour m_openedSwitchColour;
+    OpenGLColour m_selectionColour;
+    OpenGLColour m_powerFlowArrowColour;
 
     std::vector<wxRect2DDouble> m_switchRect;
 

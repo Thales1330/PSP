@@ -10,6 +10,7 @@
 #include "Load.h"
 #include "Inductor.h"
 #include "Capacitor.h"
+#include "ElementDataObject.h"
 
 #include "Text.h"
 
@@ -158,7 +159,7 @@ void Workspace::SetViewport()
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
     bool foundElement = false;
-    if(m_mode == MODE_INSERT_TEXT) {
+    if(m_mode == MODE_INSERT_TEXT || m_mode == MODE_PASTE) {
         m_mode = MODE_EDIT;
     } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT || m_mode == MODE_DRAG_INSERT_TEXT) {
         // Get the last element inserted on the list.
@@ -534,7 +535,8 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
             }
         } break;
 
-        case MODE_MOVE_ELEMENT: {
+        case MODE_MOVE_ELEMENT:
+        case MODE_PASTE: {
             for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
                 Element* element = *it;
                 // Parent's element moving...
@@ -769,6 +771,15 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Capacitor: Click on a buses, ESC to cancel."));
                         Redraw();
+                    } else if(event.GetModifiers() == wxMOD_CONTROL) { // Copy.
+                        CopySelection();
+                    }
+                }
+            } break;
+            case 'V': {
+                if(!insertingElement) {
+                    if(event.GetModifiers() == wxMOD_CONTROL) {
+                        Paste();
                     }
                 }
             } break;
@@ -787,6 +798,10 @@ void Workspace::UpdateStatusBar()
         case MODE_DRAG: {
             m_statusBar->SetStatusText(_("MODE: DRAG"), 1);
         } break;
+
+        case MODE_PASTE: {
+            m_statusBar->SetStatusText(_("MODE: PASTE"), 1);
+        }
 
         case MODE_INSERT:
         case MODE_INSERT_TEXT:
@@ -953,41 +968,53 @@ void Workspace::DeleteSelectedElements()
     Redraw();
 }
 
+bool Workspace::GetElementsCorners(wxPoint2DDouble& leftUpCorner,
+    wxPoint2DDouble& rightDownCorner,
+    std::vector<Element*> elementList)
+{
+    if(elementList.size() == 0) return false;
+
+    elementList[0]->CalculateBoundaries(leftUpCorner, rightDownCorner);
+
+    for(auto it = elementList.begin() + 1, itEnd = elementList.end(); it != itEnd; it++) {
+        Element* element = *it;
+        wxPoint2DDouble leftUp;
+        wxPoint2DDouble rightDown;
+        element->CalculateBoundaries(leftUp, rightDown);
+        if(leftUp.m_x < leftUpCorner.m_x) leftUpCorner.m_x = leftUp.m_x;
+        if(leftUp.m_y < leftUpCorner.m_y) leftUpCorner.m_y = leftUp.m_y;
+        if(rightDown.m_x > rightDownCorner.m_x) rightDownCorner.m_x = rightDown.m_x;
+        if(rightDown.m_y > rightDownCorner.m_y) rightDownCorner.m_y = rightDown.m_y;
+    }
+    return true;
+}
+
 void Workspace::Fit()
 {
-    if(m_elementList.size() > 0) {
-        wxPoint2DDouble leftUpCorner(0, 0);
-        wxPoint2DDouble rightDownCorner(0, 0);
-        m_elementList[0]->CalculateBoundaries(leftUpCorner, rightDownCorner);
-
-        for(auto it = m_elementList.begin() + 1; it != m_elementList.end(); it++) {
-            Element* element = *it;
-            wxPoint2DDouble leftUp;
-            wxPoint2DDouble rightDown;
-            element->CalculateBoundaries(leftUp, rightDown);
-            if(leftUp.m_x < leftUpCorner.m_x) leftUpCorner.m_x = leftUp.m_x;
-            if(leftUp.m_y < leftUpCorner.m_y) leftUpCorner.m_y = leftUp.m_y;
-            if(rightDown.m_x > rightDownCorner.m_x) rightDownCorner.m_x = rightDown.m_x;
-            if(rightDown.m_y > rightDownCorner.m_y) rightDownCorner.m_y = rightDown.m_y;
-        }
-
-        int width = 0.0;
-        int height = 0.0;
-        GetSize(&width, &height);
-
-        double scaleX = double(width) / (rightDownCorner.m_x - leftUpCorner.m_x);
-        double scaleY = double(height) / (rightDownCorner.m_y - leftUpCorner.m_y);
-
-        double scale = scaleX < scaleY ? scaleX : scaleY;
-        if(scale > m_camera->GetZoomMax()) scale = m_camera->GetZoomMax();
-        if(scale < m_camera->GetZoomMin()) scale = m_camera->GetZoomMin();
-
-        m_camera->SetScale(scale);
-
-        m_camera->StartTranslation(leftUpCorner);
-        m_camera->SetTranslation(wxPoint2DDouble(0, 0));
-        Redraw();
+    wxPoint2DDouble leftUpCorner(0, 0);
+    wxPoint2DDouble rightDownCorner(0, 0);
+    std::vector<Element*> elementList = m_elementList;
+    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
+        elementList.push_back(*it);
     }
+
+    if(!GetElementsCorners(leftUpCorner, rightDownCorner, elementList)) return;
+    int width = 0.0;
+    int height = 0.0;
+    GetSize(&width, &height);
+
+    double scaleX = double(width) / (rightDownCorner.m_x - leftUpCorner.m_x);
+    double scaleY = double(height) / (rightDownCorner.m_y - leftUpCorner.m_y);
+
+    double scale = scaleX < scaleY ? scaleX : scaleY;
+    if(scale > m_camera->GetZoomMax()) scale = m_camera->GetZoomMax();
+    if(scale < m_camera->GetZoomMin()) scale = m_camera->GetZoomMin();
+
+    m_camera->SetScale(scale);
+
+    m_camera->StartTranslation(leftUpCorner);
+    m_camera->SetTranslation(wxPoint2DDouble(0, 0));
+    Redraw();
 }
 
 void Workspace::ValidateBusesVoltages(Element* initialBus)
@@ -1060,5 +1087,152 @@ void Workspace::UpdateTextElements()
     for(auto it = m_textList.begin(); it != m_textList.end(); ++it) {
         Text* text = *it;
         text->UpdateText(100e6);
+    }
+}
+
+void Workspace::CopySelection()
+{
+    std::vector<Element*> selectedElements;
+    // The buses need to be numerated to associate the child's parents to the copies.
+    int busNumber = 0;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        Element* element = *it;
+        if(typeid(*element) == typeid(Bus)) {
+            Bus* bus = (Bus*)element;
+            auto data = bus->GetEletricalData();
+            data.number = busNumber;
+            bus->SetElectricalData(data);
+            busNumber++;
+        }
+        if(element->IsSelected()) {
+            selectedElements.push_back(element);
+        }
+    }
+    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
+        Text* text = *it;
+        if(text->IsSelected()) {
+            selectedElements.push_back(text);
+        }
+    }
+    ElementDataObject* dataObject = new ElementDataObject(selectedElements);
+    wxTheClipboard->SetData(dataObject);
+    wxTheClipboard->Close();
+}
+
+bool Workspace::Paste()
+{
+    if(wxTheClipboard->Open()) {
+        ElementDataObject dataObject;
+
+        if(wxTheClipboard->IsSupported(wxDataFormat("PSPCopy"))) {
+            if(!wxTheClipboard->GetData(dataObject)) {
+                wxMessageDialog dialog(this, _("It was not possible to paste from clipboard."), _("Error"),
+                    wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
+                dialog.ShowModal();
+                wxTheClipboard->Close();
+                return false;
+            }
+        } else {
+            wxTheClipboard->Close();
+            return false;
+        }
+        wxTheClipboard->Close();
+
+        UnselectAll();
+
+        std::vector<Element*> pastedElements;
+        ElementsLists* elementsLists = dataObject.GetElementsLists();
+
+        // Paste buses (parents).
+        auto parentList = elementsLists->parentList;
+        std::vector<Bus*> pastedBusList; // To set new parents;
+        for(auto it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {
+            Element* copy = (*it)->GetCopy();
+            if(copy) {
+                pastedElements.push_back((Bus*)copy);
+                pastedBusList.push_back((Bus*)copy);
+                m_elementList.push_back((Bus*)copy);
+            }
+        }
+
+        // Paste other elements.
+        auto elementLists = elementsLists->elementList;
+        for(auto it = elementLists.begin(), itEnd = elementLists.end(); it != itEnd; ++it) {
+            Element* copy = (*it)->GetCopy();
+            if(copy) {
+                // Check if is text element
+                if(typeid(*copy) == typeid(Text)) {
+                    Text* text = (Text*)copy;
+                    // Check if element associated with the text exists.
+                    bool elementExist = false;
+                    for(int i = 0; i < (int)m_elementList.size(); i++) {
+                        if(text->GetElement() == m_elementList[i]) {
+                            elementExist = true;
+                            break;
+                        }
+                    }
+                    if(elementExist) {
+                        pastedElements.push_back(copy);
+                        m_textList.push_back((Text*)copy);
+                    }
+                } else {
+                    // Change the parent if copied, otherwise remove it.
+                    for(int j = 0; j < (int)copy->GetParentList().size(); j++) {
+                        Bus* currentParent = (Bus*)copy->GetParentList()[j];
+                        if(currentParent) {
+                            int parentNumber = currentParent->GetEletricalData().number;
+                            bool parentCopied = false;
+                            for(int k = 0; k < (int)pastedBusList.size(); k++) {
+                                Bus* newParent = pastedBusList[k];
+                                if(parentNumber == newParent->GetEletricalData().number)
+                                    copy->ReplaceParent(currentParent, newParent);
+                            }
+                            if(!parentCopied) copy->RemoveParent(currentParent);
+                        }
+                    }
+
+                    pastedElements.push_back(copy);
+                    m_elementList.push_back(copy);
+                }
+            }
+        }
+
+        // Move elements (and nodes) to the mouse position.
+        // The start position it's the center of the pasted objects.
+        wxPoint2DDouble leftUpCorner, rightDownCorner;
+        GetElementsCorners(leftUpCorner, rightDownCorner, pastedElements);
+        wxPoint2DDouble startPosition = (leftUpCorner + rightDownCorner) / 2.0;
+        for(auto it = pastedElements.begin(), itEnd = pastedElements.end(); it != itEnd; ++it) {
+            Element* element = *it;
+            element->StartMove(startPosition);
+            element->Move(m_camera->GetMousePosition());
+            for(int i = 0; i < (int)element->GetParentList().size(); i++) {
+                Element* parent = element->GetParentList()[i];
+                element->MoveNode(parent, m_camera->GetMousePosition());
+            }
+        }
+    } else {
+        wxMessageDialog dialog(this, _("It was not possible to paste from clipboard."), _("Error"),
+            wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
+        dialog.ShowModal();
+        return false;
+    }
+
+    Redraw();
+    m_mode = MODE_PASTE;
+    m_statusBar->SetStatusText(_("Click to paste."));
+    UpdateStatusBar();
+    return true;
+}
+
+void Workspace::UnselectAll()
+{
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
+        Element* element = *it;
+        element->SetSelected(false);
+    }
+    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; it++) {
+        Text* text = *it;
+        text->SetSelected(false);
     }
 }

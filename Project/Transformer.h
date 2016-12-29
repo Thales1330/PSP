@@ -57,7 +57,8 @@ class Transformer : public Branch
     Transformer();
     Transformer(wxString name);
     virtual ~Transformer();
-
+	
+	virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

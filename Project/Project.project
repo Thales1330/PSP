@@ -29,6 +29,7 @@
         <File Name="PowerFlow.cpp"/>
       </VirtualDirectory>
       <File Name="Text.cpp"/>
+      <File Name="ElementDataObject.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -81,6 +82,7 @@
         <File Name="rapidXML/rapidxml_print.hpp"/>
         <File Name="rapidXML/rapidxml_utils.hpp"/>
       </VirtualDirectory>
+      <File Name="ElementDataObject.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>

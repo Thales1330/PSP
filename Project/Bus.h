@@ -46,6 +46,7 @@ public:
     Bus(wxPoint2DDouble position);
     Bus(wxPoint2DDouble position, wxString name);
     ~Bus();
+	virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; }
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;

@@ -6,6 +6,7 @@
 #include <wx/dcclient.h>
 #include <wx/msgdlg.h>
 #include <wx/statusbr.h>
+#include <wx/clipbrd.h>
 
 #include "WorkspaceBase.h"
 #include "Bus.h"
@@ -21,6 +22,7 @@ class SyncMotor;
 class Load;
 class Inductor;
 class Capacitor;
+class ElementDataObject;
 
 class Text;
 
@@ -36,7 +38,8 @@ enum WorkspaceMode {
     MODE_DRAG_INSERT_TEXT,
     MODE_INSERT,
     MODE_INSERT_TEXT,
-    MODE_SELECTION_RECT
+    MODE_SELECTION_RECT,
+    MODE_PASTE
 };
 
 enum ElementID {
@@ -67,6 +70,9 @@ public:
     WorkspaceMode GetWorkspaceMode() const { return m_mode; }
     Camera* GetCamera() const { return m_camera; }
     
+    void CopySelection();
+    bool Paste();
+    
     wxFileName GetSavedPath() const { return m_savedPath; }
 
     void SetName(wxString name) { m_name = name; }
@@ -79,7 +85,9 @@ public:
     void Redraw() { m_glCanvas->Refresh(); }
     void RotateSelectedElements(bool clockwise = true);
     void DeleteSelectedElements();
+    bool GetElementsCorners(wxPoint2DDouble& leftUpCorner, wxPoint2DDouble& rightDownCorner, std::vector<Element*> elementList);
     void Fit();
+    void UnselectAll();
 
     void ValidateBusesVoltages(Element* initialBus);
     void ValidateElementsVoltages();

@@ -1,19 +1,26 @@
 #include "ReactiveShuntElementForm.h"
 #include "Inductor.h"
 
-Inductor::Inductor() : Shunt() {}
-Inductor::Inductor(wxString name) : Shunt() { m_electricalData.name = name; }
+Inductor::Inductor()
+    : Shunt()
+{
+}
+Inductor::Inductor(wxString name)
+    : Shunt()
+{
+    m_electricalData.name = name;
+}
 Inductor::~Inductor() {}
 bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {
         m_parentList.push_back(parent);
         wxPoint2DDouble parentPt =
-            parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-        parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
+            parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
+        parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
+        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
 
-        m_position = parentPt + wxPoint2DDouble(0.0, 100.0);  // Shifts the position to the down of the bus.
+        m_position = parentPt + wxPoint2DDouble(0.0, 100.0); // Shifts the position to the down of the bus.
         m_width = 20.0;
         m_height = 70.0;
         m_rect = wxRect2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0, m_width, m_height);
@@ -26,7 +33,7 @@ bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
         m_inserted = true;
 
         wxRect2DDouble genRect(0, 0, 0, 0);
-        m_switchRect.push_back(genRect);  // Push a general rectangle.
+        m_switchRect.push_back(genRect); // Push a general rectangle.
         UpdateSwitches();
 
         return true;
@@ -36,10 +43,16 @@ bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
 
 void Inductor::Draw(wxPoint2DDouble translation, double scale) const
 {
+    OpenGLColour elementColour;
+    if(m_online)
+        elementColour = m_onlineElementColour;
+    else
+        elementColour = m_offlineElementColour;
+
     if(m_inserted) {
         if(m_selected) {
             glLineWidth(1.5 + m_borderSize * 2.0);
-            glColor4d(0.0, 0.5, 1.0, 0.5);
+            glColor4dv(m_selectionColour.GetRGBA());
 
             DrawLine(m_pointList);
 
@@ -61,7 +74,7 @@ void Inductor::Draw(wxPoint2DDouble translation, double scale) const
         }
         // Draw Load (layer 2).
         glLineWidth(1.5);
-        glColor4d(0.2, 0.2, 0.2, 1.0);
+        glColor4dv(elementColour.GetRGBA());
         DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
         DrawLine(m_pointList);
 
@@ -72,7 +85,7 @@ void Inductor::Draw(wxPoint2DDouble translation, double scale) const
         glRotated(m_angle, 0.0, 0.0, 1.0);
         glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-        glColor4d(0.2, 0.2, 0.2, 1.0);
+        glColor4dv(elementColour.GetRGBA());
         DrawArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), 10, 45, 270, 10, GL_LINE_STRIP);
         DrawArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 25.0), 10, 45, 315, 10, GL_LINE_STRIP);
         DrawArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 40.0), 10, 90, 315, 10, GL_LINE_STRIP);
@@ -140,6 +153,13 @@ InductorElectricalData Inductor::GetPUElectricalData(double systemPowerBase)
         default:
             break;
     }
-    
+
     return data;
+}
+
+Element* Inductor::GetCopy()
+{
+    Inductor* copy = new Inductor();
+    *copy = *this;
+    return copy;
 }
