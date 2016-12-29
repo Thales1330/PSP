@@ -1,19 +1,26 @@
 #include "ReactiveShuntElementForm.h"
 #include "Capacitor.h"
 
-Capacitor::Capacitor() : Shunt() {}
-Capacitor::Capacitor(wxString name) : Shunt() { m_electricalData.name = name; }
+Capacitor::Capacitor()
+    : Shunt()
+{
+}
+Capacitor::Capacitor(wxString name)
+    : Shunt()
+{
+    m_electricalData.name = name;
+}
 Capacitor::~Capacitor() {}
 bool Capacitor::AddParent(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {
         m_parentList.push_back(parent);
         wxPoint2DDouble parentPt =
-            parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-        parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
+            parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
+        parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
+        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
 
-        m_position = parentPt + wxPoint2DDouble(0.0, 100.0);  // Shifts the position to the down of the bus.
+        m_position = parentPt + wxPoint2DDouble(0.0, 100.0); // Shifts the position to the down of the bus.
         m_width = 40;
         m_height = 30;
         m_rect = wxRect2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0, m_width, m_height);
@@ -26,7 +33,7 @@ bool Capacitor::AddParent(Element* parent, wxPoint2DDouble position)
         m_inserted = true;
 
         wxRect2DDouble genRect(0, 0, 0, 0);
-        m_switchRect.push_back(genRect);  // Push a general rectangle.
+        m_switchRect.push_back(genRect); // Push a general rectangle.
         UpdateSwitches();
 
         return true;
@@ -37,9 +44,11 @@ bool Capacitor::AddParent(Element* parent, wxPoint2DDouble position)
 void Capacitor::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online) elementColour = m_onlineElementColour;
-    else elementColour = m_offlineElementColour;
-    
+    if(m_online)
+        elementColour = m_onlineElementColour;
+    else
+        elementColour = m_offlineElementColour;
+
     if(m_inserted) {
         std::vector<wxPoint2DDouble> capPts;
         capPts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0));
@@ -156,7 +165,7 @@ CapacitorElectricalData Capacitor::GetPUElectricalData(double systemPowerBase)
 
 Element* Capacitor::GetCopy()
 {
-	Capacitor* copy = new Capacitor();
-	*copy = *this;
-	return copy;
+    Capacitor* copy = new Capacitor();
+    *copy = *this;
+    return copy;
 }

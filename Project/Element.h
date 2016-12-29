@@ -11,8 +11,7 @@
 
 #include <wx/log.h>
 
-enum PickboxID
-{
+enum PickboxID {
     ID_PB_NONE = 0,
     ID_PB_RIGHT,
     ID_PB_LEFT,
@@ -22,8 +21,7 @@ enum PickboxID
     ID_PB_LEFT_TOP
 };
 
-enum ContextMenuID
-{
+enum ContextMenuID {
     ID_EDIT_BUS = 0,
     ID_EDIT_LINE,
     ID_EDIT_TRANSFORMER,
@@ -42,8 +40,7 @@ enum ContextMenuID
     ID_DELETE
 };
 
-enum ElectricalUnit
-{
+enum ElectricalUnit {
     UNIT_PU = 0,
     UNIT_V,
     UNIT_kV,
@@ -66,8 +63,7 @@ enum ElectricalUnit
     UNIT_RADIAN
 };
 
-enum FaultData
-{
+enum FaultData {
     FAULT_THREEPHASE = 0,
     FAULT_2LINE,
     FAULT_2LINE_GROUND,
@@ -77,42 +73,30 @@ enum FaultData
     FAULT_LINE_C
 };
 
-enum SwitchingType
-{
-    SW_INSERT = 0,
-    SW_REMOVE
-};
+enum SwitchingType { SW_INSERT = 0, SW_REMOVE };
 
-enum PowerFlowDirection
-{
-    PF_NONE = 0,
-    PF_TO_BUS,
-    PF_TO_ELEMENT,
-    PF_BUS1_TO_BUS2,
-    PF_BUS2_TO_BUS1
-};
+enum PowerFlowDirection { PF_NONE = 0, PF_TO_BUS, PF_TO_ELEMENT, PF_BUS1_TO_BUS2, PF_BUS2_TO_BUS1 };
 
-struct SwitchingData
-{
+struct SwitchingData {
     std::vector<SwitchingType> swType;
     std::vector<double> swTime;
 };
 
 class OpenGLColour
 {
-   public:
+public:
     OpenGLColour();
     OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha);
     virtual ~OpenGLColour() {}
     void SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha);
     const GLdouble* GetRGBA() const { return rgba; }
-   protected:
+protected:
     GLdouble rgba[4];
 };
 
 class Element
 {
-   public:
+public:
     Element();
     virtual ~Element();
 
@@ -159,9 +143,8 @@ class Element
     virtual void RemoveParent(Element* parent) {}
     virtual void ReplaceParent(Element* oldParent, Element* newParent);
     virtual void RotateNode(Element* parent, bool clockwise = true) {}
-    virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
-                                           wxPoint2DDouble parentPoint,
-                                           wxPoint2DDouble secondPoint) const;
+    virtual wxPoint2DDouble
+    GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const;
     virtual bool SwitchesContains(wxPoint2DDouble position) const;
     virtual void UpdateSwitches();
     virtual void DrawSwitches() const;
@@ -174,27 +157,23 @@ class Element
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_ARROW; }
     virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
     virtual void ResetNodes() { m_activeNodeID = 0; }
-    virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
-                                          double scale,
-                                          double offsetX = 0.0,
-                                          double offsetY = 0.0) const;
+    virtual wxPoint2DDouble
+    WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX = 0.0, double offsetY = 0.0) const;
     virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble position,
-                                          wxPoint2DDouble translation,
-                                          double scale,
-                                          double offsetX = 0.0,
-                                          double offsetY = 0.0) const;
-    virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1,
-                                             wxRect2DDouble rect2,
-                                             double angle1,
-                                             double angle2) const;
+        wxPoint2DDouble translation,
+        double scale,
+        double offsetX = 0.0,
+        double offsetY = 0.0) const;
+    virtual bool
+    RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
 
     virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
     virtual void DrawArc(wxPoint2DDouble position,
-                         double radius,
-                         double initAngle,
-                         double finalAngle,
-                         int numSegments,
-                         GLenum mode = GL_LINE_LOOP) const;
+        double radius,
+        double initAngle,
+        double finalAngle,
+        int numSegments,
+        GLenum mode = GL_LINE_LOOP) const;
     virtual void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
     virtual void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
     virtual void DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode = GL_TRIANGLES) const;
@@ -225,7 +204,7 @@ class Element
     // Static methods
     static wxString StringFromDouble(double value, int minDecimal = 1);
 
-   protected:
+protected:
     std::vector<Element*> m_parentList;
 
     wxRect2DDouble m_rect;
@@ -268,4 +247,4 @@ class Element
     SwitchingData m_swData;
 };
 
-#endif  // ELEMENT_H
+#endif // ELEMENT_H

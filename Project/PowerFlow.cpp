@@ -278,13 +278,5 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
     UpdateElementsPowerFlow(voltage, power, oldBusType, reactiveLimit, systemPowerBase);
 
-    wxString str = "";
-    for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
-        Bus* bus = *itb;
-        BusElectricalData data = bus->GetEletricalData();
-        str += wxString::Format("%.5f/_%.2f\n", std::abs(data.voltage), wxRadToDeg(std::arg(data.voltage)));
-    }
-    wxLogMessage(str);
-
     return true;
 }

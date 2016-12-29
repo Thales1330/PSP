@@ -11,9 +11,7 @@ Element::Element()
     m_powerFlowArrowColour.SetRGBA(1.0, 0.51, 0.0, 1.0);
 }
 
-Element::~Element() 
-{
-}
+Element::~Element() {}
 
 void Element::SetPosition(const wxPoint2DDouble position)
 {
@@ -466,12 +464,9 @@ void OpenGLColour::SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble
     rgba[3] = alpha;
 }
 
-OpenGLColour::OpenGLColour()
-{
-	SetRGBA(1.0, 1.0, 1.0, 1.0);
-}
+OpenGLColour::OpenGLColour() { SetRGBA(1.0, 1.0, 1.0, 1.0); }
 
 OpenGLColour::OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
 {
-	SetRGBA(red, green, blue, alpha);
+    SetRGBA(red, green, blue, alpha);
 }
