@@ -225,7 +225,7 @@ Release/Load.cpp.o: Load.cpp Load.h LoadForm.h ElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menu.h \
  C:/wxWidgets-3.1.0/include/wx/log.h \
- C:/wxWidgets-3.1.0/include/wx/generic/logg.h
+ C:/wxWidgets-3.1.0/include/wx/generic/logg.h Bus.h BusForm.h
 
 Load.h:
 
@@ -694,3 +694,7 @@ C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
 C:/wxWidgets-3.1.0/include/wx/log.h:
 
 C:/wxWidgets-3.1.0/include/wx/generic/logg.h:
+
+Bus.h:
+
+BusForm.h:

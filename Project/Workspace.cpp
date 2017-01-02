@@ -62,6 +62,7 @@ Workspace::Workspace()
 Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar)
     : WorkspaceBase(parent)
 {
+    m_timer->Start();
     m_name = name;
     m_statusBar = statusBar;
     m_glContext = new wxGLContext(m_glCanvas);
@@ -271,6 +272,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
                 elementIsBus = true;
                 oldBus = *(Bus*)element;
             }
+            m_timer->Stop();
             element->ShowForm(this, element);
             elementEdited = true;
             redraw = true;
@@ -321,6 +323,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
     }
     if(elementEdited) UpdateTextElements();
     if(redraw) Redraw();
+    m_timer->Start();
 }
 
 void Workspace::OnRightClickDown(wxMouseEvent& event)
@@ -335,6 +338,7 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
                     element->ShowPickbox(false);
                     wxMenu menu;
                     if(element->GetContextMenu(menu)) {
+                        m_timer->Stop();
                         menu.SetClientData(element);
                         menu.Connect(
                             wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Workspace::OnPopupClick), NULL, this);
@@ -354,6 +358,7 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
             }
         }
     }
+    m_timer->Start();
 }
 
 void Workspace::OnLeftClickUp(wxMouseEvent& event)
@@ -586,6 +591,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
     if(redraw) Redraw();
     m_camera->UpdateMousePosition(event.GetPosition());
     UpdateStatusBar();
+    m_timer->Start(); // Restart the timer.
     event.Skip();
 }
 
@@ -1279,4 +1285,27 @@ void Workspace::UpdateElementsID()
         text->SetID(id);
         id++;
     }
+}
+void Workspace::OnTimer(wxTimerEvent& event)
+{
+    if(m_tipWindow) {
+        m_tipWindow->Close();
+        m_tipWindow = NULL;
+    }
+    if(m_mode == MODE_EDIT) {
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            Element* element = *it;
+            if(element->Contains(m_camera->GetMousePosition())) {
+                wxString tipText = element->GetTipText();
+                if(!tipText.IsEmpty()) {
+                    m_tipWindow = new wxTipWindow(this, tipText, 10000, &m_tipWindow);
+                    // Creates a very tiny bounding rect to remove the tip on any mouse movement.
+                    m_tipWindow->SetBoundingRect(wxRect(wxGetMousePosition(), wxSize(1, 1)));
+                    break;
+                }
+            }
+        }
+    }
+
+    m_timer->Stop();
 }

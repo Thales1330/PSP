@@ -135,7 +135,8 @@ public:
     virtual void AddChild(Element* child);
     virtual void RemoveChild(Element* child);
     virtual void ReplaceChild(Element* oldChild, Element* newChild);
-    virtual void Draw(wxPoint2DDouble translation, double scale) const {};
+    virtual wxString GetTipText() const { return wxEmptyString; }
+    virtual void Draw(wxPoint2DDouble translation, double scale) const {}
     virtual void Rotate(bool clockwise = true) {}
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
     virtual void AddPoint(wxPoint2DDouble point) {}

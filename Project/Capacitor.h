@@ -13,24 +13,25 @@ struct CapacitorElectricalData {
 
 class Capacitor : public Shunt
 {
-   public:
+public:
     Capacitor();
     Capacitor(wxString name);
     ~Capacitor();
-	
-	virtual Element* GetCopy();
+
+    virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
+    virtual wxString GetTipText() const;
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual CapacitorElectricalData GetElectricalData() { return m_electricalData; }
     virtual CapacitorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(CapacitorElectricalData electricalData) { m_electricalData = electricalData; }
-   protected:
+protected:
     CapacitorElectricalData m_electricalData;
 };
 
-#endif  // CAPACITOR_H
+#endif // CAPACITOR_H

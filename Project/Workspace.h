@@ -7,6 +7,7 @@
 #include <wx/msgdlg.h>
 #include <wx/statusbr.h>
 #include <wx/clipbrd.h>
+#include <wx/tipwin.h>
 
 #include "WorkspaceBase.h"
 #include "Bus.h"
@@ -101,6 +102,7 @@ public:
     bool RunPowerFlow();
 
 protected:
+    virtual void OnTimer(wxTimerEvent& event);
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
     virtual void OnRightClickDown(wxMouseEvent& event);
     virtual void OnLeftClickUp(wxMouseEvent& event);
@@ -119,6 +121,7 @@ protected:
     wxGLContext* m_glContext;
     wxStatusBar* m_statusBar;
     Camera* m_camera;
+    wxTipWindow* m_tipWindow = NULL;
     wxString m_name;
 
     WorkspaceMode m_mode = MODE_EDIT;
@@ -129,8 +132,7 @@ protected:
     std::vector<Text*> m_textList;
     
     wxFileName m_savedPath;
-
-private:
+    
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
 };

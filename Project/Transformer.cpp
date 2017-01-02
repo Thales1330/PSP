@@ -95,9 +95,11 @@ bool Transformer::Contains(wxPoint2DDouble position) const
 void Transformer::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online) elementColour = m_onlineElementColour;
-    else elementColour = m_offlineElementColour;
-    
+    if(m_online)
+        elementColour = m_onlineElementColour;
+    else
+        elementColour = m_offlineElementColour;
+
     if(m_inserted) {
         // Draw selection (layer 1).
         if(m_selected) {
@@ -389,7 +391,54 @@ void Transformer::SetPowerFlowDirection(PowerFlowDirection pfDirection)
 
 Element* Transformer::GetCopy()
 {
-	Transformer* copy = new Transformer();
-	*copy = *this;
-	return copy;
+    Transformer* copy = new Transformer();
+    *copy = *this;
+    return copy;
+}
+
+wxString Transformer::GetTipText() const
+{
+    wxString tipText = m_electricalData.name;
+    wxString primVoltage = StringFromDouble(m_electricalData.primaryNominalVoltage);
+    switch(m_electricalData.primaryNominalVoltageUnit) {
+        case UNIT_V: {
+            primVoltage += _(" V");
+        } break;
+        case UNIT_kV: {
+            primVoltage += _(" kV");
+        } break;
+        default:
+            break;
+    }
+    wxString secVoltage = StringFromDouble(m_electricalData.secondaryNominalVoltage);
+    switch(m_electricalData.secondaryNominalVoltageUnit) {
+        case UNIT_V: {
+            secVoltage += _(" V");
+        } break;
+        case UNIT_kV: {
+            secVoltage += _(" kV");
+        } break;
+        default:
+            break;
+    }
+
+    tipText += "\n" + primVoltage + " / " + secVoltage;
+
+    if(m_online) {
+        tipText += "\n";
+        int busNumber[2];
+        busNumber[0] = ((Bus*)m_parentList[0])->GetEletricalData().number + 1;
+        busNumber[1] = ((Bus*)m_parentList[1])->GetEletricalData().number + 1;
+
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricalData.powerFlow[0].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricalData.powerFlow[0].imag(), 5) + _(" p.u.");
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricalData.powerFlow[1].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
+    }
+
+    return tipText;
 }

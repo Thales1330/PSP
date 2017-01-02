@@ -2,6 +2,7 @@
 #define SHUNT_H
 
 #include "Element.h"
+#include "Bus.h"
 
 class Shunt : public Element
 {

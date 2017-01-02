@@ -164,3 +164,35 @@ Element* Inductor::GetCopy()
     *copy = *this;
     return copy;
 }
+
+wxString Inductor::GetTipText() const
+{
+    wxString tipText = m_electricalData.name;
+
+    // TODO: Avoid reactive power calculation.
+    double reactivePower = m_electricalData.reactivePower;
+    if(m_online) {
+        std::complex<double> v = ((Bus*)m_parentList[0])->GetEletricalData().voltage;
+        reactivePower *= std::pow(std::abs(v), 2);
+    }
+    tipText += "\n";
+    tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
+    switch(m_electricalData.reactivePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_VAr: {
+            tipText += _(" VAr");
+        } break;
+        case UNIT_kVAr: {
+            tipText += _(" kVAr");
+        } break;
+        case UNIT_MVAr: {
+            tipText += _(" MVAr");
+        } break;
+        default:
+            break;
+    }
+    
+    return tipText;
+}

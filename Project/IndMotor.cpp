@@ -1,8 +1,12 @@
 #include "IndMotorForm.h"
 #include "IndMotor.h"
 
-IndMotor::IndMotor() : Machines() { }
-IndMotor::IndMotor(wxString name) : Machines()
+IndMotor::IndMotor()
+    : Machines()
+{
+}
+IndMotor::IndMotor(wxString name)
+    : Machines()
 {
     m_electricalData.name = name;
 }
@@ -38,9 +42,9 @@ bool IndMotor::ShowForm(wxWindow* parent, Element* element)
 
 IndMotorElectricalData IndMotor::GetPUElectricalData(double systemPowerBase)
 {
-	IndMotorElectricalData data = m_electricalData;
-	
-	switch(data.activePowerUnit) {
+    IndMotorElectricalData data = m_electricalData;
+
+    switch(data.activePowerUnit) {
         case UNIT_W: {
             data.activePower = data.activePower / systemPowerBase;
             data.activePowerUnit = UNIT_PU;
@@ -72,13 +76,55 @@ IndMotorElectricalData IndMotor::GetPUElectricalData(double systemPowerBase)
         default:
             break;
     }
-	
-	return data;
+
+    return data;
 }
 
 Element* IndMotor::GetCopy()
 {
-	IndMotor* copy = new IndMotor();
-	*copy = *this;
-	return copy;
+    IndMotor* copy = new IndMotor();
+    *copy = *this;
+    return copy;
+}
+
+wxString IndMotor::GetTipText() const
+{
+    wxString tipText = m_electricalData.name;
+    tipText += "\n";
+    tipText += _("\nP = ") + wxString::FromDouble(m_electricalData.activePower, 5);
+    switch(m_electricalData.activePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_W: {
+            tipText += _(" W");
+        } break;
+        case UNIT_kW: {
+            tipText += _(" kW");
+        } break;
+        case UNIT_MW: {
+            tipText += _(" MW");
+        } break;
+        default:
+            break;
+    }
+    tipText += _("\nQ = ") + wxString::FromDouble(m_electricalData.reactivePower, 5);
+    switch(m_electricalData.reactivePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_VAr: {
+            tipText += _(" VAr");
+        } break;
+        case UNIT_kVAr: {
+            tipText += _(" kVAr");
+        } break;
+        case UNIT_MVAr: {
+            tipText += _(" MVAr");
+        } break;
+        default:
+            break;
+    }
+    
+    return tipText;
 }

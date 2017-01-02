@@ -32,9 +32,11 @@ bool Line::Contains(wxPoint2DDouble position) const
 void Line::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online) elementColour = m_onlineElementColour;
-    else elementColour = m_offlineElementColour;
-    
+    if(m_online)
+        elementColour = m_onlineElementColour;
+    else
+        elementColour = m_offlineElementColour;
+
     std::vector<wxPoint2DDouble> pointList = m_pointList;
     if(!m_inserted && pointList.size() > 0) {
         wxPoint2DDouble secondPoint = m_position;
@@ -503,7 +505,30 @@ void Line::SetPointList(std::vector<wxPoint2DDouble> pointList)
 
 Element* Line::GetCopy()
 {
-	Line* copy = new Line();
-	*copy = *this;
-	return copy;
+    Line* copy = new Line();
+    *copy = *this;
+    return copy;
+}
+
+wxString Line::GetTipText() const
+{
+    wxString tipText = m_electricaData.name;
+
+    if(m_online) {
+        tipText += "\n";
+        int busNumber[2];
+        busNumber[0] = ((Bus*)m_parentList[0])->GetEletricalData().number + 1;
+        busNumber[1] = ((Bus*)m_parentList[1])->GetEletricalData().number + 1;
+
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricaData.powerFlow[0].imag(), 5) + _(" p.u.");
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricaData.powerFlow[1].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricaData.powerFlow[1].imag(), 5) + _(" p.u.");
+    }
+
+    return tipText;
 }

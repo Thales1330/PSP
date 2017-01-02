@@ -1,7 +1,14 @@
 #include "Load.h"
 
-Load::Load() : Shunt() {}
-Load::Load(wxString name) : Shunt() { m_electricalData.name = name; }
+Load::Load()
+    : Shunt()
+{
+}
+Load::Load(wxString name)
+    : Shunt()
+{
+    m_electricalData.name = name;
+}
 Load::~Load() {}
 bool Load::AddParent(Element* parent, wxPoint2DDouble position)
 {
@@ -9,11 +16,11 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
         m_parentList.push_back(parent);
         parent->AddChild(this);
         wxPoint2DDouble parentPt =
-            parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
-        parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
-        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
+            parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
+        parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
+        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
 
-        m_position = parentPt + wxPoint2DDouble(0.0, 100.0);  // Shifts the position to the down of the bus.
+        m_position = parentPt + wxPoint2DDouble(0.0, 100.0); // Shifts the position to the down of the bus.
         m_width = m_height = 20.0;
         m_rect = wxRect2DDouble(m_position.m_x - 10.0, m_position.m_y - 10.0, m_width, m_height);
 
@@ -29,7 +36,7 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
         m_inserted = true;
 
         wxRect2DDouble genRect(0, 0, 0, 0);
-        m_switchRect.push_back(genRect);  // Push a general rectangle.
+        m_switchRect.push_back(genRect); // Push a general rectangle.
         UpdateSwitches();
         m_pfDirection = PF_TO_ELEMENT;
         UpdatePowerFlowArrowsPosition();
@@ -42,19 +49,21 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
 void Load::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online) elementColour = m_onlineElementColour;
-    else elementColour = m_offlineElementColour;
-    
+    if(m_online)
+        elementColour = m_onlineElementColour;
+    else
+        elementColour = m_offlineElementColour;
+
     if(m_inserted) {
         // Draw Selection (layer 1).
         if(m_selected) {
             glLineWidth(1.5 + m_borderSize * 2.0);
             glColor4dv(m_selectionColour.GetRGBA());
             std::vector<wxPoint2DDouble> selTriangPts;
-            selTriangPts.push_back(m_triangPts[0] + m_position +
-                                   wxPoint2DDouble(-m_borderSize / scale, -m_borderSize / scale));
-            selTriangPts.push_back(m_triangPts[1] + m_position +
-                                   wxPoint2DDouble(m_borderSize / scale, -m_borderSize / scale));
+            selTriangPts.push_back(
+                m_triangPts[0] + m_position + wxPoint2DDouble(-m_borderSize / scale, -m_borderSize / scale));
+            selTriangPts.push_back(
+                m_triangPts[1] + m_position + wxPoint2DDouble(m_borderSize / scale, -m_borderSize / scale));
             selTriangPts.push_back(m_triangPts[2] + m_position + wxPoint2DDouble(0.0, m_borderSize / scale));
 
             glPushMatrix();
@@ -168,7 +177,58 @@ LoadElectricalData Load::GetPUElectricalData(double systemPowerBase)
 
 Element* Load::GetCopy()
 {
-	Load* copy = new Load();
-	*copy = *this;
-	return copy;
+    Load* copy = new Load();
+    *copy = *this;
+    return copy;
+}
+
+wxString Load::GetTipText() const
+{
+    wxString tipText = m_electricalData.name;
+
+    // TODO: Avoid power calculation.
+    double activePower = m_electricalData.activePower;
+    double reactivePower = m_electricalData.reactivePower;
+    if(m_online && m_electricalData.loadType == CONST_IMPEDANCE) {
+        std::complex<double> v = ((Bus*)m_parentList[0])->GetEletricalData().voltage;
+        reactivePower *= std::pow(std::abs(v), 2);
+        activePower *= std::pow(std::abs(v), 2);
+    }
+    tipText += "\n";
+    tipText += _("\nP = ") + wxString::FromDouble(activePower, 5);
+    switch(m_electricalData.activePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_W: {
+            tipText += _(" W");
+        } break;
+        case UNIT_kW: {
+            tipText += _(" kW");
+        } break;
+        case UNIT_MW: {
+            tipText += _(" MW");
+        } break;
+        default:
+            break;
+    }
+    tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
+    switch(m_electricalData.reactivePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_VAr: {
+            tipText += _(" VAr");
+        } break;
+        case UNIT_kVAr: {
+            tipText += _(" kVAr");
+        } break;
+        case UNIT_MVAr: {
+            tipText += _(" MVAr");
+        } break;
+        default:
+            break;
+    }
+
+    return tipText;
 }
