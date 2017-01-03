@@ -214,7 +214,7 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
         m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 
         m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
-        newWorkspace->Layout();
+        m_auiNotebook->Layout();
         newWorkspace->Redraw();
         m_projectNumber++;
     } else {

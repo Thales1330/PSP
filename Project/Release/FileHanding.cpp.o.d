@@ -144,7 +144,10 @@ Release/FileHanding.cpp.o: FileHanding.cpp FileHanding.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h \
- C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h WorkspaceBase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h \
+ C:/wxWidgets-3.1.0/include/wx/tipwin.h \
+ C:/wxWidgets-3.1.0/include/wx/popupwin.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/popupwin.h WorkspaceBase.h \
  C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h \
  C:/wxWidgets-3.1.0/include/wx/filesys.h \
  C:/wxWidgets-3.1.0/include/wx/filename.h \
@@ -167,6 +170,9 @@ Release/FileHanding.cpp.o: FileHanding.cpp FileHanding.h \
  C:/wxWidgets-3.1.0/include/wx/generic/logg.h \
  C:/wxWidgets-3.1.0/include/wx/msw/app.h \
  C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h \
+ C:/wxWidgets-3.1.0/include/wx/timer.h \
+ C:/wxWidgets-3.1.0/include/wx/stopwatch.h \
+ C:/wxWidgets-3.1.0/include/wx/time.h \
  C:/wxWidgets-3.1.0/include/wx/persist.h \
  C:/wxWidgets-3.1.0/include/wx/confbase.h \
  C:/wxWidgets-3.1.0/include/wx/base64.h \
@@ -213,7 +219,6 @@ Release/FileHanding.cpp.o: FileHanding.cpp FileHanding.h \
  C:/wxWidgets-3.1.0/include/wx/scrolwin.h \
  C:/wxWidgets-3.1.0/include/wx/generic/scrolwin.h \
  C:/wxWidgets-3.1.0/include/wx/recguard.h \
- C:/wxWidgets-3.1.0/include/wx/time.h \
  C:/wxWidgets-3.1.0/include/wx/propgrid/property.h \
  C:/wxWidgets-3.1.0/include/wx/propgrid/propgriddefs.h \
  C:/wxWidgets-3.1.0/include/wx/hashset.h \
@@ -248,8 +253,6 @@ Release/FileHanding.cpp.o: FileHanding.cpp FileHanding.h \
  Branch.h Load.h LoadForm.h SyncGenerator.h SyncMotor.h Transformer.h \
  Text.h wxGLString.h C:/wxWidgets-3.1.0/include/wx/wx.h \
  C:/wxWidgets-3.1.0/include/wx/hash.h \
- C:/wxWidgets-3.1.0/include/wx/stopwatch.h \
- C:/wxWidgets-3.1.0/include/wx/timer.h \
  C:/wxWidgets-3.1.0/include/wx/module.h \
  C:/wxWidgets-3.1.0/include/wx/wxcrtvararg.h \
  C:/wxWidgets-3.1.0/include/wx/frame.h \
@@ -587,6 +590,12 @@ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h:
 
+C:/wxWidgets-3.1.0/include/wx/tipwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/popupwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/popupwin.h:
+
 WorkspaceBase.h:
 
 C:/wxWidgets-3.1.0/include/wx/xrc/xmlres.h:
@@ -632,6 +641,12 @@ C:/wxWidgets-3.1.0/include/wx/generic/logg.h:
 C:/wxWidgets-3.1.0/include/wx/msw/app.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h:
+
+C:/wxWidgets-3.1.0/include/wx/timer.h:
+
+C:/wxWidgets-3.1.0/include/wx/stopwatch.h:
+
+C:/wxWidgets-3.1.0/include/wx/time.h:
 
 C:/wxWidgets-3.1.0/include/wx/persist.h:
 
@@ -731,8 +746,6 @@ C:/wxWidgets-3.1.0/include/wx/generic/scrolwin.h:
 
 C:/wxWidgets-3.1.0/include/wx/recguard.h:
 
-C:/wxWidgets-3.1.0/include/wx/time.h:
-
 C:/wxWidgets-3.1.0/include/wx/propgrid/property.h:
 
 C:/wxWidgets-3.1.0/include/wx/propgrid/propgriddefs.h:
@@ -830,10 +843,6 @@ wxGLString.h:
 C:/wxWidgets-3.1.0/include/wx/wx.h:
 
 C:/wxWidgets-3.1.0/include/wx/hash.h:
-
-C:/wxWidgets-3.1.0/include/wx/stopwatch.h:
-
-C:/wxWidgets-3.1.0/include/wx/timer.h:
 
 C:/wxWidgets-3.1.0/include/wx/module.h:
 

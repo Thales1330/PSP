@@ -1687,7 +1687,6 @@ bool FileHanding::OpenProject(wxFileName path)
     
     m_workspace->SetElementList(elementList);
     m_workspace->SetTextList(textList);
-    m_workspace->UpdateTextElements();
     return true;
 }
 

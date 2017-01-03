@@ -20,8 +20,8 @@ Text::Text()
 Text::Text(wxPoint2DDouble position)
     : Element()
 {
+    m_position = position;
     SetText(m_text);
-    SetPosition(position);
 }
 
 Text::~Text() {}
@@ -51,26 +51,21 @@ void Text::Draw(wxPoint2DDouble translation, double scale)
     }
 
     // Draw text (layer 2)
+    glEnable(GL_TEXTURE_2D);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     if(!m_isMultlineText) { // Only one line
-        wxGLString glString(m_text);
-        glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-        glString.consolidate(&dc);
-        glString.bind();
-        glString.render(m_position.m_x, m_position.m_y);
+        m_glString->bind();
+        m_glString->render(m_position.m_x, m_position.m_y);
     } else { // Multiples lines
-        wxGLStringArray glStringArray;
-        // Fill the string array.
-        for(int i = 0; i < (int)m_multlineText.size(); i++) glStringArray.addString(m_multlineText[i]);
-        glStringArray.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-        glStringArray.consolidate(&dc);
-        glStringArray.bind();
+        m_glStringArray->bind();
         // The text will be printed centralized.
-        for(int i = 0; i < (int)m_multlineText.size(); i++) {
-            glStringArray.get(i).render(m_position.m_x, m_position.m_y - m_height / 2.0 +
-                    glStringArray.get(i).getheight() * double(i) + glStringArray.get(i).getheight() / 2.0);
+        double lineHeight = m_height / (double)m_numberOfLines;
+        for(int i = 0; i < m_numberOfLines; i++) {
+            m_glStringArray->get(i).render(
+                m_position.m_x, m_position.m_y - m_height / 2.0 + lineHeight / 2.0 + lineHeight * double(i));
         }
     }
+    glDisable(GL_TEXTURE_2D);
 
     glPopMatrix();
 }
@@ -83,46 +78,56 @@ bool Text::Intersects(wxRect2DDouble rect) const
 
 void Text::SetText(wxString text)
 {
+    glEnable(GL_TEXTURE_2D);
     m_text = text;
+    wxFont font(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 
-    // Creating a glString to get the text size.
-    int numberOfLines = m_text.Freq('\n') + 1;
-    if(numberOfLines == 1) { // Only one line
+    wxScreenDC dc;
+    if(m_glString) {
+        delete m_glString;
+        m_glString = NULL;
+    }
+    if(m_glStringArray) {
+        delete m_glStringArray;
+        m_glStringArray = NULL;
+    }
+
+    m_numberOfLines = m_text.Freq('\n') + 1;
+    if(m_numberOfLines == 1) { // Only one line
         m_isMultlineText = false;
-        wxGLString glString(m_text);
-        glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-        wxScreenDC dc;
-        glString.consolidate(&dc);
-        glString.bind();
-
-        m_width = glString.getWidth();
-        m_height = glString.getheight();
+        m_glString = new wxGLString(m_text);
+        m_glString->setFont(font);
+        m_glString->consolidate(&dc);
+        m_width = m_glString->getWidth();
+        m_height = m_glString->getheight();
     } else {
         m_isMultlineText = true;
-        m_multlineText.clear();
-        wxString text = m_text;
-        double w = 0.0, h = 0.0;
-        for(int i = 0; i < numberOfLines; ++i) {
+        m_glStringArray = new wxGLStringArray();
+        dc.SetFont(font);
+
+        int w = 0, h = 0;
+        wxString multText = m_text;
+        for(int i = 0; i < m_numberOfLines; ++i) {
             wxString nextLine;
-            wxString currentLine = text.BeforeFirst('\n', &nextLine);
-            text = nextLine;
-            m_multlineText.push_back(currentLine);
+            wxString currentLine = multText.BeforeFirst('\n', &nextLine);
+            multText = nextLine;
+            m_glStringArray->addString(currentLine);
 
-            wxGLString glString(currentLine);
-            glString.setFont(wxFont(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-            wxScreenDC dc;
-            glString.consolidate(&dc);
-            glString.bind();
-
-            if(w < glString.getWidth()) w = glString.getWidth(); // Get the major width.
-            h = glString.getheight();
+            wxSize size = dc.GetTextExtent(currentLine);
+            if(size.GetWidth() > w) w = size.GetWidth();
+            h += size.GetHeight();
         }
+
+        m_glStringArray->setFont(font);
+        m_glStringArray->consolidate(&dc);
+
         m_width = w;
-        m_height = h * (double)numberOfLines;
+        m_height = h;
     }
 
     // Update text rectangle.
     SetPosition(m_position);
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Text::Rotate(bool clockwise)
@@ -149,6 +154,7 @@ void Text::UpdateText(double systemPowerBase)
 {
     switch(m_elementType) {
         case TYPE_NONE:
+            SetText(m_text);
             break;
         case TYPE_BUS: {
             Bus* bus = (Bus*)m_element;
@@ -833,8 +839,7 @@ void Text::UpdateText(double systemPowerBase)
                                 SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + " p.u.");
                             }
                             case UNIT_VAr: {
-                                SetText(
-                                    wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
+                                SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
                             }
                             case UNIT_kVAr: {
                                 SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +
@@ -872,8 +877,7 @@ void Text::UpdateText(double systemPowerBase)
                                 SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + " p.u.");
                             }
                             case UNIT_VAr: {
-                                SetText(
-                                    wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
+                                SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
                             }
                             case UNIT_kVAr: {
                                 SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +
@@ -897,7 +901,7 @@ void Text::UpdateText(double systemPowerBase)
 
 Element* Text::GetCopy()
 {
-	Text* copy = new Text();
-	*copy = *this;
-	return copy;
+    Text* copy = new Text();
+    *copy = *this;
+    return copy;
 }

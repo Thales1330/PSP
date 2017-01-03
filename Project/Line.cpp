@@ -306,11 +306,17 @@ bool Line::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_LINE, _("Edit line"));
     if(m_activePickboxID == ID_PB_NONE) {
-        menu.Append(ID_LINE_ADD_NODE, _("Insert node"));
+        wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
+        addNodeItem->SetBitmap(wxImage("..\\data\\images\\menu\\addNode16.png"));
+        menu.Append(addNodeItem);
     } else {
-        menu.Append(ID_LINE_REMOVE_NODE, _("Remove node"));
+        wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_REMOVE_NODE, _("Remove node"));
+        addNodeItem->SetBitmap(wxImage("..\\data\\images\\menu\\removeNode16.png"));
+        menu.Append(addNodeItem);
     }
-    menu.Append(ID_DELETE, _("Delete"));
+    wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
+    deleteItem->SetBitmap(wxImage("..\\data\\images\\menu\\delete16.png"));
+    menu.Append(deleteItem);
     return true;
 }
 

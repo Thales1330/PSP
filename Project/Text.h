@@ -46,12 +46,12 @@ enum DataType {
 
 class Text : public Element
 {
-   public:
+public:
     Text();
     Text(wxPoint2DDouble position);
     ~Text();
-	
-	virtual Element* GetCopy();
+
+    virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale);
@@ -78,10 +78,13 @@ class Text : public Element
     int GetFontSize() const { return m_fontSize; }
     const ElectricalUnit GetUnit() const { return m_unit; }
     int GetDecimalPlaces() const { return m_decimalPlaces; }
-    
-   protected:
+
+protected:
+    wxGLString* m_glString = NULL;
+    wxGLStringArray* m_glStringArray = NULL;
+
     wxString m_text = _("Text");
-    std::vector<wxString> m_multlineText;
+    int m_numberOfLines;
     bool m_isMultlineText = false;
     int m_fontSize = 10;
 
@@ -94,4 +97,4 @@ class Text : public Element
     int m_decimalPlaces = 2;
 };
 
-#endif  // TEXT_H
+#endif // TEXT_H

@@ -78,7 +78,7 @@ public:
 
     void SetName(wxString name) { m_name = name; }
     void SetElementList(std::vector<Element*> elementList) { m_elementList = elementList; }
-    void SetTextList(std::vector<Text*> textList) { m_textList = textList; }
+    void SetTextList(std::vector<Text*> textList);
     void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
     void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
     void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }

@@ -1,9 +1,14 @@
 BUG/TODO LIST [pt-br]
 
 PRIORIDADE 1:
--> Elemento texto impactando bastante no desempenho gráfico (otimizar o algoritmo atual ou encontrar outra solução para desenhar textos no OpenGL (freetype-gl)?);
+-> Texto exibido incorretamente ao abrir um projeto.
+-> Remover barras com múltiplos elementos conectados não funcionando corretamente (manuseio dos childs errado);
+-> Ajuste de parent/child ao colar elementos não está sendo feito corretamente;
 
 PRIORIDADE 2:
+-> Ao arrastar os elementos que estão sendo colados são colocados;
+-> Os elementos de ramo não estão sendo associados corretamente com seus parents ao copiar/colar;
+-> Ctrl + retângulo de seleção não está mantendo os elementos já selecionados;
 -> Atualizar a posição dos disjuntores quando um circuito for colado;
 -> Abrir formulário pelo menu de contexto;
 -> Abrir o formulário do elemento após inserir o mesmo;

@@ -300,15 +300,15 @@ void Element::SetOnline(bool online)
 void Element::GeneralMenuItens(wxMenu& menu)
 {
     wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
-    clockItem->SetBitmap(wxImage("data\\images\\menu\\rotateClock16.png"));
+    clockItem->SetBitmap(wxImage("..\\data\\images\\menu\\rotateClock16.png"));
     menu.Append(clockItem);
 
     wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    counterClockItem->SetBitmap(wxImage("data\\images\\menu\\rotateCounterClock16.png"));
+    counterClockItem->SetBitmap(wxImage("..\\data\\images\\menu\\rotateCounterClock16.png"));
     menu.Append(counterClockItem);
 
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(wxImage("data\\images\\menu\\delete16.png"));
+    deleteItem->SetBitmap(wxImage("..\\data\\images\\menu\\delete16.png"));
     menu.Append(deleteItem);
 }
 
@@ -462,7 +462,10 @@ void Element::RemoveChild(Element* child)
 {
     for(auto it = m_childList.begin(); it != m_childList.end(); ++it) {
         Element* element = *it;
-        if(element == child) m_childList.erase(it--);
+        if(element == child){
+            m_childList.erase(it);
+            break;
+        }
     }
 }
 

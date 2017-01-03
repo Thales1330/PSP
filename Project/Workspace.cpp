@@ -137,7 +137,7 @@ void Workspace::SetViewport()
     glClearColor(1.0, 1.0, 1.0, 1.0); // White background.
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_DEPTH_TEST);
-    glEnable(GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_2D);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -708,11 +708,18 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
                 // Tests - Ctrl + Shift + L
                 if(event.ControlDown() && event.ShiftDown()) {
-                    int numBus = 0;
+                    int numChild = 0;
+                    int numParent = 0;
                     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-                        if(typeid(**it) == typeid(Bus)) numBus++;
+                        Element* element = *it;
+                        if(element->Contains(m_camera->GetMousePosition())) {
+                            for(int i=0; i<(int)element->GetParentList().size(); i++) {
+                                if(element->GetParentList()[i]) numParent++;
+                            }
+                            numChild = element->GetChildList().size();
+                        }
                     }
-                    wxMessageBox(wxString::Format("%d buses\n%d elements", numBus, m_elementList.size()));
+                    wxMessageBox(wxString::Format("%d parents\n%d childs", numParent, numChild));
                 }
             } break;
             case 'T': // Insert a transformer.
@@ -1097,7 +1104,7 @@ bool Workspace::RunPowerFlow()
 
 void Workspace::UpdateTextElements()
 {
-    for(auto it = m_textList.begin(); it != m_textList.end(); ++it) {
+    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
         Text* text = *it;
         text->UpdateText(100e6);
     }
@@ -1199,6 +1206,7 @@ bool Workspace::Paste()
                             for(int k = 0; k < (int)pastedBusList.size(); k++) {
                                 Bus* newParent = pastedBusList[k];
                                 if(parentID == newParent->GetID()) {
+                                    parentCopied = true;
                                     copy->ReplaceParent(currentParent, newParent);
                                     break;
                                 }
@@ -1223,6 +1231,7 @@ bool Workspace::Paste()
                 for(int j = 0; j < (int)pastedElements.size(); j++) {
                     Element* newChild = pastedElements[j];
                     if(childID == newChild->GetID()) {
+                        childCopied = true;
                         bus->ReplaceChild(currentChild, newChild);
                         break;
                     }
@@ -1308,4 +1317,10 @@ void Workspace::OnTimer(wxTimerEvent& event)
     }
 
     m_timer->Stop();
+}
+
+void Workspace::SetTextList(std::vector<Text*> textList)
+{
+    m_textList = textList;
+    UpdateTextElements();
 }
