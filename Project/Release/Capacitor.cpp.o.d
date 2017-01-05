@@ -225,7 +225,7 @@ Release/Capacitor.cpp.o: Capacitor.cpp ReactiveShuntElementForm.h \
  C:/wxWidgets-3.1.0/include/wx/msw/menuitem.h \
  C:/wxWidgets-3.1.0/include/wx/ownerdrw.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h \
- C:/wxWidgets-3.1.0/include/wx/msw/menu.h
+ C:/wxWidgets-3.1.0/include/wx/msw/menu.h Bus.h BusForm.h
 
 ReactiveShuntElementForm.h:
 
@@ -694,3 +694,7 @@ C:/wxWidgets-3.1.0/include/wx/ownerdrw.h:
 C:/wxWidgets-3.1.0/include/wx/msw/ownerdrw.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/menu.h:
+
+Bus.h:
+
+BusForm.h:

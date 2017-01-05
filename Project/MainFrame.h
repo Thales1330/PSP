@@ -72,9 +72,9 @@ class MainFrame : public MainFrameBase
     std::vector<Workspace*> m_workspaceList;
     int m_projectNumber = 1;
 
-    wxRibbonMetroArtProvider* m_artMetro;
-    wxMenu* m_addElementsMenu;
-    wxLocale* m_locale;
+    wxRibbonMetroArtProvider* m_artMetro = NULL;
+    wxMenu* m_addElementsMenu = NULL;
+    wxLocale* m_locale = NULL;
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);

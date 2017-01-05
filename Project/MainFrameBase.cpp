@@ -83,8 +83,6 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_ribbonButtonBarProjects->AddButton(ID_RIBBON_OPEN, _("Open"), wxXmlResource::Get()->LoadBitmap(wxT("open32")), _("Open saved project"), wxRIBBON_BUTTON_NORMAL);
     
-    m_ribbonButtonBarProjects->AddButton(ID_RIBBON_EXPIMP, _("Export Import"), wxXmlResource::Get()->LoadBitmap(wxT("impExp32")), _("Export or import projects"), wxRIBBON_BUTTON_NORMAL);
-    
     m_ribbonButtonBarProjects->AddButton(ID_RIBBON_GENSETTINGS, _("General Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the main settings of the program"), wxRIBBON_BUTTON_NORMAL);
     
     m_ribbonButtonBarProjects->AddButton(ID_RIBBON_EXIT, _("Exit"), wxXmlResource::Get()->LoadBitmap(wxT("exit32")), _("Closes the application"), wxRIBBON_BUTTON_NORMAL);
@@ -240,7 +238,6 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     // Connect events
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_NEW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnNewClick), NULL, this);
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_OPEN, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnOpenClick), NULL, this);
-    m_ribbonButtonBarProjects->Connect(ID_RIBBON_EXPIMP, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExpImpClick), NULL, this);
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_GENSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
     m_ribbonButtonBarProjects->Connect(ID_RIBBON_EXIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExitClick), NULL, this);
     m_ribbonButtonBarCProject->Connect(ID_RIBBON_SAVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSaveClick), NULL, this);
@@ -279,7 +276,6 @@ MainFrameBase::~MainFrameBase()
 {
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_NEW, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnNewClick), NULL, this);
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_OPEN, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnOpenClick), NULL, this);
-    m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_EXPIMP, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExpImpClick), NULL, this);
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_GENSETTINGS, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilitySettingsClick), NULL, this);
     m_ribbonButtonBarProjects->Disconnect(ID_RIBBON_EXIT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnExitClick), NULL, this);
     m_ribbonButtonBarCProject->Disconnect(ID_RIBBON_SAVE, wxEVT_COMMAND_RIBBONBUTTON_CLICKED, wxRibbonButtonBarEventHandler(MainFrameBase::OnSaveClick), NULL, this);

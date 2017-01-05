@@ -25,6 +25,7 @@ class Inductor : public Shunt
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
+    virtual wxString GetTipText() const;
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual InductorElectricalData GetElectricalData() { return m_electricalData; }
     virtual InductorElectricalData GetPUElectricalData(double systemPowerBase);

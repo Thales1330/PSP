@@ -32,9 +32,9 @@ protected:
     virtual void OnToBusChoiceSelected(wxCommandEvent& event);
     virtual void OnTypeChoiceSelected(wxCommandEvent& event);
 
-    Text* m_text;
-    Text* m_textToEdit;
-    wxWindow* m_parent;
+    Text* m_text = NULL;
+    Text* m_textToEdit = NULL;
+    wxWindow* m_parent = NULL;
     ElectricCalculation m_allElements;
     double m_systemPowerBase;
 };

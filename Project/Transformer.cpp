@@ -28,6 +28,7 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
         if(m_parentList.size() == 0) {
             m_position = position;
             m_parentList.push_back(parent);
+            parent->AddChild(this);
             wxPoint2DDouble parentPt =
                 parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
             parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
@@ -43,6 +44,7 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
         // Second bus.
         else if(parent != m_parentList[0]) {
             m_parentList.push_back(parent);
+            parent->AddChild(this);
             wxPoint2DDouble parentPt =
                 parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
             parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
@@ -93,9 +95,11 @@ bool Transformer::Contains(wxPoint2DDouble position) const
 void Transformer::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online) elementColour = m_onlineElementColour;
-    else elementColour = m_offlineElementColour;
-    
+    if(m_online)
+        elementColour = m_onlineElementColour;
+    else
+        elementColour = m_offlineElementColour;
+
     if(m_inserted) {
         // Draw selection (layer 1).
         if(m_selected) {
@@ -220,12 +224,18 @@ void Transformer::MoveNode(Element* parent, wxPoint2DDouble position)
     } else {
         if(m_activeNodeID == 1) {
             m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
-            m_parentList[0] = NULL;
-            m_online = false;
+            if(m_parentList[0]) {
+                m_parentList[0]->RemoveChild(this);
+                m_parentList[0] = NULL;
+                m_online = false;
+            }
         } else if(m_activeNodeID == 2) {
             m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
-            m_parentList[1] = NULL;
-            m_online = false;
+            if(m_parentList[1]) {
+                m_parentList[1]->RemoveChild(this);
+                m_parentList[1] = NULL;
+                m_online = false;
+            }
         }
     }
 
@@ -243,7 +253,7 @@ void Transformer::StartMove(wxPoint2DDouble position)
 
 bool Transformer::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_TRANSFORMER, _("Edit tranformer"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit tranformer"));
     GeneralMenuItens(menu);
     return true;
 }
@@ -381,7 +391,54 @@ void Transformer::SetPowerFlowDirection(PowerFlowDirection pfDirection)
 
 Element* Transformer::GetCopy()
 {
-	Transformer* copy = new Transformer();
-	*copy = *this;
-	return copy;
+    Transformer* copy = new Transformer();
+    *copy = *this;
+    return copy;
+}
+
+wxString Transformer::GetTipText() const
+{
+    wxString tipText = m_electricalData.name;
+    wxString primVoltage = StringFromDouble(m_electricalData.primaryNominalVoltage);
+    switch(m_electricalData.primaryNominalVoltageUnit) {
+        case UNIT_V: {
+            primVoltage += _(" V");
+        } break;
+        case UNIT_kV: {
+            primVoltage += _(" kV");
+        } break;
+        default:
+            break;
+    }
+    wxString secVoltage = StringFromDouble(m_electricalData.secondaryNominalVoltage);
+    switch(m_electricalData.secondaryNominalVoltageUnit) {
+        case UNIT_V: {
+            secVoltage += _(" V");
+        } break;
+        case UNIT_kV: {
+            secVoltage += _(" kV");
+        } break;
+        default:
+            break;
+    }
+
+    tipText += "\n" + primVoltage + " / " + secVoltage;
+
+    if(m_online) {
+        tipText += "\n";
+        int busNumber[2];
+        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetEletricalData().number + 1;
+        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetEletricalData().number + 1;
+
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricalData.powerFlow[0].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricalData.powerFlow[0].imag(), 5) + _(" p.u.");
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricalData.powerFlow[1].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
+    }
+
+    return tipText;
 }

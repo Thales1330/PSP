@@ -39,7 +39,7 @@ void SyncGenerator::DrawSymbol() const
 }
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_SYNCGENERATOR, _("Edit Generator"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit Generator"));
     GeneralMenuItens(menu);
     return true;
 }
@@ -141,4 +141,46 @@ Element* SyncGenerator::GetCopy()
 	SyncGenerator* copy = new SyncGenerator();
 	*copy = *this;
 	return copy;
+}
+
+wxString SyncGenerator::GetTipText() const
+{
+    wxString tipText = m_electricalData.name;
+    tipText += "\n";
+    tipText += _("\nP = ") + wxString::FromDouble(m_electricalData.activePower, 5);
+    switch(m_electricalData.activePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_W: {
+            tipText += _(" W");
+        } break;
+        case UNIT_kW: {
+            tipText += _(" kW");
+        } break;
+        case UNIT_MW: {
+            tipText += _(" MW");
+        } break;
+        default:
+            break;
+    }
+    tipText += _("\nQ = ") + wxString::FromDouble(m_electricalData.reactivePower, 5);
+    switch(m_electricalData.reactivePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_VAr: {
+            tipText += _(" VAr");
+        } break;
+        case UNIT_kVAr: {
+            tipText += _(" kVAr");
+        } break;
+        case UNIT_MVAr: {
+            tipText += _(" MVAr");
+        } break;
+        default:
+            break;
+    }
+    
+    return tipText;
 }

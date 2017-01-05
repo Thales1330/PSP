@@ -46,7 +46,7 @@ public:
     Bus(wxPoint2DDouble position);
     Bus(wxPoint2DDouble position, wxString name);
     ~Bus();
-	virtual Element* GetCopy();
+    virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; }
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
@@ -56,6 +56,7 @@ public:
     virtual void MovePickbox(wxPoint2DDouble position);
     virtual bool PickboxContains(wxPoint2DDouble position);
     virtual bool GetContextMenu(wxMenu& menu);
+    virtual wxString GetTipText() const;
     virtual BusElectricalData GetEletricalData() const { return m_electricalData; }
     virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);

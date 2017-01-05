@@ -22,15 +22,7 @@ enum PickboxID {
 };
 
 enum ContextMenuID {
-    ID_EDIT_BUS = 0,
-    ID_EDIT_LINE,
-    ID_EDIT_TRANSFORMER,
-    ID_EDIT_SYNCGENERATOR,
-    ID_EDIT_INDMOTOR,
-    ID_EDIT_SYNCMOTOR,
-    ID_EDIT_LOAD,
-    ID_EDIT_INDUCTOR,
-    ID_EDIT_CAPACITOR,
+    ID_EDIT_ELEMENT = 0,
 
     ID_LINE_ADD_NODE,
     ID_LINE_REMOVE_NODE,
@@ -130,7 +122,13 @@ public:
 
     // General methods
     virtual Element* GetCopy() { return NULL; }
-    virtual void Draw(wxPoint2DDouble translation, double scale) const {};
+    virtual void SetID(int id) { m_elementID = id; }
+    virtual int GetID() const { return m_elementID; }
+    virtual void AddChild(Element* child);
+    virtual void RemoveChild(Element* child);
+    virtual void ReplaceChild(Element* oldChild, Element* newChild);
+    virtual wxString GetTipText() const { return wxEmptyString; }
+    virtual void Draw(wxPoint2DDouble translation, double scale) const {}
     virtual void Rotate(bool clockwise = true) {}
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
     virtual void AddPoint(wxPoint2DDouble point) {}
@@ -183,6 +181,7 @@ public:
     virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;
 
     virtual std::vector<Element*> GetParentList() const { return m_parentList; }
+    virtual std::vector<Element*> GetChildList() const { return m_childList; }
     virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
     virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
@@ -205,7 +204,9 @@ public:
     static wxString StringFromDouble(double value, int minDecimal = 1);
 
 protected:
+    int m_elementID = 0;
     std::vector<Element*> m_parentList;
+    std::vector<Element*> m_childList;
 
     wxRect2DDouble m_rect;
     wxPoint2DDouble m_position;

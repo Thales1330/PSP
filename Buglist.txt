@@ -1,30 +1,25 @@
 BUG/TODO LIST [pt-br]
 
 PRIORIDADE 1:
--> Generalizar a classe ElementDataObject e o método Workspace::Paste (é possível?);
--> Elemento texto impactando bastante no desempenho gráfico (otimizar o algoritmo atual ou encontrar outra solução para desenhar textos no OpenGL?);
--> Texto de teste da solução do fluxo de carga sendo exibido desnecessariamente.
+-> Textos exibidos incorretamente quando abertos (raramente).
 
 PRIORIDADE 2:
--> Máquinas síncronas que atinge o limite de reativo igual a zero são atribuídos valores errados (-1,#J);
--> Implementar uma visão rápida da solução (usar wxPopupTransientWindow ou wxPopupWindow);
--> Abrir formulário pelo menu de contexto;
+-> Verificar a performance de c-style casting e c++ casting (static_cast/dynamic_cast);
+-> Ao arrastar os elementos que estão sendo colados são colocados;
+-> Ctrl + retângulo de seleção não está mantendo os elementos já selecionados;
+-> Atualizar a posição dos disjuntores quando um circuito for colado;
 -> Abrir o formulário do elemento após inserir o mesmo;
--> Erro ao tentar inserir texto do tipo nome para elementos de ramo;
--> Minimo de 1 casa decimal para os valores numéricos das barras;
 -> Calcular posição média na opção de mover do menu ribbon considerando os textos;
--> Número do nome do transformador preenchido incorretamente;
 -> Potência reativa não está sendo distribuída apropriadamente em barras de tensão controlada caso tenha mais de uma máquina síncrona (com valores de reativos máximos/mínimos acionados);
 -> Dados de elementos desconectados/offline não estão sendo zerados/reiniciados;
 -> É necessário perguntar ao usuário se ele deseja trocar a tensão de todo o trecho conectado por linhas (quando é trocada a tensão de uma barra);
 -> Setas de fluxo de carga de linhas e transformadores não são atualizadas quando uma barra conectada é removida;
 -> Setas do  fluxo de carga das máquinas elétricas não são atualizadas quando a barra conectada é rotacionada;
--> Criar segurança caso um aquivo não possa ser escrito ou aberto;
--> Linhas dos transformadores desalinhadas quando abertos de um arquivo salvo;
--> Algoritmo de mover apresenta desempenho ruim quando possui elementos diferentes de barras (cálculos gráficos de atualização das posições dos pontos dos elementos sendo realizados desnecessariamente? Fazer um child list para evitar a busca desnecessária do parent?);
--> Remover a ferramenta Exportar/Importar.
+-> Criar segurança caso um aquivo não possa ser gravado ou aberto;
+-> Linhas dos transformadores desalinhadas quando movidos.
 
 PRIORIDADE 3:
+-> Fluxo de potência dos elementos de ramo na unidade da potência base do sistema;
 -> Inserir texto com nome da barra juntamente com barra;
 -> Implementar dados em relação à base de potência do elemento (e não somente do sistema);
 -> Implementar fluxo de carga pelo método numérico de Newton-Raphson;

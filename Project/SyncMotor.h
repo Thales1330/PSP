@@ -66,6 +66,7 @@ class SyncMotor : public Machines
 	virtual Element* GetCopy();
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);
+    virtual wxString GetTipText() const;
     virtual SyncMotorElectricalData GetElectricalData() { return m_electricalData; }
 	virtual SyncMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(SyncMotorElectricalData electricalData) { m_electricalData = electricalData; }

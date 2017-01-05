@@ -132,6 +132,9 @@ Release/WorkspaceBase.cpp.o: WorkspaceBase.cpp WorkspaceBase.h \
  C:/wxWidgets-3.1.0/include/wx/generic/logg.h \
  C:/wxWidgets-3.1.0/include/wx/msw/app.h \
  C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h \
+ C:/wxWidgets-3.1.0/include/wx/timer.h \
+ C:/wxWidgets-3.1.0/include/wx/stopwatch.h \
+ C:/wxWidgets-3.1.0/include/wx/time.h \
  C:/wxWidgets-3.1.0/include/wx/persist.h \
  C:/wxWidgets-3.1.0/include/wx/confbase.h \
  C:/wxWidgets-3.1.0/include/wx/base64.h \
@@ -434,6 +437,12 @@ C:/wxWidgets-3.1.0/include/wx/generic/logg.h:
 C:/wxWidgets-3.1.0/include/wx/msw/app.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/glcanvas.h:
+
+C:/wxWidgets-3.1.0/include/wx/timer.h:
+
+C:/wxWidgets-3.1.0/include/wx/stopwatch.h:
+
+C:/wxWidgets-3.1.0/include/wx/time.h:
 
 C:/wxWidgets-3.1.0/include/wx/persist.h:
 

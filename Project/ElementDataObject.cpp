@@ -15,8 +15,8 @@ ElementDataObject::ElementDataObject(std::vector<Element*> elementList)
         for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
             Element* copy = (*it)->GetCopy();
             if(copy) {
-                if(typeid(*copy) == typeid(Bus))
-                    m_elementsLists->parentList.push_back((Bus*)copy);
+                if(Bus* bus = dynamic_cast<Bus*>(copy))
+                    m_elementsLists->parentList.push_back(bus);
                 else
                     m_elementsLists->elementList.push_back(copy);
             }

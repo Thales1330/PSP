@@ -21,8 +21,8 @@ struct LineElectricalData {
     bool useLinePower = false;
 
     // Power flow (p.u.)
-    std::complex<double> current[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
-    std::complex<double> powerFlow[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
+    std::complex<double> current[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
+    std::complex<double> powerFlow[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
 
     // Fault
     double zeroResistance = 0.0;
@@ -34,7 +34,7 @@ struct LineElectricalData {
 
 class Line : public Branch
 {
-   public:
+public:
     Line();
     Line(wxString name);
     ~Line();
@@ -45,13 +45,14 @@ class Line : public Branch
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
     virtual bool SetNodeParent(Element* parent);
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_SIZING; }
-	virtual Element* GetCopy();
+    virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void MovePickbox(wxPoint2DDouble position);
     virtual bool PickboxContains(wxPoint2DDouble position);
     virtual void AddPoint(wxPoint2DDouble point);
     virtual bool GetContextMenu(wxMenu& menu);
+    virtual wxString GetTipText() const;
     virtual void RemoveNode(wxPoint2DDouble point);
     virtual void AddNode(wxPoint2DDouble point);
     virtual void RotateNode(Element* parent, bool clockwise = true);
@@ -63,10 +64,10 @@ class Line : public Branch
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetPointList(std::vector<wxPoint2DDouble> pointList);
 
-   protected:
+protected:
     double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
     void UpdatePowerFlowArrowsPosition();
     LineElectricalData m_electricaData;
 };
 
-#endif  // LINE_H
+#endif // LINE_H

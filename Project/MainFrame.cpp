@@ -127,7 +127,6 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 
     m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
-    newWorkspace->Layout();
     newWorkspace->Redraw();
     m_projectNumber++;
 }
@@ -140,7 +139,7 @@ void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         workspace->DeleteSelectedElements();
     }
@@ -162,14 +161,14 @@ void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         workspace->Fit();
     }
 }
 void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         auto elementList = workspace->GetElementList();
         // Calculate the average position of selected elements.
@@ -214,8 +213,9 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
         m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 
         m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
-        newWorkspace->Layout();
+        m_auiNotebook->Layout();
         newWorkspace->Redraw();
+        newWorkspace->SetJustOpened(true);
         m_projectNumber++;
     } else {
         // TODO: fail message.
@@ -227,7 +227,7 @@ void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPasteClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         workspace->RunPowerFlow();
     }
@@ -239,7 +239,7 @@ void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnSCPowerClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnSaveAsClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         FileHanding fileHandling(workspace);
 
@@ -257,7 +257,7 @@ void MainFrame::OnSaveAsClick(wxRibbonButtonBarEvent& event)
 
 void MainFrame::OnSaveClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         FileHanding fileHandling(workspace);
 
@@ -282,7 +282,7 @@ void MainFrame::OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnUndoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
 
     if(workspace) {
         if(workspace->GetWorkspaceMode() != MODE_INSERT) {
@@ -374,14 +374,12 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 void MainFrame::NotebookPageClosed(wxAuiNotebookEvent& event)
 {
     if(m_auiNotebook->GetPageCount() == 0) EnableCurrentProjectRibbon(false);
-    // Memory leak?
 }
 void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 {
     auto it = m_workspaceList.begin();
     while(it != m_workspaceList.end()) {
         if(*it == m_auiNotebook->GetCurrentPage()) {
-            // delete *it; //Memory leak?
             m_workspaceList.erase(it);
             break;
         }
@@ -391,14 +389,14 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 }
 void MainFrame::OnRotClockClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         workspace->RotateSelectedElements();
     }
 }
 void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = (Workspace*)m_auiNotebook->GetCurrentPage();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         workspace->RotateSelectedElements(false);
     }

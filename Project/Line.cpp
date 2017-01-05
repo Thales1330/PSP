@@ -32,9 +32,11 @@ bool Line::Contains(wxPoint2DDouble position) const
 void Line::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online) elementColour = m_onlineElementColour;
-    else elementColour = m_offlineElementColour;
-    
+    if(m_online)
+        elementColour = m_onlineElementColour;
+    else
+        elementColour = m_offlineElementColour;
+
     std::vector<wxPoint2DDouble> pointList = m_pointList;
     if(!m_inserted && pointList.size() > 0) {
         wxPoint2DDouble secondPoint = m_position;
@@ -119,6 +121,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
         if(m_parentList.size() == 0) {
             m_position = position;
             m_parentList.push_back(parent);
+            parent->AddChild(this);
             wxPoint2DDouble parentPt =
                 parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
             parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
@@ -130,7 +133,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             m_switchRect.push_back(genRect);
             UpdateSwitches();
 
-            Bus* parentBus = (Bus*)parent;
+            Bus* parentBus = static_cast<Bus*>(parent);
             m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
             m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
 
@@ -138,7 +141,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
         }
         // Second bus.
         else if(parent != m_parentList[0]) {
-            Bus* parentBus = (Bus*)parent;
+            Bus* parentBus = static_cast<Bus*>(parent);
             if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
                 m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
@@ -149,6 +152,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             }
 
             m_parentList.push_back(parent);
+            parent->AddChild(this);
             wxPoint2DDouble parentPt =
                 parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
             parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
@@ -240,14 +244,21 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
             }
         }
     } else {
+        // If parent is setted to NULL for the firts time, remove the parent child
         if(m_activeNodeID == 1) {
             m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
-            m_parentList[0] = NULL;
-            m_online = false;
+            if(m_parentList[0]) {
+                m_parentList[0]->RemoveChild(this);
+                m_parentList[0] = NULL;
+                m_online = false;
+            }
         } else if(m_activeNodeID == 2) {
             m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
-            m_parentList[1] = NULL;
-            m_online = false;
+            if(m_parentList[1]) {
+                m_parentList[1]->RemoveChild(this);
+                m_parentList[1] = NULL;
+                m_online = false;
+            }
         }
     }
 
@@ -293,13 +304,19 @@ double Line::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) cons
 
 bool Line::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_LINE, _("Edit line"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit line"));
     if(m_activePickboxID == ID_PB_NONE) {
-        menu.Append(ID_LINE_ADD_NODE, _("Insert node"));
+        wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
+        addNodeItem->SetBitmap(wxImage("..\\data\\images\\menu\\addNode16.png"));
+        menu.Append(addNodeItem);
     } else {
-        menu.Append(ID_LINE_REMOVE_NODE, _("Remove node"));
+        wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_REMOVE_NODE, _("Remove node"));
+        addNodeItem->SetBitmap(wxImage("..\\data\\images\\menu\\removeNode16.png"));
+        menu.Append(addNodeItem);
     }
-    menu.Append(ID_DELETE, _("Delete"));
+    wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
+    deleteItem->SetBitmap(wxImage("..\\data\\images\\menu\\delete16.png"));
+    menu.Append(deleteItem);
     return true;
 }
 
@@ -380,9 +397,9 @@ bool Line::SetNodeParent(Element* parent)
         }
 
         if(parent->Intersects(nodeRect)) {
-            // If the line has no parents set the new nominal voltage, otherwise check if it's not connecting
+            // If the line has no parents set the new rated voltage, otherwise check if it's not connecting
             // two different voltages buses
-            Bus* parentBus = (Bus*)parent;
+            Bus* parentBus = static_cast<Bus*>(parent);
             if(!m_parentList[0] && !m_parentList[1]) {
                 m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
                 m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
@@ -494,7 +511,30 @@ void Line::SetPointList(std::vector<wxPoint2DDouble> pointList)
 
 Element* Line::GetCopy()
 {
-	Line* copy = new Line();
-	*copy = *this;
-	return copy;
+    Line* copy = new Line();
+    *copy = *this;
+    return copy;
+}
+
+wxString Line::GetTipText() const
+{
+    wxString tipText = m_electricaData.name;
+
+    if(m_online) {
+        tipText += "\n";
+        int busNumber[2];
+        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetEletricalData().number + 1;
+        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetEletricalData().number + 1;
+
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
+            wxString::FromDouble(m_electricaData.powerFlow[0].imag(), 5) + _(" p.u.");
+        tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricaData.powerFlow[1].real(), 5) + _(" p.u.");
+        tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
+            wxString::FromDouble(m_electricaData.powerFlow[1].imag(), 5) + _(" p.u.");
+    }
+
+    return tipText;
 }

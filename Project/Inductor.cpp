@@ -15,6 +15,7 @@ bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {
         m_parentList.push_back(parent);
+        parent->AddChild(this);
         wxPoint2DDouble parentPt =
             parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
         parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
@@ -110,7 +111,7 @@ void Inductor::Rotate(bool clockwise)
 
 bool Inductor::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_INDUCTOR, _("Edit Inductor"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit Inductor"));
     GeneralMenuItens(menu);
     return true;
 }
@@ -162,4 +163,36 @@ Element* Inductor::GetCopy()
     Inductor* copy = new Inductor();
     *copy = *this;
     return copy;
+}
+
+wxString Inductor::GetTipText() const
+{
+    wxString tipText = m_electricalData.name;
+
+    // TODO: Avoid reactive power calculation.
+    double reactivePower = m_electricalData.reactivePower;
+    if(m_online) {
+        std::complex<double> v = static_cast<Bus*>(m_parentList[0])->GetEletricalData().voltage;
+        reactivePower *= std::pow(std::abs(v), 2);
+    }
+    tipText += "\n";
+    tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
+    switch(m_electricalData.reactivePowerUnit) {
+        case UNIT_PU: {
+            tipText += _(" p.u.");
+        } break;
+        case UNIT_VAr: {
+            tipText += _(" VAr");
+        } break;
+        case UNIT_kVAr: {
+            tipText += _(" kVAr");
+        } break;
+        case UNIT_MVAr: {
+            tipText += _(" MVAr");
+        } break;
+        default:
+            break;
+    }
+    
+    return tipText;
 }

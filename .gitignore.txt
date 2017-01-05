@@ -1,0 +1,4 @@
+.clang/
+.codelite/
+Project/Release/
+Project/Debug/

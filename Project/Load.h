@@ -32,12 +32,13 @@ class Load : public Shunt
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
+    virtual wxString GetTipText() const;
     virtual bool ShowForm(wxWindow* parent, Element* element);
     LoadElectricalData GetElectricalData() { return m_electricalData; }
     LoadElectricalData GetPUElectricalData(double systemPowerBase);
     void SetElectricalData(LoadElectricalData electricalData) { m_electricalData = electricalData; }
 
-   private:
+   protected:
     std::vector<wxPoint2DDouble> m_triangPts;
     LoadElectricalData m_electricalData;
 };

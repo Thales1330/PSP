@@ -68,6 +68,7 @@ class Transformer : public Branch
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
     virtual bool GetContextMenu(wxMenu& menu);
+    virtual wxString GetTipText() const;
     virtual void RotateNode(Element* parent, bool clockwise);
     virtual bool SetNodeParent(Element* parent);
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);

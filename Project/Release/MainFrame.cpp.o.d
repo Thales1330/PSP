@@ -202,7 +202,10 @@ Release/MainFrame.cpp.o: MainFrame.cpp MainFrame.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataform.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h \
  C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h \
- C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h WorkspaceBase.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h \
+ C:/wxWidgets-3.1.0/include/wx/tipwin.h \
+ C:/wxWidgets-3.1.0/include/wx/popupwin.h \
+ C:/wxWidgets-3.1.0/include/wx/msw/popupwin.h WorkspaceBase.h \
  C:/wxWidgets-3.1.0/include/wx/glcanvas.h \
  C:/wxWidgets-3.1.0/include/wx/app.h \
  C:/wxWidgets-3.1.0/include/wx/eventfilter.h \
@@ -716,6 +719,12 @@ C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj.h:
 C:/wxWidgets-3.1.0/include/wx/msw/ole/dataobj2.h:
 
 C:/wxWidgets-3.1.0/include/wx/msw/clipbrd.h:
+
+C:/wxWidgets-3.1.0/include/wx/tipwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/popupwin.h:
+
+C:/wxWidgets-3.1.0/include/wx/msw/popupwin.h:
 
 WorkspaceBase.h:
 

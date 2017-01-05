@@ -7,6 +7,7 @@
 #include <wx/msgdlg.h>
 #include <wx/statusbr.h>
 #include <wx/clipbrd.h>
+#include <wx/tipwin.h>
 
 #include "WorkspaceBase.h"
 #include "Bus.h"
@@ -76,11 +77,12 @@ public:
     wxFileName GetSavedPath() const { return m_savedPath; }
 
     void SetName(wxString name) { m_name = name; }
-    void SetElementList(std::vector<Element*> elementList) { m_elementList = elementList; }
-    void SetTextList(std::vector<Text*> textList) { m_textList = textList; }
+    void SetElementList(std::vector<Element*> elementList);
+    void SetTextList(std::vector<Text*> textList);
     void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
     void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
     void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
+    void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
 
     void Redraw() { m_glCanvas->Refresh(); }
     void RotateSelectedElements(bool clockwise = true);
@@ -91,7 +93,8 @@ public:
 
     void ValidateBusesVoltages(Element* initialBus);
     void ValidateElementsVoltages();
-
+    
+    void UpdateElementsID();
     void UpdateTextElements();
 
     int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
@@ -100,6 +103,8 @@ public:
     bool RunPowerFlow();
 
 protected:
+    virtual void OnIdle(wxIdleEvent& event);
+    virtual void OnTimer(wxTimerEvent& event);
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
     virtual void OnRightClickDown(wxMouseEvent& event);
     virtual void OnLeftClickUp(wxMouseEvent& event);
@@ -115,9 +120,10 @@ protected:
     void SetViewport();
     void UpdateStatusBar();
 
-    wxGLContext* m_glContext;
-    wxStatusBar* m_statusBar;
-    Camera* m_camera;
+    wxGLContext* m_glContext = NULL;
+    wxStatusBar* m_statusBar = NULL;
+    Camera* m_camera = NULL;
+    wxTipWindow* m_tipWindow = NULL;
     wxString m_name;
 
     WorkspaceMode m_mode = MODE_EDIT;
@@ -128,10 +134,11 @@ protected:
     std::vector<Text*> m_textList;
     
     wxFileName m_savedPath;
-
-private:
+    
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
+    
+    bool m_justOpened = false;
 };
 
 class Camera
@@ -159,7 +166,7 @@ protected:
 
     wxPoint2DDouble m_mousePosition;
 
-    double m_zoomMin = 0.05;
+    double m_zoomMin = 0.01;
     double m_zoomMax = 3.0;
 };
 

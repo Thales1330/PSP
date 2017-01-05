@@ -73,6 +73,7 @@ public:
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual wxString GetTipText() const;
     virtual SyncGeneratorElectricalData GetElectricalData() { return m_electricalData; }
     virtual SyncGeneratorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(SyncGeneratorElectricalData electricalData) { m_electricalData = electricalData; }
