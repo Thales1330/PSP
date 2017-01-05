@@ -57,7 +57,7 @@ BusFormBase::BusFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
     
     gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextNomVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNomVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Rated voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_1->Add(m_staticTextNomVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -426,7 +426,7 @@ SyncMachineFormBase::SyncMachineFormBase(wxWindow* parent, wxWindowID id, const 
     
     gridSizerLvl3_1->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Rated power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_5->Add(m_staticTextNominalPower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -570,7 +570,7 @@ SyncMachineFormBase::SyncMachineFormBase(wxWindow* parent, wxWindowID id, const 
     
     boxSizerLvl5_4->Add(m_choiceMinRectivePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
     
-    m_checkBoxUseMachinePower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use machine nominal power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxUseMachinePower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use machine rated power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     m_checkBoxUseMachinePower->SetValue(false);
     
     boxSizerLvl2_1->Add(m_checkBoxUseMachinePower, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
@@ -1010,13 +1010,13 @@ GeneratorStabFormBase::GeneratorStabFormBase(wxWindow* parent, wxWindowID id, co
     
     boxSizerLvl6_2->Add(m_staticTextPU_4, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    wxStaticBoxSizer* staticBoxSizerTransitory = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Transitory")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizerTransient = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Transient")), wxVERTICAL);
     
-    boxSizerLvl2_1->Add(staticBoxSizerTransitory, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(staticBoxSizerTransient, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     wxGridSizer* gridSizerLvl4_4 = new wxGridSizer(0, 2, 0, 0);
     
-    staticBoxSizerTransitory->Add(gridSizerLvl4_4, 1, wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizerTransient->Add(gridSizerLvl4_4, 1, wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl5_6 = new wxBoxSizer(wxVERTICAL);
     
@@ -1110,13 +1110,13 @@ GeneratorStabFormBase::GeneratorStabFormBase(wxWindow* parent, wxWindowID id, co
     
     boxSizerLvl6_6->Add(m_staticTextS_3, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    wxStaticBoxSizer* staticBoxSizerSubtransitory = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Subtransitory")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizerSubtransient = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Sub-transient")), wxVERTICAL);
     
-    boxSizerLvl2_1->Add(staticBoxSizerSubtransitory, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(staticBoxSizerSubtransient, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     wxGridSizer* gridSizerLvl4_5 = new wxGridSizer(0, 2, 0, 0);
     
-    staticBoxSizerSubtransitory->Add(gridSizerLvl4_5, 1, wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizerSubtransient->Add(gridSizerLvl4_5, 1, wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl5_10 = new wxBoxSizer(wxVERTICAL);
     
@@ -1324,7 +1324,7 @@ LineFormBase::LineFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     
     gridSizerLvl3_1->Add(boxSizerLvl4_9, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextNominalVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNominalVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Rated voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_9->Add(m_staticTextNominalVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -1339,7 +1339,7 @@ LineFormBase::LineFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     
     gridSizerLvl3_1->Add(boxSizerLvl4_8, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Rated power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_8->Add(m_staticTextNominalPower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -1470,7 +1470,7 @@ LineFormBase::LineFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     
     boxSizerLvl5_4->Add(m_staticTextKM, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_checkUseLinePower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use line nominal power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkUseLinePower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use line rated power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     m_checkUseLinePower->SetValue(false);
     
     boxSizerLvl2_1->Add(m_checkUseLinePower, 0, wxALL, WXC_FROM_DIP(5));
@@ -1637,7 +1637,7 @@ TransformerFormBase::TransformerFormBase(wxWindow* parent, wxWindowID id, const 
     
     gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextNominalVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNominalVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Rated voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_1->Add(m_staticTextNominalVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -1668,7 +1668,7 @@ TransformerFormBase::TransformerFormBase(wxWindow* parent, wxWindowID id, const 
     
     gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Nominal power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextNominalPower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Rated power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_2->Add(m_staticTextNominalPower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -1817,7 +1817,7 @@ TransformerFormBase::TransformerFormBase(wxWindow* parent, wxWindowID id, const 
     
     boxSizerLvl5_4->Add(m_staticTextDeg, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_checkUseTransformerPower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use transformer nominal power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkUseTransformerPower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use transformer rated power as base"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     m_checkUseTransformerPower->SetValue(false);
     
     boxSizerLvl2_1->Add(m_checkUseTransformerPower, 0, wxALL, WXC_FROM_DIP(5));

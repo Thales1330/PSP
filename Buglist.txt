@@ -1,29 +1,22 @@
 BUG/TODO LIST [pt-br]
 
 PRIORIDADE 1:
--> Texto exibido incorretamente ao abrir um projeto.
--> Remover barras com múltiplos elementos conectados não funcionando corretamente (manuseio dos childs errado);
--> Ajuste de parent/child ao colar elementos não está sendo feito corretamente;
+-> Textos exibidos incorretamente quando abertos (raramente).
 
 PRIORIDADE 2:
+-> Verificar a performance de c-style casting e c++ casting (static_cast/dynamic_cast);
 -> Ao arrastar os elementos que estão sendo colados são colocados;
--> Os elementos de ramo não estão sendo associados corretamente com seus parents ao copiar/colar;
 -> Ctrl + retângulo de seleção não está mantendo os elementos já selecionados;
 -> Atualizar a posição dos disjuntores quando um circuito for colado;
--> Abrir formulário pelo menu de contexto;
 -> Abrir o formulário do elemento após inserir o mesmo;
--> Erro ao tentar inserir texto do tipo nome para elementos de ramo;
--> Minimo de 1 casa decimal para os valores numéricos das barras;
 -> Calcular posição média na opção de mover do menu ribbon considerando os textos;
--> Número do nome do transformador preenchido incorretamente;
 -> Potência reativa não está sendo distribuída apropriadamente em barras de tensão controlada caso tenha mais de uma máquina síncrona (com valores de reativos máximos/mínimos acionados);
 -> Dados de elementos desconectados/offline não estão sendo zerados/reiniciados;
 -> É necessário perguntar ao usuário se ele deseja trocar a tensão de todo o trecho conectado por linhas (quando é trocada a tensão de uma barra);
 -> Setas de fluxo de carga de linhas e transformadores não são atualizadas quando uma barra conectada é removida;
 -> Setas do  fluxo de carga das máquinas elétricas não são atualizadas quando a barra conectada é rotacionada;
--> Criar segurança caso um aquivo não possa ser escrito ou aberto;
--> Linhas dos transformadores desalinhadas quando movidos;
--> Remover a ferramenta Exportar/Importar.
+-> Criar segurança caso um aquivo não possa ser gravado ou aberto;
+-> Linhas dos transformadores desalinhadas quando movidos.
 
 PRIORIDADE 3:
 -> Fluxo de potência dos elementos de ramo na unidade da potência base do sistema;

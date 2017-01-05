@@ -23,7 +23,7 @@ public:
     ElementsLists* GetElementsLists() { return m_elementsLists; }
 
 protected:
-    ElementsLists* m_elementsLists;
+    ElementsLists* m_elementsLists = NULL;
 };
 
 #endif // ELEMENTDATAOBJECT_H

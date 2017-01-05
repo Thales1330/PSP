@@ -620,7 +620,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Label:",
-                   "m_value": "Nominal voltage"
+                   "m_value": "Rated voltage"
                   }, {
                    "type": "string",
                    "m_label": "Wrap:",
@@ -4692,7 +4692,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Label:",
-                   "m_value": "Nominal power"
+                   "m_value": "Rated power"
                   }, {
                    "type": "string",
                    "m_label": "Wrap:",
@@ -6164,7 +6164,7 @@
               }, {
                "type": "string",
                "m_label": "Label:",
-               "m_value": "Use machine nominal power as base"
+               "m_value": "Use machine rated power as base"
               }, {
                "type": "bool",
                "m_label": "Value:",
@@ -11257,7 +11257,7 @@
           }, {
            "type": "string",
            "m_label": "Name:",
-           "m_value": "staticBoxSizerTransitory"
+           "m_value": "staticBoxSizerTransient"
           }, {
            "type": "string",
            "m_label": "Style:",
@@ -11270,7 +11270,7 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "Transitory"
+           "m_value": "Transient"
           }],
          "m_events": [],
          "m_children": [{
@@ -12500,7 +12500,7 @@
           }, {
            "type": "string",
            "m_label": "Name:",
-           "m_value": "staticBoxSizerSubtransitory"
+           "m_value": "staticBoxSizerSubtransient"
           }, {
            "type": "string",
            "m_label": "Style:",
@@ -12513,7 +12513,7 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "Subtransitory"
+           "m_value": "Sub-transient"
           }],
          "m_events": [],
          "m_children": [{
@@ -14754,7 +14754,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Label:",
-                   "m_value": "Nominal voltage"
+                   "m_value": "Rated voltage"
                   }, {
                    "type": "string",
                    "m_label": "Wrap:",
@@ -14932,7 +14932,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Label:",
-                   "m_value": "Nominal power"
+                   "m_value": "Rated power"
                   }, {
                    "type": "string",
                    "m_label": "Wrap:",
@@ -16371,7 +16371,7 @@
               }, {
                "type": "string",
                "m_label": "Label:",
-               "m_value": "Use line nominal power as base"
+               "m_value": "Use line rated power as base"
               }, {
                "type": "bool",
                "m_label": "Value:",
@@ -18075,7 +18075,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Label:",
-                   "m_value": "Nominal voltage"
+                   "m_value": "Rated voltage"
                   }, {
                    "type": "string",
                    "m_label": "Wrap:",
@@ -18431,7 +18431,7 @@
                   }, {
                    "type": "multi-string",
                    "m_label": "Label:",
-                   "m_value": "Nominal power"
+                   "m_value": "Rated power"
                   }, {
                    "type": "string",
                    "m_label": "Wrap:",
@@ -20070,7 +20070,7 @@
               }, {
                "type": "string",
                "m_label": "Label:",
-               "m_value": "Use transformer nominal power as base"
+               "m_value": "Use transformer rated power as base"
               }, {
                "type": "bool",
                "m_label": "Value:",

@@ -77,11 +77,12 @@ public:
     wxFileName GetSavedPath() const { return m_savedPath; }
 
     void SetName(wxString name) { m_name = name; }
-    void SetElementList(std::vector<Element*> elementList) { m_elementList = elementList; }
+    void SetElementList(std::vector<Element*> elementList);
     void SetTextList(std::vector<Text*> textList);
     void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
     void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
     void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
+    void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
 
     void Redraw() { m_glCanvas->Refresh(); }
     void RotateSelectedElements(bool clockwise = true);
@@ -102,6 +103,7 @@ public:
     bool RunPowerFlow();
 
 protected:
+    virtual void OnIdle(wxIdleEvent& event);
     virtual void OnTimer(wxTimerEvent& event);
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
     virtual void OnRightClickDown(wxMouseEvent& event);
@@ -118,9 +120,9 @@ protected:
     void SetViewport();
     void UpdateStatusBar();
 
-    wxGLContext* m_glContext;
-    wxStatusBar* m_statusBar;
-    Camera* m_camera;
+    wxGLContext* m_glContext = NULL;
+    wxStatusBar* m_statusBar = NULL;
+    Camera* m_camera = NULL;
     wxTipWindow* m_tipWindow = NULL;
     wxString m_name;
 
@@ -135,6 +137,8 @@ protected:
     
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
+    
+    bool m_justOpened = false;
 };
 
 class Camera

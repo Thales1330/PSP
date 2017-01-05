@@ -25,7 +25,7 @@ protected:
 
     double x,y, angle;
     float xscale, yscale;
-    TextTexture* image;
+    TextTexture* image = NULL;
     bool xflip, yflip;
 
     float tex_coord_x1, tex_coord_y1;
@@ -77,7 +77,7 @@ my_message.render(x, y);
 class wxGLString : public wxString, public TextGLDrawable
 {
 protected:
-    TextTexture* img;
+    TextTexture* img = NULL;
     wxFont font;
 
     friend class wxGLStringArray;
@@ -168,7 +168,7 @@ my_messages.get(2).render( x, y + 50 );
 class wxGLStringArray
 {
     std::vector<wxGLString> strings;
-    TextTexture* img;
+    TextTexture* img = NULL;
     wxFont font;
 public:
     /** constructs an empty array - add elements later using addString */

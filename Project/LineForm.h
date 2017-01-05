@@ -17,8 +17,8 @@ protected:
 	virtual void ReplaceStaticTextLabelChar(wxStaticText* staticText, wchar_t newChar);
 	virtual bool ValidateData();
 	
-	wxWindow* m_parent;
-	Line* m_line;
+	wxWindow* m_parent = NULL;
+	Line* m_line = NULL;
 	
 };
 #endif // LINEFORM_H

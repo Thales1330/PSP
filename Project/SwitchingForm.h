@@ -23,6 +23,6 @@ protected:
     
     int m_maxID = 0;
     
-    Element* m_element;
+    Element* m_element = NULL;
 };
 #endif // SWITCHINGFORM_H

@@ -24,7 +24,11 @@ Text::Text(wxPoint2DDouble position)
     SetText(m_text);
 }
 
-Text::~Text() {}
+Text::~Text()
+{
+    if(m_glString) delete m_glString;
+    if(m_glStringArray) delete m_glStringArray;
+}
 bool Text::Contains(wxPoint2DDouble position) const
 {
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
@@ -105,7 +109,8 @@ void Text::SetText(wxString text)
         m_glStringArray = new wxGLStringArray();
         dc.SetFont(font);
 
-        int w = 0, h = 0;
+        m_width = 0.0;
+        m_height = 0.0;
         wxString multText = m_text;
         for(int i = 0; i < m_numberOfLines; ++i) {
             wxString nextLine;
@@ -114,15 +119,12 @@ void Text::SetText(wxString text)
             m_glStringArray->addString(currentLine);
 
             wxSize size = dc.GetTextExtent(currentLine);
-            if(size.GetWidth() > w) w = size.GetWidth();
-            h += size.GetHeight();
+            if(size.GetWidth() > m_width) m_width = size.GetWidth();
+            m_height += size.GetHeight();
         }
 
         m_glStringArray->setFont(font);
         m_glStringArray->consolidate(&dc);
-
-        m_width = w;
-        m_height = h;
     }
 
     // Update text rectangle.
@@ -157,7 +159,7 @@ void Text::UpdateText(double systemPowerBase)
             SetText(m_text);
             break;
         case TYPE_BUS: {
-            Bus* bus = (Bus*)m_element;
+            Bus* bus = static_cast<Bus*>(m_element);
             if(bus) {
                 BusElectricalData data = bus->GetEletricalData();
                 double baseVoltage = data.nominalVoltage;
@@ -289,7 +291,7 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_SYNC_GENERATOR: {
-            SyncGenerator* syncGenerator = (SyncGenerator*)m_element;
+            SyncGenerator* syncGenerator = static_cast<SyncGenerator*>(m_element);
             if(syncGenerator) {
                 SyncGeneratorElectricalData data = syncGenerator->GetPUElectricalData(systemPowerBase);
                 double baseVoltage = data.nominalVoltage;
@@ -384,7 +386,7 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_LINE: {
-            Line* line = (Line*)m_element;
+            Line* line = static_cast<Line*>(m_element);
             if(line) {
                 LineElectricalData data = line->GetElectricalData();
                 double baseVoltage = data.nominalVoltage;
@@ -510,7 +512,7 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_TRANSFORMER: {
-            Transformer* transformer = (Transformer*)m_element;
+            Transformer* transformer = static_cast<Transformer*>(m_element);
             if(transformer) {
                 TransformerElectricalData data = transformer->GetElectricalData();
                 double baseVoltage[2] = { data.primaryNominalVoltage, data.secondaryNominalVoltage };
@@ -652,12 +654,12 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_LOAD: {
-            Load* load = (Load*)m_element;
+            Load* load = static_cast<Load*>(m_element);
             if(load) {
                 LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
                 std::complex<double> sPower(data.activePower, data.reactivePower);
                 if(data.loadType == CONST_IMPEDANCE && load->IsOnline()) {
-                    std::complex<double> v = ((Bus*)load->GetParentList()[0])->GetEletricalData().voltage;
+                    std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetEletricalData().voltage;
                     sPower = std::pow(std::abs(v), 2) * sPower;
                 }
                 switch(m_dataType) {
@@ -711,7 +713,7 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_SYNC_MOTOR: {
-            SyncMotor* syncMotor = (SyncMotor*)m_element;
+            SyncMotor* syncMotor = static_cast<SyncMotor*>(m_element);
             if(syncMotor) {
                 SyncMotorElectricalData data = syncMotor->GetPUElectricalData(systemPowerBase);
                 std::complex<double> sPower(data.activePower, data.reactivePower);
@@ -766,7 +768,7 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_IND_MOTOR: {
-            IndMotor* indMotor = (IndMotor*)m_element;
+            IndMotor* indMotor = static_cast<IndMotor*>(m_element);
             if(indMotor) {
                 IndMotorElectricalData data = indMotor->GetPUElectricalData(systemPowerBase);
                 std::complex<double> sPower(data.activePower, data.reactivePower);
@@ -821,12 +823,12 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_CAPACITOR: {
-            Capacitor* capacitor = (Capacitor*)m_element;
+            Capacitor* capacitor = static_cast<Capacitor*>(m_element);
             if(capacitor) {
                 CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
                 double reativePower = -data.reactivePower;
                 if(capacitor->IsOnline()) {
-                    std::complex<double> v = ((Bus*)capacitor->GetParentList()[0])->GetEletricalData().voltage;
+                    std::complex<double> v = static_cast<Bus*>(capacitor->GetParentList()[0])->GetEletricalData().voltage;
                     reativePower *= std::pow(std::abs(v), 2);
                 }
                 switch(m_dataType) {
@@ -859,12 +861,12 @@ void Text::UpdateText(double systemPowerBase)
             }
         } break;
         case TYPE_INDUCTOR: {
-            Inductor* inductor = (Inductor*)m_element;
+            Inductor* inductor = static_cast<Inductor*>(m_element);
             if(inductor) {
                 InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
                 double reativePower = data.reactivePower;
                 if(inductor->IsOnline()) {
-                    std::complex<double> v = ((Bus*)inductor->GetParentList()[0])->GetEletricalData().voltage;
+                    std::complex<double> v = static_cast<Bus*>(inductor->GetParentList()[0])->GetEletricalData().voltage;
                     reativePower *= std::pow(std::abs(v), 2);
                 }
                 switch(m_dataType) {
@@ -903,5 +905,9 @@ Element* Text::GetCopy()
 {
     Text* copy = new Text();
     *copy = *this;
+    // The pointers to wxGLString must be different or can cause crashes.
+    copy->m_glString = NULL;
+    copy->m_glStringArray = NULL;
+    copy->SetText(copy->m_text);
     return copy;
 }

@@ -25,7 +25,7 @@ GLuint* loadImage(wxImage* img)
     // convert it to an alpha channel by the way (not all platforms support transparency in wxDCs
     // so it's the easiest way to go)
     GLubyte* bitmapData = img->GetData();
-    GLubyte* imageData;
+    GLubyte* imageData = NULL;
 
     int bytesPerPixel = 4;
 
@@ -43,7 +43,7 @@ GLuint* loadImage(wxImage* img)
             // alpha
             imageData[(x + y * w) * bytesPerPixel + 3] = 255 - bitmapData[(x + (rev_val - y) * w) * 3];
         } // next
-    } // next
+    }     // next
 
     glTexImage2D(GL_TEXTURE_2D, 0, bytesPerPixel, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
@@ -67,7 +67,7 @@ class TextTexture
     friend class wxGLStringNumber;
 
 private:
-    GLuint* ID;
+    GLuint* ID = NULL;
 
 protected:
     GLuint* getID();
@@ -97,7 +97,7 @@ TextGLDrawable::TextGLDrawable(TextTexture* image_arg)
     xflip = false;
     yflip = false;
 
-    if(image_arg != NULL)
+    if(image_arg)
         setImage(image_arg);
     else
         image = NULL;
@@ -138,7 +138,7 @@ void TextGLDrawable::rotate(int angle) { TextGLDrawable::angle = angle; }
 
 void TextGLDrawable::render() const
 {
-    assert(image != NULL);
+    assert(image);
 
     glPushMatrix();
     glTranslatef(x - w / 2, y - h / 2, 0);
@@ -182,7 +182,7 @@ GLuint* TextTexture::getID() { return ID; }
 TextTexture::~TextTexture()
 {
     glDeleteTextures(1, ID);
-    delete ID;
+    if(ID) delete ID; // Memory leak?
 }
 
 #if 0
@@ -203,7 +203,10 @@ wxGLString::wxGLString(wxString message)
     img = NULL;
 }
 void wxGLString::operator=(wxString& string) { (*((wxString*)this)) = string; }
-void wxGLString::bind() const { glBindTexture(GL_TEXTURE_2D, img->getID()[0]); }
+void wxGLString::bind() const
+{
+    if(img->getID()[0]) glBindTexture(GL_TEXTURE_2D, img->getID()[0]);
+}
 void wxGLString::calculateSize(wxDC* dc, const bool ignore_font /* when from array */)
 {
     if(!ignore_font) {
@@ -239,7 +242,7 @@ void wxGLString::consolidate(wxDC* dc)
         temp_dc.DrawText(*this, 0, 0);
     }
 
-    if(img != NULL) delete img;
+    if(img) delete img;
     img = new TextTexture(bmp);
 
     TextGLDrawable::texw = power_of_2_w;
@@ -262,7 +265,7 @@ void wxGLString::render(const double x, const double y)
 }
 wxGLString::~wxGLString()
 {
-    if(img != NULL) delete img;
+    if(img) delete img;
 }
 
 #if 0
@@ -397,11 +400,14 @@ wxGLStringArray::wxGLStringArray(const wxString strings_arg[], int amount)
 }
 wxGLStringArray::~wxGLStringArray()
 {
-    if(img != NULL) delete img;
+    if(img) delete img;
 }
 
 wxGLString& wxGLStringArray::get(const int id) { return strings[id]; }
-void wxGLStringArray::bind() { glBindTexture(GL_TEXTURE_2D, img->getID()[0]); }
+void wxGLStringArray::bind()
+{
+    if(img->getID()[0]) glBindTexture(GL_TEXTURE_2D, img->getID()[0]);
+}
 void wxGLStringArray::addString(wxString string) { strings.push_back(wxGLString(string)); }
 void wxGLStringArray::setFont(wxFont font) { wxGLStringArray::font = font; }
 
@@ -469,7 +475,7 @@ void wxGLStringArray::consolidate(wxDC* dc)
             }
         }
     }
-    if(img != NULL) delete img;
+    if(img) delete img;
     img = new TextTexture(bmp);
 
     for(int n = 0; n < amount; n++) strings[n].setImage(img);

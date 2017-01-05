@@ -22,7 +22,7 @@ protected:
 	virtual void EnableStabFaultFields(bool enable = true);
 	virtual void UpdateChoiceBoxes();
 	
-	Bus* m_bus;
-	wxWindow* m_parent;
+	Bus* m_bus = NULL;
+	wxWindow* m_parent = NULL;
 };
 #endif // BUSFORM_H

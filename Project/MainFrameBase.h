@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef PSP_PROJECT_MAINFRAME_BASE_CLASSES_H
-#define PSP_PROJECT_MAINFRAME_BASE_CLASSES_H
+#ifndef _PSP_PROJECT_MAINFRAME_BASE_CLASSES_H
+#define _PSP_PROJECT_MAINFRAME_BASE_CLASSES_H
 
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>
@@ -53,28 +53,27 @@ public:
         ID_RIBBON_DRAG = 10009,
         ID_RIBBON_ENABLESOL = 10010,
         ID_RIBBON_EXIT = 10011,
-        ID_RIBBON_EXPIMP = 10012,
-        ID_RIBBON_FAULT = 10013,
-        ID_RIBBON_FIT = 10014,
-        ID_RIBBON_GENSETTINGS = 10015,
-        ID_RIBBON_GUIDE = 10016,
-        ID_RIBBON_MOVE = 10017,
-        ID_RIBBON_NEW = 10018,
-        ID_RIBBON_OPEN = 10019,
-        ID_RIBBON_PASTE = 10020,
-        ID_RIBBON_POWERFLOW = 10021,
-        ID_RIBBON_PROJSETTINGS = 10022,
-        ID_RIBBON_REDO = 10023,
-        ID_RIBBON_RESETVOLT = 10024,
-        ID_RIBBON_ROTATEC = 10025,
-        ID_RIBBON_ROTATECC = 10026,
-        ID_RIBBON_RUNSTAB = 10027,
-        ID_RIBBON_SAVE = 10028,
-        ID_RIBBON_SAVEAS = 10029,
-        ID_RIBBON_SCPOWER = 10030,
-        ID_RIBBON_SIMULSETTINGS = 10031,
-        ID_RIBBON_SNAPSHOT = 10032,
-        ID_RIBBON_UNDO = 10033,
+        ID_RIBBON_FAULT = 10012,
+        ID_RIBBON_FIT = 10013,
+        ID_RIBBON_GENSETTINGS = 10014,
+        ID_RIBBON_GUIDE = 10015,
+        ID_RIBBON_MOVE = 10016,
+        ID_RIBBON_NEW = 10017,
+        ID_RIBBON_OPEN = 10018,
+        ID_RIBBON_PASTE = 10019,
+        ID_RIBBON_POWERFLOW = 10020,
+        ID_RIBBON_PROJSETTINGS = 10021,
+        ID_RIBBON_REDO = 10022,
+        ID_RIBBON_RESETVOLT = 10023,
+        ID_RIBBON_ROTATEC = 10024,
+        ID_RIBBON_ROTATECC = 10025,
+        ID_RIBBON_RUNSTAB = 10026,
+        ID_RIBBON_SAVE = 10027,
+        ID_RIBBON_SAVEAS = 10028,
+        ID_RIBBON_SCPOWER = 10029,
+        ID_RIBBON_SIMULSETTINGS = 10030,
+        ID_RIBBON_SNAPSHOT = 10031,
+        ID_RIBBON_UNDO = 10032,
     };
 protected:
     wxRibbonBar* m_ribbonBar;
@@ -103,7 +102,6 @@ protected:
 protected:
     virtual void OnNewClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnOpenClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnExpImpClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnExitClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSaveClick(wxRibbonButtonBarEvent& event) { event.Skip(); }

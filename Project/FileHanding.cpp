@@ -127,7 +127,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto nodePosY = AppendNode(doc, nodePos, "Y");
         SetNodeValue(doc, nodePosY, capacitor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = (Bus*)capacitor->GetParentList()[0];
+        Bus* parent = static_cast<Bus*>(capacitor->GetParentList()[0]);
         if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
 
         CapacitorElectricalData data = capacitor->GetElectricalData();
@@ -178,7 +178,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto nodePosY = AppendNode(doc, nodePos, "Y");
         SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = (Bus*)indMotor->GetParentList()[0];
+        Bus* parent = static_cast<Bus*>(indMotor->GetParentList()[0]);
         if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
 
         IndMotorElectricalData data = indMotor->GetElectricalData();
@@ -221,7 +221,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto nodePosY = AppendNode(doc, nodePos, "Y");
         SetNodeValue(doc, nodePosY, inductor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = (Bus*)inductor->GetParentList()[0];
+        Bus* parent = static_cast<Bus*>(inductor->GetParentList()[0]);
         if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
 
         InductorElectricalData data = inductor->GetElectricalData();
@@ -271,7 +271,7 @@ void FileHanding::SaveProject(wxFileName path)
 
         auto parentIDList = AppendNode(doc, cadProp, "ParentIDList");
         for(int j = 0; j < (int)line->GetParentList().size(); j++) {
-            Bus* parent = (Bus*)line->GetParentList()[j];
+            Bus* parent = static_cast<Bus*>(line->GetParentList()[j]);
             if(parent) {
                 auto parentID = AppendNode(doc, parentIDList, "ParentID");
                 SetNodeAttribute(doc, parentID, "ID", j);
@@ -351,7 +351,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto nodePosY = AppendNode(doc, nodePos, "Y");
         SetNodeValue(doc, nodePosY, load->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = (Bus*)load->GetParentList()[0];
+        Bus* parent = static_cast<Bus*>(load->GetParentList()[0]);
         if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
 
         LoadElectricalData data = load->GetElectricalData();
@@ -407,7 +407,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto nodePosY = AppendNode(doc, nodePos, "Y");
         SetNodeValue(doc, nodePosY, syncGenerator->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = (Bus*)syncGenerator->GetParentList()[0];
+        Bus* parent = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
         if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
 
         SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
@@ -537,7 +537,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto nodePosY = AppendNode(doc, nodePos, "Y");
         SetNodeValue(doc, nodePosY, syncMotor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = (Bus*)syncMotor->GetParentList()[0];
+        Bus* parent = static_cast<Bus*>(syncMotor->GetParentList()[0]);
         if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
 
         SyncMotorElectricalData data = syncMotor->GetElectricalData();
@@ -676,7 +676,7 @@ void FileHanding::SaveProject(wxFileName path)
 
         auto parentIDList = AppendNode(doc, cadProp, "ParentIDList");
         for(int j = 0; j < (int)transfomer->GetParentList().size(); j++) {
-            Bus* parent = (Bus*)transfomer->GetParentList()[j];
+            Bus* parent = static_cast<Bus*>(transfomer->GetParentList()[j]);
             if(parent) {
                 auto parentID = AppendNode(doc, parentIDList, "ParentID");
                 SetNodeAttribute(doc, parentID, "ID", j);
@@ -823,7 +823,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double posY = GetNodeValueDouble(position, "Y");
         Bus* bus = new Bus(wxPoint2DDouble(posX, posY));
 
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
@@ -841,7 +841,7 @@ bool FileHanding::OpenProject(wxFileName path)
         BusElectricalData data = bus->GetEletricalData();
         auto electricalProp = busNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         data.name = electricalProp->first_node("Name")->value();
         data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
         data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
@@ -868,21 +868,21 @@ bool FileHanding::OpenProject(wxFileName path)
         busList.push_back(bus);
         busNode = busNode->next_sibling("Bus");
     } //}
-    
+
     //{ Capacitor
     auto capacitorListNode = elementsNode->first_node("CapacitorList");
     if(!capacitorListNode) return false;
     auto capacitorNode = capacitorListNode->first_node("Capacitor");
     while(capacitorNode) {
         Capacitor* capacitor = new Capacitor();
-        
+
         auto cadPropNode = capacitorNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
@@ -891,7 +891,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double nodePosY = GetNodeValueDouble(nodePosition, "Y");
         int parentID = GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
-            //If the element has no parent, create a temporary one, remove and delete.
+            // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
             capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
             capacitor->StartMove(capacitor->GetPosition());
@@ -906,7 +906,7 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         capacitor->SetWidth(width);
         capacitor->SetHeight(height);
-        
+
         int numRot = angle / capacitor->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -914,16 +914,16 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) capacitor->Rotate(clockwise);
-        
+
         auto electricalProp = capacitorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         capacitor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         CapacitorElectricalData data = capacitor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
         data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
         data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        
+
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -934,27 +934,27 @@ bool FileHanding::OpenProject(wxFileName path)
             swNode = swNode->next_sibling("Switching");
         }
         capacitor->SetSwitchingData(swData);
-        
+
         capacitor->SetElectricalData(data);
         elementList.push_back(capacitor);
         capacitorList.push_back(capacitor);
         capacitorNode = capacitorNode->next_sibling("Capacitor");
     } //}
-    
+
     //{ IndMotor
     auto indMotorListNode = elementsNode->first_node("IndMotorList");
     if(!indMotorListNode) return false;
     auto indMotorNode = indMotorListNode->first_node("IndMotor");
     while(indMotorNode) {
         IndMotor* indMotor = new IndMotor();
-        
+
         auto cadPropNode = indMotorNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
@@ -963,7 +963,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double nodePosY = GetNodeValueDouble(nodePosition, "Y");
         int parentID = GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
-            //If the element has no parent, create a temporary one, remove and delete.
+            // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
             indMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
             indMotor->StartMove(indMotor->GetPosition());
@@ -978,7 +978,7 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         indMotor->SetWidth(width);
         indMotor->SetHeight(height);
-        
+
         int numRot = angle / indMotor->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -986,10 +986,10 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) indMotor->Rotate(clockwise);
-        
+
         auto electricalProp = indMotorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         indMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         IndMotorElectricalData data = indMotor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
@@ -997,27 +997,27 @@ bool FileHanding::OpenProject(wxFileName path)
         data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
         data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
         data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        
+
         indMotor->SetElectricalData(data);
         elementList.push_back(indMotor);
         indMotorList.push_back(indMotor);
         indMotorNode = indMotorNode->next_sibling("IndMotor");
     } //}
-    
+
     //{ Inductor
     auto inductorListNode = elementsNode->first_node("InductorList");
     if(!inductorListNode) return false;
     auto inductorNode = inductorListNode->first_node("Inductor");
     while(inductorNode) {
         Inductor* inductor = new Inductor();
-        
+
         auto cadPropNode = inductorNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
@@ -1026,7 +1026,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double nodePosY = GetNodeValueDouble(nodePosition, "Y");
         int parentID = GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
-            //If the element has no parent, create a temporary one, remove and delete.
+            // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
             inductor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
             inductor->StartMove(inductor->GetPosition());
@@ -1041,7 +1041,7 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         inductor->SetWidth(width);
         inductor->SetHeight(height);
-        
+
         int numRot = angle / inductor->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -1049,16 +1049,16 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) inductor->Rotate(clockwise);
-        
+
         auto electricalProp = inductorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         inductor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         InductorElectricalData data = inductor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
         data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
         data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        
+
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -1069,23 +1069,23 @@ bool FileHanding::OpenProject(wxFileName path)
             swNode = swNode->next_sibling("Switching");
         }
         inductor->SetSwitchingData(swData);
-        
+
         inductor->SetElectricalData(data);
         elementList.push_back(inductor);
         inductorList.push_back(inductor);
         inductorNode = inductorNode->next_sibling("Inductor");
     } //}
-    
+
     //{ Line
     auto lineListNode = elementsNode->first_node("LineList");
     if(!lineListNode) return false;
     auto lineNode = lineListNode->first_node("Line");
     while(lineNode) {
         Line* line = new Line();
-        
+
         auto cadPropNode = lineNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         // Get nodes points
         std::vector<wxPoint2DDouble> ptsList;
         auto nodePosList = cadPropNode->first_node("NodeList");
@@ -1097,21 +1097,21 @@ bool FileHanding::OpenProject(wxFileName path)
             ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
             nodePos = nodePos->next_sibling("Node");
         }
-        
+
         // Get parents IDs
         auto parentIDList = cadPropNode->first_node("ParentIDList");
         if(!parentIDList) return false;
         auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = {-1, -1};
+        long parentID[2] = { -1, -1 };
         while(parentNode) {
             long index = 0;
             wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
             wxString(parentNode->value()).ToCLong(&parentID[index]);
             parentNode = parentNode->next_sibling("ParentID");
         }
-        
+
         // Set parents (if have)
-        Bus* parent1, *parent2;
+        Bus *parent1, *parent2;
         if(parentID[0] == -1) {
             parent1 = new Bus(ptsList[0]);
             line->AddParent(parent1, ptsList[0]);
@@ -1126,27 +1126,26 @@ bool FileHanding::OpenProject(wxFileName path)
             parent2 = busList[parentID[1]];
             line->AddParent(parent2, ptsList[ptsList.size() - 1]);
         }
-        
+
         // Add the others nodes (if have)
         std::vector<wxPoint2DDouble> midPts;
-        for(int i=1; i<(int)ptsList.size() - 1; i++) midPts.push_back(ptsList[i]);
+        for(int i = 1; i < (int)ptsList.size() - 1; i++) midPts.push_back(ptsList[i]);
         std::vector<wxPoint2DDouble> edgesPts = line->GetPointList();
         edgesPts.insert(edgesPts.begin() + 2, midPts.begin(), midPts.end());
         line->SetPointList(edgesPts);
-        
-        if(parentID[0] == -1){
+
+        if(parentID[0] == -1) {
             line->RemoveParent(parent1);
             delete parent1;
         }
-        if(parentID[1] == -1){
+        if(parentID[1] == -1) {
             line->RemoveParent(parent2);
             delete parent2;
         }
-        
-        
+
         auto electricalProp = lineNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         line->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         LineElectricalData data = line->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
@@ -1162,12 +1161,12 @@ bool FileHanding::OpenProject(wxFileName path)
         data.capSusceptanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "CapSusceptance", "UnitID");
         data.lineSize = GetNodeValueDouble(electricalProp, "LineSize");
         data.useLinePower = GetNodeValueInt(electricalProp, "UseLinePower");
-        
+
         auto fault = electricalProp->first_node("Fault");
         data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
         data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
         data.zeroCapSusceptance = GetNodeValueDouble(fault, "ZeroCapSusceptance");
-        
+
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -1178,27 +1177,27 @@ bool FileHanding::OpenProject(wxFileName path)
             swNode = swNode->next_sibling("Switching");
         }
         line->SetSwitchingData(swData);
-        
+
         line->SetElectricalData(data);
         elementList.push_back(line);
         lineList.push_back(line);
         lineNode = lineNode->next_sibling("Line");
     } //}
-    
+
     //{ Load
     auto loadListNode = elementsNode->first_node("LoadList");
     if(!loadListNode) return false;
     auto loadNode = loadListNode->first_node("Load");
     while(loadNode) {
         Load* load = new Load();
-        
+
         auto cadPropNode = loadNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
@@ -1207,7 +1206,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double nodePosY = GetNodeValueDouble(nodePosition, "Y");
         int parentID = GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
-            //If the element has no parent, create a temporary one, remove and delete.
+            // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
             load->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
             load->StartMove(load->GetPosition());
@@ -1222,7 +1221,7 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         load->SetWidth(width);
         load->SetHeight(height);
-        
+
         int numRot = angle / load->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -1230,10 +1229,10 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) load->Rotate(clockwise);
-        
+
         auto electricalProp = loadNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         load->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         LoadElectricalData data = load->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
@@ -1242,7 +1241,7 @@ bool FileHanding::OpenProject(wxFileName path)
         data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
         data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
         data.loadType = (LoadType)GetNodeValueInt(electricalProp, "LoadType");
-        
+
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -1253,27 +1252,27 @@ bool FileHanding::OpenProject(wxFileName path)
             swNode = swNode->next_sibling("Switching");
         }
         load->SetSwitchingData(swData);
-        
+
         load->SetElectricalData(data);
         elementList.push_back(load);
         loadList.push_back(load);
         loadNode = loadNode->next_sibling("Load");
     } //}
-    
+
     //{ SyncGenerator
     auto syncGeneratorListNode = elementsNode->first_node("SyncGeneratorList");
     if(!syncGeneratorListNode) return false;
     auto syncGeneratorNode = syncGeneratorListNode->first_node("SyncGenerator");
     while(syncGeneratorNode) {
         SyncGenerator* syncGenerator = new SyncGenerator();
-        
+
         auto cadPropNode = syncGeneratorNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
@@ -1282,7 +1281,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double nodePosY = GetNodeValueDouble(nodePosition, "Y");
         int parentID = GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
-            //If the element has no parent, create a temporary one, remove and delete.
+            // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
             syncGenerator->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
             syncGenerator->StartMove(syncGenerator->GetPosition());
@@ -1297,7 +1296,7 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         syncGenerator->SetWidth(width);
         syncGenerator->SetHeight(height);
-        
+
         int numRot = angle / syncGenerator->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -1305,10 +1304,10 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) syncGenerator->Rotate(clockwise);
-        
+
         auto electricalProp = syncGeneratorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         syncGenerator->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
@@ -1327,7 +1326,7 @@ bool FileHanding::OpenProject(wxFileName path)
         data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
         data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
         data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
-        
+
         auto fault = electricalProp->first_node("Fault");
         if(!fault) return false;
         data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
@@ -1339,7 +1338,7 @@ bool FileHanding::OpenProject(wxFileName path)
         data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
         data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
         data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
-        
+
         auto stability = electricalProp->first_node("Stability");
         if(!stability) return false;
         data.plotSyncMachine = GetNodeValueInt(stability, "PlotSyncMachine");
@@ -1360,7 +1359,7 @@ bool FileHanding::OpenProject(wxFileName path)
         data.subXq = GetNodeValueDouble(stability, "SubXq");
         data.subTd0 = GetNodeValueDouble(stability, "SubTd0");
         data.subTq0 = GetNodeValueDouble(stability, "SubTq0");
-        
+
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -1371,27 +1370,27 @@ bool FileHanding::OpenProject(wxFileName path)
             swNode = swNode->next_sibling("Switching");
         }
         syncGenerator->SetSwitchingData(swData);
-        
+
         syncGenerator->SetElectricalData(data);
         elementList.push_back(syncGenerator);
         syncGeneratorList.push_back(syncGenerator);
         syncGeneratorNode = syncGeneratorNode->next_sibling("SyncGenerator");
     } //}
-    
+
     //{ SyncMotor
     auto syncMotorListNode = elementsNode->first_node("SyncMotorList");
     if(!syncMotorListNode) return false;
     auto syncMotorNode = syncMotorListNode->first_node("SyncMotor");
     while(syncMotorNode) {
         SyncMotor* syncMotor = new SyncMotor();
-        
+
         auto cadPropNode = syncMotorNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
@@ -1400,7 +1399,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double nodePosY = GetNodeValueDouble(nodePosition, "Y");
         int parentID = GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
-            //If the element has no parent, create a temporary one, remove and delete.
+            // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
             syncMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
             syncMotor->StartMove(syncMotor->GetPosition());
@@ -1415,7 +1414,7 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         syncMotor->SetWidth(width);
         syncMotor->SetHeight(height);
-        
+
         int numRot = angle / syncMotor->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -1423,17 +1422,17 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) syncMotor->Rotate(clockwise);
-        
+
         auto electricalProp = syncMotorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         syncMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         SyncMotorElectricalData data = syncMotor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
         data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
         data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        //data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        //data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        // data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
+        // data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
         data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
         data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
         data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
@@ -1445,7 +1444,7 @@ bool FileHanding::OpenProject(wxFileName path)
         data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
         data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
         data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
-        
+
         auto fault = electricalProp->first_node("Fault");
         if(!fault) return false;
         data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
@@ -1457,7 +1456,7 @@ bool FileHanding::OpenProject(wxFileName path)
         data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
         data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
         data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
-        
+
         /*SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -1468,31 +1467,31 @@ bool FileHanding::OpenProject(wxFileName path)
             swNode = swNode->next_sibling("Switching");
         }
         syncMotor->SetSwitchingData(swData);*/
-        
+
         syncMotor->SetElectricalData(data);
         elementList.push_back(syncMotor);
         syncMotorList.push_back(syncMotor);
         syncMotorNode = syncMotorNode->next_sibling("SyncMotor");
     } //}
-    
+
     //{ Transformer
     auto transformerListNode = elementsNode->first_node("TransformerList");
     if(!transformerListNode) return false;
     auto transfomerNode = transformerListNode->first_node("Transfomer");
     while(transfomerNode) {
         Transformer* transformer = new Transformer();
-        
+
         auto cadPropNode = transfomerNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         // Get nodes points
         std::vector<wxPoint2DDouble> ptsList;
         auto nodePosList = cadPropNode->first_node("NodeList");
@@ -1504,21 +1503,21 @@ bool FileHanding::OpenProject(wxFileName path)
             ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
             nodePos = nodePos->next_sibling("Node");
         }
-        
+
         // Get parents IDs
         auto parentIDList = cadPropNode->first_node("ParentIDList");
         if(!parentIDList) return false;
         auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = {-1, -1};
+        long parentID[2] = { -1, -1 };
         while(parentNode) {
             long index = 0;
             wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
             wxString(parentNode->value()).ToCLong(&parentID[index]);
             parentNode = parentNode->next_sibling("ParentID");
         }
-        
+
         // Set parents (if have)
-        Bus* parent1, *parent2;
+        Bus *parent1, *parent2;
         if(parentID[0] == -1) {
             parent1 = new Bus(ptsList[0]);
             transformer->AddParent(parent1, ptsList[0]);
@@ -1533,22 +1532,22 @@ bool FileHanding::OpenProject(wxFileName path)
             parent2 = busList[parentID[1]];
             transformer->AddParent(parent2, ptsList[ptsList.size() - 1]);
         }
-        
+
         transformer->StartMove(transformer->GetPosition());
         transformer->Move(wxPoint2DDouble(posX, posY));
-        
-        if(parentID[0] == -1){
+
+        if(parentID[0] == -1) {
             transformer->RemoveParent(parent1);
             delete parent1;
         }
-        if(parentID[1] == -1){
+        if(parentID[1] == -1) {
             transformer->RemoveParent(parent2);
             delete parent2;
         }
-        
+
         transformer->SetWidth(width);
         transformer->SetHeight(height);
-        
+
         int numRot = angle / transformer->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -1556,28 +1555,30 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) transformer->Rotate(clockwise);
-        
+
         auto electricalProp = transfomerNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
-        
+
         transformer->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
         TransformerElectricalData data = transformer->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
         data.primaryNominalVoltage = GetNodeValueDouble(electricalProp, "PrimaryNominalVoltage");
-        data.primaryNominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "PrimaryNominalVoltage", "UnitID");
+        data.primaryNominalVoltageUnit =
+            (ElectricalUnit)GetAttributeValueInt(electricalProp, "PrimaryNominalVoltage", "UnitID");
         data.secondaryNominalVoltage = GetNodeValueDouble(electricalProp, "SecondaryNominalVoltage");
-        data.secondaryNominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "SecondaryNominalVoltage", "UnitID");
+        data.secondaryNominalVoltageUnit =
+            (ElectricalUnit)GetAttributeValueInt(electricalProp, "SecondaryNominalVoltage", "UnitID");
         data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
         data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
         data.resistance = GetNodeValueDouble(electricalProp, "Resistance");
         data.resistanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
         data.indReactance = GetNodeValueDouble(electricalProp, "IndReactance");
         data.indReactanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
-        data.connection = (TransformerConnection) GetNodeValueInt(electricalProp, "Connection");
+        data.connection = (TransformerConnection)GetNodeValueInt(electricalProp, "Connection");
         data.turnsRatio = GetNodeValueDouble(electricalProp, "TurnsRatio");
         data.phaseShift = GetNodeValueDouble(electricalProp, "PhaseShift");
         data.useTransformerPower = GetNodeValueInt(electricalProp, "UseTransfomerPower");
-        
+
         auto fault = electricalProp->first_node("Fault");
         data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
         data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
@@ -1585,7 +1586,7 @@ bool FileHanding::OpenProject(wxFileName path)
         data.primaryGrndReactance = GetNodeValueDouble(fault, "PrimaryGrndReactance");
         data.secondaryGrndResistance = GetNodeValueDouble(fault, "SecondaryGrndResistance");
         data.secondaryGrndReactance = GetNodeValueDouble(fault, "SecondaryGrndReactance");
-        
+
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -1596,41 +1597,50 @@ bool FileHanding::OpenProject(wxFileName path)
             swNode = swNode->next_sibling("Switching");
         }
         transformer->SetSwitchingData(swData);
-        
+
         transformer->SetElectricaData(data);
         elementList.push_back(transformer);
         transformerList.push_back(transformer);
         transfomerNode = transfomerNode->next_sibling("Transfomer");
     } //}
-    
+
+    m_workspace->SetElementList(elementList);
+
     //{ Text
     auto textListNode = elementsNode->first_node("TextList");
     if(!textListNode) return false;
     auto textNode = textListNode->first_node("Text");
     while(textNode) {
-        
+
         auto cadPropNode = textNode->first_node("CADProperties");
         if(!cadPropNode) return false;
-        
+
         auto position = cadPropNode->first_node("Position");
         double posX = GetNodeValueDouble(position, "X");
         double posY = GetNodeValueDouble(position, "Y");
-        auto size  = cadPropNode->first_node("Size");
+        auto size = cadPropNode->first_node("Size");
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         Text* text = new Text(wxPoint2DDouble(posX, posY));
-        
+
         text->SetWidth(width);
         text->SetHeight(height);
-        
+
         auto textProperties = textNode->first_node("TextProperties");
         if(!textProperties) return false;
+        
         text->SetElementType((ElementType)GetNodeValueDouble(textProperties, "ElementType"));
+        text->SetDataType((DataType)GetNodeValueDouble(textProperties, "DataType"));
+        text->SetUnit((ElectricalUnit)GetNodeValueDouble(textProperties, "DataUnit"));
+        text->SetDirection(GetNodeValueDouble(textProperties, "Direction"));
+        text->SetDecimalPlaces(GetNodeValueDouble(textProperties, "DecimalPlaces"));
+
         text->SetElementNumber(GetNodeValueInt(textProperties, "ElementNumber"));
         switch(text->GetElementType()) {
-            case TYPE_NONE: break;
+            case TYPE_NONE:
+                break;
             case TYPE_BUS: {
                 Bus* bus = busList[text->GetElementNumber()];
                 text->SetElement(bus);
@@ -1668,11 +1678,7 @@ bool FileHanding::OpenProject(wxFileName path)
                 text->SetElement(transformer);
             } break;
         }
-        text->SetDataType((DataType)GetNodeValueDouble(textProperties, "DataType"));
-        text->SetUnit((ElectricalUnit)GetNodeValueDouble(textProperties, "DataUnit"));
-        text->SetDirection(GetNodeValueDouble(textProperties, "Direction"));
-        text->SetDecimalPlaces(GetNodeValueDouble(textProperties, "DecimalPlaces"));
-        
+
         int numRot = angle / text->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -1680,12 +1686,11 @@ bool FileHanding::OpenProject(wxFileName path)
             clockwise = false;
         }
         for(int i = 0; i < numRot; i++) text->Rotate(clockwise);
-        
+
         textList.push_back(text);
         textNode = textNode->next_sibling("Text");
     } //}
-    
-    m_workspace->SetElementList(elementList);
+
     m_workspace->SetTextList(textList);
     return true;
 }
@@ -1765,7 +1770,7 @@ int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* 
     long iValue = -1;
     if(parent) {
         auto node = parent->first_node(nodeName);
-        if(node){
+        if(node) {
             auto atr = node->first_attribute(atrName);
             if(atr) wxString(atr->value()).ToCLong(&iValue);
         }

@@ -133,7 +133,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             m_switchRect.push_back(genRect);
             UpdateSwitches();
 
-            Bus* parentBus = (Bus*)parent;
+            Bus* parentBus = static_cast<Bus*>(parent);
             m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
             m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
 
@@ -141,7 +141,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
         }
         // Second bus.
         else if(parent != m_parentList[0]) {
-            Bus* parentBus = (Bus*)parent;
+            Bus* parentBus = static_cast<Bus*>(parent);
             if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
                 m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
@@ -304,7 +304,7 @@ double Line::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) cons
 
 bool Line::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_LINE, _("Edit line"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit line"));
     if(m_activePickboxID == ID_PB_NONE) {
         wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
         addNodeItem->SetBitmap(wxImage("..\\data\\images\\menu\\addNode16.png"));
@@ -397,9 +397,9 @@ bool Line::SetNodeParent(Element* parent)
         }
 
         if(parent->Intersects(nodeRect)) {
-            // If the line has no parents set the new nominal voltage, otherwise check if it's not connecting
+            // If the line has no parents set the new rated voltage, otherwise check if it's not connecting
             // two different voltages buses
-            Bus* parentBus = (Bus*)parent;
+            Bus* parentBus = static_cast<Bus*>(parent);
             if(!m_parentList[0] && !m_parentList[1]) {
                 m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
                 m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
@@ -523,8 +523,8 @@ wxString Line::GetTipText() const
     if(m_online) {
         tipText += "\n";
         int busNumber[2];
-        busNumber[0] = ((Bus*)m_parentList[0])->GetEletricalData().number + 1;
-        busNumber[1] = ((Bus*)m_parentList[1])->GetEletricalData().number + 1;
+        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetEletricalData().number + 1;
+        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetEletricalData().number + 1;
 
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
             wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");

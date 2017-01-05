@@ -334,6 +334,13 @@
          "m_functionNameAndSignature": "OnLeftDoubleClick(wxMouseEvent& event)",
          "m_description": "Process a wxEVT_LEFT_DCLICK event.",
          "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_IDLE",
+         "m_eventClass": "wxIdleEvent",
+         "m_eventHandler": "wxIdleEventHandler",
+         "m_functionNameAndSignature": "OnIdle(wxIdleEvent& event)",
+         "m_description": "Process a wxEVT_IDLE event",
+         "m_noBody": false
         }],
        "m_children": []
       }]

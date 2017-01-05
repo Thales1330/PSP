@@ -16,7 +16,7 @@ class IndMotorForm : public IndMotorFormBase
     virtual void OnOKButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
 
-    wxWindow* m_parent;
-    IndMotor* m_indMotor;
+    wxWindow* m_parent = NULL;
+    IndMotor* m_indMotor = NULL;
 };
 #endif  // INDMOTORFORM_H

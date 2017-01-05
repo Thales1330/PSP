@@ -24,7 +24,7 @@ void IndMotor::DrawSymbol() const
 
 bool IndMotor::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_INDMOTOR, _("Edit induction motor"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit induction motor"));
     GeneralMenuItens(menu);
     return true;
 }

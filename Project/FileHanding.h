@@ -27,7 +27,7 @@ public:
     bool OpenProject(wxFileName path);
 
 protected:
-    Workspace* m_workspace;
+    Workspace* m_workspace = NULL;
 
     rapidxml::xml_node<>* AppendNode(rapidxml::xml_document<>& doc,
         rapidxml::xml_node<>* parentNode,

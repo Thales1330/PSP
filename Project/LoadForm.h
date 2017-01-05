@@ -18,7 +18,7 @@ class LoadForm : public LoadFormBase
     virtual void OnOnButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
 
-    wxWindow* m_parent;
-    Load* m_load;
+    wxWindow* m_parent = NULL;
+    Load* m_load = NULL;
 };
 #endif  // LOADFORM_H

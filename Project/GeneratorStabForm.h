@@ -23,7 +23,7 @@ protected:
 	
 	virtual bool ValidateData();
 	
-	SyncGenerator* m_syncGenerator;
-	wxWindow* m_parent;
+	SyncGenerator* m_syncGenerator = NULL;
+	wxWindow* m_parent = NULL;
 };
 #endif // GENERATORSTABFORM_H

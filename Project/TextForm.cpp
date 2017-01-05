@@ -848,9 +848,8 @@ void TextForm::ElementNumberChoice()
     wxArrayString arrayString;
     switch(m_text->GetElementType()) {
         case TYPE_BUS: {
-            auto it = m_allElements.GetBusList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            Bus* bus = m_allElements.GetBusList()[index];
+            m_text->SetElement(bus);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Voltage"));
@@ -860,9 +859,8 @@ void TextForm::ElementNumberChoice()
             arrayString.Add(_("Short-circuit power"));
         } break;
         case TYPE_SYNC_GENERATOR: {
-            auto it = m_allElements.GetSyncGeneratorList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            SyncGenerator* syncGenerator = m_allElements.GetSyncGeneratorList()[index];
+            m_text->SetElement(syncGenerator);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
@@ -870,9 +868,8 @@ void TextForm::ElementNumberChoice()
             arrayString.Add(_("Fault current"));
         } break;
         case TYPE_LINE: {
-            auto it = m_allElements.GetLineList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            Line* line = m_allElements.GetLineList()[index];
+            m_text->SetElement(line);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power flow"));
@@ -882,9 +879,8 @@ void TextForm::ElementNumberChoice()
             arrayString.Add(_("Fault current"));
         } break;
         case TYPE_TRANSFORMER: {
-            auto it = m_allElements.GetTransformerList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            Transformer* transformer = m_allElements.GetTransformerList()[index];
+            m_text->SetElement(transformer);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power flow"));
@@ -894,43 +890,38 @@ void TextForm::ElementNumberChoice()
             arrayString.Add(_("Fault current"));
         } break;
         case TYPE_LOAD: {
-            auto it = m_allElements.GetLoadList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            Load* load = m_allElements.GetLoadList()[index];
+            m_text->SetElement(load);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
         } break;
         case TYPE_CAPACITOR: {
-            auto it = m_allElements.GetCapacitorList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            Capacitor* capacitor = m_allElements.GetCapacitorList()[index];
+            m_text->SetElement(capacitor);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Reactive power"));
         } break;
         case TYPE_INDUCTOR: {
-            auto it = m_allElements.GetInductorList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            Inductor* inductor = m_allElements.GetInductorList()[index];
+            m_text->SetElement(inductor);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Reactive power"));
         } break;
         case TYPE_SYNC_MOTOR: {
-            auto it = m_allElements.GetSyncMotorList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            SyncMotor* syncMotor = m_allElements.GetSyncMotorList()[index];
+            m_text->SetElement(syncMotor);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
             arrayString.Add(_("Reactive power"));
         } break;
         case TYPE_IND_MOTOR: {
-            auto it = m_allElements.GetIndMotorList().begin();
-            std::advance(it, index);
-            m_text->SetElement(*it);
+            IndMotor* indMotor = m_allElements.GetIndMotorList()[index];
+            m_text->SetElement(indMotor);
 
             arrayString.Add(_("Name"));
             arrayString.Add(_("Active power"));
@@ -1011,8 +1002,8 @@ void TextForm::DataTypeChoice()
                 std::advance(it, m_text->GetElementNumber());
                 Line* line = *it;
 
-                Bus* bus1 = (Bus*)line->GetParentList()[0];
-                Bus* bus2 = (Bus*)line->GetParentList()[1];
+                Bus* bus1 = static_cast<Bus*>(line->GetParentList()[0]);
+                Bus* bus2 = static_cast<Bus*>(line->GetParentList()[1]);
                 wxString bus1Name = bus1->GetEletricalData().name;
                 wxString bus2Name = bus2->GetEletricalData().name;
 
@@ -1033,8 +1024,8 @@ void TextForm::DataTypeChoice()
                 std::advance(it, m_text->GetElementNumber());
                 Transformer* transformer = *it;
 
-                Bus* bus1 = (Bus*)transformer->GetParentList()[0];
-                Bus* bus2 = (Bus*)transformer->GetParentList()[1];
+                Bus* bus1 = static_cast<Bus*>(transformer->GetParentList()[0]);
+                Bus* bus2 = static_cast<Bus*>(transformer->GetParentList()[1]);
                 wxString bus1Name = bus1->GetEletricalData().name;
                 wxString bus2Name = bus2->GetEletricalData().name;
 
@@ -1184,7 +1175,7 @@ bool TextForm::ValidateData()
     if(m_choiceTextType->GetSelection() == -1) return false;
     if(m_text->GetDataType() != DATA_NAME && m_choiceTextUnit->GetSelection() == -1) return false;
     if(m_text->GetElementType() == TYPE_LINE || m_text->GetElementType() == TYPE_TRANSFORMER) {
-        if(m_text->GetDataType() != DATA_PF_LOSSES) {
+        if(m_text->GetDataType() != DATA_PF_LOSSES && m_text->GetDataType() != DATA_NAME) {
             if(m_choiceTextFromBus->GetSelection() == -1) return false;
             if(m_choiceTextToBus->GetSelection() == -1) return false;
         }

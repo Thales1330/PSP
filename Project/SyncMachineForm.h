@@ -26,6 +26,6 @@ class SyncMachineForm : public SyncMachineFormBase
 
     SyncGenerator* m_syncGenerator = NULL;
     SyncMotor* m_syncMotor = NULL;
-    wxWindow* m_parent;
+    wxWindow* m_parent = NULL;
 };
 #endif  // SYNCMACHINEFORM_H

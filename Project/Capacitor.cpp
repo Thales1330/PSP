@@ -113,7 +113,7 @@ void Capacitor::Rotate(bool clockwise)
 
 bool Capacitor::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_CAPACITOR, _("Edit Capacitor"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit Capacitor"));
     GeneralMenuItens(menu);
     return true;
 }
@@ -178,7 +178,7 @@ wxString Capacitor::GetTipText() const
     // TODO: Avoid reactive power calculation.
     double reactivePower = m_electricalData.reactivePower;
     if(m_online) {
-        std::complex<double> v = ((Bus*)m_parentList[0])->GetEletricalData().voltage;
+        std::complex<double> v = static_cast<Bus*>(m_parentList[0])->GetEletricalData().voltage;
         reactivePower *= std::pow(std::abs(v), 2);
     }
     tipText += "\n";

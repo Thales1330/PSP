@@ -462,10 +462,7 @@ void Element::RemoveChild(Element* child)
 {
     for(auto it = m_childList.begin(); it != m_childList.end(); ++it) {
         Element* element = *it;
-        if(element == child){
-            m_childList.erase(it);
-            break;
-        }
+        if(element == child) m_childList.erase(it--);
     }
 }
 

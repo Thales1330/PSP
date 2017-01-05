@@ -57,7 +57,6 @@ void Shunt::StartMove(wxPoint2DDouble position)
 void Shunt::RemoveParent(Element* parent)
 {
     if(parent == m_parentList[0]) {
-        m_parentList[0]->RemoveChild(this);
         m_parentList[0] = NULL;
         m_online = false;
         UpdateSwitchesPosition();

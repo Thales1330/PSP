@@ -14,7 +14,6 @@
   <object class="wxBitmap" name="faultPower32">data\images\ribbon\faultPower32.png</object>
   <object class="wxBitmap" name="fit32">data\images\ribbon\fit32.png</object>
   <object class="wxBitmap" name="guide32">data\images\ribbon\guide32.png</object>
-  <object class="wxBitmap" name="impExp32">data\images\ribbon\impExp32.png</object>
   <object class="wxBitmap" name="logo128">data\images\logo128.png</object>
   <object class="wxBitmap" name="logo16">data\images\logo16.png</object>
   <object class="wxBitmap" name="logo256">data\images\logo256.png</object>

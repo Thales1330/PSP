@@ -142,7 +142,6 @@ void Machines::RotateNode(Element* parent, bool clockwise)
 void Machines::RemoveParent(Element* parent)
 {
     if(parent == m_parentList[0]) {
-        m_parentList[0]->RemoveChild(this);
         m_parentList[0] = NULL;
         m_online = false;
         UpdateSwitchesPosition();

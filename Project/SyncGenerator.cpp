@@ -39,7 +39,7 @@ void SyncGenerator::DrawSymbol() const
 }
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_SYNCGENERATOR, _("Edit Generator"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit Generator"));
     GeneralMenuItens(menu);
     return true;
 }

@@ -172,7 +172,7 @@ void Bus::Rotate(bool clockwise)
 
 bool Bus::GetContextMenu(wxMenu& menu)
 {
-    menu.Append(ID_EDIT_BUS, _("Edit bus"));
+    menu.Append(ID_EDIT_ELEMENT, _("Edit bus"));
     GeneralMenuItens(menu);
     return true;
 }
