@@ -177,7 +177,9 @@ wxString Capacitor::GetTipText() const
 
     // TODO: Avoid reactive power calculation.
     double reactivePower = m_electricalData.reactivePower;
-    if(m_online) {
+    if(!m_online)
+        reactivePower = 0.0;
+    else {
         std::complex<double> v = static_cast<Bus*>(m_parentList[0])->GetEletricalData().voltage;
         reactivePower *= std::pow(std::abs(v), 2);
     }

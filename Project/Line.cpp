@@ -239,7 +239,7 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 
         // If the line is selected, move all the points, except the switches and buses points.
         if(m_selected) {
-            for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
+            for(int i = 2; i < (int)m_pointList.size() - 1; i++) {
                 m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
             }
         }

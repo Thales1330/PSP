@@ -170,11 +170,11 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
-        auto elementList = workspace->GetElementList();
+        auto elementList = workspace->GetAllElements();
         // Calculate the average position of selected elements.
         wxPoint2DDouble averagePos(0, 0);
         int numSelElements = 0;
-        for(auto it = elementList.begin(); it != elementList.end(); it++) {
+        for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
             Element* element = *it;
             if(element->IsSelected()) {
                 averagePos += element->GetPosition();
@@ -183,7 +183,7 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
         }
         averagePos = wxPoint2DDouble(averagePos.m_x / double(numSelElements), averagePos.m_y / double(numSelElements));
         // Set the move position to the average of selected elements.
-        for(auto it = elementList.begin(); it != elementList.end(); it++) {
+        for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
             Element* element = *it;
             if(element->IsSelected()) {
                 element->StartMove(averagePos);
@@ -218,7 +218,9 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
         newWorkspace->SetJustOpened(true);
         m_projectNumber++;
     } else {
-        // TODO: fail message.
+        wxMessageDialog msgDialog(
+            this, _("It was not possible to open the selected file."), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
         delete newWorkspace;
     }
 }

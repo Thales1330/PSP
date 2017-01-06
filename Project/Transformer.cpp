@@ -56,11 +56,11 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             // Set the transformer rectangle.
             m_width = 70.0;
             m_height = 40.0;
-            m_rect = wxRect2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0, m_width, m_height);
+            SetPosition(m_position); // This method calculates the rectangle propely.
             // Set the "side" points.
-            m_pointList.push_back(wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(-10, m_height / 2.0)));
+            m_pointList.push_back(wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(-10 - m_borderSize, m_height / 2.0)));
             m_pointList.push_back(
-                wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(m_width + 10, m_height / 2.0)));
+                wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(m_width + 10 + m_borderSize, m_height / 2.0)));
 
             // Set first switch point.
             wxPoint2DDouble secondPoint = parentPt;

@@ -302,45 +302,44 @@ void Text::UpdateText(double systemPowerBase)
                         SetText(data.name);
                     } break;
                     case DATA_ACTIVE_POWER: {
+                        double activePower = data.activePower;
+                        if(!syncGenerator->IsOnline()) activePower = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
-                                SetText(wxString::FromDouble(data.activePower, m_decimalPlaces) + " p.u.");
+                                SetText(wxString::FromDouble(activePower, m_decimalPlaces) + " p.u.");
                             } break;
                             case UNIT_W: {
-                                SetText(
-                                    wxString::FromDouble(data.activePower * systemPowerBase, m_decimalPlaces) + " W");
+                                SetText(wxString::FromDouble(activePower * systemPowerBase, m_decimalPlaces) + " W");
                             } break;
                             case UNIT_kW: {
                                 SetText(
-                                    wxString::FromDouble(data.activePower * systemPowerBase / 1e3, m_decimalPlaces) +
-                                    " kW");
+                                    wxString::FromDouble(activePower * systemPowerBase / 1e3, m_decimalPlaces) + " kW");
                             } break;
                             case UNIT_MW: {
                                 SetText(
-                                    wxString::FromDouble(data.activePower * systemPowerBase / 1e6, m_decimalPlaces) +
-                                    " MW");
+                                    wxString::FromDouble(activePower * systemPowerBase / 1e6, m_decimalPlaces) + " MW");
                             } break;
                             default:
                                 break;
                         }
                     } break;
                     case DATA_REACTIVE_POWER: {
+                        double reactivePower = data.reactivePower;
+                        if(!syncGenerator->IsOnline()) reactivePower = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
-                                SetText(wxString::FromDouble(data.reactivePower, m_decimalPlaces) + " p.u.");
+                                SetText(wxString::FromDouble(reactivePower, m_decimalPlaces) + " p.u.");
                             } break;
                             case UNIT_VAr: {
-                                SetText(wxString::FromDouble(data.reactivePower * systemPowerBase, m_decimalPlaces) +
-                                    " VAr");
+                                SetText(
+                                    wxString::FromDouble(reactivePower * systemPowerBase, m_decimalPlaces) + " VAr");
                             } break;
                             case UNIT_kVAr: {
-                                SetText(
-                                    wxString::FromDouble(data.reactivePower * systemPowerBase / 1e3, m_decimalPlaces) +
+                                SetText(wxString::FromDouble(reactivePower * systemPowerBase / 1e3, m_decimalPlaces) +
                                     " kVAr");
                             } break;
                             case UNIT_MVAr: {
-                                SetText(
-                                    wxString::FromDouble(data.reactivePower * systemPowerBase / 1e6, m_decimalPlaces) +
+                                SetText(wxString::FromDouble(reactivePower * systemPowerBase / 1e6, m_decimalPlaces) +
                                     " MVAr");
                             } break;
                             default:
@@ -350,6 +349,7 @@ void Text::UpdateText(double systemPowerBase)
                     case DATA_SC_CURRENT: {
                         double faultCurrent[3] = { std::abs(data.faultCurrent[0]), std::abs(data.faultCurrent[1]),
                             std::abs(data.faultCurrent[2]) };
+                        if(!syncGenerator->IsOnline()) faultCurrent[0] = faultCurrent[1] = faultCurrent[2] = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 wxString str =
@@ -398,6 +398,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_ACTIVE: {
                         double activePF = std::real(data.powerFlow[m_direction]);
+                        if(!line->IsOnline()) activePF = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(activePF, m_decimalPlaces) + " p.u.");
@@ -419,6 +420,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_REACTIVE: {
                         double reactivePF = std::imag(data.powerFlow[m_direction]);
+                        if(!line->IsOnline()) reactivePF = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
@@ -440,6 +442,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_LOSSES: {
                         double losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));
+                        if(!line->IsOnline()) losses = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(losses, m_decimalPlaces) + " p.u.");
@@ -459,6 +462,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_CURRENT: {
                         double current = std::abs(data.current[m_direction]);
+                        if(!line->IsOnline()) current = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(current, m_decimalPlaces) + " p.u.");
@@ -476,6 +480,7 @@ void Text::UpdateText(double systemPowerBase)
                     case DATA_SC_CURRENT: {
                         double faultCurrent[3] = { std::abs(data.faultCurrent[m_direction][0]),
                             std::abs(data.faultCurrent[m_direction][1]), std::abs(data.faultCurrent[m_direction][2]) };
+                        if(!line->IsOnline()) faultCurrent[0] = faultCurrent[1] = faultCurrent[2] = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 wxString str =
@@ -528,6 +533,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_ACTIVE: {
                         double activePF = std::real(data.powerFlow[m_direction]);
+                        if(!transformer->IsOnline()) activePF = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(activePF, m_decimalPlaces) + " p.u.");
@@ -549,6 +555,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_REACTIVE: {
                         double reactivePF = std::imag(data.powerFlow[m_direction]);
+                        if(!transformer->IsOnline()) reactivePF = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
@@ -570,6 +577,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_LOSSES: {
                         double losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));
+                        if(!transformer->IsOnline()) losses = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(losses, m_decimalPlaces) + " p.u.");
@@ -589,6 +597,7 @@ void Text::UpdateText(double systemPowerBase)
                     } break;
                     case DATA_PF_CURRENT: {
                         double current = std::abs(data.current[m_direction]);
+                        if(!transformer->IsOnline()) current = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 SetText(wxString::FromDouble(current, m_decimalPlaces) + " p.u.");
@@ -609,6 +618,7 @@ void Text::UpdateText(double systemPowerBase)
                     case DATA_SC_CURRENT: {
                         double faultCurrent[3] = { std::abs(data.faultCurrent[m_direction][0]),
                             std::abs(data.faultCurrent[m_direction][1]), std::abs(data.faultCurrent[m_direction][2]) };
+                        if(!transformer->IsOnline()) faultCurrent[0] = faultCurrent[1] = faultCurrent[2] = 0.0;
                         switch(m_unit) {
                             case UNIT_PU: {
                                 wxString str =
@@ -662,6 +672,7 @@ void Text::UpdateText(double systemPowerBase)
                     std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetEletricalData().voltage;
                     sPower = std::pow(std::abs(v), 2) * sPower;
                 }
+                if(!load->IsOnline()) sPower = std::complex<double>(0.0, 0.0);
                 switch(m_dataType) {
                     case DATA_NAME: {
                         SetText(data.name);
@@ -717,6 +728,7 @@ void Text::UpdateText(double systemPowerBase)
             if(syncMotor) {
                 SyncMotorElectricalData data = syncMotor->GetPUElectricalData(systemPowerBase);
                 std::complex<double> sPower(data.activePower, data.reactivePower);
+                if(!syncMotor->IsOnline()) sPower = std::complex<double>(0.0, 0.0);
                 switch(m_dataType) {
                     case DATA_NAME: {
                         SetText(data.name);
@@ -772,6 +784,7 @@ void Text::UpdateText(double systemPowerBase)
             if(indMotor) {
                 IndMotorElectricalData data = indMotor->GetPUElectricalData(systemPowerBase);
                 std::complex<double> sPower(data.activePower, data.reactivePower);
+                if(!indMotor->IsOnline()) sPower = std::complex<double>(0.0, 0.0);
                 switch(m_dataType) {
                     case DATA_NAME: {
                         SetText(data.name);
@@ -826,9 +839,12 @@ void Text::UpdateText(double systemPowerBase)
             Capacitor* capacitor = static_cast<Capacitor*>(m_element);
             if(capacitor) {
                 CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
-                double reativePower = -data.reactivePower;
-                if(capacitor->IsOnline()) {
-                    std::complex<double> v = static_cast<Bus*>(capacitor->GetParentList()[0])->GetEletricalData().voltage;
+                double reativePower = data.reactivePower;
+                if(!capacitor->IsOnline())
+                    reativePower = 0.0;
+                else {
+                    std::complex<double> v =
+                        static_cast<Bus*>(capacitor->GetParentList()[0])->GetEletricalData().voltage;
                     reativePower *= std::pow(std::abs(v), 2);
                 }
                 switch(m_dataType) {
@@ -865,8 +881,11 @@ void Text::UpdateText(double systemPowerBase)
             if(inductor) {
                 InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
                 double reativePower = data.reactivePower;
-                if(inductor->IsOnline()) {
-                    std::complex<double> v = static_cast<Bus*>(inductor->GetParentList()[0])->GetEletricalData().voltage;
+                if(!inductor->IsOnline())
+                    reativePower = 0.0;
+                else {
+                    std::complex<double> v =
+                        static_cast<Bus*>(inductor->GetParentList()[0])->GetEletricalData().voltage;
                     reativePower *= std::pow(std::abs(v), 2);
                 }
                 switch(m_dataType) {

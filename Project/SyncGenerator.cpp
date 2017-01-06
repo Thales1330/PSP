@@ -1,41 +1,43 @@
 #include "SyncMachineForm.h"
 #include "SyncGenerator.h"
 
-SyncGenerator::SyncGenerator() : Machines()
+SyncGenerator::SyncGenerator()
+    : Machines()
 {
     Init();
 }
 
-SyncGenerator::SyncGenerator(wxString name) : Machines()
+SyncGenerator::SyncGenerator(wxString name)
+    : Machines()
 {
-    Init();	
-	m_electricalData.name = name;
+    Init();
+    m_electricalData.name = name;
 }
 
 SyncGenerator::~SyncGenerator() {}
 
 void SyncGenerator::Init()
 {
-	int numPtsSine = 10;
+    int numPtsSine = 10;
     double mx = 15.0;
     double my = 10.0;
     double pi = 3.14159265359;
 
     for(int i = 0; i <= numPtsSine; i++) {
-	    double x = (2.0 * pi / double(numPtsSine)) * double(i) - pi;
-	    double y = std::sin(x);
-	    m_sinePts.push_back(wxPoint2DDouble((x / pi) * mx, y * my));
-	}
+        double x = (2.0 * pi / double(numPtsSine)) * double(i) - pi;
+        double y = std::sin(x);
+        m_sinePts.push_back(wxPoint2DDouble((x / pi) * mx, y * my));
+    }
 }
 
 void SyncGenerator::DrawSymbol() const
 {
     // Draw sine.
-	std::vector<wxPoint2DDouble> sinePts;
-	for(int i = 0; i < (int)m_sinePts.size(); i++) {
-		sinePts.push_back(m_sinePts[i] + m_position);
-	}
-	DrawLine(sinePts);
+    std::vector<wxPoint2DDouble> sinePts;
+    for(int i = 0; i < (int)m_sinePts.size(); i++) {
+        sinePts.push_back(m_sinePts[i] + m_position);
+    }
+    DrawLine(sinePts);
 }
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
 {
@@ -46,12 +48,12 @@ bool SyncGenerator::GetContextMenu(wxMenu& menu)
 
 bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
 {
-	SyncMachineForm* generatorForm = new SyncMachineForm(parent, this);
+    SyncMachineForm* generatorForm = new SyncMachineForm(parent, this);
     generatorForm->SetTitle(_("Generator"));
     if(generatorForm->ShowModal() == wxID_OK) {
-	    generatorForm->Destroy();
-	    return true;
-	}
+        generatorForm->Destroy();
+        return true;
+    }
 
     generatorForm->Destroy();
     return false;
@@ -59,8 +61,8 @@ bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
 
 SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowerBase)
 {
-	SyncGeneratorElectricalData data = m_electricalData;
-	switch(data.activePowerUnit) {
+    SyncGeneratorElectricalData data = m_electricalData;
+    switch(data.activePowerUnit) {
         case UNIT_W: {
             data.activePower = data.activePower / systemPowerBase;
             data.activePowerUnit = UNIT_PU;
@@ -92,7 +94,7 @@ SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowe
         default:
             break;
     }
-	switch(data.maxReactiveUnit) {
+    switch(data.maxReactiveUnit) {
         case UNIT_VAr: {
             data.maxReactive = data.maxReactive / systemPowerBase;
             data.maxReactiveUnit = UNIT_PU;
@@ -108,7 +110,7 @@ SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowe
         default:
             break;
     }
-	switch(data.minReactiveUnit) {
+    switch(data.minReactiveUnit) {
         case UNIT_VAr: {
             data.minReactive = data.minReactive / systemPowerBase;
             data.minReactiveUnit = UNIT_PU;
@@ -124,11 +126,12 @@ SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowe
         default:
             break;
     }
-	
-	return data;
+
+    return data;
 }
 
-void SyncGenerator::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
+void SyncGenerator::SetNominalVoltage(std::vector<double> nominalVoltage,
+    std::vector<ElectricalUnit> nominalVoltageUnit)
 {
     if(nominalVoltage.size() > 0) {
         m_electricalData.nominalVoltage = nominalVoltage[0];
@@ -138,16 +141,18 @@ void SyncGenerator::SetNominalVoltage(std::vector<double> nominalVoltage, std::v
 
 Element* SyncGenerator::GetCopy()
 {
-	SyncGenerator* copy = new SyncGenerator();
-	*copy = *this;
-	return copy;
+    SyncGenerator* copy = new SyncGenerator();
+    *copy = *this;
+    return copy;
 }
 
 wxString SyncGenerator::GetTipText() const
 {
     wxString tipText = m_electricalData.name;
     tipText += "\n";
-    tipText += _("\nP = ") + wxString::FromDouble(m_electricalData.activePower, 5);
+    double activePower = m_electricalData.activePower;
+    if(!m_online) activePower = 0.0;
+    tipText += _("\nP = ") + wxString::FromDouble(activePower, 5);
     switch(m_electricalData.activePowerUnit) {
         case UNIT_PU: {
             tipText += _(" p.u.");
@@ -164,7 +169,9 @@ wxString SyncGenerator::GetTipText() const
         default:
             break;
     }
-    tipText += _("\nQ = ") + wxString::FromDouble(m_electricalData.reactivePower, 5);
+    double reactivePower = m_electricalData.reactivePower;
+    if(!m_online) reactivePower = 0.0;
+    tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
     switch(m_electricalData.reactivePowerUnit) {
         case UNIT_PU: {
             tipText += _(" p.u.");
@@ -181,6 +188,6 @@ wxString SyncGenerator::GetTipText() const
         default:
             break;
     }
-    
+
     return tipText;
 }
