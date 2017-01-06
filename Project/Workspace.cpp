@@ -163,16 +163,19 @@ void Workspace::SetViewport()
 
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
+    wxPoint clickPoint = event.GetPosition();
     bool foundElement = false;
-    if(m_mode == MODE_INSERT_TEXT || m_mode == MODE_PASTE) {
+    Element* newElement = NULL;
+    bool showNewElementForm = false;
+    if(m_mode == MODE_INSERT_TEXT || m_mode == MODE_PASTE || m_mode == MODE_DRAG_PASTE) {
         m_mode = MODE_EDIT;
     } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT || m_mode == MODE_DRAG_INSERT_TEXT) {
         // Get the last element inserted on the list.
-        Element* newElement = *(m_elementList.end() - 1);
-        for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+        newElement = *(m_elementList.end() - 1);
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
             Element* element = *it;
             // Clicked in any element.
-            if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+            if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
                 // Click at a bus.
                 if(typeid(*element) == typeid(Bus)) {
                     // Select the bus.
@@ -180,8 +183,10 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
                     foundElement = true; // Element found.
                     // Add the new element's parent. If the element being inserted returns true, back to
                     // edit mode.
-                    if(newElement->AddParent(element, m_camera->ScreenToWorld(event.GetPosition()))) {
+                    if(newElement->AddParent(element, m_camera->ScreenToWorld(clickPoint))) {
                         ValidateElementsVoltages();
+                        m_timer->Stop();
+                        showNewElementForm = true;
                         m_mode = MODE_EDIT;
                     }
                 }
@@ -190,27 +195,27 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
         // The line element can have an indefined number of points.
         if(!foundElement) {
             if(typeid(*newElement) == typeid(Line)) {
-                newElement->AddPoint(m_camera->ScreenToWorld(event.GetPosition()));
+                newElement->AddPoint(m_camera->ScreenToWorld(clickPoint));
             }
         }
         foundElement = true;
     } else {
         bool clickPickbox = false;
-        for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
             Element* element = *it;
             element->ResetPickboxes(); // Reset pickbox state.
 
             // Set movement initial position (not necessarily will be moved).
-            element->StartMove(m_camera->ScreenToWorld(event.GetPosition()));
+            element->StartMove(m_camera->ScreenToWorld(clickPoint));
 
             // Click in selected element node.
-            if(element->NodeContains(m_camera->ScreenToWorld(event.GetPosition())) != 0 && element->IsSelected()) {
+            if(element->NodeContains(m_camera->ScreenToWorld(clickPoint)) != 0 && element->IsSelected()) {
                 m_mode = MODE_MOVE_NODE;
                 foundElement = true;
             }
 
             // Click in an element.
-            else if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+            else if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
                 if(!foundElement) {
                     // Select and show pickbox.
                     element->SetSelected();
@@ -218,7 +223,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
                     foundElement = true;
                 }
                 // If pickbox contains the click, move the pickbox
-                if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                if(element->PickboxContains(m_camera->ScreenToWorld(clickPoint))) {
                     m_mode = MODE_MOVE_PICKBOX;
                     clickPickbox = true;
                 }
@@ -229,18 +234,18 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
             }
 
             // Click in a switch.
-            else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
+            else if(element->SwitchesContains(m_camera->ScreenToWorld(clickPoint))) {
                 element->SetOnline(element->IsOnline() ? false : true);
             }
         }
 
         // Text element
-        for(auto it = m_textList.begin(); it != m_textList.end(); it++) {
+        for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
             Text* text = *it;
 
-            text->StartMove(m_camera->ScreenToWorld(event.GetPosition()));
+            text->StartMove(m_camera->ScreenToWorld(clickPoint));
 
-            if(text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+            if(text->Contains(m_camera->ScreenToWorld(clickPoint))) {
                 if(!foundElement) {
                     text->SetSelected();
                     m_mode = MODE_MOVE_ELEMENT;
@@ -252,11 +257,16 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
     if(!foundElement) {
         m_mode = MODE_SELECTION_RECT;
-        m_startSelRect = m_camera->ScreenToWorld(event.GetPosition());
+        m_startSelRect = m_camera->ScreenToWorld(clickPoint);
     }
 
     Redraw();
     UpdateStatusBar();
+
+    if(showNewElementForm) {
+        if(newElement) newElement->ShowForm(this, newElement);
+    }
+
     event.Skip();
 }
 
@@ -272,9 +282,10 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
         if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
             bool elementIsBus = false;
             Bus oldBus;
-            if(Bus* bus = dynamic_cast<Bus*>(element)) {
+            Bus* currentBus = NULL;
+            if((currentBus = dynamic_cast<Bus*>(element))) {
                 elementIsBus = true;
-                oldBus = *bus;
+                oldBus = *currentBus;
             }
             m_timer->Stop();
             element->ShowForm(this, element);
@@ -285,27 +296,25 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
             // propagated through the lines
             if(elementIsBus) {
                 // The voltage was changed
-                if(oldBus.GetEletricalData().nominalVoltage !=
-                        static_cast<Bus*>(element)->GetEletricalData().nominalVoltage ||
-                    oldBus.GetEletricalData().nominalVoltageUnit !=
-                        static_cast<Bus*>(element)->GetEletricalData().nominalVoltageUnit) {
-                    // Check if the lines has this bus as parent
-                    for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
-                        Element* child = *it;
-
-                        bool elementIsParent = false;
+                if(oldBus.GetEletricalData().nominalVoltage != currentBus->GetEletricalData().nominalVoltage ||
+                    oldBus.GetEletricalData().nominalVoltageUnit != currentBus->GetEletricalData().nominalVoltageUnit) {
+                    // Check if the bus has line as child.
+                    std::vector<Element*> childList = element->GetChildList();
+                    for(auto itc = childList.begin(), itcEnd = childList.end(); itc != itcEnd; ++itc) {
+                        Element* child = *itc;
                         if(typeid(*child) == typeid(Line)) {
-                            for(int i = 0; i < (int)child->GetParentList().size(); i++) {
-                                Element* parent = child->GetParentList()[i];
-                                if(parent == element) {
-                                    // TODO: Ask the user if he wants to change all
-                                    // voltages
-                                    ValidateBusesVoltages(element);
-                                    elementIsParent = true;
-                                }
+                            wxMessageDialog msgDialog(this, _("Do you want to change the rated voltage of the path?"),
+                                _("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
+                            if(msgDialog.ShowModal() == wxID_YES)
+                                ValidateBusesVoltages(element);
+                            else {
+                                auto data = currentBus->GetEletricalData();
+                                data.nominalVoltage = oldBus.GetEletricalData().nominalVoltage;
+                                data.nominalVoltageUnit = oldBus.GetEletricalData().nominalVoltageUnit;
+                                currentBus->SetElectricalData(data);
                             }
+                            break;
                         }
-                        if(elementIsParent) break;
                     }
                 }
                 ValidateElementsVoltages();
@@ -353,11 +362,6 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
                         if(!menu.GetClientData()) break;
                     }
                     element->ResetPickboxes();
-
-                    /*if(redraw) {
-                        Redraw();
-                        redraw = false;
-                    }*/
                 }
             }
         }
@@ -402,7 +406,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
         if(m_mode == MODE_SELECTION_RECT) {
             if(element->Intersects(m_selectionRect)) {
                 element->SetSelected();
-            } else {
+            } else if(!event.ControlDown()) {
                 element->SetSelected(false);
             }
         } else if(m_mode == MODE_MOVE_NODE) {
@@ -444,7 +448,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
         if(m_mode == MODE_SELECTION_RECT) {
             if(text->Intersects(m_selectionRect)) {
                 text->SetSelected();
-            } else {
+            } else if(!event.ControlDown()) {
                 text->SetSelected(false);
             }
         } else if(!event.ControlDown()) {
@@ -492,7 +496,8 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
         case MODE_DRAG:
         case MODE_DRAG_INSERT:
-        case MODE_DRAG_INSERT_TEXT: {
+        case MODE_DRAG_INSERT_TEXT:
+        case MODE_DRAG_PASTE: {
             m_camera->SetTranslation(event.GetPosition());
             redraw = true;
         } break;
@@ -603,28 +608,54 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 void Workspace::OnMiddleDown(wxMouseEvent& event)
 {
     // Set to drag mode.
-    if(m_mode != MODE_INSERT && m_mode != MODE_INSERT_TEXT && m_mode != MODE_DRAG_INSERT &&
-        m_mode != MODE_DRAG_INSERT_TEXT) {
+    switch(m_mode) {
+        case MODE_INSERT: {
+            m_mode = MODE_DRAG_INSERT;
+        } break;
+        case MODE_INSERT_TEXT: {
+            m_mode = MODE_DRAG_INSERT_TEXT;
+        } break;
+        case MODE_PASTE: {
+            m_mode = MODE_DRAG_PASTE;
+        } break;
+        default: {
+            m_mode = MODE_DRAG;
+        } break;
+    }
+    /*if(m_mode != MODE_INSERT && m_mode != MODE_INSERT_TEXT && m_mode == MODE_PASTE && m_mode != MODE_DRAG_INSERT &&
+    m_mode != MODE_DRAG_INSERT_TEXT && m_mode != MODE_DRAG_PASTE) {
         m_mode = MODE_DRAG;
     } else if(m_mode == MODE_INSERT_TEXT) {
         m_mode = MODE_DRAG_INSERT_TEXT;
+    }else if(m_mode == MODE_PASTE) {
+        m_mode = MODE_DRAG_PASTE;
     } else {
         m_mode = MODE_DRAG_INSERT;
-    }
+    }*/
     m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
 }
 
 void Workspace::OnMiddleUp(wxMouseEvent& event)
 {
-    if(m_mode != MODE_INSERT && m_mode != MODE_INSERT_TEXT && m_mode != MODE_DRAG_INSERT &&
-        m_mode != MODE_DRAG_INSERT_TEXT) {
-        // Set to edit mode back.
-        m_mode = MODE_EDIT;
-    } else if(m_mode == MODE_DRAG_INSERT_TEXT) {
-        m_mode = MODE_INSERT_TEXT;
-    } else if(m_mode == MODE_DRAG_INSERT) {
-        m_mode = MODE_INSERT;
+    switch(m_mode) {
+        case MODE_DRAG_INSERT: {
+            m_mode = MODE_INSERT;
+        } break;
+        case MODE_DRAG_INSERT_TEXT: {
+            m_mode = MODE_INSERT_TEXT;
+        } break;
+        case MODE_DRAG_PASTE: {
+            m_mode = MODE_PASTE;
+        } break;
+        case MODE_INSERT:
+        case MODE_INSERT_TEXT:
+        case MODE_PASTE: {
+            // Does nothing.
+        } break;
+        default: {
+            m_mode = MODE_EDIT;
+        } break;
     }
     UpdateStatusBar();
 }
@@ -822,7 +853,8 @@ void Workspace::UpdateStatusBar()
             m_statusBar->SetStatusText(_("MODE: DRAG"), 1);
         } break;
 
-        case MODE_PASTE: {
+        case MODE_PASTE:
+        case MODE_DRAG_PASTE: {
             m_statusBar->SetStatusText(_("MODE: PASTE"), 1);
         }
 
@@ -1370,4 +1402,14 @@ void Workspace::OnIdle(wxIdleEvent& event)
         UpdateTextElements();
         Redraw();
     }
+}
+
+std::vector<Element*> Workspace::GetAllElements() const
+{
+    std::vector<Element*> allElements;
+
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) allElements.push_back(*it);
+    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) allElements.push_back(*it);
+
+    return allElements;
 }

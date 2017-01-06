@@ -91,7 +91,9 @@ wxString IndMotor::GetTipText() const
 {
     wxString tipText = m_electricalData.name;
     tipText += "\n";
-    tipText += _("\nP = ") + wxString::FromDouble(m_electricalData.activePower, 5);
+    double activePower = m_electricalData.activePower;
+    if(!m_online) activePower = 0.0;
+    tipText += _("\nP = ") + wxString::FromDouble(activePower, 5);
     switch(m_electricalData.activePowerUnit) {
         case UNIT_PU: {
             tipText += _(" p.u.");
@@ -108,7 +110,9 @@ wxString IndMotor::GetTipText() const
         default:
             break;
     }
-    tipText += _("\nQ = ") + wxString::FromDouble(m_electricalData.reactivePower, 5);
+    double reactivePower = m_electricalData.reactivePower;
+    if(!m_online) reactivePower = 0.0;
+    tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
     switch(m_electricalData.reactivePowerUnit) {
         case UNIT_PU: {
             tipText += _(" p.u.");
@@ -125,6 +129,6 @@ wxString IndMotor::GetTipText() const
         default:
             break;
     }
-    
+
     return tipText;
 }

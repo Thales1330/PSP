@@ -136,6 +136,7 @@ void Machines::RotateNode(Element* parent, bool clockwise)
     if(parent == m_parentList[0]) {
         m_pointList[0] = parent->RotateAtPosition(m_pointList[0], rotAngle);
         UpdateSwitchesPosition();
+        UpdatePowerFlowArrowsPosition();
     }
 }
 

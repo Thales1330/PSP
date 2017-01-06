@@ -40,7 +40,8 @@ enum WorkspaceMode {
     MODE_INSERT,
     MODE_INSERT_TEXT,
     MODE_SELECTION_RECT,
-    MODE_PASTE
+    MODE_PASTE,
+    MODE_DRAG_PASTE
 };
 
 enum ElementID {
@@ -68,6 +69,7 @@ public:
     wxString GetName() const { return m_name; }
     std::vector<Element*> GetElementList() const { return m_elementList; }
     std::vector<Text*> GetTextList() const { return m_textList; }
+    std::vector<Element*> GetAllElements() const;
     WorkspaceMode GetWorkspaceMode() const { return m_mode; }
     Camera* GetCamera() const { return m_camera; }
     
