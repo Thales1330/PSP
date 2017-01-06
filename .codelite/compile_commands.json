@@ -1,9 +1,0 @@
-[{
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -I. -I. -MG -MP -MT./Release/Element.cpp.o -MF./Release/Element.cpp.o.d -MM Element.cpp",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Element.cpp"
- }, {
-  "directory": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project",
-  "command": "C:/TDM-GCC-64/bin/g++.exe -c C:/Users/Thales/Documents/GitHub/PSP/Project/Element.cpp -O2 -Wall -mthreads -DHAVE_W32API_H -D__WXMSW__ -DNDEBUG -D_UNICODE -IC:/wxWidgets-3.1.0/lib/gcc_dll/mswu -IC:/wxWidgets-3.1.0/include -DWXUSINGDLL -Wno-ctor-dtor-privacy -pipe -fmessage-length=0 -fno-keep-inline-dllexport -std=c++11 -DNDEBUG -DUNICODE -o ./Release/Element.cpp.o -I. -I.",
-  "file": "C:\\Users\\Thales\\Documents\\GitHub\\PSP\\Project\\Element.cpp"
- }]
