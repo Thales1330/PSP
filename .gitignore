@@ -44,3 +44,7 @@ Thumbs.db
 # Other files #
 ###############
 *.xrc
+*.workspace
+#*.project
+#Project/Project.mk
+#Project/Project.txt
