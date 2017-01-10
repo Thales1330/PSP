@@ -13,12 +13,12 @@
 #include "Capacitor.h"
 
 Text::Text()
-    : Element()
+    : GraphicalElement()
 {
     SetText(m_text);
 }
 Text::Text(wxPoint2DDouble position)
-    : Element()
+    : GraphicalElement()
 {
     m_position = position;
     SetText(m_text);

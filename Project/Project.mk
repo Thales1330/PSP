@@ -64,11 +64,11 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 CodeLiteDir:=C:\Program Files\CodeLite
 WXWIN:=C:\wxWidgets-3.1.0
 WXCFG:=gcc_dll\mswu
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxGLString.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/FileHanding.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) \
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxGLString.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/FileHanding.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) $(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) 
 
 
 
@@ -109,14 +109,6 @@ $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 
 $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix): win_resources.rc
 	$(RcCompilerName) -i "C:/Users/Thales/Documents/GitHub/PSP/Project/win_resources.rc" $(RcCmpOptions)   $(ObjectSwitch)$(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(RcIncludePath)
-$(IntermediateDirectory)/Text.cpp$(ObjectSuffix): Text.cpp $(IntermediateDirectory)/Text.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Text.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Text.cpp$(DependSuffix): Text.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Text.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Text.cpp$(DependSuffix) -MM Text.cpp
-
-$(IntermediateDirectory)/Text.cpp$(PreprocessSuffix): Text.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Text.cpp$(PreprocessSuffix) Text.cpp
-
 $(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix): ElementDataObject.cpp $(IntermediateDirectory)/ElementDataObject.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/ElementDataObject.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/ElementDataObject.cpp$(DependSuffix): ElementDataObject.cpp
@@ -124,6 +116,14 @@ $(IntermediateDirectory)/ElementDataObject.cpp$(DependSuffix): ElementDataObject
 
 $(IntermediateDirectory)/ElementDataObject.cpp$(PreprocessSuffix): ElementDataObject.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ElementDataObject.cpp$(PreprocessSuffix) ElementDataObject.cpp
+
+$(IntermediateDirectory)/Element.cpp$(ObjectSuffix): Element.cpp $(IntermediateDirectory)/Element.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Element.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Element.cpp$(DependSuffix): Element.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Element.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Element.cpp$(DependSuffix) -MM Element.cpp
+
+$(IntermediateDirectory)/Element.cpp$(PreprocessSuffix): Element.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Element.cpp$(PreprocessSuffix) Element.cpp
 
 $(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix): ArtMetro.cpp $(IntermediateDirectory)/ArtMetro.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/ArtMetro.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ArtMetro.cpp$(ObjectSuffix) $(IncludePath)
@@ -317,13 +317,13 @@ $(IntermediateDirectory)/Capacitor.cpp$(DependSuffix): Capacitor.cpp
 $(IntermediateDirectory)/Capacitor.cpp$(PreprocessSuffix): Capacitor.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Capacitor.cpp$(PreprocessSuffix) Capacitor.cpp
 
-$(IntermediateDirectory)/Element.cpp$(ObjectSuffix): Element.cpp $(IntermediateDirectory)/Element.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Element.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Element.cpp$(DependSuffix): Element.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Element.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Element.cpp$(DependSuffix) -MM Element.cpp
+$(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix): PowerElement.cpp $(IntermediateDirectory)/PowerElement.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/PowerElement.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/PowerElement.cpp$(DependSuffix): PowerElement.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/PowerElement.cpp$(DependSuffix) -MM PowerElement.cpp
 
-$(IntermediateDirectory)/Element.cpp$(PreprocessSuffix): Element.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Element.cpp$(PreprocessSuffix) Element.cpp
+$(IntermediateDirectory)/PowerElement.cpp$(PreprocessSuffix): PowerElement.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/PowerElement.cpp$(PreprocessSuffix) PowerElement.cpp
 
 $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix): ElectricCalculation.cpp $(IntermediateDirectory)/ElectricCalculation.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/ElectricCalculation.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IncludePath)
@@ -348,6 +348,30 @@ $(IntermediateDirectory)/Fault.cpp$(DependSuffix): Fault.cpp
 
 $(IntermediateDirectory)/Fault.cpp$(PreprocessSuffix): Fault.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Fault.cpp$(PreprocessSuffix) Fault.cpp
+
+$(IntermediateDirectory)/Text.cpp$(ObjectSuffix): Text.cpp $(IntermediateDirectory)/Text.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Text.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Text.cpp$(DependSuffix): Text.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Text.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Text.cpp$(DependSuffix) -MM Text.cpp
+
+$(IntermediateDirectory)/Text.cpp$(PreprocessSuffix): Text.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Text.cpp$(PreprocessSuffix) Text.cpp
+
+$(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix): GraphicalElement.cpp $(IntermediateDirectory)/GraphicalElement.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/GraphicalElement.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/GraphicalElement.cpp$(DependSuffix): GraphicalElement.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/GraphicalElement.cpp$(DependSuffix) -MM GraphicalElement.cpp
+
+$(IntermediateDirectory)/GraphicalElement.cpp$(PreprocessSuffix): GraphicalElement.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/GraphicalElement.cpp$(PreprocessSuffix) GraphicalElement.cpp
+
+$(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix): ControlElement.cpp $(IntermediateDirectory)/ControlElement.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/ControlElement.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ControlElement.cpp$(DependSuffix): ControlElement.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ControlElement.cpp$(DependSuffix) -MM ControlElement.cpp
+
+$(IntermediateDirectory)/ControlElement.cpp$(PreprocessSuffix): ControlElement.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ControlElement.cpp$(PreprocessSuffix) ControlElement.cpp
 
 $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix): BusForm.cpp $(IntermediateDirectory)/BusForm.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/BusForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IncludePath)

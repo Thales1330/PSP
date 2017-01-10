@@ -1,7 +1,7 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include "Element.h"
+#include "GraphicalElement.h"
 #include "wxGLString.h"
 
 class TextForm;
@@ -44,7 +44,7 @@ enum DataType {
     DATA_PF_CURRENT
 };
 
-class Text : public Element
+class Text : public GraphicalElement
 {
 public:
     Text();

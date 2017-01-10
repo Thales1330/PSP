@@ -2,7 +2,7 @@
 #define BUS_H
 
 #include "BusForm.h"
-#include "Element.h"
+#include "PowerElement.h"
 
 struct BusElectricalData {
     int number = 0;
@@ -39,7 +39,7 @@ struct BusElectricalData {
     double stabFaultReactance = 0.0;
 };
 
-class Bus : public Element
+class Bus : public PowerElement
 {
 public:
     Bus();

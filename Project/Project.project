@@ -10,7 +10,7 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="model">
-      <VirtualDirectory Name="electrical">
+      <VirtualDirectory Name="power element">
         <File Name="Bus.cpp"/>
         <File Name="Line.cpp"/>
         <File Name="Transformer.cpp"/>
@@ -23,15 +23,22 @@
         <File Name="Load.cpp"/>
         <File Name="Inductor.cpp"/>
         <File Name="Capacitor.cpp"/>
-        <File Name="Element.cpp"/>
+        <File Name="PowerElement.cpp"/>
       </VirtualDirectory>
       <VirtualDirectory Name="calculations">
         <File Name="ElectricCalculation.cpp"/>
         <File Name="PowerFlow.cpp"/>
         <File Name="Fault.cpp"/>
       </VirtualDirectory>
-      <File Name="Text.cpp"/>
       <File Name="ElementDataObject.cpp"/>
+      <VirtualDirectory Name="graphical element">
+        <File Name="Text.cpp"/>
+        <File Name="GraphicalElement.cpp"/>
+      </VirtualDirectory>
+      <File Name="Element.cpp"/>
+      <VirtualDirectory Name="control element">
+        <File Name="ControlElement.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -40,7 +47,7 @@
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
       <File Name="Workspace.cpp"/>
-      <VirtualDirectory Name="element forms">
+      <VirtualDirectory Name="power element form">
         <File Name="BusForm.cpp"/>
         <File Name="GeneratorStabForm.cpp"/>
         <File Name="LineForm.cpp"/>
@@ -50,15 +57,17 @@
         <File Name="ReactiveShuntElementForm.cpp"/>
         <File Name="IndMotorForm.cpp"/>
         <File Name="SyncMachineForm.cpp"/>
-        <File Name="TextForm.cpp"/>
       </VirtualDirectory>
       <File Name="FileHanding.cpp"/>
+      <VirtualDirectory Name="graphical element form">
+        <File Name="TextForm.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="model">
-      <VirtualDirectory Name="electrical">
+      <VirtualDirectory Name="power element">
         <File Name="Bus.h"/>
         <File Name="Line.h"/>
         <File Name="Transformer.h"/>
@@ -71,14 +80,13 @@
         <File Name="Load.h"/>
         <File Name="Inductor.h"/>
         <File Name="Capacitor.h"/>
-        <File Name="Element.h"/>
+        <File Name="PowerElement.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="calculations">
         <File Name="ElectricCalculation.h"/>
         <File Name="PowerFlow.h"/>
         <File Name="Fault.h"/>
       </VirtualDirectory>
-      <File Name="Text.h"/>
       <VirtualDirectory Name="rapidXML">
         <File Name="rapidXML/rapidxml.hpp"/>
         <File Name="rapidXML/rapidxml_iterators.hpp"/>
@@ -86,6 +94,14 @@
         <File Name="rapidXML/rapidxml_utils.hpp"/>
       </VirtualDirectory>
       <File Name="ElementDataObject.h"/>
+      <File Name="Element.h"/>
+      <VirtualDirectory Name="graphical element">
+        <File Name="Text.h"/>
+        <File Name="GraphicalElement.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="control element">
+        <File Name="ControlElement.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
@@ -94,7 +110,7 @@
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>
       <File Name="Workspace.h"/>
-      <VirtualDirectory Name="element forms">
+      <VirtualDirectory Name="power element form">
         <File Name="BusForm.h"/>
         <File Name="GeneratorStabForm.h"/>
         <File Name="LineForm.h"/>
@@ -104,9 +120,11 @@
         <File Name="ReactiveShuntElementForm.h"/>
         <File Name="IndMotorForm.h"/>
         <File Name="SyncMachineForm.h"/>
-        <File Name="TextForm.h"/>
       </VirtualDirectory>
       <File Name="FileHanding.h"/>
+      <VirtualDirectory Name="graphical element form">
+        <File Name="TextForm.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">

@@ -1,7 +1,7 @@
 #include "Branch.h"
 
 Branch::Branch()
-    : Element()
+    : PowerElement()
 {
 }
 Branch::~Branch() {}

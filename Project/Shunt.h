@@ -1,10 +1,10 @@
 #ifndef SHUNT_H
 #define SHUNT_H
 
-#include "Element.h"
+#include "PowerElement.h"
 #include "Bus.h"
 
-class Shunt : public Element
+class Shunt : public PowerElement
 {
 public:
 	Shunt();

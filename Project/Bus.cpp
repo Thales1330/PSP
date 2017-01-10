@@ -1,11 +1,11 @@
 #include "Bus.h"
 
 Bus::Bus()
-    : Element()
+    : PowerElement()
 {
 }
 Bus::Bus(wxPoint2DDouble position)
-    : Element()
+    : PowerElement()
 {
     m_width = 100.0;
     m_height = 5.0;
