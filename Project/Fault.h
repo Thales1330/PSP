@@ -2,16 +2,49 @@
 #define FAULT_H
 
 #include "ElectricCalculation.h"
+/**
+ * @class Fault
+ * @author Thales Lima Oliveira
+ * @date 10/01/2017
+ * @file Fault.h
+ * @brief Calculate the fault of the system and update the elements data.
+ */
 
 class Fault : public ElectricCalculation
 {
 public:
+    /**
+     * @brief Contructor.
+     * @param elementList List of elements in workspace
+     */
     Fault(std::vector<Element*> elementList);
+
+    /**
+     * @brief Default contructor. Use GetElementsFromList(std::vector<Element*> elementList).
+     */
     Fault();
+
+    /**
+     * @brief Destructor.
+     */
     ~Fault();
 
+    /**
+     * @brief Calculate the fault of the system. Return true if was possible the calculation.
+     * @param systemPowerBase System base of power.
+     */
     virtual bool RunFaultCalculation(double systemPowerBase);
+
+    /**
+     * @brief Update the data of the elements.
+     * @param systemPowerBase System base of power.
+     */
     virtual void UpdateElementsFault(double systemPowerBase);
+
+    /**
+     * @brief Get the error message generated in RunFaultCalculation(double systemPowerBase).
+     * @return Error message.
+     */
     virtual wxString GetErrorMessage() { return m_errorMsg; }
 
 protected:

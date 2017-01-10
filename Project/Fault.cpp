@@ -230,9 +230,144 @@ void Fault::UpdateElementsFault(double systemPowerBase)
             line->SetElectricalData(data);
         }
     }
-    
+
     for(auto it = m_transformerList.begin(), itEnd = m_transformerList.end(); it != itEnd; ++it) {
         Transformer* transformer = *it;
-        
+        if(transformer->IsOnline()) {
+            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetEletricalData().number;
+            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetEletricalData().number;
+            auto data = transformer->GetElectricalData();
+
+            std::complex<double> vPos[2] = { m_posFaultVoltagePos[n1], m_posFaultVoltagePos[n2] };
+            std::complex<double> vNeg[2] = { m_posFaultVoltageNeg[n1], m_posFaultVoltageNeg[n2] };
+            std::complex<double> vZero[2] = { m_posFaultVoltageZero[n1], m_posFaultVoltageZero[n2] };
+            std::complex<double> zPos(data.resistance, data.indReactance);
+            std::complex<double> zZero(data.zeroResistance, data.zeroIndReactance);
+
+            std::complex<double> transformerCurrentPos[2];
+            std::complex<double> transformerCurrentNeg[2];
+            std::complex<double> transformerCurrentZero[2];
+
+            if(data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
+                transformerCurrentPos[0] = (vPos[0] - vPos[1]) / zPos;
+                transformerCurrentNeg[0] = (vNeg[0] - vNeg[1]) / zPos;
+                transformerCurrentZero[0] = (vZero[0] - vZero[1]) / zZero;
+                transformerCurrentPos[1] = (vPos[1] - vPos[0]) / zPos;
+                transformerCurrentNeg[1] = (vNeg[1] - vNeg[0]) / zPos;
+                transformerCurrentZero[1] = (vZero[1] - vZero[0]) / zZero;
+            } else {
+                double radPhaseShift = wxDegToRad(data.phaseShift);
+                std::complex<double> t = std::complex<double>(
+                    data.turnsRatio * std::cos(radPhaseShift), -data.turnsRatio * std::sin(radPhaseShift));
+
+                transformerCurrentPos[0] =
+                    vPos[0] * (1.0 / (std::pow(std::abs(t), 2.0) * zPos)) - vPos[1] * (1.0 / (std::conj(t) * zPos));
+                transformerCurrentNeg[0] =
+                    vNeg[0] * (1.0 / (std::pow(std::abs(t), 2.0) * zPos)) - vNeg[1] * (1.0 / (t * zPos));
+
+                transformerCurrentPos[1] = -vPos[0] * (1.0 / (t * zPos)) + vPos[1] / zPos;
+                transformerCurrentNeg[1] = -vNeg[0] * (1.0 / (std::conj(t) * zPos)) + vNeg[1] / zPos;
+            }
+
+            switch(data.connection) {
+                case GWYE_GWYE: {
+                    transformerCurrentZero[0] = (vZero[0] - vZero[1]) / zZero;
+                    transformerCurrentZero[1] = (vZero[1] - vZero[0]) / zZero;
+                    break;
+                }
+                case GWYE_DELTA: {
+                    transformerCurrentZero[0] = vZero[0] / zZero;
+                    transformerCurrentZero[1] = std::complex<double>(0.0, 0.0);
+                    break;
+                }
+                case DELTA_GWYE: {
+                    transformerCurrentZero[0] = std::complex<double>(0.0, 0.0);
+                    transformerCurrentZero[1] = vZero[1] / zZero;
+                    break;
+                }
+                default: {
+                    transformerCurrentZero[0] = std::complex<double>(0.0, 0.0);
+                    transformerCurrentZero[1] = std::complex<double>(0.0, 0.0);
+                    break;
+                }
+            }
+
+            data.faultCurrent[0][0] = transformerCurrentPos[0] + transformerCurrentNeg[0] + transformerCurrentZero[0];
+            data.faultCurrent[1][0] =
+                transformerCurrentPos[0] + a2 * transformerCurrentNeg[0] + a * transformerCurrentZero[0];
+            data.faultCurrent[2][0] =
+                transformerCurrentPos[0] + a * transformerCurrentNeg[0] + a2 * transformerCurrentZero[0];
+            data.faultCurrent[0][1] = transformerCurrentPos[1] + transformerCurrentNeg[1] + transformerCurrentZero[1];
+            data.faultCurrent[1][1] =
+                transformerCurrentPos[1] + a2 * transformerCurrentNeg[1] + a * transformerCurrentZero[1];
+            data.faultCurrent[2][1] =
+                transformerCurrentPos[1] + a * transformerCurrentNeg[1] + a2 * transformerCurrentZero[1];
+
+            transformer->SetElectricaData(data);
+        }
+    }
+
+    for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
+        SyncGenerator* syncGenerator = *it;
+        if(syncGenerator->IsOnline()) {
+            Bus* bus = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
+            int n = bus->GetEletricalData().number;
+            std::complex<double> v = bus->GetEletricalData().voltage; // Pre-fault voltage.
+            auto data = syncGenerator->GetElectricalData();
+
+            std::complex<double> vPos = m_posFaultVoltagePos[n];
+            std::complex<double> vNeg = m_posFaultVoltageNeg[n];
+            std::complex<double> vZero = m_posFaultVoltageZero[n];
+
+            std::complex<double> zPos(data.positiveResistance, data.positiveReactance);
+            std::complex<double> zNeg(data.negativeResistance, data.negativeReactance);
+            std::complex<double> zZero(
+                data.zeroResistance + 3.0 * data.groundResistance, data.negativeReactance + 3.0 * data.groundReactance);
+
+            std::complex<double> syncGeneratorCurrentPos = (v - vPos) / zPos;
+            std::complex<double> syncGeneratorCurrentNeg = (-vNeg) / zNeg;
+            std::complex<double> syncGeneratorCurrentZero(0.0, 0.0);
+            if(data.groundNeutral) syncGeneratorCurrentZero = (-vZero) / zZero;
+
+            data.faultCurrent[0] = syncGeneratorCurrentPos + syncGeneratorCurrentNeg + syncGeneratorCurrentZero;
+            data.faultCurrent[1] =
+                syncGeneratorCurrentPos + a2 * syncGeneratorCurrentNeg + a * syncGeneratorCurrentZero;
+            data.faultCurrent[2] =
+                syncGeneratorCurrentPos + a * syncGeneratorCurrentNeg + a2 * syncGeneratorCurrentZero;
+
+            syncGenerator->SetElectricalData(data);
+        }
+    }
+
+    for(auto it = m_syncMotorList.begin(), itEnd = m_syncMotorList.end(); it != itEnd; ++it) {
+        SyncMotor* syncMotor = *it;
+        if(syncMotor->IsOnline()) {
+            Bus* bus = static_cast<Bus*>(syncMotor->GetParentList()[0]);
+            int n = bus->GetEletricalData().number;
+            std::complex<double> v = bus->GetEletricalData().voltage; // Pre-fault voltage.
+            auto data = syncMotor->GetElectricalData();
+
+            std::complex<double> vPos = m_posFaultVoltagePos[n];
+            std::complex<double> vNeg = m_posFaultVoltageNeg[n];
+            std::complex<double> vZero = m_posFaultVoltageZero[n];
+
+            std::complex<double> zPos(data.positiveResistance, data.positiveReactance);
+            std::complex<double> zNeg(data.negativeResistance, data.negativeReactance);
+            std::complex<double> zZero(
+                data.zeroResistance + 3.0 * data.groundResistance, data.negativeReactance + 3.0 * data.groundReactance);
+
+            std::complex<double> syncGeneratorCurrentPos = (v - vPos) / zPos;
+            std::complex<double> syncGeneratorCurrentNeg = (-vNeg) / zNeg;
+            std::complex<double> syncGeneratorCurrentZero(0.0, 0.0);
+            if(data.groundNeutral) syncGeneratorCurrentZero = (-vZero) / zZero;
+
+            data.faultCurrent[0] = syncGeneratorCurrentPos + syncGeneratorCurrentNeg + syncGeneratorCurrentZero;
+            data.faultCurrent[1] =
+                syncGeneratorCurrentPos + a2 * syncGeneratorCurrentNeg + a * syncGeneratorCurrentZero;
+            data.faultCurrent[2] =
+                syncGeneratorCurrentPos + a * syncGeneratorCurrentNeg + a2 * syncGeneratorCurrentZero;
+
+            syncMotor->SetElectricalData(data);
+        }
     }
 }
