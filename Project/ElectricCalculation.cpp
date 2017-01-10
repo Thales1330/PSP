@@ -37,7 +37,10 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
     }
 }
 
-bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> > >& yBus, double systemPowerBase)
+bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> > >& yBus,
+    double systemPowerBase,
+    YBusSequence sequence,
+    bool includeSyncMachines)
 {
     if(m_busList.size() == 0) return false;
 
@@ -62,8 +65,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     }
 
     // Load
-    for(auto itlo = m_loadList.begin(); itlo != m_loadList.end(); itlo++) {
-        Load* load = *itlo;
+    for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
+        Load* load = *it;
         if(load->IsOnline()) {
             int n = static_cast<Bus*>(load->GetParentList()[0])->GetEletricalData().number;
             LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
@@ -73,8 +76,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     }
 
     // Capacitor
-    for(auto itca = m_capacitorList.begin(); itca != m_capacitorList.end(); itca++) {
-        Capacitor* capacitor = *itca;
+    for(auto it = m_capacitorList.begin(), itEnd = m_capacitorList.end(); it != itEnd; ++it) {
+        Capacitor* capacitor = *it;
         if(capacitor->IsOnline()) {
             int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetEletricalData().number;
             CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
@@ -83,8 +86,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     }
 
     // Inductor
-    for(auto itin = m_inductorList.begin(); itin != m_inductorList.end(); itin++) {
-        Inductor* inductor = *itin;
+    for(auto it = m_inductorList.begin(), itEnd = m_inductorList.end(); it != itEnd; ++it) {
+        Inductor* inductor = *it;
         if(inductor->IsOnline()) {
             int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetEletricalData().number;
             InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
@@ -93,28 +96,43 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     }
 
     // Power line
-    for(auto itl = m_lineList.begin(); itl != m_lineList.end(); itl++) {
-        Line* line = *itl;
+    for(auto it = m_lineList.begin(), itEnd = m_lineList.end(); it != itEnd; ++it) {
+        Line* line = *it;
         if(line->IsOnline()) {
             LineElectricalData data = line->GetElectricalData();
 
             int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetEletricalData().number;
             int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetEletricalData().number;
 
-            yBus[n1][n2] -= 1.0 / std::complex<double>(data.resistance, data.indReactance);
-            yBus[n2][n1] -= 1.0 / std::complex<double>(data.resistance, data.indReactance);
+            switch(sequence) {
+                case POSITIVE_SEQ:
+                case NEGATIVE_SEQ: {
+                    yBus[n1][n2] -= 1.0 / std::complex<double>(data.resistance, data.indReactance);
+                    yBus[n2][n1] -= 1.0 / std::complex<double>(data.resistance, data.indReactance);
 
-            yBus[n1][n1] += 1.0 / std::complex<double>(data.resistance, data.indReactance);
-            yBus[n2][n2] += 1.0 / std::complex<double>(data.resistance, data.indReactance);
+                    yBus[n1][n1] += 1.0 / std::complex<double>(data.resistance, data.indReactance);
+                    yBus[n2][n2] += 1.0 / std::complex<double>(data.resistance, data.indReactance);
 
-            yBus[n1][n1] += std::complex<double>(0.0, data.capSusceptance / 2.0);
-            yBus[n2][n2] += std::complex<double>(0.0, data.capSusceptance / 2.0);
+                    yBus[n1][n1] += std::complex<double>(0.0, data.capSusceptance / 2.0);
+                    yBus[n2][n2] += std::complex<double>(0.0, data.capSusceptance / 2.0);
+                } break;
+                case ZERO_SEQ: {
+                    yBus[n1][n2] -= 1.0 / std::complex<double>(data.zeroResistance, data.zeroIndReactance);
+                    yBus[n2][n1] -= 1.0 / std::complex<double>(data.zeroResistance, data.zeroIndReactance);
+
+                    yBus[n1][n1] += 1.0 / std::complex<double>(data.zeroResistance, data.zeroIndReactance);
+                    yBus[n2][n2] += 1.0 / std::complex<double>(data.zeroResistance, data.zeroIndReactance);
+
+                    yBus[n1][n1] += std::complex<double>(0.0, data.zeroCapSusceptance / 2.0);
+                    yBus[n2][n2] += std::complex<double>(0.0, data.zeroCapSusceptance / 2.0);
+                }
+            }
         }
     }
 
     // Transformer
-    for(auto itt = m_transformerList.begin(); itt != m_transformerList.end(); ++itt) {
-        Transformer* transformer = *itt;
+    for(auto it = m_transformerList.begin(), itEnd = m_transformerList.end(); it != itEnd; ++it) {
+        Transformer* transformer = *it;
 
         if(transformer->IsOnline()) {
             TransformerElectricalData data = transformer->GetElectricalData();
@@ -124,7 +142,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
 
             // If the transformer have nominal turns ratio (1.0) and no phase shifting, it will be modelled as series
             // impedance.
-            if(data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
+            if(data.turnsRatio == 1.0 && data.phaseShift == 0.0 && sequence != ZERO_SEQ) {
                 yBus[n1][n2] += -1.0 / std::complex<double>(data.resistance, data.indReactance);
                 yBus[n2][n1] += -1.0 / std::complex<double>(data.resistance, data.indReactance);
 
@@ -136,7 +154,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
             //[Ref. 1: Elementos de analise de sistemas de potencia - Stevenson - pg. 232]
             //[Ref. 2: http://www.ee.washington.edu/research/real/Library/Reports/Tap_Adjustments_in_AC_Load_Flows.pdf]
             //[Ref. 3: http://www.columbia.edu/~dano/courses/power/notes/power/andersson1.pdf]
-            else {
+            else if(sequence != ZERO_SEQ) {
                 // Complex turns ratio
                 double radPhaseShift = wxDegToRad(data.phaseShift);
                 std::complex<double> a = std::complex<double>(
@@ -145,10 +163,90 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                 // Transformer admitance
                 std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
 
-                yBus[n1][n1] += y / std::pow(std::abs(a), 2.0);
-                yBus[n1][n2] += -(y / std::conj(a));
-                yBus[n2][n1] += -(y / a);
-                yBus[n2][n2] += y;
+                if(sequence == POSITIVE_SEQ) {
+                    yBus[n1][n1] += y / std::pow(std::abs(a), 2.0);
+                    yBus[n1][n2] += -(y / std::conj(a));
+                    yBus[n2][n1] += -(y / a);
+                    yBus[n2][n2] += y;
+                } else if(sequence == NEGATIVE_SEQ) {
+                    yBus[n1][n1] += y / std::pow(std::abs(a), 2.0);
+                    yBus[n1][n2] += -(y / a);
+                    yBus[n2][n1] += -(y / std::conj(a));
+                    yBus[n2][n2] += y;
+                }
+            } else if(sequence == ZERO_SEQ) {
+                switch(data.connection) {
+                    case GWYE_GWYE: {
+                        std::complex<double> y =
+                            1.0 / std::complex<double>(data.zeroResistance +
+                                          3.0 * (data.primaryGrndResistance + data.secondaryGrndResistance),
+                                      data.zeroIndReactance +
+                                          3.0 * (data.primaryGrndReactance + data.secondaryGrndReactance));
+                        std::complex<double> a = std::complex<double>(data.turnsRatio, 0.0);
+
+                        yBus[n1][n1] += y / (a * a);
+                        yBus[n1][n2] += -(y / a);
+                        yBus[n2][n1] += -(y / a);
+                        yBus[n2][n2] += y;
+                    } break;
+                    case DELTA_GWYE: {
+                        std::complex<double> y =
+                            1.0 / std::complex<double>(data.zeroResistance + 3.0 * (data.secondaryGrndResistance),
+                                      data.zeroIndReactance + 3.0 * (data.secondaryGrndReactance));
+                        yBus[n2][n2] += y;
+                        break;
+                    }
+                    case GWYE_DELTA: {
+                        std::complex<double> y =
+                            1.0 / std::complex<double>(data.zeroResistance + 3.0 * (data.primaryGrndResistance),
+                                      data.zeroIndReactance + 3.0 * (data.primaryGrndReactance));
+                        yBus[n1][n1] += y;
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    if(includeSyncMachines) {
+        // Synchronous generator
+        for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
+            SyncGenerator* syncGenerator = *it;
+            if(syncGenerator->IsOnline()) {
+                int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetEletricalData().number;
+                SyncGeneratorElectricalData data = syncGenerator->GetPUElectricalData(systemPowerBase);
+                switch(sequence) {
+                    case POSITIVE_SEQ: {
+                        yBus[n][n] += 1.0 / std::complex<double>(data.positiveResistance, data.positiveReactance);
+                    } break;
+                    case NEGATIVE_SEQ: {
+                        yBus[n][n] += 1.0 / std::complex<double>(data.negativeResistance, data.negativeReactance);
+                    } break;
+                    case ZERO_SEQ: {
+                        yBus[n][n] += 1.0 / std::complex<double>(data.zeroResistance, data.zeroReactance);
+                    } break;
+                }
+            }
+        }
+        // Synchronous motor
+        for(auto it = m_syncMotorList.begin(), itEnd = m_syncMotorList.end(); it != itEnd; ++it) {
+            SyncMotor* syncMotor = *it;
+            if(syncMotor->IsOnline()) {
+                int n = static_cast<Bus*>(syncMotor->GetParentList()[0])->GetEletricalData().number;
+                SyncMotorElectricalData data = syncMotor->GetPUElectricalData(systemPowerBase);
+                switch(sequence) {
+                    case POSITIVE_SEQ: {
+                        yBus[n][n] += 1.0 / std::complex<double>(data.positiveResistance, data.positiveReactance);
+                    } break;
+                    case NEGATIVE_SEQ: {
+                        yBus[n][n] += 1.0 / std::complex<double>(data.negativeResistance, data.negativeReactance);
+                    } break;
+                    case ZERO_SEQ: {
+                        yBus[n][n] += 1.0 / std::complex<double>(data.zeroResistance, data.zeroReactance);
+                    } break;
+                }
             }
         }
     }
@@ -428,4 +526,73 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             }
         }
     }
+}
+
+bool ElectricCalculation::InvertMatrix(std::vector<std::vector<std::complex<double> > > matrix,
+    std::vector<std::vector<std::complex<double> > >& inverse)
+{
+    int order = static_cast<int>(matrix.size());
+
+    inverse.clear();
+    // Fill the inverse matrix with identity.
+    for(int i = 0; i < order; ++i) {
+        std::vector<std::complex<double> > line;
+        for(int j = 0; j < order; ++j) {
+            line.push_back(i == j ? std::complex<double>(1.0, 0.0) : std::complex<double>(0.0, 0.0));
+        }
+        inverse.push_back(line);
+    }
+
+    // Check if a main diagonal value of the matrix is zero, if one is zero, try a linear combination to remove it.
+    for(int i = 0; i < order; ++i) {
+        for(int j = 0; j < order; ++j) {
+            if(i == j && matrix[i][j] == std::complex<double>(0.0, 0.0)) {
+                int row = 0;
+                while(row < order) {
+                    if(matrix[row][j] != std::complex<double>(0.0, 0.0)) {
+                        for(int k = 0; k < order; ++k) {
+                            matrix[i][k] += matrix[row][k];
+                            inverse[i][k] += inverse[row][k];
+                        }
+                        break;
+                    }
+                    row++;
+                }
+                // If all line values are zero, the matrix is singular and the solution is impossible.
+                if(row == order) return false;
+            }
+        }
+    }
+
+    // Linear combinations are made in both matrices, the goal is the input matrix become the identity. The final result
+    // have two matrices: the identity and the inverse of the input.
+    for(int i = 0; i < order; ++i) {
+        for(int j = 0; j < order; ++j) {
+            if(i != j) {
+                if(matrix[i][i] == std::complex<double>(0.0, 0.0)) return false;
+
+                std::complex<double> factor = matrix[j][i] / matrix[i][i];
+                for(int k = 0; k < order; ++k) {
+                    matrix[j][k] -= factor * matrix[i][k];
+                    inverse[j][k] -= factor * inverse[i][k];
+                }
+            }
+        }
+    }
+    // Main diagonal calculation.
+    for(int i = 0; i < order; ++i) {
+        for(int j = 0; j < order; ++j) {
+            if(i == j) {
+                if(matrix[i][j] == std::complex<double>(0.0, 0.0)) return false;
+
+                std::complex<double> factor = (matrix[i][j] - std::complex<double>(1.0, 0.0)) / matrix[i][j];
+                for(int k = 0; k < order; ++k) {
+                    matrix[j][k] -= factor * matrix[i][k];
+                    inverse[j][k] -= factor * inverse[i][k];
+                }
+            }
+        }
+    }
+
+    return true;
 }

@@ -151,6 +151,7 @@ void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 }
 
 void MainFrame::OnDragClick(wxRibbonButtonBarEvent& event) {}
+
 void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 {
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, true);
@@ -158,7 +159,14 @@ void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 }
 
 void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event) {}
+
+void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event)
+{
+    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
+        workspace->RunFault();
+    }
+}
+
 void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -166,6 +174,7 @@ void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
         workspace->Fit();
     }
 }
+
 void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -192,6 +201,7 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
         workspace->SetWorkspaceMode(MODE_MOVE_ELEMENT);
     }
 }
+
 void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
 {
     wxFileDialog openFileDialog(
@@ -234,6 +244,7 @@ void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
         workspace->RunPowerFlow();
     }
 }
+
 void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}

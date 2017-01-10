@@ -4,24 +4,25 @@
 #include "ElectricCalculation.h"
 
 #include <wx/string.h>
-#include <wx/intl.h>  //_()
-#include <wx/log.h>   //temp
+#include <wx/intl.h> //_()
 
 class PowerFlow : public ElectricCalculation
 {
-   public:
+public:
+    PowerFlow();
     PowerFlow(std::vector<Element*> elementList);
     ~PowerFlow();
     virtual bool RunGaussSeidel(double systemPowerBase = 100e6,
-                                int maxIteration = 5000,
-                                double error = 1e-6,
-                                double initAngle = 0.0,
-                                double accFactor = 1.0);
+        int maxIteration = 5000,
+        double error = 1e-6,
+        double initAngle = 0.0,
+        double accFactor = 1.0);
 
     virtual wxString GetErrorMessage() { return m_errorMsg; }
-   protected:
+
+protected:
     std::vector<std::vector<std::complex<double> > > m_yBus;
     wxString m_errorMsg = "";
 };
 
-#endif  // POWERFLOW_H
+#endif // POWERFLOW_H

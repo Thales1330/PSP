@@ -28,6 +28,7 @@ class ElementDataObject;
 class Text;
 
 class PowerFlow;
+class Fault;
 
 enum WorkspaceMode {
     MODE_EDIT = 0,
@@ -103,6 +104,7 @@ public:
     void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
 
     bool RunPowerFlow();
+    bool RunFault();
 
 protected:
     virtual void OnIdle(wxIdleEvent& event);

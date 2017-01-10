@@ -15,6 +15,7 @@
 #include "Text.h"
 
 #include "PowerFlow.h"
+#include "Fault.h"
 
 // Camera
 Camera::Camera()
@@ -1412,4 +1413,19 @@ std::vector<Element*> Workspace::GetAllElements() const
     for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) allElements.push_back(*it);
 
     return allElements;
+}
+
+bool Workspace::RunFault()
+{
+    Fault fault(m_elementList);
+    bool result = fault.RunFaultCalculation(100e6);
+    if(!result) {
+        wxMessageDialog msgDialog(this, fault.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+    }
+
+    UpdateTextElements();
+    Redraw();
+
+    return result;
 }

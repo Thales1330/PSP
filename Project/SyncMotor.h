@@ -32,6 +32,9 @@ struct SyncMotorElectricalData {
     double groundResistance = 0.0;
     double groundReactance = 0.0;
     bool groundNeutral = true;
+    // p.u. fault data
+    std::complex<double> faultCurrent[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
+        std::complex<double>(0.0, 0.0) };
 
     // Stability
     bool plotSyncMachine = false;
