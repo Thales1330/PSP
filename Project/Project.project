@@ -62,6 +62,7 @@
       <VirtualDirectory Name="graphical element form">
         <File Name="TextForm.cpp"/>
       </VirtualDirectory>
+      <File Name="ControlEditor.cpp"/>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
@@ -125,6 +126,7 @@
       <VirtualDirectory Name="graphical element form">
         <File Name="TextForm.h"/>
       </VirtualDirectory>
+      <File Name="ControlEditor.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
@@ -136,6 +138,7 @@
       <File Name="WorkspaceBitmaps.cpp"/>
       <File Name="BusFormBitmaps.cpp"/>
       <File Name="ElementFormBitmaps.cpp"/>
+      <File Name="ControlEditorBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
@@ -144,10 +147,13 @@
       <File Name="WorkspaceBase.cpp"/>
       <File Name="ElementForm.h"/>
       <File Name="ElementForm.cpp"/>
+      <File Name="ControlEditorBase.h"/>
+      <File Name="ControlEditorBase.cpp"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>
     <File Name="ElementForm.wxcp"/>
+    <File Name="ControlEditor.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
