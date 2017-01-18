@@ -1,5 +1,5 @@
 #include "SwitchingForm.h"
-#include "Element.h"
+#include "PowerElement.h"
 
 SwitchingForm::SwitchingForm(wxWindow* parent) : SwitchingFormBase(parent)
 {
@@ -10,7 +10,7 @@ SwitchingForm::SwitchingForm(wxWindow* parent) : SwitchingFormBase(parent)
     Layout();
 }
 
-SwitchingForm::SwitchingForm(wxWindow* parent, Element* element) : SwitchingFormBase(parent)
+SwitchingForm::SwitchingForm(wxWindow* parent, PowerElement* element) : SwitchingFormBase(parent)
 {
     m_listCtrlSwitchings->AppendColumn(_("Type"));
     m_listCtrlSwitchings->AppendColumn(_("Time (s)"));

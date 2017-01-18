@@ -2,6 +2,7 @@
 #define TEXT_H
 
 #include "GraphicalElement.h"
+#include "PowerElement.h"
 #include "wxGLString.h"
 
 class TextForm;

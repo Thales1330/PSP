@@ -32,48 +32,6 @@ enum ContextMenuID {
     ID_DELETE
 };
 
-enum ElectricalUnit {
-    UNIT_PU = 0,
-    UNIT_V,
-    UNIT_kV,
-    UNIT_A,
-    UNIT_kA,
-    UNIT_W,
-    UNIT_kW,
-    UNIT_MW,
-    UNIT_VA,
-    UNIT_kVA,
-    UNIT_MVA,
-    UNIT_VAr,
-    UNIT_kVAr,
-    UNIT_MVAr,
-    UNIT_OHM,
-    UNIT_OHM_km,
-    UNIT_S,
-    UNIT_S_km,
-    UNIT_DEGREE,
-    UNIT_RADIAN
-};
-
-enum FaultData {
-    FAULT_THREEPHASE = 0,
-    FAULT_2LINE,
-    FAULT_2LINE_GROUND,
-    FAULT_LINE_GROUND,
-    FAULT_LINE_A,
-    FAULT_LINE_B,
-    FAULT_LINE_C
-};
-
-enum SwitchingType { SW_INSERT = 0, SW_REMOVE };
-
-enum PowerFlowDirection { PF_NONE = 0, PF_TO_BUS, PF_TO_ELEMENT, PF_BUS1_TO_BUS2, PF_BUS2_TO_BUS1 };
-
-struct SwitchingData {
-    std::vector<SwitchingType> swType;
-    std::vector<double> swTime;
-};
-
 class OpenGLColour
 {
 public:
@@ -141,14 +99,6 @@ public:
     virtual void RemoveParent(Element* parent) {}
     virtual void ReplaceParent(Element* oldParent, Element* newParent);
     virtual void RotateNode(Element* parent, bool clockwise = true) {}
-    virtual wxPoint2DDouble
-    GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const;
-    virtual bool SwitchesContains(wxPoint2DDouble position) const;
-    virtual void UpdateSwitches();
-    virtual void DrawSwitches() const;
-
-    virtual void CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges);
-    virtual void DrawPowerFlowPts() const;
 
     virtual bool PickboxContains(wxPoint2DDouble position) { return false; }
     virtual void MovePickbox(wxPoint2DDouble position) {}
@@ -191,15 +141,7 @@ public:
     virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
     bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
     bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
-
-    // Electrical only methods
-    virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
-    {
-    }
-    virtual void SetSwitchingData(SwitchingData data) { m_swData = data; }
-    virtual SwitchingData GetSwitchingData() { return m_swData; }
-    virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection) { m_pfDirection = pfDirection; }
-    virtual PowerFlowDirection GetPowerFlowDirection() const { return m_pfDirection; }
+    
     // Static methods
     static wxString StringFromDouble(double value, int minDecimal = 1);
 
@@ -227,9 +169,6 @@ protected:
 
     std::vector<wxRect2DDouble> m_switchRect;
 
-    std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;
-    PowerFlowDirection m_pfDirection = PF_NONE;
-
     bool m_selected = false;
     bool m_dragging = false;
     bool m_showPickbox = false;
@@ -244,8 +183,6 @@ protected:
     wxPoint2DDouble m_movePos;
 
     bool m_online = true;
-
-    SwitchingData m_swData;
 };
 
 #endif // ELEMENT_H

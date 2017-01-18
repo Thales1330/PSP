@@ -68,7 +68,7 @@ public:
     ~Workspace();
 
     wxString GetName() const { return m_name; }
-    std::vector<Element*> GetElementList() const { return m_elementList; }
+    std::vector<Element*> GetElementList() const;
     std::vector<Text*> GetTextList() const { return m_textList; }
     std::vector<Element*> GetAllElements() const;
     WorkspaceMode GetWorkspaceMode() const { return m_mode; }
@@ -132,7 +132,7 @@ protected:
 
     WorkspaceMode m_mode = MODE_EDIT;
 
-    std::vector<Element*> m_elementList;
+    std::vector<PowerElement*> m_elementList;
     int m_elementNumber[NUM_ELEMENTS];
 
     std::vector<Text*> m_textList;
