@@ -203,7 +203,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     } else {
         bool clickPickbox = false;
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-            Element* element = *it;
+            PowerElement* element = *it;
             element->ResetPickboxes(); // Reset pickbox state.
 
             // Set movement initial position (not necessarily will be moved).
@@ -277,7 +277,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
     bool redraw = false;
 
     for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-        Element* element = *it;
+        PowerElement* element = *it;
 
         // Click in an element.
         if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
@@ -332,7 +332,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
     for(auto it = m_textList.begin(); it != m_textList.end(); ++it) {
         Text* text = *it;
         if(text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-            text->ShowForm(this, m_elementList);
+            text->ShowForm(this, GetElementList());
             redraw = true;
         }
     }
@@ -1075,7 +1075,7 @@ void Workspace::Fit()
 {
     wxPoint2DDouble leftUpCorner(0, 0);
     wxPoint2DDouble rightDownCorner(0, 0);
-    std::vector<Element*> elementList = m_elementList;
+    std::vector<Element*> elementList = GetElementList();
     for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
         elementList.push_back(*it);
     }
@@ -1134,7 +1134,7 @@ void Workspace::ValidateBusesVoltages(Element* initialBus)
 void Workspace::ValidateElementsVoltages()
 {
     for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
-        Element* child = *it;
+        PowerElement* child = *it;
 
         std::vector<double> nominalVoltage;
         std::vector<ElectricalUnit> nominalVoltageUnit;
@@ -1151,7 +1151,7 @@ void Workspace::ValidateElementsVoltages()
 
 bool Workspace::RunPowerFlow()
 {
-    PowerFlow pf(m_elementList);
+    PowerFlow pf(GetElementList());
     bool result = pf.RunGaussSeidel();
     if(!result) {
         wxMessageDialog msgDialog(this, pf.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -1234,7 +1234,7 @@ bool Workspace::Paste()
             if(copy) {
                 pastedElements.push_back(copy);
                 pastedBusList.push_back(static_cast<Bus*>(copy));
-                m_elementList.push_back(copy);
+                m_elementList.push_back(static_cast<PowerElement*>(copy));
             }
         }
 
@@ -1277,7 +1277,7 @@ bool Workspace::Paste()
                     }
 
                     pastedElements.push_back(copy);
-                    m_elementList.push_back(copy);
+                    m_elementList.push_back(static_cast<PowerElement*>(copy));
                 }
             }
         }
@@ -1392,7 +1392,8 @@ void Workspace::SetTextList(std::vector<Text*> textList)
 void Workspace::SetElementList(std::vector<Element*> elementList)
 {
     m_elementList.clear();
-    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) m_elementList.push_back(*it);
+    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it)
+        m_elementList.push_back(static_cast<PowerElement*>(*it));
 }
 
 void Workspace::OnIdle(wxIdleEvent& event)
@@ -1417,8 +1418,30 @@ std::vector<Element*> Workspace::GetAllElements() const
 
 bool Workspace::RunFault()
 {
-    Fault fault(m_elementList);
+    Fault fault(GetElementList());
     bool result = fault.RunFaultCalculation(100e6);
+    if(!result) {
+        wxMessageDialog msgDialog(this, fault.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+    }
+
+    UpdateTextElements();
+    Redraw();
+
+    return result;
+}
+
+std::vector<Element*> Workspace::GetElementList() const
+{
+    std::vector<Element*> elementList;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    return elementList;
+}
+
+bool Workspace::RunSCPower()
+{
+    Fault fault(GetElementList());
+    bool result = fault.RunSCPowerCalcutation(100e6);
     if(!result) {
         wxMessageDialog msgDialog(this, fault.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();

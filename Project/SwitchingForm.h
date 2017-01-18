@@ -3,13 +3,13 @@
 
 #include "ElementForm.h"
 
-class Element;
+class PowerElement;
 
 class SwitchingForm : public SwitchingFormBase
 {
 public:
     SwitchingForm(wxWindow* parent);
-    SwitchingForm(wxWindow* parent, Element* element);
+    SwitchingForm(wxWindow* parent, PowerElement* element);
     virtual ~SwitchingForm();
 protected:
     virtual void OnDownButtonClick(wxCommandEvent& event);
@@ -23,6 +23,6 @@ protected:
     
     int m_maxID = 0;
     
-    Element* m_element = NULL;
+    PowerElement* m_element = NULL;
 };
 #endif // SWITCHINGFORM_H

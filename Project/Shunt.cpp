@@ -1,6 +1,6 @@
 #include "Shunt.h"
 
-Shunt::Shunt() : Element() {}
+Shunt::Shunt() : PowerElement() {}
 Shunt::~Shunt() {}
 void Shunt::UpdateSwitchesPosition()
 {

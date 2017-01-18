@@ -1,9 +1,9 @@
 #ifndef MACHINES_H
 #define MACHINES_H
 
-#include "Element.h"
+#include "PowerElement.h"
 
-class Machines : public Element
+class Machines : public PowerElement
 {
 public:
 	Machines();

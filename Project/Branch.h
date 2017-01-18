@@ -1,10 +1,10 @@
 #ifndef BRANCH_H
 #define BRANCH_H
 
-#include "Element.h"
+#include "PowerElement.h"
 #include "Bus.h"
 
-class Branch : public Element
+class Branch : public PowerElement
 {
 public:
 	Branch();

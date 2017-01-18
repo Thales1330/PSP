@@ -1,7 +1,7 @@
 #include "Machines.h"
 
 Machines::Machines()
-    : Element()
+    : PowerElement()
 {
 }
 Machines::~Machines() {}

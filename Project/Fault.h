@@ -36,6 +36,12 @@ public:
     virtual bool RunFaultCalculation(double systemPowerBase);
 
     /**
+     * @brief Calculate the short-circuit power of the system. Return true if was possible the calculation.
+     * @param systemPowerBase System base of power.
+     */
+    virtual bool RunSCPowerCalcutation(double systemPowerBase);
+
+    /**
      * @brief Update the data of the elements.
      * @param systemPowerBase System base of power.
      */
