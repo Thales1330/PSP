@@ -105,6 +105,7 @@ public:
 
     bool RunPowerFlow();
     bool RunFault();
+    bool RunSCPower();
 
 protected:
     virtual void OnIdle(wxIdleEvent& event);

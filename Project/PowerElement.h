@@ -167,6 +167,14 @@ protected:
     SwitchingData m_swData;
     std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;
     PowerFlowDirection m_pfDirection = PF_NONE;
+    
+    OpenGLColour m_busColour;
+    OpenGLColour m_onlineElementColour;
+    OpenGLColour m_offlineElementColour;
+    OpenGLColour m_closedSwitchColour;
+    OpenGLColour m_openedSwitchColour;
+    OpenGLColour m_selectionColour;
+    OpenGLColour m_powerFlowArrowColour;
 };
 
 #endif // POWERELEMENT_H

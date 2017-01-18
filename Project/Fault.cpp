@@ -371,3 +371,27 @@ void Fault::UpdateElementsFault(double systemPowerBase)
         }
     }
 }
+
+bool Fault::RunSCPowerCalcutation(double systemPowerBase)
+{
+    // Get adimittance matrix.
+    std::vector<std::vector<std::complex<double> > > yBusPos;
+    GetYBus(yBusPos, systemPowerBase, POSITIVE_SEQ, true);
+
+    // Calculate the impedance matrix.
+    if(!InvertMatrix(yBusPos, m_zBusPos)) {
+        m_errorMsg = _("Fail to invert the positive sequence admittance matrix.");
+        return false;
+    }
+    
+    // Set the SC power.
+    for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        auto data = bus->GetEletricalData();
+        int n = data.number;
+        data.scPower = 1.0 / std::abs(m_zBusPos[n][n]);
+        bus->SetElectricalData(data);
+    }
+    
+    return true;
+}

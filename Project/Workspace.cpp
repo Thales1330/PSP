@@ -1437,3 +1437,18 @@ std::vector<Element*> Workspace::GetElementList() const
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) elementList.push_back(*it);
     return elementList;
 }
+
+bool Workspace::RunSCPower()
+{
+    Fault fault(GetElementList());
+    bool result = fault.RunSCPowerCalcutation(100e6);
+    if(!result) {
+        wxMessageDialog msgDialog(this, fault.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+    }
+
+    UpdateTextElements();
+    Redraw();
+
+    return result;
+}
