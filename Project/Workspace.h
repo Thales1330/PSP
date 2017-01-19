@@ -12,6 +12,8 @@
 #include "WorkspaceBase.h"
 #include "Bus.h"
 
+#include "ControlEditor.h"
+
 class Camera;
 class Element;
 // class Bus;

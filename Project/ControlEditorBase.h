@@ -14,11 +14,12 @@
 #include <wx/iconbndl.h>
 #include <wx/artprov.h>
 #include <wx/sizer.h>
-#include <wx/splitter.h>
+#include <wx/toolbar.h>
+#include <wx/aui/framemanager.h>
+#include <wx/aui/dockart.h>
 #include <wx/panel.h>
-#include <wx/scrolwin.h>
-#include <wx/bmpbuttn.h>
 #include <wx/glcanvas.h>
+#include <wx/statusbr.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -39,27 +40,23 @@
 class ControlEditorBase : public wxFrame
 {
 protected:
-    wxSplitterWindow* m_splitter157;
-    wxPanel* m_splitterPage163;
-    wxScrolledWindow* m_scrollWin201;
-    wxBitmapButton* m_bmpButton19934;
-    wxBitmapButton* m_bmpButton1993;
-    wxBitmapButton* m_bmpButton199;
-    wxPanel* m_splitterPage175;
-    wxGLCanvas* m_glCanvas147;
+    wxToolBar* m_toolbarMain;
+    wxAuiManager* m_auimgr;
+    wxPanel* m_panelControlElements;
+    wxPanel* m_panelWorkspace;
+    wxGLCanvas* m_glCanvas;
+    wxStatusBar* m_statusBarMain;
 
 protected:
 
 public:
-    wxBitmapButton* GetBmpButton19934() { return m_bmpButton19934; }
-    wxBitmapButton* GetBmpButton1993() { return m_bmpButton1993; }
-    wxBitmapButton* GetBmpButton199() { return m_bmpButton199; }
-    wxScrolledWindow* GetScrollWin201() { return m_scrollWin201; }
-    wxPanel* GetSplitterPage163() { return m_splitterPage163; }
-    wxGLCanvas* GetGlCanvas147() { return m_glCanvas147; }
-    wxPanel* GetSplitterPage175() { return m_splitterPage175; }
-    wxSplitterWindow* GetSplitter157() { return m_splitter157; }
-    ControlEditorBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Control editor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxDEFAULT_FRAME_STYLE);
+    wxToolBar* GetToolbarMain() { return m_toolbarMain; }
+    wxPanel* GetPanelControlElements() { return m_panelControlElements; }
+    wxGLCanvas* GetGlCanvas() { return m_glCanvas; }
+    wxPanel* GetPanelWorkspace() { return m_panelWorkspace; }
+    wxAuiManager* GetAuimgr() { return m_auimgr; }
+    wxStatusBar* GetStatusBarMain() { return m_statusBarMain; }
+    ControlEditorBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Control editor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxDEFAULT_FRAME_STYLE);
     virtual ~ControlEditorBase();
 };
 

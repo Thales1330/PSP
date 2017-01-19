@@ -745,18 +745,8 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
                 // Tests - Ctrl + Shift + L
                 if(event.ControlDown() && event.ShiftDown()) {
-                    int numChild = 0;
-                    int numParent = 0;
-                    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-                        Element* element = *it;
-                        if(element->Contains(m_camera->GetMousePosition())) {
-                            for(int i = 0; i < (int)element->GetParentList().size(); i++) {
-                                if(element->GetParentList()[i]) numParent++;
-                            }
-                            numChild = element->GetChildList().size();
-                        }
-                    }
-                    wxMessageBox(wxString::Format("%d parents\n%d childs", numParent, numChild));
+                    ControlEditor* ce = new ControlEditor(this);
+                    ce->Show();
                 }
             } break;
             case 'T': // Insert a transformer.
