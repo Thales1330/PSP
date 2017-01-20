@@ -7,10 +7,23 @@
 #include <wx/dcscreen.h>
 #include <wx/graphics.h>
 
+enum ControlElementButtonID
+{
+    ID_IO = 0,
+    ID_TF,
+    ID_SUM,
+    ID_CONST,
+    ID_LIMITER,
+    ID_GAIN,
+    ID_MULT,
+    ID_SAT,
+    ID_RATELIM
+};
+
 class ControlElementButton : public wxWindow
 {
 public:
-    ControlElementButton(wxWindow* parent, wxString label, wxImage image);
+    ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id = wxID_ANY);
     ~ControlElementButton();
 
 protected:
@@ -40,6 +53,8 @@ class ControlEditor : public ControlEditorBase
 public:
     ControlEditor(wxWindow* parent);
     virtual ~ControlEditor();
+    
+    virtual void AddElement(ControlElementButtonID id);
 
 protected:
     void BuildControlElementPanel();

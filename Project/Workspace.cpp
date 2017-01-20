@@ -355,8 +355,7 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
                     if(element->GetContextMenu(menu)) {
                         m_timer->Stop();
                         menu.SetClientData(element);
-                        menu.Connect(
-                            wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Workspace::OnPopupClick), NULL, this);
+                        menu.Bind(wxEVT_COMMAND_MENU_SELECTED, &Workspace::OnPopupClick, this);
                         PopupMenu(&menu);
                         redraw = true;
 

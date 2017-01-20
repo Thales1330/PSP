@@ -111,8 +111,7 @@ void MainFrame::CreateAddElementsMenu()
     m_addElementsMenu->Append(capacitorElement);
     m_addElementsMenu->Append(inductorElement);
 
-    m_addElementsMenu->Connect(
-        wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
+    m_addElementsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnAddElementsClick, this);
 }
 
 void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)

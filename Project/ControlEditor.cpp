@@ -1,11 +1,6 @@
 #include "ControlEditor.h"
 
-ControlEditor::ControlEditor(wxWindow* parent)
-    : ControlEditorBase(parent)
-{
-    BuildControlElementPanel();
-}
-
+ControlEditor::ControlEditor(wxWindow* parent) : ControlEditorBase(parent) { BuildControlElementPanel(); }
 ControlEditor::~ControlEditor()
 {
     // m_tfButton->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditor::LeftClickDown), m_tfButton, this);
@@ -17,57 +12,97 @@ void ControlEditor::BuildControlElementPanel()
     wxWrapSizer* wrapSizer = new wxWrapSizer();
     m_panelControlElements->SetSizer(wrapSizer);
 
-    ControlElementButton* ioButton = new ControlElementButton(
-        m_panelControlElements, _("Input/output"), wxImage("..\\data\\images\\control\\io.png"));
+    ControlElementButton* ioButton = new ControlElementButton(m_panelControlElements, _("In/Out"),
+                                                              wxImage("..\\data\\images\\control\\io.png"), ID_IO);
     wrapSizer->Add(ioButton, 0, wxALL, 5);
+    ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* tfButton = new ControlElementButton(
-        m_panelControlElements, _("Transfer function"), wxImage("..\\data\\images\\control\\transferFunc.png"));
+        m_panelControlElements, _("Transfer fcn"), wxImage("..\\data\\images\\control\\transferFunc.png"), ID_TF);
     wrapSizer->Add(tfButton, 0, wxALL, 5);
+    tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* sumButton =
-        new ControlElementButton(m_panelControlElements, _("Sum"), wxImage("..\\data\\images\\control\\sum.png"));
+    ControlElementButton* sumButton = new ControlElementButton(m_panelControlElements, _("Sum"),
+                                                               wxImage("..\\data\\images\\control\\sum.png"), ID_SUM);
     wrapSizer->Add(sumButton, 0, wxALL, 5);
+    sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* valueButton =
-        new ControlElementButton(m_panelControlElements, _("Value"), wxImage("..\\data\\images\\control\\value.png"));
-    wrapSizer->Add(valueButton, 0, wxALL, 5);
+    ControlElementButton* constButton = new ControlElementButton(
+        m_panelControlElements, _("Constant"), wxImage("..\\data\\images\\control\\value.png"), ID_CONST);
+    wrapSizer->Add(constButton, 0, wxALL, 5);
+    constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* limButton = new ControlElementButton(
-        m_panelControlElements, _("Limiter"), wxImage("..\\data\\images\\control\\limiter.png"));
+        m_panelControlElements, _("Limiter"), wxImage("..\\data\\images\\control\\limiter.png"), ID_LIMITER);
     wrapSizer->Add(limButton, 0, wxALL, 5);
+    limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* gainButton =
-        new ControlElementButton(m_panelControlElements, _("Gain"), wxImage("..\\data\\images\\control\\gain.png"));
+    ControlElementButton* gainButton = new ControlElementButton(
+        m_panelControlElements, _("Gain"), wxImage("..\\data\\images\\control\\gain.png"), ID_GAIN);
     wrapSizer->Add(gainButton, 0, wxALL, 5);
+    gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* multButton = new ControlElementButton(
-        m_panelControlElements, _("Multiplier"), wxImage("..\\data\\images\\control\\mult.png"));
+        m_panelControlElements, _("Multiplier"), wxImage("..\\data\\images\\control\\mult.png"), ID_MULT);
     wrapSizer->Add(multButton, 0, wxALL, 5);
+    multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* satButton = new ControlElementButton(
-        m_panelControlElements, _("Saturation"), wxImage("..\\data\\images\\control\\sat.png"));
+    ControlElementButton* satButton = new ControlElementButton(m_panelControlElements, _("Saturation"),
+                                                               wxImage("..\\data\\images\\control\\sat.png"), ID_SAT);
     wrapSizer->Add(satButton, 0, wxALL, 5);
+    satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* rateLimButton = new ControlElementButton(
-        m_panelControlElements, _("Rate limiter"), wxImage("..\\data\\images\\control\\rateLimiter.png"));
+        m_panelControlElements, _("Rate limiter"), wxImage("..\\data\\images\\control\\rateLimiter.png"), ID_RATELIM);
     wrapSizer->Add(rateLimButton, 0, wxALL, 5);
+    rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }
 
 void ControlEditor::LeftClickDown(wxMouseEvent& event)
 {
-
-    /*wxBitmapButton* button = dynamic_cast<wxBitmapButton*>(event.GetEventObject());
-    if(button) {
-        button->SetOwnBackgroundColour(wxColour(wxT("rgb(0,0,255)")));
-    }*/
+    AddElement(static_cast<ControlElementButtonID>(event.GetId()));
     event.Skip();
 }
 
-ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image)
-    : wxWindow(parent, wxID_ANY)
+void ControlEditor::AddElement(ControlElementButtonID id)
 {
-    m_font = wxFont(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    switch(id) {
+        case ID_IO: {
+            wxLogMessage("io");
+        } break;
+        case ID_TF: {
+            wxLogMessage("tf");
+        } break;
+        case ID_SUM: {
+            wxLogMessage("sum");
+        } break;
+        case ID_CONST: {
+            wxLogMessage("const");
+        } break;
+        case ID_LIMITER: {
+            wxLogMessage("limiter");
+        } break;
+        case ID_GAIN: {
+            wxLogMessage("gain");
+        } break;
+        case ID_MULT: {
+            wxLogMessage("mult");
+        } break;
+        case ID_SAT: {
+            wxLogMessage("sat");
+        } break;
+        case ID_RATELIM: {
+            wxLogMessage("rateLim");
+        } break;
+    }
+}
+
+ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
+    : wxWindow(parent, id)
+{
+    SetBackgroundColour(*wxWHITE);
+    //m_font = wxFont(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
     m_label = label;
     m_image = image;
     m_imageSize = wxSize(image.GetWidth(), image.GetHeight());
@@ -90,38 +125,34 @@ ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxI
     }
     m_buttonSize =
         wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);
-    SetMinSize(m_buttonSize);
+    SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));
 
-    // Conncet events.
-    Connect(wxEVT_PAINT, wxPaintEventHandler(ControlElementButton::OnPaint), NULL, this);
-    Connect(wxEVT_ENTER_WINDOW, wxMouseEventHandler(ControlElementButton::OnMouseEnter), NULL, this);
-    Connect(wxEVT_LEAVE_WINDOW, wxMouseEventHandler(ControlElementButton::OnMouseLeave), NULL, this);
-    Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlElementButton::OnLeftClickDown), NULL, this);
-    Connect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlElementButton::OnLeftClickUp), NULL, this);
+    // Events.
+    Bind(wxEVT_PAINT, &ControlElementButton::OnPaint, this);
+    Bind(wxEVT_ENTER_WINDOW, &ControlElementButton::OnMouseEnter, this);
+    Bind(wxEVT_LEAVE_WINDOW, &ControlElementButton::OnMouseLeave, this);
+    Bind(wxEVT_LEFT_DOWN, &ControlElementButton::OnLeftClickDown, this);
+    Bind(wxEVT_LEFT_UP, &ControlElementButton::OnLeftClickUp, this);
 }
 
 ControlElementButton::~ControlElementButton() {}
-
 void ControlElementButton::OnPaint(wxPaintEvent& event)
 {
     wxPaintDC dc(this);
     wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
     if(gc) {
-        gc->SetPen(*wxWHITE_PEN);
-        gc->SetBrush(*wxWHITE_BRUSH);
-        gc->DrawRectangle(0, 0, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
-        gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),
-            m_imageSize.GetHeight());
         if(m_mouseAbove) {
             if(m_selected) {
-                gc->SetPen(wxPen(wxColour(0, 125, 255, 255), m_borderSize));
+                gc->SetPen(wxPen(wxColour(0, 125, 255, 255), m_borderSize - 1));
                 gc->SetBrush(wxBrush(wxColour(0, 125, 255, 100)));
             } else {
                 gc->SetPen(*wxTRANSPARENT_PEN);
                 gc->SetBrush(wxBrush(wxColour(0, 125, 255, 70)));
             }
-            gc->DrawRectangle(0, 0, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
+            gc->DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
         }
+        gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),
+                       m_imageSize.GetHeight());
         gc->SetFont(m_font, *wxBLACK);
         gc->DrawText(m_label, m_labelPosition.x, m_labelPosition.y);
         delete gc;

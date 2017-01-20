@@ -1,119 +1,302 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PSP-UFU pt_BR 0.0.1\n"
-"POT-Creation-Date: 2016-09-23 17:03-0300\n"
-"PO-Revision-Date: 2016-09-23 17:11-0300\n"
+"POT-Creation-Date: 2017-01-20 14:38-0200\n"
+"PO-Revision-Date: 2017-01-20 14:39-0200\n"
 "Last-Translator: \n"
 "Language-Team: Thales Lima Oliveira <thaleslima.ufu@gmail.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
-"X-Poedit-Basepath: ../../../..\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Bus.cpp:173
+#: Bus.cpp:175
 msgid "Edit bus"
 msgstr ""
 
-#: BusForm.cpp:92
-msgid "Value entered incorrectly in the field \"Nominal voltage\"."
+#: Bus.cpp:204 Transformer.cpp:405 Transformer.cpp:416
+msgid " V"
 msgstr ""
 
-#: BusForm.cpp:98
+#: Bus.cpp:204 Transformer.cpp:408 Transformer.cpp:419
+msgid " kV"
+msgstr ""
+
+#: Bus.cpp:206
+msgid ""
+"\n"
+"V = "
+msgstr ""
+
+#: Bus.cpp:206 Bus.cpp:212 Bus.cpp:213 Bus.cpp:214 Bus.cpp:216 Bus.cpp:217
+#: Bus.cpp:218 Bus.cpp:221 Capacitor.cpp:190 IndMotor.cpp:99 IndMotor.cpp:118
+#: Inductor.cpp:184 Line.cpp:530 Line.cpp:532 Line.cpp:534 Line.cpp:536
+#: Load.cpp:205 Load.cpp:222 SyncGenerator.cpp:158 SyncGenerator.cpp:177
+#: SyncMotor.cpp:124 SyncMotor.cpp:143 Transformer.cpp:434 Transformer.cpp:436
+#: Transformer.cpp:438 Transformer.cpp:440
+msgid " p.u."
+msgstr ""
+
+#: Bus.cpp:211
+msgid ""
+"\n"
+"\n"
+"Fault info:"
+msgstr ""
+
+#: Bus.cpp:212
+msgid ""
+"\n"
+"Va = "
+msgstr ""
+
+#: Bus.cpp:213
+msgid ""
+"\n"
+"Vb = "
+msgstr ""
+
+#: Bus.cpp:214
+msgid ""
+"\n"
+"Vc = "
+msgstr ""
+
+#: Bus.cpp:216
+msgid ""
+"\n"
+"Ia = "
+msgstr ""
+
+#: Bus.cpp:217
+msgid ""
+"\n"
+"Ib = "
+msgstr ""
+
+#: Bus.cpp:218
+msgid ""
+"\n"
+"Ic = "
+msgstr ""
+
+#: Bus.cpp:221
+msgid ""
+"\n"
+"\n"
+"Ssc = "
+msgstr ""
+
+#: BusForm.cpp:77
+msgid "Value entered incorrectly in the field \"Rated voltage\"."
+msgstr ""
+
+#: BusForm.cpp:83
 msgid "Value entered incorrectly in the field \"Controlled voltage\"."
 msgstr ""
 
-#: BusForm.cpp:149
+#: BusForm.cpp:118
 msgid "Value entered incorrectly in the field \"Fault resistance\"."
 msgstr ""
 
-#: BusForm.cpp:153
+#: BusForm.cpp:122
 msgid "Value entered incorrectly in the field \"Fault reactance\"."
 msgstr ""
 
-#: BusForm.cpp:160
+#: BusForm.cpp:129
 msgid "Value entered incorrectly in the field \"Time\"."
 msgstr ""
 
-#: BusForm.cpp:164
+#: BusForm.cpp:133
 msgid "Value entered incorrectly in the field \"Fault lenght\"."
 msgstr ""
 
-#: BusForm.cpp:168
+#: BusForm.cpp:137
 msgid ""
 "Value entered incorrectly in the field \"Fault resistence (stability)\"."
 msgstr ""
 
-#: BusForm.cpp:172
+#: BusForm.cpp:141
 msgid "Value entered incorrectly in the field \"Fault reactance (stability)\"."
 msgstr ""
 
-#: BusForm.cpp:233
+#: BusForm.cpp:200
 msgid "Lines AB"
 msgstr ""
 
-#: BusForm.cpp:234
+#: BusForm.cpp:201
 msgid "Lines BC"
 msgstr ""
 
-#: BusForm.cpp:235
+#: BusForm.cpp:202
 msgid "Lines CA"
 msgstr ""
 
-#: BusForm.cpp:241
+#: BusForm.cpp:207
 msgid "Line A"
 msgstr ""
 
-#: BusForm.cpp:242
+#: BusForm.cpp:208
 msgid "Line B"
 msgstr ""
 
-#: BusForm.cpp:243
+#: BusForm.cpp:209
 msgid "Line C"
 msgstr ""
 
-#: BusForm.cpp:253
+#: BusForm.cpp:216 TextForm.cpp:958
 msgid "V"
 msgstr ""
 
-#: BusForm.cpp:258
+#: BusForm.cpp:219 TextForm.cpp:959
 msgid "kV"
 msgstr ""
 
-#: Capacitor.cpp:105
+#: Capacitor.cpp:116
 msgid "Edit Capacitor"
 msgstr ""
 
-#: Element.cpp:298 MainFrameBase.cpp:150
-msgid "Rotate clockwise"
+#: Capacitor.cpp:135
+msgid "Capacitor"
 msgstr ""
 
-#: Element.cpp:302
-msgid "Rotate counter-clockwise"
+#: Capacitor.cpp:187 IndMotor.cpp:115 Inductor.cpp:181 Load.cpp:219
+#: SyncGenerator.cpp:174 SyncMotor.cpp:140
+msgid ""
+"\n"
+"Q = "
 msgstr ""
 
-#: Element.cpp:306 Line.cpp:270 MainFrameBase.cpp:146
+#: Capacitor.cpp:193 IndMotor.cpp:121 Inductor.cpp:187 Load.cpp:225
+#: SyncGenerator.cpp:180 SyncMotor.cpp:146
+msgid " VAr"
+msgstr ""
+
+#: Capacitor.cpp:196 IndMotor.cpp:124 Inductor.cpp:190 Load.cpp:228
+#: SyncGenerator.cpp:183 SyncMotor.cpp:149
+msgid " kVAr"
+msgstr ""
+
+#: Capacitor.cpp:199 IndMotor.cpp:127 Inductor.cpp:193 Load.cpp:231
+#: SyncGenerator.cpp:186 SyncMotor.cpp:152
+msgid " MVAr"
+msgstr ""
+
+#: ControlEditor.cpp:15
+msgid "Input/output"
+msgstr ""
+
+#: ControlEditor.cpp:19
+msgid "Transfer function"
+msgstr "Função transferência"
+
+#: ControlEditor.cpp:24
+msgid "Sum"
+msgstr ""
+
+#: ControlEditor.cpp:28
+msgid "Value"
+msgstr ""
+
+#: ControlEditor.cpp:31
+msgid "Limiter"
+msgstr ""
+
+#: ControlEditor.cpp:36
+msgid "Gain"
+msgstr ""
+
+#: ControlEditor.cpp:39
+msgid "Multiplier"
+msgstr ""
+
+#: ControlEditor.cpp:43
+msgid "Saturation"
+msgstr ""
+
+#: ControlEditor.cpp:48
+msgid "Rate limiter"
+msgstr ""
+
+#: ControlEditorBase.cpp:29 MainFrameBase.cpp:82
+msgid "New"
+msgstr "Novo"
+
+#: ControlEditorBase.cpp:31
+msgid "Import"
+msgstr ""
+
+#: ControlEditorBase.cpp:33
+msgid "Export"
+msgstr ""
+
+#: ControlEditorBase.cpp:37 MainFrameBase.cpp:123
+msgid "Copy"
+msgstr "Copiar"
+
+#: ControlEditorBase.cpp:39 MainFrameBase.cpp:125
+msgid "Paste"
+msgstr "Colar"
+
+#: ControlEditorBase.cpp:41 MainFrameBase.cpp:127
+msgid "Undo"
+msgstr "Desfazer"
+
+#: ControlEditorBase.cpp:43 MainFrameBase.cpp:129
+msgid "Redo"
+msgstr "Refazer"
+
+#: ControlEditorBase.cpp:47 MainFrameBase.cpp:140
+msgid "Drag"
+msgstr "Arrastar"
+
+#: ControlEditorBase.cpp:49 MainFrameBase.cpp:142
+msgid "Move"
+msgstr "Mover"
+
+#: ControlEditorBase.cpp:51 Element.cpp:234 Line.cpp:317 MainFrameBase.cpp:144
 msgid "Delete"
 msgstr "Excluir"
 
-#: Element.cpp:345 Element.cpp:359
+#: ControlEditorBase.cpp:62
+msgid "Control elements"
+msgstr ""
+
+#: Element.cpp:226 MainFrameBase.cpp:148
+msgid "Rotate clockwise"
+msgstr ""
+
+#: Element.cpp:230
+msgid "Rotate counter-clockwise"
+msgstr ""
+
+#: Element.cpp:273 Element.cpp:287 Line.cpp:149 Line.cpp:410 MainFrame.cpp:232
+#: TextForm.cpp:1207 Workspace.cpp:1147 Workspace.cpp:1202 Workspace.cpp:1310
+#: Workspace.cpp:1414 Workspace.cpp:1436
 msgid "Error"
 msgstr ""
 
-#: ElementForm.cpp:35 ElementForm.cpp:404
+#: ElementForm.cpp:35 ElementForm.cpp:404 ElementForm.cpp:1302
+#: ElementForm.cpp:1615 ElementForm.cpp:2015 ElementForm.cpp:2184
+#: ElementForm.cpp:2441 ElementForm.cpp:2598
 msgid "General"
 msgstr ""
 
-#: ElementForm.cpp:40 ElementForm.cpp:409
+#: ElementForm.cpp:40 ElementForm.cpp:409 ElementForm.cpp:1307
+#: ElementForm.cpp:1620 ElementForm.cpp:2020 ElementForm.cpp:2189
+#: ElementForm.cpp:2446 TextForm.cpp:854 TextForm.cpp:865 TextForm.cpp:874
+#: TextForm.cpp:885 TextForm.cpp:896 TextForm.cpp:904 TextForm.cpp:911
+#: TextForm.cpp:918 TextForm.cpp:926
 msgid "Name"
 msgstr "Nome"
 
-#: ElementForm.cpp:60
-msgid "Nominal voltage"
+#: ElementForm.cpp:60 ElementForm.cpp:1327 ElementForm.cpp:1640
+msgid "Rated voltage"
 msgstr ""
 
 #: ElementForm.cpp:87
@@ -124,7 +307,8 @@ msgstr ""
 msgid "Slack Bus"
 msgstr ""
 
-#: ElementForm.cpp:117 ElementForm.cpp:579 MainFrameBase.cpp:194
+#: ElementForm.cpp:117 ElementForm.cpp:579 ElementForm.cpp:1479
+#: ElementForm.cpp:1826 MainFrameBase.cpp:192
 msgid "Fault"
 msgstr "Falta"
 
@@ -148,7 +332,8 @@ msgstr ""
 #: ElementForm.cpp:320 ElementForm.cpp:852 ElementForm.cpp:909
 #: ElementForm.cpp:932 ElementForm.cpp:955 ElementForm.cpp:986
 #: ElementForm.cpp:1009 ElementForm.cpp:1040 ElementForm.cpp:1063
-#: ElementForm.cpp:1140 ElementForm.cpp:1163
+#: ElementForm.cpp:1140 ElementForm.cpp:1163 TextForm.cpp:957 TextForm.cpp:967
+#: TextForm.cpp:972 TextForm.cpp:980 TextForm.cpp:988
 msgid "p.u."
 msgstr ""
 
@@ -156,7 +341,9 @@ msgstr ""
 msgid "Fault reactance (Xl)"
 msgstr ""
 
-#: ElementForm.cpp:213 ElementForm.cpp:725
+#: ElementForm.cpp:213 ElementForm.cpp:725 ElementForm.cpp:1541
+#: ElementForm.cpp:1941 ElementForm.cpp:2110 ElementForm.cpp:2238
+#: ElementForm.cpp:2524
 msgid "Stability"
 msgstr "Estabilidade"
 
@@ -179,22 +366,31 @@ msgid "Fault length"
 msgstr ""
 
 #: ElementForm.cpp:328 ElementForm.cpp:731 ElementForm.cpp:1235
+#: ElementForm.cpp:1547 ElementForm.cpp:1947 ElementForm.cpp:2116
+#: ElementForm.cpp:2244 ElementForm.cpp:2372 ElementForm.cpp:2530
+#: ElementForm.cpp:2728
 msgid "OK"
 msgstr ""
 
 #: ElementForm.cpp:332 ElementForm.cpp:735 ElementForm.cpp:1239
+#: ElementForm.cpp:1551 ElementForm.cpp:1951 ElementForm.cpp:2120
+#: ElementForm.cpp:2248 ElementForm.cpp:2376 ElementForm.cpp:2534
+#: ElementForm.cpp:2732
 msgid "Cancel"
 msgstr ""
 
-#: ElementForm.cpp:429
-msgid "Nominal power"
+#: ElementForm.cpp:429 ElementForm.cpp:1342 ElementForm.cpp:1671
+msgid "Rated power"
 msgstr ""
 
-#: ElementForm.cpp:459
+#: ElementForm.cpp:459 ElementForm.cpp:2040 ElementForm.cpp:2466
+#: TextForm.cpp:866 TextForm.cpp:897 TextForm.cpp:919 TextForm.cpp:927
 msgid "Active power"
 msgstr ""
 
-#: ElementForm.cpp:488
+#: ElementForm.cpp:488 ElementForm.cpp:2069 ElementForm.cpp:2209
+#: ElementForm.cpp:2495 TextForm.cpp:867 TextForm.cpp:898 TextForm.cpp:905
+#: TextForm.cpp:912 TextForm.cpp:920 TextForm.cpp:928
 msgid "Reactive power"
 msgstr ""
 
@@ -207,7 +403,7 @@ msgid "Min reactive power"
 msgstr ""
 
 #: ElementForm.cpp:573
-msgid "Use machine nominal power as base"
+msgid "Use machine rated power as base"
 msgstr ""
 
 #: ElementForm.cpp:584
@@ -303,7 +499,7 @@ msgid "Quadrature-axis reactance (Xq)"
 msgstr ""
 
 #: ElementForm.cpp:1013
-msgid "Transitory"
+msgid "Transient"
 msgstr ""
 
 #: ElementForm.cpp:1025
@@ -323,7 +519,7 @@ msgid "Quadrature-axis time constant (T'q0)"
 msgstr ""
 
 #: ElementForm.cpp:1113
-msgid "Subtransitory"
+msgid "Sub-transient"
 msgstr ""
 
 #: ElementForm.cpp:1125
@@ -342,275 +538,564 @@ msgstr ""
 msgid "Quadrature-axis time constant (T''q0)"
 msgstr ""
 
-#: ElementForm.cpp:1229
+#: ElementForm.cpp:1229 ElementForm.h:668
 msgid "Switching"
 msgstr ""
 
-#: GeneratorForm.cpp:177
-msgid "Value entered incorrectly in the field \"Nominal power\"."
+#: ElementForm.cpp:1331
+msgid "138 kV"
 msgstr ""
 
-#: GeneratorForm.cpp:193
-msgid "Value entered incorrectly in the field \"Active power\"."
+#: ElementForm.cpp:1370 ElementForm.cpp:1701
+msgid "Resistance (R)"
 msgstr ""
 
-#: GeneratorForm.cpp:212
-msgid "Value entered incorrectly in the field \"Reactive power\"."
+#: ElementForm.cpp:1398 ElementForm.cpp:1728
+msgid "Indutive reactance (XL)"
 msgstr ""
 
-#: GeneratorForm.cpp:233
-msgid "Value entered incorrectly in the field \"Max reactive power\"."
+#: ElementForm.cpp:1426
+msgid "Capacitive susceptance (B)"
 msgstr ""
 
-#: GeneratorForm.cpp:255
-msgid "Value entered incorrectly in the field \"Min reactive power\"."
+#: ElementForm.cpp:1454
+msgid "Line size"
 msgstr ""
 
-#: GeneratorForm.cpp:277
-msgid "Value entered incorrectly in the field \"Positive resistance\"."
+#: ElementForm.cpp:1469
+msgid "km"
 msgstr ""
 
-#: GeneratorForm.cpp:281
-msgid "Value entered incorrectly in the field \"Positive reactance\"."
+#: ElementForm.cpp:1473
+msgid "Use line rated power as base"
 msgstr ""
 
-#: GeneratorForm.cpp:285
-msgid "Value entered incorrectly in the field \"Negative resistance\"."
+#: ElementForm.cpp:1484 ElementForm.cpp:1831
+msgid "Zero-sequence impedances (p.u.)"
 msgstr ""
 
-#: GeneratorForm.cpp:289
-msgid "Value entered incorrectly in the field \"Negative reactance\"."
+#: ElementForm.cpp:1496 ElementForm.cpp:1843
+msgid "Resistance (R0)"
 msgstr ""
 
-#: GeneratorForm.cpp:293
-msgid "Value entered incorrectly in the field \"Zero resistance\"."
+#: ElementForm.cpp:1511 ElementForm.cpp:1858
+msgid "Indutive reactance (X0)"
 msgstr ""
 
-#: GeneratorForm.cpp:297
-msgid "Value entered incorrectly in the field \"Zero reactance\"."
+#: ElementForm.cpp:1526
+msgid "Capacitive susceptance (B0)"
 msgstr ""
 
-#: GeneratorForm.cpp:301
-msgid "Value entered incorrectly in the field \"Ground resistance\"."
+#: ElementForm.cpp:1644
+msgid "138 kV / 138 kV"
 msgstr ""
 
-#: GeneratorForm.cpp:305
-msgid "Value entered incorrectly in the field \"Ground reactance\"."
+#: ElementForm.cpp:1655
+msgid "Base voltage"
 msgstr ""
 
-#: GeneratorStabForm.cpp:57
+#: ElementForm.cpp:1759
+msgid "Connection"
+msgstr ""
+
+#: ElementForm.cpp:1786
+msgid "Turns ratio"
+msgstr ""
+
+#: ElementForm.cpp:1801
+msgid "Phase shift"
+msgstr ""
+
+#: ElementForm.cpp:1816
+msgid "degrees"
+msgstr ""
+
+#: ElementForm.cpp:1820
+msgid "Use transformer rated power as base"
+msgstr ""
+
+#: ElementForm.cpp:1869
+msgid "Ground impedances (p.u.)"
+msgstr ""
+
+#: ElementForm.cpp:1881
+msgid "Primary resistance"
+msgstr ""
+
+#: ElementForm.cpp:1896
+msgid "Primary reactance"
+msgstr ""
+
+#: ElementForm.cpp:1911
+msgid "Secondary resistance"
+msgstr ""
+
+#: ElementForm.cpp:1926
+msgid "Secondary reactance"
+msgstr ""
+
+#: ElementForm.cpp:2094
+msgid "Load type"
+msgstr ""
+
+#: ElementForm.cpp:2322
+msgid "Switching properties"
+msgstr ""
+
+#: ElementForm.cpp:2327 SwitchingForm.cpp:23 SwitchingForm.cpp:36
+#: SwitchingForm.cpp:52
+msgid "Insert"
+msgstr ""
+
+#: ElementForm.cpp:2328 ElementForm.cpp:2344 SwitchingForm.cpp:23
+#: SwitchingForm.cpp:36
+msgid "Remove"
+msgstr ""
+
+#: ElementForm.cpp:2329 SwitchingForm.cpp:6 SwitchingForm.cpp:15
+msgid "Type"
+msgstr ""
+
+#: ElementForm.cpp:2332 SwitchingForm.cpp:7 SwitchingForm.cpp:16
+msgid "Time (s)"
+msgstr ""
+
+#: ElementForm.cpp:2340
+msgid "Add"
+msgstr ""
+
+#: ElementForm.cpp:2348
+msgid "Up"
+msgstr ""
+
+#: ElementForm.cpp:2352
+msgid "Down"
+msgstr ""
+
+#: ElementForm.cpp:2360
+msgid "Switching list"
+msgstr ""
+
+#: ElementForm.cpp:2611
+msgid "Element"
+msgstr ""
+
+#: ElementForm.cpp:2633
+msgid "Element name"
+msgstr ""
+
+#: ElementForm.cpp:2646
+msgid "Text type"
+msgstr ""
+
+#: ElementForm.cpp:2659
+msgid "From bus"
+msgstr ""
+
+#: ElementForm.cpp:2672
+msgid "To bus"
+msgstr ""
+
+#: ElementForm.cpp:2685
+msgid "Unit"
+msgstr ""
+
+#: ElementForm.cpp:2698
+msgid "Decimal places:"
+msgstr ""
+
+#: ElementForm.cpp:2711
+msgid "Preview:"
+msgstr ""
+
+#: Fault.cpp:16
+msgid "There is no buses in the system."
+msgstr ""
+
+#: Fault.cpp:30 Fault.cpp:383
+msgid "Fail to invert the positive sequence admittance matrix."
+msgstr ""
+
+#: Fault.cpp:34
+msgid "Fail to invert the negative sequence admittance matrix."
+msgstr ""
+
+#: Fault.cpp:38
+msgid "Fail to invert the zero sequence admittance matrix."
+msgstr ""
+
+#: Fault.cpp:63
+msgid "There is no fault in the system."
+msgstr ""
+
+#: GeneratorStabForm.cpp:54
+msgid "Synchronous generator: Switching"
+msgstr ""
+
+#: GeneratorStabForm.cpp:67
 msgid "Value entered incorrectly in the field \"Inertia\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:61
+#: GeneratorStabForm.cpp:71
 msgid "Value entered incorrectly in the field \"Damping factor\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:68
+#: GeneratorStabForm.cpp:78
 msgid "Value entered incorrectly in the field \"Armature resistance\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:72
+#: GeneratorStabForm.cpp:82
 msgid "Value entered incorrectly in the field \"Potier reactance\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:76
+#: GeneratorStabForm.cpp:86
 msgid "Value entered incorrectly in the field \"Saturation factor\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:81
+#: GeneratorStabForm.cpp:91
 msgid ""
 "Value entered incorrectly in the field \"Synchronous direct-axis reactance\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:86
+#: GeneratorStabForm.cpp:96
 msgid ""
 "Value entered incorrectly in the field \"Synchronous quadrature-axis "
 "reactance\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:91
+#: GeneratorStabForm.cpp:101
 msgid ""
 "Value entered incorrectly in the field \"Transitory direct-axis reactance\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:96
+#: GeneratorStabForm.cpp:106
 msgid ""
 "Value entered incorrectly in the field \"Transitory quadrature-axis reactance"
 "\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:101
+#: GeneratorStabForm.cpp:111
 msgid ""
 "Value entered incorrectly in the field \"Transitory direct-axis time constant"
 "\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:106
+#: GeneratorStabForm.cpp:116
 msgid ""
 "Value entered incorrectly in the field \"Transitory quadrature-axis time "
 "constant\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:111
+#: GeneratorStabForm.cpp:121
 msgid ""
 "Value entered incorrectly in the field \"Subtransitory direct-axis reactance"
 "\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:116
+#: GeneratorStabForm.cpp:126
 msgid ""
 "Value entered incorrectly in the field \"Subtransitory quadrature-axis "
 "reactance\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:121
+#: GeneratorStabForm.cpp:131
 msgid ""
 "Value entered incorrectly in the field \"Subtransitory direct-axis time "
 "constant\"."
 msgstr ""
 
-#: GeneratorStabForm.cpp:126
+#: GeneratorStabForm.cpp:136
 msgid ""
 "Value entered incorrectly in the field \"Subtransitory quadrature-axis time "
 "constant\"."
 msgstr ""
 
-#: IndMotor.cpp:24
+#: IndMotor.cpp:27
 msgid "Edit induction motor"
 msgstr ""
 
-#: Inductor.cpp:97
+#: IndMotor.cpp:96 Load.cpp:202 SyncGenerator.cpp:155 SyncMotor.cpp:121
+msgid ""
+"\n"
+"P = "
+msgstr ""
+
+#: IndMotor.cpp:102 Load.cpp:208 SyncGenerator.cpp:161 SyncMotor.cpp:127
+msgid " W"
+msgstr ""
+
+#: IndMotor.cpp:105 Load.cpp:211 SyncGenerator.cpp:164 SyncMotor.cpp:130
+msgid " kW"
+msgstr ""
+
+#: IndMotor.cpp:108 Load.cpp:214 SyncGenerator.cpp:167 SyncMotor.cpp:133
+msgid " MW"
+msgstr ""
+
+#: IndMotorForm.cpp:68 LoadForm.cpp:83 SyncMachineForm.cpp:306
+#: SyncMachineForm.cpp:440
+msgid "Value entered incorrectly in the field \"Active power\"."
+msgstr ""
+
+#: IndMotorForm.cpp:86 LoadForm.cpp:101 ReactiveShuntElementForm.cpp:95
+#: ReactiveShuntElementForm.cpp:119 SyncMachineForm.cpp:324
+#: SyncMachineForm.cpp:458
+msgid "Value entered incorrectly in the field \"Reactive power\"."
+msgstr ""
+
+#: Inductor.cpp:114
 msgid "Edit Inductor"
 msgstr ""
 
-#: Line.cpp:262
+#: Inductor.cpp:129
+msgid "Inductor"
+msgstr ""
+
+#: Line.cpp:147 Line.cpp:408
+msgid ""
+"Unable to connect two buses with different nominal voltages.\n"
+"Use a transformer or edit the bus properties."
+msgstr ""
+
+#: Line.cpp:307
 msgid "Edit line"
 msgstr ""
 
-#: Line.cpp:264
+#: Line.cpp:309
 msgid "Insert node"
 msgstr ""
 
-#: Line.cpp:268
+#: Line.cpp:313
 msgid "Remove node"
 msgstr ""
 
-#: Load.cpp:103
+#: Line.cpp:529 Line.cpp:533 Transformer.cpp:433 Transformer.cpp:437
+msgid ""
+"\n"
+"P"
+msgstr ""
+
+#: Line.cpp:531 Line.cpp:535 Transformer.cpp:435 Transformer.cpp:439
+msgid ""
+"\n"
+"Q"
+msgstr ""
+
+#: LineForm.cpp:122
+msgid "Line: Switching"
+msgstr ""
+
+#: LineForm.cpp:142 SyncMachineForm.cpp:291 SyncMachineForm.cpp:425
+#: TransformerForm.cpp:126
+msgid "Value entered incorrectly in the field \"Nominal power\"."
+msgstr ""
+
+#: LineForm.cpp:157 TransformerForm.cpp:141
+msgid "Value entered incorrectly in the field \"Resistance\"."
+msgstr ""
+
+#: LineForm.cpp:172
+msgid "Value entered incorrectly in the field \"Indutive Reactance\"."
+msgstr ""
+
+#: LineForm.cpp:187
+msgid "Value entered incorrectly in the field \"Capacitive Susceptance\"."
+msgstr ""
+
+#: LineForm.cpp:202
+msgid "Value entered incorrectly in the field \"Line size\"."
+msgstr ""
+
+#: LineForm.cpp:208
+msgid "Value entered incorrectly in the field \"Zero-sequence resistance\"."
+msgstr ""
+
+#: LineForm.cpp:211
+msgid ""
+"Value entered incorrectly in the field \"Zero-sequence indutive reactance\"."
+msgstr ""
+
+#: LineForm.cpp:214
+msgid ""
+"Value entered incorrectly in the field \"Zero-sequence capacitive susceptance"
+"\"."
+msgstr ""
+
+#: Load.cpp:123
 msgid "Edit Load"
 msgstr ""
 
-#: MainFrame.cpp:80
+#: LoadForm.cpp:70
+msgid "Load: Switching"
+msgstr ""
+
+#: MainFrame.cpp:85
 msgid "&Bus\tB"
 msgstr "&Barramento\tB"
 
-#: MainFrame.cpp:80
+#: MainFrame.cpp:85
 msgid "Adds a bus at the circuit"
 msgstr "Adiciona um barramento no circuito"
 
-#: MainFrame.cpp:83
+#: MainFrame.cpp:88
 msgid "&Line\tL"
 msgstr "&Linha\tL"
 
-#: MainFrame.cpp:83
+#: MainFrame.cpp:88
 msgid "Adds a power line at the circuit"
 msgstr "Adiciona uma linha no circuito"
 
-#: MainFrame.cpp:84
+#: MainFrame.cpp:90
 msgid "&Transformer\tT"
 msgstr "&Transformador\tT"
 
-#: MainFrame.cpp:85
+#: MainFrame.cpp:90
 msgid "Adds a transformer at the circuit"
 msgstr "Adiciona um transformador no circuito"
 
-#: MainFrame.cpp:86
+#: MainFrame.cpp:92
 msgid "&Generator\tG"
 msgstr "&Gerador\tG"
 
-#: MainFrame.cpp:87
+#: MainFrame.cpp:92
 msgid "Adds a generator at the circuit"
 msgstr "Adiciona um gerador no circuito"
 
-#: MainFrame.cpp:88
+#: MainFrame.cpp:94
 msgid "&Induction motor\tI"
 msgstr "&Motor de indução\tI"
 
-#: MainFrame.cpp:89 MainFrame.cpp:92
+#: MainFrame.cpp:94 MainFrame.cpp:96
 msgid "Adds an induction motor at the circuit"
 msgstr "Adiciona um motor de indução no circuito"
 
-#: MainFrame.cpp:91
+#: MainFrame.cpp:96
 msgid "&Synchronous compensator \tK"
 msgstr "&Compensador síncrono \tK"
 
-#: MainFrame.cpp:94
+#: MainFrame.cpp:98
 msgid "&Load\tShift-L"
 msgstr "&Carga\tShift-L"
 
-#: MainFrame.cpp:94
+#: MainFrame.cpp:98
 msgid "Adds a load at the circuit"
 msgstr "Adiciona uma carga no circuito"
 
-#: MainFrame.cpp:95
+#: MainFrame.cpp:100
 msgid "&Capacitor\tShift-C"
 msgstr "&Capacitor\tShift-C"
 
-#: MainFrame.cpp:96
+#: MainFrame.cpp:100
 msgid "Adds a shunt capacitor at the circuit"
 msgstr "Adiciona um capacitor shunt no circuito"
 
-#: MainFrame.cpp:97
+#: MainFrame.cpp:102
 msgid "&Inductor\tShift-I"
 msgstr "&Inductor\tShift-I"
 
-#: MainFrame.cpp:98
+#: MainFrame.cpp:102
 msgid "Adds a shunt inductor at the circuit"
 msgstr "Adiciona um indutor shunt no circuito"
 
-#: MainFrame.cpp:119
+#: MainFrame.cpp:123
 #, c-format
 msgid "New project %d"
 msgstr ""
 
-#: MainFrame.cpp:223 MainFrame.cpp:249 Workspace.cpp:583
+#: MainFrame.cpp:208
+msgid "Open PSP file"
+msgstr ""
+
+#: MainFrame.cpp:214
+msgid "Open project"
+msgstr ""
+
+#: MainFrame.cpp:232
+msgid "It was not possible to open the selected file."
+msgstr ""
+
+#: MainFrame.cpp:266 MainFrame.cpp:287
+msgid "Save PSP file"
+msgstr ""
+
+#: MainFrame.cpp:315 Workspace.cpp:721
 #, c-format
 msgid "Bus %d"
 msgstr "Barra %d"
 
-#: MainFrame.cpp:226 Workspace.cpp:587
+#: MainFrame.cpp:318 Workspace.cpp:725
 msgid "Insert Bus: Click to insert, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:234 Workspace.cpp:608
+#: MainFrame.cpp:322 Workspace.cpp:738
+#, c-format
+msgid "Line %d"
+msgstr ""
+
+#: MainFrame.cpp:325 Workspace.cpp:742
 msgid "Insert Line: Click on two buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:242 Workspace.cpp:621
+#: MainFrame.cpp:330 Workspace.cpp:756
+#, c-format
+msgid "Transformer %d"
+msgstr ""
+
+#: MainFrame.cpp:333 Workspace.cpp:760
 msgid "Insert Transformer: Click on two buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:252 Workspace.cpp:634
+#: MainFrame.cpp:338 Workspace.cpp:768
+#, c-format
+msgid "Generator %d"
+msgstr "Gerador %d"
+
+#: MainFrame.cpp:341 Workspace.cpp:772
 msgid "Insert Generator: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:260 Workspace.cpp:600
+#: MainFrame.cpp:345 Workspace.cpp:732
+#, c-format
+msgid "Load %d"
+msgstr ""
+
+#: MainFrame.cpp:348 Workspace.cpp:736
 msgid "Insert Load: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:268 Workspace.cpp:681
+#: MainFrame.cpp:353 Workspace.cpp:813
+#, c-format
+msgid "Capacitor %d"
+msgstr ""
+
+#: MainFrame.cpp:356 Workspace.cpp:817
 msgid "Insert Capacitor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:276 Workspace.cpp:647
+#: MainFrame.cpp:361 Workspace.cpp:780
+#, c-format
+msgid "Inductor %d"
+msgstr ""
+
+#: MainFrame.cpp:364 Workspace.cpp:784
 msgid "Insert Inductor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:284 Workspace.cpp:655
+#: MainFrame.cpp:369 Workspace.cpp:788
+#, c-format
+msgid "Induction motor %d"
+msgstr ""
+
+#: MainFrame.cpp:372 Workspace.cpp:792
 msgid "Insert Induction Motor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:292 Workspace.cpp:668
+#: MainFrame.cpp:377 Workspace.cpp:801
+#, c-format
+msgid "Synchronous condenser %d"
+msgstr ""
+
+#: MainFrame.cpp:380 Workspace.cpp:805
 msgid "Insert Synchronous Condenser: Click on a buses, ESC to cancel."
 msgstr ""
 
@@ -621,10 +1106,6 @@ msgstr "Arquivo"
 #: MainFrameBase.cpp:76 MainFrameBase.cpp:77 MainFrameBase.cpp:80
 msgid "Projects"
 msgstr "Projetos"
-
-#: MainFrameBase.cpp:82
-msgid "New"
-msgstr "Novo"
 
 #: MainFrameBase.cpp:82
 msgid "Create new project"
@@ -639,221 +1120,189 @@ msgid "Open saved project"
 msgstr "Abrir projetos salvos"
 
 #: MainFrameBase.cpp:86
-msgid "Export Import"
-msgstr "Exportar Importar"
-
-#: MainFrameBase.cpp:86
-msgid "Export or import projects"
-msgstr "Exporta ou importa projetos"
-
-#: MainFrameBase.cpp:88
 msgid "General Settings"
 msgstr ""
 
-#: MainFrameBase.cpp:88
+#: MainFrameBase.cpp:86
 msgid "Opens a dialog to set the main settings of the program"
 msgstr ""
 
-#: MainFrameBase.cpp:90
+#: MainFrameBase.cpp:88
 msgid "Exit"
 msgstr "Sair"
 
-#: MainFrameBase.cpp:90
+#: MainFrameBase.cpp:88
 msgid "Closes the application"
 msgstr "Fecha a aplicação"
 
-#: MainFrameBase.cpp:93 MainFrameBase.cpp:94
+#: MainFrameBase.cpp:91 MainFrameBase.cpp:92
 msgid "Current project"
 msgstr "Projeto atual"
 
-#: MainFrameBase.cpp:98
+#: MainFrameBase.cpp:96
 msgid "Save"
 msgstr "Salvar"
 
-#: MainFrameBase.cpp:98
+#: MainFrameBase.cpp:96
 msgid "Save the current project"
 msgstr "Salvar o projeto atual"
 
-#: MainFrameBase.cpp:100
+#: MainFrameBase.cpp:98
 msgid "Save As..."
 msgstr ""
 
-#: MainFrameBase.cpp:100
+#: MainFrameBase.cpp:98
 msgid "Save as the current project"
 msgstr "Salvar como o projeto atual"
 
-#: MainFrameBase.cpp:102
+#: MainFrameBase.cpp:100
 msgid "Close"
 msgstr "Fechar"
 
-#: MainFrameBase.cpp:102
+#: MainFrameBase.cpp:100
 msgid "Close the current project"
 msgstr "Fechar o projeto atual"
 
-#: MainFrameBase.cpp:105 MainFrameBase.cpp:106 MainFrameBase.cpp:109
+#: MainFrameBase.cpp:103 MainFrameBase.cpp:104 MainFrameBase.cpp:107
 msgid "Help"
 msgstr "Ajuda"
 
-#: MainFrameBase.cpp:111
+#: MainFrameBase.cpp:109
 msgid "PSP-UFU Guide"
 msgstr "Manual do PSP-UFU"
 
-#: MainFrameBase.cpp:111
+#: MainFrameBase.cpp:109
 msgid "Open PSP-UFU Guide"
 msgstr "Abrir o manual do PSP-UFU"
 
-#: MainFrameBase.cpp:113
+#: MainFrameBase.cpp:111
 msgid "About..."
 msgstr "Sobre..."
 
-#: MainFrameBase.cpp:113
+#: MainFrameBase.cpp:111
 msgid "About PSP-UFU"
 msgstr "Sobre o PSP-UFU"
 
-#: MainFrameBase.cpp:116 MainFrameBase.cpp:117
+#: MainFrameBase.cpp:114 MainFrameBase.cpp:115
 msgid "Tools"
 msgstr "Ferramentas"
 
-#: MainFrameBase.cpp:119 MainFrameBase.cpp:120 MainFrameBase.cpp:123
+#: MainFrameBase.cpp:117 MainFrameBase.cpp:118 MainFrameBase.cpp:121
 msgid "Clipboard"
 msgstr "Área de transferência"
 
-#: MainFrameBase.cpp:125
-msgid "Copy"
-msgstr "Copiar"
-
-#: MainFrameBase.cpp:125
+#: MainFrameBase.cpp:123
 msgid "Copies the selected elements"
 msgstr "Copia os elementos selecionados"
 
-#: MainFrameBase.cpp:127
-msgid "Paste"
-msgstr "Colar"
-
-#: MainFrameBase.cpp:127
+#: MainFrameBase.cpp:125
 msgid "Pastes the elements from clipboard"
 msgstr "Cola os elementos da área de transferência"
 
-#: MainFrameBase.cpp:129
-msgid "Undo"
-msgstr "Desfazer"
-
-#: MainFrameBase.cpp:129
+#: MainFrameBase.cpp:127
 msgid "Undoes the last action"
 msgstr "Desfaz a última ação"
 
-#: MainFrameBase.cpp:131
-msgid "Redo"
-msgstr "Refazer"
-
-#: MainFrameBase.cpp:131
+#: MainFrameBase.cpp:129
 msgid "Redoes the last undo action"
 msgstr "Refaz a última ação desfeita"
 
-#: MainFrameBase.cpp:134 MainFrameBase.cpp:135 MainFrameBase.cpp:138
+#: MainFrameBase.cpp:132 MainFrameBase.cpp:133 MainFrameBase.cpp:136
 msgid "Circuit"
 msgstr "Circuito"
 
-#: MainFrameBase.cpp:140
+#: MainFrameBase.cpp:138
 msgid "Add Element"
 msgstr ""
 
-#: MainFrameBase.cpp:140
+#: MainFrameBase.cpp:138
 msgid "Add a new element in the project"
 msgstr "Adicionar um elemento novo no projeto"
 
-#: MainFrameBase.cpp:142
-msgid "Drag"
-msgstr "Arrastar"
-
-#: MainFrameBase.cpp:142
+#: MainFrameBase.cpp:140
 msgid "Drag all the elements"
 msgstr "Arrasta todos os elementos"
 
-#: MainFrameBase.cpp:144
-msgid "Move"
-msgstr "Mover"
-
-#: MainFrameBase.cpp:144
+#: MainFrameBase.cpp:142
 msgid "Move the selected elements"
 msgstr "Move os elementos selecionados"
 
-#: MainFrameBase.cpp:146
+#: MainFrameBase.cpp:144
 msgid "Removes all selected elements"
 msgstr "Remove todos os elementos selecionados"
 
-#: MainFrameBase.cpp:148
+#: MainFrameBase.cpp:146
 msgid "Fit"
 msgstr "Encaixar"
 
-#: MainFrameBase.cpp:148
+#: MainFrameBase.cpp:146
 msgid "Applies the drag and zoom tools to show all elements in workspace"
 msgstr ""
 "Aplica as ferramentas de arrasto e ampliação para exibir todos os elementos "
 "na área de trabalho"
 
-#: MainFrameBase.cpp:150
+#: MainFrameBase.cpp:148
 msgid "Rotate Clockwise"
 msgstr ""
 
-#: MainFrameBase.cpp:152
+#: MainFrameBase.cpp:150
 msgid "Rotate Counter-clockwise"
 msgstr ""
 
-#: MainFrameBase.cpp:152
+#: MainFrameBase.cpp:150
 msgid "Rotate the selected elements counter-clockwise"
 msgstr ""
 
-#: MainFrameBase.cpp:154
+#: MainFrameBase.cpp:152
 msgid "Project Settings"
 msgstr ""
 
-#: MainFrameBase.cpp:154
+#: MainFrameBase.cpp:152
 msgid "Opens a dialog to set the main settings of the current project"
 msgstr ""
 "Abre uma janela para definir as principais configurações do projeto atual"
 
-#: MainFrameBase.cpp:157 MainFrameBase.cpp:158
+#: MainFrameBase.cpp:155 MainFrameBase.cpp:156
 msgid "Reports"
 msgstr "Relatórios"
 
-#: MainFrameBase.cpp:162
+#: MainFrameBase.cpp:160
 msgid "Data Report"
 msgstr ""
 
-#: MainFrameBase.cpp:162
+#: MainFrameBase.cpp:160
 msgid "Opens a data report"
 msgstr "Abre um relatório de dados"
 
-#: MainFrameBase.cpp:164
+#: MainFrameBase.cpp:162
 msgid "Charts"
 msgstr "Gráficos"
 
-#: MainFrameBase.cpp:164
+#: MainFrameBase.cpp:162
 msgid "Open the charts"
 msgstr "Abre os gráficos"
 
-#: MainFrameBase.cpp:166
+#: MainFrameBase.cpp:164
 msgid "Snapshot"
 msgstr "Instantâneo"
 
-#: MainFrameBase.cpp:166
+#: MainFrameBase.cpp:164
 msgid "Capture a snapshot of the circuit"
 msgstr "Captura uma imagem instantânea do circuito"
 
-#: MainFrameBase.cpp:169 MainFrameBase.cpp:170
+#: MainFrameBase.cpp:167 MainFrameBase.cpp:168
 msgid "Simulation"
 msgstr ""
 
-#: MainFrameBase.cpp:172 MainFrameBase.cpp:173
+#: MainFrameBase.cpp:170 MainFrameBase.cpp:171
 msgid "Continuous"
 msgstr ""
 
-#: MainFrameBase.cpp:177
+#: MainFrameBase.cpp:175
 msgid "Enable Solution"
 msgstr ""
 
-#: MainFrameBase.cpp:177
+#: MainFrameBase.cpp:175
 msgid ""
 "Enables the power flow and fault (if exists) calculations after any circuit "
 "change"
@@ -861,114 +1310,368 @@ msgstr ""
 "Habilita os cálculos de fluxo de carga e falta (se existir) após qualquer "
 "mudança no circuito"
 
-#: MainFrameBase.cpp:179
+#: MainFrameBase.cpp:177
 msgid "Disable Solution"
 msgstr ""
 
-#: MainFrameBase.cpp:179
+#: MainFrameBase.cpp:177
 msgid ""
 "Disables the power flow and fault calculations after any circuit changes"
 msgstr ""
 "Desabilita os cálculos de fluxo de carga e falta após qualquer mudança no "
 "circuito"
 
-#: MainFrameBase.cpp:181
+#: MainFrameBase.cpp:179
 msgid "Reset Voltages"
 msgstr ""
 
-#: MainFrameBase.cpp:181
+#: MainFrameBase.cpp:179
 msgid "Reset all voltages to initial state"
 msgstr "Reinicia todas as tensões para os valores iniciais"
 
-#: MainFrameBase.cpp:184 MainFrameBase.cpp:185 MainFrameBase.cpp:188
+#: MainFrameBase.cpp:182 MainFrameBase.cpp:183 MainFrameBase.cpp:186
 msgid "Simulations"
 msgstr ""
 
-#: MainFrameBase.cpp:190
+#: MainFrameBase.cpp:188
 msgid "Power Flow"
 msgstr ""
 
-#: MainFrameBase.cpp:190
+#: MainFrameBase.cpp:188
 msgid "Calculate the circuit power flow"
 msgstr "Calcula o fluxo de carga do circuito"
 
-#: MainFrameBase.cpp:192
+#: MainFrameBase.cpp:190
 msgid "Run Stability"
 msgstr ""
 
-#: MainFrameBase.cpp:192
+#: MainFrameBase.cpp:190
 msgid "Run the stability calculations"
 msgstr "Executa os cálculos de estabilidade"
 
-#: MainFrameBase.cpp:194
+#: MainFrameBase.cpp:192
 msgid "Calculate the circuit fault (if exists)"
 msgstr "Calcula a falta do circuito (se existir)"
 
-#: MainFrameBase.cpp:196
+#: MainFrameBase.cpp:194
 msgid "Short-Circuit Power"
 msgstr ""
 
-#: MainFrameBase.cpp:196
+#: MainFrameBase.cpp:194
 msgid "Calculate the short-circuit power in all buses"
 msgstr "Calcula o nível de curto-circuito em todas as barras"
 
-#: MainFrameBase.cpp:198
+#: MainFrameBase.cpp:196
 msgid "Simulation Settings"
 msgstr ""
 
-#: MainFrameBase.cpp:198
+#: MainFrameBase.cpp:196
 msgid "Opens a dialog to set the settings of the simulations"
 msgstr ""
 
-#: SyncGenerator.cpp:41
+#: PowerFlow.cpp:24
+msgid "No buses found on the system."
+msgstr ""
+
+#: PowerFlow.cpp:173
+msgid "There is no slack bus on the system."
+msgstr ""
+
+#: PowerFlow.cpp:177
+msgid "The slack bus don't have generation."
+msgstr ""
+
+#: PowerFlow.cpp:192
+msgid "The maximum number of iterations was reached."
+msgstr ""
+
+#: ReactiveShuntElementForm.cpp:75
+msgid "Capacitor: Switching"
+msgstr ""
+
+#: ReactiveShuntElementForm.cpp:79
+msgid "Inductor: Switching"
+msgstr ""
+
+#: SyncGenerator.cpp:44
 msgid "Edit Generator"
 msgstr ""
 
-#: SyncMotor.cpp:18
+#: SyncGenerator.cpp:52 ElementForm.h:242
+msgid "Generator"
+msgstr ""
+
+#: SyncMachineForm.cpp:344 SyncMachineForm.cpp:478
+msgid "Value entered incorrectly in the field \"Max reactive power\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:365 SyncMachineForm.cpp:499
+msgid "Value entered incorrectly in the field \"Min reactive power\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:386 SyncMachineForm.cpp:520
+msgid "Value entered incorrectly in the field \"Positive resistance\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:390 SyncMachineForm.cpp:524
+msgid "Value entered incorrectly in the field \"Positive reactance\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:394 SyncMachineForm.cpp:528
+msgid "Value entered incorrectly in the field \"Negative resistance\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:398 SyncMachineForm.cpp:532
+msgid "Value entered incorrectly in the field \"Negative reactance\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:402 SyncMachineForm.cpp:536
+msgid "Value entered incorrectly in the field \"Zero resistance\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:406 SyncMachineForm.cpp:540
+msgid "Value entered incorrectly in the field \"Zero reactance\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:410 SyncMachineForm.cpp:544
+msgid "Value entered incorrectly in the field \"Ground resistance\"."
+msgstr ""
+
+#: SyncMachineForm.cpp:414 SyncMachineForm.cpp:548
+msgid "Value entered incorrectly in the field \"Ground reactance\"."
+msgstr ""
+
+#: SyncMotor.cpp:17
 msgid "Edit Synchronous Condenser"
 msgstr ""
 
-#: Transformer.cpp:224
+#: SyncMotor.cpp:26
+msgid "Synchronous Condenser"
+msgstr ""
+
+#: TextForm.cpp:855
+msgid "Voltage"
+msgstr ""
+
+#: TextForm.cpp:856
+msgid "Angle"
+msgstr ""
+
+#: TextForm.cpp:857 TextForm.cpp:868 TextForm.cpp:879 TextForm.cpp:890
+msgid "Fault current"
+msgstr ""
+
+#: TextForm.cpp:858
+msgid "Fault voltage"
+msgstr ""
+
+#: TextForm.cpp:859
+msgid "Short-circuit power"
+msgstr "Nível de curto-circuito"
+
+#: TextForm.cpp:875 TextForm.cpp:886
+msgid "Active power flow"
+msgstr ""
+
+#: TextForm.cpp:876 TextForm.cpp:887
+msgid "Reactive power flow"
+msgstr ""
+
+#: TextForm.cpp:877 TextForm.cpp:888
+msgid "Losses"
+msgstr ""
+
+#: TextForm.cpp:878 TextForm.cpp:889
+msgid "Current"
+msgstr ""
+
+#: TextForm.cpp:962
+msgid "Degrees"
+msgstr ""
+
+#: TextForm.cpp:963
+msgid "Radians"
+msgstr ""
+
+#: TextForm.cpp:968
+msgid "A"
+msgstr ""
+
+#: TextForm.cpp:969
+msgid "kA"
+msgstr ""
+
+#: TextForm.cpp:973
+msgid "VA"
+msgstr ""
+
+#: TextForm.cpp:974
+msgid "kVA"
+msgstr ""
+
+#: TextForm.cpp:975
+msgid "MVA"
+msgstr ""
+
+#: TextForm.cpp:981
+msgid "W"
+msgstr ""
+
+#: TextForm.cpp:982
+msgid "kW"
+msgstr ""
+
+#: TextForm.cpp:983
+msgid "MW"
+msgstr ""
+
+#: TextForm.cpp:989
+msgid "VAr"
+msgstr ""
+
+#: TextForm.cpp:990
+msgid "kVAr"
+msgstr ""
+
+#: TextForm.cpp:991
+msgid "MVAr"
+msgstr ""
+
+#: TextForm.cpp:1206
+msgid "There are blank fields."
+msgstr ""
+
+#: Transformer.cpp:256
 msgid "Edit tranformer"
 msgstr ""
 
-#: Workspace.cpp:630
-#, c-format
-msgid "Generator %d"
-msgstr "Gerador %d"
+#: TransformerForm.cpp:112
+msgid "Transfomer: Switching"
+msgstr ""
 
-#: Workspace.cpp:702
+#: TransformerForm.cpp:153
+msgid "Value entered incorrectly in the field \"Indutive reactance\"."
+msgstr ""
+
+#: TransformerForm.cpp:195
+msgid "Value entered incorrectly in the field \"Turns ratio\"."
+msgstr ""
+
+#: TransformerForm.cpp:199
+msgid "Value entered incorrectly in the field \"Phase shift\"."
+msgstr ""
+
+#: TransformerForm.cpp:205
+msgid "Value entered incorrectly in the field \"Zero sequence resistance\"."
+msgstr ""
+
+#: TransformerForm.cpp:210
+msgid ""
+"Value entered incorrectly in the field \"Zero sequence indutive reactance\"."
+msgstr ""
+
+#: TransformerForm.cpp:214
+msgid "Value entered incorrectly in the field \"Primary ground resistance\"."
+msgstr ""
+
+#: TransformerForm.cpp:218
+msgid "Value entered incorrectly in the field \"Primary ground reactance\"."
+msgstr ""
+
+#: TransformerForm.cpp:222
+msgid "Value entered incorrectly in the field \"Secondary ground resistance\"."
+msgstr ""
+
+#: TransformerForm.cpp:226
+msgid "Value entered incorrectly in the field \"Secondary ground reactance\"."
+msgstr ""
+
+#: Workspace.cpp:307
+msgid "Do you want to change the rated voltage of the path?"
+msgstr ""
+
+#: Workspace.cpp:308
+msgid "Warning"
+msgstr ""
+
+#: Workspace.cpp:704
+msgid "Insert Text: Click to insert, ESC to cancel."
+msgstr ""
+
+#: Workspace.cpp:844
 msgid "MODE: DRAG"
 msgstr ""
 
-#: Workspace.cpp:709
+#: Workspace.cpp:849
+msgid "MODE: PASTE"
+msgstr ""
+
+#: Workspace.cpp:856
 msgid "MODE: INSERT"
 msgstr ""
 
-#: Workspace.cpp:720
+#: Workspace.cpp:865
 msgid "MODE: EDIT"
 msgstr ""
 
-#: Workspace.cpp:725
+#: Workspace.cpp:869
 #, c-format
 msgid "ZOOM: %d%%"
 msgstr ""
 
-#: ElementForm.h:139
+#: Workspace.cpp:1202 Workspace.cpp:1310
+msgid "It was not possible to paste from clipboard."
+msgstr ""
+
+#: Workspace.cpp:1318
+msgid "Click to paste."
+msgstr ""
+
+#: ControlEditorBase.h:59
+msgid "Control editor"
+msgstr ""
+
+#: ElementForm.h:143
 msgid "Bus"
 msgstr ""
 
-#: ElementForm.h:238
-msgid "Generator"
-msgstr ""
-
-#: ElementForm.h:365
+#: ElementForm.h:369
 msgid "Generator: Stability"
 msgstr ""
 
-#: MainFrameBase.h:143
+#: ElementForm.h:448
+msgid "Line"
+msgstr ""
+
+#: ElementForm.h:547
+msgid "Transformer"
+msgstr ""
+
+#: ElementForm.h:592
+msgid "Load"
+msgstr ""
+
+#: ElementForm.h:627
+msgid "Reactive shunt element"
+msgstr ""
+
+#: ElementForm.h:709
+msgid "Motor"
+msgstr ""
+
+#: ElementForm.h:770 Text.h:87
+msgid "Text"
+msgstr ""
+
+#: MainFrameBase.h:141
 msgid "PSP-UFU"
 msgstr "PSP-UFU"
+
+#~ msgid "Export Import"
+#~ msgstr "Exportar Importar"
+
+#~ msgid "Export or import projects"
+#~ msgstr "Exporta ou importa projetos"
 
 #~ msgid "Project settings"
 #~ msgstr "Opções do projeto"
@@ -996,9 +1699,6 @@ msgstr "PSP-UFU"
 
 #~ msgid "Power flow"
 #~ msgstr "Fluxo de carga"
-
-#~ msgid "Short-circuit power"
-#~ msgstr "Nível de curto-circuito"
 
 #~ msgid "Data report"
 #~ msgstr "Relatório de dados"

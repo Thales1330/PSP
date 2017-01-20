@@ -59,7 +59,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     m_panelControlElements = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_panelControlElements->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
     
-    m_auimgr->AddPane(m_panelControlElements, wxAuiPaneInfo().Caption(_("Control elements")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(0).Position(0).BestSize(200,200).MinSize(200,200).MaxSize(200,200).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
+    m_auimgr->AddPane(m_panelControlElements, wxAuiPaneInfo().Name(wxT("m_controlElementsPanel")).Caption(_("Control elements")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(0).Position(0).BestSize(200,200).MinSize(10,10).MaxSize(200,200).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(true).PinButton(false));
     
     m_panelWorkspace = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     
