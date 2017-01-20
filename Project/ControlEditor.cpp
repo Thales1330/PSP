@@ -17,90 +17,87 @@ void ControlEditor::BuildControlElementPanel()
     wxWrapSizer* wrapSizer = new wxWrapSizer();
     m_panelControlElements->SetSizer(wrapSizer);
 
-    /*m_tfButton = new wxButton();
-    m_tfButton->SetBackgroundStyle(wxBG_STYLE_TRANSPARENT);
-    m_tfButton->Create(m_panelControlElements, wxID_ANY, _("Transfer function"), wxDefaultPosition, wxDefaultSize,
-    wxBORDER_NONE);
-    m_tfButton->SetTransparent(wxIMAGE_ALPHA_TRANSPARENT);
-    //m_tfButton = new wxButton(m_panelControlElements, wxID_ANY, _("Transfer function"), wxDefaultPosition,
-    wxDefaultSize, wxBORDER_NONE);
-    m_tfButton->SetBitmap(wxImage("..\\data\\images\\control\\transferFunc.png"), wxTOP);
-    // m_tfButton->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
-    // m_tfButton->SetToolTip(_("Transfer function"));
-    m_tfButton->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditor::LeftClickDown), NULL, this);
-    wrapSizer->Add(m_tfButton, 0, wxALL, 3)*/
+    ControlElementButton* ioButton = new ControlElementButton(
+        m_panelControlElements, _("Input/output"), wxImage("..\\data\\images\\control\\io.png"));
+    wrapSizer->Add(ioButton, 0, wxALL, 5);
+
     ControlElementButton* tfButton = new ControlElementButton(
         m_panelControlElements, _("Transfer function"), wxImage("..\\data\\images\\control\\transferFunc.png"));
     wrapSizer->Add(tfButton, 0, wxALL, 5);
 
-    wxBitmapButton* tfButton2 =
-        new wxBitmapButton(m_panelControlElements, wxID_ANY, wxImage("..\\data\\images\\control\\transferFunc.png"),
-            wxDefaultPosition, wxDLG_UNIT(m_panelControlElements, wxSize(-1, -1)), wxBU_AUTODRAW | wxBORDER_NONE);
-    tfButton2->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
-    tfButton2->SetToolTip(_("Transfer function"));
+    ControlElementButton* sumButton =
+        new ControlElementButton(m_panelControlElements, _("Sum"), wxImage("..\\data\\images\\control\\sum.png"));
+    wrapSizer->Add(sumButton, 0, wxALL, 5);
 
-    wrapSizer->Add(tfButton2, 0, wxALL, 3);
+    ControlElementButton* valueButton =
+        new ControlElementButton(m_panelControlElements, _("Value"), wxImage("..\\data\\images\\control\\value.png"));
+    wrapSizer->Add(valueButton, 0, wxALL, 5);
 
-    wxBitmapButton* tfButton3 =
-        new wxBitmapButton(m_panelControlElements, wxID_ANY, wxImage("..\\data\\images\\control\\transferFunc.png"),
-            wxDefaultPosition, wxDLG_UNIT(m_panelControlElements, wxSize(-1, -1)), wxBU_AUTODRAW | wxBORDER_NONE);
-    tfButton3->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
-    tfButton3->SetToolTip(_("Transfer function"));
+    ControlElementButton* limButton = new ControlElementButton(
+        m_panelControlElements, _("Limiter"), wxImage("..\\data\\images\\control\\limiter.png"));
+    wrapSizer->Add(limButton, 0, wxALL, 5);
 
-    wrapSizer->Add(tfButton3, 0, wxALL, 3);
+    ControlElementButton* gainButton =
+        new ControlElementButton(m_panelControlElements, _("Gain"), wxImage("..\\data\\images\\control\\gain.png"));
+    wrapSizer->Add(gainButton, 0, wxALL, 5);
 
-    wxBitmapButton* tfButton4 =
-        new wxBitmapButton(m_panelControlElements, wxID_ANY, wxImage("..\\data\\images\\control\\transferFunc.png"),
-            wxDefaultPosition, wxDLG_UNIT(m_panelControlElements, wxSize(-1, -1)), wxBU_AUTODRAW | wxBORDER_NONE);
-    tfButton4->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
-    tfButton4->SetToolTip(_("Transfer function"));
+    ControlElementButton* multButton = new ControlElementButton(
+        m_panelControlElements, _("Multiplier"), wxImage("..\\data\\images\\control\\mult.png"));
+    wrapSizer->Add(multButton, 0, wxALL, 5);
 
-    wrapSizer->Add(tfButton4, 0, wxALL, 3);
+    ControlElementButton* satButton = new ControlElementButton(
+        m_panelControlElements, _("Saturation"), wxImage("..\\data\\images\\control\\sat.png"));
+    wrapSizer->Add(satButton, 0, wxALL, 5);
 
-    wxBitmapButton* tfButton5 =
-        new wxBitmapButton(m_panelControlElements, wxID_ANY, wxImage("..\\data\\images\\control\\transferFunc.png"),
-            wxDefaultPosition, wxDLG_UNIT(m_panelControlElements, wxSize(-1, -1)), wxBU_AUTODRAW | wxBORDER_NONE);
-    tfButton5->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
-    tfButton5->SetToolTip(_("Transfer function"));
-
-    wrapSizer->Add(tfButton5, 0, wxALL, 3);
-
-    wxBitmapButton* tfButton6 =
-        new wxBitmapButton(m_panelControlElements, wxID_ANY, wxImage("..\\data\\images\\control\\transferFunc.png"),
-            wxDefaultPosition, wxDLG_UNIT(m_panelControlElements, wxSize(-1, -1)), wxBU_AUTODRAW | wxBORDER_NONE);
-    tfButton6->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
-    tfButton6->SetToolTip(_("Transfer function"));
-
-    wrapSizer->Add(tfButton6, 0, wxALL, 3);
-
-    wxBitmapButton* tfButton7 =
-        new wxBitmapButton(m_panelControlElements, wxID_ANY, wxImage("..\\data\\images\\control\\transferFunc.png"),
-            wxDefaultPosition, wxDLG_UNIT(m_panelControlElements, wxSize(-1, -1)), wxBU_AUTODRAW | wxBORDER_NONE);
-    tfButton7->SetBackgroundColour(wxColour(wxT("rgb(255,255,255)")));
-    tfButton7->SetToolTip(_("Transfer function"));
-
-    wrapSizer->Add(tfButton7, 0, wxALL, 3);
-
-    // m_auimgr->Update();
-    // Layout();
+    ControlElementButton* rateLimButton = new ControlElementButton(
+        m_panelControlElements, _("Rate limiter"), wxImage("..\\data\\images\\control\\rateLimiter.png"));
+    wrapSizer->Add(rateLimButton, 0, wxALL, 5);
 }
+
 void ControlEditor::LeftClickDown(wxMouseEvent& event)
 {
 
-    wxBitmapButton* button = dynamic_cast<wxBitmapButton*>(event.GetEventObject());
+    /*wxBitmapButton* button = dynamic_cast<wxBitmapButton*>(event.GetEventObject());
     if(button) {
         button->SetOwnBackgroundColour(wxColour(wxT("rgb(0,0,255)")));
-    }
+    }*/
     event.Skip();
 }
 
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image)
     : wxWindow(parent, wxID_ANY)
 {
+    m_font = wxFont(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
     m_label = label;
     m_image = image;
-    SetMinSize(wxSize(32,32));
+    m_imageSize = wxSize(image.GetWidth(), image.GetHeight());
+
+    // Calculate label size.
+    wxScreenDC dc;
+    dc.SetFont(m_font);
+    wxSize textSize = dc.GetTextExtent(label);
+
+    int buttonWidth = 0;
+    if(textSize.GetWidth() > m_imageSize.GetWidth()) {
+        buttonWidth = textSize.GetWidth();
+        m_imagePosition = wxPoint((buttonWidth - m_imageSize.GetWidth()) / 2 + m_borderSize, m_borderSize);
+        m_labelPosition = wxPoint(m_borderSize, m_imageSize.GetHeight() + m_borderSize);
+    } else {
+        buttonWidth = m_imageSize.GetWidth();
+        m_imagePosition = wxPoint(m_borderSize, m_borderSize);
+        m_labelPosition =
+            wxPoint((buttonWidth - textSize.GetWidth()) / 2 + m_borderSize, m_imageSize.GetHeight() + m_borderSize);
+    }
+    m_buttonSize =
+        wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);
+    SetMinSize(m_buttonSize);
+
+    // Conncet events.
     Connect(wxEVT_PAINT, wxPaintEventHandler(ControlElementButton::OnPaint), NULL, this);
+    Connect(wxEVT_ENTER_WINDOW, wxMouseEventHandler(ControlElementButton::OnMouseEnter), NULL, this);
+    Connect(wxEVT_LEAVE_WINDOW, wxMouseEventHandler(ControlElementButton::OnMouseLeave), NULL, this);
+    Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlElementButton::OnLeftClickDown), NULL, this);
+    Connect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlElementButton::OnLeftClickUp), NULL, this);
 }
 
 ControlElementButton::~ControlElementButton() {}
@@ -108,14 +105,53 @@ ControlElementButton::~ControlElementButton() {}
 void ControlElementButton::OnPaint(wxPaintEvent& event)
 {
     wxPaintDC dc(this);
-    //dc.SetBrush(*wxGREY_BRUSH);
-    //dc.DrawRectangle( 0, 0, 32, 32 );
-    dc.DrawBitmap(m_image, wxPoint(0,0));
     wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
     if(gc) {
-        gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), 0, 0, 32, 32);
-        gc->SetBrush(wxBrush(wxColour(0,125,255,100)));
-        gc->DrawRectangle(0,0,32,32);
+        gc->SetPen(*wxWHITE_PEN);
+        gc->SetBrush(*wxWHITE_BRUSH);
+        gc->DrawRectangle(0, 0, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
+        gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),
+            m_imageSize.GetHeight());
+        if(m_mouseAbove) {
+            if(m_selected) {
+                gc->SetPen(wxPen(wxColour(0, 125, 255, 255), m_borderSize));
+                gc->SetBrush(wxBrush(wxColour(0, 125, 255, 100)));
+            } else {
+                gc->SetPen(*wxTRANSPARENT_PEN);
+                gc->SetBrush(wxBrush(wxColour(0, 125, 255, 70)));
+            }
+            gc->DrawRectangle(0, 0, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
+        }
+        gc->SetFont(m_font, *wxBLACK);
+        gc->DrawText(m_label, m_labelPosition.x, m_labelPosition.y);
         delete gc;
     }
+}
+
+void ControlElementButton::OnMouseEnter(wxMouseEvent& event)
+{
+    m_mouseAbove = true;
+    Refresh();
+    event.Skip();
+}
+
+void ControlElementButton::OnMouseLeave(wxMouseEvent& event)
+{
+    m_mouseAbove = false;
+    Refresh();
+    event.Skip();
+}
+
+void ControlElementButton::OnLeftClickDown(wxMouseEvent& event)
+{
+    m_selected = true;
+    Refresh();
+    event.Skip();
+}
+
+void ControlElementButton::OnLeftClickUp(wxMouseEvent& event)
+{
+    m_selected = false;
+    Refresh();
+    event.Skip();
 }
