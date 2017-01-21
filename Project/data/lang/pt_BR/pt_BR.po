@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PSP-UFU pt_BR 0.0.1\n"
-"POT-Creation-Date: 2017-01-20 14:38-0200\n"
-"PO-Revision-Date: 2017-01-20 14:39-0200\n"
+"POT-Creation-Date: 2017-01-20 20:38-0200\n"
+"PO-Revision-Date: 2017-01-20 23:15-0200\n"
 "Last-Translator: \n"
 "Language-Team: Thales Lima Oliveira <thaleslima.ufu@gmail.com>\n"
 "Language: pt_BR\n"
@@ -188,38 +188,38 @@ msgid " MVAr"
 msgstr ""
 
 #: ControlEditor.cpp:15
-msgid "Input/output"
+msgid "In/Out"
 msgstr ""
 
-#: ControlEditor.cpp:19
-msgid "Transfer function"
-msgstr "Função transferência"
+#: ControlEditor.cpp:21
+msgid "Transfer fcn"
+msgstr "Func Transferência"
 
-#: ControlEditor.cpp:24
+#: ControlEditor.cpp:25
 msgid "Sum"
 msgstr ""
 
-#: ControlEditor.cpp:28
-msgid "Value"
-msgstr ""
-
 #: ControlEditor.cpp:31
-msgid "Limiter"
+msgid "Constant"
 msgstr ""
 
 #: ControlEditor.cpp:36
+msgid "Limiter"
+msgstr ""
+
+#: ControlEditor.cpp:41
 msgid "Gain"
 msgstr ""
 
-#: ControlEditor.cpp:39
+#: ControlEditor.cpp:46
 msgid "Multiplier"
 msgstr ""
 
-#: ControlEditor.cpp:43
+#: ControlEditor.cpp:50
 msgid "Saturation"
 msgstr ""
 
-#: ControlEditor.cpp:48
+#: ControlEditor.cpp:56
 msgid "Rate limiter"
 msgstr ""
 
@@ -275,9 +275,9 @@ msgstr ""
 msgid "Rotate counter-clockwise"
 msgstr ""
 
-#: Element.cpp:273 Element.cpp:287 Line.cpp:149 Line.cpp:410 MainFrame.cpp:232
-#: TextForm.cpp:1207 Workspace.cpp:1147 Workspace.cpp:1202 Workspace.cpp:1310
-#: Workspace.cpp:1414 Workspace.cpp:1436
+#: Element.cpp:273 Element.cpp:287 Line.cpp:149 Line.cpp:410 MainFrame.cpp:231
+#: TextForm.cpp:1207 Workspace.cpp:1146 Workspace.cpp:1201 Workspace.cpp:1309
+#: Workspace.cpp:1413 Workspace.cpp:1435
 msgid "Error"
 msgstr ""
 
@@ -997,105 +997,105 @@ msgstr "&Inductor\tShift-I"
 msgid "Adds a shunt inductor at the circuit"
 msgstr "Adiciona um indutor shunt no circuito"
 
-#: MainFrame.cpp:123
+#: MainFrame.cpp:122
 #, c-format
 msgid "New project %d"
 msgstr ""
 
-#: MainFrame.cpp:208
+#: MainFrame.cpp:207
 msgid "Open PSP file"
 msgstr ""
 
-#: MainFrame.cpp:214
+#: MainFrame.cpp:213
 msgid "Open project"
 msgstr ""
 
-#: MainFrame.cpp:232
+#: MainFrame.cpp:231
 msgid "It was not possible to open the selected file."
 msgstr ""
 
-#: MainFrame.cpp:266 MainFrame.cpp:287
+#: MainFrame.cpp:265 MainFrame.cpp:286
 msgid "Save PSP file"
 msgstr ""
 
-#: MainFrame.cpp:315 Workspace.cpp:721
+#: MainFrame.cpp:314 Workspace.cpp:720
 #, c-format
 msgid "Bus %d"
 msgstr "Barra %d"
 
-#: MainFrame.cpp:318 Workspace.cpp:725
+#: MainFrame.cpp:317 Workspace.cpp:724
 msgid "Insert Bus: Click to insert, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:322 Workspace.cpp:738
+#: MainFrame.cpp:321 Workspace.cpp:737
 #, c-format
 msgid "Line %d"
 msgstr ""
 
-#: MainFrame.cpp:325 Workspace.cpp:742
+#: MainFrame.cpp:324 Workspace.cpp:741
 msgid "Insert Line: Click on two buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:330 Workspace.cpp:756
+#: MainFrame.cpp:329 Workspace.cpp:755
 #, c-format
 msgid "Transformer %d"
 msgstr ""
 
-#: MainFrame.cpp:333 Workspace.cpp:760
+#: MainFrame.cpp:332 Workspace.cpp:759
 msgid "Insert Transformer: Click on two buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:338 Workspace.cpp:768
+#: MainFrame.cpp:337 Workspace.cpp:767
 #, c-format
 msgid "Generator %d"
 msgstr "Gerador %d"
 
-#: MainFrame.cpp:341 Workspace.cpp:772
+#: MainFrame.cpp:340 Workspace.cpp:771
 msgid "Insert Generator: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:345 Workspace.cpp:732
+#: MainFrame.cpp:344 Workspace.cpp:731
 #, c-format
 msgid "Load %d"
 msgstr ""
 
-#: MainFrame.cpp:348 Workspace.cpp:736
+#: MainFrame.cpp:347 Workspace.cpp:735
 msgid "Insert Load: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:353 Workspace.cpp:813
+#: MainFrame.cpp:352 Workspace.cpp:812
 #, c-format
 msgid "Capacitor %d"
 msgstr ""
 
-#: MainFrame.cpp:356 Workspace.cpp:817
+#: MainFrame.cpp:355 Workspace.cpp:816
 msgid "Insert Capacitor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:361 Workspace.cpp:780
+#: MainFrame.cpp:360 Workspace.cpp:779
 #, c-format
 msgid "Inductor %d"
 msgstr ""
 
-#: MainFrame.cpp:364 Workspace.cpp:784
+#: MainFrame.cpp:363 Workspace.cpp:783
 msgid "Insert Inductor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:369 Workspace.cpp:788
+#: MainFrame.cpp:368 Workspace.cpp:787
 #, c-format
 msgid "Induction motor %d"
 msgstr ""
 
-#: MainFrame.cpp:372 Workspace.cpp:792
+#: MainFrame.cpp:371 Workspace.cpp:791
 msgid "Insert Induction Motor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:377 Workspace.cpp:801
+#: MainFrame.cpp:376 Workspace.cpp:800
 #, c-format
 msgid "Synchronous condenser %d"
 msgstr ""
 
-#: MainFrame.cpp:380 Workspace.cpp:805
+#: MainFrame.cpp:379 Workspace.cpp:804
 msgid "Insert Synchronous Condenser: Click on a buses, ESC to cancel."
 msgstr ""
 
@@ -1594,36 +1594,36 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: Workspace.cpp:704
+#: Workspace.cpp:703
 msgid "Insert Text: Click to insert, ESC to cancel."
 msgstr ""
 
-#: Workspace.cpp:844
+#: Workspace.cpp:843
 msgid "MODE: DRAG"
 msgstr ""
 
-#: Workspace.cpp:849
+#: Workspace.cpp:848
 msgid "MODE: PASTE"
 msgstr ""
 
-#: Workspace.cpp:856
+#: Workspace.cpp:855
 msgid "MODE: INSERT"
 msgstr ""
 
-#: Workspace.cpp:865
+#: Workspace.cpp:864
 msgid "MODE: EDIT"
 msgstr ""
 
-#: Workspace.cpp:869
+#: Workspace.cpp:868
 #, c-format
 msgid "ZOOM: %d%%"
 msgstr ""
 
-#: Workspace.cpp:1202 Workspace.cpp:1310
+#: Workspace.cpp:1201 Workspace.cpp:1309
 msgid "It was not possible to paste from clipboard."
 msgstr ""
 
-#: Workspace.cpp:1318
+#: Workspace.cpp:1317
 msgid "Click to paste."
 msgstr ""
 
@@ -1666,6 +1666,9 @@ msgstr ""
 #: MainFrameBase.h:141
 msgid "PSP-UFU"
 msgstr "PSP-UFU"
+
+#~ msgid "Transfer function"
+#~ msgstr "Função transferência"
 
 #~ msgid "Export Import"
 #~ msgstr "Exportar Importar"
