@@ -63,6 +63,7 @@
         <File Name="TextForm.cpp"/>
       </VirtualDirectory>
       <File Name="ControlEditor.cpp"/>
+      <File Name="Camera.cpp"/>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
@@ -102,6 +103,8 @@
       </VirtualDirectory>
       <VirtualDirectory Name="control element">
         <File Name="ControlElement.h"/>
+        <File Name="TransferFunction.h"/>
+        <File Name="TransferFunction.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -127,6 +130,7 @@
         <File Name="TextForm.h"/>
       </VirtualDirectory>
       <File Name="ControlEditor.h"/>
+      <File Name="Camera.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">

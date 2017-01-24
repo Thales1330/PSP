@@ -1084,7 +1084,56 @@
              "m_label": "WX_GL_SAMPLES",
              "m_value": ""
             }],
-           "m_events": [],
+           "m_events": [{
+             "m_eventName": "wxEVT_PAINT",
+             "m_eventClass": "wxPaintEvent",
+             "m_eventHandler": "wxPaintEventHandler",
+             "m_functionNameAndSignature": "OnPaint(wxPaintEvent& event)",
+             "m_description": "Process a wxEVT_PAINT event",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_LEFT_DOWN",
+             "m_eventClass": "wxMouseEvent",
+             "m_eventHandler": "wxMouseEventHandler",
+             "m_functionNameAndSignature": "OnLeftClickDown(wxMouseEvent& event)",
+             "m_description": "Process a wxEVT_LEFT_DOWN event. The handler of this event should normally call event.Skip() to allow the default processing to take place as otherwise the window under mouse wouldn't get the focus.",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_LEFT_UP",
+             "m_eventClass": "wxMouseEvent",
+             "m_eventHandler": "wxMouseEventHandler",
+             "m_functionNameAndSignature": "OnLeftClickUp(wxMouseEvent& event)",
+             "m_description": "Process a wxEVT_LEFT_UP event.",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_LEFT_DCLICK",
+             "m_eventClass": "wxMouseEvent",
+             "m_eventHandler": "wxMouseEventHandler",
+             "m_functionNameAndSignature": "OnDoubleClick(wxMouseEvent& event)",
+             "m_description": "Process a wxEVT_LEFT_DCLICK event.",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_MIDDLE_DOWN",
+             "m_eventClass": "wxMouseEvent",
+             "m_eventHandler": "wxMouseEventHandler",
+             "m_functionNameAndSignature": "OnMiddleDown(wxMouseEvent& event)",
+             "m_description": "Process a wxEVT_MIDDLE_DOWN event",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_MIDDLE_UP",
+             "m_eventClass": "wxMouseEvent",
+             "m_eventHandler": "wxMouseEventHandler",
+             "m_functionNameAndSignature": "OnMiddleUp(wxMouseEvent& event)",
+             "m_description": "Process a wxEVT_MIDDLE_UP event",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_MOTION",
+             "m_eventClass": "wxMouseEvent",
+             "m_eventHandler": "wxMouseEventHandler",
+             "m_functionNameAndSignature": "OnMouseMotion(wxMouseEvent& event)",
+             "m_description": "Process a wxEVT_MOTION event",
+             "m_noBody": false
+            }],
            "m_children": []
           }]
         }]

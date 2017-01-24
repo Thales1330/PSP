@@ -96,10 +96,27 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
         wxPersistenceManager::Get().Restore(this);
     }
 #endif
+    // Connect events
+    m_glCanvas->Connect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
+    m_glCanvas->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditorBase::OnLeftClickDown), NULL, this);
+    m_glCanvas->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditorBase::OnLeftClickUp), NULL, this);
+    m_glCanvas->Connect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(ControlEditorBase::OnDoubleClick), NULL, this);
+    m_glCanvas->Connect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(ControlEditorBase::OnMiddleDown), NULL, this);
+    m_glCanvas->Connect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditorBase::OnMiddleUp), NULL, this);
+    m_glCanvas->Connect(wxEVT_MOTION, wxMouseEventHandler(ControlEditorBase::OnMouseMotion), NULL, this);
+    
 }
 
 ControlEditorBase::~ControlEditorBase()
 {
+    m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditorBase::OnLeftClickDown), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditorBase::OnLeftClickUp), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(ControlEditorBase::OnDoubleClick), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(ControlEditorBase::OnMiddleDown), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditorBase::OnMiddleUp), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(ControlEditorBase::OnMouseMotion), NULL, this);
+    
     m_auimgr->UnInit();
     delete m_auimgr;
 

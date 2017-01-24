@@ -48,6 +48,13 @@ protected:
     wxStatusBar* m_statusBarMain;
 
 protected:
+    virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
+    virtual void OnLeftClickDown(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnLeftClickUp(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnDoubleClick(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnMiddleDown(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnMiddleUp(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnMouseMotion(wxMouseEvent& event) { event.Skip(); }
 
 public:
     wxToolBar* GetToolbarMain() { return m_toolbarMain; }
