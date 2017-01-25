@@ -773,7 +773,7 @@
         "m_closeButton": false,
         "m_minButton": true,
         "m_maxButton": false,
-        "m_pinButton": false,
+        "m_pinButton": true,
         "m_toolbarPane": false
        },
        "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
@@ -1132,6 +1132,13 @@
              "m_eventHandler": "wxMouseEventHandler",
              "m_functionNameAndSignature": "OnMouseMotion(wxMouseEvent& event)",
              "m_description": "Process a wxEVT_MOTION event",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_MOUSEWHEEL",
+             "m_eventClass": "wxMouseEvent",
+             "m_eventHandler": "wxMouseEventHandler",
+             "m_functionNameAndSignature": "OnScroll(wxMouseEvent& event)",
+             "m_description": "Process a wxEVT_MOUSEWHEEL event",
              "m_noBody": false
             }],
            "m_children": []

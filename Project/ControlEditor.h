@@ -63,6 +63,7 @@ public:
     virtual void Redraw() { m_glCanvas->Refresh(); }
 
 protected:
+    virtual void OnScroll(wxMouseEvent& event);
     virtual void OnDoubleClick(wxMouseEvent& event);
     virtual void OnLeftClickDown(wxMouseEvent& event);
     virtual void OnLeftClickUp(wxMouseEvent& event);

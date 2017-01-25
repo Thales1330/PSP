@@ -1,6 +1,6 @@
 #include "Element.h"
 
-Element::Element() {}
+Element::Element() { m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5); }
 
 Element::~Element() {}
 

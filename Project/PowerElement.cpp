@@ -8,7 +8,6 @@ PowerElement::PowerElement()
     m_offlineElementColour.SetRGBA(0.5, 0.5, 0.5, 1.0);
     m_closedSwitchColour.SetRGBA(0.0, 0.4, 0.0, 1.0);
     m_openedSwitchColour.SetRGBA(1.0, 0.1, 0.1, 1.0);
-    m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5);
     m_powerFlowArrowColour.SetRGBA(1.0, 0.51, 0.0, 1.0);
 }
 

@@ -584,16 +584,6 @@ void Workspace::OnMiddleDown(wxMouseEvent& event)
             m_mode = MODE_DRAG;
         } break;
     }
-    /*if(m_mode != MODE_INSERT && m_mode != MODE_INSERT_TEXT && m_mode == MODE_PASTE && m_mode != MODE_DRAG_INSERT &&
-    m_mode != MODE_DRAG_INSERT_TEXT && m_mode != MODE_DRAG_PASTE) {
-        m_mode = MODE_DRAG;
-    } else if(m_mode == MODE_INSERT_TEXT) {
-        m_mode = MODE_DRAG_INSERT_TEXT;
-    }else if(m_mode == MODE_PASTE) {
-        m_mode = MODE_DRAG_PASTE;
-    } else {
-        m_mode = MODE_DRAG_INSERT;
-    }*/
     m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
 }

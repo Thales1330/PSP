@@ -197,7 +197,9 @@ void ControlEditor::AddElement(ControlElementButtonID id)
             wxLogMessage("io");
         } break;
         case ID_TF: {
-            wxLogMessage("tf");
+            m_mode = MODE_INSERT;
+            TransferFunction* tf = new TransferFunction();
+            m_elementList.push_back(tf);
         } break;
         case ID_SUM: {
             wxLogMessage("sum");
@@ -233,6 +235,11 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
     glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                         // Scale
     glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0); // Translation
 
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        Element* element = *it;
+        element->Draw(m_camera->GetTranslation(), m_camera->GetScale());
+    }
+
     // Selection rectangle
     glLineWidth(1.0);
     glColor4d(0.0, 0.5, 1.0, 1.0);
@@ -254,14 +261,38 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
     m_glCanvas->SwapBuffers();
     event.Skip();
 }
+
 void ControlEditor::OnDoubleClick(wxMouseEvent& event) {}
 
 void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 {
     wxPoint2DDouble clickPoint = event.GetPosition();
+    bool foundElement = false;
 
-    m_mode = MODE_SELECTION_RECT;
-    m_startSelRect = m_camera->ScreenToWorld(clickPoint);
+    if(m_mode == MODE_INSERT) {
+        m_mode = MODE_EDIT;
+    } else {
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            Element* element = *it;
+
+            // Set movement initial position (not necessarily will be moved).
+            element->StartMove(m_camera->ScreenToWorld(clickPoint));
+
+            // Click in an element.
+            if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
+                if(!foundElement) {
+                    element->SetSelected();
+                    foundElement = true;
+                }
+                m_mode = MODE_MOVE_ELEMENT;
+            }
+        }
+    }
+
+    if(!foundElement) {
+        m_mode = MODE_SELECTION_RECT;
+        m_startSelRect = m_camera->ScreenToWorld(clickPoint);
+    }
 
     Redraw();
     event.Skip();
@@ -269,16 +300,65 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 
 void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 {
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
+        Element* element = *it;
+        if(m_mode == MODE_SELECTION_RECT) {
+            if(element->Intersects(m_selectionRect)) {
+                element->SetSelected();
+            } else if(!event.ControlDown()) {
+                element->SetSelected(false);
+            }
+        } else if(!event.ControlDown()) {
+            if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                element->SetSelected(false);
+            }
+        }
+    }
+
+    m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
     if(m_mode != MODE_INSERT) {
         m_mode = MODE_EDIT;
     }
-    m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
+
     Redraw();
     event.Skip();
 }
 
-void ControlEditor::OnMiddleDown(wxMouseEvent& event) {}
-void ControlEditor::OnMiddleUp(wxMouseEvent& event) {}
+void ControlEditor::OnMiddleDown(wxMouseEvent& event)
+{
+    // Set to drag mode.
+    switch(m_mode) {
+        case MODE_INSERT: {
+            m_mode = MODE_DRAG_INSERT;
+        } break;
+        case MODE_PASTE: {
+            m_mode = MODE_DRAG_PASTE;
+        } break;
+        default: {
+            m_mode = MODE_DRAG;
+        } break;
+    }
+    m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
+}
+
+void ControlEditor::OnMiddleUp(wxMouseEvent& event)
+{
+    switch(m_mode) {
+        case MODE_DRAG_INSERT: {
+            m_mode = MODE_INSERT;
+        } break;
+        case MODE_DRAG_PASTE: {
+            m_mode = MODE_PASTE;
+        } break;
+        case MODE_INSERT:
+        case MODE_PASTE: {
+            // Does nothing.
+        } break;
+        default: {
+            m_mode = MODE_EDIT;
+        } break;
+    }
+}
 
 void ControlEditor::OnMouseMotion(wxMouseEvent& event)
 {
@@ -286,6 +366,26 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
     bool redraw = false;
 
     switch(m_mode) {
+        case MODE_INSERT: {
+            Element* newElement = *(m_elementList.end() - 1); // Get the last element in the list.
+            newElement->SetPosition(m_camera->ScreenToWorld(clickPoint));
+            redraw = true;
+        } break;
+        case MODE_DRAG:
+        case MODE_DRAG_INSERT:
+        case MODE_DRAG_PASTE: {
+            m_camera->SetTranslation(clickPoint);
+            redraw = true;
+        } break;
+        case MODE_MOVE_ELEMENT: {
+            for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
+                Element* element = *it;
+                if(element->IsSelected()) {
+                    element->Move(m_camera->ScreenToWorld(clickPoint));
+                    redraw = true;
+                }
+            }
+        } break;
         case MODE_SELECTION_RECT: {
             wxPoint2DDouble currentPos = m_camera->ScreenToWorld(clickPoint);
             double x, y, w, h;
@@ -310,6 +410,17 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
         default:
             break;
     }
+
     if(redraw) Redraw();
     event.Skip();
+}
+
+void ControlEditor::OnScroll(wxMouseEvent& event)
+{
+    if(event.GetWheelRotation() > 0)
+        m_camera->SetScale(event.GetPosition(), +0.05);
+    else
+        m_camera->SetScale(event.GetPosition(), -0.05);
+
+    Redraw();
 }

@@ -173,7 +173,6 @@ protected:
     OpenGLColour m_offlineElementColour;
     OpenGLColour m_closedSwitchColour;
     OpenGLColour m_openedSwitchColour;
-    OpenGLColour m_selectionColour;
     OpenGLColour m_powerFlowArrowColour;
 };
 

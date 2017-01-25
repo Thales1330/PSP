@@ -594,6 +594,8 @@ protected:
     wxPoint2DDouble m_movePos;
 
     bool m_online = true;
+    
+    OpenGLColour m_selectionColour;
 };
 
 #endif // ELEMENT_H
