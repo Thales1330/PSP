@@ -17,6 +17,7 @@ public:
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
     virtual void SetText(wxString numerator, wxString denominator);
+    virtual wxString GetSuperscriptNumber(int number);
     
 protected:
     wchar_t m_supNumber[10];

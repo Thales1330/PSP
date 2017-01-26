@@ -15,8 +15,8 @@ TransferFunction::TransferFunction()
     m_supNumber[9] = L'\u2079';
 
     wxString str = "";
-    for(int i = 0; i < 10; i++) {
-        str += "0,1s" + wxString(m_supNumber[i]) + " ";
+    for(int i = 0; i < 20; i++) {
+        str += "0,1s" + GetSuperscriptNumber(i) + " ";
     }
     SetText(str, "");
 
@@ -38,7 +38,7 @@ void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
     DrawRectangle(m_position, m_width, m_height);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-    
+
     glEnable(GL_TEXTURE_2D);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     m_glStringNum->bind();
@@ -58,4 +58,17 @@ void TransferFunction::SetText(wxString numerator, wxString denominator)
     m_glStringNum = new wxGLString(numerator);
     m_glStringNum->setFont(font);
     m_glStringNum->consolidate(&dc);
+}
+
+wxString TransferFunction::GetSuperscriptNumber(int number)
+{
+    wxString strNumber = wxString::Format("%d", number);
+    wxString superscriptStr = "";
+    for(int i = 0; i < (int)strNumber.length(); ++i) {
+        wxString digitStr = strNumber[i];
+        long digit = 0;
+        digitStr.ToLong(&digit);
+        superscriptStr += wxString(m_supNumber[digit]);
+    }
+    return superscriptStr;
 }
