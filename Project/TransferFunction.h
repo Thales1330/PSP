@@ -18,6 +18,8 @@ public:
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
     virtual void SetText(wxString numerator, wxString denominator);
     virtual wxString GetSuperscriptNumber(int number);
+    virtual void GetTFString(wxString& numerator, wxString& denominator);
+    virtual void UpdateTFText();
     
 protected:
     wchar_t m_supNumber[10];
@@ -25,6 +27,8 @@ protected:
     wxGLString* m_glStringNum = NULL;
     wxGLString* m_glStringDen = NULL;
     int m_fontSize = 10;
+    std::vector<double> m_numerator;
+    std::vector<double> m_denominator;
 };
 
 #endif // TRANSFERFUNCTION_H

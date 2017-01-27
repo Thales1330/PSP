@@ -22,6 +22,40 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
         wxC870InitBitmapResources();
         bBitmapLoaded = true;
     }
+    // Set icon(s) to the application/dialog
+    wxIconBundle app_icons;
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("ctrlEditor16"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("ctrlEditor32"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("ctrlEditor64"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("ctrlEditor128"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("ctrlEditor256"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    SetIcons( app_icons );
+
     
     m_toolbarMain = this->CreateToolBar(wxTB_TEXT|wxTB_FLAT, wxID_ANY);
     m_toolbarMain->SetToolBitmapSize(wxSize(32,32));
@@ -105,6 +139,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     m_glCanvas->Connect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditorBase::OnMiddleUp), NULL, this);
     m_glCanvas->Connect(wxEVT_MOTION, wxMouseEventHandler(ControlEditorBase::OnMouseMotion), NULL, this);
     m_glCanvas->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditorBase::OnScroll), NULL, this);
+    m_glCanvas->Connect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorBase::OnIdle), NULL, this);
     
 }
 
@@ -118,6 +153,7 @@ ControlEditorBase::~ControlEditorBase()
     m_glCanvas->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditorBase::OnMiddleUp), NULL, this);
     m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(ControlEditorBase::OnMouseMotion), NULL, this);
     m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditorBase::OnScroll), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorBase::OnIdle), NULL, this);
     
     m_auimgr->UnInit();
     delete m_auimgr;

@@ -110,23 +110,23 @@
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (16x16)  :",
-     "m_path": ""
+     "m_path": "data/images/ctrlEditor16.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (32x32)  :",
-     "m_path": ""
+     "m_path": "data/images/ctrlEditor32.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (64x64)  :",
-     "m_path": ""
+     "m_path": "data/images/ctrlEditor64.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (128x128):",
-     "m_path": ""
+     "m_path": "data/images/ctrlEditor128.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (256x256):",
-     "m_path": ""
+     "m_path": "data/images/ctrlEditor256.png"
     }],
    "m_events": [],
    "m_children": [{
@@ -1139,6 +1139,13 @@
              "m_eventHandler": "wxMouseEventHandler",
              "m_functionNameAndSignature": "OnScroll(wxMouseEvent& event)",
              "m_description": "Process a wxEVT_MOUSEWHEEL event",
+             "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_IDLE",
+             "m_eventClass": "wxIdleEvent",
+             "m_eventHandler": "wxIdleEventHandler",
+             "m_functionNameAndSignature": "OnIdle(wxIdleEvent& event)",
+             "m_description": "Process a wxEVT_IDLE event",
              "m_noBody": false
             }],
            "m_children": []

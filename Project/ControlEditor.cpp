@@ -273,18 +273,30 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
         m_mode = MODE_EDIT;
     } else {
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-            Element* element = *it;
-
-            // Set movement initial position (not necessarily will be moved).
-            element->StartMove(m_camera->ScreenToWorld(clickPoint));
-
-            // Click in an element.
-            if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
-                if(!foundElement) {
-                    element->SetSelected();
+            ControlElement* element = *it;
+            bool foundNode = false;
+            auto nodeList = element->GetNodeList();
+            for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
+                Node node = *itN;
+                if(node.Contains(m_camera->ScreenToWorld(clickPoint))) {
+                    wxLogMessage("Node click!");
+                    foundNode = true;
                     foundElement = true;
                 }
-                m_mode = MODE_MOVE_ELEMENT;
+            }
+            
+            if(!foundNode) {
+                // Set movement initial position (not necessarily will be moved).
+                element->StartMove(m_camera->ScreenToWorld(clickPoint));
+
+                // Click in an element.
+                if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
+                    if(!foundElement) {
+                        element->SetSelected();
+                        foundElement = true;
+                    }
+                    m_mode = MODE_MOVE_ELEMENT;
+                }
             }
         }
     }
@@ -368,7 +380,7 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
     switch(m_mode) {
         case MODE_INSERT: {
             Element* newElement = *(m_elementList.end() - 1); // Get the last element in the list.
-            newElement->SetPosition(m_camera->ScreenToWorld(clickPoint));
+            newElement->Move(m_camera->ScreenToWorld(clickPoint));
             redraw = true;
         } break;
         case MODE_DRAG:
@@ -423,4 +435,16 @@ void ControlEditor::OnScroll(wxMouseEvent& event)
         m_camera->SetScale(event.GetPosition(), -0.05);
 
     Redraw();
+}
+void ControlEditor::OnIdle(wxIdleEvent& event)
+{
+    // Solve wxGLString bug.
+    if(m_firstDraw) {
+        TransferFunction* tf = new TransferFunction();
+        m_elementList.push_back(tf);
+        Redraw();
+        m_elementList.pop_back();
+        delete tf;
+        m_firstDraw = false;
+    }
 }

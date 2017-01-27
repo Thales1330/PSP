@@ -14,21 +14,26 @@ TransferFunction::TransferFunction()
     m_supNumber[8] = L'\u2078';
     m_supNumber[9] = L'\u2079';
 
-    wxString str = "";
-    for(int i = 0; i < 20; i++) {
-        str += "0,1s" + GetSuperscriptNumber(i) + " ";
-    }
-    SetText(str, "");
+    m_numerator.clear();
+    m_numerator.push_back(1);
+    m_denominator.clear();
+    m_denominator.push_back(1);
+    m_denominator.push_back(1);
+    UpdateTFText();
 
-    m_width = 100;
-    m_height = 50;
-    SetPosition(m_position); // Update rect;
+    Node node1(m_position + wxPoint2DDouble(-m_width / 2, 0), Node::NODE_IN, m_borderSize);
+    node1.StartMove(m_position);
+    Node node2(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
+    node2.StartMove(m_position);
+    m_nodeList.push_back(node1);
+    m_nodeList.push_back(node2);
 }
 
 TransferFunction::~TransferFunction() {}
 
 void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
 {
+    glLineWidth(1.0);
     if(m_selected) {
         glColor4dv(m_selectionColour.GetRGBA());
         double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
@@ -39,10 +44,19 @@ void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
 
+    std::vector<wxPoint2DDouble> linePts;
+    linePts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2 + 5 + m_borderSize, m_position.m_y));
+    linePts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2 - 5 - m_borderSize, m_position.m_y));
+    DrawLine(linePts);
+    
+    DrawNodes();
+
     glEnable(GL_TEXTURE_2D);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     m_glStringNum->bind();
-    m_glStringNum->render(m_position.m_x, m_position.m_y);
+    m_glStringNum->render(m_position.m_x, m_position.m_y - m_height / 4);
+    m_glStringDen->bind();
+    m_glStringDen->render(m_position.m_x, m_position.m_y + m_height / 4);
     glDisable(GL_TEXTURE_2D);
 }
 
@@ -58,6 +72,21 @@ void TransferFunction::SetText(wxString numerator, wxString denominator)
     m_glStringNum = new wxGLString(numerator);
     m_glStringNum->setFont(font);
     m_glStringNum->consolidate(&dc);
+
+    if(m_glStringDen) {
+        delete m_glStringDen;
+        m_glStringDen = NULL;
+    }
+    m_glStringDen = new wxGLString(denominator);
+    m_glStringDen->setFont(font);
+    m_glStringDen->consolidate(&dc);
+
+    double nWidth = m_glStringNum->getWidth() + 5 + m_borderSize;
+    double dWidth = m_glStringDen->getWidth() + 5 + m_borderSize;
+
+    m_width = nWidth > dWidth ? nWidth : dWidth;
+    m_height = m_glStringNum->getheight() + m_glStringDen->getheight() + 2 * m_borderSize;
+    SetPosition(m_position); // Update rect properly.
 }
 
 wxString TransferFunction::GetSuperscriptNumber(int number)
@@ -71,4 +100,92 @@ wxString TransferFunction::GetSuperscriptNumber(int number)
         superscriptStr += wxString(m_supNumber[digit]);
     }
     return superscriptStr;
+}
+
+void TransferFunction::GetTFString(wxString& numerator, wxString& denominator)
+{
+    numerator = "";
+    denominator = "";
+    int index = static_cast<int>(m_numerator.size()) - 1;
+    for(auto it = m_numerator.begin(), itEnd = m_numerator.end(); it != itEnd; ++it) {
+        double value = *it;
+        if(value != 0.0) {
+            wxString signal;
+            if(index == static_cast<int>(m_numerator.size()) - 1) {
+                if(value >= 0.0)
+                    signal += "";
+                else
+                    signal += "-";
+            } else {
+                if(value >= 0.0)
+                    signal += "+ ";
+                else
+                    signal += "- ";
+            }
+
+            if(index == 0) {
+                numerator += signal + StringFromDouble(std::abs(value), 0);
+                break;
+            } else if(index == 1) {
+                if(value == 1.0) {
+                    numerator += signal + "s";
+                } else {
+                    numerator += signal + StringFromDouble(std::abs(value), 0) + "s";
+                }
+            } else {
+                if(value == 1.0) {
+                    numerator += signal + "s" + GetSuperscriptNumber(index);
+                } else {
+                    numerator += signal + StringFromDouble(std::abs(value), 0) + "s" + GetSuperscriptNumber(index);
+                }
+            }
+            numerator += " ";
+        }
+        --index;
+    }
+
+    index = static_cast<int>(m_denominator.size()) - 1;
+    for(auto it = m_denominator.begin(), itEnd = m_denominator.end(); it != itEnd; ++it) {
+        double value = *it;
+        if(value != 0.0) {
+            wxString signal;
+            if(index == static_cast<int>(m_denominator.size()) - 1) {
+                if(value >= 0.0)
+                    signal += "";
+                else
+                    signal += "-";
+            } else {
+                if(value >= 0.0)
+                    signal += "+ ";
+                else
+                    signal += "- ";
+            }
+
+            if(index == 0) {
+                denominator += signal + StringFromDouble(std::abs(value), 0);
+                break;
+            } else if(index == 1) {
+                if(value == 1.0) {
+                    denominator += signal + "s";
+                } else {
+                    denominator += signal + StringFromDouble(std::abs(value), 0) + "s";
+                }
+            } else {
+                if(value == 1.0) {
+                    denominator += signal + "s" + GetSuperscriptNumber(index);
+                } else {
+                    denominator += signal + StringFromDouble(std::abs(value), 0) + "s" + GetSuperscriptNumber(index);
+                }
+            }
+            denominator += " ";
+        }
+        --index;
+    }
+}
+
+void TransferFunction::UpdateTFText()
+{
+    wxString num, den;
+    GetTFString(num, den);
+    SetText(num, den);
 }

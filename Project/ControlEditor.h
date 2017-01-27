@@ -63,6 +63,7 @@ public:
     virtual void Redraw() { m_glCanvas->Refresh(); }
 
 protected:
+    virtual void OnIdle(wxIdleEvent& event);
     virtual void OnScroll(wxMouseEvent& event);
     virtual void OnDoubleClick(wxMouseEvent& event);
     virtual void OnLeftClickDown(wxMouseEvent& event);
@@ -85,5 +86,7 @@ protected:
     wxPoint2DDouble m_startSelRect;
     
     std::vector<ControlElement*> m_elementList;
+    
+    bool m_firstDraw = true;
 };
 #endif // CONTROLEDITOR_H
