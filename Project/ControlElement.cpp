@@ -2,7 +2,8 @@
 
 Node::Node(wxPoint2DDouble position, NodeType nodeType, double borderSize)
 {
-    m_rect = wxRect2DDouble(position.m_x, position.m_y, 2 * m_radius + 2 * borderSize, 2 * m_radius + 2 * borderSize);
+    double totalRadius = m_radius + borderSize;
+    m_rect = wxRect2DDouble(position.m_x - totalRadius, position.m_y - totalRadius, totalRadius * 2, totalRadius * 2);
     m_nodeType = nodeType;
 
     m_triPts.push_back(GetPosition() + wxPoint2DDouble(-m_radius - m_rect.GetSize().GetWidth() / 2, m_radius));
@@ -14,22 +15,27 @@ Node::~Node() {}
 
 void Node::SetPosition(wxPoint2DDouble position)
 {
-    m_rect = wxRect2DDouble(position.m_x, position.m_y, m_rect.m_width, m_rect.m_height);
+    m_rect = wxRect2DDouble(
+        position.m_x - m_rect.m_width / 2, position.m_y - m_rect.m_height / 2, m_rect.m_width, m_rect.m_height);
+    m_triPts[0] = GetPosition() + wxPoint2DDouble(-m_radius - m_rect.GetSize().GetWidth() / 2, m_radius);
+    m_triPts[1] = GetPosition() + wxPoint2DDouble(-m_radius - m_rect.GetSize().GetWidth() / 2, -m_radius);
+    m_triPts[2] = GetPosition() + wxPoint2DDouble(-m_radius + 1, 0);
 }
 
 void Node::StartMove(wxPoint2DDouble position)
 {
     m_moveStartPt = position;
-    m_movePos = m_rect.GetPosition();
-    m_triPtsMovePos = m_triPts;
+    m_movePos = m_rect.GetPosition() - wxPoint2DDouble(-m_rect.m_width / 2, -m_rect.m_height / 2);
 }
 
 void Node::Move(wxPoint2DDouble position)
 {
     SetPosition(m_movePos + position - m_moveStartPt);
-    m_triPts[0] = m_triPtsMovePos[0] + position - m_moveStartPt;
-    m_triPts[1] = m_triPtsMovePos[1] + position - m_moveStartPt;
-    m_triPts[2] = m_triPtsMovePos[2] + position - m_moveStartPt;
+}
+
+wxPoint2DDouble Node::GetPosition() const
+{
+    return m_rect.GetPosition() + wxPoint2DDouble(m_rect.GetSize().GetWidth() / 2, m_rect.GetSize().GetHeight() / 2);
 }
 
 ControlElement::ControlElement()

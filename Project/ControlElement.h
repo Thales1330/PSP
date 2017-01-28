@@ -14,7 +14,7 @@ public:
     wxRect2DDouble GetRect() const { return m_rect; }
     void SetRect(wxRect2DDouble rect) { m_rect = rect; }
 
-    wxPoint2DDouble GetPosition() const { return m_rect.GetPosition(); }
+    wxPoint2DDouble GetPosition() const;
     void SetPosition(wxPoint2DDouble position);
 
     NodeType GetNodeType() const { return m_nodeType; }
@@ -36,7 +36,6 @@ protected:
 
     double m_radius = 3.0;
     std::vector<wxPoint2DDouble> m_triPts;
-    std::vector<wxPoint2DDouble> m_triPtsMovePos;
 };
 
 class ControlElement : public Element

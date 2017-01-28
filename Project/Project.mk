@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Thales
-Date                   :=27/01/2017
+Date                   :=28/01/2017
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -69,7 +69,7 @@ Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirector
 	$(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) $(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunction.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) \
-	
+	$(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) 
 
 
 
@@ -493,6 +493,14 @@ $(IntermediateDirectory)/TextForm.cpp$(DependSuffix): TextForm.cpp
 
 $(IntermediateDirectory)/TextForm.cpp$(PreprocessSuffix): TextForm.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/TextForm.cpp$(PreprocessSuffix) TextForm.cpp
+
+$(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix): TransferFunctionForm.cpp $(IntermediateDirectory)/TransferFunctionForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/TransferFunctionForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/TransferFunctionForm.cpp$(DependSuffix): TransferFunctionForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/TransferFunctionForm.cpp$(DependSuffix) -MM TransferFunctionForm.cpp
+
+$(IntermediateDirectory)/TransferFunctionForm.cpp$(PreprocessSuffix): TransferFunctionForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/TransferFunctionForm.cpp$(PreprocessSuffix) TransferFunctionForm.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

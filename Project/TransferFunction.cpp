@@ -1,4 +1,5 @@
 #include "TransferFunction.h"
+#include "TransferFunctionForm.h"
 
 TransferFunction::TransferFunction()
 {
@@ -48,7 +49,7 @@ void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
     linePts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2 + 5 + m_borderSize, m_position.m_y));
     linePts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2 - 5 - m_borderSize, m_position.m_y));
     DrawLine(linePts);
-    
+
     DrawNodes();
 
     glEnable(GL_TEXTURE_2D);
@@ -188,4 +189,19 @@ void TransferFunction::UpdateTFText()
     wxString num, den;
     GetTFString(num, den);
     SetText(num, den);
+    if(m_nodeList.size() == 2) {
+        m_nodeList[0].SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
+        m_nodeList[1].SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+    }
+}
+
+bool TransferFunction::ShowForm(wxWindow* parent, Element* element)
+{
+    TransferFunctionForm* tfForm = new TransferFunctionForm(parent, this);
+    if(tfForm->ShowModal() == wxID_OK) {
+        tfForm->Destroy();
+        return true;
+    }
+    tfForm->Destroy();
+    return false;
 }

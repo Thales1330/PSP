@@ -262,7 +262,23 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
     event.Skip();
 }
 
-void ControlEditor::OnDoubleClick(wxMouseEvent& event) {}
+void ControlEditor::OnDoubleClick(wxMouseEvent& event)
+{
+    wxPoint2DDouble clickPoint = event.GetPosition();
+    bool redraw = false;
+
+    if(m_mode == MODE_EDIT) {
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            Element* element = *it;
+            if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
+                element->ShowForm(this, element);
+                redraw = true;
+            }
+        }
+    }
+
+    if(redraw) Redraw();
+}
 
 void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 {
@@ -284,7 +300,7 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
                     foundElement = true;
                 }
             }
-            
+
             if(!foundNode) {
                 // Set movement initial position (not necessarily will be moved).
                 element->StartMove(m_camera->ScreenToWorld(clickPoint));

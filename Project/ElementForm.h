@@ -771,4 +771,34 @@ public:
     virtual ~TextFormBase();
 };
 
+
+class TransferFunctionFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextNumerator;
+    wxTextCtrl* m_textCtrlNumerator;
+    wxStaticText* m_staticTextDenominator;
+    wxTextCtrl* m_textCtrlDenominator;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnOKClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextNumerator() { return m_staticTextNumerator; }
+    wxTextCtrl* GetTextCtrlNumerator() { return m_textCtrlNumerator; }
+    wxStaticText* GetStaticTextDenominator() { return m_staticTextDenominator; }
+    wxTextCtrl* GetTextCtrlDenominator() { return m_textCtrlDenominator; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    TransferFunctionFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Transfer function"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~TransferFunctionFormBase();
+};
+
 #endif
