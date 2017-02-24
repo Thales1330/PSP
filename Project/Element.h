@@ -230,7 +230,7 @@ public:
      * @param parent Element parent.
      * @param position Node position in the parent.
      */
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position) = 0;
+    virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
 
     /**
      * @brief Checks if the element contains a position.
@@ -380,29 +380,29 @@ public:
      * @return True if the element constains the pickbox, false otherwise.
      */
     virtual bool PickboxContains(wxPoint2DDouble position) { return false; }
-    
+
     /**
      * @brief Move the pickbox.
      * @param position position that the pickbox will be moved.
      */
     virtual void MovePickbox(wxPoint2DDouble position) {}
-    
+
     /**
      * @brief Get the best cursor to shown to the user when the mouse is above a pickbox.
      * @return Cursor.
      */
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_ARROW; }
-    
+
     /**
      * @brief Remove the pickboxes.
      */
     virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
-    
+
     /**
      * @brief Remove the active nodes.
      */
     virtual void ResetNodes() { m_activeNodeID = 0; }
-    
+
     /**
      * @brief Convert the element position to screen position.
      * @param translation System translation.
@@ -412,7 +412,7 @@ public:
      */
     virtual wxPoint2DDouble
     WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX = 0.0, double offsetY = 0.0) const;
-    
+
     /**
      * @brief Convert a generic position to screen position.
      * @param position Position to be converted.
@@ -427,15 +427,15 @@ public:
         double offsetX = 0.0,
         double offsetY = 0.0) const;
     virtual bool
-    
-    /**
-     * @brief Check if two roteted rectangles intersect.
-     * @param rect1 First rect.
-     * @param rect2 Second rect.
-     * @param angle1 Rotation algle of first rectangle.
-     * @param angle2 Rotation angle of second rectangle.
-     */
-    RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
+
+        /**
+         * @brief Check if two roteted rectangles intersect.
+         * @param rect1 First rect.
+         * @param rect2 Second rect.
+         * @param angle1 Rotation algle of first rectangle.
+         * @param angle2 Rotation angle of second rectangle.
+         */
+        RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
 
     /**
      * @brief Draw a circle.
@@ -451,7 +451,7 @@ public:
         double finalAngle,
         int numSegments,
         GLenum mode = GL_LINE_LOOP) const;
-        
+
     /**
      * @brief Draw rectangle.
      * @param position Rectangle position.
@@ -460,41 +460,41 @@ public:
      * @param mode OpenGl primitive.
      */
     virtual void DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode = GL_QUADS) const;
-    
+
     /**
      * @brief Draw rectangle.
      * @param points Rectangle vertices.
      * @param mode OpenGl primitive.
      */
     virtual void DrawRectangle(wxPoint2DDouble* points, GLenum mode = GL_QUADS) const;
-    
+
     /**
      * @brief Draw a triangle.
      * @param points Triangle vertices.
      * @param mode OpenGl primitive.
      */
     virtual void DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode = GL_TRIANGLES) const;
-    
+
     /**
      * @brief Draw a point.
      * @param position Point position.
      * @param size Point size.
      */
     virtual void DrawPoint(wxPoint2DDouble position, double size) const;
-    
+
     /**
      * @brief Draw line.
      * @param points Line vertices.
      * @param mode OpenGl primitive.
      */
     virtual void DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode = GL_LINE_STRIP) const;
-    
+
     /**
      * @brief Draw pickbox.
      * @param position Pickbox position.
      */
     virtual void DrawPickbox(wxPoint2DDouble position) const;
-    
+
     /**
      * @brief Rotate a point as element position being the origin.
      * @param pointToRotate Point that will be rotated.
@@ -508,16 +508,16 @@ public:
      * @return Parent list.
      */
     virtual std::vector<Element*> GetParentList() const { return m_parentList; }
-    
+
     /**
      * @brief Get the Child list.
      * @return Child List.
      */
     virtual std::vector<Element*> GetChildList() const { return m_childList; }
-    
-    //virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
-    //virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
-    
+
+    // virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
+    // virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
+
     /**
      * @brief Calculate the element boundaries.
      * @param leftUp Top-left position of the element.
@@ -538,7 +538,7 @@ public:
      * @return True if the form is shown, false otherwise.
      */
     virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
-    
+
     /**
      * @brief Get a double value from a string. Show a error message if the conversion fail.
      * @param parent Message box parent.
@@ -547,7 +547,7 @@ public:
      * @param errorMsg Error message.
      */
     bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
-    
+
     /**
      * @brief Convert a string to int. Show a error message if the conversion fail.
      * @param parent Message box parent.
@@ -563,6 +563,14 @@ public:
      * @param minDecimal Minimum number of decimal places.
      */
     static wxString StringFromDouble(double value, int minDecimal = 1);
+    
+    /**
+     * @brief Calculate the distance between a line (formed by point list) and a point.
+     * @param point origin point.
+     * @param segmentNumber Sotores the segment number clicked
+     * @return The distance between the point and the line.
+     */
+    virtual double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
 
 protected:
     int m_elementID = 0;
@@ -594,7 +602,7 @@ protected:
     wxPoint2DDouble m_movePos;
 
     bool m_online = true;
-    
+
     OpenGLColour m_selectionColour;
 };
 

@@ -39,6 +39,7 @@
       <VirtualDirectory Name="control element">
         <File Name="ControlElement.cpp"/>
         <File Name="TransferFunction.cpp"/>
+        <File Name="ConnectionLine.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -108,6 +109,7 @@
       <VirtualDirectory Name="control element">
         <File Name="ControlElement.h"/>
         <File Name="TransferFunction.h"/>
+        <File Name="ConnectionLine.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">

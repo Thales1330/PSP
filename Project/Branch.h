@@ -20,7 +20,6 @@ public:
 	virtual void RemoveParent(Element* parent);
     virtual void UpdateNodes();
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_ARROW; }
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
     virtual bool Intersects(wxRect2DDouble rect) const { return false; }
     virtual void MovePickbox(wxPoint2DDouble position) {}
     virtual bool PickboxContains(wxPoint2DDouble position) { return false; }

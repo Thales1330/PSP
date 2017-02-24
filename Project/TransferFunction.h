@@ -17,7 +17,6 @@ public:
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
     
     virtual std::vector<double> GetNumerator() const { return m_numerator; }
