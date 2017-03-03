@@ -1147,6 +1147,13 @@
              "m_functionNameAndSignature": "OnIdle(wxIdleEvent& event)",
              "m_description": "Process a wxEVT_IDLE event",
              "m_noBody": false
+            }, {
+             "m_eventName": "wxEVT_KEY_DOWN",
+             "m_eventClass": "wxKeyEvent",
+             "m_eventHandler": "wxKeyEventHandler",
+             "m_functionNameAndSignature": "OnKeyDown(wxKeyEvent& event)",
+             "m_description": "Process a wxEVT_KEY_DOWN event (any key has been pressed)",
+             "m_noBody": false
             }],
            "m_children": []
           }]

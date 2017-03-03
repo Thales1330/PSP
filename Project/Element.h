@@ -225,12 +225,19 @@ public:
     virtual std::vector<wxPoint2DDouble> GetPointList() const { return m_pointList; }
 
     /**
-     * @brief Add a parent to the element. The parent must be a bus. The element basic points are calculated in this
-     * method, so apply this when the element is being inserted.
+     * @brief Add a parent to the element. This method must be used on power elements that connect to a bus, so the
+     * parent must be a bus.
+     * The element basic points are calculated in this method, so apply this when the element is being inserted.
      * @param parent Element parent.
      * @param position Node position in the parent.
      */
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
+
+    /**
+     * @brief Add a parent to the element.
+     * @param parent Element parent.
+     */
+    virtual void AddParent(Element* parent) { m_parentList.push_back(parent); }
 
     /**
      * @brief Checks if the element contains a position.
@@ -426,16 +433,16 @@ public:
         double scale,
         double offsetX = 0.0,
         double offsetY = 0.0) const;
-    virtual bool
 
-        /**
-         * @brief Check if two roteted rectangles intersect.
-         * @param rect1 First rect.
-         * @param rect2 Second rect.
-         * @param angle1 Rotation algle of first rectangle.
-         * @param angle2 Rotation angle of second rectangle.
-         */
-        RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
+    /**
+     * @brief Check if two roteted rectangles intersect.
+     * @param rect1 First rect.
+     * @param rect2 Second rect.
+     * @param angle1 Rotation algle of first rectangle.
+     * @param angle2 Rotation angle of second rectangle.
+     */
+    virtual bool
+    RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
 
     /**
      * @brief Draw a circle.
@@ -563,7 +570,7 @@ public:
      * @param minDecimal Minimum number of decimal places.
      */
     static wxString StringFromDouble(double value, int minDecimal = 1);
-    
+
     /**
      * @brief Calculate the distance between a line (formed by point list) and a point.
      * @param point origin point.

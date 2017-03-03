@@ -18,6 +18,7 @@ public:
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual void Rotate(bool clockwise = true);
     
     virtual std::vector<double> GetNumerator() const { return m_numerator; }
     virtual std::vector<double> GetDenominator() const { return m_denominator; }

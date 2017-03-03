@@ -655,7 +655,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
                     Redraw();
                 }
-            }
+            } break;
             case 'F': {
                 if(event.GetModifiers() == wxMOD_SHIFT) {
                     Fit();

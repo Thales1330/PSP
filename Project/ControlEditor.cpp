@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "ControlElement.h"
 #include "TransferFunction.h"
+#include "ConnectionLine.h"
 
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
     : wxWindow(parent, id)
@@ -235,6 +236,11 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
     glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                         // Scale
     glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0); // Translation
 
+    for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
+        ConnectionLine* line = *it;
+        line->Draw(m_camera->GetTranslation(), m_camera->GetScale());
+    }
+
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
         Element* element = *it;
         element->Draw(m_camera->GetTranslation(), m_camera->GetScale());
@@ -293,11 +299,15 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
             bool foundNode = false;
             auto nodeList = element->GetNodeList();
             for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
-                Node node = *itN;
-                if(node.Contains(m_camera->ScreenToWorld(clickPoint))) {
-                    wxLogMessage("Node click!");
-                    foundNode = true;
+                Node* node = *itN;
+                if(node->Contains(m_camera->ScreenToWorld(clickPoint))) {
+                    m_mode = MODE_INSERT_LINE;
+                    ConnectionLine* line = new ConnectionLine(node);
+                    m_connectionList.push_back(line);
+                    element->AddChild(line);
+                    line->AddParent(element);
                     foundElement = true;
+                    foundNode = true;
                 }
             }
 
@@ -315,6 +325,17 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
                 }
             }
         }
+        if(m_mode != MODE_INSERT_LINE) {
+            for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
+                ConnectionLine* line = *it;
+                line->StartMove(m_camera->ScreenToWorld(clickPoint));
+                if(line->Contains(m_camera->ScreenToWorld(clickPoint))) {
+                    line->SetSelected();
+                    foundElement = true;
+                    m_mode = MODE_MOVE_LINE;
+                }
+            }
+        }
     }
 
     if(!foundElement) {
@@ -328,9 +349,25 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 
 void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 {
+    bool foundNode = false;
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
-        Element* element = *it;
-        if(m_mode == MODE_SELECTION_RECT) {
+        ControlElement* element = *it;
+        if(m_mode == MODE_INSERT_LINE) {
+            auto nodeList = element->GetNodeList();
+            for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
+                Node* node = *itN;
+                if(node->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                    ConnectionLine* line = *(m_connectionList.end() - 1);
+                    if(line->AppendNode(node, element)) {
+                        line->AddParent(element);
+                        element->AddChild(line);
+                        line->UpdatePoints();
+                        m_mode = MODE_EDIT;
+                        foundNode = true;
+                    }
+                }
+            }
+        } else if(m_mode == MODE_SELECTION_RECT) {
             if(element->Intersects(m_selectionRect)) {
                 element->SetSelected();
             } else if(!event.ControlDown()) {
@@ -342,9 +379,34 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
             }
         }
     }
+    for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
+        ConnectionLine* line = *it;
+        if(m_mode == MODE_SELECTION_RECT) {
+            if(line->Intersects(m_selectionRect)) {
+                line->SetSelected();
+            } else if(!event.ControlDown()) {
+                line->SetSelected(false);
+            }
+        } else if(!event.ControlDown()) {
+            if(!line->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                line->SetSelected(false);
+            }
+        }
+    }
 
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
-    if(m_mode != MODE_INSERT) {
+
+    if(m_mode == MODE_INSERT_LINE && !foundNode) {
+        ConnectionLine* line = *(m_connectionList.end() - 1);
+        auto parentList = line->GetParentList();
+        for(auto it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {
+            Element* element = *it;
+            element->RemoveChild(line);
+        }
+        delete line;
+        m_connectionList.pop_back();
+        m_mode = MODE_EDIT;
+    } else if(m_mode != MODE_INSERT) {
         m_mode = MODE_EDIT;
     }
 
@@ -399,6 +461,12 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
             newElement->Move(m_camera->ScreenToWorld(clickPoint));
             redraw = true;
         } break;
+        case MODE_INSERT_LINE: {
+            ConnectionLine* line = *(m_connectionList.end() - 1);
+            line->SetTemporarySecondPoint(m_camera->ScreenToWorld(clickPoint));
+            line->UpdatePoints();
+            redraw = true;
+        } break;
         case MODE_DRAG:
         case MODE_DRAG_INSERT:
         case MODE_DRAG_PASTE: {
@@ -410,6 +478,20 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
                 Element* element = *it;
                 if(element->IsSelected()) {
                     element->Move(m_camera->ScreenToWorld(clickPoint));
+                    auto childList = element->GetChildList();
+                    for(auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; itC++) {
+                        ConnectionLine* line = static_cast<ConnectionLine*>(*itC);
+                        line->UpdatePoints();
+                    }
+                    redraw = true;
+                }
+            }
+        } break;
+        case MODE_MOVE_LINE: {
+            for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; it++) {
+                ConnectionLine* line = *it;
+                if(line->IsSelected()) {
+                    line->Move(m_camera->ScreenToWorld(clickPoint));
                     redraw = true;
                 }
             }
@@ -463,4 +545,32 @@ void ControlEditor::OnIdle(wxIdleEvent& event)
         delete tf;
         m_firstDraw = false;
     }
+}
+void ControlEditor::OnKeyDown(wxKeyEvent& event)
+{
+    char key = event.GetUnicodeKey();
+    if(key != WXK_NONE) {
+        switch(key) {
+            case 'R': // Rotate the selected elements.
+            {
+                RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
+            } break;
+        }
+    }
+}
+
+void ControlEditor::RotateSelectedElements(bool clockwise)
+{
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        Element* element = *it;
+        if(element->IsSelected()) {
+            element->Rotate(clockwise);
+            auto childList = element->GetChildList();
+            for(auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; itC++) {
+                ConnectionLine* line = static_cast<ConnectionLine*>(*itC);
+                line->UpdatePoints();
+            }
+        }
+    }
+    Redraw();
 }

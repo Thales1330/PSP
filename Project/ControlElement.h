@@ -22,6 +22,13 @@ public:
 
     double GetRadius() const { return m_radius; }
     std::vector<wxPoint2DDouble> GetInTrianglePts() const { return m_triPts; }
+    
+    double GetAngle() const { return m_angle; }
+    void SetAngle(double angle) { m_angle = angle; }
+    
+    void Rotate(bool clockwise = true);
+    
+    void RotateTriPt(double angle);
 
     void StartMove(wxPoint2DDouble position);
     void Move(wxPoint2DDouble position);
@@ -36,6 +43,7 @@ protected:
 
     double m_radius = 3.0;
     std::vector<wxPoint2DDouble> m_triPts;
+    double m_angle = 0.0;
 };
 
 class ControlElement : public Element
@@ -47,13 +55,13 @@ public:
     virtual void StartMove(wxPoint2DDouble position);
     virtual void Move(wxPoint2DDouble position);
 
-    void SetNodeList(std::vector<Node> nodeList) { m_nodeList = nodeList; }
-    std::vector<Node> GetNodeList() const { return m_nodeList; }
+    void SetNodeList(std::vector<Node*> nodeList) { m_nodeList = nodeList; }
+    std::vector<Node*> GetNodeList() const { return m_nodeList; }
 
     virtual void DrawNodes() const;
 
 protected:
-    std::vector<Node> m_nodeList;
+    std::vector<Node*> m_nodeList;
 };
 
 #endif // CONTROLELEMENT_H

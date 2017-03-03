@@ -22,10 +22,11 @@ TransferFunction::TransferFunction()
     m_denominator.push_back(1);
     UpdateTFText();
 
-    Node node1(m_position + wxPoint2DDouble(-m_width / 2, 0), Node::NODE_IN, m_borderSize);
-    node1.StartMove(m_position);
-    Node node2(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
-    node2.StartMove(m_position);
+    Node* node1 = new Node(m_position + wxPoint2DDouble(-m_width / 2, 0), Node::NODE_IN, m_borderSize);
+    node1->StartMove(m_position);
+    Node* node2 = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
+    node2->SetAngle(180.0);
+    node2->StartMove(m_position);
     m_nodeList.push_back(node1);
     m_nodeList.push_back(node2);
 }
@@ -190,8 +191,8 @@ void TransferFunction::UpdateTFText()
     GetTFString(num, den);
     SetText(num, den);
     if(m_nodeList.size() == 2) {
-        m_nodeList[0].SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
-        m_nodeList[1].SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+        m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
+        m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
     }
 }
 
@@ -204,4 +205,35 @@ bool TransferFunction::ShowForm(wxWindow* parent, Element* element)
     }
     tfForm->Destroy();
     return false;
+}
+
+void TransferFunction::Rotate(bool clockwise)
+{
+    if(clockwise)
+        m_angle += 90.0;
+    else
+        m_angle -= 90.0;
+    if(m_angle >= 360.0)
+        m_angle = 0.0;
+    else if(m_angle < 0)
+        m_angle = 270.0;
+
+    if(m_angle == 0.0) {
+        m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
+        m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+    } else if(m_angle == 90.0) {
+        m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
+        m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
+    } else if(m_angle == 180.0) {
+        m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+        m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
+    } else if(m_angle == 270.0) {
+        m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
+        m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
+    }
+
+    for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
+        Node* node = *it;
+        node->Rotate(clockwise);
+    }
 }

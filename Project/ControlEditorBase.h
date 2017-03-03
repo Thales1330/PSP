@@ -57,6 +57,7 @@ protected:
     virtual void OnMouseMotion(wxMouseEvent& event) { event.Skip(); }
     virtual void OnScroll(wxMouseEvent& event) { event.Skip(); }
     virtual void OnIdle(wxIdleEvent& event) { event.Skip(); }
+    virtual void OnKeyDown(wxKeyEvent& event) { event.Skip(); }
 
 public:
     wxToolBar* GetToolbarMain() { return m_toolbarMain; }

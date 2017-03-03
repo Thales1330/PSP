@@ -12,6 +12,7 @@
 class Camera;
 class ControlElement;
 class TransferFunction;
+class ConnectionLine;
 
 enum ControlElementButtonID { ID_IO = 0, ID_TF, ID_SUM, ID_CONST, ID_LIMITER, ID_GAIN, ID_MULT, ID_SAT, ID_RATELIM };
 
@@ -49,9 +50,11 @@ public:
     enum ControlEditorMode {
         MODE_EDIT = 0,
         MODE_MOVE_ELEMENT,
+        MODE_MOVE_LINE,
         MODE_DRAG,
         MODE_DRAG_INSERT,
         MODE_INSERT,
+        MODE_INSERT_LINE,
         MODE_SELECTION_RECT,
         MODE_PASTE,
         MODE_DRAG_PASTE
@@ -61,8 +64,10 @@ public:
 
     virtual void AddElement(ControlElementButtonID id);
     virtual void Redraw() { m_glCanvas->Refresh(); }
+    virtual void RotateSelectedElements(bool clockwise);
 
 protected:
+    virtual void OnKeyDown(wxKeyEvent& event);
     virtual void OnIdle(wxIdleEvent& event);
     virtual void OnScroll(wxMouseEvent& event);
     virtual void OnDoubleClick(wxMouseEvent& event);
@@ -86,6 +91,7 @@ protected:
     wxPoint2DDouble m_startSelRect;
     
     std::vector<ControlElement*> m_elementList;
+    std::vector<ConnectionLine*> m_connectionList;
     
     bool m_firstDraw = true;
 };

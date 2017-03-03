@@ -140,6 +140,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     m_glCanvas->Connect(wxEVT_MOTION, wxMouseEventHandler(ControlEditorBase::OnMouseMotion), NULL, this);
     m_glCanvas->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditorBase::OnScroll), NULL, this);
     m_glCanvas->Connect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorBase::OnIdle), NULL, this);
+    m_glCanvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
     
 }
 
@@ -154,6 +155,7 @@ ControlEditorBase::~ControlEditorBase()
     m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(ControlEditorBase::OnMouseMotion), NULL, this);
     m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditorBase::OnScroll), NULL, this);
     m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorBase::OnIdle), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
     
     m_auimgr->UnInit();
     delete m_auimgr;
