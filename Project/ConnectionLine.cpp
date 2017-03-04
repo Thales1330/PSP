@@ -9,6 +9,7 @@ ConnectionLine::ConnectionLine(Node* firstNode)
         m_pointList.push_back(pt);
     }
     m_nodeList.push_back(firstNode);
+    firstNode->SetConnected();
 }
 
 ConnectionLine::~ConnectionLine() {}
@@ -46,44 +47,50 @@ bool ConnectionLine::Intersects(wxRect2DDouble rect) const
 
 void ConnectionLine::UpdatePoints()
 {
-    bool hasOneNode = true;
-    wxPoint2DDouble pt1 = m_nodeList[0]->GetPosition();
-    wxPoint2DDouble pt2;
-    if(m_nodeList.size() == 1)
-        pt2 = m_tmpSndPt;
-    else {
-        pt2 = m_nodeList[1]->GetPosition();
-        hasOneNode = false;
+    if(m_type == ELEMENT_ELEMENT) {
+        bool hasOneNode = true;
+        wxPoint2DDouble pt1 = m_nodeList[0]->GetPosition();
+        wxPoint2DDouble pt2;
+        if(m_nodeList.size() == 1)
+            pt2 = m_tmpSndPt;
+        else {
+            pt2 = m_nodeList[1]->GetPosition();
+            hasOneNode = false;
+        }
+        wxPoint2DDouble midPt = (pt1 + pt2) / 2.0 + wxPoint2DDouble(0.0, m_lineOffset);
+
+        m_pointList[0] = pt1;
+        if(m_nodeList[0]->GetAngle() == 0.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(-10, 0);
+        else if(m_nodeList[0]->GetAngle() == 90.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(0, -10);
+        else if(m_nodeList[0]->GetAngle() == 180.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(10, 0);
+        else if(m_nodeList[0]->GetAngle() == 270.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(0, 10);
+
+        m_pointList[2] = m_pointList[1] + wxPoint2DDouble(0.0, midPt.m_y - m_pointList[1].m_y);
+
+        m_pointList[5] = pt2;
+        if(hasOneNode)
+            m_pointList[4] = pt2;
+        else {
+            if(m_nodeList[1]->GetAngle() == 0.0)
+                m_pointList[4] = m_pointList[5] + wxPoint2DDouble(-10, 0);
+            else if(m_nodeList[1]->GetAngle() == 90.0)
+                m_pointList[4] = m_pointList[5] + wxPoint2DDouble(0, -10);
+            else if(m_nodeList[1]->GetAngle() == 180.0)
+                m_pointList[4] = m_pointList[5] + wxPoint2DDouble(10, 0);
+            else if(m_nodeList[1]->GetAngle() == 270.0)
+                m_pointList[4] = m_pointList[5] + wxPoint2DDouble(0, 10);
+        }
+
+        m_pointList[3] = m_pointList[4] + wxPoint2DDouble(0.0, midPt.m_y - m_pointList[4].m_y);
+    } else if(m_type == ELEMENT_LINE) {
+        wxPoint2DDouble pt1 = m_nodeList[0]->GetPosition();
+        wxPoint2DDouble pt2 = m_parentLine->GetMidPoint();
+        //CONTINUE...
     }
-    wxPoint2DDouble midPt = (pt1 + pt2) / 2.0 + wxPoint2DDouble(0.0, m_lineOffset);
-
-    m_pointList[0] = pt1;
-    if(m_nodeList[0]->GetAngle() == 0.0)
-        m_pointList[1] = m_pointList[0] + wxPoint2DDouble(-10, 0);
-    else if(m_nodeList[0]->GetAngle() == 90.0)
-        m_pointList[1] = m_pointList[0] + wxPoint2DDouble(0, -10);
-    else if(m_nodeList[0]->GetAngle() == 180.0)
-        m_pointList[1] = m_pointList[0] + wxPoint2DDouble(10, 0);
-    else if(m_nodeList[0]->GetAngle() == 270.0)
-        m_pointList[1] = m_pointList[0] + wxPoint2DDouble(0, 10);
-
-    m_pointList[2] = m_pointList[1] + wxPoint2DDouble(0.0, midPt.m_y - m_pointList[1].m_y);
-
-    m_pointList[5] = pt2;
-    if(hasOneNode)
-        m_pointList[4] = pt2;
-    else {
-        if(m_nodeList[1]->GetAngle() == 0.0)
-            m_pointList[4] = m_pointList[5] + wxPoint2DDouble(-10, 0);
-        else if(m_nodeList[1]->GetAngle() == 90.0)
-            m_pointList[4] = m_pointList[5] + wxPoint2DDouble(0, -10);
-        else if(m_nodeList[1]->GetAngle() == 180.0)
-            m_pointList[4] = m_pointList[5] + wxPoint2DDouble(10, 0);
-        else if(m_nodeList[1]->GetAngle() == 270.0)
-            m_pointList[4] = m_pointList[5] + wxPoint2DDouble(0, 10);
-    }
-
-    m_pointList[3] = m_pointList[4] + wxPoint2DDouble(0.0, midPt.m_y - m_pointList[4].m_y);
 }
 
 bool ConnectionLine::AppendNode(Node* node, ControlElement* parent)
@@ -98,6 +105,7 @@ bool ConnectionLine::AppendNode(Node* node, ControlElement* parent)
     }
 
     m_nodeList.push_back(node);
+    node->SetConnected();
     return true;
 }
 
@@ -111,4 +119,14 @@ void ConnectionLine::StartMove(wxPoint2DDouble position)
 {
     m_moveStartPtY = position.m_y;
     m_moveStartOffset = m_lineOffset;
+}
+
+wxPoint2DDouble ConnectionLine::GetMidPoint() const { return ((m_pointList[2] + m_pointList[3]) / 2.0); }
+
+void ConnectionLine::SetParentLine(ConnectionLine* parent)
+{
+    if(parent) {
+        m_type = ELEMENT_LINE;
+        m_parentLine = parent;
+    }
 }

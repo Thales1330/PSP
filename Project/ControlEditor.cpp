@@ -278,6 +278,11 @@ void ControlEditor::OnDoubleClick(wxMouseEvent& event)
             Element* element = *it;
             if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
                 element->ShowForm(this, element);
+                auto childList = element->GetChildList();
+                for(auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; ++itC) {
+                    ConnectionLine* line = static_cast<ConnectionLine*>(*itC);
+                    line->UpdatePoints();
+                }
                 redraw = true;
             }
         }
@@ -398,13 +403,20 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 
     if(m_mode == MODE_INSERT_LINE && !foundNode) {
         ConnectionLine* line = *(m_connectionList.end() - 1);
+        // Free nodes
+        auto nodeList = line->GetNodeList();
+        for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
+            Node* node = *itN;
+            node->SetConnected(false);
+        }
+        // Remove the associated child from parents.
         auto parentList = line->GetParentList();
         for(auto it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {
             Element* element = *it;
             element->RemoveChild(line);
         }
-        delete line;
         m_connectionList.pop_back();
+        if(line) delete line;
         m_mode = MODE_EDIT;
     } else if(m_mode != MODE_INSERT) {
         m_mode = MODE_EDIT;
@@ -551,6 +563,10 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
     char key = event.GetUnicodeKey();
     if(key != WXK_NONE) {
         switch(key) {
+            case WXK_DELETE: // Delete selected elements.
+            {
+                DeleteSelectedElements();
+            } break;
             case 'R': // Rotate the selected elements.
             {
                 RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
@@ -570,6 +586,64 @@ void ControlEditor::RotateSelectedElements(bool clockwise)
                 ConnectionLine* line = static_cast<ConnectionLine*>(*itC);
                 line->UpdatePoints();
             }
+        }
+    }
+    Redraw();
+}
+
+void ControlEditor::DeleteSelectedElements()
+{
+    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+        Element* element = *it;
+        if(element->IsSelected()) {
+            // Remove child/parent.
+            auto childList = element->GetChildList();
+            for(auto itC = childList.begin(), itEnd = childList.end(); itC != itEnd; ++itC) {
+                // The child is always a connection line.
+                ConnectionLine* child = static_cast<ConnectionLine*>(*itC);
+                // Delete the connection line.
+                for(auto itCo = m_connectionList.begin(); itCo != m_connectionList.end(); ++itCo) {
+                    ConnectionLine* line = *itCo;
+                    if(line == child) {
+                        // Free nodes
+                        auto nodeList = line->GetNodeList();
+                        for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
+                            Node* node = *itN;
+                            node->SetConnected(false);
+                        }
+                        // Remove the child from parents
+                        auto parentList = line->GetParentList();
+                        for(auto itP = parentList.begin(), itEndP = parentList.end(); itP != itEndP; ++itP) {
+                            Element* parent = *itP;
+                            parent->RemoveChild(child);
+                        }
+                        m_connectionList.erase(itCo--);
+                        if(line) delete line;
+                        break;
+                    }
+                }
+            }
+            m_elementList.erase(it--);
+            if(element) delete element;
+        }
+    }
+
+    for(auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
+        ConnectionLine* line = *it;
+        if(line->IsSelected()) {
+            auto parentList = line->GetParentList();
+            for(auto itP = parentList.begin(), itEnd = parentList.end(); itP != itEnd; ++itP) {
+                Element* parent = *itP;
+                if(parent) parent->RemoveChild(line);
+            }
+            // Free nodes
+            auto nodeList = line->GetNodeList();
+            for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
+                Node* node = *itN;
+                node->SetConnected(false);
+            }
+            m_connectionList.erase(it--);
+            if(line) delete line;
         }
     }
     Redraw();

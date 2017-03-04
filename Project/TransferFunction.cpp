@@ -191,8 +191,19 @@ void TransferFunction::UpdateTFText()
     GetTFString(num, den);
     SetText(num, den);
     if(m_nodeList.size() == 2) {
-        m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
-        m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+        if(m_angle == 0.0) {
+            m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
+            m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+        } else if(m_angle == 90.0) {
+            m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
+            m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
+        } else if(m_angle == 180.0) {
+            m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+            m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
+        } else if(m_angle == 270.0) {
+            m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
+            m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
+        }
     }
 }
 

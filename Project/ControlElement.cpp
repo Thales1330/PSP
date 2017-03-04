@@ -77,6 +77,12 @@ void Node::Rotate(bool clockwise)
     if(m_angle != 0.0) RotateTriPt(m_angle);
 }
 
+bool Node::Contains(wxPoint2DDouble position) const
+{
+    if(m_connected) return false;
+    return m_rect.Contains(position);
+}
+
 ControlElement::ControlElement()
     : Element()
 {

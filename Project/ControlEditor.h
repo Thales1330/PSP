@@ -65,6 +65,7 @@ public:
     virtual void AddElement(ControlElementButtonID id);
     virtual void Redraw() { m_glCanvas->Refresh(); }
     virtual void RotateSelectedElements(bool clockwise);
+    virtual void DeleteSelectedElements();
 
 protected:
     virtual void OnKeyDown(wxKeyEvent& event);

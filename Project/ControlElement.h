@@ -32,11 +32,16 @@ public:
 
     void StartMove(wxPoint2DDouble position);
     void Move(wxPoint2DDouble position);
-    bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
+    bool Contains(wxPoint2DDouble position) const;
+    
+    bool IsConnected() const { return m_connected; }
+    void SetConnected(bool connected = true) { m_connected = connected; }
 
 protected:
     wxRect2DDouble m_rect;
     NodeType m_nodeType;
+    
+    bool m_connected = false;
 
     wxPoint2DDouble m_moveStartPt;
     wxPoint2DDouble m_movePos;

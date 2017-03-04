@@ -6,6 +6,10 @@
 class ConnectionLine : public ControlElement
 {
 public:
+    enum ConnectionLineType {
+        ELEMENT_ELEMENT = 0,
+        ELEMENT_LINE
+    };
     ConnectionLine(Node* firstNode);
     ~ConnectionLine();
     
@@ -16,13 +20,23 @@ public:
     virtual void Move(wxPoint2DDouble position);
     virtual bool AppendNode(Node* node, ControlElement* parent);
     virtual void UpdatePoints();
-    virtual void SetTemporarySecondPoint(wxPoint2DDouble point) { m_tmpSndPt = point; };
+    virtual void SetTemporarySecondPoint(wxPoint2DDouble point) { m_tmpSndPt = point; }
+    virtual wxPoint2DDouble GetMidPoint() const;
+    
+    virtual ConnectionLineType GetType() const { return m_type; }
+    virtual void SetType(ConnectionLineType newType) { m_type = newType; }
+    
+    virtual ConnectionLine* GetParentLine() const { return m_parentLine; }
+    virtual void SetParentLine(ConnectionLine* parent);
     
 protected:
     double m_lineOffset = 0.0;
     double m_moveStartPtY = 0.0;
     double m_moveStartOffset = 0.0;
     wxPoint2DDouble m_tmpSndPt;
+    
+    ConnectionLineType m_type = ELEMENT_ELEMENT;
+    ConnectionLine* m_parentLine = NULL;
 };
 
 #endif // CONNECTIONLINE_H
