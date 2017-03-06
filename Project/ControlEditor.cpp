@@ -385,16 +385,25 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
         }
     }
     for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-        ConnectionLine* line = *it;
-        if(m_mode == MODE_SELECTION_RECT) {
-            if(line->Intersects(m_selectionRect)) {
-                line->SetSelected();
+        ConnectionLine* cLine = *it;
+        if(m_mode == MODE_INSERT_LINE && !foundNode && it != (itEnd - 1)) {
+            if(cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                ConnectionLine* iLine = *(m_connectionList.end() - 1);
+                cLine->AddChild(iLine);
+                iLine->SetParentLine(cLine);
+                iLine->UpdatePoints();
+                m_mode = MODE_EDIT;
+                foundNode = true;
+            }
+        } else if(m_mode == MODE_SELECTION_RECT) {
+            if(cLine->Intersects(m_selectionRect)) {
+                cLine->SetSelected();
             } else if(!event.ControlDown()) {
-                line->SetSelected(false);
+                cLine->SetSelected(false);
             }
         } else if(!event.ControlDown()) {
-            if(!line->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-                line->SetSelected(false);
+            if(!cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+                cLine->SetSelected(false);
             }
         }
     }
@@ -402,21 +411,21 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 
     if(m_mode == MODE_INSERT_LINE && !foundNode) {
-        ConnectionLine* line = *(m_connectionList.end() - 1);
+        ConnectionLine* cLine = *(m_connectionList.end() - 1);
         // Free nodes
-        auto nodeList = line->GetNodeList();
+        auto nodeList = cLine->GetNodeList();
         for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
             Node* node = *itN;
             node->SetConnected(false);
         }
         // Remove the associated child from parents.
-        auto parentList = line->GetParentList();
+        auto parentList = cLine->GetParentList();
         for(auto it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {
             Element* element = *it;
-            element->RemoveChild(line);
+            element->RemoveChild(cLine);
         }
         m_connectionList.pop_back();
-        if(line) delete line;
+        if(cLine) delete cLine;
         m_mode = MODE_EDIT;
     } else if(m_mode != MODE_INSERT) {
         m_mode = MODE_EDIT;
@@ -605,20 +614,7 @@ void ControlEditor::DeleteSelectedElements()
                 for(auto itCo = m_connectionList.begin(); itCo != m_connectionList.end(); ++itCo) {
                     ConnectionLine* line = *itCo;
                     if(line == child) {
-                        // Free nodes
-                        auto nodeList = line->GetNodeList();
-                        for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
-                            Node* node = *itN;
-                            node->SetConnected(false);
-                        }
-                        // Remove the child from parents
-                        auto parentList = line->GetParentList();
-                        for(auto itP = parentList.begin(), itEndP = parentList.end(); itP != itEndP; ++itP) {
-                            Element* parent = *itP;
-                            parent->RemoveChild(child);
-                        }
-                        m_connectionList.erase(itCo--);
-                        if(line) delete line;
+                        itCo = DeleteLineFromList(itCo);
                         break;
                     }
                 }
@@ -631,20 +627,39 @@ void ControlEditor::DeleteSelectedElements()
     for(auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
         ConnectionLine* line = *it;
         if(line->IsSelected()) {
-            auto parentList = line->GetParentList();
-            for(auto itP = parentList.begin(), itEnd = parentList.end(); itP != itEnd; ++itP) {
-                Element* parent = *itP;
-                if(parent) parent->RemoveChild(line);
-            }
-            // Free nodes
-            auto nodeList = line->GetNodeList();
-            for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
-                Node* node = *itN;
-                node->SetConnected(false);
-            }
-            m_connectionList.erase(it--);
-            if(line) delete line;
+            it = DeleteLineFromList(it);
         }
     }
     Redraw();
+}
+
+std::vector<ConnectionLine*>::iterator ControlEditor::DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it)
+{
+    ConnectionLine* cLine = *it;
+    auto childList = cLine->GetLineChildList();
+    for(auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; ++itC) {
+        ConnectionLine* child = *itC;
+        //child->GetParentLine()->RemoveChild(child); Error
+        for(auto itL = m_connectionList.begin(); itL != m_connectionList.end(); ++itL) {
+            ConnectionLine* childOnList = *itL;
+            if(childOnList == child) {
+                itL = DeleteLineFromList(itL);
+            }
+        }
+    }
+    wxMessageBox(wxString::Format("%d", (int)cLine->GetChildList().size()));
+    auto parentList = cLine->GetParentList();
+    for(auto itP = parentList.begin(), itEnd = parentList.end(); itP != itEnd; ++itP) {
+        Element* parent = *itP;
+        if(parent) parent->RemoveChild(cLine);
+    }
+    // Free nodes
+    auto nodeList = cLine->GetNodeList();
+    for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
+        Node* node = *itN;
+        node->SetConnected(false);
+    }
+    m_connectionList.erase(it--);
+    if(cLine) delete cLine;
+    return it;
 }

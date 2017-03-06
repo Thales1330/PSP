@@ -27,7 +27,9 @@ public:
     virtual void SetType(ConnectionLineType newType) { m_type = newType; }
     
     virtual ConnectionLine* GetParentLine() const { return m_parentLine; }
-    virtual void SetParentLine(ConnectionLine* parent);
+    virtual bool SetParentLine(ConnectionLine* parent);
+    
+    virtual std::vector<ConnectionLine*> GetLineChildList() const;
     
 protected:
     double m_lineOffset = 0.0;

@@ -27,6 +27,11 @@ void ConnectionLine::Draw(wxPoint2DDouble translation, double scale) const
     glLineWidth(1.5);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawLine(m_pointList);
+    
+    if(m_type == ELEMENT_LINE) {
+        glColor4d(0.0, 0.0, 0.0, 1.0);
+        DrawCircle(m_pointList[5], 3, 10, GL_POLYGON);
+    }
 }
 
 bool ConnectionLine::Contains(wxPoint2DDouble position) const
@@ -89,7 +94,32 @@ void ConnectionLine::UpdatePoints()
     } else if(m_type == ELEMENT_LINE) {
         wxPoint2DDouble pt1 = m_nodeList[0]->GetPosition();
         wxPoint2DDouble pt2 = m_parentLine->GetMidPoint();
-        //CONTINUE...
+        wxPoint2DDouble midPt = (pt1 + pt2) / 2.0 + wxPoint2DDouble(0.0, m_lineOffset);
+        
+        m_pointList[0] = pt1;
+        if(m_nodeList[0]->GetAngle() == 0.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(-10, 0);
+        else if(m_nodeList[0]->GetAngle() == 90.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(0, -10);
+        else if(m_nodeList[0]->GetAngle() == 180.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(10, 0);
+        else if(m_nodeList[0]->GetAngle() == 270.0)
+            m_pointList[1] = m_pointList[0] + wxPoint2DDouble(0, 10);
+
+        m_pointList[2] = m_pointList[1] + wxPoint2DDouble(0.0, midPt.m_y - m_pointList[1].m_y);
+
+        m_pointList[5] = pt2;
+        if(m_pointList[2].m_y > pt2.m_y) {
+            m_pointList[4] = m_pointList[5] + wxPoint2DDouble(0, 10);
+        } else {
+            m_pointList[4] = m_pointList[5] + wxPoint2DDouble(0, -10);
+        }
+
+        m_pointList[3] = m_pointList[4] + wxPoint2DDouble(0.0, midPt.m_y - m_pointList[4].m_y);
+    }
+    for(auto it = m_childList.begin(), itEnd = m_childList.end(); it != itEnd; ++it) {
+        ConnectionLine* child = static_cast<ConnectionLine*>(*it);
+        child->UpdatePoints();
     }
 }
 
@@ -123,10 +153,22 @@ void ConnectionLine::StartMove(wxPoint2DDouble position)
 
 wxPoint2DDouble ConnectionLine::GetMidPoint() const { return ((m_pointList[2] + m_pointList[3]) / 2.0); }
 
-void ConnectionLine::SetParentLine(ConnectionLine* parent)
+bool ConnectionLine::SetParentLine(ConnectionLine* parent)
 {
-    if(parent) {
-        m_type = ELEMENT_LINE;
-        m_parentLine = parent;
+    if(m_nodeList[0]->GetNodeType() != Node::NODE_IN) return false;
+    if(!parent) return false;
+    
+    m_type = ELEMENT_LINE;
+    m_parentLine = parent;
+    return true;
+}
+
+std::vector<ConnectionLine*> ConnectionLine::GetLineChildList() const
+{
+    std::vector<ConnectionLine*> childList;
+    for(auto it = m_childList.begin(), itEnd = m_childList.end(); it != itEnd; ++it) {
+        ConnectionLine* child = static_cast<ConnectionLine*>(*it);
+        childList.push_back(child);
     }
+    return childList;
 }

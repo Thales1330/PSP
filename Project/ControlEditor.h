@@ -10,6 +10,7 @@
 #include <GL/glu.h>
 
 class Camera;
+class Element;
 class ControlElement;
 class TransferFunction;
 class ConnectionLine;
@@ -83,6 +84,8 @@ protected:
     void BuildControlElementPanel();
     void SetViewport();
 
+    std::vector<ConnectionLine*>::iterator DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it);
+
     wxGLContext* m_glContext = NULL;
     Camera* m_camera = NULL;
 
@@ -90,10 +93,10 @@ protected:
 
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
-    
+
     std::vector<ControlElement*> m_elementList;
     std::vector<ConnectionLine*> m_connectionList;
-    
+
     bool m_firstDraw = true;
 };
 #endif // CONTROLEDITOR_H
