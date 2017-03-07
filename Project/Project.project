@@ -40,6 +40,7 @@
         <File Name="ControlElement.cpp"/>
         <File Name="TransferFunction.cpp"/>
         <File Name="ConnectionLine.cpp"/>
+        <File Name="Sum.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -68,6 +69,7 @@
       <File Name="Camera.cpp"/>
       <VirtualDirectory Name="control element form">
         <File Name="TransferFunctionForm.cpp"/>
+        <File Name="SumForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -110,6 +112,7 @@
         <File Name="ControlElement.h"/>
         <File Name="TransferFunction.h"/>
         <File Name="ConnectionLine.h"/>
+        <File Name="Sum.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -138,6 +141,7 @@
       <File Name="Camera.h"/>
       <VirtualDirectory Name="control element form">
         <File Name="TransferFunctionForm.h"/>
+        <File Name="SumForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

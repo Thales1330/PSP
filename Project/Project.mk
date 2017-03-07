@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Thales
-Date                   :=06/03/2017
+Date                   :=07/03/2017
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -68,8 +68,8 @@ Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirector
 	$(IntermediateDirectory)/Camera.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlEditorBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlEditorBase.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) $(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunction.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/ConnectionLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/ConnectionLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) 
 
 
 
@@ -422,6 +422,14 @@ $(IntermediateDirectory)/ConnectionLine.cpp$(DependSuffix): ConnectionLine.cpp
 $(IntermediateDirectory)/ConnectionLine.cpp$(PreprocessSuffix): ConnectionLine.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ConnectionLine.cpp$(PreprocessSuffix) ConnectionLine.cpp
 
+$(IntermediateDirectory)/Sum.cpp$(ObjectSuffix): Sum.cpp $(IntermediateDirectory)/Sum.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/Sum.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Sum.cpp$(DependSuffix): Sum.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Sum.cpp$(DependSuffix) -MM Sum.cpp
+
+$(IntermediateDirectory)/Sum.cpp$(PreprocessSuffix): Sum.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Sum.cpp$(PreprocessSuffix) Sum.cpp
+
 $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix): BusForm.cpp $(IntermediateDirectory)/BusForm.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/BusForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/BusForm.cpp$(DependSuffix): BusForm.cpp
@@ -509,6 +517,14 @@ $(IntermediateDirectory)/TransferFunctionForm.cpp$(DependSuffix): TransferFuncti
 
 $(IntermediateDirectory)/TransferFunctionForm.cpp$(PreprocessSuffix): TransferFunctionForm.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/TransferFunctionForm.cpp$(PreprocessSuffix) TransferFunctionForm.cpp
+
+$(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix): SumForm.cpp $(IntermediateDirectory)/SumForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Thales/Documents/GitHub/PSP/Project/SumForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/SumForm.cpp$(DependSuffix): SumForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/SumForm.cpp$(DependSuffix) -MM SumForm.cpp
+
+$(IntermediateDirectory)/SumForm.cpp$(PreprocessSuffix): SumForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SumForm.cpp$(PreprocessSuffix) SumForm.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

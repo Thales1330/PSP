@@ -4,6 +4,7 @@
 #include "ControlElement.h"
 #include "TransferFunction.h"
 #include "ConnectionLine.h"
+#include "Sum.h"
 
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
     : wxWindow(parent, id)
@@ -102,6 +103,7 @@ ControlEditor::ControlEditor(wxWindow* parent)
     m_glContext = new wxGLContext(m_glCanvas);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
+    //m_camera->SetScale(1.2);
 }
 ControlEditor::~ControlEditor()
 {
@@ -203,7 +205,9 @@ void ControlEditor::AddElement(ControlElementButtonID id)
             m_elementList.push_back(tf);
         } break;
         case ID_SUM: {
-            wxLogMessage("sum");
+            m_mode = MODE_INSERT;
+            Sum* sum = new Sum();
+            m_elementList.push_back(sum);
         } break;
         case ID_CONST: {
             wxLogMessage("const");
@@ -389,11 +393,12 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
         if(m_mode == MODE_INSERT_LINE && !foundNode && it != (itEnd - 1)) {
             if(cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
                 ConnectionLine* iLine = *(m_connectionList.end() - 1);
-                cLine->AddChild(iLine);
-                iLine->SetParentLine(cLine);
-                iLine->UpdatePoints();
-                m_mode = MODE_EDIT;
-                foundNode = true;
+                if(iLine->SetParentLine(cLine)) {
+                    cLine->AddChild(iLine);
+                    iLine->UpdatePoints();
+                    m_mode = MODE_EDIT;
+                    foundNode = true;
+                }
             }
         } else if(m_mode == MODE_SELECTION_RECT) {
             if(cLine->Intersects(m_selectionRect)) {
@@ -639,7 +644,6 @@ std::vector<ConnectionLine*>::iterator ControlEditor::DeleteLineFromList(std::ve
     auto childList = cLine->GetLineChildList();
     for(auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; ++itC) {
         ConnectionLine* child = *itC;
-        //child->GetParentLine()->RemoveChild(child); Error
         for(auto itL = m_connectionList.begin(); itL != m_connectionList.end(); ++itL) {
             ConnectionLine* childOnList = *itL;
             if(childOnList == child) {
@@ -647,12 +651,13 @@ std::vector<ConnectionLine*>::iterator ControlEditor::DeleteLineFromList(std::ve
             }
         }
     }
-    wxMessageBox(wxString::Format("%d", (int)cLine->GetChildList().size()));
+    // Remove
     auto parentList = cLine->GetParentList();
     for(auto itP = parentList.begin(), itEnd = parentList.end(); itP != itEnd; ++itP) {
         Element* parent = *itP;
         if(parent) parent->RemoveChild(cLine);
     }
+    if(cLine->GetParentLine()) cLine->GetParentLine()->RemoveChild(cLine);
     // Free nodes
     auto nodeList = cLine->GetNodeList();
     for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {

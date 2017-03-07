@@ -14,6 +14,7 @@ class Element;
 class ControlElement;
 class TransferFunction;
 class ConnectionLine;
+class Sum;
 
 enum ControlElementButtonID { ID_IO = 0, ID_TF, ID_SUM, ID_CONST, ID_LIMITER, ID_GAIN, ID_MULT, ID_SAT, ID_RATELIM };
 

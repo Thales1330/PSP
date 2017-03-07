@@ -801,4 +801,28 @@ public:
     virtual ~TransferFunctionFormBase();
 };
 
+
+class SumFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextSigns;
+    wxTextCtrl* m_textCtrlSigns;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+
+public:
+    wxStaticText* GetStaticTextSigns() { return m_staticTextSigns; }
+    wxTextCtrl* GetTextCtrlSigns() { return m_textCtrlSigns; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    SumFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Sum"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~SumFormBase();
+};
+
 #endif
