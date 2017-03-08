@@ -813,6 +813,8 @@ protected:
     wxButton* m_ButtonCancel;
 
 protected:
+    virtual void OnOKClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelClick(wxCommandEvent& event) { event.Skip(); }
 
 public:
     wxStaticText* GetStaticTextSigns() { return m_staticTextSigns; }

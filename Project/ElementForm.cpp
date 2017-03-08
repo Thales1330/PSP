@@ -2963,8 +2963,15 @@ SumFormBase::SumFormBase(wxWindow* parent, wxWindowID id, const wxString& title,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif
+    // Connect events
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SumFormBase::OnOKClick), NULL, this);
+    m_ButtonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SumFormBase::OnCancelClick), NULL, this);
+    
 }
 
 SumFormBase::~SumFormBase()
 {
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SumFormBase::OnOKClick), NULL, this);
+    m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SumFormBase::OnCancelClick), NULL, this);
+    
 }

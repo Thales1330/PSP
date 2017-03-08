@@ -18,6 +18,8 @@ Sum::Sum()
     m_nodeList.push_back(nodeOut);
     m_signalList.push_back(SIGNAL_POSITIVE);
     m_signalList.push_back(SIGNAL_NEGATIVE);
+
+    UpdatePoints();
 }
 
 Sum::~Sum() {}
@@ -49,8 +51,8 @@ void Sum::Draw(wxPoint2DDouble translation, double scale) const
             DrawLine(vLine);
         }
     }
-    
-    //Plot sigma.
+
+    // Plot sigma.
     std::vector<wxPoint2DDouble> sigma;
     sigma.push_back(m_position + wxPoint2DDouble(10, 9));
     sigma.push_back(m_position + wxPoint2DDouble(0, 9));
@@ -59,7 +61,7 @@ void Sum::Draw(wxPoint2DDouble translation, double scale) const
     sigma.push_back(m_position + wxPoint2DDouble(10, -9));
     glColor4d(0.0, 0.3, 1.0, 1.0);
     DrawLine(sigma);
-    
+
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawNodes();
 }
@@ -73,4 +75,14 @@ bool Sum::ShowForm(wxWindow* parent, Element* element)
     }
     sumForm->Destroy();
     return false;
+}
+
+void Sum::UpdatePoints()
+{
+    m_height = 18.0 * (m_nodeList.size() - 1);
+    for(int i = 0; i < (int)m_nodeList.size() - 1; ++i) {
+        m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 9 + 18 * i - m_height / 2));
+        m_nodeList[i]->StartMove(m_position);
+    }
+    SetPosition(m_position); // Update rect.
 }
