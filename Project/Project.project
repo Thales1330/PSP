@@ -41,6 +41,7 @@
         <File Name="TransferFunction.cpp"/>
         <File Name="ConnectionLine.cpp"/>
         <File Name="Sum.cpp"/>
+        <File Name="Multiplier.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -113,6 +114,7 @@
         <File Name="TransferFunction.h"/>
         <File Name="ConnectionLine.h"/>
         <File Name="Sum.h"/>
+        <File Name="Multiplier.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
