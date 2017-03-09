@@ -39,26 +39,53 @@ void Sum::Draw(wxPoint2DDouble translation, double scale) const
 
     // Plot signals.
     glLineWidth(2.0);
+    wxPoint2DDouble signalOffset[4];
+    wxPoint2DDouble sigmaOffset;
+    if(m_angle == 0.0) {
+        signalOffset[0] = wxPoint2DDouble(6, 0);
+        signalOffset[1] = wxPoint2DDouble(12, 0);
+        signalOffset[2] = wxPoint2DDouble(9, -3);
+        signalOffset[3] = wxPoint2DDouble(9, 3);
+        sigmaOffset = wxPoint2DDouble(6, 0);
+    } else if(m_angle == 90.0) {
+        signalOffset[0] = wxPoint2DDouble(-3, 9);
+        signalOffset[1] = wxPoint2DDouble(3, 9);
+        signalOffset[2] = wxPoint2DDouble(0, 6);
+        signalOffset[3] = wxPoint2DDouble(0, 12);
+        sigmaOffset = wxPoint2DDouble(0, 6);
+    } else if(m_angle == 180.0) {
+        signalOffset[0] = wxPoint2DDouble(-6, 0);
+        signalOffset[1] = wxPoint2DDouble(-12, 0);
+        signalOffset[2] = wxPoint2DDouble(-9, -3);
+        signalOffset[3] = wxPoint2DDouble(-9, 3);
+        sigmaOffset = wxPoint2DDouble(-6, 0);
+    } else if(m_angle == 270.0) {
+        signalOffset[0] = wxPoint2DDouble(-3, -9);
+        signalOffset[1] = wxPoint2DDouble(3, -9);
+        signalOffset[2] = wxPoint2DDouble(0, -6);
+        signalOffset[3] = wxPoint2DDouble(0, -12);
+        sigmaOffset = wxPoint2DDouble(0, -6);
+    }
     for(int i = 0; i < (int)m_nodeList.size() - 1; ++i) {
         std::vector<wxPoint2DDouble> hLine;
-        hLine.push_back(m_nodeList[i]->GetPosition() + wxPoint2DDouble(6, 0));
-        hLine.push_back(m_nodeList[i]->GetPosition() + wxPoint2DDouble(12, 0));
+        hLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[0]);
+        hLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[1]);
         DrawLine(hLine);
         if(m_signalList[i] == SIGNAL_POSITIVE) {
             std::vector<wxPoint2DDouble> vLine;
-            vLine.push_back(m_nodeList[i]->GetPosition() + wxPoint2DDouble(9, -3));
-            vLine.push_back(m_nodeList[i]->GetPosition() + wxPoint2DDouble(9, 3));
+            vLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[2]);
+            vLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[3]);
             DrawLine(vLine);
         }
     }
 
     // Plot sigma.
     std::vector<wxPoint2DDouble> sigma;
-    sigma.push_back(m_position + wxPoint2DDouble(10, 9));
-    sigma.push_back(m_position + wxPoint2DDouble(0, 9));
-    sigma.push_back(m_position + wxPoint2DDouble(6, 0));
-    sigma.push_back(m_position + wxPoint2DDouble(0, -9));
-    sigma.push_back(m_position + wxPoint2DDouble(10, -9));
+    sigma.push_back(m_position + wxPoint2DDouble(4, 9) + sigmaOffset);
+    sigma.push_back(m_position + wxPoint2DDouble(-6, 9) + sigmaOffset);
+    sigma.push_back(m_position + wxPoint2DDouble(0, 0) + sigmaOffset);
+    sigma.push_back(m_position + wxPoint2DDouble(-6, -9) + sigmaOffset);
+    sigma.push_back(m_position + wxPoint2DDouble(4, -9) + sigmaOffset);
     glColor4d(0.0, 0.3, 1.0, 1.0);
     DrawLine(sigma);
 
@@ -79,10 +106,78 @@ bool Sum::ShowForm(wxWindow* parent, Element* element)
 
 void Sum::UpdatePoints()
 {
-    m_height = 18.0 * (m_nodeList.size() - 1);
-    for(int i = 0; i < (int)m_nodeList.size() - 1; ++i) {
-        m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 9 + 18 * i - m_height / 2));
-        m_nodeList[i]->StartMove(m_position);
+    if(m_angle == 0.0 || m_angle == 180.0) {
+        m_height = 18.0 * (m_nodeList.size() - 1);
+        m_width = 36.0;
+    } else {
+        m_width = 18.0 * (m_nodeList.size() - 1);
+        m_height = 42.0;
     }
+
+    for(int i = 0; i < (int)m_nodeList.size() - 1; ++i) {
+        if(m_angle == 0.0)
+            m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 9 + 18 * i - m_height / 2));
+        else if(m_angle == 90.0)
+            m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(m_width / 2 - 9 - 18 * i, -m_height / 2));
+        else if(m_angle == 180.0)
+            m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, m_height / 2 - 9 - 18 * i));
+        else if(m_angle == 270.0)
+            m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(9 + 18 * i - m_width / 2, m_height / 2));
+    }
+    if(m_angle == 0.0)
+        m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
+    else if(m_angle == 90.0)
+        m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
+    else if(m_angle == 180.0)
+        m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
+    else if(m_angle == 270.0)
+        m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
+
     SetPosition(m_position); // Update rect.
+}
+
+void Sum::AddInNode()
+{
+    Node* newNode = new Node(wxPoint2DDouble(0, 0), Node::NODE_IN, m_borderSize);
+    m_nodeList.insert(m_nodeList.end() - 1, newNode);
+}
+
+void Sum::RemoveInNode()
+{
+    Node* nodeToRemove = *(m_nodeList.end() - 2);
+    bool foundChild = false;
+    for(auto it = m_childList.begin(), itEnd = m_childList.end(); it != itEnd; ++it) {
+        ControlElement* child = static_cast<ControlElement*>(*it);
+        auto childNodeList = child->GetNodeList();
+        for(auto itN = childNodeList.begin(), itEndN = childNodeList.end(); itN != itEndN; ++itN) {
+            Node* node = *itN;
+            if(node == nodeToRemove) {
+                child->RemoveParent(this);
+                RemoveChild(child);
+                foundChild = true;
+                break;
+            }
+        }
+        if(foundChild) break;
+    }
+    m_nodeList.erase(m_nodeList.end() - 2);
+}
+
+void Sum::Rotate(bool clockwise)
+{
+    if(clockwise)
+        m_angle += 90.0;
+    else
+        m_angle -= 90.0;
+    if(m_angle >= 360.0)
+        m_angle = 0.0;
+    else if(m_angle < 0)
+        m_angle = 270.0;
+
+    UpdatePoints();
+
+    for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
+        Node* node = *it;
+        node->Rotate(clockwise);
+    }
 }

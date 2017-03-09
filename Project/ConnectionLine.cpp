@@ -27,7 +27,7 @@ void ConnectionLine::Draw(wxPoint2DDouble translation, double scale) const
     glLineWidth(1.5);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawLine(m_pointList);
-    
+
     if(m_type == ELEMENT_LINE) {
         glColor4d(0.0, 0.0, 0.0, 1.0);
         DrawCircle(m_pointList[5], 3, 10, GL_POLYGON);
@@ -95,7 +95,7 @@ void ConnectionLine::UpdatePoints()
         wxPoint2DDouble pt1 = m_nodeList[0]->GetPosition();
         wxPoint2DDouble pt2 = m_parentLine->GetMidPoint();
         wxPoint2DDouble midPt = (pt1 + pt2) / 2.0 + wxPoint2DDouble(0.0, m_lineOffset);
-        
+
         m_pointList[0] = pt1;
         if(m_nodeList[0]->GetAngle() == 0.0)
             m_pointList[1] = m_pointList[0] + wxPoint2DDouble(-10, 0);
@@ -157,7 +157,7 @@ bool ConnectionLine::SetParentLine(ConnectionLine* parent)
 {
     if(m_nodeList[0]->GetNodeType() != Node::NODE_IN) return false;
     if(!parent) return false;
-    
+
     m_type = ELEMENT_LINE;
     m_parentLine = parent;
     return true;
@@ -171,4 +171,12 @@ std::vector<ConnectionLine*> ConnectionLine::GetLineChildList() const
         childList.push_back(child);
     }
     return childList;
+}
+
+void ConnectionLine::RemoveParent(Element* parent)
+{
+    for(auto it = m_parentList.begin(); it != m_parentList.end(); ++it) {
+        Element* element = *it;
+        if(element == parent) m_parentList.erase(it--);
+    }
 }

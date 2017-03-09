@@ -37,7 +37,11 @@ bool SumForm::ValidateData()
     for(int i = 0; i < (int)m_textCtrlSigns->GetValue().length(); ++i) {
         if(m_textCtrlSigns->GetValue()[i] != ' ') signalStr += m_textCtrlSigns->GetValue()[i];
     }
-    if(signalStr.size() < 2) return false;
+    if(signalStr.size() < 2){
+        wxMessageDialog msg(this, _("You must assign at least two signals."), _("Error"),  wxOK | wxCENTRE | wxICON_ERROR);
+        msg.ShowModal();
+        return false;
+    }
 
     std::vector<Sum::Signal> signalList;
     for(int i = 0; i < (int)signalStr.length(); ++i) {
@@ -49,6 +53,8 @@ bool SumForm::ValidateData()
                 signalList.push_back(Sum::SIGNAL_NEGATIVE);
             } break;
             default: {
+                wxMessageDialog msg(this, _("Value entered incorrectly in the field \"Signs\"."), _("Error"),  wxOK | wxCENTRE | wxICON_ERROR);
+                msg.ShowModal();
                 return false;
             }
         }
@@ -57,14 +63,14 @@ bool SumForm::ValidateData()
     int diff = (int)signalList.size() - (int)m_sum->GetSignalList().size();
 
     if(diff < 0) {
-
-    } else if(diff > 0) {
-        auto nodeList = m_sum->GetNodeList();
+        diff = std::abs(diff);
         for(int i = 0; i < diff; ++i) {
-            Node* newNode = new Node();
-            nodeList.insert(nodeList.end() - 1, newNode);
+            m_sum->RemoveInNode();
         }
-        m_sum->SetNodeList(nodeList);
+    } else if(diff > 0) {
+        for(int i = 0; i < diff; ++i) {
+            m_sum->AddInNode();
+        }
     }
     m_sum->SetSignalList(signalList);
     m_sum->UpdatePoints();

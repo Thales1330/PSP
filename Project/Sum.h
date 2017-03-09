@@ -16,11 +16,14 @@ public:
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual void Rotate(bool clockwise = true);
     
     virtual std::vector<Signal> GetSignalList() const { return m_signalList; }
     virtual void SetSignalList(std::vector<Signal> signalList) { m_signalList = signalList; }
     
     virtual void UpdatePoints();
+    void AddInNode();
+    void RemoveInNode();
 
 protected:
     std::vector<Signal> m_signalList;

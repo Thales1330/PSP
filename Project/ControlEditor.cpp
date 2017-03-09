@@ -103,7 +103,7 @@ ControlEditor::ControlEditor(wxWindow* parent)
     m_glContext = new wxGLContext(m_glCanvas);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
-    //m_camera->SetScale(1.2);
+    // m_camera->SetScale(1.2);
 }
 ControlEditor::~ControlEditor()
 {
@@ -282,6 +282,7 @@ void ControlEditor::OnDoubleClick(wxMouseEvent& event)
             Element* element = *it;
             if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
                 element->ShowForm(this, element);
+                CheckConnections();
                 auto childList = element->GetChildList();
                 for(auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; ++itC) {
                     ConnectionLine* line = static_cast<ConnectionLine*>(*itC);
@@ -667,4 +668,16 @@ std::vector<ConnectionLine*>::iterator ControlEditor::DeleteLineFromList(std::ve
     m_connectionList.erase(it--);
     if(cLine) delete cLine;
     return it;
+}
+
+void ControlEditor::CheckConnections()
+{
+    for(auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
+        ConnectionLine* cLine = *it;
+        if(cLine->GetType() == ConnectionLine::ELEMENT_ELEMENT) {
+            if(cLine->GetParentList().size() < 2){
+                it = DeleteLineFromList(it);
+            }
+        }
+    }
 }

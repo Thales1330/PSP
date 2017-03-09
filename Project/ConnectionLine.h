@@ -16,6 +16,7 @@ public:
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
+    virtual void RemoveParent(Element* parent);
     virtual void StartMove(wxPoint2DDouble position);
     virtual void Move(wxPoint2DDouble position);
     virtual bool AppendNode(Node* node, ControlElement* parent);

@@ -68,6 +68,7 @@ public:
     virtual void Redraw() { m_glCanvas->Refresh(); }
     virtual void RotateSelectedElements(bool clockwise);
     virtual void DeleteSelectedElements();
+    virtual void CheckConnections();
 
 protected:
     virtual void OnKeyDown(wxKeyEvent& event);
