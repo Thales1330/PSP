@@ -5,6 +5,9 @@
 #include "TransferFunction.h"
 #include "ConnectionLine.h"
 #include "Sum.h"
+#include "Multiplier.h"
+#include "Limiter.h"
+#include "RateLimiter.h"
 
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
     : wxWindow(parent, id)
@@ -61,7 +64,7 @@ void ControlElementButton::OnPaint(wxPaintEvent& event)
             gc->DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
         }
         gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),
-            m_imageSize.GetHeight());
+                       m_imageSize.GetHeight());
         gc->SetFont(m_font, *wxBLACK);
         gc->DrawText(m_label, m_labelPosition.x, m_labelPosition.y);
         delete gc;
@@ -96,8 +99,7 @@ void ControlElementButton::OnLeftClickUp(wxMouseEvent& event)
     event.Skip();
 }
 
-ControlEditor::ControlEditor(wxWindow* parent)
-    : ControlEditorBase(parent)
+ControlEditor::ControlEditor(wxWindow* parent) : ControlEditorBase(parent)
 {
     BuildControlElementPanel();
     m_glContext = new wxGLContext(m_glCanvas);
@@ -116,8 +118,8 @@ void ControlEditor::BuildControlElementPanel()
     wxWrapSizer* wrapSizer = new wxWrapSizer();
     m_panelControlElements->SetSizer(wrapSizer);
 
-    ControlElementButton* ioButton = new ControlElementButton(
-        m_panelControlElements, _("In/Out"), wxImage("..\\data\\images\\control\\io.png"), ID_IO);
+    ControlElementButton* ioButton = new ControlElementButton(m_panelControlElements, _("In/Out"),
+                                                              wxImage("..\\data\\images\\control\\io.png"), ID_IO);
     wrapSizer->Add(ioButton, 0, wxALL, 5);
     ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
@@ -126,8 +128,8 @@ void ControlEditor::BuildControlElementPanel()
     wrapSizer->Add(tfButton, 0, wxALL, 5);
     tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* sumButton = new ControlElementButton(
-        m_panelControlElements, _("Sum"), wxImage("..\\data\\images\\control\\sum.png"), ID_SUM);
+    ControlElementButton* sumButton = new ControlElementButton(m_panelControlElements, _("Sum"),
+                                                               wxImage("..\\data\\images\\control\\sum.png"), ID_SUM);
     wrapSizer->Add(sumButton, 0, wxALL, 5);
     sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
@@ -151,8 +153,8 @@ void ControlEditor::BuildControlElementPanel()
     wrapSizer->Add(multButton, 0, wxALL, 5);
     multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* satButton = new ControlElementButton(
-        m_panelControlElements, _("Saturation"), wxImage("..\\data\\images\\control\\sat.png"), ID_SAT);
+    ControlElementButton* satButton = new ControlElementButton(m_panelControlElements, _("Saturation"),
+                                                               wxImage("..\\data\\images\\control\\sat.png"), ID_SAT);
     wrapSizer->Add(satButton, 0, wxALL, 5);
     satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
@@ -170,7 +172,7 @@ void ControlEditor::LeftClickDown(wxMouseEvent& event)
 
 void ControlEditor::SetViewport()
 {
-    glClearColor(1.0, 1.0, 1.0, 1.0); // White background.
+    glClearColor(1.0, 1.0, 1.0, 1.0);  // White background.
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
@@ -213,19 +215,25 @@ void ControlEditor::AddElement(ControlElementButtonID id)
             wxLogMessage("const");
         } break;
         case ID_LIMITER: {
-            wxLogMessage("limiter");
+            m_mode = MODE_INSERT;
+            Limiter* limiter = new Limiter();
+            m_elementList.push_back(limiter);
         } break;
         case ID_GAIN: {
             wxLogMessage("gain");
         } break;
         case ID_MULT: {
-            wxLogMessage("mult");
+            m_mode = MODE_INSERT;
+            Multiplier* mult = new Multiplier();
+            m_elementList.push_back(mult);
         } break;
         case ID_SAT: {
             wxLogMessage("sat");
         } break;
         case ID_RATELIM: {
-            wxLogMessage("rateLim");
+            m_mode = MODE_INSERT;
+            RateLimiter* rateLim = new RateLimiter();
+            m_elementList.push_back(rateLim);
         } break;
     }
 }
@@ -237,8 +245,8 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
     SetViewport();
 
     // Set GLCanvas scale and translation.
-    glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                         // Scale
-    glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0); // Translation
+    glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                          // Scale
+    glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0);  // Translation
 
     for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
         ConnectionLine* line = *it;
@@ -267,7 +275,7 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
     glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y);
     glEnd();
 
-    glFlush(); // Sends all pending information directly to the GPU.
+    glFlush();  // Sends all pending information directly to the GPU.
     m_glCanvas->SwapBuffers();
     event.Skip();
 }
@@ -484,7 +492,7 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
 
     switch(m_mode) {
         case MODE_INSERT: {
-            Element* newElement = *(m_elementList.end() - 1); // Get the last element in the list.
+            Element* newElement = *(m_elementList.end() - 1);  // Get the last element in the list.
             newElement->Move(m_camera->ScreenToWorld(clickPoint));
             redraw = true;
         } break;
@@ -578,11 +586,11 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
     char key = event.GetUnicodeKey();
     if(key != WXK_NONE) {
         switch(key) {
-            case WXK_DELETE: // Delete selected elements.
+            case WXK_DELETE:  // Delete selected elements.
             {
                 DeleteSelectedElements();
             } break;
-            case 'R': // Rotate the selected elements.
+            case 'R':  // Rotate the selected elements.
             {
                 RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
             } break;
@@ -675,7 +683,7 @@ void ControlEditor::CheckConnections()
     for(auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
         ConnectionLine* cLine = *it;
         if(cLine->GetType() == ConnectionLine::ELEMENT_ELEMENT) {
-            if(cLine->GetParentList().size() < 2){
+            if(cLine->GetParentList().size() < 2) {
                 it = DeleteLineFromList(it);
             }
         }

@@ -827,4 +827,64 @@ public:
     virtual ~SumFormBase();
 };
 
+
+class LimiterFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextUpLimiter;
+    wxTextCtrl* m_textCtrlUpLimit;
+    wxStaticText* m_staticTextLowLimit;
+    wxTextCtrl* m_textCtrlLowLimit;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextUpLimiter() { return m_staticTextUpLimiter; }
+    wxTextCtrl* GetTextCtrlUpLimit() { return m_textCtrlUpLimit; }
+    wxStaticText* GetStaticTextLowLimit() { return m_staticTextLowLimit; }
+    wxTextCtrl* GetTextCtrlLowLimit() { return m_textCtrlLowLimit; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    LimiterFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Limiter"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~LimiterFormBase();
+};
+
+
+class RateLimiterFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextUpLimiter;
+    wxTextCtrl* m_textCtrlUpLimit;
+    wxStaticText* m_staticTextLowLimit;
+    wxTextCtrl* m_textCtrlLowLimit;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextUpLimiter() { return m_staticTextUpLimiter; }
+    wxTextCtrl* GetTextCtrlUpLimit() { return m_textCtrlUpLimit; }
+    wxStaticText* GetStaticTextLowLimit() { return m_staticTextLowLimit; }
+    wxTextCtrl* GetTextCtrlLowLimit() { return m_textCtrlLowLimit; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    RateLimiterFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Rate limiter"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~RateLimiterFormBase();
+};
+
 #endif

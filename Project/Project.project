@@ -42,6 +42,9 @@
         <File Name="ConnectionLine.cpp"/>
         <File Name="Sum.cpp"/>
         <File Name="Multiplier.cpp"/>
+        <File Name="Limiter.cpp"/>
+        <File Name="RateLimiter.cpp"/>
+        <File Name="Exponential.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -71,6 +74,8 @@
       <VirtualDirectory Name="control element form">
         <File Name="TransferFunctionForm.cpp"/>
         <File Name="SumForm.cpp"/>
+        <File Name="LimiterForm.cpp"/>
+        <File Name="RateLimiterForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -115,6 +120,9 @@
         <File Name="ConnectionLine.h"/>
         <File Name="Sum.h"/>
         <File Name="Multiplier.h"/>
+        <File Name="Limiter.h"/>
+        <File Name="RateLimiter.h"/>
+        <File Name="Exponential.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -144,6 +152,8 @@
       <VirtualDirectory Name="control element form">
         <File Name="TransferFunctionForm.h"/>
         <File Name="SumForm.h"/>
+        <File Name="LimiterForm.h"/>
+        <File Name="RateLimiterForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
