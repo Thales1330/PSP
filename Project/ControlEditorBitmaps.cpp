@@ -1181,6 +1181,6 @@ void wxC870InitBitmapResources()
     XRC_ADD_FILE(wxT("XRC_resource/ControlEditorBitmaps.cpp$data_images_ribbon_paste32.png"), xml_res_file_12, xml_res_size_12, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/ControlEditorBitmaps.cpp$data_images_ribbon_redo32.png"), xml_res_file_13, xml_res_size_13, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/ControlEditorBitmaps.cpp$data_images_ribbon_undo32.png"), xml_res_file_14, xml_res_size_14, wxT("image/png"));
-    XRC_ADD_FILE(wxT("XRC_resource/ControlEditorBitmaps.cpp$C__Users_Thales_Documents_GitHub_PSP_Project_ControlEditorBitmaps.xrc"), xml_res_file_15, xml_res_size_15, wxT("text/xml"));
-    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/ControlEditorBitmaps.cpp$C__Users_Thales_Documents_GitHub_PSP_Project_ControlEditorBitmaps.xrc"));
+    XRC_ADD_FILE(wxT("XRC_resource/ControlEditorBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_ControlEditorBitmaps.xrc"), xml_res_file_15, xml_res_size_15, wxT("text/xml"));
+    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/ControlEditorBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_ControlEditorBitmaps.xrc"));
 }

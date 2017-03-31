@@ -32,16 +32,16 @@ void RateLimiter::Draw(wxPoint2DDouble translation, double scale) const
 
     // Plot symbol.
     std::vector<wxPoint2DDouble> axis;
-    axis.push_back(m_position + wxPoint2DDouble(-10, 0));
-    axis.push_back(m_position + wxPoint2DDouble(10, 0));
-    axis.push_back(m_position + wxPoint2DDouble(0, -10));
-    axis.push_back(m_position + wxPoint2DDouble(0, 10));
+    axis.push_back(m_position + wxPoint2DDouble(-13, 0));
+    axis.push_back(m_position + wxPoint2DDouble(13, 0));
+    axis.push_back(m_position + wxPoint2DDouble(0, -13));
+    axis.push_back(m_position + wxPoint2DDouble(0, 13));
     DrawLine(axis, GL_LINES);
     
     glLineWidth(2.0);
     std::vector<wxPoint2DDouble> limSymbol;
-    limSymbol.push_back(m_position + wxPoint2DDouble(7, -7));
-    limSymbol.push_back(m_position + wxPoint2DDouble(-7, 7));
+    limSymbol.push_back(m_position + wxPoint2DDouble(10, -10));
+    limSymbol.push_back(m_position + wxPoint2DDouble(-10, 10));
     glColor4d(0.0, 0.3, 1.0, 1.0);
     DrawLine(limSymbol);
 

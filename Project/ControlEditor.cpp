@@ -8,6 +8,7 @@
 #include "Multiplier.h"
 #include "Limiter.h"
 #include "RateLimiter.h"
+#include "Exponential.h"
 
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
     : wxWindow(parent, id)
@@ -153,8 +154,8 @@ void ControlEditor::BuildControlElementPanel()
     wrapSizer->Add(multButton, 0, wxALL, 5);
     multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* satButton = new ControlElementButton(m_panelControlElements, _("Saturation"),
-                                                               wxImage("..\\data\\images\\control\\sat.png"), ID_SAT);
+    ControlElementButton* satButton = new ControlElementButton(m_panelControlElements, _("Exponential"),
+                                                               wxImage("..\\data\\images\\control\\sat.png"), ID_EXP);
     wrapSizer->Add(satButton, 0, wxALL, 5);
     satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
@@ -227,8 +228,10 @@ void ControlEditor::AddElement(ControlElementButtonID id)
             Multiplier* mult = new Multiplier();
             m_elementList.push_back(mult);
         } break;
-        case ID_SAT: {
-            wxLogMessage("sat");
+        case ID_EXP: {
+            m_mode = MODE_INSERT;
+            Exponential* exp = new Exponential();
+            m_elementList.push_back(exp);
         } break;
         case ID_RATELIM: {
             m_mode = MODE_INSERT;

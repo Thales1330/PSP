@@ -1078,11 +1078,11 @@
             }, {
              "type": "string",
              "m_label": "WX_GL_SAMPLE_BUFFERS",
-             "m_value": ""
+             "m_value": "1"
             }, {
              "type": "string",
              "m_label": "WX_GL_SAMPLES",
-             "m_value": ""
+             "m_value": "4"
             }],
            "m_events": [{
              "m_eventName": "wxEVT_PAINT",

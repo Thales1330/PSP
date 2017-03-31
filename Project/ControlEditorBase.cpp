@@ -103,7 +103,12 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
     m_panelWorkspace->SetSizer(boxSizerLvl2_1);
     
-    int *m_glCanvasAttr = NULL;
+    int *m_glCanvasAttr = new int[ 5 ];
+    m_glCanvasAttr[0] = WX_GL_SAMPLE_BUFFERS;
+    m_glCanvasAttr[1] = 1;
+    m_glCanvasAttr[2] = WX_GL_SAMPLES;
+    m_glCanvasAttr[3] = 4;
+    m_glCanvasAttr[4] = 0;
     m_glCanvas = new wxGLCanvas(m_panelWorkspace, wxID_ANY, m_glCanvasAttr, wxDefaultPosition, wxDLG_UNIT(m_panelWorkspace, wxSize(-1,-1)), 0);
     wxDELETEA( m_glCanvasAttr );
     
