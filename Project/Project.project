@@ -45,6 +45,7 @@
         <File Name="Limiter.cpp"/>
         <File Name="RateLimiter.cpp"/>
         <File Name="Exponential.cpp"/>
+        <File Name="Constant.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -76,6 +77,8 @@
         <File Name="SumForm.cpp"/>
         <File Name="LimiterForm.cpp"/>
         <File Name="RateLimiterForm.cpp"/>
+        <File Name="ExponentialForm.cpp"/>
+        <File Name="ConstantForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -123,6 +126,7 @@
         <File Name="Limiter.h"/>
         <File Name="RateLimiter.h"/>
         <File Name="Exponential.h"/>
+        <File Name="Constant.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -154,6 +158,8 @@
         <File Name="SumForm.h"/>
         <File Name="LimiterForm.h"/>
         <File Name="RateLimiterForm.h"/>
+        <File Name="ExponentialForm.h"/>
+        <File Name="ConstantForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>

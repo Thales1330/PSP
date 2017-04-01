@@ -1,4 +1,5 @@
 #include "Exponential.h"
+#include "ExponentialForm.h"
 
 Exponential::Exponential()
 {
@@ -12,10 +13,7 @@ Exponential::Exponential()
     m_nodeList.push_back(nodeOut);
 }
 
-Exponential::~Exponential()
-{
-}
-
+Exponential::~Exponential() {}
 void Exponential::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -36,7 +34,7 @@ void Exponential::Draw(wxPoint2DDouble translation, double scale) const
     axis.push_back(m_position + wxPoint2DDouble(-13, -13));
     axis.push_back(m_position + wxPoint2DDouble(-13, 13));
     DrawLine(axis, GL_LINES);
-    
+
     glLineWidth(2.0);
     std::vector<wxPoint2DDouble> expSymbol;
     expSymbol.push_back(m_position + wxPoint2DDouble(-13, 13));
@@ -57,6 +55,12 @@ void Exponential::Draw(wxPoint2DDouble translation, double scale) const
 
 bool Exponential::ShowForm(wxWindow* parent, Element* element)
 {
+    ExponentialForm* form = new ExponentialForm(parent, this);
+    if(form->ShowModal() == wxID_OK) {
+        form->Destroy();
+        return true;
+    }
+    form->Destroy();
     return false;
 }
 
@@ -94,4 +98,16 @@ void Exponential::UpdatePoints()
         m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, 18));
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, -18));
     }
+}
+
+double Exponential::GetValues(double& aValue, double& bValue)
+{
+    aValue = m_aValue;
+    bValue = m_bValue;
+}
+
+void Exponential::SetValues(double aValue, double bValue)
+{
+    m_aValue = aValue;
+    m_bValue = bValue;
 }

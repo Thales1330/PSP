@@ -19,6 +19,7 @@ class Multiplier;
 class Limiter;
 class RateLimiter;
 class Exponential;
+class Constant;
 
 enum ControlElementButtonID { ID_IO = 0, ID_TF, ID_SUM, ID_CONST, ID_LIMITER, ID_GAIN, ID_MULT, ID_EXP, ID_RATELIM };
 

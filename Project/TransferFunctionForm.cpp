@@ -10,9 +10,7 @@ TransferFunctionForm::TransferFunctionForm(wxWindow* parent, TransferFunction* t
 }
 
 TransferFunctionForm::~TransferFunctionForm() {}
-
 void TransferFunctionForm::OnCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
-
 void TransferFunctionForm::OnOKClick(wxCommandEvent& event)
 {
     if(ValidateData()) EndModal(wxID_OK);
@@ -51,10 +49,10 @@ bool TransferFunctionForm::ValidateData()
     while(num != "") {
         wxString rest;
         wxString strValue = num.BeforeFirst(' ', &rest);
-        num  = rest;
+        num = rest;
         double value = 0;
-        if(!m_tf->DoubleFromString(
-               this, strValue, value, _("Value entered incorrectly in the field \"Numerator parameters\".")))
+        if(!m_tf->DoubleFromString(this, strValue, value,
+                                   _("Value entered incorrectly in the field \"Numerator parameters\".")))
             return false;
         numerator.push_back(value);
     }
@@ -66,8 +64,8 @@ bool TransferFunctionForm::ValidateData()
         wxString strValue = den.BeforeFirst(' ', &rest);
         den = rest;
         double value = 0;
-        if(!m_tf->DoubleFromString(
-               this, strValue, value, _("Value entered incorrectly in the field \"Denominator parameters\".")))
+        if(!m_tf->DoubleFromString(this, strValue, value,
+                                   _("Value entered incorrectly in the field \"Denominator parameters\".")))
             return false;
         denominator.push_back(value);
     }

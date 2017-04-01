@@ -9,6 +9,7 @@
 #include "Limiter.h"
 #include "RateLimiter.h"
 #include "Exponential.h"
+#include "Constant.h"
 
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
     : wxWindow(parent, id)
@@ -106,7 +107,7 @@ ControlEditor::ControlEditor(wxWindow* parent) : ControlEditorBase(parent)
     m_glContext = new wxGLContext(m_glCanvas);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
-    // m_camera->SetScale(1.2);
+    m_camera->SetScale(1.2);
 }
 ControlEditor::~ControlEditor()
 {
@@ -213,7 +214,9 @@ void ControlEditor::AddElement(ControlElementButtonID id)
             m_elementList.push_back(sum);
         } break;
         case ID_CONST: {
-            wxLogMessage("const");
+            m_mode = MODE_INSERT;
+            Constant* constant = new Constant();
+            m_elementList.push_back(constant);
         } break;
         case ID_LIMITER: {
             m_mode = MODE_INSERT;

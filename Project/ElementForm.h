@@ -887,4 +887,62 @@ public:
     virtual ~RateLimiterFormBase();
 };
 
+
+class ExponentialFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextExp;
+    wxStaticText* m_staticTextAValue;
+    wxTextCtrl* m_textCtrlAValue;
+    wxStaticText* m_staticTextBValue;
+    wxTextCtrl* m_textCtrlBValue;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextExp() { return m_staticTextExp; }
+    wxStaticText* GetStaticTextAValue() { return m_staticTextAValue; }
+    wxTextCtrl* GetTextCtrlAValue() { return m_textCtrlAValue; }
+    wxStaticText* GetStaticTextBValue() { return m_staticTextBValue; }
+    wxTextCtrl* GetTextCtrlBValue() { return m_textCtrlBValue; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    ExponentialFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Exponential"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~ExponentialFormBase();
+};
+
+
+class ConstantFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextValue;
+    wxTextCtrl* m_textCtrlValue;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextValue() { return m_staticTextValue; }
+    wxTextCtrl* GetTextCtrlValue() { return m_textCtrlValue; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    ConstantFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Constant"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~ConstantFormBase();
+};
+
 #endif

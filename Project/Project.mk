@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=NDSE-69
-Date                   :=31/03/2017
+Date                   :=01/04/2017
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -68,9 +68,9 @@ Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirector
 	$(IntermediateDirectory)/Camera.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlEditorBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlEditorBase.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) $(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunction.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/ConnectionLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) $(IntermediateDirectory)/Multiplier.cpp$(ObjectSuffix) $(IntermediateDirectory)/Limiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Exponential.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiterForm.cpp$(ObjectSuffix) \
-	
+	$(IntermediateDirectory)/ConnectionLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) $(IntermediateDirectory)/Multiplier.cpp$(ObjectSuffix) $(IntermediateDirectory)/Limiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Exponential.cpp$(ObjectSuffix) $(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LimiterForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/RateLimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix) 
 
 
 
@@ -463,6 +463,14 @@ $(IntermediateDirectory)/Exponential.cpp$(DependSuffix): Exponential.cpp
 $(IntermediateDirectory)/Exponential.cpp$(PreprocessSuffix): Exponential.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Exponential.cpp$(PreprocessSuffix) Exponential.cpp
 
+$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix): Constant.cpp $(IntermediateDirectory)/Constant.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/Constant.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Constant.cpp$(DependSuffix): Constant.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Constant.cpp$(DependSuffix) -MM Constant.cpp
+
+$(IntermediateDirectory)/Constant.cpp$(PreprocessSuffix): Constant.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Constant.cpp$(PreprocessSuffix) Constant.cpp
+
 $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix): BusForm.cpp $(IntermediateDirectory)/BusForm.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/BusForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/BusForm.cpp$(DependSuffix): BusForm.cpp
@@ -574,6 +582,22 @@ $(IntermediateDirectory)/RateLimiterForm.cpp$(DependSuffix): RateLimiterForm.cpp
 
 $(IntermediateDirectory)/RateLimiterForm.cpp$(PreprocessSuffix): RateLimiterForm.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/RateLimiterForm.cpp$(PreprocessSuffix) RateLimiterForm.cpp
+
+$(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix): ExponentialForm.cpp $(IntermediateDirectory)/ExponentialForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ExponentialForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ExponentialForm.cpp$(DependSuffix): ExponentialForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ExponentialForm.cpp$(DependSuffix) -MM ExponentialForm.cpp
+
+$(IntermediateDirectory)/ExponentialForm.cpp$(PreprocessSuffix): ExponentialForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ExponentialForm.cpp$(PreprocessSuffix) ExponentialForm.cpp
+
+$(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix): ConstantForm.cpp $(IntermediateDirectory)/ConstantForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ConstantForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ConstantForm.cpp$(DependSuffix): ConstantForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ConstantForm.cpp$(DependSuffix) -MM ConstantForm.cpp
+
+$(IntermediateDirectory)/ConstantForm.cpp$(PreprocessSuffix): ConstantForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ConstantForm.cpp$(PreprocessSuffix) ConstantForm.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

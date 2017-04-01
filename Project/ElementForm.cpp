@@ -3177,3 +3177,197 @@ RateLimiterFormBase::~RateLimiterFormBase()
     m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RateLimiterFormBase::OnCancelButtonClick), NULL, this);
     
 }
+
+ExponentialFormBase::ExponentialFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    m_staticTextExp = new wxStaticText(m_panelGeneral, wxID_ANY, _("y = A.eB.x"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), wxALIGN_CENTRE);
+    
+    boxSizerLvl2_1->Add(m_staticTextExp, 1, wxLEFT|wxRIGHT|wxTOP|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextAValue = new wxStaticText(m_panelGeneral, wxID_ANY, _("A value"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextAValue, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlAValue = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlAValue->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_1->Add(m_textCtrlAValue, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlAValue->SetMinSize(wxSize(100,-1));
+    
+    m_staticTextBValue = new wxStaticText(m_panelGeneral, wxID_ANY, _("B value"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextBValue, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlBValue = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlBValue->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_1->Add(m_textCtrlBValue, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlBValue->SetMinSize(wxSize(100,-1));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("ExponentialFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ExponentialFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ExponentialFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+ExponentialFormBase::~ExponentialFormBase()
+{
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ExponentialFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ExponentialFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+ConstantFormBase::ConstantFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    m_staticTextValue = new wxStaticText(m_panelGeneral, wxID_ANY, _("A value"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextValue, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlValue = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlValue->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_1->Add(m_textCtrlValue, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlValue->SetMinSize(wxSize(100,-1));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("ConstantFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ConstantFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ConstantFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+ConstantFormBase::~ConstantFormBase()
+{
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ConstantFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ConstantFormBase::OnCancelButtonClick), NULL, this);
+    
+}

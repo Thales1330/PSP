@@ -3,6 +3,8 @@
 
 #include "ControlElement.h"
 
+class ExponentialForm;
+
 class Exponential : public ControlElement
 {
 public:
@@ -16,6 +18,13 @@ public:
     virtual void Rotate(bool clockwise = true);
 
     virtual void UpdatePoints();
+    
+    virtual double GetValues(double& aValue, double &bValue);
+    virtual void SetValues(double aValue, double bValue);
+    
+protected:
+    double m_aValue = 0.001;
+    double m_bValue = 5.0;
 
 };
 
