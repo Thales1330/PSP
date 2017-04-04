@@ -100,7 +100,7 @@ void Exponential::UpdatePoints()
     }
 }
 
-double Exponential::GetValues(double& aValue, double& bValue)
+void Exponential::GetValues(double& aValue, double& bValue)
 {
     aValue = m_aValue;
     bValue = m_bValue;

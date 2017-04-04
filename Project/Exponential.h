@@ -19,7 +19,7 @@ public:
 
     virtual void UpdatePoints();
     
-    virtual double GetValues(double& aValue, double &bValue);
+    virtual void GetValues(double& aValue, double &bValue);
     virtual void SetValues(double aValue, double bValue);
     
 protected:

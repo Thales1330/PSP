@@ -19,7 +19,7 @@ bool ConstantForm::ValidateData()
 {
     double value;
     if(!m_constant->DoubleFromString(this, m_textCtrlValue->GetValue(), value,
-                                     _("Value entered incorrectly in the field \"Value\".")))
+                                     _("Value entered incorrectly in the field \"Constant value\".")))
         return false;
 
     m_constant->SetValue(value);

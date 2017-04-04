@@ -945,4 +945,30 @@ public:
     virtual ~ConstantFormBase();
 };
 
+
+class GainFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextValue;
+    wxTextCtrl* m_textCtrlValue;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextValue() { return m_staticTextValue; }
+    wxTextCtrl* GetTextCtrlValue() { return m_textCtrlValue; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    GainFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Gain"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~GainFormBase();
+};
+
 #endif
