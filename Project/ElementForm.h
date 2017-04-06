@@ -971,4 +971,36 @@ public:
     virtual ~GainFormBase();
 };
 
+
+class IOControlFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxCheckBox* m_checkBoxInput;
+    wxChoice* m_choiceInput;
+    wxCheckBox* m_checkBoxOutput;
+    wxChoice* m_choiceOutput;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnInputChecked(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOutputChecked(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxCheckBox* GetCheckBoxInput() { return m_checkBoxInput; }
+    wxChoice* GetChoiceInput() { return m_choiceInput; }
+    wxCheckBox* GetCheckBoxOutput() { return m_checkBoxOutput; }
+    wxChoice* GetChoiceOutput() { return m_choiceOutput; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    IOControlFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Input / Output"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~IOControlFormBase();
+};
+
 #endif

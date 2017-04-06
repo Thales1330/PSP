@@ -102,13 +102,15 @@ void ControlElementButton::OnLeftClickUp(wxMouseEvent& event)
     event.Skip();
 }
 
-ControlEditor::ControlEditor(wxWindow* parent) : ControlEditorBase(parent)
+ControlEditor::ControlEditor(wxWindow* parent, int ioflags) : ControlEditorBase(parent)
 {
     BuildControlElementPanel();
     m_glContext = new wxGLContext(m_glCanvas);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
     //m_camera->SetScale(1.2);
+    m_ioFlags = ioflags;
+    
 }
 ControlEditor::~ControlEditor()
 {
@@ -202,7 +204,9 @@ void ControlEditor::AddElement(ControlElementButtonID id)
 {
     switch(id) {
         case ID_IO: {
-            wxLogMessage("io");
+            m_mode = MODE_INSERT;
+            IOControl* io = new IOControl(m_ioFlags);
+            m_elementList.push_back(io);
         } break;
         case ID_TF: {
             m_mode = MODE_INSERT;

@@ -9,7 +9,7 @@
 
 #include <complex>
 
-#include <wx/log.h>
+//#include <wx/log.h>
 
 /**
  * @enum PickboxID

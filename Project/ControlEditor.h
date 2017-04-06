@@ -9,6 +9,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include "IOControl.h"
+
 class Camera;
 class Element;
 class ControlElement;
@@ -26,11 +28,11 @@ enum ControlElementButtonID { ID_IO = 0, ID_TF, ID_SUM, ID_CONST, ID_LIMITER, ID
 
 class ControlElementButton : public wxWindow
 {
-public:
+   public:
     ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id = wxID_ANY);
     ~ControlElementButton();
 
-protected:
+   protected:
     virtual void OnPaint(wxPaintEvent& event);
     virtual void OnMouseEnter(wxMouseEvent& event);
     virtual void OnMouseLeave(wxMouseEvent& event);
@@ -54,7 +56,7 @@ protected:
 
 class ControlEditor : public ControlEditorBase
 {
-public:
+   public:
     enum ControlEditorMode {
         MODE_EDIT = 0,
         MODE_MOVE_ELEMENT,
@@ -67,7 +69,10 @@ public:
         MODE_PASTE,
         MODE_DRAG_PASTE
     };
-    ControlEditor(wxWindow* parent);
+
+    ControlEditor(wxWindow* parent,
+                  int ioflags = IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY | IOControl::OUT_FIELD_VOLTAGE |
+                                IOControl::OUT_MEC_POWER);
     virtual ~ControlEditor();
 
     virtual void AddElement(ControlElementButtonID id);
@@ -76,7 +81,7 @@ public:
     virtual void DeleteSelectedElements();
     virtual void CheckConnections();
 
-protected:
+   protected:
     virtual void OnKeyDown(wxKeyEvent& event);
     virtual void OnIdle(wxIdleEvent& event);
     virtual void OnScroll(wxMouseEvent& event);
@@ -106,5 +111,6 @@ protected:
     std::vector<ConnectionLine*> m_connectionList;
 
     bool m_firstDraw = true;
+    int m_ioFlags;
 };
-#endif // CONTROLEDITOR_H
+#endif  // CONTROLEDITOR_H

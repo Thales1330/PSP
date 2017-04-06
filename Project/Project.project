@@ -47,6 +47,7 @@
         <File Name="Exponential.cpp"/>
         <File Name="Constant.cpp"/>
         <File Name="Gain.cpp"/>
+        <File Name="IOControl.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -81,6 +82,7 @@
         <File Name="ExponentialForm.cpp"/>
         <File Name="ConstantForm.cpp"/>
         <File Name="GainForm.cpp"/>
+        <File Name="IOControlForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -130,6 +132,7 @@
         <File Name="Exponential.h"/>
         <File Name="Constant.h"/>
         <File Name="Gain.h"/>
+        <File Name="IOControl.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -164,6 +167,7 @@
         <File Name="ExponentialForm.h"/>
         <File Name="ConstantForm.h"/>
         <File Name="GainForm.h"/>
+        <File Name="IOControlForm.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
