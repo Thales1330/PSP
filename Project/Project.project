@@ -48,6 +48,7 @@
         <File Name="Constant.cpp"/>
         <File Name="Gain.cpp"/>
         <File Name="IOControl.cpp"/>
+        <File Name="ControlElementContainer.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
@@ -133,6 +134,7 @@
         <File Name="Constant.h"/>
         <File Name="Gain.h"/>
         <File Name="IOControl.h"/>
+        <File Name="ControlElementContainer.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">

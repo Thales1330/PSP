@@ -696,7 +696,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
                 // Tests - Ctrl + Shift + L
                 if(event.ControlDown() && event.ShiftDown()) {
-                    ControlEditor* ce = new ControlEditor(this);
+                    ControlEditor* ce = new ControlEditor(this, IOControl::IN_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
                     ce->Show();
                 }
             } break;
