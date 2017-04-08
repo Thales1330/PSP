@@ -1,7 +1,7 @@
 #include "IOControl.h"
 #include "IOControlForm.h"
 
-IOControl::IOControl(int ioFlags) : ControlElement()
+IOControl::IOControl(int ioFlags, int id) : ControlElement(id)
 {
     m_ioFlags = ioFlags;
     

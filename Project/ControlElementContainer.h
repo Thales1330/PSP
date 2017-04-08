@@ -1,19 +1,21 @@
 #ifndef CONTROLELEMENTCONTAINER_H
 #define CONTROLELEMENTCONTAINER_H
 
-class ControlEditor;
+#include <vector>
 
+class ControlEditor;
 class ControlElement;
-class ConnectionLine;
-class Constant;
-class Exponential;
-class Gain;
-class IOControl;
-class Limiter;
-class Multiplier;
-class RateLimiter;
-class Sum;
-class TransferFunction;
+
+#include "ConnectionLine.h"
+#include "Constant.h"
+#include "Exponential.h"
+#include "Gain.h"
+#include "IOControl.h"
+#include "Limiter.h"
+#include "Multiplier.h"
+#include "RateLimiter.h"
+#include "Sum.h"
+#include "TransferFunction.h"
 
 class ControlElementContainer
 {

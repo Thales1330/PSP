@@ -1,6 +1,6 @@
 #include "Multiplier.h"
 
-Multiplier::Multiplier() : ControlElement()
+Multiplier::Multiplier(int id) : ControlElement(id)
 {
     m_width = m_height = 36.0;
     Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-18, -9), Node::NODE_IN, m_borderSize);

@@ -8,7 +8,7 @@ class LimiterForm;
 class Limiter : public ControlElement
 {
 public:
-    Limiter();
+    Limiter(int id);
     ~Limiter();
     
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

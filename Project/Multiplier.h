@@ -6,7 +6,7 @@
 class Multiplier : public ControlElement
 {
    public:
-    Multiplier();
+    Multiplier(int id);
     ~Multiplier();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

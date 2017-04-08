@@ -1,7 +1,7 @@
 #include "TransferFunction.h"
 #include "TransferFunctionForm.h"
 
-TransferFunction::TransferFunction()
+TransferFunction::TransferFunction(int id) : ControlElement(id)
 {
     // Superscript unicode numbers
     m_supNumber[0] = L'\u2070';

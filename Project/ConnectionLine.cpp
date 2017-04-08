@@ -1,7 +1,7 @@
 #include "ConnectionLine.h"
 
-ConnectionLine::ConnectionLine(Node* firstNode)
-    : ControlElement()
+ConnectionLine::ConnectionLine(Node* firstNode, int id)
+    : ControlElement(id)
 {
     wxPoint2DDouble pt = firstNode->GetPosition();
     m_tmpSndPt = pt;

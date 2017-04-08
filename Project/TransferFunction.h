@@ -11,7 +11,7 @@ class TransferFunctionForm;
 class TransferFunction : public ControlElement
 {
 public:
-    TransferFunction();
+    TransferFunction(int id);
     ~TransferFunction();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

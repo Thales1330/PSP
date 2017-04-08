@@ -54,7 +54,7 @@ protected:
 class ControlElement : public Element
 {
 public:
-    ControlElement();
+    ControlElement(int id);
     ~ControlElement();
 
     virtual void StartMove(wxPoint2DDouble position);

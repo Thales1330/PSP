@@ -83,9 +83,10 @@ bool Node::Contains(wxPoint2DDouble position) const
     return m_rect.Contains(position);
 }
 
-ControlElement::ControlElement()
+ControlElement::ControlElement(int id)
     : Element()
 {
+    m_elementID = id;
 }
 
 ControlElement::~ControlElement() {}

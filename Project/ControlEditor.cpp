@@ -1,5 +1,6 @@
 #include "ControlEditor.h"
 
+#include "FileHanding.h"
 #include "Camera.h"
 #include "ControlElement.h"
 #include "TransferFunction.h"
@@ -108,9 +109,8 @@ ControlEditor::ControlEditor(wxWindow* parent, int ioflags) : ControlEditorBase(
     m_glContext = new wxGLContext(m_glCanvas);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
-    //m_camera->SetScale(1.2);
+    // m_camera->SetScale(1.2);
     m_ioFlags = ioflags;
-    
 }
 ControlEditor::~ControlEditor()
 {
@@ -205,50 +205,51 @@ void ControlEditor::AddElement(ControlElementButtonID id)
     switch(id) {
         case ID_IO: {
             m_mode = MODE_INSERT;
-            IOControl* io = new IOControl(m_ioFlags);
+            IOControl* io = new IOControl(m_ioFlags, m_lastElementID);
             m_elementList.push_back(io);
         } break;
         case ID_TF: {
             m_mode = MODE_INSERT;
-            TransferFunction* tf = new TransferFunction();
+            TransferFunction* tf = new TransferFunction(m_lastElementID);
             m_elementList.push_back(tf);
         } break;
         case ID_SUM: {
             m_mode = MODE_INSERT;
-            Sum* sum = new Sum();
+            Sum* sum = new Sum(m_lastElementID);
             m_elementList.push_back(sum);
         } break;
         case ID_CONST: {
             m_mode = MODE_INSERT;
-            Constant* constant = new Constant();
+            Constant* constant = new Constant(m_lastElementID);
             m_elementList.push_back(constant);
         } break;
         case ID_LIMITER: {
             m_mode = MODE_INSERT;
-            Limiter* limiter = new Limiter();
+            Limiter* limiter = new Limiter(m_lastElementID);
             m_elementList.push_back(limiter);
         } break;
         case ID_GAIN: {
             m_mode = MODE_INSERT;
-            Gain* gain = new Gain();
+            Gain* gain = new Gain(m_lastElementID);
             m_elementList.push_back(gain);
         } break;
         case ID_MULT: {
             m_mode = MODE_INSERT;
-            Multiplier* mult = new Multiplier();
+            Multiplier* mult = new Multiplier(m_lastElementID);
             m_elementList.push_back(mult);
         } break;
         case ID_EXP: {
             m_mode = MODE_INSERT;
-            Exponential* exp = new Exponential();
+            Exponential* exp = new Exponential(m_lastElementID);
             m_elementList.push_back(exp);
         } break;
         case ID_RATELIM: {
             m_mode = MODE_INSERT;
-            RateLimiter* rateLim = new RateLimiter();
+            RateLimiter* rateLim = new RateLimiter(m_lastElementID);
             m_elementList.push_back(rateLim);
         } break;
     }
+    m_lastElementID++;
 }
 
 void ControlEditor::OnPaint(wxPaintEvent& event)
@@ -333,7 +334,8 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
                 Node* node = *itN;
                 if(node->Contains(m_camera->ScreenToWorld(clickPoint))) {
                     m_mode = MODE_INSERT_LINE;
-                    ConnectionLine* line = new ConnectionLine(node);
+                    ConnectionLine* line = new ConnectionLine(node, m_lastElementID);
+                    m_lastElementID++;
                     m_connectionList.push_back(line);
                     element->AddChild(line);
                     line->AddParent(element);
@@ -586,7 +588,7 @@ void ControlEditor::OnIdle(wxIdleEvent& event)
 {
     // Solve wxGLString bug.
     if(m_firstDraw) {
-        TransferFunction* tf = new TransferFunction();
+        TransferFunction* tf = new TransferFunction(0);
         m_elementList.push_back(tf);
         Redraw();
         m_elementList.pop_back();
@@ -701,4 +703,15 @@ void ControlEditor::CheckConnections()
             }
         }
     }
+}
+void ControlEditor::OnExportClick(wxCommandEvent& event)
+{
+    FileHanding fileHandling(this);
+
+    wxFileDialog saveFileDialog(this, _("Save CTL file"), "", "", "CTL files (*.ctl)|*.ctl",
+                                wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    if(saveFileDialog.ShowModal() == wxID_CANCEL) return;
+
+    fileHandling.SaveControl(saveFileDialog.GetPath());
+    wxFileName fileName(saveFileDialog.GetPath());
 }

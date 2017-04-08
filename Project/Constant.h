@@ -11,7 +11,7 @@ class ConstantForm;
 class Constant : public ControlElement
 {
    public:
-    Constant();
+    Constant(int id);
     ~Constant();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

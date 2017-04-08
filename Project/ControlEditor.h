@@ -11,6 +11,7 @@
 
 #include "IOControl.h"
 
+class FileHanding;
 class Camera;
 class Element;
 class ControlElement;
@@ -84,6 +85,7 @@ class ControlEditor : public ControlEditorBase
     virtual std::vector<ControlElement*> GetControlElementList() { return m_elementList; }
 
    protected:
+    virtual void OnExportClick(wxCommandEvent& event);
     virtual void OnKeyDown(wxKeyEvent& event);
     virtual void OnIdle(wxIdleEvent& event);
     virtual void OnScroll(wxMouseEvent& event);
@@ -114,5 +116,7 @@ class ControlEditor : public ControlEditorBase
 
     bool m_firstDraw = true;
     int m_ioFlags;
+    
+    int m_lastElementID = 0;
 };
 #endif  // CONTROLEDITOR_H

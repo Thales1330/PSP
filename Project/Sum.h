@@ -9,7 +9,7 @@ class Sum : public ControlElement
 {
 public:
     enum Signal { SIGNAL_POSITIVE = 0, SIGNAL_NEGATIVE };
-    Sum();
+    Sum(int id);
     ~Sum();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

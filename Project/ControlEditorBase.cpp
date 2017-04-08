@@ -136,6 +136,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     }
 #endif
     // Connect events
+    this->Connect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Connect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
     m_glCanvas->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditorBase::OnLeftClickDown), NULL, this);
     m_glCanvas->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditorBase::OnLeftClickUp), NULL, this);
@@ -151,6 +152,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
 
 ControlEditorBase::~ControlEditorBase()
 {
+    this->Disconnect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
     m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditorBase::OnLeftClickDown), NULL, this);
     m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditorBase::OnLeftClickUp), NULL, this);

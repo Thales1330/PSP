@@ -1,8 +1,8 @@
 #include "Sum.h"
 #include "SumForm.h"
 
-Sum::Sum()
-    : ControlElement()
+Sum::Sum(int id)
+    : ControlElement(id)
 {
     m_width = m_height = 36.0;
     Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-m_width / 2, 9 - m_height / 2), Node::NODE_IN, m_borderSize);

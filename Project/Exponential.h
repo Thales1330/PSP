@@ -8,7 +8,7 @@ class ExponentialForm;
 class Exponential : public ControlElement
 {
 public:
-    Exponential();
+    Exponential(int id);
     ~Exponential();
     
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

@@ -1,7 +1,7 @@
 #include "Constant.h"
 #include "ConstantForm.h"
 
-Constant::Constant() : ControlElement()
+Constant::Constant(int id) : ControlElement(id)
 {
     SetValue(m_value);
     m_angle = 180.0;

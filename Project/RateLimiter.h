@@ -8,7 +8,7 @@ class RateLimiterForm;
 class RateLimiter : public ControlElement
 {
    public:
-    RateLimiter();
+    RateLimiter(int id);
     ~RateLimiter();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

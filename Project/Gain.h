@@ -11,7 +11,7 @@ class GainForm;
 class Gain : public ControlElement
 {
    public:
-    Gain();
+    Gain(int id);
     ~Gain();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

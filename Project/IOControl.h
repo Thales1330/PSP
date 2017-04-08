@@ -20,7 +20,7 @@ class IOControl : public ControlElement
         OUT_MEC_POWER = 1 << 5
     };
 
-    IOControl(int ioFlags);
+    IOControl(int ioFlags, int id);
     ~IOControl();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

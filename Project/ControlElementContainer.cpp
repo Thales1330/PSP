@@ -1,25 +1,9 @@
 #include "ControlElementContainer.h"
-#include "ControlEditor.h";
-#include "ControlElement.h";
-#include "ConnectionLine.h";
-#include "Constant.h";
-#include "Exponential.h";
-#include "Gain.h";
-#include "IOControl.h";
-#include "Limiter.h";
-#include "Multiplier.h";
-#include "RateLimiter.h";
-#include "Sum.h";
-#include "TransferFunction.h";
+#include "ControlEditor.h"
+#include "ControlElement.h"
 
-ControlElementContainer::ControlElementContainer()
-{
-}
-
-ControlElementContainer::~ControlElementContainer()
-{
-}
-
+ControlElementContainer::ControlElementContainer() {}
+ControlElementContainer::~ControlElementContainer() {}
 void ControlElementContainer::FillContainer(ControlEditor* editor)
 {
     ClearContainer();
@@ -33,11 +17,11 @@ void ControlElementContainer::FillContainer(ControlEditor* editor)
         } else if(Gain* gain = dynamic_cast<Gain*>(*it)) {
             m_gainList.push_back(gain);
         } else if(IOControl* ioControl = dynamic_cast<IOControl*>(*it)) {
-            m_ioControlList.push_back(IOControl);
+            m_ioControlList.push_back(ioControl);
         } else if(Limiter* limiter = dynamic_cast<Limiter*>(*it)) {
             m_limiterList.push_back(limiter);
         } else if(Multiplier* multiplier = dynamic_cast<Multiplier*>(*it)) {
-            m_multiplierList.push_back(limiter);
+            m_multiplierList.push_back(multiplier);
         } else if(RateLimiter* rateLimiter = dynamic_cast<RateLimiter*>(*it)) {
             m_rateLimiterList.push_back(rateLimiter);
         } else if(Sum* sum = dynamic_cast<Sum*>(*it)) {
@@ -45,7 +29,7 @@ void ControlElementContainer::FillContainer(ControlEditor* editor)
         } else if(TransferFunction* tf = dynamic_cast<TransferFunction*>(*it)) {
             m_tfList.push_back(tf);
         }
-    }    
+    }
 }
 
 void ControlElementContainer::ClearContainer()

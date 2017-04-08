@@ -1,7 +1,7 @@
 #include "Limiter.h"
 #include "LimiterForm.h"
 
-Limiter::Limiter() : ControlElement()
+Limiter::Limiter(int id) : ControlElement(id)
 {
     m_width = m_height = 36.0;
     Node* nodeIn = new Node(m_position + wxPoint2DDouble(-18, 0), Node::NODE_IN, m_borderSize);

@@ -1,11 +1,9 @@
 #include "FileHanding.h"
 
 FileHanding::~FileHanding() {}
-
 FileHanding::FileHanding(Workspace* workspace) { m_workspace = workspace; }
-
+FileHanding::FileHanding(ControlEditor* controlEditor) { m_controlEditor = controlEditor; }
 FileHanding::FileHanding() {}
-
 void FileHanding::SaveProject(wxFileName path)
 {
     // Erase the file (if exists or not) and write the initial data
@@ -99,7 +97,7 @@ void FileHanding::SaveProject(wxFileName path)
 
         data.number = i;
         bus->SetElectricalData(data);
-    } //}
+    }  //}
 
     //{ Capacitor
     auto capacitorsNode = AppendNode(doc, elementsNode, "CapacitorList");
@@ -150,7 +148,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ IndMotor
     auto indMotorsNode = AppendNode(doc, elementsNode, "IndMotorList");
@@ -193,7 +191,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
         SetNodeValue(doc, reactivePower, data.reactivePower);
         SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-    } //}
+    }  //}
 
     //{ Inductor
     auto inductorsNode = AppendNode(doc, elementsNode, "InductorList");
@@ -244,7 +242,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ Line
     auto linesNode = AppendNode(doc, elementsNode, "LineList");
@@ -323,7 +321,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ Load
     auto loadsNode = AppendNode(doc, elementsNode, "LoadList");
@@ -379,7 +377,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ SyncGenerator
     auto syncGeneratorsNode = AppendNode(doc, elementsNode, "SyncGeneratorList");
@@ -509,7 +507,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ SyncMotor
     auto syncMotorsNode = AppendNode(doc, elementsNode, "SyncMotorList");
@@ -638,7 +636,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }*/
-    } //}
+    }  //}
 
     //{ Transfomer
     auto transformersNode = AppendNode(doc, elementsNode, "TransformerList");
@@ -738,7 +736,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ Text
     auto textsNode = AppendNode(doc, elementsNode, "TextList");
@@ -829,7 +827,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
         bus->SetWidth(width);
         bus->SetHeight(height);
-        bus->SetPosition(bus->GetPosition()); // Update bus rectangle.
+        bus->SetPosition(bus->GetPosition());  // Update bus rectangle.
         int numRot = angle / bus->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -867,7 +865,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(bus);
         busList.push_back(bus);
         busNode = busNode->next_sibling("Bus");
-    } //}
+    }  //}
 
     //{ Capacitor
     auto capacitorListNode = elementsNode->first_node("CapacitorList");
@@ -939,7 +937,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(capacitor);
         capacitorList.push_back(capacitor);
         capacitorNode = capacitorNode->next_sibling("Capacitor");
-    } //}
+    }  //}
 
     //{ IndMotor
     auto indMotorListNode = elementsNode->first_node("IndMotorList");
@@ -1002,7 +1000,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(indMotor);
         indMotorList.push_back(indMotor);
         indMotorNode = indMotorNode->next_sibling("IndMotor");
-    } //}
+    }  //}
 
     //{ Inductor
     auto inductorListNode = elementsNode->first_node("InductorList");
@@ -1074,7 +1072,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(inductor);
         inductorList.push_back(inductor);
         inductorNode = inductorNode->next_sibling("Inductor");
-    } //}
+    }  //}
 
     //{ Line
     auto lineListNode = elementsNode->first_node("LineList");
@@ -1102,7 +1100,7 @@ bool FileHanding::OpenProject(wxFileName path)
         auto parentIDList = cadPropNode->first_node("ParentIDList");
         if(!parentIDList) return false;
         auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = { -1, -1 };
+        long parentID[2] = {-1, -1};
         while(parentNode) {
             long index = 0;
             wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
@@ -1182,7 +1180,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(line);
         lineList.push_back(line);
         lineNode = lineNode->next_sibling("Line");
-    } //}
+    }  //}
 
     //{ Load
     auto loadListNode = elementsNode->first_node("LoadList");
@@ -1257,7 +1255,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(load);
         loadList.push_back(load);
         loadNode = loadNode->next_sibling("Load");
-    } //}
+    }  //}
 
     //{ SyncGenerator
     auto syncGeneratorListNode = elementsNode->first_node("SyncGeneratorList");
@@ -1375,7 +1373,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(syncGenerator);
         syncGeneratorList.push_back(syncGenerator);
         syncGeneratorNode = syncGeneratorNode->next_sibling("SyncGenerator");
-    } //}
+    }  //}
 
     //{ SyncMotor
     auto syncMotorListNode = elementsNode->first_node("SyncMotorList");
@@ -1472,7 +1470,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(syncMotor);
         syncMotorList.push_back(syncMotor);
         syncMotorNode = syncMotorNode->next_sibling("SyncMotor");
-    } //}
+    }  //}
 
     //{ Transformer
     auto transformerListNode = elementsNode->first_node("TransformerList");
@@ -1508,7 +1506,7 @@ bool FileHanding::OpenProject(wxFileName path)
         auto parentIDList = cadPropNode->first_node("ParentIDList");
         if(!parentIDList) return false;
         auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = { -1, -1 };
+        long parentID[2] = {-1, -1};
         while(parentNode) {
             long index = 0;
             wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
@@ -1602,7 +1600,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(transformer);
         transformerList.push_back(transformer);
         transfomerNode = transfomerNode->next_sibling("Transfomer");
-    } //}
+    }  //}
 
     m_workspace->SetElementList(elementList);
 
@@ -1611,7 +1609,6 @@ bool FileHanding::OpenProject(wxFileName path)
     if(!textListNode) return false;
     auto textNode = textListNode->first_node("Text");
     while(textNode) {
-
         auto cadPropNode = textNode->first_node("CADProperties");
         if(!cadPropNode) return false;
 
@@ -1630,7 +1627,7 @@ bool FileHanding::OpenProject(wxFileName path)
 
         auto textProperties = textNode->first_node("TextProperties");
         if(!textProperties) return false;
-        
+
         text->SetElementType((ElementType)GetNodeValueDouble(textProperties, "ElementType"));
         text->SetDataType((DataType)GetNodeValueDouble(textProperties, "DataType"));
         text->SetUnit((ElectricalUnit)GetNodeValueDouble(textProperties, "DataUnit"));
@@ -1689,16 +1686,74 @@ bool FileHanding::OpenProject(wxFileName path)
 
         textList.push_back(text);
         textNode = textNode->next_sibling("Text");
-    } //}
+    }  //}
 
     m_workspace->SetTextList(textList);
     return true;
 }
 
+void FileHanding::SaveControl(wxFileName path)
+{
+    // Same process present in SaveProject():
+    std::ofstream writeProjectsFile(path.GetFullPath());
+    writeProjectsFile.close();
+
+    rapidxml::xml_document<> doc;
+    rapidxml::file<> xmlFile(path.GetFullPath());
+    doc.parse<0>(xmlFile.data());
+
+    rapidxml::xml_node<>* decl = doc.allocate_node(rapidxml::node_declaration);
+    rapidxml::xml_attribute<>* ver = doc.allocate_attribute("version", "1.0");
+    rapidxml::xml_attribute<>* encoding = doc.allocate_attribute("encoding", "utf-8");
+    decl->append_attribute(ver);
+    decl->append_attribute(encoding);
+    doc.append_node(decl);
+
+    rapidxml::xml_node<>* rootNode = doc.allocate_node(rapidxml::node_element, "Control");
+    doc.append_node(rootNode);
+
+    rapidxml::xml_node<>* projectNameNode = AppendNode(doc, rootNode, "Name");
+    SetNodeValue(doc, projectNameNode, path.GetName());
+
+    auto elementsNode = AppendNode(doc, rootNode, "ControlElements");
+    SaveControlElements(doc, elementsNode);
+    std::ofstream writeXML(path.GetFullPath());
+    writeXML << doc;
+    writeXML.close();
+}
+
+bool FileHanding::OpenControl(wxFileName path) {}
+void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode)
+{
+    ControlElementContainer ctrlContainer;
+    ctrlContainer.FillContainer(m_controlEditor);
+
+    auto constsNode = AppendNode(doc, elementsNode, "ConstantList");
+    auto constList = ctrlContainer.GetConstantList();
+    for(auto it = constList.begin(), itEnd = constList.end(); it != itEnd; ++it) {
+        Constant* constant = *it;
+        auto constNode = AppendNode(doc, constsNode, "Constant");
+        SetNodeAttribute(doc, constNode, "ID", constant->GetID());
+        auto cadProp = AppendNode(doc, constNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, constant->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, constant->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, constant->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, constant->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, constant->GetAngle());
+    }
+}
+
 rapidxml::xml_node<>* FileHanding::AppendNode(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* parentNode,
-    const char* name,
-    rapidxml::node_type nodeType)
+                                              rapidxml::xml_node<>* parentNode,
+                                              const char* name,
+                                              rapidxml::node_type nodeType)
 {
     rapidxml::xml_node<>* node = doc.allocate_node(nodeType, name);
     parentNode->append_node(node);
@@ -1721,25 +1776,25 @@ void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* node,
-    const char* atrName,
-    wxString value)
+                                   rapidxml::xml_node<>* node,
+                                   const char* atrName,
+                                   wxString value)
 {
     node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(value.mb_str())));
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* node,
-    const char* atrName,
-    int value)
+                                   rapidxml::xml_node<>* node,
+                                   const char* atrName,
+                                   int value)
 {
     node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value))));
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* node,
-    const char* atrName,
-    double value)
+                                   rapidxml::xml_node<>* node,
+                                   const char* atrName,
+                                   double value)
 {
     node->append_attribute(
         doc.allocate_attribute(atrName, doc.allocate_string(wxString::FromCDouble(value, 13).mb_str())));

@@ -10,7 +10,7 @@ public:
         ELEMENT_ELEMENT = 0,
         ELEMENT_LINE
     };
-    ConnectionLine(Node* firstNode);
+    ConnectionLine(Node* firstNode, int id);
     ~ConnectionLine();
     
     virtual void Draw(wxPoint2DDouble translation, double scale) const;

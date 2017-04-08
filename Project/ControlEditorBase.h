@@ -48,6 +48,7 @@ protected:
     wxStatusBar* m_statusBarMain;
 
 protected:
+    virtual void OnExportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
     virtual void OnLeftClickDown(wxMouseEvent& event) { event.Skip(); }
     virtual void OnLeftClickUp(wxMouseEvent& event) { event.Skip(); }

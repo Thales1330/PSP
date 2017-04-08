@@ -1,7 +1,7 @@
 #include "Gain.h"
 #include "GainForm.h"
 
-Gain::Gain() : ControlElement()
+Gain::Gain(int id) : ControlElement(id)
 {
     m_triPts.resize(3);
     SetValue(m_value);
