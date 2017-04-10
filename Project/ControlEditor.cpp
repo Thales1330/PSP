@@ -584,6 +584,7 @@ void ControlEditor::OnScroll(wxMouseEvent& event)
 
     Redraw();
 }
+
 void ControlEditor::OnIdle(wxIdleEvent& event)
 {
     // Solve wxGLString bug.
@@ -596,6 +597,7 @@ void ControlEditor::OnIdle(wxIdleEvent& event)
         m_firstDraw = false;
     }
 }
+
 void ControlEditor::OnKeyDown(wxKeyEvent& event)
 {
     char key = event.GetUnicodeKey();
@@ -704,6 +706,7 @@ void ControlEditor::CheckConnections()
         }
     }
 }
+
 void ControlEditor::OnExportClick(wxCommandEvent& event)
 {
     FileHanding fileHandling(this);

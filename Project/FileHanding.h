@@ -52,6 +52,8 @@ protected:
     int GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* nodeName, const char* atrName);
     
     void SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode);
+    void SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* nodesN, std::vector<Node*> nodeList);
+    void SaveControlChildren(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* childrenNode, std::vector<Node*> childList);
 };
 
 #endif // FILEHANDING_H
