@@ -718,3 +718,19 @@ void ControlEditor::OnExportClick(wxCommandEvent& event)
     fileHandling.SaveControl(saveFileDialog.GetPath());
     wxFileName fileName(saveFileDialog.GetPath());
 }
+
+void ControlEditor::OnImportClick(wxCommandEvent& event)
+{
+    wxFileDialog openFileDialog(this, _("Open CTL file"), "", "", "CTL files (*.ctl)|*.ctl",
+                                wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+    if(openFileDialog.ShowModal() == wxID_CANCEL) return;
+
+    wxFileName fileName(openFileDialog.GetPath());
+
+    FileHanding fileHandling(this);
+    if(!fileHandling.OpenControl(fileName)) {
+        wxMessageDialog msgDialog(this, _("It was not possible to open the selected file."), _("Error"),
+                                  wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+    }
+}

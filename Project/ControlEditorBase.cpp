@@ -62,9 +62,9 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     
     m_toolbarMain->AddTool(wxID_ANY, _("New"), wxXmlResource::Get()->LoadBitmap(wxT("new32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Import"), wxXmlResource::Get()->LoadBitmap(wxT("imp32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_IMPORT, _("Import"), wxXmlResource::Get()->LoadBitmap(wxT("imp32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Export"), wxXmlResource::Get()->LoadBitmap(wxT("exp32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_EXPORT, _("Export"), wxXmlResource::Get()->LoadBitmap(wxT("exp32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
     m_toolbarMain->AddSeparator();
     
@@ -136,7 +136,8 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     }
 #endif
     // Connect events
-    this->Connect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
+    this->Connect(ID_RIBBON_IMPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnImportClick), NULL, this);
+    this->Connect(ID_RIBBON_EXPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Connect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
     m_glCanvas->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditorBase::OnLeftClickDown), NULL, this);
     m_glCanvas->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditorBase::OnLeftClickUp), NULL, this);
@@ -152,7 +153,8 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
 
 ControlEditorBase::~ControlEditorBase()
 {
-    this->Disconnect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
+    this->Disconnect(ID_RIBBON_IMPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnImportClick), NULL, this);
+    this->Disconnect(ID_RIBBON_EXPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
     m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditorBase::OnLeftClickDown), NULL, this);
     m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditorBase::OnLeftClickUp), NULL, this);

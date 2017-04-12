@@ -81,10 +81,13 @@ class ControlEditor : public ControlEditorBase
     virtual void RotateSelectedElements(bool clockwise);
     virtual void DeleteSelectedElements();
     virtual void CheckConnections();
-    virtual std::vector<ConnectionLine*> GetConnectionLineList() { return m_connectionList; }
-    virtual std::vector<ControlElement*> GetControlElementList() { return m_elementList; }
+    virtual std::vector<ConnectionLine*> GetConnectionLineList() const { return m_connectionList; }
+    virtual std::vector<ControlElement*> GetControlElementList() const { return m_elementList; }
+    virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
+    virtual void SetElementsList(std::vector<ControlElement*> elementList) { m_elementList = elementList; }
 
    protected:
+    virtual void OnImportClick(wxCommandEvent& event);
     virtual void OnExportClick(wxCommandEvent& event);
     virtual void OnKeyDown(wxKeyEvent& event);
     virtual void OnIdle(wxIdleEvent& event);

@@ -39,6 +39,11 @@
 
 class ControlEditorBase : public wxFrame
 {
+public:
+    enum {
+        ID_RIBBON_EXPORT = 10001,
+        ID_RIBBON_IMPORT = 10002,
+    };
 protected:
     wxToolBar* m_toolbarMain;
     wxAuiManager* m_auimgr;
@@ -48,6 +53,7 @@ protected:
     wxStatusBar* m_statusBarMain;
 
 protected:
+    virtual void OnImportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnExportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
     virtual void OnLeftClickDown(wxMouseEvent& event) { event.Skip(); }

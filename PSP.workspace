@@ -2,11 +2,11 @@
 <CodeLite_Workspace Name="PSP" Database="" Version="10.0.0">
   <Project Name="Project" Path="Project/Project.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="no">
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="Project" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="yes">
+    <WorkspaceConfiguration Name="Release" Selected="no">
       <Environment/>
       <Project Name="Project" ConfigName="Release"/>
     </WorkspaceConfiguration>
