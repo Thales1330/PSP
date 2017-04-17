@@ -1,5 +1,9 @@
 #include "ConnectionLine.h"
 
+ConnectionLine::ConnectionLine() : ControlElement(-1)
+{
+}
+
 ConnectionLine::ConnectionLine(Node* firstNode, int id)
     : ControlElement(id)
 {

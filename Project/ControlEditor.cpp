@@ -717,6 +717,7 @@ void ControlEditor::OnExportClick(wxCommandEvent& event)
 
     fileHandling.SaveControl(saveFileDialog.GetPath());
     wxFileName fileName(saveFileDialog.GetPath());
+    event.Skip();
 }
 
 void ControlEditor::OnImportClick(wxCommandEvent& event)
@@ -728,9 +729,20 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
     wxFileName fileName(openFileDialog.GetPath());
 
     FileHanding fileHandling(this);
-    if(!fileHandling.OpenControl(fileName)) {
+    if(!fileHandling.OpenControl(fileName, m_elementList, m_connectionList)) {
         wxMessageDialog msgDialog(this, _("It was not possible to open the selected file."), _("Error"),
                                   wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
+    Redraw();
+    event.Skip();
 }
+
+/*void ControlEditor::SetElementsList(std::vector<ControlElement*> elementList)
+{
+    m_elementList.clear();
+    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
+        ControlElement* element = *it;
+        m_elementList.push_back(element);
+    }
+}*/

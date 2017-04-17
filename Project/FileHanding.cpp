@@ -1722,7 +1722,7 @@ void FileHanding::SaveControl(wxFileName path)
     writeXML.close();
 }
 
-bool FileHanding::OpenControl(wxFileName path)
+bool FileHanding::OpenControl(wxFileName path, std::vector<ControlElement*>& ctrlElementList, std::vector<ConnectionLine*>& ctrlConnectionList)
 {
     rapidxml::xml_document<> doc;
     rapidxml::file<> xmlFile(path.GetFullPath());
@@ -1775,22 +1775,60 @@ bool FileHanding::OpenControl(wxFileName path)
             double nodePosX = GetNodeValueDouble(nodePosition, "X");
             double nodePosY = GetNodeValueDouble(nodePosition, "Y");
             double nodeAngle = GetNodeValueDouble(nodeN, "Angle");
-            bool isConnected = (bool)GetNodeValueInt(nodeN, "IsConnected");
             Node::NodeType nodeType = (Node::NodeType)GetNodeValueInt(nodeN, "Type");
             Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
             node->SetAngle(nodeAngle);
-            node->SetConnected(isConnected);
             nodeVector.push_back(node);
             nodeN = nodeN->next_sibling("Node");
         }
         exponential->SetNodeList(nodeVector);
+        exponential->UpdatePoints();
         elementList.push_back(exponential);
-        
+
         expNode = expNode->next_sibling("Exponential");
     }
     
-    m_controlEditor->SetElementsList(elementList);
-    m_controlEditor->Redraw();
+    //Connection line
+    auto connectionListNode = elementsNode->first_node("ConnectionList");
+    if(!connectionListNode) return false;
+    auto connNode = connectionListNode->first_node("Connection");
+    while(connNode) {
+        ConnectionLine* cLine = NULL;
+        int id = GetAttributeValueInt(connNode, "ID");
+
+        auto cadPropNode = connNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        double offset = GetNodeValueDouble(cadPropNode, "Offset");
+
+        auto parentList = connNode->first_node("ParentList");
+        if(!parentList) return false;
+        auto parentNode = parentList->first_node("Parent");
+        bool firstNode = true;
+        while(parentNode) {
+            int elementID = GetNodeValueInt(parentNode, "ElementID");
+            int nodeID = GetNodeValueInt(parentNode, "NodeID");
+            
+            ControlElement* element = GetControlElementFromID(elementList, elementID);
+            Node* node = element->GetNodeList()[nodeID];
+
+            if(firstNode)
+                cLine = new ConnectionLine(node, id);
+            cLine->AddParent(element);
+            element->AddChild(cLine);
+            if(!firstNode)
+                cLine->AppendNode(node, element);
+
+            if(firstNode) firstNode = false;
+            parentNode = parentNode->next_sibling("Parent");
+        }
+        cLine->SetOffset(offset);
+        cLine->UpdatePoints();
+        connectionList.push_back(cLine);
+        connNode = connectionListNode->next_sibling("Connection");
+    }
+    
+    ctrlElementList = elementList;
+    ctrlConnectionList = connectionList;
     return true;
 }
 
@@ -1904,35 +1942,21 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::x
 
         // CAD properties
         auto cadProp = AppendNode(doc, cLineNode, "CADProperties");
-        auto position1 = AppendNode(doc, cadProp, "Position1");
-        auto posX1 = AppendNode(doc, position1, "X");
-        SetNodeValue(doc, posX1, cLine->GetPointList()[0].m_x);
-        auto posY1 = AppendNode(doc, position1, "Y");
-        SetNodeValue(doc, posY1, cLine->GetPointList()[0].m_y);
-        auto position2 = AppendNode(doc, cadProp, "Position2");
-        auto posX2 = AppendNode(doc, position2, "X");
-        SetNodeValue(doc, posX2, cLine->GetPointList()[5].m_x);
-        auto posY2 = AppendNode(doc, position2, "Y");
-        SetNodeValue(doc, posY2, cLine->GetPointList()[5].m_y);
         auto offset = AppendNode(doc, cadProp, "Offset");
         SetNodeValue(doc, offset, cLine->GetOffset());
-
-        // Child list
-        auto childsNode = AppendNode(doc, cLineNode, "ChildList");
-        auto childList = cLine->GetLineChildList();
-        for(auto itC = childList.begin(), itCEnd = childList.end(); itC != itCEnd; ++itC) {
-            ConnectionLine* childLine = *itC;
-            auto childNode = AppendNode(doc, childsNode, "Child");
-            SetNodeAttribute(doc, childNode, "ID", childLine->GetID());
-        }
 
         // Parent list
         auto parentsNode = AppendNode(doc, cLineNode, "ParentList");
         auto parentList = cLine->GetParentList();
+        int nodeIndex = 0;
         for(auto itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {
             Element* parent = *itP;
             auto parentNode = AppendNode(doc, parentsNode, "Parent");
-            SetNodeAttribute(doc, parentNode, "ID", parent->GetID());
+            auto elementID = AppendNode(doc, parentNode, "ElementID");
+            SetNodeValue(doc, elementID, parent->GetID());
+            auto nodeID = AppendNode(doc, parentNode, "NodeID");
+            SetNodeValue(doc, nodeID, cLine->GetNodeList()[nodeIndex]->GetID());
+            nodeIndex++;
         }
 
         auto parentLine = AppendNode(doc, cLineNode, "ParentLine");
@@ -1949,9 +1973,12 @@ void FileHanding::SaveControlNodes(rapidxml::xml_document<>& doc,
                                    rapidxml::xml_node<>* nodesN,
                                    std::vector<Node*> nodeList)
 {
+    int id = 0;
     for(auto it = nodeList.begin(), itEnd = nodeList.end(); it != itEnd; ++it) {
         Node* node = *it;
+        node->SetID(id);
         auto nodeN = AppendNode(doc, nodesN, "Node");
+        SetNodeAttribute(doc, nodeN, "ID", id);
         auto nodePosition = AppendNode(doc, nodeN, "Position");
         auto posNodeX = AppendNode(doc, nodePosition, "X");
         SetNodeValue(doc, posNodeX, node->GetPosition().m_x);
@@ -1959,19 +1986,11 @@ void FileHanding::SaveControlNodes(rapidxml::xml_document<>& doc,
         SetNodeValue(doc, posNodeY, node->GetPosition().m_y);
         auto angle = AppendNode(doc, nodeN, "Angle");
         SetNodeValue(doc, angle, node->GetAngle());
-        auto isConnected = AppendNode(doc, nodeN, "IsConnected");
-        SetNodeValue(doc, isConnected, node->IsConnected());
         auto nodeType = AppendNode(doc, nodeN, "Type");
         SetNodeValue(doc, nodeType, node->GetNodeType());
+        id++;
     }
 }
-
-// void FileHanding::SaveControlChildren(rapidxml::xml_document<>& doc,
-//                                      rapidxml::xml_node<>* childrenNode,
-//                                      std::vector<Node*> childList)
-//{
-//
-//}
 
 ControlElement* FileHanding::GetControlElementFromID(std::vector<ControlElement*> elementList, int id)
 {

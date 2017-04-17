@@ -36,8 +36,13 @@ public:
     
     bool IsConnected() const { return m_connected; }
     void SetConnected(bool connected = true) { m_connected = connected; }
+    
+    int GetID() const { return m_id; }
+    void SetID(int id) { m_id = id; }
 
 protected:
+    int m_id = -1;
+    
     wxRect2DDouble m_rect;
     NodeType m_nodeType;
     

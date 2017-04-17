@@ -83,8 +83,8 @@ class ControlEditor : public ControlEditorBase
     virtual void CheckConnections();
     virtual std::vector<ConnectionLine*> GetConnectionLineList() const { return m_connectionList; }
     virtual std::vector<ControlElement*> GetControlElementList() const { return m_elementList; }
-    virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
     virtual void SetElementsList(std::vector<ControlElement*> elementList) { m_elementList = elementList; }
+    virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
 
    protected:
     virtual void OnImportClick(wxCommandEvent& event);

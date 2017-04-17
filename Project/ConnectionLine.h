@@ -7,6 +7,7 @@ class ConnectionLine : public ControlElement
 {
    public:
     enum ConnectionLineType { ELEMENT_ELEMENT = 0, ELEMENT_LINE };
+    ConnectionLine();
     ConnectionLine(Node* firstNode, int id);
     ~ConnectionLine();
 
@@ -21,6 +22,7 @@ class ConnectionLine : public ControlElement
     virtual void SetTemporarySecondPoint(wxPoint2DDouble point) { m_tmpSndPt = point; }
     virtual wxPoint2DDouble GetMidPoint() const;
     virtual double GetOffset() const { return m_lineOffset; }
+    virtual void SetOffset(double offset) { m_lineOffset = offset; }
     virtual ConnectionLineType GetType() const { return m_type; }
     virtual void SetType(ConnectionLineType newType) { m_type = newType; }
     virtual ConnectionLine* GetParentLine() const { return m_parentLine; }
