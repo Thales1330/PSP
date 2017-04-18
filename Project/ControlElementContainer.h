@@ -24,8 +24,10 @@ class ControlElementContainer
     ~ControlElementContainer();
 
     virtual void FillContainer(ControlEditor* editor);
+    virtual void FillContainer(std::vector<ControlElement*> controlElementList, std::vector<ConnectionLine*> connectionLineList);
     virtual void ClearContainer();
-
+    
+    std::vector<ControlElement*> GetControlElementsList() const { return m_ctrlElementsList; }
     std::vector<ConnectionLine*> GetConnectionLineList() const { return m_cLineList; }
     std::vector<Constant*> GetConstantList() const { return m_constantList; }
     std::vector<Exponential*> GetExponentialList() const { return m_exponentialList; }
@@ -37,8 +39,10 @@ class ControlElementContainer
     std::vector<Sum*> GetSumList() const { return m_sumList; }
     std::vector<TransferFunction*> GetTFList() const { return m_tfList; }
    protected:
-    std::vector<ConnectionLine*> m_cLineList;
+    std::vector<ControlElement*> m_ctrlElementsList;
     std::vector<Constant*> m_constantList;
+
+    std::vector<ConnectionLine*> m_cLineList;
     std::vector<Exponential*> m_exponentialList;
     std::vector<Gain*> m_gainList;
     std::vector<IOControl*> m_ioControlList;

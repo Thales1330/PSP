@@ -32,6 +32,9 @@ public:
     
     void SaveControl(wxFileName path);
     bool OpenControl(wxFileName path, std::vector<ControlElement*>& ctrlElementList, std::vector<ConnectionLine*>& ctrlConnectionList);
+    
+    void SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = NULL);
+    bool OpenControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = NULL);
 
 protected:
     Workspace* m_workspace = NULL;
@@ -52,7 +55,6 @@ protected:
     int GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* nodeName, const char* atrName);
     int GetAttributeValueInt(rapidxml::xml_node<>* node, const char* atrName);
     
-    void SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode);
     void SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* nodesN, std::vector<Node*> nodeList);
     ControlElement* GetControlElementFromID(std::vector<ControlElement*> elementList, int id);
 };
