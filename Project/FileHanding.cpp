@@ -1852,6 +1852,194 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         auto value = AppendNode(doc, gainNode, "Value");
         SetNodeValue(doc, value, gain->GetValue());
     }  //}
+    
+    //{ IO
+    auto iosNode = AppendNode(doc, elementsNode, "IOList");
+    auto ioList = ctrlContainer->GetIOControlList();
+    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
+        IOControl* io = *it;
+        auto ioNode = AppendNode(doc, iosNode, "IO");
+        SetNodeAttribute(doc, ioNode, "ID", io->GetID());
+        auto cadProp = AppendNode(doc, ioNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, io->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, io->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, io->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, io->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, io->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, ioNode, "NodeList");
+        SaveControlNodes(doc, nodeList, io->GetNodeList());
+
+        // Control properties
+        auto value = AppendNode(doc, ioNode, "Value");
+        SetNodeValue(doc, value, io->GetValue());
+        auto ioFlags = AppendNode(doc, ioNode, "IOFlags");
+        SetNodeValue(doc, ioFlags, io->GetIOFlags());
+    }//}
+    
+    //{ Limiter
+    auto limitersNode = AppendNode(doc, elementsNode, "LimiterList");
+    auto limiterList = ctrlContainer->GetLimiterList();
+    for(auto it = limiterList.begin(), itEnd = limiterList.end(); it != itEnd; ++it) {
+        Limiter* limiter = *it;
+        auto limiterNode = AppendNode(doc, limitersNode, "Limiter");
+        SetNodeAttribute(doc, limiterNode, "ID", limiter->GetID());
+        auto cadProp = AppendNode(doc, limiterNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, limiter->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, limiter->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, limiter->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, limiter->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, limiter->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, limiterNode, "NodeList");
+        SaveControlNodes(doc, nodeList, limiter->GetNodeList());
+
+        // Control properties
+        auto upLimit = AppendNode(doc, limiterNode, "UpperLimit");
+        SetNodeValue(doc, upLimit, limiter->GetUpLimit());
+        auto lowLimit = AppendNode(doc, limiterNode, "LowerLimit");
+        SetNodeValue(doc, lowLimit, limiter->GetLowLimit());
+    }//}
+    
+    //{ Multiplier
+    auto multipliersNode = AppendNode(doc, elementsNode, "MultiplierList");
+    auto multiplierList = ctrlContainer->GetMultiplierList();
+    for(auto it = multiplierList.begin(), itEnd = multiplierList.end(); it != itEnd; ++it) {
+        Multiplier* multiplier = *it;
+        auto multiplierNode = AppendNode(doc, multipliersNode, "Multiplier");
+        SetNodeAttribute(doc, multiplierNode, "ID", multiplier->GetID());
+        auto cadProp = AppendNode(doc, multiplierNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, multiplier->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, multiplier->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, multiplier->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, multiplier->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, multiplier->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, multiplierNode, "NodeList");
+        SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
+    } //}
+    
+    //{ Rate limiter
+    auto rateLimitersNode = AppendNode(doc, elementsNode, "RateLimiterList");
+    auto rateLimiterList = ctrlContainer->GetRateLimiterList();
+    for(auto it = rateLimiterList.begin(), itEnd = rateLimiterList.end(); it != itEnd; ++it) {
+        RateLimiter* rateLimiter = *it;
+        auto rateLimiterNode = AppendNode(doc, rateLimitersNode, "RateLimiter");
+        SetNodeAttribute(doc, rateLimiterNode, "ID", rateLimiter->GetID());
+        auto cadProp = AppendNode(doc, rateLimiterNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, rateLimiter->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, rateLimiter->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, rateLimiter->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, rateLimiter->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, rateLimiter->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, rateLimiterNode, "NodeList");
+        SaveControlNodes(doc, nodeList, rateLimiter->GetNodeList());
+
+        // Control properties
+        auto upLimit = AppendNode(doc, rateLimiterNode, "UpperLimit");
+        SetNodeValue(doc, upLimit, rateLimiter->GetUpLimit());
+        auto lowLimit = AppendNode(doc, rateLimiterNode, "LowerLimit");
+        SetNodeValue(doc, lowLimit, rateLimiter->GetLowLimit());
+    } //}
+    
+    //{ Sum
+    auto sumsNode = AppendNode(doc, elementsNode, "SumList");
+    auto sumList = ctrlContainer->GetSumList();
+    for(auto it = sumList.begin(), itEnd = sumList.end(); it != itEnd; ++it) {
+        Sum* sum = *it;
+        auto sumNode = AppendNode(doc, sumsNode, "Sum");
+        SetNodeAttribute(doc, sumNode, "ID", sum->GetID());
+        auto cadProp = AppendNode(doc, sumNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, sum->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, sum->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, sum->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, sum->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, sum->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, sumNode, "NodeList");
+        SaveControlNodes(doc, nodeList, sum->GetNodeList());
+    } //}
+    
+    //{ Transfer function
+    auto tfsNode = AppendNode(doc, elementsNode, "TransferFunctionList");
+    auto tfList = ctrlContainer->GetTFList();
+    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
+        TransferFunction* tf = *it;
+        auto tfNode = AppendNode(doc, tfsNode, "TransferFunction");
+        SetNodeAttribute(doc, tfNode, "ID", tf->GetID());
+        auto cadProp = AppendNode(doc, tfNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, tf->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, tf->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, tf->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, tf->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, tf->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, tfNode, "NodeList");
+        SaveControlNodes(doc, nodeList, tf->GetNodeList());
+        
+        //Control properties
+        auto numeratorNode = AppendNode(doc, tfNode, "Numerator");
+        auto numerator = tf->GetNumerator();
+        for(int i = 0; i < (int)numerator.size(); ++i) {
+            auto value = AppendNode(doc, numeratorNode, "Value");
+            SetNodeValue(doc, value, numerator[i]);
+        }
+        auto denominatorNode = AppendNode(doc, tfNode, "Denominator");
+        auto denominator = tf->GetDenominator();
+        for(int i = 0; i < (int)denominator.size(); ++i) {
+            auto value = AppendNode(doc, denominatorNode, "Value");
+            SetNodeValue(doc, value, denominator[i]);
+        }
+    } //}
 
     //{ Connection line
     auto cLinesNode = AppendNode(doc, elementsNode, "ConnectionList");
