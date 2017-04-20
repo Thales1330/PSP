@@ -57,6 +57,7 @@ protected:
     
     void SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* nodesN, std::vector<Node*> nodeList);
     ControlElement* GetControlElementFromID(std::vector<ControlElement*> elementList, int id);
+    bool OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector);
 };
 
 #endif // FILEHANDING_H

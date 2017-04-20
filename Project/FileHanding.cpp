@@ -1999,6 +1999,15 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         // Nodes
         auto nodeList = AppendNode(doc, sumNode, "NodeList");
         SaveControlNodes(doc, nodeList, sum->GetNodeList());
+        
+        //Control properties
+        auto signsNode = AppendNode(doc, sumNode, "Signs");
+        auto signs = sum->GetSignalList();
+        for(int i = 0; i < (int)signs.size(); ++i) {
+            auto value = AppendNode(doc, signsNode, "Value");
+            SetNodeValue(doc, value, static_cast<int>(signs[i]));
+        }
+        
     } //}
     
     //{ Transfer function
@@ -2084,7 +2093,47 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 {
     std::vector<ControlElement*> elementList;
     std::vector<ConnectionLine*> connectionList;
+    
+    //{ Constant
+    auto constListNode = elementsNode->first_node("ConstantList");
+    if(!constListNode) return false;
+    auto constNode = constListNode->first_node("Constant");
+    while(constNode) {
+        int id = GetAttributeValueInt(constNode, "ID");
+        Constant* constant = new Constant(id);
 
+        auto cadPropNode = constNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double value = GetNodeValueDouble(constNode, "Value");
+        
+        constant->SetWidth(width);
+        constant->SetHeight(height);
+        constant->SetAngle(angle);
+        constant->SetPosition(wxPoint2DDouble(posX, posY));
+        constant->StartMove(constant->GetPosition());
+        
+        constant->SetValue(value);
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(constNode, nodeVector)) return false;
+        
+        constant->SetNodeList(nodeVector);
+        constant->UpdatePoints();
+        elementList.push_back(constant);
+
+        constNode = constNode->next_sibling("Constant");
+    } //}
+    
+    //{ Exponential
     auto expListNode = elementsNode->first_node("ExponentialList");
     if(!expListNode) return false;
     auto expNode = expListNode->first_node("Exponential");
@@ -2102,34 +2151,331 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        auto value = expNode->first_node("Value");
+        double a = GetNodeValueDouble(value, "A");
+        double b = GetNodeValueDouble(value, "B");
 
         exponential->SetWidth(width);
         exponential->SetHeight(height);
         exponential->SetAngle(angle);
         exponential->SetPosition(wxPoint2DDouble(posX, posY));
         exponential->StartMove(exponential->GetPosition());
+        
+        exponential->SetValues(a, b);
 
-        auto nodeList = expNode->first_node("NodeList");
-        if(!nodeList) return false;
-        auto nodeN = nodeList->first_node("Node");
         std::vector<Node*> nodeVector;
-        while(nodeN) {
-            auto nodePosition = nodeN->first_node("Position");
-            double nodePosX = GetNodeValueDouble(nodePosition, "X");
-            double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-            double nodeAngle = GetNodeValueDouble(nodeN, "Angle");
-            Node::NodeType nodeType = (Node::NodeType)GetNodeValueInt(nodeN, "Type");
-            Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
-            node->SetAngle(nodeAngle);
-            nodeVector.push_back(node);
-            nodeN = nodeN->next_sibling("Node");
-        }
+        if(!OpenControlNodeList(expNode, nodeVector)) return false;
+        
         exponential->SetNodeList(nodeVector);
         exponential->UpdatePoints();
         elementList.push_back(exponential);
 
         expNode = expNode->next_sibling("Exponential");
+    } //}
+    
+    //{ Gain
+    auto gainListNode = elementsNode->first_node("GainList");
+    if(!gainListNode) return false;
+    auto gainNode = gainListNode->first_node("Gain");
+    while(gainNode) {
+        int id = GetAttributeValueInt(gainNode, "ID");
+        Gain* gain = new Gain(id);
+
+        auto cadPropNode = gainNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double value = GetNodeValueDouble(gainNode, "Value");
+
+        gain->SetWidth(width);
+        gain->SetHeight(height);
+        gain->SetAngle(angle);
+        gain->SetPosition(wxPoint2DDouble(posX, posY));
+        gain->SetValue(value);
+        gain->StartMove(gain->GetPosition());
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(gainNode, nodeVector)) return false;
+        
+        gain->SetNodeList(nodeVector);
+        gain->UpdatePoints();
+        elementList.push_back(gain);
+
+        gainNode = gainNode->next_sibling("Gain");
     }
+    //}
+    
+    //{ IO
+    auto ioListNode = elementsNode->first_node("IOList");
+    if(!ioListNode) return false;
+    auto ioNode = ioListNode->first_node("IO");
+    while(ioNode) {
+        int id = GetAttributeValueInt(ioNode, "ID");
+
+        auto cadPropNode = ioNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(ioNode, nodeVector)) return false;
+        
+        IOControl::IOFlags value = static_cast<IOControl::IOFlags>(GetNodeValueInt(ioNode, "Value"));
+        int ioFlags = GetNodeValueInt(ioNode, "IOFlags");
+        
+        IOControl* io = new IOControl(ioFlags, id);
+        
+        io->SetWidth(width);
+        io->SetHeight(height);
+        io->SetAngle(angle);
+        io->SetPosition(wxPoint2DDouble(posX, posY));
+        io->SetValue(value);
+        io->StartMove(io->GetPosition());
+        io->SetNodeList(nodeVector);
+        io->UpdatePoints();
+        elementList.push_back(io);
+
+        ioNode = ioNode->next_sibling("IO");
+    }
+    //}
+    
+    //{ Limiter
+    auto limiterListNode = elementsNode->first_node("LimiterList");
+    if(!limiterListNode) return false;
+    auto limiterNode = limiterListNode->first_node("Limiter");
+    while(limiterNode) {
+        int id = GetAttributeValueInt(limiterNode, "ID");
+        Limiter* limiter = new Limiter(id);
+
+        auto cadPropNode = limiterNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double upLimit = GetNodeValueDouble(limiterNode, "UpperLimit");
+        double lowLimit = GetNodeValueDouble(limiterNode, "LowerLimit");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(limiterNode, nodeVector)) return false;
+        
+        limiter->SetWidth(width);
+        limiter->SetHeight(height);
+        limiter->SetAngle(angle);
+        limiter->SetPosition(wxPoint2DDouble(posX, posY));
+        limiter->SetUpLimit(upLimit);
+        limiter->SetLowLimit(lowLimit);
+        
+        limiter->StartMove(limiter->GetPosition());
+        limiter->SetNodeList(nodeVector);
+        limiter->UpdatePoints();
+        elementList.push_back(limiter);
+
+        limiterNode = limiterNode->next_sibling("Limiter");
+    }
+    //}
+    
+    //{ Multiplier
+    auto multiplierListNode = elementsNode->first_node("MultiplierList");
+    if(!multiplierListNode) return false;
+    auto multiplierNode = multiplierListNode->first_node("Multiplier");
+    while(multiplierNode) {
+        int id = GetAttributeValueInt(multiplierNode, "ID");
+        Multiplier* multiplier = new Multiplier(id);
+
+        auto cadPropNode = multiplierNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(multiplierNode, nodeVector)) return false;
+        
+        multiplier->SetWidth(width);
+        multiplier->SetHeight(height);
+        multiplier->SetAngle(angle);
+        multiplier->SetPosition(wxPoint2DDouble(posX, posY));
+        
+        multiplier->StartMove(multiplier->GetPosition());
+        multiplier->SetNodeList(nodeVector);
+        multiplier->UpdatePoints();
+        elementList.push_back(multiplier);
+
+        multiplierNode = multiplierNode->next_sibling("Multiplier");
+    }
+    //}
+    
+    //{ Rate limiter
+    auto rateLimiterListNode = elementsNode->first_node("RateLimiterList");
+    if(!rateLimiterListNode) return false;
+    auto rateLimiterNode = rateLimiterListNode->first_node("RateLimiter");
+    while(rateLimiterNode) {
+        int id = GetAttributeValueInt(rateLimiterNode, "ID");
+        RateLimiter* limiter = new RateLimiter(id);
+
+        auto cadPropNode = rateLimiterNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double upLimit = GetNodeValueDouble(rateLimiterNode, "UpperLimit");
+        double lowLimit = GetNodeValueDouble(rateLimiterNode, "LowerLimit");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(rateLimiterNode, nodeVector)) return false;
+        
+        limiter->SetWidth(width);
+        limiter->SetHeight(height);
+        limiter->SetAngle(angle);
+        limiter->SetPosition(wxPoint2DDouble(posX, posY));
+        limiter->SetUpLimit(upLimit);
+        limiter->SetLowLimit(lowLimit);
+        
+        limiter->StartMove(limiter->GetPosition());
+        limiter->SetNodeList(nodeVector);
+        limiter->UpdatePoints();
+        elementList.push_back(limiter);
+
+        rateLimiterNode = rateLimiterNode->next_sibling("RateLimiter");
+    }
+    //}
+    
+    //{ Sum
+    auto sumListNode = elementsNode->first_node("SumList");
+    if(!sumListNode) return false;
+    auto sumNode = sumListNode->first_node("Sum");
+    while(sumNode) {
+        int id = GetAttributeValueInt(sumNode, "ID");
+        Sum* sum = new Sum(id);
+
+        auto cadPropNode = sumNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        std::vector<Sum::Signal> signs;
+        auto signsNode = sumNode->first_node("Signs");
+        auto sign = signsNode->first_node("Value");
+        while(sign) {
+            long value;
+            wxString(sign->value()).ToCLong(&value);
+            signs.push_back(static_cast<Sum::Signal>(value));
+            sign = sign->next_sibling("Value");
+        }
+        sum->SetSignalList(signs);
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(sumNode, nodeVector)) return false;
+        
+        sum->SetWidth(width);
+        sum->SetHeight(height);
+        sum->SetAngle(angle);
+        sum->SetPosition(wxPoint2DDouble(posX, posY));
+        
+        sum->StartMove(sum->GetPosition());
+        sum->SetNodeList(nodeVector);
+        sum->UpdatePoints();
+        elementList.push_back(sum);
+
+        sumNode = sumNode->next_sibling("Sum");
+    }
+    //}
+    
+    //{ Transfer function
+    auto tfListNode = elementsNode->first_node("TransferFunctionList");
+    if(!tfListNode) return false;
+    auto tfNode = tfListNode->first_node("TransferFunction");
+    while(tfNode) {
+        int id = GetAttributeValueInt(tfNode, "ID");
+        TransferFunction* tf = new TransferFunction(id);
+
+        auto cadPropNode = tfNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        std::vector<double> numerator, denominator;
+        auto numeratorNode = tfNode->first_node("Numerator");
+        auto nValue = numeratorNode->first_node("Value");
+        while(nValue) {
+            double value = 0.0;
+            wxString(nValue->value()).ToCDouble(&value);
+            numerator.push_back(value);
+            nValue = nValue->next_sibling("Value");
+        }
+        auto denominatorNode = tfNode->first_node("Denominator");
+        auto dValue = denominatorNode->first_node("Value");
+        while(dValue) {
+            double value = 0.0;
+            wxString(dValue->value()).ToCDouble(&value);
+            denominator.push_back(value);
+            dValue = dValue->next_sibling("Value");
+        }        
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(tfNode, nodeVector)) return false;
+        
+        tf->SetWidth(width);
+        tf->SetHeight(height);
+        tf->SetAngle(angle);
+        tf->SetPosition(wxPoint2DDouble(posX, posY));
+        
+        tf->SetNumerator(numerator);
+        tf->SetDenominator(denominator);
+        
+        tf->StartMove(tf->GetPosition());
+        tf->SetNodeList(nodeVector);
+        
+        tf->UpdateTFText();
+        
+        elementList.push_back(tf);
+
+        tfNode = tfNode->next_sibling("TransferFunction");
+    }
+    //}
 
     // Connection line
     auto connectionListNode = elementsNode->first_node("ConnectionList");
@@ -2216,6 +2562,25 @@ ControlElement* FileHanding::GetControlElementFromID(std::vector<ControlElement*
         if(element->GetID() == id) return element;
     }
     return NULL;
+}
+
+bool FileHanding::OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector)
+{
+    auto nodeList = elementNode->first_node("NodeList");
+    if(!nodeList) return false;
+    auto nodeN = nodeList->first_node("Node");
+    while(nodeN) {
+        auto nodePosition = nodeN->first_node("Position");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        double nodeAngle = GetNodeValueDouble(nodeN, "Angle");
+        Node::NodeType nodeType = (Node::NodeType)GetNodeValueInt(nodeN, "Type");
+        Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
+        node->SetAngle(nodeAngle);
+        nodeVector.push_back(node);
+        nodeN = nodeN->next_sibling("Node");
+    }
+    return true;
 }
 
 rapidxml::xml_node<>* FileHanding::AppendNode(rapidxml::xml_document<>& doc,

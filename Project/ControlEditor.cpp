@@ -734,6 +734,21 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
                                   wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
+    
+    //Get the highest id number
+    int majorElementID = 0;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        ControlElement* element = *it;
+        if(element->GetID() > majorElementID)
+            majorElementID = element->GetID();
+    }
+    for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
+        ConnectionLine* line = *it;
+        if(line->GetID() > majorElementID)
+            majorElementID = line->GetID();
+    }
+    m_lastElementID = ++majorElementID;
+    
     Redraw();
     event.Skip();
 }
