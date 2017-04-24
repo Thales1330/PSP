@@ -12,6 +12,8 @@
 #include "WorkspaceBase.h"
 #include "Bus.h"
 
+#include "ControlEditor.h"
+
 class Camera;
 class Element;
 // class Bus;
@@ -29,21 +31,6 @@ class Text;
 
 class PowerFlow;
 class Fault;
-
-enum WorkspaceMode {
-    MODE_EDIT = 0,
-    MODE_MOVE_ELEMENT,
-    MODE_MOVE_PICKBOX,
-    MODE_MOVE_NODE,
-    MODE_DRAG,
-    MODE_DRAG_INSERT,
-    MODE_DRAG_INSERT_TEXT,
-    MODE_INSERT,
-    MODE_INSERT_TEXT,
-    MODE_SELECTION_RECT,
-    MODE_PASTE,
-    MODE_DRAG_PASTE
-};
 
 enum ElementID {
     ID_BUS = 0,
@@ -63,6 +50,21 @@ enum ElementID {
 class Workspace : public WorkspaceBase
 {
 public:
+    enum WorkspaceMode {
+        MODE_EDIT = 0,
+        MODE_MOVE_ELEMENT,
+        MODE_MOVE_PICKBOX,
+        MODE_MOVE_NODE,
+        MODE_DRAG,
+        MODE_DRAG_INSERT,
+        MODE_DRAG_INSERT_TEXT,
+        MODE_INSERT,
+        MODE_INSERT_TEXT,
+        MODE_SELECTION_RECT,
+        MODE_PASTE,
+        MODE_DRAG_PASTE
+    };
+
     Workspace();
     Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL);
     ~Workspace();
@@ -73,10 +75,10 @@ public:
     std::vector<Element*> GetAllElements() const;
     WorkspaceMode GetWorkspaceMode() const { return m_mode; }
     Camera* GetCamera() const { return m_camera; }
-    
+
     void CopySelection();
     bool Paste();
-    
+
     wxFileName GetSavedPath() const { return m_savedPath; }
 
     void SetName(wxString name) { m_name = name; }
@@ -90,13 +92,15 @@ public:
     void Redraw() { m_glCanvas->Refresh(); }
     void RotateSelectedElements(bool clockwise = true);
     void DeleteSelectedElements();
-    bool GetElementsCorners(wxPoint2DDouble& leftUpCorner, wxPoint2DDouble& rightDownCorner, std::vector<Element*> elementList);
+    bool GetElementsCorners(wxPoint2DDouble& leftUpCorner,
+        wxPoint2DDouble& rightDownCorner,
+        std::vector<Element*> elementList);
     void Fit();
     void UnselectAll();
 
     void ValidateBusesVoltages(Element* initialBus);
     void ValidateElementsVoltages();
-    
+
     void UpdateElementsID();
     void UpdateTextElements();
 
@@ -137,42 +141,13 @@ protected:
     int m_elementNumber[NUM_ELEMENTS];
 
     std::vector<Text*> m_textList;
-    
+
     wxFileName m_savedPath;
-    
+
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
-    
+
     bool m_justOpened = false;
-};
-
-class Camera
-{
-public:
-    Camera();
-    ~Camera();
-
-    void SetScale(wxPoint2DDouble screenPoint, double delta);
-    void SetScale(double scale) { m_scale = scale; }
-    void SetTranslation(wxPoint2DDouble screenPoint);
-    void StartTranslation(wxPoint2DDouble startPoint) { this->m_translationStartPt = startPoint; }
-    void UpdateMousePosition(wxPoint2DDouble mousePosition) { this->m_mousePosition = mousePosition; }
-    double GetScale() const { return m_scale; }
-    wxPoint2DDouble GetTranslation() const { return m_translation; }
-    wxPoint2DDouble GetMousePosition(bool worldCoords = true) const;
-    wxPoint2DDouble ScreenToWorld(wxPoint2DDouble screenCoords) const;
-    double GetZoomMin() const { return m_zoomMin; }
-    double GetZoomMax() const { return m_zoomMax; }
-
-protected:
-    wxPoint2DDouble m_translation;
-    wxPoint2DDouble m_translationStartPt;
-    double m_scale;
-
-    wxPoint2DDouble m_mousePosition;
-
-    double m_zoomMin = 0.01;
-    double m_zoomMax = 3.0;
 };
 
 #endif // WORKSPACE_H

@@ -38,11 +38,25 @@
       <File Name="Element.cpp"/>
       <VirtualDirectory Name="control element">
         <File Name="ControlElement.cpp"/>
+        <File Name="TransferFunction.cpp"/>
+        <File Name="ConnectionLine.cpp"/>
+        <File Name="Sum.cpp"/>
+        <File Name="Multiplier.cpp"/>
+        <File Name="Limiter.cpp"/>
+        <File Name="RateLimiter.cpp"/>
+        <File Name="Exponential.cpp"/>
+        <File Name="Constant.cpp"/>
+        <File Name="Gain.cpp"/>
+        <File Name="IOControl.cpp"/>
+        <File Name="ControlElementContainer.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
       <File Name="wxGLString.cpp"/>
+      <VirtualDirectory Name="wxMathPlot">
+        <File Name="wxMathPlot/mathplot.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
@@ -61,6 +75,18 @@
       <File Name="FileHanding.cpp"/>
       <VirtualDirectory Name="graphical element form">
         <File Name="TextForm.cpp"/>
+      </VirtualDirectory>
+      <File Name="ControlEditor.cpp"/>
+      <File Name="Camera.cpp"/>
+      <VirtualDirectory Name="control element form">
+        <File Name="TransferFunctionForm.cpp"/>
+        <File Name="SumForm.cpp"/>
+        <File Name="LimiterForm.cpp"/>
+        <File Name="RateLimiterForm.cpp"/>
+        <File Name="ExponentialForm.cpp"/>
+        <File Name="ConstantForm.cpp"/>
+        <File Name="GainForm.cpp"/>
+        <File Name="IOControlForm.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
@@ -101,11 +127,25 @@
       </VirtualDirectory>
       <VirtualDirectory Name="control element">
         <File Name="ControlElement.h"/>
+        <File Name="TransferFunction.h"/>
+        <File Name="ConnectionLine.h"/>
+        <File Name="Sum.h"/>
+        <File Name="Multiplier.h"/>
+        <File Name="Limiter.h"/>
+        <File Name="RateLimiter.h"/>
+        <File Name="Exponential.h"/>
+        <File Name="Constant.h"/>
+        <File Name="Gain.h"/>
+        <File Name="IOControl.h"/>
+        <File Name="ControlElementContainer.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
       <File Name="wxGLString.h"/>
+      <VirtualDirectory Name="wxMathPlot">
+        <File Name="wxMathPlot/mathplot.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>
@@ -125,6 +165,18 @@
       <VirtualDirectory Name="graphical element form">
         <File Name="TextForm.h"/>
       </VirtualDirectory>
+      <File Name="ControlEditor.h"/>
+      <File Name="Camera.h"/>
+      <VirtualDirectory Name="control element form">
+        <File Name="TransferFunctionForm.h"/>
+        <File Name="SumForm.h"/>
+        <File Name="LimiterForm.h"/>
+        <File Name="RateLimiterForm.h"/>
+        <File Name="ExponentialForm.h"/>
+        <File Name="ConstantForm.h"/>
+        <File Name="GainForm.h"/>
+        <File Name="IOControlForm.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
@@ -136,6 +188,7 @@
       <File Name="WorkspaceBitmaps.cpp"/>
       <File Name="BusFormBitmaps.cpp"/>
       <File Name="ElementFormBitmaps.cpp"/>
+      <File Name="ControlEditorBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
@@ -144,10 +197,14 @@
       <File Name="WorkspaceBase.cpp"/>
       <File Name="ElementForm.h"/>
       <File Name="ElementForm.cpp"/>
+      <File Name="ControlEditorBase.h"/>
+      <File Name="ControlEditorBase.cpp"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>
     <File Name="ElementForm.wxcp"/>
+    <File Name="ControlEditor.wxcp"/>
+    <File Name="ChartView.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

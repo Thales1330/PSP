@@ -1,5 +1,5 @@
 #include "Workspace.h"
-
+#include "Camera.h"
 #include "Element.h"
 //#include "Bus.h"
 #include "Line.h"
@@ -16,44 +16,6 @@
 
 #include "PowerFlow.h"
 #include "Fault.h"
-
-// Camera
-Camera::Camera()
-{
-    m_translation = wxPoint2DDouble(0, 0);
-    m_scale = 1.0;
-}
-
-Camera::~Camera() {}
-wxPoint2DDouble Camera::ScreenToWorld(wxPoint2DDouble screenCoords) const
-{
-    return wxPoint2DDouble(
-        screenCoords.m_x / m_scale - m_translation.m_x, screenCoords.m_y / m_scale - m_translation.m_y);
-}
-
-void Camera::SetTranslation(wxPoint2DDouble screenPoint)
-{
-    m_translation = screenPoint / m_scale - m_translationStartPt;
-}
-
-void Camera::SetScale(wxPoint2DDouble screenPoint, double delta)
-{
-    m_translation -= screenPoint * (1.0 - m_scale) / m_scale;
-
-    m_scale += delta;
-
-    // Limits: 5% - 300%
-    if(m_scale < m_zoomMin) m_scale = m_zoomMin;
-    if(m_scale > m_zoomMax) m_scale = m_zoomMax;
-
-    m_translation += screenPoint * (1.0 - m_scale) / m_scale;
-}
-
-wxPoint2DDouble Camera::GetMousePosition(bool worldCoords) const
-{
-    if(worldCoords) return ScreenToWorld(m_mousePosition);
-    return m_mousePosition;
-}
 
 // Workspace
 Workspace::Workspace()
@@ -355,8 +317,7 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
                     if(element->GetContextMenu(menu)) {
                         m_timer->Stop();
                         menu.SetClientData(element);
-                        menu.Connect(
-                            wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Workspace::OnPopupClick), NULL, this);
+                        menu.Bind(wxEVT_COMMAND_MENU_SELECTED, &Workspace::OnPopupClick, this);
                         PopupMenu(&menu);
                         redraw = true;
 
@@ -623,16 +584,6 @@ void Workspace::OnMiddleDown(wxMouseEvent& event)
             m_mode = MODE_DRAG;
         } break;
     }
-    /*if(m_mode != MODE_INSERT && m_mode != MODE_INSERT_TEXT && m_mode == MODE_PASTE && m_mode != MODE_DRAG_INSERT &&
-    m_mode != MODE_DRAG_INSERT_TEXT && m_mode != MODE_DRAG_PASTE) {
-        m_mode = MODE_DRAG;
-    } else if(m_mode == MODE_INSERT_TEXT) {
-        m_mode = MODE_DRAG_INSERT_TEXT;
-    }else if(m_mode == MODE_PASTE) {
-        m_mode = MODE_DRAG_PASTE;
-    } else {
-        m_mode = MODE_DRAG_INSERT;
-    }*/
     m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
 }
@@ -704,7 +655,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
                     Redraw();
                 }
-            }
+            } break;
             case 'F': {
                 if(event.GetModifiers() == wxMOD_SHIFT) {
                     Fit();
@@ -745,18 +696,8 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
                 // Tests - Ctrl + Shift + L
                 if(event.ControlDown() && event.ShiftDown()) {
-                    int numChild = 0;
-                    int numParent = 0;
-                    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-                        Element* element = *it;
-                        if(element->Contains(m_camera->GetMousePosition())) {
-                            for(int i = 0; i < (int)element->GetParentList().size(); i++) {
-                                if(element->GetParentList()[i]) numParent++;
-                            }
-                            numChild = element->GetChildList().size();
-                        }
-                    }
-                    wxMessageBox(wxString::Format("%d parents\n%d childs", numParent, numChild));
+                    ControlEditor* ce = new ControlEditor(this, IOControl::IN_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
+                    ce->Show();
                 }
             } break;
             case 'T': // Insert a transformer.

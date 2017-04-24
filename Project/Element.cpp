@@ -1,6 +1,6 @@
 #include "Element.h"
 
-Element::Element() {}
+Element::Element() { m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5); }
 
 Element::~Element() {}
 
@@ -356,4 +356,39 @@ OpenGLColour::OpenGLColour() { SetRGBA(1.0, 1.0, 1.0, 1.0); }
 OpenGLColour::OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
 {
     SetRGBA(red, green, blue, alpha);
+}
+
+double Element::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) const
+{
+    //[Ref] http://geomalgorithms.com/a02-_lines.html
+    double distance = 100.0; // Big initial distance.
+    wxPoint2DDouble p0 = point;
+
+    for(int i = 1; i < (int)m_pointList.size() - 2; i++) {
+        double d = 0.0;
+
+        wxPoint2DDouble p1 = m_pointList[i];
+        wxPoint2DDouble p2 = m_pointList[i + 1];
+
+        wxPoint2DDouble v = p2 - p1;
+        wxPoint2DDouble w = p0 - p1;
+
+        double c1 = w.m_x * v.m_x + w.m_y * v.m_y;
+        double c2 = v.m_x * v.m_x + v.m_y * v.m_y;
+
+        if(c1 <= 0.0) {
+            d = std::sqrt(std::pow(p0.m_y - p1.m_y, 2) + std::pow(p0.m_x - p1.m_x, 2));
+        } else if(c2 <= c1) {
+            d = std::sqrt(std::pow(p0.m_y - p2.m_y, 2) + std::pow(p0.m_x - p2.m_x, 2));
+        } else {
+            d = std::abs((p2.m_y - p1.m_y) * p0.m_x - (p2.m_x - p1.m_x) * p0.m_y + p2.m_x * p1.m_y - p2.m_y * p1.m_x) /
+                std::sqrt(std::pow(p2.m_y - p1.m_y, 2) + std::pow(p2.m_x - p1.m_x, 2));
+        }
+        if(d < distance) {
+            distance = d;
+            if(segmentNumber) *segmentNumber = i;
+        }
+    }
+
+    return distance;
 }

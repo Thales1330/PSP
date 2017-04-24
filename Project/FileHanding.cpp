@@ -1,11 +1,9 @@
 #include "FileHanding.h"
 
 FileHanding::~FileHanding() {}
-
 FileHanding::FileHanding(Workspace* workspace) { m_workspace = workspace; }
-
+FileHanding::FileHanding(ControlEditor* controlEditor) { m_controlEditor = controlEditor; }
 FileHanding::FileHanding() {}
-
 void FileHanding::SaveProject(wxFileName path)
 {
     // Erase the file (if exists or not) and write the initial data
@@ -99,7 +97,7 @@ void FileHanding::SaveProject(wxFileName path)
 
         data.number = i;
         bus->SetElectricalData(data);
-    } //}
+    }  //}
 
     //{ Capacitor
     auto capacitorsNode = AppendNode(doc, elementsNode, "CapacitorList");
@@ -150,7 +148,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ IndMotor
     auto indMotorsNode = AppendNode(doc, elementsNode, "IndMotorList");
@@ -193,7 +191,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
         SetNodeValue(doc, reactivePower, data.reactivePower);
         SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-    } //}
+    }  //}
 
     //{ Inductor
     auto inductorsNode = AppendNode(doc, elementsNode, "InductorList");
@@ -244,7 +242,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ Line
     auto linesNode = AppendNode(doc, elementsNode, "LineList");
@@ -323,7 +321,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ Load
     auto loadsNode = AppendNode(doc, elementsNode, "LoadList");
@@ -379,7 +377,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ SyncGenerator
     auto syncGeneratorsNode = AppendNode(doc, elementsNode, "SyncGeneratorList");
@@ -509,7 +507,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ SyncMotor
     auto syncMotorsNode = AppendNode(doc, elementsNode, "SyncMotorList");
@@ -638,7 +636,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }*/
-    } //}
+    }  //}
 
     //{ Transfomer
     auto transformersNode = AppendNode(doc, elementsNode, "TransformerList");
@@ -738,7 +736,7 @@ void FileHanding::SaveProject(wxFileName path)
             auto swTime = AppendNode(doc, switching, "Time");
             SetNodeValue(doc, swTime, swData.swTime[j]);
         }
-    } //}
+    }  //}
 
     //{ Text
     auto textsNode = AppendNode(doc, elementsNode, "TextList");
@@ -829,7 +827,7 @@ bool FileHanding::OpenProject(wxFileName path)
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
         bus->SetWidth(width);
         bus->SetHeight(height);
-        bus->SetPosition(bus->GetPosition()); // Update bus rectangle.
+        bus->SetPosition(bus->GetPosition());  // Update bus rectangle.
         int numRot = angle / bus->GetRotationAngle();
         bool clockwise = true;
         if(numRot < 0) {
@@ -867,7 +865,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(bus);
         busList.push_back(bus);
         busNode = busNode->next_sibling("Bus");
-    } //}
+    }  //}
 
     //{ Capacitor
     auto capacitorListNode = elementsNode->first_node("CapacitorList");
@@ -939,7 +937,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(capacitor);
         capacitorList.push_back(capacitor);
         capacitorNode = capacitorNode->next_sibling("Capacitor");
-    } //}
+    }  //}
 
     //{ IndMotor
     auto indMotorListNode = elementsNode->first_node("IndMotorList");
@@ -1002,7 +1000,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(indMotor);
         indMotorList.push_back(indMotor);
         indMotorNode = indMotorNode->next_sibling("IndMotor");
-    } //}
+    }  //}
 
     //{ Inductor
     auto inductorListNode = elementsNode->first_node("InductorList");
@@ -1074,7 +1072,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(inductor);
         inductorList.push_back(inductor);
         inductorNode = inductorNode->next_sibling("Inductor");
-    } //}
+    }  //}
 
     //{ Line
     auto lineListNode = elementsNode->first_node("LineList");
@@ -1102,7 +1100,7 @@ bool FileHanding::OpenProject(wxFileName path)
         auto parentIDList = cadPropNode->first_node("ParentIDList");
         if(!parentIDList) return false;
         auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = { -1, -1 };
+        long parentID[2] = {-1, -1};
         while(parentNode) {
             long index = 0;
             wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
@@ -1182,7 +1180,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(line);
         lineList.push_back(line);
         lineNode = lineNode->next_sibling("Line");
-    } //}
+    }  //}
 
     //{ Load
     auto loadListNode = elementsNode->first_node("LoadList");
@@ -1257,7 +1255,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(load);
         loadList.push_back(load);
         loadNode = loadNode->next_sibling("Load");
-    } //}
+    }  //}
 
     //{ SyncGenerator
     auto syncGeneratorListNode = elementsNode->first_node("SyncGeneratorList");
@@ -1375,7 +1373,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(syncGenerator);
         syncGeneratorList.push_back(syncGenerator);
         syncGeneratorNode = syncGeneratorNode->next_sibling("SyncGenerator");
-    } //}
+    }  //}
 
     //{ SyncMotor
     auto syncMotorListNode = elementsNode->first_node("SyncMotorList");
@@ -1472,7 +1470,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(syncMotor);
         syncMotorList.push_back(syncMotor);
         syncMotorNode = syncMotorNode->next_sibling("SyncMotor");
-    } //}
+    }  //}
 
     //{ Transformer
     auto transformerListNode = elementsNode->first_node("TransformerList");
@@ -1508,7 +1506,7 @@ bool FileHanding::OpenProject(wxFileName path)
         auto parentIDList = cadPropNode->first_node("ParentIDList");
         if(!parentIDList) return false;
         auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = { -1, -1 };
+        long parentID[2] = {-1, -1};
         while(parentNode) {
             long index = 0;
             wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
@@ -1602,7 +1600,7 @@ bool FileHanding::OpenProject(wxFileName path)
         elementList.push_back(transformer);
         transformerList.push_back(transformer);
         transfomerNode = transfomerNode->next_sibling("Transfomer");
-    } //}
+    }  //}
 
     m_workspace->SetElementList(elementList);
 
@@ -1611,7 +1609,6 @@ bool FileHanding::OpenProject(wxFileName path)
     if(!textListNode) return false;
     auto textNode = textListNode->first_node("Text");
     while(textNode) {
-
         auto cadPropNode = textNode->first_node("CADProperties");
         if(!cadPropNode) return false;
 
@@ -1630,7 +1627,7 @@ bool FileHanding::OpenProject(wxFileName path)
 
         auto textProperties = textNode->first_node("TextProperties");
         if(!textProperties) return false;
-        
+
         text->SetElementType((ElementType)GetNodeValueDouble(textProperties, "ElementType"));
         text->SetDataType((DataType)GetNodeValueDouble(textProperties, "DataType"));
         text->SetUnit((ElectricalUnit)GetNodeValueDouble(textProperties, "DataUnit"));
@@ -1689,16 +1686,907 @@ bool FileHanding::OpenProject(wxFileName path)
 
         textList.push_back(text);
         textNode = textNode->next_sibling("Text");
-    } //}
+    }  //}
 
     m_workspace->SetTextList(textList);
     return true;
 }
 
+void FileHanding::SaveControl(wxFileName path)
+{
+    // Same process present in SaveProject():
+    std::ofstream writeProjectsFile(path.GetFullPath());
+    writeProjectsFile.close();
+
+    rapidxml::xml_document<> doc;
+    rapidxml::file<> xmlFile(path.GetFullPath());
+    doc.parse<0>(xmlFile.data());
+
+    rapidxml::xml_node<>* decl = doc.allocate_node(rapidxml::node_declaration);
+    rapidxml::xml_attribute<>* ver = doc.allocate_attribute("version", "1.0");
+    rapidxml::xml_attribute<>* encoding = doc.allocate_attribute("encoding", "utf-8");
+    decl->append_attribute(ver);
+    decl->append_attribute(encoding);
+    doc.append_node(decl);
+
+    rapidxml::xml_node<>* rootNode = doc.allocate_node(rapidxml::node_element, "Control");
+    doc.append_node(rootNode);
+
+    rapidxml::xml_node<>* projectNameNode = AppendNode(doc, rootNode, "Name");
+    SetNodeValue(doc, projectNameNode, path.GetName());
+
+    auto elementsNode = AppendNode(doc, rootNode, "ControlElements");
+    SaveControlElements(doc, elementsNode);
+    std::ofstream writeXML(path.GetFullPath());
+    writeXML << doc;
+    writeXML.close();
+}
+
+bool FileHanding::OpenControl(wxFileName path,
+                              std::vector<ControlElement*>& ctrlElementList,
+                              std::vector<ConnectionLine*>& ctrlConnectionList)
+{
+    rapidxml::xml_document<> doc;
+    rapidxml::file<> xmlFile(path.GetFullPath());
+
+    doc.parse<0>(xmlFile.data());
+
+    auto projectNode = doc.first_node("Control");
+    if(!projectNode) return false;
+    // auto nameNode = projectNode->first_node("Name");
+    // if(!nameNode) return false;
+    // m_controlEditor->SetName(nameNode->value());
+
+    // Open elements
+    auto elementsNode = projectNode->first_node("ControlElements");
+    if(!elementsNode) return false;
+
+    // auto elementsNode = AppendNode(doc, rootNode, "ControlElements");
+    ControlElementContainer* ctrlElementContainer = new ControlElementContainer();
+    if(!OpenControlElements(doc, elementsNode, ctrlElementContainer)) return false;
+    ctrlElementList = ctrlElementContainer->GetControlElementsList();
+    ctrlConnectionList = ctrlElementContainer->GetConnectionLineList();
+    return true;
+}
+
+void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
+                                      rapidxml::xml_node<>* elementsNode,
+                                      ControlElementContainer* ctrlContainer)
+{
+    if(!ctrlContainer) {
+        ctrlContainer = new ControlElementContainer();
+        ctrlContainer->FillContainer(m_controlEditor);
+    }
+
+    //{ Constant
+    auto constsNode = AppendNode(doc, elementsNode, "ConstantList");
+    auto constList = ctrlContainer->GetConstantList();
+    for(auto it = constList.begin(), itEnd = constList.end(); it != itEnd; ++it) {
+        Constant* constant = *it;
+        auto constNode = AppendNode(doc, constsNode, "Constant");
+        SetNodeAttribute(doc, constNode, "ID", constant->GetID());
+        auto cadProp = AppendNode(doc, constNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, constant->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, constant->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, constant->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, constant->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, constant->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, constNode, "NodeList");
+        SaveControlNodes(doc, nodeList, constant->GetNodeList());
+
+        // Control properties
+        auto value = AppendNode(doc, constNode, "Value");
+        SetNodeValue(doc, value, constant->GetValue());
+    }  //}
+
+    //{ Exponential
+    auto expsNode = AppendNode(doc, elementsNode, "ExponentialList");
+    auto expList = ctrlContainer->GetExponentialList();
+    for(auto it = expList.begin(), itEnd = expList.end(); it != itEnd; ++it) {
+        Exponential* exponential = *it;
+        auto expNode = AppendNode(doc, expsNode, "Exponential");
+        SetNodeAttribute(doc, expNode, "ID", exponential->GetID());
+        auto cadProp = AppendNode(doc, expNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, exponential->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, exponential->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, exponential->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, exponential->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, exponential->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, expNode, "NodeList");
+        SaveControlNodes(doc, nodeList, exponential->GetNodeList());
+
+        // Control properties
+        double a, b;
+        exponential->GetValues(a, b);
+        auto value = AppendNode(doc, expNode, "Value");
+        auto aValue = AppendNode(doc, value, "A");
+        SetNodeValue(doc, aValue, a);
+        auto bValue = AppendNode(doc, value, "B");
+        SetNodeValue(doc, bValue, b);
+    }  //}
+
+    //{ Gain
+    auto gainsNode = AppendNode(doc, elementsNode, "GainList");
+    auto gainList = ctrlContainer->GetGainList();
+    for(auto it = gainList.begin(), itEnd = gainList.end(); it != itEnd; ++it) {
+        Gain* gain = *it;
+        auto gainNode = AppendNode(doc, gainsNode, "Gain");
+        SetNodeAttribute(doc, gainNode, "ID", gain->GetID());
+        auto cadProp = AppendNode(doc, gainNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, gain->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, gain->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, gain->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, gain->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, gain->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, gainNode, "NodeList");
+        SaveControlNodes(doc, nodeList, gain->GetNodeList());
+
+        // Control properties
+        auto value = AppendNode(doc, gainNode, "Value");
+        SetNodeValue(doc, value, gain->GetValue());
+    }  //}
+    
+    //{ IO
+    auto iosNode = AppendNode(doc, elementsNode, "IOList");
+    auto ioList = ctrlContainer->GetIOControlList();
+    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
+        IOControl* io = *it;
+        auto ioNode = AppendNode(doc, iosNode, "IO");
+        SetNodeAttribute(doc, ioNode, "ID", io->GetID());
+        auto cadProp = AppendNode(doc, ioNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, io->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, io->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, io->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, io->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, io->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, ioNode, "NodeList");
+        SaveControlNodes(doc, nodeList, io->GetNodeList());
+
+        // Control properties
+        auto value = AppendNode(doc, ioNode, "Value");
+        SetNodeValue(doc, value, io->GetValue());
+        auto ioFlags = AppendNode(doc, ioNode, "IOFlags");
+        SetNodeValue(doc, ioFlags, io->GetIOFlags());
+    }//}
+    
+    //{ Limiter
+    auto limitersNode = AppendNode(doc, elementsNode, "LimiterList");
+    auto limiterList = ctrlContainer->GetLimiterList();
+    for(auto it = limiterList.begin(), itEnd = limiterList.end(); it != itEnd; ++it) {
+        Limiter* limiter = *it;
+        auto limiterNode = AppendNode(doc, limitersNode, "Limiter");
+        SetNodeAttribute(doc, limiterNode, "ID", limiter->GetID());
+        auto cadProp = AppendNode(doc, limiterNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, limiter->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, limiter->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, limiter->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, limiter->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, limiter->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, limiterNode, "NodeList");
+        SaveControlNodes(doc, nodeList, limiter->GetNodeList());
+
+        // Control properties
+        auto upLimit = AppendNode(doc, limiterNode, "UpperLimit");
+        SetNodeValue(doc, upLimit, limiter->GetUpLimit());
+        auto lowLimit = AppendNode(doc, limiterNode, "LowerLimit");
+        SetNodeValue(doc, lowLimit, limiter->GetLowLimit());
+    }//}
+    
+    //{ Multiplier
+    auto multipliersNode = AppendNode(doc, elementsNode, "MultiplierList");
+    auto multiplierList = ctrlContainer->GetMultiplierList();
+    for(auto it = multiplierList.begin(), itEnd = multiplierList.end(); it != itEnd; ++it) {
+        Multiplier* multiplier = *it;
+        auto multiplierNode = AppendNode(doc, multipliersNode, "Multiplier");
+        SetNodeAttribute(doc, multiplierNode, "ID", multiplier->GetID());
+        auto cadProp = AppendNode(doc, multiplierNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, multiplier->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, multiplier->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, multiplier->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, multiplier->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, multiplier->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, multiplierNode, "NodeList");
+        SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
+    } //}
+    
+    //{ Rate limiter
+    auto rateLimitersNode = AppendNode(doc, elementsNode, "RateLimiterList");
+    auto rateLimiterList = ctrlContainer->GetRateLimiterList();
+    for(auto it = rateLimiterList.begin(), itEnd = rateLimiterList.end(); it != itEnd; ++it) {
+        RateLimiter* rateLimiter = *it;
+        auto rateLimiterNode = AppendNode(doc, rateLimitersNode, "RateLimiter");
+        SetNodeAttribute(doc, rateLimiterNode, "ID", rateLimiter->GetID());
+        auto cadProp = AppendNode(doc, rateLimiterNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, rateLimiter->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, rateLimiter->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, rateLimiter->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, rateLimiter->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, rateLimiter->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, rateLimiterNode, "NodeList");
+        SaveControlNodes(doc, nodeList, rateLimiter->GetNodeList());
+
+        // Control properties
+        auto upLimit = AppendNode(doc, rateLimiterNode, "UpperLimit");
+        SetNodeValue(doc, upLimit, rateLimiter->GetUpLimit());
+        auto lowLimit = AppendNode(doc, rateLimiterNode, "LowerLimit");
+        SetNodeValue(doc, lowLimit, rateLimiter->GetLowLimit());
+    } //}
+    
+    //{ Sum
+    auto sumsNode = AppendNode(doc, elementsNode, "SumList");
+    auto sumList = ctrlContainer->GetSumList();
+    for(auto it = sumList.begin(), itEnd = sumList.end(); it != itEnd; ++it) {
+        Sum* sum = *it;
+        auto sumNode = AppendNode(doc, sumsNode, "Sum");
+        SetNodeAttribute(doc, sumNode, "ID", sum->GetID());
+        auto cadProp = AppendNode(doc, sumNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, sum->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, sum->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, sum->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, sum->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, sum->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, sumNode, "NodeList");
+        SaveControlNodes(doc, nodeList, sum->GetNodeList());
+        
+        //Control properties
+        auto signsNode = AppendNode(doc, sumNode, "Signs");
+        auto signs = sum->GetSignalList();
+        for(int i = 0; i < (int)signs.size(); ++i) {
+            auto value = AppendNode(doc, signsNode, "Value");
+            SetNodeValue(doc, value, static_cast<int>(signs[i]));
+        }
+        
+    } //}
+    
+    //{ Transfer function
+    auto tfsNode = AppendNode(doc, elementsNode, "TransferFunctionList");
+    auto tfList = ctrlContainer->GetTFList();
+    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
+        TransferFunction* tf = *it;
+        auto tfNode = AppendNode(doc, tfsNode, "TransferFunction");
+        SetNodeAttribute(doc, tfNode, "ID", tf->GetID());
+        auto cadProp = AppendNode(doc, tfNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, tf->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, tf->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, tf->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, tf->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, tf->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, tfNode, "NodeList");
+        SaveControlNodes(doc, nodeList, tf->GetNodeList());
+        
+        //Control properties
+        auto numeratorNode = AppendNode(doc, tfNode, "Numerator");
+        auto numerator = tf->GetNumerator();
+        for(int i = 0; i < (int)numerator.size(); ++i) {
+            auto value = AppendNode(doc, numeratorNode, "Value");
+            SetNodeValue(doc, value, numerator[i]);
+        }
+        auto denominatorNode = AppendNode(doc, tfNode, "Denominator");
+        auto denominator = tf->GetDenominator();
+        for(int i = 0; i < (int)denominator.size(); ++i) {
+            auto value = AppendNode(doc, denominatorNode, "Value");
+            SetNodeValue(doc, value, denominator[i]);
+        }
+    } //}
+
+    //{ Connection line
+    auto cLinesNode = AppendNode(doc, elementsNode, "ConnectionList");
+    auto connLineList = ctrlContainer->GetConnectionLineList();
+    for(auto it = connLineList.begin(), itEnd = connLineList.end(); it != itEnd; ++it) {
+        ConnectionLine* cLine = *it;
+        auto cLineNode = AppendNode(doc, cLinesNode, "Connection");
+        SetNodeAttribute(doc, cLineNode, "ID", cLine->GetID());
+
+        // CAD properties
+        auto cadProp = AppendNode(doc, cLineNode, "CADProperties");
+        auto offset = AppendNode(doc, cadProp, "Offset");
+        SetNodeValue(doc, offset, cLine->GetOffset());
+
+        // Parent list
+        auto parentsNode = AppendNode(doc, cLineNode, "ParentList");
+        auto parentList = cLine->GetParentList();
+        int nodeIndex = 0;
+        for(auto itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {
+            Element* parent = *itP;
+            auto parentNode = AppendNode(doc, parentsNode, "Parent");
+            auto elementID = AppendNode(doc, parentNode, "ElementID");
+            SetNodeValue(doc, elementID, parent->GetID());
+            auto nodeID = AppendNode(doc, parentNode, "NodeID");
+            SetNodeValue(doc, nodeID, cLine->GetNodeList()[nodeIndex]->GetID());
+            nodeIndex++;
+        }
+
+        auto parentLine = AppendNode(doc, cLineNode, "ParentLine");
+        if(cLine->GetParentLine()) {
+            ConnectionLine* parent = cLine->GetParentLine();
+            SetNodeAttribute(doc, parentLine, "ID", parent->GetID());
+        } else {
+            SetNodeAttribute(doc, parentLine, "ID", -1);
+        }
+    }  //}
+}
+
+bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
+                                      rapidxml::xml_node<>* elementsNode,
+                                      ControlElementContainer* ctrlContainer)
+{
+    std::vector<ControlElement*> elementList;
+    std::vector<ConnectionLine*> connectionList;
+    
+    //{ Constant
+    auto constListNode = elementsNode->first_node("ConstantList");
+    if(!constListNode) return false;
+    auto constNode = constListNode->first_node("Constant");
+    while(constNode) {
+        int id = GetAttributeValueInt(constNode, "ID");
+        Constant* constant = new Constant(id);
+
+        auto cadPropNode = constNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double value = GetNodeValueDouble(constNode, "Value");
+        
+        constant->SetWidth(width);
+        constant->SetHeight(height);
+        constant->SetAngle(angle);
+        constant->SetPosition(wxPoint2DDouble(posX, posY));
+        constant->StartMove(constant->GetPosition());
+        
+        constant->SetValue(value);
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(constNode, nodeVector)) return false;
+        
+        constant->SetNodeList(nodeVector);
+        constant->UpdatePoints();
+        elementList.push_back(constant);
+
+        constNode = constNode->next_sibling("Constant");
+    } //}
+    
+    //{ Exponential
+    auto expListNode = elementsNode->first_node("ExponentialList");
+    if(!expListNode) return false;
+    auto expNode = expListNode->first_node("Exponential");
+    while(expNode) {
+        int id = GetAttributeValueInt(expNode, "ID");
+        Exponential* exponential = new Exponential(id);
+
+        auto cadPropNode = expNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        auto value = expNode->first_node("Value");
+        double a = GetNodeValueDouble(value, "A");
+        double b = GetNodeValueDouble(value, "B");
+
+        exponential->SetWidth(width);
+        exponential->SetHeight(height);
+        exponential->SetAngle(angle);
+        exponential->SetPosition(wxPoint2DDouble(posX, posY));
+        exponential->StartMove(exponential->GetPosition());
+        
+        exponential->SetValues(a, b);
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(expNode, nodeVector)) return false;
+        
+        exponential->SetNodeList(nodeVector);
+        exponential->UpdatePoints();
+        elementList.push_back(exponential);
+
+        expNode = expNode->next_sibling("Exponential");
+    } //}
+    
+    //{ Gain
+    auto gainListNode = elementsNode->first_node("GainList");
+    if(!gainListNode) return false;
+    auto gainNode = gainListNode->first_node("Gain");
+    while(gainNode) {
+        int id = GetAttributeValueInt(gainNode, "ID");
+        Gain* gain = new Gain(id);
+
+        auto cadPropNode = gainNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double value = GetNodeValueDouble(gainNode, "Value");
+
+        gain->SetWidth(width);
+        gain->SetHeight(height);
+        gain->SetAngle(angle);
+        gain->SetPosition(wxPoint2DDouble(posX, posY));
+        gain->SetValue(value);
+        gain->StartMove(gain->GetPosition());
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(gainNode, nodeVector)) return false;
+        
+        gain->SetNodeList(nodeVector);
+        gain->UpdatePoints();
+        elementList.push_back(gain);
+
+        gainNode = gainNode->next_sibling("Gain");
+    }
+    //}
+    
+    //{ IO
+    auto ioListNode = elementsNode->first_node("IOList");
+    if(!ioListNode) return false;
+    auto ioNode = ioListNode->first_node("IO");
+    while(ioNode) {
+        int id = GetAttributeValueInt(ioNode, "ID");
+
+        auto cadPropNode = ioNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(ioNode, nodeVector)) return false;
+        
+        IOControl::IOFlags value = static_cast<IOControl::IOFlags>(GetNodeValueInt(ioNode, "Value"));
+        int ioFlags = GetNodeValueInt(ioNode, "IOFlags");
+        
+        IOControl* io = new IOControl(ioFlags, id);
+        
+        io->SetWidth(width);
+        io->SetHeight(height);
+        io->SetAngle(angle);
+        io->SetPosition(wxPoint2DDouble(posX, posY));
+        io->SetValue(value);
+        io->StartMove(io->GetPosition());
+        io->SetNodeList(nodeVector);
+        io->UpdatePoints();
+        elementList.push_back(io);
+
+        ioNode = ioNode->next_sibling("IO");
+    }
+    //}
+    
+    //{ Limiter
+    auto limiterListNode = elementsNode->first_node("LimiterList");
+    if(!limiterListNode) return false;
+    auto limiterNode = limiterListNode->first_node("Limiter");
+    while(limiterNode) {
+        int id = GetAttributeValueInt(limiterNode, "ID");
+        Limiter* limiter = new Limiter(id);
+
+        auto cadPropNode = limiterNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double upLimit = GetNodeValueDouble(limiterNode, "UpperLimit");
+        double lowLimit = GetNodeValueDouble(limiterNode, "LowerLimit");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(limiterNode, nodeVector)) return false;
+        
+        limiter->SetWidth(width);
+        limiter->SetHeight(height);
+        limiter->SetAngle(angle);
+        limiter->SetPosition(wxPoint2DDouble(posX, posY));
+        limiter->SetUpLimit(upLimit);
+        limiter->SetLowLimit(lowLimit);
+        
+        limiter->StartMove(limiter->GetPosition());
+        limiter->SetNodeList(nodeVector);
+        limiter->UpdatePoints();
+        elementList.push_back(limiter);
+
+        limiterNode = limiterNode->next_sibling("Limiter");
+    }
+    //}
+    
+    //{ Multiplier
+    auto multiplierListNode = elementsNode->first_node("MultiplierList");
+    if(!multiplierListNode) return false;
+    auto multiplierNode = multiplierListNode->first_node("Multiplier");
+    while(multiplierNode) {
+        int id = GetAttributeValueInt(multiplierNode, "ID");
+        Multiplier* multiplier = new Multiplier(id);
+
+        auto cadPropNode = multiplierNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(multiplierNode, nodeVector)) return false;
+        
+        multiplier->SetWidth(width);
+        multiplier->SetHeight(height);
+        multiplier->SetAngle(angle);
+        multiplier->SetPosition(wxPoint2DDouble(posX, posY));
+        
+        multiplier->StartMove(multiplier->GetPosition());
+        multiplier->SetNodeList(nodeVector);
+        multiplier->UpdatePoints();
+        elementList.push_back(multiplier);
+
+        multiplierNode = multiplierNode->next_sibling("Multiplier");
+    }
+    //}
+    
+    //{ Rate limiter
+    auto rateLimiterListNode = elementsNode->first_node("RateLimiterList");
+    if(!rateLimiterListNode) return false;
+    auto rateLimiterNode = rateLimiterListNode->first_node("RateLimiter");
+    while(rateLimiterNode) {
+        int id = GetAttributeValueInt(rateLimiterNode, "ID");
+        RateLimiter* limiter = new RateLimiter(id);
+
+        auto cadPropNode = rateLimiterNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        double upLimit = GetNodeValueDouble(rateLimiterNode, "UpperLimit");
+        double lowLimit = GetNodeValueDouble(rateLimiterNode, "LowerLimit");
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(rateLimiterNode, nodeVector)) return false;
+        
+        limiter->SetWidth(width);
+        limiter->SetHeight(height);
+        limiter->SetAngle(angle);
+        limiter->SetPosition(wxPoint2DDouble(posX, posY));
+        limiter->SetUpLimit(upLimit);
+        limiter->SetLowLimit(lowLimit);
+        
+        limiter->StartMove(limiter->GetPosition());
+        limiter->SetNodeList(nodeVector);
+        limiter->UpdatePoints();
+        elementList.push_back(limiter);
+
+        rateLimiterNode = rateLimiterNode->next_sibling("RateLimiter");
+    }
+    //}
+    
+    //{ Sum
+    auto sumListNode = elementsNode->first_node("SumList");
+    if(!sumListNode) return false;
+    auto sumNode = sumListNode->first_node("Sum");
+    while(sumNode) {
+        int id = GetAttributeValueInt(sumNode, "ID");
+        Sum* sum = new Sum(id);
+
+        auto cadPropNode = sumNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        std::vector<Sum::Signal> signs;
+        auto signsNode = sumNode->first_node("Signs");
+        auto sign = signsNode->first_node("Value");
+        while(sign) {
+            long value;
+            wxString(sign->value()).ToCLong(&value);
+            signs.push_back(static_cast<Sum::Signal>(value));
+            sign = sign->next_sibling("Value");
+        }
+        sum->SetSignalList(signs);
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(sumNode, nodeVector)) return false;
+        
+        sum->SetWidth(width);
+        sum->SetHeight(height);
+        sum->SetAngle(angle);
+        sum->SetPosition(wxPoint2DDouble(posX, posY));
+        
+        sum->StartMove(sum->GetPosition());
+        sum->SetNodeList(nodeVector);
+        sum->UpdatePoints();
+        elementList.push_back(sum);
+
+        sumNode = sumNode->next_sibling("Sum");
+    }
+    //}
+    
+    //{ Transfer function
+    auto tfListNode = elementsNode->first_node("TransferFunctionList");
+    if(!tfListNode) return false;
+    auto tfNode = tfListNode->first_node("TransferFunction");
+    while(tfNode) {
+        int id = GetAttributeValueInt(tfNode, "ID");
+        TransferFunction* tf = new TransferFunction(id);
+
+        auto cadPropNode = tfNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+
+        auto position = cadPropNode->first_node("Position");
+        double posX = GetNodeValueDouble(position, "X");
+        double posY = GetNodeValueDouble(position, "Y");
+        auto size = cadPropNode->first_node("Size");
+        double width = GetNodeValueDouble(size, "Width");
+        double height = GetNodeValueDouble(size, "Height");
+        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        
+        std::vector<double> numerator, denominator;
+        auto numeratorNode = tfNode->first_node("Numerator");
+        auto nValue = numeratorNode->first_node("Value");
+        while(nValue) {
+            double value = 0.0;
+            wxString(nValue->value()).ToCDouble(&value);
+            numerator.push_back(value);
+            nValue = nValue->next_sibling("Value");
+        }
+        auto denominatorNode = tfNode->first_node("Denominator");
+        auto dValue = denominatorNode->first_node("Value");
+        while(dValue) {
+            double value = 0.0;
+            wxString(dValue->value()).ToCDouble(&value);
+            denominator.push_back(value);
+            dValue = dValue->next_sibling("Value");
+        }        
+
+        std::vector<Node*> nodeVector;
+        if(!OpenControlNodeList(tfNode, nodeVector)) return false;
+        
+        tf->SetWidth(width);
+        tf->SetHeight(height);
+        tf->SetAngle(angle);
+        tf->SetPosition(wxPoint2DDouble(posX, posY));
+        
+        tf->SetNumerator(numerator);
+        tf->SetDenominator(denominator);
+        
+        tf->StartMove(tf->GetPosition());
+        tf->SetNodeList(nodeVector);
+        
+        tf->UpdateTFText();
+        
+        elementList.push_back(tf);
+
+        tfNode = tfNode->next_sibling("TransferFunction");
+    }
+    //}
+
+    // Connection line
+    auto connectionListNode = elementsNode->first_node("ConnectionList");
+    if(!connectionListNode) return false;
+    auto connNode = connectionListNode->first_node("Connection");
+    while(connNode) {
+        ConnectionLine* cLine = NULL;
+        int id = GetAttributeValueInt(connNode, "ID");
+
+        auto cadPropNode = connNode->first_node("CADProperties");
+        if(!cadPropNode) return false;
+        double offset = GetNodeValueDouble(cadPropNode, "Offset");
+
+        auto parentList = connNode->first_node("ParentList");
+        if(!parentList) return false;
+
+        auto parentNode = parentList->first_node("Parent");
+        bool firstNode = true;
+        while(parentNode) {
+            int elementID = GetNodeValueInt(parentNode, "ElementID");
+            int nodeID = GetNodeValueInt(parentNode, "NodeID");
+
+            ControlElement* element = GetControlElementFromID(elementList, elementID);
+            Node* node = element->GetNodeList()[nodeID];
+
+            if(firstNode) cLine = new ConnectionLine(node, id);
+            cLine->AddParent(element);
+            element->AddChild(cLine);
+            if(!firstNode) cLine->AppendNode(node, element);
+
+            if(firstNode) firstNode = false;
+            parentNode = parentNode->next_sibling("Parent");
+        }
+
+        auto parentLine = connNode->first_node("ParentLine");
+        if(!parentLine) return false;
+        int parentLineID = GetAttributeValueInt(parentLine, "ID");
+        if(parentLineID != -1) {
+            for(auto it = connectionList.begin(), itEnd = connectionList.end(); it != itEnd; ++it) {
+                ConnectionLine* parent = *it;
+                if(parent->GetID() == parentLineID) {
+                    cLine->SetParentLine(parent);
+                    parent->AddChild(cLine);
+                }
+            }
+        }
+
+        cLine->SetOffset(offset);
+        cLine->UpdatePoints();
+        connectionList.push_back(cLine);
+        connNode = connNode->next_sibling("Connection");
+    }
+    ctrlContainer->FillContainer(elementList, connectionList);
+    return true;
+}
+
+void FileHanding::SaveControlNodes(rapidxml::xml_document<>& doc,
+                                   rapidxml::xml_node<>* nodesN,
+                                   std::vector<Node*> nodeList)
+{
+    int id = 0;
+    for(auto it = nodeList.begin(), itEnd = nodeList.end(); it != itEnd; ++it) {
+        Node* node = *it;
+        node->SetID(id);
+        auto nodeN = AppendNode(doc, nodesN, "Node");
+        SetNodeAttribute(doc, nodeN, "ID", id);
+        auto nodePosition = AppendNode(doc, nodeN, "Position");
+        auto posNodeX = AppendNode(doc, nodePosition, "X");
+        SetNodeValue(doc, posNodeX, node->GetPosition().m_x);
+        auto posNodeY = AppendNode(doc, nodePosition, "Y");
+        SetNodeValue(doc, posNodeY, node->GetPosition().m_y);
+        auto angle = AppendNode(doc, nodeN, "Angle");
+        SetNodeValue(doc, angle, node->GetAngle());
+        auto nodeType = AppendNode(doc, nodeN, "Type");
+        SetNodeValue(doc, nodeType, node->GetNodeType());
+        id++;
+    }
+}
+
+ControlElement* FileHanding::GetControlElementFromID(std::vector<ControlElement*> elementList, int id)
+{
+    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
+        ControlElement* element = *it;
+        if(element->GetID() == id) return element;
+    }
+    return NULL;
+}
+
+bool FileHanding::OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector)
+{
+    auto nodeList = elementNode->first_node("NodeList");
+    if(!nodeList) return false;
+    auto nodeN = nodeList->first_node("Node");
+    while(nodeN) {
+        auto nodePosition = nodeN->first_node("Position");
+        double nodePosX = GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
+        double nodeAngle = GetNodeValueDouble(nodeN, "Angle");
+        Node::NodeType nodeType = (Node::NodeType)GetNodeValueInt(nodeN, "Type");
+        Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
+        node->SetAngle(nodeAngle);
+        nodeVector.push_back(node);
+        nodeN = nodeN->next_sibling("Node");
+    }
+    return true;
+}
+
 rapidxml::xml_node<>* FileHanding::AppendNode(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* parentNode,
-    const char* name,
-    rapidxml::node_type nodeType)
+                                              rapidxml::xml_node<>* parentNode,
+                                              const char* name,
+                                              rapidxml::node_type nodeType)
 {
     rapidxml::xml_node<>* node = doc.allocate_node(nodeType, name);
     parentNode->append_node(node);
@@ -1721,25 +2609,25 @@ void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* node,
-    const char* atrName,
-    wxString value)
+                                   rapidxml::xml_node<>* node,
+                                   const char* atrName,
+                                   wxString value)
 {
     node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(value.mb_str())));
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* node,
-    const char* atrName,
-    int value)
+                                   rapidxml::xml_node<>* node,
+                                   const char* atrName,
+                                   int value)
 {
     node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value))));
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-    rapidxml::xml_node<>* node,
-    const char* atrName,
-    double value)
+                                   rapidxml::xml_node<>* node,
+                                   const char* atrName,
+                                   double value)
 {
     node->append_attribute(
         doc.allocate_attribute(atrName, doc.allocate_string(wxString::FromCDouble(value, 13).mb_str())));
@@ -1776,4 +2664,13 @@ int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* 
         }
     }
     return (int)iValue;
+}
+
+int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* node, const char* atrName)
+{
+    long intValue;
+    auto atr = node->first_attribute(atrName);
+    if(!atr) return false;
+    wxString(atr->value()).ToCLong(&intValue);
+    return (int)intValue;
 }

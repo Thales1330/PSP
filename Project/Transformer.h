@@ -35,10 +35,10 @@ struct TransformerElectricalData {
     double turnsRatio = 1.0;
     double phaseShift = 0.0;
     bool useTransformerPower = false;
-    
+
     // Power flow (p.u.)
-    std::complex<double> current[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
-    std::complex<double> powerFlow[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
+    std::complex<double> current[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
+    std::complex<double> powerFlow[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
 
     // Fault
     double zeroResistance = 0.0;
@@ -53,12 +53,12 @@ struct TransformerElectricalData {
 
 class Transformer : public Branch
 {
-   public:
+public:
     Transformer();
     Transformer(wxString name);
     virtual ~Transformer();
-	
-	virtual Element* GetCopy();
+
+    virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
@@ -77,9 +77,9 @@ class Transformer : public Branch
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
 
-   protected:
+protected:
     void UpdatePowerFlowArrowsPosition();
     TransformerElectricalData m_electricalData;
 };
 
-#endif  // TRANSFORMER_H
+#endif // TRANSFORMER_H

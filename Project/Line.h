@@ -65,7 +65,6 @@ public:
     virtual void SetPointList(std::vector<wxPoint2DDouble> pointList);
 
 protected:
-    double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
     void UpdatePowerFlowArrowsPosition();
     LineElectricalData m_electricaData;
 };

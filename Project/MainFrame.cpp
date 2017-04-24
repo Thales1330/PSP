@@ -111,8 +111,7 @@ void MainFrame::CreateAddElementsMenu()
     m_addElementsMenu->Append(capacitorElement);
     m_addElementsMenu->Append(inductorElement);
 
-    m_addElementsMenu->Connect(
-        wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
+    m_addElementsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnAddElementsClick, this);
 }
 
 void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
@@ -198,7 +197,7 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
                 element->StartMove(averagePos);
             }
         }
-        workspace->SetWorkspaceMode(MODE_MOVE_ELEMENT);
+        workspace->SetWorkspaceMode(Workspace::MODE_MOVE_ELEMENT);
     }
 }
 
@@ -304,7 +303,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
 
     if(workspace) {
-        if(workspace->GetWorkspaceMode() != MODE_INSERT) {
+        if(workspace->GetWorkspaceMode() != Workspace::MODE_INSERT) {
             auto elementList = workspace->GetElementList();
             wxString statusBarText = "";
             bool newElement = false;
@@ -383,7 +382,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
             }
             if(newElement) {
                 workspace->SetElementList(elementList);
-                workspace->SetWorkspaceMode(MODE_INSERT);
+                workspace->SetWorkspaceMode(Workspace::MODE_INSERT);
                 workspace->SetStatusBarText(statusBarText);
                 workspace->Redraw();
             }

@@ -84,7 +84,7 @@ void Text::SetText(wxString text)
 {
     glEnable(GL_TEXTURE_2D);
     m_text = text;
-    wxFont font(m_fontSize, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    wxFont font(m_fontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 
     wxScreenDC dc;
     if(m_glString) {
