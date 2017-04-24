@@ -54,6 +54,9 @@
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
       <File Name="wxGLString.cpp"/>
+      <VirtualDirectory Name="wxMathPlot">
+        <File Name="wxMathPlot/mathplot.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.cpp"/>
@@ -140,6 +143,9 @@
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
       <File Name="wxGLString.h"/>
+      <VirtualDirectory Name="wxMathPlot">
+        <File Name="wxMathPlot/mathplot.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <File Name="MainFrame.h"/>
@@ -198,6 +204,7 @@
     <File Name="Workspace.wxcp"/>
     <File Name="ElementForm.wxcp"/>
     <File Name="ControlEditor.wxcp"/>
+    <File Name="ChartView.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
