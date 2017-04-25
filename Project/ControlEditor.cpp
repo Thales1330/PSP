@@ -13,6 +13,8 @@
 #include "Constant.h"
 #include "Gain.h"
 
+#include "ChartView.h"
+
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
     : wxWindow(parent, id)
 {
@@ -611,6 +613,14 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
             {
                 RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
             } break;
+            case 'L':
+            {
+                //tests
+                if(event.ControlDown() && event.ShiftDown()) {
+                    ChartView* cView = new ChartView(this);
+                    cView->Show();
+                }
+            }
         }
     }
 }

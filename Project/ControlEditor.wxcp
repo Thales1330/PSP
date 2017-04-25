@@ -128,7 +128,14 @@
      "m_label": "Bitmap File (256x256):",
      "m_path": "data/images/ctrlEditor256.png"
     }],
-   "m_events": [],
+   "m_events": [{
+     "m_eventName": "wxEVT_KEY_DOWN",
+     "m_eventClass": "wxKeyEvent",
+     "m_eventHandler": "wxKeyEventHandler",
+     "m_functionNameAndSignature": "OnKeyDown(wxKeyEvent& event)",
+     "m_description": "Process a wxEVT_KEY_DOWN event (any key has been pressed)",
+     "m_noBody": false
+    }],
    "m_children": [{
      "m_type": 4461,
      "proportion": 0,

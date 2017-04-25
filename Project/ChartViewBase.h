@@ -19,7 +19,6 @@
 #include <wx/propgrid/manager.h>
 #include <wx/propgrid/property.h>
 #include <wx/propgrid/advprops.h>
-#include <wx/panel.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -57,7 +56,6 @@ protected:
     wxPropertyGridManager* m_pgMgr;
     wxPGProperty* m_pgPropLineProp;
     wxPGProperty* m_pgPropDraw;
-    wxPGProperty* m_pgPropColor;
     wxPGProperty* m_pgProplineThick;
     wxPGProperty* m_pgProplineType;
     wxPGProperty* m_pgProplineAxis;
@@ -75,15 +73,14 @@ protected:
     wxPGProperty* m_pgPropXMax;
     wxPGProperty* m_pgPropYMin;
     wxPGProperty* m_pgPropYMax;
-    wxPanel* m_panelChart;
 
 protected:
+    virtual void OnPropertyGridChange(wxPropertyGridEvent& event) { event.Skip(); }
 
 public:
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxTreeCtrl* GetTreeCtrl() { return m_treeCtrl; }
     wxPropertyGridManager* GetPgMgr() { return m_pgMgr; }
-    wxPanel* GetPanelChart() { return m_panelChart; }
     ChartViewBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Chart view"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_FRAME_STYLE);
     virtual ~ChartViewBase();
 };

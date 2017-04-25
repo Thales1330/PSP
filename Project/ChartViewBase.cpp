@@ -87,11 +87,6 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_pgPropDraw->SetHelpString(wxT(""));
     m_pgPropDraw->SetEditor( wxT("CheckBox") );
     
-    m_pgPropColor = m_pgMgr->AppendIn( m_pgPropLineProp,  new wxSystemColourProperty( _("Color")) );
-    m_pgPropColor->SetValueToUnspecified();
-    m_pgPropColor->SetHelpString(wxT(""));
-    m_pgPropColor->SetEditor( wxT("ChoiceAndButton") );
-    
     m_pgProplineThick = m_pgMgr->AppendIn( m_pgPropLineProp,  new wxIntProperty( _("Thickness"), wxPG_LABEL, 1) );
     m_pgProplineThick->SetHelpString(wxT(""));
     m_pgProplineThick->SetEditor( wxT("TextCtrl") );
@@ -162,11 +157,6 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_pgPropYMax->SetHelpString(wxT(""));
     m_pgMgr->SetMinSize(wxSize(250,250));
     
-    m_panelChart = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTAB_TRAVERSAL);
-    
-    boxSizer_lvl1_1->Add(m_panelChart, 1, wxEXPAND, WXC_FROM_DIP(5));
-    m_panelChart->SetMinSize(wxSize(100,300));
-    
     SetName(wxT("ChartViewBase"));
     SetSize(-1,-1);
     if (GetSizer()) {
@@ -184,8 +174,13 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
         wxPersistenceManager::Get().Restore(this);
     }
 #endif
+    // Connect events
+    m_pgMgr->Connect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
+    
 }
 
 ChartViewBase::~ChartViewBase()
 {
+    m_pgMgr->Disconnect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
+    
 }
