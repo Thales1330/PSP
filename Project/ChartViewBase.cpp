@@ -32,8 +32,8 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_menuItemSaveImage = new wxMenuItem(m_menuFile, wxID_ANY, _("Save chart as image"), wxT(""), wxITEM_NORMAL);
     m_menuFile->Append(m_menuItemSaveImage);
     
-    m_menuItemSandToClipboard = new wxMenuItem(m_menuFile, wxID_ANY, _("Send to clipboard"), wxT(""), wxITEM_NORMAL);
-    m_menuFile->Append(m_menuItemSandToClipboard);
+    m_menuItemSendToClipboard = new wxMenuItem(m_menuFile, wxID_ANY, _("Send to clipboard"), wxT(""), wxITEM_NORMAL);
+    m_menuFile->Append(m_menuItemSendToClipboard);
     
     m_menuFile->AppendSeparator();
     
@@ -132,14 +132,14 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_pgPropMarginsUp = m_pgMgr->AppendIn( m_pgPropMargins,  new wxIntProperty( _("Up"), wxPG_LABEL, 20) );
     m_pgPropMarginsUp->SetHelpString(wxT(""));
     
-    m_pgPropYMarginsBot = m_pgMgr->AppendIn( m_pgPropMargins,  new wxIntProperty( _("Botton"), wxPG_LABEL, 40) );
-    m_pgPropYMarginsBot->SetHelpString(wxT(""));
+    m_pgPropMarginsBot = m_pgMgr->AppendIn( m_pgPropMargins,  new wxIntProperty( _("Botton"), wxPG_LABEL, 40) );
+    m_pgPropMarginsBot->SetHelpString(wxT(""));
     
-    m_pgPropYMarginsLeft = m_pgMgr->AppendIn( m_pgPropMargins,  new wxIntProperty( _("Left"), wxPG_LABEL, 60) );
-    m_pgPropYMarginsLeft->SetHelpString(wxT(""));
+    m_pgPropMarginsLeft = m_pgMgr->AppendIn( m_pgPropMargins,  new wxIntProperty( _("Left"), wxPG_LABEL, 60) );
+    m_pgPropMarginsLeft->SetHelpString(wxT(""));
     
-    m_pgPropYMarginsRight = m_pgMgr->AppendIn( m_pgPropMargins,  new wxIntProperty( _("Right"), wxPG_LABEL, 10) );
-    m_pgPropYMarginsRight->SetHelpString(wxT(""));
+    m_pgPropMarginsRight = m_pgMgr->AppendIn( m_pgPropMargins,  new wxIntProperty( _("Right"), wxPG_LABEL, 10) );
+    m_pgPropMarginsRight->SetHelpString(wxT(""));
     
     m_pgPropAxisLimit = m_pgMgr->AppendIn( m_pgPropChartProp,  new wxStringProperty( _("Axis limit"), wxPG_LABEL, wxT("")) );
     m_pgPropAxisLimit->SetHelpString(wxT(""));
@@ -147,13 +147,13 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_pgPropXMin = m_pgMgr->AppendIn( m_pgPropAxisLimit,  new wxFloatProperty( _("X min"), wxPG_LABEL, 0) );
     m_pgPropXMin->SetHelpString(wxT(""));
     
-    m_pgPropXMax = m_pgMgr->AppendIn( m_pgPropAxisLimit,  new wxFloatProperty( _("X max"), wxPG_LABEL, 0) );
+    m_pgPropXMax = m_pgMgr->AppendIn( m_pgPropAxisLimit,  new wxFloatProperty( _("X max"), wxPG_LABEL, 1) );
     m_pgPropXMax->SetHelpString(wxT(""));
     
     m_pgPropYMin = m_pgMgr->AppendIn( m_pgPropAxisLimit,  new wxFloatProperty( _("Y min"), wxPG_LABEL, 0) );
     m_pgPropYMin->SetHelpString(wxT(""));
     
-    m_pgPropYMax = m_pgMgr->AppendIn( m_pgPropAxisLimit,  new wxFloatProperty( _("Y max"), wxPG_LABEL, 0) );
+    m_pgPropYMax = m_pgMgr->AppendIn( m_pgPropAxisLimit,  new wxFloatProperty( _("Y max"), wxPG_LABEL, 1) );
     m_pgPropYMax->SetHelpString(wxT(""));
     m_pgMgr->SetMinSize(wxSize(250,250));
     
@@ -175,12 +175,28 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     }
 #endif
     // Connect events
+    this->Connect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), NULL, this);
+    this->Connect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), NULL, this);
+    this->Connect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), NULL, this);
+    this->Connect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), NULL, this);
+    this->Connect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), NULL, this);
+    this->Connect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), NULL, this);
+    this->Connect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), NULL, this);
+    this->Connect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), NULL, this);
     m_pgMgr->Connect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
     
 }
 
 ChartViewBase::~ChartViewBase()
 {
+    this->Disconnect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), NULL, this);
+    this->Disconnect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), NULL, this);
+    this->Disconnect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), NULL, this);
+    this->Disconnect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), NULL, this);
+    this->Disconnect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), NULL, this);
+    this->Disconnect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), NULL, this);
+    this->Disconnect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), NULL, this);
+    this->Disconnect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), NULL, this);
     m_pgMgr->Disconnect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
     
 }

@@ -42,7 +42,7 @@ protected:
     wxMenuBar* m_menuBar;
     wxMenu* m_menuFile;
     wxMenuItem* m_menuItemSaveImage;
-    wxMenuItem* m_menuItemSandToClipboard;
+    wxMenuItem* m_menuItemSendToClipboard;
     wxMenuItem* m_menuItemSeparator_1;
     wxMenuItem* m_menuItemExit;
     wxMenu* m_menuView;
@@ -65,9 +65,9 @@ protected:
     wxPGProperty* m_pgPropYLabel;
     wxPGProperty* m_pgPropMargins;
     wxPGProperty* m_pgPropMarginsUp;
-    wxPGProperty* m_pgPropYMarginsBot;
-    wxPGProperty* m_pgPropYMarginsLeft;
-    wxPGProperty* m_pgPropYMarginsRight;
+    wxPGProperty* m_pgPropMarginsBot;
+    wxPGProperty* m_pgPropMarginsLeft;
+    wxPGProperty* m_pgPropMarginsRight;
     wxPGProperty* m_pgPropAxisLimit;
     wxPGProperty* m_pgPropXMin;
     wxPGProperty* m_pgPropXMax;
@@ -75,6 +75,14 @@ protected:
     wxPGProperty* m_pgPropYMax;
 
 protected:
+    virtual void OnMenuSaveImageClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuSendClipClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuExitClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuFitClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuShowGridClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuShowLabelClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuShowCoordinatesClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuDarkThemeClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnPropertyGridChange(wxPropertyGridEvent& event) { event.Skip(); }
 
 public:

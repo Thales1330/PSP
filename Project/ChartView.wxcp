@@ -255,7 +255,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuSaveImageClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }, {
          "m_type": 4459,
@@ -272,7 +279,7 @@
           }, {
            "type": "string",
            "m_label": "Name:",
-           "m_value": "m_menuItemSandToClipboard"
+           "m_value": "m_menuItemSendToClipboard"
           }, {
            "type": "string",
            "m_label": "Label:",
@@ -299,7 +306,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuSendClipClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }, {
          "m_type": 4459,
@@ -387,7 +401,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuExitClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }]
       }, {
@@ -450,7 +471,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuFitClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }, {
          "m_type": 4459,
@@ -538,7 +566,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuShowGridClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }, {
          "m_type": 4459,
@@ -582,7 +617,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuShowLabelClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }, {
          "m_type": 4459,
@@ -626,7 +668,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuShowCoordinatesClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }, {
          "m_type": 4459,
@@ -670,7 +719,14 @@
            "m_label": "Checked",
            "m_value": false
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuDarkThemeClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
          "m_children": []
         }]
       }]
@@ -1600,7 +1656,7 @@
                "m_properties": [{
                  "type": "string",
                  "m_label": "Name:",
-                 "m_value": "m_pgPropYMarginsBot"
+                 "m_value": "m_pgPropMarginsBot"
                 }, {
                  "type": "string",
                  "m_label": "Label:",
@@ -1665,7 +1721,7 @@
                "m_properties": [{
                  "type": "string",
                  "m_label": "Name:",
-                 "m_value": "m_pgPropYMarginsLeft"
+                 "m_value": "m_pgPropMarginsLeft"
                 }, {
                  "type": "string",
                  "m_label": "Label:",
@@ -1730,7 +1786,7 @@
                "m_properties": [{
                  "type": "string",
                  "m_label": "Name:",
-                 "m_value": "m_pgPropYMarginsRight"
+                 "m_value": "m_pgPropMarginsRight"
                 }, {
                  "type": "string",
                  "m_label": "Label:",
@@ -1951,7 +2007,7 @@
                 }, {
                  "type": "string",
                  "m_label": "String Value",
-                 "m_value": "0"
+                 "m_value": "1"
                 }, {
                  "type": "multi-string",
                  "m_label": "Choices:",
@@ -2081,7 +2137,7 @@
                 }, {
                  "type": "string",
                  "m_label": "String Value",
-                 "m_value": "0"
+                 "m_value": "1"
                 }, {
                  "type": "multi-string",
                  "m_label": "Choices:",

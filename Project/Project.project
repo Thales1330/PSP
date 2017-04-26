@@ -50,6 +50,7 @@
         <File Name="IOControl.cpp"/>
         <File Name="ControlElementContainer.cpp"/>
       </VirtualDirectory>
+      <File Name="ElementPlotData.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -140,6 +141,7 @@
         <File Name="IOControl.h"/>
         <File Name="ControlElementContainer.h"/>
       </VirtualDirectory>
+      <File Name="ElementPlotData.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
