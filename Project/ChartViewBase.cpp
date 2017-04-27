@@ -67,7 +67,7 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     boxSizer_lvl1_1->Add(boxSizer_lvl2_1, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_treeCtrl = new wxTreeCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTR_DEFAULT_STYLE);
+    m_treeCtrl = new wxTreeCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT);
     
     boxSizer_lvl2_1->Add(m_treeCtrl, 1, 0, WXC_FROM_DIP(5));
     m_treeCtrl->SetMinSize(wxSize(250,-1));
@@ -183,6 +183,8 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     this->Connect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), NULL, this);
     this->Connect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), NULL, this);
     this->Connect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), NULL, this);
+    m_treeCtrl->Connect(wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler(ChartViewBase::OnTreeItemActivated), NULL, this);
+    m_treeCtrl->Connect(wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler(ChartViewBase::OnTreeItemSelectionChanged), NULL, this);
     m_pgMgr->Connect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
     
 }
@@ -197,6 +199,8 @@ ChartViewBase::~ChartViewBase()
     this->Disconnect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), NULL, this);
     this->Disconnect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), NULL, this);
     this->Disconnect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), NULL, this);
+    m_treeCtrl->Disconnect(wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler(ChartViewBase::OnTreeItemActivated), NULL, this);
+    m_treeCtrl->Disconnect(wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler(ChartViewBase::OnTreeItemSelectionChanged), NULL, this);
     m_pgMgr->Disconnect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
     
 }

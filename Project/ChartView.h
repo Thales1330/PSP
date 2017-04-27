@@ -5,16 +5,20 @@
 
 #include <wx/msgdlg.h>
 
+class ElementPlotData;
+
 class ChartView : public ChartViewBase
 {
    public:
-    ChartView(wxWindow* parent);
+    ChartView(wxWindow* parent, std::vector<ElementPlotData> epdList, std::vector<double> time);
     virtual ~ChartView();
-    
+
     void Fit();
     void UpdatePlot(bool fit = true);
 
    protected:
+    virtual void OnTreeItemActivated(wxTreeEvent& event);
+    virtual void OnTreeItemSelectionChanged(wxTreeEvent& event);
     virtual void OnMenuDarkThemeClick(wxCommandEvent& event);
     virtual void OnMenuExitClick(wxCommandEvent& event) { Close(); }
     virtual void OnMenuFitClick(wxCommandEvent& event) { Fit(); }
@@ -25,6 +29,17 @@ class ChartView : public ChartViewBase
     virtual void OnMenuShowLabelClick(wxCommandEvent& event);
     virtual void OnPropertyGridChange(wxPropertyGridEvent& event);
     virtual void SetMPWindow();
+    virtual void SetTreectrl();
+    virtual void BuildColourList();
+    virtual wxColour GetNextColour();
+
+    wxPGProperty* m_pgPropColor = NULL;
+
+    wxTreeItemId m_treeTimeID;
+
+    std::vector<ElementPlotData> m_epdList;
+    std::vector<double> m_time;
+
     mpWindow* m_mpWindow = NULL;
     mpScaleX* m_xaxis = NULL;
     mpScaleY* m_yaxis = NULL;
@@ -37,6 +52,7 @@ class ChartView : public ChartViewBase
     bool m_showCoords = false;
     bool m_darkTheme = false;
 
-    wxPGProperty* m_pgPropColor = NULL;
+    std::vector<wxColour> m_colourList;
+    std::vector<wxColour>::iterator m_itColourList;
 };
 #endif  // CHARTVIEW_H

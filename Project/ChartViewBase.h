@@ -83,6 +83,8 @@ protected:
     virtual void OnMenuShowLabelClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuShowCoordinatesClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuDarkThemeClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnTreeItemActivated(wxTreeEvent& event) { event.Skip(); }
+    virtual void OnTreeItemSelectionChanged(wxTreeEvent& event) { event.Skip(); }
     virtual void OnPropertyGridChange(wxPropertyGridEvent& event) { event.Skip(); }
 
 public:

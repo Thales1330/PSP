@@ -790,7 +790,7 @@
          "border": 5,
          "gbSpan": "1,1",
          "gbPosition": "0,0",
-         "m_styles": ["wxTR_DEFAULT_STYLE"],
+         "m_styles": ["wxTR_DEFAULT_STYLE", "wxTR_HIDE_ROOT"],
          "m_sizerFlags": [],
          "m_properties": [{
            "type": "winid",
@@ -849,7 +849,21 @@
            "m_label": "Style:",
            "m_value": ""
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_TREE_ITEM_ACTIVATED",
+           "m_eventClass": "wxTreeEvent",
+           "m_eventHandler": "wxTreeEventHandler",
+           "m_functionNameAndSignature": "OnTreeItemActivated(wxTreeEvent& event)",
+           "m_description": "An item has been activated (e.g. double clicked).",
+           "m_noBody": false
+          }, {
+           "m_eventName": "wxEVT_COMMAND_TREE_SEL_CHANGED",
+           "m_eventClass": "wxTreeEvent",
+           "m_eventHandler": "wxTreeEventHandler",
+           "m_functionNameAndSignature": "OnTreeItemSelectionChanged(wxTreeEvent& event)",
+           "m_description": "Selection has changed.",
+           "m_noBody": false
+          }],
          "m_children": []
         }, {
          "m_type": 4485,

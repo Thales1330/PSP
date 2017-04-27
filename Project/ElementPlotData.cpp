@@ -1,9 +1,9 @@
 #include "ElementPlotData.h"
 
-ElementPlotData::ElementPlotData(wxString name, CurveType type)
+ElementPlotData::ElementPlotData(wxString name, CurveType curveType)
 {
     m_name = name;
-    m_curveType = type;
+    m_curveType = curveType;
 }
 
 ElementPlotData::~ElementPlotData() {}

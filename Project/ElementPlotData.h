@@ -40,18 +40,20 @@ class ElementPlotData
 {
    public:
     enum CurveType {
-        CT_TIME = 0,
-        CT_BUS,
+        CT_BUS = 0,
         CT_SYNC_GENERATOR,
         CT_SYNC_COMPENSATOR,
         CT_TRANSFORMER,
         CT_LINE,
         CT_IND_MOTOR,
-        CT_SHUNT_REACTOR,
+        CT_SHUNT_INDUCTOR,
         CT_SHUNT_CAPACITOR,
         CT_LOAD,
+        NUM_ELEMENTS,
+        CT_TIME
     };
-    ElementPlotData(wxString name, CurveType type);
+    ElementPlotData() {};
+    ElementPlotData(wxString name, CurveType curveType);
     ~ElementPlotData();
 
     wxString GetName() const { return m_name; }
