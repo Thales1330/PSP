@@ -11,7 +11,7 @@ void FileHanding::SaveProject(wxFileName path)
     writeProjectsFile.close();
 
     rapidxml::xml_document<> doc;
-    rapidxml::file<> xmlFile(path.GetFullPath());
+    rapidxml::file<> xmlFile(path.GetFullPath().mb_str());
     doc.parse<0>(xmlFile.data());
 
     rapidxml::xml_node<>* decl = doc.allocate_node(rapidxml::node_declaration);
@@ -782,7 +782,7 @@ void FileHanding::SaveProject(wxFileName path)
 bool FileHanding::OpenProject(wxFileName path)
 {
     rapidxml::xml_document<> doc;
-    rapidxml::file<> xmlFile(path.GetFullPath());
+    rapidxml::file<> xmlFile(path.GetFullPath().mb_str());
 
     doc.parse<0>(xmlFile.data());
 
@@ -1699,7 +1699,7 @@ void FileHanding::SaveControl(wxFileName path)
     writeProjectsFile.close();
 
     rapidxml::xml_document<> doc;
-    rapidxml::file<> xmlFile(path.GetFullPath());
+    rapidxml::file<> xmlFile(path.GetFullPath().mb_str());
     doc.parse<0>(xmlFile.data());
 
     rapidxml::xml_node<>* decl = doc.allocate_node(rapidxml::node_declaration);
@@ -1727,7 +1727,7 @@ bool FileHanding::OpenControl(wxFileName path,
                               std::vector<ConnectionLine*>& ctrlConnectionList)
 {
     rapidxml::xml_document<> doc;
-    rapidxml::file<> xmlFile(path.GetFullPath());
+    rapidxml::file<> xmlFile(path.GetFullPath().mb_str());
 
     doc.parse<0>(xmlFile.data());
 
@@ -2600,7 +2600,7 @@ void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node
 
 void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, int value)
 {
-    node->value(doc.allocate_string(wxString::Format("%d", value)));
+    node->value(doc.allocate_string(wxString::Format("%d", value).mb_str()));
 }
 
 void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, double value)
@@ -2621,7 +2621,7 @@ void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
                                    const char* atrName,
                                    int value)
 {
-    node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value))));
+    node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value).mb_str())));
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
