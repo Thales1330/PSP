@@ -6,6 +6,7 @@ ChartView::ChartView(wxWindow* parent, std::vector<ElementPlotData> epdList, std
 {
     m_epdList = epdList;
     m_time = time;
+    m_xAxisValues = time;
 
     m_menuItemShowGrid->Check(m_hideGrid ? false : true);
     m_menuItemShowLabel->Check(m_showLeg);
@@ -23,12 +24,20 @@ ChartView::ChartView(wxWindow* parent, std::vector<ElementPlotData> epdList, std
     m_pgPropAxisLimit->SetValue(wxT("<composed>"));
     m_pgMgr->Collapse(m_pgPropAxisLimit);
 
+    // Add line type choices
+    m_pgProplineType->AddChoice(_("Solid"), wxPENSTYLE_SOLID);
+    m_pgProplineType->AddChoice(_("Dot"), wxPENSTYLE_DOT);
+    m_pgProplineType->AddChoice(_("Dash"), wxPENSTYLE_SHORT_DASH);
+    m_pgProplineType->AddChoice(_("Dot and dash"), wxPENSTYLE_DOT_DASH);
+    m_pgProplineType->AddChoice(_("Cross"), wxPENSTYLE_CROSS_HATCH);
+    m_pgProplineType->AddChoice(_("Driagonal cross"), wxPENSTYLE_CROSSDIAG_HATCH);
+
     SetMPWindow();
     GetSizer()->Add(m_mpWindow, 1, wxEXPAND, WXC_FROM_DIP(5));
     SetTreectrl();
     Layout();
     SetInitialSize();
-    
+
     BuildColourList();
 }
 
@@ -107,6 +116,40 @@ void ChartView::OnPropertyGridChange(wxPropertyGridEvent& event)
 {
     bool fit = false;
 
+    if(m_treeCtrl->GetSelection()) {
+        if(PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(m_treeCtrl->GetSelection()))) {
+            if(event.GetPropertyName() == _("Draw")) {
+                bool isPlotting = m_pgPropDraw->GetValue();
+                data->SetPlot(isPlotting);
+                if(isPlotting) {
+                    wxColour colour = GetNextColour();
+                    data->SetColour(colour);
+                    m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
+                }
+                fit = true;
+            } else if(event.GetPropertyName() == _("Color")) {
+                wxColour colour;
+                colour << m_pgPropColor->GetValue();
+                data->SetColour(colour);
+            } else if(event.GetPropertyName() == _("Thickness")) {
+                data->SetThick(m_pgProplineThick->GetValue().GetInteger());
+            } else if(event.GetPropertyName() == _("Type")) {
+                data->SetPenType(static_cast<wxPenStyle>(m_pgProplineType->GetValue().GetInteger()));
+            } else if(event.GetPropertyName() == _("Axis")) {
+                int axis = m_pgProplineAxis->GetValue().GetInteger();
+                if(axis == 1) {  // Y
+                    // All lines to Y axis
+                    AllToYAxis(m_treeCtrl->GetRootItem());
+                    // curva selecionada para o eixo X
+                    m_treeCtrl->SetItemTextColour(m_treeCtrl->GetSelection(), *wxRED);
+                    m_xAxisValues = data->GetValues();
+                }
+                data->SetAxis(axis);
+                fit = true;
+            }
+        }
+    }
+
     if(event.GetPropertyName() == _("Margins")) {
         m_mpWindow->SetMargins(m_pgPropMarginsUp->GetValue().GetLong(), m_pgPropMarginsRight->GetValue().GetLong(),
                                m_pgPropMarginsBot->GetValue().GetLong(), m_pgPropMarginsLeft->GetValue().GetLong());
@@ -138,8 +181,69 @@ void ChartView::OnMenuDarkThemeClick(wxCommandEvent& event)
     m_mpWindow->UpdateAll();
 }
 
-void ChartView::OnMenuSaveImageClick(wxCommandEvent& event) {}
-void ChartView::OnMenuSendClipClick(wxCommandEvent& event) {}
+void ChartView::OnMenuSaveImageClick(wxCommandEvent& event)
+{
+    int x = m_mpWindow->GetScreenPosition().x;
+    int y = m_mpWindow->GetScreenPosition().y;
+    int width = m_mpWindow->GetSize().GetWidth();
+    int height = m_mpWindow->GetSize().GetHeight();
+
+    wxScreenDC dcScreen;
+    wxBitmap screenshot(width, height);
+
+    wxMemoryDC memDC;
+    memDC.SelectObject(screenshot);
+
+    memDC.Blit(0, 0, width, height, &dcScreen, x, y);
+    memDC.SelectObject(wxNullBitmap);
+
+    wxFileDialog saveFileDialog(
+        this, _("Save image"), "", "",
+        "PNG image file (*.png)|*.png|Bitmap image file (*.bmp)|*.bmp|JPEG image file (*.jpg)|*.jpg",
+        wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    if(saveFileDialog.ShowModal() == wxID_CANCEL) return;
+
+    wxFileName imagePath(saveFileDialog.GetPath());
+    wxBitmapType imageType = wxBITMAP_TYPE_BMP;
+
+    if(imagePath.GetExt() == "png")
+        imageType = wxBITMAP_TYPE_PNG;
+    else if(imagePath.GetExt() == "jpg")
+        imageType = wxBITMAP_TYPE_JPEG;
+
+    screenshot.SaveFile(imagePath.GetFullPath(), imageType);
+}
+
+void ChartView::OnMenuSendClipClick(wxCommandEvent& event)
+{
+    int x = m_mpWindow->GetScreenPosition().x;
+    int y = m_mpWindow->GetScreenPosition().y;
+    int width = m_mpWindow->GetSize().GetWidth();
+    int height = m_mpWindow->GetSize().GetHeight();
+
+    wxScreenDC dcScreen;
+    wxBitmap screenshot(width, height);
+
+    wxMemoryDC memDC;
+    memDC.SelectObject(screenshot);
+
+    memDC.Blit(0, 0, width, height, &dcScreen, x, y);
+    memDC.SelectObject(wxNullBitmap);
+
+    if(wxTheClipboard->Open()) {
+        wxTheClipboard->SetData(new wxBitmapDataObject(screenshot));
+        wxTheClipboard->Close();
+
+        wxMessageDialog msgDialog(this, _("Chart send to clipboard"), _("Info"), wxOK | wxICON_INFORMATION,
+                                  wxDefaultPosition);
+        msgDialog.ShowModal();
+    } else {
+        wxMessageDialog msgDialog(this, _("It was not possible to send to clipboard"), _("Error"), wxOK | wxICON_ERROR,
+                                  wxDefaultPosition);
+        msgDialog.ShowModal();
+    }
+}
+
 void ChartView::OnMenuShowCoordinatesClick(wxCommandEvent& event)
 {
     m_showCoords = event.IsChecked();
@@ -181,6 +285,7 @@ void ChartView::UpdatePlot(bool fit)
     m_mpWindow->DelAllLayers(true, false);
 
     // GoAllTrees(treeCtrl_ChartSelection->GetRootItem());
+    UpdateAllPlots(m_treeCtrl->GetRootItem());
 
     m_xaxis = new mpScaleX(m_pgPropXLabel->GetValueAsString(), mpALIGN_BOTTOM, true);
     m_yaxis = new mpScaleY(m_pgPropYLabel->GetValueAsString(), mpALIGN_LEFT, true);
@@ -221,26 +326,22 @@ void ChartView::UpdatePlot(bool fit)
 
 void ChartView::OnTreeItemActivated(wxTreeEvent& event)
 {
-    PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(event.GetItem()));
-
-    if(data) {
+    if(PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(event.GetItem()))) {
         bool isPlotting = data->IsPlot() ? false : true;
         data->SetPlot(isPlotting);
         m_pgPropDraw->SetValue(data->IsPlot());
         if(isPlotting) {
             wxColour colour = GetNextColour();
-            wxVariant vColour;
-            vColour << colour;
-            //data->SetColour(colour);
-            m_pgPropColor->SetValue(vColour);
+            data->SetColour(colour);
+            m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
         }
         UpdatePlot(true);
     }
 
     if(event.GetItem() == m_treeTimeID) {
-        // AllToYAxis(treeCtrl_ChartSelection->GetRootItem());
+        AllToYAxis(m_treeCtrl->GetRootItem());
         m_treeCtrl->SetItemTextColour(m_treeTimeID, *wxRED);
-        // xAxisValues = time;
+        m_xAxisValues = m_time;
         UpdatePlot(true);
     }
 
@@ -249,8 +350,7 @@ void ChartView::OnTreeItemActivated(wxTreeEvent& event)
 
 void ChartView::OnTreeItemSelectionChanged(wxTreeEvent& event)
 {
-    PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(event.GetItem()));
-    if(data) {
+    if(PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(event.GetItem()))) {
         m_pgPropDraw->SetValue(data->IsPlot());
         wxVariant colour;
         colour << data->GetColour();
@@ -277,8 +377,8 @@ void ChartView::BuildColourList()
     m_colourList.push_back(wxColour(255, 0, 128));
     m_colourList.push_back(wxColour(0, 128, 255));
     m_colourList.push_back(wxColour(128, 128, 128));
-    m_colourList.push_back(wxColour(0, 0, 0));
-    m_itColourList = m_colourList.end();
+    m_colourList.push_back(*wxBLACK);
+    m_itColourList = --m_colourList.end();
 }
 
 wxColour ChartView::GetNextColour()
@@ -289,4 +389,58 @@ wxColour ChartView::GetNextColour()
         ++m_itColourList;
 
     return *m_itColourList;
+}
+
+wxTreeItemId ChartView::AllToYAxis(wxTreeItemId root)
+{
+    wxTreeItemIdValue cookie;
+    wxTreeItemId item = m_treeCtrl->GetFirstChild(root, cookie);
+    wxTreeItemId child;
+
+    while(item.IsOk()) {
+        m_treeCtrl->SetItemTextColour(item, *wxBLACK);
+        if(PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(item))) data->SetAxis(0);  // X axis.
+
+        if(m_treeCtrl->ItemHasChildren(item)) {
+            wxTreeItemId nextChild = AllToYAxis(item);
+            if(nextChild.IsOk()) return nextChild;
+        }
+        item = m_treeCtrl->GetNextChild(root, cookie);
+    }
+
+    wxTreeItemId dummyID;
+    return dummyID;
+}
+
+wxTreeItemId ChartView::UpdateAllPlots(wxTreeItemId root)
+{
+    wxTreeItemIdValue cookie;
+    wxTreeItemId item = m_treeCtrl->GetFirstChild(root, cookie);
+    wxTreeItemId child;
+
+    while(item.IsOk()) {
+        if(PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(item))) {
+            if(data->IsPlot()) {
+                wxString parentName = m_treeCtrl->GetItemText(m_treeCtrl->GetItemParent(item));
+                mpFXYVector* newLayer = new mpFXYVector(data->GetName() + " (" + parentName + ")");
+                newLayer->SetData(m_xAxisValues, data->GetValues());
+                newLayer->SetContinuity(true);
+                wxPen layerPen(data->GetColour(), data->GetThick(), data->GetPenType());
+                newLayer->SetPen(layerPen);
+                newLayer->SetDrawOutsideMargins(false);
+                newLayer->ShowName(false);
+
+                m_mpWindow->AddLayer(newLayer);
+            }
+        }
+
+        if(m_treeCtrl->ItemHasChildren(item)) {
+            wxTreeItemId nextChild = UpdateAllPlots(item);
+            if(nextChild.IsOk()) return nextChild;
+        }
+        item = m_treeCtrl->GetNextChild(root, cookie);
+    }
+
+    wxTreeItemId dummyID;
+    return dummyID;
 }

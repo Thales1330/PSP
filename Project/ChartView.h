@@ -4,6 +4,10 @@
 #include "wxMathPlot/mathplot.h"
 
 #include <wx/msgdlg.h>
+#include <wx/clipbrd.h>
+#include <wx/bitmap.h>
+#include <wx/dcscreen.h>
+#include <wx/filedlg.h>
 
 class ElementPlotData;
 
@@ -32,6 +36,8 @@ class ChartView : public ChartViewBase
     virtual void SetTreectrl();
     virtual void BuildColourList();
     virtual wxColour GetNextColour();
+    virtual wxTreeItemId AllToYAxis(wxTreeItemId root);
+    virtual wxTreeItemId UpdateAllPlots(wxTreeItemId root);
 
     wxPGProperty* m_pgPropColor = NULL;
 
@@ -39,6 +45,7 @@ class ChartView : public ChartViewBase
 
     std::vector<ElementPlotData> m_epdList;
     std::vector<double> m_time;
+    std::vector<double> m_xAxisValues;
 
     mpWindow* m_mpWindow = NULL;
     mpScaleX* m_xaxis = NULL;

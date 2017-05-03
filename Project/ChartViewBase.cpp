@@ -93,12 +93,6 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_pgMgrArr.Clear();
     m_pgMgrIntArr.Clear();
-    m_pgMgrArr.Add(_("Solid"));
-    m_pgMgrArr.Add(_("Dot"));
-    m_pgMgrArr.Add(_("Dash"));
-    m_pgMgrArr.Add(_("Dot and dash"));
-    m_pgMgrArr.Add(_("Cross"));
-    m_pgMgrArr.Add(_("Diagonal cross"));
     m_pgProplineType = m_pgMgr->AppendIn( m_pgPropLineProp,  new wxEnumProperty( _("Type"), wxPG_LABEL, m_pgMgrArr, m_pgMgrIntArr, 0) );
     m_pgProplineType->SetHelpString(wxT(""));
     m_pgProplineType->SetEditor( wxT("Choice") );

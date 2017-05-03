@@ -25,8 +25,9 @@ public:
 
     virtual bool OnInit()
     {
-        // Add png image handler
+        // Add image handlers
         wxImage::AddHandler(new wxPNGHandler);
+        wxImage::AddHandler(new wxJPEGHandler);
 
         wxLocale* locale = new wxLocale();
         LoadCatalogs(locale);

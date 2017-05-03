@@ -618,27 +618,27 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
             {
                 //tests
                 if(event.ControlDown() && event.ShiftDown()) {
-                    std::vector<double> time, x2, x3;
-                    for(int i=0; i<100; ++i) {
+                    std::vector<double> time, sinC, cosC, tgC;
+                    for(int i=0; i<360; ++i) {
                         time.push_back(i);
-                        x2.push_back(std::pow(static_cast<double>(i),2));
-                        x3.push_back(std::pow(static_cast<double>(i),3));
+                        sinC.push_back(std::sin(wxDegToRad(i)));
+                        cosC.push_back(std::cos(wxDegToRad(i)));
+                        tgC.push_back(std::tan(wxDegToRad(i)));
                     }
                     std::vector<ElementPlotData> epdList;
                     
                     ElementPlotData curve1Data(_("Func. polinomiais 1"), ElementPlotData::CT_BUS);
-                    curve1Data.AddData(x2, _("x^2"));
-                    curve1Data.AddData(x3, _("x^3"));
+                    curve1Data.AddData(sinC, _("seno"));
                     epdList.push_back(curve1Data);
                     
                     ElementPlotData curve2Data(_("Func. polinomiais 2"), ElementPlotData::CT_BUS);
-                    curve2Data.AddData(x2, _("x^2"));
-                    curve2Data.AddData(x3, _("x^3"));
+                    curve2Data.AddData(tgC, _("tangente"));
                     epdList.push_back(curve2Data);
                     
                     ElementPlotData curve3Data(_("Func. polinomiais 3"), ElementPlotData::CT_SYNC_GENERATOR);
-                    curve3Data.AddData(x2, _("x^2"));
-                    curve3Data.AddData(x3, _("x^3"));
+                    curve3Data.AddData(sinC, _("seno"));
+                    curve3Data.AddData(cosC, _("cosseno"));
+                    curve3Data.AddData(tgC, _("tangente"));
                     epdList.push_back(curve3Data);
                     
                     ChartView* cView = new ChartView(this, epdList, time);

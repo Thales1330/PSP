@@ -1177,11 +1177,11 @@
               }, {
                "type": "string",
                "m_label": "String Value",
-               "m_value": "1"
+               "m_value": ""
               }, {
                "type": "multi-string",
                "m_label": "Choices:",
-               "m_value": "Solid;Dot;Dash;Dot and dash;Cross;Diagonal cross"
+               "m_value": ""
               }, {
                "type": "multi-string",
                "m_label": "Array Integer Values",
