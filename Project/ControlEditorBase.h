@@ -53,6 +53,7 @@ protected:
     wxStatusBar* m_statusBarMain;
 
 protected:
+    virtual void OnKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnImportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnExportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
@@ -64,7 +65,6 @@ protected:
     virtual void OnMouseMotion(wxMouseEvent& event) { event.Skip(); }
     virtual void OnScroll(wxMouseEvent& event) { event.Skip(); }
     virtual void OnIdle(wxIdleEvent& event) { event.Skip(); }
-    virtual void OnKeyDown(wxKeyEvent& event) { event.Skip(); }
 
 public:
     wxToolBar* GetToolbarMain() { return m_toolbarMain; }

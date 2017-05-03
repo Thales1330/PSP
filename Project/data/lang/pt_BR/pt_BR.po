@@ -1,19 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PSP-UFU pt_BR 0.0.1\n"
-"POT-Creation-Date: 2017-01-20 20:38-0200\n"
-"PO-Revision-Date: 2017-01-20 23:15-0200\n"
+"POT-Creation-Date: 2017-04-25 16:38-0300\n"
+"PO-Revision-Date: 2017-04-25 16:41-0300\n"
 "Last-Translator: \n"
 "Language-Team: Thales Lima Oliveira <thaleslima.ufu@gmail.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: wxMathPlot\n"
+"X-Poedit-SearchPathExcluded-1: rapidXML\n"
 
 #: Bus.cpp:175
 msgid "Edit bus"
@@ -35,7 +37,7 @@ msgstr ""
 
 #: Bus.cpp:206 Bus.cpp:212 Bus.cpp:213 Bus.cpp:214 Bus.cpp:216 Bus.cpp:217
 #: Bus.cpp:218 Bus.cpp:221 Capacitor.cpp:190 IndMotor.cpp:99 IndMotor.cpp:118
-#: Inductor.cpp:184 Line.cpp:530 Line.cpp:532 Line.cpp:534 Line.cpp:536
+#: Inductor.cpp:184 Line.cpp:495 Line.cpp:497 Line.cpp:499 Line.cpp:501
 #: Load.cpp:205 Load.cpp:222 SyncGenerator.cpp:158 SyncGenerator.cpp:177
 #: SyncMotor.cpp:124 SyncMotor.cpp:143 Transformer.cpp:434 Transformer.cpp:436
 #: Transformer.cpp:438 Transformer.cpp:440
@@ -187,84 +189,272 @@ msgstr ""
 msgid " MVAr"
 msgstr ""
 
-#: ControlEditor.cpp:15
+#: ChartView.cpp:14
+msgid "Color"
+msgstr ""
+
+#: ChartViewBase.cpp:30 MainFrameBase.cpp:72 MainFrameBase.cpp:73
+msgid "File"
+msgstr "Arquivo"
+
+#: ChartViewBase.cpp:32
+msgid "Save chart as image"
+msgstr ""
+
+#: ChartViewBase.cpp:35
+#, fuzzy
+#| msgid "Clipboard"
+msgid "Send to clipboard"
+msgstr "Área de transferência"
+
+#: ChartViewBase.cpp:40 MainFrameBase.cpp:88
+msgid "Exit"
+msgstr "Sair"
+
+#: ChartViewBase.cpp:44
+msgid "View"
+msgstr ""
+
+#: ChartViewBase.cpp:46 MainFrameBase.cpp:146
+msgid "Fit"
+msgstr "Encaixar"
+
+#: ChartViewBase.cpp:51
+msgid "Show grid"
+msgstr ""
+
+#: ChartViewBase.cpp:54
+msgid "Show label"
+msgstr ""
+
+#: ChartViewBase.cpp:57
+msgid "Show coordinates"
+msgstr ""
+
+#: ChartViewBase.cpp:60
+msgid "Dark theme"
+msgstr ""
+
+#: ChartViewBase.cpp:83
+msgid "Line properties"
+msgstr ""
+
+#: ChartViewBase.cpp:86
+msgid "Draw"
+msgstr ""
+
+#: ChartViewBase.cpp:90
+msgid "Thickness"
+msgstr ""
+
+#: ChartViewBase.cpp:96
+msgid "Solid"
+msgstr ""
+
+#: ChartViewBase.cpp:97
+msgid "Dot"
+msgstr ""
+
+#: ChartViewBase.cpp:98
+msgid "Dash"
+msgstr ""
+
+#: ChartViewBase.cpp:99
+msgid "Dot and dash"
+msgstr ""
+
+#: ChartViewBase.cpp:100
+msgid "Cross"
+msgstr ""
+
+#: ChartViewBase.cpp:101
+msgid "Diagonal cross"
+msgstr ""
+
+#: ChartViewBase.cpp:102 ElementForm.cpp:2329 SwitchingForm.cpp:6
+#: SwitchingForm.cpp:15
+msgid "Type"
+msgstr ""
+
+#: ChartViewBase.cpp:108
+msgid "Y"
+msgstr ""
+
+#: ChartViewBase.cpp:109
+msgid "X"
+msgstr ""
+
+#: ChartViewBase.cpp:110
+msgid "Axis"
+msgstr ""
+
+#: ChartViewBase.cpp:114
+msgid "Chart properties"
+msgstr ""
+
+#: ChartViewBase.cpp:117
+msgid "Chart title"
+msgstr ""
+
+#: ChartViewBase.cpp:121
+msgid "X axis label"
+msgstr ""
+
+#: ChartViewBase.cpp:125
+msgid "Y axis label"
+msgstr ""
+
+#: ChartViewBase.cpp:129
+msgid "Margins"
+msgstr ""
+
+#: ChartViewBase.cpp:132 ElementForm.cpp:2348
+msgid "Up"
+msgstr ""
+
+#: ChartViewBase.cpp:135
+msgid "Botton"
+msgstr ""
+
+#: ChartViewBase.cpp:138
+msgid "Left"
+msgstr ""
+
+#: ChartViewBase.cpp:141
+msgid "Right"
+msgstr ""
+
+#: ChartViewBase.cpp:144
+msgid "Axis limit"
+msgstr ""
+
+#: ChartViewBase.cpp:147
+msgid "X min"
+msgstr ""
+
+#: ChartViewBase.cpp:150
+msgid "X max"
+msgstr ""
+
+#: ChartViewBase.cpp:153
+msgid "Y min"
+msgstr ""
+
+#: ChartViewBase.cpp:156
+msgid "Y max"
+msgstr ""
+
+#: ChartViewBase.h:87
+#, fuzzy
+#| msgid "Charts"
+msgid "Chart view"
+msgstr "Gráficos"
+
+#: ConstantForm.cpp:22
+msgid "Value entered incorrectly in the field \"Constant value\"."
+msgstr ""
+
+#: ControlEditor.cpp:128
 msgid "In/Out"
 msgstr ""
 
-#: ControlEditor.cpp:21
+#: ControlEditor.cpp:134
 msgid "Transfer fcn"
 msgstr "Func Transferência"
 
-#: ControlEditor.cpp:25
+#: ControlEditor.cpp:138 ElementForm.h:826
 msgid "Sum"
 msgstr ""
 
-#: ControlEditor.cpp:31
+#: ControlEditor.cpp:144 ElementForm.h:944
 msgid "Constant"
 msgstr ""
 
-#: ControlEditor.cpp:36
+#: ControlEditor.cpp:149 ElementForm.h:856
 msgid "Limiter"
 msgstr ""
 
-#: ControlEditor.cpp:41
+#: ControlEditor.cpp:154 ElementForm.h:970
 msgid "Gain"
 msgstr ""
 
-#: ControlEditor.cpp:46
+#: ControlEditor.cpp:159
 msgid "Multiplier"
 msgstr ""
 
-#: ControlEditor.cpp:50
-msgid "Saturation"
+#: ControlEditor.cpp:163 ElementForm.h:918
+msgid "Exponential"
 msgstr ""
 
-#: ControlEditor.cpp:56
+#: ControlEditor.cpp:169 ElementForm.h:886
 msgid "Rate limiter"
 msgstr ""
 
-#: ControlEditorBase.cpp:29 MainFrameBase.cpp:82
+#: ControlEditor.cpp:724
+msgid "Save CTL file"
+msgstr ""
+
+#: ControlEditor.cpp:735
+msgid "Open CTL file"
+msgstr ""
+
+#: ControlEditor.cpp:743 MainFrame.cpp:231
+msgid "It was not possible to open the selected file."
+msgstr ""
+
+#: ControlEditor.cpp:743 Element.cpp:273 Element.cpp:287 Line.cpp:149
+#: Line.cpp:375 MainFrame.cpp:231 SumForm.cpp:41 SumForm.cpp:56
+#: TextForm.cpp:1207 Workspace.cpp:1098 Workspace.cpp:1153 Workspace.cpp:1261
+#: Workspace.cpp:1365 Workspace.cpp:1387
+msgid "Error"
+msgstr ""
+
+#: ControlEditorBase.cpp:63 MainFrameBase.cpp:82
 msgid "New"
 msgstr "Novo"
 
-#: ControlEditorBase.cpp:31
+#: ControlEditorBase.cpp:65
 msgid "Import"
 msgstr ""
 
-#: ControlEditorBase.cpp:33
+#: ControlEditorBase.cpp:67
 msgid "Export"
 msgstr ""
 
-#: ControlEditorBase.cpp:37 MainFrameBase.cpp:123
+#: ControlEditorBase.cpp:71 MainFrameBase.cpp:123
 msgid "Copy"
 msgstr "Copiar"
 
-#: ControlEditorBase.cpp:39 MainFrameBase.cpp:125
+#: ControlEditorBase.cpp:73 MainFrameBase.cpp:125
 msgid "Paste"
 msgstr "Colar"
 
-#: ControlEditorBase.cpp:41 MainFrameBase.cpp:127
+#: ControlEditorBase.cpp:75 MainFrameBase.cpp:127
 msgid "Undo"
 msgstr "Desfazer"
 
-#: ControlEditorBase.cpp:43 MainFrameBase.cpp:129
+#: ControlEditorBase.cpp:77 MainFrameBase.cpp:129
 msgid "Redo"
 msgstr "Refazer"
 
-#: ControlEditorBase.cpp:47 MainFrameBase.cpp:140
+#: ControlEditorBase.cpp:81 MainFrameBase.cpp:140
 msgid "Drag"
 msgstr "Arrastar"
 
-#: ControlEditorBase.cpp:49 MainFrameBase.cpp:142
+#: ControlEditorBase.cpp:83 MainFrameBase.cpp:142
 msgid "Move"
 msgstr "Mover"
 
-#: ControlEditorBase.cpp:51 Element.cpp:234 Line.cpp:317 MainFrameBase.cpp:144
+#: ControlEditorBase.cpp:85 Element.cpp:234 Line.cpp:282 MainFrameBase.cpp:144
 msgid "Delete"
 msgstr "Excluir"
 
-#: ControlEditorBase.cpp:62
+#: ControlEditorBase.cpp:96
 msgid "Control elements"
+msgstr ""
+
+#: ControlEditorBase.h:76
+msgid "Control editor"
 msgstr ""
 
 #: Element.cpp:226 MainFrameBase.cpp:148
@@ -275,15 +465,12 @@ msgstr ""
 msgid "Rotate counter-clockwise"
 msgstr ""
 
-#: Element.cpp:273 Element.cpp:287 Line.cpp:149 Line.cpp:410 MainFrame.cpp:231
-#: TextForm.cpp:1207 Workspace.cpp:1146 Workspace.cpp:1201 Workspace.cpp:1309
-#: Workspace.cpp:1413 Workspace.cpp:1435
-msgid "Error"
-msgstr ""
-
 #: ElementForm.cpp:35 ElementForm.cpp:404 ElementForm.cpp:1302
 #: ElementForm.cpp:1615 ElementForm.cpp:2015 ElementForm.cpp:2184
-#: ElementForm.cpp:2441 ElementForm.cpp:2598
+#: ElementForm.cpp:2441 ElementForm.cpp:2598 ElementForm.cpp:2808
+#: ElementForm.cpp:2909 ElementForm.cpp:2998 ElementForm.cpp:3099
+#: ElementForm.cpp:3200 ElementForm.cpp:3305 ElementForm.cpp:3394
+#: ElementForm.cpp:3483
 msgid "General"
 msgstr ""
 
@@ -368,14 +555,18 @@ msgstr ""
 #: ElementForm.cpp:328 ElementForm.cpp:731 ElementForm.cpp:1235
 #: ElementForm.cpp:1547 ElementForm.cpp:1947 ElementForm.cpp:2116
 #: ElementForm.cpp:2244 ElementForm.cpp:2372 ElementForm.cpp:2530
-#: ElementForm.cpp:2728
+#: ElementForm.cpp:2728 ElementForm.cpp:2843 ElementForm.cpp:2932
+#: ElementForm.cpp:3033 ElementForm.cpp:3134 ElementForm.cpp:3239
+#: ElementForm.cpp:3328 ElementForm.cpp:3417 ElementForm.cpp:3514
 msgid "OK"
 msgstr ""
 
 #: ElementForm.cpp:332 ElementForm.cpp:735 ElementForm.cpp:1239
 #: ElementForm.cpp:1551 ElementForm.cpp:1951 ElementForm.cpp:2120
 #: ElementForm.cpp:2248 ElementForm.cpp:2376 ElementForm.cpp:2534
-#: ElementForm.cpp:2732
+#: ElementForm.cpp:2732 ElementForm.cpp:2847 ElementForm.cpp:2936
+#: ElementForm.cpp:3037 ElementForm.cpp:3138 ElementForm.cpp:3243
+#: ElementForm.cpp:3332 ElementForm.cpp:3421 ElementForm.cpp:3518
 msgid "Cancel"
 msgstr ""
 
@@ -384,13 +575,14 @@ msgid "Rated power"
 msgstr ""
 
 #: ElementForm.cpp:459 ElementForm.cpp:2040 ElementForm.cpp:2466
-#: TextForm.cpp:866 TextForm.cpp:897 TextForm.cpp:919 TextForm.cpp:927
+#: IOControlForm.cpp:23 TextForm.cpp:866 TextForm.cpp:897 TextForm.cpp:919
+#: TextForm.cpp:927
 msgid "Active power"
 msgstr ""
 
 #: ElementForm.cpp:488 ElementForm.cpp:2069 ElementForm.cpp:2209
-#: ElementForm.cpp:2495 TextForm.cpp:867 TextForm.cpp:898 TextForm.cpp:905
-#: TextForm.cpp:912 TextForm.cpp:920 TextForm.cpp:928
+#: ElementForm.cpp:2495 IOControlForm.cpp:28 TextForm.cpp:867 TextForm.cpp:898
+#: TextForm.cpp:905 TextForm.cpp:912 TextForm.cpp:920 TextForm.cpp:928
 msgid "Reactive power"
 msgstr ""
 
@@ -652,20 +844,12 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: ElementForm.cpp:2329 SwitchingForm.cpp:6 SwitchingForm.cpp:15
-msgid "Type"
-msgstr ""
-
 #: ElementForm.cpp:2332 SwitchingForm.cpp:7 SwitchingForm.cpp:16
 msgid "Time (s)"
 msgstr ""
 
 #: ElementForm.cpp:2340
 msgid "Add"
-msgstr ""
-
-#: ElementForm.cpp:2348
-msgid "Up"
 msgstr ""
 
 #: ElementForm.cpp:2352
@@ -708,6 +892,106 @@ msgstr ""
 msgid "Preview:"
 msgstr ""
 
+#: ElementForm.cpp:2813
+msgid "Numerator parameters"
+msgstr ""
+
+#: ElementForm.cpp:2825
+msgid "Denominator parameters"
+msgstr ""
+
+#: ElementForm.cpp:2914
+msgid "Signs"
+msgstr ""
+
+#: ElementForm.cpp:3003 ElementForm.cpp:3104
+msgid "Upper limit"
+msgstr ""
+
+#: ElementForm.cpp:3015 ElementForm.cpp:3116
+msgid "Lower limit"
+msgstr ""
+
+#: ElementForm.cpp:3205
+msgid "y = A.eB.x"
+msgstr ""
+
+#: ElementForm.cpp:3209
+msgid "A value"
+msgstr ""
+
+#: ElementForm.cpp:3221
+msgid "B value"
+msgstr ""
+
+#: ElementForm.cpp:3310
+msgid "Constant value"
+msgstr ""
+
+#: ElementForm.cpp:3399
+msgid "Gain value"
+msgstr ""
+
+#: ElementForm.cpp:3488
+msgid "Input"
+msgstr ""
+
+#: ElementForm.cpp:3498
+msgid "Output"
+msgstr ""
+
+#: ElementForm.h:143
+msgid "Bus"
+msgstr ""
+
+#: ElementForm.h:242 SyncGenerator.cpp:52
+msgid "Generator"
+msgstr ""
+
+#: ElementForm.h:369
+msgid "Generator: Stability"
+msgstr ""
+
+#: ElementForm.h:448
+msgid "Line"
+msgstr ""
+
+#: ElementForm.h:547
+msgid "Transformer"
+msgstr ""
+
+#: ElementForm.h:592
+msgid "Load"
+msgstr ""
+
+#: ElementForm.h:627
+msgid "Reactive shunt element"
+msgstr ""
+
+#: ElementForm.h:709
+msgid "Motor"
+msgstr ""
+
+#: ElementForm.h:770 Text.h:87
+msgid "Text"
+msgstr ""
+
+#: ElementForm.h:800
+msgid "Transfer function"
+msgstr "Função transferência"
+
+#: ElementForm.h:1002
+msgid "Input / Output"
+msgstr ""
+
+#: ExponentialForm.cpp:37
+msgid "Value entered incorrectly in the field \"A value\"."
+msgstr ""
+
+#: ExponentialForm.cpp:40
+msgid "Value entered incorrectly in the field \"B value\"."
+msgstr ""
+
 #: Fault.cpp:16
 msgid "There is no buses in the system."
 msgstr ""
@@ -726,6 +1010,10 @@ msgstr ""
 
 #: Fault.cpp:63
 msgid "There is no fault in the system."
+msgstr ""
+
+#: GainForm.cpp:22
+msgid "Value entered incorrectly in the field \"Gain value\"."
 msgstr ""
 
 #: GeneratorStabForm.cpp:54
@@ -810,6 +1098,46 @@ msgid ""
 "constant\"."
 msgstr ""
 
+#: IOControl.cpp:142
+msgid "Vt"
+msgstr ""
+
+#: IOControl.cpp:150
+msgid "Pe"
+msgstr ""
+
+#: IOControl.cpp:154
+msgid "Qe"
+msgstr ""
+
+#: IOControl.cpp:158
+msgid "Vf"
+msgstr ""
+
+#: IOControl.cpp:162
+msgid "Pm"
+msgstr ""
+
+#: IOControlForm.cpp:13
+#, fuzzy
+#| msgid "Reset voltages"
+msgid "Terminal voltage"
+msgstr "Reiniciar tensões"
+
+#: IOControlForm.cpp:18
+msgid "Velocity"
+msgstr ""
+
+#: IOControlForm.cpp:33
+#, fuzzy
+#| msgid "Reset voltages"
+msgid "Field voltage"
+msgstr "Reiniciar tensões"
+
+#: IOControlForm.cpp:38
+msgid "Mechanical power"
+msgstr ""
+
 #: IndMotor.cpp:27
 msgid "Edit induction motor"
 msgstr ""
@@ -851,31 +1179,39 @@ msgstr ""
 msgid "Inductor"
 msgstr ""
 
-#: Line.cpp:147 Line.cpp:408
+#: LimiterForm.cpp:25 RateLimiterForm.cpp:20
+msgid "Value entered incorrectly in the field \"Upper limit\"."
+msgstr ""
+
+#: LimiterForm.cpp:28 RateLimiterForm.cpp:23
+msgid "Value entered incorrectly in the field \"Lower limit\"."
+msgstr ""
+
+#: Line.cpp:147 Line.cpp:373
 msgid ""
 "Unable to connect two buses with different nominal voltages.\n"
 "Use a transformer or edit the bus properties."
 msgstr ""
 
-#: Line.cpp:307
+#: Line.cpp:272
 msgid "Edit line"
 msgstr ""
 
-#: Line.cpp:309
+#: Line.cpp:274
 msgid "Insert node"
 msgstr ""
 
-#: Line.cpp:313
+#: Line.cpp:278
 msgid "Remove node"
 msgstr ""
 
-#: Line.cpp:529 Line.cpp:533 Transformer.cpp:433 Transformer.cpp:437
+#: Line.cpp:494 Line.cpp:498 Transformer.cpp:433 Transformer.cpp:437
 msgid ""
 "\n"
 "P"
 msgstr ""
 
-#: Line.cpp:531 Line.cpp:535 Transformer.cpp:435 Transformer.cpp:439
+#: Line.cpp:496 Line.cpp:500 Transformer.cpp:435 Transformer.cpp:439
 msgid ""
 "\n"
 "Q"
@@ -1010,98 +1346,90 @@ msgstr ""
 msgid "Open project"
 msgstr ""
 
-#: MainFrame.cpp:231
-msgid "It was not possible to open the selected file."
-msgstr ""
-
 #: MainFrame.cpp:265 MainFrame.cpp:286
 msgid "Save PSP file"
 msgstr ""
 
-#: MainFrame.cpp:314 Workspace.cpp:720
+#: MainFrame.cpp:314 Workspace.cpp:672
 #, c-format
 msgid "Bus %d"
 msgstr "Barra %d"
 
-#: MainFrame.cpp:317 Workspace.cpp:724
+#: MainFrame.cpp:317 Workspace.cpp:676
 msgid "Insert Bus: Click to insert, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:321 Workspace.cpp:737
+#: MainFrame.cpp:321 Workspace.cpp:689
 #, c-format
 msgid "Line %d"
 msgstr ""
 
-#: MainFrame.cpp:324 Workspace.cpp:741
+#: MainFrame.cpp:324 Workspace.cpp:693
 msgid "Insert Line: Click on two buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:329 Workspace.cpp:755
+#: MainFrame.cpp:329 Workspace.cpp:707
 #, c-format
 msgid "Transformer %d"
 msgstr ""
 
-#: MainFrame.cpp:332 Workspace.cpp:759
+#: MainFrame.cpp:332 Workspace.cpp:711
 msgid "Insert Transformer: Click on two buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:337 Workspace.cpp:767
+#: MainFrame.cpp:337 Workspace.cpp:719
 #, c-format
 msgid "Generator %d"
 msgstr "Gerador %d"
 
-#: MainFrame.cpp:340 Workspace.cpp:771
+#: MainFrame.cpp:340 Workspace.cpp:723
 msgid "Insert Generator: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:344 Workspace.cpp:731
+#: MainFrame.cpp:344 Workspace.cpp:683
 #, c-format
 msgid "Load %d"
 msgstr ""
 
-#: MainFrame.cpp:347 Workspace.cpp:735
+#: MainFrame.cpp:347 Workspace.cpp:687
 msgid "Insert Load: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:352 Workspace.cpp:812
+#: MainFrame.cpp:352 Workspace.cpp:764
 #, c-format
 msgid "Capacitor %d"
 msgstr ""
 
-#: MainFrame.cpp:355 Workspace.cpp:816
+#: MainFrame.cpp:355 Workspace.cpp:768
 msgid "Insert Capacitor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:360 Workspace.cpp:779
+#: MainFrame.cpp:360 Workspace.cpp:731
 #, c-format
 msgid "Inductor %d"
 msgstr ""
 
-#: MainFrame.cpp:363 Workspace.cpp:783
+#: MainFrame.cpp:363 Workspace.cpp:735
 msgid "Insert Inductor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:368 Workspace.cpp:787
+#: MainFrame.cpp:368 Workspace.cpp:739
 #, c-format
 msgid "Induction motor %d"
 msgstr ""
 
-#: MainFrame.cpp:371 Workspace.cpp:791
+#: MainFrame.cpp:371 Workspace.cpp:743
 msgid "Insert Induction Motor: Click on a buses, ESC to cancel."
 msgstr ""
 
-#: MainFrame.cpp:376 Workspace.cpp:800
+#: MainFrame.cpp:376 Workspace.cpp:752
 #, c-format
 msgid "Synchronous condenser %d"
 msgstr ""
 
-#: MainFrame.cpp:379 Workspace.cpp:804
+#: MainFrame.cpp:379 Workspace.cpp:756
 msgid "Insert Synchronous Condenser: Click on a buses, ESC to cancel."
 msgstr ""
-
-#: MainFrameBase.cpp:72 MainFrameBase.cpp:73
-msgid "File"
-msgstr "Arquivo"
 
 #: MainFrameBase.cpp:76 MainFrameBase.cpp:77 MainFrameBase.cpp:80
 msgid "Projects"
@@ -1126,10 +1454,6 @@ msgstr ""
 #: MainFrameBase.cpp:86
 msgid "Opens a dialog to set the main settings of the program"
 msgstr ""
-
-#: MainFrameBase.cpp:88
-msgid "Exit"
-msgstr "Sair"
 
 #: MainFrameBase.cpp:88
 msgid "Closes the application"
@@ -1230,10 +1554,6 @@ msgstr "Move os elementos selecionados"
 #: MainFrameBase.cpp:144
 msgid "Removes all selected elements"
 msgstr "Remove todos os elementos selecionados"
-
-#: MainFrameBase.cpp:146
-msgid "Fit"
-msgstr "Encaixar"
 
 #: MainFrameBase.cpp:146
 msgid "Applies the drag and zoom tools to show all elements in workspace"
@@ -1369,6 +1689,10 @@ msgstr ""
 msgid "Opens a dialog to set the settings of the simulations"
 msgstr ""
 
+#: MainFrameBase.h:141
+msgid "PSP-UFU"
+msgstr "PSP-UFU"
+
 #: PowerFlow.cpp:24
 msgid "No buses found on the system."
 msgstr ""
@@ -1393,12 +1717,16 @@ msgstr ""
 msgid "Inductor: Switching"
 msgstr ""
 
-#: SyncGenerator.cpp:44
-msgid "Edit Generator"
+#: SumForm.cpp:41
+msgid "You must assign at least two signals."
 msgstr ""
 
-#: SyncGenerator.cpp:52 ElementForm.h:242
-msgid "Generator"
+#: SumForm.cpp:56
+msgid "Value entered incorrectly in the field \"Signs\"."
+msgstr ""
+
+#: SyncGenerator.cpp:44
+msgid "Edit Generator"
 msgstr ""
 
 #: SyncMachineForm.cpp:344 SyncMachineForm.cpp:478
@@ -1541,6 +1869,14 @@ msgstr ""
 msgid "There are blank fields."
 msgstr ""
 
+#: TransferFunctionForm.cpp:55
+msgid "Value entered incorrectly in the field \"Numerator parameters\"."
+msgstr ""
+
+#: TransferFunctionForm.cpp:68
+msgid "Value entered incorrectly in the field \"Denominator parameters\"."
+msgstr ""
+
 #: Transformer.cpp:256
 msgid "Edit tranformer"
 msgstr ""
@@ -1586,89 +1922,46 @@ msgstr ""
 msgid "Value entered incorrectly in the field \"Secondary ground reactance\"."
 msgstr ""
 
-#: Workspace.cpp:307
+#: Workspace.cpp:269
 msgid "Do you want to change the rated voltage of the path?"
 msgstr ""
 
-#: Workspace.cpp:308
+#: Workspace.cpp:270
 msgid "Warning"
 msgstr ""
 
-#: Workspace.cpp:703
+#: Workspace.cpp:655
 msgid "Insert Text: Click to insert, ESC to cancel."
 msgstr ""
 
-#: Workspace.cpp:843
+#: Workspace.cpp:795
 msgid "MODE: DRAG"
 msgstr ""
 
-#: Workspace.cpp:848
+#: Workspace.cpp:800
 msgid "MODE: PASTE"
 msgstr ""
 
-#: Workspace.cpp:855
+#: Workspace.cpp:807
 msgid "MODE: INSERT"
 msgstr ""
 
-#: Workspace.cpp:864
+#: Workspace.cpp:816
 msgid "MODE: EDIT"
 msgstr ""
 
-#: Workspace.cpp:868
+#: Workspace.cpp:820
 #, c-format
 msgid "ZOOM: %d%%"
 msgstr ""
 
-#: Workspace.cpp:1201 Workspace.cpp:1309
+#: Workspace.cpp:1153 Workspace.cpp:1261
 msgid "It was not possible to paste from clipboard."
 msgstr ""
 
-#: Workspace.cpp:1317
+#: Workspace.cpp:1269
 msgid "Click to paste."
 msgstr ""
-
-#: ControlEditorBase.h:59
-msgid "Control editor"
-msgstr ""
-
-#: ElementForm.h:143
-msgid "Bus"
-msgstr ""
-
-#: ElementForm.h:369
-msgid "Generator: Stability"
-msgstr ""
-
-#: ElementForm.h:448
-msgid "Line"
-msgstr ""
-
-#: ElementForm.h:547
-msgid "Transformer"
-msgstr ""
-
-#: ElementForm.h:592
-msgid "Load"
-msgstr ""
-
-#: ElementForm.h:627
-msgid "Reactive shunt element"
-msgstr ""
-
-#: ElementForm.h:709
-msgid "Motor"
-msgstr ""
-
-#: ElementForm.h:770 Text.h:87
-msgid "Text"
-msgstr ""
-
-#: MainFrameBase.h:141
-msgid "PSP-UFU"
-msgstr "PSP-UFU"
-
-#~ msgid "Transfer function"
-#~ msgstr "Função transferência"
 
 #~ msgid "Export Import"
 #~ msgstr "Exportar Importar"
@@ -1690,9 +1983,6 @@ msgstr "PSP-UFU"
 
 #~ msgid "Disable solution"
 #~ msgstr "Desabilitar solução"
-
-#~ msgid "Reset voltages"
-#~ msgstr "Reiniciar tensões"
 
 #~ msgid "Handling"
 #~ msgstr "Manipulação"

@@ -136,6 +136,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     }
 #endif
     // Connect events
+    this->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
     this->Connect(ID_RIBBON_IMPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnImportClick), NULL, this);
     this->Connect(ID_RIBBON_EXPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Connect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
@@ -153,6 +154,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
 
 ControlEditorBase::~ControlEditorBase()
 {
+    this->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
     this->Disconnect(ID_RIBBON_IMPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnImportClick), NULL, this);
     this->Disconnect(ID_RIBBON_EXPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);

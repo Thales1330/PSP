@@ -50,6 +50,7 @@
         <File Name="IOControl.cpp"/>
         <File Name="ControlElementContainer.cpp"/>
       </VirtualDirectory>
+      <File Name="ElementPlotData.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -88,6 +89,7 @@
         <File Name="GainForm.cpp"/>
         <File Name="IOControlForm.cpp"/>
       </VirtualDirectory>
+      <File Name="ChartView.cpp"/>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
@@ -139,6 +141,7 @@
         <File Name="IOControl.h"/>
         <File Name="ControlElementContainer.h"/>
       </VirtualDirectory>
+      <File Name="ElementPlotData.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
@@ -177,6 +180,7 @@
         <File Name="GainForm.h"/>
         <File Name="IOControlForm.h"/>
       </VirtualDirectory>
+      <File Name="ChartView.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
@@ -189,6 +193,7 @@
       <File Name="BusFormBitmaps.cpp"/>
       <File Name="ElementFormBitmaps.cpp"/>
       <File Name="ControlEditorBitmaps.cpp"/>
+      <File Name="ChartViewBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
@@ -199,6 +204,8 @@
       <File Name="ElementForm.cpp"/>
       <File Name="ControlEditorBase.h"/>
       <File Name="ControlEditorBase.cpp"/>
+      <File Name="ChartViewBase.h"/>
+      <File Name="ChartViewBase.cpp"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>

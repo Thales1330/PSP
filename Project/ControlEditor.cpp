@@ -13,6 +13,9 @@
 #include "Constant.h"
 #include "Gain.h"
 
+#include "ChartView.h"
+#include "ElementPlotData.h"
+
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
     : wxWindow(parent, id)
 {
@@ -611,6 +614,37 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
             {
                 RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
             } break;
+            case 'L':
+            {
+                //tests
+                if(event.ControlDown() && event.ShiftDown()) {
+                    std::vector<double> time, sinC, cosC, tgC;
+                    for(int i=0; i<360; ++i) {
+                        time.push_back(i);
+                        sinC.push_back(std::sin(wxDegToRad(i)));
+                        cosC.push_back(std::cos(wxDegToRad(i)));
+                        tgC.push_back(std::tan(wxDegToRad(i)));
+                    }
+                    std::vector<ElementPlotData> epdList;
+                    
+                    ElementPlotData curve1Data(_("Func. polinomiais 1"), ElementPlotData::CT_BUS);
+                    curve1Data.AddData(sinC, _("seno"));
+                    epdList.push_back(curve1Data);
+                    
+                    ElementPlotData curve2Data(_("Func. polinomiais 2"), ElementPlotData::CT_BUS);
+                    curve2Data.AddData(tgC, _("tangente"));
+                    epdList.push_back(curve2Data);
+                    
+                    ElementPlotData curve3Data(_("Func. polinomiais 3"), ElementPlotData::CT_SYNC_GENERATOR);
+                    curve3Data.AddData(sinC, _("seno"));
+                    curve3Data.AddData(cosC, _("cosseno"));
+                    curve3Data.AddData(tgC, _("tangente"));
+                    epdList.push_back(curve3Data);
+                    
+                    ChartView* cView = new ChartView(this, epdList, time);
+                    cView->Show();
+                }
+            }
         }
     }
 }
