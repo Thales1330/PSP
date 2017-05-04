@@ -49,6 +49,7 @@
         <File Name="Gain.cpp"/>
         <File Name="IOControl.cpp"/>
         <File Name="ControlElementContainer.cpp"/>
+        <File Name="ControlElementSolver.cpp"/>
       </VirtualDirectory>
       <File Name="ElementPlotData.cpp"/>
     </VirtualDirectory>
@@ -140,6 +141,7 @@
         <File Name="Gain.h"/>
         <File Name="IOControl.h"/>
         <File Name="ControlElementContainer.h"/>
+        <File Name="ControlElementSolver.h"/>
       </VirtualDirectory>
       <File Name="ElementPlotData.h"/>
     </VirtualDirectory>

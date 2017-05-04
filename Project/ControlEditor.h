@@ -25,6 +25,8 @@ class Exponential;
 class Constant;
 class Gain;
 
+class ControlElementSolver;
+
 class ChartView;
 class ElementDataObject;
 

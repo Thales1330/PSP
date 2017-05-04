@@ -13,6 +13,8 @@
 #include "Constant.h"
 #include "Gain.h"
 
+#include "ControlElementSolver.h"
+
 #include "ChartView.h"
 #include "ElementPlotData.h"
 
@@ -618,6 +620,9 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
             {
                 //tests
                 if(event.ControlDown() && event.ShiftDown()) {
+                    
+                    ControlElementSolver solver(this, 1e-3, true, 0.0);
+                    /*
                     std::vector<double> time, sinC, cosC, tgC;
                     for(int i=0; i<360; ++i) {
                         time.push_back(i);
@@ -642,7 +647,7 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
                     epdList.push_back(curve3Data);
                     
                     ChartView* cView = new ChartView(this, epdList, time);
-                    cView->Show();
+                    cView->Show();*/
                 }
             }
         }

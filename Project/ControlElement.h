@@ -5,7 +5,7 @@
 
 class Node
 {
-public:
+   public:
     enum NodeType { NODE_IN = 0, NODE_OUT };
 
     Node(wxPoint2DDouble position = wxPoint2DDouble(0, 0), NodeType nodeType = NODE_IN, double borderSize = 0.0);
@@ -13,39 +13,33 @@ public:
 
     wxRect2DDouble GetRect() const { return m_rect; }
     void SetRect(wxRect2DDouble rect) { m_rect = rect; }
-
     wxPoint2DDouble GetPosition() const;
     void SetPosition(wxPoint2DDouble position);
 
     NodeType GetNodeType() const { return m_nodeType; }
     void SetNodeType(NodeType nodeType) { m_nodeType = nodeType; }
-
     double GetRadius() const { return m_radius; }
     std::vector<wxPoint2DDouble> GetInTrianglePts() const { return m_triPts; }
-    
     double GetAngle() const { return m_angle; }
     void SetAngle(double angle) { m_angle = angle; }
-    
     void Rotate(bool clockwise = true);
-    
+
     void RotateTriPt(double angle);
 
     void StartMove(wxPoint2DDouble position);
     void Move(wxPoint2DDouble position);
     bool Contains(wxPoint2DDouble position) const;
-    
+
     bool IsConnected() const { return m_connected; }
     void SetConnected(bool connected = true) { m_connected = connected; }
-    
     int GetID() const { return m_id; }
     void SetID(int id) { m_id = id; }
-
-protected:
+   protected:
     int m_id = -1;
-    
+
     wxRect2DDouble m_rect;
     NodeType m_nodeType;
-    
+
     bool m_connected = false;
 
     wxPoint2DDouble m_moveStartPt;
@@ -58,7 +52,7 @@ protected:
 
 class ControlElement : public Element
 {
-public:
+   public:
     ControlElement(int id);
     ~ControlElement();
 
@@ -67,11 +61,17 @@ public:
 
     void SetNodeList(std::vector<Node*> nodeList) { m_nodeList = nodeList; }
     std::vector<Node*> GetNodeList() const { return m_nodeList; }
-
     virtual void DrawNodes() const;
 
-protected:
+    void SetInput(double input) { m_input = input; }
+    double GetInput() const { return m_input; }
+    double GetOutput() const { return m_output; }
+    virtual bool Solve() { return false; }
+   protected:
     std::vector<Node*> m_nodeList;
+
+    double m_input = 0.0;
+    double m_output = 0.0;
 };
 
-#endif // CONTROLELEMENT_H
+#endif  // CONTROLELEMENT_H
