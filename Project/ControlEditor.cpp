@@ -622,6 +622,8 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
                 if(event.ControlDown() && event.ShiftDown()) {
                     
                     ControlElementSolver solver(this, 1e-3, true, 0.0);
+                    solver.SolveNextStep(1.0);
+                    solver.SolveNextStep(1.12);
                     /*
                     std::vector<double> time, sinC, cosC, tgC;
                     for(int i=0; i<360; ++i) {

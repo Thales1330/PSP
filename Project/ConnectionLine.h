@@ -30,9 +30,6 @@ class ConnectionLine : public ControlElement
 
     virtual std::vector<ConnectionLine*> GetLineChildList() const;
     
-    virtual bool IsSolved() const { return m_solved; }
-    virtual SetSolved(bool solved) { m_solved = solved; }
-    
     virtual double GetValue() const { return m_value; }
     virtual void SetValue(double value) { m_value = value; }
 
@@ -46,7 +43,6 @@ class ConnectionLine : public ControlElement
     ConnectionLine* m_parentLine = NULL;
     
     double m_value;
-    bool m_solved = false;
 };
 
 #endif  // CONNECTIONLINE_H

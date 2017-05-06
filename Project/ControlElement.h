@@ -63,14 +63,13 @@ class ControlElement : public Element
     std::vector<Node*> GetNodeList() const { return m_nodeList; }
     virtual void DrawNodes() const;
 
-    void SetInput(double input) { m_input = input; }
-    double GetInput() const { return m_input; }
-    double GetOutput() const { return m_output; }
-    virtual bool Solve() { return false; }
+    virtual bool IsSolved() const { return m_solved; }
+    virtual void SetSolved(bool solved = true) { m_solved = solved; }
+    virtual bool Solve(double input) { return true; }
+    virtual double GetOutput() const { return m_output; }
    protected:
     std::vector<Node*> m_nodeList;
-
-    double m_input = 0.0;
+    bool m_solved = false;
     double m_output = 0.0;
 };
 
