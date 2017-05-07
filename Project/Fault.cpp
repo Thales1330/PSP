@@ -1,4 +1,7 @@
 #include "Fault.h"
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 
 Fault::Fault()
     : ElectricCalculation()

@@ -1,4 +1,7 @@
 #include "ControlElement.h"
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 
 Node::Node(wxPoint2DDouble position, NodeType nodeType, double borderSize)
 {

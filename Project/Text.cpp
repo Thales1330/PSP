@@ -1,6 +1,9 @@
 #include "TextForm.h"
 #include "Text.h"
 
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 #include "ElectricCalculation.h"
 #include "Bus.h"
 #include "Line.h"

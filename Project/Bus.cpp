@@ -1,4 +1,7 @@
 #include "Bus.h"
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 
 Bus::Bus()
     : PowerElement()
