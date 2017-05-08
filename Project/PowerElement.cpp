@@ -1,4 +1,7 @@
 #include "PowerElement.h"
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 
 PowerElement::PowerElement()
     : Element()

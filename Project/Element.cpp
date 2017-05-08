@@ -1,4 +1,7 @@
 #include "Element.h"
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 
 Element::Element() { m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5); }
 

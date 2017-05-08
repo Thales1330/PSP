@@ -1,5 +1,8 @@
 #include "ControlEditor.h"
 
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 #include "FileHanding.h"
 #include "Camera.h"
 #include "ControlElement.h"

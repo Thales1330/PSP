@@ -1,4 +1,7 @@
 #include "ElectricCalculation.h"
+#ifdef USING_WX_3_0_X
+#include "DegreesAndRadians.h"
+#endif
 
 ElectricCalculation::ElectricCalculation() {}
 ElectricCalculation::~ElectricCalculation() {}
