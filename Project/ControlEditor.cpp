@@ -623,29 +623,37 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
                     double integrationError = 1e-5;
                     double simTime = 10.0;
                     double printStep = 1e-2;
+                    
+                    double pulsePer = 1.0;
 
                     ControlElementSolver solver(this, timeStep, integrationError, true, 0.0);
 
                     double currentTime = 0.0;
                     double printTime = 0.0;
+                    double pulseTime = 0.0;
                     std::vector<double> time;
                     std::vector<double> solution;
+                    std::vector<double> inputV;
                     while(currentTime <= simTime) {
                         double input = 0.0;
-                        if(currentTime >= 1.0) input = 1.0;
+                        if(pulseTime >= pulsePer * 2.0) pulseTime = 0.0;
+                        if(pulseTime >= pulsePer) input = 1.0;
 
                         solver.SolveNextStep(input);
                         if(printTime >= printStep) {
                             time.push_back(currentTime);
                             solution.push_back(solver.GetLastSolution());
+                            inputV.push_back(input);
                             printTime = 0.0;
                         }
                         printTime += timeStep;
                         currentTime += timeStep;
+                        pulseTime += timeStep;
                     }
                     std::vector<ElementPlotData> epdList;
                     ElementPlotData curve1Data(_("TESTES"), ElementPlotData::CT_BUS);
-                    curve1Data.AddData(solution, _("teste 1"));
+                    curve1Data.AddData(inputV, _("Entrada"));
+                    curve1Data.AddData(solution, _("Saida"));
                     epdList.push_back(curve1Data);
 
                     ChartView* cView = new ChartView(this, epdList, time);

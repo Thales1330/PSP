@@ -167,3 +167,9 @@ void Gain::Move(wxPoint2DDouble position)
     SetPosition(m_movePos + position - m_moveStartPt);
     UpdatePoints();
 }
+
+bool Gain::Solve(double input)
+{
+    m_output = input * m_value;
+    return true;
+}

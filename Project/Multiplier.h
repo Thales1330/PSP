@@ -3,6 +3,8 @@
 
 #include "ControlElement.h"
 
+class ConnectionLine;
+
 class Multiplier : public ControlElement
 {
    public:
@@ -16,6 +18,8 @@ class Multiplier : public ControlElement
     virtual void Rotate(bool clockwise = true);
 
     virtual void UpdatePoints();
+    
+    virtual bool Solve(double input);
 };
 
 #endif  // MULTIPLIER_H

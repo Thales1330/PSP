@@ -1,12 +1,12 @@
 #include "Multiplier.h"
+#include "ConnectionLine.h"
 
 Multiplier::Multiplier(int id) : ControlElement(id)
 {
     m_width = m_height = 36.0;
     Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-18, -9), Node::NODE_IN, m_borderSize);
     nodeIn1->StartMove(m_position);
-    Node* nodeIn2 =
-        new Node(m_position + wxPoint2DDouble(-18, 9), Node::NODE_IN, m_borderSize);
+    Node* nodeIn2 = new Node(m_position + wxPoint2DDouble(-18, 9), Node::NODE_IN, m_borderSize);
     nodeIn2->StartMove(m_position);
     Node* nodeOut = new Node(m_position + wxPoint2DDouble(18, 0), Node::NODE_OUT, m_borderSize);
     nodeOut->SetAngle(180.0);
@@ -17,7 +17,6 @@ Multiplier::Multiplier(int id) : ControlElement(id)
 }
 
 Multiplier::~Multiplier() {}
-
 void Multiplier::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -30,7 +29,7 @@ void Multiplier::Draw(wxPoint2DDouble translation, double scale) const
     DrawRectangle(m_position, m_width, m_height);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-    
+
     // Plot x.
     glLineWidth(2.0);
     std::vector<wxPoint2DDouble> xSymbol;
@@ -83,4 +82,36 @@ void Multiplier::UpdatePoints()
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(9, 18));
         m_nodeList[2]->SetPosition(m_position + wxPoint2DDouble(0, -18));
     }
+}
+
+bool Multiplier::Solve(double input)
+{
+    std::vector<double> inputVector;
+    for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
+        Node* node = *itN;
+        if(node->GetNodeType() != Node::NODE_OUT) {
+            if(!node->IsConnected()) {
+                inputVector.push_back(1.0);
+            } else {
+                for(auto itC = m_childList.begin(), itCEnd = m_childList.end(); itC != itCEnd; ++itC) {
+                    ConnectionLine* cLine = static_cast<ConnectionLine*>(*itC);
+                    auto nodeList = cLine->GetNodeList();
+                    for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
+                        Node* childNode = *itCN;
+                        if(childNode == node) {
+                            inputVector.push_back(cLine->GetValue());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    m_output = 1.0;
+    for(unsigned int i = 0; i < inputVector.size(); ++i) {
+        m_output *= inputVector[i];
+    }
+
+    return true;
 }

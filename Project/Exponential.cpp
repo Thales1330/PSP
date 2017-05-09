@@ -111,3 +111,9 @@ void Exponential::SetValues(double aValue, double bValue)
     m_aValue = aValue;
     m_bValue = bValue;
 }
+
+bool Exponential::Solve(double input)
+{
+    m_output = m_aValue * std::exp(m_bValue * input);
+    return true;
+}
