@@ -15,6 +15,7 @@
 
 ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor,
                                            double timeStep,
+                                           double integrationError,
                                            bool startAllZero,
                                            double input)
 {
@@ -56,10 +57,36 @@ ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor,
     }
 
     m_timeStep = timeStep;
-    if(!startAllZero) InitializeValues(input);
+    m_integrationError = integrationError;
+    InitializeValues(input, startAllZero);
 }
 
-void ControlElementSolver::InitializeValues(double input) {}
+void ControlElementSolver::InitializeValues(double input, bool startAllZero)
+{
+    // Reset Elements values
+    auto elementList = m_ctrlContainer->GetControlElementsList();
+    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
+        ControlElement* element = *it;
+        element->SetSolved(false);
+        element->SetOutput(0.0);
+    }
+    auto tfList = m_ctrlContainer->GetTFList();
+    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
+        TransferFunction* tf = *it;
+        tf->CalculateSpaceState(m_timeStep, m_integrationError);
+    }
+    auto connectionLineList = m_ctrlContainer->GetConnectionLineList();
+    for(auto it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {
+        ConnectionLine* cLine = *it;
+        cLine->SetSolved(false);
+        cLine->SetValue(0.0);
+    }
+
+    if(!startAllZero) {
+        // Calculate the steady-state results according to the input.
+    }
+}
+
 void ControlElementSolver::SolveNextStep(double input)
 {
     // Set all elements as not solved
@@ -73,7 +100,7 @@ void ControlElementSolver::SolveNextStep(double input)
         ConnectionLine* cLine = *it;
         cLine->SetSolved(false);
     }
-    
+
     // Get first node and set input value on connected lines
     ConnectionLine* firstConn = static_cast<ConnectionLine*>(m_inputControl->GetChildList()[0]);
     m_inputControl->SetSolved();
@@ -85,17 +112,45 @@ void ControlElementSolver::SolveNextStep(double input)
     auto constantList = m_ctrlContainer->GetConstantList();
     for(auto it = constantList.begin(), itEnd = constantList.end(); it != itEnd; ++it) {
         Constant* constant = *it;
-        constant->SetSolved();
-        ConnectionLine* child = static_cast<ConnectionLine*>(constant->GetChildList()[0]);
-        child->SetValue(constant->GetValue());
-        child->SetSolved();
-        FillAllConnectedChildren(child);
+        if(constant->GetChildList().size() == 1) {
+            constant->SetSolved();
+            ConnectionLine* child = static_cast<ConnectionLine*>(constant->GetChildList()[0]);
+            child->SetValue(constant->GetValue());
+            child->SetSolved();
+            FillAllConnectedChildren(child);
+        }
     }
-    
+
     ConnectionLine* currentLine = firstConn;
     while(currentLine) {
-        wxMessageBox(wxString::Format("%d", currentLine->GetID()));
+        ConnectionLine* lastLine = currentLine;
         currentLine = SolveNextElement(currentLine);
+        if(!currentLine) m_solutions.push_back(lastLine->GetValue());
+    }
+
+    bool haveUnsolvedElement = true;
+    while(haveUnsolvedElement) {
+        haveUnsolvedElement = false;
+        // Get the solved line connected with unsolved element (elements not connected in the main branch).
+        for(auto it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {
+            ConnectionLine* cLine = *it;
+            if(cLine->IsSolved()) {
+                auto parentList = cLine->GetParentList();
+                for(auto itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {
+                    ControlElement* parent = static_cast<ControlElement*>(*itP);
+                    if(!parent->IsSolved()) {
+                        haveUnsolvedElement = true;
+                        // Solve secondary branch.
+                        currentLine = cLine;
+                        while(currentLine) {
+                            currentLine = SolveNextElement(currentLine);
+                        }
+                        break;
+                    }
+                }
+            }
+            if(haveUnsolvedElement) break;
+        }
     }
 }
 
@@ -119,22 +174,21 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
         if(!element->IsSolved()) {
             if(!element->Solve(currentLine->GetValue())) return NULL;
             element->SetSolved();
-            
+
             // Get the output node (must have one or will result NULL).
             Node* outNode = NULL;
             auto nodeList = element->GetNodeList();
             for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
                 Node* node = *itN;
-                if(node->GetNodeType() == Node::NODE_OUT)
-                    outNode = node;
+                if(node->GetNodeType() == Node::NODE_OUT) outNode = node;
             }
             if(!outNode) return NULL;
-            
+
             // Set connection line value associated with the output node.
             auto childList = element->GetChildList();
             for(auto itC = childList.begin(), itCEnd = childList.end(); itC != itCEnd; ++itC) {
                 ConnectionLine* cLine = static_cast<ConnectionLine*>(*itC);
-                if(!cLine->IsSolved()) { // Only check unsolved lines
+                if(!cLine->IsSolved()) {  // Only check unsolved lines
                     // Check if the connection line have the output node on the list
                     auto lineNodeList = cLine->GetNodeList();
                     for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
@@ -142,7 +196,7 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
                         if(childNode == outNode) {
                             // Check if the line connect two elements, otherwise return NULL
                             if(cLine->GetType() != ConnectionLine::ELEMENT_ELEMENT) return NULL;
-                            
+
                             // Set the connection line value and return it.
                             cLine->SetValue(element->GetOutput());
                             cLine->SetSolved();

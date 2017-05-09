@@ -23,10 +23,11 @@ class ControlElementSolver
     ControlElementSolver() {}
     ControlElementSolver(ControlEditor* controlEditor,
                          double timeStep = 1e-3,
+                         double integrationError = 1e-3,
                          bool startAllZero = false,
                          double input = 0.0);
     ~ControlElementSolver() {}
-    virtual void InitializeValues(double input);
+    virtual void InitializeValues(double input, bool startAllZero);
     virtual void SolveNextStep(double input);
     virtual std::vector<double> GetSolutions() { return m_solutions; }
     virtual double GetLastSolution() { return m_solutions[m_solutions.size() - 1]; }
@@ -36,6 +37,7 @@ class ControlElementSolver
 
     ControlElementContainer* m_ctrlContainer = NULL;
     double m_timeStep;
+    double m_integrationError;
     std::vector<double> m_solutions;
 
     IOControl* m_inputControl = NULL;

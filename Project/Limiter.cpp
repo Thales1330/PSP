@@ -87,3 +87,12 @@ void Limiter::UpdatePoints()
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, -18));
     }
 }
+
+bool Limiter::Solve(double input)
+{
+    m_output = input;
+    if(m_output > m_upLimit) m_output = m_upLimit;
+    else if(m_output < m_lowLimit) m_output = m_lowLimit;
+    
+    return true;
+}

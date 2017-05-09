@@ -616,14 +616,41 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
             {
                 RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
             } break;
-            case 'L':
-            {
-                //tests
+            case 'L': {
+                // tests
                 if(event.ControlDown() && event.ShiftDown()) {
-                    
-                    ControlElementSolver solver(this, 1e-3, true, 0.0);
-                    solver.SolveNextStep(1.0);
-                    solver.SolveNextStep(1.12);
+                    double timeStep = 1e-3;
+                    double integrationError = 1e-5;
+                    double simTime = 10.0;
+                    double printStep = 1e-2;
+
+                    ControlElementSolver solver(this, timeStep, integrationError, true, 0.0);
+
+                    double currentTime = 0.0;
+                    double printTime = 0.0;
+                    std::vector<double> time;
+                    std::vector<double> solution;
+                    while(currentTime <= simTime) {
+                        double input = 0.0;
+                        if(currentTime >= 1.0) input = 1.0;
+
+                        solver.SolveNextStep(input);
+                        if(printTime >= printStep) {
+                            time.push_back(currentTime);
+                            solution.push_back(solver.GetLastSolution());
+                            printTime = 0.0;
+                        }
+                        printTime += timeStep;
+                        currentTime += timeStep;
+                    }
+                    std::vector<ElementPlotData> epdList;
+                    ElementPlotData curve1Data(_("TESTES"), ElementPlotData::CT_BUS);
+                    curve1Data.AddData(solution, _("teste 1"));
+                    epdList.push_back(curve1Data);
+
+                    ChartView* cView = new ChartView(this, epdList, time);
+                    cView->Show();
+
                     /*
                     std::vector<double> time, sinC, cosC, tgC;
                     for(int i=0; i<360; ++i) {
@@ -633,21 +660,21 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
                         tgC.push_back(std::tan(wxDegToRad(i)));
                     }
                     std::vector<ElementPlotData> epdList;
-                    
+
                     ElementPlotData curve1Data(_("Func. polinomiais 1"), ElementPlotData::CT_BUS);
                     curve1Data.AddData(sinC, _("seno"));
                     epdList.push_back(curve1Data);
-                    
+
                     ElementPlotData curve2Data(_("Func. polinomiais 2"), ElementPlotData::CT_BUS);
                     curve2Data.AddData(tgC, _("tangente"));
                     epdList.push_back(curve2Data);
-                    
+
                     ElementPlotData curve3Data(_("Func. polinomiais 3"), ElementPlotData::CT_SYNC_GENERATOR);
                     curve3Data.AddData(sinC, _("seno"));
                     curve3Data.AddData(cosC, _("cosseno"));
                     curve3Data.AddData(tgC, _("tangente"));
                     epdList.push_back(curve3Data);
-                    
+
                     ChartView* cView = new ChartView(this, epdList, time);
                     cView->Show();*/
                 }
@@ -775,21 +802,19 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
                                   wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
-    
-    //Get the highest id number
+
+    // Get the highest id number
     int majorElementID = 0;
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
         ControlElement* element = *it;
-        if(element->GetID() > majorElementID)
-            majorElementID = element->GetID();
+        if(element->GetID() > majorElementID) majorElementID = element->GetID();
     }
     for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
         ConnectionLine* line = *it;
-        if(line->GetID() > majorElementID)
-            majorElementID = line->GetID();
+        if(line->GetID() > majorElementID) majorElementID = line->GetID();
     }
     m_lastElementID = ++majorElementID;
-    
+
     Redraw();
     event.Skip();
 }

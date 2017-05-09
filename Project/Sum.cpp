@@ -1,8 +1,8 @@
 #include "Sum.h"
 #include "SumForm.h"
+#include "ConnectionLine.h"
 
-Sum::Sum(int id)
-    : ControlElement(id)
+Sum::Sum(int id) : ControlElement(id)
 {
     m_width = m_height = 36.0;
     Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-m_width / 2, 9 - m_height / 2), Node::NODE_IN, m_borderSize);
@@ -23,7 +23,6 @@ Sum::Sum(int id)
 }
 
 Sum::~Sum() {}
-
 void Sum::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -133,7 +132,7 @@ void Sum::UpdatePoints()
     else if(m_angle == 270.0)
         m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
 
-    SetPosition(m_position); // Update rect.
+    SetPosition(m_position);  // Update rect.
 }
 
 void Sum::AddInNode()
@@ -180,4 +179,40 @@ void Sum::Rotate(bool clockwise)
         Node* node = *it;
         node->Rotate(clockwise);
     }
+}
+
+bool Sum::Solve(double input)
+{
+    std::vector<double> inputVector;
+    for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
+        Node* node = *itN;
+        if(node->GetNodeType() != Node::NODE_OUT) {
+            if(!node->IsConnected()) {
+                inputVector.push_back(0.0);
+            } else {
+                for(auto itC = m_childList.begin(), itCEnd = m_childList.end(); itC != itCEnd; ++itC) {
+                    ConnectionLine* cLine = static_cast<ConnectionLine*>(*itC);
+                    auto nodeList = cLine->GetNodeList();
+                    for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
+                        Node* childNode = *itCN;
+                        if(childNode == node) {
+                            inputVector.push_back(cLine->GetValue());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if(m_signalList.size() != inputVector.size()) return false;
+
+    m_output = 0.0;
+    for(unsigned int i = 0; i < m_signalList.size(); ++i) {
+        if(m_signalList[i] == SIGNAL_POSITIVE)
+            m_output += inputVector[i];
+        else if(m_signalList[i] == SIGNAL_NEGATIVE)
+            m_output -= inputVector[i];
+    }
+    return true;
 }

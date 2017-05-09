@@ -4,6 +4,7 @@
 #include "ControlElement.h"
 
 class SumForm;
+class ConnectionLine;
 
 class Sum : public ControlElement
 {
@@ -20,6 +21,8 @@ public:
     
     virtual std::vector<Signal> GetSignalList() const { return m_signalList; }
     virtual void SetSignalList(std::vector<Signal> signalList) { m_signalList = signalList; }
+    
+    virtual bool Solve(double input);
     
     virtual void UpdatePoints();
     void AddInNode();

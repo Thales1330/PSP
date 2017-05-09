@@ -65,8 +65,13 @@ class ControlElement : public Element
 
     virtual bool IsSolved() const { return m_solved; }
     virtual void SetSolved(bool solved = true) { m_solved = solved; }
-    virtual bool Solve(double input) { return true; }
+    virtual bool Solve(double input)
+    {
+        m_output = input * 2.0;
+        return true;
+    }
     virtual double GetOutput() const { return m_output; }
+    virtual void SetOutput(double output) { m_output = output; }
    protected:
     std::vector<Node*> m_nodeList;
     bool m_solved = false;
