@@ -75,6 +75,11 @@ void ControlElementSolver::InitializeValues(double input, bool startAllZero)
         TransferFunction* tf = *it;
         tf->CalculateSpaceState(m_timeStep, m_integrationError);
     }
+    auto rateLimiterList = m_ctrlContainer->GetRateLimiterList();
+    for(auto it = rateLimiterList.begin(), itEnd = rateLimiterList.end(); it != itEnd; ++it) {
+        RateLimiter* rl = *it;
+        rl->SetTimeStep(m_timeStep);
+    }
     auto connectionLineList = m_ctrlContainer->GetConnectionLineList();
     for(auto it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {
         ConnectionLine* cLine = *it;
@@ -84,6 +89,8 @@ void ControlElementSolver::InitializeValues(double input, bool startAllZero)
 
     if(!startAllZero) {
         // Calculate the steady-state results according to the input.
+        double minError = 1e-6;
+        
     }
 }
 
@@ -123,9 +130,9 @@ void ControlElementSolver::SolveNextStep(double input)
 
     ConnectionLine* currentLine = firstConn;
     while(currentLine) {
-        ConnectionLine* lastLine = currentLine;
+        //ConnectionLine* lastLine = currentLine;
         currentLine = SolveNextElement(currentLine);
-        if(!currentLine) m_solutions.push_back(lastLine->GetValue());
+        //if(!currentLine) m_solutions.push_back(lastLine->GetValue());
     }
 
     bool haveUnsolvedElement = true;
@@ -152,6 +159,13 @@ void ControlElementSolver::SolveNextStep(double input)
             if(haveUnsolvedElement) break;
         }
     }
+    
+    // Set the control system step output.
+    if(m_outputControl->GetChildList().size() == 1) {
+        ConnectionLine* cLine = static_cast<ConnectionLine*>(m_outputControl->GetChildList()[0]);
+        m_solutions.push_back(cLine->GetValue());
+    }
+    else m_solutions.push_back(0.0);
 }
 
 void ControlElementSolver::FillAllConnectedChildren(ConnectionLine* parent)
