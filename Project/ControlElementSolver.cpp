@@ -51,17 +51,22 @@ ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor,
         failMessage = _("There is no output in the control system.");
     }
 
+    m_timeStep = timeStep;
+    m_integrationError = integrationError;
+    if(!InitializeValues(input, startAllZero)) {
+        fail = true;
+        failMessage = _("It was not possible to initialize the control system.");
+    }
+
     if(fail) {
         wxMessageDialog msgDialog(controlEditor, failMessage, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
+    } else {
+        m_isOK = true;
     }
-
-    m_timeStep = timeStep;
-    m_integrationError = integrationError;
-    InitializeValues(input, startAllZero);
 }
 
-void ControlElementSolver::InitializeValues(double input, bool startAllZero)
+bool ControlElementSolver::InitializeValues(double input, bool startAllZero)
 {
     // Reset Elements values
     auto elementList = m_ctrlContainer->GetControlElementsList();
@@ -88,10 +93,43 @@ void ControlElementSolver::InitializeValues(double input, bool startAllZero)
     }
 
     if(!startAllZero) {
+        // double origTimeStep = m_timeStep;
         // Calculate the steady-state results according to the input.
-        double minError = 1e-6;
-        
+        double minError = 1e-7 * m_timeStep;
+        int minIteration = 20;
+        int maxIteration = 100 / m_timeStep;
+        //double timeStep = 0.1;  // Initial value is the maximum step value.
+        /*
+        // Get the minimum time step
+        for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
+            TransferFunction* tf = *it;
+            std::vector<double> num = tf->GetNumerator();
+            std::vector<double> den = tf->GetDenominator();
+            for(unsigned int i = 0; i < num.size(); ++i) {
+                if(num[i] < timeStep) timeStep = num[i];
+            }
+            for(unsigned int i = 0; i < den.size(); ++i) {
+                if(den[i] < timeStep) timeStep = den[i];
+            }
+        }
+        m_timeStep = timeStep;*/
+
+        double prevSol = 0.0;
+        double currentSol = 1.0;
+        int numIt = 0;
+        while(std::abs(prevSol - currentSol) > minError || numIt <= minIteration) {
+            prevSol = currentSol;
+            SolveNextStep(input);
+            currentSol = GetLastSolution();
+            numIt++;
+            if(numIt >= maxIteration) return false;
+        }
+        wxMessageBox(wxString::Format("%d\n%e\n%f", numIt, minError,currentSol));
+        // m_timeStep = origTimeStep;
+        m_solutions.clear();
     }
+
+    return true;
 }
 
 void ControlElementSolver::SolveNextStep(double input)
@@ -130,9 +168,9 @@ void ControlElementSolver::SolveNextStep(double input)
 
     ConnectionLine* currentLine = firstConn;
     while(currentLine) {
-        //ConnectionLine* lastLine = currentLine;
+        // ConnectionLine* lastLine = currentLine;
         currentLine = SolveNextElement(currentLine);
-        //if(!currentLine) m_solutions.push_back(lastLine->GetValue());
+        // if(!currentLine) m_solutions.push_back(lastLine->GetValue());
     }
 
     bool haveUnsolvedElement = true;
@@ -159,13 +197,13 @@ void ControlElementSolver::SolveNextStep(double input)
             if(haveUnsolvedElement) break;
         }
     }
-    
+
     // Set the control system step output.
     if(m_outputControl->GetChildList().size() == 1) {
         ConnectionLine* cLine = static_cast<ConnectionLine*>(m_outputControl->GetChildList()[0]);
         m_solutions.push_back(cLine->GetValue());
-    }
-    else m_solutions.push_back(0.0);
+    } else
+        m_solutions.push_back(0.0);
 }
 
 void ControlElementSolver::FillAllConnectedChildren(ConnectionLine* parent)

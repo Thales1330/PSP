@@ -27,10 +27,11 @@ class ControlElementSolver
                          bool startAllZero = false,
                          double input = 0.0);
     ~ControlElementSolver() {}
-    virtual void InitializeValues(double input, bool startAllZero);
+    virtual bool InitializeValues(double input, bool startAllZero);
     virtual void SolveNextStep(double input);
     virtual std::vector<double> GetSolutions() { return m_solutions; }
     virtual double GetLastSolution() { return m_solutions[m_solutions.size() - 1]; }
+    virtual bool IsOK() const { return m_isOK; }
    protected:
     void FillAllConnectedChildren(ConnectionLine* parent);
     ConnectionLine* SolveNextElement(ConnectionLine* currentLine);
@@ -39,6 +40,7 @@ class ControlElementSolver
     double m_timeStep;
     double m_integrationError;
     std::vector<double> m_solutions;
+    bool m_isOK = false;
 
     IOControl* m_inputControl = NULL;
     IOControl* m_outputControl = NULL;
