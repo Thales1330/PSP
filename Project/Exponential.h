@@ -22,7 +22,7 @@ public:
     virtual void GetValues(double& aValue, double &bValue);
     virtual void SetValues(double aValue, double bValue);
     
-    virtual bool Solve(double input);
+    virtual bool Solve(double input, double timeStep);
     
 protected:
     double m_aValue = 0.001;

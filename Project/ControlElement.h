@@ -65,7 +65,7 @@ class ControlElement : public Element
 
     virtual bool IsSolved() const { return m_solved; }
     virtual void SetSolved(bool solved = true) { m_solved = solved; }
-    virtual bool Solve(double input);
+    virtual bool Solve(double input, double timeStep);
     virtual double GetOutput() const { return m_output; }
     virtual void SetOutput(double output) { m_output = output; }
    protected:

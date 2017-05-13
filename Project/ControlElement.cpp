@@ -119,7 +119,7 @@ void ControlElement::Move(wxPoint2DDouble position)
     }
 }
 
-bool ControlElement::Solve(double input)
+bool ControlElement::Solve(double input, double timeStep)
 {
     m_output = input;
     return true;

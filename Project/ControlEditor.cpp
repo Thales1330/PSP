@@ -619,18 +619,24 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
             case 'L': {
                 // tests
                 if(event.ControlDown() && event.ShiftDown()) {
-                    double timeStep = 1e-3;
+                    double timeStep = 1e-4;
                     double integrationError = 1e-5;
                     double simTime = 10.0;
-                    double printStep = 1e-2;
+                    double printStep = 1e-3;
+                    double pdbStep = 1e-1;
 
-                    double pulsePer = 1.0;
+                    double pulsePer = 5.0;
 
+                    wxProgressDialog pbd(_("Test"), _("Initializing..."), 100, this,
+                                         wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
+                    pbd.SetDoubleBuffered(true);
                     ControlElementSolver solver(this, timeStep, integrationError, false, 0.0);
                     if(solver.IsOK()) {
+                        bool simStopped = false;
                         double currentTime = 0.0;
                         double printTime = 0.0;
                         double pulseTime = 0.0;
+                        double pdbTime = 0.0;
                         std::vector<double> time;
                         std::vector<double> solution;
                         std::vector<double> inputV;
@@ -646,50 +652,37 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
                                 inputV.push_back(input);
                                 printTime = 0.0;
                             }
+                            if((pdbTime > pdbStep)) {
+                                if(!pbd.Update((currentTime / simTime) * 100,
+                                               wxString::Format("Time = %.2fs", currentTime))) {
+                                    pbd.Update(100);
+                                    simStopped = true;
+                                    currentTime = simTime;
+                                }
+                                pbd.Refresh();
+                                pbd.Update();
+                                pdbTime = 0.0;
+                            }
                             printTime += timeStep;
                             currentTime += timeStep;
                             pulseTime += timeStep;
+                            pdbTime += timeStep;
                         }
-                        std::vector<ElementPlotData> epdList;
-                        ElementPlotData curve1Data(_("TESTES"), ElementPlotData::CT_BUS);
-                        curve1Data.AddData(inputV, _("Entrada"));
-                        curve1Data.AddData(solution, _("Saida"));
-                        epdList.push_back(curve1Data);
+                        if(!simStopped) {
+                            std::vector<ElementPlotData> epdList;
+                            ElementPlotData curve1Data(_("TESTES"), ElementPlotData::CT_BUS);
+                            curve1Data.AddData(inputV, _("Entrada"));
+                            curve1Data.AddData(solution, _("Saida"));
+                            epdList.push_back(curve1Data);
 
-                        ChartView* cView = new ChartView(this, epdList, time);
-                        cView->Show();
+                            ChartView* cView = new ChartView(this, epdList, time);
+                            cView->Show();
+                        }
                     } else {
-                        wxMessageDialog msgDialog(this, _("it was not possible to solve the control system"),
+                        wxMessageDialog msgDialog(this, _("It was not possible to solve the control system"),
                                                   _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
                         msgDialog.ShowModal();
                     }
-
-                    /*
-                    std::vector<double> time, sinC, cosC, tgC;
-                    for(int i=0; i<360; ++i) {
-                        time.push_back(i);
-                        sinC.push_back(std::sin(wxDegToRad(i)));
-                        cosC.push_back(std::cos(wxDegToRad(i)));
-                        tgC.push_back(std::tan(wxDegToRad(i)));
-                    }
-                    std::vector<ElementPlotData> epdList;
-
-                    ElementPlotData curve1Data(_("Func. polinomiais 1"), ElementPlotData::CT_BUS);
-                    curve1Data.AddData(sinC, _("seno"));
-                    epdList.push_back(curve1Data);
-
-                    ElementPlotData curve2Data(_("Func. polinomiais 2"), ElementPlotData::CT_BUS);
-                    curve2Data.AddData(tgC, _("tangente"));
-                    epdList.push_back(curve2Data);
-
-                    ElementPlotData curve3Data(_("Func. polinomiais 3"), ElementPlotData::CT_SYNC_GENERATOR);
-                    curve3Data.AddData(sinC, _("seno"));
-                    curve3Data.AddData(cosC, _("cosseno"));
-                    curve3Data.AddData(tgC, _("tangente"));
-                    epdList.push_back(curve3Data);
-
-                    ChartView* cView = new ChartView(this, epdList, time);
-                    cView->Show();*/
                 }
             }
         }

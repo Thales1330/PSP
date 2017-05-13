@@ -19,7 +19,7 @@ class Multiplier : public ControlElement
 
     virtual void UpdatePoints();
     
-    virtual bool Solve(double input);
+    virtual bool Solve(double input, double timeStep);
 };
 
 #endif  // MULTIPLIER_H

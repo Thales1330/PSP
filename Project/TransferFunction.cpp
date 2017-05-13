@@ -248,9 +248,9 @@ void TransferFunction::Rotate(bool clockwise)
     }
 }
 
-void TransferFunction::CalculateSpaceState(double timeStep, double error)
+void TransferFunction::CalculateSpaceState(int maxIteration, double error)
 {
-    m_timeStep = timeStep;
+    m_maxIteration = maxIteration;
     m_error = error;
 
     int order = static_cast<int>(m_denominator.size());
@@ -299,9 +299,8 @@ void TransferFunction::CalculateSpaceState(double timeStep, double error)
     }
 }
 
-bool TransferFunction::Solve(double input)
+bool TransferFunction::Solve(double input, double timeStep)
 {
-    int maxIter = 100;
     int order = static_cast<int>(m_ss.A.size());
 
     std::vector<double> x;
@@ -323,7 +322,7 @@ bool TransferFunction::Solve(double input)
         double dxError = 0.0;
         for(int i = 0; i < order; i++) {
             // Trapezoidal method
-            x[i] = m_x[i] + 0.5 * m_timeStep * (m_dx[i] + dx[i]);
+            x[i] = m_x[i] + 0.5 * timeStep * (m_dx[i] + dx[i]);
 
             if(std::abs(x[i] - oldx[i]) > xError) xError = std::abs(x[i] - oldx[i]);
 
@@ -342,7 +341,7 @@ bool TransferFunction::Solve(double input)
         if(std::max(xError, dxError) < m_error) exit = true;
 
         iter++;
-        if(iter >= maxIter) return false;
+        if(iter >= m_maxIteration) return false;
     }
 
     m_output = 0.0;

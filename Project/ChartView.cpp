@@ -45,6 +45,8 @@ ChartView::~ChartView() {}
 void ChartView::SetMPWindow()
 {
     m_mpWindow = new mpWindow(this, wxID_ANY);
+    
+    m_mpWindow->SetDoubleBuffered(true);
 
     m_mpWindow->SetMargins(20, 10, 40, 60);
     m_xaxis = new mpScaleX("", mpALIGN_BOTTOM, true);

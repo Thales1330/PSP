@@ -33,8 +33,8 @@ class TransferFunction : public ControlElement
     virtual void SetDenominator(std::vector<double> denominator) { m_denominator = denominator; }
     virtual void UpdateTFText();
     virtual SpaceState GetSpaceState() { return m_ss; }
-    virtual void CalculateSpaceState(double timeStep = 1e-3, double error = 1e-3);
-    virtual bool Solve(double input);
+    virtual void CalculateSpaceState(int maxIteration = 100, double error = 1e-3);
+    virtual bool Solve(double input, double timeStep);
 
    protected:
     virtual void SetText(wxString numerator, wxString denominator);
@@ -53,8 +53,8 @@ class TransferFunction : public ControlElement
 
     std::vector<double> m_x;
     std::vector<double> m_dx;
-    double m_timeStep = 1e-3;
     double m_error = 1e-3;
+    int m_maxIteration = 100;
 };
 
 #endif  // TRANSFERFUNCTION_H

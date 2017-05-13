@@ -138,6 +138,7 @@ void Sum::UpdatePoints()
 void Sum::AddInNode()
 {
     Node* newNode = new Node(wxPoint2DDouble(0, 0), Node::NODE_IN, m_borderSize);
+    newNode->SetAngle(m_angle);
     m_nodeList.insert(m_nodeList.end() - 1, newNode);
 }
 
@@ -181,7 +182,7 @@ void Sum::Rotate(bool clockwise)
     }
 }
 
-bool Sum::Solve(double input)
+bool Sum::Solve(double input, double timeStep)
 {
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {

@@ -88,7 +88,7 @@ void Limiter::UpdatePoints()
     }
 }
 
-bool Limiter::Solve(double input)
+bool Limiter::Solve(double input, double timeStep)
 {
     m_output = input;
     if(m_output > m_upLimit) m_output = m_upLimit;

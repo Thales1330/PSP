@@ -25,7 +25,7 @@ class Gain : public ControlElement
     virtual double GetValue() const { return m_value; }
     virtual void UpdatePoints();
     
-    virtual bool Solve(double input);
+    virtual bool Solve(double input, double timeStep);
 
    protected:
     double m_value = 1.0;

@@ -84,7 +84,7 @@ void Multiplier::UpdatePoints()
     }
 }
 
-bool Multiplier::Solve(double input)
+bool Multiplier::Solve(double input, double timeStep)
 {
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {

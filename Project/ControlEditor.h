@@ -9,6 +9,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include <wx/progdlg.h>
+
 #include "IOControl.h"
 
 class FileHanding;
