@@ -2,7 +2,7 @@
 #include "ControlEditor.h"
 #include "ControlElement.h"
 
-ControlElementContainer::ControlElementContainer() {}
+ControlElementContainer::ControlElementContainer() { ClearContainer(); }
 ControlElementContainer::~ControlElementContainer() {}
 void ControlElementContainer::FillContainer(ControlEditor* editor)
 {
@@ -47,7 +47,8 @@ void ControlElementContainer::ClearContainer()
     m_tfList.clear();
 }
 
-void ControlElementContainer::FillContainer(std::vector<ControlElement*> controlElementList, std::vector<ConnectionLine*> connectionLineList)
+void ControlElementContainer::FillContainer(std::vector<ControlElement*> controlElementList,
+                                            std::vector<ConnectionLine*> connectionLineList)
 {
     m_ctrlElementsList = controlElementList;
     m_cLineList = connectionLineList;

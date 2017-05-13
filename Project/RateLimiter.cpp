@@ -13,10 +13,7 @@ RateLimiter::RateLimiter(int id) : ControlElement(id)
     m_nodeList.push_back(nodeOut);
 }
 
-RateLimiter::~RateLimiter()
-{
-}
-
+RateLimiter::~RateLimiter() {}
 void RateLimiter::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -37,7 +34,7 @@ void RateLimiter::Draw(wxPoint2DDouble translation, double scale) const
     axis.push_back(m_position + wxPoint2DDouble(0, -13));
     axis.push_back(m_position + wxPoint2DDouble(0, 13));
     DrawLine(axis, GL_LINES);
-    
+
     glLineWidth(2.0);
     std::vector<wxPoint2DDouble> limSymbol;
     limSymbol.push_back(m_position + wxPoint2DDouble(10, -10));
@@ -94,4 +91,24 @@ void RateLimiter::UpdatePoints()
         m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, 18));
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, -18));
     }
+}
+
+bool RateLimiter::Solve(double input, double timeStep)
+{
+    double rate = (input - m_output) / timeStep;
+
+    bool reachLimit = false;
+    if(rate > m_upLimit) {
+        rate = m_upLimit;
+        reachLimit = true;
+    } else if(rate < m_lowLimit) {
+        rate = m_lowLimit;
+        reachLimit = true;
+    }
+
+    if(reachLimit)
+        m_output += rate * timeStep;
+    else
+        m_output = input;
+    return true;
 }

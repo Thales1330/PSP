@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=NDSE-69
-Date                   :=03/05/2017
+Date                   :=13/05/2017
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -69,9 +69,9 @@ Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirector
 	$(IntermediateDirectory)/WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlEditorBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ChartViewBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunction.cpp$(ObjectSuffix) $(IntermediateDirectory)/ConnectionLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) $(IntermediateDirectory)/Multiplier.cpp$(ObjectSuffix) $(IntermediateDirectory)/Limiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Exponential.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IntermediateDirectory)/Gain.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControl.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElementContainer.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxMathPlot_mathplot.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GainForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControlForm.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IntermediateDirectory)/Gain.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControl.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElementContainer.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElementSolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxMathPlot_mathplot.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiterForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GainForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControlForm.cpp$(ObjectSuffix) 
 
 
 
@@ -527,6 +527,14 @@ $(IntermediateDirectory)/ControlElementContainer.cpp$(DependSuffix): ControlElem
 
 $(IntermediateDirectory)/ControlElementContainer.cpp$(PreprocessSuffix): ControlElementContainer.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ControlElementContainer.cpp$(PreprocessSuffix) ControlElementContainer.cpp
+
+$(IntermediateDirectory)/ControlElementSolver.cpp$(ObjectSuffix): ControlElementSolver.cpp $(IntermediateDirectory)/ControlElementSolver.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ControlElementSolver.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ControlElementSolver.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ControlElementSolver.cpp$(DependSuffix): ControlElementSolver.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ControlElementSolver.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ControlElementSolver.cpp$(DependSuffix) -MM ControlElementSolver.cpp
+
+$(IntermediateDirectory)/ControlElementSolver.cpp$(PreprocessSuffix): ControlElementSolver.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ControlElementSolver.cpp$(PreprocessSuffix) ControlElementSolver.cpp
 
 $(IntermediateDirectory)/wxMathPlot_mathplot.cpp$(ObjectSuffix): wxMathPlot/mathplot.cpp $(IntermediateDirectory)/wxMathPlot_mathplot.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/wxMathPlot/mathplot.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/wxMathPlot_mathplot.cpp$(ObjectSuffix) $(IncludePath)

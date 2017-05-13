@@ -54,7 +54,7 @@ class ChartView : public ChartViewBase
     mpInfoCoords* m_coords = NULL;
     mpInfoLegend* m_leg = NULL;
 
-    bool m_hideGrid = false;
+    bool m_hideGrid = true;
     bool m_showLeg = false;
     bool m_showCoords = false;
     bool m_darkTheme = false;

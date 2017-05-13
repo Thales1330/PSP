@@ -16,6 +16,7 @@ public:
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual void Rotate(bool clockwise = true);
+    virtual bool Solve(double input, double timeStep);
 
     virtual void UpdatePoints();
     

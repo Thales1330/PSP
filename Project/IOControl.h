@@ -35,6 +35,7 @@ class IOControl : public ControlElement
     virtual IOFlags GetValue() const { return m_value; }
     virtual void SetValue(IOFlags value);
     virtual int GetIOFlags() const { return m_ioFlags; }
+    virtual Node::NodeType GetType() { return m_ioNodeType; }
 
    protected:
     IOFlags m_value;

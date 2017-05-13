@@ -121,3 +121,9 @@ void ControlElement::Move(wxPoint2DDouble position)
         m_nodeList[i]->Move(position);
     }
 }
+
+bool ControlElement::Solve(double input, double timeStep)
+{
+    m_output = input;
+    return true;
+}

@@ -9,6 +9,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include <wx/progdlg.h>
+
 #include "IOControl.h"
 
 class FileHanding;
@@ -24,6 +26,8 @@ class RateLimiter;
 class Exponential;
 class Constant;
 class Gain;
+
+class ControlElementSolver;
 
 class ChartView;
 class ElementDataObject;

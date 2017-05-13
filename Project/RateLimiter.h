@@ -24,6 +24,8 @@ class RateLimiter : public ControlElement
     void SetUpLimit(double upLimit) { m_upLimit = upLimit; }
     void SetLowLimit(double lowLimit) { m_lowLimit = lowLimit; }
     
+    virtual bool Solve(double input, double timeStep);
+    
    protected:
     double m_upLimit = 5.0;
     double m_lowLimit = -5.0;

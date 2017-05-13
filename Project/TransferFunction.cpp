@@ -32,7 +32,6 @@ TransferFunction::TransferFunction(int id) : ControlElement(id)
 }
 
 TransferFunction::~TransferFunction() {}
-
 void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -88,7 +87,7 @@ void TransferFunction::SetText(wxString numerator, wxString denominator)
 
     m_width = nWidth > dWidth ? nWidth : dWidth;
     m_height = m_glStringNum->getheight() + m_glStringDen->getheight() + 2 * m_borderSize;
-    SetPosition(m_position); // Update rect properly.
+    SetPosition(m_position);  // Update rect properly.
 }
 
 wxString TransferFunction::GetSuperscriptNumber(int number)
@@ -247,4 +246,112 @@ void TransferFunction::Rotate(bool clockwise)
         Node* node = *it;
         node->Rotate(clockwise);
     }
+}
+
+void TransferFunction::CalculateSpaceState(int maxIteration, double error)
+{
+    m_maxIteration = maxIteration;
+    m_error = error;
+
+    int order = static_cast<int>(m_denominator.size());
+    std::vector<double> denominator = m_denominator;
+    std::vector<double> numerator;
+
+    int k = order;
+    for(int i = 0; i < order; i++) {
+        int numIndex = i - (order - static_cast<int>(m_numerator.size()));
+        if(numIndex < 0)
+            numerator.push_back(0.0);
+        else
+            numerator.push_back(m_numerator[numIndex]);
+        k--;
+    }
+
+    SpaceState ss;
+    for(int i = 0; i < (order - 1); i++) {
+        std::vector<double> lineA;
+        for(int j = 0; j < (order - 1); j++) {
+            if(j == i + 1)
+                lineA.push_back(1.0);
+            else
+                lineA.push_back(0.0);
+        }
+        ss.A.push_back(lineA);
+        ss.B.push_back(0.0);
+        ss.C.push_back(0.0);
+    }
+    for(int i = 0; i < order - 1; i++) {
+        ss.A[order - 2][i] = -(denominator[order - 1 - i] / denominator[0]);
+        ss.C[i] = (numerator[order - 1 - i] - denominator[order - 1 - i] * numerator[0]) / denominator[0];
+    }
+    ss.B[order - 2] = 1.0;
+    ss.D = numerator[0];
+
+    m_ss = ss;
+
+    // Reset state
+    m_x.clear();
+    m_dx.clear();
+
+    for(unsigned int i = 0; i < m_denominator.size(); ++i) {
+        m_x.push_back(0.0);
+        m_dx.push_back(0.0);
+    }
+}
+
+bool TransferFunction::Solve(double input, double timeStep)
+{
+    int order = static_cast<int>(m_ss.A.size());
+
+    std::vector<double> x;
+    std::vector<double> oldx;
+    std::vector<double> dx;
+    std::vector<double> olddx;
+    for(int i = 0; i < order; i++) {
+        x.push_back(m_x[i]);
+        oldx.push_back(m_x[i]);
+
+        dx.push_back(m_dx[i]);
+        olddx.push_back(m_dx[i]);
+    }
+
+    bool exit = false;
+    int iter = 0;
+    while(!exit) {
+        double xError = 0.0;
+        double dxError = 0.0;
+        for(int i = 0; i < order; i++) {
+            // Trapezoidal method
+            x[i] = m_x[i] + 0.5 * timeStep * (m_dx[i] + dx[i]);
+
+            if(std::abs(x[i] - oldx[i]) > xError) xError = std::abs(x[i] - oldx[i]);
+
+            oldx[i] = x[i];
+        }
+        for(int i = 0; i < order; i++) {
+            // x' = Ax + Bu
+            dx[i] = 0.0;
+            for(int j = 0; j < order; j++) dx[i] += m_ss.A[i][j] * x[j];
+            dx[i] += m_ss.B[i] * input;
+
+            if(std::abs(dx[i] - olddx[i]) > dxError) dxError = std::abs(dx[i] - olddx[i]);
+
+            olddx[i] = dx[i];
+        }
+        if(std::max(xError, dxError) < m_error) exit = true;
+
+        iter++;
+        if(iter >= m_maxIteration) return false;
+    }
+
+    m_output = 0.0;
+    for(int i = 0; i < order; i++) {
+        m_output += m_ss.C[i] * x[i];
+        m_x[i] = x[i];
+        m_dx[i] = dx[i];
+    }
+
+    m_output += m_ss.D * input;
+
+    return true;
 }

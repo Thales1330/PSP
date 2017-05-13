@@ -29,6 +29,9 @@ class ConnectionLine : public ControlElement
     virtual bool SetParentLine(ConnectionLine* parent);
 
     virtual std::vector<ConnectionLine*> GetLineChildList() const;
+    
+    virtual double GetValue() const { return m_value; }
+    virtual void SetValue(double value) { m_value = value; }
 
    protected:
     double m_lineOffset = 0.0;
@@ -38,6 +41,8 @@ class ConnectionLine : public ControlElement
 
     ConnectionLineType m_type = ELEMENT_ELEMENT;
     ConnectionLine* m_parentLine = NULL;
+    
+    double m_value;
 };
 
 #endif  // CONNECTIONLINE_H
