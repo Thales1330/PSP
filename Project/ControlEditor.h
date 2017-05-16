@@ -12,6 +12,7 @@
 #include <wx/progdlg.h>
 
 #include "IOControl.h"
+#include "ControlSystemTest.h"
 
 class FileHanding;
 class Camera;
@@ -28,6 +29,7 @@ class Constant;
 class Gain;
 
 class ControlElementSolver;
+class ControlElementContainer;
 
 class ChartView;
 class ElementDataObject;
@@ -92,8 +94,12 @@ class ControlEditor : public ControlEditorBase
     virtual std::vector<ControlElement*> GetControlElementList() const { return m_elementList; }
     virtual void SetElementsList(std::vector<ControlElement*> elementList) { m_elementList = elementList; }
     virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
-
+    virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
+    virtual void ConsolidateTexts();
    protected:
+    virtual void OnClose(wxCloseEvent& event);
+    virtual void OnTestClick(wxCommandEvent& event);
+    virtual void OnButtonOKClick(wxCommandEvent& event) { Close(); }
     virtual void OnImportClick(wxCommandEvent& event);
     virtual void OnExportClick(wxCommandEvent& event);
     virtual void OnKeyDown(wxKeyEvent& event);
@@ -124,9 +130,17 @@ class ControlEditor : public ControlEditorBase
     std::vector<ControlElement*> m_elementList;
     std::vector<ConnectionLine*> m_connectionList;
 
+    ControlElementContainer* m_ctrlContainer = NULL;
+
     bool m_firstDraw = true;
     int m_ioFlags;
-    
+
     int m_lastElementID = 0;
+
+    int m_inputType = 0;
+    double m_startTime = 1.0;
+    double m_slope = 1.0;
+    double m_timeStep = 1e-4;
+    double m_simTime = 10.0;
 };
 #endif  // CONTROLEDITOR_H

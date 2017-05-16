@@ -19,7 +19,14 @@
 #include <wx/aui/dockart.h>
 #include <wx/panel.h>
 #include <wx/glcanvas.h>
-#include <wx/statusbr.h>
+#include <wx/button.h>
+#include <wx/dialog.h>
+#include <wx/notebook.h>
+#include <wx/imaglist.h>
+#include <wx/stattext.h>
+#include <wx/choice.h>
+#include <wx/arrstr.h>
+#include <wx/textctrl.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -50,10 +57,13 @@ protected:
     wxPanel* m_panelControlElements;
     wxPanel* m_panelWorkspace;
     wxGLCanvas* m_glCanvas;
-    wxStatusBar* m_statusBarMain;
+    wxPanel* m_panelButtons;
+    wxButton* m_buttonTest;
+    wxButton* m_buttonOK;
 
 protected:
     virtual void OnKeyDown(wxKeyEvent& event) { event.Skip(); }
+    virtual void OnClose(wxCloseEvent& event) { event.Skip(); }
     virtual void OnImportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnExportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
@@ -65,16 +75,66 @@ protected:
     virtual void OnMouseMotion(wxMouseEvent& event) { event.Skip(); }
     virtual void OnScroll(wxMouseEvent& event) { event.Skip(); }
     virtual void OnIdle(wxIdleEvent& event) { event.Skip(); }
+    virtual void OnTestClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
 
 public:
     wxToolBar* GetToolbarMain() { return m_toolbarMain; }
     wxPanel* GetPanelControlElements() { return m_panelControlElements; }
     wxGLCanvas* GetGlCanvas() { return m_glCanvas; }
     wxPanel* GetPanelWorkspace() { return m_panelWorkspace; }
+    wxButton* GetButtonTest() { return m_buttonTest; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxPanel* GetPanelButtons() { return m_panelButtons; }
     wxAuiManager* GetAuimgr() { return m_auimgr; }
-    wxStatusBar* GetStatusBarMain() { return m_statusBarMain; }
     ControlEditorBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Control editor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxDEFAULT_FRAME_STYLE);
     virtual ~ControlEditorBase();
+};
+
+
+class ControlSystemTestBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextInput;
+    wxChoice* m_choiceInput;
+    wxStaticText* m_staticTextStartTime;
+    wxTextCtrl* m_textCtrlStartTime;
+    wxStaticText* m_staticTextSec_1;
+    wxStaticText* m_staticTextSlope;
+    wxTextCtrl* m_textCtrlSlope;
+    wxStaticText* m_staticTextStep;
+    wxTextCtrl* m_textCtrlTimeStep;
+    wxStaticText* m_staticTextSimTime;
+    wxTextCtrl* m_textCtrlSimTime;
+    wxStaticText* m_staticTextSec_2;
+    wxButton* m_buttonRun;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnRunButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextInput() { return m_staticTextInput; }
+    wxChoice* GetChoiceInput() { return m_choiceInput; }
+    wxStaticText* GetStaticTextStartTime() { return m_staticTextStartTime; }
+    wxTextCtrl* GetTextCtrlStartTime() { return m_textCtrlStartTime; }
+    wxStaticText* GetStaticTextSec_1() { return m_staticTextSec_1; }
+    wxStaticText* GetStaticTextSlope() { return m_staticTextSlope; }
+    wxTextCtrl* GetTextCtrlSlope() { return m_textCtrlSlope; }
+    wxStaticText* GetStaticTextStep() { return m_staticTextStep; }
+    wxTextCtrl* GetTextCtrlTimeStep() { return m_textCtrlTimeStep; }
+    wxStaticText* GetStaticTextSimTime() { return m_staticTextSimTime; }
+    wxTextCtrl* GetTextCtrlSimTime() { return m_textCtrlSimTime; }
+    wxStaticText* GetStaticTextSec_2() { return m_staticTextSec_2; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonRun() { return m_buttonRun; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    ControlSystemTestBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Control system test"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~ControlSystemTestBase();
 };
 
 #endif

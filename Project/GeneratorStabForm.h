@@ -5,6 +5,8 @@
 
 class SwitchingForm;
 class SyncGenerator;
+class ControlEditor;
+class ControlElementContainer;
 
 class GeneratorStabForm : public GeneratorStabFormBase
 {

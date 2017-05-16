@@ -98,7 +98,6 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     m_panelWorkspace = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     
     m_auimgr->AddPane(m_panelWorkspace, wxAuiPaneInfo().Direction(wxAUI_DOCK_CENTER).Layer(0).Row(0).Position(0).BestSize(100,100).MinSize(100,100).MaxSize(100,100).Fixed().CaptionVisible(false).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
-    m_auimgr->Update();
     
     wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
     m_panelWorkspace->SetSizer(boxSizerLvl2_1);
@@ -114,9 +113,23 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     
     boxSizerLvl2_1->Add(m_glCanvas, 1, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_statusBarMain = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE);
-    m_statusBarMain->SetFieldsCount(1);
-    this->SetStatusBar(m_statusBarMain);
+    m_panelButtons = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    
+    m_auimgr->AddPane(m_panelButtons, wxAuiPaneInfo().Direction(wxAUI_DOCK_BOTTOM).Layer(0).Row(0).Position(0).BestSize(100,-1).MinSize(100,-1).MaxSize(100,-1).Fixed().CaptionVisible(false).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
+    m_auimgr->Update();
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    m_panelButtons->SetSizer(boxSizerBottomButtons);
+    
+    m_buttonTest = new wxButton(m_panelButtons, wxID_ANY, _("Test system..."), wxDefaultPosition, wxDLG_UNIT(m_panelButtons, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonTest, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(m_panelButtons, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(m_panelButtons, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
     
     SetName(wxT("ControlEditorBase"));
     SetSize(800,600);
@@ -137,6 +150,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
 #endif
     // Connect events
     this->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
+    this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(ControlEditorBase::OnClose), NULL, this);
     this->Connect(ID_RIBBON_IMPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnImportClick), NULL, this);
     this->Connect(ID_RIBBON_EXPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Connect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
@@ -149,12 +163,15 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     m_glCanvas->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditorBase::OnScroll), NULL, this);
     m_glCanvas->Connect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorBase::OnIdle), NULL, this);
     m_glCanvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
+    m_buttonTest->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlEditorBase::OnTestClick), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlEditorBase::OnButtonOKClick), NULL, this);
     
 }
 
 ControlEditorBase::~ControlEditorBase()
 {
     this->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
+    this->Disconnect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(ControlEditorBase::OnClose), NULL, this);
     this->Disconnect(ID_RIBBON_IMPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnImportClick), NULL, this);
     this->Disconnect(ID_RIBBON_EXPORT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ControlEditorBase::OnExportClick), NULL, this);
     m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorBase::OnPaint), NULL, this);
@@ -167,8 +184,178 @@ ControlEditorBase::~ControlEditorBase()
     m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditorBase::OnScroll), NULL, this);
     m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorBase::OnIdle), NULL, this);
     m_glCanvas->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditorBase::OnKeyDown), NULL, this);
+    m_buttonTest->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlEditorBase::OnTestClick), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlEditorBase::OnButtonOKClick), NULL, this);
     
     m_auimgr->UnInit();
     delete m_auimgr;
 
+}
+
+ControlSystemTestBase::ControlSystemTestBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC870InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    m_staticTextInput = new wxStaticText(m_panelGeneral, wxID_ANY, _("Input type:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextInput, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceInputArr;
+    m_choiceInputArr.Add(wxT("Step"));
+    m_choiceInputArr.Add(wxT("Ramp"));
+    m_choiceInputArr.Add(wxT("Quadratic"));
+    m_choiceInput = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceInputArr, 0);
+    m_choiceInput->SetSelection(0);
+    
+    boxSizerLvl2_1->Add(m_choiceInput, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl3_1 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_1->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextStartTime = new wxStaticText(m_panelGeneral, wxID_ANY, _("Start time"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextStartTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_1->Add(boxSizerLvl5_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlStartTime = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("1,0"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlStartTime->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_1->Add(m_textCtrlStartTime, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextSec_1 = new wxStaticText(m_panelGeneral, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_1->Add(m_staticTextSec_1, 0, wxRIGHT|wxTOP|wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSlope = new wxStaticText(m_panelGeneral, wxID_ANY, _("Slope"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextSlope, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlSlope = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("1,0"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSlope->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_2->Add(m_textCtrlSlope, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextStep = new wxStaticText(m_panelGeneral, wxID_ANY, _("Time step"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_3->Add(m_staticTextStep, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlTimeStep = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("0,0001"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTimeStep->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_3->Add(m_textCtrlTimeStep, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl3_1->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSimTime = new wxStaticText(m_panelGeneral, wxID_ANY, _("Simulation time"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_4->Add(m_staticTextSimTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_4->Add(boxSizerLvl5_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSimTime = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("10,0"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSimTime->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_2->Add(m_textCtrlSimTime, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextSec_2 = new wxStaticText(m_panelGeneral, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_2->Add(m_staticTextSec_2, 0, wxRIGHT|wxTOP|wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBotomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBotomButtons, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonRun = new wxButton(this, wxID_ANY, _("Run"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBotomButtons->Add(m_buttonRun, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBotomButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("ControlSystemTestBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonRun->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlSystemTestBase::OnRunButtonClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlSystemTestBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+ControlSystemTestBase::~ControlSystemTestBase()
+{
+    m_buttonRun->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlSystemTestBase::OnRunButtonClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ControlSystemTestBase::OnCancelButtonClick), NULL, this);
+    
 }

@@ -89,6 +89,7 @@
         <File Name="ConstantForm.cpp"/>
         <File Name="GainForm.cpp"/>
         <File Name="IOControlForm.cpp"/>
+        <File Name="ControlSystemTest.cpp"/>
       </VirtualDirectory>
       <File Name="ChartView.cpp"/>
     </VirtualDirectory>
@@ -181,6 +182,7 @@
         <File Name="ConstantForm.h"/>
         <File Name="GainForm.h"/>
         <File Name="IOControlForm.h"/>
+        <File Name="ControlSystemTest.h"/>
       </VirtualDirectory>
       <File Name="ChartView.h"/>
     </VirtualDirectory>

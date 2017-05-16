@@ -1,7 +1,7 @@
 #ifndef CONTROLELEMENTSOLVER_H
 #define CONTROLELEMENTSOLVER_H
 
-#include <stddef.h>  // NULL definition
+#include <wx/window.h>
 #include <vector>
 
 class ControlElementContainer;
@@ -24,8 +24,14 @@ class ControlElementSolver
     ControlElementSolver(ControlEditor* controlEditor,
                          double timeStep = 1e-3,
                          double integrationError = 1e-3,
-                         bool startAllZero = false,
+                         bool startAllZero = true,
                          double input = 0.0);
+    ControlElementSolver(ControlElementContainer* ctrlContainer,
+                         double timeStep = 1e-3,
+                         double integrationError = 1e-3,
+                         bool startAllZero = true,
+                         double input = 0.0,
+                         wxWindow* parent = NULL);
     ~ControlElementSolver() {}
     virtual bool InitializeValues(double input, bool startAllZero);
     virtual void SolveNextStep(double input);
@@ -33,6 +39,7 @@ class ControlElementSolver
     virtual double GetLastSolution() { return m_solutions[m_solutions.size() - 1]; }
     virtual bool IsOK() const { return m_isOK; }
    protected:
+    void Initialize(wxWindow* parent, double timeStep, double integrationError, bool startAllZero, double input);
     void FillAllConnectedChildren(ConnectionLine* parent);
     ConnectionLine* SolveNextElement(ConnectionLine* currentLine);
 

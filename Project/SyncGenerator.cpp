@@ -1,5 +1,6 @@
 #include "SyncMachineForm.h"
 #include "SyncGenerator.h"
+#include "ControlElementContainer.h"
 
 SyncGenerator::SyncGenerator()
     : Machines()

@@ -96,6 +96,7 @@ void ChartView::SetTreectrl()
     rootElementName[ElementPlotData::CT_SYNC_COMPENSATOR] = _("Synchronous compensator");
     rootElementName[ElementPlotData::CT_SYNC_GENERATOR] = _("Synchronous generator");
     rootElementName[ElementPlotData::CT_TRANSFORMER] = _("Transformer");
+    rootElementName[ElementPlotData::CT_TEST] = _("Test");
 
     wxTreeItemId rootItemID[ElementPlotData::NUM_ELEMENTS];
 

@@ -21,7 +21,22 @@ ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor,
 {
     m_ctrlContainer = new ControlElementContainer();
     m_ctrlContainer->FillContainer(controlEditor);
+    Initialize(controlEditor, timeStep, integrationError, startAllZero, input);
+}
 
+ControlElementSolver::ControlElementSolver(ControlElementContainer* ctrlContainer,
+                                           double timeStep,
+                                           double integrationError,
+                                           bool startAllZero,
+                                           double input,
+                                           wxWindow* parent)
+{
+    m_ctrlContainer = ctrlContainer;
+    Initialize(parent, timeStep, integrationError, startAllZero, input);
+}
+
+void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double integrationError, bool startAllZero, double input)
+{
     // Check if the sistem have one input and one output
     bool fail = false;
     wxString failMessage = "";
@@ -67,7 +82,7 @@ ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor,
     }
 
     if(fail) {
-        wxMessageDialog msgDialog(controlEditor, failMessage, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        wxMessageDialog msgDialog(parent, failMessage, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     } else {
         m_isOK = true;

@@ -49,6 +49,7 @@ class ElementPlotData
         CT_SHUNT_INDUCTOR,
         CT_SHUNT_CAPACITOR,
         CT_LOAD,
+        CT_TEST,
         NUM_ELEMENTS,
         CT_TIME
     };
@@ -65,6 +66,7 @@ class ElementPlotData
     int GetElementDataNumber() const { return static_cast<int>(m_elementData.size()); }
     std::vector<double> GetValues(int index) const { return m_elementData[index]->GetValues(); }
     void SetValues(int index, std::vector<double> values) { m_elementData[index]->SetValues(values); }
+    void SetPlot(int index, bool plot = true) { m_elementData[index]->SetPlot(plot); }
     wxString GetDataName(int index) const { return m_elementData[index]->GetName(); }
     void SetDataName(int index, wxString name) { m_elementData[index]->SetName(name); }
     wxColour GetColour(int index) const { return m_elementData[index]->GetColour(); }

@@ -55,7 +55,7 @@ class ChartView : public ChartViewBase
     mpInfoLegend* m_leg = NULL;
 
     bool m_hideGrid = true;
-    bool m_showLeg = false;
+    bool m_showLeg = true;
     bool m_showCoords = false;
     bool m_darkTheme = false;
 

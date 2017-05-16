@@ -4,6 +4,7 @@
 #include "Machines.h"
 
 class SyncMachineForm;
+class ControlElementContainer;
 
 struct SyncGeneratorElectricalData {
     // General
@@ -59,6 +60,10 @@ struct SyncGeneratorElectricalData {
     double subXq = 0.0;
     double subTd0 = 0.0;
     double subTq0 = 0.0;
+    
+    //Control
+    ControlElementContainer* avr = NULL;
+    ControlElementContainer* speedGov = NULL;
 };
 
 class SyncGenerator : public Machines
