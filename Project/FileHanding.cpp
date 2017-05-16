@@ -497,6 +497,12 @@ void FileHanding::SaveProject(wxFileName path)
         auto subTq0 = AppendNode(doc, stability, "SubTq0");
         SetNodeValue(doc, subTq0, data.subTq0);
 
+        auto avr = AppendNode(doc, stability, "AVR");
+        if(data.avr) SaveControlElements(doc, avr, data.avr);
+
+        auto speedGov = AppendNode(doc, stability, "SpeedGovernor");
+        if(data.speedGov) SaveControlElements(doc, speedGov, data.speedGov);
+
         auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = syncGenerator->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
@@ -1358,6 +1364,14 @@ bool FileHanding::OpenProject(wxFileName path)
         data.subTd0 = GetNodeValueDouble(stability, "SubTd0");
         data.subTq0 = GetNodeValueDouble(stability, "SubTq0");
 
+        /*auto avr = stability->first_node("AVR");
+        if(!avr) return false;
+        if(!OpenControlElements(doc, avr, data.avr)) return false;
+
+        auto speedGov = stability->first_node("SpeedGovernor");
+        if(speedGov) return false;
+        if(!OpenControlElements(doc, speedGov, data.speedGov)) return false;*/
+
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
@@ -1852,7 +1866,7 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         auto value = AppendNode(doc, gainNode, "Value");
         SetNodeValue(doc, value, gain->GetValue());
     }  //}
-    
+
     //{ IO
     auto iosNode = AppendNode(doc, elementsNode, "IOList");
     auto ioList = ctrlContainer->GetIOControlList();
@@ -1883,8 +1897,8 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         SetNodeValue(doc, value, io->GetValue());
         auto ioFlags = AppendNode(doc, ioNode, "IOFlags");
         SetNodeValue(doc, ioFlags, io->GetIOFlags());
-    }//}
-    
+    }  //}
+
     //{ Limiter
     auto limitersNode = AppendNode(doc, elementsNode, "LimiterList");
     auto limiterList = ctrlContainer->GetLimiterList();
@@ -1915,8 +1929,8 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         SetNodeValue(doc, upLimit, limiter->GetUpLimit());
         auto lowLimit = AppendNode(doc, limiterNode, "LowerLimit");
         SetNodeValue(doc, lowLimit, limiter->GetLowLimit());
-    }//}
-    
+    }  //}
+
     //{ Multiplier
     auto multipliersNode = AppendNode(doc, elementsNode, "MultiplierList");
     auto multiplierList = ctrlContainer->GetMultiplierList();
@@ -1941,8 +1955,8 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         // Nodes
         auto nodeList = AppendNode(doc, multiplierNode, "NodeList");
         SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
-    } //}
-    
+    }  //}
+
     //{ Rate limiter
     auto rateLimitersNode = AppendNode(doc, elementsNode, "RateLimiterList");
     auto rateLimiterList = ctrlContainer->GetRateLimiterList();
@@ -1973,8 +1987,8 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         SetNodeValue(doc, upLimit, rateLimiter->GetUpLimit());
         auto lowLimit = AppendNode(doc, rateLimiterNode, "LowerLimit");
         SetNodeValue(doc, lowLimit, rateLimiter->GetLowLimit());
-    } //}
-    
+    }  //}
+
     //{ Sum
     auto sumsNode = AppendNode(doc, elementsNode, "SumList");
     auto sumList = ctrlContainer->GetSumList();
@@ -1999,17 +2013,17 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         // Nodes
         auto nodeList = AppendNode(doc, sumNode, "NodeList");
         SaveControlNodes(doc, nodeList, sum->GetNodeList());
-        
-        //Control properties
+
+        // Control properties
         auto signsNode = AppendNode(doc, sumNode, "Signs");
         auto signs = sum->GetSignalList();
         for(int i = 0; i < (int)signs.size(); ++i) {
             auto value = AppendNode(doc, signsNode, "Value");
             SetNodeValue(doc, value, static_cast<int>(signs[i]));
         }
-        
-    } //}
-    
+
+    }  //}
+
     //{ Transfer function
     auto tfsNode = AppendNode(doc, elementsNode, "TransferFunctionList");
     auto tfList = ctrlContainer->GetTFList();
@@ -2034,8 +2048,8 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         // Nodes
         auto nodeList = AppendNode(doc, tfNode, "NodeList");
         SaveControlNodes(doc, nodeList, tf->GetNodeList());
-        
-        //Control properties
+
+        // Control properties
         auto numeratorNode = AppendNode(doc, tfNode, "Numerator");
         auto numerator = tf->GetNumerator();
         for(int i = 0; i < (int)numerator.size(); ++i) {
@@ -2048,7 +2062,7 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
             auto value = AppendNode(doc, denominatorNode, "Value");
             SetNodeValue(doc, value, denominator[i]);
         }
-    } //}
+    }  //}
 
     //{ Connection line
     auto cLinesNode = AppendNode(doc, elementsNode, "ConnectionList");
@@ -2093,7 +2107,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 {
     std::vector<ControlElement*> elementList;
     std::vector<ConnectionLine*> connectionList;
-    
+
     //{ Constant
     auto constListNode = elementsNode->first_node("ConstantList");
     if(!constListNode) return false;
@@ -2112,27 +2126,27 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         double value = GetNodeValueDouble(constNode, "Value");
-        
+
         constant->SetWidth(width);
         constant->SetHeight(height);
         constant->SetAngle(angle);
         constant->SetPosition(wxPoint2DDouble(posX, posY));
         constant->StartMove(constant->GetPosition());
-        
+
         constant->SetValue(value);
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(constNode, nodeVector)) return false;
-        
+
         constant->SetNodeList(nodeVector);
         constant->UpdatePoints();
         elementList.push_back(constant);
 
         constNode = constNode->next_sibling("Constant");
-    } //}
-    
+    }  //}
+
     //{ Exponential
     auto expListNode = elementsNode->first_node("ExponentialList");
     if(!expListNode) return false;
@@ -2151,7 +2165,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         auto value = expNode->first_node("Value");
         double a = GetNodeValueDouble(value, "A");
         double b = GetNodeValueDouble(value, "B");
@@ -2161,19 +2175,19 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         exponential->SetAngle(angle);
         exponential->SetPosition(wxPoint2DDouble(posX, posY));
         exponential->StartMove(exponential->GetPosition());
-        
+
         exponential->SetValues(a, b);
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(expNode, nodeVector)) return false;
-        
+
         exponential->SetNodeList(nodeVector);
         exponential->UpdatePoints();
         elementList.push_back(exponential);
 
         expNode = expNode->next_sibling("Exponential");
-    } //}
-    
+    }  //}
+
     //{ Gain
     auto gainListNode = elementsNode->first_node("GainList");
     if(!gainListNode) return false;
@@ -2192,7 +2206,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         double value = GetNodeValueDouble(gainNode, "Value");
 
         gain->SetWidth(width);
@@ -2204,7 +2218,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(gainNode, nodeVector)) return false;
-        
+
         gain->SetNodeList(nodeVector);
         gain->UpdatePoints();
         elementList.push_back(gain);
@@ -2212,7 +2226,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         gainNode = gainNode->next_sibling("Gain");
     }
     //}
-    
+
     //{ IO
     auto ioListNode = elementsNode->first_node("IOList");
     if(!ioListNode) return false;
@@ -2233,12 +2247,12 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(ioNode, nodeVector)) return false;
-        
+
         IOControl::IOFlags value = static_cast<IOControl::IOFlags>(GetNodeValueInt(ioNode, "Value"));
         int ioFlags = GetNodeValueInt(ioNode, "IOFlags");
-        
+
         IOControl* io = new IOControl(ioFlags, id);
-        
+
         io->SetWidth(width);
         io->SetHeight(height);
         io->SetAngle(angle);
@@ -2252,7 +2266,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         ioNode = ioNode->next_sibling("IO");
     }
     //}
-    
+
     //{ Limiter
     auto limiterListNode = elementsNode->first_node("LimiterList");
     if(!limiterListNode) return false;
@@ -2271,20 +2285,20 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         double upLimit = GetNodeValueDouble(limiterNode, "UpperLimit");
         double lowLimit = GetNodeValueDouble(limiterNode, "LowerLimit");
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(limiterNode, nodeVector)) return false;
-        
+
         limiter->SetWidth(width);
         limiter->SetHeight(height);
         limiter->SetAngle(angle);
         limiter->SetPosition(wxPoint2DDouble(posX, posY));
         limiter->SetUpLimit(upLimit);
         limiter->SetLowLimit(lowLimit);
-        
+
         limiter->StartMove(limiter->GetPosition());
         limiter->SetNodeList(nodeVector);
         limiter->UpdatePoints();
@@ -2293,7 +2307,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         limiterNode = limiterNode->next_sibling("Limiter");
     }
     //}
-    
+
     //{ Multiplier
     auto multiplierListNode = elementsNode->first_node("MultiplierList");
     if(!multiplierListNode) return false;
@@ -2315,12 +2329,12 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(multiplierNode, nodeVector)) return false;
-        
+
         multiplier->SetWidth(width);
         multiplier->SetHeight(height);
         multiplier->SetAngle(angle);
         multiplier->SetPosition(wxPoint2DDouble(posX, posY));
-        
+
         multiplier->StartMove(multiplier->GetPosition());
         multiplier->SetNodeList(nodeVector);
         multiplier->UpdatePoints();
@@ -2329,7 +2343,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         multiplierNode = multiplierNode->next_sibling("Multiplier");
     }
     //}
-    
+
     //{ Rate limiter
     auto rateLimiterListNode = elementsNode->first_node("RateLimiterList");
     if(!rateLimiterListNode) return false;
@@ -2348,20 +2362,20 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         double upLimit = GetNodeValueDouble(rateLimiterNode, "UpperLimit");
         double lowLimit = GetNodeValueDouble(rateLimiterNode, "LowerLimit");
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(rateLimiterNode, nodeVector)) return false;
-        
+
         limiter->SetWidth(width);
         limiter->SetHeight(height);
         limiter->SetAngle(angle);
         limiter->SetPosition(wxPoint2DDouble(posX, posY));
         limiter->SetUpLimit(upLimit);
         limiter->SetLowLimit(lowLimit);
-        
+
         limiter->StartMove(limiter->GetPosition());
         limiter->SetNodeList(nodeVector);
         limiter->UpdatePoints();
@@ -2370,7 +2384,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         rateLimiterNode = rateLimiterNode->next_sibling("RateLimiter");
     }
     //}
-    
+
     //{ Sum
     auto sumListNode = elementsNode->first_node("SumList");
     if(!sumListNode) return false;
@@ -2389,7 +2403,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         std::vector<Sum::Signal> signs;
         auto signsNode = sumNode->first_node("Signs");
         auto sign = signsNode->first_node("Value");
@@ -2403,12 +2417,12 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(sumNode, nodeVector)) return false;
-        
+
         sum->SetWidth(width);
         sum->SetHeight(height);
         sum->SetAngle(angle);
         sum->SetPosition(wxPoint2DDouble(posX, posY));
-        
+
         sum->StartMove(sum->GetPosition());
         sum->SetNodeList(nodeVector);
         sum->UpdatePoints();
@@ -2417,7 +2431,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         sumNode = sumNode->next_sibling("Sum");
     }
     //}
-    
+
     //{ Transfer function
     auto tfListNode = elementsNode->first_node("TransferFunctionList");
     if(!tfListNode) return false;
@@ -2436,7 +2450,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         double width = GetNodeValueDouble(size, "Width");
         double height = GetNodeValueDouble(size, "Height");
         double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        
+
         std::vector<double> numerator, denominator;
         auto numeratorNode = tfNode->first_node("Numerator");
         auto nValue = numeratorNode->first_node("Value");
@@ -2453,24 +2467,24 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             wxString(dValue->value()).ToCDouble(&value);
             denominator.push_back(value);
             dValue = dValue->next_sibling("Value");
-        }        
+        }
 
         std::vector<Node*> nodeVector;
         if(!OpenControlNodeList(tfNode, nodeVector)) return false;
-        
+
         tf->SetWidth(width);
         tf->SetHeight(height);
         tf->SetAngle(angle);
         tf->SetPosition(wxPoint2DDouble(posX, posY));
-        
+
         tf->SetNumerator(numerator);
         tf->SetDenominator(denominator);
-        
+
         tf->StartMove(tf->GetPosition());
         tf->SetNodeList(nodeVector);
-        
+
         tf->UpdateTFText();
-        
+
         elementList.push_back(tf);
 
         tfNode = tfNode->next_sibling("TransferFunction");
@@ -2621,7 +2635,8 @@ void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
                                    const char* atrName,
                                    int value)
 {
-    node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value).mb_str())));
+    node->append_attribute(
+        doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value).mb_str())));
 }
 
 void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,

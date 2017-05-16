@@ -156,6 +156,13 @@ Element* SyncGenerator::GetCopy()
     data.avr = avrCopy;
     
     //Copy Speed Governor
+    cLineList.clear();
+    elementList.clear();
+    m_electricalData.speedGov->GetContainerCopy(elementList, cLineList);
+    
+    ControlElementContainer* speedGovCopy = new ControlElementContainer();
+    speedGovCopy->FillContainer(elementList, cLineList);
+    data.speedGov = speedGovCopy;
     
     copy->SetElectricalData(data);
     return copy;
