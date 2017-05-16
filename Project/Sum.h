@@ -27,6 +27,8 @@ public:
     virtual void UpdatePoints();
     void AddInNode();
     void RemoveInNode();
+    
+    virtual Element* GetCopy();
 
 protected:
     std::vector<Signal> m_signalList;

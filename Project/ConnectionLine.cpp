@@ -184,3 +184,10 @@ void ConnectionLine::RemoveParent(Element* parent)
         if(element == parent) m_parentList.erase(it--);
     }
 }
+
+Element* ConnectionLine::GetCopy()
+{
+    ConnectionLine* copy = new ConnectionLine();
+    *copy = *this;
+    return copy;
+}

@@ -62,7 +62,8 @@ class ControlElement : public Element
     void SetNodeList(std::vector<Node*> nodeList) { m_nodeList = nodeList; }
     std::vector<Node*> GetNodeList() const { return m_nodeList; }
     virtual void DrawNodes() const;
-
+    virtual void ReplaceNode(Node* oldNode, Node* newNode);
+    virtual void UpdateText() {}
     virtual bool IsSolved() const { return m_solved; }
     virtual void SetSolved(bool solved = true) { m_solved = solved; }
     virtual bool Solve(double input, double timeStep);

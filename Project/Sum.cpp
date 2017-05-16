@@ -217,3 +217,10 @@ bool Sum::Solve(double input, double timeStep)
     }
     return true;
 }
+
+Element* Sum::GetCopy()
+{
+    Sum* copy = new Sum(m_elementID);
+    *copy = *this;
+    return copy;
+}

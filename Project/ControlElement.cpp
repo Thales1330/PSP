@@ -15,11 +15,10 @@ Node::Node(wxPoint2DDouble position, NodeType nodeType, double borderSize)
 }
 
 Node::~Node() {}
-
 void Node::SetPosition(wxPoint2DDouble position)
 {
-    m_rect = wxRect2DDouble(
-        position.m_x - m_rect.m_width / 2, position.m_y - m_rect.m_height / 2, m_rect.m_width, m_rect.m_height);
+    m_rect = wxRect2DDouble(position.m_x - m_rect.m_width / 2, position.m_y - m_rect.m_height / 2, m_rect.m_width,
+                            m_rect.m_height);
     m_triPts[0] = GetPosition() + wxPoint2DDouble(-m_radius - m_rect.GetSize().GetWidth() / 2, m_radius);
     m_triPts[1] = GetPosition() + wxPoint2DDouble(-m_radius - m_rect.GetSize().GetWidth() / 2, -m_radius);
     m_triPts[2] = GetPosition() + wxPoint2DDouble(-m_radius + 1, 0);
@@ -35,7 +34,6 @@ void Node::StartMove(wxPoint2DDouble position)
 }
 
 void Node::Move(wxPoint2DDouble position) { SetPosition(m_movePos + position - m_moveStartPt); }
-
 wxPoint2DDouble Node::GetPosition() const
 {
     return m_rect.GetPosition() + wxPoint2DDouble(m_rect.GetSize().GetWidth() / 2, m_rect.GetSize().GetHeight() / 2);
@@ -47,17 +45,17 @@ void Node::RotateTriPt(double angle)
     wxPoint2DDouble rectCenter =
         m_rect.GetPosition() + wxPoint2DDouble(m_rect.GetSize().GetWidth() / 2.0, m_rect.GetSize().GetHeight() / 2.0);
     m_triPts[0] = wxPoint2DDouble(std::cos(radAngle) * (m_triPts[0].m_x - rectCenter.m_x) -
-            std::sin(radAngle) * (m_triPts[0].m_y - rectCenter.m_y) + rectCenter.m_x,
-        std::sin(radAngle) * (m_triPts[0].m_x - rectCenter.m_x) +
-            std::cos(radAngle) * (m_triPts[0].m_y - rectCenter.m_y) + rectCenter.m_y);
+                                      std::sin(radAngle) * (m_triPts[0].m_y - rectCenter.m_y) + rectCenter.m_x,
+                                  std::sin(radAngle) * (m_triPts[0].m_x - rectCenter.m_x) +
+                                      std::cos(radAngle) * (m_triPts[0].m_y - rectCenter.m_y) + rectCenter.m_y);
     m_triPts[1] = wxPoint2DDouble(std::cos(radAngle) * (m_triPts[1].m_x - rectCenter.m_x) -
-            std::sin(radAngle) * (m_triPts[1].m_y - rectCenter.m_y) + rectCenter.m_x,
-        std::sin(radAngle) * (m_triPts[1].m_x - rectCenter.m_x) +
-            std::cos(radAngle) * (m_triPts[1].m_y - rectCenter.m_y) + rectCenter.m_y);
+                                      std::sin(radAngle) * (m_triPts[1].m_y - rectCenter.m_y) + rectCenter.m_x,
+                                  std::sin(radAngle) * (m_triPts[1].m_x - rectCenter.m_x) +
+                                      std::cos(radAngle) * (m_triPts[1].m_y - rectCenter.m_y) + rectCenter.m_y);
     m_triPts[2] = wxPoint2DDouble(std::cos(radAngle) * (m_triPts[2].m_x - rectCenter.m_x) -
-            std::sin(radAngle) * (m_triPts[2].m_y - rectCenter.m_y) + rectCenter.m_x,
-        std::sin(radAngle) * (m_triPts[2].m_x - rectCenter.m_x) +
-            std::cos(radAngle) * (m_triPts[2].m_y - rectCenter.m_y) + rectCenter.m_y);
+                                      std::sin(radAngle) * (m_triPts[2].m_y - rectCenter.m_y) + rectCenter.m_x,
+                                  std::sin(radAngle) * (m_triPts[2].m_x - rectCenter.m_x) +
+                                      std::cos(radAngle) * (m_triPts[2].m_y - rectCenter.m_y) + rectCenter.m_y);
 }
 
 void Node::Rotate(bool clockwise)
@@ -86,14 +84,8 @@ bool Node::Contains(wxPoint2DDouble position) const
     return m_rect.Contains(position);
 }
 
-ControlElement::ControlElement(int id)
-    : Element()
-{
-    m_elementID = id;
-}
-
+ControlElement::ControlElement(int id) : Element() { m_elementID = id; }
 ControlElement::~ControlElement() {}
-
 void ControlElement::DrawNodes() const
 {
     for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
@@ -126,4 +118,11 @@ bool ControlElement::Solve(double input, double timeStep)
 {
     m_output = input;
     return true;
+}
+
+void ControlElement::ReplaceNode(Node* oldNode, Node* newNode)
+{
+    for(unsigned int i = 0; i < m_nodeList.size(); i++) {
+        if(m_nodeList[i] == oldNode) m_nodeList[i] = newNode;
+    }
 }

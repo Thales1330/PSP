@@ -95,7 +95,6 @@ class ControlEditor : public ControlEditorBase
     virtual void SetElementsList(std::vector<ControlElement*> elementList) { m_elementList = elementList; }
     virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
     virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
-    virtual void ConsolidateTexts();
    protected:
     virtual void OnClose(wxCloseEvent& event);
     virtual void OnTestClick(wxCommandEvent& event);
@@ -116,6 +115,7 @@ class ControlEditor : public ControlEditorBase
 
     void BuildControlElementPanel();
     void SetViewport();
+    void ConsolidateTexts();
 
     std::vector<ConnectionLine*>::iterator DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it);
 

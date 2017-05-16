@@ -26,6 +26,8 @@ public:
     void SetUpLimit(double upLimit) { m_upLimit = upLimit; }
     void SetLowLimit(double lowLimit) { m_lowLimit = lowLimit; }
     
+    virtual Element* GetCopy();
+    
 protected:
     double m_upLimit = 5.0;
     double m_lowLimit = -5.0;

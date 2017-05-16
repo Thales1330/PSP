@@ -28,7 +28,7 @@ class IOControl : public ControlElement
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual void Rotate(bool clockwise = true);
-
+    virtual void UpdateText() { SetValue(m_value); }
     virtual wxString GenerateText();
     virtual void UpdatePoints();
 
@@ -36,11 +36,12 @@ class IOControl : public ControlElement
     virtual void SetValue(IOFlags value);
     virtual int GetIOFlags() const { return m_ioFlags; }
     virtual Node::NodeType GetType() { return m_ioNodeType; }
-
+    
+    virtual Element* GetCopy();
    protected:
     IOFlags m_value;
     int m_ioFlags;
-    
+
     Node::NodeType m_ioNodeType = Node::NODE_IN;
 
     wxGLString* m_glStringValue = NULL;

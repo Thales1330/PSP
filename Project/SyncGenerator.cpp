@@ -144,6 +144,20 @@ Element* SyncGenerator::GetCopy()
 {
     SyncGenerator* copy = new SyncGenerator();
     *copy = *this;
+    auto data = copy->GetElectricalData();
+    
+    // Copy AVR
+    std::vector<ConnectionLine*> cLineList;
+    std::vector<ControlElement*> elementList;
+    m_electricalData.avr->GetContainerCopy(elementList, cLineList);
+    
+    ControlElementContainer* avrCopy = new ControlElementContainer();
+    avrCopy->FillContainer(elementList, cLineList);
+    data.avr = avrCopy;
+    
+    //Copy Speed Governor
+    
+    copy->SetElectricalData(data);
     return copy;
 }
 

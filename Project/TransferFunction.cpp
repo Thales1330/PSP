@@ -355,3 +355,13 @@ bool TransferFunction::Solve(double input, double timeStep)
 
     return true;
 }
+
+Element* TransferFunction::GetCopy()
+{
+    TransferFunction* copy = new TransferFunction(m_elementID);
+    *copy = *this;
+    m_glStringNum = NULL;
+    m_glStringDen = NULL;
+    UpdateTFText();
+    return copy;
+}

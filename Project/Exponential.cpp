@@ -117,3 +117,10 @@ bool Exponential::Solve(double input, double timeStep)
     m_output = m_aValue * std::exp(m_bValue * input);
     return true;
 }
+
+Element* Exponential::GetCopy()
+{
+    Exponential* copy = new Exponential(m_elementID);
+    *copy = *this;
+    return copy;
+}

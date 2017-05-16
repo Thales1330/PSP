@@ -76,3 +76,62 @@ void ControlElementContainer::FillContainer(std::vector<ControlElement*> control
         }
     }
 }
+
+void ControlElementContainer::GetContainerCopy(std::vector<ControlElement*>& controlElementList,
+                                               std::vector<ConnectionLine*>& connectionLineList)
+{
+    controlElementList.clear();
+    connectionLineList.clear();
+
+    // Copy connection lines
+    for(auto it = m_cLineList.begin(), itEnd = m_cLineList.end(); it != itEnd; ++it) {
+        ConnectionLine* copy = static_cast<ConnectionLine*>((*it)->GetCopy());
+        connectionLineList.push_back(copy);
+    }
+
+    // Copy elements (exept connection line).
+    int nodeID = 0;
+    for(auto it = m_ctrlElementsList.begin(), itEnd = m_ctrlElementsList.end(); it != itEnd; ++it) {
+        Element* oldElement = *it;
+        ControlElement* copy = static_cast<ControlElement*>(oldElement->GetCopy());
+        controlElementList.push_back(copy);
+        // Copy nodes.
+        std::vector<Node*> nodeList = copy->GetNodeList();
+        std::vector<Node*> nodeListCopy;
+        for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
+            Node* node = *itN;
+            node->SetID(nodeID);
+            Node* copyNode = new Node();
+            *copyNode = *node;
+            nodeListCopy.push_back(copyNode);
+            nodeID++;
+        }
+        copy->SetNodeList(nodeListCopy);
+
+        // Replace children to copies.
+        auto childList = copy->GetChildList();
+        for(auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; ++itC) {
+            ConnectionLine* child = static_cast<ConnectionLine*>(*itC);
+            // Replace child's parent to copy.
+            for(auto itCL = connectionLineList.begin(), itEndCL = connectionLineList.end(); itCL != itEndCL; ++itCL) {
+                ConnectionLine* copyLine = *itCL;
+                if(copyLine->GetID() == child->GetID()) {
+                    // Replace node.
+                    nodeList = child->GetNodeList();
+                    for(auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
+                        Node* node = *itN;
+                        for(auto itCN = nodeListCopy.begin(), itEndCN = nodeListCopy.end(); itCN != itEndCN; ++itCN) {
+                            Node* nodeCopy = *itCN;
+                            if(node->GetID() == nodeCopy->GetID()) {
+                                copyLine->ReplaceNode(node, nodeCopy);
+                                break;
+                            }
+                        }
+                    }
+                    copyLine->ReplaceParent(oldElement, copy);
+                    copy->ReplaceChild(child, copyLine);
+                }
+            }
+        }
+    }
+}

@@ -36,8 +36,8 @@ struct SyncGeneratorElectricalData {
     double groundReactance = 0.0;
     bool groundNeutral = true;
     // p.u. fault data
-    std::complex<double> faultCurrent[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
-        std::complex<double>(0.0, 0.0) };
+    std::complex<double> faultCurrent[3] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
+                                            std::complex<double>(0.0, 0.0)};
 
     // Stability
     bool plotSyncMachine = false;
@@ -60,20 +60,20 @@ struct SyncGeneratorElectricalData {
     double subXq = 0.0;
     double subTd0 = 0.0;
     double subTq0 = 0.0;
-    
-    //Control
+
+    // Control
     ControlElementContainer* avr = NULL;
     ControlElementContainer* speedGov = NULL;
 };
 
 class SyncGenerator : public Machines
 {
-public:
+   public:
     SyncGenerator();
     SyncGenerator(wxString name);
     ~SyncGenerator();
-	
-	virtual Element* GetCopy();
+
+    virtual Element* GetCopy();
     virtual void Init();
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);
@@ -83,10 +83,11 @@ public:
     virtual SyncGeneratorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(SyncGeneratorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
-protected:
+
+   protected:
     std::vector<wxPoint2DDouble> m_sinePts;
 
     SyncGeneratorElectricalData m_electricalData;
 };
 
-#endif // SYNCGENERATOR_H
+#endif  // SYNCGENERATOR_H

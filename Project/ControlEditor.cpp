@@ -850,6 +850,10 @@ void ControlEditor::ConsolidateTexts()
     if(m_firstDraw) {
         TransferFunction* tf = new TransferFunction(0);
         m_elementList.push_back(tf);
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            ControlElement* element = *it;
+            element->UpdateText();
+        }
         Redraw();
         m_elementList.pop_back();
         delete tf;

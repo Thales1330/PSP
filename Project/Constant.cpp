@@ -102,3 +102,12 @@ void Constant::SetValue(double value)
 
     UpdatePoints();
 }
+
+Element* Constant::GetCopy()
+{
+    Constant* copy = new Constant(m_elementID);
+    *copy = *this;
+    m_glStringValue = NULL;
+    SetValue(m_value);
+    return copy;
+}

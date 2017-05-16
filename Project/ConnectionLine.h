@@ -32,6 +32,8 @@ class ConnectionLine : public ControlElement
     
     virtual double GetValue() const { return m_value; }
     virtual void SetValue(double value) { m_value = value; }
+    
+    Element* GetCopy();
 
    protected:
     double m_lineOffset = 0.0;
