@@ -1364,13 +1364,13 @@ bool FileHanding::OpenProject(wxFileName path)
         data.subTd0 = GetNodeValueDouble(stability, "SubTd0");
         data.subTq0 = GetNodeValueDouble(stability, "SubTq0");
 
-        /*auto avr = stability->first_node("AVR");
+        auto avr = stability->first_node("AVR");
         if(!avr) return false;
         if(!OpenControlElements(doc, avr, data.avr)) return false;
 
         auto speedGov = stability->first_node("SpeedGovernor");
-        if(speedGov) return false;
-        if(!OpenControlElements(doc, speedGov, data.speedGov)) return false;*/
+        if(!speedGov) return false;
+        if(!OpenControlElements(doc, speedGov, data.speedGov)) return false;
 
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");

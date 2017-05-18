@@ -29,6 +29,9 @@ void SyncGenerator::Init()
         double y = std::sin(x);
         m_sinePts.push_back(wxPoint2DDouble((x / pi) * mx, y * my));
     }
+    
+    m_electricalData.avr = new ControlElementContainer();
+    m_electricalData.speedGov = new ControlElementContainer();
 }
 
 void SyncGenerator::DrawSymbol() const
