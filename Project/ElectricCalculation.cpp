@@ -7,6 +7,7 @@ ElectricCalculation::ElectricCalculation() {}
 ElectricCalculation::~ElectricCalculation() {}
 void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
 {
+    m_powerElementList.clear();
     m_busList.clear();
     m_capacitorList.clear();
     m_indMotorList.clear();
@@ -19,6 +20,8 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
     // TODO: Bad design?
     for(auto it = elementList.begin(); it != elementList.end(); it++) {
         Element* element = *it;
+        m_powerElementList.push_back(static_cast<PowerElement*>(element));
+
         if(Bus* bus = dynamic_cast<Bus*>(element))
             m_busList.push_back(bus);
         else if(Capacitor* capacitor = dynamic_cast<Capacitor*>(element))
@@ -41,9 +44,10 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
 }
 
 bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> > >& yBus,
-    double systemPowerBase,
-    YBusSequence sequence,
-    bool includeSyncMachines)
+                                  double systemPowerBase,
+                                  YBusSequence sequence,
+                                  bool includeSyncMachines,
+                                  bool allLoadsAsImpedances)
 {
     if(m_busList.size() == 0) return false;
 
@@ -73,7 +77,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         if(load->IsOnline()) {
             int n = static_cast<Bus*>(load->GetParentList()[0])->GetEletricalData().number;
             LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
-            if(data.loadType == CONST_IMPEDANCE)
+            if(data.loadType == CONST_IMPEDANCE || allLoadsAsImpedances)
                 yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower);
         }
     }
@@ -160,8 +164,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
             else if(sequence != ZERO_SEQ) {
                 // Complex turns ratio
                 double radPhaseShift = wxDegToRad(data.phaseShift);
-                std::complex<double> a = std::complex<double>(
-                    data.turnsRatio * std::cos(radPhaseShift), -data.turnsRatio * std::sin(radPhaseShift));
+                std::complex<double> a = std::complex<double>(data.turnsRatio * std::cos(radPhaseShift),
+                                                              -data.turnsRatio * std::sin(radPhaseShift));
 
                 // Transformer admitance
                 std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -181,10 +185,11 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                 switch(data.connection) {
                     case GWYE_GWYE: {
                         std::complex<double> y =
-                            1.0 / std::complex<double>(data.zeroResistance +
-                                          3.0 * (data.primaryGrndResistance + data.secondaryGrndResistance),
-                                      data.zeroIndReactance +
-                                          3.0 * (data.primaryGrndReactance + data.secondaryGrndReactance));
+                            1.0 /
+                            std::complex<double>(
+                                data.zeroResistance + 3.0 * (data.primaryGrndResistance + data.secondaryGrndResistance),
+                                data.zeroIndReactance +
+                                    3.0 * (data.primaryGrndReactance + data.secondaryGrndReactance));
                         std::complex<double> a = std::complex<double>(data.turnsRatio, 0.0);
 
                         yBus[n1][n1] += y / (a * a);
@@ -195,14 +200,14 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                     case DELTA_GWYE: {
                         std::complex<double> y =
                             1.0 / std::complex<double>(data.zeroResistance + 3.0 * (data.secondaryGrndResistance),
-                                      data.zeroIndReactance + 3.0 * (data.secondaryGrndReactance));
+                                                       data.zeroIndReactance + 3.0 * (data.secondaryGrndReactance));
                         yBus[n2][n2] += y;
                         break;
                     }
                     case GWYE_DELTA: {
                         std::complex<double> y =
                             1.0 / std::complex<double>(data.zeroResistance + 3.0 * (data.primaryGrndResistance),
-                                      data.zeroIndReactance + 3.0 * (data.primaryGrndReactance));
+                                                       data.zeroIndReactance + 3.0 * (data.primaryGrndReactance));
                         yBus[n1][n1] += y;
                         break;
                     }
@@ -258,10 +263,10 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
 }
 
 void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<double> > voltage,
-    std::vector<std::complex<double> > power,
-    std::vector<BusType> busType,
-    std::vector<ReactiveLimits> reactiveLimit,
-    double systemPowerBase)
+                                                  std::vector<std::complex<double> > power,
+                                                  std::vector<BusType> busType,
+                                                  std::vector<ReactiveLimits> reactiveLimit,
+                                                  double systemPowerBase)
 {
     for(int i = 0; i < (int)reactiveLimit.size(); ++i) {
         if(reactiveLimit[i].maxLimit > -1e-5 && reactiveLimit[i].maxLimit < 1e-5) reactiveLimit[i].maxLimit = 1e-5;
@@ -287,9 +292,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             std::complex<double> v2 = voltage[n2];
 
             data.current[0] = (v1 - v2) / std::complex<double>(data.resistance, data.indReactance) +
-                v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+                              v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
             data.current[1] = (v2 - v1) / std::complex<double>(data.resistance, data.indReactance) +
-                v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+                              v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
 
             data.powerFlow[0] = v1 * std::conj(data.current[0]);
             data.powerFlow[1] = v2 * std::conj(data.current[1]);
@@ -310,8 +315,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             TransformerElectricalData data = transformer->GetElectricalData();
             int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetEletricalData().number;
             int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetEletricalData().number;
-            std::complex<double> v1 = voltage[n1]; // Primary voltage
-            std::complex<double> v2 = voltage[n2]; // Secondary voltage
+            std::complex<double> v1 = voltage[n1];  // Primary voltage
+            std::complex<double> v2 = voltage[n2];  // Secondary voltage
 
             // Transformer admitance
             std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -491,8 +496,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                         reactivePower = childData_PU.minReactive;
                         reachedMachineLimit = true;
                     } else if((!childData_PU.haveMaxReactive && reactiveLimit[i].limitReached == RL_MAX_REACHED) ||
-                        (!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
-                        (!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
+                              (!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
+                              (!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
                         reactivePower += exceededReactive;
                         exceededReactive = 0.0;
                     }
@@ -532,7 +537,7 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 }
 
 bool ElectricCalculation::InvertMatrix(std::vector<std::vector<std::complex<double> > > matrix,
-    std::vector<std::vector<std::complex<double> > >& inverse)
+                                       std::vector<std::vector<std::complex<double> > >& inverse)
 {
     int order = static_cast<int>(matrix.size());
 
@@ -598,4 +603,194 @@ bool ElectricCalculation::InvertMatrix(std::vector<std::vector<std::complex<doub
     }
 
     return true;
+}
+
+void ElectricCalculation::ABCtoDQ0(std::complex<double> complexValue, double angle, double& dValue, double& qValue)
+{
+    dValue = -std::real(complexValue) * std::sin(angle) + std::imag(complexValue) * std::cos(angle);
+    qValue = std::real(complexValue) * std::cos(angle) + std::imag(complexValue) * std::sin(angle);
+}
+
+void ElectricCalculation::DQ0toABC(double dValue, double qValue, double angle, std::complex<double>& complexValue)
+{
+    double real = qValue * std::cos(angle) - dValue * std::sin(angle);
+    double imag = qValue * std::sin(angle) + dValue * std::cos(angle);
+    complexValue = std::complex<double>(real, imag);
+}
+
+std::vector<std::complex<double> > ElectricCalculation::GaussianElimination(
+    std::vector<std::vector<std::complex<double> > > matrix,
+    std::vector<std::complex<double> > array)
+{
+    //[Ref] http://pt.wikipedia.org/wiki/Elimina%C3%A7%C3%A3o_de_Gauss
+
+    std::vector<std::complex<double> > solution;
+
+    std::vector<std::vector<std::complex<double> > > triangMatrix;
+    triangMatrix.resize(matrix.size());
+    for(unsigned int i = 0; i < matrix.size(); i++) {
+        triangMatrix[i].resize(matrix.size());
+    }
+
+    for(unsigned int i = 0; i < matrix.size(); i++) {
+        solution.push_back(array[i]);
+    }
+
+    for(unsigned int i = 0; i < matrix.size(); i++) {
+        for(unsigned int j = 0; j < matrix.size(); j++) {
+            triangMatrix[i][j] = matrix[i][j];
+        }
+    }
+
+    for(unsigned int k = 0; k < matrix.size(); k++) {
+        unsigned int k1 = k + 1;
+        for(unsigned int i = k; i < matrix.size(); i++) {
+            if(triangMatrix[i][k] != std::complex<double>(0.0, 0.0)) {
+                for(unsigned int j = k1; j < matrix.size(); j++) {
+                    triangMatrix[i][j] = triangMatrix[i][j] / triangMatrix[i][k];
+                }
+                solution[i] = solution[i] / triangMatrix[i][k];
+            }
+        }
+        for(unsigned int i = k1; i < matrix.size(); i++) {
+            if(triangMatrix[i][k] != std::complex<double>(0.0, 0.0)) {
+                for(unsigned int j = k1; j < matrix.size(); j++) {
+                    triangMatrix[i][j] -= triangMatrix[k][j];
+                }
+                solution[i] -= solution[k];
+            }
+        }
+    }
+    for(unsigned int i = matrix.size() - 2; i >= 0; i--) {
+        for(unsigned int j = matrix.size() - 1; j >= i + 1; j--) {
+            solution[i] -= triangMatrix[i][j] * solution[j];
+        }
+    }
+
+    return solution;
+}
+
+SyncMachineModel ElectricCalculation::GetMachineModel(SyncGenerator* generator)
+{
+    auto data = generator->GetElectricalData();
+    if(data.transTd0 != 0.0) {
+        if(data.transTq0 != 0.0) {
+            if(data.subTd0 != 0.0) {
+                if(data.subTq0 != 0.0)
+                    return SM_MODEL_5;
+                else
+                    return SM_MODEL_4;
+            } else
+                return SM_MODEL_3;
+        } else
+            return SM_MODEL_2;
+    }
+
+    return SM_MODEL_1;
+}
+
+std::vector<std::complex<double> > ElectricCalculation::ComplexMatrixTimesVector(
+    std::vector<std::vector<std::complex<double> > > matrix,
+    std::vector<std::complex<double> > vector)
+{
+    std::vector<std::complex<double> > solution;
+    for(unsigned int i = 0; i < matrix.size(); i++) {
+        solution.push_back(std::complex<double>(0.0, 0.0));
+
+        for(unsigned int j = 0; j < matrix.size(); j++) {
+            solution[i] += matrix[i][j] * vector[j];
+        }
+    }
+
+    return solution;
+}
+
+void ElectricCalculation::GetLUDecomposition(std::vector<std::vector<std::complex<double> > > matrix,
+                                             std::vector<std::vector<std::complex<double> > >& matrixL,
+                                             std::vector<std::vector<std::complex<double> > >& matrixU)
+{
+    // Doolittle method
+    // [Ref] http://www3.nd.edu/~zxu2/acms40390F11/Alg-LU-Crout.pdf
+    // [Ref] http://www.engr.colostate.edu/~thompson/hPage/CourseMat/Tutorials/CompMethods/doolittle.pdf
+
+    int size = static_cast<int>(matrix.size());  // Decomposed matrix size.
+
+    // Set upper and lower matrices sizes.
+    matrixL.resize(size);
+    matrixU.resize(size);
+    for(int i = 0; i < size; i++) {
+        matrixL[i].resize(size);
+        matrixU[i].resize(size);
+    }
+
+    // First row of upper matrix and first column of lower matrix.
+    for(int i = 0; i < size; i++) {
+        matrixU[0][i] = matrix[0][i];
+        matrixL[i][0] = matrix[i][0] / matrixU[0][0];
+    }
+
+    // Upper matrix main diagonal.
+    for(int i = 1; i < size; i++) {
+        matrixL[i][i] = std::complex<double>(1.0, 0.0);
+    }
+
+    for(int i = 1; i < size - 1; i++) {
+        // Upper matrix main diagonal.
+        matrixU[i][i] = matrix[i][i];
+        for(int k = 0; k < i; k++) {
+            matrixU[i][i] -= matrixL[i][k] * matrixU[k][i];
+        }
+
+        // Others elements of upper matrix
+        for(int j = i + 1; j < size; j++) {
+            matrixU[i][j] = matrix[i][j];
+            for(int k = 0; k < i; k++) {
+                matrixU[i][j] -= matrixL[i][k] * matrixU[k][j];
+            }
+        }
+
+        // Lower matrix elements
+        for(int j = i + 1; j < size; j++) {
+            matrixL[j][i] = matrix[j][i];
+            for(int k = 0; k < i; k++) {
+                matrixL[j][i] -= matrixL[j][k] * matrixU[k][i];
+            }
+            matrixL[j][i] = matrixL[j][i] / matrixU[i][i];
+        }
+    }
+
+    // Last element of upper matrix.
+    matrixU[size - 1][size - 1] = matrix[size - 1][size - 1];
+    for(int k = 0; k < size - 1; k++) {
+        matrixU[size - 1][size - 1] -= matrixL[size - 1][k] * matrixU[k][size - 1];
+    }
+}
+
+std::vector<std::complex<double> > ElectricCalculation::LUEvaluate(std::vector<std::vector<std::complex<double> > > u,
+                                                                   std::vector<std::vector<std::complex<double> > > l,
+                                                                   std::vector<std::complex<double> > b)
+{
+    int size = static_cast<int>(b.size());
+    std::vector<std::complex<double> > x;
+    std::vector<std::complex<double> > y;
+    x.resize(size);
+    y.resize(size);
+
+    // Forward
+    for(int i = 0; i < size; i++) {
+        y[i] = b[i];
+        for(int j = 0; j < i; j++) {
+            y[i] -= l[i][j] * y[j];
+        }
+        y[i] /= l[i][i];
+    }
+    // Backward
+    for(int i = size - 1; i >= 0; i--) {
+        x[i] = y[i];
+        for(int j = i + 1; j < size; j++) {
+            x[i] -= u[i][j] * x[j];
+        }
+        x[i] /= u[i][i];
+    }
+    return x;
 }

@@ -247,7 +247,14 @@ void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
 void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+    if(workspace) {
+        workspace->RunStability();
+    }
+}
+
 void MainFrame::OnSCPowerClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());

@@ -31,6 +31,7 @@ class Text;
 
 class PowerFlow;
 class Fault;
+class Electromechanical;
 
 enum ElementID {
     ID_BUS = 0,
@@ -110,6 +111,7 @@ public:
     bool RunPowerFlow();
     bool RunFault();
     bool RunSCPower();
+    bool RunStability();
 
 protected:
     virtual void OnIdle(wxIdleEvent& event);

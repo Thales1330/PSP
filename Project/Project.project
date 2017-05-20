@@ -29,6 +29,7 @@
         <File Name="ElectricCalculation.cpp"/>
         <File Name="PowerFlow.cpp"/>
         <File Name="Fault.cpp"/>
+        <File Name="Electromechanical.cpp"/>
       </VirtualDirectory>
       <File Name="ElementDataObject.cpp"/>
       <VirtualDirectory Name="graphical element">
@@ -116,6 +117,7 @@
         <File Name="ElectricCalculation.h"/>
         <File Name="PowerFlow.h"/>
         <File Name="Fault.h"/>
+        <File Name="Electromechanical.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="rapidXML">
         <File Name="rapidXML/rapidxml.hpp"/>
