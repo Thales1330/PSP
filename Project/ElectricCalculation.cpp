@@ -65,7 +65,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     int busNumber = 0;
     for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
         Bus* bus = *itb;
-        BusElectricalData data = bus->GetEletricalData();
+        BusElectricalData data = bus->GetElectricalData();
         data.number = busNumber;
         bus->SetElectricalData(data);
         busNumber++;
@@ -75,10 +75,16 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
         Load* load = *it;
         if(load->IsOnline()) {
-            int n = static_cast<Bus*>(load->GetParentList()[0])->GetEletricalData().number;
+            int n = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().number;
             LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
-            if(data.loadType == CONST_IMPEDANCE || allLoadsAsImpedances)
-                yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower);
+            if(data.loadType == CONST_IMPEDANCE || allLoadsAsImpedances) {
+                std::complex<double> yLoad = std::complex<double>(data.activePower, -data.reactivePower);
+                if(allLoadsAsImpedances) {
+                    std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
+                    yLoad /= (v * v);
+                }
+                yBus[n][n] += yLoad;
+            }
         }
     }
 
@@ -86,7 +92,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     for(auto it = m_capacitorList.begin(), itEnd = m_capacitorList.end(); it != itEnd; ++it) {
         Capacitor* capacitor = *it;
         if(capacitor->IsOnline()) {
-            int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetEletricalData().number;
+            int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
             CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
             yBus[n][n] += std::complex<double>(0.0, data.reactivePower);
         }
@@ -96,7 +102,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     for(auto it = m_inductorList.begin(), itEnd = m_inductorList.end(); it != itEnd; ++it) {
         Inductor* inductor = *it;
         if(inductor->IsOnline()) {
-            int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetEletricalData().number;
+            int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
             InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
             yBus[n][n] += std::complex<double>(0.0, -data.reactivePower);
         }
@@ -108,8 +114,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         if(line->IsOnline()) {
             LineElectricalData data = line->GetElectricalData();
 
-            int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetEletricalData().number;
-            int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetEletricalData().number;
+            int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
+            int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
 
             switch(sequence) {
                 case POSITIVE_SEQ:
@@ -144,8 +150,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         if(transformer->IsOnline()) {
             TransformerElectricalData data = transformer->GetElectricalData();
 
-            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetEletricalData().number;
-            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetEletricalData().number;
+            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
+            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
 
             // If the transformer have nominal turns ratio (1.0) and no phase shifting, it will be modelled as series
             // impedance.
@@ -223,7 +229,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
             SyncGenerator* syncGenerator = *it;
             if(syncGenerator->IsOnline()) {
-                int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetEletricalData().number;
+                int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
                 SyncGeneratorElectricalData data = syncGenerator->GetPUElectricalData(systemPowerBase);
                 switch(sequence) {
                     case POSITIVE_SEQ: {
@@ -242,7 +248,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         for(auto it = m_syncMotorList.begin(), itEnd = m_syncMotorList.end(); it != itEnd; ++it) {
             SyncMotor* syncMotor = *it;
             if(syncMotor->IsOnline()) {
-                int n = static_cast<Bus*>(syncMotor->GetParentList()[0])->GetEletricalData().number;
+                int n = static_cast<Bus*>(syncMotor->GetParentList()[0])->GetElectricalData().number;
                 SyncMotorElectricalData data = syncMotor->GetPUElectricalData(systemPowerBase);
                 switch(sequence) {
                     case POSITIVE_SEQ: {
@@ -275,7 +281,7 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
     // Buses voltages
     for(int i = 0; i < (int)m_busList.size(); i++) {
         Bus* bus = m_busList[i];
-        BusElectricalData data = bus->GetEletricalData();
+        BusElectricalData data = bus->GetElectricalData();
         data.voltage = voltage[i];
         bus->SetElectricalData(data);
     }
@@ -284,8 +290,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
     for(int i = 0; i < (int)m_lineList.size(); i++) {
         Line* line = m_lineList[i];
         if(line->IsOnline()) {
-            int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetEletricalData().number;
-            int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetEletricalData().number;
+            int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
+            int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
 
             LineElectricalData data = line->GetElectricalData();
             std::complex<double> v1 = voltage[n1];
@@ -313,8 +319,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
         Transformer* transformer = m_transformerList[i];
         if(transformer->IsOnline()) {
             TransformerElectricalData data = transformer->GetElectricalData();
-            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetEletricalData().number;
-            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetEletricalData().number;
+            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
+            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
             std::complex<double> v1 = voltage[n1];  // Primary voltage
             std::complex<double> v2 = voltage[n2];  // Secondary voltage
 
@@ -348,7 +354,7 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
     // Synchronous machines
     for(int i = 0; i < (int)m_busList.size(); i++) {
         Bus* bus = m_busList[i];
-        BusElectricalData data = bus->GetEletricalData();
+        BusElectricalData data = bus->GetElectricalData();
 
         // Get the synchronous machines connected and calculate the load power on the bus.
         std::vector<SyncGenerator*> syncGeneratorsOnBus;

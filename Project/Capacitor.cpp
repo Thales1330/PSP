@@ -180,7 +180,7 @@ wxString Capacitor::GetTipText() const
     if(!m_online)
         reactivePower = 0.0;
     else {
-        std::complex<double> v = static_cast<Bus*>(m_parentList[0])->GetEletricalData().voltage;
+        std::complex<double> v = static_cast<Bus*>(m_parentList[0])->GetElectricalData().voltage;
         reactivePower *= std::pow(std::abs(v), 2);
     }
     tipText += "\n";

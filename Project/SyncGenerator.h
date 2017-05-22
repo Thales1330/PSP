@@ -23,7 +23,7 @@ struct SyncGeneratorElectricalData {
     bool haveMinReactive = false;
     double minReactive = -9999.0;
     ElectricalUnit minReactiveUnit = UNIT_MVAr;
-    bool useMachineBase = false;
+    bool useMachineBase = true;
 
     // Fault
     double positiveResistance = 0.0;

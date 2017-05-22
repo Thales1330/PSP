@@ -57,7 +57,7 @@ public:
     virtual bool PickboxContains(wxPoint2DDouble position);
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
-    virtual BusElectricalData GetEletricalData() const { return m_electricalData; }
+    virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
     virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
 

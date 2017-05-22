@@ -16,12 +16,15 @@ protected:
     void SetEventTimeList();
     bool HasEvent(double currentTime);
     void SetEvent(double currentTime);
+    inline bool EventTrigger(double eventTime, double currentTime);
     
-    void Insert
+    void InsertSyncMachinesOnYBus();
+    std::complex<double> GetSyncMachineAdmittance(SyncGenerator* generator);
     
     wxString m_errorMsg = _("Unknown error");
     
     std::vector<std::vector<std::complex<double> > > m_yBus;
+    double m_powerSystemBase = 100e6;
     
     double m_timeStep = 1e-3;
     

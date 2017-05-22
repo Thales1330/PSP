@@ -256,8 +256,9 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
             // propagated through the lines
             if(elementIsBus) {
                 // The voltage was changed
-                if(oldBus.GetEletricalData().nominalVoltage != currentBus->GetEletricalData().nominalVoltage ||
-                   oldBus.GetEletricalData().nominalVoltageUnit != currentBus->GetEletricalData().nominalVoltageUnit) {
+                if(oldBus.GetElectricalData().nominalVoltage != currentBus->GetElectricalData().nominalVoltage ||
+                   oldBus.GetElectricalData().nominalVoltageUnit !=
+                       currentBus->GetElectricalData().nominalVoltageUnit) {
                     // Check if the bus has line as child.
                     std::vector<Element*> childList = element->GetChildList();
                     for(auto itc = childList.begin(), itcEnd = childList.end(); itc != itcEnd; ++itc) {
@@ -268,9 +269,9 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
                             if(msgDialog.ShowModal() == wxID_YES)
                                 ValidateBusesVoltages(element);
                             else {
-                                auto data = currentBus->GetEletricalData();
-                                data.nominalVoltage = oldBus.GetEletricalData().nominalVoltage;
-                                data.nominalVoltageUnit = oldBus.GetEletricalData().nominalVoltageUnit;
+                                auto data = currentBus->GetElectricalData();
+                                data.nominalVoltage = oldBus.GetElectricalData().nominalVoltage;
+                                data.nominalVoltageUnit = oldBus.GetElectricalData().nominalVoltageUnit;
                                 currentBus->SetElectricalData(data);
                             }
                             break;
@@ -1039,16 +1040,16 @@ void Workspace::Fit()
 
 void Workspace::ValidateBusesVoltages(Element* initialBus)
 {
-    double nominalVoltage = static_cast<Bus*>(initialBus)->GetEletricalData().nominalVoltage;
-    ElectricalUnit nominalVoltageUnit = static_cast<Bus*>(initialBus)->GetEletricalData().nominalVoltageUnit;
+    double nominalVoltage = static_cast<Bus*>(initialBus)->GetElectricalData().nominalVoltage;
+    ElectricalUnit nominalVoltageUnit = static_cast<Bus*>(initialBus)->GetElectricalData().nominalVoltageUnit;
 
     for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
         Element* child = *it;
 
         if(typeid(*child) == typeid(Line)) {
             if(child->GetParentList()[0] && child->GetParentList()[1]) {
-                BusElectricalData data1 = static_cast<Bus*>(child->GetParentList()[0])->GetEletricalData();
-                BusElectricalData data2 = static_cast<Bus*>(child->GetParentList()[1])->GetEletricalData();
+                BusElectricalData data1 = static_cast<Bus*>(child->GetParentList()[0])->GetElectricalData();
+                BusElectricalData data2 = static_cast<Bus*>(child->GetParentList()[1])->GetElectricalData();
 
                 if(data1.nominalVoltage != data2.nominalVoltage ||
                    data1.nominalVoltageUnit != data2.nominalVoltageUnit) {
@@ -1079,8 +1080,8 @@ void Workspace::ValidateElementsVoltages()
         for(int i = 0; i < (int)child->GetParentList().size(); i++) {
             Bus* parent = static_cast<Bus*>(child->GetParentList()[i]);
             if(parent) {
-                nominalVoltage.push_back(parent->GetEletricalData().nominalVoltage);
-                nominalVoltageUnit.push_back(parent->GetEletricalData().nominalVoltageUnit);
+                nominalVoltage.push_back(parent->GetElectricalData().nominalVoltage);
+                nominalVoltageUnit.push_back(parent->GetElectricalData().nominalVoltageUnit);
             }
         }
         child->SetNominalVoltage(nominalVoltage, nominalVoltageUnit);
@@ -1120,7 +1121,7 @@ void Workspace::CopySelection()
         Element* element = *it;
         if(typeid(*element) == typeid(Bus)) {
             Bus* bus = static_cast<Bus*>(element);
-            auto data = bus->GetEletricalData();
+            auto data = bus->GetElectricalData();
             data.number = busNumber;
             bus->SetElectricalData(data);
             busNumber++;
@@ -1393,12 +1394,18 @@ bool Workspace::RunSCPower()
 
 bool Workspace::RunStability()
 {
+    // Run power flow before stability.
+    RunPowerFlow();
+
     Electromechanical stability(GetElementList());
     bool result = stability.RunStabilityCalculation();
     if(!result) {
         wxMessageDialog msgDialog(this, stability.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
+
+    // Run power flow after stability.
+    RunPowerFlow();
 
     return result;
 }

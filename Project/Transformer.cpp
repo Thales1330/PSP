@@ -427,8 +427,8 @@ wxString Transformer::GetTipText() const
     if(m_online) {
         tipText += "\n";
         int busNumber[2];
-        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetEletricalData().number + 1;
-        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetEletricalData().number + 1;
+        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetElectricalData().number + 1;
+        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetElectricalData().number + 1;
 
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
             wxString::FromDouble(m_electricalData.powerFlow[0].real(), 5) + _(" p.u.");

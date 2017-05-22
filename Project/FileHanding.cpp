@@ -54,7 +54,7 @@ void FileHanding::SaveProject(wxFileName path)
         auto angle = AppendNode(doc, cadProp, "Angle");
         SetNodeValue(doc, angle, bus->GetAngle());
 
-        BusElectricalData data = bus->GetEletricalData();
+        BusElectricalData data = bus->GetElectricalData();
         auto electricalProp = AppendNode(doc, busNode, "ElectricalProperties");
         auto name = AppendNode(doc, electricalProp, "Name");
         SetNodeValue(doc, name, data.name);
@@ -126,7 +126,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, nodePosY, capacitor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(capacitor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         CapacitorElectricalData data = capacitor->GetElectricalData();
         auto electricalProp = AppendNode(doc, capacitorNode, "ElectricalProperties");
@@ -177,7 +177,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(indMotor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         IndMotorElectricalData data = indMotor->GetElectricalData();
         auto electricalProp = AppendNode(doc, indMotorNode, "ElectricalProperties");
@@ -220,7 +220,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, nodePosY, inductor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(inductor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         InductorElectricalData data = inductor->GetElectricalData();
         auto electricalProp = AppendNode(doc, inductorNode, "ElectricalProperties");
@@ -273,7 +273,7 @@ void FileHanding::SaveProject(wxFileName path)
             if(parent) {
                 auto parentID = AppendNode(doc, parentIDList, "ParentID");
                 SetNodeAttribute(doc, parentID, "ID", j);
-                SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+                SetNodeValue(doc, parentID, parent->GetElectricalData().number);
             }
         }
 
@@ -350,7 +350,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, nodePosY, load->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(load->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         LoadElectricalData data = load->GetElectricalData();
         auto electricalProp = AppendNode(doc, loadNode, "ElectricalProperties");
@@ -406,7 +406,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, nodePosY, syncGenerator->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
         auto electricalProp = AppendNode(doc, syncGeneratorNode, "ElectricalProperties");
@@ -542,7 +542,7 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeValue(doc, nodePosY, syncMotor->GetPointList()[0].m_y);
         auto parentID = AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(syncMotor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         SyncMotorElectricalData data = syncMotor->GetElectricalData();
         auto electricalProp = AppendNode(doc, syncMotorNode, "ElectricalProperties");
@@ -684,7 +684,7 @@ void FileHanding::SaveProject(wxFileName path)
             if(parent) {
                 auto parentID = AppendNode(doc, parentIDList, "ParentID");
                 SetNodeAttribute(doc, parentID, "ID", j);
-                SetNodeValue(doc, parentID, parent->GetEletricalData().number);
+                SetNodeValue(doc, parentID, parent->GetElectricalData().number);
             }
         }
 
@@ -842,7 +842,7 @@ bool FileHanding::OpenProject(wxFileName path)
         }
         for(int i = 0; i < numRot; i++) bus->Rotate(clockwise);
 
-        BusElectricalData data = bus->GetEletricalData();
+        BusElectricalData data = bus->GetElectricalData();
         auto electricalProp = busNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 

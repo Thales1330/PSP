@@ -134,16 +134,16 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             UpdateSwitches();
 
             Bus* parentBus = static_cast<Bus*>(parent);
-            m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
-            m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
+            m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+            m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
 
             return false;
         }
         // Second bus.
         else if(parent != m_parentList[0]) {
             Bus* parentBus = static_cast<Bus*>(parent);
-            if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
-                m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit) {
+            if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+                m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
                     _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -366,10 +366,10 @@ bool Line::SetNodeParent(Element* parent)
             // two different voltages buses
             Bus* parentBus = static_cast<Bus*>(parent);
             if(!m_parentList[0] && !m_parentList[1]) {
-                m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
-                m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
-            } else if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
-                m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit) {
+                m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+                m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
+            } else if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+                m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
                     _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -488,8 +488,8 @@ wxString Line::GetTipText() const
     if(m_online) {
         tipText += "\n";
         int busNumber[2];
-        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetEletricalData().number + 1;
-        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetEletricalData().number + 1;
+        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetElectricalData().number + 1;
+        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetElectricalData().number + 1;
 
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
             wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");

@@ -194,7 +194,7 @@ wxString Load::GetTipText() const
         reactivePower = 0.0;
     }
     if(m_online && m_electricalData.loadType == CONST_IMPEDANCE) {
-        std::complex<double> v = static_cast<Bus*>(m_parentList[0])->GetEletricalData().voltage;
+        std::complex<double> v = static_cast<Bus*>(m_parentList[0])->GetElectricalData().voltage;
         reactivePower *= std::pow(std::abs(v), 2);
         activePower *= std::pow(std::abs(v), 2);
     }
