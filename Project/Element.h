@@ -150,7 +150,7 @@ public:
      * @brief Set if the element is online or offline.
      * @param online True if online, false if offline.
      */
-    void SetOnline(bool online = true);
+    bool SetOnline(bool online = true);
 
     /**
      * @brief Set the list of points that connect the element to the bus.

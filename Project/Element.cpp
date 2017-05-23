@@ -215,13 +215,14 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     return true;
 }
 
-void Element::SetOnline(bool online)
+bool Element::SetOnline(bool online)
 {
     // Check if any parent is null.
     for(auto it = m_parentList.begin(); it != m_parentList.end(); it++) {
-        if(!(*it)) return;
+        if(!(*it)) return false;
     }
     m_online = online;
+    return true;
 }
 
 void Element::GeneralMenuItens(wxMenu& menu)

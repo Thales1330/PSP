@@ -89,10 +89,11 @@ void Electromechanical::SetEvent(double currentTime)
 
                 // Insert machine (only disconnected machines)
                 if(swData.swType[i] == SW_INSERT && !generator->IsOnline() && generator->GetParentList().size() == 1) {
-                    generator->SetOnline(true);
-                    auto data = generator->GetPUElectricalData(m_powerSystemBase);
-                    int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
-                    m_yBus[n][n] += GetSyncMachineAdmittance(generator);
+                    if(generator->SetOnline(true)) {
+                        auto data = generator->GetPUElectricalData(m_powerSystemBase);
+                        int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
+                        m_yBus[n][n] += GetSyncMachineAdmittance(generator);
+                    }
                 }
             }
         }
@@ -116,12 +117,13 @@ void Electromechanical::SetEvent(double currentTime)
 
                 // Insert load (only disconnected load)
                 if(swData.swType[i] == SW_INSERT && !load->IsOnline() && load->GetParentList().size() == 1) {
-                    load->SetOnline(true);
-                    auto data = load->GetPUElectricalData(m_powerSystemBase);
-                    Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
-                    int n = parentBus->GetElectricalData().number;
-                    std::complex<double> v = parentBus->GetElectricalData().voltage;
-                    m_yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower) / (v * v);
+                    if(load->SetOnline(true)) {
+                        auto data = load->GetPUElectricalData(m_powerSystemBase);
+                        Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
+                        int n = parentBus->GetElectricalData().number;
+                        std::complex<double> v = parentBus->GetElectricalData().voltage;
+                        m_yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower) / (v * v);
+                    }
                 }
             }
         }
@@ -153,8 +155,7 @@ void Electromechanical::SetEvent(double currentTime)
 
                 // Insert line (only disconnected lines)
                 if(swData.swType[i] == SW_INSERT && !line->IsOnline() && line->GetParentList().size() == 2) {
-                    if(line->GetParentList()[0] && line->GetParentList()[1]) {
-                        line->SetOnline(true);
+                    if(line->SetOnline(true)) {
                         auto data = line->GetElectricalData();
 
                         int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
@@ -212,8 +213,7 @@ void Electromechanical::SetEvent(double currentTime)
                 // Insert transformer (only disconnected transformers)
                 if(swData.swType[i] == SW_INSERT && !transformer->IsOnline() &&
                    transformer->GetParentList().size() == 2) {
-                    if(transformer->GetParentList()[0] && transformer->GetParentList()[1]) {
-                        transformer->SetOnline(true);
+                    if(transformer->SetOnline(true)) {
                         auto data = transformer->GetElectricalData();
 
                         int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
@@ -260,8 +260,7 @@ void Electromechanical::SetEvent(double currentTime)
 
                 // Insert capacitor (only disconnected capacitors)
                 if(swData.swType[i] == SW_INSERT && !capacitor->IsOnline() && capacitor->GetParentList().size() == 1) {
-                    if(capacitor->GetParentList()[0]) {
-                        capacitor->SetOnline(true);
+                    if(capacitor->SetOnline(true)) {
                         auto data = capacitor->GetPUElectricalData(m_powerSystemBase);
                         int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
                         m_yBus[n][n] -= std::complex<double>(0.0, data.reactivePower);
@@ -287,8 +286,7 @@ void Electromechanical::SetEvent(double currentTime)
 
                 // Insert inductor (only disconnected inductors)
                 if(swData.swType[i] == SW_INSERT && !inductor->IsOnline() && inductor->GetParentList().size() == 1) {
-                    if(inductor->GetParentList()[0]) {
-                        inductor->SetOnline(true);
+                    if(inductor->SetOnline(true)) {
                         auto data = inductor->GetPUElectricalData(m_powerSystemBase);
                         int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
                         m_yBus[n][n] -= std::complex<double>(0.0, -data.reactivePower);
