@@ -1397,7 +1397,7 @@ bool Workspace::RunStability()
     // Run power flow before stability.
     RunPowerFlow();
 
-    Electromechanical stability(GetElementList());
+    Electromechanical stability(this, GetElementList());
     bool result = stability.RunStabilityCalculation();
     if(!result) {
         wxMessageDialog msgDialog(this, stability.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);

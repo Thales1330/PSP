@@ -1,12 +1,37 @@
 #include "Electromechanical.h"
+#include "ControlElementSolver.h"
 
-Electromechanical::Electromechanical(std::vector<Element*> elementList)
+Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> elementList)
 {
+    m_parent = parent;
     GetElementsFromList(elementList);
     SetEventTimeList();
 }
 
 Electromechanical::~Electromechanical() {}
+bool Electromechanical::RunStabilityCalculation()
+{
+    // Calculate the admittance matrix with the synchronous machines.
+    if(!GetYBus(m_yBus, m_powerSystemBase, POSITIVE_SEQ, false, true)) {
+        m_errorMsg = _("It was not possible to build the admittance matrix.");
+        return false;
+    }
+    InsertSyncMachinesOnYBus();
+
+    if(!InitializeDynamicElements()) return false;
+
+    // test
+    double simTime = 10.0;
+    double currentTime = 0.0;
+    while(currentTime <= simTime) {
+        if(HasEvent(currentTime)) {
+            SetEvent(currentTime);
+        }
+        currentTime += m_timeStep;
+    }
+    return true;
+}
+
 void Electromechanical::SetEventTimeList()
 {
     // Fault
@@ -297,27 +322,6 @@ void Electromechanical::SetEvent(double currentTime)
     }
 }
 
-bool Electromechanical::RunStabilityCalculation()
-{
-    // Calculate the admittance matrix with the synchronous machines.
-    if(!GetYBus(m_yBus, m_powerSystemBase, POSITIVE_SEQ, false, true)) {
-        m_errorMsg = _("It was not possible to build the admittance matrix.");
-        return false;
-    }
-    InsertSyncMachinesOnYBus();
-
-    // test
-    double simTime = 10.0;
-    double currentTime = 0.0;
-    while(currentTime <= simTime) {
-        if(HasEvent(currentTime)) {
-            SetEvent(currentTime);
-        }
-        currentTime += m_timeStep;
-    }
-    return true;
-}
-
 void Electromechanical::InsertSyncMachinesOnYBus()
 {
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
@@ -365,4 +369,120 @@ std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* 
     }
     double xdq = 0.5 * (xd + xq);
     return std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0);
+}
+
+bool Electromechanical::InitializeDynamicElements()
+{
+    // Synchronous generators
+    for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
+        SyncGenerator* syncGenerator = *it;
+        if(syncGenerator->IsOnline()) {
+            auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
+            double k = 1.0;  // Power base change factor.
+            if(data.useMachineBase) {
+                double oldBase = data.nominalPower * std::pow(1000.0f, data.nominalPowerUnit);
+                k = m_powerSystemBase / oldBase;
+            }
+            data.terminalVoltage = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().voltage;
+
+            std::complex<double> conjS(data.activePower, -data.reactivePower);
+            std::complex<double> conjV = std::conj(data.terminalVoltage);
+            std::complex<double> ia = conjS / conjV;
+
+            double xd = data.syncXd * k;
+            double xq = data.syncXq * k;
+            double ra = data.armResistance * k;
+
+            // Initialize state variables
+            std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
+            data.delta = std::arg(eq0);
+
+            double teta0 = std::arg(data.terminalVoltage);
+            double vd0, vq0;
+            ABCtoDQ0(data.terminalVoltage, data.delta - teta0, vd0, vq0);
+
+            double fi0 = std::arg(ia);
+            double id0, iq0;
+            ABCtoDQ0(ia, data.delta - fi0, id0, iq0);
+
+            data.initialFieldVoltage = std::abs(eq0) - (xd - xq) * id0;
+            data.pm = std::real((data.terminalVoltage * std::conj(ia)) + (std::abs(ia) * std::abs(ia) * ra));
+            data.speed = 2.0 * M_PI * 60.0;
+
+            switch(GetMachineModel(syncGenerator)) {
+                case SM_MODEL_1: {
+                    data.tranEq = 0.0;
+                    data.tranEd = 0.0;
+                    data.subEq = 0.0;
+                    data.subEd = 0.0;
+                } break;
+                case SM_MODEL_2: {
+                    double tranXd = data.transXd * k;
+
+                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
+                    data.tranEd = 0.0;
+                    data.subEd = 0.0;
+                    data.subEq = 0.0;
+                } break;
+                case SM_MODEL_3: {
+                    double tranXd = data.transXd * k;
+                    double tranXq = data.transXq * k;
+
+                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
+                    data.tranEd = -(xq - tranXq) * iq0;
+                    data.subEd = 0.0;
+                    data.subEq = 0.0;
+                } break;
+                case SM_MODEL_4: {
+                    double tranXd = data.transXd * k;
+                    double subXd = data.subXd * k;
+                    double subXq = data.subXq * k;
+
+                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
+                    data.tranEd = 0.0;
+                    data.subEq = data.tranEq + (tranXd - subXd) * id0;
+                    data.subEd = -(xq - subXq) * iq0;
+                } break;
+                case SM_MODEL_5: {
+                    double tranXd = data.transXd * k;
+                    double tranXq = data.transXq * k;
+                    double subXd = data.subXd * k;
+                    double subXq = data.subXq * k;
+
+                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
+                    data.tranEd = -(xq - tranXq) * iq0;
+                    data.subEq = data.tranEq + (tranXd - subXd) * id0;
+                    data.subEd = data.tranEd + (tranXq - subXq) * iq0;
+                } break;
+                default: {
+                    break;
+                }
+            }
+
+            // Initialize controllers
+            if(data.useAVR) {
+                if(data.avrSolver) delete data.avrSolver;
+                data.avrSolver = new ControlElementSolver(data.avr, m_timeStep, 1e-3, false,
+                                                          std::abs(data.terminalVoltage), m_parent);
+                if(!data.avrSolver->IsOK()) {
+                    m_errorMsg = _("Error on initializate the AVR of \"") + data.name + _("\".");
+                    syncGenerator->SetElectricalData(data);
+                    return false;
+                }
+            }
+            if(data.useSpeedGovernor) {
+                if(data.speedGovSolver) delete data.speedGovSolver;
+                data.speedGovSolver =
+                    new ControlElementSolver(data.speedGov, m_timeStep, 1e-3, false, data.speed, m_parent);
+                if(!data.speedGovSolver->IsOK()) {
+                    m_errorMsg = _("Error on initializate the speed governor of \"") + data.name + _("\".");
+                    syncGenerator->SetElectricalData(data);
+                    return false;
+                }
+            }
+
+            syncGenerator->SetElectricalData(data);
+        }
+    }
+    return true;
 }

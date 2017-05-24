@@ -5,6 +5,7 @@
 
 class SyncMachineForm;
 class ControlElementContainer;
+class ControlElementSolver;
 
 struct SyncGeneratorElectricalData {
     // General
@@ -61,9 +62,44 @@ struct SyncGeneratorElectricalData {
     double subTd0 = 0.0;
     double subTq0 = 0.0;
 
+    // Machine state variables
+    std::complex<double> terminalVoltage;
+    std::vector<std::complex<double> > terminalVoltageVector;
+    std::complex<double> electricalPower;
+    std::vector<std::complex<double> > electricalPowerVector;
+    double pm;
+    std::vector<double> mechanicalPowerVector;
+    double speed;
+    std::vector<double> freqVector;
+    double fieldVoltage;
+    std::vector<double> fieldVoltageVector;
+    double delta;
+    std::vector<double> deltaVector;
+
+    double initialFieldVoltage;
+
+    // Internal machine variables
+    double tranEq;
+    double tranEd;
+    double subEq;
+    double subEd;
+    double pe;
+
+    // Integration constants
+    IntegrationConstant icSpeed;
+    IntegrationConstant icDelta;
+    IntegrationConstant icTranEq;
+    IntegrationConstant icTranEd;
+    IntegrationConstant icSubEq;
+    IntegrationConstant icSubEd;
+
     // Control
     ControlElementContainer* avr = NULL;
     ControlElementContainer* speedGov = NULL;
+    
+    // Control solvers
+    ControlElementSolver* avrSolver = NULL;
+    ControlElementSolver* speedGovSolver = NULL;
 };
 
 class SyncGenerator : public Machines

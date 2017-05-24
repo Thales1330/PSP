@@ -78,6 +78,18 @@ struct SwitchingData {
 };
 
 /**
+ * @class IntegrationConstant
+ * @author Thales Lima Oliveira
+ * @date 24/05/2017
+ * @file PowerElement.h
+ * @brief Integration constants to calculate dynamic elements through trapezoidal integration method
+ */
+struct IntegrationConstant {
+    double c; /**< C value */
+    double m; /**< M value */
+};
+
+/**
  * @class PowerElement
  * @author Thales Lima Oliveira
  * @date 18/01/2017
@@ -86,7 +98,7 @@ struct SwitchingData {
  */
 class PowerElement : public Element
 {
-public:
+   public:
     /**
      * @brief Constructor
      */
@@ -102,8 +114,9 @@ public:
      * @param parentPoint Position of node on parent.
      * @param secondPoint Next point in element.
      */
-    virtual wxPoint2DDouble
-    GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const;
+    virtual wxPoint2DDouble GetSwitchPoint(Element* parent,
+                                           wxPoint2DDouble parentPoint,
+                                           wxPoint2DDouble secondPoint) const;
 
     /**
      * @brief Check if switch contains position.
@@ -144,30 +157,26 @@ public:
      * @param data Switching data.
      */
     virtual void SetSwitchingData(SwitchingData data) { m_swData = data; }
-
     /**
      * @brief Returns the switching data of the element.
      * @return Element switching data.
      */
     virtual SwitchingData GetSwitchingData() { return m_swData; }
-
     /**
      * @brief Set the direction of the power flow.
      * @param pfDirection Power flow direction.
      */
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection) { m_pfDirection = pfDirection; }
-
     /**
      * @brief Return the direction of the power flow.
      * @return Power flow direction.
      */
     virtual PowerFlowDirection GetPowerFlowDirection() const { return m_pfDirection; }
-
-protected:
+   protected:
     SwitchingData m_swData;
     std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;
     PowerFlowDirection m_pfDirection = PF_NONE;
-    
+
     OpenGLColour m_busColour;
     OpenGLColour m_onlineElementColour;
     OpenGLColour m_offlineElementColour;
@@ -176,4 +185,4 @@ protected:
     OpenGLColour m_powerFlowArrowColour;
 };
 
-#endif // POWERELEMENT_H
+#endif  // POWERELEMENT_H

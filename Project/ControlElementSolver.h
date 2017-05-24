@@ -32,7 +32,7 @@ class ControlElementSolver
                          bool startAllZero = true,
                          double input = 0.0,
                          wxWindow* parent = NULL);
-    ~ControlElementSolver() {}
+    virtual ~ControlElementSolver() {}
     virtual bool InitializeValues(double input, bool startAllZero);
     virtual void SolveNextStep(double input);
     virtual std::vector<double> GetSolutions() { return m_solutions; }

@@ -3,10 +3,12 @@
 
 #include "ElectricCalculation.h"
 
+class ControlElementSolver;
+
 class Electromechanical : public ElectricCalculation
 {
 public:
-    Electromechanical(std::vector<Element*> elementList);
+    Electromechanical(wxWindow* parent, std::vector<Element*> elementList);
     ~Electromechanical();
     
     bool RunStabilityCalculation();
@@ -20,7 +22,9 @@ protected:
     
     void InsertSyncMachinesOnYBus();
     std::complex<double> GetSyncMachineAdmittance(SyncGenerator* generator);
+    bool InitializeDynamicElements();
     
+    wxWindow* m_parent = NULL;
     wxString m_errorMsg = _("Unknown error");
     
     std::vector<std::vector<std::complex<double> > > m_yBus;
