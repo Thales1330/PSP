@@ -81,7 +81,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                 std::complex<double> yLoad = std::complex<double>(data.activePower, -data.reactivePower);
                 if(allLoadsAsImpedances) {
                     std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
-                    yLoad /= (v * v);
+                    yLoad /= (std::abs(v) * std::abs(v));
                 }
                 yBus[n][n] += yLoad;
             }
@@ -735,7 +735,7 @@ void ElectricCalculation::GetLUDecomposition(std::vector<std::vector<std::comple
         matrixL[i][0] = matrix[i][0] / matrixU[0][0];
     }
 
-    // Upper matrix main diagonal.
+    // Lower matrix main diagonal.
     for(int i = 1; i < size; i++) {
         matrixL[i][i] = std::complex<double>(1.0, 0.0);
     }

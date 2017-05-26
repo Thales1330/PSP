@@ -29,7 +29,9 @@ class Electromechanical : public ElectricCalculation
     bool InitializeDynamicElements();
     void CalculateMachinesCurrents();
     void CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq);
-    bool SolveSynchronousMachines(bool saveValues = false);
+    bool SolveSynchronousMachines();
+    
+    void SaveData();
 
     wxWindow* m_parent = NULL;
     wxString m_errorMsg = _("Unknown error");
@@ -46,7 +48,7 @@ class Electromechanical : public ElectricCalculation
     double m_powerSystemBase = 100e6;
 
     double m_timeStep = 1e-3;
-    double m_tolerance = 1e-3;
+    double m_tolerance = 1e-5;
     int m_maxIterations = 100;
 
     std::vector<double> m_eventTimeList;

@@ -20,19 +20,25 @@ bool Electromechanical::RunStabilityCalculation()
     GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
 
     // Get buses voltages.
+    wxString str = "";
     m_vBus.clear();
     m_vBus.resize(m_busList.size());
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
         auto data = bus->GetElectricalData();
         m_vBus[data.number] = data.voltage;
+        str += wxString::Format("%f /_ %f\n", std::abs(m_vBus[data.number]), std::arg(m_vBus[data.number]) * 180.0f / M_PI);
     }
+    wxMessageBox(str);
 
     // Calculate injected currents
+    str = "";
     m_iBus = ComplexMatrixTimesVector(m_yBus, m_vBus);
     for(unsigned int i = 0; i < m_iBus.size(); ++i) {
         if(std::abs(m_iBus[i]) < 1e-5) m_iBus[i] = std::complex<double>(0.0, 0.0);
+        str += wxString::Format("%f /_ %f\n", std::abs(m_iBus[i]), std::arg(m_iBus[i]) * 180.0f / M_PI);
     }
+    wxMessageBox(str);
 
     if(!InitializeDynamicElements()) return false;
 
@@ -47,14 +53,16 @@ bool Electromechanical::RunStabilityCalculation()
             GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
         }
 
-        bool saveData = false;
         if(currentPrintTime >= printTime) {
             m_timeVector.push_back(currentTime);
+            SaveData();
             currentPrintTime = 0.0;
-            saveData = true;
         }
 
-        if(!SolveSynchronousMachines(saveData)) return false;
+        if(!SolveSynchronousMachines()) {
+            wxMessageBox(wxString::Format("%f", currentTime));
+            return false;
+        }
 
         currentTime += m_timeStep;
         currentPrintTime += m_timeStep;
@@ -325,7 +333,7 @@ void Electromechanical::SetEvent(double currentTime)
         }
     }
 
-    // Capacitor switching
+    // Inductor switching
     for(auto it = m_inductorList.begin(), itEnd = m_inductorList.end(); it != itEnd; ++it) {
         Inductor* inductor = *it;
         auto swData = inductor->GetSwitchingData();
@@ -398,7 +406,7 @@ std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* 
         }
     }
     double xdq = 0.5 * (xd + xq);
-    return std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0);
+    return (std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0));
 }
 
 bool Electromechanical::InitializeDynamicElements()
@@ -427,21 +435,28 @@ bool Electromechanical::InitializeDynamicElements()
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
             data.delta = std::arg(eq0);
 
-            double teta0 = std::arg(data.terminalVoltage);
-            double vd0, vq0;
-            ABCtoDQ0(data.terminalVoltage, data.delta - teta0, vd0, vq0);
+            //double teta0 = std::arg(data.terminalVoltage);
+            //double vd0, vq0;
+            // ABCtoDQ0(data.terminalVoltage, data.delta - teta0, vd0, vq0);
+            //vq0 = std::abs(data.terminalVoltage) * cos(data.delta - teta0);
+            //vd0 = -std::abs(data.terminalVoltage) * sin(data.delta - teta0);
 
             double fi0 = std::arg(ia);
             double id0, iq0;
-            ABCtoDQ0(ia, data.delta - fi0, id0, iq0);
+            //ABCtoDQ0(ia, data.delta - fi0, id0, iq0);
+            iq0 = std::abs(ia) * cos(data.delta - fi0);
+            id0 = -std::abs(ia) * sin(data.delta - fi0);
 
             data.initialFieldVoltage = std::abs(eq0) - (xd - xq) * id0;
             data.fieldVoltage = data.initialFieldVoltage;
             data.pm = std::real((data.terminalVoltage * std::conj(ia)) + (std::abs(ia) * std::abs(ia) * ra));
             data.speed = 2.0 * M_PI * m_systemFreq;
 
-            //data.pe = id0 * vd0 + iq0 * vq0 + (id0 * id0 + iq0 * iq0) * data.armResistance * k;
-            //data.electricalPower = std::complex<double>(data.activePower, data.reactivePower);
+            data.pe = data.pm;
+            data.electricalPower = std::complex<double>(data.activePower, data.reactivePower);
+
+            // data.pe = id0 * vd0 + iq0 * vq0 + (id0 * id0 + iq0 * iq0) * data.armResistance * k;
+            // data.electricalPower = std::complex<double>(data.activePower, data.reactivePower);
 
             switch(GetMachineModel(syncGenerator)) {
                 case SM_MODEL_1: {
@@ -577,9 +592,9 @@ void Electromechanical::CalculateMachinesCurrents()
             double dVR = std::real(e) - std::real(v);
             double dVI = std::imag(e) - std::imag(v);
 
-            double iAdjR = ((0.5 * (xd - xq)) / (ra * ra + xd * xq)) *
+            double iAdjR = ((xd - xq) / (ra * ra + xd * xq)) *
                            (-std::sin(2.0 * data.delta) * dVR + std::cos(2.0 * data.delta) * dVI);
-            double iAdjI = ((0.5 * (xd - xq)) / (ra * ra + xd * xq)) *
+            double iAdjI = ((xd - xq) / (ra * ra + xd * xq)) *
                            (std::cos(2.0 * data.delta) * dVR + std::sin(2.0 * data.delta) * dVI);
 
             iInj = iUnadj + std::complex<double>(iAdjR, iAdjI);
@@ -598,7 +613,7 @@ void Electromechanical::CalculateMachinesCurrents()
 
 void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq)
 {
-    auto data = syncGenerator->GetElectricalData();
+    auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
 
     double k = 1.0;  // Power base change factor.
     if(data.useMachineBase) {
@@ -639,14 +654,15 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     syncGenerator->SetElectricalData(data);
 }
 
-bool Electromechanical::SolveSynchronousMachines(bool saveValues)
+bool Electromechanical::SolveSynchronousMachines()
 {
     double w0 = 2.0 * M_PI * m_systemFreq;
 
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
+        auto data = syncGenerator->GetElectricalData();
+
         if(syncGenerator->IsOnline()) {
-            auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
             int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
             double id, iq;
 
@@ -656,16 +672,6 @@ bool Electromechanical::SolveSynchronousMachines(bool saveValues)
 
             // Calculate integration constants.
             CalculateIntegrationConstants(syncGenerator, id, iq);
-            
-            if(saveValues && data.plotSyncMachine) {
-                data.terminalVoltageVector.push_back(data.terminalVoltage);
-                data.electricalPowerVector.push_back(data.pe);
-                data.mechanicalPowerVector.push_back(data.pm);
-                data.freqVector.push_back(data.speed / (2.0f * M_PI));
-                data.fieldVoltageVector.push_back(data.fieldVoltage);
-                data.deltaVector.push_back(data.delta);
-            }
-            syncGenerator->SetElectricalData(data);
         }
     }
 
@@ -675,10 +681,13 @@ bool Electromechanical::SolveSynchronousMachines(bool saveValues)
         error = 0.0;
 
         // Calculate the injected currents.
+        //wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
         CalculateMachinesCurrents();
-
+        //wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
+        
         // Calculate the buses voltages.
         m_vBus = LUEvaluate(m_yBusU, m_yBusL, m_iBus);
+        
 
         // Solve machine equations.
         for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
@@ -698,7 +707,6 @@ bool Electromechanical::SolveSynchronousMachines(bool saveValues)
                 // Mechanical differential equations.
                 double w = data.icSpeed.c + data.icSpeed.m * (data.pm - data.pe);
                 error = std::max(error, std::abs(data.speed - w) / w0);
-                //wxMessageBox(wxString::Format("%f", std::abs(w)));
 
                 double delta = data.icDelta.c + data.icDelta.m * w;
                 error = std::max(error, std::abs(data.delta - delta));
@@ -742,10 +750,13 @@ bool Electromechanical::SolveSynchronousMachines(bool saveValues)
                         error = std::max(error, std::abs(data.tranEq - tranEq));
 
                         double tranEd = data.icTranEd.c - data.icTranEd.m * (data.syncXq * k - data.transXq * k) * iq;
+                        // double tranEd = data.icTranEq.c - data.icTranEd.m * (data.syncXq * k - data.transXq * k) *
+                        // id;
                         error = std::max(error, std::abs(data.tranEd - tranEd));
 
                         data.tranEq = tranEq;
                         data.tranEd = tranEd;
+
                     } break;
                     case SM_MODEL_4: {
                     } break;
@@ -755,6 +766,8 @@ bool Electromechanical::SolveSynchronousMachines(bool saveValues)
             } else {
                 // Set values to open circuit machine.
             }
+
+            syncGenerator->SetElectricalData(data);
         }
 
         ++iterations;
@@ -806,4 +819,21 @@ double Electromechanical::GetPowerValue(double value, ElectricalUnit unit)
         } break;
     }
     return 0.0;
+}
+
+void Electromechanical::SaveData()
+{
+    for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
+        SyncGenerator* syncGenerator = *it;
+        auto data = syncGenerator->GetElectricalData();
+        if(data.plotSyncMachine) {
+            data.terminalVoltageVector.push_back(data.terminalVoltage);
+            data.electricalPowerVector.push_back(data.pe);
+            data.mechanicalPowerVector.push_back(data.pm);
+            data.freqVector.push_back(data.speed / (2.0f * M_PI));
+            data.fieldVoltageVector.push_back(data.fieldVoltage);
+            data.deltaVector.push_back(data.delta);
+            syncGenerator->SetElectricalData(data);
+        }
+    }
 }
