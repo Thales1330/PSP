@@ -21,13 +21,15 @@ class Electromechanical : public ElectricCalculation
     bool HasEvent(double currentTime);
     void SetEvent(double currentTime);
     inline bool EventTrigger(double eventTime, double currentTime);
+    
+    double GetPowerValue(double value, ElectricalUnit unit);
 
     void InsertSyncMachinesOnYBus();
     std::complex<double> GetSyncMachineAdmittance(SyncGenerator* generator);
     bool InitializeDynamicElements();
     void CalculateMachinesCurrents();
     void CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq);
-    bool SolveSynchronousMachines();
+    bool SolveSynchronousMachines(bool saveValues = false);
 
     wxWindow* m_parent = NULL;
     wxString m_errorMsg = _("Unknown error");

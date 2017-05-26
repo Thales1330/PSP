@@ -33,6 +33,9 @@ class PowerFlow;
 class Fault;
 class Electromechanical;
 
+class ElementPlotData;
+class ChartView;
+
 enum ElementID {
     ID_BUS = 0,
     ID_LINE,

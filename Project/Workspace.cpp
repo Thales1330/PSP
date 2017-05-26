@@ -18,6 +18,9 @@
 #include "Fault.h"
 #include "Electromechanical.h"
 
+#include "ElementPlotData.h"
+#include "ChartView.h"
+
 // Workspace
 Workspace::Workspace() : WorkspaceBase(NULL) {}
 Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : WorkspaceBase(parent)
@@ -1406,6 +1409,16 @@ bool Workspace::RunStability()
 
     // Run power flow after stability.
     RunPowerFlow();
+
+    std::vector<ElementPlotData> plotDataList;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        PowerElement* element = *it;
+        ElementPlotData plotData;
+        if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
+    }
+
+    ChartView* cView = new ChartView(this, plotDataList, stability.GetTimeVector());
+    cView->Show();
 
     return result;
 }

@@ -60,6 +60,7 @@ class ElementPlotData
     wxString GetName() const { return m_name; }
     void SetName(wxString name) { m_name = name; }
     CurveType GetCurveType() const { return m_curveType; }
+    void SetCurveType(CurveType type) { m_curveType = type; }
     PlotData* GetPlotData(int index) const { return m_elementData[index]; }
     void AddData(std::vector<double> values, wxString name);
 

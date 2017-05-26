@@ -2,21 +2,14 @@
 #include "SyncGenerator.h"
 #include "ControlElementContainer.h"
 
-SyncGenerator::SyncGenerator()
-    : Machines()
-{
-    Init();
-}
-
-SyncGenerator::SyncGenerator(wxString name)
-    : Machines()
+SyncGenerator::SyncGenerator() : Machines() { Init(); }
+SyncGenerator::SyncGenerator(wxString name) : Machines()
 {
     Init();
     m_electricalData.name = name;
 }
 
 SyncGenerator::~SyncGenerator() {}
-
 void SyncGenerator::Init()
 {
     int numPtsSine = 10;
@@ -29,7 +22,7 @@ void SyncGenerator::Init()
         double y = std::sin(x);
         m_sinePts.push_back(wxPoint2DDouble((x / pi) * mx, y * my));
     }
-    
+
     m_electricalData.avr = new ControlElementContainer();
     m_electricalData.speedGov = new ControlElementContainer();
 }
@@ -135,7 +128,7 @@ SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowe
 }
 
 void SyncGenerator::SetNominalVoltage(std::vector<double> nominalVoltage,
-    std::vector<ElectricalUnit> nominalVoltageUnit)
+                                      std::vector<ElectricalUnit> nominalVoltageUnit)
 {
     if(nominalVoltage.size() > 0) {
         m_electricalData.nominalVoltage = nominalVoltage[0];
@@ -148,25 +141,25 @@ Element* SyncGenerator::GetCopy()
     SyncGenerator* copy = new SyncGenerator();
     *copy = *this;
     auto data = copy->GetElectricalData();
-    
+
     // Copy AVR
     std::vector<ConnectionLine*> cLineList;
     std::vector<ControlElement*> elementList;
     m_electricalData.avr->GetContainerCopy(elementList, cLineList);
-    
+
     ControlElementContainer* avrCopy = new ControlElementContainer();
     avrCopy->FillContainer(elementList, cLineList);
     data.avr = avrCopy;
-    
-    //Copy Speed Governor
+
+    // Copy Speed Governor
     cLineList.clear();
     elementList.clear();
     m_electricalData.speedGov->GetContainerCopy(elementList, cLineList);
-    
+
     ControlElementContainer* speedGovCopy = new ControlElementContainer();
     speedGovCopy->FillContainer(elementList, cLineList);
     data.speedGov = speedGovCopy;
-    
+
     copy->SetElectricalData(data);
     return copy;
 }
@@ -215,4 +208,26 @@ wxString SyncGenerator::GetTipText() const
     }
 
     return tipText;
+}
+
+bool SyncGenerator::GetPlotData(ElementPlotData& plotData)
+{
+    if(!m_electricalData.plotSyncMachine) return false;
+    plotData.SetName(m_electricalData.name);
+    plotData.SetCurveType(ElementPlotData::CT_SYNC_GENERATOR);
+
+    std::vector<double> absTerminalVoltage, activePower, reactivePower;
+    for(unsigned int i = 0; i < m_electricalData.terminalVoltageVector.size(); ++i) {
+        absTerminalVoltage.push_back(std::abs(m_electricalData.terminalVoltageVector[i]));
+        activePower.push_back(std::real(m_electricalData.electricalPowerVector[i]));
+        reactivePower.push_back(std::imag(m_electricalData.electricalPowerVector[i]));
+    }
+    plotData.AddData(absTerminalVoltage, _("Terminal voltage"));
+    plotData.AddData(activePower, _("Active power"));
+    plotData.AddData(reactivePower, _("Reactive power"));
+    plotData.AddData(m_electricalData.mechanicalPowerVector, _("Mechanical power"));
+    plotData.AddData(m_electricalData.freqVector, _("Frequency"));
+    plotData.AddData(m_electricalData.fieldVoltageVector, _("Field voltage"));
+    plotData.AddData(m_electricalData.deltaVector, _("Delta"));
+    return true;
 }

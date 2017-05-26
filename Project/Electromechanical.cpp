@@ -38,20 +38,26 @@ bool Electromechanical::RunStabilityCalculation()
 
     // test
     double simTime = 10.0;
+    double printTime = 0.01;
     double currentTime = 0.0;
+    double currentPrintTime = 0.0;
     while(currentTime <= simTime) {
         if(HasEvent(currentTime)) {
             SetEvent(currentTime);
             GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
         }
 
-        // Solve synchronous machines.
-        if(!SolveSynchronousMachines()){
-            wxMessageBox(wxString::Format("%f", currentTime));
-            return false;
+        bool saveData = false;
+        if(currentPrintTime >= printTime) {
+            m_timeVector.push_back(currentTime);
+            currentPrintTime = 0.0;
+            saveData = true;
         }
 
+        if(!SolveSynchronousMachines(saveData)) return false;
+
         currentTime += m_timeStep;
+        currentPrintTime += m_timeStep;
     }
     return true;
 }
@@ -368,7 +374,7 @@ std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* 
     auto data = generator->GetPUElectricalData(m_powerSystemBase);
     double k = 1.0;  // Power base change factor.
     if(data.useMachineBase) {
-        double oldBase = data.nominalPower * std::pow(1000.0f, data.nominalPowerUnit);
+        double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
         k = m_powerSystemBase / oldBase;
     }
 
@@ -400,11 +406,11 @@ bool Electromechanical::InitializeDynamicElements()
     // Synchronous generators
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
+        auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
         if(syncGenerator->IsOnline()) {
-            auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
             double k = 1.0;  // Power base change factor.
             if(data.useMachineBase) {
-                double oldBase = data.nominalPower * std::pow(1000.0f, data.nominalPowerUnit);
+                double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
                 k = m_powerSystemBase / oldBase;
             }
             data.terminalVoltage = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().voltage;
@@ -433,6 +439,9 @@ bool Electromechanical::InitializeDynamicElements()
             data.fieldVoltage = data.initialFieldVoltage;
             data.pm = std::real((data.terminalVoltage * std::conj(ia)) + (std::abs(ia) * std::abs(ia) * ra));
             data.speed = 2.0 * M_PI * m_systemFreq;
+
+            //data.pe = id0 * vd0 + iq0 * vq0 + (id0 * id0 + iq0 * iq0) * data.armResistance * k;
+            //data.electricalPower = std::complex<double>(data.activePower, data.reactivePower);
 
             switch(GetMachineModel(syncGenerator)) {
                 case SM_MODEL_1: {
@@ -505,9 +514,18 @@ bool Electromechanical::InitializeDynamicElements()
                     return false;
                 }
             }
-
-            syncGenerator->SetElectricalData(data);
+        } else {
+            // Initialize open circuit machine.
         }
+        // Reset plot data
+        data.terminalVoltageVector.clear();
+        data.electricalPowerVector.clear();
+        data.mechanicalPowerVector.clear();
+        data.freqVector.clear();
+        data.fieldVoltageVector.clear();
+        data.deltaVector.clear();
+
+        syncGenerator->SetElectricalData(data);
     }
     return true;
 }
@@ -523,7 +541,7 @@ void Electromechanical::CalculateMachinesCurrents()
         if(syncGenerator->IsOnline()) {
             double k = 1.0;  // Power base change factor.
             if(data.useMachineBase) {
-                double oldBase = data.nominalPower * std::pow(1000.0f, data.nominalPowerUnit);
+                double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
                 k = m_powerSystemBase / oldBase;
             }
 
@@ -584,7 +602,7 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
 
     double k = 1.0;  // Power base change factor.
     if(data.useMachineBase) {
-        double oldBase = data.nominalPower * std::pow(1000.0f, data.nominalPowerUnit);
+        double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
         k = m_powerSystemBase / oldBase;
     }
     double w0 = 2.0f * M_PI * m_systemFreq;
@@ -617,18 +635,18 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     data.icSubEd.m = m_timeStep / (2.0f * data.subTq0 + m_timeStep);
     data.icSubEd.c = (1.0f - 2.0f * data.icSubEd.m) * data.subEd +
                      data.icSubEd.m * (data.tranEd - (data.transXq * k - data.subXq * k) * iq);
-                     
+
     syncGenerator->SetElectricalData(data);
 }
 
-bool Electromechanical::SolveSynchronousMachines()
+bool Electromechanical::SolveSynchronousMachines(bool saveValues)
 {
     double w0 = 2.0 * M_PI * m_systemFreq;
 
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
         if(syncGenerator->IsOnline()) {
-            auto data = syncGenerator->GetElectricalData();
+            auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
             int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
             double id, iq;
 
@@ -638,6 +656,16 @@ bool Electromechanical::SolveSynchronousMachines()
 
             // Calculate integration constants.
             CalculateIntegrationConstants(syncGenerator, id, iq);
+            
+            if(saveValues && data.plotSyncMachine) {
+                data.terminalVoltageVector.push_back(data.terminalVoltage);
+                data.electricalPowerVector.push_back(data.pe);
+                data.mechanicalPowerVector.push_back(data.pm);
+                data.freqVector.push_back(data.speed / (2.0f * M_PI));
+                data.fieldVoltageVector.push_back(data.fieldVoltage);
+                data.deltaVector.push_back(data.delta);
+            }
+            syncGenerator->SetElectricalData(data);
         }
     }
 
@@ -655,11 +683,12 @@ bool Electromechanical::SolveSynchronousMachines()
         // Solve machine equations.
         for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
             SyncGenerator* syncGenerator = *it;
+            auto data = syncGenerator->GetElectricalData();
+
             if(syncGenerator->IsOnline()) {
-                auto data = syncGenerator->GetElectricalData();
                 double k = 1.0;  // Power base change factor.
                 if(data.useMachineBase) {
-                    double oldBase = data.nominalPower * std::pow(1000.0f, data.nominalPowerUnit);
+                    double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
                     k = m_powerSystemBase / oldBase;
                 }
                 int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
@@ -669,6 +698,7 @@ bool Electromechanical::SolveSynchronousMachines()
                 // Mechanical differential equations.
                 double w = data.icSpeed.c + data.icSpeed.m * (data.pm - data.pe);
                 error = std::max(error, std::abs(data.speed - w) / w0);
+                //wxMessageBox(wxString::Format("%f", std::abs(w)));
 
                 double delta = data.icDelta.c + data.icDelta.m * w;
                 error = std::max(error, std::abs(data.delta - delta));
@@ -722,7 +752,8 @@ bool Electromechanical::SolveSynchronousMachines()
                     case SM_MODEL_5: {
                     } break;
                 }
-                syncGenerator->SetElectricalData(data);
+            } else {
+                // Set values to open circuit machine.
             }
         }
 
@@ -735,4 +766,44 @@ bool Electromechanical::SolveSynchronousMachines()
     }
 
     return true;
+}
+
+double Electromechanical::GetPowerValue(double value, ElectricalUnit unit)
+{
+    switch(unit) {
+        case UNIT_PU: {
+            return value;
+        } break;
+        case UNIT_VA: {
+            return value;
+        } break;
+        case UNIT_kVA: {
+            return value * 1e3;
+        } break;
+        case UNIT_MVA: {
+            return value * 1e6;
+        } break;
+        case UNIT_W: {
+            return value;
+        } break;
+        case UNIT_kW: {
+            return value * 1e3;
+        } break;
+        case UNIT_MW: {
+            return value * 1e6;
+        } break;
+        case UNIT_VAr: {
+            return value;
+        } break;
+        case UNIT_kVAr: {
+            return value * 1e3;
+        } break;
+        case UNIT_MVAr: {
+            return value * 1e6;
+        } break;
+        default: {
+            return 0.0;
+        } break;
+    }
+    return 0.0;
 }

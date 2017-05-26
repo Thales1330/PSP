@@ -42,7 +42,7 @@ struct SyncGeneratorElectricalData {
 
     // Stability
     bool plotSyncMachine = false;
-    double inertia = 0.0;
+    double inertia = 1.0;
     double damping = 0.0;
     bool useAVR = false;
     bool useSpeedGovernor = false;
@@ -119,6 +119,7 @@ class SyncGenerator : public Machines
     virtual SyncGeneratorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(SyncGeneratorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
+    virtual bool GetPlotData(ElementPlotData& plotData);
 
    protected:
     std::vector<wxPoint2DDouble> m_sinePts;

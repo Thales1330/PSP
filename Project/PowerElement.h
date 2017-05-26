@@ -2,6 +2,7 @@
 #define POWERELEMENT_H
 
 #include "Element.h"
+#include "ElementPlotData.h"
 
 /**
  * @enum ElectricalUnit
@@ -172,6 +173,13 @@ class PowerElement : public Element
      * @return Power flow direction.
      */
     virtual PowerFlowDirection GetPowerFlowDirection() const { return m_pfDirection; }
+    
+    /**
+     * @brief Fill the plot data.
+     * @param plotData Plot data to be filled.
+     * @return true if the plot data was successfully filled, false otherwise.
+     */
+    virtual bool GetPlotData(ElementPlotData& plotData) { return false; }
    protected:
     SwitchingData m_swData;
     std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;
