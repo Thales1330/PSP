@@ -42,7 +42,7 @@ bool Electromechanical::RunStabilityCalculation()
     wxMessageBox(str);
 
     if(!InitializeDynamicElements()) return false;
-
+    
     // test
     double simTime = 10.0;
     double printTime = 0.01;
@@ -397,14 +397,12 @@ std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* 
         case SM_MODEL_3: {
             xd = data.transXd * k;
             xq = data.transXq * k;
-            break;
-        }
+        } break;
         case SM_MODEL_4:
         case SM_MODEL_5: {
             xd = data.subXd * k;
             xq = data.subXq * k;
-            break;
-        }
+        } break;
     }
     double xdq = 0.5 * (xd + xq);
     return (std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0));
@@ -436,17 +434,17 @@ bool Electromechanical::InitializeDynamicElements()
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
             data.delta = std::arg(eq0);
 
-            // double teta0 = std::arg(data.terminalVoltage);
-            // double vd0, vq0;
-            // ABCtoDQ0(data.terminalVoltage, data.delta - teta0, vd0, vq0);
-            // vq0 = std::abs(data.terminalVoltage) * cos(data.delta - teta0);
-            // vd0 = -std::abs(data.terminalVoltage) * sin(data.delta - teta0);
+            double teta0 = std::arg(data.terminalVoltage);
+            double vd0, vq0;
+            ABCtoDQ0(data.terminalVoltage, data.delta - teta0, vd0, vq0);
+            vq0 = std::abs(data.terminalVoltage) * std::cos(data.delta - teta0);
+            vd0 = -std::abs(data.terminalVoltage) * std::sin(data.delta - teta0);
 
             double fi0 = std::arg(ia);
             double id0, iq0;
             // ABCtoDQ0(ia, data.delta - fi0, id0, iq0);
-            iq0 = std::abs(ia) * cos(data.delta - fi0);
-            id0 = -std::abs(ia) * sin(data.delta - fi0);
+            iq0 = std::abs(ia) * std::cos(data.delta - fi0);
+            id0 = -std::abs(ia) * std::sin(data.delta - fi0);
 
             data.initialFieldVoltage = std::abs(eq0) - (xd - xq) * id0;
             data.fieldVoltage = data.initialFieldVoltage;
@@ -480,6 +478,13 @@ bool Electromechanical::InitializeDynamicElements()
 
                     data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
                     data.tranEd = -(xq - tranXq) * iq0;
+
+                    // data.tranEq = vq0 + ra * iq0 - tranXd * id0;
+                    // data.tranEd = vd0 + ra * id0 - tranXq * iq0;
+
+                    // data.tranEq = data.initialFieldVoltage;
+                    // data.tranEd =
+
                     data.subEd = 0.0;
                     data.subEq = 0.0;
                 } break;
@@ -504,9 +509,8 @@ bool Electromechanical::InitializeDynamicElements()
                     data.subEq = data.tranEq + (tranXd - subXd) * id0;
                     data.subEd = data.tranEd + (tranXq - subXq) * iq0;
                 } break;
-                default: {
+                default:
                     break;
-                }
             }
 
             // Initialize controllers
@@ -589,7 +593,7 @@ void Electromechanical::CalculateMachinesCurrents()
 
             std::complex<double> y0 = std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0);
             std::complex<double> iUnadj = y0 * e;
-            wxMessageBox(wxString::Format("%f / %f\n", std::real(iUnadj), std::imag(iUnadj)));
+            // wxMessageBox(wxString::Format("%f / %f\n", data.tranEd, data.tranEq));
 
             double dVR = std::real(e) - std::real(v);
             double dVI = std::imag(e) - std::imag(v);
@@ -603,10 +607,9 @@ void Electromechanical::CalculateMachinesCurrents()
             m_iBus[n] += iInj;
 
             std::complex<double> iMachine = iInj - y0 * v;
+            //std::complex<double> iMachine = iUnadj - y0 * v;
 
-            //wxMessageBox(wxString::Format("%f /_ %f\n", std::real(data.electricalPower), std::imag(data.electricalPower)));
             data.electricalPower = v * std::conj(iMachine);
-            //wxMessageBox(wxString::Format("%f /_ %f\n", std::real(data.electricalPower), std::imag(data.electricalPower)));
         } else {
             data.electricalPower = std::complex<double>(0.0, 0.0);
         }
@@ -725,7 +728,7 @@ bool Electromechanical::SolveSynchronousMachines()
                 ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);
 
                 double pe = id * vd + iq * vq + (id * id + iq * iq) * data.armResistance * k;
-                //data.pe = (2 * pe - data.pe);  // Extrapolating Pe.
+                // data.pe = (2 * pe - data.pe);  // Extrapolating Pe.
                 data.pe = pe;  // Don't extrapolating Pe
 
                 // Electrical differential equations
@@ -836,11 +839,11 @@ void Electromechanical::SaveData()
         auto data = syncGenerator->GetElectricalData();
         if(data.plotSyncMachine) {
             data.terminalVoltageVector.push_back(data.terminalVoltage);
-            data.electricalPowerVector.push_back(data.pe);
+            data.electricalPowerVector.push_back(data.electricalPower);
             data.mechanicalPowerVector.push_back(data.pm);
             data.freqVector.push_back(data.speed / (2.0f * M_PI));
             data.fieldVoltageVector.push_back(data.fieldVoltage);
-            data.deltaVector.push_back(data.delta);
+            data.deltaVector.push_back(wxRadToDeg(data.delta));
             syncGenerator->SetElectricalData(data);
         }
     }
