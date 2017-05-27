@@ -27,7 +27,8 @@ bool Electromechanical::RunStabilityCalculation()
         Bus* bus = *it;
         auto data = bus->GetElectricalData();
         m_vBus[data.number] = data.voltage;
-        str += wxString::Format("%f /_ %f\n", std::abs(m_vBus[data.number]), std::arg(m_vBus[data.number]) * 180.0f / M_PI);
+        str += wxString::Format("%f /_ %f\n", std::abs(m_vBus[data.number]),
+                                std::arg(m_vBus[data.number]) * 180.0f / M_PI);
     }
     wxMessageBox(str);
 
@@ -435,15 +436,15 @@ bool Electromechanical::InitializeDynamicElements()
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
             data.delta = std::arg(eq0);
 
-            //double teta0 = std::arg(data.terminalVoltage);
-            //double vd0, vq0;
+            // double teta0 = std::arg(data.terminalVoltage);
+            // double vd0, vq0;
             // ABCtoDQ0(data.terminalVoltage, data.delta - teta0, vd0, vq0);
-            //vq0 = std::abs(data.terminalVoltage) * cos(data.delta - teta0);
-            //vd0 = -std::abs(data.terminalVoltage) * sin(data.delta - teta0);
+            // vq0 = std::abs(data.terminalVoltage) * cos(data.delta - teta0);
+            // vd0 = -std::abs(data.terminalVoltage) * sin(data.delta - teta0);
 
             double fi0 = std::arg(ia);
             double id0, iq0;
-            //ABCtoDQ0(ia, data.delta - fi0, id0, iq0);
+            // ABCtoDQ0(ia, data.delta - fi0, id0, iq0);
             iq0 = std::abs(ia) * cos(data.delta - fi0);
             id0 = -std::abs(ia) * sin(data.delta - fi0);
 
@@ -588,6 +589,7 @@ void Electromechanical::CalculateMachinesCurrents()
 
             std::complex<double> y0 = std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0);
             std::complex<double> iUnadj = y0 * e;
+            wxMessageBox(wxString::Format("%f / %f\n", std::real(iUnadj), std::imag(iUnadj)));
 
             double dVR = std::real(e) - std::real(v);
             double dVI = std::imag(e) - std::imag(v);
@@ -602,7 +604,9 @@ void Electromechanical::CalculateMachinesCurrents()
 
             std::complex<double> iMachine = iInj - y0 * v;
 
+            //wxMessageBox(wxString::Format("%f /_ %f\n", std::real(data.electricalPower), std::imag(data.electricalPower)));
             data.electricalPower = v * std::conj(iMachine);
+            //wxMessageBox(wxString::Format("%f /_ %f\n", std::real(data.electricalPower), std::imag(data.electricalPower)));
         } else {
             data.electricalPower = std::complex<double>(0.0, 0.0);
         }
@@ -681,13 +685,12 @@ bool Electromechanical::SolveSynchronousMachines()
         error = 0.0;
 
         // Calculate the injected currents.
-        //wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
+        // wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
         CalculateMachinesCurrents();
-        //wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
-        
+        // wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
+
         // Calculate the buses voltages.
         m_vBus = LUEvaluate(m_yBusU, m_yBusL, m_iBus);
-        
 
         // Solve machine equations.
         for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
@@ -722,19 +725,8 @@ bool Electromechanical::SolveSynchronousMachines()
                 ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);
 
                 double pe = id * vd + iq * vq + (id * id + iq * iq) * data.armResistance * k;
-                // data.pe = (2 * pe - data.pe);  // Extrapolating Pe.
-                data.pe = pe;  // Don't extrapolating Pe.
-
-                // Solve controllers.
-                if(data.useAVR && data.avrSolver) {
-                    data.avrSolver->SolveNextStep(std::abs(data.terminalVoltage));
-                    data.fieldVoltage = data.initialFieldVoltage + data.avrSolver->GetLastSolution();
-                }
-
-                if(data.useSpeedGovernor && data.speedGovSolver) {
-                    data.speedGovSolver->SolveNextStep(data.speed);
-                    data.pm = data.speedGovSolver->GetLastSolution();
-                }
+                //data.pe = (2 * pe - data.pe);  // Extrapolating Pe.
+                data.pe = pe;  // Don't extrapolating Pe
 
                 // Electrical differential equations
                 switch(GetMachineModel(syncGenerator)) {
@@ -776,6 +768,22 @@ bool Electromechanical::SolveSynchronousMachines()
                            "decrease the time step.");
             return false;
         }
+    }
+
+    // Solve controllers.
+    for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
+        SyncGenerator* syncGenerator = *it;
+        auto data = syncGenerator->GetElectricalData();
+        if(data.useAVR && data.avrSolver) {
+            data.avrSolver->SolveNextStep(std::abs(data.terminalVoltage));
+            data.fieldVoltage = data.initialFieldVoltage + data.avrSolver->GetLastSolution();
+        }
+
+        if(data.useSpeedGovernor && data.speedGovSolver) {
+            data.speedGovSolver->SolveNextStep(data.speed);
+            data.pm = data.speedGovSolver->GetLastSolution();
+        }
+        syncGenerator->SetElectricalData(data);
     }
 
     return true;
