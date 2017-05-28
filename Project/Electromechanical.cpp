@@ -11,6 +11,9 @@ Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> ele
 Electromechanical::~Electromechanical() {}
 bool Electromechanical::RunStabilityCalculation()
 {
+    wxProgressDialog pbd(_("Running simulation"), _("Initializing..."), 100, m_parent,
+                         wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
+
     // Calculate the admittance matrix with the synchronous machines.
     if(!GetYBus(m_yBus, m_powerSystemBase, POSITIVE_SEQ, false, true)) {
         m_errorMsg = _("It was not possible to build the admittance matrix.");
@@ -20,34 +23,29 @@ bool Electromechanical::RunStabilityCalculation()
     GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
 
     // Get buses voltages.
-    wxString str = "";
     m_vBus.clear();
     m_vBus.resize(m_busList.size());
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
         auto data = bus->GetElectricalData();
         m_vBus[data.number] = data.voltage;
-        str += wxString::Format("%f /_ %f\n", std::abs(m_vBus[data.number]),
-                                std::arg(m_vBus[data.number]) * 180.0f / M_PI);
     }
-    wxMessageBox(str);
 
     // Calculate injected currents
-    str = "";
     m_iBus = ComplexMatrixTimesVector(m_yBus, m_vBus);
     for(unsigned int i = 0; i < m_iBus.size(); ++i) {
         if(std::abs(m_iBus[i]) < 1e-5) m_iBus[i] = std::complex<double>(0.0, 0.0);
-        str += wxString::Format("%f /_ %f\n", std::abs(m_iBus[i]), std::arg(m_iBus[i]) * 180.0f / M_PI);
     }
-    wxMessageBox(str);
 
     if(!InitializeDynamicElements()) return false;
-    
+
     // test
-    double simTime = 10.0;
+    double simTime = 20.0;
     double printTime = 0.01;
+    double pbdTime = 0.01;
     double currentTime = 0.0;
     double currentPrintTime = 0.0;
+    double currentPbdTime = 0.0;
     while(currentTime <= simTime) {
         if(HasEvent(currentTime)) {
             SetEvent(currentTime);
@@ -60,13 +58,22 @@ bool Electromechanical::RunStabilityCalculation()
             currentPrintTime = 0.0;
         }
 
-        if(!SolveSynchronousMachines()) {
-            wxMessageBox(wxString::Format("%f", currentTime));
-            return false;
+        if(currentPbdTime > pbdTime) {
+            if(!pbd.Update((currentTime / simTime) * 100, wxString::Format("Time = %.2fs", currentTime))) {
+                pbd.Update(100);
+                currentTime = simTime;
+                
+                m_errorMsg = _("Simulation cancelled.");
+                return false;
+            }
+            currentPbdTime = 0.0;
         }
+
+        if(!SolveSynchronousMachines()) return false;
 
         currentTime += m_timeStep;
         currentPrintTime += m_timeStep;
+        currentPbdTime += m_timeStep;
     }
     return true;
 }
@@ -434,12 +441,6 @@ bool Electromechanical::InitializeDynamicElements()
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
             data.delta = std::arg(eq0);
 
-            double teta0 = std::arg(data.terminalVoltage);
-            double vd0, vq0;
-            ABCtoDQ0(data.terminalVoltage, data.delta - teta0, vd0, vq0);
-            vq0 = std::abs(data.terminalVoltage) * std::cos(data.delta - teta0);
-            vd0 = -std::abs(data.terminalVoltage) * std::sin(data.delta - teta0);
-
             double fi0 = std::arg(ia);
             double id0, iq0;
             // ABCtoDQ0(ia, data.delta - fi0, id0, iq0);
@@ -453,9 +454,6 @@ bool Electromechanical::InitializeDynamicElements()
 
             data.pe = data.pm;
             data.electricalPower = std::complex<double>(data.activePower, data.reactivePower);
-
-            // data.pe = id0 * vd0 + iq0 * vq0 + (id0 * id0 + iq0 * iq0) * data.armResistance * k;
-            // data.electricalPower = std::complex<double>(data.activePower, data.reactivePower);
 
             switch(GetMachineModel(syncGenerator)) {
                 case SM_MODEL_1: {
@@ -478,12 +476,6 @@ bool Electromechanical::InitializeDynamicElements()
 
                     data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
                     data.tranEd = -(xq - tranXq) * iq0;
-
-                    // data.tranEq = vq0 + ra * iq0 - tranXd * id0;
-                    // data.tranEd = vd0 + ra * id0 - tranXq * iq0;
-
-                    // data.tranEq = data.initialFieldVoltage;
-                    // data.tranEd =
 
                     data.subEd = 0.0;
                     data.subEq = 0.0;
@@ -593,21 +585,19 @@ void Electromechanical::CalculateMachinesCurrents()
 
             std::complex<double> y0 = std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0);
             std::complex<double> iUnadj = y0 * e;
-            // wxMessageBox(wxString::Format("%f / %f\n", data.tranEd, data.tranEq));
 
             double dVR = std::real(e) - std::real(v);
             double dVI = std::imag(e) - std::imag(v);
 
-            double iAdjR = ((xd - xq) / (ra * ra + xd * xq)) *
+            double iAdjR = ((0.5 * (xd - xq)) / (ra * ra + xd * xq)) *
                            (-std::sin(2.0 * data.delta) * dVR + std::cos(2.0 * data.delta) * dVI);
-            double iAdjI = ((xd - xq) / (ra * ra + xd * xq)) *
+            double iAdjI = ((0.5 * (xd - xq)) / (ra * ra + xd * xq)) *
                            (std::cos(2.0 * data.delta) * dVR + std::sin(2.0 * data.delta) * dVI);
 
             iInj = iUnadj + std::complex<double>(iAdjR, iAdjI);
             m_iBus[n] += iInj;
 
             std::complex<double> iMachine = iInj - y0 * v;
-            //std::complex<double> iMachine = iUnadj - y0 * v;
 
             data.electricalPower = v * std::conj(iMachine);
         } else {
@@ -688,9 +678,7 @@ bool Electromechanical::SolveSynchronousMachines()
         error = 0.0;
 
         // Calculate the injected currents.
-        // wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
         CalculateMachinesCurrents();
-        // wxMessageBox(wxString::Format("%f %f", m_iBus[0].real(), m_iBus[0].imag()));
 
         // Calculate the buses voltages.
         m_vBus = LUEvaluate(m_yBusU, m_yBusL, m_iBus);
@@ -745,8 +733,6 @@ bool Electromechanical::SolveSynchronousMachines()
                         error = std::max(error, std::abs(data.tranEq - tranEq));
 
                         double tranEd = data.icTranEd.c - data.icTranEd.m * (data.syncXq * k - data.transXq * k) * iq;
-                        // double tranEd = data.icTranEq.c - data.icTranEd.m * (data.syncXq * k - data.transXq * k) *
-                        // id;
                         error = std::max(error, std::abs(data.tranEd - tranEd));
 
                         data.tranEq = tranEq;

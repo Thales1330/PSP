@@ -3,6 +3,8 @@
 
 #include "ElectricCalculation.h"
 
+#include <wx/progdlg.h>
+
 class ControlElementSolver;
 
 class Electromechanical : public ElectricCalculation
@@ -47,7 +49,7 @@ class Electromechanical : public ElectricCalculation
     
     double m_powerSystemBase = 100e6;
 
-    double m_timeStep = 1e-2;
+    double m_timeStep = 1e-3;
     double m_tolerance = 1e-6;
     int m_maxIterations = 100;
 
