@@ -60,10 +60,8 @@ bool Electromechanical::RunStabilityCalculation()
 
         if(currentPbdTime > pbdTime) {
             if(!pbd.Update((currentTime / simTime) * 100, wxString::Format("Time = %.2fs", currentTime))) {
+                m_errorMsg = wxString::Format(_("Simulation cancelled at %.2fs."), currentTime);
                 pbd.Update(100);
-                currentTime = simTime;
-                
-                m_errorMsg = _("Simulation cancelled.");
                 return false;
             }
             currentPbdTime = 0.0;
@@ -417,6 +415,13 @@ std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* 
 
 bool Electromechanical::InitializeDynamicElements()
 {
+    // Buses
+    for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        auto data = bus->GetElectricalData();
+        data.stabVoltageVector.clear();
+        bus->SetElectricalData(data);
+    }
     // Synchronous generators
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
@@ -670,7 +675,15 @@ bool Electromechanical::SolveSynchronousMachines()
             // Calculate integration constants.
             CalculateIntegrationConstants(syncGenerator, id, iq);
         }
+        else {
+            CalculateIntegrationConstants(syncGenerator, 0.0f, 0.0f);
+        }
     }
+
+    m_wError = 0;
+    m_deltaError = 0;
+    m_transEdError = 0;
+    m_transEqError = 0;
 
     double error = 1.0;
     int iterations = 0;
@@ -688,64 +701,79 @@ bool Electromechanical::SolveSynchronousMachines()
             SyncGenerator* syncGenerator = *it;
             auto data = syncGenerator->GetElectricalData();
 
+            double k = 1.0;  // Power base change factor.
+            if(data.useMachineBase) {
+                double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
+                k = m_powerSystemBase / oldBase;
+            }
+            int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
+
             if(syncGenerator->IsOnline()) {
-                double k = 1.0;  // Power base change factor.
-                if(data.useMachineBase) {
-                    double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
-                    k = m_powerSystemBase / oldBase;
-                }
-                int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
-
                 data.terminalVoltage = m_vBus[n];
+            }
 
-                // Mechanical differential equations.
-                double w = data.icSpeed.c + data.icSpeed.m * (data.pm - data.pe);
-                error = std::max(error, std::abs(data.speed - w) / w0);
+            // Mechanical differential equations.
+            double w = data.icSpeed.c + data.icSpeed.m * (data.pm - data.pe);
+            error = std::max(error, std::abs(data.speed - w) / w0);
 
-                double delta = data.icDelta.c + data.icDelta.m * w;
-                error = std::max(error, std::abs(data.delta - delta));
+            m_wError += std::abs(data.speed - w) / w0;
 
-                data.speed = w;
-                data.delta = delta;
+            double delta = data.icDelta.c + data.icDelta.m * w;
+            error = std::max(error, std::abs(data.delta - delta));
 
-                // Electric power.
-                double id, iq, vd, vq;
+            data.speed = w;
+            data.delta = delta;
+
+            m_deltaError += std::abs(data.delta - delta);
+
+            // Electric power.
+            double id, iq, vd, vq, pe;
+            ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);
+
+            if(syncGenerator->IsOnline()) {
                 std::complex<double> iMachine = std::conj(data.electricalPower) / std::conj(m_vBus[n]);
-
                 ABCtoDQ0(iMachine, data.delta, id, iq);
-                ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);
 
-                double pe = id * vd + iq * vq + (id * id + iq * iq) * data.armResistance * k;
-                // data.pe = (2 * pe - data.pe);  // Extrapolating Pe.
-                data.pe = pe;  // Don't extrapolating Pe
-
-                // Electrical differential equations
-                switch(GetMachineModel(syncGenerator)) {
-                    case SM_MODEL_1: {
-                        // There is no differential equations.
-                    } break;
-                    case SM_MODEL_2: {
-                    } break;
-                    case SM_MODEL_3: {
-                        double tranEq =
-                            data.icTranEq.c +
-                            data.icTranEq.m * (data.fieldVoltage + (data.syncXd * k - data.transXd * k) * id);
-                        error = std::max(error, std::abs(data.tranEq - tranEq));
-
-                        double tranEd = data.icTranEd.c - data.icTranEd.m * (data.syncXq * k - data.transXq * k) * iq;
-                        error = std::max(error, std::abs(data.tranEd - tranEd));
-
-                        data.tranEq = tranEq;
-                        data.tranEd = tranEd;
-
-                    } break;
-                    case SM_MODEL_4: {
-                    } break;
-                    case SM_MODEL_5: {
-                    } break;
-                }
+                pe = id * vd + iq * vq + (id * id + iq * iq) * data.armResistance * k;
+                // pe = (2 * pe - data.pe);  // Extrapolating Pe.
             } else {
-                // Set values to open circuit machine.
+                pe = id = iq = 0.0f;
+            }
+
+            data.pe = pe;
+
+            // Electrical differential equations
+            switch(GetMachineModel(syncGenerator)) {
+                case SM_MODEL_1: {
+                    // There is no differential equations.
+                } break;
+                case SM_MODEL_2: {
+                } break;
+                case SM_MODEL_3: {
+                    double tranEq = data.icTranEq.c +
+                                    data.icTranEq.m * (data.fieldVoltage + (data.syncXd * k - data.transXd * k) * id);
+                    error = std::max(error, std::abs(data.tranEq - tranEq));
+
+                    m_transEqError += std::abs(data.tranEq - tranEq);
+
+                    double tranEd = data.icTranEd.c - data.icTranEd.m * (data.syncXq * k - data.transXq * k) * iq;
+                    error = std::max(error, std::abs(data.tranEd - tranEd));
+
+                    m_transEdError += std::abs(data.tranEd - tranEd);
+
+                    data.tranEq = tranEq;
+                    data.tranEd = tranEd;
+                    
+                    if(!syncGenerator->IsOnline()) {
+                        std::complex<double> e;
+                        DQ0toABC(data.tranEd, data.tranEq, data.delta, e);
+                        data.terminalVoltage = e;
+                    }
+                } break;
+                case SM_MODEL_4: {
+                } break;
+                case SM_MODEL_5: {
+                } break;
             }
 
             syncGenerator->SetElectricalData(data);
@@ -758,6 +786,7 @@ bool Electromechanical::SolveSynchronousMachines()
             return false;
         }
     }
+    m_numIt = iterations;
 
     // Solve controllers.
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
@@ -833,4 +862,18 @@ void Electromechanical::SaveData()
             syncGenerator->SetElectricalData(data);
         }
     }
+    for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        auto data = bus->GetElectricalData();
+        if(data.plotBus) {
+            data.stabVoltageVector.push_back(m_vBus[data.number]);
+            bus->SetElectricalData(data);
+        }
+    }
+
+    m_wErrorVector.push_back(m_wError);
+    m_deltaErrorVector.push_back(m_deltaError);
+    m_transEdErrorVector.push_back(m_transEdError);
+    m_transEqErrorVector.push_back(m_transEqError);
+    m_numItVector.push_back(m_numIt);
 }

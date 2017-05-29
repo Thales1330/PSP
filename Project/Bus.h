@@ -11,7 +11,7 @@ struct BusElectricalData {
     ElectricalUnit nominalVoltageUnit = UNIT_kV;
     bool isVoltageControlled = false;
     double controlledVoltage = 1.0;
-    int controlledVoltageUnitChoice = 0; // 0 = p.u., 1 = same as nominalVoltageUnit (UNIT_V or UNIT_kV).
+    int controlledVoltageUnitChoice = 0;  // 0 = p.u., 1 = same as nominalVoltageUnit (UNIT_V or UNIT_kV).
     bool slackBus = false;
 
     // Power flow (p.u.)
@@ -24,10 +24,10 @@ struct BusElectricalData {
     // p.u. fault data
     double faultResistance = 0.0;
     double faultReactance = 0.0;
-    std::complex<double> faultCurrent[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
-        std::complex<double>(0.0, 0.0) };
-    std::complex<double> faultVoltage[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
-        std::complex<double>(0.0, 0.0) };
+    std::complex<double> faultCurrent[3] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
+                                            std::complex<double>(0.0, 0.0)};
+    std::complex<double> faultVoltage[3] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
+                                            std::complex<double>(0.0, 0.0)};
     double scPower = 0.0;
 
     // Stability
@@ -37,11 +37,12 @@ struct BusElectricalData {
     double stabFaultLength = 0.0;
     double stabFaultResistance = 0.0;
     double stabFaultReactance = 0.0;
+    std::vector<std::complex<double> > stabVoltageVector;
 };
 
 class Bus : public PowerElement
 {
-public:
+   public:
     Bus();
     Bus(wxPoint2DDouble position);
     Bus(wxPoint2DDouble position, wxString name);
@@ -60,9 +61,10 @@ public:
     virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
     virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool GetPlotData(ElementPlotData& plotData);
 
-protected:
+   protected:
     BusElectricalData m_electricalData;
 };
 
-#endif // BUS_H
+#endif  // BUS_H

@@ -1416,6 +1416,13 @@ bool Workspace::RunStability()
         ElementPlotData plotData;
         if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
     }
+    ElementPlotData tests(_("Error"), ElementPlotData::CT_TEST);
+    tests.AddData(stability.m_wErrorVector, _("Speed error"));
+    tests.AddData(stability.m_deltaErrorVector, _("Delta error"));
+    tests.AddData(stability.m_transEqErrorVector, _("Eq error"));
+    tests.AddData(stability.m_transEdErrorVector, _("Ed error"));
+    tests.AddData(stability.m_numItVector, _("Number iterations"));
+    plotDataList.push_back(tests);
 
     ChartView* cView = new ChartView(this, plotDataList, stability.GetTimeVector());
     cView->Show();

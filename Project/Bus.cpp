@@ -3,12 +3,8 @@
 #include "DegreesAndRadians.h"
 #endif
 
-Bus::Bus()
-    : PowerElement()
-{
-}
-Bus::Bus(wxPoint2DDouble position)
-    : PowerElement()
+Bus::Bus() : PowerElement() {}
+Bus::Bus(wxPoint2DDouble position) : PowerElement()
 {
     m_width = 100.0;
     m_height = 5.0;
@@ -41,14 +37,14 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
 
         glColor4d(0.0, 0.5, 1.0, 0.5);
 
-        wxPoint2DDouble pts[4] = { WorldToScreen(translation, scale, -(m_width / 2.0), -(m_height / 2.0)) -
-                wxPoint2DDouble(m_borderSize, m_borderSize),
-            WorldToScreen(translation, scale, -(m_width / 2.0), (m_height / 2.0)) -
-                wxPoint2DDouble(m_borderSize, -m_borderSize),
-            WorldToScreen(translation, scale, (m_width / 2.0), (m_height / 2.0)) -
-                wxPoint2DDouble(-m_borderSize, -m_borderSize),
-            WorldToScreen(translation, scale, (m_width / 2.0), -(m_height / 2.0)) -
-                wxPoint2DDouble(-m_borderSize, m_borderSize) };
+        wxPoint2DDouble pts[4] = {WorldToScreen(translation, scale, -(m_width / 2.0), -(m_height / 2.0)) -
+                                      wxPoint2DDouble(m_borderSize, m_borderSize),
+                                  WorldToScreen(translation, scale, -(m_width / 2.0), (m_height / 2.0)) -
+                                      wxPoint2DDouble(m_borderSize, -m_borderSize),
+                                  WorldToScreen(translation, scale, (m_width / 2.0), (m_height / 2.0)) -
+                                      wxPoint2DDouble(-m_borderSize, -m_borderSize),
+                                  WorldToScreen(translation, scale, (m_width / 2.0), -(m_height / 2.0)) -
+                                      wxPoint2DDouble(-m_borderSize, m_borderSize)};
         DrawRectangle(pts);
         glPopMatrix();
     }
@@ -75,8 +71,8 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
         glRotated(m_angle, 0.0, 0.0, 1.0);
         glTranslated(-screenPt.m_x, -screenPt.m_y, 0.0);
 
-        wxPoint2DDouble pbPosition[2] = { WorldToScreen(translation, scale, m_width / 2.0),
-            WorldToScreen(translation, scale, -m_width / 2.0) };
+        wxPoint2DDouble pbPosition[2] = {WorldToScreen(translation, scale, m_width / 2.0),
+                                         WorldToScreen(translation, scale, -m_width / 2.0)};
         DrawPickbox(pbPosition[0]);
         DrawPickbox(pbPosition[1]);
 
@@ -204,12 +200,12 @@ wxString Bus::GetTipText() const
     tipText += wxString::Format(" (%d)", m_electricalData.number + 1);
     tipText += "\n";
     tipText += StringFromDouble(m_electricalData.nominalVoltage, 1) +
-        (m_electricalData.nominalVoltageUnit == UNIT_V ? _(" V") : _(" kV"));
+               (m_electricalData.nominalVoltageUnit == UNIT_V ? _(" V") : _(" kV"));
     tipText += "\n";
     tipText += _("\nV = ") + wxString::FromDouble(std::abs(m_electricalData.voltage), 5) + _(" p.u.");
     tipText += "\n";
     tipText += wxString(L'\u03B8') + " = " + wxString::FromDouble(wxRadToDeg(std::arg(m_electricalData.voltage)), 5) +
-        " " + wxString(L'\u00B0');
+               " " + wxString(L'\u00B0');
 
     tipText += _("\n\nFault info:");
     tipText += _("\nVa = ") + wxString::FromDouble(std::abs(m_electricalData.faultVoltage[0]), 5) + _(" p.u.");
@@ -220,8 +216,24 @@ wxString Bus::GetTipText() const
         tipText += _("\nIb = ") + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[1]), 5) + _(" p.u.");
         tipText += _("\nIc = ") + wxString::FromDouble(std::abs(m_electricalData.faultCurrent[2]), 5) + _(" p.u.");
     }
-    
+
     tipText += _("\n\nSsc = ") + wxString::FromDouble(std::abs(m_electricalData.scPower), 5) + _(" p.u.");
 
     return tipText;
+}
+
+bool Bus::GetPlotData(ElementPlotData& plotData)
+{
+    if(!m_electricalData.plotBus) return false;
+    plotData.SetName(m_electricalData.name);
+    plotData.SetCurveType(ElementPlotData::CT_BUS);
+
+    std::vector<double> absVoltage, argVoltage;
+    for(unsigned int i = 0; i < m_electricalData.stabVoltageVector.size(); ++i) {
+        absVoltage.push_back(std::abs(m_electricalData.stabVoltageVector[i]));
+        argVoltage.push_back(wxRadToDeg(std::arg(m_electricalData.stabVoltageVector[i])));
+    }
+    plotData.AddData(absVoltage, _("Voltage"));
+    plotData.AddData(argVoltage, _("Angle"));
+    return true;
 }

@@ -18,6 +18,12 @@ class Electromechanical : public ElectricCalculation
     
     std::vector<double> GetTimeVector() const { return m_timeVector; }
     
+    std::vector<double> m_wErrorVector;
+    std::vector<double> m_deltaErrorVector;
+    std::vector<double> m_transEdErrorVector;
+    std::vector<double> m_transEqErrorVector;
+    std::vector<double> m_numItVector;
+    
    protected:
     void SetEventTimeList();
     bool HasEvent(double currentTime);
@@ -57,6 +63,13 @@ class Electromechanical : public ElectricCalculation
     std::vector<bool> m_eventOccurrenceList;
     
     std::vector<double> m_timeVector;
+    
+    //tests
+    double m_wError = 0.0;
+    double m_deltaError = 0.0;
+    double m_transEdError = 0.0;
+    double m_transEqError = 0.0;
+    double m_numIt = 0;
 };
 
 #endif  // ELECTROMECHANICAL_H
