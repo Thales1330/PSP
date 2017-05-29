@@ -151,7 +151,6 @@ void Electromechanical::SetEvent(double currentTime)
                 // Remove machine (only connected machines)
                 if(swData.swType[i] == SW_REMOVE && generator->IsOnline()) {
                     generator->SetOnline(false);
-                    auto data = generator->GetPUElectricalData(m_powerSystemBase);
                     int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
                     m_yBus[n][n] -= GetSyncMachineAdmittance(generator);
                 }
@@ -159,7 +158,6 @@ void Electromechanical::SetEvent(double currentTime)
                 // Insert machine (only disconnected machines)
                 if(swData.swType[i] == SW_INSERT && !generator->IsOnline() && generator->GetParentList().size() == 1) {
                     if(generator->SetOnline(true)) {
-                        auto data = generator->GetPUElectricalData(m_powerSystemBase);
                         int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
                         m_yBus[n][n] += GetSyncMachineAdmittance(generator);
                     }
@@ -385,7 +383,7 @@ bool Electromechanical::EventTrigger(double eventTime, double currentTime)
 
 std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* generator)
 {
-    auto data = generator->GetPUElectricalData(m_powerSystemBase);
+    auto data = generator->GetElectricalData();
     double k = 1.0;  // Power base change factor.
     if(data.useMachineBase) {
         double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
@@ -425,7 +423,8 @@ bool Electromechanical::InitializeDynamicElements()
     // Synchronous generators
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
-        auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
+        auto dataPU = syncGenerator->GetPUElectricalData(m_powerSystemBase);
+        auto data = syncGenerator->GetElectricalData();
         if(syncGenerator->IsOnline()) {
             double k = 1.0;  // Power base change factor.
             if(data.useMachineBase) {
@@ -434,7 +433,7 @@ bool Electromechanical::InitializeDynamicElements()
             }
             data.terminalVoltage = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().voltage;
 
-            std::complex<double> conjS(data.activePower, -data.reactivePower);
+            std::complex<double> conjS(dataPU.activePower, -dataPU.reactivePower);
             std::complex<double> conjV = std::conj(data.terminalVoltage);
             std::complex<double> ia = conjS / conjV;
 
@@ -458,7 +457,7 @@ bool Electromechanical::InitializeDynamicElements()
             data.speed = 2.0 * M_PI * m_systemFreq;
 
             data.pe = data.pm;
-            data.electricalPower = std::complex<double>(data.activePower, data.reactivePower);
+            data.electricalPower = std::complex<double>(dataPU.activePower, dataPU.reactivePower);
 
             switch(GetMachineModel(syncGenerator)) {
                 case SM_MODEL_1: {
@@ -554,7 +553,7 @@ void Electromechanical::CalculateMachinesCurrents()
 
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
-        auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
+        auto data = syncGenerator->GetElectricalData();
         if(syncGenerator->IsOnline()) {
             double k = 1.0;  // Power base change factor.
             if(data.useMachineBase) {
@@ -615,7 +614,7 @@ void Electromechanical::CalculateMachinesCurrents()
 
 void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq)
 {
-    auto data = syncGenerator->GetPUElectricalData(m_powerSystemBase);
+    auto data = syncGenerator->GetElectricalData();
 
     double k = 1.0;  // Power base change factor.
     if(data.useMachineBase) {

@@ -116,6 +116,7 @@ class ControlEditor : public ControlEditorBase
     void BuildControlElementPanel();
     void SetViewport();
     void ConsolidateTexts();
+    void SetLastElementID();
 
     std::vector<ConnectionLine*>::iterator DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it);
 

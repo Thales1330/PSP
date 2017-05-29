@@ -735,18 +735,7 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
         msgDialog.ShowModal();
     }
 
-    // Get the highest id number
-    int majorElementID = 0;
-    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-        ControlElement* element = *it;
-        if(element->GetID() > majorElementID) majorElementID = element->GetID();
-    }
-    for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-        ConnectionLine* line = *it;
-        if(line->GetID() > majorElementID) majorElementID = line->GetID();
-    }
-    m_lastElementID = ++majorElementID;
-
+    SetLastElementID();
     Redraw();
     event.Skip();
 }
@@ -859,4 +848,18 @@ void ControlEditor::ConsolidateTexts()
         delete tf;
         m_firstDraw = false;
     }
+}
+
+void ControlEditor::SetLastElementID()
+{
+    int id = 0;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        int elementID = (*it)->GetID();
+        if(id < elementID) id = elementID;
+    }
+    for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
+        int elementID = (*it)->GetID();
+        if(id < elementID) id = elementID;
+    }
+    m_lastElementID = ++id;
 }
