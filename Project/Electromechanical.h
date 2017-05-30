@@ -56,6 +56,7 @@ class Electromechanical : public ElectricCalculation
     double m_powerSystemBase = 100e6;
 
     double m_timeStep = 1e-2;
+    double m_ctrlTimeStepMultiplier = 0.1;
     double m_tolerance = 1e-6;
     int m_maxIterations = 100;
 

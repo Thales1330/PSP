@@ -512,8 +512,8 @@ bool Electromechanical::InitializeDynamicElements()
             // Initialize controllers
             if(data.useAVR) {
                 if(data.avrSolver) delete data.avrSolver;
-                data.avrSolver = new ControlElementSolver(data.avr, m_timeStep, 1e-3, false,
-                                                          std::abs(data.terminalVoltage), m_parent);
+                data.avrSolver = new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance,
+                                                          false, std::abs(data.terminalVoltage), m_parent);
                 if(!data.avrSolver->IsOK()) {
                     m_errorMsg = _("Error on initializate the AVR of \"") + data.name + _("\".");
                     syncGenerator->SetElectricalData(data);
@@ -522,8 +522,8 @@ bool Electromechanical::InitializeDynamicElements()
             }
             if(data.useSpeedGovernor) {
                 if(data.speedGovSolver) delete data.speedGovSolver;
-                data.speedGovSolver =
-                    new ControlElementSolver(data.speedGov, m_timeStep, 1e-3, false, data.speed, m_parent);
+                data.speedGovSolver = new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier,
+                                                               m_tolerance, false, data.speed, m_parent);
                 if(!data.speedGovSolver->IsOK()) {
                     m_errorMsg = _("Error on initializate the speed governor of \"") + data.name + _("\".");
                     syncGenerator->SetElectricalData(data);
@@ -673,8 +673,7 @@ bool Electromechanical::SolveSynchronousMachines()
 
             // Calculate integration constants.
             CalculateIntegrationConstants(syncGenerator, id, iq);
-        }
-        else {
+        } else {
             CalculateIntegrationConstants(syncGenerator, 0.0f, 0.0f);
         }
     }
@@ -762,7 +761,7 @@ bool Electromechanical::SolveSynchronousMachines()
 
                     data.tranEq = tranEq;
                     data.tranEd = tranEd;
-                    
+
                     if(!syncGenerator->IsOnline()) {
                         std::complex<double> e;
                         DQ0toABC(data.tranEd, data.tranEq, data.delta, e);
@@ -788,16 +787,17 @@ bool Electromechanical::SolveSynchronousMachines()
     m_numIt = iterations;
 
     // Solve controllers.
+    int ctrlRatio = static_cast<int>(1 / m_ctrlTimeStepMultiplier);
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
         if(data.useAVR && data.avrSolver) {
-            data.avrSolver->SolveNextStep(std::abs(data.terminalVoltage));
+            for(int i = 0; i < ctrlRatio; ++i) data.avrSolver->SolveNextStep(std::abs(data.terminalVoltage));
             data.fieldVoltage = data.initialFieldVoltage + data.avrSolver->GetLastSolution();
         }
 
         if(data.useSpeedGovernor && data.speedGovSolver) {
-            data.speedGovSolver->SolveNextStep(data.speed);
+            for(int i = 0; i < ctrlRatio; ++i) data.speedGovSolver->SolveNextStep(data.speed);
             data.pm = data.speedGovSolver->GetLastSolution();
         }
         syncGenerator->SetElectricalData(data);
