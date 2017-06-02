@@ -35,7 +35,11 @@ ControlElementSolver::ControlElementSolver(ControlElementContainer* ctrlContaine
     Initialize(parent, timeStep, integrationError, startAllZero, input);
 }
 
-void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double integrationError, bool startAllZero, double input)
+void ControlElementSolver::Initialize(wxWindow* parent,
+                                      double timeStep,
+                                      double integrationError,
+                                      bool startAllZero,
+                                      double input)
 {
     // Check if the sistem have one input and one output
     bool fail = false;

@@ -322,7 +322,7 @@ void Electromechanical::SetEvent(double currentTime)
                     capacitor->SetOnline(false);
                     auto data = capacitor->GetPUElectricalData(m_powerSystemBase);
                     int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
-                    m_yBus[n][n] += std::complex<double>(0.0, data.reactivePower);
+                    m_yBus[n][n] -= std::complex<double>(0.0, data.reactivePower);
                 }
 
                 // Insert capacitor (only disconnected capacitors)
@@ -330,7 +330,7 @@ void Electromechanical::SetEvent(double currentTime)
                     if(capacitor->SetOnline(true)) {
                         auto data = capacitor->GetPUElectricalData(m_powerSystemBase);
                         int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
-                        m_yBus[n][n] -= std::complex<double>(0.0, data.reactivePower);
+                        m_yBus[n][n] += std::complex<double>(0.0, data.reactivePower);
                     }
                 }
             }
@@ -348,7 +348,7 @@ void Electromechanical::SetEvent(double currentTime)
                     inductor->SetOnline(false);
                     auto data = inductor->GetPUElectricalData(m_powerSystemBase);
                     int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
-                    m_yBus[n][n] += std::complex<double>(0.0, -data.reactivePower);
+                    m_yBus[n][n] -= std::complex<double>(0.0, -data.reactivePower);
                 }
 
                 // Insert inductor (only disconnected inductors)
@@ -356,7 +356,7 @@ void Electromechanical::SetEvent(double currentTime)
                     if(inductor->SetOnline(true)) {
                         auto data = inductor->GetPUElectricalData(m_powerSystemBase);
                         int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
-                        m_yBus[n][n] -= std::complex<double>(0.0, -data.reactivePower);
+                        m_yBus[n][n] += std::complex<double>(0.0, -data.reactivePower);
                     }
                 }
             }
