@@ -676,23 +676,23 @@ std::vector<std::complex<double> > ElectricCalculation::GaussianElimination(
     return solution;
 }
 
-SyncMachineModel ElectricCalculation::GetMachineModel(SyncGenerator* generator)
+Machines::SyncMachineModel ElectricCalculation::GetMachineModel(SyncGenerator* generator)
 {
     auto data = generator->GetElectricalData();
     if(data.transTd0 != 0.0) {
         if(data.transTq0 != 0.0) {
             if(data.subTd0 != 0.0) {
                 if(data.subTq0 != 0.0)
-                    return SM_MODEL_5;
+                    return Machines::SM_MODEL_5;
                 else
-                    return SM_MODEL_4;
+                    return Machines::SM_MODEL_4;
             } else
-                return SM_MODEL_3;
+                return Machines::SM_MODEL_3;
         } else
-            return SM_MODEL_2;
+            return Machines::SM_MODEL_2;
     }
 
-    return SM_MODEL_1;
+    return Machines::SM_MODEL_1;
 }
 
 std::vector<std::complex<double> > ElectricCalculation::ComplexMatrixTimesVector(

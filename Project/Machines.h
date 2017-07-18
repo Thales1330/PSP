@@ -6,6 +6,8 @@
 class Machines : public PowerElement
 {
    public:
+    enum SyncMachineModel { SM_MODEL_1 = 0, SM_MODEL_2, SM_MODEL_3, SM_MODEL_4, SM_MODEL_5 };
+
     Machines();
     ~Machines();
 

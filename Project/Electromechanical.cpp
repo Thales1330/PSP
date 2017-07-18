@@ -394,15 +394,17 @@ std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* 
     double xq = 0.0;
     double ra = data.armResistance * k;
 
-    switch(GetMachineModel(generator)) {
-        case SM_MODEL_1:
-        case SM_MODEL_2:
-        case SM_MODEL_3: {
+    switch(data.model) {
+        case Machines::SM_MODEL_1: {
+            xq = data.transXd * k;
+        } break;
+        case Machines::SM_MODEL_2:
+        case Machines::SM_MODEL_3: {
             xd = data.transXd * k;
             xq = data.transXq * k;
         } break;
-        case SM_MODEL_4:
-        case SM_MODEL_5: {
+        case Machines::SM_MODEL_4:
+        case Machines::SM_MODEL_5: {
             xd = data.subXd * k;
             xq = data.subXq * k;
         } break;
@@ -432,6 +434,8 @@ bool Electromechanical::InitializeDynamicElements()
                 k = m_powerSystemBase / oldBase;
             }
             data.terminalVoltage = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().voltage;
+            
+            data.model = GetMachineModel(syncGenerator);
 
             std::complex<double> conjS(dataPU.activePower, -dataPU.reactivePower);
             std::complex<double> conjV = std::conj(data.terminalVoltage);
@@ -440,6 +444,8 @@ bool Electromechanical::InitializeDynamicElements()
             double xd = data.syncXd * k;
             double xq = data.syncXq * k;
             double ra = data.armResistance * k;
+            
+            if(data.model == Machines::SM_MODEL_1) xq = data.transXd * k;
 
             // Initialize state variables
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
@@ -459,14 +465,17 @@ bool Electromechanical::InitializeDynamicElements()
             data.pe = data.pm;
             data.electricalPower = std::complex<double>(dataPU.activePower, dataPU.reactivePower);
 
-            switch(GetMachineModel(syncGenerator)) {
-                case SM_MODEL_1: {
-                    data.tranEq = 0.0;
+            switch(data.model) {
+                case Machines::SM_MODEL_1: {
+                    double tranXd = data.transXd * k;
+                    
+                    data.tranEq = data.initialFieldVoltage - tranXd * id0;
+                    wxMessageBox(wxString::Format("%.5f", data.tranEq));
                     data.tranEd = 0.0;
                     data.subEq = 0.0;
                     data.subEd = 0.0;
                 } break;
-                case SM_MODEL_2: {
+                case Machines::SM_MODEL_2: {
                     double tranXd = data.transXd * k;
 
                     data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
@@ -474,7 +483,7 @@ bool Electromechanical::InitializeDynamicElements()
                     data.subEd = 0.0;
                     data.subEq = 0.0;
                 } break;
-                case SM_MODEL_3: {
+                case Machines::SM_MODEL_3: {
                     double tranXd = data.transXd * k;
                     double tranXq = data.transXq * k;
 
@@ -484,7 +493,7 @@ bool Electromechanical::InitializeDynamicElements()
                     data.subEd = 0.0;
                     data.subEq = 0.0;
                 } break;
-                case SM_MODEL_4: {
+                case Machines::SM_MODEL_4: {
                     double tranXd = data.transXd * k;
                     double subXd = data.subXd * k;
                     double subXq = data.subXq * k;
@@ -494,7 +503,7 @@ bool Electromechanical::InitializeDynamicElements()
                     data.subEq = data.tranEq + (tranXd - subXd) * id0;
                     data.subEd = -(xq - subXq) * iq0;
                 } break;
-                case SM_MODEL_5: {
+                case Machines::SM_MODEL_5: {
                     double tranXd = data.transXd * k;
                     double tranXq = data.transXq * k;
                     double subXd = data.subXd * k;
@@ -570,16 +579,19 @@ void Electromechanical::CalculateMachinesCurrents()
             std::complex<double> iInj = m_iBus[n];
             double xdq = 0.0;
 
-            switch(GetMachineModel(syncGenerator)) {
-                case SM_MODEL_1:
-                case SM_MODEL_2:
-                case SM_MODEL_3: {
+            switch(data.model) {
+                case Machines::SM_MODEL_1: {
+                    DQ0toABC(data.tranEd, data.tranEq, data.delta, e);
+                    xq = data.transXd * k;
+                } break;
+                case Machines::SM_MODEL_2:
+                case Machines::SM_MODEL_3: {
                     DQ0toABC(data.tranEd, data.tranEq, data.delta, e);
                     xd = data.transXd * k;
                     xq = data.transXq * k;
                 } break;
-                case SM_MODEL_4:
-                case SM_MODEL_5: {
+                case Machines::SM_MODEL_4:
+                case Machines::SM_MODEL_5: {
                     DQ0toABC(data.subEd, data.subEq, data.delta, e);
                     xd = data.subXd * k;
                     xq = data.subXq * k;
@@ -633,24 +645,37 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     data.icDelta.c = data.delta + data.icDelta.m * (data.speed - 2.0f * w0);
 
     // Eq'
-    data.icTranEq.m = m_timeStep / (2.0f * data.transTd0 + m_timeStep);
-    data.icTranEq.c = (1.0f - 2.0 * data.icTranEq.m) * data.tranEq +
-                      data.icTranEq.m * (data.fieldVoltage + (data.syncXd * k - data.transXd * k) * id);
+    if(data.model == Machines::SM_MODEL_2 || data.model == Machines::SM_MODEL_3 || data.model == Machines::SM_MODEL_4 ||
+       data.model == Machines::SM_MODEL_5) {
+        data.icTranEq.m = m_timeStep / (2.0f * data.transTd0 + m_timeStep);
+        data.icTranEq.c = (1.0f - 2.0 * data.icTranEq.m) * data.tranEq +
+                          data.icTranEq.m * (data.fieldVoltage + (data.syncXd * k - data.transXd * k) * id);
+    }
 
     // Ed'
-    data.icTranEd.m = m_timeStep / (2.0f * data.transTq0 + m_timeStep);
-    data.icTranEd.c =
-        (1.0f - 2.0f * data.icTranEd.m) * data.tranEd - data.icTranEd.m * (data.syncXq * k - data.transXq * k) * iq;
+    if(data.model == Machines::SM_MODEL_3 || data.model == Machines::SM_MODEL_4 || data.model == Machines::SM_MODEL_5) {
+        data.icTranEd.m = m_timeStep / (2.0f * data.transTq0 + m_timeStep);
+        data.icTranEd.c =
+            (1.0f - 2.0f * data.icTranEd.m) * data.tranEd - data.icTranEd.m * (data.syncXq * k - data.transXq * k) * iq;
+    }
 
     // Eq''
-    data.icSubEq.m = m_timeStep / (2.0f * data.subTd0 + m_timeStep);
-    data.icSubEq.c = (1.0f - 2.0f * data.icSubEq.m) * data.subEq +
-                     data.icSubEq.m * (data.tranEq + (data.transXd * k - data.subXd * k) * id);
-
+    if(data.model == Machines::SM_MODEL_4 || data.model == Machines::SM_MODEL_5) {
+        data.icSubEq.m = m_timeStep / (2.0f * data.subTd0 + m_timeStep);
+        data.icSubEq.c = (1.0f - 2.0f * data.icSubEq.m) * data.subEq +
+                         data.icSubEq.m * (data.tranEq + (data.transXd * k - data.subXd * k) * id);
+    }
     // Ed''
-    data.icSubEd.m = m_timeStep / (2.0f * data.subTq0 + m_timeStep);
-    data.icSubEd.c = (1.0f - 2.0f * data.icSubEd.m) * data.subEd +
-                     data.icSubEd.m * (data.tranEd - (data.transXq * k - data.subXq * k) * iq);
+    if(data.model == Machines::SM_MODEL_4) {
+        data.icSubEd.m = m_timeStep / (2.0f * data.subTq0 + m_timeStep);
+        data.icSubEd.c =
+            (1.0f - 2.0f * data.icSubEd.m) * data.subEd - data.icSubEd.m * (data.syncXq * k - data.subXq * k) * iq;
+    }
+    if(data.model == Machines::SM_MODEL_5) {
+        data.icSubEd.m = m_timeStep / (2.0f * data.subTq0 + m_timeStep);
+        data.icSubEd.c = (1.0f - 2.0f * data.icSubEd.m) * data.subEd +
+                         data.icSubEd.m * (data.tranEd - (data.transXq * k - data.subXq * k) * iq);
+    }
 
     syncGenerator->SetElectricalData(data);
 }
@@ -719,10 +744,10 @@ bool Electromechanical::SolveSynchronousMachines()
             double delta = data.icDelta.c + data.icDelta.m * w;
             error = std::max(error, std::abs(data.delta - delta));
 
+            m_deltaError += std::abs(data.delta - delta);
+
             data.speed = w;
             data.delta = delta;
-
-            m_deltaError += std::abs(data.delta - delta);
 
             // Electric power.
             double id, iq, vd, vq, pe;
@@ -741,13 +766,13 @@ bool Electromechanical::SolveSynchronousMachines()
             data.pe = pe;
 
             // Electrical differential equations
-            switch(GetMachineModel(syncGenerator)) {
-                case SM_MODEL_1: {
+            switch(data.model) {
+                case Machines::SM_MODEL_1: {
                     // There is no differential equations.
                 } break;
-                case SM_MODEL_2: {
+                case Machines::SM_MODEL_2: {
                 } break;
-                case SM_MODEL_3: {
+                case Machines::SM_MODEL_3: {
                     double tranEq = data.icTranEq.c +
                                     data.icTranEq.m * (data.fieldVoltage + (data.syncXd * k - data.transXd * k) * id);
                     error = std::max(error, std::abs(data.tranEq - tranEq));
@@ -768,9 +793,9 @@ bool Electromechanical::SolveSynchronousMachines()
                         data.terminalVoltage = e;
                     }
                 } break;
-                case SM_MODEL_4: {
+                case Machines::SM_MODEL_4: {
                 } break;
-                case SM_MODEL_5: {
+                case Machines::SM_MODEL_5: {
                 } break;
             }
 

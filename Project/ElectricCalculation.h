@@ -29,8 +29,6 @@ enum ReactiveLimitsType {
 
 enum YBusSequence { POSITIVE_SEQ = 0, NEGATIVE_SEQ, ZERO_SEQ };
 
-enum SyncMachineModel { SM_MODEL_1 = 0, SM_MODEL_2, SM_MODEL_3, SM_MODEL_4, SM_MODEL_5 };
-
 struct ReactiveLimits {
     double maxLimit = 0.0;
     double minLimit = 0.0;
@@ -108,7 +106,7 @@ class ElectricCalculation
     std::vector<std::complex<double> > GaussianElimination(std::vector<std::vector<std::complex<double> > > matrix,
                                                            std::vector<std::complex<double> > array);
 
-    SyncMachineModel GetMachineModel(SyncGenerator* generator);
+    Machines::SyncMachineModel GetMachineModel(SyncGenerator* generator);
 
     std::vector<std::complex<double> > ComplexMatrixTimesVector(std::vector<std::vector<std::complex<double> > > matrix,
                                                                 std::vector<std::complex<double> > vector);

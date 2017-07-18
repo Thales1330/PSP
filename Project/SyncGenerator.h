@@ -96,10 +96,12 @@ struct SyncGeneratorElectricalData {
     // Control
     ControlElementContainer* avr = NULL;
     ControlElementContainer* speedGov = NULL;
-    
+
     // Control solvers
     ControlElementSolver* avrSolver = NULL;
     ControlElementSolver* speedGovSolver = NULL;
+
+    Machines::SyncMachineModel model = Machines::SM_MODEL_1;
 };
 
 class SyncGenerator : public Machines
