@@ -681,15 +681,16 @@ Machines::SyncMachineModel ElectricCalculation::GetMachineModel(SyncGenerator* g
     auto data = generator->GetElectricalData();
     if(data.transTd0 != 0.0) {
         if(data.transTq0 != 0.0) {
-            if(data.subTd0 != 0.0) {
-                if(data.subTq0 != 0.0)
-                    return Machines::SM_MODEL_5;
-                else
-                    return Machines::SM_MODEL_4;
-            } else
-                return Machines::SM_MODEL_3;
-        } else
+            if(data.subTd0 != 0.0 || data.subTq0 != 0.0) {
+                return Machines::SM_MODEL_5;
+            }
+            return Machines::SM_MODEL_3;
+        } else {
+            if(data.subTd0 != 0.0 || data.subTq0 != 0.0) {
+                return Machines::SM_MODEL_4;
+            }
             return Machines::SM_MODEL_2;
+        }
     }
 
     return Machines::SM_MODEL_1;
