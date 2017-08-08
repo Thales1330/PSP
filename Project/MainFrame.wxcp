@@ -740,7 +740,7 @@
                    "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnStabilitySettingsClick(wxRibbonButtonBarEvent& event)",
+                   "m_functionNameAndSignature": "OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],
@@ -4524,7 +4524,7 @@
                    "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
-                   "m_functionNameAndSignature": "OnProjectSettingsClick(wxRibbonButtonBarEvent& event)",
+                   "m_functionNameAndSignature": "OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],

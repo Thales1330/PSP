@@ -8,7 +8,9 @@
 #include <wx/bitmap.h>
 #include <wx/dcscreen.h>
 #include <wx/filedlg.h>
+#include <wx/textfile.h>
 
+class PlotData;
 class ElementPlotData;
 
 class ChartView : public ChartViewBase
@@ -21,6 +23,7 @@ class ChartView : public ChartViewBase
     void UpdatePlot(bool fit = true);
 
    protected:
+    virtual void OnMenuExpCSVClick(wxCommandEvent& event);
     virtual void OnTreeItemActivated(wxTreeEvent& event);
     virtual void OnTreeItemSelectionChanged(wxTreeEvent& event);
     virtual void OnMenuDarkThemeClick(wxCommandEvent& event);
@@ -38,6 +41,8 @@ class ChartView : public ChartViewBase
     virtual wxColour GetNextColour();
     virtual wxTreeItemId AllToYAxis(wxTreeItemId root);
     virtual wxTreeItemId UpdateAllPlots(wxTreeItemId root);
+    virtual wxString GetActiveCurvesCSV();
+    virtual wxTreeItemId GetActivePlotData(wxTreeItemId root, std::vector<PlotData*>& plotDataList);
 
     wxPGProperty* m_pgPropColor = NULL;
 

@@ -10,11 +10,11 @@ class ControlElementContainer;
 
 class GeneratorStabForm : public GeneratorStabFormBase
 {
-public:
+   public:
     GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator);
     virtual ~GeneratorStabForm();
-	
-protected:
+
+   protected:
     virtual void UseAVRClick(wxCommandEvent& event);
     virtual void UseSGClick(wxCommandEvent& event);
     virtual void OnCancelButtonClick(wxCommandEvent& event);
@@ -22,10 +22,10 @@ protected:
     virtual void OnOKButtonClick(wxCommandEvent& event);
     virtual void OnSpeedGovernorButtonClick(wxCommandEvent& event);
     virtual void OnSwitchingButtonClick(wxCommandEvent& event);
-	
-	virtual bool ValidateData();
-	
-	SyncGenerator* m_syncGenerator = NULL;
-	wxWindow* m_parent = NULL;
+
+    virtual bool ValidateData();
+
+    SyncGenerator* m_syncGenerator = NULL;
+    wxWindow* m_parent = NULL;
 };
-#endif // GENERATORSTABFORM_H
+#endif  // GENERATORSTABFORM_H

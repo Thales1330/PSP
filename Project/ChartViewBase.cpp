@@ -35,6 +35,9 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_menuItemSendToClipboard = new wxMenuItem(m_menuFile, wxID_ANY, _("Send to clipboard"), wxT(""), wxITEM_NORMAL);
     m_menuFile->Append(m_menuItemSendToClipboard);
     
+    m_menuItemExportCSV = new wxMenuItem(m_menuFile, wxID_ANY, _("Export CSV..."), wxT(""), wxITEM_NORMAL);
+    m_menuFile->Append(m_menuItemExportCSV);
+    
     m_menuFile->AppendSeparator();
     
     m_menuItemExit = new wxMenuItem(m_menuFile, wxID_ANY, _("Exit"), wxT(""), wxITEM_NORMAL);
@@ -171,6 +174,7 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     // Connect events
     this->Connect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), NULL, this);
     this->Connect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), NULL, this);
+    this->Connect(m_menuItemExportCSV->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExpCSVClick), NULL, this);
     this->Connect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), NULL, this);
     this->Connect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), NULL, this);
     this->Connect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), NULL, this);
@@ -187,6 +191,7 @@ ChartViewBase::~ChartViewBase()
 {
     this->Disconnect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), NULL, this);
     this->Disconnect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), NULL, this);
+    this->Disconnect(m_menuItemExportCSV->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExpCSVClick), NULL, this);
     this->Disconnect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), NULL, this);
     this->Disconnect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), NULL, this);
     this->Disconnect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), NULL, this);
