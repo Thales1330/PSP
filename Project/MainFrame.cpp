@@ -13,14 +13,18 @@
 #include "FileHanding.h"
 #include "GeneralPropertiesForm.h"
 #include "SimulationsSettingsForm.h"
+#include "PropertiesData.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
-MainFrame::MainFrame(wxWindow* parent, wxLocale* locale) : MainFrameBase(parent)
+
+MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties) : MainFrameBase(parent)
 {
     m_locale = locale;
+    m_generalProperties = initProperties;
 
     Init();
 }
+
 MainFrame::~MainFrame()
 {
     // if(m_artMetro) delete m_artMetro;
@@ -29,7 +33,10 @@ MainFrame::~MainFrame()
                                       NULL, this);
         delete m_addElementsMenu;
     }
+    if(m_locale) delete m_locale;
+    if(m_generalProperties) delete m_generalProperties;
 }
+
 void MainFrame::Init()
 {
     this->SetSize(800, 600);

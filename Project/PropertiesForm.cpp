@@ -31,6 +31,44 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     
     boxSizer_lvl1_1->Add(m_notebook, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    wxBoxSizer* boxSizerLvl3_1 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(boxSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextLanguage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Language"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_1->Add(m_staticTextLanguage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceLanguageArr;
+    m_choiceLanguageArr.Add(wxT("English"));
+    m_choiceLanguageArr.Add(wxT("Portuguese"));
+    m_choiceLanguage = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceLanguageArr, 0);
+    m_choiceLanguage->SetSelection(0);
+    
+    boxSizerLvl3_1->Add(m_choiceLanguage, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(boxSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTheme = new wxStaticText(m_panelGeneral, wxID_ANY, _("Theme"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_2->Add(m_staticTextTheme, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceThemeArr;
+    m_choiceThemeArr.Add(wxT("Light"));
+    m_choiceThemeArr.Add(wxT("Dark"));
+    m_choiceTheme = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceThemeArr, 0);
+    m_choiceTheme->SetSelection(0);
+    
+    boxSizerLvl3_2->Add(m_choiceTheme, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
     wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
     
     boxSizer_lvl1_1->Add(boxSizer_bottonButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));

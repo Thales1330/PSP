@@ -470,7 +470,7 @@ bool Electromechanical::InitializeDynamicElements()
                 xq = data.transXd * k;
                 xd = xq;
             }
-            if(data.syncXq == 0.0) xq = data.syncXd * k;
+            else if(data.syncXq == 0.0) xq = data.syncXd * k;
 
             // Initialize state variables
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;

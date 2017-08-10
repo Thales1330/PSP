@@ -13,6 +13,7 @@ class Workspace;
 class FileHanding;
 class GeneralPropertiesForm;
 class SimulationsSettingsForm;
+class PropertiesData;
 
 enum {
     ID_ADDMENU_BUS = 20000,
@@ -30,7 +31,7 @@ class MainFrame : public MainFrameBase
 {
    public:
     MainFrame();
-    MainFrame(wxWindow* parent, wxLocale* locale);
+    MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties);
     ~MainFrame();
 
    protected:
@@ -69,13 +70,14 @@ class MainFrame : public MainFrameBase
     virtual void OnUndoClick(wxRibbonButtonBarEvent& event);
     virtual void OnNewClick(wxRibbonButtonBarEvent& event);
 
-   private:
+   protected:
     std::vector<Workspace*> m_workspaceList;
     int m_projectNumber = 1;
 
     wxRibbonMetroArtProvider* m_artMetro = NULL;
     wxMenu* m_addElementsMenu = NULL;
     wxLocale* m_locale = NULL;
+    PropertiesData* m_generalProperties = NULL;
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);

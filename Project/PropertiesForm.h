@@ -15,13 +15,13 @@
 #include <wx/artprov.h>
 #include <wx/sizer.h>
 #include <wx/notebook.h>
-#include <wx/button.h>
 #include <wx/panel.h>
 #include <wx/imaglist.h>
 #include <wx/stattext.h>
-#include <wx/textctrl.h>
 #include <wx/choice.h>
 #include <wx/arrstr.h>
+#include <wx/button.h>
+#include <wx/textctrl.h>
 #include <wx/statbox.h>
 #include <wx/checkbox.h>
 #if wxVERSION_NUMBER >= 2900
@@ -45,6 +45,11 @@ class GeneralPropertiesFormBase : public wxDialog
 {
 protected:
     wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextLanguage;
+    wxChoice* m_choiceLanguage;
+    wxStaticText* m_staticTextTheme;
+    wxChoice* m_choiceTheme;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
@@ -53,6 +58,11 @@ protected:
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
 
 public:
+    wxStaticText* GetStaticTextLanguage() { return m_staticTextLanguage; }
+    wxChoice* GetChoiceLanguage() { return m_choiceLanguage; }
+    wxStaticText* GetStaticTextTheme() { return m_staticTextTheme; }
+    wxChoice* GetChoiceTheme() { return m_choiceTheme; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
