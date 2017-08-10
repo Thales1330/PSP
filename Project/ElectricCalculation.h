@@ -16,6 +16,8 @@
 #include "SyncMotor.h"
 #include "Transformer.h"
 
+#include "PropertiesData.h"
+
 enum BusType { BUS_SLACK = 0, BUS_PV, BUS_PQ };
 
 enum ReactiveLimitsType {

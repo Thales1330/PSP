@@ -55,6 +55,7 @@
           <File Name="Transformer.cpp"/>
         </VirtualDirectory>
       </VirtualDirectory>
+      <File Name="PropertiesData.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -163,6 +164,7 @@
           <File Name="Transformer.h"/>
         </VirtualDirectory>
       </VirtualDirectory>
+      <File Name="PropertiesData.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>

@@ -10,7 +10,7 @@ class ControlElementSolver;
 class Electromechanical : public ElectricCalculation
 {
    public:
-    Electromechanical(wxWindow* parent, std::vector<Element*> elementList);
+    Electromechanical(wxWindow* parent, std::vector<Element*> elementList, SimulationData data);
     ~Electromechanical();
 
     bool RunStabilityCalculation();
@@ -55,7 +55,8 @@ class Electromechanical : public ElectricCalculation
     std::vector<std::complex<double> > m_iBus;
 
     double m_powerSystemBase = 100e6;
-
+    double m_simTime = 10.0;
+    double m_plotTime = 1e-2;
     double m_timeStep = 1e-2;
     double m_ctrlTimeStepMultiplier = 0.1;
     double m_tolerance = 1e-8;

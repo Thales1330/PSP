@@ -102,6 +102,272 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizer_lvl1_1->Add(m_notebook, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    wxBoxSizer* boxSizerLvl3_1 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(boxSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextBasePower = new wxStaticText(m_panelGeneral, wxID_ANY, _("Base power"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_1->Add(m_staticTextBasePower, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlbasePower = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("100,0"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlbasePower->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_1->Add(m_textCtrlbasePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceBasePowerArr;
+    m_choiceBasePowerArr.Add(wxT("VA"));
+    m_choiceBasePowerArr.Add(wxT("kVA"));
+    m_choiceBasePowerArr.Add(wxT("MVA"));
+    m_choiceBasePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceBasePowerArr, 0);
+    m_choiceBasePower->SetSelection(2);
+    
+    boxSizerLvl4_1->Add(m_choiceBasePower, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizerLvl3_2 = new wxStaticBoxSizer( new wxStaticBox(m_panelGeneral, wxID_ANY, _("Continuous calculation")), wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(staticBoxSizerLvl3_2, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxFaultAfterPF = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Calculate fault after power flow"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxFaultAfterPF->SetValue(true);
+    
+    staticBoxSizerLvl3_2->Add(m_checkBoxFaultAfterPF, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxSCPowerAfterPF = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Calculate short-circuit power after power flow"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxSCPowerAfterPF->SetValue(true);
+    
+    staticBoxSizerLvl3_2->Add(m_checkBoxSCPowerAfterPF, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_panelPF = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelPF, _("Power flow"), false);
+    
+    wxBoxSizer* boxSizerLvl2_2 = new wxBoxSizer(wxVERTICAL);
+    m_panelPF->SetSizer(boxSizerLvl2_2);
+    
+    wxBoxSizer* boxSizerLvl3_3 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_2->Add(boxSizerLvl3_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPFMethod = new wxStaticText(m_panelPF, wxID_ANY, _("Solution method"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_3->Add(m_staticTextPFMethod, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choicePFMethodArr;
+    m_choicePFMethodArr.Add(wxT("Gauss-Seidel"));
+    m_choicePFMethodArr.Add(wxT("Newton-Raphson"));
+    m_choicePFMethod = new wxChoice(m_panelPF, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), m_choicePFMethodArr, 0);
+    m_choicePFMethod->SetSelection(0);
+    
+    boxSizerLvl3_3->Add(m_choicePFMethod, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl_3_4 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_2->Add(gridSizerLvl_3_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_3_4->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextAccFactor = new wxStaticText(m_panelPF, wxID_ANY, _("Acceleration factor"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextAccFactor, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlAccFactor = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("1,0"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlAccFactor->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_2->Add(m_textCtrlAccFactor, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_3_4->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPFTolerance = new wxStaticText(m_panelPF, wxID_ANY, _("Tolerance"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_3->Add(m_staticTextPFTolerance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlPFTolerance = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("1e-7"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPFTolerance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_3->Add(m_textCtrlPFTolerance, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_3_4->Add(boxSizerLvl4_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPFMaxIterations = new wxStaticText(m_panelPF, wxID_ANY, _("Max. iterations"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_4->Add(m_staticTextPFMaxIterations, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlPFMaxIterations = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("5000"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPFMaxIterations->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_4->Add(m_textCtrlPFMaxIterations, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_panelStability = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelStability, _("Stability"), false);
+    
+    wxBoxSizer* boxSizerLvl2_232 = new wxBoxSizer(wxVERTICAL);
+    m_panelStability->SetSizer(boxSizerLvl2_232);
+    
+    wxGridSizer* gridSizerLvl_2_3 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_232->Add(gridSizerLvl_2_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_6 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_2_3->Add(boxSizerLvl3_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTimeStep = new wxStaticText(m_panelStability, wxID_ANY, _("Time step"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_6->Add(m_staticTextTimeStep, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_6 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl3_6->Add(boxSizerLvl4_6, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlTimeStep = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("0,01"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTimeStep->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_6->Add(m_textCtrlTimeStep, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextSec_1 = new wxStaticText(m_panelStability, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_6->Add(m_staticTextSec_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_7 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_2_3->Add(boxSizerLvl3_7, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTSimTime = new wxStaticText(m_panelStability, wxID_ANY, _("Simulation time"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_7->Add(m_staticTextTSimTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_7 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl3_7->Add(boxSizerLvl4_7, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlSimTime = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("10"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlSimTime->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_7->Add(m_textCtrlSimTime, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextSec_2 = new wxStaticText(m_panelStability, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_7->Add(m_staticTextSec_2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_5 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_2_3->Add(boxSizerLvl3_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextFreq = new wxStaticText(m_panelStability, wxID_ANY, _("System frequency"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_5->Add(m_staticTextFreq, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl3_5->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlFreq = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("60,0"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlFreq->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_5->Add(m_textCtrlFreq, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextFreqUnit = new wxStaticText(m_panelStability, wxID_ANY, _("Hz"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_5->Add(m_staticTextFreqUnit, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_8 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_2_3->Add(boxSizerLvl3_8, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTStabTolerance = new wxStaticText(m_panelStability, wxID_ANY, _("Tolerance"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_8->Add(m_staticTextTStabTolerance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlStabTolerance = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("1e-8"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlStabTolerance->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl3_8->Add(m_textCtrlStabTolerance, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_9 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_2_3->Add(boxSizerLvl3_9, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTStabMaxIterations = new wxStaticText(m_panelStability, wxID_ANY, _("Max. Iterations"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_9->Add(m_staticTextTStabMaxIterations, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlStabMaxIterations = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("100"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlStabMaxIterations->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl3_9->Add(m_textCtrlStabMaxIterations, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_10 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_2_3->Add(boxSizerLvl3_10, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextCtrlStepRation = new wxStaticText(m_panelStability, wxID_ANY, _("Controls step ratio"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_10->Add(m_staticTextCtrlStepRation, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlCtrlStepRatio = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("10"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlCtrlStepRatio->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl3_10->Add(m_textCtrlCtrlStepRatio, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_11 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_2_3->Add(boxSizerLvl3_11, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPrintTime = new wxStaticText(m_panelStability, wxID_ANY, _("Plot time"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_11->Add(m_staticTextPrintTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_8 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl3_11->Add(boxSizerLvl4_8, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlPrintTime = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("0,01"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPrintTime->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_8->Add(m_textCtrlPrintTime, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextSec_4 = new wxStaticText(m_panelStability, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_8->Add(m_staticTextSec_4, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
     wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
     
     boxSizer_lvl1_1->Add(boxSizer_bottonButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
@@ -143,6 +409,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     }
 #endif
     // Connect events
+    m_choicePFMethod->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SimulationsSettingsFormBase::OnPFMethodChoiceSelected), NULL, this);
     m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonOKClick), NULL, this);
     m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonCancelClick), NULL, this);
     
@@ -150,6 +417,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
 
 SimulationsSettingsFormBase::~SimulationsSettingsFormBase()
 {
+    m_choicePFMethod->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SimulationsSettingsFormBase::OnPFMethodChoiceSelected), NULL, this);
     m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonOKClick), NULL, this);
     m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonCancelClick), NULL, this);
     

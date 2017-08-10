@@ -16,6 +16,14 @@
 #include <wx/sizer.h>
 #include <wx/notebook.h>
 #include <wx/button.h>
+#include <wx/panel.h>
+#include <wx/imaglist.h>
+#include <wx/stattext.h>
+#include <wx/textctrl.h>
+#include <wx/choice.h>
+#include <wx/arrstr.h>
+#include <wx/statbox.h>
+#include <wx/checkbox.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -57,14 +65,83 @@ class SimulationsSettingsFormBase : public wxDialog
 {
 protected:
     wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextBasePower;
+    wxTextCtrl* m_textCtrlbasePower;
+    wxChoice* m_choiceBasePower;
+    wxCheckBox* m_checkBoxFaultAfterPF;
+    wxCheckBox* m_checkBoxSCPowerAfterPF;
+    wxPanel* m_panelPF;
+    wxStaticText* m_staticTextPFMethod;
+    wxChoice* m_choicePFMethod;
+    wxStaticText* m_staticTextAccFactor;
+    wxTextCtrl* m_textCtrlAccFactor;
+    wxStaticText* m_staticTextPFTolerance;
+    wxTextCtrl* m_textCtrlPFTolerance;
+    wxStaticText* m_staticTextPFMaxIterations;
+    wxTextCtrl* m_textCtrlPFMaxIterations;
+    wxPanel* m_panelStability;
+    wxStaticText* m_staticTextTimeStep;
+    wxTextCtrl* m_textCtrlTimeStep;
+    wxStaticText* m_staticTextSec_1;
+    wxStaticText* m_staticTextTSimTime;
+    wxTextCtrl* m_textCtrlSimTime;
+    wxStaticText* m_staticTextSec_2;
+    wxStaticText* m_staticTextFreq;
+    wxTextCtrl* m_textCtrlFreq;
+    wxStaticText* m_staticTextFreqUnit;
+    wxStaticText* m_staticTextTStabTolerance;
+    wxTextCtrl* m_textCtrlStabTolerance;
+    wxStaticText* m_staticTextTStabMaxIterations;
+    wxTextCtrl* m_textCtrlStabMaxIterations;
+    wxStaticText* m_staticTextCtrlStepRation;
+    wxTextCtrl* m_textCtrlCtrlStepRatio;
+    wxStaticText* m_staticTextPrintTime;
+    wxTextCtrl* m_textCtrlPrintTime;
+    wxStaticText* m_staticTextSec_4;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
 protected:
+    virtual void OnPFMethodChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
 
 public:
+    wxStaticText* GetStaticTextBasePower() { return m_staticTextBasePower; }
+    wxTextCtrl* GetTextCtrlbasePower() { return m_textCtrlbasePower; }
+    wxChoice* GetChoiceBasePower() { return m_choiceBasePower; }
+    wxCheckBox* GetCheckBoxFaultAfterPF() { return m_checkBoxFaultAfterPF; }
+    wxCheckBox* GetCheckBoxSCPowerAfterPF() { return m_checkBoxSCPowerAfterPF; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxStaticText* GetStaticTextPFMethod() { return m_staticTextPFMethod; }
+    wxChoice* GetChoicePFMethod() { return m_choicePFMethod; }
+    wxStaticText* GetStaticTextAccFactor() { return m_staticTextAccFactor; }
+    wxTextCtrl* GetTextCtrlAccFactor() { return m_textCtrlAccFactor; }
+    wxStaticText* GetStaticTextPFTolerance() { return m_staticTextPFTolerance; }
+    wxTextCtrl* GetTextCtrlPFTolerance() { return m_textCtrlPFTolerance; }
+    wxStaticText* GetStaticTextPFMaxIterations() { return m_staticTextPFMaxIterations; }
+    wxTextCtrl* GetTextCtrlPFMaxIterations() { return m_textCtrlPFMaxIterations; }
+    wxPanel* GetPanelPF() { return m_panelPF; }
+    wxStaticText* GetStaticTextTimeStep() { return m_staticTextTimeStep; }
+    wxTextCtrl* GetTextCtrlTimeStep() { return m_textCtrlTimeStep; }
+    wxStaticText* GetStaticTextSec_1() { return m_staticTextSec_1; }
+    wxStaticText* GetStaticTextTSimTime() { return m_staticTextTSimTime; }
+    wxTextCtrl* GetTextCtrlSimTime() { return m_textCtrlSimTime; }
+    wxStaticText* GetStaticTextSec_2() { return m_staticTextSec_2; }
+    wxStaticText* GetStaticTextFreq() { return m_staticTextFreq; }
+    wxTextCtrl* GetTextCtrlFreq() { return m_textCtrlFreq; }
+    wxStaticText* GetStaticTextFreqUnit() { return m_staticTextFreqUnit; }
+    wxStaticText* GetStaticTextTStabTolerance() { return m_staticTextTStabTolerance; }
+    wxTextCtrl* GetTextCtrlStabTolerance() { return m_textCtrlStabTolerance; }
+    wxStaticText* GetStaticTextTStabMaxIterations() { return m_staticTextTStabMaxIterations; }
+    wxTextCtrl* GetTextCtrlStabMaxIterations() { return m_textCtrlStabMaxIterations; }
+    wxStaticText* GetStaticTextCtrlStepRation() { return m_staticTextCtrlStepRation; }
+    wxTextCtrl* GetTextCtrlCtrlStepRatio() { return m_textCtrlCtrlStepRatio; }
+    wxStaticText* GetStaticTextPrintTime() { return m_staticTextPrintTime; }
+    wxTextCtrl* GetTextCtrlPrintTime() { return m_textCtrlPrintTime; }
+    wxStaticText* GetStaticTextSec_4() { return m_staticTextSec_4; }
+    wxPanel* GetPanelStability() { return m_panelStability; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }

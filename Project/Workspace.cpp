@@ -21,6 +21,8 @@
 #include "ElementPlotData.h"
 #include "ChartView.h"
 
+#include "PropertiesData.h"
+
 // Workspace
 Workspace::Workspace() : WorkspaceBase(NULL) {}
 Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : WorkspaceBase(parent)
@@ -38,6 +40,8 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : 
 
     const int widths[4] = {-3, -1, 100, 100};
     m_statusBar->SetStatusWidths(4, widths);
+
+    m_properties = new PropertiesData();
 }
 
 Workspace::~Workspace()
@@ -51,6 +55,7 @@ Workspace::~Workspace()
     if(m_camera) delete m_camera;
     if(m_glContext) delete m_glContext;
     if(m_tipWindow) delete m_tipWindow;
+    if(m_properties) delete m_properties;
 }
 
 void Workspace::OnPaint(wxPaintEvent& event)
@@ -1400,7 +1405,7 @@ bool Workspace::RunStability()
     // Run power flow before stability.
     RunPowerFlow();
 
-    Electromechanical stability(this, GetElementList());
+    Electromechanical stability(this, GetElementList(), m_properties->GetSimulationPropertiesData());
     bool result = stability.RunStabilityCalculation();
     if(!result) {
         wxMessageDialog msgDialog(this, stability.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);

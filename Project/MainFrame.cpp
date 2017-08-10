@@ -423,12 +423,20 @@ void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
 }
 void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 {
-    GeneralPropertiesForm genPropForm(this);
-    genPropForm.ShowModal();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+    if(workspace) {
+        GeneralPropertiesForm genPropForm(this, workspace->GetProperties());
+        genPropForm.SetInitialSize();
+        genPropForm.ShowModal();
+    }
 }
 
 void MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)
 {
-    SimulationsSettingsForm simulSettingsForm(this);
-    simulSettingsForm.ShowModal();
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+    if(workspace) {
+        SimulationsSettingsForm simulSettingsForm(this, workspace->GetProperties());
+        simulSettingsForm.SetInitialSize();
+        simulSettingsForm.ShowModal();
+    }
 }

@@ -553,7 +553,7 @@ public:
      * @param value Double value converted.
      * @param errorMsg Error message.
      */
-    bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
+    static bool DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg);
 
     /**
      * @brief Convert a string to int. Show a error message if the conversion fail.
@@ -562,7 +562,7 @@ public:
      * @param value Int value converted.
      * @param errorMsg Error message.
      */
-    bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
+    static bool IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg);
 
     /**
      * @brief Convert a double value to string.

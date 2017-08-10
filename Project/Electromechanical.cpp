@@ -1,11 +1,22 @@
 #include "Electromechanical.h"
 #include "ControlElementSolver.h"
 
-Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> elementList)
+Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> elementList, SimulationData data)
 {
     m_parent = parent;
     GetElementsFromList(elementList);
     SetEventTimeList();
+
+    m_powerSystemBase = GetPowerValue(data.basePower, data.basePowerUnit);
+    m_systemFreq = data.stabilityFrequency;
+    m_simTime = data.stabilitySimulationTime;
+    m_timeStep = data.timeStep;
+    m_tolerance = data.stabilityTolerance;
+    m_maxIterations = data.stabilityMaxIterations;
+
+    m_ctrlTimeStepMultiplier = 1.0 / static_cast<double>(data.controlTimeStepRatio);
+
+    m_plotTime = data.plotTime;
 }
 
 Electromechanical::~Electromechanical() {}
@@ -41,27 +52,24 @@ bool Electromechanical::RunStabilityCalculation()
 
     if(!InitializeDynamicElements()) return false;
 
-    // test
-    double simTime = 20.0;
-    double printTime = 0.01;
-    double pbdTime = 0.01;
+    double pbdTime = m_plotTime;
     double currentTime = 0.0;
-    double currentPrintTime = 0.0;
+    double currentPlotTime = 0.0;
     double currentPbdTime = 0.0;
-    while(currentTime <= simTime) {
+    while(currentTime < m_simTime) {
         if(HasEvent(currentTime)) {
             SetEvent(currentTime);
             GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
         }
 
-        if(currentPrintTime >= printTime) {
+        if(currentPlotTime >= m_plotTime || currentTime == 0.0) {
             m_timeVector.push_back(currentTime);
             SaveData();
-            currentPrintTime = 0.0;
+            currentPlotTime = 0.0;
         }
 
         if(currentPbdTime > pbdTime) {
-            if(!pbd.Update((currentTime / simTime) * 100, wxString::Format("Time = %.2fs", currentTime))) {
+            if(!pbd.Update((currentTime / m_simTime) * 100, wxString::Format("Time = %.2fs", currentTime))) {
                 m_errorMsg = wxString::Format(_("Simulation cancelled at %.2fs."), currentTime);
                 pbd.Update(100);
                 return false;
@@ -72,7 +80,7 @@ bool Electromechanical::RunStabilityCalculation()
         if(!SolveSynchronousMachines()) return false;
 
         currentTime += m_timeStep;
-        currentPrintTime += m_timeStep;
+        currentPlotTime += m_timeStep;
         currentPbdTime += m_timeStep;
     }
     return true;

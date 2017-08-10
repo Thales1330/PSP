@@ -36,6 +36,8 @@ class Electromechanical;
 class ElementPlotData;
 class ChartView;
 
+class PropertiesData;
+
 enum ElementID {
     ID_BUS = 0,
     ID_LINE,
@@ -110,6 +112,8 @@ public:
 
     int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
     void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
+    
+    PropertiesData* GetProperties() const { return m_properties; }
 
     bool RunPowerFlow();
     bool RunFault();
@@ -151,6 +155,8 @@ protected:
 
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
+    
+    PropertiesData* m_properties = NULL;
 
     bool m_justOpened = false;
 };
