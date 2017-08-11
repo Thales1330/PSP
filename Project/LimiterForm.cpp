@@ -3,6 +3,8 @@
 
 LimiterForm::LimiterForm(wxWindow* parent, Limiter* limiter) : LimiterFormBase(parent)
 {
+    SetSize(GetBestSize());
+    
     m_limiter = limiter;
     m_parent = parent;
 

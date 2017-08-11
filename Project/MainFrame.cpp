@@ -16,7 +16,6 @@
 #include "PropertiesData.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
-
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties) : MainFrameBase(parent)
 {
     m_locale = locale;
@@ -430,12 +429,9 @@ void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
 }
 void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 {
-    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        GeneralPropertiesForm genPropForm(this, workspace->GetProperties());
-        genPropForm.SetInitialSize();
-        genPropForm.ShowModal();
-    }
+    GeneralPropertiesForm genPropForm(this, m_generalProperties);
+    genPropForm.SetInitialSize();
+    genPropForm.ShowModal();
 }
 
 void MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)

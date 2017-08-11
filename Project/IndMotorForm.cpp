@@ -3,6 +3,7 @@
 
 IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormBase(parent)
 {
+    SetSize(GetBestSize());
     m_buttonStabButton->Enable(false);
     IndMotorElectricalData data = indMotor->GetElectricalData();
 

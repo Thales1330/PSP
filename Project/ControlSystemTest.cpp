@@ -9,6 +9,8 @@ ControlSystemTest::ControlSystemTest(ControlEditor* parent,
                                      double* simTime)
     : ControlSystemTestBase(parent)
 {
+    SetSize(GetBestSize());
+    
     m_inputType = inputType;
     m_startTime = startTime;
     m_slope = slope;

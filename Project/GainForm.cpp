@@ -3,6 +3,8 @@
 
 GainForm::GainForm(wxWindow* parent, Gain* gain) : GainFormBase(parent)
 {
+    SetSize(GetBestSize());
+    
     m_parent = parent;
     m_gain = gain;
 

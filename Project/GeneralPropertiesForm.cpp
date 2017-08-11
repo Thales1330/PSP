@@ -5,6 +5,35 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
     : GeneralPropertiesFormBase(parent)
 {
     m_properties = properties;
+    auto data = m_properties->GetGeneralPropertiesData();
+
+    // Clear the choices and rebuild to set the correct translations.
+    m_choiceLanguage->Clear();
+    m_choiceLanguage->Insert(_("English"), 0);
+    m_choiceLanguage->Insert(_("Portuguese"), 1);
+    m_choiceTheme->Clear();
+    m_choiceTheme->Insert(_("Light"), 0);
+    m_choiceTheme->Insert(_("Dark"), 1);
+
+    switch(data.language) {
+        case wxLANGUAGE_ENGLISH: {
+            m_choiceLanguage->SetSelection(0);
+        } break;
+        case wxLANGUAGE_PORTUGUESE_BRAZILIAN: {
+            m_choiceLanguage->SetSelection(1);
+        } break;
+        default: {
+            m_choiceLanguage->SetSelection(wxNOT_FOUND);
+        } break;
+    }
+    switch(data.theme) {
+        case THEME_LIGHT: {
+            m_choiceTheme->SetSelection(0);
+        } break;
+        case THEME_DARK: {
+            m_choiceTheme->SetSelection(1);
+        } break;
+    }
 }
 
 GeneralPropertiesForm::~GeneralPropertiesForm() {}
@@ -13,4 +42,60 @@ void GeneralPropertiesForm::OnButtonOKClick(wxCommandEvent& event)
     if(ValidateData()) EndModal(wxID_OK);
 }
 
-bool GeneralPropertiesForm::ValidateData() { return true; }
+bool GeneralPropertiesForm::ValidateData()
+{
+    auto data = m_properties->GetGeneralPropertiesData();
+    auto checkData = m_properties->GetGeneralPropertiesData();
+    bool hasChanges = false;
+
+    wxTextFile file("config.ini");
+    if(!file.Create()) {
+        if(!file.Open()) {
+            // Fail to access the file.
+            wxMessageDialog msgDialog(this,
+                                      _("It was not possible to access the init file.\nThe settings won't be applied."),
+                                      _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+            msgDialog.ShowModal();
+        }
+        file.Clear();
+    }
+
+    wxString line = "lang=";
+    switch(m_choiceLanguage->GetSelection()) {
+        case 0: {
+            line += "en";
+            data.language = wxLANGUAGE_ENGLISH;
+        } break;
+        case 1: {
+            line += "pt-br";
+            data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
+        } break;
+    }
+    file.AddLine(line);
+    if(data.language != checkData.language) hasChanges = true;
+
+    line = "theme=";
+    switch(m_choiceTheme->GetSelection()) {
+        case 0: {
+            line += "light";
+            data.theme = THEME_LIGHT;
+        } break;
+        case 1: {
+            line += "dark";
+            data.theme = THEME_DARK;
+        } break;
+    }
+    file.AddLine(line);
+    if(data.theme != checkData.theme) hasChanges = true;
+
+    file.Write();
+    file.Close();
+
+    if(hasChanges) {
+        wxMessageDialog msgDialog(this, _("The application must be restarted to settings changes be applied."),
+                                  _("Info"), wxOK | wxCENTRE | wxICON_INFORMATION);
+        msgDialog.ShowModal();
+    }
+    m_properties->SetGeneralPropertiesData(data);
+    return true;
+}

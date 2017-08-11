@@ -4,6 +4,8 @@
 TransferFunctionForm::TransferFunctionForm(wxWindow* parent, TransferFunction* transferFunction)
     : TransferFunctionFormBase(parent)
 {
+    SetSize(GetBestSize());
+    
     m_parent = parent;
     m_tf = transferFunction;
     LoadTFData();

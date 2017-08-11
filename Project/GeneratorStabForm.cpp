@@ -6,6 +6,7 @@
 
 GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator) : GeneratorStabFormBase(parent)
 {
+    SetSize(GetBestSize());
     m_syncGenerator = syncGenerator;
     m_parent = parent;
 

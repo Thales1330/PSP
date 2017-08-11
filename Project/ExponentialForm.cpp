@@ -3,6 +3,8 @@
 
 ExponentialForm::ExponentialForm(wxWindow* parent, Exponential* exponential) : ExponentialFormBase(parent)
 {
+    SetSize(GetBestSize());
+    
     wxString expSymbol = wxString::FromUTF8("\xF0\x9D\x91\x92");
     wxString superscriptCapitalB = wxString::FromUTF8("\xE1\xB4\xAE");
     wxString superscriptSmallX = wxString::FromUTF8("\xCB\xA3");

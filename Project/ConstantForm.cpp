@@ -3,6 +3,8 @@
 
 ConstantForm::ConstantForm(wxWindow* parent, Constant* constant) : ConstantFormBase(parent)
 {
+    SetSize(GetBestSize());
+    
     m_parent = parent;
     m_constant = constant;
 

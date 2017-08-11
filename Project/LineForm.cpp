@@ -4,6 +4,7 @@
 
 LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
 {
+    SetSize(GetBestSize());
     m_choiceResistance->SetString(1, L'\u03A9');
     m_choiceResistance->SetString(2, (wxString)L'\u03A9' + "/km");
     m_choiceResistance->SetInitialSize();

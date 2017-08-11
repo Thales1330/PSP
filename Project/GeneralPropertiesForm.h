@@ -2,6 +2,10 @@
 #define GENERALPROPERTIESFORM_H
 
 #include "PropertiesForm.h"
+
+#include <wx/textfile.h>
+#include <wx/msgdlg.h>
+
 class PropertiesData;
 
 class GeneralPropertiesForm : public GeneralPropertiesFormBase

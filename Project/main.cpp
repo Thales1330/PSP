@@ -13,17 +13,53 @@ class MainApp : public wxApp
    public:
     MainApp() {}
     virtual ~MainApp() {}
-    void LoadInitFile(PropertiesData* propertiesData)
+    bool LoadInitFile(PropertiesData* propertiesData)
     {
         wxTextFile file("config.ini");
         auto data = propertiesData->GetGeneralPropertiesData();
 
-        if(!file.Open()) {
-            // Create default init file.
-            wxString defaultInitFile = "lang=en\ntheme=light\n";
+        if(!file.Create()) {
+            if(!file.Open()) return false;
+            
+            wxString line;
+            for(line = file.GetFirstLine(); !file.Eof(); line = file.GetNextLine()) {
+                wxString tag = "";
+                wxString tagValue = "";
+                bool parseValue = false;
+                for(unsigned int i = 0; i < line.Len(); ++i) {
+                    if(line[i] == '=') {
+                        parseValue = true;
+                    } else {
+                        if(parseValue)
+                            tagValue += line[i];
+                        else
+                            tag += line[i];
+                    }
+                }
+                // Language
+                if(tag == "lang") {
+                    if(tagValue == "pt-br" || tagValue == "pt") {
+                        data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
+                    } else if(tagValue == "en" || tagValue == "en-us" || tagValue == "en-uk") {
+                        data.language = wxLANGUAGE_ENGLISH;
+                    }
+                }
+                if(tag == "theme") {
+                    if(tagValue == "light") {
+                        data.theme = THEME_LIGHT;
+                    } else if(tagValue == "dark") {
+                        data.theme = THEME_DARK;
+                    }
+                }
+            }
+            file.Close();
+        } else { // Create default init file.
+            if(!file.Open()) return false;
 
-            file.Create();
-            file.AddLine(defaultInitFile);
+            // Default parameters.
+            file.AddLine("lang=en");
+            file.AddLine("theme=light");
+
             file.Write();
             file.Close();
 
@@ -32,48 +68,13 @@ class MainApp : public wxApp
             propertiesData->SetGeneralPropertiesData(data);
         }
 
-        wxString line;
-        for(line = file.GetFirstLine(); !file.Eof(); line = file.GetNextLine()) {
-            wxString tag = "";
-            wxString tagValue = "";
-            bool parseValue = false;
-            for(unsigned int i = 0; i < line.Len(); ++i) {
-                if(line[i] == '=') {
-                    parseValue = true;
-                } else {
-                    if(parseValue)
-                        tagValue += line[i];
-                    else
-                        tag += line[i];
-                }
-            }
-            // Language
-            if(tag == "lang") {
-                if(tagValue == "pt-br" || tagValue == "pt") {
-                    data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
-                } else if(tagValue == "en" || tagValue == "en-us" || tagValue == "en-uk") {
-                    data.language = wxLANGUAGE_ENGLISH;
-                }
-            }
-            if(tag == "theme") {
-                if(tagValue == "light") {
-                    data.theme = THEME_LIGHT;
-                } else if(tagValue == "dark") {
-                    data.theme = THEME_DARK;
-                }
-            }
-        }
-        file.Close();
-
         propertiesData->SetGeneralPropertiesData(data);
+        return true;
     }
 
     void LoadCatalogs(wxLocale* locale, PropertiesData* propertiesData)
     {
-        LoadInitFile(propertiesData);
-
-        // Load computer settings.
-        locale->Init(locale->GetSystemLanguage(), wxLOCALE_DONT_LOAD_DEFAULT);
+        locale->Init(propertiesData->GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT);
 
         wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
         wxString langPath = fn.GetPath() + "\\..\\data\\lang";
@@ -89,6 +90,7 @@ class MainApp : public wxApp
         wxImage::AddHandler(new wxJPEGHandler);
 
         PropertiesData* propertiesData = new PropertiesData();
+        LoadInitFile(propertiesData);
 
         wxLocale* locale = new wxLocale();
         LoadCatalogs(locale, propertiesData);

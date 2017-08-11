@@ -3,6 +3,7 @@
 TextForm::TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementList, double systemPowerBase)
     : TextFormBase(parent)
 {
+    SetSize(GetBestSize());
     m_parent = parent;
     m_textToEdit = text;
     m_allElements.GetElementsFromList(elementList);
