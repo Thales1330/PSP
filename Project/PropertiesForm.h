@@ -109,6 +109,7 @@ protected:
     wxStaticText* m_staticTextPrintTime;
     wxTextCtrl* m_textCtrlPrintTime;
     wxStaticText* m_staticTextSec_4;
+    wxCheckBox* m_checkBoxUseCOI;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
@@ -151,6 +152,7 @@ public:
     wxStaticText* GetStaticTextPrintTime() { return m_staticTextPrintTime; }
     wxTextCtrl* GetTextCtrlPrintTime() { return m_textCtrlPrintTime; }
     wxStaticText* GetStaticTextSec_4() { return m_staticTextSec_4; }
+    wxCheckBox* GetCheckBoxUseCOI() { return m_checkBoxUseCOI; }
     wxPanel* GetPanelStability() { return m_panelStability; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }

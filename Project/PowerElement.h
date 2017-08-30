@@ -173,13 +173,22 @@ class PowerElement : public Element
      * @return Power flow direction.
      */
     virtual PowerFlowDirection GetPowerFlowDirection() const { return m_pfDirection; }
-    
     /**
      * @brief Fill the plot data.
      * @param plotData Plot data to be filled.
      * @return true if the plot data was successfully filled, false otherwise.
      */
     virtual bool GetPlotData(ElementPlotData& plotData) { return false; }
+    /**
+     * @brief Check if the power element have dynamic event.
+     * @return true if the element have dynamic an event, false otherwise.
+     */
+    virtual bool HaveDynamicEvent() const { return m_dynEvent; }
+    /**
+     * @brief Set if the power element have dynamic event.
+     * @param dynEvent Event occurrence.
+     */
+    virtual void SetDynamicEvent(bool dynEvent = true) { m_dynEvent = dynEvent; }
    protected:
     SwitchingData m_swData;
     std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;
@@ -191,6 +200,9 @@ class PowerElement : public Element
     OpenGLColour m_closedSwitchColour;
     OpenGLColour m_openedSwitchColour;
     OpenGLColour m_powerFlowArrowColour;
+    OpenGLColour m_dynamicEventColour;
+
+    bool m_dynEvent = false;
 };
 
 #endif  // POWERELEMENT_H

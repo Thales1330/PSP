@@ -1,8 +1,7 @@
 #include "TransformerForm.h"
 #include "Transformer.h"
 
-Transformer::Transformer()
-    : Branch()
+Transformer::Transformer() : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
@@ -10,8 +9,7 @@ Transformer::Transformer()
         }
     }
 }
-Transformer::Transformer(wxString name)
-    : Branch()
+Transformer::Transformer(wxString name) : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
@@ -30,10 +28,10 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             m_parentList.push_back(parent);
             parent->AddChild(this);
             wxPoint2DDouble parentPt =
-                parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
-            parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
-            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
-            m_pointList.push_back(parentPt);                                   // First point
+                parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
+            parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
+            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
+            m_pointList.push_back(parentPt);                                    // First point
             m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
 
             wxRect2DDouble genRect(0, 0, 0, 0);
@@ -46,9 +44,9 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             m_parentList.push_back(parent);
             parent->AddChild(this);
             wxPoint2DDouble parentPt =
-                parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
-            parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
-            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+                parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
+            parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
+            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 
             // Get the average between the two bus points.
             m_position =
@@ -56,9 +54,10 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             // Set the transformer rectangle.
             m_width = 70.0;
             m_height = 40.0;
-            SetPosition(m_position); // This method calculates the rectangle propely.
+            SetPosition(m_position);  // This method calculates the rectangle propely.
             // Set the "side" points.
-            m_pointList.push_back(wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(-10 - m_borderSize, m_height / 2.0)));
+            m_pointList.push_back(
+                wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(-10 - m_borderSize, m_height / 2.0)));
             m_pointList.push_back(
                 wxPoint2DDouble(m_rect.GetPosition() + wxPoint2DDouble(m_width + 10 + m_borderSize, m_height / 2.0)));
 
@@ -72,7 +71,7 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
             // Set the second switch point.
             m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_pointList[m_pointList.size() - 1]));
 
-            m_pointList.push_back(parentPt); // Last point.
+            m_pointList.push_back(parentPt);  // Last point.
             m_inserted = true;
 
             wxRect2DDouble genRect(0, 0, 0, 0);
@@ -95,9 +94,12 @@ bool Transformer::Contains(wxPoint2DDouble position) const
 void Transformer::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online)
-        elementColour = m_onlineElementColour;
-    else
+    if(m_online) {
+        if(m_dynEvent)
+            elementColour = m_dynamicEventColour;
+        else
+            elementColour = m_onlineElementColour;
+    } else
         elementColour = m_offlineElementColour;
 
     if(m_inserted) {
@@ -113,10 +115,10 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
             glRotated(m_angle, 0.0, 0.0, 1.0);
             glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-            DrawCircle(
-                m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, GL_POLYGON);
-            DrawCircle(
-                m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, GL_POLYGON);
+            DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20,
+                       GL_POLYGON);
+            DrawCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20,
+                       GL_POLYGON);
 
             glPopMatrix();
 
@@ -328,12 +330,12 @@ bool Transformer::SetNodeParent(Element* parent)
         wxRect2DDouble nodeRect(0, 0, 0, 0);
         if(m_activeNodeID == 1) {
             nodeRect = wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                                      10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
         }
         if(m_activeNodeID == 2) {
             nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
-                m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
-                10 + 2.0 * m_borderSize);
+                                      m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+                                      10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
         }
 
         if(parent->Intersects(nodeRect)) {
@@ -348,8 +350,8 @@ bool Transformer::SetNodeParent(Element* parent)
 
                 // Centralize the node on bus.
                 wxPoint2DDouble parentPt = parent->RotateAtPosition(
-                    m_pointList[0], -parent->GetAngle()); // Rotate click to horizontal position.
-                parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+                    m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
+                parentPt.m_y = parent->GetPosition().m_y;  // Centralize on bus.
                 parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
                 m_pointList[0] = parentPt;
 
@@ -431,13 +433,13 @@ wxString Transformer::GetTipText() const
         busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetElectricalData().number + 1;
 
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-            wxString::FromDouble(m_electricalData.powerFlow[0].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[0].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-            wxString::FromDouble(m_electricalData.powerFlow[0].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[0].imag(), 5) + _(" p.u.");
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-            wxString::FromDouble(m_electricalData.powerFlow[1].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[1].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-            wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
     }
 
     return tipText;

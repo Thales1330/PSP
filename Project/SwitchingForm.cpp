@@ -60,6 +60,11 @@ void SwitchingForm::OnOKButtonClick(wxCommandEvent& event)
     }
     m_element->SetSwitchingData(data);
 
+    if(data.swTime.size() != 0)
+        m_element->SetDynamicEvent(true);
+    else
+        m_element->SetDynamicEvent(false);
+
     EndModal(wxID_OK);
 }
 

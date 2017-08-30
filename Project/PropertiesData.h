@@ -29,6 +29,7 @@ struct SimulationData {
     int stabilityMaxIterations = 100;
     int controlTimeStepRatio = 10;
     double plotTime = 1e-2;
+    bool useCOI = true;
 };
 
 struct GeneralData {

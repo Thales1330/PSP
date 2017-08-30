@@ -1,14 +1,7 @@
 #include "Load.h"
 
-Load::Load()
-    : Shunt()
-{
-}
-Load::Load(wxString name)
-    : Shunt()
-{
-    m_electricalData.name = name;
-}
+Load::Load() : Shunt() {}
+Load::Load(wxString name) : Shunt() { m_electricalData.name = name; }
 Load::~Load() {}
 bool Load::AddParent(Element* parent, wxPoint2DDouble position)
 {
@@ -16,11 +9,11 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
         m_parentList.push_back(parent);
         parent->AddChild(this);
         wxPoint2DDouble parentPt =
-            parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
-        parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
-        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+            parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
+        parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
+        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 
-        m_position = parentPt + wxPoint2DDouble(0.0, 100.0); // Shifts the position to the down of the bus.
+        m_position = parentPt + wxPoint2DDouble(0.0, 100.0);  // Shifts the position to the down of the bus.
         m_width = m_height = 20.0;
         m_rect = wxRect2DDouble(m_position.m_x - 10.0, m_position.m_y - 10.0, m_width, m_height);
 
@@ -36,7 +29,7 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
         m_inserted = true;
 
         wxRect2DDouble genRect(0, 0, 0, 0);
-        m_switchRect.push_back(genRect); // Push a general rectangle.
+        m_switchRect.push_back(genRect);  // Push a general rectangle.
         UpdateSwitches();
         m_pfDirection = PF_TO_ELEMENT;
         UpdatePowerFlowArrowsPosition();
@@ -49,9 +42,12 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
 void Load::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online)
-        elementColour = m_onlineElementColour;
-    else
+    if(m_online) {
+        if(m_dynEvent)
+            elementColour = m_dynamicEventColour;
+        else
+            elementColour = m_onlineElementColour;
+    } else
         elementColour = m_offlineElementColour;
 
     if(m_inserted) {
@@ -60,10 +56,10 @@ void Load::Draw(wxPoint2DDouble translation, double scale) const
             glLineWidth(1.5 + m_borderSize * 2.0);
             glColor4dv(m_selectionColour.GetRGBA());
             std::vector<wxPoint2DDouble> selTriangPts;
-            selTriangPts.push_back(
-                m_triangPts[0] + m_position + wxPoint2DDouble(-m_borderSize / scale, -m_borderSize / scale));
-            selTriangPts.push_back(
-                m_triangPts[1] + m_position + wxPoint2DDouble(m_borderSize / scale, -m_borderSize / scale));
+            selTriangPts.push_back(m_triangPts[0] + m_position +
+                                   wxPoint2DDouble(-m_borderSize / scale, -m_borderSize / scale));
+            selTriangPts.push_back(m_triangPts[1] + m_position +
+                                   wxPoint2DDouble(m_borderSize / scale, -m_borderSize / scale));
             selTriangPts.push_back(m_triangPts[2] + m_position + wxPoint2DDouble(0.0, m_borderSize / scale));
 
             glPushMatrix();

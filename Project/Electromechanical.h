@@ -39,6 +39,7 @@ class Electromechanical : public ElectricCalculation
     void SetSyncMachinesModel();
     double CalculateSyncMachineIntVariables(SyncGenerator* syncGenerator, double id, double iq, double pe, double k = 1.0);
     void CalculateSyncMachineNonIntVariables(SyncGenerator* syncGenerator, double& id, double& iq, double& pe, double k = 1.0);
+    void CalculateReferenceSpeed();
 
     void SaveData();
 
@@ -46,6 +47,8 @@ class Electromechanical : public ElectricCalculation
     wxString m_errorMsg = _("Unknown error");
 
     double m_systemFreq = 60.0;
+    double m_refSpeed = 2.0 * M_PI * 60.0;
+    bool m_useCOI = false;
 
     std::vector<std::vector<std::complex<double> > > m_yBus;
     std::vector<std::vector<std::complex<double> > > m_yBusU;

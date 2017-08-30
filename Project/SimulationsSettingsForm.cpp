@@ -46,6 +46,8 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     m_textCtrlStabMaxIterations->SetValue(wxString::Format("%d", data.stabilityMaxIterations));
     m_textCtrlCtrlStepRatio->SetValue(wxString::Format("%d", data.controlTimeStepRatio));
     m_textCtrlPrintTime->SetValue(wxString::Format("%g", data.plotTime));
+
+    m_checkBoxUseCOI->SetValue(data.useCOI);
 }
 
 SimulationsSettingsForm::~SimulationsSettingsForm() {}
@@ -111,6 +113,8 @@ bool SimulationsSettingsForm::ValidateData()
     if(!Element::DoubleFromString(this, m_textCtrlPrintTime->GetValue(), data.plotTime,
                                   _("Value entered incorrectly in the field \"Plot time\".")))
         return false;
+    data.useCOI = m_checkBoxUseCOI->GetValue();
+
     m_properties->SetSimulationPropertiesData(data);
     return true;
 }

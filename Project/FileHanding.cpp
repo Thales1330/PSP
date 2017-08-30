@@ -868,6 +868,9 @@ bool FileHanding::OpenProject(wxFileName path)
         data.stabFaultReactance = GetNodeValueDouble(stability, "FaultReactance");
 
         bus->SetElectricalData(data);
+
+        if(data.stabHasFault) bus->SetDynamicEvent(true);
+
         elementList.push_back(bus);
         busList.push_back(bus);
         busNode = busNode->next_sibling("Bus");
@@ -940,6 +943,9 @@ bool FileHanding::OpenProject(wxFileName path)
         capacitor->SetSwitchingData(swData);
 
         capacitor->SetElectricalData(data);
+
+        if(swData.swTime.size() != 0) capacitor->SetDynamicEvent(true);
+
         elementList.push_back(capacitor);
         capacitorList.push_back(capacitor);
         capacitorNode = capacitorNode->next_sibling("Capacitor");
@@ -1075,6 +1081,9 @@ bool FileHanding::OpenProject(wxFileName path)
         inductor->SetSwitchingData(swData);
 
         inductor->SetElectricalData(data);
+
+        if(swData.swTime.size() != 0) inductor->SetDynamicEvent(true);
+
         elementList.push_back(inductor);
         inductorList.push_back(inductor);
         inductorNode = inductorNode->next_sibling("Inductor");
@@ -1183,6 +1192,9 @@ bool FileHanding::OpenProject(wxFileName path)
         line->SetSwitchingData(swData);
 
         line->SetElectricalData(data);
+
+        if(swData.swTime.size() != 0) line->SetDynamicEvent(true);
+
         elementList.push_back(line);
         lineList.push_back(line);
         lineNode = lineNode->next_sibling("Line");
@@ -1258,6 +1270,9 @@ bool FileHanding::OpenProject(wxFileName path)
         load->SetSwitchingData(swData);
 
         load->SetElectricalData(data);
+
+        if(swData.swTime.size() != 0) load->SetDynamicEvent(true);
+
         elementList.push_back(load);
         loadList.push_back(load);
         loadNode = loadNode->next_sibling("Load");
@@ -1384,6 +1399,9 @@ bool FileHanding::OpenProject(wxFileName path)
         syncGenerator->SetSwitchingData(swData);
 
         syncGenerator->SetElectricalData(data);
+
+        if(swData.swTime.size() != 0) syncGenerator->SetDynamicEvent(true);
+
         elementList.push_back(syncGenerator);
         syncGeneratorList.push_back(syncGenerator);
         syncGeneratorNode = syncGeneratorNode->next_sibling("SyncGenerator");
@@ -1611,6 +1629,9 @@ bool FileHanding::OpenProject(wxFileName path)
         transformer->SetSwitchingData(swData);
 
         transformer->SetElectricaData(data);
+
+        if(swData.swTime.size() != 0) transformer->SetDynamicEvent(true);
+
         elementList.push_back(transformer);
         transformerList.push_back(transformer);
         transfomerNode = transfomerNode->next_sibling("Transfomer");

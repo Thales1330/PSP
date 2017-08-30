@@ -35,7 +35,7 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
         glRotated(m_angle, 0.0, 0.0, 1.0);
         glTranslated(-screenPt.m_x, -screenPt.m_y, 0.0);
 
-        glColor4d(0.0, 0.5, 1.0, 0.5);
+        glColor4dv(m_selectionColour.GetRGBA());
 
         wxPoint2DDouble pts[4] = {WorldToScreen(translation, scale, -(m_width / 2.0), -(m_height / 2.0)) -
                                       wxPoint2DDouble(m_borderSize, m_borderSize),
@@ -56,7 +56,11 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
     glRotated(m_angle, 0.0, 0.0, 1.0);
     glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-    glColor4dv(m_busColour.GetRGBA());
+    if(m_dynEvent)
+        glColor4dv(m_dynamicEventColour.GetRGBA());
+    else
+        glColor4dv(m_busColour.GetRGBA());
+
     DrawRectangle(m_position, m_width, m_height);
     // Pop the old matrix back.
     glPopMatrix();

@@ -17,6 +17,7 @@ Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> ele
     m_ctrlTimeStepMultiplier = 1.0 / static_cast<double>(data.controlTimeStepRatio);
 
     m_plotTime = data.plotTime;
+    m_useCOI = data.useCOI;
 }
 
 Electromechanical::~Electromechanical() {}
@@ -469,8 +470,8 @@ bool Electromechanical::InitializeDynamicElements()
             if(data.model == Machines::SM_MODEL_1) {
                 xq = data.transXd * k;
                 xd = xq;
-            }
-            else if(data.syncXq == 0.0) xq = data.syncXd * k;
+            } else if(data.syncXq == 0.0)
+                xq = data.syncXd * k;
 
             // Initialize state variables
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
@@ -588,6 +589,7 @@ bool Electromechanical::InitializeDynamicElements()
 
         syncGenerator->SetElectricalData(data);
     }
+    CalculateReferenceSpeed();
     return true;
 }
 
@@ -673,8 +675,8 @@ void Electromechanical::CalculateMachinesCurrents()
 
 void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq, double k)
 {
+    CalculateReferenceSpeed();
     auto data = syncGenerator->GetElectricalData();
-    double w0 = 2.0f * M_PI * m_systemFreq;
 
     double syncXd, syncXq, transXd, transXq, subXd, subXq;
     syncXd = data.syncXd * k;
@@ -699,13 +701,13 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     if(subTq0 == 0.0) subTq0 = subTd0;
 
     // Speed
-    data.icSpeed.m = m_timeStep / ((4.0f * data.inertia / w0) / k + m_timeStep * data.damping * k);
+    data.icSpeed.m = m_timeStep / ((4.0f * data.inertia / m_refSpeed) / k + m_timeStep * data.damping * k);
     data.icSpeed.c = (1.0f - 2.0f * data.icSpeed.m * data.damping * k) * data.speed +
-                     data.icSpeed.m * (data.pm - data.pe + 2.0f * w0 * data.damping * k);
+                     data.icSpeed.m * (data.pm - data.pe + 2.0f * m_refSpeed * data.damping * k);
 
     // Delta
     data.icDelta.m = 0.5f * m_timeStep;
-    data.icDelta.c = data.delta + data.icDelta.m * (data.speed - 2.0f * w0);
+    data.icDelta.c = data.delta + data.icDelta.m * (data.speed - 2.0f * m_refSpeed);
 
     // Eq'
     if(data.model == Machines::SM_MODEL_2 || data.model == Machines::SM_MODEL_3 || data.model == Machines::SM_MODEL_4 ||
@@ -962,15 +964,14 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
                                                            double pe,
                                                            double k)
 {
-    double w0 = 2.0 * M_PI * m_systemFreq;
     double error = 0.0;
     auto data = syncGenerator->GetElectricalData();
 
     // Mechanical differential equations.
     double w = data.icSpeed.c + data.icSpeed.m * (data.pm - pe);
-    error = std::max(error, std::abs(data.speed - w) / w0);
+    error = std::max(error, std::abs(data.speed - w) / m_refSpeed);
 
-    m_wError += std::abs(data.speed - w) / w0;
+    m_wError += std::abs(data.speed - w) / m_refSpeed;
 
     double delta = data.icDelta.c + data.icDelta.m * w;
     error = std::max(error, std::abs(data.delta - delta));
@@ -1086,4 +1087,28 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
 
     syncGenerator->SetElectricalData(data);
     return error;
+}
+
+void Electromechanical::CalculateReferenceSpeed()
+{
+    if(m_useCOI) {
+        double sumHW = 0.0;
+        double sumH = 0.0;
+        for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
+            SyncGenerator* syncGenerator = *it;
+            if(syncGenerator->IsOnline()) {
+                auto data = syncGenerator->GetElectricalData();
+                double k = 1.0;  // Power base change factor.
+                if(data.useMachineBase) {
+                    double oldBase = GetPowerValue(data.nominalPower, data.nominalPowerUnit);
+                    k = m_powerSystemBase / oldBase;
+                }
+                sumH += data.inertia / k;
+                sumHW += data.inertia * data.speed / k;
+            }
+        }
+        m_refSpeed = sumHW / sumH;
+    } else {
+        m_refSpeed = 2.0 * M_PI * m_systemFreq;
+    }
 }

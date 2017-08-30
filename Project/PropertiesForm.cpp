@@ -406,6 +406,11 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl4_8->Add(m_staticTextSec_4, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
+    m_checkBoxUseCOI = new wxCheckBox(m_panelStability, wxID_ANY, _("Use center of inertia as reference"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_checkBoxUseCOI->SetValue(true);
+    
+    boxSizerLvl2_232->Add(m_checkBoxUseCOI, 0, wxALL, WXC_FROM_DIP(5));
+    
     wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
     
     boxSizer_lvl1_1->Add(boxSizer_bottonButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
