@@ -592,6 +592,7 @@ void Workspace::OnMiddleDown(wxMouseEvent& event)
     }
     m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
+    event.Skip();
 }
 
 void Workspace::OnMiddleUp(wxMouseEvent& event)
@@ -616,6 +617,7 @@ void Workspace::OnMiddleUp(wxMouseEvent& event)
         } break;
     }
     UpdateStatusBar();
+    event.Skip();
 }
 
 void Workspace::OnScroll(wxMouseEvent& event)
@@ -1411,26 +1413,34 @@ bool Workspace::RunStability()
         wxMessageDialog msgDialog(this, stability.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
+    m_stabilityTimeVector.clear();
+    m_stabilityTimeVector = stability.GetTimeVector();
 
     // Run power flow after stability.
     RunPowerFlow();
 
-    std::vector<ElementPlotData> plotDataList;
-    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-        PowerElement* element = *it;
-        ElementPlotData plotData;
-        if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
-    }
-    ElementPlotData tests(_("Error"), ElementPlotData::CT_TEST);
-    tests.AddData(stability.m_wErrorVector, _("Speed error"));
-    tests.AddData(stability.m_deltaErrorVector, _("Delta error"));
-    tests.AddData(stability.m_transEqErrorVector, _("Eq error"));
-    tests.AddData(stability.m_transEdErrorVector, _("Ed error"));
-    tests.AddData(stability.m_numItVector, _("Number iterations"));
-    plotDataList.push_back(tests);
+    wxMessageDialog msgDialog(this, _("Do you wish to open the stability graphics?"), _("Question"),
+                              wxYES_NO | wxCENTRE | wxICON_QUESTION);
+    if(msgDialog.ShowModal() == wxID_YES) {
+        std::vector<ElementPlotData> plotDataList;
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            PowerElement* element = *it;
+            ElementPlotData plotData;
+            if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
+        }
+        ElementPlotData tests(_("Error"), ElementPlotData::CT_TEST);
+        tests.AddData(stability.m_wErrorVector, _("Speed error"));
+        tests.AddData(stability.m_numItVector, _("Number iterations"));
+        plotDataList.push_back(tests);
 
-    ChartView* cView = new ChartView(this, plotDataList, stability.GetTimeVector());
-    cView->Show();
+        ChartView* cView = new ChartView(this, plotDataList, m_stabilityTimeVector);
+        cView->Show();
+    }
 
     return result;
+}
+void Workspace::OnMiddleDoubleClick(wxMouseEvent& event)
+{
+    Fit();
+    event.Skip();
 }

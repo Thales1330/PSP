@@ -50,6 +50,7 @@ protected:
     virtual void OnRightClickDown(wxMouseEvent& event) { event.Skip(); }
     virtual void OnLeftDoubleClick(wxMouseEvent& event) { event.Skip(); }
     virtual void OnIdle(wxIdleEvent& event) { event.Skip(); }
+    virtual void OnMiddleDoubleClick(wxMouseEvent& event) { event.Skip(); }
     virtual void OnTimer(wxTimerEvent& event) { event.Skip(); }
 
 public:

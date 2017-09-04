@@ -782,9 +782,6 @@ bool Electromechanical::SolveSynchronousMachines()
     }
 
     m_wError = 0;
-    m_deltaError = 0;
-    m_transEdError = 0;
-    m_transEqError = 0;
 
     double error = 1.0;
     int iterations = 0;
@@ -912,9 +909,6 @@ void Electromechanical::SaveData()
     }
 
     m_wErrorVector.push_back(m_wError);
-    m_deltaErrorVector.push_back(m_deltaError);
-    m_transEdErrorVector.push_back(m_transEdError);
-    m_transEqErrorVector.push_back(m_transEqError);
     m_numItVector.push_back(m_numIt);
 }
 
@@ -976,8 +970,6 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
     double delta = data.icDelta.c + data.icDelta.m * w;
     error = std::max(error, std::abs(data.delta - delta));
 
-    m_deltaError += std::abs(data.delta - delta);
-
     data.speed = w;
     data.delta = delta;
 
@@ -990,8 +982,6 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             double tranEq =
                 data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (data.syncXd * k - data.transXd * k) * id);
             error = std::max(error, std::abs(data.tranEq - tranEq));
-
-            m_transEqError += std::abs(data.tranEq - tranEq);
 
             data.tranEq = tranEq;
         } break;
@@ -1007,12 +997,8 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             double tranEq = data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
             error = std::max(error, std::abs(data.tranEq - tranEq));
 
-            m_transEqError += std::abs(data.tranEq - tranEq);
-
             double tranEd = data.icTranEd.c - data.icTranEd.m * (syncXq - transXq) * iq;
             error = std::max(error, std::abs(data.tranEd - tranEd));
-
-            m_transEdError += std::abs(data.tranEd - tranEd);
 
             data.tranEq = tranEq;
             data.tranEd = tranEd;
@@ -1036,8 +1022,6 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
 
             double tranEq = data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
             error = std::max(error, std::abs(data.tranEq - tranEq));
-
-            m_transEqError += std::abs(data.tranEq - tranEq);
 
             double subEq = data.icSubEq.c + data.icSubEq.m * (tranEq + (transXd - subXd) * id);
             error = std::max(error, std::abs(data.subEq - subEq));
@@ -1065,12 +1049,8 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             double tranEq = data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
             error = std::max(error, std::abs(data.tranEq - tranEq));
 
-            m_transEqError += std::abs(data.tranEq - tranEq);
-
             double tranEd = data.icTranEd.c - data.icTranEd.m * (syncXq - transXq) * iq;
             error = std::max(error, std::abs(data.tranEd - tranEd));
-
-            m_transEdError += std::abs(data.tranEd - tranEd);
 
             double subEq = data.icSubEq.c + data.icSubEq.m * (tranEq + (transXd - subXd) * id);
             error = std::max(error, std::abs(data.subEq - subEq));

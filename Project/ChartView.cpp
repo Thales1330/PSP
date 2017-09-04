@@ -128,6 +128,9 @@ void ChartView::OnPropertyGridChange(wxPropertyGridEvent& event)
                     wxColour colour = GetNextColour();
                     data->SetColour(colour);
                     m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
+                    m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), true);
+                } else {
+                    m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), false);
                 }
                 fit = true;
             } else if(event.GetPropertyName() == _("Color")) {
@@ -337,6 +340,9 @@ void ChartView::OnTreeItemActivated(wxTreeEvent& event)
             wxColour colour = GetNextColour();
             data->SetColour(colour);
             m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
+            m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), true);
+        } else {
+            m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), false);
         }
         UpdatePlot(true);
     }

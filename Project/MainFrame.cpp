@@ -14,6 +14,7 @@
 #include "GeneralPropertiesForm.h"
 #include "SimulationsSettingsForm.h"
 #include "PropertiesData.h"
+#include "ChartView.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties) : MainFrameBase(parent)
@@ -137,7 +138,22 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 
 void MainFrame::OnAboutClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnAddElementDropdown(wxRibbonButtonBarEvent& event) { event.PopupMenu(m_addElementsMenu); }
-void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event)
+{
+    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
+        std::vector<ElementPlotData> plotDataList;
+        auto elementList = workspace->GetElementList();
+        for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
+            if(PowerElement* powerElement = dynamic_cast<PowerElement*>(*it)) {
+                ElementPlotData plotData;
+                if(powerElement->GetPlotData(plotData)) plotDataList.push_back(plotData);
+            }
+        }
+        ChartView* cView = new ChartView(workspace, plotDataList, workspace->GetStabilityTimeVector());
+        cView->Show();
+    }
+}
+
 void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}

@@ -114,6 +114,8 @@ public:
     void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
     
     PropertiesData* GetProperties() const { return m_properties; }
+    
+    std::vector<double> GetStabilityTimeVector() const { return m_stabilityTimeVector; }
 
     bool RunPowerFlow();
     bool RunFault();
@@ -121,6 +123,7 @@ public:
     bool RunStability();
 
 protected:
+    virtual void OnMiddleDoubleClick(wxMouseEvent& event);
     virtual void OnIdle(wxIdleEvent& event);
     virtual void OnTimer(wxTimerEvent& event);
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
@@ -157,6 +160,8 @@ protected:
     wxPoint2DDouble m_startSelRect;
     
     PropertiesData* m_properties = NULL;
+    
+    std::vector<double> m_stabilityTimeVector;
 
     bool m_justOpened = false;
 };

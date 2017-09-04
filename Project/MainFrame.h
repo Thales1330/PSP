@@ -14,6 +14,7 @@ class FileHanding;
 class GeneralPropertiesForm;
 class SimulationsSettingsForm;
 class PropertiesData;
+class ChartView;
 
 enum {
     ID_ADDMENU_BUS = 20000,

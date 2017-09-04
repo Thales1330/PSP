@@ -110,23 +110,23 @@
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (16x16)  :",
-     "m_path": ""
+     "m_path": "data/images/chart16.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (32x32)  :",
-     "m_path": ""
+     "m_path": "data/images/chart32.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (64x64)  :",
-     "m_path": ""
+     "m_path": "data/images/chart64.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (128x128):",
-     "m_path": ""
+     "m_path": "data/images/chart128.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (256x256):",
-     "m_path": ""
+     "m_path": "data/images/chart256.png"
     }],
    "m_events": [],
    "m_children": [{

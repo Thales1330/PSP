@@ -72,9 +72,6 @@ class Electromechanical : public ElectricCalculation
 
     // tests
     double m_wError = 0.0;
-    double m_deltaError = 0.0;
-    double m_transEdError = 0.0;
-    double m_transEqError = 0.0;
     double m_numIt = 0;
 };
 

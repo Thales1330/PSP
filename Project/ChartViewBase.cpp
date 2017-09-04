@@ -22,6 +22,40 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
         wxCE3EBInitBitmapResources();
         bBitmapLoaded = true;
     }
+    // Set icon(s) to the application/dialog
+    wxIconBundle app_icons;
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart16"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart32"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart64"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart128"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    {
+        wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart256"));
+        wxIcon icn;
+        icn.CopyFromBitmap(iconBmp);
+        app_icons.AddIcon( icn );
+    }
+    SetIcons( app_icons );
+
     
     m_menuBar = new wxMenuBar(0);
     this->SetMenuBar(m_menuBar);
