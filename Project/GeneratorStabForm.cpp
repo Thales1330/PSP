@@ -1,9 +1,12 @@
 #include "GeneratorStabForm.h"
 #include "SwitchingForm.h"
 #include "SyncGenerator.h"
+#include "ControlEditor.h"
+#include "ControlElementContainer.h"
 
 GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator) : GeneratorStabFormBase(parent)
 {
+    SetSize(GetBestSize());
     m_syncGenerator = syncGenerator;
     m_parent = parent;
 
@@ -40,13 +43,39 @@ GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenera
 
 GeneratorStabForm::~GeneratorStabForm() {}
 void GeneratorStabForm::OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
-void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event) {}
+void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
+{
+    SyncGeneratorElectricalData data = m_syncGenerator->GetElectricalData();
+    if(!data.avr) {
+        data.avr = new ControlElementContainer();
+        m_syncGenerator->SetElectricalData(data);
+    }
+    ControlEditor* cEditor = new ControlEditor(m_parent, IOControl::IN_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
+    cEditor->SetElementsList(data.avr->GetControlElementsList());
+    cEditor->SetConnectionsList(data.avr->GetConnectionLineList());
+    cEditor->SetControlContainer(data.avr);
+    cEditor->Show();
+}
+
 void GeneratorStabForm::OnOKButtonClick(wxCommandEvent& event)
 {
     if(ValidateData()) EndModal(wxID_OK);
 }
 
-void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event) {}
+void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
+{
+    SyncGeneratorElectricalData data = m_syncGenerator->GetElectricalData();
+    if(!data.speedGov) {
+        data.speedGov = new ControlElementContainer();
+        m_syncGenerator->SetElectricalData(data);
+    }
+    ControlEditor* cEditor = new ControlEditor(m_parent, IOControl::IN_VELOCITY | IOControl::OUT_MEC_POWER);
+    cEditor->SetElementsList(data.speedGov->GetControlElementsList());
+    cEditor->SetConnectionsList(data.speedGov->GetConnectionLineList());
+    cEditor->SetControlContainer(data.speedGov);
+    cEditor->Show();
+}
+
 void GeneratorStabForm::OnSwitchingButtonClick(wxCommandEvent& event)
 {
     if(ValidateData()) {
@@ -65,76 +94,76 @@ bool GeneratorStabForm::ValidateData()
 
     if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlInertia->GetValue(), data.inertia,
                                           _("Value entered incorrectly in the field \"Inertia\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlDamping->GetValue(), data.damping,
                                           _("Value entered incorrectly in the field \"Damping factor\".")))
-	return false;
+        return false;
 
     data.useAVR = m_checkBoxUseAVR->GetValue();
     data.useSpeedGovernor = m_checkBoxUseSG->GetValue();
 
     if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlRa->GetValue(), data.armResistance,
                                           _("Value entered incorrectly in the field \"Armature resistance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlXp->GetValue(), data.potierReactance,
                                           _("Value entered incorrectly in the field \"Potier reactance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlSat->GetValue(), data.satFactor,
                                           _("Value entered incorrectly in the field \"Saturation factor\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlSyncXd->GetValue(), data.syncXd,
            _("Value entered incorrectly in the field \"Synchronous direct-axis reactance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlSyncXq->GetValue(), data.syncXq,
            _("Value entered incorrectly in the field \"Synchronous quadrature-axis reactance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlTranXd->GetValue(), data.transXd,
            _("Value entered incorrectly in the field \"Transitory direct-axis reactance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlTranXq->GetValue(), data.transXq,
            _("Value entered incorrectly in the field \"Transitory quadrature-axis reactance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlTranTd0->GetValue(), data.transTd0,
            _("Value entered incorrectly in the field \"Transitory direct-axis time constant\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlTranTq0->GetValue(), data.transTq0,
            _("Value entered incorrectly in the field \"Transitory quadrature-axis time constant\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlSubXd->GetValue(), data.subXd,
            _("Value entered incorrectly in the field \"Subtransitory direct-axis reactance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlSubXq->GetValue(), data.subXq,
            _("Value entered incorrectly in the field \"Subtransitory quadrature-axis reactance\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlSubTd0->GetValue(), data.subTd0,
            _("Value entered incorrectly in the field \"Subtransitory direct-axis time constant\".")))
-	return false;
+        return false;
 
     if(!m_syncGenerator->DoubleFromString(
            m_parent, m_textCtrlSubTq0->GetValue(), data.subTq0,
            _("Value entered incorrectly in the field \"Subtransitory quadrature-axis time constant\".")))
-	return false;
+        return false;
 
     m_syncGenerator->SetElectricalData(data);
 

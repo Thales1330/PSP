@@ -39,7 +39,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
     int busNumber = 0;
     for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
         Bus* bus = *itb;
-        BusElectricalData data = bus->GetEletricalData();
+        BusElectricalData data = bus->GetElectricalData();
 
         // Fill the bus type
         if(data.slackBus) busType.push_back(BUS_SLACK);

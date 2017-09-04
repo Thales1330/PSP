@@ -17,6 +17,7 @@
 #include "Gain.h"
 
 #include "ControlElementSolver.h"
+#include "ControlElementContainer.h"
 
 #include "ChartView.h"
 #include "ElementPlotData.h"
@@ -593,19 +594,7 @@ void ControlEditor::OnScroll(wxMouseEvent& event)
     Redraw();
 }
 
-void ControlEditor::OnIdle(wxIdleEvent& event)
-{
-    // Solve wxGLString bug.
-    if(m_firstDraw) {
-        TransferFunction* tf = new TransferFunction(0);
-        m_elementList.push_back(tf);
-        Redraw();
-        m_elementList.pop_back();
-        delete tf;
-        m_firstDraw = false;
-    }
-}
-
+void ControlEditor::OnIdle(wxIdleEvent& event) { ConsolidateTexts(); }
 void ControlEditor::OnKeyDown(wxKeyEvent& event)
 {
     char key = event.GetUnicodeKey();
@@ -621,73 +610,7 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'L': {
                 // tests
-                if(event.ControlDown() && event.ShiftDown()) {
-                    double timeStep = 1e-4;
-                    double integrationError = 1e-5;
-                    double simTime = 10.0;
-                    double printStep = 1e-3;
-                    double pdbStep = 1e-1;
-
-                    double pulsePer = 5.0;
-
-                    wxProgressDialog pbd(_("Test"), _("Initializing..."), 100, this,
-                                         wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
-                    pbd.SetDoubleBuffered(true);
-                    ControlElementSolver solver(this, timeStep, integrationError, false, 0.0);
-                    if(solver.IsOK()) {
-                        bool simStopped = false;
-                        double currentTime = 0.0;
-                        double printTime = 0.0;
-                        double pulseTime = 0.0;
-                        double pdbTime = 0.0;
-                        std::vector<double> time;
-                        std::vector<double> solution;
-                        std::vector<double> inputV;
-                        while(currentTime <= simTime) {
-                            double input = 0.0;
-                            if(pulseTime >= pulsePer * 2.0) pulseTime = 0.0;
-                            if(pulseTime >= pulsePer) input = 1.0;
-
-                            solver.SolveNextStep(input);
-                            if(printTime >= printStep) {
-                                time.push_back(currentTime);
-                                solution.push_back(solver.GetLastSolution());
-                                inputV.push_back(input);
-                                printTime = 0.0;
-                            }
-                            if((pdbTime > pdbStep)) {
-                                if(!pbd.Update((currentTime / simTime) * 100,
-                                               wxString::Format("Time = %.2fs", currentTime))) {
-                                    pbd.Update(100);
-                                    simStopped = true;
-                                    currentTime = simTime;
-                                }
-                                pbd.Refresh();
-                                pbd.Update();
-                                pdbTime = 0.0;
-                            }
-                            printTime += timeStep;
-                            currentTime += timeStep;
-                            pulseTime += timeStep;
-                            pdbTime += timeStep;
-                        }
-                        if(!simStopped) {
-                            std::vector<ElementPlotData> epdList;
-                            ElementPlotData curve1Data(_("TESTES"), ElementPlotData::CT_BUS);
-                            curve1Data.AddData(inputV, _("Entrada"));
-                            curve1Data.AddData(solution, _("Saida"));
-                            epdList.push_back(curve1Data);
-
-                            ChartView* cView = new ChartView(this, epdList, time);
-                            cView->Show();
-                        }
-                    } else {
-                        wxMessageDialog msgDialog(this, _("It was not possible to solve the control system"),
-                                                  _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
-                        msgDialog.ShowModal();
-                    }
-                }
-            }
+            } break;
         }
     }
 }
@@ -812,27 +735,131 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
         msgDialog.ShowModal();
     }
 
-    // Get the highest id number
-    int majorElementID = 0;
-    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-        ControlElement* element = *it;
-        if(element->GetID() > majorElementID) majorElementID = element->GetID();
-    }
-    for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-        ConnectionLine* line = *it;
-        if(line->GetID() > majorElementID) majorElementID = line->GetID();
-    }
-    m_lastElementID = ++majorElementID;
-
+    SetLastElementID();
     Redraw();
     event.Skip();
 }
 
-/*void ControlEditor::SetElementsList(std::vector<ControlElement*> elementList)
+void ControlEditor::OnTestClick(wxCommandEvent& event)
 {
-    m_elementList.clear();
-    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
-        ControlElement* element = *it;
-        m_elementList.push_back(element);
+    ControlSystemTest csTest(this, &m_inputType, &m_startTime, &m_slope, &m_timeStep, &m_simTime);
+    if(csTest.ShowModal() == wxID_OK) {
+        double printStep = 1e-3;
+        double pdbStep = 1e-1;
+
+        wxProgressDialog pbd(_("Test"), _("Initializing..."), 100, this,
+                             wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
+        ControlElementSolver solver(this, m_timeStep, 1e-5);
+        if(solver.IsOK()) {
+            bool simStopped = false;
+            double currentTime = 0.0;
+            double printTime = 0.0;
+            double pdbTime = 0.0;
+            std::vector<double> time;
+            std::vector<double> solution;
+            std::vector<double> inputV;
+            while(currentTime <= m_simTime) {
+                double input = 0.0;
+                if(currentTime >= m_startTime) {
+                    switch(m_inputType) {
+                        case 0: {
+                            input = m_slope;
+                        } break;
+                        case 1: {
+                            input = m_slope * (currentTime - m_startTime);
+                        } break;
+                        case 2: {
+                            input = m_slope * std::pow(currentTime - m_startTime, 2);
+                        } break;
+                        default: {
+                            input = 0.0;
+                            break;
+                        }
+                    }
+                }
+
+                solver.SolveNextStep(input);
+
+                if(printTime >= printStep) {
+                    time.push_back(currentTime);
+                    solution.push_back(solver.GetLastSolution());
+                    inputV.push_back(input);
+                    printTime = 0.0;
+                }
+
+                if(pdbTime > pdbStep) {
+                    if(!pbd.Update((currentTime / m_simTime) * 100, wxString::Format("Time = %.2fs", currentTime))) {
+                        pbd.Update(100);
+                        simStopped = true;
+                        currentTime = m_simTime;
+                    }
+                    pdbTime = 0.0;
+                }
+
+                printTime += m_timeStep;
+                currentTime += m_timeStep;
+                pdbTime += m_timeStep;
+            }
+            if(!simStopped) {
+                std::vector<ElementPlotData> epdList;
+                ElementPlotData curveData(_("I/O"), ElementPlotData::CT_TEST);
+                curveData.AddData(inputV, _("Input"));
+                curveData.AddData(solution, _("Output"));
+
+                curveData.SetPlot(0);
+                curveData.SetColour(0, *wxRED);
+                curveData.SetPlot(1);
+                curveData.SetColour(1, *wxBLUE);
+
+                epdList.push_back(curveData);
+
+                ChartView* cView = new ChartView(this, epdList, time);
+                cView->Show();
+                cView->UpdatePlot();
+            }
+        } else {
+            wxMessageDialog msgDialog(this, _("It was not possible to solve the control system"), _("Error"),
+                                      wxOK | wxCENTRE | wxICON_ERROR);
+            msgDialog.ShowModal();
+        }
     }
-}*/
+}
+
+void ControlEditor::OnClose(wxCloseEvent& event)
+{
+    if(m_ctrlContainer) {
+        m_ctrlContainer->FillContainer(this);
+    }
+    event.Skip();
+}
+
+void ControlEditor::ConsolidateTexts()
+{
+    // Solve wxGLString bug.
+    if(m_firstDraw) {
+        TransferFunction* tf = new TransferFunction(0);
+        m_elementList.push_back(tf);
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            ControlElement* element = *it;
+            element->UpdateText();
+        }
+        Redraw();
+        m_elementList.pop_back();
+        delete tf;
+        m_firstDraw = false;
+    }
+}
+
+void ControlEditor::SetLastElementID()
+{
+    int id = 0;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        int elementID = (*it)->GetID();
+        if(id < elementID) id = elementID;
+    }
+    for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
+        int elementID = (*it)->GetID();
+        if(id < elementID) id = elementID;
+    }
+    m_lastElementID = ++id;
+}

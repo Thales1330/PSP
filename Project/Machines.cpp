@@ -1,9 +1,6 @@
 #include "Machines.h"
 
-Machines::Machines()
-    : PowerElement()
-{
-}
+Machines::Machines() : PowerElement() {}
 Machines::~Machines() {}
 bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 {
@@ -11,11 +8,11 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
         m_parentList.push_back(parent);
         parent->AddChild(this);
         wxPoint2DDouble parentPt =
-            parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
-        parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
-        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+            parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
+        parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
+        parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 
-        m_position = parentPt + wxPoint2DDouble(-100.0, 0.0); // Shifts the position to the left of the bus.
+        m_position = parentPt + wxPoint2DDouble(-100.0, 0.0);  // Shifts the position to the left of the bus.
         m_width = m_height = 50.0;
         m_rect = wxRect2DDouble(m_position.m_x - 25.0, m_position.m_y - 25.0, m_width, m_height);
 
@@ -26,7 +23,7 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
         m_inserted = true;
 
         wxRect2DDouble genRect(0, 0, 0, 0);
-        m_switchRect.push_back(genRect); // Push a general rectangle.
+        m_switchRect.push_back(genRect);  // Push a general rectangle.
         UpdateSwitches();
         UpdatePowerFlowArrowsPosition();
         return true;
@@ -37,9 +34,14 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 void Machines::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online) elementColour = m_onlineElementColour;
-    else elementColour = m_offlineElementColour;
-    
+    if(m_online) {
+        if(m_dynEvent)
+            elementColour = m_dynamicEventColour;
+        else
+            elementColour = m_onlineElementColour;
+    } else
+        elementColour = m_offlineElementColour;
+
     if(m_inserted) {
         // Draw Selection (layer 1).
         if(m_selected) {
@@ -153,7 +155,7 @@ void Machines::RemoveParent(Element* parent)
 bool Machines::NodeContains(wxPoint2DDouble position)
 {
     wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-        10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
 
     if(nodeRect.Contains(position)) {
         m_activeNodeID = 1;
@@ -168,15 +170,15 @@ bool Machines::SetNodeParent(Element* parent)
 {
     if(parent && m_activeNodeID != 0) {
         wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
 
         if(parent->Intersects(nodeRect)) {
             m_parentList[0] = parent;
 
             // Centralize the node on bus.
             wxPoint2DDouble parentPt =
-                parent->RotateAtPosition(m_pointList[0], -parent->GetAngle()); // Rotate click to horizontal position.
-            parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
+                parent->RotateAtPosition(m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
+            parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
             parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
             m_pointList[0] = parentPt;
 
@@ -195,7 +197,7 @@ void Machines::UpdateNodes()
 {
     if(m_parentList[0]) {
         wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
 
         if(!m_parentList[0]->Intersects(nodeRect)) {
             m_parentList[0]->RemoveChild(this);

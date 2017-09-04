@@ -52,7 +52,7 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
     std::complex<double> fImpedance = std::complex<double>(0.0, 0.0);
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
-        BusElectricalData data = bus->GetEletricalData();
+        BusElectricalData data = bus->GetElectricalData();
         preFaultVoltages.push_back(data.voltage);
         if(data.hasFault) {
             fNumber = data.number;
@@ -184,7 +184,7 @@ void Fault::UpdateElementsFault(double systemPowerBase)
 
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
-        auto data = bus->GetEletricalData();
+        auto data = bus->GetElectricalData();
         if(data.hasFault) {
             data.faultCurrent[0] = m_fCurrentA;
             data.faultCurrent[1] = m_fCurrentB;
@@ -201,8 +201,8 @@ void Fault::UpdateElementsFault(double systemPowerBase)
     for(auto it = m_lineList.begin(), itEnd = m_lineList.end(); it != itEnd; ++it) {
         Line* line = *it;
         if(line->IsOnline()) {
-            int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetEletricalData().number;
-            int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetEletricalData().number;
+            int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
+            int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
             auto data = line->GetElectricalData();
             std::complex<double> vPos[2] = { m_posFaultVoltagePos[n1], m_posFaultVoltagePos[n2] };
             std::complex<double> vNeg[2] = { m_posFaultVoltageNeg[n1], m_posFaultVoltageNeg[n2] };
@@ -237,8 +237,8 @@ void Fault::UpdateElementsFault(double systemPowerBase)
     for(auto it = m_transformerList.begin(), itEnd = m_transformerList.end(); it != itEnd; ++it) {
         Transformer* transformer = *it;
         if(transformer->IsOnline()) {
-            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetEletricalData().number;
-            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetEletricalData().number;
+            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
+            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
             auto data = transformer->GetElectricalData();
 
             std::complex<double> vPos[2] = { m_posFaultVoltagePos[n1], m_posFaultVoltagePos[n2] };
@@ -314,8 +314,8 @@ void Fault::UpdateElementsFault(double systemPowerBase)
         SyncGenerator* syncGenerator = *it;
         if(syncGenerator->IsOnline()) {
             Bus* bus = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
-            int n = bus->GetEletricalData().number;
-            std::complex<double> v = bus->GetEletricalData().voltage; // Pre-fault voltage.
+            int n = bus->GetElectricalData().number;
+            std::complex<double> v = bus->GetElectricalData().voltage; // Pre-fault voltage.
             auto data = syncGenerator->GetElectricalData();
 
             std::complex<double> vPos = m_posFaultVoltagePos[n];
@@ -346,8 +346,8 @@ void Fault::UpdateElementsFault(double systemPowerBase)
         SyncMotor* syncMotor = *it;
         if(syncMotor->IsOnline()) {
             Bus* bus = static_cast<Bus*>(syncMotor->GetParentList()[0]);
-            int n = bus->GetEletricalData().number;
-            std::complex<double> v = bus->GetEletricalData().voltage; // Pre-fault voltage.
+            int n = bus->GetElectricalData().number;
+            std::complex<double> v = bus->GetElectricalData().voltage; // Pre-fault voltage.
             auto data = syncMotor->GetElectricalData();
 
             std::complex<double> vPos = m_posFaultVoltagePos[n];
@@ -390,7 +390,7 @@ bool Fault::RunSCPowerCalcutation(double systemPowerBase)
     // Set the SC power.
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
-        auto data = bus->GetEletricalData();
+        auto data = bus->GetElectricalData();
         int n = data.number;
         data.scPower = 1.0 / std::abs(m_zBusPos[n][n]);
         bus->SetElectricalData(data);

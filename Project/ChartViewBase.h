@@ -43,6 +43,7 @@ protected:
     wxMenu* m_menuFile;
     wxMenuItem* m_menuItemSaveImage;
     wxMenuItem* m_menuItemSendToClipboard;
+    wxMenuItem* m_menuItemExportCSV;
     wxMenuItem* m_menuItemSeparator_1;
     wxMenuItem* m_menuItemExit;
     wxMenu* m_menuView;
@@ -77,6 +78,7 @@ protected:
 protected:
     virtual void OnMenuSaveImageClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuSendClipClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMenuExpCSVClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuExitClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuFitClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuShowGridClick(wxCommandEvent& event) { event.Skip(); }
@@ -91,7 +93,7 @@ public:
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxTreeCtrl* GetTreeCtrl() { return m_treeCtrl; }
     wxPropertyGridManager* GetPgMgr() { return m_pgMgr; }
-    ChartViewBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Chart view"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_FRAME_STYLE);
+    ChartViewBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Chart viewer"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_FRAME_STYLE);
     virtual ~ChartViewBase();
 };
 

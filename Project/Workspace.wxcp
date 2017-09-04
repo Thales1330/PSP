@@ -341,6 +341,13 @@
          "m_functionNameAndSignature": "OnIdle(wxIdleEvent& event)",
          "m_description": "Process a wxEVT_IDLE event",
          "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MIDDLE_DCLICK",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMiddleDoubleClick(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MIDDLE_DCLICK event.",
+         "m_noBody": false
         }],
        "m_children": []
       }]

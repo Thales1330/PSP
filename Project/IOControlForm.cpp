@@ -2,6 +2,8 @@
 
 IOControlForm::IOControlForm(wxWindow* parent, IOControl* ioControl) : IOControlFormBase(parent)
 {
+    SetSize(GetBestSize());
+    
     m_parent = parent;
     m_ioControl = ioControl;
 

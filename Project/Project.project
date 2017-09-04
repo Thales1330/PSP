@@ -10,48 +10,52 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="model">
-      <VirtualDirectory Name="power element">
-        <File Name="Bus.cpp"/>
-        <File Name="Line.cpp"/>
-        <File Name="Transformer.cpp"/>
-        <File Name="Machines.cpp"/>
-        <File Name="SyncGenerator.cpp"/>
-        <File Name="IndMotor.cpp"/>
-        <File Name="Branch.cpp"/>
-        <File Name="SyncMotor.cpp"/>
-        <File Name="Shunt.cpp"/>
-        <File Name="Load.cpp"/>
-        <File Name="Inductor.cpp"/>
-        <File Name="Capacitor.cpp"/>
-        <File Name="PowerElement.cpp"/>
-      </VirtualDirectory>
-      <VirtualDirectory Name="calculations">
+      <VirtualDirectory Name="simulation">
         <File Name="ElectricCalculation.cpp"/>
         <File Name="PowerFlow.cpp"/>
         <File Name="Fault.cpp"/>
+        <File Name="Electromechanical.cpp"/>
       </VirtualDirectory>
-      <File Name="ElementDataObject.cpp"/>
-      <VirtualDirectory Name="graphical element">
-        <File Name="Text.cpp"/>
-        <File Name="GraphicalElement.cpp"/>
+      <VirtualDirectory Name="element">
+        <File Name="Element.cpp"/>
+        <File Name="ElementDataObject.cpp"/>
+        <File Name="ElementPlotData.cpp"/>
+        <VirtualDirectory Name="control">
+          <File Name="ConnectionLine.cpp"/>
+          <File Name="Constant.cpp"/>
+          <File Name="ControlElement.cpp"/>
+          <File Name="ControlElementContainer.cpp"/>
+          <File Name="ControlElementSolver.cpp"/>
+          <File Name="Exponential.cpp"/>
+          <File Name="Gain.cpp"/>
+          <File Name="IOControl.cpp"/>
+          <File Name="Limiter.cpp"/>
+          <File Name="Multiplier.cpp"/>
+          <File Name="RateLimiter.cpp"/>
+          <File Name="Sum.cpp"/>
+          <File Name="TransferFunction.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="graphical">
+          <File Name="GraphicalElement.cpp"/>
+          <File Name="Text.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="power">
+          <File Name="Branch.cpp"/>
+          <File Name="Bus.cpp"/>
+          <File Name="Capacitor.cpp"/>
+          <File Name="IndMotor.cpp"/>
+          <File Name="Inductor.cpp"/>
+          <File Name="Line.cpp"/>
+          <File Name="Load.cpp"/>
+          <File Name="Machines.cpp"/>
+          <File Name="PowerElement.cpp"/>
+          <File Name="Shunt.cpp"/>
+          <File Name="SyncGenerator.cpp"/>
+          <File Name="SyncMotor.cpp"/>
+          <File Name="Transformer.cpp"/>
+        </VirtualDirectory>
       </VirtualDirectory>
-      <File Name="Element.cpp"/>
-      <VirtualDirectory Name="control element">
-        <File Name="ControlElement.cpp"/>
-        <File Name="TransferFunction.cpp"/>
-        <File Name="ConnectionLine.cpp"/>
-        <File Name="Sum.cpp"/>
-        <File Name="Multiplier.cpp"/>
-        <File Name="Limiter.cpp"/>
-        <File Name="RateLimiter.cpp"/>
-        <File Name="Exponential.cpp"/>
-        <File Name="Constant.cpp"/>
-        <File Name="Gain.cpp"/>
-        <File Name="IOControl.cpp"/>
-        <File Name="ControlElementContainer.cpp"/>
-        <File Name="ControlElementSolver.cpp"/>
-      </VirtualDirectory>
-      <File Name="ElementPlotData.cpp"/>
+      <File Name="PropertiesData.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.cpp"/>
@@ -61,60 +65,59 @@
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
-      <File Name="MainFrame.cpp"/>
-      <File Name="Workspace.cpp"/>
-      <VirtualDirectory Name="power element form">
-        <File Name="BusForm.cpp"/>
-        <File Name="GeneratorStabForm.cpp"/>
-        <File Name="LineForm.cpp"/>
-        <File Name="SwitchingForm.cpp"/>
-        <File Name="TransformerForm.cpp"/>
-        <File Name="LoadForm.cpp"/>
-        <File Name="ReactiveShuntElementForm.cpp"/>
-        <File Name="IndMotorForm.cpp"/>
-        <File Name="SyncMachineForm.cpp"/>
+      <VirtualDirectory Name="forms">
+        <VirtualDirectory Name="properties">
+          <File Name="GeneralPropertiesForm.cpp"/>
+          <File Name="SimulationsSettingsForm.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="control element">
+          <File Name="ConstantForm.cpp"/>
+          <File Name="ControlSystemTest.cpp"/>
+          <File Name="ExponentialForm.cpp"/>
+          <File Name="GainForm.cpp"/>
+          <File Name="IOControlForm.cpp"/>
+          <File Name="LimiterForm.cpp"/>
+          <File Name="RateLimiterForm.cpp"/>
+          <File Name="SumForm.cpp"/>
+          <File Name="TransferFunctionForm.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="graphical element">
+          <File Name="TextForm.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="power element">
+          <File Name="BusForm.cpp"/>
+          <File Name="GeneratorStabForm.cpp"/>
+          <File Name="IndMotorForm.cpp"/>
+          <File Name="LineForm.cpp"/>
+          <File Name="LoadForm.cpp"/>
+          <File Name="ReactiveShuntElementForm.cpp"/>
+          <File Name="SwitchingForm.cpp"/>
+          <File Name="SyncMachineForm.cpp"/>
+          <File Name="TransformerForm.cpp"/>
+        </VirtualDirectory>
       </VirtualDirectory>
-      <File Name="FileHanding.cpp"/>
-      <VirtualDirectory Name="graphical element form">
-        <File Name="TextForm.cpp"/>
+      <VirtualDirectory Name="main GUI">
+        <File Name="Camera.cpp"/>
+        <File Name="MainFrame.cpp"/>
+        <File Name="Workspace.cpp"/>
       </VirtualDirectory>
-      <File Name="ControlEditor.cpp"/>
-      <File Name="Camera.cpp"/>
-      <VirtualDirectory Name="control element form">
-        <File Name="TransferFunctionForm.cpp"/>
-        <File Name="SumForm.cpp"/>
-        <File Name="LimiterForm.cpp"/>
-        <File Name="RateLimiterForm.cpp"/>
-        <File Name="ExponentialForm.cpp"/>
-        <File Name="ConstantForm.cpp"/>
-        <File Name="GainForm.cpp"/>
-        <File Name="IOControlForm.cpp"/>
+      <VirtualDirectory Name="simulation GUI">
+        <File Name="ChartView.cpp"/>
+        <File Name="ControlEditor.cpp"/>
       </VirtualDirectory>
-      <File Name="ChartView.cpp"/>
+      <VirtualDirectory Name="files">
+        <File Name="FileHanding.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <File Name="main.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="model">
-      <VirtualDirectory Name="power element">
-        <File Name="Bus.h"/>
-        <File Name="Line.h"/>
-        <File Name="Transformer.h"/>
-        <File Name="Machines.h"/>
-        <File Name="SyncGenerator.h"/>
-        <File Name="IndMotor.h"/>
-        <File Name="Branch.h"/>
-        <File Name="SyncMotor.h"/>
-        <File Name="Shunt.h"/>
-        <File Name="Load.h"/>
-        <File Name="Inductor.h"/>
-        <File Name="Capacitor.h"/>
-        <File Name="PowerElement.h"/>
-      </VirtualDirectory>
-      <VirtualDirectory Name="calculations">
+      <VirtualDirectory Name="simulation">
         <File Name="ElectricCalculation.h"/>
         <File Name="PowerFlow.h"/>
         <File Name="Fault.h"/>
+        <File Name="Electromechanical.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="rapidXML">
         <File Name="rapidXML/rapidxml.hpp"/>
@@ -122,28 +125,46 @@
         <File Name="rapidXML/rapidxml_print.hpp"/>
         <File Name="rapidXML/rapidxml_utils.hpp"/>
       </VirtualDirectory>
-      <File Name="ElementDataObject.h"/>
-      <File Name="Element.h"/>
-      <VirtualDirectory Name="graphical element">
-        <File Name="Text.h"/>
-        <File Name="GraphicalElement.h"/>
+      <VirtualDirectory Name="element">
+        <File Name="Element.h"/>
+        <File Name="ElementDataObject.h"/>
+        <File Name="ElementPlotData.h"/>
+        <VirtualDirectory Name="graphical">
+          <File Name="GraphicalElement.h"/>
+          <File Name="Text.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="control">
+          <File Name="ConnectionLine.h"/>
+          <File Name="Constant.h"/>
+          <File Name="ControlElement.h"/>
+          <File Name="ControlElementContainer.h"/>
+          <File Name="ControlElementSolver.h"/>
+          <File Name="Exponential.h"/>
+          <File Name="Gain.h"/>
+          <File Name="IOControl.h"/>
+          <File Name="Limiter.h"/>
+          <File Name="Multiplier.h"/>
+          <File Name="RateLimiter.h"/>
+          <File Name="Sum.h"/>
+          <File Name="TransferFunction.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="power">
+          <File Name="Branch.h"/>
+          <File Name="Bus.h"/>
+          <File Name="Capacitor.h"/>
+          <File Name="IndMotor.h"/>
+          <File Name="Inductor.h"/>
+          <File Name="Line.h"/>
+          <File Name="Load.h"/>
+          <File Name="Machines.h"/>
+          <File Name="PowerElement.h"/>
+          <File Name="Shunt.h"/>
+          <File Name="SyncGenerator.h"/>
+          <File Name="SyncMotor.h"/>
+          <File Name="Transformer.h"/>
+        </VirtualDirectory>
       </VirtualDirectory>
-      <VirtualDirectory Name="control element">
-        <File Name="ControlElement.h"/>
-        <File Name="TransferFunction.h"/>
-        <File Name="ConnectionLine.h"/>
-        <File Name="Sum.h"/>
-        <File Name="Multiplier.h"/>
-        <File Name="Limiter.h"/>
-        <File Name="RateLimiter.h"/>
-        <File Name="Exponential.h"/>
-        <File Name="Constant.h"/>
-        <File Name="Gain.h"/>
-        <File Name="IOControl.h"/>
-        <File Name="ControlElementContainer.h"/>
-        <File Name="ControlElementSolver.h"/>
-      </VirtualDirectory>
-      <File Name="ElementPlotData.h"/>
+      <File Name="PropertiesData.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <File Name="ArtMetro.h"/>
@@ -153,36 +174,49 @@
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
-      <File Name="MainFrame.h"/>
-      <File Name="Workspace.h"/>
-      <VirtualDirectory Name="power element form">
-        <File Name="BusForm.h"/>
-        <File Name="GeneratorStabForm.h"/>
-        <File Name="LineForm.h"/>
-        <File Name="SwitchingForm.h"/>
-        <File Name="TransformerForm.h"/>
-        <File Name="LoadForm.h"/>
-        <File Name="ReactiveShuntElementForm.h"/>
-        <File Name="IndMotorForm.h"/>
-        <File Name="SyncMachineForm.h"/>
+      <VirtualDirectory Name="files">
+        <File Name="FileHanding.h"/>
       </VirtualDirectory>
-      <File Name="FileHanding.h"/>
-      <VirtualDirectory Name="graphical element form">
-        <File Name="TextForm.h"/>
+      <VirtualDirectory Name="forms">
+        <VirtualDirectory Name="control">
+          <File Name="ConstantForm.h"/>
+          <File Name="ControlSystemTest.h"/>
+          <File Name="ExponentialForm.h"/>
+          <File Name="GainForm.h"/>
+          <File Name="IOControlForm.h"/>
+          <File Name="LimiterForm.h"/>
+          <File Name="RateLimiterForm.h"/>
+          <File Name="SumForm.h"/>
+          <File Name="TransferFunctionForm.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="graphical">
+          <File Name="TextForm.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="power">
+          <File Name="BusForm.h"/>
+          <File Name="GeneratorStabForm.h"/>
+          <File Name="IndMotorForm.h"/>
+          <File Name="LineForm.h"/>
+          <File Name="LoadForm.h"/>
+          <File Name="ReactiveShuntElementForm.h"/>
+          <File Name="SwitchingForm.h"/>
+          <File Name="SyncMachineForm.h"/>
+          <File Name="TransformerForm.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="properties">
+          <File Name="GeneralPropertiesForm.h"/>
+          <File Name="SimulationsSettingsForm.h"/>
+        </VirtualDirectory>
       </VirtualDirectory>
-      <File Name="ControlEditor.h"/>
-      <File Name="Camera.h"/>
-      <VirtualDirectory Name="control element form">
-        <File Name="TransferFunctionForm.h"/>
-        <File Name="SumForm.h"/>
-        <File Name="LimiterForm.h"/>
-        <File Name="RateLimiterForm.h"/>
-        <File Name="ExponentialForm.h"/>
-        <File Name="ConstantForm.h"/>
-        <File Name="GainForm.h"/>
-        <File Name="IOControlForm.h"/>
+      <VirtualDirectory Name="main GUI">
+        <File Name="Camera.h"/>
+        <File Name="MainFrame.h"/>
+        <File Name="Workspace.h"/>
       </VirtualDirectory>
-      <File Name="ChartView.h"/>
+      <VirtualDirectory Name="simulation GUI">
+        <File Name="ChartView.h"/>
+        <File Name="ControlEditor.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
@@ -196,6 +230,7 @@
       <File Name="ElementFormBitmaps.cpp"/>
       <File Name="ControlEditorBitmaps.cpp"/>
       <File Name="ChartViewBitmaps.cpp"/>
+      <File Name="PropertiesFormBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
@@ -208,12 +243,15 @@
       <File Name="ControlEditorBase.cpp"/>
       <File Name="ChartViewBase.h"/>
       <File Name="ChartViewBase.cpp"/>
+      <File Name="PropertiesForm.h"/>
+      <File Name="PropertiesForm.cpp"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>
     <File Name="ElementForm.wxcp"/>
     <File Name="ControlEditor.wxcp"/>
     <File Name="ChartView.wxcp"/>
+    <File Name="PropertiesForm.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -265,7 +303,7 @@
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release" CompilerType="MinGW ( TDM-GCC-32 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Release" CompilerType="MinGW ( TDM-GCC-64 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O2;-Wall;$(shell wx-config --cflags)" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <Preprocessor Value="NDEBUG"/>

@@ -1,29 +1,28 @@
 #include "BusForm.h"
 #include "Bus.h"
 
-BusForm::BusForm(wxWindow* parent, Bus* bus)
-    : BusFormBase(parent)
+BusForm::BusForm(wxWindow* parent, Bus* bus) : BusFormBase(parent)
 {
     SetSize(GetBestSize());
 
     m_parent = parent;
     m_bus = bus;
 
-    m_textCtrlName->SetValue(bus->GetEletricalData().name);
-    m_textCtrlNomVoltage->SetValue(bus->StringFromDouble(bus->GetEletricalData().nominalVoltage));
+    m_textCtrlName->SetValue(bus->GetElectricalData().name);
+    m_textCtrlNomVoltage->SetValue(bus->StringFromDouble(bus->GetElectricalData().nominalVoltage));
 
-    if(bus->GetEletricalData().nominalVoltageUnit == UNIT_V)
+    if(bus->GetElectricalData().nominalVoltageUnit == UNIT_V)
         m_choiceNomVoltage->SetSelection(0);
     else
         m_choiceNomVoltage->SetSelection(1);
 
-    m_checkBoxCtrlVoltage->SetValue(bus->GetEletricalData().isVoltageControlled);
-    m_textCtrlCtrlVoltage->SetValue(bus->StringFromDouble(bus->GetEletricalData().controlledVoltage));
-    m_choiceCtrlVoltage->SetSelection(bus->GetEletricalData().controlledVoltageUnitChoice);
-    m_checkBoxSlackBus->SetValue(bus->GetEletricalData().slackBus);
+    m_checkBoxCtrlVoltage->SetValue(bus->GetElectricalData().isVoltageControlled);
+    m_textCtrlCtrlVoltage->SetValue(bus->StringFromDouble(bus->GetElectricalData().controlledVoltage));
+    m_choiceCtrlVoltage->SetSelection(bus->GetElectricalData().controlledVoltageUnitChoice);
+    m_checkBoxSlackBus->SetValue(bus->GetElectricalData().slackBus);
 
-    m_checkBoxFault->SetValue(bus->GetEletricalData().hasFault);
-    switch(bus->GetEletricalData().faultType) {
+    m_checkBoxFault->SetValue(bus->GetElectricalData().hasFault);
+    switch(bus->GetElectricalData().faultType) {
         case FAULT_THREEPHASE: {
             m_choiceFaultType->SetSelection(0);
         } break;
@@ -39,7 +38,7 @@ BusForm::BusForm(wxWindow* parent, Bus* bus)
         default:
             break;
     }
-    switch(bus->GetEletricalData().faultLocation) {
+    switch(bus->GetElectricalData().faultLocation) {
         case FAULT_LINE_A: {
             m_choiceFaultPlace->SetSelection(0);
         } break;
@@ -52,35 +51,35 @@ BusForm::BusForm(wxWindow* parent, Bus* bus)
         default:
             break;
     }
-    m_textCtrlFaultResistance->SetValue(bus->StringFromDouble(bus->GetEletricalData().faultResistance));
-    m_textCtrlFaultReactance->SetValue(bus->StringFromDouble(bus->GetEletricalData().faultReactance));
+    m_textCtrlFaultResistance->SetValue(bus->StringFromDouble(bus->GetElectricalData().faultResistance));
+    m_textCtrlFaultReactance->SetValue(bus->StringFromDouble(bus->GetElectricalData().faultReactance));
 
-    m_checkBoxPlotData->SetValue(bus->GetEletricalData().plotBus);
-    m_checkBoxStabFault->SetValue(bus->GetEletricalData().stabHasFault);
-    m_textCtrlStabFaultTime->SetValue(bus->StringFromDouble(bus->GetEletricalData().stabFaultTime));
-    m_textCtrlStabFaultLength->SetValue(bus->StringFromDouble(bus->GetEletricalData().stabFaultLength));
-    m_textCtrlStabFaultResistance->SetValue(bus->StringFromDouble(bus->GetEletricalData().stabFaultResistance));
-    m_textCtrlStabFaultReactance->SetValue(bus->StringFromDouble(bus->GetEletricalData().stabFaultReactance));
+    m_checkBoxPlotData->SetValue(bus->GetElectricalData().plotBus);
+    m_checkBoxStabFault->SetValue(bus->GetElectricalData().stabHasFault);
+    m_textCtrlStabFaultTime->SetValue(bus->StringFromDouble(bus->GetElectricalData().stabFaultTime));
+    m_textCtrlStabFaultLength->SetValue(bus->StringFromDouble(bus->GetElectricalData().stabFaultLength));
+    m_textCtrlStabFaultResistance->SetValue(bus->StringFromDouble(bus->GetElectricalData().stabFaultResistance));
+    m_textCtrlStabFaultReactance->SetValue(bus->StringFromDouble(bus->GetElectricalData().stabFaultReactance));
 
-    EnableCtrlVoltageFields(bus->GetEletricalData().isVoltageControlled);
-    EnableFaultFields(bus->GetEletricalData().hasFault);
-    EnableStabFaultFields(bus->GetEletricalData().stabHasFault);
+    EnableCtrlVoltageFields(bus->GetElectricalData().isVoltageControlled);
+    EnableFaultFields(bus->GetElectricalData().hasFault);
+    EnableStabFaultFields(bus->GetElectricalData().stabHasFault);
 }
 
 BusForm::~BusForm() {}
 void BusForm::OnButtonCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
 void BusForm::OnButtonOKClick(wxCommandEvent& event)
 {
-    BusElectricalData data = m_bus->GetEletricalData();
+    BusElectricalData data = m_bus->GetElectricalData();
     data.name = m_textCtrlName->GetValue();
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlNomVoltage->GetValue(), data.nominalVoltage,
-           _("Value entered incorrectly in the field \"Rated voltage\".")))
+                                _("Value entered incorrectly in the field \"Rated voltage\".")))
         return;
     data.nominalVoltageUnit = m_choiceNomVoltage->GetSelection() == 0 ? UNIT_V : UNIT_kV;
     data.isVoltageControlled = m_checkBoxCtrlVoltage->GetValue();
     if(data.isVoltageControlled) {
         if(!m_bus->DoubleFromString(m_parent, m_textCtrlCtrlVoltage->GetValue(), data.controlledVoltage,
-               _("Value entered incorrectly in the field \"Controlled voltage\".")))
+                                    _("Value entered incorrectly in the field \"Controlled voltage\".")))
             return;
         data.controlledVoltageUnitChoice = m_choiceCtrlVoltage->GetSelection();
     }
@@ -115,33 +114,38 @@ void BusForm::OnButtonOKClick(wxCommandEvent& event)
     }
 
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlFaultResistance->GetValue(), data.faultResistance,
-           _("Value entered incorrectly in the field \"Fault resistance\".")))
+                                _("Value entered incorrectly in the field \"Fault resistance\".")))
         return;
 
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlFaultReactance->GetValue(), data.faultReactance,
-           _("Value entered incorrectly in the field \"Fault reactance\".")))
+                                _("Value entered incorrectly in the field \"Fault reactance\".")))
         return;
 
     data.plotBus = m_checkBoxPlotData->GetValue();
     data.stabHasFault = m_checkBoxStabFault->GetValue();
 
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultTime->GetValue(), data.stabFaultTime,
-           _("Value entered incorrectly in the field \"Time\".")))
+                                _("Value entered incorrectly in the field \"Time\".")))
         return;
 
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultLength->GetValue(), data.stabFaultLength,
-           _("Value entered incorrectly in the field \"Fault lenght\".")))
+                                _("Value entered incorrectly in the field \"Fault lenght\".")))
         return;
 
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultResistance->GetValue(), data.stabFaultResistance,
-           _("Value entered incorrectly in the field \"Fault resistence (stability)\".")))
+                                _("Value entered incorrectly in the field \"Fault resistence (stability)\".")))
         return;
 
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultReactance->GetValue(), data.stabFaultReactance,
-           _("Value entered incorrectly in the field \"Fault reactance (stability)\".")))
+                                _("Value entered incorrectly in the field \"Fault reactance (stability)\".")))
         return;
 
     m_bus->SetElectricalData(data);
+
+    if(data.stabHasFault)
+        m_bus->SetDynamicEvent(true);
+    else
+        m_bus->SetDynamicEvent(false);
 
     EndModal(wxID_OK);
 }
@@ -189,19 +193,19 @@ void BusForm::EnableStabFaultFields(bool enable)
 void BusForm::UpdateChoiceBoxes()
 {
     switch(m_choiceFaultType->GetSelection()) {
-        case 0: // three-phase
+        case 0:  // three-phase
         {
             m_choiceFaultPlace->Enable(false);
         } break;
-        case 1: // line-to-line
-        case 2: // double line-to-line
+        case 1:  // line-to-line
+        case 2:  // double line-to-line
         {
             if(m_checkBoxFault->GetValue()) m_choiceFaultPlace->Enable(true);
             m_choiceFaultPlace->SetString(0, _("Lines AB"));
             m_choiceFaultPlace->SetString(1, _("Lines BC"));
             m_choiceFaultPlace->SetString(2, _("Lines CA"));
         } break;
-        case 3: // line-to-ground
+        case 3:  // line-to-ground
         {
             if(m_checkBoxFault->GetValue()) m_choiceFaultPlace->Enable(true);
             m_choiceFaultPlace->SetString(0, _("Line A"));

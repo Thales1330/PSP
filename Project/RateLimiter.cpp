@@ -112,3 +112,10 @@ bool RateLimiter::Solve(double input, double timeStep)
         m_output = input;
     return true;
 }
+
+Element* RateLimiter::GetCopy()
+{
+    RateLimiter* copy = new RateLimiter(m_elementID);
+    *copy = *this;
+    return copy;
+}

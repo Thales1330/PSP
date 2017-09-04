@@ -3,6 +3,7 @@
 TextForm::TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementList, double systemPowerBase)
     : TextFormBase(parent)
 {
+    SetSize(GetBestSize());
     m_parent = parent;
     m_textToEdit = text;
     m_allElements.GetElementsFromList(elementList);
@@ -773,7 +774,7 @@ void TextForm::ElementTypeChoice()
         case TYPE_BUS: {
             for(int i = 0; i < (int)m_allElements.GetBusList().size(); i++) {
                 Bus* bus = m_allElements.GetBusList()[i];
-                arrayString.Add(bus->GetEletricalData().name);
+                arrayString.Add(bus->GetElectricalData().name);
             }
         } break;
         case TYPE_SYNC_GENERATOR: {
@@ -1004,8 +1005,8 @@ void TextForm::DataTypeChoice()
 
                 Bus* bus1 = static_cast<Bus*>(line->GetParentList()[0]);
                 Bus* bus2 = static_cast<Bus*>(line->GetParentList()[1]);
-                wxString bus1Name = bus1->GetEletricalData().name;
-                wxString bus2Name = bus2->GetEletricalData().name;
+                wxString bus1Name = bus1->GetElectricalData().name;
+                wxString bus2Name = bus2->GetElectricalData().name;
 
                 m_choiceTextFromBus->Append(bus1Name);
                 m_choiceTextFromBus->Append(bus2Name);
@@ -1026,8 +1027,8 @@ void TextForm::DataTypeChoice()
 
                 Bus* bus1 = static_cast<Bus*>(transformer->GetParentList()[0]);
                 Bus* bus2 = static_cast<Bus*>(transformer->GetParentList()[1]);
-                wxString bus1Name = bus1->GetEletricalData().name;
-                wxString bus2Name = bus2->GetEletricalData().name;
+                wxString bus1Name = bus1->GetElectricalData().name;
+                wxString bus2Name = bus2->GetElectricalData().name;
 
                 m_choiceTextFromBus->Append(bus1Name);
                 m_choiceTextFromBus->Append(bus2Name);

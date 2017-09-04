@@ -5,10 +5,12 @@
 
 class Machines : public PowerElement
 {
-public:
-	Machines();
-	~Machines();
-	
+   public:
+    enum SyncMachineModel { SM_MODEL_1 = 0, SM_MODEL_2, SM_MODEL_3, SM_MODEL_4, SM_MODEL_5 };
+
+    Machines();
+    ~Machines();
+
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
@@ -22,14 +24,13 @@ public:
     virtual bool SetNodeParent(Element* parent);
     virtual void UpdateNodes();
     virtual void Rotate(bool clockwise = true);
-	virtual void DrawSymbol() const {}
+    virtual void DrawSymbol() const {}
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
 
    protected:
     void UpdateSwitchesPosition();
     void UpdatePowerFlowArrowsPosition();
     bool m_inserted = false;
-
 };
 
-#endif // MACHINES_H
+#endif  // MACHINES_H

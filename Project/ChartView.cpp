@@ -45,7 +45,7 @@ ChartView::~ChartView() {}
 void ChartView::SetMPWindow()
 {
     m_mpWindow = new mpWindow(this, wxID_ANY);
-    
+
     m_mpWindow->SetDoubleBuffered(true);
 
     m_mpWindow->SetMargins(20, 10, 40, 60);
@@ -96,6 +96,7 @@ void ChartView::SetTreectrl()
     rootElementName[ElementPlotData::CT_SYNC_COMPENSATOR] = _("Synchronous compensator");
     rootElementName[ElementPlotData::CT_SYNC_GENERATOR] = _("Synchronous generator");
     rootElementName[ElementPlotData::CT_TRANSFORMER] = _("Transformer");
+    rootElementName[ElementPlotData::CT_TEST] = _("Test");
 
     wxTreeItemId rootItemID[ElementPlotData::NUM_ELEMENTS];
 
@@ -127,6 +128,9 @@ void ChartView::OnPropertyGridChange(wxPropertyGridEvent& event)
                     wxColour colour = GetNextColour();
                     data->SetColour(colour);
                     m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
+                    m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), true);
+                } else {
+                    m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), false);
                 }
                 fit = true;
             } else if(event.GetPropertyName() == _("Color")) {
@@ -336,6 +340,9 @@ void ChartView::OnTreeItemActivated(wxTreeEvent& event)
             wxColour colour = GetNextColour();
             data->SetColour(colour);
             m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
+            m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), true);
+        } else {
+            m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), false);
         }
         UpdatePlot(true);
     }
@@ -438,6 +445,114 @@ wxTreeItemId ChartView::UpdateAllPlots(wxTreeItemId root)
 
         if(m_treeCtrl->ItemHasChildren(item)) {
             wxTreeItemId nextChild = UpdateAllPlots(item);
+            if(nextChild.IsOk()) return nextChild;
+        }
+        item = m_treeCtrl->GetNextChild(root, cookie);
+    }
+
+    wxTreeItemId dummyID;
+    return dummyID;
+}
+
+void ChartView::OnMenuExpCSVClick(wxCommandEvent& event)
+{
+    wxFileDialog saveFileDialog(this, _("Save CSV file"), "", "", "CSV file (*.csv)|*.csv",
+                                wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    if(saveFileDialog.ShowModal() == wxID_CANCEL) return;
+
+    wxTextFile csvFile(saveFileDialog.GetPath());
+    if(!csvFile.Create()) {
+        if(!csvFile.Open()) {
+            wxMessageDialog msgDialog(this, _("It was not possible to open or create the selected file."), _("Error"),
+                                      wxOK | wxCENTRE | wxICON_ERROR);
+            msgDialog.ShowModal();
+        }
+    } else
+        csvFile.Open();
+    if(csvFile.IsOpened()) {
+        csvFile.Clear();
+        csvFile.AddLine(GetActiveCurvesCSV());
+        csvFile.Write();
+        csvFile.Close();
+    }
+}
+
+wxString ChartView::GetActiveCurvesCSV()
+{
+    std::vector<PlotData*> activePlotDataList;
+    GetActivePlotData(m_treeCtrl->GetRootItem(), activePlotDataList);
+
+    std::vector<double> xValues;
+    wxString xName = "";
+
+    // Find X axis curve, if none is found, X is the m_time.
+    bool foundXAxis = false;
+    for(auto it = activePlotDataList.begin(), itEnd = activePlotDataList.end(); it != itEnd; ++it) {
+        PlotData* data = *it;
+        if(data->GetAxis() == 1) {
+            xValues = data->GetValues();
+            xName = data->GetName();
+            foundXAxis = true;
+            activePlotDataList.erase(it);
+            delete data;
+            break;
+        }
+    }
+    if(!foundXAxis) {
+        xValues = m_time;
+        xName = _("Time");
+    }
+
+    // Build CSV text.
+    wxString csvText = xName + ";";
+    // Header
+    for(auto it = activePlotDataList.begin(), itEnd = activePlotDataList.end(); it != itEnd; ++it) {
+        PlotData* data = *it;
+        csvText += data->GetName() + ";";
+    }
+    csvText[csvText.length() - 1] = '\n';
+    // Values
+    for(unsigned int i = 0; i < xValues.size(); ++i) {
+        csvText += wxString::FromCDouble(xValues[i], 13) + ";";
+        for(unsigned int j = 0; j < activePlotDataList.size(); ++j) {
+            double value = 0.0;
+            if(i < activePlotDataList[j]->GetValues().size()) {
+                value = activePlotDataList[j]->GetValues()[i];
+            }
+            csvText += wxString::FromCDouble(value, 13) + ";";
+        }
+        csvText[csvText.length() - 1] = '\n';
+    }
+
+    // Clear active plot data vector.
+    for(auto it = activePlotDataList.begin(); it != activePlotDataList.end(); ++it) {
+        delete(*it);
+    }
+    activePlotDataList.clear();
+
+    return csvText;
+}
+
+wxTreeItemId ChartView::GetActivePlotData(wxTreeItemId root, std::vector<PlotData*>& plotDataList)
+{
+    wxTreeItemIdValue cookie;
+    wxTreeItemId item = m_treeCtrl->GetFirstChild(root, cookie);
+    wxTreeItemId child;
+
+    while(item.IsOk()) {
+        if(PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(item))) {
+            if(data->IsPlot() || data->GetAxis() == 1) {
+                wxString parentName = m_treeCtrl->GetItemText(m_treeCtrl->GetItemParent(item));
+
+                PlotData* dataCopy = new PlotData();
+                *dataCopy = *data;
+                dataCopy->SetName(data->GetName() + " (" + parentName + ")");
+                plotDataList.push_back(dataCopy);
+            }
+        }
+
+        if(m_treeCtrl->ItemHasChildren(item)) {
+            wxTreeItemId nextChild = GetActivePlotData(item, plotDataList);
             if(nextChild.IsOk()) return nextChild;
         }
         item = m_treeCtrl->GetNextChild(root, cookie);

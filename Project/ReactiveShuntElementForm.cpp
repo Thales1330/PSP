@@ -6,6 +6,7 @@
 ReactiveShuntElementForm::ReactiveShuntElementForm(wxWindow* parent, Capacitor* capacitor)
     : ReactiveShuntElementFormBase(parent)
 {
+    SetSize(GetBestSize());
     CapacitorElectricalData data = capacitor->GetElectricalData();
 
     m_textCtrlName->SetValue(data.name);

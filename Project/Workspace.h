@@ -31,6 +31,12 @@ class Text;
 
 class PowerFlow;
 class Fault;
+class Electromechanical;
+
+class ElementPlotData;
+class ChartView;
+
+class PropertiesData;
 
 enum ElementID {
     ID_BUS = 0,
@@ -106,12 +112,18 @@ public:
 
     int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
     void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
+    
+    PropertiesData* GetProperties() const { return m_properties; }
+    
+    std::vector<double> GetStabilityTimeVector() const { return m_stabilityTimeVector; }
 
     bool RunPowerFlow();
     bool RunFault();
     bool RunSCPower();
+    bool RunStability();
 
 protected:
+    virtual void OnMiddleDoubleClick(wxMouseEvent& event);
     virtual void OnIdle(wxIdleEvent& event);
     virtual void OnTimer(wxTimerEvent& event);
     virtual void OnLeftDoubleClick(wxMouseEvent& event);
@@ -146,6 +158,10 @@ protected:
 
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
+    
+    PropertiesData* m_properties = NULL;
+    
+    std::vector<double> m_stabilityTimeVector;
 
     bool m_justOpened = false;
 };

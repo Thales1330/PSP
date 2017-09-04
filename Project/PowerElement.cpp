@@ -3,8 +3,7 @@
 #include "DegreesAndRadians.h"
 #endif
 
-PowerElement::PowerElement()
-    : Element()
+PowerElement::PowerElement() : Element()
 {
     m_busColour.SetRGBA(0.0, 0.3, 1.0, 1.0);
     m_onlineElementColour.SetRGBA(0.2, 0.2, 0.2, 1.0);
@@ -12,15 +11,17 @@ PowerElement::PowerElement()
     m_closedSwitchColour.SetRGBA(0.0, 0.4, 0.0, 1.0);
     m_openedSwitchColour.SetRGBA(1.0, 0.1, 0.1, 1.0);
     m_powerFlowArrowColour.SetRGBA(1.0, 0.51, 0.0, 1.0);
+    m_dynamicEventColour.SetRGBA(1.0, 0.51, 0.0, 1.0);
 }
 
 PowerElement::~PowerElement() {}
-
 void PowerElement::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
 {
 }
 
-wxPoint2DDouble PowerElement::GetSwitchPoint(Element* parent, wxPoint2DDouble parentPoint, wxPoint2DDouble secondPoint) const
+wxPoint2DDouble PowerElement::GetSwitchPoint(Element* parent,
+                                             wxPoint2DDouble parentPoint,
+                                             wxPoint2DDouble secondPoint) const
 {
     double swLineSize = 25.0;
     wxPoint2DDouble swPoint = wxPoint2DDouble(parentPoint.m_x, parentPoint.m_y - swLineSize);
@@ -28,17 +29,18 @@ wxPoint2DDouble PowerElement::GetSwitchPoint(Element* parent, wxPoint2DDouble pa
     // Rotate the second point (to compare).
     double angle = parent->GetAngle();
 
-    secondPoint = wxPoint2DDouble(std::cos(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) -
-            std::sin(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
-        std::sin(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) +
-            std::cos(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+    secondPoint =
+        wxPoint2DDouble(std::cos(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) -
+                            std::sin(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
+                        std::sin(wxDegToRad(-angle)) * (secondPoint.m_x - parentPoint.m_x) +
+                            std::cos(wxDegToRad(-angle)) * (secondPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
 
     // Rotate
     if(secondPoint.m_y > parentPoint.m_y) angle -= 180.0;
     return wxPoint2DDouble(std::cos(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) -
-            std::sin(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
-        std::sin(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) +
-            std::cos(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
+                               std::sin(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_x,
+                           std::sin(wxDegToRad(angle)) * (swPoint.m_x - parentPoint.m_x) +
+                               std::cos(wxDegToRad(angle)) * (swPoint.m_y - parentPoint.m_y) + parentPoint.m_y);
 }
 
 bool PowerElement::SwitchesContains(wxPoint2DDouble position) const
@@ -54,10 +56,10 @@ bool PowerElement::SwitchesContains(wxPoint2DDouble position) const
 void PowerElement::UpdateSwitches()
 {
     // General method, to one switch only.
-    wxPoint2DDouble swCenter = wxPoint2DDouble(
-        (m_pointList[0].m_x + m_pointList[1].m_x) / 2.0, (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
-    m_switchRect[0] = wxRect2DDouble(
-        swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize, m_switchSize);
+    wxPoint2DDouble swCenter = wxPoint2DDouble((m_pointList[0].m_x + m_pointList[1].m_x) / 2.0,
+                                               (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
+    m_switchRect[0] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize,
+                                     m_switchSize);
 }
 
 void PowerElement::DrawSwitches() const
@@ -74,13 +76,13 @@ void PowerElement::DrawSwitches() const
 
             glPushMatrix();
             glTranslated(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
-                m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0, 0.0);
+                         m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0, 0.0);
             glRotated(parent->GetAngle(), 0.0, 0.0, 1.0);
             glTranslated(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
-                -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0, 0.0);
+                         -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0, 0.0);
 
             DrawRectangle(m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
-                m_switchSize, m_switchSize);
+                          m_switchSize, m_switchSize);
 
             glPopMatrix();
         }
@@ -90,7 +92,7 @@ void PowerElement::DrawSwitches() const
 
 void PowerElement::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 {
-    double arrowRate = 100.0; // One arrow to each "arrowRate" distance in pixels.
+    double arrowRate = 100.0;  // One arrow to each "arrowRate" distance in pixels.
 
     if(edges.size() < 2) return;
 
@@ -113,7 +115,7 @@ void PowerElement::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 
         for(int i = 0; i < numArrows; i++) {
             wxPoint2DDouble arrowCenter(pt1.m_x + ((rotPt2.m_x - pt1.m_x) / double(numArrows + 1)) * double(i + 1),
-                pt1.m_y + ((rotPt2.m_y - pt1.m_y) / double(numArrows + 1)) * double(i + 1));
+                                        pt1.m_y + ((rotPt2.m_y - pt1.m_y) / double(numArrows + 1)) * double(i + 1));
 
             std::vector<wxPoint2DDouble> triPts;
             triPts.push_back(arrowCenter + wxPoint2DDouble(5.0, 0.0));

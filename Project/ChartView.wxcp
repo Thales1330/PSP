@@ -1,7 +1,7 @@
 {
  "metadata": {
   "m_generatedFilesDir": ".",
-  "m_objCounter": 80,
+  "m_objCounter": 82,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxCE3EBInitBitmapResources",
   "m_bitmapsFile": "ChartViewBitmaps.cpp",
@@ -80,7 +80,7 @@
     }, {
      "type": "string",
      "m_label": "Title:",
-     "m_value": "Chart view"
+     "m_value": "Chart viewer"
     }, {
      "type": "virtualFolderPicker",
      "m_label": "Virtual Folder:",
@@ -110,23 +110,23 @@
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (16x16)  :",
-     "m_path": ""
+     "m_path": "data/images/chart16.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (32x32)  :",
-     "m_path": ""
+     "m_path": "data/images/chart32.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (64x64)  :",
-     "m_path": ""
+     "m_path": "data/images/chart64.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (128x128):",
-     "m_path": ""
+     "m_path": "data/images/chart128.png"
     }, {
      "type": "bitmapPicker",
      "m_label": "Bitmap File (256x256):",
-     "m_path": ""
+     "m_path": "data/images/chart256.png"
     }],
    "m_events": [],
    "m_children": [{
@@ -311,6 +311,57 @@
            "m_eventClass": "wxCommandEvent",
            "m_eventHandler": "wxCommandEventHandler",
            "m_functionNameAndSignature": "OnMenuSendClipClick(wxCommandEvent& event)",
+           "m_description": "Menu item has been clicked",
+           "m_noBody": false
+          }],
+         "m_children": []
+        }, {
+         "m_type": 4459,
+         "proportion": 0,
+         "border": 5,
+         "gbSpan": "1,1",
+         "gbPosition": "0,0",
+         "m_styles": [],
+         "m_sizerFlags": [],
+         "m_properties": [{
+           "type": "winid",
+           "m_label": "ID:",
+           "m_winid": "wxID_ANY"
+          }, {
+           "type": "string",
+           "m_label": "Name:",
+           "m_value": "m_menuItemExportCSV"
+          }, {
+           "type": "string",
+           "m_label": "Label:",
+           "m_value": "Export CSV..."
+          }, {
+           "type": "string",
+           "m_label": "Shortcut:",
+           "m_value": ""
+          }, {
+           "type": "string",
+           "m_label": "Help String:",
+           "m_value": ""
+          }, {
+           "type": "bitmapPicker",
+           "m_label": "Bitmap File:",
+           "m_path": ""
+          }, {
+           "type": "choice",
+           "m_label": "Kind:",
+           "m_selection": 0,
+           "m_options": ["normal", "checkable", "radio", "separator"]
+          }, {
+           "type": "bool",
+           "m_label": "Checked",
+           "m_value": false
+          }],
+         "m_events": [{
+           "m_eventName": "wxEVT_COMMAND_MENU_SELECTED",
+           "m_eventClass": "wxCommandEvent",
+           "m_eventHandler": "wxCommandEventHandler",
+           "m_functionNameAndSignature": "OnMenuExpCSVClick(wxCommandEvent& event)",
            "m_description": "Menu item has been clicked",
            "m_noBody": false
           }],

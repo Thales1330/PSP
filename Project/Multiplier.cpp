@@ -115,3 +115,10 @@ bool Multiplier::Solve(double input, double timeStep)
 
     return true;
 }
+
+Element* Multiplier::GetCopy()
+{
+    Multiplier* copy = new Multiplier(m_elementID);
+    *copy = *this;
+    return copy;
+}

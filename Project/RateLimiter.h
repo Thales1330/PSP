@@ -26,6 +26,8 @@ class RateLimiter : public ControlElement
     
     virtual bool Solve(double input, double timeStep);
     
+    virtual Element* GetCopy();
+    
    protected:
     double m_upLimit = 5.0;
     double m_lowLimit = -5.0;

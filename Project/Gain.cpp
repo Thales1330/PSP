@@ -173,3 +173,12 @@ bool Gain::Solve(double input, double timeStep)
     m_output = input * m_value;
     return true;
 }
+
+Element* Gain::GetCopy()
+{
+    Gain* copy = new Gain(m_elementID);
+    *copy = *this;
+    m_glStringValue = NULL;
+    SetValue(m_value);
+    return copy;
+}

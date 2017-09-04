@@ -11,27 +11,32 @@
 #include "Inductor.h"
 #include "Capacitor.h"
 #include "FileHanding.h"
+#include "GeneralPropertiesForm.h"
+#include "SimulationsSettingsForm.h"
+#include "PropertiesData.h"
+#include "ChartView.h"
 
-MainFrame::MainFrame()
-    : MainFrameBase(NULL)
-{
-}
-MainFrame::MainFrame(wxWindow* parent, wxLocale* locale)
-    : MainFrameBase(parent)
+MainFrame::MainFrame() : MainFrameBase(NULL) {}
+MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties) : MainFrameBase(parent)
 {
     m_locale = locale;
+    m_generalProperties = initProperties;
 
     Init();
 }
+
 MainFrame::~MainFrame()
 {
     // if(m_artMetro) delete m_artMetro;
     if(m_addElementsMenu) {
-        m_addElementsMenu->Disconnect(
-            wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick), NULL, this);
+        m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick),
+                                      NULL, this);
         delete m_addElementsMenu;
     }
+    if(m_locale) delete m_locale;
+    if(m_generalProperties) delete m_generalProperties;
 }
+
 void MainFrame::Init()
 {
     this->SetSize(800, 600);
@@ -86,20 +91,21 @@ void MainFrame::CreateAddElementsMenu()
     // busElement->SetBitmap(wxArtProvider::GetBitmap(wxART_WARNING));
     wxMenuItem* lineElement =
         new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LINE, _("&Line\tL"), _("Adds a power line at the circuit"));
-    wxMenuItem* transformerElement = new wxMenuItem(
-        m_addElementsMenu, ID_ADDMENU_TRANSFORMER, _("&Transformer\tT"), _("Adds a transformer at the circuit"));
-    wxMenuItem* generatorElement = new wxMenuItem(
-        m_addElementsMenu, ID_ADDMENU_GENERATOR, _("&Generator\tG"), _("Adds a generator at the circuit"));
-    wxMenuItem* indMotorElement = new wxMenuItem(
-        m_addElementsMenu, ID_ADDMENU_INDMOTOR, _("&Induction motor\tI"), _("Adds an induction motor at the circuit"));
-    wxMenuItem* syncCompElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_SYNCCOMP,
-        _("&Synchronous compensator \tK"), _("Adds an induction motor at the circuit"));
+    wxMenuItem* transformerElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TRANSFORMER, _("&Transformer\tT"),
+                                                    _("Adds a transformer at the circuit"));
+    wxMenuItem* generatorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_GENERATOR, _("&Generator\tG"),
+                                                  _("Adds a generator at the circuit"));
+    wxMenuItem* indMotorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDMOTOR, _("&Induction motor\tI"),
+                                                 _("Adds an induction motor at the circuit"));
+    wxMenuItem* syncCompElement =
+        new wxMenuItem(m_addElementsMenu, ID_ADDMENU_SYNCCOMP, _("&Synchronous compensator \tK"),
+                       _("Adds an induction motor at the circuit"));
     wxMenuItem* loadElement =
         new wxMenuItem(m_addElementsMenu, ID_ADDMENU_LOAD, _("&Load\tShift-L"), _("Adds a load at the circuit"));
-    wxMenuItem* capacitorElement = new wxMenuItem(
-        m_addElementsMenu, ID_ADDMENU_CAPACITOR, _("&Capacitor\tShift-C"), _("Adds a shunt capacitor at the circuit"));
-    wxMenuItem* inductorElement = new wxMenuItem(
-        m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"), _("Adds a shunt inductor at the circuit"));
+    wxMenuItem* capacitorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_CAPACITOR, _("&Capacitor\tShift-C"),
+                                                  _("Adds a shunt capacitor at the circuit"));
+    wxMenuItem* inductorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"),
+                                                 _("Adds a shunt inductor at the circuit"));
 
     m_addElementsMenu->Append(busElement);
     m_addElementsMenu->Append(lineElement);
@@ -132,7 +138,22 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 
 void MainFrame::OnAboutClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnAddElementDropdown(wxRibbonButtonBarEvent& event) { event.PopupMenu(m_addElementsMenu); }
-void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event)
+{
+    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
+        std::vector<ElementPlotData> plotDataList;
+        auto elementList = workspace->GetElementList();
+        for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
+            if(PowerElement* powerElement = dynamic_cast<PowerElement*>(*it)) {
+                ElementPlotData plotData;
+                if(powerElement->GetPlotData(plotData)) plotDataList.push_back(plotData);
+            }
+        }
+        ChartView* cView = new ChartView(workspace, plotDataList, workspace->GetStabilityTimeVector());
+        cView->Show();
+    }
+}
+
 void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}
@@ -150,7 +171,6 @@ void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 }
 
 void MainFrame::OnDragClick(wxRibbonButtonBarEvent& event) {}
-
 void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 {
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, true);
@@ -158,7 +178,6 @@ void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 }
 
 void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
-
 void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event)
 {
     if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
@@ -203,8 +222,8 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
 
 void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
 {
-    wxFileDialog openFileDialog(
-        this, _("Open PSP file"), "", "", "PSP files (*.psp)|*.psp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+    wxFileDialog openFileDialog(this, _("Open PSP file"), "", "", "PSP files (*.psp)|*.psp",
+                                wxFD_OPEN | wxFD_FILE_MUST_EXIST);
     if(openFileDialog.ShowModal() == wxID_CANCEL) return;
 
     wxFileName fileName(openFileDialog.GetPath());
@@ -227,8 +246,8 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
         newWorkspace->SetJustOpened(true);
         m_projectNumber++;
     } else {
-        wxMessageDialog msgDialog(
-            this, _("It was not possible to open the selected file."), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        wxMessageDialog msgDialog(this, _("It was not possible to open the selected file."), _("Error"),
+                                  wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
         delete newWorkspace;
     }
@@ -244,10 +263,16 @@ void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
     }
 }
 
-void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+    if(workspace) {
+        workspace->RunStability();
+    }
+}
+
 void MainFrame::OnSCPowerClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -261,8 +286,8 @@ void MainFrame::OnSaveAsClick(wxRibbonButtonBarEvent& event)
     if(workspace) {
         FileHanding fileHandling(workspace);
 
-        wxFileDialog saveFileDialog(
-            this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+        wxFileDialog saveFileDialog(this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp",
+                                    wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
         if(saveFileDialog.ShowModal() == wxID_CANCEL) return;
 
         fileHandling.SaveProject(saveFileDialog.GetPath());
@@ -282,8 +307,8 @@ void MainFrame::OnSaveClick(wxRibbonButtonBarEvent& event)
         if(workspace->GetSavedPath().IsOk()) {
             fileHandling.SaveProject(workspace->GetSavedPath());
         } else {
-            wxFileDialog saveFileDialog(
-                this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+            wxFileDialog saveFileDialog(this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp",
+                                        wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
             if(saveFileDialog.ShowModal() == wxID_CANCEL) return;
 
             fileHandling.SaveProject(saveFileDialog.GetPath());
@@ -296,7 +321,6 @@ void MainFrame::OnSaveClick(wxRibbonButtonBarEvent& event)
 }
 
 void MainFrame::OnSnapshotClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnUndoClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 {
@@ -310,8 +334,8 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 
             switch(event.GetId()) {
                 case ID_ADDMENU_BUS: {
-                    Bus* newBus = new Bus(
-                        wxPoint2DDouble(0, 0), wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
+                    Bus* newBus = new Bus(wxPoint2DDouble(0, 0),
+                                          wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
                     workspace->IncrementElementNumber(ID_BUS);
                     elementList.push_back(newBus);
                     statusBarText = _("Insert Bus: Click to insert, ESC to cancel.");
@@ -417,5 +441,21 @@ void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) {
         workspace->RotateSelectedElements(false);
+    }
+}
+void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
+{
+    GeneralPropertiesForm genPropForm(this, m_generalProperties);
+    genPropForm.SetInitialSize();
+    genPropForm.ShowModal();
+}
+
+void MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+    if(workspace) {
+        SimulationsSettingsForm simulSettingsForm(this, workspace->GetProperties());
+        simulSettingsForm.SetInitialSize();
+        simulSettingsForm.ShowModal();
     }
 }

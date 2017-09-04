@@ -2564,6 +2564,6 @@ void wxC9ED9InitBitmapResources()
     XRC_ADD_FILE(wxT("XRC_resource/MainFrameBitmaps.cpp$data_images_ribbon_settings32.png"), xml_res_file_31, xml_res_size_31, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/MainFrameBitmaps.cpp$data_images_ribbon_snap32.png"), xml_res_file_32, xml_res_size_32, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/MainFrameBitmaps.cpp$data_images_ribbon_undo32.png"), xml_res_file_33, xml_res_size_33, wxT("image/png"));
-    XRC_ADD_FILE(wxT("XRC_resource/MainFrameBitmaps.cpp$C__Users_Thales_Documents_GitHub_PSP_Project_MainFrameBitmaps.xrc"), xml_res_file_34, xml_res_size_34, wxT("text/xml"));
-    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/MainFrameBitmaps.cpp$C__Users_Thales_Documents_GitHub_PSP_Project_MainFrameBitmaps.xrc"));
+    XRC_ADD_FILE(wxT("XRC_resource/MainFrameBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_MainFrameBitmaps.xrc"), xml_res_file_34, xml_res_size_34, wxT("text/xml"));
+    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/MainFrameBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_MainFrameBitmaps.xrc"));
 }

@@ -96,3 +96,10 @@ bool Limiter::Solve(double input, double timeStep)
     
     return true;
 }
+
+Element* Limiter::GetCopy()
+{
+    Limiter* copy = new Limiter(m_elementID);
+    *copy = *this;
+    return copy;
+}

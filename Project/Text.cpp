@@ -164,14 +164,14 @@ void Text::UpdateText(double systemPowerBase)
         case TYPE_BUS: {
             Bus* bus = static_cast<Bus*>(m_element);
             if(bus) {
-                BusElectricalData data = bus->GetEletricalData();
+                BusElectricalData data = bus->GetElectricalData();
                 double baseVoltage = data.nominalVoltage;
                 if(data.nominalVoltageUnit == UNIT_kV) baseVoltage *= 1e3;
                 double baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);
 
                 switch(m_dataType) {
                     case DATA_NAME: {
-                        SetText(bus->GetEletricalData().name);
+                        SetText(bus->GetElectricalData().name);
                     } break;
                     case DATA_VOLTAGE: {
                         double voltage = std::abs(data.voltage);
@@ -672,7 +672,7 @@ void Text::UpdateText(double systemPowerBase)
                 LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
                 std::complex<double> sPower(data.activePower, data.reactivePower);
                 if(data.loadType == CONST_IMPEDANCE && load->IsOnline()) {
-                    std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetEletricalData().voltage;
+                    std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
                     sPower = std::pow(std::abs(v), 2) * sPower;
                 }
                 if(!load->IsOnline()) sPower = std::complex<double>(0.0, 0.0);
@@ -847,7 +847,7 @@ void Text::UpdateText(double systemPowerBase)
                     reativePower = 0.0;
                 else {
                     std::complex<double> v =
-                        static_cast<Bus*>(capacitor->GetParentList()[0])->GetEletricalData().voltage;
+                        static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().voltage;
                     reativePower *= std::pow(std::abs(v), 2);
                 }
                 switch(m_dataType) {
@@ -888,7 +888,7 @@ void Text::UpdateText(double systemPowerBase)
                     reativePower = 0.0;
                 else {
                     std::complex<double> v =
-                        static_cast<Bus*>(inductor->GetParentList()[0])->GetEletricalData().voltage;
+                        static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().voltage;
                     reativePower *= std::pow(std::abs(v), 2);
                 }
                 switch(m_dataType) {

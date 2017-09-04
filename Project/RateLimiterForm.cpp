@@ -3,6 +3,8 @@
 
 RateLimiterForm::RateLimiterForm(wxWindow* parent, RateLimiter* rateLimiter) : RateLimiterFormBase(parent)
 {
+    SetSize(GetBestSize());
+    
     m_rateLimiter = rateLimiter;
     m_parent = parent;
 

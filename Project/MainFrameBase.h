@@ -102,7 +102,7 @@ protected:
 protected:
     virtual void OnNewClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnOpenClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnStabilitySettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnGeneralSettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnExitClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSaveClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSaveAsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
@@ -130,7 +130,7 @@ protected:
     virtual void OnRunStabilityClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnFaultClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSCPowerClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
-    virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnSimulationSettingsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void NotebookPageClosing(wxAuiNotebookEvent& event) { event.Skip(); }
     virtual void NotebookPageClosed(wxAuiNotebookEvent& event) { event.Skip(); }
 

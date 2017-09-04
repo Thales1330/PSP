@@ -16,14 +16,16 @@
 
 #include "PowerFlow.h"
 #include "Fault.h"
+#include "Electromechanical.h"
+
+#include "ElementPlotData.h"
+#include "ChartView.h"
+
+#include "PropertiesData.h"
 
 // Workspace
-Workspace::Workspace()
-    : WorkspaceBase(NULL)
-{
-}
-Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar)
-    : WorkspaceBase(parent)
+Workspace::Workspace() : WorkspaceBase(NULL) {}
+Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : WorkspaceBase(parent)
 {
     m_timer->Start();
     m_name = name;
@@ -36,8 +38,10 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar)
         m_elementNumber[i] = 1;
     }
 
-    const int widths[4] = { -3, -1, 100, 100 };
+    const int widths[4] = {-3, -1, 100, 100};
     m_statusBar->SetStatusWidths(4, widths);
+
+    m_properties = new PropertiesData();
 }
 
 Workspace::~Workspace()
@@ -51,6 +55,7 @@ Workspace::~Workspace()
     if(m_camera) delete m_camera;
     if(m_glContext) delete m_glContext;
     if(m_tipWindow) delete m_tipWindow;
+    if(m_properties) delete m_properties;
 }
 
 void Workspace::OnPaint(wxPaintEvent& event)
@@ -60,8 +65,8 @@ void Workspace::OnPaint(wxPaintEvent& event)
     SetViewport();
 
     // Set GLCanvas scale and translation.
-    glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                         // Scale
-    glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0); // Translation
+    glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                          // Scale
+    glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0);  // Translation
 
     // Draw
 
@@ -94,14 +99,14 @@ void Workspace::OnPaint(wxPaintEvent& event)
     glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y);
     glEnd();
 
-    glFlush(); // Sends all pending information directly to the GPU.
+    glFlush();  // Sends all pending information directly to the GPU.
     m_glCanvas->SwapBuffers();
     event.Skip();
 }
 
 void Workspace::SetViewport()
 {
-    glClearColor(1.0, 1.0, 1.0, 1.0); // White background.
+    glClearColor(1.0, 1.0, 1.0, 1.0);  // White background.
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
@@ -143,7 +148,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
                 if(typeid(*element) == typeid(Bus)) {
                     // Select the bus.
                     element->SetSelected();
-                    foundElement = true; // Element found.
+                    foundElement = true;  // Element found.
                     // Add the new element's parent. If the element being inserted returns true, back to
                     // edit mode.
                     if(newElement->AddParent(element, m_camera->ScreenToWorld(clickPoint))) {
@@ -166,7 +171,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
         bool clickPickbox = false;
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
             PowerElement* element = *it;
-            element->ResetPickboxes(); // Reset pickbox state.
+            element->ResetPickboxes();  // Reset pickbox state.
 
             // Set movement initial position (not necessarily will be moved).
             element->StartMove(m_camera->ScreenToWorld(clickPoint));
@@ -259,21 +264,22 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
             // propagated through the lines
             if(elementIsBus) {
                 // The voltage was changed
-                if(oldBus.GetEletricalData().nominalVoltage != currentBus->GetEletricalData().nominalVoltage ||
-                    oldBus.GetEletricalData().nominalVoltageUnit != currentBus->GetEletricalData().nominalVoltageUnit) {
+                if(oldBus.GetElectricalData().nominalVoltage != currentBus->GetElectricalData().nominalVoltage ||
+                   oldBus.GetElectricalData().nominalVoltageUnit !=
+                       currentBus->GetElectricalData().nominalVoltageUnit) {
                     // Check if the bus has line as child.
                     std::vector<Element*> childList = element->GetChildList();
                     for(auto itc = childList.begin(), itcEnd = childList.end(); itc != itcEnd; ++itc) {
                         Element* child = *itc;
                         if(typeid(*child) == typeid(Line)) {
                             wxMessageDialog msgDialog(this, _("Do you want to change the rated voltage of the path?"),
-                                _("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
+                                                      _("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
                             if(msgDialog.ShowModal() == wxID_YES)
                                 ValidateBusesVoltages(element);
                             else {
-                                auto data = currentBus->GetEletricalData();
-                                data.nominalVoltage = oldBus.GetEletricalData().nominalVoltage;
-                                data.nominalVoltageUnit = oldBus.GetEletricalData().nominalVoltageUnit;
+                                auto data = currentBus->GetElectricalData();
+                                data.nominalVoltage = oldBus.GetElectricalData().nominalVoltage;
+                                data.nominalVoltageUnit = oldBus.GetElectricalData().nominalVoltageUnit;
                                 currentBus->SetElectricalData(data);
                             }
                             break;
@@ -445,7 +451,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
     bool redraw = false;
     switch(m_mode) {
         case MODE_INSERT: {
-            Element* newElement = *(m_elementList.end() - 1); // Get the last element in the list.
+            Element* newElement = *(m_elementList.end() - 1);  // Get the last element in the list.
             newElement->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
             redraw = true;
         } break;
@@ -563,7 +569,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
     if(redraw) Redraw();
     m_camera->UpdateMousePosition(event.GetPosition());
     UpdateStatusBar();
-    m_timer->Start(); // Restart the timer.
+    m_timer->Start();  // Restart the timer.
     event.Skip();
 }
 
@@ -586,6 +592,7 @@ void Workspace::OnMiddleDown(wxMouseEvent& event)
     }
     m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
     UpdateStatusBar();
+    event.Skip();
 }
 
 void Workspace::OnMiddleUp(wxMouseEvent& event)
@@ -610,6 +617,7 @@ void Workspace::OnMiddleUp(wxMouseEvent& event)
         } break;
     }
     UpdateStatusBar();
+    event.Skip();
 }
 
 void Workspace::OnScroll(wxMouseEvent& event)
@@ -631,10 +639,10 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
     char key = event.GetUnicodeKey();
     if(key != WXK_NONE) {
         switch(key) {
-            case WXK_ESCAPE: // Cancel operations.
+            case WXK_ESCAPE:  // Cancel operations.
             {
                 if(m_mode == MODE_INSERT) {
-                    m_elementList.pop_back(); // Removes the last element being inserted.
+                    m_elementList.pop_back();  // Removes the last element being inserted.
                     m_mode = MODE_EDIT;
                     Redraw();
                 } else if(m_mode == MODE_INSERT_TEXT) {
@@ -643,7 +651,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     Redraw();
                 }
             } break;
-            case WXK_DELETE: // Delete selected elements
+            case WXK_DELETE:  // Delete selected elements
             {
                 DeleteSelectedElements();
             } break;
@@ -661,15 +669,15 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     Fit();
                 }
             } break;
-            case 'R': // Rotate the selected elements.
+            case 'R':  // Rotate the selected elements.
             {
                 RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
             } break;
-            case 'B': // Insert a bus.
+            case 'B':  // Insert a bus.
             {
                 if(!insertingElement) {
                     Bus* newBus = new Bus(m_camera->ScreenToWorld(event.GetPosition()),
-                        wxString::Format(_("Bus %d"), GetElementNumber(ID_BUS)));
+                                          wxString::Format(_("Bus %d"), GetElementNumber(ID_BUS)));
                     IncrementElementNumber(ID_BUS);
                     m_elementList.push_back(newBus);
                     m_mode = MODE_INSERT;
@@ -679,13 +687,13 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'L': {
                 if(!insertingElement) {
-                    if(!event.ControlDown() && event.ShiftDown()) { // Insert a load.
+                    if(!event.ControlDown() && event.ShiftDown()) {  // Insert a load.
                         Load* newLoad = new Load(wxString::Format(_("Load %d"), GetElementNumber(ID_LOAD)));
                         IncrementElementNumber(ID_LOAD);
                         m_elementList.push_back(newLoad);
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
-                    } else if(!event.ControlDown() && !event.ShiftDown()) { // Insert a power line.
+                    } else if(!event.ControlDown() && !event.ShiftDown()) {  // Insert a power line.
                         Line* newLine = new Line(wxString::Format(_("Line %d"), GetElementNumber(ID_LINE)));
                         IncrementElementNumber(ID_LINE);
                         m_elementList.push_back(newLine);
@@ -696,11 +704,12 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
                 // Tests - Ctrl + Shift + L
                 if(event.ControlDown() && event.ShiftDown()) {
-                    ControlEditor* ce = new ControlEditor(this, IOControl::IN_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
+                    ControlEditor* ce =
+                        new ControlEditor(this, IOControl::IN_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
                     ce->Show();
                 }
             } break;
-            case 'T': // Insert a transformer.
+            case 'T':  // Insert a transformer.
             {
                 if(!insertingElement) {
                     Transformer* newTransformer =
@@ -712,7 +721,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     Redraw();
                 }
             } break;
-            case 'G': // Insert a generator.
+            case 'G':  // Insert a generator.
             {
                 if(!insertingElement) {
                     SyncGenerator* newGenerator =
@@ -726,14 +735,14 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'I': {
                 if(!insertingElement) {
-                    if(event.GetModifiers() == wxMOD_SHIFT) { // Insert an inductor.
+                    if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert an inductor.
                         Inductor* newInductor =
                             new Inductor(wxString::Format(_("Inductor %d"), GetElementNumber(ID_INDUCTOR)));
                         IncrementElementNumber(ID_INDUCTOR);
                         m_elementList.push_back(newInductor);
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Inductor: Click on a buses, ESC to cancel."));
-                    } else // Insert an induction motor.
+                    } else  // Insert an induction motor.
                     {
                         IndMotor* newIndMotor =
                             new IndMotor(wxString::Format(_("Induction motor %d"), GetElementNumber(ID_INDMOTOR)));
@@ -745,7 +754,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     Redraw();
                 }
             } break;
-            case 'K': // Insert a synchronous condenser.
+            case 'K':  // Insert a synchronous condenser.
             {
                 if(!insertingElement) {
                     SyncMotor* newSyncCondenser =
@@ -759,7 +768,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'C': {
                 if(!insertingElement) {
-                    if(event.GetModifiers() == wxMOD_SHIFT) { // Insert a capacitor.
+                    if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert a capacitor.
                         Capacitor* newCapacitor =
                             new Capacitor(wxString::Format(_("Capacitor %d"), GetElementNumber(ID_CAPACITOR)));
                         IncrementElementNumber(ID_CAPACITOR);
@@ -767,7 +776,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                         m_mode = MODE_INSERT;
                         m_statusBar->SetStatusText(_("Insert Capacitor: Click on a buses, ESC to cancel."));
                         Redraw();
-                    } else if(event.GetModifiers() == wxMOD_CONTROL) { // Copy.
+                    } else if(event.GetModifiers() == wxMOD_CONTROL) {  // Copy.
                         CopySelection();
                     }
                 }
@@ -916,7 +925,7 @@ void Workspace::RotateSelectedElements(bool clockwise)
         // Parent's element rotating...
         for(int i = 0; i < (int)element->GetParentList().size(); i++) {
             Element* parent = element->GetParentList()[i];
-            if(parent) { // Check if parent is not null
+            if(parent) {  // Check if parent is not null
                 if(parent->IsSelected()) {
                     element->RotateNode(parent, clockwise);
                     // Update the positions used on motion action, the element will not be necessarily
@@ -949,7 +958,6 @@ void Workspace::DeleteSelectedElements()
         Element* element = *it;
 
         if(element->IsSelected()) {
-
             // Remove child/parent.
             std::vector<Element*> childList = element->GetChildList();
             for(auto itc = childList.begin(), itEnd = childList.end(); itc != itEnd; ++itc) {
@@ -992,8 +1000,8 @@ void Workspace::DeleteSelectedElements()
 }
 
 bool Workspace::GetElementsCorners(wxPoint2DDouble& leftUpCorner,
-    wxPoint2DDouble& rightDownCorner,
-    std::vector<Element*> elementList)
+                                   wxPoint2DDouble& rightDownCorner,
+                                   std::vector<Element*> elementList)
 {
     if(elementList.size() == 0) return false;
 
@@ -1042,19 +1050,19 @@ void Workspace::Fit()
 
 void Workspace::ValidateBusesVoltages(Element* initialBus)
 {
-    double nominalVoltage = static_cast<Bus*>(initialBus)->GetEletricalData().nominalVoltage;
-    ElectricalUnit nominalVoltageUnit = static_cast<Bus*>(initialBus)->GetEletricalData().nominalVoltageUnit;
+    double nominalVoltage = static_cast<Bus*>(initialBus)->GetElectricalData().nominalVoltage;
+    ElectricalUnit nominalVoltageUnit = static_cast<Bus*>(initialBus)->GetElectricalData().nominalVoltageUnit;
 
     for(auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
         Element* child = *it;
 
         if(typeid(*child) == typeid(Line)) {
             if(child->GetParentList()[0] && child->GetParentList()[1]) {
-                BusElectricalData data1 = static_cast<Bus*>(child->GetParentList()[0])->GetEletricalData();
-                BusElectricalData data2 = static_cast<Bus*>(child->GetParentList()[1])->GetEletricalData();
+                BusElectricalData data1 = static_cast<Bus*>(child->GetParentList()[0])->GetElectricalData();
+                BusElectricalData data2 = static_cast<Bus*>(child->GetParentList()[1])->GetElectricalData();
 
                 if(data1.nominalVoltage != data2.nominalVoltage ||
-                    data1.nominalVoltageUnit != data2.nominalVoltageUnit) {
+                   data1.nominalVoltageUnit != data2.nominalVoltageUnit) {
                     data1.nominalVoltage = nominalVoltage;
                     data2.nominalVoltage = nominalVoltage;
                     data1.nominalVoltageUnit = nominalVoltageUnit;
@@ -1063,7 +1071,7 @@ void Workspace::ValidateBusesVoltages(Element* initialBus)
                     static_cast<Bus*>(child->GetParentList()[0])->SetElectricalData(data1);
                     static_cast<Bus*>(child->GetParentList()[1])->SetElectricalData(data2);
 
-                    it = m_elementList.begin(); // Restart search.
+                    it = m_elementList.begin();  // Restart search.
                 }
             }
         }
@@ -1082,8 +1090,8 @@ void Workspace::ValidateElementsVoltages()
         for(int i = 0; i < (int)child->GetParentList().size(); i++) {
             Bus* parent = static_cast<Bus*>(child->GetParentList()[i]);
             if(parent) {
-                nominalVoltage.push_back(parent->GetEletricalData().nominalVoltage);
-                nominalVoltageUnit.push_back(parent->GetEletricalData().nominalVoltageUnit);
+                nominalVoltage.push_back(parent->GetElectricalData().nominalVoltage);
+                nominalVoltageUnit.push_back(parent->GetElectricalData().nominalVoltageUnit);
             }
         }
         child->SetNominalVoltage(nominalVoltage, nominalVoltageUnit);
@@ -1123,7 +1131,7 @@ void Workspace::CopySelection()
         Element* element = *it;
         if(typeid(*element) == typeid(Bus)) {
             Bus* bus = static_cast<Bus*>(element);
-            auto data = bus->GetEletricalData();
+            auto data = bus->GetElectricalData();
             data.number = busNumber;
             bus->SetElectricalData(data);
             busNumber++;
@@ -1151,7 +1159,7 @@ bool Workspace::Paste()
         if(wxTheClipboard->IsSupported(wxDataFormat("PSPCopy"))) {
             if(!wxTheClipboard->GetData(dataObject)) {
                 wxMessageDialog dialog(this, _("It was not possible to paste from clipboard."), _("Error"),
-                    wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
+                                       wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
                 dialog.ShowModal();
                 wxTheClipboard->Close();
                 return false;
@@ -1169,7 +1177,7 @@ bool Workspace::Paste()
 
         // Paste buses (parents).
         auto parentList = elementsLists->parentList;
-        std::vector<Bus*> pastedBusList; // To set new parents;
+        std::vector<Bus*> pastedBusList;  // To set new parents;
         for(auto it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {
             Element* copy = (*it)->GetCopy();
             if(copy) {
@@ -1259,7 +1267,7 @@ bool Workspace::Paste()
         }
     } else {
         wxMessageDialog dialog(this, _("It was not possible to paste from clipboard."), _("Error"),
-            wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
+                               wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
         dialog.ShowModal();
         return false;
     }
@@ -1392,4 +1400,47 @@ bool Workspace::RunSCPower()
     Redraw();
 
     return result;
+}
+
+bool Workspace::RunStability()
+{
+    // Run power flow before stability.
+    RunPowerFlow();
+
+    Electromechanical stability(this, GetElementList(), m_properties->GetSimulationPropertiesData());
+    bool result = stability.RunStabilityCalculation();
+    if(!result) {
+        wxMessageDialog msgDialog(this, stability.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+    }
+    m_stabilityTimeVector.clear();
+    m_stabilityTimeVector = stability.GetTimeVector();
+
+    // Run power flow after stability.
+    RunPowerFlow();
+
+    wxMessageDialog msgDialog(this, _("Do you wish to open the stability graphics?"), _("Question"),
+                              wxYES_NO | wxCENTRE | wxICON_QUESTION);
+    if(msgDialog.ShowModal() == wxID_YES) {
+        std::vector<ElementPlotData> plotDataList;
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            PowerElement* element = *it;
+            ElementPlotData plotData;
+            if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
+        }
+        ElementPlotData tests(_("Error"), ElementPlotData::CT_TEST);
+        tests.AddData(stability.m_wErrorVector, _("Speed error"));
+        tests.AddData(stability.m_numItVector, _("Number iterations"));
+        plotDataList.push_back(tests);
+
+        ChartView* cView = new ChartView(this, plotDataList, m_stabilityTimeVector);
+        cView->Show();
+    }
+
+    return result;
+}
+void Workspace::OnMiddleDoubleClick(wxMouseEvent& event)
+{
+    Fit();
+    event.Skip();
 }

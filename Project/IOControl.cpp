@@ -222,3 +222,12 @@ void IOControl::UpdatePoints()
         }
     }
 }
+
+Element* IOControl::GetCopy()
+{
+    IOControl* copy = new IOControl(m_ioFlags, m_elementID);
+    *copy = *this;
+    m_glStringValue = NULL;
+    SetValue(m_value);
+    return copy;
+}

@@ -4,6 +4,7 @@
 
 LoadForm::LoadForm(wxWindow* parent, Load* load) : LoadFormBase(parent)
 {
+    SetSize(GetBestSize());
     LoadElectricalData data = load->GetElectricalData();
 
     m_textCtrlName->SetValue(data.name);

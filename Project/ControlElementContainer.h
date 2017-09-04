@@ -24,9 +24,12 @@ class ControlElementContainer
     ~ControlElementContainer();
 
     virtual void FillContainer(ControlEditor* editor);
-    virtual void FillContainer(std::vector<ControlElement*> controlElementList, std::vector<ConnectionLine*> connectionLineList);
+    virtual void FillContainer(std::vector<ControlElement*> controlElementList,
+                               std::vector<ConnectionLine*> connectionLineList);
+    virtual void GetContainerCopy(std::vector<ControlElement*>& controlElementList,
+                                  std::vector<ConnectionLine*>& connectionLineList);
     virtual void ClearContainer();
-    
+
     std::vector<ControlElement*> GetControlElementsList() const { return m_ctrlElementsList; }
     std::vector<ConnectionLine*> GetConnectionLineList() const { return m_cLineList; }
     std::vector<Constant*> GetConstantList() const { return m_constantList; }

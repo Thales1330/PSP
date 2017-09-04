@@ -24,6 +24,8 @@ public:
     
     virtual bool Solve(double input, double timeStep);
     
+    virtual Element* GetCopy();
+    
 protected:
     double m_aValue = 0.001;
     double m_bValue = 5.0;

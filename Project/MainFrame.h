@@ -11,9 +11,12 @@ class MainFrameBase;
 class wxRibbonMetroArtProvider;
 class Workspace;
 class FileHanding;
+class GeneralPropertiesForm;
+class SimulationsSettingsForm;
+class PropertiesData;
+class ChartView;
 
-enum
-{
+enum {
     ID_ADDMENU_BUS = 20000,
     ID_ADDMENU_LINE,
     ID_ADDMENU_TRANSFORMER,
@@ -29,10 +32,12 @@ class MainFrame : public MainFrameBase
 {
    public:
     MainFrame();
-    MainFrame(wxWindow* parent, wxLocale* locale);
+    MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties);
     ~MainFrame();
 
    protected:
+    virtual void OnGeneralSettingsClick(wxRibbonButtonBarEvent& event);
+    virtual void OnSimulationSettingsClick(wxRibbonButtonBarEvent& event);
     virtual void OnRotClockClick(wxRibbonButtonBarEvent& event);
     virtual void OnRotCounterClockClick(wxRibbonButtonBarEvent& event);
     virtual void NotebookPageClosed(wxAuiNotebookEvent& event);
@@ -56,7 +61,6 @@ class MainFrame : public MainFrameBase
     virtual void OnPSPGuideClick(wxRibbonButtonBarEvent& event);
     virtual void OnPasteClick(wxRibbonButtonBarEvent& event);
     virtual void OnPowerFlowClick(wxRibbonButtonBarEvent& event);
-    virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event);
     virtual void OnRedoClick(wxRibbonButtonBarEvent& event);
     virtual void OnResetVoltagesClick(wxRibbonButtonBarEvent& event);
     virtual void OnRunStabilityClick(wxRibbonButtonBarEvent& event);
@@ -64,17 +68,17 @@ class MainFrame : public MainFrameBase
     virtual void OnSaveAsClick(wxRibbonButtonBarEvent& event);
     virtual void OnSaveClick(wxRibbonButtonBarEvent& event);
     virtual void OnSnapshotClick(wxRibbonButtonBarEvent& event);
-    virtual void OnStabilitySettingsClick(wxRibbonButtonBarEvent& event);
     virtual void OnUndoClick(wxRibbonButtonBarEvent& event);
     virtual void OnNewClick(wxRibbonButtonBarEvent& event);
 
-   private:
+   protected:
     std::vector<Workspace*> m_workspaceList;
     int m_projectNumber = 1;
 
     wxRibbonMetroArtProvider* m_artMetro = NULL;
     wxMenu* m_addElementsMenu = NULL;
     wxLocale* m_locale = NULL;
+    PropertiesData* m_generalProperties = NULL;
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);

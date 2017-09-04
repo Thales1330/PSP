@@ -32,9 +32,12 @@ class TransferFunction : public ControlElement
     virtual void SetNumerator(std::vector<double> numerator) { m_numerator = numerator; }
     virtual void SetDenominator(std::vector<double> denominator) { m_denominator = denominator; }
     virtual void UpdateTFText();
+    virtual void UpdateText() { UpdateTFText(); }
     virtual SpaceState GetSpaceState() { return m_ss; }
     virtual void CalculateSpaceState(int maxIteration = 100, double error = 1e-3);
     virtual bool Solve(double input, double timeStep);
+    
+    virtual Element* GetCopy();
 
    protected:
     virtual void SetText(wxString numerator, wxString denominator);

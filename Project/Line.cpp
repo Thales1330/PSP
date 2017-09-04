@@ -1,7 +1,6 @@
 #include "Line.h"
 
-Line::Line()
-    : Branch()
+Line::Line() : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
@@ -10,8 +9,7 @@ Line::Line()
     }
 }
 
-Line::Line(wxString name)
-    : Branch()
+Line::Line(wxString name) : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
@@ -32,9 +30,13 @@ bool Line::Contains(wxPoint2DDouble position) const
 void Line::Draw(wxPoint2DDouble translation, double scale) const
 {
     OpenGLColour elementColour;
-    if(m_online)
-        elementColour = m_onlineElementColour;
-    else
+    if(m_online) {
+        if(m_dynEvent)
+            elementColour = m_dynamicEventColour;
+        else
+            elementColour = m_onlineElementColour;
+
+    } else
         elementColour = m_offlineElementColour;
 
     std::vector<wxPoint2DDouble> pointList = m_pointList;
@@ -123,10 +125,10 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             m_parentList.push_back(parent);
             parent->AddChild(this);
             wxPoint2DDouble parentPt =
-                parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
-            parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
-            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
-            m_pointList.push_back(parentPt);                                   // First point
+                parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
+            parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
+            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
+            m_pointList.push_back(parentPt);                                    // First point
             m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_position));
 
             wxRect2DDouble genRect(0, 0, 0, 0);
@@ -134,19 +136,19 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             UpdateSwitches();
 
             Bus* parentBus = static_cast<Bus*>(parent);
-            m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
-            m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
+            m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+            m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
 
             return false;
         }
         // Second bus.
         else if(parent != m_parentList[0]) {
             Bus* parentBus = static_cast<Bus*>(parent);
-            if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
-                m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit) {
+            if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+               m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
-                    _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+                                          _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
                 msgDialog.ShowModal();
                 return false;
             }
@@ -154,9 +156,9 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             m_parentList.push_back(parent);
             parent->AddChild(this);
             wxPoint2DDouble parentPt =
-                parent->RotateAtPosition(position, -parent->GetAngle());       // Rotate click to horizontal position.
-            parentPt.m_y = parent->GetPosition().m_y;                          // Centralize on bus.
-            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle()); // Rotate back.
+                parent->RotateAtPosition(position, -parent->GetAngle());        // Rotate click to horizontal position.
+            parentPt.m_y = parent->GetPosition().m_y;                           // Centralize on bus.
+            parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());  // Rotate back.
 
             // Set first switch point.
             wxPoint2DDouble secondPoint = parentPt;
@@ -168,7 +170,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             // Set the second switch point.
             m_pointList.push_back(GetSwitchPoint(parent, parentPt, m_pointList[m_pointList.size() - 1]));
 
-            m_pointList.push_back(parentPt); // Last point.
+            m_pointList.push_back(parentPt);  // Last point.
 
             wxRect2DDouble genRect(0, 0, 0, 0);
             m_switchRect.push_back(genRect);
@@ -353,12 +355,12 @@ bool Line::SetNodeParent(Element* parent)
         wxRect2DDouble nodeRect(0, 0, 0, 0);
         if(m_activeNodeID == 1) {
             nodeRect = wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                                      10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
         }
         if(m_activeNodeID == 2) {
             nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
-                m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
-                10 + 2.0 * m_borderSize);
+                                      m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+                                      10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
         }
 
         if(parent->Intersects(nodeRect)) {
@@ -366,13 +368,13 @@ bool Line::SetNodeParent(Element* parent)
             // two different voltages buses
             Bus* parentBus = static_cast<Bus*>(parent);
             if(!m_parentList[0] && !m_parentList[1]) {
-                m_electricaData.nominalVoltage = parentBus->GetEletricalData().nominalVoltage;
-                m_electricaData.nominalVoltageUnit = parentBus->GetEletricalData().nominalVoltageUnit;
-            } else if(m_electricaData.nominalVoltage != parentBus->GetEletricalData().nominalVoltage ||
-                m_electricaData.nominalVoltageUnit != parentBus->GetEletricalData().nominalVoltageUnit) {
+                m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+                m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
+            } else if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+                      m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
-                    _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+                                          _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
                 msgDialog.ShowModal();
                 m_activeNodeID = 0;
                 return false;
@@ -389,8 +391,8 @@ bool Line::SetNodeParent(Element* parent)
 
                 // Centralize the node on bus.
                 wxPoint2DDouble parentPt = parent->RotateAtPosition(
-                    m_pointList[0], -parent->GetAngle()); // Rotate click to horizontal position.
-                parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+                    m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
+                parentPt.m_y = parent->GetPosition().m_y;  // Centralize on bus.
                 parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
                 m_pointList[0] = parentPt;
 
@@ -488,17 +490,17 @@ wxString Line::GetTipText() const
     if(m_online) {
         tipText += "\n";
         int busNumber[2];
-        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetEletricalData().number + 1;
-        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetEletricalData().number + 1;
+        busNumber[0] = static_cast<Bus*>(m_parentList[0])->GetElectricalData().number + 1;
+        busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetElectricalData().number + 1;
 
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-            wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-            wxString::FromDouble(m_electricaData.powerFlow[0].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricaData.powerFlow[0].imag(), 5) + _(" p.u.");
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-            wxString::FromDouble(m_electricaData.powerFlow[1].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricaData.powerFlow[1].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-            wxString::FromDouble(m_electricaData.powerFlow[1].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricaData.powerFlow[1].imag(), 5) + _(" p.u.");
     }
 
     return tipText;
