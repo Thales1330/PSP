@@ -444,3 +444,61 @@ wxString Transformer::GetTipText() const
 
     return tipText;
 }
+
+TransformerElectricalData Transformer::GetPUElectricalData(double basePower) const
+{
+    TransformerElectricalData data = m_electricalData;
+    double transformerBasePower = basePower;
+    if(m_electricalData.useTransformerPower) {
+        transformerBasePower = m_electricalData.nominalPower;
+        switch(m_electricalData.nominalPowerUnit) {
+            case UNIT_MVA: {
+                transformerBasePower *= 1e6;
+            } break;
+            case UNIT_kVA: {
+                transformerBasePower *= 1e3;
+            } break;
+            default:
+                break;
+        }
+    }
+    double vb = 0.0;
+    if(m_electricalData.baseVoltage == 0) {
+        vb = m_electricalData.primaryNominalVoltage;
+        if(m_electricalData.primaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+    } else {
+        vb = m_electricalData.secondaryNominalVoltage;
+        if(m_electricalData.secondaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+    }
+    double zb = (vb * vb) / basePower;
+
+    // Resistance
+    double r = data.resistance;
+    switch(data.resistanceUnit) {
+        case UNIT_PU: {
+            if(m_electricalData.useTransformerPower) data.resistance = (basePower / transformerBasePower) * r;
+        } break;
+        case UNIT_OHM: {
+            data.resistance = r / zb;
+            data.resistanceUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+
+    // Indutive reactance
+    double xl = data.indReactance;
+    switch(data.indReactanceUnit) {
+        case UNIT_PU: {
+            if(m_electricalData.useTransformerPower) data.indReactance = (basePower / transformerBasePower) * xl;
+        } break;
+        case UNIT_OHM: {
+            data.indReactance = xl / zb;
+            data.indReactanceUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+
+    return data;
+}

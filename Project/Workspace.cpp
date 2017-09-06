@@ -135,6 +135,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     bool foundElement = false;
     Element* newElement = NULL;
     bool showNewElementForm = false;
+    bool clickOnSwitch = false;
     if(m_mode == MODE_INSERT_TEXT || m_mode == MODE_PASTE || m_mode == MODE_DRAG_PASTE) {
         m_mode = MODE_EDIT;
     } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT || m_mode == MODE_DRAG_INSERT_TEXT) {
@@ -204,6 +205,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
             // Click in a switch.
             else if(element->SwitchesContains(m_camera->ScreenToWorld(clickPoint))) {
                 element->SetOnline(element->IsOnline() ? false : true);
+                clickOnSwitch = true;
             }
         }
 
@@ -232,8 +234,12 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     UpdateStatusBar();
 
     if(showNewElementForm) {
-        if(newElement) newElement->ShowForm(this, newElement);
+        if(newElement) {
+            newElement->ShowForm(this, newElement);
+            if(m_continuousCalc) RunStaticStudies();
+        }
     }
+    if(clickOnSwitch && m_continuousCalc) RunStaticStudies();
 
     event.Skip();
 }
@@ -241,6 +247,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 {
     bool elementEdited = false;
+    bool clickOnSwitch = false;
     bool redraw = false;
 
     for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
@@ -293,6 +300,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
         // Click in a switch.
         else if(element->SwitchesContains(m_camera->ScreenToWorld(event.GetPosition()))) {
             element->SetOnline(element->IsOnline() ? false : true);
+            clickOnSwitch = true;
         }
     }
 
@@ -304,7 +312,12 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
             redraw = true;
         }
     }
-    if(elementEdited) UpdateTextElements();
+    if(elementEdited) {
+        UpdateTextElements();
+        if(m_continuousCalc) RunStaticStudies();
+    }
+    if(clickOnSwitch && m_continuousCalc) RunStaticStudies();
+
     if(redraw) Redraw();
     m_timer->Start();
 }
@@ -1443,4 +1456,28 @@ void Workspace::OnMiddleDoubleClick(wxMouseEvent& event)
 {
     Fit();
     event.Skip();
+}
+
+bool Workspace::RunStaticStudies()
+{
+    bool pfStatus, faultStatus, scStatus;
+    pfStatus = faultStatus = scStatus = false;
+
+    pfStatus = RunPowerFlow();
+
+    if(m_properties->GetSimulationPropertiesData().faultAfterPowerFlow) {
+        if(pfStatus) faultStatus = RunFault();
+    } else {
+        faultStatus = true;
+    }
+
+    if(m_properties->GetSimulationPropertiesData().scPowerAfterPowerFlow) {
+        if(pfStatus) scStatus = RunSCPower();
+    } else {
+        scStatus = true;
+    }
+
+    if(pfStatus && faultStatus && scStatus) return true;
+
+    return false;
 }

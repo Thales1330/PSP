@@ -59,14 +59,15 @@ public:
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
     virtual bool ShowForm(wxWindow* parent, Element* element);
-    virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
-    virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }
+    virtual LineElectricalData GetElectricalData() const { return m_electricalData; }
+    virtual LineElectricalData GetPUElectricalData(double basePower) const;
+    virtual void SetElectricalData(LineElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetPointList(std::vector<wxPoint2DDouble> pointList);
 
 protected:
     void UpdatePowerFlowArrowsPosition();
-    LineElectricalData m_electricaData;
+    LineElectricalData m_electricalData;
 };
 
 #endif // LINE_H

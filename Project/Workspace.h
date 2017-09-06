@@ -116,10 +116,14 @@ public:
     PropertiesData* GetProperties() const { return m_properties; }
     
     std::vector<double> GetStabilityTimeVector() const { return m_stabilityTimeVector; }
+    
+    bool IsContinuousCalculationActive() const { return m_continuousCalc; }
+    void SetContinuousCalculationActive(bool value = true) { m_continuousCalc = value; }
 
     bool RunPowerFlow();
     bool RunFault();
     bool RunSCPower();
+    bool RunStaticStudies();
     bool RunStability();
 
 protected:
@@ -162,7 +166,8 @@ protected:
     PropertiesData* m_properties = NULL;
     
     std::vector<double> m_stabilityTimeVector;
-
+    
+    bool m_continuousCalc = false;
     bool m_justOpened = false;
 };
 

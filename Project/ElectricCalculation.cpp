@@ -41,6 +41,16 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
         else if(Transformer* transformer = dynamic_cast<Transformer*>(element))
             m_transformerList.push_back(transformer);
     }
+
+    // Set buses numbers
+    int busNumber = 0;
+    for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
+        Bus* bus = *itb;
+        BusElectricalData data = bus->GetElectricalData();
+        data.number = busNumber;
+        bus->SetElectricalData(data);
+        busNumber++;
+    }
 }
 
 bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> > >& yBus,
@@ -274,15 +284,24 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                                                   std::vector<ReactiveLimits> reactiveLimit,
                                                   double systemPowerBase)
 {
-    for(int i = 0; i < (int)reactiveLimit.size(); ++i) {
-        if(reactiveLimit[i].maxLimit > -1e-5 && reactiveLimit[i].maxLimit < 1e-5) reactiveLimit[i].maxLimit = 1e-5;
-        if(reactiveLimit[i].minLimit > -1e-5 && reactiveLimit[i].minLimit < 1e-5) reactiveLimit[i].minLimit = 1e-5;
+    double zeroLimit = 1e-4;
+    for(unsigned int i = 0; i < reactiveLimit.size(); ++i) {
+        if(reactiveLimit[i].maxLimit > -zeroLimit && reactiveLimit[i].maxLimit < zeroLimit) reactiveLimit[i].maxLimit = zeroLimit;
+        if(reactiveLimit[i].minLimit > -zeroLimit && reactiveLimit[i].minLimit < zeroLimit) reactiveLimit[i].minLimit = zeroLimit;
     }
-    // Buses voltages
+    for(unsigned int i = 0; i < power.size(); ++i) {
+        if(std::real(power[i]) > -zeroLimit && std::real(power[i]) < zeroLimit)
+            power[i] = std::complex<double>(0.0, std::imag(power[i]));
+        if(std::imag(power[i]) > -zeroLimit && std::imag(power[i]) < zeroLimit)
+            power[i] = std::complex<double>(std::real(power[i]), 0.0);
+    }
+    // Buses
     for(int i = 0; i < (int)m_busList.size(); i++) {
         Bus* bus = m_busList[i];
         BusElectricalData data = bus->GetElectricalData();
         data.voltage = voltage[i];
+        data.power = power[i];
+        data.busType = busType[i];
         bus->SetElectricalData(data);
     }
 

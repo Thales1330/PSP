@@ -4,7 +4,7 @@ Line::Line() : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
-            m_electricaData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
+            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
         }
     }
 }
@@ -13,10 +13,10 @@ Line::Line(wxString name) : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
-            m_electricaData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
+            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
         }
     }
-    m_electricaData.name = name;
+    m_electricalData.name = name;
 }
 Line::~Line() {}
 bool Line::Contains(wxPoint2DDouble position) const
@@ -136,16 +136,16 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             UpdateSwitches();
 
             Bus* parentBus = static_cast<Bus*>(parent);
-            m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
-            m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
+            m_electricalData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+            m_electricalData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
 
             return false;
         }
         // Second bus.
         else if(parent != m_parentList[0]) {
             Bus* parentBus = static_cast<Bus*>(parent);
-            if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
-               m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
+            if(m_electricalData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+               m_electricalData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
                                           _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -341,8 +341,8 @@ bool Line::ShowForm(wxWindow* parent, Element* element)
 void Line::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
 {
     if(nominalVoltage.size() > 0) {
-        m_electricaData.nominalVoltage = nominalVoltage[0];
-        m_electricaData.nominalVoltageUnit = nominalVoltageUnit[0];
+        m_electricalData.nominalVoltage = nominalVoltage[0];
+        m_electricalData.nominalVoltageUnit = nominalVoltageUnit[0];
     }
 }
 
@@ -368,10 +368,10 @@ bool Line::SetNodeParent(Element* parent)
             // two different voltages buses
             Bus* parentBus = static_cast<Bus*>(parent);
             if(!m_parentList[0] && !m_parentList[1]) {
-                m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
-                m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
-            } else if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
-                      m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
+                m_electricalData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+                m_electricalData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
+            } else if(m_electricalData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+                      m_electricalData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
                                           _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -485,7 +485,7 @@ Element* Line::GetCopy()
 
 wxString Line::GetTipText() const
 {
-    wxString tipText = m_electricaData.name;
+    wxString tipText = m_electricalData.name;
 
     if(m_online) {
         tipText += "\n";
@@ -494,14 +494,92 @@ wxString Line::GetTipText() const
         busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetElectricalData().number + 1;
 
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[0].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[0].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[0].imag(), 5) + _(" p.u.");
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[1].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[1].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[1].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
     }
 
     return tipText;
+}
+
+LineElectricalData Line::GetPUElectricalData(double basePower) const
+{
+    LineElectricalData data = m_electricalData;
+    double lineBasePower = basePower;
+    if(m_electricalData.useLinePower) {
+        lineBasePower = m_electricalData.nominalPower;
+        switch(m_electricalData.nominalPowerUnit) {
+            case UNIT_MVA: {
+                lineBasePower *= 1e6;
+            } break;
+            case UNIT_kVA: {
+                lineBasePower *= 1e3;
+            } break;
+            default:
+                break;
+        }
+    }
+    double vb = m_electricalData.nominalVoltage;
+    if(m_electricalData.nominalVoltageUnit == UNIT_kV) vb *= 1e3;
+    double zb = (vb * vb) / basePower;
+
+    // Resistance
+    double r = data.resistance;
+    switch(data.resistanceUnit) {
+        case UNIT_PU: {
+            if(m_electricalData.useLinePower) data.resistance = (basePower / lineBasePower) * r;
+        } break;
+        case UNIT_OHM: {
+            data.resistance = r / zb;
+            data.resistanceUnit = UNIT_PU;
+        } break;
+        case UNIT_OHM_km: {
+            data.resistance = (r * data.lineSize) / zb;
+            data.resistanceUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+
+    // Indutive reactance
+    double xl = data.indReactance;
+    switch(data.indReactanceUnit) {
+        case UNIT_PU: {
+            if(m_electricalData.useLinePower) data.indReactance = (basePower / lineBasePower) * xl;
+        } break;
+        case UNIT_OHM: {
+            data.indReactance = xl / zb;
+            data.indReactanceUnit = UNIT_PU;
+        } break;
+        case UNIT_OHM_km: {
+            data.indReactance = (xl * data.lineSize) / zb;
+            data.indReactanceUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+
+    // Capacitive susceptance
+    double b = data.capSusceptance;
+    switch(data.capSusceptanceUnit) {
+        case UNIT_PU: {
+            if(m_electricalData.useLinePower) data.capSusceptance = (basePower / lineBasePower) * b;
+        } break;
+        case UNIT_S: {
+            data.capSusceptance = b / zb;
+            data.capSusceptanceUnit = UNIT_PU;
+        } break;
+        case UNIT_S_km: {
+            data.capSusceptance = (b * data.lineSize) / zb;
+            data.capSusceptanceUnit = UNIT_PU;
+        } break;
+        default:
+            break;
+    }
+
+    return data;
 }

@@ -16,6 +16,8 @@ struct BusElectricalData {
 
     // Power flow (p.u.)
     std::complex<double> voltage = std::complex<double>(1.0, 0.0);
+    std::complex<double> power = std::complex<double>(0.0, 0.0);
+    int busType = 2; // PQ
 
     // Fault
     bool hasFault = false;

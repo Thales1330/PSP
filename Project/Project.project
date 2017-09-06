@@ -104,6 +104,7 @@
       <VirtualDirectory Name="simulation GUI">
         <File Name="ChartView.cpp"/>
         <File Name="ControlEditor.cpp"/>
+        <File Name="DataReport.cpp"/>
       </VirtualDirectory>
       <VirtualDirectory Name="files">
         <File Name="FileHanding.cpp"/>
@@ -216,6 +217,7 @@
       <VirtualDirectory Name="simulation GUI">
         <File Name="ChartView.h"/>
         <File Name="ControlEditor.h"/>
+        <File Name="DataReport.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
@@ -231,6 +233,7 @@
       <File Name="ControlEditorBitmaps.cpp"/>
       <File Name="ChartViewBitmaps.cpp"/>
       <File Name="PropertiesFormBitmaps.cpp"/>
+      <File Name="DataReportBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
       <File Name="MainFrameBase.h"/>
@@ -245,6 +248,8 @@
       <File Name="ChartViewBase.cpp"/>
       <File Name="PropertiesForm.h"/>
       <File Name="PropertiesForm.cpp"/>
+      <File Name="DataReportBase.h"/>
+      <File Name="DataReportBase.cpp"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>
@@ -252,6 +257,7 @@
     <File Name="ControlEditor.wxcp"/>
     <File Name="ChartView.wxcp"/>
     <File Name="PropertiesForm.wxcp"/>
+    <File Name="DataReport.wxcp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
