@@ -16,6 +16,8 @@ DataReport::~DataReport() {}
 void DataReport::SetHeaders()
 {
     // Headers choices fill
+    wxString omega = static_cast<wxString>(L'\u03A9');
+
     m_voltageChoices.Add(_("Voltage (p.u.)"));
     m_voltageChoices.Add(_("Voltage (V)"));
     m_voltageChoices.Add(_("Voltage (kV)"));
@@ -29,6 +31,15 @@ void DataReport::SetHeaders()
     m_reactivePowerChoices.Add(_("Reactive Power (VAr)"));
     m_reactivePowerChoices.Add(_("Reactive Power (kVAr)"));
     m_reactivePowerChoices.Add(_("Reactive Power (MVAr)"));
+
+    m_resistanceChoices.Add(_("R (p.u.)"));
+    m_resistanceChoices.Add(_("R (") + omega + wxT(")"));
+
+    m_indReactanceChoices.Add(_("XL (p.u.)"));
+    m_indReactanceChoices.Add(_("XL (") + omega + wxT(")"));
+
+    m_capSusceptanceChoices.Add(_("B (p.u.)"));
+    m_capSusceptanceChoices.Add(_("B (S)"));
 
     // Power flow
     m_gridPowerFlow->SetCellValue(0, 0, _("Type"));
@@ -56,9 +67,12 @@ void DataReport::SetHeaders()
     m_gridPFBranches->SetCellValue(0, 1, _("Name"));
     m_gridPFBranches->SetCellValue(0, 2, _("From"));
     m_gridPFBranches->SetCellValue(0, 3, _("To"));
-    m_gridPFBranches->SetCellValue(0, 4, _("R (p.u.)"));
-    m_gridPFBranches->SetCellValue(0, 5, _("XL (p.u.)"));
-    m_gridPFBranches->SetCellValue(0, 6, _("B (p.u.)"));
+    m_gridPFBranches->SetCellEditor(0, 4, new wxGridCellChoiceEditor(m_resistanceChoices));
+    m_gridPFBranches->SetCellValue(0, 4, m_resistanceChoices[0]);
+    m_gridPFBranches->SetCellEditor(0, 5, new wxGridCellChoiceEditor(m_indReactanceChoices));
+    m_gridPFBranches->SetCellValue(0, 5, m_indReactanceChoices[0]);
+    m_gridPFBranches->SetCellEditor(0, 6, new wxGridCellChoiceEditor(m_capSusceptanceChoices));
+    m_gridPFBranches->SetCellValue(0, 6, m_capSusceptanceChoices[0]);
     m_gridPFBranches->SetCellValue(0, 7, _("TAP"));
     m_gridPFBranches->SetCellValue(0, 8, _("Phase Shift"));
     m_gridPFBranches->SetCellValue(0, 9, _("Online"));
@@ -228,6 +242,10 @@ void DataReport::FillValues(GridSelection gridToFill)
             Line* line = *it;
             auto data = line->GetPUElectricalData(basePower);
 
+            double vb = data.nominalVoltage;
+            if(data.nominalVoltageUnit == UNIT_kV) vb *= 1e3;
+            double zb = (vb * vb) / basePower;
+
             m_gridPFBranches->SetCellValue(rowNumber, 0, _("Line"));
             m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
 
@@ -240,9 +258,15 @@ void DataReport::FillValues(GridSelection gridToFill)
             m_gridPFBranches->SetCellValue(rowNumber, 2, busName1);
             m_gridPFBranches->SetCellValue(rowNumber, 3, busName2);
 
-            m_gridPFBranches->SetCellValue(rowNumber, 4, line->StringFromDouble(data.resistance));
-            m_gridPFBranches->SetCellValue(rowNumber, 5, line->StringFromDouble(data.indReactance));
-            m_gridPFBranches->SetCellValue(rowNumber, 6, line->StringFromDouble(data.capSusceptance));
+            double k = 1.0;
+            if(m_gridPFBranches->GetCellValue(0, 4) == m_resistanceChoices[1]) k = zb;
+            m_gridPFBranches->SetCellValue(rowNumber, 4, line->StringFromDouble(data.resistance * k));
+            k = 1.0;
+            if(m_gridPFBranches->GetCellValue(0, 5) == m_indReactanceChoices[1]) k = zb;
+            m_gridPFBranches->SetCellValue(rowNumber, 5, line->StringFromDouble(data.indReactance * k));
+            k = 1.0;
+            if(m_gridPFBranches->GetCellValue(0, 6) == m_capSusceptanceChoices[1]) k = zb;
+            m_gridPFBranches->SetCellValue(rowNumber, 6, line->StringFromDouble(data.capSusceptance / k));
             m_gridPFBranches->SetCellValue(rowNumber, 7, "-");
             m_gridPFBranches->SetCellValue(rowNumber, 8, "-");
 
@@ -254,6 +278,16 @@ void DataReport::FillValues(GridSelection gridToFill)
         for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) {
             Transformer* transformer = *it;
             auto data = transformer->GetPUElectricalData(basePower);
+
+            double vb = 0.0;
+            if(data.baseVoltage == 0) {
+                vb = data.primaryNominalVoltage;
+                if(data.primaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+            } else {
+                vb = data.secondaryNominalVoltage;
+                if(data.secondaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+            }
+            double zb = (vb * vb) / basePower;
 
             m_gridPFBranches->SetCellValue(rowNumber, 0, _("Transformer"));
             m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
@@ -267,8 +301,12 @@ void DataReport::FillValues(GridSelection gridToFill)
             m_gridPFBranches->SetCellValue(rowNumber, 2, busName1);
             m_gridPFBranches->SetCellValue(rowNumber, 3, busName2);
 
-            m_gridPFBranches->SetCellValue(rowNumber, 4, transformer->StringFromDouble(data.resistance));
-            m_gridPFBranches->SetCellValue(rowNumber, 5, transformer->StringFromDouble(data.indReactance));
+            double k = 1.0;
+            if(m_gridPFBranches->GetCellValue(0, 4) == m_resistanceChoices[1]) k = zb;
+            m_gridPFBranches->SetCellValue(rowNumber, 4, transformer->StringFromDouble(data.resistance * k));
+            k = 1.0;
+            if(m_gridPFBranches->GetCellValue(0, 5) == m_indReactanceChoices[1]) k = zb;
+            m_gridPFBranches->SetCellValue(rowNumber, 5, transformer->StringFromDouble(data.indReactance * k));
             m_gridPFBranches->SetCellValue(rowNumber, 6, "-");
             m_gridPFBranches->SetCellValue(rowNumber, 7, transformer->StringFromDouble(data.turnsRatio));
             m_gridPFBranches->SetCellValue(rowNumber, 8, transformer->StringFromDouble(data.phaseShift));

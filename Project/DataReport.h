@@ -42,5 +42,8 @@ public:
     wxArrayString m_voltageChoices;
     wxArrayString m_activePowerChoices;
     wxArrayString m_reactivePowerChoices;
+    wxArrayString m_resistanceChoices;
+    wxArrayString m_indReactanceChoices;
+    wxArrayString m_capSusceptanceChoices;
 };
 #endif  // DATAREPORT_H
