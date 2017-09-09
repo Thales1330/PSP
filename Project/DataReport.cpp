@@ -5,9 +5,23 @@
 DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(parent)
 {
     m_workspace = workspace;
+
+    m_headerColour = wxColour(150, 150, 150);
+    m_offlineColour = wxColour(100, 100, 100);
+    m_oddRowColour = wxColour(220, 220, 220);
+    m_evenRowColour = wxColour(255, 255, 255);
+
     CreateGrids();
     SetHeaders();
     FillValues();
+
+    SetRowsColours(m_gridPowerFlow);
+    SetRowsColours(m_gridPFBuses);
+    SetRowsColours(m_gridPFBranches);
+    SetRowsColours(m_gridFault, 2);
+    SetRowsColours(m_gridFaultBuses, 2);
+    SetRowsColours(m_gridFaultBranches, 2);
+    SetRowsColours(m_gridFaultGenerators, 2);
 
     Layout();
 }
@@ -15,7 +29,6 @@ DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(
 DataReport::~DataReport() {}
 void DataReport::CreateGrids()
 {
-    wxColour headerColour(200, 200, 200);
     wxFont headerFont = m_gridPowerFlow->GetLabelFont();
     headerFont.SetWeight(wxFONTWEIGHT_BOLD);
 
@@ -33,7 +46,7 @@ void DataReport::CreateGrids()
     m_gridPowerFlow->HideColLabels();
     m_gridPowerFlow->HideRowLabels();
     for(int i = 0; i < 7; ++i) {
-        m_gridPowerFlow->SetCellBackgroundColour(0, i, headerColour);
+        m_gridPowerFlow->SetCellBackgroundColour(0, i, m_headerColour);
         m_gridPowerFlow->SetCellFont(0, i, headerFont);
     }
     m_gridPowerFlow->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
@@ -48,7 +61,7 @@ void DataReport::CreateGrids()
     m_gridPFBuses->HideColLabels();
     m_gridPFBuses->HideRowLabels();
     for(int i = 0; i < 6; ++i) {
-        m_gridPFBuses->SetCellBackgroundColour(0, i, headerColour);
+        m_gridPFBuses->SetCellBackgroundColour(0, i, m_headerColour);
         m_gridPFBuses->SetCellFont(0, i, headerFont);
     }
     m_gridPFBuses->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
@@ -63,7 +76,7 @@ void DataReport::CreateGrids()
     m_gridPFBranches->HideColLabels();
     m_gridPFBranches->HideRowLabels();
     for(int i = 0; i < 10; ++i) {
-        m_gridPFBranches->SetCellBackgroundColour(0, i, headerColour);
+        m_gridPFBranches->SetCellBackgroundColour(0, i, m_headerColour);
         m_gridPFBranches->SetCellFont(0, i, headerFont);
     }
     m_gridPFBranches->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
@@ -79,7 +92,7 @@ void DataReport::CreateGrids()
     m_gridFault->HideRowLabels();
     for(int i = 0; i < 2; ++i) {
         for(int j = 0; j < 7; ++j) {
-            m_gridFault->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFault->SetCellBackgroundColour(i, j, m_headerColour);
             m_gridFault->SetCellFont(i, j, headerFont);
         }
     }
@@ -103,7 +116,7 @@ void DataReport::CreateGrids()
     m_gridFaultBuses->HideRowLabels();
     for(int i = 0; i < 2; ++i) {
         for(int j = 0; j < 7; ++j) {
-            m_gridFaultBuses->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFaultBuses->SetCellBackgroundColour(i, j, m_headerColour);
             m_gridFaultBuses->SetCellFont(i, j, headerFont);
         }
     }
@@ -124,7 +137,7 @@ void DataReport::CreateGrids()
     m_gridFaultBranches->HideRowLabels();
     for(int i = 0; i < 2; ++i) {
         for(int j = 0; j < 11; ++j) {
-            m_gridFaultBranches->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFaultBranches->SetCellBackgroundColour(i, j, m_headerColour);
             m_gridFaultBranches->SetCellFont(i, j, headerFont);
         }
     }
@@ -149,7 +162,7 @@ void DataReport::CreateGrids()
     m_gridFaultGenerators->HideRowLabels();
     for(int i = 0; i < 2; ++i) {
         for(int j = 0; j < 7; ++j) {
-            m_gridFaultGenerators->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFaultGenerators->SetCellBackgroundColour(i, j, m_headerColour);
             m_gridFaultGenerators->SetCellFont(i, j, headerFont);
         }
     }
@@ -299,8 +312,6 @@ void DataReport::SetHeaders()
 
 void DataReport::FillValues(GridSelection gridToFill)
 {
-    wxColour offlineColour(100, 100, 100);
-
     m_changingValues = true;
     ElectricCalculation eCalc;
     eCalc.GetElementsFromList(m_workspace->GetElementList());
@@ -321,6 +332,7 @@ void DataReport::FillValues(GridSelection gridToFill)
     auto lineList = eCalc.GetLineList();
     auto transformerList = eCalc.GetTransformerList();
     auto busList = eCalc.GetBusList();
+    auto generatorList = eCalc.GetSyncGeneratorList();
 
     // Power Flow
     if(gridToFill == GRID_ALL || gridToFill == GRID_PF) {
@@ -354,7 +366,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             wxColour textColour = m_gridPowerFlow->GetDefaultCellTextColour();
             if(!line->IsOnline()) {
                 isOnline = _("No");
-                textColour = offlineColour;
+                textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
                 for(int j = 0; j < 7; ++j) {
@@ -403,7 +415,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             wxColour textColour = m_gridPowerFlow->GetDefaultCellTextColour();
             if(!transformer->IsOnline()) {
                 isOnline = _("No");
-                textColour = offlineColour;
+                textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
                 for(int j = 0; j < 7; ++j) {
@@ -511,7 +523,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             wxColour textColour = m_gridPFBranches->GetDefaultCellTextColour();
             if(!line->IsOnline()) {
                 isOnline = _("No");
-                textColour = offlineColour;
+                textColour = m_offlineColour;
             }
             for(int j = 0; j < 10; ++j) {
                 m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour);
@@ -562,7 +574,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             wxColour textColour = m_gridPFBranches->GetDefaultCellTextColour();
             if(!transformer->IsOnline()) {
                 isOnline = _("No");
-                textColour = offlineColour;
+                textColour = m_offlineColour;
             }
             for(int j = 0; j < 10; ++j) {
                 m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour);
@@ -596,7 +608,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             auto data = bus->GetElectricalData();
             if(data.hasFault) {
                 double vb = bus->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
-                double ib = basePower / vb;
+                double ib = basePower / (std::sqrt(3.0) * vb);
 
                 m_gridFault->SetCellValue(rowNumber, 0, data.name);
 
@@ -697,7 +709,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             auto data = line->GetPUElectricalData(basePower);
 
             double vb = line->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
-            double ib = basePower / vb;
+            double ib = basePower / (std::sqrt(3.0) * vb);
 
             wxString busName1 = "-";
             if(line->GetParentList()[0])
@@ -710,7 +722,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             wxColour textColour = m_gridFaultBranches->GetDefaultCellTextColour();
             if(!line->IsOnline()) {
                 isOnline = _("No");
-                textColour = offlineColour;
+                textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
                 for(int j = 0; j < 11; ++j) {
@@ -799,9 +811,9 @@ void DataReport::FillValues(GridSelection gridToFill)
             auto data = transformer->GetPUElectricalData(basePower);
 
             double vb = transformer->GetValueFromUnit(data.primaryNominalVoltage, data.primaryNominalVoltageUnit);
-            double ibp = basePower / vb;
+            double ibp = basePower / (std::sqrt(3.0) * vb);
             vb = transformer->GetValueFromUnit(data.secondaryNominalVoltage, data.secondaryNominalVoltageUnit);
-            double ibs = basePower / vb;
+            double ibs = basePower / (std::sqrt(3.0) * vb);
 
             wxString busName1 = "-";
             if(transformer->GetParentList()[0])
@@ -814,7 +826,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             wxColour textColour = m_gridFaultBranches->GetDefaultCellTextColour();
             if(!transformer->IsOnline()) {
                 isOnline = _("No");
-                textColour = offlineColour;
+                textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
                 for(int j = 0; j < 11; ++j) {
@@ -900,7 +912,65 @@ void DataReport::FillValues(GridSelection gridToFill)
 
         m_gridFaultBranches->AutoSize();
     }
+
+    // Fault generators
+    if(gridToFill == GRID_ALL || gridToFill == GRID_FAULTGENERATORS) {
+        rowNumber = 2;
+        for(auto it = generatorList.begin(), itEnd = generatorList.end(); it != itEnd; ++it) {
+            SyncGenerator* generator = *it;
+            auto data = generator->GetPUElectricalData(basePower);
+            double vb = generator->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
+            double ib = basePower / (std::sqrt(3.0) * vb);
+
+            m_gridFaultGenerators->SetCellValue(rowNumber, 0, data.name);
+
+            double kCurrent = 1.0;
+            if(m_gridFaultGenerators->GetCellValue(1, 1) == m_currentChoices[1])
+                kCurrent = ib;
+            else if(m_gridFaultGenerators->GetCellValue(1, 1) == m_currentChoices[2])
+                kCurrent = ib / 1e3;
+            m_gridFaultGenerators->SetCellValue(rowNumber, 1,
+                                                generator->StringFromDouble(std::abs(data.faultCurrent[0]) * kCurrent));
+            m_gridFaultGenerators->SetCellValue(
+                rowNumber, 2, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0]))));
+
+            kCurrent = 1.0;
+            if(m_gridFaultGenerators->GetCellValue(1, 3) == m_currentChoices[1])
+                kCurrent = ib;
+            else if(m_gridFaultGenerators->GetCellValue(1, 3) == m_currentChoices[2])
+                kCurrent = ib / 1e3;
+            m_gridFaultGenerators->SetCellValue(rowNumber, 3,
+                                                generator->StringFromDouble(std::abs(data.faultCurrent[1]) * kCurrent));
+            m_gridFaultGenerators->SetCellValue(
+                rowNumber, 4, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1]))));
+
+            kCurrent = 1.0;
+            if(m_gridFaultGenerators->GetCellValue(1, 5) == m_currentChoices[1])
+                kCurrent = ib;
+            else if(m_gridFaultGenerators->GetCellValue(1, 5) == m_currentChoices[2])
+                kCurrent = ib / 1e3;
+            m_gridFaultGenerators->SetCellValue(rowNumber, 5,
+                                                generator->StringFromDouble(std::abs(data.faultCurrent[2]) * kCurrent));
+            m_gridFaultGenerators->SetCellValue(
+                rowNumber, 6, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[2]))));
+
+            rowNumber++;
+        }
+        m_gridFaultGenerators->AutoSize();
+    }
     m_changingValues = false;
+}
+
+void DataReport::SetRowsColours(wxGrid* grid, int rowStart)
+{
+    for(int i = rowStart; i < grid->GetNumberRows(); ++i) {
+        wxGridCellAttr* attr = grid->GetOrCreateCellAttr(i, 0);
+        if((i - rowStart) % 2 == 0)
+            attr->SetBackgroundColour(m_evenRowColour);
+        else
+            attr->SetBackgroundColour(m_oddRowColour);
+        grid->SetRowAttr(i, attr);
+    }
 }
 
 void DataReport::OnPFBusGridChanged(wxGridEvent& event)

@@ -180,6 +180,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
             // Click in selected element node.
             if(element->NodeContains(m_camera->ScreenToWorld(clickPoint)) != 0 && element->IsSelected()) {
                 m_mode = MODE_MOVE_NODE;
+                m_disconnectedElement = true;
                 foundElement = true;
             }
 
@@ -377,6 +378,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
                             // The child have a parent that is the element.
                             if(parent == element) {
                                 child->UpdateNodes();
+                                m_disconnectedElement = true;
                             }
                         }
                     }
@@ -454,6 +456,12 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
     if(updateVoltages) {
         ValidateElementsVoltages();
     }
+
+    if(m_continuousCalc && m_disconnectedElement) {
+        m_disconnectedElement = false;
+        RunStaticStudies();
+    }
+
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
     Redraw();
     UpdateStatusBar();
@@ -717,9 +725,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
                 // Tests - Ctrl + Shift + L
                 if(event.ControlDown() && event.ShiftDown()) {
-                    ControlEditor* ce =
-                        new ControlEditor(this, IOControl::IN_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
-                    ce->Show();
+                    UpdateTextElements();
                 }
             } break;
             case 'T':  // Insert a transformer.
@@ -1043,6 +1049,8 @@ void Workspace::Fit()
     }
 
     if(!GetElementsCorners(leftUpCorner, rightDownCorner, elementList)) return;
+    wxPoint2DDouble middleCoords = (leftUpCorner + rightDownCorner) / 2.0;
+
     int width = 0.0;
     int height = 0.0;
     GetSize(&width, &height);
@@ -1056,8 +1064,8 @@ void Workspace::Fit()
 
     m_camera->SetScale(scale);
 
-    m_camera->StartTranslation(leftUpCorner);
-    m_camera->SetTranslation(wxPoint2DDouble(0, 0));
+    m_camera->StartTranslation(middleCoords);
+    m_camera->SetTranslation(wxPoint2DDouble(width / 2, height / 2));
     Redraw();
 }
 
@@ -1130,7 +1138,7 @@ void Workspace::UpdateTextElements()
 {
     for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
         Text* text = *it;
-        text->UpdateText(100e6);
+        text->UpdateText(m_properties->GetSimulationPropertiesData().basePower);
     }
 }
 

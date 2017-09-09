@@ -77,35 +77,21 @@ SyncMotorElectricalData SyncMotor::GetPUElectricalData(double systemPowerBase)
     double machineBaseImpedance = (baseVoltage * baseVoltage) / machineBasePower;
 
     // Fault data
+    if(data.useMachineBase) {
+        data.positiveResistance = (data.positiveResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.positiveReactance = (data.positiveReactance * machineBaseImpedance) / systemBaseImpedance;
+        data.negativeResistance = (data.negativeResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.negativeReactance = (data.negativeReactance * machineBaseImpedance) / systemBaseImpedance;
+        data.zeroResistance = (data.zeroResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.zeroReactance = (data.zeroReactance * machineBaseImpedance) / systemBaseImpedance;
+        data.groundResistance = (data.groundResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.groundReactance = (data.groundReactance * machineBaseImpedance) / systemBaseImpedance;
+    }
 
-    // Pos. seq. resistance
-    double r1 = data.positiveResistance;
-    if(data.useMachineBase) data.positiveResistance = (r1 * machineBaseImpedance) / systemBaseImpedance;
-
-    // Pos. seq. reactance
-    double x1 = data.positiveReactance;
-    if(data.useMachineBase) data.positiveReactance = (x1 * machineBaseImpedance) / systemBaseImpedance;
-
-    // Neg. seq. resistance
-    double r2 = data.negativeResistance;
-    if(data.useMachineBase) data.negativeResistance = (r2 * machineBaseImpedance) / systemBaseImpedance;
-
-    // Neg. seq. reactance
-    double x2 = data.negativeReactance;
-    if(data.useMachineBase) data.negativeReactance = (x2 * machineBaseImpedance) / systemBaseImpedance;
-
-    // Zero seq. resistance
-    double r0 = data.zeroResistance;
-    if(data.useMachineBase) data.zeroResistance = (r0 * machineBaseImpedance) / systemBaseImpedance;
-
-    // Zero seq. reactance
-    double x0 = data.zeroReactance;
-    if(data.useMachineBase) data.zeroReactance = (x0 * machineBaseImpedance) / systemBaseImpedance;
-    
     if(!m_online) {
-        data.faultCurrent[0] = std::complex<double>(0,0);
-        data.faultCurrent[1] = std::complex<double>(0,0);
-        data.faultCurrent[2] = std::complex<double>(0,0);
+        data.faultCurrent[0] = std::complex<double>(0, 0);
+        data.faultCurrent[1] = std::complex<double>(0, 0);
+        data.faultCurrent[2] = std::complex<double>(0, 0);
     }
 
     return data;

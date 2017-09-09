@@ -168,6 +168,7 @@ protected:
     std::vector<double> m_stabilityTimeVector;
     
     bool m_continuousCalc = false;
+    bool m_disconnectedElement = false;
     bool m_justOpened = false;
 };
 
