@@ -59,69 +59,69 @@ bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
 SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowerBase)
 {
     SyncGeneratorElectricalData data = m_electricalData;
-    switch(data.activePowerUnit) {
-        case UNIT_W: {
-            data.activePower = data.activePower / systemPowerBase;
-            data.activePowerUnit = UNIT_PU;
-        } break;
-        case UNIT_kW: {
-            data.activePower = (data.activePower * 1e3) / systemPowerBase;
-            data.activePowerUnit = UNIT_PU;
-        } break;
-        case UNIT_MW: {
-            data.activePower = (data.activePower * 1e6) / systemPowerBase;
-            data.activePowerUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    double machineBasePower = 1.0;
+    if(data.useMachineBase) {
+        machineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
     }
-    switch(data.reactivePowerUnit) {
-        case UNIT_VAr: {
-            data.reactivePower = data.reactivePower / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
-        } break;
-        case UNIT_kVAr: {
-            data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
-        } break;
-        case UNIT_MVAr: {
-            data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+
+    // Active power
+    double activePower = GetValueFromUnit(data.activePower, data.activePowerUnit);
+    if(!m_online) activePower = 0.0;
+    if(data.activePowerUnit == UNIT_PU) {
+        if(data.useMachineBase) data.activePower = (activePower * machineBasePower) / systemPowerBase;
+    } else {
+        data.activePower = activePower / systemPowerBase;
     }
-    switch(data.maxReactiveUnit) {
-        case UNIT_VAr: {
-            data.maxReactive = data.maxReactive / systemPowerBase;
-            data.maxReactiveUnit = UNIT_PU;
-        } break;
-        case UNIT_kVAr: {
-            data.maxReactive = (data.maxReactive * 1e3) / systemPowerBase;
-            data.maxReactiveUnit = UNIT_PU;
-        } break;
-        case UNIT_MVAr: {
-            data.maxReactive = (data.maxReactive * 1e6) / systemPowerBase;
-            data.maxReactiveUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    data.activePowerUnit = UNIT_PU;
+
+    // Reactive power
+    double reactivePower = GetValueFromUnit(data.reactivePower, data.reactivePowerUnit);
+    if(!m_online) reactivePower = 0.0;
+    if(data.reactivePowerUnit == UNIT_PU) {
+        if(data.useMachineBase) data.reactivePower = (reactivePower * machineBasePower) / systemPowerBase;
+    } else {
+        data.reactivePower = reactivePower / systemPowerBase;
     }
-    switch(data.minReactiveUnit) {
-        case UNIT_VAr: {
-            data.minReactive = data.minReactive / systemPowerBase;
-            data.minReactiveUnit = UNIT_PU;
-        } break;
-        case UNIT_kVAr: {
-            data.minReactive = (data.minReactive * 1e3) / systemPowerBase;
-            data.minReactiveUnit = UNIT_PU;
-        } break;
-        case UNIT_MVAr: {
-            data.minReactive = (data.minReactive * 1e6) / systemPowerBase;
-            data.minReactiveUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    data.reactivePowerUnit = UNIT_PU;
+
+    // Max reactive power
+    double maxReactive = GetValueFromUnit(data.maxReactive, data.maxReactiveUnit);
+    if(data.maxReactiveUnit == UNIT_PU) {
+        if(data.useMachineBase) data.maxReactive = (maxReactive * machineBasePower) / systemPowerBase;
+    } else {
+        data.maxReactive = maxReactive / systemPowerBase;
+    }
+    data.maxReactiveUnit = UNIT_PU;
+
+    // Min reactive power
+    double minReactive = GetValueFromUnit(data.minReactive, data.minReactiveUnit);
+    if(data.minReactiveUnit == UNIT_PU) {
+        if(data.useMachineBase) data.minReactive = (minReactive * machineBasePower) / systemPowerBase;
+    } else {
+        data.minReactive = minReactive / systemPowerBase;
+    }
+    data.minReactiveUnit = UNIT_PU;
+
+    double baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
+    double systemBaseImpedance = (baseVoltage * baseVoltage) / systemPowerBase;
+    double machineBaseImpedance = (baseVoltage * baseVoltage) / machineBasePower;
+
+    // Fault data
+    if(data.useMachineBase) {
+        data.positiveResistance = (data.positiveResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.positiveReactance = (data.positiveReactance * machineBaseImpedance) / systemBaseImpedance;
+        data.negativeResistance = (data.negativeResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.negativeReactance = (data.negativeReactance * machineBaseImpedance) / systemBaseImpedance;
+        data.zeroResistance = (data.zeroResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.zeroReactance = (data.zeroReactance * machineBaseImpedance) / systemBaseImpedance;
+        data.groundResistance = (data.groundResistance * machineBaseImpedance) / systemBaseImpedance;
+        data.groundReactance = (data.groundReactance * machineBaseImpedance) / systemBaseImpedance;
+    }
+
+    if(!m_online) {
+        data.faultCurrent[0] = std::complex<double>(0, 0);
+        data.faultCurrent[1] = std::complex<double>(0, 0);
+        data.faultCurrent[2] = std::complex<double>(0, 0);
     }
 
     return data;

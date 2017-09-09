@@ -4,7 +4,7 @@ Line::Line() : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
-            m_electricaData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
+            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
         }
     }
 }
@@ -13,10 +13,10 @@ Line::Line(wxString name) : Branch()
 {
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 3; j++) {
-            m_electricaData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
+            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
         }
     }
-    m_electricaData.name = name;
+    m_electricalData.name = name;
 }
 Line::~Line() {}
 bool Line::Contains(wxPoint2DDouble position) const
@@ -136,16 +136,16 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             UpdateSwitches();
 
             Bus* parentBus = static_cast<Bus*>(parent);
-            m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
-            m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
+            m_electricalData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+            m_electricalData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
 
             return false;
         }
         // Second bus.
         else if(parent != m_parentList[0]) {
             Bus* parentBus = static_cast<Bus*>(parent);
-            if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
-               m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
+            if(m_electricalData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+               m_electricalData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
                                           _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -341,8 +341,8 @@ bool Line::ShowForm(wxWindow* parent, Element* element)
 void Line::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
 {
     if(nominalVoltage.size() > 0) {
-        m_electricaData.nominalVoltage = nominalVoltage[0];
-        m_electricaData.nominalVoltageUnit = nominalVoltageUnit[0];
+        m_electricalData.nominalVoltage = nominalVoltage[0];
+        m_electricalData.nominalVoltageUnit = nominalVoltageUnit[0];
     }
 }
 
@@ -368,10 +368,10 @@ bool Line::SetNodeParent(Element* parent)
             // two different voltages buses
             Bus* parentBus = static_cast<Bus*>(parent);
             if(!m_parentList[0] && !m_parentList[1]) {
-                m_electricaData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
-                m_electricaData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
-            } else if(m_electricaData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
-                      m_electricaData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
+                m_electricalData.nominalVoltage = parentBus->GetElectricalData().nominalVoltage;
+                m_electricalData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
+            } else if(m_electricalData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
+                      m_electricalData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
                 wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
                                                   "Use a transformer or edit the bus properties."),
                                           _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -485,7 +485,7 @@ Element* Line::GetCopy()
 
 wxString Line::GetTipText() const
 {
-    wxString tipText = m_electricaData.name;
+    wxString tipText = m_electricalData.name;
 
     if(m_online) {
         tipText += "\n";
@@ -494,14 +494,80 @@ wxString Line::GetTipText() const
         busNumber[1] = static_cast<Bus*>(m_parentList[1])->GetElectricalData().number + 1;
 
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[0].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[0].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[0], busNumber[1]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[0].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[0].imag(), 5) + _(" p.u.");
         tipText += _("\nP") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[1].real(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[1].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
-                   wxString::FromDouble(m_electricaData.powerFlow[1].imag(), 5) + _(" p.u.");
+                   wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
     }
 
     return tipText;
+}
+
+LineElectricalData Line::GetPUElectricalData(double systemBasePower)
+{
+    LineElectricalData data = m_electricalData;
+    double lineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
+    double baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
+    double systemBaseImpedance = (baseVoltage * baseVoltage) / systemBasePower;
+    double lineBaseImpedance = (baseVoltage * baseVoltage) / lineBasePower;
+
+    // Resistance
+    double r = data.resistance;
+    if(data.resistanceUnit == UNIT_OHM_km) r *= data.lineSize;
+    if(data.resistanceUnit == UNIT_PU) {
+        if(data.useLinePower) data.resistance = (r * lineBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.resistance = r / systemBaseImpedance;
+    }
+    data.resistanceUnit = UNIT_PU;
+
+    // Inductive reactance
+    double x = data.indReactance;
+    if(data.indReactanceUnit == UNIT_OHM_km) x *= data.lineSize;
+    if(data.indReactanceUnit == UNIT_PU) {
+        if(data.useLinePower) data.indReactance = (x * lineBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.indReactance = x / systemBaseImpedance;
+    }
+    data.indReactanceUnit = UNIT_PU;
+
+    // Capacitive susceptance
+    double b = data.capSusceptance;
+    if(data.capSusceptanceUnit == UNIT_OHM_km) b *= data.lineSize;
+    if(data.capSusceptanceUnit == UNIT_PU) {
+        if(data.useLinePower) data.capSusceptance = (b * lineBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.capSusceptance = b / systemBaseImpedance;
+    }
+    data.capSusceptanceUnit = UNIT_PU;
+
+    // Fault
+
+    // Zero seq. resistance
+    double r0 = data.zeroResistance;
+    if(data.useLinePower) data.zeroResistance = (r0 * lineBaseImpedance) / systemBaseImpedance;
+
+    // Zero seq. ind. reactance
+    double x0 = data.zeroIndReactance;
+    if(data.useLinePower) data.zeroIndReactance = (x0 * lineBaseImpedance) / systemBaseImpedance;
+
+    // Zero seq. cap. susceptance
+    double b0 = data.zeroCapSusceptance;
+    if(data.useLinePower) data.zeroCapSusceptance = (b0 * lineBaseImpedance) / systemBaseImpedance;
+    
+    if(!m_online) {
+        data.powerFlow[0] = std::complex<double>(0,0);
+        data.powerFlow[1] = std::complex<double>(0,0);
+        data.faultCurrent[0][0] = std::complex<double>(0,0);
+        data.faultCurrent[0][1] = std::complex<double>(0,0);
+        data.faultCurrent[0][2] = std::complex<double>(0,0);
+        data.faultCurrent[1][0] = std::complex<double>(0,0);
+        data.faultCurrent[1][1] = std::complex<double>(0,0);
+        data.faultCurrent[1][2] = std::complex<double>(0,0);
+    }
+
+    return data;
 }

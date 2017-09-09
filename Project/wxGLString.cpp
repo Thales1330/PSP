@@ -10,9 +10,8 @@
 
 GLuint* loadImage(wxImage* img)
 {
-
-    GLuint* ID = new GLuint[1];
-    glGenTextures(1, &ID[0]);
+    GLuint* ID = new GLuint;
+    glGenTextures(1, ID);
 
     glBindTexture(GL_TEXTURE_2D, *ID);
 
@@ -42,8 +41,8 @@ GLuint* loadImage(wxImage* img)
 
             // alpha
             imageData[(x + y * w) * bytesPerPixel + 3] = 255 - bitmapData[(x + (rev_val - y) * w) * 3];
-        } // next
-    }     // next
+        }  // next
+    }      // next
 
     glTexImage2D(GL_TEXTURE_2D, 0, bytesPerPixel, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
@@ -66,17 +65,17 @@ class TextTexture
     friend class wxGLStringArray;
     friend class wxGLStringNumber;
 
-private:
+   private:
     GLuint* ID = NULL;
 
-protected:
+   protected:
     GLuint* getID();
 
     TextTexture();
     TextTexture(wxBitmap& bmp);
     void load(wxImage* img);
 
-public:
+   public:
     ~TextTexture();
 };
 
@@ -133,9 +132,7 @@ void TextGLDrawable::scale(float k)
 }
 
 void TextGLDrawable::setImage(TextTexture* image) { TextGLDrawable::image = image; }
-
 void TextGLDrawable::rotate(int angle) { TextGLDrawable::angle = angle; }
-
 void TextGLDrawable::render() const
 {
     assert(image);
@@ -169,20 +166,17 @@ void TextGLDrawable::render() const
 #endif
 
 TextTexture::TextTexture() {}
-
 TextTexture::TextTexture(wxBitmap& bmp)
 {
     wxImage img = bmp.ConvertToImage();
     load(&img);
 }
 void TextTexture::load(wxImage* img) { ID = loadImage(img); }
-
 GLuint* TextTexture::getID() { return ID; }
-
 TextTexture::~TextTexture()
 {
     glDeleteTextures(1, ID);
-    if(ID) delete ID; // Memory leak?
+    if(ID) delete ID;  // Memory leak?
 }
 
 #if 0
@@ -190,22 +184,14 @@ TextTexture::~TextTexture()
 #pragma mark wxGLString implementation
 #endif
 
-wxGLString::wxGLString()
-    : wxString(wxT(""))
-    , TextGLDrawable()
-{
-    img = NULL;
-}
-wxGLString::wxGLString(wxString message)
-    : wxString(message)
-    , TextGLDrawable()
-{
-    img = NULL;
-}
+wxGLString::wxGLString() : wxString(wxT("")), TextGLDrawable() { img = NULL; }
+wxGLString::wxGLString(wxString message) : wxString(message), TextGLDrawable() { img = NULL; }
 void wxGLString::operator=(wxString& string) { (*((wxString*)this)) = string; }
 void wxGLString::bind() const
 {
-    if(img->getID()[0]) glBindTexture(GL_TEXTURE_2D, img->getID()[0]);
+    if(img->getID()) {
+        glBindTexture(GL_TEXTURE_2D, *img->getID());
+    }
 }
 void wxGLString::calculateSize(wxDC* dc, const bool ignore_font /* when from array */)
 {
@@ -255,9 +241,7 @@ void wxGLString::consolidate(wxDC* dc)
 }
 
 void wxGLString::consolidateFromArray(wxDC* dc, double x, double y) { dc->DrawText(*this, x, y); }
-
 void wxGLString::setFont(wxFont font) { wxGLString::font = font; }
-
 void wxGLString::render(const double x, const double y)
 {
     TextGLDrawable::move(x, y);
@@ -273,13 +257,11 @@ wxGLString::~wxGLString()
 #pragma mark wxGLNumberRenderer implementation
 #endif
 
-wxGLNumberRenderer::wxGLNumberRenderer()
-    : wxGLString(wxT("0 1 2 3 4 5 6 7 8 9 . - "))
+wxGLNumberRenderer::wxGLNumberRenderer() : wxGLString(wxT("0 1 2 3 4 5 6 7 8 9 . - "))
 {
     number_location = new int[13];
 }
 wxGLNumberRenderer::~wxGLNumberRenderer() { delete[] number_location; }
-
 void wxGLNumberRenderer::consolidate(wxDC* dc)
 {
     wxGLString::consolidate(dc);
@@ -381,7 +363,7 @@ void wxGLNumberRenderer::renderNumber(wxString s, double x, double y)
         TextGLDrawable::render();
 
         x += char_width;
-    } // next
+    }  // next
 
     // TextGLDrawable::w = full_string_w;
 }
@@ -406,11 +388,12 @@ wxGLStringArray::~wxGLStringArray()
 wxGLString& wxGLStringArray::get(const int id) { return strings[id]; }
 void wxGLStringArray::bind()
 {
-    if(img->getID()[0]) glBindTexture(GL_TEXTURE_2D, img->getID()[0]);
+    if(img->getID()) {
+        glBindTexture(GL_TEXTURE_2D, *img->getID());
+    }
 }
 void wxGLStringArray::addString(wxString string) { strings.push_back(wxGLString(string)); }
 void wxGLStringArray::setFont(wxFont font) { wxGLStringArray::font = font; }
-
 void wxGLStringArray::consolidate(wxDC* dc)
 {
     int x = 0, y = 0;
@@ -428,7 +411,7 @@ void wxGLStringArray::consolidate(wxDC* dc)
         strings[n].calculateSize(dc, true);
         y += strings[n].h;
         if(strings[n].w > longest_string) longest_string = strings[n].w;
-    } // next
+    }  // next
 
     const int average_string_height = y / amount;
 
@@ -468,7 +451,7 @@ void wxGLStringArray::consolidate(wxDC* dc)
             strings[n].tex_coord_y2 = 1.0 - (float)(y + strings[n].h) / (float)power_of_2_h;
 
             y += strings[n].h;
-            if(y > power_of_2_h - average_string_height) // check if we need to switch to next column
+            if(y > power_of_2_h - average_string_height)  // check if we need to switch to next column
             {
                 y = 0;
                 x += longest_string;

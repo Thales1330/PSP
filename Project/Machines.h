@@ -3,6 +3,9 @@
 
 #include "PowerElement.h"
 
+class ControlElementContainer;
+class ControlElementSolver;
+
 class Machines : public PowerElement
 {
    public:

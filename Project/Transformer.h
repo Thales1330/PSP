@@ -73,7 +73,8 @@ public:
     virtual bool SetNodeParent(Element* parent);
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
     virtual bool ShowForm(wxWindow* parent, Element* element);
-    virtual TransformerElectricalData GetElectricalData() { return m_electricalData; }
+    virtual TransformerElectricalData GetElectricalData() const { return m_electricalData; }
+    virtual TransformerElectricalData GetPUElectricalData(double systemBasePower);
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
 

@@ -15,6 +15,7 @@
 #include "SimulationsSettingsForm.h"
 #include "PropertiesData.h"
 #include "ChartView.h"
+#include "DataReport.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties) : MainFrameBase(parent)
@@ -156,7 +157,14 @@ void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event)
 
 void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
-void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event) {}
+
+void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event)
+{
+    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
+        DataReport* dataReport = new DataReport(workspace, workspace);
+        dataReport->Show();
+    }
+}
 void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -166,6 +174,9 @@ void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
 }
 void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 {
+    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
+        workspace->SetContinuousCalculationActive(false);
+    }
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 }
@@ -173,6 +184,10 @@ void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 void MainFrame::OnDragClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 {
+    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
+        workspace->SetContinuousCalculationActive(true);
+        workspace->RunStaticStudies();
+    }
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, true);
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, false);
 }

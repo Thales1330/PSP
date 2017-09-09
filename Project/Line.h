@@ -21,8 +21,8 @@ struct LineElectricalData {
     bool useLinePower = false;
 
     // Power flow (p.u.)
-    std::complex<double> current[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
-    std::complex<double> powerFlow[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
+    std::complex<double> current[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
+    std::complex<double> powerFlow[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
 
     // Fault
     double zeroResistance = 0.0;
@@ -34,7 +34,7 @@ struct LineElectricalData {
 
 class Line : public Branch
 {
-public:
+   public:
     Line();
     Line(wxString name);
     ~Line();
@@ -59,14 +59,15 @@ public:
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
     virtual bool ShowForm(wxWindow* parent, Element* element);
-    virtual LineElectricalData GetElectricalData() const { return m_electricaData; }
-    virtual void SetElectricalData(LineElectricalData electricalData) { m_electricaData = electricalData; }
+    virtual LineElectricalData GetElectricalData() const { return m_electricalData; }
+    virtual LineElectricalData GetPUElectricalData(double systemBasePower);
+    virtual void SetElectricalData(LineElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetPointList(std::vector<wxPoint2DDouble> pointList);
 
-protected:
+   protected:
     void UpdatePowerFlowArrowsPosition();
-    LineElectricalData m_electricaData;
+    LineElectricalData m_electricalData;
 };
 
-#endif // LINE_H
+#endif  // LINE_H

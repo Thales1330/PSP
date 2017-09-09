@@ -55,6 +55,8 @@ public:
 
 protected:
     wxString m_errorMsg = "";
+    
+    double m_systemPowerBase;
 
     std::vector<std::vector<std::complex<double> > > m_zBusPos;
     std::vector<std::vector<std::complex<double> > > m_zBusNeg;

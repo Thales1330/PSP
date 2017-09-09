@@ -189,6 +189,8 @@ class PowerElement : public Element
      * @param dynEvent Event occurrence.
      */
     virtual void SetDynamicEvent(bool dynEvent = true) { m_dynEvent = dynEvent; }
+    virtual double GetValueFromUnit(double value, ElectricalUnit valueUnit);
+
    protected:
     SwitchingData m_swData;
     std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;

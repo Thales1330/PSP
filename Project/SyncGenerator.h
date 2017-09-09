@@ -4,8 +4,6 @@
 #include "Machines.h"
 
 class SyncMachineForm;
-class ControlElementContainer;
-class ControlElementSolver;
 
 struct SyncGeneratorElectricalData {
     // General

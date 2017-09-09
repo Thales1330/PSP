@@ -143,3 +143,24 @@ void PowerElement::DrawPowerFlowPts() const
         }
     }
 }
+
+double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit)
+{
+    switch(valueUnit) {
+        case UNIT_kV:
+        case UNIT_kA:
+        case UNIT_kW:
+        case UNIT_kVA:
+        case UNIT_kVAr: {
+            return value * 1e3;
+        } break;
+        case UNIT_MW:
+        case UNIT_MVA:
+        case UNIT_MVAr: {
+            return value * 1e6;
+        }
+        default:
+            break;
+    }
+    return value;
+}
