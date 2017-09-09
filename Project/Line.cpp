@@ -506,79 +506,67 @@ wxString Line::GetTipText() const
     return tipText;
 }
 
-LineElectricalData Line::GetPUElectricalData(double basePower) const
+LineElectricalData Line::GetPUElectricalData(double systemBasePower)
 {
     LineElectricalData data = m_electricalData;
-    double lineBasePower = basePower;
-    if(m_electricalData.useLinePower) {
-        lineBasePower = m_electricalData.nominalPower;
-        switch(m_electricalData.nominalPowerUnit) {
-            case UNIT_MVA: {
-                lineBasePower *= 1e6;
-            } break;
-            case UNIT_kVA: {
-                lineBasePower *= 1e3;
-            } break;
-            default:
-                break;
-        }
-    }
-    double vb = m_electricalData.nominalVoltage;
-    if(m_electricalData.nominalVoltageUnit == UNIT_kV) vb *= 1e3;
-    double zb = (vb * vb) / basePower;
+    double lineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
+    double baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
+    double systemBaseImpedance = (baseVoltage * baseVoltage) / systemBasePower;
+    double lineBaseImpedance = (baseVoltage * baseVoltage) / lineBasePower;
 
     // Resistance
     double r = data.resistance;
-    switch(data.resistanceUnit) {
-        case UNIT_PU: {
-            if(m_electricalData.useLinePower) data.resistance = (basePower / lineBasePower) * r;
-        } break;
-        case UNIT_OHM: {
-            data.resistance = r / zb;
-            data.resistanceUnit = UNIT_PU;
-        } break;
-        case UNIT_OHM_km: {
-            data.resistance = (r * data.lineSize) / zb;
-            data.resistanceUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    if(data.resistanceUnit == UNIT_OHM_km) r *= data.lineSize;
+    if(data.resistanceUnit == UNIT_PU) {
+        if(data.useLinePower) data.resistance = (r * lineBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.resistance = r / systemBaseImpedance;
     }
+    data.resistanceUnit = UNIT_PU;
 
-    // Indutive reactance
-    double xl = data.indReactance;
-    switch(data.indReactanceUnit) {
-        case UNIT_PU: {
-            if(m_electricalData.useLinePower) data.indReactance = (basePower / lineBasePower) * xl;
-        } break;
-        case UNIT_OHM: {
-            data.indReactance = xl / zb;
-            data.indReactanceUnit = UNIT_PU;
-        } break;
-        case UNIT_OHM_km: {
-            data.indReactance = (xl * data.lineSize) / zb;
-            data.indReactanceUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    // Inductive reactance
+    double x = data.indReactance;
+    if(data.indReactanceUnit == UNIT_OHM_km) x *= data.lineSize;
+    if(data.indReactanceUnit == UNIT_PU) {
+        if(data.useLinePower) data.indReactance = (x * lineBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.indReactance = x / systemBaseImpedance;
     }
+    data.indReactanceUnit = UNIT_PU;
 
     // Capacitive susceptance
     double b = data.capSusceptance;
-    switch(data.capSusceptanceUnit) {
-        case UNIT_PU: {
-            if(m_electricalData.useLinePower) data.capSusceptance = (basePower / lineBasePower) * b;
-        } break;
-        case UNIT_S: {
-            data.capSusceptance = b / zb;
-            data.capSusceptanceUnit = UNIT_PU;
-        } break;
-        case UNIT_S_km: {
-            data.capSusceptance = (b * data.lineSize) / zb;
-            data.capSusceptanceUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    if(data.capSusceptanceUnit == UNIT_OHM_km) b *= data.lineSize;
+    if(data.capSusceptanceUnit == UNIT_PU) {
+        if(data.useLinePower) data.capSusceptance = (b * lineBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.capSusceptance = b / systemBaseImpedance;
+    }
+    data.capSusceptanceUnit = UNIT_PU;
+
+    // Fault
+
+    // Zero seq. resistance
+    double r0 = data.zeroResistance;
+    if(data.useLinePower) data.zeroResistance = (r0 * lineBaseImpedance) / systemBaseImpedance;
+
+    // Zero seq. ind. reactance
+    double x0 = data.zeroIndReactance;
+    if(data.useLinePower) data.zeroIndReactance = (x0 * lineBaseImpedance) / systemBaseImpedance;
+
+    // Zero seq. cap. susceptance
+    double b0 = data.zeroCapSusceptance;
+    if(data.useLinePower) data.zeroCapSusceptance = (b0 * lineBaseImpedance) / systemBaseImpedance;
+    
+    if(!m_online) {
+        data.powerFlow[0] = std::complex<double>(0,0);
+        data.powerFlow[1] = std::complex<double>(0,0);
+        data.faultCurrent[0][0] = std::complex<double>(0,0);
+        data.faultCurrent[0][1] = std::complex<double>(0,0);
+        data.faultCurrent[0][2] = std::complex<double>(0,0);
+        data.faultCurrent[1][0] = std::complex<double>(0,0);
+        data.faultCurrent[1][1] = std::complex<double>(0,0);
+        data.faultCurrent[1][2] = std::complex<double>(0,0);
     }
 
     return data;

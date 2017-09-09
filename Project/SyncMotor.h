@@ -10,6 +10,8 @@ struct SyncMotorElectricalData {
     wxString name = "";
     double nominalPower = 100.0;
     ElectricalUnit nominalPowerUnit = UNIT_MVA;
+    double nominalVoltage = 13.8;
+    ElectricalUnit nominalVoltageUnit = UNIT_kV;
     double activePower = 100.0;
     ElectricalUnit activePowerUnit = UNIT_MW;
     double reactivePower = 0.0;
@@ -20,7 +22,7 @@ struct SyncMotorElectricalData {
     bool haveMinReactive = false;
     double minReactive = -9999.0;
     ElectricalUnit minReactiveUnit = UNIT_MVAr;
-    bool useMachineBase = false;
+    bool useMachineBase = true;
 
     // Fault
     double positiveResistance = 0.0;
@@ -33,12 +35,12 @@ struct SyncMotorElectricalData {
     double groundReactance = 0.0;
     bool groundNeutral = true;
     // p.u. fault data
-    std::complex<double> faultCurrent[3] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
-        std::complex<double>(0.0, 0.0) };
+    std::complex<double> faultCurrent[3] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0),
+                                            std::complex<double>(0.0, 0.0)};
 
     // Stability
     bool plotSyncMachine = false;
-    double inertia = 0.0;
+    double inertia = 1.0;
     double damping = 0.0;
     bool useAVR = false;
     bool useSpeedGovernor = false;
@@ -57,6 +59,52 @@ struct SyncMotorElectricalData {
     double subXq = 0.0;
     double subTd0 = 0.0;
     double subTq0 = 0.0;
+
+    // Machine state variables
+    std::complex<double> terminalVoltage;
+    std::vector<std::complex<double> > terminalVoltageVector;
+    std::complex<double> electricalPower;
+    std::vector<std::complex<double> > electricalPowerVector;
+    double pm;
+    std::vector<double> mechanicalPowerVector;
+    double speed;
+    std::vector<double> freqVector;
+    double fieldVoltage;
+    std::vector<double> fieldVoltageVector;
+    double delta;
+    std::vector<double> deltaVector;
+
+    double initialFieldVoltage;
+
+    // Internal machine variables
+    double tranEq;
+    double tranEd;
+    double subEq;
+    double subEd;
+    double pe;
+
+    // Variables to extrapolate
+    double oldId;
+    double oldIq;
+    double oldPe;
+
+    // Integration constants
+    IntegrationConstant icSpeed;
+    IntegrationConstant icDelta;
+    IntegrationConstant icTranEq;
+    IntegrationConstant icTranEd;
+    IntegrationConstant icSubEq;
+    IntegrationConstant icSubEd;
+
+    // Control
+    ControlElementContainer* avr = NULL;
+    ControlElementContainer* speedGov = NULL;
+
+    // Control solvers
+    ControlElementSolver* avrSolver = NULL;
+    ControlElementSolver* speedGovSolver = NULL;
+
+    Machines::SyncMachineModel model = Machines::SM_MODEL_1;
 };
 
 class SyncMotor : public Machines
@@ -65,13 +113,14 @@ class SyncMotor : public Machines
     SyncMotor();
     SyncMotor(wxString name);
     ~SyncMotor();
-	
-	virtual Element* GetCopy();
+
+    virtual Element* GetCopy();
     virtual void DrawSymbol() const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
     virtual SyncMotorElectricalData GetElectricalData() { return m_electricalData; }
-	virtual SyncMotorElectricalData GetPUElectricalData(double systemPowerBase);
+    virtual SyncMotorElectricalData GetPUElectricalData(double systemPowerBase);
+    virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetElectricalData(SyncMotorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
 

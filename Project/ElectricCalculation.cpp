@@ -122,7 +122,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     for(auto it = m_lineList.begin(), itEnd = m_lineList.end(); it != itEnd; ++it) {
         Line* line = *it;
         if(line->IsOnline()) {
-            LineElectricalData data = line->GetElectricalData();
+            LineElectricalData data = line->GetPUElectricalData(systemPowerBase);
 
             int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
             int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
@@ -158,7 +158,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         Transformer* transformer = *it;
 
         if(transformer->IsOnline()) {
-            TransformerElectricalData data = transformer->GetElectricalData();
+            TransformerElectricalData data = transformer->GetPUElectricalData(systemPowerBase);
 
             int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
             int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
@@ -249,7 +249,10 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                         yBus[n][n] += 1.0 / std::complex<double>(data.negativeResistance, data.negativeReactance);
                     } break;
                     case ZERO_SEQ: {
-                        yBus[n][n] += 1.0 / std::complex<double>(data.zeroResistance, data.zeroReactance);
+                        if(data.groundNeutral) {
+                            yBus[n][n] += 1.0 / std::complex<double>(data.zeroResistance + 3.0 * data.groundResistance,
+                                                                     data.zeroReactance + 3.0 * data.groundReactance);
+                        }
                     } break;
                 }
             }
@@ -268,7 +271,10 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                         yBus[n][n] += 1.0 / std::complex<double>(data.negativeResistance, data.negativeReactance);
                     } break;
                     case ZERO_SEQ: {
-                        yBus[n][n] += 1.0 / std::complex<double>(data.zeroResistance, data.zeroReactance);
+                        if(data.groundNeutral) {
+                            yBus[n][n] += 1.0 / std::complex<double>(data.zeroResistance + 3.0 * data.groundResistance,
+                                                                     data.zeroReactance + 3.0 * data.groundReactance);
+                        }
                     } break;
                 }
             }
@@ -286,8 +292,10 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 {
     double zeroLimit = 1e-4;
     for(unsigned int i = 0; i < reactiveLimit.size(); ++i) {
-        if(reactiveLimit[i].maxLimit > -zeroLimit && reactiveLimit[i].maxLimit < zeroLimit) reactiveLimit[i].maxLimit = zeroLimit;
-        if(reactiveLimit[i].minLimit > -zeroLimit && reactiveLimit[i].minLimit < zeroLimit) reactiveLimit[i].minLimit = zeroLimit;
+        if(reactiveLimit[i].maxLimit > -zeroLimit && reactiveLimit[i].maxLimit < zeroLimit)
+            reactiveLimit[i].maxLimit = zeroLimit;
+        if(reactiveLimit[i].minLimit > -zeroLimit && reactiveLimit[i].minLimit < zeroLimit)
+            reactiveLimit[i].minLimit = zeroLimit;
     }
     for(unsigned int i = 0; i < power.size(); ++i) {
         if(std::real(power[i]) > -zeroLimit && std::real(power[i]) < zeroLimit)

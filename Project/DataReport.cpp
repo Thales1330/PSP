@@ -13,6 +13,156 @@ DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(
 }
 
 DataReport::~DataReport() {}
+void DataReport::CreateGrids()
+{
+    wxColour headerColour(200, 200, 200);
+    wxFont headerFont = m_gridPowerFlow->GetLabelFont();
+    headerFont.SetWeight(wxFONTWEIGHT_BOLD);
+
+    ElectricCalculation eCalc;
+    eCalc.GetElementsFromList(m_workspace->GetElementList());
+    auto lineList = eCalc.GetLineList();
+    auto transformerList = eCalc.GetTransformerList();
+    auto busList = eCalc.GetBusList();
+    auto generatorList = eCalc.GetSyncGeneratorList();
+
+    // Power Flow
+    // Header
+    m_gridPowerFlow->AppendCols(7);
+    m_gridPowerFlow->AppendRows();
+    m_gridPowerFlow->HideColLabels();
+    m_gridPowerFlow->HideRowLabels();
+    for(int i = 0; i < 7; ++i) {
+        m_gridPowerFlow->SetCellBackgroundColour(0, i, headerColour);
+        m_gridPowerFlow->SetCellFont(0, i, headerFont);
+    }
+    m_gridPowerFlow->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    // Values
+    m_gridPowerFlow->AppendRows((lineList.size() + transformerList.size()) * 2);
+    m_gridPowerFlow->AutoSize();
+
+    // Power Flow buses
+    // Header
+    m_gridPFBuses->AppendCols(6);
+    m_gridPFBuses->AppendRows();
+    m_gridPFBuses->HideColLabels();
+    m_gridPFBuses->HideRowLabels();
+    for(int i = 0; i < 6; ++i) {
+        m_gridPFBuses->SetCellBackgroundColour(0, i, headerColour);
+        m_gridPFBuses->SetCellFont(0, i, headerFont);
+    }
+    m_gridPFBuses->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    // Values
+    m_gridPFBuses->AppendRows(busList.size());
+    m_gridPFBuses->AutoSize();
+
+    // Power flow branches
+    // Header
+    m_gridPFBranches->AppendCols(10);
+    m_gridPFBranches->AppendRows(1);
+    m_gridPFBranches->HideColLabels();
+    m_gridPFBranches->HideRowLabels();
+    for(int i = 0; i < 10; ++i) {
+        m_gridPFBranches->SetCellBackgroundColour(0, i, headerColour);
+        m_gridPFBranches->SetCellFont(0, i, headerFont);
+    }
+    m_gridPFBranches->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    // Values
+    m_gridPFBranches->AppendRows(lineList.size() + transformerList.size());
+    m_gridPFBranches->AutoSize();
+
+    // Fault
+    // Header
+    m_gridFault->AppendCols(7);
+    m_gridFault->AppendRows(2);
+    m_gridFault->HideColLabels();
+    m_gridFault->HideRowLabels();
+    for(int i = 0; i < 2; ++i) {
+        for(int j = 0; j < 7; ++j) {
+            m_gridFault->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFault->SetCellFont(i, j, headerFont);
+        }
+    }
+    m_gridFault->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    m_gridFault->SetCellSize(0, 0, 2, 1);
+    m_gridFault->SetCellSize(0, 1, 1, 2);
+    m_gridFault->SetCellSize(0, 3, 1, 2);
+    m_gridFault->SetCellSize(0, 5, 1, 2);
+    // Values
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        if(bus->GetElectricalData().hasFault) m_gridFault->AppendRows();
+    }
+    m_gridFault->AutoSize();
+
+    // Fault buses
+    // Header
+    m_gridFaultBuses->AppendCols(7);
+    m_gridFaultBuses->AppendRows(2);
+    m_gridFaultBuses->HideColLabels();
+    m_gridFaultBuses->HideRowLabels();
+    for(int i = 0; i < 2; ++i) {
+        for(int j = 0; j < 7; ++j) {
+            m_gridFaultBuses->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFaultBuses->SetCellFont(i, j, headerFont);
+        }
+    }
+    m_gridFaultBuses->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    m_gridFaultBuses->SetCellSize(0, 0, 2, 1);
+    m_gridFaultBuses->SetCellSize(0, 1, 1, 2);
+    m_gridFaultBuses->SetCellSize(0, 3, 1, 2);
+    m_gridFaultBuses->SetCellSize(0, 5, 1, 2);
+    // Values
+    m_gridFaultBuses->AppendRows(busList.size());
+    m_gridFaultBuses->AutoSize();
+
+    // Fault branches
+    // Header
+    m_gridFaultBranches->AppendCols(11);
+    m_gridFaultBranches->AppendRows(2);
+    m_gridFaultBranches->HideColLabels();
+    m_gridFaultBranches->HideRowLabels();
+    for(int i = 0; i < 2; ++i) {
+        for(int j = 0; j < 11; ++j) {
+            m_gridFaultBranches->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFaultBranches->SetCellFont(i, j, headerFont);
+        }
+    }
+    m_gridFaultBranches->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    m_gridFaultBranches->SetCellSize(0, 0, 2, 1);
+    m_gridFaultBranches->SetCellSize(0, 1, 2, 1);
+    m_gridFaultBranches->SetCellSize(0, 2, 2, 1);
+    m_gridFaultBranches->SetCellSize(0, 3, 2, 1);
+    m_gridFaultBranches->SetCellSize(0, 10, 2, 1);
+    m_gridFaultBranches->SetCellSize(0, 4, 1, 2);
+    m_gridFaultBranches->SetCellSize(0, 6, 1, 2);
+    m_gridFaultBranches->SetCellSize(0, 8, 1, 2);
+    // Values
+    m_gridFaultBranches->AppendRows((lineList.size() + transformerList.size()) * 2);
+    m_gridFaultBranches->AutoSize();
+
+    // Fault generators
+    // Header
+    m_gridFaultGenerators->AppendCols(7);
+    m_gridFaultGenerators->AppendRows(2);
+    m_gridFaultGenerators->HideColLabels();
+    m_gridFaultGenerators->HideRowLabels();
+    for(int i = 0; i < 2; ++i) {
+        for(int j = 0; j < 7; ++j) {
+            m_gridFaultGenerators->SetCellBackgroundColour(i, j, headerColour);
+            m_gridFaultGenerators->SetCellFont(i, j, headerFont);
+        }
+    }
+    m_gridFaultGenerators->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    m_gridFaultGenerators->SetCellSize(0, 0, 2, 1);
+    m_gridFaultGenerators->SetCellSize(0, 1, 1, 2);
+    m_gridFaultGenerators->SetCellSize(0, 3, 1, 2);
+    m_gridFaultGenerators->SetCellSize(0, 5, 1, 2);
+    // Values
+    m_gridFaultGenerators->AppendRows(generatorList.size());
+    m_gridFaultGenerators->AutoSize();
+}
+
 void DataReport::SetHeaders()
 {
     // Headers choices fill
@@ -41,6 +191,10 @@ void DataReport::SetHeaders()
     m_capSusceptanceChoices.Add(_("B (p.u.)"));
     m_capSusceptanceChoices.Add(_("B (S)"));
 
+    m_currentChoices.Add(_("Current (p.u.)"));
+    m_currentChoices.Add(_("Current (A)"));
+    m_currentChoices.Add(_("Current (kA)"));
+
     // Power flow
     m_gridPowerFlow->SetCellValue(0, 0, _("Type"));
     m_gridPowerFlow->SetCellValue(0, 1, _("Name"));
@@ -50,6 +204,7 @@ void DataReport::SetHeaders()
     m_gridPowerFlow->SetCellValue(0, 4, m_activePowerChoices[3]);
     m_gridPowerFlow->SetCellEditor(0, 5, new wxGridCellChoiceEditor(m_reactivePowerChoices));
     m_gridPowerFlow->SetCellValue(0, 5, m_reactivePowerChoices[3]);
+    m_gridPowerFlow->SetCellValue(0, 6, _("Online"));
 
     // Power flow buses
     m_gridPFBuses->SetCellValue(0, 0, _("Name"));
@@ -62,7 +217,7 @@ void DataReport::SetHeaders()
     m_gridPFBuses->SetCellEditor(0, 5, new wxGridCellChoiceEditor(m_reactivePowerChoices));
     m_gridPFBuses->SetCellValue(0, 5, m_reactivePowerChoices[3]);
 
-    // Power flow brances
+    // Power flow branches
     m_gridPFBranches->SetCellValue(0, 0, _("Type"));
     m_gridPFBranches->SetCellValue(0, 1, _("Name"));
     m_gridPFBranches->SetCellValue(0, 2, _("From"));
@@ -76,10 +231,76 @@ void DataReport::SetHeaders()
     m_gridPFBranches->SetCellValue(0, 7, _("TAP"));
     m_gridPFBranches->SetCellValue(0, 8, _("Phase Shift"));
     m_gridPFBranches->SetCellValue(0, 9, _("Online"));
+
+    // Fault
+    m_gridFault->SetCellValue(0, 0, _("Fault bus name"));
+    m_gridFault->SetCellValue(0, 1, _("Phase A"));
+    m_gridFault->SetCellValue(0, 3, _("Phase B"));
+    m_gridFault->SetCellValue(0, 5, _("Phase C"));
+    m_gridFault->SetCellEditor(1, 1, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFault->SetCellValue(1, 1, m_currentChoices[1]);
+    m_gridFault->SetCellValue(1, 2, _("Angle"));
+    m_gridFault->SetCellEditor(1, 3, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFault->SetCellValue(1, 3, m_currentChoices[1]);
+    m_gridFault->SetCellValue(1, 4, _("Angle"));
+    m_gridFault->SetCellEditor(1, 5, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFault->SetCellValue(1, 5, m_currentChoices[1]);
+    m_gridFault->SetCellValue(1, 6, _("Angle"));
+
+    // Fault buses
+    m_gridFaultBuses->SetCellValue(0, 0, _("Name"));
+    m_gridFaultBuses->SetCellValue(0, 1, _("Phase A"));
+    m_gridFaultBuses->SetCellValue(0, 3, _("Phase B"));
+    m_gridFaultBuses->SetCellValue(0, 5, _("Phase C"));
+    m_gridFaultBuses->SetCellEditor(1, 1, new wxGridCellChoiceEditor(m_voltageChoices));
+    m_gridFaultBuses->SetCellValue(1, 1, m_voltageChoices[0]);
+    m_gridFaultBuses->SetCellValue(1, 2, _("Angle"));
+    m_gridFaultBuses->SetCellEditor(1, 3, new wxGridCellChoiceEditor(m_voltageChoices));
+    m_gridFaultBuses->SetCellValue(1, 3, m_voltageChoices[0]);
+    m_gridFaultBuses->SetCellValue(1, 4, _("Angle"));
+    m_gridFaultBuses->SetCellEditor(1, 5, new wxGridCellChoiceEditor(m_voltageChoices));
+    m_gridFaultBuses->SetCellValue(1, 5, m_voltageChoices[0]);
+    m_gridFaultBuses->SetCellValue(1, 6, _("Angle"));
+
+    // Fault branches
+    m_gridFaultBranches->SetCellValue(0, 0, _("Type"));
+    m_gridFaultBranches->SetCellValue(0, 1, _("Name"));
+    m_gridFaultBranches->SetCellValue(0, 2, _("From"));
+    m_gridFaultBranches->SetCellValue(0, 3, _("To"));
+    m_gridFaultBranches->SetCellValue(0, 4, _("Phase A"));
+    m_gridFaultBranches->SetCellValue(0, 6, _("Phase B"));
+    m_gridFaultBranches->SetCellValue(0, 8, _("Phase C"));
+    m_gridFaultBranches->SetCellValue(0, 10, _("Online"));
+    m_gridFaultBranches->SetCellEditor(1, 4, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFaultBranches->SetCellValue(1, 4, m_currentChoices[1]);
+    m_gridFaultBranches->SetCellValue(1, 5, _("Angle"));
+    m_gridFaultBranches->SetCellEditor(1, 6, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFaultBranches->SetCellValue(1, 6, m_currentChoices[1]);
+    m_gridFaultBranches->SetCellValue(1, 7, _("Angle"));
+    m_gridFaultBranches->SetCellEditor(1, 8, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFaultBranches->SetCellValue(1, 8, m_currentChoices[1]);
+    m_gridFaultBranches->SetCellValue(1, 9, _("Angle"));
+
+    // Fault generators
+    m_gridFaultGenerators->SetCellValue(0, 0, _("Name"));
+    m_gridFaultGenerators->SetCellValue(0, 1, _("Phase A"));
+    m_gridFaultGenerators->SetCellValue(0, 3, _("Phase B"));
+    m_gridFaultGenerators->SetCellValue(0, 5, _("Phase C"));
+    m_gridFaultGenerators->SetCellEditor(1, 1, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFaultGenerators->SetCellValue(1, 1, m_currentChoices[1]);
+    m_gridFaultGenerators->SetCellValue(1, 2, _("Angle"));
+    m_gridFaultGenerators->SetCellEditor(1, 3, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFaultGenerators->SetCellValue(1, 3, m_currentChoices[1]);
+    m_gridFaultGenerators->SetCellValue(1, 4, _("Angle"));
+    m_gridFaultGenerators->SetCellEditor(1, 5, new wxGridCellChoiceEditor(m_currentChoices));
+    m_gridFaultGenerators->SetCellValue(1, 5, m_currentChoices[1]);
+    m_gridFaultGenerators->SetCellValue(1, 6, _("Angle"));
 }
 
 void DataReport::FillValues(GridSelection gridToFill)
 {
+    wxColour offlineColour(100, 100, 100);
+
     m_changingValues = true;
     ElectricCalculation eCalc;
     eCalc.GetElementsFromList(m_workspace->GetElementList());
@@ -121,62 +342,96 @@ void DataReport::FillValues(GridSelection gridToFill)
 
         for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) {
             Line* line = *it;
-            if(line->IsOnline()) {
-                auto data = line->GetElectricalData();
 
-                Bus* bus1 = static_cast<Bus*>(line->GetParentList()[0]);
-                Bus* bus2 = static_cast<Bus*>(line->GetParentList()[1]);
+            wxString busName1 = "-";
+            if(line->GetParentList()[0])
+                busName1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().name;
+            wxString busName2 = "-";
+            if(line->GetParentList()[1])
+                busName2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().name;
 
-                m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Line"));
-                m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 2, bus1->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 3, bus2->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 4,
-                                              line->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower));
-                m_gridPowerFlow->SetCellValue(rowNumber, 5,
-                                              line->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower));
-                rowNumber++;
-
-                m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Line"));
-                m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 2, bus2->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 3, bus1->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 4,
-                                              line->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower));
-                m_gridPowerFlow->SetCellValue(rowNumber, 5,
-                                              line->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower));
-                rowNumber++;
+            wxString isOnline = _("Yes");
+            wxColour textColour = m_gridPowerFlow->GetDefaultCellTextColour();
+            if(!line->IsOnline()) {
+                isOnline = _("No");
+                textColour = offlineColour;
             }
+            for(int i = 0; i < 2; ++i) {
+                for(int j = 0; j < 7; ++j) {
+                    m_gridPowerFlow->SetCellTextColour(rowNumber + i, j, textColour);
+                }
+            }
+
+            m_gridPowerFlow->SetCellValue(rowNumber, 9, isOnline);
+            auto data = line->GetPUElectricalData(basePower);
+
+            m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Line"));
+            m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
+            m_gridPowerFlow->SetCellValue(rowNumber, 2, busName1);
+            m_gridPowerFlow->SetCellValue(rowNumber, 3, busName2);
+            m_gridPowerFlow->SetCellValue(rowNumber, 4,
+                                          line->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 5,
+                                          line->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
+            rowNumber++;
+
+            m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Line"));
+            m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
+            m_gridPowerFlow->SetCellValue(rowNumber, 2, busName2);
+            m_gridPowerFlow->SetCellValue(rowNumber, 3, busName1);
+            m_gridPowerFlow->SetCellValue(rowNumber, 4,
+                                          line->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 5,
+                                          line->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
+            rowNumber++;
         }
 
         for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) {
             Transformer* transformer = *it;
-            if(transformer->IsOnline()) {
-                auto data = transformer->GetElectricalData();
+            auto data = transformer->GetPUElectricalData(basePower);
 
-                Bus* bus1 = static_cast<Bus*>(transformer->GetParentList()[0]);
-                Bus* bus2 = static_cast<Bus*>(transformer->GetParentList()[1]);
+            wxString busName1 = "-";
+            if(transformer->GetParentList()[0])
+                busName1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().name;
+            wxString busName2 = "-";
+            if(transformer->GetParentList()[1])
+                busName2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().name;
 
-                m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Transformer"));
-                m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 2, bus1->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 3, bus2->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(
-                    rowNumber, 4, transformer->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower));
-                m_gridPowerFlow->SetCellValue(
-                    rowNumber, 5, transformer->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower));
-                rowNumber++;
-
-                m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Transformer"));
-                m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 2, bus2->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(rowNumber, 3, bus1->GetElectricalData().name);
-                m_gridPowerFlow->SetCellValue(
-                    rowNumber, 4, transformer->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower));
-                m_gridPowerFlow->SetCellValue(
-                    rowNumber, 5, transformer->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower));
-                rowNumber++;
+            wxString isOnline = _("Yes");
+            wxColour textColour = m_gridPowerFlow->GetDefaultCellTextColour();
+            if(!transformer->IsOnline()) {
+                isOnline = _("No");
+                textColour = offlineColour;
             }
+            for(int i = 0; i < 2; ++i) {
+                for(int j = 0; j < 7; ++j) {
+                    m_gridPowerFlow->SetCellTextColour(rowNumber + i, j, textColour);
+                }
+            }
+
+            m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Transformer"));
+            m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
+            m_gridPowerFlow->SetCellValue(rowNumber, 2, busName1);
+            m_gridPowerFlow->SetCellValue(rowNumber, 3, busName2);
+            m_gridPowerFlow->SetCellValue(rowNumber, 4,
+                                          transformer->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 5,
+                                          transformer->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
+            rowNumber++;
+
+            m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Transformer"));
+            m_gridPowerFlow->SetCellValue(rowNumber, 1, data.name);
+            m_gridPowerFlow->SetCellValue(rowNumber, 2, busName2);
+            m_gridPowerFlow->SetCellValue(rowNumber, 3, busName1);
+            m_gridPowerFlow->SetCellValue(rowNumber, 4,
+                                          transformer->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 5,
+                                          transformer->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower));
+            m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
+            rowNumber++;
         }
         m_gridPowerFlow->AutoSize();
     }
@@ -246,15 +501,25 @@ void DataReport::FillValues(GridSelection gridToFill)
             if(data.nominalVoltageUnit == UNIT_kV) vb *= 1e3;
             double zb = (vb * vb) / basePower;
 
-            m_gridPFBranches->SetCellValue(rowNumber, 0, _("Line"));
-            m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
-
             wxString busName1 = "-";
             if(line->GetParentList()[0])
                 busName1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().name;
             wxString busName2 = "-";
             if(line->GetParentList()[1])
                 busName2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().name;
+            wxString isOnline = _("Yes");
+            wxColour textColour = m_gridPFBranches->GetDefaultCellTextColour();
+            if(!line->IsOnline()) {
+                isOnline = _("No");
+                textColour = offlineColour;
+            }
+            for(int j = 0; j < 10; ++j) {
+                m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour);
+            }
+
+            m_gridPFBranches->SetCellValue(rowNumber, 0, _("Line"));
+            m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
+
             m_gridPFBranches->SetCellValue(rowNumber, 2, busName1);
             m_gridPFBranches->SetCellValue(rowNumber, 3, busName2);
 
@@ -269,9 +534,6 @@ void DataReport::FillValues(GridSelection gridToFill)
             m_gridPFBranches->SetCellValue(rowNumber, 6, line->StringFromDouble(data.capSusceptance / k));
             m_gridPFBranches->SetCellValue(rowNumber, 7, "-");
             m_gridPFBranches->SetCellValue(rowNumber, 8, "-");
-
-            wxString isOnline = _("Yes");
-            if(!line->IsOnline()) isOnline = _("No");
             m_gridPFBranches->SetCellValue(rowNumber, 9, isOnline);
             rowNumber++;
         }
@@ -289,15 +551,25 @@ void DataReport::FillValues(GridSelection gridToFill)
             }
             double zb = (vb * vb) / basePower;
 
-            m_gridPFBranches->SetCellValue(rowNumber, 0, _("Transformer"));
-            m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
-
             wxString busName1 = "-";
             if(transformer->GetParentList()[0])
                 busName1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().name;
             wxString busName2 = "-";
             if(transformer->GetParentList()[1])
                 busName2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().name;
+
+            wxString isOnline = _("Yes");
+            wxColour textColour = m_gridPFBranches->GetDefaultCellTextColour();
+            if(!transformer->IsOnline()) {
+                isOnline = _("No");
+                textColour = offlineColour;
+            }
+            for(int j = 0; j < 10; ++j) {
+                m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour);
+            }
+
+            m_gridPFBranches->SetCellValue(rowNumber, 0, _("Transformer"));
+            m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
             m_gridPFBranches->SetCellValue(rowNumber, 2, busName1);
             m_gridPFBranches->SetCellValue(rowNumber, 3, busName2);
 
@@ -310,85 +582,325 @@ void DataReport::FillValues(GridSelection gridToFill)
             m_gridPFBranches->SetCellValue(rowNumber, 6, "-");
             m_gridPFBranches->SetCellValue(rowNumber, 7, transformer->StringFromDouble(data.turnsRatio));
             m_gridPFBranches->SetCellValue(rowNumber, 8, transformer->StringFromDouble(data.phaseShift));
-
-            wxString isOnline = _("Yes");
-            if(!transformer->IsOnline()) isOnline = _("No");
             m_gridPFBranches->SetCellValue(rowNumber, 9, isOnline);
             rowNumber++;
         }
         m_gridPFBranches->AutoSize();
     }
 
+    // Fault
+    if(gridToFill == GRID_ALL || gridToFill == GRID_FAULT) {
+        rowNumber = 2;
+        for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+            Bus* bus = *it;
+            auto data = bus->GetElectricalData();
+            if(data.hasFault) {
+                double vb = bus->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
+                double ib = basePower / vb;
+
+                m_gridFault->SetCellValue(rowNumber, 0, data.name);
+
+                double kCurrent = 1.0;
+                if(m_gridFault->GetCellValue(1, 1) == m_currentChoices[1]) {
+                    kCurrent = ib;
+                } else if(m_gridFault->GetCellValue(1, 1) == m_currentChoices[2]) {
+                    kCurrent = ib / 1e3;
+                }
+                m_gridFault->SetCellValue(rowNumber, 1,
+                                          bus->StringFromDouble(std::abs(data.faultCurrent[0]) * kCurrent));
+
+                m_gridFault->SetCellValue(rowNumber, 2,
+                                          bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0]))));
+
+                kCurrent = 1.0;
+                if(m_gridFault->GetCellValue(1, 3) == m_currentChoices[1]) {
+                    kCurrent = ib;
+                } else if(m_gridFault->GetCellValue(1, 3) == m_currentChoices[2]) {
+                    kCurrent = ib / 1e3;
+                }
+                m_gridFault->SetCellValue(rowNumber, 3,
+                                          bus->StringFromDouble(std::abs(data.faultCurrent[1]) * kCurrent));
+
+                m_gridFault->SetCellValue(rowNumber, 4,
+                                          bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1]))));
+
+                kCurrent = 1.0;
+                if(m_gridFault->GetCellValue(1, 5) == m_currentChoices[1]) {
+                    kCurrent = ib;
+                } else if(m_gridFault->GetCellValue(1, 5) == m_currentChoices[2]) {
+                    kCurrent = ib / 1e3;
+                }
+                m_gridFault->SetCellValue(rowNumber, 5,
+                                          bus->StringFromDouble(std::abs(data.faultCurrent[2]) * kCurrent));
+
+                m_gridFault->SetCellValue(rowNumber, 6,
+                                          bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[2]))));
+
+                rowNumber++;
+            }
+        }
+        m_gridFault->AutoSize();
+    }
+
+    // Fault buses
+    if(gridToFill == GRID_ALL || gridToFill == GRID_FAULTBUSES) {
+        rowNumber = 2;
+        for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+            Bus* bus = *it;
+            auto data = bus->GetElectricalData();
+            double vb = bus->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
+
+            m_gridFaultBuses->SetCellValue(rowNumber, 0, data.name);
+            double kVoltage = 1.0;
+            if(m_gridFaultBuses->GetCellValue(1, 1) == m_voltageChoices[1]) {
+                kVoltage = vb;
+            } else if(m_gridFaultBuses->GetCellValue(1, 1) == m_voltageChoices[2]) {
+                kVoltage = vb / 1e3;
+            }
+            m_gridFaultBuses->SetCellValue(rowNumber, 1,
+                                           bus->StringFromDouble(std::abs(data.faultVoltage[0]) * kVoltage));
+            m_gridFaultBuses->SetCellValue(rowNumber, 2,
+                                           bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[0]))));
+
+            kVoltage = 1.0;
+            if(m_gridFaultBuses->GetCellValue(1, 3) == m_voltageChoices[1]) {
+                kVoltage = vb;
+            } else if(m_gridFaultBuses->GetCellValue(1, 3) == m_voltageChoices[2]) {
+                kVoltage = vb / 1e3;
+            }
+            m_gridFaultBuses->SetCellValue(rowNumber, 3,
+                                           bus->StringFromDouble(std::abs(data.faultVoltage[1]) * kVoltage));
+            m_gridFaultBuses->SetCellValue(rowNumber, 4,
+                                           bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[1]))));
+
+            kVoltage = 1.0;
+            if(m_gridFaultBuses->GetCellValue(1, 5) == m_voltageChoices[1]) {
+                kVoltage = vb;
+            } else if(m_gridFaultBuses->GetCellValue(1, 5) == m_voltageChoices[2]) {
+                kVoltage = vb / 1e3;
+            }
+            m_gridFaultBuses->SetCellValue(rowNumber, 5,
+                                           bus->StringFromDouble(std::abs(data.faultVoltage[2]) * kVoltage));
+            m_gridFaultBuses->SetCellValue(rowNumber, 6,
+                                           bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[2]))));
+
+            rowNumber++;
+        }
+        m_gridFaultBuses->AutoSize();
+    }
+
+    // Fault branches
+    if(gridToFill == GRID_ALL || gridToFill == GRID_FAULTBRANCHES) {
+        rowNumber = 2;
+        for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) {
+            Line* line = *it;
+            auto data = line->GetPUElectricalData(basePower);
+
+            double vb = line->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
+            double ib = basePower / vb;
+
+            wxString busName1 = "-";
+            if(line->GetParentList()[0])
+                busName1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().name;
+            wxString busName2 = "-";
+            if(line->GetParentList()[1])
+                busName2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().name;
+
+            wxString isOnline = _("Yes");
+            wxColour textColour = m_gridFaultBranches->GetDefaultCellTextColour();
+            if(!line->IsOnline()) {
+                isOnline = _("No");
+                textColour = offlineColour;
+            }
+            for(int i = 0; i < 2; ++i) {
+                for(int j = 0; j < 11; ++j) {
+                    m_gridFaultBranches->SetCellTextColour(rowNumber + i, j, textColour);
+                }
+            }
+
+            m_gridFaultBranches->SetCellValue(rowNumber, 0, _("Line"));
+            m_gridFaultBranches->SetCellValue(rowNumber, 1, data.name);
+            m_gridFaultBranches->SetCellValue(rowNumber, 2, busName1);
+            m_gridFaultBranches->SetCellValue(rowNumber, 3, busName2);
+
+            double kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[1]) {
+                kCurrent = ib;
+            } else if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[2]) {
+                kCurrent = ib / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(rowNumber, 4,
+                                              line->StringFromDouble(std::abs(data.faultCurrent[0][0]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(rowNumber, 5,
+                                              line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][0]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
+                kCurrent = ib;
+            } else if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[2]) {
+                kCurrent = ib / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(rowNumber, 6,
+                                              line->StringFromDouble(std::abs(data.faultCurrent[0][1]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(rowNumber, 7,
+                                              line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][1]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
+                kCurrent = ib;
+            } else if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[2]) {
+                kCurrent = ib / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(rowNumber, 8,
+                                              line->StringFromDouble(std::abs(data.faultCurrent[0][2]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(rowNumber, 9,
+                                              line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][2]))));
+            m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
+            rowNumber++;
+
+            m_gridFaultBranches->SetCellValue(rowNumber, 0, _("Line"));
+            m_gridFaultBranches->SetCellValue(rowNumber, 1, data.name);
+            m_gridFaultBranches->SetCellValue(rowNumber, 2, busName2);
+            m_gridFaultBranches->SetCellValue(rowNumber, 3, busName1);
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[1]) {
+                kCurrent = ib;
+            } else if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[2]) {
+                kCurrent = ib / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(rowNumber, 4,
+                                              line->StringFromDouble(std::abs(data.faultCurrent[1][0]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(rowNumber, 5,
+                                              line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][0]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
+                kCurrent = ib;
+            } else if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[2]) {
+                kCurrent = ib / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(rowNumber, 6,
+                                              line->StringFromDouble(std::abs(data.faultCurrent[1][1]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(rowNumber, 7,
+                                              line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][1]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
+                kCurrent = ib;
+            } else if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[2]) {
+                kCurrent = ib / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(rowNumber, 8,
+                                              line->StringFromDouble(std::abs(data.faultCurrent[1][2]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(rowNumber, 9,
+                                              line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][2]))));
+            m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
+            rowNumber++;
+        }
+
+        for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) {
+            Transformer* transformer = *it;
+            auto data = transformer->GetPUElectricalData(basePower);
+
+            double vb = transformer->GetValueFromUnit(data.primaryNominalVoltage, data.primaryNominalVoltageUnit);
+            double ibp = basePower / vb;
+            vb = transformer->GetValueFromUnit(data.secondaryNominalVoltage, data.secondaryNominalVoltageUnit);
+            double ibs = basePower / vb;
+
+            wxString busName1 = "-";
+            if(transformer->GetParentList()[0])
+                busName1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().name;
+            wxString busName2 = "-";
+            if(transformer->GetParentList()[1])
+                busName2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().name;
+
+            wxString isOnline = _("Yes");
+            wxColour textColour = m_gridFaultBranches->GetDefaultCellTextColour();
+            if(!transformer->IsOnline()) {
+                isOnline = _("No");
+                textColour = offlineColour;
+            }
+            for(int i = 0; i < 2; ++i) {
+                for(int j = 0; j < 11; ++j) {
+                    m_gridFaultBranches->SetCellTextColour(rowNumber + i, j, textColour);
+                }
+            }
+
+            m_gridFaultBranches->SetCellValue(rowNumber, 0, _("Transformer"));
+            m_gridFaultBranches->SetCellValue(rowNumber, 1, data.name);
+            m_gridFaultBranches->SetCellValue(rowNumber, 2, busName1);
+            m_gridFaultBranches->SetCellValue(rowNumber, 3, busName2);
+
+            double kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[1]) {
+                kCurrent = ibp;
+            } else if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[2]) {
+                kCurrent = ibp / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 4, transformer->StringFromDouble(std::abs(data.faultCurrent[0][0]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 5, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][0]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
+                kCurrent = ibp;
+            } else if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[2]) {
+                kCurrent = ibp / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 6, transformer->StringFromDouble(std::abs(data.faultCurrent[0][1]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 7, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][1]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
+                kCurrent = ibp;
+            } else if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[2]) {
+                kCurrent = ibp / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 8, transformer->StringFromDouble(std::abs(data.faultCurrent[0][2]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 9, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][2]))));
+            m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
+            rowNumber++;
+
+            m_gridFaultBranches->SetCellValue(rowNumber, 0, _("Transformer"));
+            m_gridFaultBranches->SetCellValue(rowNumber, 1, data.name);
+            m_gridFaultBranches->SetCellValue(rowNumber, 2, busName2);
+            m_gridFaultBranches->SetCellValue(rowNumber, 3, busName1);
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[1]) {
+                kCurrent = ibs;
+            } else if(m_gridFaultBranches->GetCellValue(1, 4) == m_currentChoices[2]) {
+                kCurrent = ibs / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 4, transformer->StringFromDouble(std::abs(data.faultCurrent[1][0]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 5, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][0]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
+                kCurrent = ibs;
+            } else if(m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[2]) {
+                kCurrent = ibs / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 6, transformer->StringFromDouble(std::abs(data.faultCurrent[1][1]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 7, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][1]))));
+            kCurrent = 1.0;
+            if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
+                kCurrent = ibs;
+            } else if(m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[2]) {
+                kCurrent = ibs / 1e3;
+            }
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 8, transformer->StringFromDouble(std::abs(data.faultCurrent[1][2]) * kCurrent));
+            m_gridFaultBranches->SetCellValue(
+                rowNumber, 9, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][2]))));
+            m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
+            rowNumber++;
+        }
+
+        m_gridFaultBranches->AutoSize();
+    }
     m_changingValues = false;
-}
-
-void DataReport::CreateGrids()
-{
-    wxColour headerColour(200, 200, 200);
-    wxFont headerFont = m_gridPowerFlow->GetLabelFont();
-    headerFont.SetWeight(wxFONTWEIGHT_BOLD);
-
-    ElectricCalculation eCalc;
-    eCalc.GetElementsFromList(m_workspace->GetElementList());
-
-    // Power Flow
-    // Header
-    m_gridPowerFlow->AppendCols(6);
-    m_gridPowerFlow->AppendRows();
-    m_gridPowerFlow->HideColLabels();
-    m_gridPowerFlow->HideRowLabels();
-    for(int i = 0; i < 6; ++i) {
-        m_gridPowerFlow->SetCellBackgroundColour(0, i, headerColour);
-        m_gridPowerFlow->SetCellFont(0, i, headerFont);
-    }
-    m_gridPowerFlow->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-    // Values
-    auto lineList = eCalc.GetLineList();
-    for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) {
-        Line* line = *it;
-        if(line->IsOnline()) {
-            m_gridPowerFlow->AppendRows(2);
-        }
-    }
-    auto transformerList = eCalc.GetTransformerList();
-    for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) {
-        Transformer* transformer = *it;
-        if(transformer->IsOnline()) {
-            m_gridPowerFlow->AppendRows(2);
-        }
-    }
-    m_gridPowerFlow->AutoSize();
-
-    // Power Flow buses
-    // Header
-    m_gridPFBuses->AppendCols(6);
-    m_gridPFBuses->AppendRows();
-    m_gridPFBuses->HideColLabels();
-    m_gridPFBuses->HideRowLabels();
-    for(int i = 0; i < 6; ++i) {
-        m_gridPFBuses->SetCellBackgroundColour(0, i, headerColour);
-        m_gridPFBuses->SetCellFont(0, i, headerFont);
-    }
-    m_gridPFBuses->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-    // Values
-    auto busList = eCalc.GetBusList();
-    m_gridPFBuses->AppendRows(busList.size());
-    m_gridPFBuses->AutoSize();
-
-    // Power flow branches
-    // Header
-    m_gridPFBranches->AppendCols(10);
-    m_gridPFBranches->AppendRows(1);
-    m_gridPFBranches->HideColLabels();
-    m_gridPFBranches->HideRowLabels();
-    for(int i = 0; i < 10; ++i) {
-        m_gridPFBranches->SetCellBackgroundColour(0, i, headerColour);
-        m_gridPFBranches->SetCellFont(0, i, headerFont);
-    }
-    m_gridPFBranches->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-    // Values
-    m_gridPFBranches->AppendRows(lineList.size() + transformerList.size());
-    m_gridPFBranches->AutoSize();
 }
 
 void DataReport::OnPFBusGridChanged(wxGridEvent& event)

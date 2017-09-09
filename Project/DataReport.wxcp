@@ -206,7 +206,7 @@
           }, {
            "type": "string",
            "m_label": "Name:",
-           "m_value": "m_notebookPowerFlowData"
+           "m_value": "m_notebookDataReport"
           }, {
            "type": "multi-string",
            "m_label": "Tooltip:",

@@ -38,7 +38,7 @@
 class DataReportBase : public wxFrame
 {
 protected:
-    wxNotebook* m_notebookPowerFlowData;
+    wxNotebook* m_notebookDataReport;
     wxPanel* m_panelPowerFlowData;
     wxNotebook* m_notebookPowerFlow;
     wxPanel* m_panelPowerFlow;
@@ -86,7 +86,7 @@ public:
     wxPanel* GetPanelFaultGenerators() { return m_panelFaultGenerators; }
     wxNotebook* GetNotebookFault() { return m_notebookFault; }
     wxPanel* GetPanelFaultData() { return m_panelFaultData; }
-    wxNotebook* GetNotebookPowerFlowData() { return m_notebookPowerFlowData; }
+    wxNotebook* GetNotebookDataReport() { return m_notebookDataReport; }
     DataReportBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Data report"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_FRAME_STYLE);
     virtual ~DataReportBase();
 };

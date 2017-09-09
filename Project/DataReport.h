@@ -45,5 +45,6 @@ public:
     wxArrayString m_resistanceChoices;
     wxArrayString m_indReactanceChoices;
     wxArrayString m_capSusceptanceChoices;
+    wxArrayString m_currentChoices;
 };
 #endif  // DATAREPORT_H

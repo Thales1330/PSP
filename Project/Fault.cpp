@@ -3,15 +3,9 @@
 #include "DegreesAndRadians.h"
 #endif
 
-Fault::Fault()
-    : ElectricCalculation()
-{
-}
-
+Fault::Fault() : ElectricCalculation() {}
 Fault::Fault(std::vector<Element*> elementList) { GetElementsFromList(elementList); }
-
 Fault::~Fault() {}
-
 bool Fault::RunFaultCalculation(double systemPowerBase)
 {
     int numberOfBuses = static_cast<int>(m_busList.size());
@@ -44,6 +38,7 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
 
     // Pre-fault voltages (power flow solution).
     std::vector<std::complex<double> > preFaultVoltages;
+    preFaultVoltages.resize(m_busList.size());
 
     // Get fault parameters.
     int fNumber = -1;
@@ -53,7 +48,7 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
         BusElectricalData data = bus->GetElectricalData();
-        preFaultVoltages.push_back(data.voltage);
+        preFaultVoltages[data.number] = data.voltage;
         if(data.hasFault) {
             fNumber = data.number;
             fType = data.faultType;
@@ -125,7 +120,7 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
         case FAULT_LINE_GROUND: {
             fCurrentPos =
                 preFaultVoltage / (m_zBusPos[fNumber][fNumber] + m_zBusNeg[fNumber][fNumber] +
-                                      m_zBusZero[fNumber][fNumber] + std::complex<double>(3.0, 0.0) * fImpedance);
+                                   m_zBusZero[fNumber][fNumber] + std::complex<double>(3.0, 0.0) * fImpedance);
             switch(fLocation) {
                 case FAULT_LINE_A: {
                     fCurrentNeg = fCurrentPos;
@@ -148,9 +143,9 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
     }
 
     // Convert sequence currents to ABC. [Iabc] = [A]*[I012]
-    m_fCurrentA = fCurrentPos + fCurrentNeg + fCurrentZero;
-    m_fCurrentB = fCurrentPos + a2 * fCurrentNeg + a * fCurrentZero;
-    m_fCurrentC = fCurrentPos + a * fCurrentNeg + a2 * fCurrentZero;
+    m_fCurrentA = fCurrentZero + fCurrentPos + fCurrentNeg;
+    m_fCurrentB = fCurrentZero + a2 * fCurrentPos + a * fCurrentNeg;
+    m_fCurrentC = fCurrentZero + a * fCurrentPos + a2 * fCurrentNeg;
 
     // Pos-fault voltages calculation
     m_posFaultVoltagePos.clear();
@@ -166,11 +161,11 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
         m_posFaultVoltageZero.push_back(-m_zBusZero[i][fNumber] * fCurrentZero);
 
         // V012 -> Vabc
-        m_posFaultVoltageA.push_back(m_posFaultVoltagePos[i] + m_posFaultVoltageNeg[i] + m_posFaultVoltageZero[i]);
-        m_posFaultVoltageB.push_back(
-            m_posFaultVoltagePos[i] + a2 * m_posFaultVoltageNeg[i] + a * m_posFaultVoltageZero[i]);
-        m_posFaultVoltageC.push_back(
-            m_posFaultVoltagePos[i] + a * m_posFaultVoltageNeg[i] + a2 * m_posFaultVoltageZero[i]);
+        m_posFaultVoltageA.push_back(m_posFaultVoltageZero[i] + m_posFaultVoltagePos[i] + m_posFaultVoltageNeg[i]);
+        m_posFaultVoltageB.push_back(m_posFaultVoltageZero[i] + a2 * m_posFaultVoltagePos[i] +
+                                     a * m_posFaultVoltageNeg[i]);
+        m_posFaultVoltageC.push_back(m_posFaultVoltageZero[i] + a * m_posFaultVoltagePos[i] +
+                                     a2 * m_posFaultVoltageNeg[i]);
     }
 
     UpdateElementsFault(systemPowerBase);
@@ -204,9 +199,9 @@ void Fault::UpdateElementsFault(double systemPowerBase)
             int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
             int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
             auto data = line->GetElectricalData();
-            std::complex<double> vPos[2] = { m_posFaultVoltagePos[n1], m_posFaultVoltagePos[n2] };
-            std::complex<double> vNeg[2] = { m_posFaultVoltageNeg[n1], m_posFaultVoltageNeg[n2] };
-            std::complex<double> vZero[2] = { m_posFaultVoltageZero[n1], m_posFaultVoltageZero[n2] };
+            std::complex<double> vPos[2] = {m_posFaultVoltagePos[n1], m_posFaultVoltagePos[n2]};
+            std::complex<double> vNeg[2] = {m_posFaultVoltageNeg[n1], m_posFaultVoltageNeg[n2]};
+            std::complex<double> vZero[2] = {m_posFaultVoltageZero[n1], m_posFaultVoltageZero[n2]};
             std::complex<double> zPos(data.resistance, data.indReactance);
             std::complex<double> bPos(0.0, data.capSusceptance / 2.0);
             std::complex<double> zZero(data.zeroResistance, data.zeroIndReactance);
@@ -223,12 +218,12 @@ void Fault::UpdateElementsFault(double systemPowerBase)
             lineCurrentNeg[1] = ((vNeg[1] - vNeg[0]) / zPos) + (vNeg[1] * bPos);
             lineCurrentZero[1] = ((vZero[1] - vZero[0]) / zZero) + (vZero[1] * bZero);
 
-            data.faultCurrent[0][0] = lineCurrentPos[0] + lineCurrentNeg[0] + lineCurrentZero[0];
-            data.faultCurrent[1][0] = lineCurrentPos[0] + a2 * lineCurrentNeg[0] + a * lineCurrentZero[0];
-            data.faultCurrent[2][0] = lineCurrentPos[0] + a * lineCurrentNeg[0] + a2 * lineCurrentZero[0];
-            data.faultCurrent[0][1] = lineCurrentPos[1] + lineCurrentNeg[1] + lineCurrentZero[1];
-            data.faultCurrent[1][1] = lineCurrentPos[1] + a2 * lineCurrentNeg[1] + a * lineCurrentZero[1];
-            data.faultCurrent[2][1] = lineCurrentPos[1] + a * lineCurrentNeg[1] + a2 * lineCurrentZero[1];
+            data.faultCurrent[0][0] = lineCurrentZero[0] + lineCurrentPos[0] + lineCurrentNeg[0];
+            data.faultCurrent[0][1] = lineCurrentZero[0] + a2 * lineCurrentPos[0] + a * lineCurrentNeg[0];
+            data.faultCurrent[0][2] = lineCurrentZero[0] + a * lineCurrentPos[0] + a2 * lineCurrentNeg[0];
+            data.faultCurrent[1][0] = lineCurrentZero[1] + lineCurrentPos[1] + lineCurrentNeg[1];
+            data.faultCurrent[1][1] = lineCurrentZero[1] + a2 * lineCurrentPos[1] + a * lineCurrentNeg[1];
+            data.faultCurrent[1][2] = lineCurrentZero[1] + a * lineCurrentPos[1] + a2 * lineCurrentNeg[1];
 
             line->SetElectricalData(data);
         }
@@ -241,9 +236,9 @@ void Fault::UpdateElementsFault(double systemPowerBase)
             int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
             auto data = transformer->GetElectricalData();
 
-            std::complex<double> vPos[2] = { m_posFaultVoltagePos[n1], m_posFaultVoltagePos[n2] };
-            std::complex<double> vNeg[2] = { m_posFaultVoltageNeg[n1], m_posFaultVoltageNeg[n2] };
-            std::complex<double> vZero[2] = { m_posFaultVoltageZero[n1], m_posFaultVoltageZero[n2] };
+            std::complex<double> vPos[2] = {m_posFaultVoltagePos[n1], m_posFaultVoltagePos[n2]};
+            std::complex<double> vNeg[2] = {m_posFaultVoltageNeg[n1], m_posFaultVoltageNeg[n2]};
+            std::complex<double> vZero[2] = {m_posFaultVoltageZero[n1], m_posFaultVoltageZero[n2]};
             std::complex<double> zPos(data.resistance, data.indReactance);
             std::complex<double> zZero(data.zeroResistance, data.zeroIndReactance);
 
@@ -260,8 +255,8 @@ void Fault::UpdateElementsFault(double systemPowerBase)
                 transformerCurrentZero[1] = (vZero[1] - vZero[0]) / zZero;
             } else {
                 double radPhaseShift = wxDegToRad(data.phaseShift);
-                std::complex<double> t = std::complex<double>(
-                    data.turnsRatio * std::cos(radPhaseShift), -data.turnsRatio * std::sin(radPhaseShift));
+                std::complex<double> t = std::complex<double>(data.turnsRatio * std::cos(radPhaseShift),
+                                                              -data.turnsRatio * std::sin(radPhaseShift));
 
                 transformerCurrentPos[0] =
                     vPos[0] * (1.0 / (std::pow(std::abs(t), 2.0) * zPos)) - vPos[1] * (1.0 / (std::conj(t) * zPos));
@@ -295,16 +290,16 @@ void Fault::UpdateElementsFault(double systemPowerBase)
                 }
             }
 
-            data.faultCurrent[0][0] = transformerCurrentPos[0] + transformerCurrentNeg[0] + transformerCurrentZero[0];
-            data.faultCurrent[1][0] =
-                transformerCurrentPos[0] + a2 * transformerCurrentNeg[0] + a * transformerCurrentZero[0];
-            data.faultCurrent[2][0] =
-                transformerCurrentPos[0] + a * transformerCurrentNeg[0] + a2 * transformerCurrentZero[0];
-            data.faultCurrent[0][1] = transformerCurrentPos[1] + transformerCurrentNeg[1] + transformerCurrentZero[1];
+            data.faultCurrent[0][0] = transformerCurrentZero[0] + transformerCurrentPos[0] + transformerCurrentNeg[0];
+            data.faultCurrent[0][1] =
+                transformerCurrentZero[0] + a2 * transformerCurrentPos[0] + a * transformerCurrentNeg[0];
+            data.faultCurrent[0][2] =
+                transformerCurrentZero[0] + a * transformerCurrentPos[0] + a2 * transformerCurrentNeg[0];
+            data.faultCurrent[1][0] = transformerCurrentZero[1] + transformerCurrentPos[1] + transformerCurrentNeg[1];
             data.faultCurrent[1][1] =
-                transformerCurrentPos[1] + a2 * transformerCurrentNeg[1] + a * transformerCurrentZero[1];
-            data.faultCurrent[2][1] =
-                transformerCurrentPos[1] + a * transformerCurrentNeg[1] + a2 * transformerCurrentZero[1];
+                transformerCurrentZero[1] + a2 * transformerCurrentPos[1] + a * transformerCurrentNeg[1];
+            data.faultCurrent[1][2] =
+                transformerCurrentZero[1] + a * transformerCurrentPos[1] + a2 * transformerCurrentNeg[1];
 
             transformer->SetElectricaData(data);
         }
@@ -315,7 +310,7 @@ void Fault::UpdateElementsFault(double systemPowerBase)
         if(syncGenerator->IsOnline()) {
             Bus* bus = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
             int n = bus->GetElectricalData().number;
-            std::complex<double> v = bus->GetElectricalData().voltage; // Pre-fault voltage.
+            std::complex<double> v = bus->GetElectricalData().voltage;  // Pre-fault voltage.
             auto data = syncGenerator->GetElectricalData();
 
             std::complex<double> vPos = m_posFaultVoltagePos[n];
@@ -324,8 +319,8 @@ void Fault::UpdateElementsFault(double systemPowerBase)
 
             std::complex<double> zPos(data.positiveResistance, data.positiveReactance);
             std::complex<double> zNeg(data.negativeResistance, data.negativeReactance);
-            std::complex<double> zZero(
-                data.zeroResistance + 3.0 * data.groundResistance, data.negativeReactance + 3.0 * data.groundReactance);
+            std::complex<double> zZero(data.zeroResistance + 3.0 * data.groundResistance,
+                                       data.negativeReactance + 3.0 * data.groundReactance);
 
             std::complex<double> syncGeneratorCurrentPos = (v - vPos) / zPos;
             std::complex<double> syncGeneratorCurrentNeg = (-vNeg) / zNeg;
@@ -347,7 +342,7 @@ void Fault::UpdateElementsFault(double systemPowerBase)
         if(syncMotor->IsOnline()) {
             Bus* bus = static_cast<Bus*>(syncMotor->GetParentList()[0]);
             int n = bus->GetElectricalData().number;
-            std::complex<double> v = bus->GetElectricalData().voltage; // Pre-fault voltage.
+            std::complex<double> v = bus->GetElectricalData().voltage;  // Pre-fault voltage.
             auto data = syncMotor->GetElectricalData();
 
             std::complex<double> vPos = m_posFaultVoltagePos[n];
@@ -356,19 +351,19 @@ void Fault::UpdateElementsFault(double systemPowerBase)
 
             std::complex<double> zPos(data.positiveResistance, data.positiveReactance);
             std::complex<double> zNeg(data.negativeResistance, data.negativeReactance);
-            std::complex<double> zZero(
-                data.zeroResistance + 3.0 * data.groundResistance, data.negativeReactance + 3.0 * data.groundReactance);
+            std::complex<double> zZero(data.zeroResistance + 3.0 * data.groundResistance,
+                                       data.negativeReactance + 3.0 * data.groundReactance);
 
             std::complex<double> syncGeneratorCurrentPos = (v - vPos) / zPos;
             std::complex<double> syncGeneratorCurrentNeg = (-vNeg) / zNeg;
             std::complex<double> syncGeneratorCurrentZero(0.0, 0.0);
             if(data.groundNeutral) syncGeneratorCurrentZero = (-vZero) / zZero;
 
-            data.faultCurrent[0] = syncGeneratorCurrentPos + syncGeneratorCurrentNeg + syncGeneratorCurrentZero;
+            data.faultCurrent[0] = syncGeneratorCurrentZero + syncGeneratorCurrentPos + syncGeneratorCurrentNeg;
             data.faultCurrent[1] =
-                syncGeneratorCurrentPos + a2 * syncGeneratorCurrentNeg + a * syncGeneratorCurrentZero;
+                syncGeneratorCurrentZero + a2 * syncGeneratorCurrentPos + a * syncGeneratorCurrentNeg;
             data.faultCurrent[2] =
-                syncGeneratorCurrentPos + a * syncGeneratorCurrentNeg + a2 * syncGeneratorCurrentZero;
+                syncGeneratorCurrentZero + a * syncGeneratorCurrentPos + a2 * syncGeneratorCurrentNeg;
 
             syncMotor->SetElectricalData(data);
         }
@@ -386,7 +381,7 @@ bool Fault::RunSCPowerCalcutation(double systemPowerBase)
         m_errorMsg = _("Fail to invert the positive sequence admittance matrix.");
         return false;
     }
-    
+
     // Set the SC power.
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
@@ -395,6 +390,6 @@ bool Fault::RunSCPowerCalcutation(double systemPowerBase)
         data.scPower = 1.0 / std::abs(m_zBusPos[n][n]);
         bus->SetElectricalData(data);
     }
-    
+
     return true;
 }

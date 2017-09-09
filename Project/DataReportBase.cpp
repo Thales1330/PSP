@@ -64,13 +64,13 @@ DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& 
     
     boxSizerLvl1_1->Add(boxSizerLvl2_1, 1, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_notebookPowerFlowData = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
-    m_notebookPowerFlowData->SetName(wxT("m_notebookPowerFlowData"));
+    m_notebookDataReport = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebookDataReport->SetName(wxT("m_notebookDataReport"));
     
-    boxSizerLvl2_1->Add(m_notebookPowerFlowData, 1, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(m_notebookDataReport, 1, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_panelPowerFlowData = new wxPanel(m_notebookPowerFlowData, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookPowerFlowData, wxSize(-1,-1)), wxTAB_TRAVERSAL);
-    m_notebookPowerFlowData->AddPage(m_panelPowerFlowData, _("Power flow data"), false);
+    m_panelPowerFlowData = new wxPanel(m_notebookDataReport, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookDataReport, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookDataReport->AddPage(m_panelPowerFlowData, _("Power flow data"), false);
     
     wxBoxSizer* boxSizerLvl3_1 = new wxBoxSizer(wxVERTICAL);
     m_panelPowerFlowData->SetSizer(boxSizerLvl3_1);
@@ -131,8 +131,8 @@ DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& 
     
     boxSizerLvl4_3->Add(m_gridPFBranches, 1, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_panelFaultData = new wxPanel(m_notebookPowerFlowData, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookPowerFlowData, wxSize(-1,-1)), wxTAB_TRAVERSAL);
-    m_notebookPowerFlowData->AddPage(m_panelFaultData, _("Fault data"), false);
+    m_panelFaultData = new wxPanel(m_notebookDataReport, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookDataReport, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookDataReport->AddPage(m_panelFaultData, _("Fault data"), false);
     
     wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxVERTICAL);
     m_panelFaultData->SetSizer(boxSizerLvl3_2);
@@ -212,10 +212,10 @@ DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& 
     
     
     #if wxVERSION_NUMBER >= 2900
-    if(!wxPersistenceManager::Get().Find(m_notebookPowerFlowData)){
-        wxPersistenceManager::Get().RegisterAndRestore(m_notebookPowerFlowData);
+    if(!wxPersistenceManager::Get().Find(m_notebookDataReport)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebookDataReport);
     } else {
-        wxPersistenceManager::Get().Restore(m_notebookPowerFlowData);
+        wxPersistenceManager::Get().Restore(m_notebookDataReport);
     }
     #endif
     

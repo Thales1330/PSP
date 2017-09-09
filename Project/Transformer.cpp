@@ -445,59 +445,72 @@ wxString Transformer::GetTipText() const
     return tipText;
 }
 
-TransformerElectricalData Transformer::GetPUElectricalData(double basePower) const
+TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePower)
 {
     TransformerElectricalData data = m_electricalData;
-    double transformerBasePower = basePower;
-    if(m_electricalData.useTransformerPower) {
-        transformerBasePower = m_electricalData.nominalPower;
-        switch(m_electricalData.nominalPowerUnit) {
-            case UNIT_MVA: {
-                transformerBasePower *= 1e6;
-            } break;
-            case UNIT_kVA: {
-                transformerBasePower *= 1e3;
-            } break;
-            default:
-                break;
-        }
-    }
-    double vb = 0.0;
-    if(m_electricalData.baseVoltage == 0) {
-        vb = m_electricalData.primaryNominalVoltage;
-        if(m_electricalData.primaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+    double transformerBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
+    double baseVoltage = 0.0;
+    if(data.baseVoltage == 0) {
+        baseVoltage = GetValueFromUnit(data.primaryNominalVoltage, data.primaryNominalVoltageUnit);
     } else {
-        vb = m_electricalData.secondaryNominalVoltage;
-        if(m_electricalData.secondaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+        baseVoltage = GetValueFromUnit(data.secondaryNominalVoltage, data.secondaryNominalVoltageUnit);
     }
-    double zb = (vb * vb) / basePower;
+    double systemBaseImpedance = (baseVoltage * baseVoltage) / systemBasePower;
+    double transformerBaseImpedance = (baseVoltage * baseVoltage) / transformerBasePower;
 
     // Resistance
     double r = data.resistance;
-    switch(data.resistanceUnit) {
-        case UNIT_PU: {
-            if(m_electricalData.useTransformerPower) data.resistance = (basePower / transformerBasePower) * r;
-        } break;
-        case UNIT_OHM: {
-            data.resistance = r / zb;
-            data.resistanceUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    if(data.resistanceUnit ==  UNIT_PU) {
+        if(data.useTransformerPower) data.resistance = (r * transformerBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.resistance = r / systemBaseImpedance;
     }
+    data.resistanceUnit = UNIT_PU;
 
     // Indutive reactance
-    double xl = data.indReactance;
-    switch(data.indReactanceUnit) {
-        case UNIT_PU: {
-            if(m_electricalData.useTransformerPower) data.indReactance = (basePower / transformerBasePower) * xl;
-        } break;
-        case UNIT_OHM: {
-            data.indReactance = xl / zb;
-            data.indReactanceUnit = UNIT_PU;
-        } break;
-        default:
-            break;
+    double x = data.indReactance;
+    if(data.indReactanceUnit == UNIT_PU) {
+        if(data.useTransformerPower) data.indReactance = (x * transformerBaseImpedance) / systemBaseImpedance;
+    } else {
+        data.indReactance = x / systemBaseImpedance;
+    }
+    data.indReactanceUnit = UNIT_PU;
+
+    // Fault
+
+    // Zero seq. resistance
+    double r0 = data.zeroResistance;
+    if(data.useTransformerPower) data.zeroResistance = (r0 * transformerBaseImpedance) / systemBaseImpedance;
+
+    // Zero seq. ind. reactance
+    double x0 = data.zeroIndReactance;
+    if(data.useTransformerPower) data.zeroIndReactance = (x0 * transformerBaseImpedance) / systemBaseImpedance;
+
+    // Primary ground resistance
+    double rgp = data.primaryGrndResistance;
+    if(data.useTransformerPower) data.primaryGrndResistance = (rgp * transformerBaseImpedance) / systemBaseImpedance;
+
+    // Primary ground ind reactance
+    double xgp = data.primaryGrndReactance;
+    if(data.useTransformerPower) data.primaryGrndReactance = (xgp * transformerBaseImpedance) / systemBaseImpedance;
+
+    // Secondary ground resistance
+    double rgs = data.secondaryGrndResistance;
+    if(data.useTransformerPower) data.secondaryGrndResistance = (rgs * transformerBaseImpedance) / systemBaseImpedance;
+
+    // Secondary ground ind reactance
+    double xgs = data.secondaryGrndReactance;
+    if(data.useTransformerPower) data.secondaryGrndReactance = (xgs * transformerBaseImpedance) / systemBaseImpedance;
+    
+    if(!m_online) {
+        data.powerFlow[0] = std::complex<double>(0,0);
+        data.powerFlow[1] = std::complex<double>(0,0);
+        data.faultCurrent[0][0] = std::complex<double>(0,0);
+        data.faultCurrent[0][1] = std::complex<double>(0,0);
+        data.faultCurrent[0][2] = std::complex<double>(0,0);
+        data.faultCurrent[1][0] = std::complex<double>(0,0);
+        data.faultCurrent[1][1] = std::complex<double>(0,0);
+        data.faultCurrent[1][2] = std::complex<double>(0,0);
     }
 
     return data;
