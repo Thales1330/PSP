@@ -1,3 +1,3 @@
-# PSP
-Plataforma de Sistemas de Potência da Universidade Federal de Uberlândia
-(Power Systems Platform of Federal University of Uberlândia)
+# PSP-UFU
+
+https://thales1330.github.io/PSP/
