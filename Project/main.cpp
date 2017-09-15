@@ -96,6 +96,7 @@ class MainApp : public wxApp
         LoadCatalogs(locale, propertiesData);
 
         MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData);
+        mainFrame->SetIcon(wxICON(aaaaprogicon));
         SetTopWindow(mainFrame);
         return GetTopWindow()->Show();
     }
