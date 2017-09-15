@@ -5951,11 +5951,11 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "http://www.ndse.ufu.br/pspufu"
+           "m_value": "https://thales1330.github.io/PSP/"
           }, {
            "type": "string",
            "m_label": "URL:",
-           "m_value": "http://www.ndse.ufu.br/pspufu"
+           "m_value": "https://thales1330.github.io/PSP/"
           }, {
            "type": "colour",
            "m_label": "Normal Colour:",

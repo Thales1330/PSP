@@ -540,7 +540,7 @@ AboutFormBase::AboutFormBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     flexGridSizer247->Add(m_staticTextHome, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_hyperLinkPSP = new wxHyperlinkCtrl(this, wxID_ANY, _("http://www.ndse.ufu.br/pspufu"), wxT("http://www.ndse.ufu.br/pspufu"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxHL_DEFAULT_STYLE);
+    m_hyperLinkPSP = new wxHyperlinkCtrl(this, wxID_ANY, _("https://thales1330.github.io/PSP/"), wxT("https://thales1330.github.io/PSP/"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxHL_DEFAULT_STYLE);
     m_hyperLinkPSP->SetNormalColour(wxColour(wxT("#0000FF")));
     m_hyperLinkPSP->SetHoverColour(wxColour(wxT("#0000FF")));
     m_hyperLinkPSP->SetVisitedColour(wxColour(wxT("#FF0000")));
