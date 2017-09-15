@@ -5,10 +5,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PSP-UFU: Shunt Class Reference</title>
+<title>Shunt Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,13 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo256.png"/></td>
-  <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PSP-UFU
-   &#160;<span id="projectnumber">2017w37a</span>
-   </div>
-   <div id="projectbrief">Power System Platform (UFU)</div>
-  </td>
+  <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
  </tr>
  </tbody>
 </table>
@@ -45,6 +46,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_shunt.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,7 +75,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -495,7 +510,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a double value to string.  <a href="class_element.html#abb2e253ec1e86353cd7160209c96553c">More...</a><br /></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00007">7</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a449431a2044b838d35cbb991aa1de658"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a449431a2044b838d35cbb991aa1de658">&#9670;&nbsp;</a></span>Contains()</h2>
 
@@ -531,6 +549,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
 <p>Reimplemented in <a class="el" href="class_capacitor.html#a994039e59a8ae0ec3fe7cf7f5b66e4e5">Capacitor</a>, and <a class="el" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00013">13</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
 
 </div>
 </div>
@@ -570,6 +590,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_capacitor.html#a6b06adb1ef3545b220e0b94ee6210b7a">Capacitor</a>, and <a class="el" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00014">14</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
+
 </div>
 </div>
 <a id="aa98b8a2f097fc02fee1ea874e19480f3"></a>
@@ -605,6 +627,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_element.html#abe884d99d12d5252e18956162115b025">Element</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00015">15</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -653,6 +677,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a870e266e0457bacbc3f7ef1fb70c6fdd">Element</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00028">28</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ae325a441a44c2a78c08289292fa00979"></a>
@@ -690,6 +716,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a95b4f7e9341883ec39d0201148afffb4">Element</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00067">67</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a665d9a8c291d427e666567c6df34321b"></a>
@@ -725,6 +753,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a9504437b60faf2c5a27584de8a24810c">Element</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00057">57</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -773,6 +803,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#af26c67b6dd32eb1b3e417fddf54818c3">Element</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00124">124</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+
 </div>
 </div>
 <a id="aacb9fdd05533a8322596b130c70774ef"></a>
@@ -810,6 +842,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ac7490a91f3edfff08584567cc84d86b5">Element</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00081">81</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a56d6136d647f64cf490dd9d7720f6865"></a>
@@ -846,18 +880,24 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a846a2a51780a99363b4d4b1812ca16b4">Element</a>.</p>
 
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00050">50</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Project/<a class="el" href="_shunt_8h_source.html">Shunt.h</a></li>
-<li>Project/Shunt.cpp</li>
+<li>Project/<a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_shunt.html">Shunt</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

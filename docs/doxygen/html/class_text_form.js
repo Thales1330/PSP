@@ -1,0 +1,26 @@
+var class_text_form =
+[
+    [ "TextForm", "class_text_form.html#a14ccad2b03e8017c02eb632fbe02df2a", null ],
+    [ "~TextForm", "class_text_form.html#aa15c4be9ce71f50b6ebdbabf1ddb26bb", null ],
+    [ "DataTypeChoice", "class_text_form.html#a7cb43566e1ec8bb5d7be0e3ed86f1876", null ],
+    [ "ElementNumberChoice", "class_text_form.html#ad11e9224ce96616ccc1fae802a65738e", null ],
+    [ "ElementTypeChoice", "class_text_form.html#ae46074db075dacd127c78b16b0417c3a", null ],
+    [ "LoadChoices", "class_text_form.html#a4bbd73071ce20cf1c805139af58d2e77", null ],
+    [ "OnCancelButtonClick", "class_text_form.html#ab9cad6d1dc2ea1406ca6f9b44ecd46c3", null ],
+    [ "OnElementChoiceSelected", "class_text_form.html#a098066e96da254f13b5cd2b0e8977e43", null ],
+    [ "OnFromBusChoiceSelected", "class_text_form.html#a2946f7590a66a55d3ae63a6def86a8f3", null ],
+    [ "OnNameChoiceSelected", "class_text_form.html#aae058177645a7b974003cf7ba3957e62", null ],
+    [ "OnOKButtonClick", "class_text_form.html#a21a3fa61ce11a198e4a0cf086a85e61b", null ],
+    [ "OnTextEnter", "class_text_form.html#a29a135685c4f5f6801abc50ab48d97f9", null ],
+    [ "OnToBusChoiceSelected", "class_text_form.html#a3b32cfbb221700c5cde1146dd9ba0ac3", null ],
+    [ "OnTypeChoiceSelected", "class_text_form.html#a644cc688a5f54e202c451f403174a725", null ],
+    [ "OnUnitChoiceSelected", "class_text_form.html#a53d385f26fb4bf90e52db6e4c1d3b49a", null ],
+    [ "Preview", "class_text_form.html#a05f71762d18640d7ee7b85cf8cfde0ee", null ],
+    [ "UnitChoice", "class_text_form.html#a55358259e75a1e262aa6f2f58dc70c80", null ],
+    [ "ValidateData", "class_text_form.html#a553bf0b435f0d59d4c86ea7a004aab60", null ],
+    [ "m_allElements", "class_text_form.html#a4e3ecb63b41fe8e1592ba1bdb57cf89f", null ],
+    [ "m_parent", "class_text_form.html#af96c830fe67da49fac36a7df58f0728b", null ],
+    [ "m_systemPowerBase", "class_text_form.html#adc28fed9ecb5fb32957737af4e7827dc", null ],
+    [ "m_text", "class_text_form.html#a1268fce1f817bd9ff0626a24c0aabda7", null ],
+    [ "m_textToEdit", "class_text_form.html#aad06ea6fcaec43465ea4e0aa7bd3b61d", null ]
+];

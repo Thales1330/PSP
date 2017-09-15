@@ -1,0 +1,28 @@
+var class_reactive_shunt_element_form_base =
+[
+    [ "ReactiveShuntElementFormBase", "class_reactive_shunt_element_form_base.html#a93655501f77f68824420ef640ade219f", null ],
+    [ "~ReactiveShuntElementFormBase", "class_reactive_shunt_element_form_base.html#a783c3c5b73e8386a96c51e22d0730d78", null ],
+    [ "GetButtonCancel", "class_reactive_shunt_element_form_base.html#a39f95da41f55cae7829b9bd777dfef4d", null ],
+    [ "GetButtonOK", "class_reactive_shunt_element_form_base.html#ad927d95189e470a8f9268df8e16f81df", null ],
+    [ "GetButtonStabButton", "class_reactive_shunt_element_form_base.html#a3a61222247b8bf0d0dc0a74f002f9f54", null ],
+    [ "GetChoiceReactivePower", "class_reactive_shunt_element_form_base.html#a5ae249950ace35e5b19124f1fa49946b", null ],
+    [ "GetNotebook", "class_reactive_shunt_element_form_base.html#a3295f1d61c6249cb5ec8994a86b66d41", null ],
+    [ "GetPanelGeneral", "class_reactive_shunt_element_form_base.html#a92f31dfb84b855ff5a36ab9f5257e381", null ],
+    [ "GetStaticTextName", "class_reactive_shunt_element_form_base.html#aab4647a9961226fd3b6934b539539535", null ],
+    [ "GetStaticTextReactivePower", "class_reactive_shunt_element_form_base.html#a41f1a2d4df3cc1c7506b975d5ecde71b", null ],
+    [ "GetTextCtrlName", "class_reactive_shunt_element_form_base.html#a45c87f3d26fefb6701e3ce84445d3b2a", null ],
+    [ "GetTextCtrlReactivePower", "class_reactive_shunt_element_form_base.html#afb6b4c5f665e515a466d8fd31353829e", null ],
+    [ "OnCancelButtonClick", "class_reactive_shunt_element_form_base.html#a2eabee46e0b04d92086a0d0f21e3b10e", null ],
+    [ "OnOKButtonClick", "class_reactive_shunt_element_form_base.html#a4b0ca8c2ccb39a0f305bcc2fe95c820e", null ],
+    [ "OnStabilityButtonClick", "class_reactive_shunt_element_form_base.html#aff864c79e7dae7fd22200efcdba27eb3", null ],
+    [ "m_buttonCancel", "class_reactive_shunt_element_form_base.html#aee2a26f08d25bb9989a03e8228dd1e69", null ],
+    [ "m_buttonOK", "class_reactive_shunt_element_form_base.html#a22cccd74ef0c2b8d251c336a88c9f407", null ],
+    [ "m_buttonStabButton", "class_reactive_shunt_element_form_base.html#a2e2c10853585884ad3a2802764b756c7", null ],
+    [ "m_choiceReactivePower", "class_reactive_shunt_element_form_base.html#a653e5033a3d9834d3a3e1f3442d3d1e5", null ],
+    [ "m_notebook", "class_reactive_shunt_element_form_base.html#a12aba656b33ee48307824e4229f75541", null ],
+    [ "m_panelGeneral", "class_reactive_shunt_element_form_base.html#a2554b773c193f87e3ac85fc14d3e63c7", null ],
+    [ "m_staticTextName", "class_reactive_shunt_element_form_base.html#a090e59ee0d5d344b2867b3e7b79e8951", null ],
+    [ "m_staticTextReactivePower", "class_reactive_shunt_element_form_base.html#a2ca7cece107e7d4057f5c9ee5b98c305", null ],
+    [ "m_textCtrlName", "class_reactive_shunt_element_form_base.html#a27c200b1beef702fec0e5d5a94165269", null ],
+    [ "m_textCtrlReactivePower", "class_reactive_shunt_element_form_base.html#aacf7ec5dec20fef61f3b190a950a0528", null ]
+];

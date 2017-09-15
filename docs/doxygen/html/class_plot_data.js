@@ -1,0 +1,26 @@
+var class_plot_data =
+[
+    [ "PlotData", "class_plot_data.html#ae47a004654643cfc9b92adc71a4cf329", null ],
+    [ "~PlotData", "class_plot_data.html#a1cb94d65bba22a360b944ee7f984deb0", null ],
+    [ "GetAxis", "class_plot_data.html#a350f55e0284bf76b29d3407ab4a27e03", null ],
+    [ "GetColour", "class_plot_data.html#a2676d2127ec018ca65ca050c6a3e9283", null ],
+    [ "GetName", "class_plot_data.html#a0f44d78236b2f63c2e9a91714ab6fb93", null ],
+    [ "GetPenType", "class_plot_data.html#a300d6834ed32b84bbfeaff1eb2f3110a", null ],
+    [ "GetThick", "class_plot_data.html#adcedf9ea7913016c4e873fb34d1bbaeb", null ],
+    [ "GetValues", "class_plot_data.html#a4140a06481acd5a30bc93c4596bde12f", null ],
+    [ "IsPlot", "class_plot_data.html#a4e1477bd4f881e125777ecb957e88f67", null ],
+    [ "SetAxis", "class_plot_data.html#a22ea156cd9e5928433f3942441338615", null ],
+    [ "SetColour", "class_plot_data.html#a467c771ab18f6c2f8d9538ddbf54b894", null ],
+    [ "SetName", "class_plot_data.html#aaa111316ee264172a593f37a44535bce", null ],
+    [ "SetPenType", "class_plot_data.html#a2aa0424c9b6cad400344f36044150d5f", null ],
+    [ "SetPlot", "class_plot_data.html#a06057c547fd67d07c198e97138cd30cc", null ],
+    [ "SetThick", "class_plot_data.html#af7cb7387a3902a0d11b134f3a241f538", null ],
+    [ "SetValues", "class_plot_data.html#aaef76dbf3683e48fbf185ac98d42c55e", null ],
+    [ "m_axis", "class_plot_data.html#a19d3ba5b243c0b3a0ae29deb853fa468", null ],
+    [ "m_colour", "class_plot_data.html#a56d96ac4098c3c484fcc72df17272d3c", null ],
+    [ "m_name", "class_plot_data.html#a61f92a5008b507029b47baabfda9da4f", null ],
+    [ "m_penType", "class_plot_data.html#ac5fab80f751e5c8220e62b1a8639b2ba", null ],
+    [ "m_plot", "class_plot_data.html#aed63b37dfb4b7cc33a52cd77f64be040", null ],
+    [ "m_thick", "class_plot_data.html#a9435886e5e2c795e014c39866c01bb0f", null ],
+    [ "m_values", "class_plot_data.html#acc00d1c404fff949e1f01db66eaa3a64", null ]
+];
