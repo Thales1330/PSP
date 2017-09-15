@@ -69,6 +69,7 @@
         <VirtualDirectory Name="properties">
           <File Name="GeneralPropertiesForm.cpp"/>
           <File Name="SimulationsSettingsForm.cpp"/>
+          <File Name="AboutForm.cpp"/>
         </VirtualDirectory>
         <VirtualDirectory Name="control element">
           <File Name="ConstantForm.cpp"/>
@@ -207,6 +208,7 @@
         <VirtualDirectory Name="properties">
           <File Name="GeneralPropertiesForm.h"/>
           <File Name="SimulationsSettingsForm.h"/>
+          <File Name="AboutForm.h"/>
         </VirtualDirectory>
       </VirtualDirectory>
       <VirtualDirectory Name="main GUI">

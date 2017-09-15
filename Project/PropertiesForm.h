@@ -24,6 +24,10 @@
 #include <wx/textctrl.h>
 #include <wx/statbox.h>
 #include <wx/checkbox.h>
+#include <wx/statbmp.h>
+#include <wx/grid.h>
+#include <wx/richtext/richtextctrl.h>
+#include <wx/hyperlink.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -159,6 +163,43 @@ public:
     wxButton* GetButtonCancel() { return m_buttonCancel; }
     SimulationsSettingsFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Simulation settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~SimulationsSettingsFormBase();
+};
+
+
+class AboutFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelLogo;
+    wxStaticBitmap* m_staticBitmapLogo;
+    wxPanel* m_panelCredits;
+    wxGrid* m_gridCredits;
+    wxPanel* m_panelLicense;
+    wxRichTextCtrl* m_richTextCtrlLicense;
+    wxStaticText* m_staticTextVersionLabel;
+    wxStaticText* m_staticTextVersion;
+    wxStaticText* m_staticTextHome;
+    wxHyperlinkCtrl* m_hyperLinkPSP;
+    wxButton* m_buttonOK;
+
+protected:
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticBitmap* GetStaticBitmapLogo() { return m_staticBitmapLogo; }
+    wxPanel* GetPanelLogo() { return m_panelLogo; }
+    wxGrid* GetGridCredits() { return m_gridCredits; }
+    wxPanel* GetPanelCredits() { return m_panelCredits; }
+    wxRichTextCtrl* GetRichTextCtrlLicense() { return m_richTextCtrlLicense; }
+    wxPanel* GetPanelLicense() { return m_panelLicense; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxStaticText* GetStaticTextVersionLabel() { return m_staticTextVersionLabel; }
+    wxStaticText* GetStaticTextVersion() { return m_staticTextVersion; }
+    wxStaticText* GetStaticTextHome() { return m_staticTextHome; }
+    wxHyperlinkCtrl* GetHyperLinkPSP() { return m_hyperLinkPSP; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    AboutFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About PSP-UFU"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~AboutFormBase();
 };
 
 #endif

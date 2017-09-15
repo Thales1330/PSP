@@ -465,3 +465,125 @@ SimulationsSettingsFormBase::~SimulationsSettingsFormBase()
     m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonCancelClick), NULL, this);
     
 }
+
+AboutFormBase::AboutFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxCDAD0InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerMain = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerMain);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerMain->Add(m_notebook, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelLogo = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelLogo, _("About"), false);
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelLogo->SetSizer(boxSizerLvl1_1);
+    
+    m_staticBitmapLogo = new wxStaticBitmap(m_panelLogo, wxID_ANY, wxXmlResource::Get()->LoadBitmap(wxT("About2017")), wxDefaultPosition, wxDLG_UNIT(m_panelLogo, wxSize(-1,-1)), 0 );
+    
+    boxSizerLvl1_1->Add(m_staticBitmapLogo, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, WXC_FROM_DIP(5));
+    
+    m_panelCredits = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelCredits, _("Credits"), false);
+    
+    wxBoxSizer* boxSizerLvl1_2 = new wxBoxSizer(wxVERTICAL);
+    m_panelCredits->SetSizer(boxSizerLvl1_2);
+    
+    m_gridCredits = new wxGrid(m_panelCredits, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelCredits, wxSize(-1,-1)), wxWANTS_CHARS);
+    m_gridCredits->CreateGrid(0, 0);
+    m_gridCredits->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
+    m_gridCredits->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    #if wxVERSION_NUMBER >= 2904
+    m_gridCredits->UseNativeColHeader(true);
+    #endif
+    m_gridCredits->EnableEditing(false);
+    
+    boxSizerLvl1_2->Add(m_gridCredits, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelLicense = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelLicense, _("License"), false);
+    
+    wxBoxSizer* boxSizerLvl1_3 = new wxBoxSizer(wxVERTICAL);
+    m_panelLicense->SetSizer(boxSizerLvl1_3);
+    
+    m_richTextCtrlLicense = new wxRichTextCtrl(m_panelLicense, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelLicense, wxSize(-1,-1)), wxTE_MULTILINE|wxTE_PROCESS_TAB|wxTE_PROCESS_ENTER|wxWANTS_CHARS);
+    
+    boxSizerLvl1_3->Add(m_richTextCtrlLicense, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxFlexGridSizer* flexGridSizer247 = new wxFlexGridSizer(2, 2, 0, 0);
+    flexGridSizer247->SetFlexibleDirection( wxBOTH );
+    flexGridSizer247->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+    flexGridSizer247->AddGrowableCol(1);
+    
+    boxSizerMain->Add(flexGridSizer247, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextVersionLabel = new wxStaticText(this, wxID_ANY, _("Version:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    flexGridSizer247->Add(m_staticTextVersionLabel, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_staticTextVersion = new wxStaticText(this, wxID_ANY, _("Alpha 2017w37a"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    flexGridSizer247->Add(m_staticTextVersion, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_staticTextHome = new wxStaticText(this, wxID_ANY, _("Home page:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    flexGridSizer247->Add(m_staticTextHome, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_hyperLinkPSP = new wxHyperlinkCtrl(this, wxID_ANY, _("http://www.ndse.ufu.br/pspufu"), wxT("http://www.ndse.ufu.br/pspufu"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxHL_DEFAULT_STYLE);
+    m_hyperLinkPSP->SetNormalColour(wxColour(wxT("#0000FF")));
+    m_hyperLinkPSP->SetHoverColour(wxColour(wxT("#0000FF")));
+    m_hyperLinkPSP->SetVisitedColour(wxColour(wxT("#FF0000")));
+    
+    flexGridSizer247->Add(m_hyperLinkPSP, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerMain->Add(m_buttonOK, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("AboutFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(AboutFormBase::OnOKButtonClick), NULL, this);
+    
+}
+
+AboutFormBase::~AboutFormBase()
+{
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(AboutFormBase::OnOKButtonClick), NULL, this);
+    
+}
