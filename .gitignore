@@ -23,7 +23,7 @@ Project/Debug/
 *.jar
 *.rar
 *.tar
-*.zip
+#*.zip
 
 # Logs and databases #
 ######################
