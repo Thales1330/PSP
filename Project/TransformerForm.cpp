@@ -6,6 +6,17 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 {
     m_choiceResistance->SetString(1, L'\u03A9');
     m_choiceReactance->SetString(1, L'\u03A9');
+    
+    //Reset connections choice labels (to be translated)
+    m_choiceConnection->SetString(0, _("Grounded Wye - Grounded Wye"));
+    m_choiceConnection->SetString(1, _("Wye - Grounded Wye"));
+    m_choiceConnection->SetString(2, _("Grounded Wye - Wye"));
+    m_choiceConnection->SetString(3, _("Wye - Wye"));
+    m_choiceConnection->SetString(4, _("Delta - Grounded Wye"));
+    m_choiceConnection->SetString(5, _("Delta - Wye"));
+    m_choiceConnection->SetString(6, _("Grounded Wye - Delta"));
+    m_choiceConnection->SetString(7, _("Wye - Delta"));
+    m_choiceConnection->SetString(8, _("Delta - Delta"));
 
     SetSize(GetBestSize());
     Layout();

@@ -16,6 +16,7 @@
 #include "PropertiesData.h"
 #include "ChartView.h"
 #include "DataReport.h"
+#include "AboutForm.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties) : MainFrameBase(parent)
@@ -137,7 +138,12 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
     m_projectNumber++;
 }
 
-void MainFrame::OnAboutClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnAboutClick(wxRibbonButtonBarEvent& event)
+{
+    AboutForm about(this);
+    about.ShowModal();
+}
+
 void MainFrame::OnAddElementDropdown(wxRibbonButtonBarEvent& event) { event.PopupMenu(m_addElementsMenu); }
 void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event)
 {
@@ -157,7 +163,6 @@ void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event)
 
 void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
-
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event)
 {
     if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
@@ -295,6 +300,7 @@ void MainFrame::OnSCPowerClick(wxRibbonButtonBarEvent& event)
         workspace->RunSCPower();
     }
 }
+
 void MainFrame::OnSaveAsClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -432,6 +438,7 @@ void MainFrame::NotebookPageClosed(wxAuiNotebookEvent& event)
 {
     if(m_auiNotebook->GetPageCount() == 0) EnableCurrentProjectRibbon(false);
 }
+
 void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 {
     auto it = m_workspaceList.begin();
@@ -444,6 +451,7 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
     }
     event.Skip();
 }
+
 void MainFrame::OnRotClockClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -451,6 +459,7 @@ void MainFrame::OnRotClockClick(wxRibbonButtonBarEvent& event)
         workspace->RotateSelectedElements();
     }
 }
+
 void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -458,6 +467,7 @@ void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
         workspace->RotateSelectedElements(false);
     }
 }
+
 void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 {
     GeneralPropertiesForm genPropForm(this, m_generalProperties);

@@ -3,6 +3,11 @@
 
 BusForm::BusForm(wxWindow* parent, Bus* bus) : BusFormBase(parent)
 {
+    m_choiceFaultType->SetString(0, _("Three-phase"));
+    m_choiceFaultType->SetString(1, _("Line-to-line"));
+    m_choiceFaultType->SetString(2, _("Double line-to-ground"));
+    m_choiceFaultType->SetString(3, _("Line-to-ground"));
+    
     SetSize(GetBestSize());
 
     m_parent = parent;

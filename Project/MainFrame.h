@@ -16,6 +16,7 @@ class SimulationsSettingsForm;
 class PropertiesData;
 class ChartView;
 class DataReport;
+class AboutForm;
 
 enum {
     ID_ADDMENU_BUS = 20000,
