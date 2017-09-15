@@ -4,7 +4,6 @@
 .codelite/
 Project/Release/
 Project/Debug/
-doxygen/
 
 # Compiled source #
 ###################
