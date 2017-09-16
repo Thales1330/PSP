@@ -19,7 +19,7 @@ O _software_ permite a realização dos seguintes estudos:
   - Nível de curto-circuito em todas as barras
 - **Estabilidade eletromecânica**
   - Vários modelos de máquinas síncronas
-  - Criação e edição de controle (tensão e velocidade) genéricos
+  - Criação e edição de controles (tensão e velocidade) genéricos
 
 ## [](#header-2)Documentação
 
@@ -35,6 +35,4 @@ Toda a descrição detalhada do código fonte pode ser encontrada na [**Document
 
 ![](ss/ss_3.png)
 
-```
-Desenvolvido por Thales Lima Oliveira
-```
+Desenvolvido por Thales Lima Oliveira (<thales@ufu.br>)
