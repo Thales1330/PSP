@@ -90,7 +90,8 @@ a {
   color: $header-heading-color;
   text-align: center;
   background-color: $header-bg-color;
-  background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
+  /*background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);*/
+  background-image: #56687C url('img/cover.jpg') no-repeat 50%;
 
   @include large {
     padding: 5rem 6rem;

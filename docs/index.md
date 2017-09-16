@@ -27,12 +27,12 @@ Toda a descrição detalhada do código fonte pode ser encontrada na [**Document
 
 ## [](#header-2)Screenshots
 
-![](ss/ss_1.png)
+![](img/ss_1.png)
 
-![](ss/ss_1_1.png)
+![](img/ss_1_1.png)
 
-![](ss/ss_2.png)
+![](img/ss_2.png)
 
-![](ss/ss_3.png)
+![](img/ss_3.png)
 
 Desenvolvido por Thales Lima Oliveira (<thales@ufu.br>)
