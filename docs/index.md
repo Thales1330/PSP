@@ -23,7 +23,7 @@ O _software_ permite a realização dos seguintes estudos:
 
 ## [](#header-2)Documentação
 
-Toda a descrição detalhada do código fonte pode ser encontrada na [**Documentação Online**](doxygen/html/index.html), gerada pelo [Doxygen](www.doxygen.org)
+Toda a descrição detalhada do código fonte pode ser encontrada na [**Documentação Online**](doxygen/html/index.html), gerada pelo [Doxygen](http://www.doxygen.org).
 
 ## [](#header-2)Screenshots
 
