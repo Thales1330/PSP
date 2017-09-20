@@ -19,12 +19,34 @@
 #include "AboutForm.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
-MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties) : MainFrameBase(parent)
+MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties, wxString openPath)
+    : MainFrameBase(parent)
 {
     m_locale = locale;
     m_generalProperties = initProperties;
 
     Init();
+
+    if(openPath != "") {
+        EnableCurrentProjectRibbon();
+        Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar());
+
+        FileHanding fileHandling(newWorkspace);
+        if(fileHandling.OpenProject(openPath)) {
+            newWorkspace->SetSavedPath(openPath);
+
+            m_workspaceList.push_back(newWorkspace);
+
+            m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+            m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
+
+            m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
+            m_auiNotebook->Layout();
+            newWorkspace->Redraw();
+            newWorkspace->SetJustOpened(true);
+            m_projectNumber++;
+        }
+    }
 }
 
 MainFrame::~MainFrame()

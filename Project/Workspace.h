@@ -53,9 +53,17 @@ enum ElementID {
     NUM_ELEMENTS
 };
 
+/**
+ * @class Workspace
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 19/09/2017
+ * @file Workspace.h
+ * @brief This class manages the graphical and power elements. It is responsible for handling the user's interaction
+ * with the elements.
+ */
 class Workspace : public WorkspaceBase
 {
-public:
+   public:
     enum WorkspaceMode {
         MODE_EDIT = 0,
         MODE_MOVE_ELEMENT,
@@ -81,12 +89,10 @@ public:
     std::vector<Element*> GetAllElements() const;
     WorkspaceMode GetWorkspaceMode() const { return m_mode; }
     Camera* GetCamera() const { return m_camera; }
-
     void CopySelection();
     bool Paste();
 
     wxFileName GetSavedPath() const { return m_savedPath; }
-
     void SetName(wxString name) { m_name = name; }
     void SetElementList(std::vector<Element*> elementList);
     void SetTextList(std::vector<Text*> textList);
@@ -94,13 +100,12 @@ public:
     void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
     void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
     void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
-
     void Redraw() { m_glCanvas->Refresh(); }
     void RotateSelectedElements(bool clockwise = true);
     void DeleteSelectedElements();
     bool GetElementsCorners(wxPoint2DDouble& leftUpCorner,
-        wxPoint2DDouble& rightDownCorner,
-        std::vector<Element*> elementList);
+                            wxPoint2DDouble& rightDownCorner,
+                            std::vector<Element*> elementList);
     void Fit();
     void UnselectAll();
 
@@ -112,21 +117,17 @@ public:
 
     int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
     void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
-    
     PropertiesData* GetProperties() const { return m_properties; }
-    
     std::vector<double> GetStabilityTimeVector() const { return m_stabilityTimeVector; }
-    
     bool IsContinuousCalculationActive() const { return m_continuousCalc; }
     void SetContinuousCalculationActive(bool value = true) { m_continuousCalc = value; }
-
     bool RunPowerFlow();
     bool RunFault();
     bool RunSCPower();
     bool RunStaticStudies();
     bool RunStability();
 
-protected:
+   protected:
     virtual void OnMiddleDoubleClick(wxMouseEvent& event);
     virtual void OnIdle(wxIdleEvent& event);
     virtual void OnTimer(wxTimerEvent& event);
@@ -162,14 +163,14 @@ protected:
 
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
-    
+
     PropertiesData* m_properties = NULL;
-    
+
     std::vector<double> m_stabilityTimeVector;
-    
+
     bool m_continuousCalc = false;
     bool m_disconnectedElement = false;
     bool m_justOpened = false;
 };
 
-#endif // WORKSPACE_H
+#endif  // WORKSPACE_H

@@ -5,6 +5,8 @@
 #include <wx/geometry.h>
 #include <wx/cursor.h>
 #include <wx/menu.h>
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
 #include <GL/gl.h>
 
 #include <complex>
@@ -85,6 +87,13 @@ protected:
     GLdouble rgba[4];
 };
 
+/**
+ * @class Element
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 19/09/2017
+ * @file Element.h
+ * @brief Base class of all elements of the program. This class is responsible for manage graphical and his data.
+ */
 class Element
 {
 public:

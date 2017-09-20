@@ -3,6 +3,7 @@
 #include "PropertiesForm.h"
 
 #include <wx/textfile.h>
+#include <wx/stdpaths.h>
 
 class AboutForm : public AboutFormBase
 {

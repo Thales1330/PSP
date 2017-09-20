@@ -60,7 +60,9 @@ void AboutForm::Init()
     // Load license file
     wxString licenseStr = "";
     wxTextFile file;
-    if(!file.Open("../data/LICENSE")) {
+    wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+    wxString licensePath = fn.GetPath() + "\\..\\data\\LICENSE";
+    if(!file.Open(licensePath)) {
         // Error message
     } else {
         licenseStr += file.GetFirstLine() + "\n";

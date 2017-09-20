@@ -227,16 +227,19 @@ bool Element::SetOnline(bool online)
 
 void Element::GeneralMenuItens(wxMenu& menu)
 {
+    wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
+    wxString exePath = exeFileName.GetPath();
+    
     wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
-    clockItem->SetBitmap(wxImage("..\\data\\images\\menu\\rotateClock16.png"));
+    clockItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\rotateClock16.png"));
     menu.Append(clockItem);
 
     wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    counterClockItem->SetBitmap(wxImage("..\\data\\images\\menu\\rotateCounterClock16.png"));
+    counterClockItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\rotateCounterClock16.png"));
     menu.Append(counterClockItem);
 
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(wxImage("..\\data\\images\\menu\\delete16.png"));
+    deleteItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\delete16.png"));
     menu.Append(deleteItem);
 }
 

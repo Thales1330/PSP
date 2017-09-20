@@ -132,48 +132,54 @@ void ControlEditor::BuildControlElementPanel()
     wxWrapSizer* wrapSizer = new wxWrapSizer();
     m_panelControlElements->SetSizer(wrapSizer);
 
-    ControlElementButton* ioButton = new ControlElementButton(m_panelControlElements, _("In/Out"),
-                                                              wxImage("..\\data\\images\\control\\io.png"), ID_IO);
+    wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
+    wxString exePath = exeFileName.GetPath();
+
+    ControlElementButton* ioButton = new ControlElementButton(
+        m_panelControlElements, _("In/Out"), wxImage(exePath + "\\..\\data\\images\\control\\io.png"), ID_IO);
     wrapSizer->Add(ioButton, 0, wxALL, 5);
     ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* tfButton = new ControlElementButton(
-        m_panelControlElements, _("Transfer fcn"), wxImage("..\\data\\images\\control\\transferFunc.png"), ID_TF);
+    ControlElementButton* tfButton =
+        new ControlElementButton(m_panelControlElements, _("Transfer fcn"),
+                                 wxImage(exePath + "\\..\\data\\images\\control\\transferFunc.png"), ID_TF);
     wrapSizer->Add(tfButton, 0, wxALL, 5);
     tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* sumButton = new ControlElementButton(m_panelControlElements, _("Sum"),
-                                                               wxImage("..\\data\\images\\control\\sum.png"), ID_SUM);
+    ControlElementButton* sumButton = new ControlElementButton(
+        m_panelControlElements, _("Sum"), wxImage(exePath + "\\..\\data\\images\\control\\sum.png"), ID_SUM);
     wrapSizer->Add(sumButton, 0, wxALL, 5);
     sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* constButton = new ControlElementButton(
-        m_panelControlElements, _("Constant"), wxImage("..\\data\\images\\control\\value.png"), ID_CONST);
+        m_panelControlElements, _("Constant"), wxImage(exePath + "\\..\\data\\images\\control\\value.png"), ID_CONST);
     wrapSizer->Add(constButton, 0, wxALL, 5);
     constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* limButton = new ControlElementButton(
-        m_panelControlElements, _("Limiter"), wxImage("..\\data\\images\\control\\limiter.png"), ID_LIMITER);
+    ControlElementButton* limButton =
+        new ControlElementButton(m_panelControlElements, _("Limiter"),
+                                 wxImage(exePath + "\\..\\data\\images\\control\\limiter.png"), ID_LIMITER);
     wrapSizer->Add(limButton, 0, wxALL, 5);
     limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* gainButton = new ControlElementButton(
-        m_panelControlElements, _("Gain"), wxImage("..\\data\\images\\control\\gain.png"), ID_GAIN);
+        m_panelControlElements, _("Gain"), wxImage(exePath + "\\..\\data\\images\\control\\gain.png"), ID_GAIN);
     wrapSizer->Add(gainButton, 0, wxALL, 5);
     gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* multButton = new ControlElementButton(
-        m_panelControlElements, _("Multiplier"), wxImage("..\\data\\images\\control\\mult.png"), ID_MULT);
+        m_panelControlElements, _("Multiplier"), wxImage(exePath + "\\..\\data\\images\\control\\mult.png"), ID_MULT);
     wrapSizer->Add(multButton, 0, wxALL, 5);
     multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* satButton = new ControlElementButton(m_panelControlElements, _("Exponential"),
-                                                               wxImage("..\\data\\images\\control\\sat.png"), ID_EXP);
+    ControlElementButton* satButton = new ControlElementButton(
+        m_panelControlElements, _("Exponential"), wxImage(exePath + "\\..\\data\\images\\control\\sat.png"), ID_EXP);
     wrapSizer->Add(satButton, 0, wxALL, 5);
     satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* rateLimButton = new ControlElementButton(
-        m_panelControlElements, _("Rate limiter"), wxImage("..\\data\\images\\control\\rateLimiter.png"), ID_RATELIM);
+    ControlElementButton* rateLimButton =
+        new ControlElementButton(m_panelControlElements, _("Rate limiter"),
+                                 wxImage(exePath + "\\..\\data\\images\\control\\rateLimiter.png"), ID_RATELIM);
     wrapSizer->Add(rateLimButton, 0, wxALL, 5);
     rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }

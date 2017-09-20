@@ -30,11 +30,32 @@ enum {
     ID_ADDMENU_SYNCCOMP
 };
 
+/**
+ * @class MainFrame
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 19/09/2017
+ * @file MainFrame.h
+ * @brief Main frame of the program. This class manage the ribbon menu and the notebook behavior.
+ */
 class MainFrame : public MainFrameBase
 {
    public:
+    /**
+     * @brief Default constructor.
+     */
+
     MainFrame();
-    MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties);
+    /**
+     * @brief Main frame contructor.
+     * @param parent Parent window.
+     * @param locale Locale settings.
+     * @param initProperties Initial properties.
+     */
+    MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties, wxString openPath = "");
+
+    /**
+     * @brief Default destructor.
+     */
     ~MainFrame();
 
    protected:
@@ -73,7 +94,6 @@ class MainFrame : public MainFrameBase
     virtual void OnUndoClick(wxRibbonButtonBarEvent& event);
     virtual void OnNewClick(wxRibbonButtonBarEvent& event);
 
-   protected:
     std::vector<Workspace*> m_workspaceList;
     int m_projectNumber = 1;
 
