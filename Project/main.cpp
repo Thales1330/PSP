@@ -3,6 +3,7 @@
 #include <wx/image.h>
 #include <wx/stdpaths.h>
 #include <wx/textfile.h>
+#include <wx/cmdline.h>
 
 #include "MainFrame.h"
 #include "PropertiesData.h"
@@ -15,12 +16,13 @@ class MainApp : public wxApp
     virtual ~MainApp() {}
     bool LoadInitFile(PropertiesData* propertiesData)
     {
-        wxTextFile file("config.ini");
+        wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+        wxTextFile file(fn.GetPath() + "\\config.ini");
         auto data = propertiesData->GetGeneralPropertiesData();
 
         if(!file.Create()) {
             if(!file.Open()) return false;
-            
+
             wxString line;
             for(line = file.GetFirstLine(); !file.Eof(); line = file.GetNextLine()) {
                 wxString tag = "";
@@ -53,7 +55,7 @@ class MainApp : public wxApp
                 }
             }
             file.Close();
-        } else { // Create default init file.
+        } else {  // Create default init file.
             if(!file.Open()) return false;
 
             // Default parameters.
@@ -95,7 +97,19 @@ class MainApp : public wxApp
         wxLocale* locale = new wxLocale();
         LoadCatalogs(locale, propertiesData);
 
-        MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData);
+        wxString openFilePath = "";
+
+        wxCmdLineParser cmdLineParser(wxApp::argc, wxApp::argv);
+        cmdLineParser.AddParam("", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
+        if(cmdLineParser.Parse() == 0) {
+            wxCmdLineArgs args = cmdLineParser.GetArguments();
+            for(auto it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {
+                if(it->GetKind() == wxCMD_LINE_PARAM) {
+                    openFilePath = it->GetStrVal();
+                }
+            }
+        }
+        MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData, openFilePath);
         mainFrame->SetIcon(wxICON(aaaaprogicon));
         SetTopWindow(mainFrame);
         return GetTopWindow()->Show();

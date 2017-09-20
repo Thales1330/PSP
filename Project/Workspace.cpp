@@ -725,7 +725,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
                 // Tests - Ctrl + Shift + L
                 if(event.ControlDown() && event.ShiftDown()) {
-                    UpdateTextElements();
+                    // Nothing...
                 }
             } break;
             case 'T':  // Insert a transformer.

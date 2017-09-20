@@ -271,18 +271,21 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 
 bool Line::GetContextMenu(wxMenu& menu)
 {
+    wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
+    wxString exePath = exeFileName.GetPath();
+
     menu.Append(ID_EDIT_ELEMENT, _("Edit line"));
     if(m_activePickboxID == ID_PB_NONE) {
         wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
-        addNodeItem->SetBitmap(wxImage("..\\data\\images\\menu\\addNode16.png"));
+        addNodeItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\addNode16.png"));
         menu.Append(addNodeItem);
     } else {
         wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_REMOVE_NODE, _("Remove node"));
-        addNodeItem->SetBitmap(wxImage("..\\data\\images\\menu\\removeNode16.png"));
+        addNodeItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\removeNode16.png"));
         menu.Append(addNodeItem);
     }
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(wxImage("..\\data\\images\\menu\\delete16.png"));
+    deleteItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\delete16.png"));
     menu.Append(deleteItem);
     return true;
 }
@@ -557,16 +560,16 @@ LineElectricalData Line::GetPUElectricalData(double systemBasePower)
     // Zero seq. cap. susceptance
     double b0 = data.zeroCapSusceptance;
     if(data.useLinePower) data.zeroCapSusceptance = (b0 * lineBaseImpedance) / systemBaseImpedance;
-    
+
     if(!m_online) {
-        data.powerFlow[0] = std::complex<double>(0,0);
-        data.powerFlow[1] = std::complex<double>(0,0);
-        data.faultCurrent[0][0] = std::complex<double>(0,0);
-        data.faultCurrent[0][1] = std::complex<double>(0,0);
-        data.faultCurrent[0][2] = std::complex<double>(0,0);
-        data.faultCurrent[1][0] = std::complex<double>(0,0);
-        data.faultCurrent[1][1] = std::complex<double>(0,0);
-        data.faultCurrent[1][2] = std::complex<double>(0,0);
+        data.powerFlow[0] = std::complex<double>(0, 0);
+        data.powerFlow[1] = std::complex<double>(0, 0);
+        data.faultCurrent[0][0] = std::complex<double>(0, 0);
+        data.faultCurrent[0][1] = std::complex<double>(0, 0);
+        data.faultCurrent[0][2] = std::complex<double>(0, 0);
+        data.faultCurrent[1][0] = std::complex<double>(0, 0);
+        data.faultCurrent[1][1] = std::complex<double>(0, 0);
+        data.faultCurrent[1][2] = std::complex<double>(0, 0);
     }
 
     return data;
