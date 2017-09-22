@@ -475,10 +475,11 @@ bool Electromechanical::InitializeDynamicElements()
 
             double sd = 1.0;
             double sq = 1.0;
-            double xp = data.potierReactance;
+            double satF = 1.0;
+            double xp = data.potierReactance * k;
             bool hasSaturation = false;
             if(data.satFactor != 0.0) {  // Have saturation.
-                sd = data.satFactor;
+                satF = (data.satFactor - 1.2) / std::pow(1.2, 7);
                 if(xp == 0.0) xp = 0.8 * (data.transXd * k);
                 hasSaturation = true;
             }
@@ -487,12 +488,7 @@ bool Electromechanical::InitializeDynamicElements()
             std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
             double delta = std::arg(eq0);
 
-            double fi0 = std::arg(ia);
             double id0, iq0, vd0, vq0;
-            // iq and id
-            // iq0 = std::abs(ia) * std::cos(delta - fi0);
-            // id0 = -std::abs(ia) * std::sin(delta - fi0);
-            // WRONG!!!! Review!!
             ABCtoDQ0(ia, delta, id0, iq0);
             ABCtoDQ0(data.terminalVoltage, delta, vd0, vq0);
 
@@ -502,7 +498,7 @@ bool Electromechanical::InitializeDynamicElements()
             if(hasSaturation) {
                 double oldDelta = 0;
                 bool exit = false;
-                int it = 0;
+                int numIt = 0;
                 while(!exit) {
                     oldDelta = delta;
 
@@ -510,42 +506,44 @@ bool Electromechanical::InitializeDynamicElements()
                     ABCtoDQ0(data.terminalVoltage, delta, vd0, vq0);
 
                     // Direct-axis Potier voltage.
-                    double epd = vd0 + ra * id0 - xp * iq0;
+                    double epd = vd0 + ra * id0 + xp * iq0;
 
-                    sq = 1.0 + data.satFactor * (xq / xd) * std::pow(epd, 6);
+                    sq = 1.0 + satF * (xq / xd) * std::pow(epd, 6);
                     xqs = (xq - xp) / sq + xp;
                     eq0 = data.terminalVoltage + std::complex<double>(ra, xqs) * ia;
                     delta = std::arg(eq0);
                     if(std::abs(delta - oldDelta) < m_tolerance) {
                         exit = true;
-                    } else if(it >= m_maxIterations) {
+                    } else if(numIt >= m_maxIterations) {
                         m_errorMsg = _("Error on initializate the saturation values of \"") + data.name + _("\".");
                         return false;
                     }
-                    it++;
+                    numIt++;
                 }
                 // Quadrature-axis Potier voltage.
                 double epq = vq0 + ra * iq0 - xp * id0;
-                sd = 1.0 + data.satFactor * std::pow(epq, 6);
+                sd = 1.0 + satF * std::pow(epq, 6);
                 xds = (xd - xp) / sd + xp;
             }
 
-            double ef0 = vq0 + ra * iq0 + xds * id0;
+            double ef0 = vq0 + ra * iq0 - xds * id0;
 
-            // data.initialFieldVoltage = std::abs(eq0) - (xd - xq) * id0;
             data.initialFieldVoltage = ef0 * sd;
             data.fieldVoltage = data.initialFieldVoltage;
             data.pm = std::real((data.terminalVoltage * std::conj(ia)) + (std::abs(ia) * std::abs(ia) * ra));
             data.speed = 2.0 * M_PI * m_systemFreq;
-
             data.delta = delta;
             data.pe = data.pm;
             data.electricalPower = std::complex<double>(dataPU.activePower, dataPU.reactivePower);
+            data.sd = sd;
+            data.sq = sq;
 
             // Variables to extrapolate.
             data.oldIq = iq0;
             data.oldId = id0;
             data.oldPe = data.pe;
+            data.oldSd = sd;
+            data.oldSq = sq;
 
             switch(data.model) {
                 case Machines::SM_MODEL_1: {
@@ -561,7 +559,7 @@ bool Electromechanical::InitializeDynamicElements()
                 case Machines::SM_MODEL_2: {
                     double tranXd = data.transXd * k;
 
-                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * (id0 / sd);
+                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
                     data.tranEd = 0.0;
                     data.subEd = 0.0;
                     data.subEq = 0.0;
@@ -571,7 +569,7 @@ bool Electromechanical::InitializeDynamicElements()
                     double tranXq = data.transXq * k;
                     if(tranXq == 0.0) tranXq = tranXd;
 
-                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * (id0 / sd);
+                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
                     data.tranEd = -(xq - tranXq) * (iq0 / sq);
 
                     data.subEd = 0.0;
@@ -584,7 +582,7 @@ bool Electromechanical::InitializeDynamicElements()
                     if(subXd == 0.0) subXd = subXq;
                     if(subXq == 0.0) subXq = subXd;
 
-                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * (id0 / sd);
+                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
                     data.tranEd = 0.0;
                     data.subEq = data.tranEq + (tranXd - subXd) * (id0 / sd);
                     data.subEd = -(xq - subXq) * (iq0 / sq);
@@ -597,7 +595,7 @@ bool Electromechanical::InitializeDynamicElements()
                     if(subXd == 0.0) subXd = subXq;
                     if(subXq == 0.0) subXq = subXd;
 
-                    data.tranEq = data.initialFieldVoltage + (xd - tranXd) * (id0 / sd);
+                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
                     data.tranEd = -(xq - tranXq) * (iq0 / sq);
                     data.subEq = data.tranEq + (tranXd - subXd) * (id0 / sd);
                     data.subEd = data.tranEd - (tranXq - subXq) * (iq0 / sq);

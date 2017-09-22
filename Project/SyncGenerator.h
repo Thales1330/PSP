@@ -82,11 +82,15 @@ struct SyncGeneratorElectricalData {
     double subEq;
     double subEd;
     double pe;
+    double sd;
+    double sq;
     
     // Variables to extrapolate
     double oldId;
     double oldIq;
     double oldPe;
+    double oldSd;
+    double oldSq;
 
     // Integration constants
     IntegrationConstant icSpeed;
