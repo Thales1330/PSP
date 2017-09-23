@@ -762,31 +762,41 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     if(data.model == Machines::SM_MODEL_2 || data.model == Machines::SM_MODEL_3 || data.model == Machines::SM_MODEL_4 ||
        data.model == Machines::SM_MODEL_5) {
         data.icTranEq.m = m_timeStep / (2.0f * transTd0 + m_timeStep);
-        data.icTranEq.c = (1.0f - 2.0 * data.icTranEq.m) * data.tranEq +
+        // data.icTranEq.c = (1.0f - 2.0 * data.icTranEq.m) * data.tranEq +
+        //                  data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
+        data.icTranEq.c = (1.0 - data.icTranEq.m * (1.0 + data.sd)) * data.tranEq +
                           data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
     }
 
     // Ed'
     if(data.model == Machines::SM_MODEL_3 || data.model == Machines::SM_MODEL_4 || data.model == Machines::SM_MODEL_5) {
         data.icTranEd.m = m_timeStep / (2.0f * transTq0 + m_timeStep);
-        data.icTranEd.c = (1.0f - 2.0f * data.icTranEd.m) * data.tranEd - data.icTranEd.m * (syncXq - transXq) * iq;
+        // data.icTranEd.c = (1.0f - 2.0f * data.icTranEd.m) * data.tranEd - data.icTranEd.m * (syncXq - transXq) * iq;
+        data.icTranEd.c =
+            (1.0 - data.icTranEd.m * (1.0 + data.sq)) * data.tranEd - data.icTranEd.m * (syncXq - transXq) * iq;
     }
 
     // Eq''
     if(data.model == Machines::SM_MODEL_4 || data.model == Machines::SM_MODEL_5) {
         data.icSubEq.m = m_timeStep / (2.0f * subTd0 + m_timeStep);
-        data.icSubEq.c =
-            (1.0f - 2.0f * data.icSubEq.m) * data.subEq + data.icSubEq.m * (data.tranEq + (transXd - subXd) * id);
+        // data.icSubEq.c =
+        //    (1.0f - 2.0f * data.icSubEq.m) * data.subEq + data.icSubEq.m * (data.tranEq + (transXd - subXd) * id);
+        data.icSubEq.c = (1.0 - data.icSubEq.m * (1.0 + data.sd)) * data.subEq +
+                         data.icSubEq.m * (data.sd * data.tranEq + (transXd - subXd) * id);
     }
     // Ed''
     if(data.model == Machines::SM_MODEL_4) {
         data.icSubEd.m = m_timeStep / (2.0f * subTq0 + m_timeStep);
-        data.icSubEd.c = (1.0f - 2.0f * data.icSubEd.m) * data.subEd - data.icSubEd.m * (syncXq - subXq) * iq;
+        // data.icSubEd.c = (1.0f - 2.0f * data.icSubEd.m) * data.subEd - data.icSubEd.m * (syncXq - subXq) * iq;
+        data.icSubEd.c =
+            (1.0f - data.icSubEd.m * (1.0 + data.sq)) * data.subEd - data.icSubEd.m * (syncXq - subXq) * iq;
     }
     if(data.model == Machines::SM_MODEL_5) {
         data.icSubEd.m = m_timeStep / (2.0f * subTq0 + m_timeStep);
-        data.icSubEd.c =
-            (1.0f - 2.0f * data.icSubEd.m) * data.subEd + data.icSubEd.m * (data.tranEd - (transXq - subXq) * iq);
+        // data.icSubEd.c =
+        //    (1.0f - 2.0f * data.icSubEd.m) * data.subEd + data.icSubEd.m * (data.tranEd - (transXq - subXq) * iq);
+        data.icSubEd.c = (1.0f - data.icSubEd.m * (1.0 + data.sq)) * data.subEd +
+                         data.icSubEd.m * (data.sq * data.tranEd - (transXq - subXq) * iq);
     }
 
     syncGenerator->SetElectricalData(data);
@@ -794,7 +804,6 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
 
 bool Electromechanical::SolveSynchronousMachines()
 {
-    // CalculateMachinesCurrents();
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
@@ -823,6 +832,8 @@ bool Electromechanical::SolveSynchronousMachines()
             id = 2.0 * id - data.oldId;
             iq = 2.0 * iq - data.oldIq;
             pe = 2.0 * pe - data.oldPe;
+            data.sd = 2.0 * data.sd - data.oldSd;
+            data.sq = 2.0 * data.sq - data.oldSq;
 
             CalculateSyncMachineIntVariables(syncGenerator, id, iq, pe, k);
         } else {
@@ -1028,8 +1039,12 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             // There is no differential equations.
         } break;
         case Machines::SM_MODEL_2: {
-            double tranEq =
-                data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (data.syncXd * k - data.transXd * k) * id);
+            double syncXd, transXd;
+            syncXd = data.syncXd * k;
+            transXd = data.transXd * k;
+
+            double tranEq = (data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id)) /
+                            (1.0 + data.icTranEq.m * (data.sd - 1.0));
             error = std::max(error, std::abs(data.tranEq - tranEq));
 
             data.tranEq = tranEq;
@@ -1043,10 +1058,12 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             if(syncXq == 0.0) syncXq = syncXd;
             if(transXq == 0.0) transXq = transXd;
 
-            double tranEq = data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
+            double tranEq = (data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id)) /
+                            (1.0 + data.icTranEq.m * (data.sd - 1.0));
             error = std::max(error, std::abs(data.tranEq - tranEq));
 
-            double tranEd = data.icTranEd.c - data.icTranEd.m * (syncXq - transXq) * iq;
+            double tranEd = (data.icTranEd.c - data.icTranEd.m * (syncXq - transXq) * iq) /
+                            (1.0 + data.icTranEd.m * (data.sq - 1.0));
             error = std::max(error, std::abs(data.tranEd - tranEd));
 
             data.tranEq = tranEq;
@@ -1069,13 +1086,16 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             if(subXd == 0.0) subXd = subXq;
             if(subXq == 0.0) subXq = subXd;
 
-            double tranEq = data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
+            double tranEq = (data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id)) /
+                            (1.0 + data.icTranEq.m * (data.sd - 1.0));
             error = std::max(error, std::abs(data.tranEq - tranEq));
 
-            double subEq = data.icSubEq.c + data.icSubEq.m * (tranEq + (transXd - subXd) * id);
+            double subEq = (data.icSubEq.c + data.icSubEq.m * (data.sd * tranEq + (transXd - subXd) * id)) /
+                           (1.0 + data.icSubEq.m * (data.sd - 1.0));
             error = std::max(error, std::abs(data.subEq - subEq));
 
-            double subEd = data.icSubEd.c - data.icSubEd.m * (syncXq - subXq) * iq;
+            double subEd =
+                (data.icSubEd.c - data.icSubEd.m * ((syncXq - subXq) * iq)) / (1.0 + data.icSubEd.m * (data.sq - 1.0));
             error = std::max(error, std::abs(data.subEd - subEd));
 
             data.tranEq = tranEq;
@@ -1095,16 +1115,20 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             if(subXd == 0.0) subXd = subXq;
             if(subXq == 0.0) subXq = subXd;
 
-            double tranEq = data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
+            double tranEq = (data.icTranEq.c + data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id)) /
+                            (1.0 + data.icTranEq.m * (data.sd - 1.0));
             error = std::max(error, std::abs(data.tranEq - tranEq));
 
-            double tranEd = data.icTranEd.c - data.icTranEd.m * (syncXq - transXq) * iq;
+            double tranEd = (data.icTranEd.c - data.icTranEd.m * (syncXq - transXq) * iq) /
+                            (1.0 + data.icTranEd.m * (data.sq - 1.0));
             error = std::max(error, std::abs(data.tranEd - tranEd));
 
-            double subEq = data.icSubEq.c + data.icSubEq.m * (tranEq + (transXd - subXd) * id);
+            double subEq = (data.icSubEq.c + data.icSubEq.m * (data.sd * tranEq + (transXd - subXd) * id)) /
+                           (1.0 + data.icSubEq.m * (data.sd - 1.0));
             error = std::max(error, std::abs(data.subEq - subEq));
 
-            double subEd = data.icSubEd.c + data.icSubEd.m * (tranEd - (transXq - subXq) * iq);
+            double subEd = (data.icSubEd.c + data.icSubEd.m * (data.sq * tranEd - (transXq - subXq) * iq)) /
+                           (1.0 + data.icSubEd.m * (data.sq - 1.0));
             error = std::max(error, std::abs(data.subEd - subEd));
 
             data.tranEq = tranEq;
