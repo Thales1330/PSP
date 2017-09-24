@@ -7,6 +7,29 @@
 
 class ControlElementSolver;
 
+/**
+ * @brief Synchronous machine data for different models
+ *
+ * This struct have the parameters and calculated data that depends on each machine model.
+ */
+struct SyncMachineModelData {
+    /** Direct-axis reactance (transient for models 1, 2 and 3; subtransient for models 4 and 5) */
+    double xd;
+    /** Quadrature-axis reactance (transient for models 1, 2 and 3; subtransient for models 4 and 5) */
+    double xq;
+    /** Direct-axis internal voltage (transient for models 1, 2 and 3; subtransient for models 4 and 5) */
+    double ed;
+    /** Quadrature-axis internal voltage (transient for models 1, 2 and 3; subtransient for models 4 and 5) */
+    double eq;
+};
+
+/**
+ * @class Electromechanical
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 23/09/2017
+ * @file Electromechanical.h
+ * @brief Calculates the electromechanical transient based on disturbances (e.g. system fault).
+ */
 class Electromechanical : public ElectricCalculation
 {
    public:
@@ -28,18 +51,32 @@ class Electromechanical : public ElectricCalculation
     void SetEvent(double currentTime);
     inline bool EventTrigger(double eventTime, double currentTime);
 
-    double GetPowerValue(double value, ElectricalUnit unit);
+    // double GetPowerValue(double value, ElectricalUnit unit);
 
     void InsertSyncMachinesOnYBus();
     std::complex<double> GetSyncMachineAdmittance(SyncGenerator* generator);
     bool InitializeDynamicElements();
-    void CalculateMachinesCurrents();
+    bool CalculateMachinesCurrents();
     void CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq, double k = 1.0);
     bool SolveSynchronousMachines();
     void SetSyncMachinesModel();
-    double CalculateSyncMachineIntVariables(SyncGenerator* syncGenerator, double id, double iq, double pe, double k = 1.0);
-    void CalculateSyncMachineNonIntVariables(SyncGenerator* syncGenerator, double& id, double& iq, double& pe, double k = 1.0);
+    SyncMachineModelData GetSyncMachineModelData(SyncGenerator* syncMachine);
+    double CalculateSyncMachineIntVariables(SyncGenerator* syncGenerator,
+                                            double id,
+                                            double iq,
+                                            double sd,
+                                            double sq,
+                                            double pe,
+                                            double k = 1.0);
+    void CalculateSyncMachineNonIntVariables(SyncGenerator* syncGenerator,
+                                             double& id,
+                                             double& iq,
+                                             double& sd,
+                                             double& sq,
+                                             double& pe,
+                                             double k = 1.0);
     void CalculateReferenceSpeed();
+    bool CalculateSyncMachineSaturation(SyncGenerator* syncMachine, double k = 1.0);
 
     void SaveData();
 
@@ -64,6 +101,7 @@ class Electromechanical : public ElectricCalculation
     double m_ctrlTimeStepMultiplier = 0.1;
     double m_tolerance = 1e-8;
     int m_maxIterations = 100;
+    double m_saturationTolerance = 1e-4;
 
     std::vector<double> m_eventTimeList;
     std::vector<bool> m_eventOccurrenceList;
