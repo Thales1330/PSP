@@ -82,6 +82,8 @@ struct SyncGeneratorElectricalData {
     double subEq;
     double subEd;
     double pe;
+    double id;
+    double iq;
     double sd;
     double sq;
     

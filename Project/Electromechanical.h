@@ -70,7 +70,7 @@ class Electromechanical : public ElectricCalculation
                                             double sq,
                                             double pe,
                                             double k = 1.0);
-    void CalculateSyncMachineNonIntVariables(SyncGenerator* syncGenerator,
+    bool CalculateSyncMachineNonIntVariables(SyncGenerator* syncGenerator,
                                              double& id,
                                              double& iq,
                                              double& sd,
@@ -78,7 +78,7 @@ class Electromechanical : public ElectricCalculation
                                              double& pe,
                                              double k = 1.0);
     void CalculateReferenceSpeed();
-    bool CalculateSyncMachineSaturation(SyncGenerator* syncMachine, double k = 1.0);
+    bool CalculateSyncMachineSaturation(SyncGenerator* syncMachine, bool updateCurrents = true, double k = 1.0);
 
     void SaveData();
 
