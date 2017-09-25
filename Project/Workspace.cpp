@@ -1451,6 +1451,8 @@ bool Workspace::RunStability()
         }
         ElementPlotData tests(_("Error"), ElementPlotData::CT_TEST);
         tests.AddData(stability.m_wErrorVector, _("Speed error"));
+        tests.AddData(stability.m_sdCVector, _("Sd"));
+        tests.AddData(stability.m_sqCVector, _("Sq"));
         tests.AddData(stability.m_numItVector, _("Number iterations"));
         plotDataList.push_back(tests);
 

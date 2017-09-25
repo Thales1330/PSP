@@ -682,6 +682,8 @@ bool Electromechanical::CalculateMachinesCurrents()
             // matrix) to calculate the electrical power.
             std::complex<double> iMachine = iInj - iUnadjusted;
             data.electricalPower = v * std::conj(iMachine);
+            data.sd = sd;
+            data.sq = sq;
         } else {
             data.electricalPower = std::complex<double>(0.0, 0.0);
         }
@@ -838,6 +840,8 @@ bool Electromechanical::SolveSynchronousMachines()
             double genError = CalculateSyncMachineIntVariables(syncGenerator, id, iq, sd, sq, pe, k);
 
             if(genError > error) error = genError;
+            m_sdC = data.sd;
+            m_sqC = data.sq;
         }
 
         ++iterations;
@@ -896,6 +900,8 @@ void Electromechanical::SaveData()
 
     m_wErrorVector.push_back(m_wError);
     m_numItVector.push_back(m_numIt);
+    m_sdCVector.push_back(m_sdC);
+    m_sqCVector.push_back(m_sqC);
 }
 
 void Electromechanical::SetSyncMachinesModel()
@@ -926,6 +932,7 @@ void Electromechanical::CalculateSyncMachineNonIntVariables(SyncGenerator* syncG
     double vd, vq;
     ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);
 
+    CalculateSyncMachineSaturation(syncGenerator, k);
     sd = data.sd;
     sq = data.sq;
 
@@ -938,6 +945,8 @@ void Electromechanical::CalculateSyncMachineNonIntVariables(SyncGenerator* syncG
         pe = id = iq = 0.0f;
     }
     data.pe = pe;
+    data.sd = sd;
+    data.sq = sq;
     data.oldPe = pe;
     data.oldId = id;
     data.oldIq = iq;
@@ -1124,7 +1133,7 @@ bool Electromechanical::CalculateSyncMachineSaturation(SyncGenerator* syncMachin
         syncXq = data.transXd * k;
         syncXd = syncXq;
     } else if(data.syncXq == 0.0)
-        syncXd = data.syncXd * k;
+        syncXq = data.syncXd * k;
 
     double xp = data.potierReactance * k;
     if(xp == 0.0) xp = 0.8 * (data.transXd * k);

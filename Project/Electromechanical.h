@@ -44,6 +44,8 @@ class Electromechanical : public ElectricCalculation
     std::vector<double> m_transEdErrorVector;
     std::vector<double> m_transEqErrorVector;
     std::vector<double> m_numItVector;
+    std::vector<double> m_sdCVector;
+    std::vector<double> m_sqCVector;
 
    protected:
     void SetEventTimeList();
@@ -110,6 +112,8 @@ class Electromechanical : public ElectricCalculation
 
     // tests
     double m_wError = 0.0;
+    double m_sdC = 0.0;
+    double m_sqC = 0.0;
     double m_numIt = 0;
 };
 
