@@ -4,6 +4,7 @@
 #include "ElectricCalculation.h"
 
 #include <wx/progdlg.h>
+#include <wx/log.h>
 
 class ControlElementSolver;
 
@@ -78,7 +79,13 @@ class Electromechanical : public ElectricCalculation
                                              double& pe,
                                              double k = 1.0);
     void CalculateReferenceSpeed();
-    bool CalculateSyncMachineSaturation(SyncGenerator* syncMachine, bool updateCurrents = true, double k = 1.0);
+    bool CalculateSyncMachineSaturation(SyncGenerator* syncMachine,
+                                        double& id,
+                                        double& iq,
+                                        double& sd,
+                                        double& sq,
+                                        bool updateCurrents = true,
+                                        double k = 1.0);
 
     void SaveData();
 
@@ -112,8 +119,8 @@ class Electromechanical : public ElectricCalculation
 
     // tests
     double m_wError = 0.0;
-    double m_sdC = 0.0;
-    double m_sqC = 0.0;
+    double m_sdC = 1.0;
+    double m_sqC = 1.0;
     double m_numIt = 0;
 };
 
