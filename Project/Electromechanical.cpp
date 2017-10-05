@@ -433,8 +433,8 @@ bool Electromechanical::InitializeDynamicElements()
             data.terminalVoltage = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().voltage;
 
             std::complex<double> conjS(dataPU.activePower, -dataPU.reactivePower);
-            std::complex<double> conjV = std::conj(data.terminalVoltage);
-            std::complex<double> ia = conjS / conjV;
+            std::complex<double> vt = data.terminalVoltage;
+            std::complex<double> ia = conjS / std::conj(vt);
 
             double xd = data.syncXd * k;
             double xq = data.syncXq * k;
@@ -458,12 +458,12 @@ bool Electromechanical::InitializeDynamicElements()
             }
 
             // Initialize state variables
-            std::complex<double> eq0 = data.terminalVoltage + std::complex<double>(ra, xq) * ia;
+            std::complex<double> eq0 = vt + std::complex<double>(ra, xq) * ia;
             double delta = std::arg(eq0);
 
             double id0, iq0, vd0, vq0;
             ABCtoDQ0(ia, delta, id0, iq0);
-            ABCtoDQ0(data.terminalVoltage, delta, vd0, vq0);
+            ABCtoDQ0(vt, delta, vd0, vq0);
 
             // Initialize saturation
             double xqs = xq;
@@ -474,8 +474,8 @@ bool Electromechanical::InitializeDynamicElements()
                 int numIt = 0;
                 while(!exit) {
                     oldDelta = delta;
-                    // ABCtoDQ0(ia, delta, id0, iq0);
-                    // ABCtoDQ0(data.terminalVoltage, delta, vd0, vq0);
+                    ABCtoDQ0(ia, delta, id0, iq0);
+                    ABCtoDQ0(vt, delta, vd0, vq0);
 
                     // Direct-axis Potier voltage.
                     double epd = vd0 + ra * id0 + xp * iq0;
@@ -502,7 +502,7 @@ bool Electromechanical::InitializeDynamicElements()
                 eq0 = data.terminalVoltage + std::complex<double>(ra, xqs) * ia;
                 delta = std::arg(eq0);*/
             }
-
+            
             double ef0 = vq0 + ra * iq0 - xds * id0;
 
             data.initialFieldVoltage = ef0 * sd;
@@ -1065,7 +1065,7 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
             error = std::max(error, std::abs(data.subEq - subEq));
 
             double subEd =
-                (data.icSubEd.c - data.icSubEd.m * ((syncXq - subXq) * iq)) / (1.0 + data.icSubEd.m * (data.sq - 1.0));
+                (data.icSubEd.c - data.icSubEd.m * ((syncXq - subXq) * iq)) / (1.0 + data.icSubEd.m * (sq - 1.0));
             error = std::max(error, std::abs(data.subEd - subEd));
 
             data.tranEq = tranEq;

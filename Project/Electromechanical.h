@@ -110,7 +110,7 @@ class Electromechanical : public ElectricCalculation
     double m_ctrlTimeStepMultiplier = 0.1;
     double m_tolerance = 1e-8;
     int m_maxIterations = 100;
-    double m_saturationTolerance = 1e-4;
+    double m_saturationTolerance = 1e-8;
 
     std::vector<double> m_eventTimeList;
     std::vector<bool> m_eventOccurrenceList;
