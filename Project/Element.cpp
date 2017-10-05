@@ -1,17 +1,33 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "Element.h"
 #ifdef USING_WX_3_0_X
 #include "DegreesAndRadians.h"
 #endif
 
 Element::Element() { m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5); }
-
 Element::~Element() {}
-
 void Element::SetPosition(const wxPoint2DDouble position)
 {
     m_position = position;
-    m_rect = wxRect2DDouble(m_position.m_x - m_width / 2.0 - m_borderSize,
-        m_position.m_y - m_height / 2.0 - m_borderSize, m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
+    m_rect =
+        wxRect2DDouble(m_position.m_x - m_width / 2.0 - m_borderSize, m_position.m_y - m_height / 2.0 - m_borderSize,
+                       m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
 }
 
 void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode) const
@@ -25,11 +41,11 @@ void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegment
 }
 
 void Element::DrawArc(wxPoint2DDouble position,
-    double radius,
-    double initAngle,
-    double finalAngle,
-    int numSegments,
-    GLenum mode) const
+                      double radius,
+                      double initAngle,
+                      double finalAngle,
+                      int numSegments,
+                      GLenum mode) const
 {
     double initAngRad = wxDegToRad(initAngle);
     double finalAngRad = wxDegToRad(finalAngle);
@@ -52,7 +68,7 @@ void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) con
 
 void Element::DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode) const
 {
-    glBegin(mode); // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
+    glBegin(mode);  // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
     glVertex2d(position.m_x - width / 2.0, position.m_y - height / 2.0);
     glVertex2d(position.m_x - width / 2.0, position.m_y + height / 2.0);
     glVertex2d(position.m_x + width / 2.0, position.m_y + height / 2.0);
@@ -62,7 +78,7 @@ void Element::DrawRectangle(wxPoint2DDouble position, double width, double heigh
 
 void Element::DrawRectangle(wxPoint2DDouble* points, GLenum mode) const
 {
-    glBegin(mode); // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
+    glBegin(mode);  // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
     glVertex2d(points[0].m_x, points[0].m_y);
     glVertex2d(points[1].m_x, points[1].m_y);
     glVertex2d(points[2].m_x, points[2].m_y);
@@ -93,9 +109,9 @@ wxPoint2DDouble Element::RotateAtPosition(wxPoint2DDouble pointToRotate, double 
     double radAngle = angle;
     if(degrees) radAngle = wxDegToRad(angle);
     return wxPoint2DDouble(std::cos(radAngle) * (pointToRotate.m_x - m_position.m_x) -
-            std::sin(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_x,
-        std::sin(radAngle) * (pointToRotate.m_x - m_position.m_x) +
-            std::cos(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_y);
+                               std::sin(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_x,
+                           std::sin(radAngle) * (pointToRotate.m_x - m_position.m_x) +
+                               std::cos(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_y);
 }
 
 void Element::StartMove(wxPoint2DDouble position)
@@ -105,18 +121,17 @@ void Element::StartMove(wxPoint2DDouble position)
 }
 
 void Element::Move(wxPoint2DDouble position) { SetPosition(m_movePos + position - m_moveStartPt); }
-
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
 {
     return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *
-        scale;
+           scale;
 }
 
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble position,
-    wxPoint2DDouble translation,
-    double scale,
-    double offsetX,
-    double offsetY) const
+                                       wxPoint2DDouble translation,
+                                       double scale,
+                                       double offsetX,
+                                       double offsetY) const
 {
     return wxPoint2DDouble(position.m_x + offsetX + translation.m_x, position.m_y + offsetY + translation.m_y) * scale;
 }
@@ -130,14 +145,14 @@ void Element::DrawPoint(wxPoint2DDouble position, double size) const
 }
 
 bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
-    wxRect2DDouble rect2,
-    double angle1,
-    double angle2) const
+                                          wxRect2DDouble rect2,
+                                          double angle1,
+                                          double angle2) const
 {
-    wxPoint2DDouble rect1Corners[4] = { rect1.GetLeftTop(), rect1.GetLeftBottom(), rect1.GetRightBottom(),
-        rect1.GetRightTop() };
-    wxPoint2DDouble rect2Corners[4] = { rect2.GetLeftTop(), rect2.GetLeftBottom(), rect2.GetRightBottom(),
-        rect2.GetRightTop() };
+    wxPoint2DDouble rect1Corners[4] = {rect1.GetLeftTop(), rect1.GetLeftBottom(), rect1.GetRightBottom(),
+                                       rect1.GetRightTop()};
+    wxPoint2DDouble rect2Corners[4] = {rect2.GetLeftTop(), rect2.GetLeftBottom(), rect2.GetRightBottom(),
+                                       rect2.GetRightTop()};
     wxPoint2DDouble rect1Center(rect1.m_x + rect1.m_width / 2.0, rect1.m_y + rect1.m_height / 2.0);
     wxPoint2DDouble rect2Center(rect2.m_x + rect2.m_width / 2.0, rect2.m_y + rect2.m_height / 2.0);
 
@@ -146,26 +161,28 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     double radAngle2 = wxDegToRad(angle2);
 
     for(int i = 0; i < 4; i++) {
-        rect1Corners[i] = wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
-                std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
-            std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
-                std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
+        rect1Corners[i] =
+            wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
+                                std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
+                            std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
+                                std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
 
-        rect2Corners[i] = wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
-                std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
-            std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
-                std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
+        rect2Corners[i] =
+            wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
+                                std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
+                            std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
+                                std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
     }
 
     //[Ref] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
 
     // Find the rectangles axis to project
-    wxPoint2DDouble axis[4] = { rect1Corners[3] - rect1Corners[0], rect1Corners[3] - rect1Corners[2],
-        rect2Corners[3] - rect2Corners[0], rect2Corners[3] - rect2Corners[2] };
+    wxPoint2DDouble axis[4] = {rect1Corners[3] - rect1Corners[0], rect1Corners[3] - rect1Corners[2],
+                               rect2Corners[3] - rect2Corners[0], rect2Corners[3] - rect2Corners[2]};
 
     // Calculate the projected points to each axis
-    wxPoint2DDouble rect1ProjPts[4][4]; // [axis][corner]
-    wxPoint2DDouble rect2ProjPts[4][4]; // [axis][corner]
+    wxPoint2DDouble rect1ProjPts[4][4];  // [axis][corner]
+    wxPoint2DDouble rect2ProjPts[4][4];  // [axis][corner]
     for(int i = 0; i < 4; i++) {
         double den = axis[i].m_x * axis[i].m_x + axis[i].m_y * axis[i].m_y;
         for(int j = 0; j < 4; j++) {
@@ -178,8 +195,8 @@ bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
     }
 
     // Calculate the scalar value to identify the max and min values on projections
-    double rect1Scalar[4][4]; //[axis][corner]
-    double rect2Scalar[4][4]; //[axis][corner]
+    double rect1Scalar[4][4];  //[axis][corner]
+    double rect2Scalar[4][4];  //[axis][corner]
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             rect1Scalar[i][j] = rect1ProjPts[i][j].m_x * axis[i].m_x + rect1ProjPts[i][j].m_y * axis[i].m_y;
@@ -229,7 +246,7 @@ void Element::GeneralMenuItens(wxMenu& menu)
 {
     wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
     wxString exePath = exeFileName.GetPath();
-    
+
     wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
     clockItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\rotateClock16.png"));
     menu.Append(clockItem);
@@ -248,8 +265,8 @@ void Element::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& righ
     // Check rect corners boundaries.
 
     // Get rectangle corners
-    wxPoint2DDouble rectCorner[4] = { m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
-        m_rect.GetRightTop() };
+    wxPoint2DDouble rectCorner[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
+                                     m_rect.GetRightTop()};
     // Rotate corners.
     for(int i = 0; i < 4; ++i) {
         rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle);
@@ -334,7 +351,6 @@ void Element::ReplaceParent(Element* oldParent, Element* newParent)
 }
 
 void Element::AddChild(Element* child) { m_childList.push_back(child); }
-
 void Element::RemoveChild(Element* child)
 {
     for(auto it = m_childList.begin(); it != m_childList.end(); ++it) {
@@ -359,7 +375,6 @@ void OpenGLColour::SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble
 }
 
 OpenGLColour::OpenGLColour() { SetRGBA(1.0, 1.0, 1.0, 1.0); }
-
 OpenGLColour::OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
 {
     SetRGBA(red, green, blue, alpha);
@@ -368,7 +383,7 @@ OpenGLColour::OpenGLColour(GLdouble red, GLdouble green, GLdouble blue, GLdouble
 double Element::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) const
 {
     //[Ref] http://geomalgorithms.com/a02-_lines.html
-    double distance = 100.0; // Big initial distance.
+    double distance = 100.0;  // Big initial distance.
     wxPoint2DDouble p0 = point;
 
     for(int i = 1; i < (int)m_pointList.size() - 2; i++) {

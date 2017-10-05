@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "TransformerForm.h"
 #include "SwitchingForm.h"
 #include "Transformer.h"
@@ -6,8 +23,8 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 {
     m_choiceResistance->SetString(1, L'\u03A9');
     m_choiceReactance->SetString(1, L'\u03A9');
-    
-    //Reset connections choice labels (to be translated)
+
+    // Reset connections choice labels (to be translated)
     m_choiceConnection->SetString(0, _("Grounded Wye - Grounded Wye"));
     m_choiceConnection->SetString(1, _("Wye - Grounded Wye"));
     m_choiceConnection->SetString(2, _("Grounded Wye - Wye"));
@@ -99,7 +116,7 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 
     m_textCtrlTurnRatio->SetValue(Transformer::StringFromDouble(data.turnsRatio));
     m_textCtrlPhaseShift->SetValue(Transformer::StringFromDouble(data.phaseShift));
-    
+
     m_checkUseTransformerPower->SetValue(data.useTransformerPower);
 
     m_textCtrlZeroResistance->SetValue(Transformer::StringFromDouble(data.zeroResistance));

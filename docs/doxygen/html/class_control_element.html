@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,6 +92,8 @@ $(document).ready(function(){initNavTree('class_control_element.html','');});
 <div class="title">ControlElement Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_control_element_8h_source.html">ControlElement.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ControlElement:</div>
 <div class="dyncontent">
@@ -93,14 +101,14 @@ Inheritance diagram for ControlElement:</div>
   <img src="class_control_element.png" usemap="#ControlElement_map" alt=""/>
   <map id="ControlElement_map" name="ControlElement_map">
 <area href="class_element.html" alt="Element" shape="rect" coords="0,0,109,24"/>
-<area href="class_connection_line.html" alt="ConnectionLine" shape="rect" coords="119,112,228,136"/>
-<area href="class_constant.html" alt="Constant" shape="rect" coords="119,168,228,192"/>
-<area href="class_exponential.html" alt="Exponential" shape="rect" coords="119,224,228,248"/>
-<area href="class_gain.html" alt="Gain" shape="rect" coords="119,280,228,304"/>
-<area href="class_i_o_control.html" alt="IOControl" shape="rect" coords="119,336,228,360"/>
-<area href="class_limiter.html" alt="Limiter" shape="rect" coords="119,392,228,416"/>
-<area href="class_multiplier.html" alt="Multiplier" shape="rect" coords="119,448,228,472"/>
-<area href="class_rate_limiter.html" alt="RateLimiter" shape="rect" coords="119,504,228,528"/>
+<area href="class_connection_line.html" title="Connection between two control elements or other connection line and an element. " alt="ConnectionLine" shape="rect" coords="119,112,228,136"/>
+<area href="class_constant.html" title="A control element that provides a constant value. " alt="Constant" shape="rect" coords="119,168,228,192"/>
+<area href="class_exponential.html" title="Generates an output following an exponential function. . " alt="Exponential" shape="rect" coords="119,224,228,248"/>
+<area href="class_gain.html" title="Provide an output multiplying the input by a constant. . " alt="Gain" shape="rect" coords="119,280,228,304"/>
+<area href="class_i_o_control.html" title="Provides the communication with the power element. " alt="IOControl" shape="rect" coords="119,336,228,360"/>
+<area href="class_limiter.html" title="Limits the input value by superior and inferior values. " alt="Limiter" shape="rect" coords="119,392,228,416"/>
+<area href="class_multiplier.html" title="Multiplies two inputs. " alt="Multiplier" shape="rect" coords="119,448,228,472"/>
+<area href="class_rate_limiter.html" title="Limits the rising and/or falling rate.  " alt="RateLimiter" shape="rect" coords="119,504,228,528"/>
 <area href="class_sum.html" alt="Sum" shape="rect" coords="119,560,228,584"/>
 <area href="class_transfer_function.html" alt="TransferFunction" shape="rect" coords="119,616,228,640"/>
 </map>
@@ -454,8 +462,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00053">53</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
+<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00084">84</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac8bd52ddb8eed51a217fecb2eed65708"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac8bd52ddb8eed51a217fecb2eed65708">&#9670;&nbsp;</a></span>Move()</h2>
@@ -493,7 +503,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_gain.html#aa303bcc736ac5fad1f89c6cc87e859db">Gain</a>, and <a class="el" href="class_connection_line.html#a49300d04c6dd4bcc6f4569c0c47780c7">ConnectionLine</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8cpp_source.html#l00109">109</a> of file <a class="el" href="_control_element_8cpp_source.html">ControlElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_8cpp_source.html#l00126">126</a> of file <a class="el" href="_control_element_8cpp_source.html">ControlElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -533,7 +543,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_connection_line.html#a292d284d6f30b209995c2a9877f9fe36">ConnectionLine</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_control_element_8cpp_source.html#l00100">100</a> of file <a class="el" href="_control_element_8cpp_source.html">ControlElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_8cpp_source.html#l00117">117</a> of file <a class="el" href="_control_element_8cpp_source.html">ControlElement.cpp</a>.</p>
 
 </div>
 </div>

@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "TransformerForm.h"
 #include "Transformer.h"
 
@@ -460,7 +477,7 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
 
     // Resistance
     double r = data.resistance;
-    if(data.resistanceUnit ==  UNIT_PU) {
+    if(data.resistanceUnit == UNIT_PU) {
         if(data.useTransformerPower) data.resistance = (r * transformerBaseImpedance) / systemBaseImpedance;
     } else {
         data.resistance = r / systemBaseImpedance;
@@ -501,16 +518,16 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
     // Secondary ground ind reactance
     double xgs = data.secondaryGrndReactance;
     if(data.useTransformerPower) data.secondaryGrndReactance = (xgs * transformerBaseImpedance) / systemBaseImpedance;
-    
+
     if(!m_online) {
-        data.powerFlow[0] = std::complex<double>(0,0);
-        data.powerFlow[1] = std::complex<double>(0,0);
-        data.faultCurrent[0][0] = std::complex<double>(0,0);
-        data.faultCurrent[0][1] = std::complex<double>(0,0);
-        data.faultCurrent[0][2] = std::complex<double>(0,0);
-        data.faultCurrent[1][0] = std::complex<double>(0,0);
-        data.faultCurrent[1][1] = std::complex<double>(0,0);
-        data.faultCurrent[1][2] = std::complex<double>(0,0);
+        data.powerFlow[0] = std::complex<double>(0, 0);
+        data.powerFlow[1] = std::complex<double>(0, 0);
+        data.faultCurrent[0][0] = std::complex<double>(0, 0);
+        data.faultCurrent[0][1] = std::complex<double>(0, 0);
+        data.faultCurrent[0][2] = std::complex<double>(0, 0);
+        data.faultCurrent[1][0] = std::complex<double>(0, 0);
+        data.faultCurrent[1][1] = std::complex<double>(0, 0);
+        data.faultCurrent[1][2] = std::complex<double>(0, 0);
     }
 
     return data;

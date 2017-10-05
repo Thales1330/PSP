@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,6 +92,11 @@ $(document).ready(function(){initNavTree('class_control_element_container.html',
 <div class="title">ControlElementContainer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that can contain all control elements. Can identify (using RTTI) the elements from a generic list and store them separately.  
+ <a href="class_control_element_container.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_control_element_container_8h_source.html">ControlElementContainer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -172,8 +183,11 @@ std::vector&lt; <a class="el" href="class_transfer_function.html">TransferFuncti
 <tr class="separator:a32afcd17e0f337c5ef4a6af55b5de358"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_control_element_container_8h_source.html#l00020">20</a> of file <a class="el" href="_control_element_container_8h_source.html">ControlElementContainer.h</a>.</p>
+<div class="textblock"><p>Class that can contain all control elements. Can identify (using RTTI) the elements from a generic list and store them separately. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_control_element_container_8h_source.html#l00045">45</a> of file <a class="el" href="_control_element_container_8h_source.html">ControlElementContainer.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>Project/<a class="el" href="_control_element_container_8h_source.html">ControlElementContainer.h</a></li>
 <li>Project/<a class="el" href="_control_element_container_8cpp_source.html">ControlElementContainer.cpp</a></li>

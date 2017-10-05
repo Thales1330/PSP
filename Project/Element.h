@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
@@ -49,7 +66,7 @@ enum ContextMenuID {
  */
 class OpenGLColour
 {
-public:
+   public:
     /**
      * @brief Default construnctor. Use SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha).
      */
@@ -68,7 +85,6 @@ public:
      * @brief Destructor.
      */
     virtual ~OpenGLColour() {}
-
     /**
      * @brief Set the colour in RGBA. The colour values must be between 0.0 and 1.0.
      * @param red Red colour value.
@@ -83,7 +99,7 @@ public:
      * @return RGBA colour.
      */
     const GLdouble* GetRGBA() const { return rgba; }
-protected:
+   protected:
     GLdouble rgba[4];
 };
 
@@ -96,7 +112,7 @@ protected:
  */
 class Element
 {
-public:
+   public:
     /**
      * @brief Constructor.
      */
@@ -112,13 +128,11 @@ public:
      * @param dragging True if is dragging, false otherwise.
      */
     void SetDragging(bool dragging = true) { m_dragging = dragging; }
-
     /**
      * @brief Set element height.
      * @param height Height value.
      */
     void SetHeight(double height) { m_height = height; }
-
     /**
      * @brief Set the element position and update the rectangle.
      * @param position Position value.
@@ -130,31 +144,26 @@ public:
      * @param selected True if selected, false otherwise.
      */
     void SetSelected(bool selected = true) { m_selected = selected; }
-
     /**
      * @brief Set element width.
      * @param width Width value.
      */
     void SetWidth(double width) { m_width = width; }
-
     /**
      * @brief Set element angle
      * @param angle Angle value in degrees.
      */
     void SetAngle(double angle) { m_angle = angle; }
-
     /**
      * @brief Set if the pickbox is shown.
      * @param showPickbox True if show, false otherwise.
      */
     void ShowPickbox(bool showPickbox = true) { m_showPickbox = showPickbox; }
-
     /**
      * @brief Set the size of the border (shown in selected elements).
      * @param borderSize Border size.
      */
     void SetBorderSize(double borderSize) { m_borderSize = borderSize; }
-
     /**
      * @brief Set if the element is online or offline.
      * @param online True if online, false if offline.
@@ -166,73 +175,61 @@ public:
      * @param pointList List of points.
      */
     virtual void SetPointList(std::vector<wxPoint2DDouble> pointList) { m_pointList = pointList; }
-
     /**
      * @brief Get the element rectangle.
      * @return Element rectangle.
      */
     wxRect2DDouble GetRect() const { return m_rect; }
-
     /**
      * @brief Get the element position.
      * @return Element position.
      */
     wxPoint2DDouble GetPosition() const { return m_position; }
-
     /**
      * @brief Checks if the element is being dragged.
      * @return True if is being dragged, false otherwise.
      */
     bool IsDragging() const { return m_dragging; }
-
     /**
      * @brief Get the element height.
      * @return Element height.
      */
     double GetHeight() const { return m_height; }
-
     /**
      * @brief Checks if the element is selected.
      * @return True if selected, false otherwise.
      */
     bool IsSelected() const { return m_selected; }
-
     /**
      * @brief Get the element width.
      * @return Element width.
      */
     double GetWidth() const { return m_width; }
-
     /**
      * @brief Get the element angle.
      * @return Angle value.
      */
     double GetAngle() const { return m_angle; }
-
     /**
      * @brief Get the angle of rotation.
      * @return Rotation angle.
      */
     double GetRotationAngle() const { return m_rotationAngle; }
-
     /**
      * @brief Checks if the pickbox is shown.
      * @return True if the pickbox is show, false otherwise.
      */
     bool IsPickboxShown() const { return m_showPickbox; }
-
     /**
      * @brief Checks if the element is online or offline.
      * @return True if online, false if offline.
      */
     bool IsOnline() const { return m_online; }
-
     /**
      * @brief Get the list of points that connect the element to bus.
      * @return List of points.
      */
     virtual std::vector<wxPoint2DDouble> GetPointList() const { return m_pointList; }
-
     /**
      * @brief Add a parent to the element. This method must be used on power elements that connect to a bus, so the
      * parent must be a bus.
@@ -241,13 +238,11 @@ public:
      * @param position Node position in the parent.
      */
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return false; }
-
     /**
      * @brief Add a parent to the element.
      * @param parent Element parent.
      */
     virtual void AddParent(Element* parent) { m_parentList.push_back(parent); }
-
     /**
      * @brief Checks if the element contains a position.
      * @param position Position to be checked.
@@ -265,19 +260,16 @@ public:
      * @return Copy of the element.
      */
     virtual Element* GetCopy() { return NULL; }
-
     /**
      * @brief Set the element ID.
      * @param id Element ID.
      */
     virtual void SetID(int id) { m_elementID = id; }
-
     /**
      * @brief Get the element ID.
      * @return Element ID.
      */
     virtual int GetID() const { return m_elementID; }
-
     /**
      * @brief Add a child to the child list.
      * @param child New child.
@@ -302,33 +294,28 @@ public:
      * @return Tip text.
      */
     virtual wxString GetTipText() const { return wxEmptyString; }
-
     /**
      * @brief Draw the element.
      * @param translation Translation of the system.
      * @param scale Scale of the system.
      */
     virtual void Draw(wxPoint2DDouble translation, double scale) const {}
-
     /**
      * @brief Rotate the element.
      * @param clockwise True to rotate clockwise, false to rotate counter-clockwise.
      */
     virtual void Rotate(bool clockwise = true) {}
-
     /**
      * @brief Get the element contex menu.
      * @param menu menu that will be inserted the element itens.
      * @return True if was possible to build the menu, false otherwise.
      */
     virtual bool GetContextMenu(wxMenu& menu) { return false; }
-
     /**
      * @brief Add point to the list of points that connect the element to the bus.
      * @param point Point to be added.
      */
     virtual void AddPoint(wxPoint2DDouble point) {}
-
     /**
      * @brief Update the element attributes related to the movement.
      * @param position Start move position.
@@ -348,19 +335,16 @@ public:
      * @param position New node position.
      */
     virtual void MoveNode(Element* parent, wxPoint2DDouble position) {}
-
     /**
      * @brief Check if a node contains a point. If contains, set the attributes related to node movement.
      * @param position Position tested.
      * @return True if at least one node contains the position, false otherwise.
      */
     virtual bool NodeContains(wxPoint2DDouble position) { return false; }
-
     /**
      * @brief Update the nodes according to the parents. If a parent is removed, use this method.
      */
     virtual void UpdateNodes() {}
-
     /**
      * @brief Set a perent to the node. If all conditions are met, a new parent are added to the element and the points
      * related to the nodes will be calculated.
@@ -368,13 +352,11 @@ public:
      * @return True if was possible to set the parent.
      */
     virtual bool SetNodeParent(Element* parent) { return false; }
-
     /**
      * @brief Remove a parent.
      * @param parent Parent to be removed.
      */
     virtual void RemoveParent(Element* parent) {}
-
     /**
      * @brief Replace a parent.
      * @param oldParent Parent to be replaced.
@@ -388,7 +370,6 @@ public:
      * @param clockwise True to rotate clockwise, false to rotate counter-clockwise.
      */
     virtual void RotateNode(Element* parent, bool clockwise = true) {}
-
     /**
      * @brief Check if a pickbox contains a point. If contains the attributes related to pickbox movement will be
      * calculated.
@@ -396,29 +377,24 @@ public:
      * @return True if the element constains the pickbox, false otherwise.
      */
     virtual bool PickboxContains(wxPoint2DDouble position) { return false; }
-
     /**
      * @brief Move the pickbox.
      * @param position position that the pickbox will be moved.
      */
     virtual void MovePickbox(wxPoint2DDouble position) {}
-
     /**
      * @brief Get the best cursor to shown to the user when the mouse is above a pickbox.
      * @return Cursor.
      */
     virtual wxCursor GetBestPickboxCursor() const { return wxCURSOR_ARROW; }
-
     /**
      * @brief Remove the pickboxes.
      */
     virtual void ResetPickboxes() { m_activePickboxID = ID_PB_NONE; }
-
     /**
      * @brief Remove the active nodes.
      */
     virtual void ResetNodes() { m_activeNodeID = 0; }
-
     /**
      * @brief Convert the element position to screen position.
      * @param translation System translation.
@@ -426,8 +402,10 @@ public:
      * @param offsetX Offset in X axis.
      * @param offsetY Offset if Y axis.
      */
-    virtual wxPoint2DDouble
-    WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX = 0.0, double offsetY = 0.0) const;
+    virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble translation,
+                                          double scale,
+                                          double offsetX = 0.0,
+                                          double offsetY = 0.0) const;
 
     /**
      * @brief Convert a generic position to screen position.
@@ -438,10 +416,10 @@ public:
      * @param offsetY Offset in Y axis.
      */
     virtual wxPoint2DDouble WorldToScreen(wxPoint2DDouble position,
-        wxPoint2DDouble translation,
-        double scale,
-        double offsetX = 0.0,
-        double offsetY = 0.0) const;
+                                          wxPoint2DDouble translation,
+                                          double scale,
+                                          double offsetX = 0.0,
+                                          double offsetY = 0.0) const;
 
     /**
      * @brief Check if two roteted rectangles intersect.
@@ -450,8 +428,10 @@ public:
      * @param angle1 Rotation algle of first rectangle.
      * @param angle2 Rotation angle of second rectangle.
      */
-    virtual bool
-    RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const;
+    virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1,
+                                             wxRect2DDouble rect2,
+                                             double angle1,
+                                             double angle2) const;
 
     /**
      * @brief Draw a circle.
@@ -462,11 +442,11 @@ public:
      */
     virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
     virtual void DrawArc(wxPoint2DDouble position,
-        double radius,
-        double initAngle,
-        double finalAngle,
-        int numSegments,
-        GLenum mode = GL_LINE_LOOP) const;
+                         double radius,
+                         double initAngle,
+                         double finalAngle,
+                         int numSegments,
+                         GLenum mode = GL_LINE_LOOP) const;
 
     /**
      * @brief Draw rectangle.
@@ -524,13 +504,11 @@ public:
      * @return Parent list.
      */
     virtual std::vector<Element*> GetParentList() const { return m_parentList; }
-
     /**
      * @brief Get the Child list.
      * @return Child List.
      */
     virtual std::vector<Element*> GetChildList() const { return m_childList; }
-
     // virtual wxPoint2DDouble GetMoveStartPosition() const { return m_moveStartPt; }
     // virtual wxPoint2DDouble GetMovePosition() const { return m_movePos; }
 
@@ -554,7 +532,6 @@ public:
      * @return True if the form is shown, false otherwise.
      */
     virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
-
     /**
      * @brief Get a double value from a string. Show a error message if the conversion fail.
      * @param parent Message box parent.
@@ -588,7 +565,7 @@ public:
      */
     virtual double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
 
-protected:
+   protected:
     int m_elementID = 0;
     std::vector<Element*> m_parentList;
     std::vector<Element*> m_childList;
@@ -622,4 +599,4 @@ protected:
     OpenGLColour m_selectionColour;
 };
 
-#endif // ELEMENT_H
+#endif  // ELEMENT_H

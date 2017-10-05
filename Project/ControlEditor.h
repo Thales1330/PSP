@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef CONTROLEDITOR_H
 #define CONTROLEDITOR_H
 
@@ -36,6 +53,13 @@ class ElementDataObject;
 
 enum ControlElementButtonID { ID_IO = 0, ID_TF, ID_SUM, ID_CONST, ID_LIMITER, ID_GAIN, ID_MULT, ID_EXP, ID_RATELIM };
 
+/**
+ * @class ControlElementButton
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 05/10/2017
+ * @brief This class is responsible to handle the user interaction with control elements.
+ * @file ControlEditor.h
+ */
 class ControlElementButton : public wxWindow
 {
    public:

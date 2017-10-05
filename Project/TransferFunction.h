@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef TRANSFERFUNCTION_H
 #define TRANSFERFUNCTION_H
 
@@ -36,7 +53,7 @@ class TransferFunction : public ControlElement
     virtual SpaceState GetSpaceState() { return m_ss; }
     virtual void CalculateSpaceState(int maxIteration = 100, double error = 1e-3);
     virtual bool Solve(double input, double timeStep);
-    
+
     virtual Element* GetCopy();
 
    protected:

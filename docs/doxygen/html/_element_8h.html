@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -92,6 +98,8 @@ $(document).ready(function(){initNavTree('_element_8h.html','');});
 <code>#include &lt;wx/geometry.h&gt;</code><br />
 <code>#include &lt;wx/cursor.h&gt;</code><br />
 <code>#include &lt;wx/menu.h&gt;</code><br />
+<code>#include &lt;wx/stdpaths.h&gt;</code><br />
+<code>#include &lt;wx/filename.h&gt;</code><br />
 <code>#include &lt;GL/gl.h&gt;</code><br />
 <code>#include &lt;complex&gt;</code><br />
 </div>
@@ -134,6 +142,7 @@ Enumerations</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to manage color of OpenGL. </p>
+<p>Base class of all elements of the program. This class is responsible for manage graphical and his data.</p>
 
 <p class="definition">Definition in file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -165,7 +174,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00032">32</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00051">51</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
 </div>
 </div>
@@ -199,7 +208,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00018">18</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00037">37</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
 </div>
 </div>

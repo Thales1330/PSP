@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -151,8 +157,8 @@ $(document).ready(function(){initNavTree('class_main_frame.html','');});
   <tr bgcolor="#f0f0f0"><td class="entry"><b>m_ribbonPanelSimulations</b> (defined in <a class="el" href="class_main_frame_base.html">MainFrameBase</a>)</td><td class="entry"><a class="el" href="class_main_frame_base.html">MainFrameBase</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>m_statusBar</b> (defined in <a class="el" href="class_main_frame_base.html">MainFrameBase</a>)</td><td class="entry"><a class="el" href="class_main_frame_base.html">MainFrameBase</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>m_workspaceList</b> (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>MainFrame</b>() (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>MainFrame</b>(wxWindow *parent, wxLocale *locale, PropertiesData *initProperties) (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_main_frame.html#a667b44053cae174a361cfd21124ef995">MainFrame</a>()</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_main_frame.html#ac3288e93c5b8682863574bc47c9e9ff8">MainFrame</a>(wxWindow *parent, wxLocale *locale, PropertiesData *initProperties, wxString openPath=&quot;&quot;)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>MainFrameBase</b>(wxWindow *parent, wxWindowID id=wxID_ANY, const wxString &amp;title=_(&quot;PSP-UFU&quot;), const wxPoint &amp;pos=wxDefaultPosition, const wxSize &amp;size=wxSize(800, 600), long style=wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX) (defined in <a class="el" href="class_main_frame_base.html">MainFrameBase</a>)</td><td class="entry"><a class="el" href="class_main_frame_base.html">MainFrameBase</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>NotebookPageClosed</b>(wxAuiNotebookEvent &amp;event) (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>NotebookPageClosing</b>(wxAuiNotebookEvent &amp;event) (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
@@ -189,7 +195,7 @@ $(document).ready(function(){initNavTree('class_main_frame.html','');});
   <tr bgcolor="#f0f0f0"><td class="entry"><b>OnSimulationSettingsClick</b>(wxRibbonButtonBarEvent &amp;event) (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>OnSnapshotClick</b>(wxRibbonButtonBarEvent &amp;event) (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>OnUndoClick</b>(wxRibbonButtonBarEvent &amp;event) (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~MainFrame</b>() (defined in <a class="el" href="class_main_frame.html">MainFrame</a>)</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_main_frame.html#a0cfd88ece4836e0ea5430bd55370bf11">~MainFrame</a>()</td><td class="entry"><a class="el" href="class_main_frame.html">MainFrame</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>~MainFrameBase</b>() (defined in <a class="el" href="class_main_frame_base.html">MainFrameBase</a>)</td><td class="entry"><a class="el" href="class_main_frame_base.html">MainFrameBase</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->

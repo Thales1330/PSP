@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,6 +92,12 @@ $(document).ready(function(){initNavTree('class_rate_limiter.html','');});
 <div class="title">RateLimiter Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Limits the rising and/or falling rate.<br />
+  
+ <a href="class_rate_limiter.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_rate_limiter_8h_source.html">RateLimiter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RateLimiter:</div>
 <div class="dyncontent">
@@ -132,8 +144,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetUpLimit</b> (doubl
 <tr class="memitem:ac9e938191a9cb73f2062424bb7ef3d6a"><td class="memItemLeft" align="right" valign="top"><a id="ac9e938191a9cb73f2062424bb7ef3d6a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLowLimit</b> (double lowLimit)</td></tr>
 <tr class="separator:ac9e938191a9cb73f2062424bb7ef3d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2697e0f56b574739651fa2126b315e29"><td class="memItemLeft" align="right" valign="top"><a id="a2697e0f56b574739651fa2126b315e29"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (double input, double timeStep)</td></tr>
+<tr class="memitem:a2697e0f56b574739651fa2126b315e29"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rate_limiter.html#a2697e0f56b574739651fa2126b315e29">Solve</a> (double input, double timeStep)</td></tr>
+<tr class="memdesc:a2697e0f56b574739651fa2126b315e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the rate and limits it if exceeds.<br />
+ The rate is calculated by:<br />
+<br />
+ \( rate = \frac{x(i) - y(i-1)}{\Delta t} \)<br />
+<br />
+ \( x(i) \) is the current input and \( y(i-1) \) is the previous output.<br />
+ If the \(rate\) is greater than rising rate ( \( R \)), the output will be:<br />
+<br />
+ \( output = \Delta t \cdot R + y(i-1)\)<br />
+<br />
+ If the \(rate\) is lower than falling rate ( \( F \)), the output will be:<br />
+<br />
+ \( output = \Delta t \cdot L + y(i-1) \)<br />
+<br />
+ Otherwise:<br />
+<br />
+ \( output = input \).  <a href="#a2697e0f56b574739651fa2126b315e29">More...</a><br /></td></tr>
 <tr class="separator:a2697e0f56b574739651fa2126b315e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f1152238b97fcf76a0bee258e971823"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rate_limiter.html#a4f1152238b97fcf76a0bee258e971823">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a4f1152238b97fcf76a0bee258e971823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <a href="#a4f1152238b97fcf76a0bee258e971823">More...</a><br /></td></tr>
@@ -471,8 +499,12 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_rate_limiter_8h_source.html#l00008">8</a> of file <a class="el" href="_rate_limiter_8h_source.html">RateLimiter.h</a>.</p>
+<div class="textblock"><p>Limits the rising and/or falling rate.<br />
+ </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8h_source.html#l00032">32</a> of file <a class="el" href="_rate_limiter_8h_source.html">RateLimiter.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="addf0eef395781b8584063a9061be59dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#addf0eef395781b8584063a9061be59dc">&#9670;&nbsp;</a></span>Contains()</h2>
@@ -508,7 +540,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_rate_limiter_8h_source.html#l00015">15</a> of file <a class="el" href="_rate_limiter_8h_source.html">RateLimiter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8h_source.html#l00039">39</a> of file <a class="el" href="_rate_limiter_8h_source.html">RateLimiter.h</a>.</p>
 
 </div>
 </div>
@@ -557,7 +589,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00017">17</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00034">34</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
 
 </div>
 </div>
@@ -589,7 +621,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00116">116</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00133">133</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
 
 </div>
 </div>
@@ -627,7 +659,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_rate_limiter_8h_source.html#l00016">16</a> of file <a class="el" href="_rate_limiter_8h_source.html">RateLimiter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8h_source.html#l00040">40</a> of file <a class="el" href="_rate_limiter_8h_source.html">RateLimiter.h</a>.</p>
 
 </div>
 </div>
@@ -665,7 +697,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00060">60</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00077">77</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
 
 </div>
 </div>
@@ -715,7 +747,73 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00049">49</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00066">66</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2697e0f56b574739651fa2126b315e29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2697e0f56b574739651fa2126b315e29">&#9670;&nbsp;</a></span>Solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RateLimiter::Solve </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>timeStep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the rate and limits it if exceeds.<br />
+ The rate is calculated by:<br />
+<br />
+ \( rate = \frac{x(i) - y(i-1)}{\Delta t} \)<br />
+<br />
+ \( x(i) \) is the current input and \( y(i-1) \) is the previous output.<br />
+ If the \(rate\) is greater than rising rate ( \( R \)), the output will be:<br />
+<br />
+ \( output = \Delta t \cdot R + y(i-1)\)<br />
+<br />
+ If the \(rate\) is lower than falling rate ( \( F \)), the output will be:<br />
+<br />
+ \( output = \Delta t \cdot L + y(i-1) \)<br />
+<br />
+ Otherwise:<br />
+<br />
+ \( output = input \). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>input value. </td></tr>
+    <tr><td class="paramname">timeStep</td><td>Time step. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Always true. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_rate_limiter_8cpp_source.html#l00113">113</a> of file <a class="el" href="_rate_limiter_8cpp_source.html">RateLimiter.cpp</a>.</p>
 
 </div>
 </div>

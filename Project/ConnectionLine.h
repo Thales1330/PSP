@@ -1,8 +1,32 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef CONNECTIONLINE_H
 #define CONNECTIONLINE_H
 
 #include "ControlElement.h"
 
+/**
+ * @class ConnectionLine
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 05/10/2017
+ * @brief Connection between two control elements or other connection line and an element.
+ * @file ConnectionLine.h
+ */
 class ConnectionLine : public ControlElement
 {
    public:
@@ -29,10 +53,9 @@ class ConnectionLine : public ControlElement
     virtual bool SetParentLine(ConnectionLine* parent);
 
     virtual std::vector<ConnectionLine*> GetLineChildList() const;
-    
+
     virtual double GetValue() const { return m_value; }
     virtual void SetValue(double value) { m_value = value; }
-    
     Element* GetCopy();
 
    protected:
@@ -43,7 +66,7 @@ class ConnectionLine : public ControlElement
 
     ConnectionLineType m_type = ELEMENT_ELEMENT;
     ConnectionLine* m_parentLine = NULL;
-    
+
     double m_value;
 };
 

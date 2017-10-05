@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -528,7 +534,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00009">9</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00026">26</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aaaf1b86dcbfd8f4a4c082a77d72b1fe3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaaf1b86dcbfd8f4a4c082a77d72b1fe3">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -568,14 +574,14 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
-    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html">Node</a> position in the parent. </td></tr>
+    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00008">8</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00025">25</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -613,7 +619,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00018">18</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00035">35</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
 
 </div>
 </div>
@@ -662,7 +668,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00037">37</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00054">54</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -700,7 +706,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00020">20</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00037">37</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
 
 </div>
 </div>
@@ -738,7 +744,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#abe884d99d12d5252e18956162115b025">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00094">94</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00111">111</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -779,7 +785,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Move a node. <a class="el" href="class_machines.html#acbefe76cd5161b5684a27205b155e797" title="Update the element attributes related to the movement. ">StartMove(wxPoint2DDouble position)</a> before start moving. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a>'s parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a>'s parent. </td></tr>
     <tr><td class="paramname">position</td><td>New node position. </td></tr>
   </table>
   </dd>
@@ -787,7 +793,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a870e266e0457bacbc3f7ef1fb70c6fdd">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00107">107</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00124">124</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -826,7 +832,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a95b4f7e9341883ec39d0201148afffb4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00158">158</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00175">175</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -864,7 +870,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a9504437b60faf2c5a27584de8a24810c">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00148">148</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00165">165</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -902,7 +908,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00215">215</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00232">232</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -943,7 +949,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Rotate a node. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a>'s parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a>'s parent. </td></tr>
     <tr><td class="paramname">clockwise</td><td>True to rotate clockwise, false to rotate counter-clockwise. </td></tr>
   </table>
   </dd>
@@ -951,7 +957,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#af26c67b6dd32eb1b3e417fddf54818c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00136">136</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00153">153</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -982,7 +988,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Set a perent to the node. If all conditions are met, a new parent are added to the element and the points related to the nodes will be calculated. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a> parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> parent. </td></tr>
   </table>
   </dd>
 </dl>
@@ -990,7 +996,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ac7490a91f3edfff08584567cc84d86b5">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00172">172</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00189">189</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1034,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00250">250</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00267">267</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
@@ -1066,7 +1072,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a846a2a51780a99363b4d4b1812ca16b4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00129">129</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8cpp_source.html#l00146">146</a> of file <a class="el" href="_machines_8cpp_source.html">Machines.cpp</a>.</p>
 
 </div>
 </div>
