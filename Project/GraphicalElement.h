@@ -20,6 +20,13 @@
 
 #include "Element.h"
 
+/**
+ * @class GraphicalElement
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Abstract class for graphical elements shown with power elements in workspace.
+ * @file GraphicalElement.h
+ */
 class GraphicalElement : public Element
 {
    public:

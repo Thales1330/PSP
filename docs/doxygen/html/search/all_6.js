@@ -45,5 +45,6 @@ var searchData=
   ['gettransformerlist',['GetTransformerList',['../class_electric_calculation.html#a3b89149e5fb56253c0629c9d260b3b7e',1,'ElectricCalculation']]],
   ['getwidth',['GetWidth',['../class_element.html#a23e1fe2745c70cfb43725f608c4bce00',1,'Element::GetWidth()'],['../class_text_g_l_drawable.html#a965ac9bf245f1979a080193986874f18',1,'TextGLDrawable::getWidth()']]],
   ['getybus',['GetYBus',['../class_electric_calculation.html#a939e6e75b5e0cb555a82b2f9ef59c59d',1,'ElectricCalculation']]],
-  ['graphicalelement',['GraphicalElement',['../class_graphical_element.html',1,'']]]
+  ['graphicalelement',['GraphicalElement',['../class_graphical_element.html',1,'']]],
+  ['graphicalelement_2eh',['GraphicalElement.h',['../_graphical_element_8h.html',1,'']]]
 ];

@@ -26,6 +26,13 @@ struct ElementsLists {
     std::vector<Bus*> parentList;
 };
 
+/**
+ * @class ElementDataObject
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Class to store the elements in the clipboard.
+ * @file ElementDataObject.h
+ */
 class ElementDataObject : public wxDataObjectSimple
 {
    public:

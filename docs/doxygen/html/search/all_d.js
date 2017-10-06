@@ -13,6 +13,8 @@ var searchData=
   ['powerelement',['PowerElement',['../class_power_element.html',1,'PowerElement'],['../class_power_element.html#a382cdc0897802eb0a89692483fa7043e',1,'PowerElement::PowerElement()']]],
   ['powerelement_2eh',['PowerElement.h',['../_power_element_8h.html',1,'']]],
   ['powerflow',['PowerFlow',['../class_power_flow.html',1,'']]],
+  ['powerflow_2eh',['PowerFlow.h',['../_power_flow_8h.html',1,'']]],
   ['powerflowdirection',['PowerFlowDirection',['../_power_element_8h.html#a467d3005d31dde0ba0e52cf8e233e740',1,'PowerElement.h']]],
-  ['propertiesdata',['PropertiesData',['../class_properties_data.html',1,'']]]
+  ['propertiesdata',['PropertiesData',['../class_properties_data.html',1,'']]],
+  ['propertiesdata_2eh',['PropertiesData.h',['../_properties_data_8h.html',1,'']]]
 ];

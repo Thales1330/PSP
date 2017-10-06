@@ -93,6 +93,9 @@ $(document).ready(function(){initNavTree('class_power_element.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Abstract class of power elements.  
+ <a href="class_power_element.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_power_element_8h_source.html">PowerElement.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PowerElement:</div>
@@ -100,19 +103,19 @@ Inheritance diagram for PowerElement:</div>
  <div class="center">
   <img src="class_power_element.png" usemap="#PowerElement_map" alt=""/>
   <map id="PowerElement_map" name="PowerElement_map">
-<area href="class_element.html" alt="Element" shape="rect" coords="162,0,260,24"/>
-<area href="class_branch.html" alt="Branch" shape="rect" coords="0,112,98,136"/>
-<area href="class_bus.html" alt="Bus" shape="rect" coords="108,112,206,136"/>
-<area href="class_machines.html" alt="Machines" shape="rect" coords="216,112,314,136"/>
-<area href="class_shunt.html" alt="Shunt" shape="rect" coords="432,112,530,136"/>
-<area href="class_line.html" alt="Line" shape="rect" coords="108,168,206,192"/>
-<area href="class_transformer.html" alt="Transformer" shape="rect" coords="108,224,206,248"/>
-<area href="class_ind_motor.html" alt="IndMotor" shape="rect" coords="324,168,422,192"/>
-<area href="class_sync_generator.html" alt="SyncGenerator" shape="rect" coords="324,224,422,248"/>
-<area href="class_sync_motor.html" alt="SyncMotor" shape="rect" coords="324,280,422,304"/>
-<area href="class_capacitor.html" alt="Capacitor" shape="rect" coords="540,168,638,192"/>
-<area href="class_inductor.html" alt="Inductor" shape="rect" coords="540,224,638,248"/>
-<area href="class_load.html" alt="Load" shape="rect" coords="540,280,638,304"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="162,0,260,24"/>
+<area href="class_branch.html" title="Abstract class for branch power elements. " alt="Branch" shape="rect" coords="0,112,98,136"/>
+<area href="class_bus.html" title="Node for power elements. All others power elements are connected through this. " alt="Bus" shape="rect" coords="108,112,206,136"/>
+<area href="class_machines.html" title="Abstract class for rotary machines power elements. " alt="Machines" shape="rect" coords="216,112,314,136"/>
+<area href="class_shunt.html" title="Abstract class for shunt power elements. " alt="Shunt" shape="rect" coords="432,112,530,136"/>
+<area href="class_line.html" title="Power line element. " alt="Line" shape="rect" coords="108,168,206,192"/>
+<area href="class_transformer.html" title="Two-winding transformer power element. " alt="Transformer" shape="rect" coords="108,224,206,248"/>
+<area href="class_ind_motor.html" title="Induction motor power element. " alt="IndMotor" shape="rect" coords="324,168,422,192"/>
+<area href="class_sync_generator.html" title="Synchronous generator power element. " alt="SyncGenerator" shape="rect" coords="324,224,422,248"/>
+<area href="class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="SyncMotor" shape="rect" coords="324,280,422,304"/>
+<area href="class_capacitor.html" title="Shunt capactior power element. " alt="Capacitor" shape="rect" coords="540,168,638,192"/>
+<area href="class_inductor.html" title="Inductor shunt power element. " alt="Inductor" shape="rect" coords="540,224,638,248"/>
+<area href="class_load.html" title="Loas shunt power element. " alt="Load" shape="rect" coords="540,280,638,304"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -511,7 +514,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira </dd></dl>
+<div class="textblock"><p>Abstract class of power elements. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>18/01/2017 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00117">117</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
@@ -645,7 +649,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the switching data of the element. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html">Element</a> switching data. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> switching data. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00182">182</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
@@ -694,7 +698,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Get the correct switch position. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_bus.html">Bus</a> with switch. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_bus.html" title="Node for power elements. All others power elements are connected through this. ">Bus</a> with switch. </td></tr>
     <tr><td class="paramname">parentPoint</td><td>Position of node on parent. </td></tr>
     <tr><td class="paramname">secondPoint</td><td>Next point in element. </td></tr>
   </table>

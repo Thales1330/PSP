@@ -49,6 +49,13 @@ struct LineElectricalData {
     std::complex<double> faultCurrent[2][3];
 };
 
+/**
+ * @class Line
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Power line element.
+ * @file Line.h
+ */
 class Line : public Branch
 {
    public:

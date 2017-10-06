@@ -49,16 +49,17 @@ class RateLimiter : public ControlElement
     void SetLowLimit(double lowLimit) { m_lowLimit = lowLimit; }
     /**
      * @brief Calculate the rate and limits it if exceeds.<br>
-     * The rate is calculated by:<br><br>
-     * \f$ rate = \frac{x(i) - y(i-1)}{\Delta t} \f$<br><br>
-     * \f$ x(i) \f$ is the current input and \f$ y(i-1) \f$ is the previous output.<br>
-     * If the \f$rate\f$ is greater than rising rate (\f$ R \f$), the output will be:<br><br>
-     * \f$ output = \Delta t \cdot R + y(i-1)\f$<br><br>
+     *
+     * The rate is calculated by:
+     * <center>\f$ rate = \frac{x(i) - y(i-1)}{\Delta t} \f$</center>
+     * Where, \f$ x(i) \f$ is the current input and \f$ y(i-1) \f$ is the previous output.<br><br>
+     * If the \f$rate\f$ is greater than rising rate (\f$ R \f$), the output will be:<br>
+     * <center>\f$ output = \Delta t \cdot R + y(i-1)\f$</center>
      * If the \f$rate\f$ is lower than falling rate (\f$ F \f$), the output will be:<br><br>
-     * \f$ output = \Delta t \cdot L + y(i-1) \f$<br><br>
-     * Otherwise:<br><br>
-     * \f$ output = input \f$.
-     * @param input input value.
+     * <center>\f$ output = \Delta t \cdot F + y(i-1) \f$</center>
+     * Otherwise:
+     * <center>\f$ output = input \f$</center>.
+     * @param input Input value.
      * @param timeStep Time step.
      * @return Always true.
      */

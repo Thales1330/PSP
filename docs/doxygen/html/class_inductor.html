@@ -92,15 +92,20 @@ $(document).ready(function(){initNavTree('class_inductor.html','');});
 <div class="title">Inductor Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_inductor.html" title="Inductor shunt power element. ">Inductor</a> shunt power element.  
+ <a href="class_inductor.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_inductor_8h_source.html">Inductor.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Inductor:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_inductor.png" usemap="#Inductor_map" alt=""/>
   <map id="Inductor_map" name="Inductor_map">
-<area href="class_shunt.html" alt="Shunt" shape="rect" coords="0,112,92,136"/>
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="0,56,92,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,92,24"/>
+<area href="class_shunt.html" title="Abstract class for shunt power elements. " alt="Shunt" shape="rect" coords="0,112,92,136"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="0,56,92,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,92,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -531,8 +536,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <tr class="separator:a902525eebbb4bf3ecaab0e1e60b6f017 inherit pro_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_inductor_8h_source.html#l00031">31</a> of file <a class="el" href="_inductor_8h_source.html">Inductor.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_inductor.html" title="Inductor shunt power element. ">Inductor</a> shunt power element. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_inductor_8h_source.html#l00038">38</a> of file <a class="el" href="_inductor_8h_source.html">Inductor.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4e404c6e15f206fe0f5de06fc19dedf5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e404c6e15f206fe0f5de06fc19dedf5">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -571,7 +579,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <p>Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
     <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
@@ -887,7 +895,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>

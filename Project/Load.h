@@ -32,6 +32,13 @@ struct LoadElectricalData {
     LoadType loadType = CONST_POWER;
 };
 
+/**
+ * @class Load
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Loas shunt power element.
+ * @file Load.h
+ */
 class Load : public Shunt
 {
    public:

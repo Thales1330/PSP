@@ -24,6 +24,14 @@
 
 #include <vector>
 
+/**
+ * @class PlotData
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief This class is responsible to manage the graphical data of electromechanical result to be plotted on chart
+ * viewer.
+ * @file ElementPlotData.h
+ */
 class PlotData : public wxTreeItemData
 {
    public:

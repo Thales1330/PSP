@@ -130,6 +130,13 @@ struct SyncGeneratorElectricalData {
     Machines::SyncMachineModel model = Machines::SM_MODEL_1;
 };
 
+/**
+ * @class SyncGenerator
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Synchronous generator power element.
+ * @file SyncGenerator.h
+ */
 class SyncGenerator : public Machines
 {
    public:

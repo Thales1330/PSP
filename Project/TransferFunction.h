@@ -25,6 +25,13 @@
 
 class TransferFunctionForm;
 
+/**
+ * @class TransferFunction
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Calculates the time response by a frequency domain transfer function.
+ * @file TransferFunction.h
+ */
 class TransferFunction : public ControlElement
 {
    public:
@@ -51,7 +58,21 @@ class TransferFunction : public ControlElement
     virtual void UpdateTFText();
     virtual void UpdateText() { UpdateTFText(); }
     virtual SpaceState GetSpaceState() { return m_ss; }
+    /**
+     * @brief Convert the transfer function to space state on controllable canonical form (CCF).
+     * @param maxIteration Max number of solution iteration.
+     * @param error Tolerance for calculation.
+     */
     virtual void CalculateSpaceState(int maxIteration = 100, double error = 1e-3);
+    /**
+     * @brief Calculates the time response by the space state form of transfer function.
+     *
+     * Uses the implicit trapezoidal rule to solve:
+     * <center>\f$ y_{n+1}=y_n+\frac{1}{2}h(y'_n+y'_{n+1}) \f$</center>
+     * @param input Input value.
+     * @param timeStep Time step.
+     * @return true if the calculation converges, false otherwise.
+     */
     virtual bool Solve(double input, double timeStep);
 
     virtual Element* GetCopy();

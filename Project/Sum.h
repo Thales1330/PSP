@@ -23,6 +23,13 @@
 class SumForm;
 class ConnectionLine;
 
+/**
+ * @class Sum
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Sum the all inputs (can choose the input signal).
+ * @file Sum.h
+ */
 class Sum : public ControlElement
 {
    public:

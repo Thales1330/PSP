@@ -273,7 +273,8 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     int order = static_cast<int>(m_denominator.size());
     std::vector<double> denominator = m_denominator;
     std::vector<double> numerator;
-
+    
+    //[Ref.] http://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS.html
     int k = order;
     for(int i = 0; i < order; i++) {
         int numIndex = i - (order - static_cast<int>(m_numerator.size()));

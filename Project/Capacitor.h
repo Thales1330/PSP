@@ -28,6 +28,13 @@ struct CapacitorElectricalData {
     ElectricalUnit reactivePowerUnit = UNIT_MVAr;
 };
 
+/**
+ * @class Capacitor
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Shunt capactior power element.
+ * @file Capacitor.h
+ */
 class Capacitor : public Shunt
 {
    public:

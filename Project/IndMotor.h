@@ -30,6 +30,13 @@ struct IndMotorElectricalData {
     ElectricalUnit reactivePowerUnit = UNIT_MVAr;
 };
 
+/**
+ * @class IndMotor
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Induction motor power element.
+ * @file IndMotor.h
+ */
 class IndMotor : public Machines
 {
    public:

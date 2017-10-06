@@ -105,7 +105,7 @@ Inheritance diagram for RateLimiter:</div>
   <img src="class_rate_limiter.png" usemap="#RateLimiter_map" alt=""/>
   <map id="RateLimiter_map" name="RateLimiter_map">
 <area href="class_control_element.html" alt="ControlElement" shape="rect" coords="0,56,97,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,97,24"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,97,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -146,22 +146,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLowLimit</b> (doub
 <tr class="separator:ac9e938191a9cb73f2062424bb7ef3d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2697e0f56b574739651fa2126b315e29"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rate_limiter.html#a2697e0f56b574739651fa2126b315e29">Solve</a> (double input, double timeStep)</td></tr>
 <tr class="memdesc:a2697e0f56b574739651fa2126b315e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the rate and limits it if exceeds.<br />
- The rate is calculated by:<br />
-<br />
- \( rate = \frac{x(i) - y(i-1)}{\Delta t} \)<br />
-<br />
- \( x(i) \) is the current input and \( y(i-1) \) is the previous output.<br />
- If the \(rate\) is greater than rising rate ( \( R \)), the output will be:<br />
-<br />
- \( output = \Delta t \cdot R + y(i-1)\)<br />
-<br />
- If the \(rate\) is lower than falling rate ( \( F \)), the output will be:<br />
-<br />
- \( output = \Delta t \cdot L + y(i-1) \)<br />
-<br />
- Otherwise:<br />
-<br />
- \( output = input \).  <a href="#a2697e0f56b574739651fa2126b315e29">More...</a><br /></td></tr>
+  <a href="#a2697e0f56b574739651fa2126b315e29">More...</a><br /></td></tr>
 <tr class="separator:a2697e0f56b574739651fa2126b315e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f1152238b97fcf76a0bee258e971823"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rate_limiter.html#a4f1152238b97fcf76a0bee258e971823">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a4f1152238b97fcf76a0bee258e971823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <a href="#a4f1152238b97fcf76a0bee258e971823">More...</a><br /></td></tr>
@@ -739,7 +724,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -786,25 +771,15 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Calculate the rate and limits it if exceeds.<br />
- The rate is calculated by:<br />
+ </p>
+<p>The rate is calculated by: </p><center> \( rate = \frac{x(i) - y(i-1)}{\Delta t} \)</center><p> Where, \( x(i) \) is the current input and \( y(i-1) \) is the previous output.<br />
 <br />
- \( rate = \frac{x(i) - y(i-1)}{\Delta t} \)<br />
-<br />
- \( x(i) \) is the current input and \( y(i-1) \) is the previous output.<br />
  If the \(rate\) is greater than rising rate ( \( R \)), the output will be:<br />
+ </p><center> \( output = \Delta t \cdot R + y(i-1)\)</center><p> If the \(rate\) is lower than falling rate ( \( F \)), the output will be:<br />
 <br />
- \( output = \Delta t \cdot R + y(i-1)\)<br />
-<br />
- If the \(rate\) is lower than falling rate ( \( F \)), the output will be:<br />
-<br />
- \( output = \Delta t \cdot L + y(i-1) \)<br />
-<br />
- Otherwise:<br />
-<br />
- \( output = input \). </p>
-<dl class="params"><dt>Parameters</dt><dd>
+ </p><center> \( output = \Delta t \cdot F + y(i-1) \)</center><p> Otherwise: </p><center> \( output = input \)</center><p>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">input</td><td>input value. </td></tr>
+    <tr><td class="paramname">input</td><td>Input value. </td></tr>
     <tr><td class="paramname">timeStep</td><td>Time step. </td></tr>
   </table>
   </dd>

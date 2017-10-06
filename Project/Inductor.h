@@ -28,6 +28,13 @@ struct InductorElectricalData {
     ElectricalUnit reactivePowerUnit = UNIT_MVAr;
 };
 
+/**
+ * @class Inductor
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Inductor shunt power element.
+ * @file Inductor.h
+ */
 class Inductor : public Shunt
 {
    public:

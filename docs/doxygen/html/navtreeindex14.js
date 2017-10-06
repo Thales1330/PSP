@@ -1,0 +1,19 @@
+var NAVTREEINDEX14 =
+{
+"struct_transformer_electrical_data.html#a8a90bbbcefecfe59505d86003354afdc":[0,0,110,16],
+"struct_transformer_electrical_data.html#a900c1dfc24ebcca169fae8dfd4a3e6bd":[0,0,110,15],
+"struct_transformer_electrical_data.html#a913f0ad1ba90018a13d7930670438a89":[0,0,110,21],
+"struct_transformer_electrical_data.html#a9da8363e7eb19e805650db36d87fca93":[0,0,110,7],
+"struct_transformer_electrical_data.html#aa450538f0a29571bef6e2785d3544bb2":[0,0,110,6],
+"struct_transformer_electrical_data.html#aabe6d597ed902640f5c87f2cd2550364":[0,0,110,0],
+"struct_transformer_electrical_data.html#ab6606d2f93aa369b7a3173e61d44c8f3":[0,0,110,24],
+"struct_transformer_electrical_data.html#abae77eeb48d1a56cb10302f2b9aea38c":[0,0,110,17],
+"struct_transformer_electrical_data.html#ac954927451779be66154613475143dc9":[0,0,110,11],
+"struct_transformer_electrical_data.html#ad1a62e6b3f896f6a9d794f6b9e02f599":[0,0,110,9],
+"struct_transformer_electrical_data.html#add161341c5cdd9c9ce93c34f9ace2c08":[0,0,110,20],
+"struct_transformer_electrical_data.html#af19976dfba78777187211ab79581396e":[0,0,110,2],
+"struct_transformer_electrical_data.html#af4454c28f422632359573496c40b70e4":[0,0,110,3],
+"struct_transformer_electrical_data.html#afb45c8a86048551b51c399a1b72ff949":[0,0,110,23],
+"wx_g_l_string_8cpp_source.html":[1,0,0,156],
+"wx_g_l_string_8h_source.html":[1,0,0,157]
+};

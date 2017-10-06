@@ -124,6 +124,13 @@ struct SyncMotorElectricalData {
     Machines::SyncMachineModel model = Machines::SM_MODEL_1;
 };
 
+/**
+ * @class SyncMotor
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Synchronous motor (synchronous compensator) power element.
+ * @file SyncMotor.h
+ */
 class SyncMotor : public Machines
 {
    public:

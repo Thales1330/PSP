@@ -2,6 +2,7 @@ var searchData=
 [
   ['m',['m',['../struct_integration_constant.html#adafabd0d37a52d4ed054a800cbce3d65',1,'IntegrationConstant']]],
   ['machines',['Machines',['../class_machines.html',1,'']]],
+  ['machines_2eh',['Machines.h',['../_machines_8h.html',1,'']]],
   ['mainapp',['MainApp',['../class_main_app.html',1,'']]],
   ['mainframe',['MainFrame',['../class_main_frame.html',1,'MainFrame'],['../class_main_frame.html#a667b44053cae174a361cfd21124ef995',1,'MainFrame::MainFrame()'],['../class_main_frame.html#ac3288e93c5b8682863574bc47c9e9ff8',1,'MainFrame::MainFrame(wxWindow *parent, wxLocale *locale, PropertiesData *initProperties, wxString openPath=&quot;&quot;)']]],
   ['mainframe_2eh',['MainFrame.h',['../_main_frame_8h.html',1,'']]],

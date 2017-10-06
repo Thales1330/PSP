@@ -23,6 +23,13 @@
 class ControlElementContainer;
 class ControlElementSolver;
 
+/**
+ * @class Machines
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Abstract class for rotary machines power elements.
+ * @file Machines.h
+ */
 class Machines : public PowerElement
 {
    public:

@@ -68,6 +68,13 @@ struct TransformerElectricalData {
     std::complex<double> faultCurrent[2][3];
 };
 
+/**
+ * @class Transformer
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Two-winding transformer power element.
+ * @file Transformer.h
+ */
 class Transformer : public Branch
 {
    public:

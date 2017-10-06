@@ -87,8 +87,8 @@ enum PowerFlowDirection {
  * @class SwitchingData
  * @author Thales Lima Oliveira
  * @date 18/01/2017
- * @file PowerElement.h
  * @brief Switching data of power elements.
+ * @file PowerElement.h
  */
 struct SwitchingData {
     std::vector<SwitchingType> swType; /**< Type of switching */
@@ -99,8 +99,8 @@ struct SwitchingData {
  * @class IntegrationConstant
  * @author Thales Lima Oliveira
  * @date 24/05/2017
- * @file PowerElement.h
  * @brief Integration constants to calculate dynamic elements through trapezoidal integration method
+ * @file PowerElement.h
  */
 struct IntegrationConstant {
     double c; /**< C value */
@@ -109,10 +109,10 @@ struct IntegrationConstant {
 
 /**
  * @class PowerElement
- * @author Thales Lima Oliveira
+ * @author Thales Lima Oliveira <thales@ufu.br>
  * @date 18/01/2017
+ * @brief Abstract class of power elements.
  * @file PowerElement.h
- * @brief Base class of power elements.
  */
 class PowerElement : public Element
 {

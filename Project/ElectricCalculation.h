@@ -60,8 +60,8 @@ struct ReactiveLimits {
  * @class ElectricCalculation
  * @author Thales Lima Oliveira
  * @date 09/01/2017
- * @file ElectricCalculation.h
  * @brief Base class of electric calculations, with general methods.
+ * @file ElectricCalculation.h
  */
 class ElectricCalculation
 {

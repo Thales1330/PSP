@@ -59,6 +59,13 @@ struct BusElectricalData {
     std::vector<std::complex<double> > stabVoltageVector;
 };
 
+/**
+ * @class Bus
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Node for power elements. All others power elements are connected through this.
+ * @file Bus.h
+ */
 class Bus : public PowerElement
 {
    public:

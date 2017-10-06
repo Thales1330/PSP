@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('class_gain.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Provide an output multiplying the input by a constant. \( output = K \cdot input \).  
+<p>Provide an output multiplying the input by a constant.  
  <a href="class_gain.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_gain_8h_source.html">Gain.h</a>&gt;</code></p>
@@ -104,7 +104,7 @@ Inheritance diagram for Gain:</div>
   <img src="class_gain.png" usemap="#Gain_map" alt=""/>
   <map id="Gain_map" name="Gain_map">
 <area href="class_control_element.html" alt="ControlElement" shape="rect" coords="0,56,97,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,97,24"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,97,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -143,8 +143,8 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>GetValue</b
 <tr class="memitem:a9930247d3cee160ac2ae815ad865f077"><td class="memItemLeft" align="right" valign="top"><a id="a9930247d3cee160ac2ae815ad865f077"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePoints</b> ()</td></tr>
 <tr class="separator:a9930247d3cee160ac2ae815ad865f077"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a282cab6d339aa89a35c775bbea2aa117"><td class="memItemLeft" align="right" valign="top"><a id="a282cab6d339aa89a35c775bbea2aa117"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (double input, double timeStep)</td></tr>
+<tr class="memitem:a282cab6d339aa89a35c775bbea2aa117"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gain.html#a282cab6d339aa89a35c775bbea2aa117">Solve</a> (double input, double timeStep)</td></tr>
+<tr class="memdesc:a282cab6d339aa89a35c775bbea2aa117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the input by a constant.  <a href="#a282cab6d339aa89a35c775bbea2aa117">More...</a><br /></td></tr>
 <tr class="separator:a282cab6d339aa89a35c775bbea2aa117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a489572e289935d7256c037af682b9351"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gain.html#a489572e289935d7256c037af682b9351">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a489572e289935d7256c037af682b9351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <a href="#a489572e289935d7256c037af682b9351">More...</a><br /></td></tr>
@@ -482,11 +482,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Provide an output multiplying the input by a constant. \( output = K \cdot input \). </p>
+<div class="textblock"><p>Provide an output multiplying the input by a constant. </p>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8h_source.html#l00036">36</a> of file <a class="el" href="_gain_8h_source.html">Gain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8h_source.html#l00035">35</a> of file <a class="el" href="_gain_8h_source.html">Gain.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9d80d49f5123cf4859bf15a251e3923f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9d80d49f5123cf4859bf15a251e3923f">&#9670;&nbsp;</a></span>Contains()</h2>
@@ -522,7 +522,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8h_source.html#l00043">43</a> of file <a class="el" href="_gain_8h_source.html">Gain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8h_source.html#l00042">42</a> of file <a class="el" href="_gain_8h_source.html">Gain.h</a>.</p>
 
 </div>
 </div>
@@ -641,7 +641,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8h_source.html#l00044">44</a> of file <a class="el" href="_gain_8h_source.html">Gain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8h_source.html#l00043">43</a> of file <a class="el" href="_gain_8h_source.html">Gain.h</a>.</p>
 
 </div>
 </div>
@@ -759,7 +759,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -768,6 +768,56 @@ Additional Inherited Members</h2></td></tr>
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00088">88</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a282cab6d339aa89a35c775bbea2aa117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a282cab6d339aa89a35c775bbea2aa117">&#9670;&nbsp;</a></span>Solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Gain::Solve </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>timeStep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the input by a constant. </p>
+<center> \( output = K \cdot input \)</center> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Input value. </td></tr>
+    <tr><td class="paramname">timeStep</td><td>Time step. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Always true. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00188">188</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
 
 </div>
 </div>

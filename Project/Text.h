@@ -62,6 +62,13 @@ enum DataType {
     DATA_PF_CURRENT
 };
 
+/**
+ * @class Text
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Element that shows power element informations in workspace.
+ * @file Text.h
+ */
 class Text : public GraphicalElement
 {
    public:

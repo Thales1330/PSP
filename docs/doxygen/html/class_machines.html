@@ -94,17 +94,22 @@ $(document).ready(function(){initNavTree('class_machines.html','');});
 <div class="title">Machines Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Abstract class for rotary machines power elements.  
+ <a href="class_machines.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_machines_8h_source.html">Machines.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Machines:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_machines.png" usemap="#Machines_map" alt=""/>
   <map id="Machines_map" name="Machines_map">
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="108,56,206,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="108,0,206,24"/>
-<area href="class_ind_motor.html" alt="IndMotor" shape="rect" coords="0,168,98,192"/>
-<area href="class_sync_generator.html" alt="SyncGenerator" shape="rect" coords="108,168,206,192"/>
-<area href="class_sync_motor.html" alt="SyncMotor" shape="rect" coords="216,168,314,192"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="108,56,206,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="108,0,206,24"/>
+<area href="class_ind_motor.html" title="Induction motor power element. " alt="IndMotor" shape="rect" coords="0,168,98,192"/>
+<area href="class_sync_generator.html" title="Synchronous generator power element. " alt="SyncGenerator" shape="rect" coords="108,168,206,192"/>
+<area href="class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="SyncMotor" shape="rect" coords="216,168,314,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -533,8 +538,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00026">26</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
+<div class="textblock"><p>Abstract class for rotary machines power elements. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00033">33</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aaaf1b86dcbfd8f4a4c082a77d72b1fe3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaaf1b86dcbfd8f4a4c082a77d72b1fe3">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -573,7 +581,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
     <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
@@ -619,7 +627,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00035">35</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00042">42</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
 
 </div>
 </div>
@@ -706,7 +714,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00037">37</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_machines_8h_source.html#l00044">44</a> of file <a class="el" href="_machines_8h_source.html">Machines.h</a>.</p>
 
 </div>
 </div>

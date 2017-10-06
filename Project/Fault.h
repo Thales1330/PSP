@@ -23,8 +23,8 @@
  * @class Fault
  * @author Thales Lima Oliveira
  * @date 10/01/2017
- * @file Fault.h
  * @brief Calculate the fault of the system and update the elements data.
+ * @file Fault.h
  */
 
 class Fault : public ElectricCalculation

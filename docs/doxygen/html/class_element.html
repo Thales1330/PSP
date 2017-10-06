@@ -94,6 +94,9 @@ $(document).ready(function(){initNavTree('class_element.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Base class of all elements of the program. This class is responsible for manage graphical and his data.  
+ <a href="class_element.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_element_8h_source.html">Element.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Element:</div>
@@ -102,23 +105,23 @@ Inheritance diagram for Element:</div>
   <img src="class_element.png" usemap="#Element_map" alt=""/>
   <map id="Element_map" name="Element_map">
 <area href="class_control_element.html" alt="ControlElement" shape="rect" coords="0,56,111,80"/>
-<area href="class_graphical_element.html" alt="GraphicalElement" shape="rect" coords="242,56,353,80"/>
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="363,56,474,80"/>
+<area href="class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace. " alt="GraphicalElement" shape="rect" coords="242,56,353,80"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="363,56,474,80"/>
 <area href="class_connection_line.html" title="Connection between two control elements or other connection line and an element. " alt="ConnectionLine" shape="rect" coords="121,112,232,136"/>
 <area href="class_constant.html" title="A control element that provides a constant value. " alt="Constant" shape="rect" coords="121,168,232,192"/>
-<area href="class_exponential.html" title="Generates an output following an exponential function. . " alt="Exponential" shape="rect" coords="121,224,232,248"/>
-<area href="class_gain.html" title="Provide an output multiplying the input by a constant. . " alt="Gain" shape="rect" coords="121,280,232,304"/>
+<area href="class_exponential.html" title="Generates an output following an exponential function. " alt="Exponential" shape="rect" coords="121,224,232,248"/>
+<area href="class_gain.html" title="Provide an output multiplying the input by a constant. " alt="Gain" shape="rect" coords="121,280,232,304"/>
 <area href="class_i_o_control.html" title="Provides the communication with the power element. " alt="IOControl" shape="rect" coords="121,336,232,360"/>
 <area href="class_limiter.html" title="Limits the input value by superior and inferior values. " alt="Limiter" shape="rect" coords="121,392,232,416"/>
 <area href="class_multiplier.html" title="Multiplies two inputs. " alt="Multiplier" shape="rect" coords="121,448,232,472"/>
 <area href="class_rate_limiter.html" title="Limits the rising and/or falling rate.  " alt="RateLimiter" shape="rect" coords="121,504,232,528"/>
-<area href="class_sum.html" alt="Sum" shape="rect" coords="121,560,232,584"/>
-<area href="class_transfer_function.html" alt="TransferFunction" shape="rect" coords="121,616,232,640"/>
-<area href="class_text.html" alt="Text" shape="rect" coords="242,112,353,136"/>
-<area href="class_branch.html" alt="Branch" shape="rect" coords="484,112,595,136"/>
-<area href="class_bus.html" alt="Bus" shape="rect" coords="484,168,595,192"/>
-<area href="class_machines.html" alt="Machines" shape="rect" coords="484,224,595,248"/>
-<area href="class_shunt.html" alt="Shunt" shape="rect" coords="484,280,595,304"/>
+<area href="class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="Sum" shape="rect" coords="121,560,232,584"/>
+<area href="class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="TransferFunction" shape="rect" coords="121,616,232,640"/>
+<area href="class_text.html" title="Element that shows power element informations in workspace. " alt="Text" shape="rect" coords="242,112,353,136"/>
+<area href="class_branch.html" title="Abstract class for branch power elements. " alt="Branch" shape="rect" coords="484,112,595,136"/>
+<area href="class_bus.html" title="Node for power elements. All others power elements are connected through this. " alt="Bus" shape="rect" coords="484,168,595,192"/>
+<area href="class_machines.html" title="Abstract class for rotary machines power elements. " alt="Machines" shape="rect" coords="484,224,595,248"/>
+<area href="class_shunt.html" title="Abstract class for shunt power elements. " alt="Shunt" shape="rect" coords="484,280,595,304"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -425,7 +428,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <tr class="separator:ab0df145138fef6ed901ff4b1828439b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<div class="textblock"><p>Base class of all elements of the program. This class is responsible for manage graphical and his data. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>19/09/2017 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00113">113</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
@@ -503,7 +507,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <p>Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
     <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
@@ -542,7 +546,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <p>Add a parent to the element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
   </table>
   </dd>
 </dl>
@@ -670,7 +674,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_transformer.html#a327ff3cf9194c18049e4feac6761ebc0">Transformer</a>, <a class="el" href="class_text.html#a51c55b9272f653cfc3cdafe665d5dde0">Text</a>, <a class="el" href="class_bus.html#ad2b960058be6e990463b53d79c74c7a3">Bus</a>, <a class="el" href="class_line.html#a05eb3761f198a058045f85d6e685ca97">Line</a>, <a class="el" href="class_i_o_control.html#aa064c5d70e562334e2b374f919f42ef1">IOControl</a>, <a class="el" href="class_gain.html#a9d80d49f5123cf4859bf15a251e3923f">Gain</a>, <a class="el" href="class_constant.html#ae091eb79633beb158dc06880424f7ce6">Constant</a>, <a class="el" href="class_transfer_function.html#a6a4415d2cf0af290494ea30d586cc187">TransferFunction</a>, <a class="el" href="class_capacitor.html#a994039e59a8ae0ec3fe7cf7f5b66e4e5">Capacitor</a>, <a class="el" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor</a>, <a class="el" href="class_exponential.html#a79eabfca357002f160b082a6df9f6f2b">Exponential</a>, <a class="el" href="class_connection_line.html#a65c6d7139587c973a92dd1009909597f">ConnectionLine</a>, <a class="el" href="class_limiter.html#ac6506d59da4ea682d9e556564ec3ad11">Limiter</a>, <a class="el" href="class_multiplier.html#acee6216a03b550f3a9cad2bef3963a18">Multiplier</a>, <a class="el" href="class_rate_limiter.html#addf0eef395781b8584063a9061be59dc">RateLimiter</a>, <a class="el" href="class_machines.html#acda27b0ea8a7b0fb00d647d8744f346e">Machines</a>, <a class="el" href="class_sum.html#a1d1b52ca1b9a81d53c0a9cf140546987">Sum</a>, <a class="el" href="class_branch.html#a691f94c3cd2abe1274e870d2882634d8">Branch</a>, and <a class="el" href="class_shunt.html#a449431a2044b838d35cbb991aa1de658">Shunt</a>.</p>
+<p>Implemented in <a class="el" href="class_transformer.html#a327ff3cf9194c18049e4feac6761ebc0">Transformer</a>, <a class="el" href="class_text.html#a51c55b9272f653cfc3cdafe665d5dde0">Text</a>, <a class="el" href="class_bus.html#ad2b960058be6e990463b53d79c74c7a3">Bus</a>, <a class="el" href="class_line.html#a05eb3761f198a058045f85d6e685ca97">Line</a>, <a class="el" href="class_i_o_control.html#aa064c5d70e562334e2b374f919f42ef1">IOControl</a>, <a class="el" href="class_transfer_function.html#a6a4415d2cf0af290494ea30d586cc187">TransferFunction</a>, <a class="el" href="class_capacitor.html#a994039e59a8ae0ec3fe7cf7f5b66e4e5">Capacitor</a>, <a class="el" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor</a>, <a class="el" href="class_constant.html#ae091eb79633beb158dc06880424f7ce6">Constant</a>, <a class="el" href="class_gain.html#a9d80d49f5123cf4859bf15a251e3923f">Gain</a>, <a class="el" href="class_machines.html#acda27b0ea8a7b0fb00d647d8744f346e">Machines</a>, <a class="el" href="class_sum.html#a1d1b52ca1b9a81d53c0a9cf140546987">Sum</a>, <a class="el" href="class_connection_line.html#a65c6d7139587c973a92dd1009909597f">ConnectionLine</a>, <a class="el" href="class_exponential.html#a79eabfca357002f160b082a6df9f6f2b">Exponential</a>, <a class="el" href="class_limiter.html#ac6506d59da4ea682d9e556564ec3ad11">Limiter</a>, <a class="el" href="class_multiplier.html#acee6216a03b550f3a9cad2bef3963a18">Multiplier</a>, <a class="el" href="class_rate_limiter.html#addf0eef395781b8584063a9061be59dc">RateLimiter</a>, <a class="el" href="class_branch.html#a691f94c3cd2abe1274e870d2882634d8">Branch</a>, and <a class="el" href="class_shunt.html#a449431a2044b838d35cbb991aa1de658">Shunt</a>.</p>
 
 </div>
 </div>
@@ -778,7 +782,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_transformer.html#a1e9e9ba48aa76bdd2ff2e973014ad422">Transformer</a>, <a class="el" href="class_bus.html#ae9022ca29399377d2fe0082bb762107c">Bus</a>, <a class="el" href="class_line.html#a297e12aa8ff0be5d344e245732487bdd">Line</a>, <a class="el" href="class_i_o_control.html#aa6aab56f8936a87f099241d9bad9fee4">IOControl</a>, <a class="el" href="class_load.html#aaef52b18cc53fa2db996fb9cad5db181">Load</a>, <a class="el" href="class_gain.html#a42f48bfdfb3d6f593fcc599504dd2264">Gain</a>, <a class="el" href="class_constant.html#afc4d8739980ae1b57e9c5058c2e05591">Constant</a>, <a class="el" href="class_transfer_function.html#a0cd1dec850117741abb04b608c7b3f1e">TransferFunction</a>, <a class="el" href="class_capacitor.html#a94d378c922467214b394931ec0eb01c8">Capacitor</a>, <a class="el" href="class_inductor.html#a97761292fac4f0da7ae3dc6ca4b4de54">Inductor</a>, <a class="el" href="class_exponential.html#af5f172e2f7ae7df0fc79b44b55355339">Exponential</a>, <a class="el" href="class_connection_line.html#a71cb3502dd098e1d1ef541668789586e">ConnectionLine</a>, <a class="el" href="class_limiter.html#a2e2960936ebfcc6589181b7948fba242">Limiter</a>, <a class="el" href="class_multiplier.html#ae854fd981a98aca93b286081cc9c19f3">Multiplier</a>, <a class="el" href="class_rate_limiter.html#a6afc319e3a165776b8a429b9bbe38580">RateLimiter</a>, <a class="el" href="class_machines.html#af3279663c82de88e12f0487bfc633f7c">Machines</a>, <a class="el" href="class_sum.html#a31dbb6867b17188b4a8cc650983da57b">Sum</a>, and <a class="el" href="class_branch.html#a7037f496f9b9c9e64c74eb638debe278">Branch</a>.</p>
+<p>Reimplemented in <a class="el" href="class_transformer.html#a1e9e9ba48aa76bdd2ff2e973014ad422">Transformer</a>, <a class="el" href="class_bus.html#ae9022ca29399377d2fe0082bb762107c">Bus</a>, <a class="el" href="class_line.html#a297e12aa8ff0be5d344e245732487bdd">Line</a>, <a class="el" href="class_load.html#aaef52b18cc53fa2db996fb9cad5db181">Load</a>, <a class="el" href="class_i_o_control.html#aa6aab56f8936a87f099241d9bad9fee4">IOControl</a>, <a class="el" href="class_transfer_function.html#a0cd1dec850117741abb04b608c7b3f1e">TransferFunction</a>, <a class="el" href="class_capacitor.html#a94d378c922467214b394931ec0eb01c8">Capacitor</a>, <a class="el" href="class_inductor.html#a97761292fac4f0da7ae3dc6ca4b4de54">Inductor</a>, <a class="el" href="class_machines.html#af3279663c82de88e12f0487bfc633f7c">Machines</a>, <a class="el" href="class_constant.html#afc4d8739980ae1b57e9c5058c2e05591">Constant</a>, <a class="el" href="class_gain.html#a42f48bfdfb3d6f593fcc599504dd2264">Gain</a>, <a class="el" href="class_sum.html#a31dbb6867b17188b4a8cc650983da57b">Sum</a>, <a class="el" href="class_branch.html#a7037f496f9b9c9e64c74eb638debe278">Branch</a>, <a class="el" href="class_connection_line.html#a71cb3502dd098e1d1ef541668789586e">ConnectionLine</a>, <a class="el" href="class_exponential.html#af5f172e2f7ae7df0fc79b44b55355339">Exponential</a>, <a class="el" href="class_limiter.html#a2e2960936ebfcc6589181b7948fba242">Limiter</a>, <a class="el" href="class_multiplier.html#ae854fd981a98aca93b286081cc9c19f3">Multiplier</a>, and <a class="el" href="class_rate_limiter.html#a6afc319e3a165776b8a429b9bbe38580">RateLimiter</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00302">302</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -882,7 +886,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <p>Draw line. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">points</td><td><a class="el" href="class_line.html">Line</a> vertices. </td></tr>
+    <tr><td class="paramname">points</td><td><a class="el" href="class_line.html" title="Power line element. ">Line</a> vertices. </td></tr>
     <tr><td class="paramname">mode</td><td>OpenGl primitive. </td></tr>
   </table>
   </dd>
@@ -1323,7 +1327,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <p>Get a the element copy. </p>
 <dl class="section return"><dt>Returns</dt><dd>Copy of the element. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_sync_generator.html#a9130e8714c1518683540f587aca1201f">SyncGenerator</a>, <a class="el" href="class_sync_motor.html#a035b63a3dfd356daff0bf1cee9672313">SyncMotor</a>, <a class="el" href="class_transformer.html#a286bcc94f7202a6ff81b66707424a9bd">Transformer</a>, <a class="el" href="class_text.html#a06e740065c875633e458c0d8f860c43e">Text</a>, <a class="el" href="class_bus.html#a4288c4c84c8840705c3ce6ccd42e578c">Bus</a>, <a class="el" href="class_rate_limiter.html#a4f1152238b97fcf76a0bee258e971823">RateLimiter</a>, <a class="el" href="class_line.html#afc4916268d2a32014e4ab0f8308165a1">Line</a>, <a class="el" href="class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7">IOControl</a>, <a class="el" href="class_connection_line.html#a131a890bd54059c5370f1dc5156c192c">ConnectionLine</a>, <a class="el" href="class_transfer_function.html#a3312f7e9499aa99742093d3b60547862">TransferFunction</a>, <a class="el" href="class_gain.html#a489572e289935d7256c037af682b9351">Gain</a>, <a class="el" href="class_exponential.html#a85cda0dba6549828a9045e478e24609f">Exponential</a>, <a class="el" href="class_constant.html#ac566e3a63326d3f543a55af14ae0f8fa">Constant</a>, <a class="el" href="class_limiter.html#a6071e2308baa7b42f189f09fd1878245">Limiter</a>, <a class="el" href="class_multiplier.html#ab487232a96ed3c3f3a7c3628ddaa4c77">Multiplier</a>, <a class="el" href="class_sum.html#a0da96514e0462e47d3f57b79ddc457b6">Sum</a>, <a class="el" href="class_load.html#a27309c24b2c70bde37ba6afbb9679da2">Load</a>, <a class="el" href="class_ind_motor.html#ace3ce34ba500ec33bf37b9216ad636a8">IndMotor</a>, <a class="el" href="class_capacitor.html#a422e353b594ac6e4ef34e1f613f7d580">Capacitor</a>, and <a class="el" href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">Inductor</a>.</p>
+<p>Reimplemented in <a class="el" href="class_sync_generator.html#a9130e8714c1518683540f587aca1201f">SyncGenerator</a>, <a class="el" href="class_sync_motor.html#a035b63a3dfd356daff0bf1cee9672313">SyncMotor</a>, <a class="el" href="class_transformer.html#a286bcc94f7202a6ff81b66707424a9bd">Transformer</a>, <a class="el" href="class_text.html#a06e740065c875633e458c0d8f860c43e">Text</a>, <a class="el" href="class_transfer_function.html#a3312f7e9499aa99742093d3b60547862">TransferFunction</a>, <a class="el" href="class_bus.html#a4288c4c84c8840705c3ce6ccd42e578c">Bus</a>, <a class="el" href="class_line.html#afc4916268d2a32014e4ab0f8308165a1">Line</a>, <a class="el" href="class_rate_limiter.html#a4f1152238b97fcf76a0bee258e971823">RateLimiter</a>, <a class="el" href="class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7">IOControl</a>, <a class="el" href="class_gain.html#a489572e289935d7256c037af682b9351">Gain</a>, <a class="el" href="class_connection_line.html#a131a890bd54059c5370f1dc5156c192c">ConnectionLine</a>, <a class="el" href="class_exponential.html#a85cda0dba6549828a9045e478e24609f">Exponential</a>, <a class="el" href="class_sum.html#a0da96514e0462e47d3f57b79ddc457b6">Sum</a>, <a class="el" href="class_constant.html#ac566e3a63326d3f543a55af14ae0f8fa">Constant</a>, <a class="el" href="class_limiter.html#a6071e2308baa7b42f189f09fd1878245">Limiter</a>, <a class="el" href="class_load.html#a27309c24b2c70bde37ba6afbb9679da2">Load</a>, <a class="el" href="class_multiplier.html#ab487232a96ed3c3f3a7c3628ddaa4c77">Multiplier</a>, <a class="el" href="class_ind_motor.html#ace3ce34ba500ec33bf37b9216ad636a8">IndMotor</a>, <a class="el" href="class_capacitor.html#a422e353b594ac6e4ef34e1f613f7d580">Capacitor</a>, and <a class="el" href="class_inductor.html#a4241ebd43388ebe88ec5888a15bc22d9">Inductor</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00262">262</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -1353,7 +1357,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </div><div class="memdoc">
 
 <p>Get the element height. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html">Element</a> height. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> height. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00197">197</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -1383,7 +1387,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </div><div class="memdoc">
 
 <p>Get the element ID. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html">Element</a> ID. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> ID. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00272">272</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -1473,7 +1477,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </div><div class="memdoc">
 
 <p>Get the element position. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html">Element</a> position. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> position. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00187">187</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -1503,7 +1507,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </div><div class="memdoc">
 
 <p>Get the element rectangle. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html">Element</a> rectangle. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> rectangle. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00182">182</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -1595,7 +1599,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </div><div class="memdoc">
 
 <p>Get the element width. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html">Element</a> width. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> width. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00207">207</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -1633,7 +1637,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_transformer.html#a39b58fcf230970601c5d77c088559731">Transformer</a>, <a class="el" href="class_text.html#a9923c820cd77b411257ba48beceafeaa">Text</a>, <a class="el" href="class_bus.html#a5014be68f4bb5d8f1a1ea861b03bacdf">Bus</a>, <a class="el" href="class_line.html#a125581fc6d21c83565b902751af331dc">Line</a>, <a class="el" href="class_i_o_control.html#adebd59a32fd699ba4dff4dff44dfbf90">IOControl</a>, <a class="el" href="class_gain.html#a8768490f9cb20a6a8c9148d1c893e980">Gain</a>, <a class="el" href="class_constant.html#ac2e2c958b3d38ed381d59cbb361974b2">Constant</a>, <a class="el" href="class_transfer_function.html#a6325dec72c7b85178f490c5cf85229bd">TransferFunction</a>, <a class="el" href="class_capacitor.html#a6b06adb1ef3545b220e0b94ee6210b7a">Capacitor</a>, <a class="el" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor</a>, <a class="el" href="class_exponential.html#a540b1a43045b9bb7c96d32825d15c95e">Exponential</a>, <a class="el" href="class_branch.html#aa23b1014c947e46996f1c0c4caa187e1">Branch</a>, <a class="el" href="class_connection_line.html#aaa3e63c2e48338e324ee7b58911c86b6">ConnectionLine</a>, <a class="el" href="class_limiter.html#ac9c1858dfc3b4d30b2eca0c4767a9f0e">Limiter</a>, <a class="el" href="class_multiplier.html#aba53ef763812fbff891cdf0b89c7fcca">Multiplier</a>, <a class="el" href="class_rate_limiter.html#a7c1ce7440e82613b455054dd8447f147">RateLimiter</a>, <a class="el" href="class_machines.html#a0a825ccdbd5059f9ae9f869d4b6e3ec4">Machines</a>, <a class="el" href="class_sum.html#ac8ed3db993dd3053b94ccac7da4a664e">Sum</a>, and <a class="el" href="class_shunt.html#afdbf0c51f9630589937298329bb041fe">Shunt</a>.</p>
+<p>Implemented in <a class="el" href="class_transformer.html#a39b58fcf230970601c5d77c088559731">Transformer</a>, <a class="el" href="class_text.html#a9923c820cd77b411257ba48beceafeaa">Text</a>, <a class="el" href="class_bus.html#a5014be68f4bb5d8f1a1ea861b03bacdf">Bus</a>, <a class="el" href="class_line.html#a125581fc6d21c83565b902751af331dc">Line</a>, <a class="el" href="class_i_o_control.html#adebd59a32fd699ba4dff4dff44dfbf90">IOControl</a>, <a class="el" href="class_transfer_function.html#a6325dec72c7b85178f490c5cf85229bd">TransferFunction</a>, <a class="el" href="class_capacitor.html#a6b06adb1ef3545b220e0b94ee6210b7a">Capacitor</a>, <a class="el" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor</a>, <a class="el" href="class_branch.html#aa23b1014c947e46996f1c0c4caa187e1">Branch</a>, <a class="el" href="class_machines.html#a0a825ccdbd5059f9ae9f869d4b6e3ec4">Machines</a>, <a class="el" href="class_constant.html#ac2e2c958b3d38ed381d59cbb361974b2">Constant</a>, <a class="el" href="class_gain.html#a8768490f9cb20a6a8c9148d1c893e980">Gain</a>, <a class="el" href="class_sum.html#ac8ed3db993dd3053b94ccac7da4a664e">Sum</a>, <a class="el" href="class_connection_line.html#aaa3e63c2e48338e324ee7b58911c86b6">ConnectionLine</a>, <a class="el" href="class_exponential.html#a540b1a43045b9bb7c96d32825d15c95e">Exponential</a>, <a class="el" href="class_limiter.html#ac9c1858dfc3b4d30b2eca0c4767a9f0e">Limiter</a>, <a class="el" href="class_multiplier.html#aba53ef763812fbff891cdf0b89c7fcca">Multiplier</a>, <a class="el" href="class_rate_limiter.html#a7c1ce7440e82613b455054dd8447f147">RateLimiter</a>, and <a class="el" href="class_shunt.html#afdbf0c51f9630589937298329bb041fe">Shunt</a>.</p>
 
 </div>
 </div>
@@ -1850,7 +1854,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708">ControlElement</a>, <a class="el" href="class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8">Transformer</a>, <a class="el" href="class_line.html#a3eabf6de2af4ee71f72ce4f091c69978">Line</a>, <a class="el" href="class_gain.html#aa303bcc736ac5fad1f89c6cc87e859db">Gain</a>, <a class="el" href="class_connection_line.html#a49300d04c6dd4bcc6f4569c0c47780c7">ConnectionLine</a>, <a class="el" href="class_machines.html#a2f7450283dd36f4fc0847dfd50385c44">Machines</a>, <a class="el" href="class_branch.html#a7cf4b117f43f49bb76cce3df5521fb70">Branch</a>, and <a class="el" href="class_shunt.html#aa98b8a2f097fc02fee1ea874e19480f3">Shunt</a>.</p>
+<p>Reimplemented in <a class="el" href="class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708">ControlElement</a>, <a class="el" href="class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8">Transformer</a>, <a class="el" href="class_line.html#a3eabf6de2af4ee71f72ce4f091c69978">Line</a>, <a class="el" href="class_gain.html#aa303bcc736ac5fad1f89c6cc87e859db">Gain</a>, <a class="el" href="class_machines.html#a2f7450283dd36f4fc0847dfd50385c44">Machines</a>, <a class="el" href="class_connection_line.html#a49300d04c6dd4bcc6f4569c0c47780c7">ConnectionLine</a>, <a class="el" href="class_branch.html#a7cf4b117f43f49bb76cce3df5521fb70">Branch</a>, and <a class="el" href="class_shunt.html#aa98b8a2f097fc02fee1ea874e19480f3">Shunt</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_element_8cpp_source.html#l00123">123</a> of file <a class="el" href="_element_8cpp_source.html">Element.cpp</a>.</p>
 
@@ -2137,7 +2141,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_machines.html#a002d852ddd0d73502a6bd819b5545026">Machines</a>, <a class="el" href="class_connection_line.html#a3f5584348b86e665161b033d4ce8d702">ConnectionLine</a>, <a class="el" href="class_branch.html#aa0328a743090b2b7b3f33d57a867b6dc">Branch</a>, and <a class="el" href="class_shunt.html#a665d9a8c291d427e666567c6df34321b">Shunt</a>.</p>
+<p>Reimplemented in <a class="el" href="class_machines.html#a002d852ddd0d73502a6bd819b5545026">Machines</a>, <a class="el" href="class_branch.html#aa0328a743090b2b7b3f33d57a867b6dc">Branch</a>, <a class="el" href="class_shunt.html#a665d9a8c291d427e666567c6df34321b">Shunt</a>, and <a class="el" href="class_connection_line.html#a3f5584348b86e665161b033d4ce8d702">ConnectionLine</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00359">359</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -2269,7 +2273,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de">Transformer</a>, <a class="el" href="class_text.html#afe1f86a497f34cee4809cbd7fda24dc3">Text</a>, <a class="el" href="class_bus.html#ace039d00c23d36a7c14d7e4155c94791">Bus</a>, <a class="el" href="class_i_o_control.html#a47a5633ed68ef0648623b9733dc5dab9">IOControl</a>, <a class="el" href="class_gain.html#ae19d739112c3aad30c58bdfd98f442e7">Gain</a>, <a class="el" href="class_machines.html#acff264f0c80d97a966ff97401f2f142a">Machines</a>, <a class="el" href="class_constant.html#a867addfc3c1a755b7aa0032d119245c6">Constant</a>, <a class="el" href="class_load.html#a46e9f2e0935ecca77b3a46568404d8e3">Load</a>, <a class="el" href="class_transfer_function.html#ae145b86db1450a19a3ed32084ee60423">TransferFunction</a>, <a class="el" href="class_capacitor.html#a2c3f0949c2b791c6a0b69866e9aaff7a">Capacitor</a>, <a class="el" href="class_exponential.html#a0714869ee8815119a6d76431bac767ea">Exponential</a>, <a class="el" href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">Inductor</a>, <a class="el" href="class_limiter.html#ab9c3aa47fd2fd4903be2dd600f658d25">Limiter</a>, <a class="el" href="class_multiplier.html#ae01f155ed56925cb87d71a860882a3a1">Multiplier</a>, <a class="el" href="class_rate_limiter.html#a3eb4d933b1d069808617306c78835f3e">RateLimiter</a>, and <a class="el" href="class_sum.html#a738bcb564fec2764055e4785227b5eea">Sum</a>.</p>
+<p>Reimplemented in <a class="el" href="class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de">Transformer</a>, <a class="el" href="class_text.html#afe1f86a497f34cee4809cbd7fda24dc3">Text</a>, <a class="el" href="class_bus.html#ace039d00c23d36a7c14d7e4155c94791">Bus</a>, <a class="el" href="class_i_o_control.html#a47a5633ed68ef0648623b9733dc5dab9">IOControl</a>, <a class="el" href="class_machines.html#acff264f0c80d97a966ff97401f2f142a">Machines</a>, <a class="el" href="class_load.html#a46e9f2e0935ecca77b3a46568404d8e3">Load</a>, <a class="el" href="class_transfer_function.html#ae145b86db1450a19a3ed32084ee60423">TransferFunction</a>, <a class="el" href="class_capacitor.html#a2c3f0949c2b791c6a0b69866e9aaff7a">Capacitor</a>, <a class="el" href="class_inductor.html#a801bb445c01059558902c0eca4d38cdd">Inductor</a>, <a class="el" href="class_constant.html#a867addfc3c1a755b7aa0032d119245c6">Constant</a>, <a class="el" href="class_gain.html#ae19d739112c3aad30c58bdfd98f442e7">Gain</a>, <a class="el" href="class_sum.html#a738bcb564fec2764055e4785227b5eea">Sum</a>, <a class="el" href="class_exponential.html#a0714869ee8815119a6d76431bac767ea">Exponential</a>, <a class="el" href="class_limiter.html#ab9c3aa47fd2fd4903be2dd600f658d25">Limiter</a>, <a class="el" href="class_multiplier.html#ae01f155ed56925cb87d71a860882a3a1">Multiplier</a>, and <a class="el" href="class_rate_limiter.html#a3eb4d933b1d069808617306c78835f3e">RateLimiter</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00307">307</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -2610,7 +2614,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <p>Set the element ID. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td><a class="el" href="class_element.html">Element</a> ID. </td></tr>
+    <tr><td class="paramname">id</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> ID. </td></tr>
   </table>
   </dd>
 </dl>
@@ -2862,13 +2866,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_sync_generator.html#a4a9dd07d901f26cc8304399fe241afec">SyncGenerator</a>, <a class="el" href="class_sync_motor.html#a3201b22e0271517f5ed3df85da6cee6f">SyncMotor</a>, <a class="el" href="class_transformer.html#acb55f182a7f6d7af0feb6a94cb62af4f">Transformer</a>, <a class="el" href="class_bus.html#a93dbd8f80b11123395093f561d5241d0">Bus</a>, <a class="el" href="class_line.html#a24c6a659148f063c78e080a18f4517a1">Line</a>, <a class="el" href="class_i_o_control.html#abbd3054700825f9c4ac1b7c813f7b439">IOControl</a>, <a class="el" href="class_load.html#a792367f35c97324328816fee156e5ecf">Load</a>, <a class="el" href="class_capacitor.html#a459b1bbdb153bb9720176661e2960ea6">Capacitor</a>, <a class="el" href="class_inductor.html#abfaf28fc70a71f3f85940eef7d1551c9">Inductor</a>, <a class="el" href="class_gain.html#a6b98027cbf545302867ad75f7ab84b93">Gain</a>, <a class="el" href="class_constant.html#af6bded0e01717303bb71da9e45c2b061">Constant</a>, <a class="el" href="class_ind_motor.html#add48c9a03d197a6279ca2e33af0fe286">IndMotor</a>, <a class="el" href="class_transfer_function.html#afe15de93ab4f93032560a6139091ef10">TransferFunction</a>, <a class="el" href="class_exponential.html#abdf1c3c1d8e7839fc2a8fc914acff68d">Exponential</a>, <a class="el" href="class_limiter.html#a31fd227e010e7d39f1435a70709b14e3">Limiter</a>, <a class="el" href="class_multiplier.html#a4fa1206b47c626930db753a70e01680d">Multiplier</a>, <a class="el" href="class_rate_limiter.html#a7d16df402b56e0025bab076aa071be60">RateLimiter</a>, and <a class="el" href="class_sum.html#a8c4bfb1dc965d8ac246de59d1f10888b">Sum</a>.</p>
+<p>Reimplemented in <a class="el" href="class_sync_generator.html#a4a9dd07d901f26cc8304399fe241afec">SyncGenerator</a>, <a class="el" href="class_sync_motor.html#a3201b22e0271517f5ed3df85da6cee6f">SyncMotor</a>, <a class="el" href="class_transformer.html#acb55f182a7f6d7af0feb6a94cb62af4f">Transformer</a>, <a class="el" href="class_bus.html#a93dbd8f80b11123395093f561d5241d0">Bus</a>, <a class="el" href="class_line.html#a24c6a659148f063c78e080a18f4517a1">Line</a>, <a class="el" href="class_load.html#a792367f35c97324328816fee156e5ecf">Load</a>, <a class="el" href="class_capacitor.html#a459b1bbdb153bb9720176661e2960ea6">Capacitor</a>, <a class="el" href="class_inductor.html#abfaf28fc70a71f3f85940eef7d1551c9">Inductor</a>, <a class="el" href="class_i_o_control.html#abbd3054700825f9c4ac1b7c813f7b439">IOControl</a>, <a class="el" href="class_ind_motor.html#add48c9a03d197a6279ca2e33af0fe286">IndMotor</a>, <a class="el" href="class_transfer_function.html#afe15de93ab4f93032560a6139091ef10">TransferFunction</a>, <a class="el" href="class_constant.html#af6bded0e01717303bb71da9e45c2b061">Constant</a>, <a class="el" href="class_gain.html#a6b98027cbf545302867ad75f7ab84b93">Gain</a>, <a class="el" href="class_sum.html#a8c4bfb1dc965d8ac246de59d1f10888b">Sum</a>, <a class="el" href="class_exponential.html#abdf1c3c1d8e7839fc2a8fc914acff68d">Exponential</a>, <a class="el" href="class_limiter.html#a31fd227e010e7d39f1435a70709b14e3">Limiter</a>, <a class="el" href="class_multiplier.html#a4fa1206b47c626930db753a70e01680d">Multiplier</a>, and <a class="el" href="class_rate_limiter.html#a7d16df402b56e0025bab076aa071be60">RateLimiter</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00534">534</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
@@ -2942,7 +2946,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">ControlElement</a>, <a class="el" href="class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5">Transformer</a>, <a class="el" href="class_line.html#abb812387508a9971570bfa1d38e41041">Line</a>, <a class="el" href="class_connection_line.html#a292d284d6f30b209995c2a9877f9fe36">ConnectionLine</a>, <a class="el" href="class_machines.html#acbefe76cd5161b5684a27205b155e797">Machines</a>, <a class="el" href="class_shunt.html#a56d6136d647f64cf490dd9d7720f6865">Shunt</a>, and <a class="el" href="class_branch.html#a947cec45fcdc78d01eaabe19d23daf64">Branch</a>.</p>
+<p>Reimplemented in <a class="el" href="class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5">Transformer</a>, <a class="el" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">ControlElement</a>, <a class="el" href="class_line.html#abb812387508a9971570bfa1d38e41041">Line</a>, <a class="el" href="class_machines.html#acbefe76cd5161b5684a27205b155e797">Machines</a>, <a class="el" href="class_connection_line.html#a292d284d6f30b209995c2a9877f9fe36">ConnectionLine</a>, <a class="el" href="class_shunt.html#a56d6136d647f64cf490dd9d7720f6865">Shunt</a>, and <a class="el" href="class_branch.html#a947cec45fcdc78d01eaabe19d23daf64">Branch</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_element_8cpp_source.html#l00117">117</a> of file <a class="el" href="_element_8cpp_source.html">Element.cpp</a>.</p>
 

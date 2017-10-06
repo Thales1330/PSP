@@ -21,6 +21,13 @@
 #include "PowerElement.h"
 #include "Bus.h"
 
+/**
+ * @class Branch
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Abstract class for branch power elements.
+ * @file Branch.h
+ */
 class Branch : public PowerElement
 {
    public:

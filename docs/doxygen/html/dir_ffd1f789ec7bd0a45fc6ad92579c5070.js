@@ -7,9 +7,14 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
     [ "ArtMetro.cpp", "_art_metro_8cpp_source.html", null ],
     [ "ArtMetro.h", "_art_metro_8h_source.html", null ],
     [ "Branch.cpp", "_branch_8cpp_source.html", null ],
-    [ "Branch.h", "_branch_8h_source.html", null ],
+    [ "Branch.h", "_branch_8h.html", [
+      [ "Branch", "class_branch.html", "class_branch" ]
+    ] ],
     [ "Bus.cpp", "_bus_8cpp_source.html", null ],
-    [ "Bus.h", "_bus_8h_source.html", null ],
+    [ "Bus.h", "_bus_8h.html", [
+      [ "BusElectricalData", "struct_bus_electrical_data.html", "struct_bus_electrical_data" ],
+      [ "Bus", "class_bus.html", "class_bus" ]
+    ] ],
     [ "BusForm.cpp", "_bus_form_8cpp_source.html", null ],
     [ "BusForm.h", "_bus_form_8h.html", [
       [ "BusForm", "class_bus_form.html", "class_bus_form" ]
@@ -20,7 +25,10 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
       [ "Camera", "class_camera.html", "class_camera" ]
     ] ],
     [ "Capacitor.cpp", "_capacitor_8cpp_source.html", null ],
-    [ "Capacitor.h", "_capacitor_8h_source.html", null ],
+    [ "Capacitor.h", "_capacitor_8h.html", [
+      [ "CapacitorElectricalData", "struct_capacitor_electrical_data.html", "struct_capacitor_electrical_data" ],
+      [ "Capacitor", "class_capacitor.html", "class_capacitor" ]
+    ] ],
     [ "ChartView.cpp", "_chart_view_8cpp_source.html", null ],
     [ "ChartView.h", "_chart_view_8h.html", [
       [ "ChartView", "class_chart_view.html", "class_chart_view" ]
@@ -80,12 +88,18 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
     [ "Element.cpp", "_element_8cpp_source.html", null ],
     [ "Element.h", "_element_8h.html", "_element_8h" ],
     [ "ElementDataObject.cpp", "_element_data_object_8cpp_source.html", null ],
-    [ "ElementDataObject.h", "_element_data_object_8h_source.html", null ],
+    [ "ElementDataObject.h", "_element_data_object_8h.html", [
+      [ "ElementsLists", "struct_elements_lists.html", "struct_elements_lists" ],
+      [ "ElementDataObject", "class_element_data_object.html", "class_element_data_object" ]
+    ] ],
     [ "ElementForm.cpp", "_element_form_8cpp_source.html", null ],
     [ "ElementForm.h", "_element_form_8h_source.html", null ],
     [ "ElementFormBitmaps.cpp", "_element_form_bitmaps_8cpp_source.html", null ],
     [ "ElementPlotData.cpp", "_element_plot_data_8cpp_source.html", null ],
-    [ "ElementPlotData.h", "_element_plot_data_8h_source.html", null ],
+    [ "ElementPlotData.h", "_element_plot_data_8h.html", [
+      [ "PlotData", "class_plot_data.html", "class_plot_data" ],
+      [ "ElementPlotData", "class_element_plot_data.html", "class_element_plot_data" ]
+    ] ],
     [ "Exponential.cpp", "_exponential_8cpp_source.html", null ],
     [ "Exponential.h", "_exponential_8h.html", [
       [ "Exponential", "class_exponential.html", "class_exponential" ]
@@ -119,15 +133,23 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
       [ "GeneratorStabForm", "class_generator_stab_form.html", "class_generator_stab_form" ]
     ] ],
     [ "GraphicalElement.cpp", "_graphical_element_8cpp_source.html", null ],
-    [ "GraphicalElement.h", "_graphical_element_8h_source.html", null ],
+    [ "GraphicalElement.h", "_graphical_element_8h.html", [
+      [ "GraphicalElement", "class_graphical_element.html", "class_graphical_element" ]
+    ] ],
     [ "IndMotor.cpp", "_ind_motor_8cpp_source.html", null ],
-    [ "IndMotor.h", "_ind_motor_8h_source.html", null ],
+    [ "IndMotor.h", "_ind_motor_8h.html", [
+      [ "IndMotorElectricalData", "struct_ind_motor_electrical_data.html", "struct_ind_motor_electrical_data" ],
+      [ "IndMotor", "class_ind_motor.html", "class_ind_motor" ]
+    ] ],
     [ "IndMotorForm.cpp", "_ind_motor_form_8cpp_source.html", null ],
     [ "IndMotorForm.h", "_ind_motor_form_8h.html", [
       [ "IndMotorForm", "class_ind_motor_form.html", "class_ind_motor_form" ]
     ] ],
     [ "Inductor.cpp", "_inductor_8cpp_source.html", null ],
-    [ "Inductor.h", "_inductor_8h_source.html", null ],
+    [ "Inductor.h", "_inductor_8h.html", [
+      [ "InductorElectricalData", "struct_inductor_electrical_data.html", "struct_inductor_electrical_data" ],
+      [ "Inductor", "class_inductor.html", "class_inductor" ]
+    ] ],
     [ "IOControl.cpp", "_i_o_control_8cpp_source.html", null ],
     [ "IOControl.h", "_i_o_control_8h.html", [
       [ "IOControl", "class_i_o_control.html", "class_i_o_control" ]
@@ -145,19 +167,24 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
       [ "LimiterForm", "class_limiter_form.html", "class_limiter_form" ]
     ] ],
     [ "Line.cpp", "_line_8cpp_source.html", null ],
-    [ "Line.h", "_line_8h_source.html", null ],
+    [ "Line.h", "_line_8h.html", [
+      [ "LineElectricalData", "struct_line_electrical_data.html", "struct_line_electrical_data" ],
+      [ "Line", "class_line.html", "class_line" ]
+    ] ],
     [ "LineForm.cpp", "_line_form_8cpp_source.html", null ],
     [ "LineForm.h", "_line_form_8h.html", [
       [ "LineForm", "class_line_form.html", "class_line_form" ]
     ] ],
     [ "Load.cpp", "_load_8cpp_source.html", null ],
-    [ "Load.h", "_load_8h_source.html", null ],
+    [ "Load.h", "_load_8h.html", "_load_8h" ],
     [ "LoadForm.cpp", "_load_form_8cpp_source.html", null ],
     [ "LoadForm.h", "_load_form_8h.html", [
       [ "LoadForm", "class_load_form.html", "class_load_form" ]
     ] ],
     [ "Machines.cpp", "_machines_8cpp_source.html", null ],
-    [ "Machines.h", "_machines_8h_source.html", null ],
+    [ "Machines.h", "_machines_8h.html", [
+      [ "Machines", "class_machines.html", "class_machines" ]
+    ] ],
     [ "main.cpp", "main_8cpp_source.html", null ],
     [ "MainFrame.cpp", "_main_frame_8cpp_source.html", null ],
     [ "MainFrame.h", "_main_frame_8h.html", "_main_frame_8h" ],
@@ -171,9 +198,11 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
     [ "PowerElement.cpp", "_power_element_8cpp_source.html", null ],
     [ "PowerElement.h", "_power_element_8h.html", "_power_element_8h" ],
     [ "PowerFlow.cpp", "_power_flow_8cpp_source.html", null ],
-    [ "PowerFlow.h", "_power_flow_8h_source.html", null ],
+    [ "PowerFlow.h", "_power_flow_8h.html", [
+      [ "PowerFlow", "class_power_flow.html", "class_power_flow" ]
+    ] ],
     [ "PropertiesData.cpp", "_properties_data_8cpp_source.html", null ],
-    [ "PropertiesData.h", "_properties_data_8h_source.html", null ],
+    [ "PropertiesData.h", "_properties_data_8h.html", "_properties_data_8h" ],
     [ "PropertiesForm.cpp", "_properties_form_8cpp_source.html", null ],
     [ "PropertiesForm.h", "_properties_form_8h_source.html", null ],
     [ "PropertiesFormBitmaps.cpp", "_properties_form_bitmaps_8cpp_source.html", null ],
@@ -190,13 +219,17 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
       [ "ReactiveShuntElementForm", "class_reactive_shunt_element_form.html", "class_reactive_shunt_element_form" ]
     ] ],
     [ "Shunt.cpp", "_shunt_8cpp_source.html", null ],
-    [ "Shunt.h", "_shunt_8h_source.html", null ],
+    [ "Shunt.h", "_shunt_8h.html", [
+      [ "Shunt", "class_shunt.html", "class_shunt" ]
+    ] ],
     [ "SimulationsSettingsForm.cpp", "_simulations_settings_form_8cpp_source.html", null ],
     [ "SimulationsSettingsForm.h", "_simulations_settings_form_8h.html", [
       [ "SimulationsSettingsForm", "class_simulations_settings_form.html", "class_simulations_settings_form" ]
     ] ],
     [ "Sum.cpp", "_sum_8cpp_source.html", null ],
-    [ "Sum.h", "_sum_8h_source.html", null ],
+    [ "Sum.h", "_sum_8h.html", [
+      [ "Sum", "class_sum.html", "class_sum" ]
+    ] ],
     [ "SumForm.cpp", "_sum_form_8cpp_source.html", null ],
     [ "SumForm.h", "_sum_form_8h.html", [
       [ "SumForm", "class_sum_form.html", "class_sum_form" ]
@@ -206,27 +239,36 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
       [ "SwitchingForm", "class_switching_form.html", "class_switching_form" ]
     ] ],
     [ "SyncGenerator.cpp", "_sync_generator_8cpp_source.html", null ],
-    [ "SyncGenerator.h", "_sync_generator_8h_source.html", null ],
+    [ "SyncGenerator.h", "_sync_generator_8h.html", [
+      [ "SyncGeneratorElectricalData", "struct_sync_generator_electrical_data.html", "struct_sync_generator_electrical_data" ],
+      [ "SyncGenerator", "class_sync_generator.html", "class_sync_generator" ]
+    ] ],
     [ "SyncMachineForm.cpp", "_sync_machine_form_8cpp_source.html", null ],
     [ "SyncMachineForm.h", "_sync_machine_form_8h.html", [
       [ "SyncMachineForm", "class_sync_machine_form.html", "class_sync_machine_form" ]
     ] ],
     [ "SyncMotor.cpp", "_sync_motor_8cpp_source.html", null ],
-    [ "SyncMotor.h", "_sync_motor_8h_source.html", null ],
+    [ "SyncMotor.h", "_sync_motor_8h.html", [
+      [ "SyncMotorElectricalData", "struct_sync_motor_electrical_data.html", "struct_sync_motor_electrical_data" ],
+      [ "SyncMotor", "class_sync_motor.html", "class_sync_motor" ]
+    ] ],
     [ "Text.cpp", "_text_8cpp_source.html", null ],
-    [ "Text.h", "_text_8h_source.html", null ],
+    [ "Text.h", "_text_8h.html", "_text_8h" ],
     [ "TextForm.cpp", "_text_form_8cpp_source.html", null ],
     [ "TextForm.h", "_text_form_8h.html", [
       [ "TextForm", "class_text_form.html", "class_text_form" ]
     ] ],
     [ "TransferFunction.cpp", "_transfer_function_8cpp_source.html", null ],
-    [ "TransferFunction.h", "_transfer_function_8h_source.html", null ],
+    [ "TransferFunction.h", "_transfer_function_8h.html", [
+      [ "TransferFunction", "class_transfer_function.html", "class_transfer_function" ],
+      [ "SpaceState", "struct_transfer_function_1_1_space_state.html", "struct_transfer_function_1_1_space_state" ]
+    ] ],
     [ "TransferFunctionForm.cpp", "_transfer_function_form_8cpp_source.html", null ],
     [ "TransferFunctionForm.h", "_transfer_function_form_8h.html", [
       [ "TransferFunctionForm", "class_transfer_function_form.html", "class_transfer_function_form" ]
     ] ],
     [ "Transformer.cpp", "_transformer_8cpp_source.html", null ],
-    [ "Transformer.h", "_transformer_8h_source.html", null ],
+    [ "Transformer.h", "_transformer_8h.html", "_transformer_8h" ],
     [ "TransformerForm.cpp", "_transformer_form_8cpp_source.html", null ],
     [ "TransformerForm.h", "_transformer_form_8h.html", [
       [ "TransformerForm", "class_transformer_form.html", "class_transformer_form" ]

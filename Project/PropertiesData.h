@@ -54,6 +54,13 @@ struct GeneralData {
     GUITheme theme = THEME_LIGHT;
 };
 
+/**
+ * @class PropertiesData
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief General and simulation data manager.
+ * @file PropertiesData.h
+ */
 class PropertiesData
 {
    public:

@@ -30,7 +30,6 @@ class GainForm;
  * @author Thales Lima Oliveira <thales@ufu.br>
  * @date 05/10/2017
  * @brief Provide an output multiplying the input by a constant.
- * \f$ output = K \cdot input \f$
  * @file Gain.h
  */
 class Gain : public ControlElement
@@ -49,7 +48,14 @@ class Gain : public ControlElement
     virtual void SetValue(double value);
     virtual double GetValue() const { return m_value; }
     virtual void UpdatePoints();
-
+    /**
+     * @brief Multiply the input by a constant
+     * 
+     * <center>\f$ output = K \cdot input \f$</center>
+     * @param input Input value.
+     * @param timeStep Time step.
+     * @return Always true.
+     */
     virtual bool Solve(double input, double timeStep);
 
     virtual Element* GetCopy();

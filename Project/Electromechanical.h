@@ -45,8 +45,8 @@ struct SyncMachineModelData {
  * @class Electromechanical
  * @author Thales Lima Oliveira <thales@ufu.br>
  * @date 23/09/2017
- * @file Electromechanical.h
  * @brief Calculates the electromechanical transient based on disturbances (e.g. system fault).
+ * @file Electromechanical.h
  */
 class Electromechanical : public ElectricCalculation
 {

@@ -25,19 +25,20 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_about_form_8cpp_source.html",
-"_simulations_settings_form_8h_source.html",
-"class_camera.html#aefeb0e4d35db499c1049173f1c0be1c2",
-"class_control_editor_base.html",
-"class_data_report_base.html#af7230eab205cf660e465b5a4ed36f41c",
-"class_exponential_form.html#a3c0b865be48a390d39b42a552afdd711",
-"class_generator_stab_form_base.html#ab83eed913a74588eeaec593e777d6903",
-"class_line_form.html#a3896cd6a6cc5500fe1935aa9b16d37ce",
-"class_main_frame_base.html#a869092abc9913bb995eb36ec69db0405",
-"class_reactive_shunt_element_form_base.html#a2eabee46e0b04d92086a0d0f21e3b10e",
-"class_sync_machine_form_base.html#a0580ac7326c742ffe05d7791d83a52d7",
-"class_text_texture.html#a028855c450db4925652071c212cce8c7",
-"class_workspace.html#a8b7645ec6641e9eff52f9d6b8e12b84e",
-"struct_simulation_data.html#af0ca3cdcc810fcba377e5c6e2bcd71b5"
+"_properties_data_8h.html#a22c433d87328b2b1a796559b51b82cc5a36b54867355898cdf8184bc1b1b1ab64",
+"class_bus_form_base.html#a8731cdb29c22002ed2d63bceaba322a5",
+"class_constant_form_base.html#ad9296d05ec4b36ef59108bf72ddfdaca",
+"class_data_report.html#a65ae7767572792800630dbff4e1c0de7",
+"class_element_data_object.html#a19995ba1b03a9566352e5bdf44d1370b",
+"class_generator_stab_form_base.html#a2bda5575654a49d342aefb1e4c8fbaef",
+"class_limiter_form.html",
+"class_main_frame.html#a4a1c9ab859e5fd8a4c76ea7e10276181",
+"class_rate_limiter.html#a2697e0f56b574739651fa2126b315e29",
+"class_switching_form_base.html#a12a2da9f3c7ed16f5e9965c13d166f96",
+"class_text_form_base.html#a6e8c2c55fcac20adba14d0ee92ee6560",
+"class_transformer_form_base.html#ae7a24e53da32b8caf67fc5ef39618743",
+"struct_general_data.html#ab52356d45c62ade32d080b3244f0b3ef",
+"struct_transformer_electrical_data.html#a8a90bbbcefecfe59505d86003354afdc"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

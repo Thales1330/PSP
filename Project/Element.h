@@ -61,8 +61,8 @@ enum ContextMenuID {
  * @class OpenGLColour
  * @author Thales Lima Oliveira
  * @date 18/01/2017
- * @file Element.h
  * @brief Class to manage color of OpenGL.
+ * @file Element.h
  */
 class OpenGLColour
 {
@@ -107,8 +107,8 @@ class OpenGLColour
  * @class Element
  * @author Thales Lima Oliveira <thales@ufu.br>
  * @date 19/09/2017
- * @file Element.h
  * @brief Base class of all elements of the program. This class is responsible for manage graphical and his data.
+ * @file Element.h
  */
 class Element
 {

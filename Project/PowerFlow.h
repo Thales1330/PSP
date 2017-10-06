@@ -23,6 +23,13 @@
 #include <wx/string.h>
 #include <wx/intl.h>  //_()
 
+/**
+ * @class PowerFlow
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Calculate the power flow.
+ * @file PowerFlow.h
+ */
 class PowerFlow : public ElectricCalculation
 {
    public:
