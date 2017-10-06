@@ -1,13 +1,17 @@
 var searchData=
 [
   ['gain',['Gain',['../class_gain.html',1,'']]],
+  ['gain_2eh',['Gain.h',['../_gain_8h.html',1,'']]],
   ['gainform',['GainForm',['../class_gain_form.html',1,'']]],
+  ['gainform_2eh',['GainForm.h',['../_gain_form_8h.html',1,'']]],
   ['gainformbase',['GainFormBase',['../class_gain_form_base.html',1,'']]],
   ['generaldata',['GeneralData',['../struct_general_data.html',1,'']]],
   ['generalmenuitens',['GeneralMenuItens',['../class_element.html#a35f55626a29d5256f8dc07cf92655e64',1,'Element']]],
   ['generalpropertiesform',['GeneralPropertiesForm',['../class_general_properties_form.html',1,'']]],
+  ['generalpropertiesform_2eh',['GeneralPropertiesForm.h',['../_general_properties_form_8h.html',1,'']]],
   ['generalpropertiesformbase',['GeneralPropertiesFormBase',['../class_general_properties_form_base.html',1,'']]],
   ['generatorstabform',['GeneratorStabForm',['../class_generator_stab_form.html',1,'']]],
+  ['generatorstabform_2eh',['GeneratorStabForm.h',['../_generator_stab_form_8h.html',1,'']]],
   ['generatorstabformbase',['GeneratorStabFormBase',['../class_generator_stab_form_base.html',1,'']]],
   ['get',['get',['../classwx_g_l_string_array.html#a2ae0c1cffb2f54b66a170d1698ad62e0',1,'wxGLStringArray']]],
   ['getangle',['GetAngle',['../class_element.html#a5c75d8a6e28326dd568104a4d9d3473f',1,'Element']]],
@@ -41,5 +45,6 @@ var searchData=
   ['gettransformerlist',['GetTransformerList',['../class_electric_calculation.html#a3b89149e5fb56253c0629c9d260b3b7e',1,'ElectricCalculation']]],
   ['getwidth',['GetWidth',['../class_element.html#a23e1fe2745c70cfb43725f608c4bce00',1,'Element::GetWidth()'],['../class_text_g_l_drawable.html#a965ac9bf245f1979a080193986874f18',1,'TextGLDrawable::getWidth()']]],
   ['getybus',['GetYBus',['../class_electric_calculation.html#a939e6e75b5e0cb555a82b2f9ef59c59d',1,'ElectricCalculation']]],
-  ['graphicalelement',['GraphicalElement',['../class_graphical_element.html',1,'']]]
+  ['graphicalelement',['GraphicalElement',['../class_graphical_element.html',1,'']]],
+  ['graphicalelement_2eh',['GraphicalElement.h',['../_graphical_element_8h.html',1,'']]]
 ];

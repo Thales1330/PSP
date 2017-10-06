@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef CAPACITOR_H
 #define CAPACITOR_H
 
@@ -11,9 +28,16 @@ struct CapacitorElectricalData {
     ElectricalUnit reactivePowerUnit = UNIT_MVAr;
 };
 
+/**
+ * @class Capacitor
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Shunt capactior power element.
+ * @file Capacitor.h
+ */
 class Capacitor : public Shunt
 {
-public:
+   public:
     Capacitor();
     Capacitor(wxString name);
     ~Capacitor();
@@ -30,8 +54,8 @@ public:
     virtual CapacitorElectricalData GetElectricalData() { return m_electricalData; }
     virtual CapacitorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(CapacitorElectricalData electricalData) { m_electricalData = electricalData; }
-protected:
+   protected:
     CapacitorElectricalData m_electricalData;
 };
 
-#endif // CAPACITOR_H
+#endif  // CAPACITOR_H

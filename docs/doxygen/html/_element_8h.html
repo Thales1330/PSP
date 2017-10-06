@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -85,13 +91,12 @@ $(document).ready(function(){initNavTree('_element_8h.html','');});
 <div class="title">Element.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Class to manage color of OpenGL.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;wx/msgdlg.h&gt;</code><br />
 <code>#include &lt;wx/geometry.h&gt;</code><br />
 <code>#include &lt;wx/cursor.h&gt;</code><br />
 <code>#include &lt;wx/menu.h&gt;</code><br />
+<code>#include &lt;wx/stdpaths.h&gt;</code><br />
+<code>#include &lt;wx/filename.h&gt;</code><br />
 <code>#include &lt;GL/gl.h&gt;</code><br />
 <code>#include &lt;complex&gt;</code><br />
 </div>
@@ -100,8 +105,10 @@ $(document).ready(function(){initNavTree('_element_8h.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_g_l_colour.html">OpenGLColour</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class to manage color of OpenGL.  <a href="class_open_g_l_colour.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html">Element</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class of all elements of the program. This class is responsible for manage graphical and his data.  <a href="class_element.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -132,11 +139,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr class="separator:a0a9284bee7d4ad748c4a740fdeb3f049"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class to manage color of OpenGL. </p>
-
-<p class="definition">Definition in file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a0a9284bee7d4ad748c4a740fdeb3f049"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a9284bee7d4ad748c4a740fdeb3f049">&#9670;&nbsp;</a></span>ContextMenuID</h2>
 
@@ -165,7 +168,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00032">32</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00051">51</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
 </div>
 </div>
@@ -199,7 +202,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00018">18</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_element_8h_source.html#l00037">37</a> of file <a class="el" href="_element_8h_source.html">Element.h</a>.</p>
 
 </div>
 </div>

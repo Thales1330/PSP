@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -85,21 +91,21 @@ $(document).ready(function(){initNavTree('_power_element_8h.html','');});
 <div class="title">PowerElement.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Switching data of power elements.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_element_8h_source.html">Element.h</a>&quot;</code><br />
-<code>#include &quot;ElementPlotData.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_element_plot_data_8h_source.html">ElementPlotData.h</a>&quot;</code><br />
 </div>
 <p><a href="_power_element_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_switching_data.html">SwitchingData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switching data of power elements.  <a href="struct_switching_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_integration_constant.html">IntegrationConstant</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integration constants to calculate dynamic elements through trapezoidal integration method.  <a href="struct_integration_constant.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html">PowerElement</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class of power elements.  <a href="class_power_element.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -163,13 +169,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr class="separator:a467d3005d31dde0ba0e52cf8e233e740"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Switching data of power elements. </p>
-<p>Base class of power elements.</p>
-<p>Integration constants to calculate dynamic elements through trapezoidal integration method.</p>
-
-<p class="definition">Definition in file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a398e3da742a726a8f2bacd8149220cca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a398e3da742a726a8f2bacd8149220cca">&#9670;&nbsp;</a></span>ElectricalUnit</h2>
 
@@ -226,7 +226,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00011">11</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00028">28</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -252,15 +252,15 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a41a50717b1a7ef4caa3c499c164fc2cbaa8b6335aeec4befa68e4642a94026d0d"></a>FAULT_LINE_GROUND&#160;</td><td class="fielddoc"><p>Line-to-ground fault </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a41a50717b1a7ef4caa3c499c164fc2cbad7f3fd44a6a841106ba66d1adbd53fdd"></a>FAULT_LINE_A&#160;</td><td class="fielddoc"><p><a class="el" href="class_fault.html">Fault</a> on phase A or phase AB </p>
+<tr><td class="fieldname"><a id="a41a50717b1a7ef4caa3c499c164fc2cbad7f3fd44a6a841106ba66d1adbd53fdd"></a>FAULT_LINE_A&#160;</td><td class="fielddoc"><p><a class="el" href="class_fault.html" title="Calculate the fault of the system and update the elements data. ">Fault</a> on phase A or phase AB </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a41a50717b1a7ef4caa3c499c164fc2cba6ab815fdf2ca1dc91c0dd3ec4c630245"></a>FAULT_LINE_B&#160;</td><td class="fielddoc"><p><a class="el" href="class_fault.html">Fault</a> on phase B or phase BC </p>
+<tr><td class="fieldname"><a id="a41a50717b1a7ef4caa3c499c164fc2cba6ab815fdf2ca1dc91c0dd3ec4c630245"></a>FAULT_LINE_B&#160;</td><td class="fielddoc"><p><a class="el" href="class_fault.html" title="Calculate the fault of the system and update the elements data. ">Fault</a> on phase B or phase BC </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a41a50717b1a7ef4caa3c499c164fc2cba836a7abab9ade9c28512ea3ee0737315"></a>FAULT_LINE_C&#160;</td><td class="fielddoc"><p><a class="el" href="class_fault.html">Fault</a> on phase C or phase CA </p>
+<tr><td class="fieldname"><a id="a41a50717b1a7ef4caa3c499c164fc2cba836a7abab9ade9c28512ea3ee0737315"></a>FAULT_LINE_C&#160;</td><td class="fielddoc"><p><a class="el" href="class_fault.html" title="Calculate the fault of the system and update the elements data. ">Fault</a> on phase C or phase CA </p>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00038">38</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00055">55</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -280,9 +280,9 @@ Enumerations</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a467d3005d31dde0ba0e52cf8e233e740aad1f68b93664b1917fafc7cf9b7537d3"></a>PF_NONE&#160;</td><td class="fielddoc"><p>No direction (no arrows printed) </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a467d3005d31dde0ba0e52cf8e233e740a2c1d794112edc994905b320596aba869"></a>PF_TO_BUS&#160;</td><td class="fielddoc"><p><a class="el" href="class_element.html">Element</a> to bus </p>
+<tr><td class="fieldname"><a id="a467d3005d31dde0ba0e52cf8e233e740a2c1d794112edc994905b320596aba869"></a>PF_TO_BUS&#160;</td><td class="fielddoc"><p><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> to bus </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a467d3005d31dde0ba0e52cf8e233e740a5e06e77c5b3ee38885f0321cc0276b81"></a>PF_TO_ELEMENT&#160;</td><td class="fielddoc"><p><a class="el" href="class_bus.html">Bus</a> to element </p>
+<tr><td class="fieldname"><a id="a467d3005d31dde0ba0e52cf8e233e740a5e06e77c5b3ee38885f0321cc0276b81"></a>PF_TO_ELEMENT&#160;</td><td class="fielddoc"><p><a class="el" href="class_bus.html" title="Node for power elements. All others power elements are connected through this. ">Bus</a> to element </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a467d3005d31dde0ba0e52cf8e233e740ad4f3902fa2c8a1fbd48375c553d40523"></a>PF_BUS1_TO_BUS2&#160;</td><td class="fielddoc"><p>First bus to secont bus (branch elements) </p>
 </td></tr>
@@ -290,7 +290,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00061">61</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00078">78</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -314,7 +314,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00052">52</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00069">69</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>

@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef TEXT_H
 #define TEXT_H
 
@@ -45,9 +62,16 @@ enum DataType {
     DATA_PF_CURRENT
 };
 
+/**
+ * @class Text
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Element that shows power element informations in workspace.
+ * @file Text.h
+ */
 class Text : public GraphicalElement
 {
-public:
+   public:
     Text();
     Text(wxPoint2DDouble position);
     ~Text();
@@ -79,8 +103,7 @@ public:
     int GetFontSize() const { return m_fontSize; }
     const ElectricalUnit GetUnit() const { return m_unit; }
     int GetDecimalPlaces() const { return m_decimalPlaces; }
-
-protected:
+   protected:
     wxGLString* m_glString = NULL;
     wxGLStringArray* m_glStringArray = NULL;
 
@@ -98,4 +121,4 @@ protected:
     int m_decimalPlaces = 2;
 };
 
-#endif // TEXT_H
+#endif  // TEXT_H

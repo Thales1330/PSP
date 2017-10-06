@@ -98,6 +98,7 @@ var annotated_dup =
     [ "SyncGeneratorElectricalData", "struct_sync_generator_electrical_data.html", "struct_sync_generator_electrical_data" ],
     [ "SyncMachineForm", "class_sync_machine_form.html", "class_sync_machine_form" ],
     [ "SyncMachineFormBase", "class_sync_machine_form_base.html", "class_sync_machine_form_base" ],
+    [ "SyncMachineModelData", "struct_sync_machine_model_data.html", "struct_sync_machine_model_data" ],
     [ "SyncMotor", "class_sync_motor.html", "class_sync_motor" ],
     [ "SyncMotorElectricalData", "struct_sync_motor_electrical_data.html", "struct_sync_motor_electrical_data" ],
     [ "Text", "class_text.html", "class_text" ],

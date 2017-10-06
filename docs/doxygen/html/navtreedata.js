@@ -25,19 +25,20 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_about_form_8cpp_source.html",
-"class_about_form_base.html#a74341fb9c17f6320745444ea4eb76df8",
-"class_chart_view_base.html#a4083de6c29b7ab0997217c32e246ee0b",
-"class_control_element_container.html",
-"class_electromechanical.html#ac51fdb6f0ae13514b6986f99a782532a",
-"class_file_handing.html#ae85e5c9173a850b8165939fef18c8c88",
-"class_i_o_control_form_base.html#a0e3c563e83daad1b146c3145a1f344dc",
-"class_load.html",
-"class_node.html#a16217ea768b7bad76285e779bdc819c7",
-"class_simulations_settings_form_base.html#a76d9c02a5e8293274ff5ca30da5f3875",
-"class_sync_machine_form_base.html#aedf1ffdbc6b3cec7614126d733a12f4a",
-"class_transformer.html#a328c419af15701734168c8db62eefa36",
-"classwx_g_l_string_array.html#a6923a709d67ada5b713549bc706bdddd",
-"struct_sync_generator_electrical_data.html#aef18b7163c5e2b9e6e2c671b3939480d"
+"_properties_data_8h.html#a22c433d87328b2b1a796559b51b82cc5a36b54867355898cdf8184bc1b1b1ab64",
+"class_bus_form_base.html#a8731cdb29c22002ed2d63bceaba322a5",
+"class_constant_form_base.html#ad9296d05ec4b36ef59108bf72ddfdaca",
+"class_data_report.html#a65ae7767572792800630dbff4e1c0de7",
+"class_element_data_object.html#a19995ba1b03a9566352e5bdf44d1370b",
+"class_generator_stab_form_base.html#a2bda5575654a49d342aefb1e4c8fbaef",
+"class_limiter_form.html",
+"class_main_frame.html#a4a1c9ab859e5fd8a4c76ea7e10276181",
+"class_rate_limiter.html#a2697e0f56b574739651fa2126b315e29",
+"class_switching_form_base.html#a12a2da9f3c7ed16f5e9965c13d166f96",
+"class_text_form_base.html#a6e8c2c55fcac20adba14d0ee92ee6560",
+"class_transformer_form_base.html#ae7a24e53da32b8caf67fc5ef39618743",
+"struct_general_data.html#ab52356d45c62ade32d080b3244f0b3ef",
+"struct_transformer_electrical_data.html#a8a90bbbcefecfe59505d86003354afdc"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

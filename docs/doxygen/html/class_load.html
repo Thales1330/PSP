@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,15 +92,20 @@ $(document).ready(function(){initNavTree('class_load.html','');});
 <div class="title">Load Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Loas shunt power element.  
+ <a href="class_load.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_load_8h_source.html">Load.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Load:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_load.png" usemap="#Load_map" alt=""/>
   <map id="Load_map" name="Load_map">
-<area href="class_shunt.html" alt="Shunt" shape="rect" coords="0,112,92,136"/>
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="0,56,92,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,92,24"/>
+<area href="class_shunt.html" title="Abstract class for shunt power elements. " alt="Shunt" shape="rect" coords="0,112,92,136"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="0,56,92,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,92,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -528,8 +539,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <tr class="separator:a902525eebbb4bf3ecaab0e1e60b6f017 inherit pro_methods_class_shunt"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_load_8h_source.html#l00023">23</a> of file <a class="el" href="_load_8h_source.html">Load.h</a>.</p>
+<div class="textblock"><p>Loas shunt power element. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_load_8h_source.html#l00042">42</a> of file <a class="el" href="_load_8h_source.html">Load.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac9f449be9b919b36924a844324bf37ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9f449be9b919b36924a844324bf37ee">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -568,15 +582,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <p>Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
-    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html">Node</a> position in the parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
+    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00006">6</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00023">23</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>
@@ -625,7 +639,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00042">42</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00059">59</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>
@@ -664,7 +678,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 
 <p>Reimplemented from <a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00117">117</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00134">134</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>
@@ -696,7 +710,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00174">174</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00191">191</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>
@@ -728,7 +742,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 
 <p>Reimplemented from <a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00181">181</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00198">198</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>
@@ -766,7 +780,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00104">104</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00121">121</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>
@@ -808,7 +822,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -816,7 +830,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00124">124</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00141">141</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>

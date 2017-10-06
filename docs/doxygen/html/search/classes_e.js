@@ -15,6 +15,7 @@ var searchData=
   ['syncgeneratorelectricaldata',['SyncGeneratorElectricalData',['../struct_sync_generator_electrical_data.html',1,'']]],
   ['syncmachineform',['SyncMachineForm',['../class_sync_machine_form.html',1,'']]],
   ['syncmachineformbase',['SyncMachineFormBase',['../class_sync_machine_form_base.html',1,'']]],
+  ['syncmachinemodeldata',['SyncMachineModelData',['../struct_sync_machine_model_data.html',1,'']]],
   ['syncmotor',['SyncMotor',['../class_sync_motor.html',1,'']]],
   ['syncmotorelectricaldata',['SyncMotorElectricalData',['../struct_sync_motor_electrical_data.html',1,'']]]
 ];

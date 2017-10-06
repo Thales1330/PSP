@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,15 +92,20 @@ $(document).ready(function(){initNavTree('class_ind_motor.html','');});
 <div class="title">IndMotor Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Induction motor power element.  
+ <a href="class_ind_motor.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_ind_motor_8h_source.html">IndMotor.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for IndMotor:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_ind_motor.png" usemap="#IndMotor_map" alt=""/>
   <map id="IndMotor_map" name="IndMotor_map">
-<area href="class_machines.html" alt="Machines" shape="rect" coords="0,112,92,136"/>
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="0,56,92,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,92,24"/>
+<area href="class_machines.html" title="Abstract class for rotary machines power elements. " alt="Machines" shape="rect" coords="0,112,92,136"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="0,56,92,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,92,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -536,8 +547,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 <tr class="separator:a489713cc909f0d733107dad72160f434 inherit pro_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_ind_motor_8h_source.html#l00017">17</a> of file <a class="el" href="_ind_motor_8h_source.html">IndMotor.h</a>.</p>
+<div class="textblock"><p>Induction motor power element. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_ind_motor_8h_source.html#l00040">40</a> of file <a class="el" href="_ind_motor_8h_source.html">IndMotor.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a87666565ae1380993d94e7886e9a1f59"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87666565ae1380993d94e7886e9a1f59">&#9670;&nbsp;</a></span>GetContextMenu()</h2>
@@ -574,7 +588,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00025">25</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00035">35</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
 
 </div>
 </div>
@@ -606,7 +620,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00083">83</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00093">93</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
 
 </div>
 </div>
@@ -638,7 +652,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00090">90</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00100">100</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
 
 </div>
 </div>
@@ -680,7 +694,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -688,7 +702,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00032">32</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_ind_motor_8cpp_source.html#l00042">42</a> of file <a class="el" href="_ind_motor_8cpp_source.html">IndMotor.cpp</a>.</p>
 
 </div>
 </div>

@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,6 +93,9 @@ $(document).ready(function(){initNavTree('class_fault.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Calculate the fault of the system and update the elements data.  
+ <a href="class_fault.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_fault_8h_source.html">Fault.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Fault:</div>
@@ -94,7 +103,7 @@ Inheritance diagram for Fault:</div>
  <div class="center">
   <img src="class_fault.png" usemap="#Fault_map" alt=""/>
   <map id="Fault_map" name="Fault_map">
-<area href="class_electric_calculation.html" alt="ElectricCalculation" shape="rect" coords="0,0,118,24"/>
+<area href="class_electric_calculation.html" title="Base class of electric calculations, with general methods. " alt="ElectricCalculation" shape="rect" coords="0,0,118,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -270,10 +279,11 @@ std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &g
 <tr class="separator:a6cca6be3c0b79741a49b1631e38fc3be inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira </dd></dl>
+<div class="textblock"><p>Calculate the fault of the system and update the elements data. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10/01/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_fault_8h_source.html#l00013">13</a> of file <a class="el" href="_fault_8h_source.html">Fault.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_fault_8h_source.html#l00030">30</a> of file <a class="el" href="_fault_8h_source.html">Fault.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8fbe3ce9f7288c4f8261db2d9a89adbb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8fbe3ce9f7288c4f8261db2d9a89adbb">&#9670;&nbsp;</a></span>Fault()</h2>
@@ -299,7 +309,7 @@ std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00007">7</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00024">24</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +340,7 @@ std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &g
 <p>Get the error message generated in <a class="el" href="class_fault.html#a4120f861b073783b4fb82385171fbd0f" title="Calculate the fault of the system. Return true if was possible the calculation. ">RunFaultCalculation(double systemPowerBase)</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>Error message. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_fault_8h_source.html#l00054">54</a> of file <a class="el" href="_fault_8h_source.html">Fault.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_fault_8h_source.html#l00071">71</a> of file <a class="el" href="_fault_8h_source.html">Fault.h</a>.</p>
 
 </div>
 </div>
@@ -366,7 +376,7 @@ std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00009">9</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00026">26</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
 
 </div>
 </div>
@@ -402,7 +412,7 @@ std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00382">382</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00399">399</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
 
 </div>
 </div>
@@ -438,7 +448,7 @@ std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00176">176</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_fault_8cpp_source.html#l00193">193</a> of file <a class="el" href="_fault_8cpp_source.html">Fault.cpp</a>.</p>
 
 </div>
 </div>

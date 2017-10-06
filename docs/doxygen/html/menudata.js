@@ -23,6 +23,7 @@ var menudata={children:[
 {text:"s",url:"functions_s.html#index_s"},
 {text:"u",url:"functions_u.html#index_u"},
 {text:"w",url:"functions_w.html#index_w"},
+{text:"x",url:"functions_x.html#index_x"},
 {text:"~",url:"functions_0x7e.html#index_0x7e"}]},
 {text:"Functions",url:"functions_func.html",children:[
 {text:"a",url:"functions_func.html#index_a"},

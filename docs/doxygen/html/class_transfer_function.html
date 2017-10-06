@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -88,6 +94,11 @@ $(document).ready(function(){initNavTree('class_transfer_function.html','');});
 <div class="title">TransferFunction Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Calculates the time response by a frequency domain transfer function.  
+ <a href="class_transfer_function.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_transfer_function_8h_source.html">TransferFunction.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TransferFunction:</div>
 <div class="dyncontent">
@@ -95,7 +106,7 @@ Inheritance diagram for TransferFunction:</div>
   <img src="class_transfer_function.png" usemap="#TransferFunction_map" alt=""/>
   <map id="TransferFunction_map" name="TransferFunction_map">
 <area href="class_control_element.html" alt="ControlElement" shape="rect" coords="0,56,109,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,109,24"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,109,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -145,11 +156,11 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateText</b
 <tr class="memitem:aee6c1440c4f527b7a839e07474a381f0"><td class="memItemLeft" align="right" valign="top"><a id="aee6c1440c4f527b7a839e07474a381f0"></a>
 virtual <a class="el" href="struct_transfer_function_1_1_space_state.html">SpaceState</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetSpaceState</b> ()</td></tr>
 <tr class="separator:aee6c1440c4f527b7a839e07474a381f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f09dd8e5c016a90c69a8e38ef302c8a"><td class="memItemLeft" align="right" valign="top"><a id="a5f09dd8e5c016a90c69a8e38ef302c8a"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateSpaceState</b> (int maxIteration=100, double error=1e-3)</td></tr>
+<tr class="memitem:a5f09dd8e5c016a90c69a8e38ef302c8a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#a5f09dd8e5c016a90c69a8e38ef302c8a">CalculateSpaceState</a> (int maxIteration=100, double error=1e-3)</td></tr>
+<tr class="memdesc:a5f09dd8e5c016a90c69a8e38ef302c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the transfer function to space state on controllable canonical form (CCF).  <a href="#a5f09dd8e5c016a90c69a8e38ef302c8a">More...</a><br /></td></tr>
 <tr class="separator:a5f09dd8e5c016a90c69a8e38ef302c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab23ed101f7d4e953e4df0d4d480d9798"><td class="memItemLeft" align="right" valign="top"><a id="ab23ed101f7d4e953e4df0d4d480d9798"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (double input, double timeStep)</td></tr>
+<tr class="memitem:ab23ed101f7d4e953e4df0d4d480d9798"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#ab23ed101f7d4e953e4df0d4d480d9798">Solve</a> (double input, double timeStep)</td></tr>
+<tr class="memdesc:ab23ed101f7d4e953e4df0d4d480d9798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the time response by the space state form of transfer function.  <a href="#ab23ed101f7d4e953e4df0d4d480d9798">More...</a><br /></td></tr>
 <tr class="separator:ab23ed101f7d4e953e4df0d4d480d9798"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3312f7e9499aa99742093d3b60547862"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#a3312f7e9499aa99742093d3b60547862">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a3312f7e9499aa99742093d3b60547862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <a href="#a3312f7e9499aa99742093d3b60547862">More...</a><br /></td></tr>
@@ -523,9 +534,59 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8h_source.html#l00011">11</a> of file <a class="el" href="_transfer_function_8h_source.html">TransferFunction.h</a>.</p>
+<div class="textblock"><p>Calculates the time response by a frequency domain transfer function. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8h_source.html#l00035">35</a> of file <a class="el" href="_transfer_function_8h_source.html">TransferFunction.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5f09dd8e5c016a90c69a8e38ef302c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f09dd8e5c016a90c69a8e38ef302c8a">&#9670;&nbsp;</a></span>CalculateSpaceState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TransferFunction::CalculateSpaceState </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxIteration</em> = <code>100</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>error</em> = <code>1e-3</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert the transfer function to space state on controllable canonical form (CCF). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxIteration</td><td>Max number of solution iteration. </td></tr>
+    <tr><td class="paramname">error</td><td>Tolerance for calculation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00268">268</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a6a4415d2cf0af290494ea30d586cc187"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a4415d2cf0af290494ea30d586cc187">&#9670;&nbsp;</a></span>Contains()</h2>
 
@@ -560,7 +621,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8h_source.html#l00025">25</a> of file <a class="el" href="_transfer_function_8h_source.html">TransferFunction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8h_source.html#l00049">49</a> of file <a class="el" href="_transfer_function_8h_source.html">TransferFunction.h</a>.</p>
 
 </div>
 </div>
@@ -609,7 +670,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00035">35</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00052">52</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -641,7 +702,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00359">359</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00377">377</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -679,7 +740,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8h_source.html#l00026">26</a> of file <a class="el" href="_transfer_function_8h_source.html">TransferFunction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8h_source.html#l00050">50</a> of file <a class="el" href="_transfer_function_8h_source.html">TransferFunction.h</a>.</p>
 
 </div>
 </div>
@@ -717,7 +778,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00220">220</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00237">237</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -759,7 +820,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -767,7 +828,57 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00209">209</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00226">226</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab23ed101f7d4e953e4df0d4d480d9798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab23ed101f7d4e953e4df0d4d480d9798">&#9670;&nbsp;</a></span>Solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TransferFunction::Solve </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>timeStep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the time response by the space state form of transfer function. </p>
+<p>Uses the implicit trapezoidal rule to solve: </p><center> \( y_{n+1}=y_n+\frac{1}{2}h(y&#39;_n+y&#39;_{n+1}) \)</center> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Input value. </td></tr>
+    <tr><td class="paramname">timeStep</td><td>Time step. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the calculation converges, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00320">320</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>

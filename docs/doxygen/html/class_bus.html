@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,14 +92,19 @@ $(document).ready(function(){initNavTree('class_bus.html','');});
 <div class="title">Bus Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> for power elements. All others power elements are connected through this.  
+ <a href="class_bus.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_bus_8h_source.html">Bus.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Bus:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_bus.png" usemap="#Bus_map" alt=""/>
   <map id="Bus_map" name="Bus_map">
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="0,56,92,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,92,24"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="0,56,92,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,92,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -509,8 +520,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00045">45</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> for power elements. All others power elements are connected through this. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00069">69</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab046baebe4bfe0a52905148d78f44681"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab046baebe4bfe0a52905148d78f44681">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -549,15 +563,15 @@ Additional Inherited Members</h2></td></tr>
 <p>Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
-    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html">Node</a> position in the parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
+    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00053">53</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8h_source.html#l00077">77</a> of file <a class="el" href="_bus_8h_source.html">Bus.h</a>.</p>
 
 </div>
 </div>
@@ -595,7 +609,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00087">87</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00104">104</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -644,7 +658,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00024">24</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00041">41</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +690,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a245924c5be948397b101787dbea565ea">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00124">124</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00141">141</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -715,7 +729,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00176">176</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00193">193</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -747,7 +761,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00195">195</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00212">212</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -786,7 +800,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#acadf6712b430f9fadfbd7015903eaeaf">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00229">229</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00246">246</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -818,7 +832,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00201">201</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00218">218</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -856,7 +870,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00093">93</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00110">110</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -894,7 +908,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a6f071b6dfd64721ca673bfbe1ca2d525">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00141">141</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00158">158</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -933,7 +947,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#af4815de7e7698ea116e8e2af51414050">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00100">100</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00117">117</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -971,7 +985,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00167">167</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00184">184</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -1013,7 +1027,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1021,7 +1035,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00183">183</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_bus_8cpp_source.html#l00200">200</a> of file <a class="el" href="_bus_8cpp_source.html">Bus.cpp</a>.</p>
 
 </div>
 </div>

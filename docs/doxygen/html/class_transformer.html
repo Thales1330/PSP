@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,15 +93,20 @@ $(document).ready(function(){initNavTree('class_transformer.html','');});
 <div class="title">Transformer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Two-winding transformer power element.  
+ <a href="class_transformer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_transformer_8h_source.html">Transformer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Transformer:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_transformer.png" usemap="#Transformer_map" alt=""/>
   <map id="Transformer_map" name="Transformer_map">
-<area href="class_branch.html" alt="Branch" shape="rect" coords="0,112,92,136"/>
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="0,56,92,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,92,24"/>
+<area href="class_branch.html" title="Abstract class for branch power elements. " alt="Branch" shape="rect" coords="0,112,92,136"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="0,56,92,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,92,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -525,8 +536,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_transformer_8h_source.html#l00054">54</a> of file <a class="el" href="_transformer_8h_source.html">Transformer.h</a>.</p>
+<div class="textblock"><p>Two-winding transformer power element. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_transformer_8h_source.html#l00078">78</a> of file <a class="el" href="_transformer_8h_source.html">Transformer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aea52a4562ec5b4a79bf82b8ede32ecc6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea52a4562ec5b4a79bf82b8ede32ecc6">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -565,15 +579,15 @@ Additional Inherited Members</h2></td></tr>
 <p>Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
-    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html">Node</a> position in the parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
+    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00022">22</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00039">39</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -611,7 +625,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#a691f94c3cd2abe1274e870d2882634d8">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00088">88</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00105">105</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -660,7 +674,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#a7037f496f9b9c9e64c74eb638debe278">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00094">94</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00111">111</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -699,7 +713,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#a6ddd901403c46f5d9aa179644467b088">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00256">256</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00273">273</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -731,7 +745,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00394">394</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00411">411</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -763,7 +777,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00401">401</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00418">418</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -801,7 +815,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#aa23b1014c947e46996f1c0c4caa187e1">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00173">173</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00190">190</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -839,7 +853,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#a7cf4b117f43f49bb76cce3df5521fb70">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00195">195</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00212">212</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -880,7 +894,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Move a node. <a class="el" href="class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5" title="Update the element attributes related to the movement. ">StartMove(wxPoint2DDouble position)</a> before start moving. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a>'s parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a>'s parent. </td></tr>
     <tr><td class="paramname">position</td><td>New node position. </td></tr>
   </table>
   </dd>
@@ -888,7 +902,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#aef2ffe79c9b239fb5a1ad175555a9f5a">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00215">215</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00232">232</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -926,7 +940,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00179">179</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00196">196</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -967,7 +981,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Rotate a node. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a>'s parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a>'s parent. </td></tr>
     <tr><td class="paramname">clockwise</td><td>True to rotate clockwise, false to rotate counter-clockwise. </td></tr>
   </table>
   </dd>
@@ -975,7 +989,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#a190d3da81276751c5b9ab23c5d3f37df">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00310">310</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00327">327</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -1006,7 +1020,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Set a perent to the node. If all conditions are met, a new parent are added to the element and the points related to the nodes will be calculated. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a> parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> parent. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1014,7 +1028,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#aaf64ea58631438e3a16b1b2ede793875">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00324">324</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00341">341</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -1063,7 +1077,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#a0730506d0417089d69f7ce64b05daed4">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00274">274</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00291">291</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -1101,7 +1115,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#a2ee71f9eb90beadf5439ce9f70469b49">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00388">388</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00405">405</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -1143,7 +1157,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1151,7 +1165,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00263">263</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00280">280</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>
@@ -1189,7 +1203,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#a947cec45fcdc78d01eaabe19d23daf64">Branch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00249">249</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transformer_8cpp_source.html#l00266">266</a> of file <a class="el" href="_transformer_8cpp_source.html">Transformer.cpp</a>.</p>
 
 </div>
 </div>

@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef GAIN_H
 #define GAIN_H
 
@@ -8,6 +25,13 @@
 
 class GainForm;
 
+/**
+ * @class Gain
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 05/10/2017
+ * @brief Provide an output multiplying the input by a constant.
+ * @file Gain.h
+ */
 class Gain : public ControlElement
 {
    public:
@@ -24,17 +48,24 @@ class Gain : public ControlElement
     virtual void SetValue(double value);
     virtual double GetValue() const { return m_value; }
     virtual void UpdatePoints();
-    
+    /**
+     * @brief Multiply the input by a constant
+     * 
+     * <center>\f$ output = K \cdot input \f$</center>
+     * @param input Input value.
+     * @param timeStep Time step.
+     * @return Always true.
+     */
     virtual bool Solve(double input, double timeStep);
-    
+
     virtual Element* GetCopy();
 
    protected:
     double m_value = 1.0;
-    
+
     wxGLString* m_glStringValue = NULL;
     int m_fontSize = 10;
-    
+
     std::vector<wxPoint2DDouble> m_triPts;
 };
 

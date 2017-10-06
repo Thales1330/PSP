@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef BUS_H
 #define BUS_H
 
@@ -17,7 +34,7 @@ struct BusElectricalData {
     // Power flow (p.u.)
     std::complex<double> voltage = std::complex<double>(1.0, 0.0);
     std::complex<double> power = std::complex<double>(0.0, 0.0);
-    int busType = 2; // PQ
+    int busType = 2;  // PQ
 
     // Fault
     bool hasFault = false;
@@ -42,6 +59,13 @@ struct BusElectricalData {
     std::vector<std::complex<double> > stabVoltageVector;
 };
 
+/**
+ * @class Bus
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Node for power elements. All others power elements are connected through this.
+ * @file Bus.h
+ */
 class Bus : public PowerElement
 {
    public:

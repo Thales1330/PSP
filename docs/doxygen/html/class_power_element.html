@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,6 +93,9 @@ $(document).ready(function(){initNavTree('class_power_element.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Abstract class of power elements.  
+ <a href="class_power_element.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_power_element_8h_source.html">PowerElement.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PowerElement:</div>
@@ -94,19 +103,19 @@ Inheritance diagram for PowerElement:</div>
  <div class="center">
   <img src="class_power_element.png" usemap="#PowerElement_map" alt=""/>
   <map id="PowerElement_map" name="PowerElement_map">
-<area href="class_element.html" alt="Element" shape="rect" coords="162,0,260,24"/>
-<area href="class_branch.html" alt="Branch" shape="rect" coords="0,112,98,136"/>
-<area href="class_bus.html" alt="Bus" shape="rect" coords="108,112,206,136"/>
-<area href="class_machines.html" alt="Machines" shape="rect" coords="216,112,314,136"/>
-<area href="class_shunt.html" alt="Shunt" shape="rect" coords="432,112,530,136"/>
-<area href="class_line.html" alt="Line" shape="rect" coords="108,168,206,192"/>
-<area href="class_transformer.html" alt="Transformer" shape="rect" coords="108,224,206,248"/>
-<area href="class_ind_motor.html" alt="IndMotor" shape="rect" coords="324,168,422,192"/>
-<area href="class_sync_generator.html" alt="SyncGenerator" shape="rect" coords="324,224,422,248"/>
-<area href="class_sync_motor.html" alt="SyncMotor" shape="rect" coords="324,280,422,304"/>
-<area href="class_capacitor.html" alt="Capacitor" shape="rect" coords="540,168,638,192"/>
-<area href="class_inductor.html" alt="Inductor" shape="rect" coords="540,224,638,248"/>
-<area href="class_load.html" alt="Load" shape="rect" coords="540,280,638,304"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="162,0,260,24"/>
+<area href="class_branch.html" title="Abstract class for branch power elements. " alt="Branch" shape="rect" coords="0,112,98,136"/>
+<area href="class_bus.html" title="Node for power elements. All others power elements are connected through this. " alt="Bus" shape="rect" coords="108,112,206,136"/>
+<area href="class_machines.html" title="Abstract class for rotary machines power elements. " alt="Machines" shape="rect" coords="216,112,314,136"/>
+<area href="class_shunt.html" title="Abstract class for shunt power elements. " alt="Shunt" shape="rect" coords="432,112,530,136"/>
+<area href="class_line.html" title="Power line element. " alt="Line" shape="rect" coords="108,168,206,192"/>
+<area href="class_transformer.html" title="Two-winding transformer power element. " alt="Transformer" shape="rect" coords="108,224,206,248"/>
+<area href="class_ind_motor.html" title="Induction motor power element. " alt="IndMotor" shape="rect" coords="324,168,422,192"/>
+<area href="class_sync_generator.html" title="Synchronous generator power element. " alt="SyncGenerator" shape="rect" coords="324,224,422,248"/>
+<area href="class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="SyncMotor" shape="rect" coords="324,280,422,304"/>
+<area href="class_capacitor.html" title="Shunt capactior power element. " alt="Capacitor" shape="rect" coords="540,168,638,192"/>
+<area href="class_inductor.html" title="Inductor shunt power element. " alt="Inductor" shape="rect" coords="540,224,638,248"/>
+<area href="class_load.html" title="Loas shunt power element. " alt="Load" shape="rect" coords="540,280,638,304"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -505,10 +514,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira </dd></dl>
+<div class="textblock"><p>Abstract class of power elements. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>18/01/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00100">100</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00117">117</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6c656ef223d36e96b19b0a9ec2115e9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6c656ef223d36e96b19b0a9ec2115e9e">&#9670;&nbsp;</a></span>CalculatePowerFlowPts()</h2>
@@ -542,7 +552,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00093">93</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00110">110</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -581,7 +591,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_sync_generator.html#afcb0a1c03dab5ede586e5d15231f2cab">SyncGenerator</a>, and <a class="el" href="class_bus.html#a1ccb74b15ba07f867f2d73b976577e2a">Bus</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00181">181</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00198">198</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -611,7 +621,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Return the direction of the power flow. </p>
 <dl class="section return"><dt>Returns</dt><dd>Power flow direction. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00175">175</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00192">192</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -639,9 +649,9 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the switching data of the element. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html">Element</a> switching data. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> switching data. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00165">165</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00182">182</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -688,14 +698,14 @@ Additional Inherited Members</h2></td></tr>
 <p>Get the correct switch position. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_bus.html">Bus</a> with switch. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_bus.html" title="Node for power elements. All others power elements are connected through this. ">Bus</a> with switch. </td></tr>
     <tr><td class="paramname">parentPoint</td><td>Position of node on parent. </td></tr>
     <tr><td class="paramname">secondPoint</td><td>Next point in element. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00022">22</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00039">39</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -725,7 +735,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Check if the power element have dynamic event. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the element have dynamic an event, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00186">186</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00203">203</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -761,7 +771,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00191">191</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00208">208</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -810,7 +820,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_sync_generator.html#aaa4c5978dc6d344747d74e36fb3e71d8">SyncGenerator</a>, <a class="el" href="class_sync_motor.html#a038162c828595f58782fe97dea2c864d">SyncMotor</a>, <a class="el" href="class_transformer.html#a7e3cd54e20d795ab9b0b8533ce03b728">Transformer</a>, and <a class="el" href="class_line.html#a1f3ef94716c52a357ecbcbdf00b0e072">Line</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00018">18</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00035">35</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -848,7 +858,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_transformer.html#a328c419af15701734168c8db62eefa36">Transformer</a>, <a class="el" href="class_line.html#a400c8d0397ecdfe6c0a8380ee6bc7e1e">Line</a>, and <a class="el" href="class_machines.html#a293cb955dcacaaebca564b8a91ce57d3">Machines</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00170">170</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00187">187</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -884,7 +894,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00160">160</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8h_source.html#l00177">177</a> of file <a class="el" href="_power_element_8h_source.html">PowerElement.h</a>.</p>
 
 </div>
 </div>
@@ -920,7 +930,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00046">46</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_power_element_8cpp_source.html#l00063">63</a> of file <a class="el" href="_power_element_8cpp_source.html">PowerElement.cpp</a>.</p>
 
 </div>
 </div>

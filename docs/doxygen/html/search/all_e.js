@@ -1,10 +1,13 @@
 var searchData=
 [
   ['ratelimiter',['RateLimiter',['../class_rate_limiter.html',1,'']]],
+  ['ratelimiter_2eh',['RateLimiter.h',['../_rate_limiter_8h.html',1,'']]],
   ['ratelimiterform',['RateLimiterForm',['../class_rate_limiter_form.html',1,'']]],
+  ['ratelimiterform_2eh',['RateLimiterForm.h',['../_rate_limiter_form_8h.html',1,'']]],
   ['ratelimiterformbase',['RateLimiterFormBase',['../class_rate_limiter_form_base.html',1,'']]],
   ['reactivelimits',['ReactiveLimits',['../struct_reactive_limits.html',1,'']]],
   ['reactiveshuntelementform',['ReactiveShuntElementForm',['../class_reactive_shunt_element_form.html',1,'']]],
+  ['reactiveshuntelementform_2eh',['ReactiveShuntElementForm.h',['../_reactive_shunt_element_form_8h.html',1,'']]],
   ['reactiveshuntelementformbase',['ReactiveShuntElementFormBase',['../class_reactive_shunt_element_form_base.html',1,'']]],
   ['removechild',['RemoveChild',['../class_element.html#a6be881ba60674b289a91e498d3d8fc09',1,'Element']]],
   ['removeparent',['RemoveParent',['../class_branch.html#aa0328a743090b2b7b3f33d57a867b6dc',1,'Branch::RemoveParent()'],['../class_connection_line.html#a3f5584348b86e665161b033d4ce8d702',1,'ConnectionLine::RemoveParent()'],['../class_element.html#a9504437b60faf2c5a27584de8a24810c',1,'Element::RemoveParent()'],['../class_machines.html#a002d852ddd0d73502a6bd819b5545026',1,'Machines::RemoveParent()'],['../class_shunt.html#a665d9a8c291d427e666567c6df34321b',1,'Shunt::RemoveParent()']]],

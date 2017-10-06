@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,6 +92,11 @@ $(document).ready(function(){initNavTree('class_limiter.html','');});
 <div class="title">Limiter Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Limits the input value by superior and inferior values.  
+ <a href="class_limiter.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_limiter_8h_source.html">Limiter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Limiter:</div>
 <div class="dyncontent">
@@ -93,7 +104,7 @@ Inheritance diagram for Limiter:</div>
   <img src="class_limiter.png" usemap="#Limiter_map" alt=""/>
   <map id="Limiter_map" name="Limiter_map">
 <area href="class_control_element.html" alt="ControlElement" shape="rect" coords="0,56,97,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,97,24"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,97,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -471,8 +482,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_limiter_8h_source.html#l00008">8</a> of file <a class="el" href="_limiter_8h_source.html">Limiter.h</a>.</p>
+<div class="textblock"><p>Limits the input value by superior and inferior values. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_limiter_8h_source.html#l00032">32</a> of file <a class="el" href="_limiter_8h_source.html">Limiter.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac6506d59da4ea682d9e556564ec3ad11"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6506d59da4ea682d9e556564ec3ad11">&#9670;&nbsp;</a></span>Contains()</h2>
@@ -508,7 +522,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_limiter_8h_source.html#l00015">15</a> of file <a class="el" href="_limiter_8h_source.html">Limiter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_limiter_8h_source.html#l00039">39</a> of file <a class="el" href="_limiter_8h_source.html">Limiter.h</a>.</p>
 
 </div>
 </div>
@@ -557,7 +571,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00017">17</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00034">34</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
 
 </div>
 </div>
@@ -589,7 +603,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00100">100</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00119">119</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
 
 </div>
 </div>
@@ -627,7 +641,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_limiter_8h_source.html#l00016">16</a> of file <a class="el" href="_limiter_8h_source.html">Limiter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_limiter_8h_source.html#l00040">40</a> of file <a class="el" href="_limiter_8h_source.html">Limiter.h</a>.</p>
 
 </div>
 </div>
@@ -665,7 +679,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00055">55</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00072">72</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
 
 </div>
 </div>
@@ -707,7 +721,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -715,7 +729,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00044">44</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_limiter_8cpp_source.html#l00061">61</a> of file <a class="el" href="_limiter_8cpp_source.html">Limiter.cpp</a>.</p>
 
 </div>
 </div>

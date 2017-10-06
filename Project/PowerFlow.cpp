@@ -1,23 +1,30 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "PowerFlow.h"
 
-PowerFlow::PowerFlow()
-    : ElectricCalculation()
-{
-}
-
-PowerFlow::PowerFlow(std::vector<Element*> elementList)
-    : ElectricCalculation()
-{
-    GetElementsFromList(elementList);
-}
-
+PowerFlow::PowerFlow() : ElectricCalculation() {}
+PowerFlow::PowerFlow(std::vector<Element*> elementList) : ElectricCalculation() { GetElementsFromList(elementList); }
 PowerFlow::~PowerFlow() {}
-
 bool PowerFlow::RunGaussSeidel(double systemPowerBase,
-    int maxIteration,
-    double error,
-    double initAngle,
-    double accFactor)
+                               int maxIteration,
+                               double error,
+                               double initAngle,
+                               double accFactor)
 {
     // Calculate the Ybus.
     if(!GetYBus(m_yBus, systemPowerBase)) {
@@ -28,11 +35,11 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
     // Number of buses on the system.
     int numberOfBuses = static_cast<int>(m_busList.size());
 
-    std::vector<BusType> busType;                 // Bus type
-    std::vector<std::complex<double> > voltage;   // Voltage of buses
-    std::vector<std::complex<double> > power;     // Injected power
-    std::vector<std::complex<double> > loadPower; // Only the load power
-    std::vector<ReactiveLimits> reactiveLimit;    // Limit of reactive power on PV buses
+    std::vector<BusType> busType;                  // Bus type
+    std::vector<std::complex<double> > voltage;    // Voltage of buses
+    std::vector<std::complex<double> > power;      // Injected power
+    std::vector<std::complex<double> > loadPower;  // Only the load power
+    std::vector<ReactiveLimits> reactiveLimit;     // Limit of reactive power on PV buses
 
     reactiveLimit.resize(numberOfBuses);
 
@@ -72,7 +79,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
         }
 
         // Fill the power array
-        power.push_back(std::complex<double>(0.0, 0.0)); // Initial value
+        power.push_back(std::complex<double>(0.0, 0.0));  // Initial value
         loadPower.push_back(std::complex<double>(0.0, 0.0));
 
         // Synchronous generator
@@ -179,12 +186,12 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
     }
 
     // Gauss-Seidel method
-    std::vector<std::complex<double> > oldVoltage; // Old voltage array.
+    std::vector<std::complex<double> > oldVoltage;  // Old voltage array.
     oldVoltage.resize(voltage.size());
 
     auto oldBusType = busType;
 
-    int iteration = 0; // Current itaration number.
+    int iteration = 0;  // Current itaration number.
 
     while(true) {
         // Reach the max number of iterations.
@@ -214,7 +221,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
                 // Apply the acceleration factor.
                 newVolt = std::complex<double>(accFactor * (newVolt.real() - voltage[i].real()) + voltage[i].real(),
-                    accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());
+                                               accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());
 
                 voltage[i] = newVolt;
             }
@@ -238,15 +245,15 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
                 // Apply the acceleration factor.
                 newVolt = std::complex<double>(accFactor * (newVolt.real() - voltage[i].real()) + voltage[i].real(),
-                    accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());
+                                               accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());
 
                 // Keep the same voltage magnitude.
                 voltage[i] = std::complex<double>(std::abs(voltage[i]) * std::cos(std::arg(newVolt)),
-                    std::abs(voltage[i]) * std::sin(std::arg(newVolt)));
+                                                  std::abs(voltage[i]) * std::sin(std::arg(newVolt)));
             }
 
-            double busError = std::max(
-                std::abs(voltage[i].real() - oldVoltage[i].real()), std::abs(voltage[i].imag() - oldVoltage[i].imag()));
+            double busError = std::max(std::abs(voltage[i].real() - oldVoltage[i].real()),
+                                       std::abs(voltage[i].imag() - oldVoltage[i].imag()));
 
             if(busError > iterationError) iterationError = busError;
         }

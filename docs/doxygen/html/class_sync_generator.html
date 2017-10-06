@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,15 +92,20 @@ $(document).ready(function(){initNavTree('class_sync_generator.html','');});
 <div class="title">SyncGenerator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Synchronous generator power element.  
+ <a href="class_sync_generator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_sync_generator_8h_source.html">SyncGenerator.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SyncGenerator:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_sync_generator.png" usemap="#SyncGenerator_map" alt=""/>
   <map id="SyncGenerator_map" name="SyncGenerator_map">
-<area href="class_machines.html" alt="Machines" shape="rect" coords="0,112,98,136"/>
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="0,56,98,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,98,24"/>
+<area href="class_machines.html" title="Abstract class for rotary machines power elements. " alt="Machines" shape="rect" coords="0,112,98,136"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="0,56,98,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,98,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -542,8 +553,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 <tr class="separator:a489713cc909f0d733107dad72160f434 inherit pro_methods_class_machines"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_sync_generator_8h_source.html#l00110">110</a> of file <a class="el" href="_sync_generator_8h_source.html">SyncGenerator.h</a>.</p>
+<div class="textblock"><p>Synchronous generator power element. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_sync_generator_8h_source.html#l00140">140</a> of file <a class="el" href="_sync_generator_8h_source.html">SyncGenerator.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a24b9894fa42473dfb8bcf82221401a97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a24b9894fa42473dfb8bcf82221401a97">&#9670;&nbsp;</a></span>GetContextMenu()</h2>
@@ -580,7 +594,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00039">39</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00056">56</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -612,7 +626,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00139">139</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00156">156</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -651,7 +665,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#acadf6712b430f9fadfbd7015903eaeaf">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00213">213</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00230">230</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -683,7 +697,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00167">167</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00184">184</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -732,7 +746,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#a0730506d0417089d69f7ce64b05daed4">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00130">130</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00147">147</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -774,7 +788,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html">Element</a> that will be edited. </td></tr>
+    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
   </table>
   </dd>
 </dl>
@@ -782,7 +796,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePowerFlowArrows
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00046">46</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_sync_generator_8cpp_source.html#l00063">63</a> of file <a class="el" href="_sync_generator_8cpp_source.html">SyncGenerator.cpp</a>.</p>
 
 </div>
 </div>

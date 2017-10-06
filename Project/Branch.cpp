@@ -1,16 +1,31 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "Branch.h"
 
-Branch::Branch()
-    : PowerElement()
-{
-}
+Branch::Branch() : PowerElement() {}
 Branch::~Branch() {}
 bool Branch::NodeContains(wxPoint2DDouble position)
 {
     wxRect2DDouble nodeRect1(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-        10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                             10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
     wxRect2DDouble nodeRect2(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
-        m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                             m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
+                             10 + 2.0 * m_borderSize);
 
     if(nodeRect1.Contains(position)) {
         m_activeNodeID = 1;
@@ -34,12 +49,12 @@ bool Branch::SetNodeParent(Element* parent)
         wxRect2DDouble nodeRect(0, 0, 0, 0);
         if(m_activeNodeID == 1) {
             nodeRect = wxRect2DDouble(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                                      10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
         }
         if(m_activeNodeID == 2) {
             nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
-                m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
-                10 + 2.0 * m_borderSize);
+                                      m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+                                      10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
         }
 
         if(parent->Intersects(nodeRect)) {
@@ -54,8 +69,8 @@ bool Branch::SetNodeParent(Element* parent)
 
                 // Centralize the node on bus.
                 wxPoint2DDouble parentPt = parent->RotateAtPosition(
-                    m_pointList[0], -parent->GetAngle()); // Rotate click to horizontal position.
-                parentPt.m_y = parent->GetPosition().m_y; // Centralize on bus.
+                    m_pointList[0], -parent->GetAngle());  // Rotate click to horizontal position.
+                parentPt.m_y = parent->GetPosition().m_y;  // Centralize on bus.
                 parentPt = parent->RotateAtPosition(parentPt, parent->GetAngle());
                 m_pointList[0] = parentPt;
 
@@ -102,7 +117,7 @@ void Branch::UpdateNodes()
 {
     if(m_parentList[0]) {
         wxRect2DDouble nodeRect(m_pointList[0].m_x - 5.0 - m_borderSize, m_pointList[0].m_y - 5.0 - m_borderSize,
-            10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
+                                10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
 
         if(!m_parentList[0]->Intersects(nodeRect)) {
             m_parentList[0]->RemoveChild(this);
@@ -113,8 +128,8 @@ void Branch::UpdateNodes()
     }
     if(m_parentList[1]) {
         wxRect2DDouble nodeRect = wxRect2DDouble(m_pointList[m_pointList.size() - 1].m_x - 5.0 - m_borderSize,
-            m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize, 10 + 2.0 * m_borderSize,
-            10 + 2.0 * m_borderSize);
+                                                 m_pointList[m_pointList.size() - 1].m_y - 5.0 - m_borderSize,
+                                                 10 + 2.0 * m_borderSize, 10 + 2.0 * m_borderSize);
 
         if(!m_parentList[1]->Intersects(nodeRect)) {
             m_parentList[1]->RemoveChild(this);
@@ -156,16 +171,16 @@ void Branch::UpdateSwitchesPosition()
 
 void Branch::UpdateSwitches()
 {
-    wxPoint2DDouble swCenter = wxPoint2DDouble(
-        (m_pointList[0].m_x + m_pointList[1].m_x) / 2.0, (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
-    m_switchRect[0] = wxRect2DDouble(
-        swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize, m_switchSize);
+    wxPoint2DDouble swCenter = wxPoint2DDouble((m_pointList[0].m_x + m_pointList[1].m_x) / 2.0,
+                                               (m_pointList[0].m_y + m_pointList[1].m_y) / 2.0);
+    m_switchRect[0] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize,
+                                     m_switchSize);
 
     if(m_switchRect.size() > 1) {
         swCenter =
             wxPoint2DDouble((m_pointList[m_pointList.size() - 1].m_x + m_pointList[m_pointList.size() - 2].m_x) / 2.0,
-                (m_pointList[m_pointList.size() - 1].m_y + m_pointList[m_pointList.size() - 2].m_y) / 2.0);
-        m_switchRect[1] = wxRect2DDouble(
-            swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0, m_switchSize, m_switchSize);
+                            (m_pointList[m_pointList.size() - 1].m_y + m_pointList[m_pointList.size() - 2].m_y) / 2.0);
+        m_switchRect[1] = wxRect2DDouble(swCenter.m_x - m_switchSize / 2.0, swCenter.m_y - m_switchSize / 2.0,
+                                         m_switchSize, m_switchSize);
     }
 }

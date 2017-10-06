@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,14 +92,19 @@ $(document).ready(function(){initNavTree('class_text.html','');});
 <div class="title">Text Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that shows power element informations in workspace.  
+ <a href="class_text.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_text_8h_source.html">Text.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Text:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_text.png" usemap="#Text_map" alt=""/>
   <map id="Text_map" name="Text_map">
-<area href="class_graphical_element.html" alt="GraphicalElement" shape="rect" coords="0,56,111,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,111,24"/>
+<area href="class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace. " alt="GraphicalElement" shape="rect" coords="0,56,111,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,111,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -508,8 +519,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00048">48</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that shows power element informations in workspace. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00072">72</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4f273ea7008c72533327c25caff2e917"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f273ea7008c72533327c25caff2e917">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -548,15 +562,15 @@ Additional Inherited Members</h2></td></tr>
 <p>Add a parent to the element. This method must be used on power elements that connect to a bus, so the parent must be a bus. The element basic points are calculated in this method, so apply this when the element is being inserted. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html">Element</a> parent. </td></tr>
-    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html">Node</a> position in the parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> parent. </td></tr>
+    <tr><td class="paramname">position</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> position in the parent. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00056">56</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00080">80</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
 
 </div>
 </div>
@@ -594,7 +608,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00030">30</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00047">47</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>
@@ -626,7 +640,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00950">950</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00967">967</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>
@@ -664,7 +678,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00075">75</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00092">92</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>
@@ -702,7 +716,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00145">145</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00162">162</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>

@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "BusForm.h"
 #include "Bus.h"
 
@@ -7,7 +24,7 @@ BusForm::BusForm(wxWindow* parent, Bus* bus) : BusFormBase(parent)
     m_choiceFaultType->SetString(1, _("Line-to-line"));
     m_choiceFaultType->SetString(2, _("Double line-to-ground"));
     m_choiceFaultType->SetString(3, _("Line-to-ground"));
-    
+
     SetSize(GetBestSize());
 
     m_parent = parent;

@@ -61,6 +61,7 @@ var hierarchy =
     [ "TransferFunction::SpaceState", "struct_transfer_function_1_1_space_state.html", null ],
     [ "SwitchingData", "struct_switching_data.html", null ],
     [ "SyncGeneratorElectricalData", "struct_sync_generator_electrical_data.html", null ],
+    [ "SyncMachineModelData", "struct_sync_machine_model_data.html", null ],
     [ "SyncMotorElectricalData", "struct_sync_motor_electrical_data.html", null ],
     [ "TextGLDrawable", "class_text_g_l_drawable.html", [
       [ "wxGLString", "classwx_g_l_string.html", [

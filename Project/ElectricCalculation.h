@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef ELECTRICCALCULATION_H
 #define ELECTRICCALCULATION_H
 
@@ -43,8 +60,8 @@ struct ReactiveLimits {
  * @class ElectricCalculation
  * @author Thales Lima Oliveira
  * @date 09/01/2017
- * @file ElectricCalculation.h
  * @brief Base class of electric calculations, with general methods.
+ * @file ElectricCalculation.h
  */
 class ElectricCalculation
 {

@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef TRANSFERFUNCTION_H
 #define TRANSFERFUNCTION_H
 
@@ -8,6 +25,13 @@
 
 class TransferFunctionForm;
 
+/**
+ * @class TransferFunction
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Calculates the time response by a frequency domain transfer function.
+ * @file TransferFunction.h
+ */
 class TransferFunction : public ControlElement
 {
    public:
@@ -34,9 +58,23 @@ class TransferFunction : public ControlElement
     virtual void UpdateTFText();
     virtual void UpdateText() { UpdateTFText(); }
     virtual SpaceState GetSpaceState() { return m_ss; }
+    /**
+     * @brief Convert the transfer function to space state on controllable canonical form (CCF).
+     * @param maxIteration Max number of solution iteration.
+     * @param error Tolerance for calculation.
+     */
     virtual void CalculateSpaceState(int maxIteration = 100, double error = 1e-3);
+    /**
+     * @brief Calculates the time response by the space state form of transfer function.
+     *
+     * Uses the implicit trapezoidal rule to solve:
+     * <center>\f$ y_{n+1}=y_n+\frac{1}{2}h(y'_n+y'_{n+1}) \f$</center>
+     * @param input Input value.
+     * @param timeStep Time step.
+     * @return true if the calculation converges, false otherwise.
+     */
     virtual bool Solve(double input, double timeStep);
-    
+
     virtual Element* GetCopy();
 
    protected:

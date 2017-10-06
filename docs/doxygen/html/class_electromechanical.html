@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -88,13 +94,18 @@ $(document).ready(function(){initNavTree('class_electromechanical.html','');});
 <div class="title">Electromechanical Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Calculates the electromechanical transient based on disturbances (e.g. system fault).  
+ <a href="class_electromechanical.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_electromechanical_8h_source.html">Electromechanical.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Electromechanical:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_electromechanical.png" usemap="#Electromechanical_map" alt=""/>
   <map id="Electromechanical_map" name="Electromechanical_map">
-<area href="class_electric_calculation.html" alt="ElectricCalculation" shape="rect" coords="0,0,118,24"/>
+<area href="class_electric_calculation.html" title="Base class of electric calculations, with general methods. " alt="ElectricCalculation" shape="rect" coords="0,0,118,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -199,6 +210,12 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 <tr class="memitem:a1e7fff4570b7a983f79a22aafed2112d"><td class="memItemLeft" align="right" valign="top"><a id="a1e7fff4570b7a983f79a22aafed2112d"></a>
 std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_numItVector</b></td></tr>
 <tr class="separator:a1e7fff4570b7a983f79a22aafed2112d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c82ed8fc748149bb116ee532e6ee978"><td class="memItemLeft" align="right" valign="top"><a id="a4c82ed8fc748149bb116ee532e6ee978"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_sdCVector</b></td></tr>
+<tr class="separator:a4c82ed8fc748149bb116ee532e6ee978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a237471acf9a372a9b1cd1481803571d5"><td class="memItemLeft" align="right" valign="top"><a id="a237471acf9a372a9b1cd1481803571d5"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_sqCVector</b></td></tr>
+<tr class="separator:a237471acf9a372a9b1cd1481803571d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -214,9 +231,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetEvent</b> (double 
 <tr class="memitem:a9b076237d26ff011552ed624a5d9bbe2"><td class="memItemLeft" align="right" valign="top"><a id="a9b076237d26ff011552ed624a5d9bbe2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>EventTrigger</b> (double eventTime, double currentTime)</td></tr>
 <tr class="separator:a9b076237d26ff011552ed624a5d9bbe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad655c165bc53cce5d5fdd8ae9339ba2"><td class="memItemLeft" align="right" valign="top"><a id="aad655c165bc53cce5d5fdd8ae9339ba2"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetPowerValue</b> (double value, <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca">ElectricalUnit</a> unit)</td></tr>
-<tr class="separator:aad655c165bc53cce5d5fdd8ae9339ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a790c142f8d9db534c7e368711e84f61e"><td class="memItemLeft" align="right" valign="top"><a id="a790c142f8d9db534c7e368711e84f61e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>InsertSyncMachinesOnYBus</b> ()</td></tr>
 <tr class="separator:a790c142f8d9db534c7e368711e84f61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,9 +240,9 @@ std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom">
 <tr class="memitem:a4ccf60ce21c83ff757e1a7de99a00704"><td class="memItemLeft" align="right" valign="top"><a id="a4ccf60ce21c83ff757e1a7de99a00704"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>InitializeDynamicElements</b> ()</td></tr>
 <tr class="separator:a4ccf60ce21c83ff757e1a7de99a00704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e3c1766ff06883a681f39d536a41136"><td class="memItemLeft" align="right" valign="top"><a id="a4e3c1766ff06883a681f39d536a41136"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateMachinesCurrents</b> ()</td></tr>
-<tr class="separator:a4e3c1766ff06883a681f39d536a41136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa59f55e739c674f4ede073eadbb79ac0"><td class="memItemLeft" align="right" valign="top"><a id="aa59f55e739c674f4ede073eadbb79ac0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateMachinesCurrents</b> ()</td></tr>
+<tr class="separator:aa59f55e739c674f4ede073eadbb79ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a488985a77171f915145ecc5d891db04f"><td class="memItemLeft" align="right" valign="top"><a id="a488985a77171f915145ecc5d891db04f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateIntegrationConstants</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, double id, double iq, double k=1.0)</td></tr>
 <tr class="separator:a488985a77171f915145ecc5d891db04f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,15 +252,21 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>SolveSynchronousMachi
 <tr class="memitem:a7cce38fb26c4e1e6a70bd605285848e8"><td class="memItemLeft" align="right" valign="top"><a id="a7cce38fb26c4e1e6a70bd605285848e8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetSyncMachinesModel</b> ()</td></tr>
 <tr class="separator:a7cce38fb26c4e1e6a70bd605285848e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82b5c5c2aeefd49706199d0ba140d300"><td class="memItemLeft" align="right" valign="top"><a id="a82b5c5c2aeefd49706199d0ba140d300"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateSyncMachineIntVariables</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, double id, double iq, double pe, double k=1.0)</td></tr>
-<tr class="separator:a82b5c5c2aeefd49706199d0ba140d300"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10b7ceb1a8066461c5369d210cff48d5"><td class="memItemLeft" align="right" valign="top"><a id="a10b7ceb1a8066461c5369d210cff48d5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateSyncMachineNonIntVariables</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, double &amp;id, double &amp;iq, double &amp;pe, double k=1.0)</td></tr>
-<tr class="separator:a10b7ceb1a8066461c5369d210cff48d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa191e34b2a6cbfd0d89c78da14f1d7f7"><td class="memItemLeft" align="right" valign="top"><a id="aa191e34b2a6cbfd0d89c78da14f1d7f7"></a>
+<a class="el" href="struct_sync_machine_model_data.html">SyncMachineModelData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetSyncMachineModelData</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncMachine)</td></tr>
+<tr class="separator:aa191e34b2a6cbfd0d89c78da14f1d7f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac185e65f3073319fc4ac4ec11c328337"><td class="memItemLeft" align="right" valign="top"><a id="ac185e65f3073319fc4ac4ec11c328337"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateSyncMachineIntVariables</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, double id, double iq, double sd, double sq, double pe, double k=1.0)</td></tr>
+<tr class="separator:ac185e65f3073319fc4ac4ec11c328337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ca8ab15ead93ee615277698bf0b3867"><td class="memItemLeft" align="right" valign="top"><a id="a8ca8ab15ead93ee615277698bf0b3867"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateSyncMachineNonIntVariables</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, double &amp;id, double &amp;iq, double &amp;sd, double &amp;sq, double &amp;pe, double k=1.0)</td></tr>
+<tr class="separator:a8ca8ab15ead93ee615277698bf0b3867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af02c1382b8a7d3085831d3a1e89526f6"><td class="memItemLeft" align="right" valign="top"><a id="af02c1382b8a7d3085831d3a1e89526f6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateReferenceSpeed</b> ()</td></tr>
 <tr class="separator:af02c1382b8a7d3085831d3a1e89526f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a900832be747b8b3e41e901235012bf87"><td class="memItemLeft" align="right" valign="top"><a id="a900832be747b8b3e41e901235012bf87"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateSyncMachineSaturation</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncMachine, double &amp;id, double &amp;iq, double &amp;sd, double &amp;sq, bool updateCurrents=true, double k=1.0)</td></tr>
+<tr class="separator:a900832be747b8b3e41e901235012bf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5f5162b53e8969fd933af2ef80d1b67"><td class="memItemLeft" align="right" valign="top"><a id="ae5f5162b53e8969fd933af2ef80d1b67"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveData</b> ()</td></tr>
 <tr class="separator:ae5f5162b53e8969fd933af2ef80d1b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -304,6 +324,9 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>m_tolerance</b> = 1
 <tr class="memitem:ad963e529cd06cf42a9eef98dbbf04edb"><td class="memItemLeft" align="right" valign="top"><a id="ad963e529cd06cf42a9eef98dbbf04edb"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_maxIterations</b> = 100</td></tr>
 <tr class="separator:ad963e529cd06cf42a9eef98dbbf04edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4029ebc888d91ec49b9bdf9f7cdf2631"><td class="memItemLeft" align="right" valign="top"><a id="a4029ebc888d91ec49b9bdf9f7cdf2631"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_saturationTolerance</b> = 1e-8</td></tr>
+<tr class="separator:a4029ebc888d91ec49b9bdf9f7cdf2631"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb77fe8bf93882f3cd039c126ab79f7d"><td class="memItemLeft" align="right" valign="top"><a id="adb77fe8bf93882f3cd039c126ab79f7d"></a>
 std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_eventTimeList</b></td></tr>
 <tr class="separator:adb77fe8bf93882f3cd039c126ab79f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -316,6 +339,12 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 <tr class="memitem:a23d720e7a18a781b808cc7ca0f130ceb"><td class="memItemLeft" align="right" valign="top"><a id="a23d720e7a18a781b808cc7ca0f130ceb"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>m_wError</b> = 0.0</td></tr>
 <tr class="separator:a23d720e7a18a781b808cc7ca0f130ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a7d7043e936b7649a741cf9d39e01b9"><td class="memItemLeft" align="right" valign="top"><a id="a3a7d7043e936b7649a741cf9d39e01b9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_sdC</b> = 1.0</td></tr>
+<tr class="separator:a3a7d7043e936b7649a741cf9d39e01b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac684393f47d36a6038d562e92df56ab6"><td class="memItemLeft" align="right" valign="top"><a id="ac684393f47d36a6038d562e92df56ab6"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_sqC</b> = 1.0</td></tr>
+<tr class="separator:ac684393f47d36a6038d562e92df56ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fe6bcd83ae05c0cf6827eed9d0eb029"><td class="memItemLeft" align="right" valign="top"><a id="a4fe6bcd83ae05c0cf6827eed9d0eb029"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>m_numIt</b> = 0</td></tr>
 <tr class="separator:a4fe6bcd83ae05c0cf6827eed9d0eb029"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -352,8 +381,11 @@ std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &g
 <tr class="separator:a6cca6be3c0b79741a49b1631e38fc3be inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_electromechanical_8h_source.html#l00010">10</a> of file <a class="el" href="_electromechanical_8h_source.html">Electromechanical.h</a>.</p>
+<div class="textblock"><p>Calculates the electromechanical transient based on disturbances (e.g. system fault). </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>23/09/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_electromechanical_8h_source.html#l00051">51</a> of file <a class="el" href="_electromechanical_8h_source.html">Electromechanical.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>Project/<a class="el" href="_electromechanical_8h_source.html">Electromechanical.h</a></li>
 <li>Project/<a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a></li>

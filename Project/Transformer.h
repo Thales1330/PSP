@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef TRANSFORMER_H
 #define TRANSFORMER_H
 
@@ -37,8 +54,8 @@ struct TransformerElectricalData {
     bool useTransformerPower = false;
 
     // Power flow (p.u.)
-    std::complex<double> current[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
-    std::complex<double> powerFlow[2] = { std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0) };
+    std::complex<double> current[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
+    std::complex<double> powerFlow[2] = {std::complex<double>(0.0, 0.0), std::complex<double>(0.0, 0.0)};
 
     // Fault
     double zeroResistance = 0.0;
@@ -51,9 +68,16 @@ struct TransformerElectricalData {
     std::complex<double> faultCurrent[2][3];
 };
 
+/**
+ * @class Transformer
+ * @author Thales Lima Oliveira <thales@ufu.br>
+ * @date 06/10/2017
+ * @brief Two-winding transformer power element.
+ * @file Transformer.h
+ */
 class Transformer : public Branch
 {
-public:
+   public:
     Transformer();
     Transformer(wxString name);
     virtual ~Transformer();
@@ -78,9 +102,9 @@ public:
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
 
-protected:
+   protected:
     void UpdatePowerFlowArrowsPosition();
     TransformerElectricalData m_electricalData;
 };
 
-#endif // TRANSFORMER_H
+#endif  // TRANSFORMER_H

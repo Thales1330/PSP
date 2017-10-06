@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -90,7 +96,7 @@ $(document).ready(function(){initNavTree('class_transfer_function.html','');});
   <tr class="even"><td class="entry"><a class="el" href="class_element.html#ad1f153a87797633ab310d07e1d06eba9">AddParent</a>(Element *parent)</td><td class="entry"><a class="el" href="class_element.html">Element</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_element.html#aa40c60c03d6a76639d8c6f6bab86720e">AddPoint</a>(wxPoint2DDouble point)</td><td class="entry"><a class="el" href="class_element.html">Element</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_element.html#a57f5771fd003020fef3866a1d1dc7487">CalculateBoundaries</a>(wxPoint2DDouble &amp;leftUp, wxPoint2DDouble &amp;rightBottom) const</td><td class="entry"><a class="el" href="class_element.html">Element</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>CalculateSpaceState</b>(int maxIteration=100, double error=1e-3) (defined in <a class="el" href="class_transfer_function.html">TransferFunction</a>)</td><td class="entry"><a class="el" href="class_transfer_function.html">TransferFunction</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_transfer_function.html#a5f09dd8e5c016a90c69a8e38ef302c8a">CalculateSpaceState</a>(int maxIteration=100, double error=1e-3)</td><td class="entry"><a class="el" href="class_transfer_function.html">TransferFunction</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_transfer_function.html#a6a4415d2cf0af290494ea30d586cc187">Contains</a>(wxPoint2DDouble position) const</td><td class="entry"><a class="el" href="class_transfer_function.html">TransferFunction</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>ControlElement</b>(int id) (defined in <a class="el" href="class_control_element.html">ControlElement</a>)</td><td class="entry"><a class="el" href="class_control_element.html">ControlElement</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">DoubleFromString</a>(wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</td><td class="entry"><a class="el" href="class_element.html">Element</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
@@ -207,7 +213,7 @@ $(document).ready(function(){initNavTree('class_transfer_function.html','');});
   <tr><td class="entry"><a class="el" href="class_element.html#a5da121470a0c26c6b5c57a7c4eeac48b">SetWidth</a>(double width)</td><td class="entry"><a class="el" href="class_element.html">Element</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_transfer_function.html#afe15de93ab4f93032560a6139091ef10">ShowForm</a>(wxWindow *parent, Element *element)</td><td class="entry"><a class="el" href="class_transfer_function.html">TransferFunction</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_element.html#ab8bf35b4a205fa58772402cea7fad89c">ShowPickbox</a>(bool showPickbox=true)</td><td class="entry"><a class="el" href="class_element.html">Element</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Solve</b>(double input, double timeStep) (defined in <a class="el" href="class_transfer_function.html">TransferFunction</a>)</td><td class="entry"><a class="el" href="class_transfer_function.html">TransferFunction</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_transfer_function.html#ab23ed101f7d4e953e4df0d4d480d9798">Solve</a>(double input, double timeStep)</td><td class="entry"><a class="el" href="class_transfer_function.html">TransferFunction</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">StartMove</a>(wxPoint2DDouble position)</td><td class="entry"><a class="el" href="class_control_element.html">ControlElement</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_element.html#abb2e253ec1e86353cd7160209c96553c">StringFromDouble</a>(double value, int minDecimal=1)</td><td class="entry"><a class="el" href="class_element.html">Element</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>TransferFunction</b>(int id) (defined in <a class="el" href="class_transfer_function.html">TransferFunction</a>)</td><td class="entry"><a class="el" href="class_transfer_function.html">TransferFunction</a></td><td class="entry"></td></tr>

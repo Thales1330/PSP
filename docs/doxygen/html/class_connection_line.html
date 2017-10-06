@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,6 +93,11 @@ $(document).ready(function(){initNavTree('class_connection_line.html','');});
 <div class="title">ConnectionLine Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Connection between two control elements or other connection line and an element.  
+ <a href="class_connection_line.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_connection_line_8h_source.html">ConnectionLine.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ConnectionLine:</div>
 <div class="dyncontent">
@@ -94,7 +105,7 @@ Inheritance diagram for ConnectionLine:</div>
   <img src="class_connection_line.png" usemap="#ConnectionLine_map" alt=""/>
   <map id="ConnectionLine_map" name="ConnectionLine_map">
 <area href="class_control_element.html" alt="ControlElement" shape="rect" coords="0,56,100,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="0,0,100,24"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,100,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -518,8 +529,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_connection_line_8h_source.html#l00006">6</a> of file <a class="el" href="_connection_line_8h_source.html">ConnectionLine.h</a>.</p>
+<div class="textblock"><p>Connection between two control elements or other connection line and an element. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_connection_line_8h_source.html#l00030">30</a> of file <a class="el" href="_connection_line_8h_source.html">ConnectionLine.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a65c6d7139587c973a92dd1009909597f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65c6d7139587c973a92dd1009909597f">&#9670;&nbsp;</a></span>Contains()</h2>
@@ -555,7 +569,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00041">41</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00053">53</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 
 </div>
 </div>
@@ -604,7 +618,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00021">21</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00033">33</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 
 </div>
 </div>
@@ -636,7 +650,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00188">188</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00199">199</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 
 </div>
 </div>
@@ -674,7 +688,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00049">49</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00061">61</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 
 </div>
 </div>
@@ -712,7 +726,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00146">146</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00158">158</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 
 </div>
 </div>
@@ -750,7 +764,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a9504437b60faf2c5a27584de8a24810c">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00180">180</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00191">191</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 
 </div>
 </div>
@@ -788,7 +802,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00152">152</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00164">164</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 
 </div>
 </div>

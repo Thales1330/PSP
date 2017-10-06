@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,17 +93,22 @@ $(document).ready(function(){initNavTree('class_shunt.html','');});
 <div class="title">Shunt Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Abstract class for shunt power elements.  
+ <a href="class_shunt.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_shunt_8h_source.html">Shunt.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Shunt:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_shunt.png" usemap="#Shunt_map" alt=""/>
   <map id="Shunt_map" name="Shunt_map">
-<area href="class_power_element.html" alt="PowerElement" shape="rect" coords="102,56,194,80"/>
-<area href="class_element.html" alt="Element" shape="rect" coords="102,0,194,24"/>
-<area href="class_capacitor.html" alt="Capacitor" shape="rect" coords="0,168,92,192"/>
-<area href="class_inductor.html" alt="Inductor" shape="rect" coords="102,168,194,192"/>
-<area href="class_load.html" alt="Load" shape="rect" coords="204,168,296,192"/>
+<area href="class_power_element.html" title="Abstract class of power elements. " alt="PowerElement" shape="rect" coords="102,56,194,80"/>
+<area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="102,0,194,24"/>
+<area href="class_capacitor.html" title="Shunt capactior power element. " alt="Capacitor" shape="rect" coords="0,168,92,192"/>
+<area href="class_inductor.html" title="Inductor shunt power element. " alt="Inductor" shape="rect" coords="102,168,194,192"/>
+<area href="class_load.html" title="Loas shunt power element. " alt="Load" shape="rect" coords="204,168,296,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -513,8 +524,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00007">7</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
+<div class="textblock"><p>Abstract class for shunt power elements. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00031">31</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a449431a2044b838d35cbb991aa1de658"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a449431a2044b838d35cbb991aa1de658">&#9670;&nbsp;</a></span>Contains()</h2>
@@ -552,7 +566,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_capacitor.html#a994039e59a8ae0ec3fe7cf7f5b66e4e5">Capacitor</a>, and <a class="el" href="class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60">Inductor</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00013">13</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00037">37</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
 
 </div>
 </div>
@@ -592,7 +606,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_capacitor.html#a6b06adb1ef3545b220e0b94ee6210b7a">Capacitor</a>, and <a class="el" href="class_inductor.html#a3d331d2a725275a12489401180d4c1d1">Inductor</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00014">14</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8h_source.html#l00038">38</a> of file <a class="el" href="_shunt_8h_source.html">Shunt.h</a>.</p>
 
 </div>
 </div>
@@ -630,7 +644,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#abe884d99d12d5252e18956162115b025">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00015">15</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00032">32</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -671,7 +685,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Move a node. <a class="el" href="class_shunt.html#a56d6136d647f64cf490dd9d7720f6865" title="Update the element attributes related to the movement. ">StartMove(wxPoint2DDouble position)</a> before start moving. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a>'s parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a>'s parent. </td></tr>
     <tr><td class="paramname">position</td><td>New node position. </td></tr>
   </table>
   </dd>
@@ -679,7 +693,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a870e266e0457bacbc3f7ef1fb70c6fdd">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00028">28</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00045">45</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -718,7 +732,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a95b4f7e9341883ec39d0201148afffb4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00067">67</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00084">84</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -756,7 +770,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a9504437b60faf2c5a27584de8a24810c">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00057">57</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00074">74</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -797,7 +811,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Rotate a node. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a>'s parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a>'s parent. </td></tr>
     <tr><td class="paramname">clockwise</td><td>True to rotate clockwise, false to rotate counter-clockwise. </td></tr>
   </table>
   </dd>
@@ -805,7 +819,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#af26c67b6dd32eb1b3e417fddf54818c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00124">124</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00141">141</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -836,7 +850,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Set a perent to the node. If all conditions are met, a new parent are added to the element and the points related to the nodes will be calculated. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html">Node</a> parent. </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="class_node.html" title="Node of a control element. This class manages the user interaction with the connection and control el...">Node</a> parent. </td></tr>
   </table>
   </dd>
 </dl>
@@ -844,7 +858,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ac7490a91f3edfff08584567cc84d86b5">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00081">81</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00098">98</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>
@@ -882,7 +896,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a846a2a51780a99363b4d4b1812ca16b4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00050">50</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shunt_8cpp_source.html#l00067">67</a> of file <a class="el" href="_shunt_8cpp_source.html">Shunt.cpp</a>.</p>
 
 </div>
 </div>

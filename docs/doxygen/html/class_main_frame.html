@@ -21,6 +21,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,6 +93,11 @@ $(document).ready(function(){initNavTree('class_main_frame.html','');});
 <div class="title">MainFrame Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Main frame of the program. This class manage the ribbon menu and the notebook behavior.  
+ <a href="class_main_frame.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_main_frame_8h_source.html">MainFrame.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MainFrame:</div>
 <div class="dyncontent">
@@ -99,9 +110,17 @@ Inheritance diagram for MainFrame:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac5d3dc03594f76ed6e5fd1ccecfc5b0b"><td class="memItemLeft" align="right" valign="top"><a id="ac5d3dc03594f76ed6e5fd1ccecfc5b0b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MainFrame</b> (wxWindow *parent, wxLocale *locale, <a class="el" href="class_properties_data.html">PropertiesData</a> *initProperties)</td></tr>
-<tr class="separator:ac5d3dc03594f76ed6e5fd1ccecfc5b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a667b44053cae174a361cfd21124ef995"><td class="memItemLeft" align="right" valign="top"><a id="a667b44053cae174a361cfd21124ef995"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_frame.html#a667b44053cae174a361cfd21124ef995">MainFrame</a> ()</td></tr>
+<tr class="memdesc:a667b44053cae174a361cfd21124ef995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:a667b44053cae174a361cfd21124ef995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3288e93c5b8682863574bc47c9e9ff8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_frame.html#ac3288e93c5b8682863574bc47c9e9ff8">MainFrame</a> (wxWindow *parent, wxLocale *locale, <a class="el" href="class_properties_data.html">PropertiesData</a> *initProperties, wxString openPath=&quot;&quot;)</td></tr>
+<tr class="memdesc:ac3288e93c5b8682863574bc47c9e9ff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main frame contructor.  <a href="#ac3288e93c5b8682863574bc47c9e9ff8">More...</a><br /></td></tr>
+<tr class="separator:ac3288e93c5b8682863574bc47c9e9ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cfd88ece4836e0ea5430bd55370bf11"><td class="memItemLeft" align="right" valign="top"><a id="a0cfd88ece4836e0ea5430bd55370bf11"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_frame.html#a0cfd88ece4836e0ea5430bd55370bf11">~MainFrame</a> ()</td></tr>
+<tr class="memdesc:a0cfd88ece4836e0ea5430bd55370bf11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
+<tr class="separator:a0cfd88ece4836e0ea5430bd55370bf11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_main_frame_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_main_frame_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_main_frame_base.html">MainFrameBase</a></td></tr>
 <tr class="memitem:ae32925edbbd4ab14b2ce775b733b7c50 inherit pub_methods_class_main_frame_base"><td class="memItemLeft" align="right" valign="top"><a id="ae32925edbbd4ab14b2ce775b733b7c50"></a>
 wxRibbonBar *&#160;</td><td class="memItemRight" valign="bottom"><b>GetRibbonBar</b> ()</td></tr>
@@ -369,9 +388,65 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ae7e11ee827b7ec42dbd94f90891d15c9 inherit pub_types_class_main_frame_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_main_frame_8h_source.html#l00033">33</a> of file <a class="el" href="_main_frame_8h_source.html">MainFrame.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+<div class="textblock"><p>Main frame of the program. This class manage the ribbon menu and the notebook behavior. </p>
+<dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>19/09/2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_main_frame_8h_source.html#l00057">57</a> of file <a class="el" href="_main_frame_8h_source.html">MainFrame.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac3288e93c5b8682863574bc47c9e9ff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3288e93c5b8682863574bc47c9e9ff8">&#9670;&nbsp;</a></span>MainFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MainFrame::MainFrame </td>
+          <td>(</td>
+          <td class="paramtype">wxWindow *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxLocale *&#160;</td>
+          <td class="paramname"><em>locale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_properties_data.html">PropertiesData</a> *&#160;</td>
+          <td class="paramname"><em>initProperties</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxString&#160;</td>
+          <td class="paramname"><em>openPath</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main frame contructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>Parent window. </td></tr>
+    <tr><td class="paramname">locale</td><td>Locale settings. </td></tr>
+    <tr><td class="paramname">initProperties</td><td>Initial properties. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00039">39</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>Project/<a class="el" href="_main_frame_8h_source.html">MainFrame.h</a></li>
 <li>Project/<a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a></li>
 </ul>

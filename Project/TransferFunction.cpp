@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "TransferFunction.h"
 #include "TransferFunctionForm.h"
 
@@ -256,7 +273,8 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     int order = static_cast<int>(m_denominator.size());
     std::vector<double> denominator = m_denominator;
     std::vector<double> numerator;
-
+    
+    //[Ref.] http://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS.html
     int k = order;
     for(int i = 0; i < order; i++) {
         int numIndex = i - (order - static_cast<int>(m_numerator.size()));

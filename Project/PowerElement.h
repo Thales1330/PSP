@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef POWERELEMENT_H
 #define POWERELEMENT_H
 
@@ -70,8 +87,8 @@ enum PowerFlowDirection {
  * @class SwitchingData
  * @author Thales Lima Oliveira
  * @date 18/01/2017
- * @file PowerElement.h
  * @brief Switching data of power elements.
+ * @file PowerElement.h
  */
 struct SwitchingData {
     std::vector<SwitchingType> swType; /**< Type of switching */
@@ -82,8 +99,8 @@ struct SwitchingData {
  * @class IntegrationConstant
  * @author Thales Lima Oliveira
  * @date 24/05/2017
- * @file PowerElement.h
  * @brief Integration constants to calculate dynamic elements through trapezoidal integration method
+ * @file PowerElement.h
  */
 struct IntegrationConstant {
     double c; /**< C value */
@@ -92,10 +109,10 @@ struct IntegrationConstant {
 
 /**
  * @class PowerElement
- * @author Thales Lima Oliveira
+ * @author Thales Lima Oliveira <thales@ufu.br>
  * @date 18/01/2017
+ * @brief Abstract class of power elements.
  * @file PowerElement.h
- * @brief Base class of power elements.
  */
 class PowerElement : public Element
 {
