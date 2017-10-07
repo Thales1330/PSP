@@ -801,7 +801,15 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
                     }
                 }
 
-                solver.SolveNextStep(input);
+                // solver.SolveNextStep(input);
+                solver.SetInitialTerminalVoltage(input);
+                solver.SetActivePower(input);
+                solver.SetInitialMecPower(input);
+                solver.SetInitialVelocity(input);
+                solver.SetReactivePower(input);
+                solver.SetTerminalVoltage(input);
+                solver.SetVelocity(input);
+                solver.SolveNextStep();
 
                 if(printTime >= printStep) {
                     time.push_back(currentTime);

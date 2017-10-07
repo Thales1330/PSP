@@ -41,7 +41,10 @@ class IOControl : public ControlElement
         IN_ACTIVE_POWER = 1 << 2,
         IN_REACTIVE_POWER = 1 << 3,
         OUT_FIELD_VOLTAGE = 1 << 4,
-        OUT_MEC_POWER = 1 << 5
+        OUT_MEC_POWER = 1 << 5,
+        IN_INITIAL_TERMINAL_VOLTAGE = 1 << 6,
+        IN_INITIAL_MEC_POWER = 1 << 7,
+        IN_INITIAL_VELOCITY = 1 << 8,
     };
 
     IOControl(int ioFlags, int id);

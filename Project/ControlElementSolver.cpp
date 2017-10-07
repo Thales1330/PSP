@@ -30,47 +30,36 @@
 #include "Sum.h"
 #include "TransferFunction.h"
 
-ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor,
-                                           double timeStep,
-                                           double integrationError,
-                                           bool startAllZero,
-                                           double input)
+ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor, double timeStep, double integrationError)
 {
     m_ctrlContainer = new ControlElementContainer();
     m_ctrlContainer->FillContainer(controlEditor);
-    Initialize(controlEditor, timeStep, integrationError, startAllZero, input);
+    Initialize(controlEditor, timeStep, integrationError);
 }
 
 ControlElementSolver::ControlElementSolver(ControlElementContainer* ctrlContainer,
                                            double timeStep,
                                            double integrationError,
-                                           bool startAllZero,
-                                           double input,
                                            wxWindow* parent)
 {
     m_ctrlContainer = ctrlContainer;
-    Initialize(parent, timeStep, integrationError, startAllZero, input);
+    Initialize(parent, timeStep, integrationError);
 }
 
-void ControlElementSolver::Initialize(wxWindow* parent,
-                                      double timeStep,
-                                      double integrationError,
-                                      bool startAllZero,
-                                      double input)
+void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double integrationError)
 {
     // Check if the sistem have one input and one output
     bool fail = false;
-    wxString failMessage = "";
     auto ioList = m_ctrlContainer->GetIOControlList();
-    if(ioList.size() != 2) {
+    if(ioList.size() < 2) {
         fail = true;
-        failMessage = _("The control system must have one input and one output.");
+        m_failMessage = _("The control system must have at least one input and one output.");
     }
     bool haveInput, haveOutput;
     haveInput = haveOutput = false;
     for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
         IOControl* io = *it;
-        if(io->GetType() == Node::NODE_OUT) {
+        if(io->GetType() == Node::NODE_OUT && !haveInput) {
             m_inputControl = io;
             haveInput = true;
         } else if(io->GetType() == Node::NODE_IN) {
@@ -80,37 +69,37 @@ void ControlElementSolver::Initialize(wxWindow* parent,
     }
     if(!fail && !haveInput) {
         fail = true;
-        failMessage = _("There is no input in the control system.");
+        m_failMessage = _("There is no input in the control system.");
     }
     if(!fail && !haveOutput) {
         fail = true;
-        failMessage = _("There is no output in the control system.");
+        m_failMessage = _("There is no output in the control system.");
     }
     if(!fail) {
         if(m_inputControl->GetChildList().size() == 0) {
             fail = true;
-            failMessage = _("Input not connected.");
+            m_failMessage = _("Input not connected.");
         }
     }
 
     m_timeStep = timeStep;
     m_integrationError = integrationError;
     if(!fail) {
-        if(!InitializeValues(input, startAllZero)) {
+        if(!InitializeValues(false)) {
             fail = true;
-            failMessage = _("It was not possible to initialize the control system.");
+            m_failMessage = _("It was not possible to initialize the control system.");
         }
     }
 
     if(fail) {
-        wxMessageDialog msgDialog(parent, failMessage, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        wxMessageDialog msgDialog(parent, m_failMessage, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     } else {
         m_isOK = true;
     }
 }
 
-bool ControlElementSolver::InitializeValues(double input, bool startAllZero)
+bool ControlElementSolver::InitializeValues(bool startAllZero)
 {
     // Reset Elements values
     auto elementList = m_ctrlContainer->GetControlElementsList();
@@ -147,7 +136,7 @@ bool ControlElementSolver::InitializeValues(double input, bool startAllZero)
         while(error > minError) {
             prevSol = currentSol;
             prevError = error;
-            SolveNextStep(input);
+            SolveNextStep();
             currentSol = GetLastSolution();
             numIt++;
             error = std::abs(prevSol - currentSol);
@@ -160,7 +149,10 @@ bool ControlElementSolver::InitializeValues(double input, bool startAllZero)
                     m_timeStep /= 1.5;
                 }
             }
-            if(numIt >= maxIteration) return false;
+            if(numIt >= maxIteration) {
+                m_failMessage = _("It was not possible to initialize the control system.");
+                return false;
+            }
         }
         m_timeStep = origTimeStep;
         m_solutions.clear();
@@ -169,7 +161,7 @@ bool ControlElementSolver::InitializeValues(double input, bool startAllZero)
     return true;
 }
 
-void ControlElementSolver::SolveNextStep(double input)
+void ControlElementSolver::SolveNextStep()
 {
     // Set all elements as not solved
     auto elementList = m_ctrlContainer->GetControlElementsList();
@@ -183,12 +175,12 @@ void ControlElementSolver::SolveNextStep(double input)
         cLine->SetSolved(false);
     }
 
-    // Get first node and set input value on connected lines
+    // Get first node connection
     ConnectionLine* firstConn = static_cast<ConnectionLine*>(m_inputControl->GetChildList()[0]);
-    m_inputControl->SetSolved();
+    /*m_inputControl->SetSolved();
     firstConn->SetValue(input);
     firstConn->SetSolved();
-    FillAllConnectedChildren(firstConn);
+    FillAllConnectedChildren(firstConn);*/
 
     // Set value to the connected lines in constants
     auto constantList = m_ctrlContainer->GetConstantList();
@@ -198,6 +190,43 @@ void ControlElementSolver::SolveNextStep(double input)
             constant->SetSolved();
             ConnectionLine* child = static_cast<ConnectionLine*>(constant->GetChildList()[0]);
             child->SetValue(constant->GetValue());
+            child->SetSolved();
+            FillAllConnectedChildren(child);
+        }
+    }
+
+    // Set value to the connected lines in inputs
+    auto ioList = m_ctrlContainer->GetIOControlList();
+    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
+        IOControl* io = *it;
+        if(io->GetChildList().size() == 1) {
+            io->SetSolved();
+            ConnectionLine* child = static_cast<ConnectionLine*>(io->GetChildList()[0]);
+            switch(io->GetValue()) {
+                case IOControl::IN_TERMINAL_VOLTAGE: {
+                    child->SetValue(m_terminalVoltage);
+                } break;
+                case IOControl::IN_VELOCITY: {
+                    child->SetValue(m_velocity);
+                } break;
+                case IOControl::IN_ACTIVE_POWER: {
+                    child->SetValue(m_activePower);
+                } break;
+                case IOControl::IN_REACTIVE_POWER: {
+                    child->SetValue(m_reactivePower);
+                } break;
+                case IOControl::IN_INITIAL_TERMINAL_VOLTAGE: {
+                    child->SetValue(m_initTerminalVoltage);
+                } break;
+                case IOControl::IN_INITIAL_MEC_POWER: {
+                    child->SetValue(m_initMecPower);
+                } break;
+                case IOControl::IN_INITIAL_VELOCITY: {
+                    child->SetValue(m_initVelocity);
+                } break;
+                default:
+                    break;
+            }
             child->SetSolved();
             FillAllConnectedChildren(child);
         }

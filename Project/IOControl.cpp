@@ -178,6 +178,14 @@ wxString IOControl::GenerateText()
             m_ioNodeType = Node::NODE_IN;
             return _("Pm");
         } break;
+        case IN_INITIAL_TERMINAL_VOLTAGE: {
+            m_ioNodeType = Node::NODE_IN;
+            return _("Vt0");
+        } break;
+        case IN_INITIAL_MEC_POWER: {
+            m_ioNodeType = Node::NODE_IN;
+            return _("Pm0");
+        } break;
     }
     return "";
 }

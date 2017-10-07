@@ -67,7 +67,9 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
         data.avr = new ControlElementContainer();
         m_syncGenerator->SetElectricalData(data);
     }
-    ControlEditor* cEditor = new ControlEditor(m_parent, IOControl::IN_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
+    ControlEditor* cEditor = new ControlEditor(
+        m_parent, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
+                      IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::OUT_FIELD_VOLTAGE);
     cEditor->SetElementsList(data.avr->GetControlElementsList());
     cEditor->SetConnectionsList(data.avr->GetConnectionLineList());
     cEditor->SetControlContainer(data.avr);
@@ -86,7 +88,9 @@ void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
         data.speedGov = new ControlElementContainer();
         m_syncGenerator->SetElectricalData(data);
     }
-    ControlEditor* cEditor = new ControlEditor(m_parent, IOControl::IN_VELOCITY | IOControl::OUT_MEC_POWER);
+    ControlEditor* cEditor =
+        new ControlEditor(m_parent, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
+                                        IOControl::IN_INITIAL_VELOCITY | IOControl::OUT_MEC_POWER);
     cEditor->SetElementsList(data.speedGov->GetControlElementsList());
     cEditor->SetConnectionsList(data.speedGov->GetConnectionLineList());
     cEditor->SetControlContainer(data.speedGov);

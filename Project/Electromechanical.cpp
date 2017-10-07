@@ -606,10 +606,16 @@ bool Electromechanical::InitializeDynamicElements()
             // Initialize controllers
             if(data.useAVR) {
                 if(data.avrSolver) delete data.avrSolver;
-                data.avrSolver = new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance,
-                                                          false, std::abs(data.terminalVoltage), m_parent);
+                data.avrSolver =
+                    new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+                data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
+                data.avrSolver->SetInitialTerminalVoltage(std::abs(data.terminalVoltage));
+                data.avrSolver->SetActivePower(dataPU.activePower);
+                data.avrSolver->SetReactivePower(dataPU.reactivePower);
+                data.avrSolver->InitializeValues(false);
                 if(!data.avrSolver->IsOK()) {
-                    m_errorMsg = _("Error on initializate the AVR of \"") + data.name + _("\".");
+                    m_errorMsg = _("Error on initializate the AVR of \"") + data.name + wxT("\".\n") +
+                                 data.avrSolver->GetErrorMessage();
                     syncGenerator->SetElectricalData(data);
                     return false;
                 }
@@ -617,9 +623,16 @@ bool Electromechanical::InitializeDynamicElements()
             if(data.useSpeedGovernor) {
                 if(data.speedGovSolver) delete data.speedGovSolver;
                 data.speedGovSolver = new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier,
-                                                               m_tolerance, false, data.speed, m_parent);
+                                                               m_tolerance, m_parent);
+                data.speedGovSolver->SetActivePower(dataPU.activePower);
+                data.speedGovSolver->SetReactivePower(dataPU.reactivePower);
+                data.speedGovSolver->SetVelocity(data.speed);
+                data.speedGovSolver->SetInitialVelocity(data.speed);
+                data.speedGovSolver->SetInitialMecPower(data.pm);
+                data.speedGovSolver->InitializeValues(false);
                 if(!data.speedGovSolver->IsOK()) {
-                    m_errorMsg = _("Error on initializate the speed governor of \"") + data.name + _("\".");
+                    m_errorMsg = _("Error on initializate the speed governor of \"") + data.name + wxT("\".\n") +
+                                 data.speedGovSolver->GetErrorMessage();
                     syncGenerator->SetElectricalData(data);
                     return false;
                 }
@@ -901,12 +914,22 @@ bool Electromechanical::SolveSynchronousMachines()
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
         if(data.useAVR && data.avrSolver) {
-            for(int i = 0; i < ctrlRatio; ++i) data.avrSolver->SolveNextStep(std::abs(data.terminalVoltage));
+            data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
+            data.avrSolver->SetActivePower(data.electricalPower.real());
+            data.avrSolver->SetReactivePower(data.electricalPower.imag());
+
+            for(int i = 0; i < ctrlRatio; ++i) data.avrSolver->SolveNextStep();
+
             data.fieldVoltage = data.initialFieldVoltage + data.avrSolver->GetLastSolution();
         }
 
         if(data.useSpeedGovernor && data.speedGovSolver) {
-            for(int i = 0; i < ctrlRatio; ++i) data.speedGovSolver->SolveNextStep(data.speed);
+            data.speedGovSolver->SetVelocity(data.speed);
+            data.speedGovSolver->SetActivePower(data.electricalPower.real());
+            data.speedGovSolver->SetReactivePower(data.electricalPower.imag());
+
+            for(int i = 0; i < ctrlRatio; ++i) data.speedGovSolver->SolveNextStep();
+
             data.pm = data.speedGovSolver->GetLastSolution();
         }
         syncGenerator->SetElectricalData(data);
