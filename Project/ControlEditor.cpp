@@ -237,51 +237,50 @@ void ControlEditor::AddElement(ControlElementButtonID id)
     switch(id) {
         case ID_IO: {
             m_mode = MODE_INSERT;
-            IOControl* io = new IOControl(m_ioFlags, m_lastElementID);
+            IOControl* io = new IOControl(m_ioFlags, GetNextID());
             m_elementList.push_back(io);
         } break;
         case ID_TF: {
             m_mode = MODE_INSERT;
-            TransferFunction* tf = new TransferFunction(m_lastElementID);
+            TransferFunction* tf = new TransferFunction(GetNextID());
             m_elementList.push_back(tf);
         } break;
         case ID_SUM: {
             m_mode = MODE_INSERT;
-            Sum* sum = new Sum(m_lastElementID);
+            Sum* sum = new Sum(GetNextID());
             m_elementList.push_back(sum);
         } break;
         case ID_CONST: {
             m_mode = MODE_INSERT;
-            Constant* constant = new Constant(m_lastElementID);
+            Constant* constant = new Constant(GetNextID());
             m_elementList.push_back(constant);
         } break;
         case ID_LIMITER: {
             m_mode = MODE_INSERT;
-            Limiter* limiter = new Limiter(m_lastElementID);
+            Limiter* limiter = new Limiter(GetNextID());
             m_elementList.push_back(limiter);
         } break;
         case ID_GAIN: {
             m_mode = MODE_INSERT;
-            Gain* gain = new Gain(m_lastElementID);
+            Gain* gain = new Gain(GetNextID());
             m_elementList.push_back(gain);
         } break;
         case ID_MULT: {
             m_mode = MODE_INSERT;
-            Multiplier* mult = new Multiplier(m_lastElementID);
+            Multiplier* mult = new Multiplier(GetNextID());
             m_elementList.push_back(mult);
         } break;
         case ID_EXP: {
             m_mode = MODE_INSERT;
-            Exponential* exp = new Exponential(m_lastElementID);
+            Exponential* exp = new Exponential(GetNextID());
             m_elementList.push_back(exp);
         } break;
         case ID_RATELIM: {
             m_mode = MODE_INSERT;
-            RateLimiter* rateLim = new RateLimiter(m_lastElementID);
+            RateLimiter* rateLim = new RateLimiter(GetNextID());
             m_elementList.push_back(rateLim);
         } break;
     }
-    m_lastElementID++;
 }
 
 void ControlEditor::OnPaint(wxPaintEvent& event)
@@ -366,8 +365,7 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
                 Node* node = *itN;
                 if(node->Contains(m_camera->ScreenToWorld(clickPoint))) {
                     m_mode = MODE_INSERT_LINE;
-                    ConnectionLine* line = new ConnectionLine(node, m_lastElementID);
-                    m_lastElementID++;
+                    ConnectionLine* line = new ConnectionLine(node, GetNextID());
                     m_connectionList.push_back(line);
                     element->AddChild(line);
                     line->AddParent(element);
@@ -757,8 +755,6 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
                                   wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
-
-    SetLastElementID();
     Redraw();
     event.Skip();
 }
@@ -881,16 +877,17 @@ void ControlEditor::ConsolidateTexts()
     }
 }
 
-void ControlEditor::SetLastElementID()
+int ControlEditor::GetNextID()
 {
     int id = 0;
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-        int elementID = (*it)->GetID();
-        if(id < elementID) id = elementID;
+        ControlElement* element = *it;
+        if(element->GetID() > id) id = element->GetID();
     }
     for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-        int elementID = (*it)->GetID();
-        if(id < elementID) id = elementID;
+        ConnectionLine* line = *it;
+        if(line->GetID() > id) id = line->GetID();
     }
-    m_lastElementID = ++id;
+    id++;
+    return id;
 }

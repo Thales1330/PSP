@@ -513,11 +513,6 @@ bool Electromechanical::InitializeDynamicElements()
                 double epq = vq0 + ra * iq0 - xp * id0;
                 sd = 1.0 + satF * std::pow(epq, 6);
                 xds = (xd - xp) / sd + xp;
-                /*CalculateSyncMachineSaturation(syncGenerator, id0, iq0, sq, sd, true, k);
-                xqs = (xq - xp) / sq + xp;
-                xds = (xd - xp) / sd + xp;
-                eq0 = data.terminalVoltage + std::complex<double>(ra, xqs) * ia;
-                delta = std::arg(eq0);*/
             }
 
             double ef0 = vq0 + ra * iq0 - xds * id0;
@@ -546,9 +541,6 @@ bool Electromechanical::InitializeDynamicElements()
 
             switch(data.model) {
                 case Machines::SM_MODEL_1: {
-                    // double tranXd = data.transXd * k;
-
-                    // data.tranEq = data.initialFieldVoltage + (xd - tranXd) * id0;
                     data.tranEq = std::abs(eq0);
 
                     data.tranEd = 0.0;
@@ -612,6 +604,8 @@ bool Electromechanical::InitializeDynamicElements()
                 data.avrSolver->SetInitialTerminalVoltage(std::abs(data.terminalVoltage));
                 data.avrSolver->SetActivePower(dataPU.activePower);
                 data.avrSolver->SetReactivePower(dataPU.reactivePower);
+                data.avrSolver->SetVelocity(data.speed);
+                data.avrSolver->SetInitialVelocity(data.speed);
                 data.avrSolver->InitializeValues(false);
                 if(!data.avrSolver->IsOK()) {
                     m_errorMsg = _("Error on initializate the AVR of \"") + data.name + wxT("\".\n") +
@@ -699,7 +693,6 @@ bool Electromechanical::CalculateMachinesCurrents()
             xdqs = 0.5 * (xds + xqs);
 
             std::complex<double> y0 = std::complex<double>(ra, -xdq) / std::complex<double>(ra * ra + xd * xq, 0.0);
-            // std::complex<double> iUnadjusted = y0 * e;
             std::complex<double> iUnadjusted = y0 * v;
 
             // [Ref] Arrillaga, J.; Arnold, C. P.. "Computer Modelling of Electrical Power Systems". Pg. 225-226
@@ -778,8 +771,6 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     if(data.model == Machines::SM_MODEL_2 || data.model == Machines::SM_MODEL_3 || data.model == Machines::SM_MODEL_4 ||
        data.model == Machines::SM_MODEL_5) {
         data.icTranEq.m = m_timeStep / (2.0f * transTd0 + m_timeStep);
-        // data.icTranEq.c = (1.0f - 2.0 * data.icTranEq.m) * data.tranEq +
-        //                  data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
         data.icTranEq.c = (1.0 - data.icTranEq.m * (1.0 + data.sd)) * data.tranEq +
                           data.icTranEq.m * (data.fieldVoltage + (syncXd - transXd) * id);
     }
@@ -787,7 +778,6 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     // Ed'
     if(data.model == Machines::SM_MODEL_3 || data.model == Machines::SM_MODEL_4 || data.model == Machines::SM_MODEL_5) {
         data.icTranEd.m = m_timeStep / (2.0f * transTq0 + m_timeStep);
-        // data.icTranEd.c = (1.0f - 2.0f * data.icTranEd.m) * data.tranEd - data.icTranEd.m * (syncXq - transXq) * iq;
         data.icTranEd.c =
             (1.0 - data.icTranEd.m * (1.0 + data.sq)) * data.tranEd - data.icTranEd.m * (syncXq - transXq) * iq;
     }
@@ -795,22 +785,17 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
     // Eq''
     if(data.model == Machines::SM_MODEL_4 || data.model == Machines::SM_MODEL_5) {
         data.icSubEq.m = m_timeStep / (2.0f * subTd0 + m_timeStep);
-        // data.icSubEq.c =
-        //    (1.0f - 2.0f * data.icSubEq.m) * data.subEq + data.icSubEq.m * (data.tranEq + (transXd - subXd) * id);
         data.icSubEq.c = (1.0 - data.icSubEq.m * (1.0 + data.sd)) * data.subEq +
                          data.icSubEq.m * (data.sd * data.tranEq + (transXd - subXd) * id);
     }
     // Ed''
     if(data.model == Machines::SM_MODEL_4) {
         data.icSubEd.m = m_timeStep / (2.0f * subTq0 + m_timeStep);
-        // data.icSubEd.c = (1.0f - 2.0f * data.icSubEd.m) * data.subEd - data.icSubEd.m * (syncXq - subXq) * iq;
         data.icSubEd.c =
             (1.0f - data.icSubEd.m * (1.0 + data.sq)) * data.subEd - data.icSubEd.m * (syncXq - subXq) * iq;
     }
     if(data.model == Machines::SM_MODEL_5) {
         data.icSubEd.m = m_timeStep / (2.0f * subTq0 + m_timeStep);
-        // data.icSubEd.c =
-        //    (1.0f - 2.0f * data.icSubEd.m) * data.subEd + data.icSubEd.m * (data.tranEd - (transXq - subXq) * iq);
         data.icSubEd.c = (1.0f - data.icSubEd.m * (1.0 + data.sq)) * data.subEd +
                          data.icSubEd.m * (data.sq * data.tranEd - (transXq - subXq) * iq);
     }
@@ -917,10 +902,11 @@ bool Electromechanical::SolveSynchronousMachines()
             data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
             data.avrSolver->SetActivePower(data.electricalPower.real());
             data.avrSolver->SetReactivePower(data.electricalPower.imag());
+            data.avrSolver->SetVelocity(data.speed);
 
             for(int i = 0; i < ctrlRatio; ++i) data.avrSolver->SolveNextStep();
 
-            data.fieldVoltage = data.initialFieldVoltage + data.avrSolver->GetLastSolution();
+            data.fieldVoltage = data.initialFieldVoltage + data.avrSolver->GetFieldVoltage();
         }
 
         if(data.useSpeedGovernor && data.speedGovSolver) {
@@ -930,7 +916,7 @@ bool Electromechanical::SolveSynchronousMachines()
 
             for(int i = 0; i < ctrlRatio; ++i) data.speedGovSolver->SolveNextStep();
 
-            data.pm = data.speedGovSolver->GetLastSolution();
+            data.pm = data.speedGovSolver->GetMechanicalPower();
         }
         syncGenerator->SetElectricalData(data);
     }

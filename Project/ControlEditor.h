@@ -140,7 +140,7 @@ class ControlEditor : public ControlEditorBase
     void BuildControlElementPanel();
     void SetViewport();
     void ConsolidateTexts();
-    void SetLastElementID();
+    int GetNextID();
 
     std::vector<ConnectionLine*>::iterator DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it);
 
@@ -159,8 +159,6 @@ class ControlEditor : public ControlEditorBase
 
     bool m_firstDraw = true;
     int m_ioFlags;
-
-    int m_lastElementID = 0;
 
     int m_inputType = 0;
     double m_startTime = 1.0;

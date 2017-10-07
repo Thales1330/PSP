@@ -60,22 +60,22 @@ IOControlForm::IOControlForm(wxWindow* parent, IOControl* ioControl) : IOControl
     }
 
     if(ioFlags & IOControl::IN_INITIAL_MEC_POWER) {
-        m_choiceOutput->Append(_("Initial mechanical power"));
-        m_outputFlags.push_back(IOControl::IN_INITIAL_MEC_POWER);
-        if(m_ioControl->GetValue() == IOControl::IN_INITIAL_MEC_POWER) outChoiceNumber = (int)m_outputFlags.size() - 1;
+        m_choiceInput->Append(_("Initial mechanical power"));
+        m_inputFlags.push_back(IOControl::IN_INITIAL_MEC_POWER);
+        if(m_ioControl->GetValue() == IOControl::IN_INITIAL_MEC_POWER) inChoiceNumber = (int)m_inputFlags.size() - 1;
     }
 
     if(ioFlags & IOControl::IN_INITIAL_TERMINAL_VOLTAGE) {
-        m_choiceOutput->Append(_("Initial terminal voltage"));
-        m_outputFlags.push_back(IOControl::IN_INITIAL_TERMINAL_VOLTAGE);
+        m_choiceInput->Append(_("Initial terminal voltage"));
+        m_inputFlags.push_back(IOControl::IN_INITIAL_TERMINAL_VOLTAGE);
         if(m_ioControl->GetValue() == IOControl::IN_INITIAL_TERMINAL_VOLTAGE)
-            outChoiceNumber = (int)m_outputFlags.size() - 1;
+            inChoiceNumber = (int)m_inputFlags.size() - 1;
     }
 
     if(ioFlags & IOControl::IN_INITIAL_VELOCITY) {
-        m_choiceOutput->Append(_("Initial velocity"));
-        m_outputFlags.push_back(IOControl::IN_INITIAL_VELOCITY);
-        if(m_ioControl->GetValue() == IOControl::IN_INITIAL_VELOCITY) outChoiceNumber = (int)m_outputFlags.size() - 1;
+        m_choiceInput->Append(_("Initial velocity"));
+        m_inputFlags.push_back(IOControl::IN_INITIAL_VELOCITY);
+        if(m_ioControl->GetValue() == IOControl::IN_INITIAL_VELOCITY) inChoiceNumber = (int)m_inputFlags.size() - 1;
     }
 
     if(inChoiceNumber != -1) {

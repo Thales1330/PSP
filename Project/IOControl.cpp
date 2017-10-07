@@ -152,6 +152,7 @@ void IOControl::Rotate(bool clockwise)
 wxString IOControl::GenerateText()
 {
     wxString omega = wxString::FromUTF8("\xCF\x89");
+    wxString subZero = wxString::FromUTF8("\xE2\x82\x92");
 
     switch(m_value) {
         case IN_TERMINAL_VOLTAGE: {
@@ -179,12 +180,16 @@ wxString IOControl::GenerateText()
             return _("Pm");
         } break;
         case IN_INITIAL_TERMINAL_VOLTAGE: {
-            m_ioNodeType = Node::NODE_IN;
-            return _("Vt0");
+            m_ioNodeType = Node::NODE_OUT;
+            return _("Vt") + subZero;
         } break;
         case IN_INITIAL_MEC_POWER: {
-            m_ioNodeType = Node::NODE_IN;
-            return _("Pm0");
+            m_ioNodeType = Node::NODE_OUT;
+            return _("Pm") + subZero;
+        } break;
+        case IN_INITIAL_VELOCITY: {
+            m_ioNodeType = Node::NODE_OUT;
+            return omega + subZero;
         } break;
     }
     return "";

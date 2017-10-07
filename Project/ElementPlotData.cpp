@@ -33,7 +33,7 @@ void ElementPlotData::AddData(std::vector<double> values, wxString name)
     data->SetAxis(0);
     data->SetColour(*wxBLACK);
     data->SetPenType(wxPENSTYLE_SOLID);
-    data->SetThick(2);
+    data->SetThick(1);
 
     m_elementData.push_back(data);
 }

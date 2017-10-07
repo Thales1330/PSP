@@ -85,7 +85,7 @@ void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double 
     m_timeStep = timeStep;
     m_integrationError = integrationError;
     if(!fail) {
-        if(!InitializeValues(false)) {
+        if(!InitializeValues(true)) {
             fail = true;
             m_failMessage = _("It was not possible to initialize the control system.");
         }
@@ -178,7 +178,7 @@ void ControlElementSolver::SolveNextStep()
     // Get first node connection
     ConnectionLine* firstConn = static_cast<ConnectionLine*>(m_inputControl->GetChildList()[0]);
     /*m_inputControl->SetSolved();
-    firstConn->SetValue(input);
+    firstConn->SetValue(1);
     firstConn->SetSolved();
     FillAllConnectedChildren(firstConn);*/
 
@@ -202,7 +202,10 @@ void ControlElementSolver::SolveNextStep()
         if(io->GetChildList().size() == 1) {
             io->SetSolved();
             ConnectionLine* child = static_cast<ConnectionLine*>(io->GetChildList()[0]);
+            if(m_inputControl == io) firstConn = child;
+            bool inputType = true;
             switch(io->GetValue()) {
+                io->SetSolved();
                 case IOControl::IN_TERMINAL_VOLTAGE: {
                     child->SetValue(m_terminalVoltage);
                 } break;
@@ -224,11 +227,14 @@ void ControlElementSolver::SolveNextStep()
                 case IOControl::IN_INITIAL_VELOCITY: {
                     child->SetValue(m_initVelocity);
                 } break;
-                default:
-                    break;
+                default: {
+                    inputType = false;
+                } break;
             }
-            child->SetSolved();
-            FillAllConnectedChildren(child);
+            if(inputType) {
+                child->SetSolved();
+                FillAllConnectedChildren(child);
+            }
         }
     }
 
@@ -262,12 +268,32 @@ void ControlElementSolver::SolveNextStep()
         }
     }
 
-    // Set the control system step output.
-    if(m_outputControl->GetChildList().size() == 1) {
+    // Set the control system output.
+    /*if(m_outputControl->GetChildList().size() == 1) {
         ConnectionLine* cLine = static_cast<ConnectionLine*>(m_outputControl->GetChildList()[0]);
         m_solutions.push_back(cLine->GetValue());
     } else
-        m_solutions.push_back(0.0);
+        m_solutions.push_back(0.0);*/
+    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
+        IOControl* io = *it;
+        if(io->GetChildList().size() == 1) {
+            io->SetSolved();
+            ConnectionLine* child = static_cast<ConnectionLine*>(io->GetChildList()[0]);
+            switch(io->GetValue()) {
+                io->SetSolved();
+                case IOControl::OUT_MEC_POWER: {
+                    m_mecPower = child->GetValue();
+                    m_solutions.push_back(m_mecPower);
+                } break;
+                case IOControl::OUT_FIELD_VOLTAGE: {
+                    m_fieldVoltage = child->GetValue();
+                    m_solutions.push_back(m_fieldVoltage);
+                } break;
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 void ControlElementSolver::FillAllConnectedChildren(ConnectionLine* parent)
