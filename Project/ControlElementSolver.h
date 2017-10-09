@@ -65,8 +65,10 @@ class ControlElementSolver
     void SetInitialTerminalVoltage(double value) { m_initTerminalVoltage = value; }
     void SetInitialMecPower(double value) { m_initMecPower = value; }
     void SetInitialVelocity(double value) { m_initVelocity = value; }
+    void SetDeltaVelocity(double value) { m_deltaVelocity = value; }
     double GetFieldVoltage() { return m_fieldVoltage; }
     double GetMechanicalPower() { return m_mecPower; }
+    double GetVelocity() { return m_velocity; }
    protected:
     void Initialize(wxWindow* parent, double timeStep, double integrationError);
     void FillAllConnectedChildren(ConnectionLine* parent);
@@ -89,6 +91,7 @@ class ControlElementSolver
     double m_initTerminalVoltage = 0.0;
     double m_initMecPower = 0.0;
     double m_initVelocity = 0.0;
+    double m_deltaVelocity = 0.0;
     // Outputs
     double m_fieldVoltage = 0.0;
     double m_mecPower = 0.0;

@@ -153,6 +153,7 @@ wxString IOControl::GenerateText()
 {
     wxString omega = wxString::FromUTF8("\xCF\x89");
     wxString subZero = wxString::FromUTF8("\xE2\x82\x92");
+    wxString capDelta = wxString::FromUTF8("\xCE\x94");
 
     switch(m_value) {
         case IN_TERMINAL_VOLTAGE: {
@@ -190,6 +191,10 @@ wxString IOControl::GenerateText()
         case IN_INITIAL_VELOCITY: {
             m_ioNodeType = Node::NODE_OUT;
             return omega + subZero;
+        } break;
+        case IN_DELTA_VELOCITY: {
+            m_ioNodeType = Node::NODE_OUT;
+            return capDelta + omega;
         } break;
     }
     return "";

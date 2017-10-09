@@ -902,6 +902,7 @@ bool Electromechanical::SolveSynchronousMachines()
             data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
             data.avrSolver->SetActivePower(data.electricalPower.real());
             data.avrSolver->SetReactivePower(data.electricalPower.imag());
+            data.avrSolver->SetDeltaVelocity(data.speed - data.avrSolver->GetVelocity());
             data.avrSolver->SetVelocity(data.speed);
 
             for(int i = 0; i < ctrlRatio; ++i) data.avrSolver->SolveNextStep();

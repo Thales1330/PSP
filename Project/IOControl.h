@@ -45,6 +45,7 @@ class IOControl : public ControlElement
         IN_INITIAL_TERMINAL_VOLTAGE = 1 << 6,
         IN_INITIAL_MEC_POWER = 1 << 7,
         IN_INITIAL_VELOCITY = 1 << 8,
+        IN_DELTA_VELOCITY = 1 << 9,
     };
 
     IOControl(int ioFlags, int id);
