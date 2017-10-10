@@ -70,7 +70,7 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
     ControlEditor* cEditor = new ControlEditor(
         m_parent, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
                       IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY | IOControl::IN_INITIAL_VELOCITY |
-                      IOControl::IN_DELTA_VELOCITY | IOControl::OUT_FIELD_VOLTAGE);
+                      IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER | IOControl::OUT_FIELD_VOLTAGE);
     cEditor->SetElementsList(data.avr->GetControlElementsList());
     cEditor->SetConnectionsList(data.avr->GetConnectionLineList());
     cEditor->SetControlContainer(data.avr);

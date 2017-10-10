@@ -15,32 +15,30 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Multiplier.h"
+#include "Divider.h"
 #include "ConnectionLine.h"
 
-Multiplier::Multiplier(int id) : MathOperation(id) {}
-Multiplier::~Multiplier() {}
-void Multiplier::DrawSymbol() const
+Divider::Divider(int id) : MathOperation(id) {}
+Divider::~Divider() {}
+void Divider::DrawSymbol() const
 {
-    // Plot x.
+    // Plot divider.
     glLineWidth(2.0);
-    std::vector<wxPoint2DDouble> xSymbol;
-    xSymbol.push_back(m_position + wxPoint2DDouble(-5, -5));
-    xSymbol.push_back(m_position + wxPoint2DDouble(5, 5));
-    xSymbol.push_back(m_position + wxPoint2DDouble(-5, 5));
-    xSymbol.push_back(m_position + wxPoint2DDouble(5, -5));
+    std::vector<wxPoint2DDouble> mSymbol;
+    mSymbol.push_back(m_position + wxPoint2DDouble(-5, 0));
+    mSymbol.push_back(m_position + wxPoint2DDouble(5, 0));
     glColor4d(0.0, 0.3, 1.0, 1.0);
-    DrawLine(xSymbol, GL_LINES);
+    DrawLine(mSymbol, GL_LINES);
 }
 
-bool Multiplier::Solve(double input, double timeStep)
+bool Divider::Solve(double input, double timeStep)
 {
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
         if(node->GetNodeType() != Node::NODE_OUT) {
             if(!node->IsConnected()) {
-                inputVector.push_back(1.0);
+                inputVector.push_back(0.0);
             } else {
                 for(auto itC = m_childList.begin(), itCEnd = m_childList.end(); itC != itCEnd; ++itC) {
                     ConnectionLine* cLine = static_cast<ConnectionLine*>(*itC);
@@ -56,18 +54,21 @@ bool Multiplier::Solve(double input, double timeStep)
             }
         }
     }
+    if(inputVector.size() != 2) return false;
 
-    m_output = 1.0;
-    for(unsigned int i = 0; i < inputVector.size(); ++i) {
-        m_output *= inputVector[i];
+    // If the denominator is zero, set the output a big number (1e15).
+    if(std::abs(inputVector[1]) < 1e-15) {
+        m_output = 1e15;
+    } else {
+        m_output = inputVector[0] / inputVector[1];
     }
 
     return true;
 }
 
-Element* Multiplier::GetCopy()
+Element* Divider::GetCopy()
 {
-    Multiplier* copy = new Multiplier(m_elementID);
+    Divider* copy = new Divider(m_elementID);
     *copy = *this;
     return copy;
 }

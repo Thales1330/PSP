@@ -44,6 +44,8 @@ class RateLimiter;
 class Exponential;
 class Constant;
 class Gain;
+class MathOperation;
+class Divider;
 
 class ControlElementSolver;
 class ControlElementContainer;
@@ -51,7 +53,18 @@ class ControlElementContainer;
 class ChartView;
 class ElementDataObject;
 
-enum ControlElementButtonID { ID_IO = 0, ID_TF, ID_SUM, ID_CONST, ID_LIMITER, ID_GAIN, ID_MULT, ID_EXP, ID_RATELIM };
+enum ControlElementButtonID {
+    ID_IO = 0,
+    ID_TF,
+    ID_SUM,
+    ID_CONST,
+    ID_LIMITER,
+    ID_GAIN,
+    ID_MULT,
+    ID_EXP,
+    ID_RATELIM,
+    ID_MATH_DIV
+};
 
 /**
  * @class ControlElementButton

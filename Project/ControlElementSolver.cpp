@@ -230,6 +230,9 @@ void ControlElementSolver::SolveNextStep()
                 case IOControl::IN_DELTA_VELOCITY: {
                     child->SetValue(m_deltaVelocity);
                 } break;
+                case IOControl::IN_DELTA_ACTIVE_POWER: {
+                    child->SetValue(m_deltaPe);
+                } break;
                 default: {
                     inputType = false;
                 } break;

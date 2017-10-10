@@ -166,11 +166,11 @@ wxString IOControl::GenerateText()
         } break;
         case IN_ACTIVE_POWER: {
             m_ioNodeType = Node::NODE_OUT;
-            return _("Pe");
+            return _("P");
         } break;
         case IN_REACTIVE_POWER: {
             m_ioNodeType = Node::NODE_OUT;
-            return _("Qe");
+            return _("Q");
         } break;
         case OUT_FIELD_VOLTAGE: {
             m_ioNodeType = Node::NODE_IN;
@@ -195,6 +195,10 @@ wxString IOControl::GenerateText()
         case IN_DELTA_VELOCITY: {
             m_ioNodeType = Node::NODE_OUT;
             return capDelta + omega;
+        } break;
+        case IN_DELTA_ACTIVE_POWER: {
+            m_ioNodeType = Node::NODE_OUT;
+            return capDelta + _("P");
         } break;
     }
     return "";

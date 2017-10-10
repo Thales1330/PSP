@@ -34,6 +34,8 @@
           <File Name="RateLimiter.cpp"/>
           <File Name="Sum.cpp"/>
           <File Name="TransferFunction.cpp"/>
+          <File Name="Divider.cpp"/>
+          <File Name="MathOperation.cpp"/>
         </VirtualDirectory>
         <VirtualDirectory Name="graphical">
           <File Name="GraphicalElement.cpp"/>
@@ -149,6 +151,8 @@
           <File Name="RateLimiter.h"/>
           <File Name="Sum.h"/>
           <File Name="TransferFunction.h"/>
+          <File Name="Divider.h"/>
+          <File Name="MathOperation.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="power">
           <File Name="Branch.h"/>

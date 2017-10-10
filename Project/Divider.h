@@ -15,29 +15,29 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef MULTIPLIER_H
-#define MULTIPLIER_H
+#ifndef DIVIDER_H
+#define DIVIDER_H
 
 #include "MathOperation.h"
 
 class ConnectionLine;
 
 /**
- * @class Multiplier
+ * @class Divider
  * @author Thales Lima Oliveira <thales@ufu.br>
- * @date 05/10/2017
- * @brief Multiplies two inputs.
- * @file Multiplier.h
+ * @date 09/10/2017
+ * @brief Control element that divides two inputs.
+ * @file Divider.h
  */
-class Multiplier : public MathOperation
+class Divider : public MathOperation
 {
    public:
-    Multiplier(int id);
-    ~Multiplier();
+    Divider(int id);
+    ~Divider();
 
     virtual void DrawSymbol() const;
     virtual bool Solve(double input, double timeStep);
     virtual Element* GetCopy();
 };
 
-#endif  // MULTIPLIER_H
+#endif  // DIVIDER_H

@@ -900,6 +900,7 @@ bool Electromechanical::SolveSynchronousMachines()
         auto data = syncGenerator->GetElectricalData();
         if(data.useAVR && data.avrSolver) {
             data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
+            data.avrSolver->SetDeltaActivePower(data.electricalPower.real() - data.avrSolver->GetActivePower());
             data.avrSolver->SetActivePower(data.electricalPower.real());
             data.avrSolver->SetReactivePower(data.electricalPower.imag());
             data.avrSolver->SetDeltaVelocity(data.speed - data.avrSolver->GetVelocity());

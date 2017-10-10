@@ -32,6 +32,8 @@
 #include "Exponential.h"
 #include "Constant.h"
 #include "Gain.h"
+#include "MathOperation.h"
+#include "Divider.h"
 
 #include "ControlElementSolver.h"
 #include "ControlElementContainer.h"
@@ -199,6 +201,10 @@ void ControlEditor::BuildControlElementPanel()
                                  wxImage(exePath + "\\..\\data\\images\\control\\rateLimiter.png"), ID_RATELIM);
     wrapSizer->Add(rateLimButton, 0, wxALL, 5);
     rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
+    
+    ControlElementButton* divButton = new ControlElementButton(m_panelControlElements, _("Divider"), wxImage(exePath + "\\..\\data\\images\\control\\mult.png"), ID_MATH_DIV);
+    wrapSizer->Add(divButton, 0, wxALL, 5);
+    divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }
 
 void ControlEditor::LeftClickDown(wxMouseEvent& event)
@@ -280,6 +286,11 @@ void ControlEditor::AddElement(ControlElementButtonID id)
             RateLimiter* rateLim = new RateLimiter(GetNextID());
             m_elementList.push_back(rateLim);
         } break;
+        case ID_MATH_DIV: {
+            m_mode = MODE_INSERT;
+            Divider* divider = new Divider(GetNextID());
+            m_elementList.push_back(divider);
+        }
     }
 }
 
