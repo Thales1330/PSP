@@ -29,6 +29,8 @@ void Divider::DrawSymbol() const
     mSymbol.push_back(m_position + wxPoint2DDouble(5, 0));
     glColor4d(0.0, 0.3, 1.0, 1.0);
     DrawLine(mSymbol, GL_LINES);
+    DrawCircle(m_position + wxPoint2DDouble(0, -3), 2, 10, GL_POLYGON);
+    DrawCircle(m_position + wxPoint2DDouble(0, 3), 2, 10, GL_POLYGON);
 }
 
 bool Divider::Solve(double input, double timeStep)

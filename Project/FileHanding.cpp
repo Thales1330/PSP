@@ -1994,9 +1994,9 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         auto nodeList = AppendNode(doc, multiplierNode, "NodeList");
         SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
     }  //}
-    
+
     //{ Divider
-    /*auto dividersNode = AppendNode(doc, elementsNode, "DividerList");
+    auto dividersNode = AppendNode(doc, elementsNode, "DividerList");
     auto dividersList = ctrlContainer->GetDividerList();
     for(auto it = dividersList.begin(), itEnd = dividersList.end(); it != itEnd; ++it) {
         Divider* divider = *it;
@@ -2019,7 +2019,7 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         // Nodes
         auto nodeList = AppendNode(doc, dividerNode, "NodeList");
         SaveControlNodes(doc, nodeList, divider->GetNodeList());
-    }*/ //}
+    }  //}
 
     //{ Rate limiter
     auto rateLimitersNode = AppendNode(doc, elementsNode, "RateLimiterList");
@@ -2407,41 +2407,42 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         multiplierNode = multiplierNode->next_sibling("Multiplier");
     }
     //}
-    
+
     //{ Divider
-    /*auto dividerListNode = elementsNode->first_node("DividerList");
-    if(!dividerListNode) return false;
-    auto dividerNode = dividerListNode->first_node("Divider");
-    while(dividerNode) {
-        int id = GetAttributeValueInt(dividerNode, "ID");
-        Divider* divider = new Divider(id);
+    auto dividerListNode = elementsNode->first_node("DividerList");
+    if(dividerListNode) {
+        auto dividerNode = dividerListNode->first_node("Divider");
+        while(dividerNode) {
+            int id = GetAttributeValueInt(dividerNode, "ID");
+            Divider* divider = new Divider(id);
 
-        auto cadPropNode = dividerNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
+            auto cadPropNode = dividerNode->first_node("CADProperties");
+            if(!cadPropNode) return false;
 
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            auto position = cadPropNode->first_node("Position");
+            double posX = GetNodeValueDouble(position, "X");
+            double posY = GetNodeValueDouble(position, "Y");
+            auto size = cadPropNode->first_node("Size");
+            double width = GetNodeValueDouble(size, "Width");
+            double height = GetNodeValueDouble(size, "Height");
+            double angle = GetNodeValueDouble(cadPropNode, "Angle");
 
-        std::vector<Node*> nodeVector;
-        if(!OpenControlNodeList(dividerNode, nodeVector)) return false;
+            std::vector<Node*> nodeVector;
+            if(!OpenControlNodeList(dividerNode, nodeVector)) return false;
 
-        divider->SetWidth(width);
-        divider->SetHeight(height);
-        divider->SetAngle(angle);
-        divider->SetPosition(wxPoint2DDouble(posX, posY));
+            divider->SetWidth(width);
+            divider->SetHeight(height);
+            divider->SetAngle(angle);
+            divider->SetPosition(wxPoint2DDouble(posX, posY));
 
-        divider->StartMove(divider->GetPosition());
-        divider->SetNodeList(nodeVector);
-        divider->UpdatePoints();
-        elementList.push_back(divider);
+            divider->StartMove(divider->GetPosition());
+            divider->SetNodeList(nodeVector);
+            divider->UpdatePoints();
+            elementList.push_back(divider);
 
-        dividerNode = dividerNode->next_sibling("Divider");
-    }*/
+            dividerNode = dividerNode->next_sibling("Divider");
+        }
+    }
     //}
 
     //{ Rate limiter
