@@ -536,9 +536,6 @@ bool Electromechanical::InitializeDynamicElements()
             data.oldSd = sd;
             data.oldSq = sq;
 
-            m_sdC = sd;
-            m_sqC = sq;
-
             switch(data.model) {
                 case Machines::SM_MODEL_1: {
                     data.tranEq = std::abs(eq0);
@@ -834,16 +831,11 @@ bool Electromechanical::SolveSynchronousMachines()
             sd = 2.0 * sd - data.oldSd;
             sq = 2.0 * sq - data.oldSq;
 
-            m_sdC = sd;
-            m_sqC = sq;
-
             CalculateSyncMachineIntVariables(syncGenerator, id, iq, sd, sq, pe, k);
         } else {
             CalculateIntegrationConstants(syncGenerator, 0.0f, 0.0f);
         }
     }
-
-    m_wError = 0;
 
     double error = 1.0;
     int iterations = 0;
@@ -891,7 +883,6 @@ bool Electromechanical::SolveSynchronousMachines()
             return false;
         }
     }
-    m_numIt = iterations;
 
     // Solve controllers.
     int ctrlRatio = static_cast<int>(1 / m_ctrlTimeStepMultiplier);
@@ -949,11 +940,6 @@ void Electromechanical::SaveData()
             bus->SetElectricalData(data);
         }
     }
-
-    m_wErrorVector.push_back(m_wError);
-    m_numItVector.push_back(m_numIt);
-    m_sdCVector.push_back(m_sdC);
-    m_sqCVector.push_back(m_sqC);
 }
 
 void Electromechanical::SetSyncMachinesModel()
@@ -1022,8 +1008,6 @@ double Electromechanical::CalculateSyncMachineIntVariables(SyncGenerator* syncGe
     // Mechanical differential equations.
     double w = data.icSpeed.c + data.icSpeed.m * (data.pm - pe);
     error = std::max(error, std::abs(data.speed - w) / m_refSpeed);
-
-    m_wError += std::abs(data.speed - w) / m_refSpeed;
 
     double delta = data.icDelta.c + data.icDelta.m * w;
     error = std::max(error, std::abs(data.delta - delta));

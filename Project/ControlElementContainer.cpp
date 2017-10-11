@@ -64,6 +64,7 @@ void ControlElementContainer::ClearContainer()
     m_rateLimiterList.clear();
     m_sumList.clear();
     m_tfList.clear();
+    m_dividerList.clear();
 }
 
 void ControlElementContainer::FillContainer(std::vector<ControlElement*> controlElementList,
@@ -113,7 +114,7 @@ void ControlElementContainer::GetContainerCopy(std::vector<ControlElement*>& con
     // Copy elements (exept connection line).
     int nodeID = 0;
     for(auto it = m_ctrlElementsList.begin(), itEnd = m_ctrlElementsList.end(); it != itEnd; ++it) {
-        Element* oldElement = *it;
+        ControlElement* oldElement = *it;
         ControlElement* copy = static_cast<ControlElement*>(oldElement->GetCopy());
         controlElementList.push_back(copy);
         // Copy nodes.

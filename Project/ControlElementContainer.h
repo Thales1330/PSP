@@ -71,7 +71,6 @@ class ControlElementContainer
    protected:
     std::vector<ControlElement*> m_ctrlElementsList;
     std::vector<Constant*> m_constantList;
-
     std::vector<ConnectionLine*> m_cLineList;
     std::vector<Exponential*> m_exponentialList;
     std::vector<Gain*> m_gainList;

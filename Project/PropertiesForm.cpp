@@ -532,7 +532,7 @@ AboutFormBase::AboutFormBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     flexGridSizer247->Add(m_staticTextVersionLabel, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_staticTextVersion = new wxStaticText(this, wxID_ANY, _("Alpha 2017w38b"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextVersion = new wxStaticText(this, wxID_ANY, _("Alpha 2017w41a"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
     flexGridSizer247->Add(m_staticTextVersion, 0, wxALL, WXC_FROM_DIP(5));
     
