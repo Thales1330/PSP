@@ -33,6 +33,7 @@ class ControlElement;
 #include "RateLimiter.h"
 #include "Sum.h"
 #include "TransferFunction.h"
+#include "Divider.h"
 
 /**
  * @class ControlElementContainer
@@ -66,10 +67,10 @@ class ControlElementContainer
     std::vector<RateLimiter*> GetRateLimiterList() const { return m_rateLimiterList; }
     std::vector<Sum*> GetSumList() const { return m_sumList; }
     std::vector<TransferFunction*> GetTFList() const { return m_tfList; }
+    std::vector<Divider*> GetDividerList() const { return m_dividerList; }
    protected:
     std::vector<ControlElement*> m_ctrlElementsList;
     std::vector<Constant*> m_constantList;
-
     std::vector<ConnectionLine*> m_cLineList;
     std::vector<Exponential*> m_exponentialList;
     std::vector<Gain*> m_gainList;
@@ -79,6 +80,7 @@ class ControlElementContainer
     std::vector<RateLimiter*> m_rateLimiterList;
     std::vector<Sum*> m_sumList;
     std::vector<TransferFunction*> m_tfList;
+    std::vector<Divider*> m_dividerList;
 };
 
 #endif  // CONTROLELEMENTCONTAINER_H

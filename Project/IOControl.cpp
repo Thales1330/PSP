@@ -152,6 +152,8 @@ void IOControl::Rotate(bool clockwise)
 wxString IOControl::GenerateText()
 {
     wxString omega = wxString::FromUTF8("\xCF\x89");
+    wxString subZero = wxString::FromUTF8("\xE2\x82\x92");
+    wxString capDelta = wxString::FromUTF8("\xCE\x94");
 
     switch(m_value) {
         case IN_TERMINAL_VOLTAGE: {
@@ -164,11 +166,11 @@ wxString IOControl::GenerateText()
         } break;
         case IN_ACTIVE_POWER: {
             m_ioNodeType = Node::NODE_OUT;
-            return _("Pe");
+            return _("P");
         } break;
         case IN_REACTIVE_POWER: {
             m_ioNodeType = Node::NODE_OUT;
-            return _("Qe");
+            return _("Q");
         } break;
         case OUT_FIELD_VOLTAGE: {
             m_ioNodeType = Node::NODE_IN;
@@ -177,6 +179,26 @@ wxString IOControl::GenerateText()
         case OUT_MEC_POWER: {
             m_ioNodeType = Node::NODE_IN;
             return _("Pm");
+        } break;
+        case IN_INITIAL_TERMINAL_VOLTAGE: {
+            m_ioNodeType = Node::NODE_OUT;
+            return _("Vt") + subZero;
+        } break;
+        case IN_INITIAL_MEC_POWER: {
+            m_ioNodeType = Node::NODE_OUT;
+            return _("Pm") + subZero;
+        } break;
+        case IN_INITIAL_VELOCITY: {
+            m_ioNodeType = Node::NODE_OUT;
+            return omega + subZero;
+        } break;
+        case IN_DELTA_VELOCITY: {
+            m_ioNodeType = Node::NODE_OUT;
+            return capDelta + omega;
+        } break;
+        case IN_DELTA_ACTIVE_POWER: {
+            m_ioNodeType = Node::NODE_OUT;
+            return capDelta + _("P");
         } break;
     }
     return "";

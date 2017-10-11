@@ -59,6 +59,37 @@ IOControlForm::IOControlForm(wxWindow* parent, IOControl* ioControl) : IOControl
         if(m_ioControl->GetValue() == IOControl::OUT_MEC_POWER) outChoiceNumber = (int)m_outputFlags.size() - 1;
     }
 
+    if(ioFlags & IOControl::IN_INITIAL_MEC_POWER) {
+        m_choiceInput->Append(_("Initial mechanical power"));
+        m_inputFlags.push_back(IOControl::IN_INITIAL_MEC_POWER);
+        if(m_ioControl->GetValue() == IOControl::IN_INITIAL_MEC_POWER) inChoiceNumber = (int)m_inputFlags.size() - 1;
+    }
+
+    if(ioFlags & IOControl::IN_INITIAL_TERMINAL_VOLTAGE) {
+        m_choiceInput->Append(_("Initial terminal voltage"));
+        m_inputFlags.push_back(IOControl::IN_INITIAL_TERMINAL_VOLTAGE);
+        if(m_ioControl->GetValue() == IOControl::IN_INITIAL_TERMINAL_VOLTAGE)
+            inChoiceNumber = (int)m_inputFlags.size() - 1;
+    }
+
+    if(ioFlags & IOControl::IN_INITIAL_VELOCITY) {
+        m_choiceInput->Append(_("Initial velocity"));
+        m_inputFlags.push_back(IOControl::IN_INITIAL_VELOCITY);
+        if(m_ioControl->GetValue() == IOControl::IN_INITIAL_VELOCITY) inChoiceNumber = (int)m_inputFlags.size() - 1;
+    }
+
+    if(ioFlags & IOControl::IN_DELTA_VELOCITY) {
+        m_choiceInput->Append(_("Velocity variation"));
+        m_inputFlags.push_back(IOControl::IN_DELTA_VELOCITY);
+        if(m_ioControl->GetValue() == IOControl::IN_DELTA_VELOCITY) inChoiceNumber = (int)m_inputFlags.size() - 1;
+    }
+
+    if(ioFlags & IOControl::IN_DELTA_ACTIVE_POWER) {
+        m_choiceInput->Append(_("Active power variation"));
+        m_inputFlags.push_back(IOControl::IN_DELTA_ACTIVE_POWER);
+        if(m_ioControl->GetValue() == IOControl::IN_DELTA_ACTIVE_POWER) inChoiceNumber = (int)m_inputFlags.size() - 1;
+    }
+
     if(inChoiceNumber != -1) {
         m_choiceInput->SetSelection(inChoiceNumber);
         m_checkBoxInput->SetValue(true);

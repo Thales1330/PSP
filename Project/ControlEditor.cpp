@@ -32,6 +32,8 @@
 #include "Exponential.h"
 #include "Constant.h"
 #include "Gain.h"
+#include "MathOperation.h"
+#include "Divider.h"
 
 #include "ControlElementSolver.h"
 #include "ControlElementContainer.h"
@@ -173,32 +175,37 @@ void ControlEditor::BuildControlElementPanel()
     wrapSizer->Add(constButton, 0, wxALL, 5);
     constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+    ControlElementButton* gainButton = new ControlElementButton(
+        m_panelControlElements, _("Gain"), wxImage(exePath + "\\..\\data\\images\\control\\gain.png"), ID_GAIN);
+    wrapSizer->Add(gainButton, 0, wxALL, 5);
+    gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
+
     ControlElementButton* limButton =
         new ControlElementButton(m_panelControlElements, _("Limiter"),
                                  wxImage(exePath + "\\..\\data\\images\\control\\limiter.png"), ID_LIMITER);
     wrapSizer->Add(limButton, 0, wxALL, 5);
     limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* gainButton = new ControlElementButton(
-        m_panelControlElements, _("Gain"), wxImage(exePath + "\\..\\data\\images\\control\\gain.png"), ID_GAIN);
-    wrapSizer->Add(gainButton, 0, wxALL, 5);
-    gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
+    ControlElementButton* rateLimButton =
+        new ControlElementButton(m_panelControlElements, _("Rate limiter"),
+                                 wxImage(exePath + "\\..\\data\\images\\control\\rateLimiter.png"), ID_RATELIM);
+    wrapSizer->Add(rateLimButton, 0, wxALL, 5);
+    rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* multButton = new ControlElementButton(
         m_panelControlElements, _("Multiplier"), wxImage(exePath + "\\..\\data\\images\\control\\mult.png"), ID_MULT);
     wrapSizer->Add(multButton, 0, wxALL, 5);
     multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+    ControlElementButton* divButton = new ControlElementButton(
+        m_panelControlElements, _("Divider"), wxImage(exePath + "\\..\\data\\images\\control\\div.png"), ID_MATH_DIV);
+    wrapSizer->Add(divButton, 0, wxALL, 5);
+    divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
+
     ControlElementButton* satButton = new ControlElementButton(
         m_panelControlElements, _("Exponential"), wxImage(exePath + "\\..\\data\\images\\control\\sat.png"), ID_EXP);
     wrapSizer->Add(satButton, 0, wxALL, 5);
     satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
-
-    ControlElementButton* rateLimButton =
-        new ControlElementButton(m_panelControlElements, _("Rate limiter"),
-                                 wxImage(exePath + "\\..\\data\\images\\control\\rateLimiter.png"), ID_RATELIM);
-    wrapSizer->Add(rateLimButton, 0, wxALL, 5);
-    rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }
 
 void ControlEditor::LeftClickDown(wxMouseEvent& event)
@@ -237,51 +244,55 @@ void ControlEditor::AddElement(ControlElementButtonID id)
     switch(id) {
         case ID_IO: {
             m_mode = MODE_INSERT;
-            IOControl* io = new IOControl(m_ioFlags, m_lastElementID);
+            IOControl* io = new IOControl(m_ioFlags, GetNextID());
             m_elementList.push_back(io);
         } break;
         case ID_TF: {
             m_mode = MODE_INSERT;
-            TransferFunction* tf = new TransferFunction(m_lastElementID);
+            TransferFunction* tf = new TransferFunction(GetNextID());
             m_elementList.push_back(tf);
         } break;
         case ID_SUM: {
             m_mode = MODE_INSERT;
-            Sum* sum = new Sum(m_lastElementID);
+            Sum* sum = new Sum(GetNextID());
             m_elementList.push_back(sum);
         } break;
         case ID_CONST: {
             m_mode = MODE_INSERT;
-            Constant* constant = new Constant(m_lastElementID);
+            Constant* constant = new Constant(GetNextID());
             m_elementList.push_back(constant);
         } break;
         case ID_LIMITER: {
             m_mode = MODE_INSERT;
-            Limiter* limiter = new Limiter(m_lastElementID);
+            Limiter* limiter = new Limiter(GetNextID());
             m_elementList.push_back(limiter);
         } break;
         case ID_GAIN: {
             m_mode = MODE_INSERT;
-            Gain* gain = new Gain(m_lastElementID);
+            Gain* gain = new Gain(GetNextID());
             m_elementList.push_back(gain);
         } break;
         case ID_MULT: {
             m_mode = MODE_INSERT;
-            Multiplier* mult = new Multiplier(m_lastElementID);
+            Multiplier* mult = new Multiplier(GetNextID());
             m_elementList.push_back(mult);
         } break;
         case ID_EXP: {
             m_mode = MODE_INSERT;
-            Exponential* exp = new Exponential(m_lastElementID);
+            Exponential* exp = new Exponential(GetNextID());
             m_elementList.push_back(exp);
         } break;
         case ID_RATELIM: {
             m_mode = MODE_INSERT;
-            RateLimiter* rateLim = new RateLimiter(m_lastElementID);
+            RateLimiter* rateLim = new RateLimiter(GetNextID());
             m_elementList.push_back(rateLim);
         } break;
+        case ID_MATH_DIV: {
+            m_mode = MODE_INSERT;
+            Divider* divider = new Divider(GetNextID());
+            m_elementList.push_back(divider);
+        }
     }
-    m_lastElementID++;
 }
 
 void ControlEditor::OnPaint(wxPaintEvent& event)
@@ -366,8 +377,7 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
                 Node* node = *itN;
                 if(node->Contains(m_camera->ScreenToWorld(clickPoint))) {
                     m_mode = MODE_INSERT_LINE;
-                    ConnectionLine* line = new ConnectionLine(node, m_lastElementID);
-                    m_lastElementID++;
+                    ConnectionLine* line = new ConnectionLine(node, GetNextID());
                     m_connectionList.push_back(line);
                     element->AddChild(line);
                     line->AddParent(element);
@@ -757,8 +767,6 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
                                   wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
     }
-
-    SetLastElementID();
     Redraw();
     event.Skip();
 }
@@ -801,7 +809,15 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
                     }
                 }
 
-                solver.SolveNextStep(input);
+                // solver.SolveNextStep(input);
+                solver.SetInitialTerminalVoltage(input);
+                solver.SetActivePower(input);
+                solver.SetInitialMecPower(input);
+                solver.SetInitialVelocity(input);
+                solver.SetReactivePower(input);
+                solver.SetTerminalVoltage(input);
+                solver.SetVelocity(input);
+                solver.SolveNextStep();
 
                 if(printTime >= printStep) {
                     time.push_back(currentTime);
@@ -873,16 +889,17 @@ void ControlEditor::ConsolidateTexts()
     }
 }
 
-void ControlEditor::SetLastElementID()
+int ControlEditor::GetNextID()
 {
     int id = 0;
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-        int elementID = (*it)->GetID();
-        if(id < elementID) id = elementID;
+        ControlElement* element = *it;
+        if(element->GetID() > id) id = element->GetID();
     }
     for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-        int elementID = (*it)->GetID();
-        if(id < elementID) id = elementID;
+        ConnectionLine* line = *it;
+        if(line->GetID() > id) id = line->GetID();
     }
-    m_lastElementID = ++id;
+    id++;
+    return id;
 }
