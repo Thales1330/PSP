@@ -10,5 +10,9 @@
       <Environment/>
       <Project Name="Project" ConfigName="Release"/>
     </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release_x86_32" Selected="no">
+      <Environment/>
+      <Project Name="Project" ConfigName="Release_x86_32"/>
+    </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

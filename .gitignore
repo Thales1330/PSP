@@ -3,6 +3,7 @@
 .clang/
 .codelite/
 Project/Release/
+Project/Release_32/
 Project/Debug/
 
 # Compiled source #
