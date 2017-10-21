@@ -17,12 +17,12 @@
 
 #include "ElementDataObject.h"
 
-ElementDataObject::ElementDataObject() : wxDataObjectSimple(wxDataFormat("PSPCopy"))
+ElementDataObject::ElementDataObject() : wxDataObjectSimple(wxDataFormat(wxT("PSPCopy")))
 {
     m_elementsLists = new ElementsLists();
 }
 
-ElementDataObject::ElementDataObject(std::vector<Element*> elementList) : wxDataObjectSimple(wxDataFormat("PSPCopy"))
+ElementDataObject::ElementDataObject(std::vector<Element*> elementList) : wxDataObjectSimple(wxDataFormat(wxT("PSPCopy")))
 {
     m_elementsLists = new ElementsLists();
     if(elementList.size() > 0) {
@@ -40,15 +40,22 @@ ElementDataObject::ElementDataObject(std::vector<Element*> elementList) : wxData
 }
 
 ElementDataObject::~ElementDataObject() {}
-size_t ElementDataObject::GetDataSize() const { return sizeof(void*); }
+size_t ElementDataObject::GetDataSize() const
+{
+    return sizeof(void*);
+    //return sizeof(*this);
+}
+
 bool ElementDataObject::GetDataHere(void* buf) const
 {
     *(ElementsLists**)buf = m_elementsLists;
+    //buf = m_elementsLists;
     return true;
 }
 
 bool ElementDataObject::SetData(size_t len, const void* buf)
 {
     m_elementsLists = *(ElementsLists**)buf;
+    //m_elementsLists = const_cast<ElementsLists*>(static_cast<const ElementsLists*>(buf));
     return true;
 }

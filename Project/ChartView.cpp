@@ -33,7 +33,7 @@ ChartView::ChartView(wxWindow* parent, std::vector<ElementPlotData> epdList, std
     // Create color property.
     m_pgPropColor = m_pgMgr->Insert(m_pgPropLineProp, 1, new wxColourProperty(_("Color")));
     m_pgPropColor->SetEditor(wxT("ChoiceAndButton"));
-    m_pgPropColor->SetValue(static_cast<wxVariant>(*wxBLACK));
+    m_pgPropColor->SetValue(static_cast<wxVariant>(static_cast<wxAny>(*wxBLACK)));
 
     // Set margins and axis limit to composed mode.
     m_pgPropMargins->SetValue(wxT("<composed>"));
@@ -144,7 +144,7 @@ void ChartView::OnPropertyGridChange(wxPropertyGridEvent& event)
                 if(isPlotting) {
                     wxColour colour = GetNextColour();
                     data->SetColour(colour);
-                    m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
+                    m_pgPropColor->SetValue(static_cast<wxVariant>(static_cast<wxAny>(colour)));
                     m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), true);
                 } else {
                     m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), false);
@@ -356,7 +356,7 @@ void ChartView::OnTreeItemActivated(wxTreeEvent& event)
         if(isPlotting) {
             wxColour colour = GetNextColour();
             data->SetColour(colour);
-            m_pgPropColor->SetValue(static_cast<wxVariant>(colour));
+            m_pgPropColor->SetValue(static_cast<wxVariant>(static_cast<wxAny>(colour)));
             m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), true);
         } else {
             m_treeCtrl->SetItemBold(m_treeCtrl->GetSelection(), false);

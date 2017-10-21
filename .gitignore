@@ -5,6 +5,8 @@
 Project/Release/
 Project/Release_32/
 Project/Debug/
+Project/Debug_Ubuntu_x64/
+Project/Release_Ubuntu_x64/
 
 # Compiled source #
 ###################

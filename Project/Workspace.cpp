@@ -1185,8 +1185,10 @@ void Workspace::CopySelection()
         }
     }
     ElementDataObject* dataObject = new ElementDataObject(selectedElements);
-    wxTheClipboard->SetData(dataObject);
-    wxTheClipboard->Close();
+    if(wxTheClipboard->Open()) {
+        wxTheClipboard->SetData(dataObject);
+        wxTheClipboard->Close();
+    }
 }
 
 bool Workspace::Paste()
@@ -1194,7 +1196,7 @@ bool Workspace::Paste()
     if(wxTheClipboard->Open()) {
         ElementDataObject dataObject;
 
-        if(wxTheClipboard->IsSupported(wxDataFormat("PSPCopy"))) {
+        if(wxTheClipboard->IsSupported(dataObject.GetFormat())) {
             if(!wxTheClipboard->GetData(dataObject)) {
                 wxMessageDialog dialog(this, _("It was not possible to paste from clipboard."), _("Error"),
                                        wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);

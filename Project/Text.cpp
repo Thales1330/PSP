@@ -99,7 +99,8 @@ void Text::SetText(wxString text)
 {
     glEnable(GL_TEXTURE_2D);
     m_text = text;
-    wxFont font(m_fontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    //wxFont font(m_fontSize, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    wxFont font = wxSystemSettings::GetFont(wxSYS_SYSTEM_FONT);
 
     wxScreenDC dc;
     GLuint* idString = NULL;

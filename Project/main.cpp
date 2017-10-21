@@ -17,7 +17,7 @@ class MainApp : public wxApp
     bool LoadInitFile(PropertiesData* propertiesData)
     {
         wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-        wxTextFile file(fn.GetPath() + "\\config.ini");
+        wxTextFile file(fn.GetPath() + wxFileName::GetPathSeparator() + "config.ini");
         auto data = propertiesData->GetGeneralPropertiesData();
 
         if(!file.Create()) {
@@ -79,7 +79,7 @@ class MainApp : public wxApp
         locale->Init(propertiesData->GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT);
 
         wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-        wxString langPath = fn.GetPath() + "\\..\\data\\lang";
+        wxString langPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\lang", wxPATH_WIN).GetPath();
         locale->AddCatalogLookupPathPrefix(langPath);
         // Load translation catalogs.
         locale->AddCatalog(wxT("pt_BR"), wxLANGUAGE_PORTUGUESE_BRAZILIAN);
@@ -110,7 +110,9 @@ class MainApp : public wxApp
             }
         }
         MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData, openFilePath);
+        #ifdef __WXMSW__
         mainFrame->SetIcon(wxICON(aaaaprogicon));
+        #endif
         SetTopWindow(mainFrame);
         return GetTopWindow()->Show();
     }

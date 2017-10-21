@@ -294,15 +294,15 @@ bool Line::GetContextMenu(wxMenu& menu)
     menu.Append(ID_EDIT_ELEMENT, _("Edit line"));
     if(m_activePickboxID == ID_PB_NONE) {
         wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
-        addNodeItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\addNode16.png"));
+        addNodeItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\addNode16.png", wxPATH_WIN).GetPath()));
         menu.Append(addNodeItem);
     } else {
         wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_REMOVE_NODE, _("Remove node"));
-        addNodeItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\removeNode16.png"));
+        addNodeItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\removeNode16.png", wxPATH_WIN).GetPath()));
         menu.Append(addNodeItem);
     }
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\delete16.png"));
+    deleteItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
     menu.Append(deleteItem);
     return true;
 }

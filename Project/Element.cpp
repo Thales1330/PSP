@@ -248,15 +248,15 @@ void Element::GeneralMenuItens(wxMenu& menu)
     wxString exePath = exeFileName.GetPath();
 
     wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
-    clockItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\rotateClock16.png"));
+    clockItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateClock16.png", wxPATH_WIN).GetPath()));
     menu.Append(clockItem);
 
     wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    counterClockItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\rotateCounterClock16.png"));
+    counterClockItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateCounterClock16.png", wxPATH_WIN).GetPath()));
     menu.Append(counterClockItem);
 
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(wxImage(exePath + "\\..\\data\\images\\menu\\delete16.png"));
+    deleteItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
     menu.Append(deleteItem);
 }
 
