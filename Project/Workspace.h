@@ -118,6 +118,7 @@ class Workspace : public WorkspaceBase
     void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
     void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
     void Redraw() { m_glCanvas->Refresh(); }
+    wxGLContext* GetOpenGLContext() { return m_glContext; }
     void RotateSelectedElements(bool clockwise = true);
     void DeleteSelectedElements();
     bool GetElementsCorners(wxPoint2DDouble& leftUpCorner,

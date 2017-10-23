@@ -74,7 +74,7 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
             data.avr = new ControlElementContainer();
             m_syncGenerator->SetElectricalData(data);
         }
-        ControlEditor* cEditor = new ControlEditor(NULL, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
+        ControlEditor* cEditor = new ControlEditor(m_parent, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
                 IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
                 IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
                 IOControl::OUT_FIELD_VOLTAGE);
@@ -82,7 +82,8 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
         cEditor->SetConnectionsList(data.avr->GetConnectionLineList());
         cEditor->SetControlContainer(data.avr);
         cEditor->Show();
-        EndModal(wxID_OK);
+        cEditor->SetJustOpened(true);
+        //EndModal(wxID_OK);
     }
 }
 
@@ -107,7 +108,8 @@ void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
         cEditor->SetConnectionsList(data.speedGov->GetConnectionLineList());
         cEditor->SetControlContainer(data.speedGov);
         cEditor->Show();
-        EndModal(wxID_OK);
+        cEditor->SetJustOpened(true);
+        //EndModal(wxID_OK);
     }
 }
 

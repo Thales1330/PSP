@@ -124,6 +124,7 @@ class ControlEditor : public ControlEditorBase
 
     virtual void AddElement(ControlElementButtonID id);
     virtual void Redraw() { m_glCanvas->Refresh(); }
+    virtual void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
     virtual void RotateSelectedElements(bool clockwise);
     virtual void DeleteSelectedElements();
     virtual void CheckConnections();
@@ -152,7 +153,6 @@ class ControlEditor : public ControlEditorBase
 
     void BuildControlElementPanel();
     void SetViewport();
-    void ConsolidateTexts();
     int GetNextID();
 
     std::vector<ConnectionLine*>::iterator DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it);
@@ -170,7 +170,7 @@ class ControlEditor : public ControlEditorBase
 
     ControlElementContainer* m_ctrlContainer = NULL;
 
-    bool m_firstDraw = true;
+    bool m_justOpened = false;
     int m_ioFlags;
 
     int m_inputType = 0;

@@ -135,6 +135,7 @@ ControlEditor::ControlEditor(wxWindow* parent, int ioflags) : ControlEditorBase(
 {
     BuildControlElementPanel();
     m_glContext = new wxGLContext(m_glCanvas);
+    m_glContext->SetCurrent(*m_glCanvas);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
     // m_camera->SetScale(1.2);
@@ -155,55 +156,67 @@ void ControlEditor::BuildControlElementPanel()
     wxString exePath = exeFileName.GetPath();
 
     ControlElementButton* ioButton = new ControlElementButton(
-        m_panelControlElements, _("In/Out"), wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\io.png", wxPATH_WIN).GetPath()), ID_IO);
+        m_panelControlElements, _("In/Out"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\io.png", wxPATH_WIN).GetPath()), ID_IO);
     wrapSizer->Add(ioButton, 0, wxALL, 5);
     ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* tfButton =
-        new ControlElementButton(m_panelControlElements, _("Transfer fcn"),
-                                 wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\transferFunc.png", wxPATH_WIN).GetPath()), ID_TF);
+    ControlElementButton* tfButton = new ControlElementButton(
+        m_panelControlElements, _("Transfer fcn"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\transferFunc.png", wxPATH_WIN).GetPath()),
+        ID_TF);
     wrapSizer->Add(tfButton, 0, wxALL, 5);
     tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* sumButton = new ControlElementButton(
-        m_panelControlElements, _("Sum"), wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sum.png", wxPATH_WIN).GetPath()), ID_SUM);
+        m_panelControlElements, _("Sum"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sum.png", wxPATH_WIN).GetPath()), ID_SUM);
     wrapSizer->Add(sumButton, 0, wxALL, 5);
     sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* constButton = new ControlElementButton(
-        m_panelControlElements, _("Constant"), wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\value.png", wxPATH_WIN).GetPath()), ID_CONST);
+        m_panelControlElements, _("Constant"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\value.png", wxPATH_WIN).GetPath()),
+        ID_CONST);
     wrapSizer->Add(constButton, 0, wxALL, 5);
     constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* gainButton = new ControlElementButton(
-        m_panelControlElements, _("Gain"), wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\gain.png", wxPATH_WIN).GetPath()), ID_GAIN);
+        m_panelControlElements, _("Gain"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\gain.png", wxPATH_WIN).GetPath()), ID_GAIN);
     wrapSizer->Add(gainButton, 0, wxALL, 5);
     gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* limButton =
-        new ControlElementButton(m_panelControlElements, _("Limiter"),
-                                 wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\limiter.png", wxPATH_WIN).GetPath()), ID_LIMITER);
+    ControlElementButton* limButton = new ControlElementButton(
+        m_panelControlElements, _("Limiter"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\limiter.png", wxPATH_WIN).GetPath()),
+        ID_LIMITER);
     wrapSizer->Add(limButton, 0, wxALL, 5);
     limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
-    ControlElementButton* rateLimButton =
-        new ControlElementButton(m_panelControlElements, _("Rate limiter"),
-                                 wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\rateLimiter.png", wxPATH_WIN).GetPath()), ID_RATELIM);
+    ControlElementButton* rateLimButton = new ControlElementButton(
+        m_panelControlElements, _("Rate limiter"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\rateLimiter.png", wxPATH_WIN).GetPath()),
+        ID_RATELIM);
     wrapSizer->Add(rateLimButton, 0, wxALL, 5);
     rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* multButton = new ControlElementButton(
-        m_panelControlElements, _("Multiplier"), wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mult.png", wxPATH_WIN).GetPath()), ID_MULT);
+        m_panelControlElements, _("Multiplier"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mult.png", wxPATH_WIN).GetPath()), ID_MULT);
     wrapSizer->Add(multButton, 0, wxALL, 5);
     multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* divButton = new ControlElementButton(
-        m_panelControlElements, _("Divider"), wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\div.png", wxPATH_WIN).GetPath()), ID_MATH_DIV);
+        m_panelControlElements, _("Divider"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\div.png", wxPATH_WIN).GetPath()),
+        ID_MATH_DIV);
     wrapSizer->Add(divButton, 0, wxALL, 5);
     divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* satButton = new ControlElementButton(
-        m_panelControlElements, _("Exponential"), wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sat.png", wxPATH_WIN).GetPath()), ID_EXP);
+        m_panelControlElements, _("Exponential"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sat.png", wxPATH_WIN).GetPath()), ID_EXP);
     wrapSizer->Add(satButton, 0, wxALL, 5);
     satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }
@@ -627,7 +640,19 @@ void ControlEditor::OnScroll(wxMouseEvent& event)
     Redraw();
 }
 
-void ControlEditor::OnIdle(wxIdleEvent& event) { ConsolidateTexts(); }
+void ControlEditor::OnIdle(wxIdleEvent& event)
+{
+    if(m_justOpened) {
+        this->Raise();
+        Redraw();
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            ControlElement* element = *it;
+            element->UpdateText();
+        }
+        Redraw();
+        m_justOpened = false;
+    }
+}
 void ControlEditor::OnKeyDown(wxKeyEvent& event)
 {
     char key = event.GetUnicodeKey();
@@ -870,23 +895,6 @@ void ControlEditor::OnClose(wxCloseEvent& event)
         m_ctrlContainer->FillContainer(this);
     }
     event.Skip();
-}
-
-void ControlEditor::ConsolidateTexts()
-{
-    // Solve wxGLString bug.
-    if(m_firstDraw) {
-        TransferFunction* tf = new TransferFunction(0);
-        m_elementList.push_back(tf);
-        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-            ControlElement* element = *it;
-            element->UpdateText();
-        }
-        Redraw();
-        m_elementList.pop_back();
-        delete tf;
-        m_firstDraw = false;
-    }
 }
 
 int ControlEditor::GetNextID()

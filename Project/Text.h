@@ -18,9 +18,11 @@
 #ifndef TEXT_H
 #define TEXT_H
 
+#include <GL/gl.h>
+#include <wx/dcmemory.h>
+
 #include "GraphicalElement.h"
 #include "PowerElement.h"
-#include "wxGLString.h"
 
 class TextForm;
 
@@ -103,14 +105,22 @@ class Text : public GraphicalElement
     int GetFontSize() const { return m_fontSize; }
     const ElectricalUnit GetUnit() const { return m_unit; }
     int GetDecimalPlaces() const { return m_decimalPlaces; }
+    
    protected:
-    wxGLString* m_glString = NULL;
-    wxGLStringArray* m_glStringArray = NULL;
+    void Init();
+    int RoundToPowerOfTwo(int value, int min = 32);
+    void TextToBitmap();
+    void LoadTextTexture();
 
     wxString m_text = _("Text");
     int m_numberOfLines;
     bool m_isMultlineText = false;
     int m_fontSize = 10;
+
+    wxBitmap m_bitmap = wxNullBitmap;
+    wxSize m_bitmapSize = wxSize(0, 0);
+    wxPoint2DDouble* m_textCoord = NULL;
+    GLuint* m_textureID = NULL;
 
     Element* m_element = NULL;
     ElementType m_elementType = TYPE_NONE;

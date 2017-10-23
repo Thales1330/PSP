@@ -1387,7 +1387,8 @@ void Workspace::SetElementList(std::vector<Element*> elementList)
 
 void Workspace::OnIdle(wxIdleEvent& event)
 {
-    // TODO: Find other solution to text displayed wrong on opened file.
+    // The OpenGL element (m_glCanvas) must be completely initialized (showed) to draw properly the textures.
+    // TODO(?): Find other solution to text displayed wrong on opened file.
     if(m_justOpened) {
         m_justOpened = false;
         UpdateTextElements();

@@ -32,18 +32,34 @@
 #include "Inductor.h"
 #include "Capacitor.h"
 
-Text::Text() : GraphicalElement() { SetText(m_text); }
+Text::Text() : GraphicalElement()
+{
+    Init();
+    SetText(m_text);
+}
 Text::Text(wxPoint2DDouble position) : GraphicalElement()
 {
     m_position = position;
+    Init();
     SetText(m_text);
 }
 
 Text::~Text()
 {
-    if(m_glString) delete m_glString;
-    if(m_glStringArray) delete m_glStringArray;
+    // if(m_glString) delete m_glString;
+    // if(m_glStringArray) delete m_glStringArray;
+    if(m_textureID) {
+        glDeleteTextures(1, m_textureID);
+    }
 }
+
+void Text::Init()
+{
+    m_textCoord = new wxPoint2DDouble[2];
+    m_textCoord[0] = wxPoint2DDouble(0, 1);
+    m_textCoord[1] = wxPoint2DDouble(1, 0);
+}
+
 bool Text::Contains(wxPoint2DDouble position) const
 {
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);
@@ -52,7 +68,7 @@ bool Text::Contains(wxPoint2DDouble position) const
 
 void Text::Draw(wxPoint2DDouble translation, double scale)
 {
-    wxScreenDC dc;
+    // wxScreenDC dc;
 
     // Draw selection rectangle
 
@@ -72,20 +88,34 @@ void Text::Draw(wxPoint2DDouble translation, double scale)
     // Draw text (layer 2)
     glEnable(GL_TEXTURE_2D);
     glColor4d(0.0, 0.0, 0.0, 1.0);
-    if(!m_isMultlineText) {  // Only one line
-        m_glString->bind();
-        m_glString->render(m_position.m_x, m_position.m_y);
-    } else {  // Multiples lines
-        m_glStringArray->bind();
-        // The text will be printed centralized.
-        double lineHeight = m_height / (double)m_numberOfLines;
-        for(int i = 0; i < m_numberOfLines; i++) {
-            m_glStringArray->get(i)
-                .render(m_position.m_x, m_position.m_y - m_height / 2.0 + lineHeight / 2.0 + lineHeight * double(i));
-        }
-    }
-    glDisable(GL_TEXTURE_2D);
+    if(m_textureID) {
+        glPushMatrix();
+        
+        glTranslated(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, 0);
+        if(m_angle != 0) glRotatef(m_angle, 0, 0, 1);
+        
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, m_textureID[0]);
 
+        glBegin(GL_QUADS);
+
+        glTexCoord2f(m_textCoord[0].m_x, m_textCoord[0].m_y);
+        glVertex2f(0, 0);
+
+        glTexCoord2f(m_textCoord[1].m_x, m_textCoord[0].m_y);
+        glVertex2f(m_width, 0);
+
+        glTexCoord2f(m_textCoord[1].m_x, m_textCoord[1].m_y);
+        glVertex2f(m_width, m_height);
+
+        glTexCoord2f(m_textCoord[0].m_x, m_textCoord[1].m_y);
+        glVertex2f(0, m_height);
+        glEnd();
+
+        glDisable(GL_TEXTURE_2D);
+        
+        glPopMatrix();
+    }
     glPopMatrix();
 }
 
@@ -97,10 +127,11 @@ bool Text::Intersects(wxRect2DDouble rect) const
 
 void Text::SetText(wxString text)
 {
+    /*
     glEnable(GL_TEXTURE_2D);
     m_text = text;
-    //wxFont font(m_fontSize, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    wxFont font = wxSystemSettings::GetFont(wxSYS_SYSTEM_FONT);
+    wxFont font(m_fontSize, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    //wxFont font = wxSystemSettings::GetFont(wxSYS_SYSTEM_FONT);
 
     wxScreenDC dc;
     GLuint* idString = NULL;
@@ -157,7 +188,13 @@ void Text::SetText(wxString text)
 
     // Update text rectangle.
     SetPosition(m_position);
-    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_2D);*/
+    m_text = text;
+    TextToBitmap();
+    LoadTextTexture();
+    m_width = m_bitmapSize.GetWidth();
+    m_height = m_bitmapSize.GetHeight();
+    SetPosition(m_position);
 }
 
 void Text::Rotate(bool clockwise)
@@ -969,9 +1006,80 @@ Element* Text::GetCopy()
 {
     Text* copy = new Text();
     *copy = *this;
-    // The pointers to wxGLString must be different or can cause crashes.
-    copy->m_glString = NULL;
-    copy->m_glStringArray = NULL;
+    copy->Init();
+    copy->m_textureID = NULL;
+    copy->m_bitmapSize = wxSize(0, 0);
+    copy->m_bitmap = wxNullBitmap;
     copy->SetText(copy->m_text);
     return copy;
+}
+
+void Text::TextToBitmap()
+{
+    wxFont font = wxFont(m_fontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+
+    wxMemoryDC memDC;
+    memDC.SetFont(font);
+    m_bitmapSize = memDC.GetTextExtent(m_text);
+
+    int p2w = RoundToPowerOfTwo(m_bitmapSize.GetWidth());
+    int p2h = RoundToPowerOfTwo(m_bitmapSize.GetHeight());
+
+    m_bitmap = wxBitmap(p2w, p2h);
+
+    memDC.SelectObject(m_bitmap);
+    memDC.SetBackground(*wxWHITE_BRUSH);
+    memDC.Clear();
+    memDC.DrawText(m_text, 0, 0);
+
+    m_textCoord[1].m_x = static_cast<double>(m_bitmapSize.GetWidth()) / static_cast<double>(p2w);
+    m_textCoord[1].m_y = 1.0 - static_cast<double>(m_bitmapSize.GetHeight()) / static_cast<double>(p2h);
+}
+
+void Text::LoadTextTexture()
+{
+    if(m_textureID) glDeleteTextures(1, m_textureID);
+    m_textureID = new GLuint[1];
+    glGenTextures(1, &m_textureID[0]);
+
+    glBindTexture(GL_TEXTURE_2D, *m_textureID);
+
+    wxImage img = m_bitmap.ConvertToImage();
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+    const int w = img.GetWidth(), h = img.GetHeight();
+    int bytesPerPixel = 4;
+    GLubyte* bitmapData = img.GetData();
+    int imageSize = w * h * bytesPerPixel;
+    GLubyte* imageData = new GLubyte[imageSize];
+    int revVal = h - 1;
+
+    for(int y = 0; y < h; y++) {
+        for(int x = 0; x < w; x++) {
+            imageData[(x + y * w) * bytesPerPixel + 0] = 255;
+            imageData[(x + y * w) * bytesPerPixel + 1] = 255;
+            imageData[(x + y * w) * bytesPerPixel + 2] = 255;
+
+            // alpha
+            imageData[(x + y * w) * bytesPerPixel + 3] = 255 - bitmapData[(x + (revVal - y) * w) * 3];
+        }
+    }
+
+    glTexImage2D(GL_TEXTURE_2D, 0, bytesPerPixel, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    delete imageData;
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+}
+
+int Text::RoundToPowerOfTwo(int value, int min)
+{
+    //[Ref] https://stackoverflow.com/questions/466204/rounding-up-to-next-power-of-2
+    double baseOfTwo = std::log(static_cast<double>(value)) / std::log(2.0);
+    int powerOfTwo = static_cast<int>(std::pow(2.0, static_cast<int>(std::ceil(baseOfTwo))));
+    return std::max(min, powerOfTwo);
 }
