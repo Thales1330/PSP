@@ -21,7 +21,7 @@
 #include "ControlElement.h"
 
 #include <wx/dcscreen.h>
-#include "wxGLString.h"
+#include "OpenGLText.h"
 
 class GainForm;
 
@@ -63,8 +63,7 @@ class Gain : public ControlElement
    protected:
     double m_value = 1.0;
 
-    wxGLString* m_glStringValue = NULL;
-    int m_fontSize = 10;
+    OpenGLText* m_glText = NULL;
 
     std::vector<wxPoint2DDouble> m_triPts;
 };

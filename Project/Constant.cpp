@@ -28,7 +28,10 @@ Constant::Constant(int id) : ControlElement(id)
     m_nodeList.push_back(nodeOut);
 }
 
-Constant::~Constant() {}
+Constant::~Constant()
+{
+    if(m_glText) delete m_glText;
+}
 void Constant::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -43,11 +46,7 @@ void Constant::Draw(wxPoint2DDouble translation, double scale) const
     DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
 
     // Plot number.
-    glEnable(GL_TEXTURE_2D);
-    glColor4d(0.0, 0.0, 0.0, 1.0);
-    m_glStringValue->bind();
-    m_glStringValue->render(m_position.m_x, m_position.m_y);
-    glDisable(GL_TEXTURE_2D);
+    m_glText->Draw(m_position);
 
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawNodes();
@@ -103,19 +102,13 @@ void Constant::SetValue(double value)
     m_value = value;
     wxString text = StringFromDouble(m_value);
 
-    wxFont font(m_fontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    wxScreenDC dc;
+    if(m_glText)
+        m_glText->SetText(text);
+    else
+        m_glText = new OpenGLText(text);
 
-    if(m_glStringValue) {
-        delete m_glStringValue;
-        m_glStringValue = NULL;
-    }
-    m_glStringValue = new wxGLString(text);
-    m_glStringValue->setFont(font);
-    m_glStringValue->consolidate(&dc);
-
-    m_width = m_glStringValue->getWidth() + 6 + 2 * m_borderSize;
-    m_height = m_glStringValue->getheight() + 6 + 2 * m_borderSize;
+    m_width = m_glText->GetWidth() + 6 + 2 * m_borderSize;
+    m_height = m_glText->GetHeight() + 6 + 2 * m_borderSize;
 
     UpdatePoints();
 }
@@ -124,7 +117,6 @@ Element* Constant::GetCopy()
 {
     Constant* copy = new Constant(m_elementID);
     *copy = *this;
-    m_glStringValue = NULL;
-    SetValue(m_value);
+    copy->m_glText = m_glText->GetCopy();
     return copy;
 }

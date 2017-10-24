@@ -21,7 +21,7 @@
 #include "ControlElement.h"
 
 #include <wx/dcscreen.h>
-#include "wxGLString.h"
+#include "OpenGLText.h"
 
 class TransferFunctionForm;
 
@@ -84,8 +84,8 @@ class TransferFunction : public ControlElement
 
     wchar_t m_supNumber[10];
 
-    wxGLString* m_glStringNum = NULL;
-    wxGLString* m_glStringDen = NULL;
+    OpenGLText* m_glTextNum = NULL;
+    OpenGLText* m_glTextDen = NULL;
     int m_fontSize = 10;
 
     std::vector<double> m_numerator;

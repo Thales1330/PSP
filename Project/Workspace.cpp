@@ -1153,9 +1153,14 @@ bool Workspace::RunPowerFlow()
 
 void Workspace::UpdateTextElements()
 {
+    double basePower = m_properties->GetSimulationPropertiesData().basePower;
+    if(m_properties->GetSimulationPropertiesData().basePowerUnit == UNIT_kVA)
+        basePower *= 1e3;
+    else if(m_properties->GetSimulationPropertiesData().basePowerUnit == UNIT_MVA)
+        basePower *= 1e6;
     for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
         Text* text = *it;
-        text->UpdateText(m_properties->GetSimulationPropertiesData().basePower);
+        text->UpdateText(basePower);
     }
 }
 

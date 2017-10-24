@@ -176,8 +176,8 @@
       <VirtualDirectory Name="wxMathPlot">
         <File Name="wxMathPlot/mathplot.h"/>
       </VirtualDirectory>
-      <File Name="wxGLString.cpp"/>
-      <File Name="wxGLString.h"/>
+      <File Name="OpenGLText.h"/>
+      <File Name="OpenGLText.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="controller">
       <VirtualDirectory Name="files">

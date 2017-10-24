@@ -23,6 +23,7 @@
 
 #include "GraphicalElement.h"
 #include "PowerElement.h"
+#include "OpenGLText.h"
 
 class TextForm;
 
@@ -94,7 +95,6 @@ class Text : public GraphicalElement
     void SetElement(Element* element) { m_element = element; }
     void SetElementNumber(int elementNumber) { m_elementNumber = elementNumber; }
     void SetElementType(const ElementType elementType) { m_elementType = elementType; }
-    void SetFontSize(int fontSize) { m_fontSize = fontSize; }
     void SetUnit(const ElectricalUnit unit) { m_unit = unit; }
     void SetDecimalPlaces(int decimalPlaces) { m_decimalPlaces = decimalPlaces; }
     const DataType GetDataType() const { return m_dataType; }
@@ -102,25 +102,14 @@ class Text : public GraphicalElement
     Element* GetElement() { return m_element; }
     int GetElementNumber() const { return m_elementNumber; }
     const ElementType GetElementType() const { return m_elementType; }
-    int GetFontSize() const { return m_fontSize; }
     const ElectricalUnit GetUnit() const { return m_unit; }
     int GetDecimalPlaces() const { return m_decimalPlaces; }
-    
    protected:
-    void Init();
-    int RoundToPowerOfTwo(int value, int min = 32);
-    void TextToBitmap();
-    void LoadTextTexture();
-
     wxString m_text = _("Text");
-    int m_numberOfLines;
+    int m_numberOfLines = 0;
     bool m_isMultlineText = false;
-    int m_fontSize = 10;
 
-    wxBitmap m_bitmap = wxNullBitmap;
-    wxSize m_bitmapSize = wxSize(0, 0);
-    wxPoint2DDouble* m_textCoord = NULL;
-    GLuint* m_textureID = NULL;
+    std::vector<OpenGLText*> m_openGLTextList;
 
     Element* m_element = NULL;
     ElementType m_elementType = TYPE_NONE;

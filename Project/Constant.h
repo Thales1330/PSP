@@ -21,7 +21,7 @@
 #include "ControlElement.h"
 
 #include <wx/dcscreen.h>
-#include "wxGLString.h"
+#include "OpenGLText.h"
 
 class ConstantForm;
 
@@ -53,8 +53,7 @@ class Constant : public ControlElement
    protected:
     double m_value = 1.0;
 
-    wxGLString* m_glStringValue = NULL;
-    int m_fontSize = 10;
+    OpenGLText* m_glText = NULL;
 };
 
 #endif  // CONSTANT_H

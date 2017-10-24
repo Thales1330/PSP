@@ -21,7 +21,7 @@
 #include "ControlElement.h"
 
 #include <wx/dcscreen.h>
-#include "wxGLString.h"
+#include "OpenGLText.h"
 
 class IOControlForm;
 
@@ -73,8 +73,7 @@ class IOControl : public ControlElement
 
     Node::NodeType m_ioNodeType = Node::NODE_IN;
 
-    wxGLString* m_glStringValue = NULL;
-    int m_fontSize = 10;
+    OpenGLText* m_glText = NULL;
 };
 
 #endif  // IOCONTROL_H

@@ -32,7 +32,11 @@ IOControl::IOControl(int ioFlags, int id) : ControlElement(id)
     node->StartMove(m_position);
 }
 
-IOControl::~IOControl() {}
+IOControl::~IOControl()
+{
+    if(m_glText) delete m_glText;
+}
+
 void IOControl::Draw(wxPoint2DDouble translation, double scale) const
 {
     std::vector<wxPoint2DDouble> pts;
@@ -100,20 +104,16 @@ void IOControl::Draw(wxPoint2DDouble translation, double scale) const
     DrawLine(pts, GL_LINE_LOOP);
 
     // Plot number.
-    glEnable(GL_TEXTURE_2D);
     glColor4d(0.0, 0.0, 0.0, 1.0);
-    m_glStringValue->bind();
     if(m_angle == 0.0) {
-        m_glStringValue->render(m_position.m_x - 5, m_position.m_y);
+        m_glText->Draw(m_position + wxPoint2DDouble(-5.0, 0.0));
     } else if(m_angle == 90.0) {
-        m_glStringValue->render(m_position.m_x, m_position.m_y - 5);
+        m_glText->Draw(m_position + wxPoint2DDouble(0.0, -5.0));
     } else if(m_angle == 180.0) {
-        m_glStringValue->render(m_position.m_x + 5, m_position.m_y);
+        m_glText->Draw(m_position + wxPoint2DDouble(5.0, 0.0));
     } else if(m_angle == 270.0) {
-        m_glStringValue->render(m_position.m_x, m_position.m_y + 5);
+        m_glText->Draw(m_position + wxPoint2DDouble(0.0, 5.0));
     }
-
-    glDisable(GL_TEXTURE_2D);
 
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawNodes();
@@ -209,19 +209,13 @@ void IOControl::SetValue(IOFlags value)
     m_value = value;
     wxString text = GenerateText();
 
-    wxFont font(m_fontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    wxScreenDC dc;
+    if(m_glText)
+        m_glText->SetText(text);
+    else
+        m_glText = new OpenGLText(text);
 
-    if(m_glStringValue) {
-        delete m_glStringValue;
-        m_glStringValue = NULL;
-    }
-    m_glStringValue = new wxGLString(text);
-    m_glStringValue->setFont(font);
-    m_glStringValue->consolidate(&dc);
-
-    m_width = m_glStringValue->getWidth() + 10 + 2 * m_borderSize;
-    m_height = m_glStringValue->getheight() + 10 + 2 * m_borderSize;
+    m_width = m_glText->GetWidth() + 10 + 2 * m_borderSize;
+    m_height = m_glText->GetHeight() + 10 + 2 * m_borderSize;
 
     SetPosition(m_position);  // Update rectangle.
 
@@ -266,7 +260,6 @@ Element* IOControl::GetCopy()
 {
     IOControl* copy = new IOControl(m_ioFlags, m_elementID);
     *copy = *this;
-    m_glStringValue = NULL;
-    SetValue(m_value);
+    copy->m_glText = m_glText->GetCopy();
     return copy;
 }

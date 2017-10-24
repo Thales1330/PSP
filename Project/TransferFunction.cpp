@@ -48,7 +48,11 @@ TransferFunction::TransferFunction(int id) : ControlElement(id)
     m_nodeList.push_back(node2);
 }
 
-TransferFunction::~TransferFunction() {}
+TransferFunction::~TransferFunction()
+{
+    if(m_glTextDen) delete m_glTextDen;
+    if(m_glTextNum) delete m_glTextNum;
+}
 void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -69,41 +73,28 @@ void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
 
     DrawNodes();
 
-    glEnable(GL_TEXTURE_2D);
     glColor4d(0.0, 0.0, 0.0, 1.0);
-    m_glStringNum->bind();
-    m_glStringNum->render(m_position.m_x, m_position.m_y - m_height / 4);
-    m_glStringDen->bind();
-    m_glStringDen->render(m_position.m_x, m_position.m_y + m_height / 4);
-    glDisable(GL_TEXTURE_2D);
+    m_glTextNum->Draw(m_position + wxPoint2DDouble(0.0, -m_height / 4));
+    m_glTextDen->Draw(m_position + wxPoint2DDouble(0.0, m_height / 4));
 }
 
 void TransferFunction::SetText(wxString numerator, wxString denominator)
 {
-    wxFont font(m_fontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    wxScreenDC dc;
+    if(m_glTextNum)
+        m_glTextNum->SetText(numerator);
+    else
+        m_glTextNum = new OpenGLText(numerator);
 
-    if(m_glStringNum) {
-        delete m_glStringNum;
-        m_glStringNum = NULL;
-    }
-    m_glStringNum = new wxGLString(numerator);
-    m_glStringNum->setFont(font);
-    m_glStringNum->consolidate(&dc);
+    if(m_glTextDen)
+        m_glTextDen->SetText(denominator);
+    else
+        m_glTextDen = new OpenGLText(denominator);
 
-    if(m_glStringDen) {
-        delete m_glStringDen;
-        m_glStringDen = NULL;
-    }
-    m_glStringDen = new wxGLString(denominator);
-    m_glStringDen->setFont(font);
-    m_glStringDen->consolidate(&dc);
-
-    double nWidth = m_glStringNum->getWidth() + 5 + m_borderSize;
-    double dWidth = m_glStringDen->getWidth() + 5 + m_borderSize;
+    double nWidth = m_glTextNum->GetWidth() + 5 + m_borderSize;
+    double dWidth = m_glTextDen->GetWidth() + 5 + m_borderSize;
 
     m_width = nWidth > dWidth ? nWidth : dWidth;
-    m_height = m_glStringNum->getheight() + m_glStringDen->getheight() + 2 * m_borderSize;
+    m_height = m_glTextNum->GetHeight() + m_glTextDen->GetHeight() + 2 * m_borderSize;
     SetPosition(m_position);  // Update rect properly.
 }
 
@@ -273,7 +264,7 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     int order = static_cast<int>(m_denominator.size());
     std::vector<double> denominator = m_denominator;
     std::vector<double> numerator;
-    
+
     //[Ref.] http://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS.html
     int k = order;
     for(int i = 0; i < order; i++) {
@@ -378,8 +369,7 @@ Element* TransferFunction::GetCopy()
 {
     TransferFunction* copy = new TransferFunction(m_elementID);
     *copy = *this;
-    m_glStringNum = NULL;
-    m_glStringDen = NULL;
-    UpdateTFText();
+    copy->m_glTextNum = m_glTextNum->GetCopy();
+    copy->m_glTextDen = m_glTextDen->GetCopy();
     return copy;
 }
