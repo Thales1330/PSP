@@ -56,7 +56,7 @@ class TransferFunction : public ControlElement
     virtual void SetNumerator(std::vector<double> numerator) { m_numerator = numerator; }
     virtual void SetDenominator(std::vector<double> denominator) { m_denominator = denominator; }
     virtual void UpdateTFText();
-    virtual void UpdateText() { UpdateTFText(); }
+    virtual bool UpdateText();
     virtual SpaceState GetSpaceState() { return m_ss; }
     /**
      * @brief Convert the transfer function to space state on controllable canonical form (CCF).

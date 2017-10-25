@@ -89,6 +89,7 @@ class Text : public GraphicalElement
     virtual void UpdateText(double systemPowerBase);
     virtual wxString GetText() const { return m_text; }
     virtual void SetText(wxString text);
+    virtual bool IsGLTextOK();
 
     void SetDataType(const DataType& dataType) { m_dataType = dataType; }
     void SetDirection(int direction) { m_direction = direction; }

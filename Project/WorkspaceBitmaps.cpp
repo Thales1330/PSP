@@ -44,6 +44,6 @@ void wxC52C4InitBitmapResources()
         else wxFileSystem::AddHandler(new wxMemoryFSHandlerBase);
     }
 
-    XRC_ADD_FILE(wxT("XRC_resource/WorkspaceBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_WorkspaceBitmaps.xrc"), xml_res_file_0, xml_res_size_0, wxT("text/xml"));
-    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/WorkspaceBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_WorkspaceBitmaps.xrc"));
+    XRC_ADD_FILE(wxT("XRC_resource/WorkspaceBitmaps.cpp$_home_thales_Documentos_GitHub_PSP_Project_WorkspaceBitmaps.xrc"), xml_res_file_0, xml_res_size_0, wxT("text/xml"));
+    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/WorkspaceBitmaps.cpp$_home_thales_Documentos_GitHub_PSP_Project_WorkspaceBitmaps.xrc"));
 }

@@ -43,7 +43,7 @@ class Constant : public ControlElement
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual void Rotate(bool clockwise = true);
-    virtual void UpdateText() { SetValue(m_value); }
+    virtual bool UpdateText();
     virtual void SetValue(double value);
     virtual double GetValue() const { return m_value; }
     virtual void UpdatePoints();

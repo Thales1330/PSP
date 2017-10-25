@@ -94,7 +94,12 @@ class ControlElement : public Element
     std::vector<Node*> GetNodeList() const { return m_nodeList; }
     virtual void DrawNodes() const;
     virtual void ReplaceNode(Node* oldNode, Node* newNode);
-    virtual void UpdateText() {}
+    
+    /**
+     * @brief Update the OpenGL text in the element (if present).
+     * @return true if OpenGLText is ok, false otherwise.
+     */
+    virtual bool UpdateText() { return true; }
     virtual bool IsSolved() const { return m_solved; }
     virtual void SetSolved(bool solved = true) { m_solved = solved; }
     virtual bool Solve(double input, double timeStep);

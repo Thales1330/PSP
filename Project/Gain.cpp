@@ -188,3 +188,10 @@ Element* Gain::GetCopy()
     copy->m_glText = m_glText->GetCopy();
     return copy;
 }
+
+bool Gain::UpdateText()
+{
+    SetValue(m_value);
+    if(!m_glText->IsTextureOK()) return false;
+    return true;
+}

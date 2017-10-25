@@ -131,7 +131,7 @@ class Workspace : public WorkspaceBase
     void ValidateElementsVoltages();
 
     void UpdateElementsID();
-    void UpdateTextElements();
+    bool UpdateTextElements();
 
     int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
     void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }

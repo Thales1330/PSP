@@ -77,6 +77,8 @@ Workspace::~Workspace()
 
 void Workspace::OnPaint(wxPaintEvent& event)
 {
+    if(!m_glCanvas->IsShown()) return;
+    
     wxPaintDC dc(m_glCanvas);
     m_glContext->SetCurrent(*m_glCanvas);
     SetViewport();
@@ -1151,8 +1153,9 @@ bool Workspace::RunPowerFlow()
     return result;
 }
 
-void Workspace::UpdateTextElements()
+bool Workspace::UpdateTextElements()
 {
+    bool isTexturesOK = true;
     double basePower = m_properties->GetSimulationPropertiesData().basePower;
     if(m_properties->GetSimulationPropertiesData().basePowerUnit == UNIT_kVA)
         basePower *= 1e3;
@@ -1161,7 +1164,9 @@ void Workspace::UpdateTextElements()
     for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
         Text* text = *it;
         text->UpdateText(basePower);
+        if(!text->IsGLTextOK()) isTexturesOK = false;
     }
+    return isTexturesOK;
 }
 
 void Workspace::CopySelection()
@@ -1395,8 +1400,7 @@ void Workspace::OnIdle(wxIdleEvent& event)
     // The OpenGL element (m_glCanvas) must be completely initialized (showed) to draw properly the textures.
     // TODO(?): Find other solution to text displayed wrong on opened file.
     if(m_justOpened) {
-        m_justOpened = false;
-        UpdateTextElements();
+        if(UpdateTextElements()) m_justOpened = false;
         Redraw();
     }
 }

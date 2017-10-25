@@ -42,6 +42,7 @@ class OpenGLText
     virtual wxString GetText() const { return m_text; }
     virtual int GetWidth() const { return m_bitmapSize.GetWidth(); }
     virtual int GetHeight() const { return m_bitmapSize.GetHeight(); }
+    virtual bool IsTextureOK();
    protected:
     void Init();
     int RoundToPowerOfTwo(int value, int min = 32);

@@ -927,3 +927,12 @@ Element* Text::GetCopy()
     copy->m_openGLTextList = copyList;
     return copy;
 }
+
+bool Text::IsGLTextOK()
+{
+    bool isOk = true;
+    for(auto it = m_openGLTextList.begin(), itEnd = m_openGLTextList.end(); it != itEnd; ++it) {
+        if(!(*it)->IsTextureOK()) isOk = false;
+    }
+    return isOk;
+}

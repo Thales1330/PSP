@@ -16,6 +16,7 @@
  */
 
 #include "OpenGLText.h"
+#include <wx/log.h>
 
 OpenGLText::OpenGLText() { Init(); }
 OpenGLText::OpenGLText(wxString text)
@@ -27,7 +28,7 @@ OpenGLText::OpenGLText(wxString text)
 OpenGLText::~OpenGLText()
 {
     if(m_textureID) {
-        glDeleteTextures(1, m_textureID);
+        glDeleteTextures(1, &m_textureID[0]);
     }
 }
 
@@ -108,7 +109,7 @@ void OpenGLText::TextToBitmap()
 
 void OpenGLText::LoadTextTexture()
 {
-    if(m_textureID) glDeleteTextures(1, m_textureID);
+    if(m_textureID) glDeleteTextures(1, &m_textureID[0]);
     m_textureID = new GLuint[1];
     glGenTextures(1, &m_textureID[0]);
 
@@ -155,4 +156,12 @@ OpenGLText* OpenGLText::GetCopy()
     copy->m_bitmap = wxNullBitmap;
     copy->SetText(copy->m_text);
     return copy;
+}
+
+bool OpenGLText::IsTextureOK()
+{
+    if(m_textureID) {
+        if(glIsTexture(m_textureID[0]) == GL_TRUE) return true;
+    }
+    return false;
 }

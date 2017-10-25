@@ -120,3 +120,10 @@ Element* Constant::GetCopy()
     copy->m_glText = m_glText->GetCopy();
     return copy;
 }
+
+bool Constant::UpdateText()
+{
+    SetValue(m_value);
+    if(!m_glText->IsTextureOK()) return false;
+    return true;
+}

@@ -373,3 +373,11 @@ Element* TransferFunction::GetCopy()
     copy->m_glTextDen = m_glTextDen->GetCopy();
     return copy;
 }
+
+bool TransferFunction::UpdateText()
+{
+    UpdateTFText();
+    if(!m_glTextDen->IsTextureOK()) return false;
+    if(!m_glTextNum->IsTextureOK()) return false;
+    return true;
+}

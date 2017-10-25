@@ -45,7 +45,6 @@ ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxI
     : wxWindow(parent, id)
 {
     SetBackgroundColour(*wxWHITE);
-    // m_font = wxFont(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
     m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
     m_label = label;
     m_image = image;
@@ -644,13 +643,14 @@ void ControlEditor::OnIdle(wxIdleEvent& event)
 {
     if(m_justOpened) {
         this->Raise();
-        Redraw();
+        
+        // Update all text elements
+        m_justOpened = false;
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
             ControlElement* element = *it;
-            element->UpdateText();
+            if(!element->UpdateText()) m_justOpened = true;
         }
         Redraw();
-        m_justOpened = false;
     }
 }
 void ControlEditor::OnKeyDown(wxKeyEvent& event)
