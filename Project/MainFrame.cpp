@@ -59,8 +59,8 @@ MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initPro
 
             m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
             m_auiNotebook->Layout();
-            //newWorkspace->Redraw();
-            //newWorkspace->SetJustOpened(true);
+            newWorkspace->Redraw();
+            newWorkspace->SetJustOpened(true);
             m_projectNumber++;
         }
     }

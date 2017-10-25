@@ -83,7 +83,9 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
         cEditor->SetControlContainer(data.avr);
         cEditor->Show();
         cEditor->SetJustOpened(true);
-        //EndModal(wxID_OK);
+        #ifdef __WXGTK__
+        EndModal(wxID_OK);
+        #endif
     }
 }
 
@@ -109,7 +111,9 @@ void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
         cEditor->SetControlContainer(data.speedGov);
         cEditor->Show();
         cEditor->SetJustOpened(true);
-        //EndModal(wxID_OK);
+        #ifdef __WXGTK__
+        EndModal(wxID_OK);
+        #endif
     }
 }
 
