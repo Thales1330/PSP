@@ -42,12 +42,12 @@
 
 // Workspace
 Workspace::Workspace() : WorkspaceBase(NULL) {}
-Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar) : WorkspaceBase(parent)
+Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wxGLContext* sharedGLContext) : WorkspaceBase(parent)
 {
     m_timer->Start();
     m_name = name;
     m_statusBar = statusBar;
-    m_glContext = new wxGLContext(m_glCanvas);
+    m_glContext = new wxGLContext(m_glCanvas, sharedGLContext);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 

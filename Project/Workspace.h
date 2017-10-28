@@ -97,7 +97,7 @@ class Workspace : public WorkspaceBase
     };
 
     Workspace();
-    Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL);
+    Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL, wxGLContext* sharedGLContext = NULL);
     ~Workspace();
 
     wxString GetName() const { return m_name; }

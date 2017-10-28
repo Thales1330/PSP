@@ -46,7 +46,8 @@ MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initPro
 
     if(openPath != "") {
         EnableCurrentProjectRibbon();
-        Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar());
+        Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar(), m_sharedGLContext);
+        if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
 
         FileHanding fileHandling(newWorkspace);
         if(fileHandling.OpenProject(openPath)) {
@@ -166,7 +167,8 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
     EnableCurrentProjectRibbon();
 
     Workspace* newWorkspace =
-        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar());
+        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), m_sharedGLContext);
+    if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
     m_workspaceList.push_back(newWorkspace);
 
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
@@ -288,7 +290,8 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
     wxFileName fileName(openFileDialog.GetPath());
 
     EnableCurrentProjectRibbon();
-    Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar());
+    Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar(), m_sharedGLContext);
+    if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
 
     FileHanding fileHandling(newWorkspace);
     if(fileHandling.OpenProject(fileName)) {
@@ -483,10 +486,14 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
     auto it = m_workspaceList.begin();
     while(it != m_workspaceList.end()) {
         if(*it == m_auiNotebook->GetCurrentPage()) {
+            if((*it)->GetOpenGLContext() == m_sharedGLContext) m_sharedGLContext = NULL;
             m_workspaceList.erase(it);
             break;
         }
         it++;
+    }
+    if(!m_sharedGLContext && m_workspaceList.size() != 0) {
+        m_sharedGLContext = m_workspaceList[0]->GetOpenGLContext();
     }
     event.Skip();
 }
