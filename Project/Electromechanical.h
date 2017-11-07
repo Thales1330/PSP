@@ -69,7 +69,7 @@ class Electromechanical : public ElectricCalculation
     void InsertSyncMachinesOnYBus();
     std::complex<double> GetSyncMachineAdmittance(SyncGenerator* generator);
     bool InitializeDynamicElements();
-    bool CalculateMachinesCurrents();
+    bool CalculateInjectedCurrents();
     void CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq, double k = 1.0);
     bool SolveSynchronousMachines();
     void SetSyncMachinesModel();

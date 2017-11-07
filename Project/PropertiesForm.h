@@ -114,11 +114,39 @@ protected:
     wxTextCtrl* m_textCtrlPrintTime;
     wxStaticText* m_staticTextSec_4;
     wxCheckBox* m_checkBoxUseCOI;
+    wxPanel* m_panelLoadComp;
+    wxCheckBox* m_checkBoxUseCompLoads;
+    wxStaticText* m_staticTextActivePowerImp;
+    wxTextCtrl* m_textCtrlActivePowerImp;
+    wxStaticText* m_staticTextPerc_1;
+    wxStaticText* m_staticTextActivePowerCur;
+    wxTextCtrl* m_textCtrlActivePowerCur;
+    wxStaticText* m_staticTextPerc_2;
+    wxStaticText* m_staticTextActivePowerPow;
+    wxTextCtrl* m_textCtrlActivePowerPow;
+    wxStaticText* m_staticTextPerc_3;
+    wxStaticText* m_staticTextReactivePowerImp;
+    wxTextCtrl* m_textCtrlReactivePowerImp;
+    wxStaticText* m_staticTextPerc_4;
+    wxStaticText* m_staticTextReactivePowerCur;
+    wxTextCtrl* m_textCtrlReactivePowerCur;
+    wxStaticText* m_staticTextPerc_5;
+    wxStaticText* m_staticTextReactivePowerPow;
+    wxTextCtrl* m_textCtrlReactivePowerPow;
+    wxStaticText* m_staticTextPerc_6;
+    wxStaticText* m_staticTextUV;
+    wxStaticText* m_staticTextUVCur;
+    wxTextCtrl* m_textCtrlUVCur;
+    wxStaticText* m_staticTextPerc_7;
+    wxStaticText* m_staticTextUVPow;
+    wxTextCtrl* m_textCtrlUVPow;
+    wxStaticText* m_staticTextPerc_8;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
 protected:
     virtual void OnPFMethodChoiceSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCheckboxUseCompLoadClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
 
@@ -158,6 +186,33 @@ public:
     wxStaticText* GetStaticTextSec_4() { return m_staticTextSec_4; }
     wxCheckBox* GetCheckBoxUseCOI() { return m_checkBoxUseCOI; }
     wxPanel* GetPanelStability() { return m_panelStability; }
+    wxCheckBox* GetCheckBoxUseCompLoads() { return m_checkBoxUseCompLoads; }
+    wxStaticText* GetStaticTextActivePowerImp() { return m_staticTextActivePowerImp; }
+    wxTextCtrl* GetTextCtrlActivePowerImp() { return m_textCtrlActivePowerImp; }
+    wxStaticText* GetStaticTextPerc_1() { return m_staticTextPerc_1; }
+    wxStaticText* GetStaticTextActivePowerCur() { return m_staticTextActivePowerCur; }
+    wxTextCtrl* GetTextCtrlActivePowerCur() { return m_textCtrlActivePowerCur; }
+    wxStaticText* GetStaticTextPerc_2() { return m_staticTextPerc_2; }
+    wxStaticText* GetStaticTextActivePowerPow() { return m_staticTextActivePowerPow; }
+    wxTextCtrl* GetTextCtrlActivePowerPow() { return m_textCtrlActivePowerPow; }
+    wxStaticText* GetStaticTextPerc_3() { return m_staticTextPerc_3; }
+    wxStaticText* GetStaticTextReactivePowerImp() { return m_staticTextReactivePowerImp; }
+    wxTextCtrl* GetTextCtrlReactivePowerImp() { return m_textCtrlReactivePowerImp; }
+    wxStaticText* GetStaticTextPerc_4() { return m_staticTextPerc_4; }
+    wxStaticText* GetStaticTextReactivePowerCur() { return m_staticTextReactivePowerCur; }
+    wxTextCtrl* GetTextCtrlReactivePowerCur() { return m_textCtrlReactivePowerCur; }
+    wxStaticText* GetStaticTextPerc_5() { return m_staticTextPerc_5; }
+    wxStaticText* GetStaticTextReactivePowerPow() { return m_staticTextReactivePowerPow; }
+    wxTextCtrl* GetTextCtrlReactivePowerPow() { return m_textCtrlReactivePowerPow; }
+    wxStaticText* GetStaticTextPerc_6() { return m_staticTextPerc_6; }
+    wxStaticText* GetStaticTextUV() { return m_staticTextUV; }
+    wxStaticText* GetStaticTextUVCur() { return m_staticTextUVCur; }
+    wxTextCtrl* GetTextCtrlUVCur() { return m_textCtrlUVCur; }
+    wxStaticText* GetStaticTextPerc_7() { return m_staticTextPerc_7; }
+    wxStaticText* GetStaticTextUVPow() { return m_staticTextUVPow; }
+    wxTextCtrl* GetTextCtrlUVPow() { return m_textCtrlUVPow; }
+    wxStaticText* GetStaticTextPerc_8() { return m_staticTextPerc_8; }
+    wxPanel* GetPanelLoadComp() { return m_panelLoadComp; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }

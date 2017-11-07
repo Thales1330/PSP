@@ -36,10 +36,12 @@ class SimulationsSettingsForm : public SimulationsSettingsFormBase
     virtual ~SimulationsSettingsForm();
 
    protected:
+    virtual void OnCheckboxUseCompLoadClick(wxCommandEvent& event) { UpdateZIPLoadFieldStatus(); }
     virtual void OnPFMethodChoiceSelected(wxCommandEvent& event);
     virtual void OnButtonCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
     virtual void OnButtonOKClick(wxCommandEvent& event);
     virtual bool ValidateData();
+    virtual void UpdateZIPLoadFieldStatus();
 
     PropertiesData* m_properties;
 };

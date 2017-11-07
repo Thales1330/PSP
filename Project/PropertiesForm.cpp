@@ -262,12 +262,12 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     m_panelStability = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelStability, _("Stability"), false);
     
-    wxBoxSizer* boxSizerLvl2_232 = new wxBoxSizer(wxVERTICAL);
-    m_panelStability->SetSizer(boxSizerLvl2_232);
+    wxBoxSizer* boxSizerLvl2_3 = new wxBoxSizer(wxVERTICAL);
+    m_panelStability->SetSizer(boxSizerLvl2_3);
     
     wxGridSizer* gridSizerLvl_2_3 = new wxGridSizer(0, 2, 0, 0);
     
-    boxSizerLvl2_232->Add(gridSizerLvl_2_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl2_3->Add(gridSizerLvl_2_3, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl3_6 = new wxBoxSizer(wxVERTICAL);
     
@@ -409,7 +409,222 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     m_checkBoxUseCOI = new wxCheckBox(m_panelStability, wxID_ANY, _("Use center of inertia as reference"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
     m_checkBoxUseCOI->SetValue(true);
     
-    boxSizerLvl2_232->Add(m_checkBoxUseCOI, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizerLvl2_3->Add(m_checkBoxUseCOI, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_panelLoadComp = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelLoadComp, _("ZIP Load"), false);
+    
+    wxBoxSizer* boxSizerLvl2_4 = new wxBoxSizer(wxVERTICAL);
+    m_panelLoadComp->SetSizer(boxSizerLvl2_4);
+    
+    m_checkBoxUseCompLoads = new wxCheckBox(m_panelLoadComp, wxID_ANY, _("Use general composition to all system loads"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    m_checkBoxUseCompLoads->SetValue(false);
+    
+    boxSizerLvl2_4->Add(m_checkBoxUseCompLoads, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl2_4 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizerLvl2_4->Add(gridSizerLvl2_4, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizerLvl3_4 = new wxStaticBoxSizer( new wxStaticBox(m_panelLoadComp, wxID_ANY, _("Active power")), wxVERTICAL);
+    
+    gridSizerLvl2_4->Add(staticBoxSizerLvl3_4, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_12 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_4->Add(boxSizerLvl4_12, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextActivePowerImp = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant impedance"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_12->Add(m_staticTextActivePowerImp, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_9 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_12->Add(boxSizerLvl5_9, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlActivePowerImp = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("100"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlActivePowerImp->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_9->Add(m_textCtrlActivePowerImp, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_1 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_9->Add(m_staticTextPerc_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_13 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_4->Add(boxSizerLvl4_13, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextActivePowerCur = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant current"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_13->Add(m_staticTextActivePowerCur, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_10 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_13->Add(boxSizerLvl5_10, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlActivePowerCur = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("0"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlActivePowerCur->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_10->Add(m_textCtrlActivePowerCur, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_2 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_10->Add(m_staticTextPerc_2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_14 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_4->Add(boxSizerLvl4_14, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextActivePowerPow = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant power"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_14->Add(m_staticTextActivePowerPow, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_11 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_14->Add(boxSizerLvl5_11, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlActivePowerPow = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("0"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlActivePowerPow->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_11->Add(m_textCtrlActivePowerPow, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_3 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_11->Add(m_staticTextPerc_3, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizerLvl3_5 = new wxStaticBoxSizer( new wxStaticBox(m_panelLoadComp, wxID_ANY, _("Reactive power")), wxVERTICAL);
+    
+    gridSizerLvl2_4->Add(staticBoxSizerLvl3_5, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_15 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_5->Add(boxSizerLvl4_15, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextReactivePowerImp = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant impedance"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_15->Add(m_staticTextReactivePowerImp, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_12 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_15->Add(boxSizerLvl5_12, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlReactivePowerImp = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("100"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlReactivePowerImp->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_12->Add(m_textCtrlReactivePowerImp, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_4 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_12->Add(m_staticTextPerc_4, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_16 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_5->Add(boxSizerLvl4_16, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextReactivePowerCur = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant current"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_16->Add(m_staticTextReactivePowerCur, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_13 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_16->Add(boxSizerLvl5_13, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlReactivePowerCur = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("0"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlReactivePowerCur->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_13->Add(m_textCtrlReactivePowerCur, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_5 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_13->Add(m_staticTextPerc_5, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_17 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_5->Add(boxSizerLvl4_17, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextReactivePowerPow = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant power"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_17->Add(m_staticTextReactivePowerPow, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_14 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_17->Add(boxSizerLvl5_14, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlReactivePowerPow = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("0"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlReactivePowerPow->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_14->Add(m_textCtrlReactivePowerPow, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_6 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_14->Add(m_staticTextPerc_6, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextUV = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Undervoltage limit which the loads will be modelled by\nconstant impedance:"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_4->Add(m_staticTextUV, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl2_5 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl2_4->Add(boxSizerLvl2_5, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_18 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_5->Add(boxSizerLvl4_18, 1, 0, WXC_FROM_DIP(5));
+    
+    m_staticTextUVCur = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant current"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_18->Add(m_staticTextUVCur, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_15 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_18->Add(boxSizerLvl5_15, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlUVCur = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("70"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlUVCur->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_15->Add(m_textCtrlUVCur, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_7 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_15->Add(m_staticTextPerc_7, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_19 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_5->Add(boxSizerLvl4_19, 1, 0, WXC_FROM_DIP(5));
+    
+    m_staticTextUVPow = new wxStaticText(m_panelLoadComp, wxID_ANY, _("Constant power"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_19->Add(m_staticTextUVPow, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_16 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_19->Add(boxSizerLvl5_16, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlUVPow = new wxTextCtrl(m_panelLoadComp, wxID_ANY, wxT("70"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlUVPow->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_16->Add(m_textCtrlUVPow, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPerc_8 = new wxStaticText(m_panelLoadComp, wxID_ANY, _("%"), wxDefaultPosition, wxDLG_UNIT(m_panelLoadComp, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_16->Add(m_staticTextPerc_8, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
     
@@ -453,6 +668,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
 #endif
     // Connect events
     m_choicePFMethod->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SimulationsSettingsFormBase::OnPFMethodChoiceSelected), NULL, this);
+    m_checkBoxUseCompLoads->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick), NULL, this);
     m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonOKClick), NULL, this);
     m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonCancelClick), NULL, this);
     
@@ -461,6 +677,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
 SimulationsSettingsFormBase::~SimulationsSettingsFormBase()
 {
     m_choicePFMethod->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SimulationsSettingsFormBase::OnPFMethodChoiceSelected), NULL, this);
+    m_checkBoxUseCompLoads->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick), NULL, this);
     m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonOKClick), NULL, this);
     m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonCancelClick), NULL, this);
     

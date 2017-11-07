@@ -6,7 +6,7 @@
       <Environment/>
       <Project Name="Project" ConfigName="Release_Windows_x32"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release_Windows_x64" Selected="no">
+    <WorkspaceConfiguration Name="Release_Windows_x64" Selected="yes">
       <Environment/>
       <Project Name="Project" ConfigName="Release_Windows_x64"/>
     </WorkspaceConfiguration>
@@ -14,7 +14,7 @@
       <Environment/>
       <Project Name="Project" ConfigName="Debug_Windows_x64"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release_Ubuntu_x64" Selected="yes">
+    <WorkspaceConfiguration Name="Release_Ubuntu_x64" Selected="no">
       <Environment/>
       <Project Name="Project" ConfigName="Release_Ubuntu_x64"/>
     </WorkspaceConfiguration>

@@ -36,6 +36,32 @@ Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> ele
 
     m_plotTime = data.plotTime;
     m_useCOI = data.useCOI;
+    // If the user use all load as ZIP, updates the portions of each model, otherwise use constant impedance only.
+    for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
+        Load* load = *it;
+        auto loadData = load->GetElectricalData();
+        if(!loadData.useCompLoad) {  // If no individual load composition defined.
+            if(data.useCompLoads) {  // Use general composition, if defined.
+                loadData.constImpedanceActive = data.constImpedanceActive;
+                loadData.constCurrentActive = data.constCurrentActive;
+                loadData.constPowerActive = data.constPowerActive;
+                loadData.constImpedanceReactive = data.constImpedanceReactive;
+                loadData.constCurrentReactive = data.constCurrentReactive;
+                loadData.constPowerReactive = data.constPowerReactive;
+            } else {  // Otherwise, use constant impedance.
+                loadData.constImpedanceActive = 100.0;
+                loadData.constCurrentActive = 0.0;
+                loadData.constPowerActive = 0.0;
+                loadData.constImpedanceReactive = 100.0;
+                loadData.constCurrentReactive = 0.0;
+                loadData.constPowerReactive = 0.0;
+            }
+        }
+
+        loadData.constCurrentUV = data.underVoltageConstCurrent / 100.0;
+        loadData.constPowerUV = data.underVoltageConstPower / 100.0;
+        load->SetElectricalData(loadData);
+    }
 }
 
 Electromechanical::~Electromechanical() {}
@@ -436,6 +462,45 @@ bool Electromechanical::InitializeDynamicElements()
         data.stabVoltageVector.clear();
         bus->SetElectricalData(data);
     }
+    // Loads
+    for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
+        Load* load = *it;
+        auto dataPU = load->GetPUElectricalData(m_powerSystemBase);
+        auto data = load->GetElectricalData();
+
+        double activePower = dataPU.activePower;
+        double reactivePower = dataPU.reactivePower;
+
+        if(load) data.voltage = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
+        data.v0 = std::abs(data.voltage);
+        data.y0 = std::complex<double>(activePower, -reactivePower) / (data.v0 * data.v0);
+
+        if(data.loadType == CONST_IMPEDANCE) {
+            std::complex<double> s0 = std::complex<double>(activePower, -reactivePower) * (data.v0 * data.v0);
+            activePower = s0.real();
+            reactivePower = -s0.imag();
+        }
+
+        data.pz0 = (data.constImpedanceActive / 100.0) * activePower;
+        data.pi0 = (data.constCurrentActive / 100.0) * activePower;
+        data.pp0 = (data.constPowerActive / 100.0) * activePower;
+
+        data.qz0 = (data.constImpedanceReactive / 100.0) * reactivePower;
+        data.qi0 = (data.constCurrentReactive / 100.0) * reactivePower;
+        data.qp0 = (data.constPowerReactive / 100.0) * reactivePower;
+
+        data.voltageVector.clear();
+        data.electricalPowerVector.clear();
+
+        if(load->IsOnline())
+            data.electricalPower = std::complex<double>(activePower, reactivePower);
+        else {
+            data.electricalPower = std::complex<double>(0.0, 0.0);
+            data.voltage = std::complex<double>(0.0, 0.0);
+        }
+
+        load->SetElectricalData(data);
+    }
     // Synchronous generators
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
@@ -645,11 +710,12 @@ bool Electromechanical::InitializeDynamicElements()
     return true;
 }
 
-bool Electromechanical::CalculateMachinesCurrents()
+bool Electromechanical::CalculateInjectedCurrents()
 {
     // Reset injected currents vector
     for(unsigned int i = 0; i < m_iBus.size(); ++i) m_iBus[i] = std::complex<double>(0.0, 0.0);
 
+    // Synchronous machines
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
@@ -724,6 +790,49 @@ bool Electromechanical::CalculateMachinesCurrents()
         }
 
         syncGenerator->SetElectricalData(data);
+    }
+
+    // Loads
+    for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
+        Load* load = *it;
+        auto data = load->GetElectricalData();
+
+        if(load->IsOnline()) {
+            int n = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().number;
+            data.voltage = m_vBus[n];
+            double vAbs = std::abs(data.voltage);
+
+            double pz, pi, pp, qz, qi, qp;
+            pz = data.pz0 * std::pow(vAbs / data.v0, 2);
+            pi = data.pi0 * (vAbs / data.v0);
+            pp = data.pp0;
+            qz = data.qz0 * std::pow(vAbs / data.v0, 2);
+            qi = data.qi0 * (vAbs / data.v0);
+            qp = data.qp0;
+
+            // If voltage value is low, set the ZIP load to constant impedance.
+            if(vAbs < data.constCurrentUV) {
+                pi = data.pi0 * (data.constCurrentUV / data.v0) * std::pow(vAbs / data.constCurrentUV, 2);
+                qi = data.qi0 * (data.constCurrentUV / data.v0) * std::pow(vAbs / data.constCurrentUV, 2);
+            }
+            if(vAbs < data.constPowerUV) {
+                pp *= std::pow(vAbs / data.constPowerUV, 2);
+                qp *= std::pow(vAbs / data.constPowerUV, 2);
+            }
+
+            double activePower = pz + pi + pp;
+            double reactivePower = qz + qi + qp;
+
+            std::complex<double> newY = std::complex<double>(activePower, -reactivePower) / (vAbs * vAbs);
+            m_iBus[n] += (data.y0 - newY) * data.voltage;
+
+            data.electricalPower = std::complex<double>(activePower, reactivePower);
+        } else {
+            data.voltage = std::complex<double>(0.0, 0.0);
+            data.electricalPower = std::complex<double>(0.0, 0.0);
+        }
+
+        load->SetElectricalData(data);
     }
     return true;
 }
@@ -843,7 +952,7 @@ bool Electromechanical::SolveSynchronousMachines()
         error = 0.0;
 
         // Calculate the injected currents.
-        if(!CalculateMachinesCurrents()) return false;
+        if(!CalculateInjectedCurrents()) return false;
 
         // Calculate the buses voltages.
         m_vBus = LUEvaluate(m_yBusU, m_yBusL, m_iBus);
@@ -938,6 +1047,15 @@ void Electromechanical::SaveData()
         if(data.plotBus) {
             data.stabVoltageVector.push_back(m_vBus[data.number]);
             bus->SetElectricalData(data);
+        }
+    }
+    for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
+        Load* load = *it;
+        auto data = load->GetElectricalData();
+        if(data.plotLoad) {
+            data.voltageVector.push_back(data.voltage);
+            data.electricalPowerVector.push_back(data.electricalPower);
+            load->SetElectricalData(data);
         }
     }
 }

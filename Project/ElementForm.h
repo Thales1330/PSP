@@ -564,11 +564,33 @@ protected:
     wxChoice* m_choiceReactivePower;
     wxStaticText* m_staticTextType;
     wxChoice* m_choiceType;
+    wxPanel* m_panelStability;
+    wxCheckBox* m_checkBoxPlotData;
+    wxCheckBox* m_checkBoxUseCompLoad;
+    wxStaticText* m_staticTextActivePowerImp;
+    wxTextCtrl* m_textCtrlActivePowerImp;
+    wxStaticText* m_staticTextPerc_1;
+    wxStaticText* m_staticTextActivePowerCur;
+    wxTextCtrl* m_textCtrlActivePowerCur;
+    wxStaticText* m_staticTextPerc_2;
+    wxStaticText* m_staticTextActivePowerPow;
+    wxTextCtrl* m_textCtrlActivePowerPow;
+    wxStaticText* m_staticTextPerc_3;
+    wxStaticText* m_staticTextReactivePowerImp;
+    wxTextCtrl* m_textCtrlReactivePowerImp;
+    wxStaticText* m_staticTextPerc_4;
+    wxStaticText* m_staticTextReactivePowerCur;
+    wxTextCtrl* m_textCtrlReactivePowerCur;
+    wxStaticText* m_staticTextPerc_5;
+    wxStaticText* m_staticTextReactivePowerPow;
+    wxTextCtrl* m_textCtrlReactivePowerPow;
+    wxStaticText* m_staticTextPerc_6;
     wxButton* m_buttonStabButton;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
 protected:
+    virtual void OnCheckBoxCompLoadClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOnButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
@@ -585,6 +607,27 @@ public:
     wxStaticText* GetStaticTextType() { return m_staticTextType; }
     wxChoice* GetChoiceType() { return m_choiceType; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxCheckBox* GetCheckBoxPlotData() { return m_checkBoxPlotData; }
+    wxCheckBox* GetCheckBoxUseCompLoad() { return m_checkBoxUseCompLoad; }
+    wxStaticText* GetStaticTextActivePowerImp() { return m_staticTextActivePowerImp; }
+    wxTextCtrl* GetTextCtrlActivePowerImp() { return m_textCtrlActivePowerImp; }
+    wxStaticText* GetStaticTextPerc_1() { return m_staticTextPerc_1; }
+    wxStaticText* GetStaticTextActivePowerCur() { return m_staticTextActivePowerCur; }
+    wxTextCtrl* GetTextCtrlActivePowerCur() { return m_textCtrlActivePowerCur; }
+    wxStaticText* GetStaticTextPerc_2() { return m_staticTextPerc_2; }
+    wxStaticText* GetStaticTextActivePowerPow() { return m_staticTextActivePowerPow; }
+    wxTextCtrl* GetTextCtrlActivePowerPow() { return m_textCtrlActivePowerPow; }
+    wxStaticText* GetStaticTextPerc_3() { return m_staticTextPerc_3; }
+    wxStaticText* GetStaticTextReactivePowerImp() { return m_staticTextReactivePowerImp; }
+    wxTextCtrl* GetTextCtrlReactivePowerImp() { return m_textCtrlReactivePowerImp; }
+    wxStaticText* GetStaticTextPerc_4() { return m_staticTextPerc_4; }
+    wxStaticText* GetStaticTextReactivePowerCur() { return m_staticTextReactivePowerCur; }
+    wxTextCtrl* GetTextCtrlReactivePowerCur() { return m_textCtrlReactivePowerCur; }
+    wxStaticText* GetStaticTextPerc_5() { return m_staticTextPerc_5; }
+    wxStaticText* GetStaticTextReactivePowerPow() { return m_staticTextReactivePowerPow; }
+    wxTextCtrl* GetTextCtrlReactivePowerPow() { return m_textCtrlReactivePowerPow; }
+    wxStaticText* GetStaticTextPerc_6() { return m_staticTextPerc_6; }
+    wxPanel* GetPanelStability() { return m_panelStability; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonStabButton() { return m_buttonStabButton; }
     wxButton* GetButtonOK() { return m_buttonOK; }

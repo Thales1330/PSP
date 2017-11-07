@@ -30,6 +30,37 @@ struct LoadElectricalData {
     double reactivePower = 0.0;
     ElectricalUnit reactivePowerUnit = UNIT_MVAr;
     LoadType loadType = CONST_POWER;
+
+    // Stability
+    bool plotLoad = false;
+    // ZIP load
+    bool useCompLoad = false;
+    // The power injected on the "i" bus flollow the quadratic equation:
+    // -p(i) = pz0 * (v(i) / v0) ^ 2 + pi0 * (v(i) / v0) + pp0
+    double v0 = 1.0;   // Initial load voltage from load flow in p.u.
+    double pz0 = 1.0;  // Initial active power modelled as constant impedance from load flow in p.u.
+    double pi0 = 0.0;  // Initial active power modelled as constant current from load flow in p.u.
+    double pp0 = 0.0;  // Initial active power modelled as constant power from load flow in p.u.
+    double qz0 = 1.0;  // Initial reactive power modelled as constant impedance from load flow in p.u.
+    double qi0 = 0.0;  // Initial reactive power modelled as constant current from load flow in p.u.
+    double qp0 = 0.0;  // Initial reactive power modelled as constant power from load flow in p.u.
+    double constImpedanceActive = 100.0;    // Constant impedance portion of active power (%).
+    double constCurrentActive = 0.0;        // Constant current portion of active power (%).
+    double constPowerActive = 0.0;          // Constant power portion of active power (%).
+    double constImpedanceReactive = 100.0;  // Constant impedance portion of reactive power (%).
+    double constCurrentReactive = 0.0;      // Constant current portion of reactive power (%).
+    double constPowerReactive = 0.0;        // Constant power portion of reactive power (%).
+    std::complex<double> y0;                // Steady-state equivalent admittance calculated from power flow.
+    // Undervoltage (in p.u.) which the constant current portion will be modelled as constant impedance.
+    double constCurrentUV = 0.7;
+    // Undervoltage (in p.u.) which the constant power portion will be modelled as constant impedance.
+    double constPowerUV = 0.7;
+
+    // Load state variables
+    std::complex<double> voltage;
+    std::vector<std::complex<double> > voltageVector;
+    std::complex<double> electricalPower;
+    std::vector<std::complex<double> > electricalPowerVector;
 };
 
 /**
@@ -56,6 +87,8 @@ class Load : public Shunt
     LoadElectricalData GetElectricalData() { return m_electricalData; }
     LoadElectricalData GetPUElectricalData(double systemPowerBase);
     void SetElectricalData(LoadElectricalData electricalData) { m_electricalData = electricalData; }
+    virtual bool GetPlotData(ElementPlotData& plotData);
+
    protected:
     std::vector<wxPoint2DDouble> m_triangPts;
     LoadElectricalData m_electricalData;
