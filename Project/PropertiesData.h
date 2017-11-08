@@ -29,8 +29,8 @@ struct SimulationData {
     // General simulation data
     double basePower = 100.0;
     ElectricalUnit basePowerUnit = UNIT_MVA;
-    bool faultAfterPowerFlow = true;
-    bool scPowerAfterPowerFlow = true;
+    bool faultAfterPowerFlow = false;
+    bool scPowerAfterPowerFlow = false;
 
     // Power flow
     PowerFlowMethod powerFlowMethod = GAUSS_SEIDEL;

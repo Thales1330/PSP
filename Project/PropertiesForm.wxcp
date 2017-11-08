@@ -8512,7 +8512,7 @@
           }, {
            "type": "colour",
            "m_label": "Fg Colour:",
-           "colour": "Tooltip"
+           "colour": "<Default>"
           }, {
            "type": "font",
            "m_label": "Font:",
@@ -8544,7 +8544,7 @@
           }, {
            "type": "multi-string",
            "m_label": "Label:",
-           "m_value": "Alpha 2017w43a"
+           "m_value": "Alpha 2017w45a"
           }, {
            "type": "string",
            "m_label": "Wrap:",
