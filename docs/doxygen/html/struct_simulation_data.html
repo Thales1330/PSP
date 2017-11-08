@@ -101,10 +101,10 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>basePower</b> = 100
 <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca">ElectricalUnit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>basePowerUnit</b> = <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220ccaa0120ee2353bba9baf0151108a299f6ae">UNIT_MVA</a></td></tr>
 <tr class="separator:a4f00f14bee3145127e12023088e92dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10954746e67fdbc89860f3718ed23ee9"><td class="memItemLeft" align="right" valign="top"><a id="a10954746e67fdbc89860f3718ed23ee9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>faultAfterPowerFlow</b> = true</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>faultAfterPowerFlow</b> = false</td></tr>
 <tr class="separator:a10954746e67fdbc89860f3718ed23ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367edc643dd9b6eca8413c666d1a02c1"><td class="memItemLeft" align="right" valign="top"><a id="a367edc643dd9b6eca8413c666d1a02c1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>scPowerAfterPowerFlow</b> = true</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>scPowerAfterPowerFlow</b> = false</td></tr>
 <tr class="separator:a367edc643dd9b6eca8413c666d1a02c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8e32dc510771960d6d6612e80ddbae6"><td class="memItemLeft" align="right" valign="top"><a id="ab8e32dc510771960d6d6612e80ddbae6"></a>
 PowerFlowMethod&#160;</td><td class="memItemRight" valign="bottom"><b>powerFlowMethod</b> = GAUSS_SEIDEL</td></tr>
@@ -142,6 +142,33 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>plotTime</b> = 1e-2
 <tr class="memitem:a18355fc645416844735b2496700aefab"><td class="memItemLeft" align="right" valign="top"><a id="a18355fc645416844735b2496700aefab"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>useCOI</b> = true</td></tr>
 <tr class="separator:a18355fc645416844735b2496700aefab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a224014ee1d4c47dd3ac6bc49aec06174"><td class="memItemLeft" align="right" valign="top"><a id="a224014ee1d4c47dd3ac6bc49aec06174"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>useCompLoads</b> = false</td></tr>
+<tr class="separator:a224014ee1d4c47dd3ac6bc49aec06174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f5b68f230e0fd82e957c80801e1323f"><td class="memItemLeft" align="right" valign="top"><a id="a0f5b68f230e0fd82e957c80801e1323f"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>constImpedanceActive</b> = 100.0</td></tr>
+<tr class="separator:a0f5b68f230e0fd82e957c80801e1323f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99f5d7c6e162e3b7b219ee762be277be"><td class="memItemLeft" align="right" valign="top"><a id="a99f5d7c6e162e3b7b219ee762be277be"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>constCurrentActive</b> = 0.0</td></tr>
+<tr class="separator:a99f5d7c6e162e3b7b219ee762be277be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bb64db82753b51b4913cb37d8af77c1"><td class="memItemLeft" align="right" valign="top"><a id="a8bb64db82753b51b4913cb37d8af77c1"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>constPowerActive</b> = 0.0</td></tr>
+<tr class="separator:a8bb64db82753b51b4913cb37d8af77c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d60ed25d40e5be9e0e8870596165bb"><td class="memItemLeft" align="right" valign="top"><a id="aa1d60ed25d40e5be9e0e8870596165bb"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>constImpedanceReactive</b> = 100.0</td></tr>
+<tr class="separator:aa1d60ed25d40e5be9e0e8870596165bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8bee01b8bfd695b21d4b250e8cdc40"><td class="memItemLeft" align="right" valign="top"><a id="acb8bee01b8bfd695b21d4b250e8cdc40"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>constCurrentReactive</b> = 0.0</td></tr>
+<tr class="separator:acb8bee01b8bfd695b21d4b250e8cdc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886d3d81aeec00beccfb3e97fcc0c6bd"><td class="memItemLeft" align="right" valign="top"><a id="a886d3d81aeec00beccfb3e97fcc0c6bd"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>constPowerReactive</b> = 0.0</td></tr>
+<tr class="separator:a886d3d81aeec00beccfb3e97fcc0c6bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38528a4891ae579643356a88e07bfa60"><td class="memItemLeft" align="right" valign="top"><a id="a38528a4891ae579643356a88e07bfa60"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>underVoltageConstCurrent</b> = 70.0</td></tr>
+<tr class="separator:a38528a4891ae579643356a88e07bfa60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a910598f19eb945418f3091c6d45d0547"><td class="memItemLeft" align="right" valign="top"><a id="a910598f19eb945418f3091c6d45d0547"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>underVoltageConstPower</b> = 70.0</td></tr>
+<tr class="separator:a910598f19eb945418f3091c6d45d0547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">

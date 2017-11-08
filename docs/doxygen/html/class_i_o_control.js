@@ -6,7 +6,12 @@ var class_i_o_control =
       [ "IN_ACTIVE_POWER", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a3a942ff0ef0f3d8d5db72dce5c3c9fae", null ],
       [ "IN_REACTIVE_POWER", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a93d85bb8a7e63b57b618a1c255e4c61f", null ],
       [ "OUT_FIELD_VOLTAGE", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a5d7ea66bd1f25fa23472c0dd00c4175f", null ],
-      [ "OUT_MEC_POWER", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a3276150d286d747d428297abbe52d313", null ]
+      [ "OUT_MEC_POWER", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a3276150d286d747d428297abbe52d313", null ],
+      [ "IN_INITIAL_TERMINAL_VOLTAGE", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091ae857ab8b188d20df9707c342b27bd0ef", null ],
+      [ "IN_INITIAL_MEC_POWER", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a6482f7dcd3e169f913bf8e12b7ae5e53", null ],
+      [ "IN_INITIAL_VELOCITY", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a903cbbc9b14ff4c2ea9c32d5a9473df5", null ],
+      [ "IN_DELTA_VELOCITY", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a63bad285cee04009a7dc05f031bcf8f5", null ],
+      [ "IN_DELTA_ACTIVE_POWER", "class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a00522b2044a60a26fe124edfefd80b66", null ]
     ] ],
     [ "IOControl", "class_i_o_control.html#a1a3b4a8f356a5d1ab95fdc729b9e758d", null ],
     [ "~IOControl", "class_i_o_control.html#a41afef16a922a517d7362470ba252466", null ],
@@ -22,9 +27,8 @@ var class_i_o_control =
     [ "SetValue", "class_i_o_control.html#ab76679a7c7c0b83e0f3a7e562e07803f", null ],
     [ "ShowForm", "class_i_o_control.html#abbd3054700825f9c4ac1b7c813f7b439", null ],
     [ "UpdatePoints", "class_i_o_control.html#a4ed6c7e0b25b5f8678e2d8375ffd5735", null ],
-    [ "UpdateText", "class_i_o_control.html#af99b84798978d530f1c3a8181cac2f54", null ],
-    [ "m_fontSize", "class_i_o_control.html#a973ae81e5d2d3df3b9088834d1950d32", null ],
-    [ "m_glStringValue", "class_i_o_control.html#a0e5e4b97d0e36099db3d6bf39eaa5dd1", null ],
+    [ "UpdateText", "class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9", null ],
+    [ "m_glText", "class_i_o_control.html#acb1363859386046db43ed7d251cf95f6", null ],
     [ "m_ioFlags", "class_i_o_control.html#a277d748a0aaaf3d31a64c293755ad807", null ],
     [ "m_ioNodeType", "class_i_o_control.html#a4ab76d7f7634b1ed80459f1f17ce37c6", null ],
     [ "m_value", "class_i_o_control.html#a595b6b926353d28d63fefee0f92f7719", null ]

@@ -46,5 +46,6 @@ var class_main_frame =
     [ "m_generalProperties", "class_main_frame.html#aa30782a1fa801cf46cb461e388d57eb4", null ],
     [ "m_locale", "class_main_frame.html#a323110e4e9e99d7358baf119b2e50ad3", null ],
     [ "m_projectNumber", "class_main_frame.html#a88c766e242fb1efba27f0f0d2fb0a207", null ],
+    [ "m_sharedGLContext", "class_main_frame.html#a920e55253af2f7fc9c63a549b16ab226", null ],
     [ "m_workspaceList", "class_main_frame.html#a38697929eab5835946f68dc7680fee5a", null ]
 ];

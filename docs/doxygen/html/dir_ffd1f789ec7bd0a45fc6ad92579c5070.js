@@ -78,6 +78,10 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
     [ "DataReportBase.h", "_data_report_base_8h_source.html", null ],
     [ "DataReportBitmaps.cpp", "_data_report_bitmaps_8cpp_source.html", null ],
     [ "DegreesAndRadians.h", "_degrees_and_radians_8h_source.html", null ],
+    [ "Divider.cpp", "_divider_8cpp_source.html", null ],
+    [ "Divider.h", "_divider_8h.html", [
+      [ "Divider", "class_divider.html", "class_divider" ]
+    ] ],
     [ "ElectricCalculation.cpp", "_electric_calculation_8cpp_source.html", null ],
     [ "ElectricCalculation.h", "_electric_calculation_8h.html", "_electric_calculation_8h" ],
     [ "Electromechanical.cpp", "_electromechanical_8cpp_source.html", null ],
@@ -191,9 +195,17 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
     [ "MainFrameBase.cpp", "_main_frame_base_8cpp_source.html", null ],
     [ "MainFrameBase.h", "_main_frame_base_8h_source.html", null ],
     [ "MainFrameBitmaps.cpp", "_main_frame_bitmaps_8cpp_source.html", null ],
+    [ "MathOperation.cpp", "_math_operation_8cpp_source.html", null ],
+    [ "MathOperation.h", "_math_operation_8h.html", [
+      [ "MathOperation", "class_math_operation.html", "class_math_operation" ]
+    ] ],
     [ "Multiplier.cpp", "_multiplier_8cpp_source.html", null ],
     [ "Multiplier.h", "_multiplier_8h.html", [
       [ "Multiplier", "class_multiplier.html", "class_multiplier" ]
+    ] ],
+    [ "OpenGLText.cpp", "_open_g_l_text_8cpp_source.html", null ],
+    [ "OpenGLText.h", "_open_g_l_text_8h.html", [
+      [ "OpenGLText", "class_open_g_l_text.html", "class_open_g_l_text" ]
     ] ],
     [ "PowerElement.cpp", "_power_element_8cpp_source.html", null ],
     [ "PowerElement.h", "_power_element_8h.html", "_power_element_8h" ],
@@ -277,7 +289,5 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
     [ "Workspace.h", "_workspace_8h.html", "_workspace_8h" ],
     [ "WorkspaceBase.cpp", "_workspace_base_8cpp_source.html", null ],
     [ "WorkspaceBase.h", "_workspace_base_8h_source.html", null ],
-    [ "WorkspaceBitmaps.cpp", "_workspace_bitmaps_8cpp_source.html", null ],
-    [ "wxGLString.cpp", "wx_g_l_string_8cpp_source.html", null ],
-    [ "wxGLString.h", "wx_g_l_string_8h_source.html", null ]
+    [ "WorkspaceBitmaps.cpp", "_workspace_bitmaps_8cpp_source.html", null ]
 ];

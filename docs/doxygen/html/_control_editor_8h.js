@@ -11,6 +11,7 @@ var _control_editor_8h =
       [ "ID_GAIN", "_control_editor_8h.html#a8b2fbb4494abb95ea860e1b6b3cb7076abc8cc51c937d00684cb6967548dbbe12", null ],
       [ "ID_MULT", "_control_editor_8h.html#a8b2fbb4494abb95ea860e1b6b3cb7076a4db14943629d93315bc091b2d7e8ac1b", null ],
       [ "ID_EXP", "_control_editor_8h.html#a8b2fbb4494abb95ea860e1b6b3cb7076a9f541dfe8890f2636816ed2d7f8d07d7", null ],
-      [ "ID_RATELIM", "_control_editor_8h.html#a8b2fbb4494abb95ea860e1b6b3cb7076aec5fbed678b51ff6e1b215cb36ac9bfa", null ]
+      [ "ID_RATELIM", "_control_editor_8h.html#a8b2fbb4494abb95ea860e1b6b3cb7076aec5fbed678b51ff6e1b215cb36ac9bfa", null ],
+      [ "ID_MATH_DIV", "_control_editor_8h.html#a8b2fbb4494abb95ea860e1b6b3cb7076a9dc7ab1b6b773b8c0ef749ccf6cff831", null ]
     ] ]
 ];

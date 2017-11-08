@@ -139,6 +139,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>AddElement</b
 <tr class="memitem:a212828bd1ce2012a6a5dc921f796a16e"><td class="memItemLeft" align="right" valign="top"><a id="a212828bd1ce2012a6a5dc921f796a16e"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Redraw</b> ()</td></tr>
 <tr class="separator:a212828bd1ce2012a6a5dc921f796a16e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0130ef582fbd686883a772ca9cc68d2"><td class="memItemLeft" align="right" valign="top"><a id="ac0130ef582fbd686883a772ca9cc68d2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetJustOpened</b> (bool justOpened)</td></tr>
+<tr class="separator:ac0130ef582fbd686883a772ca9cc68d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ff32f01ab5c2c3aeaf78ce545805a29"><td class="memItemLeft" align="right" valign="top"><a id="a1ff32f01ab5c2c3aeaf78ce545805a29"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>RotateSelectedElements</b> (bool clockwise)</td></tr>
 <tr class="separator:a1ff32f01ab5c2c3aeaf78ce545805a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -248,12 +251,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>BuildControlElementPa
 <tr class="memitem:ae02c4f6a57f265dca61b0d610c133045"><td class="memItemLeft" align="right" valign="top"><a id="ae02c4f6a57f265dca61b0d610c133045"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetViewport</b> ()</td></tr>
 <tr class="separator:ae02c4f6a57f265dca61b0d610c133045"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a399ce8936bf198d0ade2b4adccac22c5"><td class="memItemLeft" align="right" valign="top"><a id="a399ce8936bf198d0ade2b4adccac22c5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ConsolidateTexts</b> ()</td></tr>
-<tr class="separator:a399ce8936bf198d0ade2b4adccac22c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adade1f7f85eaf3406536371787aea54d"><td class="memItemLeft" align="right" valign="top"><a id="adade1f7f85eaf3406536371787aea54d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLastElementID</b> ()</td></tr>
-<tr class="separator:adade1f7f85eaf3406536371787aea54d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4f6218ac5d9de94091e7c7ee90c998e"><td class="memItemLeft" align="right" valign="top"><a id="ad4f6218ac5d9de94091e7c7ee90c998e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>GetNextID</b> ()</td></tr>
+<tr class="separator:ad4f6218ac5d9de94091e7c7ee90c998e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4b1d8d1b470336cce4183a1bbd5d068"><td class="memItemLeft" align="right" valign="top"><a id="ae4b1d8d1b470336cce4183a1bbd5d068"></a>
 std::vector&lt; <a class="el" href="class_connection_line.html">ConnectionLine</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteLineFromList</b> (std::vector&lt; <a class="el" href="class_connection_line.html">ConnectionLine</a> *&gt;::iterator &amp;it)</td></tr>
 <tr class="separator:ae4b1d8d1b470336cce4183a1bbd5d068"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -284,15 +284,12 @@ std::vector&lt; <a class="el" href="class_connection_line.html">ConnectionLine</
 <tr class="memitem:ac6e551c5fee3258928f282981c289c1c"><td class="memItemLeft" align="right" valign="top"><a id="ac6e551c5fee3258928f282981c289c1c"></a>
 <a class="el" href="class_control_element_container.html">ControlElementContainer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_ctrlContainer</b> = NULL</td></tr>
 <tr class="separator:ac6e551c5fee3258928f282981c289c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e1f15ddaba866993fab86b70920765d"><td class="memItemLeft" align="right" valign="top"><a id="a7e1f15ddaba866993fab86b70920765d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_firstDraw</b> = true</td></tr>
-<tr class="separator:a7e1f15ddaba866993fab86b70920765d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8baa4bb5bf86e1347ec88393a03f6c60"><td class="memItemLeft" align="right" valign="top"><a id="a8baa4bb5bf86e1347ec88393a03f6c60"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_justOpened</b> = false</td></tr>
+<tr class="separator:a8baa4bb5bf86e1347ec88393a03f6c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f01fdd06ab4e520a62af5fcab087302"><td class="memItemLeft" align="right" valign="top"><a id="a1f01fdd06ab4e520a62af5fcab087302"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_ioFlags</b></td></tr>
 <tr class="separator:a1f01fdd06ab4e520a62af5fcab087302"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc63499d3b4469db86a1f60c3260b8e6"><td class="memItemLeft" align="right" valign="top"><a id="abc63499d3b4469db86a1f60c3260b8e6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastElementID</b> = 0</td></tr>
-<tr class="separator:abc63499d3b4469db86a1f60c3260b8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aede55dc44f1bcc87ffd3e004dcb902be"><td class="memItemLeft" align="right" valign="top"><a id="aede55dc44f1bcc87ffd3e004dcb902be"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_inputType</b> = 0</td></tr>
 <tr class="separator:aede55dc44f1bcc87ffd3e004dcb902be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -336,7 +333,7 @@ wxButton *&#160;</td><td class="memItemRight" valign="bottom"><b>m_buttonOK</b><
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00091">91</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8h_source.html#l00104">104</a> of file <a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>Project/<a class="el" href="_control_editor_8h_source.html">ControlEditor.h</a></li>
 <li>Project/<a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a></li>

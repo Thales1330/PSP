@@ -143,6 +143,9 @@ virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><b>GetText</
 <tr class="memitem:a255ba9b693f614b16986ac238c28f66e"><td class="memItemLeft" align="right" valign="top"><a id="a255ba9b693f614b16986ac238c28f66e"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetText</b> (wxString text)</td></tr>
 <tr class="separator:a255ba9b693f614b16986ac238c28f66e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ed5628ce7de6095dcf898727ee2e024"><td class="memItemLeft" align="right" valign="top"><a id="a7ed5628ce7de6095dcf898727ee2e024"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsGLTextOK</b> ()</td></tr>
+<tr class="separator:a7ed5628ce7de6095dcf898727ee2e024"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3f1487162842f26d6d50b298bb3142d"><td class="memItemLeft" align="right" valign="top"><a id="ab3f1487162842f26d6d50b298bb3142d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDataType</b> (const DataType &amp;dataType)</td></tr>
 <tr class="separator:ab3f1487162842f26d6d50b298bb3142d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,9 +161,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElementNumber</b> 
 <tr class="memitem:aa32f9156fbbe783fab5d90072667e2c3"><td class="memItemLeft" align="right" valign="top"><a id="aa32f9156fbbe783fab5d90072667e2c3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElementType</b> (const ElementType elementType)</td></tr>
 <tr class="separator:aa32f9156fbbe783fab5d90072667e2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d37b9c067e62e10ebd1f0f74dbb5e66"><td class="memItemLeft" align="right" valign="top"><a id="a0d37b9c067e62e10ebd1f0f74dbb5e66"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFontSize</b> (int fontSize)</td></tr>
-<tr class="separator:a0d37b9c067e62e10ebd1f0f74dbb5e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eb67f2bf595a78858733c96a5bc05d6"><td class="memItemLeft" align="right" valign="top"><a id="a5eb67f2bf595a78858733c96a5bc05d6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetUnit</b> (const <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca">ElectricalUnit</a> unit)</td></tr>
 <tr class="separator:a5eb67f2bf595a78858733c96a5bc05d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,9 +182,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>GetElementNumber</b> (
 <tr class="memitem:a80916b96c94d30abd8d76dcbf01d580d"><td class="memItemLeft" align="right" valign="top"><a id="a80916b96c94d30abd8d76dcbf01d580d"></a>
 const ElementType&#160;</td><td class="memItemRight" valign="bottom"><b>GetElementType</b> () const</td></tr>
 <tr class="separator:a80916b96c94d30abd8d76dcbf01d580d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f58eb1736e822f96882ded57938dbbd"><td class="memItemLeft" align="right" valign="top"><a id="a3f58eb1736e822f96882ded57938dbbd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetFontSize</b> () const</td></tr>
-<tr class="separator:a3f58eb1736e822f96882ded57938dbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41eabb28f45124d5da3ec2d703ce9018"><td class="memItemLeft" align="right" valign="top"><a id="a41eabb28f45124d5da3ec2d703ce9018"></a>
 const <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca">ElectricalUnit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetUnit</b> () const</td></tr>
 <tr class="separator:a41eabb28f45124d5da3ec2d703ce9018"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -395,24 +392,18 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a2d07db0c15bdbd9d7056ac794f524f57"><td class="memItemLeft" align="right" valign="top"><a id="a2d07db0c15bdbd9d7056ac794f524f57"></a>
-<a class="el" href="classwx_g_l_string.html">wxGLString</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glString</b> = NULL</td></tr>
-<tr class="separator:a2d07db0c15bdbd9d7056ac794f524f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9836ec9395fdd3e0ce1f1914219fe360"><td class="memItemLeft" align="right" valign="top"><a id="a9836ec9395fdd3e0ce1f1914219fe360"></a>
-<a class="el" href="classwx_g_l_string_array.html">wxGLStringArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glStringArray</b> = NULL</td></tr>
-<tr class="separator:a9836ec9395fdd3e0ce1f1914219fe360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d0629dec49cece668f41d2a85062f39"><td class="memItemLeft" align="right" valign="top"><a id="a0d0629dec49cece668f41d2a85062f39"></a>
 wxString&#160;</td><td class="memItemRight" valign="bottom"><b>m_text</b> = _(&quot;Text&quot;)</td></tr>
 <tr class="separator:a0d0629dec49cece668f41d2a85062f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac045b28b3621a5fddb3e5ac86889bfca"><td class="memItemLeft" align="right" valign="top"><a id="ac045b28b3621a5fddb3e5ac86889bfca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>m_numberOfLines</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>m_numberOfLines</b> = 0</td></tr>
 <tr class="separator:ac045b28b3621a5fddb3e5ac86889bfca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d1b7f1b53288297dfc8f77be4c37ac4"><td class="memItemLeft" align="right" valign="top"><a id="a4d1b7f1b53288297dfc8f77be4c37ac4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_isMultlineText</b> = false</td></tr>
 <tr class="separator:a4d1b7f1b53288297dfc8f77be4c37ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f40cb8ed553f1680bf402f9c8e2b541"><td class="memItemLeft" align="right" valign="top"><a id="a2f40cb8ed553f1680bf402f9c8e2b541"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontSize</b> = 10</td></tr>
-<tr class="separator:a2f40cb8ed553f1680bf402f9c8e2b541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcdefd0b4ce4b6a915ff905dad6d1345"><td class="memItemLeft" align="right" valign="top"><a id="abcdefd0b4ce4b6a915ff905dad6d1345"></a>
+std::vector&lt; <a class="el" href="class_open_g_l_text.html">OpenGLText</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_openGLTextList</b></td></tr>
+<tr class="separator:abcdefd0b4ce4b6a915ff905dad6d1345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7010e26ac225166d3a7f23118bf45f74"><td class="memItemLeft" align="right" valign="top"><a id="a7010e26ac225166d3a7f23118bf45f74"></a>
 <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_element</b> = NULL</td></tr>
 <tr class="separator:a7010e26ac225166d3a7f23118bf45f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -523,7 +514,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00072">72</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00075">75</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4f273ea7008c72533327c25caff2e917"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f273ea7008c72533327c25caff2e917">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -570,7 +561,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a569178e9138490a981511a644536c0f9">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00080">80</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8h_source.html#l00083">83</a> of file <a class="el" href="_text_8h_source.html">Text.h</a>.</p>
 
 </div>
 </div>
@@ -608,7 +599,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00047">47</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00043">43</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>
@@ -640,7 +631,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00967">967</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00919">919</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>
@@ -678,7 +669,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00092">92</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00082">82</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>
@@ -716,7 +707,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00162">162</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_text_8cpp_source.html#l00114">114</a> of file <a class="el" href="_text_8cpp_source.html">Text.cpp</a>.</p>
 
 </div>
 </div>

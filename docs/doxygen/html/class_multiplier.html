@@ -102,6 +102,7 @@ Inheritance diagram for Multiplier:</div>
  <div class="center">
   <img src="class_multiplier.png" usemap="#Multiplier_map" alt=""/>
   <map id="Multiplier_map" name="Multiplier_map">
+<area href="class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="MathOperation" shape="rect" coords="0,112,97,136"/>
 <area href="class_control_element.html" alt="ControlElement" shape="rect" coords="0,56,97,80"/>
 <area href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="Element" shape="rect" coords="0,0,97,24"/>
 </map>
@@ -112,30 +113,37 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a48166896d667216da146a0b25766f867"><td class="memItemLeft" align="right" valign="top"><a id="a48166896d667216da146a0b25766f867"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Multiplier</b> (int id)</td></tr>
 <tr class="separator:a48166896d667216da146a0b25766f867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae854fd981a98aca93b286081cc9c19f3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_multiplier.html#ae854fd981a98aca93b286081cc9c19f3">Draw</a> (wxPoint2DDouble translation, double scale) const</td></tr>
-<tr class="memdesc:ae854fd981a98aca93b286081cc9c19f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element.  <a href="#ae854fd981a98aca93b286081cc9c19f3">More...</a><br /></td></tr>
-<tr class="separator:ae854fd981a98aca93b286081cc9c19f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acee6216a03b550f3a9cad2bef3963a18"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_multiplier.html#acee6216a03b550f3a9cad2bef3963a18">Contains</a> (wxPoint2DDouble position) const</td></tr>
-<tr class="memdesc:acee6216a03b550f3a9cad2bef3963a18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <a href="#acee6216a03b550f3a9cad2bef3963a18">More...</a><br /></td></tr>
-<tr class="separator:acee6216a03b550f3a9cad2bef3963a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba53ef763812fbff891cdf0b89c7fcca"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_multiplier.html#aba53ef763812fbff891cdf0b89c7fcca">Intersects</a> (wxRect2DDouble rect) const</td></tr>
-<tr class="memdesc:aba53ef763812fbff891cdf0b89c7fcca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the element's rect intersects other rect.  <a href="#aba53ef763812fbff891cdf0b89c7fcca">More...</a><br /></td></tr>
-<tr class="separator:aba53ef763812fbff891cdf0b89c7fcca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fa1206b47c626930db753a70e01680d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_multiplier.html#a4fa1206b47c626930db753a70e01680d">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:a4fa1206b47c626930db753a70e01680d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <a href="#a4fa1206b47c626930db753a70e01680d">More...</a><br /></td></tr>
-<tr class="separator:a4fa1206b47c626930db753a70e01680d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae01f155ed56925cb87d71a860882a3a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_multiplier.html#ae01f155ed56925cb87d71a860882a3a1">Rotate</a> (bool clockwise=true)</td></tr>
-<tr class="memdesc:ae01f155ed56925cb87d71a860882a3a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <a href="#ae01f155ed56925cb87d71a860882a3a1">More...</a><br /></td></tr>
-<tr class="separator:ae01f155ed56925cb87d71a860882a3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43398a07b130b819c229e1512066456c"><td class="memItemLeft" align="right" valign="top"><a id="a43398a07b130b819c229e1512066456c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePoints</b> ()</td></tr>
-<tr class="separator:a43398a07b130b819c229e1512066456c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed6b8d7e44aa5adb812be92954a3f03"><td class="memItemLeft" align="right" valign="top"><a id="a2ed6b8d7e44aa5adb812be92954a3f03"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawSymbol</b> () const</td></tr>
+<tr class="separator:a2ed6b8d7e44aa5adb812be92954a3f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d6101ab83aa92316efdb4d26b715d4c"><td class="memItemLeft" align="right" valign="top"><a id="a9d6101ab83aa92316efdb4d26b715d4c"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (double input, double timeStep)</td></tr>
 <tr class="separator:a9d6101ab83aa92316efdb4d26b715d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab487232a96ed3c3f3a7c3628ddaa4c77"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_multiplier.html#ab487232a96ed3c3f3a7c3628ddaa4c77">GetCopy</a> ()</td></tr>
 <tr class="memdesc:ab487232a96ed3c3f3a7c3628ddaa4c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <a href="#ab487232a96ed3c3f3a7c3628ddaa4c77">More...</a><br /></td></tr>
 <tr class="separator:ab487232a96ed3c3f3a7c3628ddaa4c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_math_operation"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_math_operation')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_math_operation.html">MathOperation</a></td></tr>
+<tr class="memitem:ae82fbb0009b0cdc14dc46ebffe985b0f inherit pub_methods_class_math_operation"><td class="memItemLeft" align="right" valign="top"><a id="ae82fbb0009b0cdc14dc46ebffe985b0f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MathOperation</b> (int id)</td></tr>
+<tr class="separator:ae82fbb0009b0cdc14dc46ebffe985b0f inherit pub_methods_class_math_operation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e025543abc271d063ef2dcf739b76d inherit pub_methods_class_math_operation"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_math_operation.html#a08e025543abc271d063ef2dcf739b76d">Draw</a> (wxPoint2DDouble translation, double scale) const</td></tr>
+<tr class="memdesc:a08e025543abc271d063ef2dcf739b76d inherit pub_methods_class_math_operation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element.  <a href="class_math_operation.html#a08e025543abc271d063ef2dcf739b76d">More...</a><br /></td></tr>
+<tr class="separator:a08e025543abc271d063ef2dcf739b76d inherit pub_methods_class_math_operation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee3a8f6e0d401723d9b11bad24f8ceaa inherit pub_methods_class_math_operation"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_math_operation.html#aee3a8f6e0d401723d9b11bad24f8ceaa">Contains</a> (wxPoint2DDouble position) const</td></tr>
+<tr class="memdesc:aee3a8f6e0d401723d9b11bad24f8ceaa inherit pub_methods_class_math_operation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <a href="class_math_operation.html#aee3a8f6e0d401723d9b11bad24f8ceaa">More...</a><br /></td></tr>
+<tr class="separator:aee3a8f6e0d401723d9b11bad24f8ceaa inherit pub_methods_class_math_operation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fdd533e844f6cd9d852e64f5fa9edc3 inherit pub_methods_class_math_operation"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_math_operation.html#a0fdd533e844f6cd9d852e64f5fa9edc3">Intersects</a> (wxRect2DDouble rect) const</td></tr>
+<tr class="memdesc:a0fdd533e844f6cd9d852e64f5fa9edc3 inherit pub_methods_class_math_operation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the element's rect intersects other rect.  <a href="class_math_operation.html#a0fdd533e844f6cd9d852e64f5fa9edc3">More...</a><br /></td></tr>
+<tr class="separator:a0fdd533e844f6cd9d852e64f5fa9edc3 inherit pub_methods_class_math_operation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb3f4d562963a40a605a2d026129bf79 inherit pub_methods_class_math_operation"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_math_operation.html#acb3f4d562963a40a605a2d026129bf79">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
+<tr class="memdesc:acb3f4d562963a40a605a2d026129bf79 inherit pub_methods_class_math_operation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <a href="class_math_operation.html#acb3f4d562963a40a605a2d026129bf79">More...</a><br /></td></tr>
+<tr class="separator:acb3f4d562963a40a605a2d026129bf79 inherit pub_methods_class_math_operation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a7ee572ca3787ff537cfc0fea3df7cd inherit pub_methods_class_math_operation"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_math_operation.html#a7a7ee572ca3787ff537cfc0fea3df7cd">Rotate</a> (bool clockwise=true)</td></tr>
+<tr class="memdesc:a7a7ee572ca3787ff537cfc0fea3df7cd inherit pub_methods_class_math_operation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <a href="class_math_operation.html#a7a7ee572ca3787ff537cfc0fea3df7cd">More...</a><br /></td></tr>
+<tr class="separator:a7a7ee572ca3787ff537cfc0fea3df7cd inherit pub_methods_class_math_operation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae800ebd9a2eab128ee14821ab2176ec0 inherit pub_methods_class_math_operation"><td class="memItemLeft" align="right" valign="top"><a id="ae800ebd9a2eab128ee14821ab2176ec0"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePoints</b> ()</td></tr>
+<tr class="separator:ae800ebd9a2eab128ee14821ab2176ec0 inherit pub_methods_class_math_operation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_control_element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_control_element')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_control_element.html">ControlElement</a></td></tr>
 <tr class="memitem:aa03ed482f0f726e8b4724e815b1cdfb1 inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="aa03ed482f0f726e8b4724e815b1cdfb1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ControlElement</b> (int id)</td></tr>
@@ -158,9 +166,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawNodes</b>
 <tr class="memitem:a8f817b751c7766f070cee27d094a5499 inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a8f817b751c7766f070cee27d094a5499"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>ReplaceNode</b> (<a class="el" href="class_node.html">Node</a> *oldNode, <a class="el" href="class_node.html">Node</a> *newNode)</td></tr>
 <tr class="separator:a8f817b751c7766f070cee27d094a5499 inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a802885ecd7464b6ae085da276be4d06c inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a802885ecd7464b6ae085da276be4d06c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateText</b> ()</td></tr>
-<tr class="separator:a802885ecd7464b6ae085da276be4d06c inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab65259365622f1d4a2a1915ee93431 inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">UpdateText</a> ()</td></tr>
+<tr class="memdesc:acab65259365622f1d4a2a1915ee93431 inherit pub_methods_class_control_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the OpenGL text in the element (if present).  <a href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">More...</a><br /></td></tr>
+<tr class="separator:acab65259365622f1d4a2a1915ee93431 inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8958776ec4e32bc0b23f90f4ee9ea2e3 inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a8958776ec4e32bc0b23f90f4ee9ea2e3"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsSolved</b> () const</td></tr>
 <tr class="separator:a8958776ec4e32bc0b23f90f4ee9ea2e3 inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -466,93 +474,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 
 <p class="definition">Definition at line <a class="el" href="_multiplier_8h_source.html#l00032">32</a> of file <a class="el" href="_multiplier_8h_source.html">Multiplier.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="acee6216a03b550f3a9cad2bef3963a18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acee6216a03b550f3a9cad2bef3963a18">&#9670;&nbsp;</a></span>Contains()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool Multiplier::Contains </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if the element contains a position. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">position</td><td>Position to be checked. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_multiplier_8h_source.html#l00039">39</a> of file <a class="el" href="_multiplier_8h_source.html">Multiplier.h</a>.</p>
-
-</div>
-</div>
-<a id="ae854fd981a98aca93b286081cc9c19f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae854fd981a98aca93b286081cc9c19f3">&#9670;&nbsp;</a></span>Draw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Multiplier::Draw </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble&#160;</td>
-          <td class="paramname"><em>translation</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>scale</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw the element. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">translation</td><td>Translation of the system. </td></tr>
-    <tr><td class="paramname">scale</td><td>Scale of the system. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_multiplier_8cpp_source.html#l00037">37</a> of file <a class="el" href="_multiplier_8cpp_source.html">Multiplier.cpp</a>.</p>
-
-</div>
-</div>
 <a id="ab487232a96ed3c3f3a7c3628ddaa4c77"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab487232a96ed3c3f3a7c3628ddaa4c77">&#9670;&nbsp;</a></span>GetCopy()</h2>
 
@@ -581,133 +502,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_multiplier_8cpp_source.html#l00136">136</a> of file <a class="el" href="_multiplier_8cpp_source.html">Multiplier.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aba53ef763812fbff891cdf0b89c7fcca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba53ef763812fbff891cdf0b89c7fcca">&#9670;&nbsp;</a></span>Intersects()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool Multiplier::Intersects </td>
-          <td>(</td>
-          <td class="paramtype">wxRect2DDouble&#160;</td>
-          <td class="paramname"><em>rect</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the element's rect intersects other rect. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rect</td><td>Rect to check intersection. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_multiplier_8h_source.html#l00040">40</a> of file <a class="el" href="_multiplier_8h_source.html">Multiplier.h</a>.</p>
-
-</div>
-</div>
-<a id="ae01f155ed56925cb87d71a860882a3a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae01f155ed56925cb87d71a860882a3a1">&#9670;&nbsp;</a></span>Rotate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Multiplier::Rotate </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>clockwise</em> = <code>true</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Rotate the element. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">clockwise</td><td>True to rotate clockwise, false to rotate counter-clockwise. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_multiplier_8cpp_source.html#l00064">64</a> of file <a class="el" href="_multiplier_8cpp_source.html">Multiplier.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a4fa1206b47c626930db753a70e01680d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fa1206b47c626930db753a70e01680d">&#9670;&nbsp;</a></span>ShowForm()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool Multiplier::ShowForm </td>
-          <td>(</td>
-          <td class="paramtype">wxWindow *&#160;</td>
-          <td class="paramname"><em>parent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_element.html">Element</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Show element data form. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
-
-<p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_multiplier_8h_source.html#l00041">41</a> of file <a class="el" href="_multiplier_8h_source.html">Multiplier.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_multiplier_8cpp_source.html#l00068">68</a> of file <a class="el" href="_multiplier_8cpp_source.html">Multiplier.cpp</a>.</p>
 
 </div>
 </div>

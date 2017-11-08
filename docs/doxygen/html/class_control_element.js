@@ -13,7 +13,7 @@ var class_control_element =
     [ "SetSolved", "class_control_element.html#a899b994168cf0c98695e82a4f3e7c98b", null ],
     [ "Solve", "class_control_element.html#aeee4f373f0ebca4589b9ef77fe40c291", null ],
     [ "StartMove", "class_control_element.html#a61440a392d438de163bfe9ffb8e9efec", null ],
-    [ "UpdateText", "class_control_element.html#a802885ecd7464b6ae085da276be4d06c", null ],
+    [ "UpdateText", "class_control_element.html#acab65259365622f1d4a2a1915ee93431", null ],
     [ "m_nodeList", "class_control_element.html#af1813931d9b51f5def437ba3c31e8aba", null ],
     [ "m_output", "class_control_element.html#af669ba711650e3befaad4ed70d2776ab", null ],
     [ "m_solved", "class_control_element.html#abcd5f56c2c771a58b0f1ea80eb8c6a86", null ]

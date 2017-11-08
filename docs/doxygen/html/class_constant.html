@@ -128,9 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a867addfc3c1a755b7aa0032d119245c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constant.html#a867addfc3c1a755b7aa0032d119245c6">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:a867addfc3c1a755b7aa0032d119245c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <a href="#a867addfc3c1a755b7aa0032d119245c6">More...</a><br /></td></tr>
 <tr class="separator:a867addfc3c1a755b7aa0032d119245c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adda09379e36416476d5e5a2f61c8dad3"><td class="memItemLeft" align="right" valign="top"><a id="adda09379e36416476d5e5a2f61c8dad3"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateText</b> ()</td></tr>
-<tr class="separator:adda09379e36416476d5e5a2f61c8dad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a380618903f79d9062da054a7337bab97"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constant.html#a380618903f79d9062da054a7337bab97">UpdateText</a> ()</td></tr>
+<tr class="memdesc:a380618903f79d9062da054a7337bab97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the OpenGL text in the element (if present).  <a href="#a380618903f79d9062da054a7337bab97">More...</a><br /></td></tr>
+<tr class="separator:a380618903f79d9062da054a7337bab97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a059fdb74aa6aea03fbd7a22de1def41c"><td class="memItemLeft" align="right" valign="top"><a id="a059fdb74aa6aea03fbd7a22de1def41c"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetValue</b> (double value)</td></tr>
 <tr class="separator:a059fdb74aa6aea03fbd7a22de1def41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -378,12 +378,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a34ebce575d175d506f46adc72c3a2070"><td class="memItemLeft" align="right" valign="top"><a id="a34ebce575d175d506f46adc72c3a2070"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>m_value</b> = 1.0</td></tr>
 <tr class="separator:a34ebce575d175d506f46adc72c3a2070"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1916148248a168f589791ec0435ec937"><td class="memItemLeft" align="right" valign="top"><a id="a1916148248a168f589791ec0435ec937"></a>
-<a class="el" href="classwx_g_l_string.html">wxGLString</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glStringValue</b> = NULL</td></tr>
-<tr class="separator:a1916148248a168f589791ec0435ec937"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d1cff7badada5e9350d19649086a79a"><td class="memItemLeft" align="right" valign="top"><a id="a3d1cff7badada5e9350d19649086a79a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontSize</b> = 10</td></tr>
-<tr class="separator:a3d1cff7badada5e9350d19649086a79a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15fd99035dc28611e49f383bc4cfc56f"><td class="memItemLeft" align="right" valign="top"><a id="a15fd99035dc28611e49f383bc4cfc56f"></a>
+<a class="el" href="class_open_g_l_text.html">OpenGLText</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glText</b> = NULL</td></tr>
+<tr class="separator:a15fd99035dc28611e49f383bc4cfc56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_control_element"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_control_element')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_control_element.html">ControlElement</a></td></tr>
 <tr class="memitem:af1813931d9b51f5def437ba3c31e8aba inherit pro_attribs_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="af1813931d9b51f5def437ba3c31e8aba"></a>
 std::vector&lt; <a class="el" href="class_node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_nodeList</b></td></tr>
@@ -568,7 +565,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00032">32</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00035">35</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
 
 </div>
 </div>
@@ -600,7 +597,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00123">123</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00116">116</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +673,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00067">67</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00066">66</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +723,39 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00056">56</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00055">55</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a380618903f79d9062da054a7337bab97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a380618903f79d9062da054a7337bab97">&#9670;&nbsp;</a></span>UpdateText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Constant::UpdateText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the OpenGL text in the element (if present). </p>
+<dl class="section return"><dt>Returns</dt><dd>true if <a class="el" href="class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. ">OpenGLText</a> is ok, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_constant_8cpp_source.html#l00124">124</a> of file <a class="el" href="_constant_8cpp_source.html">Constant.cpp</a>.</p>
 
 </div>
 </div>

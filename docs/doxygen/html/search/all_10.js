@@ -5,8 +5,6 @@ var searchData=
   ['textform',['TextForm',['../class_text_form.html',1,'']]],
   ['textform_2eh',['TextForm.h',['../_text_form_8h.html',1,'']]],
   ['textformbase',['TextFormBase',['../class_text_form_base.html',1,'']]],
-  ['textgldrawable',['TextGLDrawable',['../class_text_g_l_drawable.html',1,'']]],
-  ['texttexture',['TextTexture',['../class_text_texture.html',1,'']]],
   ['transferfunction',['TransferFunction',['../class_transfer_function.html',1,'']]],
   ['transferfunction_2eh',['TransferFunction.h',['../_transfer_function_8h.html',1,'']]],
   ['transferfunctionform',['TransferFunctionForm',['../class_transfer_function_form.html',1,'']]],

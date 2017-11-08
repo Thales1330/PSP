@@ -101,18 +101,18 @@ $(document).ready(function(){initNavTree('class_control_element_solver.html','')
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad9e006422893e09204aa1b8037223cc2"><td class="memItemLeft" align="right" valign="top"><a id="ad9e006422893e09204aa1b8037223cc2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ControlElementSolver</b> (<a class="el" href="class_control_editor.html">ControlEditor</a> *controlEditor, double timeStep=1e-3, double integrationError=1e-3, bool startAllZero=true, double input=0.0)</td></tr>
-<tr class="separator:ad9e006422893e09204aa1b8037223cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18ed70b4ad042171dc155bdedeb66d0f"><td class="memItemLeft" align="right" valign="top"><a id="a18ed70b4ad042171dc155bdedeb66d0f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ControlElementSolver</b> (<a class="el" href="class_control_element_container.html">ControlElementContainer</a> *ctrlContainer, double timeStep=1e-3, double integrationError=1e-3, bool startAllZero=true, double input=0.0, wxWindow *parent=NULL)</td></tr>
-<tr class="separator:a18ed70b4ad042171dc155bdedeb66d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ab86b8eb7bb44d5566e67e130bc72c9"><td class="memItemLeft" align="right" valign="top"><a id="a0ab86b8eb7bb44d5566e67e130bc72c9"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>InitializeValues</b> (double input, bool startAllZero)</td></tr>
-<tr class="separator:a0ab86b8eb7bb44d5566e67e130bc72c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab55025bf6838a7e6fe29a1418cbc2262"><td class="memItemLeft" align="right" valign="top"><a id="ab55025bf6838a7e6fe29a1418cbc2262"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SolveNextStep</b> (double input)</td></tr>
-<tr class="separator:ab55025bf6838a7e6fe29a1418cbc2262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ec1757dd3fb6379507ec5ef6de0b66f"><td class="memItemLeft" align="right" valign="top"><a id="a4ec1757dd3fb6379507ec5ef6de0b66f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ControlElementSolver</b> (<a class="el" href="class_control_editor.html">ControlEditor</a> *controlEditor, double timeStep=1e-3, double integrationError=1e-3)</td></tr>
+<tr class="separator:a4ec1757dd3fb6379507ec5ef6de0b66f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9796cc5956ff7742f5578b222091d157"><td class="memItemLeft" align="right" valign="top"><a id="a9796cc5956ff7742f5578b222091d157"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ControlElementSolver</b> (<a class="el" href="class_control_element_container.html">ControlElementContainer</a> *ctrlContainer, double timeStep=1e-3, double integrationError=1e-3, wxWindow *parent=NULL)</td></tr>
+<tr class="separator:a9796cc5956ff7742f5578b222091d157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a873cba8a6714cbd410975eb271cac082"><td class="memItemLeft" align="right" valign="top"><a id="a873cba8a6714cbd410975eb271cac082"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>InitializeValues</b> (bool startAllZero)</td></tr>
+<tr class="separator:a873cba8a6714cbd410975eb271cac082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d77c276acfc7c97a5e0e7da6538f501"><td class="memItemLeft" align="right" valign="top"><a id="a4d77c276acfc7c97a5e0e7da6538f501"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SolveNextStep</b> ()</td></tr>
+<tr class="separator:a4d77c276acfc7c97a5e0e7da6538f501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e4ee90763316c3259b3c9016858c7e7"><td class="memItemLeft" align="right" valign="top"><a id="a8e4ee90763316c3259b3c9016858c7e7"></a>
 virtual std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetSolutions</b> ()</td></tr>
 <tr class="separator:a8e4ee90763316c3259b3c9016858c7e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,12 +122,54 @@ virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>GetLastSolu
 <tr class="memitem:adfb19ac3a90a780338fc654a6b12b6ff"><td class="memItemLeft" align="right" valign="top"><a id="adfb19ac3a90a780338fc654a6b12b6ff"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsOK</b> () const</td></tr>
 <tr class="separator:adfb19ac3a90a780338fc654a6b12b6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac3f179b74368dced1739957fc22391f"><td class="memItemLeft" align="right" valign="top"><a id="aac3f179b74368dced1739957fc22391f"></a>
+virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><b>GetErrorMessage</b> ()</td></tr>
+<tr class="separator:aac3f179b74368dced1739957fc22391f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa27bb62a34f130571b0958961d465dfa"><td class="memItemLeft" align="right" valign="top"><a id="aa27bb62a34f130571b0958961d465dfa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetTerminalVoltage</b> (double value)</td></tr>
+<tr class="separator:aa27bb62a34f130571b0958961d465dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75346fb75c66d38f2de6d2b74b42f7f9"><td class="memItemLeft" align="right" valign="top"><a id="a75346fb75c66d38f2de6d2b74b42f7f9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetVelocity</b> (double value)</td></tr>
+<tr class="separator:a75346fb75c66d38f2de6d2b74b42f7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a14cdf1300ab4e5c2c14202bda8e51"><td class="memItemLeft" align="right" valign="top"><a id="ad5a14cdf1300ab4e5c2c14202bda8e51"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetActivePower</b> (double value)</td></tr>
+<tr class="separator:ad5a14cdf1300ab4e5c2c14202bda8e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a322c13efc94f27d766562b465307e60b"><td class="memItemLeft" align="right" valign="top"><a id="a322c13efc94f27d766562b465307e60b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetReactivePower</b> (double value)</td></tr>
+<tr class="separator:a322c13efc94f27d766562b465307e60b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b65d0cd61235e508ee09542be0c348"><td class="memItemLeft" align="right" valign="top"><a id="ae6b65d0cd61235e508ee09542be0c348"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetInitialTerminalVoltage</b> (double value)</td></tr>
+<tr class="separator:ae6b65d0cd61235e508ee09542be0c348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6471734006cdb0e36ff2be1f5a628fe4"><td class="memItemLeft" align="right" valign="top"><a id="a6471734006cdb0e36ff2be1f5a628fe4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetInitialMecPower</b> (double value)</td></tr>
+<tr class="separator:a6471734006cdb0e36ff2be1f5a628fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f76438d3c104e9217acac21af02a27c"><td class="memItemLeft" align="right" valign="top"><a id="a8f76438d3c104e9217acac21af02a27c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetInitialVelocity</b> (double value)</td></tr>
+<tr class="separator:a8f76438d3c104e9217acac21af02a27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4383b93697923a5d19a9b11b0f4176d7"><td class="memItemLeft" align="right" valign="top"><a id="a4383b93697923a5d19a9b11b0f4176d7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDeltaVelocity</b> (double value)</td></tr>
+<tr class="separator:a4383b93697923a5d19a9b11b0f4176d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cf595bb14f5a328cb355bf1edffa47e"><td class="memItemLeft" align="right" valign="top"><a id="a5cf595bb14f5a328cb355bf1edffa47e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDeltaActivePower</b> (double value)</td></tr>
+<tr class="separator:a5cf595bb14f5a328cb355bf1edffa47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6942c5ca50ec6cce41c5cfec44c12e"><td class="memItemLeft" align="right" valign="top"><a id="a0c6942c5ca50ec6cce41c5cfec44c12e"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetFieldVoltage</b> ()</td></tr>
+<tr class="separator:a0c6942c5ca50ec6cce41c5cfec44c12e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b636267123a26d2e358b3c65e446ce9"><td class="memItemLeft" align="right" valign="top"><a id="a5b636267123a26d2e358b3c65e446ce9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetMechanicalPower</b> ()</td></tr>
+<tr class="separator:a5b636267123a26d2e358b3c65e446ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27251de5ad8466aa6fc9249c1f3b48bd"><td class="memItemLeft" align="right" valign="top"><a id="a27251de5ad8466aa6fc9249c1f3b48bd"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetVelocity</b> ()</td></tr>
+<tr class="separator:a27251de5ad8466aa6fc9249c1f3b48bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90b4ca6012ba3a050786b7ccbe4ca828"><td class="memItemLeft" align="right" valign="top"><a id="a90b4ca6012ba3a050786b7ccbe4ca828"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetActivePower</b> ()</td></tr>
+<tr class="separator:a90b4ca6012ba3a050786b7ccbe4ca828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae7d7257ee2c087cb30be90868f615443"><td class="memItemLeft" align="right" valign="top"><a id="ae7d7257ee2c087cb30be90868f615443"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> (wxWindow *parent, double timeStep, double integrationError, bool startAllZero, double input)</td></tr>
-<tr class="separator:ae7d7257ee2c087cb30be90868f615443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d3dbb0593e7a8ff0f9e43185b7f2a6a"><td class="memItemLeft" align="right" valign="top"><a id="a7d3dbb0593e7a8ff0f9e43185b7f2a6a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> (wxWindow *parent, double timeStep, double integrationError)</td></tr>
+<tr class="separator:a7d3dbb0593e7a8ff0f9e43185b7f2a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79fe08e24036417f54cda3a42ba0fe7d"><td class="memItemLeft" align="right" valign="top"><a id="a79fe08e24036417f54cda3a42ba0fe7d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>FillAllConnectedChildren</b> (<a class="el" href="class_connection_line.html">ConnectionLine</a> *parent)</td></tr>
 <tr class="separator:a79fe08e24036417f54cda3a42ba0fe7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,12 +194,47 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 <tr class="memitem:a1626821f8807cee9a878dd19c023abc9"><td class="memItemLeft" align="right" valign="top"><a id="a1626821f8807cee9a878dd19c023abc9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_isOK</b> = false</td></tr>
 <tr class="separator:a1626821f8807cee9a878dd19c023abc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2048b5988e5edc2dfd73f349bfceb831"><td class="memItemLeft" align="right" valign="top"><a id="a2048b5988e5edc2dfd73f349bfceb831"></a>
-<a class="el" href="class_i_o_control.html">IOControl</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_inputControl</b> = NULL</td></tr>
+<tr class="memitem:a931dd38bfd5a2bf8617821367e546668"><td class="memItemLeft" align="right" valign="top"><a id="a931dd38bfd5a2bf8617821367e546668"></a>
+wxString&#160;</td><td class="memItemRight" valign="bottom"><b>m_failMessage</b> = _(&quot;Unknown error.&quot;)</td></tr>
+<tr class="separator:a931dd38bfd5a2bf8617821367e546668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2048b5988e5edc2dfd73f349bfceb831"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_o_control.html">IOControl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a> = NULL</td></tr>
 <tr class="separator:a2048b5988e5edc2dfd73f349bfceb831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eb65b2465b751462cb08f21496607a6"><td class="memItemLeft" align="right" valign="top"><a id="a7eb65b2465b751462cb08f21496607a6"></a>
 <a class="el" href="class_i_o_control.html">IOControl</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_outputControl</b> = NULL</td></tr>
 <tr class="separator:a7eb65b2465b751462cb08f21496607a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d96c283387b7517d667056d24fb0ea6"><td class="memItemLeft" align="right" valign="top"><a id="a1d96c283387b7517d667056d24fb0ea6"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_terminalVoltage</b> = 0.0</td></tr>
+<tr class="separator:a1d96c283387b7517d667056d24fb0ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41670726fc214dcb7ee0e286a5096eb"><td class="memItemLeft" align="right" valign="top"><a id="af41670726fc214dcb7ee0e286a5096eb"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_velocity</b> = 0.0</td></tr>
+<tr class="separator:af41670726fc214dcb7ee0e286a5096eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40b3a4b4b57933c7e64fab246f407bef"><td class="memItemLeft" align="right" valign="top"><a id="a40b3a4b4b57933c7e64fab246f407bef"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_activePower</b> = 0.0</td></tr>
+<tr class="separator:a40b3a4b4b57933c7e64fab246f407bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4b2eb58c053ceb2e34d348c7b76eb44"><td class="memItemLeft" align="right" valign="top"><a id="aa4b2eb58c053ceb2e34d348c7b76eb44"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_reactivePower</b> = 0.0</td></tr>
+<tr class="separator:aa4b2eb58c053ceb2e34d348c7b76eb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658937613fb94496953a67d3a56740ce"><td class="memItemLeft" align="right" valign="top"><a id="a658937613fb94496953a67d3a56740ce"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_initTerminalVoltage</b> = 0.0</td></tr>
+<tr class="separator:a658937613fb94496953a67d3a56740ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef6f506cc91ad129eb042677fdc97a3"><td class="memItemLeft" align="right" valign="top"><a id="a0ef6f506cc91ad129eb042677fdc97a3"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_initMecPower</b> = 0.0</td></tr>
+<tr class="separator:a0ef6f506cc91ad129eb042677fdc97a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb5561120199bcf6fa3b4a314d004570"><td class="memItemLeft" align="right" valign="top"><a id="afb5561120199bcf6fa3b4a314d004570"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_initVelocity</b> = 0.0</td></tr>
+<tr class="separator:afb5561120199bcf6fa3b4a314d004570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158c3f6dce9a09b2177510e493df0b3b"><td class="memItemLeft" align="right" valign="top"><a id="a158c3f6dce9a09b2177510e493df0b3b"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_deltaVelocity</b> = 0.0</td></tr>
+<tr class="separator:a158c3f6dce9a09b2177510e493df0b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a4e25681e6168d0fa4f209c8a796842"><td class="memItemLeft" align="right" valign="top"><a id="a4a4e25681e6168d0fa4f209c8a796842"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_deltaPe</b> = 0.0</td></tr>
+<tr class="separator:a4a4e25681e6168d0fa4f209c8a796842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4573a966cfa8a746496c45991913dd9"><td class="memItemLeft" align="right" valign="top"><a id="ae4573a966cfa8a746496c45991913dd9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_fieldVoltage</b> = 0.0</td></tr>
+<tr class="separator:ae4573a966cfa8a746496c45991913dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae141eceb0c109ca650c4822286616dea"><td class="memItemLeft" align="right" valign="top"><a id="ae141eceb0c109ca650c4822286616dea"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_mecPower</b> = 0.0</td></tr>
+<tr class="separator:ae141eceb0c109ca650c4822286616dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Solves in the time the control system. Can solve the control system directly from a <a class="el" href="class_control_editor.html">ControlEditor</a> or from a ControlEditorElement. </p>
@@ -165,7 +242,33 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_isOK</b> = false</t
 <dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00045">45</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2048b5988e5edc2dfd73f349bfceb831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2048b5988e5edc2dfd73f349bfceb831">&#9670;&nbsp;</a></span>m_inputControl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_o_control.html">IOControl</a>* ControlElementSolver::m_inputControl = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>First input control to be solved </p>
+
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00086">86</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>Project/<a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a></li>
 <li>Project/<a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a></li>
 </ul>

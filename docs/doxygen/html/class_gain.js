@@ -13,9 +13,8 @@ var class_gain =
     [ "ShowForm", "class_gain.html#a6b98027cbf545302867ad75f7ab84b93", null ],
     [ "Solve", "class_gain.html#a282cab6d339aa89a35c775bbea2aa117", null ],
     [ "UpdatePoints", "class_gain.html#a9930247d3cee160ac2ae815ad865f077", null ],
-    [ "UpdateText", "class_gain.html#a147d3a05881f09ca10a638c431ded5f8", null ],
-    [ "m_fontSize", "class_gain.html#a1631d322627fc41fd2e53d5352c07071", null ],
-    [ "m_glStringValue", "class_gain.html#a8e680f3c98522129ae3c6a703075c0c1", null ],
+    [ "UpdateText", "class_gain.html#a5f955287a3e2c95404cdde9e71b1c637", null ],
+    [ "m_glText", "class_gain.html#acd6843827ef561bdf5e9136bd3f6f481", null ],
     [ "m_triPts", "class_gain.html#a279d335d4f489a4f24d86d74b6ad6b27", null ],
     [ "m_value", "class_gain.html#a7e622e7ee612206387f8cc734feee06d", null ]
 ];

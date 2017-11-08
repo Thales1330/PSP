@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('class_electromechanical.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_electromechanical-members.html">List of all members</a>  </div>
@@ -193,30 +192,6 @@ std::vector&lt; std::complex&lt; double &gt; &gt;&#160;</td><td class="memItemRi
 <tr class="memdesc:a3b89149e5fb56253c0629c9d260b3b7e inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transformers of the system (use GetElementsFromList first).  <a href="class_electric_calculation.html#a3b89149e5fb56253c0629c9d260b3b7e">More...</a><br /></td></tr>
 <tr class="separator:a3b89149e5fb56253c0629c9d260b3b7e inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a28873d1ce6c1bbee57a07dabc5053423"><td class="memItemLeft" align="right" valign="top"><a id="a28873d1ce6c1bbee57a07dabc5053423"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_wErrorVector</b></td></tr>
-<tr class="separator:a28873d1ce6c1bbee57a07dabc5053423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1d6b85d886abd344d8b12d6d8665f1f"><td class="memItemLeft" align="right" valign="top"><a id="ac1d6b85d886abd344d8b12d6d8665f1f"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_deltaErrorVector</b></td></tr>
-<tr class="separator:ac1d6b85d886abd344d8b12d6d8665f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a159776bb812bc74d94c8abe5bb8b3e10"><td class="memItemLeft" align="right" valign="top"><a id="a159776bb812bc74d94c8abe5bb8b3e10"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_transEdErrorVector</b></td></tr>
-<tr class="separator:a159776bb812bc74d94c8abe5bb8b3e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4eacb39ac3ab6b4fd3e0cf963f030ce2"><td class="memItemLeft" align="right" valign="top"><a id="a4eacb39ac3ab6b4fd3e0cf963f030ce2"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_transEqErrorVector</b></td></tr>
-<tr class="separator:a4eacb39ac3ab6b4fd3e0cf963f030ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e7fff4570b7a983f79a22aafed2112d"><td class="memItemLeft" align="right" valign="top"><a id="a1e7fff4570b7a983f79a22aafed2112d"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_numItVector</b></td></tr>
-<tr class="separator:a1e7fff4570b7a983f79a22aafed2112d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c82ed8fc748149bb116ee532e6ee978"><td class="memItemLeft" align="right" valign="top"><a id="a4c82ed8fc748149bb116ee532e6ee978"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_sdCVector</b></td></tr>
-<tr class="separator:a4c82ed8fc748149bb116ee532e6ee978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a237471acf9a372a9b1cd1481803571d5"><td class="memItemLeft" align="right" valign="top"><a id="a237471acf9a372a9b1cd1481803571d5"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_sqCVector</b></td></tr>
-<tr class="separator:a237471acf9a372a9b1cd1481803571d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8668c1b2881d2f2a173d15c46c8efb9d"><td class="memItemLeft" align="right" valign="top"><a id="a8668c1b2881d2f2a173d15c46c8efb9d"></a>
@@ -240,9 +215,9 @@ std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom">
 <tr class="memitem:a4ccf60ce21c83ff757e1a7de99a00704"><td class="memItemLeft" align="right" valign="top"><a id="a4ccf60ce21c83ff757e1a7de99a00704"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>InitializeDynamicElements</b> ()</td></tr>
 <tr class="separator:a4ccf60ce21c83ff757e1a7de99a00704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa59f55e739c674f4ede073eadbb79ac0"><td class="memItemLeft" align="right" valign="top"><a id="aa59f55e739c674f4ede073eadbb79ac0"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateMachinesCurrents</b> ()</td></tr>
-<tr class="separator:aa59f55e739c674f4ede073eadbb79ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736cdcea247d9c7a6c6a647c455bd7cc"><td class="memItemLeft" align="right" valign="top"><a id="a736cdcea247d9c7a6c6a647c455bd7cc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateInjectedCurrents</b> ()</td></tr>
+<tr class="separator:a736cdcea247d9c7a6c6a647c455bd7cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a488985a77171f915145ecc5d891db04f"><td class="memItemLeft" align="right" valign="top"><a id="a488985a77171f915145ecc5d891db04f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateIntegrationConstants</b> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *syncGenerator, double id, double iq, double k=1.0)</td></tr>
 <tr class="separator:a488985a77171f915145ecc5d891db04f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -336,18 +311,6 @@ std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a3e7a7dfe02d9277957552f5a46f96dd1"><td class="memItemLeft" align="right" valign="top"><a id="a3e7a7dfe02d9277957552f5a46f96dd1"></a>
 std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_timeVector</b></td></tr>
 <tr class="separator:a3e7a7dfe02d9277957552f5a46f96dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23d720e7a18a781b808cc7ca0f130ceb"><td class="memItemLeft" align="right" valign="top"><a id="a23d720e7a18a781b808cc7ca0f130ceb"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_wError</b> = 0.0</td></tr>
-<tr class="separator:a23d720e7a18a781b808cc7ca0f130ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a7d7043e936b7649a741cf9d39e01b9"><td class="memItemLeft" align="right" valign="top"><a id="a3a7d7043e936b7649a741cf9d39e01b9"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_sdC</b> = 1.0</td></tr>
-<tr class="separator:a3a7d7043e936b7649a741cf9d39e01b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac684393f47d36a6038d562e92df56ab6"><td class="memItemLeft" align="right" valign="top"><a id="ac684393f47d36a6038d562e92df56ab6"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_sqC</b> = 1.0</td></tr>
-<tr class="separator:ac684393f47d36a6038d562e92df56ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fe6bcd83ae05c0cf6827eed9d0eb029"><td class="memItemLeft" align="right" valign="top"><a id="a4fe6bcd83ae05c0cf6827eed9d0eb029"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_numIt</b> = 0</td></tr>
-<tr class="separator:a4fe6bcd83ae05c0cf6827eed9d0eb029"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_electric_calculation"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_electric_calculation')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_electric_calculation.html">ElectricCalculation</a></td></tr>
 <tr class="memitem:a0c88feb4f01309795e8a0cf5064a7d90 inherit pro_attribs_class_electric_calculation"><td class="memItemLeft" align="right" valign="top"><a id="a0c88feb4f01309795e8a0cf5064a7d90"></a>
 std::vector&lt; <a class="el" href="class_power_element.html">PowerElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_powerElementList</b></td></tr>

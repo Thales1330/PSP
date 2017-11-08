@@ -118,7 +118,13 @@ Public Types</h2></td></tr>
 <b>IN_REACTIVE_POWER</b> = 1 &lt;&lt; 3, 
 <br />
 &#160;&#160;<b>OUT_FIELD_VOLTAGE</b> = 1 &lt;&lt; 4, 
-<b>OUT_MEC_POWER</b> = 1 &lt;&lt; 5
+<b>OUT_MEC_POWER</b> = 1 &lt;&lt; 5, 
+<b>IN_INITIAL_TERMINAL_VOLTAGE</b> = 1 &lt;&lt; 6, 
+<b>IN_INITIAL_MEC_POWER</b> = 1 &lt;&lt; 7, 
+<br />
+&#160;&#160;<b>IN_INITIAL_VELOCITY</b> = 1 &lt;&lt; 8, 
+<b>IN_DELTA_VELOCITY</b> = 1 &lt;&lt; 9, 
+<b>IN_DELTA_ACTIVE_POWER</b> = 1 &lt;&lt; 10
 <br />
  }</td></tr>
 <tr class="separator:a84a11e53cc306b8f9f82e577923d4091"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,9 +149,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a47a5633ed68ef0648623b9733dc5dab9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a47a5633ed68ef0648623b9733dc5dab9">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:a47a5633ed68ef0648623b9733dc5dab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <a href="#a47a5633ed68ef0648623b9733dc5dab9">More...</a><br /></td></tr>
 <tr class="separator:a47a5633ed68ef0648623b9733dc5dab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af99b84798978d530f1c3a8181cac2f54"><td class="memItemLeft" align="right" valign="top"><a id="af99b84798978d530f1c3a8181cac2f54"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateText</b> ()</td></tr>
-<tr class="separator:af99b84798978d530f1c3a8181cac2f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19372719e4f316f5cd49e2f289e3d4d9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">UpdateText</a> ()</td></tr>
+<tr class="memdesc:a19372719e4f316f5cd49e2f289e3d4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the OpenGL text in the element (if present).  <a href="#a19372719e4f316f5cd49e2f289e3d4d9">More...</a><br /></td></tr>
+<tr class="separator:a19372719e4f316f5cd49e2f289e3d4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f79a55442d00a0d88cd688d74ba271c"><td class="memItemLeft" align="right" valign="top"><a id="a9f79a55442d00a0d88cd688d74ba271c"></a>
 virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><b>GenerateText</b> ()</td></tr>
 <tr class="separator:a9f79a55442d00a0d88cd688d74ba271c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -408,12 +414,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>m_ioFlags</b></td></tr
 <tr class="memitem:a4ab76d7f7634b1ed80459f1f17ce37c6"><td class="memItemLeft" align="right" valign="top"><a id="a4ab76d7f7634b1ed80459f1f17ce37c6"></a>
 Node::NodeType&#160;</td><td class="memItemRight" valign="bottom"><b>m_ioNodeType</b> = Node::NODE_IN</td></tr>
 <tr class="separator:a4ab76d7f7634b1ed80459f1f17ce37c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e5e4b97d0e36099db3d6bf39eaa5dd1"><td class="memItemLeft" align="right" valign="top"><a id="a0e5e4b97d0e36099db3d6bf39eaa5dd1"></a>
-<a class="el" href="classwx_g_l_string.html">wxGLString</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glStringValue</b> = NULL</td></tr>
-<tr class="separator:a0e5e4b97d0e36099db3d6bf39eaa5dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a973ae81e5d2d3df3b9088834d1950d32"><td class="memItemLeft" align="right" valign="top"><a id="a973ae81e5d2d3df3b9088834d1950d32"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontSize</b> = 10</td></tr>
-<tr class="separator:a973ae81e5d2d3df3b9088834d1950d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb1363859386046db43ed7d251cf95f6"><td class="memItemLeft" align="right" valign="top"><a id="acb1363859386046db43ed7d251cf95f6"></a>
+<a class="el" href="class_open_g_l_text.html">OpenGLText</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glText</b> = NULL</td></tr>
+<tr class="separator:acb1363859386046db43ed7d251cf95f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_control_element"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_control_element')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_control_element.html">ControlElement</a></td></tr>
 <tr class="memitem:af1813931d9b51f5def437ba3c31e8aba inherit pro_attribs_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="af1813931d9b51f5def437ba3c31e8aba"></a>
 std::vector&lt; <a class="el" href="class_node.html">Node</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_nodeList</b></td></tr>
@@ -549,7 +552,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#abf6c4949733debca55b2f56d8e9b7372">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00051">51</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00056">56</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -598,7 +601,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00036">36</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00040">40</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
 
 </div>
 </div>
@@ -630,7 +633,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00243">243</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00259">259</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
 
 </div>
 </div>
@@ -668,7 +671,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_element.html#a038dfd8452fe48ab04bc4e47820c148e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00052">52</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8h_source.html#l00057">57</a> of file <a class="el" href="_i_o_control_8h_source.html">IOControl.h</a>.</p>
 
 </div>
 </div>
@@ -757,6 +760,38 @@ Additional Inherited Members</h2></td></tr>
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00122">122</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a19372719e4f316f5cd49e2f289e3d4d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19372719e4f316f5cd49e2f289e3d4d9">&#9670;&nbsp;</a></span>UpdateText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IOControl::UpdateText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the OpenGL text in the element (if present). </p>
+<dl class="section return"><dt>Returns</dt><dd>true if <a class="el" href="class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. ">OpenGLText</a> is ok, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00267">267</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
 
 </div>
 </div>

@@ -131,9 +131,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa303bcc736ac5fad1f89c6cc87e859db"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gain.html#aa303bcc736ac5fad1f89c6cc87e859db">Move</a> (wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:aa303bcc736ac5fad1f89c6cc87e859db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the element other position.  <a href="#aa303bcc736ac5fad1f89c6cc87e859db">More...</a><br /></td></tr>
 <tr class="separator:aa303bcc736ac5fad1f89c6cc87e859db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a147d3a05881f09ca10a638c431ded5f8"><td class="memItemLeft" align="right" valign="top"><a id="a147d3a05881f09ca10a638c431ded5f8"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateText</b> ()</td></tr>
-<tr class="separator:a147d3a05881f09ca10a638c431ded5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f955287a3e2c95404cdde9e71b1c637"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gain.html#a5f955287a3e2c95404cdde9e71b1c637">UpdateText</a> ()</td></tr>
+<tr class="memdesc:a5f955287a3e2c95404cdde9e71b1c637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the OpenGL text in the element (if present).  <a href="#a5f955287a3e2c95404cdde9e71b1c637">More...</a><br /></td></tr>
+<tr class="separator:a5f955287a3e2c95404cdde9e71b1c637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c13cd79ec18f6c9c844fa9a6b154e4d"><td class="memItemLeft" align="right" valign="top"><a id="a4c13cd79ec18f6c9c844fa9a6b154e4d"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetValue</b> (double value)</td></tr>
 <tr class="separator:a4c13cd79ec18f6c9c844fa9a6b154e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -378,12 +378,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7e622e7ee612206387f8cc734feee06d"><td class="memItemLeft" align="right" valign="top"><a id="a7e622e7ee612206387f8cc734feee06d"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>m_value</b> = 1.0</td></tr>
 <tr class="separator:a7e622e7ee612206387f8cc734feee06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e680f3c98522129ae3c6a703075c0c1"><td class="memItemLeft" align="right" valign="top"><a id="a8e680f3c98522129ae3c6a703075c0c1"></a>
-<a class="el" href="classwx_g_l_string.html">wxGLString</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glStringValue</b> = NULL</td></tr>
-<tr class="separator:a8e680f3c98522129ae3c6a703075c0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1631d322627fc41fd2e53d5352c07071"><td class="memItemLeft" align="right" valign="top"><a id="a1631d322627fc41fd2e53d5352c07071"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontSize</b> = 10</td></tr>
-<tr class="separator:a1631d322627fc41fd2e53d5352c07071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd6843827ef561bdf5e9136bd3f6f481"><td class="memItemLeft" align="right" valign="top"><a id="acd6843827ef561bdf5e9136bd3f6f481"></a>
+<a class="el" href="class_open_g_l_text.html">OpenGLText</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glText</b> = NULL</td></tr>
+<tr class="separator:acd6843827ef561bdf5e9136bd3f6f481"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a279d335d4f489a4f24d86d74b6ad6b27"><td class="memItemLeft" align="right" valign="top"><a id="a279d335d4f489a4f24d86d74b6ad6b27"></a>
 std::vector&lt; wxPoint2DDouble &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_triPts</b></td></tr>
 <tr class="separator:a279d335d4f489a4f24d86d74b6ad6b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -571,7 +568,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00035">35</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00038">38</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
 
 </div>
 </div>
@@ -603,7 +600,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00194">194</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00184">184</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
 
 </div>
 </div>
@@ -679,7 +676,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00182">182</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00172">172</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
 
 </div>
 </div>
@@ -717,7 +714,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00099">99</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00095">95</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
 
 </div>
 </div>
@@ -767,7 +764,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00088">88</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00084">84</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
 
 </div>
 </div>
@@ -817,7 +814,39 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00188">188</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00178">178</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5f955287a3e2c95404cdde9e71b1c637"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f955287a3e2c95404cdde9e71b1c637">&#9670;&nbsp;</a></span>UpdateText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Gain::UpdateText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the OpenGL text in the element (if present). </p>
+<dl class="section return"><dt>Returns</dt><dd>true if <a class="el" href="class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. ">OpenGLText</a> is ok, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_gain_8cpp_source.html#l00192">192</a> of file <a class="el" href="_gain_8cpp_source.html">Gain.cpp</a>.</p>
 
 </div>
 </div>

@@ -150,9 +150,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDenominato
 <tr class="memitem:af8c3f06742a7ffc9dabc0d4f5dbc98c3"><td class="memItemLeft" align="right" valign="top"><a id="af8c3f06742a7ffc9dabc0d4f5dbc98c3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateTFText</b> ()</td></tr>
 <tr class="separator:af8c3f06742a7ffc9dabc0d4f5dbc98c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad10adb7a94ebc62349cca7b56b7cadb9"><td class="memItemLeft" align="right" valign="top"><a id="ad10adb7a94ebc62349cca7b56b7cadb9"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateText</b> ()</td></tr>
-<tr class="separator:ad10adb7a94ebc62349cca7b56b7cadb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ca78c0edc2a9af0a1375b1b83d81d1b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#a5ca78c0edc2a9af0a1375b1b83d81d1b">UpdateText</a> ()</td></tr>
+<tr class="memdesc:a5ca78c0edc2a9af0a1375b1b83d81d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the OpenGL text in the element (if present).  <a href="#a5ca78c0edc2a9af0a1375b1b83d81d1b">More...</a><br /></td></tr>
+<tr class="separator:a5ca78c0edc2a9af0a1375b1b83d81d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee6c1440c4f527b7a839e07474a381f0"><td class="memItemLeft" align="right" valign="top"><a id="aee6c1440c4f527b7a839e07474a381f0"></a>
 virtual <a class="el" href="struct_transfer_function_1_1_space_state.html">SpaceState</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetSpaceState</b> ()</td></tr>
 <tr class="separator:aee6c1440c4f527b7a839e07474a381f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -409,12 +409,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aee524d83c25209202ba2b1e8a600ef21"><td class="memItemLeft" align="right" valign="top"><a id="aee524d83c25209202ba2b1e8a600ef21"></a>
 wchar_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_supNumber</b> [10]</td></tr>
 <tr class="separator:aee524d83c25209202ba2b1e8a600ef21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad708802d32428ddb20d33910bf348b55"><td class="memItemLeft" align="right" valign="top"><a id="ad708802d32428ddb20d33910bf348b55"></a>
-<a class="el" href="classwx_g_l_string.html">wxGLString</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glStringNum</b> = NULL</td></tr>
-<tr class="separator:ad708802d32428ddb20d33910bf348b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b66df900c86cfb848d2e08591a4a0c9"><td class="memItemLeft" align="right" valign="top"><a id="a6b66df900c86cfb848d2e08591a4a0c9"></a>
-<a class="el" href="classwx_g_l_string.html">wxGLString</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glStringDen</b> = NULL</td></tr>
-<tr class="separator:a6b66df900c86cfb848d2e08591a4a0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c2a0668fc0dbbcaa681b4916b3cb3c"><td class="memItemLeft" align="right" valign="top"><a id="aa9c2a0668fc0dbbcaa681b4916b3cb3c"></a>
+<a class="el" href="class_open_g_l_text.html">OpenGLText</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glTextNum</b> = NULL</td></tr>
+<tr class="separator:aa9c2a0668fc0dbbcaa681b4916b3cb3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ccae9afc988d5b5b444e3f542b97b30"><td class="memItemLeft" align="right" valign="top"><a id="a0ccae9afc988d5b5b444e3f542b97b30"></a>
+<a class="el" href="class_open_g_l_text.html">OpenGLText</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_glTextDen</b> = NULL</td></tr>
+<tr class="separator:a0ccae9afc988d5b5b444e3f542b97b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d3e5afb04d7196647814339cd15bc3a"><td class="memItemLeft" align="right" valign="top"><a id="a4d3e5afb04d7196647814339cd15bc3a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontSize</b> = 10</td></tr>
 <tr class="separator:a4d3e5afb04d7196647814339cd15bc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -583,7 +583,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00268">268</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00259">259</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -670,7 +670,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a551ed1eeab446b5366d56c2ee9dec187">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00052">52</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00056">56</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -702,7 +702,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00377">377</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00368">368</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -778,7 +778,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#afab568cea0a7074bb9984e94bd2ba52e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00237">237</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00228">228</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -828,7 +828,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00226">226</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00217">217</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -878,7 +878,39 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00320">320</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00311">311</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5ca78c0edc2a9af0a1375b1b83d81d1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ca78c0edc2a9af0a1375b1b83d81d1b">&#9670;&nbsp;</a></span>UpdateText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TransferFunction::UpdateText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the OpenGL text in the element (if present). </p>
+<dl class="section return"><dt>Returns</dt><dd>true if <a class="el" href="class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. ">OpenGLText</a> is ok, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">ControlElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_transfer_function_8cpp_source.html#l00377">377</a> of file <a class="el" href="_transfer_function_8cpp_source.html">TransferFunction.cpp</a>.</p>
 
 </div>
 </div>

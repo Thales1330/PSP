@@ -18,7 +18,10 @@ var hierarchy =
         [ "Gain", "class_gain.html", null ],
         [ "IOControl", "class_i_o_control.html", null ],
         [ "Limiter", "class_limiter.html", null ],
-        [ "Multiplier", "class_multiplier.html", null ],
+        [ "MathOperation", "class_math_operation.html", [
+          [ "Divider", "class_divider.html", null ],
+          [ "Multiplier", "class_multiplier.html", null ]
+        ] ],
         [ "RateLimiter", "class_rate_limiter.html", null ],
         [ "Sum", "class_sum.html", null ],
         [ "TransferFunction", "class_transfer_function.html", null ]
@@ -55,6 +58,7 @@ var hierarchy =
     [ "LoadElectricalData", "struct_load_electrical_data.html", null ],
     [ "Node", "class_node.html", null ],
     [ "OpenGLColour", "class_open_g_l_colour.html", null ],
+    [ "OpenGLText", "class_open_g_l_text.html", null ],
     [ "PropertiesData", "class_properties_data.html", null ],
     [ "ReactiveLimits", "struct_reactive_limits.html", null ],
     [ "SimulationData", "struct_simulation_data.html", null ],
@@ -63,12 +67,6 @@ var hierarchy =
     [ "SyncGeneratorElectricalData", "struct_sync_generator_electrical_data.html", null ],
     [ "SyncMachineModelData", "struct_sync_machine_model_data.html", null ],
     [ "SyncMotorElectricalData", "struct_sync_motor_electrical_data.html", null ],
-    [ "TextGLDrawable", "class_text_g_l_drawable.html", [
-      [ "wxGLString", "classwx_g_l_string.html", [
-        [ "wxGLNumberRenderer", "classwx_g_l_number_renderer.html", null ]
-      ] ]
-    ] ],
-    [ "TextTexture", "class_text_texture.html", null ],
     [ "TransformerElectricalData", "struct_transformer_electrical_data.html", null ],
     [ "wxApp", null, [
       [ "MainApp", "class_main_app.html", null ]
@@ -158,7 +156,6 @@ var hierarchy =
         [ "MainFrame", "class_main_frame.html", null ]
       ] ]
     ] ],
-    [ "wxGLStringArray", "classwx_g_l_string_array.html", null ],
     [ "wxPanel", null, [
       [ "WorkspaceBase", "class_workspace_base.html", [
         [ "Workspace", "class_workspace.html", null ]
@@ -166,9 +163,6 @@ var hierarchy =
     ] ],
     [ "wxRibbonMSWArtProvider", null, [
       [ "wxRibbonMetroArtProvider", "classwx_ribbon_metro_art_provider.html", null ]
-    ] ],
-    [ "wxString", null, [
-      [ "wxGLString", "classwx_g_l_string.html", null ]
     ] ],
     [ "wxTreeItemData", null, [
       [ "PlotData", "class_plot_data.html", null ]

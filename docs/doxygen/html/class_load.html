@@ -144,6 +144,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af5bb79d6e7bdfb3ec0d24f5caafae1c4"><td class="memItemLeft" align="right" valign="top"><a id="af5bb79d6e7bdfb3ec0d24f5caafae1c4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElectricalData</b> (<a class="el" href="struct_load_electrical_data.html">LoadElectricalData</a> electricalData)</td></tr>
 <tr class="separator:af5bb79d6e7bdfb3ec0d24f5caafae1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9662bab9a498114d859df3d6a65c0ed"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load.html#aa9662bab9a498114d859df3d6a65c0ed">GetPlotData</a> (<a class="el" href="class_element_plot_data.html">ElementPlotData</a> &amp;plotData)</td></tr>
+<tr class="memdesc:aa9662bab9a498114d859df3d6a65c0ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the plot data.  <a href="#aa9662bab9a498114d859df3d6a65c0ed">More...</a><br /></td></tr>
+<tr class="separator:aa9662bab9a498114d859df3d6a65c0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_shunt"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_shunt')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_shunt.html">Shunt</a></td></tr>
 <tr class="memitem:a449431a2044b838d35cbb991aa1de658 inherit pub_methods_class_shunt"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shunt.html#a449431a2044b838d35cbb991aa1de658">Contains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:a449431a2044b838d35cbb991aa1de658 inherit pub_methods_class_shunt"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <a href="class_shunt.html#a449431a2044b838d35cbb991aa1de658">More...</a><br /></td></tr>
@@ -221,9 +224,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a8ffa0f79241bd21ad5dd501d26fed933 inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_power_element_8h.html#a467d3005d31dde0ba0e52cf8e233e740">PowerFlowDirection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a8ffa0f79241bd21ad5dd501d26fed933">GetPowerFlowDirection</a> () const</td></tr>
 <tr class="memdesc:a8ffa0f79241bd21ad5dd501d26fed933 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the direction of the power flow.  <a href="class_power_element.html#a8ffa0f79241bd21ad5dd501d26fed933">More...</a><br /></td></tr>
 <tr class="separator:a8ffa0f79241bd21ad5dd501d26fed933 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acadf6712b430f9fadfbd7015903eaeaf inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#acadf6712b430f9fadfbd7015903eaeaf">GetPlotData</a> (<a class="el" href="class_element_plot_data.html">ElementPlotData</a> &amp;plotData)</td></tr>
-<tr class="memdesc:acadf6712b430f9fadfbd7015903eaeaf inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the plot data.  <a href="class_power_element.html#acadf6712b430f9fadfbd7015903eaeaf">More...</a><br /></td></tr>
-<tr class="separator:acadf6712b430f9fadfbd7015903eaeaf inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefa43fe646e90428b1ed9884a7e499ae inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#aefa43fe646e90428b1ed9884a7e499ae">HaveDynamicEvent</a> () const</td></tr>
 <tr class="memdesc:aefa43fe646e90428b1ed9884a7e499ae inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the power element have dynamic event.  <a href="class_power_element.html#aefa43fe646e90428b1ed9884a7e499ae">More...</a><br /></td></tr>
 <tr class="separator:aefa43fe646e90428b1ed9884a7e499ae inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -543,7 +543,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>06/10/2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_load_8h_source.html#l00042">42</a> of file <a class="el" href="_load_8h_source.html">Load.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_load_8h_source.html#l00073">73</a> of file <a class="el" href="_load_8h_source.html">Load.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac9f449be9b919b36924a844324bf37ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9f449be9b919b36924a844324bf37ee">&#9670;&nbsp;</a></span>AddParent()</h2>
@@ -711,6 +711,45 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawGround</b> (wxPoi
 <p>Reimplemented from <a class="el" href="class_element.html#aeabe64a5907e917c8b61afd605ea52c3">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00191">191</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa9662bab9a498114d859df3d6a65c0ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9662bab9a498114d859df3d6a65c0ed">&#9670;&nbsp;</a></span>GetPlotData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Load::GetPlotData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_element_plot_data.html">ElementPlotData</a> &amp;&#160;</td>
+          <td class="paramname"><em>plotData</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill the plot data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">plotData</td><td>Plot data to be filled. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the plot data was successfully filled, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_power_element.html#acadf6712b430f9fadfbd7015903eaeaf">PowerElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_load_8cpp_source.html#l00253">253</a> of file <a class="el" href="_load_8cpp_source.html">Load.cpp</a>.</p>
 
 </div>
 </div>

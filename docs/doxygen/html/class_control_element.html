@@ -107,7 +107,7 @@ Inheritance diagram for ControlElement:</div>
 <area href="class_gain.html" title="Provide an output multiplying the input by a constant. " alt="Gain" shape="rect" coords="119,280,228,304"/>
 <area href="class_i_o_control.html" title="Provides the communication with the power element. " alt="IOControl" shape="rect" coords="119,336,228,360"/>
 <area href="class_limiter.html" title="Limits the input value by superior and inferior values. " alt="Limiter" shape="rect" coords="119,392,228,416"/>
-<area href="class_multiplier.html" title="Multiplies two inputs. " alt="Multiplier" shape="rect" coords="119,448,228,472"/>
+<area href="class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="MathOperation" shape="rect" coords="119,448,228,472"/>
 <area href="class_rate_limiter.html" title="Limits the rising and/or falling rate.  " alt="RateLimiter" shape="rect" coords="119,504,228,528"/>
 <area href="class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="Sum" shape="rect" coords="119,560,228,584"/>
 <area href="class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="TransferFunction" shape="rect" coords="119,616,228,640"/>
@@ -137,9 +137,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawNodes</b>
 <tr class="memitem:a8f817b751c7766f070cee27d094a5499"><td class="memItemLeft" align="right" valign="top"><a id="a8f817b751c7766f070cee27d094a5499"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>ReplaceNode</b> (<a class="el" href="class_node.html">Node</a> *oldNode, <a class="el" href="class_node.html">Node</a> *newNode)</td></tr>
 <tr class="separator:a8f817b751c7766f070cee27d094a5499"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a802885ecd7464b6ae085da276be4d06c"><td class="memItemLeft" align="right" valign="top"><a id="a802885ecd7464b6ae085da276be4d06c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateText</b> ()</td></tr>
-<tr class="separator:a802885ecd7464b6ae085da276be4d06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab65259365622f1d4a2a1915ee93431"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">UpdateText</a> ()</td></tr>
+<tr class="memdesc:acab65259365622f1d4a2a1915ee93431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the OpenGL text in the element (if present).  <a href="#acab65259365622f1d4a2a1915ee93431">More...</a><br /></td></tr>
+<tr class="separator:acab65259365622f1d4a2a1915ee93431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8958776ec4e32bc0b23f90f4ee9ea2e3"><td class="memItemLeft" align="right" valign="top"><a id="a8958776ec4e32bc0b23f90f4ee9ea2e3"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsSolved</b> () const</td></tr>
 <tr class="separator:a8958776ec4e32bc0b23f90f4ee9ea2e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -544,6 +544,38 @@ Additional Inherited Members</h2></td></tr>
 <p>Reimplemented in <a class="el" href="class_connection_line.html#a292d284d6f30b209995c2a9877f9fe36">ConnectionLine</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_control_element_8cpp_source.html#l00117">117</a> of file <a class="el" href="_control_element_8cpp_source.html">ControlElement.cpp</a>.</p>
+
+</div>
+</div>
+<a id="acab65259365622f1d4a2a1915ee93431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acab65259365622f1d4a2a1915ee93431">&#9670;&nbsp;</a></span>UpdateText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ControlElement::UpdateText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the OpenGL text in the element (if present). </p>
+<dl class="section return"><dt>Returns</dt><dd>true if <a class="el" href="class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. ">OpenGLText</a> is ok, false otherwise. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl</a>, <a class="el" href="class_transfer_function.html#a5ca78c0edc2a9af0a1375b1b83d81d1b">TransferFunction</a>, <a class="el" href="class_gain.html#a5f955287a3e2c95404cdde9e71b1c637">Gain</a>, and <a class="el" href="class_constant.html#a380618903f79d9062da054a7337bab97">Constant</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_control_element_8h_source.html#l00102">102</a> of file <a class="el" href="_control_element_8h_source.html">ControlElement.h</a>.</p>
 
 </div>
 </div>

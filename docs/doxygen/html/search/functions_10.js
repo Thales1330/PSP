@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['worldtoscreen',['WorldToScreen',['../class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8',1,'Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const'],['../class_element.html#a147dd55d902171b212168ffde7262343',1,'Element::WorldToScreen(wxPoint2DDouble position, wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const']]],
-  ['wxglstring',['wxGLString',['../classwx_g_l_string.html#a19e05beb1f5cbf905f4e1cdf5b566303',1,'wxGLString::wxGLString()'],['../classwx_g_l_string.html#a6dbedbac054d8835ff98e02b7a2c1801',1,'wxGLString::wxGLString(wxString message)']]],
-  ['wxglstringarray',['wxGLStringArray',['../classwx_g_l_string_array.html#a9d0ea419b455d761b87c8d4262f84296',1,'wxGLStringArray::wxGLStringArray()'],['../classwx_g_l_string_array.html#a0c466a4b8f3d5ca954749f8440b5fa0f',1,'wxGLStringArray::wxGLStringArray(const wxString strings_arg[], int amount)']]]
+  ['_7eelectriccalculation',['~ElectricCalculation',['../class_electric_calculation.html#a1e70291bfa9a0850d9ffcbee44daa2f7',1,'ElectricCalculation']]],
+  ['_7eelement',['~Element',['../class_element.html#a13d54ba9c08b6bec651402f1c2bb002c',1,'Element']]],
+  ['_7efault',['~Fault',['../class_fault.html#a42019654142cd8187b314e43d70262eb',1,'Fault']]],
+  ['_7emainframe',['~MainFrame',['../class_main_frame.html#a0cfd88ece4836e0ea5430bd55370bf11',1,'MainFrame']]],
+  ['_7eopenglcolour',['~OpenGLColour',['../class_open_g_l_colour.html#a4b9a726773b4c82935f15add648ed2a0',1,'OpenGLColour']]],
+  ['_7epowerelement',['~PowerElement',['../class_power_element.html#a39be7c8e3bdb96b16c26ea7f7d6e6cbf',1,'PowerElement']]]
 ];

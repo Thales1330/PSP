@@ -3,6 +3,12 @@ var struct_simulation_data =
     [ "accFator", "struct_simulation_data.html#a75d5bdfb0ad45f3e901b73877dd5d394", null ],
     [ "basePower", "struct_simulation_data.html#ab5a905d2b287348696596e9f07fcd552", null ],
     [ "basePowerUnit", "struct_simulation_data.html#a4f00f14bee3145127e12023088e92dcf", null ],
+    [ "constCurrentActive", "struct_simulation_data.html#a99f5d7c6e162e3b7b219ee762be277be", null ],
+    [ "constCurrentReactive", "struct_simulation_data.html#acb8bee01b8bfd695b21d4b250e8cdc40", null ],
+    [ "constImpedanceActive", "struct_simulation_data.html#a0f5b68f230e0fd82e957c80801e1323f", null ],
+    [ "constImpedanceReactive", "struct_simulation_data.html#aa1d60ed25d40e5be9e0e8870596165bb", null ],
+    [ "constPowerActive", "struct_simulation_data.html#a8bb64db82753b51b4913cb37d8af77c1", null ],
+    [ "constPowerReactive", "struct_simulation_data.html#a886d3d81aeec00beccfb3e97fcc0c6bd", null ],
     [ "controlTimeStepRatio", "struct_simulation_data.html#af5b66ffff262e5d7c49835c1fb57b302", null ],
     [ "faultAfterPowerFlow", "struct_simulation_data.html#a10954746e67fdbc89860f3718ed23ee9", null ],
     [ "plotTime", "struct_simulation_data.html#a3cf2e7f71bf62e323b60e0ddb997266a", null ],
@@ -15,5 +21,8 @@ var struct_simulation_data =
     [ "stabilitySimulationTime", "struct_simulation_data.html#ac9bad1814e79451a2fd2f6afcee7016b", null ],
     [ "stabilityTolerance", "struct_simulation_data.html#ac8073342d75faf98fb15ff5100fdc711", null ],
     [ "timeStep", "struct_simulation_data.html#af0ca3cdcc810fcba377e5c6e2bcd71b5", null ],
-    [ "useCOI", "struct_simulation_data.html#a18355fc645416844735b2496700aefab", null ]
+    [ "underVoltageConstCurrent", "struct_simulation_data.html#a38528a4891ae579643356a88e07bfa60", null ],
+    [ "underVoltageConstPower", "struct_simulation_data.html#a910598f19eb945418f3091c6d45d0547", null ],
+    [ "useCOI", "struct_simulation_data.html#a18355fc645416844735b2496700aefab", null ],
+    [ "useCompLoads", "struct_simulation_data.html#a224014ee1d4c47dd3ac6bc49aec06174", null ]
 ];

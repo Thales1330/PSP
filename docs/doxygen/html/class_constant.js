@@ -11,8 +11,7 @@ var class_constant =
     [ "SetValue", "class_constant.html#a059fdb74aa6aea03fbd7a22de1def41c", null ],
     [ "ShowForm", "class_constant.html#af6bded0e01717303bb71da9e45c2b061", null ],
     [ "UpdatePoints", "class_constant.html#afad1a9ac77a4e2b94530d045bffa3c37", null ],
-    [ "UpdateText", "class_constant.html#adda09379e36416476d5e5a2f61c8dad3", null ],
-    [ "m_fontSize", "class_constant.html#a3d1cff7badada5e9350d19649086a79a", null ],
-    [ "m_glStringValue", "class_constant.html#a1916148248a168f589791ec0435ec937", null ],
+    [ "UpdateText", "class_constant.html#a380618903f79d9062da054a7337bab97", null ],
+    [ "m_glText", "class_constant.html#a15fd99035dc28611e49f383bc4cfc56f", null ],
     [ "m_value", "class_constant.html#a34ebce575d175d506f46adc72c3a2070", null ]
 ];

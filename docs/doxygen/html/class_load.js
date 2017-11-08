@@ -8,6 +8,7 @@ var class_load =
     [ "GetContextMenu", "class_load.html#a25b4a3e553f8400114ac8effa11287da", null ],
     [ "GetCopy", "class_load.html#a27309c24b2c70bde37ba6afbb9679da2", null ],
     [ "GetElectricalData", "class_load.html#a4bbca04fe58f176cff346032f6d503b8", null ],
+    [ "GetPlotData", "class_load.html#aa9662bab9a498114d859df3d6a65c0ed", null ],
     [ "GetPUElectricalData", "class_load.html#a00ef3c6ae69dbd45e96f696dfb76f013", null ],
     [ "GetTipText", "class_load.html#a00acfbf7dc907e5de79ceb4803632279", null ],
     [ "Rotate", "class_load.html#a46e9f2e0935ecca77b3a46568404d8e3", null ],
