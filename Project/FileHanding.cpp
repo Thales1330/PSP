@@ -44,6 +44,76 @@ void FileHanding::SaveProject(wxFileName path)
     rapidxml::xml_node<>* projectNameNode = AppendNode(doc, rootNode, "Name");
     SetNodeValue(doc, projectNameNode, path.GetName());
 
+    //{ Simulation properties
+    PropertiesData* properties = m_workspace->GetProperties();
+    auto propertiesNode = AppendNode(doc, rootNode, "Properties");
+
+    SimulationData simulationData = properties->GetSimulationPropertiesData();
+    auto simulationPropNode = AppendNode(doc, propertiesNode, "SimulationProperties");
+
+    auto generalPropNode = AppendNode(doc, simulationPropNode, "General");
+    auto basePower = AppendNode(doc, generalPropNode, "BasePower");
+    SetNodeValue(doc, basePower, simulationData.basePower);
+    SetNodeAttribute(doc, basePower, "UnitID", simulationData.basePowerUnit);
+    auto contCalc = AppendNode(doc, generalPropNode, "ContinuousCalculation");
+    auto contCalcFault = AppendNode(doc, contCalc, "Fault");
+    SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);
+    auto contCalcSCPower = AppendNode(doc, contCalc, "SCPower");
+    SetNodeValue(doc, contCalcSCPower, simulationData.scPowerAfterPowerFlow);
+
+    auto powerFlowPropNode = AppendNode(doc, simulationPropNode, "PowerFlow");
+    auto solutionMethod = AppendNode(doc, powerFlowPropNode, "SolutionMethod");
+    SetNodeValue(doc, solutionMethod, simulationData.powerFlowMethod);
+    auto accFactor = AppendNode(doc, powerFlowPropNode, "AccFactor");
+    SetNodeValue(doc, accFactor, simulationData.accFator);
+    auto pfTolerance = AppendNode(doc, powerFlowPropNode, "Tolerance");
+    SetNodeValue(doc, pfTolerance, simulationData.powerFlowTolerance);
+    auto pfMaxIter = AppendNode(doc, powerFlowPropNode, "MaxIterations");
+    SetNodeValue(doc, pfMaxIter, simulationData.powerFlowMaxIterations);
+
+    auto stabilityPropNode = AppendNode(doc, simulationPropNode, "Stability");
+    auto timeStep = AppendNode(doc, stabilityPropNode, "TimeStep");
+    SetNodeValue(doc, timeStep, simulationData.timeStep);
+    auto simTime = AppendNode(doc, stabilityPropNode, "SimulationTime");
+    SetNodeValue(doc, simTime, simulationData.stabilitySimulationTime);
+    auto freq = AppendNode(doc, stabilityPropNode, "Frequency");
+    SetNodeValue(doc, freq, simulationData.stabilityFrequency);
+    auto stabTolerance = AppendNode(doc, stabilityPropNode, "Tolerance");
+    SetNodeValue(doc, stabTolerance, simulationData.stabilityTolerance);
+    auto stabTMaxIter = AppendNode(doc, stabilityPropNode, "MaxIterations");
+    SetNodeValue(doc, stabTMaxIter, simulationData.stabilityMaxIterations);
+    auto controlRatio = AppendNode(doc, stabilityPropNode, "ControlStepRatio");
+    SetNodeValue(doc, controlRatio, simulationData.controlTimeStepRatio);
+    auto plotStep = AppendNode(doc, stabilityPropNode, "PlotStep");
+    SetNodeValue(doc, plotStep, simulationData.plotTime);
+    auto useCOI = AppendNode(doc, stabilityPropNode, "UseCOI");
+    SetNodeValue(doc, useCOI, simulationData.useCOI);
+
+    auto zipPropNode = AppendNode(doc, simulationPropNode, "ZIPLoad");
+    auto useCompLoads = AppendNode(doc, zipPropNode, "UseCompositeLoad");
+    SetNodeValue(doc, useCompLoads, simulationData.useCompLoads);
+    auto activePowerComp = AppendNode(doc, zipPropNode, "ActivePowerComposition");
+    auto pz = AppendNode(doc, activePowerComp, "ConstantImpedance");
+    SetNodeValue(doc, pz, simulationData.constImpedanceActive);
+    auto pi = AppendNode(doc, activePowerComp, "ConstantCurrent");
+    SetNodeValue(doc, pi, simulationData.constCurrentActive);
+    auto pp = AppendNode(doc, activePowerComp, "ConstantPower");
+    SetNodeValue(doc, pp, simulationData.constPowerActive);
+    auto reactivePowerComp = AppendNode(doc, zipPropNode, "ReactivePowerComposition");
+    auto qz = AppendNode(doc, reactivePowerComp, "ConstantImpedance");
+    SetNodeValue(doc, qz, simulationData.constImpedanceReactive);
+    auto qi = AppendNode(doc, reactivePowerComp, "ConstantCurrent");
+    SetNodeValue(doc, qi, simulationData.constCurrentReactive);
+    auto qp = AppendNode(doc, reactivePowerComp, "ConstantPower");
+    SetNodeValue(doc, qp, simulationData.constPowerReactive);
+    auto undervoltageLim = AppendNode(doc, zipPropNode, "UndervoltageLimit");
+    auto uvi = AppendNode(doc, undervoltageLim, "ConstantCurrent");
+    SetNodeValue(doc, uvi, simulationData.underVoltageConstCurrent);
+    auto uvp = AppendNode(doc, undervoltageLim, "ConstantPower");
+    SetNodeValue(doc, uvp, simulationData.underVoltageConstPower);
+
+    //}
+
     auto elementsNode = AppendNode(doc, rootNode, "Elements");
 
     // Save all the data
@@ -383,6 +453,26 @@ void FileHanding::SaveProject(wxFileName path)
         SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
         auto loadType = AppendNode(doc, electricalProp, "LoadType");
         SetNodeValue(doc, loadType, data.loadType);
+
+        auto stability = AppendNode(doc, electricalProp, "Stability");
+        auto plotLoad = AppendNode(doc, stability, "PlotLoad");
+        SetNodeValue(doc, plotLoad, data.plotLoad);
+        auto useCompLoad = AppendNode(doc, stability, "UseCompositeLoad");
+        SetNodeValue(doc, useCompLoad, data.useCompLoad);
+        auto activePowerCompl = AppendNode(doc, stability, "ActivePowerComposition");
+        auto pzl = AppendNode(doc, activePowerCompl, "ConstantImpedance");
+        SetNodeValue(doc, pzl, data.constImpedanceActive);
+        auto pil = AppendNode(doc, activePowerCompl, "ConstantCurrent");
+        SetNodeValue(doc, pil, data.constCurrentActive);
+        auto ppl = AppendNode(doc, activePowerCompl, "ConstantPower");
+        SetNodeValue(doc, ppl, data.constPowerActive);
+        auto reactivePowerCompl = AppendNode(doc, stability, "ReactivePowerComposition");
+        auto qzl = AppendNode(doc, reactivePowerCompl, "ConstantImpedance");
+        SetNodeValue(doc, qzl, data.constImpedanceReactive);
+        auto qil = AppendNode(doc, reactivePowerCompl, "ConstantCurrent");
+        SetNodeValue(doc, qil, data.constCurrentReactive);
+        auto qpl = AppendNode(doc, reactivePowerCompl, "ConstantPower");
+        SetNodeValue(doc, qpl, data.constPowerReactive);
 
         auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = load->GetSwitchingData();
@@ -814,6 +904,60 @@ bool FileHanding::OpenProject(wxFileName path)
     auto nameNode = projectNode->first_node("Name");
     if(!nameNode) return false;
     m_workspace->SetName(nameNode->value());
+
+    PropertiesData* propData = m_workspace->GetProperties();
+    SimulationData simData = propData->GetSimulationPropertiesData();
+
+    // { Properties data
+    auto propertiesNode = projectNode->first_node("Properties");
+    if(propertiesNode) {
+        auto simPropertiesNode = propertiesNode->first_node("SimulationProperties");
+        if(simPropertiesNode) {
+            // General
+            auto general = simPropertiesNode->first_node("General");
+            simData.basePower = GetNodeValueDouble(general, "BasePower");
+            simData.basePowerUnit = static_cast<ElectricalUnit>(GetAttributeValueInt(general, "BasePower", "UnitID"));
+            auto contCalc = general->first_node("ContinuousCalculation");
+            simData.faultAfterPowerFlow = GetNodeValueInt(contCalc, "Fault");
+            simData.scPowerAfterPowerFlow = GetNodeValueInt(contCalc, "SCPower");
+
+            // Power flow
+            auto powerFlow = simPropertiesNode->first_node("PowerFlow");
+            simData.powerFlowMethod = static_cast<PowerFlowMethod>(GetNodeValueInt(powerFlow, "SolutionMethod"));
+            simData.accFator = GetNodeValueDouble(powerFlow, "AccFactor");
+            simData.powerFlowTolerance = GetNodeValueDouble(powerFlow, "Tolerance");
+            simData.powerFlowMaxIterations = GetNodeValueInt(powerFlow, "MaxIterations");
+
+            // Stability
+            auto stability = simPropertiesNode->first_node("Stability");
+            simData.timeStep = GetNodeValueDouble(stability, "TimeStep");
+            simData.stabilitySimulationTime = GetNodeValueDouble(stability, "SimulationTime");
+            simData.stabilityFrequency = GetNodeValueDouble(stability, "Frequency");
+            simData.stabilityTolerance = GetNodeValueDouble(stability, "Tolerance");
+            simData.stabilityMaxIterations = GetNodeValueDouble(stability, "MaxIterations");
+            simData.controlTimeStepRatio = GetNodeValueInt(stability, "ControlStepRatio");
+            simData.plotTime = GetNodeValueDouble(stability, "PlotStep");
+            simData.useCOI = GetNodeValueInt(stability, "UseCOI");
+
+            // ZIP load
+            auto compLoads = simPropertiesNode->first_node("ZIPLoad");
+            simData.useCompLoads = GetNodeValueInt(compLoads, "UseCompositeLoad");
+            auto activePowerComp = compLoads->first_node("ActivePowerComposition");
+            simData.constImpedanceActive = GetNodeValueDouble(activePowerComp, "ConstantImpedance");
+            simData.constCurrentActive = GetNodeValueDouble(activePowerComp, "ConstantCurrent");
+            simData.constPowerActive = GetNodeValueDouble(activePowerComp, "ConstantPower");
+            auto reactivePowerComp = compLoads->first_node("ReactivePowerComposition");
+            simData.constImpedanceReactive = GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
+            simData.constCurrentReactive = GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
+            simData.constPowerReactive = GetNodeValueDouble(reactivePowerComp, "ConstantPower");
+            auto uvLimit = compLoads->first_node("UndervoltageLimit");
+            simData.underVoltageConstCurrent = GetNodeValueDouble(uvLimit, "ConstantCurrent");
+            simData.underVoltageConstPower = GetNodeValueDouble(uvLimit, "ConstantPower");
+        }
+    }
+    // }
+
+    propData->SetSimulationPropertiesData(simData);
 
     // Open elements
     auto elementsNode = projectNode->first_node("Elements");
@@ -1274,6 +1418,20 @@ bool FileHanding::OpenProject(wxFileName path)
         data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
         data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
         data.loadType = (LoadType)GetNodeValueInt(electricalProp, "LoadType");
+        // Stability
+        auto stability = electricalProp->first_node("Stability");
+        if(stability) {
+            data.plotLoad = GetNodeValueInt(stability, "PlotLoad");
+            data.useCompLoad = GetNodeValueInt(stability, "UseCompositeLoad");
+            auto activePowerComp = stability->first_node("ActivePowerComposition");
+            data.constImpedanceActive = GetNodeValueDouble(activePowerComp, "ConstantImpedance");
+            data.constCurrentActive = GetNodeValueDouble(activePowerComp, "ConstantCurrent");
+            data.constPowerActive = GetNodeValueDouble(activePowerComp, "ConstantPower");
+            auto reactivePowerComp = stability->first_node("ReactivePowerComposition");
+            data.constImpedanceReactive = GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
+            data.constCurrentReactive = GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
+            data.constPowerReactive = GetNodeValueDouble(reactivePowerComp, "ConstantPower");
+        }
 
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");

@@ -71,8 +71,21 @@ LoadForm::LoadForm(wxWindow* parent, Load* load) : LoadFormBase(parent)
         } break;
     }
 
+    m_checkBoxPlotData->SetValue(data.plotLoad);
+
+    m_checkBoxUseCompLoad->SetValue(data.useCompLoad);
+
+    m_textCtrlActivePowerImp->SetValue(Element::StringFromDouble(data.constImpedanceActive));
+    m_textCtrlActivePowerCur->SetValue(Element::StringFromDouble(data.constCurrentActive));
+    m_textCtrlActivePowerPow->SetValue(Element::StringFromDouble(data.constPowerActive));
+    m_textCtrlReactivePowerImp->SetValue(Element::StringFromDouble(data.constImpedanceReactive));
+    m_textCtrlReactivePowerCur->SetValue(Element::StringFromDouble(data.constCurrentReactive));
+    m_textCtrlReactivePowerPow->SetValue(Element::StringFromDouble(data.constPowerReactive));
+
     m_parent = parent;
     m_load = load;
+    
+    UpdateZIPLoadFieldStatus();
 }
 
 LoadForm::~LoadForm() {}
@@ -142,6 +155,60 @@ bool LoadForm::ValidateData()
         } break;
     }
 
+    data.plotLoad = m_checkBoxPlotData->GetValue();
+
+    data.useCompLoad = m_checkBoxUseCompLoad->GetValue();
+
+    if(!Element::DoubleFromString(
+           this, m_textCtrlActivePowerImp->GetValue(), data.constImpedanceActive,
+           _("Value entered incorrectly in the field \"Constant impedance portion of active power\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlActivePowerCur->GetValue(), data.constCurrentActive,
+           _("Value entered incorrectly in the field \"Constant current portion of active power\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlActivePowerPow->GetValue(), data.constPowerActive,
+           _("Value entered incorrectly in the field \"Constant power portion of active power\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlReactivePowerImp->GetValue(), data.constImpedanceReactive,
+           _("Value entered incorrectly in the field \"Constant impedance portion of reactive power\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlReactivePowerCur->GetValue(), data.constCurrentReactive,
+           _("Value entered incorrectly in the field \"Constant current portion of reactive power\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlReactivePowerPow->GetValue(), data.constPowerReactive,
+           _("Value entered incorrectly in the field \"Constant power portion of reactive power\".")))
+        return false;
+
+    double sum = data.constImpedanceActive + data.constCurrentActive + data.constPowerActive;
+    if(sum > 100.01 || sum < 99.99) {
+        wxMessageDialog msgDialog(this, _("The sum of active power load composition must be 100%."), _("Error"),
+                                  wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+        return false;
+    }
+    sum = data.constImpedanceReactive + data.constCurrentReactive + data.constPowerReactive;
+    if(sum > 100.01 || sum < 99.99) {
+        wxMessageDialog msgDialog(this, _("The sum of reactive power load composition must be 100%."), _("Error"),
+                                  wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+        return false;
+    }
+
     m_load->SetElectricalData(data);
     return true;
+}
+
+void LoadForm::UpdateZIPLoadFieldStatus()
+{
+    m_textCtrlActivePowerImp->Enable(m_checkBoxUseCompLoad->GetValue());
+    m_textCtrlActivePowerCur->Enable(m_checkBoxUseCompLoad->GetValue());
+    m_textCtrlActivePowerPow->Enable(m_checkBoxUseCompLoad->GetValue());
+    m_textCtrlReactivePowerImp->Enable(m_checkBoxUseCompLoad->GetValue());
+    m_textCtrlReactivePowerCur->Enable(m_checkBoxUseCompLoad->GetValue());
+    m_textCtrlReactivePowerPow->Enable(m_checkBoxUseCompLoad->GetValue());
 }

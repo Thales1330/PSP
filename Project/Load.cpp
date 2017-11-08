@@ -249,3 +249,26 @@ wxString Load::GetTipText() const
 
     return tipText;
 }
+
+bool Load::GetPlotData(ElementPlotData& plotData)
+{
+    if(!m_electricalData.plotLoad) return false;
+    plotData.SetName(m_electricalData.name);
+    plotData.SetCurveType(ElementPlotData::CT_LOAD);
+
+    std::vector<double> absVoltage, activePower, reactivePower, current;
+    for(unsigned int i = 0; i < m_electricalData.voltageVector.size(); ++i) {
+        absVoltage.push_back(std::abs(m_electricalData.voltageVector[i]));
+        activePower.push_back(std::real(m_electricalData.electricalPowerVector[i]));
+        reactivePower.push_back(std::imag(m_electricalData.electricalPowerVector[i]));
+        current.push_back(std::abs(std::complex<double>(activePower[i], -reactivePower[i]) /
+                                   std::conj(m_electricalData.voltageVector[i])));
+    }
+
+    plotData.AddData(absVoltage, _("Voltage"));
+    plotData.AddData(activePower, _("Active power"));
+    plotData.AddData(reactivePower, _("Reactive power"));
+    plotData.AddData(current, _("Current"));
+
+    return true;
+}

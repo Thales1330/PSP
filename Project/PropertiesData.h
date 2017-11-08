@@ -29,8 +29,8 @@ struct SimulationData {
     // General simulation data
     double basePower = 100.0;
     ElectricalUnit basePowerUnit = UNIT_MVA;
-    bool faultAfterPowerFlow = true;
-    bool scPowerAfterPowerFlow = true;
+    bool faultAfterPowerFlow = false;
+    bool scPowerAfterPowerFlow = false;
 
     // Power flow
     PowerFlowMethod powerFlowMethod = GAUSS_SEIDEL;
@@ -47,6 +47,17 @@ struct SimulationData {
     int controlTimeStepRatio = 10;
     double plotTime = 1e-2;
     bool useCOI = true;
+    
+    // ZIP load
+    bool useCompLoads = false;
+    double constImpedanceActive = 100.0;
+    double constCurrentActive = 0.0;
+    double constPowerActive = 0.0;
+    double constImpedanceReactive = 100.0;
+    double constCurrentReactive = 0.0;
+    double constPowerReactive = 0.0;
+    double underVoltageConstCurrent = 70.0;
+    double underVoltageConstPower = 70.0;
 };
 
 struct GeneralData {

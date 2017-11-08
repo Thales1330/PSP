@@ -65,6 +65,20 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     m_textCtrlPrintTime->SetValue(wxString::Format("%g", data.plotTime));
 
     m_checkBoxUseCOI->SetValue(data.useCOI);
+
+    m_checkBoxUseCompLoads->SetValue(data.useCompLoads);
+
+    m_textCtrlActivePowerImp->SetValue(Element::StringFromDouble(data.constImpedanceActive));
+    m_textCtrlActivePowerCur->SetValue(Element::StringFromDouble(data.constCurrentActive));
+    m_textCtrlActivePowerPow->SetValue(Element::StringFromDouble(data.constPowerActive));
+    m_textCtrlReactivePowerImp->SetValue(Element::StringFromDouble(data.constImpedanceReactive));
+    m_textCtrlReactivePowerCur->SetValue(Element::StringFromDouble(data.constCurrentReactive));
+    m_textCtrlReactivePowerPow->SetValue(Element::StringFromDouble(data.constPowerReactive));
+
+    m_textCtrlUVCur->SetValue(Element::StringFromDouble(data.underVoltageConstCurrent));
+    m_textCtrlUVPow->SetValue(Element::StringFromDouble(data.underVoltageConstPower));
+
+    UpdateZIPLoadFieldStatus();
 }
 
 SimulationsSettingsForm::~SimulationsSettingsForm() {}
@@ -132,13 +146,76 @@ bool SimulationsSettingsForm::ValidateData()
         return false;
     data.useCOI = m_checkBoxUseCOI->GetValue();
 
+    data.useCompLoads = m_checkBoxUseCompLoads->GetValue();
+
+    if(!Element::DoubleFromString(
+           this, m_textCtrlActivePowerImp->GetValue(), data.constImpedanceActive,
+           _("Value entered incorrectly in the field \"Constant impedance portion of active power (ZIP load)\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlActivePowerCur->GetValue(), data.constCurrentActive,
+           _("Value entered incorrectly in the field \"Constant current portion of active power (ZIP load)\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlActivePowerPow->GetValue(), data.constPowerActive,
+           _("Value entered incorrectly in the field \"Constant power portion of active power (ZIP load)\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlReactivePowerImp->GetValue(), data.constImpedanceReactive,
+           _("Value entered incorrectly in the field \"Constant impedance portion of reactive power (ZIP load)\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlReactivePowerCur->GetValue(), data.constCurrentReactive,
+           _("Value entered incorrectly in the field \"Constant current portion of reactive power (ZIP load)\".")))
+        return false;
+    if(!Element::DoubleFromString(
+           this, m_textCtrlReactivePowerPow->GetValue(), data.constPowerReactive,
+           _("Value entered incorrectly in the field \"Constant power portion of reactive power (ZIP load)\".")))
+        return false;
+
+    if(!Element::DoubleFromString(
+           this, m_textCtrlUVCur->GetValue(), data.underVoltageConstCurrent,
+           _("Value entered incorrectly in the field \"Constant current undervoltage limit (ZIP load)\".")))
+        return false;
+
+    if(!Element::DoubleFromString(
+           this, m_textCtrlUVPow->GetValue(), data.underVoltageConstPower,
+           _("Value entered incorrectly in the field \"Constant power undervoltage limit (ZIP load)\".")))
+        return false;
+
+    double sum = data.constImpedanceActive + data.constCurrentActive + data.constPowerActive;
+    if(sum > 100.01 || sum < 99.99) {
+        wxMessageDialog msgDialog(this, _("The sum of active power load composition must be 100%."), _("Error"),
+                                  wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+        return false;
+    }
+    sum = data.constImpedanceReactive + data.constCurrentReactive + data.constPowerReactive;
+    if(sum > 100.01 || sum < 99.99) {
+        wxMessageDialog msgDialog(this, _("The sum of reactive power load composition must be 100%."), _("Error"),
+                                  wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+        return false;
+    }
+
     m_properties->SetSimulationPropertiesData(data);
     return true;
 }
+
 void SimulationsSettingsForm::OnPFMethodChoiceSelected(wxCommandEvent& event)
 {
     if(m_choicePFMethod->GetSelection() == 0)
         m_textCtrlAccFactor->Enable();
     else
         m_textCtrlAccFactor->Enable(false);
+}
+
+void SimulationsSettingsForm::UpdateZIPLoadFieldStatus()
+{
+    m_textCtrlActivePowerImp->Enable(m_checkBoxUseCompLoads->GetValue());
+    m_textCtrlActivePowerCur->Enable(m_checkBoxUseCompLoads->GetValue());
+    m_textCtrlActivePowerPow->Enable(m_checkBoxUseCompLoads->GetValue());
+    m_textCtrlReactivePowerImp->Enable(m_checkBoxUseCompLoads->GetValue());
+    m_textCtrlReactivePowerCur->Enable(m_checkBoxUseCompLoads->GetValue());
+    m_textCtrlReactivePowerPow->Enable(m_checkBoxUseCompLoads->GetValue());
 }

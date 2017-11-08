@@ -38,9 +38,11 @@ class LoadForm : public LoadFormBase
     virtual bool ValidateData();
 
    protected:
+    virtual void OnCheckBoxCompLoadClick(wxCommandEvent& event) { UpdateZIPLoadFieldStatus(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); };
     virtual void OnOnButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
+    virtual void UpdateZIPLoadFieldStatus();
 
     wxWindow* m_parent = NULL;
     Load* m_load = NULL;
