@@ -17,7 +17,7 @@
 
 #ifndef LINEFORM_H
 #define LINEFORM_H
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 
 class Line;
 class SwitchingForm;

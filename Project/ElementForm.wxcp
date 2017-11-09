@@ -1,12 +1,12 @@
 {
  "metadata": {
-  "m_generatedFilesDir": ".",
+  "m_generatedFilesDir": "base/",
   "m_objCounter": 1932,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxC9EE9InitBitmapResources",
   "m_bitmapsFile": "ElementFormBitmaps.cpp",
   "m_GenerateCodeTypes": 1,
-  "m_outputFileName": "ElementForm",
+  "m_outputFileName": "ElementFormBase",
   "m_firstWindowId": 10000,
   "m_useEnum": true,
   "m_useUnderscoreMacro": true,

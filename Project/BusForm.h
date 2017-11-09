@@ -18,7 +18,7 @@
 #ifndef BUSFORM_H
 #define BUSFORM_H
 
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 class Bus;
 
 /**

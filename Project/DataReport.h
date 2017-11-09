@@ -18,7 +18,7 @@
 #ifndef DATAREPORT_H
 #define DATAREPORT_H
 
-#include "DataReportBase.h"
+#include "base/DataReportBase.h"
 
 class Workspace;
 class ElectricCalculation;

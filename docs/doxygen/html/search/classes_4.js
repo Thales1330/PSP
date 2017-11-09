@@ -7,6 +7,5 @@ var searchData=
   ['elementplotdata',['ElementPlotData',['../class_element_plot_data.html',1,'']]],
   ['elementslists',['ElementsLists',['../struct_elements_lists.html',1,'']]],
   ['exponential',['Exponential',['../class_exponential.html',1,'']]],
-  ['exponentialform',['ExponentialForm',['../class_exponential_form.html',1,'']]],
-  ['exponentialformbase',['ExponentialFormBase',['../class_exponential_form_base.html',1,'']]]
+  ['exponentialform',['ExponentialForm',['../class_exponential_form.html',1,'']]]
 ];

@@ -18,7 +18,7 @@
 #ifndef CONTROLEDITOR_H
 #define CONTROLEDITOR_H
 
-#include "ControlEditorBase.h"
+#include "base/ControlEditorBase.h"
 #include <wx/wrapsizer.h>
 #include <wx/dcclient.h>
 #include <wx/dcscreen.h>

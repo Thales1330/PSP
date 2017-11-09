@@ -1,390 +1,390 @@
 {
-	"metadata":	{
-		"m_generatedFilesDir":	".",
-		"m_objCounter":	6,
-		"m_includeFiles":	[],
-		"m_bitmapFunction":	"wxC52C4InitBitmapResources",
-		"m_bitmapsFile":	"WorkspaceBitmaps.cpp",
-		"m_GenerateCodeTypes":	1,
-		"m_outputFileName":	"WorkspaceBase",
-		"m_firstWindowId":	10000,
-		"m_useEnum":	true,
-		"m_useUnderscoreMacro":	true,
-		"m_addHandlers":	true,
-		"m_templateClasses":	[]
-	},
-	"windows":	[{
-			"m_type":	4407,
-			"proportion":	0,
-			"border":	5,
-			"gbSpan":	"1,1",
-			"gbPosition":	"0,0",
-			"m_styles":	["wxTAB_TRAVERSAL"],
-			"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-			"m_properties":	[{
-					"type":	"string",
-					"m_label":	"Size:",
-					"m_value":	"500,300"
-				}, {
-					"type":	"string",
-					"m_label":	"Minimum Size:",
-					"m_value":	"-1,-1"
-				}, {
-					"type":	"string",
-					"m_label":	"Name:",
-					"m_value":	"WorkspaceBase"
-				}, {
-					"type":	"multi-string",
-					"m_label":	"Tooltip:",
-					"m_value":	""
-				}, {
-					"type":	"colour",
-					"m_label":	"Bg Colour:",
-					"colour":	"<Default>"
-				}, {
-					"type":	"colour",
-					"m_label":	"Fg Colour:",
-					"colour":	"<Default>"
-				}, {
-					"type":	"font",
-					"m_label":	"Font:",
-					"m_value":	""
-				}, {
-					"type":	"bool",
-					"m_label":	"Hidden",
-					"m_value":	false
-				}, {
-					"type":	"bool",
-					"m_label":	"Disabled",
-					"m_value":	false
-				}, {
-					"type":	"bool",
-					"m_label":	"Focused",
-					"m_value":	false
-				}, {
-					"type":	"string",
-					"m_label":	"Class Name:",
-					"m_value":	""
-				}, {
-					"type":	"string",
-					"m_label":	"Include File:",
-					"m_value":	""
-				}, {
-					"type":	"string",
-					"m_label":	"Style:",
-					"m_value":	""
-				}, {
-					"type":	"string",
-					"m_label":	"Title:",
-					"m_value":	""
-				}, {
-					"type":	"virtualFolderPicker",
-					"m_label":	"Virtual Folder:",
-					"m_path":	"Project:wxcrafter"
-				}, {
-					"type":	"choice",
-					"m_label":	"Centre:",
-					"m_selection":	1,
-					"m_options":	["", "wxBOTH", "wxVERTICAL", "wxHORIZONTAL"]
-				}, {
-					"type":	"string",
-					"m_label":	"Inherited Class",
-					"m_value":	"Workspace"
-				}, {
-					"type":	"string",
-					"m_label":	"File:",
-					"m_value":	"Workspace"
-				}, {
-					"type":	"string",
-					"m_label":	"Class Decorator",
-					"m_value":	""
-				}],
-			"m_events":	[],
-			"m_children":	[{
-					"m_type":	4401,
-					"proportion":	1,
-					"border":	5,
-					"gbSpan":	"1,1",
-					"gbPosition":	"0,0",
-					"m_styles":	[],
-					"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
-					"m_properties":	[{
-							"type":	"string",
-							"m_label":	"Minimum Size:",
-							"m_value":	"-1,-1"
-						}, {
-							"type":	"string",
-							"m_label":	"Name:",
-							"m_value":	"boxSizer_lvl_1_1"
-						}, {
-							"type":	"string",
-							"m_label":	"Style:",
-							"m_value":	""
-						}, {
-							"type":	"choice",
-							"m_label":	"Orientation:",
-							"m_selection":	0,
-							"m_options":	["wxVERTICAL", "wxHORIZONTAL"]
-						}],
-					"m_events":	[],
-					"m_children":	[{
-							"m_type":	4505,
-							"proportion":	1,
-							"border":	5,
-							"gbSpan":	"1,1",
-							"gbPosition":	"0,0",
-							"m_styles":	[],
-							"m_sizerFlags":	["wxEXPAND"],
-							"m_properties":	[{
-									"type":	"winid",
-									"m_label":	"ID:",
-									"m_winid":	"wxID_ANY"
-								}, {
-									"type":	"string",
-									"m_label":	"Size:",
-									"m_value":	"-1,-1"
-								}, {
-									"type":	"string",
-									"m_label":	"Minimum Size:",
-									"m_value":	"-1,-1"
-								}, {
-									"type":	"string",
-									"m_label":	"Name:",
-									"m_value":	"m_glCanvas"
-								}, {
-									"type":	"multi-string",
-									"m_label":	"Tooltip:",
-									"m_value":	""
-								}, {
-									"type":	"colour",
-									"m_label":	"Bg Colour:",
-									"colour":	"<Default>"
-								}, {
-									"type":	"colour",
-									"m_label":	"Fg Colour:",
-									"colour":	"<Default>"
-								}, {
-									"type":	"font",
-									"m_label":	"Font:",
-									"m_value":	""
-								}, {
-									"type":	"bool",
-									"m_label":	"Hidden",
-									"m_value":	false
-								}, {
-									"type":	"bool",
-									"m_label":	"Disabled",
-									"m_value":	false
-								}, {
-									"type":	"bool",
-									"m_label":	"Focused",
-									"m_value":	false
-								}, {
-									"type":	"string",
-									"m_label":	"Class Name:",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"Include File:",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"Style:",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_RGBA",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_BUFFER_SIZE",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_LEVEL",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_DOUBLEBUFFER",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_STEREO",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_AUX_BUFFERS",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_RED",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_GREEN",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_BLUE",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_ALPHA",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_DEPTH_SIZE",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_STENCIL_SIZE",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_ACCUM_RED",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_ACCUM_GREEN",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_ACCUM_BLUE",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_MIN_ACCUM_ALPHA",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_SAMPLE_BUFFERS",
-									"m_value":	"1"
-								}, {
-									"type":	"string",
-									"m_label":	"WX_GL_SAMPLES",
-									"m_value":	"4"
-								}],
-							"m_events":	[{
-									"m_eventName":	"wxEVT_PAINT",
-									"m_eventClass":	"wxPaintEvent",
-									"m_eventHandler":	"wxPaintEventHandler",
-									"m_functionNameAndSignature":	"OnPaint(wxPaintEvent& event)",
-									"m_description":	"Process a wxEVT_PAINT event",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_LEFT_DOWN",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnLeftClickDown(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_LEFT_DOWN event. The handler of this event should normally call event.Skip() to allow the default processing to take place as otherwise the window under mouse wouldn't get the focus.",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_KEY_DOWN",
-									"m_eventClass":	"wxKeyEvent",
-									"m_eventHandler":	"wxKeyEventHandler",
-									"m_functionNameAndSignature":	"OnKeyDown(wxKeyEvent& event)",
-									"m_description":	"Process a wxEVT_KEY_DOWN event (any key has been pressed)",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_MOTION",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnMouseMotion(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_MOTION event",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_MIDDLE_DOWN",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnMiddleDown(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_MIDDLE_DOWN event",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_MIDDLE_UP",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnMiddleUp(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_MIDDLE_UP event",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_LEFT_UP",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnLeftClickUp(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_LEFT_UP event.",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_MOUSEWHEEL",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnScroll(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_MOUSEWHEEL event",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_RIGHT_DOWN",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnRightClickDown(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_RIGHT_DOWN event",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_LEFT_DCLICK",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnLeftDoubleClick(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_LEFT_DCLICK event.",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_IDLE",
-									"m_eventClass":	"wxIdleEvent",
-									"m_eventHandler":	"wxIdleEventHandler",
-									"m_functionNameAndSignature":	"OnIdle(wxIdleEvent& event)",
-									"m_description":	"Process a wxEVT_IDLE event",
-									"m_noBody":	false
-								}, {
-									"m_eventName":	"wxEVT_MIDDLE_DCLICK",
-									"m_eventClass":	"wxMouseEvent",
-									"m_eventHandler":	"wxMouseEventHandler",
-									"m_functionNameAndSignature":	"OnMiddleDoubleClick(wxMouseEvent& event)",
-									"m_description":	"Process a wxEVT_MIDDLE_DCLICK event.",
-									"m_noBody":	false
-								}],
-							"m_children":	[]
-						}]
-				}, {
-					"m_type":	4483,
-					"proportion":	0,
-					"border":	5,
-					"gbSpan":	"1,1",
-					"gbPosition":	"0,0",
-					"m_styles":	[],
-					"m_sizerFlags":	[],
-					"m_properties":	[{
-							"type":	"string",
-							"m_label":	"Name:",
-							"m_value":	"m_timer"
-						}, {
-							"type":	"integer",
-							"m_label":	"Interval",
-							"m_value":	1500
-						}, {
-							"type":	"bool",
-							"m_label":	"Start the timer",
-							"m_value":	true
-						}, {
-							"type":	"bool",
-							"m_label":	"One Shot Timer",
-							"m_value":	false
-						}],
-					"m_events":	[{
-							"m_eventName":	"wxEVT_TIMER",
-							"m_eventClass":	"wxTimerEvent",
-							"m_eventHandler":	"wxTimerEventHandler",
-							"m_functionNameAndSignature":	"OnTimer(wxTimerEvent& event)",
-							"m_description":	"Process a timer event",
-							"m_noBody":	false
-						}],
-					"m_children":	[]
-				}]
-		}]
+ "metadata": {
+  "m_generatedFilesDir": "base/",
+  "m_objCounter": 6,
+  "m_includeFiles": [],
+  "m_bitmapFunction": "wxC52C4InitBitmapResources",
+  "m_bitmapsFile": "WorkspaceBitmaps.cpp",
+  "m_GenerateCodeTypes": 1,
+  "m_outputFileName": "WorkspaceBase",
+  "m_firstWindowId": 10000,
+  "m_useEnum": true,
+  "m_useUnderscoreMacro": true,
+  "m_addHandlers": true,
+  "m_templateClasses": []
+ },
+ "windows": [{
+   "m_type": 4407,
+   "proportion": 0,
+   "border": 5,
+   "gbSpan": "1,1",
+   "gbPosition": "0,0",
+   "m_styles": ["wxTAB_TRAVERSAL"],
+   "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+   "m_properties": [{
+     "type": "string",
+     "m_label": "Size:",
+     "m_value": "500,300"
+    }, {
+     "type": "string",
+     "m_label": "Minimum Size:",
+     "m_value": "-1,-1"
+    }, {
+     "type": "string",
+     "m_label": "Name:",
+     "m_value": "WorkspaceBase"
+    }, {
+     "type": "multi-string",
+     "m_label": "Tooltip:",
+     "m_value": ""
+    }, {
+     "type": "colour",
+     "m_label": "Bg Colour:",
+     "colour": "<Default>"
+    }, {
+     "type": "colour",
+     "m_label": "Fg Colour:",
+     "colour": "<Default>"
+    }, {
+     "type": "font",
+     "m_label": "Font:",
+     "m_value": ""
+    }, {
+     "type": "bool",
+     "m_label": "Hidden",
+     "m_value": false
+    }, {
+     "type": "bool",
+     "m_label": "Disabled",
+     "m_value": false
+    }, {
+     "type": "bool",
+     "m_label": "Focused",
+     "m_value": false
+    }, {
+     "type": "string",
+     "m_label": "Class Name:",
+     "m_value": ""
+    }, {
+     "type": "string",
+     "m_label": "Include File:",
+     "m_value": ""
+    }, {
+     "type": "string",
+     "m_label": "Style:",
+     "m_value": ""
+    }, {
+     "type": "string",
+     "m_label": "Title:",
+     "m_value": ""
+    }, {
+     "type": "virtualFolderPicker",
+     "m_label": "Virtual Folder:",
+     "m_path": "Project:wxcrafter"
+    }, {
+     "type": "choice",
+     "m_label": "Centre:",
+     "m_selection": 1,
+     "m_options": ["", "wxBOTH", "wxVERTICAL", "wxHORIZONTAL"]
+    }, {
+     "type": "string",
+     "m_label": "Inherited Class",
+     "m_value": "Workspace"
+    }, {
+     "type": "string",
+     "m_label": "File:",
+     "m_value": "Workspace"
+    }, {
+     "type": "string",
+     "m_label": "Class Decorator",
+     "m_value": ""
+    }],
+   "m_events": [],
+   "m_children": [{
+     "m_type": 4401,
+     "proportion": 1,
+     "border": 5,
+     "gbSpan": "1,1",
+     "gbPosition": "0,0",
+     "m_styles": [],
+     "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
+     "m_properties": [{
+       "type": "string",
+       "m_label": "Minimum Size:",
+       "m_value": "-1,-1"
+      }, {
+       "type": "string",
+       "m_label": "Name:",
+       "m_value": "boxSizer_lvl_1_1"
+      }, {
+       "type": "string",
+       "m_label": "Style:",
+       "m_value": ""
+      }, {
+       "type": "choice",
+       "m_label": "Orientation:",
+       "m_selection": 0,
+       "m_options": ["wxVERTICAL", "wxHORIZONTAL"]
+      }],
+     "m_events": [],
+     "m_children": [{
+       "m_type": 4505,
+       "proportion": 1,
+       "border": 5,
+       "gbSpan": "1,1",
+       "gbPosition": "0,0",
+       "m_styles": [],
+       "m_sizerFlags": ["wxEXPAND"],
+       "m_properties": [{
+         "type": "winid",
+         "m_label": "ID:",
+         "m_winid": "wxID_ANY"
+        }, {
+         "type": "string",
+         "m_label": "Size:",
+         "m_value": "-1,-1"
+        }, {
+         "type": "string",
+         "m_label": "Minimum Size:",
+         "m_value": "-1,-1"
+        }, {
+         "type": "string",
+         "m_label": "Name:",
+         "m_value": "m_glCanvas"
+        }, {
+         "type": "multi-string",
+         "m_label": "Tooltip:",
+         "m_value": ""
+        }, {
+         "type": "colour",
+         "m_label": "Bg Colour:",
+         "colour": "<Default>"
+        }, {
+         "type": "colour",
+         "m_label": "Fg Colour:",
+         "colour": "<Default>"
+        }, {
+         "type": "font",
+         "m_label": "Font:",
+         "m_value": ""
+        }, {
+         "type": "bool",
+         "m_label": "Hidden",
+         "m_value": false
+        }, {
+         "type": "bool",
+         "m_label": "Disabled",
+         "m_value": false
+        }, {
+         "type": "bool",
+         "m_label": "Focused",
+         "m_value": false
+        }, {
+         "type": "string",
+         "m_label": "Class Name:",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "Include File:",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "Style:",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_RGBA",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_BUFFER_SIZE",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_LEVEL",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_DOUBLEBUFFER",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_STEREO",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_AUX_BUFFERS",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_RED",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_GREEN",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_BLUE",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_ALPHA",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_DEPTH_SIZE",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_STENCIL_SIZE",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_ACCUM_RED",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_ACCUM_GREEN",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_ACCUM_BLUE",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_MIN_ACCUM_ALPHA",
+         "m_value": ""
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_SAMPLE_BUFFERS",
+         "m_value": "1"
+        }, {
+         "type": "string",
+         "m_label": "WX_GL_SAMPLES",
+         "m_value": "4"
+        }],
+       "m_events": [{
+         "m_eventName": "wxEVT_PAINT",
+         "m_eventClass": "wxPaintEvent",
+         "m_eventHandler": "wxPaintEventHandler",
+         "m_functionNameAndSignature": "OnPaint(wxPaintEvent& event)",
+         "m_description": "Process a wxEVT_PAINT event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_LEFT_DOWN",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnLeftClickDown(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_LEFT_DOWN event. The handler of this event should normally call event.Skip() to allow the default processing to take place as otherwise the window under mouse wouldn't get the focus.",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_KEY_DOWN",
+         "m_eventClass": "wxKeyEvent",
+         "m_eventHandler": "wxKeyEventHandler",
+         "m_functionNameAndSignature": "OnKeyDown(wxKeyEvent& event)",
+         "m_description": "Process a wxEVT_KEY_DOWN event (any key has been pressed)",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MOTION",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMouseMotion(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MOTION event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MIDDLE_DOWN",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMiddleDown(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MIDDLE_DOWN event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MIDDLE_UP",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMiddleUp(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MIDDLE_UP event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_LEFT_UP",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnLeftClickUp(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_LEFT_UP event.",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MOUSEWHEEL",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnScroll(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MOUSEWHEEL event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_RIGHT_DOWN",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnRightClickDown(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_RIGHT_DOWN event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_LEFT_DCLICK",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnLeftDoubleClick(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_LEFT_DCLICK event.",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_IDLE",
+         "m_eventClass": "wxIdleEvent",
+         "m_eventHandler": "wxIdleEventHandler",
+         "m_functionNameAndSignature": "OnIdle(wxIdleEvent& event)",
+         "m_description": "Process a wxEVT_IDLE event",
+         "m_noBody": false
+        }, {
+         "m_eventName": "wxEVT_MIDDLE_DCLICK",
+         "m_eventClass": "wxMouseEvent",
+         "m_eventHandler": "wxMouseEventHandler",
+         "m_functionNameAndSignature": "OnMiddleDoubleClick(wxMouseEvent& event)",
+         "m_description": "Process a wxEVT_MIDDLE_DCLICK event.",
+         "m_noBody": false
+        }],
+       "m_children": []
+      }]
+    }, {
+     "m_type": 4483,
+     "proportion": 0,
+     "border": 5,
+     "gbSpan": "1,1",
+     "gbPosition": "0,0",
+     "m_styles": [],
+     "m_sizerFlags": [],
+     "m_properties": [{
+       "type": "string",
+       "m_label": "Name:",
+       "m_value": "m_timer"
+      }, {
+       "type": "integer",
+       "m_label": "Interval",
+       "m_value": 1500
+      }, {
+       "type": "bool",
+       "m_label": "Start the timer",
+       "m_value": true
+      }, {
+       "type": "bool",
+       "m_label": "One Shot Timer",
+       "m_value": false
+      }],
+     "m_events": [{
+       "m_eventName": "wxEVT_TIMER",
+       "m_eventClass": "wxTimerEvent",
+       "m_eventHandler": "wxTimerEventHandler",
+       "m_functionNameAndSignature": "OnTimer(wxTimerEvent& event)",
+       "m_description": "Process a timer event",
+       "m_noBody": false
+      }],
+     "m_children": []
+    }]
+  }]
 }

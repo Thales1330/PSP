@@ -18,7 +18,7 @@
 #ifndef SIMULATIONSSETTINGSFORM_H
 #define SIMULATIONSSETTINGSFORM_H
 
-#include "PropertiesForm.h"
+#include "base/PropertiesFormBase.h"
 
 class PropertiesData;
 
