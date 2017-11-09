@@ -3,3 +3,5 @@ description: Plataforma de Sistemas de Potência<br />Universidade Federal de Ub
 show_downloads: true
 theme: jekyll-theme-cayman
 google_analytics: UA-106599602-1
+
+include: ["doxygen/html/_about_form_8h_source.html"]
