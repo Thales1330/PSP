@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods. " alt="" coords="5,56,136,83"/>
+<area shape="rect" id="node2" href="$class_electromechanical.html" title="Calculates the electromechanical transient based on disturbances (e.g. system fault). " alt="" coords="184,5,313,32"/>
+<area shape="rect" id="node3" href="$class_fault.html" title="Calculate the fault of the system and update the elements data. " alt="" coords="223,56,274,83"/>
+<area shape="rect" id="node4" href="$class_power_flow.html" title="Calculate the power flow. " alt="" coords="206,107,291,133"/>
+</map>

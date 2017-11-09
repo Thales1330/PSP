@@ -1,0 +1,4 @@
+<map id="ControlEditor" name="ControlEditor">
+<area shape="rect" id="node3" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="156,5,323,32"/>
+<area shape="rect" id="node4" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen. " alt="" coords="347,5,414,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="GainForm" name="GainForm">
+<area shape="rect" id="node3" href="$class_gain.html" title="Provide an output multiplying the input by a constant. " alt="" coords="139,260,189,287"/>
+<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="25,171,135,197"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="45,95,115,121"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="27,5,133,32"/>
+<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="159,171,254,197"/>
+</map>

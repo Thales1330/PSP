@@ -1,0 +1,9 @@
+<map id="FileHanding" name="FileHanding">
+<area shape="rect" id="node2" href="$class_control_editor.html" title="ControlEditor" alt="" coords="208,184,305,211"/>
+<area shape="rect" id="node4" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="156,95,323,121"/>
+<area shape="rect" id="node5" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen. " alt="" coords="371,95,438,121"/>
+<area shape="rect" id="node6" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="461,184,549,211"/>
+<area shape="rect" id="node8" href="$class_properties_data.html" title="General and simulation data manager. " alt="" coords="631,95,739,121"/>
+<area shape="rect" id="node9" href="$struct_general_data.html" title="GeneralData" alt="" coords="573,5,668,32"/>
+<area shape="rect" id="node10" href="$struct_simulation_data.html" title="SimulationData" alt="" coords="692,5,803,32"/>
+</map>

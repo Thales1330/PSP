@@ -1,0 +1,7 @@
+<map id="TextForm" name="TextForm">
+<area shape="rect" id="node3" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods. " alt="" coords="136,247,267,273"/>
+<area shape="rect" id="node4" href="$class_text.html" title="Element that shows power element informations in workspace. " alt="" coords="299,247,346,273"/>
+<area shape="rect" id="node5" href="$class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace. " alt="" coords="368,171,493,197"/>
+<area shape="rect" id="node6" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="255,95,326,121"/>
+<area shape="rect" id="node7" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="237,5,344,32"/>
+</map>

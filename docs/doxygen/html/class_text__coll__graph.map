@@ -1,0 +1,5 @@
+<map id="Text" name="Text">
+<area shape="rect" id="node2" href="$class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace. " alt="" coords="136,171,261,197"/>
+<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="23,95,94,121"/>
+<area shape="rect" id="node4" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="5,5,112,32"/>
+</map>

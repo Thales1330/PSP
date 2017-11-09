@@ -1,0 +1,11 @@
+<map id="ReactiveShuntElementForm" name="ReactiveShuntElementForm">
+<area shape="rect" id="node3" href="$class_inductor.html" title="Inductor shunt power element. " alt="" coords="350,425,418,452"/>
+<area shape="rect" id="node4" href="$class_shunt.html" title="Abstract class for shunt power elements. " alt="" coords="283,336,339,363"/>
+<area shape="rect" id="node10" href="$class_capacitor.html" title="Shunt capactior power element. " alt="" coords="243,425,320,452"/>
+<area shape="rect" id="node5" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="257,260,364,287"/>
+<area shape="rect" id="node6" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="275,133,346,159"/>
+<area shape="rect" id="node7" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="111,5,217,32"/>
+<area shape="rect" id="node8" href="$struct_switching_data.html" title="Switching data of power elements. " alt="" coords="370,133,475,159"/>
+<area shape="rect" id="node9" href="$struct_inductor_electrical_data.html" title="InductorElectricalData" alt="" coords="363,336,512,363"/>
+<area shape="rect" id="node11" href="$struct_capacitor_electrical_data.html" title="CapacitorElectricalData" alt="" coords="99,336,258,363"/>
+</map>

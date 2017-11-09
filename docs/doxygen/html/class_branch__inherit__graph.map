@@ -1,0 +1,6 @@
+<map id="Branch" name="Branch">
+<area shape="rect" id="node4" href="$class_line.html" title="Power line element. " alt="" coords="5,229,52,256"/>
+<area shape="rect" id="node5" href="$class_transformer.html" title="Two&#45;winding transformer power element. " alt="" coords="77,229,167,256"/>
+<area shape="rect" id="node2" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="22,80,129,107"/>
+<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="40,5,111,32"/>
+</map>

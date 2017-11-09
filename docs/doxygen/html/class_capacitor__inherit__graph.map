@@ -1,0 +1,5 @@
+<map id="Capacitor" name="Capacitor">
+<area shape="rect" id="node2" href="$class_shunt.html" title="Abstract class for shunt power elements. " alt="" coords="31,155,87,181"/>
+<area shape="rect" id="node3" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="5,80,112,107"/>
+<area shape="rect" id="node4" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="23,5,94,32"/>
+</map>

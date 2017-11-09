@@ -1,0 +1,6 @@
+<map id="SumForm" name="SumForm">
+<area shape="rect" id="node3" href="$class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="" coords="139,247,189,273"/>
+<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="109,171,219,197"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="129,95,199,121"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="111,5,217,32"/>
+</map>

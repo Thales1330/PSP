@@ -1,0 +1,8 @@
+<map id="BusForm" name="BusForm">
+<area shape="rect" id="node3" href="$class_bus.html" title="Node for power elements. All others power elements are connected through this. " alt="" coords="290,349,336,376"/>
+<area shape="rect" id="node4" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="165,260,272,287"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="183,133,254,159"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="18,5,125,32"/>
+<area shape="rect" id="node7" href="$struct_switching_data.html" title="Switching data of power elements. " alt="" coords="278,133,383,159"/>
+<area shape="rect" id="node8" href="$struct_bus_electrical_data.html" title="BusElectricalData" alt="" coords="296,260,423,287"/>
+</map>

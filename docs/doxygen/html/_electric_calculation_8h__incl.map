@@ -1,0 +1,21 @@
+<map id="Project/ElectricCalculation.h" name="Project/ElectricCalculation.h">
+<area shape="rect" id="node4" href="$_element_8h.html" title="Element.h" alt="" coords="1205,379,1286,405"/>
+<area shape="rect" id="node12" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="528,304,645,331"/>
+<area shape="rect" id="node17" href="$_bus_8h.html" title="Bus.h" alt="" coords="227,229,283,256"/>
+<area shape="rect" id="node20" href="$_capacitor_8h.html" title="Capacitor.h" alt="" coords="388,80,476,107"/>
+<area shape="rect" id="node22" href="$_ind_motor_8h.html" title="IndMotor.h" alt="" coords="604,80,687,107"/>
+<area shape="rect" id="node24" href="$_inductor_8h.html" title="Inductor.h" alt="" coords="501,80,579,107"/>
+<area shape="rect" id="node25" href="$_line_8h.html" title="Line.h" alt="" coords="45,80,102,107"/>
+<area shape="rect" id="node28" href="$_load_8h.html" title="Load.h" alt="" coords="303,80,364,107"/>
+<area shape="rect" id="node30" href="$_sync_generator_8h.html" title="SyncGenerator.h" alt="" coords="711,80,831,107"/>
+<area shape="rect" id="node31" href="$_sync_motor_8h.html" title="SyncMotor.h" alt="" coords="855,80,951,107"/>
+<area shape="rect" id="node32" href="$_transformer_8h.html" title="Transformer.h" alt="" coords="127,80,228,107"/>
+<area shape="rect" id="node33" href="$_properties_data_8h.html" title="PropertiesData.h" alt="" coords="1077,229,1195,256"/>
+<area shape="rect" id="node13" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="475,379,605,405"/>
+<area shape="rect" id="node18" href="$_bus_form_8h.html" title="BusForm.h" alt="" coords="211,304,298,331"/>
+<area shape="rect" id="node21" href="$_shunt_8h.html" title="Shunt.h" alt="" coords="399,155,465,181"/>
+<area shape="rect" id="node23" href="$_machines_8h.html" title="Machines.h" alt="" coords="663,155,753,181"/>
+<area shape="rect" id="node26" href="$_line_form_8h.html" title="LineForm.h" alt="" coords="57,229,143,256"/>
+<area shape="rect" id="node27" href="$_branch_8h.html" title="Branch.h" alt="" coords="145,155,220,181"/>
+<area shape="rect" id="node29" href="$_load_form_8h.html" title="LoadForm.h" alt="" coords="307,229,397,256"/>
+</map>

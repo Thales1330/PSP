@@ -1,0 +1,8 @@
+<map id="TransferFunctionForm" name="TransferFunctionForm">
+<area shape="rect" id="node3" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="" coords="209,275,327,301"/>
+<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="86,171,197,197"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="106,95,177,121"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="88,5,195,32"/>
+<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="221,171,315,197"/>
+<area shape="rect" id="node8" href="$struct_transfer_function_1_1_space_state.html" title="TransferFunction::SpaceState" alt="" coords="340,171,535,197"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="GraphicalElement" name="GraphicalElement">
+<area shape="rect" id="node3" href="$class_text.html" title="Element that shows power element informations in workspace. " alt="" coords="45,155,91,181"/>
+<area shape="rect" id="node2" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="33,5,103,32"/>
+</map>

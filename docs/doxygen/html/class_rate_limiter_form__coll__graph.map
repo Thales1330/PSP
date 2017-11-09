@@ -1,0 +1,6 @@
+<map id="RateLimiterForm" name="RateLimiterForm">
+<area shape="rect" id="node3" href="$class_rate_limiter.html" title="Limits the rising and/or falling rate. &#160;" alt="" coords="178,247,266,273"/>
+<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="167,171,277,197"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="187,95,257,121"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="169,5,275,32"/>
+</map>

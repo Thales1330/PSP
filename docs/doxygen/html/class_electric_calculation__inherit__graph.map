@@ -1,0 +1,5 @@
+<map id="ElectricCalculation" name="ElectricCalculation">
+<area shape="rect" id="node2" href="$class_electromechanical.html" title="Calculates the electromechanical transient based on disturbances (e.g. system fault). " alt="" coords="5,80,135,107"/>
+<area shape="rect" id="node3" href="$class_fault.html" title="Calculate the fault of the system and update the elements data. " alt="" coords="159,80,210,107"/>
+<area shape="rect" id="node4" href="$class_power_flow.html" title="Calculate the power flow. " alt="" coords="234,80,319,107"/>
+</map>

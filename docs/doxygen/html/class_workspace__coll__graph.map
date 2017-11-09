@@ -1,0 +1,6 @@
+<map id="Workspace" name="Workspace">
+<area shape="rect" id="node3" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen. " alt="" coords="149,95,215,121"/>
+<area shape="rect" id="node4" href="$class_properties_data.html" title="General and simulation data manager. " alt="" coords="240,95,348,121"/>
+<area shape="rect" id="node5" href="$struct_general_data.html" title="GeneralData" alt="" coords="183,5,277,32"/>
+<area shape="rect" id="node6" href="$struct_simulation_data.html" title="SimulationData" alt="" coords="301,5,412,32"/>
+</map>

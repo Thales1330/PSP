@@ -1,0 +1,7 @@
+<map id="IOControlForm" name="IOControlForm">
+<area shape="rect" id="node3" href="$class_i_o_control.html" title="Provides the communication with the power element. " alt="" coords="166,260,242,287"/>
+<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="65,171,175,197"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="85,95,155,121"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="67,5,173,32"/>
+<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="199,171,294,197"/>
+</map>

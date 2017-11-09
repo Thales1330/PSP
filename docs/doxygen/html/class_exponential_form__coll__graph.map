@@ -1,0 +1,6 @@
+<map id="ExponentialForm" name="ExponentialForm">
+<area shape="rect" id="node3" href="$class_exponential.html" title="Generates an output following an exponential function. " alt="" coords="181,247,271,273"/>
+<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="171,171,281,197"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="191,95,261,121"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="173,5,279,32"/>
+</map>

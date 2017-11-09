@@ -1,0 +1,15 @@
+<map id="PowerElement" name="PowerElement">
+<area shape="rect" id="node3" href="$class_branch.html" title="Abstract class for branch power elements. " alt="" coords="91,155,153,181"/>
+<area shape="rect" id="node6" href="$class_bus.html" title="Node for power elements. All others power elements are connected through this. " alt="" coords="233,155,278,181"/>
+<area shape="rect" id="node7" href="$class_machines.html" title="Abstract class for rotary machines power elements. " alt="" coords="303,155,381,181"/>
+<area shape="rect" id="node11" href="$class_shunt.html" title="Abstract class for shunt power elements. " alt="" coords="589,155,645,181"/>
+<area shape="rect" id="node2" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="263,5,333,32"/>
+<area shape="rect" id="node4" href="$class_line.html" title="Power line element. " alt="" coords="5,229,52,256"/>
+<area shape="rect" id="node5" href="$class_transformer.html" title="Two&#45;winding transformer power element. " alt="" coords="77,229,167,256"/>
+<area shape="rect" id="node8" href="$class_ind_motor.html" title="Induction motor power element. " alt="" coords="191,229,263,256"/>
+<area shape="rect" id="node9" href="$class_sync_generator.html" title="Synchronous generator power element. " alt="" coords="287,229,397,256"/>
+<area shape="rect" id="node10" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="" coords="421,229,506,256"/>
+<area shape="rect" id="node12" href="$class_capacitor.html" title="Shunt capactior power element. " alt="" coords="530,229,607,256"/>
+<area shape="rect" id="node13" href="$class_inductor.html" title="Inductor shunt power element. " alt="" coords="632,229,700,256"/>
+<area shape="rect" id="node14" href="$class_load.html" title="Loas shunt power element. " alt="" coords="725,229,775,256"/>
+</map>

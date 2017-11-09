@@ -1,0 +1,7 @@
+<map id="Machines" name="Machines">
+<area shape="rect" id="node4" href="$class_ind_motor.html" title="Induction motor power element. " alt="" coords="5,229,77,256"/>
+<area shape="rect" id="node5" href="$class_sync_generator.html" title="Synchronous generator power element. " alt="" coords="101,229,211,256"/>
+<area shape="rect" id="node6" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="" coords="235,229,320,256"/>
+<area shape="rect" id="node2" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="103,80,209,107"/>
+<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="121,5,191,32"/>
+</map>

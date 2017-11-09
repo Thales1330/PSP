@@ -1,0 +1,42 @@
+<map id="Project/Element.h" name="Project/Element.h">
+<area shape="rect" id="node2" href="$_power_element_8h.html" title="Project/PowerElement.h" alt="" coords="801,80,964,107"/>
+<area shape="rect" id="node5" href="$_electric_calculation_8h.html" title="Project/ElectricCalculation.h" alt="" coords="639,379,825,405"/>
+<area shape="rect" id="node23" href="$_properties_data_8h.html" title="Project/PropertiesData.h" alt="" coords="1035,155,1199,181"/>
+<area shape="rect" id="node25" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="2207,155,2374,181"/>
+<area shape="rect" id="node41" href="$_graphical_element_8h.html" title="Project/GraphicalElement.h" alt="" coords="1405,80,1587,107"/>
+<area shape="rect" id="node3" href="$_branch_8h.html" title="Project/Branch.h" alt="" coords="242,229,361,256"/>
+<area shape="rect" id="node12" href="$_bus_8h.html" title="Project/Bus.h" alt="" coords="629,155,731,181"/>
+<area shape="rect" id="node13" href="$_shunt_8h.html" title="Project/Shunt.h" alt="" coords="624,229,736,256"/>
+<area shape="rect" id="node19" href="$_machines_8h.html" title="Project/Machines.h" alt="" coords="962,229,1097,256"/>
+<area shape="rect" id="node24" href="$_text_8h.html" title="Project/Text.h" alt="" coords="1507,379,1610,405"/>
+<area shape="rect" id="node4" href="$_line_8h.html" title="Project/Line.h" alt="" coords="94,304,197,331"/>
+<area shape="rect" id="node11" href="$_transformer_8h.html" title="Project/Transformer.h" alt="" coords="221,304,368,331"/>
+<area shape="rect" id="node6" href="$_file_handing_8h.html" title="Project/FileHanding.h" alt="" coords="1536,453,1683,480"/>
+<area shape="rect" id="node7" href="$_electromechanical_8h.html" title="Project/Electromechanical.h" alt="" coords="469,453,654,480"/>
+<area shape="rect" id="node8" href="$_fault_8h.html" title="Project/Fault.h" alt="" coords="679,453,785,480"/>
+<area shape="rect" id="node9" href="$_power_flow_8h.html" title="Project/PowerFlow.h" alt="" coords="809,453,951,480"/>
+<area shape="rect" id="node10" href="$_text_form_8h.html" title="Project/TextForm.h" alt="" coords="1379,453,1512,480"/>
+<area shape="rect" id="node17" href="$_workspace_8h.html" title="Project/Workspace.h" alt="" coords="1339,379,1483,405"/>
+<area shape="rect" id="node14" href="$_capacitor_8h.html" title="Project/Capacitor.h" alt="" coords="443,304,576,331"/>
+<area shape="rect" id="node15" href="$_inductor_8h.html" title="Project/Inductor.h" alt="" coords="601,304,725,331"/>
+<area shape="rect" id="node16" href="$_load_8h.html" title="Project/Load.h" alt="" coords="749,304,856,331"/>
+<area shape="rect" id="node18" href="$_element_data_object_8h.html" title="Project/ElementDataObject.h" alt="" coords="1163,453,1354,480"/>
+<area shape="rect" id="node20" href="$_ind_motor_8h.html" title="Project/IndMotor.h" alt="" coords="880,304,1008,331"/>
+<area shape="rect" id="node21" href="$_sync_generator_8h.html" title="Project/SyncGenerator.h" alt="" coords="1032,304,1197,331"/>
+<area shape="rect" id="node22" href="$_sync_motor_8h.html" title="Project/SyncMotor.h" alt="" coords="1221,304,1363,331"/>
+<area shape="rect" id="node26" href="$_connection_line_8h.html" title="Project/ConnectionLine.h" alt="" coords="1767,304,1934,331"/>
+<area shape="rect" id="node28" href="$_constant_8h.html" title="Project/Constant.h" alt="" coords="1755,229,1885,256"/>
+<area shape="rect" id="node29" href="$_i_o_control_8h.html" title="Project/IOControl.h" alt="" coords="1910,229,2042,256"/>
+<area shape="rect" id="node32" href="$_exponential_8h.html" title="Project/Exponential.h" alt="" coords="2067,229,2213,256"/>
+<area shape="rect" id="node33" href="$_gain_8h.html" title="Project/Gain.h" alt="" coords="2238,229,2343,256"/>
+<area shape="rect" id="node34" href="$_limiter_8h.html" title="Project/Limiter.h" alt="" coords="2368,229,2485,256"/>
+<area shape="rect" id="node35" href="$_math_operation_8h.html" title="Project/MathOperation.h" alt="" coords="2509,229,2672,256"/>
+<area shape="rect" id="node38" href="$_rate_limiter_8h.html" title="Project/RateLimiter.h" alt="" coords="2696,229,2840,256"/>
+<area shape="rect" id="node39" href="$_sum_8h.html" title="Project/Sum.h" alt="" coords="2865,229,2970,256"/>
+<area shape="rect" id="node40" href="$_transfer_function_8h.html" title="Project/TransferFunction.h" alt="" coords="2994,229,3169,256"/>
+<area shape="rect" id="node27" href="$_control_element_container_8h.html" title="Project/ControlElementContainer.h" alt="" coords="2225,379,2447,405"/>
+<area shape="rect" id="node30" href="$_control_editor_8h.html" title="Project/ControlEditor.h" alt="" coords="1590,304,1743,331"/>
+<area shape="rect" id="node31" href="$_i_o_control_form_8h.html" title="Project/IOControlForm.h" alt="" coords="2060,304,2223,331"/>
+<area shape="rect" id="node36" href="$_multiplier_8h.html" title="Project/Multiplier.h" alt="" coords="2399,304,2529,331"/>
+<area shape="rect" id="node37" href="$_divider_8h.html" title="Project/Divider.h" alt="" coords="2554,304,2670,331"/>
+</map>

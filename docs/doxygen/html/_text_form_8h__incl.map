@@ -1,0 +1,25 @@
+<map id="Project/TextForm.h" name="Project/TextForm.h">
+<area shape="rect" id="node3" href="$_text_8h.html" title="Text.h" alt="" coords="155,304,213,331"/>
+<area shape="rect" id="node22" href="$_electric_calculation_8h.html" title="ElectricCalculation.h" alt="" coords="801,80,943,107"/>
+<area shape="rect" id="node6" href="$_graphical_element_8h.html" title="GraphicalElement.h" alt="" coords="463,379,599,405"/>
+<area shape="rect" id="node15" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="735,379,852,405"/>
+<area shape="rect" id="node21" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="5,379,112,405"/>
+<area shape="rect" id="node7" href="$_element_8h.html" title="Element.h" alt="" coords="1285,453,1366,480"/>
+<area shape="rect" id="node16" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="720,453,851,480"/>
+<area shape="rect" id="node23" href="$_bus_8h.html" title="Bus.h" alt="" coords="639,304,695,331"/>
+<area shape="rect" id="node25" href="$_capacitor_8h.html" title="Capacitor.h" alt="" coords="408,155,496,181"/>
+<area shape="rect" id="node27" href="$_ind_motor_8h.html" title="IndMotor.h" alt="" coords="831,155,913,181"/>
+<area shape="rect" id="node29" href="$_inductor_8h.html" title="Inductor.h" alt="" coords="521,155,599,181"/>
+<area shape="rect" id="node30" href="$_line_8h.html" title="Line.h" alt="" coords="623,155,681,181"/>
+<area shape="rect" id="node33" href="$_load_8h.html" title="Load.h" alt="" coords="323,155,384,181"/>
+<area shape="rect" id="node35" href="$_sync_generator_8h.html" title="SyncGenerator.h" alt="" coords="937,155,1057,181"/>
+<area shape="rect" id="node36" href="$_sync_motor_8h.html" title="SyncMotor.h" alt="" coords="1081,155,1177,181"/>
+<area shape="rect" id="node37" href="$_transformer_8h.html" title="Transformer.h" alt="" coords="705,155,807,181"/>
+<area shape="rect" id="node38" href="$_properties_data_8h.html" title="PropertiesData.h" alt="" coords="1303,304,1422,331"/>
+<area shape="rect" id="node24" href="$_bus_form_8h.html" title="BusForm.h" alt="" coords="623,379,710,405"/>
+<area shape="rect" id="node26" href="$_shunt_8h.html" title="Shunt.h" alt="" coords="516,229,583,256"/>
+<area shape="rect" id="node28" href="$_machines_8h.html" title="Machines.h" alt="" coords="890,229,979,256"/>
+<area shape="rect" id="node31" href="$_line_form_8h.html" title="LineForm.h" alt="" coords="607,229,694,256"/>
+<area shape="rect" id="node32" href="$_branch_8h.html" title="Branch.h" alt="" coords="719,229,793,256"/>
+<area shape="rect" id="node34" href="$_load_form_8h.html" title="LoadForm.h" alt="" coords="297,304,388,331"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="IndMotor" name="IndMotor">
+<area shape="rect" id="node2" href="$class_machines.html" title="Abstract class for rotary machines power elements. " alt="" coords="179,336,258,363"/>
+<area shape="rect" id="node3" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="165,260,272,287"/>
+<area shape="rect" id="node4" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="183,133,254,159"/>
+<area shape="rect" id="node5" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="18,5,125,32"/>
+<area shape="rect" id="node6" href="$struct_switching_data.html" title="Switching data of power elements. " alt="" coords="278,133,383,159"/>
+<area shape="rect" id="node7" href="$struct_ind_motor_electrical_data.html" title="IndMotorElectricalData" alt="" coords="282,336,435,363"/>
+</map>

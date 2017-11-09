@@ -1,0 +1,30 @@
+<map id="Element" name="Element">
+<area shape="rect" id="node2" href="$class_control_element.html" title="ControlElement" alt="" coords="131,259,242,285"/>
+<area shape="rect" id="node15" href="$class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace. " alt="" coords="124,512,249,539"/>
+<area shape="rect" id="node17" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="133,613,240,640"/>
+<area shape="rect" id="node3" href="$class_connection_line.html" title="Connection between two control elements or other connection line and an element. " alt="" coords="301,5,412,32"/>
+<area shape="rect" id="node4" href="$class_constant.html" title="A control element that provides a constant value. " alt="" coords="319,56,394,83"/>
+<area shape="rect" id="node5" href="$class_exponential.html" title="Generates an output following an exponential function. " alt="" coords="311,107,402,133"/>
+<area shape="rect" id="node6" href="$class_gain.html" title="Provide an output multiplying the input by a constant. " alt="" coords="332,157,381,184"/>
+<area shape="rect" id="node7" href="$class_i_o_control.html" title="Provides the communication with the power element. " alt="" coords="319,208,395,235"/>
+<area shape="rect" id="node8" href="$class_limiter.html" title="Limits the input value by superior and inferior values. " alt="" coords="326,259,387,285"/>
+<area shape="rect" id="node9" href="$class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="" coords="303,309,410,336"/>
+<area shape="rect" id="node12" href="$class_rate_limiter.html" title="Limits the rising and/or falling rate. &#160;" alt="" coords="313,360,401,387"/>
+<area shape="rect" id="node13" href="$class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="" coords="332,411,381,437"/>
+<area shape="rect" id="node14" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="" coords="297,461,416,488"/>
+<area shape="rect" id="node10" href="$class_divider.html" title="Control element that divides two inputs. " alt="" coords="489,284,549,311"/>
+<area shape="rect" id="node11" href="$class_multiplier.html" title="Multiplies two inputs. " alt="" coords="481,335,556,361"/>
+<area shape="rect" id="node16" href="$class_text.html" title="Element that shows power element informations in workspace. " alt="" coords="333,512,380,539"/>
+<area shape="rect" id="node18" href="$class_branch.html" title="Abstract class for branch power elements. " alt="" coords="325,563,388,589"/>
+<area shape="rect" id="node21" href="$class_bus.html" title="Node for power elements. All others power elements are connected through this. " alt="" coords="334,613,379,640"/>
+<area shape="rect" id="node22" href="$class_machines.html" title="Abstract class for rotary machines power elements. " alt="" coords="317,664,396,691"/>
+<area shape="rect" id="node26" href="$class_shunt.html" title="Abstract class for shunt power elements. " alt="" coords="329,791,385,817"/>
+<area shape="rect" id="node19" href="$class_line.html" title="Power line element. " alt="" coords="495,512,542,539"/>
+<area shape="rect" id="node20" href="$class_transformer.html" title="Two&#45;winding transformer power element. " alt="" coords="473,563,564,589"/>
+<area shape="rect" id="node23" href="$class_ind_motor.html" title="Induction motor power element. " alt="" coords="483,613,555,640"/>
+<area shape="rect" id="node24" href="$class_sync_generator.html" title="Synchronous generator power element. " alt="" coords="464,664,573,691"/>
+<area shape="rect" id="node25" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="" coords="476,715,561,741"/>
+<area shape="rect" id="node27" href="$class_capacitor.html" title="Shunt capactior power element. " alt="" coords="480,765,557,792"/>
+<area shape="rect" id="node28" href="$class_inductor.html" title="Inductor shunt power element. " alt="" coords="485,816,553,843"/>
+<area shape="rect" id="node29" href="$class_load.html" title="Loas shunt power element. " alt="" coords="493,867,544,893"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="ConstantForm" name="ConstantForm">
+<area shape="rect" id="node3" href="$class_constant.html" title="A control element that provides a constant value. " alt="" coords="165,260,239,287"/>
+<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="63,171,173,197"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="83,95,153,121"/>
+<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="65,5,171,32"/>
+<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="197,171,292,197"/>
+</map>
