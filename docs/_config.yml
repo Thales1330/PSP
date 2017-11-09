@@ -4,4 +4,5 @@ show_downloads: true
 theme: jekyll-theme-cayman
 google_analytics: UA-106599602-1
 
-include: ["_about_form_8h_source.html"]
+include: 
+  - doxygen/html/_about_form_8h_source.html
