@@ -97,14 +97,13 @@ $(document).ready(function(){initNavTree('class_chart_view.html','');});
 <p>This class is responsible to manage the charts generated in the transient electromechanical studies.  
  <a href="class_chart_view.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_chart_view_8h_source.html">ChartView.h</a>&gt;</code></p>
+<p><code>#include &lt;ChartView.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ChartView:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_chart_view.png" usemap="#ChartView_map" alt=""/>
   <map id="ChartView_map" name="ChartView_map">
-<area href="class_chart_view_base.html" alt="ChartViewBase" shape="rect" coords="0,56,99,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -119,19 +118,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Fit</b> ()</td></tr>
 <tr class="memitem:a88dfb946342df7c344bd3578d207dcd9"><td class="memItemLeft" align="right" valign="top"><a id="a88dfb946342df7c344bd3578d207dcd9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdatePlot</b> (bool fit=true)</td></tr>
 <tr class="separator:a88dfb946342df7c344bd3578d207dcd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_chart_view_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_chart_view_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_chart_view_base.html">ChartViewBase</a></td></tr>
-<tr class="memitem:ae03299107d6d4b75aa723abd8276764a inherit pub_methods_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="ae03299107d6d4b75aa723abd8276764a"></a>
-wxMenuBar *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMenuBar</b> ()</td></tr>
-<tr class="separator:ae03299107d6d4b75aa723abd8276764a inherit pub_methods_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6593ae0442366b2eccc2d6a5e955a97 inherit pub_methods_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="af6593ae0442366b2eccc2d6a5e955a97"></a>
-wxTreeCtrl *&#160;</td><td class="memItemRight" valign="bottom"><b>GetTreeCtrl</b> ()</td></tr>
-<tr class="separator:af6593ae0442366b2eccc2d6a5e955a97 inherit pub_methods_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8839884176bb6ceec1d1d153477a084 inherit pub_methods_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="ae8839884176bb6ceec1d1d153477a084"></a>
-wxPropertyGridManager *&#160;</td><td class="memItemRight" valign="bottom"><b>GetPgMgr</b> ()</td></tr>
-<tr class="separator:ae8839884176bb6ceec1d1d153477a084 inherit pub_methods_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a491fa99972b27860b94e78c6e1745216 inherit pub_methods_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a491fa99972b27860b94e78c6e1745216"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ChartViewBase</b> (wxWindow *parent, wxWindowID id=wxID_ANY, const wxString &amp;title=_(&quot;Chart viewer&quot;), const wxPoint &amp;pos=wxDefaultPosition, const wxSize &amp;size=wxSize(-1,-1), long style=wxDEFAULT_FRAME_STYLE)</td></tr>
-<tr class="separator:a491fa99972b27860b94e78c6e1745216 inherit pub_methods_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -249,122 +235,14 @@ std::vector&lt; wxColour &gt;&#160;</td><td class="memItemRight" valign="bottom"
 <tr class="memitem:a70200389b94906b89d2454b27ac2469c"><td class="memItemLeft" align="right" valign="top"><a id="a70200389b94906b89d2454b27ac2469c"></a>
 std::vector&lt; wxColour &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>m_itColourList</b></td></tr>
 <tr class="separator:a70200389b94906b89d2454b27ac2469c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_class_chart_view_base"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_chart_view_base')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_chart_view_base.html">ChartViewBase</a></td></tr>
-<tr class="memitem:a84dd44e402a650e86d2ff293fac12162 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a84dd44e402a650e86d2ff293fac12162"></a>
-wxMenuBar *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuBar</b></td></tr>
-<tr class="separator:a84dd44e402a650e86d2ff293fac12162 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbfb88d48b10e02cac353a472e1628fc inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="afbfb88d48b10e02cac353a472e1628fc"></a>
-wxMenu *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuFile</b></td></tr>
-<tr class="separator:afbfb88d48b10e02cac353a472e1628fc inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef2fe75fb8e5f72673d24633ca40f4e6 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="aef2fe75fb8e5f72673d24633ca40f4e6"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemSaveImage</b></td></tr>
-<tr class="separator:aef2fe75fb8e5f72673d24633ca40f4e6 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9d955087848cbe20c4bf50b149b4d0f inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="aa9d955087848cbe20c4bf50b149b4d0f"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemSendToClipboard</b></td></tr>
-<tr class="separator:aa9d955087848cbe20c4bf50b149b4d0f inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a624ed8499a19a7cae28437dd54ccaa30 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a624ed8499a19a7cae28437dd54ccaa30"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemExportCSV</b></td></tr>
-<tr class="separator:a624ed8499a19a7cae28437dd54ccaa30 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af952160ce42c32bfff6496f7d07fea99 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="af952160ce42c32bfff6496f7d07fea99"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemSeparator_1</b></td></tr>
-<tr class="separator:af952160ce42c32bfff6496f7d07fea99 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a407b4fc3b5f891ff37cd8475f0f6ab19 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a407b4fc3b5f891ff37cd8475f0f6ab19"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemExit</b></td></tr>
-<tr class="separator:a407b4fc3b5f891ff37cd8475f0f6ab19 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a237d5355111659d84fa4e61569deeecc inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a237d5355111659d84fa4e61569deeecc"></a>
-wxMenu *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuView</b></td></tr>
-<tr class="separator:a237d5355111659d84fa4e61569deeecc inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70006384adb23f93d64612c20d50cd2f inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a70006384adb23f93d64612c20d50cd2f"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemFit</b></td></tr>
-<tr class="separator:a70006384adb23f93d64612c20d50cd2f inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27f1cf05d785e4f230b3093ab807972c inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a27f1cf05d785e4f230b3093ab807972c"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemSeparator_2</b></td></tr>
-<tr class="separator:a27f1cf05d785e4f230b3093ab807972c inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8babad2afd97edf9cb0d0e10bf1dc7c6 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a8babad2afd97edf9cb0d0e10bf1dc7c6"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemShowGrid</b></td></tr>
-<tr class="separator:a8babad2afd97edf9cb0d0e10bf1dc7c6 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad24acb1e08f0a4223df11a4e2d929710 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="ad24acb1e08f0a4223df11a4e2d929710"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemShowLabel</b></td></tr>
-<tr class="separator:ad24acb1e08f0a4223df11a4e2d929710 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a250a4f7292e38ffadf609f07dbbc0323 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a250a4f7292e38ffadf609f07dbbc0323"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemShowCoordinates</b></td></tr>
-<tr class="separator:a250a4f7292e38ffadf609f07dbbc0323 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7adac58739fe82b104e34bbf27fb1dc7 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a7adac58739fe82b104e34bbf27fb1dc7"></a>
-wxMenuItem *&#160;</td><td class="memItemRight" valign="bottom"><b>m_menuItemDarkTheme</b></td></tr>
-<tr class="separator:a7adac58739fe82b104e34bbf27fb1dc7 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc3855389d4369940b7caafa0c446851 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="adc3855389d4369940b7caafa0c446851"></a>
-wxTreeCtrl *&#160;</td><td class="memItemRight" valign="bottom"><b>m_treeCtrl</b></td></tr>
-<tr class="separator:adc3855389d4369940b7caafa0c446851 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb24602e82869403f8ea40d71849fe0c inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="adb24602e82869403f8ea40d71849fe0c"></a>
-wxPropertyGridManager *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgMgr</b></td></tr>
-<tr class="separator:adb24602e82869403f8ea40d71849fe0c inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34f689775bc42f1f11a7b84067a98808 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a34f689775bc42f1f11a7b84067a98808"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropLineProp</b></td></tr>
-<tr class="separator:a34f689775bc42f1f11a7b84067a98808 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af69de67731b917ec6f5eef8d20e3e4c8 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="af69de67731b917ec6f5eef8d20e3e4c8"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropDraw</b></td></tr>
-<tr class="separator:af69de67731b917ec6f5eef8d20e3e4c8 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a561157aa85ca4ad02d28870b1c2c856a inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a561157aa85ca4ad02d28870b1c2c856a"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgProplineThick</b></td></tr>
-<tr class="separator:a561157aa85ca4ad02d28870b1c2c856a inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafb4ae39c6001ad8efb213ea54561b5d inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="aafb4ae39c6001ad8efb213ea54561b5d"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgProplineType</b></td></tr>
-<tr class="separator:aafb4ae39c6001ad8efb213ea54561b5d inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd083ffdfe84b6f2460efdcd928c8edd inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="afd083ffdfe84b6f2460efdcd928c8edd"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgProplineAxis</b></td></tr>
-<tr class="separator:afd083ffdfe84b6f2460efdcd928c8edd inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51f2301e489e6ca6309948c51953d2eb inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a51f2301e489e6ca6309948c51953d2eb"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropChartProp</b></td></tr>
-<tr class="separator:a51f2301e489e6ca6309948c51953d2eb inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4083de6c29b7ab0997217c32e246ee0b inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a4083de6c29b7ab0997217c32e246ee0b"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropChartTitle</b></td></tr>
-<tr class="separator:a4083de6c29b7ab0997217c32e246ee0b inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96122bb85c3bfbf72369b2a0b3ee9340 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a96122bb85c3bfbf72369b2a0b3ee9340"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropXLabel</b></td></tr>
-<tr class="separator:a96122bb85c3bfbf72369b2a0b3ee9340 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afef3a2f6f799ee3bcac9a796cddc0ada inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="afef3a2f6f799ee3bcac9a796cddc0ada"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropYLabel</b></td></tr>
-<tr class="separator:afef3a2f6f799ee3bcac9a796cddc0ada inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bcd17e77ca213af3c6cca1b05508d85 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a9bcd17e77ca213af3c6cca1b05508d85"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropMargins</b></td></tr>
-<tr class="separator:a9bcd17e77ca213af3c6cca1b05508d85 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c69cf95fa34405e07c420275aca35f4 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a7c69cf95fa34405e07c420275aca35f4"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropMarginsUp</b></td></tr>
-<tr class="separator:a7c69cf95fa34405e07c420275aca35f4 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9b41d88147f15b2ce6d76f117bfff75 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="ac9b41d88147f15b2ce6d76f117bfff75"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropMarginsBot</b></td></tr>
-<tr class="separator:ac9b41d88147f15b2ce6d76f117bfff75 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a720211e750c1184bced8da8db3fb1438 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a720211e750c1184bced8da8db3fb1438"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropMarginsLeft</b></td></tr>
-<tr class="separator:a720211e750c1184bced8da8db3fb1438 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa436ffebb21ce63202333cc33f02b8d inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="afa436ffebb21ce63202333cc33f02b8d"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropMarginsRight</b></td></tr>
-<tr class="separator:afa436ffebb21ce63202333cc33f02b8d inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8c758cc9494a44e6ba66fbdec7884bd inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="ad8c758cc9494a44e6ba66fbdec7884bd"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropAxisLimit</b></td></tr>
-<tr class="separator:ad8c758cc9494a44e6ba66fbdec7884bd inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7fff2a1e52f784a92edc1e9808bf6a5 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="ab7fff2a1e52f784a92edc1e9808bf6a5"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropXMin</b></td></tr>
-<tr class="separator:ab7fff2a1e52f784a92edc1e9808bf6a5 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b4dad71a2c76cc196f671c74c57bc38 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a6b4dad71a2c76cc196f671c74c57bc38"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropXMax</b></td></tr>
-<tr class="separator:a6b4dad71a2c76cc196f671c74c57bc38 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d66080c5a61b4a544111cd829cd88b8 inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a0d66080c5a61b4a544111cd829cd88b8"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropYMin</b></td></tr>
-<tr class="separator:a0d66080c5a61b4a544111cd829cd88b8 inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43e25960f37484e564f8043b273760cd inherit pro_attribs_class_chart_view_base"><td class="memItemLeft" align="right" valign="top"><a id="a43e25960f37484e564f8043b273760cd"></a>
-wxPGProperty *&#160;</td><td class="memItemRight" valign="bottom"><b>m_pgPropYMax</b></td></tr>
-<tr class="separator:a43e25960f37484e564f8043b273760cd inherit pro_attribs_class_chart_view_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is responsible to manage the charts generated in the transient electromechanical studies. </p>
 <dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05/10/2017 </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_chart_view_8h_source.html#l00040">40</a> of file <a class="el" href="_chart_view_8h_source.html">ChartView.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
-<li>Project/<a class="el" href="_chart_view_8h_source.html">ChartView.h</a></li>
-<li>Project/<a class="el" href="_chart_view_8cpp_source.html">ChartView.cpp</a></li>
+<li>Project/<a class="el" href="_chart_view_8h.html">ChartView.h</a></li>
+<li>Project/ChartView.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -17,6 +17,5 @@ var searchData=
   ['exponential',['Exponential',['../class_exponential.html',1,'']]],
   ['exponential_2eh',['Exponential.h',['../_exponential_8h.html',1,'']]],
   ['exponentialform',['ExponentialForm',['../class_exponential_form.html',1,'']]],
-  ['exponentialform_2eh',['ExponentialForm.h',['../_exponential_form_8h.html',1,'']]],
-  ['exponentialformbase',['ExponentialFormBase',['../class_exponential_form_base.html',1,'']]]
+  ['exponentialform_2eh',['ExponentialForm.h',['../_exponential_form_8h.html',1,'']]]
 ];

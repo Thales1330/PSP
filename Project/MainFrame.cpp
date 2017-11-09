@@ -16,7 +16,7 @@
  */
 
 #include "MainFrame.h"
-#include "ArtMetro.h"
+#include "artProvider/ArtMetro.h"
 #include "Workspace.h"
 #include "Bus.h"
 #include "Line.h"

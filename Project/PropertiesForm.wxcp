@@ -1,12 +1,12 @@
 {
  "metadata": {
-  "m_generatedFilesDir": ".",
+  "m_generatedFilesDir": "base/",
   "m_objCounter": 415,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxCDAD0InitBitmapResources",
   "m_bitmapsFile": "PropertiesFormBitmaps.cpp",
   "m_GenerateCodeTypes": 1,
-  "m_outputFileName": "PropertiesForm",
+  "m_outputFileName": "PropertiesFormBase",
   "m_firstWindowId": 10000,
   "m_useEnum": true,
   "m_useUnderscoreMacro": true,

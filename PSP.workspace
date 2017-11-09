@@ -22,5 +22,9 @@
       <Environment/>
       <Project Name="Project" ConfigName="Debug_Ubuntu_x64"/>
     </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Debug_Windows_x32" Selected="no">
+      <Environment/>
+      <Project Name="Project" ConfigName="Debug_Windows_x32"/>
+    </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

@@ -17,7 +17,7 @@
 
 #ifndef LOADFORM_H
 #define LOADFORM_H
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 
 class Load;
 class SwitchingForm;

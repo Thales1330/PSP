@@ -17,7 +17,7 @@
 
 #ifndef LIMITERFORM_H
 #define LIMITERFORM_H
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 
 class Limiter;
 

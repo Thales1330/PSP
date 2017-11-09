@@ -24,21 +24,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_about_form_8cpp_source.html",
-"_power_element_8h.html#ae98a0d9ac1aab1d3a057854f5ebdca1b",
-"class_bus_form_base.html#a65fc5c09ea6d29267fdec67a353c0a46",
-"class_constant_form_base.html#a8c2c85c2dbe59fc4831024ad4bb9e675",
-"class_control_system_test_base.html#a96d99c0b620ed8087f3b88a3d582d807",
-"class_element.html#ab0d0e20be9a36ae676202db753faeec9",
-"class_generator_stab_form.html#a7973b5d0a05cf05a9606714f2e5fb357",
-"class_inductor.html",
-"class_load_form_base.html#aaa96d2ac7928d6bb44edd3371f09469d",
-"class_node.html#aad806f85c0a0ce88935b79e3fdbd5de5",
-"class_simulations_settings_form_base.html#a50c8793f91516bffad3a4e9649a4963d",
-"class_sync_machine_form_base.html#a46fe41a58c06bedeab99cd190921e545",
-"class_transfer_function_form_base.html#ab70bd59a35d2c588291e0fd65b7b043c",
-"classwx_ribbon_metro_art_provider.html#a64892cbeb4809a944158eeeb64521992",
-"struct_sync_generator_electrical_data.html#abe8b5c90c1b330c2c340def3973694c6"
+"_about_form_8h.html",
+"class_bus.html#aacf35e62456128245a02db34334f9a3d",
+"class_control_element_button.html#ab87a13cd01a3ac7222a1df2e5252a2ac",
+"class_element.html#a5da121470a0c26c6b5c57a7c4eeac48b",
+"class_i_o_control.html#a84a11e53cc306b8f9f82e577923d4091a903cbbc9b14ff4c2ea9c32d5a9473df5",
+"class_multiplier.html",
+"class_sync_generator.html#a6cbf05435af171775cbaf81d8beb6474",
+"class_workspace.html#acf9d7e1a32e3ba2714aad00558561164",
+"struct_sync_generator_electrical_data.html#a9f351e057a8249ae2fcfdf7e102e4633"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -17,7 +17,7 @@
 
 #ifndef RATELIMITERFORM_H
 #define RATELIMITERFORM_H
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 
 class RateLimiter;
 

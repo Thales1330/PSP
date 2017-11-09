@@ -18,7 +18,7 @@
 #ifndef TRANSFERFUNCTIONFORM_H
 #define TRANSFERFUNCTIONFORM_H
 
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 
 class TransferFunction;
 

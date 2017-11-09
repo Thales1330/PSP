@@ -2,7 +2,6 @@ var searchData=
 [
   ['datareport',['DataReport',['../class_data_report.html',1,'']]],
   ['datareport_2eh',['DataReport.h',['../_data_report_8h.html',1,'']]],
-  ['datareportbase',['DataReportBase',['../class_data_report_base.html',1,'']]],
   ['divider',['Divider',['../class_divider.html',1,'']]],
   ['divider_2eh',['Divider.h',['../_divider_8h.html',1,'']]],
   ['doublefromstring',['DoubleFromString',['../class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a',1,'Element']]],

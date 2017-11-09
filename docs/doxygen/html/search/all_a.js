@@ -7,7 +7,6 @@ var searchData=
   ['mainapp',['MainApp',['../class_main_app.html',1,'']]],
   ['mainframe',['MainFrame',['../class_main_frame.html',1,'MainFrame'],['../class_main_frame.html#a667b44053cae174a361cfd21124ef995',1,'MainFrame::MainFrame()'],['../class_main_frame.html#ac3288e93c5b8682863574bc47c9e9ff8',1,'MainFrame::MainFrame(wxWindow *parent, wxLocale *locale, PropertiesData *initProperties, wxString openPath=&quot;&quot;)']]],
   ['mainframe_2eh',['MainFrame.h',['../_main_frame_8h.html',1,'']]],
-  ['mainframebase',['MainFrameBase',['../class_main_frame_base.html',1,'']]],
   ['mathoperation',['MathOperation',['../class_math_operation.html',1,'']]],
   ['mathoperation_2eh',['MathOperation.h',['../_math_operation_8h.html',1,'']]],
   ['move',['Move',['../class_branch.html#a7cf4b117f43f49bb76cce3df5521fb70',1,'Branch::Move()'],['../class_connection_line.html#a49300d04c6dd4bcc6f4569c0c47780c7',1,'ConnectionLine::Move()'],['../class_control_element.html#ac8bd52ddb8eed51a217fecb2eed65708',1,'ControlElement::Move()'],['../class_element.html#abe884d99d12d5252e18956162115b025',1,'Element::Move()'],['../class_gain.html#aa303bcc736ac5fad1f89c6cc87e859db',1,'Gain::Move()'],['../class_line.html#a3eabf6de2af4ee71f72ce4f091c69978',1,'Line::Move()'],['../class_machines.html#a2f7450283dd36f4fc0847dfd50385c44',1,'Machines::Move()'],['../class_shunt.html#aa98b8a2f097fc02fee1ea874e19480f3',1,'Shunt::Move()'],['../class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8',1,'Transformer::Move()']]],

@@ -18,7 +18,7 @@
 #ifndef IOCONTROLFORM_H
 #define IOCONTROLFORM_H
 
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 #include "IOControl.h"
 
 /**

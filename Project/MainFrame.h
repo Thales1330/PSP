@@ -23,7 +23,7 @@
 #include <wx/filedlg.h>
 #include <wx/glcanvas.h>
 
-#include "MainFrameBase.h"
+#include "base/MainFrameBase.h"
 
 class MainFrameBase;
 class wxRibbonMetroArtProvider;

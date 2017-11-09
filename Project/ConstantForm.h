@@ -17,7 +17,7 @@
 
 #ifndef CONSTANTFORM_H
 #define CONSTANTFORM_H
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 
 class Constant;
 

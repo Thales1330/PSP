@@ -18,7 +18,7 @@
 #ifndef SUMFORM_H
 #define SUMFORM_H
 
-#include "ElementForm.h"
+#include "base/ElementFormBase.h"
 
 class Sum;
 
