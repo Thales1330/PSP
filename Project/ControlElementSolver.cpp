@@ -204,8 +204,8 @@ void ControlElementSolver::SolveNextStep()
             ConnectionLine* child = static_cast<ConnectionLine*>(io->GetChildList()[0]);
             if(m_inputControl == io) firstConn = child;
             bool inputType = true;
+            io->SetSolved();
             switch(io->GetValue()) {
-                io->SetSolved();
                 case IOControl::IN_TERMINAL_VOLTAGE: {
                     child->SetValue(m_terminalVoltage);
                 } break;
@@ -235,6 +235,7 @@ void ControlElementSolver::SolveNextStep()
                 } break;
                 default: {
                     inputType = false;
+                    io->SetSolved(false);
                 } break;
             }
             if(inputType) {
@@ -286,7 +287,6 @@ void ControlElementSolver::SolveNextStep()
             io->SetSolved();
             ConnectionLine* child = static_cast<ConnectionLine*>(io->GetChildList()[0]);
             switch(io->GetValue()) {
-                io->SetSolved();
                 case IOControl::OUT_MEC_POWER: {
                     m_mecPower = child->GetValue();
                     m_solutions.push_back(m_mecPower);

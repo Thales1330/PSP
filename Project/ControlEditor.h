@@ -46,6 +46,7 @@ class Constant;
 class Gain;
 class MathOperation;
 class Divider;
+class MathExpression;
 
 class ControlElementSolver;
 class ControlElementContainer;
@@ -63,7 +64,8 @@ enum ControlElementButtonID {
     ID_MULT,
     ID_EXP,
     ID_RATELIM,
-    ID_MATH_DIV
+    ID_MATH_DIV,
+    ID_MATH_EXPR
 };
 
 /**

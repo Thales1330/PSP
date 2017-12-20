@@ -743,9 +743,6 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     Redraw();
                 }
                 // Tests - Ctrl + Shift + L
-                if(event.ControlDown() && event.ShiftDown()) {
-                    // Nothing...
-                }
             } break;
             case 'T':  // Insert a transformer.
             {

@@ -36,6 +36,7 @@
           <File Name="TransferFunction.cpp"/>
           <File Name="Divider.cpp"/>
           <File Name="MathOperation.cpp"/>
+          <File Name="MathExpression.cpp"/>
         </VirtualDirectory>
         <VirtualDirectory Name="graphical">
           <File Name="GraphicalElement.cpp"/>
@@ -58,6 +59,11 @@
         </VirtualDirectory>
       </VirtualDirectory>
       <File Name="PropertiesData.cpp"/>
+      <VirtualDirectory Name="fparser">
+        <File Name="MathExprParser.cpp"/>
+        <File Name="fparser/fparser.cc"/>
+        <File Name="fparser/fpoptimizer.cc"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <VirtualDirectory Name="wxMathPlot">
@@ -85,6 +91,7 @@
           <File Name="RateLimiterForm.cpp"/>
           <File Name="SumForm.cpp"/>
           <File Name="TransferFunctionForm.cpp"/>
+          <File Name="MathExpressionForm.cpp"/>
         </VirtualDirectory>
         <VirtualDirectory Name="graphical element">
           <File Name="TextForm.cpp"/>
@@ -155,6 +162,7 @@
           <File Name="TransferFunction.h"/>
           <File Name="Divider.h"/>
           <File Name="MathOperation.h"/>
+          <File Name="MathExpression.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="power">
           <File Name="Branch.h"/>
@@ -171,6 +179,11 @@
           <File Name="SyncMotor.h"/>
           <File Name="Transformer.h"/>
         </VirtualDirectory>
+      </VirtualDirectory>
+      <VirtualDirectory Name="farser">
+        <File Name="MathExprParser.h"/>
+        <File Name="fparser/fparser.hh"/>
+        <File Name="fparser/fpconfig.hh"/>
       </VirtualDirectory>
       <File Name="PropertiesData.h"/>
     </VirtualDirectory>
@@ -198,6 +211,7 @@
           <File Name="RateLimiterForm.h"/>
           <File Name="SumForm.h"/>
           <File Name="TransferFunctionForm.h"/>
+          <File Name="MathExpressionForm.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="graphical">
           <File Name="TextForm.h"/>
@@ -446,7 +460,7 @@
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release_Windows_x32" CompilerType="MinGW ( TDM-GCC-32 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Release_Windows_x32" CompilerType="MinGW ( TDM-GCC-481-32 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O2;-Wall;$(shell wx-config --cflags);-std=gnu++11" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <Preprocessor Value="NDEBUG"/>

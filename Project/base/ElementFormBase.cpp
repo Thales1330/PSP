@@ -3729,3 +3729,160 @@ IOControlFormBase::~IOControlFormBase()
     m_ButtonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IOControlFormBase::OnCancelButtonClick), NULL, this);
     
 }
+
+MathExpressionFormBase::MathExpressionFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerLvl1_1);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerLvl1_1->Add(m_notebook, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    m_staticTextVariables = new wxStaticText(m_panelGeneral, wxID_ANY, _("Input variables (space separated)"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1->Add(m_staticTextVariables, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlVariables = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("x y"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlVariables->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_1->Add(m_textCtrlVariables, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlVariables->SetMinSize(wxSize(100,-1));
+    
+    m_stcMathExpr = new wxStyledTextCtrl(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    wxFont m_stcMathExprFont(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Courier New"));
+    m_stcMathExpr->SetFont(m_stcMathExprFont);
+    // Configure the fold margin
+    m_stcMathExpr->SetMarginType     (4, wxSTC_MARGIN_SYMBOL);
+    m_stcMathExpr->SetMarginMask     (4, wxSTC_MASK_FOLDERS);
+    m_stcMathExpr->SetMarginSensitive(4, true);
+    m_stcMathExpr->SetMarginWidth    (4, 16);
+    
+    m_stcMathExpr->SetProperty(wxT("fold"),wxT("1"));
+    m_stcMathExpr->MarkerDefine(wxSTC_MARKNUM_FOLDEROPEN,    wxSTC_MARK_ARROWDOWN);
+    m_stcMathExpr->MarkerDefine(wxSTC_MARKNUM_FOLDER,        wxSTC_MARK_ARROW);
+    m_stcMathExpr->MarkerDefine(wxSTC_MARKNUM_FOLDERSUB,     wxSTC_MARK_BACKGROUND);
+    m_stcMathExpr->MarkerDefine(wxSTC_MARKNUM_FOLDERTAIL,    wxSTC_MARK_BACKGROUND);
+    m_stcMathExpr->MarkerDefine(wxSTC_MARKNUM_FOLDEREND,     wxSTC_MARK_ARROW);
+    m_stcMathExpr->MarkerDefine(wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_ARROWDOWN);
+    m_stcMathExpr->MarkerDefine(wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_BACKGROUND);
+    // Configure the tracker margin
+    m_stcMathExpr->SetMarginWidth(1, 0);
+    
+    // Configure the symbol margin
+    m_stcMathExpr->SetMarginType (2, wxSTC_MARGIN_SYMBOL);
+    m_stcMathExpr->SetMarginMask (2, ~(wxSTC_MASK_FOLDERS));
+    m_stcMathExpr->SetMarginWidth(2, 0);
+    m_stcMathExpr->SetMarginSensitive(2, true);
+    
+    // Configure the line numbers margin
+    m_stcMathExpr->SetMarginType(0, wxSTC_MARGIN_NUMBER);
+    m_stcMathExpr->SetMarginWidth(0,0);
+    
+    // Configure the line symbol margin
+    m_stcMathExpr->SetMarginType(3, wxSTC_MARGIN_FORE);
+    m_stcMathExpr->SetMarginMask(3, 0);
+    m_stcMathExpr->SetMarginWidth(3,0);
+    // Select the lexer
+    m_stcMathExpr->SetLexer(wxSTC_LEX_PASCAL);
+    // Set default font / styles
+    m_stcMathExpr->StyleClearAll();
+    for(int i=0; i<wxSTC_STYLE_MAX; ++i) {
+        m_stcMathExpr->StyleSetFont(i, m_stcMathExprFont);
+    }
+    m_stcMathExpr->SetWrapMode(0);
+    m_stcMathExpr->SetIndentationGuides(0);
+    m_stcMathExpr->SetKeyWords(0, wxT(""));
+    m_stcMathExpr->SetKeyWords(1, wxT(""));
+    m_stcMathExpr->SetKeyWords(2, wxT(""));
+    m_stcMathExpr->SetKeyWords(3, wxT(""));
+    m_stcMathExpr->SetKeyWords(4, wxT(""));
+    
+    boxSizerLvl2_1->Add(m_stcMathExpr, 0, wxALL, WXC_FROM_DIP(5));
+    m_stcMathExpr->SetMinSize(wxSize(400,200));
+    
+    m_staticTextCheckStatus = new wxStaticText(this, wxID_ANY, _("No checks performed"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl1_1->Add(m_staticTextCheckStatus, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl1_1->Add(boxSizerBottomButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonCheck = new wxButton(this, wxID_ANY, _("Check expression"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonCheck, 0, wxALL|wxALIGN_LEFT, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("MathExpressionFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_textCtrlVariables->Connect(wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(MathExpressionFormBase::OnTextUpdate), NULL, this);
+    m_textCtrlVariables->Connect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(MathExpressionFormBase::OnTextEnter), NULL, this);
+    m_stcMathExpr->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(MathExpressionFormBase::OnLeftClickDown), NULL, this);
+    m_buttonCheck->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MathExpressionFormBase::OnCheckButtonClick), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MathExpressionFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MathExpressionFormBase::OnCancelButtonClick), NULL, this);
+    
+}
+
+MathExpressionFormBase::~MathExpressionFormBase()
+{
+    m_textCtrlVariables->Disconnect(wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(MathExpressionFormBase::OnTextUpdate), NULL, this);
+    m_textCtrlVariables->Disconnect(wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(MathExpressionFormBase::OnTextEnter), NULL, this);
+    m_stcMathExpr->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(MathExpressionFormBase::OnLeftClickDown), NULL, this);
+    m_buttonCheck->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MathExpressionFormBase::OnCheckButtonClick), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MathExpressionFormBase::OnOKButtonClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MathExpressionFormBase::OnCancelButtonClick), NULL, this);
+    
+}
