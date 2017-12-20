@@ -19,7 +19,6 @@
 #define MATHEXPRESSIONFORM_H
 
 #include "base/ElementFormBase.h"
-#include "MathExprParser.h"
 #include <wx/msgdlg.h>
 
 class MathExpression;
@@ -27,11 +26,12 @@ class MathExpression;
 class MathExpressionForm : public MathExpressionFormBase
 {
 public:
-    MathExpressionForm(wxWindow* parent, MathExpression* mathEpr);
+    MathExpressionForm(wxWindow* parent, MathExpression* mathExpr);
     virtual ~MathExpressionForm();
 protected:
     bool ValidateData();
     void SetSintaxHighlights();
+    bool CheckMathExpression();
     std::string GetVariablesToParse();
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
     virtual void OnCheckButtonClick(wxCommandEvent& event);
@@ -43,6 +43,6 @@ protected:
     std::vector<wxString> m_translatedErrorMsg;
     
     wxWindow* m_parent;
-    MathExpression* m_mathEpr;
+    MathExpression* m_mathExpr;
 };
 #endif // MATHEXPRESSIONFORM_H

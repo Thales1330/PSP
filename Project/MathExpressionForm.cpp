@@ -15,26 +15,45 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "MathExpression.h"
 #include "MathExpressionForm.h"
 
 #define ERROR_INDICATOR 10
 
-MathExpressionForm::MathExpressionForm(wxWindow* parent, MathExpression* mathEpr) : MathExpressionFormBase(parent)
+MathExpressionForm::MathExpressionForm(wxWindow* parent, MathExpression* mathExpr) : MathExpressionFormBase(parent)
 {
     m_parent = parent;
-    m_mathEpr = mathEpr;
-    
+    m_mathExpr = mathExpr;
+
+    // Variables string.
+    wxString variables = "";
+    for(unsigned int i = 0; i < m_mathExpr->GetVariables().size(); ++i) {
+        variables += m_mathExpr->GetVariables()[i] + " ";
+    }
+    variables.RemoveLast();
+
+    // Variables text ctrl.
+    wxFont variablesFont = m_textCtrlVariables->GetFont();
+    variablesFont.SetWeight(wxFONTWEIGHT_BOLD);
+    m_textCtrlVariables->SetFont(variablesFont);
+    m_textCtrlVariables->SetForegroundColour(wxColour(160, 0, 0));
+    m_textCtrlVariables->SetValue(variables);
+
+    m_stcMathExpr->SetText(m_mathExpr->GetMathExpression());
+
     m_staticTextCheckStatus->SetLabel(_("No checks performed."));
     SetSintaxHighlights();
     m_stcMathExpr->SetTabWidth(3);
+
+    // Error indicator
     m_stcMathExpr->IndicatorSetUnder(ERROR_INDICATOR, true);
     m_stcMathExpr->IndicatorSetStyle(ERROR_INDICATOR, wxSTC_INDIC_ROUNDBOX);
     m_stcMathExpr->IndicatorSetAlpha(ERROR_INDICATOR, 200);
     m_stcMathExpr->IndicatorSetUnder(ERROR_INDICATOR, true);
     m_stcMathExpr->IndicatorSetForeground(ERROR_INDICATOR, wxColor(255, 85, 0));
     m_stcMathExpr->SetIndicatorCurrent(ERROR_INDICATOR);
-    m_stcMathExpr->SetText("a := 0.98 * x;\nb := int(a) + e^y;\nsqrt(1 - sin(2.2 * a) + cos(pi / b) / 3.3)");
 
+    // Parser error messages to translation.
     m_translatedErrorMsg.clear();
     m_translatedErrorMsg.push_back(_("Syntax error"));
     m_translatedErrorMsg.push_back(_("Mismatched parenthesis"));
@@ -45,6 +64,7 @@ MathExpressionForm::MathExpressionForm(wxWindow* parent, MathExpression* mathEpr
     m_translatedErrorMsg.push_back(_("An unexpected error occurred"));
     m_translatedErrorMsg.push_back(_("Syntax error in input variables"));
     m_translatedErrorMsg.push_back(_("Illegal number of parameters to function"));
+    m_translatedErrorMsg.push_back(_("Syntax error: Premature end of string"));
     m_translatedErrorMsg.push_back(_("Syntax error: Expecting ( after function"));
     m_translatedErrorMsg.push_back(_("Syntax error: Unknown identifier"));
     m_translatedErrorMsg.push_back(_("No function has been parsed yet"));
@@ -52,31 +72,48 @@ MathExpressionForm::MathExpressionForm(wxWindow* parent, MathExpression* mathEpr
 
 MathExpressionForm::~MathExpressionForm() {}
 
-void MathExpressionForm::OnCheckButtonClick(wxCommandEvent& event)
-{
-    m_stcMathExpr->IndicatorClearRange(0, m_stcMathExpr->GetValue().length());
-    int currentLang = wxLocale::GetSystemLanguage();
-    wxLocale newLocale(wxLANGUAGE_ENGLISH_US);
-    MathExprParser parser;
-    int parserRes = parser.Parse(static_cast<std::string>(m_stcMathExpr->GetValue()), GetVariablesToParse());
-    if(parserRes != -1) {
-        m_staticTextCheckStatus->SetLabel(m_translatedErrorMsg[parser.GetParseErrorType()]);
-        m_staticTextCheckStatus->SetForegroundColour(wxColor(255, 0, 0));
-        m_stcMathExpr->IndicatorFillRange(parserRes, 1);
-    } else {
-        m_staticTextCheckStatus->SetLabel(_("OK!"));
-        m_staticTextCheckStatus->SetForegroundColour(wxColor(0, 128, 0));
-    }
-    Layout();
-    wxLocale oldLocale(currentLang);
-}
+void MathExpressionForm::OnCheckButtonClick(wxCommandEvent& event) { CheckMathExpression(); }
 
 void MathExpressionForm::OnOKButtonClick(wxCommandEvent& event)
 {
     if(ValidateData()) EndModal(wxID_OK);
 }
 
-bool MathExpressionForm::ValidateData() { return true; }
+bool MathExpressionForm::ValidateData()
+{
+    if(!CheckMathExpression()) {
+        wxMessageDialog msg(this, _("There is an error on math expression."), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msg.ShowModal();
+        return false;
+    }
+    wxString rawVariables = m_textCtrlVariables->GetValue();
+    wxString var = "";
+    std::vector<wxString> variables;
+    for(unsigned int i = 0; i < rawVariables.length(); ++i) {
+        if(rawVariables[i] == ' ') {
+            variables.push_back(var);
+            var = "";
+        } else if((i + 1) == static_cast<unsigned int>(rawVariables.length())) {
+            var += rawVariables[i];
+            variables.push_back(var);
+        } else {
+            var += rawVariables[i];
+        }
+    }
+
+    int diff = static_cast<int>(variables.size()) - static_cast<int>(m_mathExpr->GetVariables().size());
+
+    if(diff < 0) {
+        diff = std::abs(diff);
+        for(int i = 0; i < diff; ++i) { m_mathExpr->RemoveInNode(); }
+    } else if(diff > 0) {
+        for(int i = 0; i < diff; ++i) { m_mathExpr->AddInNode(); }
+    }
+    m_mathExpr->SetVariables(variables);
+    m_mathExpr->SetMathExpression(m_stcMathExpr->GetValue());
+    m_mathExpr->UpdatePoints();
+    return true;
+}
 
 void MathExpressionForm::SetSintaxHighlights()
 {
@@ -116,4 +153,26 @@ void MathExpressionForm::OnLeftClickDown(wxMouseEvent& event)
 {
     m_stcMathExpr->IndicatorClearRange(0, m_stcMathExpr->GetValue().length());
     event.Skip();
+}
+
+bool MathExpressionForm::CheckMathExpression()
+{
+    bool success = true;
+    m_stcMathExpr->IndicatorClearRange(0, m_stcMathExpr->GetValue().length());
+    int currentLang = wxLocale::GetSystemLanguage();
+    wxLocale newLocale(wxLANGUAGE_ENGLISH_US);
+    MathExprParser parser = m_mathExpr->GetParser();
+    int parserRes = parser.Parse(static_cast<std::string>(m_stcMathExpr->GetValue()), GetVariablesToParse());
+    if(parserRes != -1) {
+        m_staticTextCheckStatus->SetLabel(m_translatedErrorMsg[parser.GetParseErrorType()]);
+        m_staticTextCheckStatus->SetForegroundColour(wxColor(255, 0, 0));
+        m_stcMathExpr->IndicatorFillRange(parserRes, 1);
+        success = false;
+    } else {
+        m_staticTextCheckStatus->SetLabel(_("The math expression is correct."));
+        m_staticTextCheckStatus->SetForegroundColour(wxColor(0, 128, 0));
+    }
+    wxLocale oldLocale(currentLang);
+    Layout();
+    return success;
 }

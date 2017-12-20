@@ -15,13 +15,14 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "ConnectionLine.h"
 #include "MathExpression.h"
 #include "MathExpressionForm.h"
 
 MathExpression::MathExpression(int id) : ControlElement(id)
 {
     m_variablesVector.push_back("x");
-    // m_variablesVector.push_back("y");
+    m_variablesVector.push_back("y");
 
     for(unsigned int i = 0; i < m_variablesVector.size(); ++i) {
         m_glTextInputVector.push_back(new OpenGLText(m_variablesVector[i]));
@@ -151,8 +152,32 @@ void MathExpression::Rotate(bool clockwise)
     }
 }
 
-bool MathExpression::Solve(double input, double timeStep)
+bool MathExpression::Solve(double input, double timeStep, double currentTime)
 {
+    // Get the input vector from connection lines (can't use default (one) input argument)
+    std::vector<double> inputVector;
+    for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
+        Node* node = *itN;
+        if(node->GetNodeType() != Node::NODE_OUT) {
+            if(!node->IsConnected()) {
+                inputVector.push_back(0.0);  // Node not connected means zero value as input.
+            } else {
+                for(auto itC = m_childList.begin(), itCEnd = m_childList.end(); itC != itCEnd; ++itC) {
+                    ConnectionLine* cLine = static_cast<ConnectionLine*>(*itC);
+                    auto nodeList = cLine->GetNodeList();
+                    for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
+                        Node* childNode = *itCN;
+                        if(childNode == node) {
+                            inputVector.push_back(cLine->GetValue());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if(m_variablesVector.size() != inputVector.size()) return false;
+
     // Solve the math expression using fparser
     return true;
 }
@@ -249,4 +274,50 @@ void MathExpression::CalculateBlockSize(double numInNodes)
         if(m_width < m_minimumSize) m_width = m_minimumSize;  // minimum width
         m_height = m_maxSringSize + m_symbolSize.GetHeight() + 18;
     }
+}
+
+bool MathExpression::UpdateText()
+{
+    bool isTextureOK = true;
+    m_symbol.SetText(m_symbol.GetText());
+    if(!m_symbol.IsTextureOK()) isTextureOK = false;
+    for(auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) {
+        (*it)->SetText((*it)->GetText());
+        if(!(*it)->IsTextureOK()) isTextureOK = false;
+    }
+    return isTextureOK;
+}
+
+void MathExpression::SetVariables(std::vector<wxString> variablesVector)
+{
+    m_variablesVector = variablesVector;
+    // Clear old glTextVector
+    for(auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) { delete *it; }
+    m_glTextInputVector.clear();
+
+    for(auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
+        m_glTextInputVector.push_back(new OpenGLText(*(it)));
+}
+
+bool MathExpression::Initialize()
+{
+    m_variables = "time,step,";
+    for(auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
+        m_variables += *(it) + ",";
+    m_variables.RemoveLast();
+
+    // Set locale to ENGLISH_US to avoid parser error in numbers (eg. comma).
+    int currentLang = wxLocale::GetSystemLanguage();
+    wxLocale newLocale(wxLANGUAGE_ENGLISH_US);
+    int parserRes = m_fparser.Parse(static_cast<std::string>(m_mathExpression), static_cast<std::string>(m_variables));
+    if(parserRes != -1) return false;  // Parse error.
+    wxLocale oldLocale(currentLang);   // Return to current language.
+
+    if(m_inputValues) delete m_inputValues;
+    m_inputValues = new double[m_variablesVector.size() + 2];  // Custom variables + time + step
+    
+    // Optimize only once to gain performance.
+    m_fparser.Optimize();
+    
+    return true;
 }

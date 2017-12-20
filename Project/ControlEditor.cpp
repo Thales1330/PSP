@@ -764,6 +764,8 @@ void ControlEditor::CheckConnections()
         ConnectionLine* cLine = *it;
         if(cLine->GetType() == ConnectionLine::ELEMENT_ELEMENT) {
             if(cLine->GetParentList().size() < 2) { it = DeleteLineFromList(it); }
+        } else if(cLine->GetParentList().size() < 1) {
+            it = DeleteLineFromList(it);
         }
     }
 }

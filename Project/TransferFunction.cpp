@@ -308,7 +308,7 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     }
 }
 
-bool TransferFunction::Solve(double input, double timeStep)
+bool TransferFunction::Solve(double input, double timeStep, double currentTime)
 {
     int order = static_cast<int>(m_ss.A.size());
 

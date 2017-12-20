@@ -73,7 +73,7 @@ class TransferFunction : public ControlElement
      * @param timeStep Time step.
      * @return true if the calculation converges, false otherwise.
      */
-    virtual bool Solve(double input, double timeStep);
+    virtual bool Solve(double input, double timeStep, double currentTime);
 
     virtual Element* GetCopy();
 

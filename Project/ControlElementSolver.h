@@ -58,6 +58,7 @@ class ControlElementSolver
     virtual double GetLastSolution() { return m_solutions[m_solutions.size() - 1]; }
     virtual bool IsOK() const { return m_isOK; }
     virtual wxString GetErrorMessage() { return m_failMessage; }
+    void SetCurrentTime(double value) { m_currentTime = value; }
     void SetTerminalVoltage(double value) { m_terminalVoltage = value; }
     void SetVelocity(double value) { m_velocity = value; }
     void SetActivePower(double value) { m_activePower = value; }
@@ -86,6 +87,7 @@ class ControlElementSolver
     IOControl* m_inputControl = NULL; /**< First input control to be solved */
     IOControl* m_outputControl = NULL;
     // Inputs
+    double m_currentTime = 0.0;
     double m_terminalVoltage = 0.0;
     double m_velocity = 0.0;
     double m_activePower = 0.0;

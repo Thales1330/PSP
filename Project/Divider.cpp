@@ -33,7 +33,7 @@ void Divider::DrawSymbol() const
     DrawCircle(m_position + wxPoint2DDouble(0, 3), 2, 10, GL_POLYGON);
 }
 
-bool Divider::Solve(double input, double timeStep)
+bool Divider::Solve(double input, double timeStep, double currentTime)
 {
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {

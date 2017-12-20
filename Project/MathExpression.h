@@ -22,6 +22,8 @@
 #include "MathExprParser.h"
 #include "OpenGLText.h"
 
+class ConnectionLine;
+
 class MathExpressionForm;
 
 /**
@@ -43,11 +45,18 @@ class MathExpression : public ControlElement
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual void Rotate(bool clockwise = true);
 
-    virtual bool Solve(double input, double timeStep);
+    virtual bool Solve(double input, double timeStep, double currentTime);
+    virtual bool Initialize();
+    virtual wxString GetMathExpression() { return m_mathExpression; }
+    virtual void SetMathExpression(wxString mathExpression) { m_mathExpression = mathExpression; }
+    virtual std::vector<wxString> GetVariables() { return m_variablesVector; }
+    virtual void SetVariables(std::vector<wxString> variablesVector);
+    virtual MathExprParser GetParser() { return m_fparser; }
 
     virtual void UpdatePoints();
     void AddInNode();
     void RemoveInNode();
+    virtual bool UpdateText();
 
     virtual Element* GetCopy();
 
@@ -56,8 +65,9 @@ class MathExpression : public ControlElement
 
     MathExprParser m_fparser;
     wxString m_mathExpression = "sqrt(x^2 + y^2)";
-    wxString m_variables = "x,y";
+    wxString m_variables = "time,step,x,y";
     std::vector<wxString> m_variablesVector;
+    double* m_inputValues = NULL;
     std::vector<OpenGLText*> m_glTextInputVector;
     OpenGLText m_symbol;
     wxSize m_symbolSize;

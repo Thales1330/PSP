@@ -40,7 +40,7 @@ class Limiter : public ControlElement
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual void Rotate(bool clockwise = true);
-    virtual bool Solve(double input, double timeStep);
+    virtual bool Solve(double input, double timeStep, double currentTime);
 
     virtual void UpdatePoints();
 

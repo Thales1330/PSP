@@ -54,7 +54,7 @@ class Exponential : public ControlElement
      * @param timeStep Time step.
      * @return Aways true.
      */
-    virtual bool Solve(double input, double timeStep);
+    virtual bool Solve(double input, double timeStep, double currentTime);
 
     virtual Element* GetCopy();
 

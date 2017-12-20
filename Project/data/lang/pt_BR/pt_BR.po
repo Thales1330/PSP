@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PSP-UFU pt_BR 0.0.1\n"
-"POT-Creation-Date: 2017-12-19 10:56-0200\n"
-"PO-Revision-Date: 2017-12-19 10:57-0200\n"
+"POT-Creation-Date: 2017-12-20 11:07-0200\n"
+"PO-Revision-Date: 2017-12-20 11:08-0200\n"
 "Last-Translator: \n"
 "Language-Team: Thales Lima Oliveira <thaleslima.ufu@gmail.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.5\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: _\n"
@@ -323,7 +323,7 @@ msgstr "Gerador síncrono"
 msgid "Transformer"
 msgstr "Transformador"
 
-#: ChartView.cpp:116 ControlEditor.cpp:806
+#: ChartView.cpp:116 ControlEditor.cpp:809
 msgid "Test"
 msgstr "Teste"
 
@@ -369,15 +369,15 @@ msgstr "Informação"
 msgid "It was not possible to send to clipboard"
 msgstr "Não foi possível enviar para a área de transferência"
 
-#: ChartView.cpp:264 ChartView.cpp:483 ControlEditor.cpp:791
-#: ControlEditor.cpp:885 ControlElementSolver.cpp:95 ControlSystemTest.cpp:53
+#: ChartView.cpp:264 ChartView.cpp:483 ControlEditor.cpp:794
+#: ControlEditor.cpp:888 ControlElementSolver.cpp:95 ControlSystemTest.cpp:53
 #: ControlSystemTest.cpp:60 ControlSystemTest.cpp:67 ControlSystemTest.cpp:74
 #: Element.cpp:297 Element.cpp:311 GeneralPropertiesForm.cpp:74 Line.cpp:168
 #: Line.cpp:397 LoadForm.cpp:189 LoadForm.cpp:196 MainFrame.cpp:311
 #: SimulationsSettingsForm.cpp:188 SimulationsSettingsForm.cpp:195
-#: SumForm.cpp:58 SumForm.cpp:74 TextForm.cpp:1225 Workspace.cpp:1147
-#: Workspace.cpp:1212 Workspace.cpp:1320 Workspace.cpp:1424 Workspace.cpp:1446
-#: Workspace.cpp:1464
+#: SumForm.cpp:58 SumForm.cpp:74 TextForm.cpp:1225 Workspace.cpp:1143
+#: Workspace.cpp:1208 Workspace.cpp:1316 Workspace.cpp:1420 Workspace.cpp:1442
+#: Workspace.cpp:1460
 msgid "Error"
 msgstr "Erro"
 
@@ -393,75 +393,79 @@ msgstr "Não foi possível criar ou abrir o arquivo selecionado."
 msgid "Value entered incorrectly in the field \"Constant value\"."
 msgstr "Valor inserido incorretamente no campo \"Valor da constante\"."
 
-#: ControlEditor.cpp:158
+#: ControlEditor.cpp:159
 msgid "In/Out"
 msgstr "Entrada/Saída"
 
-#: ControlEditor.cpp:164
+#: ControlEditor.cpp:165
 msgid "Transfer fcn"
 msgstr "Func Transferência"
 
-#: ControlEditor.cpp:171 base/ElementFormBase.h:870
+#: ControlEditor.cpp:172 base/ElementFormBase.h:870
 msgid "Sum"
 msgstr "Somador"
 
-#: ControlEditor.cpp:177 base/ElementFormBase.h:988
+#: ControlEditor.cpp:178 base/ElementFormBase.h:988
 msgid "Constant"
 msgstr "Constante"
 
-#: ControlEditor.cpp:184 base/ElementFormBase.h:1014
+#: ControlEditor.cpp:185 base/ElementFormBase.h:1014
 msgid "Gain"
 msgstr "Ganho"
 
-#: ControlEditor.cpp:190 base/ElementFormBase.h:900
+#: ControlEditor.cpp:191 base/ElementFormBase.h:900
 msgid "Limiter"
 msgstr "Limitador"
 
-#: ControlEditor.cpp:197 base/ElementFormBase.h:930
+#: ControlEditor.cpp:198 base/ElementFormBase.h:930
 msgid "Rate limiter"
 msgstr "Limitador de taxa"
 
-#: ControlEditor.cpp:204
+#: ControlEditor.cpp:205
 msgid "Multiplier"
 msgstr "Multiplicador"
 
-#: ControlEditor.cpp:210
+#: ControlEditor.cpp:211
 msgid "Divider"
 msgstr "Divisor"
 
-#: ControlEditor.cpp:217 base/ElementFormBase.h:962
+#: ControlEditor.cpp:218
+msgid "Math Expression"
+msgstr "Expressão matemática"
+
+#: ControlEditor.cpp:225 base/ElementFormBase.h:962
 msgid "Exponential"
 msgstr "Exponencial"
 
-#: ControlEditor.cpp:772
+#: ControlEditor.cpp:775
 msgid "Save CTL file"
 msgstr "Salvar arquivo CTL"
 
-#: ControlEditor.cpp:783
+#: ControlEditor.cpp:786
 msgid "Open CTL file"
 msgstr "Abrir arquivo CTL"
 
-#: ControlEditor.cpp:791 MainFrame.cpp:311
+#: ControlEditor.cpp:794 MainFrame.cpp:311
 msgid "It was not possible to open the selected file."
 msgstr "Não foi possível abrir o arquivo selecionado."
 
-#: ControlEditor.cpp:806 Electromechanical.cpp:70
+#: ControlEditor.cpp:809 Electromechanical.cpp:70
 msgid "Initializing..."
 msgstr "Inicializando..."
 
-#: ControlEditor.cpp:869
+#: ControlEditor.cpp:872
 msgid "I/O"
 msgstr "I/O"
 
-#: ControlEditor.cpp:870 base/ElementFormBase.cpp:3656
+#: ControlEditor.cpp:873 base/ElementFormBase.cpp:3656
 msgid "Input"
 msgstr "Entrada"
 
-#: ControlEditor.cpp:871 base/ElementFormBase.cpp:3666
+#: ControlEditor.cpp:874 base/ElementFormBase.cpp:3666
 msgid "Output"
 msgstr "Saída"
 
-#: ControlEditor.cpp:885
+#: ControlEditor.cpp:888
 msgid "It was not possible to solve the control system"
 msgstr "Não foi possível resolver o sistema de controle"
 
@@ -1245,21 +1249,21 @@ msgstr "Linha %d"
 msgid "Insert Line: Click on two buses, ESC to cancel."
 msgstr "Inserir Linha: Clique em duas barras, ESC para cancelar."
 
-#: MainFrame.cpp:416 Workspace.cpp:755
+#: MainFrame.cpp:416 Workspace.cpp:751
 #, c-format
 msgid "Transformer %d"
 msgstr "Transformador %d"
 
-#: MainFrame.cpp:419 Workspace.cpp:759
+#: MainFrame.cpp:419 Workspace.cpp:755
 msgid "Insert Transformer: Click on two buses, ESC to cancel."
 msgstr "Inserir Transformador: Clique em duas barras, ESC para cancelar."
 
-#: MainFrame.cpp:424 Workspace.cpp:767
+#: MainFrame.cpp:424 Workspace.cpp:763
 #, c-format
 msgid "Generator %d"
 msgstr "Gerador %d"
 
-#: MainFrame.cpp:427 Workspace.cpp:771
+#: MainFrame.cpp:427 Workspace.cpp:767
 msgid "Insert Generator: Click on a buses, ESC to cancel."
 msgstr "Inserir Gerador: Clique em uma barra, ESC para cancelar."
 
@@ -1272,99 +1276,103 @@ msgstr "Carga %d"
 msgid "Insert Load: Click on a buses, ESC to cancel."
 msgstr "Inserir Carga: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:439 Workspace.cpp:812
+#: MainFrame.cpp:439 Workspace.cpp:808
 #, c-format
 msgid "Capacitor %d"
 msgstr "Capacitor %d"
 
-#: MainFrame.cpp:442 Workspace.cpp:816
+#: MainFrame.cpp:442 Workspace.cpp:812
 msgid "Insert Capacitor: Click on a buses, ESC to cancel."
 msgstr "Inserir Capacitor: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:447 Workspace.cpp:779
+#: MainFrame.cpp:447 Workspace.cpp:775
 #, c-format
 msgid "Inductor %d"
 msgstr "Indutor %d"
 
-#: MainFrame.cpp:450 Workspace.cpp:783
+#: MainFrame.cpp:450 Workspace.cpp:779
 msgid "Insert Inductor: Click on a buses, ESC to cancel."
 msgstr "Inserir Indutor: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:455 Workspace.cpp:787
+#: MainFrame.cpp:455 Workspace.cpp:783
 #, c-format
 msgid "Induction motor %d"
 msgstr "Motor de indução %d"
 
-#: MainFrame.cpp:458 Workspace.cpp:791
+#: MainFrame.cpp:458 Workspace.cpp:787
 msgid "Insert Induction Motor: Click on a buses, ESC to cancel."
 msgstr "Inserir Motor de indução: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:463 Workspace.cpp:800
+#: MainFrame.cpp:463 Workspace.cpp:796
 #, c-format
 msgid "Synchronous condenser %d"
 msgstr "Compensador síncrono %d"
 
-#: MainFrame.cpp:466 Workspace.cpp:804
+#: MainFrame.cpp:466 Workspace.cpp:800
 msgid "Insert Synchronous Condenser: Click on a buses, ESC to cancel."
 msgstr "Inserir Compensador síncrono: Clique em uma barra, ESC para cancelar."
 
-#: MathExpressionForm.cpp:7
+#: MathExpressionForm.cpp:44
 msgid "No checks performed."
 msgstr "Nenhuma verificação realizada."
 
-#: MathExpressionForm.cpp:19
+#: MathExpressionForm.cpp:57
 msgid "Syntax error"
 msgstr "Erro de sintaxe"
 
-#: MathExpressionForm.cpp:20
+#: MathExpressionForm.cpp:58
 msgid "Mismatched parenthesis"
 msgstr "Parênteses sem correspondência"
 
-#: MathExpressionForm.cpp:21
+#: MathExpressionForm.cpp:59
 msgid "Missing ')'"
 msgstr "Faltando ')'"
 
-#: MathExpressionForm.cpp:22
+#: MathExpressionForm.cpp:60
 msgid "Empty parentheses"
 msgstr "Parênteses vazios"
 
-#: MathExpressionForm.cpp:23
+#: MathExpressionForm.cpp:61
 msgid "Syntax error: Operator expected"
 msgstr "Erro de sintaxe: Operador esperado"
 
-#: MathExpressionForm.cpp:24
+#: MathExpressionForm.cpp:62
 msgid "Not enough memory"
 msgstr "Não possui memória"
 
-#: MathExpressionForm.cpp:25
+#: MathExpressionForm.cpp:63
 msgid "An unexpected error occurred"
 msgstr "Um erro inesperado ocorreu"
 
-#: MathExpressionForm.cpp:26
+#: MathExpressionForm.cpp:64
 msgid "Syntax error in input variables"
 msgstr "Erro de sintaxe nas variáveis de entrada"
 
-#: MathExpressionForm.cpp:27
+#: MathExpressionForm.cpp:65
 msgid "Illegal number of parameters to function"
 msgstr "Número ilegal de parâmetros para a função"
 
-#: MathExpressionForm.cpp:28
+#: MathExpressionForm.cpp:66
+msgid "Syntax error: Premature end of string"
+msgstr "Erro de sintaxe: Fim prematuro da string"
+
+#: MathExpressionForm.cpp:67
 msgid "Syntax error: Expecting ( after function"
 msgstr "Erro de sintaxe: '(' esperado após a função"
 
-#: MathExpressionForm.cpp:29
+#: MathExpressionForm.cpp:68
 msgid "Syntax error: Unknown identifier"
-msgstr "Erro de sintaxe: identificador desconhecida"
+msgstr "Erro de sintaxe: Identificador desconhecido"
 
-#: MathExpressionForm.cpp:30
+#: MathExpressionForm.cpp:69
 msgid "No function has been parsed yet"
 msgstr "Nenhuma função foi analisada ainda"
 
-#: MathExpressionForm.cpp:47
+#: MathExpressionForm.cpp:86
 msgid "OK!"
 msgstr "OK!"
 
-#: OpenGLText.h:52 Text.h:109 base/ElementFormBase.h:814
+#: OpenGLText.h:57 Text.h:109 base/ElementFormBase.h:814
 msgid "Text"
 msgstr "Texto"
 
@@ -1786,40 +1794,40 @@ msgstr "Atenção"
 msgid "Insert Text: Click to insert, ESC to cancel."
 msgstr "Inserir Texto: Clique para inserir, ESC para cancelar."
 
-#: Workspace.cpp:843
+#: Workspace.cpp:839
 msgid "MODE: DRAG"
 msgstr "MODO: ARRASTAR"
 
-#: Workspace.cpp:848
+#: Workspace.cpp:844
 msgid "MODE: PASTE"
 msgstr "MODO: COLAR"
 
-#: Workspace.cpp:855
+#: Workspace.cpp:851
 msgid "MODE: INSERT"
 msgstr "MODO: INSERÇÃO"
 
-#: Workspace.cpp:864
+#: Workspace.cpp:860
 msgid "MODE: EDIT"
 msgstr "MODO: EDIÇÃO"
 
-#: Workspace.cpp:868
+#: Workspace.cpp:864
 #, c-format
 msgid "ZOOM: %d%%"
 msgstr "ZOOM: %d%%"
 
-#: Workspace.cpp:1212 Workspace.cpp:1320
+#: Workspace.cpp:1208 Workspace.cpp:1316
 msgid "It was not possible to paste from clipboard."
 msgstr "Não foi possível colar da área de transferência."
 
-#: Workspace.cpp:1328
+#: Workspace.cpp:1324
 msgid "Click to paste."
 msgstr "Clique para colar."
 
-#: Workspace.cpp:1473
+#: Workspace.cpp:1469
 msgid "Do you wish to open the stability graphics?"
 msgstr "Você deseja abrir os gráficos do estudo de estabilidade?"
 
-#: Workspace.cpp:1473
+#: Workspace.cpp:1469
 msgid "Question"
 msgstr "Pergunta"
 
