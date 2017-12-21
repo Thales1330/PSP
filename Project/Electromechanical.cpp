@@ -98,6 +98,7 @@ bool Electromechanical::RunStabilityCalculation()
     if(!InitializeDynamicElements()) return false;
 
     double pbdTime = m_plotTime;
+    m_currentTime = 0.0;
     double currentPlotTime = 0.0;
     double currentPbdTime = 0.0;
     while(m_currentTime < m_simTime) {
