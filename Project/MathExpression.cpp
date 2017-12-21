@@ -155,12 +155,14 @@ void MathExpression::Rotate(bool clockwise)
 bool MathExpression::Solve(double input, double timeStep, double currentTime)
 {
     // Get the input vector from connection lines (can't use default (one) input argument)
-    std::vector<double> inputVector;
+    m_inputValues[0] = currentTime;
+    m_inputValues[1] = timeStep;
+    int i = 2;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
         if(node->GetNodeType() != Node::NODE_OUT) {
             if(!node->IsConnected()) {
-                inputVector.push_back(0.0);  // Node not connected means zero value as input.
+                m_inputValues[i] = 0.0;  // Node not connected means zero value as input.
             } else {
                 for(auto itC = m_childList.begin(), itCEnd = m_childList.end(); itC != itCEnd; ++itC) {
                     ConnectionLine* cLine = static_cast<ConnectionLine*>(*itC);
@@ -168,17 +170,20 @@ bool MathExpression::Solve(double input, double timeStep, double currentTime)
                     for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
                         Node* childNode = *itCN;
                         if(childNode == node) {
-                            inputVector.push_back(cLine->GetValue());
+                            m_inputValues[i] = cLine->GetValue();
                             break;
                         }
                     }
                 }
             }
+            ++i;
         }
     }
-    if(m_variablesVector.size() != inputVector.size()) return false;
 
     // Solve the math expression using fparser
+    double result = m_fparser.Eval(m_inputValues);
+    if(m_fparser.EvalError() != 0) return false;
+    m_output = result;
     return true;
 }
 
@@ -318,6 +323,5 @@ bool MathExpression::Initialize()
     
     // Optimize only once to gain performance.
     m_fparser.Optimize();
-    
     return true;
 }

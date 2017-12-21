@@ -840,6 +840,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
                 }
 
                 // solver.SolveNextStep(input);
+                solver.SetCurrentTime(currentTime);
                 solver.SetInitialTerminalVoltage(input);
                 solver.SetActivePower(input);
                 solver.SetInitialMecPower(input);
