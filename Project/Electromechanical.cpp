@@ -1003,10 +1003,10 @@ bool Electromechanical::SolveSynchronousMachines()
         if(data.useAVR && data.avrSolver) {
             data.avrSolver->SetCurrentTime(m_currentTime);
             data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
-            data.avrSolver->SetDeltaActivePower(data.electricalPower.real() - data.avrSolver->GetActivePower());
+            data.avrSolver->SetDeltaActivePower((data.electricalPower.real() - data.avrSolver->GetActivePower()) / m_timeStep);
             data.avrSolver->SetActivePower(data.electricalPower.real());
             data.avrSolver->SetReactivePower(data.electricalPower.imag());
-            data.avrSolver->SetDeltaVelocity(data.speed - data.avrSolver->GetVelocity());
+            data.avrSolver->SetDeltaVelocity((data.speed - data.avrSolver->GetVelocity()) / m_timeStep);
             data.avrSolver->SetVelocity(data.speed);
 
             for(int i = 0; i < ctrlRatio; ++i) data.avrSolver->SolveNextStep();

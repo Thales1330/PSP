@@ -134,8 +134,8 @@ void MathExpressionForm::SetSintaxHighlights()
     m_stcMathExpr->SetKeyWords(
         0, wxT("abs acos acosh arg asin asinh atan atan2 atanh cbrt conj ceil cos cosh cot csc eval exp exp2 floor "
                "hypot if imag int log log2 log10 max min polar pow real sec sin sinh sqrt tan tanh trunc"));
-    m_stcMathExpr->SetKeyWords(1, wxT("time step ") + variables);
-    m_stcMathExpr->SetKeyWords(2, wxT("pi e"));
+    m_stcMathExpr->SetKeyWords(1, wxT("time step switch ") + variables);
+    m_stcMathExpr->SetKeyWords(2, wxT("TRUE FALSE OPEN CLOSE PI E"));
 }
 
 void MathExpressionForm::OnTextUpdate(wxCommandEvent& event) { SetSintaxHighlights(); }
