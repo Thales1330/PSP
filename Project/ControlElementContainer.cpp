@@ -48,6 +48,8 @@ void ControlElementContainer::FillContainer(ControlEditor* editor)
             m_tfList.push_back(tf);
         } else if(Divider* divider = dynamic_cast<Divider*>(*it)) {
             m_dividerList.push_back(divider);
+        } else if(MathExpression* mathExpr = dynamic_cast<MathExpression*>(*it)) {
+            m_mathExprList.push_back(mathExpr);
         }
     }
 }
@@ -65,6 +67,7 @@ void ControlElementContainer::ClearContainer()
     m_sumList.clear();
     m_tfList.clear();
     m_dividerList.clear();
+    m_mathExprList.clear();
 }
 
 void ControlElementContainer::FillContainer(std::vector<ControlElement*> controlElementList,
@@ -95,6 +98,8 @@ void ControlElementContainer::FillContainer(std::vector<ControlElement*> control
             m_tfList.push_back(tf);
         } else if(Divider* divider = dynamic_cast<Divider*>(*it)) {
             m_dividerList.push_back(divider);
+        } else if(MathExpression* mathExpr = dynamic_cast<MathExpression*>(*it)) {
+            m_mathExprList.push_back(mathExpr);
         }
     }
 }

@@ -35,14 +35,19 @@ class OpenGLText
     OpenGLText(wxString text);
     virtual ~OpenGLText();
 
-    virtual void Draw(wxPoint2DDouble position) const;
+    virtual void Draw(wxPoint2DDouble position, double angle = 0.0) const;
     virtual OpenGLText* GetCopy();
 
     virtual void SetText(wxString text);
     virtual wxString GetText() const { return m_text; }
     virtual int GetWidth() const { return m_bitmapSize.GetWidth(); }
     virtual int GetHeight() const { return m_bitmapSize.GetHeight(); }
+    virtual void SetFontSize(int fontSize) { m_fontSize = fontSize; }
+    virtual void SetFontWeight(wxFontWeight fontWeight) { m_fontWeight = fontWeight; }
+    virtual void SetFontStyle(wxFontStyle fontStyle) { m_fontStyle = fontStyle; }
+    virtual void SetFontFamily(wxFontFamily fontFamily) { m_fontFamily = fontFamily; }
     virtual bool IsTextureOK();
+
    protected:
     void Init();
     int RoundToPowerOfTwo(int value, int min = 32);
@@ -51,6 +56,9 @@ class OpenGLText
 
     wxString m_text = _("Text");
     int m_fontSize = 10;
+    wxFontWeight m_fontWeight = wxFONTWEIGHT_NORMAL;
+    wxFontStyle m_fontStyle = wxFONTSTYLE_NORMAL;
+    wxFontFamily m_fontFamily = wxFONTFAMILY_DEFAULT;
 
     wxBitmap m_bitmap = wxNullBitmap;
     wxSize m_bitmapSize = wxSize(0, 0);

@@ -36,7 +36,7 @@ class Multiplier : public MathOperation
     ~Multiplier();
 
     virtual void DrawSymbol() const;
-    virtual bool Solve(double input, double timeStep);
+    virtual bool Solve(double* input, double timeStep);
     virtual Element* GetCopy();
 };
 

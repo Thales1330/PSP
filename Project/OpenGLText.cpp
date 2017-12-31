@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "OpenGLText.h"
 #include <wx/log.h>
+#include "OpenGLText.h"
 
 OpenGLText::OpenGLText() { Init(); }
 OpenGLText::OpenGLText(wxString text)
@@ -27,9 +27,7 @@ OpenGLText::OpenGLText(wxString text)
 
 OpenGLText::~OpenGLText()
 {
-    if(m_textureID) {
-        glDeleteTextures(1, &m_textureID[0]);
-    }
+    if(m_textureID) { glDeleteTextures(1, &m_textureID[0]); }
 }
 
 void OpenGLText::Init()
@@ -39,12 +37,13 @@ void OpenGLText::Init()
     m_textCoord[1] = wxPoint2DDouble(1, 0);
 }
 
-void OpenGLText::Draw(wxPoint2DDouble position) const
+void OpenGLText::Draw(wxPoint2DDouble position, double angle) const
 {
     if(m_textureID) {
         glPushMatrix();
-        
+
         glTranslated(position.m_x - m_bitmapSize.GetWidth() / 2, position.m_y - m_bitmapSize.GetHeight() / 2, 0);
+        glRotated(angle, 0, 0, 1);
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, m_textureID[0]);
@@ -87,7 +86,7 @@ int OpenGLText::RoundToPowerOfTwo(int value, int min)
 
 void OpenGLText::TextToBitmap()
 {
-    wxFont font = wxFont(m_fontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    wxFont font = wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight);
 
     wxMemoryDC memDC;
     memDC.SetFont(font);

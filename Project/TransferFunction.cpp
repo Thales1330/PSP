@@ -308,8 +308,13 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     }
 }
 
-bool TransferFunction::Solve(double input, double timeStep)
+bool TransferFunction::Solve(double* input, double timeStep)
 {
+    if(!input) {
+        m_output = 0.0;
+        return true;
+    }
+
     int order = static_cast<int>(m_ss.A.size());
 
     std::vector<double> x;
@@ -341,7 +346,7 @@ bool TransferFunction::Solve(double input, double timeStep)
             // x' = Ax + Bu
             dx[i] = 0.0;
             for(int j = 0; j < order; j++) dx[i] += m_ss.A[i][j] * x[j];
-            dx[i] += m_ss.B[i] * input;
+            dx[i] += m_ss.B[i] * input[0];
 
             if(std::abs(dx[i] - olddx[i]) > dxError) dxError = std::abs(dx[i] - olddx[i]);
 
@@ -360,7 +365,7 @@ bool TransferFunction::Solve(double input, double timeStep)
         m_dx[i] = dx[i];
     }
 
-    m_output += m_ss.D * input;
+    m_output += m_ss.D * input[0];
 
     return true;
 }

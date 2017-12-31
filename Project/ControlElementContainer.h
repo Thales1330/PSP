@@ -34,6 +34,7 @@ class ControlElement;
 #include "Sum.h"
 #include "TransferFunction.h"
 #include "Divider.h"
+#include "MathExpression.h"
 
 /**
  * @class ControlElementContainer
@@ -68,6 +69,7 @@ class ControlElementContainer
     std::vector<Sum*> GetSumList() const { return m_sumList; }
     std::vector<TransferFunction*> GetTFList() const { return m_tfList; }
     std::vector<Divider*> GetDividerList() const { return m_dividerList; }
+    std::vector<MathExpression*> GetMathExprList() const { return m_mathExprList; }
    protected:
     std::vector<ControlElement*> m_ctrlElementsList;
     std::vector<Constant*> m_constantList;
@@ -81,6 +83,7 @@ class ControlElementContainer
     std::vector<Sum*> m_sumList;
     std::vector<TransferFunction*> m_tfList;
     std::vector<Divider*> m_dividerList;
+    std::vector<MathExpression*> m_mathExprList;
 };
 
 #endif  // CONTROLELEMENTCONTAINER_H

@@ -2245,6 +2245,43 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
         }
 
     }  //}
+    
+    //{ Math expression
+    auto mathExprsNode = AppendNode(doc, elementsNode, "MathExprList");
+    auto mathExprList = ctrlContainer->GetMathExprList();
+    for(auto it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {
+        MathExpression* mathExpr = *it;
+        auto mathExprNode = AppendNode(doc, mathExprsNode, "MathExpr");
+        SetNodeAttribute(doc, mathExprNode, "ID", mathExpr->GetID());
+        auto cadProp = AppendNode(doc, mathExprNode, "CADProperties");
+        auto position = AppendNode(doc, cadProp, "Position");
+        auto posX = AppendNode(doc, position, "X");
+        SetNodeValue(doc, posX, mathExpr->GetPosition().m_x);
+        auto posY = AppendNode(doc, position, "Y");
+        SetNodeValue(doc, posY, mathExpr->GetPosition().m_y);
+        auto size = AppendNode(doc, cadProp, "Size");
+        auto width = AppendNode(doc, size, "Width");
+        SetNodeValue(doc, width, mathExpr->GetWidth());
+        auto height = AppendNode(doc, size, "Height");
+        SetNodeValue(doc, height, mathExpr->GetHeight());
+        auto angle = AppendNode(doc, cadProp, "Angle");
+        SetNodeValue(doc, angle, mathExpr->GetAngle());
+
+        // Nodes
+        auto nodeList = AppendNode(doc, mathExprNode, "NodeList");
+        SaveControlNodes(doc, nodeList, mathExpr->GetNodeList());
+
+        // Control properties
+        auto variablesNode = AppendNode(doc, mathExprNode, "VariableList");
+        auto variables = mathExpr->GetVariables();
+        for(unsigned int i = 0; i < variables.size(); ++i) {
+            auto variable = AppendNode(doc, variablesNode, "Variable");
+            SetNodeValue(doc, variable, variables[i]);
+        }
+        auto mathExprValue = AppendNode(doc, mathExprNode, "MathExprValue");
+        SetNodeValue(doc, mathExprValue, mathExpr->GetMathExpression());
+
+    }  //}
 
     //{ Transfer function
     auto tfsNode = AppendNode(doc, elementsNode, "TransferFunctionList");
@@ -2700,6 +2737,55 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         }
     }
     //}
+    
+    //{ Math expression
+    auto mathListNode = elementsNode->first_node("MathExprList");
+    if(mathListNode) {
+        auto mathExprNode = mathListNode->first_node("MathExpr");
+        while(mathExprNode) {
+            int id = GetAttributeValueInt(mathExprNode, "ID");
+            MathExpression* mathExpr = new MathExpression(id);
+
+            auto cadPropNode = mathExprNode->first_node("CADProperties");
+            if(!cadPropNode) return false;
+
+            auto position = cadPropNode->first_node("Position");
+            double posX = GetNodeValueDouble(position, "X");
+            double posY = GetNodeValueDouble(position, "Y");
+            auto size = cadPropNode->first_node("Size");
+            double width = GetNodeValueDouble(size, "Width");
+            double height = GetNodeValueDouble(size, "Height");
+            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+
+            std::vector<wxString> variables;
+            auto variablesNode = mathExprNode->first_node("VariableList");
+            auto variable = variablesNode->first_node("Variable");
+            while(variable) {
+                variables.push_back(variable->value());
+                variable = variable->next_sibling("Variable");
+            }
+            mathExpr->SetVariables(variables);
+            
+            auto mathExprValueNode = mathExprNode->first_node("MathExprValue");
+            mathExpr->SetMathExpression(mathExprValueNode->value());
+
+            std::vector<Node*> nodeVector;
+            if(!OpenControlNodeList(mathExprNode, nodeVector)) return false;
+
+            mathExpr->SetWidth(width);
+            mathExpr->SetHeight(height);
+            mathExpr->SetAngle(angle);
+            mathExpr->SetPosition(wxPoint2DDouble(posX, posY));
+
+            mathExpr->StartMove(mathExpr->GetPosition());
+            mathExpr->SetNodeList(nodeVector);
+            mathExpr->UpdatePoints();
+            elementList.push_back(mathExpr);
+
+            mathExprNode = mathExprNode->next_sibling("MathExpr");
+        }
+    }
+    //}
 
     //{ Transfer function
     auto tfListNode = elementsNode->first_node("TransferFunctionList");
@@ -2761,7 +2847,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     }
     //}
 
-    // Connection line
+    //{ Connection line
     auto connectionListNode = elementsNode->first_node("ConnectionList");
     if(connectionListNode) {
         auto connNode = connectionListNode->first_node("Connection");
@@ -2812,7 +2898,8 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             connectionList.push_back(cLine);
             connNode = connNode->next_sibling("Connection");
         }
-    }
+    } //}
+    
     ctrlContainer->FillContainer(elementList, connectionList);
     return true;
 }

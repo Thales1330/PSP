@@ -129,9 +129,13 @@ void Exponential::SetValues(double aValue, double bValue)
     m_bValue = bValue;
 }
 
-bool Exponential::Solve(double input, double timeStep)
+bool Exponential::Solve(double* input, double timeStep)
 {
-    m_output = m_aValue * std::exp(m_bValue * input);
+    if(!input){
+        m_output = 0.0;
+        return true;
+    }
+    m_output = m_aValue * std::exp(m_bValue * input[0]);
     return true;
 }
 

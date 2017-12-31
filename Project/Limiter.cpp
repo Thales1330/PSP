@@ -105,9 +105,13 @@ void Limiter::UpdatePoints()
     }
 }
 
-bool Limiter::Solve(double input, double timeStep)
+bool Limiter::Solve(double* input, double timeStep)
 {
-    m_output = input;
+    if(!input){
+        m_output = 0.0;
+        return true;
+    }
+    m_output = input[0];
     if(m_output > m_upLimit)
         m_output = m_upLimit;
     else if(m_output < m_lowLimit)

@@ -20,23 +20,24 @@
 #ifdef USING_WX_3_0_X
 #include "DegreesAndRadians.h"
 #endif
-#include "FileHanding.h"
 #include "Camera.h"
-#include "ControlElement.h"
-#include "TransferFunction.h"
 #include "ConnectionLine.h"
-#include "Sum.h"
-#include "Multiplier.h"
-#include "Limiter.h"
-#include "RateLimiter.h"
-#include "Exponential.h"
 #include "Constant.h"
-#include "Gain.h"
-#include "MathOperation.h"
+#include "ControlElement.h"
 #include "Divider.h"
+#include "Exponential.h"
+#include "FileHanding.h"
+#include "Gain.h"
+#include "Limiter.h"
+#include "MathExpression.h"
+#include "MathOperation.h"
+#include "Multiplier.h"
+#include "RateLimiter.h"
+#include "Sum.h"
+#include "TransferFunction.h"
 
-#include "ControlElementSolver.h"
 #include "ControlElementContainer.h"
+#include "ControlElementSolver.h"
 
 #include "ChartView.h"
 #include "ElementPlotData.h"
@@ -213,6 +214,13 @@ void ControlEditor::BuildControlElementPanel()
     wrapSizer->Add(divButton, 0, wxALL, 5);
     divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+    ControlElementButton* mathExprButton = new ControlElementButton(
+        m_panelControlElements, _("Math Expression"),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mathExpr.png", wxPATH_WIN).GetPath()),
+        ID_MATH_EXPR);
+    wrapSizer->Add(mathExprButton, 0, wxALL, 5);
+    mathExprButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
+
     ControlElementButton* satButton = new ControlElementButton(
         m_panelControlElements, _("Exponential"),
         wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sat.png", wxPATH_WIN).GetPath()), ID_EXP);
@@ -303,7 +311,12 @@ void ControlEditor::AddElement(ControlElementButtonID id)
             m_mode = MODE_INSERT;
             Divider* divider = new Divider(GetNextID());
             m_elementList.push_back(divider);
-        }
+        } break;
+        case ID_MATH_EXPR: {
+            m_mode = MODE_INSERT;
+            MathExpression* mathExpr = new MathExpression(GetNextID());
+            m_elementList.push_back(mathExpr);
+        } break;
     }
 }
 
@@ -461,9 +474,7 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
                 element->SetSelected(false);
             }
         } else if(!event.ControlDown()) {
-            if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-                element->SetSelected(false);
-            }
+            if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) { element->SetSelected(false); }
         }
     }
     for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
@@ -485,9 +496,7 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
                 cLine->SetSelected(false);
             }
         } else if(!event.ControlDown()) {
-            if(!cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-                cLine->SetSelected(false);
-            }
+            if(!cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) { cLine->SetSelected(false); }
         }
     }
 
@@ -643,7 +652,7 @@ void ControlEditor::OnIdle(wxIdleEvent& event)
 {
     if(m_justOpened) {
         this->Raise();
-        
+
         // Update all text elements
         m_justOpened = false;
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
@@ -715,9 +724,7 @@ void ControlEditor::DeleteSelectedElements()
 
     for(auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
         ConnectionLine* line = *it;
-        if(line->IsSelected()) {
-            it = DeleteLineFromList(it);
-        }
+        if(line->IsSelected()) { it = DeleteLineFromList(it); }
     }
     Redraw();
 }
@@ -730,9 +737,7 @@ std::vector<ConnectionLine*>::iterator ControlEditor::DeleteLineFromList(std::ve
         ConnectionLine* child = *itC;
         for(auto itL = m_connectionList.begin(); itL != m_connectionList.end(); ++itL) {
             ConnectionLine* childOnList = *itL;
-            if(childOnList == child) {
-                itL = DeleteLineFromList(itL);
-            }
+            if(childOnList == child) { itL = DeleteLineFromList(itL); }
         }
     }
     // Remove
@@ -758,9 +763,9 @@ void ControlEditor::CheckConnections()
     for(auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
         ConnectionLine* cLine = *it;
         if(cLine->GetType() == ConnectionLine::ELEMENT_ELEMENT) {
-            if(cLine->GetParentList().size() < 2) {
-                it = DeleteLineFromList(it);
-            }
+            if(cLine->GetParentList().size() < 2) { it = DeleteLineFromList(it); }
+        } else if(cLine->GetParentList().size() < 1) {
+            it = DeleteLineFromList(it);
         }
     }
 }
@@ -835,6 +840,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
                 }
 
                 // solver.SolveNextStep(input);
+                solver.SetCurrentTime(currentTime);
                 solver.SetInitialTerminalVoltage(input);
                 solver.SetActivePower(input);
                 solver.SetInitialMecPower(input);
@@ -891,9 +897,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 
 void ControlEditor::OnClose(wxCloseEvent& event)
 {
-    if(m_ctrlContainer) {
-        m_ctrlContainer->FillContainer(this);
-    }
+    if(m_ctrlContainer) { m_ctrlContainer->FillContainer(this); }
     event.Skip();
 }
 

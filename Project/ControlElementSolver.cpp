@@ -17,10 +17,10 @@
 
 #include "ControlElementSolver.h"
 
-#include "ControlElementContainer.h"
-#include "ControlEditor.h"
 #include "ConnectionLine.h"
 #include "Constant.h"
+#include "ControlEditor.h"
+#include "ControlElementContainer.h"
 #include "Exponential.h"
 #include "Gain.h"
 #include "IOControl.h"
@@ -48,6 +48,9 @@ ControlElementSolver::ControlElementSolver(ControlElementContainer* ctrlContaine
 
 void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double integrationError)
 {
+    // Init the input array size
+    if(m_inputToSolve) delete[] m_inputToSolve;
+    m_inputToSolve =  new double[3];
     // Check if the sistem have one input and one output
     bool fail = false;
     auto ioList = m_ctrlContainer->GetIOControlList();
@@ -119,6 +122,11 @@ bool ControlElementSolver::InitializeValues(bool startAllZero)
         cLine->SetSolved(false);
         cLine->SetValue(0.0);
     }
+    auto mathExprList = m_ctrlContainer->GetMathExprList();
+    for(auto it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {
+        MathExpression* mathExpr = *it;
+        if(!mathExpr->Initialize()) return false;
+    }
 
     if(!startAllZero) {
         double origTimeStep = m_timeStep;
@@ -141,13 +149,9 @@ bool ControlElementSolver::InitializeValues(bool startAllZero)
             numIt++;
             error = std::abs(prevSol - currentSol);
             if(std::abs(error - prevError) < 1e-1) {
-                if(m_timeStep < maxStep) {
-                    m_timeStep *= 1.5;
-                }
+                if(m_timeStep < maxStep) { m_timeStep *= 1.5; }
             } else if(std::abs(error - prevError) > 10) {
-                if(m_timeStep > minStep) {
-                    m_timeStep /= 1.5;
-                }
+                if(m_timeStep > minStep) { m_timeStep /= 1.5; }
             }
             if(numIt >= maxIteration) {
                 m_failMessage = _("It was not possible to initialize the control system.");
@@ -177,10 +181,6 @@ void ControlElementSolver::SolveNextStep()
 
     // Get first node connection
     ConnectionLine* firstConn = static_cast<ConnectionLine*>(m_inputControl->GetChildList()[0]);
-    /*m_inputControl->SetSolved();
-    firstConn->SetValue(1);
-    firstConn->SetSolved();
-    FillAllConnectedChildren(firstConn);*/
 
     // Set value to the connected lines in constants
     auto constantList = m_ctrlContainer->GetConstantList();
@@ -204,8 +204,8 @@ void ControlElementSolver::SolveNextStep()
             ConnectionLine* child = static_cast<ConnectionLine*>(io->GetChildList()[0]);
             if(m_inputControl == io) firstConn = child;
             bool inputType = true;
+            io->SetSolved();
             switch(io->GetValue()) {
-                io->SetSolved();
                 case IOControl::IN_TERMINAL_VOLTAGE: {
                     child->SetValue(m_terminalVoltage);
                 } break;
@@ -235,6 +235,7 @@ void ControlElementSolver::SolveNextStep()
                 } break;
                 default: {
                     inputType = false;
+                    io->SetSolved(false);
                 } break;
             }
             if(inputType) {
@@ -245,9 +246,7 @@ void ControlElementSolver::SolveNextStep()
     }
 
     ConnectionLine* currentLine = firstConn;
-    while(currentLine) {
-        currentLine = SolveNextElement(currentLine);
-    }
+    while(currentLine) { currentLine = SolveNextElement(currentLine); }
 
     bool haveUnsolvedElement = true;
     while(haveUnsolvedElement) {
@@ -263,9 +262,7 @@ void ControlElementSolver::SolveNextStep()
                         haveUnsolvedElement = true;
                         // Solve secondary branch.
                         currentLine = cLine;
-                        while(currentLine) {
-                            currentLine = SolveNextElement(currentLine);
-                        }
+                        while(currentLine) { currentLine = SolveNextElement(currentLine); }
                         break;
                     }
                 }
@@ -275,18 +272,12 @@ void ControlElementSolver::SolveNextStep()
     }
 
     // Set the control system output.
-    /*if(m_outputControl->GetChildList().size() == 1) {
-        ConnectionLine* cLine = static_cast<ConnectionLine*>(m_outputControl->GetChildList()[0]);
-        m_solutions.push_back(cLine->GetValue());
-    } else
-        m_solutions.push_back(0.0);*/
     for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
         IOControl* io = *it;
         if(io->GetChildList().size() == 1) {
             io->SetSolved();
             ConnectionLine* child = static_cast<ConnectionLine*>(io->GetChildList()[0]);
             switch(io->GetValue()) {
-                io->SetSolved();
                 case IOControl::OUT_MEC_POWER: {
                     m_mecPower = child->GetValue();
                     m_solutions.push_back(m_mecPower);
@@ -320,7 +311,10 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
         ControlElement* element = static_cast<ControlElement*>(*it);
         // Solve the unsolved parent.
         if(!element->IsSolved()) {
-            if(!element->Solve(currentLine->GetValue(), m_timeStep)) return NULL;
+            m_inputToSolve[0] = currentLine->GetValue();
+            m_inputToSolve[1] = m_currentTime;
+            m_inputToSolve[2] = m_switchStatus;
+            if(!element->Solve(m_inputToSolve, m_timeStep)) return NULL;
             element->SetSolved();
 
             // Get the output node (must have one or will result NULL).

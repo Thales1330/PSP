@@ -29,6 +29,7 @@
 #include <wx/propgrid/property.h>
 #include <wx/propgrid/advprops.h>
 #include <wx/listctrl.h>
+#include <wx/stc/stc.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -1044,6 +1045,42 @@ public:
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
     IOControlFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Input / Output"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~IOControlFormBase();
+};
+
+
+class MathExpressionFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextVariables;
+    wxTextCtrl* m_textCtrlVariables;
+    wxStyledTextCtrl* m_stcMathExpr;
+    wxStaticText* m_staticTextCheckStatus;
+    wxButton* m_buttonCheck;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnTextUpdate(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnTextEnter(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnLeftClickDown(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnCheckButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextVariables() { return m_staticTextVariables; }
+    wxTextCtrl* GetTextCtrlVariables() { return m_textCtrlVariables; }
+    wxStyledTextCtrl* GetStcMathExpr() { return m_stcMathExpr; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxStaticText* GetStaticTextCheckStatus() { return m_staticTextCheckStatus; }
+    wxButton* GetButtonCheck() { return m_buttonCheck; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    MathExpressionFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Math expression"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~MathExpressionFormBase();
 };
 
 #endif

@@ -98,24 +98,24 @@ bool Electromechanical::RunStabilityCalculation()
     if(!InitializeDynamicElements()) return false;
 
     double pbdTime = m_plotTime;
-    double currentTime = 0.0;
+    m_currentTime = 0.0;
     double currentPlotTime = 0.0;
     double currentPbdTime = 0.0;
-    while(currentTime < m_simTime) {
-        if(HasEvent(currentTime)) {
-            SetEvent(currentTime);
+    while(m_currentTime < m_simTime) {
+        if(HasEvent(m_currentTime)) {
+            SetEvent(m_currentTime);
             GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
         }
 
-        if(currentPlotTime >= m_plotTime || currentTime == 0.0) {
-            m_timeVector.push_back(currentTime);
+        if(currentPlotTime >= m_plotTime || m_currentTime == 0.0) {
+            m_timeVector.push_back(m_currentTime);
             SaveData();
             currentPlotTime = 0.0;
         }
 
         if(currentPbdTime > pbdTime) {
-            if(!pbd.Update((currentTime / m_simTime) * 100, wxString::Format("Time = %.2fs", currentTime))) {
-                m_errorMsg = wxString::Format(_("Simulation cancelled at %.2fs."), currentTime);
+            if(!pbd.Update((m_currentTime / m_simTime) * 100, wxString::Format("Time = %.2fs", m_currentTime))) {
+                m_errorMsg = wxString::Format(_("Simulation cancelled at %.2fs."), m_currentTime);
                 pbd.Update(100);
                 return false;
             }
@@ -124,7 +124,7 @@ bool Electromechanical::RunStabilityCalculation()
 
         if(!SolveSynchronousMachines()) return false;
 
-        currentTime += m_timeStep;
+        m_currentTime += m_timeStep;
         currentPlotTime += m_timeStep;
         currentPbdTime += m_timeStep;
     }
@@ -662,6 +662,8 @@ bool Electromechanical::InitializeDynamicElements()
                 if(data.avrSolver) delete data.avrSolver;
                 data.avrSolver =
                     new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+                data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
+                data.avrSolver->SetCurrentTime(m_currentTime);
                 data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
                 data.avrSolver->SetInitialTerminalVoltage(std::abs(data.terminalVoltage));
                 data.avrSolver->SetActivePower(dataPU.activePower);
@@ -680,6 +682,8 @@ bool Electromechanical::InitializeDynamicElements()
                 if(data.speedGovSolver) delete data.speedGovSolver;
                 data.speedGovSolver = new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier,
                                                                m_tolerance, m_parent);
+                data.speedGovSolver->SetSwitchStatus(syncGenerator->IsOnline());
+                data.speedGovSolver->SetCurrentTime(m_currentTime);
                 data.speedGovSolver->SetActivePower(dataPU.activePower);
                 data.speedGovSolver->SetReactivePower(dataPU.reactivePower);
                 data.speedGovSolver->SetVelocity(data.speed);
@@ -999,11 +1003,13 @@ bool Electromechanical::SolveSynchronousMachines()
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
         if(data.useAVR && data.avrSolver) {
+            data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
+            data.avrSolver->SetCurrentTime(m_currentTime);
             data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
-            data.avrSolver->SetDeltaActivePower(data.electricalPower.real() - data.avrSolver->GetActivePower());
+            data.avrSolver->SetDeltaActivePower((data.electricalPower.real() - data.avrSolver->GetActivePower()) / m_timeStep);
             data.avrSolver->SetActivePower(data.electricalPower.real());
             data.avrSolver->SetReactivePower(data.electricalPower.imag());
-            data.avrSolver->SetDeltaVelocity(data.speed - data.avrSolver->GetVelocity());
+            data.avrSolver->SetDeltaVelocity((data.speed - data.avrSolver->GetVelocity()) / m_timeStep);
             data.avrSolver->SetVelocity(data.speed);
 
             for(int i = 0; i < ctrlRatio; ++i) data.avrSolver->SolveNextStep();
@@ -1012,6 +1018,8 @@ bool Electromechanical::SolveSynchronousMachines()
         }
 
         if(data.useSpeedGovernor && data.speedGovSolver) {
+            data.speedGovSolver->SetSwitchStatus(syncGenerator->IsOnline());
+            data.speedGovSolver->SetCurrentTime(m_currentTime);
             data.speedGovSolver->SetVelocity(data.speed);
             data.speedGovSolver->SetActivePower(data.electricalPower.real());
             data.speedGovSolver->SetReactivePower(data.electricalPower.imag());

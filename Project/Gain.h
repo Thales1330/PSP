@@ -56,7 +56,7 @@ class Gain : public ControlElement
      * @param timeStep Time step.
      * @return Always true.
      */
-    virtual bool Solve(double input, double timeStep);
+    virtual bool Solve(double* input, double timeStep);
 
     virtual Element* GetCopy();
 

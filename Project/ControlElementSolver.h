@@ -58,6 +58,8 @@ class ControlElementSolver
     virtual double GetLastSolution() { return m_solutions[m_solutions.size() - 1]; }
     virtual bool IsOK() const { return m_isOK; }
     virtual wxString GetErrorMessage() { return m_failMessage; }
+    void SetSwitchStatus(bool value) { m_switchStatus = value; }
+    void SetCurrentTime(double value) { m_currentTime = value; }
     void SetTerminalVoltage(double value) { m_terminalVoltage = value; }
     void SetVelocity(double value) { m_velocity = value; }
     void SetActivePower(double value) { m_activePower = value; }
@@ -86,6 +88,8 @@ class ControlElementSolver
     IOControl* m_inputControl = NULL; /**< First input control to be solved */
     IOControl* m_outputControl = NULL;
     // Inputs
+    bool m_switchStatus = false;
+    double m_currentTime = 0.0;
     double m_terminalVoltage = 0.0;
     double m_velocity = 0.0;
     double m_activePower = 0.0;
@@ -95,6 +99,13 @@ class ControlElementSolver
     double m_initVelocity = 0.0;
     double m_deltaVelocity = 0.0;
     double m_deltaPe = 0.0;
+    
+    /*
+     * m_inputToSolve[0] = Current line value;
+     * m_inputToSolve[1] = Current time;
+     * m_inputToSolve[2] = Switch status.
+     */
+    double* m_inputToSolve = NULL;
     // Outputs
     double m_fieldVoltage = 0.0;
     double m_mecPower = 0.0;
