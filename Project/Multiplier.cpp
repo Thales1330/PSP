@@ -33,7 +33,7 @@ void Multiplier::DrawSymbol() const
     DrawLine(xSymbol, GL_LINES);
 }
 
-bool Multiplier::Solve(double input, double timeStep, double currentTime)
+bool Multiplier::Solve(double* input, double timeStep)
 {
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {

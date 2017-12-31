@@ -48,6 +48,9 @@ ControlElementSolver::ControlElementSolver(ControlElementContainer* ctrlContaine
 
 void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double integrationError)
 {
+    // Init the input array size
+    if(m_inputToSolve) delete[] m_inputToSolve;
+    m_inputToSolve =  new double[3];
     // Check if the sistem have one input and one output
     bool fail = false;
     auto ioList = m_ctrlContainer->GetIOControlList();
@@ -308,7 +311,10 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
         ControlElement* element = static_cast<ControlElement*>(*it);
         // Solve the unsolved parent.
         if(!element->IsSolved()) {
-            if(!element->Solve(currentLine->GetValue(), m_timeStep, m_currentTime)) return NULL;
+            m_inputToSolve[0] = currentLine->GetValue();
+            m_inputToSolve[1] = m_currentTime;
+            m_inputToSolve[2] = m_switchStatus;
+            if(!element->Solve(m_inputToSolve, m_timeStep)) return NULL;
             element->SetSolved();
 
             // Get the output node (must have one or will result NULL).

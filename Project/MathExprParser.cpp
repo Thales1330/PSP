@@ -19,12 +19,12 @@
 
 MathExprParser::MathExprParser()
 {
-    AddConstant("PI", 3.14159265358979323846);
-    AddConstant("E", 2.71828182845904523536);
-    AddConstant("CLOSE", 1);
-    AddConstant("OPEN", 0);
-    AddConstant("TRUE", 1);
-    AddConstant("FALSE", 0);
+    AddConstant("pi", 3.14159265358979323846);
+    AddConstant("e", 2.71828182845904523536);
+    AddConstant("closed", 1);
+    AddConstant("open", 0);
+    AddConstant("true", 1);
+    AddConstant("false", 0);
 }
 
 MathExprParser::~MathExprParser() {}

@@ -199,8 +199,12 @@ void Sum::Rotate(bool clockwise)
     }
 }
 
-bool Sum::Solve(double input, double timeStep, double currentTime)
+bool Sum::Solve(double* input, double timeStep)
 {
+    if(!input) {
+        m_output = 0.0;
+        return true;
+    }
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;

@@ -45,7 +45,7 @@ class MathExpression : public ControlElement
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual void Rotate(bool clockwise = true);
 
-    virtual bool Solve(double input, double timeStep, double currentTime);
+    virtual bool Solve(double* input, double timeStep);
     virtual bool Initialize();
     virtual wxString GetMathExpression() { return m_mathExpression; }
     virtual void SetMathExpression(wxString mathExpression) { m_mathExpression = mathExpression; }

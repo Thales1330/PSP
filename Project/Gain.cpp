@@ -175,9 +175,13 @@ void Gain::Move(wxPoint2DDouble position)
     UpdatePoints();
 }
 
-bool Gain::Solve(double input, double timeStep, double currentTime)
+bool Gain::Solve(double* input, double timeStep)
 {
-    m_output = input * m_value;
+    if(!input){
+        m_output = 0.0;
+        return true;
+    }
+    m_output = input[0] * m_value;
     return true;
 }
 

@@ -216,7 +216,7 @@ void ControlEditor::BuildControlElementPanel()
 
     ControlElementButton* mathExprButton = new ControlElementButton(
         m_panelControlElements, _("Math Expression"),
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sum.png", wxPATH_WIN).GetPath()),
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mathExpr.png", wxPATH_WIN).GetPath()),
         ID_MATH_EXPR);
     wrapSizer->Add(mathExprButton, 0, wxALL, 5);
     mathExprButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);

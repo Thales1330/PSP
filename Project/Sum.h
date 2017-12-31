@@ -45,7 +45,7 @@ class Sum : public ControlElement
 
     virtual std::vector<Signal> GetSignalList() const { return m_signalList; }
     virtual void SetSignalList(std::vector<Signal> signalList) { m_signalList = signalList; }
-    virtual bool Solve(double input, double timeStep, double currentTime);
+    virtual bool Solve(double* input, double timeStep);
 
     virtual void UpdatePoints();
     void AddInNode();

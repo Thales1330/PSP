@@ -152,12 +152,17 @@ void MathExpression::Rotate(bool clockwise)
     }
 }
 
-bool MathExpression::Solve(double input, double timeStep, double currentTime)
+bool MathExpression::Solve(double* input, double timeStep)
 {
+    if(!input) {
+        m_output = 0.0;
+        return true;
+    }
     // Get the input vector from connection lines (can't use default (one) input argument)
-    m_inputValues[0] = currentTime;
+    m_inputValues[0] = input[1]; // Current time
     m_inputValues[1] = timeStep;
-    int i = 2;
+    m_inputValues[2] = input[2]; // Switch status
+    int i = 3;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
         if(node->GetNodeType() != Node::NODE_OUT) {
@@ -306,7 +311,7 @@ void MathExpression::SetVariables(std::vector<wxString> variablesVector)
 
 bool MathExpression::Initialize()
 {
-    m_variables = "time,step,";
+    m_variables = "time,step,switch,";
     for(auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
         m_variables += *(it) + ",";
     m_variables.RemoveLast();
@@ -319,7 +324,7 @@ bool MathExpression::Initialize()
     wxLocale oldLocale(currentLang);   // Return to current language.
 
     if(m_inputValues) delete m_inputValues;
-    m_inputValues = new double[m_variablesVector.size() + 2];  // Custom variables + time + step
+    m_inputValues = new double[m_variablesVector.size() + 3];  // Custom variables + time + step + switch
     
     // Optimize only once to gain performance.
     m_fparser.Optimize();

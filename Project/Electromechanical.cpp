@@ -662,6 +662,7 @@ bool Electromechanical::InitializeDynamicElements()
                 if(data.avrSolver) delete data.avrSolver;
                 data.avrSolver =
                     new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+                data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
                 data.avrSolver->SetCurrentTime(m_currentTime);
                 data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
                 data.avrSolver->SetInitialTerminalVoltage(std::abs(data.terminalVoltage));
@@ -681,6 +682,7 @@ bool Electromechanical::InitializeDynamicElements()
                 if(data.speedGovSolver) delete data.speedGovSolver;
                 data.speedGovSolver = new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier,
                                                                m_tolerance, m_parent);
+                data.speedGovSolver->SetSwitchStatus(syncGenerator->IsOnline());
                 data.speedGovSolver->SetCurrentTime(m_currentTime);
                 data.speedGovSolver->SetActivePower(dataPU.activePower);
                 data.speedGovSolver->SetReactivePower(dataPU.reactivePower);
@@ -1001,6 +1003,7 @@ bool Electromechanical::SolveSynchronousMachines()
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
         if(data.useAVR && data.avrSolver) {
+            data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
             data.avrSolver->SetCurrentTime(m_currentTime);
             data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
             data.avrSolver->SetDeltaActivePower((data.electricalPower.real() - data.avrSolver->GetActivePower()) / m_timeStep);
@@ -1015,6 +1018,7 @@ bool Electromechanical::SolveSynchronousMachines()
         }
 
         if(data.useSpeedGovernor && data.speedGovSolver) {
+            data.speedGovSolver->SetSwitchStatus(syncGenerator->IsOnline());
             data.speedGovSolver->SetCurrentTime(m_currentTime);
             data.speedGovSolver->SetVelocity(data.speed);
             data.speedGovSolver->SetActivePower(data.electricalPower.real());

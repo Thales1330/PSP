@@ -135,14 +135,14 @@ void MathExpressionForm::SetSintaxHighlights()
         0, wxT("abs acos acosh arg asin asinh atan atan2 atanh cbrt conj ceil cos cosh cot csc eval exp exp2 floor "
                "hypot if imag int log log2 log10 max min polar pow real sec sin sinh sqrt tan tanh trunc"));
     m_stcMathExpr->SetKeyWords(1, wxT("time step switch ") + variables);
-    m_stcMathExpr->SetKeyWords(2, wxT("TRUE FALSE OPEN CLOSE PI E"));
+    m_stcMathExpr->SetKeyWords(2, wxT("true false open closed pi e"));
 }
 
 void MathExpressionForm::OnTextUpdate(wxCommandEvent& event) { SetSintaxHighlights(); }
 
 std::string MathExpressionForm::GetVariablesToParse()
 {
-    wxString variables = wxT("time,step,") + m_textCtrlVariables->GetValue();
+    wxString variables = wxT("time,step,switch,") + m_textCtrlVariables->GetValue();
     for(unsigned int i = 0; i < variables.length(); ++i) {
         if(variables[i] == ' ') variables[i] = ',';
     }

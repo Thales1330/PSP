@@ -110,9 +110,13 @@ void RateLimiter::UpdatePoints()
     }
 }
 
-bool RateLimiter::Solve(double input, double timeStep, double currentTime)
+bool RateLimiter::Solve(double* input, double timeStep)
 {
-    double rate = (input - m_output) / timeStep;
+    if(!input) {
+        m_output = 0.0;
+        return true;
+    }
+    double rate = (input[0] - m_output) / timeStep;
 
     bool reachLimit = false;
     if(rate > m_upLimit) {
@@ -126,7 +130,7 @@ bool RateLimiter::Solve(double input, double timeStep, double currentTime)
     if(reachLimit)
         m_output += rate * timeStep;
     else
-        m_output = input;
+        m_output = input[0];
     return true;
 }
 
