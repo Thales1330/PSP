@@ -386,3 +386,12 @@ bool TransferFunction::UpdateText()
     if(!m_glTextNum->IsTextureOK()) return false;
     return true;
 }
+
+void TransferFunction::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+}
+
+bool TransferFunction::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    return true;
+}

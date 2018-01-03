@@ -60,9 +60,7 @@ void Element::DrawArc(wxPoint2DDouble position,
 void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) const
 {
     glBegin(mode);
-    for(int i = 0; i < 3; i++) {
-        glVertex2d(points[i].m_x, points[i].m_y);
-    }
+    for(int i = 0; i < 3; i++) { glVertex2d(points[i].m_x, points[i].m_y); }
     glEnd();
 }
 
@@ -89,9 +87,7 @@ void Element::DrawRectangle(wxPoint2DDouble* points, GLenum mode) const
 void Element::DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode) const
 {
     glBegin(mode);
-    for(auto it = points.begin(); it != points.end(); ++it) {
-        glVertex2d((*it).m_x, (*it).m_y);
-    }
+    for(auto it = points.begin(); it != points.end(); ++it) { glVertex2d((*it).m_x, (*it).m_y); }
     glEnd();
 }
 
@@ -248,15 +244,18 @@ void Element::GeneralMenuItens(wxMenu& menu)
     wxString exePath = exeFileName.GetPath();
 
     wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
-    clockItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateClock16.png", wxPATH_WIN).GetPath()));
+    clockItem->SetBitmap(
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateClock16.png", wxPATH_WIN).GetPath()));
     menu.Append(clockItem);
 
     wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    counterClockItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateCounterClock16.png", wxPATH_WIN).GetPath()));
+    counterClockItem->SetBitmap(wxImage(
+        exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateCounterClock16.png", wxPATH_WIN).GetPath()));
     menu.Append(counterClockItem);
 
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
+    deleteItem->SetBitmap(
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
     menu.Append(deleteItem);
 }
 
@@ -268,9 +267,7 @@ void Element::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& righ
     wxPoint2DDouble rectCorner[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
                                      m_rect.GetRightTop()};
     // Rotate corners.
-    for(int i = 0; i < 4; ++i) {
-        rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle);
-    }
+    for(int i = 0; i < 4; ++i) { rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle); }
     leftUp = rectCorner[0];
     rightBottom = rectCorner[0];
     for(int i = 1; i < 4; ++i) {
@@ -413,4 +410,37 @@ double Element::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) c
     }
 
     return distance;
+}
+
+void Element::SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode)
+{
+    auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
+    auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+    auto posX = XMLParser::AppendNode(doc, position, "X");
+    XMLParser::SetNodeValue(doc, posX, m_position.m_x);
+    auto posY = XMLParser::AppendNode(doc, position, "Y");
+    XMLParser::SetNodeValue(doc, posY, m_position.m_y);
+    auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+    auto width = XMLParser::AppendNode(doc, size, "Width");
+    XMLParser::SetNodeValue(doc, width, m_width);
+    auto height = XMLParser::AppendNode(doc, size, "Height");
+    XMLParser::SetNodeValue(doc, height, m_height);
+    auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+    XMLParser::SetNodeValue(doc, angle, m_angle);
+}
+
+bool Element::OpenCADProperties(rapidxml::xml_node<>* elementNode)
+{
+    auto cadPropNode = elementNode->first_node("CADProperties");
+    if(!cadPropNode) return false;
+
+    auto position = cadPropNode->first_node("Position");
+    double posX = XMLParser::GetNodeValueDouble(position, "X");
+    double posY = XMLParser::GetNodeValueDouble(position, "Y");
+    m_position = wxPoint2DDouble(posX, posY);
+    auto size = cadPropNode->first_node("Size");
+    m_width = XMLParser::GetNodeValueDouble(size, "Width");
+    m_height = XMLParser::GetNodeValueDouble(size, "Height");
+    m_angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+    return true;
 }

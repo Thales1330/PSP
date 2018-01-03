@@ -41,849 +41,849 @@ void FileHanding::SaveProject(wxFileName path)
     rapidxml::xml_node<>* rootNode = doc.allocate_node(rapidxml::node_element, "Project");
     doc.append_node(rootNode);
 
-    rapidxml::xml_node<>* projectNameNode = AppendNode(doc, rootNode, "Name");
-    SetNodeValue(doc, projectNameNode, path.GetName());
+    rapidxml::xml_node<>* projectNameNode = XMLParser::AppendNode(doc, rootNode, "Name");
+    XMLParser::SetNodeValue(doc, projectNameNode, path.GetName());
 
     //{ Simulation properties
     PropertiesData* properties = m_workspace->GetProperties();
-    auto propertiesNode = AppendNode(doc, rootNode, "Properties");
+    auto propertiesNode = XMLParser::AppendNode(doc, rootNode, "Properties");
 
     SimulationData simulationData = properties->GetSimulationPropertiesData();
-    auto simulationPropNode = AppendNode(doc, propertiesNode, "SimulationProperties");
+    auto simulationPropNode = XMLParser::XMLParser::AppendNode(doc, propertiesNode, "SimulationProperties");
 
-    auto generalPropNode = AppendNode(doc, simulationPropNode, "General");
-    auto basePower = AppendNode(doc, generalPropNode, "BasePower");
-    SetNodeValue(doc, basePower, simulationData.basePower);
-    SetNodeAttribute(doc, basePower, "UnitID", simulationData.basePowerUnit);
-    auto contCalc = AppendNode(doc, generalPropNode, "ContinuousCalculation");
-    auto contCalcFault = AppendNode(doc, contCalc, "Fault");
-    SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);
-    auto contCalcSCPower = AppendNode(doc, contCalc, "SCPower");
-    SetNodeValue(doc, contCalcSCPower, simulationData.scPowerAfterPowerFlow);
+    auto generalPropNode = XMLParser::AppendNode(doc, simulationPropNode, "General");
+    auto basePower = XMLParser::AppendNode(doc, generalPropNode, "BasePower");
+    XMLParser::SetNodeValue(doc, basePower, simulationData.basePower);
+    XMLParser::SetNodeAttribute(doc, basePower, "UnitID", simulationData.basePowerUnit);
+    auto contCalc = XMLParser::AppendNode(doc, generalPropNode, "ContinuousCalculation");
+    auto contCalcFault = XMLParser::AppendNode(doc, contCalc, "Fault");
+    XMLParser::SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);
+    auto contCalcSCPower = XMLParser::AppendNode(doc, contCalc, "SCPower");
+    XMLParser::SetNodeValue(doc, contCalcSCPower, simulationData.scPowerAfterPowerFlow);
 
-    auto powerFlowPropNode = AppendNode(doc, simulationPropNode, "PowerFlow");
-    auto solutionMethod = AppendNode(doc, powerFlowPropNode, "SolutionMethod");
-    SetNodeValue(doc, solutionMethod, simulationData.powerFlowMethod);
-    auto accFactor = AppendNode(doc, powerFlowPropNode, "AccFactor");
-    SetNodeValue(doc, accFactor, simulationData.accFator);
-    auto pfTolerance = AppendNode(doc, powerFlowPropNode, "Tolerance");
-    SetNodeValue(doc, pfTolerance, simulationData.powerFlowTolerance);
-    auto pfMaxIter = AppendNode(doc, powerFlowPropNode, "MaxIterations");
-    SetNodeValue(doc, pfMaxIter, simulationData.powerFlowMaxIterations);
+    auto powerFlowPropNode = XMLParser::AppendNode(doc, simulationPropNode, "PowerFlow");
+    auto solutionMethod = XMLParser::AppendNode(doc, powerFlowPropNode, "SolutionMethod");
+    XMLParser::SetNodeValue(doc, solutionMethod, simulationData.powerFlowMethod);
+    auto accFactor = XMLParser::AppendNode(doc, powerFlowPropNode, "AccFactor");
+    XMLParser::SetNodeValue(doc, accFactor, simulationData.accFator);
+    auto pfTolerance = XMLParser::AppendNode(doc, powerFlowPropNode, "Tolerance");
+    XMLParser::SetNodeValue(doc, pfTolerance, simulationData.powerFlowTolerance);
+    auto pfMaxIter = XMLParser::AppendNode(doc, powerFlowPropNode, "MaxIterations");
+    XMLParser::SetNodeValue(doc, pfMaxIter, simulationData.powerFlowMaxIterations);
 
-    auto stabilityPropNode = AppendNode(doc, simulationPropNode, "Stability");
-    auto timeStep = AppendNode(doc, stabilityPropNode, "TimeStep");
-    SetNodeValue(doc, timeStep, simulationData.timeStep);
-    auto simTime = AppendNode(doc, stabilityPropNode, "SimulationTime");
-    SetNodeValue(doc, simTime, simulationData.stabilitySimulationTime);
-    auto freq = AppendNode(doc, stabilityPropNode, "Frequency");
-    SetNodeValue(doc, freq, simulationData.stabilityFrequency);
-    auto stabTolerance = AppendNode(doc, stabilityPropNode, "Tolerance");
-    SetNodeValue(doc, stabTolerance, simulationData.stabilityTolerance);
-    auto stabTMaxIter = AppendNode(doc, stabilityPropNode, "MaxIterations");
-    SetNodeValue(doc, stabTMaxIter, simulationData.stabilityMaxIterations);
-    auto controlRatio = AppendNode(doc, stabilityPropNode, "ControlStepRatio");
-    SetNodeValue(doc, controlRatio, simulationData.controlTimeStepRatio);
-    auto plotStep = AppendNode(doc, stabilityPropNode, "PlotStep");
-    SetNodeValue(doc, plotStep, simulationData.plotTime);
-    auto useCOI = AppendNode(doc, stabilityPropNode, "UseCOI");
-    SetNodeValue(doc, useCOI, simulationData.useCOI);
+    auto stabilityPropNode = XMLParser::AppendNode(doc, simulationPropNode, "Stability");
+    auto timeStep = XMLParser::AppendNode(doc, stabilityPropNode, "TimeStep");
+    XMLParser::SetNodeValue(doc, timeStep, simulationData.timeStep);
+    auto simTime = XMLParser::AppendNode(doc, stabilityPropNode, "SimulationTime");
+    XMLParser::SetNodeValue(doc, simTime, simulationData.stabilitySimulationTime);
+    auto freq = XMLParser::AppendNode(doc, stabilityPropNode, "Frequency");
+    XMLParser::SetNodeValue(doc, freq, simulationData.stabilityFrequency);
+    auto stabTolerance = XMLParser::AppendNode(doc, stabilityPropNode, "Tolerance");
+    XMLParser::SetNodeValue(doc, stabTolerance, simulationData.stabilityTolerance);
+    auto stabTMaxIter = XMLParser::AppendNode(doc, stabilityPropNode, "MaxIterations");
+    XMLParser::SetNodeValue(doc, stabTMaxIter, simulationData.stabilityMaxIterations);
+    auto controlRatio = XMLParser::AppendNode(doc, stabilityPropNode, "ControlStepRatio");
+    XMLParser::SetNodeValue(doc, controlRatio, simulationData.controlTimeStepRatio);
+    auto plotStep = XMLParser::AppendNode(doc, stabilityPropNode, "PlotStep");
+    XMLParser::SetNodeValue(doc, plotStep, simulationData.plotTime);
+    auto useCOI = XMLParser::AppendNode(doc, stabilityPropNode, "UseCOI");
+    XMLParser::SetNodeValue(doc, useCOI, simulationData.useCOI);
 
-    auto zipPropNode = AppendNode(doc, simulationPropNode, "ZIPLoad");
-    auto useCompLoads = AppendNode(doc, zipPropNode, "UseCompositeLoad");
-    SetNodeValue(doc, useCompLoads, simulationData.useCompLoads);
-    auto activePowerComp = AppendNode(doc, zipPropNode, "ActivePowerComposition");
-    auto pz = AppendNode(doc, activePowerComp, "ConstantImpedance");
-    SetNodeValue(doc, pz, simulationData.constImpedanceActive);
-    auto pi = AppendNode(doc, activePowerComp, "ConstantCurrent");
-    SetNodeValue(doc, pi, simulationData.constCurrentActive);
-    auto pp = AppendNode(doc, activePowerComp, "ConstantPower");
-    SetNodeValue(doc, pp, simulationData.constPowerActive);
-    auto reactivePowerComp = AppendNode(doc, zipPropNode, "ReactivePowerComposition");
-    auto qz = AppendNode(doc, reactivePowerComp, "ConstantImpedance");
-    SetNodeValue(doc, qz, simulationData.constImpedanceReactive);
-    auto qi = AppendNode(doc, reactivePowerComp, "ConstantCurrent");
-    SetNodeValue(doc, qi, simulationData.constCurrentReactive);
-    auto qp = AppendNode(doc, reactivePowerComp, "ConstantPower");
-    SetNodeValue(doc, qp, simulationData.constPowerReactive);
-    auto undervoltageLim = AppendNode(doc, zipPropNode, "UndervoltageLimit");
-    auto uvi = AppendNode(doc, undervoltageLim, "ConstantCurrent");
-    SetNodeValue(doc, uvi, simulationData.underVoltageConstCurrent);
-    auto uvp = AppendNode(doc, undervoltageLim, "ConstantPower");
-    SetNodeValue(doc, uvp, simulationData.underVoltageConstPower);
+    auto zipPropNode = XMLParser::AppendNode(doc, simulationPropNode, "ZIPLoad");
+    auto useCompLoads = XMLParser::AppendNode(doc, zipPropNode, "UseCompositeLoad");
+    XMLParser::SetNodeValue(doc, useCompLoads, simulationData.useCompLoads);
+    auto activePowerComp = XMLParser::AppendNode(doc, zipPropNode, "ActivePowerComposition");
+    auto pz = XMLParser::AppendNode(doc, activePowerComp, "ConstantImpedance");
+    XMLParser::SetNodeValue(doc, pz, simulationData.constImpedanceActive);
+    auto pi = XMLParser::AppendNode(doc, activePowerComp, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, pi, simulationData.constCurrentActive);
+    auto pp = XMLParser::AppendNode(doc, activePowerComp, "ConstantPower");
+    XMLParser::SetNodeValue(doc, pp, simulationData.constPowerActive);
+    auto reactivePowerComp = XMLParser::AppendNode(doc, zipPropNode, "ReactivePowerComposition");
+    auto qz = XMLParser::AppendNode(doc, reactivePowerComp, "ConstantImpedance");
+    XMLParser::SetNodeValue(doc, qz, simulationData.constImpedanceReactive);
+    auto qi = XMLParser::AppendNode(doc, reactivePowerComp, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, qi, simulationData.constCurrentReactive);
+    auto qp = XMLParser::AppendNode(doc, reactivePowerComp, "ConstantPower");
+    XMLParser::SetNodeValue(doc, qp, simulationData.constPowerReactive);
+    auto undervoltageLim = XMLParser::AppendNode(doc, zipPropNode, "UndervoltageLimit");
+    auto uvi = XMLParser::AppendNode(doc, undervoltageLim, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, uvi, simulationData.underVoltageConstCurrent);
+    auto uvp = XMLParser::AppendNode(doc, undervoltageLim, "ConstantPower");
+    XMLParser::SetNodeValue(doc, uvp, simulationData.underVoltageConstPower);
 
     //}
 
-    auto elementsNode = AppendNode(doc, rootNode, "Elements");
+    auto elementsNode = XMLParser::AppendNode(doc, rootNode, "Elements");
 
     // Save all the data
     ElectricCalculation allElements;
     allElements.GetElementsFromList(m_workspace->GetElementList());
 
     //{ Buses
-    auto busesNode = AppendNode(doc, elementsNode, "BusList");
+    auto busesNode = XMLParser::AppendNode(doc, elementsNode, "BusList");
     auto busList = allElements.GetBusList();
     for(int i = 0; i < (int)busList.size(); i++) {
         Bus* bus = busList[i];
-        auto busNode = AppendNode(doc, busesNode, "Bus");
-        SetNodeAttribute(doc, busNode, "ID", i);
-        auto cadProp = AppendNode(doc, busNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, bus->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, bus->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, bus->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, bus->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, bus->GetAngle());
+        auto busNode = XMLParser::AppendNode(doc, busesNode, "Bus");
+        XMLParser::SetNodeAttribute(doc, busNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, busNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, bus->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, bus->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, bus->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, bus->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, bus->GetAngle());
 
         BusElectricalData data = bus->GetElectricalData();
-        auto electricalProp = AppendNode(doc, busNode, "ElectricalProperties");
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto isVoltageControlled = AppendNode(doc, electricalProp, "IsVoltageControlled");
-        SetNodeValue(doc, isVoltageControlled, data.isVoltageControlled);
-        auto controlledVoltage = AppendNode(doc, electricalProp, "ControlledVoltage");
-        SetNodeValue(doc, controlledVoltage, data.controlledVoltage);
-        SetNodeAttribute(doc, controlledVoltage, "Choice", data.controlledVoltageUnitChoice);
-        auto slackBus = AppendNode(doc, electricalProp, "SlackBus");
-        SetNodeValue(doc, slackBus, data.slackBus);
+        auto electricalProp = XMLParser::AppendNode(doc, busNode, "ElectricalProperties");
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
+        XMLParser::SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
+        XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
+        auto isVoltageControlled = XMLParser::AppendNode(doc, electricalProp, "IsVoltageControlled");
+        XMLParser::SetNodeValue(doc, isVoltageControlled, data.isVoltageControlled);
+        auto controlledVoltage = XMLParser::AppendNode(doc, electricalProp, "ControlledVoltage");
+        XMLParser::SetNodeValue(doc, controlledVoltage, data.controlledVoltage);
+        XMLParser::SetNodeAttribute(doc, controlledVoltage, "Choice", data.controlledVoltageUnitChoice);
+        auto slackBus = XMLParser::AppendNode(doc, electricalProp, "SlackBus");
+        XMLParser::SetNodeValue(doc, slackBus, data.slackBus);
 
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto hasFault = AppendNode(doc, fault, "HasFault");
-        SetNodeValue(doc, hasFault, data.hasFault);
-        auto faultType = AppendNode(doc, fault, "Type");
-        SetNodeValue(doc, faultType, data.faultType);
-        auto faultLocation = AppendNode(doc, fault, "Location");
-        SetNodeValue(doc, faultLocation, data.faultLocation);
-        auto faultResistance = AppendNode(doc, fault, "Resistance");
-        SetNodeValue(doc, faultResistance, data.faultResistance);
-        auto faultReactance = AppendNode(doc, fault, "Reactance");
-        SetNodeValue(doc, faultReactance, data.faultReactance);
+        auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+        auto hasFault = XMLParser::AppendNode(doc, fault, "HasFault");
+        XMLParser::SetNodeValue(doc, hasFault, data.hasFault);
+        auto faultType = XMLParser::AppendNode(doc, fault, "Type");
+        XMLParser::SetNodeValue(doc, faultType, data.faultType);
+        auto faultLocation = XMLParser::AppendNode(doc, fault, "Location");
+        XMLParser::SetNodeValue(doc, faultLocation, data.faultLocation);
+        auto faultResistance = XMLParser::AppendNode(doc, fault, "Resistance");
+        XMLParser::SetNodeValue(doc, faultResistance, data.faultResistance);
+        auto faultReactance = XMLParser::AppendNode(doc, fault, "Reactance");
+        XMLParser::SetNodeValue(doc, faultReactance, data.faultReactance);
 
-        auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotBus = AppendNode(doc, stability, "Plot");
-        SetNodeValue(doc, plotBus, data.plotBus);
-        auto stabHasFault = AppendNode(doc, stability, "HasFault");
-        SetNodeValue(doc, stabHasFault, data.stabHasFault);
-        auto stabFaultTime = AppendNode(doc, stability, "FaultTime");
-        SetNodeValue(doc, stabFaultTime, data.stabFaultTime);
-        auto stabFaultLength = AppendNode(doc, stability, "FaultLength");
-        SetNodeValue(doc, stabFaultLength, data.stabFaultLength);
-        auto stabFaultResistance = AppendNode(doc, stability, "FaultResistance");
-        SetNodeValue(doc, stabFaultResistance, data.stabFaultResistance);
-        auto stabFaultReactance = AppendNode(doc, stability, "FaultReactance");
-        SetNodeValue(doc, stabFaultReactance, data.stabFaultReactance);
+        auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+        auto plotBus = XMLParser::AppendNode(doc, stability, "Plot");
+        XMLParser::SetNodeValue(doc, plotBus, data.plotBus);
+        auto stabHasFault = XMLParser::AppendNode(doc, stability, "HasFault");
+        XMLParser::SetNodeValue(doc, stabHasFault, data.stabHasFault);
+        auto stabFaultTime = XMLParser::AppendNode(doc, stability, "FaultTime");
+        XMLParser::SetNodeValue(doc, stabFaultTime, data.stabFaultTime);
+        auto stabFaultLength = XMLParser::AppendNode(doc, stability, "FaultLength");
+        XMLParser::SetNodeValue(doc, stabFaultLength, data.stabFaultLength);
+        auto stabFaultResistance = XMLParser::AppendNode(doc, stability, "FaultResistance");
+        XMLParser::SetNodeValue(doc, stabFaultResistance, data.stabFaultResistance);
+        auto stabFaultReactance = XMLParser::AppendNode(doc, stability, "FaultReactance");
+        XMLParser::SetNodeValue(doc, stabFaultReactance, data.stabFaultReactance);
 
         data.number = i;
         bus->SetElectricalData(data);
     }  //}
 
     //{ Capacitor
-    auto capacitorsNode = AppendNode(doc, elementsNode, "CapacitorList");
+    auto capacitorsNode = XMLParser::AppendNode(doc, elementsNode, "CapacitorList");
     auto capacitorList = allElements.GetCapacitorList();
     for(int i = 0; i < (int)capacitorList.size(); i++) {
         Capacitor* capacitor = capacitorList[i];
-        auto capacitorNode = AppendNode(doc, capacitorsNode, "Capacitor");
-        SetNodeAttribute(doc, capacitorNode, "ID", i);
-        auto cadProp = AppendNode(doc, capacitorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, capacitor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, capacitor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, capacitor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, capacitor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, capacitor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, capacitor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, capacitor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
+        auto capacitorNode = XMLParser::AppendNode(doc, capacitorsNode, "Capacitor");
+        XMLParser::SetNodeAttribute(doc, capacitorNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, capacitorNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, capacitor->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, capacitor->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, capacitor->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, capacitor->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, capacitor->GetAngle());
+        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+        XMLParser::SetNodeValue(doc, nodePosX, capacitor->GetPointList()[0].m_x);
+        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY, capacitor->GetPointList()[0].m_y);
+        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(capacitor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         CapacitorElectricalData data = capacitor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, capacitorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, capacitor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto electricalProp = XMLParser::AppendNode(doc, capacitorNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, capacitor->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
+        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = capacitor->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
+            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = XMLParser::AppendNode(doc, switching, "Type");
+            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     }  //}
 
     //{ IndMotor
-    auto indMotorsNode = AppendNode(doc, elementsNode, "IndMotorList");
+    auto indMotorsNode = XMLParser::AppendNode(doc, elementsNode, "IndMotorList");
     auto indMotorList = allElements.GetIndMotorList();
     for(int i = 0; i < (int)indMotorList.size(); i++) {
         IndMotor* indMotor = indMotorList[i];
-        auto indMotorNode = AppendNode(doc, indMotorsNode, "IndMotor");
-        SetNodeAttribute(doc, indMotorNode, "ID", i);
-        auto cadProp = AppendNode(doc, indMotorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, indMotor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, indMotor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, indMotor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, indMotor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, indMotor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, indMotor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
+        auto indMotorNode = XMLParser::AppendNode(doc, indMotorsNode, "IndMotor");
+        XMLParser::SetNodeAttribute(doc, indMotorNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, indMotorNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, indMotor->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, indMotor->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, indMotor->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, indMotor->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, indMotor->GetAngle());
+        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+        XMLParser::SetNodeValue(doc, nodePosX, indMotor->GetPointList()[0].m_x);
+        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
+        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(indMotor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         IndMotorElectricalData data = indMotor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, indMotorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, indMotor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto electricalProp = XMLParser::AppendNode(doc, indMotorNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, indMotor->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
+        XMLParser::SetNodeValue(doc, activePower, data.activePower);
+        XMLParser::SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
+        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
+        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
     }  //}
 
     //{ Inductor
-    auto inductorsNode = AppendNode(doc, elementsNode, "InductorList");
+    auto inductorsNode = XMLParser::AppendNode(doc, elementsNode, "InductorList");
     auto inductorList = allElements.GetInductorList();
     for(int i = 0; i < (int)inductorList.size(); i++) {
         Inductor* inductor = inductorList[i];
-        auto inductorNode = AppendNode(doc, inductorsNode, "Inductor");
-        SetNodeAttribute(doc, inductorNode, "ID", i);
-        auto cadProp = AppendNode(doc, inductorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, inductor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, inductor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, inductor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, inductor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, inductor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, inductor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, inductor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
+        auto inductorNode = XMLParser::AppendNode(doc, inductorsNode, "Inductor");
+        XMLParser::SetNodeAttribute(doc, inductorNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, inductorNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, inductor->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, inductor->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, inductor->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, inductor->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, inductor->GetAngle());
+        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+        XMLParser::SetNodeValue(doc, nodePosX, inductor->GetPointList()[0].m_x);
+        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY, inductor->GetPointList()[0].m_y);
+        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(inductor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         InductorElectricalData data = inductor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, inductorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, inductor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto electricalProp = XMLParser::AppendNode(doc, inductorNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, inductor->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
+        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = inductor->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
+            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = XMLParser::AppendNode(doc, switching, "Type");
+            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     }  //}
 
     //{ Line
-    auto linesNode = AppendNode(doc, elementsNode, "LineList");
+    auto linesNode = XMLParser::AppendNode(doc, elementsNode, "LineList");
     auto lineList = allElements.GetLineList();
     for(int i = 0; i < (int)lineList.size(); i++) {
         Line* line = lineList[i];
-        auto lineNode = AppendNode(doc, linesNode, "Line");
-        SetNodeAttribute(doc, lineNode, "ID", i);
-        auto cadProp = AppendNode(doc, lineNode, "CADProperties");
-        auto nodeList = AppendNode(doc, cadProp, "NodeList");
+        auto lineNode = XMLParser::AppendNode(doc, linesNode, "Line");
+        XMLParser::SetNodeAttribute(doc, lineNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, lineNode, "CADProperties");
+        auto nodeList = XMLParser::AppendNode(doc, cadProp, "NodeList");
         auto ptList = line->GetPointList();
         int nodeID = 0;
         for(int j = 0; j < (int)ptList.size(); j++) {
             if((j != 1) && (j != (int)ptList.size() - 2)) {
-                auto nodePos = AppendNode(doc, nodeList, "Node");
-                SetNodeAttribute(doc, nodePos, "ID", nodeID);
-                auto nodePosX = AppendNode(doc, nodePos, "X");
-                SetNodeValue(doc, nodePosX, ptList[j].m_x);
-                auto nodePosY = AppendNode(doc, nodePos, "Y");
-                SetNodeValue(doc, nodePosY, ptList[j].m_y);
+                auto nodePos = XMLParser::AppendNode(doc, nodeList, "Node");
+                XMLParser::SetNodeAttribute(doc, nodePos, "ID", nodeID);
+                auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+                XMLParser::SetNodeValue(doc, nodePosX, ptList[j].m_x);
+                auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+                XMLParser::SetNodeValue(doc, nodePosY, ptList[j].m_y);
                 nodeID++;
             }
         }
 
-        auto parentIDList = AppendNode(doc, cadProp, "ParentIDList");
+        auto parentIDList = XMLParser::AppendNode(doc, cadProp, "ParentIDList");
         for(int j = 0; j < (int)line->GetParentList().size(); j++) {
             Bus* parent = static_cast<Bus*>(line->GetParentList()[j]);
             if(parent) {
-                auto parentID = AppendNode(doc, parentIDList, "ParentID");
-                SetNodeAttribute(doc, parentID, "ID", j);
-                SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+                auto parentID = XMLParser::AppendNode(doc, parentIDList, "ParentID");
+                XMLParser::SetNodeAttribute(doc, parentID, "ID", j);
+                XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
             }
         }
 
         LineElectricalData data = line->GetElectricalData();
-        auto electricalProp = AppendNode(doc, lineNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, line->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        auto resistance = AppendNode(doc, electricalProp, "Resistance");
-        SetNodeValue(doc, resistance, data.resistance);
-        SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
-        auto indReactance = AppendNode(doc, electricalProp, "IndReactance");
-        SetNodeValue(doc, indReactance, data.indReactance);
-        SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
-        auto capSusceptance = AppendNode(doc, electricalProp, "CapSusceptance");
-        SetNodeValue(doc, capSusceptance, data.capSusceptance);
-        SetNodeAttribute(doc, capSusceptance, "UnitID", data.capSusceptanceUnit);
-        auto lineSize = AppendNode(doc, electricalProp, "LineSize");
-        SetNodeValue(doc, lineSize, data.lineSize);
-        auto useLinePower = AppendNode(doc, electricalProp, "UseLinePower");
-        SetNodeValue(doc, useLinePower, data.useLinePower);
+        auto electricalProp = XMLParser::AppendNode(doc, lineNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, line->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
+        XMLParser::SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
+        XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
+        auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
+        XMLParser::SetNodeValue(doc, nominalPower, data.nominalPower);
+        XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
+        auto resistance = XMLParser::AppendNode(doc, electricalProp, "Resistance");
+        XMLParser::SetNodeValue(doc, resistance, data.resistance);
+        XMLParser::SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
+        auto indReactance = XMLParser::AppendNode(doc, electricalProp, "IndReactance");
+        XMLParser::SetNodeValue(doc, indReactance, data.indReactance);
+        XMLParser::SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
+        auto capSusceptance = XMLParser::AppendNode(doc, electricalProp, "CapSusceptance");
+        XMLParser::SetNodeValue(doc, capSusceptance, data.capSusceptance);
+        XMLParser::SetNodeAttribute(doc, capSusceptance, "UnitID", data.capSusceptanceUnit);
+        auto lineSize = XMLParser::AppendNode(doc, electricalProp, "LineSize");
+        XMLParser::SetNodeValue(doc, lineSize, data.lineSize);
+        auto useLinePower = XMLParser::AppendNode(doc, electricalProp, "UseLinePower");
+        XMLParser::SetNodeValue(doc, useLinePower, data.useLinePower);
 
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroIndReactance = AppendNode(doc, fault, "ZeroIndReactance");
-        SetNodeValue(doc, zeroIndReactance, data.zeroIndReactance);
-        auto zeroCapSusceptance = AppendNode(doc, fault, "ZeroCapSusceptance");
-        SetNodeValue(doc, zeroCapSusceptance, data.zeroCapSusceptance);
+        auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+        auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
+        XMLParser::SetNodeValue(doc, zeroResistance, data.zeroResistance);
+        auto zeroIndReactance = XMLParser::AppendNode(doc, fault, "ZeroIndReactance");
+        XMLParser::SetNodeValue(doc, zeroIndReactance, data.zeroIndReactance);
+        auto zeroCapSusceptance = XMLParser::AppendNode(doc, fault, "ZeroCapSusceptance");
+        XMLParser::SetNodeValue(doc, zeroCapSusceptance, data.zeroCapSusceptance);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = line->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
+            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = XMLParser::AppendNode(doc, switching, "Type");
+            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     }  //}
 
     //{ Load
-    auto loadsNode = AppendNode(doc, elementsNode, "LoadList");
+    auto loadsNode = XMLParser::AppendNode(doc, elementsNode, "LoadList");
     auto loadList = allElements.GetLoadList();
     for(int i = 0; i < (int)loadList.size(); i++) {
         Load* load = loadList[i];
-        auto loadNode = AppendNode(doc, loadsNode, "Load");
-        SetNodeAttribute(doc, loadNode, "ID", i);
-        auto cadProp = AppendNode(doc, loadNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, load->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, load->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, load->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, load->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, load->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, load->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, load->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
+        auto loadNode = XMLParser::AppendNode(doc, loadsNode, "Load");
+        XMLParser::SetNodeAttribute(doc, loadNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, loadNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, load->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, load->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, load->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, load->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, load->GetAngle());
+        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+        XMLParser::SetNodeValue(doc, nodePosX, load->GetPointList()[0].m_x);
+        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY, load->GetPointList()[0].m_y);
+        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(load->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         LoadElectricalData data = load->GetElectricalData();
-        auto electricalProp = AppendNode(doc, loadNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, load->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-        auto loadType = AppendNode(doc, electricalProp, "LoadType");
-        SetNodeValue(doc, loadType, data.loadType);
+        auto electricalProp = XMLParser::AppendNode(doc, loadNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, load->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
+        XMLParser::SetNodeValue(doc, activePower, data.activePower);
+        XMLParser::SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
+        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
+        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto loadType = XMLParser::AppendNode(doc, electricalProp, "LoadType");
+        XMLParser::SetNodeValue(doc, loadType, data.loadType);
 
-        auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotLoad = AppendNode(doc, stability, "PlotLoad");
-        SetNodeValue(doc, plotLoad, data.plotLoad);
-        auto useCompLoad = AppendNode(doc, stability, "UseCompositeLoad");
-        SetNodeValue(doc, useCompLoad, data.useCompLoad);
-        auto activePowerCompl = AppendNode(doc, stability, "ActivePowerComposition");
-        auto pzl = AppendNode(doc, activePowerCompl, "ConstantImpedance");
-        SetNodeValue(doc, pzl, data.constImpedanceActive);
-        auto pil = AppendNode(doc, activePowerCompl, "ConstantCurrent");
-        SetNodeValue(doc, pil, data.constCurrentActive);
-        auto ppl = AppendNode(doc, activePowerCompl, "ConstantPower");
-        SetNodeValue(doc, ppl, data.constPowerActive);
-        auto reactivePowerCompl = AppendNode(doc, stability, "ReactivePowerComposition");
-        auto qzl = AppendNode(doc, reactivePowerCompl, "ConstantImpedance");
-        SetNodeValue(doc, qzl, data.constImpedanceReactive);
-        auto qil = AppendNode(doc, reactivePowerCompl, "ConstantCurrent");
-        SetNodeValue(doc, qil, data.constCurrentReactive);
-        auto qpl = AppendNode(doc, reactivePowerCompl, "ConstantPower");
-        SetNodeValue(doc, qpl, data.constPowerReactive);
+        auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+        auto plotLoad = XMLParser::AppendNode(doc, stability, "PlotLoad");
+        XMLParser::SetNodeValue(doc, plotLoad, data.plotLoad);
+        auto useCompLoad = XMLParser::AppendNode(doc, stability, "UseCompositeLoad");
+        XMLParser::SetNodeValue(doc, useCompLoad, data.useCompLoad);
+        auto activePowerCompl = XMLParser::AppendNode(doc, stability, "ActivePowerComposition");
+        auto pzl = XMLParser::AppendNode(doc, activePowerCompl, "ConstantImpedance");
+        XMLParser::SetNodeValue(doc, pzl, data.constImpedanceActive);
+        auto pil = XMLParser::AppendNode(doc, activePowerCompl, "ConstantCurrent");
+        XMLParser::SetNodeValue(doc, pil, data.constCurrentActive);
+        auto ppl = XMLParser::AppendNode(doc, activePowerCompl, "ConstantPower");
+        XMLParser::SetNodeValue(doc, ppl, data.constPowerActive);
+        auto reactivePowerCompl = XMLParser::AppendNode(doc, stability, "ReactivePowerComposition");
+        auto qzl = XMLParser::AppendNode(doc, reactivePowerCompl, "ConstantImpedance");
+        XMLParser::SetNodeValue(doc, qzl, data.constImpedanceReactive);
+        auto qil = XMLParser::AppendNode(doc, reactivePowerCompl, "ConstantCurrent");
+        XMLParser::SetNodeValue(doc, qil, data.constCurrentReactive);
+        auto qpl = XMLParser::AppendNode(doc, reactivePowerCompl, "ConstantPower");
+        XMLParser::SetNodeValue(doc, qpl, data.constPowerReactive);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = load->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
+            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = XMLParser::AppendNode(doc, switching, "Type");
+            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     }  //}
 
     //{ SyncGenerator
-    auto syncGeneratorsNode = AppendNode(doc, elementsNode, "SyncGeneratorList");
+    auto syncGeneratorsNode = XMLParser::AppendNode(doc, elementsNode, "SyncGeneratorList");
     auto syncGeneratorList = allElements.GetSyncGeneratorList();
     for(int i = 0; i < (int)syncGeneratorList.size(); i++) {
         SyncGenerator* syncGenerator = syncGeneratorList[i];
-        auto syncGeneratorNode = AppendNode(doc, syncGeneratorsNode, "SyncGenerator");
-        SetNodeAttribute(doc, syncGeneratorNode, "ID", i);
-        auto cadProp = AppendNode(doc, syncGeneratorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, syncGenerator->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, syncGenerator->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, syncGenerator->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, syncGenerator->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, syncGenerator->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, syncGenerator->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, syncGenerator->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
+        auto syncGeneratorNode = XMLParser::AppendNode(doc, syncGeneratorsNode, "SyncGenerator");
+        XMLParser::SetNodeAttribute(doc, syncGeneratorNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, syncGeneratorNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, syncGenerator->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, syncGenerator->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, syncGenerator->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, syncGenerator->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, syncGenerator->GetAngle());
+        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+        XMLParser::SetNodeValue(doc, nodePosX, syncGenerator->GetPointList()[0].m_x);
+        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY, syncGenerator->GetPointList()[0].m_y);
+        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
-        auto electricalProp = AppendNode(doc, syncGeneratorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, syncGenerator->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-        auto haveMaxReactive = AppendNode(doc, electricalProp, "HaveMaxReactive");
-        SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
-        auto maxReactive = AppendNode(doc, electricalProp, "MaxReactive");
-        SetNodeValue(doc, maxReactive, data.maxReactive);
-        SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
-        auto haveMinReactive = AppendNode(doc, electricalProp, "HaveMinReactive");
-        SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
-        auto minReactive = AppendNode(doc, electricalProp, "MinReactive");
-        SetNodeValue(doc, minReactive, data.minReactive);
-        SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
-        auto useMachineBase = AppendNode(doc, electricalProp, "UseMachineBase");
-        SetNodeValue(doc, useMachineBase, data.useMachineBase);
+        auto electricalProp = XMLParser::AppendNode(doc, syncGeneratorNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, syncGenerator->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
+        XMLParser::SetNodeValue(doc, nominalPower, data.nominalPower);
+        XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
+        auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
+        XMLParser::SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
+        XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
+        auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
+        XMLParser::SetNodeValue(doc, activePower, data.activePower);
+        XMLParser::SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
+        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
+        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto haveMaxReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMaxReactive");
+        XMLParser::SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
+        auto maxReactive = XMLParser::AppendNode(doc, electricalProp, "MaxReactive");
+        XMLParser::SetNodeValue(doc, maxReactive, data.maxReactive);
+        XMLParser::SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
+        auto haveMinReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMinReactive");
+        XMLParser::SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
+        auto minReactive = XMLParser::AppendNode(doc, electricalProp, "MinReactive");
+        XMLParser::SetNodeValue(doc, minReactive, data.minReactive);
+        XMLParser::SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
+        auto useMachineBase = XMLParser::AppendNode(doc, electricalProp, "UseMachineBase");
+        XMLParser::SetNodeValue(doc, useMachineBase, data.useMachineBase);
 
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto positiveResistance = AppendNode(doc, fault, "PositiveResistance");
-        SetNodeValue(doc, positiveResistance, data.positiveResistance);
-        auto positiveReactance = AppendNode(doc, fault, "PositiveReactance");
-        SetNodeValue(doc, positiveReactance, data.positiveReactance);
-        auto negativeResistance = AppendNode(doc, fault, "NegativeResistance");
-        SetNodeValue(doc, negativeResistance, data.negativeResistance);
-        auto negativeReactance = AppendNode(doc, fault, "NegativeReactance");
-        SetNodeValue(doc, negativeReactance, data.negativeReactance);
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
-        SetNodeValue(doc, zeroReactance, data.zeroReactance);
-        auto groundResistance = AppendNode(doc, fault, "GroundResistance");
-        SetNodeValue(doc, groundResistance, data.groundResistance);
-        auto groundReactance = AppendNode(doc, fault, "GroundReactance");
-        SetNodeValue(doc, groundReactance, data.groundReactance);
-        auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
-        SetNodeValue(doc, groundNeutral, data.groundNeutral);
+        auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+        auto positiveResistance = XMLParser::AppendNode(doc, fault, "PositiveResistance");
+        XMLParser::SetNodeValue(doc, positiveResistance, data.positiveResistance);
+        auto positiveReactance = XMLParser::AppendNode(doc, fault, "PositiveReactance");
+        XMLParser::SetNodeValue(doc, positiveReactance, data.positiveReactance);
+        auto negativeResistance = XMLParser::AppendNode(doc, fault, "NegativeResistance");
+        XMLParser::SetNodeValue(doc, negativeResistance, data.negativeResistance);
+        auto negativeReactance = XMLParser::AppendNode(doc, fault, "NegativeReactance");
+        XMLParser::SetNodeValue(doc, negativeReactance, data.negativeReactance);
+        auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
+        XMLParser::SetNodeValue(doc, zeroResistance, data.zeroResistance);
+        auto zeroReactance = XMLParser::AppendNode(doc, fault, "ZeroReactance");
+        XMLParser::SetNodeValue(doc, zeroReactance, data.zeroReactance);
+        auto groundResistance = XMLParser::AppendNode(doc, fault, "GroundResistance");
+        XMLParser::SetNodeValue(doc, groundResistance, data.groundResistance);
+        auto groundReactance = XMLParser::AppendNode(doc, fault, "GroundReactance");
+        XMLParser::SetNodeValue(doc, groundReactance, data.groundReactance);
+        auto groundNeutral = XMLParser::AppendNode(doc, fault, "GroundNeutral");
+        XMLParser::SetNodeValue(doc, groundNeutral, data.groundNeutral);
 
-        auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotSyncMachine = AppendNode(doc, stability, "PlotSyncMachine");
-        SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
-        auto inertia = AppendNode(doc, stability, "Inertia");
-        SetNodeValue(doc, inertia, data.inertia);
-        auto damping = AppendNode(doc, stability, "Damping");
-        SetNodeValue(doc, damping, data.damping);
-        auto useAVR = AppendNode(doc, stability, "UseAVR");
-        SetNodeValue(doc, useAVR, data.useAVR);
-        auto useSpeedGovernor = AppendNode(doc, stability, "UseSpeedGovernor");
-        SetNodeValue(doc, useSpeedGovernor, data.useSpeedGovernor);
-        auto armResistance = AppendNode(doc, stability, "ArmResistance");
-        SetNodeValue(doc, armResistance, data.armResistance);
-        auto potierReactance = AppendNode(doc, stability, "PotierReactance");
-        SetNodeValue(doc, potierReactance, data.potierReactance);
-        auto satFactor = AppendNode(doc, stability, "SatFactor");
-        SetNodeValue(doc, satFactor, data.satFactor);
-        auto syncXd = AppendNode(doc, stability, "SyncXd");
-        SetNodeValue(doc, syncXd, data.syncXd);
-        auto syncXq = AppendNode(doc, stability, "SyncXq");
-        SetNodeValue(doc, syncXq, data.syncXq);
-        auto transXd = AppendNode(doc, stability, "TransXd");
-        SetNodeValue(doc, transXd, data.transXd);
-        auto transXq = AppendNode(doc, stability, "TransXq");
-        SetNodeValue(doc, transXq, data.transXq);
-        auto transTd0 = AppendNode(doc, stability, "TransTd0");
-        SetNodeValue(doc, transTd0, data.transTd0);
-        auto transTq0 = AppendNode(doc, stability, "TransTq0");
-        SetNodeValue(doc, transTq0, data.transTq0);
-        auto subXd = AppendNode(doc, stability, "SubXd");
-        SetNodeValue(doc, subXd, data.subXd);
-        auto subXq = AppendNode(doc, stability, "SubXq");
-        SetNodeValue(doc, subXq, data.subXq);
-        auto subTd0 = AppendNode(doc, stability, "SubTd0");
-        SetNodeValue(doc, subTd0, data.subTd0);
-        auto subTq0 = AppendNode(doc, stability, "SubTq0");
-        SetNodeValue(doc, subTq0, data.subTq0);
+        auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+        auto plotSyncMachine = XMLParser::AppendNode(doc, stability, "PlotSyncMachine");
+        XMLParser::SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
+        auto inertia = XMLParser::AppendNode(doc, stability, "Inertia");
+        XMLParser::SetNodeValue(doc, inertia, data.inertia);
+        auto damping = XMLParser::AppendNode(doc, stability, "Damping");
+        XMLParser::SetNodeValue(doc, damping, data.damping);
+        auto useAVR = XMLParser::AppendNode(doc, stability, "UseAVR");
+        XMLParser::SetNodeValue(doc, useAVR, data.useAVR);
+        auto useSpeedGovernor = XMLParser::AppendNode(doc, stability, "UseSpeedGovernor");
+        XMLParser::SetNodeValue(doc, useSpeedGovernor, data.useSpeedGovernor);
+        auto armResistance = XMLParser::AppendNode(doc, stability, "ArmResistance");
+        XMLParser::SetNodeValue(doc, armResistance, data.armResistance);
+        auto potierReactance = XMLParser::AppendNode(doc, stability, "PotierReactance");
+        XMLParser::SetNodeValue(doc, potierReactance, data.potierReactance);
+        auto satFactor = XMLParser::AppendNode(doc, stability, "SatFactor");
+        XMLParser::SetNodeValue(doc, satFactor, data.satFactor);
+        auto syncXd = XMLParser::AppendNode(doc, stability, "SyncXd");
+        XMLParser::SetNodeValue(doc, syncXd, data.syncXd);
+        auto syncXq = XMLParser::AppendNode(doc, stability, "SyncXq");
+        XMLParser::SetNodeValue(doc, syncXq, data.syncXq);
+        auto transXd = XMLParser::AppendNode(doc, stability, "TransXd");
+        XMLParser::SetNodeValue(doc, transXd, data.transXd);
+        auto transXq = XMLParser::AppendNode(doc, stability, "TransXq");
+        XMLParser::SetNodeValue(doc, transXq, data.transXq);
+        auto transTd0 = XMLParser::AppendNode(doc, stability, "TransTd0");
+        XMLParser::SetNodeValue(doc, transTd0, data.transTd0);
+        auto transTq0 = XMLParser::AppendNode(doc, stability, "TransTq0");
+        XMLParser::SetNodeValue(doc, transTq0, data.transTq0);
+        auto subXd = XMLParser::AppendNode(doc, stability, "SubXd");
+        XMLParser::SetNodeValue(doc, subXd, data.subXd);
+        auto subXq = XMLParser::AppendNode(doc, stability, "SubXq");
+        XMLParser::SetNodeValue(doc, subXq, data.subXq);
+        auto subTd0 = XMLParser::AppendNode(doc, stability, "SubTd0");
+        XMLParser::SetNodeValue(doc, subTd0, data.subTd0);
+        auto subTq0 = XMLParser::AppendNode(doc, stability, "SubTq0");
+        XMLParser::SetNodeValue(doc, subTq0, data.subTq0);
 
-        auto avr = AppendNode(doc, stability, "AVR");
+        auto avr = XMLParser::AppendNode(doc, stability, "AVR");
         if(data.avr) SaveControlElements(doc, avr, data.avr);
 
-        auto speedGov = AppendNode(doc, stability, "SpeedGovernor");
+        auto speedGov = XMLParser::AppendNode(doc, stability, "SpeedGovernor");
         if(data.speedGov) SaveControlElements(doc, speedGov, data.speedGov);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = syncGenerator->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
+            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = XMLParser::AppendNode(doc, switching, "Type");
+            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     }  //}
 
     //{ SyncMotor
-    auto syncMotorsNode = AppendNode(doc, elementsNode, "SyncMotorList");
+    auto syncMotorsNode = XMLParser::AppendNode(doc, elementsNode, "SyncMotorList");
     auto syncMotorList = allElements.GetSyncMotorList();
     for(int i = 0; i < (int)syncMotorList.size(); i++) {
         SyncMotor* syncMotor = syncMotorList[i];
-        auto syncMotorNode = AppendNode(doc, syncMotorsNode, "SyncMotor");
-        SetNodeAttribute(doc, syncMotorNode, "ID", i);
-        auto cadProp = AppendNode(doc, syncMotorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, syncMotor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, syncMotor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, syncMotor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, syncMotor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, syncMotor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, syncMotor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, syncMotor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
+        auto syncMotorNode = XMLParser::AppendNode(doc, syncMotorsNode, "SyncMotor");
+        XMLParser::SetNodeAttribute(doc, syncMotorNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, syncMotorNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, syncMotor->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, syncMotor->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, syncMotor->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, syncMotor->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, syncMotor->GetAngle());
+        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+        XMLParser::SetNodeValue(doc, nodePosX, syncMotor->GetPointList()[0].m_x);
+        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY, syncMotor->GetPointList()[0].m_y);
+        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
         Bus* parent = static_cast<Bus*>(syncMotor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
 
         SyncMotorElectricalData data = syncMotor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, syncMotorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, syncMotor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        // auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        // SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        // SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-        auto haveMaxReactive = AppendNode(doc, electricalProp, "HaveMaxReactive");
-        SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
-        auto maxReactive = AppendNode(doc, electricalProp, "MaxReactive");
-        SetNodeValue(doc, maxReactive, data.maxReactive);
-        SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
-        auto haveMinReactive = AppendNode(doc, electricalProp, "HaveMinReactive");
-        SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
-        auto minReactive = AppendNode(doc, electricalProp, "MinReactive");
-        SetNodeValue(doc, minReactive, data.minReactive);
-        SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
-        auto useMachineBase = AppendNode(doc, electricalProp, "UseMachineBase");
-        SetNodeValue(doc, useMachineBase, data.useMachineBase);
+        auto electricalProp = XMLParser::AppendNode(doc, syncMotorNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, syncMotor->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
+        XMLParser::SetNodeValue(doc, nominalPower, data.nominalPower);
+        XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
+        // auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
+        // XMLParser::SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
+        // XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
+        auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
+        XMLParser::SetNodeValue(doc, activePower, data.activePower);
+        XMLParser::SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
+        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
+        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
+        auto haveMaxReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMaxReactive");
+        XMLParser::SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
+        auto maxReactive = XMLParser::AppendNode(doc, electricalProp, "MaxReactive");
+        XMLParser::SetNodeValue(doc, maxReactive, data.maxReactive);
+        XMLParser::SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
+        auto haveMinReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMinReactive");
+        XMLParser::SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
+        auto minReactive = XMLParser::AppendNode(doc, electricalProp, "MinReactive");
+        XMLParser::SetNodeValue(doc, minReactive, data.minReactive);
+        XMLParser::SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
+        auto useMachineBase = XMLParser::AppendNode(doc, electricalProp, "UseMachineBase");
+        XMLParser::SetNodeValue(doc, useMachineBase, data.useMachineBase);
 
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto positiveResistance = AppendNode(doc, fault, "PositiveResistance");
-        SetNodeValue(doc, positiveResistance, data.positiveResistance);
-        auto positiveReactance = AppendNode(doc, fault, "PositiveReactance");
-        SetNodeValue(doc, positiveReactance, data.positiveReactance);
-        auto negativeResistance = AppendNode(doc, fault, "NegativeResistance");
-        SetNodeValue(doc, negativeResistance, data.negativeResistance);
-        auto negativeReactance = AppendNode(doc, fault, "NegativeReactance");
-        SetNodeValue(doc, negativeReactance, data.negativeReactance);
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
-        SetNodeValue(doc, zeroReactance, data.zeroReactance);
-        auto groundResistance = AppendNode(doc, fault, "GroundResistance");
-        SetNodeValue(doc, groundResistance, data.groundResistance);
-        auto groundReactance = AppendNode(doc, fault, "GroundReactance");
-        SetNodeValue(doc, groundReactance, data.groundReactance);
-        auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
-        SetNodeValue(doc, groundNeutral, data.groundNeutral);
+        auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+        auto positiveResistance = XMLParser::AppendNode(doc, fault, "PositiveResistance");
+        XMLParser::SetNodeValue(doc, positiveResistance, data.positiveResistance);
+        auto positiveReactance = XMLParser::AppendNode(doc, fault, "PositiveReactance");
+        XMLParser::SetNodeValue(doc, positiveReactance, data.positiveReactance);
+        auto negativeResistance = XMLParser::AppendNode(doc, fault, "NegativeResistance");
+        XMLParser::SetNodeValue(doc, negativeResistance, data.negativeResistance);
+        auto negativeReactance = XMLParser::AppendNode(doc, fault, "NegativeReactance");
+        XMLParser::SetNodeValue(doc, negativeReactance, data.negativeReactance);
+        auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
+        XMLParser::SetNodeValue(doc, zeroResistance, data.zeroResistance);
+        auto zeroReactance = XMLParser::AppendNode(doc, fault, "ZeroReactance");
+        XMLParser::SetNodeValue(doc, zeroReactance, data.zeroReactance);
+        auto groundResistance = XMLParser::AppendNode(doc, fault, "GroundResistance");
+        XMLParser::SetNodeValue(doc, groundResistance, data.groundResistance);
+        auto groundReactance = XMLParser::AppendNode(doc, fault, "GroundReactance");
+        XMLParser::SetNodeValue(doc, groundReactance, data.groundReactance);
+        auto groundNeutral = XMLParser::AppendNode(doc, fault, "GroundNeutral");
+        XMLParser::SetNodeValue(doc, groundNeutral, data.groundNeutral);
 
         // To future use...
-        /*auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotSyncMachine = AppendNode(doc, stability, "PlotSyncMotor");
-        SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
-        auto inertia = AppendNode(doc, stability, "Inertia");
-        SetNodeValue(doc, inertia, data.inertia);
-        auto damping = AppendNode(doc, stability, "Damping");
-        SetNodeValue(doc, damping, data.damping);
-        auto useAVR = AppendNode(doc, stability, "UseAVR");
-        SetNodeValue(doc, useAVR, data.useAVR);
-        auto armResistance = AppendNode(doc, stability, "ArmResistance");
-        SetNodeValue(doc, armResistance, data.armResistance);
-        auto potierReactance = AppendNode(doc, stability, "PotierReactance");
-        SetNodeValue(doc, potierReactance, data.potierReactance);
-        auto satFactor = AppendNode(doc, stability, "SatFactor");
-        SetNodeValue(doc, satFactor, data.satFactor);
-        auto syncXd = AppendNode(doc, stability, "SyncXd");
-        SetNodeValue(doc, syncXd, data.syncXd);
-        auto syncXq = AppendNode(doc, stability, "SyncXq");
-        SetNodeValue(doc, syncXq, data.syncXq);
-        auto transXd = AppendNode(doc, stability, "TransXd");
-        SetNodeValue(doc, transXd, data.transXd);
-        auto transXq = AppendNode(doc, stability, "TransXq");
-        SetNodeValue(doc, transXq, data.transXq);
-        auto transTd0 = AppendNode(doc, stability, "TransTd0");
-        SetNodeValue(doc, transTd0, data.transTd0);
-        auto transTq0 = AppendNode(doc, stability, "TransTq0");
-        SetNodeValue(doc, transTq0, data.transTq0);
-        auto subXd = AppendNode(doc, stability, "SubXd");
-        SetNodeValue(doc, subXd, data.subXd);
-        auto subXq = AppendNode(doc, stability, "SubXq");
-        SetNodeValue(doc, subXq, data.subXq);
-        auto subTd0 = AppendNode(doc, stability, "SubTd0");
-        SetNodeValue(doc, subTd0, data.subTd0);
-        auto subTq0 = AppendNode(doc, stability, "SubTq0");
-        SetNodeValue(doc, subTq0, data.subTq0);
+        /*auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+        auto plotSyncMachine = XMLParser::AppendNode(doc, stability, "PlotSyncMotor");
+        XMLParser::SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
+        auto inertia = XMLParser::AppendNode(doc, stability, "Inertia");
+        XMLParser::SetNodeValue(doc, inertia, data.inertia);
+        auto damping = XMLParser::AppendNode(doc, stability, "Damping");
+        XMLParser::SetNodeValue(doc, damping, data.damping);
+        auto useAVR = XMLParser::AppendNode(doc, stability, "UseAVR");
+        XMLParser::SetNodeValue(doc, useAVR, data.useAVR);
+        auto armResistance = XMLParser::AppendNode(doc, stability, "ArmResistance");
+        XMLParser::SetNodeValue(doc, armResistance, data.armResistance);
+        auto potierReactance = XMLParser::AppendNode(doc, stability, "PotierReactance");
+        XMLParser::SetNodeValue(doc, potierReactance, data.potierReactance);
+        auto satFactor = XMLParser::AppendNode(doc, stability, "SatFactor");
+        XMLParser::SetNodeValue(doc, satFactor, data.satFactor);
+        auto syncXd = XMLParser::AppendNode(doc, stability, "SyncXd");
+        XMLParser::SetNodeValue(doc, syncXd, data.syncXd);
+        auto syncXq = XMLParser::AppendNode(doc, stability, "SyncXq");
+        XMLParser::SetNodeValue(doc, syncXq, data.syncXq);
+        auto transXd = XMLParser::AppendNode(doc, stability, "TransXd");
+        XMLParser::SetNodeValue(doc, transXd, data.transXd);
+        auto transXq = XMLParser::AppendNode(doc, stability, "TransXq");
+        XMLParser::SetNodeValue(doc, transXq, data.transXq);
+        auto transTd0 = XMLParser::AppendNode(doc, stability, "TransTd0");
+        XMLParser::SetNodeValue(doc, transTd0, data.transTd0);
+        auto transTq0 = XMLParser::AppendNode(doc, stability, "TransTq0");
+        XMLParser::SetNodeValue(doc, transTq0, data.transTq0);
+        auto subXd = XMLParser::AppendNode(doc, stability, "SubXd");
+        XMLParser::SetNodeValue(doc, subXd, data.subXd);
+        auto subXq = XMLParser::AppendNode(doc, stability, "SubXq");
+        XMLParser::SetNodeValue(doc, subXq, data.subXq);
+        auto subTd0 = XMLParser::AppendNode(doc, stability, "SubTd0");
+        XMLParser::SetNodeValue(doc, subTd0, data.subTd0);
+        auto subTq0 = XMLParser::AppendNode(doc, stability, "SubTq0");
+        XMLParser::SetNodeValue(doc, subTq0, data.subTq0);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = syncGenerator->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
+            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = XMLParser::AppendNode(doc, switching, "Type");
+            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
         }*/
     }  //}
 
     //{ Transfomer
-    auto transformersNode = AppendNode(doc, elementsNode, "TransformerList");
+    auto transformersNode = XMLParser::AppendNode(doc, elementsNode, "TransformerList");
     auto transformerList = allElements.GetTransformerList();
     for(int i = 0; i < (int)transformerList.size(); i++) {
         Transformer* transfomer = transformerList[i];
-        auto transformerNode = AppendNode(doc, transformersNode, "Transfomer");
-        SetNodeAttribute(doc, transformerNode, "ID", i);
-        auto cadProp = AppendNode(doc, transformerNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, transfomer->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, transfomer->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, transfomer->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, transfomer->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, transfomer->GetAngle());
-        auto nodeList = AppendNode(doc, cadProp, "NodeList");
-        auto nodePos1 = AppendNode(doc, nodeList, "Node");
-        SetNodeAttribute(doc, nodePos1, "ID", 0);
-        auto nodePosX1 = AppendNode(doc, nodePos1, "X");
-        SetNodeValue(doc, nodePosX1, transfomer->GetPointList()[0].m_x);
-        auto nodePosY1 = AppendNode(doc, nodePos1, "Y");
-        SetNodeValue(doc, nodePosY1, transfomer->GetPointList()[0].m_y);
-        auto nodePos2 = AppendNode(doc, nodeList, "Node");
-        SetNodeAttribute(doc, nodePos2, "ID", 1);
-        auto nodePosX2 = AppendNode(doc, nodePos2, "X");
-        SetNodeValue(doc, nodePosX2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_x);
-        auto nodePosY2 = AppendNode(doc, nodePos2, "Y");
-        SetNodeValue(doc, nodePosY2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_y);
+        auto transformerNode = XMLParser::AppendNode(doc, transformersNode, "Transfomer");
+        XMLParser::SetNodeAttribute(doc, transformerNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, transformerNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, transfomer->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, transfomer->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, transfomer->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, transfomer->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, transfomer->GetAngle());
+        auto nodeList = XMLParser::AppendNode(doc, cadProp, "NodeList");
+        auto nodePos1 = XMLParser::AppendNode(doc, nodeList, "Node");
+        XMLParser::SetNodeAttribute(doc, nodePos1, "ID", 0);
+        auto nodePosX1 = XMLParser::AppendNode(doc, nodePos1, "X");
+        XMLParser::SetNodeValue(doc, nodePosX1, transfomer->GetPointList()[0].m_x);
+        auto nodePosY1 = XMLParser::AppendNode(doc, nodePos1, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY1, transfomer->GetPointList()[0].m_y);
+        auto nodePos2 = XMLParser::AppendNode(doc, nodeList, "Node");
+        XMLParser::SetNodeAttribute(doc, nodePos2, "ID", 1);
+        auto nodePosX2 = XMLParser::AppendNode(doc, nodePos2, "X");
+        XMLParser::SetNodeValue(doc, nodePosX2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_x);
+        auto nodePosY2 = XMLParser::AppendNode(doc, nodePos2, "Y");
+        XMLParser::SetNodeValue(doc, nodePosY2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_y);
 
-        auto parentIDList = AppendNode(doc, cadProp, "ParentIDList");
+        auto parentIDList = XMLParser::AppendNode(doc, cadProp, "ParentIDList");
         for(int j = 0; j < (int)transfomer->GetParentList().size(); j++) {
             Bus* parent = static_cast<Bus*>(transfomer->GetParentList()[j]);
             if(parent) {
-                auto parentID = AppendNode(doc, parentIDList, "ParentID");
-                SetNodeAttribute(doc, parentID, "ID", j);
-                SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+                auto parentID = XMLParser::AppendNode(doc, parentIDList, "ParentID");
+                XMLParser::SetNodeAttribute(doc, parentID, "ID", j);
+                XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
             }
         }
 
         TransformerElectricalData data = transfomer->GetElectricalData();
-        auto electricalProp = AppendNode(doc, transformerNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, transfomer->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto primaryNominalVoltage = AppendNode(doc, electricalProp, "PrimaryNominalVoltage");
-        SetNodeValue(doc, primaryNominalVoltage, data.primaryNominalVoltage);
-        SetNodeAttribute(doc, primaryNominalVoltage, "UnitID", data.primaryNominalVoltageUnit);
-        auto secondaryNominalVoltage = AppendNode(doc, electricalProp, "SecondaryNominalVoltage");
-        SetNodeValue(doc, secondaryNominalVoltage, data.secondaryNominalVoltage);
-        SetNodeAttribute(doc, secondaryNominalVoltage, "UnitID", data.secondaryNominalVoltageUnit);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        auto resistance = AppendNode(doc, electricalProp, "Resistance");
-        SetNodeValue(doc, resistance, data.resistance);
-        SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
-        auto indReactance = AppendNode(doc, electricalProp, "IndReactance");
-        SetNodeValue(doc, indReactance, data.indReactance);
-        SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
-        auto connection = AppendNode(doc, electricalProp, "Connection");
-        SetNodeValue(doc, connection, data.connection);
-        auto turnsRatio = AppendNode(doc, electricalProp, "TurnsRatio");
-        SetNodeValue(doc, turnsRatio, data.turnsRatio);
-        auto phaseShift = AppendNode(doc, electricalProp, "PhaseShift");
-        SetNodeValue(doc, phaseShift, data.phaseShift);
-        auto useTransformerPower = AppendNode(doc, electricalProp, "UseTransfomerPower");
-        SetNodeValue(doc, useTransformerPower, data.useTransformerPower);
+        auto electricalProp = XMLParser::AppendNode(doc, transformerNode, "ElectricalProperties");
+        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+        XMLParser::SetNodeValue(doc, isOnline, transfomer->IsOnline());
+        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+        XMLParser::SetNodeValue(doc, name, data.name);
+        auto primaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, "PrimaryNominalVoltage");
+        XMLParser::SetNodeValue(doc, primaryNominalVoltage, data.primaryNominalVoltage);
+        XMLParser::SetNodeAttribute(doc, primaryNominalVoltage, "UnitID", data.primaryNominalVoltageUnit);
+        auto secondaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, "SecondaryNominalVoltage");
+        XMLParser::SetNodeValue(doc, secondaryNominalVoltage, data.secondaryNominalVoltage);
+        XMLParser::SetNodeAttribute(doc, secondaryNominalVoltage, "UnitID", data.secondaryNominalVoltageUnit);
+        auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
+        XMLParser::SetNodeValue(doc, nominalPower, data.nominalPower);
+        XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
+        auto resistance = XMLParser::AppendNode(doc, electricalProp, "Resistance");
+        XMLParser::SetNodeValue(doc, resistance, data.resistance);
+        XMLParser::SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
+        auto indReactance = XMLParser::AppendNode(doc, electricalProp, "IndReactance");
+        XMLParser::SetNodeValue(doc, indReactance, data.indReactance);
+        XMLParser::SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
+        auto connection = XMLParser::AppendNode(doc, electricalProp, "Connection");
+        XMLParser::SetNodeValue(doc, connection, data.connection);
+        auto turnsRatio = XMLParser::AppendNode(doc, electricalProp, "TurnsRatio");
+        XMLParser::SetNodeValue(doc, turnsRatio, data.turnsRatio);
+        auto phaseShift = XMLParser::AppendNode(doc, electricalProp, "PhaseShift");
+        XMLParser::SetNodeValue(doc, phaseShift, data.phaseShift);
+        auto useTransformerPower = XMLParser::AppendNode(doc, electricalProp, "UseTransfomerPower");
+        XMLParser::SetNodeValue(doc, useTransformerPower, data.useTransformerPower);
 
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroIndReactance = AppendNode(doc, fault, "ZeroIndReactance");
-        SetNodeValue(doc, zeroIndReactance, data.zeroIndReactance);
-        auto primaryGrndResistance = AppendNode(doc, fault, "PrimaryGrndResistance");
-        SetNodeValue(doc, primaryGrndResistance, data.primaryGrndResistance);
-        auto primaryGrndReactance = AppendNode(doc, fault, "PrimaryGrndReactance");
-        SetNodeValue(doc, primaryGrndReactance, data.primaryGrndReactance);
-        auto secondaryGrndResistance = AppendNode(doc, fault, "SecondaryGrndResistance");
-        SetNodeValue(doc, secondaryGrndResistance, data.secondaryGrndResistance);
-        auto secondaryGrndReactance = AppendNode(doc, fault, "SecondaryGrndReactance");
-        SetNodeValue(doc, secondaryGrndReactance, data.secondaryGrndReactance);
+        auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+        auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
+        XMLParser::SetNodeValue(doc, zeroResistance, data.zeroResistance);
+        auto zeroIndReactance = XMLParser::AppendNode(doc, fault, "ZeroIndReactance");
+        XMLParser::SetNodeValue(doc, zeroIndReactance, data.zeroIndReactance);
+        auto primaryGrndResistance = XMLParser::AppendNode(doc, fault, "PrimaryGrndResistance");
+        XMLParser::SetNodeValue(doc, primaryGrndResistance, data.primaryGrndResistance);
+        auto primaryGrndReactance = XMLParser::AppendNode(doc, fault, "PrimaryGrndReactance");
+        XMLParser::SetNodeValue(doc, primaryGrndReactance, data.primaryGrndReactance);
+        auto secondaryGrndResistance = XMLParser::AppendNode(doc, fault, "SecondaryGrndResistance");
+        XMLParser::SetNodeValue(doc, secondaryGrndResistance, data.secondaryGrndResistance);
+        auto secondaryGrndReactance = XMLParser::AppendNode(doc, fault, "SecondaryGrndReactance");
+        XMLParser::SetNodeValue(doc, secondaryGrndReactance, data.secondaryGrndReactance);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
+        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
         SwitchingData swData = transfomer->GetSwitchingData();
         for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
+            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
+            auto swType = XMLParser::AppendNode(doc, switching, "Type");
+            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
+            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
         }
     }  //}
 
     //{ Text
-    auto textsNode = AppendNode(doc, elementsNode, "TextList");
+    auto textsNode = XMLParser::AppendNode(doc, elementsNode, "TextList");
     auto textList = m_workspace->GetTextList();
     for(int i = 0; i < (int)textList.size(); i++) {
         Text* text = textList[i];
-        auto textNode = AppendNode(doc, textsNode, "Text");
-        SetNodeAttribute(doc, textNode, "ID", i);
-        auto cadProp = AppendNode(doc, textNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, text->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, text->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, text->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, text->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, text->GetAngle());
-        auto textProperties = AppendNode(doc, textNode, "TextProperties");
-        auto elementType = AppendNode(doc, textProperties, "ElementType");
-        SetNodeValue(doc, elementType, text->GetElementType());
-        auto elementNumber = AppendNode(doc, textProperties, "ElementNumber");
-        SetNodeValue(doc, elementNumber, text->GetElementNumber());
-        auto dataType = AppendNode(doc, textProperties, "DataType");
-        SetNodeValue(doc, dataType, text->GetDataType());
-        auto dataUnit = AppendNode(doc, textProperties, "DataUnit");
-        SetNodeValue(doc, dataUnit, text->GetUnit());
-        auto direction = AppendNode(doc, textProperties, "Direction");
-        SetNodeValue(doc, direction, text->GetDirection());
-        auto decimalPlaces = AppendNode(doc, textProperties, "DecimalPlaces");
-        SetNodeValue(doc, decimalPlaces, text->GetDecimalPlaces());
+        auto textNode = XMLParser::AppendNode(doc, textsNode, "Text");
+        XMLParser::SetNodeAttribute(doc, textNode, "ID", i);
+        auto cadProp = XMLParser::AppendNode(doc, textNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, text->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, text->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, text->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, text->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, text->GetAngle());
+        auto textProperties = XMLParser::AppendNode(doc, textNode, "TextProperties");
+        auto elementType = XMLParser::AppendNode(doc, textProperties, "ElementType");
+        XMLParser::SetNodeValue(doc, elementType, text->GetElementType());
+        auto elementNumber = XMLParser::AppendNode(doc, textProperties, "ElementNumber");
+        XMLParser::SetNodeValue(doc, elementNumber, text->GetElementNumber());
+        auto dataType = XMLParser::AppendNode(doc, textProperties, "DataType");
+        XMLParser::SetNodeValue(doc, dataType, text->GetDataType());
+        auto dataUnit = XMLParser::AppendNode(doc, textProperties, "DataUnit");
+        XMLParser::SetNodeValue(doc, dataUnit, text->GetUnit());
+        auto direction = XMLParser::AppendNode(doc, textProperties, "Direction");
+        XMLParser::SetNodeValue(doc, direction, text->GetDirection());
+        auto decimalPlaces = XMLParser::AppendNode(doc, textProperties, "DecimalPlaces");
+        XMLParser::SetNodeValue(doc, decimalPlaces, text->GetDecimalPlaces());
     }
     //}
 
@@ -915,44 +915,46 @@ bool FileHanding::OpenProject(wxFileName path)
         if(simPropertiesNode) {
             // General
             auto general = simPropertiesNode->first_node("General");
-            simData.basePower = GetNodeValueDouble(general, "BasePower");
-            simData.basePowerUnit = static_cast<ElectricalUnit>(GetAttributeValueInt(general, "BasePower", "UnitID"));
+            simData.basePower = XMLParser::GetNodeValueDouble(general, "BasePower");
+            simData.basePowerUnit =
+                static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(general, "BasePower", "UnitID"));
             auto contCalc = general->first_node("ContinuousCalculation");
-            simData.faultAfterPowerFlow = GetNodeValueInt(contCalc, "Fault");
-            simData.scPowerAfterPowerFlow = GetNodeValueInt(contCalc, "SCPower");
+            simData.faultAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "Fault");
+            simData.scPowerAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "SCPower");
 
             // Power flow
             auto powerFlow = simPropertiesNode->first_node("PowerFlow");
-            simData.powerFlowMethod = static_cast<PowerFlowMethod>(GetNodeValueInt(powerFlow, "SolutionMethod"));
-            simData.accFator = GetNodeValueDouble(powerFlow, "AccFactor");
-            simData.powerFlowTolerance = GetNodeValueDouble(powerFlow, "Tolerance");
-            simData.powerFlowMaxIterations = GetNodeValueInt(powerFlow, "MaxIterations");
+            simData.powerFlowMethod =
+                static_cast<PowerFlowMethod>(XMLParser::GetNodeValueInt(powerFlow, "SolutionMethod"));
+            simData.accFator = XMLParser::GetNodeValueDouble(powerFlow, "AccFactor");
+            simData.powerFlowTolerance = XMLParser::GetNodeValueDouble(powerFlow, "Tolerance");
+            simData.powerFlowMaxIterations = XMLParser::GetNodeValueInt(powerFlow, "MaxIterations");
 
             // Stability
             auto stability = simPropertiesNode->first_node("Stability");
-            simData.timeStep = GetNodeValueDouble(stability, "TimeStep");
-            simData.stabilitySimulationTime = GetNodeValueDouble(stability, "SimulationTime");
-            simData.stabilityFrequency = GetNodeValueDouble(stability, "Frequency");
-            simData.stabilityTolerance = GetNodeValueDouble(stability, "Tolerance");
-            simData.stabilityMaxIterations = GetNodeValueDouble(stability, "MaxIterations");
-            simData.controlTimeStepRatio = GetNodeValueInt(stability, "ControlStepRatio");
-            simData.plotTime = GetNodeValueDouble(stability, "PlotStep");
-            simData.useCOI = GetNodeValueInt(stability, "UseCOI");
+            simData.timeStep = XMLParser::GetNodeValueDouble(stability, "TimeStep");
+            simData.stabilitySimulationTime = XMLParser::GetNodeValueDouble(stability, "SimulationTime");
+            simData.stabilityFrequency = XMLParser::GetNodeValueDouble(stability, "Frequency");
+            simData.stabilityTolerance = XMLParser::GetNodeValueDouble(stability, "Tolerance");
+            simData.stabilityMaxIterations = XMLParser::GetNodeValueDouble(stability, "MaxIterations");
+            simData.controlTimeStepRatio = XMLParser::GetNodeValueInt(stability, "ControlStepRatio");
+            simData.plotTime = XMLParser::GetNodeValueDouble(stability, "PlotStep");
+            simData.useCOI = XMLParser::GetNodeValueInt(stability, "UseCOI");
 
             // ZIP load
             auto compLoads = simPropertiesNode->first_node("ZIPLoad");
-            simData.useCompLoads = GetNodeValueInt(compLoads, "UseCompositeLoad");
+            simData.useCompLoads = XMLParser::GetNodeValueInt(compLoads, "UseCompositeLoad");
             auto activePowerComp = compLoads->first_node("ActivePowerComposition");
-            simData.constImpedanceActive = GetNodeValueDouble(activePowerComp, "ConstantImpedance");
-            simData.constCurrentActive = GetNodeValueDouble(activePowerComp, "ConstantCurrent");
-            simData.constPowerActive = GetNodeValueDouble(activePowerComp, "ConstantPower");
+            simData.constImpedanceActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantImpedance");
+            simData.constCurrentActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantCurrent");
+            simData.constPowerActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantPower");
             auto reactivePowerComp = compLoads->first_node("ReactivePowerComposition");
-            simData.constImpedanceReactive = GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
-            simData.constCurrentReactive = GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
-            simData.constPowerReactive = GetNodeValueDouble(reactivePowerComp, "ConstantPower");
+            simData.constImpedanceReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
+            simData.constCurrentReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
+            simData.constPowerReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantPower");
             auto uvLimit = compLoads->first_node("UndervoltageLimit");
-            simData.underVoltageConstCurrent = GetNodeValueDouble(uvLimit, "ConstantCurrent");
-            simData.underVoltageConstPower = GetNodeValueDouble(uvLimit, "ConstantPower");
+            simData.underVoltageConstCurrent = XMLParser::GetNodeValueDouble(uvLimit, "ConstantCurrent");
+            simData.underVoltageConstPower = XMLParser::GetNodeValueDouble(uvLimit, "ConstantPower");
         }
     }
     // }
@@ -984,14 +986,14 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         Bus* bus = new Bus(wxPoint2DDouble(posX, posY));
 
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
         bus->SetWidth(width);
         bus->SetHeight(height);
         bus->SetPosition(bus->GetPosition());  // Update bus rectangle.
@@ -1008,25 +1010,27 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!electricalProp) return false;
 
         data.name = electricalProp->first_node("Name")->value();
-        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.isVoltageControlled = GetNodeValueInt(electricalProp, "IsVoltageControlled");
-        data.controlledVoltage = GetNodeValueDouble(electricalProp, "ControlledVoltage");
-        data.controlledVoltageUnitChoice = GetAttributeValueInt(electricalProp, "ControlledVoltage", "Choice");
-        data.slackBus = GetNodeValueInt(electricalProp, "SlackBus");
+        data.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
+        data.nominalVoltageUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        data.isVoltageControlled = XMLParser::GetNodeValueInt(electricalProp, "IsVoltageControlled");
+        data.controlledVoltage = XMLParser::GetNodeValueDouble(electricalProp, "ControlledVoltage");
+        data.controlledVoltageUnitChoice =
+            XMLParser::GetAttributeValueInt(electricalProp, "ControlledVoltage", "Choice");
+        data.slackBus = XMLParser::GetNodeValueInt(electricalProp, "SlackBus");
         auto fault = electricalProp->first_node("Fault");
-        data.hasFault = GetNodeValueInt(fault, "HasFault");
-        data.faultType = (FaultData)GetNodeValueInt(fault, "Type");
-        data.faultLocation = (FaultData)GetNodeValueInt(fault, "Location");
-        data.faultResistance = GetNodeValueDouble(fault, "Resistance");
-        data.faultReactance = GetNodeValueDouble(fault, "Reactance");
+        data.hasFault = XMLParser::GetNodeValueInt(fault, "HasFault");
+        data.faultType = (FaultData)XMLParser::GetNodeValueInt(fault, "Type");
+        data.faultLocation = (FaultData)XMLParser::GetNodeValueInt(fault, "Location");
+        data.faultResistance = XMLParser::GetNodeValueDouble(fault, "Resistance");
+        data.faultReactance = XMLParser::GetNodeValueDouble(fault, "Reactance");
         auto stability = electricalProp->first_node("Stability");
-        data.plotBus = GetNodeValueInt(stability, "Plot");
-        data.stabHasFault = GetNodeValueInt(stability, "HasFault");
-        data.stabFaultTime = GetNodeValueDouble(stability, "FaultTime");
-        data.stabFaultLength = GetNodeValueDouble(stability, "FaultLength");
-        data.stabFaultResistance = GetNodeValueDouble(stability, "FaultResistance");
-        data.stabFaultReactance = GetNodeValueDouble(stability, "FaultReactance");
+        data.plotBus = XMLParser::GetNodeValueInt(stability, "Plot");
+        data.stabHasFault = XMLParser::GetNodeValueInt(stability, "HasFault");
+        data.stabFaultTime = XMLParser::GetNodeValueDouble(stability, "FaultTime");
+        data.stabFaultLength = XMLParser::GetNodeValueDouble(stability, "FaultLength");
+        data.stabFaultResistance = XMLParser::GetNodeValueDouble(stability, "FaultResistance");
+        data.stabFaultReactance = XMLParser::GetNodeValueDouble(stability, "FaultReactance");
 
         bus->SetElectricalData(data);
 
@@ -1048,16 +1052,16 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
         auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
             // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
@@ -1086,19 +1090,20 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = capacitorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        capacitor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        capacitor->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         CapacitorElectricalData data = capacitor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
 
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
         auto swNode = switchingList->first_node("Switching");
         while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
             swNode = swNode->next_sibling("Switching");
         }
         capacitor->SetSwitchingData(swData);
@@ -1123,16 +1128,16 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
         auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
             // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
@@ -1161,13 +1166,14 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = indMotorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        indMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        indMotor->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         IndMotorElectricalData data = indMotor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
 
         indMotor->SetElectricalData(data);
         elementList.push_back(indMotor);
@@ -1186,16 +1192,16 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
         auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
             // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
@@ -1224,19 +1230,20 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = inductorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        inductor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        inductor->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         InductorElectricalData data = inductor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
 
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
         auto swNode = switchingList->first_node("Switching");
         while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
             swNode = swNode->next_sibling("Switching");
         }
         inductor->SetSwitchingData(swData);
@@ -1266,8 +1273,8 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!nodePosList) return false;
         auto nodePos = nodePosList->first_node("Node");
         while(nodePos) {
-            double nodePosX = GetNodeValueDouble(nodePos, "X");
-            double nodePosY = GetNodeValueDouble(nodePos, "Y");
+            double nodePosX = XMLParser::GetNodeValueDouble(nodePos, "X");
+            double nodePosY = XMLParser::GetNodeValueDouble(nodePos, "Y");
             ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
             nodePos = nodePos->next_sibling("Node");
         }
@@ -1320,34 +1327,38 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = lineNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        line->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        line->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         LineElectricalData data = line->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        data.resistance = GetNodeValueDouble(electricalProp, "Resistance");
-        data.resistanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
-        data.indReactance = GetNodeValueDouble(electricalProp, "IndReactance");
-        data.indReactanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
-        data.capSusceptance = GetNodeValueDouble(electricalProp, "CapSusceptance");
-        data.capSusceptanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "CapSusceptance", "UnitID");
-        data.lineSize = GetNodeValueDouble(electricalProp, "LineSize");
-        data.useLinePower = GetNodeValueInt(electricalProp, "UseLinePower");
+        data.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
+        data.nominalVoltageUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        data.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        data.resistance = XMLParser::GetNodeValueDouble(electricalProp, "Resistance");
+        data.resistanceUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
+        data.indReactance = XMLParser::GetNodeValueDouble(electricalProp, "IndReactance");
+        data.indReactanceUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
+        data.capSusceptance = XMLParser::GetNodeValueDouble(electricalProp, "CapSusceptance");
+        data.capSusceptanceUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "CapSusceptance", "UnitID");
+        data.lineSize = XMLParser::GetNodeValueDouble(electricalProp, "LineSize");
+        data.useLinePower = XMLParser::GetNodeValueInt(electricalProp, "UseLinePower");
 
         auto fault = electricalProp->first_node("Fault");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
-        data.zeroCapSusceptance = GetNodeValueDouble(fault, "ZeroCapSusceptance");
+        data.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroIndReactance = XMLParser::GetNodeValueDouble(fault, "ZeroIndReactance");
+        data.zeroCapSusceptance = XMLParser::GetNodeValueDouble(fault, "ZeroCapSusceptance");
 
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
         auto swNode = switchingList->first_node("Switching");
         while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
             swNode = swNode->next_sibling("Switching");
         }
         line->SetSwitchingData(swData);
@@ -1372,16 +1383,16 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
         auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
             // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
@@ -1410,27 +1421,28 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = loadNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        load->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        load->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         LoadElectricalData data = load->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        data.loadType = (LoadType)GetNodeValueInt(electricalProp, "LoadType");
+        data.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.loadType = (LoadType)XMLParser::GetNodeValueInt(electricalProp, "LoadType");
         // Stability
         auto stability = electricalProp->first_node("Stability");
         if(stability) {
-            data.plotLoad = GetNodeValueInt(stability, "PlotLoad");
-            data.useCompLoad = GetNodeValueInt(stability, "UseCompositeLoad");
+            data.plotLoad = XMLParser::GetNodeValueInt(stability, "PlotLoad");
+            data.useCompLoad = XMLParser::GetNodeValueInt(stability, "UseCompositeLoad");
             auto activePowerComp = stability->first_node("ActivePowerComposition");
-            data.constImpedanceActive = GetNodeValueDouble(activePowerComp, "ConstantImpedance");
-            data.constCurrentActive = GetNodeValueDouble(activePowerComp, "ConstantCurrent");
-            data.constPowerActive = GetNodeValueDouble(activePowerComp, "ConstantPower");
+            data.constImpedanceActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantImpedance");
+            data.constCurrentActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantCurrent");
+            data.constPowerActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantPower");
             auto reactivePowerComp = stability->first_node("ReactivePowerComposition");
-            data.constImpedanceReactive = GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
-            data.constCurrentReactive = GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
-            data.constPowerReactive = GetNodeValueDouble(reactivePowerComp, "ConstantPower");
+            data.constImpedanceReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
+            data.constCurrentReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
+            data.constPowerReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantPower");
         }
 
         SwitchingData swData;
@@ -1438,8 +1450,8 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!switchingList) return false;
         auto swNode = switchingList->first_node("Switching");
         while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
             swNode = swNode->next_sibling("Switching");
         }
         load->SetSwitchingData(swData);
@@ -1464,16 +1476,16 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
         auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
             // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
@@ -1502,57 +1514,60 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = syncGeneratorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        syncGenerator->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        syncGenerator->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        data.haveMaxReactive = GetNodeValueInt(electricalProp, "HaveMaxReactive");
-        data.maxReactive = GetNodeValueDouble(electricalProp, "MaxReactive");
-        data.maxReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
-        data.haveMinReactive = GetNodeValueInt(electricalProp, "HaveMinReactive");
-        data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
-        data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
-        data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
+        data.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        data.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
+        data.nominalVoltageUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+        data.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.haveMaxReactive = XMLParser::GetNodeValueInt(electricalProp, "HaveMaxReactive");
+        data.maxReactive = XMLParser::GetNodeValueDouble(electricalProp, "MaxReactive");
+        data.maxReactiveUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
+        data.haveMinReactive = XMLParser::GetNodeValueInt(electricalProp, "HaveMinReactive");
+        data.minReactive = XMLParser::GetNodeValueDouble(electricalProp, "MinReactive");
+        data.minReactiveUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
+        data.useMachineBase = XMLParser::GetNodeValueInt(electricalProp, "UseMachineBase");
 
         auto fault = electricalProp->first_node("Fault");
         if(!fault) return false;
-        data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
-        data.positiveReactance = GetNodeValueDouble(fault, "PositiveReactance");
-        data.negativeResistance = GetNodeValueDouble(fault, "NegativeResistance");
-        data.negativeReactance = GetNodeValueDouble(fault, "NegativeReactance");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroReactance = GetNodeValueDouble(fault, "ZeroReactance");
-        data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
-        data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
-        data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
+        data.positiveResistance = XMLParser::GetNodeValueDouble(fault, "PositiveResistance");
+        data.positiveReactance = XMLParser::GetNodeValueDouble(fault, "PositiveReactance");
+        data.negativeResistance = XMLParser::GetNodeValueDouble(fault, "NegativeResistance");
+        data.negativeReactance = XMLParser::GetNodeValueDouble(fault, "NegativeReactance");
+        data.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroReactance = XMLParser::GetNodeValueDouble(fault, "ZeroReactance");
+        data.groundResistance = XMLParser::GetNodeValueDouble(fault, "GroundResistance");
+        data.groundReactance = XMLParser::GetNodeValueDouble(fault, "GroundReactance");
+        data.groundNeutral = XMLParser::GetNodeValueInt(fault, "GroundNeutral");
 
         auto stability = electricalProp->first_node("Stability");
         if(!stability) return false;
-        data.plotSyncMachine = GetNodeValueInt(stability, "PlotSyncMachine");
-        data.inertia = GetNodeValueDouble(stability, "Inertia");
-        data.damping = GetNodeValueDouble(stability, "Damping");
-        data.useAVR = GetNodeValueInt(stability, "UseAVR");
-        data.useSpeedGovernor = GetNodeValueInt(stability, "UseSpeedGovernor");
-        data.armResistance = GetNodeValueDouble(stability, "ArmResistance");
-        data.potierReactance = GetNodeValueDouble(stability, "PotierReactance");
-        data.satFactor = GetNodeValueDouble(stability, "SatFactor");
-        data.syncXd = GetNodeValueDouble(stability, "SyncXd");
-        data.syncXq = GetNodeValueDouble(stability, "SyncXq");
-        data.transXd = GetNodeValueDouble(stability, "TransXd");
-        data.transXq = GetNodeValueDouble(stability, "TransXq");
-        data.transTd0 = GetNodeValueDouble(stability, "TransTd0");
-        data.transTq0 = GetNodeValueDouble(stability, "TransTq0");
-        data.subXd = GetNodeValueDouble(stability, "SubXd");
-        data.subXq = GetNodeValueDouble(stability, "SubXq");
-        data.subTd0 = GetNodeValueDouble(stability, "SubTd0");
-        data.subTq0 = GetNodeValueDouble(stability, "SubTq0");
+        data.plotSyncMachine = XMLParser::GetNodeValueInt(stability, "PlotSyncMachine");
+        data.inertia = XMLParser::GetNodeValueDouble(stability, "Inertia");
+        data.damping = XMLParser::GetNodeValueDouble(stability, "Damping");
+        data.useAVR = XMLParser::GetNodeValueInt(stability, "UseAVR");
+        data.useSpeedGovernor = XMLParser::GetNodeValueInt(stability, "UseSpeedGovernor");
+        data.armResistance = XMLParser::GetNodeValueDouble(stability, "ArmResistance");
+        data.potierReactance = XMLParser::GetNodeValueDouble(stability, "PotierReactance");
+        data.satFactor = XMLParser::GetNodeValueDouble(stability, "SatFactor");
+        data.syncXd = XMLParser::GetNodeValueDouble(stability, "SyncXd");
+        data.syncXq = XMLParser::GetNodeValueDouble(stability, "SyncXq");
+        data.transXd = XMLParser::GetNodeValueDouble(stability, "TransXd");
+        data.transXq = XMLParser::GetNodeValueDouble(stability, "TransXq");
+        data.transTd0 = XMLParser::GetNodeValueDouble(stability, "TransTd0");
+        data.transTq0 = XMLParser::GetNodeValueDouble(stability, "TransTq0");
+        data.subXd = XMLParser::GetNodeValueDouble(stability, "SubXd");
+        data.subXq = XMLParser::GetNodeValueDouble(stability, "SubXq");
+        data.subTd0 = XMLParser::GetNodeValueDouble(stability, "SubTd0");
+        data.subTq0 = XMLParser::GetNodeValueDouble(stability, "SubTq0");
 
         auto avr = stability->first_node("AVR");
         if(!avr) return false;
@@ -1567,8 +1582,8 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!switchingList) return false;
         auto swNode = switchingList->first_node("Switching");
         while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
             swNode = swNode->next_sibling("Switching");
         }
         syncGenerator->SetSwitchingData(swData);
@@ -1593,16 +1608,16 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
         auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
         if(parentID == -1) {
             // If the element has no parent, create a temporary one, remove and delete.
             Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
@@ -1631,44 +1646,47 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = syncMotorNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        syncMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        syncMotor->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         SyncMotorElectricalData data = syncMotor->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        // data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        // data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        data.haveMaxReactive = GetNodeValueInt(electricalProp, "HaveMaxReactive");
-        data.maxReactive = GetNodeValueDouble(electricalProp, "MaxReactive");
-        data.maxReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
-        data.haveMinReactive = GetNodeValueInt(electricalProp, "HaveMinReactive");
-        data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
-        data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
-        data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
+        data.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        // data.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
+        // data.nominalVoltageUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage",
+        // "UnitID");
+        data.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
+        data.activePowerUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
+        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+        data.reactivePowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
+        data.haveMaxReactive = XMLParser::GetNodeValueInt(electricalProp, "HaveMaxReactive");
+        data.maxReactive = XMLParser::GetNodeValueDouble(electricalProp, "MaxReactive");
+        data.maxReactiveUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
+        data.haveMinReactive = XMLParser::GetNodeValueInt(electricalProp, "HaveMinReactive");
+        data.minReactive = XMLParser::GetNodeValueDouble(electricalProp, "MinReactive");
+        data.minReactiveUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
+        data.useMachineBase = XMLParser::GetNodeValueInt(electricalProp, "UseMachineBase");
 
         auto fault = electricalProp->first_node("Fault");
         if(!fault) return false;
-        data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
-        data.positiveReactance = GetNodeValueDouble(fault, "PositiveReactance");
-        data.negativeResistance = GetNodeValueDouble(fault, "NegativeResistance");
-        data.negativeReactance = GetNodeValueDouble(fault, "NegativeReactance");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroReactance = GetNodeValueDouble(fault, "ZeroReactance");
-        data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
-        data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
-        data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
+        data.positiveResistance = XMLParser::GetNodeValueDouble(fault, "PositiveResistance");
+        data.positiveReactance = XMLParser::GetNodeValueDouble(fault, "PositiveReactance");
+        data.negativeResistance = XMLParser::GetNodeValueDouble(fault, "NegativeResistance");
+        data.negativeReactance = XMLParser::GetNodeValueDouble(fault, "NegativeReactance");
+        data.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroReactance = XMLParser::GetNodeValueDouble(fault, "ZeroReactance");
+        data.groundResistance = XMLParser::GetNodeValueDouble(fault, "GroundResistance");
+        data.groundReactance = XMLParser::GetNodeValueDouble(fault, "GroundReactance");
+        data.groundNeutral = XMLParser::GetNodeValueInt(fault, "GroundNeutral");
 
         /*SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
         auto swNode = switchingList->first_node("Switching");
         while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
             swNode = swNode->next_sibling("Switching");
         }
         syncMotor->SetSwitchingData(swData);*/
@@ -1690,12 +1708,12 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
         // Get nodes points
         std::vector<wxPoint2DDouble> ptsList;
@@ -1703,8 +1721,8 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!nodePosList) return false;
         auto nodePos = nodePosList->first_node("Node");
         while(nodePos) {
-            double nodePosX = GetNodeValueDouble(nodePos, "X");
-            double nodePosY = GetNodeValueDouble(nodePos, "Y");
+            double nodePosX = XMLParser::GetNodeValueDouble(nodePos, "X");
+            double nodePosY = XMLParser::GetNodeValueDouble(nodePos, "Y");
             ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
             nodePos = nodePos->next_sibling("Node");
         }
@@ -1764,41 +1782,43 @@ bool FileHanding::OpenProject(wxFileName path)
         auto electricalProp = transfomerNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
 
-        transformer->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
+        transformer->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
         TransformerElectricalData data = transformer->GetElectricalData();
         data.name = electricalProp->first_node("Name")->value();
-        data.primaryNominalVoltage = GetNodeValueDouble(electricalProp, "PrimaryNominalVoltage");
+        data.primaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "PrimaryNominalVoltage");
         data.primaryNominalVoltageUnit =
-            (ElectricalUnit)GetAttributeValueInt(electricalProp, "PrimaryNominalVoltage", "UnitID");
-        data.secondaryNominalVoltage = GetNodeValueDouble(electricalProp, "SecondaryNominalVoltage");
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "PrimaryNominalVoltage", "UnitID");
+        data.secondaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "SecondaryNominalVoltage");
         data.secondaryNominalVoltageUnit =
-            (ElectricalUnit)GetAttributeValueInt(electricalProp, "SecondaryNominalVoltage", "UnitID");
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        data.resistance = GetNodeValueDouble(electricalProp, "Resistance");
-        data.resistanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
-        data.indReactance = GetNodeValueDouble(electricalProp, "IndReactance");
-        data.indReactanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
-        data.connection = (TransformerConnection)GetNodeValueInt(electricalProp, "Connection");
-        data.turnsRatio = GetNodeValueDouble(electricalProp, "TurnsRatio");
-        data.phaseShift = GetNodeValueDouble(electricalProp, "PhaseShift");
-        data.useTransformerPower = GetNodeValueInt(electricalProp, "UseTransfomerPower");
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "SecondaryNominalVoltage", "UnitID");
+        data.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, "NominalPower");
+        data.nominalPowerUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
+        data.resistance = XMLParser::GetNodeValueDouble(electricalProp, "Resistance");
+        data.resistanceUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
+        data.indReactance = XMLParser::GetNodeValueDouble(electricalProp, "IndReactance");
+        data.indReactanceUnit =
+            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
+        data.connection = (TransformerConnection)XMLParser::GetNodeValueInt(electricalProp, "Connection");
+        data.turnsRatio = XMLParser::GetNodeValueDouble(electricalProp, "TurnsRatio");
+        data.phaseShift = XMLParser::GetNodeValueDouble(electricalProp, "PhaseShift");
+        data.useTransformerPower = XMLParser::GetNodeValueInt(electricalProp, "UseTransfomerPower");
 
         auto fault = electricalProp->first_node("Fault");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
-        data.primaryGrndResistance = GetNodeValueDouble(fault, "PrimaryGrndResistance");
-        data.primaryGrndReactance = GetNodeValueDouble(fault, "PrimaryGrndReactance");
-        data.secondaryGrndResistance = GetNodeValueDouble(fault, "SecondaryGrndResistance");
-        data.secondaryGrndReactance = GetNodeValueDouble(fault, "SecondaryGrndReactance");
+        data.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
+        data.zeroIndReactance = XMLParser::GetNodeValueDouble(fault, "ZeroIndReactance");
+        data.primaryGrndResistance = XMLParser::GetNodeValueDouble(fault, "PrimaryGrndResistance");
+        data.primaryGrndReactance = XMLParser::GetNodeValueDouble(fault, "PrimaryGrndReactance");
+        data.secondaryGrndResistance = XMLParser::GetNodeValueDouble(fault, "SecondaryGrndResistance");
+        data.secondaryGrndReactance = XMLParser::GetNodeValueDouble(fault, "SecondaryGrndReactance");
 
         SwitchingData swData;
         auto switchingList = electricalProp->first_node("SwitchingList");
         if(!switchingList) return false;
         auto swNode = switchingList->first_node("Switching");
         while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
+            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
             swNode = swNode->next_sibling("Switching");
         }
         transformer->SetSwitchingData(swData);
@@ -1823,12 +1843,12 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!cadPropNode) return false;
 
         auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
+        double posX = XMLParser::GetNodeValueDouble(position, "X");
+        double posY = XMLParser::GetNodeValueDouble(position, "Y");
         auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        double width = XMLParser::GetNodeValueDouble(size, "Width");
+        double height = XMLParser::GetNodeValueDouble(size, "Height");
+        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
         Text* text = new Text(wxPoint2DDouble(posX, posY));
 
@@ -1838,13 +1858,13 @@ bool FileHanding::OpenProject(wxFileName path)
         auto textProperties = textNode->first_node("TextProperties");
         if(!textProperties) return false;
 
-        text->SetElementType((ElementType)GetNodeValueDouble(textProperties, "ElementType"));
-        text->SetDataType((DataType)GetNodeValueDouble(textProperties, "DataType"));
-        text->SetUnit((ElectricalUnit)GetNodeValueDouble(textProperties, "DataUnit"));
-        text->SetDirection(GetNodeValueDouble(textProperties, "Direction"));
-        text->SetDecimalPlaces(GetNodeValueDouble(textProperties, "DecimalPlaces"));
+        text->SetElementType((ElementType)XMLParser::GetNodeValueDouble(textProperties, "ElementType"));
+        text->SetDataType((DataType)XMLParser::GetNodeValueDouble(textProperties, "DataType"));
+        text->SetUnit((ElectricalUnit)XMLParser::GetNodeValueDouble(textProperties, "DataUnit"));
+        text->SetDirection(XMLParser::GetNodeValueDouble(textProperties, "Direction"));
+        text->SetDecimalPlaces(XMLParser::GetNodeValueDouble(textProperties, "DecimalPlaces"));
 
-        text->SetElementNumber(GetNodeValueInt(textProperties, "ElementNumber"));
+        text->SetElementNumber(XMLParser::GetNodeValueInt(textProperties, "ElementNumber"));
         switch(text->GetElementType()) {
             case TYPE_NONE:
                 break;
@@ -1922,10 +1942,10 @@ void FileHanding::SaveControl(wxFileName path)
     rapidxml::xml_node<>* rootNode = doc.allocate_node(rapidxml::node_element, "Control");
     doc.append_node(rootNode);
 
-    rapidxml::xml_node<>* projectNameNode = AppendNode(doc, rootNode, "Name");
-    SetNodeValue(doc, projectNameNode, path.GetName());
+    rapidxml::xml_node<>* projectNameNode = XMLParser::AppendNode(doc, rootNode, "Name");
+    XMLParser::SetNodeValue(doc, projectNameNode, path.GetName());
 
-    auto elementsNode = AppendNode(doc, rootNode, "ControlElements");
+    auto elementsNode = XMLParser::AppendNode(doc, rootNode, "ControlElements");
     SaveControlElements(doc, elementsNode);
     std::ofstream writeXML(path.GetFullPath());
     writeXML << doc;
@@ -1951,7 +1971,7 @@ bool FileHanding::OpenControl(wxFileName path,
     auto elementsNode = projectNode->first_node("ControlElements");
     if(!elementsNode) return false;
 
-    // auto elementsNode = AppendNode(doc, rootNode, "ControlElements");
+    // auto elementsNode = XMLParser::AppendNode(doc, rootNode, "ControlElements");
     ControlElementContainer* ctrlElementContainer = new ControlElementContainer();
     if(!OpenControlElements(doc, elementsNode, ctrlElementContainer)) return false;
     ctrlElementList = ctrlElementContainer->GetControlElementsList();
@@ -1969,393 +1989,363 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
     }
 
     //{ Constant
-    auto constsNode = AppendNode(doc, elementsNode, "ConstantList");
+    auto constsNode = XMLParser::AppendNode(doc, elementsNode, "ConstantList");
     auto constList = ctrlContainer->GetConstantList();
     for(auto it = constList.begin(), itEnd = constList.end(); it != itEnd; ++it) {
         Constant* constant = *it;
-        auto constNode = AppendNode(doc, constsNode, "Constant");
-        SetNodeAttribute(doc, constNode, "ID", constant->GetID());
-        auto cadProp = AppendNode(doc, constNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, constant->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, constant->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, constant->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, constant->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, constant->GetAngle());
+        auto constNode = XMLParser::AppendNode(doc, constsNode, "Constant");
+        XMLParser::SetNodeAttribute(doc, constNode, "ID", constant->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, constNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, constant->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, constant->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, constant->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, constant->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, constant->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, constNode, "NodeList");
-        SaveControlNodes(doc, nodeList, constant->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, constNode, "NodeList");
+        constant->SaveControlNodes(doc, nodeList, constant->GetNodeList());
 
         // Control properties
-        auto value = AppendNode(doc, constNode, "Value");
-        SetNodeValue(doc, value, constant->GetValue());
+        auto value = XMLParser::AppendNode(doc, constNode, "Value");
+        XMLParser::SetNodeValue(doc, value, constant->GetValue());
     }  //}
 
     //{ Exponential
-    auto expsNode = AppendNode(doc, elementsNode, "ExponentialList");
+    auto expsNode = XMLParser::AppendNode(doc, elementsNode, "ExponentialList");
     auto expList = ctrlContainer->GetExponentialList();
     for(auto it = expList.begin(), itEnd = expList.end(); it != itEnd; ++it) {
         Exponential* exponential = *it;
-        auto expNode = AppendNode(doc, expsNode, "Exponential");
-        SetNodeAttribute(doc, expNode, "ID", exponential->GetID());
-        auto cadProp = AppendNode(doc, expNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, exponential->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, exponential->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, exponential->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, exponential->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, exponential->GetAngle());
+        auto expNode = XMLParser::AppendNode(doc, expsNode, "Exponential");
+        XMLParser::SetNodeAttribute(doc, expNode, "ID", exponential->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, expNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, exponential->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, exponential->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, exponential->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, exponential->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, exponential->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, expNode, "NodeList");
-        SaveControlNodes(doc, nodeList, exponential->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, expNode, "NodeList");
+        exponential->SaveControlNodes(doc, nodeList, exponential->GetNodeList());
 
         // Control properties
         double a, b;
         exponential->GetValues(a, b);
-        auto value = AppendNode(doc, expNode, "Value");
-        auto aValue = AppendNode(doc, value, "A");
-        SetNodeValue(doc, aValue, a);
-        auto bValue = AppendNode(doc, value, "B");
-        SetNodeValue(doc, bValue, b);
+        auto value = XMLParser::AppendNode(doc, expNode, "Value");
+        auto aValue = XMLParser::AppendNode(doc, value, "A");
+        XMLParser::SetNodeValue(doc, aValue, a);
+        auto bValue = XMLParser::AppendNode(doc, value, "B");
+        XMLParser::SetNodeValue(doc, bValue, b);
     }  //}
 
     //{ Gain
-    auto gainsNode = AppendNode(doc, elementsNode, "GainList");
+    auto gainsNode = XMLParser::AppendNode(doc, elementsNode, "GainList");
     auto gainList = ctrlContainer->GetGainList();
     for(auto it = gainList.begin(), itEnd = gainList.end(); it != itEnd; ++it) {
         Gain* gain = *it;
-        auto gainNode = AppendNode(doc, gainsNode, "Gain");
-        SetNodeAttribute(doc, gainNode, "ID", gain->GetID());
-        auto cadProp = AppendNode(doc, gainNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, gain->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, gain->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, gain->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, gain->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, gain->GetAngle());
+        auto gainNode = XMLParser::AppendNode(doc, gainsNode, "Gain");
+        XMLParser::SetNodeAttribute(doc, gainNode, "ID", gain->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, gainNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, gain->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, gain->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, gain->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, gain->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, gain->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, gainNode, "NodeList");
-        SaveControlNodes(doc, nodeList, gain->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, gainNode, "NodeList");
+        gain->SaveControlNodes(doc, nodeList, gain->GetNodeList());
 
         // Control properties
-        auto value = AppendNode(doc, gainNode, "Value");
-        SetNodeValue(doc, value, gain->GetValue());
+        auto value = XMLParser::AppendNode(doc, gainNode, "Value");
+        XMLParser::SetNodeValue(doc, value, gain->GetValue());
     }  //}
 
     //{ IO
-    auto iosNode = AppendNode(doc, elementsNode, "IOList");
+    auto iosNode = XMLParser::AppendNode(doc, elementsNode, "IOList");
     auto ioList = ctrlContainer->GetIOControlList();
     for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
         IOControl* io = *it;
-        auto ioNode = AppendNode(doc, iosNode, "IO");
-        SetNodeAttribute(doc, ioNode, "ID", io->GetID());
-        auto cadProp = AppendNode(doc, ioNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, io->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, io->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, io->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, io->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, io->GetAngle());
+        auto ioNode = XMLParser::AppendNode(doc, iosNode, "IO");
+        XMLParser::SetNodeAttribute(doc, ioNode, "ID", io->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, ioNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, io->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, io->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, io->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, io->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, io->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, ioNode, "NodeList");
-        SaveControlNodes(doc, nodeList, io->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, ioNode, "NodeList");
+        io->SaveControlNodes(doc, nodeList, io->GetNodeList());
 
         // Control properties
-        auto value = AppendNode(doc, ioNode, "Value");
-        SetNodeValue(doc, value, io->GetValue());
-        auto ioFlags = AppendNode(doc, ioNode, "IOFlags");
-        SetNodeValue(doc, ioFlags, io->GetIOFlags());
+        auto value = XMLParser::AppendNode(doc, ioNode, "Value");
+        XMLParser::SetNodeValue(doc, value, io->GetValue());
+        auto ioFlags = XMLParser::AppendNode(doc, ioNode, "IOFlags");
+        XMLParser::SetNodeValue(doc, ioFlags, io->GetIOFlags());
     }  //}
 
     //{ Limiter
-    auto limitersNode = AppendNode(doc, elementsNode, "LimiterList");
+    auto limitersNode = XMLParser::AppendNode(doc, elementsNode, "LimiterList");
     auto limiterList = ctrlContainer->GetLimiterList();
     for(auto it = limiterList.begin(), itEnd = limiterList.end(); it != itEnd; ++it) {
         Limiter* limiter = *it;
-        auto limiterNode = AppendNode(doc, limitersNode, "Limiter");
-        SetNodeAttribute(doc, limiterNode, "ID", limiter->GetID());
-        auto cadProp = AppendNode(doc, limiterNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, limiter->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, limiter->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, limiter->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, limiter->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, limiter->GetAngle());
+        auto limiterNode = XMLParser::AppendNode(doc, limitersNode, "Limiter");
+        XMLParser::SetNodeAttribute(doc, limiterNode, "ID", limiter->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, limiterNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, limiter->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, limiter->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, limiter->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, limiter->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, limiter->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, limiterNode, "NodeList");
-        SaveControlNodes(doc, nodeList, limiter->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, limiterNode, "NodeList");
+        limiter->SaveControlNodes(doc, nodeList, limiter->GetNodeList());
 
         // Control properties
-        auto upLimit = AppendNode(doc, limiterNode, "UpperLimit");
-        SetNodeValue(doc, upLimit, limiter->GetUpLimit());
-        auto lowLimit = AppendNode(doc, limiterNode, "LowerLimit");
-        SetNodeValue(doc, lowLimit, limiter->GetLowLimit());
+        auto upLimit = XMLParser::AppendNode(doc, limiterNode, "UpperLimit");
+        XMLParser::SetNodeValue(doc, upLimit, limiter->GetUpLimit());
+        auto lowLimit = XMLParser::AppendNode(doc, limiterNode, "LowerLimit");
+        XMLParser::SetNodeValue(doc, lowLimit, limiter->GetLowLimit());
     }  //}
 
     //{ Multiplier
-    auto multipliersNode = AppendNode(doc, elementsNode, "MultiplierList");
+    auto multipliersNode = XMLParser::AppendNode(doc, elementsNode, "MultiplierList");
     auto multiplierList = ctrlContainer->GetMultiplierList();
     for(auto it = multiplierList.begin(), itEnd = multiplierList.end(); it != itEnd; ++it) {
         Multiplier* multiplier = *it;
-        auto multiplierNode = AppendNode(doc, multipliersNode, "Multiplier");
-        SetNodeAttribute(doc, multiplierNode, "ID", multiplier->GetID());
-        auto cadProp = AppendNode(doc, multiplierNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, multiplier->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, multiplier->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, multiplier->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, multiplier->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, multiplier->GetAngle());
+        auto multiplierNode = XMLParser::AppendNode(doc, multipliersNode, "Multiplier");
+        XMLParser::SetNodeAttribute(doc, multiplierNode, "ID", multiplier->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, multiplierNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, multiplier->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, multiplier->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, multiplier->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, multiplier->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, multiplier->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, multiplierNode, "NodeList");
-        SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, multiplierNode, "NodeList");
+        multiplier->SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
     }  //}
 
     //{ Divider
-    auto dividersNode = AppendNode(doc, elementsNode, "DividerList");
+    auto dividersNode = XMLParser::AppendNode(doc, elementsNode, "DividerList");
     auto dividersList = ctrlContainer->GetDividerList();
     for(auto it = dividersList.begin(), itEnd = dividersList.end(); it != itEnd; ++it) {
         Divider* divider = *it;
-        auto dividerNode = AppendNode(doc, dividersNode, "Divider");
-        SetNodeAttribute(doc, dividerNode, "ID", divider->GetID());
-        auto cadProp = AppendNode(doc, dividerNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, divider->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, divider->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, divider->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, divider->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, divider->GetAngle());
+        auto dividerNode = XMLParser::AppendNode(doc, dividersNode, "Divider");
+        XMLParser::SetNodeAttribute(doc, dividerNode, "ID", divider->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, dividerNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, divider->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, divider->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, divider->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, divider->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, divider->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, dividerNode, "NodeList");
-        SaveControlNodes(doc, nodeList, divider->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, dividerNode, "NodeList");
+        divider->SaveControlNodes(doc, nodeList, divider->GetNodeList());
     }  //}
 
     //{ Rate limiter
-    auto rateLimitersNode = AppendNode(doc, elementsNode, "RateLimiterList");
+    auto rateLimitersNode = XMLParser::AppendNode(doc, elementsNode, "RateLimiterList");
     auto rateLimiterList = ctrlContainer->GetRateLimiterList();
     for(auto it = rateLimiterList.begin(), itEnd = rateLimiterList.end(); it != itEnd; ++it) {
         RateLimiter* rateLimiter = *it;
-        auto rateLimiterNode = AppendNode(doc, rateLimitersNode, "RateLimiter");
-        SetNodeAttribute(doc, rateLimiterNode, "ID", rateLimiter->GetID());
-        auto cadProp = AppendNode(doc, rateLimiterNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, rateLimiter->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, rateLimiter->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, rateLimiter->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, rateLimiter->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, rateLimiter->GetAngle());
+        auto rateLimiterNode = XMLParser::AppendNode(doc, rateLimitersNode, "RateLimiter");
+        XMLParser::SetNodeAttribute(doc, rateLimiterNode, "ID", rateLimiter->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, rateLimiterNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, rateLimiter->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, rateLimiter->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, rateLimiter->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, rateLimiter->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, rateLimiter->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, rateLimiterNode, "NodeList");
-        SaveControlNodes(doc, nodeList, rateLimiter->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, rateLimiterNode, "NodeList");
+        rateLimiter->SaveControlNodes(doc, nodeList, rateLimiter->GetNodeList());
 
         // Control properties
-        auto upLimit = AppendNode(doc, rateLimiterNode, "UpperLimit");
-        SetNodeValue(doc, upLimit, rateLimiter->GetUpLimit());
-        auto lowLimit = AppendNode(doc, rateLimiterNode, "LowerLimit");
-        SetNodeValue(doc, lowLimit, rateLimiter->GetLowLimit());
+        auto upLimit = XMLParser::AppendNode(doc, rateLimiterNode, "UpperLimit");
+        XMLParser::SetNodeValue(doc, upLimit, rateLimiter->GetUpLimit());
+        auto lowLimit = XMLParser::AppendNode(doc, rateLimiterNode, "LowerLimit");
+        XMLParser::SetNodeValue(doc, lowLimit, rateLimiter->GetLowLimit());
     }  //}
 
     //{ Sum
-    auto sumsNode = AppendNode(doc, elementsNode, "SumList");
+    auto sumsNode = XMLParser::AppendNode(doc, elementsNode, "SumList");
     auto sumList = ctrlContainer->GetSumList();
     for(auto it = sumList.begin(), itEnd = sumList.end(); it != itEnd; ++it) {
         Sum* sum = *it;
-        auto sumNode = AppendNode(doc, sumsNode, "Sum");
-        SetNodeAttribute(doc, sumNode, "ID", sum->GetID());
-        auto cadProp = AppendNode(doc, sumNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, sum->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, sum->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, sum->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, sum->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, sum->GetAngle());
+        auto sumNode = XMLParser::AppendNode(doc, sumsNode, "Sum");
+        XMLParser::SetNodeAttribute(doc, sumNode, "ID", sum->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, sumNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, sum->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, sum->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, sum->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, sum->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, sum->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, sumNode, "NodeList");
-        SaveControlNodes(doc, nodeList, sum->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, sumNode, "NodeList");
+        sum->SaveControlNodes(doc, nodeList, sum->GetNodeList());
 
         // Control properties
-        auto signsNode = AppendNode(doc, sumNode, "Signs");
+        auto signsNode = XMLParser::AppendNode(doc, sumNode, "Signs");
         auto signs = sum->GetSignalList();
         for(int i = 0; i < (int)signs.size(); ++i) {
-            auto value = AppendNode(doc, signsNode, "Value");
-            SetNodeValue(doc, value, static_cast<int>(signs[i]));
+            auto value = XMLParser::AppendNode(doc, signsNode, "Value");
+            XMLParser::SetNodeValue(doc, value, static_cast<int>(signs[i]));
         }
 
     }  //}
-    
+
     //{ Math expression
-    auto mathExprsNode = AppendNode(doc, elementsNode, "MathExprList");
+    auto mathExprsNode = XMLParser::AppendNode(doc, elementsNode, "MathExprList");
     auto mathExprList = ctrlContainer->GetMathExprList();
     for(auto it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {
-        MathExpression* mathExpr = *it;
-        auto mathExprNode = AppendNode(doc, mathExprsNode, "MathExpr");
-        SetNodeAttribute(doc, mathExprNode, "ID", mathExpr->GetID());
-        auto cadProp = AppendNode(doc, mathExprNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, mathExpr->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, mathExpr->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, mathExpr->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, mathExpr->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, mathExpr->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, mathExprNode, "NodeList");
-        SaveControlNodes(doc, nodeList, mathExpr->GetNodeList());
-
-        // Control properties
-        auto variablesNode = AppendNode(doc, mathExprNode, "VariableList");
-        auto variables = mathExpr->GetVariables();
-        for(unsigned int i = 0; i < variables.size(); ++i) {
-            auto variable = AppendNode(doc, variablesNode, "Variable");
-            SetNodeValue(doc, variable, variables[i]);
-        }
-        auto mathExprValue = AppendNode(doc, mathExprNode, "MathExprValue");
-        SetNodeValue(doc, mathExprValue, mathExpr->GetMathExpression());
-
+        (*it)->SaveElement(doc, mathExprsNode);
     }  //}
 
     //{ Transfer function
-    auto tfsNode = AppendNode(doc, elementsNode, "TransferFunctionList");
+    auto tfsNode = XMLParser::AppendNode(doc, elementsNode, "TransferFunctionList");
     auto tfList = ctrlContainer->GetTFList();
     for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
         TransferFunction* tf = *it;
-        auto tfNode = AppendNode(doc, tfsNode, "TransferFunction");
-        SetNodeAttribute(doc, tfNode, "ID", tf->GetID());
-        auto cadProp = AppendNode(doc, tfNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, tf->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, tf->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, tf->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, tf->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, tf->GetAngle());
+        auto tfNode = XMLParser::AppendNode(doc, tfsNode, "TransferFunction");
+        XMLParser::SetNodeAttribute(doc, tfNode, "ID", tf->GetID());
+        auto cadProp = XMLParser::AppendNode(doc, tfNode, "CADProperties");
+        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+        auto posX = XMLParser::AppendNode(doc, position, "X");
+        XMLParser::SetNodeValue(doc, posX, tf->GetPosition().m_x);
+        auto posY = XMLParser::AppendNode(doc, position, "Y");
+        XMLParser::SetNodeValue(doc, posY, tf->GetPosition().m_y);
+        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+        auto width = XMLParser::AppendNode(doc, size, "Width");
+        XMLParser::SetNodeValue(doc, width, tf->GetWidth());
+        auto height = XMLParser::AppendNode(doc, size, "Height");
+        XMLParser::SetNodeValue(doc, height, tf->GetHeight());
+        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+        XMLParser::SetNodeValue(doc, angle, tf->GetAngle());
 
         // Nodes
-        auto nodeList = AppendNode(doc, tfNode, "NodeList");
-        SaveControlNodes(doc, nodeList, tf->GetNodeList());
+        auto nodeList = XMLParser::AppendNode(doc, tfNode, "NodeList");
+        tf->SaveControlNodes(doc, nodeList, tf->GetNodeList());
 
         // Control properties
-        auto numeratorNode = AppendNode(doc, tfNode, "Numerator");
+        auto numeratorNode = XMLParser::AppendNode(doc, tfNode, "Numerator");
         auto numerator = tf->GetNumerator();
         for(int i = 0; i < (int)numerator.size(); ++i) {
-            auto value = AppendNode(doc, numeratorNode, "Value");
-            SetNodeValue(doc, value, numerator[i]);
+            auto value = XMLParser::AppendNode(doc, numeratorNode, "Value");
+            XMLParser::SetNodeValue(doc, value, numerator[i]);
         }
-        auto denominatorNode = AppendNode(doc, tfNode, "Denominator");
+        auto denominatorNode = XMLParser::AppendNode(doc, tfNode, "Denominator");
         auto denominator = tf->GetDenominator();
         for(int i = 0; i < (int)denominator.size(); ++i) {
-            auto value = AppendNode(doc, denominatorNode, "Value");
-            SetNodeValue(doc, value, denominator[i]);
+            auto value = XMLParser::AppendNode(doc, denominatorNode, "Value");
+            XMLParser::SetNodeValue(doc, value, denominator[i]);
         }
     }  //}
 
     //{ Connection line
-    auto cLinesNode = AppendNode(doc, elementsNode, "ConnectionList");
+    auto cLinesNode = XMLParser::AppendNode(doc, elementsNode, "ConnectionList");
     auto connLineList = ctrlContainer->GetConnectionLineList();
     for(auto it = connLineList.begin(), itEnd = connLineList.end(); it != itEnd; ++it) {
         ConnectionLine* cLine = *it;
-        auto cLineNode = AppendNode(doc, cLinesNode, "Connection");
-        SetNodeAttribute(doc, cLineNode, "ID", cLine->GetID());
+        auto cLineNode = XMLParser::AppendNode(doc, cLinesNode, "Connection");
+        XMLParser::SetNodeAttribute(doc, cLineNode, "ID", cLine->GetID());
 
         // CAD properties
-        auto cadProp = AppendNode(doc, cLineNode, "CADProperties");
-        auto offset = AppendNode(doc, cadProp, "Offset");
-        SetNodeValue(doc, offset, cLine->GetOffset());
+        auto cadProp = XMLParser::AppendNode(doc, cLineNode, "CADProperties");
+        auto offset = XMLParser::AppendNode(doc, cadProp, "Offset");
+        XMLParser::SetNodeValue(doc, offset, cLine->GetOffset());
 
         // Parent list
-        auto parentsNode = AppendNode(doc, cLineNode, "ParentList");
+        auto parentsNode = XMLParser::AppendNode(doc, cLineNode, "ParentList");
         auto parentList = cLine->GetParentList();
         int nodeIndex = 0;
         for(auto itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {
             Element* parent = *itP;
-            auto parentNode = AppendNode(doc, parentsNode, "Parent");
-            auto elementID = AppendNode(doc, parentNode, "ElementID");
-            SetNodeValue(doc, elementID, parent->GetID());
-            auto nodeID = AppendNode(doc, parentNode, "NodeID");
-            SetNodeValue(doc, nodeID, cLine->GetNodeList()[nodeIndex]->GetID());
+            auto parentNode = XMLParser::AppendNode(doc, parentsNode, "Parent");
+            auto elementID = XMLParser::AppendNode(doc, parentNode, "ElementID");
+            XMLParser::SetNodeValue(doc, elementID, parent->GetID());
+            auto nodeID = XMLParser::AppendNode(doc, parentNode, "NodeID");
+            XMLParser::SetNodeValue(doc, nodeID, cLine->GetNodeList()[nodeIndex]->GetID());
             nodeIndex++;
         }
 
-        auto parentLine = AppendNode(doc, cLineNode, "ParentLine");
+        auto parentLine = XMLParser::AppendNode(doc, cLineNode, "ParentLine");
         if(cLine->GetParentLine()) {
             ConnectionLine* parent = cLine->GetParentLine();
-            SetNodeAttribute(doc, parentLine, "ID", parent->GetID());
+            XMLParser::SetNodeAttribute(doc, parentLine, "ID", parent->GetID());
         } else {
-            SetNodeAttribute(doc, parentLine, "ID", -1);
+            XMLParser::SetNodeAttribute(doc, parentLine, "ID", -1);
         }
     }  //}
 }
@@ -2372,21 +2362,21 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(constListNode) {
         auto constNode = constListNode->first_node("Constant");
         while(constNode) {
-            int id = GetAttributeValueInt(constNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(constNode, "ID");
             Constant* constant = new Constant(id);
 
             auto cadPropNode = constNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
-            double value = GetNodeValueDouble(constNode, "Value");
+            double value = XMLParser::GetNodeValueDouble(constNode, "Value");
 
             constant->SetWidth(width);
             constant->SetHeight(height);
@@ -2397,7 +2387,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             constant->SetValue(value);
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(constNode, nodeVector)) return false;
+            if(!constant->OpenControlNodeList(constNode, nodeVector)) return false;
 
             constant->SetNodeList(nodeVector);
             constant->UpdatePoints();
@@ -2413,23 +2403,23 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(expListNode) {
         auto expNode = expListNode->first_node("Exponential");
         while(expNode) {
-            int id = GetAttributeValueInt(expNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(expNode, "ID");
             Exponential* exponential = new Exponential(id);
 
             auto cadPropNode = expNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
             auto value = expNode->first_node("Value");
-            double a = GetNodeValueDouble(value, "A");
-            double b = GetNodeValueDouble(value, "B");
+            double a = XMLParser::GetNodeValueDouble(value, "A");
+            double b = XMLParser::GetNodeValueDouble(value, "B");
 
             exponential->SetWidth(width);
             exponential->SetHeight(height);
@@ -2440,7 +2430,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             exponential->SetValues(a, b);
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(expNode, nodeVector)) return false;
+            if(!exponential->OpenControlNodeList(expNode, nodeVector)) return false;
 
             exponential->SetNodeList(nodeVector);
             exponential->UpdatePoints();
@@ -2456,21 +2446,21 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(gainListNode) {
         auto gainNode = gainListNode->first_node("Gain");
         while(gainNode) {
-            int id = GetAttributeValueInt(gainNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(gainNode, "ID");
             Gain* gain = new Gain(id);
 
             auto cadPropNode = gainNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
-            double value = GetNodeValueDouble(gainNode, "Value");
+            double value = XMLParser::GetNodeValueDouble(gainNode, "Value");
 
             gain->SetWidth(width);
             gain->SetHeight(height);
@@ -2480,7 +2470,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             gain->StartMove(gain->GetPosition());
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(gainNode, nodeVector)) return false;
+            if(!gain->OpenControlNodeList(gainNode, nodeVector)) return false;
 
             gain->SetNodeList(nodeVector);
             gain->UpdatePoints();
@@ -2496,26 +2486,26 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(ioListNode) {
         auto ioNode = ioListNode->first_node("IO");
         while(ioNode) {
-            int id = GetAttributeValueInt(ioNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(ioNode, "ID");
 
             auto cadPropNode = ioNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(ioNode, nodeVector)) return false;
-
-            IOControl::IOFlags value = static_cast<IOControl::IOFlags>(GetNodeValueInt(ioNode, "Value"));
-            int ioFlags = GetNodeValueInt(ioNode, "IOFlags");
+            IOControl::IOFlags value = static_cast<IOControl::IOFlags>(XMLParser::GetNodeValueInt(ioNode, "Value"));
+            int ioFlags = XMLParser::GetNodeValueInt(ioNode, "IOFlags");
 
             IOControl* io = new IOControl(ioFlags, id);
+
+            std::vector<Node*> nodeVector;
+            if(!io->OpenControlNodeList(ioNode, nodeVector)) return false;
 
             io->SetWidth(width);
             io->SetHeight(height);
@@ -2537,25 +2527,25 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(limiterListNode) {
         auto limiterNode = limiterListNode->first_node("Limiter");
         while(limiterNode) {
-            int id = GetAttributeValueInt(limiterNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(limiterNode, "ID");
             Limiter* limiter = new Limiter(id);
 
             auto cadPropNode = limiterNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
-            double upLimit = GetNodeValueDouble(limiterNode, "UpperLimit");
-            double lowLimit = GetNodeValueDouble(limiterNode, "LowerLimit");
+            double upLimit = XMLParser::GetNodeValueDouble(limiterNode, "UpperLimit");
+            double lowLimit = XMLParser::GetNodeValueDouble(limiterNode, "LowerLimit");
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(limiterNode, nodeVector)) return false;
+            if(!limiter->OpenControlNodeList(limiterNode, nodeVector)) return false;
 
             limiter->SetWidth(width);
             limiter->SetHeight(height);
@@ -2579,22 +2569,22 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(multiplierListNode) {
         auto multiplierNode = multiplierListNode->first_node("Multiplier");
         while(multiplierNode) {
-            int id = GetAttributeValueInt(multiplierNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(multiplierNode, "ID");
             Multiplier* multiplier = new Multiplier(id);
 
             auto cadPropNode = multiplierNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(multiplierNode, nodeVector)) return false;
+            if(!multiplier->OpenControlNodeList(multiplierNode, nodeVector)) return false;
 
             multiplier->SetWidth(width);
             multiplier->SetHeight(height);
@@ -2616,22 +2606,22 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(dividerListNode) {
         auto dividerNode = dividerListNode->first_node("Divider");
         while(dividerNode) {
-            int id = GetAttributeValueInt(dividerNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(dividerNode, "ID");
             Divider* divider = new Divider(id);
 
             auto cadPropNode = dividerNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(dividerNode, nodeVector)) return false;
+            if(!divider->OpenControlNodeList(dividerNode, nodeVector)) return false;
 
             divider->SetWidth(width);
             divider->SetHeight(height);
@@ -2653,25 +2643,25 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(rateLimiterListNode) {
         auto rateLimiterNode = rateLimiterListNode->first_node("RateLimiter");
         while(rateLimiterNode) {
-            int id = GetAttributeValueInt(rateLimiterNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(rateLimiterNode, "ID");
             RateLimiter* limiter = new RateLimiter(id);
 
             auto cadPropNode = rateLimiterNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
-            double upLimit = GetNodeValueDouble(rateLimiterNode, "UpperLimit");
-            double lowLimit = GetNodeValueDouble(rateLimiterNode, "LowerLimit");
+            double upLimit = XMLParser::GetNodeValueDouble(rateLimiterNode, "UpperLimit");
+            double lowLimit = XMLParser::GetNodeValueDouble(rateLimiterNode, "LowerLimit");
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(rateLimiterNode, nodeVector)) return false;
+            if(!limiter->OpenControlNodeList(rateLimiterNode, nodeVector)) return false;
 
             limiter->SetWidth(width);
             limiter->SetHeight(height);
@@ -2695,91 +2685,26 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(sumListNode) {
         auto sumNode = sumListNode->first_node("Sum");
         while(sumNode) {
-            int id = GetAttributeValueInt(sumNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(sumNode, "ID");
             Sum* sum = new Sum(id);
 
-            auto cadPropNode = sumNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<Sum::Signal> signs;
-            auto signsNode = sumNode->first_node("Signs");
-            auto sign = signsNode->first_node("Value");
-            while(sign) {
-                long value;
-                wxString(sign->value()).ToCLong(&value);
-                signs.push_back(static_cast<Sum::Signal>(value));
-                sign = sign->next_sibling("Value");
-            }
-            sum->SetSignalList(signs);
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(sumNode, nodeVector)) return false;
-
-            sum->SetWidth(width);
-            sum->SetHeight(height);
-            sum->SetAngle(angle);
-            sum->SetPosition(wxPoint2DDouble(posX, posY));
-
-            sum->StartMove(sum->GetPosition());
-            sum->SetNodeList(nodeVector);
-            sum->UpdatePoints();
+            if(!sum->OpenElement(sumNode)) return false;
             elementList.push_back(sum);
 
             sumNode = sumNode->next_sibling("Sum");
         }
     }
     //}
-    
+
     //{ Math expression
     auto mathListNode = elementsNode->first_node("MathExprList");
     if(mathListNode) {
         auto mathExprNode = mathListNode->first_node("MathExpr");
         while(mathExprNode) {
-            int id = GetAttributeValueInt(mathExprNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(mathExprNode, "ID");
             MathExpression* mathExpr = new MathExpression(id);
 
-            auto cadPropNode = mathExprNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<wxString> variables;
-            auto variablesNode = mathExprNode->first_node("VariableList");
-            auto variable = variablesNode->first_node("Variable");
-            while(variable) {
-                variables.push_back(variable->value());
-                variable = variable->next_sibling("Variable");
-            }
-            mathExpr->SetVariables(variables);
-            
-            auto mathExprValueNode = mathExprNode->first_node("MathExprValue");
-            mathExpr->SetMathExpression(mathExprValueNode->value());
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(mathExprNode, nodeVector)) return false;
-
-            mathExpr->SetWidth(width);
-            mathExpr->SetHeight(height);
-            mathExpr->SetAngle(angle);
-            mathExpr->SetPosition(wxPoint2DDouble(posX, posY));
-
-            mathExpr->StartMove(mathExpr->GetPosition());
-            mathExpr->SetNodeList(nodeVector);
-            mathExpr->UpdatePoints();
+            if(!mathExpr->OpenElement(mathExprNode)) return false;
             elementList.push_back(mathExpr);
 
             mathExprNode = mathExprNode->next_sibling("MathExpr");
@@ -2792,19 +2717,19 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(tfListNode) {
         auto tfNode = tfListNode->first_node("TransferFunction");
         while(tfNode) {
-            int id = GetAttributeValueInt(tfNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(tfNode, "ID");
             TransferFunction* tf = new TransferFunction(id);
 
             auto cadPropNode = tfNode->first_node("CADProperties");
             if(!cadPropNode) return false;
 
             auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
+            double posX = XMLParser::GetNodeValueDouble(position, "X");
+            double posY = XMLParser::GetNodeValueDouble(position, "Y");
             auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
+            double width = XMLParser::GetNodeValueDouble(size, "Width");
+            double height = XMLParser::GetNodeValueDouble(size, "Height");
+            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
 
             std::vector<double> numerator, denominator;
             auto numeratorNode = tfNode->first_node("Numerator");
@@ -2825,7 +2750,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             }
 
             std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(tfNode, nodeVector)) return false;
+            if(!tf->OpenControlNodeList(tfNode, nodeVector)) return false;
 
             tf->SetWidth(width);
             tf->SetHeight(height);
@@ -2853,11 +2778,11 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         auto connNode = connectionListNode->first_node("Connection");
         while(connNode) {
             ConnectionLine* cLine = NULL;
-            int id = GetAttributeValueInt(connNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(connNode, "ID");
 
             auto cadPropNode = connNode->first_node("CADProperties");
             if(!cadPropNode) return false;
-            double offset = GetNodeValueDouble(cadPropNode, "Offset");
+            double offset = XMLParser::GetNodeValueDouble(cadPropNode, "Offset");
 
             auto parentList = connNode->first_node("ParentList");
             if(!parentList) return false;
@@ -2865,10 +2790,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             auto parentNode = parentList->first_node("Parent");
             bool firstNode = true;
             while(parentNode) {
-                int elementID = GetNodeValueInt(parentNode, "ElementID");
-                int nodeID = GetNodeValueInt(parentNode, "NodeID");
+                int elementID = XMLParser::GetNodeValueInt(parentNode, "ElementID");
+                int nodeID = XMLParser::GetNodeValueInt(parentNode, "NodeID");
 
-                ControlElement* element = GetControlElementFromID(elementList, elementID);
+                ControlElement* element = ControlElement::GetControlElementFromID(elementList, elementID);
                 Node* node = element->GetNodeList()[nodeID];
 
                 if(firstNode) cLine = new ConnectionLine(node, id);
@@ -2882,7 +2807,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 
             auto parentLine = connNode->first_node("ParentLine");
             if(!parentLine) return false;
-            int parentLineID = GetAttributeValueInt(parentLine, "ID");
+            int parentLineID = XMLParser::GetAttributeValueInt(parentLine, "ID");
             if(parentLineID != -1) {
                 for(auto it = connectionList.begin(), itEnd = connectionList.end(); it != itEnd; ++it) {
                     ConnectionLine* parent = *it;
@@ -2898,152 +2823,8 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             connectionList.push_back(cLine);
             connNode = connNode->next_sibling("Connection");
         }
-    } //}
-    
+    }  //}
+
     ctrlContainer->FillContainer(elementList, connectionList);
     return true;
-}
-
-void FileHanding::SaveControlNodes(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* nodesN,
-                                   std::vector<Node*> nodeList)
-{
-    int id = 0;
-    for(auto it = nodeList.begin(), itEnd = nodeList.end(); it != itEnd; ++it) {
-        Node* node = *it;
-        node->SetID(id);
-        auto nodeN = AppendNode(doc, nodesN, "Node");
-        SetNodeAttribute(doc, nodeN, "ID", id);
-        auto nodePosition = AppendNode(doc, nodeN, "Position");
-        auto posNodeX = AppendNode(doc, nodePosition, "X");
-        SetNodeValue(doc, posNodeX, node->GetPosition().m_x);
-        auto posNodeY = AppendNode(doc, nodePosition, "Y");
-        SetNodeValue(doc, posNodeY, node->GetPosition().m_y);
-        auto angle = AppendNode(doc, nodeN, "Angle");
-        SetNodeValue(doc, angle, node->GetAngle());
-        auto nodeType = AppendNode(doc, nodeN, "Type");
-        SetNodeValue(doc, nodeType, node->GetNodeType());
-        id++;
-    }
-}
-
-ControlElement* FileHanding::GetControlElementFromID(std::vector<ControlElement*> elementList, int id)
-{
-    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
-        ControlElement* element = *it;
-        if(element->GetID() == id) return element;
-    }
-    return NULL;
-}
-
-bool FileHanding::OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector)
-{
-    auto nodeList = elementNode->first_node("NodeList");
-    if(!nodeList) return false;
-    auto nodeN = nodeList->first_node("Node");
-    while(nodeN) {
-        auto nodePosition = nodeN->first_node("Position");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        double nodeAngle = GetNodeValueDouble(nodeN, "Angle");
-        Node::NodeType nodeType = (Node::NodeType)GetNodeValueInt(nodeN, "Type");
-        Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
-        node->SetAngle(nodeAngle);
-        nodeVector.push_back(node);
-        nodeN = nodeN->next_sibling("Node");
-    }
-    return true;
-}
-
-rapidxml::xml_node<>* FileHanding::AppendNode(rapidxml::xml_document<>& doc,
-                                              rapidxml::xml_node<>* parentNode,
-                                              const char* name,
-                                              rapidxml::node_type nodeType)
-{
-    rapidxml::xml_node<>* node = doc.allocate_node(nodeType, name);
-    parentNode->append_node(node);
-    return node;
-}
-
-void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, wxString value)
-{
-    node->value(doc.allocate_string(value.mb_str()));
-}
-
-void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, int value)
-{
-    node->value(doc.allocate_string(wxString::Format("%d", value).mb_str()));
-}
-
-void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, double value)
-{
-    node->value(doc.allocate_string(wxString::FromCDouble(value, 13).mb_str()));
-}
-
-void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* node,
-                                   const char* atrName,
-                                   wxString value)
-{
-    node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(value.mb_str())));
-}
-
-void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* node,
-                                   const char* atrName,
-                                   int value)
-{
-    node->append_attribute(
-        doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value).mb_str())));
-}
-
-void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* node,
-                                   const char* atrName,
-                                   double value)
-{
-    node->append_attribute(
-        doc.allocate_attribute(atrName, doc.allocate_string(wxString::FromCDouble(value, 13).mb_str())));
-}
-
-double FileHanding::GetNodeValueDouble(rapidxml::xml_node<>* parent, const char* nodeName)
-{
-    double dValue = 0.0;
-    if(parent) {
-        auto node = parent->first_node(nodeName);
-        if(node) wxString(node->value()).ToCDouble(&dValue);
-    }
-    return dValue;
-}
-
-int FileHanding::GetNodeValueInt(rapidxml::xml_node<>* parent, const char* nodeName)
-{
-    long iValue = -1;
-    if(parent) {
-        auto node = parent->first_node(nodeName);
-        if(node) wxString(node->value()).ToCLong(&iValue);
-    }
-    return (int)iValue;
-}
-
-int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* nodeName, const char* atrName)
-{
-    long iValue = -1;
-    if(parent) {
-        auto node = parent->first_node(nodeName);
-        if(node) {
-            auto atr = node->first_attribute(atrName);
-            if(atr) wxString(atr->value()).ToCLong(&iValue);
-        }
-    }
-    return (int)iValue;
-}
-
-int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* node, const char* atrName)
-{
-    long intValue;
-    auto atr = node->first_attribute(atrName);
-    if(!atr) return false;
-    wxString(atr->value()).ToCLong(&intValue);
-    return (int)intValue;
 }

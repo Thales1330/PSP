@@ -28,6 +28,8 @@
 
 #include <complex>
 
+#include "XMLParser.h"
+
 //#include <wx/log.h>
 
 /**
@@ -564,6 +566,11 @@ class Element
      * @return The distance between the point and the line.
      */
     virtual double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
+    
+    virtual void SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode) {}
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode) { return true; }
+    void SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
+    bool OpenCADProperties(rapidxml::xml_node<>* elementNode);
 
    protected:
     int m_elementID = 0;

@@ -58,6 +58,7 @@ class Node
     void SetConnected(bool connected = true) { m_connected = connected; }
     int GetID() const { return m_id; }
     void SetID(int id) { m_id = id; }
+
    protected:
     int m_id = -1;
 
@@ -94,7 +95,7 @@ class ControlElement : public Element
     std::vector<Node*> GetNodeList() const { return m_nodeList; }
     virtual void DrawNodes() const;
     virtual void ReplaceNode(Node* oldNode, Node* newNode);
-    
+
     /**
      * @brief Update the OpenGL text in the element (if present).
      * @return true if OpenGLText is ok, false otherwise.
@@ -106,10 +107,20 @@ class ControlElement : public Element
     virtual bool Initialize() { return true; }
     virtual double GetOutput() const { return m_output; }
     virtual void SetOutput(double output) { m_output = output; }
+    
+    static ControlElement* GetControlElementFromID(std::vector<ControlElement*> elementList, int id);
+    
+    // File handling methods
+    void SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* nodesN, std::vector<Node*> nodeList);
+    bool OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector);
+
    protected:
     std::vector<Node*> m_nodeList;
     bool m_solved = false;
     double m_output = 0.0;
+    
+    void SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
+    bool OpenControlNodes(rapidxml::xml_node<>* elementNode);
 };
 
 #endif  // CONTROLELEMENT_H

@@ -159,9 +159,9 @@ bool MathExpression::Solve(double* input, double timeStep)
         return true;
     }
     // Get the input vector from connection lines (can't use default (one) input argument)
-    m_inputValues[0] = input[1]; // Current time
+    m_inputValues[0] = input[1];  // Current time
     m_inputValues[1] = timeStep;
-    m_inputValues[2] = input[2]; // Switch status
+    m_inputValues[2] = input[2];  // Switch status
     int i = 3;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
@@ -325,8 +325,51 @@ bool MathExpression::Initialize()
 
     if(m_inputValues) delete m_inputValues;
     m_inputValues = new double[m_variablesVector.size() + 3];  // Custom variables + time + step + switch
-    
+
     // Optimize only once to gain performance.
     m_fparser.Optimize();
+    return true;
+}
+
+void MathExpression::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto mathExprNode = XMLParser::AppendNode(doc, elementListNode, "MathExpr");
+    XMLParser::SetNodeAttribute(doc, mathExprNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, mathExprNode);
+    SaveControlNodes(doc, mathExprNode);
+
+    // Element properties
+    auto variablesNode = XMLParser::AppendNode(doc, mathExprNode, "VariableList");
+    for(unsigned int i = 0; i < m_variablesVector.size(); ++i) {
+        auto variable = XMLParser::AppendNode(doc, variablesNode, "Variable");
+        XMLParser::SetNodeValue(doc, variable, m_variablesVector[i]);
+    }
+    auto mathExprValue = XMLParser::AppendNode(doc, mathExprNode, "MathExprValue");
+    XMLParser::SetNodeValue(doc, mathExprValue, m_mathExpression);
+}
+
+bool MathExpression::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    std::vector<wxString> variables;
+    auto variablesNode = elementNode->first_node("VariableList");
+    auto variable = variablesNode->first_node("Variable");
+    while(variable) {
+        variables.push_back(variable->value());
+        variable = variable->next_sibling("Variable");
+    }
+    SetVariables(variables);
+
+    auto mathExprValueNode = elementNode->first_node("MathExprValue");
+    m_mathExpression = mathExprValueNode->value();
+
+    // Init opened properties
+    StartMove(m_position);
+    UpdatePoints();
+
     return true;
 }
