@@ -437,10 +437,10 @@ bool Element::OpenCADProperties(rapidxml::xml_node<>* elementNode)
     auto position = cadPropNode->first_node("Position");
     double posX = XMLParser::GetNodeValueDouble(position, "X");
     double posY = XMLParser::GetNodeValueDouble(position, "Y");
-    m_position = wxPoint2DDouble(posX, posY);
     auto size = cadPropNode->first_node("Size");
     m_width = XMLParser::GetNodeValueDouble(size, "Width");
     m_height = XMLParser::GetNodeValueDouble(size, "Height");
     m_angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+    SetPosition(wxPoint2DDouble(posX, posY));
     return true;
 }

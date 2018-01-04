@@ -246,7 +246,21 @@ Element* Sum::GetCopy()
     return copy;
 }
 
-void Sum::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode) {}
+void Sum::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Sum");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto signsNode = XMLParser::AppendNode(doc, elementNode, "Signs");
+    for(unsigned int i = 0; i < m_signalList.size(); ++i) {
+        auto value = XMLParser::AppendNode(doc, signsNode, "Value");
+        XMLParser::SetNodeValue(doc, value, static_cast<int>(m_signalList[i]));
+    }
+}
 
 bool Sum::OpenElement(rapidxml::xml_node<>* elementNode)
 {

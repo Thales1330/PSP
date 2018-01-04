@@ -48,6 +48,9 @@ class Constant : public ControlElement
     virtual double GetValue() const { return m_value; }
     virtual void UpdatePoints();
 
+    virtual void SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
+
     virtual Element* GetCopy();
 
    protected:

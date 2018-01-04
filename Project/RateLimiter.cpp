@@ -140,3 +140,32 @@ Element* RateLimiter::GetCopy()
     *copy = *this;
     return copy;
 }
+
+void RateLimiter::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "RateLimiter");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto upLimit = XMLParser::AppendNode(doc, elementNode, "UpperLimit");
+    XMLParser::SetNodeValue(doc, upLimit, m_upLimit);
+    auto lowLimit = XMLParser::AppendNode(doc, elementNode, "LowerLimit");
+    XMLParser::SetNodeValue(doc, lowLimit, m_lowLimit);
+}
+
+bool RateLimiter::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    m_upLimit = XMLParser::GetNodeValueDouble(elementNode, "UpperLimit");
+    m_lowLimit = XMLParser::GetNodeValueDouble(elementNode, "LowerLimit");
+
+    StartMove(m_position);
+    UpdatePoints();
+    return true;
+}

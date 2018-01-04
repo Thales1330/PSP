@@ -131,7 +131,7 @@ void Exponential::SetValues(double aValue, double bValue)
 
 bool Exponential::Solve(double* input, double timeStep)
 {
-    if(!input){
+    if(!input) {
         m_output = 0.0;
         return true;
     }
@@ -144,4 +144,34 @@ Element* Exponential::GetCopy()
     Exponential* copy = new Exponential(m_elementID);
     *copy = *this;
     return copy;
+}
+
+void Exponential::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Exponential");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    auto value = XMLParser::AppendNode(doc, elementNode, "Value");
+    auto aValue = XMLParser::AppendNode(doc, value, "A");
+    XMLParser::SetNodeValue(doc, aValue, m_aValue);
+    auto bValue = XMLParser::AppendNode(doc, value, "B");
+    XMLParser::SetNodeValue(doc, bValue, m_bValue);
+}
+
+bool Exponential::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    auto value = elementNode->first_node("Value");
+    m_aValue = XMLParser::GetNodeValueDouble(value, "A");
+    m_bValue = XMLParser::GetNodeValueDouble(value, "B");
+
+    StartMove(m_position);
+    UpdatePoints();
+    return true;
 }

@@ -32,6 +32,7 @@ Constant::~Constant()
 {
     if(m_glText) delete m_glText;
 }
+
 void Constant::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
@@ -125,5 +126,31 @@ bool Constant::UpdateText()
 {
     SetValue(m_value);
     if(!m_glText->IsTextureOK()) return false;
+    return true;
+}
+
+void Constant::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Constant");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto value = XMLParser::AppendNode(doc, elementNode, "Value");
+    XMLParser::SetNodeValue(doc, value, m_value);
+}
+
+bool Constant::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    double value = XMLParser::GetNodeValueDouble(elementNode, "Value");
+
+    SetPosition(m_position);
+    SetValue(value);
     return true;
 }

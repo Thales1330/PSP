@@ -1291,38 +1291,36 @@ bool FileHanding::OpenProject(wxFileName path)
             parentNode = parentNode->next_sibling("ParentID");
         }
 
-        // Set parents (if have)
-        Bus *parent1, *parent2;
-        if(parentID[0] == -1) {
-            parent1 = new Bus(ptsList[0]);
-            line->AddParent(parent1, ptsList[0]);
-        } else {
-            parent1 = busList[parentID[0]];
-            line->AddParent(parent1, ptsList[0]);
-        }
-        if(parentID[1] == -1) {
-            parent2 = new Bus(ptsList[ptsList.size() - 1]);
-            line->AddParent(parent2, ptsList[ptsList.size() - 1]);
-        } else {
-            parent2 = busList[parentID[1]];
-            line->AddParent(parent2, ptsList[ptsList.size() - 1]);
+        std::vector<wxPoint2DDouble> nodePtsList;            // List of node points
+        nodePtsList.push_back(ptsList[0]);                   // First point on the list
+        nodePtsList.push_back(ptsList[ptsList.size() - 1]);  // Last point on the list
+
+        // List of dummy buses to set not connected nodes properly
+        std::vector<Bus*> dummyBusList;
+        for(unsigned int i = 0; i < nodePtsList.size(); ++i) {
+            if(parentID[i] == -1)  // No parent connected
+            {
+                Bus* dummyBus = new Bus(nodePtsList[i]);
+                dummyBusList.push_back(dummyBus);
+                line->AddParent(dummyBus, nodePtsList[i]);
+            } else {  // Parent connected (necessarily a bus, get from bus list)
+                line->AddParent(busList[parentID[i]], nodePtsList[i]);
+            }
         }
 
-        // Add the others nodes (if have)
+        // Add the others nodes (if exists)
         std::vector<wxPoint2DDouble> midPts;
-        for(int i = 1; i < (int)ptsList.size() - 1; i++) midPts.push_back(ptsList[i]);
+        for(unsigned int i = 1; i < ptsList.size() - 1; i++) midPts.push_back(ptsList[i]);
         std::vector<wxPoint2DDouble> edgesPts = line->GetPointList();
         edgesPts.insert(edgesPts.begin() + 2, midPts.begin(), midPts.end());
         line->SetPointList(edgesPts);
 
-        if(parentID[0] == -1) {
-            line->RemoveParent(parent1);
-            delete parent1;
+        // Remove dummy buses
+        for(auto it = dummyBusList.begin(), itEnd = dummyBusList.end(); it != itEnd; ++it) {
+            line->RemoveParent(*it);
+            delete *it;
         }
-        if(parentID[1] == -1) {
-            line->RemoveParent(parent2);
-            delete parent2;
-        }
+        dummyBusList.clear();
 
         auto electricalProp = lineNode->first_node("ElectricalProperties");
         if(!electricalProp) return false;
@@ -1992,279 +1990,58 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
     auto constsNode = XMLParser::AppendNode(doc, elementsNode, "ConstantList");
     auto constList = ctrlContainer->GetConstantList();
     for(auto it = constList.begin(), itEnd = constList.end(); it != itEnd; ++it) {
-        Constant* constant = *it;
-        auto constNode = XMLParser::AppendNode(doc, constsNode, "Constant");
-        XMLParser::SetNodeAttribute(doc, constNode, "ID", constant->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, constNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, constant->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, constant->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, constant->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, constant->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, constant->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, constNode, "NodeList");
-        constant->SaveControlNodes(doc, nodeList, constant->GetNodeList());
-
-        // Control properties
-        auto value = XMLParser::AppendNode(doc, constNode, "Value");
-        XMLParser::SetNodeValue(doc, value, constant->GetValue());
+        (*it)->SaveElement(doc, constsNode);
     }  //}
 
     //{ Exponential
     auto expsNode = XMLParser::AppendNode(doc, elementsNode, "ExponentialList");
     auto expList = ctrlContainer->GetExponentialList();
-    for(auto it = expList.begin(), itEnd = expList.end(); it != itEnd; ++it) {
-        Exponential* exponential = *it;
-        auto expNode = XMLParser::AppendNode(doc, expsNode, "Exponential");
-        XMLParser::SetNodeAttribute(doc, expNode, "ID", exponential->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, expNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, exponential->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, exponential->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, exponential->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, exponential->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, exponential->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, expNode, "NodeList");
-        exponential->SaveControlNodes(doc, nodeList, exponential->GetNodeList());
-
-        // Control properties
-        double a, b;
-        exponential->GetValues(a, b);
-        auto value = XMLParser::AppendNode(doc, expNode, "Value");
-        auto aValue = XMLParser::AppendNode(doc, value, "A");
-        XMLParser::SetNodeValue(doc, aValue, a);
-        auto bValue = XMLParser::AppendNode(doc, value, "B");
-        XMLParser::SetNodeValue(doc, bValue, b);
-    }  //}
+    for(auto it = expList.begin(), itEnd = expList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, expsNode); }  //}
 
     //{ Gain
     auto gainsNode = XMLParser::AppendNode(doc, elementsNode, "GainList");
     auto gainList = ctrlContainer->GetGainList();
     for(auto it = gainList.begin(), itEnd = gainList.end(); it != itEnd; ++it) {
-        Gain* gain = *it;
-        auto gainNode = XMLParser::AppendNode(doc, gainsNode, "Gain");
-        XMLParser::SetNodeAttribute(doc, gainNode, "ID", gain->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, gainNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, gain->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, gain->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, gain->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, gain->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, gain->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, gainNode, "NodeList");
-        gain->SaveControlNodes(doc, nodeList, gain->GetNodeList());
-
-        // Control properties
-        auto value = XMLParser::AppendNode(doc, gainNode, "Value");
-        XMLParser::SetNodeValue(doc, value, gain->GetValue());
+        (*it)->SaveElement(doc, gainsNode);
     }  //}
 
     //{ IO
     auto iosNode = XMLParser::AppendNode(doc, elementsNode, "IOList");
     auto ioList = ctrlContainer->GetIOControlList();
-    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
-        IOControl* io = *it;
-        auto ioNode = XMLParser::AppendNode(doc, iosNode, "IO");
-        XMLParser::SetNodeAttribute(doc, ioNode, "ID", io->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, ioNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, io->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, io->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, io->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, io->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, io->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, ioNode, "NodeList");
-        io->SaveControlNodes(doc, nodeList, io->GetNodeList());
-
-        // Control properties
-        auto value = XMLParser::AppendNode(doc, ioNode, "Value");
-        XMLParser::SetNodeValue(doc, value, io->GetValue());
-        auto ioFlags = XMLParser::AppendNode(doc, ioNode, "IOFlags");
-        XMLParser::SetNodeValue(doc, ioFlags, io->GetIOFlags());
-    }  //}
+    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, iosNode); }  //}
 
     //{ Limiter
     auto limitersNode = XMLParser::AppendNode(doc, elementsNode, "LimiterList");
     auto limiterList = ctrlContainer->GetLimiterList();
     for(auto it = limiterList.begin(), itEnd = limiterList.end(); it != itEnd; ++it) {
-        Limiter* limiter = *it;
-        auto limiterNode = XMLParser::AppendNode(doc, limitersNode, "Limiter");
-        XMLParser::SetNodeAttribute(doc, limiterNode, "ID", limiter->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, limiterNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, limiter->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, limiter->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, limiter->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, limiter->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, limiter->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, limiterNode, "NodeList");
-        limiter->SaveControlNodes(doc, nodeList, limiter->GetNodeList());
-
-        // Control properties
-        auto upLimit = XMLParser::AppendNode(doc, limiterNode, "UpperLimit");
-        XMLParser::SetNodeValue(doc, upLimit, limiter->GetUpLimit());
-        auto lowLimit = XMLParser::AppendNode(doc, limiterNode, "LowerLimit");
-        XMLParser::SetNodeValue(doc, lowLimit, limiter->GetLowLimit());
+        (*it)->SaveElement(doc, limitersNode);
     }  //}
 
     //{ Multiplier
     auto multipliersNode = XMLParser::AppendNode(doc, elementsNode, "MultiplierList");
     auto multiplierList = ctrlContainer->GetMultiplierList();
     for(auto it = multiplierList.begin(), itEnd = multiplierList.end(); it != itEnd; ++it) {
-        Multiplier* multiplier = *it;
-        auto multiplierNode = XMLParser::AppendNode(doc, multipliersNode, "Multiplier");
-        XMLParser::SetNodeAttribute(doc, multiplierNode, "ID", multiplier->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, multiplierNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, multiplier->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, multiplier->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, multiplier->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, multiplier->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, multiplier->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, multiplierNode, "NodeList");
-        multiplier->SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
+        (*it)->SaveElement(doc, multipliersNode);
     }  //}
 
     //{ Divider
     auto dividersNode = XMLParser::AppendNode(doc, elementsNode, "DividerList");
     auto dividersList = ctrlContainer->GetDividerList();
     for(auto it = dividersList.begin(), itEnd = dividersList.end(); it != itEnd; ++it) {
-        Divider* divider = *it;
-        auto dividerNode = XMLParser::AppendNode(doc, dividersNode, "Divider");
-        XMLParser::SetNodeAttribute(doc, dividerNode, "ID", divider->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, dividerNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, divider->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, divider->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, divider->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, divider->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, divider->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, dividerNode, "NodeList");
-        divider->SaveControlNodes(doc, nodeList, divider->GetNodeList());
+        (*it)->SaveElement(doc, dividersNode);
     }  //}
 
     //{ Rate limiter
     auto rateLimitersNode = XMLParser::AppendNode(doc, elementsNode, "RateLimiterList");
     auto rateLimiterList = ctrlContainer->GetRateLimiterList();
     for(auto it = rateLimiterList.begin(), itEnd = rateLimiterList.end(); it != itEnd; ++it) {
-        RateLimiter* rateLimiter = *it;
-        auto rateLimiterNode = XMLParser::AppendNode(doc, rateLimitersNode, "RateLimiter");
-        XMLParser::SetNodeAttribute(doc, rateLimiterNode, "ID", rateLimiter->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, rateLimiterNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, rateLimiter->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, rateLimiter->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, rateLimiter->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, rateLimiter->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, rateLimiter->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, rateLimiterNode, "NodeList");
-        rateLimiter->SaveControlNodes(doc, nodeList, rateLimiter->GetNodeList());
-
-        // Control properties
-        auto upLimit = XMLParser::AppendNode(doc, rateLimiterNode, "UpperLimit");
-        XMLParser::SetNodeValue(doc, upLimit, rateLimiter->GetUpLimit());
-        auto lowLimit = XMLParser::AppendNode(doc, rateLimiterNode, "LowerLimit");
-        XMLParser::SetNodeValue(doc, lowLimit, rateLimiter->GetLowLimit());
+        (*it)->SaveElement(doc, rateLimitersNode);
     }  //}
 
     //{ Sum
     auto sumsNode = XMLParser::AppendNode(doc, elementsNode, "SumList");
     auto sumList = ctrlContainer->GetSumList();
-    for(auto it = sumList.begin(), itEnd = sumList.end(); it != itEnd; ++it) {
-        Sum* sum = *it;
-        auto sumNode = XMLParser::AppendNode(doc, sumsNode, "Sum");
-        XMLParser::SetNodeAttribute(doc, sumNode, "ID", sum->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, sumNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, sum->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, sum->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, sum->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, sum->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, sum->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, sumNode, "NodeList");
-        sum->SaveControlNodes(doc, nodeList, sum->GetNodeList());
-
-        // Control properties
-        auto signsNode = XMLParser::AppendNode(doc, sumNode, "Signs");
-        auto signs = sum->GetSignalList();
-        for(int i = 0; i < (int)signs.size(); ++i) {
-            auto value = XMLParser::AppendNode(doc, signsNode, "Value");
-            XMLParser::SetNodeValue(doc, value, static_cast<int>(signs[i]));
-        }
-
-    }  //}
+    for(auto it = sumList.begin(), itEnd = sumList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, sumsNode); }  //}
 
     //{ Math expression
     auto mathExprsNode = XMLParser::AppendNode(doc, elementsNode, "MathExprList");
@@ -2276,42 +2053,7 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
     //{ Transfer function
     auto tfsNode = XMLParser::AppendNode(doc, elementsNode, "TransferFunctionList");
     auto tfList = ctrlContainer->GetTFList();
-    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
-        TransferFunction* tf = *it;
-        auto tfNode = XMLParser::AppendNode(doc, tfsNode, "TransferFunction");
-        XMLParser::SetNodeAttribute(doc, tfNode, "ID", tf->GetID());
-        auto cadProp = XMLParser::AppendNode(doc, tfNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, tf->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, tf->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, tf->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, tf->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, tf->GetAngle());
-
-        // Nodes
-        auto nodeList = XMLParser::AppendNode(doc, tfNode, "NodeList");
-        tf->SaveControlNodes(doc, nodeList, tf->GetNodeList());
-
-        // Control properties
-        auto numeratorNode = XMLParser::AppendNode(doc, tfNode, "Numerator");
-        auto numerator = tf->GetNumerator();
-        for(int i = 0; i < (int)numerator.size(); ++i) {
-            auto value = XMLParser::AppendNode(doc, numeratorNode, "Value");
-            XMLParser::SetNodeValue(doc, value, numerator[i]);
-        }
-        auto denominatorNode = XMLParser::AppendNode(doc, tfNode, "Denominator");
-        auto denominator = tf->GetDenominator();
-        for(int i = 0; i < (int)denominator.size(); ++i) {
-            auto value = XMLParser::AppendNode(doc, denominatorNode, "Value");
-            XMLParser::SetNodeValue(doc, value, denominator[i]);
-        }
-    }  //}
+    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, tfsNode); }  //}
 
     //{ Connection line
     auto cLinesNode = XMLParser::AppendNode(doc, elementsNode, "ConnectionList");
@@ -2365,32 +2107,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(constNode, "ID");
             Constant* constant = new Constant(id);
 
-            auto cadPropNode = constNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            double value = XMLParser::GetNodeValueDouble(constNode, "Value");
-
-            constant->SetWidth(width);
-            constant->SetHeight(height);
-            constant->SetAngle(angle);
-            constant->SetPosition(wxPoint2DDouble(posX, posY));
-            constant->StartMove(constant->GetPosition());
-
-            constant->SetValue(value);
-
-            std::vector<Node*> nodeVector;
-            if(!constant->OpenControlNodeList(constNode, nodeVector)) return false;
-
-            constant->SetNodeList(nodeVector);
-            constant->UpdatePoints();
+            if(!constant->OpenElement(constNode)) return false;
             elementList.push_back(constant);
 
             constNode = constNode->next_sibling("Constant");
@@ -2406,34 +2123,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(expNode, "ID");
             Exponential* exponential = new Exponential(id);
 
-            auto cadPropNode = expNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            auto value = expNode->first_node("Value");
-            double a = XMLParser::GetNodeValueDouble(value, "A");
-            double b = XMLParser::GetNodeValueDouble(value, "B");
-
-            exponential->SetWidth(width);
-            exponential->SetHeight(height);
-            exponential->SetAngle(angle);
-            exponential->SetPosition(wxPoint2DDouble(posX, posY));
-            exponential->StartMove(exponential->GetPosition());
-
-            exponential->SetValues(a, b);
-
-            std::vector<Node*> nodeVector;
-            if(!exponential->OpenControlNodeList(expNode, nodeVector)) return false;
-
-            exponential->SetNodeList(nodeVector);
-            exponential->UpdatePoints();
+            if(!exponential->OpenElement(expNode)) return false;
             elementList.push_back(exponential);
 
             expNode = expNode->next_sibling("Exponential");
@@ -2449,31 +2139,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(gainNode, "ID");
             Gain* gain = new Gain(id);
 
-            auto cadPropNode = gainNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            double value = XMLParser::GetNodeValueDouble(gainNode, "Value");
-
-            gain->SetWidth(width);
-            gain->SetHeight(height);
-            gain->SetAngle(angle);
-            gain->SetPosition(wxPoint2DDouble(posX, posY));
-            gain->SetValue(value);
-            gain->StartMove(gain->GetPosition());
-
-            std::vector<Node*> nodeVector;
-            if(!gain->OpenControlNodeList(gainNode, nodeVector)) return false;
-
-            gain->SetNodeList(nodeVector);
-            gain->UpdatePoints();
+            if(!gain->OpenElement(gainNode)) return false;
             elementList.push_back(gain);
 
             gainNode = gainNode->next_sibling("Gain");
@@ -2487,34 +2153,11 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         auto ioNode = ioListNode->first_node("IO");
         while(ioNode) {
             int id = XMLParser::GetAttributeValueInt(ioNode, "ID");
-
-            auto cadPropNode = ioNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            IOControl::IOFlags value = static_cast<IOControl::IOFlags>(XMLParser::GetNodeValueInt(ioNode, "Value"));
             int ioFlags = XMLParser::GetNodeValueInt(ioNode, "IOFlags");
 
             IOControl* io = new IOControl(ioFlags, id);
 
-            std::vector<Node*> nodeVector;
-            if(!io->OpenControlNodeList(ioNode, nodeVector)) return false;
-
-            io->SetWidth(width);
-            io->SetHeight(height);
-            io->SetAngle(angle);
-            io->SetPosition(wxPoint2DDouble(posX, posY));
-            io->SetValue(value);
-            io->StartMove(io->GetPosition());
-            io->SetNodeList(nodeVector);
-            io->UpdatePoints();
+            if(!io->OpenElement(ioNode)) return false;
             elementList.push_back(io);
 
             ioNode = ioNode->next_sibling("IO");
@@ -2530,33 +2173,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(limiterNode, "ID");
             Limiter* limiter = new Limiter(id);
 
-            auto cadPropNode = limiterNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            double upLimit = XMLParser::GetNodeValueDouble(limiterNode, "UpperLimit");
-            double lowLimit = XMLParser::GetNodeValueDouble(limiterNode, "LowerLimit");
-
-            std::vector<Node*> nodeVector;
-            if(!limiter->OpenControlNodeList(limiterNode, nodeVector)) return false;
-
-            limiter->SetWidth(width);
-            limiter->SetHeight(height);
-            limiter->SetAngle(angle);
-            limiter->SetPosition(wxPoint2DDouble(posX, posY));
-            limiter->SetUpLimit(upLimit);
-            limiter->SetLowLimit(lowLimit);
-
-            limiter->StartMove(limiter->GetPosition());
-            limiter->SetNodeList(nodeVector);
-            limiter->UpdatePoints();
+            if(!limiter->OpenElement(limiterNode)) return false;
             elementList.push_back(limiter);
 
             limiterNode = limiterNode->next_sibling("Limiter");
@@ -2572,28 +2189,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(multiplierNode, "ID");
             Multiplier* multiplier = new Multiplier(id);
 
-            auto cadPropNode = multiplierNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<Node*> nodeVector;
-            if(!multiplier->OpenControlNodeList(multiplierNode, nodeVector)) return false;
-
-            multiplier->SetWidth(width);
-            multiplier->SetHeight(height);
-            multiplier->SetAngle(angle);
-            multiplier->SetPosition(wxPoint2DDouble(posX, posY));
-
-            multiplier->StartMove(multiplier->GetPosition());
-            multiplier->SetNodeList(nodeVector);
-            multiplier->UpdatePoints();
+            if(!multiplier->OpenElement(multiplierNode)) return false;
             elementList.push_back(multiplier);
 
             multiplierNode = multiplierNode->next_sibling("Multiplier");
@@ -2609,28 +2205,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(dividerNode, "ID");
             Divider* divider = new Divider(id);
 
-            auto cadPropNode = dividerNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<Node*> nodeVector;
-            if(!divider->OpenControlNodeList(dividerNode, nodeVector)) return false;
-
-            divider->SetWidth(width);
-            divider->SetHeight(height);
-            divider->SetAngle(angle);
-            divider->SetPosition(wxPoint2DDouble(posX, posY));
-
-            divider->StartMove(divider->GetPosition());
-            divider->SetNodeList(nodeVector);
-            divider->UpdatePoints();
+            if(!divider->OpenElement(dividerNode)) return false;
             elementList.push_back(divider);
 
             dividerNode = dividerNode->next_sibling("Divider");
@@ -2646,33 +2221,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(rateLimiterNode, "ID");
             RateLimiter* limiter = new RateLimiter(id);
 
-            auto cadPropNode = rateLimiterNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            double upLimit = XMLParser::GetNodeValueDouble(rateLimiterNode, "UpperLimit");
-            double lowLimit = XMLParser::GetNodeValueDouble(rateLimiterNode, "LowerLimit");
-
-            std::vector<Node*> nodeVector;
-            if(!limiter->OpenControlNodeList(rateLimiterNode, nodeVector)) return false;
-
-            limiter->SetWidth(width);
-            limiter->SetHeight(height);
-            limiter->SetAngle(angle);
-            limiter->SetPosition(wxPoint2DDouble(posX, posY));
-            limiter->SetUpLimit(upLimit);
-            limiter->SetLowLimit(lowLimit);
-
-            limiter->StartMove(limiter->GetPosition());
-            limiter->SetNodeList(nodeVector);
-            limiter->UpdatePoints();
+            if(!limiter->OpenElement(rateLimiterNode)) return false;
             elementList.push_back(limiter);
 
             rateLimiterNode = rateLimiterNode->next_sibling("RateLimiter");
@@ -2720,51 +2269,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             int id = XMLParser::GetAttributeValueInt(tfNode, "ID");
             TransferFunction* tf = new TransferFunction(id);
 
-            auto cadPropNode = tfNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = XMLParser::GetNodeValueDouble(position, "X");
-            double posY = XMLParser::GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = XMLParser::GetNodeValueDouble(size, "Width");
-            double height = XMLParser::GetNodeValueDouble(size, "Height");
-            double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<double> numerator, denominator;
-            auto numeratorNode = tfNode->first_node("Numerator");
-            auto nValue = numeratorNode->first_node("Value");
-            while(nValue) {
-                double value = 0.0;
-                wxString(nValue->value()).ToCDouble(&value);
-                numerator.push_back(value);
-                nValue = nValue->next_sibling("Value");
-            }
-            auto denominatorNode = tfNode->first_node("Denominator");
-            auto dValue = denominatorNode->first_node("Value");
-            while(dValue) {
-                double value = 0.0;
-                wxString(dValue->value()).ToCDouble(&value);
-                denominator.push_back(value);
-                dValue = dValue->next_sibling("Value");
-            }
-
-            std::vector<Node*> nodeVector;
-            if(!tf->OpenControlNodeList(tfNode, nodeVector)) return false;
-
-            tf->SetWidth(width);
-            tf->SetHeight(height);
-            tf->SetAngle(angle);
-            tf->SetPosition(wxPoint2DDouble(posX, posY));
-
-            tf->SetNumerator(numerator);
-            tf->SetDenominator(denominator);
-
-            tf->StartMove(tf->GetPosition());
-            tf->SetNodeList(nodeVector);
-
-            tf->UpdateTFText();
-
+            if(!tf->OpenElement(tfNode)) return false;
             elementList.push_back(tf);
 
             tfNode = tfNode->next_sibling("TransferFunction");

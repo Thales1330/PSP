@@ -141,29 +141,6 @@ void ControlElement::ReplaceNode(Node* oldNode, Node* newNode)
     }
 }
 
-void ControlElement::SaveControlNodes(rapidxml::xml_document<>& doc,
-                                      rapidxml::xml_node<>* nodesN,
-                                      std::vector<Node*> nodeList)
-{
-    int id = 0;
-    for(auto it = nodeList.begin(), itEnd = nodeList.end(); it != itEnd; ++it) {
-        Node* node = *it;
-        node->SetID(id);
-        auto nodeN = XMLParser::AppendNode(doc, nodesN, "Node");
-        XMLParser::SetNodeAttribute(doc, nodeN, "ID", id);
-        auto nodePosition = XMLParser::AppendNode(doc, nodeN, "Position");
-        auto posNodeX = XMLParser::AppendNode(doc, nodePosition, "X");
-        XMLParser::SetNodeValue(doc, posNodeX, node->GetPosition().m_x);
-        auto posNodeY = XMLParser::AppendNode(doc, nodePosition, "Y");
-        XMLParser::SetNodeValue(doc, posNodeY, node->GetPosition().m_y);
-        auto angle = XMLParser::AppendNode(doc, nodeN, "Angle");
-        XMLParser::SetNodeValue(doc, angle, node->GetAngle());
-        auto nodeType = XMLParser::AppendNode(doc, nodeN, "Type");
-        XMLParser::SetNodeValue(doc, nodeType, node->GetNodeType());
-        id++;
-    }
-}
-
 ControlElement* ControlElement::GetControlElementFromID(std::vector<ControlElement*> elementList, int id)
 {
     for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
@@ -171,25 +148,6 @@ ControlElement* ControlElement::GetControlElementFromID(std::vector<ControlEleme
         if(element->GetID() == id) return element;
     }
     return NULL;
-}
-
-bool ControlElement::OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector)
-{
-    auto nodeList = elementNode->first_node("NodeList");
-    if(!nodeList) return false;
-    auto nodeN = nodeList->first_node("Node");
-    while(nodeN) {
-        auto nodePosition = nodeN->first_node("Position");
-        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
-        double nodeAngle = XMLParser::GetNodeValueDouble(nodeN, "Angle");
-        Node::NodeType nodeType = static_cast<Node::NodeType>(XMLParser::GetNodeValueInt(nodeN, "Type"));
-        Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
-        node->SetAngle(nodeAngle);
-        nodeVector.push_back(node);
-        nodeN = nodeN->next_sibling("Node");
-    }
-    return true;
 }
 
 void ControlElement::SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode)

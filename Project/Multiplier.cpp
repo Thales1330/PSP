@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Multiplier.h"
 #include "ConnectionLine.h"
+#include "Multiplier.h"
 
 Multiplier::Multiplier(int id) : MathOperation(id) {}
 Multiplier::~Multiplier() {}
@@ -58,9 +58,7 @@ bool Multiplier::Solve(double* input, double timeStep)
     }
 
     m_output = 1.0;
-    for(unsigned int i = 0; i < inputVector.size(); ++i) {
-        m_output *= inputVector[i];
-    }
+    for(unsigned int i = 0; i < inputVector.size(); ++i) { m_output *= inputVector[i]; }
 
     return true;
 }
@@ -70,4 +68,23 @@ Element* Multiplier::GetCopy()
     Multiplier* copy = new Multiplier(m_elementID);
     *copy = *this;
     return copy;
+}
+
+void Multiplier::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Multiplier");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+}
+
+bool Multiplier::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    StartMove(m_position);
+    UpdatePoints();
+    return true;
 }

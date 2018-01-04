@@ -333,19 +333,19 @@ bool MathExpression::Initialize()
 
 void MathExpression::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
-    auto mathExprNode = XMLParser::AppendNode(doc, elementListNode, "MathExpr");
-    XMLParser::SetNodeAttribute(doc, mathExprNode, "ID", m_elementID);
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "MathExpr");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
 
-    SaveCADProperties(doc, mathExprNode);
-    SaveControlNodes(doc, mathExprNode);
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
 
     // Element properties
-    auto variablesNode = XMLParser::AppendNode(doc, mathExprNode, "VariableList");
+    auto variablesNode = XMLParser::AppendNode(doc, elementNode, "VariableList");
     for(unsigned int i = 0; i < m_variablesVector.size(); ++i) {
         auto variable = XMLParser::AppendNode(doc, variablesNode, "Variable");
         XMLParser::SetNodeValue(doc, variable, m_variablesVector[i]);
     }
-    auto mathExprValue = XMLParser::AppendNode(doc, mathExprNode, "MathExprValue");
+    auto mathExprValue = XMLParser::AppendNode(doc, elementNode, "MathExprValue");
     XMLParser::SetNodeValue(doc, mathExprValue, m_mathExpression);
 }
 

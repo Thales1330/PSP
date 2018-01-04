@@ -48,6 +48,10 @@ class Limiter : public ControlElement
     double GetLowLimit() const { return m_lowLimit; }
     void SetUpLimit(double upLimit) { m_upLimit = upLimit; }
     void SetLowLimit(double lowLimit) { m_lowLimit = lowLimit; }
+
+    virtual void SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
+
     virtual Element* GetCopy();
 
    protected:

@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Divider.h"
 #include "ConnectionLine.h"
+#include "Divider.h"
 
 Divider::Divider(int id) : MathOperation(id) {}
 Divider::~Divider() {}
@@ -74,4 +74,24 @@ Element* Divider::GetCopy()
     Divider* copy = new Divider(m_elementID);
     *copy = *this;
     return copy;
+}
+
+void Divider::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Divider");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+}
+
+bool Divider::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    StartMove(m_position);
+    UpdatePoints();
+
+    return true;
 }

@@ -109,10 +109,6 @@ class ControlElement : public Element
     virtual void SetOutput(double output) { m_output = output; }
     
     static ControlElement* GetControlElementFromID(std::vector<ControlElement*> elementList, int id);
-    
-    // File handling methods
-    void SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* nodesN, std::vector<Node*> nodeList);
-    bool OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector);
 
    protected:
     std::vector<Node*> m_nodeList;
