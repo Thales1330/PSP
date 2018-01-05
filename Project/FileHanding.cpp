@@ -119,166 +119,39 @@ void FileHanding::SaveProject(wxFileName path)
     // Save all the data
     ElectricCalculation allElements;
     allElements.GetElementsFromList(m_workspace->GetElementList());
+    int elementID = 0;
 
     //{ Buses
     auto busesNode = XMLParser::AppendNode(doc, elementsNode, "BusList");
     auto busList = allElements.GetBusList();
-    for(int i = 0; i < (int)busList.size(); i++) {
-        Bus* bus = busList[i];
-        auto busNode = XMLParser::AppendNode(doc, busesNode, "Bus");
-        XMLParser::SetNodeAttribute(doc, busNode, "ID", i);
-        auto cadProp = XMLParser::AppendNode(doc, busNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, bus->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, bus->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, bus->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, bus->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, bus->GetAngle());
-
-        BusElectricalData data = bus->GetElectricalData();
-        auto electricalProp = XMLParser::AppendNode(doc, busNode, "ElectricalProperties");
-        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
-        XMLParser::SetNodeValue(doc, name, data.name);
-        auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
-        XMLParser::SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto isVoltageControlled = XMLParser::AppendNode(doc, electricalProp, "IsVoltageControlled");
-        XMLParser::SetNodeValue(doc, isVoltageControlled, data.isVoltageControlled);
-        auto controlledVoltage = XMLParser::AppendNode(doc, electricalProp, "ControlledVoltage");
-        XMLParser::SetNodeValue(doc, controlledVoltage, data.controlledVoltage);
-        XMLParser::SetNodeAttribute(doc, controlledVoltage, "Choice", data.controlledVoltageUnitChoice);
-        auto slackBus = XMLParser::AppendNode(doc, electricalProp, "SlackBus");
-        XMLParser::SetNodeValue(doc, slackBus, data.slackBus);
-
-        auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
-        auto hasFault = XMLParser::AppendNode(doc, fault, "HasFault");
-        XMLParser::SetNodeValue(doc, hasFault, data.hasFault);
-        auto faultType = XMLParser::AppendNode(doc, fault, "Type");
-        XMLParser::SetNodeValue(doc, faultType, data.faultType);
-        auto faultLocation = XMLParser::AppendNode(doc, fault, "Location");
-        XMLParser::SetNodeValue(doc, faultLocation, data.faultLocation);
-        auto faultResistance = XMLParser::AppendNode(doc, fault, "Resistance");
-        XMLParser::SetNodeValue(doc, faultResistance, data.faultResistance);
-        auto faultReactance = XMLParser::AppendNode(doc, fault, "Reactance");
-        XMLParser::SetNodeValue(doc, faultReactance, data.faultReactance);
-
-        auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
-        auto plotBus = XMLParser::AppendNode(doc, stability, "Plot");
-        XMLParser::SetNodeValue(doc, plotBus, data.plotBus);
-        auto stabHasFault = XMLParser::AppendNode(doc, stability, "HasFault");
-        XMLParser::SetNodeValue(doc, stabHasFault, data.stabHasFault);
-        auto stabFaultTime = XMLParser::AppendNode(doc, stability, "FaultTime");
-        XMLParser::SetNodeValue(doc, stabFaultTime, data.stabFaultTime);
-        auto stabFaultLength = XMLParser::AppendNode(doc, stability, "FaultLength");
-        XMLParser::SetNodeValue(doc, stabFaultLength, data.stabFaultLength);
-        auto stabFaultResistance = XMLParser::AppendNode(doc, stability, "FaultResistance");
-        XMLParser::SetNodeValue(doc, stabFaultResistance, data.stabFaultResistance);
-        auto stabFaultReactance = XMLParser::AppendNode(doc, stability, "FaultReactance");
-        XMLParser::SetNodeValue(doc, stabFaultReactance, data.stabFaultReactance);
-
-        data.number = i;
-        bus->SetElectricalData(data);
-    }  //}
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, busesNode);
+        elementID++;
+    }
+    //}
 
     //{ Capacitor
     auto capacitorsNode = XMLParser::AppendNode(doc, elementsNode, "CapacitorList");
     auto capacitorList = allElements.GetCapacitorList();
-    for(int i = 0; i < (int)capacitorList.size(); i++) {
-        Capacitor* capacitor = capacitorList[i];
-        auto capacitorNode = XMLParser::AppendNode(doc, capacitorsNode, "Capacitor");
-        XMLParser::SetNodeAttribute(doc, capacitorNode, "ID", i);
-        auto cadProp = XMLParser::AppendNode(doc, capacitorNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, capacitor->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, capacitor->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, capacitor->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, capacitor->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, capacitor->GetAngle());
-        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
-        XMLParser::SetNodeValue(doc, nodePosX, capacitor->GetPointList()[0].m_x);
-        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
-        XMLParser::SetNodeValue(doc, nodePosY, capacitor->GetPointList()[0].m_y);
-        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(capacitor->GetParentList()[0]);
-        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-
-        CapacitorElectricalData data = capacitor->GetElectricalData();
-        auto electricalProp = XMLParser::AppendNode(doc, capacitorNode, "ElectricalProperties");
-        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
-        XMLParser::SetNodeValue(doc, isOnline, capacitor->IsOnline());
-        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
-        XMLParser::SetNodeValue(doc, name, data.name);
-        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
-        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
-        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-
-        auto switchingList = XMLParser::AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = capacitor->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
-            XMLParser::SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = XMLParser::AppendNode(doc, switching, "Type");
-            XMLParser::SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = XMLParser::AppendNode(doc, switching, "Time");
-            XMLParser::SetNodeValue(doc, swTime, swData.swTime[j]);
-        }
-    }  //}
+    elementID = 0;
+    for(auto it = capacitorList.begin(), itEnd = capacitorList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, capacitorsNode);
+        elementID++;
+    }
+    //}
 
     //{ IndMotor
     auto indMotorsNode = XMLParser::AppendNode(doc, elementsNode, "IndMotorList");
     auto indMotorList = allElements.GetIndMotorList();
-    for(int i = 0; i < (int)indMotorList.size(); i++) {
-        IndMotor* indMotor = indMotorList[i];
-        auto indMotorNode = XMLParser::AppendNode(doc, indMotorsNode, "IndMotor");
-        XMLParser::SetNodeAttribute(doc, indMotorNode, "ID", i);
-        auto cadProp = XMLParser::AppendNode(doc, indMotorNode, "CADProperties");
-        auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-        auto posX = XMLParser::AppendNode(doc, position, "X");
-        XMLParser::SetNodeValue(doc, posX, indMotor->GetPosition().m_x);
-        auto posY = XMLParser::AppendNode(doc, position, "Y");
-        XMLParser::SetNodeValue(doc, posY, indMotor->GetPosition().m_y);
-        auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-        auto width = XMLParser::AppendNode(doc, size, "Width");
-        XMLParser::SetNodeValue(doc, width, indMotor->GetWidth());
-        auto height = XMLParser::AppendNode(doc, size, "Height");
-        XMLParser::SetNodeValue(doc, height, indMotor->GetHeight());
-        auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-        XMLParser::SetNodeValue(doc, angle, indMotor->GetAngle());
-        auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
-        XMLParser::SetNodeValue(doc, nodePosX, indMotor->GetPointList()[0].m_x);
-        auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
-        XMLParser::SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
-        auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(indMotor->GetParentList()[0]);
-        if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-
-        IndMotorElectricalData data = indMotor->GetElectricalData();
-        auto electricalProp = XMLParser::AppendNode(doc, indMotorNode, "ElectricalProperties");
-        auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
-        XMLParser::SetNodeValue(doc, isOnline, indMotor->IsOnline());
-        auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
-        XMLParser::SetNodeValue(doc, name, data.name);
-        auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
-        XMLParser::SetNodeValue(doc, activePower, data.activePower);
-        XMLParser::SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
-        XMLParser::SetNodeValue(doc, reactivePower, data.reactivePower);
-        XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-    }  //}
+    elementID = 0;
+    for(auto it = indMotorList.begin(), itEnd = indMotorList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, indMotorsNode);
+        elementID++;
+    }
+    //}
 
     //{ Inductor
     auto inductorsNode = XMLParser::AppendNode(doc, elementsNode, "InductorList");
@@ -908,7 +781,7 @@ bool FileHanding::OpenProject(wxFileName path)
     PropertiesData* propData = m_workspace->GetProperties();
     SimulationData simData = propData->GetSimulationPropertiesData();
 
-    // { Properties data
+    //{ Properties data
     auto propertiesNode = projectNode->first_node("Properties");
     if(propertiesNode) {
         auto simPropertiesNode = propertiesNode->first_node("SimulationProperties");
@@ -957,7 +830,7 @@ bool FileHanding::OpenProject(wxFileName path)
             simData.underVoltageConstPower = XMLParser::GetNodeValueDouble(uvLimit, "ConstantPower");
         }
     }
-    // }
+    //}
 
     propData->SetSimulationPropertiesData(simData);
 
@@ -976,68 +849,22 @@ bool FileHanding::OpenProject(wxFileName path)
     std::vector<SyncMotor*> syncMotorList;
     std::vector<Transformer*> transformerList;
     std::vector<Text*> textList;
+    
+    // List of parents
+    std::vector<Element*> parentList;
 
     //{ Bus
     auto busListNode = elementsNode->first_node("BusList");
     if(!busListNode) return false;
     auto busNode = busListNode->first_node("Bus");
     while(busNode) {
-        auto cadPropNode = busNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = XMLParser::GetNodeValueDouble(position, "X");
-        double posY = XMLParser::GetNodeValueDouble(position, "Y");
-        Bus* bus = new Bus(wxPoint2DDouble(posX, posY));
-
-        auto size = cadPropNode->first_node("Size");
-        double width = XMLParser::GetNodeValueDouble(size, "Width");
-        double height = XMLParser::GetNodeValueDouble(size, "Height");
-        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-        bus->SetWidth(width);
-        bus->SetHeight(height);
-        bus->SetPosition(bus->GetPosition());  // Update bus rectangle.
-        int numRot = angle / bus->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) bus->Rotate(clockwise);
-
-        BusElectricalData data = bus->GetElectricalData();
-        auto electricalProp = busNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        data.name = electricalProp->first_node("Name")->value();
-        data.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
-        data.nominalVoltageUnit =
-            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.isVoltageControlled = XMLParser::GetNodeValueInt(electricalProp, "IsVoltageControlled");
-        data.controlledVoltage = XMLParser::GetNodeValueDouble(electricalProp, "ControlledVoltage");
-        data.controlledVoltageUnitChoice =
-            XMLParser::GetAttributeValueInt(electricalProp, "ControlledVoltage", "Choice");
-        data.slackBus = XMLParser::GetNodeValueInt(electricalProp, "SlackBus");
-        auto fault = electricalProp->first_node("Fault");
-        data.hasFault = XMLParser::GetNodeValueInt(fault, "HasFault");
-        data.faultType = (FaultData)XMLParser::GetNodeValueInt(fault, "Type");
-        data.faultLocation = (FaultData)XMLParser::GetNodeValueInt(fault, "Location");
-        data.faultResistance = XMLParser::GetNodeValueDouble(fault, "Resistance");
-        data.faultReactance = XMLParser::GetNodeValueDouble(fault, "Reactance");
-        auto stability = electricalProp->first_node("Stability");
-        data.plotBus = XMLParser::GetNodeValueInt(stability, "Plot");
-        data.stabHasFault = XMLParser::GetNodeValueInt(stability, "HasFault");
-        data.stabFaultTime = XMLParser::GetNodeValueDouble(stability, "FaultTime");
-        data.stabFaultLength = XMLParser::GetNodeValueDouble(stability, "FaultLength");
-        data.stabFaultResistance = XMLParser::GetNodeValueDouble(stability, "FaultResistance");
-        data.stabFaultReactance = XMLParser::GetNodeValueDouble(stability, "FaultReactance");
-
-        bus->SetElectricalData(data);
-
-        if(data.stabHasFault) bus->SetDynamicEvent(true);
-
+        Bus* bus = new Bus();
+        
+        if(!bus->OpenElement(busNode)) return false;
         elementList.push_back(bus);
         busList.push_back(bus);
+        parentList.push_back(bus);
+        
         busNode = busNode->next_sibling("Bus");
     }  //}
 
@@ -1047,73 +874,11 @@ bool FileHanding::OpenProject(wxFileName path)
     auto capacitorNode = capacitorListNode->first_node("Capacitor");
     while(capacitorNode) {
         Capacitor* capacitor = new Capacitor();
-
-        auto cadPropNode = capacitorNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = XMLParser::GetNodeValueDouble(position, "X");
-        double posY = XMLParser::GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = XMLParser::GetNodeValueDouble(size, "Width");
-        double height = XMLParser::GetNodeValueDouble(size, "Height");
-        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
-        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            capacitor->StartMove(capacitor->GetPosition());
-            capacitor->Move(wxPoint2DDouble(posX, posY));
-            capacitor->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            capacitor->StartMove(capacitor->GetPosition());
-            capacitor->Move(wxPoint2DDouble(posX, posY));
-        }
-        capacitor->SetWidth(width);
-        capacitor->SetHeight(height);
-
-        int numRot = angle / capacitor->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) capacitor->Rotate(clockwise);
-
-        auto electricalProp = capacitorNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        capacitor->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
-        CapacitorElectricalData data = capacitor->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit =
-            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-
-        SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        capacitor->SetSwitchingData(swData);
-
-        capacitor->SetElectricalData(data);
-
-        if(swData.swTime.size() != 0) capacitor->SetDynamicEvent(true);
-
+        
+        if(!capacitor->OpenElement(capacitorNode, parentList)) return false;
         elementList.push_back(capacitor);
         capacitorList.push_back(capacitor);
+
         capacitorNode = capacitorNode->next_sibling("Capacitor");
     }  //}
 
@@ -1123,61 +888,11 @@ bool FileHanding::OpenProject(wxFileName path)
     auto indMotorNode = indMotorListNode->first_node("IndMotor");
     while(indMotorNode) {
         IndMotor* indMotor = new IndMotor();
-
-        auto cadPropNode = indMotorNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = XMLParser::GetNodeValueDouble(position, "X");
-        double posY = XMLParser::GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = XMLParser::GetNodeValueDouble(size, "Width");
-        double height = XMLParser::GetNodeValueDouble(size, "Height");
-        double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
-        int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            indMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            indMotor->StartMove(indMotor->GetPosition());
-            indMotor->Move(wxPoint2DDouble(posX, posY));
-            indMotor->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            indMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            indMotor->StartMove(indMotor->GetPosition());
-            indMotor->Move(wxPoint2DDouble(posX, posY));
-        }
-        indMotor->SetWidth(width);
-        indMotor->SetHeight(height);
-
-        int numRot = angle / indMotor->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) indMotor->Rotate(clockwise);
-
-        auto electricalProp = indMotorNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        indMotor->SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
-        IndMotorElectricalData data = indMotor->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit =
-            (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-
-        indMotor->SetElectricalData(data);
+        
+        if(!indMotor->OpenElement(indMotorNode, parentList)) return false;
         elementList.push_back(indMotor);
         indMotorList.push_back(indMotor);
+        
         indMotorNode = indMotorNode->next_sibling("IndMotor");
     }  //}
 

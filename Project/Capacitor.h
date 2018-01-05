@@ -54,6 +54,10 @@ class Capacitor : public Shunt
     virtual CapacitorElectricalData GetElectricalData() { return m_electricalData; }
     virtual CapacitorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(CapacitorElectricalData electricalData) { m_electricalData = electricalData; }
+
+    virtual void SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);
+
    protected:
     CapacitorElectricalData m_electricalData;
 };

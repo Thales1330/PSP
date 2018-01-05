@@ -207,6 +207,12 @@ class PowerElement : public Element
      */
     virtual void SetDynamicEvent(bool dynEvent = true) { m_dynEvent = dynEvent; }
     virtual double GetValueFromUnit(double value, ElectricalUnit valueUnit);
+    
+    virtual void SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
+    virtual void SaveSwitchingData(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* electricalNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList) { return true; }
+    virtual bool OpenCADProperties(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);
+    virtual bool OpenSwitchingData(rapidxml::xml_node<>* electricalNode);
 
    protected:
     SwitchingData m_swData;
