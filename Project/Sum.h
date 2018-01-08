@@ -51,6 +51,9 @@ class Sum : public ControlElement
     void AddInNode();
     void RemoveInNode();
 
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
+
     virtual Element* GetCopy();
 
    protected:

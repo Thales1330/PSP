@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "ReactiveShuntElementForm.h"
 #include "Inductor.h"
+#include "ReactiveShuntElementForm.h"
 
 Inductor::Inductor() : Shunt() {}
 Inductor::Inductor(wxString name) : Shunt() { m_electricalData.name = name; }
@@ -210,4 +210,45 @@ wxString Inductor::GetTipText() const
     }
 
     return tipText;
+}
+
+rapidxml::xml_node<>* Inductor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Inductor");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+
+    auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
+    auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+    XMLParser::SetNodeValue(doc, isOnline, m_online);
+    auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+    XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+
+    SaveSwitchingData(doc, electricalProp);
+
+    return elementNode;
+}
+
+bool Inductor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
+{
+    if(!OpenCADProperties(elementNode, parentList)) return false;
+
+    auto electricalProp = elementNode->first_node("ElectricalProperties");
+    if(!electricalProp) return false;
+
+    SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
+    m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+    m_electricalData.reactivePowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID"));
+
+    if(!OpenSwitchingData(electricalProp)) return false;
+    if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
+
+    m_inserted = true;
+    return true;
 }

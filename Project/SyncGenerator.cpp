@@ -15,9 +15,9 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "SyncMachineForm.h"
-#include "SyncGenerator.h"
 #include "ControlElementContainer.h"
+#include "SyncGenerator.h"
+#include "SyncMachineForm.h"
 
 SyncGenerator::SyncGenerator() : Machines() { Init(); }
 SyncGenerator::SyncGenerator(wxString name) : Machines()
@@ -48,9 +48,7 @@ void SyncGenerator::DrawSymbol() const
 {
     // Draw sine.
     std::vector<wxPoint2DDouble> sinePts;
-    for(int i = 0; i < (int)m_sinePts.size(); i++) {
-        sinePts.push_back(m_sinePts[i] + m_position);
-    }
+    for(int i = 0; i < (int)m_sinePts.size(); i++) { sinePts.push_back(m_sinePts[i] + m_position); }
     DrawLine(sinePts);
 }
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
@@ -77,9 +75,7 @@ SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowe
 {
     SyncGeneratorElectricalData data = m_electricalData;
     double machineBasePower = 1.0;
-    if(data.useMachineBase) {
-        machineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
-    }
+    if(data.useMachineBase) { machineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit); }
 
     // Active power
     double activePower = GetValueFromUnit(data.activePower, data.activePowerUnit);
@@ -246,5 +242,174 @@ bool SyncGenerator::GetPlotData(ElementPlotData& plotData)
     plotData.AddData(m_electricalData.freqVector, _("Frequency"));
     plotData.AddData(m_electricalData.fieldVoltageVector, _("Field voltage"));
     plotData.AddData(m_electricalData.deltaVector, _("Delta"));
+    return true;
+}
+
+rapidxml::xml_node<>* SyncGenerator::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "SyncGenerator");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
+    auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+    XMLParser::SetNodeValue(doc, isOnline, m_online);
+    auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+    XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
+    XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);
+    XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", m_electricalData.nominalPowerUnit);
+    auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
+    XMLParser::SetNodeValue(doc, nominalVoltage, m_electricalData.nominalVoltage);
+    XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", m_electricalData.nominalVoltageUnit);
+    auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
+    XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);
+    XMLParser::SetNodeAttribute(doc, activePower, "UnitID", m_electricalData.activePowerUnit);
+    auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+    auto haveMaxReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMaxReactive");
+    XMLParser::SetNodeValue(doc, haveMaxReactive, m_electricalData.haveMaxReactive);
+    auto maxReactive = XMLParser::AppendNode(doc, electricalProp, "MaxReactive");
+    XMLParser::SetNodeValue(doc, maxReactive, m_electricalData.maxReactive);
+    XMLParser::SetNodeAttribute(doc, maxReactive, "UnitID", m_electricalData.maxReactiveUnit);
+    auto haveMinReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMinReactive");
+    XMLParser::SetNodeValue(doc, haveMinReactive, m_electricalData.haveMinReactive);
+    auto minReactive = XMLParser::AppendNode(doc, electricalProp, "MinReactive");
+    XMLParser::SetNodeValue(doc, minReactive, m_electricalData.minReactive);
+    XMLParser::SetNodeAttribute(doc, minReactive, "UnitID", m_electricalData.minReactiveUnit);
+    auto useMachineBase = XMLParser::AppendNode(doc, electricalProp, "UseMachineBase");
+    XMLParser::SetNodeValue(doc, useMachineBase, m_electricalData.useMachineBase);
+
+    auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+    auto positiveResistance = XMLParser::AppendNode(doc, fault, "PositiveResistance");
+    XMLParser::SetNodeValue(doc, positiveResistance, m_electricalData.positiveResistance);
+    auto positiveReactance = XMLParser::AppendNode(doc, fault, "PositiveReactance");
+    XMLParser::SetNodeValue(doc, positiveReactance, m_electricalData.positiveReactance);
+    auto negativeResistance = XMLParser::AppendNode(doc, fault, "NegativeResistance");
+    XMLParser::SetNodeValue(doc, negativeResistance, m_electricalData.negativeResistance);
+    auto negativeReactance = XMLParser::AppendNode(doc, fault, "NegativeReactance");
+    XMLParser::SetNodeValue(doc, negativeReactance, m_electricalData.negativeReactance);
+    auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
+    XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);
+    auto zeroReactance = XMLParser::AppendNode(doc, fault, "ZeroReactance");
+    XMLParser::SetNodeValue(doc, zeroReactance, m_electricalData.zeroReactance);
+    auto groundResistance = XMLParser::AppendNode(doc, fault, "GroundResistance");
+    XMLParser::SetNodeValue(doc, groundResistance, m_electricalData.groundResistance);
+    auto groundReactance = XMLParser::AppendNode(doc, fault, "GroundReactance");
+    XMLParser::SetNodeValue(doc, groundReactance, m_electricalData.groundReactance);
+    auto groundNeutral = XMLParser::AppendNode(doc, fault, "GroundNeutral");
+    XMLParser::SetNodeValue(doc, groundNeutral, m_electricalData.groundNeutral);
+
+    auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+    auto plotSyncMachine = XMLParser::AppendNode(doc, stability, "PlotSyncMachine");
+    XMLParser::SetNodeValue(doc, plotSyncMachine, m_electricalData.plotSyncMachine);
+    auto inertia = XMLParser::AppendNode(doc, stability, "Inertia");
+    XMLParser::SetNodeValue(doc, inertia, m_electricalData.inertia);
+    auto damping = XMLParser::AppendNode(doc, stability, "Damping");
+    XMLParser::SetNodeValue(doc, damping, m_electricalData.damping);
+    auto useAVR = XMLParser::AppendNode(doc, stability, "UseAVR");
+    XMLParser::SetNodeValue(doc, useAVR, m_electricalData.useAVR);
+    auto useSpeedGovernor = XMLParser::AppendNode(doc, stability, "UseSpeedGovernor");
+    XMLParser::SetNodeValue(doc, useSpeedGovernor, m_electricalData.useSpeedGovernor);
+    auto armResistance = XMLParser::AppendNode(doc, stability, "ArmResistance");
+    XMLParser::SetNodeValue(doc, armResistance, m_electricalData.armResistance);
+    auto potierReactance = XMLParser::AppendNode(doc, stability, "PotierReactance");
+    XMLParser::SetNodeValue(doc, potierReactance, m_electricalData.potierReactance);
+    auto satFactor = XMLParser::AppendNode(doc, stability, "SatFactor");
+    XMLParser::SetNodeValue(doc, satFactor, m_electricalData.satFactor);
+    auto syncXd = XMLParser::AppendNode(doc, stability, "SyncXd");
+    XMLParser::SetNodeValue(doc, syncXd, m_electricalData.syncXd);
+    auto syncXq = XMLParser::AppendNode(doc, stability, "SyncXq");
+    XMLParser::SetNodeValue(doc, syncXq, m_electricalData.syncXq);
+    auto transXd = XMLParser::AppendNode(doc, stability, "TransXd");
+    XMLParser::SetNodeValue(doc, transXd, m_electricalData.transXd);
+    auto transXq = XMLParser::AppendNode(doc, stability, "TransXq");
+    XMLParser::SetNodeValue(doc, transXq, m_electricalData.transXq);
+    auto transTd0 = XMLParser::AppendNode(doc, stability, "TransTd0");
+    XMLParser::SetNodeValue(doc, transTd0, m_electricalData.transTd0);
+    auto transTq0 = XMLParser::AppendNode(doc, stability, "TransTq0");
+    XMLParser::SetNodeValue(doc, transTq0, m_electricalData.transTq0);
+    auto subXd = XMLParser::AppendNode(doc, stability, "SubXd");
+    XMLParser::SetNodeValue(doc, subXd, m_electricalData.subXd);
+    auto subXq = XMLParser::AppendNode(doc, stability, "SubXq");
+    XMLParser::SetNodeValue(doc, subXq, m_electricalData.subXq);
+    auto subTd0 = XMLParser::AppendNode(doc, stability, "SubTd0");
+    XMLParser::SetNodeValue(doc, subTd0, m_electricalData.subTd0);
+    auto subTq0 = XMLParser::AppendNode(doc, stability, "SubTq0");
+    XMLParser::SetNodeValue(doc, subTq0, m_electricalData.subTq0);
+
+    SaveSwitchingData(doc, electricalProp);
+    return elementNode;
+}
+
+bool SyncGenerator::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
+{
+    if(!OpenCADProperties(elementNode, parentList)) return false;
+
+    auto electricalProp = elementNode->first_node("ElectricalProperties");
+    if(!electricalProp) return false;
+
+    SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
+    m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, "NominalPower");
+    m_electricalData.nominalPowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "NominalPower", "UnitID"));
+    m_electricalData.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
+    m_electricalData.nominalVoltageUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID"));
+    m_electricalData.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
+    m_electricalData.activePowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID"));
+    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+    m_electricalData.reactivePowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID"));
+    m_electricalData.haveMaxReactive = XMLParser::GetNodeValueInt(electricalProp, "HaveMaxReactive");
+    m_electricalData.maxReactive = XMLParser::GetNodeValueDouble(electricalProp, "MaxReactive");
+    m_electricalData.maxReactiveUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID"));
+    m_electricalData.haveMinReactive = XMLParser::GetNodeValueInt(electricalProp, "HaveMinReactive");
+    m_electricalData.minReactive = XMLParser::GetNodeValueDouble(electricalProp, "MinReactive");
+    m_electricalData.minReactiveUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "MinReactive", "UnitID"));
+    m_electricalData.useMachineBase = XMLParser::GetNodeValueInt(electricalProp, "UseMachineBase");
+
+    auto fault = electricalProp->first_node("Fault");
+    if(!fault) return false;
+    m_electricalData.positiveResistance = XMLParser::GetNodeValueDouble(fault, "PositiveResistance");
+    m_electricalData.positiveReactance = XMLParser::GetNodeValueDouble(fault, "PositiveReactance");
+    m_electricalData.negativeResistance = XMLParser::GetNodeValueDouble(fault, "NegativeResistance");
+    m_electricalData.negativeReactance = XMLParser::GetNodeValueDouble(fault, "NegativeReactance");
+    m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
+    m_electricalData.zeroReactance = XMLParser::GetNodeValueDouble(fault, "ZeroReactance");
+    m_electricalData.groundResistance = XMLParser::GetNodeValueDouble(fault, "GroundResistance");
+    m_electricalData.groundReactance = XMLParser::GetNodeValueDouble(fault, "GroundReactance");
+    m_electricalData.groundNeutral = XMLParser::GetNodeValueInt(fault, "GroundNeutral");
+
+    auto stability = electricalProp->first_node("Stability");
+    if(!stability) return false;
+    m_electricalData.plotSyncMachine = XMLParser::GetNodeValueInt(stability, "PlotSyncMachine");
+    m_electricalData.inertia = XMLParser::GetNodeValueDouble(stability, "Inertia");
+    m_electricalData.damping = XMLParser::GetNodeValueDouble(stability, "Damping");
+    m_electricalData.useAVR = XMLParser::GetNodeValueInt(stability, "UseAVR");
+    m_electricalData.useSpeedGovernor = XMLParser::GetNodeValueInt(stability, "UseSpeedGovernor");
+    m_electricalData.armResistance = XMLParser::GetNodeValueDouble(stability, "ArmResistance");
+    m_electricalData.potierReactance = XMLParser::GetNodeValueDouble(stability, "PotierReactance");
+    m_electricalData.satFactor = XMLParser::GetNodeValueDouble(stability, "SatFactor");
+    m_electricalData.syncXd = XMLParser::GetNodeValueDouble(stability, "SyncXd");
+    m_electricalData.syncXq = XMLParser::GetNodeValueDouble(stability, "SyncXq");
+    m_electricalData.transXd = XMLParser::GetNodeValueDouble(stability, "TransXd");
+    m_electricalData.transXq = XMLParser::GetNodeValueDouble(stability, "TransXq");
+    m_electricalData.transTd0 = XMLParser::GetNodeValueDouble(stability, "TransTd0");
+    m_electricalData.transTq0 = XMLParser::GetNodeValueDouble(stability, "TransTq0");
+    m_electricalData.subXd = XMLParser::GetNodeValueDouble(stability, "SubXd");
+    m_electricalData.subXq = XMLParser::GetNodeValueDouble(stability, "SubXq");
+    m_electricalData.subTd0 = XMLParser::GetNodeValueDouble(stability, "SubTd0");
+    m_electricalData.subTq0 = XMLParser::GetNodeValueDouble(stability, "SubTq0");
+
+    if(!OpenSwitchingData(electricalProp)) return false;
+    if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
+
+    m_inserted = true;
     return true;
 }

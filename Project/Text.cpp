@@ -15,22 +15,22 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "TextForm.h"
 #include "Text.h"
+#include "TextForm.h"
 
 #ifdef USING_WX_3_0_X
 #include "DegreesAndRadians.h"
 #endif
-#include "ElectricCalculation.h"
 #include "Bus.h"
-#include "Line.h"
-#include "Transformer.h"
-#include "SyncGenerator.h"
-#include "IndMotor.h"
-#include "SyncMotor.h"
-#include "Load.h"
-#include "Inductor.h"
 #include "Capacitor.h"
+#include "ElectricCalculation.h"
+#include "IndMotor.h"
+#include "Inductor.h"
+#include "Line.h"
+#include "Load.h"
+#include "SyncGenerator.h"
+#include "SyncMotor.h"
+#include "Transformer.h"
 
 Text::Text() : GraphicalElement() { SetText(m_text); }
 Text::Text(wxPoint2DDouble position) : GraphicalElement()
@@ -90,9 +90,7 @@ void Text::SetText(wxString text)
     m_text = text;
 
     // Clear OpenGL text list
-    for(auto it = m_openGLTextList.begin(), itEnd = m_openGLTextList.end(); it != itEnd; ++it) {
-        delete *it;
-    }
+    for(auto it = m_openGLTextList.begin(), itEnd = m_openGLTextList.end(); it != itEnd; ++it) { delete *it; }
     m_openGLTextList.clear();
 
     m_numberOfLines = m_text.Freq('\n') + 1;
@@ -190,9 +188,9 @@ void Text::UpdateText(double systemPowerBase)
                                 SetText(str);
                             } break;
                             case UNIT_A: {
-                                wxString str = "Ia = " +
-                                               wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +
-                                               " A";
+                                wxString str =
+                                    "Ia = " + wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +
+                                    " A";
                                 str += "\nIb = " +
                                        wxString::FromDouble(faultCurrent[1] * baseCurrent, m_decimalPlaces) + " A";
                                 str += "\nIc = " +
@@ -227,9 +225,9 @@ void Text::UpdateText(double systemPowerBase)
                                 SetText(str);
                             } break;
                             case UNIT_V: {
-                                wxString str = "Va = " +
-                                               wxString::FromDouble(faultVoltage[0] * baseVoltage, m_decimalPlaces) +
-                                               " V";
+                                wxString str =
+                                    "Va = " + wxString::FromDouble(faultVoltage[0] * baseVoltage, m_decimalPlaces) +
+                                    " V";
                                 str += "\nVb = " +
                                        wxString::FromDouble(faultVoltage[1] * baseVoltage, m_decimalPlaces) + " V";
                                 str += "\nVc = " +
@@ -344,9 +342,9 @@ void Text::UpdateText(double systemPowerBase)
                                 SetText(str);
                             } break;
                             case UNIT_A: {
-                                wxString str = "Ia = " +
-                                               wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +
-                                               " A";
+                                wxString str =
+                                    "Ia = " + wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +
+                                    " A";
                                 str += "\nIb = " +
                                        wxString::FromDouble(faultCurrent[1] * baseCurrent, m_decimalPlaces) + " A";
                                 str += "\nIc = " +
@@ -480,9 +478,9 @@ void Text::UpdateText(double systemPowerBase)
                                 SetText(str);
                             } break;
                             case UNIT_A: {
-                                wxString str = "Ia = " +
-                                               wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +
-                                               " A";
+                                wxString str =
+                                    "Ia = " + wxString::FromDouble(faultCurrent[0] * baseCurrent, m_decimalPlaces) +
+                                    " A";
                                 str += "\nIb = " +
                                        wxString::FromDouble(faultCurrent[1] * baseCurrent, m_decimalPlaces) + " A";
                                 str += "\nIc = " +
@@ -627,12 +625,14 @@ void Text::UpdateText(double systemPowerBase)
                                     "Ia = " +
                                     wxString::FromDouble(faultCurrent[0] * baseCurrent[m_direction], m_decimalPlaces) +
                                     " A";
-                                str += "\nIb = " + wxString::FromDouble(faultCurrent[1] * baseCurrent[m_direction],
-                                                                        m_decimalPlaces) +
-                                       " A";
-                                str += "\nIc = " + wxString::FromDouble(faultCurrent[2] * baseCurrent[m_direction],
-                                                                        m_decimalPlaces) +
-                                       " A";
+                                str +=
+                                    "\nIb = " +
+                                    wxString::FromDouble(faultCurrent[1] * baseCurrent[m_direction], m_decimalPlaces) +
+                                    " A";
+                                str +=
+                                    "\nIc = " +
+                                    wxString::FromDouble(faultCurrent[2] * baseCurrent[m_direction], m_decimalPlaces) +
+                                    " A";
                                 SetText(str);
                             } break;
                             case UNIT_kA: {
@@ -935,4 +935,44 @@ bool Text::IsGLTextOK()
         if(!(*it)->IsTextureOK()) isOk = false;
     }
     return isOk;
+}
+
+rapidxml::xml_node<>* Text::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Text");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+
+    auto textProperties = XMLParser::AppendNode(doc, elementNode, "TextProperties");
+    auto elementType = XMLParser::AppendNode(doc, textProperties, "ElementType");
+    XMLParser::SetNodeValue(doc, elementType, m_elementType);
+    auto elementNumber = XMLParser::AppendNode(doc, textProperties, "ElementNumber");
+    XMLParser::SetNodeValue(doc, elementNumber, m_elementNumber);
+    auto dataType = XMLParser::AppendNode(doc, textProperties, "DataType");
+    XMLParser::SetNodeValue(doc, dataType, m_dataType);
+    auto dataUnit = XMLParser::AppendNode(doc, textProperties, "DataUnit");
+    XMLParser::SetNodeValue(doc, dataUnit, m_unit);
+    auto direction = XMLParser::AppendNode(doc, textProperties, "Direction");
+    XMLParser::SetNodeValue(doc, direction, m_direction);
+    auto decimalPlaces = XMLParser::AppendNode(doc, textProperties, "DecimalPlaces");
+    XMLParser::SetNodeValue(doc, decimalPlaces, m_decimalPlaces);
+
+    return elementNode;
+}
+
+bool Text::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+
+    auto textProperties = elementNode->first_node("TextProperties");
+    if(!textProperties) return false;
+
+    SetElementType(static_cast<ElementType>(XMLParser::GetNodeValueDouble(textProperties, "ElementType")));
+    SetDataType(static_cast<DataType>(XMLParser::GetNodeValueDouble(textProperties, "DataType")));
+    SetUnit(static_cast<ElectricalUnit>(XMLParser::GetNodeValueDouble(textProperties, "DataUnit")));
+    SetDirection(XMLParser::GetNodeValueDouble(textProperties, "Direction"));
+    SetDecimalPlaces(XMLParser::GetNodeValueDouble(textProperties, "DecimalPlaces"));
+    SetElementNumber(XMLParser::GetNodeValueInt(textProperties, "ElementNumber"));
+    return true;
 }

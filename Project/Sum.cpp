@@ -15,9 +15,9 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "ConnectionLine.h"
 #include "Sum.h"
 #include "SumForm.h"
-#include "ConnectionLine.h"
 
 Sum::Sum(int id) : ControlElement(id)
 {
@@ -244,4 +244,43 @@ Element* Sum::GetCopy()
     Sum* copy = new Sum(m_elementID);
     *copy = *this;
     return copy;
+}
+
+rapidxml::xml_node<>* Sum::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Sum");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto signsNode = XMLParser::AppendNode(doc, elementNode, "Signs");
+    for(unsigned int i = 0; i < m_signalList.size(); ++i) {
+        auto value = XMLParser::AppendNode(doc, signsNode, "Value");
+        XMLParser::SetNodeValue(doc, value, static_cast<int>(m_signalList[i]));
+    }
+
+    return elementNode;
+}
+
+bool Sum::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    m_signalList.clear();
+    auto signsNode = elementNode->first_node("Signs");
+    auto sign = signsNode->first_node("Value");
+    while(sign) {
+        long value;
+        wxString(sign->value()).ToCLong(&value);
+        m_signalList.push_back(static_cast<Sum::Signal>(value));
+        sign = sign->next_sibling("Value");
+    }
+
+    StartMove(m_position);
+    UpdatePoints();
+
+    return true;
 }

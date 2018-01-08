@@ -177,7 +177,7 @@ void Gain::Move(wxPoint2DDouble position)
 
 bool Gain::Solve(double* input, double timeStep)
 {
-    if(!input){
+    if(!input) {
         m_output = 0.0;
         return true;
     }
@@ -197,5 +197,31 @@ bool Gain::UpdateText()
 {
     SetValue(m_value);
     if(!m_glText->IsTextureOK()) return false;
+    return true;
+}
+
+rapidxml::xml_node<>* Gain::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Gain");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto value = XMLParser::AppendNode(doc, elementNode, "Value");
+    XMLParser::SetNodeValue(doc, value, m_value);
+
+    return elementNode;
+}
+
+bool Gain::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    double value = XMLParser::GetNodeValueDouble(elementNode, "Value");
+    SetValue(value);
     return true;
 }

@@ -52,6 +52,10 @@ class IndMotor : public Machines
     virtual IndMotorElectricalData GetElectricalData() { return m_electricalData; }
     virtual IndMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(IndMotorElectricalData electricalData) { m_electricalData = electricalData; }
+
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);
+
    protected:
     IndMotorElectricalData m_electricalData;
 };

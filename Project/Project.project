@@ -64,6 +64,9 @@
         <File Name="fparser/fparser.cc"/>
         <File Name="fparser/fpoptimizer.cc"/>
       </VirtualDirectory>
+      <VirtualDirectory Name="rapidXML">
+        <File Name="XMLParser.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
       <VirtualDirectory Name="wxMathPlot">
@@ -137,6 +140,7 @@
         <File Name="rapidXML/rapidxml_iterators.hpp"/>
         <File Name="rapidXML/rapidxml_print.hpp"/>
         <File Name="rapidXML/rapidxml_utils.hpp"/>
+        <File Name="XMLParser.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="element">
         <File Name="Element.h"/>
@@ -180,7 +184,7 @@
           <File Name="Transformer.h"/>
         </VirtualDirectory>
       </VirtualDirectory>
-      <VirtualDirectory Name="farser">
+      <VirtualDirectory Name="fparser">
         <File Name="MathExprParser.h"/>
         <File Name="fparser/fparser.hh"/>
         <File Name="fparser/fpconfig.hh"/>

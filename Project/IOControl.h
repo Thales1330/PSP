@@ -65,6 +65,10 @@ class IOControl : public ControlElement
     virtual void SetValue(IOFlags value);
     virtual int GetIOFlags() const { return m_ioFlags; }
     virtual Node::NodeType GetType() { return m_ioNodeType; }
+
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
+
     virtual Element* GetCopy();
 
    protected:

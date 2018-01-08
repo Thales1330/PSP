@@ -41,849 +41,204 @@ void FileHanding::SaveProject(wxFileName path)
     rapidxml::xml_node<>* rootNode = doc.allocate_node(rapidxml::node_element, "Project");
     doc.append_node(rootNode);
 
-    rapidxml::xml_node<>* projectNameNode = AppendNode(doc, rootNode, "Name");
-    SetNodeValue(doc, projectNameNode, path.GetName());
+    rapidxml::xml_node<>* projectNameNode = XMLParser::AppendNode(doc, rootNode, "Name");
+    XMLParser::SetNodeValue(doc, projectNameNode, path.GetName());
 
     //{ Simulation properties
     PropertiesData* properties = m_workspace->GetProperties();
-    auto propertiesNode = AppendNode(doc, rootNode, "Properties");
+    auto propertiesNode = XMLParser::AppendNode(doc, rootNode, "Properties");
 
     SimulationData simulationData = properties->GetSimulationPropertiesData();
-    auto simulationPropNode = AppendNode(doc, propertiesNode, "SimulationProperties");
+    auto simulationPropNode = XMLParser::XMLParser::AppendNode(doc, propertiesNode, "SimulationProperties");
 
-    auto generalPropNode = AppendNode(doc, simulationPropNode, "General");
-    auto basePower = AppendNode(doc, generalPropNode, "BasePower");
-    SetNodeValue(doc, basePower, simulationData.basePower);
-    SetNodeAttribute(doc, basePower, "UnitID", simulationData.basePowerUnit);
-    auto contCalc = AppendNode(doc, generalPropNode, "ContinuousCalculation");
-    auto contCalcFault = AppendNode(doc, contCalc, "Fault");
-    SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);
-    auto contCalcSCPower = AppendNode(doc, contCalc, "SCPower");
-    SetNodeValue(doc, contCalcSCPower, simulationData.scPowerAfterPowerFlow);
+    auto generalPropNode = XMLParser::AppendNode(doc, simulationPropNode, "General");
+    auto basePower = XMLParser::AppendNode(doc, generalPropNode, "BasePower");
+    XMLParser::SetNodeValue(doc, basePower, simulationData.basePower);
+    XMLParser::SetNodeAttribute(doc, basePower, "UnitID", simulationData.basePowerUnit);
+    auto contCalc = XMLParser::AppendNode(doc, generalPropNode, "ContinuousCalculation");
+    auto contCalcFault = XMLParser::AppendNode(doc, contCalc, "Fault");
+    XMLParser::SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);
+    auto contCalcSCPower = XMLParser::AppendNode(doc, contCalc, "SCPower");
+    XMLParser::SetNodeValue(doc, contCalcSCPower, simulationData.scPowerAfterPowerFlow);
 
-    auto powerFlowPropNode = AppendNode(doc, simulationPropNode, "PowerFlow");
-    auto solutionMethod = AppendNode(doc, powerFlowPropNode, "SolutionMethod");
-    SetNodeValue(doc, solutionMethod, simulationData.powerFlowMethod);
-    auto accFactor = AppendNode(doc, powerFlowPropNode, "AccFactor");
-    SetNodeValue(doc, accFactor, simulationData.accFator);
-    auto pfTolerance = AppendNode(doc, powerFlowPropNode, "Tolerance");
-    SetNodeValue(doc, pfTolerance, simulationData.powerFlowTolerance);
-    auto pfMaxIter = AppendNode(doc, powerFlowPropNode, "MaxIterations");
-    SetNodeValue(doc, pfMaxIter, simulationData.powerFlowMaxIterations);
+    auto powerFlowPropNode = XMLParser::AppendNode(doc, simulationPropNode, "PowerFlow");
+    auto solutionMethod = XMLParser::AppendNode(doc, powerFlowPropNode, "SolutionMethod");
+    XMLParser::SetNodeValue(doc, solutionMethod, simulationData.powerFlowMethod);
+    auto accFactor = XMLParser::AppendNode(doc, powerFlowPropNode, "AccFactor");
+    XMLParser::SetNodeValue(doc, accFactor, simulationData.accFator);
+    auto pfTolerance = XMLParser::AppendNode(doc, powerFlowPropNode, "Tolerance");
+    XMLParser::SetNodeValue(doc, pfTolerance, simulationData.powerFlowTolerance);
+    auto pfMaxIter = XMLParser::AppendNode(doc, powerFlowPropNode, "MaxIterations");
+    XMLParser::SetNodeValue(doc, pfMaxIter, simulationData.powerFlowMaxIterations);
 
-    auto stabilityPropNode = AppendNode(doc, simulationPropNode, "Stability");
-    auto timeStep = AppendNode(doc, stabilityPropNode, "TimeStep");
-    SetNodeValue(doc, timeStep, simulationData.timeStep);
-    auto simTime = AppendNode(doc, stabilityPropNode, "SimulationTime");
-    SetNodeValue(doc, simTime, simulationData.stabilitySimulationTime);
-    auto freq = AppendNode(doc, stabilityPropNode, "Frequency");
-    SetNodeValue(doc, freq, simulationData.stabilityFrequency);
-    auto stabTolerance = AppendNode(doc, stabilityPropNode, "Tolerance");
-    SetNodeValue(doc, stabTolerance, simulationData.stabilityTolerance);
-    auto stabTMaxIter = AppendNode(doc, stabilityPropNode, "MaxIterations");
-    SetNodeValue(doc, stabTMaxIter, simulationData.stabilityMaxIterations);
-    auto controlRatio = AppendNode(doc, stabilityPropNode, "ControlStepRatio");
-    SetNodeValue(doc, controlRatio, simulationData.controlTimeStepRatio);
-    auto plotStep = AppendNode(doc, stabilityPropNode, "PlotStep");
-    SetNodeValue(doc, plotStep, simulationData.plotTime);
-    auto useCOI = AppendNode(doc, stabilityPropNode, "UseCOI");
-    SetNodeValue(doc, useCOI, simulationData.useCOI);
+    auto stabilityPropNode = XMLParser::AppendNode(doc, simulationPropNode, "Stability");
+    auto timeStep = XMLParser::AppendNode(doc, stabilityPropNode, "TimeStep");
+    XMLParser::SetNodeValue(doc, timeStep, simulationData.timeStep);
+    auto simTime = XMLParser::AppendNode(doc, stabilityPropNode, "SimulationTime");
+    XMLParser::SetNodeValue(doc, simTime, simulationData.stabilitySimulationTime);
+    auto freq = XMLParser::AppendNode(doc, stabilityPropNode, "Frequency");
+    XMLParser::SetNodeValue(doc, freq, simulationData.stabilityFrequency);
+    auto stabTolerance = XMLParser::AppendNode(doc, stabilityPropNode, "Tolerance");
+    XMLParser::SetNodeValue(doc, stabTolerance, simulationData.stabilityTolerance);
+    auto stabTMaxIter = XMLParser::AppendNode(doc, stabilityPropNode, "MaxIterations");
+    XMLParser::SetNodeValue(doc, stabTMaxIter, simulationData.stabilityMaxIterations);
+    auto controlRatio = XMLParser::AppendNode(doc, stabilityPropNode, "ControlStepRatio");
+    XMLParser::SetNodeValue(doc, controlRatio, simulationData.controlTimeStepRatio);
+    auto plotStep = XMLParser::AppendNode(doc, stabilityPropNode, "PlotStep");
+    XMLParser::SetNodeValue(doc, plotStep, simulationData.plotTime);
+    auto useCOI = XMLParser::AppendNode(doc, stabilityPropNode, "UseCOI");
+    XMLParser::SetNodeValue(doc, useCOI, simulationData.useCOI);
 
-    auto zipPropNode = AppendNode(doc, simulationPropNode, "ZIPLoad");
-    auto useCompLoads = AppendNode(doc, zipPropNode, "UseCompositeLoad");
-    SetNodeValue(doc, useCompLoads, simulationData.useCompLoads);
-    auto activePowerComp = AppendNode(doc, zipPropNode, "ActivePowerComposition");
-    auto pz = AppendNode(doc, activePowerComp, "ConstantImpedance");
-    SetNodeValue(doc, pz, simulationData.constImpedanceActive);
-    auto pi = AppendNode(doc, activePowerComp, "ConstantCurrent");
-    SetNodeValue(doc, pi, simulationData.constCurrentActive);
-    auto pp = AppendNode(doc, activePowerComp, "ConstantPower");
-    SetNodeValue(doc, pp, simulationData.constPowerActive);
-    auto reactivePowerComp = AppendNode(doc, zipPropNode, "ReactivePowerComposition");
-    auto qz = AppendNode(doc, reactivePowerComp, "ConstantImpedance");
-    SetNodeValue(doc, qz, simulationData.constImpedanceReactive);
-    auto qi = AppendNode(doc, reactivePowerComp, "ConstantCurrent");
-    SetNodeValue(doc, qi, simulationData.constCurrentReactive);
-    auto qp = AppendNode(doc, reactivePowerComp, "ConstantPower");
-    SetNodeValue(doc, qp, simulationData.constPowerReactive);
-    auto undervoltageLim = AppendNode(doc, zipPropNode, "UndervoltageLimit");
-    auto uvi = AppendNode(doc, undervoltageLim, "ConstantCurrent");
-    SetNodeValue(doc, uvi, simulationData.underVoltageConstCurrent);
-    auto uvp = AppendNode(doc, undervoltageLim, "ConstantPower");
-    SetNodeValue(doc, uvp, simulationData.underVoltageConstPower);
+    auto zipPropNode = XMLParser::AppendNode(doc, simulationPropNode, "ZIPLoad");
+    auto useCompLoads = XMLParser::AppendNode(doc, zipPropNode, "UseCompositeLoad");
+    XMLParser::SetNodeValue(doc, useCompLoads, simulationData.useCompLoads);
+    auto activePowerComp = XMLParser::AppendNode(doc, zipPropNode, "ActivePowerComposition");
+    auto pz = XMLParser::AppendNode(doc, activePowerComp, "ConstantImpedance");
+    XMLParser::SetNodeValue(doc, pz, simulationData.constImpedanceActive);
+    auto pi = XMLParser::AppendNode(doc, activePowerComp, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, pi, simulationData.constCurrentActive);
+    auto pp = XMLParser::AppendNode(doc, activePowerComp, "ConstantPower");
+    XMLParser::SetNodeValue(doc, pp, simulationData.constPowerActive);
+    auto reactivePowerComp = XMLParser::AppendNode(doc, zipPropNode, "ReactivePowerComposition");
+    auto qz = XMLParser::AppendNode(doc, reactivePowerComp, "ConstantImpedance");
+    XMLParser::SetNodeValue(doc, qz, simulationData.constImpedanceReactive);
+    auto qi = XMLParser::AppendNode(doc, reactivePowerComp, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, qi, simulationData.constCurrentReactive);
+    auto qp = XMLParser::AppendNode(doc, reactivePowerComp, "ConstantPower");
+    XMLParser::SetNodeValue(doc, qp, simulationData.constPowerReactive);
+    auto undervoltageLim = XMLParser::AppendNode(doc, zipPropNode, "UndervoltageLimit");
+    auto uvi = XMLParser::AppendNode(doc, undervoltageLim, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, uvi, simulationData.underVoltageConstCurrent);
+    auto uvp = XMLParser::AppendNode(doc, undervoltageLim, "ConstantPower");
+    XMLParser::SetNodeValue(doc, uvp, simulationData.underVoltageConstPower);
 
     //}
 
-    auto elementsNode = AppendNode(doc, rootNode, "Elements");
+    auto elementsNode = XMLParser::AppendNode(doc, rootNode, "Elements");
 
     // Save all the data
     ElectricCalculation allElements;
     allElements.GetElementsFromList(m_workspace->GetElementList());
+    int elementID = 0;
 
     //{ Buses
-    auto busesNode = AppendNode(doc, elementsNode, "BusList");
+    auto busesNode = XMLParser::AppendNode(doc, elementsNode, "BusList");
     auto busList = allElements.GetBusList();
-    for(int i = 0; i < (int)busList.size(); i++) {
-        Bus* bus = busList[i];
-        auto busNode = AppendNode(doc, busesNode, "Bus");
-        SetNodeAttribute(doc, busNode, "ID", i);
-        auto cadProp = AppendNode(doc, busNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, bus->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, bus->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, bus->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, bus->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, bus->GetAngle());
-
-        BusElectricalData data = bus->GetElectricalData();
-        auto electricalProp = AppendNode(doc, busNode, "ElectricalProperties");
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto isVoltageControlled = AppendNode(doc, electricalProp, "IsVoltageControlled");
-        SetNodeValue(doc, isVoltageControlled, data.isVoltageControlled);
-        auto controlledVoltage = AppendNode(doc, electricalProp, "ControlledVoltage");
-        SetNodeValue(doc, controlledVoltage, data.controlledVoltage);
-        SetNodeAttribute(doc, controlledVoltage, "Choice", data.controlledVoltageUnitChoice);
-        auto slackBus = AppendNode(doc, electricalProp, "SlackBus");
-        SetNodeValue(doc, slackBus, data.slackBus);
-
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto hasFault = AppendNode(doc, fault, "HasFault");
-        SetNodeValue(doc, hasFault, data.hasFault);
-        auto faultType = AppendNode(doc, fault, "Type");
-        SetNodeValue(doc, faultType, data.faultType);
-        auto faultLocation = AppendNode(doc, fault, "Location");
-        SetNodeValue(doc, faultLocation, data.faultLocation);
-        auto faultResistance = AppendNode(doc, fault, "Resistance");
-        SetNodeValue(doc, faultResistance, data.faultResistance);
-        auto faultReactance = AppendNode(doc, fault, "Reactance");
-        SetNodeValue(doc, faultReactance, data.faultReactance);
-
-        auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotBus = AppendNode(doc, stability, "Plot");
-        SetNodeValue(doc, plotBus, data.plotBus);
-        auto stabHasFault = AppendNode(doc, stability, "HasFault");
-        SetNodeValue(doc, stabHasFault, data.stabHasFault);
-        auto stabFaultTime = AppendNode(doc, stability, "FaultTime");
-        SetNodeValue(doc, stabFaultTime, data.stabFaultTime);
-        auto stabFaultLength = AppendNode(doc, stability, "FaultLength");
-        SetNodeValue(doc, stabFaultLength, data.stabFaultLength);
-        auto stabFaultResistance = AppendNode(doc, stability, "FaultResistance");
-        SetNodeValue(doc, stabFaultResistance, data.stabFaultResistance);
-        auto stabFaultReactance = AppendNode(doc, stability, "FaultReactance");
-        SetNodeValue(doc, stabFaultReactance, data.stabFaultReactance);
-
-        data.number = i;
-        bus->SetElectricalData(data);
-    }  //}
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, busesNode);
+        elementID++;
+    }
+    //}
 
     //{ Capacitor
-    auto capacitorsNode = AppendNode(doc, elementsNode, "CapacitorList");
+    auto capacitorsNode = XMLParser::AppendNode(doc, elementsNode, "CapacitorList");
     auto capacitorList = allElements.GetCapacitorList();
-    for(int i = 0; i < (int)capacitorList.size(); i++) {
-        Capacitor* capacitor = capacitorList[i];
-        auto capacitorNode = AppendNode(doc, capacitorsNode, "Capacitor");
-        SetNodeAttribute(doc, capacitorNode, "ID", i);
-        auto cadProp = AppendNode(doc, capacitorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, capacitor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, capacitor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, capacitor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, capacitor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, capacitor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, capacitor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, capacitor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(capacitor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-
-        CapacitorElectricalData data = capacitor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, capacitorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, capacitor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = capacitor->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
-        }
-    }  //}
+    elementID = 0;
+    for(auto it = capacitorList.begin(), itEnd = capacitorList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, capacitorsNode);
+        elementID++;
+    }
+    //}
 
     //{ IndMotor
-    auto indMotorsNode = AppendNode(doc, elementsNode, "IndMotorList");
+    auto indMotorsNode = XMLParser::AppendNode(doc, elementsNode, "IndMotorList");
     auto indMotorList = allElements.GetIndMotorList();
-    for(int i = 0; i < (int)indMotorList.size(); i++) {
-        IndMotor* indMotor = indMotorList[i];
-        auto indMotorNode = AppendNode(doc, indMotorsNode, "IndMotor");
-        SetNodeAttribute(doc, indMotorNode, "ID", i);
-        auto cadProp = AppendNode(doc, indMotorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, indMotor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, indMotor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, indMotor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, indMotor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, indMotor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, indMotor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, indMotor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(indMotor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-
-        IndMotorElectricalData data = indMotor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, indMotorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, indMotor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-    }  //}
+    elementID = 0;
+    for(auto it = indMotorList.begin(), itEnd = indMotorList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, indMotorsNode);
+        elementID++;
+    }
+    //}
 
     //{ Inductor
-    auto inductorsNode = AppendNode(doc, elementsNode, "InductorList");
+    auto inductorsNode = XMLParser::AppendNode(doc, elementsNode, "InductorList");
     auto inductorList = allElements.GetInductorList();
-    for(int i = 0; i < (int)inductorList.size(); i++) {
-        Inductor* inductor = inductorList[i];
-        auto inductorNode = AppendNode(doc, inductorsNode, "Inductor");
-        SetNodeAttribute(doc, inductorNode, "ID", i);
-        auto cadProp = AppendNode(doc, inductorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, inductor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, inductor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, inductor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, inductor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, inductor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, inductor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, inductor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(inductor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-
-        InductorElectricalData data = inductor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, inductorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, inductor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = inductor->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
-        }
-    }  //}
+    elementID = 0;
+    for(auto it = inductorList.begin(), itEnd = inductorList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, inductorsNode);
+        elementID++;
+    }
+    //}
 
     //{ Line
-    auto linesNode = AppendNode(doc, elementsNode, "LineList");
+    auto linesNode = XMLParser::AppendNode(doc, elementsNode, "LineList");
     auto lineList = allElements.GetLineList();
-    for(int i = 0; i < (int)lineList.size(); i++) {
-        Line* line = lineList[i];
-        auto lineNode = AppendNode(doc, linesNode, "Line");
-        SetNodeAttribute(doc, lineNode, "ID", i);
-        auto cadProp = AppendNode(doc, lineNode, "CADProperties");
-        auto nodeList = AppendNode(doc, cadProp, "NodeList");
-        auto ptList = line->GetPointList();
-        int nodeID = 0;
-        for(int j = 0; j < (int)ptList.size(); j++) {
-            if((j != 1) && (j != (int)ptList.size() - 2)) {
-                auto nodePos = AppendNode(doc, nodeList, "Node");
-                SetNodeAttribute(doc, nodePos, "ID", nodeID);
-                auto nodePosX = AppendNode(doc, nodePos, "X");
-                SetNodeValue(doc, nodePosX, ptList[j].m_x);
-                auto nodePosY = AppendNode(doc, nodePos, "Y");
-                SetNodeValue(doc, nodePosY, ptList[j].m_y);
-                nodeID++;
-            }
-        }
-
-        auto parentIDList = AppendNode(doc, cadProp, "ParentIDList");
-        for(int j = 0; j < (int)line->GetParentList().size(); j++) {
-            Bus* parent = static_cast<Bus*>(line->GetParentList()[j]);
-            if(parent) {
-                auto parentID = AppendNode(doc, parentIDList, "ParentID");
-                SetNodeAttribute(doc, parentID, "ID", j);
-                SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-            }
-        }
-
-        LineElectricalData data = line->GetElectricalData();
-        auto electricalProp = AppendNode(doc, lineNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, line->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        auto resistance = AppendNode(doc, electricalProp, "Resistance");
-        SetNodeValue(doc, resistance, data.resistance);
-        SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
-        auto indReactance = AppendNode(doc, electricalProp, "IndReactance");
-        SetNodeValue(doc, indReactance, data.indReactance);
-        SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
-        auto capSusceptance = AppendNode(doc, electricalProp, "CapSusceptance");
-        SetNodeValue(doc, capSusceptance, data.capSusceptance);
-        SetNodeAttribute(doc, capSusceptance, "UnitID", data.capSusceptanceUnit);
-        auto lineSize = AppendNode(doc, electricalProp, "LineSize");
-        SetNodeValue(doc, lineSize, data.lineSize);
-        auto useLinePower = AppendNode(doc, electricalProp, "UseLinePower");
-        SetNodeValue(doc, useLinePower, data.useLinePower);
-
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroIndReactance = AppendNode(doc, fault, "ZeroIndReactance");
-        SetNodeValue(doc, zeroIndReactance, data.zeroIndReactance);
-        auto zeroCapSusceptance = AppendNode(doc, fault, "ZeroCapSusceptance");
-        SetNodeValue(doc, zeroCapSusceptance, data.zeroCapSusceptance);
-
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = line->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
-        }
-    }  //}
+    elementID = 0;
+    for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, linesNode);
+        elementID++;
+    }
+    //}
 
     //{ Load
-    auto loadsNode = AppendNode(doc, elementsNode, "LoadList");
+    auto loadsNode = XMLParser::AppendNode(doc, elementsNode, "LoadList");
     auto loadList = allElements.GetLoadList();
-    for(int i = 0; i < (int)loadList.size(); i++) {
-        Load* load = loadList[i];
-        auto loadNode = AppendNode(doc, loadsNode, "Load");
-        SetNodeAttribute(doc, loadNode, "ID", i);
-        auto cadProp = AppendNode(doc, loadNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, load->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, load->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, load->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, load->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, load->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, load->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, load->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(load->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-
-        LoadElectricalData data = load->GetElectricalData();
-        auto electricalProp = AppendNode(doc, loadNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, load->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-        auto loadType = AppendNode(doc, electricalProp, "LoadType");
-        SetNodeValue(doc, loadType, data.loadType);
-
-        auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotLoad = AppendNode(doc, stability, "PlotLoad");
-        SetNodeValue(doc, plotLoad, data.plotLoad);
-        auto useCompLoad = AppendNode(doc, stability, "UseCompositeLoad");
-        SetNodeValue(doc, useCompLoad, data.useCompLoad);
-        auto activePowerCompl = AppendNode(doc, stability, "ActivePowerComposition");
-        auto pzl = AppendNode(doc, activePowerCompl, "ConstantImpedance");
-        SetNodeValue(doc, pzl, data.constImpedanceActive);
-        auto pil = AppendNode(doc, activePowerCompl, "ConstantCurrent");
-        SetNodeValue(doc, pil, data.constCurrentActive);
-        auto ppl = AppendNode(doc, activePowerCompl, "ConstantPower");
-        SetNodeValue(doc, ppl, data.constPowerActive);
-        auto reactivePowerCompl = AppendNode(doc, stability, "ReactivePowerComposition");
-        auto qzl = AppendNode(doc, reactivePowerCompl, "ConstantImpedance");
-        SetNodeValue(doc, qzl, data.constImpedanceReactive);
-        auto qil = AppendNode(doc, reactivePowerCompl, "ConstantCurrent");
-        SetNodeValue(doc, qil, data.constCurrentReactive);
-        auto qpl = AppendNode(doc, reactivePowerCompl, "ConstantPower");
-        SetNodeValue(doc, qpl, data.constPowerReactive);
-
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = load->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
-        }
-    }  //}
+    elementID = 0;
+    for(auto it = loadList.begin(), itEnd = loadList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, loadsNode);
+        elementID++;
+    }
+    //}
 
     //{ SyncGenerator
-    auto syncGeneratorsNode = AppendNode(doc, elementsNode, "SyncGeneratorList");
+    auto syncGeneratorsNode = XMLParser::AppendNode(doc, elementsNode, "SyncGeneratorList");
     auto syncGeneratorList = allElements.GetSyncGeneratorList();
-    for(int i = 0; i < (int)syncGeneratorList.size(); i++) {
-        SyncGenerator* syncGenerator = syncGeneratorList[i];
-        auto syncGeneratorNode = AppendNode(doc, syncGeneratorsNode, "SyncGenerator");
-        SetNodeAttribute(doc, syncGeneratorNode, "ID", i);
-        auto cadProp = AppendNode(doc, syncGeneratorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, syncGenerator->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, syncGenerator->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, syncGenerator->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, syncGenerator->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, syncGenerator->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, syncGenerator->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, syncGenerator->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
+    elementID = 0;
+    for(auto it = syncGeneratorList.begin(), itEnd = syncGeneratorList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        auto elementNode = (*it)->SaveElement(doc, syncGeneratorsNode);
 
-        SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
-        auto electricalProp = AppendNode(doc, syncGeneratorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, syncGenerator->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-        auto haveMaxReactive = AppendNode(doc, electricalProp, "HaveMaxReactive");
-        SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
-        auto maxReactive = AppendNode(doc, electricalProp, "MaxReactive");
-        SetNodeValue(doc, maxReactive, data.maxReactive);
-        SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
-        auto haveMinReactive = AppendNode(doc, electricalProp, "HaveMinReactive");
-        SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
-        auto minReactive = AppendNode(doc, electricalProp, "MinReactive");
-        SetNodeValue(doc, minReactive, data.minReactive);
-        SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
-        auto useMachineBase = AppendNode(doc, electricalProp, "UseMachineBase");
-        SetNodeValue(doc, useMachineBase, data.useMachineBase);
+        // Save controls
+        auto data = (*it)->GetElectricalData();
+        auto electricalProp = elementNode->first_node("ElectricalProperties");
+        auto stability = electricalProp->first_node("Stability");
 
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto positiveResistance = AppendNode(doc, fault, "PositiveResistance");
-        SetNodeValue(doc, positiveResistance, data.positiveResistance);
-        auto positiveReactance = AppendNode(doc, fault, "PositiveReactance");
-        SetNodeValue(doc, positiveReactance, data.positiveReactance);
-        auto negativeResistance = AppendNode(doc, fault, "NegativeResistance");
-        SetNodeValue(doc, negativeResistance, data.negativeResistance);
-        auto negativeReactance = AppendNode(doc, fault, "NegativeReactance");
-        SetNodeValue(doc, negativeReactance, data.negativeReactance);
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
-        SetNodeValue(doc, zeroReactance, data.zeroReactance);
-        auto groundResistance = AppendNode(doc, fault, "GroundResistance");
-        SetNodeValue(doc, groundResistance, data.groundResistance);
-        auto groundReactance = AppendNode(doc, fault, "GroundReactance");
-        SetNodeValue(doc, groundReactance, data.groundReactance);
-        auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
-        SetNodeValue(doc, groundNeutral, data.groundNeutral);
-
-        auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotSyncMachine = AppendNode(doc, stability, "PlotSyncMachine");
-        SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
-        auto inertia = AppendNode(doc, stability, "Inertia");
-        SetNodeValue(doc, inertia, data.inertia);
-        auto damping = AppendNode(doc, stability, "Damping");
-        SetNodeValue(doc, damping, data.damping);
-        auto useAVR = AppendNode(doc, stability, "UseAVR");
-        SetNodeValue(doc, useAVR, data.useAVR);
-        auto useSpeedGovernor = AppendNode(doc, stability, "UseSpeedGovernor");
-        SetNodeValue(doc, useSpeedGovernor, data.useSpeedGovernor);
-        auto armResistance = AppendNode(doc, stability, "ArmResistance");
-        SetNodeValue(doc, armResistance, data.armResistance);
-        auto potierReactance = AppendNode(doc, stability, "PotierReactance");
-        SetNodeValue(doc, potierReactance, data.potierReactance);
-        auto satFactor = AppendNode(doc, stability, "SatFactor");
-        SetNodeValue(doc, satFactor, data.satFactor);
-        auto syncXd = AppendNode(doc, stability, "SyncXd");
-        SetNodeValue(doc, syncXd, data.syncXd);
-        auto syncXq = AppendNode(doc, stability, "SyncXq");
-        SetNodeValue(doc, syncXq, data.syncXq);
-        auto transXd = AppendNode(doc, stability, "TransXd");
-        SetNodeValue(doc, transXd, data.transXd);
-        auto transXq = AppendNode(doc, stability, "TransXq");
-        SetNodeValue(doc, transXq, data.transXq);
-        auto transTd0 = AppendNode(doc, stability, "TransTd0");
-        SetNodeValue(doc, transTd0, data.transTd0);
-        auto transTq0 = AppendNode(doc, stability, "TransTq0");
-        SetNodeValue(doc, transTq0, data.transTq0);
-        auto subXd = AppendNode(doc, stability, "SubXd");
-        SetNodeValue(doc, subXd, data.subXd);
-        auto subXq = AppendNode(doc, stability, "SubXq");
-        SetNodeValue(doc, subXq, data.subXq);
-        auto subTd0 = AppendNode(doc, stability, "SubTd0");
-        SetNodeValue(doc, subTd0, data.subTd0);
-        auto subTq0 = AppendNode(doc, stability, "SubTq0");
-        SetNodeValue(doc, subTq0, data.subTq0);
-
-        auto avr = AppendNode(doc, stability, "AVR");
+        auto avr = XMLParser::AppendNode(doc, stability, "AVR");
         if(data.avr) SaveControlElements(doc, avr, data.avr);
 
-        auto speedGov = AppendNode(doc, stability, "SpeedGovernor");
+        auto speedGov = XMLParser::AppendNode(doc, stability, "SpeedGovernor");
         if(data.speedGov) SaveControlElements(doc, speedGov, data.speedGov);
 
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = syncGenerator->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
-        }
-    }  //}
+        elementID++;
+    }
+    //}
 
     //{ SyncMotor
-    auto syncMotorsNode = AppendNode(doc, elementsNode, "SyncMotorList");
+    auto syncMotorsNode = XMLParser::AppendNode(doc, elementsNode, "SyncMotorList");
     auto syncMotorList = allElements.GetSyncMotorList();
-    for(int i = 0; i < (int)syncMotorList.size(); i++) {
-        SyncMotor* syncMotor = syncMotorList[i];
-        auto syncMotorNode = AppendNode(doc, syncMotorsNode, "SyncMotor");
-        SetNodeAttribute(doc, syncMotorNode, "ID", i);
-        auto cadProp = AppendNode(doc, syncMotorNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, syncMotor->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, syncMotor->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, syncMotor->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, syncMotor->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, syncMotor->GetAngle());
-        auto nodePos = AppendNode(doc, cadProp, "NodePosition");
-        auto nodePosX = AppendNode(doc, nodePos, "X");
-        SetNodeValue(doc, nodePosX, syncMotor->GetPointList()[0].m_x);
-        auto nodePosY = AppendNode(doc, nodePos, "Y");
-        SetNodeValue(doc, nodePosY, syncMotor->GetPointList()[0].m_y);
-        auto parentID = AppendNode(doc, cadProp, "ParentID");
-        Bus* parent = static_cast<Bus*>(syncMotor->GetParentList()[0]);
-        if(parent) SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-
-        SyncMotorElectricalData data = syncMotor->GetElectricalData();
-        auto electricalProp = AppendNode(doc, syncMotorNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, syncMotor->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        // auto nominalVoltage = AppendNode(doc, electricalProp, "NominalVoltage");
-        // SetNodeValue(doc, nominalVoltage, data.nominalVoltage);
-        // SetNodeAttribute(doc, nominalVoltage, "UnitID", data.nominalVoltageUnit);
-        auto activePower = AppendNode(doc, electricalProp, "ActivePower");
-        SetNodeValue(doc, activePower, data.activePower);
-        SetNodeAttribute(doc, activePower, "UnitID", data.activePowerUnit);
-        auto reactivePower = AppendNode(doc, electricalProp, "ReactivePower");
-        SetNodeValue(doc, reactivePower, data.reactivePower);
-        SetNodeAttribute(doc, reactivePower, "UnitID", data.reactivePowerUnit);
-        auto haveMaxReactive = AppendNode(doc, electricalProp, "HaveMaxReactive");
-        SetNodeValue(doc, haveMaxReactive, data.haveMaxReactive);
-        auto maxReactive = AppendNode(doc, electricalProp, "MaxReactive");
-        SetNodeValue(doc, maxReactive, data.maxReactive);
-        SetNodeAttribute(doc, maxReactive, "UnitID", data.maxReactiveUnit);
-        auto haveMinReactive = AppendNode(doc, electricalProp, "HaveMinReactive");
-        SetNodeValue(doc, haveMinReactive, data.haveMinReactive);
-        auto minReactive = AppendNode(doc, electricalProp, "MinReactive");
-        SetNodeValue(doc, minReactive, data.minReactive);
-        SetNodeAttribute(doc, minReactive, "UnitID", data.minReactiveUnit);
-        auto useMachineBase = AppendNode(doc, electricalProp, "UseMachineBase");
-        SetNodeValue(doc, useMachineBase, data.useMachineBase);
-
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto positiveResistance = AppendNode(doc, fault, "PositiveResistance");
-        SetNodeValue(doc, positiveResistance, data.positiveResistance);
-        auto positiveReactance = AppendNode(doc, fault, "PositiveReactance");
-        SetNodeValue(doc, positiveReactance, data.positiveReactance);
-        auto negativeResistance = AppendNode(doc, fault, "NegativeResistance");
-        SetNodeValue(doc, negativeResistance, data.negativeResistance);
-        auto negativeReactance = AppendNode(doc, fault, "NegativeReactance");
-        SetNodeValue(doc, negativeReactance, data.negativeReactance);
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroReactance = AppendNode(doc, fault, "ZeroReactance");
-        SetNodeValue(doc, zeroReactance, data.zeroReactance);
-        auto groundResistance = AppendNode(doc, fault, "GroundResistance");
-        SetNodeValue(doc, groundResistance, data.groundResistance);
-        auto groundReactance = AppendNode(doc, fault, "GroundReactance");
-        SetNodeValue(doc, groundReactance, data.groundReactance);
-        auto groundNeutral = AppendNode(doc, fault, "GroundNeutral");
-        SetNodeValue(doc, groundNeutral, data.groundNeutral);
-
-        // To future use...
-        /*auto stability = AppendNode(doc, electricalProp, "Stability");
-        auto plotSyncMachine = AppendNode(doc, stability, "PlotSyncMotor");
-        SetNodeValue(doc, plotSyncMachine, data.plotSyncMachine);
-        auto inertia = AppendNode(doc, stability, "Inertia");
-        SetNodeValue(doc, inertia, data.inertia);
-        auto damping = AppendNode(doc, stability, "Damping");
-        SetNodeValue(doc, damping, data.damping);
-        auto useAVR = AppendNode(doc, stability, "UseAVR");
-        SetNodeValue(doc, useAVR, data.useAVR);
-        auto armResistance = AppendNode(doc, stability, "ArmResistance");
-        SetNodeValue(doc, armResistance, data.armResistance);
-        auto potierReactance = AppendNode(doc, stability, "PotierReactance");
-        SetNodeValue(doc, potierReactance, data.potierReactance);
-        auto satFactor = AppendNode(doc, stability, "SatFactor");
-        SetNodeValue(doc, satFactor, data.satFactor);
-        auto syncXd = AppendNode(doc, stability, "SyncXd");
-        SetNodeValue(doc, syncXd, data.syncXd);
-        auto syncXq = AppendNode(doc, stability, "SyncXq");
-        SetNodeValue(doc, syncXq, data.syncXq);
-        auto transXd = AppendNode(doc, stability, "TransXd");
-        SetNodeValue(doc, transXd, data.transXd);
-        auto transXq = AppendNode(doc, stability, "TransXq");
-        SetNodeValue(doc, transXq, data.transXq);
-        auto transTd0 = AppendNode(doc, stability, "TransTd0");
-        SetNodeValue(doc, transTd0, data.transTd0);
-        auto transTq0 = AppendNode(doc, stability, "TransTq0");
-        SetNodeValue(doc, transTq0, data.transTq0);
-        auto subXd = AppendNode(doc, stability, "SubXd");
-        SetNodeValue(doc, subXd, data.subXd);
-        auto subXq = AppendNode(doc, stability, "SubXq");
-        SetNodeValue(doc, subXq, data.subXq);
-        auto subTd0 = AppendNode(doc, stability, "SubTd0");
-        SetNodeValue(doc, subTd0, data.subTd0);
-        auto subTq0 = AppendNode(doc, stability, "SubTq0");
-        SetNodeValue(doc, subTq0, data.subTq0);
-
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = syncGenerator->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
-        }*/
-    }  //}
+    elementID = 0;
+    for(auto it = syncMotorList.begin(), itEnd = syncMotorList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, syncMotorsNode);
+        elementID++;
+    }
+    //}
 
     //{ Transfomer
-    auto transformersNode = AppendNode(doc, elementsNode, "TransformerList");
+    auto transformersNode = XMLParser::AppendNode(doc, elementsNode, "TransformerList");
     auto transformerList = allElements.GetTransformerList();
-    for(int i = 0; i < (int)transformerList.size(); i++) {
-        Transformer* transfomer = transformerList[i];
-        auto transformerNode = AppendNode(doc, transformersNode, "Transfomer");
-        SetNodeAttribute(doc, transformerNode, "ID", i);
-        auto cadProp = AppendNode(doc, transformerNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, transfomer->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, transfomer->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, transfomer->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, transfomer->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, transfomer->GetAngle());
-        auto nodeList = AppendNode(doc, cadProp, "NodeList");
-        auto nodePos1 = AppendNode(doc, nodeList, "Node");
-        SetNodeAttribute(doc, nodePos1, "ID", 0);
-        auto nodePosX1 = AppendNode(doc, nodePos1, "X");
-        SetNodeValue(doc, nodePosX1, transfomer->GetPointList()[0].m_x);
-        auto nodePosY1 = AppendNode(doc, nodePos1, "Y");
-        SetNodeValue(doc, nodePosY1, transfomer->GetPointList()[0].m_y);
-        auto nodePos2 = AppendNode(doc, nodeList, "Node");
-        SetNodeAttribute(doc, nodePos2, "ID", 1);
-        auto nodePosX2 = AppendNode(doc, nodePos2, "X");
-        SetNodeValue(doc, nodePosX2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_x);
-        auto nodePosY2 = AppendNode(doc, nodePos2, "Y");
-        SetNodeValue(doc, nodePosY2, transfomer->GetPointList()[transfomer->GetPointList().size() - 1].m_y);
-
-        auto parentIDList = AppendNode(doc, cadProp, "ParentIDList");
-        for(int j = 0; j < (int)transfomer->GetParentList().size(); j++) {
-            Bus* parent = static_cast<Bus*>(transfomer->GetParentList()[j]);
-            if(parent) {
-                auto parentID = AppendNode(doc, parentIDList, "ParentID");
-                SetNodeAttribute(doc, parentID, "ID", j);
-                SetNodeValue(doc, parentID, parent->GetElectricalData().number);
-            }
-        }
-
-        TransformerElectricalData data = transfomer->GetElectricalData();
-        auto electricalProp = AppendNode(doc, transformerNode, "ElectricalProperties");
-        auto isOnline = AppendNode(doc, electricalProp, "IsOnline");
-        SetNodeValue(doc, isOnline, transfomer->IsOnline());
-        auto name = AppendNode(doc, electricalProp, "Name");
-        SetNodeValue(doc, name, data.name);
-        auto primaryNominalVoltage = AppendNode(doc, electricalProp, "PrimaryNominalVoltage");
-        SetNodeValue(doc, primaryNominalVoltage, data.primaryNominalVoltage);
-        SetNodeAttribute(doc, primaryNominalVoltage, "UnitID", data.primaryNominalVoltageUnit);
-        auto secondaryNominalVoltage = AppendNode(doc, electricalProp, "SecondaryNominalVoltage");
-        SetNodeValue(doc, secondaryNominalVoltage, data.secondaryNominalVoltage);
-        SetNodeAttribute(doc, secondaryNominalVoltage, "UnitID", data.secondaryNominalVoltageUnit);
-        auto nominalPower = AppendNode(doc, electricalProp, "NominalPower");
-        SetNodeValue(doc, nominalPower, data.nominalPower);
-        SetNodeAttribute(doc, nominalPower, "UnitID", data.nominalPowerUnit);
-        auto resistance = AppendNode(doc, electricalProp, "Resistance");
-        SetNodeValue(doc, resistance, data.resistance);
-        SetNodeAttribute(doc, resistance, "UnitID", data.resistanceUnit);
-        auto indReactance = AppendNode(doc, electricalProp, "IndReactance");
-        SetNodeValue(doc, indReactance, data.indReactance);
-        SetNodeAttribute(doc, indReactance, "UnitID", data.indReactanceUnit);
-        auto connection = AppendNode(doc, electricalProp, "Connection");
-        SetNodeValue(doc, connection, data.connection);
-        auto turnsRatio = AppendNode(doc, electricalProp, "TurnsRatio");
-        SetNodeValue(doc, turnsRatio, data.turnsRatio);
-        auto phaseShift = AppendNode(doc, electricalProp, "PhaseShift");
-        SetNodeValue(doc, phaseShift, data.phaseShift);
-        auto useTransformerPower = AppendNode(doc, electricalProp, "UseTransfomerPower");
-        SetNodeValue(doc, useTransformerPower, data.useTransformerPower);
-
-        auto fault = AppendNode(doc, electricalProp, "Fault");
-        auto zeroResistance = AppendNode(doc, fault, "ZeroResistance");
-        SetNodeValue(doc, zeroResistance, data.zeroResistance);
-        auto zeroIndReactance = AppendNode(doc, fault, "ZeroIndReactance");
-        SetNodeValue(doc, zeroIndReactance, data.zeroIndReactance);
-        auto primaryGrndResistance = AppendNode(doc, fault, "PrimaryGrndResistance");
-        SetNodeValue(doc, primaryGrndResistance, data.primaryGrndResistance);
-        auto primaryGrndReactance = AppendNode(doc, fault, "PrimaryGrndReactance");
-        SetNodeValue(doc, primaryGrndReactance, data.primaryGrndReactance);
-        auto secondaryGrndResistance = AppendNode(doc, fault, "SecondaryGrndResistance");
-        SetNodeValue(doc, secondaryGrndResistance, data.secondaryGrndResistance);
-        auto secondaryGrndReactance = AppendNode(doc, fault, "SecondaryGrndReactance");
-        SetNodeValue(doc, secondaryGrndReactance, data.secondaryGrndReactance);
-
-        auto switchingList = AppendNode(doc, electricalProp, "SwitchingList");
-        SwitchingData swData = transfomer->GetSwitchingData();
-        for(int j = 0; j < (int)swData.swType.size(); j++) {
-            auto switching = AppendNode(doc, switchingList, "Switching");
-            SetNodeAttribute(doc, switching, "ID", j);
-            auto swType = AppendNode(doc, switching, "Type");
-            SetNodeValue(doc, swType, swData.swType[j]);
-            auto swTime = AppendNode(doc, switching, "Time");
-            SetNodeValue(doc, swTime, swData.swTime[j]);
-        }
-    }  //}
+    elementID = 0;
+    for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, transformersNode);
+        elementID++;
+    }
+    //}
 
     //{ Text
-    auto textsNode = AppendNode(doc, elementsNode, "TextList");
+    auto textsNode = XMLParser::AppendNode(doc, elementsNode, "TextList");
     auto textList = m_workspace->GetTextList();
-    for(int i = 0; i < (int)textList.size(); i++) {
-        Text* text = textList[i];
-        auto textNode = AppendNode(doc, textsNode, "Text");
-        SetNodeAttribute(doc, textNode, "ID", i);
-        auto cadProp = AppendNode(doc, textNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, text->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, text->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, text->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, text->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, text->GetAngle());
-        auto textProperties = AppendNode(doc, textNode, "TextProperties");
-        auto elementType = AppendNode(doc, textProperties, "ElementType");
-        SetNodeValue(doc, elementType, text->GetElementType());
-        auto elementNumber = AppendNode(doc, textProperties, "ElementNumber");
-        SetNodeValue(doc, elementNumber, text->GetElementNumber());
-        auto dataType = AppendNode(doc, textProperties, "DataType");
-        SetNodeValue(doc, dataType, text->GetDataType());
-        auto dataUnit = AppendNode(doc, textProperties, "DataUnit");
-        SetNodeValue(doc, dataUnit, text->GetUnit());
-        auto direction = AppendNode(doc, textProperties, "Direction");
-        SetNodeValue(doc, direction, text->GetDirection());
-        auto decimalPlaces = AppendNode(doc, textProperties, "DecimalPlaces");
-        SetNodeValue(doc, decimalPlaces, text->GetDecimalPlaces());
+    elementID = 0;
+    for(auto it = textList.begin(), itEnd = textList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, textsNode);
+        elementID++;
     }
     //}
 
@@ -908,54 +263,56 @@ bool FileHanding::OpenProject(wxFileName path)
     PropertiesData* propData = m_workspace->GetProperties();
     SimulationData simData = propData->GetSimulationPropertiesData();
 
-    // { Properties data
+    //{ Properties data
     auto propertiesNode = projectNode->first_node("Properties");
     if(propertiesNode) {
         auto simPropertiesNode = propertiesNode->first_node("SimulationProperties");
         if(simPropertiesNode) {
             // General
             auto general = simPropertiesNode->first_node("General");
-            simData.basePower = GetNodeValueDouble(general, "BasePower");
-            simData.basePowerUnit = static_cast<ElectricalUnit>(GetAttributeValueInt(general, "BasePower", "UnitID"));
+            simData.basePower = XMLParser::GetNodeValueDouble(general, "BasePower");
+            simData.basePowerUnit =
+                static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(general, "BasePower", "UnitID"));
             auto contCalc = general->first_node("ContinuousCalculation");
-            simData.faultAfterPowerFlow = GetNodeValueInt(contCalc, "Fault");
-            simData.scPowerAfterPowerFlow = GetNodeValueInt(contCalc, "SCPower");
+            simData.faultAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "Fault");
+            simData.scPowerAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "SCPower");
 
             // Power flow
             auto powerFlow = simPropertiesNode->first_node("PowerFlow");
-            simData.powerFlowMethod = static_cast<PowerFlowMethod>(GetNodeValueInt(powerFlow, "SolutionMethod"));
-            simData.accFator = GetNodeValueDouble(powerFlow, "AccFactor");
-            simData.powerFlowTolerance = GetNodeValueDouble(powerFlow, "Tolerance");
-            simData.powerFlowMaxIterations = GetNodeValueInt(powerFlow, "MaxIterations");
+            simData.powerFlowMethod =
+                static_cast<PowerFlowMethod>(XMLParser::GetNodeValueInt(powerFlow, "SolutionMethod"));
+            simData.accFator = XMLParser::GetNodeValueDouble(powerFlow, "AccFactor");
+            simData.powerFlowTolerance = XMLParser::GetNodeValueDouble(powerFlow, "Tolerance");
+            simData.powerFlowMaxIterations = XMLParser::GetNodeValueInt(powerFlow, "MaxIterations");
 
             // Stability
             auto stability = simPropertiesNode->first_node("Stability");
-            simData.timeStep = GetNodeValueDouble(stability, "TimeStep");
-            simData.stabilitySimulationTime = GetNodeValueDouble(stability, "SimulationTime");
-            simData.stabilityFrequency = GetNodeValueDouble(stability, "Frequency");
-            simData.stabilityTolerance = GetNodeValueDouble(stability, "Tolerance");
-            simData.stabilityMaxIterations = GetNodeValueDouble(stability, "MaxIterations");
-            simData.controlTimeStepRatio = GetNodeValueInt(stability, "ControlStepRatio");
-            simData.plotTime = GetNodeValueDouble(stability, "PlotStep");
-            simData.useCOI = GetNodeValueInt(stability, "UseCOI");
+            simData.timeStep = XMLParser::GetNodeValueDouble(stability, "TimeStep");
+            simData.stabilitySimulationTime = XMLParser::GetNodeValueDouble(stability, "SimulationTime");
+            simData.stabilityFrequency = XMLParser::GetNodeValueDouble(stability, "Frequency");
+            simData.stabilityTolerance = XMLParser::GetNodeValueDouble(stability, "Tolerance");
+            simData.stabilityMaxIterations = XMLParser::GetNodeValueDouble(stability, "MaxIterations");
+            simData.controlTimeStepRatio = XMLParser::GetNodeValueInt(stability, "ControlStepRatio");
+            simData.plotTime = XMLParser::GetNodeValueDouble(stability, "PlotStep");
+            simData.useCOI = XMLParser::GetNodeValueInt(stability, "UseCOI");
 
             // ZIP load
             auto compLoads = simPropertiesNode->first_node("ZIPLoad");
-            simData.useCompLoads = GetNodeValueInt(compLoads, "UseCompositeLoad");
+            simData.useCompLoads = XMLParser::GetNodeValueInt(compLoads, "UseCompositeLoad");
             auto activePowerComp = compLoads->first_node("ActivePowerComposition");
-            simData.constImpedanceActive = GetNodeValueDouble(activePowerComp, "ConstantImpedance");
-            simData.constCurrentActive = GetNodeValueDouble(activePowerComp, "ConstantCurrent");
-            simData.constPowerActive = GetNodeValueDouble(activePowerComp, "ConstantPower");
+            simData.constImpedanceActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantImpedance");
+            simData.constCurrentActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantCurrent");
+            simData.constPowerActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantPower");
             auto reactivePowerComp = compLoads->first_node("ReactivePowerComposition");
-            simData.constImpedanceReactive = GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
-            simData.constCurrentReactive = GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
-            simData.constPowerReactive = GetNodeValueDouble(reactivePowerComp, "ConstantPower");
+            simData.constImpedanceReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
+            simData.constCurrentReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
+            simData.constPowerReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantPower");
             auto uvLimit = compLoads->first_node("UndervoltageLimit");
-            simData.underVoltageConstCurrent = GetNodeValueDouble(uvLimit, "ConstantCurrent");
-            simData.underVoltageConstPower = GetNodeValueDouble(uvLimit, "ConstantPower");
+            simData.underVoltageConstCurrent = XMLParser::GetNodeValueDouble(uvLimit, "ConstantCurrent");
+            simData.underVoltageConstPower = XMLParser::GetNodeValueDouble(uvLimit, "ConstantPower");
         }
     }
-    // }
+    //}
 
     propData->SetSimulationPropertiesData(simData);
 
@@ -975,65 +332,21 @@ bool FileHanding::OpenProject(wxFileName path)
     std::vector<Transformer*> transformerList;
     std::vector<Text*> textList;
 
+    // List of parents
+    std::vector<Element*> parentList;
+
     //{ Bus
     auto busListNode = elementsNode->first_node("BusList");
     if(!busListNode) return false;
     auto busNode = busListNode->first_node("Bus");
     while(busNode) {
-        auto cadPropNode = busNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
+        Bus* bus = new Bus();
 
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        Bus* bus = new Bus(wxPoint2DDouble(posX, posY));
-
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        bus->SetWidth(width);
-        bus->SetHeight(height);
-        bus->SetPosition(bus->GetPosition());  // Update bus rectangle.
-        int numRot = angle / bus->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) bus->Rotate(clockwise);
-
-        BusElectricalData data = bus->GetElectricalData();
-        auto electricalProp = busNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        data.name = electricalProp->first_node("Name")->value();
-        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.isVoltageControlled = GetNodeValueInt(electricalProp, "IsVoltageControlled");
-        data.controlledVoltage = GetNodeValueDouble(electricalProp, "ControlledVoltage");
-        data.controlledVoltageUnitChoice = GetAttributeValueInt(electricalProp, "ControlledVoltage", "Choice");
-        data.slackBus = GetNodeValueInt(electricalProp, "SlackBus");
-        auto fault = electricalProp->first_node("Fault");
-        data.hasFault = GetNodeValueInt(fault, "HasFault");
-        data.faultType = (FaultData)GetNodeValueInt(fault, "Type");
-        data.faultLocation = (FaultData)GetNodeValueInt(fault, "Location");
-        data.faultResistance = GetNodeValueDouble(fault, "Resistance");
-        data.faultReactance = GetNodeValueDouble(fault, "Reactance");
-        auto stability = electricalProp->first_node("Stability");
-        data.plotBus = GetNodeValueInt(stability, "Plot");
-        data.stabHasFault = GetNodeValueInt(stability, "HasFault");
-        data.stabFaultTime = GetNodeValueDouble(stability, "FaultTime");
-        data.stabFaultLength = GetNodeValueDouble(stability, "FaultLength");
-        data.stabFaultResistance = GetNodeValueDouble(stability, "FaultResistance");
-        data.stabFaultReactance = GetNodeValueDouble(stability, "FaultReactance");
-
-        bus->SetElectricalData(data);
-
-        if(data.stabHasFault) bus->SetDynamicEvent(true);
-
+        if(!bus->OpenElement(busNode)) return false;
         elementList.push_back(bus);
         busList.push_back(bus);
+        parentList.push_back(bus);
+
         busNode = busNode->next_sibling("Bus");
     }  //}
 
@@ -1044,71 +357,10 @@ bool FileHanding::OpenProject(wxFileName path)
     while(capacitorNode) {
         Capacitor* capacitor = new Capacitor();
 
-        auto cadPropNode = capacitorNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            capacitor->StartMove(capacitor->GetPosition());
-            capacitor->Move(wxPoint2DDouble(posX, posY));
-            capacitor->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            capacitor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            capacitor->StartMove(capacitor->GetPosition());
-            capacitor->Move(wxPoint2DDouble(posX, posY));
-        }
-        capacitor->SetWidth(width);
-        capacitor->SetHeight(height);
-
-        int numRot = angle / capacitor->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) capacitor->Rotate(clockwise);
-
-        auto electricalProp = capacitorNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        capacitor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        CapacitorElectricalData data = capacitor->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-
-        SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        capacitor->SetSwitchingData(swData);
-
-        capacitor->SetElectricalData(data);
-
-        if(swData.swTime.size() != 0) capacitor->SetDynamicEvent(true);
-
+        if(!capacitor->OpenElement(capacitorNode, parentList)) return false;
         elementList.push_back(capacitor);
         capacitorList.push_back(capacitor);
+
         capacitorNode = capacitorNode->next_sibling("Capacitor");
     }  //}
 
@@ -1119,59 +371,10 @@ bool FileHanding::OpenProject(wxFileName path)
     while(indMotorNode) {
         IndMotor* indMotor = new IndMotor();
 
-        auto cadPropNode = indMotorNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            indMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            indMotor->StartMove(indMotor->GetPosition());
-            indMotor->Move(wxPoint2DDouble(posX, posY));
-            indMotor->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            indMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            indMotor->StartMove(indMotor->GetPosition());
-            indMotor->Move(wxPoint2DDouble(posX, posY));
-        }
-        indMotor->SetWidth(width);
-        indMotor->SetHeight(height);
-
-        int numRot = angle / indMotor->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) indMotor->Rotate(clockwise);
-
-        auto electricalProp = indMotorNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        indMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        IndMotorElectricalData data = indMotor->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-
-        indMotor->SetElectricalData(data);
+        if(!indMotor->OpenElement(indMotorNode, parentList)) return false;
         elementList.push_back(indMotor);
         indMotorList.push_back(indMotor);
+
         indMotorNode = indMotorNode->next_sibling("IndMotor");
     }  //}
 
@@ -1182,71 +385,10 @@ bool FileHanding::OpenProject(wxFileName path)
     while(inductorNode) {
         Inductor* inductor = new Inductor();
 
-        auto cadPropNode = inductorNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            inductor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            inductor->StartMove(inductor->GetPosition());
-            inductor->Move(wxPoint2DDouble(posX, posY));
-            inductor->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            inductor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            inductor->StartMove(inductor->GetPosition());
-            inductor->Move(wxPoint2DDouble(posX, posY));
-        }
-        inductor->SetWidth(width);
-        inductor->SetHeight(height);
-
-        int numRot = angle / inductor->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) inductor->Rotate(clockwise);
-
-        auto electricalProp = inductorNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        inductor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        InductorElectricalData data = inductor->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-
-        SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        inductor->SetSwitchingData(swData);
-
-        inductor->SetElectricalData(data);
-
-        if(swData.swTime.size() != 0) inductor->SetDynamicEvent(true);
-
+        if(!inductor->OpenElement(inductorNode, parentList)) return false;
         elementList.push_back(inductor);
         inductorList.push_back(inductor);
+
         inductorNode = inductorNode->next_sibling("Inductor");
     }  //}
 
@@ -1257,107 +399,10 @@ bool FileHanding::OpenProject(wxFileName path)
     while(lineNode) {
         Line* line = new Line();
 
-        auto cadPropNode = lineNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        // Get nodes points
-        std::vector<wxPoint2DDouble> ptsList;
-        auto nodePosList = cadPropNode->first_node("NodeList");
-        if(!nodePosList) return false;
-        auto nodePos = nodePosList->first_node("Node");
-        while(nodePos) {
-            double nodePosX = GetNodeValueDouble(nodePos, "X");
-            double nodePosY = GetNodeValueDouble(nodePos, "Y");
-            ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
-            nodePos = nodePos->next_sibling("Node");
-        }
-
-        // Get parents IDs
-        auto parentIDList = cadPropNode->first_node("ParentIDList");
-        if(!parentIDList) return false;
-        auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = {-1, -1};
-        while(parentNode) {
-            long index = 0;
-            wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
-            wxString(parentNode->value()).ToCLong(&parentID[index]);
-            parentNode = parentNode->next_sibling("ParentID");
-        }
-
-        // Set parents (if have)
-        Bus *parent1, *parent2;
-        if(parentID[0] == -1) {
-            parent1 = new Bus(ptsList[0]);
-            line->AddParent(parent1, ptsList[0]);
-        } else {
-            parent1 = busList[parentID[0]];
-            line->AddParent(parent1, ptsList[0]);
-        }
-        if(parentID[1] == -1) {
-            parent2 = new Bus(ptsList[ptsList.size() - 1]);
-            line->AddParent(parent2, ptsList[ptsList.size() - 1]);
-        } else {
-            parent2 = busList[parentID[1]];
-            line->AddParent(parent2, ptsList[ptsList.size() - 1]);
-        }
-
-        // Add the others nodes (if have)
-        std::vector<wxPoint2DDouble> midPts;
-        for(int i = 1; i < (int)ptsList.size() - 1; i++) midPts.push_back(ptsList[i]);
-        std::vector<wxPoint2DDouble> edgesPts = line->GetPointList();
-        edgesPts.insert(edgesPts.begin() + 2, midPts.begin(), midPts.end());
-        line->SetPointList(edgesPts);
-
-        if(parentID[0] == -1) {
-            line->RemoveParent(parent1);
-            delete parent1;
-        }
-        if(parentID[1] == -1) {
-            line->RemoveParent(parent2);
-            delete parent2;
-        }
-
-        auto electricalProp = lineNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        line->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        LineElectricalData data = line->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        data.resistance = GetNodeValueDouble(electricalProp, "Resistance");
-        data.resistanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
-        data.indReactance = GetNodeValueDouble(electricalProp, "IndReactance");
-        data.indReactanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
-        data.capSusceptance = GetNodeValueDouble(electricalProp, "CapSusceptance");
-        data.capSusceptanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "CapSusceptance", "UnitID");
-        data.lineSize = GetNodeValueDouble(electricalProp, "LineSize");
-        data.useLinePower = GetNodeValueInt(electricalProp, "UseLinePower");
-
-        auto fault = electricalProp->first_node("Fault");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
-        data.zeroCapSusceptance = GetNodeValueDouble(fault, "ZeroCapSusceptance");
-
-        SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        line->SetSwitchingData(swData);
-
-        line->SetElectricalData(data);
-
-        if(swData.swTime.size() != 0) line->SetDynamicEvent(true);
-
+        if(!line->OpenElement(lineNode, parentList)) return false;
         elementList.push_back(line);
         lineList.push_back(line);
+
         lineNode = lineNode->next_sibling("Line");
     }  //}
 
@@ -1368,88 +413,10 @@ bool FileHanding::OpenProject(wxFileName path)
     while(loadNode) {
         Load* load = new Load();
 
-        auto cadPropNode = loadNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            load->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            load->StartMove(load->GetPosition());
-            load->Move(wxPoint2DDouble(posX, posY));
-            load->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            load->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            load->StartMove(load->GetPosition());
-            load->Move(wxPoint2DDouble(posX, posY));
-        }
-        load->SetWidth(width);
-        load->SetHeight(height);
-
-        int numRot = angle / load->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) load->Rotate(clockwise);
-
-        auto electricalProp = loadNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        load->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        LoadElectricalData data = load->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        data.loadType = (LoadType)GetNodeValueInt(electricalProp, "LoadType");
-        // Stability
-        auto stability = electricalProp->first_node("Stability");
-        if(stability) {
-            data.plotLoad = GetNodeValueInt(stability, "PlotLoad");
-            data.useCompLoad = GetNodeValueInt(stability, "UseCompositeLoad");
-            auto activePowerComp = stability->first_node("ActivePowerComposition");
-            data.constImpedanceActive = GetNodeValueDouble(activePowerComp, "ConstantImpedance");
-            data.constCurrentActive = GetNodeValueDouble(activePowerComp, "ConstantCurrent");
-            data.constPowerActive = GetNodeValueDouble(activePowerComp, "ConstantPower");
-            auto reactivePowerComp = stability->first_node("ReactivePowerComposition");
-            data.constImpedanceReactive = GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
-            data.constCurrentReactive = GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
-            data.constPowerReactive = GetNodeValueDouble(reactivePowerComp, "ConstantPower");
-        }
-
-        SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        load->SetSwitchingData(swData);
-
-        load->SetElectricalData(data);
-
-        if(swData.swTime.size() != 0) load->SetDynamicEvent(true);
-
+        if(!load->OpenElement(loadNode, parentList)) return false;
         elementList.push_back(load);
         loadList.push_back(load);
+
         loadNode = loadNode->next_sibling("Load");
     }  //}
 
@@ -1457,102 +424,16 @@ bool FileHanding::OpenProject(wxFileName path)
     auto syncGeneratorListNode = elementsNode->first_node("SyncGeneratorList");
     if(!syncGeneratorListNode) return false;
     auto syncGeneratorNode = syncGeneratorListNode->first_node("SyncGenerator");
+
     while(syncGeneratorNode) {
         SyncGenerator* syncGenerator = new SyncGenerator();
 
-        auto cadPropNode = syncGeneratorNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
+        if(!syncGenerator->OpenElement(syncGeneratorNode, parentList)) return false;
 
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            syncGenerator->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            syncGenerator->StartMove(syncGenerator->GetPosition());
-            syncGenerator->Move(wxPoint2DDouble(posX, posY));
-            syncGenerator->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            syncGenerator->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            syncGenerator->StartMove(syncGenerator->GetPosition());
-            syncGenerator->Move(wxPoint2DDouble(posX, posY));
-        }
-        syncGenerator->SetWidth(width);
-        syncGenerator->SetHeight(height);
-
-        int numRot = angle / syncGenerator->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) syncGenerator->Rotate(clockwise);
-
+        // Open controls.
+        auto data = syncGenerator->GetElectricalData();
         auto electricalProp = syncGeneratorNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        syncGenerator->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        data.haveMaxReactive = GetNodeValueInt(electricalProp, "HaveMaxReactive");
-        data.maxReactive = GetNodeValueDouble(electricalProp, "MaxReactive");
-        data.maxReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
-        data.haveMinReactive = GetNodeValueInt(electricalProp, "HaveMinReactive");
-        data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
-        data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
-        data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
-
-        auto fault = electricalProp->first_node("Fault");
-        if(!fault) return false;
-        data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
-        data.positiveReactance = GetNodeValueDouble(fault, "PositiveReactance");
-        data.negativeResistance = GetNodeValueDouble(fault, "NegativeResistance");
-        data.negativeReactance = GetNodeValueDouble(fault, "NegativeReactance");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroReactance = GetNodeValueDouble(fault, "ZeroReactance");
-        data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
-        data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
-        data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
-
         auto stability = electricalProp->first_node("Stability");
-        if(!stability) return false;
-        data.plotSyncMachine = GetNodeValueInt(stability, "PlotSyncMachine");
-        data.inertia = GetNodeValueDouble(stability, "Inertia");
-        data.damping = GetNodeValueDouble(stability, "Damping");
-        data.useAVR = GetNodeValueInt(stability, "UseAVR");
-        data.useSpeedGovernor = GetNodeValueInt(stability, "UseSpeedGovernor");
-        data.armResistance = GetNodeValueDouble(stability, "ArmResistance");
-        data.potierReactance = GetNodeValueDouble(stability, "PotierReactance");
-        data.satFactor = GetNodeValueDouble(stability, "SatFactor");
-        data.syncXd = GetNodeValueDouble(stability, "SyncXd");
-        data.syncXq = GetNodeValueDouble(stability, "SyncXq");
-        data.transXd = GetNodeValueDouble(stability, "TransXd");
-        data.transXq = GetNodeValueDouble(stability, "TransXq");
-        data.transTd0 = GetNodeValueDouble(stability, "TransTd0");
-        data.transTq0 = GetNodeValueDouble(stability, "TransTq0");
-        data.subXd = GetNodeValueDouble(stability, "SubXd");
-        data.subXq = GetNodeValueDouble(stability, "SubXq");
-        data.subTd0 = GetNodeValueDouble(stability, "SubTd0");
-        data.subTq0 = GetNodeValueDouble(stability, "SubTq0");
 
         auto avr = stability->first_node("AVR");
         if(!avr) return false;
@@ -1562,20 +443,7 @@ bool FileHanding::OpenProject(wxFileName path)
         if(!speedGov) return false;
         if(!OpenControlElements(doc, speedGov, data.speedGov)) return false;
 
-        SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        syncGenerator->SetSwitchingData(swData);
-
         syncGenerator->SetElectricalData(data);
-
-        if(swData.swTime.size() != 0) syncGenerator->SetDynamicEvent(true);
 
         elementList.push_back(syncGenerator);
         syncGeneratorList.push_back(syncGenerator);
@@ -1589,93 +457,10 @@ bool FileHanding::OpenProject(wxFileName path)
     while(syncMotorNode) {
         SyncMotor* syncMotor = new SyncMotor();
 
-        auto cadPropNode = syncMotorNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-        auto nodePosition = cadPropNode->first_node("NodePosition");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        int parentID = GetNodeValueInt(cadPropNode, "ParentID");
-        if(parentID == -1) {
-            // If the element has no parent, create a temporary one, remove and delete.
-            Bus* parent = new Bus(wxPoint2DDouble(nodePosX, nodePosY));
-            syncMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            syncMotor->StartMove(syncMotor->GetPosition());
-            syncMotor->Move(wxPoint2DDouble(posX, posY));
-            syncMotor->RemoveParent(parent);
-            delete parent;
-        } else {
-            Bus* parent = busList[parentID];
-            syncMotor->AddParent(parent, wxPoint2DDouble(nodePosX, nodePosY));
-            syncMotor->StartMove(syncMotor->GetPosition());
-            syncMotor->Move(wxPoint2DDouble(posX, posY));
-        }
-        syncMotor->SetWidth(width);
-        syncMotor->SetHeight(height);
-
-        int numRot = angle / syncMotor->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) syncMotor->Rotate(clockwise);
-
-        auto electricalProp = syncMotorNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        syncMotor->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        SyncMotorElectricalData data = syncMotor->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        // data.nominalVoltage = GetNodeValueDouble(electricalProp, "NominalVoltage");
-        // data.nominalVoltageUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
-        data.activePower = GetNodeValueDouble(electricalProp, "ActivePower");
-        data.activePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ActivePower", "UnitID");
-        data.reactivePower = GetNodeValueDouble(electricalProp, "ReactivePower");
-        data.reactivePowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID");
-        data.haveMaxReactive = GetNodeValueInt(electricalProp, "HaveMaxReactive");
-        data.maxReactive = GetNodeValueDouble(electricalProp, "MaxReactive");
-        data.maxReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MaxReactive", "UnitID");
-        data.haveMinReactive = GetNodeValueInt(electricalProp, "HaveMinReactive");
-        data.minReactive = GetNodeValueDouble(electricalProp, "MinReactive");
-        data.minReactiveUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "MinReactive", "UnitID");
-        data.useMachineBase = GetNodeValueInt(electricalProp, "UseMachineBase");
-
-        auto fault = electricalProp->first_node("Fault");
-        if(!fault) return false;
-        data.positiveResistance = GetNodeValueDouble(fault, "PositiveResistance");
-        data.positiveReactance = GetNodeValueDouble(fault, "PositiveReactance");
-        data.negativeResistance = GetNodeValueDouble(fault, "NegativeResistance");
-        data.negativeReactance = GetNodeValueDouble(fault, "NegativeReactance");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroReactance = GetNodeValueDouble(fault, "ZeroReactance");
-        data.groundResistance = GetNodeValueDouble(fault, "GroundResistance");
-        data.groundReactance = GetNodeValueDouble(fault, "GroundReactance");
-        data.groundNeutral = GetNodeValueInt(fault, "GroundNeutral");
-
-        /*SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        syncMotor->SetSwitchingData(swData);*/
-
-        syncMotor->SetElectricalData(data);
+        if(!syncMotor->OpenElement(syncMotorNode, parentList)) return false;
         elementList.push_back(syncMotor);
         syncMotorList.push_back(syncMotor);
+
         syncMotorNode = syncMotorNode->next_sibling("SyncMotor");
     }  //}
 
@@ -1686,129 +471,10 @@ bool FileHanding::OpenProject(wxFileName path)
     while(transfomerNode) {
         Transformer* transformer = new Transformer();
 
-        auto cadPropNode = transfomerNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
-
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-        // Get nodes points
-        std::vector<wxPoint2DDouble> ptsList;
-        auto nodePosList = cadPropNode->first_node("NodeList");
-        if(!nodePosList) return false;
-        auto nodePos = nodePosList->first_node("Node");
-        while(nodePos) {
-            double nodePosX = GetNodeValueDouble(nodePos, "X");
-            double nodePosY = GetNodeValueDouble(nodePos, "Y");
-            ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
-            nodePos = nodePos->next_sibling("Node");
-        }
-
-        // Get parents IDs
-        auto parentIDList = cadPropNode->first_node("ParentIDList");
-        if(!parentIDList) return false;
-        auto parentNode = parentIDList->first_node("ParentID");
-        long parentID[2] = {-1, -1};
-        while(parentNode) {
-            long index = 0;
-            wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
-            wxString(parentNode->value()).ToCLong(&parentID[index]);
-            parentNode = parentNode->next_sibling("ParentID");
-        }
-
-        // Set parents (if have)
-        Bus *parent1, *parent2;
-        if(parentID[0] == -1) {
-            parent1 = new Bus(ptsList[0]);
-            transformer->AddParent(parent1, ptsList[0]);
-        } else {
-            parent1 = busList[parentID[0]];
-            transformer->AddParent(parent1, ptsList[0]);
-        }
-        if(parentID[1] == -1) {
-            parent2 = new Bus(ptsList[ptsList.size() - 1]);
-            transformer->AddParent(parent2, ptsList[ptsList.size() - 1]);
-        } else {
-            parent2 = busList[parentID[1]];
-            transformer->AddParent(parent2, ptsList[ptsList.size() - 1]);
-        }
-
-        transformer->StartMove(transformer->GetPosition());
-        transformer->Move(wxPoint2DDouble(posX, posY));
-
-        if(parentID[0] == -1) {
-            transformer->RemoveParent(parent1);
-            delete parent1;
-        }
-        if(parentID[1] == -1) {
-            transformer->RemoveParent(parent2);
-            delete parent2;
-        }
-
-        transformer->SetWidth(width);
-        transformer->SetHeight(height);
-
-        int numRot = angle / transformer->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) transformer->Rotate(clockwise);
-
-        auto electricalProp = transfomerNode->first_node("ElectricalProperties");
-        if(!electricalProp) return false;
-
-        transformer->SetOnline(GetNodeValueInt(electricalProp, "IsOnline"));
-        TransformerElectricalData data = transformer->GetElectricalData();
-        data.name = electricalProp->first_node("Name")->value();
-        data.primaryNominalVoltage = GetNodeValueDouble(electricalProp, "PrimaryNominalVoltage");
-        data.primaryNominalVoltageUnit =
-            (ElectricalUnit)GetAttributeValueInt(electricalProp, "PrimaryNominalVoltage", "UnitID");
-        data.secondaryNominalVoltage = GetNodeValueDouble(electricalProp, "SecondaryNominalVoltage");
-        data.secondaryNominalVoltageUnit =
-            (ElectricalUnit)GetAttributeValueInt(electricalProp, "SecondaryNominalVoltage", "UnitID");
-        data.nominalPower = GetNodeValueDouble(electricalProp, "NominalPower");
-        data.nominalPowerUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "NominalPower", "UnitID");
-        data.resistance = GetNodeValueDouble(electricalProp, "Resistance");
-        data.resistanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "Resistance", "UnitID");
-        data.indReactance = GetNodeValueDouble(electricalProp, "IndReactance");
-        data.indReactanceUnit = (ElectricalUnit)GetAttributeValueInt(electricalProp, "IndReactance", "UnitID");
-        data.connection = (TransformerConnection)GetNodeValueInt(electricalProp, "Connection");
-        data.turnsRatio = GetNodeValueDouble(electricalProp, "TurnsRatio");
-        data.phaseShift = GetNodeValueDouble(electricalProp, "PhaseShift");
-        data.useTransformerPower = GetNodeValueInt(electricalProp, "UseTransfomerPower");
-
-        auto fault = electricalProp->first_node("Fault");
-        data.zeroResistance = GetNodeValueDouble(fault, "ZeroResistance");
-        data.zeroIndReactance = GetNodeValueDouble(fault, "ZeroIndReactance");
-        data.primaryGrndResistance = GetNodeValueDouble(fault, "PrimaryGrndResistance");
-        data.primaryGrndReactance = GetNodeValueDouble(fault, "PrimaryGrndReactance");
-        data.secondaryGrndResistance = GetNodeValueDouble(fault, "SecondaryGrndResistance");
-        data.secondaryGrndReactance = GetNodeValueDouble(fault, "SecondaryGrndReactance");
-
-        SwitchingData swData;
-        auto switchingList = electricalProp->first_node("SwitchingList");
-        if(!switchingList) return false;
-        auto swNode = switchingList->first_node("Switching");
-        while(swNode) {
-            swData.swType.push_back((SwitchingType)GetNodeValueInt(swNode, "Type"));
-            swData.swTime.push_back(GetNodeValueDouble(swNode, "Time"));
-            swNode = swNode->next_sibling("Switching");
-        }
-        transformer->SetSwitchingData(swData);
-
-        transformer->SetElectricaData(data);
-
-        if(swData.swTime.size() != 0) transformer->SetDynamicEvent(true);
-
+        if(!transformer->OpenElement(transfomerNode, parentList)) return false;
         elementList.push_back(transformer);
         transformerList.push_back(transformer);
+
         transfomerNode = transfomerNode->next_sibling("Transfomer");
     }  //}
 
@@ -1819,32 +485,10 @@ bool FileHanding::OpenProject(wxFileName path)
     if(!textListNode) return false;
     auto textNode = textListNode->first_node("Text");
     while(textNode) {
-        auto cadPropNode = textNode->first_node("CADProperties");
-        if(!cadPropNode) return false;
+        Text* text = new Text();
 
-        auto position = cadPropNode->first_node("Position");
-        double posX = GetNodeValueDouble(position, "X");
-        double posY = GetNodeValueDouble(position, "Y");
-        auto size = cadPropNode->first_node("Size");
-        double width = GetNodeValueDouble(size, "Width");
-        double height = GetNodeValueDouble(size, "Height");
-        double angle = GetNodeValueDouble(cadPropNode, "Angle");
+        if(!text->OpenElement(textNode)) return true;
 
-        Text* text = new Text(wxPoint2DDouble(posX, posY));
-
-        text->SetWidth(width);
-        text->SetHeight(height);
-
-        auto textProperties = textNode->first_node("TextProperties");
-        if(!textProperties) return false;
-
-        text->SetElementType((ElementType)GetNodeValueDouble(textProperties, "ElementType"));
-        text->SetDataType((DataType)GetNodeValueDouble(textProperties, "DataType"));
-        text->SetUnit((ElectricalUnit)GetNodeValueDouble(textProperties, "DataUnit"));
-        text->SetDirection(GetNodeValueDouble(textProperties, "Direction"));
-        text->SetDecimalPlaces(GetNodeValueDouble(textProperties, "DecimalPlaces"));
-
-        text->SetElementNumber(GetNodeValueInt(textProperties, "ElementNumber"));
         switch(text->GetElementType()) {
             case TYPE_NONE:
                 break;
@@ -1886,14 +530,6 @@ bool FileHanding::OpenProject(wxFileName path)
             } break;
         }
 
-        int numRot = angle / text->GetRotationAngle();
-        bool clockwise = true;
-        if(numRot < 0) {
-            numRot = std::abs(numRot);
-            clockwise = false;
-        }
-        for(int i = 0; i < numRot; i++) text->Rotate(clockwise);
-
         textList.push_back(text);
         textNode = textNode->next_sibling("Text");
     }  //}
@@ -1922,10 +558,10 @@ void FileHanding::SaveControl(wxFileName path)
     rapidxml::xml_node<>* rootNode = doc.allocate_node(rapidxml::node_element, "Control");
     doc.append_node(rootNode);
 
-    rapidxml::xml_node<>* projectNameNode = AppendNode(doc, rootNode, "Name");
-    SetNodeValue(doc, projectNameNode, path.GetName());
+    rapidxml::xml_node<>* projectNameNode = XMLParser::AppendNode(doc, rootNode, "Name");
+    XMLParser::SetNodeValue(doc, projectNameNode, path.GetName());
 
-    auto elementsNode = AppendNode(doc, rootNode, "ControlElements");
+    auto elementsNode = XMLParser::AppendNode(doc, rootNode, "ControlElements");
     SaveControlElements(doc, elementsNode);
     std::ofstream writeXML(path.GetFullPath());
     writeXML << doc;
@@ -1951,7 +587,7 @@ bool FileHanding::OpenControl(wxFileName path,
     auto elementsNode = projectNode->first_node("ControlElements");
     if(!elementsNode) return false;
 
-    // auto elementsNode = AppendNode(doc, rootNode, "ControlElements");
+    // auto elementsNode = XMLParser::AppendNode(doc, rootNode, "ControlElements");
     ControlElementContainer* ctrlElementContainer = new ControlElementContainer();
     if(!OpenControlElements(doc, elementsNode, ctrlElementContainer)) return false;
     ctrlElementList = ctrlElementContainer->GetControlElementsList();
@@ -1969,393 +605,107 @@ void FileHanding::SaveControlElements(rapidxml::xml_document<>& doc,
     }
 
     //{ Constant
-    auto constsNode = AppendNode(doc, elementsNode, "ConstantList");
+    auto constsNode = XMLParser::AppendNode(doc, elementsNode, "ConstantList");
     auto constList = ctrlContainer->GetConstantList();
     for(auto it = constList.begin(), itEnd = constList.end(); it != itEnd; ++it) {
-        Constant* constant = *it;
-        auto constNode = AppendNode(doc, constsNode, "Constant");
-        SetNodeAttribute(doc, constNode, "ID", constant->GetID());
-        auto cadProp = AppendNode(doc, constNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, constant->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, constant->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, constant->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, constant->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, constant->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, constNode, "NodeList");
-        SaveControlNodes(doc, nodeList, constant->GetNodeList());
-
-        // Control properties
-        auto value = AppendNode(doc, constNode, "Value");
-        SetNodeValue(doc, value, constant->GetValue());
+        (*it)->SaveElement(doc, constsNode);
     }  //}
 
     //{ Exponential
-    auto expsNode = AppendNode(doc, elementsNode, "ExponentialList");
+    auto expsNode = XMLParser::AppendNode(doc, elementsNode, "ExponentialList");
     auto expList = ctrlContainer->GetExponentialList();
-    for(auto it = expList.begin(), itEnd = expList.end(); it != itEnd; ++it) {
-        Exponential* exponential = *it;
-        auto expNode = AppendNode(doc, expsNode, "Exponential");
-        SetNodeAttribute(doc, expNode, "ID", exponential->GetID());
-        auto cadProp = AppendNode(doc, expNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, exponential->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, exponential->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, exponential->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, exponential->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, exponential->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, expNode, "NodeList");
-        SaveControlNodes(doc, nodeList, exponential->GetNodeList());
-
-        // Control properties
-        double a, b;
-        exponential->GetValues(a, b);
-        auto value = AppendNode(doc, expNode, "Value");
-        auto aValue = AppendNode(doc, value, "A");
-        SetNodeValue(doc, aValue, a);
-        auto bValue = AppendNode(doc, value, "B");
-        SetNodeValue(doc, bValue, b);
-    }  //}
+    for(auto it = expList.begin(), itEnd = expList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, expsNode); }  //}
 
     //{ Gain
-    auto gainsNode = AppendNode(doc, elementsNode, "GainList");
+    auto gainsNode = XMLParser::AppendNode(doc, elementsNode, "GainList");
     auto gainList = ctrlContainer->GetGainList();
     for(auto it = gainList.begin(), itEnd = gainList.end(); it != itEnd; ++it) {
-        Gain* gain = *it;
-        auto gainNode = AppendNode(doc, gainsNode, "Gain");
-        SetNodeAttribute(doc, gainNode, "ID", gain->GetID());
-        auto cadProp = AppendNode(doc, gainNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, gain->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, gain->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, gain->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, gain->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, gain->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, gainNode, "NodeList");
-        SaveControlNodes(doc, nodeList, gain->GetNodeList());
-
-        // Control properties
-        auto value = AppendNode(doc, gainNode, "Value");
-        SetNodeValue(doc, value, gain->GetValue());
+        (*it)->SaveElement(doc, gainsNode);
     }  //}
 
     //{ IO
-    auto iosNode = AppendNode(doc, elementsNode, "IOList");
+    auto iosNode = XMLParser::AppendNode(doc, elementsNode, "IOList");
     auto ioList = ctrlContainer->GetIOControlList();
-    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
-        IOControl* io = *it;
-        auto ioNode = AppendNode(doc, iosNode, "IO");
-        SetNodeAttribute(doc, ioNode, "ID", io->GetID());
-        auto cadProp = AppendNode(doc, ioNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, io->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, io->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, io->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, io->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, io->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, ioNode, "NodeList");
-        SaveControlNodes(doc, nodeList, io->GetNodeList());
-
-        // Control properties
-        auto value = AppendNode(doc, ioNode, "Value");
-        SetNodeValue(doc, value, io->GetValue());
-        auto ioFlags = AppendNode(doc, ioNode, "IOFlags");
-        SetNodeValue(doc, ioFlags, io->GetIOFlags());
-    }  //}
+    for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, iosNode); }  //}
 
     //{ Limiter
-    auto limitersNode = AppendNode(doc, elementsNode, "LimiterList");
+    auto limitersNode = XMLParser::AppendNode(doc, elementsNode, "LimiterList");
     auto limiterList = ctrlContainer->GetLimiterList();
     for(auto it = limiterList.begin(), itEnd = limiterList.end(); it != itEnd; ++it) {
-        Limiter* limiter = *it;
-        auto limiterNode = AppendNode(doc, limitersNode, "Limiter");
-        SetNodeAttribute(doc, limiterNode, "ID", limiter->GetID());
-        auto cadProp = AppendNode(doc, limiterNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, limiter->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, limiter->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, limiter->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, limiter->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, limiter->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, limiterNode, "NodeList");
-        SaveControlNodes(doc, nodeList, limiter->GetNodeList());
-
-        // Control properties
-        auto upLimit = AppendNode(doc, limiterNode, "UpperLimit");
-        SetNodeValue(doc, upLimit, limiter->GetUpLimit());
-        auto lowLimit = AppendNode(doc, limiterNode, "LowerLimit");
-        SetNodeValue(doc, lowLimit, limiter->GetLowLimit());
+        (*it)->SaveElement(doc, limitersNode);
     }  //}
 
     //{ Multiplier
-    auto multipliersNode = AppendNode(doc, elementsNode, "MultiplierList");
+    auto multipliersNode = XMLParser::AppendNode(doc, elementsNode, "MultiplierList");
     auto multiplierList = ctrlContainer->GetMultiplierList();
     for(auto it = multiplierList.begin(), itEnd = multiplierList.end(); it != itEnd; ++it) {
-        Multiplier* multiplier = *it;
-        auto multiplierNode = AppendNode(doc, multipliersNode, "Multiplier");
-        SetNodeAttribute(doc, multiplierNode, "ID", multiplier->GetID());
-        auto cadProp = AppendNode(doc, multiplierNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, multiplier->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, multiplier->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, multiplier->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, multiplier->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, multiplier->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, multiplierNode, "NodeList");
-        SaveControlNodes(doc, nodeList, multiplier->GetNodeList());
+        (*it)->SaveElement(doc, multipliersNode);
     }  //}
 
     //{ Divider
-    auto dividersNode = AppendNode(doc, elementsNode, "DividerList");
+    auto dividersNode = XMLParser::AppendNode(doc, elementsNode, "DividerList");
     auto dividersList = ctrlContainer->GetDividerList();
     for(auto it = dividersList.begin(), itEnd = dividersList.end(); it != itEnd; ++it) {
-        Divider* divider = *it;
-        auto dividerNode = AppendNode(doc, dividersNode, "Divider");
-        SetNodeAttribute(doc, dividerNode, "ID", divider->GetID());
-        auto cadProp = AppendNode(doc, dividerNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, divider->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, divider->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, divider->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, divider->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, divider->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, dividerNode, "NodeList");
-        SaveControlNodes(doc, nodeList, divider->GetNodeList());
+        (*it)->SaveElement(doc, dividersNode);
     }  //}
 
     //{ Rate limiter
-    auto rateLimitersNode = AppendNode(doc, elementsNode, "RateLimiterList");
+    auto rateLimitersNode = XMLParser::AppendNode(doc, elementsNode, "RateLimiterList");
     auto rateLimiterList = ctrlContainer->GetRateLimiterList();
     for(auto it = rateLimiterList.begin(), itEnd = rateLimiterList.end(); it != itEnd; ++it) {
-        RateLimiter* rateLimiter = *it;
-        auto rateLimiterNode = AppendNode(doc, rateLimitersNode, "RateLimiter");
-        SetNodeAttribute(doc, rateLimiterNode, "ID", rateLimiter->GetID());
-        auto cadProp = AppendNode(doc, rateLimiterNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, rateLimiter->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, rateLimiter->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, rateLimiter->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, rateLimiter->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, rateLimiter->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, rateLimiterNode, "NodeList");
-        SaveControlNodes(doc, nodeList, rateLimiter->GetNodeList());
-
-        // Control properties
-        auto upLimit = AppendNode(doc, rateLimiterNode, "UpperLimit");
-        SetNodeValue(doc, upLimit, rateLimiter->GetUpLimit());
-        auto lowLimit = AppendNode(doc, rateLimiterNode, "LowerLimit");
-        SetNodeValue(doc, lowLimit, rateLimiter->GetLowLimit());
+        (*it)->SaveElement(doc, rateLimitersNode);
     }  //}
 
     //{ Sum
-    auto sumsNode = AppendNode(doc, elementsNode, "SumList");
+    auto sumsNode = XMLParser::AppendNode(doc, elementsNode, "SumList");
     auto sumList = ctrlContainer->GetSumList();
-    for(auto it = sumList.begin(), itEnd = sumList.end(); it != itEnd; ++it) {
-        Sum* sum = *it;
-        auto sumNode = AppendNode(doc, sumsNode, "Sum");
-        SetNodeAttribute(doc, sumNode, "ID", sum->GetID());
-        auto cadProp = AppendNode(doc, sumNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, sum->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, sum->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, sum->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, sum->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, sum->GetAngle());
+    for(auto it = sumList.begin(), itEnd = sumList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, sumsNode); }  //}
 
-        // Nodes
-        auto nodeList = AppendNode(doc, sumNode, "NodeList");
-        SaveControlNodes(doc, nodeList, sum->GetNodeList());
-
-        // Control properties
-        auto signsNode = AppendNode(doc, sumNode, "Signs");
-        auto signs = sum->GetSignalList();
-        for(int i = 0; i < (int)signs.size(); ++i) {
-            auto value = AppendNode(doc, signsNode, "Value");
-            SetNodeValue(doc, value, static_cast<int>(signs[i]));
-        }
-
-    }  //}
-    
     //{ Math expression
-    auto mathExprsNode = AppendNode(doc, elementsNode, "MathExprList");
+    auto mathExprsNode = XMLParser::AppendNode(doc, elementsNode, "MathExprList");
     auto mathExprList = ctrlContainer->GetMathExprList();
     for(auto it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {
-        MathExpression* mathExpr = *it;
-        auto mathExprNode = AppendNode(doc, mathExprsNode, "MathExpr");
-        SetNodeAttribute(doc, mathExprNode, "ID", mathExpr->GetID());
-        auto cadProp = AppendNode(doc, mathExprNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, mathExpr->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, mathExpr->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, mathExpr->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, mathExpr->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, mathExpr->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, mathExprNode, "NodeList");
-        SaveControlNodes(doc, nodeList, mathExpr->GetNodeList());
-
-        // Control properties
-        auto variablesNode = AppendNode(doc, mathExprNode, "VariableList");
-        auto variables = mathExpr->GetVariables();
-        for(unsigned int i = 0; i < variables.size(); ++i) {
-            auto variable = AppendNode(doc, variablesNode, "Variable");
-            SetNodeValue(doc, variable, variables[i]);
-        }
-        auto mathExprValue = AppendNode(doc, mathExprNode, "MathExprValue");
-        SetNodeValue(doc, mathExprValue, mathExpr->GetMathExpression());
-
+        (*it)->SaveElement(doc, mathExprsNode);
     }  //}
 
     //{ Transfer function
-    auto tfsNode = AppendNode(doc, elementsNode, "TransferFunctionList");
+    auto tfsNode = XMLParser::AppendNode(doc, elementsNode, "TransferFunctionList");
     auto tfList = ctrlContainer->GetTFList();
-    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
-        TransferFunction* tf = *it;
-        auto tfNode = AppendNode(doc, tfsNode, "TransferFunction");
-        SetNodeAttribute(doc, tfNode, "ID", tf->GetID());
-        auto cadProp = AppendNode(doc, tfNode, "CADProperties");
-        auto position = AppendNode(doc, cadProp, "Position");
-        auto posX = AppendNode(doc, position, "X");
-        SetNodeValue(doc, posX, tf->GetPosition().m_x);
-        auto posY = AppendNode(doc, position, "Y");
-        SetNodeValue(doc, posY, tf->GetPosition().m_y);
-        auto size = AppendNode(doc, cadProp, "Size");
-        auto width = AppendNode(doc, size, "Width");
-        SetNodeValue(doc, width, tf->GetWidth());
-        auto height = AppendNode(doc, size, "Height");
-        SetNodeValue(doc, height, tf->GetHeight());
-        auto angle = AppendNode(doc, cadProp, "Angle");
-        SetNodeValue(doc, angle, tf->GetAngle());
-
-        // Nodes
-        auto nodeList = AppendNode(doc, tfNode, "NodeList");
-        SaveControlNodes(doc, nodeList, tf->GetNodeList());
-
-        // Control properties
-        auto numeratorNode = AppendNode(doc, tfNode, "Numerator");
-        auto numerator = tf->GetNumerator();
-        for(int i = 0; i < (int)numerator.size(); ++i) {
-            auto value = AppendNode(doc, numeratorNode, "Value");
-            SetNodeValue(doc, value, numerator[i]);
-        }
-        auto denominatorNode = AppendNode(doc, tfNode, "Denominator");
-        auto denominator = tf->GetDenominator();
-        for(int i = 0; i < (int)denominator.size(); ++i) {
-            auto value = AppendNode(doc, denominatorNode, "Value");
-            SetNodeValue(doc, value, denominator[i]);
-        }
-    }  //}
+    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) { (*it)->SaveElement(doc, tfsNode); }  //}
 
     //{ Connection line
-    auto cLinesNode = AppendNode(doc, elementsNode, "ConnectionList");
+    auto cLinesNode = XMLParser::AppendNode(doc, elementsNode, "ConnectionList");
     auto connLineList = ctrlContainer->GetConnectionLineList();
     for(auto it = connLineList.begin(), itEnd = connLineList.end(); it != itEnd; ++it) {
         ConnectionLine* cLine = *it;
-        auto cLineNode = AppendNode(doc, cLinesNode, "Connection");
-        SetNodeAttribute(doc, cLineNode, "ID", cLine->GetID());
+        auto cLineNode = XMLParser::AppendNode(doc, cLinesNode, "Connection");
+        XMLParser::SetNodeAttribute(doc, cLineNode, "ID", cLine->GetID());
 
         // CAD properties
-        auto cadProp = AppendNode(doc, cLineNode, "CADProperties");
-        auto offset = AppendNode(doc, cadProp, "Offset");
-        SetNodeValue(doc, offset, cLine->GetOffset());
+        auto cadProp = XMLParser::AppendNode(doc, cLineNode, "CADProperties");
+        auto offset = XMLParser::AppendNode(doc, cadProp, "Offset");
+        XMLParser::SetNodeValue(doc, offset, cLine->GetOffset());
 
         // Parent list
-        auto parentsNode = AppendNode(doc, cLineNode, "ParentList");
+        auto parentsNode = XMLParser::AppendNode(doc, cLineNode, "ParentList");
         auto parentList = cLine->GetParentList();
         int nodeIndex = 0;
         for(auto itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {
             Element* parent = *itP;
-            auto parentNode = AppendNode(doc, parentsNode, "Parent");
-            auto elementID = AppendNode(doc, parentNode, "ElementID");
-            SetNodeValue(doc, elementID, parent->GetID());
-            auto nodeID = AppendNode(doc, parentNode, "NodeID");
-            SetNodeValue(doc, nodeID, cLine->GetNodeList()[nodeIndex]->GetID());
+            auto parentNode = XMLParser::AppendNode(doc, parentsNode, "Parent");
+            auto elementID = XMLParser::AppendNode(doc, parentNode, "ElementID");
+            XMLParser::SetNodeValue(doc, elementID, parent->GetID());
+            auto nodeID = XMLParser::AppendNode(doc, parentNode, "NodeID");
+            XMLParser::SetNodeValue(doc, nodeID, cLine->GetNodeList()[nodeIndex]->GetID());
             nodeIndex++;
         }
 
-        auto parentLine = AppendNode(doc, cLineNode, "ParentLine");
+        auto parentLine = XMLParser::AppendNode(doc, cLineNode, "ParentLine");
         if(cLine->GetParentLine()) {
             ConnectionLine* parent = cLine->GetParentLine();
-            SetNodeAttribute(doc, parentLine, "ID", parent->GetID());
+            XMLParser::SetNodeAttribute(doc, parentLine, "ID", parent->GetID());
         } else {
-            SetNodeAttribute(doc, parentLine, "ID", -1);
+            XMLParser::SetNodeAttribute(doc, parentLine, "ID", -1);
         }
     }  //}
 }
@@ -2372,35 +722,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(constListNode) {
         auto constNode = constListNode->first_node("Constant");
         while(constNode) {
-            int id = GetAttributeValueInt(constNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(constNode, "ID");
             Constant* constant = new Constant(id);
 
-            auto cadPropNode = constNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            double value = GetNodeValueDouble(constNode, "Value");
-
-            constant->SetWidth(width);
-            constant->SetHeight(height);
-            constant->SetAngle(angle);
-            constant->SetPosition(wxPoint2DDouble(posX, posY));
-            constant->StartMove(constant->GetPosition());
-
-            constant->SetValue(value);
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(constNode, nodeVector)) return false;
-
-            constant->SetNodeList(nodeVector);
-            constant->UpdatePoints();
+            if(!constant->OpenElement(constNode)) return false;
             elementList.push_back(constant);
 
             constNode = constNode->next_sibling("Constant");
@@ -2413,37 +738,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(expListNode) {
         auto expNode = expListNode->first_node("Exponential");
         while(expNode) {
-            int id = GetAttributeValueInt(expNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(expNode, "ID");
             Exponential* exponential = new Exponential(id);
 
-            auto cadPropNode = expNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            auto value = expNode->first_node("Value");
-            double a = GetNodeValueDouble(value, "A");
-            double b = GetNodeValueDouble(value, "B");
-
-            exponential->SetWidth(width);
-            exponential->SetHeight(height);
-            exponential->SetAngle(angle);
-            exponential->SetPosition(wxPoint2DDouble(posX, posY));
-            exponential->StartMove(exponential->GetPosition());
-
-            exponential->SetValues(a, b);
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(expNode, nodeVector)) return false;
-
-            exponential->SetNodeList(nodeVector);
-            exponential->UpdatePoints();
+            if(!exponential->OpenElement(expNode)) return false;
             elementList.push_back(exponential);
 
             expNode = expNode->next_sibling("Exponential");
@@ -2456,34 +754,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(gainListNode) {
         auto gainNode = gainListNode->first_node("Gain");
         while(gainNode) {
-            int id = GetAttributeValueInt(gainNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(gainNode, "ID");
             Gain* gain = new Gain(id);
 
-            auto cadPropNode = gainNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            double value = GetNodeValueDouble(gainNode, "Value");
-
-            gain->SetWidth(width);
-            gain->SetHeight(height);
-            gain->SetAngle(angle);
-            gain->SetPosition(wxPoint2DDouble(posX, posY));
-            gain->SetValue(value);
-            gain->StartMove(gain->GetPosition());
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(gainNode, nodeVector)) return false;
-
-            gain->SetNodeList(nodeVector);
-            gain->UpdatePoints();
+            if(!gain->OpenElement(gainNode)) return false;
             elementList.push_back(gain);
 
             gainNode = gainNode->next_sibling("Gain");
@@ -2496,35 +770,12 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(ioListNode) {
         auto ioNode = ioListNode->first_node("IO");
         while(ioNode) {
-            int id = GetAttributeValueInt(ioNode, "ID");
-
-            auto cadPropNode = ioNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(ioNode, nodeVector)) return false;
-
-            IOControl::IOFlags value = static_cast<IOControl::IOFlags>(GetNodeValueInt(ioNode, "Value"));
-            int ioFlags = GetNodeValueInt(ioNode, "IOFlags");
+            int id = XMLParser::GetAttributeValueInt(ioNode, "ID");
+            int ioFlags = XMLParser::GetNodeValueInt(ioNode, "IOFlags");
 
             IOControl* io = new IOControl(ioFlags, id);
 
-            io->SetWidth(width);
-            io->SetHeight(height);
-            io->SetAngle(angle);
-            io->SetPosition(wxPoint2DDouble(posX, posY));
-            io->SetValue(value);
-            io->StartMove(io->GetPosition());
-            io->SetNodeList(nodeVector);
-            io->UpdatePoints();
+            if(!io->OpenElement(ioNode)) return false;
             elementList.push_back(io);
 
             ioNode = ioNode->next_sibling("IO");
@@ -2537,36 +788,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(limiterListNode) {
         auto limiterNode = limiterListNode->first_node("Limiter");
         while(limiterNode) {
-            int id = GetAttributeValueInt(limiterNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(limiterNode, "ID");
             Limiter* limiter = new Limiter(id);
 
-            auto cadPropNode = limiterNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            double upLimit = GetNodeValueDouble(limiterNode, "UpperLimit");
-            double lowLimit = GetNodeValueDouble(limiterNode, "LowerLimit");
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(limiterNode, nodeVector)) return false;
-
-            limiter->SetWidth(width);
-            limiter->SetHeight(height);
-            limiter->SetAngle(angle);
-            limiter->SetPosition(wxPoint2DDouble(posX, posY));
-            limiter->SetUpLimit(upLimit);
-            limiter->SetLowLimit(lowLimit);
-
-            limiter->StartMove(limiter->GetPosition());
-            limiter->SetNodeList(nodeVector);
-            limiter->UpdatePoints();
+            if(!limiter->OpenElement(limiterNode)) return false;
             elementList.push_back(limiter);
 
             limiterNode = limiterNode->next_sibling("Limiter");
@@ -2579,31 +804,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(multiplierListNode) {
         auto multiplierNode = multiplierListNode->first_node("Multiplier");
         while(multiplierNode) {
-            int id = GetAttributeValueInt(multiplierNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(multiplierNode, "ID");
             Multiplier* multiplier = new Multiplier(id);
 
-            auto cadPropNode = multiplierNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(multiplierNode, nodeVector)) return false;
-
-            multiplier->SetWidth(width);
-            multiplier->SetHeight(height);
-            multiplier->SetAngle(angle);
-            multiplier->SetPosition(wxPoint2DDouble(posX, posY));
-
-            multiplier->StartMove(multiplier->GetPosition());
-            multiplier->SetNodeList(nodeVector);
-            multiplier->UpdatePoints();
+            if(!multiplier->OpenElement(multiplierNode)) return false;
             elementList.push_back(multiplier);
 
             multiplierNode = multiplierNode->next_sibling("Multiplier");
@@ -2616,31 +820,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(dividerListNode) {
         auto dividerNode = dividerListNode->first_node("Divider");
         while(dividerNode) {
-            int id = GetAttributeValueInt(dividerNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(dividerNode, "ID");
             Divider* divider = new Divider(id);
 
-            auto cadPropNode = dividerNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(dividerNode, nodeVector)) return false;
-
-            divider->SetWidth(width);
-            divider->SetHeight(height);
-            divider->SetAngle(angle);
-            divider->SetPosition(wxPoint2DDouble(posX, posY));
-
-            divider->StartMove(divider->GetPosition());
-            divider->SetNodeList(nodeVector);
-            divider->UpdatePoints();
+            if(!divider->OpenElement(dividerNode)) return false;
             elementList.push_back(divider);
 
             dividerNode = dividerNode->next_sibling("Divider");
@@ -2653,36 +836,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(rateLimiterListNode) {
         auto rateLimiterNode = rateLimiterListNode->first_node("RateLimiter");
         while(rateLimiterNode) {
-            int id = GetAttributeValueInt(rateLimiterNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(rateLimiterNode, "ID");
             RateLimiter* limiter = new RateLimiter(id);
 
-            auto cadPropNode = rateLimiterNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            double upLimit = GetNodeValueDouble(rateLimiterNode, "UpperLimit");
-            double lowLimit = GetNodeValueDouble(rateLimiterNode, "LowerLimit");
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(rateLimiterNode, nodeVector)) return false;
-
-            limiter->SetWidth(width);
-            limiter->SetHeight(height);
-            limiter->SetAngle(angle);
-            limiter->SetPosition(wxPoint2DDouble(posX, posY));
-            limiter->SetUpLimit(upLimit);
-            limiter->SetLowLimit(lowLimit);
-
-            limiter->StartMove(limiter->GetPosition());
-            limiter->SetNodeList(nodeVector);
-            limiter->UpdatePoints();
+            if(!limiter->OpenElement(rateLimiterNode)) return false;
             elementList.push_back(limiter);
 
             rateLimiterNode = rateLimiterNode->next_sibling("RateLimiter");
@@ -2695,91 +852,26 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(sumListNode) {
         auto sumNode = sumListNode->first_node("Sum");
         while(sumNode) {
-            int id = GetAttributeValueInt(sumNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(sumNode, "ID");
             Sum* sum = new Sum(id);
 
-            auto cadPropNode = sumNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<Sum::Signal> signs;
-            auto signsNode = sumNode->first_node("Signs");
-            auto sign = signsNode->first_node("Value");
-            while(sign) {
-                long value;
-                wxString(sign->value()).ToCLong(&value);
-                signs.push_back(static_cast<Sum::Signal>(value));
-                sign = sign->next_sibling("Value");
-            }
-            sum->SetSignalList(signs);
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(sumNode, nodeVector)) return false;
-
-            sum->SetWidth(width);
-            sum->SetHeight(height);
-            sum->SetAngle(angle);
-            sum->SetPosition(wxPoint2DDouble(posX, posY));
-
-            sum->StartMove(sum->GetPosition());
-            sum->SetNodeList(nodeVector);
-            sum->UpdatePoints();
+            if(!sum->OpenElement(sumNode)) return false;
             elementList.push_back(sum);
 
             sumNode = sumNode->next_sibling("Sum");
         }
     }
     //}
-    
+
     //{ Math expression
     auto mathListNode = elementsNode->first_node("MathExprList");
     if(mathListNode) {
         auto mathExprNode = mathListNode->first_node("MathExpr");
         while(mathExprNode) {
-            int id = GetAttributeValueInt(mathExprNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(mathExprNode, "ID");
             MathExpression* mathExpr = new MathExpression(id);
 
-            auto cadPropNode = mathExprNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<wxString> variables;
-            auto variablesNode = mathExprNode->first_node("VariableList");
-            auto variable = variablesNode->first_node("Variable");
-            while(variable) {
-                variables.push_back(variable->value());
-                variable = variable->next_sibling("Variable");
-            }
-            mathExpr->SetVariables(variables);
-            
-            auto mathExprValueNode = mathExprNode->first_node("MathExprValue");
-            mathExpr->SetMathExpression(mathExprValueNode->value());
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(mathExprNode, nodeVector)) return false;
-
-            mathExpr->SetWidth(width);
-            mathExpr->SetHeight(height);
-            mathExpr->SetAngle(angle);
-            mathExpr->SetPosition(wxPoint2DDouble(posX, posY));
-
-            mathExpr->StartMove(mathExpr->GetPosition());
-            mathExpr->SetNodeList(nodeVector);
-            mathExpr->UpdatePoints();
+            if(!mathExpr->OpenElement(mathExprNode)) return false;
             elementList.push_back(mathExpr);
 
             mathExprNode = mathExprNode->next_sibling("MathExpr");
@@ -2792,54 +884,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(tfListNode) {
         auto tfNode = tfListNode->first_node("TransferFunction");
         while(tfNode) {
-            int id = GetAttributeValueInt(tfNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(tfNode, "ID");
             TransferFunction* tf = new TransferFunction(id);
 
-            auto cadPropNode = tfNode->first_node("CADProperties");
-            if(!cadPropNode) return false;
-
-            auto position = cadPropNode->first_node("Position");
-            double posX = GetNodeValueDouble(position, "X");
-            double posY = GetNodeValueDouble(position, "Y");
-            auto size = cadPropNode->first_node("Size");
-            double width = GetNodeValueDouble(size, "Width");
-            double height = GetNodeValueDouble(size, "Height");
-            double angle = GetNodeValueDouble(cadPropNode, "Angle");
-
-            std::vector<double> numerator, denominator;
-            auto numeratorNode = tfNode->first_node("Numerator");
-            auto nValue = numeratorNode->first_node("Value");
-            while(nValue) {
-                double value = 0.0;
-                wxString(nValue->value()).ToCDouble(&value);
-                numerator.push_back(value);
-                nValue = nValue->next_sibling("Value");
-            }
-            auto denominatorNode = tfNode->first_node("Denominator");
-            auto dValue = denominatorNode->first_node("Value");
-            while(dValue) {
-                double value = 0.0;
-                wxString(dValue->value()).ToCDouble(&value);
-                denominator.push_back(value);
-                dValue = dValue->next_sibling("Value");
-            }
-
-            std::vector<Node*> nodeVector;
-            if(!OpenControlNodeList(tfNode, nodeVector)) return false;
-
-            tf->SetWidth(width);
-            tf->SetHeight(height);
-            tf->SetAngle(angle);
-            tf->SetPosition(wxPoint2DDouble(posX, posY));
-
-            tf->SetNumerator(numerator);
-            tf->SetDenominator(denominator);
-
-            tf->StartMove(tf->GetPosition());
-            tf->SetNodeList(nodeVector);
-
-            tf->UpdateTFText();
-
+            if(!tf->OpenElement(tfNode)) return false;
             elementList.push_back(tf);
 
             tfNode = tfNode->next_sibling("TransferFunction");
@@ -2853,11 +901,11 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
         auto connNode = connectionListNode->first_node("Connection");
         while(connNode) {
             ConnectionLine* cLine = NULL;
-            int id = GetAttributeValueInt(connNode, "ID");
+            int id = XMLParser::GetAttributeValueInt(connNode, "ID");
 
             auto cadPropNode = connNode->first_node("CADProperties");
             if(!cadPropNode) return false;
-            double offset = GetNodeValueDouble(cadPropNode, "Offset");
+            double offset = XMLParser::GetNodeValueDouble(cadPropNode, "Offset");
 
             auto parentList = connNode->first_node("ParentList");
             if(!parentList) return false;
@@ -2865,10 +913,10 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             auto parentNode = parentList->first_node("Parent");
             bool firstNode = true;
             while(parentNode) {
-                int elementID = GetNodeValueInt(parentNode, "ElementID");
-                int nodeID = GetNodeValueInt(parentNode, "NodeID");
+                int elementID = XMLParser::GetNodeValueInt(parentNode, "ElementID");
+                int nodeID = XMLParser::GetNodeValueInt(parentNode, "NodeID");
 
-                ControlElement* element = GetControlElementFromID(elementList, elementID);
+                ControlElement* element = ControlElement::GetControlElementFromID(elementList, elementID);
                 Node* node = element->GetNodeList()[nodeID];
 
                 if(firstNode) cLine = new ConnectionLine(node, id);
@@ -2882,7 +930,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
 
             auto parentLine = connNode->first_node("ParentLine");
             if(!parentLine) return false;
-            int parentLineID = GetAttributeValueInt(parentLine, "ID");
+            int parentLineID = XMLParser::GetAttributeValueInt(parentLine, "ID");
             if(parentLineID != -1) {
                 for(auto it = connectionList.begin(), itEnd = connectionList.end(); it != itEnd; ++it) {
                     ConnectionLine* parent = *it;
@@ -2898,152 +946,8 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
             connectionList.push_back(cLine);
             connNode = connNode->next_sibling("Connection");
         }
-    } //}
-    
+    }  //}
+
     ctrlContainer->FillContainer(elementList, connectionList);
     return true;
-}
-
-void FileHanding::SaveControlNodes(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* nodesN,
-                                   std::vector<Node*> nodeList)
-{
-    int id = 0;
-    for(auto it = nodeList.begin(), itEnd = nodeList.end(); it != itEnd; ++it) {
-        Node* node = *it;
-        node->SetID(id);
-        auto nodeN = AppendNode(doc, nodesN, "Node");
-        SetNodeAttribute(doc, nodeN, "ID", id);
-        auto nodePosition = AppendNode(doc, nodeN, "Position");
-        auto posNodeX = AppendNode(doc, nodePosition, "X");
-        SetNodeValue(doc, posNodeX, node->GetPosition().m_x);
-        auto posNodeY = AppendNode(doc, nodePosition, "Y");
-        SetNodeValue(doc, posNodeY, node->GetPosition().m_y);
-        auto angle = AppendNode(doc, nodeN, "Angle");
-        SetNodeValue(doc, angle, node->GetAngle());
-        auto nodeType = AppendNode(doc, nodeN, "Type");
-        SetNodeValue(doc, nodeType, node->GetNodeType());
-        id++;
-    }
-}
-
-ControlElement* FileHanding::GetControlElementFromID(std::vector<ControlElement*> elementList, int id)
-{
-    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
-        ControlElement* element = *it;
-        if(element->GetID() == id) return element;
-    }
-    return NULL;
-}
-
-bool FileHanding::OpenControlNodeList(rapidxml::xml_node<>* elementNode, std::vector<Node*>& nodeVector)
-{
-    auto nodeList = elementNode->first_node("NodeList");
-    if(!nodeList) return false;
-    auto nodeN = nodeList->first_node("Node");
-    while(nodeN) {
-        auto nodePosition = nodeN->first_node("Position");
-        double nodePosX = GetNodeValueDouble(nodePosition, "X");
-        double nodePosY = GetNodeValueDouble(nodePosition, "Y");
-        double nodeAngle = GetNodeValueDouble(nodeN, "Angle");
-        Node::NodeType nodeType = (Node::NodeType)GetNodeValueInt(nodeN, "Type");
-        Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
-        node->SetAngle(nodeAngle);
-        nodeVector.push_back(node);
-        nodeN = nodeN->next_sibling("Node");
-    }
-    return true;
-}
-
-rapidxml::xml_node<>* FileHanding::AppendNode(rapidxml::xml_document<>& doc,
-                                              rapidxml::xml_node<>* parentNode,
-                                              const char* name,
-                                              rapidxml::node_type nodeType)
-{
-    rapidxml::xml_node<>* node = doc.allocate_node(nodeType, name);
-    parentNode->append_node(node);
-    return node;
-}
-
-void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, wxString value)
-{
-    node->value(doc.allocate_string(value.mb_str()));
-}
-
-void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, int value)
-{
-    node->value(doc.allocate_string(wxString::Format("%d", value).mb_str()));
-}
-
-void FileHanding::SetNodeValue(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* node, double value)
-{
-    node->value(doc.allocate_string(wxString::FromCDouble(value, 13).mb_str()));
-}
-
-void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* node,
-                                   const char* atrName,
-                                   wxString value)
-{
-    node->append_attribute(doc.allocate_attribute(atrName, doc.allocate_string(value.mb_str())));
-}
-
-void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* node,
-                                   const char* atrName,
-                                   int value)
-{
-    node->append_attribute(
-        doc.allocate_attribute(atrName, doc.allocate_string(wxString::Format("%d", value).mb_str())));
-}
-
-void FileHanding::SetNodeAttribute(rapidxml::xml_document<>& doc,
-                                   rapidxml::xml_node<>* node,
-                                   const char* atrName,
-                                   double value)
-{
-    node->append_attribute(
-        doc.allocate_attribute(atrName, doc.allocate_string(wxString::FromCDouble(value, 13).mb_str())));
-}
-
-double FileHanding::GetNodeValueDouble(rapidxml::xml_node<>* parent, const char* nodeName)
-{
-    double dValue = 0.0;
-    if(parent) {
-        auto node = parent->first_node(nodeName);
-        if(node) wxString(node->value()).ToCDouble(&dValue);
-    }
-    return dValue;
-}
-
-int FileHanding::GetNodeValueInt(rapidxml::xml_node<>* parent, const char* nodeName)
-{
-    long iValue = -1;
-    if(parent) {
-        auto node = parent->first_node(nodeName);
-        if(node) wxString(node->value()).ToCLong(&iValue);
-    }
-    return (int)iValue;
-}
-
-int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* parent, const char* nodeName, const char* atrName)
-{
-    long iValue = -1;
-    if(parent) {
-        auto node = parent->first_node(nodeName);
-        if(node) {
-            auto atr = node->first_attribute(atrName);
-            if(atr) wxString(atr->value()).ToCLong(&iValue);
-        }
-    }
-    return (int)iValue;
-}
-
-int FileHanding::GetAttributeValueInt(rapidxml::xml_node<>* node, const char* atrName)
-{
-    long intValue;
-    auto atr = node->first_attribute(atrName);
-    if(!atr) return false;
-    wxString(atr->value()).ToCLong(&intValue);
-    return (int)intValue;
 }

@@ -45,16 +45,19 @@ class Exponential : public ControlElement
 
     virtual void GetValues(double& aValue, double& bValue);
     virtual void SetValues(double aValue, double bValue);
-    
+
     /**
      * @brief Calculates the exponential.
-     * 
+     *
      * <center>\f$ output = A\cdot e^{B\cdot input} \f$</center>
      * @param input Input value.
      * @param timeStep Time step.
      * @return Aways true.
      */
     virtual bool Solve(double* input, double timeStep);
+
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
 
     virtual Element* GetCopy();
 

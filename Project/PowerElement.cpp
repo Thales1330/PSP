@@ -155,9 +155,7 @@ void PowerElement::DrawPowerFlowPts() const
 {
     if(m_online) {
         glColor4dv(m_powerFlowArrowColour.GetRGBA());
-        for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) {
-            DrawTriangle(m_powerFlowArrow[i]);
-        }
+        for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) { DrawTriangle(m_powerFlowArrow[i]); }
     }
 }
 
@@ -180,4 +178,108 @@ double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit)
             break;
     }
     return value;
+}
+
+bool PowerElement::OpenCADProperties(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
+{
+    auto cadPropNode = elementNode->first_node("CADProperties");
+    if(!cadPropNode) return false;
+
+    auto position = cadPropNode->first_node("Position");
+    double posX = XMLParser::GetNodeValueDouble(position, "X");
+    double posY = XMLParser::GetNodeValueDouble(position, "Y");
+    auto size = cadPropNode->first_node("Size");
+    m_width = XMLParser::GetNodeValueDouble(size, "Width");
+    m_height = XMLParser::GetNodeValueDouble(size, "Height");
+    double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+    SetPosition(wxPoint2DDouble(posX, posY));
+
+    auto nodePosition = cadPropNode->first_node("NodePosition");
+    double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+    double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+
+    int parentID = XMLParser::GetNodeValueInt(cadPropNode, "ParentID");
+    // If the opened power element has no parent, set up the basics CAD properties of the element manually, otherwise
+    // just class method AddParent to calculate properly.
+    if(parentID == -1) {
+        m_parentList.push_back(NULL);
+        m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+        m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+        m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0 - 10.0));
+        m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0));
+
+        wxRect2DDouble genRect(0, 0, 0, 0);
+        m_switchRect.push_back(genRect);  // Push a general rectangle.
+        UpdateSwitches();
+
+        m_online = false;  // Not connected elements are always offline.
+    } else {
+        AddParent(parentList[parentID], wxPoint2DDouble(nodePosX, nodePosY));
+    }
+
+    // Set up the points properly.
+    StartMove(m_position);
+    Move(wxPoint2DDouble(posX, posY));
+
+    // Set the rotation properly.
+    int numRot = angle / m_rotationAngle;
+    bool clockwise = true;
+    if(numRot < 0) {
+        numRot = std::abs(numRot);
+        clockwise = false;
+    }
+    for(int i = 0; i < numRot; i++) Rotate(clockwise);
+
+    return true;
+}
+
+void PowerElement::SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode)
+{
+    auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
+    auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+    auto posX = XMLParser::AppendNode(doc, position, "X");
+    XMLParser::SetNodeValue(doc, posX, m_position.m_x);
+    auto posY = XMLParser::AppendNode(doc, position, "Y");
+    XMLParser::SetNodeValue(doc, posY, m_position.m_y);
+    auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+    auto width = XMLParser::AppendNode(doc, size, "Width");
+    XMLParser::SetNodeValue(doc, width, m_width);
+    auto height = XMLParser::AppendNode(doc, size, "Height");
+    XMLParser::SetNodeValue(doc, height, m_height);
+    auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+    XMLParser::SetNodeValue(doc, angle, m_angle);
+    auto nodePos = XMLParser::AppendNode(doc, cadProp, "NodePosition");
+    auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+    XMLParser::SetNodeValue(doc, nodePosX, m_pointList[0].m_x);
+    auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+    XMLParser::SetNodeValue(doc, nodePosY, m_pointList[0].m_y);
+    auto parentID = XMLParser::AppendNode(doc, cadProp, "ParentID");
+    Element* parent = m_parentList[0];
+    if(parent) XMLParser::SetNodeValue(doc, parentID, parent->GetID());
+}
+
+void PowerElement::SaveSwitchingData(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* electricalNode)
+{
+    auto switchingList = XMLParser::AppendNode(doc, electricalNode, "SwitchingList");
+    for(int i = 0; i < static_cast<int>(m_swData.swType.size()); i++) {
+        auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
+        XMLParser::SetNodeAttribute(doc, switching, "ID", i);
+        auto swType = XMLParser::AppendNode(doc, switching, "Type");
+        XMLParser::SetNodeValue(doc, swType, m_swData.swType[i]);
+        auto swTime = XMLParser::AppendNode(doc, switching, "Time");
+        XMLParser::SetNodeValue(doc, swTime, m_swData.swTime[i]);
+    }
+}
+
+bool PowerElement::OpenSwitchingData(rapidxml::xml_node<>* electricalNode)
+{
+    auto switchingList = electricalNode->first_node("SwitchingList");
+    if(!switchingList) return false;
+    auto swNode = switchingList->first_node("Switching");
+    while(swNode) {
+        m_swData.swType.push_back((SwitchingType)XMLParser::GetNodeValueInt(swNode, "Type"));
+        m_swData.swTime.push_back(XMLParser::GetNodeValueDouble(swNode, "Time"));
+        swNode = swNode->next_sibling("Switching");
+    }
+    return true;
 }

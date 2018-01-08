@@ -37,6 +37,10 @@ class Divider : public MathOperation
 
     virtual void DrawSymbol() const;
     virtual bool Solve(double* input, double timeStep);
+
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
+
     virtual Element* GetCopy();
 };
 

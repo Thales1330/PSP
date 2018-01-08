@@ -270,3 +270,32 @@ bool IOControl::UpdateText()
     if(!m_glText->IsTextureOK()) return false;
     return true;
 }
+
+rapidxml::xml_node<>* IOControl::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "IO");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto value = XMLParser::AppendNode(doc, elementNode, "Value");
+    XMLParser::SetNodeValue(doc, value, m_value);
+    auto ioFlags = XMLParser::AppendNode(doc, elementNode, "IOFlags");
+    XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);
+
+    return elementNode;
+}
+
+bool IOControl::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    IOControl::IOFlags value = static_cast<IOControl::IOFlags>(XMLParser::GetNodeValueInt(elementNode, "Value"));
+    SetValue(value);
+
+    return true;
+}

@@ -386,3 +386,58 @@ bool TransferFunction::UpdateText()
     if(!m_glTextNum->IsTextureOK()) return false;
     return true;
 }
+
+rapidxml::xml_node<>* TransferFunction::SaveElement(rapidxml::xml_document<>& doc,
+                                                    rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "TransferFunction");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto numeratorNode = XMLParser::AppendNode(doc, elementNode, "Numerator");
+    for(unsigned int i = 0; i < m_numerator.size(); ++i) {
+        auto value = XMLParser::AppendNode(doc, numeratorNode, "Value");
+        XMLParser::SetNodeValue(doc, value, m_numerator[i]);
+    }
+    auto denominatorNode = XMLParser::AppendNode(doc, elementNode, "Denominator");
+    for(unsigned int i = 0; i < m_denominator.size(); ++i) {
+        auto value = XMLParser::AppendNode(doc, denominatorNode, "Value");
+        XMLParser::SetNodeValue(doc, value, m_denominator[i]);
+    }
+
+    return elementNode;
+}
+
+bool TransferFunction::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    std::vector<double> numerator, denominator;
+    m_numerator.clear();
+    m_denominator.clear();
+    auto numeratorNode = elementNode->first_node("Numerator");
+    auto nValue = numeratorNode->first_node("Value");
+    while(nValue) {
+        double value = 0.0;
+        wxString(nValue->value()).ToCDouble(&value);
+        m_numerator.push_back(value);
+        nValue = nValue->next_sibling("Value");
+    }
+    auto denominatorNode = elementNode->first_node("Denominator");
+    auto dValue = denominatorNode->first_node("Value");
+    while(dValue) {
+        double value = 0.0;
+        wxString(dValue->value()).ToCDouble(&value);
+        m_denominator.push_back(value);
+        dValue = dValue->next_sibling("Value");
+    }
+    StartMove(m_position);
+    UpdateTFText();
+
+    return true;
+}

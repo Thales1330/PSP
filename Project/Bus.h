@@ -88,6 +88,9 @@ class Bus : public PowerElement
     virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual bool GetPlotData(ElementPlotData& plotData);
+    
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
 
    protected:
     BusElectricalData m_electricalData;

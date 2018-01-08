@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "IndMotorForm.h"
 #include "IndMotor.h"
+#include "IndMotorForm.h"
 
 IndMotor::IndMotor() : Machines() {}
 IndMotor::IndMotor(wxString name) : Machines() { m_electricalData.name = name; }
@@ -141,4 +141,49 @@ wxString IndMotor::GetTipText() const
     }
 
     return tipText;
+}
+
+rapidxml::xml_node<>* IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "IndMotor");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+
+    // Element properties
+    auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
+    auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+    XMLParser::SetNodeValue(doc, isOnline, m_online);
+    auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+    XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
+    XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);
+    XMLParser::SetNodeAttribute(doc, activePower, "UnitID", m_electricalData.activePowerUnit);
+    auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+
+    return elementNode;
+}
+
+bool IndMotor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
+{
+    if(!OpenCADProperties(elementNode, parentList)) return false;
+
+    auto electricalProp = elementNode->first_node("ElectricalProperties");
+    if(!electricalProp) return false;
+
+    // Element properties
+    SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
+    m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
+    m_electricalData.activePowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID"));
+    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+    m_electricalData.reactivePowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID"));
+
+    m_inserted = true;
+
+    return true;
 }

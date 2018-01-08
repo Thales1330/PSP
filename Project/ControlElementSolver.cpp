@@ -50,7 +50,7 @@ void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double 
 {
     // Init the input array size
     if(m_inputToSolve) delete[] m_inputToSolve;
-    m_inputToSolve =  new double[3];
+    m_inputToSolve = new double[3];
     // Check if the sistem have one input and one output
     bool fail = false;
     auto ioList = m_ctrlContainer->GetIOControlList();
@@ -107,25 +107,15 @@ bool ControlElementSolver::InitializeValues(bool startAllZero)
     // Reset Elements values
     auto elementList = m_ctrlContainer->GetControlElementsList();
     for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
-        ControlElement* element = *it;
-        element->SetSolved(false);
-        element->SetOutput(0.0);
-    }
-    auto tfList = m_ctrlContainer->GetTFList();
-    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
-        TransferFunction* tf = *it;
-        tf->CalculateSpaceState(100, m_integrationError);
+        if(!(*it)->Initialize()) return false;
     }
     auto connectionLineList = m_ctrlContainer->GetConnectionLineList();
     for(auto it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {
-        ConnectionLine* cLine = *it;
-        cLine->SetSolved(false);
-        cLine->SetValue(0.0);
+        if(!(*it)->Initialize()) return false;
     }
-    auto mathExprList = m_ctrlContainer->GetMathExprList();
-    for(auto it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {
-        MathExpression* mathExpr = *it;
-        if(!mathExpr->Initialize()) return false;
+    auto tfList = m_ctrlContainer->GetTFList();
+    for(auto it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {
+        (*it)->CalculateSpaceState(100, m_integrationError);
     }
 
     if(!startAllZero) {
@@ -190,6 +180,23 @@ void ControlElementSolver::SolveNextStep()
             constant->SetSolved();
             ConnectionLine* child = static_cast<ConnectionLine*>(constant->GetChildList()[0]);
             child->SetValue(constant->GetValue());
+            child->SetSolved();
+            FillAllConnectedChildren(child);
+        }
+    }
+
+    // Solve math expression without inputs (but connected)
+    auto mathExprList = m_ctrlContainer->GetMathExprList();
+    for(auto it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {
+        MathExpression* mathExpr = *it;
+        if(mathExpr->GetVariables().size() == 0) {  // No variables, no inputs.
+            m_inputToSolve[0] = 0.0;
+            m_inputToSolve[1] = m_currentTime;
+            m_inputToSolve[2] = m_switchStatus;
+            mathExpr->Solve(m_inputToSolve, m_timeStep);
+            mathExpr->SetSolved();
+            ConnectionLine* child = static_cast<ConnectionLine*>(mathExpr->GetChildList()[0]);
+            child->SetValue(mathExpr->GetOutput());
             child->SetSolved();
             FillAllConnectedChildren(child);
         }

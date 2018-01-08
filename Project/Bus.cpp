@@ -258,3 +258,89 @@ bool Bus::GetPlotData(ElementPlotData& plotData)
     plotData.AddData(argVoltage, _("Angle"));
     return true;
 }
+
+rapidxml::xml_node<>* Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    m_electricalData.number = m_elementID;
+
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Bus");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    Element::SaveCADProperties(doc, elementNode);
+
+    auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
+    auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+    XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
+    XMLParser::SetNodeValue(doc, nominalVoltage, m_electricalData.nominalVoltage);
+    XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", m_electricalData.nominalVoltageUnit);
+    auto isVoltageControlled = XMLParser::AppendNode(doc, electricalProp, "IsVoltageControlled");
+    XMLParser::SetNodeValue(doc, isVoltageControlled, m_electricalData.isVoltageControlled);
+    auto controlledVoltage = XMLParser::AppendNode(doc, electricalProp, "ControlledVoltage");
+    XMLParser::SetNodeValue(doc, controlledVoltage, m_electricalData.controlledVoltage);
+    XMLParser::SetNodeAttribute(doc, controlledVoltage, "Choice", m_electricalData.controlledVoltageUnitChoice);
+    auto slackBus = XMLParser::AppendNode(doc, electricalProp, "SlackBus");
+    XMLParser::SetNodeValue(doc, slackBus, m_electricalData.slackBus);
+
+    auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+    auto hasFault = XMLParser::AppendNode(doc, fault, "HasFault");
+    XMLParser::SetNodeValue(doc, hasFault, m_electricalData.hasFault);
+    auto faultType = XMLParser::AppendNode(doc, fault, "Type");
+    XMLParser::SetNodeValue(doc, faultType, m_electricalData.faultType);
+    auto faultLocation = XMLParser::AppendNode(doc, fault, "Location");
+    XMLParser::SetNodeValue(doc, faultLocation, m_electricalData.faultLocation);
+    auto faultResistance = XMLParser::AppendNode(doc, fault, "Resistance");
+    XMLParser::SetNodeValue(doc, faultResistance, m_electricalData.faultResistance);
+    auto faultReactance = XMLParser::AppendNode(doc, fault, "Reactance");
+    XMLParser::SetNodeValue(doc, faultReactance, m_electricalData.faultReactance);
+
+    auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+    auto plotBus = XMLParser::AppendNode(doc, stability, "Plot");
+    XMLParser::SetNodeValue(doc, plotBus, m_electricalData.plotBus);
+    auto stabHasFault = XMLParser::AppendNode(doc, stability, "HasFault");
+    XMLParser::SetNodeValue(doc, stabHasFault, m_electricalData.stabHasFault);
+    auto stabFaultTime = XMLParser::AppendNode(doc, stability, "FaultTime");
+    XMLParser::SetNodeValue(doc, stabFaultTime, m_electricalData.stabFaultTime);
+    auto stabFaultLength = XMLParser::AppendNode(doc, stability, "FaultLength");
+    XMLParser::SetNodeValue(doc, stabFaultLength, m_electricalData.stabFaultLength);
+    auto stabFaultResistance = XMLParser::AppendNode(doc, stability, "FaultResistance");
+    XMLParser::SetNodeValue(doc, stabFaultResistance, m_electricalData.stabFaultResistance);
+    auto stabFaultReactance = XMLParser::AppendNode(doc, stability, "FaultReactance");
+    XMLParser::SetNodeValue(doc, stabFaultReactance, m_electricalData.stabFaultReactance);
+
+    return elementNode;
+}
+
+bool Bus::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!Element::OpenCADProperties(elementNode)) return false;
+
+    auto electricalProp = elementNode->first_node("ElectricalProperties");
+    if(!electricalProp) return false;
+
+    m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
+    m_electricalData.nominalVoltageUnit =
+        (ElectricalUnit)XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID");
+    m_electricalData.isVoltageControlled = XMLParser::GetNodeValueInt(electricalProp, "IsVoltageControlled");
+    m_electricalData.controlledVoltage = XMLParser::GetNodeValueDouble(electricalProp, "ControlledVoltage");
+    m_electricalData.controlledVoltageUnitChoice =
+        XMLParser::GetAttributeValueInt(electricalProp, "ControlledVoltage", "Choice");
+    m_electricalData.slackBus = XMLParser::GetNodeValueInt(electricalProp, "SlackBus");
+    auto fault = electricalProp->first_node("Fault");
+    m_electricalData.hasFault = XMLParser::GetNodeValueInt(fault, "HasFault");
+    m_electricalData.faultType = (FaultData)XMLParser::GetNodeValueInt(fault, "Type");
+    m_electricalData.faultLocation = (FaultData)XMLParser::GetNodeValueInt(fault, "Location");
+    m_electricalData.faultResistance = XMLParser::GetNodeValueDouble(fault, "Resistance");
+    m_electricalData.faultReactance = XMLParser::GetNodeValueDouble(fault, "Reactance");
+    auto stability = electricalProp->first_node("Stability");
+    m_electricalData.plotBus = XMLParser::GetNodeValueInt(stability, "Plot");
+    m_electricalData.stabHasFault = XMLParser::GetNodeValueInt(stability, "HasFault");
+    m_electricalData.stabFaultTime = XMLParser::GetNodeValueDouble(stability, "FaultTime");
+    m_electricalData.stabFaultLength = XMLParser::GetNodeValueDouble(stability, "FaultLength");
+    m_electricalData.stabFaultResistance = XMLParser::GetNodeValueDouble(stability, "FaultResistance");
+    m_electricalData.stabFaultReactance = XMLParser::GetNodeValueDouble(stability, "FaultReactance");
+
+    if(m_electricalData.stabHasFault) SetDynamicEvent(true);
+    return true;
+}

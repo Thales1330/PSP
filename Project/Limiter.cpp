@@ -107,7 +107,7 @@ void Limiter::UpdatePoints()
 
 bool Limiter::Solve(double* input, double timeStep)
 {
-    if(!input){
+    if(!input) {
         m_output = 0.0;
         return true;
     }
@@ -125,4 +125,35 @@ Element* Limiter::GetCopy()
     Limiter* copy = new Limiter(m_elementID);
     *copy = *this;
     return copy;
+}
+
+rapidxml::xml_node<>* Limiter::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Limiter");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+    SaveControlNodes(doc, elementNode);
+
+    // Element properties
+    auto upLimit = XMLParser::AppendNode(doc, elementNode, "UpperLimit");
+    XMLParser::SetNodeValue(doc, upLimit, m_upLimit);
+    auto lowLimit = XMLParser::AppendNode(doc, elementNode, "LowerLimit");
+    XMLParser::SetNodeValue(doc, lowLimit, m_lowLimit);
+
+    return elementNode;
+}
+
+bool Limiter::OpenElement(rapidxml::xml_node<>* elementNode)
+{
+    if(!OpenCADProperties(elementNode)) return false;
+    if(!OpenControlNodes(elementNode)) return false;
+
+    // Element properties
+    m_upLimit = XMLParser::GetNodeValueDouble(elementNode, "UpperLimit");
+    m_lowLimit = XMLParser::GetNodeValueDouble(elementNode, "LowerLimit");
+
+    StartMove(m_position);
+    UpdatePoints();
+    return true;
 }

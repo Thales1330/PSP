@@ -108,9 +108,7 @@ void ControlElement::DrawNodes() const
     for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
         Node* node = *it;
         DrawCircle(node->GetPosition(), node->GetRadius(), 10, GL_POLYGON);
-        if(node->GetNodeType() == Node::NODE_IN) {
-            DrawTriangle(node->GetInTrianglePts());
-        }
+        if(node->GetNodeType() == Node::NODE_IN) { DrawTriangle(node->GetInTrianglePts()); }
     }
 }
 
@@ -118,17 +116,13 @@ void ControlElement::StartMove(wxPoint2DDouble position)
 {
     m_moveStartPt = position;
     m_movePos = m_position;
-    for(int i = 0; i < (int)m_nodeList.size(); ++i) {
-        m_nodeList[i]->StartMove(position);
-    }
+    for(int i = 0; i < (int)m_nodeList.size(); ++i) { m_nodeList[i]->StartMove(position); }
 }
 
 void ControlElement::Move(wxPoint2DDouble position)
 {
     SetPosition(m_movePos + position - m_moveStartPt);
-    for(int i = 0; i < (int)m_nodeList.size(); ++i) {
-        m_nodeList[i]->Move(position);
-    }
+    for(int i = 0; i < (int)m_nodeList.size(); ++i) { m_nodeList[i]->Move(position); }
 }
 
 bool ControlElement::Solve(double* input, double timeStep)
@@ -145,4 +139,65 @@ void ControlElement::ReplaceNode(Node* oldNode, Node* newNode)
     for(unsigned int i = 0; i < m_nodeList.size(); i++) {
         if(m_nodeList[i] == oldNode) m_nodeList[i] = newNode;
     }
+}
+
+ControlElement* ControlElement::GetControlElementFromID(std::vector<ControlElement*> elementList, int id)
+{
+    for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
+        ControlElement* element = *it;
+        if(element->GetID() == id) return element;
+    }
+    return NULL;
+}
+
+void ControlElement::SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode)
+{
+    auto nodeList = XMLParser::AppendNode(doc, elementNode, "NodeList");
+    int id = 0;
+    for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
+        Node* node = *it;
+        node->SetID(id);
+        auto nodeN = XMLParser::AppendNode(doc, nodeList, "Node");
+        XMLParser::SetNodeAttribute(doc, nodeN, "ID", id);
+        auto nodePosition = XMLParser::AppendNode(doc, nodeN, "Position");
+        auto posNodeX = XMLParser::AppendNode(doc, nodePosition, "X");
+        XMLParser::SetNodeValue(doc, posNodeX, node->GetPosition().m_x);
+        auto posNodeY = XMLParser::AppendNode(doc, nodePosition, "Y");
+        XMLParser::SetNodeValue(doc, posNodeY, node->GetPosition().m_y);
+        auto angle = XMLParser::AppendNode(doc, nodeN, "Angle");
+        XMLParser::SetNodeValue(doc, angle, node->GetAngle());
+        auto nodeType = XMLParser::AppendNode(doc, nodeN, "Type");
+        XMLParser::SetNodeValue(doc, nodeType, node->GetNodeType());
+        id++;
+    }
+}
+
+bool ControlElement::OpenControlNodes(rapidxml::xml_node<>* elementNode)
+{
+    // Clear old nodes
+    for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) delete *it;
+    m_nodeList.clear();
+
+    auto nodeList = elementNode->first_node("NodeList");
+    if(!nodeList) return false;
+    auto nodeN = nodeList->first_node("Node");
+    while(nodeN) {
+        auto nodePosition = nodeN->first_node("Position");
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePosition, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePosition, "Y");
+        double nodeAngle = XMLParser::GetNodeValueDouble(nodeN, "Angle");
+        Node::NodeType nodeType = static_cast<Node::NodeType>(XMLParser::GetNodeValueInt(nodeN, "Type"));
+        Node* node = new Node(wxPoint2DDouble(nodePosX, nodePosY), nodeType, 2.0);
+        node->SetAngle(nodeAngle);
+        m_nodeList.push_back(node);
+        nodeN = nodeN->next_sibling("Node");
+    }
+    return true;
+}
+
+bool ControlElement::Initialize()
+{
+    m_solved = false;
+    m_output = 0.0;
+    return true;
 }

@@ -88,6 +88,9 @@ class Line : public Branch
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetPointList(std::vector<wxPoint2DDouble> pointList);
+    
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);
 
    protected:
     void UpdatePowerFlowArrowsPosition();

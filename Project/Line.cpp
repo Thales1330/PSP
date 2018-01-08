@@ -20,27 +20,21 @@
 Line::Line() : Branch()
 {
     for(int i = 0; i < 2; i++) {
-        for(int j = 0; j < 3; j++) {
-            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
-        }
+        for(int j = 0; j < 3; j++) { m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0); }
     }
 }
 
 Line::Line(wxString name) : Branch()
 {
     for(int i = 0; i < 2; i++) {
-        for(int j = 0; j < 3; j++) {
-            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
-        }
+        for(int j = 0; j < 3; j++) { m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0); }
     }
     m_electricalData.name = name;
 }
 Line::~Line() {}
 bool Line::Contains(wxPoint2DDouble position) const
 {
-    if(PointToLineDistance(position) < 5.0) {
-        return true;
-    }
+    if(PointToLineDistance(position) < 5.0) { return true; }
     return false;
 }
 
@@ -59,9 +53,7 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
     std::vector<wxPoint2DDouble> pointList = m_pointList;
     if(!m_inserted && pointList.size() > 0) {
         wxPoint2DDouble secondPoint = m_position;
-        if(pointList.size() > 2) {
-            secondPoint = pointList[2];
-        }
+        if(pointList.size() > 2) { secondPoint = pointList[2]; }
         pointList[1] = GetSwitchPoint(m_parentList[0], pointList[0], secondPoint);
         pointList.push_back(m_position);
     }
@@ -75,9 +67,7 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
         // Draw nodes selection.
         if(pointList.size() > 0) {
             DrawCircle(pointList[0], 5.0 + m_borderSize / scale, 10, GL_POLYGON);
-            if(m_inserted) {
-                DrawCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, 10, GL_POLYGON);
-            }
+            if(m_inserted) { DrawCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, 10, GL_POLYGON); }
         }
     }
 
@@ -95,9 +85,7 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
     if(pointList.size() > 0) {
         glColor4dv(elementColour.GetRGBA());
         DrawCircle(pointList[0], 5.0, 10, GL_POLYGON);
-        if(m_inserted) {
-            DrawCircle(pointList[pointList.size() - 1], 5.0, 10, GL_POLYGON);
-        }
+        if(m_inserted) { DrawCircle(pointList[pointList.size() - 1], 5.0, 10, GL_POLYGON); }
     }
 
     // Draw pickboxes (Layer 3).
@@ -163,8 +151,9 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
             Bus* parentBus = static_cast<Bus*>(parent);
             if(m_electricalData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
                m_electricalData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
-                wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
-                                                  "Use a transformer or edit the bus properties."),
+                wxMessageDialog msgDialog(NULL,
+                                          _("Unable to connect two buses with different nominal voltages.\n"
+                                            "Use a transformer or edit the bus properties."),
                                           _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
                 msgDialog.ShowModal();
                 return false;
@@ -179,9 +168,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 
             // Set first switch point.
             wxPoint2DDouble secondPoint = parentPt;
-            if(m_pointList.size() > 2) {
-                secondPoint = m_pointList[2];
-            }
+            if(m_pointList.size() > 2) { secondPoint = m_pointList[2]; }
             m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], secondPoint);
 
             // Set the second switch point.
@@ -233,9 +220,7 @@ bool Line::PickboxContains(wxPoint2DDouble position)
 
 void Line::AddPoint(wxPoint2DDouble point)
 {
-    if(m_parentList.size() != 0) {
-        m_pointList.push_back(point);
-    }
+    if(m_parentList.size() != 0) { m_pointList.push_back(point); }
 }
 
 void Line::StartMove(wxPoint2DDouble position)
@@ -294,15 +279,18 @@ bool Line::GetContextMenu(wxMenu& menu)
     menu.Append(ID_EDIT_ELEMENT, _("Edit line"));
     if(m_activePickboxID == ID_PB_NONE) {
         wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
-        addNodeItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\addNode16.png", wxPATH_WIN).GetPath()));
+        addNodeItem->SetBitmap(
+            wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\addNode16.png", wxPATH_WIN).GetPath()));
         menu.Append(addNodeItem);
     } else {
         wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_REMOVE_NODE, _("Remove node"));
-        addNodeItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\removeNode16.png", wxPATH_WIN).GetPath()));
+        addNodeItem->SetBitmap(
+            wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\removeNode16.png", wxPATH_WIN).GetPath()));
         menu.Append(addNodeItem);
     }
     wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
+    deleteItem->SetBitmap(
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
     menu.Append(deleteItem);
     return true;
 }
@@ -392,8 +380,9 @@ bool Line::SetNodeParent(Element* parent)
                 m_electricalData.nominalVoltageUnit = parentBus->GetElectricalData().nominalVoltageUnit;
             } else if(m_electricalData.nominalVoltage != parentBus->GetElectricalData().nominalVoltage ||
                       m_electricalData.nominalVoltageUnit != parentBus->GetElectricalData().nominalVoltageUnit) {
-                wxMessageDialog msgDialog(NULL, _("Unable to connect two buses with different nominal voltages.\n"
-                                                  "Use a transformer or edit the bus properties."),
+                wxMessageDialog msgDialog(NULL,
+                                          _("Unable to connect two buses with different nominal voltages.\n"
+                                            "Use a transformer or edit the bus properties."),
                                           _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
                 msgDialog.ShowModal();
                 m_activeNodeID = 0;
@@ -460,14 +449,10 @@ void Line::UpdatePowerFlowArrowsPosition()
             m_powerFlowArrow.clear();
         } break;
         case PF_BUS1_TO_BUS2: {
-            for(int i = 1; i < (int)m_pointList.size() - 1; i++) {
-                edges.push_back(m_pointList[i]);
-            }
+            for(int i = 1; i < (int)m_pointList.size() - 1; i++) { edges.push_back(m_pointList[i]); }
         } break;
         case PF_BUS2_TO_BUS1: {
-            for(int i = (int)m_pointList.size() - 2; i > 0; i--) {
-                edges.push_back(m_pointList[i]);
-            }
+            for(int i = (int)m_pointList.size() - 2; i > 0; i--) { edges.push_back(m_pointList[i]); }
         } break;
         default:
             break;
@@ -590,4 +575,165 @@ LineElectricalData Line::GetPUElectricalData(double systemBasePower)
     }
 
     return data;
+}
+
+rapidxml::xml_node<>* Line::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Line");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+    auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
+    auto nodeList = XMLParser::AppendNode(doc, cadProp, "NodeList");
+    int nodeID = 0;
+    // Parse all the points.
+    for(unsigned int i = 0; i < m_pointList.size(); i++) {
+        // Don't save switch points, the method UpdateSwitchesPosition() calculate these points properly after open the
+        // element
+        if((i != 1) && (i != m_pointList.size() - 2)) {
+            auto nodePos = XMLParser::AppendNode(doc, nodeList, "Node");
+            XMLParser::SetNodeAttribute(doc, nodePos, "ID", nodeID);
+            auto nodePosX = XMLParser::AppendNode(doc, nodePos, "X");
+            XMLParser::SetNodeValue(doc, nodePosX, m_pointList[i].m_x);
+            auto nodePosY = XMLParser::AppendNode(doc, nodePos, "Y");
+            XMLParser::SetNodeValue(doc, nodePosY, m_pointList[i].m_y);
+            nodeID++;
+        }
+    }
+
+    auto parentIDList = XMLParser::AppendNode(doc, cadProp, "ParentIDList");
+    for(unsigned int i = 0; i < m_parentList.size(); i++) {
+        if(m_parentList[i]) {
+            auto parentID = XMLParser::AppendNode(doc, parentIDList, "ParentID");
+            XMLParser::SetNodeAttribute(doc, parentID, "ID", static_cast<int>(i));
+            XMLParser::SetNodeValue(doc, parentID, m_parentList[i]->GetID());
+        }
+    }
+
+    auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
+    auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+    XMLParser::SetNodeValue(doc, isOnline, m_online);
+    auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+    XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
+    XMLParser::SetNodeValue(doc, nominalVoltage, m_electricalData.nominalVoltage);
+    XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", m_electricalData.nominalVoltageUnit);
+    auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
+    XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);
+    XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", m_electricalData.nominalPowerUnit);
+    auto resistance = XMLParser::AppendNode(doc, electricalProp, "Resistance");
+    XMLParser::SetNodeValue(doc, resistance, m_electricalData.resistance);
+    XMLParser::SetNodeAttribute(doc, resistance, "UnitID", m_electricalData.resistanceUnit);
+    auto indReactance = XMLParser::AppendNode(doc, electricalProp, "IndReactance");
+    XMLParser::SetNodeValue(doc, indReactance, m_electricalData.indReactance);
+    XMLParser::SetNodeAttribute(doc, indReactance, "UnitID", m_electricalData.indReactanceUnit);
+    auto capSusceptance = XMLParser::AppendNode(doc, electricalProp, "CapSusceptance");
+    XMLParser::SetNodeValue(doc, capSusceptance, m_electricalData.capSusceptance);
+    XMLParser::SetNodeAttribute(doc, capSusceptance, "UnitID", m_electricalData.capSusceptanceUnit);
+    auto lineSize = XMLParser::AppendNode(doc, electricalProp, "LineSize");
+    XMLParser::SetNodeValue(doc, lineSize, m_electricalData.lineSize);
+    auto useLinePower = XMLParser::AppendNode(doc, electricalProp, "UseLinePower");
+    XMLParser::SetNodeValue(doc, useLinePower, m_electricalData.useLinePower);
+
+    auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+    auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
+    XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);
+    auto zeroIndReactance = XMLParser::AppendNode(doc, fault, "ZeroIndReactance");
+    XMLParser::SetNodeValue(doc, zeroIndReactance, m_electricalData.zeroIndReactance);
+    auto zeroCapSusceptance = XMLParser::AppendNode(doc, fault, "ZeroCapSusceptance");
+    XMLParser::SetNodeValue(doc, zeroCapSusceptance, m_electricalData.zeroCapSusceptance);
+
+    SaveSwitchingData(doc, electricalProp);
+
+    return elementNode;
+}
+
+bool Line::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
+{
+    auto cadPropNode = elementNode->first_node("CADProperties");
+    if(!cadPropNode) return false;
+
+    // Get nodes points
+    std::vector<wxPoint2DDouble> ptsList;
+    auto nodePosList = cadPropNode->first_node("NodeList");
+    if(!nodePosList) return false;
+    auto nodePos = nodePosList->first_node("Node");
+    while(nodePos) {
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePos, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePos, "Y");
+        ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+        nodePos = nodePos->next_sibling("Node");
+    }
+
+    // Get parents IDs
+    auto parentIDList = cadPropNode->first_node("ParentIDList");
+    if(!parentIDList) return false;
+    auto parentNode = parentIDList->first_node("ParentID");
+    long parentID[2] = {-1, -1};
+    while(parentNode) {
+        long index = 0;
+        wxString(parentNode->first_attribute("ID")->value()).ToCLong(&index);
+        wxString(parentNode->value()).ToCLong(&parentID[index]);
+        parentNode = parentNode->next_sibling("ParentID");
+    }
+
+    std::vector<wxPoint2DDouble> nodePtsList;            // List of node points
+    nodePtsList.push_back(ptsList[0]);                   // First point on the list
+    nodePtsList.push_back(ptsList[ptsList.size() - 1]);  // Last point on the list
+
+    // List of dummy buses to set not connected nodes properly
+    std::vector<Bus*> dummyBusList;
+    for(unsigned int i = 0; i < nodePtsList.size(); ++i) {
+        if(parentID[i] == -1)  // No parent connected
+        {
+            Bus* dummyBus = new Bus(nodePtsList[i]);
+            dummyBusList.push_back(dummyBus);
+            AddParent(dummyBus, nodePtsList[i]);
+        } else {  // Parent connected (necessarily a bus, get from bus list)
+            AddParent(parentList[parentID[i]], nodePtsList[i]);
+        }
+    }
+
+    // Add the others nodes (if exists)
+    std::vector<wxPoint2DDouble> midPts;
+    for(unsigned int i = 1; i < ptsList.size() - 1; i++) midPts.push_back(ptsList[i]);
+    m_pointList.insert(m_pointList.begin() + 2, midPts.begin(), midPts.end());
+    SetPointList(m_pointList);
+
+    // Remove dummy buses
+    for(auto it = dummyBusList.begin(), itEnd = dummyBusList.end(); it != itEnd; ++it) {
+        RemoveParent(*it);
+        delete *it;
+    }
+    dummyBusList.clear();
+
+    auto electricalProp = elementNode->first_node("ElectricalProperties");
+    if(!electricalProp) return false;
+
+    SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
+    m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.nominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "NominalVoltage");
+    m_electricalData.nominalVoltageUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "NominalVoltage", "UnitID"));
+    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, "NominalPower");
+    m_electricalData.nominalPowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "NominalPower", "UnitID"));
+    m_electricalData.resistance = XMLParser::GetNodeValueDouble(electricalProp, "Resistance");
+    m_electricalData.resistanceUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "Resistance", "UnitID"));
+    m_electricalData.indReactance = XMLParser::GetNodeValueDouble(electricalProp, "IndReactance");
+    m_electricalData.indReactanceUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "IndReactance", "UnitID"));
+    m_electricalData.capSusceptance = XMLParser::GetNodeValueDouble(electricalProp, "CapSusceptance");
+    m_electricalData.capSusceptanceUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "CapSusceptance", "UnitID"));
+    m_electricalData.lineSize = XMLParser::GetNodeValueDouble(electricalProp, "LineSize");
+    m_electricalData.useLinePower = XMLParser::GetNodeValueInt(electricalProp, "UseLinePower");
+
+    auto fault = electricalProp->first_node("Fault");
+    m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
+    m_electricalData.zeroIndReactance = XMLParser::GetNodeValueDouble(fault, "ZeroIndReactance");
+    m_electricalData.zeroCapSusceptance = XMLParser::GetNodeValueDouble(fault, "ZeroCapSusceptance");
+
+    if(!OpenSwitchingData(electricalProp)) return false;
+    if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
+    return true;
 }
