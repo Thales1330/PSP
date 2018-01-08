@@ -259,7 +259,7 @@ bool Bus::GetPlotData(ElementPlotData& plotData)
     return true;
 }
 
-void Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     m_electricalData.number = m_elementID;
 
@@ -307,6 +307,8 @@ void Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* eleme
     XMLParser::SetNodeValue(doc, stabFaultResistance, m_electricalData.stabFaultResistance);
     auto stabFaultReactance = XMLParser::AppendNode(doc, stability, "FaultReactance");
     XMLParser::SetNodeValue(doc, stabFaultReactance, m_electricalData.stabFaultReactance);
+
+    return elementNode;
 }
 
 bool Bus::OpenElement(rapidxml::xml_node<>* elementNode)

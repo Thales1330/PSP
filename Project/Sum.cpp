@@ -246,7 +246,7 @@ Element* Sum::GetCopy()
     return copy;
 }
 
-void Sum::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Sum::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Sum");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -260,6 +260,8 @@ void Sum::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* eleme
         auto value = XMLParser::AppendNode(doc, signsNode, "Value");
         XMLParser::SetNodeValue(doc, value, static_cast<int>(m_signalList[i]));
     }
+
+    return elementNode;
 }
 
 bool Sum::OpenElement(rapidxml::xml_node<>* elementNode)

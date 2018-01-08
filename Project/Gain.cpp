@@ -200,7 +200,7 @@ bool Gain::UpdateText()
     return true;
 }
 
-void Gain::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Gain::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Gain");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -211,6 +211,8 @@ void Gain::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elem
     // Element properties
     auto value = XMLParser::AppendNode(doc, elementNode, "Value");
     XMLParser::SetNodeValue(doc, value, m_value);
+
+    return elementNode;
 }
 
 bool Gain::OpenElement(rapidxml::xml_node<>* elementNode)

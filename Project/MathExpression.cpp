@@ -328,10 +328,13 @@ bool MathExpression::Initialize()
 
     // Optimize only once to gain performance.
     m_fparser.Optimize();
+    
+    m_solved = false;
+    m_output = 0.0;
     return true;
 }
 
-void MathExpression::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* MathExpression::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "MathExpr");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -347,6 +350,8 @@ void MathExpression::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_no
     }
     auto mathExprValue = XMLParser::AppendNode(doc, elementNode, "MathExprValue");
     XMLParser::SetNodeValue(doc, mathExprValue, m_mathExpression);
+
+    return elementNode;
 }
 
 bool MathExpression::OpenElement(rapidxml::xml_node<>* elementNode)

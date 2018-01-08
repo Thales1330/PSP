@@ -127,7 +127,7 @@ Element* Limiter::GetCopy()
     return copy;
 }
 
-void Limiter::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Limiter::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Limiter");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -140,6 +140,8 @@ void Limiter::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* e
     XMLParser::SetNodeValue(doc, upLimit, m_upLimit);
     auto lowLimit = XMLParser::AppendNode(doc, elementNode, "LowerLimit");
     XMLParser::SetNodeValue(doc, lowLimit, m_lowLimit);
+
+    return elementNode;
 }
 
 bool Limiter::OpenElement(rapidxml::xml_node<>* elementNode)

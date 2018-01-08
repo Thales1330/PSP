@@ -76,13 +76,15 @@ Element* Divider::GetCopy()
     return copy;
 }
 
-void Divider::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Divider::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Divider");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
 
     SaveCADProperties(doc, elementNode);
     SaveControlNodes(doc, elementNode);
+
+    return elementNode;
 }
 
 bool Divider::OpenElement(rapidxml::xml_node<>* elementNode)

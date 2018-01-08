@@ -89,6 +89,9 @@ class Load : public Shunt
     void SetElectricalData(LoadElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool GetPlotData(ElementPlotData& plotData);
 
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);
+
    protected:
     std::vector<wxPoint2DDouble> m_triangPts;
     LoadElectricalData m_electricalData;

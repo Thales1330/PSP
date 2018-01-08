@@ -89,7 +89,7 @@ class Bus : public PowerElement
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual bool GetPlotData(ElementPlotData& plotData);
     
-    virtual void SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
 
    protected:

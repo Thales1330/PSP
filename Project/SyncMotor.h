@@ -148,6 +148,9 @@ class SyncMotor : public Machines
     virtual void SetElectricalData(SyncMotorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
 
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);
+
    protected:
     SyncMotorElectricalData m_electricalData;
 };

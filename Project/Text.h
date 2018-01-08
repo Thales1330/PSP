@@ -105,6 +105,10 @@ class Text : public GraphicalElement
     const ElementType GetElementType() const { return m_elementType; }
     const ElectricalUnit GetUnit() const { return m_unit; }
     int GetDecimalPlaces() const { return m_decimalPlaces; }
+    
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
+    
    protected:
     wxString m_text = _("Text");
     int m_numberOfLines = 0;

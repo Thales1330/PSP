@@ -143,7 +143,7 @@ wxString IndMotor::GetTipText() const
     return tipText;
 }
 
-void IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "IndMotor");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -162,6 +162,8 @@ void IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* 
     auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
     XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
     XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+
+    return elementNode;
 }
 
 bool IndMotor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)

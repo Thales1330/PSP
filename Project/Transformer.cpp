@@ -15,23 +15,19 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "TransformerForm.h"
 #include "Transformer.h"
+#include "TransformerForm.h"
 
 Transformer::Transformer() : Branch()
 {
     for(int i = 0; i < 2; i++) {
-        for(int j = 0; j < 3; j++) {
-            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
-        }
+        for(int j = 0; j < 3; j++) { m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0); }
     }
 }
 Transformer::Transformer(wxString name) : Branch()
 {
     for(int i = 0; i < 2; i++) {
-        for(int j = 0; j < 3; j++) {
-            m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0);
-        }
+        for(int j = 0; j < 3; j++) { m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0); }
     }
     m_electricalData.name = name;
 }
@@ -80,9 +76,7 @@ bool Transformer::AddParent(Element* parent, wxPoint2DDouble position)
 
             // Set first switch point.
             wxPoint2DDouble secondPoint = parentPt;
-            if(m_pointList.size() > 2) {
-                secondPoint = m_pointList[2];
-            }
+            if(m_pointList.size() > 2) { secondPoint = m_pointList[2]; }
             m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], secondPoint);
 
             // Set the second switch point.
@@ -158,9 +152,7 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
         if(m_pointList.size() > 0) {
             glColor4dv(elementColour.GetRGBA());
             DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
-            if(m_inserted) {
-                DrawCircle(m_pointList[m_pointList.size() - 1], 5.0, 10, GL_POLYGON);
-            }
+            if(m_inserted) { DrawCircle(m_pointList[m_pointList.size() - 1], 5.0, 10, GL_POLYGON); }
         }
 
         DrawSwitches();
@@ -214,13 +206,9 @@ void Transformer::Move(wxPoint2DDouble position)
     SetPosition(m_movePos + position - m_moveStartPt);
 
     // Move all the points, except the switches and buses points.
-    for(int i = 2; i < (int)m_pointList.size() - 2; i++) {
-        m_pointList[i] = m_movePts[i] + position - m_moveStartPt;
-    }
+    for(int i = 2; i < (int)m_pointList.size() - 2; i++) { m_pointList[i] = m_movePts[i] + position - m_moveStartPt; }
 
-    if(!m_parentList[0]) {
-        m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
-    }
+    if(!m_parentList[0]) { m_pointList[0] = m_movePts[0] + position - m_moveStartPt; }
     if(!m_parentList[1]) {
         m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
     }
@@ -309,14 +297,10 @@ void Transformer::UpdatePowerFlowArrowsPosition()
             m_powerFlowArrow.clear();
         } break;
         case PF_BUS1_TO_BUS2: {
-            for(int i = 1; i < (int)m_pointList.size() - 1; i++) {
-                edges.push_back(m_pointList[i]);
-            }
+            for(int i = 1; i < (int)m_pointList.size() - 1; i++) { edges.push_back(m_pointList[i]); }
         } break;
         case PF_BUS2_TO_BUS1: {
-            for(int i = (int)m_pointList.size() - 2; i > 0; i--) {
-                edges.push_back(m_pointList[i]);
-            }
+            for(int i = (int)m_pointList.size() - 2; i > 0; i--) { edges.push_back(m_pointList[i]); }
         } break;
         default:
             break;
@@ -531,4 +515,206 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
     }
 
     return data;
+}
+
+rapidxml::xml_node<>* Transformer::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Transfomer");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+    auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
+    auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+    auto posX = XMLParser::AppendNode(doc, position, "X");
+    XMLParser::SetNodeValue(doc, posX, m_position.m_x);
+    auto posY = XMLParser::AppendNode(doc, position, "Y");
+    XMLParser::SetNodeValue(doc, posY, m_position.m_y);
+    auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+    auto width = XMLParser::AppendNode(doc, size, "Width");
+    XMLParser::SetNodeValue(doc, width, m_width);
+    auto height = XMLParser::AppendNode(doc, size, "Height");
+    XMLParser::SetNodeValue(doc, height, m_height);
+    auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+    XMLParser::SetNodeValue(doc, angle, m_angle);
+    auto nodeList = XMLParser::AppendNode(doc, cadProp, "NodeList");
+    auto nodePos1 = XMLParser::AppendNode(doc, nodeList, "Node");
+    XMLParser::SetNodeAttribute(doc, nodePos1, "ID", 0);
+    auto nodePosX1 = XMLParser::AppendNode(doc, nodePos1, "X");
+    XMLParser::SetNodeValue(doc, nodePosX1, m_pointList[0].m_x);
+    auto nodePosY1 = XMLParser::AppendNode(doc, nodePos1, "Y");
+    XMLParser::SetNodeValue(doc, nodePosY1, m_pointList[0].m_y);
+    auto nodePos2 = XMLParser::AppendNode(doc, nodeList, "Node");
+    XMLParser::SetNodeAttribute(doc, nodePos2, "ID", 1);
+    auto nodePosX2 = XMLParser::AppendNode(doc, nodePos2, "X");
+    XMLParser::SetNodeValue(doc, nodePosX2, m_pointList[m_pointList.size() - 1].m_x);
+    auto nodePosY2 = XMLParser::AppendNode(doc, nodePos2, "Y");
+    XMLParser::SetNodeValue(doc, nodePosY2, m_pointList[m_pointList.size() - 1].m_y);
+
+    auto parentIDList = XMLParser::AppendNode(doc, cadProp, "ParentIDList");
+    for(unsigned int i = 0; i < m_parentList.size(); i++) {
+        Element* parent = m_parentList[i];
+        if(parent) {
+            auto parentID = XMLParser::AppendNode(doc, parentIDList, "ParentID");
+            XMLParser::SetNodeAttribute(doc, parentID, "ID", static_cast<int>(i));
+            XMLParser::SetNodeValue(doc, parentID, parent->GetID());
+        }
+    }
+
+    auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
+    auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+    XMLParser::SetNodeValue(doc, isOnline, m_online);
+    auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+    XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto primaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, "PrimaryNominalVoltage");
+    XMLParser::SetNodeValue(doc, primaryNominalVoltage, m_electricalData.primaryNominalVoltage);
+    XMLParser::SetNodeAttribute(doc, primaryNominalVoltage, "UnitID", m_electricalData.primaryNominalVoltageUnit);
+    auto secondaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, "SecondaryNominalVoltage");
+    XMLParser::SetNodeValue(doc, secondaryNominalVoltage, m_electricalData.secondaryNominalVoltage);
+    XMLParser::SetNodeAttribute(doc, secondaryNominalVoltage, "UnitID", m_electricalData.secondaryNominalVoltageUnit);
+    auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
+    XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);
+    XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", m_electricalData.nominalPowerUnit);
+    auto resistance = XMLParser::AppendNode(doc, electricalProp, "Resistance");
+    XMLParser::SetNodeValue(doc, resistance, m_electricalData.resistance);
+    XMLParser::SetNodeAttribute(doc, resistance, "UnitID", m_electricalData.resistanceUnit);
+    auto indReactance = XMLParser::AppendNode(doc, electricalProp, "IndReactance");
+    XMLParser::SetNodeValue(doc, indReactance, m_electricalData.indReactance);
+    XMLParser::SetNodeAttribute(doc, indReactance, "UnitID", m_electricalData.indReactanceUnit);
+    auto connection = XMLParser::AppendNode(doc, electricalProp, "Connection");
+    XMLParser::SetNodeValue(doc, connection, m_electricalData.connection);
+    auto turnsRatio = XMLParser::AppendNode(doc, electricalProp, "TurnsRatio");
+    XMLParser::SetNodeValue(doc, turnsRatio, m_electricalData.turnsRatio);
+    auto phaseShift = XMLParser::AppendNode(doc, electricalProp, "PhaseShift");
+    XMLParser::SetNodeValue(doc, phaseShift, m_electricalData.phaseShift);
+    auto useTransformerPower = XMLParser::AppendNode(doc, electricalProp, "UseTransfomerPower");
+    XMLParser::SetNodeValue(doc, useTransformerPower, m_electricalData.useTransformerPower);
+
+    auto fault = XMLParser::AppendNode(doc, electricalProp, "Fault");
+    auto zeroResistance = XMLParser::AppendNode(doc, fault, "ZeroResistance");
+    XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);
+    auto zeroIndReactance = XMLParser::AppendNode(doc, fault, "ZeroIndReactance");
+    XMLParser::SetNodeValue(doc, zeroIndReactance, m_electricalData.zeroIndReactance);
+    auto primaryGrndResistance = XMLParser::AppendNode(doc, fault, "PrimaryGrndResistance");
+    XMLParser::SetNodeValue(doc, primaryGrndResistance, m_electricalData.primaryGrndResistance);
+    auto primaryGrndReactance = XMLParser::AppendNode(doc, fault, "PrimaryGrndReactance");
+    XMLParser::SetNodeValue(doc, primaryGrndReactance, m_electricalData.primaryGrndReactance);
+    auto secondaryGrndResistance = XMLParser::AppendNode(doc, fault, "SecondaryGrndResistance");
+    XMLParser::SetNodeValue(doc, secondaryGrndResistance, m_electricalData.secondaryGrndResistance);
+    auto secondaryGrndReactance = XMLParser::AppendNode(doc, fault, "SecondaryGrndReactance");
+    XMLParser::SetNodeValue(doc, secondaryGrndReactance, m_electricalData.secondaryGrndReactance);
+
+    SaveSwitchingData(doc, electricalProp);
+
+    return elementNode;
+}
+
+bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
+{
+    auto cadPropNode = elementNode->first_node("CADProperties");
+    if(!cadPropNode) return false;
+
+    auto position = cadPropNode->first_node("Position");
+    double posX = XMLParser::GetNodeValueDouble(position, "X");
+    double posY = XMLParser::GetNodeValueDouble(position, "Y");
+    auto size = cadPropNode->first_node("Size");
+    m_width = XMLParser::GetNodeValueDouble(size, "Width");
+    m_height = XMLParser::GetNodeValueDouble(size, "Height");
+    double angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+
+    // Get nodes points
+    std::vector<wxPoint2DDouble> ptsList;
+    auto nodePosList = cadPropNode->first_node("NodeList");
+    if(!nodePosList) return false;
+    auto nodePos = nodePosList->first_node("Node");
+    while(nodePos) {
+        double nodePosX = XMLParser::GetNodeValueDouble(nodePos, "X");
+        double nodePosY = XMLParser::GetNodeValueDouble(nodePos, "Y");
+        ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
+        nodePos = nodePos->next_sibling("Node");
+    }
+
+    // Get parents IDs
+    auto parentIDList = cadPropNode->first_node("ParentIDList");
+    if(!parentIDList) return false;
+    auto parentNode = parentIDList->first_node("ParentID");
+    long parentID[2] = {-1, -1};
+    while(parentNode) {
+        long index = 0;
+        wxString(parentNode->first_attribute("ID")->value()).ToLong(&index);
+        wxString(parentNode->value()).ToCLong(&parentID[index]);
+        parentNode = parentNode->next_sibling("ParentID");
+    }
+
+    std::vector<wxPoint2DDouble> nodePtsList;            // List of node points
+    nodePtsList.push_back(ptsList[0]);                   // First point on the list
+    nodePtsList.push_back(ptsList[ptsList.size() - 1]);  // Last point on the list
+
+    // List of dummy buses to set not connected nodes properly
+    std::vector<Bus*> dummyBusList;
+    // Set parents (if have)
+    for(unsigned int i = 0; i < 2; ++i) {
+        if(parentID[i] == -1)  // No parent connected
+        {
+            Bus* dummyBus = new Bus(nodePtsList[i]);
+            dummyBusList.push_back(dummyBus);
+            AddParent(dummyBus, nodePtsList[i]);
+        } else {  // Parent connected (necessarily a bus, get from bus list)
+            AddParent(parentList[parentID[i]], nodePtsList[i]);
+        }
+    }
+
+    StartMove(m_position);
+    Move(wxPoint2DDouble(posX, posY));
+
+    // Remove dummy buses
+    for(auto it = dummyBusList.begin(), itEnd = dummyBusList.end(); it != itEnd; ++it) {
+        RemoveParent(*it);
+        delete *it;
+    }
+    dummyBusList.clear();
+
+    // Set rotation properly.
+    int numRot = angle / GetRotationAngle();
+    bool clockwise = true;
+    if(numRot < 0) {
+        numRot = std::abs(numRot);
+        clockwise = false;
+    }
+    for(int i = 0; i < numRot; i++) Rotate(clockwise);
+
+    auto electricalProp = elementNode->first_node("ElectricalProperties");
+    if(!electricalProp) return false;
+
+    SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
+    m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.primaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "PrimaryNominalVoltage");
+    m_electricalData.primaryNominalVoltageUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "PrimaryNominalVoltage", "UnitID"));
+    m_electricalData.secondaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, "SecondaryNominalVoltage");
+    m_electricalData.secondaryNominalVoltageUnit = static_cast<ElectricalUnit>(
+        XMLParser::GetAttributeValueInt(electricalProp, "SecondaryNominalVoltage", "UnitID"));
+    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, "NominalPower");
+    m_electricalData.nominalPowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "NominalPower", "UnitID"));
+    m_electricalData.resistance = XMLParser::GetNodeValueDouble(electricalProp, "Resistance");
+    m_electricalData.resistanceUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "Resistance", "UnitID"));
+    m_electricalData.indReactance = XMLParser::GetNodeValueDouble(electricalProp, "IndReactance");
+    m_electricalData.indReactanceUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "IndReactance", "UnitID"));
+    m_electricalData.connection = (TransformerConnection)XMLParser::GetNodeValueInt(electricalProp, "Connection");
+    m_electricalData.turnsRatio = XMLParser::GetNodeValueDouble(electricalProp, "TurnsRatio");
+    m_electricalData.phaseShift = XMLParser::GetNodeValueDouble(electricalProp, "PhaseShift");
+    m_electricalData.useTransformerPower = XMLParser::GetNodeValueInt(electricalProp, "UseTransfomerPower");
+
+    auto fault = electricalProp->first_node("Fault");
+    m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, "ZeroResistance");
+    m_electricalData.zeroIndReactance = XMLParser::GetNodeValueDouble(fault, "ZeroIndReactance");
+    m_electricalData.primaryGrndResistance = XMLParser::GetNodeValueDouble(fault, "PrimaryGrndResistance");
+    m_electricalData.primaryGrndReactance = XMLParser::GetNodeValueDouble(fault, "PrimaryGrndReactance");
+    m_electricalData.secondaryGrndResistance = XMLParser::GetNodeValueDouble(fault, "SecondaryGrndResistance");
+    m_electricalData.secondaryGrndReactance = XMLParser::GetNodeValueDouble(fault, "SecondaryGrndReactance");
+
+    if(!OpenSwitchingData(electricalProp)) return false;
+    if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
+
+    return true;
 }

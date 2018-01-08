@@ -49,7 +49,7 @@ class Limiter : public ControlElement
     void SetUpLimit(double upLimit) { m_upLimit = upLimit; }
     void SetLowLimit(double lowLimit) { m_lowLimit = lowLimit; }
 
-    virtual void SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
 
     virtual Element* GetCopy();

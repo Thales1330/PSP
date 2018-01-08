@@ -218,7 +218,7 @@ wxString Capacitor::GetTipText() const
     return tipText;
 }
 
-void Capacitor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Capacitor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Capacitor");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -235,6 +235,8 @@ void Capacitor::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>*
     XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
 
     SaveSwitchingData(doc, electricalProp);
+
+    return elementNode;
 }
 
 bool Capacitor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
@@ -251,7 +253,6 @@ bool Capacitor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Eleme
         static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID"));
 
     if(!OpenSwitchingData(electricalProp)) return false;
-
     if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
 
     m_inserted = true;

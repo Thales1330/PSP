@@ -387,7 +387,8 @@ bool TransferFunction::UpdateText()
     return true;
 }
 
-void TransferFunction::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* TransferFunction::SaveElement(rapidxml::xml_document<>& doc,
+                                                    rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "TransferFunction");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -406,6 +407,8 @@ void TransferFunction::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_
         auto value = XMLParser::AppendNode(doc, denominatorNode, "Value");
         XMLParser::SetNodeValue(doc, value, m_denominator[i]);
     }
+
+    return elementNode;
 }
 
 bool TransferFunction::OpenElement(rapidxml::xml_node<>* elementNode)

@@ -194,3 +194,10 @@ bool ControlElement::OpenControlNodes(rapidxml::xml_node<>* elementNode)
     }
     return true;
 }
+
+bool ControlElement::Initialize()
+{
+    m_solved = false;
+    m_output = 0.0;
+    return true;
+}

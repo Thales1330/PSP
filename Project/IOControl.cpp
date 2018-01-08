@@ -271,7 +271,7 @@ bool IOControl::UpdateText()
     return true;
 }
 
-void IOControl::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* IOControl::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "IO");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -284,6 +284,8 @@ void IOControl::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>*
     XMLParser::SetNodeValue(doc, value, m_value);
     auto ioFlags = XMLParser::AppendNode(doc, elementNode, "IOFlags");
     XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);
+
+    return elementNode;
 }
 
 bool IOControl::OpenElement(rapidxml::xml_node<>* elementNode)

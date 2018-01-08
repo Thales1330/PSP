@@ -70,13 +70,15 @@ Element* Multiplier::GetCopy()
     return copy;
 }
 
-void Multiplier::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Multiplier::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Multiplier");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
 
     SaveCADProperties(doc, elementNode);
     SaveControlNodes(doc, elementNode);
+    
+    return elementNode;
 }
 
 bool Multiplier::OpenElement(rapidxml::xml_node<>* elementNode)

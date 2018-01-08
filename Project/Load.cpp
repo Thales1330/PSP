@@ -105,9 +105,7 @@ void Load::Draw(wxPoint2DDouble translation, double scale) const
         DrawPowerFlowPts();
 
         std::vector<wxPoint2DDouble> triangPts;
-        for(int i = 0; i < 3; i++) {
-            triangPts.push_back(m_triangPts[i] + m_position);
-        }
+        for(int i = 0; i < 3; i++) { triangPts.push_back(m_triangPts[i] + m_position); }
         glPushMatrix();
         glTranslated(m_position.m_x, m_position.m_y, 0.0);
         glRotated(m_angle, 0.0, 0.0, 1.0);
@@ -269,6 +267,95 @@ bool Load::GetPlotData(ElementPlotData& plotData)
     plotData.AddData(activePower, _("Active power"));
     plotData.AddData(reactivePower, _("Reactive power"));
     plotData.AddData(current, _("Current"));
+
+    return true;
+}
+
+rapidxml::xml_node<>* Load::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+{
+    auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Load");
+    XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
+
+    SaveCADProperties(doc, elementNode);
+
+    auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
+    auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
+    XMLParser::SetNodeValue(doc, isOnline, m_online);
+    auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
+    XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
+    XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);
+    XMLParser::SetNodeAttribute(doc, activePower, "UnitID", m_electricalData.activePowerUnit);
+    auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
+    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+    auto loadType = XMLParser::AppendNode(doc, electricalProp, "LoadType");
+    XMLParser::SetNodeValue(doc, loadType, m_electricalData.loadType);
+
+    auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+    auto plotLoad = XMLParser::AppendNode(doc, stability, "PlotLoad");
+    XMLParser::SetNodeValue(doc, plotLoad, m_electricalData.plotLoad);
+    auto useCompLoad = XMLParser::AppendNode(doc, stability, "UseCompositeLoad");
+    XMLParser::SetNodeValue(doc, useCompLoad, m_electricalData.useCompLoad);
+    auto activePowerCompl = XMLParser::AppendNode(doc, stability, "ActivePowerComposition");
+    auto pzl = XMLParser::AppendNode(doc, activePowerCompl, "ConstantImpedance");
+    XMLParser::SetNodeValue(doc, pzl, m_electricalData.constImpedanceActive);
+    auto pil = XMLParser::AppendNode(doc, activePowerCompl, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, pil, m_electricalData.constCurrentActive);
+    auto ppl = XMLParser::AppendNode(doc, activePowerCompl, "ConstantPower");
+    XMLParser::SetNodeValue(doc, ppl, m_electricalData.constPowerActive);
+    auto reactivePowerCompl = XMLParser::AppendNode(doc, stability, "ReactivePowerComposition");
+    auto qzl = XMLParser::AppendNode(doc, reactivePowerCompl, "ConstantImpedance");
+    XMLParser::SetNodeValue(doc, qzl, m_electricalData.constImpedanceReactive);
+    auto qil = XMLParser::AppendNode(doc, reactivePowerCompl, "ConstantCurrent");
+    XMLParser::SetNodeValue(doc, qil, m_electricalData.constCurrentReactive);
+    auto qpl = XMLParser::AppendNode(doc, reactivePowerCompl, "ConstantPower");
+    XMLParser::SetNodeValue(doc, qpl, m_electricalData.constPowerReactive);
+
+    SaveSwitchingData(doc, electricalProp);
+
+    return elementNode;
+}
+
+bool Load::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList)
+{
+    if(!OpenCADProperties(elementNode, parentList)) return false;
+    // The load have to insert the points that define his triangle
+    m_triangPts.push_back(wxPoint2DDouble(-m_width / 2.0, -m_height / 2.0));
+    m_triangPts.push_back(wxPoint2DDouble(m_width / 2.0, -m_height / 2.0));
+    m_triangPts.push_back(wxPoint2DDouble(0.0, m_height / 2.0));
+
+    auto electricalProp = elementNode->first_node("ElectricalProperties");
+    if(!electricalProp) return false;
+
+    SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
+    m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
+    m_electricalData.activePowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID"));
+    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
+    m_electricalData.reactivePowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID"));
+    m_electricalData.loadType = static_cast<LoadType>(XMLParser::GetNodeValueInt(electricalProp, "LoadType"));
+    // Stability
+    auto stability = electricalProp->first_node("Stability");
+    if(stability) {
+        m_electricalData.plotLoad = XMLParser::GetNodeValueInt(stability, "PlotLoad");
+        m_electricalData.useCompLoad = XMLParser::GetNodeValueInt(stability, "UseCompositeLoad");
+        auto activePowerComp = stability->first_node("ActivePowerComposition");
+        m_electricalData.constImpedanceActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantImpedance");
+        m_electricalData.constCurrentActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantCurrent");
+        m_electricalData.constPowerActive = XMLParser::GetNodeValueDouble(activePowerComp, "ConstantPower");
+        auto reactivePowerComp = stability->first_node("ReactivePowerComposition");
+        m_electricalData.constImpedanceReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantImpedance");
+        m_electricalData.constCurrentReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantCurrent");
+        m_electricalData.constPowerReactive = XMLParser::GetNodeValueDouble(reactivePowerComp, "ConstantPower");
+    }
+
+    if(!OpenSwitchingData(electricalProp)) return false;
+    if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
+
+    m_inserted = true;
 
     return true;
 }

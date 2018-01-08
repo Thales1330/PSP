@@ -567,7 +567,7 @@ class Element
      */
     virtual double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
     
-    virtual void SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode) {}
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode) { return NULL; }
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode) { return true; }
     void SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
     bool OpenCADProperties(rapidxml::xml_node<>* elementNode);

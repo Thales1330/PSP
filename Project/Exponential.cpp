@@ -146,7 +146,7 @@ Element* Exponential::GetCopy()
     return copy;
 }
 
-void Exponential::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Exponential::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Exponential");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -159,6 +159,8 @@ void Exponential::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<
     XMLParser::SetNodeValue(doc, aValue, m_aValue);
     auto bValue = XMLParser::AppendNode(doc, value, "B");
     XMLParser::SetNodeValue(doc, bValue, m_bValue);
+    
+    return elementNode;
 }
 
 bool Exponential::OpenElement(rapidxml::xml_node<>* elementNode)

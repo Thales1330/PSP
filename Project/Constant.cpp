@@ -129,7 +129,7 @@ bool Constant::UpdateText()
     return true;
 }
 
-void Constant::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
+rapidxml::xml_node<>* Constant::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "Constant");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -140,6 +140,8 @@ void Constant::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* 
     // Element properties
     auto value = XMLParser::AppendNode(doc, elementNode, "Value");
     XMLParser::SetNodeValue(doc, value, m_value);
+    
+    return elementNode;
 }
 
 bool Constant::OpenElement(rapidxml::xml_node<>* elementNode)
