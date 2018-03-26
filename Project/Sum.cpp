@@ -218,7 +218,10 @@ bool Sum::Solve(double* input, double timeStep)
                     for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
                         Node* childNode = *itCN;
                         if(childNode == node) {
-                            inputVector.push_back(cLine->GetValue());
+                            if(!cLine->IsSolved())
+                                inputVector.push_back(0.0);
+                            else
+                                inputVector.push_back(cLine->GetValue());
                             break;
                         }
                     }

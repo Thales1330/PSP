@@ -175,7 +175,10 @@ bool MathExpression::Solve(double* input, double timeStep)
                     for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
                         Node* childNode = *itCN;
                         if(childNode == node) {
-                            m_inputValues[i] = cLine->GetValue();
+                            if(!cLine->IsSolved())
+                                m_inputValues[i] = 0.0;
+                            else
+                                m_inputValues[i] = cLine->GetValue();
                             break;
                         }
                     }
@@ -328,7 +331,7 @@ bool MathExpression::Initialize()
 
     // Optimize only once to gain performance.
     m_fparser.Optimize();
-    
+
     m_solved = false;
     m_output = 0.0;
     return true;
