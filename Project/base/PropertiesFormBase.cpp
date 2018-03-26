@@ -804,3 +804,129 @@ AboutFormBase::~AboutFormBase()
     m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(AboutFormBase::OnOKButtonClick), NULL, this);
     
 }
+
+ImportFormBase::ImportFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxCDAD0InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerMain = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerMain);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerMain->Add(m_notebook, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelCEPEL = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelCEPEL, _("CEPEL"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelCEPEL->SetSizer(boxSizerLvl2_1);
+    
+    wxStaticBoxSizer* staticBoxSizerLvl3_1 = new wxStaticBoxSizer( new wxStaticBox(m_panelCEPEL, wxID_ANY, _("ANAREDE")), wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(staticBoxSizerLvl3_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextBasePWFFile = new wxStaticText(m_panelCEPEL, wxID_ANY, _(".PWF file"), wxDefaultPosition, wxDLG_UNIT(m_panelCEPEL, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextBasePWFFile, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_filePickerANAREDEPWF = new wxFilePickerCtrl(m_panelCEPEL, wxID_ANY, wxEmptyString, _("Select a ANAREDE PWF file"), wxT("PWF files (*.pwf)|*.pwf"), wxDefaultPosition, wxDLG_UNIT(m_panelCEPEL, wxSize(-1,-1)), wxFLP_DEFAULT_STYLE|wxFLP_SMALL);
+    
+    boxSizerLvl4_1->Add(m_filePickerANAREDEPWF, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    m_filePickerANAREDEPWF->SetMinSize(wxSize(300,-1));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextBaseLSTFile = new wxStaticText(m_panelCEPEL, wxID_ANY, _(".LST file"), wxDefaultPosition, wxDLG_UNIT(m_panelCEPEL, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextBaseLSTFile, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_filePickerANAREDELST = new wxFilePickerCtrl(m_panelCEPEL, wxID_ANY, wxEmptyString, _("Select a ANAREDE LST file"), wxT("LST files (*.lst)|*.lst"), wxDefaultPosition, wxDLG_UNIT(m_panelCEPEL, wxSize(-1,-1)), wxFLP_DEFAULT_STYLE|wxFLP_SMALL);
+    
+    boxSizerLvl4_2->Add(m_filePickerANAREDELST, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    m_filePickerANAREDELST->SetMinSize(wxSize(300,-1));
+    
+    wxStaticBoxSizer* staticBoxSizerLvl3_2 = new wxStaticBoxSizer( new wxStaticBox(m_panelCEPEL, wxID_ANY, _("ANATEM")), wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(staticBoxSizerLvl3_2, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_2->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextBaseSTBFile = new wxStaticText(m_panelCEPEL, wxID_ANY, _(".STB file"), wxDefaultPosition, wxDLG_UNIT(m_panelCEPEL, wxSize(-1,-1)), 0);
+    m_staticTextBaseSTBFile->Enable(false);
+    
+    boxSizerLvl4_3->Add(m_staticTextBaseSTBFile, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_filePickerANATEMSTB = new wxFilePickerCtrl(m_panelCEPEL, wxID_ANY, wxEmptyString, _("Select a ANATEM STB file"), wxT("STB files (*.stb)|*.stb"), wxDefaultPosition, wxDLG_UNIT(m_panelCEPEL, wxSize(-1,-1)), wxFLP_DEFAULT_STYLE|wxFLP_SMALL);
+    m_filePickerANATEMSTB->Enable(false);
+    
+    boxSizerLvl4_3->Add(m_filePickerANATEMSTB, 0, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    m_filePickerANATEMSTB->SetMinSize(wxSize(300,-1));
+    
+    wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerMain->Add(boxSizer_bottonButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizer_bottonButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer_bottonButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer_bottonButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("ImportFormBase"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonOKClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonCancelClick), NULL, this);
+    
+}
+
+ImportFormBase::~ImportFormBase()
+{
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonOKClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonCancelClick), NULL, this);
+    
+}

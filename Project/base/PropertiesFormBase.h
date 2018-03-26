@@ -28,6 +28,7 @@
 #include <wx/grid.h>
 #include <wx/richtext/richtextctrl.h>
 #include <wx/hyperlink.h>
+#include <wx/filepicker.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -255,6 +256,40 @@ public:
     wxButton* GetButtonOK() { return m_buttonOK; }
     AboutFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About PSP-UFU"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~AboutFormBase();
+};
+
+
+class ImportFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelCEPEL;
+    wxStaticText* m_staticTextBasePWFFile;
+    wxFilePickerCtrl* m_filePickerANAREDEPWF;
+    wxStaticText* m_staticTextBaseLSTFile;
+    wxFilePickerCtrl* m_filePickerANAREDELST;
+    wxStaticText* m_staticTextBaseSTBFile;
+    wxFilePickerCtrl* m_filePickerANATEMSTB;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextBasePWFFile() { return m_staticTextBasePWFFile; }
+    wxFilePickerCtrl* GetFilePickerANAREDEPWF() { return m_filePickerANAREDEPWF; }
+    wxStaticText* GetStaticTextBaseLSTFile() { return m_staticTextBaseLSTFile; }
+    wxFilePickerCtrl* GetFilePickerANAREDELST() { return m_filePickerANAREDELST; }
+    wxStaticText* GetStaticTextBaseSTBFile() { return m_staticTextBaseSTBFile; }
+    wxFilePickerCtrl* GetFilePickerANATEMSTB() { return m_filePickerANATEMSTB; }
+    wxPanel* GetPanelCEPEL() { return m_panelCEPEL; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    ImportFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Import files"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~ImportFormBase();
 };
 
 #endif

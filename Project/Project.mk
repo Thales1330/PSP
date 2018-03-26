@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=NDSE-69
-Date                   :=19/03/2018
+Date                   :=26/03/2018
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -64,18 +64,18 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 CodeLiteDir:=C:\Program Files\CodeLite
 WXWIN:=C:\wxWidgets-3.1.0
 WXCFG:=gcc_dll\mswu
-Objects0=$(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementPlotData.cpp$(ObjectSuffix) $(IntermediateDirectory)/ChartView.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IntermediateDirectory)/GainForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IntermediateDirectory)/Camera.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxMathPlot_mathplot.cpp$(ObjectSuffix) $(IntermediateDirectory)/XMLParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix) \
-	$(IntermediateDirectory)/fparser_fparser.cc$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Divider.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ChartViewBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropertiesData.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ControlEditorBase.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/Gain.cpp$(ObjectSuffix) $(IntermediateDirectory)/DataReport.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_PropertiesFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathExprParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlSystemTest.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_DataReportBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_WorkspaceBitmaps.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/ConnectionLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControlForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ControlEditorBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/FileHanding.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/TransformerForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementPlotData.cpp$(ObjectSuffix) $(IntermediateDirectory)/ChartView.cpp$(ObjectSuffix) $(IntermediateDirectory)/GainForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Camera.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxMathPlot_mathplot.cpp$(ObjectSuffix) $(IntermediateDirectory)/XMLParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/fparser_fparser.cc$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/Divider.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ImportForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix) $(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/base_ChartViewBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/SumForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropertiesData.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ControlEditorBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/ConstantForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotorForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/Gain.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/DataReport.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_PropertiesFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathExprParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Line.cpp$(ObjectSuffix) $(IntermediateDirectory)/Transformer.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlSystemTest.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_MainFrameBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_DataReportBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(IntermediateDirectory)/base_WorkspaceBitmaps.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/ConnectionLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControlForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ControlEditorBitmaps.cpp$(ObjectSuffix) 
 
-Objects1=$(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Electromechanical.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_PropertiesFormBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/Multiplier.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElementContainer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Exponential.cpp$(ObjectSuffix) $(IntermediateDirectory)/Limiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathOperation.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathExpression.cpp$(ObjectSuffix) $(IntermediateDirectory)/artProvider_ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) $(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/base_DataReportBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/OpenGLText.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunction.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Load.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ElementFormBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControl.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ChartViewBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/AboutForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElementSolver.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/LimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathExpressionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ElementFormBitmaps.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/GeneralPropertiesForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) 
+Objects1=$(IntermediateDirectory)/FileHanding.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerFlow.cpp$(ObjectSuffix) $(IntermediateDirectory)/Element.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Electromechanical.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_PropertiesFormBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/Multiplier.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IntermediateDirectory)/ControlElementContainer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Exponential.cpp$(ObjectSuffix) $(IntermediateDirectory)/Limiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/RateLimiter.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathOperation.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathExpression.cpp$(ObjectSuffix) $(IntermediateDirectory)/artProvider_ArtMetro.cpp$(ObjectSuffix) $(IntermediateDirectory)/Workspace.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/GraphicalElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_DataReportBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/TextForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/OpenGLText.cpp$(ObjectSuffix) $(IntermediateDirectory)/IndMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/Text.cpp$(ObjectSuffix) $(IntermediateDirectory)/Branch.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunction.cpp$(ObjectSuffix) $(IntermediateDirectory)/Bus.cpp$(ObjectSuffix) $(IntermediateDirectory)/Inductor.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Load.cpp$(ObjectSuffix) $(IntermediateDirectory)/TransferFunctionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ElementFormBase.cpp$(ObjectSuffix) $(IntermediateDirectory)/Machines.cpp$(ObjectSuffix) $(IntermediateDirectory)/PowerElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/IOControl.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMotor.cpp$(ObjectSuffix) $(IntermediateDirectory)/base_ChartViewBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/ExponentialForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/AboutForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/ControlElementSolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/LimiterForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/MathExpressionForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/BusForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneratorStabForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/LineForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Capacitor.cpp$(ObjectSuffix) $(IntermediateDirectory)/LoadForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReactiveShuntElementForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SyncMachineForm.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/base_ElementFormBitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/GeneralPropertiesForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/SwitchingForm.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sum.cpp$(ObjectSuffix) 
 
 
 
@@ -131,14 +131,6 @@ $(IntermediateDirectory)/ChartView.cpp$(DependSuffix): ChartView.cpp
 $(IntermediateDirectory)/ChartView.cpp$(PreprocessSuffix): ChartView.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ChartView.cpp$(PreprocessSuffix) ChartView.cpp
 
-$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix): ElectricCalculation.cpp $(IntermediateDirectory)/ElectricCalculation.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ElectricCalculation.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/ElectricCalculation.cpp$(DependSuffix): ElectricCalculation.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ElectricCalculation.cpp$(DependSuffix) -MM ElectricCalculation.cpp
-
-$(IntermediateDirectory)/ElectricCalculation.cpp$(PreprocessSuffix): ElectricCalculation.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ElectricCalculation.cpp$(PreprocessSuffix) ElectricCalculation.cpp
-
 $(IntermediateDirectory)/GainForm.cpp$(ObjectSuffix): GainForm.cpp $(IntermediateDirectory)/GainForm.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/GainForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/GainForm.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/GainForm.cpp$(DependSuffix): GainForm.cpp
@@ -146,14 +138,6 @@ $(IntermediateDirectory)/GainForm.cpp$(DependSuffix): GainForm.cpp
 
 $(IntermediateDirectory)/GainForm.cpp$(PreprocessSuffix): GainForm.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/GainForm.cpp$(PreprocessSuffix) GainForm.cpp
-
-$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix): Constant.cpp $(IntermediateDirectory)/Constant.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/Constant.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Constant.cpp$(DependSuffix): Constant.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Constant.cpp$(DependSuffix) -MM Constant.cpp
-
-$(IntermediateDirectory)/Constant.cpp$(PreprocessSuffix): Constant.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Constant.cpp$(PreprocessSuffix) Constant.cpp
 
 $(IntermediateDirectory)/Camera.cpp$(ObjectSuffix): Camera.cpp $(IntermediateDirectory)/Camera.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/Camera.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Camera.cpp$(ObjectSuffix) $(IncludePath)
@@ -179,14 +163,6 @@ $(IntermediateDirectory)/XMLParser.cpp$(DependSuffix): XMLParser.cpp
 $(IntermediateDirectory)/XMLParser.cpp$(PreprocessSuffix): XMLParser.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/XMLParser.cpp$(PreprocessSuffix) XMLParser.cpp
 
-$(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix): fparser/fpoptimizer.cc $(IntermediateDirectory)/fparser_fpoptimizer.cc$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/fparser/fpoptimizer.cc" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/fparser_fpoptimizer.cc$(DependSuffix): fparser/fpoptimizer.cc
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix) -MF$(IntermediateDirectory)/fparser_fpoptimizer.cc$(DependSuffix) -MM fparser/fpoptimizer.cc
-
-$(IntermediateDirectory)/fparser_fpoptimizer.cc$(PreprocessSuffix): fparser/fpoptimizer.cc
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/fparser_fpoptimizer.cc$(PreprocessSuffix) fparser/fpoptimizer.cc
-
 $(IntermediateDirectory)/fparser_fparser.cc$(ObjectSuffix): fparser/fparser.cc $(IntermediateDirectory)/fparser_fparser.cc$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/fparser/fparser.cc" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/fparser_fparser.cc$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/fparser_fparser.cc$(DependSuffix): fparser/fparser.cc
@@ -211,6 +187,22 @@ $(IntermediateDirectory)/Divider.cpp$(DependSuffix): Divider.cpp
 $(IntermediateDirectory)/Divider.cpp$(PreprocessSuffix): Divider.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Divider.cpp$(PreprocessSuffix) Divider.cpp
 
+$(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix): ControlEditor.cpp $(IntermediateDirectory)/ControlEditor.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ControlEditor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ControlEditor.cpp$(DependSuffix): ControlEditor.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ControlEditor.cpp$(DependSuffix) -MM ControlEditor.cpp
+
+$(IntermediateDirectory)/ControlEditor.cpp$(PreprocessSuffix): ControlEditor.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ControlEditor.cpp$(PreprocessSuffix) ControlEditor.cpp
+
+$(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix): base/WorkspaceBase.cpp $(IntermediateDirectory)/base_WorkspaceBase.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/base/WorkspaceBase.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/base_WorkspaceBase.cpp$(DependSuffix): base/WorkspaceBase.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/base_WorkspaceBase.cpp$(DependSuffix) -MM base/WorkspaceBase.cpp
+
+$(IntermediateDirectory)/base_WorkspaceBase.cpp$(PreprocessSuffix): base/WorkspaceBase.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/base_WorkspaceBase.cpp$(PreprocessSuffix) base/WorkspaceBase.cpp
+
 $(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix): ElementDataObject.cpp $(IntermediateDirectory)/ElementDataObject.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ElementDataObject.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ElementDataObject.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/ElementDataObject.cpp$(DependSuffix): ElementDataObject.cpp
@@ -218,6 +210,54 @@ $(IntermediateDirectory)/ElementDataObject.cpp$(DependSuffix): ElementDataObject
 
 $(IntermediateDirectory)/ElementDataObject.cpp$(PreprocessSuffix): ElementDataObject.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ElementDataObject.cpp$(PreprocessSuffix) ElementDataObject.cpp
+
+$(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix): base/MainFrameBase.cpp $(IntermediateDirectory)/base_MainFrameBase.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/base/MainFrameBase.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/base_MainFrameBase.cpp$(DependSuffix): base/MainFrameBase.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/base_MainFrameBase.cpp$(DependSuffix) -MM base/MainFrameBase.cpp
+
+$(IntermediateDirectory)/base_MainFrameBase.cpp$(PreprocessSuffix): base/MainFrameBase.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/base_MainFrameBase.cpp$(PreprocessSuffix) base/MainFrameBase.cpp
+
+$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix): SimulationsSettingsForm.cpp $(IntermediateDirectory)/SimulationsSettingsForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/SimulationsSettingsForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(DependSuffix): SimulationsSettingsForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(DependSuffix) -MM SimulationsSettingsForm.cpp
+
+$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(PreprocessSuffix): SimulationsSettingsForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SimulationsSettingsForm.cpp$(PreprocessSuffix) SimulationsSettingsForm.cpp
+
+$(IntermediateDirectory)/ImportForm.cpp$(ObjectSuffix): ImportForm.cpp $(IntermediateDirectory)/ImportForm.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ImportForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ImportForm.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ImportForm.cpp$(DependSuffix): ImportForm.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ImportForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ImportForm.cpp$(DependSuffix) -MM ImportForm.cpp
+
+$(IntermediateDirectory)/ImportForm.cpp$(PreprocessSuffix): ImportForm.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ImportForm.cpp$(PreprocessSuffix) ImportForm.cpp
+
+$(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix): fparser/fpoptimizer.cc $(IntermediateDirectory)/fparser_fpoptimizer.cc$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/fparser/fpoptimizer.cc" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/fparser_fpoptimizer.cc$(DependSuffix): fparser/fpoptimizer.cc
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/fparser_fpoptimizer.cc$(ObjectSuffix) -MF$(IntermediateDirectory)/fparser_fpoptimizer.cc$(DependSuffix) -MM fparser/fpoptimizer.cc
+
+$(IntermediateDirectory)/fparser_fpoptimizer.cc$(PreprocessSuffix): fparser/fpoptimizer.cc
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/fparser_fpoptimizer.cc$(PreprocessSuffix) fparser/fpoptimizer.cc
+
+$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix): Constant.cpp $(IntermediateDirectory)/Constant.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/Constant.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Constant.cpp$(DependSuffix): Constant.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Constant.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Constant.cpp$(DependSuffix) -MM Constant.cpp
+
+$(IntermediateDirectory)/Constant.cpp$(PreprocessSuffix): Constant.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Constant.cpp$(PreprocessSuffix) Constant.cpp
+
+$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix): SyncGenerator.cpp $(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/SyncGenerator.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix): SyncGenerator.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix) -MM SyncGenerator.cpp
+
+$(IntermediateDirectory)/SyncGenerator.cpp$(PreprocessSuffix): SyncGenerator.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SyncGenerator.cpp$(PreprocessSuffix) SyncGenerator.cpp
 
 $(IntermediateDirectory)/Fault.cpp$(ObjectSuffix): Fault.cpp $(IntermediateDirectory)/Fault.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/Fault.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Fault.cpp$(ObjectSuffix) $(IncludePath)
@@ -258,6 +298,14 @@ $(IntermediateDirectory)/BusFormBitmaps.cpp$(DependSuffix): BusFormBitmaps.cpp
 
 $(IntermediateDirectory)/BusFormBitmaps.cpp$(PreprocessSuffix): BusFormBitmaps.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/BusFormBitmaps.cpp$(PreprocessSuffix) BusFormBitmaps.cpp
+
+$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
+
+$(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
 
 $(IntermediateDirectory)/base_ControlEditorBase.cpp$(ObjectSuffix): base/ControlEditorBase.cpp $(IntermediateDirectory)/base_ControlEditorBase.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/base/ControlEditorBase.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/base_ControlEditorBase.cpp$(ObjectSuffix) $(IncludePath)
@@ -315,22 +363,6 @@ $(IntermediateDirectory)/base_PropertiesFormBitmaps.cpp$(DependSuffix): base/Pro
 $(IntermediateDirectory)/base_PropertiesFormBitmaps.cpp$(PreprocessSuffix): base/PropertiesFormBitmaps.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/base_PropertiesFormBitmaps.cpp$(PreprocessSuffix) base/PropertiesFormBitmaps.cpp
 
-$(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix): base/MainFrameBase.cpp $(IntermediateDirectory)/base_MainFrameBase.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/base/MainFrameBase.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/base_MainFrameBase.cpp$(DependSuffix): base/MainFrameBase.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/base_MainFrameBase.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/base_MainFrameBase.cpp$(DependSuffix) -MM base/MainFrameBase.cpp
-
-$(IntermediateDirectory)/base_MainFrameBase.cpp$(PreprocessSuffix): base/MainFrameBase.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/base_MainFrameBase.cpp$(PreprocessSuffix) base/MainFrameBase.cpp
-
-$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix): SimulationsSettingsForm.cpp $(IntermediateDirectory)/SimulationsSettingsForm.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/SimulationsSettingsForm.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(DependSuffix): SimulationsSettingsForm.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(DependSuffix) -MM SimulationsSettingsForm.cpp
-
-$(IntermediateDirectory)/SimulationsSettingsForm.cpp$(PreprocessSuffix): SimulationsSettingsForm.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SimulationsSettingsForm.cpp$(PreprocessSuffix) SimulationsSettingsForm.cpp
-
 $(IntermediateDirectory)/MathExprParser.cpp$(ObjectSuffix): MathExprParser.cpp $(IntermediateDirectory)/MathExprParser.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/MathExprParser.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/MathExprParser.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/MathExprParser.cpp$(DependSuffix): MathExprParser.cpp
@@ -363,30 +395,6 @@ $(IntermediateDirectory)/ControlSystemTest.cpp$(DependSuffix): ControlSystemTest
 $(IntermediateDirectory)/ControlSystemTest.cpp$(PreprocessSuffix): ControlSystemTest.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ControlSystemTest.cpp$(PreprocessSuffix) ControlSystemTest.cpp
 
-$(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix): ControlEditor.cpp $(IntermediateDirectory)/ControlEditor.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ControlEditor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/ControlEditor.cpp$(DependSuffix): ControlEditor.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ControlEditor.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ControlEditor.cpp$(DependSuffix) -MM ControlEditor.cpp
-
-$(IntermediateDirectory)/ControlEditor.cpp$(PreprocessSuffix): ControlEditor.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ControlEditor.cpp$(PreprocessSuffix) ControlEditor.cpp
-
-$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix): SyncGenerator.cpp $(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/SyncGenerator.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix): SyncGenerator.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SyncGenerator.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/SyncGenerator.cpp$(DependSuffix) -MM SyncGenerator.cpp
-
-$(IntermediateDirectory)/SyncGenerator.cpp$(PreprocessSuffix): SyncGenerator.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SyncGenerator.cpp$(PreprocessSuffix) SyncGenerator.cpp
-
-$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
-
-$(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
-
 $(IntermediateDirectory)/base_MainFrameBitmaps.cpp$(ObjectSuffix): base/MainFrameBitmaps.cpp $(IntermediateDirectory)/base_MainFrameBitmaps.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/base/MainFrameBitmaps.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/base_MainFrameBitmaps.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/base_MainFrameBitmaps.cpp$(DependSuffix): base/MainFrameBitmaps.cpp
@@ -405,14 +413,6 @@ $(IntermediateDirectory)/base_DataReportBase.cpp$(PreprocessSuffix): base/DataRe
 
 $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix): win_resources.rc
 	$(RcCompilerName) -i "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/win_resources.rc" $(RcCmpOptions)   $(ObjectSwitch)$(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(RcIncludePath)
-$(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix): base/WorkspaceBase.cpp $(IntermediateDirectory)/base_WorkspaceBase.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/base/WorkspaceBase.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/base_WorkspaceBase.cpp$(DependSuffix): base/WorkspaceBase.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/base_WorkspaceBase.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/base_WorkspaceBase.cpp$(DependSuffix) -MM base/WorkspaceBase.cpp
-
-$(IntermediateDirectory)/base_WorkspaceBase.cpp$(PreprocessSuffix): base/WorkspaceBase.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/base_WorkspaceBase.cpp$(PreprocessSuffix) base/WorkspaceBase.cpp
-
 $(IntermediateDirectory)/base_WorkspaceBitmaps.cpp$(ObjectSuffix): base/WorkspaceBitmaps.cpp $(IntermediateDirectory)/base_WorkspaceBitmaps.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/base/WorkspaceBitmaps.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/base_WorkspaceBitmaps.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/base_WorkspaceBitmaps.cpp$(DependSuffix): base/WorkspaceBitmaps.cpp
@@ -500,6 +500,14 @@ $(IntermediateDirectory)/Multiplier.cpp$(DependSuffix): Multiplier.cpp
 
 $(IntermediateDirectory)/Multiplier.cpp$(PreprocessSuffix): Multiplier.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Multiplier.cpp$(PreprocessSuffix) Multiplier.cpp
+
+$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix): ElectricCalculation.cpp $(IntermediateDirectory)/ElectricCalculation.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/ElectricCalculation.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ElectricCalculation.cpp$(DependSuffix): ElectricCalculation.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ElectricCalculation.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ElectricCalculation.cpp$(DependSuffix) -MM ElectricCalculation.cpp
+
+$(IntermediateDirectory)/ElectricCalculation.cpp$(PreprocessSuffix): ElectricCalculation.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ElectricCalculation.cpp$(PreprocessSuffix) ElectricCalculation.cpp
 
 $(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix): Shunt.cpp $(IntermediateDirectory)/Shunt.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/NDSE-69/Documents/GitHub/PSP/Project/Shunt.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Shunt.cpp$(ObjectSuffix) $(IncludePath)

@@ -34,6 +34,7 @@
 #include "ChartView.h"
 #include "DataReport.h"
 #include "AboutForm.h"
+#include "ImportForm.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties, wxString openPath)
@@ -238,7 +239,7 @@ void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, false);
 }
 
-void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
+//void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event)
 {
     if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
@@ -476,6 +477,24 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
         }
     }
 }
+
+void MainFrame::OnImportClick(wxRibbonButtonBarEvent& event)
+{
+    // Create a new workspace to import
+    Workspace* impWorkspace = new Workspace(this, _("Imported project"), this->GetStatusBar(), m_sharedGLContext);
+    ImportForm importForm(this, impWorkspace);
+    if(importForm.ShowModal() == wxID_OK) {
+        // Import file(s)
+        if(!m_sharedGLContext) m_sharedGLContext = impWorkspace->GetOpenGLContext();
+        m_workspaceList.push_back(impWorkspace);
+        m_auiNotebook->AddPage(impWorkspace, impWorkspace->GetName(), true);
+        m_auiNotebook->Layout();
+        impWorkspace->Redraw();
+        impWorkspace->SetJustOpened(true);
+        m_projectNumber++;
+    }
+}
+
 void MainFrame::NotebookPageClosed(wxAuiNotebookEvent& event)
 {
     if(m_auiNotebook->GetPageCount() == 0) EnableCurrentProjectRibbon(false);

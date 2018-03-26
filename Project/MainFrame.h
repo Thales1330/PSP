@@ -35,6 +35,7 @@ class PropertiesData;
 class ChartView;
 class DataReport;
 class AboutForm;
+class ImportForm;
 
 enum {
     ID_ADDMENU_BUS = 20000,
@@ -94,7 +95,7 @@ class MainFrame : public MainFrameBase
     virtual void OnDragClick(wxRibbonButtonBarEvent& event);
     virtual void OnEnableSolutionClick(wxRibbonButtonBarEvent& event);
     virtual void OnExitClick(wxRibbonButtonBarEvent& event) { this->Close(); };
-    virtual void OnExpImpClick(wxRibbonButtonBarEvent& event);
+    //virtual void OnExpImpClick(wxRibbonButtonBarEvent& event);
     virtual void OnFaultClick(wxRibbonButtonBarEvent& event);
     virtual void OnFitClick(wxRibbonButtonBarEvent& event);
     virtual void OnMoveClick(wxRibbonButtonBarEvent& event);
@@ -111,6 +112,7 @@ class MainFrame : public MainFrameBase
     virtual void OnSnapshotClick(wxRibbonButtonBarEvent& event);
     virtual void OnUndoClick(wxRibbonButtonBarEvent& event);
     virtual void OnNewClick(wxRibbonButtonBarEvent& event);
+    virtual void OnImportClick(wxRibbonButtonBarEvent& event);
 
     std::vector<Workspace*> m_workspaceList;
     int m_projectNumber = 1;

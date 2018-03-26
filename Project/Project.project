@@ -80,6 +80,7 @@
     <VirtualDirectory Name="controller">
       <VirtualDirectory Name="forms">
         <VirtualDirectory Name="properties">
+          <File Name="ImportForm.cpp"/>
           <File Name="GeneralPropertiesForm.cpp"/>
           <File Name="SimulationsSettingsForm.cpp"/>
           <File Name="AboutForm.cpp"/>
@@ -232,6 +233,7 @@
           <File Name="TransformerForm.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="properties">
+          <File Name="ImportForm.h"/>
           <File Name="GeneralPropertiesForm.h"/>
           <File Name="SimulationsSettingsForm.h"/>
           <File Name="AboutForm.h"/>
