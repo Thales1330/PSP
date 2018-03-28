@@ -88,6 +88,8 @@ class ParseAnarede
     ParseAnarede(wxFileName lstFile, wxFileName pwfFile);
     ~ParseAnarede() {}
     bool Parse();
+    std::vector<Component> GetComponents() const { return m_components; }
+    std::vector<PowerLine> GetLines() const { return m_lines; }
 
    protected:
     bool GetLenghtAndRotationFromBusCode(wxString code, double& lenght, int& rotationID);
@@ -98,6 +100,7 @@ class ParseAnarede
 
     std::vector<Component> m_components;
     std::vector<PowerLine> m_lines;
+    
 };
 
 #endif  // IMPORTFORM_H

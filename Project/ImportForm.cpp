@@ -33,6 +33,54 @@ bool ImportForm::ImportSelectedFiles()
 {
     ParseAnarede parseAnarede(m_filePickerANAREDELST->GetFileName(), m_filePickerANAREDEPWF->GetFileName());
     if(!parseAnarede.Parse()) return false;
+    double scale = 2.0;
+
+    std::vector<Element*> elementList;
+    auto components = parseAnarede.GetComponents();
+    for(auto it = components.begin(), itEnd = components.end(); it != itEnd; ++it) {
+        switch((*it).type) {
+            case ANA_BUS: {
+                Bus* bus = new Bus(wxPoint2DDouble((*it).position.m_x * scale, (*it).position.m_y * scale));
+                bus->SetWidth((*it).length * scale);
+                bus->SetPosition(bus->GetPosition());  // Update bus rect
+                bus->StartMove(bus->GetPosition());
+                // bus->Move(bus->GetPosition() + wxPoint2DDouble(bus->GetWidth() / 2, bus->GetHeight() / 2));
+                if((*it).rotationID == 0) {
+                    bus->Move(bus->GetPosition() + wxPoint2DDouble(bus->GetWidth() / 2, bus->GetHeight() / 2));
+                } else if((*it).rotationID == 1) {
+                    for(int i = 0; i < (*it).rotationID * 2; ++i) bus->Rotate();
+                    bus->Move(bus->GetPosition() + wxPoint2DDouble(-bus->GetHeight() / 2, bus->GetWidth() / 2));
+                } else if((*it).rotationID == 2) {
+                    for(int i = 0; i < (*it).rotationID * 2; ++i) bus->Rotate();
+                    bus->Move(bus->GetPosition() + wxPoint2DDouble(-bus->GetWidth() / 2, -bus->GetHeight() / 2));
+                } else if((*it).rotationID == 3) {
+                    for(int i = 0; i < (*it).rotationID * 2; ++i) bus->Rotate();
+                    bus->Move(bus->GetPosition() + wxPoint2DDouble(-bus->GetHeight() / 2, -bus->GetWidth() / 2));
+                }
+
+                elementList.push_back(bus);
+            } break;
+            case ANA_GENERATOR: {
+            } break;
+            case ANA_LOAD: {
+            } break;
+            case ANA_SHUNT: {
+            } break;
+            case ANA_MIT: {
+            } break;
+            case ANA_TRANSFORMER: {
+            } break;
+            case ANA_LINE: {
+            } break;
+            case ANA_IND_LOAD: {
+            } break;
+            case ANA_IND_SHUNT: {
+            } break;
+            case ANA_IND_GENERATOR: {
+            } break;
+        }
+    }
+    m_workspace->SetElementList(elementList);
     return true;
 }
 
@@ -177,7 +225,7 @@ bool ParseAnarede::Parse()
     }
     // Last line
 
-    for(auto it = m_components.begin(), itEnd = m_components.end(); it != itEnd; ++it) {
+    /*for(auto it = m_components.begin(), itEnd = m_components.end(); it != itEnd; ++it) {
         wxString comp = wxString::Format("ID = %d\n", (*it).id);
         comp += wxString::Format("TIPO = %d\n", (*it).type);
         comp += wxString::Format("TAMANHO = %f\n", (*it).length);
@@ -194,7 +242,7 @@ bool ParseAnarede::Parse()
         }
         wxMessageBox(comp);
     }
-    /*for(auto it = m_lines.begin(), itEnd = m_lines.end(); it != itEnd; ++it) {
+    for(auto it = m_lines.begin(), itEnd = m_lines.end(); it != itEnd; ++it) {
         wxString comp = wxString::Format("ID = %d\n", (*it).id);
         comp += wxString::Format("TIPO = %d\n", (*it).type);
         comp += wxString::Format("ID ELETRICO = %d\n", (*it).electricalID);
@@ -234,13 +282,15 @@ bool ParseAnarede::GetLenghtAndRotationFromBusCode(wxString code, double& lenght
 {
     long longCode;
     if(!code.ToLong(&longCode)) return false;
-    std::bitset<22> bit(longCode);
-    wxString binStr(bit.to_string());
-    wxString lenghtStr = binStr.Left(20);
-    wxString rotationIDStr = binStr.Right(2);
-    std::bitset<20> lenghtBit(lenghtStr.ToStdString());
-    std::bitset<2> rotationIDBit(rotationIDStr.ToStdString());
-    lenght = ((static_cast<double>(lenghtBit.to_ulong()) / 16.0) - 1) * 50.0 + 30.0;
-    rotationID = static_cast<int>(rotationIDBit.to_ulong());
+    std::stringstream hexCode;
+    hexCode << std::hex << longCode;
+    wxString hexCodeStr = hexCode.str();
+    wxString lenghtStr = hexCodeStr.Left(hexCodeStr.length() - 1);
+    wxString rotationIDStr = hexCodeStr.Right(1);
+    if(!lenghtStr.ToDouble(&lenght)) return false;
+    lenght = 4.8 * lenght - 16.0;
+    long rotationIDLong;
+    if(!rotationIDStr.ToLong(&rotationIDLong)) return false;
+    rotationID = static_cast<int>(rotationIDLong);
     return true;
 }

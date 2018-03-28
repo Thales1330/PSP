@@ -491,6 +491,7 @@ void MainFrame::OnImportClick(wxRibbonButtonBarEvent& event)
         m_auiNotebook->Layout();
         impWorkspace->Redraw();
         impWorkspace->SetJustOpened(true);
+        impWorkspace->Fit();
         m_projectNumber++;
     }
 }
