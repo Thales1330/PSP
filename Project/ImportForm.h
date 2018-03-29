@@ -9,6 +9,14 @@
 #include <bitset>
 
 class Workspace;
+class Bus;
+class SyncGenerator;
+class Load;
+class Capacitor;
+class Inductor;
+class IndMotor;
+class Transformer;
+class Line;
 
 /**
  * @class ImportForm
@@ -29,6 +37,7 @@ class ImportForm : public ImportFormBase
     virtual void OnButtonCancelClick(wxCommandEvent& event);
     virtual void OnButtonOKClick(wxCommandEvent& event);
     bool ImportSelectedFiles();
+    Bus* GetBusFromID(std::vector<Bus*> busList, int id);
 
     Workspace* m_workspace = NULL;
     wxWindow* m_parent;
@@ -90,17 +99,18 @@ class ParseAnarede
     bool Parse();
     std::vector<Component> GetComponents() const { return m_components; }
     std::vector<PowerLine> GetLines() const { return m_lines; }
+    wxPoint2DDouble GetNodePositionFromID(Bus* bus, double scale, int nodeID);
 
    protected:
     bool GetLenghtAndRotationFromBusCode(wxString code, double& lenght, int& rotationID);
     wxString GetLSTLineNextValue(wxString line, int& currentPos);
+    bool StrToElementType(wxString strType, ElementTypeAnarede& type);
 
     wxFileName m_lstFile;
     wxFileName m_pwfFile;
 
     std::vector<Component> m_components;
     std::vector<PowerLine> m_lines;
-    
 };
 
 #endif  // IMPORTFORM_H

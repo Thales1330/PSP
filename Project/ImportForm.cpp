@@ -1,4 +1,12 @@
+#include "Bus.h"
+#include "Capacitor.h"
 #include "ImportForm.h"
+#include "IndMotor.h"
+#include "Inductor.h"
+#include "Line.h"
+#include "Load.h"
+#include "SyncGenerator.h"
+#include "Transformer.h"
 #include "Workspace.h"
 
 ImportForm::ImportForm(wxWindow* parent, Workspace* workspace) : ImportFormBase(parent)
@@ -33,18 +41,27 @@ bool ImportForm::ImportSelectedFiles()
 {
     ParseAnarede parseAnarede(m_filePickerANAREDELST->GetFileName(), m_filePickerANAREDEPWF->GetFileName());
     if(!parseAnarede.Parse()) return false;
-    double scale = 2.0;
+    double scale = 1.25;
 
     std::vector<Element*> elementList;
+
+    std::vector<Bus*> busList;
+    std::vector<SyncGenerator*> syncGeneratorList;
+    std::vector<Load*> loadList;
+    std::vector<Inductor*> indList;
+    std::vector<IndMotor*> indMotorList;
+    std::vector<Transformer*> transformerList;
+    std::vector<Line*> lineList;
+
     auto components = parseAnarede.GetComponents();
     for(auto it = components.begin(), itEnd = components.end(); it != itEnd; ++it) {
         switch((*it).type) {
             case ANA_BUS: {
                 Bus* bus = new Bus(wxPoint2DDouble((*it).position.m_x * scale, (*it).position.m_y * scale));
+                bus->SetID((*it).id);
                 bus->SetWidth((*it).length * scale);
-                bus->SetPosition(bus->GetPosition());  // Update bus rect
+                // bus->SetPosition(bus->GetPosition());  // Update bus rect
                 bus->StartMove(bus->GetPosition());
-                // bus->Move(bus->GetPosition() + wxPoint2DDouble(bus->GetWidth() / 2, bus->GetHeight() / 2));
                 if((*it).rotationID == 0) {
                     bus->Move(bus->GetPosition() + wxPoint2DDouble(bus->GetWidth() / 2, bus->GetHeight() / 2));
                 } else if((*it).rotationID == 1) {
@@ -58,30 +75,156 @@ bool ImportForm::ImportSelectedFiles()
                     bus->Move(bus->GetPosition() + wxPoint2DDouble(-bus->GetHeight() / 2, -bus->GetWidth() / 2));
                 }
 
-                elementList.push_back(bus);
+                busList.push_back(bus);
             } break;
-            case ANA_GENERATOR: {
+            case ANA_GENERATOR:
+            case ANA_IND_GENERATOR: {
+                // Find parent bus
+                Bus* parentBus = GetBusFromID(busList, (*it).busConnectionID[0].first);
+                wxPoint2DDouble nodePos =
+                    parseAnarede.GetNodePositionFromID(parentBus, scale, (*it).busConnectionNode[0].second);
+
+                SyncGenerator* syncGenerator = new SyncGenerator();
+                syncGenerator->SetID((*it).id);
+                syncGenerator->AddParent(parentBus, nodePos);
+
+                syncGenerator->StartMove(syncGenerator->GetPosition());
+                syncGenerator->Move(wxPoint2DDouble((*it).position.m_x * scale, (*it).position.m_y * scale));
+
+                for(int i = 0; i < 2; ++i) syncGenerator->Rotate(false);  // Set to ANAREDE default rotation
+                for(int i = 0; i < (*it).rotationID * 2; ++i) syncGenerator->Rotate();
+
+                syncGeneratorList.push_back(syncGenerator);
             } break;
-            case ANA_LOAD: {
+            case ANA_LOAD:
+            case ANA_IND_LOAD: {
+                Bus* parentBus = GetBusFromID(busList, (*it).busConnectionID[0].first);
+                wxPoint2DDouble nodePos =
+                    parseAnarede.GetNodePositionFromID(parentBus, scale, (*it).busConnectionNode[0].second);
+
+                Load* load = new Load();
+                load->SetID((*it).id);
+                load->AddParent(parentBus, nodePos);
+
+                load->StartMove(load->GetPosition());
+                load->Move(wxPoint2DDouble((*it).position.m_x * scale, (*it).position.m_y * scale));
+
+                for(int i = 0; i < (*it).rotationID * 2; ++i) load->Rotate();
+
+                loadList.push_back(load);
             } break;
-            case ANA_SHUNT: {
+            case ANA_SHUNT:
+            case ANA_IND_SHUNT: {
+                Bus* parentBus = GetBusFromID(busList, (*it).busConnectionID[0].first);
+                wxPoint2DDouble nodePos =
+                    parseAnarede.GetNodePositionFromID(parentBus, scale, (*it).busConnectionNode[0].second);
+
+                Inductor* ind = new Inductor();
+                ind->SetID((*it).id);
+                ind->AddParent(parentBus, nodePos);
+
+                ind->StartMove(ind->GetPosition());
+                // Offset (ind->GetHeight() / 2 + 10) to adequate the y coordinate
+                ind->Move(wxPoint2DDouble((*it).position.m_x * scale,
+                                          (*it).position.m_y * scale + ind->GetHeight() / 2 + 10));
+                if((*it).rotationID != 0) {
+                    // Remove offset in position
+                    ind->Move(wxPoint2DDouble((*it).position.m_x * scale, (*it).position.m_y * scale));
+                    // Get the rotated point ralated to the offset
+                    wxPoint2DDouble movePt =
+                        ind->RotateAtPosition(ind->GetPosition() + wxPoint2DDouble(0, ind->GetHeight() / 2 + 10),
+                                              (*it).rotationID * 90.0, true);
+                    ind->Move(movePt);
+
+                    for(int i = 0; i < (*it).rotationID * 2; ++i) ind->Rotate();
+                }
+
+                indList.push_back(ind);
             } break;
             case ANA_MIT: {
+                // Find parent bus
+                Bus* parentBus = GetBusFromID(busList, (*it).busConnectionID[0].first);
+                wxPoint2DDouble nodePos =
+                    parseAnarede.GetNodePositionFromID(parentBus, scale, (*it).busConnectionNode[0].second);
+
+                IndMotor* indMotor = new IndMotor();
+                indMotor->SetID((*it).id);
+                indMotor->AddParent(parentBus, nodePos);
+
+                indMotor->StartMove(indMotor->GetPosition());
+                indMotor->Move(wxPoint2DDouble((*it).position.m_x * scale, (*it).position.m_y * scale));
+
+                for(int i = 0; i < 2; ++i) indMotor->Rotate(false);  // Set to ANAREDE default rotation
+                for(int i = 0; i < (*it).rotationID * 2; ++i) indMotor->Rotate();
+
+                indMotorList.push_back(indMotor);
             } break;
             case ANA_TRANSFORMER: {
+                Bus* parentBus1 = GetBusFromID(busList, (*it).busConnectionID[0].first);
+                Bus* parentBus2 = GetBusFromID(busList, (*it).busConnectionID[1].first);
+                wxPoint2DDouble nodePos1 =
+                    parseAnarede.GetNodePositionFromID(parentBus1, scale, (*it).busConnectionNode[0].second);
+                wxPoint2DDouble nodePos2 =
+                    parseAnarede.GetNodePositionFromID(parentBus2, scale, (*it).busConnectionNode[1].second);
+
+                Transformer* transformer = new Transformer();
+                transformer->SetID((*it).id);
+                transformer->AddParent(parentBus1, nodePos1);
+                transformer->AddParent(parentBus2, nodePos2);
+
+                transformer->StartMove(transformer->GetPosition());
+                transformer->Move(wxPoint2DDouble((*it).position.m_x * scale, (*it).position.m_y * scale));
+
+                for(int i = 0; i < 2; ++i) transformer->Rotate();  // Set to ANAREDE default rotation
+                for(int i = 0; i < (*it).rotationID * 2; ++i) transformer->Rotate();
+
+                transformerList.push_back(transformer);
             } break;
-            case ANA_LINE: {
-            } break;
-            case ANA_IND_LOAD: {
-            } break;
-            case ANA_IND_SHUNT: {
-            } break;
-            case ANA_IND_GENERATOR: {
+            default: {
             } break;
         }
     }
+
+    auto powerLines = parseAnarede.GetLines();
+    for(auto it = powerLines.begin(), itEnd = powerLines.end(); it != itEnd; ++it) {
+        if((*it).type == ANA_LINE) {
+            Bus* parentBus1 = GetBusFromID(busList, (*it).busConnectionID[0].first);
+            Bus* parentBus2 = GetBusFromID(busList, (*it).busConnectionID[1].first);
+            wxPoint2DDouble nodePos1 =
+                parseAnarede.GetNodePositionFromID(parentBus1, scale, (*it).busConnectionNode[0].second);
+            wxPoint2DDouble nodePos2 =
+                parseAnarede.GetNodePositionFromID(parentBus2, scale, (*it).busConnectionNode[1].second);
+
+            Line* line = new Line();
+            line->SetID((*it).id);
+            line->AddParent(parentBus1, nodePos1);
+            for(unsigned int i = 0; i < (*it).nodesPosition.size(); ++i)
+                line->AddPoint(wxPoint2DDouble((*it).nodesPosition[i].m_x * scale, (*it).nodesPosition[i].m_y * scale));
+            line->AddParent(parentBus2, nodePos2);
+
+            lineList.push_back(line);
+        }
+    }
+
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = syncGeneratorList.begin(), itEnd = syncGeneratorList.end(); it != itEnd; ++it)
+        elementList.push_back(*it);
+    for(auto it = loadList.begin(), itEnd = loadList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = indList.begin(), itEnd = indList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = indMotorList.begin(), itEnd = indMotorList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) elementList.push_back(*it);
+
     m_workspace->SetElementList(elementList);
     return true;
+}
+
+Bus* ImportForm::GetBusFromID(std::vector<Bus*> busList, int id)
+{
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+        if((*it)->GetID() == id) return *it;
+    }
+    return NULL;
 }
 
 ParseAnarede::ParseAnarede(wxFileName lstFile, wxFileName pwfFile)
@@ -107,43 +250,42 @@ bool ParseAnarede::Parse()
                 Component component;
 
                 component.id = wxAtoi(GetLSTLineNextValue(line, parsePosition));
-                component.type = static_cast<ElementTypeAnarede>(wxAtoi(GetLSTLineNextValue(line, parsePosition)));
-
-                if(component.type == ANA_BUS) {
-                    if(!GetLenghtAndRotationFromBusCode(GetLSTLineNextValue(line, parsePosition), component.length,
-                                                        component.rotationID))
-                        return false;
-                } else {
-                    component.rotationID = wxAtoi(GetLSTLineNextValue(line, parsePosition));
-                }
-                parsePosition += 2;  // Jump to position
-                if(!GetLSTLineNextValue(line, parsePosition).ToCDouble(&component.position.m_x)) return false;
-                if(!GetLSTLineNextValue(line, parsePosition).ToCDouble(&component.position.m_y)) return false;
-                parsePosition += 8;  // Jump to electrical ID
-                component.electricalID = wxAtoi(GetLSTLineNextValue(line, parsePosition));
-
-                // Bus connection IDs
-                if(component.type != ANA_BUS) {
-                    int fromBus = wxAtoi(GetLSTLineNextValue(line, parsePosition));  // Origin bus
-                    int toBus = 0;
-                    // If the component is a transformer, parse the next value (toBus)
-                    if(component.type == ANA_TRANSFORMER) {
-                        toBus = wxAtoi(GetLSTLineNextValue(line, parsePosition));  // Destiny bus
+                // Check if is component type is valid
+                if(StrToElementType(GetLSTLineNextValue(line, parsePosition), component.type)) {
+                    if(component.type == ANA_BUS) {
+                        if(!GetLenghtAndRotationFromBusCode(GetLSTLineNextValue(line, parsePosition), component.length,
+                                                            component.rotationID))
+                            return false;
+                    } else {
+                        component.rotationID = wxAtoi(GetLSTLineNextValue(line, parsePosition));
                     }
-                    // Iterate through the already parsed components (the buses is saved first)
-                    for(auto it = m_components.begin(), itEnd = m_components.end(); it != itEnd; ++it) {
-                        if((*it).type == ANA_BUS) {
-                            if(fromBus == (*it).electricalID) {
-                                component.busConnectionID[0] = std::make_pair((*it).id, fromBus);
-                            } else if(toBus == (*it).electricalID) {
-                                component.busConnectionID[1] = std::make_pair((*it).id, toBus);
+                    parsePosition += 2;  // Jump to position
+                    if(!GetLSTLineNextValue(line, parsePosition).ToCDouble(&component.position.m_x)) return false;
+                    if(!GetLSTLineNextValue(line, parsePosition).ToCDouble(&component.position.m_y)) return false;
+                    parsePosition += 8;  // Jump to electrical ID
+                    component.electricalID = wxAtoi(GetLSTLineNextValue(line, parsePosition));
+
+                    // Bus connection IDs
+                    if(component.type != ANA_BUS) {
+                        int fromBus = wxAtoi(GetLSTLineNextValue(line, parsePosition));  // Origin bus
+                        int toBus = 0;
+                        // If the component is a transformer, parse the next value (toBus)
+                        if(component.type == ANA_TRANSFORMER) {
+                            toBus = wxAtoi(GetLSTLineNextValue(line, parsePosition));  // Destiny bus
+                        }
+                        // Iterate through the already parsed components (the buses is saved first)
+                        for(auto it = m_components.begin(), itEnd = m_components.end(); it != itEnd; ++it) {
+                            if((*it).type == ANA_BUS) {
+                                if(fromBus == (*it).electricalID) {
+                                    component.busConnectionID[0] = std::make_pair((*it).id, fromBus);
+                                } else if(toBus == (*it).electricalID) {
+                                    component.busConnectionID[1] = std::make_pair((*it).id, toBus);
+                                }
                             }
                         }
                     }
+                    m_components.push_back(component);
                 }
-
-                m_components.push_back(component);
-
             } break;
             case 'L': {  // Line
                 int parsePosition = 1;
@@ -225,41 +367,6 @@ bool ParseAnarede::Parse()
     }
     // Last line
 
-    /*for(auto it = m_components.begin(), itEnd = m_components.end(); it != itEnd; ++it) {
-        wxString comp = wxString::Format("ID = %d\n", (*it).id);
-        comp += wxString::Format("TIPO = %d\n", (*it).type);
-        comp += wxString::Format("TAMANHO = %f\n", (*it).length);
-        comp += wxString::Format("ROTACAO = %d\n", (*it).rotationID);
-        comp += wxString::Format("POS = (%f , %f)\n", (*it).position.m_x, (*it).position.m_y);
-        comp += wxString::Format("ID ELETRICO = %d\n", (*it).electricalID);
-        for(int i = 0; i < 2; ++i) {
-            comp += wxString::Format("BARRA[%d]<IDg, IDe> = <%d , %d>\n", i, (*it).busConnectionID[i].first,
-                                     (*it).busConnectionID[i].second);
-        }
-        for(int i = 0; i < 2; ++i) {
-            comp += wxString::Format("NODE[%d]<IDg, IDp> = <%d , %d>\n", i, (*it).busConnectionNode[i].first,
-                                     (*it).busConnectionNode[i].second);
-        }
-        wxMessageBox(comp);
-    }
-    for(auto it = m_lines.begin(), itEnd = m_lines.end(); it != itEnd; ++it) {
-        wxString comp = wxString::Format("ID = %d\n", (*it).id);
-        comp += wxString::Format("TIPO = %d\n", (*it).type);
-        comp += wxString::Format("ID ELETRICO = %d\n", (*it).electricalID);
-        for(int i = 0; i < 2; ++i) {
-            comp += wxString::Format("BARRA[%d]<IDg, IDe> = <%d , %d>\n", i, (*it).busConnectionID[i].first,
-                                     (*it).busConnectionID[i].second);
-        }
-        for(int i = 0; i < 2; ++i) {
-            comp += wxString::Format("NODE[%d]<IDg, IDp> = <%d , %d>\n", i, (*it).busConnectionNode[i].first,
-                                     (*it).busConnectionNode[i].second);
-        }
-        for(unsigned int i = 0; i < (*it).nodesPosition.size(); ++i) {
-            comp += wxString::Format("NODEPos[%d] = (%f , %f)\n", i, (*it).nodesPosition[i].m_x,
-                                     (*it).nodesPosition[i].m_y);
-        }
-        wxMessageBox(comp);
-    }*/
     return true;
 }
 
@@ -280,17 +387,65 @@ wxString ParseAnarede::GetLSTLineNextValue(wxString line, int& currentPos)
 
 bool ParseAnarede::GetLenghtAndRotationFromBusCode(wxString code, double& lenght, int& rotationID)
 {
+    // Get code in decimal.
     long longCode;
     if(!code.ToLong(&longCode)) return false;
+    // Convert code to hex
     std::stringstream hexCode;
     hexCode << std::hex << longCode;
+    // Convert code to string
     wxString hexCodeStr = hexCode.str();
+    // Get length on the substring
     wxString lenghtStr = hexCodeStr.Left(hexCodeStr.length() - 1);
+    // Convert lenght string (hex) to decimal
+    hexCode.str("");
+    hexCode << lenghtStr.ToStdString();
+    int intLenght;
+    hexCode >> std::hex >> intLenght;
+    lenght = static_cast<double>(intLenght);
+    // Get rotation ID from substring
     wxString rotationIDStr = hexCodeStr.Right(1);
-    if(!lenghtStr.ToDouble(&lenght)) return false;
-    lenght = 4.8 * lenght - 16.0;
+    // Convert rotation ID string to int
     long rotationIDLong;
     if(!rotationIDStr.ToLong(&rotationIDLong)) return false;
     rotationID = static_cast<int>(rotationIDLong);
+    // Calculate the true value of lenght
+    lenght = 3.0 * lenght - 16.0;
     return true;
+}
+
+wxPoint2DDouble ParseAnarede::GetNodePositionFromID(Bus* bus, double scale, int nodeID)
+{
+    wxPoint2DDouble nodePt;
+
+    double offset = (static_cast<double>(nodeID) - 1.0) * 16.0;
+    nodePt = bus->GetPosition() + wxPoint2DDouble(offset * scale, 0) -
+             wxPoint2DDouble(bus->GetWidth() / 2, bus->GetHeight() / 2);
+    nodePt = bus->RotateAtPosition(nodePt, bus->GetAngle(), true);
+
+    return nodePt;
+}
+
+bool ParseAnarede::StrToElementType(wxString strType, ElementTypeAnarede& type)
+{
+    // Check if type exists, othewise return false
+    int typeInt = wxAtoi(strType);
+    switch(typeInt) {
+        case ANA_BUS:
+        case ANA_GENERATOR:
+        case ANA_LOAD:
+        case ANA_SHUNT:
+        case ANA_MIT:
+        case ANA_TRANSFORMER:
+        case ANA_LINE:
+        case ANA_IND_LOAD:
+        case ANA_IND_SHUNT:
+        case ANA_IND_GENERATOR: {
+            type = static_cast<ElementTypeAnarede>(typeInt);
+            return true;
+        } break;
+        default:
+            break;
+    }
+    return false;
 }
