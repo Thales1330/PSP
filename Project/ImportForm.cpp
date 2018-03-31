@@ -347,19 +347,23 @@ bool ParseAnarede::Parse()
                     // Iterate through parsed components
                     for(auto it = m_components.begin(), itEnd = m_components.end(); it != itEnd; ++it) {
                         if(data1 == (*it).id) {
-                            if((*it).type == ANA_TRANSFORMER) {
-                                if(data2 == 1) {  // Primary
-                                    (*it).busConnectionNode[0] = std::make_pair(data3, data4);
-                                } else if(data2 == 2) {  // Secondary
-                                    (*it).busConnectionNode[1] = std::make_pair(data3, data4);
+                            if((*it).type == ANA_BUS) {
+                                // If the data1 is a bus ID, the element is a element with different data order.
+                                // Find the correct element ID with data3
+                                for(auto itDiff = m_components.begin(), itDiffEnd = m_components.end();
+                                    itDiff != itDiffEnd; ++itDiff) {
+                                    if(data3 == (*itDiff).id) {
+                                        (*itDiff).busConnectionNode[data4 - 1] = std::make_pair(data1, data2);
+                                        break;
+                                    }
                                 }
                             } else {
-                                (*it).busConnectionNode[0] = std::make_pair(data3, data4);
+                                (*it).busConnectionNode[data2 - 1] = std::make_pair(data3, data4);
+                                break;
                             }
                         }
                     }
                 }
-
             } break;
             default:
                 break;
