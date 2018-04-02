@@ -371,6 +371,27 @@ bool ParseAnarede::Parse()
     }
     // Last line
 
+    // Parse PWF file
+    for(wxString line = pwf.GetFirstLine(); !pwf.Eof(); line = pwf.GetNextLine()) {
+        // Current line
+        if(line == "TITU") {  // Title
+            line = pwf.GetNextLine();
+            m_projectName = line;
+        } else if(line != "FIM") {
+            wxString exeCode = line;
+            wxString data = "";
+            for(wxString lineData = pwf.GetNextLine(); lineData != "99999"; lineData = pwf.GetNextLine()) {
+                if(lineData[0] != '(') {  // Ignore commented line
+                    data += lineData + "\n";
+                }
+            }
+            if(data != "") {  // Don't parse empty data
+                if(!ParsePWFExeCode(data, exeCode)) return false;
+            }
+        }
+    }
+    // Last line
+
     return true;
 }
 
@@ -452,4 +473,84 @@ bool ParseAnarede::StrToElementType(wxString strType, ElementTypeAnarede& type)
             break;
     }
     return false;
+}
+
+bool ParseAnarede::ParsePWFExeCode(wxString data, wxString exeCode)
+{
+    if(exeCode == "DCTE") {
+        // Parse data
+        wxString code = "";
+        wxString value = "";
+        for(unsigned int i = 0; i < data.length(); ++i) {
+            code = data.Mid(i, 4);
+            value = data.Mid(i + 5, 6).Trim(false);
+            i += 11;
+            if(code == "BASE") {
+                if(!value.ToCDouble(&m_mvaBase)) return false;
+                break;
+            }
+        }
+    } else if(exeCode == "DBAR") {
+        wxString lineData = "";
+        while(data != "") {
+            wxString rest = "";
+            lineData = data.BeforeFirst('\n', &rest);
+            data = rest;
+            BusData busData;
+            if(!GetPWFStructuredData(lineData, 0, 5, busData.id)) return false;
+            wxString isOnlineCode = lineData.Mid(6, 1);
+            if(isOnlineCode == "L")
+                busData.isOnline = true;
+            else if(isOnlineCode == "D")
+                busData.isOnline = false;
+            else
+                return false;
+            if(!GetPWFStructuredData(lineData, 7, 1, busData.type)) return false;
+            if(!GetPWFStructuredData(lineData, 8, 2, busData.voltageBase)) return false;
+            busData.busName = lineData.Mid(10, 12).Trim();
+            if(!GetPWFStructuredData(lineData, 24, 4, busData.voltage, 1)) return false;
+            if(!GetPWFStructuredData(lineData, 28, 4, busData.angle)) return false;
+            double pg, qg;
+            if(!GetPWFStructuredData(lineData, 32, 5, pg)) return false;
+            if(!GetPWFStructuredData(lineData, 37, 5, qg)) return false;
+            busData.genPower = std::complex<double>(pg, qg);
+            if(!GetPWFStructuredData(lineData, 42, 5, busData.minReactivePower)) return false;
+            if(!GetPWFStructuredData(lineData, 47, 5, busData.maxReactivePower)) return false;
+            if(!GetPWFStructuredData(lineData, 52, 6, busData.ctrlBusID)) return false;
+            double pl, ql;
+            if(!GetPWFStructuredData(lineData, 58, 5, pl)) return false;
+            if(!GetPWFStructuredData(lineData, 63, 5, ql)) return false;
+            busData.loadPower = std::complex<double>(pl, ql);
+            if(!GetPWFStructuredData(lineData, 68, 5, busData.shuntReactive)) return false;
+
+            wxMessageBox(wxString::Format("ID = %d\nonline = %d\ntype = %d\nbaseVoltage = %d\nName = \"%s\"\nTensao = "
+                                          "%f\nAngulo = %f\nPg = %f\nQg = %f\nminQ = %f\nmaxQ = %f\nctrlBus = %d\nPl = "
+                                          "%f\nQl = %f\nshuntMVA = %f",
+                                          busData.id, busData.isOnline, busData.type, busData.voltageBase,
+                                          busData.busName, busData.voltage, busData.angle, busData.genPower.real(),
+                                          busData.genPower.imag(), busData.minReactivePower, busData.maxReactivePower,
+                                          busData.ctrlBusID, busData.loadPower.real(), busData.loadPower.imag(),
+                                          busData.shuntReactive));
+        }
+    }
+    return true;
+}
+
+bool ParseAnarede::GetPWFStructuredData(wxString data, int startPos, int dataLenght, int& value, int decimalPos)
+{
+    wxString strValue = data.Mid(startPos, dataLenght);
+    strValue.Replace(' ', '0');
+    long lValue = 0;
+    if(!strValue.ToLong(&lValue)) return false;
+    value = static_cast<int>(lValue);
+    return true;
+}
+
+bool ParseAnarede::GetPWFStructuredData(wxString data, int startPos, int dataLenght, double& value, int decimalPos)
+{
+    wxString strValue = data.Mid(startPos, dataLenght);
+    strValue.Replace(' ', '0');
+    if(decimalPos != -1) strValue.insert(decimalPos, '.');
+    if(!strValue.ToCDouble(&value)) return false;
+    return true;
 }
