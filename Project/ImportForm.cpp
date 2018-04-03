@@ -216,6 +216,7 @@ bool ImportForm::ImportSelectedFiles()
     for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) elementList.push_back(*it);
 
     m_workspace->SetElementList(elementList);
+    m_workspace->SetName(parseAnarede.GetProjectName());
     return true;
 }
 
@@ -375,18 +376,22 @@ bool ParseAnarede::Parse()
     for(wxString line = pwf.GetFirstLine(); !pwf.Eof(); line = pwf.GetNextLine()) {
         // Current line
         if(line == "TITU") {  // Title
-            line = pwf.GetNextLine();
-            m_projectName = line;
-        } else if(line != "FIM") {
-            wxString exeCode = line;
-            wxString data = "";
-            for(wxString lineData = pwf.GetNextLine(); lineData != "99999"; lineData = pwf.GetNextLine()) {
-                if(lineData[0] != '(') {  // Ignore commented line
-                    data += lineData + "\n";
+            m_projectName = pwf.GetNextLine().Trim();
+        } else if(line != "") {
+            if(line == "FIM") break;
+            if(line[0] != '(') {  // Ignore commented line
+                wxString exeCode = line;
+                wxString data = "";
+                for(wxString lineData = pwf.GetNextLine(); lineData != "99999" && !pwf.Eof();
+                    lineData = pwf.GetNextLine()) {
+                    if(lineData == "FIM") break;
+                    if(lineData[0] != '(') {  // Ignore commented line
+                        data += lineData + "\n";
+                    }
                 }
-            }
-            if(data != "") {  // Don't parse empty data
-                if(!ParsePWFExeCode(data, exeCode)) return false;
+                if(data != "" || data != "FIM") {  // Don't parse empty data
+                    if(!ParsePWFExeCode(data, exeCode)) return false;
+                }
             }
         }
     }
@@ -549,7 +554,7 @@ bool ParseAnarede::GetPWFStructuredData(wxString data, int startPos, int dataLen
 bool ParseAnarede::GetPWFStructuredData(wxString data, int startPos, int dataLenght, double& value, int decimalPos)
 {
     wxString strValue = data.Mid(startPos, dataLenght);
-    strValue.Replace(' ', '0');
+    if(strValue.Find('-') == wxNOT_FOUND) strValue.Replace(' ', '0');
     if(decimalPos != -1) strValue.insert(decimalPos, '.');
     if(!strValue.ToCDouble(&value)) return false;
     return true;
