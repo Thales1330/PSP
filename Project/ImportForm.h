@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2018  Thales Lima Oliveira <thales@ufu.br>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef IMPORTFORM_H
 #define IMPORTFORM_H
 
@@ -11,12 +28,15 @@
 class Workspace;
 class Bus;
 class SyncGenerator;
+class SyncMotor;
 class Load;
 class Capacitor;
 class Inductor;
+class Capacitor;
 class IndMotor;
 class Transformer;
 class Line;
+class PropertiesData;
 
 /**
  * @class ImportForm
@@ -120,43 +140,67 @@ class ParseAnarede
         double phaseShift = 0.0;                                   /**< Transformer phase shift */
     };
     struct IndElementData {
-        int id = 0;                                                  /**< Group electrical ID */
-        ElementTypeAnarede type = ANA_IND_GENERATOR;                 /**< Element type */
-        bool isOnline = true;                                        /**< Element is online */
-        std::complex<double> loadPower = std::complex<double>(0, 0); /**< Element power */
-        int numUnits = 0;                                            /**< Number of unities */
+        int id = 0;                                              /**< Group electrical ID */
+        int busConnection = 0;                                   /**< Branch connection ID */
+        ElementTypeAnarede type = ANA_IND_GENERATOR;             /**< Element type */
+        bool isOnline = true;                                    /**< Element is online */
+        std::complex<double> power = std::complex<double>(0, 0); /**< Element power */
+        int numUnits = 0;                                        /**< Number of unities */
+    };
+    struct IndGenData : IndElementData {
+        double minReactivePower = -9999.0; /**< Minimal reactive power */
+        double maxReactivePower = 99999.0; /**< Maximum reactive power */
+        double xt = 1.0;                   /**< Transformer reactance of each generator */
+        double xd = 1.0;                   /**< Synchronous direct-axis reactance of each generator */
+        double xq = 1.0;                   /**< Synchronous quadrature-axis reactance of each generator */
+        double xl = 1.0;                   /**< Leakage reactance of each generator */
+        double ratedPower = 100.0;         /**< Rated power of each generator */
     };
 
     ParseAnarede(wxFileName lstFile, wxFileName pwfFile);
-    ~ParseAnarede() {}
+    ~ParseAnarede() { ClearData(); }
 
     bool Parse();
 
-    std::vector<Component> GetComponents() const { return m_components; }
-    std::vector<PowerLine> GetLines() const { return m_lines; }
-    std::vector<BranchData> GetBranchData() const { return m_branchData; }
-    std::vector<BusData> GetBusData() const { return m_busData; }
-    std::vector<IndElementData> GetIndElementData() const { return m_indElementData; }
+    std::vector<Component*> GetComponents() const { return m_components; }
+    std::vector<PowerLine*> GetLines() const { return m_lines; }
+    std::vector<BranchData*> GetBranchData() const { return m_branchData; }
+    std::vector<BusData*> GetBusData() const { return m_busData; }
+    std::vector<IndElementData*> GetIndElementData() const { return m_indElementData; }
     wxString GetProjectName() const { return m_projectName; }
+    double GetMVAPowerBase() const { return m_mvaBase; }
 
     wxPoint2DDouble GetNodePositionFromID(Bus* bus, double scale, int nodeID);
+    BusData* GetBusDataFromID(int id);
+    BranchData* GetBranchDataFromID(int id, int fromBus, int toBus);
+    IndElementData* GetIndElementDataFromID(int id, int bus);
+
+    void ClearData();
 
    protected:
     bool GetLenghtAndRotationFromBusCode(wxString code, double& lenght, int& rotationID);
     wxString GetLSTLineNextValue(wxString line, int& currentPos);
     bool StrToElementType(wxString strType, ElementTypeAnarede& type);
     bool ParsePWFExeCode(wxString data, wxString exeCode);
-    bool GetPWFStructuredData(wxString data, int startPos, int dataLenght, int& value, int decimalPos = -1);
-    bool GetPWFStructuredData(wxString data, int startPos, int dataLenght, double& value, int decimalPos = -1);
+    bool GetPWFStructuredData(wxString data,
+                              unsigned int startPos,
+                              unsigned int dataLenght,
+                              int& value,
+                              int decimalPos = -1);
+    bool GetPWFStructuredData(wxString data,
+                              unsigned int startPos,
+                              unsigned int dataLenght,
+                              double& value,
+                              int decimalPos = -1);
 
     wxFileName m_lstFile;
     wxFileName m_pwfFile;
 
-    std::vector<Component> m_components;
-    std::vector<PowerLine> m_lines;
-    std::vector<BusData> m_busData;
-    std::vector<BranchData> m_branchData;
-    std::vector<IndElementData> m_indElementData;
+    std::vector<Component*> m_components;
+    std::vector<PowerLine*> m_lines;
+    std::vector<BusData*> m_busData;
+    std::vector<BranchData*> m_branchData;
+    std::vector<IndElementData*> m_indElementData;
 
     wxString m_projectName = _("Imported project");
     double m_mvaBase = 100.0;
