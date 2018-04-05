@@ -37,6 +37,7 @@ struct SimulationData {
     double accFator = 1.0;
     double powerFlowTolerance = 1e-7;
     int powerFlowMaxIterations = 5000;
+    double initAngle = 0.0;
 
     // Stability
     double stabilityFrequency = 60.0;

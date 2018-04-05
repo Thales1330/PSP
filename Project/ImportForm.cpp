@@ -148,11 +148,12 @@ bool ImportForm::ImportSelectedFiles()
                     SyncGenerator* syncGenerator = new SyncGenerator();
 
                     auto data = syncGenerator->GetElectricalData();
-                    data.name = _("Generator") + wxT(" (") + busData->busName + wxT(")");
+                    data.name = wxString::Format("%s %u (%s)", _("Generator"), indList.size() + 1, busData->busName);
                     data.activePower = busData->genPower.real();
                     data.reactivePower = busData->genPower.imag();
                     data.minReactive = busData->minReactivePower;
                     data.maxReactive = busData->maxReactivePower;
+                    data.useMachineBase = false;  //  ANAREDE use system's base
 
                     syncGenerator->SetElectricalData(data);
 
@@ -161,11 +162,13 @@ bool ImportForm::ImportSelectedFiles()
                     SyncMotor* syncMotor = new SyncMotor();
 
                     auto data = syncMotor->GetElectricalData();
-                    data.name = _("Synchronous compensator") + wxT(" (") + busData->busName + wxT(")");
+                    data.name = wxString::Format("%s %u (%s)", _("Synchronous compensator"), indList.size() + 1,
+                                                 busData->busName);
                     data.activePower = busData->genPower.real() == 0.0 ? 0.0 : -busData->genPower.real();
                     data.reactivePower = busData->genPower.imag();
                     data.minReactive = busData->minReactivePower;
                     data.maxReactive = busData->maxReactivePower;
+                    data.useMachineBase = false;  //  ANAREDE use system's base
 
                     syncMotor->SetElectricalData(data);
 
@@ -238,8 +241,6 @@ bool ImportForm::ImportSelectedFiles()
                 for(int i = 0; i < 2; ++i) syncGenerator->Rotate(false);  // Set to ANAREDE default rotation
                 for(int i = 0; i < (*it)->rotationID * 2; ++i) syncGenerator->Rotate();
 
-                syncGeneratorList.push_back(syncGenerator);
-
                 busList.push_back(auxBus);
                 transformerList.push_back(transformer);
                 syncGeneratorList.push_back(syncGenerator);
@@ -250,12 +251,20 @@ bool ImportForm::ImportSelectedFiles()
                 wxPoint2DDouble nodePos =
                     parseAnarede.GetNodePositionFromID(parentBus, scale, (*it)->busConnectionNode[0].second);
 
+                ParseAnarede::BusData* busData = parseAnarede.GetBusDataFromID((*it)->busConnectionID[0].second);
+
                 Load* load = new Load();
                 load->SetID((*it)->id);
                 load->AddParent(parentBus, nodePos);
 
                 load->StartMove(load->GetPosition());
                 load->Move(wxPoint2DDouble((*it)->position.m_x * scale, (*it)->position.m_y * scale));
+
+                auto data = load->GetElectricalData();
+                data.name = wxString::Format("%s %u (%s)", _("Load"), indList.size() + 1, busData->busName);
+                data.activePower = busData->loadPower.real();
+                data.reactivePower = busData->loadPower.imag();
+                load->SetElectricalData(data);
 
                 for(int i = 0; i < (*it)->rotationID * 2; ++i) load->Rotate();
 
@@ -274,14 +283,14 @@ bool ImportForm::ImportSelectedFiles()
                 if(!isInductor) {
                     Capacitor* cap = new Capacitor();
                     auto data = cap->GetElectricalData();
-                    data.name = _("Capacitor") + wxT("(") + busData->busName + wxT(")");
+                    data.name = wxString::Format("%s %u (%s)", _("Capacitor"), indList.size() + 1, busData->busName);
                     data.reactivePower = busData->shuntReactive;
                     cap->SetElectricalData(data);
                     shuntElement = cap;
                 } else {
                     Inductor* ind = new Inductor();
                     auto data = ind->GetElectricalData();
-                    data.name = _("Inductor") + wxT("(") + busData->busName + wxT(")");
+                    data.name = wxString::Format("%s %u (%s)", _("Inductor"), indList.size() + 1, busData->busName);
                     data.reactivePower = -busData->shuntReactive;
                     ind->SetElectricalData(data);
                     shuntElement = ind;
@@ -339,6 +348,9 @@ bool ImportForm::ImportSelectedFiles()
                 wxPoint2DDouble nodePos2 =
                     parseAnarede.GetNodePositionFromID(parentBus2, scale, (*it)->busConnectionNode[1].second);
 
+                ParseAnarede::BranchData* branchData = parseAnarede.GetBranchDataFromID(
+                    (*it)->electricalID, (*it)->busConnectionID[0].second, (*it)->busConnectionID[1].second);
+
                 Transformer* transformer = new Transformer();
                 transformer->SetID((*it)->id);
                 transformer->AddParent(parentBus1, nodePos1);
@@ -349,6 +361,16 @@ bool ImportForm::ImportSelectedFiles()
 
                 for(int i = 0; i < 2; ++i) transformer->Rotate();  // Set to ANAREDE default rotation
                 for(int i = 0; i < (*it)->rotationID * 2; ++i) transformer->Rotate();
+
+                auto data = transformer->GetElectricalData();
+                data.name =
+                    wxString::Format("%s %u (%s - %s)", _("Transformer"), lineList.size() + 1,
+                                     parentBus1->GetElectricalData().name, parentBus2->GetElectricalData().name);
+                data.resistance = branchData->resistance / 100.0;
+                data.indReactance = branchData->indReactance / 100.0;
+                data.turnsRatio = branchData->tap;
+                data.phaseShift = branchData->phaseShift;
+                transformer->SetElectricaData(data);
 
                 transformerList.push_back(transformer);
             } break;
@@ -367,6 +389,9 @@ bool ImportForm::ImportSelectedFiles()
             wxPoint2DDouble nodePos2 =
                 parseAnarede.GetNodePositionFromID(parentBus2, scale, (*it)->busConnectionNode[1].second);
 
+            ParseAnarede::BranchData* branchData = parseAnarede.GetBranchDataFromID(
+                (*it)->electricalID, (*it)->busConnectionID[0].second, (*it)->busConnectionID[1].second);
+
             Line* line = new Line();
             line->SetID((*it)->id);
             line->AddParent(parentBus1, nodePos1);
@@ -375,11 +400,21 @@ bool ImportForm::ImportSelectedFiles()
                     wxPoint2DDouble((*it)->nodesPosition[i].m_x * scale, (*it)->nodesPosition[i].m_y * scale));
             line->AddParent(parentBus2, nodePos2);
 
+            auto data = line->GetElectricalData();
+            data.name = wxString::Format("%s %u (%s - %s)", _("Line"), lineList.size() + 1,
+                                         parentBus1->GetElectricalData().name, parentBus2->GetElectricalData().name);
+            data.resistance = branchData->resistance / 100.0;
+            data.indReactance = branchData->indReactance / 100.0;
+            data.capSusceptance = branchData->capSusceptance / mvaBasePower;
+            line->SetElectricalData(data);
+
             lineList.push_back(line);
         }
     }
 
     for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) elementList.push_back(*it);
     for(auto it = syncGeneratorList.begin(), itEnd = syncGeneratorList.end(); it != itEnd; ++it)
         elementList.push_back(*it);
     for(auto it = syncMotorList.begin(), itEnd = syncMotorList.end(); it != itEnd; ++it) elementList.push_back(*it);
@@ -387,8 +422,6 @@ bool ImportForm::ImportSelectedFiles()
     for(auto it = indList.begin(), itEnd = indList.end(); it != itEnd; ++it) elementList.push_back(*it);
     for(auto it = capList.begin(), itEnd = capList.end(); it != itEnd; ++it) elementList.push_back(*it);
     for(auto it = indMotorList.begin(), itEnd = indMotorList.end(); it != itEnd; ++it) elementList.push_back(*it);
-    for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) elementList.push_back(*it);
-    for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) elementList.push_back(*it);
 
     m_workspace->SetElementList(elementList);
     m_workspace->SetName(parseAnarede.GetProjectName());
@@ -687,7 +720,7 @@ bool ParseAnarede::ParsePWFExeCode(wxString data, wxString exeCode)
             else
                 return false;
             if(!GetPWFStructuredData(lineData, 7, 1, busData->type)) return false;
-            if(!GetPWFStructuredData(lineData, 8, 2, busData->voltageBase)) return false;
+            busData->voltageBase = lineData.Mid(8, 2);
             busData->busName = lineData.Mid(10, 12).Trim();
             if(!GetPWFStructuredData(lineData, 24, 4, busData->voltage, 1)) return false;
             if(!GetPWFStructuredData(lineData, 28, 4, busData->angle)) return false;
@@ -847,7 +880,14 @@ ParseAnarede::BusData* ParseAnarede::GetBusDataFromID(int id)
     return NULL;
 }
 
-ParseAnarede::BranchData* ParseAnarede::GetBranchDataFromID(int id, int fromBus, int toBus) { return NULL; }
+ParseAnarede::BranchData* ParseAnarede::GetBranchDataFromID(int id, int fromBus, int toBus)
+{
+    for(auto it = m_branchData.begin(), itEnd = m_branchData.end(); it != itEnd; ++it) {
+        if((*it)->id == id && (*it)->busConnections.first == fromBus && (*it)->busConnections.second == toBus)
+            return *it;
+    }
+    return NULL;
+}
 
 ParseAnarede::IndElementData* ParseAnarede::GetIndElementDataFromID(int id, int bus) { return NULL; }
 

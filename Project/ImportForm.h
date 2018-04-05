@@ -114,13 +114,13 @@ class ParseAnarede
         std::vector<wxPoint2DDouble> nodesPosition; /**< Coordinates of the line breaks, if any */
     };
     struct BusData {
-        int id = 0;               /**< Bus electrical ID */
-        bool isOnline = true;     /**< Element is online */
-        int type = 0;             /**< Bus Type: 0 = PQ; 1 = PV; 2 = Ref.; 3 = PQ with voltage between */
-        int voltageBase = 0;      /**< Voltage base ID */
-        wxString busName = "Bus"; /**< Bus name */
-        double voltage = 1.0;     /**< Bus abs voltage (controlled value for PV and Ref. types) */
-        double angle = 0.0;       /**< Angle of voltage */
+        int id = 0;                 /**< Bus electrical ID */
+        bool isOnline = true;       /**< Element is online */
+        int type = 0;               /**< Bus Type: 0 = PQ; 1 = PV; 2 = Ref.; 3 = PQ with voltage between */
+        wxString voltageBase = "0"; /**< Voltage base identifier */
+        wxString busName = "Bus";   /**< Bus name */
+        double voltage = 1.0;       /**< Bus abs voltage (controlled value for PV and Ref. types) */
+        double angle = 0.0;         /**< Angle of voltage */
         std::complex<double> genPower = std::complex<double>(0, 0);  /**< Generated power */
         double minReactivePower = -9999.0;                           /**< Minimal reactive power */
         double maxReactivePower = 99999.0;                           /**< Maximum reactive power */
