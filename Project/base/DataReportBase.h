@@ -60,12 +60,19 @@ protected:
 
 protected:
     virtual void OnPowerFlowGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void OnGridPFKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnPFBusGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void OnGridPFBusesKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnPFBranchesGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void OnGridPFBranchesKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnFaulrGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void OnGridFaultKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnFaultBusesGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void OnGridFaultBusesKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnFaultBranchesGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void OnGridFaultBranchesKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnFaultGeneratorsGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void OnGridFaultGeneratorsKeyDown(wxKeyEvent& event) { event.Skip(); }
 
 public:
     wxGrid* GetGridPowerFlow() { return m_gridPowerFlow; }

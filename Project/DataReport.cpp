@@ -16,8 +16,8 @@
  */
 
 #include "DataReport.h"
-#include "Workspace.h"
 #include "ElectricCalculation.h"
+#include "Workspace.h"
 
 DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(parent)
 {
@@ -386,9 +386,7 @@ void DataReport::FillValues(GridSelection gridToFill)
                 textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
-                for(int j = 0; j < 7; ++j) {
-                    m_gridPowerFlow->SetCellTextColour(rowNumber + i, j, textColour);
-                }
+                for(int j = 0; j < 7; ++j) { m_gridPowerFlow->SetCellTextColour(rowNumber + i, j, textColour); }
             }
 
             m_gridPowerFlow->SetCellValue(rowNumber, 9, isOnline);
@@ -435,9 +433,7 @@ void DataReport::FillValues(GridSelection gridToFill)
                 textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
-                for(int j = 0; j < 7; ++j) {
-                    m_gridPowerFlow->SetCellTextColour(rowNumber + i, j, textColour);
-                }
+                for(int j = 0; j < 7; ++j) { m_gridPowerFlow->SetCellTextColour(rowNumber + i, j, textColour); }
             }
 
             m_gridPowerFlow->SetCellValue(rowNumber, 0, _("Transformer"));
@@ -542,9 +538,7 @@ void DataReport::FillValues(GridSelection gridToFill)
                 isOnline = _("No");
                 textColour = m_offlineColour;
             }
-            for(int j = 0; j < 10; ++j) {
-                m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour);
-            }
+            for(int j = 0; j < 10; ++j) { m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour); }
 
             m_gridPFBranches->SetCellValue(rowNumber, 0, _("Line"));
             m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
@@ -593,9 +587,7 @@ void DataReport::FillValues(GridSelection gridToFill)
                 isOnline = _("No");
                 textColour = m_offlineColour;
             }
-            for(int j = 0; j < 10; ++j) {
-                m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour);
-            }
+            for(int j = 0; j < 10; ++j) { m_gridPFBranches->SetCellTextColour(rowNumber, j, textColour); }
 
             m_gridPFBranches->SetCellValue(rowNumber, 0, _("Transformer"));
             m_gridPFBranches->SetCellValue(rowNumber, 1, data.name);
@@ -742,9 +734,7 @@ void DataReport::FillValues(GridSelection gridToFill)
                 textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
-                for(int j = 0; j < 11; ++j) {
-                    m_gridFaultBranches->SetCellTextColour(rowNumber + i, j, textColour);
-                }
+                for(int j = 0; j < 11; ++j) { m_gridFaultBranches->SetCellTextColour(rowNumber + i, j, textColour); }
             }
 
             m_gridFaultBranches->SetCellValue(rowNumber, 0, _("Line"));
@@ -846,9 +836,7 @@ void DataReport::FillValues(GridSelection gridToFill)
                 textColour = m_offlineColour;
             }
             for(int i = 0; i < 2; ++i) {
-                for(int j = 0; j < 11; ++j) {
-                    m_gridFaultBranches->SetCellTextColour(rowNumber + i, j, textColour);
-                }
+                for(int j = 0; j < 11; ++j) { m_gridFaultBranches->SetCellTextColour(rowNumber + i, j, textColour); }
             }
 
             m_gridFaultBranches->SetCellValue(rowNumber, 0, _("Transformer"));
@@ -1017,4 +1005,38 @@ void DataReport::OnPFBranchesGridChanged(wxGridEvent& event)
 void DataReport::OnPowerFlowGridChanged(wxGridEvent& event)
 {
     if(!m_changingValues) FillValues(GRID_PF);
+}
+
+void DataReport::GridKeyHandler(wxGrid* grid, wxKeyEvent& event)
+{
+    if(event.GetKeyCode() == 'C' && event.GetModifiers() == wxMOD_CONTROL) {  // Copy selection
+        // [Ref.] https://forums.wxwidgets.org/viewtopic.php?t=2200
+        wxString copyData = "";
+        bool lineNotEmpty;
+
+        for(int i = 0; i < grid->GetNumberRows(); i++) {
+            lineNotEmpty = false;
+            for(int j = 0; j < grid->GetNumberCols(); j++) {
+                if(grid->IsInSelection(i, j)) {
+                    if(lineNotEmpty == false) {
+                        if(copyData.IsEmpty() == false) {
+                            copyData.Append(wxT("\r\n"));  // In Windows if copy to notepad need \r\n to new line.
+                        }
+                        lineNotEmpty = true;
+                    } else {
+                        copyData.Append(wxT("\t"));
+                    }
+                    copyData = copyData + grid->GetCellValue(i, j);
+                }
+            }
+        }
+
+        wxOpenClipboard();
+        wxEmptyClipboard();
+        wxSetClipboardData(wxDF_TEXT, copyData.mb_str(), 0, 0);  // In Windows need this for UNICODE
+        wxCloseClipboard();
+    } else if(event.GetKeyCode() == 'A' && event.GetModifiers() == wxMOD_CONTROL) {  // Select all
+        grid->SelectAll();
+    }
+    event.Skip();
 }

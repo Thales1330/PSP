@@ -173,7 +173,7 @@ class ParseAnarede
     wxPoint2DDouble GetNodePositionFromID(Bus* bus, double scale, int nodeID);
     BusData* GetBusDataFromID(int id);
     BranchData* GetBranchDataFromID(int id, int fromBus, int toBus);
-    IndElementData* GetIndElementDataFromID(int id, int bus);
+    IndElementData* GetIndElementDataFromID(int id, int busID);
 
     void ClearData();
 

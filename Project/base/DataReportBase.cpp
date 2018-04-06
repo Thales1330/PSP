@@ -255,23 +255,37 @@ DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& 
 #endif
     // Connect events
     m_gridPowerFlow->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPowerFlowGridChanged), NULL, this);
+    m_gridPowerFlow->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFKeyDown), NULL, this);
     m_gridPFBuses->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBusGridChanged), NULL, this);
+    m_gridPFBuses->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBusesKeyDown), NULL, this);
     m_gridPFBranches->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBranchesGridChanged), NULL, this);
+    m_gridPFBranches->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBranchesKeyDown), NULL, this);
     m_gridFault->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaulrGridChanged), NULL, this);
+    m_gridFault->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultKeyDown), NULL, this);
     m_gridFaultBuses->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultBusesGridChanged), NULL, this);
+    m_gridFaultBuses->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBusesKeyDown), NULL, this);
     m_gridFaultBranches->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultBranchesGridChanged), NULL, this);
+    m_gridFaultBranches->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBranchesKeyDown), NULL, this);
     m_gridFaultGenerators->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultGeneratorsGridChanged), NULL, this);
+    m_gridFaultGenerators->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultGeneratorsKeyDown), NULL, this);
     
 }
 
 DataReportBase::~DataReportBase()
 {
     m_gridPowerFlow->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPowerFlowGridChanged), NULL, this);
+    m_gridPowerFlow->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFKeyDown), NULL, this);
     m_gridPFBuses->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBusGridChanged), NULL, this);
+    m_gridPFBuses->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBusesKeyDown), NULL, this);
     m_gridPFBranches->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBranchesGridChanged), NULL, this);
+    m_gridPFBranches->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBranchesKeyDown), NULL, this);
     m_gridFault->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaulrGridChanged), NULL, this);
+    m_gridFault->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultKeyDown), NULL, this);
     m_gridFaultBuses->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultBusesGridChanged), NULL, this);
+    m_gridFaultBuses->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBusesKeyDown), NULL, this);
     m_gridFaultBranches->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultBranchesGridChanged), NULL, this);
+    m_gridFaultBranches->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBranchesKeyDown), NULL, this);
     m_gridFaultGenerators->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultGeneratorsGridChanged), NULL, this);
+    m_gridFaultGenerators->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultGeneratorsKeyDown), NULL, this);
     
 }

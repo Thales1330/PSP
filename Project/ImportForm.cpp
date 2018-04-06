@@ -148,7 +148,8 @@ bool ImportForm::ImportSelectedFiles()
                     SyncGenerator* syncGenerator = new SyncGenerator();
 
                     auto data = syncGenerator->GetElectricalData();
-                    data.name = wxString::Format("%s %u (%s)", _("Generator"), indList.size() + 1, busData->busName);
+                    data.name =
+                        wxString::Format("%s %u (%s)", _("Generator"), syncGeneratorList.size() + 1, busData->busName);
                     data.activePower = busData->genPower.real();
                     data.reactivePower = busData->genPower.imag();
                     data.minReactive = busData->minReactivePower;
@@ -162,7 +163,7 @@ bool ImportForm::ImportSelectedFiles()
                     SyncMotor* syncMotor = new SyncMotor();
 
                     auto data = syncMotor->GetElectricalData();
-                    data.name = wxString::Format("%s %u (%s)", _("Synchronous compensator"), indList.size() + 1,
+                    data.name = wxString::Format("%s %u (%s)", _("Synchronous compensator"), syncMotorList.size() + 1,
                                                  busData->busName);
                     data.activePower = busData->genPower.real() == 0.0 ? 0.0 : -busData->genPower.real();
                     data.reactivePower = busData->genPower.imag();
@@ -197,6 +198,10 @@ bool ImportForm::ImportSelectedFiles()
                 wxPoint2DDouble nodePos =
                     parseAnarede.GetNodePositionFromID(parentBus, scale, (*it)->busConnectionNode[0].second);
 
+                ParseAnarede::IndGenData* genData = static_cast<ParseAnarede::IndGenData*>(
+                    parseAnarede.GetIndElementDataFromID((*it)->electricalID, (*it)->busConnectionID[0].second));
+                double numUnits = static_cast<double>(genData->numUnits);
+
                 wxPoint2DDouble genPosition((*it)->position.m_x * scale,
                                             (*it)->position.m_y * scale);  // Element position.
                 // Calculate the new generator position:
@@ -223,6 +228,10 @@ bool ImportForm::ImportSelectedFiles()
                 // Auxiliary bus
                 Bus* auxBus = new Bus(genPosition);
                 for(int i = 0; i < bRot; ++i) auxBus->Rotate();
+                auto auxBusData = auxBus->GetElectricalData();
+                auxBusData.name = parentBus->GetElectricalData().name + wxString::Format(" -- %s", _("Auxiliary"));
+                auxBus->SetElectricalData(auxBusData);
+
                 // Transformer
                 Transformer* transformer = new Transformer();
                 transformer->AddParent(auxBus, auxBus->GetPosition());
@@ -231,6 +240,14 @@ bool ImportForm::ImportSelectedFiles()
                 transformer->StartMove(transformer->GetPosition());
                 transformer->Move(genPosition - offset);
 
+                auto transfData = transformer->GetElectricalData();
+                transfData.name =
+                    wxString::Format("%s %u (%s - %s)", _("Transformer"), transformerList.size() + 1,
+                                     auxBus->GetElectricalData().name, parentBus->GetElectricalData().name);
+                transfData.indReactance = genData->xt / (100.0 * numUnits);
+                transformer->SetElectricaData(transfData);
+
+                // Generator
                 SyncGenerator* syncGenerator = new SyncGenerator();
                 syncGenerator->SetID((*it)->id);
                 syncGenerator->AddParent(auxBus, auxBus->GetPosition());
@@ -240,6 +257,19 @@ bool ImportForm::ImportSelectedFiles()
 
                 for(int i = 0; i < 2; ++i) syncGenerator->Rotate(false);  // Set to ANAREDE default rotation
                 for(int i = 0; i < (*it)->rotationID * 2; ++i) syncGenerator->Rotate();
+
+                auto data = syncGenerator->GetElectricalData();
+                data.name = wxString::Format("%s %u (%s)", _("Generator"), syncGeneratorList.size() + 1,
+                                             parentBus->GetElectricalData().name);
+                data.activePower = genData->power.real() * numUnits;
+                data.reactivePower = genData->power.imag() * numUnits;
+                data.maxReactive = genData->maxReactivePower * numUnits;
+                data.minReactive = genData->minReactivePower * numUnits;
+                data.nominalPower = genData->ratedPower * numUnits;
+                data.syncXd = genData->xd / (100.0 * numUnits);
+                data.syncXq = genData->xq / (100.0 * numUnits);
+                data.potierReactance = genData->xl / (100.0 * numUnits);
+                syncGenerator->SetElectricalData(data);
 
                 busList.push_back(auxBus);
                 transformerList.push_back(transformer);
@@ -261,7 +291,7 @@ bool ImportForm::ImportSelectedFiles()
                 load->Move(wxPoint2DDouble((*it)->position.m_x * scale, (*it)->position.m_y * scale));
 
                 auto data = load->GetElectricalData();
-                data.name = wxString::Format("%s %u (%s)", _("Load"), indList.size() + 1, busData->busName);
+                data.name = wxString::Format("%s %u (%s)", _("Load"), loadList.size() + 1, busData->busName);
                 data.activePower = busData->loadPower.real();
                 data.reactivePower = busData->loadPower.imag();
                 load->SetElectricalData(data);
@@ -364,7 +394,7 @@ bool ImportForm::ImportSelectedFiles()
 
                 auto data = transformer->GetElectricalData();
                 data.name =
-                    wxString::Format("%s %u (%s - %s)", _("Transformer"), lineList.size() + 1,
+                    wxString::Format("%s %u (%s - %s)", _("Transformer"), transformerList.size() + 1,
                                      parentBus1->GetElectricalData().name, parentBus2->GetElectricalData().name);
                 data.resistance = branchData->resistance / 100.0;
                 data.indReactance = branchData->indReactance / 100.0;
@@ -409,6 +439,50 @@ bool ImportForm::ImportSelectedFiles()
             line->SetElectricalData(data);
 
             lineList.push_back(line);
+        }
+    }
+
+    // Search for bus data without component
+    std::vector<ParseAnarede::BusData*> busDataVector = parseAnarede.GetBusData();
+    for(auto it = busDataVector.begin(), itEnd = busDataVector.end(); it != itEnd; ++it) {
+        ParseAnarede::BusData* busData = *it;
+
+        // Search for bus
+        Bus* bus = NULL;
+        for(auto itB = busList.begin(), itBEnd = busList.end(); itB != itBEnd; ++itB) {
+            if((*itB)->GetElectricalData().number == busData->id) {
+                bus = *itB;
+                break;
+            }
+        }
+        if(bus) {
+            // Check loads
+            if(std::abs(busData->loadPower.real()) > 1e-5 ||
+               std::abs(busData->loadPower.imag()) > 1e-5) {  // Have loads
+                // Find load associated with the bus
+                Load* load = NULL;
+                for(auto itL = loadList.begin(), itLEnd = loadList.end(); itL != itLEnd; ++itL) {
+                    if((*itL)->GetParentList().size() > 0) {     // Don't search in empty vectors
+                        if((*itL)->GetParentList()[0] == bus) {  // Found load
+                            load = *itL;
+                            break;
+                        }
+                    }
+                }
+                if(!load) {  // The load don't exists, create a new one.
+                    Load* newLoad =
+                        new Load(wxString::Format("%s %u (%s)", _("Load"), loadList.size() + 1, busData->busName));
+                    newLoad->AddParent(bus, bus->GetPosition());
+                    auto data = newLoad->GetElectricalData();
+                    data.activePower = busData->loadPower.real();
+                    data.reactivePower = busData->loadPower.imag();
+                    newLoad->SetElectricalData(data);
+
+                    loadList.push_back(newLoad);
+                }
+            }
+            // Check generation
+            
         }
     }
 
@@ -889,7 +963,13 @@ ParseAnarede::BranchData* ParseAnarede::GetBranchDataFromID(int id, int fromBus,
     return NULL;
 }
 
-ParseAnarede::IndElementData* ParseAnarede::GetIndElementDataFromID(int id, int bus) { return NULL; }
+ParseAnarede::IndElementData* ParseAnarede::GetIndElementDataFromID(int id, int busID)
+{
+    for(auto it = m_indElementData.begin(), itEnd = m_indElementData.end(); it != itEnd; ++it) {
+        if((*it)->id == id && (*it)->busConnection == busID) return *it;
+    }
+    return NULL;
+}
 
 void ParseAnarede::ClearData()
 {

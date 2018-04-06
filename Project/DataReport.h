@@ -51,6 +51,7 @@ class DataReport : public DataReportBase
     virtual void CreateGrids();
     virtual void FillValues(GridSelection gridToFill = GRID_ALL);
     virtual void SetRowsColours(wxGrid* grid, int rowStart = 1);
+    virtual void GridKeyHandler(wxGrid* grid, wxKeyEvent& event);
 
    protected:
     virtual void OnFaulrGridChanged(wxGridEvent& event);
@@ -60,6 +61,13 @@ class DataReport : public DataReportBase
     virtual void OnPFBranchesGridChanged(wxGridEvent& event);
     virtual void OnPowerFlowGridChanged(wxGridEvent& event);
     virtual void OnPFBusGridChanged(wxGridEvent& event);
+    virtual void OnGridFaultBranchesKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridFaultBranches, event); }
+    virtual void OnGridFaultBusesKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridFaultBuses, event); }
+    virtual void OnGridFaultGeneratorsKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridFaultGenerators, event); }
+    virtual void OnGridFaultKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridFault, event); }
+    virtual void OnGridPFBranchesKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridPFBranches, event); }
+    virtual void OnGridPFBusesKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridPFBuses, event); }
+    virtual void OnGridPFKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridPowerFlow, event); }
     Workspace* m_workspace = NULL;
     bool m_changingValues = false;
 
