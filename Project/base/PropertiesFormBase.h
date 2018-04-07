@@ -95,6 +95,9 @@ protected:
     wxTextCtrl* m_textCtrlPFTolerance;
     wxStaticText* m_staticTextPFMaxIterations;
     wxTextCtrl* m_textCtrlPFMaxIterations;
+    wxStaticText* m_staticTextPFSlackBusAngle;
+    wxTextCtrl* m_textCtrlPFSlackBusAngle;
+    wxStaticText* m_staticTextDeg_1;
     wxPanel* m_panelStability;
     wxStaticText* m_staticTextTimeStep;
     wxTextCtrl* m_textCtrlTimeStep;
@@ -166,6 +169,9 @@ public:
     wxTextCtrl* GetTextCtrlPFTolerance() { return m_textCtrlPFTolerance; }
     wxStaticText* GetStaticTextPFMaxIterations() { return m_staticTextPFMaxIterations; }
     wxTextCtrl* GetTextCtrlPFMaxIterations() { return m_textCtrlPFMaxIterations; }
+    wxStaticText* GetStaticTextPFSlackBusAngle() { return m_staticTextPFSlackBusAngle; }
+    wxTextCtrl* GetTextCtrlPFSlackBusAngle() { return m_textCtrlPFSlackBusAngle; }
+    wxStaticText* GetStaticTextDeg_1() { return m_staticTextDeg_1; }
     wxPanel* GetPanelPF() { return m_panelPF; }
     wxStaticText* GetStaticTextTimeStep() { return m_staticTextTimeStep; }
     wxTextCtrl* GetTextCtrlTimeStep() { return m_textCtrlTimeStep; }

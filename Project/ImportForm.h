@@ -131,12 +131,13 @@ class ParseAnarede
     };
     struct BranchData {
         int id = 0;                                                /**< Branch electrical ID */
+        ElementTypeAnarede type = ANA_LINE;                        /**< Element type */
         std::pair<int, int> busConnections = std::make_pair(0, 0); /**< Branch connection IDs */
         bool isOnline = true;                                      /**< Element is online */
         double resistance = 0.0;                                   /**< Branch resistance */
         double indReactance = 0.0;                                 /**< Branch inductive reactance */
         double capSusceptance = 0.0;                               /**< Branch capacitive susceptance */
-        double tap = 1.0;                                          /**< Transformer tap */
+        double tap = 0.0;                                          /**< Transformer tap */
         double phaseShift = 0.0;                                   /**< Transformer phase shift */
     };
     struct IndElementData {
@@ -172,8 +173,8 @@ class ParseAnarede
 
     wxPoint2DDouble GetNodePositionFromID(Bus* bus, double scale, int nodeID);
     BusData* GetBusDataFromID(int id);
-    BranchData* GetBranchDataFromID(int id, int fromBus, int toBus);
-    IndElementData* GetIndElementDataFromID(int id, int busID);
+    BranchData* GetBranchDataFromID(int id, int fromBus, int toBus, ElementTypeAnarede type);
+    IndElementData* GetIndElementDataFromID(int id, int busID, ElementTypeAnarede type);
 
     void ClearData();
 

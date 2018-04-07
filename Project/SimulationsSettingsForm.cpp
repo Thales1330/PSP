@@ -123,6 +123,9 @@ bool SimulationsSettingsForm::ValidateData()
     if(!Element::IntFromString(this, m_textCtrlPFMaxIterations->GetValue(), data.powerFlowMaxIterations,
                                _("Value entered incorrectly in the field \"Max. iterations (Power flow)\".")))
         return false;
+    if(!Element::DoubleFromString(this, m_textCtrlPFSlackBusAngle->GetValue(), data.initAngle,
+                               _("Value entered incorrectly in the field \"Slack bus angle\".")))
+        return false;
     if(!Element::DoubleFromString(this, m_textCtrlTimeStep->GetValue(), data.timeStep,
                                   _("Value entered incorrectly in the field \"Time step\".")))
         return false;

@@ -259,6 +259,29 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl4_4->Add(m_textCtrlPFMaxIterations, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
+    wxBoxSizer* boxSizerLvl4_20 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_3_4->Add(boxSizerLvl4_20, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPFSlackBusAngle = new wxStaticText(m_panelPF, wxID_ANY, _("Slack bus angle"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_20->Add(m_staticTextPFSlackBusAngle, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_17 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_20->Add(boxSizerLvl5_17, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlPFSlackBusAngle = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("0,0"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPFSlackBusAngle->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_17->Add(m_textCtrlPFSlackBusAngle, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextDeg_1 = new wxStaticText(m_panelPF, wxID_ANY, _("º"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_17->Add(m_staticTextDeg_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
     m_panelStability = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelStability, _("Stability"), false);
     
