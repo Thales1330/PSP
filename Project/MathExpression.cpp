@@ -175,10 +175,7 @@ bool MathExpression::Solve(double* input, double timeStep)
                     for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
                         Node* childNode = *itCN;
                         if(childNode == node) {
-                            if(!cLine->IsSolved())
-                                m_inputValues[i] = 0.0;
-                            else
-                                m_inputValues[i] = cLine->GetValue();
+                            m_inputValues[i] = cLine->GetValue();
                             break;
                         }
                     }

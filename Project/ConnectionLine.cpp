@@ -22,9 +22,7 @@ ConnectionLine::ConnectionLine(Node* firstNode, int id) : ControlElement(id)
 {
     wxPoint2DDouble pt = firstNode->GetPosition();
     m_tmpSndPt = pt;
-    for(int i = 0; i < 6; i++) {
-        m_pointList.push_back(pt);
-    }
+    for(int i = 0; i < 6; i++) { m_pointList.push_back(pt); }
     m_nodeList.push_back(firstNode);
     firstNode->SetConnected();
 }
@@ -52,9 +50,7 @@ void ConnectionLine::Draw(wxPoint2DDouble translation, double scale) const
 
 bool ConnectionLine::Contains(wxPoint2DDouble position) const
 {
-    if(PointToLineDistance(position) < 5.0) {
-        return true;
-    }
+    if(PointToLineDistance(position) < 5.0) { return true; }
     return false;
 }
 
@@ -201,4 +197,12 @@ Element* ConnectionLine::GetCopy()
     ConnectionLine* copy = new ConnectionLine();
     *copy = *this;
     return copy;
+}
+
+bool ConnectionLine::Initialize()
+{
+    m_solved = false;
+    m_output = 0.0;
+    m_value = 0.0;
+    return true;
 }
