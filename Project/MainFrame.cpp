@@ -15,25 +15,26 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "MainFrame.h"
-#include "artProvider/ArtMetro.h"
-#include "Workspace.h"
+#include "AboutForm.h"
 #include "Bus.h"
-#include "Line.h"
-#include "Transformer.h"
-#include "SyncGenerator.h"
-#include "IndMotor.h"
-#include "SyncMotor.h"
-#include "Load.h"
-#include "Inductor.h"
 #include "Capacitor.h"
-#include "FileHanding.h"
-#include "GeneralPropertiesForm.h"
-#include "SimulationsSettingsForm.h"
-#include "PropertiesData.h"
 #include "ChartView.h"
 #include "DataReport.h"
-#include "AboutForm.h"
+#include "FileHanding.h"
+#include "GeneralPropertiesForm.h"
+#include "ImportForm.h"
+#include "IndMotor.h"
+#include "Inductor.h"
+#include "Line.h"
+#include "Load.h"
+#include "MainFrame.h"
+#include "PropertiesData.h"
+#include "SimulationsSettingsForm.h"
+#include "SyncGenerator.h"
+#include "SyncMotor.h"
+#include "Transformer.h"
+#include "Workspace.h"
+#include "artProvider/ArtMetro.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties, wxString openPath)
@@ -166,8 +167,8 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 {
     EnableCurrentProjectRibbon();
 
-    Workspace* newWorkspace =
-        new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), m_sharedGLContext);
+    Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
+                                            this->GetStatusBar(), m_sharedGLContext);
     if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
     m_workspaceList.push_back(newWorkspace);
 
@@ -214,9 +215,7 @@ void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event)
 void MainFrame::OnDeleteClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        workspace->DeleteSelectedElements();
-    }
+    if(workspace) { workspace->DeleteSelectedElements(); }
 }
 void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 {
@@ -238,20 +237,16 @@ void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, false);
 }
 
-void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
+// void MainFrame::OnExpImpClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnFaultClick(wxRibbonButtonBarEvent& event)
 {
-    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
-        workspace->RunFault();
-    }
+    if(Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) { workspace->RunFault(); }
 }
 
 void MainFrame::OnFitClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        workspace->Fit();
-    }
+    if(workspace) { workspace->Fit(); }
 }
 
 void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
@@ -273,9 +268,7 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
         // Set the move position to the average of selected elements.
         for(auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
             Element* element = *it;
-            if(element->IsSelected()) {
-                element->StartMove(averagePos);
-            }
+            if(element->IsSelected()) { element->StartMove(averagePos); }
         }
         workspace->SetWorkspaceMode(Workspace::MODE_MOVE_ELEMENT);
     }
@@ -320,9 +313,7 @@ void MainFrame::OnPasteClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        workspace->RunPowerFlow();
-    }
+    if(workspace) { workspace->RunPowerFlow(); }
 }
 
 void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event) {}
@@ -330,17 +321,13 @@ void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        workspace->RunStability();
-    }
+    if(workspace) { workspace->RunStability(); }
 }
 
 void MainFrame::OnSCPowerClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        workspace->RunSCPower();
-    }
+    if(workspace) { workspace->RunSCPower(); }
 }
 
 void MainFrame::OnSaveAsClick(wxRibbonButtonBarEvent& event)
@@ -476,6 +463,31 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
         }
     }
 }
+
+void MainFrame::OnImportClick(wxRibbonButtonBarEvent& event)
+{
+    // Create a new workspace to import
+    Workspace* impWorkspace = new Workspace(this, _("Imported project"), this->GetStatusBar(), m_sharedGLContext);
+    ImportForm importForm(this, impWorkspace);
+    if(importForm.ShowModal() == wxID_OK) {
+        // Import file(s)
+        EnableCurrentProjectRibbon();
+
+        if(!m_sharedGLContext) m_sharedGLContext = impWorkspace->GetOpenGLContext();
+        m_workspaceList.push_back(impWorkspace);
+
+        m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+        m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
+
+        m_auiNotebook->AddPage(impWorkspace, impWorkspace->GetName(), true);
+        m_auiNotebook->Layout();
+        impWorkspace->Redraw();
+        impWorkspace->SetJustOpened(true);
+        impWorkspace->Fit();
+        m_projectNumber++;
+    }
+}
+
 void MainFrame::NotebookPageClosed(wxAuiNotebookEvent& event)
 {
     if(m_auiNotebook->GetPageCount() == 0) EnableCurrentProjectRibbon(false);
@@ -501,17 +513,13 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
 void MainFrame::OnRotClockClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        workspace->RotateSelectedElements();
-    }
+    if(workspace) { workspace->RotateSelectedElements(); }
 }
 
 void MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
-        workspace->RotateSelectedElements(false);
-    }
+    if(workspace) { workspace->RotateSelectedElements(false); }
 }
 
 void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)

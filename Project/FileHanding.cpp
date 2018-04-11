@@ -70,6 +70,8 @@ void FileHanding::SaveProject(wxFileName path)
     XMLParser::SetNodeValue(doc, pfTolerance, simulationData.powerFlowTolerance);
     auto pfMaxIter = XMLParser::AppendNode(doc, powerFlowPropNode, "MaxIterations");
     XMLParser::SetNodeValue(doc, pfMaxIter, simulationData.powerFlowMaxIterations);
+    auto pfSlackAngle = XMLParser::AppendNode(doc, powerFlowPropNode, "SlackAngle");
+    XMLParser::SetNodeValue(doc, pfSlackAngle, simulationData.initAngle);
 
     auto stabilityPropNode = XMLParser::AppendNode(doc, simulationPropNode, "Stability");
     auto timeStep = XMLParser::AppendNode(doc, stabilityPropNode, "TimeStep");
@@ -284,6 +286,7 @@ bool FileHanding::OpenProject(wxFileName path)
             simData.accFator = XMLParser::GetNodeValueDouble(powerFlow, "AccFactor");
             simData.powerFlowTolerance = XMLParser::GetNodeValueDouble(powerFlow, "Tolerance");
             simData.powerFlowMaxIterations = XMLParser::GetNodeValueInt(powerFlow, "MaxIterations");
+            simData.initAngle = XMLParser::GetNodeValueDouble(powerFlow, "SlackAngle");
 
             // Stability
             auto stability = simPropertiesNode->first_node("Stability");

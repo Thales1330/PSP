@@ -18,7 +18,7 @@
 #ifndef MATHEXPRESSIONFORM_H
 #define MATHEXPRESSIONFORM_H
 
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 #include <wx/msgdlg.h>
 
 class MathExpression;

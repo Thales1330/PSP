@@ -18,7 +18,7 @@
 #ifndef TRANSFORMERFORM_H
 #define TRANSFORMERFORM_H
 
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 class SwitchingForm;
 class Transformer;

@@ -17,7 +17,7 @@
 
 #ifndef TEXTFORM_H
 #define TEXTFORM_H
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 #include "Text.h"
 #include "ElectricCalculation.h"

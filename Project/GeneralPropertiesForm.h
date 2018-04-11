@@ -18,7 +18,7 @@
 #ifndef GENERALPROPERTIESFORM_H
 #define GENERALPROPERTIESFORM_H
 
-#include "base/PropertiesFormBase.h"
+#include "PropertiesFormBase.h"
 
 #include <wx/textfile.h>
 #include <wx/msgdlg.h>

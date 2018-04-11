@@ -390,6 +390,7 @@ void ChartView::OnTreeItemSelectionChanged(wxTreeEvent& event)
 
 void ChartView::BuildColourList()
 {
+    m_colourList.push_back(wxColour(60, 60, 60));
     m_colourList.push_back(wxColour(255, 0, 0));
     m_colourList.push_back(wxColour(0, 0, 255));
     m_colourList.push_back(wxColour(0, 255, 0));

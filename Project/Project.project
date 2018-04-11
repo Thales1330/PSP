@@ -80,6 +80,7 @@
     <VirtualDirectory Name="controller">
       <VirtualDirectory Name="forms">
         <VirtualDirectory Name="properties">
+          <File Name="ImportForm.cpp"/>
           <File Name="GeneralPropertiesForm.cpp"/>
           <File Name="SimulationsSettingsForm.cpp"/>
           <File Name="AboutForm.cpp"/>
@@ -232,6 +233,7 @@
           <File Name="TransformerForm.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="properties">
+          <File Name="ImportForm.h"/>
           <File Name="GeneralPropertiesForm.h"/>
           <File Name="SimulationsSettingsForm.h"/>
           <File Name="AboutForm.h"/>
@@ -254,30 +256,30 @@
   </VirtualDirectory>
   <VirtualDirectory Name="wxcrafter">
     <VirtualDirectory Name="resources">
+      <File Name="WorkspaceBitmaps.cpp"/>
+      <File Name="PropertiesFormBitmaps.cpp"/>
+      <File Name="MainFrameBitmaps.cpp"/>
+      <File Name="ElementFormBitmaps.cpp"/>
+      <File Name="ControlEditorBitmaps.cpp"/>
+      <File Name="ChartViewBitmaps.cpp"/>
+      <File Name="DataReportBitmaps.cpp"/>
       <File Name="BusFormBitmaps.cpp"/>
-      <File Name="base/ChartViewBitmaps.cpp"/>
-      <File Name="base/ControlEditorBitmaps.cpp"/>
-      <File Name="base/DataReportBitmaps.cpp"/>
-      <File Name="base/ElementFormBitmaps.cpp"/>
-      <File Name="base/MainFrameBitmaps.cpp"/>
-      <File Name="base/PropertiesFormBitmaps.cpp"/>
-      <File Name="base/WorkspaceBitmaps.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="base">
-      <File Name="base/ChartViewBase.h"/>
-      <File Name="base/ChartViewBase.cpp"/>
-      <File Name="base/ControlEditorBase.h"/>
-      <File Name="base/ControlEditorBase.cpp"/>
-      <File Name="base/DataReportBase.h"/>
-      <File Name="base/DataReportBase.cpp"/>
-      <File Name="base/ElementFormBase.h"/>
-      <File Name="base/ElementFormBase.cpp"/>
-      <File Name="base/MainFrameBase.h"/>
-      <File Name="base/MainFrameBase.cpp"/>
-      <File Name="base/PropertiesFormBase.h"/>
-      <File Name="base/PropertiesFormBase.cpp"/>
-      <File Name="base/WorkspaceBase.h"/>
-      <File Name="base/WorkspaceBase.cpp"/>
+      <File Name="WorkspaceBase.cpp"/>
+      <File Name="WorkspaceBase.h"/>
+      <File Name="PropertiesFormBase.cpp"/>
+      <File Name="PropertiesFormBase.h"/>
+      <File Name="MainFrameBase.cpp"/>
+      <File Name="MainFrameBase.h"/>
+      <File Name="ElementFormBase.cpp"/>
+      <File Name="ElementFormBase.h"/>
+      <File Name="ControlEditorBase.cpp"/>
+      <File Name="ControlEditorBase.h"/>
+      <File Name="ChartViewBase.cpp"/>
+      <File Name="ChartViewBase.h"/>
+      <File Name="DataReportBase.cpp"/>
+      <File Name="DataReportBase.h"/>
     </VirtualDirectory>
     <File Name="MainFrame.wxcp"/>
     <File Name="Workspace.wxcp"/>

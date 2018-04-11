@@ -18,7 +18,7 @@
 #ifndef SYNCMACHINEFORM_H
 #define SYNCMACHINEFORM_H
 
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 class GeneratorStabForm;
 class SyncGenerator;

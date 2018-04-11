@@ -26,7 +26,7 @@
 #include <wx/clipbrd.h>
 #include <wx/tipwin.h>
 
-#include "base/WorkspaceBase.h"
+#include "WorkspaceBase.h"
 #include "Bus.h"
 
 #include "ControlEditor.h"

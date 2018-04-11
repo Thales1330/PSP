@@ -26,6 +26,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
                                double initAngle,
                                double accFactor)
 {
+    double radInitAngle = wxDegToRad(initAngle);
     // Calculate the Ybus.
     if(!GetYBus(m_yBus, systemPowerBase)) {
         m_errorMsg = _("No buses found on the system.");
@@ -73,9 +74,10 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
         // Fill the voltages array
         if(data.isVoltageControlled && busType[busNumber] != BUS_PQ) {
-            voltage.push_back(std::complex<double>(data.controlledVoltage, 0.0));
+            voltage.push_back(std::complex<double>(data.controlledVoltage * std::cos(radInitAngle),
+                                                   data.controlledVoltage * std::sin(radInitAngle)));
         } else {
-            voltage.push_back(std::complex<double>(1.0, 0.0));
+            voltage.push_back(std::complex<double>(std::cos(radInitAngle), std::sin(radInitAngle)));
         }
 
         // Fill the power array

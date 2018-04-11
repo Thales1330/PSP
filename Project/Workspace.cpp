@@ -15,34 +15,35 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Workspace.h"
 #include "Camera.h"
 #include "Element.h"
+#include "Workspace.h"
 //#include "Bus.h"
-#include "Line.h"
-#include "Transformer.h"
-#include "SyncGenerator.h"
-#include "IndMotor.h"
-#include "SyncMotor.h"
-#include "Load.h"
-#include "Inductor.h"
 #include "Capacitor.h"
 #include "ElementDataObject.h"
+#include "IndMotor.h"
+#include "Inductor.h"
+#include "Line.h"
+#include "Load.h"
+#include "SyncGenerator.h"
+#include "SyncMotor.h"
+#include "Transformer.h"
 
 #include "Text.h"
 
-#include "PowerFlow.h"
-#include "Fault.h"
 #include "Electromechanical.h"
+#include "Fault.h"
+#include "PowerFlow.h"
 
-#include "ElementPlotData.h"
 #include "ChartView.h"
+#include "ElementPlotData.h"
 
 #include "PropertiesData.h"
 
 // Workspace
 Workspace::Workspace() : WorkspaceBase(NULL) {}
-Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wxGLContext* sharedGLContext) : WorkspaceBase(parent)
+Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wxGLContext* sharedGLContext)
+    : WorkspaceBase(parent)
 {
     m_timer->Start();
     m_name = name;
@@ -51,9 +52,7 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 
-    for(int i = 0; i < NUM_ELEMENTS; ++i) {
-        m_elementNumber[i] = 1;
-    }
+    for(int i = 0; i < NUM_ELEMENTS; ++i) { m_elementNumber[i] = 1; }
 
     const int widths[4] = {-3, -1, 100, 100};
     m_statusBar->SetStatusWidths(4, widths);
@@ -78,7 +77,7 @@ Workspace::~Workspace()
 void Workspace::OnPaint(wxPaintEvent& event)
 {
     if(!m_glCanvas->IsShown()) return;
-    
+
     wxPaintDC dc(m_glCanvas);
     m_glContext->SetCurrent(*m_glCanvas);
     SetViewport();
@@ -182,9 +181,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
         }
         // The line element can have an indefined number of points.
         if(!foundElement) {
-            if(typeid(*newElement) == typeid(Line)) {
-                newElement->AddPoint(m_camera->ScreenToWorld(clickPoint));
-            }
+            if(typeid(*newElement) == typeid(Line)) { newElement->AddPoint(m_camera->ScreenToWorld(clickPoint)); }
         }
         foundElement = true;
     } else {
@@ -217,9 +214,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
                     clickPickbox = true;
                 }
                 // If didn't found a pickbox, move the element
-                if(!clickPickbox) {
-                    m_mode = MODE_MOVE_ELEMENT;
-                }
+                if(!clickPickbox) { m_mode = MODE_MOVE_ELEMENT; }
             }
 
             // Click in a switch.
@@ -430,9 +425,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
         } else {
             // Deselect
             if(!event.ControlDown()) {
-                if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-                    element->SetSelected(false);
-                }
+                if(!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) { element->SetSelected(false); }
             }
 
             if(element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
@@ -454,9 +447,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
                 text->SetSelected(false);
             }
         } else if(!event.ControlDown()) {
-            if(!text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-                text->SetSelected(false);
-            }
+            if(!text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) { text->SetSelected(false); }
         }
     }
 
@@ -464,17 +455,11 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
         std::rotate(itnp, itnp + 1, m_elementList.end());
         updateVoltages = true;
     }
-    if(!foundPickbox) {
-        SetCursor(wxCURSOR_ARROW);
-    }
+    if(!foundPickbox) { SetCursor(wxCURSOR_ARROW); }
 
-    if(m_mode != MODE_INSERT) {
-        m_mode = MODE_EDIT;
-    }
+    if(m_mode != MODE_INSERT) { m_mode = MODE_EDIT; }
 
-    if(updateVoltages) {
-        ValidateElementsVoltages();
-    }
+    if(updateVoltages) { ValidateElementsVoltages(); }
 
     if(m_continuousCalc && m_disconnectedElement) {
         m_disconnectedElement = false;
@@ -705,9 +690,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                 }
             } break;
             case 'F': {
-                if(event.GetModifiers() == wxMOD_SHIFT) {
-                    Fit();
-                }
+                if(event.GetModifiers() == wxMOD_SHIFT) { Fit(); }
             } break;
             case 'R':  // Rotate the selected elements.
             {
@@ -818,9 +801,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             } break;
             case 'V': {
                 if(!insertingElement) {
-                    if(event.GetModifiers() == wxMOD_CONTROL) {
-                        Paste();
-                    }
+                    if(event.GetModifiers() == wxMOD_CONTROL) { Paste(); }
                 }
             } break;
             default:
@@ -892,9 +873,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
                 // Parent's element rotating...
                 for(int i = 0; i < (int)iElement->GetParentList().size(); i++) {
                     Element* parent = iElement->GetParentList()[i];
-                    if(parent == element) {
-                        iElement->RotateNode(parent);
-                    }
+                    if(parent == element) { iElement->RotateNode(parent); }
                 }
             }
             Redraw();
@@ -906,9 +885,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
                 // Parent's element rotating...
                 for(int i = 0; i < (int)iElement->GetParentList().size(); i++) {
                     Element* parent = iElement->GetParentList()[i];
-                    if(parent == element) {
-                        iElement->RotateNode(parent, false);
-                    }
+                    if(parent == element) { iElement->RotateNode(parent, false); }
                 }
             }
             Redraw();
@@ -930,9 +907,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
                     std::vector<Element*> parentList = element->GetParentList();
                     for(auto itp = parentList.begin(), itEnd = parentList.end(); itp != itEnd; ++itp) {
                         Element* parent = *itp;
-                        if(parent) {
-                            parent->RemoveChild(element);
-                        }
+                        if(parent) { parent->RemoveChild(element); }
                     }
 
                     for(auto itt = m_textList.begin(); itt != m_textList.end(); ++itt) {
@@ -1005,9 +980,7 @@ void Workspace::DeleteSelectedElements()
             std::vector<Element*> parentList = element->GetParentList();
             for(auto itp = parentList.begin(), itEnd = parentList.end(); itp != itEnd; ++itp) {
                 Element* parent = *itp;
-                if(parent) {
-                    parent->RemoveChild(element);
-                }
+                if(parent) { parent->RemoveChild(element); }
             }
 
             for(auto itt = m_textList.begin(); itt != m_textList.end(); ++itt) {
@@ -1060,9 +1033,7 @@ void Workspace::Fit()
     wxPoint2DDouble leftUpCorner(0, 0);
     wxPoint2DDouble rightDownCorner(0, 0);
     std::vector<Element*> elementList = GetElementList();
-    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
-        elementList.push_back(*it);
-    }
+    for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) { elementList.push_back(*it); }
 
     if(!GetElementsCorners(leftUpCorner, rightDownCorner, elementList)) return;
     wxPoint2DDouble middleCoords = (leftUpCorner + rightDownCorner) / 2.0;
@@ -1137,8 +1108,15 @@ void Workspace::ValidateElementsVoltages()
 
 bool Workspace::RunPowerFlow()
 {
+    auto simProp = m_properties->GetSimulationPropertiesData();
+    double basePower = simProp.basePower;
+    if(simProp.basePowerUnit == UNIT_MVA)
+        basePower *= 1e6;
+    else if(simProp.basePowerUnit == UNIT_kVA)
+        basePower *= 1e3;
     PowerFlow pf(GetElementList());
-    bool result = pf.RunGaussSeidel();
+    bool result = pf.RunGaussSeidel(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+                                    simProp.initAngle, simProp.accFator);
     if(!result) {
         wxMessageDialog msgDialog(this, pf.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
@@ -1181,15 +1159,11 @@ void Workspace::CopySelection()
             bus->SetElectricalData(data);
             busNumber++;
         }
-        if(element->IsSelected()) {
-            selectedElements.push_back(element);
-        }
+        if(element->IsSelected()) { selectedElements.push_back(element); }
     }
     for(auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
         Text* text = *it;
-        if(text->IsSelected()) {
-            selectedElements.push_back(text);
-        }
+        if(text->IsSelected()) { selectedElements.push_back(text); }
     }
     ElementDataObject* dataObject = new ElementDataObject(selectedElements);
     if(wxTheClipboard->Open()) {

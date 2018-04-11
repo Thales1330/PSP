@@ -18,7 +18,7 @@
 #ifndef SWITCHINGFORM_H
 #define SWITCHINGFORM_H
 
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 class PowerElement;
 

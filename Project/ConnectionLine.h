@@ -43,6 +43,7 @@ class ConnectionLine : public ControlElement
     virtual void Move(wxPoint2DDouble position);
     virtual bool AppendNode(Node* node, ControlElement* parent);
     virtual void UpdatePoints();
+    virtual bool Initialize();
     virtual void SetTemporarySecondPoint(wxPoint2DDouble point) { m_tmpSndPt = point; }
     virtual wxPoint2DDouble GetMidPoint() const;
     virtual double GetOffset() const { return m_lineOffset; }

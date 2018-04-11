@@ -18,7 +18,7 @@
 #ifndef CONTROLSYSTEMTEST_H
 #define CONTROLSYSTEMTEST_H
 
-#include "base/ControlEditorBase.h"
+#include "ControlEditorBase.h"
 
 class ControlEditor;
 

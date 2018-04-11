@@ -17,7 +17,7 @@
 
 #ifndef ABOUTFORM_H
 #define ABOUTFORM_H
-#include "base/PropertiesFormBase.h"
+#include "PropertiesFormBase.h"
 
 #include <wx/textfile.h>
 #include <wx/stdpaths.h>
