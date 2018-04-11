@@ -18,7 +18,7 @@
 #ifndef IMPORTFORM_H
 #define IMPORTFORM_H
 
-#include "base/PropertiesFormBase.h"
+#include "PropertiesFormBase.h"
 
 #include <wx/geometry.h>
 #include <wx/msgdlg.h>

@@ -17,7 +17,7 @@
 
 #ifndef INDMOTORFORM_H
 #define INDMOTORFORM_H
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 class IndMotor;
 

@@ -17,7 +17,7 @@
 
 #ifndef CHARTVIEW_H
 #define CHARTVIEW_H
-#include "base/ChartViewBase.h"
+#include "ChartViewBase.h"
 #include "wxMathPlot/mathplot.h"
 
 #include <wx/msgdlg.h>

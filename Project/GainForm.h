@@ -17,7 +17,7 @@
 
 #ifndef GAINFORM_H
 #define GAINFORM_H
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 class Gain;
 

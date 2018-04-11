@@ -17,7 +17,7 @@
 
 #ifndef EXPONENTIALFORM_H
 #define EXPONENTIALFORM_H
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 class Exponential;
 

@@ -1,6 +1,6 @@
 {
  "metadata": {
-  "m_generatedFilesDir": "base/",
+  "m_generatedFilesDir": ".",
   "m_objCounter": 791,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxCDAD0InitBitmapResources",

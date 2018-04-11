@@ -18,7 +18,7 @@
 #ifndef GENERATORSTABFORM_H
 #define GENERATORSTABFORM_H
 
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 
 class SwitchingForm;
 class SyncGenerator;

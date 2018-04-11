@@ -17,7 +17,7 @@
 
 #ifndef REACTIVESHUNTELEMENTFORM_H
 #define REACTIVESHUNTELEMENTFORM_H
-#include "base/ElementFormBase.h"
+#include "ElementFormBase.h"
 #include <wx/log.h>
 
 class Capacitor;
