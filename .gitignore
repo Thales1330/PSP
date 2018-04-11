@@ -50,5 +50,6 @@ Thumbs.db
 *.xrc
 #*.workspace
 #*.project
-#Project/Project.mk
-#Project/Project.txt
+Project/Project.mk
+Project/Project.txt
+Makefile
