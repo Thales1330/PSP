@@ -2764,7 +2764,7 @@
                     }, {
                      "type": "string",
                      "m_label": "Minimum Size:",
-                     "m_value": "-1,-1"
+                     "m_value": "20,-1"
                     }, {
                      "type": "string",
                      "m_label": "Name:",
@@ -2899,7 +2899,7 @@
                     }, {
                      "type": "multi-string",
                      "m_label": "Label:",
-                     "m_value": "º"
+                     "m_value": "degrees"
                     }, {
                      "type": "string",
                      "m_label": "Wrap:",
@@ -8837,7 +8837,7 @@
           }, {
            "type": "multi-string",
            "m_label": "Label:",
-           "m_value": "Alpha 2017w45a"
+           "m_value": "Alpha 2018w15a"
           }, {
            "type": "string",
            "m_label": "Wrap:",

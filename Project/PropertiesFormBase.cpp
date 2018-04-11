@@ -277,8 +277,9 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     #endif
     
     boxSizerLvl5_17->Add(m_textCtrlPFSlackBusAngle, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlPFSlackBusAngle->SetMinSize(wxSize(20,-1));
     
-    m_staticTextDeg_1 = new wxStaticText(m_panelPF, wxID_ANY, _("º"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    m_staticTextDeg_1 = new wxStaticText(m_panelPF, wxID_ANY, _("degrees"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
     
     boxSizerLvl5_17->Add(m_staticTextDeg_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -772,7 +773,7 @@ AboutFormBase::AboutFormBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     flexGridSizer247->Add(m_staticTextVersionLabel, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_staticTextVersion = new wxStaticText(this, wxID_ANY, _("Alpha 2017w45a"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextVersion = new wxStaticText(this, wxID_ANY, _("Alpha 2018w15a"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
     flexGridSizer247->Add(m_staticTextVersion, 0, wxALL, WXC_FROM_DIP(5));
     
