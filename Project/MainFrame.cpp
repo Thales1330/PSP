@@ -63,6 +63,7 @@ MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initPro
             m_auiNotebook->Layout();
             newWorkspace->Redraw();
             newWorkspace->SetJustOpened(true);
+            newWorkspace->Fit();
             m_projectNumber++;
         }
     }
@@ -299,6 +300,7 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
         m_auiNotebook->Layout();
         newWorkspace->Redraw();
         newWorkspace->SetJustOpened(true);
+        newWorkspace->Fit();
         m_projectNumber++;
     } else {
         wxMessageDialog msgDialog(this, _("It was not possible to open the selected file."), _("Error"),

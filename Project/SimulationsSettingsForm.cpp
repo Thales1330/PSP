@@ -56,6 +56,7 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     m_textCtrlAccFactor->SetValue(Element::StringFromDouble(data.accFator));
     m_textCtrlPFTolerance->SetValue(wxString::Format("%g", data.powerFlowTolerance));
     m_textCtrlPFMaxIterations->SetValue(wxString::Format("%d", data.powerFlowMaxIterations));
+    m_textCtrlPFSlackBusAngle->SetValue(Element::StringFromDouble(data.initAngle));
     m_textCtrlTimeStep->SetValue(wxString::Format("%g", data.timeStep));
     m_textCtrlSimTime->SetValue(Element::StringFromDouble(data.stabilitySimulationTime));
     m_textCtrlFreq->SetValue(Element::StringFromDouble(data.stabilityFrequency));
