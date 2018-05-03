@@ -1,7 +1,8 @@
 <map id="Project/Text.h" name="Project/Text.h">
 <area shape="rect" id="node4" href="$_graphical_element_8h.html" title="GraphicalElement.h" alt="" coords="300,80,436,107"/>
-<area shape="rect" id="node13" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="460,80,577,107"/>
-<area shape="rect" id="node19" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="169,80,276,107"/>
-<area shape="rect" id="node5" href="$_element_8h.html" title="Element.h" alt="" coords="405,155,486,181"/>
-<area shape="rect" id="node14" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="1013,155,1144,181"/>
+<area shape="rect" id="node18" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="460,80,577,107"/>
+<area shape="rect" id="node24" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="169,80,276,107"/>
+<area shape="rect" id="node5" href="$_element_8h.html" title="Element.h" alt="" coords="461,155,542,181"/>
+<area shape="rect" id="node13" href="$_x_m_l_parser_8h.html" title="XMLParser.h" alt="" coords="917,229,1013,256"/>
+<area shape="rect" id="node19" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="1133,155,1264,181"/>
 </map>

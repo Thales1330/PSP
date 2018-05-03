@@ -1,5 +1,6 @@
 <map id="Project/IOControl.h" name="Project/IOControl.h">
-<area shape="rect" id="node2" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="499,80,622,107"/>
-<area shape="rect" id="node13" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="799,80,906,107"/>
-<area shape="rect" id="node3" href="$_element_8h.html" title="Element.h" alt="" coords="491,155,572,181"/>
+<area shape="rect" id="node2" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="570,80,693,107"/>
+<area shape="rect" id="node18" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="915,80,1022,107"/>
+<area shape="rect" id="node3" href="$_element_8h.html" title="Element.h" alt="" coords="501,155,583,181"/>
+<area shape="rect" id="node12" href="$_x_m_l_parser_8h.html" title="XMLParser.h" alt="" coords="829,229,925,256"/>
 </map>

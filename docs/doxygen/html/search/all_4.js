@@ -1,6 +1,7 @@
 var searchData=
 [
   ['ed',['ed',['../struct_sync_machine_model_data.html#ad2bda1ac696b664571e33f657f4a81b6',1,'SyncMachineModelData']]],
+  ['electricalid',['electricalID',['../struct_parse_anarede_1_1_component.html#a3c9a86b39ad81566811b5afb4eec3fa6',1,'ParseAnarede::Component::electricalID()'],['../struct_parse_anarede_1_1_power_line.html#ac623803e69933e51a92062f7850cb834',1,'ParseAnarede::PowerLine::electricalID()']]],
   ['electricalunit',['ElectricalUnit',['../_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca',1,'PowerElement.h']]],
   ['electriccalculation',['ElectricCalculation',['../class_electric_calculation.html',1,'ElectricCalculation'],['../class_electric_calculation.html#a6663e7a20e96ee975bd0f7d54b8a6f70',1,'ElectricCalculation::ElectricCalculation()']]],
   ['electriccalculation_2eh',['ElectricCalculation.h',['../_electric_calculation_8h.html',1,'']]],
@@ -13,6 +14,8 @@ var searchData=
   ['elementplotdata',['ElementPlotData',['../class_element_plot_data.html',1,'']]],
   ['elementplotdata_2eh',['ElementPlotData.h',['../_element_plot_data_8h.html',1,'']]],
   ['elementslists',['ElementsLists',['../struct_elements_lists.html',1,'']]],
+  ['elementtype',['ElementType',['../_text_8h.html#a16b11be27a8e9362dd122c4d879e01ae',1,'Text.h']]],
+  ['elementtypeanarede',['ElementTypeAnarede',['../_import_form_8h.html#af79b7ee434281f21c847fec3980be290',1,'ImportForm.h']]],
   ['eq',['eq',['../struct_sync_machine_model_data.html#a810b9e3250ebb8f3d4176f6e5a2b1076',1,'SyncMachineModelData']]],
   ['exponential',['Exponential',['../class_exponential.html',1,'']]],
   ['exponential_2eh',['Exponential.h',['../_exponential_8h.html',1,'']]],

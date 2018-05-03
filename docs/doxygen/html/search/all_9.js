@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['length',['length',['../struct_parse_anarede_1_1_component.html#a40533fa2666a27b311f7d6972f1b38c8',1,'ParseAnarede::Component']]],
   ['limiter',['Limiter',['../class_limiter.html',1,'']]],
   ['limiter_2eh',['Limiter.h',['../_limiter_8h.html',1,'']]],
   ['limiterform',['LimiterForm',['../class_limiter_form.html',1,'']]],
@@ -13,5 +14,6 @@ var searchData=
   ['load_2eh',['Load.h',['../_load_8h.html',1,'']]],
   ['loadelectricaldata',['LoadElectricalData',['../struct_load_electrical_data.html',1,'']]],
   ['loadform',['LoadForm',['../class_load_form.html',1,'']]],
-  ['loadform_2eh',['LoadForm.h',['../_load_form_8h.html',1,'']]]
+  ['loadform_2eh',['LoadForm.h',['../_load_form_8h.html',1,'']]],
+  ['loadpower',['loadPower',['../struct_parse_anarede_1_1_bus_data.html#a7d88013f23f3730343a8e83beba2a604',1,'ParseAnarede::BusData']]]
 ];

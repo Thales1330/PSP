@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['xd',['xd',['../struct_sync_machine_model_data.html#af75546805bf92eb7a8a7280f7964b330',1,'SyncMachineModelData']]],
-  ['xq',['xq',['../struct_sync_machine_model_data.html#af81596945918e86e56f5822a0ba97fbc',1,'SyncMachineModelData']]]
+  ['workspace',['Workspace',['../class_workspace.html',1,'']]],
+  ['workspace_2eh',['Workspace.h',['../_workspace_8h.html',1,'']]],
+  ['worldtoscreen',['WorldToScreen',['../class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8',1,'Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const'],['../class_element.html#a147dd55d902171b212168ffde7262343',1,'Element::WorldToScreen(wxPoint2DDouble position, wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const']]]
 ];

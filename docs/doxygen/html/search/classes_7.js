@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['importform',['ImportForm',['../class_import_form.html',1,'']]],
+  ['indelementdata',['IndElementData',['../struct_parse_anarede_1_1_ind_element_data.html',1,'ParseAnarede']]],
+  ['indgendata',['IndGenData',['../struct_parse_anarede_1_1_ind_gen_data.html',1,'ParseAnarede']]],
   ['indmotor',['IndMotor',['../class_ind_motor.html',1,'']]],
   ['indmotorelectricaldata',['IndMotorElectricalData',['../struct_ind_motor_electrical_data.html',1,'']]],
   ['indmotorform',['IndMotorForm',['../class_ind_motor_form.html',1,'']]],

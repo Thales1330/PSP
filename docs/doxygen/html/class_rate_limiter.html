@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>RateLimiter Class Reference</title>
+<title>Power System Platform: RateLimiter Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,6 +29,11 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Power System Platform
+   &#160;<span id="projectnumber">2018w15a</span>
+   </div>
+  </td>
  </tr>
  </tbody>
 </table>
@@ -132,10 +137,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetUpLimit</b> (doubl
 <tr class="memitem:ac9e938191a9cb73f2062424bb7ef3d6a"><td class="memItemLeft" align="right" valign="top"><a id="ac9e938191a9cb73f2062424bb7ef3d6a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLowLimit</b> (double lowLimit)</td></tr>
 <tr class="separator:ac9e938191a9cb73f2062424bb7ef3d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2697e0f56b574739651fa2126b315e29"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rate_limiter.html#a2697e0f56b574739651fa2126b315e29">Solve</a> (double input, double timeStep)</td></tr>
-<tr class="memdesc:a2697e0f56b574739651fa2126b315e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the rate and limits it if exceeds.<br />
-  <a href="#a2697e0f56b574739651fa2126b315e29">More...</a><br /></td></tr>
-<tr class="separator:a2697e0f56b574739651fa2126b315e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a716561cd4fbb010422a4a8bdb529077c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rate_limiter.html#a716561cd4fbb010422a4a8bdb529077c">Solve</a> (double *input, double timeStep)</td></tr>
+<tr class="memdesc:a716561cd4fbb010422a4a8bdb529077c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the rate and limits it if exceeds.<br />
+  <a href="#a716561cd4fbb010422a4a8bdb529077c">More...</a><br /></td></tr>
+<tr class="separator:a716561cd4fbb010422a4a8bdb529077c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbeb2b94724c303870b14bcab1ca6604"><td class="memItemLeft" align="right" valign="top"><a id="abbeb2b94724c303870b14bcab1ca6604"></a>
+virtual rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><b>SaveElement</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementListNode)</td></tr>
+<tr class="separator:abbeb2b94724c303870b14bcab1ca6604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc96cbec251712013160e8bb364aa49"><td class="memItemLeft" align="right" valign="top"><a id="a0bc96cbec251712013160e8bb364aa49"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenElement</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a0bc96cbec251712013160e8bb364aa49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f1152238b97fcf76a0bee258e971823"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rate_limiter.html#a4f1152238b97fcf76a0bee258e971823">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a4f1152238b97fcf76a0bee258e971823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <a href="#a4f1152238b97fcf76a0bee258e971823">More...</a><br /></td></tr>
 <tr class="separator:a4f1152238b97fcf76a0bee258e971823"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,6 +181,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsSolved</b> 
 <tr class="memitem:a899b994168cf0c98695e82a4f3e7c98b inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a899b994168cf0c98695e82a4f3e7c98b"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetSolved</b> (bool solved=true)</td></tr>
 <tr class="separator:a899b994168cf0c98695e82a4f3e7c98b inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40eeb299e10b3ccbad58c22023b2609 inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="ad40eeb299e10b3ccbad58c22023b2609"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> ()</td></tr>
+<tr class="separator:ad40eeb299e10b3ccbad58c22023b2609 inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a038e940fc33ac3e443502169104d7ebd inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a038e940fc33ac3e443502169104d7ebd"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOutput</b> () const</td></tr>
 <tr class="separator:a038e940fc33ac3e443502169104d7ebd inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -368,6 +382,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (
 <tr class="memitem:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">PointToLineDistance</a> (wxPoint2DDouble point, int *segmentNumber=NULL) const</td></tr>
 <tr class="memdesc:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between a line (formed by point list) and a point.  <a href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">More...</a><br /></td></tr>
 <tr class="separator:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab84987a1ba6ddc82cc2316d816bf6d06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveCADProperties</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ada74d29413484cfe1f0beb039892d4c8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenCADProperties</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -460,6 +480,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_class_control_element"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_control_element')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_control_element.html">ControlElement</a></td></tr>
+<tr class="memitem:a8af85e268ffdad900f94f83105f1ed19 inherit pub_static_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a8af85e268ffdad900f94f83105f1ed19"></a>
+static <a class="el" href="class_control_element.html">ControlElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetControlElementFromID</b> (std::vector&lt; <a class="el" href="class_control_element.html">ControlElement</a> *&gt; elementList, int id)</td></tr>
+<tr class="separator:a8af85e268ffdad900f94f83105f1ed19 inherit pub_static_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_element"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_element')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_element.html">Element</a></td></tr>
 <tr class="memitem:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">DoubleFromString</a> (wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</td></tr>
 <tr class="memdesc:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a double value from a string. Show a error message if the conversion fail.  <a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">More...</a><br /></td></tr>
@@ -470,6 +494,13 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#abb2e253ec1e86353cd7160209c96553c">StringFromDouble</a> (double value, int minDecimal=1)</td></tr>
 <tr class="memdesc:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a double value to string.  <a href="class_element.html#abb2e253ec1e86353cd7160209c96553c">More...</a><br /></td></tr>
 <tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_control_element"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_control_element')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_control_element.html">ControlElement</a></td></tr>
+<tr class="memitem:a0bd1ab46b6dca2838d01e13714f2f15d inherit pro_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a0bd1ab46b6dca2838d01e13714f2f15d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveControlNodes</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a0bd1ab46b6dca2838d01e13714f2f15d inherit pro_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9374cc5f89f4bfcd84d5db171ee38973 inherit pro_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a9374cc5f89f4bfcd84d5db171ee38973"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenControlNodes</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a9374cc5f89f4bfcd84d5db171ee38973 inherit pro_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Limits the rising and/or falling rate.<br />
@@ -710,8 +741,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a2697e0f56b574739651fa2126b315e29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2697e0f56b574739651fa2126b315e29">&#9670;&nbsp;</a></span>Solve()</h2>
+<a id="a716561cd4fbb010422a4a8bdb529077c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716561cd4fbb010422a4a8bdb529077c">&#9670;&nbsp;</a></span>Solve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -722,7 +753,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">bool RateLimiter::Solve </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
