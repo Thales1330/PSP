@@ -1,8 +1,9 @@
 <map id="Project/Inductor.h" name="Project/Inductor.h">
-<area shape="rect" id="node2" href="$_shunt_8h.html" title="Shunt.h" alt="" coords="1077,80,1143,107"/>
-<area shape="rect" id="node3" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="1019,229,1137,256"/>
-<area shape="rect" id="node18" href="$_bus_8h.html" title="Bus.h" alt="" coords="1115,155,1171,181"/>
-<area shape="rect" id="node4" href="$_element_8h.html" title="Element.h" alt="" coords="491,304,572,331"/>
-<area shape="rect" id="node13" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="1013,304,1143,331"/>
-<area shape="rect" id="node19" href="$_bus_form_8h.html" title="BusForm.h" alt="" coords="1185,229,1272,256"/>
+<area shape="rect" id="node2" href="$_shunt_8h.html" title="Shunt.h" alt="" coords="1197,80,1263,107"/>
+<area shape="rect" id="node3" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="1139,229,1257,256"/>
+<area shape="rect" id="node23" href="$_bus_8h.html" title="Bus.h" alt="" coords="1235,155,1291,181"/>
+<area shape="rect" id="node4" href="$_element_8h.html" title="Element.h" alt="" coords="555,304,636,331"/>
+<area shape="rect" id="node18" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="1133,304,1263,331"/>
+<area shape="rect" id="node13" href="$_x_m_l_parser_8h.html" title="XMLParser.h" alt="" coords="917,379,1013,405"/>
+<area shape="rect" id="node24" href="$_bus_form_8h.html" title="BusForm.h" alt="" coords="1297,229,1384,256"/>
 </map>

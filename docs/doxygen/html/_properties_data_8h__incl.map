@@ -1,5 +1,6 @@
 <map id="Project/PropertiesData.h" name="Project/PropertiesData.h">
-<area shape="rect" id="node3" href="$_element_8h.html" title="Element.h" alt="" coords="491,155,572,181"/>
-<area shape="rect" id="node12" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="569,80,686,107"/>
-<area shape="rect" id="node13" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="1013,155,1143,181"/>
+<area shape="rect" id="node3" href="$_element_8h.html" title="Element.h" alt="" coords="553,155,635,181"/>
+<area shape="rect" id="node17" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="631,80,749,107"/>
+<area shape="rect" id="node12" href="$_x_m_l_parser_8h.html" title="XMLParser.h" alt="" coords="917,229,1013,256"/>
+<area shape="rect" id="node18" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="1133,155,1263,181"/>
 </map>

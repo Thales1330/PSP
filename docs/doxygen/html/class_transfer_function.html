@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TransferFunction Class Reference</title>
+<title>Power System Platform: TransferFunction Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,6 +29,11 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Power System Platform
+   &#160;<span id="projectnumber">2018w15a</span>
+   </div>
+  </td>
  </tr>
  </tbody>
 </table>
@@ -149,9 +154,15 @@ virtual <a class="el" href="struct_transfer_function_1_1_space_state.html">Space
 <tr class="memitem:a5f09dd8e5c016a90c69a8e38ef302c8a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#a5f09dd8e5c016a90c69a8e38ef302c8a">CalculateSpaceState</a> (int maxIteration=100, double error=1e-3)</td></tr>
 <tr class="memdesc:a5f09dd8e5c016a90c69a8e38ef302c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the transfer function to space state on controllable canonical form (CCF).  <a href="#a5f09dd8e5c016a90c69a8e38ef302c8a">More...</a><br /></td></tr>
 <tr class="separator:a5f09dd8e5c016a90c69a8e38ef302c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab23ed101f7d4e953e4df0d4d480d9798"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#ab23ed101f7d4e953e4df0d4d480d9798">Solve</a> (double input, double timeStep)</td></tr>
-<tr class="memdesc:ab23ed101f7d4e953e4df0d4d480d9798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the time response by the space state form of transfer function.  <a href="#ab23ed101f7d4e953e4df0d4d480d9798">More...</a><br /></td></tr>
-<tr class="separator:ab23ed101f7d4e953e4df0d4d480d9798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa0fe5b1078739da321b835e6ef91449"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#afa0fe5b1078739da321b835e6ef91449">Solve</a> (double *input, double timeStep)</td></tr>
+<tr class="memdesc:afa0fe5b1078739da321b835e6ef91449"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the time response by the space state form of transfer function.  <a href="#afa0fe5b1078739da321b835e6ef91449">More...</a><br /></td></tr>
+<tr class="separator:afa0fe5b1078739da321b835e6ef91449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d7f4ed84d839ded8b84df5bd17a3f6"><td class="memItemLeft" align="right" valign="top"><a id="a58d7f4ed84d839ded8b84df5bd17a3f6"></a>
+virtual rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><b>SaveElement</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementListNode)</td></tr>
+<tr class="separator:a58d7f4ed84d839ded8b84df5bd17a3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad26f7dad939bcc355c96a0adb6d4d33e"><td class="memItemLeft" align="right" valign="top"><a id="ad26f7dad939bcc355c96a0adb6d4d33e"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenElement</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ad26f7dad939bcc355c96a0adb6d4d33e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3312f7e9499aa99742093d3b60547862"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_transfer_function.html#a3312f7e9499aa99742093d3b60547862">GetCopy</a> ()</td></tr>
 <tr class="memdesc:a3312f7e9499aa99742093d3b60547862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a the element copy.  <a href="#a3312f7e9499aa99742093d3b60547862">More...</a><br /></td></tr>
 <tr class="separator:a3312f7e9499aa99742093d3b60547862"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +194,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsSolved</b> 
 <tr class="memitem:a899b994168cf0c98695e82a4f3e7c98b inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a899b994168cf0c98695e82a4f3e7c98b"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetSolved</b> (bool solved=true)</td></tr>
 <tr class="separator:a899b994168cf0c98695e82a4f3e7c98b inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40eeb299e10b3ccbad58c22023b2609 inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="ad40eeb299e10b3ccbad58c22023b2609"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> ()</td></tr>
+<tr class="separator:ad40eeb299e10b3ccbad58c22023b2609 inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a038e940fc33ac3e443502169104d7ebd inherit pub_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a038e940fc33ac3e443502169104d7ebd"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOutput</b> () const</td></tr>
 <tr class="separator:a038e940fc33ac3e443502169104d7ebd inherit pub_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -381,6 +395,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (
 <tr class="memitem:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">PointToLineDistance</a> (wxPoint2DDouble point, int *segmentNumber=NULL) const</td></tr>
 <tr class="memdesc:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between a line (formed by point list) and a point.  <a href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">More...</a><br /></td></tr>
 <tr class="separator:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab84987a1ba6ddc82cc2316d816bf6d06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveCADProperties</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ada74d29413484cfe1f0beb039892d4c8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenCADProperties</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -393,6 +413,13 @@ virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><b>GetSupers
 <tr class="memitem:aec2d0676d112ccf849c0d3d6f3fee461"><td class="memItemLeft" align="right" valign="top"><a id="aec2d0676d112ccf849c0d3d6f3fee461"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>GetTFString</b> (wxString &amp;numerator, wxString &amp;denominator)</td></tr>
 <tr class="separator:aec2d0676d112ccf849c0d3d6f3fee461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_control_element"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_control_element')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_control_element.html">ControlElement</a></td></tr>
+<tr class="memitem:a0bd1ab46b6dca2838d01e13714f2f15d inherit pro_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a0bd1ab46b6dca2838d01e13714f2f15d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveControlNodes</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a0bd1ab46b6dca2838d01e13714f2f15d inherit pro_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9374cc5f89f4bfcd84d5db171ee38973 inherit pro_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a9374cc5f89f4bfcd84d5db171ee38973"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenControlNodes</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a9374cc5f89f4bfcd84d5db171ee38973 inherit pro_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -512,6 +539,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_class_control_element"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_control_element')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_control_element.html">ControlElement</a></td></tr>
+<tr class="memitem:a8af85e268ffdad900f94f83105f1ed19 inherit pub_static_methods_class_control_element"><td class="memItemLeft" align="right" valign="top"><a id="a8af85e268ffdad900f94f83105f1ed19"></a>
+static <a class="el" href="class_control_element.html">ControlElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetControlElementFromID</b> (std::vector&lt; <a class="el" href="class_control_element.html">ControlElement</a> *&gt; elementList, int id)</td></tr>
+<tr class="separator:a8af85e268ffdad900f94f83105f1ed19 inherit pub_static_methods_class_control_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_element"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_element')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_element.html">Element</a></td></tr>
 <tr class="memitem:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">DoubleFromString</a> (wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</td></tr>
 <tr class="memdesc:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a double value from a string. Show a error message if the conversion fail.  <a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">More...</a><br /></td></tr>
@@ -806,8 +837,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ab23ed101f7d4e953e4df0d4d480d9798"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab23ed101f7d4e953e4df0d4d480d9798">&#9670;&nbsp;</a></span>Solve()</h2>
+<a id="afa0fe5b1078739da321b835e6ef91449"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa0fe5b1078739da321b835e6ef91449">&#9670;&nbsp;</a></span>Solve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -818,7 +849,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">bool TransferFunction::Solve </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>

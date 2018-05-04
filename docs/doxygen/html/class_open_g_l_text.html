@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OpenGLText Class Reference</title>
+<title>Power System Platform: OpenGLText Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,6 +29,11 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Power System Platform
+   &#160;<span id="projectnumber">2018w15a</span>
+   </div>
+  </td>
  </tr>
  </tbody>
 </table>
@@ -83,9 +88,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7201f9815214fd110e21b9deeb0b2ba"><td class="memItemLeft" align="right" valign="top"><a id="aa7201f9815214fd110e21b9deeb0b2ba"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>OpenGLText</b> (wxString text)</td></tr>
 <tr class="separator:aa7201f9815214fd110e21b9deeb0b2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ea61e3a3db2e681b89c8474d6950ba9"><td class="memItemLeft" align="right" valign="top"><a id="a1ea61e3a3db2e681b89c8474d6950ba9"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Draw</b> (wxPoint2DDouble position) const</td></tr>
-<tr class="separator:a1ea61e3a3db2e681b89c8474d6950ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d0eaf6bfbd42dc87a4c5302363cc02a"><td class="memItemLeft" align="right" valign="top"><a id="a7d0eaf6bfbd42dc87a4c5302363cc02a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Draw</b> (wxPoint2DDouble position, double angle=0.0) const</td></tr>
+<tr class="separator:a7d0eaf6bfbd42dc87a4c5302363cc02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32cd2f8caedc3ac7989dd56a9bb6934d"><td class="memItemLeft" align="right" valign="top"><a id="a32cd2f8caedc3ac7989dd56a9bb6934d"></a>
 virtual <a class="el" href="class_open_g_l_text.html">OpenGLText</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetCopy</b> ()</td></tr>
 <tr class="separator:a32cd2f8caedc3ac7989dd56a9bb6934d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,6 +106,18 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>GetWidth</b> (
 <tr class="memitem:aa2e1bd352827e31ae450e524623c9913"><td class="memItemLeft" align="right" valign="top"><a id="aa2e1bd352827e31ae450e524623c9913"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>GetHeight</b> () const</td></tr>
 <tr class="separator:aa2e1bd352827e31ae450e524623c9913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b9071328c738490d8131a8d7c459a3"><td class="memItemLeft" align="right" valign="top"><a id="ac5b9071328c738490d8131a8d7c459a3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFontSize</b> (int fontSize)</td></tr>
+<tr class="separator:ac5b9071328c738490d8131a8d7c459a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6168f7a2106f4e7ed1abfc130d2e8360"><td class="memItemLeft" align="right" valign="top"><a id="a6168f7a2106f4e7ed1abfc130d2e8360"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFontWeight</b> (wxFontWeight fontWeight)</td></tr>
+<tr class="separator:a6168f7a2106f4e7ed1abfc130d2e8360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeeb0c2ebd5be0f2c1055e29f92367ad"><td class="memItemLeft" align="right" valign="top"><a id="adeeb0c2ebd5be0f2c1055e29f92367ad"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFontStyle</b> (wxFontStyle fontStyle)</td></tr>
+<tr class="separator:adeeb0c2ebd5be0f2c1055e29f92367ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0dc9685a1a1383b9ae348cf85b12792"><td class="memItemLeft" align="right" valign="top"><a id="af0dc9685a1a1383b9ae348cf85b12792"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFontFamily</b> (wxFontFamily fontFamily)</td></tr>
+<tr class="separator:af0dc9685a1a1383b9ae348cf85b12792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e2b70ce262eb4048239fb933aa339fd"><td class="memItemLeft" align="right" valign="top"><a id="a5e2b70ce262eb4048239fb933aa339fd"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsTextureOK</b> ()</td></tr>
 <tr class="separator:a5e2b70ce262eb4048239fb933aa339fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,6 +145,15 @@ wxString&#160;</td><td class="memItemRight" valign="bottom"><b>m_text</b> = _(&q
 <tr class="memitem:afda88b02e1f15a4c9a7ac63edd9b2165"><td class="memItemLeft" align="right" valign="top"><a id="afda88b02e1f15a4c9a7ac63edd9b2165"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontSize</b> = 10</td></tr>
 <tr class="separator:afda88b02e1f15a4c9a7ac63edd9b2165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2efce874f57fe96edbae237b455d79ad"><td class="memItemLeft" align="right" valign="top"><a id="a2efce874f57fe96edbae237b455d79ad"></a>
+wxFontWeight&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontWeight</b> = wxFONTWEIGHT_NORMAL</td></tr>
+<tr class="separator:a2efce874f57fe96edbae237b455d79ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda10a4fd52f04597049f9274e486aa3"><td class="memItemLeft" align="right" valign="top"><a id="afda10a4fd52f04597049f9274e486aa3"></a>
+wxFontStyle&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontStyle</b> = wxFONTSTYLE_NORMAL</td></tr>
+<tr class="separator:afda10a4fd52f04597049f9274e486aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a553a72f48e458380c402493eda9e6854"><td class="memItemLeft" align="right" valign="top"><a id="a553a72f48e458380c402493eda9e6854"></a>
+wxFontFamily&#160;</td><td class="memItemRight" valign="bottom"><b>m_fontFamily</b> = wxFONTFAMILY_DEFAULT</td></tr>
+<tr class="separator:a553a72f48e458380c402493eda9e6854"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac19769336db8a13dfdaf2c3254c8e7bd"><td class="memItemLeft" align="right" valign="top"><a id="ac19769336db8a13dfdaf2c3254c8e7bd"></a>
 wxBitmap&#160;</td><td class="memItemRight" valign="bottom"><b>m_bitmap</b> = wxNullBitmap</td></tr>
 <tr class="separator:ac19769336db8a13dfdaf2c3254c8e7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>

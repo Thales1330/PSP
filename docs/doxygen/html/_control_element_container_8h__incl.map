@@ -1,17 +1,19 @@
 <map id="Project/ControlElementContainer.h" name="Project/ControlElementContainer.h">
-<area shape="rect" id="node3" href="$_connection_line_8h.html" title="ConnectionLine.h" alt="" coords="464,155,587,181"/>
-<area shape="rect" id="node14" href="$_constant_8h.html" title="Constant.h" alt="" coords="5,155,91,181"/>
-<area shape="rect" id="node18" href="$_exponential_8h.html" title="Exponential.h" alt="" coords="611,155,712,181"/>
-<area shape="rect" id="node19" href="$_gain_8h.html" title="Gain.h" alt="" coords="269,155,329,181"/>
-<area shape="rect" id="node20" href="$_i_o_control_8h.html" title="IOControl.h" alt="" coords="353,155,439,181"/>
-<area shape="rect" id="node21" href="$_limiter_8h.html" title="Limiter.h" alt="" coords="593,80,665,107"/>
-<area shape="rect" id="node22" href="$_multiplier_8h.html" title="Multiplier.h" alt="" coords="689,80,775,107"/>
-<area shape="rect" id="node24" href="$_rate_limiter_8h.html" title="RateLimiter.h" alt="" coords="895,80,993,107"/>
-<area shape="rect" id="node25" href="$_sum_8h.html" title="Sum.h" alt="" coords="1018,80,1078,107"/>
-<area shape="rect" id="node26" href="$_transfer_function_8h.html" title="TransferFunction.h" alt="" coords="115,155,245,181"/>
-<area shape="rect" id="node27" href="$_divider_8h.html" title="Divider.h" alt="" coords="799,80,870,107"/>
-<area shape="rect" id="node4" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="519,229,641,256"/>
-<area shape="rect" id="node5" href="$_element_8h.html" title="Element.h" alt="" coords="539,304,621,331"/>
-<area shape="rect" id="node16" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="121,229,228,256"/>
-<area shape="rect" id="node23" href="$_math_operation_8h.html" title="MathOperation.h" alt="" coords="787,155,906,181"/>
+<area shape="rect" id="node3" href="$_connection_line_8h.html" title="ConnectionLine.h" alt="" coords="859,155,982,181"/>
+<area shape="rect" id="node19" href="$_constant_8h.html" title="Constant.h" alt="" coords="354,155,439,181"/>
+<area shape="rect" id="node23" href="$_exponential_8h.html" title="Exponential.h" alt="" coords="953,80,1054,107"/>
+<area shape="rect" id="node24" href="$_gain_8h.html" title="Gain.h" alt="" coords="159,155,219,181"/>
+<area shape="rect" id="node25" href="$_i_o_control_8h.html" title="IOControl.h" alt="" coords="243,155,329,181"/>
+<area shape="rect" id="node26" href="$_limiter_8h.html" title="Limiter.h" alt="" coords="1078,80,1150,107"/>
+<area shape="rect" id="node27" href="$_multiplier_8h.html" title="Multiplier.h" alt="" coords="489,80,574,107"/>
+<area shape="rect" id="node29" href="$_rate_limiter_8h.html" title="RateLimiter.h" alt="" coords="694,80,793,107"/>
+<area shape="rect" id="node30" href="$_sum_8h.html" title="Sum.h" alt="" coords="817,80,877,107"/>
+<area shape="rect" id="node31" href="$_transfer_function_8h.html" title="TransferFunction.h" alt="" coords="5,155,135,181"/>
+<area shape="rect" id="node32" href="$_divider_8h.html" title="Divider.h" alt="" coords="599,80,669,107"/>
+<area shape="rect" id="node33" href="$_math_expression_8h.html" title="MathExpression.h" alt="" coords="464,155,591,181"/>
+<area shape="rect" id="node4" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="615,229,738,256"/>
+<area shape="rect" id="node5" href="$_element_8h.html" title="Element.h" alt="" coords="636,304,717,331"/>
+<area shape="rect" id="node14" href="$_x_m_l_parser_8h.html" title="XMLParser.h" alt="" coords="738,379,834,405"/>
+<area shape="rect" id="node21" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="266,229,373,256"/>
+<area shape="rect" id="node28" href="$_math_operation_8h.html" title="MathOperation.h" alt="" coords="615,155,733,181"/>
 </map>

@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Branch Class Reference</title>
+<title>Power System Platform: Branch Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,6 +29,11 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Power System Platform
+   &#160;<span id="projectnumber">2018w15a</span>
+   </div>
+  </td>
  </tr>
  </tbody>
 </table>
@@ -210,6 +215,21 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:ad57d3eb59a91d1ae45c5416f7bc5d896 inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top"><a id="ad57d3eb59a91d1ae45c5416f7bc5d896"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>GetValueFromUnit</b> (double value, <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca">ElectricalUnit</a> valueUnit)</td></tr>
 <tr class="separator:ad57d3eb59a91d1ae45c5416f7bc5d896 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396c3e0e3d9a7b9255567e9692feaaa6 inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top"><a id="a396c3e0e3d9a7b9255567e9692feaaa6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveCADProperties</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a396c3e0e3d9a7b9255567e9692feaaa6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5dba245ecbf31a460207a0e9176fde2 inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top"><a id="af5dba245ecbf31a460207a0e9176fde2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveSwitchingData</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *electricalNode)</td></tr>
+<tr class="separator:af5dba245ecbf31a460207a0e9176fde2 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46202ab9883b2efc617698fe28d665c7 inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top"><a id="a46202ab9883b2efc617698fe28d665c7"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenElement</b> (rapidxml::xml_node&lt;&gt; *elementNode, std::vector&lt; <a class="el" href="class_element.html">Element</a> *&gt; parentList)</td></tr>
+<tr class="separator:a46202ab9883b2efc617698fe28d665c7 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d6ad24f48195f01e0158c327831c8dd inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top"><a id="a0d6ad24f48195f01e0158c327831c8dd"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenCADProperties</b> (rapidxml::xml_node&lt;&gt; *elementNode, std::vector&lt; <a class="el" href="class_element.html">Element</a> *&gt; parentList)</td></tr>
+<tr class="separator:a0d6ad24f48195f01e0158c327831c8dd inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3938cdacbf603d19601f82d1c9d0ce37 inherit pub_methods_class_power_element"><td class="memItemLeft" align="right" valign="top"><a id="a3938cdacbf603d19601f82d1c9d0ce37"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenSwitchingData</b> (rapidxml::xml_node&lt;&gt; *electricalNode)</td></tr>
+<tr class="separator:a3938cdacbf603d19601f82d1c9d0ce37 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_element')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_element.html">Element</a></td></tr>
 <tr class="memitem:ab0d0e20be9a36ae676202db753faeec9 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab0d0e20be9a36ae676202db753faeec9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element</a> ()</td></tr>
@@ -377,6 +397,18 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (
 <tr class="memitem:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">PointToLineDistance</a> (wxPoint2DDouble point, int *segmentNumber=NULL) const</td></tr>
 <tr class="memdesc:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between a line (formed by point list) and a point.  <a href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">More...</a><br /></td></tr>
 <tr class="separator:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc164e654f8347385a68c6abf7733f53 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="acc164e654f8347385a68c6abf7733f53"></a>
+virtual rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><b>SaveElement</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementListNode)</td></tr>
+<tr class="separator:acc164e654f8347385a68c6abf7733f53 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad250a9be862d47bedfd4f6a1f526b5cf inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ad250a9be862d47bedfd4f6a1f526b5cf"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenElement</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ad250a9be862d47bedfd4f6a1f526b5cf inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab84987a1ba6ddc82cc2316d816bf6d06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveCADProperties</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ada74d29413484cfe1f0beb039892d4c8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenCADProperties</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>

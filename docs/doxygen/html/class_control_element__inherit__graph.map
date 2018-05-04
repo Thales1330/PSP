@@ -5,11 +5,12 @@
 <area shape="rect" id="node6" href="$class_gain.html" title="Provide an output multiplying the input by a constant. " alt="" coords="317,157,367,184"/>
 <area shape="rect" id="node7" href="$class_i_o_control.html" title="Provides the communication with the power element. " alt="" coords="304,208,380,235"/>
 <area shape="rect" id="node8" href="$class_limiter.html" title="Limits the input value by superior and inferior values. " alt="" coords="311,259,373,285"/>
-<area shape="rect" id="node9" href="$class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="" coords="289,309,395,336"/>
-<area shape="rect" id="node12" href="$class_rate_limiter.html" title="Limits the rising and/or falling rate. &#160;" alt="" coords="298,360,386,387"/>
-<area shape="rect" id="node13" href="$class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="" coords="317,411,367,437"/>
-<area shape="rect" id="node14" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="" coords="283,461,401,488"/>
-<area shape="rect" id="node2" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,233,76,260"/>
-<area shape="rect" id="node10" href="$class_divider.html" title="Control element that divides two inputs. " alt="" coords="457,284,517,311"/>
-<area shape="rect" id="node11" href="$class_multiplier.html" title="Multiplies two inputs. " alt="" coords="449,335,524,361"/>
+<area shape="rect" id="node9" href="$class_math_expression.html" title="A generic math expression block that can perform math and conditional operations with the inputs..." alt="" coords="284,309,400,336"/>
+<area shape="rect" id="node10" href="$class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="" coords="289,360,395,387"/>
+<area shape="rect" id="node13" href="$class_rate_limiter.html" title="Limits the rising and/or falling rate. &#160;" alt="" coords="298,411,386,437"/>
+<area shape="rect" id="node14" href="$class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="" coords="317,461,367,488"/>
+<area shape="rect" id="node15" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="" coords="283,512,401,539"/>
+<area shape="rect" id="node2" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,259,76,285"/>
+<area shape="rect" id="node11" href="$class_divider.html" title="Control element that divides two inputs. " alt="" coords="457,335,517,361"/>
+<area shape="rect" id="node12" href="$class_multiplier.html" title="Multiplies two inputs. " alt="" coords="449,385,524,412"/>
 </map>

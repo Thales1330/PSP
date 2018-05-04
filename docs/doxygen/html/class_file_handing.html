@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>FileHanding Class Reference</title>
+<title>Power System Platform: FileHanding Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,6 +29,11 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Power System Platform
+   &#160;<span id="projectnumber">2018w15a</span>
+   </div>
+  </td>
  </tr>
  </tbody>
 </table>
@@ -65,7 +70,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_file_handing-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -124,51 +128,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveControlElements</
 <tr class="memitem:a561b1bc5807aeb4424f0047b003b9238"><td class="memItemLeft" align="right" valign="top"><a id="a561b1bc5807aeb4424f0047b003b9238"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenControlElements</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementsNode, <a class="el" href="class_control_element_container.html">ControlElementContainer</a> *ctrlContainer=NULL)</td></tr>
 <tr class="separator:a561b1bc5807aeb4424f0047b003b9238"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a315b88e9e9bd75cb45794bf9f52a7925"><td class="memItemLeft" align="right" valign="top"><a id="a315b88e9e9bd75cb45794bf9f52a7925"></a>
-rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><b>AppendNode</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *parentNode, const char *name, rapidxml::node_type nodeType=rapidxml::node_element)</td></tr>
-<tr class="separator:a315b88e9e9bd75cb45794bf9f52a7925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a815fb97269b3755ac1a00cb196ee226c"><td class="memItemLeft" align="right" valign="top"><a id="a815fb97269b3755ac1a00cb196ee226c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeValue</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *node, wxString value)</td></tr>
-<tr class="separator:a815fb97269b3755ac1a00cb196ee226c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d7ad3fb6f8f920aa6f0c720cc4852f1"><td class="memItemLeft" align="right" valign="top"><a id="a2d7ad3fb6f8f920aa6f0c720cc4852f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeValue</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *node, int value)</td></tr>
-<tr class="separator:a2d7ad3fb6f8f920aa6f0c720cc4852f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b5ac3287c11ee33c0e802dd60e07e68"><td class="memItemLeft" align="right" valign="top"><a id="a7b5ac3287c11ee33c0e802dd60e07e68"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeValue</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *node, double value)</td></tr>
-<tr class="separator:a7b5ac3287c11ee33c0e802dd60e07e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8951c02ab38f7922e96de8024189a2b0"><td class="memItemLeft" align="right" valign="top"><a id="a8951c02ab38f7922e96de8024189a2b0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeAttribute</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *node, const char *atrName, wxString value)</td></tr>
-<tr class="separator:a8951c02ab38f7922e96de8024189a2b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe3af403418c668035bb38e6e6428f04"><td class="memItemLeft" align="right" valign="top"><a id="abe3af403418c668035bb38e6e6428f04"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeAttribute</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *node, const char *atrName, int value)</td></tr>
-<tr class="separator:abe3af403418c668035bb38e6e6428f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca642a587c19e07a16cf65cb06f78950"><td class="memItemLeft" align="right" valign="top"><a id="aca642a587c19e07a16cf65cb06f78950"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeAttribute</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *node, const char *atrName, double value)</td></tr>
-<tr class="separator:aca642a587c19e07a16cf65cb06f78950"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adde631f17207ec5744c0dbdfe79d45d3"><td class="memItemLeft" align="right" valign="top"><a id="adde631f17207ec5744c0dbdfe79d45d3"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeValueDouble</b> (rapidxml::xml_node&lt;&gt; *parent, const char *nodeName)</td></tr>
-<tr class="separator:adde631f17207ec5744c0dbdfe79d45d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3880248f7fa8c93c765a4408ca33893"><td class="memItemLeft" align="right" valign="top"><a id="ad3880248f7fa8c93c765a4408ca33893"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeValueInt</b> (rapidxml::xml_node&lt;&gt; *parent, const char *nodeName)</td></tr>
-<tr class="separator:ad3880248f7fa8c93c765a4408ca33893"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad880af02d674437811fec077a84a7909"><td class="memItemLeft" align="right" valign="top"><a id="ad880af02d674437811fec077a84a7909"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetAttributeValueInt</b> (rapidxml::xml_node&lt;&gt; *parent, const char *nodeName, const char *atrName)</td></tr>
-<tr class="separator:ad880af02d674437811fec077a84a7909"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ca9be771b02e58e554dc7a45a11e510"><td class="memItemLeft" align="right" valign="top"><a id="a3ca9be771b02e58e554dc7a45a11e510"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetAttributeValueInt</b> (rapidxml::xml_node&lt;&gt; *node, const char *atrName)</td></tr>
-<tr class="separator:a3ca9be771b02e58e554dc7a45a11e510"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae85e5c9173a850b8165939fef18c8c88"><td class="memItemLeft" align="right" valign="top"><a id="ae85e5c9173a850b8165939fef18c8c88"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveControlNodes</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *nodesN, std::vector&lt; <a class="el" href="class_node.html">Node</a> *&gt; nodeList)</td></tr>
-<tr class="separator:ae85e5c9173a850b8165939fef18c8c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd02764e9227133832464b2a7cb10952"><td class="memItemLeft" align="right" valign="top"><a id="afd02764e9227133832464b2a7cb10952"></a>
-<a class="el" href="class_control_element.html">ControlElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetControlElementFromID</b> (std::vector&lt; <a class="el" href="class_control_element.html">ControlElement</a> *&gt; elementList, int id)</td></tr>
-<tr class="separator:afd02764e9227133832464b2a7cb10952"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96c5ba440caa8b0ab44a01e2bfd63f51"><td class="memItemLeft" align="right" valign="top"><a id="a96c5ba440caa8b0ab44a01e2bfd63f51"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenControlNodeList</b> (rapidxml::xml_node&lt;&gt; *elementNode, std::vector&lt; <a class="el" href="class_node.html">Node</a> *&gt; &amp;nodeVector)</td></tr>
-<tr class="separator:a96c5ba440caa8b0ab44a01e2bfd63f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>

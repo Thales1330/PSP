@@ -1,12 +1,13 @@
 <map id="Project/Workspace.h" name="Project/Workspace.h">
-<area shape="rect" id="node10" href="$_bus_8h.html" title="Bus.h" alt="" coords="207,80,263,107"/>
-<area shape="rect" id="node26" href="$_control_editor_8h.html" title="ControlEditor.h" alt="" coords="958,80,1066,107"/>
-<area shape="rect" id="node11" href="$_bus_form_8h.html" title="BusForm.h" alt="" coords="65,155,151,181"/>
-<area shape="rect" id="node13" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="176,155,293,181"/>
-<area shape="rect" id="node14" href="$_element_8h.html" title="Element.h" alt="" coords="727,304,809,331"/>
-<area shape="rect" id="node21" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="240,229,371,256"/>
-<area shape="rect" id="node32" href="$_i_o_control_8h.html" title="IOControl.h" alt="" coords="1135,155,1222,181"/>
-<area shape="rect" id="node36" href="$_control_system_test_8h.html" title="ControlSystemTest.h" alt="" coords="669,155,813,181"/>
-<area shape="rect" id="node33" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="871,229,993,256"/>
-<area shape="rect" id="node34" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="1036,229,1143,256"/>
+<area shape="rect" id="node10" href="$_bus_8h.html" title="Bus.h" alt="" coords="253,80,309,107"/>
+<area shape="rect" id="node31" href="$_control_editor_8h.html" title="ControlEditor.h" alt="" coords="992,80,1100,107"/>
+<area shape="rect" id="node11" href="$_bus_form_8h.html" title="BusForm.h" alt="" coords="111,155,197,181"/>
+<area shape="rect" id="node13" href="$_power_element_8h.html" title="PowerElement.h" alt="" coords="222,155,339,181"/>
+<area shape="rect" id="node14" href="$_element_8h.html" title="Element.h" alt="" coords="699,304,780,331"/>
+<area shape="rect" id="node26" href="$_element_plot_data_8h.html" title="ElementPlotData.h" alt="" coords="262,229,393,256"/>
+<area shape="rect" id="node21" href="$_x_m_l_parser_8h.html" title="XMLParser.h" alt="" coords="331,379,427,405"/>
+<area shape="rect" id="node37" href="$_i_o_control_8h.html" title="IOControl.h" alt="" coords="1181,155,1268,181"/>
+<area shape="rect" id="node41" href="$_control_system_test_8h.html" title="ControlSystemTest.h" alt="" coords="715,155,859,181"/>
+<area shape="rect" id="node38" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="909,229,1031,256"/>
+<area shape="rect" id="node39" href="$_open_g_l_text_8h.html" title="OpenGLText.h" alt="" coords="1082,229,1189,256"/>
 </map>
