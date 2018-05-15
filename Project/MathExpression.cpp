@@ -122,7 +122,7 @@ void MathExpression::Draw(wxPoint2DDouble translation, double scale) const
     DrawNodes();
 }
 
-bool MathExpression::ShowForm(wxWindowMSW* parent, Element* element)
+bool MathExpression::ShowForm(wxWindow* parent, Element* element)
 {
     MathExpressionForm* mathExprForm = new MathExpressionForm(parent, this);
     if(mathExprForm->ShowModal() == wxID_OK) {
