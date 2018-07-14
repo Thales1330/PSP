@@ -94,7 +94,8 @@ class ElectricCalculation
                          double systemPowerBase,
                          YBusSequence sequence = POSITIVE_SEQ,
                          bool includeSyncMachines = false,
-                         bool allLoadsAsImpedances = false);
+                         bool allLoadsAsImpedances = false,
+                         bool usePowerFlowVoltagesOnImpedances = false);
 
     /**
      * @brief Invert a matrix.

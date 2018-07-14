@@ -73,7 +73,7 @@ bool Electromechanical::RunStabilityCalculation()
     SetSyncMachinesModel();
 
     // Calculate the admittance matrix with the synchronous machines.
-    if(!GetYBus(m_yBus, m_powerSystemBase, POSITIVE_SEQ, false, true)) {
+    if(!GetYBus(m_yBus, m_powerSystemBase, POSITIVE_SEQ, false, true, true)) {
         m_errorMsg = _("It was not possible to build the admittance matrix.");
         return false;
     }
