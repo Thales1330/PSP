@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PSP-UFU pt_BR 0.0.1\n"
-"POT-Creation-Date: 2018-04-11 00:56-0300\n"
-"PO-Revision-Date: 2018-04-11 01:00-0300\n"
+"POT-Creation-Date: 2018-12-29 12:15-0200\n"
+"PO-Revision-Date: 2018-12-29 12:16-0200\n"
 "Last-Translator: \n"
 "Language-Team: Thales Lima Oliveira <thaleslima.ufu@gmail.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: _\n"
@@ -377,11 +377,11 @@ msgstr "Não foi possível enviar para a área de transferência"
 #: ControlSystemTest.cpp:60 ControlSystemTest.cpp:67 ControlSystemTest.cpp:74
 #: Element.cpp:294 Element.cpp:308 GeneralPropertiesForm.cpp:74
 #: ImportForm.cpp:53 Line.cpp:157 Line.cpp:386 LoadForm.cpp:189
-#: LoadForm.cpp:196 MainFrame.cpp:304 MathExpressionForm.cpp:85
-#: SimulationsSettingsForm.cpp:191 SimulationsSettingsForm.cpp:198
+#: LoadForm.cpp:196 MainFrame.cpp:306 MathExpressionForm.cpp:85
+#: SimulationsSettingsForm.cpp:192 SimulationsSettingsForm.cpp:199
 #: SumForm.cpp:58 SumForm.cpp:74 TextForm.cpp:1225 Workspace.cpp:1121
 #: Workspace.cpp:1182 Workspace.cpp:1290 Workspace.cpp:1394 Workspace.cpp:1416
-#: Workspace.cpp:1434
+#: Workspace.cpp:1434 main.cpp:87
 msgid "Error"
 msgstr "Erro"
 
@@ -557,7 +557,7 @@ msgstr "Salvar arquivo CTL"
 msgid "Open CTL file"
 msgstr "Abrir arquivo CTL"
 
-#: ControlEditor.cpp:796 MainFrame.cpp:304
+#: ControlEditor.cpp:796 MainFrame.cpp:306
 msgid "It was not possible to open the selected file."
 msgstr "Não foi possível abrir o arquivo selecionado."
 
@@ -734,11 +734,11 @@ msgstr "Valor inserido incorretamente no campo \"Tempo de início\"."
 msgid "Value entered incorrectly in the field \"Slope\"."
 msgstr "Valor inserido incorretamente no campo \"Inclinação\"."
 
-#: ControlSystemTest.cpp:67 SimulationsSettingsForm.cpp:130
+#: ControlSystemTest.cpp:67 SimulationsSettingsForm.cpp:131
 msgid "Value entered incorrectly in the field \"Time step\"."
 msgstr "Valor inserido incorretamente no campo \"Passo de integração\"."
 
-#: ControlSystemTest.cpp:74 SimulationsSettingsForm.cpp:133
+#: ControlSystemTest.cpp:74 SimulationsSettingsForm.cpp:134
 msgid "Value entered incorrectly in the field \"Simulation time\"."
 msgstr "Valor inserido incorretamente no campo \"Tempo de simulação\"."
 
@@ -927,32 +927,32 @@ msgstr "Relatório de dados"
 msgid "Running simulation"
 msgstr "Simulação em andamento"
 
-#: Electromechanical.cpp:77
+#: Electromechanical.cpp:78
 msgid "It was not possible to build the admittance matrix."
 msgstr "Não foi possível construir a matriz admitância."
 
-#: Electromechanical.cpp:118
+#: Electromechanical.cpp:119
 #, c-format
 msgid "Simulation cancelled at %.2fs."
 msgstr "Simulação cancelada em %.2fs."
 
-#: Electromechanical.cpp:572
+#: Electromechanical.cpp:573
 msgid "Error on initializate the saturation values of \""
 msgstr "Erro ao inicializar os valores de saturação de \""
 
-#: Electromechanical.cpp:572
+#: Electromechanical.cpp:573
 msgid "\"."
 msgstr "\"."
 
-#: Electromechanical.cpp:675
+#: Electromechanical.cpp:676
 msgid "Error on initializate the AVR of \""
 msgstr "Erro ao inicializar o AVR de \""
 
-#: Electromechanical.cpp:694
+#: Electromechanical.cpp:695
 msgid "Error on initializate the speed governor of \""
 msgstr "Erro ao inicializar o regulador de velocidade de \""
 
-#: Electromechanical.cpp:994
+#: Electromechanical.cpp:995
 msgid ""
 "Impossible to solve the synchronous generators.\n"
 "Check the system parameters and/or decrease the time step."
@@ -965,7 +965,7 @@ msgid ""
 "It was not possible to solve the saturation of the synchronous machine \""
 msgstr "Não foi possível solucionar a saturação da máquina síncrona \""
 
-#: Electromechanical.h:103
+#: Electromechanical.h:107
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
@@ -1695,7 +1695,7 @@ msgstr "Variação de potência ativa"
 msgid "It was not possible to import the selected files."
 msgstr "Não foi possível importar os arquivo selecionados."
 
-#: ImportForm.h:206 MainFrame.cpp:470
+#: ImportForm.h:206 MainFrame.cpp:472
 msgid "Imported project"
 msgstr "Projeto importado"
 
@@ -1887,177 +1887,177 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Parcela de potência constante da "
 "potência ativa\"."
 
-#: LoadForm.cpp:189 SimulationsSettingsForm.cpp:191
+#: LoadForm.cpp:189 SimulationsSettingsForm.cpp:192
 msgid "The sum of active power load composition must be 100%."
 msgstr "A soma da composição de carga da potência ativa deve ser 100%."
 
-#: LoadForm.cpp:196 SimulationsSettingsForm.cpp:198
+#: LoadForm.cpp:196 SimulationsSettingsForm.cpp:199
 msgid "The sum of reactive power load composition must be 100%."
 msgstr "A soma da composição de carga da potência reativa deve ser 100%."
 
-#: MainFrame.cpp:50 MainFrame.cpp:286
+#: MainFrame.cpp:50 MainFrame.cpp:287
 msgid "Open project"
 msgstr "Abrir projeto"
 
-#: MainFrame.cpp:133
+#: MainFrame.cpp:134
 msgid "&Bus\tB"
 msgstr "&Barramento\tB"
 
-#: MainFrame.cpp:133
+#: MainFrame.cpp:134
 msgid "Adds a bus at the circuit"
 msgstr "Adiciona um barramento no circuito"
 
-#: MainFrame.cpp:136
+#: MainFrame.cpp:137
 msgid "&Line\tL"
 msgstr "&Linha\tL"
 
-#: MainFrame.cpp:136
+#: MainFrame.cpp:137
 msgid "Adds a power line at the circuit"
 msgstr "Adiciona uma linha no circuito"
 
-#: MainFrame.cpp:137
+#: MainFrame.cpp:138
 msgid "&Transformer\tT"
 msgstr "&Transformador\tT"
 
-#: MainFrame.cpp:138
+#: MainFrame.cpp:139
 msgid "Adds a transformer at the circuit"
 msgstr "Adiciona um transformador no circuito"
 
-#: MainFrame.cpp:139
+#: MainFrame.cpp:140
 msgid "&Generator\tG"
 msgstr "&Gerador\tG"
 
-#: MainFrame.cpp:140
+#: MainFrame.cpp:141
 msgid "Adds a generator at the circuit"
 msgstr "Adiciona um gerador no circuito"
 
-#: MainFrame.cpp:141
+#: MainFrame.cpp:142
 msgid "&Induction motor\tI"
 msgstr "&Motor de indução\tI"
 
-#: MainFrame.cpp:142 MainFrame.cpp:145
+#: MainFrame.cpp:143 MainFrame.cpp:146
 msgid "Adds an induction motor at the circuit"
 msgstr "Adiciona um motor de indução no circuito"
 
-#: MainFrame.cpp:144
+#: MainFrame.cpp:145
 msgid "&Synchronous compensator \tK"
 msgstr "&Compensador síncrono \tK"
 
-#: MainFrame.cpp:147
+#: MainFrame.cpp:148
 msgid "&Load\tShift-L"
 msgstr "&Carga\tShift-L"
 
-#: MainFrame.cpp:147
+#: MainFrame.cpp:148
 msgid "Adds a load at the circuit"
 msgstr "Adiciona uma carga no circuito"
 
-#: MainFrame.cpp:148
+#: MainFrame.cpp:149
 msgid "&Capacitor\tShift-C"
 msgstr "&Capacitor\tShift-C"
 
-#: MainFrame.cpp:149
+#: MainFrame.cpp:150
 msgid "Adds a shunt capacitor at the circuit"
 msgstr "Adiciona um capacitor shunt no circuito"
 
-#: MainFrame.cpp:150
+#: MainFrame.cpp:151
 msgid "&Inductor\tShift-I"
 msgstr "&Inductor\tShift-I"
 
-#: MainFrame.cpp:151
+#: MainFrame.cpp:152
 msgid "Adds a shunt inductor at the circuit"
 msgstr "Adiciona um indutor shunt no circuito"
 
-#: MainFrame.cpp:170
+#: MainFrame.cpp:171
 #, c-format
 msgid "New project %d"
 msgstr "Novo projeto %d"
 
-#: MainFrame.cpp:279
+#: MainFrame.cpp:280
 msgid "Open PSP file"
 msgstr "Abrir arquivo do PSP"
 
-#: MainFrame.cpp:339 MainFrame.cpp:360
+#: MainFrame.cpp:341 MainFrame.cpp:362
 msgid "Save PSP file"
 msgstr "Salvar arquivo do PSP"
 
-#: MainFrame.cpp:388 Workspace.cpp:703
+#: MainFrame.cpp:390 Workspace.cpp:703
 #, c-format
 msgid "Bus %d"
 msgstr "Barra %d"
 
-#: MainFrame.cpp:391 Workspace.cpp:707
+#: MainFrame.cpp:393 Workspace.cpp:707
 msgid "Insert Bus: Click to insert, ESC to cancel."
 msgstr "Inserir Barramento: Clique para inserir, ESC para cancelar."
 
-#: MainFrame.cpp:395 Workspace.cpp:720
+#: MainFrame.cpp:397 Workspace.cpp:720
 #, c-format
 msgid "Line %d"
 msgstr "Linha %d"
 
-#: MainFrame.cpp:398 Workspace.cpp:724
+#: MainFrame.cpp:400 Workspace.cpp:724
 msgid "Insert Line: Click on two buses, ESC to cancel."
 msgstr "Inserir Linha: Clique em duas barras, ESC para cancelar."
 
-#: MainFrame.cpp:403 Workspace.cpp:734
+#: MainFrame.cpp:405 Workspace.cpp:734
 #, c-format
 msgid "Transformer %d"
 msgstr "Transformador %d"
 
-#: MainFrame.cpp:406 Workspace.cpp:738
+#: MainFrame.cpp:408 Workspace.cpp:738
 msgid "Insert Transformer: Click on two buses, ESC to cancel."
 msgstr "Inserir Transformador: Clique em duas barras, ESC para cancelar."
 
-#: MainFrame.cpp:411 Workspace.cpp:746
+#: MainFrame.cpp:413 Workspace.cpp:746
 #, c-format
 msgid "Generator %d"
 msgstr "Gerador %d"
 
-#: MainFrame.cpp:414 Workspace.cpp:750
+#: MainFrame.cpp:416 Workspace.cpp:750
 msgid "Insert Generator: Click on a buses, ESC to cancel."
 msgstr "Inserir Gerador: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:418 Workspace.cpp:714
+#: MainFrame.cpp:420 Workspace.cpp:714
 #, c-format
 msgid "Load %d"
 msgstr "Carga %d"
 
-#: MainFrame.cpp:421 Workspace.cpp:718
+#: MainFrame.cpp:423 Workspace.cpp:718
 msgid "Insert Load: Click on a buses, ESC to cancel."
 msgstr "Inserir Carga: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:426 Workspace.cpp:791
+#: MainFrame.cpp:428 Workspace.cpp:791
 #, c-format
 msgid "Capacitor %d"
 msgstr "Capacitor %d"
 
-#: MainFrame.cpp:429 Workspace.cpp:795
+#: MainFrame.cpp:431 Workspace.cpp:795
 msgid "Insert Capacitor: Click on a buses, ESC to cancel."
 msgstr "Inserir Capacitor: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:434 Workspace.cpp:758
+#: MainFrame.cpp:436 Workspace.cpp:758
 #, c-format
 msgid "Inductor %d"
 msgstr "Indutor %d"
 
-#: MainFrame.cpp:437 Workspace.cpp:762
+#: MainFrame.cpp:439 Workspace.cpp:762
 msgid "Insert Inductor: Click on a buses, ESC to cancel."
 msgstr "Inserir Indutor: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:442 Workspace.cpp:766
+#: MainFrame.cpp:444 Workspace.cpp:766
 #, c-format
 msgid "Induction motor %d"
 msgstr "Motor de indução %d"
 
-#: MainFrame.cpp:445 Workspace.cpp:770
+#: MainFrame.cpp:447 Workspace.cpp:770
 msgid "Insert Induction Motor: Click on a buses, ESC to cancel."
 msgstr "Inserir Motor de indução: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:450 Workspace.cpp:779
+#: MainFrame.cpp:452 Workspace.cpp:779
 #, c-format
 msgid "Synchronous condenser %d"
 msgstr "Compensador síncrono %d"
 
-#: MainFrame.cpp:453 Workspace.cpp:783
+#: MainFrame.cpp:455 Workspace.cpp:783
 msgid "Insert Synchronous Condenser: Click on a buses, ESC to cancel."
 msgstr "Inserir Compensador síncrono: Clique em uma barra, ESC para cancelar."
 
@@ -2572,53 +2572,53 @@ msgstr "Capacitor: Chaveamento"
 msgid "Inductor: Switching"
 msgstr "Indutor: Chaveamento"
 
-#: SimulationsSettingsForm.cpp:94
+#: SimulationsSettingsForm.cpp:95
 msgid "Value entered incorrectly in the field \"Base power\"."
 msgstr "Valor inserido incorretamente no campo \"Potência base\"."
 
-#: SimulationsSettingsForm.cpp:118
+#: SimulationsSettingsForm.cpp:119
 msgid "Value entered incorrectly in the field \"Acceleration factor\"."
 msgstr "Valor inserido incorretamente no campo \"Fator de aceleração\"."
 
-#: SimulationsSettingsForm.cpp:121
+#: SimulationsSettingsForm.cpp:122
 msgid "Value entered incorrectly in the field \"Tolerance (Power flow)\"."
 msgstr ""
 "Valor inserido incorretamente no campo \"Tolerância (Fluxo de carga)\"."
 
-#: SimulationsSettingsForm.cpp:124
+#: SimulationsSettingsForm.cpp:125
 msgid ""
 "Value entered incorrectly in the field \"Max. iterations (Power flow)\"."
 msgstr ""
 "Valor inserido incorretamente no campo \"Iterações máx (Fluxo de carga)\"."
 
-#: SimulationsSettingsForm.cpp:127
+#: SimulationsSettingsForm.cpp:128
 msgid "Value entered incorrectly in the field \"Slack bus angle\"."
 msgstr ""
 "Valor inserido incorretamente no campo \"Ângulo da barra de referência\"."
 
-#: SimulationsSettingsForm.cpp:136
+#: SimulationsSettingsForm.cpp:137
 msgid "Value entered incorrectly in the field \"System frequency\"."
 msgstr "Valor inserido incorretamente no campo \"Frequência do sistema\"."
 
-#: SimulationsSettingsForm.cpp:139
+#: SimulationsSettingsForm.cpp:140
 msgid "Value entered incorrectly in the field \"Tolerance (Stability)\"."
 msgstr "Valor inserido incorretamente no campo \"Tolerância (estabilidade)\"."
 
-#: SimulationsSettingsForm.cpp:142
+#: SimulationsSettingsForm.cpp:143
 msgid "Value entered incorrectly in the field \"Max. iterations (Stability)\"."
 msgstr ""
 "Valor inserido incorretamente no campo \"Iterações máx (Estabilidade)\"."
 
-#: SimulationsSettingsForm.cpp:145
+#: SimulationsSettingsForm.cpp:146
 msgid "Value entered incorrectly in the field \"Controls step ratio\"."
 msgstr ""
 "Valor inserido incorretamente no campo \"Razão do passo dos controles\"."
 
-#: SimulationsSettingsForm.cpp:148
+#: SimulationsSettingsForm.cpp:149
 msgid "Value entered incorrectly in the field \"Plot time\"."
 msgstr "Valor inserido incorretamente no campo \"Tempo de impressão\"."
 
-#: SimulationsSettingsForm.cpp:156
+#: SimulationsSettingsForm.cpp:157
 msgid ""
 "Value entered incorrectly in the field \"Constant impedance portion of "
 "active power (ZIP load)\"."
@@ -2626,7 +2626,7 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Parcela de impedância constante da "
 "potência ativa (Carga ZIP)\"."
 
-#: SimulationsSettingsForm.cpp:160
+#: SimulationsSettingsForm.cpp:161
 msgid ""
 "Value entered incorrectly in the field \"Constant current portion of active "
 "power (ZIP load)\"."
@@ -2634,7 +2634,7 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Parcela de corrente constante da "
 "potência ativa (Carga ZIP)\"."
 
-#: SimulationsSettingsForm.cpp:164
+#: SimulationsSettingsForm.cpp:165
 msgid ""
 "Value entered incorrectly in the field \"Constant power portion of active "
 "power (ZIP load)\"."
@@ -2642,7 +2642,7 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Parcela de potência constante da "
 "potência ativa (Carga ZIP)\"."
 
-#: SimulationsSettingsForm.cpp:168
+#: SimulationsSettingsForm.cpp:169
 msgid ""
 "Value entered incorrectly in the field \"Constant impedance portion of "
 "reactive power (ZIP load)\"."
@@ -2650,7 +2650,7 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Parcela de impedância constante da "
 "potência reativa (Carga ZIP)\"."
 
-#: SimulationsSettingsForm.cpp:172
+#: SimulationsSettingsForm.cpp:173
 msgid ""
 "Value entered incorrectly in the field \"Constant current portion of "
 "reactive power (ZIP load)\"."
@@ -2658,7 +2658,7 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Parcela de corrente constante da "
 "potência reativa (Carga ZIP)\"."
 
-#: SimulationsSettingsForm.cpp:176
+#: SimulationsSettingsForm.cpp:177
 msgid ""
 "Value entered incorrectly in the field \"Constant power portion of reactive "
 "power (ZIP load)\"."
@@ -2666,7 +2666,7 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Parcela de potência constante da "
 "potência reativa (Carga ZIP)\"."
 
-#: SimulationsSettingsForm.cpp:181
+#: SimulationsSettingsForm.cpp:182
 msgid ""
 "Value entered incorrectly in the field \"Constant current undervoltage limit "
 "(ZIP load)\"."
@@ -2674,7 +2674,7 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Limite de subtensão da corrente "
 "constante (Carga ZIP)\"."
 
-#: SimulationsSettingsForm.cpp:186
+#: SimulationsSettingsForm.cpp:187
 msgid ""
 "Value entered incorrectly in the field \"Constant power undervoltage limit "
 "(ZIP load)\"."
@@ -2978,6 +2978,18 @@ msgstr "Você deseja abrir os gráficos do estudo de estabilidade?"
 #: Workspace.cpp:1443
 msgid "Question"
 msgstr "Pergunta"
+
+#: Workspace.cpp:1454
+msgid "Simulation parameters"
+msgstr "Parâmetros de simulação"
+
+#: Workspace.cpp:1456
+msgid "Iterations number"
+msgstr "Número de iterações"
+
+#: main.cpp:87
+msgid "Fail to load brazilian portuguese language catalog."
+msgstr "Falhou em carregar o catálogo de português do Brasil."
 
 #~ msgid "OK!"
 #~ msgstr "OK!"
