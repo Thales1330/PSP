@@ -1,9 +1,10 @@
 #include <wx/app.h>
+#include <wx/cmdline.h>
 #include <wx/event.h>
 #include <wx/image.h>
+#include <wx/msgdlg.h>
 #include <wx/stdpaths.h>
 #include <wx/textfile.h>
-#include <wx/cmdline.h>
 
 #include "MainFrame.h"
 #include "PropertiesData.h"
@@ -76,13 +77,23 @@ class MainApp : public wxApp
 
     void LoadCatalogs(wxLocale* locale, PropertiesData* propertiesData)
     {
-        locale->Init(propertiesData->GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT);
+        if(!locale->Init(propertiesData->GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT)) {
+            wxMessageDialog msgDialog(NULL, _("This language is not supported by the system."), _("Error"),
+                                      wxOK | wxCENTRE | wxICON_ERROR);
+            msgDialog.ShowModal();
+        }
 
         wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
         wxString langPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\lang", wxPATH_WIN).GetPath();
         locale->AddCatalogLookupPathPrefix(langPath);
-        // Load translation catalogs.
-        locale->AddCatalog(wxT("pt_BR"), wxLANGUAGE_PORTUGUESE_BRAZILIAN);
+        //pt_BR
+        if(propertiesData->GetGeneralPropertiesData().language == wxLANGUAGE_PORTUGUESE_BRAZILIAN) {
+            if(!locale->AddCatalog(wxT("pt_BR"))) {
+                wxMessageDialog msgDialog(NULL, _("Fail to load brazilian portuguese language catalog."), _("Error"),
+                                          wxOK | wxCENTRE | wxICON_ERROR);
+                msgDialog.ShowModal();
+            }
+        }
     }
 
     virtual bool OnInit()
@@ -104,15 +115,13 @@ class MainApp : public wxApp
         if(cmdLineParser.Parse() == 0) {
             wxCmdLineArgs args = cmdLineParser.GetArguments();
             for(auto it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {
-                if(it->GetKind() == wxCMD_LINE_PARAM) {
-                    openFilePath = it->GetStrVal();
-                }
+                if(it->GetKind() == wxCMD_LINE_PARAM) { openFilePath = it->GetStrVal(); }
             }
         }
         MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData, openFilePath);
-        #ifdef __WXMSW__
+#ifdef __WXMSW__
         mainFrame->SetIcon(wxICON(aaaaprogicon));
-        #endif
+#endif
         SetTopWindow(mainFrame);
         return GetTopWindow()->Show();
     }

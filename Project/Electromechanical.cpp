@@ -235,7 +235,11 @@ void Electromechanical::SetEvent(double currentTime)
                     Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
                     int n = parentBus->GetElectricalData().number;
                     std::complex<double> v = parentBus->GetElectricalData().voltage;
+<<<<<<< HEAD
                     m_yBus[n][n] -= std::complex<double>(data.activePower, -data.reactivePower) / (abs(v) * abs(v));
+=======
+                    m_yBus[n][n] -= std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
+>>>>>>> aad89bf4d16d45c0790bd2fc010d9ec06cc35430
                 }
 
                 // Insert load (only disconnected load)
@@ -245,7 +249,11 @@ void Electromechanical::SetEvent(double currentTime)
                         Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
                         int n = parentBus->GetElectricalData().number;
                         std::complex<double> v = parentBus->GetElectricalData().voltage;
+<<<<<<< HEAD
                         m_yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower) / (abs(v) * abs(v));
+=======
+                        m_yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
+>>>>>>> aad89bf4d16d45c0790bd2fc010d9ec06cc35430
                     }
                 }
             }
