@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ControlElement Class Reference</title>
+<title>Power System Platform: ControlElement Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,6 +29,11 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Power System Platform
+   &#160;<span id="projectnumber">2018w15a</span>
+   </div>
+  </td>
  </tr>
  </tbody>
 </table>
@@ -65,6 +70,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_control_element-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -84,13 +91,14 @@ Inheritance diagram for ControlElement:</div>
 <area shape="rect" id="node6" href="class_gain.html" title="Provide an output multiplying the input by a constant. " alt="" coords="317,157,367,184"/>
 <area shape="rect" id="node7" href="class_i_o_control.html" title="Provides the communication with the power element. " alt="" coords="304,208,380,235"/>
 <area shape="rect" id="node8" href="class_limiter.html" title="Limits the input value by superior and inferior values. " alt="" coords="311,259,373,285"/>
-<area shape="rect" id="node9" href="class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="" coords="289,309,395,336"/>
-<area shape="rect" id="node12" href="class_rate_limiter.html" title="Limits the rising and/or falling rate. &#160;" alt="" coords="298,360,386,387"/>
-<area shape="rect" id="node13" href="class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="" coords="317,411,367,437"/>
-<area shape="rect" id="node14" href="class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="" coords="283,461,401,488"/>
-<area shape="rect" id="node2" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,233,76,260"/>
-<area shape="rect" id="node10" href="class_divider.html" title="Control element that divides two inputs. " alt="" coords="457,284,517,311"/>
-<area shape="rect" id="node11" href="class_multiplier.html" title="Multiplies two inputs. " alt="" coords="449,335,524,361"/>
+<area shape="rect" id="node9" href="class_math_expression.html" title="A generic math expression block that can perform math and conditional operations with the inputs..." alt="" coords="284,309,400,336"/>
+<area shape="rect" id="node10" href="class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="" coords="289,360,395,387"/>
+<area shape="rect" id="node13" href="class_rate_limiter.html" title="Limits the rising and/or falling rate. &#160;" alt="" coords="298,411,386,437"/>
+<area shape="rect" id="node14" href="class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="" coords="317,461,367,488"/>
+<area shape="rect" id="node15" href="class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="" coords="283,512,401,539"/>
+<area shape="rect" id="node2" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,259,76,285"/>
+<area shape="rect" id="node11" href="class_divider.html" title="Control element that divides two inputs. " alt="" coords="457,335,517,361"/>
+<area shape="rect" id="node12" href="class_multiplier.html" title="Multiplies two inputs. " alt="" coords="449,385,524,412"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -135,9 +143,12 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsSolved</b> 
 <tr class="memitem:a899b994168cf0c98695e82a4f3e7c98b"><td class="memItemLeft" align="right" valign="top"><a id="a899b994168cf0c98695e82a4f3e7c98b"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetSolved</b> (bool solved=true)</td></tr>
 <tr class="separator:a899b994168cf0c98695e82a4f3e7c98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeee4f373f0ebca4589b9ef77fe40c291"><td class="memItemLeft" align="right" valign="top"><a id="aeee4f373f0ebca4589b9ef77fe40c291"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (double input, double timeStep)</td></tr>
-<tr class="separator:aeee4f373f0ebca4589b9ef77fe40c291"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7753a67bfadc7471d95317aeca902289"><td class="memItemLeft" align="right" valign="top"><a id="a7753a67bfadc7471d95317aeca902289"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (double *input, double timeStep)</td></tr>
+<tr class="separator:a7753a67bfadc7471d95317aeca902289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40eeb299e10b3ccbad58c22023b2609"><td class="memItemLeft" align="right" valign="top"><a id="ad40eeb299e10b3ccbad58c22023b2609"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> ()</td></tr>
+<tr class="separator:ad40eeb299e10b3ccbad58c22023b2609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a038e940fc33ac3e443502169104d7ebd"><td class="memItemLeft" align="right" valign="top"><a id="a038e940fc33ac3e443502169104d7ebd"></a>
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOutput</b> () const</td></tr>
 <tr class="separator:a038e940fc33ac3e443502169104d7ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -354,6 +365,43 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (
 <tr class="memitem:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">PointToLineDistance</a> (wxPoint2DDouble point, int *segmentNumber=NULL) const</td></tr>
 <tr class="memdesc:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between a line (formed by point list) and a point.  <a href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">More...</a><br /></td></tr>
 <tr class="separator:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc164e654f8347385a68c6abf7733f53 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="acc164e654f8347385a68c6abf7733f53"></a>
+virtual rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><b>SaveElement</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementListNode)</td></tr>
+<tr class="separator:acc164e654f8347385a68c6abf7733f53 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad250a9be862d47bedfd4f6a1f526b5cf inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ad250a9be862d47bedfd4f6a1f526b5cf"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenElement</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ad250a9be862d47bedfd4f6a1f526b5cf inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab84987a1ba6ddc82cc2316d816bf6d06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveCADProperties</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ada74d29413484cfe1f0beb039892d4c8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenCADProperties</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8af85e268ffdad900f94f83105f1ed19"><td class="memItemLeft" align="right" valign="top"><a id="a8af85e268ffdad900f94f83105f1ed19"></a>
+static <a class="el" href="class_control_element.html">ControlElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetControlElementFromID</b> (std::vector&lt; <a class="el" href="class_control_element.html">ControlElement</a> *&gt; elementList, int id)</td></tr>
+<tr class="separator:a8af85e268ffdad900f94f83105f1ed19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_class_element"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_element')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_element.html">Element</a></td></tr>
+<tr class="memitem:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">DoubleFromString</a> (wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</td></tr>
+<tr class="memdesc:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a double value from a string. Show a error message if the conversion fail.  <a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">More...</a><br /></td></tr>
+<tr class="separator:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c93a9e20ed0ca0c376cf412b4347159 inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4c93a9e20ed0ca0c376cf412b4347159">IntFromString</a> (wxWindow *parent, wxString strValue, int &amp;value, wxString errorMsg)</td></tr>
+<tr class="memdesc:a4c93a9e20ed0ca0c376cf412b4347159 inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to int. Show a error message if the conversion fail.  <a href="class_element.html#a4c93a9e20ed0ca0c376cf412b4347159">More...</a><br /></td></tr>
+<tr class="separator:a4c93a9e20ed0ca0c376cf412b4347159 inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#abb2e253ec1e86353cd7160209c96553c">StringFromDouble</a> (double value, int minDecimal=1)</td></tr>
+<tr class="memdesc:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a double value to string.  <a href="class_element.html#abb2e253ec1e86353cd7160209c96553c">More...</a><br /></td></tr>
+<tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0bd1ab46b6dca2838d01e13714f2f15d"><td class="memItemLeft" align="right" valign="top"><a id="a0bd1ab46b6dca2838d01e13714f2f15d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveControlNodes</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a0bd1ab46b6dca2838d01e13714f2f15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9374cc5f89f4bfcd84d5db171ee38973"><td class="memItemLeft" align="right" valign="top"><a id="a9374cc5f89f4bfcd84d5db171ee38973"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenControlNodes</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a9374cc5f89f4bfcd84d5db171ee38973"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -436,19 +484,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 <tr class="memitem:ab0df145138fef6ed901ff4b1828439b0 inherit pro_attribs_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab0df145138fef6ed901ff4b1828439b0"></a>
 <a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_selectionColour</b></td></tr>
 <tr class="separator:ab0df145138fef6ed901ff4b1828439b0 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_methods_class_element"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_element')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_element.html">Element</a></td></tr>
-<tr class="memitem:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">DoubleFromString</a> (wxWindow *parent, wxString strValue, double &amp;value, wxString errorMsg)</td></tr>
-<tr class="memdesc:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a double value from a string. Show a error message if the conversion fail.  <a href="class_element.html#acfd2c0fe1af5a8ad6da393fb711fd69a">More...</a><br /></td></tr>
-<tr class="separator:acfd2c0fe1af5a8ad6da393fb711fd69a inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c93a9e20ed0ca0c376cf412b4347159 inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4c93a9e20ed0ca0c376cf412b4347159">IntFromString</a> (wxWindow *parent, wxString strValue, int &amp;value, wxString errorMsg)</td></tr>
-<tr class="memdesc:a4c93a9e20ed0ca0c376cf412b4347159 inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to int. Show a error message if the conversion fail.  <a href="class_element.html#a4c93a9e20ed0ca0c376cf412b4347159">More...</a><br /></td></tr>
-<tr class="separator:a4c93a9e20ed0ca0c376cf412b4347159 inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memItemLeft" align="right" valign="top">static wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#abb2e253ec1e86353cd7160209c96553c">StringFromDouble</a> (double value, int minDecimal=1)</td></tr>
-<tr class="memdesc:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a double value to string.  <a href="class_element.html#abb2e253ec1e86353cd7160209c96553c">More...</a><br /></td></tr>
-<tr class="separator:abb2e253ec1e86353cd7160209c96553c inherit pub_static_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Thales Lima Oliveira <a href="#" onclick="location.href='mai'+'lto:'+'tha'+'le'+'s@u'+'fu'+'.br'; return false;">thale<span style="display: none;">.nosp@m.</span>s@uf<span style="display: none;">.nosp@m.</span>u.br</a> </dd></dl>
@@ -556,7 +591,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Update the OpenGL text in the element (if present). </p>
 <dl class="section return"><dt>Returns</dt><dd>true if <a class="el" href="class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. ">OpenGLText</a> is ok, false otherwise. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl</a>, <a class="el" href="class_transfer_function.html#a5ca78c0edc2a9af0a1375b1b83d81d1b">TransferFunction</a>, <a class="el" href="class_gain.html#a5f955287a3e2c95404cdde9e71b1c637">Gain</a>, and <a class="el" href="class_constant.html#a380618903f79d9062da054a7337bab97">Constant</a>.</p>
+<p>Reimplemented in <a class="el" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl</a>, <a class="el" href="class_math_expression.html#a7430d1f92978843de5f1bd171f09def6">MathExpression</a>, <a class="el" href="class_transfer_function.html#a5ca78c0edc2a9af0a1375b1b83d81d1b">TransferFunction</a>, <a class="el" href="class_gain.html#a5f955287a3e2c95404cdde9e71b1c637">Gain</a>, and <a class="el" href="class_constant.html#a380618903f79d9062da054a7337bab97">Constant</a>.</p>
 
 </div>
 </div>

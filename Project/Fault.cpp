@@ -34,11 +34,11 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
 
     // Get adimittance matrices.
     std::vector<std::vector<std::complex<double> > > yBusPos;
-    GetYBus(yBusPos, systemPowerBase, POSITIVE_SEQ, true);
+    GetYBus(yBusPos, systemPowerBase, POSITIVE_SEQ, true, true);
     std::vector<std::vector<std::complex<double> > > yBusNeg;
-    GetYBus(yBusNeg, systemPowerBase, NEGATIVE_SEQ, true);
+    GetYBus(yBusNeg, systemPowerBase, NEGATIVE_SEQ, true, true);
     std::vector<std::vector<std::complex<double> > > yBusZero;
-    GetYBus(yBusZero, systemPowerBase, ZERO_SEQ, true);
+    GetYBus(yBusZero, systemPowerBase, ZERO_SEQ, true, true);
 
     // Calculate the impedance matrices.
     if(!InvertMatrix(yBusPos, m_zBusPos)) {

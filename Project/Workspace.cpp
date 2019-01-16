@@ -1449,6 +1449,12 @@ bool Workspace::RunStability()
             ElementPlotData plotData;
             if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
         }
+        
+        ElementPlotData plotData;
+        plotData.SetName(_("Simulation parameters"));
+        plotData.SetCurveType(ElementPlotData::CT_TEST);
+        plotData.AddData(stability.GetIterationVector(), _("Iterations number"));
+        plotDataList.push_back(plotData);
 
         ChartView* cView = new ChartView(this, plotDataList, m_stabilityTimeVector);
         cView->Show();

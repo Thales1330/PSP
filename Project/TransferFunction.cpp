@@ -291,10 +291,11 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     }
     for(int i = 0; i < order - 1; i++) {
         ss.A[order - 2][i] = -(denominator[order - 1 - i] / denominator[0]);
-        ss.C[i] = (numerator[order - 1 - i] - denominator[order - 1 - i] * numerator[0]) / denominator[0];
+        ss.C[i] = numerator[order - 1 - i] / denominator[0] -
+                  (denominator[order - 1 - i] / denominator[0]) * (numerator[0] / denominator[0]);
     }
     ss.B[order - 2] = 1.0;
-    ss.D = numerator[0];
+    ss.D = numerator[0] / denominator[0];
 
     m_ss = ss;
 

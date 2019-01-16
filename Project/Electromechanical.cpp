@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Electromechanical.h"
 #include "ControlElementSolver.h"
+#include "Electromechanical.h"
 
 Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> elementList, SimulationData data)
 {
@@ -70,10 +70,11 @@ bool Electromechanical::RunStabilityCalculation()
     wxProgressDialog pbd(_("Running simulation"), _("Initializing..."), 100, m_parent,
                          wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
 
+    PreallocateVectors();  // Reserve the vectors' memory with a estimated size, this can optimize the simulation.
     SetSyncMachinesModel();
 
     // Calculate the admittance matrix with the synchronous machines.
-    if(!GetYBus(m_yBus, m_powerSystemBase, POSITIVE_SEQ, false, true)) {
+    if(!GetYBus(m_yBus, m_powerSystemBase, POSITIVE_SEQ, false, true, true)) {
         m_errorMsg = _("It was not possible to build the admittance matrix.");
         return false;
     }
@@ -234,7 +235,8 @@ void Electromechanical::SetEvent(double currentTime)
                     Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
                     int n = parentBus->GetElectricalData().number;
                     std::complex<double> v = parentBus->GetElectricalData().voltage;
-                    m_yBus[n][n] -= std::complex<double>(data.activePower, -data.reactivePower) / (v * v);
+                    m_yBus[n][n] -= std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
+
                 }
 
                 // Insert load (only disconnected load)
@@ -244,7 +246,7 @@ void Electromechanical::SetEvent(double currentTime)
                         Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
                         int n = parentBus->GetElectricalData().number;
                         std::complex<double> v = parentBus->GetElectricalData().voltage;
-                        m_yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower) / (v * v);
+                        m_yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
                     }
                 }
             }
@@ -996,6 +998,7 @@ bool Electromechanical::SolveSynchronousMachines()
             return false;
         }
     }
+    m_iterationsNum = iterations;
 
     // Solve controllers.
     int ctrlRatio = static_cast<int>(1 / m_ctrlTimeStepMultiplier);
@@ -1006,7 +1009,8 @@ bool Electromechanical::SolveSynchronousMachines()
             data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
             data.avrSolver->SetCurrentTime(m_currentTime);
             data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
-            data.avrSolver->SetDeltaActivePower((data.electricalPower.real() - data.avrSolver->GetActivePower()) / m_timeStep);
+            data.avrSolver->SetDeltaActivePower((data.electricalPower.real() - data.avrSolver->GetActivePower()) /
+                                                m_timeStep);
             data.avrSolver->SetActivePower(data.electricalPower.real());
             data.avrSolver->SetReactivePower(data.electricalPower.imag());
             data.avrSolver->SetDeltaVelocity((data.speed - data.avrSolver->GetVelocity()) / m_timeStep);
@@ -1066,6 +1070,7 @@ void Electromechanical::SaveData()
             load->SetElectricalData(data);
         }
     }
+    m_iterationsNumVector.push_back(m_iterationsNum);
 }
 
 void Electromechanical::SetSyncMachinesModel()
@@ -1089,9 +1094,7 @@ bool Electromechanical::CalculateSyncMachineNonIntVariables(SyncGenerator* syncG
     auto data = syncGenerator->GetElectricalData();
     int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
 
-    if(syncGenerator->IsOnline()) {
-        data.terminalVoltage = m_vBus[n];
-    }
+    if(syncGenerator->IsOnline()) { data.terminalVoltage = m_vBus[n]; }
 
     double vd, vq;
     ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);
@@ -1287,9 +1290,7 @@ bool Electromechanical::CalculateSyncMachineSaturation(SyncGenerator* syncMachin
     auto smDataModel = GetSyncMachineModelData(syncMachine);
 
     int n = static_cast<Bus*>(syncMachine->GetParentList()[0])->GetElectricalData().number;
-    if(syncMachine->IsOnline()) {
-        data.terminalVoltage = m_vBus[n];
-    }
+    if(syncMachine->IsOnline()) { data.terminalVoltage = m_vBus[n]; }
     double idCalc = id;
     double iqCalc = iq;
     double sdCalc = sd;
@@ -1394,9 +1395,7 @@ SyncMachineModelData Electromechanical::GetSyncMachineModelData(SyncGenerator* s
             smModelData.xq = data.transXq * k;
             if(smModelData.xq == 0.0) {
                 smModelData.xq = data.syncXq * k;
-                if(smModelData.xq == 0.0) {
-                    smModelData.xq = data.syncXd * k;
-                }
+                if(smModelData.xq == 0.0) { smModelData.xq = data.syncXd * k; }
             }
         } break;
         case Machines::SM_MODEL_3: {
@@ -1417,4 +1416,41 @@ SyncMachineModelData Electromechanical::GetSyncMachineModelData(SyncGenerator* s
         } break;
     }
     return smModelData;
+}
+
+void Electromechanical::PreallocateVectors()
+{
+    int numPoints = static_cast<unsigned int>(m_simTime / m_plotTime);
+
+    m_timeVector.reserve(numPoints);
+    for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
+        SyncGenerator* syncGenerator = *it;
+        auto data = syncGenerator->GetElectricalData();
+        if(data.plotSyncMachine) {
+            data.terminalVoltageVector.reserve(numPoints);
+            data.electricalPowerVector.reserve(numPoints);
+            data.mechanicalPowerVector.reserve(numPoints);
+            data.freqVector.reserve(numPoints);
+            data.fieldVoltageVector.reserve(numPoints);
+            data.deltaVector.reserve(numPoints);
+            syncGenerator->SetElectricalData(data);
+        }
+    }
+    for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        auto data = bus->GetElectricalData();
+        if(data.plotBus) {
+            data.stabVoltageVector.reserve(numPoints);
+            bus->SetElectricalData(data);
+        }
+    }
+    for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
+        Load* load = *it;
+        auto data = load->GetElectricalData();
+        if(data.plotLoad) {
+            data.voltageVector.reserve(numPoints);
+            data.electricalPowerVector.reserve(numPoints);
+            load->SetElectricalData(data);
+        }
+    }
 }

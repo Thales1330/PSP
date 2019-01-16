@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Text Class Reference</title>
+<title>Power System Platform: Text Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,6 +29,11 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Power System Platform
+   &#160;<span id="projectnumber">2018w15a</span>
+   </div>
+  </td>
  </tr>
  </tbody>
 </table>
@@ -147,7 +152,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElement</b> (<a cl
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElementNumber</b> (int elementNumber)</td></tr>
 <tr class="separator:aef377b465f00fe9aec996e122c1bb23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa32f9156fbbe783fab5d90072667e2c3"><td class="memItemLeft" align="right" valign="top"><a id="aa32f9156fbbe783fab5d90072667e2c3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElementType</b> (const ElementType elementType)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElementType</b> (const <a class="el" href="_text_8h.html#a16b11be27a8e9362dd122c4d879e01ae">ElementType</a> elementType)</td></tr>
 <tr class="separator:aa32f9156fbbe783fab5d90072667e2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eb67f2bf595a78858733c96a5bc05d6"><td class="memItemLeft" align="right" valign="top"><a id="a5eb67f2bf595a78858733c96a5bc05d6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetUnit</b> (const <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca">ElectricalUnit</a> unit)</td></tr>
@@ -168,7 +173,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>GetDirection</b> () co
 int&#160;</td><td class="memItemRight" valign="bottom"><b>GetElementNumber</b> () const</td></tr>
 <tr class="separator:a340b00ac7a17cd9a1f37f63275715638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80916b96c94d30abd8d76dcbf01d580d"><td class="memItemLeft" align="right" valign="top"><a id="a80916b96c94d30abd8d76dcbf01d580d"></a>
-const ElementType&#160;</td><td class="memItemRight" valign="bottom"><b>GetElementType</b> () const</td></tr>
+const <a class="el" href="_text_8h.html#a16b11be27a8e9362dd122c4d879e01ae">ElementType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetElementType</b> () const</td></tr>
 <tr class="separator:a80916b96c94d30abd8d76dcbf01d580d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41eabb28f45124d5da3ec2d703ce9018"><td class="memItemLeft" align="right" valign="top"><a id="a41eabb28f45124d5da3ec2d703ce9018"></a>
 const <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca">ElectricalUnit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetUnit</b> () const</td></tr>
@@ -176,6 +181,12 @@ const <a class="el" href="_power_element_8h.html#a398e3da742a726a8f2bacd8149220c
 <tr class="memitem:a03c67acf11b90374ded2a8cb8ec1088f"><td class="memItemLeft" align="right" valign="top"><a id="a03c67acf11b90374ded2a8cb8ec1088f"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>GetDecimalPlaces</b> () const</td></tr>
 <tr class="separator:a03c67acf11b90374ded2a8cb8ec1088f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab680b4baaa1a6ee6a5a1e1c03b2444e0"><td class="memItemLeft" align="right" valign="top"><a id="ab680b4baaa1a6ee6a5a1e1c03b2444e0"></a>
+virtual rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><b>SaveElement</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementListNode)</td></tr>
+<tr class="separator:ab680b4baaa1a6ee6a5a1e1c03b2444e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ad0af76d16fda04d5af95b5b441d1f"><td class="memItemLeft" align="right" valign="top"><a id="a77ad0af76d16fda04d5af95b5b441d1f"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenElement</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:a77ad0af76d16fda04d5af95b5b441d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_element')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_element.html">Element</a></td></tr>
 <tr class="memitem:ab0d0e20be9a36ae676202db753faeec9 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab0d0e20be9a36ae676202db753faeec9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element</a> ()</td></tr>
@@ -377,6 +388,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (
 <tr class="memitem:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">PointToLineDistance</a> (wxPoint2DDouble point, int *segmentNumber=NULL) const</td></tr>
 <tr class="memdesc:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between a line (formed by point list) and a point.  <a href="class_element.html#a158e271d7f309cd49002ca3c98365e9b">More...</a><br /></td></tr>
 <tr class="separator:a158e271d7f309cd49002ca3c98365e9b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ab84987a1ba6ddc82cc2316d816bf6d06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveCADProperties</b> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ab84987a1ba6ddc82cc2316d816bf6d06 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memItemLeft" align="right" valign="top"><a id="ada74d29413484cfe1f0beb039892d4c8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>OpenCADProperties</b> (rapidxml::xml_node&lt;&gt; *elementNode)</td></tr>
+<tr class="separator:ada74d29413484cfe1f0beb039892d4c8 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -396,7 +413,7 @@ std::vector&lt; <a class="el" href="class_open_g_l_text.html">OpenGLText</a> * &
 <a class="el" href="class_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_element</b> = NULL</td></tr>
 <tr class="separator:a7010e26ac225166d3a7f23118bf45f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0ab42a8d5145cd1d780f695d0e6e64f"><td class="memItemLeft" align="right" valign="top"><a id="ac0ab42a8d5145cd1d780f695d0e6e64f"></a>
-ElementType&#160;</td><td class="memItemRight" valign="bottom"><b>m_elementType</b> = TYPE_NONE</td></tr>
+<a class="el" href="_text_8h.html#a16b11be27a8e9362dd122c4d879e01ae">ElementType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_elementType</b> = TYPE_NONE</td></tr>
 <tr class="separator:ac0ab42a8d5145cd1d780f695d0e6e64f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bab7377ac548d1883dcbbe2489c5ff1"><td class="memItemLeft" align="right" valign="top"><a id="a8bab7377ac548d1883dcbbe2489c5ff1"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_elementNumber</b></td></tr>

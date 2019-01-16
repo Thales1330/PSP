@@ -32,13 +32,13 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = 
+PROJECT_NAME           = "Power System Platform"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = 2017w45a
+PROJECT_NUMBER         = 2018w15a
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -876,8 +876,25 @@ RECURSIVE              = NO
 
 EXCLUDE                = Project/rapidXML \
                          Project/wxMathPlot \
-                         Project/base \
-                         Project/artProvider
+                         Project/artProvider \
+                         Project/ControlEditorBase.cpp \
+                         Project/ControlEditorBase.h \
+                         Project/ControlEditorBitmaps.cpp \
+                         Project/DataReportBase.cpp \
+                         Project/DataReportBase.h \
+                         Project/DataReportBitmaps.cpp \
+                         Project/ElementFormBase.cpp \
+                         Project/ElementFormBase.h \
+                         Project/ElementFormBitmaps.cpp \
+                         Project/MainFrameBase.cpp \
+                         Project/MainFrameBase.h \
+                         Project/MainFrameBitmaps.cpp \
+                         Project/PropertiesFormBase.cpp \
+                         Project/PropertiesFormBase.h \
+                         Project/PropertiesFormBitmaps.cpp \
+                         Project/WorkspaceBase.cpp \
+                         Project/WorkspaceBase.h \
+                         Project/WorkspaceBitmaps.cpp
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1670,7 +1687,7 @@ EXTRA_SEARCH_MAPPINGS  =
 # If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.
 # The default value is: YES.
 
-GENERATE_LATEX         = NO
+GENERATE_LATEX         = YES
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of

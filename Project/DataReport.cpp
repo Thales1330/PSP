@@ -1030,11 +1030,12 @@ void DataReport::GridKeyHandler(wxGrid* grid, wxKeyEvent& event)
                 }
             }
         }
-
-        wxOpenClipboard();
-        wxEmptyClipboard();
-        wxSetClipboardData(wxDF_TEXT, copyData.mb_str(), 0, 0);  // In Windows need this for UNICODE
-        wxCloseClipboard();
+        
+        if (wxTheClipboard->Open())
+        {
+            wxTheClipboard->SetData(new wxTextDataObject(copyData));
+            wxTheClipboard->Close();
+        }
     } else if(event.GetKeyCode() == 'A' && event.GetModifiers() == wxMOD_CONTROL) {  // Select all
         grid->SelectAll();
     }

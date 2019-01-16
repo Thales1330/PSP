@@ -428,7 +428,7 @@
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="UNICODE"/>
       </Compiler>
-      <Linker Options="$(shell wx-config --libs std,ribbon,aui,propgrid,richtext,gl)" Required="yes">
+      <Linker Options="$(shell wx-config --libs std,ribbon,aui,propgrid,richtext,stc,gl)" Required="yes">
         <Library Value="GLU"/>
         <Library Value="GL"/>
       </Linker>
@@ -513,7 +513,7 @@
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="UNICODE"/>
       </Compiler>
-      <Linker Options="$(shell wx-config --libs std,ribbon,aui,propgrid,richtext,gl);-mwindows" Required="yes"/>
+      <Linker Options="$(shell wx-config --libs std,ribbon,aui,propgrid,richtext,stc,gl);-mwindows" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/pspufu" IntermediateDirectory="./Release_Windows_x64" Command="./pspufu" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>

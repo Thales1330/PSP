@@ -74,7 +74,8 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                                   double systemPowerBase,
                                   YBusSequence sequence,
                                   bool includeSyncMachines,
-                                  bool allLoadsAsImpedances)
+                                  bool allLoadsAsImpedances,
+                                  bool usePowerFlowVoltagesOnImpedances)
 {
     if(m_busList.size() == 0) return false;
 
@@ -106,7 +107,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
             LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
             if(data.loadType == CONST_IMPEDANCE || allLoadsAsImpedances) {
                 std::complex<double> yLoad = std::complex<double>(data.activePower, -data.reactivePower);
-                if(allLoadsAsImpedances) {
+                if(allLoadsAsImpedances && usePowerFlowVoltagesOnImpedances) {
                     std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
                     yLoad /= (std::abs(v) * std::abs(v));
                 }

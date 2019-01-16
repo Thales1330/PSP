@@ -57,6 +57,9 @@ class Electromechanical : public ElectricCalculation
     bool RunStabilityCalculation();
     wxString GetErrorMessage() const { return m_errorMsg; }
     std::vector<double> GetTimeVector() const { return m_timeVector; }
+    
+    // For tests
+    std::vector<double> GetIterationVector() const { return m_iterationsNumVector; }
 
    protected:
     void SetEventTimeList();
@@ -98,6 +101,7 @@ class Electromechanical : public ElectricCalculation
                                         double k = 1.0);
 
     void SaveData();
+    void PreallocateVectors();
 
     wxWindow* m_parent = NULL;
     wxString m_errorMsg = _("Unknown error");
@@ -127,6 +131,10 @@ class Electromechanical : public ElectricCalculation
     std::vector<bool> m_eventOccurrenceList;
 
     std::vector<double> m_timeVector;
+    
+    // For tests
+    int m_iterationsNum = 0.0;
+    std::vector<double> m_iterationsNumVector;
 };
 
 #endif  // ELECTROMECHANICAL_H
