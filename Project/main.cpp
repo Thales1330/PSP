@@ -17,6 +17,8 @@ class MainApp : public wxApp
     virtual ~MainApp() {}
     bool LoadInitFile(PropertiesData* propertiesData)
     {
+        // Load configuration file, if don't exists create it.
+        // Find the executable location path.
         wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
         wxTextFile file(fn.GetPath() + wxFileName::GetPathSeparator() + "config.ini");
         auto data = propertiesData->GetGeneralPropertiesData();
@@ -77,6 +79,7 @@ class MainApp : public wxApp
 
     void LoadCatalogs(wxLocale* locale, PropertiesData* propertiesData)
     {
+        // Load language catalogs according the propertiesData attribute.
         if(!locale->Init(propertiesData->GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT)) {
             wxMessageDialog msgDialog(NULL, _("This language is not supported by the system."), _("Error"),
                                       wxOK | wxCENTRE | wxICON_ERROR);
@@ -109,7 +112,8 @@ class MainApp : public wxApp
         LoadCatalogs(locale, propertiesData);
 
         wxString openFilePath = "";
-
+        
+        // Load command line attributes. This is used to directly open saved files (.psp).
         wxCmdLineParser cmdLineParser(wxApp::argc, wxApp::argv);
         cmdLineParser.AddParam("", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
         if(cmdLineParser.Parse() == 0) {
@@ -120,6 +124,7 @@ class MainApp : public wxApp
         }
         MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData, openFilePath);
 #ifdef __WXMSW__
+        //Set application icon for windows
         mainFrame->SetIcon(wxICON(aaaaprogicon));
 #endif
         SetTopWindow(mainFrame);
