@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-	<Name>IEEE 14 Barras_PSS_CC</Name>
+	<Name>IEEE 14 bus - fault</Name>
 	<Properties>
 		<SimulationProperties>
 			<General>
@@ -242,7 +242,7 @@
 					<ControlledVoltage Choice="0">1.0500000000000</ControlledVoltage>
 					<SlackBus>0</SlackBus>
 					<Fault>
-						<HasFault>0</HasFault>
+						<HasFault>1</HasFault>
 						<Type>0</Type>
 						<Location>4</Location>
 						<Resistance>0.0000000000000</Resistance>
@@ -1694,8 +1694,8 @@
 					<Name>Gerador 1</Name>
 					<NominalPower UnitID="10">615.0000000000000</NominalPower>
 					<NominalVoltage UnitID="2">69.0000000000000</NominalVoltage>
-					<ActivePower UnitID="7">288.9839523788656</ActivePower>
-					<ReactivePower UnitID="13">16.0820164233581</ReactivePower>
+					<ActivePower UnitID="7">248.6373217770593</ActivePower>
+					<ReactivePower UnitID="13">-18.5366518599785</ReactivePower>
 					<HaveMaxReactive>0</HaveMaxReactive>
 					<MaxReactive UnitID="13">0.0000000000000</MaxReactive>
 					<HaveMinReactive>0</HaveMinReactive>
@@ -1737,8 +1737,8 @@
 								<Exponential ID="88">
 									<CADProperties>
 										<Position>
-											<X>596.6666666666667</X>
-											<Y>74.0000000000000</Y>
+											<X>503.6666666666667</X>
+											<Y>46.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -1749,16 +1749,16 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>614.6666666666667</X>
-												<Y>74.0000000000000</Y>
+												<X>521.6666666666667</X>
+												<Y>46.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>578.6666666666667</X>
-												<Y>74.0000000000000</Y>
+												<X>485.6666666666667</X>
+												<Y>46.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>1</Type>
@@ -1770,58 +1770,25 @@
 									</Value>
 								</Exponential>
 							</ExponentialList>
-							<GainList>
-								<Gain ID="116">
-									<CADProperties>
-										<Position>
-											<X>166.0000000000000</X>
-											<Y>361.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>40.0000000000000</Width>
-											<Height>40.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>146.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="1">
-											<Position>
-												<X>184.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<Value>2.0000000000000</Value>
-								</Gain>
-							</GainList>
+							<GainList/>
 							<IOList>
 								<IO ID="89">
 									<CADProperties>
 										<Position>
-											<X>713.4761904761906</X>
-											<Y>146.4285714285714</Y>
+											<X>620.4761904761906</X>
+											<Y>118.4285714285714</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>30.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>699.4761904761906</X>
-												<Y>146.4285714285714</Y>
+												<X>605.4761904761906</X>
+												<Y>118.4285714285714</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
@@ -1833,20 +1800,20 @@
 								<IO ID="108">
 									<CADProperties>
 										<Position>
-											<X>142.0000000000000</X>
-											<Y>147.0000000000000</Y>
+											<X>51.0000000000000</X>
+											<Y>128.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>29.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>154.0000000000000</X>
-												<Y>147.0000000000000</Y>
+												<X>63.5000000000000</X>
+												<Y>128.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -1858,20 +1825,20 @@
 								<IO ID="110">
 									<CADProperties>
 										<Position>
-											<X>172.0000000000000</X>
-											<Y>82.0000000000000</Y>
+											<X>79.0000000000000</X>
+											<Y>61.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>33.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>35.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>172.0000000000000</X>
-												<Y>95.0000000000000</Y>
+												<X>79.0000000000000</X>
+												<Y>75.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -1880,63 +1847,13 @@
 									<Value>64</Value>
 									<IOFlags>1887</IOFlags>
 								</IO>
-								<IO ID="159">
-									<CADProperties>
-										<Position>
-											<X>49.0000000000000</X>
-											<Y>395.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>61.0000000000000</X>
-												<Y>395.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<Value>256</Value>
-									<IOFlags>1887</IOFlags>
-								</IO>
-								<IO ID="161">
-									<CADProperties>
-										<Position>
-											<X>51.0000000000000</X>
-											<Y>352.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>32.0000000000000</Width>
-											<Height>30.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>65.0000000000000</X>
-												<Y>352.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<Value>512</Value>
-									<IOFlags>1887</IOFlags>
-								</IO>
 							</IOList>
 							<LimiterList>
 								<Limiter ID="84">
 									<CADProperties>
 										<Position>
-											<X>456.0952380952381</X>
-											<Y>155.9523809523810</Y>
+											<X>363.0952380952381</X>
+											<Y>127.9523809523810</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -1947,16 +1864,16 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>438.0952380952381</X>
-												<Y>155.9523809523810</Y>
+												<X>345.0952380952381</X>
+												<Y>127.9523809523810</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>474.0952380952381</X>
-												<Y>155.9523809523810</Y>
+												<X>381.0952380952381</X>
+												<Y>127.9523809523810</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -1965,125 +1882,44 @@
 									<UpperLimit>8.8200000000000</UpperLimit>
 									<LowerLimit>-1.0800000000000</LowerLimit>
 								</Limiter>
-								<Limiter ID="115">
-									<CADProperties>
-										<Position>
-											<X>187.0000000000000</X>
-											<Y>247.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>36.0000000000000</Width>
-											<Height>36.0000000000000</Height>
-										</Size>
-										<Angle>270.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>187.0000000000000</X>
-												<Y>265.0000000000000</Y>
-											</Position>
-											<Angle>270.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="1">
-											<Position>
-												<X>187.0000000000000</X>
-												<Y>229.0000000000000</Y>
-											</Position>
-											<Angle>90.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<UpperLimit>0.1000000000000</UpperLimit>
-									<LowerLimit>-0.1000000000000</LowerLimit>
-								</Limiter>
 							</LimiterList>
 							<MultiplierList/>
-							<DividerList>
-								<Divider ID="156">
-									<CADProperties>
-										<Position>
-											<X>99.0000000000000</X>
-											<Y>361.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>36.0000000000000</Width>
-											<Height>36.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>81.0000000000000</X>
-												<Y>352.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="1">
-											<Position>
-												<X>81.0000000000000</X>
-												<Y>370.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="2">
-											<Position>
-												<X>117.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-								</Divider>
-							</DividerList>
+							<DividerList/>
 							<RateLimiterList/>
 							<SumList>
 								<Sum ID="82">
 									<CADProperties>
 										<Position>
-											<X>215.0000000000000</X>
-											<Y>147.0000000000000</Y>
+											<X>122.0000000000000</X>
+											<Y>119.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
-											<Height>54.0000000000000</Height>
+											<Height>36.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>197.0000000000000</X>
-												<Y>129.0000000000000</Y>
+												<X>104.0000000000000</X>
+												<Y>110.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>197.0000000000000</X>
-												<Y>147.0000000000000</Y>
+												<X>104.0000000000000</X>
+												<Y>128.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="2">
 											<Position>
-												<X>197.0000000000000</X>
-												<Y>165.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="3">
-											<Position>
-												<X>233.0000000000000</X>
-												<Y>147.0000000000000</Y>
+												<X>140.0000000000000</X>
+												<Y>119.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -2092,14 +1928,13 @@
 									<Signs>
 										<Value>0</Value>
 										<Value>1</Value>
-										<Value>0</Value>
 									</Signs>
 								</Sum>
 								<Sum ID="87">
 									<CADProperties>
 										<Position>
-											<X>293.0000000000000</X>
-											<Y>156.0000000000000</Y>
+											<X>200.0000000000000</X>
+											<Y>128.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -2110,24 +1945,24 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>275.0000000000000</X>
-												<Y>147.0000000000000</Y>
+												<X>182.0000000000000</X>
+												<Y>119.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>275.0000000000000</X>
-												<Y>165.0000000000000</Y>
+												<X>182.0000000000000</X>
+												<Y>137.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="2">
 											<Position>
-												<X>311.0000000000000</X>
-												<Y>156.0000000000000</Y>
+												<X>218.0000000000000</X>
+												<Y>128.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -2141,8 +1976,8 @@
 								<Sum ID="95">
 									<CADProperties>
 										<Position>
-											<X>534.0000000000001</X>
-											<Y>146.9047619047619</Y>
+											<X>441.0000000000000</X>
+											<Y>118.9047619047619</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -2153,24 +1988,24 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>516.0000000000001</X>
-												<Y>137.9047619047619</Y>
+												<X>423.0000000000000</X>
+												<Y>109.9047619047619</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>516.0000000000001</X>
-												<Y>155.9047619047619</Y>
+												<X>423.0000000000000</X>
+												<Y>127.9047619047619</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="2">
 											<Position>
-												<X>552.0000000000001</X>
-												<Y>146.9047619047619</Y>
+												<X>459.0000000000000</X>
+												<Y>118.9047619047619</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -2182,69 +2017,33 @@
 									</Signs>
 								</Sum>
 							</SumList>
-							<MathExprList>
-								<MathExpr ID="142">
-									<CADProperties>
-										<Position>
-											<X>507.0000000000000</X>
-											<Y>361.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>82.0000000000000</Width>
-											<Height>36.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>466.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="1">
-											<Position>
-												<X>548.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<VariableList>
-										<Variable>in_pss</Variable>
-									</VariableList>
-									<MathExprValue>if(switch = closed, in_pss, 0.0)</MathExprValue>
-								</MathExpr>
-							</MathExprList>
+							<MathExprList/>
 							<TransferFunctionList>
 								<TransferFunction ID="83">
 									<CADProperties>
 										<Position>
-											<X>376.0000000000000</X>
-											<Y>156.0000000000000</Y>
+											<X>283.0000000000000</X>
+											<Y>128.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>345.0000000000000</X>
-												<Y>156.0000000000000</Y>
+												<X>245.0000000000000</X>
+												<Y>128.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>407.0000000000000</X>
-												<Y>156.0000000000000</Y>
+												<X>321.0000000000000</X>
+												<Y>128.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -2261,28 +2060,28 @@
 								<TransferFunction ID="85">
 									<CADProperties>
 										<Position>
-											<X>619.4761904761906</X>
-											<Y>146.4285714285714</Y>
+											<X>526.4761904761906</X>
+											<Y>118.4285714285714</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>588.4761904761906</X>
-												<Y>146.4285714285714</Y>
+												<X>488.4761904761906</X>
+												<Y>118.4285714285714</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>650.4761904761906</X>
-												<Y>146.4285714285714</Y>
+												<X>564.4761904761906</X>
+												<Y>118.4285714285714</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -2299,28 +2098,28 @@
 								<TransferFunction ID="86">
 									<CADProperties>
 										<Position>
-											<X>467.0000000000000</X>
-											<Y>228.0000000000000</Y>
+											<X>374.0000000000000</X>
+											<Y>200.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>57.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>70.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>180.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>495.5000000000000</X>
-												<Y>228.0000000000000</Y>
+												<X>409.0000000000000</X>
+												<Y>200.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>438.5000000000000</X>
-												<Y>228.0000000000000</Y>
+												<X>339.0000000000000</X>
+												<Y>200.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>1</Type>
@@ -2332,123 +2131,6 @@
 									</Numerator>
 									<Denominator>
 										<Value>1.0000000000000</Value>
-										<Value>1.0000000000000</Value>
-									</Denominator>
-								</TransferFunction>
-								<TransferFunction ID="118">
-									<CADProperties>
-										<Position>
-											<X>227.0000000000000</X>
-											<Y>361.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>51.0000000000000</Width>
-											<Height>36.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>201.5000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="1">
-											<Position>
-												<X>252.5000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<Numerator>
-										<Value>10.0000000000000</Value>
-										<Value>0.0000000000000</Value>
-									</Numerator>
-									<Denominator>
-										<Value>10.0000000000000</Value>
-										<Value>1.0000000000000</Value>
-									</Denominator>
-								</TransferFunction>
-								<TransferFunction ID="136">
-									<CADProperties>
-										<Position>
-											<X>312.0000000000000</X>
-											<Y>361.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>281.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="1">
-											<Position>
-												<X>343.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<Numerator>
-										<Value>0.2800000000000</Value>
-										<Value>1.0000000000000</Value>
-									</Numerator>
-									<Denominator>
-										<Value>0.2000000000000</Value>
-										<Value>1.0000000000000</Value>
-									</Denominator>
-								</TransferFunction>
-								<TransferFunction ID="137">
-									<CADProperties>
-										<Position>
-											<X>400.0000000000000</X>
-											<Y>361.0000000000000</Y>
-										</Position>
-										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
-										</Size>
-										<Angle>0.0000000000000</Angle>
-									</CADProperties>
-									<NodeList>
-										<Node ID="0">
-											<Position>
-												<X>369.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>0.0000000000000</Angle>
-											<Type>0</Type>
-										</Node>
-										<Node ID="1">
-											<Position>
-												<X>431.0000000000000</X>
-												<Y>361.0000000000000</Y>
-											</Position>
-											<Angle>180.0000000000000</Angle>
-											<Type>1</Type>
-										</Node>
-									</NodeList>
-									<Numerator>
-										<Value>0.2800000000000</Value>
-										<Value>1.0000000000000</Value>
-									</Numerator>
-									<Denominator>
-										<Value>0.2000000000000</Value>
 										<Value>1.0000000000000</Value>
 									</Denominator>
 								</TransferFunction>
@@ -2477,7 +2159,7 @@
 									<ParentList>
 										<Parent>
 											<ElementID>82</ElementID>
-											<NodeID>3</NodeID>
+											<NodeID>2</NodeID>
 										</Parent>
 										<Parent>
 											<ElementID>87</ElementID>
@@ -2638,134 +2320,6 @@
 									</ParentList>
 									<ParentLine ID="-1"/>
 								</Connection>
-								<Connection ID="133">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>116</ElementID>
-											<NodeID>1</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>118</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
-								<Connection ID="139">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>136</ElementID>
-											<NodeID>1</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>137</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
-								<Connection ID="144">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>142</ElementID>
-											<NodeID>1</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>115</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
-								<Connection ID="150">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>118</ElementID>
-											<NodeID>1</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>136</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
-								<Connection ID="151">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>137</ElementID>
-											<NodeID>1</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>142</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
-								<Connection ID="158">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>156</ElementID>
-											<NodeID>2</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>116</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
-								<Connection ID="160">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>159</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>156</ElementID>
-											<NodeID>1</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
-								<Connection ID="162">
-									<CADProperties>
-										<Offset>0.0000000000000</Offset>
-									</CADProperties>
-									<ParentList>
-										<Parent>
-											<ElementID>161</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-										<Parent>
-											<ElementID>156</ElementID>
-											<NodeID>0</NodeID>
-										</Parent>
-									</ParentList>
-									<ParentLine ID="-1"/>
-								</Connection>
 							</ConnectionList>
 						</AVR>
 						<SpeedGovernor>
@@ -2777,8 +2331,8 @@
 											<Y>333.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>35.0000000000000</Width>
-											<Height>26.0000000000000</Height>
+											<Width>42.0000000000000</Width>
+											<Height>29.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -2786,7 +2340,7 @@
 										<Node ID="0">
 											<Position>
 												<X>388.0000000000000</X>
-												<Y>320.0000000000000</Y>
+												<Y>318.5000000000000</Y>
 											</Position>
 											<Angle>90.0000000000000</Angle>
 											<Type>1</Type>
@@ -2805,8 +2359,8 @@
 											<Y>195.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>33.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -2814,7 +2368,7 @@
 										<Node ID="0">
 											<Position>
 												<X>152.0000000000000</X>
-												<Y>208.0000000000000</Y>
+												<Y>209.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -2830,15 +2384,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>23.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>27.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>123.5000000000000</X>
+												<X>125.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -2855,8 +2409,8 @@
 											<Y>318.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>33.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>270.0000000000000</Angle>
 									</CADProperties>
@@ -2864,7 +2418,7 @@
 										<Node ID="0">
 											<Position>
 												<X>222.0000000000000</X>
-												<Y>305.0000000000000</Y>
+												<Y>303.5000000000000</Y>
 											</Position>
 											<Angle>90.0000000000000</Angle>
 											<Type>1</Type>
@@ -2880,8 +2434,8 @@
 											<Y>191.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>39.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>44.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -2889,7 +2443,7 @@
 										<Node ID="0">
 											<Position>
 												<X>563.0000000000000</X>
-												<Y>204.0000000000000</Y>
+												<Y>205.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -2905,15 +2459,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>34.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>38.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>792.0000000000000</X>
+												<X>790.0000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -3138,15 +2692,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>55.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>67.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>300.5000000000000</X>
+												<X>294.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -3154,7 +2708,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>355.5000000000000</X>
+												<X>361.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -3176,15 +2730,15 @@
 											<Y>269.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>55.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>67.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>474.5000000000000</X>
+												<X>468.5000000000000</X>
 												<Y>269.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -3192,7 +2746,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>529.5000000000000</X>
+												<X>535.5000000000000</X>
 												<Y>269.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -3214,15 +2768,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>66.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>82.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>698.0000000000000</X>
+												<X>690.0000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -3230,7 +2784,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>764.0000000000000</X>
+												<X>772.0000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -3527,8 +3081,8 @@
 								<Exponential ID="88">
 									<CADProperties>
 										<Position>
-											<X>598.0000000000000</X>
-											<Y>72.0000000000000</Y>
+											<X>500.0000000000000</X>
+											<Y>47.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -3539,16 +3093,16 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>616.0000000000000</X>
-												<Y>72.0000000000000</Y>
+												<X>518.0000000000000</X>
+												<Y>47.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>580.0000000000000</X>
-												<Y>72.0000000000000</Y>
+												<X>482.0000000000000</X>
+												<Y>47.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>1</Type>
@@ -3565,20 +3119,20 @@
 								<IO ID="89">
 									<CADProperties>
 										<Position>
-											<X>713.0000000000000</X>
-											<Y>145.0000000000000</Y>
+											<X>615.0000000000000</X>
+											<Y>120.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>30.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>699.0000000000000</X>
-												<Y>145.0000000000000</Y>
+												<X>600.0000000000000</X>
+												<Y>120.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
@@ -3590,20 +3144,20 @@
 								<IO ID="108">
 									<CADProperties>
 										<Position>
-											<X>138.0000000000000</X>
-											<Y>156.0000000000000</Y>
+											<X>40.0000000000000</X>
+											<Y>131.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>29.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>150.0000000000000</X>
-												<Y>156.0000000000000</Y>
+												<X>52.5000000000000</X>
+												<Y>131.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -3615,20 +3169,20 @@
 								<IO ID="110">
 									<CADProperties>
 										<Position>
-											<X>168.0000000000000</X>
-											<Y>91.0000000000000</Y>
+											<X>70.0000000000000</X>
+											<Y>66.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>33.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>35.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>168.0000000000000</X>
-												<Y>104.0000000000000</Y>
+												<X>70.0000000000000</X>
+												<Y>80.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -3642,8 +3196,8 @@
 								<Limiter ID="84">
 									<CADProperties>
 										<Position>
-											<X>450.0000000000000</X>
-											<Y>154.0000000000000</Y>
+											<X>352.0000000000000</X>
+											<Y>129.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -3654,16 +3208,16 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>432.0000000000000</X>
-												<Y>154.0000000000000</Y>
+												<X>334.0000000000000</X>
+												<Y>129.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>468.0000000000000</X>
-												<Y>154.0000000000000</Y>
+												<X>370.0000000000000</X>
+												<Y>129.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -3680,8 +3234,8 @@
 								<Sum ID="82">
 									<CADProperties>
 										<Position>
-											<X>211.0000000000000</X>
-											<Y>147.0000000000000</Y>
+											<X>113.0000000000000</X>
+											<Y>122.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -3692,24 +3246,24 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>193.0000000000000</X>
-												<Y>138.0000000000000</Y>
+												<X>95.0000000000000</X>
+												<Y>113.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>193.0000000000000</X>
-												<Y>156.0000000000000</Y>
+												<X>95.0000000000000</X>
+												<Y>131.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="2">
 											<Position>
-												<X>229.0000000000000</X>
-												<Y>147.0000000000000</Y>
+												<X>131.0000000000000</X>
+												<Y>122.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -3723,8 +3277,8 @@
 								<Sum ID="87">
 									<CADProperties>
 										<Position>
-											<X>293.0000000000000</X>
-											<Y>156.0000000000000</Y>
+											<X>195.0000000000000</X>
+											<Y>131.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -3735,24 +3289,24 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>275.0000000000000</X>
-												<Y>147.0000000000000</Y>
+												<X>177.0000000000000</X>
+												<Y>122.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>275.0000000000000</X>
-												<Y>165.0000000000000</Y>
+												<X>177.0000000000000</X>
+												<Y>140.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="2">
 											<Position>
-												<X>311.0000000000000</X>
-												<Y>156.0000000000000</Y>
+												<X>213.0000000000000</X>
+												<Y>131.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -3766,8 +3320,8 @@
 								<Sum ID="95">
 									<CADProperties>
 										<Position>
-											<X>534.0000000000000</X>
-											<Y>145.0000000000000</Y>
+											<X>436.0000000000000</X>
+											<Y>120.0000000000000</Y>
 										</Position>
 										<Size>
 											<Width>36.0000000000000</Width>
@@ -3778,24 +3332,24 @@
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>516.0000000000000</X>
-												<Y>136.0000000000000</Y>
+												<X>418.0000000000000</X>
+												<Y>111.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>516.0000000000000</X>
-												<Y>154.0000000000000</Y>
+												<X>418.0000000000000</X>
+												<Y>129.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="2">
 											<Position>
-												<X>552.0000000000000</X>
-												<Y>145.0000000000000</Y>
+												<X>454.0000000000000</X>
+												<Y>120.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -3812,28 +3366,28 @@
 								<TransferFunction ID="83">
 									<CADProperties>
 										<Position>
-											<X>376.0000000000000</X>
-											<Y>155.0000000000000</Y>
+											<X>278.0000000000000</X>
+											<Y>130.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>345.0000000000000</X>
-												<Y>155.0000000000000</Y>
+												<X>240.0000000000000</X>
+												<Y>130.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>407.0000000000000</X>
-												<Y>155.0000000000000</Y>
+												<X>316.0000000000000</X>
+												<Y>130.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -3850,28 +3404,28 @@
 								<TransferFunction ID="85">
 									<CADProperties>
 										<Position>
-											<X>619.0000000000000</X>
-											<Y>145.0000000000000</Y>
+											<X>521.0000000000000</X>
+											<Y>120.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>588.0000000000000</X>
-												<Y>145.0000000000000</Y>
+												<X>483.0000000000000</X>
+												<Y>120.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>650.0000000000000</X>
-												<Y>145.0000000000000</Y>
+												<X>559.0000000000000</X>
+												<Y>120.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>1</Type>
@@ -3888,28 +3442,28 @@
 								<TransferFunction ID="86">
 									<CADProperties>
 										<Position>
-											<X>467.0000000000000</X>
-											<Y>228.0000000000000</Y>
+											<X>369.0000000000000</X>
+											<Y>203.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>50.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>61.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>180.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>492.0000000000000</X>
-												<Y>228.0000000000000</Y>
+												<X>399.5000000000000</X>
+												<Y>203.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
 											<Type>0</Type>
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>442.0000000000000</X>
-												<Y>228.0000000000000</Y>
+												<X>338.5000000000000</X>
+												<Y>203.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
 											<Type>1</Type>
@@ -4121,8 +3675,8 @@
 											<Y>333.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>35.0000000000000</Width>
-											<Height>26.0000000000000</Height>
+											<Width>42.0000000000000</Width>
+											<Height>29.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -4130,7 +3684,7 @@
 										<Node ID="0">
 											<Position>
 												<X>388.0000000000000</X>
-												<Y>320.0000000000000</Y>
+												<Y>318.5000000000000</Y>
 											</Position>
 											<Angle>90.0000000000000</Angle>
 											<Type>1</Type>
@@ -4149,8 +3703,8 @@
 											<Y>195.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>33.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -4158,7 +3712,7 @@
 										<Node ID="0">
 											<Position>
 												<X>152.0000000000000</X>
-												<Y>208.0000000000000</Y>
+												<Y>209.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -4174,15 +3728,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>23.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>27.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>123.5000000000000</X>
+												<X>125.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -4199,8 +3753,8 @@
 											<Y>318.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>33.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>270.0000000000000</Angle>
 									</CADProperties>
@@ -4208,7 +3762,7 @@
 										<Node ID="0">
 											<Position>
 												<X>222.0000000000000</X>
-												<Y>305.0000000000000</Y>
+												<Y>303.5000000000000</Y>
 											</Position>
 											<Angle>90.0000000000000</Angle>
 											<Type>1</Type>
@@ -4224,8 +3778,8 @@
 											<Y>191.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>39.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>44.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -4233,7 +3787,7 @@
 										<Node ID="0">
 											<Position>
 												<X>563.0000000000000</X>
-												<Y>204.0000000000000</Y>
+												<Y>205.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -4249,15 +3803,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>34.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>38.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>792.0000000000000</X>
+												<X>790.0000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -4482,15 +4036,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>55.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>67.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>300.5000000000000</X>
+												<X>294.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -4498,7 +4052,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>355.5000000000000</X>
+												<X>361.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -4520,15 +4074,15 @@
 											<Y>269.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>55.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>67.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>474.5000000000000</X>
+												<X>468.5000000000000</X>
 												<Y>269.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -4536,7 +4090,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>529.5000000000000</X>
+												<X>535.5000000000000</X>
 												<Y>269.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -4558,15 +4112,15 @@
 											<Y>260.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>55.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>67.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>703.5000000000000</X>
+												<X>697.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -4574,7 +4128,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>758.5000000000000</X>
+												<X>764.5000000000000</X>
 												<Y>260.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -4802,12 +4356,7 @@
 							</ConnectionList>
 						</SpeedGovernor>
 					</Stability>
-					<SwitchingList>
-						<Switching ID="0">
-							<Type>1</Type>
-							<Time>1.0000000000000</Time>
-						</Switching>
-					</SwitchingList>
+					<SwitchingList/>
 				</ElectricalProperties>
 			</SyncGenerator>
 			<SyncGenerator ID="2">
@@ -4833,7 +4382,7 @@
 					<NominalPower UnitID="10">25.0000000000000</NominalPower>
 					<NominalVoltage UnitID="2">18.0000000000000</NominalVoltage>
 					<ActivePower UnitID="7">0.0000000000000</ActivePower>
-					<ReactivePower UnitID="13">21.5703312073619</ReactivePower>
+					<ReactivePower UnitID="13">19.2350063975927</ReactivePower>
 					<HaveMaxReactive>0</HaveMaxReactive>
 					<MaxReactive UnitID="13">9999.0000000000000</MaxReactive>
 					<HaveMinReactive>0</HaveMinReactive>
@@ -4917,15 +4466,15 @@
 											<Y>145.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>30.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>699.0000000000000</X>
+												<X>698.0000000000000</X>
 												<Y>145.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -4942,15 +4491,15 @@
 											<Y>156.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>29.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>150.0000000000000</X>
+												<X>150.5000000000000</X>
 												<Y>156.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -4967,8 +4516,8 @@
 											<Y>91.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>33.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>35.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -4976,7 +4525,7 @@
 										<Node ID="0">
 											<Position>
 												<X>168.0000000000000</X>
-												<Y>104.0000000000000</Y>
+												<Y>105.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -5164,15 +4713,15 @@
 											<Y>155.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>345.0000000000000</X>
+												<X>338.0000000000000</X>
 												<Y>155.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -5180,7 +4729,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>407.0000000000000</X>
+												<X>414.0000000000000</X>
 												<Y>155.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -5202,15 +4751,15 @@
 											<Y>145.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>55.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>67.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>591.5000000000000</X>
+												<X>585.5000000000000</X>
 												<Y>145.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -5218,7 +4767,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>646.5000000000000</X>
+												<X>652.5000000000000</X>
 												<Y>145.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -5240,15 +4789,15 @@
 											<Y>228.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>50.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>61.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>180.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>492.0000000000000</X>
+												<X>497.5000000000000</X>
 												<Y>228.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -5256,7 +4805,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>442.0000000000000</X>
+												<X>436.5000000000000</X>
 												<Y>228.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -5501,7 +5050,7 @@
 					<NominalPower UnitID="10">60.0000000000000</NominalPower>
 					<NominalVoltage UnitID="2">69.0000000000000</NominalVoltage>
 					<ActivePower UnitID="7">0.0000000000000</ActivePower>
-					<ReactivePower UnitID="13">44.4202817779740</ReactivePower>
+					<ReactivePower UnitID="13">27.5367263230489</ReactivePower>
 					<HaveMaxReactive>0</HaveMaxReactive>
 					<MaxReactive UnitID="13">50.0000000000000</MaxReactive>
 					<HaveMinReactive>0</HaveMinReactive>
@@ -5585,15 +5134,15 @@
 											<Y>145.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>30.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>699.0000000000000</X>
+												<X>698.0000000000000</X>
 												<Y>145.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -5610,15 +5159,15 @@
 											<Y>156.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>29.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>150.0000000000000</X>
+												<X>150.5000000000000</X>
 												<Y>156.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -5635,8 +5184,8 @@
 											<Y>91.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>33.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>35.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -5644,7 +5193,7 @@
 										<Node ID="0">
 											<Position>
 												<X>168.0000000000000</X>
-												<Y>104.0000000000000</Y>
+												<Y>105.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -5832,15 +5381,15 @@
 											<Y>155.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>345.0000000000000</X>
+												<X>338.0000000000000</X>
 												<Y>155.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -5848,7 +5397,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>407.0000000000000</X>
+												<X>414.0000000000000</X>
 												<Y>155.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -5870,15 +5419,15 @@
 											<Y>145.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>588.0000000000000</X>
+												<X>581.0000000000000</X>
 												<Y>145.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -5886,7 +5435,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>650.0000000000000</X>
+												<X>657.0000000000000</X>
 												<Y>145.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -5908,15 +5457,15 @@
 											<Y>228.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>39.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>48.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>180.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>486.5000000000000</X>
+												<X>491.0000000000000</X>
 												<Y>228.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -5924,7 +5473,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>447.5000000000000</X>
+												<X>443.0000000000000</X>
 												<Y>228.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -6168,7 +5717,7 @@
 					<NominalPower UnitID="10">25.0000000000000</NominalPower>
 					<NominalVoltage UnitID="2">13.8000000000000</NominalVoltage>
 					<ActivePower UnitID="7">0.0000000000000</ActivePower>
-					<ReactivePower UnitID="13">22.8877282452645</ReactivePower>
+					<ReactivePower UnitID="13">17.6936090173069</ReactivePower>
 					<HaveMaxReactive>0</HaveMaxReactive>
 					<MaxReactive UnitID="13">9999.0000000000000</MaxReactive>
 					<HaveMinReactive>0</HaveMinReactive>
@@ -6252,15 +5801,15 @@
 											<Y>145.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>30.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>699.0000000000000</X>
+												<X>698.0000000000000</X>
 												<Y>145.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -6277,15 +5826,15 @@
 											<Y>156.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>28.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>29.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>150.0000000000000</X>
+												<X>150.5000000000000</X>
 												<Y>156.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -6302,8 +5851,8 @@
 											<Y>91.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>33.0000000000000</Width>
-											<Height>30.0000000000000</Height>
+											<Width>35.0000000000000</Width>
+											<Height>33.0000000000000</Height>
 										</Size>
 										<Angle>90.0000000000000</Angle>
 									</CADProperties>
@@ -6311,7 +5860,7 @@
 										<Node ID="0">
 											<Position>
 												<X>168.0000000000000</X>
-												<Y>104.0000000000000</Y>
+												<Y>105.5000000000000</Y>
 											</Position>
 											<Angle>270.0000000000000</Angle>
 											<Type>1</Type>
@@ -6499,15 +6048,15 @@
 											<Y>155.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>62.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>76.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>345.0000000000000</X>
+												<X>338.0000000000000</X>
 												<Y>155.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -6515,7 +6064,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>407.0000000000000</X>
+												<X>414.0000000000000</X>
 												<Y>155.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -6537,15 +6086,15 @@
 											<Y>145.2000000000000</Y>
 										</Position>
 										<Size>
-											<Width>55.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>67.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>0.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>589.1000000000000</X>
+												<X>583.1000000000000</X>
 												<Y>145.2000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -6553,7 +6102,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>644.1000000000000</X>
+												<X>650.1000000000000</X>
 												<Y>145.2000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -6575,15 +6124,15 @@
 											<Y>228.0000000000000</Y>
 										</Position>
 										<Size>
-											<Width>50.0000000000000</Width>
-											<Height>36.0000000000000</Height>
+											<Width>61.0000000000000</Width>
+											<Height>42.0000000000000</Height>
 										</Size>
 										<Angle>180.0000000000000</Angle>
 									</CADProperties>
 									<NodeList>
 										<Node ID="0">
 											<Position>
-												<X>492.0000000000000</X>
+												<X>497.5000000000000</X>
 												<Y>228.0000000000000</Y>
 											</Position>
 											<Angle>180.0000000000000</Angle>
@@ -6591,7 +6140,7 @@
 										</Node>
 										<Node ID="1">
 											<Position>
-												<X>442.0000000000000</X>
+												<X>436.5000000000000</X>
 												<Y>228.0000000000000</Y>
 											</Position>
 											<Angle>0.0000000000000</Angle>
@@ -7021,8 +6570,8 @@
 						<Y>-192.3657883835805</Y>
 					</Position>
 					<Size>
-						<Width>76.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>99.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7042,8 +6591,8 @@
 						<Y>281.5262226140255</Y>
 					</Position>
 					<Size>
-						<Width>76.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>99.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7063,8 +6612,8 @@
 						<Y>532.4159298992827</Y>
 					</Position>
 					<Size>
-						<Width>76.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>99.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7084,8 +6633,8 @@
 						<Y>-39.1120914083829</Y>
 					</Position>
 					<Size>
-						<Width>76.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>99.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7105,8 +6654,8 @@
 						<Y>-40.4089573402609</Y>
 					</Position>
 					<Size>
-						<Width>76.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>99.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7126,8 +6675,8 @@
 						<Y>-241.4231767813596</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7147,8 +6696,8 @@
 						<Y>-397.0470886067262</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7168,8 +6717,8 @@
 						<Y>-320.5319986259210</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7189,8 +6738,8 @@
 						<Y>-581.2020509334102</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7210,8 +6759,8 @@
 						<Y>-681.0607276880205</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7231,8 +6780,8 @@
 						<Y>-719.9667056443622</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7252,8 +6801,8 @@
 						<Y>-797.7786615570457</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7273,8 +6822,8 @@
 						<Y>-940.4339140636316</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
@@ -7294,8 +6843,8 @@
 						<Y>-334.0117283502020</Y>
 					</Position>
 					<Size>
-						<Width>74.0000000000000</Width>
-						<Height>16.0000000000000</Height>
+						<Width>97.0000000000000</Width>
+						<Height>19.0000000000000</Height>
 					</Size>
 					<Angle>0.0000000000000</Angle>
 				</CADProperties>
