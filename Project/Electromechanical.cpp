@@ -237,7 +237,6 @@ void Electromechanical::SetEvent(double currentTime)
                     int n = parentBus->GetElectricalData().number;
                     std::complex<double> v = parentBus->GetElectricalData().voltage;
                     m_yBus[n][n] -= std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
-
                 }
 
                 // Insert load (only disconnected load)
