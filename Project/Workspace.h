@@ -25,6 +25,7 @@
 #include <wx/statusbr.h>
 #include <wx/clipbrd.h>
 #include <wx/tipwin.h>
+#include <wx/stopwatch.h>
 
 #include "WorkspaceBase.h"
 #include "Bus.h"

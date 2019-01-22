@@ -70,7 +70,6 @@ bool Electromechanical::RunStabilityCalculation()
     wxProgressDialog pbd(_("Running simulation"), _("Initializing..."), 100, m_parent,
                          wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
 
-    PreallocateVectors();  // Reserve the vectors' memory with a estimated size, this can optimize the simulation.
     SetSyncMachinesModel();
 
     // Calculate the admittance matrix with the synchronous machines.
@@ -83,6 +82,7 @@ bool Electromechanical::RunStabilityCalculation()
 
     // Get buses voltages.
     m_vBus.clear();
+    m_vBus.shrink_to_fit();
     m_vBus.resize(m_busList.size());
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
@@ -97,6 +97,7 @@ bool Electromechanical::RunStabilityCalculation()
     }
 
     if(!InitializeDynamicElements()) return false;
+    PreallocateVectors();  // Reserve the vectors' memory with a estimated size, this can optimize the simulation.
 
     double pbdTime = m_plotTime;
     m_currentTime = 0.0;
@@ -109,7 +110,7 @@ bool Electromechanical::RunStabilityCalculation()
         }
 
         if(currentPlotTime >= m_plotTime || m_currentTime == 0.0) {
-            m_timeVector.push_back(m_currentTime);
+            m_timeVector.emplace_back(m_currentTime);
             SaveData();
             currentPlotTime = 0.0;
         }
@@ -139,10 +140,10 @@ void Electromechanical::SetEventTimeList()
         Bus* bus = *it;
         auto data = bus->GetElectricalData();
         if(data.stabHasFault) {
-            m_eventTimeList.push_back(data.stabFaultTime);
-            m_eventOccurrenceList.push_back(false);
-            m_eventTimeList.push_back(data.stabFaultTime + data.stabFaultLength);
-            m_eventOccurrenceList.push_back(false);
+            m_eventTimeList.emplace_back(data.stabFaultTime);
+            m_eventOccurrenceList.emplace_back(false);
+            m_eventTimeList.emplace_back(data.stabFaultTime + data.stabFaultLength);
+            m_eventOccurrenceList.emplace_back(false);
         }
     }
     // Switching
@@ -150,8 +151,8 @@ void Electromechanical::SetEventTimeList()
         PowerElement* element = *it;
         SwitchingData swData = element->GetSwitchingData();
         for(unsigned int i = 0; i < swData.swTime.size(); ++i) {
-            m_eventTimeList.push_back(swData.swTime[i]);
-            m_eventOccurrenceList.push_back(false);
+            m_eventTimeList.emplace_back(swData.swTime[i]);
+            m_eventOccurrenceList.emplace_back(false);
         }
     }
 }
@@ -462,6 +463,7 @@ bool Electromechanical::InitializeDynamicElements()
         Bus* bus = *it;
         auto data = bus->GetElectricalData();
         data.stabVoltageVector.clear();
+        data.stabVoltageVector.shrink_to_fit();
         bus->SetElectricalData(data);
     }
     // Loads
@@ -492,7 +494,9 @@ bool Electromechanical::InitializeDynamicElements()
         data.qp0 = (data.constPowerReactive / 100.0) * reactivePower;
 
         data.voltageVector.clear();
+        data.voltageVector.shrink_to_fit();
         data.electricalPowerVector.clear();
+        data.electricalPowerVector.shrink_to_fit();
 
         if(load->IsOnline())
             data.electricalPower = std::complex<double>(activePower, reactivePower);
@@ -704,11 +708,17 @@ bool Electromechanical::InitializeDynamicElements()
         }
         // Reset plot data
         data.terminalVoltageVector.clear();
+        data.terminalVoltageVector.shrink_to_fit();
         data.electricalPowerVector.clear();
+        data.electricalPowerVector.shrink_to_fit();
         data.mechanicalPowerVector.clear();
+        data.mechanicalPowerVector.shrink_to_fit();
         data.freqVector.clear();
+        data.freqVector.shrink_to_fit();
         data.fieldVoltageVector.clear();
+        data.fieldVoltageVector.shrink_to_fit();
         data.deltaVector.clear();
+        data.deltaVector.shrink_to_fit();
 
         syncGenerator->SetElectricalData(data);
     }
@@ -1044,20 +1054,14 @@ void Electromechanical::SaveData()
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
         if(data.plotSyncMachine) {
-            data.terminalVoltageVector.push_back(data.terminalVoltage);
-            data.electricalPowerVector.push_back(data.electricalPower);
-            data.mechanicalPowerVector.push_back(data.pm);
-            data.freqVector.push_back(data.speed / (2.0f * M_PI));
-            data.fieldVoltageVector.push_back(data.fieldVoltage);
-            data.deltaVector.push_back(wxRadToDeg(data.delta));
-            syncGenerator->SetElectricalData(data);
+            syncGenerator->SavePlotData();
         }
     }
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
         auto data = bus->GetElectricalData();
         if(data.plotBus) {
-            data.stabVoltageVector.push_back(m_vBus[data.number]);
+            data.stabVoltageVector.emplace_back(m_vBus[data.number]);
             bus->SetElectricalData(data);
         }
     }
@@ -1065,12 +1069,12 @@ void Electromechanical::SaveData()
         Load* load = *it;
         auto data = load->GetElectricalData();
         if(data.plotLoad) {
-            data.voltageVector.push_back(data.voltage);
-            data.electricalPowerVector.push_back(data.electricalPower);
+            data.voltageVector.emplace_back(data.voltage);
+            data.electricalPowerVector.emplace_back(data.electricalPower);
             load->SetElectricalData(data);
         }
     }
-    m_iterationsNumVector.push_back(m_iterationsNum);
+    m_iterationsNumVector.emplace_back(m_iterationsNum);
 }
 
 void Electromechanical::SetSyncMachinesModel()

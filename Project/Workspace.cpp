@@ -1429,7 +1429,9 @@ bool Workspace::RunStability()
     RunPowerFlow();
 
     Electromechanical stability(this, GetElementList(), m_properties->GetSimulationPropertiesData());
+    wxStopWatch sw;
     bool result = stability.RunStabilityCalculation();
+    sw.Pause();
     if(!result) {
         wxMessageDialog msgDialog(this, stability.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
@@ -1440,8 +1442,11 @@ bool Workspace::RunStability()
     // Run power flow after stability.
     RunPowerFlow();
 
-    wxMessageDialog msgDialog(this, _("Do you wish to open the stability graphics?"), _("Question"),
-                              wxYES_NO | wxCENTRE | wxICON_QUESTION);
+    wxMessageDialog msgDialog(
+        this,
+        wxString::Format(_("The program took %ld ms to run this system.\nDo you wish to open the stability graphics?"),
+                         sw.Time()),
+        _("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
     if(msgDialog.ShowModal() == wxID_YES) {
         std::vector<ElementPlotData> plotDataList;
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
@@ -1449,7 +1454,7 @@ bool Workspace::RunStability()
             ElementPlotData plotData;
             if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
         }
-        
+
         ElementPlotData plotData;
         plotData.SetName(_("Simulation parameters"));
         plotData.SetCurveType(ElementPlotData::CT_TEST);

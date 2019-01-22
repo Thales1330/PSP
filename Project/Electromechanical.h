@@ -126,6 +126,8 @@ class Electromechanical : public ElectricCalculation
     double m_tolerance = 1e-8;
     int m_maxIterations = 100;
     double m_saturationTolerance = 1e-8;
+    
+    int m_currentPoint = 0;
 
     std::vector<double> m_eventTimeList;
     std::vector<bool> m_eventOccurrenceList;

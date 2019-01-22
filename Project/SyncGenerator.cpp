@@ -231,11 +231,10 @@ bool SyncGenerator::GetPlotData(ElementPlotData& plotData)
 
     std::vector<double> absTerminalVoltage, activePower, reactivePower;
     for(unsigned int i = 0; i < m_electricalData.terminalVoltageVector.size(); ++i) {
-        absTerminalVoltage.push_back(std::abs(m_electricalData.terminalVoltageVector[i]));
         activePower.push_back(std::real(m_electricalData.electricalPowerVector[i]));
         reactivePower.push_back(std::imag(m_electricalData.electricalPowerVector[i]));
     }
-    plotData.AddData(absTerminalVoltage, _("Terminal voltage"));
+    plotData.AddData(m_electricalData.terminalVoltageVector, _("Terminal voltage"));
     plotData.AddData(activePower, _("Active power"));
     plotData.AddData(reactivePower, _("Reactive power"));
     plotData.AddData(m_electricalData.mechanicalPowerVector, _("Mechanical power"));
@@ -412,4 +411,14 @@ bool SyncGenerator::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<E
 
     m_inserted = true;
     return true;
+}
+
+void SyncGenerator::SavePlotData()
+{
+    m_electricalData.terminalVoltageVector.emplace_back(std::abs(m_electricalData.terminalVoltage));
+    m_electricalData.electricalPowerVector.emplace_back(m_electricalData.electricalPower);
+    m_electricalData.mechanicalPowerVector.emplace_back(m_electricalData.pm);
+    m_electricalData.freqVector.emplace_back(m_electricalData.speed / (2.0f * M_PI));
+    m_electricalData.fieldVoltageVector.emplace_back(m_electricalData.fieldVoltage);
+    m_electricalData.deltaVector.emplace_back(wxRadToDeg(m_electricalData.delta));
 }
