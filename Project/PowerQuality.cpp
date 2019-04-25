@@ -29,11 +29,12 @@ void PowerQuality::CalculateHarmonicYbusList(double systemPowerBase)
             if(load->IsOnline()) {
                 int n = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().number;
                 LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
-                if(data.loadType == CONST_IMPEDANCE) {
-                    std::complex<double> yLoad =
-                        std::complex<double>(data.activePower, -data.reactivePower / harmYBus.order);
-                    harmYBus.yBus[n][n] += yLoad;
-                }
+                wxMessageBox(wxString::Format("%f %f", data.activePower, data.reactivePower));
+                std::complex<double> yLoad =
+                    std::complex<double>(data.activePower, -data.reactivePower / harmYBus.order);
+                std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
+                yLoad /= (std::abs(v) * std::abs(v));
+                harmYBus.yBus[n][n] += yLoad;
             }
         }
 
@@ -117,7 +118,8 @@ void PowerQuality::CalculateHarmonicYbusList(double systemPowerBase)
                                                                   -data.turnsRatio * std::sin(radPhaseShift));
 
                     // Transformer admitance
-                    std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance * harmYBus.order);
+                    std::complex<double> y =
+                        1.0 / std::complex<double>(data.resistance, data.indReactance * harmYBus.order);
 
                     harmYBus.yBus[n1][n1] += y / (std::pow(std::abs(a), 2.0));
                     harmYBus.yBus[n1][n2] += -(y / std::conj(a));
@@ -205,16 +207,22 @@ bool PowerQuality::CalculateDistortions(double systemPowerBase)
     for(unsigned int i = 0; i < m_harmYbusList.size(); ++i) {
         vHarmList.push_back(GaussianElimination(m_harmYbusList[i].yBus, iHarmInjList[i]));
     }
-
-    wxString volt = "";
-    for(unsigned int i = 0; i < vHarmList.size(); ++i) {
-        wxString orderStr = "";
-        for(unsigned int j = 0; j < vHarmList[i].size(); ++j) {
-            orderStr += wxString::Format("%f; ", std::abs(vHarmList[i][j]));
+    
+    for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        auto data = bus->GetElectricalData();
+        data.harmonicOrder.clear();
+        data.harmonicVoltage.clear();
+        double thd = 0.0;
+        for(unsigned int i = 0; i < vHarmList.size(); ++i) {
+            thd += std::abs(vHarmList[i][data.number]) * std::abs(vHarmList[i][data.number]);
+            data.harmonicVoltage.push_back(vHarmList[i][data.number]);
+            data.harmonicOrder.push_back(static_cast<int>(harmOrders[i]));
         }
-        volt += orderStr + "\n";
+        //distortion = std::sqrt(distortion) / std::abs(data.voltage);
+        thd = std::sqrt(thd) * 100.0;
+        data.thd = thd;
     }
-    wxMessageBox(volt);
 
     return true;
 }

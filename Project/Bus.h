@@ -57,6 +57,11 @@ struct BusElectricalData {
     double stabFaultResistance = 0.0;
     double stabFaultReactance = 0.0;
     std::vector<std::complex<double> > stabVoltageVector;
+    
+    // Power Quality
+    std::vector<int> harmonicOrder;
+    std::vector< std::complex<double> > harmonicVoltage;
+    double thd = 0.0;
 };
 
 /**
