@@ -34,6 +34,7 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
     m_syncGeneratorList.clear();
     m_syncMotorList.clear();
     m_transformerList.clear();
+    m_harmCurrentList.clear();
     // TODO: Bad design?
     for(auto it = elementList.begin(); it != elementList.end(); it++) {
         Element* element = *it;
@@ -57,6 +58,8 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
             m_syncMotorList.push_back(syncMotor);
         else if(Transformer* transformer = dynamic_cast<Transformer*>(element))
             m_transformerList.push_back(transformer);
+        else if(HarmCurrent* harmCurrent = dynamic_cast<HarmCurrent*>(element))
+            m_harmCurrentList.push_back(harmCurrent);
     }
 
     // Set buses numbers
@@ -83,9 +86,7 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
     yBus.clear();
     for(int i = 0; i < (int)m_busList.size(); i++) {
         std::vector<std::complex<double> > line;
-        for(int j = 0; j < (int)m_busList.size(); j++) {
-            line.push_back(std::complex<double>(0.0, 0.0));
-        }
+        for(int j = 0; j < (int)m_busList.size(); j++) { line.push_back(std::complex<double>(0.0, 0.0)); }
         yBus.push_back(line);
     }
 
@@ -679,18 +680,12 @@ std::vector<std::complex<double> > ElectricCalculation::GaussianElimination(
 
     std::vector<std::vector<std::complex<double> > > triangMatrix;
     triangMatrix.resize(matrix.size());
-    for(unsigned int i = 0; i < matrix.size(); i++) {
-        triangMatrix[i].resize(matrix.size());
-    }
+    for(unsigned int i = 0; i < matrix.size(); i++) { triangMatrix[i].resize(matrix.size()); }
+
+    for(unsigned int i = 0; i < matrix.size(); i++) { solution.push_back(array[i]); }
 
     for(unsigned int i = 0; i < matrix.size(); i++) {
-        solution.push_back(array[i]);
-    }
-
-    for(unsigned int i = 0; i < matrix.size(); i++) {
-        for(unsigned int j = 0; j < matrix.size(); j++) {
-            triangMatrix[i][j] = matrix[i][j];
-        }
+        for(unsigned int j = 0; j < matrix.size(); j++) { triangMatrix[i][j] = matrix[i][j]; }
     }
 
     for(unsigned int k = 0; k < matrix.size(); k++) {
@@ -705,15 +700,13 @@ std::vector<std::complex<double> > ElectricCalculation::GaussianElimination(
         }
         for(unsigned int i = k1; i < matrix.size(); i++) {
             if(triangMatrix[i][k] != std::complex<double>(0.0, 0.0)) {
-                for(unsigned int j = k1; j < matrix.size(); j++) {
-                    triangMatrix[i][j] -= triangMatrix[k][j];
-                }
+                for(unsigned int j = k1; j < matrix.size(); j++) { triangMatrix[i][j] -= triangMatrix[k][j]; }
                 solution[i] -= solution[k];
             }
         }
     }
-    for(unsigned int i = matrix.size() - 2; i >= 0; i--) {
-        for(unsigned int j = matrix.size() - 1; j >= i + 1; j--) {
+    for(int i = static_cast<int>(matrix.size()) - 2; i >= 0; i--) {
+        for(int j = static_cast<int>(matrix.size()) - 1; j >= i + 1; j--) {
             solution[i] -= triangMatrix[i][j] * solution[j];
         }
     }
@@ -726,14 +719,10 @@ Machines::SyncMachineModel ElectricCalculation::GetMachineModel(SyncGenerator* g
     auto data = generator->GetElectricalData();
     if(data.transTd0 != 0.0) {
         if(data.transTq0 != 0.0) {
-            if(data.subTd0 != 0.0 || data.subTq0 != 0.0) {
-                return Machines::SM_MODEL_5;
-            }
+            if(data.subTd0 != 0.0 || data.subTq0 != 0.0) { return Machines::SM_MODEL_5; }
             return Machines::SM_MODEL_3;
         } else {
-            if(data.subTd0 != 0.0 || data.subTq0 != 0.0) {
-                return Machines::SM_MODEL_4;
-            }
+            if(data.subTd0 != 0.0 || data.subTq0 != 0.0) { return Machines::SM_MODEL_4; }
             return Machines::SM_MODEL_2;
         }
     }
@@ -749,9 +738,7 @@ std::vector<std::complex<double> > ElectricCalculation::ComplexMatrixTimesVector
     for(unsigned int i = 0; i < matrix.size(); i++) {
         solution.push_back(std::complex<double>(0.0, 0.0));
 
-        for(unsigned int j = 0; j < matrix.size(); j++) {
-            solution[i] += matrix[i][j] * vector[j];
-        }
+        for(unsigned int j = 0; j < matrix.size(); j++) { solution[i] += matrix[i][j] * vector[j]; }
     }
 
     return solution;
@@ -782,40 +769,30 @@ void ElectricCalculation::GetLUDecomposition(std::vector<std::vector<std::comple
     }
 
     // Lower matrix main diagonal.
-    for(int i = 1; i < size; i++) {
-        matrixL[i][i] = std::complex<double>(1.0, 0.0);
-    }
+    for(int i = 1; i < size; i++) { matrixL[i][i] = std::complex<double>(1.0, 0.0); }
 
     for(int i = 1; i < size - 1; i++) {
         // Upper matrix main diagonal.
         matrixU[i][i] = matrix[i][i];
-        for(int k = 0; k < i; k++) {
-            matrixU[i][i] -= matrixL[i][k] * matrixU[k][i];
-        }
+        for(int k = 0; k < i; k++) { matrixU[i][i] -= matrixL[i][k] * matrixU[k][i]; }
 
         // Others elements of upper matrix
         for(int j = i + 1; j < size; j++) {
             matrixU[i][j] = matrix[i][j];
-            for(int k = 0; k < i; k++) {
-                matrixU[i][j] -= matrixL[i][k] * matrixU[k][j];
-            }
+            for(int k = 0; k < i; k++) { matrixU[i][j] -= matrixL[i][k] * matrixU[k][j]; }
         }
 
         // Lower matrix elements
         for(int j = i + 1; j < size; j++) {
             matrixL[j][i] = matrix[j][i];
-            for(int k = 0; k < i; k++) {
-                matrixL[j][i] -= matrixL[j][k] * matrixU[k][i];
-            }
+            for(int k = 0; k < i; k++) { matrixL[j][i] -= matrixL[j][k] * matrixU[k][i]; }
             matrixL[j][i] = matrixL[j][i] / matrixU[i][i];
         }
     }
 
     // Last element of upper matrix.
     matrixU[size - 1][size - 1] = matrix[size - 1][size - 1];
-    for(int k = 0; k < size - 1; k++) {
-        matrixU[size - 1][size - 1] -= matrixL[size - 1][k] * matrixU[k][size - 1];
-    }
+    for(int k = 0; k < size - 1; k++) { matrixU[size - 1][size - 1] -= matrixL[size - 1][k] * matrixU[k][size - 1]; }
 }
 
 std::vector<std::complex<double> > ElectricCalculation::LUEvaluate(std::vector<std::vector<std::complex<double> > > u,
@@ -831,17 +808,13 @@ std::vector<std::complex<double> > ElectricCalculation::LUEvaluate(std::vector<s
     // Forward
     for(int i = 0; i < size; i++) {
         y[i] = b[i];
-        for(int j = 0; j < i; j++) {
-            y[i] -= l[i][j] * y[j];
-        }
+        for(int j = 0; j < i; j++) { y[i] -= l[i][j] * y[j]; }
         y[i] /= l[i][i];
     }
     // Backward
     for(int i = size - 1; i >= 0; i--) {
         x[i] = y[i];
-        for(int j = i + 1; j < size; j++) {
-            x[i] -= u[i][j] * x[j];
-        }
+        for(int j = i + 1; j < size; j++) { x[i] -= u[i][j] * x[j]; }
         x[i] /= u[i][i];
     }
     return x;

@@ -43,6 +43,7 @@ class SyncMotor;
 class Load;
 class Inductor;
 class Capacitor;
+class HarmCurrent;
 class ElementDataObject;
 
 class Text;
@@ -50,6 +51,7 @@ class Text;
 class PowerFlow;
 class Fault;
 class Electromechanical;
+class PowerQuality;
 
 class ElementPlotData;
 class ChartView;
@@ -66,6 +68,7 @@ enum ElementID {
     ID_LOAD,
     ID_CAPACITOR,
     ID_INDUCTOR,
+    ID_HARMCURRENT,
     ID_TEXT,
 
     NUM_ELEMENTS
@@ -145,6 +148,7 @@ class Workspace : public WorkspaceBase
     bool RunSCPower();
     bool RunStaticStudies();
     bool RunStability();
+    bool RunHarmonicDistortion();
 
    protected:
     virtual void OnMiddleDoubleClick(wxMouseEvent& event);

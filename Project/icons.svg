@@ -13,8 +13,8 @@
    height="297mm"
    id="svg2"
    version="1.1"
-   inkscape:version="0.92.1 r15371"
-   sodipodi:docname="icones.svg">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="icons.svg">
   <defs
      id="defs4">
     <filter
@@ -1735,16 +1735,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="486.22101"
-     inkscape:cy="232.11191"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="364.71431"
+     inkscape:cy="-195.53066"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="1358"
-     inkscape:window-y="-8"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true" />
@@ -4149,5 +4149,130 @@
        inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\chart32.png"
        inkscape:export-xdpi="35"
        inkscape:export-ydpi="35" />
+    <rect
+       style="fill:#0081cb;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       id="rect4916-7-9"
+       width="86.594116"
+       height="86.594116"
+       x="213.70671"
+       y="1325.0332"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\harmDist32.png"
+       inkscape:export-xdpi="35.470001"
+       inkscape:export-ydpi="35.470001" />
+    <path
+       style="fill:#000000;fill-opacity:0.05882353;stroke:none;stroke-width:1.06666672"
+       d="m 300.29747,1411.4943 v 0.1334 h -86.59411 v -86.3275"
+       id="rect4916-1-8-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\harmDist32.png"
+       inkscape:export-xdpi="35.470001"
+       inkscape:export-ydpi="35.470001" />
+    <rect
+       style="fill:#ff8200;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       id="rect4767-2"
+       width="13.866669"
+       height="48.296875"
+       x="-275.01144"
+       y="1361.2612"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\harmDist32.png"
+       inkscape:export-xdpi="35.470001"
+       inkscape:export-ydpi="35.470001"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:#ff8200;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       id="rect4767-6-6"
+       width="13.866669"
+       height="20.086981"
+       x="-253.08957"
+       y="1389.4711"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\harmDist32.png"
+       inkscape:export-xdpi="35.470001"
+       inkscape:export-ydpi="35.470001"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:#ff8200;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       id="rect4767-6-1-3"
+       width="13.866669"
+       height="83.217773"
+       x="-231.16768"
+       y="1326.3406"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\harmDist32.png"
+       inkscape:export-xdpi="35.470001"
+       inkscape:export-ydpi="35.470001"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:#0081cb;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       id="rect4916-7-2"
+       width="86.594116"
+       height="86.594116"
+       x="396.20462"
+       y="1322.2224"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\freqResp32.png"
+       inkscape:export-xdpi="35.48"
+       inkscape:export-ydpi="35.48" />
+    <path
+       style="fill:none;stroke:#ff8200;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0.07058824;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 404.81863,1400.7662 c 10.61145,-7.0743 13.43585,-49.6121 13.78859,-48.6136 0.78094,1.1563 2.81643,34.6666 10.07626,41.3657 7.25983,6.6991 8.11241,0.4018 13.08148,0.1768 4.96907,-0.2249 2.50101,5.1429 11.13694,-2.8284 8.63593,-7.9713 3.37597,-54.4406 5.83362,-52.6794 1.51742,1.8986 1.25519,45.5388 9.36917,53.5632 8.11398,8.0245 9.54594,1.4143 9.54594,1.4143"
+       id="path1417"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cczzzczc"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\freqResp32.png"
+       inkscape:export-xdpi="35"
+       inkscape:export-ydpi="35" />
+    <path
+       style="fill:#000000;fill-opacity:0.05882353;stroke:none;stroke-width:1.06666672"
+       d="m 482.79537,1408.6835 v 0.1334 h -86.5941 v -86.3275"
+       id="rect4916-1-8-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\freqResp32.png"
+       inkscape:export-xdpi="35"
+       inkscape:export-ydpi="35" />
+    <g
+       id="g4938-8-67"
+       transform="translate(44.130517,315.13334)"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\freqResp32.png"
+       inkscape:export-xdpi="35.48"
+       inkscape:export-ydpi="35.48">
+      <rect
+         y="1011.4568"
+         x="356.62167"
+         height="77.498955"
+         width="7.1921496"
+         id="rect4918-7-1"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.06666672" />
+      <rect
+         transform="rotate(-90)"
+         y="356.62167"
+         x="-1089.3158"
+         height="77.498955"
+         width="7.1921496"
+         id="rect4918-6-7-1"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.06666672" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.80000019px;line-height:0%;font-family:Arial;-inkscape-font-specification:'Arial Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       x="273.34689"
+       y="1344.6519"
+       id="text5186-9"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\harmDist32.png"
+       inkscape:export-xdpi="35.470001"
+       inkscape:export-ydpi="35.470001"><tspan
+         sodipodi:role="line"
+         id="tspan5188-8"
+         x="273.34689"
+         y="1344.6519"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.60000038px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.06666672">THD</tspan></text>
+    <rect
+       style="fill:#ff8200;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       id="rect4767-2-3"
+       width="13.866669"
+       height="6.421875"
+       x="-296.93332"
+       y="1403.1362"
+       inkscape:export-filename="C:\Users\thale\Documents\GitHub\PSP\Project\data\images\ribbon\harmDist32.png"
+       inkscape:export-xdpi="35.470001"
+       inkscape:export-ydpi="35.470001"
+       transform="scale(-1,1)" />
   </g>
 </svg>

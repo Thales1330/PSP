@@ -27,6 +27,7 @@
 #include "Inductor.h"
 #include "Line.h"
 #include "Load.h"
+#include "HarmCurrent.h"
 #include "MainFrame.h"
 #include "PropertiesData.h"
 #include "SimulationsSettingsForm.h"
@@ -124,6 +125,8 @@ void MainFrame::EnableCurrentProjectRibbon(bool enable)
     m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_UNDO, enable);
     m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATEC, enable);
     m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATECC, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_HARMDIST, enable);
+    m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FREQRESP, enable);
 }
 
 void MainFrame::CreateAddElementsMenu()
@@ -150,6 +153,8 @@ void MainFrame::CreateAddElementsMenu()
                                                   _("Adds a shunt capacitor at the circuit"));
     wxMenuItem* inductorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"),
                                                  _("Adds a shunt inductor at the circuit"));
+    wxMenuItem* harmCurrentElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_HARMCURRENT, _("&Harmonic current\tShift-H"),
+                                                 _("Adds a harmonic current source at the circuit"));
 
     m_addElementsMenu->Append(busElement);
     m_addElementsMenu->Append(lineElement);
@@ -160,6 +165,7 @@ void MainFrame::CreateAddElementsMenu()
     m_addElementsMenu->Append(loadElement);
     m_addElementsMenu->Append(capacitorElement);
     m_addElementsMenu->Append(inductorElement);
+    m_addElementsMenu->Append(harmCurrentElement);
 
     m_addElementsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnAddElementsClick, this);
 }
@@ -439,6 +445,14 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                     statusBarText = _("Insert Inductor: Click on a buses, ESC to cancel.");
                     newElement = true;
                 } break;
+                case ID_ADDMENU_HARMCURRENT: {
+                    HarmCurrent* newHarmCurrent =
+                        new HarmCurrent(wxString::Format(_("Harmonic Current %d"), workspace->GetElementNumber(ID_INDUCTOR)));
+                    workspace->IncrementElementNumber(ID_HARMCURRENT);
+                    elementList.push_back(newHarmCurrent);
+                    statusBarText = _("Insert Harmonic Current Source: Click on a buses, ESC to cancel.");
+                    newElement = true;
+                } break;
                 case ID_ADDMENU_INDMOTOR: {
                     IndMotor* newIndMotor = new IndMotor(
                         wxString::Format(_("Induction motor %d"), workspace->GetElementNumber(ID_INDMOTOR)));
@@ -539,4 +553,12 @@ void MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)
         simulSettingsForm.SetInitialSize();
         simulSettingsForm.ShowModal();
     }
+}
+void MainFrame::OnFreqResponseClick(wxRibbonButtonBarEvent& event)
+{
+}
+void MainFrame::OnHarmDistortionsClick(wxRibbonButtonBarEvent& event)
+{
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+    if(workspace) { workspace->RunHarmonicDistortion(); }
 }

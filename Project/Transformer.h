@@ -101,6 +101,7 @@ class Transformer : public Branch
     virtual TransformerElectricalData GetPUElectricalData(double systemBasePower);
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
+    virtual void SetBestPositionAndRotation();
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

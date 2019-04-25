@@ -65,6 +65,7 @@ struct SyncGeneratorElectricalData {
     double armResistance = 0.0;
     double potierReactance = 0.0;
     double satFactor = 0.0;
+    double ocFrequency = 60.0;
 
     double syncXd = 0.0;
     double syncXq = 0.0;

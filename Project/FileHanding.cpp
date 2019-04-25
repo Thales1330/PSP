@@ -232,6 +232,17 @@ void FileHanding::SaveProject(wxFileName path)
         elementID++;
     }
     //}
+    
+    //{ HarmCurrent
+    auto harmCurrentNode = XMLParser::AppendNode(doc, elementsNode, "HarmCurrentList");
+    auto harmCurrentList = allElements.GetHarmCurrentList();
+    elementID = 0;
+    for(auto it = harmCurrentList.begin(), itEnd = harmCurrentList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, harmCurrentNode);
+        elementID++;
+    }
+    //}
 
     //{ Text
     auto textsNode = XMLParser::AppendNode(doc, elementsNode, "TextList");
@@ -333,6 +344,7 @@ bool FileHanding::OpenProject(wxFileName path)
     std::vector<SyncGenerator*> syncGeneratorList;
     std::vector<SyncMotor*> syncMotorList;
     std::vector<Transformer*> transformerList;
+    std::vector<HarmCurrent*> harmCurrentList;
     std::vector<Text*> textList;
 
     // List of parents
@@ -480,6 +492,20 @@ bool FileHanding::OpenProject(wxFileName path)
 
         transfomerNode = transfomerNode->next_sibling("Transfomer");
     }  //}
+    
+    //{ Transformer
+    auto harmCurrentListNode = elementsNode->first_node("HarmCurrentList");
+    if(!harmCurrentListNode) return false;
+    auto harmCurrentNode = harmCurrentListNode->first_node("HarmCurrent");
+    while(harmCurrentNode) {
+        HarmCurrent* harmCurrent = new HarmCurrent();
+
+        if(!harmCurrent->OpenElement(harmCurrentNode, parentList)) return false;
+        elementList.push_back(harmCurrent);
+        harmCurrentList.push_back(harmCurrent);
+
+        harmCurrentNode = harmCurrentNode->next_sibling("HarmCurrent");
+    }  //}
 
     m_workspace->SetElementList(elementList);
 
@@ -530,6 +556,10 @@ bool FileHanding::OpenProject(wxFileName path)
             case TYPE_TRANSFORMER: {
                 Transformer* transformer = transformerList[text->GetElementNumber()];
                 text->SetElement(transformer);
+            } break;
+            case TYPE_HARMCURRENT: {
+                HarmCurrent* harmCurrent = harmCurrentList[text->GetElementNumber()];
+                text->SetElement(harmCurrent);
             } break;
         }
 

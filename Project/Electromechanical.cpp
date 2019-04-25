@@ -511,7 +511,7 @@ bool Electromechanical::InitializeDynamicElements()
         SyncGenerator* syncGenerator = *it;
         auto dataPU = syncGenerator->GetPUElectricalData(m_powerSystemBase);
         auto data = syncGenerator->GetElectricalData();
-        if(syncGenerator->IsOnline()) {
+        //if(syncGenerator->IsOnline()) {
             double k = 1.0;  // Power base change factor.
             if(data.useMachineBase) {
                 double oldBase = syncGenerator->GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
@@ -590,7 +590,7 @@ bool Electromechanical::InitializeDynamicElements()
             data.initialFieldVoltage = ef0 * sd;
             data.fieldVoltage = data.initialFieldVoltage;
             data.pm = std::real((data.terminalVoltage * std::conj(ia)) + (std::abs(ia) * std::abs(ia) * ra));
-            data.speed = 2.0 * M_PI * m_systemFreq;
+            syncGenerator->IsOnline() ? data.speed = 2.0 * M_PI * m_systemFreq : data.speed = 2.0 * M_PI * data.ocFrequency;
             data.delta = delta;
             data.pe = data.pm;
             data.electricalPower = std::complex<double>(dataPU.activePower, dataPU.reactivePower);
@@ -702,9 +702,9 @@ bool Electromechanical::InitializeDynamicElements()
                     return false;
                 }
             }
-        } else {
+        //} else {
             // Initialize open circuit machine.
-        }
+        //}
         // Reset plot data
         data.terminalVoltageVector.clear();
         data.terminalVoltageVector.shrink_to_fit();

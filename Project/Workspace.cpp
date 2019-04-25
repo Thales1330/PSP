@@ -28,12 +28,14 @@
 #include "SyncGenerator.h"
 #include "SyncMotor.h"
 #include "Transformer.h"
+#include "HarmCurrent.h"
 
 #include "Text.h"
 
 #include "Electromechanical.h"
 #include "Fault.h"
 #include "PowerFlow.h"
+#include "PowerQuality.h"
 
 #include "ChartView.h"
 #include "ElementPlotData.h"
@@ -154,6 +156,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     Element* newElement = NULL;
     bool showNewElementForm = false;
     bool clickOnSwitch = false;
+    
     if(m_mode == MODE_INSERT_TEXT || m_mode == MODE_PASTE || m_mode == MODE_DRAG_PASTE) {
         m_mode = MODE_EDIT;
     } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT || m_mode == MODE_DRAG_INSERT_TEXT) {
@@ -797,6 +800,19 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     } else if(event.GetModifiers() == wxMOD_CONTROL) {  // Copy.
                         CopySelection();
                     }
+                }
+            } break;
+            case 'H': {
+                if(!insertingElement) {
+                    if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert an harmonic current source.
+                        HarmCurrent* newHarmCurrent =
+                            new HarmCurrent(wxString::Format(_("Harmonic Current %d"), GetElementNumber(ID_HARMCURRENT)));
+                        IncrementElementNumber(ID_HARMCURRENT);
+                        m_elementList.push_back(newHarmCurrent);
+                        m_mode = MODE_INSERT;
+                        m_statusBar->SetStatusText(_("Insert Harmonic Current Source: Click on a buses, ESC to cancel."));
+                    }
+                    Redraw();
                 }
             } break;
             case 'V': {
@@ -1495,4 +1511,17 @@ bool Workspace::RunStaticStudies()
     if(pfStatus && faultStatus && scStatus) return true;
 
     return false;
+}
+
+bool Workspace::RunHarmonicDistortion()
+{
+    auto simProp = m_properties->GetSimulationPropertiesData();
+    double basePower = simProp.basePower;
+    if(simProp.basePowerUnit == UNIT_MVA)
+        basePower *= 1e6;
+    else if(simProp.basePowerUnit == UNIT_kVA)
+        basePower *= 1e3;
+    if(!RunPowerFlow()) return false;
+    PowerQuality pq(GetElementList());
+    return pq.CalculateDistortions(basePower);
 }
