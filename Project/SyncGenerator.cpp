@@ -223,7 +223,7 @@ wxString SyncGenerator::GetTipText() const
     return tipText;
 }
 
-bool SyncGenerator::GetPlotData(ElementPlotData& plotData)
+bool SyncGenerator::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 {
     if(!m_electricalData.plotSyncMachine) return false;
     plotData.SetName(m_electricalData.name);

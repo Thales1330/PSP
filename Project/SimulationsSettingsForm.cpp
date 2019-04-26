@@ -41,6 +41,7 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     }
     m_checkBoxFaultAfterPF->SetValue(data.faultAfterPowerFlow);
     m_checkBoxSCPowerAfterPF->SetValue(data.scPowerAfterPowerFlow);
+    m_checkBoxTHDAfterPF->SetValue(data.harmDistortionAfterPowerFlow);
     switch(data.powerFlowMethod) {
         case GAUSS_SEIDEL: {
             m_choicePFMethod->SetSelection(0);
@@ -107,6 +108,7 @@ bool SimulationsSettingsForm::ValidateData()
     }
     data.faultAfterPowerFlow = m_checkBoxFaultAfterPF->GetValue();
     data.scPowerAfterPowerFlow = m_checkBoxSCPowerAfterPF->GetValue();
+    data.harmDistortionAfterPowerFlow = m_checkBoxTHDAfterPF->GetValue();
     switch(m_choicePFMethod->GetSelection()) {
         case 0: {
             data.powerFlowMethod = GAUSS_SEIDEL;

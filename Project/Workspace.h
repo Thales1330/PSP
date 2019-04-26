@@ -149,6 +149,7 @@ class Workspace : public WorkspaceBase
     bool RunStaticStudies();
     bool RunStability();
     bool RunHarmonicDistortion();
+    bool RunFrequencyResponse();
 
    protected:
     virtual void OnMiddleDoubleClick(wxMouseEvent& event);

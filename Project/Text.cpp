@@ -270,6 +270,9 @@ void Text::UpdateText(double systemPowerBase)
                                 break;
                         }
                     } break;
+                    case DATA_PQ_THD: {
+                        SetText("THD = " + wxString::FromDouble(data.thd, m_decimalPlaces) + "\%");
+                    } break;
                     default:
                         break;
                 }
@@ -907,6 +910,19 @@ void Text::UpdateText(double systemPowerBase)
                             default:
                                 break;
                         }
+                    } break;
+                    default:
+                        break;
+                }
+            }
+        } break;
+        case TYPE_HARMCURRENT: {
+            HarmCurrent* harmCurrent = static_cast<HarmCurrent*>(m_element);
+            if(harmCurrent) {
+                auto data = harmCurrent->GetElectricalData();
+                switch(m_dataType) {
+                    case DATA_NAME: {
+                        SetText(data.name);
                     } break;
                     default:
                         break;

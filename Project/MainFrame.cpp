@@ -22,12 +22,12 @@
 #include "DataReport.h"
 #include "FileHanding.h"
 #include "GeneralPropertiesForm.h"
+#include "HarmCurrent.h"
 #include "ImportForm.h"
 #include "IndMotor.h"
 #include "Inductor.h"
 #include "Line.h"
 #include "Load.h"
-#include "HarmCurrent.h"
 #include "MainFrame.h"
 #include "PropertiesData.h"
 #include "SimulationsSettingsForm.h"
@@ -153,8 +153,9 @@ void MainFrame::CreateAddElementsMenu()
                                                   _("Adds a shunt capacitor at the circuit"));
     wxMenuItem* inductorElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_INDUCTOR, _("&Inductor\tShift-I"),
                                                  _("Adds a shunt inductor at the circuit"));
-    wxMenuItem* harmCurrentElement = new wxMenuItem(m_addElementsMenu, ID_ADDMENU_HARMCURRENT, _("&Harmonic current\tShift-H"),
-                                                 _("Adds a harmonic current source at the circuit"));
+    wxMenuItem* harmCurrentElement =
+        new wxMenuItem(m_addElementsMenu, ID_ADDMENU_HARMCURRENT, _("&Harmonic current\tShift-H"),
+                       _("Adds a harmonic current source at the circuit"));
 
     m_addElementsMenu->Append(busElement);
     m_addElementsMenu->Append(lineElement);
@@ -446,8 +447,8 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                     newElement = true;
                 } break;
                 case ID_ADDMENU_HARMCURRENT: {
-                    HarmCurrent* newHarmCurrent =
-                        new HarmCurrent(wxString::Format(_("Harmonic Current %d"), workspace->GetElementNumber(ID_INDUCTOR)));
+                    HarmCurrent* newHarmCurrent = new HarmCurrent(
+                        wxString::Format(_("Harmonic Current %d"), workspace->GetElementNumber(ID_INDUCTOR)));
                     workspace->IncrementElementNumber(ID_HARMCURRENT);
                     elementList.push_back(newHarmCurrent);
                     statusBarText = _("Insert Harmonic Current Source: Click on a buses, ESC to cancel.");
@@ -556,6 +557,8 @@ void MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)
 }
 void MainFrame::OnFreqResponseClick(wxRibbonButtonBarEvent& event)
 {
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+    if(workspace) { workspace->RunFrequencyResponse(); }
 }
 void MainFrame::OnHarmDistortionsClick(wxRibbonButtonBarEvent& event)
 {

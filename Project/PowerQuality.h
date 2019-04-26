@@ -22,16 +22,26 @@ class PowerQuality : public ElectricCalculation
     };
 
     PowerQuality();
-    PowerQuality(std::vector<Element*> elementList);
+    PowerQuality(std::vector<Element *> elementList);
     ~PowerQuality();
-    
+
     virtual void CalculateHarmonicYbusList(double systemPowerBase = 100e6);
+    virtual void CalculateHarmonicYbus(std::vector<std::vector<std::complex<double> > > &yBus,
+                                       double systemPowerBase,
+                                       double order);
 
     virtual bool CalculateDistortions(double systemPowerBase = 100e6);
+    virtual bool CalculateFrequencyResponse(double systemFreq = 60.0,
+                                            double initFreq = 0.0,
+                                            double endFreq = 1500.0,
+                                            double stepFreq = 1.0,
+                                            double systemPowerBase = 100e6);
     virtual std::vector<double> GetHarmonicOrdersList();
+    virtual std::vector<double> GetFrequencies() { return m_frequencyList; }
 
    protected:
     std::vector<HarmonicYbus> m_harmYbusList;
+    std::vector<double> m_frequencyList;
 };
 
 #endif  // POWERQUALITY_H

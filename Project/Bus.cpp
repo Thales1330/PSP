@@ -239,23 +239,31 @@ wxString Bus::GetTipText() const
     }
 
     tipText += _("\n\nSsc = ") + wxString::FromDouble(std::abs(m_electricalData.scPower), 5) + _(" p.u.");
+    tipText += _("\n\nTHD = ") + wxString::FromDouble(std::abs(m_electricalData.thd), 5) + wxT("\%");
 
     return tipText;
 }
 
-bool Bus::GetPlotData(ElementPlotData& plotData)
+bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 {
-    if(!m_electricalData.plotBus) return false;
-    plotData.SetName(m_electricalData.name);
-    plotData.SetCurveType(ElementPlotData::CT_BUS);
+    if(study == STABILITY) {
+        if(!m_electricalData.plotBus) return false;
+        plotData.SetName(m_electricalData.name);
+        plotData.SetCurveType(ElementPlotData::CT_BUS);
 
-    std::vector<double> absVoltage, argVoltage;
-    for(unsigned int i = 0; i < m_electricalData.stabVoltageVector.size(); ++i) {
-        absVoltage.push_back(std::abs(m_electricalData.stabVoltageVector[i]));
-        argVoltage.push_back(wxRadToDeg(std::arg(m_electricalData.stabVoltageVector[i])));
+        std::vector<double> absVoltage, argVoltage;
+        for(unsigned int i = 0; i < m_electricalData.stabVoltageVector.size(); ++i) {
+            absVoltage.push_back(std::abs(m_electricalData.stabVoltageVector[i]));
+            argVoltage.push_back(wxRadToDeg(std::arg(m_electricalData.stabVoltageVector[i])));
+        }
+        plotData.AddData(absVoltage, _("Voltage"));
+        plotData.AddData(argVoltage, _("Angle"));
+    } else if(FREQRESPONSE) {
+        //if(!m_electricalData.plotBus) return false;
+        plotData.SetName(m_electricalData.name);
+        plotData.SetCurveType(ElementPlotData::CT_BUS);
+        plotData.AddData(m_electricalData.absImpedanceVector, _("Impedance"));
     }
-    plotData.AddData(absVoltage, _("Voltage"));
-    plotData.AddData(argVoltage, _("Angle"));
     return true;
 }
 

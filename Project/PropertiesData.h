@@ -31,6 +31,7 @@ struct SimulationData {
     ElectricalUnit basePowerUnit = UNIT_MVA;
     bool faultAfterPowerFlow = false;
     bool scPowerAfterPowerFlow = false;
+    bool harmDistortionAfterPowerFlow = false;
 
     // Power flow
     PowerFlowMethod powerFlowMethod = GAUSS_SEIDEL;

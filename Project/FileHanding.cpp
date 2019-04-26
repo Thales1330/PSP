@@ -232,7 +232,7 @@ void FileHanding::SaveProject(wxFileName path)
         elementID++;
     }
     //}
-    
+
     //{ HarmCurrent
     auto harmCurrentNode = XMLParser::AppendNode(doc, elementsNode, "HarmCurrentList");
     auto harmCurrentList = allElements.GetHarmCurrentList();
@@ -492,19 +492,20 @@ bool FileHanding::OpenProject(wxFileName path)
 
         transfomerNode = transfomerNode->next_sibling("Transfomer");
     }  //}
-    
-    //{ Transformer
+
+    //{ HarmCurrent
     auto harmCurrentListNode = elementsNode->first_node("HarmCurrentList");
-    if(!harmCurrentListNode) return false;
-    auto harmCurrentNode = harmCurrentListNode->first_node("HarmCurrent");
-    while(harmCurrentNode) {
-        HarmCurrent* harmCurrent = new HarmCurrent();
+    if(harmCurrentListNode) {
+        auto harmCurrentNode = harmCurrentListNode->first_node("HarmCurrent");
+        while(harmCurrentNode) {
+            HarmCurrent* harmCurrent = new HarmCurrent();
 
-        if(!harmCurrent->OpenElement(harmCurrentNode, parentList)) return false;
-        elementList.push_back(harmCurrent);
-        harmCurrentList.push_back(harmCurrent);
+            if(!harmCurrent->OpenElement(harmCurrentNode, parentList)) return false;
+            elementList.push_back(harmCurrent);
+            harmCurrentList.push_back(harmCurrent);
 
-        harmCurrentNode = harmCurrentNode->next_sibling("HarmCurrent");
+            harmCurrentNode = harmCurrentNode->next_sibling("HarmCurrent");
+        }
     }  //}
 
     m_workspace->SetElementList(elementList);

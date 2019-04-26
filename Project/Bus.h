@@ -62,6 +62,8 @@ struct BusElectricalData {
     std::vector<int> harmonicOrder;
     std::vector< std::complex<double> > harmonicVoltage;
     double thd = 0.0;
+    
+    std::vector<double> absImpedanceVector;
 };
 
 /**
@@ -92,7 +94,7 @@ class Bus : public PowerElement
     virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
     virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
-    virtual bool GetPlotData(ElementPlotData& plotData);
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
     
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode);

@@ -64,7 +64,8 @@ enum DataType {
     DATA_PF_ACTIVE,
     DATA_PF_REACTIVE,
     DATA_PF_LOSSES,
-    DATA_PF_CURRENT
+    DATA_PF_CURRENT,
+    DATA_PQ_THD
 };
 
 /**

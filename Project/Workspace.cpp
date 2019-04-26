@@ -1491,8 +1491,8 @@ void Workspace::OnMiddleDoubleClick(wxMouseEvent& event)
 
 bool Workspace::RunStaticStudies()
 {
-    bool pfStatus, faultStatus, scStatus;
-    pfStatus = faultStatus = scStatus = false;
+    bool pfStatus, faultStatus, scStatus, harmStatus;
+    pfStatus = faultStatus = scStatus = harmStatus = false;
 
     pfStatus = RunPowerFlow();
 
@@ -1507,8 +1507,14 @@ bool Workspace::RunStaticStudies()
     } else {
         scStatus = true;
     }
+    
+    if(m_properties->GetSimulationPropertiesData().harmDistortionAfterPowerFlow) {
+        if(pfStatus) harmStatus = RunHarmonicDistortion();
+    } else {
+        harmStatus = true;
+    }
 
-    if(pfStatus && faultStatus && scStatus) return true;
+    if(pfStatus && faultStatus && scStatus && harmStatus) return true;
 
     return false;
 }
@@ -1523,5 +1529,43 @@ bool Workspace::RunHarmonicDistortion()
         basePower *= 1e3;
     if(!RunPowerFlow()) return false;
     PowerQuality pq(GetElementList());
-    return pq.CalculateDistortions(basePower);
+    bool result =  pq.CalculateDistortions(basePower);
+    
+    UpdateTextElements();
+    Redraw();
+    
+    return result;
+}
+
+bool Workspace::RunFrequencyResponse()
+{
+    auto simProp = m_properties->GetSimulationPropertiesData();
+    double basePower = simProp.basePower;
+    if(simProp.basePowerUnit == UNIT_MVA)
+        basePower *= 1e6;
+    else if(simProp.basePowerUnit == UNIT_kVA)
+        basePower *= 1e3;
+    PowerQuality pq(GetElementList());
+    bool result =  pq.CalculateFrequencyResponse(simProp.stabilityFrequency, 0.0, 1500.0, 1.0, basePower);
+    
+    wxMessageDialog msgDialog(
+        this,
+        wxString::Format(_("Calculations done.\nDo you wish to open the frequency response graphics?")),
+        _("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
+    if(msgDialog.ShowModal() == wxID_YES) {
+        std::vector<ElementPlotData> plotDataList;
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            PowerElement* element = *it;
+            ElementPlotData plotData;
+            if(element->GetPlotData(plotData, FREQRESPONSE)) plotDataList.push_back(plotData);
+        }
+
+        ChartView* cView = new ChartView(this, plotDataList, pq.GetFrequencies());
+        cView->Show();
+    }
+    
+    UpdateTextElements();
+    Redraw();
+    
+    return result;
 }

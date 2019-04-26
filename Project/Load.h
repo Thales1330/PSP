@@ -87,7 +87,7 @@ class Load : public Shunt
     LoadElectricalData GetElectricalData() { return m_electricalData; }
     LoadElectricalData GetPUElectricalData(double systemPowerBase);
     void SetElectricalData(LoadElectricalData electricalData) { m_electricalData = electricalData; }
-    virtual bool GetPlotData(ElementPlotData& plotData);
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

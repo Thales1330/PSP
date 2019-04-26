@@ -156,7 +156,7 @@ class SyncGenerator : public Machines
     virtual void SetElectricalData(SyncGeneratorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SavePlotData();
-    virtual bool GetPlotData(ElementPlotData& plotData);
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

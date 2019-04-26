@@ -190,6 +190,33 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent,
 
     boxSizerLvl4_1->Add(m_choiceBasePower, 0, wxLEFT | wxRIGHT | wxBOTTOM, WXC_FROM_DIP(5));
 
+    wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxVERTICAL);
+
+    boxSizerLvl2_1->Add(boxSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextFreq = new wxStaticText(m_panelGeneral, wxID_ANY, _("System frequency"), wxDefaultPosition,
+                                        wxDLG_UNIT(m_panelGeneral, wxSize(-1, -1)), 0);
+
+    boxSizerLvl3_2->Add(m_staticTextFreq, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxHORIZONTAL);
+
+    boxSizerLvl3_2->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_textCtrlFreq = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("60,0"), wxDefaultPosition,
+                                    wxDLG_UNIT(m_panelGeneral, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlFreq->SetHint(wxT(""));
+#endif
+
+    boxSizerLvl4_5->Add(m_textCtrlFreq, 1, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    m_staticTextFreqUnit = new wxStaticText(m_panelGeneral, wxID_ANY, _("Hz"), wxDefaultPosition,
+                                            wxDLG_UNIT(m_panelGeneral, wxSize(-1, -1)), 0);
+
+    boxSizerLvl4_5->Add(m_staticTextFreqUnit, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL,
+                        WXC_FROM_DIP(5));
+
     wxStaticBoxSizer* staticBoxSizerLvl3_2 =
         new wxStaticBoxSizer(new wxStaticBox(m_panelGeneral, wxID_ANY, _("Continuous calculation")), wxVERTICAL);
 
@@ -207,6 +234,12 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent,
     m_checkBoxSCPowerAfterPF->SetValue(true);
 
     staticBoxSizerLvl3_2->Add(m_checkBoxSCPowerAfterPF, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_checkBoxTHDAfterPF = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Calculate harmonic distortion after power flow"),
+                                          wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1, -1)), 0);
+    m_checkBoxTHDAfterPF->SetValue(true);
+
+    staticBoxSizerLvl3_2->Add(m_checkBoxTHDAfterPF, 0, wxALL, WXC_FROM_DIP(5));
 
     m_panelPF =
         new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1, -1)), wxTAB_TRAVERSAL);
@@ -384,33 +417,6 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent,
                                          wxDLG_UNIT(m_panelStability, wxSize(-1, -1)), 0);
 
     boxSizerLvl4_7->Add(m_staticTextSec_2, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-
-    wxBoxSizer* boxSizerLvl3_5 = new wxBoxSizer(wxVERTICAL);
-
-    gridSizerLvl_2_3->Add(boxSizerLvl3_5, 0, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_staticTextFreq = new wxStaticText(m_panelStability, wxID_ANY, _("System frequency"), wxDefaultPosition,
-                                        wxDLG_UNIT(m_panelStability, wxSize(-1, -1)), 0);
-
-    boxSizerLvl3_5->Add(m_staticTextFreq, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-
-    wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxHORIZONTAL);
-
-    boxSizerLvl3_5->Add(boxSizerLvl4_5, 0, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_textCtrlFreq = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("60,0"), wxDefaultPosition,
-                                    wxDLG_UNIT(m_panelStability, wxSize(-1, -1)), 0);
-#if wxVERSION_NUMBER >= 3000
-    m_textCtrlFreq->SetHint(wxT(""));
-#endif
-
-    boxSizerLvl4_5->Add(m_textCtrlFreq, 1, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-
-    m_staticTextFreqUnit = new wxStaticText(m_panelStability, wxID_ANY, _("Hz"), wxDefaultPosition,
-                                            wxDLG_UNIT(m_panelStability, wxSize(-1, -1)), 0);
-
-    boxSizerLvl4_5->Add(m_staticTextFreqUnit, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL,
-                        WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizerLvl3_8 = new wxBoxSizer(wxVERTICAL);
 
