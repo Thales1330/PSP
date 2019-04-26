@@ -35,6 +35,7 @@ class PowerQuality : public ElectricCalculation
                                             double initFreq = 0.0,
                                             double endFreq = 1500.0,
                                             double stepFreq = 1.0,
+                                            int injBusNumber = 0,
                                             double systemPowerBase = 100e6);
     virtual std::vector<double> GetHarmonicOrdersList();
     virtual std::vector<double> GetFrequencies() { return m_frequencyList; }

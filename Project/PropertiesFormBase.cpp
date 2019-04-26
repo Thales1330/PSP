@@ -1172,3 +1172,164 @@ ImportFormBase::~ImportFormBase()
     m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonCancelClick),
                                NULL, this);
 }
+
+FrequencyResponseFormBase::FrequencyResponseFormBase(wxWindow* parent,
+                                                     wxWindowID id,
+                                                     const wxString& title,
+                                                     const wxPoint& pos,
+                                                     const wxSize& size,
+                                                     long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if(!bBitmapLoaded) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxCDAD0InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+
+    wxBoxSizer* boxSizerMain = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerMain);
+
+    wxGridSizer* gridSizer = new wxGridSizer(0, 2, 0, 0);
+
+    boxSizerMain->Add(gridSizer, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl3_1 = new wxBoxSizer(wxVERTICAL);
+
+    gridSizer->Add(boxSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextInitFreq = new wxStaticText(this, wxID_ANY, _("Initial frequency"), wxDefaultPosition,
+                                            wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizerLvl3_1->Add(m_staticTextInitFreq, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxHORIZONTAL);
+
+    boxSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_textCtrlInitFreq =
+        new wxTextCtrl(this, wxID_ANY, wxT("0,0"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlInitFreq->SetHint(wxT(""));
+#endif
+
+    boxSizerLvl4_1->Add(m_textCtrlInitFreq, 1, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    m_staticTextFreqUnit78 =
+        new wxStaticText(this, wxID_ANY, _("Hz"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizerLvl4_1->Add(m_staticTextFreqUnit78, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL,
+                        WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxVERTICAL);
+
+    gridSizer->Add(boxSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextFinalFreq =
+        new wxStaticText(this, wxID_ANY, _("Final frequency"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizerLvl3_2->Add(m_staticTextFinalFreq, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxHORIZONTAL);
+
+    boxSizerLvl3_2->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_textCtrlFinalFreq =
+        new wxTextCtrl(this, wxID_ANY, wxT("1500"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlFinalFreq->SetHint(wxT(""));
+#endif
+
+    boxSizerLvl4_2->Add(m_textCtrlFinalFreq, 1, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    m_staticTextFreqUnit2 =
+        new wxStaticText(this, wxID_ANY, _("Hz"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizerLvl4_2->Add(m_staticTextFreqUnit2, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL,
+                        WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl3_3 = new wxBoxSizer(wxVERTICAL);
+
+    gridSizer->Add(boxSizerLvl3_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextStep =
+        new wxStaticText(this, wxID_ANY, _("Frequency step"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizerLvl3_3->Add(m_staticTextStep, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxHORIZONTAL);
+
+    boxSizerLvl3_3->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_textCtrlStepFreq =
+        new wxTextCtrl(this, wxID_ANY, wxT("1"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlStepFreq->SetHint(wxT(""));
+#endif
+
+    boxSizerLvl4_3->Add(m_textCtrlStepFreq, 1, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    m_staticTextFreqUnit3 =
+        new wxStaticText(this, wxID_ANY, _("Hz"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizerLvl4_3->Add(m_staticTextFreqUnit3, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL,
+                        WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl3_4 = new wxBoxSizer(wxVERTICAL);
+
+    gridSizer->Add(boxSizerLvl3_4, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextInjCurrent =
+        new wxStaticText(this, wxID_ANY, _("Injected current"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizerLvl3_4->Add(m_staticTextInjCurrent, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    wxArrayString m_choiceBusArr;
+    m_choiceBus = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceBusArr, 0);
+
+    boxSizerLvl3_4->Add(m_choiceBus, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
+
+    boxSizerMain->Add(boxSizer_bottonButtons, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    boxSizer_bottonButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+
+    m_buttonRun = new wxButton(this, wxID_ANY, _("Run"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer_bottonButtons->Add(m_buttonRun, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
+
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer_bottonButtons->Add(m_buttonCancel, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
+
+    SetName(wxT("FrequencyResponseFormBase"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
+    if(GetSizer()) { GetSizer()->Fit(this); }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_buttonRun->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
+                         wxCommandEventHandler(FrequencyResponseFormBase::OnRunButtonClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
+                            wxCommandEventHandler(FrequencyResponseFormBase::OnCancelButtonClick), NULL, this);
+}
+
+FrequencyResponseFormBase::~FrequencyResponseFormBase()
+{
+    m_buttonRun->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
+                            wxCommandEventHandler(FrequencyResponseFormBase::OnRunButtonClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
+                               wxCommandEventHandler(FrequencyResponseFormBase::OnCancelButtonClick), NULL, this);
+}

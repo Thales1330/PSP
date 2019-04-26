@@ -86,6 +86,8 @@ BusForm::BusForm(wxWindow* parent, Bus* bus) : BusFormBase(parent)
     EnableCtrlVoltageFields(bus->GetElectricalData().isVoltageControlled);
     EnableFaultFields(bus->GetElectricalData().hasFault);
     EnableStabFaultFields(bus->GetElectricalData().stabHasFault);
+    
+    m_checkBoxPlotPQData->SetValue(bus->GetElectricalData().plotPQData);
 }
 
 BusForm::~BusForm() {}
@@ -161,6 +163,8 @@ void BusForm::OnButtonOKClick(wxCommandEvent& event)
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlStabFaultReactance->GetValue(), data.stabFaultReactance,
                                 _("Value entered incorrectly in the field \"Fault reactance (stability)\".")))
         return;
+        
+    data.plotPQData = m_checkBoxPlotPQData->GetValue();
 
     m_bus->SetElectricalData(data);
 

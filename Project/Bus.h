@@ -59,6 +59,7 @@ struct BusElectricalData {
     std::vector<std::complex<double> > stabVoltageVector;
     
     // Power Quality
+    bool plotPQData = false;
     std::vector<int> harmonicOrder;
     std::vector< std::complex<double> > harmonicVoltage;
     double thd = 0.0;

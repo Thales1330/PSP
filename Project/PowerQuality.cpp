@@ -256,6 +256,7 @@ bool PowerQuality::CalculateFrequencyResponse(double systemFreq,
                                               double initFreq,
                                               double endFreq,
                                               double stepFreq,
+                                              int injBusNumber,
                                               double systemPowerBase)
 {
     // Clear all previous data
@@ -273,9 +274,10 @@ bool PowerQuality::CalculateFrequencyResponse(double systemFreq,
         for(unsigned int j = 0; j < m_busList.size(); j++) { line.push_back(std::complex<double>(0.0, 0.0)); }
         yBus.push_back(line);
     }
-    // Create and fill with zoros the injected current vector
+    // Create and fill with zeros the injected current vector
     std::vector<std::complex<double> > iInj;
-    for(unsigned int i = 0; i < m_busList.size(); i++) { iInj.push_back(std::complex<double>(10.0, 0.0)); }
+    for(unsigned int i = 0; i < m_busList.size(); i++) { iInj.push_back(std::complex<double>(0.0, 0.0)); }
+    iInj[injBusNumber] = std::complex<double>(1.0, 0.0);
 
     if(initFreq < 1e-6) initFreq = stepFreq;
     double currentFreq = initFreq;
@@ -293,13 +295,12 @@ bool PowerQuality::CalculateFrequencyResponse(double systemFreq,
 
         for(unsigned int i = 0; i < m_busList.size(); i++) {
             auto data = m_busList[i]->GetElectricalData();
-            iInj[data.number] = std::complex<double>(1.0, 0.0);
+            if(data.plotPQData) {
+                auto zh = GaussianElimination(yBus, iInj);
 
-            auto zh = GaussianElimination(yBus, iInj);
-
-            data.absImpedanceVector.push_back(std::abs(zh[data.number]));
-            m_busList[i]->SetElectricalData(data);
-            iInj[data.number] = std::complex<double>(0.0, 0.0);
+                data.absImpedanceVector.push_back(std::abs(zh[data.number]));
+                m_busList[i]->SetElectricalData(data);
+            }
         }
 
         currentFreq += stepFreq;

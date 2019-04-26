@@ -55,6 +55,7 @@ class PowerQuality;
 
 class ElementPlotData;
 class ChartView;
+class FrequencyResponseForm;
 
 class PropertiesData;
 

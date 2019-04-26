@@ -87,6 +87,8 @@ class BusFormBase : public wxDialog
     wxStaticText* m_staticTextStabFaultReactance;
     wxTextCtrl* m_textCtrlStabFaultReactance;
     wxStaticText* m_staticTextPU_4;
+    wxPanel* m_panelPowerQuality;
+    wxCheckBox* m_checkBoxPlotPQData;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
@@ -137,6 +139,8 @@ class BusFormBase : public wxDialog
     wxTextCtrl* GetTextCtrlStabFaultReactance() { return m_textCtrlStabFaultReactance; }
     wxStaticText* GetStaticTextPU_4() { return m_staticTextPU_4; }
     wxPanel* GetPanelStability() { return m_panelStability; }
+    wxCheckBox* GetCheckBoxPlotPQData() { return m_checkBoxPlotPQData; }
+    wxPanel* GetPanelPowerQuality() { return m_panelPowerQuality; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }

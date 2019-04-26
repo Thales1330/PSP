@@ -60,6 +60,8 @@ void FileHanding::SaveProject(wxFileName path)
     XMLParser::SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);
     auto contCalcSCPower = XMLParser::AppendNode(doc, contCalc, "SCPower");
     XMLParser::SetNodeValue(doc, contCalcSCPower, simulationData.scPowerAfterPowerFlow);
+    auto contCalcTHD = XMLParser::AppendNode(doc, contCalc, "HarmonicDistortion");
+    XMLParser::SetNodeValue(doc, contCalcTHD, simulationData.harmDistortionAfterPowerFlow);
 
     auto powerFlowPropNode = XMLParser::AppendNode(doc, simulationPropNode, "PowerFlow");
     auto solutionMethod = XMLParser::AppendNode(doc, powerFlowPropNode, "SolutionMethod");
@@ -289,6 +291,8 @@ bool FileHanding::OpenProject(wxFileName path)
             auto contCalc = general->first_node("ContinuousCalculation");
             simData.faultAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "Fault");
             simData.scPowerAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "SCPower");
+            int harmDistortionAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "HarmonicDistortion");
+            simData.harmDistortionAfterPowerFlow = harmDistortionAfterPowerFlow != -1 ? harmDistortionAfterPowerFlow : false;
 
             // Power flow
             auto powerFlow = simPropertiesNode->first_node("PowerFlow");

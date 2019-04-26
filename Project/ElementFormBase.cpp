@@ -379,6 +379,19 @@ BusFormBase::BusFormBase(wxWindow* parent,
 
     boxSizerLvl5_8->Add(m_staticTextPU_4, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
 
+    m_panelPowerQuality =
+        new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelPowerQuality, _("Power Quality"), false);
+
+    wxBoxSizer* boxSizerLvl2_4 = new wxBoxSizer(wxVERTICAL);
+    m_panelPowerQuality->SetSizer(boxSizerLvl2_4);
+
+    m_checkBoxPlotPQData = new wxCheckBox(m_panelPowerQuality, wxID_ANY, _("Plot harmonic bus impedance"),
+                                          wxDefaultPosition, wxDLG_UNIT(m_panelPowerQuality, wxSize(-1, -1)), 0);
+    m_checkBoxPlotPQData->SetValue(false);
+
+    boxSizerLvl2_4->Add(m_checkBoxPlotPQData, 0, wxALL | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
     wxBoxSizer* boxSizerOkCancel = new wxBoxSizer(wxHORIZONTAL);
 
     boxSizerLvl1_1->Add(boxSizerOkCancel, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));

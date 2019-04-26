@@ -21,6 +21,7 @@
 //#include "Bus.h"
 #include "Capacitor.h"
 #include "ElementDataObject.h"
+#include "HarmCurrent.h"
 #include "IndMotor.h"
 #include "Inductor.h"
 #include "Line.h"
@@ -28,7 +29,6 @@
 #include "SyncGenerator.h"
 #include "SyncMotor.h"
 #include "Transformer.h"
-#include "HarmCurrent.h"
 
 #include "Text.h"
 
@@ -41,6 +41,8 @@
 #include "ElementPlotData.h"
 
 #include "PropertiesData.h"
+
+#include "FrequencyResponseForm.h"
 
 // Workspace
 Workspace::Workspace() : WorkspaceBase(NULL) {}
@@ -156,7 +158,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     Element* newElement = NULL;
     bool showNewElementForm = false;
     bool clickOnSwitch = false;
-    
+
     if(m_mode == MODE_INSERT_TEXT || m_mode == MODE_PASTE || m_mode == MODE_DRAG_PASTE) {
         m_mode = MODE_EDIT;
     } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT || m_mode == MODE_DRAG_INSERT_TEXT) {
@@ -805,12 +807,13 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
             case 'H': {
                 if(!insertingElement) {
                     if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert an harmonic current source.
-                        HarmCurrent* newHarmCurrent =
-                            new HarmCurrent(wxString::Format(_("Harmonic Current %d"), GetElementNumber(ID_HARMCURRENT)));
+                        HarmCurrent* newHarmCurrent = new HarmCurrent(
+                            wxString::Format(_("Harmonic Current %d"), GetElementNumber(ID_HARMCURRENT)));
                         IncrementElementNumber(ID_HARMCURRENT);
                         m_elementList.push_back(newHarmCurrent);
                         m_mode = MODE_INSERT;
-                        m_statusBar->SetStatusText(_("Insert Harmonic Current Source: Click on a buses, ESC to cancel."));
+                        m_statusBar->SetStatusText(
+                            _("Insert Harmonic Current Source: Click on a buses, ESC to cancel."));
                     }
                     Redraw();
                 }
@@ -1507,7 +1510,7 @@ bool Workspace::RunStaticStudies()
     } else {
         scStatus = true;
     }
-    
+
     if(m_properties->GetSimulationPropertiesData().harmDistortionAfterPowerFlow) {
         if(pfStatus) harmStatus = RunHarmonicDistortion();
     } else {
@@ -1529,16 +1532,35 @@ bool Workspace::RunHarmonicDistortion()
         basePower *= 1e3;
     if(!RunPowerFlow()) return false;
     PowerQuality pq(GetElementList());
-    bool result =  pq.CalculateDistortions(basePower);
-    
+    bool result = pq.CalculateDistortions(basePower);
+
     UpdateTextElements();
     Redraw();
-    
+
     return result;
 }
 
 bool Workspace::RunFrequencyResponse()
 {
+    // Get bus list
+    std::vector<Bus*> busList;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        if(Bus* bus = dynamic_cast<Bus*>(*it)) { busList.push_back(bus); }
+    }
+    
+    auto data = m_properties->GetFreqRespData();
+    
+    FrequencyResponseForm frForm(this, busList, data.injBusNumber, data.initFreq, data.finalFreq, data.stepFreq);
+
+    if(frForm.ShowModal() == wxID_OK) {
+        data.initFreq = frForm.GetInitFreq();
+        data.finalFreq = frForm.GetEndFreq();
+        data.stepFreq = frForm.GetStepFreq();
+        data.injBusNumber = frForm.GetInjBusNumber();
+        m_properties->SetFreqRespData(data);
+    } else
+        return false;
+
     auto simProp = m_properties->GetSimulationPropertiesData();
     double basePower = simProp.basePower;
     if(simProp.basePowerUnit == UNIT_MVA)
@@ -1546,11 +1568,10 @@ bool Workspace::RunFrequencyResponse()
     else if(simProp.basePowerUnit == UNIT_kVA)
         basePower *= 1e3;
     PowerQuality pq(GetElementList());
-    bool result =  pq.CalculateFrequencyResponse(simProp.stabilityFrequency, 0.0, 1500.0, 1.0, basePower);
-    
+    bool result = pq.CalculateFrequencyResponse(simProp.stabilityFrequency, data.initFreq , data.finalFreq, data.stepFreq, data.injBusNumber, basePower);
+
     wxMessageDialog msgDialog(
-        this,
-        wxString::Format(_("Calculations done.\nDo you wish to open the frequency response graphics?")),
+        this, wxString::Format(_("Calculations done.\nDo you wish to open the frequency response graphics?")),
         _("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
     if(msgDialog.ShowModal() == wxID_YES) {
         std::vector<ElementPlotData> plotDataList;
@@ -1563,9 +1584,9 @@ bool Workspace::RunFrequencyResponse()
         ChartView* cView = new ChartView(this, plotDataList, pq.GetFrequencies());
         cView->Show();
     }
-    
+
     UpdateTextElements();
     Redraw();
-    
+
     return result;
 }

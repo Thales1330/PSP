@@ -330,4 +330,48 @@ class ImportFormBase : public wxDialog
     virtual ~ImportFormBase();
 };
 
+class FrequencyResponseFormBase : public wxDialog
+{
+   protected:
+    wxStaticText* m_staticTextInitFreq;
+    wxTextCtrl* m_textCtrlInitFreq;
+    wxStaticText* m_staticTextFreqUnit78;
+    wxStaticText* m_staticTextFinalFreq;
+    wxTextCtrl* m_textCtrlFinalFreq;
+    wxStaticText* m_staticTextFreqUnit2;
+    wxStaticText* m_staticTextStep;
+    wxTextCtrl* m_textCtrlStepFreq;
+    wxStaticText* m_staticTextFreqUnit3;
+    wxStaticText* m_staticTextInjCurrent;
+    wxChoice* m_choiceBus;
+    wxButton* m_buttonRun;
+    wxButton* m_buttonCancel;
+
+   protected:
+    virtual void OnRunButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+   public:
+    wxStaticText* GetStaticTextInitFreq() { return m_staticTextInitFreq; }
+    wxTextCtrl* GetTextCtrlInitFreq() { return m_textCtrlInitFreq; }
+    wxStaticText* GetStaticTextFreqUnit78() { return m_staticTextFreqUnit78; }
+    wxStaticText* GetStaticTextFinalFreq() { return m_staticTextFinalFreq; }
+    wxTextCtrl* GetTextCtrlFinalFreq() { return m_textCtrlFinalFreq; }
+    wxStaticText* GetStaticTextFreqUnit2() { return m_staticTextFreqUnit2; }
+    wxStaticText* GetStaticTextStep() { return m_staticTextStep; }
+    wxTextCtrl* GetTextCtrlStepFreq() { return m_textCtrlStepFreq; }
+    wxStaticText* GetStaticTextFreqUnit3() { return m_staticTextFreqUnit3; }
+    wxStaticText* GetStaticTextInjCurrent() { return m_staticTextInjCurrent; }
+    wxChoice* GetChoiceBus() { return m_choiceBus; }
+    wxButton* GetButtonRun() { return m_buttonRun; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    FrequencyResponseFormBase(wxWindow* parent,
+                              wxWindowID id = wxID_ANY,
+                              const wxString& title = _("Frequency response"),
+                              const wxPoint& pos = wxDefaultPosition,
+                              const wxSize& size = wxSize(-1, -1),
+                              long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~FrequencyResponseFormBase();
+};
+
 #endif

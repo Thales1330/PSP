@@ -259,7 +259,7 @@ bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
         plotData.AddData(absVoltage, _("Voltage"));
         plotData.AddData(argVoltage, _("Angle"));
     } else if(FREQRESPONSE) {
-        //if(!m_electricalData.plotBus) return false;
+        if(!m_electricalData.plotPQData) return false;
         plotData.SetName(m_electricalData.name);
         plotData.SetCurveType(ElementPlotData::CT_BUS);
         plotData.AddData(m_electricalData.absImpedanceVector, _("Impedance"));
@@ -316,6 +316,10 @@ rapidxml::xml_node<>* Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::
     auto stabFaultReactance = XMLParser::AppendNode(doc, stability, "FaultReactance");
     XMLParser::SetNodeValue(doc, stabFaultReactance, m_electricalData.stabFaultReactance);
 
+    auto powerQuality = XMLParser::AppendNode(doc, electricalProp, "PowerQuality");
+    auto plotPQData = XMLParser::AppendNode(doc, powerQuality, "Plot");
+    XMLParser::SetNodeValue(doc, plotPQData, m_electricalData.plotPQData);
+
     return elementNode;
 }
 
@@ -348,6 +352,9 @@ bool Bus::OpenElement(rapidxml::xml_node<>* elementNode)
     m_electricalData.stabFaultLength = XMLParser::GetNodeValueDouble(stability, "FaultLength");
     m_electricalData.stabFaultResistance = XMLParser::GetNodeValueDouble(stability, "FaultResistance");
     m_electricalData.stabFaultReactance = XMLParser::GetNodeValueDouble(stability, "FaultReactance");
+
+    auto powerQuality = electricalProp->first_node("PowerQuality");
+    if(powerQuality) m_electricalData.plotPQData = XMLParser::GetNodeValueInt(powerQuality, "Plot");
 
     if(m_electricalData.stabHasFault) SetDynamicEvent(true);
     return true;
