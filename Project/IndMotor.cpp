@@ -151,17 +151,47 @@ rapidxml::xml_node<>* IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapid
     SaveCADProperties(doc, elementNode);
 
     // Element properties
+    // General
     auto electricalProp = XMLParser::AppendNode(doc, elementNode, "ElectricalProperties");
     auto isOnline = XMLParser::AppendNode(doc, electricalProp, "IsOnline");
     XMLParser::SetNodeValue(doc, isOnline, m_online);
     auto name = XMLParser::AppendNode(doc, electricalProp, "Name");
     XMLParser::SetNodeValue(doc, name, m_electricalData.name);
+    auto ratedPower = XMLParser::AppendNode(doc, electricalProp, "RatedPower");
+    XMLParser::SetNodeValue(doc, ratedPower, m_electricalData.ratedPower);
+    XMLParser::SetNodeAttribute(doc, ratedPower, "UnitID", m_electricalData.activePowerUnit);
     auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
     XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);
     XMLParser::SetNodeAttribute(doc, activePower, "UnitID", m_electricalData.activePowerUnit);
     auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
     XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
     XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+    auto useMachineBase = XMLParser::AppendNode(doc, electricalProp, "UseMachineBase");
+    XMLParser::SetNodeValue(doc, useMachineBase, m_electricalData.useMachinePowerAsBase);
+
+    // Stability
+    auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+    auto inertia = XMLParser::AppendNode(doc, stability, "Inertia");
+    XMLParser::SetNodeValue(doc, inertia, m_electricalData.inertia);
+    auto r1 = XMLParser::AppendNode(doc, stability, "StatorResistence");
+    XMLParser::SetNodeValue(doc, r1, m_electricalData.r1);
+    auto x1 = XMLParser::AppendNode(doc, stability, "StatorReactance");
+    XMLParser::SetNodeValue(doc, x1, m_electricalData.x1);
+    auto r2 = XMLParser::AppendNode(doc, stability, "RotorResistence");
+    XMLParser::SetNodeValue(doc, r2, m_electricalData.r2);
+    auto x2 = XMLParser::AppendNode(doc, stability, "RotorReactance");
+    XMLParser::SetNodeValue(doc, x2, m_electricalData.x2);
+    auto xm = XMLParser::AppendNode(doc, stability, "MagnetizingReactance");
+    XMLParser::SetNodeValue(doc, xm, m_electricalData.xm);
+    auto loadChar = XMLParser::AppendNode(doc, stability, "LoadCharacteristic");
+    auto aw = XMLParser::AppendNode(doc, loadChar, "Constant");
+    XMLParser::SetNodeValue(doc, aw, m_electricalData.aw);
+    auto bw = XMLParser::AppendNode(doc, loadChar, "Linear");
+    XMLParser::SetNodeValue(doc, bw, m_electricalData.bw);
+    auto cw = XMLParser::AppendNode(doc, loadChar, "Quadratic");
+    XMLParser::SetNodeValue(doc, cw, m_electricalData.cw);
+
+    SaveSwitchingData(doc, electricalProp);
 
     return elementNode;
 }
@@ -176,12 +206,29 @@ bool IndMotor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Elemen
     // Element properties
     SetOnline(XMLParser::GetNodeValueInt(electricalProp, "IsOnline"));
     m_electricalData.name = electricalProp->first_node("Name")->value();
+    m_electricalData.ratedPower = XMLParser::GetNodeValueDouble(electricalProp, "RatedPower");
+    m_electricalData.ratedPowerUnit =
+        static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "RatedPower", "UnitID"));
     m_electricalData.activePower = XMLParser::GetNodeValueDouble(electricalProp, "ActivePower");
     m_electricalData.activePowerUnit =
         static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ActivePower", "UnitID"));
     m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, "ReactivePower");
     m_electricalData.reactivePowerUnit =
         static_cast<ElectricalUnit>(XMLParser::GetAttributeValueInt(electricalProp, "ReactivePower", "UnitID"));
+    m_electricalData.useMachinePowerAsBase = XMLParser::GetNodeValueInt(electricalProp, "UseMachineBase");
+
+    // Stability
+    auto stability = electricalProp->first_node("Stability");
+    m_electricalData.inertia = XMLParser::GetNodeValueDouble(stability, "Inertia");
+    m_electricalData.r1 = XMLParser::GetNodeValueDouble(stability, "StatorResistence");
+    m_electricalData.x1 = XMLParser::GetNodeValueDouble(stability, "StatorReactance");
+    m_electricalData.r2 = XMLParser::GetNodeValueDouble(stability, "RotorResistence");
+    m_electricalData.x2 = XMLParser::GetNodeValueDouble(stability, "RotorReactance");
+    m_electricalData.xm = XMLParser::GetNodeValueDouble(stability, "MagnetizingReactance");
+    auto loadChar = stability->first_node("LoadCharacteristic");
+    m_electricalData.aw = XMLParser::GetNodeValueDouble(loadChar, "Constant");
+    m_electricalData.bw = XMLParser::GetNodeValueDouble(loadChar, "Linear");
+    m_electricalData.cw = XMLParser::GetNodeValueDouble(loadChar, "Quadratic");
 
     m_inserted = true;
 

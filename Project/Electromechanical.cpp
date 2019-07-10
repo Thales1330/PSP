@@ -78,6 +78,7 @@ bool Electromechanical::RunStabilityCalculation()
         return false;
     }
     InsertSyncMachinesOnYBus();
+    if(!InsertIndMachinesOnYBus()) return false;
     GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
 
     // Get buses voltages.
@@ -236,7 +237,8 @@ void Electromechanical::SetEvent(double currentTime)
                     Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
                     int n = parentBus->GetElectricalData().number;
                     std::complex<double> v = parentBus->GetElectricalData().voltage;
-                    m_yBus[n][n] -= std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
+                    m_yBus[n][n] -=
+                        std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
                 }
 
                 // Insert load (only disconnected load)
@@ -246,7 +248,8 @@ void Electromechanical::SetEvent(double currentTime)
                         Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
                         int n = parentBus->GetElectricalData().number;
                         std::complex<double> v = parentBus->GetElectricalData().voltage;
-                        m_yBus[n][n] += std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
+                        m_yBus[n][n] +=
+                            std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
                     }
                 }
             }
@@ -511,199 +514,199 @@ bool Electromechanical::InitializeDynamicElements()
         SyncGenerator* syncGenerator = *it;
         auto dataPU = syncGenerator->GetPUElectricalData(m_powerSystemBase);
         auto data = syncGenerator->GetElectricalData();
-        //if(syncGenerator->IsOnline()) {
-            double k = 1.0;  // Power base change factor.
-            if(data.useMachineBase) {
-                double oldBase = syncGenerator->GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
-                k = m_powerSystemBase / oldBase;
-            }
-            data.terminalVoltage = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().voltage;
+        // if(syncGenerator->IsOnline()) {
+        double k = 1.0;  // Power base change factor.
+        if(data.useMachineBase) {
+            double oldBase = syncGenerator->GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
+            k = m_powerSystemBase / oldBase;
+        }
+        data.terminalVoltage = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().voltage;
 
-            std::complex<double> conjS(dataPU.activePower, -dataPU.reactivePower);
-            std::complex<double> vt = data.terminalVoltage;
-            std::complex<double> ia = conjS / std::conj(vt);
+        std::complex<double> conjS(dataPU.activePower, -dataPU.reactivePower);
+        std::complex<double> vt = data.terminalVoltage;
+        std::complex<double> ia = conjS / std::conj(vt);
 
-            double xd = data.syncXd * k;
-            double xq = data.syncXq * k;
-            double ra = data.armResistance * k;
+        double xd = data.syncXd * k;
+        double xq = data.syncXq * k;
+        double ra = data.armResistance * k;
 
-            if(data.model == Machines::SM_MODEL_1) {
-                xq = data.transXd * k;
-                xd = xq;
-            } else if(data.syncXq == 0.0)
-                xq = data.syncXd * k;
+        if(data.model == Machines::SM_MODEL_1) {
+            xq = data.transXd * k;
+            xd = xq;
+        } else if(data.syncXq == 0.0)
+            xq = data.syncXd * k;
 
-            double sd = 1.0;
-            double sq = 1.0;
-            double satF = 1.0;
-            double xp = data.potierReactance * k;
-            bool hasSaturation = false;
-            if(data.satFactor != 0.0) {  // Have saturation.
-                satF = (data.satFactor - 1.2) / std::pow(1.2, 7);
-                if(xp == 0.0) xp = 0.8 * (data.transXd * k);
-                hasSaturation = true;
-            }
+        double sd = 1.0;
+        double sq = 1.0;
+        double satF = 1.0;
+        double xp = data.potierReactance * k;
+        bool hasSaturation = false;
+        if(data.satFactor != 0.0) {  // Have saturation.
+            satF = (data.satFactor - 1.2) / std::pow(1.2, 7);
+            if(xp == 0.0) xp = 0.8 * (data.transXd * k);
+            hasSaturation = true;
+        }
 
-            // Initialize state variables
-            std::complex<double> eq0 = vt + std::complex<double>(ra, xq) * ia;
-            double delta = std::arg(eq0);
+        // Initialize state variables
+        std::complex<double> eq0 = vt + std::complex<double>(ra, xq) * ia;
+        double delta = std::arg(eq0);
 
-            double id0, iq0, vd0, vq0;
-            ABCtoDQ0(ia, delta, id0, iq0);
-            ABCtoDQ0(vt, delta, vd0, vq0);
+        double id0, iq0, vd0, vq0;
+        ABCtoDQ0(ia, delta, id0, iq0);
+        ABCtoDQ0(vt, delta, vd0, vq0);
 
-            // Initialize saturation
-            double xqs = xq;
-            double xds = xd;
-            if(hasSaturation) {
-                double oldDelta = 0;
-                bool exit = false;
-                int numIt = 0;
-                while(!exit) {
-                    oldDelta = delta;
-                    ABCtoDQ0(ia, delta, id0, iq0);
-                    ABCtoDQ0(vt, delta, vd0, vq0);
+        // Initialize saturation
+        double xqs = xq;
+        double xds = xd;
+        if(hasSaturation) {
+            double oldDelta = 0;
+            bool exit = false;
+            int numIt = 0;
+            while(!exit) {
+                oldDelta = delta;
+                ABCtoDQ0(ia, delta, id0, iq0);
+                ABCtoDQ0(vt, delta, vd0, vq0);
 
-                    // Direct-axis Potier voltage.
-                    double epd = vd0 + ra * id0 + xp * iq0;
+                // Direct-axis Potier voltage.
+                double epd = vd0 + ra * id0 + xp * iq0;
 
-                    sq = 1.0 + satF * (xq / xd) * std::pow(epd, 6);
-                    xqs = (xq - xp) / sq + xp;
-                    eq0 = data.terminalVoltage + std::complex<double>(ra, xqs) * ia;
-                    delta = std::arg(eq0);
-                    if(std::abs(delta - oldDelta) < m_saturationTolerance) {
-                        exit = true;
-                    } else if(numIt >= m_maxIterations) {
-                        m_errorMsg = _("Error on initializate the saturation values of \"") + data.name + _("\".");
-                        return false;
-                    }
-                    numIt++;
-                }
-                // Quadrature-axis Potier voltage.
-                double epq = vq0 + ra * iq0 - xp * id0;
-                sd = 1.0 + satF * std::pow(epq, 6);
-                xds = (xd - xp) / sd + xp;
-            }
-
-            double ef0 = vq0 + ra * iq0 - xds * id0;
-
-            data.initialFieldVoltage = ef0 * sd;
-            data.fieldVoltage = data.initialFieldVoltage;
-            data.pm = std::real((data.terminalVoltage * std::conj(ia)) + (std::abs(ia) * std::abs(ia) * ra));
-            syncGenerator->IsOnline() ? data.speed = 2.0 * M_PI * m_systemFreq : data.speed = 2.0 * M_PI * data.ocFrequency;
-            data.delta = delta;
-            data.pe = data.pm;
-            data.electricalPower = std::complex<double>(dataPU.activePower, dataPU.reactivePower);
-            data.sd = sd;
-            data.sq = sq;
-            data.id = id0;
-            data.iq = iq0;
-
-            // Variables to extrapolate.
-            data.oldIq = iq0;
-            data.oldId = id0;
-            data.oldPe = data.pe;
-            data.oldSd = sd;
-            data.oldSq = sq;
-
-            switch(data.model) {
-                case Machines::SM_MODEL_1: {
-                    data.tranEq = std::abs(eq0);
-
-                    data.tranEd = 0.0;
-                    data.subEq = 0.0;
-                    data.subEd = 0.0;
-                } break;
-                case Machines::SM_MODEL_2: {
-                    double tranXd = data.transXd * k;
-
-                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
-                    data.tranEd = 0.0;
-                    data.subEd = 0.0;
-                    data.subEq = 0.0;
-                } break;
-                case Machines::SM_MODEL_3: {
-                    double tranXd = data.transXd * k;
-                    double tranXq = data.transXq * k;
-                    if(tranXq == 0.0) tranXq = tranXd;
-
-                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
-                    data.tranEd = -(xq - tranXq) * (iq0 / sq);
-
-                    data.subEd = 0.0;
-                    data.subEq = 0.0;
-                } break;
-                case Machines::SM_MODEL_4: {
-                    double tranXd = data.transXd * k;
-                    double subXd = data.subXd * k;
-                    double subXq = data.subXq * k;
-                    if(subXd == 0.0) subXd = subXq;
-                    if(subXq == 0.0) subXq = subXd;
-
-                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
-                    data.tranEd = 0.0;
-                    data.subEq = data.tranEq + (tranXd - subXd) * (id0 / sd);
-                    data.subEd = -(xq - subXq) * (iq0 / sq);
-                } break;
-                case Machines::SM_MODEL_5: {
-                    double tranXd = data.transXd * k;
-                    double tranXq = data.transXq * k;
-                    double subXd = data.subXd * k;
-                    double subXq = data.subXq * k;
-                    if(subXd == 0.0) subXd = subXq;
-                    if(subXq == 0.0) subXq = subXd;
-
-                    data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
-                    data.tranEd = -(xq - tranXq) * (iq0 / sq);
-                    data.subEq = data.tranEq + (tranXd - subXd) * (id0 / sd);
-                    data.subEd = data.tranEd - (tranXq - subXq) * (iq0 / sq);
-                } break;
-                default:
-                    break;
-            }
-
-            // Initialize controllers
-            if(data.useAVR) {
-                if(data.avrSolver) delete data.avrSolver;
-                data.avrSolver =
-                    new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
-                data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
-                data.avrSolver->SetCurrentTime(m_currentTime);
-                data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
-                data.avrSolver->SetInitialTerminalVoltage(std::abs(data.terminalVoltage));
-                data.avrSolver->SetActivePower(dataPU.activePower);
-                data.avrSolver->SetReactivePower(dataPU.reactivePower);
-                data.avrSolver->SetVelocity(data.speed);
-                data.avrSolver->SetInitialVelocity(data.speed);
-                data.avrSolver->InitializeValues(false);
-                if(!data.avrSolver->IsOK()) {
-                    m_errorMsg = _("Error on initializate the AVR of \"") + data.name + wxT("\".\n") +
-                                 data.avrSolver->GetErrorMessage();
-                    syncGenerator->SetElectricalData(data);
+                sq = 1.0 + satF * (xq / xd) * std::pow(epd, 6);
+                xqs = (xq - xp) / sq + xp;
+                eq0 = data.terminalVoltage + std::complex<double>(ra, xqs) * ia;
+                delta = std::arg(eq0);
+                if(std::abs(delta - oldDelta) < m_saturationTolerance) {
+                    exit = true;
+                } else if(numIt >= m_maxIterations) {
+                    m_errorMsg = _("Error on initializate the saturation values of \"") + data.name + _("\".");
                     return false;
                 }
+                numIt++;
             }
-            if(data.useSpeedGovernor) {
-                if(data.speedGovSolver) delete data.speedGovSolver;
-                data.speedGovSolver = new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier,
-                                                               m_tolerance, m_parent);
-                data.speedGovSolver->SetSwitchStatus(syncGenerator->IsOnline());
-                data.speedGovSolver->SetCurrentTime(m_currentTime);
-                data.speedGovSolver->SetActivePower(dataPU.activePower);
-                data.speedGovSolver->SetReactivePower(dataPU.reactivePower);
-                data.speedGovSolver->SetVelocity(data.speed);
-                data.speedGovSolver->SetInitialVelocity(data.speed);
-                data.speedGovSolver->SetInitialMecPower(data.pm);
-                data.speedGovSolver->InitializeValues(false);
-                if(!data.speedGovSolver->IsOK()) {
-                    m_errorMsg = _("Error on initializate the speed governor of \"") + data.name + wxT("\".\n") +
-                                 data.speedGovSolver->GetErrorMessage();
-                    syncGenerator->SetElectricalData(data);
-                    return false;
-                }
+            // Quadrature-axis Potier voltage.
+            double epq = vq0 + ra * iq0 - xp * id0;
+            sd = 1.0 + satF * std::pow(epq, 6);
+            xds = (xd - xp) / sd + xp;
+        }
+
+        double ef0 = vq0 + ra * iq0 - xds * id0;
+
+        data.initialFieldVoltage = ef0 * sd;
+        data.fieldVoltage = data.initialFieldVoltage;
+        data.pm = std::real((data.terminalVoltage * std::conj(ia)) + (std::abs(ia) * std::abs(ia) * ra));
+        syncGenerator->IsOnline() ? data.speed = 2.0 * M_PI* m_systemFreq : data.speed = 2.0 * M_PI * data.ocFrequency;
+        data.delta = delta;
+        data.pe = data.pm;
+        data.electricalPower = std::complex<double>(dataPU.activePower, dataPU.reactivePower);
+        data.sd = sd;
+        data.sq = sq;
+        data.id = id0;
+        data.iq = iq0;
+
+        // Variables to extrapolate.
+        data.oldIq = iq0;
+        data.oldId = id0;
+        data.oldPe = data.pe;
+        data.oldSd = sd;
+        data.oldSq = sq;
+
+        switch(data.model) {
+            case Machines::SM_MODEL_1: {
+                data.tranEq = std::abs(eq0);
+
+                data.tranEd = 0.0;
+                data.subEq = 0.0;
+                data.subEd = 0.0;
+            } break;
+            case Machines::SM_MODEL_2: {
+                double tranXd = data.transXd * k;
+
+                data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
+                data.tranEd = 0.0;
+                data.subEd = 0.0;
+                data.subEq = 0.0;
+            } break;
+            case Machines::SM_MODEL_3: {
+                double tranXd = data.transXd * k;
+                double tranXq = data.transXq * k;
+                if(tranXq == 0.0) tranXq = tranXd;
+
+                data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
+                data.tranEd = -(xq - tranXq) * (iq0 / sq);
+
+                data.subEd = 0.0;
+                data.subEq = 0.0;
+            } break;
+            case Machines::SM_MODEL_4: {
+                double tranXd = data.transXd * k;
+                double subXd = data.subXd * k;
+                double subXq = data.subXq * k;
+                if(subXd == 0.0) subXd = subXq;
+                if(subXq == 0.0) subXq = subXd;
+
+                data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
+                data.tranEd = 0.0;
+                data.subEq = data.tranEq + (tranXd - subXd) * (id0 / sd);
+                data.subEd = -(xq - subXq) * (iq0 / sq);
+            } break;
+            case Machines::SM_MODEL_5: {
+                double tranXd = data.transXd * k;
+                double tranXq = data.transXq * k;
+                double subXd = data.subXd * k;
+                double subXq = data.subXq * k;
+                if(subXd == 0.0) subXd = subXq;
+                if(subXq == 0.0) subXq = subXd;
+
+                data.tranEq = ef0 + (xd - tranXd) * (id0 / sd);
+                data.tranEd = -(xq - tranXq) * (iq0 / sq);
+                data.subEq = data.tranEq + (tranXd - subXd) * (id0 / sd);
+                data.subEd = data.tranEd - (tranXq - subXq) * (iq0 / sq);
+            } break;
+            default:
+                break;
+        }
+
+        // Initialize controllers
+        if(data.useAVR) {
+            if(data.avrSolver) delete data.avrSolver;
+            data.avrSolver =
+                new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+            data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
+            data.avrSolver->SetCurrentTime(m_currentTime);
+            data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
+            data.avrSolver->SetInitialTerminalVoltage(std::abs(data.terminalVoltage));
+            data.avrSolver->SetActivePower(dataPU.activePower);
+            data.avrSolver->SetReactivePower(dataPU.reactivePower);
+            data.avrSolver->SetVelocity(data.speed);
+            data.avrSolver->SetInitialVelocity(data.speed);
+            data.avrSolver->InitializeValues(false);
+            if(!data.avrSolver->IsOK()) {
+                m_errorMsg = _("Error on initializate the AVR of \"") + data.name + wxT("\".\n") +
+                             data.avrSolver->GetErrorMessage();
+                syncGenerator->SetElectricalData(data);
+                return false;
             }
+        }
+        if(data.useSpeedGovernor) {
+            if(data.speedGovSolver) delete data.speedGovSolver;
+            data.speedGovSolver =
+                new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+            data.speedGovSolver->SetSwitchStatus(syncGenerator->IsOnline());
+            data.speedGovSolver->SetCurrentTime(m_currentTime);
+            data.speedGovSolver->SetActivePower(dataPU.activePower);
+            data.speedGovSolver->SetReactivePower(dataPU.reactivePower);
+            data.speedGovSolver->SetVelocity(data.speed);
+            data.speedGovSolver->SetInitialVelocity(data.speed);
+            data.speedGovSolver->SetInitialMecPower(data.pm);
+            data.speedGovSolver->InitializeValues(false);
+            if(!data.speedGovSolver->IsOK()) {
+                m_errorMsg = _("Error on initializate the speed governor of \"") + data.name + wxT("\".\n") +
+                             data.speedGovSolver->GetErrorMessage();
+                syncGenerator->SetElectricalData(data);
+                return false;
+            }
+        }
         //} else {
-            // Initialize open circuit machine.
+        // Initialize open circuit machine.
         //}
         // Reset plot data
         data.terminalVoltageVector.clear();
@@ -720,6 +723,40 @@ bool Electromechanical::InitializeDynamicElements()
         data.deltaVector.shrink_to_fit();
 
         syncGenerator->SetElectricalData(data);
+    }
+    // Induction motors
+    for(auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
+        IndMotor* indMotor = *it;
+        auto dataPU = indMotor->GetPUElectricalData(m_powerSystemBase);
+        auto data = indMotor->GetElectricalData();
+
+        double w0 = 2.0 * M_PI * m_systemFreq;
+
+        std::complex<double> i1 = std::complex<double>(dataPU.activePower, -data.q0) / std::conj(data.terminalVoltage);
+        data.ir = std::real(i1);
+        data.im = std::imag(i1);
+        std::complex<double> e = data.terminalVoltage - std::complex<double>(data.r1t, data.x1t) * i1;
+        data.te = std::real(e * std::conj(i1)) / w0;
+
+        double wi = w0 * (1 - data.s0);  // Initial velocity
+        data.as = data.te * (data.aw + (data.bw * w0) / wi + (data.cw * w0 * w0) / (wi * wi));
+        data.bs = data.te * ((data.bw * w0) / wi + (2.0 * data.cw * w0 * w0) / (wi * wi));
+        data.cs = (data.te * data.cw * w0 * w0) / (wi * wi);
+
+        std::complex<double> tranE =
+            (std::complex<double>(0, data.x0 - data.xt) * i1) / std::complex<double>(1.0, w0 * data.s0 * data.t0);
+
+        data.tranEr = std::real(tranE);
+        data.tranEm = std::imag(tranE);
+
+        /*
+        double pEr = w0 * data.s0 * data.tranEm - (data.tranEr + (data.x0 - data.xt) * data.im) / (data.t0);
+        double pEm = -w0 * data.s0 * data.tranEr - (data.tranEm - (data.x0 - data.xt) * data.ir) / (data.t0);
+        wxMessageBox(wxString::Format("%.2f\%\n%f\n%f\n%f\n\n%f\n\n%f\n%f\n\n%f\n%f", data.s0 * 100, std::abs(i1),
+                                      std::abs(e), data.te, data.as - data.bs * data.s0 + data.cs * data.s0 * data.s0,
+                                      data.tranEr, data.tranEm, pEr, pEm));
+        */
+        indMotor->SetElectricalData(data);
     }
     CalculateReferenceSpeed();
     return true;
@@ -805,6 +842,17 @@ bool Electromechanical::CalculateInjectedCurrents()
         }
 
         syncGenerator->SetElectricalData(data);
+    }
+    // Induction motors
+    for(auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
+        IndMotor* motor = *it;
+        if(motor->IsOnline()) {
+            auto data = motor->GetElectricalData();
+            int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+            std::complex<double> y0 = std::complex<double>(1.0, 0.0) / std::complex<double>(data.r1t, data.xt);
+            std::complex<double> e = std::complex<double>(data.tranEr, data.tranEm);
+            m_iBus[n] += y0 * e;
+        }
     }
 
     // Loads
@@ -1052,9 +1100,7 @@ void Electromechanical::SaveData()
     for(auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
         SyncGenerator* syncGenerator = *it;
         auto data = syncGenerator->GetElectricalData();
-        if(data.plotSyncMachine) {
-            syncGenerator->SavePlotData();
-        }
+        if(data.plotSyncMachine) { syncGenerator->SavePlotData(); }
     }
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
@@ -1456,4 +1502,91 @@ void Electromechanical::PreallocateVectors()
             load->SetElectricalData(data);
         }
     }
+}
+
+std::complex<double> Electromechanical::GetIndMachineAdmittance(IndMotor* motor)
+{
+    auto data = motor->GetElectricalData();
+    auto dataPU = motor->GetPUElectricalData(m_powerSystemBase);
+    std::complex<double> y0 = (std::complex<double>(1, 0) / std::complex<double>(data.r1t, data.xt));
+    // The difference between calculated and defined reactive power
+    std::complex<double> yq = std::complex<double>(0.0, data.q0 - dataPU.reactivePower);
+    return y0 + yq;
+}
+
+bool Electromechanical::InsertIndMachinesOnYBus()
+{
+    for(auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
+        IndMotor* motor = *it;
+        if(motor->IsOnline()) {
+            if(!CalculateIndMachinesTransientValues(motor)) return false;
+            int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+            m_yBus[n][n] += GetIndMachineAdmittance(motor);
+        }
+    }
+    return true;
+}
+
+bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
+{
+    auto data = motor->GetElectricalData();
+    auto dataPU = motor->GetPUElectricalData(m_powerSystemBase);
+    double k = 1.0;  // Power base change factor.
+    if(data.useMachinePowerAsBase) {
+        double oldBase = motor->GetValueFromUnit(data.ratedPower, data.ratedPowerUnit);
+        k = m_powerSystemBase / oldBase;
+    }
+
+    // Calculate the induction machine transient constants at the machine base
+    double r1t = data.r1 * k;
+    double r2t = data.r2 * k;
+    double x1t = data.x1 * k;
+    double x2t = data.x2 * k;
+    double xmt = data.xm * k;
+    data.r1t = r1t;
+    data.r2t = r2t;
+    data.x1t = x1t;
+    data.x2t = x2t;
+    data.xmt = xmt;
+
+    double xt = x1t + (x2t * xmt) / (x2t + xmt);
+    double t0 = (x2t + xmt) / (2.0 * M_PI * m_systemFreq * r2t);
+    double x0 = x1t + xmt;
+    data.xt = xt;
+    data.t0 = t0;
+    data.x0 = x0;
+
+    data.terminalVoltage = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().voltage;
+
+    //[Ref.] Induction Motor Static Models for Power Flow and Voltage Stability Studies
+    double p = dataPU.activePower;
+    double v = std::abs(data.terminalVoltage);
+    double r1 = data.r1t;
+    double r2 = data.r2t;
+    double x1 = data.x1t;
+    double x2 = data.x2t;
+    double xm = data.xmt;
+    double k1 = x2 + xm;
+    double k2 = -x1 * k1 - x2 * xm;
+    double k3 = xm + x1;
+    double k4 = r1 * k1;
+    double a = p * (r1 * r1 + k3 * k3) - v * v * r1;
+    double b = 2.0 * p * (r1 * k2 + k3 * k4) - v * v * (k2 + k1 * k3);
+    double c = p * (k2 * k2 + k4 * k4) - v * v * k1 * k4;
+    double d = (b * b - 4.0 * a * c);
+    if(d < 0.0) {
+        m_errorMsg = _("Error on initializate the slip of \"") + data.name + _("\".");
+        return false;
+    }
+    double r2_s = (-b + std::sqrt(d)) / (2.0 * a);
+    data.s0 = r2 / r2_s;
+
+    double qa = k1 * (r2_s * r1 - x1 * k1 - x2 * xm);
+    double qb = r2_s * (r2_s * (xm + x1) + r1 * k1);
+    double qc = r2_s * r1 - x1 * k1 - x2 * xm;
+    double qd = r2_s * (xm + x1) + r1 * k1;
+    data.q0 = (-v * v * (qa - qb)) / (qc * qc + qd * qd);
+
+    motor->SetElectricalData(data);
+    return true;
 }

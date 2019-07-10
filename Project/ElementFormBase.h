@@ -762,13 +762,43 @@ class IndMotorFormBase : public wxDialog
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
     wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextNominalPower;
+    wxTextCtrl* m_textCtrlnominalPower;
+    wxChoice* m_choiceNominalPower;
     wxStaticText* m_staticTextActivePower;
     wxTextCtrl* m_textCtrlActivePower;
     wxChoice* m_choiceActivePower;
     wxStaticText* m_staticTextReactivePower;
     wxTextCtrl* m_textCtrlReactivePower;
     wxChoice* m_choiceReactivePower;
-    wxButton* m_buttonStabButton;
+    wxCheckBox* m_checkBoxUseMachinePower;
+    wxPanel* m_panelStability;
+    wxStaticText* m_staticTextInertia;
+    wxTextCtrl* m_textCtrlInertia;
+    wxStaticText* m_staticTextS_1;
+    wxStaticText* m_staticTextStatorResistence;
+    wxTextCtrl* m_textCtrlStatorResistence;
+    wxStaticText* m_staticTextPU_1;
+    wxStaticText* m_staticTextStatorReactance;
+    wxTextCtrl* m_textCtrlStatorReactance;
+    wxStaticText* m_staticTextPU_2;
+    wxStaticText* m_staticTextRotorResistence;
+    wxTextCtrl* m_textCtrlRotorResistence;
+    wxStaticText* m_staticTextPU_3;
+    wxStaticText* m_staticTextRotorReactance;
+    wxTextCtrl* m_textCtrlRotorReactance;
+    wxStaticText* m_staticTextPU_4;
+    wxStaticText* m_staticTextMagnetizingReactance;
+    wxTextCtrl* m_textCtrlMagnetizingReactance;
+    wxStaticText* m_staticTextPU_5;
+    wxStaticText* m_staticTextLoadCharacteristic;
+    wxTextCtrl* m_textCtrlA;
+    wxStaticText* m_staticTextPlus;
+    wxTextCtrl* m_textCtrlB;
+    wxStaticText* m_staticTextw;
+    wxTextCtrl* m_textCtrlC;
+    wxStaticText* m_staticTextw2;
+    wxButton* m_buttonSwitchingButton;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
@@ -780,15 +810,45 @@ class IndMotorFormBase : public wxDialog
    public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextNominalPower() { return m_staticTextNominalPower; }
+    wxTextCtrl* GetTextCtrlnominalPower() { return m_textCtrlnominalPower; }
+    wxChoice* GetChoiceNominalPower() { return m_choiceNominalPower; }
     wxStaticText* GetStaticTextActivePower() { return m_staticTextActivePower; }
     wxTextCtrl* GetTextCtrlActivePower() { return m_textCtrlActivePower; }
     wxChoice* GetChoiceActivePower() { return m_choiceActivePower; }
     wxStaticText* GetStaticTextReactivePower() { return m_staticTextReactivePower; }
     wxTextCtrl* GetTextCtrlReactivePower() { return m_textCtrlReactivePower; }
     wxChoice* GetChoiceReactivePower() { return m_choiceReactivePower; }
+    wxCheckBox* GetCheckBoxUseMachinePower() { return m_checkBoxUseMachinePower; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxStaticText* GetStaticTextInertia() { return m_staticTextInertia; }
+    wxTextCtrl* GetTextCtrlInertia() { return m_textCtrlInertia; }
+    wxStaticText* GetStaticTextS_1() { return m_staticTextS_1; }
+    wxStaticText* GetStaticTextStatorResistence() { return m_staticTextStatorResistence; }
+    wxTextCtrl* GetTextCtrlStatorResistence() { return m_textCtrlStatorResistence; }
+    wxStaticText* GetStaticTextPU_1() { return m_staticTextPU_1; }
+    wxStaticText* GetStaticTextStatorReactance() { return m_staticTextStatorReactance; }
+    wxTextCtrl* GetTextCtrlStatorReactance() { return m_textCtrlStatorReactance; }
+    wxStaticText* GetStaticTextPU_2() { return m_staticTextPU_2; }
+    wxStaticText* GetStaticTextRotorResistence() { return m_staticTextRotorResistence; }
+    wxTextCtrl* GetTextCtrlRotorResistence() { return m_textCtrlRotorResistence; }
+    wxStaticText* GetStaticTextPU_3() { return m_staticTextPU_3; }
+    wxStaticText* GetStaticTextRotorReactance() { return m_staticTextRotorReactance; }
+    wxTextCtrl* GetTextCtrlRotorReactance() { return m_textCtrlRotorReactance; }
+    wxStaticText* GetStaticTextPU_4() { return m_staticTextPU_4; }
+    wxStaticText* GetStaticTextMagnetizingReactance() { return m_staticTextMagnetizingReactance; }
+    wxTextCtrl* GetTextCtrlMagnetizingReactance() { return m_textCtrlMagnetizingReactance; }
+    wxStaticText* GetStaticTextPU_5() { return m_staticTextPU_5; }
+    wxStaticText* GetStaticTextLoadCharacteristic() { return m_staticTextLoadCharacteristic; }
+    wxTextCtrl* GetTextCtrlA() { return m_textCtrlA; }
+    wxStaticText* GetStaticTextPlus() { return m_staticTextPlus; }
+    wxTextCtrl* GetTextCtrlB() { return m_textCtrlB; }
+    wxStaticText* GetStaticTextw() { return m_staticTextw; }
+    wxTextCtrl* GetTextCtrlC() { return m_textCtrlC; }
+    wxStaticText* GetStaticTextw2() { return m_staticTextw2; }
+    wxPanel* GetPanelStability() { return m_panelStability; }
     wxNotebook* GetNotebook() { return m_notebook; }
-    wxButton* GetButtonStabButton() { return m_buttonStabButton; }
+    wxButton* GetButtonSwitchingButton() { return m_buttonSwitchingButton; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
     IndMotorFormBase(wxWindow* parent,

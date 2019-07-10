@@ -70,7 +70,10 @@ class Electromechanical : public ElectricCalculation
     // double GetPowerValue(double value, ElectricalUnit unit);
 
     void InsertSyncMachinesOnYBus();
+    bool InsertIndMachinesOnYBus();
+    bool CalculateIndMachinesTransientValues(IndMotor* motor);
     std::complex<double> GetSyncMachineAdmittance(SyncGenerator* generator);
+    std::complex<double> GetIndMachineAdmittance(IndMotor* motor);
     bool InitializeDynamicElements();
     bool CalculateInjectedCurrents();
     void CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq, double k = 1.0);
