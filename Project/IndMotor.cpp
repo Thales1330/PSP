@@ -234,3 +234,15 @@ bool IndMotor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Elemen
 
     return true;
 }
+
+bool IndMotor::GetPlotData(ElementPlotData& plotData, PlotStudy study)
+{
+    if(!m_electricalData.plotIndMachine) return false;
+    plotData.SetName(m_electricalData.name);
+    plotData.SetCurveType(ElementPlotData::CT_IND_MOTOR);
+
+    plotData.AddData(m_electricalData.slipVector, _("Slip"));
+    plotData.AddData(m_electricalData.electricalTorqueVector, _("Electrical torque"));
+    plotData.AddData(m_electricalData.mechanicalTorqueVector, _("Mechanical torque"));
+    return true;
+}

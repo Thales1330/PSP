@@ -34,6 +34,7 @@ struct IndMotorElectricalData {
     bool useMachinePowerAsBase = true;
 
     // Stability
+    bool plotIndMachine = true;
     double inertia = 1.0;  // Motor and load inertia
     double s0;             // Initial slip
     double q0;             // Initial reactive power
@@ -64,7 +65,6 @@ struct IndMotorElectricalData {
     // Internal machine variables
     double tranEr;
     double tranEm;
-    double te;
     double ir;
     double im;
 
@@ -83,6 +83,9 @@ struct IndMotorElectricalData {
     std::vector<double> terminalVoltageVector;
     double slip = 1.0;  // Machine slip
     std::vector<double> slipVector;
+    double te;
+    std::vector<double> electricalTorqueVector;
+    std::vector<double> mechanicalTorqueVector;
     std::complex<double> electricalPower;
     std::vector<std::complex<double> > electricalPowerVector;
 };
@@ -109,6 +112,8 @@ class IndMotor : public Machines
     virtual IndMotorElectricalData GetElectricalData() { return m_electricalData; }
     virtual IndMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(IndMotorElectricalData electricalData) { m_electricalData = electricalData; }
+    
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);
