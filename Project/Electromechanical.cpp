@@ -224,6 +224,32 @@ void Electromechanical::SetEvent(double currentTime)
         }
     }
 
+    // Induction motor switching
+    for(auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
+        IndMotor* motor = *it;
+        auto swData = motor->GetSwitchingData();
+        for(unsigned int i = 0; i < swData.swType.size(); ++i) {
+            if(EventTrigger(swData.swTime[i], currentTime)) {
+                // Remove machine (only connected machines)
+                if(swData.swType[i] == SW_REMOVE && motor->IsOnline() && motor->GetParentList().size() == 1) {
+                    auto data = motor->GetElectricalData();
+                    motor->SetOnline(false);
+                    int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+                    m_yBus[n][n] -= (std::complex<double>(1, 0) / std::complex<double>(data.r1t, data.xt));
+                }
+
+                // Insert machine (only disconnected machines)
+                if(swData.swType[i] == SW_INSERT && !motor->IsOnline() && motor->GetParentList().size() == 1) {
+                    auto data = motor->GetElectricalData();
+                    if(motor->SetOnline(true)) {
+                        int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+                        m_yBus[n][n] += (std::complex<double>(1, 0) / std::complex<double>(data.r1t, data.xt));
+                    }
+                }
+            }
+        }
+    }
+
     // Load switching
     for(auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
         Load* load = *it;
@@ -231,7 +257,7 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove load (only connected loads)
-                if(swData.swType[i] == SW_REMOVE && load->IsOnline()) {
+                if(swData.swType[i] == SW_REMOVE && load->IsOnline() && load->GetParentList().size() == 1) {
                     load->SetOnline(false);
                     auto data = load->GetPUElectricalData(m_powerSystemBase);
                     Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
@@ -731,25 +757,36 @@ bool Electromechanical::InitializeDynamicElements()
         auto data = indMotor->GetElectricalData();
 
         double w0 = 2.0 * M_PI * m_systemFreq;
-
         std::complex<double> i1 = std::complex<double>(dataPU.activePower, -data.q0) / std::conj(data.terminalVoltage);
-        data.ir = std::real(i1);
-        data.im = std::imag(i1);
+        double ir = std::real(i1);
+        double im = std::imag(i1);
         std::complex<double> e = data.terminalVoltage - std::complex<double>(data.r1t, data.x1t) * i1;
-        data.te = std::real(e * std::conj(i1)) / w0;
+        double te = std::real(e * std::conj(i1)) / w0;
 
         double wi = w0 * (1 - data.s0);  // Initial velocity
-        data.as = data.te * (data.aw + (data.bw * w0) / wi + (data.cw * w0 * w0) / (wi * wi));
-        data.bs = data.te * ((data.bw * w0) / wi + (2.0 * data.cw * w0 * w0) / (wi * wi));
-        data.cs = (data.te * data.cw * w0 * w0) / (wi * wi);
+        data.as = te * (data.aw + (data.bw * w0) / wi + (data.cw * w0 * w0) / (wi * wi));
+        data.bs = te * ((data.bw * w0) / wi + (2.0 * data.cw * w0 * w0) / (wi * wi));
+        data.cs = (te * data.cw * w0 * w0) / (wi * wi);
 
-        std::complex<double> tranE =
-            (std::complex<double>(0, data.x0 - data.xt) * i1) / std::complex<double>(1.0, w0 * data.s0 * data.t0);
+        if(indMotor->IsOnline()) {
+            std::complex<double> tranE =
+                (std::complex<double>(0, data.x0 - data.xt) * i1) / std::complex<double>(1.0, w0 * data.s0 * data.t0);
 
-        data.tranEr = std::real(tranE);
-        data.tranEm = std::imag(tranE);
+            data.tranEr = std::real(tranE);
+            data.tranEm = std::imag(tranE);
 
-        data.slip = data.s0;
+            data.slip = data.s0;
+            data.ir = ir;
+            data.im = im;
+            data.te = te;
+        } else {  // Offline
+            data.tranEr = 0.0;
+            data.tranEm = 0.0;
+            data.slip = 1.0 - 1e-7;
+            data.ir = 0.0;
+            data.im = 0.0;
+            data.te = 0.0;
+        }
 
         // Reset plot data
         data.slipVector.clear();
@@ -757,7 +794,11 @@ bool Electromechanical::InitializeDynamicElements()
         data.electricalTorqueVector.clear();
         data.electricalTorqueVector.shrink_to_fit();
         data.mechanicalTorqueVector.clear();
-        data.mechanicalTorqueVector.shrink_to_fit();        
+        data.mechanicalTorqueVector.shrink_to_fit();
+        data.velocityVector.clear();
+        data.velocityVector.shrink_to_fit();
+        data.currentVector.clear();
+        data.currentVector.shrink_to_fit();
 
         indMotor->SetElectricalData(data);
     }
@@ -860,15 +901,8 @@ bool Electromechanical::CalculateInjectedCurrents()
 
             std::complex<double> iMachine = y0 * (v - e);
 
-            // wxMessageBox(wxString::Format("%f\n%f", data.ir, data.im));
-
             data.ir = std::real(iMachine);
             data.im = std::imag(iMachine);
-            // double y = (1.0 / (data.r1t * data.r1t + data.xt * data.xt));
-            // data.ir = y * (data.r1t * data.tranEr + data.xt * data.tranEm);
-            // data.im = y * (-data.xt * data.tranEr + data.r1t * data.tranEm);
-
-            // wxMessageBox(wxString::Format("%f\n%f", data.ir, data.im));
         } else {
             data.ir = 0.0;
             data.im = 0.0;
@@ -1002,7 +1036,7 @@ void Electromechanical::CalculateIntegrationConstants(IndMotor* indMotor, double
 
         // Mechanical equations
         // s
-        data.icSlip.m = m_timeStep / (4.0f * data.inertia / k + data.bs * m_timeStep);
+        data.icSlip.m = m_timeStep / ((4.0f * data.inertia / w0) / k + data.bs * m_timeStep);
         data.icSlip.c = data.slip * (1.0 - 2.0 * data.bs * data.icSlip.m) +
                         data.icSlip.m * (2.0 * data.as + data.cs * data.slip * data.slip - data.te);
 
@@ -1080,9 +1114,9 @@ bool Electromechanical::SolveMachines()
 
             if(!CalculateNonIntVariables(indMotor, ir, im, te, k)) return false;
             // Extrapolate nonintegrable variables.
-            // ir = 2.0 * ir - data.oldIr;
-            // im = 2.0 * im - data.oldIm;
-            // te = 2.0 * te - data.oldTe;
+            ir = 2.0 * ir - data.oldIr;
+            im = 2.0 * im - data.oldIm;
+            te = 2.0 * te - data.oldTe;
 
             CalculateIntVariables(indMotor, ir, im, te, k);
         } else {
@@ -1230,11 +1264,13 @@ void Electromechanical::SaveData()
         auto data = motor->GetElectricalData();
         if(data.plotIndMachine) {
             data.slipVector.emplace_back(data.slip * 100.0);
-            double te = std::real(std::complex<double>(data.tranEr, data.tranEm) * std::complex<double>(data.ir, -data.im));
-            data.electricalTorqueVector.emplace_back(te);
-            //data.electricalTorqueVector.emplace_back(data.te * 2.0 * M_PI * m_systemFreq);
+            data.electricalTorqueVector.emplace_back(data.te * 2.0 * M_PI * m_systemFreq);
             double tm = (data.as - data.bs * data.slip + data.cs * data.slip * data.slip) * 2.0 * M_PI * m_systemFreq;
             data.mechanicalTorqueVector.emplace_back(tm);
+            double w = (1.0 - data.slip) * 2.0 * M_PI * m_systemFreq;
+            data.velocityVector.emplace_back(w);
+            double i1 = std::sqrt(data.ir * data.ir + data.im * data.im);
+            data.currentVector.emplace_back(i1);
             motor->SetElectricalData(data);
         }
     }
@@ -1449,7 +1485,7 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
 
     // Mechanical differential equations
     // Using Newton method to solve the non-linear slip equation: s = Cs + Ms * (C * s^2 - Te):
-    double slip = data.slip;  // Initial value
+    double slip = data.slip;  // Initial value. CAN BE THE PROBLEM ON MOTOR START!
     double ds = (data.icSlip.c + data.icSlip.m * (data.cs * slip * slip - te) - slip) /
                 (1.0 - 2.0 * data.icSlip.m * data.cs * slip * slip);
     int iteration = 0;
@@ -1460,7 +1496,8 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
         iteration++;
         if(iteration > m_maxIterations) break;
     }
-
+    
+    if(!indMotor->IsOnline()) slip = 1.0 - 1e-7;
     error = std::max(error, std::abs(data.slip - slip));
     data.slip = slip;
 
@@ -1696,9 +1733,10 @@ std::complex<double> Electromechanical::GetIndMachineAdmittance(IndMotor* motor)
 {
     auto data = motor->GetElectricalData();
     auto dataPU = motor->GetPUElectricalData(m_powerSystemBase);
+    std::complex<double> v = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().voltage;
     std::complex<double> y0 = (std::complex<double>(1, 0) / std::complex<double>(data.r1t, data.xt));
     // The difference between calculated and defined reactive power
-    std::complex<double> yq = std::complex<double>(0.0, data.q0 - dataPU.reactivePower);
+    std::complex<double> yq = std::complex<double>(0.0, data.q0 - dataPU.reactivePower) / (std::abs(v) * std::abs(v));
     return y0 + yq;
 }
 
@@ -1706,8 +1744,8 @@ bool Electromechanical::InsertIndMachinesOnYBus()
 {
     for(auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
         IndMotor* motor = *it;
+        if(!CalculateIndMachinesTransientValues(motor)) return false;
         if(motor->IsOnline()) {
-            if(!CalculateIndMachinesTransientValues(motor)) return false;
             int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
             m_yBus[n][n] += GetIndMachineAdmittance(motor);
         }
@@ -1749,6 +1787,8 @@ bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
     //[Ref.] Induction Motor Static Models for Power Flow and Voltage Stability Studies
     double p = dataPU.activePower;
     double v = std::abs(data.terminalVoltage);
+    // If the motor is offline, calculate the nominal slip to user-defined power input and 1.0 p.u. voltage
+    if(!motor->IsOnline()) v = 1.0;
     double r1 = data.r1t;
     double r2 = data.r2t;
     double x1 = data.x1t;

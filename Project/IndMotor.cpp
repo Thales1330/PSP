@@ -229,6 +229,9 @@ bool IndMotor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Elemen
     m_electricalData.aw = XMLParser::GetNodeValueDouble(loadChar, "Constant");
     m_electricalData.bw = XMLParser::GetNodeValueDouble(loadChar, "Linear");
     m_electricalData.cw = XMLParser::GetNodeValueDouble(loadChar, "Quadratic");
+    
+    if(!OpenSwitchingData(electricalProp)) return false;
+    if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
 
     m_inserted = true;
 
@@ -244,5 +247,7 @@ bool IndMotor::GetPlotData(ElementPlotData& plotData, PlotStudy study)
     plotData.AddData(m_electricalData.slipVector, _("Slip"));
     plotData.AddData(m_electricalData.electricalTorqueVector, _("Electrical torque"));
     plotData.AddData(m_electricalData.mechanicalTorqueVector, _("Mechanical torque"));
+    plotData.AddData(m_electricalData.velocityVector, _("Velocity"));
+    plotData.AddData(m_electricalData.currentVector, _("Current"));
     return true;
 }

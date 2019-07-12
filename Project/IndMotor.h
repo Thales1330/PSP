@@ -86,6 +86,8 @@ struct IndMotorElectricalData {
     double te;
     std::vector<double> electricalTorqueVector;
     std::vector<double> mechanicalTorqueVector;
+    std::vector<double> velocityVector;
+    std::vector<double> currentVector;
     std::complex<double> electricalPower;
     std::vector<std::complex<double> > electricalPowerVector;
 };
