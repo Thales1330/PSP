@@ -3200,6 +3200,12 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
     wxBoxSizer* boxSizerLvl2_2 = new wxBoxSizer(wxVERTICAL);
     m_panelStability->SetSizer(boxSizerLvl2_2);
 
+    m_checkBoxPlotIndMachine = new wxCheckBox(m_panelStability, wxID_ANY, _("Plot induction machine data"),
+                                              wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1, -1)), 0);
+    m_checkBoxPlotIndMachine->SetValue(false);
+
+    boxSizerLvl2_2->Add(m_checkBoxPlotIndMachine, 0, wxALL | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
     wxGridSizer* gridSizerLvl3_2 = new wxGridSizer(0, 2, 0, 0);
 
     boxSizerLvl2_2->Add(gridSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));
@@ -3373,6 +3379,25 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
 
     boxSizerLvl5_8->Add(m_staticTextPU_5, 0, wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
 
+    wxBoxSizer* boxSizerLvl4_9 = new wxBoxSizer(wxVERTICAL);
+
+    gridSizerLvl3_2->Add(boxSizerLvl4_9, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_checkBoxUseKf = new wxCheckBox(m_panelStability, wxID_ANY, _("Use cage factor"), wxDefaultPosition,
+                                     wxDLG_UNIT(m_panelStability, wxSize(-1, -1)), 0);
+    m_checkBoxUseKf->SetValue(false);
+
+    boxSizerLvl4_9->Add(m_checkBoxUseKf, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    m_textCtrlKf = new wxTextCtrl(m_panelStability, wxID_ANY, wxT(""), wxDefaultPosition,
+                                  wxDLG_UNIT(m_panelStability, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlKf->SetHint(wxT(""));
+#endif
+
+    boxSizerLvl4_9->Add(m_textCtrlKf, 1, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND | wxALIGN_CENTER_VERTICAL,
+                        WXC_FROM_DIP(5));
+
     wxBoxSizer* boxSizerLvl3_3 = new wxBoxSizer(wxVERTICAL);
 
     boxSizerLvl2_2->Add(boxSizerLvl3_3, 0, wxEXPAND, WXC_FROM_DIP(5));
@@ -3386,7 +3411,7 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
 
     wxGridSizer* gridSizerLvl4_8 = new wxGridSizer(0, 3, 0, 0);
 
-    boxSizerLvl3_3->Add(gridSizerLvl4_8, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerLvl3_3->Add(gridSizerLvl4_8, 1, wxEXPAND, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizerLvl5_9 = new wxBoxSizer(wxHORIZONTAL);
 
@@ -3485,6 +3510,8 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
     }
 #endif
     // Connect events
+    m_checkBoxUseKf->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED,
+                             wxCommandEventHandler(IndMotorFormBase::OnCheckboxUseCageFactorClick), NULL, this);
     m_buttonSwitchingButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
                                      wxCommandEventHandler(IndMotorFormBase::OnStabilityButtonClick), NULL, this);
     m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IndMotorFormBase::OnOKButtonClick), NULL,
@@ -3495,6 +3522,8 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
 
 IndMotorFormBase::~IndMotorFormBase()
 {
+    m_checkBoxUseKf->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED,
+                                wxCommandEventHandler(IndMotorFormBase::OnCheckboxUseCageFactorClick), NULL, this);
     m_buttonSwitchingButton->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
                                         wxCommandEventHandler(IndMotorFormBase::OnStabilityButtonClick), NULL, this);
     m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IndMotorFormBase::OnOKButtonClick), NULL,

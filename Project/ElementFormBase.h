@@ -773,6 +773,7 @@ class IndMotorFormBase : public wxDialog
     wxChoice* m_choiceReactivePower;
     wxCheckBox* m_checkBoxUseMachinePower;
     wxPanel* m_panelStability;
+    wxCheckBox* m_checkBoxPlotIndMachine;
     wxStaticText* m_staticTextInertia;
     wxTextCtrl* m_textCtrlInertia;
     wxStaticText* m_staticTextS_1;
@@ -791,6 +792,8 @@ class IndMotorFormBase : public wxDialog
     wxStaticText* m_staticTextMagnetizingReactance;
     wxTextCtrl* m_textCtrlMagnetizingReactance;
     wxStaticText* m_staticTextPU_5;
+    wxCheckBox* m_checkBoxUseKf;
+    wxTextCtrl* m_textCtrlKf;
     wxStaticText* m_staticTextLoadCharacteristic;
     wxTextCtrl* m_textCtrlA;
     wxStaticText* m_staticTextPlus;
@@ -803,6 +806,7 @@ class IndMotorFormBase : public wxDialog
     wxButton* m_ButtonCancel;
 
    protected:
+    virtual void OnCheckboxUseCageFactorClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
@@ -821,6 +825,7 @@ class IndMotorFormBase : public wxDialog
     wxChoice* GetChoiceReactivePower() { return m_choiceReactivePower; }
     wxCheckBox* GetCheckBoxUseMachinePower() { return m_checkBoxUseMachinePower; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxCheckBox* GetCheckBoxPlotIndMachine() { return m_checkBoxPlotIndMachine; }
     wxStaticText* GetStaticTextInertia() { return m_staticTextInertia; }
     wxTextCtrl* GetTextCtrlInertia() { return m_textCtrlInertia; }
     wxStaticText* GetStaticTextS_1() { return m_staticTextS_1; }
@@ -839,6 +844,8 @@ class IndMotorFormBase : public wxDialog
     wxStaticText* GetStaticTextMagnetizingReactance() { return m_staticTextMagnetizingReactance; }
     wxTextCtrl* GetTextCtrlMagnetizingReactance() { return m_textCtrlMagnetizingReactance; }
     wxStaticText* GetStaticTextPU_5() { return m_staticTextPU_5; }
+    wxCheckBox* GetCheckBoxUseKf() { return m_checkBoxUseKf; }
+    wxTextCtrl* GetTextCtrlKf() { return m_textCtrlKf; }
     wxStaticText* GetStaticTextLoadCharacteristic() { return m_staticTextLoadCharacteristic; }
     wxTextCtrl* GetTextCtrlA() { return m_textCtrlA; }
     wxStaticText* GetStaticTextPlus() { return m_staticTextPlus; }

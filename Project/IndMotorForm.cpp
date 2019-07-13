@@ -82,12 +82,16 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
     m_checkBoxUseMachinePower->SetValue(data.useMachinePowerAsBase);
 
     // Stability
+    m_checkBoxPlotIndMachine->SetValue(data.plotIndMachine);
     m_textCtrlInertia->SetValue(IndMotor::StringFromDouble(data.inertia));
     m_textCtrlStatorResistence->SetValue(IndMotor::StringFromDouble(data.r1));
     m_textCtrlStatorReactance->SetValue(IndMotor::StringFromDouble(data.x1));
     m_textCtrlRotorResistence->SetValue(IndMotor::StringFromDouble(data.r2));
     m_textCtrlRotorReactance->SetValue(IndMotor::StringFromDouble(data.x2));
     m_textCtrlMagnetizingReactance->SetValue(IndMotor::StringFromDouble(data.xm));
+    m_checkBoxUseKf->SetValue(data.useKf);
+    m_textCtrlKf->SetValue(IndMotor::StringFromDouble(data.kf));
+    m_textCtrlKf->Enable(data.useKf);
 
     m_textCtrlA->SetValue(IndMotor::StringFromDouble(data.aw));
     m_textCtrlB->SetValue(IndMotor::StringFromDouble(data.bw));
@@ -172,6 +176,7 @@ bool IndMotorForm::ValidateData()
     data.useMachinePowerAsBase = m_checkBoxUseMachinePower->GetValue();
 
     // Stability
+    data.plotIndMachine = m_checkBoxPlotIndMachine->GetValue();
     if(!m_indMotor->DoubleFromString(m_parent, m_textCtrlInertia->GetValue(), data.inertia,
                                      _("Value entered incorrectly in the field \"Inertia\".")))
         return false;
@@ -190,6 +195,10 @@ bool IndMotorForm::ValidateData()
     if(!m_indMotor->DoubleFromString(m_parent, m_textCtrlMagnetizingReactance->GetValue(), data.xm,
                                      _("Value entered incorrectly in the field \"Magnetizing reactance\".")))
         return false;
+    data.useKf = m_checkBoxUseKf->GetValue();
+    if(!m_indMotor->DoubleFromString(m_parent, m_textCtrlKf->GetValue(), data.kf,
+                                     _("Value entered incorrectly in the field \"Cage factor\".")))
+        return false;
 
     if(!m_indMotor->DoubleFromString(m_parent, m_textCtrlA->GetValue(), data.aw,
                                      _("Value entered incorrectly in the field \"Constant torque\".")))
@@ -201,14 +210,20 @@ bool IndMotorForm::ValidateData()
                                      _("Value entered incorrectly in the field \"Quadratic torque\".")))
         return false;
 
-    /*double sum = data.aw + data.bw + data.cw;
-    if(sum > 1.01 || sum < 0.99) {
-        wxString errorMsg = _("The sum of the portions of the torque must be unitary");
+    double sum = data.aw + data.bw + data.cw;
+    double tolerance = 1e-4;
+    if(sum > (1.0 + tolerance) || sum < (1.0 - tolerance)) {
+        wxString errorMsg = _("The sum of the torque portions must be unitary.\nThe current value is ") +
+                            m_indMotor->StringFromDouble(sum);
         wxMessageDialog msgDialog(m_parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
         return false;
-    }*/
+    }
 
     m_indMotor->SetElectricalData(data);
     return true;
+}
+void IndMotorForm::OnCheckboxUseCageFactorClick(wxCommandEvent& event)
+{
+    m_textCtrlKf->Enable(m_checkBoxUseKf->GetValue());
 }

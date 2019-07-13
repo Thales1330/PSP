@@ -34,7 +34,7 @@ struct IndMotorElectricalData {
     bool useMachinePowerAsBase = true;
 
     // Stability
-    bool plotIndMachine = true;
+    bool plotIndMachine = false;
     double inertia = 1.0;  // Motor and load inertia
     double s0;             // Initial slip
     double q0;             // Initial reactive power
@@ -43,15 +43,17 @@ struct IndMotorElectricalData {
     double r2 = 1.0;       // Rotor resistence data
     double x2 = 0.0;       // Rotor reactance data
     double xm = 100.0;     // Magnetizing reactance data
+    double kf = 0.0;       // Cage factor
+    bool useKf = false;
 
     // Transient values
     double xt = 1.0;     // Transient reactance
     double x0 = 1.0;     // Open-circuit reactance
     double r1t = 0.0;    // Stator resistence in system power base
-    double x1t = 1.0;    // Stator reactance  in system power base
-    double r2t = 1.0;    // Rotor resistence  in system power base
-    double x2t = 0.0;    // Rotor reactance  in system power base
-    double xmt = 100.0;  // Magnetizing reactance  in system power base
+    double x1t = 1.0;    // Stator reactance in system power base
+    double r2t = 1.0;    // Rotor resistence in system power base
+    double x2t = 0.0;    // Rotor reactance in system power base
+    double xmt = 100.0;  // Magnetizing reactance in system power base
 
     double t0 = 1.0;  // Open-circuit time constant
 
@@ -63,15 +65,15 @@ struct IndMotorElectricalData {
     double cs = 0.0;  // Slip quadratic dependent torque
 
     // Internal machine variables
-    double tranEr;
-    double tranEm;
-    double ir;
-    double im;
+    double tranEr = 0.0;
+    double tranEm = 0.0;
+    double ir = 0.0;
+    double im = 0.0;
 
     // Variables to extrapolate
-    double oldIr;
-    double oldIm;
-    double oldTe;
+    double oldIr = 0.0;
+    double oldIm = 0.0;
+    double oldTe = 0.0;
 
     // Integration constants
     IntegrationConstant icSlip;
@@ -88,8 +90,8 @@ struct IndMotorElectricalData {
     std::vector<double> mechanicalTorqueVector;
     std::vector<double> velocityVector;
     std::vector<double> currentVector;
-    std::complex<double> electricalPower;
-    std::vector<std::complex<double> > electricalPowerVector;
+    std::vector<double> activePowerVector;
+    std::vector<double> reactivePowerVector;
 };
 
 /**
@@ -114,7 +116,7 @@ class IndMotor : public Machines
     virtual IndMotorElectricalData GetElectricalData() { return m_electricalData; }
     virtual IndMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(IndMotorElectricalData electricalData) { m_electricalData = electricalData; }
-    
+
     virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);

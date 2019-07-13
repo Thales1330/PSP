@@ -171,6 +171,8 @@ rapidxml::xml_node<>* IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapid
 
     // Stability
     auto stability = XMLParser::AppendNode(doc, electricalProp, "Stability");
+    auto plotMotor = XMLParser::AppendNode(doc, stability, "PlotIndMachine");
+    XMLParser::SetNodeValue(doc, plotMotor, m_electricalData.plotIndMachine);
     auto inertia = XMLParser::AppendNode(doc, stability, "Inertia");
     XMLParser::SetNodeValue(doc, inertia, m_electricalData.inertia);
     auto r1 = XMLParser::AppendNode(doc, stability, "StatorResistence");
@@ -183,6 +185,10 @@ rapidxml::xml_node<>* IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapid
     XMLParser::SetNodeValue(doc, x2, m_electricalData.x2);
     auto xm = XMLParser::AppendNode(doc, stability, "MagnetizingReactance");
     XMLParser::SetNodeValue(doc, xm, m_electricalData.xm);
+    auto useCageFactor = XMLParser::AppendNode(doc, stability, "UseCageFactor");
+    XMLParser::SetNodeValue(doc, useCageFactor, m_electricalData.useKf);
+    auto cageFactor = XMLParser::AppendNode(doc, stability, "CageFactor");
+    XMLParser::SetNodeValue(doc, cageFactor, m_electricalData.kf);
     auto loadChar = XMLParser::AppendNode(doc, stability, "LoadCharacteristic");
     auto aw = XMLParser::AppendNode(doc, loadChar, "Constant");
     XMLParser::SetNodeValue(doc, aw, m_electricalData.aw);
@@ -219,17 +225,20 @@ bool IndMotor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Elemen
 
     // Stability
     auto stability = electricalProp->first_node("Stability");
-    m_electricalData.inertia = XMLParser::GetNodeValueDouble(stability, "Inertia");
+    m_electricalData.plotIndMachine = XMLParser::GetNodeValueInt(stability, "Inertia");
+    m_electricalData.inertia = XMLParser::GetNodeValueDouble(stability, "PlotIndMachine");
     m_electricalData.r1 = XMLParser::GetNodeValueDouble(stability, "StatorResistence");
     m_electricalData.x1 = XMLParser::GetNodeValueDouble(stability, "StatorReactance");
     m_electricalData.r2 = XMLParser::GetNodeValueDouble(stability, "RotorResistence");
     m_electricalData.x2 = XMLParser::GetNodeValueDouble(stability, "RotorReactance");
     m_electricalData.xm = XMLParser::GetNodeValueDouble(stability, "MagnetizingReactance");
+    m_electricalData.useKf = XMLParser::GetNodeValueInt(stability, "UseCageFactor");
+    m_electricalData.kf = XMLParser::GetNodeValueDouble(stability, "CageFactor");
     auto loadChar = stability->first_node("LoadCharacteristic");
     m_electricalData.aw = XMLParser::GetNodeValueDouble(loadChar, "Constant");
     m_electricalData.bw = XMLParser::GetNodeValueDouble(loadChar, "Linear");
     m_electricalData.cw = XMLParser::GetNodeValueDouble(loadChar, "Quadratic");
-    
+
     if(!OpenSwitchingData(electricalProp)) return false;
     if(m_swData.swTime.size() != 0) SetDynamicEvent(true);
 
@@ -244,10 +253,13 @@ bool IndMotor::GetPlotData(ElementPlotData& plotData, PlotStudy study)
     plotData.SetName(m_electricalData.name);
     plotData.SetCurveType(ElementPlotData::CT_IND_MOTOR);
 
-    plotData.AddData(m_electricalData.slipVector, _("Slip"));
+    plotData.AddData(m_electricalData.terminalVoltageVector, _("Terminal voltage"));
+    plotData.AddData(m_electricalData.activePowerVector, _("Active power"));
+    plotData.AddData(m_electricalData.reactivePowerVector, _("Reactive power"));
+    plotData.AddData(m_electricalData.currentVector, _("Current"));
     plotData.AddData(m_electricalData.electricalTorqueVector, _("Electrical torque"));
     plotData.AddData(m_electricalData.mechanicalTorqueVector, _("Mechanical torque"));
-    plotData.AddData(m_electricalData.velocityVector, _("Velocity"));
-    plotData.AddData(m_electricalData.currentVector, _("Current"));
+    plotData.AddData(m_electricalData.velocityVector, _("Speed"));
+    plotData.AddData(m_electricalData.slipVector, _("Slip"));
     return true;
 }

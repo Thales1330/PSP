@@ -788,6 +788,11 @@ bool Electromechanical::InitializeDynamicElements()
             data.te = 0.0;
         }
 
+        // Variables to extrapolate.
+        data.oldTe = data.te;
+        data.oldIr = data.ir;
+        data.oldIm = data.im;
+
         // Reset plot data
         data.slipVector.clear();
         data.slipVector.shrink_to_fit();
@@ -799,6 +804,12 @@ bool Electromechanical::InitializeDynamicElements()
         data.velocityVector.shrink_to_fit();
         data.currentVector.clear();
         data.currentVector.shrink_to_fit();
+        data.terminalVoltageVector.clear();
+        data.terminalVoltageVector.shrink_to_fit();
+        data.activePowerVector.clear();
+        data.activePowerVector.shrink_to_fit();
+        data.reactivePowerVector.clear();
+        data.reactivePowerVector.shrink_to_fit();
 
         indMotor->SetElectricalData(data);
     }
@@ -1030,28 +1041,26 @@ void Electromechanical::CalculateIntegrationConstants(SyncGenerator* syncGenerat
 void Electromechanical::CalculateIntegrationConstants(IndMotor* indMotor, double ir, double im, double k)
 {
     double w0 = 2.0 * M_PI * m_systemFreq;
-    for(auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
-        IndMotor* motor = *it;
-        auto data = motor->GetElectricalData();
 
-        // Mechanical equations
-        // s
-        data.icSlip.m = m_timeStep / ((4.0f * data.inertia / w0) / k + data.bs * m_timeStep);
-        data.icSlip.c = data.slip * (1.0 - 2.0 * data.bs * data.icSlip.m) +
-                        data.icSlip.m * (2.0 * data.as + data.cs * data.slip * data.slip - data.te);
+    auto data = indMotor->GetElectricalData();
 
-        // Electrical equations
-        // Er
-        data.icTranEr.m = m_timeStep / (2.0 * data.t0 + m_timeStep);
-        data.icTranEr.c = data.tranEr * (1.0 - 2.0 * data.icTranEr.m) +
-                          data.icTranEr.m * (w0 * data.t0 * data.slip * data.tranEm - (data.x0 - data.xt) * im);
-        // Em
-        data.icTranEm.m = m_timeStep / (2.0 * data.t0 + m_timeStep);
-        data.icTranEm.c = data.tranEm * (1.0 - 2.0 * data.icTranEm.m) -
-                          data.icTranEm.m * (w0 * data.t0 * data.slip * data.tranEr - (data.x0 - data.xt) * ir);
+    // Mechanical equations
+    // s
+    data.icSlip.m = m_timeStep / ((4.0f * data.inertia / w0) / k + data.bs * m_timeStep);
+    data.icSlip.c = data.slip * (1.0 - 2.0 * data.bs * data.icSlip.m) +
+                    data.icSlip.m * (2.0 * data.as + data.cs * data.slip * data.slip - data.te);
 
-        motor->SetElectricalData(data);
-    }
+    // Electrical equations
+    // Er
+    data.icTranEr.m = m_timeStep / (2.0 * data.t0 + m_timeStep);
+    data.icTranEr.c = data.tranEr * (1.0 - 2.0 * data.icTranEr.m) +
+                      data.icTranEr.m * (w0 * data.t0 * data.slip * data.tranEm - (data.x0 - data.xt) * im);
+    // Em
+    data.icTranEm.m = m_timeStep / (2.0 * data.t0 + m_timeStep);
+    data.icTranEm.c = data.tranEm * (1.0 - 2.0 * data.icTranEm.m) -
+                      data.icTranEm.m * (w0 * data.t0 * data.slip * data.tranEr - (data.x0 - data.xt) * ir);
+
+    indMotor->SetElectricalData(data);
 }
 
 bool Electromechanical::SolveMachines()
@@ -1269,8 +1278,14 @@ void Electromechanical::SaveData()
             data.mechanicalTorqueVector.emplace_back(tm);
             double w = (1.0 - data.slip) * 2.0 * M_PI * m_systemFreq;
             data.velocityVector.emplace_back(w);
-            double i1 = std::sqrt(data.ir * data.ir + data.im * data.im);
-            data.currentVector.emplace_back(i1);
+            std::complex<double> i1 = std::complex<double>(data.ir, data.im);
+            data.currentVector.emplace_back(std::abs(i1));
+            int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+            std::complex<double> v = m_vBus[n];
+            data.terminalVoltageVector.emplace_back(std::abs(v));
+            std::complex<double> s = v * std::conj(i1);
+            data.activePowerVector.emplace_back(std::real(s));
+            data.reactivePowerVector.emplace_back(std::imag(s));
             motor->SetElectricalData(data);
         }
     }
@@ -1485,7 +1500,7 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
 
     // Mechanical differential equations
     // Using Newton method to solve the non-linear slip equation: s = Cs + Ms * (C * s^2 - Te):
-    double slip = data.slip;  // Initial value. CAN BE THE PROBLEM ON MOTOR START!
+    double slip = 0.0;  // Initial value. CAN BE THE PROBLEM ON MOTOR START!
     double ds = (data.icSlip.c + data.icSlip.m * (data.cs * slip * slip - te) - slip) /
                 (1.0 - 2.0 * data.icSlip.m * data.cs * slip * slip);
     int iteration = 0;
@@ -1496,20 +1511,21 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
         iteration++;
         if(iteration > m_maxIterations) break;
     }
-    
+
     if(!indMotor->IsOnline()) slip = 1.0 - 1e-7;
     error = std::max(error, std::abs(data.slip - slip));
     data.slip = slip;
 
-    // Electrical differential equations
+    // Change T'0 with the cage factor
+    if(data.useKf)
+        data.t0 = (data.x2t + data.xmt) / (2.0 * M_PI * m_systemFreq * data.r2t * (1.0 + data.kf * data.r2t));
 
+    // Electrical differential equations
     double tranEr = data.icTranEr.c + data.icTranEr.m * (w0 * data.t0 * slip * data.tranEm - (data.x0 - data.xt) * im);
     error = std::max(error, std::abs(data.tranEr - tranEr));
 
     double tranEm = data.icTranEm.c - data.icTranEm.m * (w0 * data.t0 * slip * data.tranEr - (data.x0 - data.xt) * ir);
     error = std::max(error, std::abs(data.tranEm - tranEm));
-
-    // wxMessageBox(wxString::Format("%f\n%f\n\n%f\n%f", data.tranEr, data.tranEm, tranEr, tranEm));
 
     data.tranEr = tranEr;
     data.tranEm = tranEm;
@@ -1763,6 +1779,8 @@ bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
         k = m_powerSystemBase / oldBase;
     }
 
+    data.terminalVoltage = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().voltage;
+
     // Calculate the induction machine transient constants at the machine base
     double r1t = data.r1 * k;
     double r2t = data.r2 * k;
@@ -1776,21 +1794,19 @@ bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
     data.xmt = xmt;
 
     double xt = x1t + (x2t * xmt) / (x2t + xmt);
-    double t0 = (x2t + xmt) / (2.0 * M_PI * m_systemFreq * r2t);
     double x0 = x1t + xmt;
     data.xt = xt;
-    data.t0 = t0;
     data.x0 = x0;
 
-    data.terminalVoltage = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().voltage;
-
-    //[Ref.] Induction Motor Static Models for Power Flow and Voltage Stability Studies
     double p = dataPU.activePower;
     double v = std::abs(data.terminalVoltage);
+
+    //[Ref.] Induction Motor Static Models for Power Flow and Voltage Stability Studies
     // If the motor is offline, calculate the nominal slip to user-defined power input and 1.0 p.u. voltage
     if(!motor->IsOnline()) v = 1.0;
     double r1 = data.r1t;
     double r2 = data.r2t;
+    if(data.useKf) r2 *= (1.0 + data.kf * r2t);
     double x1 = data.x1t;
     double x2 = data.x2t;
     double xm = data.xmt;
@@ -1814,6 +1830,8 @@ bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
     double qc = r2_s * r1 - x1 * k1 - x2 * xm;
     double qd = r2_s * (xm + x1) + r1 * k1;
     data.q0 = (-v * v * (qa - qb)) / (qc * qc + qd * qd);
+
+    data.t0 = (x2t + xmt) / (2.0 * M_PI * m_systemFreq * r2);
 
     motor->SetElectricalData(data);
     return true;
