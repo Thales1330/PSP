@@ -7,33 +7,33 @@
 #ifndef _PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
 #define _PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
 
-#include <wx/settings.h>
-#include <wx/xrc/xmlres.h>
-#include <wx/xrc/xh_bmp.h>
+#include <wx/arrstr.h>
+#include <wx/artprov.h>
+#include <wx/button.h>
+#include <wx/checkbox.h>
+#include <wx/choice.h>
 #include <wx/dialog.h>
 #include <wx/iconbndl.h>
-#include <wx/artprov.h>
-#include <wx/sizer.h>
+#include <wx/imaglist.h>
+#include <wx/listctrl.h>
 #include <wx/notebook.h>
 #include <wx/panel.h>
-#include <wx/imaglist.h>
-#include <wx/stattext.h>
-#include <wx/textctrl.h>
-#include <wx/choice.h>
-#include <wx/arrstr.h>
-#include <wx/checkbox.h>
-#include <wx/button.h>
-#include <wx/statbox.h>
-#include <wx/statline.h>
+//#include <wx/propgrid/advprops.h>
 #include <wx/propgrid/manager.h>
 #include <wx/propgrid/property.h>
-#include <wx/propgrid/advprops.h>
-#include <wx/listctrl.h>
+#include <wx/settings.h>
+#include <wx/sizer.h>
+#include <wx/statbox.h>
+#include <wx/statline.h>
+#include <wx/stattext.h>
 #include <wx/stc/stc.h>
+#include <wx/textctrl.h>
+#include <wx/xrc/xh_bmp.h>
+#include <wx/xrc/xmlres.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
-#include <wx/persist/toplevel.h>
 #include <wx/persist/bookctrl.h>
+#include <wx/persist/toplevel.h>
 #include <wx/persist/treebook.h>
 #endif
 
@@ -46,10 +46,9 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
-
 class BusFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
@@ -88,10 +87,12 @@ protected:
     wxStaticText* m_staticTextStabFaultReactance;
     wxTextCtrl* m_textCtrlStabFaultReactance;
     wxStaticText* m_staticTextPU_4;
+    wxPanel* m_panelPowerQuality;
+    wxCheckBox* m_checkBoxPlotPQData;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnNominalVoltageChoice(wxCommandEvent& event) { event.Skip(); }
     virtual void OnControlledVoltageClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnInsertFaultClick(wxCommandEvent& event) { event.Skip(); }
@@ -100,7 +101,7 @@ protected:
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
     wxStaticText* GetStaticTextNomVoltage() { return m_staticTextNomVoltage; }
@@ -138,17 +139,23 @@ public:
     wxTextCtrl* GetTextCtrlStabFaultReactance() { return m_textCtrlStabFaultReactance; }
     wxStaticText* GetStaticTextPU_4() { return m_staticTextPU_4; }
     wxPanel* GetPanelStability() { return m_panelStability; }
+    wxCheckBox* GetCheckBoxPlotPQData() { return m_checkBoxPlotPQData; }
+    wxPanel* GetPanelPowerQuality() { return m_panelPowerQuality; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    BusFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Bus"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    BusFormBase(wxWindow* parent,
+                wxWindowID id = wxID_ANY,
+                const wxString& title = _("Bus"),
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxSize(-1, -1),
+                long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~BusFormBase();
 };
 
-
 class SyncMachineFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
@@ -191,14 +198,14 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnCheckMaxReactive(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCheckMinReactive(wxCommandEvent& event) { event.Skip(); }
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
     wxStaticText* GetStaticTextNominalPower() { return m_staticTextNominalPower; }
@@ -240,14 +247,18 @@ public:
     wxButton* GetButtonStab() { return m_buttonStab; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    SyncMachineFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Generator"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    SyncMachineFormBase(wxWindow* parent,
+                        wxWindowID id = wxID_ANY,
+                        const wxString& title = _("Generator"),
+                        const wxPoint& pos = wxDefaultPosition,
+                        const wxSize& size = wxSize(-1, -1),
+                        long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~SyncMachineFormBase();
 };
 
-
 class GeneratorStabFormBase : public wxDialog
 {
-protected:
+   protected:
     wxCheckBox* m_checkBoxPlotSyncMachine;
     wxStaticText* m_staticTextInertia;
     wxTextCtrl* m_textCtrlInertia;
@@ -269,6 +280,9 @@ protected:
     wxStaticText* m_staticTextSat;
     wxTextCtrl* m_textCtrlSat;
     wxStaticText* m_staticTextPU_10;
+    wxStaticText* m_staticTextOCFreq;
+    wxTextCtrl* m_textCtrlOCFreq;
+    wxStaticText* m_staticTextHz_1;
     wxStaticText* m_staticTextSyncXd;
     wxTextCtrl* m_textCtrlSyncXd;
     wxStaticText* m_staticTextPU_3;
@@ -303,7 +317,7 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void UseAVRClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnEditAVRButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void UseSGClick(wxCommandEvent& event) { event.Skip(); }
@@ -312,7 +326,7 @@ protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxCheckBox* GetCheckBoxPlotSyncMachine() { return m_checkBoxPlotSyncMachine; }
     wxStaticText* GetStaticTextInertia() { return m_staticTextInertia; }
     wxTextCtrl* GetTextCtrlInertia() { return m_textCtrlInertia; }
@@ -334,6 +348,9 @@ public:
     wxStaticText* GetStaticTextSat() { return m_staticTextSat; }
     wxTextCtrl* GetTextCtrlSat() { return m_textCtrlSat; }
     wxStaticText* GetStaticTextPU_10() { return m_staticTextPU_10; }
+    wxStaticText* GetStaticTextOCFreq() { return m_staticTextOCFreq; }
+    wxTextCtrl* GetTextCtrlOCFreq() { return m_textCtrlOCFreq; }
+    wxStaticText* GetStaticTextHz_1() { return m_staticTextHz_1; }
     wxStaticText* GetStaticTextSyncXd() { return m_staticTextSyncXd; }
     wxTextCtrl* GetTextCtrlSyncXd() { return m_textCtrlSyncXd; }
     wxStaticText* GetStaticTextPU_3() { return m_staticTextPU_3; }
@@ -367,14 +384,18 @@ public:
     wxButton* GetButtonSwitching() { return m_buttonSwitching; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    GeneratorStabFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Generator: Stability"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    GeneratorStabFormBase(wxWindow* parent,
+                          wxWindowID id = wxID_ANY,
+                          const wxString& title = _("Generator: Stability"),
+                          const wxPoint& pos = wxDefaultPosition,
+                          const wxSize& size = wxSize(-1, -1),
+                          long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~GeneratorStabFormBase();
 };
 
-
 class LineFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
@@ -408,12 +429,12 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
     wxStaticText* GetStaticTextNominalVoltage() { return m_staticTextNominalVoltage; }
@@ -446,14 +467,18 @@ public:
     wxButton* GetButtonStability() { return m_buttonStability; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    LineFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Line"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    LineFormBase(wxWindow* parent,
+                 wxWindowID id = wxID_ANY,
+                 const wxString& title = _("Line"),
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& size = wxSize(-1, -1),
+                 long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~LineFormBase();
 };
 
-
 class TransformerFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
@@ -497,12 +522,12 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
     wxStaticText* GetStaticTextNominalVoltage() { return m_staticTextNominalVoltage; }
@@ -545,14 +570,18 @@ public:
     wxButton* GetButtonStability() { return m_buttonStability; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    TransformerFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Transformer"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    TransformerFormBase(wxWindow* parent,
+                        wxWindowID id = wxID_ANY,
+                        const wxString& title = _("Transformer"),
+                        const wxPoint& pos = wxDefaultPosition,
+                        const wxSize& size = wxSize(-1, -1),
+                        long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~TransformerFormBase();
 };
 
-
 class LoadFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
@@ -590,13 +619,13 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnCheckBoxCompLoadClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOnButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
     wxStaticText* GetStaticTextActivePower() { return m_staticTextActivePower; }
@@ -633,14 +662,18 @@ public:
     wxButton* GetButtonStabButton() { return m_buttonStabButton; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    LoadFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Load"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    LoadFormBase(wxWindow* parent,
+                 wxWindowID id = wxID_ANY,
+                 const wxString& title = _("Load"),
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& size = wxSize(-1, -1),
+                 long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~LoadFormBase();
 };
 
-
 class ReactiveShuntElementFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
@@ -652,12 +685,12 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
     wxStaticText* GetStaticTextReactivePower() { return m_staticTextReactivePower; }
@@ -668,14 +701,18 @@ public:
     wxButton* GetButtonStabButton() { return m_buttonStabButton; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    ReactiveShuntElementFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Reactive shunt element"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    ReactiveShuntElementFormBase(wxWindow* parent,
+                                 wxWindowID id = wxID_ANY,
+                                 const wxString& title = _("Reactive shunt element"),
+                                 const wxPoint& pos = wxDefaultPosition,
+                                 const wxSize& size = wxSize(-1, -1),
+                                 long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~ReactiveShuntElementFormBase();
 };
 
-
 class SwitchingFormBase : public wxDialog
 {
-protected:
+   protected:
     wxPropertyGridManager* m_pgMgrSwitchingsProp;
     wxPGProperty* m_pgPropTitle;
     wxPGProperty* m_pgPropType;
@@ -689,7 +726,7 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnChangeProperties(wxPropertyGridEvent& event) { event.Skip(); }
     virtual void OnInsertButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
@@ -699,7 +736,7 @@ protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxPropertyGridManager* GetPgMgrSwitchingsProp() { return m_pgMgrSwitchingsProp; }
     wxButton* GetButtonInsert() { return m_buttonInsert; }
     wxButton* GetButtonRemove() { return m_buttonRemove; }
@@ -709,55 +746,130 @@ public:
     wxListCtrl* GetListCtrlSwitchings() { return m_listCtrlSwitchings; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    SwitchingFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Switching"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    SwitchingFormBase(wxWindow* parent,
+                      wxWindowID id = wxID_ANY,
+                      const wxString& title = _("Switching"),
+                      const wxPoint& pos = wxDefaultPosition,
+                      const wxSize& size = wxSize(-1, -1),
+                      long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~SwitchingFormBase();
 };
 
-
 class IndMotorFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextName;
     wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextNominalPower;
+    wxTextCtrl* m_textCtrlnominalPower;
+    wxChoice* m_choiceNominalPower;
     wxStaticText* m_staticTextActivePower;
     wxTextCtrl* m_textCtrlActivePower;
     wxChoice* m_choiceActivePower;
     wxStaticText* m_staticTextReactivePower;
     wxTextCtrl* m_textCtrlReactivePower;
     wxChoice* m_choiceReactivePower;
-    wxButton* m_buttonStabButton;
+    wxCheckBox* m_checkBoxUseMachinePower;
+    wxPanel* m_panelStability;
+    wxCheckBox* m_checkBoxPlotIndMachine;
+    wxStaticText* m_staticTextInertia;
+    wxTextCtrl* m_textCtrlInertia;
+    wxStaticText* m_staticTextS_1;
+    wxStaticText* m_staticTextStatorResistence;
+    wxTextCtrl* m_textCtrlStatorResistence;
+    wxStaticText* m_staticTextPU_1;
+    wxStaticText* m_staticTextStatorReactance;
+    wxTextCtrl* m_textCtrlStatorReactance;
+    wxStaticText* m_staticTextPU_2;
+    wxStaticText* m_staticTextRotorResistence;
+    wxTextCtrl* m_textCtrlRotorResistence;
+    wxStaticText* m_staticTextPU_3;
+    wxStaticText* m_staticTextRotorReactance;
+    wxTextCtrl* m_textCtrlRotorReactance;
+    wxStaticText* m_staticTextPU_4;
+    wxStaticText* m_staticTextMagnetizingReactance;
+    wxTextCtrl* m_textCtrlMagnetizingReactance;
+    wxStaticText* m_staticTextPU_5;
+    wxCheckBox* m_checkBoxUseKf;
+    wxTextCtrl* m_textCtrlKf;
+    wxStaticText* m_staticTextLoadCharacteristic;
+    wxTextCtrl* m_textCtrlA;
+    wxStaticText* m_staticTextPlus;
+    wxTextCtrl* m_textCtrlB;
+    wxStaticText* m_staticTextw;
+    wxTextCtrl* m_textCtrlC;
+    wxStaticText* m_staticTextw2;
+    wxButton* m_buttonSwitchingButton;
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
+    virtual void OnCheckboxUseCageFactorClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
     wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextNominalPower() { return m_staticTextNominalPower; }
+    wxTextCtrl* GetTextCtrlnominalPower() { return m_textCtrlnominalPower; }
+    wxChoice* GetChoiceNominalPower() { return m_choiceNominalPower; }
     wxStaticText* GetStaticTextActivePower() { return m_staticTextActivePower; }
     wxTextCtrl* GetTextCtrlActivePower() { return m_textCtrlActivePower; }
     wxChoice* GetChoiceActivePower() { return m_choiceActivePower; }
     wxStaticText* GetStaticTextReactivePower() { return m_staticTextReactivePower; }
     wxTextCtrl* GetTextCtrlReactivePower() { return m_textCtrlReactivePower; }
     wxChoice* GetChoiceReactivePower() { return m_choiceReactivePower; }
+    wxCheckBox* GetCheckBoxUseMachinePower() { return m_checkBoxUseMachinePower; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxCheckBox* GetCheckBoxPlotIndMachine() { return m_checkBoxPlotIndMachine; }
+    wxStaticText* GetStaticTextInertia() { return m_staticTextInertia; }
+    wxTextCtrl* GetTextCtrlInertia() { return m_textCtrlInertia; }
+    wxStaticText* GetStaticTextS_1() { return m_staticTextS_1; }
+    wxStaticText* GetStaticTextStatorResistence() { return m_staticTextStatorResistence; }
+    wxTextCtrl* GetTextCtrlStatorResistence() { return m_textCtrlStatorResistence; }
+    wxStaticText* GetStaticTextPU_1() { return m_staticTextPU_1; }
+    wxStaticText* GetStaticTextStatorReactance() { return m_staticTextStatorReactance; }
+    wxTextCtrl* GetTextCtrlStatorReactance() { return m_textCtrlStatorReactance; }
+    wxStaticText* GetStaticTextPU_2() { return m_staticTextPU_2; }
+    wxStaticText* GetStaticTextRotorResistence() { return m_staticTextRotorResistence; }
+    wxTextCtrl* GetTextCtrlRotorResistence() { return m_textCtrlRotorResistence; }
+    wxStaticText* GetStaticTextPU_3() { return m_staticTextPU_3; }
+    wxStaticText* GetStaticTextRotorReactance() { return m_staticTextRotorReactance; }
+    wxTextCtrl* GetTextCtrlRotorReactance() { return m_textCtrlRotorReactance; }
+    wxStaticText* GetStaticTextPU_4() { return m_staticTextPU_4; }
+    wxStaticText* GetStaticTextMagnetizingReactance() { return m_staticTextMagnetizingReactance; }
+    wxTextCtrl* GetTextCtrlMagnetizingReactance() { return m_textCtrlMagnetizingReactance; }
+    wxStaticText* GetStaticTextPU_5() { return m_staticTextPU_5; }
+    wxCheckBox* GetCheckBoxUseKf() { return m_checkBoxUseKf; }
+    wxTextCtrl* GetTextCtrlKf() { return m_textCtrlKf; }
+    wxStaticText* GetStaticTextLoadCharacteristic() { return m_staticTextLoadCharacteristic; }
+    wxTextCtrl* GetTextCtrlA() { return m_textCtrlA; }
+    wxStaticText* GetStaticTextPlus() { return m_staticTextPlus; }
+    wxTextCtrl* GetTextCtrlB() { return m_textCtrlB; }
+    wxStaticText* GetStaticTextw() { return m_staticTextw; }
+    wxTextCtrl* GetTextCtrlC() { return m_textCtrlC; }
+    wxStaticText* GetStaticTextw2() { return m_staticTextw2; }
+    wxPanel* GetPanelStability() { return m_panelStability; }
     wxNotebook* GetNotebook() { return m_notebook; }
-    wxButton* GetButtonStabButton() { return m_buttonStabButton; }
+    wxButton* GetButtonSwitchingButton() { return m_buttonSwitchingButton; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    IndMotorFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Motor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    IndMotorFormBase(wxWindow* parent,
+                     wxWindowID id = wxID_ANY,
+                     const wxString& title = _("Motor"),
+                     const wxPoint& pos = wxDefaultPosition,
+                     const wxSize& size = wxSize(-1, -1),
+                     long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~IndMotorFormBase();
 };
 
-
 class TextFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextElement;
@@ -779,7 +891,7 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnElementChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnNameChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnTypeChoiceSelected(wxCommandEvent& event) { event.Skip(); }
@@ -790,7 +902,7 @@ protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextElement() { return m_staticTextElement; }
     wxChoice* GetChoiceElement() { return m_choiceElement; }
     wxStaticText* GetStaticTextName() { return m_staticTextName; }
@@ -811,14 +923,18 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    TextFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Text"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    TextFormBase(wxWindow* parent,
+                 wxWindowID id = wxID_ANY,
+                 const wxString& title = _("Text"),
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& size = wxSize(-1, -1),
+                 long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~TextFormBase();
 };
 
-
 class TransferFunctionFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextNumerator;
@@ -828,11 +944,11 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextNumerator() { return m_staticTextNumerator; }
     wxTextCtrl* GetTextCtrlNumerator() { return m_textCtrlNumerator; }
     wxStaticText* GetStaticTextDenominator() { return m_staticTextDenominator; }
@@ -841,14 +957,18 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    TransferFunctionFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Transfer function"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    TransferFunctionFormBase(wxWindow* parent,
+                             wxWindowID id = wxID_ANY,
+                             const wxString& title = _("Transfer function"),
+                             const wxPoint& pos = wxDefaultPosition,
+                             const wxSize& size = wxSize(-1, -1),
+                             long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~TransferFunctionFormBase();
 };
 
-
 class SumFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextSigns;
@@ -856,25 +976,29 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextSigns() { return m_staticTextSigns; }
     wxTextCtrl* GetTextCtrlSigns() { return m_textCtrlSigns; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    SumFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Sum"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    SumFormBase(wxWindow* parent,
+                wxWindowID id = wxID_ANY,
+                const wxString& title = _("Sum"),
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxSize(-1, -1),
+                long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~SumFormBase();
 };
 
-
 class LimiterFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextUpLimiter;
@@ -884,11 +1008,11 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextUpLimiter() { return m_staticTextUpLimiter; }
     wxTextCtrl* GetTextCtrlUpLimit() { return m_textCtrlUpLimit; }
     wxStaticText* GetStaticTextLowLimit() { return m_staticTextLowLimit; }
@@ -897,14 +1021,18 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    LimiterFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Limiter"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    LimiterFormBase(wxWindow* parent,
+                    wxWindowID id = wxID_ANY,
+                    const wxString& title = _("Limiter"),
+                    const wxPoint& pos = wxDefaultPosition,
+                    const wxSize& size = wxSize(-1, -1),
+                    long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~LimiterFormBase();
 };
 
-
 class RateLimiterFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextUpLimiter;
@@ -914,11 +1042,11 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextUpLimiter() { return m_staticTextUpLimiter; }
     wxTextCtrl* GetTextCtrlUpLimit() { return m_textCtrlUpLimit; }
     wxStaticText* GetStaticTextLowLimit() { return m_staticTextLowLimit; }
@@ -927,14 +1055,18 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    RateLimiterFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Rate limiter"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    RateLimiterFormBase(wxWindow* parent,
+                        wxWindowID id = wxID_ANY,
+                        const wxString& title = _("Rate limiter"),
+                        const wxPoint& pos = wxDefaultPosition,
+                        const wxSize& size = wxSize(-1, -1),
+                        long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~RateLimiterFormBase();
 };
 
-
 class ExponentialFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextExp;
@@ -945,11 +1077,11 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextExp() { return m_staticTextExp; }
     wxStaticText* GetStaticTextAValue() { return m_staticTextAValue; }
     wxTextCtrl* GetTextCtrlAValue() { return m_textCtrlAValue; }
@@ -959,14 +1091,18 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    ExponentialFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Exponential"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    ExponentialFormBase(wxWindow* parent,
+                        wxWindowID id = wxID_ANY,
+                        const wxString& title = _("Exponential"),
+                        const wxPoint& pos = wxDefaultPosition,
+                        const wxSize& size = wxSize(-1, -1),
+                        long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~ExponentialFormBase();
 };
 
-
 class ConstantFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextValue;
@@ -974,25 +1110,29 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextValue() { return m_staticTextValue; }
     wxTextCtrl* GetTextCtrlValue() { return m_textCtrlValue; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    ConstantFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Constant"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    ConstantFormBase(wxWindow* parent,
+                     wxWindowID id = wxID_ANY,
+                     const wxString& title = _("Constant"),
+                     const wxPoint& pos = wxDefaultPosition,
+                     const wxSize& size = wxSize(-1, -1),
+                     long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~ConstantFormBase();
 };
 
-
 class GainFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextValue;
@@ -1000,25 +1140,29 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextValue() { return m_staticTextValue; }
     wxTextCtrl* GetTextCtrlValue() { return m_textCtrlValue; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    GainFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Gain"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    GainFormBase(wxWindow* parent,
+                 wxWindowID id = wxID_ANY,
+                 const wxString& title = _("Gain"),
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& size = wxSize(-1, -1),
+                 long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~GainFormBase();
 };
 
-
 class IOControlFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxCheckBox* m_checkBoxInput;
@@ -1028,13 +1172,13 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_ButtonCancel;
 
-protected:
+   protected:
     virtual void OnInputChecked(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOutputChecked(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxCheckBox* GetCheckBoxInput() { return m_checkBoxInput; }
     wxChoice* GetChoiceInput() { return m_choiceInput; }
     wxCheckBox* GetCheckBoxOutput() { return m_checkBoxOutput; }
@@ -1043,14 +1187,18 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    IOControlFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Input / Output"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    IOControlFormBase(wxWindow* parent,
+                      wxWindowID id = wxID_ANY,
+                      const wxString& title = _("Input / Output"),
+                      const wxPoint& pos = wxDefaultPosition,
+                      const wxSize& size = wxSize(-1, -1),
+                      long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~IOControlFormBase();
 };
 
-
 class MathExpressionFormBase : public wxDialog
 {
-protected:
+   protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextVariables;
@@ -1061,7 +1209,7 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
+   protected:
     virtual void OnTextUpdate(wxCommandEvent& event) { event.Skip(); }
     virtual void OnTextEnter(wxCommandEvent& event) { event.Skip(); }
     virtual void OnLeftClickDown(wxMouseEvent& event) { event.Skip(); }
@@ -1069,7 +1217,7 @@ protected:
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxStaticText* GetStaticTextVariables() { return m_staticTextVariables; }
     wxTextCtrl* GetTextCtrlVariables() { return m_textCtrlVariables; }
     wxStyledTextCtrl* GetStcMathExpr() { return m_stcMathExpr; }
@@ -1079,8 +1227,56 @@ public:
     wxButton* GetButtonCheck() { return m_buttonCheck; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    MathExpressionFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Math expression"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    MathExpressionFormBase(wxWindow* parent,
+                           wxWindowID id = wxID_ANY,
+                           const wxString& title = _("Math expression"),
+                           const wxPoint& pos = wxDefaultPosition,
+                           const wxSize& size = wxSize(-1, -1),
+                           long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~MathExpressionFormBase();
+};
+
+class HarmCurrentFormBase : public wxDialog
+{
+   protected:
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
+    wxPropertyGridManager* m_pgMgrHarmCurrentProp;
+    wxPGProperty* m_pgPropTitle;
+    wxPGProperty* m_pgPropHarmOrder;
+    wxPGProperty* m_pgPropHarmCurrent;
+    wxPGProperty* m_pgPropUnit;
+    wxPGProperty* m_pgPropHarmAngle;
+    wxButton* m_buttonInsert;
+    wxButton* m_buttonRemove;
+    wxStaticText* m_staticTextHarmCurrentList;
+    wxListCtrl* m_listCtrlHarmCurrentList;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+   protected:
+    virtual void OnAddButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRemoveButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+   public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxPropertyGridManager* GetPgMgrHarmCurrentProp() { return m_pgMgrHarmCurrentProp; }
+    wxButton* GetButtonInsert() { return m_buttonInsert; }
+    wxButton* GetButtonRemove() { return m_buttonRemove; }
+    wxStaticText* GetStaticTextHarmCurrentList() { return m_staticTextHarmCurrentList; }
+    wxListCtrl* GetListCtrlHarmCurrentList() { return m_listCtrlHarmCurrentList; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    HarmCurrentFormBase(wxWindow* parent,
+                        wxWindowID id = wxID_ANY,
+                        const wxString& title = _("Switching"),
+                        const wxPoint& pos = wxDefaultPosition,
+                        const wxSize& size = wxSize(-1, -1),
+                        long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~HarmCurrentFormBase();
 };
 
 #endif

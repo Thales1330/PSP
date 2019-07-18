@@ -18,9 +18,9 @@
 #ifndef PROPERTIESDATA_H
 #define PROPERTIESDATA_H
 
-#include "wx/language.h"
 #include "Element.h"
 #include "PowerElement.h"
+#include "wx/language.h"
 
 enum PowerFlowMethod { GAUSS_SEIDEL = 0, NEWTON_RAPHSON };
 enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
@@ -31,6 +31,7 @@ struct SimulationData {
     ElectricalUnit basePowerUnit = UNIT_MVA;
     bool faultAfterPowerFlow = false;
     bool scPowerAfterPowerFlow = false;
+    bool harmDistortionAfterPowerFlow = false;
 
     // Power flow
     PowerFlowMethod powerFlowMethod = GAUSS_SEIDEL;
@@ -48,7 +49,7 @@ struct SimulationData {
     int controlTimeStepRatio = 10;
     double plotTime = 1e-2;
     bool useCOI = true;
-    
+
     // ZIP load
     bool useCompLoads = false;
     double constImpedanceActive = 100.0;
@@ -64,6 +65,13 @@ struct SimulationData {
 struct GeneralData {
     wxLanguage language = wxLANGUAGE_ENGLISH;
     GUITheme theme = THEME_LIGHT;
+};
+
+struct FreqResponseData {
+    double initFreq = 0.0;
+    double finalFreq = 1500.0;
+    double stepFreq = 1.0;
+    int injBusNumber = -1;
 };
 
 /**
@@ -83,9 +91,14 @@ class PropertiesData
     void SetSimulationPropertiesData(SimulationData simulationData) { m_simulData = simulationData; }
     GeneralData GetGeneralPropertiesData() const { return m_genData; }
     void SetGeneralPropertiesData(GeneralData generalData) { m_genData = generalData; }
+
+    void SetFreqRespData(const FreqResponseData& freqRespData) { this->m_freqRespData = freqRespData; }
+    const FreqResponseData& GetFreqRespData() const { return m_freqRespData; }
+
    protected:
     SimulationData m_simulData;
     GeneralData m_genData;
+    FreqResponseData m_freqRespData;
 };
 
 #endif  // PROPERTIESDATA_H

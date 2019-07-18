@@ -131,6 +131,9 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
                 case 5: {
                     m_text->SetDataType(DATA_SC_POWER);
                 } break;
+                case 6: {
+                    m_text->SetDataType(DATA_PQ_THD);
+                } break;
             }
         } break;
         case TYPE_SYNC_GENERATOR: {
@@ -203,7 +206,7 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
     }
     DataTypeChoice();
 
-    if(m_text->GetDataType() == DATA_NAME) Preview();
+    if(m_text->GetDataType() == DATA_NAME || m_text->GetDataType() == DATA_PQ_THD) Preview();
 }
 
 bool TextForm::LoadChoices()
@@ -304,6 +307,9 @@ bool TextForm::LoadChoices()
                         default:
                             break;
                     }
+                } break;
+                case DATA_PQ_THD: {
+                    m_choiceTextType->SetSelection(6);
                 } break;
                 default:
                     break;
@@ -875,6 +881,7 @@ void TextForm::ElementNumberChoice()
             arrayString.Add(_("Fault current"));
             arrayString.Add(_("Fault voltage"));
             arrayString.Add(_("Short-circuit power"));
+            arrayString.Add(_("Voltage THD"));
         } break;
         case TYPE_SYNC_GENERATOR: {
             SyncGenerator* syncGenerator = m_allElements.GetSyncGeneratorList()[index];
@@ -966,7 +973,8 @@ void TextForm::DataTypeChoice()
 
     wxArrayString arrayString;
     switch(m_text->GetDataType()) {
-        case DATA_NAME: {
+        case DATA_NAME:
+        case DATA_PQ_THD: {
             m_choiceTextUnit->Enable(false);
             return;
         } break;
@@ -1191,7 +1199,9 @@ bool TextForm::ValidateData()
     if(m_choiceElement->GetSelection() == -1) return false;
     if(m_choiceName->GetSelection() == -1) return false;
     if(m_choiceTextType->GetSelection() == -1) return false;
-    if(m_text->GetDataType() != DATA_NAME && m_choiceTextUnit->GetSelection() == -1) return false;
+    if(m_text->GetDataType() != DATA_NAME && m_text->GetDataType() != DATA_PQ_THD &&
+       m_choiceTextUnit->GetSelection() == -1)
+        return false;
     if(m_text->GetElementType() == TYPE_LINE || m_text->GetElementType() == TYPE_TRANSFORMER) {
         if(m_text->GetDataType() != DATA_PF_LOSSES && m_text->GetDataType() != DATA_NAME) {
             if(m_choiceTextFromBus->GetSelection() == -1) return false;

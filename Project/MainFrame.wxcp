@@ -1,7 +1,7 @@
 {
  "metadata": {
   "m_generatedFilesDir": ".",
-  "m_objCounter": 151,
+  "m_objCounter": 153,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxC9ED9InitBitmapResources",
   "m_bitmapsFile": "MainFrameBitmaps.cpp",
@@ -4525,6 +4525,188 @@
                    "m_eventClass": "wxRibbonButtonBarEvent",
                    "m_eventHandler": "wxRibbonButtonBarEventHandler",
                    "m_functionNameAndSignature": "OnSCPowerClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_HARMDIST"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonHarmDistortions"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Harmonic Distortions"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Harmonic Distortions"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/harmDist32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Calculate the voltage distortions on all buses due to harmonic current sources"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnHarmDistortionsClick(wxRibbonButtonBarEvent& event)",
+                   "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
+                   "m_noBody": false
+                  }],
+                 "m_children": []
+                }, {
+                 "m_type": 4492,
+                 "proportion": 0,
+                 "border": 5,
+                 "gbSpan": "1,1",
+                 "gbPosition": "0,0",
+                 "m_styles": [],
+                 "m_sizerFlags": ["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+                 "m_properties": [{
+                   "type": "winid",
+                   "m_label": "ID:",
+                   "m_winid": "ID_RIBBON_FREQRESP"
+                  }, {
+                   "type": "string",
+                   "m_label": "Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Minimum Size:",
+                   "m_value": "-1,-1"
+                  }, {
+                   "type": "string",
+                   "m_label": "Name:",
+                   "m_value": "m_ribbonButtonFreqResponse"
+                  }, {
+                   "type": "multi-string",
+                   "m_label": "Tooltip:",
+                   "m_value": "Frequency Response"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Bg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "colour",
+                   "m_label": "Fg Colour:",
+                   "colour": "<Default>"
+                  }, {
+                   "type": "font",
+                   "m_label": "Font:",
+                   "m_value": ""
+                  }, {
+                   "type": "bool",
+                   "m_label": "Hidden",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Disabled",
+                   "m_value": false
+                  }, {
+                   "type": "bool",
+                   "m_label": "Focused",
+                   "m_value": false
+                  }, {
+                   "type": "string",
+                   "m_label": "Class Name:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Include File:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Style:",
+                   "m_value": ""
+                  }, {
+                   "type": "string",
+                   "m_label": "Label:",
+                   "m_value": "Frequency response"
+                  }, {
+                   "type": "bitmapPicker",
+                   "m_label": "Bitmap File:",
+                   "m_path": "data/images/ribbon/freqResp32.png"
+                  }, {
+                   "type": "string",
+                   "m_label": "Help String:",
+                   "m_value": "Calculate the impedance seen in a bus for varies frequencies"
+                  }, {
+                   "type": "choice",
+                   "m_label": "Kind:",
+                   "m_selection": 0,
+                   "m_options": ["wxRIBBON_BUTTON_NORMAL", "wxRIBBON_BUTTON_DROPDOWN", "wxRIBBON_BUTTON_HYBRID", "wxRIBBON_BUTTON_TOGGLE"]
+                  }],
+                 "m_events": [{
+                   "m_eventName": "wxEVT_COMMAND_RIBBONBUTTON_CLICKED",
+                   "m_eventClass": "wxRibbonButtonBarEvent",
+                   "m_eventHandler": "wxRibbonButtonBarEventHandler",
+                   "m_functionNameAndSignature": "OnFreqResponseClick(wxRibbonButtonBarEvent& event)",
                    "m_description": "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked.",
                    "m_noBody": false
                   }],

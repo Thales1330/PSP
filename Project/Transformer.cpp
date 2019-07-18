@@ -718,3 +718,15 @@ bool Transformer::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Ele
 
     return true;
 }
+
+void Transformer::SetBestPositionAndRotation()
+{
+    wxPoint2DDouble p1 = m_pointList[0];
+    wxPoint2DDouble p2 = m_pointList[m_pointList.size() - 1];
+    wxPoint2DDouble mid = (p1 + p2) / 2.0;
+    StartMove(m_position);
+    Move(mid);
+    double bestAngle = wxRadToDeg(std::atan2(p2.m_y - p1.m_y, p2.m_x - p1.m_x));
+    bool clockwise = bestAngle > 0 ? true : false;
+    while(std::abs(m_angle) < std::abs(bestAngle)) { Rotate(clockwise); }
+}

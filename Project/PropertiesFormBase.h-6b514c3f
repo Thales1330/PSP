@@ -87,12 +87,8 @@ class SimulationsSettingsFormBase : public wxDialog
     wxStaticText* m_staticTextBasePower;
     wxTextCtrl* m_textCtrlbasePower;
     wxChoice* m_choiceBasePower;
-    wxStaticText* m_staticTextFreq;
-    wxTextCtrl* m_textCtrlFreq;
-    wxStaticText* m_staticTextFreqUnit;
     wxCheckBox* m_checkBoxFaultAfterPF;
     wxCheckBox* m_checkBoxSCPowerAfterPF;
-    wxCheckBox* m_checkBoxTHDAfterPF;
     wxPanel* m_panelPF;
     wxStaticText* m_staticTextPFMethod;
     wxChoice* m_choicePFMethod;
@@ -112,6 +108,9 @@ class SimulationsSettingsFormBase : public wxDialog
     wxStaticText* m_staticTextTSimTime;
     wxTextCtrl* m_textCtrlSimTime;
     wxStaticText* m_staticTextSec_2;
+    wxStaticText* m_staticTextFreq;
+    wxTextCtrl* m_textCtrlFreq;
+    wxStaticText* m_staticTextFreqUnit;
     wxStaticText* m_staticTextTStabTolerance;
     wxTextCtrl* m_textCtrlStabTolerance;
     wxStaticText* m_staticTextTStabMaxIterations;
@@ -162,12 +161,8 @@ class SimulationsSettingsFormBase : public wxDialog
     wxStaticText* GetStaticTextBasePower() { return m_staticTextBasePower; }
     wxTextCtrl* GetTextCtrlbasePower() { return m_textCtrlbasePower; }
     wxChoice* GetChoiceBasePower() { return m_choiceBasePower; }
-    wxStaticText* GetStaticTextFreq() { return m_staticTextFreq; }
-    wxTextCtrl* GetTextCtrlFreq() { return m_textCtrlFreq; }
-    wxStaticText* GetStaticTextFreqUnit() { return m_staticTextFreqUnit; }
     wxCheckBox* GetCheckBoxFaultAfterPF() { return m_checkBoxFaultAfterPF; }
     wxCheckBox* GetCheckBoxSCPowerAfterPF() { return m_checkBoxSCPowerAfterPF; }
-    wxCheckBox* GetCheckBoxTHDAfterPF() { return m_checkBoxTHDAfterPF; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxStaticText* GetStaticTextPFMethod() { return m_staticTextPFMethod; }
     wxChoice* GetChoicePFMethod() { return m_choicePFMethod; }
@@ -187,6 +182,9 @@ class SimulationsSettingsFormBase : public wxDialog
     wxStaticText* GetStaticTextTSimTime() { return m_staticTextTSimTime; }
     wxTextCtrl* GetTextCtrlSimTime() { return m_textCtrlSimTime; }
     wxStaticText* GetStaticTextSec_2() { return m_staticTextSec_2; }
+    wxStaticText* GetStaticTextFreq() { return m_staticTextFreq; }
+    wxTextCtrl* GetTextCtrlFreq() { return m_textCtrlFreq; }
+    wxStaticText* GetStaticTextFreqUnit() { return m_staticTextFreqUnit; }
     wxStaticText* GetStaticTextTStabTolerance() { return m_staticTextTStabTolerance; }
     wxTextCtrl* GetTextCtrlStabTolerance() { return m_textCtrlStabTolerance; }
     wxStaticText* GetStaticTextTStabMaxIterations() { return m_staticTextTStabMaxIterations; }
@@ -328,50 +326,6 @@ class ImportFormBase : public wxDialog
                    const wxSize& size = wxSize(-1, -1),
                    long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~ImportFormBase();
-};
-
-class FrequencyResponseFormBase : public wxDialog
-{
-   protected:
-    wxStaticText* m_staticTextInitFreq;
-    wxTextCtrl* m_textCtrlInitFreq;
-    wxStaticText* m_staticTextFreqUnit78;
-    wxStaticText* m_staticTextFinalFreq;
-    wxTextCtrl* m_textCtrlFinalFreq;
-    wxStaticText* m_staticTextFreqUnit2;
-    wxStaticText* m_staticTextStep;
-    wxTextCtrl* m_textCtrlStepFreq;
-    wxStaticText* m_staticTextFreqUnit3;
-    wxStaticText* m_staticTextInjCurrent;
-    wxChoice* m_choiceBus;
-    wxButton* m_buttonRun;
-    wxButton* m_buttonCancel;
-
-   protected:
-    virtual void OnRunButtonClick(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
-
-   public:
-    wxStaticText* GetStaticTextInitFreq() { return m_staticTextInitFreq; }
-    wxTextCtrl* GetTextCtrlInitFreq() { return m_textCtrlInitFreq; }
-    wxStaticText* GetStaticTextFreqUnit78() { return m_staticTextFreqUnit78; }
-    wxStaticText* GetStaticTextFinalFreq() { return m_staticTextFinalFreq; }
-    wxTextCtrl* GetTextCtrlFinalFreq() { return m_textCtrlFinalFreq; }
-    wxStaticText* GetStaticTextFreqUnit2() { return m_staticTextFreqUnit2; }
-    wxStaticText* GetStaticTextStep() { return m_staticTextStep; }
-    wxTextCtrl* GetTextCtrlStepFreq() { return m_textCtrlStepFreq; }
-    wxStaticText* GetStaticTextFreqUnit3() { return m_staticTextFreqUnit3; }
-    wxStaticText* GetStaticTextInjCurrent() { return m_staticTextInjCurrent; }
-    wxChoice* GetChoiceBus() { return m_choiceBus; }
-    wxButton* GetButtonRun() { return m_buttonRun; }
-    wxButton* GetButtonCancel() { return m_buttonCancel; }
-    FrequencyResponseFormBase(wxWindow* parent,
-                              wxWindowID id = wxID_ANY,
-                              const wxString& title = _("Frequency response"),
-                              const wxPoint& pos = wxDefaultPosition,
-                              const wxSize& size = wxSize(-1, -1),
-                              long style = wxDEFAULT_DIALOG_STYLE);
-    virtual ~FrequencyResponseFormBase();
 };
 
 #endif

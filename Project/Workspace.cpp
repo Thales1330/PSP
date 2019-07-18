@@ -21,6 +21,7 @@
 //#include "Bus.h"
 #include "Capacitor.h"
 #include "ElementDataObject.h"
+#include "HarmCurrent.h"
 #include "IndMotor.h"
 #include "Inductor.h"
 #include "Line.h"
@@ -34,11 +35,14 @@
 #include "Electromechanical.h"
 #include "Fault.h"
 #include "PowerFlow.h"
+#include "PowerQuality.h"
 
 #include "ChartView.h"
 #include "ElementPlotData.h"
 
 #include "PropertiesData.h"
+
+#include "FrequencyResponseForm.h"
 
 // Workspace
 Workspace::Workspace() : WorkspaceBase(NULL) {}
@@ -154,6 +158,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
     Element* newElement = NULL;
     bool showNewElementForm = false;
     bool clickOnSwitch = false;
+
     if(m_mode == MODE_INSERT_TEXT || m_mode == MODE_PASTE || m_mode == MODE_DRAG_PASTE) {
         m_mode = MODE_EDIT;
     } else if(m_mode == MODE_INSERT || m_mode == MODE_DRAG_INSERT || m_mode == MODE_DRAG_INSERT_TEXT) {
@@ -799,6 +804,20 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
                     }
                 }
             } break;
+            case 'H': {
+                if(!insertingElement) {
+                    if(event.GetModifiers() == wxMOD_SHIFT) {  // Insert an harmonic current source.
+                        HarmCurrent* newHarmCurrent = new HarmCurrent(
+                            wxString::Format(_("Harmonic Current %d"), GetElementNumber(ID_HARMCURRENT)));
+                        IncrementElementNumber(ID_HARMCURRENT);
+                        m_elementList.push_back(newHarmCurrent);
+                        m_mode = MODE_INSERT;
+                        m_statusBar->SetStatusText(
+                            _("Insert Harmonic Current Source: Click on a buses, ESC to cancel."));
+                    }
+                    Redraw();
+                }
+            } break;
             case 'V': {
                 if(!insertingElement) {
                     if(event.GetModifiers() == wxMOD_CONTROL) { Paste(); }
@@ -1429,7 +1448,9 @@ bool Workspace::RunStability()
     RunPowerFlow();
 
     Electromechanical stability(this, GetElementList(), m_properties->GetSimulationPropertiesData());
+    wxStopWatch sw;
     bool result = stability.RunStabilityCalculation();
+    sw.Pause();
     if(!result) {
         wxMessageDialog msgDialog(this, stability.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
@@ -1440,8 +1461,11 @@ bool Workspace::RunStability()
     // Run power flow after stability.
     RunPowerFlow();
 
-    wxMessageDialog msgDialog(this, _("Do you wish to open the stability graphics?"), _("Question"),
-                              wxYES_NO | wxCENTRE | wxICON_QUESTION);
+    wxMessageDialog msgDialog(
+        this,
+        wxString::Format(_("The program took %ld ms to run this system.\nDo you wish to open the stability graphics?"),
+                         sw.Time()),
+        _("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
     if(msgDialog.ShowModal() == wxID_YES) {
         std::vector<ElementPlotData> plotDataList;
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
@@ -1449,7 +1473,7 @@ bool Workspace::RunStability()
             ElementPlotData plotData;
             if(element->GetPlotData(plotData)) plotDataList.push_back(plotData);
         }
-        
+
         ElementPlotData plotData;
         plotData.SetName(_("Simulation parameters"));
         plotData.SetCurveType(ElementPlotData::CT_TEST);
@@ -1470,8 +1494,8 @@ void Workspace::OnMiddleDoubleClick(wxMouseEvent& event)
 
 bool Workspace::RunStaticStudies()
 {
-    bool pfStatus, faultStatus, scStatus;
-    pfStatus = faultStatus = scStatus = false;
+    bool pfStatus, faultStatus, scStatus, harmStatus;
+    pfStatus = faultStatus = scStatus = harmStatus = false;
 
     pfStatus = RunPowerFlow();
 
@@ -1487,7 +1511,82 @@ bool Workspace::RunStaticStudies()
         scStatus = true;
     }
 
-    if(pfStatus && faultStatus && scStatus) return true;
+    if(m_properties->GetSimulationPropertiesData().harmDistortionAfterPowerFlow) {
+        if(pfStatus) harmStatus = RunHarmonicDistortion();
+    } else {
+        harmStatus = true;
+    }
+
+    if(pfStatus && faultStatus && scStatus && harmStatus) return true;
 
     return false;
+}
+
+bool Workspace::RunHarmonicDistortion()
+{
+    auto simProp = m_properties->GetSimulationPropertiesData();
+    double basePower = simProp.basePower;
+    if(simProp.basePowerUnit == UNIT_MVA)
+        basePower *= 1e6;
+    else if(simProp.basePowerUnit == UNIT_kVA)
+        basePower *= 1e3;
+    if(!RunPowerFlow()) return false;
+    PowerQuality pq(GetElementList());
+    bool result = pq.CalculateDistortions(basePower);
+
+    UpdateTextElements();
+    Redraw();
+
+    return result;
+}
+
+bool Workspace::RunFrequencyResponse()
+{
+    // Get bus list
+    std::vector<Bus*> busList;
+    for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+        if(Bus* bus = dynamic_cast<Bus*>(*it)) { busList.push_back(bus); }
+    }
+    
+    auto data = m_properties->GetFreqRespData();
+    
+    FrequencyResponseForm frForm(this, busList, data.injBusNumber, data.initFreq, data.finalFreq, data.stepFreq);
+
+    if(frForm.ShowModal() == wxID_OK) {
+        data.initFreq = frForm.GetInitFreq();
+        data.finalFreq = frForm.GetEndFreq();
+        data.stepFreq = frForm.GetStepFreq();
+        data.injBusNumber = frForm.GetInjBusNumber();
+        m_properties->SetFreqRespData(data);
+    } else
+        return false;
+
+    auto simProp = m_properties->GetSimulationPropertiesData();
+    double basePower = simProp.basePower;
+    if(simProp.basePowerUnit == UNIT_MVA)
+        basePower *= 1e6;
+    else if(simProp.basePowerUnit == UNIT_kVA)
+        basePower *= 1e3;
+    PowerQuality pq(GetElementList());
+    bool result = pq.CalculateFrequencyResponse(simProp.stabilityFrequency, data.initFreq , data.finalFreq, data.stepFreq, data.injBusNumber, basePower);
+
+    wxMessageDialog msgDialog(
+        this, wxString::Format(_("Calculations done.\nDo you wish to open the frequency response graphics?")),
+        _("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
+    if(msgDialog.ShowModal() == wxID_YES) {
+        std::vector<ElementPlotData> plotDataList;
+        for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+            PowerElement* element = *it;
+            ElementPlotData plotData;
+            if(element->GetPlotData(plotData, FREQRESPONSE)) plotDataList.push_back(plotData);
+        }
+
+        ChartView* cView = new ChartView(this, plotDataList, pq.GetFrequencies());
+        cView->Show();
+    }
+
+    UpdateTextElements();
+    Redraw();
+
+    return result;
 }

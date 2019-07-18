@@ -32,6 +32,7 @@
 #include "SyncGenerator.h"
 #include "SyncMotor.h"
 #include "Transformer.h"
+#include "HarmCurrent.h"
 
 #include "PropertiesData.h"
 
@@ -184,6 +185,11 @@ class ElectricCalculation
      * @return A list of transformer elements.
      */
     const std::vector<Transformer*> GetTransformerList() const { return m_transformerList; }
+        /**
+     * @brief Get the harmonic current source of the system (use GetElementsFromList first).
+     * @return A list of harmonic current sources elements.
+     */
+    const std::vector<HarmCurrent*> GetHarmCurrentList() const { return m_harmCurrentList; }
    protected:
     std::vector<PowerElement*> m_powerElementList;
     std::vector<Bus*> m_busList;
@@ -195,6 +201,7 @@ class ElectricCalculation
     std::vector<SyncGenerator*> m_syncGeneratorList;
     std::vector<SyncMotor*> m_syncMotorList;
     std::vector<Transformer*> m_transformerList;
+    std::vector<HarmCurrent*> m_harmCurrentList;
 };
 
 #endif  // ELECTRICCALCULATION_H

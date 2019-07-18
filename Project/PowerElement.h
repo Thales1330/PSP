@@ -24,7 +24,7 @@
 /**
  * @enum ElectricalUnit
  * @brief Electrical units.
-*/
+ */
 enum ElectricalUnit {
     UNIT_PU = 0, /**< Per unit (p.u.) */
     UNIT_V,      /**< Volt */
@@ -51,7 +51,7 @@ enum ElectricalUnit {
 /**
  * @enum FaultData
  * @brief Information about fault (type and location).
-*/
+ */
 enum FaultData {
     FAULT_THREEPHASE = 0, /**< Three-phase fault */
     FAULT_2LINE,          /**< Line-to-line fault */
@@ -65,7 +65,7 @@ enum FaultData {
 /**
  * @enum SwitchingType
  * @brief Type of switching.
-*/
+ */
 enum SwitchingType {
     SW_INSERT = 0, /**< Insert element */
     SW_REMOVE      /**< Remove element */
@@ -74,13 +74,18 @@ enum SwitchingType {
 /**
  * @enum PowerFlowDirection
  * @brief Direction of power flow arrows.
-*/
+ */
 enum PowerFlowDirection {
     PF_NONE = 0,     /**< No direction (no arrows printed) */
     PF_TO_BUS,       /**< Element to bus */
     PF_TO_ELEMENT,   /**< Bus to element */
     PF_BUS1_TO_BUS2, /**< First bus to secont bus (branch elements) */
     PF_BUS2_TO_BUS1  /**< Second bus to first bus (branch elements) */
+};
+
+enum PlotStudy {
+    STABILITY = 0, /**< Stability studies */
+    FREQRESPONSE   /**< Frequency resonse (Harmonics) */
 };
 
 /**
@@ -195,7 +200,7 @@ class PowerElement : public Element
      * @param plotData Plot data to be filled.
      * @return true if the plot data was successfully filled, false otherwise.
      */
-    virtual bool GetPlotData(ElementPlotData& plotData) { return false; }
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY) { return false; }
     /**
      * @brief Check if the power element have dynamic event.
      * @return true if the element have dynamic an event, false otherwise.
@@ -207,7 +212,7 @@ class PowerElement : public Element
      */
     virtual void SetDynamicEvent(bool dynEvent = true) { m_dynEvent = dynEvent; }
     virtual double GetValueFromUnit(double value, ElectricalUnit valueUnit);
-    
+
     virtual void SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
     virtual void SaveSwitchingData(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* electricalNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList) { return true; }

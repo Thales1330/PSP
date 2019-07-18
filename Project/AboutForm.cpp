@@ -21,6 +21,9 @@ AboutForm::AboutForm(wxWindow* parent) : AboutFormBase(parent) { Init(); }
 AboutForm::~AboutForm() {}
 void AboutForm::Init()
 {
+    // Set program version
+    m_staticTextVersion->SetLabel("Beta 2019w29a");
+    
     // Create developers table
     m_gridCredits->EnableGridLines(false);
     wxFont headerFont = m_gridCredits->GetDefaultCellFont();

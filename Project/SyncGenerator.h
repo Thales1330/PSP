@@ -65,6 +65,7 @@ struct SyncGeneratorElectricalData {
     double armResistance = 0.0;
     double potierReactance = 0.0;
     double satFactor = 0.0;
+    double ocFrequency = 60.0;
 
     double syncXd = 0.0;
     double syncXq = 0.0;
@@ -79,7 +80,7 @@ struct SyncGeneratorElectricalData {
 
     // Machine state variables
     std::complex<double> terminalVoltage;
-    std::vector<std::complex<double> > terminalVoltageVector;
+    std::vector<double> terminalVoltageVector;
     std::complex<double> electricalPower;
     std::vector<std::complex<double> > electricalPowerVector;
     double pm;
@@ -154,7 +155,8 @@ class SyncGenerator : public Machines
     virtual SyncGeneratorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(SyncGeneratorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
-    virtual bool GetPlotData(ElementPlotData& plotData);
+    virtual void SavePlotData();
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

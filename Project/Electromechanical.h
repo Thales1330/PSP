@@ -20,8 +20,8 @@
 
 #include "ElectricCalculation.h"
 
-#include <wx/progdlg.h>
 #include <wx/log.h>
+#include <wx/progdlg.h>
 
 class ControlElementSolver;
 
@@ -57,7 +57,7 @@ class Electromechanical : public ElectricCalculation
     bool RunStabilityCalculation();
     wxString GetErrorMessage() const { return m_errorMsg; }
     std::vector<double> GetTimeVector() const { return m_timeVector; }
-    
+
     // For tests
     std::vector<double> GetIterationVector() const { return m_iterationsNumVector; }
 
@@ -70,27 +70,33 @@ class Electromechanical : public ElectricCalculation
     // double GetPowerValue(double value, ElectricalUnit unit);
 
     void InsertSyncMachinesOnYBus();
+    bool InsertIndMachinesOnYBus();
+    bool CalculateIndMachinesTransientValues(IndMotor* motor);
     std::complex<double> GetSyncMachineAdmittance(SyncGenerator* generator);
+    std::complex<double> GetIndMachineAdmittance(IndMotor* motor);
     bool InitializeDynamicElements();
     bool CalculateInjectedCurrents();
     void CalculateIntegrationConstants(SyncGenerator* syncGenerator, double id, double iq, double k = 1.0);
-    bool SolveSynchronousMachines();
+    void CalculateIntegrationConstants(IndMotor* indMotor, double ir, double im, double k = 1.0);
+    bool SolveMachines();
     void SetSyncMachinesModel();
     SyncMachineModelData GetSyncMachineModelData(SyncGenerator* syncMachine);
-    double CalculateSyncMachineIntVariables(SyncGenerator* syncGenerator,
-                                            double id,
-                                            double iq,
-                                            double sd,
-                                            double sq,
-                                            double pe,
-                                            double k = 1.0);
-    bool CalculateSyncMachineNonIntVariables(SyncGenerator* syncGenerator,
-                                             double& id,
-                                             double& iq,
-                                             double& sd,
-                                             double& sq,
-                                             double& pe,
-                                             double k = 1.0);
+    double CalculateIntVariables(SyncGenerator* syncGenerator,
+                                 double id,
+                                 double iq,
+                                 double sd,
+                                 double sq,
+                                 double pe,
+                                 double k = 1.0);
+    double CalculateIntVariables(IndMotor* indMotor, double ir, double im, double te, double k = 1.0);
+    bool CalculateNonIntVariables(SyncGenerator* syncGenerator,
+                                  double& id,
+                                  double& iq,
+                                  double& sd,
+                                  double& sq,
+                                  double& pe,
+                                  double k = 1.0);
+    bool CalculateNonIntVariables(IndMotor* indMotor, double& ir, double& im, double& te, double k = 1.0);
     void CalculateReferenceSpeed();
     bool CalculateSyncMachineSaturation(SyncGenerator* syncMachine,
                                         double& id,
@@ -127,11 +133,13 @@ class Electromechanical : public ElectricCalculation
     int m_maxIterations = 100;
     double m_saturationTolerance = 1e-8;
 
+    int m_currentPoint = 0;
+
     std::vector<double> m_eventTimeList;
     std::vector<bool> m_eventOccurrenceList;
 
     std::vector<double> m_timeVector;
-    
+
     // For tests
     int m_iterationsNum = 0.0;
     std::vector<double> m_iterationsNumVector;

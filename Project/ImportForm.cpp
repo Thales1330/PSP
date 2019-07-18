@@ -28,6 +28,8 @@
 #include "Transformer.h"
 #include "Workspace.h"
 
+#include "GraphAutoLayout.h"
+
 ImportForm::ImportForm(wxWindow* parent, Workspace* workspace) : ImportFormBase(parent)
 {
     SetInitialSize();
@@ -57,6 +59,31 @@ void ImportForm::OnButtonOKClick(wxCommandEvent& event)
 }
 
 bool ImportForm::ImportSelectedFiles()
+{
+    switch(m_notebook->GetSelection()) {
+        case 0: {
+            return ImportCEPELFiles();
+            break;
+        }
+        case 1: {
+            return ImportMatpowerFiles();
+            break;
+        }
+        default:
+            break;
+    }
+    return false;
+}
+
+Bus* ImportForm::GetBusFromID(std::vector<Bus*> busList, int id)
+{
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+        if((*it)->GetID() == id) return *it;
+    }
+    return NULL;
+}
+
+bool ImportForm::ImportCEPELFiles()
 {
     ParseAnarede parseAnarede(m_filePickerANAREDELST->GetFileName(), m_filePickerANAREDEPWF->GetFileName());
     if(!parseAnarede.Parse()) return false;
@@ -374,9 +401,8 @@ bool ImportForm::ImportSelectedFiles()
             wxPoint2DDouble nodePos2 =
                 parseAnarede.GetNodePositionFromID(parentBus2, scale, (*it)->busConnectionNode[1].second);
 
-            ParseAnarede::BranchData* branchData =
-                parseAnarede.GetBranchDataFromID((*it)->electricalID, (*it)->busConnectionID[0].second,
-                                                 (*it)->busConnectionID[1].second, ANA_LINE);
+            ParseAnarede::BranchData* branchData = parseAnarede.GetBranchDataFromID(
+                (*it)->electricalID, (*it)->busConnectionID[0].second, (*it)->busConnectionID[1].second, ANA_LINE);
 
             Line* line = new Line();
             line->SetID((*it)->id);
@@ -505,12 +531,317 @@ bool ImportForm::ImportSelectedFiles()
     return true;
 }
 
-Bus* ImportForm::GetBusFromID(std::vector<Bus*> busList, int id)
+bool ImportForm::ImportMatpowerFiles()
 {
-    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
-        if((*it)->GetID() == id) return *it;
+    ParseMatpower parseMatpower(m_filePickerMatpowerM->GetFileName());
+    if(!parseMatpower.Parse()) return false;
+
+    double mvaBasePower = parseMatpower.GetMVAPowerBase();
+    auto simProp = m_workspace->GetProperties()->GetSimulationPropertiesData();
+    simProp.basePower = mvaBasePower;
+    m_workspace->GetProperties()->SetSimulationPropertiesData(simProp);
+
+    std::vector<Element*> elementList;
+
+    std::vector<Bus*> busList;
+    std::vector<SyncGenerator*> syncGeneratorList;
+    std::vector<SyncMotor*> syncMotorList;
+    std::vector<Load*> loadList;
+    std::vector<Inductor*> indList;
+    std::vector<Capacitor*> capList;
+    std::vector<IndMotor*> indMotorList;
+    std::vector<Transformer*> transformerList;
+    std::vector<Line*> lineList;
+
+    int iterations = wxAtoi(m_textCtrlIterations->GetValue());
+    double scale;
+    if(!m_textCtrlScale->GetValue().ToDouble(&scale)) return false;
+
+    // Automatically calculate buses positions using weighted graph to determine the layout
+    GraphAutoLayout gal(parseMatpower.GetBusData(), parseMatpower.GetBranchData());
+    gal.CalculatePositions(iterations, scale);
+
+    // Fill bus list
+    auto busDataList = parseMatpower.GetBusData();
+    for(auto it = busDataList.begin(), itEnd = busDataList.end(); it != itEnd; ++it) {
+        ParseMatpower::BusData* busData = *it;
+
+        Bus* bus = new Bus(busData->busPosition);
+        bus->SetID((*it)->id);
+
+        // Electrical data
+        auto data = bus->GetElectricalData();
+        if(busData) {
+            data.number = busData->id;
+            data.name = busData->busName;
+            switch(busData->type) {
+                case 3: {
+                    data.isVoltageControlled = true;
+                    data.slackBus = true;
+                } break;
+                case 1: {
+                    data.isVoltageControlled = false;
+                    data.slackBus = false;
+                } break;
+                case 2: {
+                    data.isVoltageControlled = true;
+                    data.slackBus = false;
+                } break;
+                default: {
+                    return false;
+                } break;
+            }
+            data.voltage = std::complex<double>(busData->voltage * std::cos(wxDegToRad(busData->angle)),
+                                                busData->voltage * std::sin(wxDegToRad(busData->angle)));
+            data.controlledVoltage = busData->voltage;
+            // TODO: Nominal voltage are getting errors (e.g. 118bus.m)
+            // if(busData->baseVoltage > 1e-3) { data.nominalVoltage = busData->baseVoltage; }
+        } else
+            return false;
+
+        bus->SetElectricalData(data);
+        busList.push_back(bus);
     }
-    return NULL;
+    // Fill lines list
+    auto branchDataList = parseMatpower.GetBranchData();
+    int lineID = 0;
+    int transformerID = 0;
+    for(auto it = branchDataList.begin(), itEnd = branchDataList.end(); it != itEnd; ++it) {
+        ParseMatpower::BranchData* branchData = *it;
+        Bus* fstParentBus = GetBusFromID(busList, branchData->busConnections.first);
+        Bus* sndParentBus = GetBusFromID(busList, branchData->busConnections.second);
+        if(branchData->tap > 1e-3) {  // Transformer
+            Transformer* transformer = new Transformer();
+            transformer->SetID(transformerID);
+            transformer->AddParent(fstParentBus, fstParentBus->GetPosition());
+            transformer->AddParent(sndParentBus, sndParentBus->GetPosition());
+
+            auto data = transformer->GetElectricalData();
+            data.resistance = branchData->resistance;
+            data.indReactance = branchData->indReactance;
+            data.turnsRatio = branchData->tap;
+            data.phaseShift = branchData->phaseShift;
+            data.name =
+                wxString::Format("%s %u (%s - %s)", _("Transfomer"), transformerList.size() + 1,
+                                 fstParentBus->GetElectricalData().name, sndParentBus->GetElectricalData().name);
+
+            transformer->SetElectricaData(data);
+
+            transformer->SetOnline(branchData->isOnline);
+
+            transformerList.push_back(transformer);
+            transformerID++;
+        } else {  // Line
+            Line* line = new Line();
+            line->SetID(lineID);
+            line->AddParent(fstParentBus, fstParentBus->GetPosition());
+            line->AddParent(sndParentBus, sndParentBus->GetPosition());
+
+            auto data = line->GetElectricalData();
+            data.resistance = branchData->resistance;
+            data.indReactance = branchData->indReactance;
+            data.capSusceptance = branchData->capSusceptance;
+            data.name =
+                wxString::Format("%s %u (%s - %s)", _("Line"), lineList.size() + 1,
+                                 fstParentBus->GetElectricalData().name, sndParentBus->GetElectricalData().name);
+
+            line->SetElectricalData(data);
+
+            line->SetOnline(branchData->isOnline);
+
+            lineList.push_back(line);
+            lineID++;
+        }
+    }
+
+    // Connect Generators
+    auto genDataList = parseMatpower.GetGenData();
+    int genID = 0;
+    for(auto it = genDataList.begin(), itEnd = genDataList.end(); it != itEnd; ++it) {
+        SyncGenerator* generator = new SyncGenerator();
+        ParseMatpower::GenData* genData = *it;
+        generator->SetID(genID);
+
+        Bus* parentBus = GetBusFromID(busList, (*it)->busID);
+        generator->AddParent(parentBus, parentBus->GetPosition());
+
+        auto data = generator->GetElectricalData();
+        data.name = wxString::Format("%s %u (%s)", _("Machine"), syncGeneratorList.size() + 1,
+                                     parentBus->GetElectricalData().name);
+        data.activePower = genData->pg;
+        data.reactivePower = genData->qg;
+        data.maxReactive = genData->maxReactivePower;
+        data.minReactive = genData->minReactivePower;
+        data.nominalPower = genData->baseMVA;
+        generator->SetElectricalData(data);
+
+        syncGeneratorList.push_back(generator);
+
+        genID++;
+    }
+
+    // Connect Loads and capacitors
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        ParseMatpower::BusData* busData = parseMatpower.GetBusDataFromID(bus->GetID());
+        if(busData->pd > 1e-3 || busData->qd > 1e-3) {
+            // The bus have load
+            Load* load = new Load();
+
+            load->AddParent(bus, bus->GetPosition());
+
+            auto data = load->GetElectricalData();
+            data.name = wxString::Format("%s %u (%s)", _("Load"), loadList.size() + 1, busData->busName);
+            data.activePower = busData->pd;
+            data.reactivePower = busData->qd;
+            load->SetElectricalData(data);
+
+            loadList.push_back(load);
+        }
+        if(std::abs(busData->gs) > 1e-3) {
+            // The bus have constant impedance load
+            Load* load = new Load();
+
+            load->AddParent(bus, bus->GetPosition());
+
+            auto data = load->GetElectricalData();
+            data.name = wxString::Format("%s %u (%s)", _("Load"), loadList.size() + 1, busData->busName);
+            data.activePower = busData->gs;
+            data.reactivePower = busData->bs;
+            data.loadType = CONST_IMPEDANCE;
+            load->SetElectricalData(data);
+
+            loadList.push_back(load);
+        } else if(std::abs(busData->bs) > 1e-3) {
+            // The bus have capacitor or inductor connected
+            if(busData->bs < 1e-3) {
+                // Inductor
+                Inductor* inductor = new Inductor();
+
+                inductor->AddParent(bus, bus->GetPosition());
+
+                auto data = inductor->GetElectricalData();
+                data.name = wxString::Format("%s %u (%s)", _("Inductor"), indList.size() + 1, busData->busName);
+                data.reactivePower = std::abs(busData->bs);
+                inductor->SetElectricalData(data);
+
+                indList.push_back(inductor);
+            } else {
+                // Capacitor
+                Capacitor* capacitor = new Capacitor();
+
+                capacitor->AddParent(bus, bus->GetPosition());
+
+                auto data = capacitor->GetElectricalData();
+                data.name = wxString::Format("%s %u (%s)", _("Capacitor"), capList.size() + 1, busData->busName);
+                data.reactivePower = std::abs(busData->bs);
+                capacitor->SetElectricalData(data);
+
+                capList.push_back(capacitor);
+            }
+        }
+    }
+
+    // Adjust generators positions
+    for(auto it = syncGeneratorList.begin(), itEnd = syncGeneratorList.end(); it != itEnd; ++it) {
+        SyncGenerator* generator = *it;
+        generator->StartMove(generator->GetPosition());
+        // TODO: Check why node position have 100 pts offset in x axis
+        generator->MoveNode(generator->GetParentList()[0],
+                            generator->GetParentList()[0]->GetPosition() - wxPoint2DDouble(140, 0));
+        generator->Move(generator->GetParentList()[0]->GetPosition() - wxPoint2DDouble(40, 100));
+        generator->Rotate();
+        generator->Rotate();
+    }
+
+    // Adjust loads positions
+    for(auto it = loadList.begin(), itEnd = loadList.end(); it != itEnd; ++it) {
+        Load* load = *it;
+        // Move load to the left of the bus
+        load->StartMove(wxPoint2DDouble(0, 0));
+        load->MoveNode(load->GetParentList()[0], wxPoint2DDouble(-load->GetParentList()[0]->GetWidth() / 2 + 10, 0));
+        load->Move(wxPoint2DDouble(-load->GetParentList()[0]->GetWidth() / 2 + 10, 0));
+    }
+
+    // Adjust capacitors positions
+    for(auto it = capList.begin(), itEnd = capList.end(); it != itEnd; ++it) {
+        Capacitor* capacitor = *it;
+        // Move capacitor to the right of the bus capacitor->StartMove(wxPoint2DDouble(0, 0));
+        capacitor->StartMove(wxPoint2DDouble(0, 0));
+        capacitor->MoveNode(capacitor->GetParentList()[0],
+                            wxPoint2DDouble(capacitor->GetParentList()[0]->GetWidth() / 2 - 20, 0));
+        capacitor->Move(wxPoint2DDouble(capacitor->GetParentList()[0]->GetWidth() / 2 - 20, 0));
+    }
+
+    // Adjust inductors positions
+    for(auto it = indList.begin(), itEnd = indList.end(); it != itEnd; ++it) {
+        Inductor* inductor = *it;
+        // Move indutor to the far right of the bus inductor->StartMove(wxPoint2DDouble(0, 0));
+        inductor->StartMove(wxPoint2DDouble(0, 0));
+        inductor->MoveNode(inductor->GetParentList()[0],
+                           wxPoint2DDouble(inductor->GetParentList()[0]->GetWidth() / 2 - 10, 0));
+        inductor->Move(wxPoint2DDouble(inductor->GetParentList()[0]->GetWidth() / 2 + 10, 0));
+    }
+
+    // Adjust branches
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        int numberOfConnectedBranches = 0;
+        std::vector<Line*> linesConnected;
+        std::vector<Transformer*> transformersConnected;
+
+        std::vector<Element*> childElements = bus->GetChildList();
+        for(unsigned int i = 0; i < childElements.size(); ++i) {
+            if(Line* line = dynamic_cast<Line*>(childElements[i])) {
+                linesConnected.push_back(line);
+                numberOfConnectedBranches++;
+            } else if(Transformer* transformer = dynamic_cast<Transformer*>(childElements[i])) {
+                transformersConnected.push_back(transformer);
+                numberOfConnectedBranches++;
+            }
+        }
+        /*for(auto itc = bus->GetChildList().begin(), itEnd = bus->GetChildList().end(); itc != itEnd; ++itc) {
+            if(Line* line = dynamic_cast<Line*>(*itc)) {
+                linesConnected.push_back(line);
+                numberOfConnectedLines++;
+            }
+        }*/
+
+        if(numberOfConnectedBranches > 0) {
+            double dx = (bus->GetWidth() - 30) / (static_cast<double>(numberOfConnectedBranches + 1));
+            int cont = 0;
+            for(unsigned int i = 0; i < linesConnected.size(); ++i) {
+                Line* lineToMove = linesConnected[i];
+                // Line nove move in x axis
+                wxPoint2DDouble newPos(dx * static_cast<double>(i + 1), 0);
+                lineToMove->StartMove(bus->GetPosition());
+                lineToMove->MoveNode(bus, bus->GetPosition() - wxPoint2DDouble(bus->GetWidth() / 2 - 10, 0) + newPos);
+                cont++;
+            }
+            for(unsigned int i = 0; i < transformersConnected.size(); ++i) {
+                Transformer* trafoToMove = transformersConnected[i];
+                wxPoint2DDouble newPos(dx * static_cast<double>(i + cont + 1), 0);
+                trafoToMove->StartMove(bus->GetPosition());
+                trafoToMove->MoveNode(bus, bus->GetPosition() - wxPoint2DDouble(bus->GetWidth() / 2 - 10, 0) + newPos);
+                trafoToMove->SetBestPositionAndRotation();
+            }
+        }
+    }
+
+    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = syncGeneratorList.begin(), itEnd = syncGeneratorList.end(); it != itEnd; ++it)
+        elementList.push_back(*it);
+    for(auto it = syncMotorList.begin(), itEnd = syncMotorList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = loadList.begin(), itEnd = loadList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = indList.begin(), itEnd = indList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = capList.begin(), itEnd = capList.end(); it != itEnd; ++it) elementList.push_back(*it);
+    for(auto it = indMotorList.begin(), itEnd = indMotorList.end(); it != itEnd; ++it) elementList.push_back(*it);
+
+    m_workspace->SetElementList(elementList);
+
+    return true;
 }
 
 ParseAnarede::ParseAnarede(wxFileName lstFile, wxFileName pwfFile)
@@ -1039,4 +1370,163 @@ void ParseAnarede::ClearData()
         if(*it) delete *it;
     }
     m_indElementData.clear();
+}
+
+ParseMatpower::ParseMatpower(wxFileName mFile) { m_mFile = mFile; }
+
+void ParseMatpower::ClearData()
+{
+    // Clear data to avoid memory leak
+    for(auto it = m_branchData.begin(), itEnd = m_branchData.end(); it != itEnd; ++it) {
+        if(*it) delete *it;
+    }
+    m_branchData.clear();
+    for(auto it = m_branchData.begin(), itEnd = m_branchData.end(); it != itEnd; ++it) {
+        if(*it) delete *it;
+    }
+    m_branchData.clear();
+    for(auto it = m_genData.begin(), itEnd = m_genData.end(); it != itEnd; ++it) {
+        if(*it) delete *it;
+    }
+    m_genData.clear();
+}
+
+bool ParseMatpower::Parse()
+{
+    wxTextFile mFile(m_mFile.GetFullPath());
+    if(!mFile.Open()) return false;
+
+    // Parse M file
+    wxString fileTxt = "";
+    for(wxString line = mFile.GetFirstLine(); !mFile.Eof(); line = mFile.GetNextLine()) {
+        // Current line
+        if(line.Trim()[0] != '%') {  // Check if the line is commented (with %)
+            // Parse data:
+            if(line.Find("mpc.baseMVA") != wxNOT_FOUND) {                                       // Found baseMVA
+                if(!line.AfterFirst('=').BeforeFirst(';').ToCDouble(&m_mvaBase)) return false;  // No Trim() needed?
+            }
+            if(line.Find("mpc.bus ") != wxNOT_FOUND) {  // Found bus
+                wxStringTokenizer busStrTok = GetMFileTokenData(mFile, line);
+                while(busStrTok.HasMoreTokens()) {
+                    BusData* busData = new BusData();
+                    wxString busDataStr = busStrTok.GetNextToken();
+                    char tokenChar = '\t';
+                    if(busDataStr.Find('\t') == wxNOT_FOUND) { tokenChar = ' '; }
+                    // Tokenize using tabulation or space (each branch data)
+                    wxStringTokenizer busDataStrTok(busDataStr, tokenChar);
+
+                    busData->id = wxAtoi(busDataStrTok.GetNextToken());                      // Bus number
+                    busData->type = wxAtoi(busDataStrTok.GetNextToken());                    // Bus type
+                    if(!busDataStrTok.GetNextToken().ToCDouble(&busData->pd)) return false;  // Real power demand
+                    if(!busDataStrTok.GetNextToken().ToCDouble(&busData->qd)) return false;  // Reactive power demand
+                    if(!busDataStrTok.GetNextToken().ToCDouble(&busData->gs)) return false;  // Shunt condutance
+                    if(!busDataStrTok.GetNextToken().ToCDouble(&busData->bs)) return false;  // Shunt susceptance
+                    busData->area = wxAtoi(busDataStrTok.GetNextToken());                    // Bus area
+                    if(!busDataStrTok.GetNextToken().ToCDouble(&busData->voltage)) return false;  // Bus abs voltage
+                    if(!busDataStrTok.GetNextToken().ToCDouble(&busData->angle)) return false;    // Angle of voltage
+                    if(!busDataStrTok.GetNextToken().ToCDouble(&busData->baseVoltage)) return false;  // Base Voltage
+
+                    m_busData.push_back(busData);  // Save new bus data at vector
+                }
+            }
+            if(line.Find("mpc.gen ") != wxNOT_FOUND) {  // Found generator
+                wxStringTokenizer genStrTok = GetMFileTokenData(mFile, line);
+                while(genStrTok.HasMoreTokens()) {
+                    GenData* genData = new GenData();
+                    wxString genDataStr = genStrTok.GetNextToken();
+                    char tokenChar = '\t';
+                    if(genDataStr.Find('\t') == wxNOT_FOUND) { tokenChar = ' '; }
+                    // Tokenize using tabulation or space (each branch data)
+                    wxStringTokenizer genDataStrTok(genDataStr, tokenChar);
+                    genData->busID = wxAtoi(genDataStrTok.GetNextToken());                   // Bus number
+                    if(!genDataStrTok.GetNextToken().ToCDouble(&genData->pg)) return false;  // Real power output
+                    if(!genDataStrTok.GetNextToken().ToCDouble(&genData->qg)) return false;  // Reative power output
+                    if(!genDataStrTok.GetNextToken().ToCDouble(&genData->maxReactivePower))
+                        return false;  // Maximum reactive power (MVAr)
+                    if(!genDataStrTok.GetNextToken().ToCDouble(&genData->minReactivePower))
+                        return false;              // Minumum reactive power (MVAr)
+                    genDataStrTok.GetNextToken();  // Voltage magnitude setpoint (p.u.), skip
+                    if(!genDataStrTok.GetNextToken().ToCDouble(&genData->baseMVA)) return false;  // Power base (MVA)
+                    double machineStatus = 0;
+                    if(!genDataStrTok.GetNextToken().ToCDouble(&machineStatus))
+                        return false;  // Machine status (> 0 = machine in-service; <= 0 = machine out-of-service)
+                    genData->isOnline = machineStatus > 1e-3 ? true : false;
+
+                    m_genData.push_back(genData);
+                }
+            }
+            if(line.Find("mpc.branch") != wxNOT_FOUND) {  // Found branch
+                wxStringTokenizer branchStrTok = GetMFileTokenData(mFile, line);
+                while(branchStrTok.HasMoreTokens()) {
+                    BranchData* branchData = new BranchData();
+                    wxString branchDataStr = branchStrTok.GetNextToken();
+                    char tokenChar = '\t';
+                    if(branchDataStr.Find('\t') == wxNOT_FOUND) { tokenChar = ' '; }
+                    // Tokenize using tabulation or space (each branch data)
+                    wxStringTokenizer branchDataStrTok(branchDataStr, tokenChar);
+
+                    int fromBus = wxAtoi(branchDataStrTok.GetNextToken());  // From bus number
+                    int toBus = wxAtoi(branchDataStrTok.GetNextToken());    // To bus number
+                    branchData->busConnections = std::make_pair(fromBus, toBus);
+                    if(!branchDataStrTok.GetNextToken().ToCDouble(&branchData->resistance)) return false;  // Resistance
+                    if(!branchDataStrTok.GetNextToken().ToCDouble(&branchData->indReactance))
+                        return false;  // Reactance
+                    if(!branchDataStrTok.GetNextToken().ToCDouble(&branchData->capSusceptance))
+                        return false;                 // Line charging susceptance
+                    branchDataStrTok.GetNextToken();  // MVA rating A, skip
+                    branchDataStrTok.GetNextToken();  // MVA rating B, skip
+                    branchDataStrTok.GetNextToken();  // MVA rating C, skip
+                    if(!branchDataStrTok.GetNextToken().ToCDouble(&branchData->tap)) return false;  // TAP
+                    if(!branchDataStrTok.GetNextToken().ToCDouble(&branchData->phaseShift))
+                        return false;  // Transformer phase-shift angle
+                    double branchStatus = 0;
+                    if(!branchDataStrTok.GetNextToken().ToCDouble(&branchStatus))
+                        return false;  // Branch status (> 0 = machine in-service; <= 0 = machine out-of-service)
+                    branchData->isOnline = branchStatus > 1e-3 ? true : false;
+
+                    m_branchData.push_back(branchData);
+                }
+            }
+            if(line.Find("mpc.bus_name") != wxNOT_FOUND) {  // Found buses names
+                wxString dataStr = "";
+                while(line.Find('}', true) == wxNOT_FOUND) {  // Concatenate all lines until find ']'
+                    dataStr += line;
+                    line = mFile.GetNextLine();
+                }
+                dataStr += line;
+                dataStr = dataStr.AfterFirst('{').BeforeFirst('}');  // Get only the element data
+                wxStringTokenizer dataStrTok(dataStr, ";");          // Tokenize using ';' char (one element data)
+                for(auto it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {
+                    if(dataStrTok.HasMoreTokens())
+                        (*it)->busName = dataStrTok.GetNextToken().AfterFirst('\'').BeforeFirst('\'');
+                }
+            }
+        }
+    }
+    // Last line
+
+    return true;
+}
+
+wxStringTokenizer ParseMatpower::GetMFileTokenData(wxTextFile& mFile, wxString currentLine)
+{
+    wxString dataStr = "";
+    while(currentLine.Find(']', true) == wxNOT_FOUND) {  // Concatenate all lines until find ']'
+        dataStr += currentLine;
+        if(currentLine.Find("mpc") == wxNOT_FOUND && currentLine.Find(';') == wxNOT_FOUND) dataStr += ';';
+        currentLine = mFile.GetNextLine();
+    }
+    dataStr += currentLine + ";";
+    if(currentLine.Find(';') == wxNOT_FOUND) dataStr += ';';
+    dataStr = dataStr.AfterFirst('[').BeforeFirst(']');  // Get only the element data
+    wxStringTokenizer dataStrTok(dataStr, ';');          // Tokenize using ';' char (one element data)
+    return dataStrTok;
+}
+
+ParseMatpower::BusData* ParseMatpower::GetBusDataFromID(int id)
+{
+    for(auto it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {
+        if((*it)->id == id) return *it;
+    }
+    return NULL;
 }

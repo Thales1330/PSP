@@ -248,7 +248,7 @@ wxString Load::GetTipText() const
     return tipText;
 }
 
-bool Load::GetPlotData(ElementPlotData& plotData)
+bool Load::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 {
     if(!m_electricalData.plotLoad) return false;
     plotData.SetName(m_electricalData.name);

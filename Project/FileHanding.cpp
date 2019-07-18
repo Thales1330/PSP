@@ -60,6 +60,8 @@ void FileHanding::SaveProject(wxFileName path)
     XMLParser::SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);
     auto contCalcSCPower = XMLParser::AppendNode(doc, contCalc, "SCPower");
     XMLParser::SetNodeValue(doc, contCalcSCPower, simulationData.scPowerAfterPowerFlow);
+    auto contCalcTHD = XMLParser::AppendNode(doc, contCalc, "HarmonicDistortion");
+    XMLParser::SetNodeValue(doc, contCalcTHD, simulationData.harmDistortionAfterPowerFlow);
 
     auto powerFlowPropNode = XMLParser::AppendNode(doc, simulationPropNode, "PowerFlow");
     auto solutionMethod = XMLParser::AppendNode(doc, powerFlowPropNode, "SolutionMethod");
@@ -233,6 +235,17 @@ void FileHanding::SaveProject(wxFileName path)
     }
     //}
 
+    //{ HarmCurrent
+    auto harmCurrentNode = XMLParser::AppendNode(doc, elementsNode, "HarmCurrentList");
+    auto harmCurrentList = allElements.GetHarmCurrentList();
+    elementID = 0;
+    for(auto it = harmCurrentList.begin(), itEnd = harmCurrentList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, harmCurrentNode);
+        elementID++;
+    }
+    //}
+
     //{ Text
     auto textsNode = XMLParser::AppendNode(doc, elementsNode, "TextList");
     auto textList = m_workspace->GetTextList();
@@ -278,6 +291,8 @@ bool FileHanding::OpenProject(wxFileName path)
             auto contCalc = general->first_node("ContinuousCalculation");
             simData.faultAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "Fault");
             simData.scPowerAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "SCPower");
+            int harmDistortionAfterPowerFlow = XMLParser::GetNodeValueInt(contCalc, "HarmonicDistortion");
+            simData.harmDistortionAfterPowerFlow = harmDistortionAfterPowerFlow != -1 ? harmDistortionAfterPowerFlow : false;
 
             // Power flow
             auto powerFlow = simPropertiesNode->first_node("PowerFlow");
@@ -333,6 +348,7 @@ bool FileHanding::OpenProject(wxFileName path)
     std::vector<SyncGenerator*> syncGeneratorList;
     std::vector<SyncMotor*> syncMotorList;
     std::vector<Transformer*> transformerList;
+    std::vector<HarmCurrent*> harmCurrentList;
     std::vector<Text*> textList;
 
     // List of parents
@@ -481,6 +497,21 @@ bool FileHanding::OpenProject(wxFileName path)
         transfomerNode = transfomerNode->next_sibling("Transfomer");
     }  //}
 
+    //{ HarmCurrent
+    auto harmCurrentListNode = elementsNode->first_node("HarmCurrentList");
+    if(harmCurrentListNode) {
+        auto harmCurrentNode = harmCurrentListNode->first_node("HarmCurrent");
+        while(harmCurrentNode) {
+            HarmCurrent* harmCurrent = new HarmCurrent();
+
+            if(!harmCurrent->OpenElement(harmCurrentNode, parentList)) return false;
+            elementList.push_back(harmCurrent);
+            harmCurrentList.push_back(harmCurrent);
+
+            harmCurrentNode = harmCurrentNode->next_sibling("HarmCurrent");
+        }
+    }  //}
+
     m_workspace->SetElementList(elementList);
 
     //{ Text
@@ -530,6 +561,10 @@ bool FileHanding::OpenProject(wxFileName path)
             case TYPE_TRANSFORMER: {
                 Transformer* transformer = transformerList[text->GetElementNumber()];
                 text->SetElement(transformer);
+            } break;
+            case TYPE_HARMCURRENT: {
+                HarmCurrent* harmCurrent = harmCurrentList[text->GetElementNumber()];
+                text->SetElement(harmCurrent);
             } break;
         }
 

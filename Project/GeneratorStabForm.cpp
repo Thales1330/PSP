@@ -44,6 +44,7 @@ GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenera
     m_textCtrlRa->SetValue(SyncGenerator::StringFromDouble(data.armResistance));
     m_textCtrlXp->SetValue(SyncGenerator::StringFromDouble(data.potierReactance));
     m_textCtrlSat->SetValue(SyncGenerator::StringFromDouble(data.satFactor));
+    m_textCtrlOCFreq->SetValue(SyncGenerator::StringFromDouble(data.ocFrequency));
 
     m_textCtrlSyncXd->SetValue(SyncGenerator::StringFromDouble(data.syncXd));
     m_textCtrlSyncXq->SetValue(SyncGenerator::StringFromDouble(data.syncXq));
@@ -154,6 +155,10 @@ bool GeneratorStabForm::ValidateData()
 
     if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlSat->GetValue(), data.satFactor,
            _("Value entered incorrectly in the field \"Saturation factor\".")))
+        return false;
+        
+    if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlOCFreq->GetValue(), data.ocFrequency,
+           _("Value entered incorrectly in the field \"Open-circuit frequency\".")))
         return false;
 
     if(!m_syncGenerator->DoubleFromString(m_parent, m_textCtrlSyncXd->GetValue(), data.syncXd,

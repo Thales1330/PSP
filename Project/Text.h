@@ -36,6 +36,7 @@ class SyncMotor;
 class Load;
 class Inductor;
 class Capacitor;
+class HarmCurrent;
 
 enum ElementType {
     TYPE_NONE = 0,
@@ -47,7 +48,8 @@ enum ElementType {
     TYPE_LOAD,
     TYPE_SYNC_GENERATOR,
     TYPE_SYNC_MOTOR,
-    TYPE_TRANSFORMER
+    TYPE_TRANSFORMER,
+    TYPE_HARMCURRENT
 };
 
 enum DataType {
@@ -62,7 +64,8 @@ enum DataType {
     DATA_PF_ACTIVE,
     DATA_PF_REACTIVE,
     DATA_PF_LOSSES,
-    DATA_PF_CURRENT
+    DATA_PF_CURRENT,
+    DATA_PQ_THD
 };
 
 /**

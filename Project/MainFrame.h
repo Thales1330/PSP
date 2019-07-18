@@ -46,7 +46,8 @@ enum {
     ID_ADDMENU_CAPACITOR,
     ID_ADDMENU_INDUCTOR,
     ID_ADDMENU_INDMOTOR,
-    ID_ADDMENU_SYNCCOMP
+    ID_ADDMENU_SYNCCOMP,
+    ID_ADDMENU_HARMCURRENT
 };
 
 /**
@@ -78,6 +79,8 @@ class MainFrame : public MainFrameBase
     ~MainFrame();
 
    protected:
+    virtual void OnFreqResponseClick(wxRibbonButtonBarEvent& event);
+    virtual void OnHarmDistortionsClick(wxRibbonButtonBarEvent& event);
     virtual void OnGeneralSettingsClick(wxRibbonButtonBarEvent& event);
     virtual void OnSimulationSettingsClick(wxRibbonButtonBarEvent& event);
     virtual void OnRotClockClick(wxRibbonButtonBarEvent& event);

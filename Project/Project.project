@@ -11,6 +11,7 @@
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="model">
       <VirtualDirectory Name="simulation">
+        <File Name="PowerQuality.cpp"/>
         <File Name="ElectricCalculation.cpp"/>
         <File Name="PowerFlow.cpp"/>
         <File Name="Fault.cpp"/>
@@ -43,6 +44,7 @@
           <File Name="Text.cpp"/>
         </VirtualDirectory>
         <VirtualDirectory Name="power">
+          <File Name="HarmCurrent.cpp"/>
           <File Name="Branch.cpp"/>
           <File Name="Bus.cpp"/>
           <File Name="Capacitor.cpp"/>
@@ -69,6 +71,7 @@
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
+      <File Name="GraphAutoLayout.cpp"/>
       <VirtualDirectory Name="wxMathPlot">
         <File Name="wxMathPlot/mathplot.cpp"/>
       </VirtualDirectory>
@@ -80,6 +83,7 @@
     <VirtualDirectory Name="controller">
       <VirtualDirectory Name="forms">
         <VirtualDirectory Name="properties">
+          <File Name="FrequencyResponseForm.cpp"/>
           <File Name="ImportForm.cpp"/>
           <File Name="GeneralPropertiesForm.cpp"/>
           <File Name="SimulationsSettingsForm.cpp"/>
@@ -101,6 +105,7 @@
           <File Name="TextForm.cpp"/>
         </VirtualDirectory>
         <VirtualDirectory Name="power element">
+          <File Name="HarmCurrentForm.cpp"/>
           <File Name="BusForm.cpp"/>
           <File Name="GeneratorStabForm.cpp"/>
           <File Name="IndMotorForm.cpp"/>
@@ -131,6 +136,7 @@
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="model">
       <VirtualDirectory Name="simulation">
+        <File Name="PowerQuality.h"/>
         <File Name="ElectricCalculation.h"/>
         <File Name="PowerFlow.h"/>
         <File Name="Fault.h"/>
@@ -170,6 +176,7 @@
           <File Name="MathExpression.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="power">
+          <File Name="HarmCurrent.h"/>
           <File Name="Branch.h"/>
           <File Name="Bus.h"/>
           <File Name="Capacitor.h"/>
@@ -193,6 +200,7 @@
       <File Name="PropertiesData.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="view">
+      <File Name="GraphAutoLayout.h"/>
       <VirtualDirectory Name="wxMathPlot">
         <File Name="wxMathPlot/mathplot.h"/>
       </VirtualDirectory>
@@ -222,6 +230,7 @@
           <File Name="TextForm.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="power">
+          <File Name="HarmCurrentForm.h"/>
           <File Name="BusForm.h"/>
           <File Name="GeneratorStabForm.h"/>
           <File Name="IndMotorForm.h"/>
@@ -233,6 +242,7 @@
           <File Name="TransformerForm.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="properties">
+          <File Name="FrequencyResponseForm.h"/>
           <File Name="ImportForm.h"/>
           <File Name="GeneralPropertiesForm.h"/>
           <File Name="SimulationsSettingsForm.h"/>
@@ -513,7 +523,7 @@
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="UNICODE"/>
       </Compiler>
-      <Linker Options="$(shell wx-config --libs std,ribbon,aui,propgrid,richtext,stc,gl);-mwindows" Required="yes"/>
+      <Linker Options="$(shell wx-config --libs std,adv,ribbon,aui,propgrid,richtext,stc,gl);-mwindows" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/pspufu" IntermediateDirectory="./Release_Windows_x64" Command="./pspufu" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>

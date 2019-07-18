@@ -23,7 +23,9 @@
 #include <wx/geometry.h>
 #include <wx/msgdlg.h>
 #include <wx/textfile.h>
+#include <wx/tokenzr.h>
 #include <bitset>
+#include <complex>
 
 class Workspace;
 class Bus;
@@ -37,6 +39,8 @@ class IndMotor;
 class Transformer;
 class Line;
 class PropertiesData;
+
+class GraphAutoLayout;
 
 /**
  * @class ImportForm
@@ -57,6 +61,8 @@ class ImportForm : public ImportFormBase
     virtual void OnButtonCancelClick(wxCommandEvent& event);
     virtual void OnButtonOKClick(wxCommandEvent& event);
     bool ImportSelectedFiles();
+    bool ImportCEPELFiles();
+    bool ImportMatpowerFiles();
     Bus* GetBusFromID(std::vector<Bus*> busList, int id);
 
     Workspace* m_workspace = NULL;
@@ -202,6 +208,69 @@ class ParseAnarede
     std::vector<BusData*> m_busData;
     std::vector<BranchData*> m_branchData;
     std::vector<IndElementData*> m_indElementData;
+
+    wxString m_projectName = _("Imported project");
+    double m_mvaBase = 100.0;
+};
+
+class ParseMatpower
+{
+   public:
+    struct BusData {
+        int id = 0;      /**< Bus electrical ID */
+        int type = 0;    /**< Bus Type: 1 = PQ; 2 = PV; 3 = Ref.; 4 = isolated */
+        double pd = 0.0; /**< Real power demand (MW) */
+        double qd = 0.0; /**< Reactive power demand (MVAr) */
+        double gs = 0.0; /**< Shunt condutance (MW, V = 1.0 p.u.) */
+        double bs = 0.0; /**< Shunt susceptance (MVAr, V = 1.0 p.u.). Positive for capacitor, negative for inductor? */
+        int area = 0;    /**< Bus area */
+        double voltage = 1.0;     /**< Bus abs voltage (controlled value for PV and Ref. types) */
+        double angle = 0.0;       /**< Angle of voltage */
+        double baseVoltage = 138; /**< Base voltage (kV)*/
+        wxString busName = "Bus"; /**< Bus name */
+        wxPoint2DDouble busPosition = wxPoint2DDouble(0,0);  /**< Bus position */
+    };
+    struct GenData {
+        int busID = 0;                     /**< Bus electrical ID */
+        double pg = 0.0;                   /**< Real power output (MW) */
+        double qg = 0.0;                   /**< Reactive power output (MVAr) */
+        double maxReactivePower = 99999.0; /**< Maximum reactive power (MVAr) */
+        double minReactivePower = -9999.0; /**< Minimal reactive power (MVAr) */
+        double baseMVA = 100;              /**< Generator power base (MVA)*/
+        bool isOnline = true; /**< Machine status (> 0 = machine in-service; <= 0 = machine out-of-service) */
+    };
+    struct BranchData {
+        std::pair<int, int> busConnections = std::make_pair(0, 0); /**< Branch connection IDs */
+        double resistance = 0.0;                                   /**< Branch resistance */
+        double indReactance = 0.0;                                 /**< Branch inductive reactance */
+        double capSusceptance = 0.0;                               /**< Branch capacitive susceptance */
+        double tap = 0.0;        /**< Transformer tap. If equal zero the branch is a line element */
+        double phaseShift = 0.0; /**< Transformer phase shift. Positive represents delay */
+        bool isOnline = true;    /**< Element is online */
+    };
+
+    ParseMatpower(wxFileName mFile);
+    ~ParseMatpower() { ClearData(); }
+
+    void ClearData();
+
+    bool Parse();
+    
+    std::vector<BranchData*> GetBranchData() const { return m_branchData; }
+    std::vector<BusData*> GetBusData() const { return m_busData; }
+    std::vector<GenData*> GetGenData() const { return m_genData; }
+    double GetMVAPowerBase() const { return m_mvaBase; }
+    
+    BusData* GetBusDataFromID(int id);
+    Bus* GetBusFromID(int id, std::vector<Bus*> busList);
+
+   protected:
+    wxStringTokenizer GetMFileTokenData(wxTextFile& mFile, wxString currentLine);
+    wxFileName m_mFile;
+
+    std::vector<BusData*> m_busData;
+    std::vector<BranchData*> m_branchData;
+    std::vector<GenData*> m_genData;
 
     wxString m_projectName = _("Imported project");
     double m_mvaBase = 100.0;
