@@ -7,21 +7,23 @@
 #ifndef _PSP_PROJECT_DATAREPORT_BASE_CLASSES_H
 #define _PSP_PROJECT_DATAREPORT_BASE_CLASSES_H
 
-#include <wx/settings.h>
-#include <wx/xrc/xmlres.h>
-#include <wx/xrc/xh_bmp.h>
-#include <wx/frame.h>
-#include <wx/iconbndl.h>
 #include <wx/artprov.h>
-#include <wx/sizer.h>
+#include <wx/button.h>
+#include <wx/dialog.h>
+#include <wx/frame.h>
+#include <wx/grid.h>
+#include <wx/iconbndl.h>
+#include <wx/imaglist.h>
 #include <wx/notebook.h>
 #include <wx/panel.h>
-#include <wx/imaglist.h>
-#include <wx/grid.h>
+#include <wx/settings.h>
+#include <wx/sizer.h>
+#include <wx/xrc/xh_bmp.h>
+#include <wx/xrc/xmlres.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
-#include <wx/persist/toplevel.h>
 #include <wx/persist/bookctrl.h>
+#include <wx/persist/toplevel.h>
 #include <wx/persist/treebook.h>
 #endif
 
@@ -34,10 +36,9 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
-
 class DataReportBase : public wxFrame
 {
-protected:
+   protected:
     wxNotebook* m_notebookDataReport;
     wxPanel* m_panelPowerFlowData;
     wxNotebook* m_notebookPowerFlow;
@@ -58,7 +59,7 @@ protected:
     wxPanel* m_panelFaultGenerators;
     wxGrid* m_gridFaultGenerators;
 
-protected:
+   protected:
     virtual void OnPowerFlowGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnGridPFKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnPFBusGridChanged(wxGridEvent& event) { event.Skip(); }
@@ -74,7 +75,7 @@ protected:
     virtual void OnFaultGeneratorsGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnGridFaultGeneratorsKeyDown(wxKeyEvent& event) { event.Skip(); }
 
-public:
+   public:
     wxGrid* GetGridPowerFlow() { return m_gridPowerFlow; }
     wxPanel* GetPanelPowerFlow() { return m_panelPowerFlow; }
     wxGrid* GetGridPFBuses() { return m_gridPFBuses; }
@@ -94,8 +95,34 @@ public:
     wxNotebook* GetNotebookFault() { return m_notebookFault; }
     wxPanel* GetPanelFaultData() { return m_panelFaultData; }
     wxNotebook* GetNotebookDataReport() { return m_notebookDataReport; }
-    DataReportBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Data report"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_FRAME_STYLE);
+    DataReportBase(wxWindow* parent,
+                   wxWindowID id = wxID_ANY,
+                   const wxString& title = _("Data report"),
+                   const wxPoint& pos = wxDefaultPosition,
+                   const wxSize& size = wxSize(-1, -1),
+                   long style = wxDEFAULT_FRAME_STYLE);
     virtual ~DataReportBase();
+};
+
+class StabilityEventListBase : public wxDialog
+{
+   protected:
+    wxGrid* m_gridStabEventList;
+    wxButton* m_buttonOK;
+
+   protected:
+    virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+   public:
+    wxGrid* GetGridStabEventList() { return m_gridStabEventList; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    StabilityEventListBase(wxWindow* parent,
+                           wxWindowID id = wxID_ANY,
+                           const wxString& title = _("Stability event list"),
+                           const wxPoint& pos = wxDefaultPosition,
+                           const wxSize& size = wxSize(500, 300),
+                           long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~StabilityEventListBase();
 };
 
 #endif

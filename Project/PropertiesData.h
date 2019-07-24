@@ -22,7 +22,7 @@
 #include "PowerElement.h"
 #include "wx/language.h"
 
-enum PowerFlowMethod { GAUSS_SEIDEL = 0, NEWTON_RAPHSON };
+enum PowerFlowMethod { GAUSS_SEIDEL = 0, NEWTON_RAPHSON, GAUSS_NEWTON };
 enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
 
 struct SimulationData {
@@ -39,6 +39,7 @@ struct SimulationData {
     double powerFlowTolerance = 1e-7;
     int powerFlowMaxIterations = 5000;
     double initAngle = 0.0;
+    double gaussTolerance = 1e-2;
 
     // Stability
     double stabilityFrequency = 60.0;

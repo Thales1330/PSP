@@ -132,6 +132,7 @@ class MainFrameBase : public wxFrame
     virtual void OnResetVoltagesClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnPowerFlowClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnRunStabilityClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnStabilityDropdown(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnFaultClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSCPowerClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnHarmDistortionsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }

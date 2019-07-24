@@ -263,7 +263,7 @@ MainFrameBase::MainFrameBase(wxWindow* parent,
 
     m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_RUNSTAB, _("Run Stability"),
                                             wxXmlResource::Get()->LoadBitmap(wxT("playStopped32")),
-                                            _("Run the stability calculations"), wxRIBBON_BUTTON_NORMAL);
+                                            _("Run the stability calculations"), wxRIBBON_BUTTON_HYBRID);
 
     m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_FAULT, _("Fault"),
                                             wxXmlResource::Get()->LoadBitmap(wxT("fault32")),
@@ -387,6 +387,9 @@ MainFrameBase::MainFrameBase(wxWindow* parent,
     m_ribbonButtonBarSimulations->Connect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED,
                                           wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL,
                                           this);
+    m_ribbonButtonBarSimulations->Connect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_DROPDOWN_CLICKED,
+                                          wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilityDropdown), NULL,
+                                          this);
     m_ribbonButtonBarSimulations->Connect(ID_RIBBON_FAULT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED,
                                           wxRibbonButtonBarEventHandler(MainFrameBase::OnFaultClick), NULL, this);
     m_ribbonButtonBarSimulations->Connect(ID_RIBBON_SCPOWER, wxEVT_COMMAND_RIBBONBUTTON_CLICKED,
@@ -473,6 +476,9 @@ MainFrameBase::~MainFrameBase()
                                              this);
     m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_CLICKED,
                                              wxRibbonButtonBarEventHandler(MainFrameBase::OnRunStabilityClick), NULL,
+                                             this);
+    m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_RUNSTAB, wxEVT_COMMAND_RIBBONBUTTON_DROPDOWN_CLICKED,
+                                             wxRibbonButtonBarEventHandler(MainFrameBase::OnStabilityDropdown), NULL,
                                              this);
     m_ribbonButtonBarSimulations->Disconnect(ID_RIBBON_FAULT, wxEVT_COMMAND_RIBBONBUTTON_CLICKED,
                                              wxRibbonButtonBarEventHandler(MainFrameBase::OnFaultClick), NULL, this);

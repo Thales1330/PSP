@@ -34,6 +34,7 @@
 #include "SyncGenerator.h"
 #include "SyncMotor.h"
 #include "Transformer.h"
+#include "StabilityEventList.h"
 #include "Workspace.h"
 #include "artProvider/ArtMetro.h"
 
@@ -78,6 +79,11 @@ MainFrame::~MainFrame()
                                       NULL, this);
         delete m_addElementsMenu;
     }
+    if(m_stabilityMenu) {
+        m_stabilityMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnStabilityMenuClick),
+                                    NULL, this);
+        delete m_stabilityMenu;
+    }
     if(m_locale) delete m_locale;
     if(m_generalProperties) delete m_generalProperties;
 }
@@ -86,7 +92,7 @@ void MainFrame::Init()
 {
     this->SetSize(800, 600);
 
-    CreateAddElementsMenu();
+    CreateDropdownMenus();
 
     EnableCurrentProjectRibbon(false);
 
@@ -129,7 +135,7 @@ void MainFrame::EnableCurrentProjectRibbon(bool enable)
     m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FREQRESP, enable);
 }
 
-void MainFrame::CreateAddElementsMenu()
+void MainFrame::CreateDropdownMenus()
 {
     m_addElementsMenu = new wxMenu();
 
@@ -156,6 +162,8 @@ void MainFrame::CreateAddElementsMenu()
     wxMenuItem* harmCurrentElement =
         new wxMenuItem(m_addElementsMenu, ID_ADDMENU_HARMCURRENT, _("&Harmonic current\tShift-H"),
                        _("Adds a harmonic current source at the circuit"));
+    wxMenuItem* textElement =
+        new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TEXT, _("&Text\tA"), _("Adds a linked text element"));
 
     m_addElementsMenu->Append(busElement);
     m_addElementsMenu->Append(lineElement);
@@ -167,8 +175,17 @@ void MainFrame::CreateAddElementsMenu()
     m_addElementsMenu->Append(capacitorElement);
     m_addElementsMenu->Append(inductorElement);
     m_addElementsMenu->Append(harmCurrentElement);
+    m_addElementsMenu->Append(textElement);
 
     m_addElementsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnAddElementsClick, this);
+
+    m_stabilityMenu = new wxMenu();
+
+    wxMenuItem* stabilityList = new wxMenuItem(m_stabilityMenu, ID_STABMENU_LIST, _("&Stability event list"),
+                                               _("Show the stability event list"));
+    m_stabilityMenu->Append(stabilityList);
+
+    m_stabilityMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnStabilityMenuClick, this);
 }
 
 void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
@@ -564,4 +581,22 @@ void MainFrame::OnHarmDistortionsClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
     if(workspace) { workspace->RunHarmonicDistortion(); }
+}
+
+void MainFrame::OnStabilityDropdown(wxRibbonButtonBarEvent& event) { event.PopupMenu(m_stabilityMenu); }
+
+void MainFrame::OnStabilityMenuClick(wxCommandEvent& event)
+{
+    Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+
+    if(workspace) {
+        auto elementList = workspace->GetElementList();
+
+        switch(event.GetId()) {
+            case ID_STABMENU_LIST: {
+                StabilityEventList stabEventList(this, elementList);
+                stabEventList.ShowModal();
+            } break;
+        }
+    }
 }

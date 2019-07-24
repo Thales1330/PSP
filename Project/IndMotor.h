@@ -63,6 +63,9 @@ struct IndMotorElectricalData {
     double as = 0.0;  // Slip constant torque
     double bs = 0.0;  // Slip linear dependent torque
     double cs = 0.0;  // Slip quadratic dependent torque
+    double aCalc = 0.0;
+    double bCalc = 0.0;
+    double cCalc = 0.0;
 
     // Internal machine variables
     double tranEr = 0.0;

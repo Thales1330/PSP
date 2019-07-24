@@ -42,6 +42,7 @@ class SimulationsSettingsForm : public SimulationsSettingsFormBase
     virtual void OnButtonOKClick(wxCommandEvent& event);
     virtual bool ValidateData();
     virtual void UpdateZIPLoadFieldStatus();
+    virtual void UpdatePFFieldStatus();
 
     PropertiesData* m_properties;
 };

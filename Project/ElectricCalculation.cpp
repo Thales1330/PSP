@@ -674,7 +674,7 @@ std::vector<std::complex<double> > ElectricCalculation::GaussianElimination(
     std::vector<std::vector<std::complex<double> > > matrix,
     std::vector<std::complex<double> > array)
 {
-    //[Ref] http://pt.wikipedia.org/wiki/Elimina%C3%A7%C3%A3o_de_Gauss
+    //[Ref] https://en.wikipedia.org/wiki/Gaussian_elimination
 
     std::vector<std::complex<double> > solution;
 
@@ -700,6 +700,49 @@ std::vector<std::complex<double> > ElectricCalculation::GaussianElimination(
         }
         for(unsigned int i = k1; i < matrix.size(); i++) {
             if(triangMatrix[i][k] != std::complex<double>(0.0, 0.0)) {
+                for(unsigned int j = k1; j < matrix.size(); j++) { triangMatrix[i][j] -= triangMatrix[k][j]; }
+                solution[i] -= solution[k];
+            }
+        }
+    }
+    for(int i = static_cast<int>(matrix.size()) - 2; i >= 0; i--) {
+        for(int j = static_cast<int>(matrix.size()) - 1; j >= i + 1; j--) {
+            solution[i] -= triangMatrix[i][j] * solution[j];
+        }
+    }
+
+    return solution;
+}
+
+std::vector<double> ElectricCalculation::GaussianElimination(std::vector<std::vector<double> > matrix,
+                                                             std::vector<double> array)
+{
+    //[Ref] https://en.wikipedia.org/wiki/Gaussian_elimination
+
+    std::vector<double> solution;
+
+    std::vector<std::vector<double> > triangMatrix;
+    triangMatrix.resize(matrix.size());
+    for(unsigned int i = 0; i < matrix.size(); i++) { triangMatrix[i].resize(matrix.size()); }
+
+    for(unsigned int i = 0; i < matrix.size(); i++) { solution.push_back(array[i]); }
+
+    for(unsigned int i = 0; i < matrix.size(); i++) {
+        for(unsigned int j = 0; j < matrix.size(); j++) { triangMatrix[i][j] = matrix[i][j]; }
+    }
+
+    for(unsigned int k = 0; k < matrix.size(); k++) {
+        unsigned int k1 = k + 1;
+        for(unsigned int i = k; i < matrix.size(); i++) {
+            if(triangMatrix[i][k] != 0.0) {
+                for(unsigned int j = k1; j < matrix.size(); j++) {
+                    triangMatrix[i][j] = triangMatrix[i][j] / triangMatrix[i][k];
+                }
+                solution[i] = solution[i] / triangMatrix[i][k];
+            }
+        }
+        for(unsigned int i = k1; i < matrix.size(); i++) {
+            if(triangMatrix[i][k] != 0.0) {
                 for(unsigned int j = k1; j < matrix.size(); j++) { triangMatrix[i][j] -= triangMatrix[k][j]; }
                 solution[i] -= solution[k];
             }

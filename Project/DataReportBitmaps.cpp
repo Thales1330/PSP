@@ -719,6 +719,6 @@ void wxC6A63InitBitmapResources()
     XRC_ADD_FILE(wxT("XRC_resource/DataReportBitmaps.cpp$data_images_chart256.png"), xml_res_file_2, xml_res_size_2, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/DataReportBitmaps.cpp$data_images_chart32.png"), xml_res_file_3, xml_res_size_3, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/DataReportBitmaps.cpp$data_images_chart64.png"), xml_res_file_4, xml_res_size_4, wxT("image/png"));
-    XRC_ADD_FILE(wxT("XRC_resource/DataReportBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_DataReportBitmaps.xrc"), xml_res_file_5, xml_res_size_5, wxT("text/xml"));
-    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/DataReportBitmaps.cpp$C__Users_NDSE-69_Documents_GitHub_PSP_Project_DataReportBitmaps.xrc"));
+    XRC_ADD_FILE(wxT("XRC_resource/DataReportBitmaps.cpp$C__Users_thale_Documents_GitHub_PSP_Project_DataReportBitmaps.xrc"), xml_res_file_5, xml_res_size_5, wxT("text/xml"));
+    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/DataReportBitmaps.cpp$C__Users_thale_Documents_GitHub_PSP_Project_DataReportBitmaps.xrc"));
 }
