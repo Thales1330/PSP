@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "SimulationsSettingsForm.h"
 #include "PropertiesData.h"
+#include "SimulationsSettingsForm.h"
 
 SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesData* properties)
     : SimulationsSettingsFormBase(parent)
@@ -48,7 +48,9 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
         } break;
         case NEWTON_RAPHSON: {
             m_choicePFMethod->SetSelection(1);
-            m_textCtrlAccFactor->Enable(false);
+        } break;
+        case GAUSS_NEWTON: {
+            m_choicePFMethod->SetSelection(2);
         } break;
         default: {
             m_choicePFMethod->SetSelection(wxNOT_FOUND);
@@ -58,6 +60,7 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     m_textCtrlPFTolerance->SetValue(wxString::Format("%g", data.powerFlowTolerance));
     m_textCtrlPFMaxIterations->SetValue(wxString::Format("%d", data.powerFlowMaxIterations));
     m_textCtrlPFSlackBusAngle->SetValue(Element::StringFromDouble(data.initAngle));
+    m_textCtrlPFGaussTolerance->SetValue(wxString::Format("%g", data.gaussTolerance));
     m_textCtrlTimeStep->SetValue(wxString::Format("%g", data.timeStep));
     m_textCtrlSimTime->SetValue(Element::StringFromDouble(data.stabilitySimulationTime));
     m_textCtrlFreq->SetValue(Element::StringFromDouble(data.stabilityFrequency));
@@ -81,6 +84,7 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     m_textCtrlUVPow->SetValue(Element::StringFromDouble(data.underVoltageConstPower));
 
     UpdateZIPLoadFieldStatus();
+    UpdatePFFieldStatus();
 }
 
 SimulationsSettingsForm::~SimulationsSettingsForm() {}
@@ -116,6 +120,9 @@ bool SimulationsSettingsForm::ValidateData()
         case 1: {
             data.powerFlowMethod = NEWTON_RAPHSON;
         } break;
+        case 2: {
+            data.powerFlowMethod = GAUSS_NEWTON;
+        } break;
     }
     if(!Element::DoubleFromString(this, m_textCtrlAccFactor->GetValue(), data.accFator,
                                   _("Value entered incorrectly in the field \"Acceleration factor\".")))
@@ -127,7 +134,10 @@ bool SimulationsSettingsForm::ValidateData()
                                _("Value entered incorrectly in the field \"Max. iterations (Power flow)\".")))
         return false;
     if(!Element::DoubleFromString(this, m_textCtrlPFSlackBusAngle->GetValue(), data.initAngle,
-                               _("Value entered incorrectly in the field \"Slack bus angle\".")))
+                                  _("Value entered incorrectly in the field \"Slack bus angle\".")))
+        return false;
+    if(!Element::DoubleFromString(this, m_textCtrlPFGaussTolerance->GetValue(), data.gaussTolerance,
+                                  _("Value entered incorrectly in the field \"Gauss tolerance (Power flow)\".")))
         return false;
     if(!Element::DoubleFromString(this, m_textCtrlTimeStep->GetValue(), data.timeStep,
                                   _("Value entered incorrectly in the field \"Time step\".")))
@@ -208,13 +218,7 @@ bool SimulationsSettingsForm::ValidateData()
     return true;
 }
 
-void SimulationsSettingsForm::OnPFMethodChoiceSelected(wxCommandEvent& event)
-{
-    if(m_choicePFMethod->GetSelection() == 0)
-        m_textCtrlAccFactor->Enable();
-    else
-        m_textCtrlAccFactor->Enable(false);
-}
+void SimulationsSettingsForm::OnPFMethodChoiceSelected(wxCommandEvent& event) { UpdatePFFieldStatus(); }
 
 void SimulationsSettingsForm::UpdateZIPLoadFieldStatus()
 {
@@ -224,4 +228,16 @@ void SimulationsSettingsForm::UpdateZIPLoadFieldStatus()
     m_textCtrlReactivePowerImp->Enable(m_checkBoxUseCompLoads->GetValue());
     m_textCtrlReactivePowerCur->Enable(m_checkBoxUseCompLoads->GetValue());
     m_textCtrlReactivePowerPow->Enable(m_checkBoxUseCompLoads->GetValue());
+}
+
+void SimulationsSettingsForm::UpdatePFFieldStatus()
+{
+    if(m_choicePFMethod->GetSelection() == 0 || m_choicePFMethod->GetSelection() == 2)
+        m_textCtrlAccFactor->Enable();
+    else
+        m_textCtrlAccFactor->Enable(false);
+    if(m_choicePFMethod->GetSelection() == 2)
+        m_textCtrlPFGaussTolerance->Enable();
+    else
+        m_textCtrlPFGaussTolerance->Enable(false);
 }

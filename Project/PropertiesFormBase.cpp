@@ -260,6 +260,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent,
     wxArrayString m_choicePFMethodArr;
     m_choicePFMethodArr.Add(wxT("Gauss-Seidel"));
     m_choicePFMethodArr.Add(wxT("Newton-Raphson"));
+    m_choicePFMethodArr.Add(wxT("Hybrid Gauss-Newton"));
     m_choicePFMethod = new wxChoice(m_panelPF, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1, -1)),
                                     m_choicePFMethodArr, 0);
     m_choicePFMethod->SetSelection(0);
@@ -354,6 +355,26 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent,
                                          wxDLG_UNIT(m_panelPF, wxSize(-1, -1)), 0);
 
     boxSizerLvl5_17->Add(m_staticTextDeg_1, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizerLvl4_21 = new wxBoxSizer(wxVERTICAL);
+
+    gridSizerLvl_3_4->Add(boxSizerLvl4_21, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextPFGaussTolerance = new wxStaticText(m_panelPF, wxID_ANY, _("Gauss tolerance"), wxDefaultPosition,
+                                                    wxDLG_UNIT(m_panelPF, wxSize(-1, -1)), 0);
+
+    boxSizerLvl4_21->Add(m_staticTextPFGaussTolerance, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL,
+                         WXC_FROM_DIP(5));
+
+    m_textCtrlPFGaussTolerance =
+        new wxTextCtrl(m_panelPF, wxID_ANY, wxT("1e-2"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlPFGaussTolerance->SetHint(wxT(""));
+#endif
+
+    boxSizerLvl4_21->Add(m_textCtrlPFGaussTolerance, 0,
+                         wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlPFGaussTolerance->SetMinSize(wxSize(20, -1));
 
     m_panelStability =
         new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1, -1)), wxTAB_TRAVERSAL);

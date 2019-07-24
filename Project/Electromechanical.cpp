@@ -767,6 +767,10 @@ bool Electromechanical::InitializeDynamicElements()
         data.as = te * (data.aw + (data.bw * w0) / wi + (data.cw * w0 * w0) / (wi * wi));
         data.bs = te * ((data.bw * w0) / wi + (2.0 * data.cw * w0 * w0) / (wi * wi));
         data.cs = (te * data.cw * w0 * w0) / (wi * wi);
+        
+        data.aCalc = data.as;
+        data.bCalc = data.bs;
+        data.cCalc = data.cs;
 
         if(indMotor->IsOnline()) {
             std::complex<double> tranE =
@@ -1043,6 +1047,17 @@ void Electromechanical::CalculateIntegrationConstants(IndMotor* indMotor, double
     double w0 = 2.0 * M_PI * m_systemFreq;
 
     auto data = indMotor->GetElectricalData();
+    
+    // If the velocity is too low set mechanical torque to zero (a, b and c coeficients)
+    if(data.slip > 0.99999) {
+        data.as = 0.0;
+        data.bs = 0.0;
+        data.cs = 0.0;
+    } else {
+        data.as = data.aCalc;
+        data.bs = data.bCalc;
+        data.cs = data.cCalc;
+    }
 
     // Mechanical equations
     // s
@@ -1106,7 +1121,7 @@ bool Electromechanical::SolveMachines()
         IndMotor* indMotor = *it;
         auto data = indMotor->GetElectricalData();
 
-        if(indMotor->IsOnline()) {
+        //if(indMotor->IsOnline()) {
             double ir, im, te;
             te = data.te;
             ir = data.ir;
@@ -1128,9 +1143,9 @@ bool Electromechanical::SolveMachines()
             te = 2.0 * te - data.oldTe;
 
             CalculateIntVariables(indMotor, ir, im, te, k);
-        } else {
-            CalculateIntegrationConstants(indMotor, 0.0f, 0.0f);
-        }
+        //} else {
+            //CalculateIntegrationConstants(indMotor, 0.0f, 0.0f);
+        //}
     }
 
     double error = 1.0;
@@ -1500,7 +1515,7 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
 
     // Mechanical differential equations
     // Using Newton method to solve the non-linear slip equation: s = Cs + Ms * (C * s^2 - Te):
-    double slip = 0.0;  // Initial value. CAN BE THE PROBLEM ON MOTOR START!
+    double slip = data.slip;  // Initial value. CAN BE THE PROBLEM ON MOTOR START!
     double ds = (data.icSlip.c + data.icSlip.m * (data.cs * slip * slip - te) - slip) /
                 (1.0 - 2.0 * data.icSlip.m * data.cs * slip * slip);
     int iteration = 0;
@@ -1512,7 +1527,7 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
         if(iteration > m_maxIterations) break;
     }
 
-    if(!indMotor->IsOnline()) slip = 1.0 - 1e-7;
+    //if(!indMotor->IsOnline()) slip = 1.0 - 1e-7;
     error = std::max(error, std::abs(data.slip - slip));
     data.slip = slip;
 

@@ -18,21 +18,21 @@
 #ifndef ELECTRICCALCULATION_H
 #define ELECTRICCALCULATION_H
 
-#include <vector>
 #include <complex>
+#include <vector>
 
-#include "Element.h"
-#include "PowerElement.h"
 #include "Bus.h"
 #include "Capacitor.h"
+#include "Element.h"
+#include "HarmCurrent.h"
 #include "IndMotor.h"
 #include "Inductor.h"
 #include "Line.h"
 #include "Load.h"
+#include "PowerElement.h"
 #include "SyncGenerator.h"
 #include "SyncMotor.h"
 #include "Transformer.h"
-#include "HarmCurrent.h"
 
 #include "PropertiesData.h"
 
@@ -126,6 +126,7 @@ class ElectricCalculation
 
     std::vector<std::complex<double> > GaussianElimination(std::vector<std::vector<std::complex<double> > > matrix,
                                                            std::vector<std::complex<double> > array);
+    std::vector<double> GaussianElimination(std::vector<std::vector<double> > matrix, std::vector<double> array);
 
     Machines::SyncMachineModel GetMachineModel(SyncGenerator* generator);
 
@@ -140,6 +141,11 @@ class ElectricCalculation
                                                   std::vector<std::vector<std::complex<double> > > l,
                                                   std::vector<std::complex<double> > b);
 
+    /**
+     * @brief Get the power elements of the system (use GetElementsFromList first).
+     * @return A list of power elements.
+     */
+    const std::vector<PowerElement*> GetPowerElementList() const { return m_powerElementList; }
     /**
      * @brief Get the buses of the system (use GetElementsFromList first).
      * @return A list of bus elements.
@@ -185,11 +191,12 @@ class ElectricCalculation
      * @return A list of transformer elements.
      */
     const std::vector<Transformer*> GetTransformerList() const { return m_transformerList; }
-        /**
+    /**
      * @brief Get the harmonic current source of the system (use GetElementsFromList first).
      * @return A list of harmonic current sources elements.
      */
     const std::vector<HarmCurrent*> GetHarmCurrentList() const { return m_harmCurrentList; }
+
    protected:
     std::vector<PowerElement*> m_powerElementList;
     std::vector<Bus*> m_busList;

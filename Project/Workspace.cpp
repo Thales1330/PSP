@@ -1134,8 +1134,21 @@ bool Workspace::RunPowerFlow()
     else if(simProp.basePowerUnit == UNIT_kVA)
         basePower *= 1e3;
     PowerFlow pf(GetElementList());
-    bool result = pf.RunGaussSeidel(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
-                                    simProp.initAngle, simProp.accFator);
+    bool result = false;
+    switch(simProp.powerFlowMethod) {
+        case GAUSS_SEIDEL: {
+            result = pf.RunGaussSeidel(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+                                       simProp.initAngle, simProp.accFator);
+        } break;
+        case NEWTON_RAPHSON: {
+            result = pf.RunNewtonRaphson(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+                                         simProp.initAngle);
+        } break;
+        case GAUSS_NEWTON: {
+            result = pf.RunGaussNewton(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+                                       simProp.initAngle, simProp.accFator, simProp.gaussTolerance);
+        } break;
+    }
     if(!result) {
         wxMessageDialog msgDialog(this, pf.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
@@ -1547,9 +1560,9 @@ bool Workspace::RunFrequencyResponse()
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
         if(Bus* bus = dynamic_cast<Bus*>(*it)) { busList.push_back(bus); }
     }
-    
+
     auto data = m_properties->GetFreqRespData();
-    
+
     FrequencyResponseForm frForm(this, busList, data.injBusNumber, data.initFreq, data.finalFreq, data.stepFreq);
 
     if(frForm.ShowModal() == wxID_OK) {
@@ -1568,7 +1581,8 @@ bool Workspace::RunFrequencyResponse()
     else if(simProp.basePowerUnit == UNIT_kVA)
         basePower *= 1e3;
     PowerQuality pq(GetElementList());
-    bool result = pq.CalculateFrequencyResponse(simProp.stabilityFrequency, data.initFreq , data.finalFreq, data.stepFreq, data.injBusNumber, basePower);
+    bool result = pq.CalculateFrequencyResponse(simProp.stabilityFrequency, data.initFreq, data.finalFreq,
+                                                data.stepFreq, data.injBusNumber, basePower);
 
     wxMessageDialog msgDialog(
         this, wxString::Format(_("Calculations done.\nDo you wish to open the frequency response graphics?")),

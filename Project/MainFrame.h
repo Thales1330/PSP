@@ -36,6 +36,7 @@ class ChartView;
 class DataReport;
 class AboutForm;
 class ImportForm;
+class StabilityEventList;
 
 enum {
     ID_ADDMENU_BUS = 20000,
@@ -47,7 +48,10 @@ enum {
     ID_ADDMENU_INDUCTOR,
     ID_ADDMENU_INDMOTOR,
     ID_ADDMENU_SYNCCOMP,
-    ID_ADDMENU_HARMCURRENT
+    ID_ADDMENU_HARMCURRENT,
+    ID_ADDMENU_TEXT,
+    
+    ID_STABMENU_LIST
 };
 
 /**
@@ -79,6 +83,7 @@ class MainFrame : public MainFrameBase
     ~MainFrame();
 
    protected:
+    virtual void OnStabilityDropdown(wxRibbonButtonBarEvent& event);
     virtual void OnFreqResponseClick(wxRibbonButtonBarEvent& event);
     virtual void OnHarmDistortionsClick(wxRibbonButtonBarEvent& event);
     virtual void OnGeneralSettingsClick(wxRibbonButtonBarEvent& event);
@@ -122,15 +127,17 @@ class MainFrame : public MainFrameBase
 
     wxRibbonMetroArtProvider* m_artMetro = NULL;
     wxMenu* m_addElementsMenu = NULL;
+    wxMenu* m_stabilityMenu = NULL;
     wxLocale* m_locale = NULL;
     PropertiesData* m_generalProperties = NULL;
     wxGLContext* m_sharedGLContext = NULL;
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);
-    void CreateAddElementsMenu();
+    void CreateDropdownMenus();
 
     void OnAddElementsClick(wxCommandEvent& event);
+    void OnStabilityMenuClick(wxCommandEvent& event);
 };
 
 #endif  // MAINFRAME_H

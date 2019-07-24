@@ -225,8 +225,8 @@ bool IndMotor::OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Elemen
 
     // Stability
     auto stability = electricalProp->first_node("Stability");
-    m_electricalData.plotIndMachine = XMLParser::GetNodeValueInt(stability, "Inertia");
-    m_electricalData.inertia = XMLParser::GetNodeValueDouble(stability, "PlotIndMachine");
+    m_electricalData.plotIndMachine = XMLParser::GetNodeValueInt(stability, "PlotIndMachine");
+    m_electricalData.inertia = XMLParser::GetNodeValueDouble(stability, "Inertia");
     m_electricalData.r1 = XMLParser::GetNodeValueDouble(stability, "StatorResistence");
     m_electricalData.x1 = XMLParser::GetNodeValueDouble(stability, "StatorReactance");
     m_electricalData.r2 = XMLParser::GetNodeValueDouble(stability, "RotorResistence");
