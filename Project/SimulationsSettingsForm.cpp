@@ -60,6 +60,7 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     m_textCtrlPFTolerance->SetValue(wxString::Format("%g", data.powerFlowTolerance));
     m_textCtrlPFMaxIterations->SetValue(wxString::Format("%d", data.powerFlowMaxIterations));
     m_textCtrlPFSlackBusAngle->SetValue(Element::StringFromDouble(data.initAngle));
+    m_textCtrlPFNewtonInertia->SetValue(Element::StringFromDouble(data.newtonInertia));
     m_textCtrlPFGaussTolerance->SetValue(wxString::Format("%g", data.gaussTolerance));
     m_textCtrlTimeStep->SetValue(wxString::Format("%g", data.timeStep));
     m_textCtrlSimTime->SetValue(Element::StringFromDouble(data.stabilitySimulationTime));
@@ -135,6 +136,9 @@ bool SimulationsSettingsForm::ValidateData()
         return false;
     if(!Element::DoubleFromString(this, m_textCtrlPFSlackBusAngle->GetValue(), data.initAngle,
                                   _("Value entered incorrectly in the field \"Slack bus angle\".")))
+        return false;
+    if(!Element::DoubleFromString(this, m_textCtrlPFNewtonInertia->GetValue(), data.newtonInertia,
+                                  _("Value entered incorrectly in the field \"Newton inertia (Power flow)\".")))
         return false;
     if(!Element::DoubleFromString(this, m_textCtrlPFGaussTolerance->GetValue(), data.gaussTolerance,
                                   _("Value entered incorrectly in the field \"Gauss tolerance (Power flow)\".")))
@@ -240,4 +244,8 @@ void SimulationsSettingsForm::UpdatePFFieldStatus()
         m_textCtrlPFGaussTolerance->Enable();
     else
         m_textCtrlPFGaussTolerance->Enable(false);
+    if(m_choicePFMethod->GetSelection() == 1 || m_choicePFMethod->GetSelection() == 2)
+        m_textCtrlPFNewtonInertia->Enable();
+    else
+        m_textCtrlPFNewtonInertia->Enable(false);
 }

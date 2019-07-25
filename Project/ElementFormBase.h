@@ -771,6 +771,7 @@ class IndMotorFormBase : public wxDialog
     wxStaticText* m_staticTextReactivePower;
     wxTextCtrl* m_textCtrlReactivePower;
     wxChoice* m_choiceReactivePower;
+    wxCheckBox* m_checkBoxComputeQ;
     wxCheckBox* m_checkBoxUseMachinePower;
     wxPanel* m_panelStability;
     wxCheckBox* m_checkBoxPlotIndMachine;
@@ -806,6 +807,7 @@ class IndMotorFormBase : public wxDialog
     wxButton* m_ButtonCancel;
 
    protected:
+    virtual void OnCalcQInPFClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCheckboxUseCageFactorClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnStabilityButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnOKButtonClick(wxCommandEvent& event) { event.Skip(); }
@@ -823,6 +825,7 @@ class IndMotorFormBase : public wxDialog
     wxStaticText* GetStaticTextReactivePower() { return m_staticTextReactivePower; }
     wxTextCtrl* GetTextCtrlReactivePower() { return m_textCtrlReactivePower; }
     wxChoice* GetChoiceReactivePower() { return m_choiceReactivePower; }
+    wxCheckBox* GetCheckBoxComputeQ() { return m_checkBoxComputeQ; }
     wxCheckBox* GetCheckBoxUseMachinePower() { return m_checkBoxUseMachinePower; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxCheckBox* GetCheckBoxPlotIndMachine() { return m_checkBoxPlotIndMachine; }

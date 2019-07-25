@@ -356,6 +356,26 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent,
 
     boxSizerLvl5_17->Add(m_staticTextDeg_1, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
 
+    wxBoxSizer* boxSizerLvl4_22 = new wxBoxSizer(wxVERTICAL);
+
+    gridSizerLvl_3_4->Add(boxSizerLvl4_22, 0, wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextPFNewtonInertia = new wxStaticText(m_panelPF, wxID_ANY, _("Newton inertia"), wxDefaultPosition,
+                                                   wxDLG_UNIT(m_panelPF, wxSize(-1, -1)), 0);
+
+    boxSizerLvl4_22->Add(m_staticTextPFNewtonInertia, 0, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL,
+                         WXC_FROM_DIP(5));
+
+    m_textCtrlPFNewtonInertia =
+        new wxTextCtrl(m_panelPF, wxID_ANY, wxT("1,0"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlPFNewtonInertia->SetHint(wxT(""));
+#endif
+
+    boxSizerLvl4_22->Add(m_textCtrlPFNewtonInertia, 0, wxLEFT | wxRIGHT | wxBOTTOM | wxEXPAND | wxALIGN_CENTER_VERTICAL,
+                         WXC_FROM_DIP(5));
+    m_textCtrlPFNewtonInertia->SetMinSize(wxSize(20, -1));
+
     wxBoxSizer* boxSizerLvl4_21 = new wxBoxSizer(wxVERTICAL);
 
     gridSizerLvl_3_4->Add(boxSizerLvl4_21, 0, wxEXPAND, WXC_FROM_DIP(5));

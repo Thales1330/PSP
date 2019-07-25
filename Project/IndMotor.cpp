@@ -263,3 +263,64 @@ bool IndMotor::GetPlotData(ElementPlotData& plotData, PlotStudy study)
     plotData.AddData(m_electricalData.slipVector, _("Slip"));
     return true;
 }
+
+void IndMotor::InitPowerFlowMotor(double systemPowerBase, int busNumber)
+{
+    double k = 1.0;  // Power base change factor.
+    if(m_electricalData.useMachinePowerAsBase) {
+        double oldBase = GetValueFromUnit(m_electricalData.ratedPower, m_electricalData.ratedPowerUnit);
+        k = systemPowerBase / oldBase;
+    }
+    // Calculate the induction machine transient constants at the machine base
+    m_electricalData.r1t = m_electricalData.r1 * k;
+    m_electricalData.r2t = m_electricalData.r2 * k;
+    m_electricalData.x1t = m_electricalData.x1 * k;
+    m_electricalData.x2t = m_electricalData.x2 * k;
+    m_electricalData.xmt = m_electricalData.xm * k;
+
+    m_electricalData.xt = m_electricalData.x1t +
+                          (m_electricalData.x2t * m_electricalData.xmt) / (m_electricalData.x2t + m_electricalData.xmt);
+    m_electricalData.x0 = m_electricalData.x1t + m_electricalData.xmt;
+
+    double r1 = m_electricalData.r1t;
+    double r2 = m_electricalData.r2t;
+    if(m_electricalData.useKf) r2 *= (1.0 + m_electricalData.kf * m_electricalData.r2t);
+    double x1 = m_electricalData.x1t;
+    double x2 = m_electricalData.x2t;
+    double xm = m_electricalData.xmt;
+    m_electricalData.k1 = x2 + xm;
+    m_electricalData.k2 = -x1 * m_electricalData.k1 - x2 * xm;
+    m_electricalData.k3 = xm + x1;
+    m_electricalData.k4 = r1 * m_electricalData.k1;
+
+    auto puData = GetPUElectricalData(systemPowerBase);
+    m_electricalData.p0 = puData.activePower;
+    m_electricalData.busNum = busNumber;
+}
+
+bool IndMotor::CalculateReactivePower(double voltage)
+{
+    double a = m_electricalData.p0 *
+                   (m_electricalData.r1t * m_electricalData.r1t + m_electricalData.k3 * m_electricalData.k3) -
+               voltage * voltage * m_electricalData.r1t;
+    double b = 2.0 * m_electricalData.p0 *
+                   (m_electricalData.r1t * m_electricalData.k2 + m_electricalData.k3 * m_electricalData.k4) -
+               voltage * voltage * (m_electricalData.k2 + m_electricalData.k1 * m_electricalData.k3);
+    double c =
+        m_electricalData.p0 * (m_electricalData.k2 * m_electricalData.k2 + m_electricalData.k4 * m_electricalData.k4) -
+        voltage * voltage * m_electricalData.k1 * m_electricalData.k4;
+    double d = (b * b - 4.0 * a * c);
+    if(d < 0.0) return false;
+    double r2_s = (-b + std::sqrt(d)) / (2.0 * a);
+
+    double qa = m_electricalData.k1 * (r2_s * m_electricalData.r1t - m_electricalData.x1t * m_electricalData.k1 -
+                                       m_electricalData.x2t * m_electricalData.xmt);
+    double qb =
+        r2_s * (r2_s * (m_electricalData.xmt + m_electricalData.x1t) + m_electricalData.r1t * m_electricalData.k1);
+    double qc = r2_s * m_electricalData.r1t - m_electricalData.x1t * m_electricalData.k1 -
+                m_electricalData.x2t * m_electricalData.xmt;
+    double qd = r2_s * (m_electricalData.xmt + m_electricalData.x1t) + m_electricalData.r1t * m_electricalData.k1;
+    m_electricalData.qValue = (-voltage * voltage * (qa - qb)) / (qc * qc + qd * qd);
+
+    return true;
+}

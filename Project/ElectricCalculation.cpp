@@ -397,6 +397,33 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
         }
     }
 
+    // Ind motor
+    for(unsigned int i = 0; i < m_indMotorList.size(); i++) {
+        IndMotor* motor = m_indMotorList[i];
+        auto data = motor->GetElectricalData();
+        if(motor->IsOnline() && data.calcQInPowerFlow) {
+            double reactivePower = data.qValue * systemPowerBase;
+
+            switch(data.reactivePowerUnit) {
+                case UNIT_PU: {
+                    reactivePower /= systemPowerBase;
+                } break;
+                case UNIT_kVAr: {
+                    reactivePower /= 1e3;
+                } break;
+                case UNIT_MVAr: {
+                    reactivePower /= 1e6;
+                } break;
+                default:
+                    break;
+            }
+
+            data.reactivePower = reactivePower;
+
+            motor->SetElectricalData(data);
+        }
+    }
+
     // Synchronous machines
     for(int i = 0; i < (int)m_busList.size(); i++) {
         Bus* bus = m_busList[i];

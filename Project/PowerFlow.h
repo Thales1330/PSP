@@ -51,15 +51,18 @@ class PowerFlow : public ElectricCalculation
     virtual bool RunNewtonRaphson(double systemPowerBase = 100e6,
                                   int maxIteration = 5000,
                                   double error = 1e-6,
-                                  double initAngle = 0.0);
+                                  double initAngle = 0.0,
+                                  double inertia = 1.0);
     virtual bool RunGaussNewton(double systemPowerBase = 100e6,
                                 int maxIteration = 5000,
                                 double error = 1e-6,
                                 double initAngle = 0.0,
                                 double accFactor = 1.0,
-                                double gaussTol = 10);
+                                double gaussTol = 1e-2,
+                                double inertia = 1.0);
 
     virtual wxString GetErrorMessage() { return m_errorMsg; }
+    virtual int GetIterations() { return m_iterations; }
 
    protected:
     void GetNumPVPQ(std::vector<BusType> busType, int &numPQ, int &numPV);
@@ -82,11 +85,15 @@ class PowerFlow : public ElectricCalculation
                        std::vector<std::complex<double> > power,
                        int numPV,
                        int numPQ,
-                       std::vector<double> dPdQ);
+                       std::vector<double> dPdQ,
+                       double inertia);
+    bool CalculateMotorsReactivePower(std::vector<std::complex<double> > voltage,
+                                      std::vector<std::complex<double> > &power);
 
     std::vector<std::vector<std::complex<double> > > m_yBus;
     wxString m_errorMsg = "";
     int m_numberOfBuses = 0;
+    int m_iterations = 0;
 };
 
 #endif  // POWERFLOW_H

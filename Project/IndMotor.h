@@ -32,6 +32,17 @@ struct IndMotorElectricalData {
     ElectricalUnit reactivePowerUnit = UNIT_MVAr;
 
     bool useMachinePowerAsBase = true;
+    bool calcQInPowerFlow = true;
+    
+    // Power flow
+    double k1 = 0.0;
+    double k2 = 0.0;
+    double k3 = 0.0;
+    double k4 = 0.0;
+    double p0 = 0.0;
+    int busNum = 0;
+    
+    double qValue = 0.0;
 
     // Stability
     bool plotIndMachine = false;
@@ -119,6 +130,8 @@ class IndMotor : public Machines
     virtual IndMotorElectricalData GetElectricalData() { return m_electricalData; }
     virtual IndMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(IndMotorElectricalData electricalData) { m_electricalData = electricalData; }
+    virtual void InitPowerFlowMotor(double systemPowerBase, int busNumber);
+    virtual bool CalculateReactivePower(double voltage);
 
     virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
 

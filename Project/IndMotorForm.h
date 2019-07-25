@@ -36,10 +36,13 @@ class IndMotorForm : public IndMotorFormBase
     virtual bool ValidateData();
 
    protected:
+    virtual void OnCalcQInPFClick(wxCommandEvent& event);
     virtual void OnCheckboxUseCageFactorClick(wxCommandEvent& event);
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); };
     virtual void OnOKButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
+    
+    void UpdateFields();
 
     wxWindow* m_parent = NULL;
     IndMotor* m_indMotor = NULL;

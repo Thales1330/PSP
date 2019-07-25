@@ -155,8 +155,19 @@ bool PowerFlow::InitPowerFlow(std::vector<BusType>& busType,
             if(indMotor->IsOnline()) {
                 if(bus == indMotor->GetParentList()[0]) {
                     IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
-                    power[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
-                    loadPower[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
+                    double reactivePower = childData.reactivePower;
+
+                    if(childData.calcQInPowerFlow) {
+                        indMotor->InitPowerFlowMotor(systemPowerBase, data.number);
+                        if(!indMotor->CalculateReactivePower(std::abs(voltage[childData.busNum]))) {
+                            m_errorMsg = _("It was not possible to solve the induction motors.");
+                            return false;
+                        }
+                        reactivePower = indMotor->GetElectricalData().qValue;
+                    }
+
+                    power[busNumber] += std::complex<double>(-childData.activePower, -reactivePower);
+                    loadPower[busNumber] += std::complex<double>(-childData.activePower, -reactivePower);
                 }
             }
         }
@@ -221,6 +232,12 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
             return false;
         }
 
+        // Calculate induction motor reactive power
+        if(!CalculateMotorsReactivePower(voltage, power)) {
+            m_errorMsg = _("It was not possible to solve the induction motors.");
+            return false;
+        }
+
         // Update the old voltage array to current iteration values.
         for(int i = 0; i < m_numberOfBuses; i++) oldVoltage[i] = voltage[i];
 
@@ -232,6 +249,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
         iteration++;
     }
+    m_iterations = iteration;
 
     // Adjust the power array.
     for(int i = 0; i < m_numberOfBuses; i++) {
@@ -245,7 +263,11 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
     return true;
 }
 
-bool PowerFlow::RunNewtonRaphson(double systemPowerBase, int maxIteration, double error, double initAngle)
+bool PowerFlow::RunNewtonRaphson(double systemPowerBase,
+                                 int maxIteration,
+                                 double error,
+                                 double initAngle,
+                                 double inertia)
 {
     std::vector<BusType> busType;                  // Bus type
     std::vector<std::complex<double> > voltage;    // Voltage of buses
@@ -270,6 +292,12 @@ bool PowerFlow::RunNewtonRaphson(double systemPowerBase, int maxIteration, doubl
         // Reach the max number of iterations.
         if(iteration >= maxIteration) {
             m_errorMsg = _("The maximum number of iterations was reached.");
+            return false;
+        }
+
+        // Calculate induction motor reactive power
+        if(!CalculateMotorsReactivePower(voltage, power)) {
+            m_errorMsg = _("It was not possible to solve the induction motors.");
             return false;
         }
 
@@ -321,10 +349,11 @@ bool PowerFlow::RunNewtonRaphson(double systemPowerBase, int maxIteration, doubl
             }
         }
 
-        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ);
+        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);
 
         iteration++;
     }
+    m_iterations = iteration;
 
     // Adjust the power array.
     for(int i = 0; i < m_numberOfBuses; i++) {
@@ -343,7 +372,8 @@ bool PowerFlow::RunGaussNewton(double systemPowerBase,
                                double error,
                                double initAngle,
                                double accFactor,
-                               double gaussTol)
+                               double gaussTol,
+                               double inertia)
 {
     std::vector<BusType> busType;                  // Bus type
     std::vector<std::complex<double> > voltage;    // Voltage of buses
@@ -365,6 +395,12 @@ bool PowerFlow::RunGaussNewton(double systemPowerBase,
         // Reach the max number of iterations.
         if(iteration >= maxIteration) {
             m_errorMsg = _("The maximum number of iterations was reached.");
+            return false;
+        }
+
+        // Calculate induction motor reactive power
+        if(!CalculateMotorsReactivePower(voltage, power)) {
+            m_errorMsg = _("It was not possible to solve the induction motors.");
             return false;
         }
 
@@ -394,6 +430,12 @@ bool PowerFlow::RunGaussNewton(double systemPowerBase,
             return false;
         }
 
+        // Calculate induction motor reactive power
+        if(!CalculateMotorsReactivePower(voltage, power)) {
+            m_errorMsg = _("It was not possible to solve the induction motors.");
+            return false;
+        }
+
         // Calculate dPdQ array
 
         // Fill it with zeros
@@ -442,10 +484,11 @@ bool PowerFlow::RunGaussNewton(double systemPowerBase,
             }
         }
 
-        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ);
+        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);
 
         iteration++;
     }
+    m_iterations = iteration;
 
     // Adjust the power array.
     for(int i = 0; i < m_numberOfBuses; i++) {
@@ -537,10 +580,14 @@ void PowerFlow::NewtonRaphson(std::vector<BusType> busType,
                               std::vector<std::complex<double> > power,
                               int numPV,
                               int numPQ,
-                              std::vector<double> dPdQ)
+                              std::vector<double> dPdQ,
+                              double inertia)
 {
     // Jacobian matrix
     std::vector<std::vector<double> > jacobMatrix = CalculateJacobianMatrix(voltage, busType, numPV, numPQ);
+
+    // Apply inertia
+    for(unsigned int i = 0; i < dPdQ.size(); ++i) { dPdQ[i] = inertia * dPdQ[i]; }
 
     // Calculate DeltaTheta DeltaV array
     std::vector<double> dTdV = GaussianElimination(jacobMatrix, dPdQ);
@@ -556,7 +603,7 @@ void PowerFlow::NewtonRaphson(std::vector<BusType> busType,
                 voltage[i] = std::complex<double>(newV * std::cos(newT), newV * std::sin(newT));
                 indexDT++;
             } else {
-                double newV = std::abs(voltage[i]) + dTdV[indexDV];
+                double newV = std::abs(voltage[i]) * (1.0 + dTdV[indexDV]);
                 double newT = std::arg(voltage[i]) + dTdV[indexDT];
                 voltage[i] = std::complex<double>(newV * std::cos(newT), newV * std::sin(newT));
                 indexDV++;
@@ -577,10 +624,10 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
     for(int i = 0; i < (2 * numPQ + numPV); i++) jacobMatrix[i].resize(2 * numPQ + numPV);
 
     // Calculate the submatrices
-    //{ H
-    std::vector<std::vector<double> > sMatrixH;
-    sMatrixH.resize(numPQ + numPV);  // submatrix H size
-    for(int i = 0; i < (numPQ + numPV); i++) sMatrixH[i].resize(numPQ + numPV);
+    //{ J11
+    std::vector<std::vector<double> > j11;
+    j11.resize(numPQ + numPV);  // submatrix j11 size
+    for(int i = 0; i < (numPQ + numPV); i++) j11[i].resize(numPQ + numPV);
 
     int busNumI = 0;
     int busNumJ = 0;
@@ -593,16 +640,14 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
                         double ti = std::arg(voltage[i]);
                         double vj = std::abs(voltage[j]);
                         double tj = std::arg(voltage[j]);
-                        sMatrixH[busNumI][busNumJ] =
-                            vi * vj *
-                            (m_yBus[i][j].real() * std::sin(ti - tj) - m_yBus[i][j].imag() * std::cos(ti - tj));
-                    } else  // busNumI == busNumJ
-                    {
+                        double yij = std::abs(m_yBus[i][j]);
+                        double tij = std::arg(m_yBus[i][j]);
+                        j11[busNumI][busNumJ] = -vi * vj * yij * std::sin(tij + tj - ti);
+                    } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-                        sMatrixH[busNumI][busNumJ] =
-                            -sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
+                        j11[busNumI][busNumJ] = -sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
                     }
                     busNumJ++;
                 }
@@ -612,10 +657,10 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
         }
     }
     //}
-    //{ N
-    std::vector<std::vector<double> > sMatrixN;
-    sMatrixN.resize(numPQ + numPV);  // submatrix N size
-    for(int i = 0; i < (numPQ + numPV); i++) sMatrixN[i].resize(numPQ);
+    //{ J12
+    std::vector<std::vector<double> > j12;
+    j12.resize(numPQ + numPV);  // submatrix j12 size
+    for(int i = 0; i < (numPQ + numPV); i++) j12[i].resize(numPQ);
 
     busNumI = 0;
     busNumJ = 0;
@@ -629,16 +674,15 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
                         double ti = std::arg(voltage[i]);
                         double vj = std::abs(voltage[j]);
                         double tj = std::arg(voltage[j]);
-                        sMatrixN[busNumI][busNumJ] =
-                            vi * vj *
-                            (m_yBus[i][j].real() * std::cos(ti - tj) + m_yBus[i][j].imag() * std::sin(ti - tj));
-                    } else  // busNumI == busNumJ
-                    {
+                        double yij = std::abs(m_yBus[i][j]);
+                        double tij = std::arg(m_yBus[i][j]);
+
+                        j12[busNumI][busNumJ] = vj * vi * yij * std::cos(tij + tj - ti);
+                    } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-                        sMatrixN[busNumI][busNumJ] =
-                            sj.real() + m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
+                        j12[busNumI][busNumJ] = sj.real() + m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
                     }
                     busNumJ++;
                 }
@@ -648,10 +692,10 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
         }
     }
     //}
-    //{ J
-    std::vector<std::vector<double> > sMatrixJ;
-    sMatrixJ.resize(numPQ);  // submatrix J size
-    for(int i = 0; i < (numPQ); i++) sMatrixJ[i].resize(numPQ + numPV);
+    //{ J21
+    std::vector<std::vector<double> > j21;
+    j21.resize(numPQ);  // submatrix j21 size
+    for(int i = 0; i < (numPQ); i++) j21[i].resize(numPQ + numPV);
 
     busNumI = 0;
     busNumJ = 0;
@@ -665,16 +709,15 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
                         double ti = std::arg(voltage[i]);
                         double vj = std::abs(voltage[j]);
                         double tj = std::arg(voltage[j]);
-                        sMatrixJ[busNumI][busNumJ] =
-                            -vi * vj *
-                            (m_yBus[i][j].real() * std::cos(ti - tj) + m_yBus[i][j].imag() * std::sin(ti - tj));
-                    } else  // busNumI == busNumJ
-                    {
+                        double yij = std::abs(m_yBus[i][j]);
+                        double tij = std::arg(m_yBus[i][j]);
+
+                        j21[busNumI][busNumJ] = -vi * vj * yij * std::cos(tij + tj - ti);
+                    } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-                        sMatrixJ[busNumI][busNumJ] =
-                            sj.real() - m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
+                        j21[busNumI][busNumJ] = sj.real() - m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
                     }
                     busNumJ++;
                 }
@@ -684,34 +727,31 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
         }
     }
     //}
-    //{ L
-    std::vector<std::vector<double> > sMatrixL;
-    sMatrixL.resize(numPQ);  // submatrix L size
-    for(int i = 0; i < (numPQ); i++) sMatrixL[i].resize(numPQ);
+    //{ J22
+    std::vector<std::vector<double> > j22;
+    j22.resize(numPQ);  // submatrix j22 size
+    for(int i = 0; i < (numPQ); i++) j22[i].resize(numPQ);
 
     busNumI = 0;
     busNumJ = 0;
     for(int i = 0; i < m_numberOfBuses; i++) {
-        if(busType[i] == BUS_PQ)  // nćo deve ser referźncia e nćo deve ser PV, ou seja é PQ
-        {
+        if(busType[i] == BUS_PQ) {
             for(int j = 0; j < m_numberOfBuses; j++) {
-                if(busType[j] == BUS_PQ)  // nćo deve ser referźncia e nćo deve ser PV, ou seja é PQ
-                {
+                if(busType[j] == BUS_PQ) {
                     if(busNumI != busNumJ) {
                         double vi = std::abs(voltage[i]);
                         double ti = std::arg(voltage[i]);
                         double vj = std::abs(voltage[j]);
                         double tj = std::arg(voltage[j]);
-                        sMatrixL[busNumI][busNumJ] =
-                            vi * vj *
-                            (m_yBus[i][j].real() * std::sin(ti - tj) - m_yBus[i][j].imag() * std::cos(ti - tj));
-                    } else  // busNumI == busNumJ
-                    {
+                        double yij = std::abs(m_yBus[i][j]);
+                        double tij = std::arg(m_yBus[i][j]);
+
+                        j22[busNumI][busNumJ] = -vj * vi * yij * std::sin(tij + tj - ti);
+                    } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-                        sMatrixL[busNumI][busNumJ] =
-                            -sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
+                        j22[busNumI][busNumJ] = sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
                     }
                     busNumJ++;
                 }
@@ -727,15 +767,14 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
         for(int j = 0; j < (2 * numPQ + numPV); j++) {
             if(i < (numPQ + numPV)) {
                 if(j < (numPQ + numPV))
-                    jacobMatrix[i][j] = sMatrixH[i][j];
+                    jacobMatrix[i][j] = j11[i][j];
                 else  // j >= numPQ + numPV
-                    jacobMatrix[i][j] = sMatrixN[i][j - (numPQ + numPV)];
-            } else  // i >= numPQ + numPV
-            {
+                    jacobMatrix[i][j] = j12[i][j - (numPQ + numPV)];
+            } else {  // i >= numPQ + numPV
                 if(j < (numPQ + numPV))
-                    jacobMatrix[i][j] = sMatrixJ[i - (numPQ + numPV)][j];
+                    jacobMatrix[i][j] = j21[i - (numPQ + numPV)][j];
                 else  // j >= numPQ + numPV
-                    jacobMatrix[i][j] = sMatrixL[i - (numPQ + numPV)][j - (numPQ + numPV)];
+                    jacobMatrix[i][j] = j22[i - (numPQ + numPV)][j - (numPQ + numPV)];
             }
         }
     }
@@ -769,4 +808,20 @@ bool PowerFlow::CheckReactiveLimits(std::vector<BusType>& busType,
         }
     }
     return limitReach;
+}
+
+bool PowerFlow::CalculateMotorsReactivePower(std::vector<std::complex<double> > voltage,
+                                             std::vector<std::complex<double> >& power)
+{
+    for(unsigned int i = 0; i < m_indMotorList.size(); ++i) {
+        IndMotor* motor = m_indMotorList[i];
+        auto data = motor->GetElectricalData();
+        if(motor->IsOnline() && data.calcQInPowerFlow) {
+            double oldQ = data.qValue;
+            if(!motor->CalculateReactivePower(std::abs(voltage[data.busNum]))) return false;
+            double dQ = oldQ - motor->GetElectricalData().qValue;
+            power[data.busNum] += std::complex<double>(0.0, dQ);
+        }
+    }
+    return true;
 }

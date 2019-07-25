@@ -105,6 +105,8 @@ class SimulationsSettingsFormBase : public wxDialog
     wxStaticText* m_staticTextPFSlackBusAngle;
     wxTextCtrl* m_textCtrlPFSlackBusAngle;
     wxStaticText* m_staticTextDeg_1;
+    wxStaticText* m_staticTextPFNewtonInertia;
+    wxTextCtrl* m_textCtrlPFNewtonInertia;
     wxStaticText* m_staticTextPFGaussTolerance;
     wxTextCtrl* m_textCtrlPFGaussTolerance;
     wxPanel* m_panelStability;
@@ -182,6 +184,8 @@ class SimulationsSettingsFormBase : public wxDialog
     wxStaticText* GetStaticTextPFSlackBusAngle() { return m_staticTextPFSlackBusAngle; }
     wxTextCtrl* GetTextCtrlPFSlackBusAngle() { return m_textCtrlPFSlackBusAngle; }
     wxStaticText* GetStaticTextDeg_1() { return m_staticTextDeg_1; }
+    wxStaticText* GetStaticTextPFNewtonInertia() { return m_staticTextPFNewtonInertia; }
+    wxTextCtrl* GetTextCtrlPFNewtonInertia() { return m_textCtrlPFNewtonInertia; }
     wxStaticText* GetStaticTextPFGaussTolerance() { return m_staticTextPFGaussTolerance; }
     wxTextCtrl* GetTextCtrlPFGaussTolerance() { return m_textCtrlPFGaussTolerance; }
     wxPanel* GetPanelPF() { return m_panelPF; }

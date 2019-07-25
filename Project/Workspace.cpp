@@ -1135,6 +1135,7 @@ bool Workspace::RunPowerFlow()
         basePower *= 1e3;
     PowerFlow pf(GetElementList());
     bool result = false;
+    wxStopWatch sw;
     switch(simProp.powerFlowMethod) {
         case GAUSS_SEIDEL: {
             result = pf.RunGaussSeidel(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
@@ -1142,16 +1143,21 @@ bool Workspace::RunPowerFlow()
         } break;
         case NEWTON_RAPHSON: {
             result = pf.RunNewtonRaphson(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
-                                         simProp.initAngle);
+                                         simProp.initAngle, simProp.newtonInertia);
         } break;
         case GAUSS_NEWTON: {
-            result = pf.RunGaussNewton(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
-                                       simProp.initAngle, simProp.accFator, simProp.gaussTolerance);
+            result =
+                pf.RunGaussNewton(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+                                  simProp.initAngle, simProp.accFator, simProp.gaussTolerance, simProp.newtonInertia);
         } break;
     }
+    sw.Pause();
     if(!result) {
         wxMessageDialog msgDialog(this, pf.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
+    } else {
+        m_statusBar->SetStatusText(
+            wxString::Format(_("Power flow converge with %d iterations (%ld ms)"), pf.GetIterations(), sw.Time()));
     }
 
     UpdateTextElements();

@@ -3187,6 +3187,13 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
 
     boxSizerLvl5_2->Add(m_choiceReactivePower, 0, wxLEFT | wxRIGHT | wxBOTTOM, WXC_FROM_DIP(5));
 
+    m_checkBoxComputeQ =
+        new wxCheckBox(m_panelGeneral, wxID_ANY, _("Calculate reactive power in load flow (using stability data)"),
+                       wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1, -1)), 0);
+    m_checkBoxComputeQ->SetValue(false);
+
+    boxSizerLvl2_1->Add(m_checkBoxComputeQ, 0, wxALL | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
     m_checkBoxUseMachinePower = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Use machine rated power as base"),
                                                wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1, -1)), 0);
     m_checkBoxUseMachinePower->SetValue(false);
@@ -3510,6 +3517,8 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
     }
 #endif
     // Connect events
+    m_checkBoxComputeQ->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED,
+                                wxCommandEventHandler(IndMotorFormBase::OnCalcQInPFClick), NULL, this);
     m_checkBoxUseKf->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED,
                              wxCommandEventHandler(IndMotorFormBase::OnCheckboxUseCageFactorClick), NULL, this);
     m_buttonSwitchingButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
@@ -3522,6 +3531,8 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent,
 
 IndMotorFormBase::~IndMotorFormBase()
 {
+    m_checkBoxComputeQ->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED,
+                                   wxCommandEventHandler(IndMotorFormBase::OnCalcQInPFClick), NULL, this);
     m_checkBoxUseKf->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED,
                                 wxCommandEventHandler(IndMotorFormBase::OnCheckboxUseCageFactorClick), NULL, this);
     m_buttonSwitchingButton->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,

@@ -78,7 +78,8 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
         default:
             break;
     }
-
+    
+    m_checkBoxComputeQ->SetValue(data.calcQInPowerFlow);
     m_checkBoxUseMachinePower->SetValue(data.useMachinePowerAsBase);
 
     // Stability
@@ -99,6 +100,8 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
 
     m_parent = parent;
     m_indMotor = indMotor;
+    
+    UpdateFields();
 }
 
 IndMotorForm::~IndMotorForm() {}
@@ -172,7 +175,8 @@ bool IndMotorForm::ValidateData()
             data.reactivePowerUnit = UNIT_MVAr;
         } break;
     }
-
+    
+    data.calcQInPowerFlow = m_checkBoxComputeQ->GetValue();
     data.useMachinePowerAsBase = m_checkBoxUseMachinePower->GetValue();
 
     // Stability
@@ -223,7 +227,12 @@ bool IndMotorForm::ValidateData()
     m_indMotor->SetElectricalData(data);
     return true;
 }
-void IndMotorForm::OnCheckboxUseCageFactorClick(wxCommandEvent& event)
+void IndMotorForm::OnCheckboxUseCageFactorClick(wxCommandEvent& event) { UpdateFields(); }
+void IndMotorForm::OnCalcQInPFClick(wxCommandEvent& event) { UpdateFields(); }
+
+void IndMotorForm::UpdateFields()
 {
     m_textCtrlKf->Enable(m_checkBoxUseKf->GetValue());
+    m_textCtrlReactivePower->Enable(!m_checkBoxComputeQ->GetValue());
+    m_choiceReactivePower->Enable(!m_checkBoxComputeQ->GetValue());
 }

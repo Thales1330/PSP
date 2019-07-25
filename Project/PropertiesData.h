@@ -39,6 +39,7 @@ struct SimulationData {
     double powerFlowTolerance = 1e-7;
     int powerFlowMaxIterations = 5000;
     double initAngle = 0.0;
+    double newtonInertia = 1.0;
     double gaussTolerance = 1e-2;
 
     // Stability
