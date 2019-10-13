@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="Project" InternalType="GUI" Version="10.0.0">
+<CodeLite_Project Name="Project" InternalType="GUI" Version="11000">
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00090001N0005Debug0000000000000001N0016Debug_Ubuntu_x640000000000000001N0017Debug_Windows_x320000000000000001N0017Debug_Windows_x640000000000000001N0007Release0000000000000001N0018Release_Ubuntu_x640000000000000001N0019Release_Windows_x320000000000000001N0019Release_Windows_x640000000000000001N0014Release_x86_32000000000000]]>
