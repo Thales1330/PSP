@@ -46,6 +46,8 @@ All detailed descriptions of the source-code can be found at [**Online Documenta
 
 ![](img/ss_1_1.png)
 
+![](img/ss_1_2.png)
+
 ![](img/ss_2.png)
 
 ![](img/ss_3.png)
