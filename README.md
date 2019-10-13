@@ -2,6 +2,8 @@
 
 [PSP-UFU website](https://thales1330.github.io/PSP/)
 
+[![DOI](https://zenodo.org/badge/64333860.svg)](https://zenodo.org/badge/latestdoi/64333860)
+
 PSP-UFU (Power Systems Platform of Federal University of Uberlândia) is a **cross-platform**, **multilingual**, **Free and Open-Source Software** (FOSS) with **advanced GUI** (Graphical User Interface) features and **CAD** (Computer-Aided Design) tools for power system studies.
 
 The software allows for the construction of any electric **transmission network** and **control systems** through the deployment of visual elements.
