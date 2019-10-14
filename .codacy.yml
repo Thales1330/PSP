@@ -1,0 +1,11 @@
+---
+engines:
+ cppcheck:
+languages:
+  cpp:
+    extensions:
+      - '-cpp'
+      - '-h'
+exclude_paths:
+  - 'docs/**'
+  
