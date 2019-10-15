@@ -22,12 +22,12 @@ before_install:
   - sudo apt-key adv --fetch-keys http://repos.codelite.org/CodeLite.asc
   - sudo sudo apt-add-repository 'deb http://repos.codelite.org/wx3.1.1/ubuntu/ xenial universe'
   - sudo apt-get update
-  - sudo apt-get install libwxbase3.1-0-unofficial \
-                 libwxbase3.1-dev \
-                 libwxgtk3.1-0-unofficial \
-                 libwxgtk3.1-dev \
-                 wx3.1-headers \
-                 wx-common \
+  - sudo apt-get install libwxbase3.1-0-unofficial
+  - sudo apt-get install libwxbase3.1-dev
+  - sudo apt-get install libwxgtk3.1-0-unofficial
+  - sudo apt-get install libwxgtk3.1-dev
+  - sudo apt-get install  wx3.1-headers
+  - sudo apt-get install wx-common
 
 install: 
   # C++17
