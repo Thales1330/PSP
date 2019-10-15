@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.9.0)
 SET(PROJECT_NAME "PSP-UFU")
 project(${PROJECT_NAME})
 set(default_build_type "Release")
+add_subdirectory(Project
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,8 +18,8 @@ include(${wxWidgets_USE_FILE})
     
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
 file(GLOB PSP_SRC
-    "*.h"
-    "*.cpp"
+    "/Project/*.h"
+    "/Project/*.cpp"
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
