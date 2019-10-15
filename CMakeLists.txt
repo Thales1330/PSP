@@ -3,7 +3,7 @@ SET(PROJECT_NAME "PSP-UFU")
 project(${PROJECT_NAME})
 set(default_build_type "Release")
 
-aux_source_directory("Project/" SRC_LIST)
+aux_source_directory("Project/" PSP_SRC)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
