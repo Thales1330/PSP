@@ -19,7 +19,10 @@ else()
     include(${wxWidgets_USE_FILE})
 endif()
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
-file(GLOB helloworld_SRC
+file(GLOB PSP_SRC
     "*.h"
     "*.cpp"
 )
+
+add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
