@@ -13,13 +13,17 @@ if(NOT CMAKE_BUILD_TYPE)
       STRING "Choose the type of build." FORCE)
 endif()
 
-find_package(wxWidgets REQUIRED COMPONENTS net core base)
-include(${wxWidgets_USE_FILE})
-    
+if(MSVC AND NOT WXSOURCE)
+    include(${CMAKE_SOURCE_DIR}/winmsvc.cmake)
+else()
+    find_package(wxWidgets REQUIRED COMPONENTS net core base)
+    include(${wxWidgets_USE_FILE})
+endif()
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
-file(GLOB PSP_SRC
-    "/Project/*.h"
-    "/Project/*.cpp"
+
+file(GLOB PSP_SRC 
+    "Project/*.h" 
+    "Project/*.cpp"
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
