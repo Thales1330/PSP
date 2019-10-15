@@ -23,4 +23,3 @@ file(GLOB helloworld_SRC
     "*.h"
     "*.cpp"
 )
-target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
