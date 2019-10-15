@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.9.0)
 SET(PROJECT_NAME "PSP-UFU")
 project(${PROJECT_NAME})
 set(default_build_type "Release")
-add_subdirectory(Project
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
