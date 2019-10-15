@@ -12,10 +12,6 @@ if(NOT CMAKE_BUILD_TYPE)
       STRING "Choose the type of build." FORCE)
 endif()
 
-if(MSVC)
-    add_definitions(/MP)
-endif()
-
 if(MSVC AND NOT WXSOURCE)
     include(${CMAKE_SOURCE_DIR}/winmsvc.cmake)
 else()
@@ -27,14 +23,4 @@ file(GLOB helloworld_SRC
     "*.h"
     "*.cpp"
 )
-add_executable(${PROJECT_NAME} WIN32 ${helloworld_SRC})
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
-
-if(MSVC)
-add_custom_command(
-    TARGET ${PROJECT_NAME} 
-    POST_BUILD
-    COMMAND "mt.exe" -manifest \"${CMAKE_CURRENT_SOURCE_DIR}\\dpiawarescaleing.manifest\" -inputresource:\"$<TARGET_FILE:${PROJECT_NAME}>\"\;\#1 -outputresource:\"$<TARGET_FILE:${PROJECT_NAME}>\"\;\#1
-    COMMENT "Adding display aware manifest..." 
-)
-endif()
