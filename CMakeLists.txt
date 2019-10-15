@@ -3,6 +3,8 @@ SET(PROJECT_NAME "PSP-UFU")
 project(${PROJECT_NAME})
 set(default_build_type "Release")
 
+aux_source_directory("Project/" SRC_LIST)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -21,8 +23,8 @@ endif()
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
 
 file(GLOB PSP_SRC 
-    "Project/*.h" 
-    "Project/*.cpp"
+    "*.h" 
+    "*.cpp"
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
