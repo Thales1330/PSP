@@ -12,12 +12,9 @@ if(NOT CMAKE_BUILD_TYPE)
       STRING "Choose the type of build." FORCE)
 endif()
 
-if(MSVC AND NOT WXSOURCE)
-    include(${CMAKE_SOURCE_DIR}/winmsvc.cmake)
-else()
-    find_package(wxWidgets REQUIRED COMPONENTS net core base)
-    include(${wxWidgets_USE_FILE})
-endif()
+find_package(wxWidgets REQUIRED COMPONENTS net core base)
+include(${wxWidgets_USE_FILE})
+    
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
 file(GLOB PSP_SRC
     "*.h"
