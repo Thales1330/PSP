@@ -20,11 +20,14 @@ before_install:
  - sudo sudo apt-add-repository 'deb http://repos.codelite.org/wx3.1.1/ubuntu/ xenial universe'
  - sudo apt-get update
  - sudo apt-get install libwxbase3.1-dev
+ 
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update 
 
 install: 
   # C++17
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq g++-6   ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90   ; fi
+  - sudo apt-get install -qq g++-6   ; fi
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90   ; fi
   
 before_script:
   - mkdir build
