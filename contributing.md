@@ -24,10 +24,16 @@ Please, follow the guidelines with the following **exceptions**:
  - _Physical Files Organization_: Always use the MVC pattern described in published papers;
  - _Use wx prefix for all public symbols_: wx prefix are not needed;
  - _Restrictions on C++ Features_: The are no C++ feature restrictions in PSP-UFU.
+
+Use the comments to create your code documentation, using the [Doxygen style](http://www.doxygen.nl/).
+
+The [Project Documentation](https://thales1330.github.io/PSP/doxygen/html/index.html) is your best friend! Explore it!
  
 ## Pull requests
 After your contribution, please send a pull request with detailed description in order to make clear the modifications and new features.
 Aways test your code with the samples projects before pull requests.
+
+
 
 Good coding!
 
