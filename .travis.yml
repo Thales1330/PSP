@@ -19,22 +19,7 @@ before_install:
  - sudo apt-key adv --fetch-keys http://repos.codelite.org/CodeLite.asc
  - sudo sudo apt-add-repository 'deb http://repos.codelite.org/wx3.1.1/ubuntu/ xenial universe'
  - sudo apt-get update
- - sudo apt-get install libwxbase3.1-0-unofficial \
-                 libwxbase3.1-dev \
-                 libwxgtk3.1-0-unofficial \
-                 libwxgtk3.1-dev \
-                 wx3.1-headers \
-                 wx-common \
-                 libwxgtk-webview3.1-0-unofficial \
-                 libwxgtk-webview3.1-dev \
-                 libwxgtk-media3.1-0-unofficial \
-                 libwxgtk-media3.1-dev \
-                 libwxbase3.1-0-unofficial-dbg \
-                 libwxgtk3.1-0-unofficial-dbg \
-                 libwxgtk-webview3.1-0-unofficial-dbg \
-                 libwxgtk-media3.1-0-unofficial-dbg \
-                 wx3.1-i18n \
-                 wx3.1-examples
+ - sudo apt-get install libwxbase3.1-dev
 
 install: 
   # C++17
