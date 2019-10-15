@@ -1,8 +1,8 @@
 exclude_paths:
   - 'docs/**'
-  - 'Project/artProvider**'
-  - 'Project/data**'
-  - 'Project/fparser**'
-  - 'Project/rapidXML**'
-  - 'Project/wxMathPlot**'
+  - 'Project/artProvider/**'
+  - 'Project/data/**'
+  - 'Project/fparser/**'
+  - 'Project/rapidXML/**'
+  - 'Project/wxMathPlot/**'
   
