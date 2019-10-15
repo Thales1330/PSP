@@ -1,11 +1,8 @@
----
-engines:
- cppcheck:
-languages:
-  cpp:
-    extensions:
-      - '-cpp'
-      - '-h'
 exclude_paths:
   - 'docs/**'
+  - 'Project/artProvider**'
+  - 'Project/data**'
+  - 'Project/fparser**'
+  - 'Project/rapidXML**'
+  - 'Project/wxMathPlot**'
   
