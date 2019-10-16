@@ -49,5 +49,3 @@ script:
   - g++ --version
   - make
   - ls -la
-  - sudo PSP-UFU
-  - sudo pkill PSP-UFU
