@@ -13,7 +13,10 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 find_package(wxWidgets REQUIRED COMPONENTS net core base std adv ribbon aui propgrid richtext stc gl)
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
 include(${wxWidgets_USE_FILE})
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
     
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
 message(STATUS "wxWidgets_INCLUDE_DIRS    : ${wxWidgets_INCLUDE_DIRS}")
@@ -36,4 +39,4 @@ file(GLOB PSP_SRC
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
-target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
