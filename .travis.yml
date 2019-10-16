@@ -11,6 +11,14 @@ matrix:
 packages:
   - cmake-data
   - cmake
+    
+apt:
+  packages:
+     - xauth
+     - libgtk-3-0
+
+services:
+  - xvfb
   
 before_install:
 #sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -50,4 +58,4 @@ script:
   - g++ --version
   - make
   - ls -la
-  - sudo ./PSP-UFU
+  - xvfb-run --server-args="-screen 0, 1024x768x24" ./PSP-UFU
