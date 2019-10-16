@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Thales1330/PSP.svg?branch=master)](https://travis-ci.org/Thales1330/PSP)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d32eae214f2341c7b1dfc004274cd5d1)](https://www.codacy.com/manual/Thales1330/PSP?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Thales1330/PSP&amp;utm_campaign=Badge_Grade)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3287/badge)](https://bestpractices.coreinfrastructure.org/projects/3287)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
