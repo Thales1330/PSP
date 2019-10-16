@@ -49,3 +49,4 @@ script:
   - g++ --version
   - make
   - ls -la
+  ./PSP-UFU
