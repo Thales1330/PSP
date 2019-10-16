@@ -21,20 +21,17 @@ endif()
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
 
 file(GLOB PSP_SRC 
-    "Project/*.h" 
-    "Project/*.cpp"
+    "Project/*.h"
+    "Project/artProvider/*.h"
+    "Project/fparser/fparser.hh"
+    "Project/fparser/fpconfig.hh"
+    "Project/rapidXML/*.hpp"
+    "Project/wxMathPlot/*.h"
     "Project/*.cpp"
     "Project/artProvider/*.cpp"
-    "Project/artProvider/*.h"
-    "Project/fparser/*.cc"
-    "Project/fparser/*.hh"
-    "Project/fparser/mpfr/*.cc"
-    "Project/fparser/mpfr/*.hh"
-    "Project/fparser/extrasrc/*.inc"
-    "Project/fparser/extrasrc/*.hh"
-    "Project/rapidXML/*.hpp"
+    "Project/fparser/fparser.cc"
+    "Project/fparser/fpoptimizer.cc"
     "Project/wxMathPlot/*.cpp"
-    "Project/wxMathPlot/*.h"
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
