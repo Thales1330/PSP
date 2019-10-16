@@ -17,6 +17,8 @@ find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 include(${wxWidgets_USE_FILE})
 include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
+add_definitions(${OpenGL_DEFINITIONS})
+add_definitions(${GLUT_DEFINITIONS})
     
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
 message(STATUS "wxWidgets_INCLUDE_DIRS    : ${wxWidgets_INCLUDE_DIRS}")
