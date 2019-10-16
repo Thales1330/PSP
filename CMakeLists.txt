@@ -12,13 +12,14 @@ if(NOT CMAKE_BUILD_TYPE)
       STRING "Choose the type of build." FORCE)
 endif()
 
-if(MSVC AND NOT WXSOURCE)
-    include(${CMAKE_SOURCE_DIR}/winmsvc.cmake)
-else()
-    find_package(wxWidgets REQUIRED COMPONENTS net core base)
-    include(${wxWidgets_USE_FILE})
-endif()
+find_package(wxWidgets REQUIRED COMPONENTS net core base std adv ribbon aui propgrid richtext stc gl)
+include(${wxWidgets_USE_FILE})
+    
 message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
+message(STATUS "wxWidgets_INCLUDE_DIRS    : ${wxWidgets_INCLUDE_DIRS}")
+message(STATUS "wxWidgets_LIBRARY_DIRS    : ${wxWidgets_LIBRARY_DIRS}")
+message(STATUS "wxWidgets_LIBRARIES       : ${wxWidgets_LIBRARIES}")
+message(STATUS "wxWidgets_CXX_FLAGS       : ${wxWidgets_CXX_FLAGS}")
 
 file(GLOB PSP_SRC 
     "Project/*.h"
@@ -34,10 +35,5 @@ file(GLOB PSP_SRC
     "Project/wxMathPlot/*.cpp"
 )
 
-DBG_MSG("wxWidgets_INCLUDE_DIRS    : ${wxWidgets_INCLUDE_DIRS}")
-DBG_MSG("wxWidgets_LIBRARY_DIRS    : ${wxWidgets_LIBRARY_DIRS}")
-DBG_MSG("wxWidgets_LIBRARIES       : ${wxWidgets_LIBRARIES}")
-DBG_MSG("wxWidgets_CXX_FLAGS       : ${wxWidgets_CXX_FLAGS}")
-
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
-target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} wx-config --libs std,adv,ribbon,aui,propgrid,richtext,stc,gl)
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
