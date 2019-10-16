@@ -28,6 +28,11 @@ before_install:
   - sudo apt-get install libwxgtk3.1-dev
   - sudo apt-get install  wx3.1-headers
   - sudo apt-get install wx-common
+  
+#OpenGL
+  - sudo apt-get install freeglut3-dev
+  - sudo apt-get install libglew-dev
+  - sudo apt-get install mesa-utils
 
 install: 
   # C++17
