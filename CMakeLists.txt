@@ -34,5 +34,10 @@ file(GLOB PSP_SRC
     "Project/wxMathPlot/*.cpp"
 )
 
+DBG_MSG("wxWidgets_INCLUDE_DIRS    : ${wxWidgets_INCLUDE_DIRS}")
+DBG_MSG("wxWidgets_LIBRARY_DIRS    : ${wxWidgets_LIBRARY_DIRS}")
+DBG_MSG("wxWidgets_LIBRARIES       : ${wxWidgets_LIBRARIES}")
+DBG_MSG("wxWidgets_CXX_FLAGS       : ${wxWidgets_CXX_FLAGS}")
+
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
-target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} wx-config --libs std,adv,ribbon,aui,propgrid,richtext,stc,gl)
