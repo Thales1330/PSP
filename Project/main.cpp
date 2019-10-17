@@ -7,7 +7,7 @@
 #include <wx/textfile.h>
 
 #include <wx/cmdline.h>
-#include <wx/log.h> 
+#include <wx/msgout.h> 
 
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -131,13 +131,14 @@ class MainApp : public wxApp
         // Load command line attributes. This is used to directly open saved files (.psp).
         wxCmdLineParser cmdLineParser(wxApp::argc, wxApp::argv);
         //cmdLineParser.SetDesc(cmdLineDesc);
+        cmdLineParser.AddParam("", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
         cmdLineParser.AddSwitch("t", "test", "Run PSP-UFU tests");
         if(cmdLineParser.Parse() == 0) {
             wxCmdLineArgs args = cmdLineParser.GetArguments();
             for(auto it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {
                 if(it->GetKind() == wxCMD_LINE_PARAM) { openFilePath = it->GetStrVal();}
                 else if(it->GetShortName() == "t") {
-                    wxLogMessage("Test OK!");
+                    wxMessageOutput::Get()->Printf("Test OK!");
                     exit(0);
                 }
             }
