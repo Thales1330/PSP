@@ -81,6 +81,8 @@ class MainFrame : public MainFrameBase
      * @brief Default destructor.
      */
     ~MainFrame();
+    
+    int RunPSPTest();
 
    protected:
     virtual void OnStabilityDropdown(wxRibbonButtonBarEvent& event);

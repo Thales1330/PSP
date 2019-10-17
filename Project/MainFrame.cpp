@@ -31,10 +31,10 @@
 #include "MainFrame.h"
 #include "PropertiesData.h"
 #include "SimulationsSettingsForm.h"
+#include "StabilityEventList.h"
 #include "SyncGenerator.h"
 #include "SyncMotor.h"
 #include "Transformer.h"
-#include "StabilityEventList.h"
 #include "Workspace.h"
 #include "artProvider/ArtMetro.h"
 
@@ -599,4 +599,28 @@ void MainFrame::OnStabilityMenuClick(wxCommandEvent& event)
             } break;
         }
     }
+}
+
+int MainFrame::RunPSPTest()
+{
+    wxMessageOutput::Get()->Printf("Main frame setup OK!\n");
+
+    // Emulate new project creation
+    EnableCurrentProjectRibbon();
+
+    Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
+                                            this->GetStatusBar(), m_sharedGLContext);
+    if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
+    m_workspaceList.push_back(newWorkspace);
+
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
+    m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
+
+    m_auiNotebook->AddPage(newWorkspace, newWorkspace->GetName(), true);
+    newWorkspace->Redraw();
+
+    wxMessageOutput::Get()->Printf("Project creation OK!\n");
+    wxMessageOutput::Get()->Printf("Test done!\n");
+
+    return 0;
 }

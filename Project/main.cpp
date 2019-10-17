@@ -133,13 +133,14 @@ class MainApp : public wxApp
         //cmdLineParser.SetDesc(cmdLineDesc);
         cmdLineParser.AddParam("", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
         cmdLineParser.AddSwitch("t", "test", "Run PSP-UFU tests");
+        
+        bool test = false;
         if(cmdLineParser.Parse() == 0) {
             wxCmdLineArgs args = cmdLineParser.GetArguments();
             for(auto it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {
                 if(it->GetKind() == wxCMD_LINE_PARAM) { openFilePath = it->GetStrVal();}
                 else if(it->GetShortName() == "t") {
-                    wxMessageOutput::Get()->Printf("Test OK!");
-                    exit(0);
+                    test = true;
                 }
             }
         }
@@ -149,6 +150,10 @@ class MainApp : public wxApp
         mainFrame->SetIcon(wxICON(aaaaprogicon));
 #endif
         SetTopWindow(mainFrame);
+        if(test) {
+            GetTopWindow()->Show();
+            exit(mainFrame->RunPSPTest());
+        }
         return GetTopWindow()->Show();
     }
 
