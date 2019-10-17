@@ -6,8 +6,23 @@
 #include <wx/stdpaths.h>
 #include <wx/textfile.h>
 
+#include <wx/cmdline.h>
+#include <wx/log.h> 
+
+#ifndef WX_PRECOMP
+#include <wx/wx.h>
+#endif
+
 #include "MainFrame.h"
 #include "PropertiesData.h"
+
+/*static const wxCmdLineEntryDesc g_cmdLineDesc[] = {
+    {wxCMD_LINE_SWITCH, "h", "help", "displays help on the command line parameters", wxCMD_LINE_VAL_NONE,
+     wxCMD_LINE_OPTION_HELP},
+    {wxCMD_LINE_SWITCH, "t", "test", "test switch", wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_MANDATORY},
+    {wxCMD_LINE_SWITCH, "s", "silent", "disables the GUI"},
+
+    {wxCMD_LINE_NONE}};*/
 
 // Define the MainApp
 class MainApp : public wxApp
@@ -89,7 +104,7 @@ class MainApp : public wxApp
         wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
         wxString langPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\lang", wxPATH_WIN).GetPath();
         locale->AddCatalogLookupPathPrefix(langPath);
-        //pt_BR
+        // pt_BR
         if(propertiesData->GetGeneralPropertiesData().language == wxLANGUAGE_PORTUGUESE_BRAZILIAN) {
             if(!locale->AddCatalog(wxT("pt_BR"))) {
                 wxMessageDialog msgDialog(NULL, _("Fail to load brazilian portuguese language catalog."), _("Error"),
@@ -112,24 +127,65 @@ class MainApp : public wxApp
         LoadCatalogs(locale, propertiesData);
 
         wxString openFilePath = "";
-        
+
         // Load command line attributes. This is used to directly open saved files (.psp).
         wxCmdLineParser cmdLineParser(wxApp::argc, wxApp::argv);
-        cmdLineParser.AddParam("", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
+        //cmdLineParser.SetDesc(cmdLineDesc);
+        cmdLineParser.AddSwitch("t", "test", "Run PSP-UFU tests");
         if(cmdLineParser.Parse() == 0) {
             wxCmdLineArgs args = cmdLineParser.GetArguments();
             for(auto it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {
-                if(it->GetKind() == wxCMD_LINE_PARAM) { openFilePath = it->GetStrVal(); }
+                if(it->GetKind() == wxCMD_LINE_PARAM) { openFilePath = it->GetStrVal();}
+                else if(it->GetShortName() == "t") {
+                    printf("Test OK!");
+                    exit(0);
+                }
             }
         }
         MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData, openFilePath);
 #ifdef __WXMSW__
-        //Set application icon for windows
+        // Set application icon for windows
         mainFrame->SetIcon(wxICON(aaaaprogicon));
 #endif
         SetTopWindow(mainFrame);
         return GetTopWindow()->Show();
     }
+
+    virtual int OnExit()
+    {
+        // clean up
+        return 0;
+    }
+
+    /*virtual int OnRun()
+    {
+        int exitcode = wxApp::OnRun();
+        // wxTheClipboard->Flush();
+        if(exitcode != 0) return exitcode;
+    }
+
+    virtual void OnInitCmdLine(wxCmdLineParser& parser)
+    {
+        parser.SetDesc(g_cmdLineDesc);
+        // must refuse '/' as parameter starter or cannot use "/path" style paths
+        parser.SetSwitchChars(wxT("-"));
+    }
+
+    virtual bool OnCmdLineParsed(wxCmdLineParser& parser)
+    {
+        //silent_mode = parser.Found(wxT("s"));
+
+        // to get at your unnamed parameters use
+        wxArrayString files;
+        for(unsigned int i = 0; i < parser.GetParamCount(); i++) { files.Add(parser.GetParam(i));
+wxMessageBox(parser.GetParam(i)); }
+
+        // and other command line parameters
+
+        // then do what you need with them.
+
+        return true;
+    }*/
 };
 
 DECLARE_APP(MainApp)
