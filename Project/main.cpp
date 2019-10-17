@@ -137,7 +137,7 @@ class MainApp : public wxApp
             for(auto it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {
                 if(it->GetKind() == wxCMD_LINE_PARAM) { openFilePath = it->GetStrVal();}
                 else if(it->GetShortName() == "t") {
-                    printf("Test OK!");
+                    wxLogMessage("Test OK!");
                     exit(0);
                 }
             }
