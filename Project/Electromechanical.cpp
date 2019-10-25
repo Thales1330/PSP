@@ -142,9 +142,9 @@ void Electromechanical::SetEventTimeList()
         auto data = bus->GetElectricalData();
         if(data.stabHasFault) {
             m_eventTimeList.emplace_back(data.stabFaultTime);
-            m_eventOccurrenceList.emplace_back(false);
+            m_eventOccurrenceList.push_back(false);
             m_eventTimeList.emplace_back(data.stabFaultTime + data.stabFaultLength);
-            m_eventOccurrenceList.emplace_back(false);
+            m_eventOccurrenceList.push_back(false);
         }
     }
     // Switching
@@ -153,7 +153,7 @@ void Electromechanical::SetEventTimeList()
         SwitchingData swData = element->GetSwitchingData();
         for(unsigned int i = 0; i < swData.swTime.size(); ++i) {
             m_eventTimeList.emplace_back(swData.swTime[i]);
-            m_eventOccurrenceList.emplace_back(false);
+            m_eventOccurrenceList.push_back(false);
         }
     }
 }

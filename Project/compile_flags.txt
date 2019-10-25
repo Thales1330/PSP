@@ -5,7 +5,7 @@
 -IC:\TDM-GCC-64\include
 -IC:\TDM-GCC-64\lib\gcc\x86_64-w64-mingw32\5.1.0\include-fixed
 -IC:\TDM-GCC-64\x86_64-w64-mingw32\include
--IC:\Users\thale\Documents\GitHub\PSP\Project
+-IC:\Users\NDSE-69\Documents\GitHub\PSP\Project
 -IC:\wxWidgets-3.1.2\lib\gcc_dll\mswu
 -IC:\wxWidgets-3.1.2\include
 -D_UNICODE
