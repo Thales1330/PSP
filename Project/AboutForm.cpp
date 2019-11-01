@@ -21,8 +21,8 @@ AboutForm::AboutForm(wxWindow* parent) : AboutFormBase(parent) { Init(); }
 AboutForm::~AboutForm() {}
 void AboutForm::Init()
 {
-    // Set program version
-    m_staticTextVersion->SetLabel("Beta 2019w29a");
+    // Set program version. Format: (Alpha/Beta/Release) (YEAR)w(WEEK)(a/b/c/...)
+    m_staticTextVersion->SetLabel("Beta 2019w44a");
     
     // Create developers table
     m_gridCredits->EnableGridLines(false);
