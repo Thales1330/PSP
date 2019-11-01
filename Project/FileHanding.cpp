@@ -24,11 +24,11 @@ FileHanding::FileHanding() {}
 void FileHanding::SaveProject(wxFileName path)
 {
     // Erase the file (if exists or not) and write the initial data
-    std::ofstream writeProjectsFile(path.GetFullPath());
+    std::ofstream writeProjectsFile(path.GetFullPath().mb_str());
     writeProjectsFile.close();
 
     rapidxml::xml_document<> doc;
-    rapidxml::file<> xmlFile(path.GetFullPath().mb_str());
+    rapidxml::file<> xmlFile(path.GetFullPath());
     doc.parse<0>(xmlFile.data());
 
     rapidxml::xml_node<>* decl = doc.allocate_node(rapidxml::node_declaration);
@@ -257,7 +257,7 @@ void FileHanding::SaveProject(wxFileName path)
     }
     //}
 
-    std::ofstream writeXML(path.GetFullPath());
+    std::ofstream writeXML(path.GetFullPath().mb_str());
     writeXML << doc;
     writeXML.close();
 }
@@ -579,7 +579,7 @@ bool FileHanding::OpenProject(wxFileName path)
 void FileHanding::SaveControl(wxFileName path)
 {
     // Same process present in SaveProject():
-    std::ofstream writeProjectsFile(path.GetFullPath());
+    std::ofstream writeProjectsFile(path.GetFullPath().mb_str());
     writeProjectsFile.close();
 
     rapidxml::xml_document<> doc;
@@ -601,7 +601,7 @@ void FileHanding::SaveControl(wxFileName path)
 
     auto elementsNode = XMLParser::AppendNode(doc, rootNode, "ControlElements");
     SaveControlElements(doc, elementsNode);
-    std::ofstream writeXML(path.GetFullPath());
+    std::ofstream writeXML(path.GetFullPath().mb_str());
     writeXML << doc;
     writeXML.close();
 }
