@@ -24,7 +24,9 @@
 #include <GL/gl.h>
 #include <wx/dcmemory.h>
 #include <algorithm>
-
+#ifdef __LINUX__
+#include <GL/glx.h>
+#endif
 /**
  * @class OpenGLText
  * @author Thales Lima Oliveira <thales@ufu.br>
