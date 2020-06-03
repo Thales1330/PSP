@@ -110,6 +110,75 @@ void Inductor::Draw(wxPoint2DDouble translation, double scale) const
     }
 }
 
+void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+	OpenGLColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	if (m_inserted) {
+		if (m_selected) {
+			gc->SetPen(wxPen(wxColour(m_selectionColour.GetDcRGBA()), 2 + m_borderSize * 2.0));
+			gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+			// Push the current matrix on stack.
+			gc->PushState();
+			// Rotate the matrix around the object position.
+			gc->Translate(m_position.m_x, m_position.m_y);
+			gc->Rotate(wxDegToRad(m_angle));
+			gc->Translate(-m_position.m_x, -m_position.m_y);
+
+			DrawDCArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), 10, 45, 270, 30, gc);
+			DrawDCArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 25.0), 10, 45, 315, 30, gc);
+			DrawDCArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 40.0), 10, 90, 315, 30, gc);
+
+            DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), gc);
+
+			gc->PopState();
+
+			// Draw node selection.
+			gc->SetPen(*wxTRANSPARENT_PEN);
+			gc->SetBrush(wxBrush(wxColour(m_selectionColour.GetDcRGBA())));
+			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
+		}
+		// Draw Inductor (layer 2).
+		gc->SetPen(*wxTRANSPARENT_PEN);
+		gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+		DrawDCCircle(m_pointList[0], 5.0, 10, gc);
+
+		gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+		gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+		DrawDCSwitches(gc);
+
+		// Push the current matrix on stack.
+		gc->PushState();
+		// Rotate the matrix around the object position.
+		gc->Translate(m_position.m_x, m_position.m_y);
+		gc->Rotate(wxDegToRad(m_angle));
+		gc->Translate(-m_position.m_x, -m_position.m_y);
+
+		gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+		gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		DrawDCArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), 10, 45, 270, 10, gc);
+		DrawDCArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 25.0), 10, 45, 315, 10, gc);
+		DrawDCArc(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 40.0), 10, 90, 315, 10, gc);
+
+        DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 50.0), gc);
+
+		gc->PopState();
+	}
+}
+
 void Inductor::Rotate(bool clockwise)
 {
     double rotAngle = m_rotationAngle;
@@ -152,17 +221,17 @@ InductorElectricalData Inductor::GetPUElectricalData(double systemPowerBase)
 {
     InductorElectricalData data = m_electricalData;
     switch(data.reactivePowerUnit) {
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_VAr: {
             data.reactivePower = data.reactivePower / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kVAr: {
             data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_MVAr: {
             data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         default:
             break;
@@ -193,16 +262,16 @@ wxString Inductor::GetTipText() const
     tipText += "\n";
     tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
     switch(m_electricalData.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             tipText += _(" p.u.");
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_VAr: {
             tipText += _(" VAr");
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kVAr: {
             tipText += _(" kVAr");
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_MVAr: {
             tipText += _(" MVAr");
         } break;
         default:

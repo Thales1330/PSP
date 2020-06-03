@@ -19,6 +19,7 @@
 #ifdef USING_WX_3_0_X
 #include "DegreesAndRadians.h"
 #endif
+#include <wx/brush.h>
 
 PowerElement::PowerElement() : Element()
 {
@@ -107,6 +108,36 @@ void PowerElement::DrawSwitches() const
     }
 }
 
+void PowerElement::DrawDCSwitches(wxGraphicsContext* gc) const
+{
+	gc->SetPen(*wxTRANSPARENT_PEN);
+	
+	int i = 0;
+    for (auto parent : m_parentList) {
+		if (parent) {
+			if (m_online) {
+                gc->SetBrush(wxBrush(wxColour(m_closedSwitchColour.GetDcRGBA())));
+			}
+			else {
+                gc->SetBrush(wxBrush(wxColour(m_openedSwitchColour.GetDcRGBA())));
+			}
+
+            gc->PushState();
+			gc->Translate(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
+				m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0);
+            gc->Rotate(wxDegToRad(parent->GetAngle()));
+			gc->Translate(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
+				-m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0);
+
+            wxPoint2DDouble switchPos = m_switchRect[i].GetPosition();
+			gc->DrawRectangle(switchPos.m_x, switchPos.m_y, m_switchSize, m_switchSize);
+
+            gc->PopState();
+		}
+		i++;
+    }
+}
+
 void PowerElement::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 {
     double arrowRate = 100.0;  // One arrow to each "arrowRate" distance in pixels.
@@ -157,6 +188,15 @@ void PowerElement::DrawPowerFlowPts() const
         glColor4dv(m_powerFlowArrowColour.GetRGBA());
         for(int i = 0; i < (int)m_powerFlowArrow.size(); i++) { DrawTriangle(m_powerFlowArrow[i]); }
     }
+}
+
+void PowerElement::DrawDCPowerFlowPts(wxGraphicsContext* gc) const
+{
+    gc->SetPen(*wxTRANSPARENT_PEN);
+	if (m_online) {
+        gc->SetBrush(wxBrush(wxColour(m_powerFlowArrowColour.GetDcRGBA())));
+		for (auto arrow : m_powerFlowArrow) { DrawDCTriangle(arrow, gc); }
+	}
 }
 
 double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit)

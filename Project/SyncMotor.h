@@ -140,6 +140,7 @@ class SyncMotor : public Machines
 
     virtual Element* GetCopy();
     virtual void DrawSymbol() const;
+    virtual void DrawDCSymbol(wxGraphicsContext* gc) const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
     virtual SyncMotorElectricalData GetElectricalData() { return m_electricalData; }

@@ -37,7 +37,7 @@ SwitchingForm::SwitchingForm(wxWindow* parent, PowerElement* element) : Switchin
 
     SwitchingData data = element->GetSwitchingData();
     for(int i = 0; i < (int)data.swType.size(); i++) {
-        long index = m_listCtrlSwitchings->InsertItem(m_maxID, data.swType[i] == SW_INSERT ? _("Insert") : _("Remove"));
+        long index = m_listCtrlSwitchings->InsertItem(m_maxID, data.swType[i] == SwitchingType::SW_INSERT ? _("Insert") : _("Remove"));
         m_listCtrlSwitchings->SetItem(index, 1, wxString::FromDouble(data.swTime[i]));
         m_maxID++;
     }
@@ -67,9 +67,9 @@ void SwitchingForm::OnOKButtonClick(wxCommandEvent& event)
     SwitchingData data;
     for(int i = 0; i < (int)itemList.size(); i++) {
         if(m_listCtrlSwitchings->GetItemText(itemList[i], 0) == _("Insert"))
-            data.swType.push_back(SW_INSERT);
+            data.swType.push_back(SwitchingType::SW_INSERT);
         else
-            data.swType.push_back(SW_REMOVE);
+            data.swType.push_back(SwitchingType::SW_REMOVE);
 
         double swTime;
         m_listCtrlSwitchings->GetItemText(itemList[i], 1).ToDouble(&swTime);

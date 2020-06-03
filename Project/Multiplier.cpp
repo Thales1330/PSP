@@ -38,7 +38,7 @@ bool Multiplier::Solve(double* input, double timeStep)
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
-        if(node->GetNodeType() != Node::NODE_OUT) {
+        if(node->GetNodeType() != Node::NodeType::NODE_OUT) {
             if(!node->IsConnected()) {
                 inputVector.push_back(1.0);
             } else {

@@ -60,8 +60,8 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
 
     // Get fault parameters.
     int fNumber = -1;
-    FaultData fType = FAULT_THREEPHASE;
-    FaultData fLocation = FAULT_LINE_A;
+    FaultData fType = FaultData::FAULT_THREEPHASE;
+    FaultData fLocation = FaultData::FAULT_LINE_A;
     std::complex<double> fImpedance = std::complex<double>(0.0, 0.0);
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
@@ -90,27 +90,27 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
     std::complex<double> a2 = std::complex<double>(-0.5, -0.866025403784);
 
     switch(fType) {
-        case FAULT_THREEPHASE: {
+        case FaultData::FAULT_THREEPHASE: {
             fCurrentPos = preFaultVoltage / (m_zBusPos[fNumber][fNumber] + fImpedance);
         } break;
-        case FAULT_2LINE: {
+        case FaultData::FAULT_2LINE: {
             fCurrentPos = preFaultVoltage / (m_zBusPos[fNumber][fNumber] + m_zBusNeg[fNumber][fNumber] + fImpedance);
 
             switch(fLocation) {
-                case FAULT_LINE_A: {
+                case FaultData::FAULT_LINE_A: {
                     fCurrentNeg = -a2 * fCurrentPos;
                 } break;
-                case FAULT_LINE_B: {
+                case FaultData::FAULT_LINE_B: {
                     fCurrentNeg = -fCurrentPos;
                 } break;
-                case FAULT_LINE_C: {
+                case FaultData::FAULT_LINE_C: {
                     fCurrentNeg = -a * fCurrentPos;
                 } break;
                 default:
                     break;
             }
         } break;
-        case FAULT_2LINE_GROUND: {
+        case FaultData::FAULT_2LINE_GROUND: {
             std::complex<double> z1 = m_zBusPos[fNumber][fNumber];
             std::complex<double> z2 = m_zBusNeg[fNumber][fNumber];
             std::complex<double> z0 = m_zBusZero[fNumber][fNumber];
@@ -119,15 +119,15 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
             fCurrentPos = (preFaultVoltage * (z2 + z0 + zf_3)) / (z1 * z2 + z2 * z0 + z2 * zf_3 + z1 * z0 + z1 * zf_3);
 
             switch(fLocation) {
-                case FAULT_LINE_A: {
+                case FaultData::FAULT_LINE_A: {
                     fCurrentNeg = -a2 * ((preFaultVoltage - z1 * fCurrentPos) / z2);
                     fCurrentZero = -a * ((preFaultVoltage - z1 * fCurrentPos) / (z0 + zf_3));
                 } break;
-                case FAULT_LINE_B: {
+                case FaultData::FAULT_LINE_B: {
                     fCurrentNeg = -((preFaultVoltage - z1 * fCurrentPos) / z2);
                     fCurrentZero = -((preFaultVoltage - z1 * fCurrentPos) / (z0 + zf_3));
                 } break;
-                case FAULT_LINE_C: {
+                case FaultData::FAULT_LINE_C: {
                     fCurrentNeg = -a * ((preFaultVoltage - z1 * fCurrentPos) / z2);
                     fCurrentZero = -a2 * ((preFaultVoltage - z1 * fCurrentPos) / (z0 + zf_3));
                 } break;
@@ -135,20 +135,20 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
                     break;
             }
         } break;
-        case FAULT_LINE_GROUND: {
+        case FaultData::FAULT_LINE_GROUND: {
             fCurrentPos =
                 preFaultVoltage / (m_zBusPos[fNumber][fNumber] + m_zBusNeg[fNumber][fNumber] +
                                    m_zBusZero[fNumber][fNumber] + std::complex<double>(3.0, 0.0) * fImpedance);
             switch(fLocation) {
-                case FAULT_LINE_A: {
+                case FaultData::FAULT_LINE_A: {
                     fCurrentNeg = fCurrentPos;
                     fCurrentZero = fCurrentPos;
                 } break;
-                case FAULT_LINE_B: {
+                case FaultData::FAULT_LINE_B: {
                     fCurrentNeg = a * fCurrentPos;
                     fCurrentZero = a2 * fCurrentPos;
                 } break;
-                case FAULT_LINE_C: {
+                case FaultData::FAULT_LINE_C: {
                     fCurrentNeg = a2 * fCurrentPos;
                     fCurrentZero = a * fCurrentPos;
                 } break;

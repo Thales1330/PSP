@@ -22,9 +22,9 @@ Gain::Gain(int id) : ControlElement(id)
 {
     m_triPts.resize(3);
     SetValue(m_value);
-    Node* nodeIn = new Node(m_position + wxPoint2DDouble(-m_width / 2, 0), Node::NODE_IN, m_borderSize);
+    Node* nodeIn = new Node(m_position + wxPoint2DDouble(-m_width / 2, 0), Node::NodeType::NODE_IN, m_borderSize);
     nodeIn->StartMove(m_position);
-    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
+    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NodeType::NODE_OUT, m_borderSize);
     nodeOut->SetAngle(180.0);
     nodeOut->StartMove(m_position);
     m_nodeList.push_back(nodeIn);

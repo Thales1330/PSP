@@ -47,10 +47,10 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 
     wxString primVoltStr = Transformer::StringFromDouble(data.primaryNominalVoltage);
     switch(data.primaryNominalVoltageUnit) {
-        case UNIT_V: {
+        case ElectricalUnit::UNIT_V: {
             primVoltStr += " V";
         } break;
-        case UNIT_kV: {
+        case ElectricalUnit::UNIT_kV: {
             primVoltStr += " kV";
         } break;
         default:
@@ -58,10 +58,10 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
     }
     wxString secVoltStr = Transformer::StringFromDouble(data.secondaryNominalVoltage);
     switch(data.secondaryNominalVoltageUnit) {
-        case UNIT_V: {
+        case ElectricalUnit::UNIT_V: {
             secVoltStr += " V";
         } break;
-        case UNIT_kV: {
+        case ElectricalUnit::UNIT_kV: {
             secVoltStr += " kV";
         } break;
         default:
@@ -75,13 +75,13 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 
     m_textCtrlNominalPower->SetValue(Transformer::StringFromDouble(data.nominalPower));
     switch(data.nominalPowerUnit) {
-        case UNIT_VA: {
+        case ElectricalUnit::UNIT_VA: {
             m_choiceNominalPower->SetSelection(0);
         } break;
-        case UNIT_kVA: {
+        case ElectricalUnit::UNIT_kVA: {
             m_choiceNominalPower->SetSelection(1);
         } break;
-        case UNIT_MVA: {
+        case ElectricalUnit::UNIT_MVA: {
             m_choiceNominalPower->SetSelection(2);
         } break;
         default:
@@ -90,10 +90,10 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 
     m_textCtrlResistance->SetValue(Transformer::StringFromDouble(data.resistance));
     switch(data.resistanceUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceResistance->SetSelection(0);
         } break;
-        case UNIT_OHM: {
+        case ElectricalUnit::UNIT_OHM: {
             m_choiceResistance->SetSelection(1);
         } break;
         default:
@@ -102,10 +102,10 @@ TransformerForm::TransformerForm(wxWindow* parent, Transformer* transformer) : T
 
     m_textCtrlReactance->SetValue(Transformer::StringFromDouble(data.indReactance));
     switch(data.indReactanceUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceReactance->SetSelection(0);
         } break;
-        case UNIT_OHM: {
+        case ElectricalUnit::UNIT_OHM: {
             m_choiceReactance->SetSelection(1);
         } break;
         default:
@@ -155,13 +155,13 @@ bool TransformerForm::ValidateData()
         return false;
     switch(m_choiceNominalPower->GetSelection()) {
         case 0: {
-            data.nominalPowerUnit = UNIT_VA;
+            data.nominalPowerUnit = ElectricalUnit::UNIT_VA;
         } break;
         case 1: {
-            data.nominalPowerUnit = UNIT_kVA;
+            data.nominalPowerUnit = ElectricalUnit::UNIT_kVA;
         } break;
         case 2: {
-            data.nominalPowerUnit = UNIT_MVA;
+            data.nominalPowerUnit = ElectricalUnit::UNIT_MVA;
         } break;
     }
 
@@ -170,10 +170,10 @@ bool TransformerForm::ValidateData()
         return false;
     switch(m_choiceResistance->GetSelection()) {
         case 0: {
-            data.resistanceUnit = UNIT_PU;
+            data.resistanceUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.resistanceUnit = UNIT_OHM;
+            data.resistanceUnit = ElectricalUnit::UNIT_OHM;
         } break;
     }
 
@@ -182,10 +182,10 @@ bool TransformerForm::ValidateData()
         return false;
     switch(m_choiceReactance->GetSelection()) {
         case 0: {
-            data.indReactanceUnit = UNIT_PU;
+            data.indReactanceUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.indReactanceUnit = UNIT_OHM;
+            data.indReactanceUnit = ElectricalUnit::UNIT_OHM;
         } break;
     }
 

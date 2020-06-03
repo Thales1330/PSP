@@ -18,8 +18,10 @@
 #ifndef OPENGLTEXT_H
 #define OPENGLTEXT_H
 
+#include <windows.h>
 #include <GL/gl.h>
 #include <wx/dcmemory.h>
+#include <algorithm>
 
 /**
  * @class OpenGLText
@@ -36,6 +38,7 @@ class OpenGLText
     virtual ~OpenGLText();
 
     virtual void Draw(wxPoint2DDouble position, double angle = 0.0) const;
+    virtual void DrawDC(wxPoint2DDouble position, wxGraphicsContext* gc, double angle = 0.0) const;
     virtual OpenGLText* GetCopy();
 
     virtual void SetText(wxString text);
@@ -53,6 +56,7 @@ class OpenGLText
     int RoundToPowerOfTwo(int value, int min = 32);
     void TextToBitmap();
     void LoadTextTexture();
+
 
     wxString m_text = _("Text");
     int m_fontSize = 10;

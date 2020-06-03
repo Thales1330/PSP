@@ -261,7 +261,7 @@ MainFrameBase::MainFrameBase(wxWindow* parent,
                                             wxXmlResource::Get()->LoadBitmap(wxT("powerFLow32")),
                                             _("Calculate the circuit power flow"), wxRIBBON_BUTTON_NORMAL);
 
-    m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_RUNSTAB, _("Run Stability"),
+    m_ribbonButtonBarSimulations->AddButton(ID_RIBBON_RUNSTAB, _("Run stability"),
                                             wxXmlResource::Get()->LoadBitmap(wxT("playStopped32")),
                                             _("Run the stability calculations"), wxRIBBON_BUTTON_HYBRID);
 

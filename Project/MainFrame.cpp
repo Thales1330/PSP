@@ -37,6 +37,7 @@
 #include "Transformer.h"
 #include "Workspace.h"
 #include "artProvider/ArtMetro.h"
+#include "WorkspaceDC.h"
 
 MainFrame::MainFrame() : MainFrameBase(NULL) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties, wxString openPath)
@@ -50,7 +51,7 @@ MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initPro
     if(openPath != "") {
         EnableCurrentProjectRibbon();
         Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar(), m_sharedGLContext);
-        if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
+        if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
 
         FileHanding fileHandling(newWorkspace);
         if(fileHandling.OpenProject(openPath)) {
@@ -192,9 +193,19 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 {
     EnableCurrentProjectRibbon();
 
-    Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-                                            this->GetStatusBar(), m_sharedGLContext);
-    if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
+    Workspace* newWorkspace;
+    if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
+        newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
+            this->GetStatusBar(), m_sharedGLContext);
+        if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
+    }
+    else {
+		newWorkspace = new WorkspaceDC(this, wxString::Format(_("New project %d"), m_projectNumber),
+			this->GetStatusBar());
+    }
+    // Set general properties in new Workspace
+    newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+    
     m_workspaceList.push_back(newWorkspace);
 
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
@@ -308,9 +319,22 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
     wxFileName fileName(openFileDialog.GetPath());
 
     EnableCurrentProjectRibbon();
-    Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar(), m_sharedGLContext);
-    if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
 
+	Workspace* newWorkspace;
+	if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
+		newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
+			this->GetStatusBar(), m_sharedGLContext);
+		// If none shared OpenGL context is loaded, get from this workspace.
+		if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
+	}
+	else {
+		newWorkspace = new WorkspaceDC(this, wxString::Format(_("New project %d"), m_projectNumber),
+			this->GetStatusBar());
+	}
+
+	// Set general properties in new workspace.
+	newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+    
     FileHanding fileHandling(newWorkspace);
     if(fileHandling.OpenProject(fileName)) {
         newWorkspace->SetSavedPath(fileName);
@@ -507,7 +531,7 @@ void MainFrame::OnImportClick(wxRibbonButtonBarEvent& event)
         // Import file(s)
         EnableCurrentProjectRibbon();
 
-        if(!m_sharedGLContext) m_sharedGLContext = impWorkspace->GetOpenGLContext();
+        if(!m_sharedGLContext) m_sharedGLContext = impWorkspace->GetSharedGLContext();
         m_workspaceList.push_back(impWorkspace);
 
         m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);
@@ -532,14 +556,14 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
     auto it = m_workspaceList.begin();
     while(it != m_workspaceList.end()) {
         if(*it == m_auiNotebook->GetCurrentPage()) {
-            if((*it)->GetOpenGLContext() == m_sharedGLContext) m_sharedGLContext = NULL;
+            if((*it)->GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = NULL;
             m_workspaceList.erase(it);
             break;
         }
         it++;
     }
     if(!m_sharedGLContext && m_workspaceList.size() != 0) {
-        m_sharedGLContext = m_workspaceList[0]->GetOpenGLContext();
+        m_sharedGLContext = m_workspaceList[0]->GetSharedGLContext();
     }
     event.Skip();
 }
@@ -610,7 +634,7 @@ int MainFrame::RunPSPTest()
 
     Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
                                             this->GetStatusBar(), m_sharedGLContext);
-    if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetOpenGLContext();
+    if(!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
     m_workspaceList.push_back(newWorkspace);
 
     m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_DISABLESOL, true);

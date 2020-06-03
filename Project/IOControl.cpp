@@ -22,7 +22,7 @@ IOControl::IOControl(int ioFlags, int id) : ControlElement(id)
 {
     m_ioFlags = ioFlags;
 
-    Node* node = new Node(m_position, Node::NODE_IN, m_borderSize);
+    Node* node = new Node(m_position, Node::NodeType::NODE_IN, m_borderSize);
     m_nodeList.push_back(node);
 
     if(ioFlags & IN_TERMINAL_VOLTAGE)
@@ -157,47 +157,47 @@ wxString IOControl::GenerateText()
 
     switch(m_value) {
         case IN_TERMINAL_VOLTAGE: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return _("Vt");
         } break;
         case IN_VELOCITY: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return omega;
         } break;
         case IN_ACTIVE_POWER: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return _("P");
         } break;
         case IN_REACTIVE_POWER: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return _("Q");
         } break;
         case OUT_FIELD_VOLTAGE: {
-            m_ioNodeType = Node::NODE_IN;
+            m_ioNodeType = Node::NodeType::NODE_IN;
             return _("Vf");
         } break;
         case OUT_MEC_POWER: {
-            m_ioNodeType = Node::NODE_IN;
+            m_ioNodeType = Node::NodeType::NODE_IN;
             return _("Pm");
         } break;
         case IN_INITIAL_TERMINAL_VOLTAGE: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return _("Vt") + subZero;
         } break;
         case IN_INITIAL_MEC_POWER: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return _("Pm") + subZero;
         } break;
         case IN_INITIAL_VELOCITY: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return omega + subZero;
         } break;
         case IN_DELTA_VELOCITY: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return capDelta + omega;
         } break;
         case IN_DELTA_ACTIVE_POWER: {
-            m_ioNodeType = Node::NODE_OUT;
+            m_ioNodeType = Node::NodeType::NODE_OUT;
             return capDelta + _("P");
         } break;
     }
@@ -233,22 +233,22 @@ void IOControl::UpdatePoints()
         }
         node->SetNodeType(m_ioNodeType);
         if(m_angle == 0.0) {
-            if(m_ioNodeType == Node::NODE_IN)
+            if(m_ioNodeType == Node::NodeType::NODE_IN)
                 node->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
             else
                 node->SetPosition(m_position + wxPoint2DDouble(m_width / 2 - 2, 0));
         } else if(m_angle == 90.0) {
-            if(m_ioNodeType == Node::NODE_IN)
+            if(m_ioNodeType == Node::NodeType::NODE_IN)
                 node->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
             else
                 node->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2 - 2));
         } else if(m_angle == 180.0) {
-            if(m_ioNodeType == Node::NODE_IN)
+            if(m_ioNodeType == Node::NodeType::NODE_IN)
                 node->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
             else
                 node->SetPosition(m_position + wxPoint2DDouble(2 - m_width / 2, 0));
         } else if(m_angle == 270.0) {
-            if(m_ioNodeType == Node::NODE_IN)
+            if(m_ioNodeType == Node::NodeType::NODE_IN)
                 node->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
             else
                 node->SetPosition(m_position + wxPoint2DDouble(0, 2 - m_height / 2));

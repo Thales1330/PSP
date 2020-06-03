@@ -34,7 +34,7 @@ void GraphAutoLayout::AddLink(size_t index1, size_t index2, float weight)
         m_nodes.push_back(node);
     }
     // Add an edge
-    m_edges.push_back((GraphLayoutEdge){.node1 = m_nodes[index1], .node2 = m_nodes[index2], .weight = weight});
+    m_edges.push_back({.node1 = m_nodes[index1], .node2 = m_nodes[index2], .weight = weight});
 }
 
 void GraphAutoLayout::Compute(size_t iterations)

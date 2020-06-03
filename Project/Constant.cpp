@@ -22,7 +22,7 @@ Constant::Constant(int id) : ControlElement(id)
 {
     SetValue(m_value);
     m_angle = 180.0;
-    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
+    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NodeType::NODE_OUT, m_borderSize);
     nodeOut->SetAngle(180.0);
     nodeOut->StartMove(m_position);
     m_nodeList.push_back(nodeOut);

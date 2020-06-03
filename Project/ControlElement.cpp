@@ -108,7 +108,7 @@ void ControlElement::DrawNodes() const
     for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
         Node* node = *it;
         DrawCircle(node->GetPosition(), node->GetRadius(), 10, GL_POLYGON);
-        if(node->GetNodeType() == Node::NODE_IN) { DrawTriangle(node->GetInTrianglePts()); }
+        if(node->GetNodeType() == Node::NodeType::NODE_IN) { DrawTriangle(node->GetInTrianglePts()); }
     }
 }
 
@@ -167,7 +167,7 @@ void ControlElement::SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::x
         auto angle = XMLParser::AppendNode(doc, nodeN, "Angle");
         XMLParser::SetNodeValue(doc, angle, node->GetAngle());
         auto nodeType = XMLParser::AppendNode(doc, nodeN, "Type");
-        XMLParser::SetNodeValue(doc, nodeType, node->GetNodeType());
+        XMLParser::SetNodeValue(doc, nodeType, static_cast<int>(node->GetNodeType()));
         id++;
     }
 }

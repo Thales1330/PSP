@@ -98,6 +98,60 @@ void Machines::Draw(wxPoint2DDouble translation, double scale) const
     }
 }
 
+void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+	OpenGLColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	if (m_inserted) {
+		// Draw Selection (layer 1).
+		if (m_selected) {
+			gc->SetPen(wxPen(wxColour(m_selectionColour.GetDcRGBA()), 2 + m_borderSize * 2.0));
+			gc->SetBrush(*wxTRANSPARENT_BRUSH);
+			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+			gc->SetPen(*wxTRANSPARENT_PEN);
+			gc->SetBrush(wxBrush(wxColour(m_selectionColour.GetDcRGBA())));
+            DrawDCCircle(m_position, 25.0 + (m_borderSize + 1.5) / scale, 20, gc);
+
+            // Draw nodes selection.
+			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
+		}
+
+		// Draw Machines (layer 2).
+		// Draw node.
+		gc->SetPen(*wxTRANSPARENT_PEN);
+		gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+		DrawDCCircle(m_pointList[0], 5.0, 10, gc);
+
+		gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+		gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		DrawDCCircle(m_position, 25.0, 20.0, gc);
+
+		DrawDCSwitches(gc);
+		DrawDCPowerFlowPts(gc);
+
+		gc->SetPen(*wxTRANSPARENT_PEN);
+		gc->SetBrush(*wxWHITE_BRUSH);
+		DrawDCCircle(m_position, 25.0, 20.0, gc);
+
+		gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+		gc->SetBrush(*wxTRANSPARENT_BRUSH);
+        DrawDCCircle(m_position, 25.0, 20.0, gc);
+
+		// Draw machine symbol.
+		DrawDCSymbol(gc);
+	}
+}
+
 void Machines::UpdateSwitchesPosition()
 {
     if(m_parentList[0]) {
@@ -246,14 +300,14 @@ void Machines::UpdatePowerFlowArrowsPosition()
 {
     std::vector<wxPoint2DDouble> edges;
     switch(m_pfDirection) {
-        case PF_NONE: {
+        case PowerFlowDirection::PF_NONE: {
             m_powerFlowArrow.clear();
         } break;
-        case PF_TO_BUS: {
+        case PowerFlowDirection::PF_TO_BUS: {
             edges.push_back(m_pointList[2]);
             edges.push_back(m_pointList[1]);
         } break;
-        case PF_TO_ELEMENT: {
+        case PowerFlowDirection::PF_TO_ELEMENT: {
             edges.push_back(m_pointList[1]);
             edges.push_back(m_pointList[2]);
         } break;

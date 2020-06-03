@@ -148,7 +148,7 @@ void StabilityEventList::SetPowerElementSwitchingEvent(PowerElement* element, wx
 {
     SwitchingData swData = element->GetSwitchingData();
     for(unsigned int i = 0; i < swData.swTime.size(); ++i) {
-        if(swData.swType[i] == SW_INSERT) {
+        if(swData.swType[i] == SwitchingType::SW_INSERT) {
             AddEvent(swData.swTime[i], _("Switching"), _("Insertion of \"") + elementName + _("\""), m_blueColour);
         } else {
             AddEvent(swData.swTime[i], _("Switching"), _("Removal of \"") + elementName + _("\""), m_redColour);

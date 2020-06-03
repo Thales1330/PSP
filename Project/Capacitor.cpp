@@ -112,6 +112,80 @@ void Capacitor::Draw(wxPoint2DDouble translation, double scale) const
     }
 }
 
+void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+	OpenGLColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	if (m_inserted) {
+		std::vector<wxPoint2DDouble> capPts;
+		capPts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0));
+		capPts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2.0, m_position.m_y - m_height / 2.0));
+		capPts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0 + 10.0));
+		capPts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2.0, m_position.m_y - m_height / 2.0 + 10.0));
+
+		if (m_selected) {
+			gc->SetPen(wxPen(wxColour(m_selectionColour.GetDcRGBA()), 2 + m_borderSize * 2.0));
+			gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+			// Push the current matrix on stack.
+			gc->PushState();
+			// Rotate the matrix around the object position.
+			gc->Translate(m_position.m_x, m_position.m_y);
+			gc->Rotate(wxDegToRad(m_angle));
+			gc->Translate(-m_position.m_x, -m_position.m_y);
+
+            gc->DrawLines(2, &capPts[0]);
+            gc->DrawLines(2, &capPts[2]);
+
+			DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), gc);
+
+            gc->PopState();
+
+			// Draw node selection.
+			gc->SetPen(*wxTRANSPARENT_PEN);
+			gc->SetBrush(wxBrush(wxColour(m_selectionColour.GetDcRGBA())));
+			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
+		}
+		// Draw Capacitor (layer 2).
+		// Draw node.
+		gc->SetPen(*wxTRANSPARENT_PEN);
+		gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+        DrawDCCircle(m_pointList[0], 5.0, 10, gc);
+
+		gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+		gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+        DrawDCSwitches(gc);
+
+		// Push the current matrix on stack.
+		gc->PushState();
+		// Rotate the matrix around the object position.
+		gc->Translate(m_position.m_x, m_position.m_y);
+		gc->Rotate(wxDegToRad(m_angle));
+		gc->Translate(-m_position.m_x, -m_position.m_y);
+
+		gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+		gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		gc->DrawLines(2, &capPts[0]);
+		gc->DrawLines(2, &capPts[2]);
+
+		DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), gc);
+
+        gc->PopState();
+	}
+}
+
 void Capacitor::Rotate(bool clockwise)
 {
     double rotAngle = m_rotationAngle;

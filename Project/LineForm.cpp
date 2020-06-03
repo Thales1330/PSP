@@ -47,10 +47,10 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
 
     wxString nominalVoltageStr = Line::StringFromDouble(data.nominalVoltage);
     switch(data.nominalVoltageUnit) {
-        case UNIT_V: {
+        case ElectricalUnit::UNIT_V: {
             nominalVoltageStr += " V";
         } break;
-        case UNIT_kV: {
+        case ElectricalUnit::UNIT_kV: {
             nominalVoltageStr += " kV";
         } break;
         default:
@@ -60,13 +60,13 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
 
     m_textCtrlNominalPower->SetValue(Line::StringFromDouble(data.nominalPower));
     switch(data.nominalPowerUnit) {
-        case UNIT_VA: {
+        case ElectricalUnit::UNIT_VA: {
             m_choiceNominalPower->SetSelection(0);
         } break;
-        case UNIT_kVA: {
+        case ElectricalUnit::UNIT_kVA: {
             m_choiceNominalPower->SetSelection(1);
         } break;
-        case UNIT_MVA: {
+        case ElectricalUnit::UNIT_MVA: {
             m_choiceNominalPower->SetSelection(2);
         } break;
         default:
@@ -75,13 +75,13 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
 
     m_textCtrlResistance->SetValue(Line::StringFromDouble(data.resistance));
     switch(data.resistanceUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceResistance->SetSelection(0);
         } break;
-        case UNIT_OHM: {
+        case ElectricalUnit::UNIT_OHM: {
             m_choiceResistance->SetSelection(1);
         } break;
-        case UNIT_OHM_km: {
+        case ElectricalUnit::UNIT_OHM_km: {
             m_choiceResistance->SetSelection(2);
         } break;
         default:
@@ -90,13 +90,13 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
 
     m_textCtrlReactance->SetValue(Line::StringFromDouble(data.indReactance));
     switch(data.indReactanceUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceReactance->SetSelection(0);
         } break;
-        case UNIT_OHM: {
+        case ElectricalUnit::UNIT_OHM: {
             m_choiceReactance->SetSelection(1);
         } break;
-        case UNIT_OHM_km: {
+        case ElectricalUnit::UNIT_OHM_km: {
             m_choiceReactance->SetSelection(2);
         } break;
         default:
@@ -105,13 +105,13 @@ LineForm::LineForm(wxWindow* parent, Line* line) : LineFormBase(parent)
 
     m_textCtrlSusceptance->SetValue(Line::StringFromDouble(data.capSusceptance));
     switch(data.capSusceptanceUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceSusceptance->SetSelection(0);
         } break;
-        case UNIT_S: {
+        case ElectricalUnit::UNIT_S: {
             m_choiceSusceptance->SetSelection(1);
         } break;
-        case UNIT_S_km: {
+        case ElectricalUnit::UNIT_S_km: {
             m_choiceSusceptance->SetSelection(2);
         } break;
         default:
@@ -161,13 +161,13 @@ bool LineForm::ValidateData()
         return false;
     switch(m_choiceNominalPower->GetSelection()) {
         case 0: {
-            data.nominalPowerUnit = UNIT_VA;
+            data.nominalPowerUnit = ElectricalUnit::UNIT_VA;
         } break;
         case 1: {
-            data.nominalPowerUnit = UNIT_kVA;
+            data.nominalPowerUnit = ElectricalUnit::UNIT_kVA;
         } break;
         case 2: {
-            data.nominalPowerUnit = UNIT_MVA;
+            data.nominalPowerUnit = ElectricalUnit::UNIT_MVA;
         } break;
     }
 
@@ -176,13 +176,13 @@ bool LineForm::ValidateData()
         return false;
     switch(m_choiceResistance->GetSelection()) {
         case 0: {
-            data.resistanceUnit = UNIT_PU;
+            data.resistanceUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.resistanceUnit = UNIT_OHM;
+            data.resistanceUnit = ElectricalUnit::UNIT_OHM;
         } break;
         case 2: {
-            data.resistanceUnit = UNIT_OHM_km;
+            data.resistanceUnit = ElectricalUnit::UNIT_OHM_km;
         } break;
     }
 
@@ -191,13 +191,13 @@ bool LineForm::ValidateData()
         return false;
     switch(m_choiceReactance->GetSelection()) {
         case 0: {
-            data.indReactanceUnit = UNIT_PU;
+            data.indReactanceUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.indReactanceUnit = UNIT_OHM;
+            data.indReactanceUnit = ElectricalUnit::UNIT_OHM;
         } break;
         case 2: {
-            data.indReactanceUnit = UNIT_OHM_km;
+            data.indReactanceUnit = ElectricalUnit::UNIT_OHM_km;
         } break;
     }
 
@@ -206,13 +206,13 @@ bool LineForm::ValidateData()
         return false;
     switch(m_choiceSusceptance->GetSelection()) {
         case 0: {
-            data.capSusceptanceUnit = UNIT_PU;
+            data.capSusceptanceUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.capSusceptanceUnit = UNIT_S;
+            data.capSusceptanceUnit = ElectricalUnit::UNIT_S;
         } break;
         case 2: {
-            data.capSusceptanceUnit = UNIT_S_km;
+            data.capSusceptanceUnit = ElectricalUnit::UNIT_S_km;
         } break;
     }
 

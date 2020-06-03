@@ -30,13 +30,13 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
 
     m_textCtrlnominalPower->SetValue(IndMotor::StringFromDouble(data.ratedPower));
     switch(data.activePowerUnit) {
-        case UNIT_VA: {
+        case ElectricalUnit::UNIT_VA: {
             m_choiceNominalPower->SetSelection(0);
         } break;
-        case UNIT_kVA: {
+        case ElectricalUnit::UNIT_kVA: {
             m_choiceNominalPower->SetSelection(1);
         } break;
-        case UNIT_MVA: {
+        case ElectricalUnit::UNIT_MVA: {
             m_choiceNominalPower->SetSelection(2);
         } break;
         default:
@@ -45,16 +45,16 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
 
     m_textCtrlActivePower->SetValue(IndMotor::StringFromDouble(data.activePower));
     switch(data.activePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceActivePower->SetSelection(0);
         } break;
         case UNIT_W: {
             m_choiceActivePower->SetSelection(1);
         } break;
-        case UNIT_kW: {
+        case ElectricalUnit::UNIT_kW: {
             m_choiceActivePower->SetSelection(2);
         } break;
-        case UNIT_MW: {
+        case ElectricalUnit::UNIT_MW: {
             m_choiceActivePower->SetSelection(3);
         } break;
         default:
@@ -63,16 +63,16 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
 
     m_textCtrlReactivePower->SetValue(IndMotor::StringFromDouble(data.reactivePower));
     switch(data.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceReactivePower->SetSelection(0);
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_VAr: {
             m_choiceReactivePower->SetSelection(1);
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kVAr: {
             m_choiceReactivePower->SetSelection(2);
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_MVAr: {
             m_choiceReactivePower->SetSelection(3);
         } break;
         default:
@@ -130,13 +130,13 @@ bool IndMotorForm::ValidateData()
         return false;
     switch(m_choiceNominalPower->GetSelection()) {
         case 0: {
-            data.activePowerUnit = UNIT_VA;
+            data.activePowerUnit = ElectricalUnit::UNIT_VA;
         } break;
         case 1: {
-            data.activePowerUnit = UNIT_kVA;
+            data.activePowerUnit = ElectricalUnit::UNIT_kVA;
         } break;
         case 2: {
-            data.activePowerUnit = UNIT_MVA;
+            data.activePowerUnit = ElectricalUnit::UNIT_MVA;
         } break;
     }
 
@@ -145,16 +145,16 @@ bool IndMotorForm::ValidateData()
         return false;
     switch(m_choiceActivePower->GetSelection()) {
         case 0: {
-            data.activePowerUnit = UNIT_PU;
+            data.activePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
             data.activePowerUnit = UNIT_W;
         } break;
         case 2: {
-            data.activePowerUnit = UNIT_kW;
+            data.activePowerUnit = ElectricalUnit::UNIT_kW;
         } break;
         case 3: {
-            data.activePowerUnit = UNIT_MW;
+            data.activePowerUnit = ElectricalUnit::UNIT_MW;
         } break;
     }
 
@@ -163,16 +163,16 @@ bool IndMotorForm::ValidateData()
         return false;
     switch(m_choiceReactivePower->GetSelection()) {
         case 0: {
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.reactivePowerUnit = UNIT_VAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_VAr;
         } break;
         case 2: {
-            data.reactivePowerUnit = UNIT_kVAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_kVAr;
         } break;
         case 3: {
-            data.reactivePowerUnit = UNIT_MVAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
         } break;
     }
     

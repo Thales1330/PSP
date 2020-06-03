@@ -101,6 +101,80 @@ void Line::Draw(wxPoint2DDouble translation, double scale) const
     }
 }
 
+void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    //gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+	wxGraphicsMatrix identityMatrix = gc->GetTransform();
+	identityMatrix.Set(); // Set to identity
+
+	OpenGLColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	std::vector<wxPoint2DDouble> pointList = m_pointList;
+	if (!m_inserted && pointList.size() > 0) {
+		wxPoint2DDouble secondPoint = m_position;
+		if (pointList.size() > 2) { secondPoint = pointList[2]; }
+		pointList[1] = GetSwitchPoint(m_parentList[0], pointList[0], secondPoint);
+		pointList.push_back(m_position);
+	}
+
+	// Line selected (Layer 1).
+	if (m_selected) {
+        gc->SetPen(wxPen(wxColour(m_selectionColour.GetDcRGBA()), 2 + m_borderSize * 2.0));
+        gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		if (pointList.size() > 0)
+			gc->DrawLines(pointList.size(), &pointList[0]);
+        
+		// Draw nodes selection.
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(wxColour(m_selectionColour.GetDcRGBA())));
+		if (pointList.size() > 0) {
+            DrawDCCircle(pointList[0], 5.0 + m_borderSize / scale, 10, gc);
+			if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, 10, gc); }
+		}
+	}
+
+	// Draw line (Layer 2)
+    gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+    gc->SetBrush(*wxTRANSPARENT_BRUSH);
+    if(pointList.size() > 0)
+        gc->DrawLines(pointList.size(), &pointList[0]);
+
+	if (m_inserted) {
+		DrawDCSwitches(gc);
+		DrawDCPowerFlowPts(gc);
+	}
+
+	// Draw nodes.
+	gc->SetPen(*wxTRANSPARENT_PEN);
+	gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+	if (pointList.size() > 0) {
+		DrawDCCircle(pointList[0], 5.0, 10, gc);
+		if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0, 10, gc); }
+	}
+
+	// Draw pickboxes (Layer 3).
+	if (m_showPickbox) {
+		gc->PushState();
+		gc->SetTransform(identityMatrix);
+
+		for (int i = 2; i < (int)m_pointList.size() - 2; i++) {
+			DrawDCPickbox(WorldToScreen(m_pointList[i], translation - wxPoint2DDouble(4 / scale, 4 / scale), scale), gc);
+		}
+
+		gc->PopState();
+	}
+}
+
 void Line::Move(wxPoint2DDouble position)
 {
     if(!m_parentList[0]) {
@@ -445,13 +519,13 @@ void Line::UpdatePowerFlowArrowsPosition()
 {
     std::vector<wxPoint2DDouble> edges;
     switch(m_pfDirection) {
-        case PF_NONE: {
+        case PowerFlowDirection::PF_NONE: {
             m_powerFlowArrow.clear();
         } break;
-        case PF_BUS1_TO_BUS2: {
+        case PowerFlowDirection::PF_BUS1_TO_BUS2: {
             for(int i = 1; i < (int)m_pointList.size() - 1; i++) { edges.push_back(m_pointList[i]); }
         } break;
-        case PF_BUS2_TO_BUS1: {
+        case PowerFlowDirection::PF_BUS2_TO_BUS1: {
             for(int i = (int)m_pointList.size() - 2; i > 0; i--) { edges.push_back(m_pointList[i]); }
         } break;
         default:
@@ -521,33 +595,33 @@ LineElectricalData Line::GetPUElectricalData(double systemBasePower)
 
     // Resistance
     double r = data.resistance;
-    if(data.resistanceUnit == UNIT_OHM_km) r *= data.lineSize;
-    if(data.resistanceUnit == UNIT_PU) {
+    if(data.resistanceUnit == ElectricalUnit::UNIT_OHM_km) r *= data.lineSize;
+    if(data.resistanceUnit == ElectricalUnit::UNIT_PU) {
         if(data.useLinePower) data.resistance = (r * lineBaseImpedance) / systemBaseImpedance;
     } else {
         data.resistance = r / systemBaseImpedance;
     }
-    data.resistanceUnit = UNIT_PU;
+    data.resistanceUnit = ElectricalUnit::UNIT_PU;
 
     // Inductive reactance
     double x = data.indReactance;
-    if(data.indReactanceUnit == UNIT_OHM_km) x *= data.lineSize;
-    if(data.indReactanceUnit == UNIT_PU) {
+    if(data.indReactanceUnit == ElectricalUnit::UNIT_OHM_km) x *= data.lineSize;
+    if(data.indReactanceUnit == ElectricalUnit::UNIT_PU) {
         if(data.useLinePower) data.indReactance = (x * lineBaseImpedance) / systemBaseImpedance;
     } else {
         data.indReactance = x / systemBaseImpedance;
     }
-    data.indReactanceUnit = UNIT_PU;
+    data.indReactanceUnit = ElectricalUnit::UNIT_PU;
 
     // Capacitive susceptance
     double b = data.capSusceptance;
-    if(data.capSusceptanceUnit == UNIT_OHM_km) b *= data.lineSize;
-    if(data.capSusceptanceUnit == UNIT_PU) {
+    if(data.capSusceptanceUnit == ElectricalUnit::UNIT_OHM_km) b *= data.lineSize;
+    if(data.capSusceptanceUnit == ElectricalUnit::UNIT_PU) {
         if(data.useLinePower) data.capSusceptance = (b * lineBaseImpedance) / systemBaseImpedance;
     } else {
         data.capSusceptance = b / systemBaseImpedance;
     }
-    data.capSusceptanceUnit = UNIT_PU;
+    data.capSusceptanceUnit = ElectricalUnit::UNIT_PU;
 
     // Fault
 

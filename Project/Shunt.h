@@ -49,6 +49,7 @@ class Shunt : public PowerElement
     void UpdateSwitchesPosition();
     void UpdatePowerFlowArrowsPosition();
     void DrawGround(wxPoint2DDouble position) const;
+    void DrawDCGround(wxPoint2DDouble position, wxGraphicsContext* gc) const;
     bool m_inserted = false;
 };
 

@@ -21,12 +21,13 @@
 #include "SwitchingForm.h"
 #include "SyncGenerator.h"
 
-GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator)
+GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator, wxGLContext* sharedGLContext)
     : GeneratorStabFormBase(parent)
 {
     SetSize(GetBestSize());
     m_syncGenerator = syncGenerator;
     m_parent = parent;
+    m_sharedGLContext = sharedGLContext;
 
     SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
 
@@ -75,7 +76,7 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
             data.avr = new ControlElementContainer();
             m_syncGenerator->SetElectricalData(data);
         }
-        ControlEditor* cEditor = new ControlEditor(m_parent, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
+        ControlEditor* cEditor = new ControlEditor(NULL, m_sharedGLContext, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
                 IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
                 IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
                 IOControl::OUT_FIELD_VOLTAGE);
@@ -105,7 +106,7 @@ void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
             m_syncGenerator->SetElectricalData(data);
         }
         ControlEditor* cEditor =
-            new ControlEditor(NULL, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
+            new ControlEditor(NULL, m_sharedGLContext, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
                     IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER);
         cEditor->SetElementsList(data.speedGov->GetControlElementsList());
         cEditor->SetConnectionsList(data.speedGov->GetConnectionLineList());

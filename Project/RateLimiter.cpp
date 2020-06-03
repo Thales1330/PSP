@@ -21,9 +21,9 @@
 RateLimiter::RateLimiter(int id) : ControlElement(id)
 {
     m_width = m_height = 36.0;
-    Node* nodeIn = new Node(m_position + wxPoint2DDouble(-18, 0), Node::NODE_IN, m_borderSize);
+    Node* nodeIn = new Node(m_position + wxPoint2DDouble(-18, 0), Node::NodeType::NODE_IN, m_borderSize);
     nodeIn->StartMove(m_position);
-    Node* nodeOut = new Node(m_position + wxPoint2DDouble(18, 0), Node::NODE_OUT, m_borderSize);
+    Node* nodeOut = new Node(m_position + wxPoint2DDouble(18, 0), Node::NodeType::NODE_OUT, m_borderSize);
     nodeOut->SetAngle(180.0);
     nodeOut->StartMove(m_position);
     m_nodeList.push_back(nodeIn);

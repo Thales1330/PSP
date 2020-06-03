@@ -22,6 +22,10 @@ SyncMotor::SyncMotor() : Machines() {}
 SyncMotor::SyncMotor(wxString name) : Machines() { m_electricalData.name = name; }
 SyncMotor::~SyncMotor() {}
 void SyncMotor::DrawSymbol() const { DrawArc(m_position, 12, 30, 330, 10, GL_LINE_STRIP); }
+void SyncMotor::DrawDCSymbol(wxGraphicsContext* gc) const
+{
+    DrawDCArc(m_position, 12, 30, 330, 10, gc);
+}
 bool SyncMotor::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_ELEMENT, _("Edit Synchronous Condenser"));

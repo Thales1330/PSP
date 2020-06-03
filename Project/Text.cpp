@@ -79,6 +79,42 @@ void Text::Draw(wxPoint2DDouble translation, double scale)
     glPopMatrix();
 }
 
+void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc)
+{
+	// Draw selection rectangle
+
+	// Push the current matrix on stack.
+	gc->PushState();
+	// Rotate the matrix around the object position.
+	gc->Translate(m_position.m_x, m_position.m_y);
+	gc->Rotate(wxDegToRad(m_angle));
+	gc->Translate(-m_position.m_x, -m_position.m_y);
+
+	if (m_selected) {
+		glColor4d(0.0, 0.5, 1.0, 0.5);
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
+        wxPoint2DDouble pos = m_position - wxPoint2DDouble(m_borderSize / 2.0 + m_width / 2, m_borderSize / 2.0 + m_height / 2);
+        gc->DrawRectangle(pos.m_x, pos.m_y, m_rect.m_width, m_rect.m_height);
+	}
+
+	// Draw text (layer 2)
+	//gc->SetPen(wxPen(wxColour(0, 0, 0, 255)));
+	//gc->SetBrush(*wxTRANSPARENT_BRUSH);
+    wxPoint2DDouble pos = m_position - wxPoint2DDouble(m_width / 2, m_height / 2);
+	if (m_isMultlineText) {
+		for (unsigned int i = 0; i < m_openGLTextList.size(); ++i) {
+			m_openGLTextList[i]->DrawDC(
+                pos +
+				wxPoint2DDouble(0.0, (m_height * static_cast<double>(i) / static_cast<double>(m_numberOfLines))), gc);
+		}
+	}
+	else if (m_openGLTextList.size() > 0) {
+		m_openGLTextList[0]->DrawDC(pos, gc);
+	}
+    gc->PopState();
+}
+
 bool Text::Intersects(wxRect2DDouble rect) const
 {
     if(m_angle == 0.0 || m_angle == 180.0) return m_rect.Intersects(rect);

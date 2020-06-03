@@ -71,6 +71,14 @@ class MainApp : public wxApp
                         data.theme = THEME_DARK;
                     }
                 }
+				if (tag == "useOpenGL") {
+					if (tagValue == "yes") {
+						data.useOpenGL = true;
+					}
+					else if (tagValue == "no") {
+						data.useOpenGL = false;
+					}
+				}
             }
             file.Close();
         } else {  // Create default init file.
@@ -79,12 +87,14 @@ class MainApp : public wxApp
             // Default parameters.
             file.AddLine("lang=en");
             file.AddLine("theme=light");
+            file.AddLine("useOpenGL=yes");
 
             file.Write();
             file.Close();
 
             data.language = wxLANGUAGE_ENGLISH;
             data.theme = THEME_LIGHT;
+            data.useOpenGL = true;
             propertiesData->SetGeneralPropertiesData(data);
         }
 

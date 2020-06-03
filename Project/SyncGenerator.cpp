@@ -15,6 +15,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "Workspace.h"
 #include "ControlElementContainer.h"
 #include "SyncGenerator.h"
 #include "SyncMachineForm.h"
@@ -51,6 +52,15 @@ void SyncGenerator::DrawSymbol() const
     for(int i = 0; i < (int)m_sinePts.size(); i++) { sinePts.push_back(m_sinePts[i] + m_position); }
     DrawLine(sinePts);
 }
+
+void SyncGenerator::DrawDCSymbol(wxGraphicsContext* gc) const
+{
+	// Draw sine.
+	std::vector<wxPoint2DDouble> sinePts;
+	for (unsigned int i = 0; i < m_sinePts.size(); i++) { sinePts.push_back(m_sinePts[i] + m_position); }
+	gc->DrawLines(sinePts.size(), &sinePts[0]);
+}
+
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_ELEMENT, _("Edit Generator"));
@@ -60,7 +70,8 @@ bool SyncGenerator::GetContextMenu(wxMenu& menu)
 
 bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
 {
-    SyncMachineForm* generatorForm = new SyncMachineForm(parent, this);
+    Workspace* ws = static_cast<Workspace*>(parent);
+    SyncMachineForm* generatorForm = new SyncMachineForm(parent, this, ws->GetSharedGLContext());
     generatorForm->SetTitle(_("Generator"));
     if(generatorForm->ShowModal() == wxID_OK) {
         generatorForm->Destroy();

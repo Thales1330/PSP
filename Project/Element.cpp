@@ -19,6 +19,8 @@
 #ifdef USING_WX_3_0_X
 #include "DegreesAndRadians.h"
 #endif
+#include <wx/pen.h>
+#include <wx/brush.h>
 
 Element::Element() { m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5); }
 Element::~Element() {}
@@ -40,6 +42,18 @@ void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegment
     glEnd();
 }
 
+void Element::DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext* gc) const
+{
+    wxPoint2DDouble* pts = new wxPoint2DDouble[numSegments + 1];
+	for (int i = 0; i < numSegments; i++) {
+		double theta = 2.0 * 3.1415926 * double(i) / double(numSegments);
+        pts[i] = wxPoint2DDouble(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
+	}
+    pts[numSegments] = pts[0];
+    gc->DrawLines(numSegments + 1, pts);
+    delete[] pts;
+}
+
 void Element::DrawArc(wxPoint2DDouble position,
                       double radius,
                       double initAngle,
@@ -57,11 +71,31 @@ void Element::DrawArc(wxPoint2DDouble position,
     glEnd();
 }
 
+void Element::DrawDCArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, wxGraphicsContext* gc) const
+{
+	double initAngRad = wxDegToRad(initAngle);
+	double finalAngRad = wxDegToRad(finalAngle);
+    wxPoint2DDouble* points =  new wxPoint2DDouble[numSegments + 2];
+	for (int i = 0; i <= numSegments; i++) {
+		double theta = initAngRad + (finalAngRad - initAngRad) * double(i) / double(numSegments);
+        points[i] = wxPoint2DDouble(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
+	}
+
+    gc->DrawLines(numSegments + 1, points);
+    delete[] points;
+}
+
 void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) const
 {
     glBegin(mode);
     for(int i = 0; i < 3; i++) { glVertex2d(points[i].m_x, points[i].m_y); }
     glEnd();
+}
+
+void Element::DrawDCTriangle(std::vector<wxPoint2DDouble> points, wxGraphicsContext* gc) const
+{
+    points.emplace_back(points[0]);
+    gc->DrawLines(4, &points[0]);
 }
 
 void Element::DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode) const
@@ -98,6 +132,13 @@ void Element::DrawPickbox(wxPoint2DDouble position) const
     DrawRectangle(position, 8.0, 8.0);
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawRectangle(position, 8.0, 8.0, GL_LINE_LOOP);
+}
+
+void Element::DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext* gc) const
+{
+    gc->SetPen(wxPen(wxColour(0, 0, 0, 255)));
+    gc->SetBrush(wxBrush(wxColour(255, 255, 255, 204)));
+    gc->DrawRectangle(position.m_x, position.m_y, 8, 8);
 }
 
 wxPoint2DDouble Element::RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees) const
@@ -350,9 +391,9 @@ void Element::ReplaceParent(Element* oldParent, Element* newParent)
 void Element::AddChild(Element* child) { m_childList.push_back(child); }
 void Element::RemoveChild(Element* child)
 {
-    for(auto it = m_childList.begin(); it != m_childList.end(); ++it) {
-        Element* element = *it;
-        if(element == child) m_childList.erase(it--);
+    for(auto it = m_childList.begin(); it != m_childList.end();) {
+        if (*it == child) it = m_childList.erase(it);
+        else ++it;
     }
 }
 
@@ -369,6 +410,11 @@ void OpenGLColour::SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble
     rgba[1] = green;
     rgba[2] = blue;
     rgba[3] = alpha;
+}
+
+wxColour OpenGLColour::GetDcRGBA() const
+{
+    return wxColour(rgba[0] * 255, rgba[1] * 255, rgba[2] * 255, rgba[3] * 255);
 }
 
 OpenGLColour::OpenGLColour() { SetRGBA(1.0, 1.0, 1.0, 1.0); }

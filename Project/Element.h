@@ -24,7 +24,9 @@
 #include <wx/menu.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
+#include <windows.h>
 #include <GL/gl.h>
+#include <wx/graphics.h>
 
 #include <complex>
 
@@ -101,6 +103,7 @@ class OpenGLColour
      * @return RGBA colour.
      */
     const GLdouble* GetRGBA() const { return rgba; }
+    wxColour GetDcRGBA() const;
    protected:
     GLdouble rgba[4];
 };
@@ -297,11 +300,18 @@ class Element
      */
     virtual wxString GetTipText() const { return wxEmptyString; }
     /**
-     * @brief Draw the element.
+     * @brief Draw the element using OpenGL.
      * @param translation Translation of the system.
      * @param scale Scale of the system.
      */
     virtual void Draw(wxPoint2DDouble translation, double scale) const {}
+    /**
+     * @brief Draw the element using GDI+.
+     * @param translation Translation of the system.
+     * @param scale Scale of the system.
+     * @param gc Graphics context
+     */
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const {}
     /**
      * @brief Rotate the element.
      * @param clockwise True to rotate clockwise, false to rotate counter-clockwise.
@@ -443,12 +453,23 @@ class Element
      * @param mode OpenGl primitive.
      */
     virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
+
+    /**
+     * @brief Draw a circle using device context.
+     * @param position Circle position.
+     * @param radius Circle radius
+     * @param numSegments Num of segments of the circle.
+     * @param gl Device context.
+     */
+    virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext* gc) const;
     virtual void DrawArc(wxPoint2DDouble position,
                          double radius,
                          double initAngle,
                          double finalAngle,
                          int numSegments,
                          GLenum mode = GL_LINE_LOOP) const;
+
+	virtual void DrawDCArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, wxGraphicsContext* gc) const;
 
     /**
      * @brief Draw rectangle.
@@ -474,6 +495,13 @@ class Element
     virtual void DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode = GL_TRIANGLES) const;
 
     /**
+     * @brief Draw a triangle.
+     * @param points Triangle vertices.
+     * @param gc Device context.
+     */
+    virtual void DrawDCTriangle(std::vector<wxPoint2DDouble> points, wxGraphicsContext* gc) const;
+
+    /**
      * @brief Draw a point.
      * @param position Point position.
      * @param size Point size.
@@ -492,6 +520,13 @@ class Element
      * @param position Pickbox position.
      */
     virtual void DrawPickbox(wxPoint2DDouble position) const;
+
+    /**
+	 * @brief Draw pickbox using direct context.
+	 * @param position Pickbox position.
+     * @param gc Direct context.
+	 */
+    virtual void DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext* gc) const;
 
     /**
      * @brief Rotate a point as element position being the origin.

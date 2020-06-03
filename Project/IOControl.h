@@ -75,7 +75,7 @@ class IOControl : public ControlElement
     IOFlags m_value;
     int m_ioFlags;
 
-    Node::NodeType m_ioNodeType = Node::NODE_IN;
+    Node::NodeType m_ioNodeType = Node::NodeType::NODE_IN;
 
     OpenGLText* m_glText = NULL;
 };

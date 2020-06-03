@@ -25,7 +25,7 @@ class ReactiveShuntElementForm;
 struct CapacitorElectricalData {
     wxString name;
     double reactivePower = 100.0;
-    ElectricalUnit reactivePowerUnit = UNIT_MVAr;
+    ElectricalUnit reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
 };
 
 /**
@@ -45,6 +45,7 @@ class Capacitor : public Shunt
     virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);

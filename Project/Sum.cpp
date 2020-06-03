@@ -22,12 +22,12 @@
 Sum::Sum(int id) : ControlElement(id)
 {
     m_width = m_height = 36.0;
-    Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-m_width / 2, 9 - m_height / 2), Node::NODE_IN, m_borderSize);
+    Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-m_width / 2, 9 - m_height / 2), Node::NodeType::NODE_IN, m_borderSize);
     nodeIn1->StartMove(m_position);
     Node* nodeIn2 =
-        new Node(m_position + wxPoint2DDouble(-m_width / 2, 27 - m_height / 2), Node::NODE_IN, m_borderSize);
+        new Node(m_position + wxPoint2DDouble(-m_width / 2, 27 - m_height / 2), Node::NodeType::NODE_IN, m_borderSize);
     nodeIn2->StartMove(m_position);
-    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
+    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NodeType::NODE_OUT, m_borderSize);
     nodeOut->SetAngle(180.0);
     nodeOut->StartMove(m_position);
     m_nodeList.push_back(nodeIn1);
@@ -154,7 +154,7 @@ void Sum::UpdatePoints()
 
 void Sum::AddInNode()
 {
-    Node* newNode = new Node(wxPoint2DDouble(0, 0), Node::NODE_IN, m_borderSize);
+    Node* newNode = new Node(wxPoint2DDouble(0, 0), Node::NodeType::NODE_IN, m_borderSize);
     newNode->SetAngle(m_angle);
     m_nodeList.insert(m_nodeList.end() - 1, newNode);
 }
@@ -208,7 +208,7 @@ bool Sum::Solve(double* input, double timeStep)
     std::vector<double> inputVector;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
-        if(node->GetNodeType() != Node::NODE_OUT) {
+        if(node->GetNodeType() != Node::NodeType::NODE_OUT) {
             if(!node->IsConnected()) {
                 inputVector.push_back(0.0);
             } else {

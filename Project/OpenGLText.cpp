@@ -16,7 +16,9 @@
  */
 
 #include <wx/log.h>
+#include <wx/graphics.h>
 #include "OpenGLText.h"
+#include <algorithm>
 
 OpenGLText::OpenGLText() { Init(); }
 OpenGLText::OpenGLText(wxString text)
@@ -69,11 +71,40 @@ void OpenGLText::Draw(wxPoint2DDouble position, double angle) const
     }
 }
 
+void OpenGLText::DrawDC(wxPoint2DDouble position, wxGraphicsContext* gc, double angle) const
+{
+    gc->SetFont(wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight), wxColour(0, 0 , 0 , 255));
+    gc->DrawText(m_text, position.m_x, position.m_y, angle);
+}
+
 void OpenGLText::SetText(wxString text)
 {
     m_text = text;
-    TextToBitmap();
-    LoadTextTexture();
+    bool contextValid = false;
+#ifdef __LINUX__
+    if(glXGetCurrentContext()) contextValid = true;
+#endif
+#ifdef __APPLE__
+    if(aglGetCurrentContext()) contextValid = true;
+#endif
+#ifdef __WINDOWS__
+    if (wglGetCurrentContext()) contextValid = true;
+#endif
+
+    if (contextValid) {
+        TextToBitmap();
+        LoadTextTexture();
+    }
+    else
+    {
+        // If the context is not valid, the text still can be rendered using wxDC.
+        // So, the text size must be calculated
+		wxFont font = wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight);
+
+		wxMemoryDC memDC;
+		memDC.SetFont(font);
+		m_bitmapSize = memDC.GetTextExtent(m_text);
+    }
 }
 
 int OpenGLText::RoundToPowerOfTwo(int value, int min)
@@ -81,7 +112,8 @@ int OpenGLText::RoundToPowerOfTwo(int value, int min)
     //[Ref] https://stackoverflow.com/questions/466204/rounding-up-to-next-power-of-2
     double baseOfTwo = std::log(static_cast<double>(value)) / std::log(2.0);
     int powerOfTwo = static_cast<int>(std::pow(2.0, static_cast<int>(std::ceil(baseOfTwo))));
-    return std::max(min, powerOfTwo);
+    //return std::max(min, powerOfTwo);
+    return min > powerOfTwo ? min : powerOfTwo;
 }
 
 void OpenGLText::TextToBitmap()

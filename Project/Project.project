@@ -118,6 +118,7 @@
         </VirtualDirectory>
       </VirtualDirectory>
       <VirtualDirectory Name="main GUI">
+        <File Name="WorkspaceDC.cpp"/>
         <File Name="Camera.cpp"/>
         <File Name="MainFrame.cpp"/>
         <File Name="Workspace.cpp"/>
@@ -251,6 +252,7 @@
         </VirtualDirectory>
       </VirtualDirectory>
       <VirtualDirectory Name="main GUI">
+        <File Name="WorkspaceDC.h"/>
         <File Name="Camera.h"/>
         <File Name="MainFrame.h"/>
         <File Name="Workspace.h"/>

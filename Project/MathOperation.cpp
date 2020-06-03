@@ -21,11 +21,11 @@
 MathOperation::MathOperation(int id) : ControlElement(id)
 {
     m_width = m_height = 36.0;
-    Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-18, -9), Node::NODE_IN, m_borderSize);
+    Node* nodeIn1 = new Node(m_position + wxPoint2DDouble(-18, -9), Node::NodeType::NODE_IN, m_borderSize);
     nodeIn1->StartMove(m_position);
-    Node* nodeIn2 = new Node(m_position + wxPoint2DDouble(-18, 9), Node::NODE_IN, m_borderSize);
+    Node* nodeIn2 = new Node(m_position + wxPoint2DDouble(-18, 9), Node::NodeType::NODE_IN, m_borderSize);
     nodeIn2->StartMove(m_position);
-    Node* nodeOut = new Node(m_position + wxPoint2DDouble(18, 0), Node::NODE_OUT, m_borderSize);
+    Node* nodeOut = new Node(m_position + wxPoint2DDouble(18, 0), Node::NodeType::NODE_OUT, m_borderSize);
     nodeOut->SetAngle(180.0);
     nodeOut->StartMove(m_position);
     m_nodeList.push_back(nodeIn1);

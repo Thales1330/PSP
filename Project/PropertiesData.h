@@ -28,7 +28,7 @@ enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
 struct SimulationData {
     // General simulation data
     double basePower = 100.0;
-    ElectricalUnit basePowerUnit = UNIT_MVA;
+    ElectricalUnit basePowerUnit = ElectricalUnit::UNIT_MVA;
     bool faultAfterPowerFlow = false;
     bool scPowerAfterPowerFlow = false;
     bool harmDistortionAfterPowerFlow = false;
@@ -42,7 +42,7 @@ struct SimulationData {
     double newtonInertia = 1.0;
     double gaussTolerance = 1e-2;
 
-    // Stability
+    // stability
     double stabilityFrequency = 60.0;
     double timeStep = 1e-2;
     double stabilitySimulationTime = 10.0;
@@ -67,6 +67,7 @@ struct SimulationData {
 struct GeneralData {
     wxLanguage language = wxLANGUAGE_ENGLISH;
     GUITheme theme = THEME_LIGHT;
+    bool useOpenGL = true;
 };
 
 struct FreqResponseData {

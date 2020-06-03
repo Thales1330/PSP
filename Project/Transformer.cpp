@@ -179,6 +179,92 @@ void Transformer::Draw(wxPoint2DDouble translation, double scale) const
     }
 }
 
+void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+	OpenGLColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	if (m_inserted) {
+		// Draw selection (layer 1).
+		if (m_selected) {
+            gc->SetPen(wxPen(wxColour(m_selectionColour.GetDcRGBA()), 2 + m_borderSize * 2.0));
+            gc->SetBrush(*wxTRANSPARENT_BRUSH);
+			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+            // Push the current matrix on stack.
+            gc->PushState();
+			// Rotate the matrix around the object position.
+			gc->Translate(m_position.m_x, m_position.m_y);
+			gc->Rotate(wxDegToRad(m_angle));
+            gc->Translate(-m_position.m_x, -m_position.m_y);
+
+			gc->SetPen(*wxTRANSPARENT_PEN);
+			gc->SetBrush(wxBrush(wxColour(m_selectionColour.GetDcRGBA())));
+            DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+            DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
+
+            gc->PopState();
+
+			// Draw nodes selection.
+			gc->SetPen(*wxTRANSPARENT_PEN);
+			gc->SetBrush(wxBrush(wxColour(m_selectionColour.GetDcRGBA())));
+			if (m_pointList.size() > 0) {
+				DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
+				if (m_inserted) { DrawDCCircle(m_pointList[m_pointList.size() - 1], 5.0 + m_borderSize / scale, 10, gc); }
+			}
+		}
+
+		// Draw transformer (layer 2).
+		// Transformer line
+		gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+		gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+		// Draw nodes.
+		gc->SetPen(*wxTRANSPARENT_PEN);
+		gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+		if (m_pointList.size() > 0) {
+			DrawDCCircle(m_pointList[0], 5.0, 10, gc);
+			if (m_inserted) { DrawDCCircle(m_pointList[m_pointList.size() - 1], 5.0, 10, gc); }
+		}
+
+		DrawDCSwitches(gc);
+		DrawDCPowerFlowPts(gc);
+
+		// Push the current matrix on stack.
+        gc->PushState();
+		// Rotate the matrix around the object position.
+		gc->Translate(m_position.m_x, m_position.m_y);
+		gc->Rotate(wxDegToRad(m_angle));
+		gc->Translate(-m_position.m_x, -m_position.m_y);
+
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(*wxWHITE_BRUSH);
+		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
+		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+
+        gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+        gc->SetBrush(*wxTRANSPARENT_BRUSH);
+		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
+		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
+
+        // Point
+		gc->SetPen(*wxTRANSPARENT_PEN);
+		gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+        DrawDCCircle(m_rect.GetPosition(), 4, 10, gc);
+
+        gc->PopState();
+	}
+}
+
 bool Transformer::Intersects(wxRect2DDouble rect) const
 {
     if(m_angle == 0.0 || m_angle == 180.0) return m_rect.Intersects(rect);

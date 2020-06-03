@@ -41,6 +41,7 @@ class Machines : public PowerElement
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext*  gc) const;
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual void Move(wxPoint2DDouble position);
     virtual void MoveNode(Element* element, wxPoint2DDouble position);
@@ -52,6 +53,7 @@ class Machines : public PowerElement
     virtual void UpdateNodes();
     virtual void Rotate(bool clockwise = true);
     virtual void DrawSymbol() const {}
+    virtual void DrawDCSymbol(wxGraphicsContext* gc) const {}
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
 
    protected:

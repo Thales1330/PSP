@@ -18,6 +18,7 @@
 #ifndef WORKSPACE_H
 #define WORKSPACE_H
 
+#include <windows.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <wx/dcclient.h>
@@ -103,7 +104,7 @@ class Workspace : public WorkspaceBase
 
     Workspace();
     Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL, wxGLContext* sharedGLContext = NULL);
-    ~Workspace();
+    virtual ~Workspace();
 
     wxString GetName() const { return m_name; }
     std::vector<Element*> GetElementList() const;
@@ -122,8 +123,8 @@ class Workspace : public WorkspaceBase
     void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
     void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
     void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
-    void Redraw() { m_glCanvas->Refresh(); }
-    wxGLContext* GetOpenGLContext() { return m_glContext; }
+    virtual void Redraw() { m_glCanvas->Refresh(); }
+    wxGLContext* GetSharedGLContext() const { return m_glContext; }
     void RotateSelectedElements(bool clockwise = true);
     void DeleteSelectedElements();
     bool GetElementsCorners(wxPoint2DDouble& leftUpCorner,
@@ -152,22 +153,23 @@ class Workspace : public WorkspaceBase
     bool RunHarmonicDistortion();
     bool RunFrequencyResponse();
 
-   protected:
-    virtual void OnMiddleDoubleClick(wxMouseEvent& event);
-    virtual void OnIdle(wxIdleEvent& event);
-    virtual void OnTimer(wxTimerEvent& event);
-    virtual void OnLeftDoubleClick(wxMouseEvent& event);
-    virtual void OnRightClickDown(wxMouseEvent& event);
-    virtual void OnLeftClickUp(wxMouseEvent& event);
-    virtual void OnScroll(wxMouseEvent& event);
-    virtual void OnMiddleDown(wxMouseEvent& event);
-    virtual void OnMiddleUp(wxMouseEvent& event);
-    virtual void OnMouseMotion(wxMouseEvent& event);
-    virtual void OnKeyDown(wxKeyEvent& event);
-    virtual void OnLeftClickDown(wxMouseEvent& event);
-    virtual void OnPaint(wxPaintEvent& event);
-    virtual void OnPopupClick(wxCommandEvent& event);
+   
+	virtual void OnMiddleDoubleClick(wxMouseEvent& event);
+	virtual void OnIdle(wxIdleEvent& event);
+	virtual void OnTimer(wxTimerEvent& event);
+	virtual void OnLeftDoubleClick(wxMouseEvent& event);
+	virtual void OnRightClickDown(wxMouseEvent& event);
+	virtual void OnLeftClickUp(wxMouseEvent& event);
+	virtual void OnScroll(wxMouseEvent& event);
+	virtual void OnMiddleDown(wxMouseEvent& event);
+	virtual void OnMiddleUp(wxMouseEvent& event);
+	virtual void OnMouseMotion(wxMouseEvent& event);
+	virtual void OnKeyDown(wxKeyEvent& event);
+	virtual void OnLeftClickDown(wxMouseEvent& event);
+	virtual void OnPaint(wxPaintEvent& event);
+	virtual void OnPopupClick(wxCommandEvent& event);
 
+protected:
     void SetViewport();
     void UpdateStatusBar();
 

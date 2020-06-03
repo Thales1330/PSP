@@ -80,13 +80,14 @@ class Load : public Shunt
     virtual Element* GetCopy();
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
     virtual bool ShowForm(wxWindow* parent, Element* element);
     LoadElectricalData GetElectricalData() { return m_electricalData; }
     LoadElectricalData GetPUElectricalData(double systemPowerBase);
-    void SetElectricalData(LoadElectricalData electricalData) { m_electricalData = electricalData; }
+    void SetElectricalData(const LoadElectricalData& electricalData) { m_electricalData = electricalData; }
     virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);

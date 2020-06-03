@@ -33,7 +33,7 @@ BusForm::BusForm(wxWindow* parent, Bus* bus) : BusFormBase(parent)
     m_textCtrlName->SetValue(bus->GetElectricalData().name);
     m_textCtrlNomVoltage->SetValue(bus->StringFromDouble(bus->GetElectricalData().nominalVoltage));
 
-    if(bus->GetElectricalData().nominalVoltageUnit == UNIT_V)
+    if(bus->GetElectricalData().nominalVoltageUnit == ElectricalUnit::UNIT_V)
         m_choiceNomVoltage->SetSelection(0);
     else
         m_choiceNomVoltage->SetSelection(1);
@@ -45,29 +45,29 @@ BusForm::BusForm(wxWindow* parent, Bus* bus) : BusFormBase(parent)
 
     m_checkBoxFault->SetValue(bus->GetElectricalData().hasFault);
     switch(bus->GetElectricalData().faultType) {
-        case FAULT_THREEPHASE: {
+        case FaultData::FAULT_THREEPHASE: {
             m_choiceFaultType->SetSelection(0);
         } break;
-        case FAULT_2LINE: {
+        case FaultData::FAULT_2LINE: {
             m_choiceFaultType->SetSelection(1);
         } break;
-        case FAULT_2LINE_GROUND: {
+        case FaultData::FAULT_2LINE_GROUND: {
             m_choiceFaultType->SetSelection(2);
         } break;
-        case FAULT_LINE_GROUND: {
+        case FaultData::FAULT_LINE_GROUND: {
             m_choiceFaultType->SetSelection(3);
         } break;
         default:
             break;
     }
     switch(bus->GetElectricalData().faultLocation) {
-        case FAULT_LINE_A: {
+        case FaultData::FAULT_LINE_A: {
             m_choiceFaultPlace->SetSelection(0);
         } break;
-        case FAULT_LINE_B: {
+        case FaultData::FAULT_LINE_B: {
             m_choiceFaultPlace->SetSelection(1);
         } break;
-        case FAULT_LINE_C: {
+        case FaultData::FAULT_LINE_C: {
             m_choiceFaultPlace->SetSelection(2);
         } break;
         default:
@@ -99,7 +99,7 @@ void BusForm::OnButtonOKClick(wxCommandEvent& event)
     if(!m_bus->DoubleFromString(m_parent, m_textCtrlNomVoltage->GetValue(), data.nominalVoltage,
                                 _("Value entered incorrectly in the field \"Rated voltage\".")))
         return;
-    data.nominalVoltageUnit = m_choiceNomVoltage->GetSelection() == 0 ? UNIT_V : UNIT_kV;
+    data.nominalVoltageUnit = m_choiceNomVoltage->GetSelection() == 0 ? ElectricalUnit::UNIT_V : ElectricalUnit::UNIT_kV;
     data.isVoltageControlled = m_checkBoxCtrlVoltage->GetValue();
     if(data.isVoltageControlled) {
         if(!m_bus->DoubleFromString(m_parent, m_textCtrlCtrlVoltage->GetValue(), data.controlledVoltage,
@@ -112,28 +112,28 @@ void BusForm::OnButtonOKClick(wxCommandEvent& event)
     data.hasFault = m_checkBoxFault->GetValue();
     switch(m_choiceFaultType->GetSelection()) {
         case 0: {
-            data.faultType = FAULT_THREEPHASE;
+            data.faultType = FaultData::FAULT_THREEPHASE;
         } break;
         case 1: {
-            data.faultType = FAULT_2LINE;
+            data.faultType = FaultData::FAULT_2LINE;
         } break;
         case 2: {
-            data.faultType = FAULT_2LINE_GROUND;
+            data.faultType = FaultData::FAULT_2LINE_GROUND;
         } break;
         case 3: {
-            data.faultType = FAULT_LINE_GROUND;
+            data.faultType = FaultData::FAULT_LINE_GROUND;
         } break;
     }
 
     switch(m_choiceFaultPlace->GetSelection()) {
         case 0: {
-            data.faultLocation = FAULT_LINE_A;
+            data.faultLocation = FaultData::FAULT_LINE_A;
         } break;
         case 1: {
-            data.faultLocation = FAULT_LINE_B;
+            data.faultLocation = FaultData::FAULT_LINE_B;
         } break;
         case 2: {
-            data.faultLocation = FAULT_LINE_C;
+            data.faultLocation = FaultData::FAULT_LINE_C;
         } break;
     }
 

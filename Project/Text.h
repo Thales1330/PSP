@@ -18,6 +18,7 @@
 #ifndef TEXT_H
 #define TEXT_H
 
+#include <windows.h>
 #include <GL/gl.h>
 #include <wx/dcmemory.h>
 
@@ -86,6 +87,7 @@ class Text : public GraphicalElement
     virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale);
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);
     virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList);

@@ -101,6 +101,73 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
     }
 }
 
+void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    wxPoint2DDouble gcPosition = m_position - wxPoint2DDouble(m_width / 2.0, m_height / 2.0);
+    wxGraphicsMatrix identityMatrix = gc->GetTransform();
+    identityMatrix.Set(); // Set to identity
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+
+	// Draw selection (layer 1)
+	if (m_selected) {
+		// If the object is selected, the matrix is reset to remove scale effects applied to it, thus keeping the
+		// edges with fixed sizes for all zoom levels.
+        gc->PushState();
+        gc->SetTransform(identityMatrix);
+		// The matrix was reset, so we must use screen coordinates (WorldToScreen).
+		wxPoint2DDouble screenPt = WorldToScreen(translation, scale);
+        gc->Translate(screenPt.m_x, screenPt.m_y);
+        gc->Rotate(wxDegToRad(m_angle));
+        gc->Translate(-screenPt.m_x, -screenPt.m_y);
+
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+
+		wxPoint2DDouble pts[4] = { WorldToScreen(translation, scale, -(m_width / 2.0), -(m_height / 2.0)) -
+									  wxPoint2DDouble(m_borderSize, m_borderSize),
+								  WorldToScreen(translation, scale, -(m_width / 2.0), (m_height / 2.0)) -
+									  wxPoint2DDouble(m_borderSize, -m_borderSize),
+								  WorldToScreen(translation, scale, (m_width / 2.0), (m_height / 2.0)) -
+									  wxPoint2DDouble(-m_borderSize, -m_borderSize),
+								  WorldToScreen(translation, scale, (m_width / 2.0), -(m_height / 2.0)) -
+									  wxPoint2DDouble(-m_borderSize, m_borderSize) };
+        gc->DrawLines(4, pts);
+        gc->PopState();
+	}
+
+    gc->PushState();
+    gc->Translate(m_position.m_x, m_position.m_y);
+    gc->Rotate(wxDegToRad(m_angle));
+    gc->Translate(-m_position.m_x, -m_position.m_y);
+
+	if (m_dynEvent)
+        gc->SetBrush(wxBrush(m_dynamicEventColour.GetDcRGBA()));
+	else
+        gc->SetBrush(wxBrush(m_busColour.GetDcRGBA()));
+
+    gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
+
+    gc->PopState();
+
+	// Draw pickbox (layer 3)
+	if (m_showPickbox) {
+        gc->PushState();
+        gc->SetTransform(identityMatrix);
+
+		wxPoint2DDouble screenPt = WorldToScreen(translation, scale);
+        gc->Translate(screenPt.m_x, screenPt.m_y);
+        gc->Rotate(wxDegToRad(m_angle));
+        gc->Translate(-screenPt.m_x, -screenPt.m_y);
+
+		wxPoint2DDouble pbPosition[2] = { WorldToScreen(translation, scale, m_width / 2.0) - wxPoint2DDouble(4, 4),
+										 WorldToScreen(translation, scale, -m_width / 2.0) - wxPoint2DDouble(4, 4)};
+		DrawDCPickbox(pbPosition[0], gc);
+		DrawDCPickbox(pbPosition[1], gc);
+
+        gc->PopState();
+	}
+}
+
 bool Bus::Contains(wxPoint2DDouble position) const
 {
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);

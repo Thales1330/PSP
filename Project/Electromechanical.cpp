@@ -207,14 +207,14 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove machine (only connected machines)
-                if(swData.swType[i] == SW_REMOVE && generator->IsOnline()) {
+                if(swData.swType[i] == SwitchingType::SW_REMOVE && generator->IsOnline()) {
                     generator->SetOnline(false);
                     int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
                     m_yBus[n][n] -= GetSyncMachineAdmittance(generator);
                 }
 
                 // Insert machine (only disconnected machines)
-                if(swData.swType[i] == SW_INSERT && !generator->IsOnline() && generator->GetParentList().size() == 1) {
+                if(swData.swType[i] == SwitchingType::SW_INSERT && !generator->IsOnline() && generator->GetParentList().size() == 1) {
                     if(generator->SetOnline(true)) {
                         int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
                         m_yBus[n][n] += GetSyncMachineAdmittance(generator);
@@ -231,7 +231,7 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove machine (only connected machines)
-                if(swData.swType[i] == SW_REMOVE && motor->IsOnline() && motor->GetParentList().size() == 1) {
+                if(swData.swType[i] == SwitchingType::SW_REMOVE && motor->IsOnline() && motor->GetParentList().size() == 1) {
                     auto data = motor->GetElectricalData();
                     motor->SetOnline(false);
                     int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
@@ -239,7 +239,7 @@ void Electromechanical::SetEvent(double currentTime)
                 }
 
                 // Insert machine (only disconnected machines)
-                if(swData.swType[i] == SW_INSERT && !motor->IsOnline() && motor->GetParentList().size() == 1) {
+                if(swData.swType[i] == SwitchingType::SW_INSERT && !motor->IsOnline() && motor->GetParentList().size() == 1) {
                     auto data = motor->GetElectricalData();
                     if(motor->SetOnline(true)) {
                         int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
@@ -257,7 +257,7 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove load (only connected loads)
-                if(swData.swType[i] == SW_REMOVE && load->IsOnline() && load->GetParentList().size() == 1) {
+                if(swData.swType[i] == SwitchingType::SW_REMOVE && load->IsOnline() && load->GetParentList().size() == 1) {
                     load->SetOnline(false);
                     auto data = load->GetPUElectricalData(m_powerSystemBase);
                     Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
@@ -268,7 +268,7 @@ void Electromechanical::SetEvent(double currentTime)
                 }
 
                 // Insert load (only disconnected load)
-                if(swData.swType[i] == SW_INSERT && !load->IsOnline() && load->GetParentList().size() == 1) {
+                if(swData.swType[i] == SwitchingType::SW_INSERT && !load->IsOnline() && load->GetParentList().size() == 1) {
                     if(load->SetOnline(true)) {
                         auto data = load->GetPUElectricalData(m_powerSystemBase);
                         Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
@@ -289,7 +289,7 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove line (only connected lines)
-                if(swData.swType[i] == SW_REMOVE && line->IsOnline()) {
+                if(swData.swType[i] == SwitchingType::SW_REMOVE && line->IsOnline()) {
                     line->SetOnline(false);
                     auto data = line->GetElectricalData();
 
@@ -307,7 +307,7 @@ void Electromechanical::SetEvent(double currentTime)
                 }
 
                 // Insert line (only disconnected lines)
-                if(swData.swType[i] == SW_INSERT && !line->IsOnline() && line->GetParentList().size() == 2) {
+                if(swData.swType[i] == SwitchingType::SW_INSERT && !line->IsOnline() && line->GetParentList().size() == 2) {
                     if(line->SetOnline(true)) {
                         auto data = line->GetElectricalData();
 
@@ -335,7 +335,7 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove transformer (only connected transformers)
-                if(swData.swType[i] == SW_REMOVE && transformer->IsOnline()) {
+                if(swData.swType[i] == SwitchingType::SW_REMOVE && transformer->IsOnline()) {
                     transformer->SetOnline(false);
                     auto data = transformer->GetElectricalData();
 
@@ -364,7 +364,7 @@ void Electromechanical::SetEvent(double currentTime)
                 }
 
                 // Insert transformer (only disconnected transformers)
-                if(swData.swType[i] == SW_INSERT && !transformer->IsOnline() &&
+                if(swData.swType[i] == SwitchingType::SW_INSERT && !transformer->IsOnline() &&
                    transformer->GetParentList().size() == 2) {
                     if(transformer->SetOnline(true)) {
                         auto data = transformer->GetElectricalData();
@@ -404,7 +404,7 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove capacitor (only connected capacitors)
-                if(swData.swType[i] == SW_REMOVE && capacitor->IsOnline()) {
+                if(swData.swType[i] == SwitchingType::SW_REMOVE && capacitor->IsOnline()) {
                     capacitor->SetOnline(false);
                     auto data = capacitor->GetPUElectricalData(m_powerSystemBase);
                     int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
@@ -412,7 +412,7 @@ void Electromechanical::SetEvent(double currentTime)
                 }
 
                 // Insert capacitor (only disconnected capacitors)
-                if(swData.swType[i] == SW_INSERT && !capacitor->IsOnline() && capacitor->GetParentList().size() == 1) {
+                if(swData.swType[i] == SwitchingType::SW_INSERT && !capacitor->IsOnline() && capacitor->GetParentList().size() == 1) {
                     if(capacitor->SetOnline(true)) {
                         auto data = capacitor->GetPUElectricalData(m_powerSystemBase);
                         int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
@@ -430,7 +430,7 @@ void Electromechanical::SetEvent(double currentTime)
         for(unsigned int i = 0; i < swData.swType.size(); ++i) {
             if(EventTrigger(swData.swTime[i], currentTime)) {
                 // Remove inductor (only connected inductors)
-                if(swData.swType[i] == SW_REMOVE && inductor->IsOnline()) {
+                if(swData.swType[i] == SwitchingType::SW_REMOVE && inductor->IsOnline()) {
                     inductor->SetOnline(false);
                     auto data = inductor->GetPUElectricalData(m_powerSystemBase);
                     int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
@@ -438,7 +438,7 @@ void Electromechanical::SetEvent(double currentTime)
                 }
 
                 // Insert inductor (only disconnected inductors)
-                if(swData.swType[i] == SW_INSERT && !inductor->IsOnline() && inductor->GetParentList().size() == 1) {
+                if(swData.swType[i] == SwitchingType::SW_INSERT && !inductor->IsOnline() && inductor->GetParentList().size() == 1) {
                     if(inductor->SetOnline(true)) {
                         auto data = inductor->GetPUElectricalData(m_powerSystemBase);
                         int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
@@ -1816,7 +1816,7 @@ bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
     double p = dataPU.activePower;
     double v = std::abs(data.terminalVoltage);
 
-    //[Ref.] Induction Motor Static Models for Power Flow and Voltage Stability Studies
+    //[Ref.] Induction Motor Static Models for Power Flow and Voltage stability Studies
     // If the motor is offline, calculate the nominal slip to user-defined power input and 1.0 p.u. voltage
     if(!motor->IsOnline()) v = 1.0;
     double r1 = data.r1t;

@@ -131,10 +131,10 @@ void ControlElementButton::OnLeftClickUp(wxMouseEvent& event)
     event.Skip();
 }
 
-ControlEditor::ControlEditor(wxWindow* parent, int ioflags) : ControlEditorBase(parent)
+ControlEditor::ControlEditor(wxWindow* parent, wxGLContext* sharedGLContext, int ioflags) : ControlEditorBase(parent)
 {
     BuildControlElementPanel();
-    m_glContext = new wxGLContext(m_glCanvas);
+    m_glContext = new wxGLContext(m_glCanvas, sharedGLContext);
     m_glContext->SetCurrent(*m_glCanvas);
     m_camera = new Camera();
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);

@@ -26,13 +26,13 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
 
     m_textCtrlbasePower->SetValue(Element::StringFromDouble(data.basePower));
     switch(data.basePowerUnit) {
-        case UNIT_VA: {
+        case ElectricalUnit::UNIT_VA: {
             m_choiceBasePower->SetSelection(0);
         } break;
-        case UNIT_kVA: {
+        case ElectricalUnit::UNIT_kVA: {
             m_choiceBasePower->SetSelection(1);
         } break;
-        case UNIT_MVA: {
+        case ElectricalUnit::UNIT_MVA: {
             m_choiceBasePower->SetSelection(2);
         } break;
         default: {
@@ -102,13 +102,13 @@ bool SimulationsSettingsForm::ValidateData()
         return false;
     switch(m_choiceBasePower->GetSelection()) {
         case 0: {
-            data.basePowerUnit = UNIT_VA;
+            data.basePowerUnit = ElectricalUnit::UNIT_VA;
         } break;
         case 1: {
-            data.basePowerUnit = UNIT_kVA;
+            data.basePowerUnit = ElectricalUnit::UNIT_kVA;
         } break;
         default: {
-            data.basePowerUnit = UNIT_MVA;
+            data.basePowerUnit = ElectricalUnit::UNIT_MVA;
         } break;
     }
     data.faultAfterPowerFlow = m_checkBoxFaultAfterPF->GetValue();
@@ -153,10 +153,10 @@ bool SimulationsSettingsForm::ValidateData()
                                   _("Value entered incorrectly in the field \"System frequency\".")))
         return false;
     if(!Element::DoubleFromString(this, m_textCtrlStabTolerance->GetValue(), data.stabilityTolerance,
-                                  _("Value entered incorrectly in the field \"Tolerance (Stability)\".")))
+                                  _("Value entered incorrectly in the field \"Tolerance (stability)\".")))
         return false;
     if(!Element::IntFromString(this, m_textCtrlStabMaxIterations->GetValue(), data.stabilityMaxIterations,
-                               _("Value entered incorrectly in the field \"Max. iterations (Stability)\".")))
+                               _("Value entered incorrectly in the field \"Max. iterations (stability)\".")))
         return false;
     if(!Element::IntFromString(this, m_textCtrlCtrlStepRatio->GetValue(), data.controlTimeStepRatio,
                                _("Value entered incorrectly in the field \"Controls step ratio\".")))

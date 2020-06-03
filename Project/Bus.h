@@ -86,6 +86,7 @@ class Bus : public PowerElement
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void Rotate(bool clockwise = true);
     virtual wxCursor GetBestPickboxCursor() const;
     virtual void MovePickbox(wxPoint2DDouble position);
@@ -93,7 +94,7 @@ class Bus : public PowerElement
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
     virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
-    virtual void SetElectricalData(BusElectricalData electricalData) { m_electricalData = electricalData; }
+    virtual void SetElectricalData(const BusElectricalData& electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
     

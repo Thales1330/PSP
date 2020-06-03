@@ -86,6 +86,7 @@ class Transformer : public Branch
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void Rotate(bool clockwise = true);
     virtual void Move(wxPoint2DDouble position);

@@ -166,7 +166,7 @@ void ConnectionLine::StartMove(wxPoint2DDouble position)
 wxPoint2DDouble ConnectionLine::GetMidPoint() const { return ((m_pointList[2] + m_pointList[3]) / 2.0); }
 bool ConnectionLine::SetParentLine(ConnectionLine* parent)
 {
-    if(m_nodeList[0]->GetNodeType() != Node::NODE_IN) return false;
+    if(m_nodeList[0]->GetNodeType() != Node::NodeType::NODE_IN) return false;
     if(!parent) return false;
 
     m_type = ELEMENT_LINE;

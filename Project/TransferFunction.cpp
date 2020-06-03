@@ -39,9 +39,9 @@ TransferFunction::TransferFunction(int id) : ControlElement(id)
     m_denominator.push_back(1);
     UpdateTFText();
 
-    Node* node1 = new Node(m_position + wxPoint2DDouble(-m_width / 2, 0), Node::NODE_IN, m_borderSize);
+    Node* node1 = new Node(m_position + wxPoint2DDouble(-m_width / 2, 0), Node::NodeType::NODE_IN, m_borderSize);
     node1->StartMove(m_position);
-    Node* node2 = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
+    Node* node2 = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NodeType::NODE_OUT, m_borderSize);
     node2->SetAngle(180.0);
     node2->StartMove(m_position);
     m_nodeList.push_back(node1);

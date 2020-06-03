@@ -165,18 +165,36 @@ void Shunt::DrawGround(wxPoint2DDouble position) const
     DrawLine(groundPts, GL_LINES);
 }
 
+void Shunt::DrawDCGround(wxPoint2DDouble position, wxGraphicsContext* gc) const
+{
+	std::vector<wxPoint2DDouble> groundPts;
+	groundPts.push_back(position);
+	groundPts.push_back(position + wxPoint2DDouble(0, 10));
+	groundPts.push_back(position + wxPoint2DDouble(-10, 10));
+	groundPts.push_back(position + wxPoint2DDouble(10, 10));
+	groundPts.push_back(position + wxPoint2DDouble(-6, 15));
+	groundPts.push_back(position + wxPoint2DDouble(6, 15));
+	groundPts.push_back(position + wxPoint2DDouble(-3, 20));
+	groundPts.push_back(position + wxPoint2DDouble(3, 20));
+
+	gc->DrawLines(2, &groundPts[0]);
+	gc->DrawLines(2, &groundPts[2]);
+	gc->DrawLines(2, &groundPts[4]);
+	gc->DrawLines(2, &groundPts[6]);
+}
+
 void Shunt::UpdatePowerFlowArrowsPosition()
 {
     std::vector<wxPoint2DDouble> edges;
     switch(m_pfDirection) {
-        case PF_NONE: {
+        case PowerFlowDirection::PF_NONE: {
             m_powerFlowArrow.clear();
         } break;
-        case PF_TO_BUS: {
+        case PowerFlowDirection::PF_TO_BUS: {
             edges.push_back(m_pointList[2]);
             edges.push_back(m_pointList[1]);
         } break;
-        case PF_TO_ELEMENT: {
+        case PowerFlowDirection::PF_TO_ELEMENT: {
             edges.push_back(m_pointList[1]);
             edges.push_back(m_pointList[2]);
         } break;

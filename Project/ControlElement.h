@@ -30,9 +30,9 @@
 class Node
 {
    public:
-    enum NodeType { NODE_IN = 0, NODE_OUT };
+    enum class NodeType { NODE_IN = 0, NODE_OUT };
 
-    Node(wxPoint2DDouble position = wxPoint2DDouble(0, 0), NodeType nodeType = NODE_IN, double borderSize = 0.0);
+    Node(wxPoint2DDouble position = wxPoint2DDouble(0, 0), NodeType nodeType = NodeType::NODE_IN, double borderSize = 0.0);
     ~Node();
 
     wxRect2DDouble GetRect() const { return m_rect; }

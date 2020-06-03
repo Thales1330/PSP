@@ -65,7 +65,9 @@ bool GeneralPropertiesForm::ValidateData()
     auto checkData = m_properties->GetGeneralPropertiesData();
     bool hasChanges = false;
 
-    wxTextFile file("config.ini");
+    //wxTextFile file("config.ini");
+	wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+	wxTextFile file(fn.GetPath() + wxFileName::GetPathSeparator() + "config.ini");
     if(!file.Create()) {
         if(!file.Open()) {
             // Fail to access the file.

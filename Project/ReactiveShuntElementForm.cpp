@@ -30,16 +30,16 @@ ReactiveShuntElementForm::ReactiveShuntElementForm(wxWindow* parent, Capacitor* 
 
     m_textCtrlReactivePower->SetValue(Capacitor::StringFromDouble(data.reactivePower));
     switch(data.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceReactivePower->SetSelection(0);
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_VAr: {
             m_choiceReactivePower->SetSelection(1);
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kVAr: {
             m_choiceReactivePower->SetSelection(2);
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_MVAr: {
             m_choiceReactivePower->SetSelection(3);
         } break;
         default:
@@ -59,16 +59,16 @@ ReactiveShuntElementForm::ReactiveShuntElementForm(wxWindow* parent, Inductor* i
 
     m_textCtrlReactivePower->SetValue(Inductor::StringFromDouble(data.reactivePower));
     switch(data.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceReactivePower->SetSelection(0);
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_VAr: {
             m_choiceReactivePower->SetSelection(1);
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kVAr: {
             m_choiceReactivePower->SetSelection(2);
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_MVAr: {
             m_choiceReactivePower->SetSelection(3);
         } break;
         default:
@@ -114,16 +114,16 @@ bool ReactiveShuntElementForm::ValidateData()
             return false;
         switch(m_choiceReactivePower->GetSelection()) {
             case 0: {
-                data.reactivePowerUnit = UNIT_PU;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
             } break;
             case 1: {
-                data.reactivePowerUnit = UNIT_VAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_VAr;
             } break;
             case 2: {
-                data.reactivePowerUnit = UNIT_kVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_kVAr;
             } break;
             case 3: {
-                data.reactivePowerUnit = UNIT_MVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
             } break;
         }
 
@@ -138,16 +138,16 @@ bool ReactiveShuntElementForm::ValidateData()
             return false;
         switch(m_choiceReactivePower->GetSelection()) {
             case 0: {
-                data.reactivePowerUnit = UNIT_PU;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
             } break;
             case 1: {
-                data.reactivePowerUnit = UNIT_VAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_VAr;
             } break;
             case 2: {
-                data.reactivePowerUnit = UNIT_kVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_kVAr;
             } break;
             case 3: {
-                data.reactivePowerUnit = UNIT_MVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
             } break;
         }
 

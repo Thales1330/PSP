@@ -20,7 +20,7 @@
 #include "SyncGenerator.h"
 #include "SyncMotor.h"
 
-SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator) : SyncMachineFormBase(parent)
+SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator, wxGLContext* sharedGLContext) : SyncMachineFormBase(parent)
 {
     SetSize(GetBestSize());
     ReplaceStaticTextLabelChar(m_staticTextPosResistance, L'\u2081');
@@ -32,6 +32,7 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator)
     Layout();
     m_syncGenerator = syncGenerator;
     m_parent = parent;
+    m_sharedGLContext = sharedGLContext;
 
     SyncGeneratorElectricalData data = syncGenerator->GetElectricalData();
 
@@ -286,7 +287,7 @@ void SyncMachineForm::OnStabilityButtonClick(wxCommandEvent& event)
 {
     if(ValidateData()) {
         if(m_syncGenerator) {
-            GeneratorStabForm* stabForm = new GeneratorStabForm(m_parent, m_syncGenerator);
+            GeneratorStabForm* stabForm = new GeneratorStabForm(m_parent, m_syncGenerator, m_sharedGLContext);
             if(stabForm->ShowModal() == wxID_OK) {
                 stabForm->Destroy();
                 EndModal(wxID_OK);

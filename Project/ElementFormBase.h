@@ -386,7 +386,7 @@ class GeneratorStabFormBase : public wxDialog
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
     GeneratorStabFormBase(wxWindow* parent,
                           wxWindowID id = wxID_ANY,
-                          const wxString& title = _("Generator: Stability"),
+                          const wxString& title = _("Generator: stability"),
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxSize(-1, -1),
                           long style = wxDEFAULT_DIALOG_STYLE);

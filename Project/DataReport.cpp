@@ -335,10 +335,10 @@ void DataReport::FillValues(GridSelection gridToFill)
 
     double basePower = m_workspace->GetProperties()->GetSimulationPropertiesData().basePower;
     switch(m_workspace->GetProperties()->GetSimulationPropertiesData().basePowerUnit) {
-        case UNIT_kVA: {
+        case ElectricalUnit::UNIT_kVA: {
             basePower *= 1e3;
         } break;
-        case UNIT_MVA: {
+        case ElectricalUnit::UNIT_MVA: {
             basePower *= 1e6;
         } break;
         default:
@@ -485,7 +485,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             auto data = bus->GetElectricalData();
 
             double vb = std::abs(data.nominalVoltage);
-            if(data.nominalVoltageUnit == UNIT_kV) vb *= 1e3;
+            if(data.nominalVoltageUnit == ElectricalUnit::UNIT_kV) vb *= 1e3;
             double kVoltage = 1.0;
             if(m_gridPFBuses->GetCellValue(0, 2) == m_voltageChoices[1])
                 kVoltage = vb;
@@ -523,7 +523,7 @@ void DataReport::FillValues(GridSelection gridToFill)
             auto data = line->GetPUElectricalData(basePower);
 
             double vb = data.nominalVoltage;
-            if(data.nominalVoltageUnit == UNIT_kV) vb *= 1e3;
+            if(data.nominalVoltageUnit == ElectricalUnit::UNIT_kV) vb *= 1e3;
             double zb = (vb * vb) / basePower;
 
             wxString busName1 = "-";
@@ -567,10 +567,10 @@ void DataReport::FillValues(GridSelection gridToFill)
             double vb = 0.0;
             if(data.baseVoltage == 0) {
                 vb = data.primaryNominalVoltage;
-                if(data.primaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+                if(data.primaryNominalVoltageUnit == ElectricalUnit::UNIT_kV) vb *= 1e3;
             } else {
                 vb = data.secondaryNominalVoltage;
-                if(data.secondaryNominalVoltageUnit == UNIT_kV) vb *= 1e3;
+                if(data.secondaryNominalVoltageUnit == ElectricalUnit::UNIT_kV) vb *= 1e3;
             }
             double zb = (vb * vb) / basePower;
 

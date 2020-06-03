@@ -183,7 +183,7 @@ bool PowerQuality::CalculateDistortions(double systemPowerBase)
 
                         // Bus voltage
                         double voltage = busData.nominalVoltage;
-                        if(busData.nominalVoltageUnit == UNIT_kV) voltage *= 1e3;
+                        if(busData.nominalVoltageUnit == ElectricalUnit::UNIT_kV) voltage *= 1e3;
 
                         auto puData = harmCurrent->GetPUElectricalData(systemPowerBase, voltage);
 

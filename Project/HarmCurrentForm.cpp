@@ -16,7 +16,7 @@ HarmCurrentForm::HarmCurrentForm(wxWindow* parent, HarmCurrent* harmCurrent) : H
     for(unsigned int i = 0; i < data.harmonicOrder.size(); ++i) {
         long item = m_listCtrlHarmCurrentList->InsertItem(m_maxID, wxString::Format("%d", data.harmonicOrder[i]));
         m_listCtrlHarmCurrentList->SetItem(item, 1, m_harmCurrent->StringFromDouble(data.injHarmCurrent[i], 1));
-        m_listCtrlHarmCurrentList->SetItem(item, 2, data.injHarmCurrentUnit[i] == UNIT_A ? _("A") : _("p.u."));
+        m_listCtrlHarmCurrentList->SetItem(item, 2, data.injHarmCurrentUnit[i] == ElectricalUnit::UNIT_A ? _("A") : _("p.u."));
         m_listCtrlHarmCurrentList->SetItem(item, 3, m_harmCurrent->StringFromDouble(data.injHarmAngle[i], 1));
         m_maxID++;
     }
@@ -50,9 +50,9 @@ bool HarmCurrentForm::ValidateData()
         if(!m_listCtrlHarmCurrentList->GetItemText(item, 1).ToDouble(&injCurrent)) { return false; }
         injHarmCurrent.push_back(injCurrent);
         if(m_listCtrlHarmCurrentList->GetItemText(item, 2) == "A")
-            injHarmCurrentUnit.push_back(UNIT_A);
+            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_A);
         else
-            injHarmCurrentUnit.push_back(UNIT_PU);
+            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_PU);
         double injCAngle = 0.0;
         if(!m_listCtrlHarmCurrentList->GetItemText(item, 3).ToDouble(&injCAngle)) { return false; }
         injHarmAngle.push_back(injCAngle);
@@ -124,9 +124,9 @@ void HarmCurrentForm::SortList()
         if(!m_listCtrlHarmCurrentList->GetItemText(item, 1).ToDouble(&injCurrent)) return;
         injHarmCurrent.push_back(injCurrent);
         if(m_listCtrlHarmCurrentList->GetItemText(item, 2) == "A")
-            injHarmCurrentUnit.push_back(UNIT_A);
+            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_A);
         else
-            injHarmCurrentUnit.push_back(UNIT_PU);
+            injHarmCurrentUnit.push_back(ElectricalUnit::UNIT_PU);
         double injCAngle = 0.0;
         if(!m_listCtrlHarmCurrentList->GetItemText(item, 3).ToDouble(&injCAngle)) return;
         injHarmAngle.push_back(injCAngle);
@@ -165,7 +165,7 @@ void HarmCurrentForm::SortList()
     for(unsigned int i = 0; i < harmonicOrder.size(); ++i) {
         long item = m_listCtrlHarmCurrentList->InsertItem(m_maxID, wxString::Format("%d", harmonicOrder[i]));
         m_listCtrlHarmCurrentList->SetItem(item, 1, m_harmCurrent->StringFromDouble(injHarmCurrent[i], 1));
-        m_listCtrlHarmCurrentList->SetItem(item, 2, injHarmCurrentUnit[i] == UNIT_A ? _("A") : _("p.u."));
+        m_listCtrlHarmCurrentList->SetItem(item, 2, injHarmCurrentUnit[i] == ElectricalUnit::UNIT_A ? _("A") : _("p.u."));
         m_listCtrlHarmCurrentList->SetItem(item, 3, m_harmCurrent->StringFromDouble(injHarmAngle[i], 1));
         m_maxID++;
     }

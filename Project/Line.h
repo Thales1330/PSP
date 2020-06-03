@@ -25,15 +25,15 @@ struct LineElectricalData {
     // General
     wxString name = "";
     double nominalVoltage = 138.0;
-    ElectricalUnit nominalVoltageUnit = UNIT_kV;
+    ElectricalUnit nominalVoltageUnit = ElectricalUnit::UNIT_kV;
     double nominalPower = 100.0;
-    ElectricalUnit nominalPowerUnit = UNIT_MVA;
+    ElectricalUnit nominalPowerUnit = ElectricalUnit::UNIT_MVA;
     double resistance = 0.0;
-    ElectricalUnit resistanceUnit = UNIT_PU;
+    ElectricalUnit resistanceUnit = ElectricalUnit::UNIT_PU;
     double indReactance = 1.0;
-    ElectricalUnit indReactanceUnit = UNIT_PU;
+    ElectricalUnit indReactanceUnit = ElectricalUnit::UNIT_PU;
     double capSusceptance = 0.0;
-    ElectricalUnit capSusceptanceUnit = UNIT_PU;
+    ElectricalUnit capSusceptanceUnit = ElectricalUnit::UNIT_PU;
     double lineSize = 100.0;
     bool useLinePower = false;
 
@@ -64,6 +64,7 @@ class Line : public Branch
     ~Line();
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void Move(wxPoint2DDouble position);
     virtual void StartMove(wxPoint2DDouble position);
     virtual void MoveNode(Element* parent, wxPoint2DDouble position);

@@ -18,6 +18,7 @@
 #ifndef GENERATORSTABFORM_H
 #define GENERATORSTABFORM_H
 
+#include <wx/glcanvas.h>
 #include "ElementFormBase.h"
 
 class SwitchingForm;
@@ -35,7 +36,7 @@ class ControlElementContainer;
 class GeneratorStabForm : public GeneratorStabFormBase
 {
    public:
-    GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator);
+    GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator, wxGLContext* sharedGLContext);
     virtual ~GeneratorStabForm();
 
    protected:
@@ -46,10 +47,12 @@ class GeneratorStabForm : public GeneratorStabFormBase
     virtual void OnOKButtonClick(wxCommandEvent& event);
     virtual void OnSpeedGovernorButtonClick(wxCommandEvent& event);
     virtual void OnSwitchingButtonClick(wxCommandEvent& event);
+    wxGLContext* GetSharedGLContext() const { return m_sharedGLContext; }
 
     virtual bool ValidateData();
 
     SyncGenerator* m_syncGenerator = NULL;
     wxWindow* m_parent = NULL;
+    wxGLContext* m_sharedGLContext = NULL;
 };
 #endif  // GENERATORSTABFORM_H

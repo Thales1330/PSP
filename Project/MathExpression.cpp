@@ -45,11 +45,11 @@ MathExpression::MathExpression(int id) : ControlElement(id)
         } else {
             nodePosition = m_position + wxPoint2DDouble(-m_width / 2, 9 + 18 * i - m_height / 2);
         }
-        Node* nodeIn = new Node(nodePosition, Node::NODE_IN, m_borderSize);
+        Node* nodeIn = new Node(nodePosition, Node::NodeType::NODE_IN, m_borderSize);
         nodeIn->StartMove(m_position);
         m_nodeList.push_back(nodeIn);
     }
-    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NODE_OUT, m_borderSize);
+    Node* nodeOut = new Node(m_position + wxPoint2DDouble(m_width / 2, 0), Node::NodeType::NODE_OUT, m_borderSize);
     nodeOut->SetAngle(180.0);
     nodeOut->StartMove(m_position);
     m_nodeList.push_back(nodeOut);
@@ -165,7 +165,7 @@ bool MathExpression::Solve(double* input, double timeStep)
     int i = 3;
     for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
-        if(node->GetNodeType() != Node::NODE_OUT) {
+        if(node->GetNodeType() != Node::NodeType::NODE_OUT) {
             if(!node->IsConnected()) {
                 m_inputValues[i] = 0.0;  // Node not connected means zero value as input.
             } else {
@@ -243,7 +243,7 @@ void MathExpression::UpdatePoints()
 
 void MathExpression::AddInNode()
 {
-    Node* newNode = new Node(wxPoint2DDouble(0, 0), Node::NODE_IN, m_borderSize);
+    Node* newNode = new Node(wxPoint2DDouble(0, 0), Node::NodeType::NODE_IN, m_borderSize);
     newNode->SetAngle(m_angle);
     m_nodeList.insert(m_nodeList.end() - 1, newNode);
 }

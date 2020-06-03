@@ -83,13 +83,13 @@ void Workspace::OnPaint(wxPaintEvent& event)
     if(!m_glCanvas->IsShown()) return;
 
     wxPaintDC dc(m_glCanvas);
+
     m_glContext->SetCurrent(*m_glCanvas);
     SetViewport();
 
     // Set GLCanvas scale and translation.
     glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                          // Scale
     glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0);  // Translation
-
     // Draw
 
     // Elements
@@ -122,6 +122,7 @@ void Workspace::OnPaint(wxPaintEvent& event)
     glEnd();
 
     glFlush();  // Sends all pending information directly to the GPU.
+
     m_glCanvas->SwapBuffers();
     event.Skip();
 }
@@ -983,7 +984,7 @@ void Workspace::RotateSelectedElements(bool clockwise)
 void Workspace::DeleteSelectedElements()
 {
     // Don't set the end of the list at the loop's begin.
-    for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+    for(auto it = m_elementList.begin(); it != m_elementList.end();) {
         Element* element = *it;
 
         if(element->IsSelected()) {
@@ -1010,9 +1011,10 @@ void Workspace::DeleteSelectedElements()
                 }
             }
 
-            m_elementList.erase(it--);
+            it = m_elementList.erase(it);
             if(element) delete element;
         }
+        else it++;
     }
 
     for(auto it = m_textList.begin(); it != m_textList.end(); ++it) {

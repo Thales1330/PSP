@@ -352,9 +352,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             data.powerFlow[1] = v2 * std::conj(data.current[1]);
 
             if(data.powerFlow[0].real() > data.powerFlow[1].real())
-                line->SetPowerFlowDirection(PF_BUS1_TO_BUS2);
+                line->SetPowerFlowDirection(PowerFlowDirection::PF_BUS1_TO_BUS2);
             else
-                line->SetPowerFlowDirection(PF_BUS2_TO_BUS1);
+                line->SetPowerFlowDirection(PowerFlowDirection::PF_BUS2_TO_BUS1);
 
             line->SetElectricalData(data);
         }
@@ -389,9 +389,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             data.powerFlow[1] = v2 * std::conj(data.current[1]);
 
             if(data.powerFlow[0].real() > data.powerFlow[1].real())
-                transformer->SetPowerFlowDirection(PF_BUS1_TO_BUS2);
+                transformer->SetPowerFlowDirection(PowerFlowDirection::PF_BUS1_TO_BUS2);
             else
-                transformer->SetPowerFlowDirection(PF_BUS2_TO_BUS1);
+                transformer->SetPowerFlowDirection(PowerFlowDirection::PF_BUS2_TO_BUS1);
 
             transformer->SetElectricaData(data);
         }
@@ -405,13 +405,13 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             double reactivePower = data.qValue * systemPowerBase;
 
             switch(data.reactivePowerUnit) {
-                case UNIT_PU: {
+                case ElectricalUnit::UNIT_PU: {
                     reactivePower /= systemPowerBase;
                 } break;
-                case UNIT_kVAr: {
+                case ElectricalUnit::UNIT_kVAr: {
                     reactivePower /= 1e3;
                 } break;
-                case UNIT_MVAr: {
+                case ElectricalUnit::UNIT_MVAr: {
                     reactivePower /= 1e6;
                 } break;
                 default:
@@ -455,9 +455,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                     loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
 
                 if(childData.activePower >= 0.0)
-                    load->SetPowerFlowDirection(PF_TO_ELEMENT);
+                    load->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
                 else
-                    load->SetPowerFlowDirection(PF_TO_BUS);
+                    load->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
             }
         }
         for(auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
@@ -467,9 +467,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                 loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
 
                 if(childData.activePower >= 0.0)
-                    indMotor->SetPowerFlowDirection(PF_TO_ELEMENT);
+                    indMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
                 else
-                    indMotor->SetPowerFlowDirection(PF_TO_BUS);
+                    indMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
             }
         }
 
@@ -484,13 +484,13 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                         (power[i].real() + loadPower.real()) * systemPowerBase / (double)(syncGeneratorsOnBus.size());
 
                     switch(childData.activePowerUnit) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             activePower /= systemPowerBase;
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             activePower /= 1e3;
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             activePower /= 1e6;
                         } break;
                         default:
@@ -516,13 +516,13 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                         reactivePower /= (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
 
                     switch(childData.reactivePowerUnit) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             reactivePower /= systemPowerBase;
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kVAr: {
                             reactivePower /= 1e3;
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_MVAr: {
                             reactivePower /= 1e6;
                         } break;
                         default:
@@ -532,9 +532,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                 }
 
                 if(childData.activePower >= 0.0)
-                    generator->SetPowerFlowDirection(PF_TO_BUS);
+                    generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
                 else
-                    generator->SetPowerFlowDirection(PF_TO_ELEMENT);
+                    generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
 
                 generator->SetElectricalData(childData);
             }
@@ -585,13 +585,13 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                 reactivePower *= systemPowerBase;
 
                 switch(childData.reactivePowerUnit) {
-                    case UNIT_PU: {
+                    case ElectricalUnit::UNIT_PU: {
                         reactivePower /= systemPowerBase;
                     } break;
-                    case UNIT_kVAr: {
+                    case ElectricalUnit::UNIT_kVAr: {
                         reactivePower /= 1e3;
                     } break;
-                    case UNIT_MVAr: {
+                    case ElectricalUnit::UNIT_MVAr: {
                         reactivePower /= 1e6;
                     } break;
                     default:
@@ -601,9 +601,9 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
             }
 
             if(childData.activePower > 0.0)
-                syncMotor->SetPowerFlowDirection(PF_TO_ELEMENT);
+                syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
             else
-                syncMotor->SetPowerFlowDirection(PF_TO_BUS);
+                syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
 
             syncMotor->SetElectricalData(childData);
 

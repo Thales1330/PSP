@@ -17,6 +17,7 @@
 
 #ifndef SYNCMACHINEFORM_H
 #define SYNCMACHINEFORM_H
+#include <wx/glcanvas.h>
 
 #include "ElementFormBase.h"
 
@@ -34,7 +35,7 @@ class SyncMotor;
 class SyncMachineForm : public SyncMachineFormBase
 {
    public:
-    SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator);
+    SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator, wxGLContext* sharedGLContext);
     SyncMachineForm(wxWindow* parent, SyncMotor* syncMotor);
     virtual ~SyncMachineForm();
 
@@ -44,6 +45,7 @@ class SyncMachineForm : public SyncMachineFormBase
     virtual void OnCheckMinReactive(wxCommandEvent& event);
     virtual void OnOKButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
+    wxGLContext* GetSharedGLContext() const { return m_sharedGLContext; }
 
     virtual bool ValidateData();
     virtual void ReplaceStaticTextLabelChar(wxStaticText* staticText, wchar_t newChar);
@@ -51,5 +53,6 @@ class SyncMachineForm : public SyncMachineFormBase
     SyncGenerator* m_syncGenerator = NULL;
     SyncMotor* m_syncMotor = NULL;
     wxWindow* m_parent = NULL;
+    wxGLContext* m_sharedGLContext = NULL;    
 };
 #endif  // SYNCMACHINEFORM_H

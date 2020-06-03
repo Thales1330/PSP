@@ -158,6 +158,11 @@ class PowerElement : public Element
     virtual void DrawSwitches() const;
 
     /**
+     * @brief Draw switch using device context.
+     */
+    virtual void DrawDCSwitches(wxGraphicsContext* gc) const;
+
+    /**
      * @brief Calculate the points of the power flow arrows.
      * @param edges Points of the element that arrows point.
      */
@@ -167,6 +172,12 @@ class PowerElement : public Element
      * @brief Draw power flow arrows.
      */
     virtual void DrawPowerFlowPts() const;
+
+    /**
+     * @brief Draw power flow arrows using device context.
+     * @param gc Device context.
+     */
+    virtual void DrawDCPowerFlowPts(wxGraphicsContext* gc) const;
 
     /**
      * @brief Set nominal voltage of the element.

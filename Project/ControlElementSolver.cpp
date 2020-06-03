@@ -62,10 +62,10 @@ void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double 
     haveInput = haveOutput = false;
     for(auto it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {
         IOControl* io = *it;
-        if(io->GetType() == Node::NODE_OUT && !haveInput) {
+        if(io->GetType() == Node::NodeType::NODE_OUT && !haveInput) {
             m_inputControl = io;
             haveInput = true;
-        } else if(io->GetType() == Node::NODE_IN) {
+        } else if(io->GetType() == Node::NodeType::NODE_IN) {
             m_outputControl = io;
             haveOutput = true;
         }
@@ -329,7 +329,7 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
             auto nodeList = element->GetNodeList();
             for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
                 Node* node = *itN;
-                if(node->GetNodeType() == Node::NODE_OUT) outNode = node;
+                if(node->GetNodeType() == Node::NodeType::NODE_OUT) outNode = node;
             }
             if(!outNode) return NULL;
 

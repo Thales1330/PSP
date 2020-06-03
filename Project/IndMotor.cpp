@@ -32,6 +32,17 @@ void IndMotor::DrawSymbol() const
     DrawLine(mPts);
 }
 
+void IndMotor::DrawDCSymbol(wxGraphicsContext* gc) const
+{
+	std::vector<wxPoint2DDouble> mPts;
+	mPts.push_back(wxPoint2DDouble(-10, 13) + m_position);
+	mPts.push_back(wxPoint2DDouble(-10, -13) + m_position);
+	mPts.push_back(wxPoint2DDouble(0, 2) + m_position);
+	mPts.push_back(wxPoint2DDouble(10, -13) + m_position);
+	mPts.push_back(wxPoint2DDouble(10, 13) + m_position);
+	gc->DrawLines(mPts.size(), &mPts[0]);
+}
+
 bool IndMotor::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_ELEMENT, _("Edit induction motor"));
