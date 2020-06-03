@@ -18,7 +18,10 @@
 #ifndef WORKSPACE_H
 #define WORKSPACE_H
 
+#ifdef _MSC_VER
 #include <windows.h>
+#endif 
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <wx/dcclient.h>
