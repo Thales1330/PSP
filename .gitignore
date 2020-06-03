@@ -8,7 +8,14 @@ Project/Release_Ubuntu_x64/
 Project/Debug_Windows_x64/
 Project/Debug_Windows_x32/
 Project/Debug_Ubuntu_x64/
+Project/x64
+Project/Debug
+Project/Release
 docs/doxygen/latex
+data/
+Debug/
+Release/
+x64/
 
 # Compiled source #
 ###################
@@ -35,6 +42,8 @@ docs/doxygen/latex
 *.log
 *.sql
 *.sqlite
+*.filters
+*.db
 
 # OS generated files #
 ######################
@@ -54,3 +63,4 @@ Thumbs.db
 Project/Project.mk
 Project/Project.txt
 Makefile
+.vs

@@ -573,9 +573,10 @@ void mpFXY::Plot(wxDC& dc, mpWindow& w)
             }
 
             // draw method modified
-            wxPoint drawPts[ptVector.size()];
-            for(int i = 0; i < (int)ptVector.size(); i++) { drawPts[i] = ptVector[i]; }
-            dc.DrawLines(ptVector.size(), drawPts);
+			wxPoint* drawPts = new wxPoint[ptVector.size()];
+			for (int i = 0; i < (int)ptVector.size(); i++) { drawPts[i] = ptVector[i]; }
+			dc.DrawLines(ptVector.size(), drawPts);
+            delete[] drawPts;
         }
 
         if(!m_name.IsEmpty() && m_showName) {
@@ -912,7 +913,10 @@ void mpScaleX::Plot(wxDC& dc, mpWindow& w)
         }
     }
     /*    if (m_flags != mpALIGN_TOP) {
-            
+            
+
+
+
             if ((m_flags == mpALIGN_BORDER_BOTTOM) || (m_flags == mpALIGN_TOP)) {
                 dc.DrawText( m_name, extend - tx - 4, orgy - 4 - (ty*2));
             } else {
@@ -1310,7 +1314,10 @@ void mpWindow::OnMouseMove(wxMouseEvent& event)
                 wxTipWindow** ptr = NULL;
                 wxRect rectBounds(event.GetX(), event.GetY(), 5, 5);
                 wxTipWindow* tip = new wxTipWindow(this, toolTipContent, 100, ptr, &rectBounds);
-                
+                
+
+
+
             } */
         }
     }

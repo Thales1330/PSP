@@ -81,7 +81,7 @@
 #include <deque>
 
 // For memory leak debug
-#ifdef _WINDOWS
+#ifdef __WINDOWS__
 #ifdef _DEBUG
 #include <crtdbg.h>
 #define DEBUG_NEW new(_NORMAL_BLOCK ,__FILE__, __LINE__)

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{10B333DB-E093-46BA-BFE2-18AA8005AD88}</ProjectGuid>
+    <RootNamespace>PSPUFU</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\wxWidgets-3.1.3\wxwidgets.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\wxWidgets-3.1.3\wxwidgets.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\wxWidgets-3.1.3\wxwidgets.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\wxWidgets-3.1.3\wxwidgets.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <EmbedManifest>true</EmbedManifest>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <EmbedManifest>true</EmbedManifest>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <IntDir>$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ManifestResourceCompile />
+    <Manifest>
+      <AdditionalManifestFiles>win_resources.rc</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;WIN32;_CRT_SECURE_NO_DEPRECATE=1;_CRT_NON_CONFORMING_SWPRINTFS=1;_SCL_SECURE_NO_WARNINGS=1;__WXMSW__;NDEBUG;_UNICODE;WXBUILDING</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ManifestResourceCompile />
+    <Manifest>
+      <AdditionalManifestFiles>win_resources.rc</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>win_resources.rc</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <OmitFramePointers>false</OmitFramePointers>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>win_resources.rc</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutForm.cpp" />
+    <ClCompile Include="artProvider\ArtMetro.cpp" />
+    <ClCompile Include="Branch.cpp" />
+    <ClCompile Include="Bus.cpp" />
+    <ClCompile Include="BusForm.cpp" />
+    <ClCompile Include="BusFormBitmaps.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Capacitor.cpp" />
+    <ClCompile Include="ChartView.cpp" />
+    <ClCompile Include="ChartViewBase.cpp" />
+    <ClCompile Include="ChartViewBitmaps.cpp" />
+    <ClCompile Include="ConnectionLine.cpp" />
+    <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="ConstantForm.cpp" />
+    <ClCompile Include="ControlEditor.cpp" />
+    <ClCompile Include="ControlEditorBase.cpp" />
+    <ClCompile Include="ControlEditorBitmaps.cpp" />
+    <ClCompile Include="ControlElement.cpp" />
+    <ClCompile Include="ControlElementContainer.cpp" />
+    <ClCompile Include="ControlElementSolver.cpp" />
+    <ClCompile Include="ControlSystemTest.cpp" />
+    <ClCompile Include="DataReport.cpp" />
+    <ClCompile Include="DataReportBase.cpp" />
+    <ClCompile Include="DataReportBitmaps.cpp" />
+    <ClCompile Include="Divider.cpp" />
+    <ClCompile Include="ElectricCalculation.cpp" />
+    <ClCompile Include="Electromechanical.cpp" />
+    <ClCompile Include="Element.cpp" />
+    <ClCompile Include="ElementDataObject.cpp" />
+    <ClCompile Include="ElementFormBase.cpp" />
+    <ClCompile Include="ElementFormBitmaps.cpp" />
+    <ClCompile Include="ElementPlotData.cpp" />
+    <ClCompile Include="Exponential.cpp" />
+    <ClCompile Include="ExponentialForm.cpp" />
+    <ClCompile Include="Fault.cpp" />
+    <ClCompile Include="FileHanding.cpp" />
+    <ClCompile Include="fparser\fparser.cc" />
+    <ClCompile Include="fparser\fpoptimizer.cc" />
+    <ClCompile Include="FrequencyResponseForm.cpp" />
+    <ClCompile Include="Gain.cpp" />
+    <ClCompile Include="GainForm.cpp" />
+    <ClCompile Include="GeneralPropertiesForm.cpp" />
+    <ClCompile Include="GeneratorStabForm.cpp" />
+    <ClCompile Include="GraphAutoLayout.cpp" />
+    <ClCompile Include="GraphicalElement.cpp" />
+    <ClCompile Include="HarmCurrent.cpp" />
+    <ClCompile Include="HarmCurrentForm.cpp" />
+    <ClCompile Include="ImportForm.cpp" />
+    <ClCompile Include="IndMotor.cpp" />
+    <ClCompile Include="IndMotorForm.cpp" />
+    <ClCompile Include="Inductor.cpp" />
+    <ClCompile Include="IOControl.cpp" />
+    <ClCompile Include="IOControlForm.cpp" />
+    <ClCompile Include="Limiter.cpp" />
+    <ClCompile Include="LimiterForm.cpp" />
+    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="LineForm.cpp" />
+    <ClCompile Include="Load.cpp" />
+    <ClCompile Include="LoadForm.cpp" />
+    <ClCompile Include="Machines.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="MainFrameBase.cpp" />
+    <ClCompile Include="MainFrameBitmaps.cpp" />
+    <ClCompile Include="MathExpression.cpp" />
+    <ClCompile Include="MathExpressionForm.cpp" />
+    <ClCompile Include="MathExprParser.cpp" />
+    <ClCompile Include="MathOperation.cpp" />
+    <ClCompile Include="Multiplier.cpp" />
+    <ClCompile Include="OpenGLText.cpp" />
+    <ClCompile Include="PowerElement.cpp" />
+    <ClCompile Include="PowerFlow.cpp" />
+    <ClCompile Include="PowerQuality.cpp" />
+    <ClCompile Include="PropertiesData.cpp" />
+    <ClCompile Include="PropertiesFormBase.cpp" />
+    <ClCompile Include="PropertiesFormBitmaps.cpp" />
+    <ClCompile Include="RateLimiter.cpp" />
+    <ClCompile Include="RateLimiterForm.cpp" />
+    <ClCompile Include="ReactiveShuntElementForm.cpp" />
+    <ClCompile Include="Shunt.cpp" />
+    <ClCompile Include="SimulationsSettingsForm.cpp" />
+    <ClCompile Include="StabilityEventList.cpp" />
+    <ClCompile Include="Sum.cpp" />
+    <ClCompile Include="SumForm.cpp" />
+    <ClCompile Include="SwitchingForm.cpp" />
+    <ClCompile Include="SyncGenerator.cpp" />
+    <ClCompile Include="SyncMachineForm.cpp" />
+    <ClCompile Include="SyncMotor.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TextForm.cpp" />
+    <ClCompile Include="TransferFunction.cpp" />
+    <ClCompile Include="TransferFunctionForm.cpp" />
+    <ClCompile Include="Transformer.cpp" />
+    <ClCompile Include="TransformerForm.cpp" />
+    <ClCompile Include="Workspace.cpp" />
+    <ClCompile Include="WorkspaceBase.cpp" />
+    <ClCompile Include="WorkspaceBitmaps.cpp" />
+    <ClCompile Include="WorkspaceDC.cpp" />
+    <ClCompile Include="wxMathPlot\mathplot.cpp" />
+    <ClCompile Include="XMLParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutForm.h" />
+    <ClInclude Include="artProvider\ArtMetro.h" />
+    <ClInclude Include="Branch.h" />
+    <ClInclude Include="Bus.h" />
+    <ClInclude Include="BusForm.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Capacitor.h" />
+    <ClInclude Include="ChartView.h" />
+    <ClInclude Include="ChartViewBase.h" />
+    <ClInclude Include="ConnectionLine.h" />
+    <ClInclude Include="Constant.h" />
+    <ClInclude Include="ConstantForm.h" />
+    <ClInclude Include="ControlEditor.h" />
+    <ClInclude Include="ControlEditorBase.h" />
+    <ClInclude Include="ControlElement.h" />
+    <ClInclude Include="ControlElementContainer.h" />
+    <ClInclude Include="ControlElementSolver.h" />
+    <ClInclude Include="ControlSystemTest.h" />
+    <ClInclude Include="DataReport.h" />
+    <ClInclude Include="DataReportBase.h" />
+    <ClInclude Include="DegreesAndRadians.h" />
+    <ClInclude Include="Divider.h" />
+    <ClInclude Include="ElectricCalculation.h" />
+    <ClInclude Include="Electromechanical.h" />
+    <ClInclude Include="Element.h" />
+    <ClInclude Include="ElementDataObject.h" />
+    <ClInclude Include="ElementFormBase.h" />
+    <ClInclude Include="ElementPlotData.h" />
+    <ClInclude Include="Exponential.h" />
+    <ClInclude Include="ExponentialForm.h" />
+    <ClInclude Include="Fault.h" />
+    <ClInclude Include="FileHanding.h" />
+    <ClInclude Include="fparser\fparser.hh" />
+    <ClInclude Include="fparser\fpconfig.hh" />
+    <ClInclude Include="FrequencyResponseForm.h" />
+    <ClInclude Include="Gain.h" />
+    <ClInclude Include="GainForm.h" />
+    <ClInclude Include="GeneralPropertiesForm.h" />
+    <ClInclude Include="GeneratorStabForm.h" />
+    <ClInclude Include="GraphAutoLayout.h" />
+    <ClInclude Include="GraphicalElement.h" />
+    <ClInclude Include="HarmCurrent.h" />
+    <ClInclude Include="HarmCurrentForm.h" />
+    <ClInclude Include="ImportForm.h" />
+    <ClInclude Include="IndMotor.h" />
+    <ClInclude Include="IndMotorForm.h" />
+    <ClInclude Include="Inductor.h" />
+    <ClInclude Include="IOControl.h" />
+    <ClInclude Include="IOControlForm.h" />
+    <ClInclude Include="Limiter.h" />
+    <ClInclude Include="LimiterForm.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="LineForm.h" />
+    <ClInclude Include="Load.h" />
+    <ClInclude Include="LoadForm.h" />
+    <ClInclude Include="Machines.h" />
+    <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="MainFrameBase.h" />
+    <ClInclude Include="MathExpression.h" />
+    <ClInclude Include="MathExpressionForm.h" />
+    <ClInclude Include="MathExprParser.h" />
+    <ClInclude Include="MathOperation.h" />
+    <ClInclude Include="Multiplier.h" />
+    <ClInclude Include="OpenGLText.h" />
+    <ClInclude Include="PowerElement.h" />
+    <ClInclude Include="PowerFlow.h" />
+    <ClInclude Include="PowerQuality.h" />
+    <ClInclude Include="PropertiesData.h" />
+    <ClInclude Include="PropertiesFormBase.h" />
+    <ClInclude Include="RateLimiter.h" />
+    <ClInclude Include="RateLimiterForm.h" />
+    <ClInclude Include="ReactiveShuntElementForm.h" />
+    <ClInclude Include="Shunt.h" />
+    <ClInclude Include="SimulationsSettingsForm.h" />
+    <ClInclude Include="StabilityEventList.h" />
+    <ClInclude Include="Sum.h" />
+    <ClInclude Include="SumForm.h" />
+    <ClInclude Include="SwitchingForm.h" />
+    <ClInclude Include="SyncGenerator.h" />
+    <ClInclude Include="SyncMachineForm.h" />
+    <ClInclude Include="SyncMotor.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="TextForm.h" />
+    <ClInclude Include="TransferFunction.h" />
+    <ClInclude Include="TransferFunctionForm.h" />
+    <ClInclude Include="Transformer.h" />
+    <ClInclude Include="TransformerForm.h" />
+    <ClInclude Include="Workspace.h" />
+    <ClInclude Include="WorkspaceBase.h" />
+    <ClInclude Include="WorkspaceDC.h" />
+    <ClInclude Include="wxMathPlot\mathplot.h" />
+    <ClInclude Include="XMLParser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="win_resources.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
