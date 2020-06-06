@@ -25,10 +25,10 @@ struct BusElectricalData {
     int number = 0;
     wxString name = "";
     double nominalVoltage = 138.0;
-    ElectricalUnit nominalVoltageUnit = UNIT_kV;
+    ElectricalUnit nominalVoltageUnit = ElectricalUnit::UNIT_kV;
     bool isVoltageControlled = false;
     double controlledVoltage = 1.0;
-    int controlledVoltageUnitChoice = 0;  // 0 = p.u., 1 = same as nominalVoltageUnit (UNIT_V or UNIT_kV).
+    int controlledVoltageUnitChoice = 0;  // 0 = p.u., 1 = same as nominalVoltageUnit (ElectricalUnit::UNIT_V or ElectricalUnit::UNIT_kV).
     bool slackBus = false;
 
     // Power flow (p.u.)
@@ -38,8 +38,8 @@ struct BusElectricalData {
 
     // Fault
     bool hasFault = false;
-    FaultData faultType = FAULT_THREEPHASE;
-    FaultData faultLocation = FAULT_LINE_A;
+    FaultData faultType = FaultData::FAULT_THREEPHASE;
+    FaultData faultLocation = FaultData::FAULT_LINE_A;
     // p.u. fault data
     double faultResistance = 0.0;
     double faultReactance = 0.0;
@@ -96,7 +96,7 @@ class Bus : public PowerElement
     virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
     virtual void SetElectricalData(const BusElectricalData& electricalData) { m_electricalData = electricalData; }
     virtual bool ShowForm(wxWindow* parent, Element* element);
-    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = PlotStudy::STABILITY);
     
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode);

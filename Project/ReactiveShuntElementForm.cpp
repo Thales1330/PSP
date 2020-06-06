@@ -33,13 +33,13 @@ ReactiveShuntElementForm::ReactiveShuntElementForm(wxWindow* parent, Capacitor* 
         case ElectricalUnit::UNIT_PU: {
             m_choiceReactivePower->SetSelection(0);
         } break;
-        case ElectricalUnit::UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             m_choiceReactivePower->SetSelection(1);
         } break;
-        case ElectricalUnit::UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             m_choiceReactivePower->SetSelection(2);
         } break;
-        case ElectricalUnit::UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             m_choiceReactivePower->SetSelection(3);
         } break;
         default:
@@ -62,13 +62,13 @@ ReactiveShuntElementForm::ReactiveShuntElementForm(wxWindow* parent, Inductor* i
         case ElectricalUnit::UNIT_PU: {
             m_choiceReactivePower->SetSelection(0);
         } break;
-        case ElectricalUnit::UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             m_choiceReactivePower->SetSelection(1);
         } break;
-        case ElectricalUnit::UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             m_choiceReactivePower->SetSelection(2);
         } break;
-        case ElectricalUnit::UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             m_choiceReactivePower->SetSelection(3);
         } break;
         default:
@@ -117,13 +117,13 @@ bool ReactiveShuntElementForm::ValidateData()
                 data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
             } break;
             case 1: {
-                data.reactivePowerUnit = ElectricalUnit::UNIT_VAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_var;
             } break;
             case 2: {
-                data.reactivePowerUnit = ElectricalUnit::UNIT_kVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;
             } break;
             case 3: {
-                data.reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
             } break;
         }
 
@@ -141,13 +141,13 @@ bool ReactiveShuntElementForm::ValidateData()
                 data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
             } break;
             case 1: {
-                data.reactivePowerUnit = ElectricalUnit::UNIT_VAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_var;
             } break;
             case 2: {
-                data.reactivePowerUnit = ElectricalUnit::UNIT_kVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;
             } break;
             case 3: {
-                data.reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
             } break;
         }
 

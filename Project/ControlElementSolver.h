@@ -79,8 +79,8 @@ class ControlElementSolver
     ConnectionLine* SolveNextElement(ConnectionLine* currentLine);
 
     ControlElementContainer* m_ctrlContainer = NULL;
-    double m_timeStep;
-    double m_integrationError;
+    double m_timeStep = 1e-3;
+    double m_integrationError = 1e-5;
     std::vector<double> m_solutions;
     bool m_isOK = false;
     wxString m_failMessage = _("Unknown error.");

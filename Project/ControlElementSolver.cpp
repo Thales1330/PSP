@@ -344,7 +344,7 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
                         Node* childNode = *itCN;
                         if(childNode == outNode) {
                             // Check if the line connect two elements, otherwise return NULL
-                            if(cLine->GetType() != ConnectionLine::ELEMENT_ELEMENT) return NULL;
+                            if(cLine->GetType() != ConnectionLine::ConnectionLineType::ELEMENT_ELEMENT) return NULL;
 
                             // Set the connection line value and return it.
                             cLine->SetValue(element->GetOutput());

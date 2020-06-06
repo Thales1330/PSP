@@ -20,7 +20,7 @@
 
 #ifdef _MSC_VER
 #include <windows.h>
-#endif 
+#endif // _MSC_VER
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -90,7 +90,7 @@ enum ElementID {
 class Workspace : public WorkspaceBase
 {
    public:
-    enum WorkspaceMode {
+    enum class WorkspaceMode : int {
         MODE_EDIT = 0,
         MODE_MOVE_ELEMENT,
         MODE_MOVE_PICKBOX,
@@ -182,7 +182,7 @@ protected:
     wxTipWindow* m_tipWindow = NULL;
     wxString m_name;
 
-    WorkspaceMode m_mode = MODE_EDIT;
+    WorkspaceMode m_mode = WorkspaceMode::MODE_EDIT;
 
     std::vector<PowerElement*> m_elementList;
     int m_elementNumber[NUM_ELEMENTS];

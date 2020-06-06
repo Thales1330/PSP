@@ -155,7 +155,7 @@ wxString HarmCurrent::GetTipText() const
         tipText +=
             wxString::Format("\nI%dh = %s %s (%s%s)", m_electricalData.harmonicOrder[i],
                              StringFromDouble(m_electricalData.injHarmCurrent[i]),
-                             m_electricalData.injHarmCurrentUnit[i] == UNIT_A ? "A" : "p.u.",
+                             m_electricalData.injHarmCurrentUnit[i] == ElectricalUnit::UNIT_A ? "A" : "p.u.",
                              StringFromDouble(m_electricalData.injHarmAngle[i]), static_cast<wxString>(L'\u00B0'));
     }
 
@@ -179,9 +179,9 @@ HarmCurrentElectricalData HarmCurrent::GetPUElectricalData(double systemPowerBas
     HarmCurrentElectricalData puData = m_electricalData;
     double ib = systemPowerBase / (std::sqrt(3.00) * voltage);
     for(unsigned int i = 0; i < puData.harmonicOrder.size(); ++i) {
-        if(puData.injHarmCurrentUnit[i] == UNIT_A) {
+        if(puData.injHarmCurrentUnit[i] == ElectricalUnit::UNIT_A) {
             puData.injHarmCurrent[i] /= ib;
-            puData.injHarmCurrentUnit[i] = UNIT_PU;
+            puData.injHarmCurrentUnit[i] = ElectricalUnit::UNIT_PU;
         }
     }
     return puData;
@@ -208,7 +208,7 @@ rapidxml::xml_node<>* HarmCurrent::SaveElement(rapidxml::xml_document<>& doc, ra
         XMLParser::SetNodeValue(doc, order, m_electricalData.harmonicOrder[i]);
         auto injCurrent = XMLParser::AppendNode(doc, harmCurrentData, "InjCurrent");
         XMLParser::SetNodeValue(doc, injCurrent, m_electricalData.injHarmCurrent[i]);
-        XMLParser::SetNodeAttribute(doc, injCurrent, "UnitID", m_electricalData.injHarmCurrentUnit[i]);
+        XMLParser::SetNodeAttribute(doc, injCurrent, "UnitID", static_cast<int>(m_electricalData.injHarmCurrentUnit[i]));
         auto injHarmAngle = XMLParser::AppendNode(doc, harmCurrentData, "Angle");
         XMLParser::SetNodeValue(doc, injHarmAngle, m_electricalData.injHarmAngle[i]);
     }

@@ -25,7 +25,7 @@
  * @enum ElectricalUnit
  * @brief Electrical units.
  */
-enum ElectricalUnit {
+enum class ElectricalUnit : int {
     UNIT_PU = 0, /**< Per unit (p.u.) */
     UNIT_V,      /**< Volt */
     UNIT_kV,     /**< Kilovolts */
@@ -37,9 +37,9 @@ enum ElectricalUnit {
     UNIT_VA,     /**< Volt-ampere */
     UNIT_kVA,    /**< Kilovolt-ampere */
     UNIT_MVA,    /**< Megavolt-ampere */
-    UNIT_VAr,    /**< Volt-ampere reactive */
-    UNIT_kVAr,   /**< Kilovolt-ampere reactive */
-    UNIT_MVAr,   /**< Megavolt-ampere reactive */
+    UNIT_var,    /**< Volt-ampere reactive */
+    UNIT_kvar,   /**< Kilovolt-ampere reactive */
+    UNIT_Mvar,   /**< Megavolt-ampere reactive */
     UNIT_OHM,    /**< Ohm */
     UNIT_OHM_km, /**< Ohm/km */
     UNIT_S,      /**< Siemens */
@@ -52,7 +52,7 @@ enum ElectricalUnit {
  * @enum FaultData
  * @brief Information about fault (type and location).
  */
-enum FaultData {
+enum class FaultData : int {
     FAULT_THREEPHASE = 0, /**< Three-phase fault */
     FAULT_2LINE,          /**< Line-to-line fault */
     FAULT_2LINE_GROUND,   /**< Double line-to-ground fault */
@@ -66,7 +66,7 @@ enum FaultData {
  * @enum SwitchingType
  * @brief Type of switching.
  */
-enum SwitchingType {
+enum class SwitchingType : int {
     SW_INSERT = 0, /**< Insert element */
     SW_REMOVE      /**< Remove element */
 };
@@ -75,7 +75,7 @@ enum SwitchingType {
  * @enum PowerFlowDirection
  * @brief Direction of power flow arrows.
  */
-enum PowerFlowDirection {
+enum class PowerFlowDirection : int {
     PF_NONE = 0,     /**< No direction (no arrows printed) */
     PF_TO_BUS,       /**< Element to bus */
     PF_TO_ELEMENT,   /**< Bus to element */
@@ -83,7 +83,7 @@ enum PowerFlowDirection {
     PF_BUS2_TO_BUS1  /**< Second bus to first bus (branch elements) */
 };
 
-enum PlotStudy {
+enum class PlotStudy : int {
     STABILITY = 0, /**< Stability studies */
     FREQRESPONSE   /**< Frequency resonse (Harmonics) */
 };
@@ -211,7 +211,7 @@ class PowerElement : public Element
      * @param plotData Plot data to be filled.
      * @return true if the plot data was successfully filled, false otherwise.
      */
-    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY) { return false; }
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = PlotStudy::STABILITY) { return false; }
     /**
      * @brief Check if the power element have dynamic event.
      * @return true if the element have dynamic an event, false otherwise.
@@ -233,7 +233,7 @@ class PowerElement : public Element
    protected:
     SwitchingData m_swData;
     std::vector<std::vector<wxPoint2DDouble> > m_powerFlowArrow;
-    PowerFlowDirection m_pfDirection = PF_NONE;
+    PowerFlowDirection m_pfDirection = PowerFlowDirection::PF_NONE;
 
     OpenGLColour m_busColour;
     OpenGLColour m_onlineElementColour;

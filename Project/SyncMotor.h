@@ -26,19 +26,19 @@ struct SyncMotorElectricalData {
     // General
     wxString name = "";
     double nominalPower = 100.0;
-    ElectricalUnit nominalPowerUnit = UNIT_MVA;
+    ElectricalUnit nominalPowerUnit = ElectricalUnit::UNIT_MVA;
     double nominalVoltage = 13.8;
-    ElectricalUnit nominalVoltageUnit = UNIT_kV;
+    ElectricalUnit nominalVoltageUnit = ElectricalUnit::UNIT_kV;
     double activePower = 100.0;
-    ElectricalUnit activePowerUnit = UNIT_MW;
+    ElectricalUnit activePowerUnit = ElectricalUnit::UNIT_MW;
     double reactivePower = 0.0;
-    ElectricalUnit reactivePowerUnit = UNIT_MVAr;
+    ElectricalUnit reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
     bool haveMaxReactive = false;
     double maxReactive = 9999.0;
-    ElectricalUnit maxReactiveUnit = UNIT_MVAr;
+    ElectricalUnit maxReactiveUnit = ElectricalUnit::UNIT_Mvar;
     bool haveMinReactive = false;
     double minReactive = -9999.0;
-    ElectricalUnit minReactiveUnit = UNIT_MVAr;
+    ElectricalUnit minReactiveUnit = ElectricalUnit::UNIT_Mvar;
     bool useMachineBase = true;
 
     // Fault

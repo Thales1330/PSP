@@ -232,17 +232,17 @@ CapacitorElectricalData Capacitor::GetPUElectricalData(double systemPowerBase)
 {
     CapacitorElectricalData data = m_electricalData;
     switch(data.reactivePowerUnit) {
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             data.reactivePower = data.reactivePower / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         default:
             break;
@@ -273,16 +273,16 @@ wxString Capacitor::GetTipText() const
     tipText += "\n";
     tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
     switch(m_electricalData.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             tipText += _(" p.u.");
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             tipText += _(" VAr");
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             tipText += _(" kVAr");
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             tipText += _(" MVAr");
         } break;
         default:
@@ -306,7 +306,7 @@ rapidxml::xml_node<>* Capacitor::SaveElement(rapidxml::xml_document<>& doc, rapi
     XMLParser::SetNodeValue(doc, name, m_electricalData.name);
     auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
     XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
-    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", static_cast<int>(m_electricalData.reactivePowerUnit));
 
     SaveSwitchingData(doc, electricalProp);
 

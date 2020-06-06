@@ -25,11 +25,11 @@ class IndMotorForm;
 struct IndMotorElectricalData {
     wxString name;
     double ratedPower = 100.0;
-    ElectricalUnit ratedPowerUnit = UNIT_MVA;
+    ElectricalUnit ratedPowerUnit = ElectricalUnit::UNIT_MVA;
     double activePower = 100.0;
-    ElectricalUnit activePowerUnit = UNIT_MW;
+    ElectricalUnit activePowerUnit = ElectricalUnit::UNIT_MW;
     double reactivePower = 0.0;
-    ElectricalUnit reactivePowerUnit = UNIT_MVAr;
+    ElectricalUnit reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
 
     bool useMachinePowerAsBase = true;
     bool calcQInPowerFlow = true;
@@ -134,7 +134,7 @@ class IndMotor : public Machines
     virtual void InitPowerFlowMotor(double systemPowerBase, int busNumber);
     virtual bool CalculateReactivePower(double voltage);
 
-    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = PlotStudy::STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

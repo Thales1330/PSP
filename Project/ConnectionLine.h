@@ -30,7 +30,7 @@
 class ConnectionLine : public ControlElement
 {
    public:
-    enum ConnectionLineType { ELEMENT_ELEMENT = 0, ELEMENT_LINE };
+    enum class ConnectionLineType : int { ELEMENT_ELEMENT = 0, ELEMENT_LINE };
     ConnectionLine();
     ConnectionLine(Node* firstNode, int id);
     ~ConnectionLine();
@@ -48,7 +48,7 @@ class ConnectionLine : public ControlElement
     virtual wxPoint2DDouble GetMidPoint() const;
     virtual double GetOffset() const { return m_lineOffset; }
     virtual void SetOffset(double offset) { m_lineOffset = offset; }
-    virtual ConnectionLineType GetType() const { return m_type; }
+    virtual ConnectionLine::ConnectionLineType GetType() const { return m_type; }
     virtual void SetType(ConnectionLineType newType) { m_type = newType; }
     virtual ConnectionLine* GetParentLine() const { return m_parentLine; }
     virtual bool SetParentLine(ConnectionLine* parent);
@@ -65,7 +65,7 @@ class ConnectionLine : public ControlElement
     double m_moveStartOffset = 0.0;
     wxPoint2DDouble m_tmpSndPt;
 
-    ConnectionLineType m_type = ELEMENT_ELEMENT;
+    ConnectionLineType m_type = ConnectionLineType::ELEMENT_ELEMENT;
     ConnectionLine* m_parentLine = NULL;
 
     double m_value;

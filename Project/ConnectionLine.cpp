@@ -42,7 +42,7 @@ void ConnectionLine::Draw(wxPoint2DDouble translation, double scale) const
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawLine(m_pointList);
 
-    if(m_type == ELEMENT_LINE) {
+    if(m_type == ConnectionLineType::ELEMENT_LINE) {
         glColor4d(0.0, 0.0, 0.0, 1.0);
         DrawCircle(m_pointList[5], 3, 10, GL_POLYGON);
     }
@@ -64,7 +64,7 @@ bool ConnectionLine::Intersects(wxRect2DDouble rect) const
 
 void ConnectionLine::UpdatePoints()
 {
-    if(m_type == ELEMENT_ELEMENT) {
+    if(m_type == ConnectionLineType::ELEMENT_ELEMENT) {
         bool hasOneNode = true;
         wxPoint2DDouble pt1 = m_nodeList[0]->GetPosition();
         wxPoint2DDouble pt2;
@@ -103,7 +103,7 @@ void ConnectionLine::UpdatePoints()
         }
 
         m_pointList[3] = m_pointList[4] + wxPoint2DDouble(0.0, midPt.m_y - m_pointList[4].m_y);
-    } else if(m_type == ELEMENT_LINE) {
+    } else if(m_type == ConnectionLineType::ELEMENT_LINE) {
         wxPoint2DDouble pt1 = m_nodeList[0]->GetPosition();
         wxPoint2DDouble pt2 = m_parentLine->GetMidPoint();
         wxPoint2DDouble midPt = (pt1 + pt2) / 2.0 + wxPoint2DDouble(0.0, m_lineOffset);
@@ -169,7 +169,7 @@ bool ConnectionLine::SetParentLine(ConnectionLine* parent)
     if(m_nodeList[0]->GetNodeType() != Node::NodeType::NODE_IN) return false;
     if(!parent) return false;
 
-    m_type = ELEMENT_LINE;
+    m_type = ConnectionLineType::ELEMENT_LINE;
     m_parentLine = parent;
     return true;
 }

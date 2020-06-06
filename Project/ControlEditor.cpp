@@ -157,73 +157,78 @@ void ControlEditor::BuildControlElementPanel()
 
     ControlElementButton* ioButton = new ControlElementButton(
         m_panelControlElements, _("In/Out"),
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\io.png", wxPATH_WIN).GetPath()), ID_IO);
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\io.png", wxPATH_WIN).GetPath()),
+        static_cast<int>(ControlElementButtonID::ID_IO));
     wrapSizer->Add(ioButton, 0, wxALL, 5);
     ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* tfButton = new ControlElementButton(
         m_panelControlElements, _("Transfer fcn"),
         wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\transferFunc.png", wxPATH_WIN).GetPath()),
-        ID_TF);
+        static_cast<int>(ControlElementButtonID::ID_TF));
     wrapSizer->Add(tfButton, 0, wxALL, 5);
     tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* sumButton = new ControlElementButton(
         m_panelControlElements, _("Sum"),
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sum.png", wxPATH_WIN).GetPath()), ID_SUM);
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sum.png", wxPATH_WIN).GetPath()),
+        static_cast<int>(ControlElementButtonID::ID_SUM));
     wrapSizer->Add(sumButton, 0, wxALL, 5);
     sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* constButton = new ControlElementButton(
         m_panelControlElements, _("Constant"),
         wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\value.png", wxPATH_WIN).GetPath()),
-        ID_CONST);
+        static_cast<int>(ControlElementButtonID::ID_CONST));
     wrapSizer->Add(constButton, 0, wxALL, 5);
     constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* gainButton = new ControlElementButton(
         m_panelControlElements, _("Gain"),
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\gain.png", wxPATH_WIN).GetPath()), ID_GAIN);
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\gain.png", wxPATH_WIN).GetPath()),
+        static_cast<int>(ControlElementButtonID::ID_GAIN));
     wrapSizer->Add(gainButton, 0, wxALL, 5);
     gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* limButton = new ControlElementButton(
         m_panelControlElements, _("Limiter"),
         wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\limiter.png", wxPATH_WIN).GetPath()),
-        ID_LIMITER);
+        static_cast<int>(ControlElementButtonID::ID_LIMITER));
     wrapSizer->Add(limButton, 0, wxALL, 5);
     limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* rateLimButton = new ControlElementButton(
         m_panelControlElements, _("Rate limiter"),
         wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\rateLimiter.png", wxPATH_WIN).GetPath()),
-        ID_RATELIM);
+        static_cast<int>(ControlElementButtonID::ID_RATELIM));
     wrapSizer->Add(rateLimButton, 0, wxALL, 5);
     rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* multButton = new ControlElementButton(
         m_panelControlElements, _("Multiplier"),
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mult.png", wxPATH_WIN).GetPath()), ID_MULT);
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mult.png", wxPATH_WIN).GetPath()),
+        static_cast<int>(ControlElementButtonID::ID_MULT));
     wrapSizer->Add(multButton, 0, wxALL, 5);
     multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* divButton = new ControlElementButton(
         m_panelControlElements, _("Divider"),
         wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\div.png", wxPATH_WIN).GetPath()),
-        ID_MATH_DIV);
+        static_cast<int>(ControlElementButtonID::ID_MATH_DIV));
     wrapSizer->Add(divButton, 0, wxALL, 5);
     divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* mathExprButton = new ControlElementButton(
         m_panelControlElements, _("Math Expression"),
         wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mathExpr.png", wxPATH_WIN).GetPath()),
-        ID_MATH_EXPR);
+        static_cast<int>(ControlElementButtonID::ID_MATH_EXPR));
     wrapSizer->Add(mathExprButton, 0, wxALL, 5);
     mathExprButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
     ControlElementButton* satButton = new ControlElementButton(
         m_panelControlElements, _("Exponential"),
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sat.png", wxPATH_WIN).GetPath()), ID_EXP);
+        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sat.png", wxPATH_WIN).GetPath()),
+        static_cast<int>(ControlElementButtonID::ID_EXP));
     wrapSizer->Add(satButton, 0, wxALL, 5);
     satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }
@@ -245,8 +250,8 @@ void ControlEditor::SetViewport()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_LINE_SMOOTH);
 
-    double width = m_glCanvas->GetSize().x - 1;
-    double height = m_glCanvas->GetSize().y - 1;
+    double width = static_cast<double>(m_glCanvas->GetSize().x) - 1;
+    double height = static_cast<double>(m_glCanvas->GetSize().y) - 1;
 
     // Viewport fit the screen.
     glViewport(0, 0, width, height);
@@ -262,58 +267,58 @@ void ControlEditor::SetViewport()
 void ControlEditor::AddElement(ControlElementButtonID id)
 {
     switch(id) {
-        case ID_IO: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_IO: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             IOControl* io = new IOControl(m_ioFlags, GetNextID());
             m_elementList.push_back(io);
         } break;
-        case ID_TF: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_TF: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             TransferFunction* tf = new TransferFunction(GetNextID());
             m_elementList.push_back(tf);
         } break;
-        case ID_SUM: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_SUM: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             Sum* sum = new Sum(GetNextID());
             m_elementList.push_back(sum);
         } break;
-        case ID_CONST: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_CONST: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             Constant* constant = new Constant(GetNextID());
             m_elementList.push_back(constant);
         } break;
-        case ID_LIMITER: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_LIMITER: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             Limiter* limiter = new Limiter(GetNextID());
             m_elementList.push_back(limiter);
         } break;
-        case ID_GAIN: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_GAIN: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             Gain* gain = new Gain(GetNextID());
             m_elementList.push_back(gain);
         } break;
-        case ID_MULT: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_MULT: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             Multiplier* mult = new Multiplier(GetNextID());
             m_elementList.push_back(mult);
         } break;
-        case ID_EXP: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_EXP: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             Exponential* exp = new Exponential(GetNextID());
             m_elementList.push_back(exp);
         } break;
-        case ID_RATELIM: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_RATELIM: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             RateLimiter* rateLim = new RateLimiter(GetNextID());
             m_elementList.push_back(rateLim);
         } break;
-        case ID_MATH_DIV: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_MATH_DIV: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             Divider* divider = new Divider(GetNextID());
             m_elementList.push_back(divider);
         } break;
-        case ID_MATH_EXPR: {
-            m_mode = MODE_INSERT;
+        case ControlElementButtonID::ID_MATH_EXPR: {
+            m_mode = ControlEditorMode::MODE_INSERT;
             MathExpression* mathExpr = new MathExpression(GetNextID());
             m_elementList.push_back(mathExpr);
         } break;
@@ -367,7 +372,7 @@ void ControlEditor::OnDoubleClick(wxMouseEvent& event)
     wxPoint2DDouble clickPoint = event.GetPosition();
     bool redraw = false;
 
-    if(m_mode == MODE_EDIT) {
+    if(m_mode == ControlEditor::ControlEditorMode::MODE_EDIT) {
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
             Element* element = *it;
             if(element->Contains(m_camera->ScreenToWorld(clickPoint))) {
@@ -391,8 +396,8 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
     wxPoint2DDouble clickPoint = event.GetPosition();
     bool foundElement = false;
 
-    if(m_mode == MODE_INSERT) {
-        m_mode = MODE_EDIT;
+    if(m_mode == ControlEditorMode::MODE_INSERT) {
+        m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
     } else {
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
             ControlElement* element = *it;
@@ -401,7 +406,7 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
             for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
                 Node* node = *itN;
                 if(node->Contains(m_camera->ScreenToWorld(clickPoint))) {
-                    m_mode = MODE_INSERT_LINE;
+                    m_mode = ControlEditorMode::MODE_INSERT_LINE;
                     ConnectionLine* line = new ConnectionLine(node, GetNextID());
                     m_connectionList.push_back(line);
                     element->AddChild(line);
@@ -421,25 +426,25 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
                         element->SetSelected();
                         foundElement = true;
                     }
-                    m_mode = MODE_MOVE_ELEMENT;
+                    m_mode = ControlEditor::ControlEditorMode::MODE_MOVE_ELEMENT;
                 }
             }
         }
-        if(m_mode != MODE_INSERT_LINE) {
+        if(m_mode != ControlEditorMode::MODE_INSERT_LINE) {
             for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
                 ConnectionLine* line = *it;
                 line->StartMove(m_camera->ScreenToWorld(clickPoint));
                 if(line->Contains(m_camera->ScreenToWorld(clickPoint))) {
                     line->SetSelected();
                     foundElement = true;
-                    m_mode = MODE_MOVE_LINE;
+                    m_mode = ControlEditorMode::MODE_MOVE_LINE;
                 }
             }
         }
     }
 
     if(!foundElement) {
-        m_mode = MODE_SELECTION_RECT;
+        m_mode = ControlEditorMode::MODE_SELECTION_RECT;
         m_startSelRect = m_camera->ScreenToWorld(clickPoint);
     }
 
@@ -452,7 +457,7 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
     bool foundNode = false;
     for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
         ControlElement* element = *it;
-        if(m_mode == MODE_INSERT_LINE) {
+        if(m_mode == ControlEditorMode::MODE_INSERT_LINE) {
             auto nodeList = element->GetNodeList();
             for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
                 Node* node = *itN;
@@ -462,12 +467,12 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
                         line->AddParent(element);
                         element->AddChild(line);
                         line->UpdatePoints();
-                        m_mode = MODE_EDIT;
+                        m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
                         foundNode = true;
                     }
                 }
             }
-        } else if(m_mode == MODE_SELECTION_RECT) {
+        } else if(m_mode == ControlEditorMode::MODE_SELECTION_RECT) {
             if(element->Intersects(m_selectionRect)) {
                 element->SetSelected();
             } else if(!event.ControlDown()) {
@@ -479,17 +484,17 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
     }
     for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
         ConnectionLine* cLine = *it;
-        if(m_mode == MODE_INSERT_LINE && !foundNode && it != (itEnd - 1)) {
+        if(m_mode == ControlEditorMode::MODE_INSERT_LINE && !foundNode && it != (itEnd - 1)) {
             if(cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
                 ConnectionLine* iLine = *(m_connectionList.end() - 1);
                 if(iLine->SetParentLine(cLine)) {
                     cLine->AddChild(iLine);
                     iLine->UpdatePoints();
-                    m_mode = MODE_EDIT;
+                    m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
                     foundNode = true;
                 }
             }
-        } else if(m_mode == MODE_SELECTION_RECT) {
+        } else if(m_mode == ControlEditorMode::MODE_SELECTION_RECT) {
             if(cLine->Intersects(m_selectionRect)) {
                 cLine->SetSelected();
             } else if(!event.ControlDown()) {
@@ -502,7 +507,7 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 
     m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 
-    if(m_mode == MODE_INSERT_LINE && !foundNode) {
+    if(m_mode == ControlEditorMode::MODE_INSERT_LINE && !foundNode) {
         ConnectionLine* cLine = *(m_connectionList.end() - 1);
         // Free nodes
         auto nodeList = cLine->GetNodeList();
@@ -518,9 +523,9 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
         }
         m_connectionList.pop_back();
         if(cLine) delete cLine;
-        m_mode = MODE_EDIT;
-    } else if(m_mode != MODE_INSERT) {
-        m_mode = MODE_EDIT;
+        m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
+    } else if(m_mode != ControlEditorMode::MODE_INSERT) {
+        m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
     }
 
     Redraw();
@@ -531,14 +536,14 @@ void ControlEditor::OnMiddleDown(wxMouseEvent& event)
 {
     // Set to drag mode.
     switch(m_mode) {
-        case MODE_INSERT: {
-            m_mode = MODE_DRAG_INSERT;
+        case ControlEditorMode::MODE_INSERT: {
+            m_mode = ControlEditorMode::MODE_DRAG_INSERT;
         } break;
-        case MODE_PASTE: {
-            m_mode = MODE_DRAG_PASTE;
+        case ControlEditorMode::MODE_PASTE: {
+            m_mode = ControlEditorMode::MODE_DRAG_PASTE;
         } break;
         default: {
-            m_mode = MODE_DRAG;
+            m_mode = ControlEditorMode::MODE_DRAG;
         } break;
     }
     m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
@@ -547,18 +552,18 @@ void ControlEditor::OnMiddleDown(wxMouseEvent& event)
 void ControlEditor::OnMiddleUp(wxMouseEvent& event)
 {
     switch(m_mode) {
-        case MODE_DRAG_INSERT: {
-            m_mode = MODE_INSERT;
+        case ControlEditorMode::MODE_DRAG_INSERT: {
+            m_mode = ControlEditorMode::MODE_INSERT;
         } break;
-        case MODE_DRAG_PASTE: {
-            m_mode = MODE_PASTE;
+        case ControlEditorMode::MODE_DRAG_PASTE: {
+            m_mode = ControlEditorMode::MODE_PASTE;
         } break;
-        case MODE_INSERT:
-        case MODE_PASTE: {
+        case ControlEditorMode::MODE_INSERT:
+        case ControlEditorMode::MODE_PASTE: {
             // Does nothing.
         } break;
         default: {
-            m_mode = MODE_EDIT;
+            m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
         } break;
     }
 }
@@ -569,24 +574,24 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
     bool redraw = false;
 
     switch(m_mode) {
-        case MODE_INSERT: {
+        case ControlEditorMode::MODE_INSERT: {
             Element* newElement = *(m_elementList.end() - 1);  // Get the last element in the list.
             newElement->Move(m_camera->ScreenToWorld(clickPoint));
             redraw = true;
         } break;
-        case MODE_INSERT_LINE: {
+        case ControlEditorMode::MODE_INSERT_LINE: {
             ConnectionLine* line = *(m_connectionList.end() - 1);
             line->SetTemporarySecondPoint(m_camera->ScreenToWorld(clickPoint));
             line->UpdatePoints();
             redraw = true;
         } break;
-        case MODE_DRAG:
-        case MODE_DRAG_INSERT:
-        case MODE_DRAG_PASTE: {
+        case ControlEditorMode::MODE_DRAG:
+        case ControlEditorMode::MODE_DRAG_INSERT:
+        case ControlEditorMode::MODE_DRAG_PASTE: {
             m_camera->SetTranslation(clickPoint);
             redraw = true;
         } break;
-        case MODE_MOVE_ELEMENT: {
+        case ControlEditor::ControlEditorMode::MODE_MOVE_ELEMENT: {
             for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
                 Element* element = *it;
                 if(element->IsSelected()) {
@@ -600,7 +605,7 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
                 }
             }
         } break;
-        case MODE_MOVE_LINE: {
+        case ControlEditorMode::MODE_MOVE_LINE: {
             for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; it++) {
                 ConnectionLine* line = *it;
                 if(line->IsSelected()) {
@@ -609,7 +614,7 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
                 }
             }
         } break;
-        case MODE_SELECTION_RECT: {
+        case ControlEditorMode::MODE_SELECTION_RECT: {
             wxPoint2DDouble currentPos = m_camera->ScreenToWorld(clickPoint);
             double x, y, w, h;
             if(currentPos.m_x < m_startSelRect.m_x) {
@@ -762,7 +767,7 @@ void ControlEditor::CheckConnections()
 {
     for(auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
         ConnectionLine* cLine = *it;
-        if(cLine->GetType() == ConnectionLine::ELEMENT_ELEMENT) {
+        if(cLine->GetType() == ConnectionLine::ConnectionLineType::ELEMENT_ELEMENT) {
             if(cLine->GetParentList().size() < 2) { it = DeleteLineFromList(it); }
         } else if(cLine->GetParentList().size() < 1) {
             it = DeleteLineFromList(it);
@@ -872,7 +877,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
             }
             if(!simStopped) {
                 std::vector<ElementPlotData> epdList;
-                ElementPlotData curveData(_("I/O"), ElementPlotData::CT_TEST);
+                ElementPlotData curveData(_("I/O"), ElementPlotData::CurveType::CT_TEST);
                 curveData.AddData(inputV, _("Input"));
                 curveData.AddData(solution, _("Output"));
 

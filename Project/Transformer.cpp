@@ -379,13 +379,13 @@ void Transformer::UpdatePowerFlowArrowsPosition()
 {
     std::vector<wxPoint2DDouble> edges;
     switch(m_pfDirection) {
-        case PF_NONE: {
+        case PowerFlowDirection::PF_NONE: {
             m_powerFlowArrow.clear();
         } break;
-        case PF_BUS1_TO_BUS2: {
+        case PowerFlowDirection::PF_BUS1_TO_BUS2 : {
             for(int i = 1; i < (int)m_pointList.size() - 1; i++) { edges.push_back(m_pointList[i]); }
         } break;
-        case PF_BUS2_TO_BUS1: {
+        case PowerFlowDirection::PF_BUS2_TO_BUS1: {
             for(int i = (int)m_pointList.size() - 2; i > 0; i--) { edges.push_back(m_pointList[i]); }
         } break;
         default:
@@ -490,10 +490,10 @@ wxString Transformer::GetTipText() const
     wxString tipText = m_electricalData.name;
     wxString primVoltage = StringFromDouble(m_electricalData.primaryNominalVoltage);
     switch(m_electricalData.primaryNominalVoltageUnit) {
-        case UNIT_V: {
+        case ElectricalUnit::UNIT_V: {
             primVoltage += _(" V");
         } break;
-        case UNIT_kV: {
+        case ElectricalUnit::UNIT_kV: {
             primVoltage += _(" kV");
         } break;
         default:
@@ -501,10 +501,10 @@ wxString Transformer::GetTipText() const
     }
     wxString secVoltage = StringFromDouble(m_electricalData.secondaryNominalVoltage);
     switch(m_electricalData.secondaryNominalVoltageUnit) {
-        case UNIT_V: {
+        case ElectricalUnit::UNIT_V: {
             secVoltage += _(" V");
         } break;
-        case UNIT_kV: {
+        case ElectricalUnit::UNIT_kV: {
             secVoltage += _(" kV");
         } break;
         default:
@@ -547,21 +547,21 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
 
     // Resistance
     double r = data.resistance;
-    if(data.resistanceUnit == UNIT_PU) {
+    if(data.resistanceUnit == ElectricalUnit::UNIT_PU) {
         if(data.useTransformerPower) data.resistance = (r * transformerBaseImpedance) / systemBaseImpedance;
     } else {
         data.resistance = r / systemBaseImpedance;
     }
-    data.resistanceUnit = UNIT_PU;
+    data.resistanceUnit = ElectricalUnit::UNIT_PU;
 
     // Indutive reactance
     double x = data.indReactance;
-    if(data.indReactanceUnit == UNIT_PU) {
+    if(data.indReactanceUnit == ElectricalUnit::UNIT_PU) {
         if(data.useTransformerPower) data.indReactance = (x * transformerBaseImpedance) / systemBaseImpedance;
     } else {
         data.indReactance = x / systemBaseImpedance;
     }
-    data.indReactanceUnit = UNIT_PU;
+    data.indReactanceUnit = ElectricalUnit::UNIT_PU;
 
     // Fault
 
@@ -651,19 +651,19 @@ rapidxml::xml_node<>* Transformer::SaveElement(rapidxml::xml_document<>& doc, ra
     XMLParser::SetNodeValue(doc, name, m_electricalData.name);
     auto primaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, "PrimaryNominalVoltage");
     XMLParser::SetNodeValue(doc, primaryNominalVoltage, m_electricalData.primaryNominalVoltage);
-    XMLParser::SetNodeAttribute(doc, primaryNominalVoltage, "UnitID", m_electricalData.primaryNominalVoltageUnit);
+    XMLParser::SetNodeAttribute(doc, primaryNominalVoltage, "UnitID", static_cast<int>(m_electricalData.primaryNominalVoltageUnit));
     auto secondaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, "SecondaryNominalVoltage");
     XMLParser::SetNodeValue(doc, secondaryNominalVoltage, m_electricalData.secondaryNominalVoltage);
-    XMLParser::SetNodeAttribute(doc, secondaryNominalVoltage, "UnitID", m_electricalData.secondaryNominalVoltageUnit);
+    XMLParser::SetNodeAttribute(doc, secondaryNominalVoltage, "UnitID", static_cast<int>(m_electricalData.secondaryNominalVoltageUnit));
     auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
     XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);
-    XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", m_electricalData.nominalPowerUnit);
+    XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", static_cast<int>(m_electricalData.nominalPowerUnit));
     auto resistance = XMLParser::AppendNode(doc, electricalProp, "Resistance");
     XMLParser::SetNodeValue(doc, resistance, m_electricalData.resistance);
-    XMLParser::SetNodeAttribute(doc, resistance, "UnitID", m_electricalData.resistanceUnit);
+    XMLParser::SetNodeAttribute(doc, resistance, "UnitID", static_cast<int>(m_electricalData.resistanceUnit));
     auto indReactance = XMLParser::AppendNode(doc, electricalProp, "IndReactance");
     XMLParser::SetNodeValue(doc, indReactance, m_electricalData.indReactance);
-    XMLParser::SetNodeAttribute(doc, indReactance, "UnitID", m_electricalData.indReactanceUnit);
+    XMLParser::SetNodeAttribute(doc, indReactance, "UnitID", static_cast<int>(m_electricalData.indReactanceUnit));
     auto connection = XMLParser::AppendNode(doc, electricalProp, "Connection");
     XMLParser::SetNodeValue(doc, connection, m_electricalData.connection);
     auto turnsRatio = XMLParser::AppendNode(doc, electricalProp, "TurnsRatio");

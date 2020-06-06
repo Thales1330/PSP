@@ -64,7 +64,7 @@ class PlotData : public wxTreeItemData
 class ElementPlotData
 {
    public:
-    enum CurveType {
+    enum class CurveType : int {
         CT_BUS = 0,
         CT_SYNC_GENERATOR,
         CT_SYNC_COMPENSATOR,

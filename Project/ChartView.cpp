@@ -100,26 +100,26 @@ void ChartView::SetTreectrl()
     m_treeTimeID = m_treeCtrl->AppendItem(rootID, _("Time"));
     m_treeCtrl->SetItemTextColour(m_treeTimeID, *wxRED);
 
-    bool firstElement[ElementPlotData::NUM_ELEMENTS];
-    for(int i = 0; i < ElementPlotData::NUM_ELEMENTS; ++i) firstElement[i] = true;
+    bool firstElement[static_cast<unsigned int>(ElementPlotData::CurveType::NUM_ELEMENTS)];
+    for(int i = 0; i < static_cast<unsigned int>(ElementPlotData::CurveType::NUM_ELEMENTS); ++i) firstElement[i] = true;
 
-    wxString rootElementName[ElementPlotData::NUM_ELEMENTS];
-    rootElementName[ElementPlotData::CT_BUS] = _("Bus");
-    rootElementName[ElementPlotData::CT_IND_MOTOR] = _("Induction motor");
-    rootElementName[ElementPlotData::CT_LINE] = _("Line");
-    rootElementName[ElementPlotData::CT_LOAD] = _("Load");
-    rootElementName[ElementPlotData::CT_SHUNT_CAPACITOR] = _("Capacitor");
-    rootElementName[ElementPlotData::CT_SHUNT_INDUCTOR] = _("Inductor");
-    rootElementName[ElementPlotData::CT_SYNC_COMPENSATOR] = _("Synchronous compensator");
-    rootElementName[ElementPlotData::CT_SYNC_GENERATOR] = _("Synchronous generator");
-    rootElementName[ElementPlotData::CT_TRANSFORMER] = _("Transformer");
-    rootElementName[ElementPlotData::CT_TEST] = _("Test");
+    wxString rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::NUM_ELEMENTS)];
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_BUS)] = _("Bus");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_IND_MOTOR)] = _("Induction motor");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_LINE)] = _("Line");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_LOAD)] = _("Load");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_SHUNT_CAPACITOR)] = _("Capacitor");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_SHUNT_INDUCTOR)] = _("Inductor");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_SYNC_COMPENSATOR)] = _("Synchronous compensator");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_SYNC_GENERATOR)] = _("Synchronous generator");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_TRANSFORMER)] = _("Transformer");
+    rootElementName[static_cast<unsigned int>(ElementPlotData::CurveType::CT_TEST)] = _("Test");
 
-    wxTreeItemId rootItemID[ElementPlotData::NUM_ELEMENTS];
+    wxTreeItemId rootItemID[static_cast<unsigned int>(ElementPlotData::CurveType::NUM_ELEMENTS)];
 
     for(auto it = m_epdList.begin(), itEnd = m_epdList.end(); it != itEnd; ++it) {
         ElementPlotData data = *it;
-        ElementPlotData::CurveType curveType = data.GetCurveType();
+        unsigned int curveType = static_cast<unsigned int>(data.GetCurveType());
 
         if(firstElement[curveType]) {
             rootItemID[curveType] = m_treeCtrl->AppendItem(rootID, rootElementName[curveType]);

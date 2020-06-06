@@ -28,16 +28,16 @@ LoadForm::LoadForm(wxWindow* parent, Load* load) : LoadFormBase(parent)
 
     m_textCtrlActivePower->SetValue(Load::StringFromDouble(data.activePower));
     switch(data.activePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceActivePower->SetSelection(0);
         } break;
-        case UNIT_W: {
+        case ElectricalUnit::UNIT_W: {
             m_choiceActivePower->SetSelection(1);
         } break;
-        case UNIT_kW: {
+        case ElectricalUnit::UNIT_kW: {
             m_choiceActivePower->SetSelection(2);
         } break;
-        case UNIT_MW: {
+        case ElectricalUnit::UNIT_MW: {
             m_choiceActivePower->SetSelection(3);
         } break;
         default:
@@ -46,16 +46,16 @@ LoadForm::LoadForm(wxWindow* parent, Load* load) : LoadFormBase(parent)
 
     m_textCtrlReactivePower->SetValue(Load::StringFromDouble(data.reactivePower));
     switch(data.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             m_choiceReactivePower->SetSelection(0);
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             m_choiceReactivePower->SetSelection(1);
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             m_choiceReactivePower->SetSelection(2);
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             m_choiceReactivePower->SetSelection(3);
         } break;
         default:
@@ -115,16 +115,16 @@ bool LoadForm::ValidateData()
         return false;
     switch(m_choiceActivePower->GetSelection()) {
         case 0: {
-            data.activePowerUnit = UNIT_PU;
+            data.activePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.activePowerUnit = UNIT_W;
+            data.activePowerUnit = ElectricalUnit::UNIT_W;
         } break;
         case 2: {
-            data.activePowerUnit = UNIT_kW;
+            data.activePowerUnit = ElectricalUnit::UNIT_kW;
         } break;
         case 3: {
-            data.activePowerUnit = UNIT_MW;
+            data.activePowerUnit = ElectricalUnit::UNIT_MW;
         } break;
     }
 
@@ -133,16 +133,16 @@ bool LoadForm::ValidateData()
         return false;
     switch(m_choiceReactivePower->GetSelection()) {
         case 0: {
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.reactivePowerUnit = UNIT_VAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_var;
         } break;
         case 2: {
-            data.reactivePowerUnit = UNIT_kVAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;
         } break;
         case 3: {
-            data.reactivePowerUnit = UNIT_MVAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
         } break;
     }
 

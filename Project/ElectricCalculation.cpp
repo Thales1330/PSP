@@ -408,10 +408,10 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                 case ElectricalUnit::UNIT_PU: {
                     reactivePower /= systemPowerBase;
                 } break;
-                case ElectricalUnit::UNIT_kVAr: {
+                case ElectricalUnit::UNIT_kvar: {
                     reactivePower /= 1e3;
                 } break;
-                case ElectricalUnit::UNIT_MVAr: {
+                case ElectricalUnit::UNIT_Mvar: {
                     reactivePower /= 1e6;
                 } break;
                 default:
@@ -519,10 +519,10 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                         case ElectricalUnit::UNIT_PU: {
                             reactivePower /= systemPowerBase;
                         } break;
-                        case ElectricalUnit::UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             reactivePower /= 1e3;
                         } break;
-                        case ElectricalUnit::UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             reactivePower /= 1e6;
                         } break;
                         default:
@@ -588,10 +588,10 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                     case ElectricalUnit::UNIT_PU: {
                         reactivePower /= systemPowerBase;
                     } break;
-                    case ElectricalUnit::UNIT_kVAr: {
+                    case ElectricalUnit::UNIT_kvar: {
                         reactivePower /= 1e3;
                     } break;
-                    case ElectricalUnit::UNIT_MVAr: {
+                    case ElectricalUnit::UNIT_Mvar: {
                         reactivePower /= 1e6;
                     } break;
                     default:

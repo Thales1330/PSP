@@ -48,7 +48,7 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
         case ElectricalUnit::UNIT_PU: {
             m_choiceActivePower->SetSelection(0);
         } break;
-        case UNIT_W: {
+        case ElectricalUnit::UNIT_W: {
             m_choiceActivePower->SetSelection(1);
         } break;
         case ElectricalUnit::UNIT_kW: {
@@ -66,13 +66,13 @@ IndMotorForm::IndMotorForm(wxWindow* parent, IndMotor* indMotor) : IndMotorFormB
         case ElectricalUnit::UNIT_PU: {
             m_choiceReactivePower->SetSelection(0);
         } break;
-        case ElectricalUnit::UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             m_choiceReactivePower->SetSelection(1);
         } break;
-        case ElectricalUnit::UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             m_choiceReactivePower->SetSelection(2);
         } break;
-        case ElectricalUnit::UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             m_choiceReactivePower->SetSelection(3);
         } break;
         default:
@@ -148,7 +148,7 @@ bool IndMotorForm::ValidateData()
             data.activePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.activePowerUnit = UNIT_W;
+            data.activePowerUnit = ElectricalUnit::UNIT_W;
         } break;
         case 2: {
             data.activePowerUnit = ElectricalUnit::UNIT_kW;
@@ -166,13 +166,13 @@ bool IndMotorForm::ValidateData()
             data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         case 1: {
-            data.reactivePowerUnit = ElectricalUnit::UNIT_VAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_var;
         } break;
         case 2: {
-            data.reactivePowerUnit = ElectricalUnit::UNIT_kVAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;
         } break;
         case 3: {
-            data.reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
         } break;
     }
     

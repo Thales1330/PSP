@@ -56,40 +56,40 @@ SyncMotorElectricalData SyncMotor::GetPUElectricalData(double systemPowerBase)
     // Active power
     double activePower = GetValueFromUnit(data.activePower, data.activePowerUnit);
     if(!m_online) activePower = 0.0;
-    if(data.activePowerUnit == UNIT_PU) {
+    if(data.activePowerUnit == ElectricalUnit::UNIT_PU) {
         if(data.useMachineBase) data.activePower = (activePower * machineBasePower) / systemPowerBase;
     } else {
         data.activePower = activePower / systemPowerBase;
     }
-    data.activePowerUnit = UNIT_PU;
+    data.activePowerUnit = ElectricalUnit::UNIT_PU;
 
     // Reactive power
     double reactivePower = GetValueFromUnit(data.reactivePower, data.reactivePowerUnit);
     if(!m_online) reactivePower = 0.0;
-    if(data.reactivePowerUnit == UNIT_PU) {
+    if(data.reactivePowerUnit == ElectricalUnit::UNIT_PU) {
         if(data.useMachineBase) data.reactivePower = (reactivePower * machineBasePower) / systemPowerBase;
     } else {
         data.reactivePower = reactivePower / systemPowerBase;
     }
-    data.reactivePowerUnit = UNIT_PU;
+    data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
 
     // Max reactive power
     double maxReactive = GetValueFromUnit(data.maxReactive, data.maxReactiveUnit);
-    if(data.maxReactiveUnit == UNIT_PU) {
+    if(data.maxReactiveUnit == ElectricalUnit::UNIT_PU) {
         if(data.useMachineBase) data.maxReactive = (maxReactive * machineBasePower) / systemPowerBase;
     } else {
         data.maxReactive = maxReactive / systemPowerBase;
     }
-    data.maxReactiveUnit = UNIT_PU;
+    data.maxReactiveUnit = ElectricalUnit::UNIT_PU;
 
     // Min reactive power
     double minReactive = GetValueFromUnit(data.minReactive, data.minReactiveUnit);
-    if(data.minReactiveUnit == UNIT_PU) {
+    if(data.minReactiveUnit == ElectricalUnit::UNIT_PU) {
         if(data.useMachineBase) data.minReactive = (minReactive * machineBasePower) / systemPowerBase;
     } else {
         data.minReactive = minReactive / systemPowerBase;
     }
-    data.minReactiveUnit = UNIT_PU;
+    data.minReactiveUnit = ElectricalUnit::UNIT_PU;
 
     double baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
     double systemBaseImpedance = (baseVoltage * baseVoltage) / systemPowerBase;
@@ -139,16 +139,16 @@ wxString SyncMotor::GetTipText() const
     if(!m_online) activePower = 0.0;
     tipText += _("\nP = ") + wxString::FromDouble(activePower, 5);
     switch(m_electricalData.activePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             tipText += _(" p.u.");
         } break;
-        case UNIT_W: {
+        case ElectricalUnit::UNIT_W: {
             tipText += _(" W");
         } break;
-        case UNIT_kW: {
+        case ElectricalUnit::UNIT_kW: {
             tipText += _(" kW");
         } break;
-        case UNIT_MW: {
+        case ElectricalUnit::UNIT_MW: {
             tipText += _(" MW");
         } break;
         default:
@@ -158,16 +158,16 @@ wxString SyncMotor::GetTipText() const
     if(!m_online) reactivePower = 0.0;
     tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
     switch(m_electricalData.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             tipText += _(" p.u.");
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             tipText += _(" VAr");
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             tipText += _(" kVAr");
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             tipText += _(" MVAr");
         } break;
         default:
@@ -191,23 +191,23 @@ rapidxml::xml_node<>* SyncMotor::SaveElement(rapidxml::xml_document<>& doc, rapi
     XMLParser::SetNodeValue(doc, name, m_electricalData.name);
     auto nominalPower = XMLParser::AppendNode(doc, electricalProp, "NominalPower");
     XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);
-    XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", m_electricalData.nominalPowerUnit);
+    XMLParser::SetNodeAttribute(doc, nominalPower, "UnitID", static_cast<int>(m_electricalData.nominalPowerUnit));
     auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
     XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);
-    XMLParser::SetNodeAttribute(doc, activePower, "UnitID", m_electricalData.activePowerUnit);
+    XMLParser::SetNodeAttribute(doc, activePower, "UnitID", static_cast<int>(m_electricalData.activePowerUnit));
     auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
     XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
-    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", static_cast<int>(m_electricalData.reactivePowerUnit));
     auto haveMaxReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMaxReactive");
     XMLParser::SetNodeValue(doc, haveMaxReactive, m_electricalData.haveMaxReactive);
     auto maxReactive = XMLParser::AppendNode(doc, electricalProp, "MaxReactive");
     XMLParser::SetNodeValue(doc, maxReactive, m_electricalData.maxReactive);
-    XMLParser::SetNodeAttribute(doc, maxReactive, "UnitID", m_electricalData.maxReactiveUnit);
+    XMLParser::SetNodeAttribute(doc, maxReactive, "UnitID", static_cast<int>(m_electricalData.maxReactiveUnit));
     auto haveMinReactive = XMLParser::AppendNode(doc, electricalProp, "HaveMinReactive");
     XMLParser::SetNodeValue(doc, haveMinReactive, m_electricalData.haveMinReactive);
     auto minReactive = XMLParser::AppendNode(doc, electricalProp, "MinReactive");
     XMLParser::SetNodeValue(doc, minReactive, m_electricalData.minReactive);
-    XMLParser::SetNodeAttribute(doc, minReactive, "UnitID", m_electricalData.minReactiveUnit);
+    XMLParser::SetNodeAttribute(doc, minReactive, "UnitID", static_cast<int>(m_electricalData.minReactiveUnit));
     auto useMachineBase = XMLParser::AppendNode(doc, electricalProp, "UseMachineBase");
     XMLParser::SetNodeValue(doc, useMachineBase, m_electricalData.useMachineBase);
 

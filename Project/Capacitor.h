@@ -25,7 +25,7 @@ class ReactiveShuntElementForm;
 struct CapacitorElectricalData {
     wxString name;
     double reactivePower = 100.0;
-    ElectricalUnit reactivePowerUnit = ElectricalUnit::UNIT_MVAr;
+    ElectricalUnit reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
 };
 
 /**

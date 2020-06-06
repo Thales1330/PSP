@@ -66,33 +66,33 @@ IndMotorElectricalData IndMotor::GetPUElectricalData(double systemPowerBase)
     IndMotorElectricalData data = m_electricalData;
 
     switch(data.activePowerUnit) {
-        case UNIT_W: {
+        case ElectricalUnit::UNIT_W: {
             data.activePower = data.activePower / systemPowerBase;
-            data.activePowerUnit = UNIT_PU;
+            data.activePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_kW: {
+        case ElectricalUnit::UNIT_kW: {
             data.activePower = (data.activePower * 1e3) / systemPowerBase;
-            data.activePowerUnit = UNIT_PU;
+            data.activePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_MW: {
+        case ElectricalUnit::UNIT_MW: {
             data.activePower = (data.activePower * 1e6) / systemPowerBase;
-            data.activePowerUnit = UNIT_PU;
+            data.activePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         default:
             break;
     }
     switch(data.reactivePowerUnit) {
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             data.reactivePower = data.reactivePower / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;
-            data.reactivePowerUnit = UNIT_PU;
+            data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
         default:
             break;
@@ -116,16 +116,16 @@ wxString IndMotor::GetTipText() const
     if(!m_online) activePower = 0.0;
     tipText += _("\nP = ") + wxString::FromDouble(activePower, 5);
     switch(m_electricalData.activePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             tipText += _(" p.u.");
         } break;
-        case UNIT_W: {
+        case ElectricalUnit::UNIT_W: {
             tipText += _(" W");
         } break;
-        case UNIT_kW: {
+        case ElectricalUnit::UNIT_kW: {
             tipText += _(" kW");
         } break;
-        case UNIT_MW: {
+        case ElectricalUnit::UNIT_MW: {
             tipText += _(" MW");
         } break;
         default:
@@ -135,16 +135,16 @@ wxString IndMotor::GetTipText() const
     if(!m_online) reactivePower = 0.0;
     tipText += _("\nQ = ") + wxString::FromDouble(reactivePower, 5);
     switch(m_electricalData.reactivePowerUnit) {
-        case UNIT_PU: {
+        case ElectricalUnit::UNIT_PU: {
             tipText += _(" p.u.");
         } break;
-        case UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             tipText += _(" VAr");
         } break;
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             tipText += _(" kVAr");
         } break;
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             tipText += _(" MVAr");
         } break;
         default:
@@ -170,13 +170,13 @@ rapidxml::xml_node<>* IndMotor::SaveElement(rapidxml::xml_document<>& doc, rapid
     XMLParser::SetNodeValue(doc, name, m_electricalData.name);
     auto ratedPower = XMLParser::AppendNode(doc, electricalProp, "RatedPower");
     XMLParser::SetNodeValue(doc, ratedPower, m_electricalData.ratedPower);
-    XMLParser::SetNodeAttribute(doc, ratedPower, "UnitID", m_electricalData.activePowerUnit);
+    XMLParser::SetNodeAttribute(doc, ratedPower, "UnitID", static_cast<int>(m_electricalData.activePowerUnit));
     auto activePower = XMLParser::AppendNode(doc, electricalProp, "ActivePower");
     XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);
-    XMLParser::SetNodeAttribute(doc, activePower, "UnitID", m_electricalData.activePowerUnit);
+    XMLParser::SetNodeAttribute(doc, activePower, "UnitID", static_cast<int>(m_electricalData.activePowerUnit));
     auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
     XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
-    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", static_cast<int>(m_electricalData.reactivePowerUnit));
     auto useMachineBase = XMLParser::AppendNode(doc, electricalProp, "UseMachineBase");
     XMLParser::SetNodeValue(doc, useMachineBase, m_electricalData.useMachinePowerAsBase);
 
@@ -262,7 +262,7 @@ bool IndMotor::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 {
     if(!m_electricalData.plotIndMachine) return false;
     plotData.SetName(m_electricalData.name);
-    plotData.SetCurveType(ElementPlotData::CT_IND_MOTOR);
+    plotData.SetCurveType(ElementPlotData::CurveType::CT_IND_MOTOR);
 
     plotData.AddData(m_electricalData.terminalVoltageVector, _("Terminal voltage"));
     plotData.AddData(m_electricalData.activePowerVector, _("Active power"));

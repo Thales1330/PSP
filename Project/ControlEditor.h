@@ -57,7 +57,7 @@ class ControlElementContainer;
 class ChartView;
 class ElementDataObject;
 
-enum ControlElementButtonID {
+enum class ControlElementButtonID : int {
     ID_IO = 0,
     ID_TF,
     ID_SUM,
@@ -109,7 +109,7 @@ class ControlElementButton : public wxWindow
 class ControlEditor : public ControlEditorBase
 {
    public:
-    enum ControlEditorMode {
+    enum class ControlEditorMode : int {
         MODE_EDIT = 0,
         MODE_MOVE_ELEMENT,
         MODE_MOVE_LINE,
@@ -165,7 +165,7 @@ class ControlEditor : public ControlEditorBase
     wxGLContext* m_glContext = NULL;
     Camera* m_camera = NULL;
 
-    ControlEditorMode m_mode = MODE_EDIT;
+    ControlEditorMode m_mode = ControlEditorMode::MODE_EDIT;
 
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;

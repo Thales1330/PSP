@@ -230,13 +230,13 @@ bool TextForm::LoadChoices()
                 case DATA_VOLTAGE: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_V: {
+                        case ElectricalUnit::UNIT_V: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kV: {
+                        case ElectricalUnit::UNIT_kV: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
                         default:
@@ -247,10 +247,10 @@ bool TextForm::LoadChoices()
                 case DATA_ANGLE: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
-                        case UNIT_DEGREE: {
+                        case ElectricalUnit::UNIT_DEGREE: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_RADIAN: {
+                        case ElectricalUnit::UNIT_RADIAN: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
                         default:
@@ -260,13 +260,13 @@ bool TextForm::LoadChoices()
                 case DATA_SC_CURRENT: {
                     m_choiceTextType->SetSelection(3);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_A: {
+                        case ElectricalUnit::UNIT_A: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kA: {
+                        case ElectricalUnit::UNIT_kA: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
                         default:
@@ -276,13 +276,13 @@ bool TextForm::LoadChoices()
                 case DATA_SC_VOLTAGE: {
                     m_choiceTextType->SetSelection(4);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_V: {
+                        case ElectricalUnit::UNIT_V: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kV: {
+                        case ElectricalUnit::UNIT_kV: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
                         default:
@@ -292,16 +292,16 @@ bool TextForm::LoadChoices()
                 case DATA_SC_POWER: {
                     m_choiceTextType->SetSelection(5);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VA: {
+                        case ElectricalUnit::UNIT_VA: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVA: {
+                        case ElectricalUnit::UNIT_kVA: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVA: {
+                        case ElectricalUnit::UNIT_MVA: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -324,16 +324,16 @@ bool TextForm::LoadChoices()
                 case DATA_ACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -343,16 +343,16 @@ bool TextForm::LoadChoices()
                 case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VAr: {
+                        case ElectricalUnit::UNIT_var: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -362,13 +362,13 @@ bool TextForm::LoadChoices()
                 case DATA_SC_CURRENT: {
                     m_choiceTextType->SetSelection(3);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_A: {
+                        case ElectricalUnit::UNIT_A: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kA: {
+                        case ElectricalUnit::UNIT_kA: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
                         default:
@@ -388,16 +388,16 @@ bool TextForm::LoadChoices()
                 case DATA_PF_ACTIVE: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -407,16 +407,16 @@ bool TextForm::LoadChoices()
                 case DATA_PF_REACTIVE: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VAr: {
+                        case ElectricalUnit::UNIT_var: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -426,16 +426,16 @@ bool TextForm::LoadChoices()
                 case DATA_PF_LOSSES: {
                     m_choiceTextType->SetSelection(3);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -445,13 +445,13 @@ bool TextForm::LoadChoices()
                 case DATA_PF_CURRENT: {
                     m_choiceTextType->SetSelection(4);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_A: {
+                        case ElectricalUnit::UNIT_A: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kA: {
+                        case ElectricalUnit::UNIT_kA: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
                         default:
@@ -461,16 +461,16 @@ bool TextForm::LoadChoices()
                 case DATA_SC_CURRENT: {
                     m_choiceTextType->SetSelection(5);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_A: {
+                        case ElectricalUnit::UNIT_A: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kA: {
+                        case ElectricalUnit::UNIT_kA: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -490,16 +490,16 @@ bool TextForm::LoadChoices()
                 case DATA_PF_ACTIVE: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -509,16 +509,16 @@ bool TextForm::LoadChoices()
                 case DATA_PF_REACTIVE: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VAr: {
+                        case ElectricalUnit::UNIT_var: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -528,16 +528,16 @@ bool TextForm::LoadChoices()
                 case DATA_PF_LOSSES: {
                     m_choiceTextType->SetSelection(3);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -547,13 +547,13 @@ bool TextForm::LoadChoices()
                 case DATA_PF_CURRENT: {
                     m_choiceTextType->SetSelection(4);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_A: {
+                        case ElectricalUnit::UNIT_A: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kA: {
+                        case ElectricalUnit::UNIT_kA: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
                         default:
@@ -563,13 +563,13 @@ bool TextForm::LoadChoices()
                 case DATA_SC_CURRENT: {
                     m_choiceTextType->SetSelection(5);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_A: {
+                        case ElectricalUnit::UNIT_A: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kA: {
+                        case ElectricalUnit::UNIT_kA: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
                         default:
@@ -589,16 +589,16 @@ bool TextForm::LoadChoices()
                 case DATA_ACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -608,16 +608,16 @@ bool TextForm::LoadChoices()
                 case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VAr: {
+                        case ElectricalUnit::UNIT_var: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -651,16 +651,16 @@ bool TextForm::LoadChoices()
                 case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VAr: {
+                        case ElectricalUnit::UNIT_var: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -680,16 +680,16 @@ bool TextForm::LoadChoices()
                 case DATA_ACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -699,16 +699,16 @@ bool TextForm::LoadChoices()
                 case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VAr: {
+                        case ElectricalUnit::UNIT_var: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -728,16 +728,16 @@ bool TextForm::LoadChoices()
                 case DATA_ACTIVE_POWER: {
                     m_choiceTextType->SetSelection(1);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_W: {
+                        case ElectricalUnit::UNIT_W: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kW: {
+                        case ElectricalUnit::UNIT_kW: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MW: {
+                        case ElectricalUnit::UNIT_MW: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -747,16 +747,16 @@ bool TextForm::LoadChoices()
                 case DATA_REACTIVE_POWER: {
                     m_choiceTextType->SetSelection(2);
                     switch(m_text->GetUnit()) {
-                        case UNIT_PU: {
+                        case ElectricalUnit::UNIT_PU: {
                             m_choiceTextUnit->SetSelection(0);
                         } break;
-                        case UNIT_VAr: {
+                        case ElectricalUnit::UNIT_var: {
                             m_choiceTextUnit->SetSelection(1);
                         } break;
-                        case UNIT_kVAr: {
+                        case ElectricalUnit::UNIT_kvar: {
                             m_choiceTextUnit->SetSelection(2);
                         } break;
-                        case UNIT_MVAr: {
+                        case ElectricalUnit::UNIT_Mvar: {
                             m_choiceTextUnit->SetSelection(3);
                         } break;
                         default:
@@ -1082,13 +1082,13 @@ void TextForm::UnitChoice()
         case DATA_SC_VOLTAGE: {
             switch(m_choiceTextUnit->GetSelection()) {
                 case 0: {
-                    m_text->SetUnit(UNIT_PU);
+                    m_text->SetUnit(ElectricalUnit::UNIT_PU);
                 } break;
                 case 1: {
-                    m_text->SetUnit(UNIT_V);
+                    m_text->SetUnit(ElectricalUnit::UNIT_V);
                 } break;
                 case 2: {
-                    m_text->SetUnit(UNIT_kV);
+                    m_text->SetUnit(ElectricalUnit::UNIT_kV);
                 } break;
                 default:
                     break;
@@ -1097,10 +1097,10 @@ void TextForm::UnitChoice()
         case DATA_ANGLE: {
             switch(m_choiceTextUnit->GetSelection()) {
                 case 0: {
-                    m_text->SetUnit(UNIT_DEGREE);
+                    m_text->SetUnit(ElectricalUnit::UNIT_DEGREE);
                 } break;
                 case 1: {
-                    m_text->SetUnit(UNIT_RADIAN);
+                    m_text->SetUnit(ElectricalUnit::UNIT_RADIAN);
                 } break;
                 default:
                     break;
@@ -1110,13 +1110,13 @@ void TextForm::UnitChoice()
         case DATA_PF_CURRENT: {
             switch(m_choiceTextUnit->GetSelection()) {
                 case 0: {
-                    m_text->SetUnit(UNIT_PU);
+                    m_text->SetUnit(ElectricalUnit::UNIT_PU);
                 } break;
                 case 1: {
-                    m_text->SetUnit(UNIT_A);
+                    m_text->SetUnit(ElectricalUnit::UNIT_A);
                 } break;
                 case 2: {
-                    m_text->SetUnit(UNIT_kA);
+                    m_text->SetUnit(ElectricalUnit::UNIT_kA);
                 } break;
                 default:
                     break;
@@ -1125,16 +1125,16 @@ void TextForm::UnitChoice()
         case DATA_SC_POWER: {
             switch(m_choiceTextUnit->GetSelection()) {
                 case 0: {
-                    m_text->SetUnit(UNIT_PU);
+                    m_text->SetUnit(ElectricalUnit::UNIT_PU);
                 } break;
                 case 1: {
-                    m_text->SetUnit(UNIT_VA);
+                    m_text->SetUnit(ElectricalUnit::UNIT_VA);
                 } break;
                 case 2: {
-                    m_text->SetUnit(UNIT_kVA);
+                    m_text->SetUnit(ElectricalUnit::UNIT_kVA);
                 } break;
                 case 3: {
-                    m_text->SetUnit(UNIT_MVA);
+                    m_text->SetUnit(ElectricalUnit::UNIT_MVA);
                 } break;
                 default:
                     break;
@@ -1145,16 +1145,16 @@ void TextForm::UnitChoice()
         case DATA_PF_LOSSES: {
             switch(m_choiceTextUnit->GetSelection()) {
                 case 0: {
-                    m_text->SetUnit(UNIT_PU);
+                    m_text->SetUnit(ElectricalUnit::UNIT_PU);
                 } break;
                 case 1: {
-                    m_text->SetUnit(UNIT_W);
+                    m_text->SetUnit(ElectricalUnit::UNIT_W);
                 } break;
                 case 2: {
-                    m_text->SetUnit(UNIT_kW);
+                    m_text->SetUnit(ElectricalUnit::UNIT_kW);
                 } break;
                 case 3: {
-                    m_text->SetUnit(UNIT_MW);
+                    m_text->SetUnit(ElectricalUnit::UNIT_MW);
                 } break;
                 default:
                     break;
@@ -1164,16 +1164,16 @@ void TextForm::UnitChoice()
         case DATA_PF_REACTIVE: {
             switch(m_choiceTextUnit->GetSelection()) {
                 case 0: {
-                    m_text->SetUnit(UNIT_PU);
+                    m_text->SetUnit(ElectricalUnit::UNIT_PU);
                 } break;
                 case 1: {
-                    m_text->SetUnit(UNIT_VAr);
+                    m_text->SetUnit(ElectricalUnit::UNIT_var);
                 } break;
                 case 2: {
-                    m_text->SetUnit(UNIT_kVAr);
+                    m_text->SetUnit(ElectricalUnit::UNIT_kvar);
                 } break;
                 case 3: {
-                    m_text->SetUnit(UNIT_MVAr);
+                    m_text->SetUnit(ElectricalUnit::UNIT_Mvar);
                 } break;
                 default:
                     break;

@@ -288,7 +288,9 @@ wxString Bus::GetTipText() const
     tipText += wxString::Format(" (%d)", m_electricalData.number + 1);
     tipText += "\n";
     tipText += StringFromDouble(m_electricalData.nominalVoltage, 1) +
-               (m_electricalData.nominalVoltageUnit == UNIT_V ? _(" V") : _(" kV"));
+               (m_electricalData.nominalVoltageUnit == ElectricalUnit::UNIT_V
+                    ? _(" V")
+                    : _(" kV"));
     tipText += "\n";
     tipText += _("\nV = ") + wxString::FromDouble(std::abs(m_electricalData.voltage), 5) + _(" p.u.");
     tipText += "\n";
@@ -306,17 +308,17 @@ wxString Bus::GetTipText() const
     }
 
     tipText += _("\n\nSsc = ") + wxString::FromDouble(std::abs(m_electricalData.scPower), 5) + _(" p.u.");
-    tipText += _("\n\nTHD = ") + wxString::FromDouble(std::abs(m_electricalData.thd), 5) + wxT("\%");
+    tipText += _("\n\nTHD = ") + wxString::FromDouble(std::abs(m_electricalData.thd), 5) + wxT("%");
 
     return tipText;
 }
 
 bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 {
-    if(study == STABILITY) {
+    if(study == PlotStudy::STABILITY) {
         if(!m_electricalData.plotBus) return false;
         plotData.SetName(m_electricalData.name);
-        plotData.SetCurveType(ElementPlotData::CT_BUS);
+        plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);
 
         std::vector<double> absVoltage, argVoltage;
         for(unsigned int i = 0; i < m_electricalData.stabVoltageVector.size(); ++i) {
@@ -325,10 +327,10 @@ bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
         }
         plotData.AddData(absVoltage, _("Voltage"));
         plotData.AddData(argVoltage, _("Angle"));
-    } else if(FREQRESPONSE) {
+    } else if (study == PlotStudy::FREQRESPONSE) {
         if(!m_electricalData.plotPQData) return false;
         plotData.SetName(m_electricalData.name);
-        plotData.SetCurveType(ElementPlotData::CT_BUS);
+        plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);
         plotData.AddData(m_electricalData.absImpedanceVector, _("Impedance"));
     }
     return true;
@@ -348,7 +350,7 @@ rapidxml::xml_node<>* Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::
     XMLParser::SetNodeValue(doc, name, m_electricalData.name);
     auto nominalVoltage = XMLParser::AppendNode(doc, electricalProp, "NominalVoltage");
     XMLParser::SetNodeValue(doc, nominalVoltage, m_electricalData.nominalVoltage);
-    XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", m_electricalData.nominalVoltageUnit);
+    XMLParser::SetNodeAttribute(doc, nominalVoltage, "UnitID", static_cast<int>(m_electricalData.nominalVoltageUnit));
     auto isVoltageControlled = XMLParser::AppendNode(doc, electricalProp, "IsVoltageControlled");
     XMLParser::SetNodeValue(doc, isVoltageControlled, m_electricalData.isVoltageControlled);
     auto controlledVoltage = XMLParser::AppendNode(doc, electricalProp, "ControlledVoltage");
@@ -361,9 +363,9 @@ rapidxml::xml_node<>* Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::
     auto hasFault = XMLParser::AppendNode(doc, fault, "HasFault");
     XMLParser::SetNodeValue(doc, hasFault, m_electricalData.hasFault);
     auto faultType = XMLParser::AppendNode(doc, fault, "Type");
-    XMLParser::SetNodeValue(doc, faultType, m_electricalData.faultType);
+    XMLParser::SetNodeValue(doc, faultType, static_cast<int>(m_electricalData.faultType));
     auto faultLocation = XMLParser::AppendNode(doc, fault, "Location");
-    XMLParser::SetNodeValue(doc, faultLocation, m_electricalData.faultLocation);
+    XMLParser::SetNodeValue(doc, faultLocation, static_cast<int>(m_electricalData.faultLocation));
     auto faultResistance = XMLParser::AppendNode(doc, fault, "Resistance");
     XMLParser::SetNodeValue(doc, faultResistance, m_electricalData.faultResistance);
     auto faultReactance = XMLParser::AppendNode(doc, fault, "Reactance");

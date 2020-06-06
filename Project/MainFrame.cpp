@@ -306,7 +306,7 @@ void MainFrame::OnMoveClick(wxRibbonButtonBarEvent& event)
             Element* element = *it;
             if(element->IsSelected()) { element->StartMove(averagePos); }
         }
-        workspace->SetWorkspaceMode(Workspace::MODE_MOVE_ELEMENT);
+        workspace->SetWorkspaceMode(Workspace::WorkspaceMode::MODE_MOVE_ELEMENT);
     }
 }
 
@@ -427,7 +427,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
 
     if(workspace) {
-        if(workspace->GetWorkspaceMode() != Workspace::MODE_INSERT) {
+        if(workspace->GetWorkspaceMode() != Workspace::WorkspaceMode::MODE_INSERT) {
             auto elementList = workspace->GetElementList();
             wxString statusBarText = "";
             bool newElement = false;
@@ -514,7 +514,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
             }
             if(newElement) {
                 workspace->SetElementList(elementList);
-                workspace->SetWorkspaceMode(Workspace::MODE_INSERT);
+                workspace->SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT);
                 workspace->SetStatusBarText(statusBarText);
                 workspace->Redraw();
             }

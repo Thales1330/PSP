@@ -38,16 +38,16 @@ struct TransformerElectricalData {
     // General
     wxString name = "";
     double primaryNominalVoltage = 138.0;
-    ElectricalUnit primaryNominalVoltageUnit = UNIT_kV;
+    ElectricalUnit primaryNominalVoltageUnit = ElectricalUnit::UNIT_kV;
     double secondaryNominalVoltage = 138.0;
-    ElectricalUnit secondaryNominalVoltageUnit = UNIT_kV;
+    ElectricalUnit secondaryNominalVoltageUnit = ElectricalUnit::UNIT_kV;
     int baseVoltage = 0;
     double nominalPower = 100.0;
-    ElectricalUnit nominalPowerUnit = UNIT_MVA;
+    ElectricalUnit nominalPowerUnit = ElectricalUnit::UNIT_MVA;
     double resistance = 0.0;
-    ElectricalUnit resistanceUnit = UNIT_PU;
+    ElectricalUnit resistanceUnit = ElectricalUnit::UNIT_PU;
     double indReactance = 1.0;
-    ElectricalUnit indReactanceUnit = UNIT_PU;
+    ElectricalUnit indReactanceUnit = ElectricalUnit::UNIT_PU;
     TransformerConnection connection = GWYE_GWYE;
     double turnsRatio = 1.0;
     double phaseShift = 0.0;

@@ -1,3 +1,7 @@
+#ifdef __INTELLISENSE__
+#pragma diag_suppress 102
+#endif
+
 #include <wx/app.h>
 #include <wx/cmdline.h>
 #include <wx/event.h>

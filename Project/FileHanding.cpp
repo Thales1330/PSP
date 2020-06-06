@@ -54,7 +54,7 @@ void FileHanding::SaveProject(wxFileName path)
     auto generalPropNode = XMLParser::AppendNode(doc, simulationPropNode, "General");
     auto basePower = XMLParser::AppendNode(doc, generalPropNode, "BasePower");
     XMLParser::SetNodeValue(doc, basePower, simulationData.basePower);
-    XMLParser::SetNodeAttribute(doc, basePower, "UnitID", simulationData.basePowerUnit);
+    XMLParser::SetNodeAttribute(doc, basePower, "UnitID", static_cast<int>(simulationData.basePowerUnit));
     auto contCalc = XMLParser::AppendNode(doc, generalPropNode, "ContinuousCalculation");
     auto contCalcFault = XMLParser::AppendNode(doc, contCalc, "Fault");
     XMLParser::SetNodeValue(doc, contCalcFault, simulationData.faultAfterPowerFlow);

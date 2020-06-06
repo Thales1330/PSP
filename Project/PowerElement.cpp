@@ -202,16 +202,16 @@ void PowerElement::DrawDCPowerFlowPts(wxGraphicsContext* gc) const
 double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit)
 {
     switch(valueUnit) {
-        case UNIT_kV:
-        case UNIT_kA:
-        case UNIT_kW:
-        case UNIT_kVA:
-        case UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kV:
+        case ElectricalUnit::UNIT_kA:
+        case ElectricalUnit::UNIT_kW:
+        case ElectricalUnit::UNIT_kVA:
+        case ElectricalUnit::UNIT_kvar: {
             return value * 1e3;
         } break;
-        case UNIT_MW:
-        case UNIT_MVA:
-        case UNIT_MVAr: {
+        case ElectricalUnit::UNIT_MW:
+        case ElectricalUnit::UNIT_MVA:
+        case ElectricalUnit::UNIT_Mvar: {
             return value * 1e6;
         }
         default:
@@ -305,7 +305,7 @@ void PowerElement::SaveSwitchingData(rapidxml::xml_document<>& doc, rapidxml::xm
         auto switching = XMLParser::AppendNode(doc, switchingList, "Switching");
         XMLParser::SetNodeAttribute(doc, switching, "ID", i);
         auto swType = XMLParser::AppendNode(doc, switching, "Type");
-        XMLParser::SetNodeValue(doc, swType, m_swData.swType[i]);
+        XMLParser::SetNodeValue(doc, swType, static_cast<int>(m_swData.swType[i]));
         auto swTime = XMLParser::AppendNode(doc, switching, "Time");
         XMLParser::SetNodeValue(doc, swTime, m_swData.swTime[i]);
     }

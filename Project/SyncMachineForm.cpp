@@ -40,13 +40,13 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator,
 
     m_textCtrlnominalPower->SetValue(SyncGenerator::StringFromDouble(data.nominalPower));
     switch(data.nominalPowerUnit) {
-        case UNIT_VA:
+        case ElectricalUnit::UNIT_VA:
             m_choiceNominalPower->SetSelection(0);
             break;
-        case UNIT_kVA:
+        case ElectricalUnit::UNIT_kVA:
             m_choiceNominalPower->SetSelection(1);
             break;
-        case UNIT_MVA:
+        case ElectricalUnit::UNIT_MVA:
             m_choiceNominalPower->SetSelection(2);
             break;
         default:
@@ -55,16 +55,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator,
 
     m_textCtrlActivePower->SetValue(SyncGenerator::StringFromDouble(data.activePower));
     switch(data.activePowerUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceActivePower->SetSelection(0);
             break;
-        case UNIT_W:
+        case ElectricalUnit::UNIT_W:
             m_choiceActivePower->SetSelection(1);
             break;
-        case UNIT_kW:
+        case ElectricalUnit::UNIT_kW:
             m_choiceActivePower->SetSelection(2);
             break;
-        case UNIT_MW:
+        case ElectricalUnit::UNIT_MW:
             m_choiceActivePower->SetSelection(3);
             break;
         default:
@@ -73,16 +73,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator,
 
     m_textCtrlReactivePower->SetValue(SyncGenerator::StringFromDouble(data.reactivePower));
     switch(data.reactivePowerUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceReactivePower->SetSelection(0);
             break;
-        case UNIT_VAr:
+        case ElectricalUnit::UNIT_var:
             m_choiceReactivePower->SetSelection(1);
             break;
-        case UNIT_kVAr:
+        case ElectricalUnit::UNIT_kvar:
             m_choiceReactivePower->SetSelection(2);
             break;
-        case UNIT_MVAr:
+        case ElectricalUnit::UNIT_Mvar:
             m_choiceReactivePower->SetSelection(3);
             break;
         default:
@@ -92,16 +92,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator,
 
     m_textCtrlMaxRectivePower->SetValue(SyncGenerator::StringFromDouble(data.maxReactive));
     switch(data.maxReactiveUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceMaxRectivePower->SetSelection(0);
             break;
-        case UNIT_VAr:
+        case ElectricalUnit::UNIT_var:
             m_choiceMaxRectivePower->SetSelection(1);
             break;
-        case UNIT_kVAr:
+        case ElectricalUnit::UNIT_kvar:
             m_choiceMaxRectivePower->SetSelection(2);
             break;
-        case UNIT_MVAr:
+        case ElectricalUnit::UNIT_Mvar:
             m_choiceMaxRectivePower->SetSelection(3);
             break;
         default:
@@ -113,16 +113,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator,
     m_checkBoxMinReactive->SetValue(data.haveMinReactive);
     m_textCtrlMinRectivePower->SetValue(SyncGenerator::StringFromDouble(data.minReactive));
     switch(data.minReactiveUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceMinRectivePower->SetSelection(0);
             break;
-        case UNIT_VAr:
+        case ElectricalUnit::UNIT_var:
             m_choiceMinRectivePower->SetSelection(1);
             break;
-        case UNIT_kVAr:
+        case ElectricalUnit::UNIT_kvar:
             m_choiceMinRectivePower->SetSelection(2);
             break;
-        case UNIT_MVAr:
+        case ElectricalUnit::UNIT_Mvar:
             m_choiceMinRectivePower->SetSelection(3);
             break;
         default:
@@ -164,13 +164,13 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncMotor* syncMotor) : SyncM
 
     m_textCtrlnominalPower->SetValue(SyncMotor::StringFromDouble(data.nominalPower));
     switch(data.nominalPowerUnit) {
-        case UNIT_VA:
+        case ElectricalUnit::UNIT_VA:
             m_choiceNominalPower->SetSelection(0);
             break;
-        case UNIT_kVA:
+        case ElectricalUnit::UNIT_kVA:
             m_choiceNominalPower->SetSelection(1);
             break;
-        case UNIT_MVA:
+        case ElectricalUnit::UNIT_MVA:
             m_choiceNominalPower->SetSelection(2);
             break;
         default:
@@ -179,16 +179,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncMotor* syncMotor) : SyncM
 
     m_textCtrlActivePower->SetValue(SyncMotor::StringFromDouble(data.activePower));
     switch(data.activePowerUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceActivePower->SetSelection(0);
             break;
-        case UNIT_W:
+        case ElectricalUnit::UNIT_W:
             m_choiceActivePower->SetSelection(1);
             break;
-        case UNIT_kW:
+        case ElectricalUnit::UNIT_kW:
             m_choiceActivePower->SetSelection(2);
             break;
-        case UNIT_MW:
+        case ElectricalUnit::UNIT_MW:
             m_choiceActivePower->SetSelection(3);
             break;
         default:
@@ -197,16 +197,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncMotor* syncMotor) : SyncM
 
     m_textCtrlReactivePower->SetValue(SyncMotor::StringFromDouble(data.reactivePower));
     switch(data.reactivePowerUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceReactivePower->SetSelection(0);
             break;
-        case UNIT_VAr:
+        case ElectricalUnit::UNIT_var:
             m_choiceReactivePower->SetSelection(1);
             break;
-        case UNIT_kVAr:
+        case ElectricalUnit::UNIT_kvar:
             m_choiceReactivePower->SetSelection(2);
             break;
-        case UNIT_MVAr:
+        case ElectricalUnit::UNIT_Mvar:
             m_choiceReactivePower->SetSelection(3);
             break;
         default:
@@ -216,16 +216,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncMotor* syncMotor) : SyncM
 
     m_textCtrlMaxRectivePower->SetValue(SyncMotor::StringFromDouble(data.maxReactive));
     switch(data.maxReactiveUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceMaxRectivePower->SetSelection(0);
             break;
-        case UNIT_VAr:
+        case ElectricalUnit::UNIT_var:
             m_choiceMaxRectivePower->SetSelection(1);
             break;
-        case UNIT_kVAr:
+        case ElectricalUnit::UNIT_kvar:
             m_choiceMaxRectivePower->SetSelection(2);
             break;
-        case UNIT_MVAr:
+        case ElectricalUnit::UNIT_Mvar:
             m_choiceMaxRectivePower->SetSelection(3);
             break;
         default:
@@ -237,16 +237,16 @@ SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncMotor* syncMotor) : SyncM
     m_checkBoxMinReactive->SetValue(data.haveMinReactive);
     m_textCtrlMinRectivePower->SetValue(SyncMotor::StringFromDouble(data.minReactive));
     switch(data.minReactiveUnit) {
-        case UNIT_PU:
+        case ElectricalUnit::UNIT_PU:
             m_choiceMinRectivePower->SetSelection(0);
             break;
-        case UNIT_VAr:
+        case ElectricalUnit::UNIT_var:
             m_choiceMinRectivePower->SetSelection(1);
             break;
-        case UNIT_kVAr:
+        case ElectricalUnit::UNIT_kvar:
             m_choiceMinRectivePower->SetSelection(2);
             break;
-        case UNIT_MVAr:
+        case ElectricalUnit::UNIT_Mvar:
             m_choiceMinRectivePower->SetSelection(3);
             break;
         default:
@@ -310,13 +310,13 @@ bool SyncMachineForm::ValidateData()
             return false;
         switch(m_choiceNominalPower->GetSelection()) {
             case 0:
-                data.nominalPowerUnit = UNIT_VA;
+                data.nominalPowerUnit = ElectricalUnit::UNIT_VA;
                 break;
             case 1:
-                data.nominalPowerUnit = UNIT_kVA;
+                data.nominalPowerUnit = ElectricalUnit::UNIT_kVA;
                 break;
             case 2:
-                data.nominalPowerUnit = UNIT_MVA;
+                data.nominalPowerUnit = ElectricalUnit::UNIT_MVA;
                 break;
         }
 
@@ -325,16 +325,16 @@ bool SyncMachineForm::ValidateData()
             return false;
         switch(m_choiceActivePower->GetSelection()) {
             case 0:
-                data.activePowerUnit = UNIT_PU;
+                data.activePowerUnit = ElectricalUnit::UNIT_PU;
                 break;
             case 1:
-                data.activePowerUnit = UNIT_W;
+                data.activePowerUnit = ElectricalUnit::UNIT_W;
                 break;
             case 2:
-                data.activePowerUnit = UNIT_kW;
+                data.activePowerUnit = ElectricalUnit::UNIT_kW;
                 break;
             case 3:
-                data.activePowerUnit = UNIT_MW;
+                data.activePowerUnit = ElectricalUnit::UNIT_MW;
                 break;
         }
 
@@ -343,16 +343,16 @@ bool SyncMachineForm::ValidateData()
             return false;
         switch(m_choiceReactivePower->GetSelection()) {
             case 0:
-                data.reactivePowerUnit = UNIT_PU;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
                 break;
             case 1:
-                data.reactivePowerUnit = UNIT_VAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_var;
                 break;
             case 2:
-                data.reactivePowerUnit = UNIT_kVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;
                 break;
             case 3:
-                data.reactivePowerUnit = UNIT_MVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
                 break;
         }
 
@@ -363,16 +363,16 @@ bool SyncMachineForm::ValidateData()
                 return false;
             switch(m_choiceMaxRectivePower->GetSelection()) {
                 case 0:
-                    data.maxReactiveUnit = UNIT_PU;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_PU;
                     break;
                 case 1:
-                    data.maxReactiveUnit = UNIT_VAr;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_var;
                     break;
                 case 2:
-                    data.maxReactiveUnit = UNIT_kVAr;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_kvar;
                     break;
                 case 3:
-                    data.maxReactiveUnit = UNIT_MVAr;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_Mvar;
                     break;
             }
         }
@@ -384,16 +384,16 @@ bool SyncMachineForm::ValidateData()
                 return false;
             switch(m_choiceMinRectivePower->GetSelection()) {
                 case 0:
-                    data.minReactiveUnit = UNIT_PU;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_PU;
                     break;
                 case 1:
-                    data.minReactiveUnit = UNIT_VAr;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_var;
                     break;
                 case 2:
-                    data.minReactiveUnit = UNIT_kVAr;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_kvar;
                     break;
                 case 3:
-                    data.minReactiveUnit = UNIT_MVAr;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_Mvar;
                     break;
             }
         }
@@ -444,13 +444,13 @@ bool SyncMachineForm::ValidateData()
             return false;
         switch(m_choiceNominalPower->GetSelection()) {
             case 0:
-                data.nominalPowerUnit = UNIT_VA;
+                data.nominalPowerUnit = ElectricalUnit::UNIT_VA;
                 break;
             case 1:
-                data.nominalPowerUnit = UNIT_kVA;
+                data.nominalPowerUnit = ElectricalUnit::UNIT_kVA;
                 break;
             case 2:
-                data.nominalPowerUnit = UNIT_MVA;
+                data.nominalPowerUnit = ElectricalUnit::UNIT_MVA;
                 break;
         }
 
@@ -459,16 +459,16 @@ bool SyncMachineForm::ValidateData()
             return false;
         switch(m_choiceActivePower->GetSelection()) {
             case 0:
-                data.activePowerUnit = UNIT_PU;
+                data.activePowerUnit = ElectricalUnit::UNIT_PU;
                 break;
             case 1:
-                data.activePowerUnit = UNIT_W;
+                data.activePowerUnit = ElectricalUnit::UNIT_W;
                 break;
             case 2:
-                data.activePowerUnit = UNIT_kW;
+                data.activePowerUnit = ElectricalUnit::UNIT_kW;
                 break;
             case 3:
-                data.activePowerUnit = UNIT_MW;
+                data.activePowerUnit = ElectricalUnit::UNIT_MW;
                 break;
         }
 
@@ -477,16 +477,16 @@ bool SyncMachineForm::ValidateData()
             return false;
         switch(m_choiceReactivePower->GetSelection()) {
             case 0:
-                data.reactivePowerUnit = UNIT_PU;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
                 break;
             case 1:
-                data.reactivePowerUnit = UNIT_VAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_var;
                 break;
             case 2:
-                data.reactivePowerUnit = UNIT_kVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_kvar;
                 break;
             case 3:
-                data.reactivePowerUnit = UNIT_MVAr;
+                data.reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
                 break;
         }
 
@@ -497,16 +497,16 @@ bool SyncMachineForm::ValidateData()
                 return false;
             switch(m_choiceMaxRectivePower->GetSelection()) {
                 case 0:
-                    data.maxReactiveUnit = UNIT_PU;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_PU;
                     break;
                 case 1:
-                    data.maxReactiveUnit = UNIT_VAr;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_var;
                     break;
                 case 2:
-                    data.maxReactiveUnit = UNIT_kVAr;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_kvar;
                     break;
                 case 3:
-                    data.maxReactiveUnit = UNIT_MVAr;
+                    data.maxReactiveUnit = ElectricalUnit::UNIT_Mvar;
                     break;
             }
         }
@@ -518,16 +518,16 @@ bool SyncMachineForm::ValidateData()
                 return false;
             switch(m_choiceMinRectivePower->GetSelection()) {
                 case 0:
-                    data.minReactiveUnit = UNIT_PU;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_PU;
                     break;
                 case 1:
-                    data.minReactiveUnit = UNIT_VAr;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_var;
                     break;
                 case 2:
-                    data.minReactiveUnit = UNIT_kVAr;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_kvar;
                     break;
                 case 3:
-                    data.minReactiveUnit = UNIT_MVAr;
+                    data.minReactiveUnit = ElectricalUnit::UNIT_Mvar;
                     break;
             }
         }

@@ -26,9 +26,9 @@ enum LoadType { CONST_POWER = 0, CONST_IMPEDANCE };
 struct LoadElectricalData {
     wxString name;
     double activePower = 100.0;
-    ElectricalUnit activePowerUnit = UNIT_MW;
+    ElectricalUnit activePowerUnit = ElectricalUnit::UNIT_MW;
     double reactivePower = 0.0;
-    ElectricalUnit reactivePowerUnit = UNIT_MVAr;
+    ElectricalUnit reactivePowerUnit = ElectricalUnit::UNIT_Mvar;
     LoadType loadType = CONST_POWER;
 
     // Stability
@@ -88,7 +88,7 @@ class Load : public Shunt
     LoadElectricalData GetElectricalData() { return m_electricalData; }
     LoadElectricalData GetPUElectricalData(double systemPowerBase);
     void SetElectricalData(const LoadElectricalData& electricalData) { m_electricalData = electricalData; }
-    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = STABILITY);
+    virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = PlotStudy::STABILITY);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

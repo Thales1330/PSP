@@ -221,15 +221,15 @@ InductorElectricalData Inductor::GetPUElectricalData(double systemPowerBase)
 {
     InductorElectricalData data = m_electricalData;
     switch(data.reactivePowerUnit) {
-        case ElectricalUnit::UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             data.reactivePower = data.reactivePower / systemPowerBase;
             data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case ElectricalUnit::UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             data.reactivePower = (data.reactivePower * 1e3) / systemPowerBase;
             data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
-        case ElectricalUnit::UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             data.reactivePower = (data.reactivePower * 1e6) / systemPowerBase;
             data.reactivePowerUnit = ElectricalUnit::UNIT_PU;
         } break;
@@ -265,13 +265,13 @@ wxString Inductor::GetTipText() const
         case ElectricalUnit::UNIT_PU: {
             tipText += _(" p.u.");
         } break;
-        case ElectricalUnit::UNIT_VAr: {
+        case ElectricalUnit::UNIT_var: {
             tipText += _(" VAr");
         } break;
-        case ElectricalUnit::UNIT_kVAr: {
+        case ElectricalUnit::UNIT_kvar: {
             tipText += _(" kVAr");
         } break;
-        case ElectricalUnit::UNIT_MVAr: {
+        case ElectricalUnit::UNIT_Mvar: {
             tipText += _(" MVAr");
         } break;
         default:
@@ -295,7 +295,7 @@ rapidxml::xml_node<>* Inductor::SaveElement(rapidxml::xml_document<>& doc, rapid
     XMLParser::SetNodeValue(doc, name, m_electricalData.name);
     auto reactivePower = XMLParser::AppendNode(doc, electricalProp, "ReactivePower");
     XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);
-    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", m_electricalData.reactivePowerUnit);
+    XMLParser::SetNodeAttribute(doc, reactivePower, "UnitID", static_cast<int>(m_electricalData.reactivePowerUnit));
 
     SaveSwitchingData(doc, electricalProp);
 
