@@ -138,7 +138,7 @@ class ControlEditor : public ControlEditorBase
     virtual void SetElementsList(std::vector<ControlElement*> elementList) { m_elementList = elementList; }
     virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
     virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
-   protected:
+
     virtual void OnClose(wxCloseEvent& event);
     virtual void OnTestClick(wxCommandEvent& event);
     virtual void OnButtonOKClick(wxCommandEvent& event) { Close(); }
@@ -155,8 +155,10 @@ class ControlEditor : public ControlEditorBase
     virtual void OnMouseMotion(wxMouseEvent& event);
     virtual void OnPaint(wxPaintEvent& event);
     virtual void LeftClickDown(wxMouseEvent& event);
-
+    
     void BuildControlElementPanel();
+
+   protected:
     void SetViewport();
     int GetNextID();
 

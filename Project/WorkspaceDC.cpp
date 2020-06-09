@@ -65,10 +65,6 @@ WorkspaceDC::WorkspaceDC(wxWindow* parent, wxString name, wxStatusBar* statusBar
 
 	this->GetSizer()->Remove(this->GetSizer()->GetChildren()[0]->GetId()); // remove m_glCanvas object from sizer
 
-	//for (int i = 0; i < this->GetSizer()->GetChildren().GetCount(); ++i) {
-		//wxMessageBox(wxString::Format("%d", this->GetSizer()->GetChildren()[i]->GetId()));
-	//}
-
 	delete m_glCanvas; // Delete GLcanvas to allow drawing with wxDC
 	m_glCanvas = nullptr;
 	SetBackgroundColour(wxColour(255, 255, 255));
