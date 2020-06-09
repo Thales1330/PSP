@@ -62,6 +62,8 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
     m_statusBar->SetStatusWidths(4, widths);
 
     m_properties = new PropertiesData();
+    
+    m_glCanvas->SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 }
 
 Workspace::~Workspace()
@@ -82,9 +84,13 @@ void Workspace::OnPaint(wxPaintEvent& event)
 {
     if(!m_glCanvas->IsShown()) return;
 
-    wxPaintDC dc(m_glCanvas);
+    
+    //dc.Clear();
 
-    m_glContext->SetCurrent(*m_glCanvas);
+    //m_glContext->SetCurrent(*m_glCanvas);
+    m_glCanvas->SetCurrent(*m_glContext);
+    wxPaintDC dc(m_glCanvas);
+    
     SetViewport();
 
     // Set GLCanvas scale and translation.
@@ -129,8 +135,11 @@ void Workspace::OnPaint(wxPaintEvent& event)
 
 void Workspace::SetViewport()
 {
+    
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+    glDepthMask(GL_TRUE);
     glClearColor(1.0, 1.0, 1.0, 1.0);  // White background.
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_COLOR_MATERIAL);

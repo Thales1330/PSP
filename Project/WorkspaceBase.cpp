@@ -41,7 +41,7 @@ WorkspaceBase::WorkspaceBase(wxWindow* parent, wxWindowID id, const wxPoint& pos
     m_timer->Start(1500, false);
     
     SetName(wxT("WorkspaceBase"));
-    SetSize(500,300);
+    SetSize(wxDLG_UNIT(this, wxSize(500,300)));
     if (GetSizer()) {
          GetSizer()->Fit(this);
     }
