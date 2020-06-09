@@ -124,6 +124,7 @@
         <File Name="Workspace.cpp"/>
       </VirtualDirectory>
       <VirtualDirectory Name="simulation GUI">
+        <File Name="ControlEditorDC.cpp"/>
         <File Name="StabilityEventList.cpp"/>
         <File Name="ChartView.cpp"/>
         <File Name="ControlEditor.cpp"/>
@@ -258,6 +259,7 @@
         <File Name="Workspace.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="simulation GUI">
+        <File Name="ControlEditorDC.h"/>
         <File Name="StabilityEventList.h"/>
         <File Name="ChartView.h"/>
         <File Name="ControlEditor.h"/>
