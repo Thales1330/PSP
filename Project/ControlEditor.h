@@ -121,7 +121,7 @@ class ControlEditor : public ControlEditorBase
         MODE_PASTE,
         MODE_DRAG_PASTE
     };
-
+    ControlEditor(wxWindow* parent) : ControlEditorBase (parent) {}
     ControlEditor(wxWindow* parent, wxGLContext* sharedGLContext,
                   int ioflags = IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY | IOControl::OUT_FIELD_VOLTAGE |
                                 IOControl::OUT_MEC_POWER);

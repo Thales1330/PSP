@@ -17,6 +17,7 @@
 
 #include "GeneratorStabForm.h"
 #include "ControlEditor.h"
+#include "ControlEditorDC.h"
 #include "ControlElementContainer.h"
 #include "SwitchingForm.h"
 #include "SyncGenerator.h"
@@ -76,10 +77,22 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
             data.avr = new ControlElementContainer();
             m_syncGenerator->SetElectricalData(data);
         }
-        ControlEditor* cEditor = new ControlEditor(NULL, m_sharedGLContext, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
-                IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
-                IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
-                IOControl::OUT_FIELD_VOLTAGE);
+
+		ControlEditor* cEditor = nullptr;
+
+		if (m_sharedGLContext) {
+			cEditor = new ControlEditor(nullptr, m_sharedGLContext, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
+				IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
+				IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
+				IOControl::OUT_FIELD_VOLTAGE);
+		}
+		else {
+			cEditor = new ControlEditorDC(nullptr, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
+				IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
+				IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
+				IOControl::OUT_FIELD_VOLTAGE);
+		}
+
         cEditor->SetElementsList(data.avr->GetControlElementsList());
         cEditor->SetConnectionsList(data.avr->GetConnectionLineList());
         cEditor->SetControlContainer(data.avr);
@@ -105,9 +118,17 @@ void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
             data.speedGov = new ControlElementContainer();
             m_syncGenerator->SetElectricalData(data);
         }
-        ControlEditor* cEditor =
-            new ControlEditor(NULL, m_sharedGLContext, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
-                    IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER);
+        ControlEditor* cEditor = nullptr;
+
+        if (m_sharedGLContext) {
+            cEditor = new ControlEditor(nullptr, m_sharedGLContext, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
+                IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER);
+        }
+        else {
+			cEditor = new ControlEditorDC(nullptr, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
+				IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER);
+        }
+
         cEditor->SetElementsList(data.speedGov->GetControlElementsList());
         cEditor->SetConnectionsList(data.speedGov->GetConnectionLineList());
         cEditor->SetControlContainer(data.speedGov);

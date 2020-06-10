@@ -14,7 +14,7 @@ public:
             IOControl::OUT_MEC_POWER);
     ~ControlEditorDC();
     
-    virtual void Redraw() { this->Refresh(); }
+    virtual void Redraw() { m_panelWorkspace->Refresh(); }
 
 protected:
     virtual void OnPaint(wxPaintEvent& event);

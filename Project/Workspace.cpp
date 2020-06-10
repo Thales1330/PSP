@@ -194,7 +194,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
                 }
             }
         }
-        // The line element can have an indefined number of points.
+        // The line element can have an undefined number of points.
         if(!foundElement) {
             if(typeid(*newElement) == typeid(Line)) { newElement->AddPoint(m_camera->ScreenToWorld(clickPoint)); }
         }

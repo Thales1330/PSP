@@ -67,6 +67,7 @@ WorkspaceDC::WorkspaceDC(wxWindow* parent, wxString name, wxStatusBar* statusBar
 
 	delete m_glCanvas; // Delete GLcanvas to allow drawing with wxDC
 	m_glCanvas = nullptr;
+    m_glContext = nullptr;
 	SetBackgroundColour(wxColour(255, 255, 255));
 	SetBackgroundStyle(wxBG_STYLE_PAINT); // To allow wxBufferedPaintDC works properly.
 	Redraw();
@@ -120,10 +121,8 @@ void WorkspaceDC::OnPaint(wxPaintEvent& event)
 		}
 
 		// Selection rectangle
-		//dc.SetPen(wxPen(wxColour(0, 125, 255)));
 		gc->SetPen(wxPen(wxColour(0, 125, 255, 255)));
 		gc->SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
-		//dc.SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
 		gc->DrawRectangle(m_selectionRect.m_x, m_selectionRect.m_y, m_selectionRect.m_width, m_selectionRect.m_height);
 
 		delete gc;

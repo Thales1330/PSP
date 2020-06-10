@@ -191,6 +191,7 @@
     <ClCompile Include="ControlEditor.cpp" />
     <ClCompile Include="ControlEditorBase.cpp" />
     <ClCompile Include="ControlEditorBitmaps.cpp" />
+    <ClCompile Include="ControlEditorDC.cpp" />
     <ClCompile Include="ControlElement.cpp" />
     <ClCompile Include="ControlElementContainer.cpp" />
     <ClCompile Include="ControlElementSolver.cpp" />
@@ -290,6 +291,7 @@
     <ClInclude Include="ConstantForm.h" />
     <ClInclude Include="ControlEditor.h" />
     <ClInclude Include="ControlEditorBase.h" />
+    <ClInclude Include="ControlEditorDC.h" />
     <ClInclude Include="ControlElement.h" />
     <ClInclude Include="ControlElementContainer.h" />
     <ClInclude Include="ControlElementSolver.h" />
