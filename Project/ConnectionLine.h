@@ -36,6 +36,7 @@ class ConnectionLine : public ControlElement
     ~ConnectionLine();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Contains(wxPoint2DDouble position) const;
     virtual bool Intersects(wxRect2DDouble rect) const;
     virtual void RemoveParent(Element* parent);
@@ -66,7 +67,7 @@ class ConnectionLine : public ControlElement
     wxPoint2DDouble m_tmpSndPt;
 
     ConnectionLineType m_type = ConnectionLineType::ELEMENT_ELEMENT;
-    ConnectionLine* m_parentLine = NULL;
+    ConnectionLine* m_parentLine = nullptr;
 
     double m_value;
 };

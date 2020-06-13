@@ -110,7 +110,7 @@ class MainApp : public wxApp
     {
         // Load language catalogs according the propertiesData attribute.
         if(!locale->Init(propertiesData->GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT)) {
-            wxMessageDialog msgDialog(NULL, _("This language is not supported by the system."), _("Error"),
+            wxMessageDialog msgDialog(nullptr, _("This language is not supported by the system."), _("Error"),
                                       wxOK | wxCENTRE | wxICON_ERROR);
             msgDialog.ShowModal();
         }
@@ -121,7 +121,7 @@ class MainApp : public wxApp
         // pt_BR
         if(propertiesData->GetGeneralPropertiesData().language == wxLANGUAGE_PORTUGUESE_BRAZILIAN) {
             if(!locale->AddCatalog(wxT("pt_BR"))) {
-                wxMessageDialog msgDialog(NULL, _("Fail to load brazilian portuguese language catalog."), _("Error"),
+                wxMessageDialog msgDialog(nullptr, _("Fail to load brazilian portuguese language catalog."), _("Error"),
                                           wxOK | wxCENTRE | wxICON_ERROR);
                 msgDialog.ShowModal();
             }
@@ -158,7 +158,7 @@ class MainApp : public wxApp
                 }
             }
         }
-        MainFrame* mainFrame = new MainFrame(NULL, locale, propertiesData, openFilePath);
+        MainFrame* mainFrame = new MainFrame(nullptr, locale, propertiesData, openFilePath);
 #ifdef __WXMSW__
         // Set application icon for windows
         mainFrame->SetIcon(wxICON(aaaaprogicon));

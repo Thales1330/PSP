@@ -41,7 +41,7 @@ class TransferFunctionForm : public TransferFunctionFormBase
     virtual void OnOKClick(wxCommandEvent& event);
     void LoadTFData();
 
-    wxWindow* m_parent = NULL;
-    TransferFunction* m_tf = NULL;
+    wxWindow* m_parent = nullptr;
+    TransferFunction* m_tf = nullptr;
 };
 #endif  // TRANSFERFUNCTIONFORM_H

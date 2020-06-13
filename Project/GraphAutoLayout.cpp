@@ -39,7 +39,7 @@ void GraphAutoLayout::AddLink(size_t index1, size_t index2, float weight)
 
 void GraphAutoLayout::Compute(size_t iterations)
 {
-    wxProgressDialog pbd(_("Importing..."), _("Initializing..."), iterations, NULL,
+    wxProgressDialog pbd(_("Importing..."), _("Initializing..."), iterations, nullptr,
                          wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
 
     float nodesCount = m_nodes.size();

@@ -94,6 +94,7 @@ class ControlElement : public Element
     void SetNodeList(std::vector<Node*> nodeList) { m_nodeList = nodeList; }
     std::vector<Node*> GetNodeList() const { return m_nodeList; }
     virtual void DrawNodes() const;
+    virtual void DrawDCNodes(wxGraphicsContext* gc) const;
     virtual void ReplaceNode(Node* oldNode, Node* newNode);
 
     /**

@@ -123,7 +123,7 @@ class Text : public GraphicalElement
 
     std::vector<OpenGLText*> m_openGLTextList;
 
-    Element* m_element = NULL;
+    Element* m_element = nullptr;
     ElementType m_elementType = TYPE_NONE;
     int m_elementNumber;
     DataType m_dataType;

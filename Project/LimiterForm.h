@@ -39,7 +39,7 @@ class LimiterForm : public LimiterFormBase
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
     virtual void OnOKButtonClick(wxCommandEvent& event);
 
-    wxWindow* m_parent = NULL;
-    Limiter* m_limiter = NULL;
+    wxWindow* m_parent = nullptr;
+    Limiter* m_limiter = nullptr;
 };
 #endif  // LIMITERFORM_H

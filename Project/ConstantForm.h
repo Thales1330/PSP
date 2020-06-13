@@ -39,7 +39,7 @@ class ConstantForm : public ConstantFormBase
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
     virtual void OnOKButtonClick(wxCommandEvent& event);
 
-    wxWindow* m_parent = NULL;
-    Constant* m_constant = NULL;
+    wxWindow* m_parent = nullptr;
+    Constant* m_constant = nullptr;
 };
 #endif  // CONSTANTFORM_H

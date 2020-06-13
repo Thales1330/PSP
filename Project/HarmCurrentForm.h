@@ -19,7 +19,7 @@ class HarmCurrentForm : public HarmCurrentFormBase
     virtual void OnOKButtonClick(wxCommandEvent& event);
 
     wxWindow* m_parent;
-    HarmCurrent* m_harmCurrent = NULL;
+    HarmCurrent* m_harmCurrent = nullptr;
     int m_maxID = 0;
 };
 #endif  // HARMCURRENTFORM_H

@@ -31,32 +31,37 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
     m_choiceTheme->Clear();
     m_choiceTheme->Insert(_("Light"), 0);
     m_choiceTheme->Insert(_("Dark"), 1);
+    m_choiceRender->Clear();
+    m_choiceRender->Insert(_("OpenGL"), 0);
+    m_choiceRender->Insert(_("Device Context"), 1);
 
-    switch(data.language) {
-        case wxLANGUAGE_ENGLISH: {
-            m_choiceLanguage->SetSelection(0);
-        } break;
-        case wxLANGUAGE_PORTUGUESE_BRAZILIAN: {
-            m_choiceLanguage->SetSelection(1);
-        } break;
-        default: {
-            m_choiceLanguage->SetSelection(wxNOT_FOUND);
-        } break;
+    switch (data.language) {
+    case wxLANGUAGE_ENGLISH: {
+        m_choiceLanguage->SetSelection(0);
+    } break;
+    case wxLANGUAGE_PORTUGUESE_BRAZILIAN: {
+        m_choiceLanguage->SetSelection(1);
+    } break;
+    default: {
+        m_choiceLanguage->SetSelection(wxNOT_FOUND);
+    } break;
     }
-    switch(data.theme) {
-        case THEME_LIGHT: {
-            m_choiceTheme->SetSelection(0);
-        } break;
-        case THEME_DARK: {
-            m_choiceTheme->SetSelection(1);
-        } break;
+    switch (data.theme) {
+    case THEME_LIGHT: {
+        m_choiceTheme->SetSelection(0);
+    } break;
+    case THEME_DARK: {
+        m_choiceTheme->SetSelection(1);
+    } break;
     }
+    if (data.useOpenGL) m_choiceRender->SetSelection(0);
+    else m_choiceRender->SetSelection(1);
 }
 
 GeneralPropertiesForm::~GeneralPropertiesForm() {}
 void GeneralPropertiesForm::OnButtonOKClick(wxCommandEvent& event)
 {
-    if(ValidateData()) EndModal(wxID_OK);
+    if (ValidateData()) EndModal(wxID_OK);
 }
 
 bool GeneralPropertiesForm::ValidateData()
@@ -66,53 +71,67 @@ bool GeneralPropertiesForm::ValidateData()
     bool hasChanges = false;
 
     //wxTextFile file("config.ini");
-	wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-	wxTextFile file(fn.GetPath() + wxFileName::GetPathSeparator() + "config.ini");
-    if(!file.Create()) {
-        if(!file.Open()) {
+    wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+    wxTextFile file(fn.GetPath() + wxFileName::GetPathSeparator() + "config.ini");
+    if (!file.Create()) {
+        if (!file.Open()) {
             // Fail to access the file.
             wxMessageDialog msgDialog(this,
-                                      _("It was not possible to access the init file.\nThe settings won't be applied."),
-                                      _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+                _("It was not possible to access the init file.\nThe settings won't be applied."),
+                _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
             msgDialog.ShowModal();
         }
         file.Clear();
     }
 
     wxString line = "lang=";
-    switch(m_choiceLanguage->GetSelection()) {
-        case 0: {
-            line += "en";
-            data.language = wxLANGUAGE_ENGLISH;
-        } break;
-        case 1: {
-            line += "pt-br";
-            data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
-        } break;
+    switch (m_choiceLanguage->GetSelection()) {
+    case 0: {
+        line += "en";
+        data.language = wxLANGUAGE_ENGLISH;
+    } break;
+    case 1: {
+        line += "pt-br";
+        data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
+    } break;
     }
     file.AddLine(line);
-    if(data.language != checkData.language) hasChanges = true;
+    if (data.language != checkData.language) hasChanges = true;
 
     line = "theme=";
-    switch(m_choiceTheme->GetSelection()) {
-        case 0: {
-            line += "light";
-            data.theme = THEME_LIGHT;
-        } break;
-        case 1: {
-            line += "dark";
-            data.theme = THEME_DARK;
-        } break;
+    switch (m_choiceTheme->GetSelection()) {
+    case 0: {
+        line += "light";
+        data.theme = THEME_LIGHT;
+    } break;
+    case 1: {
+        line += "dark";
+        data.theme = THEME_DARK;
+    } break;
     }
     file.AddLine(line);
-    if(data.theme != checkData.theme) hasChanges = true;
+    if (data.theme != checkData.theme) hasChanges = true;
+
+    line = "useOpenGL=";
+    switch (m_choiceRender->GetSelection()) {
+    case 0: {
+        line += "yes";
+        data.useOpenGL = true;
+    } break;
+    case 1: {
+        line += "no";
+        data.useOpenGL = false;
+    } break;
+    }
+    file.AddLine(line);
+    if (data.useOpenGL != checkData.useOpenGL) hasChanges = true;
 
     file.Write();
     file.Close();
 
-    if(hasChanges) {
+    if (hasChanges) {
         wxMessageDialog msgDialog(this, _("The application must be restarted to settings changes be applied."),
-                                  _("Info"), wxOK | wxCENTRE | wxICON_INFORMATION);
+            _("Info"), wxOK | wxCENTRE | wxICON_INFORMATION);
         msgDialog.ShowModal();
     }
     m_properties->SetGeneralPropertiesData(data);

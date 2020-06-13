@@ -319,14 +319,14 @@ void Transformer::MoveNode(Element* parent, wxPoint2DDouble position)
             m_pointList[0] = m_movePts[0] + position - m_moveStartPt;
             if(m_parentList[0]) {
                 m_parentList[0]->RemoveChild(this);
-                m_parentList[0] = NULL;
+                m_parentList[0] = nullptr;
                 m_online = false;
             }
         } else if(m_activeNodeID == 2) {
             m_pointList[m_pointList.size() - 1] = m_movePts[m_pointList.size() - 1] + position - m_moveStartPt;
             if(m_parentList[1]) {
                 m_parentList[1]->RemoveChild(this);
-                m_parentList[1] = NULL;
+                m_parentList[1] = nullptr;
                 m_online = false;
             }
         }
@@ -465,8 +465,8 @@ bool Transformer::SetNodeParent(Element* parent)
                 return true;
             }
         } else {
-            if(m_activeNodeID == 1) m_parentList[0] = NULL;
-            if(m_activeNodeID == 2) m_parentList[1] = NULL;
+            if(m_activeNodeID == 1) m_parentList[0] = nullptr;
+            if(m_activeNodeID == 2) m_parentList[1] = nullptr;
         }
     }
     return false;

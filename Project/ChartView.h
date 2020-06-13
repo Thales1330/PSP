@@ -68,7 +68,7 @@ class ChartView : public ChartViewBase
     virtual wxString GetActiveCurvesCSV();
     virtual wxTreeItemId GetActivePlotData(wxTreeItemId root, std::vector<PlotData*>& plotDataList);
 
-    wxPGProperty* m_pgPropColor = NULL;
+    wxPGProperty* m_pgPropColor = nullptr;
 
     wxTreeItemId m_treeTimeID;
 
@@ -76,12 +76,12 @@ class ChartView : public ChartViewBase
     std::vector<double> m_time;
     std::vector<double> m_xAxisValues;
 
-    mpWindow* m_mpWindow = NULL;
-    mpScaleX* m_xaxis = NULL;
-    mpScaleY* m_yaxis = NULL;
-    mpText* m_chartTitle = NULL;
-    mpInfoCoords* m_coords = NULL;
-    mpInfoLegend* m_leg = NULL;
+    mpWindow* m_mpWindow = nullptr;
+    mpScaleX* m_xaxis = nullptr;
+    mpScaleY* m_yaxis = nullptr;
+    mpText* m_chartTitle = nullptr;
+    mpInfoCoords* m_coords = nullptr;
+    mpInfoLegend* m_leg = nullptr;
 
     bool m_hideGrid = true;
     bool m_showLeg = true;

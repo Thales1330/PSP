@@ -71,9 +71,9 @@ void OpenGLText::Draw(wxPoint2DDouble position, double angle) const
     }
 }
 
-void OpenGLText::DrawDC(wxPoint2DDouble position, wxGraphicsContext* gc, double angle) const
+void OpenGLText::DrawDC(wxPoint2DDouble position, wxGraphicsContext* gc, double angle, wxColour colour) const
 {
-    gc->SetFont(wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight), wxColour(0, 0 , 0 , 255));
+    gc->SetFont(wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight), colour);
     gc->DrawText(m_text, position.m_x, position.m_y, angle);
 }
 
@@ -182,7 +182,7 @@ OpenGLText* OpenGLText::GetCopy()
 {
     OpenGLText* copy = new OpenGLText();
     *copy = *this;
-    copy->m_textureID = NULL;
+    copy->m_textureID = nullptr;
     copy->m_bitmapSize = wxSize(0, 0);
     copy->m_bitmap = wxNullBitmap;
     copy->SetText(copy->m_text);

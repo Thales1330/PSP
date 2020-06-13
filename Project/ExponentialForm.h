@@ -39,7 +39,7 @@ class ExponentialForm : public ExponentialFormBase
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
     virtual void OnOKButtonClick(wxCommandEvent& event);
 
-    wxWindow* m_parent = NULL;
-    Exponential* m_exponential = NULL;
+    wxWindow* m_parent = nullptr;
+    Exponential* m_exponential = nullptr;
 };
 #endif  // EXPONENTIALFORM_H

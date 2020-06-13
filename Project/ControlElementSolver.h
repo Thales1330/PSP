@@ -50,7 +50,7 @@ class ControlElementSolver
     ControlElementSolver(ControlElementContainer* ctrlContainer,
                          double timeStep = 1e-3,
                          double integrationError = 1e-3,
-                         wxWindow* parent = NULL);
+                         wxWindow* parent = nullptr);
     virtual ~ControlElementSolver() {}
     virtual bool InitializeValues(bool startAllZero);
     virtual void SolveNextStep();
@@ -78,15 +78,15 @@ class ControlElementSolver
     void FillAllConnectedChildren(ConnectionLine* parent);
     ConnectionLine* SolveNextElement(ConnectionLine* currentLine);
 
-    ControlElementContainer* m_ctrlContainer = NULL;
+    ControlElementContainer* m_ctrlContainer = nullptr;
     double m_timeStep = 1e-3;
     double m_integrationError = 1e-5;
     std::vector<double> m_solutions;
     bool m_isOK = false;
     wxString m_failMessage = _("Unknown error.");
 
-    IOControl* m_inputControl = NULL; /**< First input control to be solved */
-    IOControl* m_outputControl = NULL;
+    IOControl* m_inputControl = nullptr; /**< First input control to be solved */
+    IOControl* m_outputControl = nullptr;
     // Inputs
     bool m_switchStatus = false;
     double m_currentTime = 0.0;
@@ -105,7 +105,7 @@ class ControlElementSolver
      * m_inputToSolve[1] = Current time;
      * m_inputToSolve[2] = Switch status.
      */
-    double* m_inputToSolve = NULL;
+    double* m_inputToSolve = nullptr;
     // Outputs
     double m_fieldVoltage = 0.0;
     double m_mecPower = 0.0;

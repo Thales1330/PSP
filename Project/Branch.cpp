@@ -95,8 +95,8 @@ bool Branch::SetNodeParent(Element* parent)
                 return true;
             }
         } else {
-            if(m_activeNodeID == 1) m_parentList[0] = NULL;
-            if(m_activeNodeID == 2) m_parentList[1] = NULL;
+            if(m_activeNodeID == 1) m_parentList[0] = nullptr;
+            if(m_activeNodeID == 2) m_parentList[1] = nullptr;
         }
     }
     return false;
@@ -106,7 +106,7 @@ void Branch::RemoveParent(Element* parent)
 {
     for(int i = 0; i < 2; i++) {
         if(parent == m_parentList[i]) {
-            m_parentList[i] = NULL;
+            m_parentList[i] = nullptr;
             m_online = false;
             UpdateSwitchesPosition();
         }
@@ -121,7 +121,7 @@ void Branch::UpdateNodes()
 
         if(!m_parentList[0]->Intersects(nodeRect)) {
             m_parentList[0]->RemoveChild(this);
-            m_parentList[0] = NULL;
+            m_parentList[0] = nullptr;
             m_online = false;
             UpdateSwitchesPosition();
         }
@@ -133,7 +133,7 @@ void Branch::UpdateNodes()
 
         if(!m_parentList[1]->Intersects(nodeRect)) {
             m_parentList[1]->RemoveChild(this);
-            m_parentList[1] = NULL;
+            m_parentList[1] = nullptr;
             m_online = false;
             UpdateSwitchesPosition();
         }

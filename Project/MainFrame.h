@@ -127,12 +127,12 @@ class MainFrame : public MainFrameBase
     std::vector<Workspace*> m_workspaceList;
     int m_projectNumber = 1;
 
-    wxRibbonMetroArtProvider* m_artMetro = NULL;
-    wxMenu* m_addElementsMenu = NULL;
-    wxMenu* m_stabilityMenu = NULL;
-    wxLocale* m_locale = NULL;
-    PropertiesData* m_generalProperties = NULL;
-    wxGLContext* m_sharedGLContext = NULL;
+    wxRibbonMetroArtProvider* m_artMetro = nullptr;
+    wxMenu* m_addElementsMenu = nullptr;
+    wxMenu* m_stabilityMenu = nullptr;
+    wxLocale* m_locale = nullptr;
+    PropertiesData* m_generalProperties = nullptr;
+    wxGLContext* m_sharedGLContext = nullptr;
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);

@@ -53,6 +53,27 @@ void Constant::Draw(wxPoint2DDouble translation, double scale) const
     DrawNodes();
 }
 
+void Constant::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    if (m_selected) {
+        gc->SetPen(wxPen(wxColour(m_selectionColour.GetDcRGBA())));
+        gc->SetBrush(*wxTRANSPARENT_BRUSH);
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
+    }
+    gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
+    gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
+    DrawRectangle(m_position, m_width, m_height);
+    gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
+
+    // Plot number.
+    m_glText->DrawDC(m_position + wxPoint2DDouble(-m_glText->GetWidth() / 2, - m_glText->GetHeight() / 2), gc);
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
+    DrawDCNodes(gc);
+}
+
 bool Constant::ShowForm(wxWindow* parent, Element* element)
 {
     ConstantForm* form = new ConstantForm(parent, this);

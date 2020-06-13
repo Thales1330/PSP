@@ -18,6 +18,7 @@
 #include "ConnectionLine.h"
 #include "Sum.h"
 #include "SumForm.h"
+#include <wx/pen.h>
 
 Sum::Sum(int id) : ControlElement(id)
 {
@@ -107,6 +108,79 @@ void Sum::Draw(wxPoint2DDouble translation, double scale) const
 
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawNodes();
+}
+
+void Sum::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    if (m_selected) {
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
+    }
+    gc->SetPen(*wxBLACK_PEN);
+    gc->SetBrush(*wxWHITE_BRUSH);
+    gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
+
+    // Plot signals.
+    gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 2));
+    gc->SetBrush(*wxTRANSPARENT_BRUSH);
+    wxPoint2DDouble signalOffset[4];
+    wxPoint2DDouble sigmaOffset;
+    if (m_angle == 0.0) {
+        signalOffset[0] = wxPoint2DDouble(6, 0);
+        signalOffset[1] = wxPoint2DDouble(12, 0);
+        signalOffset[2] = wxPoint2DDouble(9, -3);
+        signalOffset[3] = wxPoint2DDouble(9, 3);
+        sigmaOffset = wxPoint2DDouble(6, 0);
+    }
+    else if (m_angle == 90.0) {
+        signalOffset[0] = wxPoint2DDouble(-3, 9);
+        signalOffset[1] = wxPoint2DDouble(3, 9);
+        signalOffset[2] = wxPoint2DDouble(0, 6);
+        signalOffset[3] = wxPoint2DDouble(0, 12);
+        sigmaOffset = wxPoint2DDouble(0, 6);
+    }
+    else if (m_angle == 180.0) {
+        signalOffset[0] = wxPoint2DDouble(-6, 0);
+        signalOffset[1] = wxPoint2DDouble(-12, 0);
+        signalOffset[2] = wxPoint2DDouble(-9, -3);
+        signalOffset[3] = wxPoint2DDouble(-9, 3);
+        sigmaOffset = wxPoint2DDouble(-6, 0);
+    }
+    else if (m_angle == 270.0) {
+        signalOffset[0] = wxPoint2DDouble(-3, -9);
+        signalOffset[1] = wxPoint2DDouble(3, -9);
+        signalOffset[2] = wxPoint2DDouble(0, -6);
+        signalOffset[3] = wxPoint2DDouble(0, -12);
+        sigmaOffset = wxPoint2DDouble(0, -6);
+    }
+    for (unsigned int i = 0; i < m_nodeList.size() - 1; ++i) {
+        wxPoint2DDouble hLine[2];
+        hLine[0] = m_nodeList[i]->GetPosition() + signalOffset[0];
+        hLine[1] = m_nodeList[i]->GetPosition() + signalOffset[1];
+        gc->DrawLines(2, hLine);
+        if (m_signalList[i] == SIGNAL_POSITIVE) {
+            wxPoint2DDouble vLine[2];
+            vLine[0] = m_nodeList[i]->GetPosition() + signalOffset[2];
+            vLine[1] = m_nodeList[i]->GetPosition() + signalOffset[3];
+            gc->DrawLines(2, vLine);
+        }
+    }
+
+    // Plot sigma.
+    gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+    wxPoint2DDouble sigma[5];
+    sigma[0] = m_position + wxPoint2DDouble(4, 9) + sigmaOffset;
+    sigma[1] = m_position + wxPoint2DDouble(-6, 9) + sigmaOffset;
+    sigma[2] = m_position + wxPoint2DDouble(0, 0) + sigmaOffset;
+    sigma[3] = m_position + wxPoint2DDouble(-6, -9) + sigmaOffset;
+    sigma[4] = m_position + wxPoint2DDouble(4, -9) + sigmaOffset;
+    gc->DrawLines(5, sigma);
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(*wxBLACK_BRUSH);
+    DrawDCNodes(gc);
 }
 
 bool Sum::ShowForm(wxWindow* parent, Element* element)

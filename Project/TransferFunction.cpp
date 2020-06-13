@@ -50,13 +50,13 @@ TransferFunction::TransferFunction(int id) : ControlElement(id)
 
 TransferFunction::~TransferFunction()
 {
-    if(m_glTextDen) delete m_glTextDen;
-    if(m_glTextNum) delete m_glTextNum;
+    if (m_glTextDen) delete m_glTextDen;
+    if (m_glTextNum) delete m_glTextNum;
 }
 void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
-    if(m_selected) {
+    if (m_selected) {
         glColor4dv(m_selectionColour.GetRGBA());
         double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
         DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
@@ -78,23 +78,49 @@ void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
     m_glTextDen->Draw(m_position + wxPoint2DDouble(0.0, m_height / 4));
 }
 
+void TransferFunction::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    if (m_selected) {
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
+    }
+    gc->SetPen(*wxBLACK_PEN);
+    gc->SetBrush(*wxWHITE_BRUSH);
+    gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
+
+    wxPoint2DDouble linePts[2];
+    linePts[0] = wxPoint2DDouble(m_position.m_x - m_width / 2 + 5 + m_borderSize, m_position.m_y);
+    linePts[1] = wxPoint2DDouble(m_position.m_x + m_width / 2 - 5 - m_borderSize, m_position.m_y);
+    gc->DrawLines(2, linePts);
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(*wxBLACK_BRUSH);
+    DrawDCNodes(gc);
+
+    glColor4d(0.0, 0.0, 0.0, 1.0);
+    m_glTextNum->DrawDC(m_position + wxPoint2DDouble(-m_glTextNum->GetWidth() / 2, -m_height / 4 - m_glTextNum->GetHeight() / 2), gc);
+    m_glTextDen->DrawDC(m_position + wxPoint2DDouble(-m_glTextDen->GetWidth() / 2, m_height / 4 - m_glTextDen->GetHeight() / 2), gc);
+}
+
 void TransferFunction::SetText(wxString numerator, wxString denominator)
 {
-    if(m_glTextNum)
+    if (m_glTextNum)
         m_glTextNum->SetText(numerator);
     else
         m_glTextNum = new OpenGLText(numerator);
 
-    if(m_glTextDen)
+    if (m_glTextDen)
         m_glTextDen->SetText(denominator);
     else
         m_glTextDen = new OpenGLText(denominator);
 
-    double nWidth = m_glTextNum->GetWidth() + 5 + m_borderSize;
-    double dWidth = m_glTextDen->GetWidth() + 5 + m_borderSize;
+    double nWidth = static_cast<double>(m_glTextNum->GetWidth()) + 5 + m_borderSize;
+    double dWidth = static_cast<double>(m_glTextDen->GetWidth()) + 5 + m_borderSize;
 
     m_width = nWidth > dWidth ? nWidth : dWidth;
-    m_height = m_glTextNum->GetHeight() + m_glTextDen->GetHeight() + 2 * m_borderSize;
+    m_height = static_cast<double>(m_glTextNum->GetHeight()) + static_cast<double>(m_glTextDen->GetHeight()) + 2 * m_borderSize;
     SetPosition(m_position);  // Update rect properly.
 }
 
@@ -102,7 +128,7 @@ wxString TransferFunction::GetSuperscriptNumber(int number)
 {
     wxString strNumber = wxString::Format("%d", number);
     wxString superscriptStr = "";
-    for(int i = 0; i < (int)strNumber.length(); ++i) {
+    for (int i = 0; i < (int)strNumber.length(); ++i) {
         wxString digitStr = strNumber[i];
         long digit = 0;
         digitStr.ToLong(&digit);
@@ -116,35 +142,40 @@ void TransferFunction::GetTFString(wxString& numerator, wxString& denominator)
     numerator = "";
     denominator = "";
     int index = static_cast<int>(m_numerator.size()) - 1;
-    for(auto it = m_numerator.begin(), itEnd = m_numerator.end(); it != itEnd; ++it) {
+    for (auto it = m_numerator.begin(), itEnd = m_numerator.end(); it != itEnd; ++it) {
         double value = *it;
-        if(value != 0.0) {
+        if (value != 0.0) {
             wxString signal;
-            if(index == static_cast<int>(m_numerator.size()) - 1) {
-                if(value >= 0.0)
+            if (index == static_cast<int>(m_numerator.size()) - 1) {
+                if (value >= 0.0)
                     signal += "";
                 else
                     signal += "-";
-            } else {
-                if(value >= 0.0)
+            }
+            else {
+                if (value >= 0.0)
                     signal += "+ ";
                 else
                     signal += "- ";
             }
 
-            if(index == 0) {
+            if (index == 0) {
                 numerator += signal + StringFromDouble(std::abs(value), 0);
                 break;
-            } else if(index == 1) {
-                if(value == 1.0) {
+            }
+            else if (index == 1) {
+                if (value == 1.0) {
                     numerator += signal + "s";
-                } else {
+                }
+                else {
                     numerator += signal + StringFromDouble(std::abs(value), 0) + "s";
                 }
-            } else {
-                if(value == 1.0) {
+            }
+            else {
+                if (value == 1.0) {
                     numerator += signal + "s" + GetSuperscriptNumber(index);
-                } else {
+                }
+                else {
                     numerator += signal + StringFromDouble(std::abs(value), 0) + "s" + GetSuperscriptNumber(index);
                 }
             }
@@ -154,35 +185,40 @@ void TransferFunction::GetTFString(wxString& numerator, wxString& denominator)
     }
 
     index = static_cast<int>(m_denominator.size()) - 1;
-    for(auto it = m_denominator.begin(), itEnd = m_denominator.end(); it != itEnd; ++it) {
+    for (auto it = m_denominator.begin(), itEnd = m_denominator.end(); it != itEnd; ++it) {
         double value = *it;
-        if(value != 0.0) {
+        if (value != 0.0) {
             wxString signal;
-            if(index == static_cast<int>(m_denominator.size()) - 1) {
-                if(value >= 0.0)
+            if (index == static_cast<int>(m_denominator.size()) - 1) {
+                if (value >= 0.0)
                     signal += "";
                 else
                     signal += "-";
-            } else {
-                if(value >= 0.0)
+            }
+            else {
+                if (value >= 0.0)
                     signal += "+ ";
                 else
                     signal += "- ";
             }
 
-            if(index == 0) {
+            if (index == 0) {
                 denominator += signal + StringFromDouble(std::abs(value), 0);
                 break;
-            } else if(index == 1) {
-                if(value == 1.0) {
+            }
+            else if (index == 1) {
+                if (value == 1.0) {
                     denominator += signal + "s";
-                } else {
+                }
+                else {
                     denominator += signal + StringFromDouble(std::abs(value), 0) + "s";
                 }
-            } else {
-                if(value == 1.0) {
+            }
+            else {
+                if (value == 1.0) {
                     denominator += signal + "s" + GetSuperscriptNumber(index);
-                } else {
+                }
+                else {
                     denominator += signal + StringFromDouble(std::abs(value), 0) + "s" + GetSuperscriptNumber(index);
                 }
             }
@@ -197,17 +233,20 @@ void TransferFunction::UpdateTFText()
     wxString num, den;
     GetTFString(num, den);
     SetText(num, den);
-    if(m_nodeList.size() == 2) {
-        if(m_angle == 0.0) {
+    if (m_nodeList.size() == 2) {
+        if (m_angle == 0.0) {
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
             m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
-        } else if(m_angle == 90.0) {
+        }
+        else if (m_angle == 90.0) {
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
             m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
-        } else if(m_angle == 180.0) {
+        }
+        else if (m_angle == 180.0) {
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
             m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
-        } else if(m_angle == 270.0) {
+        }
+        else if (m_angle == 270.0) {
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
             m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
         }
@@ -217,7 +256,7 @@ void TransferFunction::UpdateTFText()
 bool TransferFunction::ShowForm(wxWindow* parent, Element* element)
 {
     TransferFunctionForm* tfForm = new TransferFunctionForm(parent, this);
-    if(tfForm->ShowModal() == wxID_OK) {
+    if (tfForm->ShowModal() == wxID_OK) {
         tfForm->Destroy();
         return true;
     }
@@ -227,30 +266,33 @@ bool TransferFunction::ShowForm(wxWindow* parent, Element* element)
 
 void TransferFunction::Rotate(bool clockwise)
 {
-    if(clockwise)
+    if (clockwise)
         m_angle += 90.0;
     else
         m_angle -= 90.0;
-    if(m_angle >= 360.0)
+    if (m_angle >= 360.0)
         m_angle = 0.0;
-    else if(m_angle < 0)
+    else if (m_angle < 0)
         m_angle = 270.0;
 
-    if(m_angle == 0.0) {
+    if (m_angle == 0.0) {
         m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
-    } else if(m_angle == 90.0) {
+    }
+    else if (m_angle == 90.0) {
         m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
-    } else if(m_angle == 180.0) {
+    }
+    else if (m_angle == 180.0) {
         m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
-    } else if(m_angle == 270.0) {
+    }
+    else if (m_angle == 270.0) {
         m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
         m_nodeList[1]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
     }
 
-    for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
+    for (auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
         Node* node = *it;
         node->Rotate(clockwise);
     }
@@ -267,9 +309,9 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
 
     //[Ref.] http://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS.html
     int k = order;
-    for(int i = 0; i < order; i++) {
+    for (int i = 0; i < order; i++) {
         int numIndex = i - (order - static_cast<int>(m_numerator.size()));
-        if(numIndex < 0)
+        if (numIndex < 0)
             numerator.push_back(0.0);
         else
             numerator.push_back(m_numerator[numIndex]);
@@ -277,10 +319,10 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     }
 
     SpaceState ss;
-    for(int i = 0; i < (order - 1); i++) {
+    for (int i = 0; i < (order - 1); i++) {
         std::vector<double> lineA;
-        for(int j = 0; j < (order - 1); j++) {
-            if(j == i + 1)
+        for (int j = 0; j < (order - 1); j++) {
+            if (j == i + 1)
                 lineA.push_back(1.0);
             else
                 lineA.push_back(0.0);
@@ -289,10 +331,10 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
         ss.B.push_back(0.0);
         ss.C.push_back(0.0);
     }
-    for(int i = 0; i < order - 1; i++) {
+    for (int i = 0; i < order - 1; i++) {
         ss.A[order - 2][i] = -(denominator[order - 1 - i] / denominator[0]);
         ss.C[i] = numerator[order - 1 - i] / denominator[0] -
-                  (denominator[order - 1 - i] / denominator[0]) * (numerator[0] / denominator[0]);
+            (denominator[order - 1 - i] / denominator[0]) * (numerator[0] / denominator[0]);
     }
     ss.B[order - 2] = 1.0;
     ss.D = numerator[0] / denominator[0];
@@ -303,7 +345,7 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
     m_x.clear();
     m_dx.clear();
 
-    for(unsigned int i = 0; i < m_denominator.size(); ++i) {
+    for (unsigned int i = 0; i < m_denominator.size(); ++i) {
         m_x.push_back(0.0);
         m_dx.push_back(0.0);
     }
@@ -311,7 +353,7 @@ void TransferFunction::CalculateSpaceState(int maxIteration, double error)
 
 bool TransferFunction::Solve(double* input, double timeStep)
 {
-    if(!input) {
+    if (!input) {
         m_output = 0.0;
         return true;
     }
@@ -322,7 +364,7 @@ bool TransferFunction::Solve(double* input, double timeStep)
     std::vector<double> oldx;
     std::vector<double> dx;
     std::vector<double> olddx;
-    for(int i = 0; i < order; i++) {
+    for (int i = 0; i < order; i++) {
         x.push_back(m_x[i]);
         oldx.push_back(m_x[i]);
 
@@ -332,35 +374,35 @@ bool TransferFunction::Solve(double* input, double timeStep)
 
     bool exit = false;
     int iter = 0;
-    while(!exit) {
+    while (!exit) {
         double xError = 0.0;
         double dxError = 0.0;
-        for(int i = 0; i < order; i++) {
+        for (int i = 0; i < order; i++) {
             // Trapezoidal method
             x[i] = m_x[i] + 0.5 * timeStep * (m_dx[i] + dx[i]);
 
-            if(std::abs(x[i] - oldx[i]) > xError) xError = std::abs(x[i] - oldx[i]);
+            if (std::abs(x[i] - oldx[i]) > xError) xError = std::abs(x[i] - oldx[i]);
 
             oldx[i] = x[i];
         }
-        for(int i = 0; i < order; i++) {
+        for (int i = 0; i < order; i++) {
             // x' = Ax + Bu
             dx[i] = 0.0;
-            for(int j = 0; j < order; j++) dx[i] += m_ss.A[i][j] * x[j];
+            for (int j = 0; j < order; j++) dx[i] += m_ss.A[i][j] * x[j];
             dx[i] += m_ss.B[i] * input[0];
 
-            if(std::abs(dx[i] - olddx[i]) > dxError) dxError = std::abs(dx[i] - olddx[i]);
+            if (std::abs(dx[i] - olddx[i]) > dxError) dxError = std::abs(dx[i] - olddx[i]);
 
             olddx[i] = dx[i];
         }
-        if(std::max(xError, dxError) < m_error) exit = true;
+        if (std::max(xError, dxError) < m_error) exit = true;
 
         iter++;
-        if(iter >= m_maxIteration) return false;
+        if (iter >= m_maxIteration) return false;
     }
 
     m_output = 0.0;
-    for(int i = 0; i < order; i++) {
+    for (int i = 0; i < order; i++) {
         m_output += m_ss.C[i] * x[i];
         m_x[i] = x[i];
         m_dx[i] = dx[i];
@@ -383,13 +425,13 @@ Element* TransferFunction::GetCopy()
 bool TransferFunction::UpdateText()
 {
     UpdateTFText();
-    if(!m_glTextDen->IsTextureOK()) return false;
-    if(!m_glTextNum->IsTextureOK()) return false;
+    if (!m_glTextDen->IsTextureOK()) return false;
+    if (!m_glTextNum->IsTextureOK()) return false;
     return true;
 }
 
 rapidxml::xml_node<>* TransferFunction::SaveElement(rapidxml::xml_document<>& doc,
-                                                    rapidxml::xml_node<>* elementListNode)
+    rapidxml::xml_node<>* elementListNode)
 {
     auto elementNode = XMLParser::AppendNode(doc, elementListNode, "TransferFunction");
     XMLParser::SetNodeAttribute(doc, elementNode, "ID", m_elementID);
@@ -399,12 +441,12 @@ rapidxml::xml_node<>* TransferFunction::SaveElement(rapidxml::xml_document<>& do
 
     // Element properties
     auto numeratorNode = XMLParser::AppendNode(doc, elementNode, "Numerator");
-    for(unsigned int i = 0; i < m_numerator.size(); ++i) {
+    for (unsigned int i = 0; i < m_numerator.size(); ++i) {
         auto value = XMLParser::AppendNode(doc, numeratorNode, "Value");
         XMLParser::SetNodeValue(doc, value, m_numerator[i]);
     }
     auto denominatorNode = XMLParser::AppendNode(doc, elementNode, "Denominator");
-    for(unsigned int i = 0; i < m_denominator.size(); ++i) {
+    for (unsigned int i = 0; i < m_denominator.size(); ++i) {
         auto value = XMLParser::AppendNode(doc, denominatorNode, "Value");
         XMLParser::SetNodeValue(doc, value, m_denominator[i]);
     }
@@ -414,8 +456,8 @@ rapidxml::xml_node<>* TransferFunction::SaveElement(rapidxml::xml_document<>& do
 
 bool TransferFunction::OpenElement(rapidxml::xml_node<>* elementNode)
 {
-    if(!OpenCADProperties(elementNode)) return false;
-    if(!OpenControlNodes(elementNode)) return false;
+    if (!OpenCADProperties(elementNode)) return false;
+    if (!OpenControlNodes(elementNode)) return false;
 
     // Element properties
     std::vector<double> numerator, denominator;
@@ -423,7 +465,7 @@ bool TransferFunction::OpenElement(rapidxml::xml_node<>* elementNode)
     m_denominator.clear();
     auto numeratorNode = elementNode->first_node("Numerator");
     auto nValue = numeratorNode->first_node("Value");
-    while(nValue) {
+    while (nValue) {
         double value = 0.0;
         wxString(nValue->value()).ToCDouble(&value);
         m_numerator.push_back(value);
@@ -431,7 +473,7 @@ bool TransferFunction::OpenElement(rapidxml::xml_node<>* elementNode)
     }
     auto denominatorNode = elementNode->first_node("Denominator");
     auto dValue = denominatorNode->first_node("Value");
-    while(dValue) {
+    while (dValue) {
         double value = 0.0;
         wxString(dValue->value()).ToCDouble(&value);
         m_denominator.push_back(value);

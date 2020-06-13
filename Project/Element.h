@@ -266,7 +266,7 @@ class Element
      * @brief Get a the element copy.
      * @return Copy of the element.
      */
-    virtual Element* GetCopy() { return NULL; }
+    virtual Element* GetCopy() { return nullptr; }
     /**
      * @brief Set the element ID.
      * @param id Element ID.
@@ -602,9 +602,9 @@ class Element
      * @param segmentNumber Sotores the segment number clicked
      * @return The distance between the point and the line.
      */
-    virtual double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = NULL) const;
+    virtual double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = nullptr) const;
     
-    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode) { return NULL; }
+    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode) { return nullptr; }
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode) { return true; }
     void SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
     bool OpenCADProperties(rapidxml::xml_node<>* elementNode);

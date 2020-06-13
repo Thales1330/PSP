@@ -45,7 +45,7 @@
 #include "FrequencyResponseForm.h"
 
 // Workspace
-Workspace::Workspace() : WorkspaceBase(NULL) {}
+Workspace::Workspace() : WorkspaceBase(nullptr) {}
 Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wxGLContext* sharedGLContext)
     : WorkspaceBase(parent)
 {
@@ -147,8 +147,8 @@ void Workspace::SetViewport()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_LINE_SMOOTH);
 
-    double width = m_glCanvas->GetSize().x - 1;
-    double height = m_glCanvas->GetSize().y - 1;
+    double width = static_cast<double>(m_glCanvas->GetSize().x) - 1.0;
+    double height = static_cast<double>(m_glCanvas->GetSize().y) - 1.0;
 
     // Viewport fit the screen.
     glViewport(0, 0, width, height);
@@ -165,7 +165,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
     wxPoint clickPoint = event.GetPosition();
     bool foundElement = false;
-    Element* newElement = NULL;
+    Element* newElement = nullptr;
     bool showNewElementForm = false;
     bool clickOnSwitch = false;
 
@@ -287,7 +287,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
         if(element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
             bool elementIsBus = false;
             Bus oldBus;
-            Bus* currentBus = NULL;
+            Bus* currentBus = nullptr;
             if((currentBus = dynamic_cast<Bus*>(element))) {
                 elementIsBus = true;
                 oldBus = *currentBus;
@@ -543,7 +543,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
             for(auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
                 Element* element = *it;
                 if(element->IsSelected()) {
-                    element->MoveNode(NULL, m_camera->ScreenToWorld(event.GetPosition()));
+                    element->MoveNode(nullptr, m_camera->ScreenToWorld(event.GetPosition()));
                     redraw = true;
                 }
             }
@@ -949,7 +949,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 
                     m_elementList.erase(it);
                     if(element) delete element;
-                    menu->SetClientData(NULL);
+                    menu->SetClientData(nullptr);
                     break;
                 }
             }
@@ -1278,7 +1278,7 @@ bool Workspace::Paste()
                     }
                 } else {
                     // Change the parent if copied, otherwise remove it.
-                    for(int j = 0; j < (int)copy->GetParentList().size(); j++) {
+                    for(unsigned int j = 0; j < copy->GetParentList().size(); j++) {
                         Bus* currentParent = static_cast<Bus*>(copy->GetParentList()[j]);
                         if(currentParent) {
                             int parentID = currentParent->GetID();
@@ -1380,7 +1380,7 @@ void Workspace::OnTimer(wxTimerEvent& event)
 {
     if(m_tipWindow) {
         m_tipWindow->Close();
-        m_tipWindow = NULL;
+        m_tipWindow = nullptr;
     }
     if(m_mode == WorkspaceMode::MODE_EDIT) {
         for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {

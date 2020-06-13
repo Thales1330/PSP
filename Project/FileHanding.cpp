@@ -938,7 +938,7 @@ bool FileHanding::OpenControlElements(rapidxml::xml_document<>& doc,
     if(connectionListNode) {
         auto connNode = connectionListNode->first_node("Connection");
         while(connNode) {
-            ConnectionLine* cLine = NULL;
+            ConnectionLine* cLine = nullptr;
             int id = XMLParser::GetAttributeValueInt(connNode, "ID");
 
             auto cadPropNode = connNode->first_node("CADProperties");

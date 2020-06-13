@@ -40,6 +40,7 @@ class MathExpression : public ControlElement
     ~MathExpression();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
@@ -70,7 +71,7 @@ class MathExpression : public ControlElement
     wxString m_mathExpression = "sqrt(x^2 + y^2)";
     wxString m_variables = "time,step,x,y";
     std::vector<wxString> m_variablesVector;
-    double* m_inputValues = NULL;
+    double* m_inputValues = nullptr;
     std::vector<OpenGLText*> m_glTextInputVector;
     OpenGLText m_symbol;
     wxSize m_symbolSize;

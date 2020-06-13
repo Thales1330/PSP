@@ -43,10 +43,10 @@ class ControlSystemTest : public ControlSystemTestBase
    protected:
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
     virtual void OnRunButtonClick(wxCommandEvent& event);
-    int* m_inputType = NULL;
-    double* m_startTime = NULL;
-    double* m_slope = NULL;
-    double* m_timeStep = NULL;
-    double* m_simTime = NULL;
+    int* m_inputType = nullptr;
+    double* m_startTime = nullptr;
+    double* m_slope = nullptr;
+    double* m_timeStep = nullptr;
+    double* m_simTime = nullptr;
 };
 #endif  // CONTROLSYSTEMTEST_H

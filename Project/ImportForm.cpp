@@ -80,7 +80,7 @@ Bus* ImportForm::GetBusFromID(std::vector<Bus*> busList, int id)
     for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
         if((*it)->GetID() == id) return *it;
     }
-    return NULL;
+    return nullptr;
 }
 
 bool ImportForm::ImportCEPELFiles()
@@ -170,7 +170,7 @@ bool ImportForm::ImportCEPELFiles()
                 ParseAnarede::BusData* busData = parseAnarede.GetBusDataFromID((*it)->busConnectionID[0].second);
                 bool isMotor = false;
                 if(busData->genPower.real() <= 0.0) isMotor = true;
-                Machines* machine = NULL;
+                Machines* machine = nullptr;
 
                 if(!isMotor) {
                     SyncGenerator* syncGenerator = new SyncGenerator();
@@ -269,7 +269,7 @@ bool ImportForm::ImportCEPELFiles()
 
                 ParseAnarede::BusData* busData = parseAnarede.GetBusDataFromID((*it)->busConnectionID[0].second);
                 bool isInductor = false;
-                Shunt* shuntElement = NULL;
+                Shunt* shuntElement = nullptr;
 
                 double ql = 0.0;
                 if((*it)->type == ANA_IND_SHUNT) {
@@ -430,7 +430,7 @@ bool ImportForm::ImportCEPELFiles()
         ParseAnarede::BusData* busData = *it;
 
         // Search for bus
-        Bus* bus = NULL;
+        Bus* bus = nullptr;
         for(auto itB = busList.begin(), itBEnd = busList.end(); itB != itBEnd; ++itB) {
             if((*itB)->GetElectricalData().number == busData->id) {
                 bus = *itB;
@@ -442,7 +442,7 @@ bool ImportForm::ImportCEPELFiles()
             if(std::abs(busData->loadPower.real()) > 1e-5 ||
                std::abs(busData->loadPower.imag()) > 1e-5) {  // Have loads
                 // Find load associated with the bus
-                Load* load = NULL;
+                Load* load = nullptr;
                 for(auto itL = loadList.begin(), itLEnd = loadList.end(); itL != itLEnd; ++itL) {
                     if((*itL)->GetParentList().size() > 0) {     // Don't search in empty vectors
                         if((*itL)->GetParentList()[0] == bus) {  // Found load
@@ -467,7 +467,7 @@ bool ImportForm::ImportCEPELFiles()
             if(std::abs(busData->genPower.real()) > 1e-5 || std::abs(busData->genPower.imag()) > 1e-5) {
                 // Find synchornous machine associated with bus
                 if(busData->genPower.real() > 0.0) {  // Synchronous generator
-                    SyncGenerator* syncGenerator = NULL;
+                    SyncGenerator* syncGenerator = nullptr;
                     for(auto itSM = syncGeneratorList.begin(), itSMEnd = syncGeneratorList.end(); itSM != itSMEnd;
                         ++itSM) {
                         if((*itSM)->GetParentList().size() > 0) {     // Don't search in empty vectors
@@ -489,7 +489,7 @@ bool ImportForm::ImportCEPELFiles()
                         syncGeneratorList.push_back(newSyncGenerator);
                     }
                 } else {
-                    SyncMotor* syncMotor = NULL;
+                    SyncMotor* syncMotor = nullptr;
                     for(auto itSM = syncMotorList.begin(), itSMEnd = syncMotorList.end(); itSM != itSMEnd; ++itSM) {
                         if((*itSM)->GetParentList().size() > 0) {     // Don't search in empty vectors
                             if((*itSM)->GetParentList()[0] == bus) {  // Found load
@@ -1327,7 +1327,7 @@ ParseAnarede::BusData* ParseAnarede::GetBusDataFromID(int id)
     for(auto it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {
         if((*it)->id == id) return *it;
     }
-    return NULL;
+    return nullptr;
 }
 
 ParseAnarede::BranchData* ParseAnarede::GetBranchDataFromID(int id, int fromBus, int toBus, ElementTypeAnarede type)
@@ -1337,7 +1337,7 @@ ParseAnarede::BranchData* ParseAnarede::GetBranchDataFromID(int id, int fromBus,
            (*it)->type == type)
             return *it;
     }
-    return NULL;
+    return nullptr;
 }
 
 ParseAnarede::IndElementData* ParseAnarede::GetIndElementDataFromID(int id, int busID, ElementTypeAnarede type)
@@ -1345,7 +1345,7 @@ ParseAnarede::IndElementData* ParseAnarede::GetIndElementDataFromID(int id, int 
     for(auto it = m_indElementData.begin(), itEnd = m_indElementData.end(); it != itEnd; ++it) {
         if((*it)->id == id && (*it)->busConnection == busID && (*it)->type == type) return *it;
     }
-    return NULL;
+    return nullptr;
 }
 
 void ParseAnarede::ClearData()
@@ -1528,5 +1528,5 @@ ParseMatpower::BusData* ParseMatpower::GetBusDataFromID(int id)
     for(auto it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {
         if((*it)->id == id) return *it;
     }
-    return NULL;
+    return nullptr;
 }

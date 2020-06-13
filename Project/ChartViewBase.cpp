@@ -206,34 +206,34 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     }
 #endif
     // Connect events
-    this->Connect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), NULL, this);
-    this->Connect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), NULL, this);
-    this->Connect(m_menuItemExportCSV->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExpCSVClick), NULL, this);
-    this->Connect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), NULL, this);
-    this->Connect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), NULL, this);
-    this->Connect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), NULL, this);
-    this->Connect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), NULL, this);
-    this->Connect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), NULL, this);
-    this->Connect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), NULL, this);
-    m_treeCtrl->Connect(wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler(ChartViewBase::OnTreeItemActivated), NULL, this);
-    m_treeCtrl->Connect(wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler(ChartViewBase::OnTreeItemSelectionChanged), NULL, this);
-    m_pgMgr->Connect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
+    this->Connect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), nullptr, this);
+    this->Connect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), nullptr, this);
+    this->Connect(m_menuItemExportCSV->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExpCSVClick), nullptr, this);
+    this->Connect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), nullptr, this);
+    this->Connect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), nullptr, this);
+    this->Connect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), nullptr, this);
+    this->Connect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), nullptr, this);
+    this->Connect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), nullptr, this);
+    this->Connect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), nullptr, this);
+    m_treeCtrl->Connect(wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler(ChartViewBase::OnTreeItemActivated), nullptr, this);
+    m_treeCtrl->Connect(wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler(ChartViewBase::OnTreeItemSelectionChanged), nullptr, this);
+    m_pgMgr->Connect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), nullptr, this);
     
 }
 
 ChartViewBase::~ChartViewBase()
 {
-    this->Disconnect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), NULL, this);
-    this->Disconnect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), NULL, this);
-    this->Disconnect(m_menuItemExportCSV->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExpCSVClick), NULL, this);
-    this->Disconnect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), NULL, this);
-    this->Disconnect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), NULL, this);
-    this->Disconnect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), NULL, this);
-    this->Disconnect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), NULL, this);
-    this->Disconnect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), NULL, this);
-    this->Disconnect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), NULL, this);
-    m_treeCtrl->Disconnect(wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler(ChartViewBase::OnTreeItemActivated), NULL, this);
-    m_treeCtrl->Disconnect(wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler(ChartViewBase::OnTreeItemSelectionChanged), NULL, this);
-    m_pgMgr->Disconnect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), NULL, this);
+    this->Disconnect(m_menuItemSaveImage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSaveImageClick), nullptr, this);
+    this->Disconnect(m_menuItemSendToClipboard->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuSendClipClick), nullptr, this);
+    this->Disconnect(m_menuItemExportCSV->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExpCSVClick), nullptr, this);
+    this->Disconnect(m_menuItemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuExitClick), nullptr, this);
+    this->Disconnect(m_menuItemFit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuFitClick), nullptr, this);
+    this->Disconnect(m_menuItemShowGrid->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowGridClick), nullptr, this);
+    this->Disconnect(m_menuItemShowLabel->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowLabelClick), nullptr, this);
+    this->Disconnect(m_menuItemShowCoordinates->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuShowCoordinatesClick), nullptr, this);
+    this->Disconnect(m_menuItemDarkTheme->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(ChartViewBase::OnMenuDarkThemeClick), nullptr, this);
+    m_treeCtrl->Disconnect(wxEVT_COMMAND_TREE_ITEM_ACTIVATED, wxTreeEventHandler(ChartViewBase::OnTreeItemActivated), nullptr, this);
+    m_treeCtrl->Disconnect(wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler(ChartViewBase::OnTreeItemSelectionChanged), nullptr, this);
+    m_pgMgr->Disconnect(wxEVT_PG_CHANGED, wxPropertyGridEventHandler(ChartViewBase::OnPropertyGridChange), nullptr, this);
     
 }

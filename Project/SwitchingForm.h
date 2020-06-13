@@ -48,6 +48,6 @@ class SwitchingForm : public SwitchingFormBase
 
     int m_maxID = 0;
 
-    PowerElement* m_element = NULL;
+    PowerElement* m_element = nullptr;
 };
 #endif  // SWITCHINGFORM_H

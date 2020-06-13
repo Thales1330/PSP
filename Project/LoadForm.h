@@ -44,7 +44,7 @@ class LoadForm : public LoadFormBase
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
     virtual void UpdateZIPLoadFieldStatus();
 
-    wxWindow* m_parent = NULL;
-    Load* m_load = NULL;
+    wxWindow* m_parent = nullptr;
+    Load* m_load = nullptr;
 };
 #endif  // LOADFORM_H

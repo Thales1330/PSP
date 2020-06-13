@@ -321,17 +321,17 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
             m_inputToSolve[0] = currentLine->GetValue();
             m_inputToSolve[1] = m_currentTime;
             m_inputToSolve[2] = m_switchStatus;
-            if(!element->Solve(m_inputToSolve, m_timeStep)) return NULL;
+            if(!element->Solve(m_inputToSolve, m_timeStep)) return nullptr;
             element->SetSolved();
 
-            // Get the output node (must have one or will result NULL).
-            Node* outNode = NULL;
+            // Get the output node (must have one or will result nullptr).
+            Node* outNode = nullptr;
             auto nodeList = element->GetNodeList();
             for(auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
                 Node* node = *itN;
                 if(node->GetNodeType() == Node::NodeType::NODE_OUT) outNode = node;
             }
-            if(!outNode) return NULL;
+            if(!outNode) return nullptr;
 
             // Set connection line value associated with the output node.
             auto childList = element->GetChildList();
@@ -343,8 +343,8 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
                     for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
                         Node* childNode = *itCN;
                         if(childNode == outNode) {
-                            // Check if the line connect two elements, otherwise return NULL
-                            if(cLine->GetType() != ConnectionLine::ConnectionLineType::ELEMENT_ELEMENT) return NULL;
+                            // Check if the line connect two elements, otherwise return nullptr
+                            if(cLine->GetType() != ConnectionLine::ConnectionLineType::ELEMENT_ELEMENT) return nullptr;
 
                             // Set the connection line value and return it.
                             cLine->SetValue(element->GetOutput());
@@ -357,5 +357,5 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
             }
         }
     }
-    return NULL;
+    return nullptr;
 }

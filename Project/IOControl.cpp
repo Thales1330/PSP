@@ -119,6 +119,97 @@ void IOControl::Draw(wxPoint2DDouble translation, double scale) const
     DrawNodes();
 }
 
+void IOControl::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    std::vector<wxPoint2DDouble> pts;
+    if (m_angle == 0.0) {
+        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize));
+        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize - 10, m_borderSize));
+        pts.push_back(m_position + wxPoint2DDouble(m_width / 2 - m_borderSize, 0));
+        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize - 10, -m_borderSize));
+        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize));
+    }
+    else if (m_angle == 90.0) {
+        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize));
+        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize));
+        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize - 10));
+        pts.push_back(m_position + wxPoint2DDouble(0, m_height / 2 - m_borderSize));
+        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize - 10));
+    }
+    else if (m_angle == 180.0) {
+        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize + 10, m_borderSize));
+        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize));
+        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize));
+        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize + 10, -m_borderSize));
+        pts.push_back(m_position + wxPoint2DDouble(-m_width / 2 + m_borderSize, 0));
+    }
+    else if (m_angle == 270.0) {
+        pts.push_back(m_position + wxPoint2DDouble(0, -m_height / 2 + m_borderSize));
+        pts.push_back(m_rect.GetRightTop() + wxPoint2DDouble(-m_borderSize, m_borderSize + 10));
+        pts.push_back(m_rect.GetRightBottom() + wxPoint2DDouble(-m_borderSize, -m_borderSize));
+        pts.push_back(m_rect.GetLeftBottom() + wxPoint2DDouble(m_borderSize, -m_borderSize));
+        pts.push_back(m_rect.GetLeftTop() + wxPoint2DDouble(m_borderSize, m_borderSize + 10));
+    }
+    pts.emplace_back(pts[0]);
+
+    if (m_selected) {
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        std::vector<wxPoint2DDouble> selPts = pts;
+        if (m_angle == 0.0) {
+            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);
+            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);
+            selPts[2] += wxPoint2DDouble(1.5 * borderSize / 2, 0);
+            selPts[3] += wxPoint2DDouble(borderSize / 2, borderSize / 2);
+            selPts[4] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);
+        }
+        else if (m_angle == 90.0) {
+            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);
+            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);
+            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);
+            selPts[3] += wxPoint2DDouble(0, 1.5 * borderSize / 2);
+            selPts[4] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);
+        }
+        else if (m_angle == 180.0) {
+            selPts[0] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);
+            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);
+            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);
+            selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);
+            selPts[4] += wxPoint2DDouble(-1.5 * borderSize / 2, 0);
+        }
+        else if (m_angle == 270.0) {
+            selPts[0] += wxPoint2DDouble(0, -1.5 * borderSize / 2);
+            selPts[1] += wxPoint2DDouble(borderSize / 2, -borderSize / 2);
+            selPts[2] += wxPoint2DDouble(borderSize / 2, borderSize / 2);
+            selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);
+            selPts[4] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);
+        }
+        gc->DrawLines(5, &selPts[0]);
+    }
+    gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
+    gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
+    gc->DrawLines(6, &pts[0]);
+
+    // Plot number.
+    if (m_angle == 0.0) {
+        m_glText->DrawDC(m_position + wxPoint2DDouble(-5.0 - m_glText->GetWidth() / 2, - m_glText->GetHeight() / 2), gc);
+    }
+    else if (m_angle == 90.0) {
+        m_glText->DrawDC(m_position + wxPoint2DDouble(- m_glText->GetWidth() / 2, -5.0 - m_glText->GetHeight() / 2), gc);
+    }
+    else if (m_angle == 180.0) {
+        m_glText->DrawDC(m_position + wxPoint2DDouble(5.0 - m_glText->GetWidth() / 2, - m_glText->GetHeight() / 2), gc);
+    }
+    else if (m_angle == 270.0) {
+        m_glText->DrawDC(m_position + wxPoint2DDouble(- m_glText->GetWidth() / 2, 5.0 - m_glText->GetHeight() / 2), gc);
+    }
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
+    DrawDCNodes(gc);
+}
+
 bool IOControl::ShowForm(wxWindow* parent, Element* element)
 {
     IOControlForm* form = new IOControlForm(parent, this);

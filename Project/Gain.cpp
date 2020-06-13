@@ -81,6 +81,60 @@ void Gain::Draw(wxPoint2DDouble translation, double scale) const
     DrawNodes();
 }
 
+void Gain::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    if (m_selected) {
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        std::vector<wxPoint2DDouble> m_triSelectedPts;
+        if (m_angle == 0.0) {
+            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(borderSize / 2, borderSize / 1.5));
+            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(borderSize / 2, -borderSize / 1.5));
+            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(-borderSize, 0));
+        }
+        else if (m_angle == 90.0) {
+            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(borderSize / 1.5, borderSize / 2));
+            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(-borderSize / 1.5, borderSize / 2));
+            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(0, -borderSize));
+        }
+        else if (m_angle == 180.0) {
+            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(borderSize, 0));
+            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(-borderSize / 2, borderSize / 1.5));
+            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(-borderSize / 2, -borderSize / 1.5));
+        }
+        else if (m_angle == 270.0) {
+            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(0, borderSize));
+            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(-borderSize / 1.5, -borderSize / 2));
+            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(borderSize / 1.5, -borderSize / 2));
+        }
+        DrawDCTriangle(m_triSelectedPts, gc);
+    }
+    glLineWidth(1.0);
+    glColor4d(1.0, 1.0, 1.0, 1.0);
+    DrawTriangle(m_triPts);
+    glColor4d(0.0, 0.0, 0.0, 1.0);
+    DrawTriangle(m_triPts, GL_LINE_LOOP);
+
+    gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
+    gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
+    DrawDCTriangle(m_triPts, gc);
+
+    // Plot number.
+    if (m_angle == 0.0)
+        m_glText->DrawDC(m_position + wxPoint2DDouble(-m_width / 2 + 2 + m_borderSize, - m_glText->GetHeight() / 2), gc);
+    else if (m_angle == 90.0)
+        m_glText->DrawDC(m_position + wxPoint2DDouble(-m_glText->GetWidth() / 2, -m_height / 2 + 2 + m_borderSize), gc);
+    else if (m_angle == 180.0)
+        m_glText->DrawDC(m_position + wxPoint2DDouble(m_width / 2 - m_glText->GetWidth() - 2 - m_borderSize, -m_glText->GetHeight() / 2), gc);
+    else if (m_angle == 270.0)
+        m_glText->DrawDC(m_position + wxPoint2DDouble(-m_glText->GetWidth() / 2, m_height / 2 - m_glText->GetHeight() - 2 - m_borderSize), gc);
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
+    DrawDCNodes(gc);
+}
+
 bool Gain::ShowForm(wxWindow* parent, Element* element)
 {
     GainForm* form = new GainForm(parent, this);

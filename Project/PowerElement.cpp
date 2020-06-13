@@ -242,7 +242,7 @@ bool PowerElement::OpenCADProperties(rapidxml::xml_node<>* elementNode, std::vec
     // If the opened power element has no parent, set up the basics CAD properties of the element manually, otherwise
     // just class method AddParent to calculate properly.
     if(parentID == -1) {
-        m_parentList.push_back(NULL);
+        m_parentList.push_back(nullptr);
         m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
         m_pointList.push_back(wxPoint2DDouble(nodePosX, nodePosY));
         m_pointList.push_back(m_position + wxPoint2DDouble(0.0, -m_height / 2.0 - 10.0));

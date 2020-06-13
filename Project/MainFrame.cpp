@@ -39,7 +39,7 @@
 #include "artProvider/ArtMetro.h"
 #include "WorkspaceDC.h"
 
-MainFrame::MainFrame() : MainFrameBase(NULL) {}
+MainFrame::MainFrame() : MainFrameBase(nullptr) {}
 MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initProperties, wxString openPath)
     : MainFrameBase(parent)
 {
@@ -77,12 +77,12 @@ MainFrame::~MainFrame()
     // if(m_artMetro) delete m_artMetro;
     if(m_addElementsMenu) {
         m_addElementsMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAddElementsClick),
-                                      NULL, this);
+                                      nullptr, this);
         delete m_addElementsMenu;
     }
     if(m_stabilityMenu) {
         m_stabilityMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnStabilityMenuClick),
-                                    NULL, this);
+                                    nullptr, this);
         delete m_stabilityMenu;
     }
     if(m_locale) delete m_locale;
@@ -556,7 +556,7 @@ void MainFrame::NotebookPageClosing(wxAuiNotebookEvent& event)
     auto it = m_workspaceList.begin();
     while(it != m_workspaceList.end()) {
         if(*it == m_auiNotebook->GetCurrentPage()) {
-            if((*it)->GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = NULL;
+            if((*it)->GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = nullptr;
             m_workspaceList.erase(it);
             break;
         }

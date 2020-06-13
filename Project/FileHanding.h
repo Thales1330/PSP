@@ -54,12 +54,12 @@ public:
     void SaveControl(wxFileName path);
     bool OpenControl(wxFileName path, std::vector<ControlElement*>& ctrlElementList, std::vector<ConnectionLine*>& ctrlConnectionList);
     
-    void SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = NULL);
-    bool OpenControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = NULL);
+    void SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = nullptr);
+    bool OpenControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = nullptr);
 
 protected:
-    Workspace* m_workspace = NULL;
-    ControlEditor* m_controlEditor = NULL;
+    Workspace* m_workspace = nullptr;
+    ControlEditor* m_controlEditor = nullptr;
 };
 
 #endif // FILEHANDING_H

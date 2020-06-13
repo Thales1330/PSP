@@ -10,26 +10,28 @@ ControlEditorDC::ControlEditorDC(wxWindow* parent, int ioflags) : ControlEditor(
     m_ioFlags = ioflags;
 
     // Disconnect events from GLCanvas
-    m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(ControlEditor::OnPaint), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditor::OnLeftClickDown), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditor::OnKeyDown), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(ControlEditor::OnMouseMotion), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(ControlEditor::OnMiddleDown), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditor::OnMiddleUp), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditor::OnLeftClickUp), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditor::OnScroll), NULL, this);
-    m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(ControlEditor::OnIdle), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(ControlEditor::OnPaint), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditor::OnLeftClickDown), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditor::OnLeftClickUp), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(ControlEditor::OnDoubleClick), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(ControlEditor::OnMiddleDown), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditor::OnMiddleUp), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(ControlEditor::OnMouseMotion), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditor::OnScroll), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(ControlEditor::OnIdle), nullptr, this);
+    m_glCanvas->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditor::OnKeyDown), nullptr, this);
 
     // Reconnect events to this
-    m_panelWorkspace->Connect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorDC::OnPaint), NULL, this);  // Connect to overloaded method
-    m_panelWorkspace->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditor::OnLeftClickDown), NULL, this);
-    m_panelWorkspace->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditor::OnKeyDown), NULL, this);
-    m_panelWorkspace->Connect(wxEVT_MOTION, wxMouseEventHandler(ControlEditor::OnMouseMotion), NULL, this);
-    m_panelWorkspace->Connect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(ControlEditor::OnMiddleDown), NULL, this);
-    m_panelWorkspace->Connect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditor::OnMiddleUp), NULL, this);
-    m_panelWorkspace->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditor::OnLeftClickUp), NULL, this);
-    m_panelWorkspace->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditor::OnScroll), NULL, this);
-    m_panelWorkspace->Connect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorDC::OnIdle), NULL, this);  // Connect to overloaded method
+    m_panelWorkspace->Connect(wxEVT_PAINT, wxPaintEventHandler(ControlEditorDC::OnPaint), nullptr, this); // Connect to overloaded method
+    m_panelWorkspace->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditor::OnLeftClickDown), nullptr, this);
+    m_panelWorkspace->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(ControlEditor::OnLeftClickUp), nullptr, this);
+    m_panelWorkspace->Connect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(ControlEditor::OnDoubleClick), nullptr, this);
+    m_panelWorkspace->Connect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(ControlEditor::OnMiddleDown), nullptr, this);
+    m_panelWorkspace->Connect(wxEVT_MIDDLE_UP, wxMouseEventHandler(ControlEditor::OnMiddleUp), nullptr, this);
+    m_panelWorkspace->Connect(wxEVT_MOTION, wxMouseEventHandler(ControlEditor::OnMouseMotion), nullptr, this);
+    m_panelWorkspace->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(ControlEditor::OnScroll), nullptr, this);
+    m_panelWorkspace->Connect(wxEVT_IDLE, wxIdleEventHandler(ControlEditorDC::OnIdle), nullptr, this); // Connect to overloaded method
+    m_panelWorkspace->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(ControlEditor::OnKeyDown), nullptr, this);
 
     m_panelWorkspace->GetSizer()->Remove(m_panelWorkspace->GetSizer()->GetChildren()[0]->GetId());  // remove m_glCanvas object from sizer
 

@@ -47,7 +47,7 @@ class BusForm : public BusFormBase
     virtual void EnableStabFaultFields(bool enable = true);
     virtual void UpdateChoiceBoxes();
 
-    Bus* m_bus = NULL;
-    wxWindow* m_parent = NULL;
+    Bus* m_bus = nullptr;
+    wxWindow* m_parent = nullptr;
 };
 #endif  // BUSFORM_H

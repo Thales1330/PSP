@@ -44,7 +44,7 @@ class IndMotorForm : public IndMotorFormBase
     
     void UpdateFields();
 
-    wxWindow* m_parent = NULL;
-    IndMotor* m_indMotor = NULL;
+    wxWindow* m_parent = nullptr;
+    IndMotor* m_indMotor = nullptr;
 };
 #endif  // INDMOTORFORM_H

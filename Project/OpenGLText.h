@@ -42,7 +42,7 @@ class OpenGLText
     virtual ~OpenGLText();
 
     virtual void Draw(wxPoint2DDouble position, double angle = 0.0) const;
-    virtual void DrawDC(wxPoint2DDouble position, wxGraphicsContext* gc, double angle = 0.0) const;
+    virtual void DrawDC(wxPoint2DDouble position, wxGraphicsContext* gc, double angle = 0.0, wxColour colour = *wxBLACK) const;
     virtual OpenGLText* GetCopy();
 
     virtual void SetText(wxString text);
@@ -70,8 +70,8 @@ class OpenGLText
 
     wxBitmap m_bitmap = wxNullBitmap;
     wxSize m_bitmapSize = wxSize(0, 0);
-    wxPoint2DDouble* m_textCoord = NULL;
-    GLuint* m_textureID = NULL;
+    wxPoint2DDouble* m_textCoord = nullptr;
+    GLuint* m_textureID = nullptr;
 };
 
 #endif  // OPENGLTEXT_H

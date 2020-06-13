@@ -53,6 +53,7 @@ class IOControl : public ControlElement
     ~IOControl();
 
     virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element);
@@ -77,7 +78,7 @@ class IOControl : public ControlElement
 
     Node::NodeType m_ioNodeType = Node::NodeType::NODE_IN;
 
-    OpenGLText* m_glText = NULL;
+    OpenGLText* m_glText = nullptr;
 };
 
 #endif  // IOCONTROL_H

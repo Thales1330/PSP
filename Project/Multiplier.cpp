@@ -17,6 +17,7 @@
 
 #include "ConnectionLine.h"
 #include "Multiplier.h"
+#include <wx/pen.h>
 
 Multiplier::Multiplier(int id) : MathOperation(id) {}
 Multiplier::~Multiplier() {}
@@ -31,6 +32,20 @@ void Multiplier::DrawSymbol() const
     xSymbol.push_back(m_position + wxPoint2DDouble(5, -5));
     glColor4d(0.0, 0.3, 1.0, 1.0);
     DrawLine(xSymbol, GL_LINES);
+}
+
+void Multiplier::DrawDCSymbol(wxGraphicsContext* gc) const
+{
+    // Plot x.
+    gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+    gc->SetBrush(*wxTRANSPARENT_BRUSH);
+    wxPoint2DDouble xSymbol[4];
+    xSymbol[0] = m_position + wxPoint2DDouble(-5, -5);
+    xSymbol[1] = m_position + wxPoint2DDouble(5, 5);
+    xSymbol[2] = m_position + wxPoint2DDouble(-5, 5);
+    xSymbol[3] = m_position + wxPoint2DDouble(5, -5);
+    gc->DrawLines(2, &xSymbol[0]);
+    gc->DrawLines(2, &xSymbol[2]);
 }
 
 bool Multiplier::Solve(double* input, double timeStep)

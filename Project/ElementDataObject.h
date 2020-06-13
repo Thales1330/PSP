@@ -46,7 +46,7 @@ class ElementDataObject : public wxDataObjectSimple
 
     ElementsLists* GetElementsLists() { return m_elementsLists; }
    protected:
-    ElementsLists* m_elementsLists = NULL;
+    ElementsLists* m_elementsLists = nullptr;
 };
 
 #endif  // ELEMENTDATAOBJECT_H

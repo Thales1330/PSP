@@ -36,6 +36,7 @@ class Multiplier : public MathOperation
     ~Multiplier();
 
     virtual void DrawSymbol() const;
+    virtual void DrawDCSymbol(wxGraphicsContext* gc) const;
     virtual bool Solve(double* input, double timeStep);
     
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);

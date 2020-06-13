@@ -50,9 +50,9 @@ class SyncMachineForm : public SyncMachineFormBase
     virtual bool ValidateData();
     virtual void ReplaceStaticTextLabelChar(wxStaticText* staticText, wchar_t newChar);
 
-    SyncGenerator* m_syncGenerator = NULL;
-    SyncMotor* m_syncMotor = NULL;
-    wxWindow* m_parent = NULL;
-    wxGLContext* m_sharedGLContext = NULL;    
+    SyncGenerator* m_syncGenerator = nullptr;
+    SyncMotor* m_syncMotor = nullptr;
+    wxWindow* m_parent = nullptr;
+    wxGLContext* m_sharedGLContext = nullptr;    
 };
 #endif  // SYNCMACHINEFORM_H

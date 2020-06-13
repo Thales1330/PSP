@@ -106,7 +106,7 @@ class Workspace : public WorkspaceBase
     };
 
     Workspace();
-    Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = NULL, wxGLContext* sharedGLContext = NULL);
+    Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = nullptr, wxGLContext* sharedGLContext = nullptr);
     virtual ~Workspace();
 
     wxString GetName() const { return m_name; }
@@ -176,10 +176,10 @@ protected:
     void SetViewport();
     void UpdateStatusBar();
 
-    wxGLContext* m_glContext = NULL;
-    wxStatusBar* m_statusBar = NULL;
-    Camera* m_camera = NULL;
-    wxTipWindow* m_tipWindow = NULL;
+    wxGLContext* m_glContext = nullptr;
+    wxStatusBar* m_statusBar = nullptr;
+    Camera* m_camera = nullptr;
+    wxTipWindow* m_tipWindow = nullptr;
     wxString m_name;
 
     WorkspaceMode m_mode = WorkspaceMode::MODE_EDIT;
@@ -194,7 +194,7 @@ protected:
     wxRect2DDouble m_selectionRect;
     wxPoint2DDouble m_startSelRect;
 
-    PropertiesData* m_properties = NULL;
+    PropertiesData* m_properties = nullptr;
 
     std::vector<double> m_stabilityTimeVector;
 

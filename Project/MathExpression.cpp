@@ -24,7 +24,7 @@ MathExpression::MathExpression(int id) : ControlElement(id)
     m_variablesVector.push_back("x");
     m_variablesVector.push_back("y");
 
-    for(unsigned int i = 0; i < m_variablesVector.size(); ++i) {
+    for (unsigned int i = 0; i < m_variablesVector.size(); ++i) {
         m_glTextInputVector.push_back(new OpenGLText(m_variablesVector[i]));
     }
 
@@ -38,11 +38,12 @@ MathExpression::MathExpression(int id) : ControlElement(id)
 
     CalculateBlockSize(static_cast<double>(m_variablesVector.size()));
 
-    for(unsigned int i = 0; i < m_variablesVector.size(); ++i) {
+    for (unsigned int i = 0; i < m_variablesVector.size(); ++i) {
         wxPoint2DDouble nodePosition(0, 0);
-        if(m_variablesVector.size() == 1) {
+        if (m_variablesVector.size() == 1) {
             nodePosition = m_position + wxPoint2DDouble(-m_width / 2, 0);
-        } else {
+        }
+        else {
             nodePosition = m_position + wxPoint2DDouble(-m_width / 2, 9 + 18 * i - m_height / 2);
         }
         Node* nodeIn = new Node(nodePosition, Node::NodeType::NODE_IN, m_borderSize);
@@ -59,14 +60,14 @@ MathExpression::MathExpression(int id) : ControlElement(id)
 
 MathExpression::~MathExpression()
 {
-    for(auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) { delete *it; }
+    for (auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) { delete* it; }
     m_glTextInputVector.clear();
 }
 
 void MathExpression::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);
-    if(m_selected) {
+    if (m_selected) {
         glColor4dv(m_selectionColour.GetRGBA());
         double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
         DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
@@ -78,42 +79,44 @@ void MathExpression::Draw(wxPoint2DDouble translation, double scale) const
 
     // Plot input variables and symbol.
     glColor4d(0.0, 0.3, 1.0, 1.0);
-    if(m_angle == 0.0) {
+    if (m_angle == 0.0) {
         m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() -
-                      wxPoint2DDouble(m_symbolSize.GetWidth() / 2.0 + 6.0, 0));
+            wxPoint2DDouble(m_symbolSize.GetWidth() / 2.0 + 6.0, 0));
         glColor4d(0.0, 0.0, 0.0, 1.0);
-        for(unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
             m_glTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() +
-                                         wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + 6, 0));
+                wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + 6, 0));
         }
-    } else if(m_angle == 90.0) {
+    }
+    else if (m_angle == 90.0) {
         m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() -
-                      wxPoint2DDouble(0, m_symbolSize.GetHeight() / 2.0 + 6.0));
+            wxPoint2DDouble(0, m_symbolSize.GetHeight() / 2.0 + 6.0));
         glColor4d(0.0, 0.0, 0.0, 1.0);
-        for(unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
             m_glTextInputVector[i]->Draw(
                 m_nodeList[i]->GetPosition() +
-                    wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + m_glTextInputVector[i]->GetHeight() / 2,
-                                    15),
+                wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + m_glTextInputVector[i]->GetHeight() / 2,
+                    15),
                 90);
         }
-    } else if(m_angle == 180.0) {
+    }
+    else if (m_angle == 180.0) {
         m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() +
-                      wxPoint2DDouble(m_symbolSize.GetWidth() / 2.0 + 6.0, 0));
+            wxPoint2DDouble(m_symbolSize.GetWidth() / 2.0 + 6.0, 0));
         glColor4d(0.0, 0.0, 0.0, 1.0);
-        for(unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
             m_glTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() -
-                                         wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + 6, 0));
+                wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + 6, 0));
         }
-    } else if(m_angle == 270.0) {
+    }
+    else if (m_angle == 270.0) {
         m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() +
-                      wxPoint2DDouble(0, m_symbolSize.GetHeight() / 2.0 + 6.0));
+            wxPoint2DDouble(0, m_symbolSize.GetHeight() / 2.0 + 6.0));
         glColor4d(0.0, 0.0, 0.0, 1.0);
-        for(unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
             m_glTextInputVector[i]->Draw(
-                m_nodeList[i]->GetPosition() + wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 +
-                                                                   m_glTextInputVector[i]->GetHeight() / 2.0,
-                                                               -m_glTextInputVector[i]->GetWidth()),
+                m_nodeList[i]->GetPosition() + wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + m_glTextInputVector[i]->GetHeight() / 2.0,
+                    -m_glTextInputVector[i]->GetWidth()),
                 90);
         }
     }
@@ -122,10 +125,70 @@ void MathExpression::Draw(wxPoint2DDouble translation, double scale) const
     DrawNodes();
 }
 
+void MathExpression::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    double pi = 3.1415926535897932;
+    if (m_selected) {
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
+    }
+    gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
+    gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
+    gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
+
+    // Plot input variables and symbol.
+    if (m_angle == 0.0) {
+        double w = static_cast<double>(m_symbolSize.GetWidth());
+        double h = static_cast<double>(m_symbolSize.GetHeight());
+        m_symbol.DrawDC(m_nodeList[m_nodeList.size() - 1]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc, 0, wxColour(0, 77, 255, 255));
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+            w = static_cast<double>(m_glTextInputVector[i]->GetWidth());
+            h = static_cast<double>(m_glTextInputVector[i]->GetHeight());
+            m_glTextInputVector[i]->DrawDC(m_nodeList[i]->GetPosition() + wxPoint2DDouble(6.0, -h / 2.0), gc);
+        }
+    }
+    else if (m_angle == 90.0) {
+        double w = static_cast<double>(m_symbolSize.GetWidth());
+        double h = static_cast<double>(m_symbolSize.GetHeight());
+        m_symbol.DrawDC(m_nodeList[m_nodeList.size() - 1]->GetPosition() - wxPoint2DDouble(w / 2, h + 6.0), gc, 0, wxColour(0, 77, 255, 255));
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+            w = static_cast<double>(m_glTextInputVector[i]->GetWidth());
+            h = static_cast<double>(m_glTextInputVector[i]->GetHeight());
+            m_glTextInputVector[i]->DrawDC(m_nodeList[i]->GetPosition() + wxPoint2DDouble(-h / 2, w + 6.0), gc, pi / 2.0);
+        }
+    }
+    else if (m_angle == 180.0) {
+        double w = static_cast<double>(m_symbolSize.GetWidth());
+        double h = static_cast<double>(m_symbolSize.GetHeight());
+        m_symbol.DrawDC(m_nodeList[m_nodeList.size() - 1]->GetPosition() + wxPoint2DDouble(6.0, -h / 2.0), gc, 0, wxColour(0, 77, 255, 255));
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+            w = static_cast<double>(m_glTextInputVector[i]->GetWidth());
+            h = static_cast<double>(m_glTextInputVector[i]->GetHeight());
+            m_glTextInputVector[i]->DrawDC(m_nodeList[i]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc);
+        }
+    }
+    else if (m_angle == 270.0) {
+        double w = static_cast<double>(m_symbolSize.GetWidth());
+        double h = static_cast<double>(m_symbolSize.GetHeight());
+        m_symbol.DrawDC(m_nodeList[m_nodeList.size() - 1]->GetPosition() + wxPoint2DDouble(-w / 2, 6.0), gc, 0, wxColour(0, 77, 255, 255));
+        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
+            w = static_cast<double>(m_glTextInputVector[i]->GetWidth());
+            h = static_cast<double>(m_glTextInputVector[i]->GetHeight());
+            m_glTextInputVector[i]->DrawDC(m_nodeList[i]->GetPosition() - wxPoint2DDouble(-h / 2, w + 6.0), gc, -pi / 2.0);
+        }
+    }
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(*wxBLACK_BRUSH);
+    DrawDCNodes(gc);
+}
+
 bool MathExpression::ShowForm(wxWindow* parent, Element* element)
 {
     MathExpressionForm* mathExprForm = new MathExpressionForm(parent, this);
-    if(mathExprForm->ShowModal() == wxID_OK) {
+    if (mathExprForm->ShowModal() == wxID_OK) {
         mathExprForm->Destroy();
         return true;
     }
@@ -135,18 +198,18 @@ bool MathExpression::ShowForm(wxWindow* parent, Element* element)
 
 void MathExpression::Rotate(bool clockwise)
 {
-    if(clockwise)
+    if (clockwise)
         m_angle += 90.0;
     else
         m_angle -= 90.0;
-    if(m_angle >= 360.0)
+    if (m_angle >= 360.0)
         m_angle = 0.0;
-    else if(m_angle < 0)
+    else if (m_angle < 0)
         m_angle = 270.0;
 
     UpdatePoints();
 
-    for(auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
+    for (auto it = m_nodeList.begin(), itEnd = m_nodeList.end(); it != itEnd; ++it) {
         Node* node = *it;
         node->Rotate(clockwise);
     }
@@ -154,7 +217,7 @@ void MathExpression::Rotate(bool clockwise)
 
 bool MathExpression::Solve(double* input, double timeStep)
 {
-    if(!input) {
+    if (!input) {
         m_output = 0.0;
         return true;
     }
@@ -163,18 +226,19 @@ bool MathExpression::Solve(double* input, double timeStep)
     m_inputValues[1] = timeStep;
     m_inputValues[2] = input[2];  // Switch status
     int i = 3;
-    for(auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
+    for (auto itN = m_nodeList.begin(), itNEnd = m_nodeList.end(); itN != itNEnd; ++itN) {
         Node* node = *itN;
-        if(node->GetNodeType() != Node::NodeType::NODE_OUT) {
-            if(!node->IsConnected()) {
+        if (node->GetNodeType() != Node::NodeType::NODE_OUT) {
+            if (!node->IsConnected()) {
                 m_inputValues[i] = 0.0;  // Node not connected means zero value as input.
-            } else {
-                for(auto itC = m_childList.begin(), itCEnd = m_childList.end(); itC != itCEnd; ++itC) {
+            }
+            else {
+                for (auto itC = m_childList.begin(), itCEnd = m_childList.end(); itC != itCEnd; ++itC) {
                     ConnectionLine* cLine = static_cast<ConnectionLine*>(*itC);
                     auto nodeList = cLine->GetNodeList();
-                    for(auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
+                    for (auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
                         Node* childNode = *itCN;
-                        if(childNode == node) {
+                        if (childNode == node) {
                             m_inputValues[i] = cLine->GetValue();
                             break;
                         }
@@ -187,7 +251,7 @@ bool MathExpression::Solve(double* input, double timeStep)
 
     // Solve the math expression using fparser
     double result = m_fparser.Eval(m_inputValues);
-    if(m_fparser.EvalError() != 0) return false;
+    if (m_fparser.EvalError() != 0) return false;
     m_output = result;
     return true;
 }
@@ -197,7 +261,7 @@ Element* MathExpression::GetCopy()
     MathExpression* copy = new MathExpression(m_elementID);
     *copy = *this;
     copy->m_glTextInputVector.clear();
-    for(auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) {
+    for (auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) {
         copy->m_glTextInputVector.push_back((*it)->GetCopy());
     }
     return copy;
@@ -207,35 +271,36 @@ void MathExpression::UpdatePoints()
 {
     CalculateBlockSize(static_cast<double>(m_nodeList.size()) - 1.0);
 
-    if(m_nodeList.size() == 2)  // Only one input (and the output).
+    if (m_nodeList.size() == 2)  // Only one input (and the output).
     {
-        if(m_angle == 0.0)
+        if (m_angle == 0.0)
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
-        else if(m_angle == 90.0)
+        else if (m_angle == 90.0)
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
-        else if(m_angle == 180.0)
+        else if (m_angle == 180.0)
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
-        else if(m_angle == 270.0)
+        else if (m_angle == 270.0)
             m_nodeList[0]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
-    } else {
-        for(unsigned int i = 0; i < m_nodeList.size() - 1; ++i) {
-            if(m_angle == 0.0)
+    }
+    else {
+        for (unsigned int i = 0; i < m_nodeList.size() - 1; ++i) {
+            if (m_angle == 0.0)
                 m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 9 + 18 * i - m_height / 2));
-            else if(m_angle == 90.0)
+            else if (m_angle == 90.0)
                 m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(m_width / 2 - 9 - 18 * i, -m_height / 2));
-            else if(m_angle == 180.0)
+            else if (m_angle == 180.0)
                 m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, m_height / 2 - 9 - 18 * i));
-            else if(m_angle == 270.0)
+            else if (m_angle == 270.0)
                 m_nodeList[i]->SetPosition(m_position + wxPoint2DDouble(9 + 18 * i - m_width / 2, m_height / 2));
         }
     }
-    if(m_angle == 0.0)
+    if (m_angle == 0.0)
         m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(m_width / 2, 0));
-    else if(m_angle == 90.0)
+    else if (m_angle == 90.0)
         m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(0, m_height / 2));
-    else if(m_angle == 180.0)
+    else if (m_angle == 180.0)
         m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(-m_width / 2, 0));
-    else if(m_angle == 270.0)
+    else if (m_angle == 270.0)
         m_nodeList[m_nodeList.size() - 1]->SetPosition(m_position + wxPoint2DDouble(0, -m_height / 2));
 
     SetPosition(m_position);  // Update rect.
@@ -252,19 +317,19 @@ void MathExpression::RemoveInNode()
 {
     Node* nodeToRemove = *(m_nodeList.end() - 2);
     bool foundChild = false;
-    for(auto it = m_childList.begin(), itEnd = m_childList.end(); it != itEnd; ++it) {
+    for (auto it = m_childList.begin(), itEnd = m_childList.end(); it != itEnd; ++it) {
         ControlElement* child = static_cast<ControlElement*>(*it);
         auto childNodeList = child->GetNodeList();
-        for(auto itN = childNodeList.begin(), itEndN = childNodeList.end(); itN != itEndN; ++itN) {
+        for (auto itN = childNodeList.begin(), itEndN = childNodeList.end(); itN != itEndN; ++itN) {
             Node* node = *itN;
-            if(node == nodeToRemove) {
+            if (node == nodeToRemove) {
                 child->RemoveParent(this);
                 RemoveChild(child);
                 foundChild = true;
                 break;
             }
         }
-        if(foundChild) break;
+        if (foundChild) break;
     }
     m_nodeList.erase(m_nodeList.end() - 2);
 }
@@ -272,16 +337,17 @@ void MathExpression::RemoveInNode()
 void MathExpression::CalculateBlockSize(double numInNodes)
 {
     m_maxSringSize = 0;
-    for(auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) {
-        if(m_maxSringSize < (*it)->GetWidth()) m_maxSringSize = (*it)->GetWidth();
+    for (auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) {
+        if (m_maxSringSize < (*it)->GetWidth()) m_maxSringSize = (*it)->GetWidth();
     }
-    if(m_angle == 0.0 || m_angle == 180.0) {
+    if (m_angle == 0.0 || m_angle == 180.0) {
         m_height = 18.0 * numInNodes;
-        if(m_height < m_minimumSize) m_height = m_minimumSize;  // minimum height
+        if (m_height < m_minimumSize) m_height = m_minimumSize;  // minimum height
         m_width = m_maxSringSize + m_symbolSize.GetWidth() + 18;
-    } else {
+    }
+    else {
         m_width = 18.0 * numInNodes;
-        if(m_width < m_minimumSize) m_width = m_minimumSize;  // minimum width
+        if (m_width < m_minimumSize) m_width = m_minimumSize;  // minimum width
         m_height = m_maxSringSize + m_symbolSize.GetHeight() + 18;
     }
 }
@@ -290,10 +356,10 @@ bool MathExpression::UpdateText()
 {
     bool isTextureOK = true;
     m_symbol.SetText(m_symbol.GetText());
-    if(!m_symbol.IsTextureOK()) isTextureOK = false;
-    for(auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) {
+    if (!m_symbol.IsTextureOK()) isTextureOK = false;
+    for (auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) {
         (*it)->SetText((*it)->GetText());
-        if(!(*it)->IsTextureOK()) isTextureOK = false;
+        if (!(*it)->IsTextureOK()) isTextureOK = false;
     }
     return isTextureOK;
 }
@@ -302,28 +368,28 @@ void MathExpression::SetVariables(std::vector<wxString> variablesVector)
 {
     m_variablesVector = variablesVector;
     // Clear old glTextVector
-    for(auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) { delete *it; }
+    for (auto it = m_glTextInputVector.begin(), itEnd = m_glTextInputVector.end(); it != itEnd; ++it) { delete* it; }
     m_glTextInputVector.clear();
 
-    for(auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
+    for (auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
         m_glTextInputVector.push_back(new OpenGLText(*(it)));
 }
 
 bool MathExpression::Initialize()
 {
     m_variables = "time,step,switch,";
-    for(auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
-        m_variables += *(it) + ",";
+    for (auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
+        m_variables += *(it)+",";
     m_variables.RemoveLast();
 
     // Set locale to ENGLISH_US to avoid parser error in numbers (eg. comma).
     int currentLang = wxLocale::GetSystemLanguage();
     wxLocale newLocale(wxLANGUAGE_ENGLISH_US);
     int parserRes = m_fparser.Parse(static_cast<std::string>(m_mathExpression), static_cast<std::string>(m_variables));
-    if(parserRes != -1) return false;  // Parse error.
+    if (parserRes != -1) return false;  // Parse error.
     wxLocale oldLocale(currentLang);   // Return to current language.
 
-    if(m_inputValues) delete m_inputValues;
+    if (m_inputValues) delete m_inputValues;
     m_inputValues = new double[m_variablesVector.size() + 3];  // Custom variables + time + step + switch
 
     // Optimize only once to gain performance.
@@ -344,7 +410,7 @@ rapidxml::xml_node<>* MathExpression::SaveElement(rapidxml::xml_document<>& doc,
 
     // Element properties
     auto variablesNode = XMLParser::AppendNode(doc, elementNode, "VariableList");
-    for(unsigned int i = 0; i < m_variablesVector.size(); ++i) {
+    for (unsigned int i = 0; i < m_variablesVector.size(); ++i) {
         auto variable = XMLParser::AppendNode(doc, variablesNode, "Variable");
         XMLParser::SetNodeValue(doc, variable, m_variablesVector[i]);
     }
@@ -356,14 +422,14 @@ rapidxml::xml_node<>* MathExpression::SaveElement(rapidxml::xml_document<>& doc,
 
 bool MathExpression::OpenElement(rapidxml::xml_node<>* elementNode)
 {
-    if(!OpenCADProperties(elementNode)) return false;
-    if(!OpenControlNodes(elementNode)) return false;
+    if (!OpenCADProperties(elementNode)) return false;
+    if (!OpenControlNodes(elementNode)) return false;
 
     // Element properties
     std::vector<wxString> variables;
     auto variablesNode = elementNode->first_node("VariableList");
     auto variable = variablesNode->first_node("Variable");
-    while(variable) {
+    while (variable) {
         variables.push_back(variable->value());
         variable = variable->next_sibling("Variable");
     }

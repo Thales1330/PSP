@@ -40,7 +40,7 @@ class SumForm : public SumFormBase
    protected:
     virtual void OnCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
     virtual void OnOKClick(wxCommandEvent& event);
-    wxWindow* m_parent = NULL;
-    Sum* m_sum = NULL;
+    wxWindow* m_parent = nullptr;
+    Sum* m_sum = nullptr;
 };
 #endif  // SUMFORM_H

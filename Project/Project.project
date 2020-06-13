@@ -531,7 +531,7 @@
       </Compiler>
       <Linker Options="$(shell wx-config --libs std,adv,ribbon,aui,propgrid,richtext,stc,gl);-mwindows;-static" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/pspufu" IntermediateDirectory="./Release_Windows_x64" Command="./pspufu" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/pspufu" IntermediateDirectory="./Release_Windows_x64" Command="./PSP-UFU" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>

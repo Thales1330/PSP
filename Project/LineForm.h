@@ -42,7 +42,7 @@ class LineForm : public LineFormBase
     virtual void ReplaceStaticTextLabelChar(wxStaticText* staticText, wchar_t newChar);
     virtual bool ValidateData();
 
-    wxWindow* m_parent = NULL;
-    Line* m_line = NULL;
+    wxWindow* m_parent = nullptr;
+    Line* m_line = nullptr;
 };
 #endif  // LINEFORM_H

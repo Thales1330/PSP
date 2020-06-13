@@ -45,7 +45,7 @@ class ReactiveShuntElementForm : public ReactiveShuntElementFormBase
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
 
     wxWindow* m_parent;
-    Capacitor* m_capacitor = NULL;
-    Inductor* m_inductor = NULL;
+    Capacitor* m_capacitor = nullptr;
+    Inductor* m_inductor = nullptr;
 };
 #endif  // REACTIVESHUNTELEMENTFORM_H

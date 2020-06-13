@@ -42,7 +42,7 @@ class TransformerForm : public TransformerFormBase
     virtual void OnOKButtonClick(wxCommandEvent& event);
     virtual void OnStabilityButtonClick(wxCommandEvent& event);
 
-    wxWindow* m_parent = NULL;
-    Transformer* m_transformer = NULL;
+    wxWindow* m_parent = nullptr;
+    Transformer* m_transformer = nullptr;
 };
 #endif  // TRANSFORMERFORM_H

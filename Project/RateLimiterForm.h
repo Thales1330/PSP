@@ -39,7 +39,7 @@ class RateLimiterForm : public RateLimiterFormBase
     virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_OK); }
     virtual void OnOKButtonClick(wxCommandEvent& event);
 
-    wxWindow* m_parent = NULL;
-    RateLimiter* m_rateLimiter = NULL;
+    wxWindow* m_parent = nullptr;
+    RateLimiter* m_rateLimiter = nullptr;
 };
 #endif  // RATELIMITERFORM_H

@@ -36,32 +36,32 @@ WorkspaceDC::WorkspaceDC()
 WorkspaceDC::WorkspaceDC(wxWindow* parent, wxString name, wxStatusBar* statusBar) : Workspace(parent, name, statusBar, nullptr)
 {
 	// Disconnect events from GLCanvas
-	m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(Workspace::OnPaint), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(Workspace::OnLeftClickDown), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(Workspace::OnKeyDown), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(Workspace::OnMouseMotion), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(Workspace::OnMiddleDown), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(Workspace::OnMiddleUp), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(Workspace::OnLeftClickUp), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(Workspace::OnScroll), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(Workspace::OnRightClickDown), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(Workspace::OnLeftDoubleClick), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(Workspace::OnIdle), NULL, this);
-	m_glCanvas->Disconnect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(Workspace::OnMiddleDoubleClick), NULL, this);
+	m_glCanvas->Disconnect(wxEVT_PAINT, wxPaintEventHandler(Workspace::OnPaint), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(Workspace::OnLeftClickDown), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(Workspace::OnKeyDown), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_MOTION, wxMouseEventHandler(Workspace::OnMouseMotion), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(Workspace::OnMiddleDown), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(Workspace::OnMiddleUp), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(Workspace::OnLeftClickUp), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(Workspace::OnScroll), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(Workspace::OnRightClickDown), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(Workspace::OnLeftDoubleClick), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(Workspace::OnIdle), nullptr, this);
+	m_glCanvas->Disconnect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(Workspace::OnMiddleDoubleClick), nullptr, this);
 
 	// Reconnect events to this
-	this->Connect(wxEVT_PAINT, wxPaintEventHandler(WorkspaceDC::OnPaint), NULL, this); // Connect to overloaded method
-	this->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(Workspace::OnLeftClickDown), NULL, this);
-	this->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(Workspace::OnKeyDown), NULL, this);
-	this->Connect(wxEVT_MOTION, wxMouseEventHandler(Workspace::OnMouseMotion), NULL, this);
-	this->Connect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(Workspace::OnMiddleDown), NULL, this);
-	this->Connect(wxEVT_MIDDLE_UP, wxMouseEventHandler(Workspace::OnMiddleUp), NULL, this);
-	this->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(Workspace::OnLeftClickUp), NULL, this);
-	this->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(Workspace::OnScroll), NULL, this);
-	this->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(Workspace::OnRightClickDown), NULL, this);
-	this->Connect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(Workspace::OnLeftDoubleClick), NULL, this);
-	this->Connect(wxEVT_IDLE, wxIdleEventHandler(WorkspaceDC::OnIdle), NULL, this);  // Connect to overloaded method
-	this->Connect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(Workspace::OnMiddleDoubleClick), NULL, this);
+	this->Connect(wxEVT_PAINT, wxPaintEventHandler(WorkspaceDC::OnPaint), nullptr, this); // Connect to overloaded method
+	this->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(Workspace::OnLeftClickDown), nullptr, this);
+	this->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(Workspace::OnKeyDown), nullptr, this);
+	this->Connect(wxEVT_MOTION, wxMouseEventHandler(Workspace::OnMouseMotion), nullptr, this);
+	this->Connect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(Workspace::OnMiddleDown), nullptr, this);
+	this->Connect(wxEVT_MIDDLE_UP, wxMouseEventHandler(Workspace::OnMiddleUp), nullptr, this);
+	this->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(Workspace::OnLeftClickUp), nullptr, this);
+	this->Connect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(Workspace::OnScroll), nullptr, this);
+	this->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(Workspace::OnRightClickDown), nullptr, this);
+	this->Connect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(Workspace::OnLeftDoubleClick), nullptr, this);
+	this->Connect(wxEVT_IDLE, wxIdleEventHandler(WorkspaceDC::OnIdle), nullptr, this);  // Connect to overloaded method
+	this->Connect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(Workspace::OnMiddleDoubleClick), nullptr, this);
 
 	this->GetSizer()->Remove(this->GetSizer()->GetChildren()[0]->GetId()); // remove m_glCanvas object from sizer
 
@@ -76,18 +76,18 @@ WorkspaceDC::WorkspaceDC(wxWindow* parent, wxString name, wxStatusBar* statusBar
 WorkspaceDC::~WorkspaceDC()
 {
 	// Disconnect events
-	this->Disconnect(wxEVT_PAINT, wxPaintEventHandler(WorkspaceDC::OnPaint), NULL, this);
-	this->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(Workspace::OnLeftClickDown), NULL, this);
-	this->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(Workspace::OnKeyDown), NULL, this);
-	this->Disconnect(wxEVT_MOTION, wxMouseEventHandler(Workspace::OnMouseMotion), NULL, this);
-	this->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(Workspace::OnMiddleDown), NULL, this);
-	this->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(Workspace::OnMiddleUp), NULL, this);
-	this->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(Workspace::OnLeftClickUp), NULL, this);
-	this->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(Workspace::OnScroll), NULL, this);
-	this->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(Workspace::OnRightClickDown), NULL, this);
-	this->Disconnect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(Workspace::OnLeftDoubleClick), NULL, this);
-	this->Disconnect(wxEVT_IDLE, wxIdleEventHandler(WorkspaceDC::OnIdle), NULL, this);
-	this->Disconnect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(Workspace::OnMiddleDoubleClick), NULL, this);
+	this->Disconnect(wxEVT_PAINT, wxPaintEventHandler(WorkspaceDC::OnPaint), nullptr, this);
+	this->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(Workspace::OnLeftClickDown), nullptr, this);
+	this->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(Workspace::OnKeyDown), nullptr, this);
+	this->Disconnect(wxEVT_MOTION, wxMouseEventHandler(Workspace::OnMouseMotion), nullptr, this);
+	this->Disconnect(wxEVT_MIDDLE_DOWN, wxMouseEventHandler(Workspace::OnMiddleDown), nullptr, this);
+	this->Disconnect(wxEVT_MIDDLE_UP, wxMouseEventHandler(Workspace::OnMiddleUp), nullptr, this);
+	this->Disconnect(wxEVT_LEFT_UP, wxMouseEventHandler(Workspace::OnLeftClickUp), nullptr, this);
+	this->Disconnect(wxEVT_MOUSEWHEEL, wxMouseEventHandler(Workspace::OnScroll), nullptr, this);
+	this->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(Workspace::OnRightClickDown), nullptr, this);
+	this->Disconnect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(Workspace::OnLeftDoubleClick), nullptr, this);
+	this->Disconnect(wxEVT_IDLE, wxIdleEventHandler(WorkspaceDC::OnIdle), nullptr, this);
+	this->Disconnect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(Workspace::OnMiddleDoubleClick), nullptr, this);
 
 	// Recreate the GLCanvas. This is necessary to prevent WorkspaceBase destructor access nullpr.
 	// Also avoid the code editing of WorkspaceBase, since is automatically generated by wxCrafter.

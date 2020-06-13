@@ -133,11 +133,11 @@ void wxRibbonMetroArtProvider::GetColourScheme(
                          wxColour* secondary,
                          wxColour* tertiary) const
 {
-    if(primary != NULL)
+    if(primary != nullptr)
         *primary = m_primary_scheme_colour;
-    if(secondary != NULL)
+    if(secondary != nullptr)
         *secondary = m_secondary_scheme_colour;
-    if(tertiary != NULL)
+    if(tertiary != nullptr)
         *tertiary = m_tertiary_scheme_colour;
 }
 void wxRibbonMetroArtProvider::SetColourScheme(
@@ -608,7 +608,7 @@ void wxRibbonMetroArtProvider::DrawMinimisedPanel(
 	client_rect.y++;
 	client_rect.height -= 2;
 	
-	if(wnd->GetExpandedPanel() != NULL)
+	if(wnd->GetExpandedPanel() != nullptr)
     {
 		dc.SetPen(m_button_bar_active_border_pen);
 		dc.SetBrush (m_button_bar_active_background_colour);
@@ -719,15 +719,15 @@ void wxRibbonMetroArtProvider::DrawPartialPageBackground(
     // hovered panel somewhere between the window and the page, as it causes
     // the background to change.
     wxPoint offset(wnd->GetPosition());
-    wxRibbonPage* page = NULL;
+    wxRibbonPage* page = nullptr;
     wxWindow* parent = wnd->GetParent();
     wxRibbonPanel* panel = wxDynamicCast(wnd, wxRibbonPanel);
     bool hovered = false;
 
-    if(panel != NULL)
+    if(panel != nullptr)
     {
         hovered = allow_hovered && panel->IsHovered();
-        if(panel->GetExpandedDummy() != NULL)
+        if(panel->GetExpandedDummy() != nullptr)
         {
             offset = panel->GetExpandedDummy()->GetPosition();
             parent = panel->GetExpandedDummy()->GetParent();
@@ -735,26 +735,26 @@ void wxRibbonMetroArtProvider::DrawPartialPageBackground(
     }
     for(; parent; parent = parent->GetParent())
     {
-        if(panel == NULL)
+        if(panel == nullptr)
         {
             panel = wxDynamicCast(parent, wxRibbonPanel);
-            if(panel != NULL)
+            if(panel != nullptr)
             {
                 hovered = allow_hovered && panel->IsHovered();
-                if(panel->GetExpandedDummy() != NULL)
+                if(panel->GetExpandedDummy() != nullptr)
                 {
                     parent = panel->GetExpandedDummy();
                 }
             }
         }
         page = wxDynamicCast(parent, wxRibbonPage);
-        if(page != NULL)
+        if(page != nullptr)
         {
             break;
         }
         offset += parent->GetPosition();
     }
-    if(page != NULL)
+    if(page != nullptr)
     {
         DrawPartialPageBackground(dc, wnd, rect, page, offset, hovered);
         return;

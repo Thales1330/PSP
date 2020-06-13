@@ -112,6 +112,14 @@ void ControlElement::DrawNodes() const
     }
 }
 
+void ControlElement::DrawDCNodes(wxGraphicsContext* gc) const
+{
+    for (auto node : m_nodeList) {
+        DrawDCCircle(node->GetPosition(), node->GetRadius(), 10, gc);
+        if (node->GetNodeType() == Node::NodeType::NODE_IN) { DrawDCTriangle(node->GetInTrianglePts(), gc); }
+    }
+}
+
 void ControlElement::StartMove(wxPoint2DDouble position)
 {
     m_moveStartPt = position;
@@ -147,7 +155,7 @@ ControlElement* ControlElement::GetControlElementFromID(std::vector<ControlEleme
         ControlElement* element = *it;
         if(element->GetID() == id) return element;
     }
-    return NULL;
+    return nullptr;
 }
 
 void ControlElement::SaveControlNodes(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode)

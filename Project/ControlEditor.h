@@ -164,8 +164,8 @@ class ControlEditor : public ControlEditorBase
 
     std::vector<ConnectionLine*>::iterator DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it);
 
-    wxGLContext* m_glContext = NULL;
-    Camera* m_camera = NULL;
+    wxGLContext* m_glContext = nullptr;
+    Camera* m_camera = nullptr;
 
     ControlEditorMode m_mode = ControlEditorMode::MODE_EDIT;
 
@@ -175,7 +175,7 @@ class ControlEditor : public ControlEditorBase
     std::vector<ControlElement*> m_elementList;
     std::vector<ConnectionLine*> m_connectionList;
 
-    ControlElementContainer* m_ctrlContainer = NULL;
+    ControlElementContainer* m_ctrlContainer = nullptr;
 
     bool m_justOpened = false;
     int m_ioFlags;

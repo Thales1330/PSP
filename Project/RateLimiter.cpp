@@ -17,6 +17,7 @@
 
 #include "RateLimiter.h"
 #include "RateLimiterForm.h"
+#include <wx/pen.h>
 
 RateLimiter::RateLimiter(int id) : ControlElement(id)
 {
@@ -61,6 +62,39 @@ void RateLimiter::Draw(wxPoint2DDouble translation, double scale) const
 
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawNodes();
+}
+
+void RateLimiter::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    if (m_selected) {
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
+    }
+    gc->SetPen(*wxBLACK_PEN);
+    gc->SetBrush(*wxWHITE_BRUSH);
+    gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
+
+    // Plot symbol.
+    gc->SetBrush(*wxTRANSPARENT_BRUSH);
+    wxPoint2DDouble axis[4];
+    axis[0] = m_position + wxPoint2DDouble(-13, 0);
+    axis[1] = m_position + wxPoint2DDouble(13, 0);
+    axis[2] = m_position + wxPoint2DDouble(0, -13);
+    axis[3] = m_position + wxPoint2DDouble(0, 13);
+    gc->DrawLines(2, &axis[0]);
+    gc->DrawLines(2, &axis[2]);
+
+    gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+    wxPoint2DDouble limSymbol[2];
+    limSymbol[0] = m_position + wxPoint2DDouble(10, -10);
+    limSymbol[1] = m_position + wxPoint2DDouble(-10, 10);
+    gc->DrawLines(2, limSymbol);
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(*wxBLACK_BRUSH);
+    DrawDCNodes(gc);
 }
 
 bool RateLimiter::ShowForm(wxWindow* parent, Element* element)

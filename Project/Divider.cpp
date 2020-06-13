@@ -17,6 +17,8 @@
 
 #include "ConnectionLine.h"
 #include "Divider.h"
+#include <wx/pen.h>
+#include <wx/brush.h>
 
 Divider::Divider(int id) : MathOperation(id) {}
 Divider::~Divider() {}
@@ -31,6 +33,22 @@ void Divider::DrawSymbol() const
     DrawLine(mSymbol, GL_LINES);
     DrawCircle(m_position + wxPoint2DDouble(0, -3), 2, 10, GL_POLYGON);
     DrawCircle(m_position + wxPoint2DDouble(0, 3), 2, 10, GL_POLYGON);
+}
+
+void Divider::DrawDCSymbol(wxGraphicsContext* gc) const
+{
+    // Plot divider.
+    gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+    gc->SetBrush(*wxTRANSPARENT_BRUSH);
+    wxPoint2DDouble mSymbol[2];
+    mSymbol[0] = m_position + wxPoint2DDouble(-5, 0);
+    mSymbol[1] = m_position + wxPoint2DDouble(5, 0);
+    gc->DrawLines(2, mSymbol);
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(wxBrush(wxColour(0, 77, 255, 255)));
+    DrawDCCircle(m_position + wxPoint2DDouble(0, -3), 2, 10, gc);
+    DrawDCCircle(m_position + wxPoint2DDouble(0, 3), 2, 10, gc);
 }
 
 bool Divider::Solve(double* input, double timeStep)

@@ -56,9 +56,9 @@ class TextForm : public TextFormBase
     virtual void OnToBusChoiceSelected(wxCommandEvent& event);
     virtual void OnTypeChoiceSelected(wxCommandEvent& event);
 
-    Text* m_text = NULL;
-    Text* m_textToEdit = NULL;
-    wxWindow* m_parent = NULL;
+    Text* m_text = nullptr;
+    Text* m_textToEdit = nullptr;
+    wxWindow* m_parent = nullptr;
     ElectricCalculation m_allElements;
     double m_systemPowerBase;
 };

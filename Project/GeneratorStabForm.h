@@ -51,8 +51,8 @@ class GeneratorStabForm : public GeneratorStabFormBase
 
     virtual bool ValidateData();
 
-    SyncGenerator* m_syncGenerator = NULL;
-    wxWindow* m_parent = NULL;
-    wxGLContext* m_sharedGLContext = NULL;
+    SyncGenerator* m_syncGenerator = nullptr;
+    wxWindow* m_parent = nullptr;
+    wxGLContext* m_sharedGLContext = nullptr;
 };
 #endif  // GENERATORSTABFORM_H

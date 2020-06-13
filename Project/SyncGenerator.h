@@ -121,12 +121,12 @@ struct SyncGeneratorElectricalData {
     IntegrationConstant icSubEd;
 
     // Control
-    ControlElementContainer* avr = NULL;
-    ControlElementContainer* speedGov = NULL;
+    ControlElementContainer* avr = nullptr;
+    ControlElementContainer* speedGov = nullptr;
 
     // Control solvers
-    ControlElementSolver* avrSolver = NULL;
-    ControlElementSolver* speedGovSolver = NULL;
+    ControlElementSolver* avrSolver = nullptr;
+    ControlElementSolver* speedGovSolver = nullptr;
 
     Machines::SyncMachineModel model = Machines::SM_MODEL_1;
 };

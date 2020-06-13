@@ -68,7 +68,7 @@ class DataReport : public DataReportBase
     virtual void OnGridPFBranchesKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridPFBranches, event); }
     virtual void OnGridPFBusesKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridPFBuses, event); }
     virtual void OnGridPFKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridPowerFlow, event); }
-    Workspace* m_workspace = NULL;
+    Workspace* m_workspace = nullptr;
     bool m_changingValues = false;
 
     // Headers choices

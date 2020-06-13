@@ -65,7 +65,7 @@ class ImportForm : public ImportFormBase
     bool ImportMatpowerFiles();
     Bus* GetBusFromID(std::vector<Bus*> busList, int id);
 
-    Workspace* m_workspace = NULL;
+    Workspace* m_workspace = nullptr;
     wxWindow* m_parent;
 };
 

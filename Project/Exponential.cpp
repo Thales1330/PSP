@@ -17,6 +17,7 @@
 
 #include "Exponential.h"
 #include "ExponentialForm.h"
+#include <wx/pen.h>
 
 Exponential::Exponential(int id) : ControlElement(id)
 {
@@ -68,6 +69,47 @@ void Exponential::Draw(wxPoint2DDouble translation, double scale) const
 
     glColor4d(0.0, 0.0, 0.0, 1.0);
     DrawNodes();
+}
+
+void Exponential::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    if (m_selected) {
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(m_selectionColour.GetDcRGBA()));
+        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+        gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
+    }
+    gc->SetPen(*wxBLACK_PEN);
+    gc->SetBrush(*wxWHITE_BRUSH);
+    DrawRectangle(m_position, m_width, m_height);
+    gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
+
+    // Plot symbol.
+    wxPoint2DDouble axis[4];
+    axis[0] = m_position + wxPoint2DDouble(-13, 13);
+    axis[1] = m_position + wxPoint2DDouble(13, 13);
+    axis[2] = m_position + wxPoint2DDouble(-13, -13);
+    axis[3] = m_position + wxPoint2DDouble(-13, 13);
+    gc->DrawLines(2, &axis[0]);
+    gc->DrawLines(2, &axis[2]);
+
+    gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+    gc->SetBrush(*wxTRANSPARENT_BRUSH);
+    wxPoint2DDouble expSymbol[9];
+    expSymbol[0] = m_position + wxPoint2DDouble(-13, 13);
+    expSymbol[1] = m_position + wxPoint2DDouble(-6, 13);
+    expSymbol[2] = m_position + wxPoint2DDouble(2, 12);
+    expSymbol[3] = m_position + wxPoint2DDouble(4, 11);
+    expSymbol[4] = m_position + wxPoint2DDouble(6, 10);
+    expSymbol[5] = m_position + wxPoint2DDouble(8, 7);
+    expSymbol[6] = m_position + wxPoint2DDouble(11, -1);
+    expSymbol[7] = m_position + wxPoint2DDouble(12, -7);
+    expSymbol[8] = m_position + wxPoint2DDouble(13, -13);
+    gc->DrawLines(9, expSymbol);
+
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
+    DrawDCNodes(gc);
 }
 
 bool Exponential::ShowForm(wxWindow* parent, Element* element)

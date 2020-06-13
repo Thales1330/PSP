@@ -43,6 +43,6 @@ class GeneralPropertiesForm : public GeneralPropertiesFormBase
     virtual void OnButtonOKClick(wxCommandEvent& event);
     virtual bool ValidateData();
 
-    PropertiesData* m_properties = NULL;
+    PropertiesData* m_properties = nullptr;
 };
 #endif  // GENERALPROPERTIESFORM_H

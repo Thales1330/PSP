@@ -109,7 +109,7 @@ class Electromechanical : public ElectricCalculation
     void SaveData();
     void PreallocateVectors();
 
-    wxWindow* m_parent = NULL;
+    wxWindow* m_parent = nullptr;
     wxString m_errorMsg = _("Unknown error");
 
     double m_systemFreq = 60.0;
