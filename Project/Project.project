@@ -932,7 +932,6 @@
     <Configuration Name="Release_Windows_x32" CompilerType="MinGW ( TDM-GCC-32 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O2;-std=gnu++17;-Wall;$(shell wx-config --cflags)" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
-        <IncludePath Value="vendor"/>
         <IncludePath Value="..\ExtLibs\GLEW\include"/>
         <IncludePath Value="..\ExtLibs\GLFW\include"/>
         <Preprocessor Value="GLEW_STATIC"/>

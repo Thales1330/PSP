@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <wx/string.h>
 
-#include <glm\glm.hpp>
+#include "glm\glm.hpp"
 
 struct ShaderSource
 {

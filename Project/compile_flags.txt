@@ -5,7 +5,6 @@
 -IC:\TDM-GCC-32\include
 -IC:\TDM-GCC-32\lib\gcc\mingw32\9.2.0\include-fixed
 -IC:\Users\thale\Documents\GitHub\PSP\Project
--IC:\Users\thale\Documents\GitHub\PSP\Project\vendor
 -IC:\Users\thale\Documents\GitHub\PSP\ExtLibs\GLEW\include
 -IC:\Users\thale\Documents\GitHub\PSP\ExtLibs\GLFW\include
 -IC:\wxWidgets313\lib\gcc_lib\mswu

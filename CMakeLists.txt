@@ -17,7 +17,7 @@ find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(glfw3 3.1 REQUIRED)
 include(${wxWidgets_USE_FILE})
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/Project/vendor/)
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
 add_definitions(${OpenGL_DEFINITIONS})
 add_definitions(${GLUT_DEFINITIONS})
     
@@ -40,15 +40,15 @@ file(GLOB PSP_SRC
     "Project/fparser/fpoptimizer.cc"
     "Project/wxMathPlot/*.cpp"
     "Project/vendor/glm/*.hpp"
-    "Project/vendor/glm/detail/*.hpp"
-    "Project/vendor/glm/detail/*.inl"
-    "Project/vendor/glm/ext/*.hpp"
-    "Project/vendor/glm/ext/*.inl"
-    "Project/vendor/glm/gtc/*.hpp"
-    "Project/vendor/glm/gtc/*.inl"
-    "Project/vendor/glm/gtx/*.hpp"
-    "Project/vendor/glm/gtx/*.inl"
-    "Project/vendor/glm/simd/*.h"
+    "Project/glm/detail/*.hpp"
+    "Project/glm/detail/*.inl"
+    "Project/glm/ext/*.hpp"
+    "Project/glm/ext/*.inl"
+    "Project/glm/gtc/*.hpp"
+    "Project/glm/gtc/*.inl"
+    "Project/glm/gtx/*.hpp"
+    "Project/glm/gtx/*.inl"
+    "Project/glm/simd/*.h"
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})

@@ -33,8 +33,8 @@
 #include <wx/tipwin.h>
 #include <wx/stopwatch.h>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include "glm\glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 #include "WorkspaceBase.h"
 #include "Bus.h"
