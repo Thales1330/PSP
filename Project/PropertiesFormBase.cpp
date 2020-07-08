@@ -1204,3 +1204,137 @@ FrequencyResponseFormBase::~FrequencyResponseFormBase()
     m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(FrequencyResponseFormBase::OnCancelButtonClick), NULL, this);
     
 }
+
+ProjectPropertiesFormBase::ProjectPropertiesFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxCDAD0InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerMain = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerMain);
+    
+    m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook->SetName(wxT("m_notebook"));
+    
+    boxSizerMain->Add(m_notebook, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    wxStaticBoxSizer* staticBoxSizerLvl3_1 = new wxStaticBoxSizer( new wxStaticBox(m_panelGeneral, wxID_ANY, _("Voltage heatmap")), wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(staticBoxSizerLvl3_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxAutomaticLabel = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Calculate automatically the label limits"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxAutomaticLabel->SetValue(false);
+    
+    staticBoxSizerLvl3_1->Add(m_checkBoxAutomaticLabel, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextMaxVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Label max voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_1->Add(m_staticTextMaxVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_1->Add(boxSizerLvl5_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlMaxVoltage = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("1.05"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlMaxVoltage->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_1->Add(m_textCtrlMaxVoltage, 1, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_1 = new wxStaticText(m_panelGeneral, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_1->Add(m_staticTextPU_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
+    
+    staticBoxSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextMinVoltage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Label min voltage"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_2->Add(m_staticTextMinVoltage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_2->Add(boxSizerLvl5_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlMinVoltage = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("0.95"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlMinVoltage->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_2->Add(m_textCtrlMinVoltage, 1, wxLEFT|wxRIGHT|wxBOTTOM, WXC_FROM_DIP(5));
+    
+    m_staticTextPU_2 = new wxStaticText(m_panelGeneral, wxID_ANY, _("p.u."), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_2->Add(m_staticTextPU_2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerMain->Add(boxSizer_bottonButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizer_bottonButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer_bottonButtons->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer_bottonButtons->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook);
+    }
+    #endif
+    
+    SetName(wxT("ProjectPropertiesFormBase"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+    // Connect events
+    m_checkBoxAutomaticLabel->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnAutomaticLabelClick), NULL, this);
+    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnOKClick), NULL, this);
+    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnCancelClick), NULL, this);
+    
+}
+
+ProjectPropertiesFormBase::~ProjectPropertiesFormBase()
+{
+    m_checkBoxAutomaticLabel->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnAutomaticLabelClick), NULL, this);
+    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnOKClick), NULL, this);
+    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnCancelClick), NULL, this);
+    
+}

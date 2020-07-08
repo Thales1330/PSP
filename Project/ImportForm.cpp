@@ -43,7 +43,7 @@ ImportForm::~ImportForm() {}
 void ImportForm::OnButtonCancelClick(wxCommandEvent& event)
 {
     EndModal(wxID_CANCEL);
-    if(m_workspace) delete m_workspace;
+    //if(m_workspace) delete m_workspace;
 }
 
 void ImportForm::OnButtonOKClick(wxCommandEvent& event)

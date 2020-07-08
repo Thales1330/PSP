@@ -15,6 +15,7 @@ docs/doxygen/latex
 data/
 Debug/
 Release/
+ExtLibs/
 x64/
 
 # Compiled source #

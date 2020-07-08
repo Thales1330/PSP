@@ -19,6 +19,8 @@
 #include <wx/graphics.h>
 #include "OpenGLText.h"
 #include <algorithm>
+#include <wingdi.h>
+#include <cmath>
 
 OpenGLText::OpenGLText() { Init(); }
 OpenGLText::OpenGLText(wxString text)
@@ -30,6 +32,8 @@ OpenGLText::OpenGLText(wxString text)
 OpenGLText::~OpenGLText()
 {
     if(m_textureID) { glDeleteTextures(1, &m_textureID[0]); }
+    delete m_textureID;
+    delete[] m_textCoord;
 }
 
 void OpenGLText::Init()
@@ -169,7 +173,7 @@ void OpenGLText::LoadTextTexture()
     }
 
     glTexImage2D(GL_TEXTURE_2D, 0, bytesPerPixel, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-    delete imageData;
+    delete[] imageData;
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

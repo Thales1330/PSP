@@ -366,4 +366,41 @@ public:
     virtual ~FrequencyResponseFormBase();
 };
 
+
+class ProjectPropertiesFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook;
+    wxPanel* m_panelGeneral;
+    wxCheckBox* m_checkBoxAutomaticLabel;
+    wxStaticText* m_staticTextMaxVoltage;
+    wxTextCtrl* m_textCtrlMaxVoltage;
+    wxStaticText* m_staticTextPU_1;
+    wxStaticText* m_staticTextMinVoltage;
+    wxTextCtrl* m_textCtrlMinVoltage;
+    wxStaticText* m_staticTextPU_2;
+    wxButton* m_buttonOK;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnAutomaticLabelClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxCheckBox* GetCheckBoxAutomaticLabel() { return m_checkBoxAutomaticLabel; }
+    wxStaticText* GetStaticTextMaxVoltage() { return m_staticTextMaxVoltage; }
+    wxTextCtrl* GetTextCtrlMaxVoltage() { return m_textCtrlMaxVoltage; }
+    wxStaticText* GetStaticTextPU_1() { return m_staticTextPU_1; }
+    wxStaticText* GetStaticTextMinVoltage() { return m_staticTextMinVoltage; }
+    wxTextCtrl* GetTextCtrlMinVoltage() { return m_textCtrlMinVoltage; }
+    wxStaticText* GetStaticTextPU_2() { return m_staticTextPU_2; }
+    wxPanel* GetPanelGeneral() { return m_panelGeneral; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    ProjectPropertiesFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Project properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~ProjectPropertiesFormBase();
+};
+
 #endif

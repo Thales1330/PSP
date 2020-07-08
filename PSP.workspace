@@ -2,11 +2,11 @@
 <CodeLite_Workspace Name="PSP" Database="" Version="10.0.0">
   <Project Name="Project" Path="Project/Project.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Release_Windows_x32" Selected="no">
+    <WorkspaceConfiguration Name="Release_Windows_x32" Selected="yes">
       <Environment/>
       <Project Name="Project" ConfigName="Release_Windows_x32"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release_Windows_x64" Selected="yes">
+    <WorkspaceConfiguration Name="Release_Windows_x64" Selected="no">
       <Environment/>
       <Project Name="Project" ConfigName="Release_Windows_x64"/>
     </WorkspaceConfiguration>

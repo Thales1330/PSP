@@ -2,6 +2,8 @@
 #pragma diag_suppress 102
 #endif
 
+#include <GL/glew.h>
+
 #include <wx/app.h>
 #include <wx/cmdline.h>
 #include <wx/event.h>
@@ -32,6 +34,7 @@
 class MainApp : public wxApp
 {
    public:
+
     MainApp() {}
     virtual ~MainApp() {}
     bool LoadInitFile(PropertiesData* propertiesData)

@@ -18,6 +18,8 @@
 #ifndef GENERATORSTABFORM_H
 #define GENERATORSTABFORM_H
 
+#include <GL/glew.h>
+
 #include <wx/glcanvas.h>
 #include "ElementFormBase.h"
 

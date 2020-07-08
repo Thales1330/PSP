@@ -18,10 +18,12 @@
 #ifndef TEXT_H
 #define TEXT_H
 
+#include <GL/glew.h>
+
 #ifdef _MSC_VER
 #include <windows.h>
 #endif 
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #include <wx/dcmemory.h>
 
 #include "GraphicalElement.h"

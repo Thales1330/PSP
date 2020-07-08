@@ -18,15 +18,18 @@
 #ifndef CONTROLEDITOR_H
 #define CONTROLEDITOR_H
 
+#include <GL/glew.h>
+
 #include "ControlEditorBase.h"
 #include <wx/wrapsizer.h>
 #include <wx/dcclient.h>
 #include <wx/dcscreen.h>
 #include <wx/graphics.h>
+
 #ifdef _MSC_VER
 #include <windows.h>
 #endif 
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #include <GL/glu.h>
 
 #include <wx/progdlg.h>

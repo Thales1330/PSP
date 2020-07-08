@@ -37,6 +37,7 @@ class WorkspaceBase : public wxPanel
 protected:
     wxGLCanvas* m_glCanvas;
     wxTimer* m_timer;
+    wxTimer* m_timerHeatMap;
 
 protected:
     virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
@@ -51,11 +52,14 @@ protected:
     virtual void OnLeftDoubleClick(wxMouseEvent& event) { event.Skip(); }
     virtual void OnIdle(wxIdleEvent& event) { event.Skip(); }
     virtual void OnMiddleDoubleClick(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnResize(wxSizeEvent& event) { event.Skip(); }
     virtual void OnTimer(wxTimerEvent& event) { event.Skip(); }
+    virtual void OnHeatMapTime(wxTimerEvent& event) { event.Skip(); }
 
 public:
     wxGLCanvas* GetGlCanvas() { return m_glCanvas; }
     wxTimer* GetTimer() { return m_timer; }
+    wxTimer* GetTimerHeatMap() { return m_timerHeatMap; }
     WorkspaceBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxTAB_TRAVERSAL);
     virtual ~WorkspaceBase();
 };

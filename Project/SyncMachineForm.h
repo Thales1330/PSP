@@ -17,6 +17,8 @@
 
 #ifndef SYNCMACHINEFORM_H
 #define SYNCMACHINEFORM_H
+#include <GL/glew.h>
+
 #include <wx/glcanvas.h>
 
 #include "ElementFormBase.h"

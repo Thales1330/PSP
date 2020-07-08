@@ -18,11 +18,13 @@
 #ifndef WORKSPACE_H
 #define WORKSPACE_H
 
+#include <GL/glew.h>
+
 #ifdef _MSC_VER
 #include <windows.h>
 #endif // _MSC_VER
 
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #include <GL/glu.h>
 #include <wx/dcclient.h>
 #include <wx/msgdlg.h>
@@ -30,6 +32,9 @@
 #include <wx/clipbrd.h>
 #include <wx/tipwin.h>
 #include <wx/stopwatch.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "WorkspaceBase.h"
 #include "Bus.h"
@@ -62,6 +67,10 @@ class ChartView;
 class FrequencyResponseForm;
 
 class PropertiesData;
+
+class HMPlane;
+class Shader;
+class Renderer;
 
 enum ElementID {
     ID_BUS = 0,
@@ -127,7 +136,7 @@ class Workspace : public WorkspaceBase
     void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
     void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
     virtual void Redraw() { m_glCanvas->Refresh(); }
-    wxGLContext* GetSharedGLContext() const { return m_glContext; }
+    wxGLContext* GetSharedGLContext() { return m_glContext; }
     void RotateSelectedElements(bool clockwise = true);
     void DeleteSelectedElements();
     bool GetElementsCorners(wxPoint2DDouble& leftUpCorner,
@@ -135,12 +144,18 @@ class Workspace : public WorkspaceBase
                             std::vector<Element*> elementList);
     void Fit();
     void UnselectAll();
+    void EnableHeatMap(const bool& enable = true);
+    bool IsHeatMapEnable() const { return m_showHM; }
+    HMPlane* GetHeatMap() const { return m_hmPlane; }
+    void EnableAutoHeatMapLabel(const bool& enable = true) { m_hmAutomaticLabel = enable; }
+    bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
 
     void ValidateBusesVoltages(Element* initialBus);
     void ValidateElementsVoltages();
 
     void UpdateElementsID();
     bool UpdateTextElements();
+    void UpdateHeatMap();
 
     int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
     void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }
@@ -155,7 +170,6 @@ class Workspace : public WorkspaceBase
     bool RunStability();
     bool RunHarmonicDistortion();
     bool RunFrequencyResponse();
-
    
 	virtual void OnMiddleDoubleClick(wxMouseEvent& event);
 	virtual void OnIdle(wxIdleEvent& event);
@@ -173,6 +187,8 @@ class Workspace : public WorkspaceBase
 	virtual void OnPopupClick(wxCommandEvent& event);
 
 protected:
+    virtual void OnHeatMapTime(wxTimerEvent& event);
+    virtual void OnResize(wxSizeEvent& event);
     void SetViewport();
     void UpdateStatusBar();
 
@@ -201,6 +217,21 @@ protected:
     bool m_continuousCalc = false;
     bool m_disconnectedElement = false;
     bool m_justOpened = false;
+
+    float m_width = 0.0;
+    float m_height = 0.0;
+
+    // Modern OpenGL
+    HMPlane* m_hmPlane = nullptr;
+    Shader* m_basicShader = nullptr;
+    Shader* m_hmLabelShader = nullptr;
+    Renderer* m_renderer = nullptr;
+
+    glm::mat4 m_projMatrix;
+
+    bool m_showHM = false;
+    bool m_showHMTimer = false;
+    bool m_hmAutomaticLabel = false;
 };
 
 #endif  // WORKSPACE_H

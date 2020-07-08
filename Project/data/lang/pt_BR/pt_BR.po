@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PSP-UFU pt_BR 1.2\n"
-"POT-Creation-Date: 2020-06-12 18:06-0300\n"
-"PO-Revision-Date: 2020-06-12 18:11-0300\n"
+"POT-Creation-Date: 2020-07-07 22:36-0300\n"
+"PO-Revision-Date: 2020-07-07 22:44-0300\n"
 "Last-Translator: \n"
 "Language-Team: Thales Lima Oliveira <thaleslima.ufu@gmail.com>\n"
 "Language: pt_BR\n"
@@ -394,11 +394,11 @@ msgstr "Não foi possível enviar para a área de transferência"
 #: Element.cpp:335 Element.cpp:349 FrequencyResponseForm.cpp:57
 #: GeneralPropertiesForm.cpp:81 ImportForm.cpp:55 IndMotorForm.cpp:222
 #: Line.cpp:231 Line.cpp:460 LoadForm.cpp:189 LoadForm.cpp:196
-#: MainFrame.cpp:354 MathExpressionForm.cpp:85 SimulationsSettingsForm.cpp:208
+#: MainFrame.cpp:365 MathExpressionForm.cpp:85 SimulationsSettingsForm.cpp:208
 #: SimulationsSettingsForm.cpp:215 SumForm.cpp:58 SumForm.cpp:74
-#: TextForm.cpp:1235 Workspace.cpp:1167 Workspace.cpp:1231 Workspace.cpp:1339
-#: Workspace.cpp:1443 Workspace.cpp:1465 Workspace.cpp:1485 main.cpp:113
-#: main.cpp:124
+#: TextForm.cpp:1235 Workspace.cpp:1344 Workspace.cpp:1410 Workspace.cpp:1521
+#: Workspace.cpp:1645 Workspace.cpp:1667 Workspace.cpp:1687 main.cpp:116
+#: main.cpp:127
 msgid "Error"
 msgstr "Erro"
 
@@ -410,7 +410,7 @@ msgstr "Salvar arquivo CSV"
 msgid "It was not possible to open or create the selected file."
 msgstr "Não foi possível criar ou abrir o arquivo selecionado."
 
-#: ChartViewBase.cpp:64 MainFrameBase.cpp:75 MainFrameBase.cpp:76
+#: ChartViewBase.cpp:64 MainFrameBase.cpp:72 MainFrameBase.cpp:73
 msgid "File"
 msgstr "Arquivo"
 
@@ -426,7 +426,7 @@ msgstr "Enviar para a área de transferência"
 msgid "Export CSV..."
 msgstr "Exportar CSV..."
 
-#: ChartViewBase.cpp:77 MainFrameBase.cpp:101
+#: ChartViewBase.cpp:77 MainFrameBase.cpp:90
 msgid "Exit"
 msgstr "Sair"
 
@@ -434,7 +434,7 @@ msgstr "Sair"
 msgid "View"
 msgstr "Vizualização"
 
-#: ChartViewBase.cpp:83 MainFrameBase.cpp:189
+#: ChartViewBase.cpp:83 MainFrameBase.cpp:148
 msgid "Fit"
 msgstr "Encaixar"
 
@@ -574,7 +574,7 @@ msgstr "Salvar arquivo CTL"
 msgid "Open CTL file"
 msgstr "Abrir arquivo CTL"
 
-#: ControlEditor.cpp:801 MainFrame.cpp:354
+#: ControlEditor.cpp:801 MainFrame.cpp:365
 msgid "It was not possible to open the selected file."
 msgstr "Não foi possível abrir o arquivo selecionado."
 
@@ -598,11 +598,11 @@ msgstr "Saída"
 msgid "It was not possible to solve the control system"
 msgstr "Não foi possível resolver o sistema de controle"
 
-#: ControlEditorBase.cpp:63 MainFrameBase.cpp:88
+#: ControlEditorBase.cpp:63 MainFrameBase.cpp:82
 msgid "New"
 msgstr "Novo"
 
-#: ControlEditorBase.cpp:65 MainFrameBase.cpp:94
+#: ControlEditorBase.cpp:65 MainFrameBase.cpp:86
 msgid "Import"
 msgstr "Importar"
 
@@ -610,31 +610,31 @@ msgstr "Importar"
 msgid "Export"
 msgstr "Exportar"
 
-#: ControlEditorBase.cpp:71 MainFrameBase.cpp:153
+#: ControlEditorBase.cpp:71 MainFrameBase.cpp:125
 msgid "Copy"
 msgstr "Copiar"
 
-#: ControlEditorBase.cpp:73 MainFrameBase.cpp:156
+#: ControlEditorBase.cpp:73 MainFrameBase.cpp:127
 msgid "Paste"
 msgstr "Colar"
 
-#: ControlEditorBase.cpp:75 MainFrameBase.cpp:159
+#: ControlEditorBase.cpp:75 MainFrameBase.cpp:129
 msgid "Undo"
 msgstr "Desfazer"
 
-#: ControlEditorBase.cpp:77 MainFrameBase.cpp:162
+#: ControlEditorBase.cpp:77 MainFrameBase.cpp:131
 msgid "Redo"
 msgstr "Refazer"
 
-#: ControlEditorBase.cpp:81 MainFrameBase.cpp:179
+#: ControlEditorBase.cpp:81 MainFrameBase.cpp:142
 msgid "Drag"
 msgstr "Arrastar"
 
-#: ControlEditorBase.cpp:83 MainFrameBase.cpp:182
+#: ControlEditorBase.cpp:83 MainFrameBase.cpp:144
 msgid "Move"
 msgstr "Mover"
 
-#: ControlEditorBase.cpp:85 Element.cpp:297 Line.cpp:365 MainFrameBase.cpp:185
+#: ControlEditorBase.cpp:85 Element.cpp:297 Line.cpp:365 MainFrameBase.cpp:146
 msgid "Delete"
 msgstr "Excluir"
 
@@ -655,7 +655,7 @@ msgstr "Testar sistema..."
 #: ElementFormBase.cpp:4488 ElementFormBase.cpp:4593 ElementFormBase.cpp:4762
 #: ElementFormBase.cpp:4929 PropertiesFormBase.cpp:94
 #: PropertiesFormBase.cpp:713 PropertiesFormBase.cpp:845
-#: PropertiesFormBase.cpp:1018
+#: PropertiesFormBase.cpp:1018 PropertiesFormBase.cpp:1293
 msgid "OK"
 msgstr "OK"
 
@@ -666,6 +666,7 @@ msgstr "OK"
 #: ElementFormBase.cpp:4134 ElementFormBase.cpp:4246 ElementFormBase.cpp:4365
 #: ElementFormBase.cpp:4462 ElementFormBase.cpp:4558 ElementFormBase.cpp:4672
 #: PropertiesFormBase.cpp:35 PropertiesFormBase.cpp:160
+#: PropertiesFormBase.cpp:1227
 msgid "General"
 msgstr "Geral"
 
@@ -710,6 +711,7 @@ msgstr "Executar"
 #: ElementFormBase.cpp:4597 ElementFormBase.cpp:4766 ElementFormBase.cpp:4933
 #: PropertiesFormBase.cpp:98 PropertiesFormBase.cpp:717
 #: PropertiesFormBase.cpp:1022 PropertiesFormBase.cpp:1174
+#: PropertiesFormBase.cpp:1297
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -930,7 +932,7 @@ msgid "Fault data"
 msgstr "Dados da falta"
 
 #: DataReportBase.cpp:160 ElementFormBase.cpp:134 ElementFormBase.cpp:692
-#: ElementFormBase.cpp:1744 ElementFormBase.cpp:2147 MainFrameBase.cpp:268
+#: ElementFormBase.cpp:1744 ElementFormBase.cpp:2147 MainFrameBase.cpp:196
 #: StabilityEventList.cpp:37 StabilityEventList.cpp:42
 msgid "Fault"
 msgstr "Falta"
@@ -997,7 +999,7 @@ msgstr "Erro ao inicializar o escorregamento de \""
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
-#: Element.cpp:287 MainFrameBase.cpp:194
+#: Element.cpp:287 MainFrameBase.cpp:150
 msgid "Rotate clockwise"
 msgstr "Girar no sentido horário"
 
@@ -1040,8 +1042,9 @@ msgstr "Resistência da falta (R)"
 #: ElementFormBase.cpp:1354 ElementFormBase.cpp:1379 ElementFormBase.cpp:3271
 #: ElementFormBase.cpp:3299 ElementFormBase.cpp:3327 ElementFormBase.cpp:3355
 #: ElementFormBase.cpp:3384 ElementFormBase.cpp:4889 HarmCurrentForm.cpp:19
-#: HarmCurrentForm.cpp:88 HarmCurrentForm.cpp:168 TextForm.cpp:983
-#: TextForm.cpp:993 TextForm.cpp:998 TextForm.cpp:1006 TextForm.cpp:1014
+#: HarmCurrentForm.cpp:88 HarmCurrentForm.cpp:168 PropertiesFormBase.cpp:1260
+#: PropertiesFormBase.cpp:1283 TextForm.cpp:983 TextForm.cpp:993
+#: TextForm.cpp:998 TextForm.cpp:1006 TextForm.cpp:1014
 msgid "p.u."
 msgstr "p.u."
 
@@ -1591,7 +1594,7 @@ msgstr "Elemento shunt reativo"
 msgid "Motor"
 msgstr "Motor"
 
-#: ElementFormBase.h:931 OpenGLText.h:65 Text.h:120
+#: ElementFormBase.h:931 OpenGLText.h:67 Text.h:122
 msgid "Text"
 msgstr "Texto"
 
@@ -1877,7 +1880,7 @@ msgstr "Transformador"
 msgid "Machine"
 msgstr "Máquina"
 
-#: ImportForm.h:212 ImportForm.h:275 MainFrame.cpp:528
+#: ImportForm.h:212 ImportForm.h:275
 msgid "Imported project"
 msgstr "Projeto importado"
 
@@ -2141,400 +2144,424 @@ msgstr "A soma da composição de carga da potência ativa deve ser 100%."
 msgid "The sum of reactive power load composition must be 100%."
 msgstr "A soma da composição de carga da potência reativa deve ser 100%."
 
-#: MainFrame.cpp:53
+#: MainFrame.cpp:55
 msgid "Open project"
 msgstr "Abrir projeto"
 
-#: MainFrame.cpp:144
+#: MainFrame.cpp:153
 msgid "&Bus\tB"
 msgstr "&Barramento\tB"
 
-#: MainFrame.cpp:144
+#: MainFrame.cpp:153
 msgid "Adds a bus at the circuit"
 msgstr "Adiciona um barramento no circuito"
 
-#: MainFrame.cpp:147
+#: MainFrame.cpp:156
 msgid "&Line\tL"
 msgstr "&Linha\tL"
 
-#: MainFrame.cpp:147
+#: MainFrame.cpp:156
 msgid "Adds a power line at the circuit"
 msgstr "Adiciona uma linha no circuito"
 
-#: MainFrame.cpp:148
+#: MainFrame.cpp:157
 msgid "&Transformer\tT"
 msgstr "&Transformador\tT"
 
-#: MainFrame.cpp:149
+#: MainFrame.cpp:158
 msgid "Adds a transformer at the circuit"
 msgstr "Adiciona um transformador no circuito"
 
-#: MainFrame.cpp:150
+#: MainFrame.cpp:159
 msgid "&Generator\tG"
 msgstr "&Gerador\tG"
 
-#: MainFrame.cpp:151
+#: MainFrame.cpp:160
 msgid "Adds a generator at the circuit"
 msgstr "Adiciona um gerador no circuito"
 
-#: MainFrame.cpp:152
+#: MainFrame.cpp:161
 msgid "&Induction motor\tI"
 msgstr "&Motor de indução\tI"
 
-#: MainFrame.cpp:153 MainFrame.cpp:156
+#: MainFrame.cpp:162 MainFrame.cpp:165
 msgid "Adds an induction motor at the circuit"
 msgstr "Adiciona um motor de indução no circuito"
 
-#: MainFrame.cpp:155
+#: MainFrame.cpp:164
 msgid "&Synchronous compensator \tK"
 msgstr "&Compensador síncrono \tK"
 
-#: MainFrame.cpp:158
+#: MainFrame.cpp:167
 msgid "&Load\tShift-L"
 msgstr "&Carga\tShift-L"
 
-#: MainFrame.cpp:158
+#: MainFrame.cpp:167
 msgid "Adds a load at the circuit"
 msgstr "Adiciona uma carga no circuito"
 
-#: MainFrame.cpp:159
+#: MainFrame.cpp:168
 msgid "&Capacitor\tShift-C"
 msgstr "&Capacitor\tShift-C"
 
-#: MainFrame.cpp:160
+#: MainFrame.cpp:169
 msgid "Adds a shunt capacitor at the circuit"
 msgstr "Adiciona um capacitor shunt no circuito"
 
-#: MainFrame.cpp:161
+#: MainFrame.cpp:170
 msgid "&Inductor\tShift-I"
 msgstr "&Inductor\tShift-I"
 
-#: MainFrame.cpp:162
+#: MainFrame.cpp:171
 msgid "Adds a shunt inductor at the circuit"
 msgstr "Adiciona um indutor shunt no circuito"
 
-#: MainFrame.cpp:164
+#: MainFrame.cpp:173
 msgid "&Harmonic current\tShift-H"
 msgstr "&Corrente harmônica\tShift-H"
 
-#: MainFrame.cpp:165
+#: MainFrame.cpp:174
 msgid "Adds a harmonic current source at the circuit"
 msgstr "Adiciona uma fonte de corrente harmônica no circuito"
 
-#: MainFrame.cpp:167
+#: MainFrame.cpp:176
 msgid "&Text\tA"
 msgstr "&Texto\tA"
 
-#: MainFrame.cpp:167
+#: MainFrame.cpp:176
 msgid "Adds a linked text element"
 msgstr "Adiciona um elemento de texto vinculado"
 
-#: MainFrame.cpp:185
+#: MainFrame.cpp:194
 msgid "&Stability event list"
 msgstr "&Lista de eventos de estabilidade"
 
-#: MainFrame.cpp:186
+#: MainFrame.cpp:195
 msgid "Show the stability event list"
 msgstr "Mostra a lista de eventos de estabilidade"
 
-#: MainFrame.cpp:198 MainFrame.cpp:203 MainFrame.cpp:325 MainFrame.cpp:331
-#: MainFrame.cpp:635
+#: MainFrame.cpp:207 MainFrame.cpp:212 MainFrame.cpp:335 MainFrame.cpp:341
+#: MainFrame.cpp:547 MainFrame.cpp:552 MainFrame.cpp:664
 #, c-format
 msgid "New project %d"
 msgstr "Novo projeto %d"
 
-#: MainFrame.cpp:315
+#: MainFrame.cpp:325
 msgid "Open PSP file"
 msgstr "Abrir arquivo do PSP"
 
-#: MainFrame.cpp:389 MainFrame.cpp:410
+#: MainFrame.cpp:400 MainFrame.cpp:422
 msgid "Save PSP file"
 msgstr "Salvar arquivo do PSP"
 
-#: MainFrame.cpp:438 Workspace.cpp:718
+#: MainFrame.cpp:450 Workspace.cpp:801
 #, c-format
 msgid "Bus %d"
 msgstr "Barra %d"
 
-#: MainFrame.cpp:441 Workspace.cpp:722
+#: MainFrame.cpp:453 Workspace.cpp:805
 msgid "Insert Bus: Click to insert, ESC to cancel."
 msgstr "Inserir Barramento: Clique para inserir, ESC para cancelar."
 
-#: MainFrame.cpp:445 Workspace.cpp:735
+#: MainFrame.cpp:457 Workspace.cpp:819
 #, c-format
 msgid "Line %d"
 msgstr "Linha %d"
 
-#: MainFrame.cpp:448 Workspace.cpp:739
+#: MainFrame.cpp:460 Workspace.cpp:823
 msgid "Insert Line: Click on two buses, ESC to cancel."
 msgstr "Inserir Linha: Clique em duas barras, ESC para cancelar."
 
-#: MainFrame.cpp:453 Workspace.cpp:749
+#: MainFrame.cpp:465 Workspace.cpp:833
 #, c-format
 msgid "Transformer %d"
 msgstr "Transformador %d"
 
-#: MainFrame.cpp:456 Workspace.cpp:753
+#: MainFrame.cpp:468 Workspace.cpp:837
 msgid "Insert Transformer: Click on two buses, ESC to cancel."
 msgstr "Inserir Transformador: Clique em duas barras, ESC para cancelar."
 
-#: MainFrame.cpp:461 Workspace.cpp:761
+#: MainFrame.cpp:473 Workspace.cpp:845
 #, c-format
 msgid "Generator %d"
 msgstr "Gerador %d"
 
-#: MainFrame.cpp:464 Workspace.cpp:765
+#: MainFrame.cpp:476 Workspace.cpp:849
 msgid "Insert Generator: Click on a buses, ESC to cancel."
 msgstr "Inserir Gerador: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:468 Workspace.cpp:729
+#: MainFrame.cpp:480 Workspace.cpp:812
 #, c-format
 msgid "Load %d"
 msgstr "Carga %d"
 
-#: MainFrame.cpp:471 Workspace.cpp:733
+#: MainFrame.cpp:483 Workspace.cpp:816
 msgid "Insert Load: Click on a buses, ESC to cancel."
 msgstr "Inserir Carga: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:476 Workspace.cpp:806
+#: MainFrame.cpp:488 Workspace.cpp:891
 #, c-format
 msgid "Capacitor %d"
 msgstr "Capacitor %d"
 
-#: MainFrame.cpp:479 Workspace.cpp:810
+#: MainFrame.cpp:491 Workspace.cpp:895
 msgid "Insert Capacitor: Click on a buses, ESC to cancel."
 msgstr "Inserir Capacitor: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:484 Workspace.cpp:773
+#: MainFrame.cpp:496 Workspace.cpp:857
 #, c-format
 msgid "Inductor %d"
 msgstr "Indutor %d"
 
-#: MainFrame.cpp:487 Workspace.cpp:777
+#: MainFrame.cpp:499 Workspace.cpp:861
 msgid "Insert Inductor: Click on a buses, ESC to cancel."
 msgstr "Inserir Indutor: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:492 Workspace.cpp:821
+#: MainFrame.cpp:504 Workspace.cpp:917
 #, c-format
 msgid "Harmonic Current %d"
 msgstr "Corrente Harmônica %d"
 
-#: MainFrame.cpp:495 Workspace.cpp:826
+#: MainFrame.cpp:507 Workspace.cpp:922
 msgid "Insert Harmonic Current Source: Click on a buses, ESC to cancel."
 msgstr ""
 "Inserir Fonte de Corrente Harmônica: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:500 Workspace.cpp:781
+#: MainFrame.cpp:512 Workspace.cpp:866
 #, c-format
 msgid "Induction motor %d"
 msgstr "Motor de indução %d"
 
-#: MainFrame.cpp:503 Workspace.cpp:785
+#: MainFrame.cpp:515 Workspace.cpp:870
 msgid "Insert Induction Motor: Click on a buses, ESC to cancel."
 msgstr "Inserir Motor de indução: Clique em uma barra, ESC para cancelar."
 
-#: MainFrame.cpp:508 Workspace.cpp:794
+#: MainFrame.cpp:520 Workspace.cpp:879
 #, c-format
 msgid "Synchronous condenser %d"
 msgstr "Compensador síncrono %d"
 
-#: MainFrame.cpp:511 Workspace.cpp:798
+#: MainFrame.cpp:523 Workspace.cpp:883
 msgid "Insert Synchronous Condenser: Click on a buses, ESC to cancel."
 msgstr "Inserir Compensador síncrono: Clique em uma barra, ESC para cancelar."
 
-#: MainFrameBase.cpp:79 MainFrameBase.cpp:82 MainFrameBase.cpp:86
+#: MainFrame.cpp:687
+msgid ""
+"Are you sure you want to close the program?\n"
+"Any unsaved changes will be lost."
+msgstr ""
+"Tem certeza que deseja fechar o programa?\n"
+"Todas as alterações não salvas serão descartadas."
+
+#: MainFrame.cpp:688
+msgid "Closing PSP-UFU..."
+msgstr "Fechando PSP-UFU..."
+
+#: MainFrameBase.cpp:76 MainFrameBase.cpp:77 MainFrameBase.cpp:80
 msgid "Projects"
 msgstr "Projetos"
 
-#: MainFrameBase.cpp:89
+#: MainFrameBase.cpp:82
 msgid "Create new project"
 msgstr "Criar novo projeto"
 
-#: MainFrameBase.cpp:91
+#: MainFrameBase.cpp:84
 msgid "Open"
 msgstr "Abrir"
 
-#: MainFrameBase.cpp:92 MainFrameBase.cpp:95
+#: MainFrameBase.cpp:84 MainFrameBase.cpp:86
 msgid "Open saved project"
 msgstr "Abrir projetos salvos"
 
-#: MainFrameBase.cpp:98
+#: MainFrameBase.cpp:88
 msgid "General Settings"
 msgstr "Configurações gerais"
 
-#: MainFrameBase.cpp:99
+#: MainFrameBase.cpp:88
 msgid "Opens a dialog to set the main settings of the program"
 msgstr ""
 "Abre um formulário para definir as principais configurações do programa"
 
-#: MainFrameBase.cpp:102
+#: MainFrameBase.cpp:90
 msgid "Closes the application"
 msgstr "Fecha a aplicação"
 
-#: MainFrameBase.cpp:105 MainFrameBase.cpp:108
+#: MainFrameBase.cpp:93 MainFrameBase.cpp:94
 msgid "Current project"
 msgstr "Projeto atual"
 
-#: MainFrameBase.cpp:113
+#: MainFrameBase.cpp:98
 msgid "Save"
 msgstr "Salvar"
 
-#: MainFrameBase.cpp:114
+#: MainFrameBase.cpp:98
 msgid "Save the current project"
 msgstr "Salvar o projeto atual"
 
-#: MainFrameBase.cpp:116
+#: MainFrameBase.cpp:100
 msgid "Save As..."
 msgstr "Salvar como..."
 
-#: MainFrameBase.cpp:118
+#: MainFrameBase.cpp:100
 msgid "Save as the current project"
 msgstr "Salvar como o projeto atual"
 
-#: MainFrameBase.cpp:120
+#: MainFrameBase.cpp:102
 msgid "Close"
 msgstr "Fechar"
 
-#: MainFrameBase.cpp:121
+#: MainFrameBase.cpp:102
 msgid "Close the current project"
 msgstr "Fechar o projeto atual"
 
-#: MainFrameBase.cpp:124 MainFrameBase.cpp:127 MainFrameBase.cpp:131
+#: MainFrameBase.cpp:105 MainFrameBase.cpp:106 MainFrameBase.cpp:109
 msgid "Help"
 msgstr "Ajuda"
 
-#: MainFrameBase.cpp:133
+#: MainFrameBase.cpp:111
 msgid "PSP-UFU Guide"
 msgstr "Manual do PSP-UFU"
 
-#: MainFrameBase.cpp:134
+#: MainFrameBase.cpp:111
 msgid "Open PSP-UFU Guide"
 msgstr "Abrir o manual do PSP-UFU"
 
-#: MainFrameBase.cpp:137
+#: MainFrameBase.cpp:113
 msgid "About..."
 msgstr "Sobre..."
 
-#: MainFrameBase.cpp:138 PropertiesFormBase.h:277
+#: MainFrameBase.cpp:113 PropertiesFormBase.h:277
 msgid "About PSP-UFU"
 msgstr "Sobre o PSP-UFU"
 
-#: MainFrameBase.cpp:141 MainFrameBase.cpp:142
+#: MainFrameBase.cpp:116 MainFrameBase.cpp:117
 msgid "Tools"
 msgstr "Ferramentas"
 
-#: MainFrameBase.cpp:144 MainFrameBase.cpp:147 MainFrameBase.cpp:151
+#: MainFrameBase.cpp:119 MainFrameBase.cpp:120 MainFrameBase.cpp:123
 msgid "Clipboard"
 msgstr "Área de transferência"
 
-#: MainFrameBase.cpp:154
+#: MainFrameBase.cpp:125
 msgid "Copies the selected elements"
 msgstr "Copia os elementos selecionados"
 
-#: MainFrameBase.cpp:157
+#: MainFrameBase.cpp:127
 msgid "Pastes the elements from clipboard"
 msgstr "Cola os elementos da área de transferência"
 
-#: MainFrameBase.cpp:160
+#: MainFrameBase.cpp:129
 msgid "Undoes the last action"
 msgstr "Desfaz a última ação"
 
-#: MainFrameBase.cpp:163
+#: MainFrameBase.cpp:131
 msgid "Redoes the last undo action"
 msgstr "Refaz a última ação desfeita"
 
-#: MainFrameBase.cpp:166 MainFrameBase.cpp:169 MainFrameBase.cpp:173
+#: MainFrameBase.cpp:134 MainFrameBase.cpp:135 MainFrameBase.cpp:138
 msgid "Circuit"
 msgstr "Circuito"
 
-#: MainFrameBase.cpp:175
+#: MainFrameBase.cpp:140
 msgid "Add Element"
 msgstr "Inserir elemento"
 
-#: MainFrameBase.cpp:177
+#: MainFrameBase.cpp:140
 msgid "Add a new element in the project"
 msgstr "Adicionar um elemento novo no projeto"
 
-#: MainFrameBase.cpp:180
+#: MainFrameBase.cpp:142
 msgid "Drag all the elements"
 msgstr "Arrasta todos os elementos"
 
-#: MainFrameBase.cpp:183
+#: MainFrameBase.cpp:144
 msgid "Move the selected elements"
 msgstr "Move os elementos selecionados"
 
-#: MainFrameBase.cpp:187
+#: MainFrameBase.cpp:146
 msgid "Removes all selected elements"
 msgstr "Remove todos os elementos selecionados"
 
-#: MainFrameBase.cpp:190
+#: MainFrameBase.cpp:148
 msgid "Applies the drag and zoom tools to show all elements in workspace"
 msgstr ""
 "Aplica as ferramentas de arrasto e ampliação para exibir todos os elementos "
 "na área de trabalho"
 
-#: MainFrameBase.cpp:193
+#: MainFrameBase.cpp:150
 msgid "Rotate Clockwise"
 msgstr "Girar Horário"
 
-#: MainFrameBase.cpp:197
+#: MainFrameBase.cpp:152
 msgid "Rotate Counter-clockwise"
 msgstr "Girar anti-horário"
 
-#: MainFrameBase.cpp:199
+#: MainFrameBase.cpp:152
 msgid "Rotate the selected elements counter-clockwise"
 msgstr "Gira os elementos selecionados no sentido anti-horário"
 
-#: MainFrameBase.cpp:202
+#: MainFrameBase.cpp:154
 msgid "Project Settings"
 msgstr "Configurações do projeto"
 
-#: MainFrameBase.cpp:203
+#: MainFrameBase.cpp:154
 msgid "Opens a dialog to set the main settings of the current project"
 msgstr ""
 "Abre uma janela para definir as principais configurações do projeto atual"
 
-#: MainFrameBase.cpp:206 MainFrameBase.cpp:209
+#: MainFrameBase.cpp:157
+msgid "Data Visualization"
+msgstr "Visualização dos Dados"
+
+#: MainFrameBase.cpp:158
 msgid "Reports"
 msgstr "Relatórios"
 
-#: MainFrameBase.cpp:214
+#: MainFrameBase.cpp:162
 msgid "Data Report"
 msgstr "Relatório de dados"
 
-#: MainFrameBase.cpp:215
+#: MainFrameBase.cpp:162
 msgid "Opens a data report"
 msgstr "Abre um relatório de dados"
 
-#: MainFrameBase.cpp:218
+#: MainFrameBase.cpp:164
 msgid "Charts"
 msgstr "Gráficos"
 
-#: MainFrameBase.cpp:219
+#: MainFrameBase.cpp:164
 msgid "Open the charts"
 msgstr "Abre os gráficos"
 
-#: MainFrameBase.cpp:221
+#: MainFrameBase.cpp:166
+msgid "Voltage Heatmap"
+msgstr "Mapa de Tensão"
+
+#: MainFrameBase.cpp:166
+msgid "Enable/disable the voltage heatmap visualization"
+msgstr "Ativa/desativa a visualização do mapa de tensão"
+
+#: MainFrameBase.cpp:168
 msgid "Snapshot"
 msgstr "Instantâneo"
 
-#: MainFrameBase.cpp:223
+#: MainFrameBase.cpp:168
 msgid "Capture a snapshot of the circuit"
 msgstr "Captura uma imagem instantânea do circuito"
 
-#: MainFrameBase.cpp:226 MainFrameBase.cpp:227
+#: MainFrameBase.cpp:171 MainFrameBase.cpp:172
 msgid "Simulation"
 msgstr "Simulação"
 
-#: MainFrameBase.cpp:230 MainFrameBase.cpp:232
+#: MainFrameBase.cpp:174 MainFrameBase.cpp:175
 msgid "Continuous"
 msgstr "Contínuo"
 
-#: MainFrameBase.cpp:238
+#: MainFrameBase.cpp:179
 msgid "Enable Solution"
 msgstr "Habilitar solução"
 
-#: MainFrameBase.cpp:239
+#: MainFrameBase.cpp:179
 msgid ""
 "Enables the power flow and fault (if exists) calculations after any circuit "
 "change"
@@ -2542,62 +2569,62 @@ msgstr ""
 "Habilita os cálculos de fluxo de carga e falta (se existir) após qualquer "
 "mudança no circuito"
 
-#: MainFrameBase.cpp:243
+#: MainFrameBase.cpp:181
 msgid "Disable Solution"
 msgstr "Desabilitar solução"
 
-#: MainFrameBase.cpp:244
+#: MainFrameBase.cpp:181
 msgid ""
 "Disables the power flow and fault calculations after any circuit changes"
 msgstr ""
 "Desabilita os cálculos de fluxo de carga e falta após qualquer mudança no "
 "circuito"
 
-#: MainFrameBase.cpp:246
+#: MainFrameBase.cpp:183
 msgid "Reset Voltages"
 msgstr "Reiniciar tensões"
 
-#: MainFrameBase.cpp:248
+#: MainFrameBase.cpp:183
 msgid "Reset all voltages to initial state"
 msgstr "Reinicia todas as tensões para os valores iniciais"
 
-#: MainFrameBase.cpp:251 MainFrameBase.cpp:254 MainFrameBase.cpp:258
+#: MainFrameBase.cpp:186 MainFrameBase.cpp:187 MainFrameBase.cpp:190
 msgid "Simulations"
 msgstr "Simulações"
 
-#: MainFrameBase.cpp:260
+#: MainFrameBase.cpp:192
 msgid "Power Flow"
 msgstr "Fluxo de carga"
 
-#: MainFrameBase.cpp:262
+#: MainFrameBase.cpp:192
 msgid "Calculate the circuit power flow"
 msgstr "Calcula o fluxo de carga do circuito"
 
-#: MainFrameBase.cpp:264
-msgid "Run stability"
-msgstr "Executar estabilidade"
+#: MainFrameBase.cpp:194
+msgid "Run Stability"
+msgstr "Executar Estabilidade"
 
-#: MainFrameBase.cpp:266
+#: MainFrameBase.cpp:194
 msgid "Run the stability calculations"
 msgstr "Executa os cálculos de estabilidade"
 
-#: MainFrameBase.cpp:270
+#: MainFrameBase.cpp:196
 msgid "Calculate the circuit fault (if exists)"
 msgstr "Calcula a falta do circuito (se existir)"
 
-#: MainFrameBase.cpp:273
+#: MainFrameBase.cpp:198
 msgid "Short-Circuit Power"
 msgstr "Nível de curto-circuito"
 
-#: MainFrameBase.cpp:274
+#: MainFrameBase.cpp:198
 msgid "Calculate the short-circuit power in all buses"
 msgstr "Calcula o nível de curto-circuito em todas as barras"
 
-#: MainFrameBase.cpp:277
+#: MainFrameBase.cpp:200
 msgid "Harmonic Distortions"
 msgstr "Distorções Harmônicas"
 
-#: MainFrameBase.cpp:278
+#: MainFrameBase.cpp:200
 msgid ""
 "Calculate the voltage distortions on all buses due to harmonic current "
 "sources"
@@ -2605,23 +2632,23 @@ msgstr ""
 "Calcula as distorções de tensão em todos os barramentos causadas por fontes "
 "de corrente harmônicas"
 
-#: MainFrameBase.cpp:281 PropertiesFormBase.h:365
+#: MainFrameBase.cpp:202 PropertiesFormBase.h:365
 msgid "Frequency response"
 msgstr "Resposta na Frequência"
 
-#: MainFrameBase.cpp:282
+#: MainFrameBase.cpp:202
 msgid "Calculate the impedance seen in a bus for varies frequencies"
 msgstr "Calcula a impedância vista por uma parra para várias frequências"
 
-#: MainFrameBase.cpp:285
+#: MainFrameBase.cpp:204
 msgid "Simulation Settings"
 msgstr "Configurações de simulação"
 
-#: MainFrameBase.cpp:286
+#: MainFrameBase.cpp:204
 msgid "Opens a dialog to set the settings of the simulations"
 msgstr "Abre um formulário para definir as configurações de simulação"
 
-#: MainFrameBase.h:150
+#: MainFrameBase.h:153
 msgid "PSP-UFU"
 msgstr "PSP-UFU"
 
@@ -2709,6 +2736,14 @@ msgstr "A barra de referência não tem geração."
 #: PowerFlow.cpp:231 PowerFlow.cpp:294 PowerFlow.cpp:397 PowerFlow.cpp:429
 msgid "The maximum number of iterations was reached."
 msgstr "O número máximo de iterações foi alcançado."
+
+#: ProjectPropertiesForm.cpp:30
+msgid "Value entered incorrectly in the field \"Label max voltage\"."
+msgstr "Valor inserido incorretamente no campo \"Tensão máxima da legenda\"."
+
+#: ProjectPropertiesForm.cpp:33
+msgid "Value entered incorrectly in the field \"Label min voltage\"."
+msgstr "Valor inserido incorretamente no campo \"Tensão mínima da legenda\"."
 
 #: PropertiesFormBase.cpp:44
 msgid "Language"
@@ -2914,6 +2949,22 @@ msgstr "Passo de frequência"
 msgid "Injected current"
 msgstr "Corrente injetada"
 
+#: PropertiesFormBase.cpp:1232
+msgid "Voltage heatmap"
+msgstr "Mapa de tensão"
+
+#: PropertiesFormBase.cpp:1236
+msgid "Calculate automatically the label limits"
+msgstr "Calcular os limites de estabilidade automaticamente"
+
+#: PropertiesFormBase.cpp:1245
+msgid "Label max voltage"
+msgstr "Tensão máxima da legenda"
+
+#: PropertiesFormBase.cpp:1268
+msgid "Label min voltage"
+msgstr "Tensão mínima da legenda"
+
 #: PropertiesFormBase.h:78
 msgid "General settings"
 msgstr "Opções gerais"
@@ -2925,6 +2976,10 @@ msgstr "Opções de simulação"
 #: PropertiesFormBase.h:325
 msgid "Import files"
 msgstr "Importar arquivos"
+
+#: PropertiesFormBase.h:402
+msgid "Project properties"
+msgstr "Propriedades do projeto"
 
 #: ReactiveShuntElementForm.cpp:93
 msgid "Capacitor: Switching"
@@ -3337,53 +3392,53 @@ msgstr ""
 "Valor inserido incorretamente no campo \"Reatância de aterramento do "
 "secundário\"."
 
-#: Workspace.cpp:312
+#: Workspace.cpp:353
 msgid "Do you want to change the rated voltage of the path?"
 msgstr "Você quer mudar a tensão nominal do trecho?"
 
-#: Workspace.cpp:313
+#: Workspace.cpp:354
 msgid "Warning"
 msgstr "Atenção"
 
-#: Workspace.cpp:703
+#: Workspace.cpp:786
 msgid "Insert Text: Click to insert, ESC to cancel."
 msgstr "Inserir Texto: Clique para inserir, ESC para cancelar."
 
-#: Workspace.cpp:849
+#: Workspace.cpp:945
 msgid "MODE: DRAG"
 msgstr "MODO: ARRASTAR"
 
-#: Workspace.cpp:854
+#: Workspace.cpp:950
 msgid "MODE: PASTE"
 msgstr "MODO: COLAR"
 
-#: Workspace.cpp:861
+#: Workspace.cpp:957
 msgid "MODE: INSERT"
 msgstr "MODO: INSERÇÃO"
 
-#: Workspace.cpp:870
+#: Workspace.cpp:966
 msgid "MODE: EDIT"
 msgstr "MODO: EDIÇÃO"
 
-#: Workspace.cpp:874
+#: Workspace.cpp:970
 #, c-format
 msgid "ZOOM: %d%%"
 msgstr "ZOOM: %d%%"
 
-#: Workspace.cpp:1171
+#: Workspace.cpp:1349
 #, c-format
 msgid "Power flow converge with %d iterations (%ld ms)"
 msgstr "Fluxo de carga convergiu com %d iterações (%ld ms)"
 
-#: Workspace.cpp:1231 Workspace.cpp:1339
+#: Workspace.cpp:1410 Workspace.cpp:1521
 msgid "It was not possible to paste from clipboard."
 msgstr "Não foi possível colar da área de transferência."
 
-#: Workspace.cpp:1347
+#: Workspace.cpp:1529
 msgid "Click to paste."
 msgstr "Clique para colar."
 
-#: Workspace.cpp:1496
+#: Workspace.cpp:1698
 #, c-format
 msgid ""
 "The program took %ld ms to run this system.\n"
@@ -3392,19 +3447,19 @@ msgstr ""
 "O programa levou %ld ms para simular o sistema\n"
 "Você deseja abrir os gráficos do estudo de estabilidade?"
 
-#: Workspace.cpp:1498 Workspace.cpp:1606
+#: Workspace.cpp:1700 Workspace.cpp:1812
 msgid "Question"
 msgstr "Pergunta"
 
-#: Workspace.cpp:1508
+#: Workspace.cpp:1710
 msgid "Simulation parameters"
 msgstr "Parâmetros de simulação"
 
-#: Workspace.cpp:1510
+#: Workspace.cpp:1712
 msgid "Iterations number"
 msgstr "Número de iterações"
 
-#: Workspace.cpp:1605
+#: Workspace.cpp:1811
 msgid ""
 "Calculations done.\n"
 "Do you wish to open the frequency response graphics?"
@@ -3412,11 +3467,11 @@ msgstr ""
 "Cálculos realizados.\n"
 "Você deseja abrir os gráficos da resposta na frequência?"
 
-#: main.cpp:113
+#: main.cpp:116
 msgid "This language is not supported by the system."
 msgstr "Esse idioma não é suportado pelo sistema."
 
-#: main.cpp:124
+#: main.cpp:127
 msgid "Fail to load brazilian portuguese language catalog."
 msgstr "Falhou em carregar o catálogo de português do Brasil."
 

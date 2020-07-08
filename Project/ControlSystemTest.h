@@ -18,6 +18,8 @@
 #ifndef CONTROLSYSTEMTEST_H
 #define CONTROLSYSTEMTEST_H
 
+#include <GL/glew.h>
+
 #include "ControlEditorBase.h"
 
 class ControlEditor;

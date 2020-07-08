@@ -40,6 +40,9 @@ WorkspaceBase::WorkspaceBase(wxWindow* parent, wxWindowID id, const wxPoint& pos
     m_timer = new wxTimer;
     m_timer->Start(1500, false);
     
+    m_timerHeatMap = new wxTimer;
+    m_timerHeatMap->Start(500, false);
+    
     SetName(wxT("WorkspaceBase"));
     SetSize(wxDLG_UNIT(this, wxSize(500,300)));
     if (GetSizer()) {
@@ -58,7 +61,9 @@ WorkspaceBase::WorkspaceBase(wxWindow* parent, wxWindowID id, const wxPoint& pos
     m_glCanvas->Connect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(WorkspaceBase::OnLeftDoubleClick), NULL, this);
     m_glCanvas->Connect(wxEVT_IDLE, wxIdleEventHandler(WorkspaceBase::OnIdle), NULL, this);
     m_glCanvas->Connect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(WorkspaceBase::OnMiddleDoubleClick), NULL, this);
+    m_glCanvas->Connect(wxEVT_SIZE, wxSizeEventHandler(WorkspaceBase::OnResize), NULL, this);
     m_timer->Connect(wxEVT_TIMER, wxTimerEventHandler(WorkspaceBase::OnTimer), NULL, this);
+    m_timerHeatMap->Connect(wxEVT_TIMER, wxTimerEventHandler(WorkspaceBase::OnHeatMapTime), NULL, this);
     
 }
 
@@ -76,9 +81,14 @@ WorkspaceBase::~WorkspaceBase()
     m_glCanvas->Disconnect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(WorkspaceBase::OnLeftDoubleClick), NULL, this);
     m_glCanvas->Disconnect(wxEVT_IDLE, wxIdleEventHandler(WorkspaceBase::OnIdle), NULL, this);
     m_glCanvas->Disconnect(wxEVT_MIDDLE_DCLICK, wxMouseEventHandler(WorkspaceBase::OnMiddleDoubleClick), NULL, this);
+    m_glCanvas->Disconnect(wxEVT_SIZE, wxSizeEventHandler(WorkspaceBase::OnResize), NULL, this);
     m_timer->Disconnect(wxEVT_TIMER, wxTimerEventHandler(WorkspaceBase::OnTimer), NULL, this);
+    m_timerHeatMap->Disconnect(wxEVT_TIMER, wxTimerEventHandler(WorkspaceBase::OnHeatMapTime), NULL, this);
     
     m_timer->Stop();
     wxDELETE( m_timer );
+
+    m_timerHeatMap->Stop();
+    wxDELETE( m_timerHeatMap );
 
 }
