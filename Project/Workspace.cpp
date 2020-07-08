@@ -1025,7 +1025,7 @@ void Workspace::UpdateHeatMap()
 
         m_hmPlane->UpdateCoords();
 
-        int iterations = std::lround(3.3 * std::powf(m_camera->GetScale(), 0.62));
+        int iterations = std::lround(3.3 * std::pow(m_camera->GetScale(), 0.62));
         if (iterations < 1) iterations = 1;
         m_hmPlane->SmoothPlane(iterations);
     }

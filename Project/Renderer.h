@@ -8,10 +8,12 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 
+#ifdef _MSC_VER
 #define  ASSERT(x) if (!(x)) __debugbreak();
+#endif //_MSC_VER
 #define GLCall(x) GLClearError();\
     x;\
-    ASSERT(GLCheckError())
+    wxASSERT(GLCheckError())
 
 void GLClearError();
 bool GLCheckError();

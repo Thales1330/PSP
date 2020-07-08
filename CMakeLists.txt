@@ -38,6 +38,16 @@ file(GLOB PSP_SRC
     "Project/fparser/fparser.cc"
     "Project/fparser/fpoptimizer.cc"
     "Project/wxMathPlot/*.cpp"
+    "Project/vendor/glm/*.hpp"
+    "Project/vendor/glm/detail/*.hpp"
+    "Project/vendor/glm/detail/*.inl"
+    "Project/vendor/glm/ext/*.hpp"
+    "Project/vendor/glm/ext/*.inl"
+    "Project/vendor/glm/gtc/*.hpp"
+    "Project/vendor/glm/gtc/*.inl"
+    "Project/vendor/glm/gtx/*.hpp"
+    "Project/vendor/glm/gtx/*.inl"
+    "Project/vendor/glm/simd/*.h"
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})

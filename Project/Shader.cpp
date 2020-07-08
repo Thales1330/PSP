@@ -72,8 +72,12 @@ ShaderSource Shader::ParseShader(const wxString& filepath) const
             ss[static_cast<int>(type)] << line + std::string("\n");
         }
     }
+    
+    ShaderSource source;
+    source.vertexShader = ss[0].str();
+    source.fragmentShader = ss[1].str();
 
-    return { ss[0].str(), ss[1].str() };
+    return source;
 }
 
 unsigned int Shader::CreateShader(std::string& vertexShader, std::string& fragmentShader) const
@@ -131,7 +135,7 @@ unsigned int Shader::GetUniformLocation(const std::string& name)
 
     GLCall(int location = glGetUniformLocation(m_rendererID, name.c_str()));
     if (location == -1) {
-        wxMessageBox(wxString::Format("Atenção! uniform \"%s\" não encontrado", name));
+        wxMessageBox(wxString::Format("AtenÃ§Ã£o! uniform \"%s\" nÃ£o encontrado", name));
     }
     
     m_uniformLocationCache[name] = location;
