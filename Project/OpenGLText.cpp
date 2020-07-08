@@ -19,7 +19,9 @@
 #include <wx/graphics.h>
 #include "OpenGLText.h"
 #include <algorithm>
+#ifdef __WINDOWS__
 #include <wingdi.h>
+#endif
 #include <cmath>
 
 OpenGLText::OpenGLText() { Init(); }
