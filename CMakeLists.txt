@@ -15,8 +15,9 @@ endif()
 find_package(wxWidgets REQUIRED COMPONENTS net core base std adv ribbon aui propgrid richtext stc gl)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
+find_package(glfw3 3.3 REQUIRED)
 include(${wxWidgets_USE_FILE})
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} vendor)
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/Project/vendor)
 add_definitions(${OpenGL_DEFINITIONS})
 add_definitions(${GLUT_DEFINITIONS})
     
@@ -51,4 +52,4 @@ file(GLOB PSP_SRC
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
-target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} glfw)
