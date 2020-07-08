@@ -39,7 +39,7 @@ file(GLOB PSP_SRC
     "Project/fparser/fparser.cc"
     "Project/fparser/fpoptimizer.cc"
     "Project/wxMathPlot/*.cpp"
-    "Project/vendor/glm/*.hpp"
+    "Project/glm/*.hpp"
     "Project/glm/detail/*.hpp"
     "Project/glm/detail/*.inl"
     "Project/glm/ext/*.hpp"
