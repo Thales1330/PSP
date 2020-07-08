@@ -15,7 +15,9 @@ docs/doxygen/latex
 data/
 Debug/
 Release/
-ExtLibs/
+ExtLibs/GLEW/lib/
+ExtLibs/GLFW/lib-mingw/
+ExtLibs/GLFW/lib-vc2019/
 x64/
 
 # Compiled source #

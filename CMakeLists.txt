@@ -51,6 +51,8 @@ file(GLOB PSP_SRC
     "Project/glm/gtx/*.hpp"
     "Project/glm/gtx/*.inl"
     "Project/glm/simd/*.h"
+    "ExtLibs/GLEW/include/GL/*.h"
+    "ExtLibs/GLFW/include/GLFW/*.h"
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
