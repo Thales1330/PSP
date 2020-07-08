@@ -17,7 +17,7 @@ find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(glfw3 3.1 REQUIRED)
 include(${wxWidgets_USE_FILE})
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/Project/vendor)
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/Project/vendor/)
 add_definitions(${OpenGL_DEFINITIONS})
 add_definitions(${GLUT_DEFINITIONS})
     
