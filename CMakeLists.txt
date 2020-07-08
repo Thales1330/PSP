@@ -17,7 +17,7 @@ find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(glfw3 3.1 REQUIRED)
 include(${wxWidgets_USE_FILE})
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
+include_directories( ${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS})
 add_definitions(${OpenGL_DEFINITIONS})
 add_definitions(${GLUT_DEFINITIONS})
     
@@ -54,4 +54,4 @@ file(GLOB PSP_SRC
 )
 
 add_executable(${PROJECT_NAME} WIN32 ${PSP_SRC})
-target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} glfw)
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${GLEW_LIBRARIES} ${GLFW_LIBRARIES})
