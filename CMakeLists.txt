@@ -16,6 +16,7 @@ find_package(wxWidgets REQUIRED COMPONENTS net core base std adv ribbon aui prop
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(glfw3 3.1 REQUIRED)
+find_package(GLEW REQUIRED)
 include(${wxWidgets_USE_FILE})
 include_directories( ${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS})
 add_definitions(${OpenGL_DEFINITIONS})
