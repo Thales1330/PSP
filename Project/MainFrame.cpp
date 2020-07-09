@@ -249,7 +249,25 @@ void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event)
     }
 }
 
-void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnCloseClick(wxRibbonButtonBarEvent& event)
+{
+    auto it = m_workspaceList.begin();
+    while (it != m_workspaceList.end()) {
+        if (*it == m_auiNotebook->GetCurrentPage()) {
+            if ((*it)->GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = nullptr;
+            m_workspaceList.erase(it);
+            m_auiNotebook->DeletePage(m_auiNotebook->GetPageIndex(m_auiNotebook->GetCurrentPage()));
+            break;
+        }
+        ++it;
+    }
+    if (!m_sharedGLContext && !m_workspaceList.empty()) {
+        m_sharedGLContext = m_workspaceList[0]->GetSharedGLContext();
+    }
+    else if (m_workspaceList.empty()) {
+        EnableCurrentProjectRibbon(false);
+    }
+}
 void MainFrame::OnCopyClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnDataReportClick(wxRibbonButtonBarEvent& event)
 {
@@ -716,7 +734,7 @@ void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event)
 void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event)
 {
     Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
-    if(workspace) {
+    if (workspace) {
         ProjectPropertiesForm ppf(this, workspace);
         ppf.ShowModal();
         workspace->UpdateHeatMap();
