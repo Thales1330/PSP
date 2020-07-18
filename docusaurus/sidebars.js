@@ -8,7 +8,7 @@ module.exports = {
 	],
 		
     'Editor de Elementos de Potência': [
-		'doc2',
+		'powerEditor',
 		{
 			type: 'category',
 			label: 'Elementos de Potência',

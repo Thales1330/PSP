@@ -43,3 +43,7 @@ As edições gráficas dos elementos, como posição, conexão e tamanho dos bar
 
 ### Barra de Status
 A barra de status é responsável por informações interessantes sobre as circunstâncias atuais do programa: modo de operação do mouse (editar, mover, arrastar), zoom aplicado e posição do mouse na área de trabalho, além de dados sobre as ações dos usuários, como: inserção de elementos, informação sobre copiar e colar, etc.
+
+:::tip Dica
+**Sempre fique atendo à barra de status**, pois são fornecidas informações importantes acerca da operação do programa. Caso tenha alguma dúvida siga as instruções apresentadas nesse componente.
+:::

@@ -10,7 +10,7 @@ This user guide was written in Brazilian Portuguese. If you want to help me tran
 
 ## Sobre o PSP-UFU
 
-O PSP-UFU (Plataforma de Sistemas de Potência da Universidade Federal de Uberlândia) é um software **multi-plataforma**, **multilíngue**, **livre e de código aberto (FOSS)** com **recursos avançados de GUI (Interface Gráfica do Usuário)** e **ferramentas CAD (Design Assistido por Computador)** para estudos de sistemas elétricos de potência.
+O PSP-UFU (Plataforma de Sistemas de Potência da Universidade Federal de Uberlândia) é um software **multi-plataforma**, **multilíngue**, **livre e de código aberto (FOSS)** com **recursos avançados de GUI (*Graphical User Interface*)** e **ferramentas CAD (*Computer Aided Design*)** para estudos de sistemas elétricos de potência.
 
 O software permite a construção de qualquer rede de transmissão elétrica e sistemas de controle através da inserção de elementos visuais. Para a visualização dos resultados, o programa oferece **elementos de texto vinculados** na tela principal e também **editores de tabelas e gráficos**.
 
@@ -23,7 +23,7 @@ Resumidamente, o *software* pode executar os seguintes estudos:
 - Harmônicos
 - Estabilidade transitória e dinâmica
 
-### Artigos publicados e Tese de doutorado
+### Publicações
 Os artigos abaixo possuem maiores detalhes a respeito do PSP-UFU:
 >Oliveira, T. L., Guimarães, G. C., & Silva, L. R. C. (2019). PSP-UFU: An open-source, graphical, and multiplatform software for power system studies. *International Transactions on Electrical Energy Systems*, e12185. doi: [10.1002/2050-7038.12185](https://doi.org/10.1002/2050-7038.12185)
 

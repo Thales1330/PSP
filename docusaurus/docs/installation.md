@@ -10,7 +10,7 @@ O download do PSP-UFU pode ser realizado pelo ["*last release*" do repositório 
 Ao acessar ao link, role a página até encontrar os *Assets*:
 
 ![Download][download]
-[download]: /PSP/images/download.png 'Assets donwload'
+[download]: /PSP/images/download.png 'Assets download'
 
 Como o PSP-UFU é um *software* multiplataforma, você deve baixar o arquivo correto:
 - Para o sistema operacional [Windows](installation#windows) baixe os arquivos *.exe* (recomendado) ou *.zip*.
@@ -56,7 +56,7 @@ echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib" >> ~/.bashrc
 
 #### *Método II (não recomendado)*
 :::warning Cuidado!
-Utilizando esse método, os passos abaixo devem ser executados todas as vezes que você quiser abir o PSP-UFU.
+Utilizando esse método os passos abaixo devem ser executados **todas as vezes** que você quiser abrir o PSP-UFU.
 :::
 1. Abra o terminal e acesse o diretório onde está instalado o PSP-UFU:
 ```shell
