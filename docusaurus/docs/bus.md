@@ -11,7 +11,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 Nota - Em muitos casos, o barramento consiste em uma barra. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-12-30).
 
-O elemento **barramento**, ou simplemente **barra**, é um conector ou nó do diagrama unifilar do PSP-UFU. Essa barra pode representar um PAC (Ponto de Acoplamento Comum), um poste de distrubuição, uma subestação, um barramento da subestação, entre inúmeros outros tipos pontos de análise e conexão entre elementos.
+O elemento **barramento**, ou simplesmente **barra**, é um conector ou nó do diagrama unifilar do PSP-UFU. Essa barra pode representar um PAC (Ponto de Acoplamento Comum), um poste de distribuição, uma subestação, um barramento da subestação, entre inúmeros outros tipos pontos de análise e conexão entre elementos.
 
 ## Formulário de edição dos barramentos
 :::caution Atenção!
@@ -24,7 +24,7 @@ A imagem abaixo apresenta o formulário de inserção/alteração de dados das b
 
 Esse formulário é subdividido em quatro contextos distintos:
 - **Geral**: no qual são inseridas informações gerais da barra e informações do fluxo de carga;
-- **Falta**: local onde o curto-circuito shunt deve ser inserido;
+- **Falta**: local onde o curto-circuito *shunt* deve ser inserido;
 - **Estabilidade**: contendo opções de visualização de dados da barra em gráficos no tempo e inserção de faltas trifásicas no cálculo de estabilidade transitória.
 - **Qualidade de energia**: contém a opção de de visualização da impedância harmônica vista pela barra.
 
@@ -32,7 +32,7 @@ Esse formulário é subdividido em quatro contextos distintos:
 ### Geral
 
 #### Nome
-Identificação do elemento elétrico. Podem ser iseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
 
 Todos os componentes de potência do PSP-UFU possuem esse campo.
 
@@ -100,6 +100,7 @@ Duração da falta inserida ($\Delta t_{falta}$) no estudo de estabilidade. A fa
 #### Resistência e reatância de falta
 Impedância de falta nos estudos de estabilidade. Uma falta franca é representada pela inserção de um valor de impedância shunt de valor muito baixo ($j10^{-5}  p.u.$).
 
+---
 ### Qualidade de energia
 
 #### Imprimir impedância harmônica da barra

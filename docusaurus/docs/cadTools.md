@@ -63,7 +63,7 @@ Ao utilizar essa ferramenta os objetos irão girar 45º a partir do seu ponto de
 ### Arrastar
 Três ferramentas muito úteis na navegação do circuito, principalmente em grandes redes, são: arrastar, zoom e encaixar.
 
-A ferramenta arrastar possibilita mover todo o circuito **preservando as posições relativas entre os elementos**. Esta ferramenta pode ser acessada pelo submenu “Ferramentas” ou **mantendo pressionada o scroll do mouse**, ativando assim o “modo arrastar”. Ao ativá-lo todo o circuito será movido clicando e arrastando na direção desejada.
+A ferramenta arrastar possibilita mover todo o circuito **preservando as posições relativas entre os elementos**. Esta ferramenta pode ser acessada pelo submenu “Ferramentas” ou **mantendo pressionada o *scroll* do mouse**, ativando assim o “modo arrastar”. Ao ativá-lo todo o circuito será movido clicando e arrastando na direção desejada.
 
 Para sair do “modo arrastar” basta pressionar a tecla Escape do teclado.
 

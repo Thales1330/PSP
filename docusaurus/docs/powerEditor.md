@@ -65,3 +65,8 @@ Ao inserir um barramento, a mesma irá acompanhar o ponteiro do mouse até que v
 | Gerador              | G         | Corrente harmônica   | Shift + H |
 | Motor de indução     | I         | Texto                | A         |
 | Compensador síncrono | K         |
+
+## Editando dados elétricos
+Ao inserir um elemento, seu respectivo formulário de edição é exibido para inserção dos dados elétricos d elemento. Todos os dados podem ser **alterados** ao **clicar duas vezes sobre o elemento** ou por opção do **menu de contexto** exibido ao clicar com o botão direito sobre o elemento.
+
+Cada formulário de edição de dados elétricos dos elementos possuem suas particularidades e são descritos em documentação específica: [Barramento](bus), [Linha](line), [Transformador](transformer), [Carga](load), [Capacitor](capacitor), [Indutor](inductor), [Fonte de Corrente Harmônica](harmSource), [Gerador Síncrono](syncGenerator), [Compensador Síncrono](syncMotor), [Motor de Indução](indMotor).

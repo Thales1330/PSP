@@ -16,10 +16,19 @@ module.exports = {
 		},
 	],
     'Editor de Elementos de Controle': [
-	'doc2'
+	'controlEditor',
+		{
+			type: 'category',
+			label: 'Elementos de Controle',
+			items: ['io', 'transferFunction'],
+		},
 	],
     'Simulações': [
-		'powerFlow'
+		'powerFlow',
+		'fault',
+		'harmonics',
+		'stability',
+		'simulationConfig'
 	],
   },
 };
