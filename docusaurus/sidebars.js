@@ -12,14 +12,14 @@ module.exports = {
 		{
 			type: 'category',
 			label: 'Elementos de Potência',
-			items: ['doc2', 'doc3'],
+			items: ['bus', 'line', 'transformer', 'load', 'capacitor', 'inductor', 'harmSource', 'syncGenerator', 'syncMotor', 'indMotor'],
 		},
 	],
     'Editor de Elementos de Controle': [
 	'doc2'
 	],
     'Simulações': [
-		'doc2'
+		'powerFlow'
 	],
   },
 };

@@ -3,14 +3,15 @@ id: installation
 title: Instalação
 sidebar_label: Instalação
 ---
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
 ## Download
 
 O download do PSP-UFU pode ser realizado pelo ["*last release*" do repositório do PSP-UFU no GitHub](https://github.com/Thales1330/PSP/releases/latest).
 
 Ao acessar ao link, role a página até encontrar os *Assets*:
 
-![Download][download]
-[download]: /PSP/images/download.png 'Assets download'
+<img src={useBaseUrl("images/download.png")} alt="Assets download" title="Informações da Figura" />
 
 Como o PSP-UFU é um *software* multiplataforma, você deve baixar o arquivo correto:
 - Para o sistema operacional [Windows](installation#windows) baixe os arquivos *.exe* (recomendado) ou *.zip*.

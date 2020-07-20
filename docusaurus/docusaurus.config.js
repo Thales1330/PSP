@@ -1,3 +1,6 @@
+const remarkMath = require("remark-math");
+const rehypeKatex = require("rehype-katex");
+
 module.exports = {
   title: 'PSP-UFU',
   tagline: 'Power System Platform of Federal University of Uberlândia',
@@ -80,7 +83,9 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/Thales1330/PSP/tree/master/docs',
+            'https://github.com/Thales1330/PSP/tree/master/docusaurus',
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [[rehypeKatex, {strict: false}]],
         },
         blog: {
           showReadingTime: true,
