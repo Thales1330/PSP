@@ -11,11 +11,12 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 Nota - Em muitos casos, o barramento consiste em uma barra. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-12-30).
 
+## Barramento no PSP-UFU
 O elemento **barramento**, ou simplesmente **barra**, é um conector ou nó do diagrama unifilar do PSP-UFU. Essa barra pode representar um PAC (Ponto de Acoplamento Comum), um poste de distribuição, uma subestação, um barramento da subestação, entre inúmeros outros tipos pontos de análise e conexão entre elementos.
 
 ## Formulário de edição dos barramentos
 :::caution Atenção!
-O barramento deve ser o primeiro elemento elétrico a ser inserido no diagrama de potência, uma vez que os demais componentes de potência são conectados nele.
+O barramento deve ser o **primeiro elemento elétrico a ser inserido no diagrama de potência**, uma vez que os demais componentes de potência são conectados nele.
 :::
 
 A imagem abaixo apresenta o formulário de inserção/alteração de dados das barras:
@@ -25,7 +26,7 @@ A imagem abaixo apresenta o formulário de inserção/alteração de dados das b
 Esse formulário é subdividido em quatro contextos distintos:
 - **Geral**: no qual são inseridas informações gerais da barra e informações do fluxo de carga;
 - **Falta**: local onde o curto-circuito *shunt* deve ser inserido;
-- **Estabilidade**: contendo opções de visualização de dados da barra em gráficos no tempo e inserção de faltas trifásicas no cálculo de estabilidade transitória.
+- **Estabilidade**: contendo opções de visualização de dados da barra em gráficos no tempo e inserção de faltas trifásicas no cálculo de estabilidade transitória;
 - **Qualidade de energia**: contém a opção de de visualização da impedância harmônica vista pela barra.
 
 ---

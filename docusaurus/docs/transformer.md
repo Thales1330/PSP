@@ -10,6 +10,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 >Aparelho estático com dois ou mais enrolamentos que, por indução eletromagnética, transforma um sistema de tensão e corrente alternada em outro sistema de tensão e corrente geralmente de valores diferentes e na mesma frequência com o objetivo de transmitir energia elétrica. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=421-01-01).
 
+## Transformador no PSP-UFU
 Transformadores com quaisquer conexões e defasagens entre as tensões primárias e secundárias podem ser inseridos no PSP-UFU. Para isso, os transformadores devem ser modelados representando seu tape ($t$) e defasagem ($\phi$), utilizando um transformador ideal de relação de transformação $\overline{t}:1$ em série com sua impedância ($\overline{y}_T = r_T + jx_T$), em que $\overline{t}$ é um número complexo ($t\angle\phi$)
 
 :::caution Atenção
@@ -50,6 +51,29 @@ Assim como nas [linhas](line), o transformador de dois enrolamentos deve ser ins
 A primeira barra selecionada será o lado **primário**, o qual é indicado por um círculo. Para alterar o lado primário após a inserção basta desconectar os nós dos transformadores e reconectá-los alternando as barras, utilizando as [ferramentas CAD](cadTools#conexão-e-desconexão-de-elemetos-na-barra).
 :::
 
+### Transformadores no estudo de curto-circuito
+Da mesma forma que no estudo de fluxo de carga, a representação dos elementos do sistema para o estudo de curto-circuito é realizada por meio de circuitos equivalentes inseridos na matriz admitância de barras. Nas [faltas desbalanceadas](fault) é necessário formar três matrizes admitância de sequência: positiva, negativa e zero.
+
+A matriz admitância de sequência positiva é construída da mesma forma que os estudos de fluxo de carga. Na sequência negativa o ângulo de defasagem entre tensões primária e secundária ($\phi$) deve ser invertido, uma vez que os fasores da sequência negativa **são deslocados na direção oposta**. Com isso, a matriz que representa as admitâncias da equação anterior deve ser substituída pela seguinte expressão:
+
+$$
+\begin{bmatrix}
+\overline{Y}_{ii} & \overline{Y}_{ij}\\
+\overline{Y}_{ji} & \overline{Y}_{jj}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\displaystyle \frac{\overline{y}_T}{t^2} & -\displaystyle \frac{\overline{y}_T}{\overline{t}}\\
+-\displaystyle \frac{\overline{y}_T}{\overline{t}^*} & \overline{y}_T
+\end{bmatrix}
+$$
+
+A impedância de sequência negativa nos transformadores deve ser tratada de maneira específica devido aos diferentes tipos de conexão. Na figura abaixo são mostrados os circuitos equivalentes para cada tipo de conexão de transformadores de dois enrolamentos. As setas indicam os caminhos possíveis para circulação da corrente de sequência zero.
+
+<img src={useBaseUrl("images/seqZeroTrafo.svg")} alt="Circuitos equivalentes de sequência zero dos transformadores" title="Circuitos equivalentes de sequência zero dos transformadores" />
+
+Para os transformadores com conexão estrela aterrado, se a ligação do neutro para a terra apresentar uma impedância $\overline{z}_n$, o circuito equivalente de sequência zero deve ter impedância de $3\overline{z}_n$ em série com a resistência e reatância equivalentes do transformador.
+
 ## Formulário de edição dos transformadores
 
 A imagem abaixo apresenta o formulário de inserção/alteração de dados dos transformadores:
@@ -58,9 +82,9 @@ A imagem abaixo apresenta o formulário de inserção/alteração de dados dos t
 
 Esse formulário é subdividido em dois contextos distintos:
 - **Geral**: no qual são inseridas informações gerais dos transformadores, informações do fluxo de carga, sua conexão e defasagem;
-- **Falta**: local onde as impedâncias de sequência zero e impedâncias de aterramento são inseridas;
+- **Falta**: local onde as impedâncias de sequência zero e impedâncias de aterramento são inseridas.
 
-Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior direita do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
+Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
 
 <img src={useBaseUrl("images/trafoSw.png")} alt="Formulário de chaveamento do transformador" title="Formulário de chaveamento do transformador" />
 
@@ -95,14 +119,14 @@ Conexão do transformador utilizada para cálculo das correntes de sequência ze
 
 As seguintes conexões estão disponíveis:
 1. $Y_{aterrado}-Y_{aterrado}$
-2. $Y-Y_{aterrado}$
-3. $Y_{aterrado}-Y$
-4. $Y-Y$
-5. $\Delta-Y_{aterrado}$
-6. $\Delta-Y$
-7. $Y_{aterrado}-\Delta$
-8. $Y-\Delta$
-9. $\Delta-\Delta$
+1. $Y-Y_{aterrado}$
+1. $Y_{aterrado}-Y$
+1. $Y-Y$
+1. $\Delta-Y_{aterrado}$
+1. $\Delta-Y$
+1. $Y_{aterrado}-\Delta$
+1. $Y-\Delta$
+1. $\Delta-\Delta$
 
 #### TAP
 Tape do transformador **em relação ao primário**.

@@ -10,6 +10,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 >Um meio de transmissão fabricado usado para transmitir energia eletromagnética entre dois pontos com um mínimo de radiação. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=704-02-02).
 
+## Linha no PSP-UFU
 As linhas no PSP-UFU são modelos $\pi$ equilibradas. Podem ser utilizadas como linhas de transmissão e distribuição de sistemas elétricos de potência.
 
 A figura abaixo mostra o modelo $\pi$ implementado no PSP-UFU:
@@ -31,6 +32,10 @@ A linha pode ser inseridas com pontos de ancoragem, ou "nós", para maior person
 A linha deve ser inserida entre duas barras de **mesma tensão nominal**. Caso você tente inseri-la entre barras de tensão diferentes, uma mensagem de erro será exibida.
 :::
 
+:::tip Dica
+Um arranjo série de uma [linha](line) sem as susceptâncias *shunt*, um [barramento](bus) e um [capacitor](capacitor) pode ser utilizado para fabricar um filtro passivo nos [estudos harmônicos](harmonics). Em versões futuras, um elemento de filtro passivo será implementado no PSP-UFU.
+:::
+
 ## Formulário de edição das linhas
 
 A imagem abaixo apresenta o formulário de inserção/alteração de dados das linhas de transmissão:
@@ -39,7 +44,7 @@ A imagem abaixo apresenta o formulário de inserção/alteração de dados das l
 
 Esse formulário é subdividido em dois contextos distintos:
 - **Geral**: no qual são inseridas informações gerais da linha e informações do fluxo de carga;
-- **Falta**: local onde as impedâncias de sequência zero são inseridas;
+- **Falta**: local onde as impedâncias de sequência zero são inseridas.
 
 :::note Nota
 Os parâmetros necessários para construção da linha segundo seu modelo $\pi$ são inseridos na aba Geral, utilizados para construção da matriz admitância de sequência positiva e negativa.
@@ -47,7 +52,7 @@ Os parâmetros necessários para construção da linha segundo seu modelo $\pi$ 
 Dados adicionais de impedâncias de sequência zero necessário para o cálculo de curtos-circuitos desbalanceados são editados na aba Falta, utilizados na construção da matriz admitância de sequência zero.
 :::
 
-Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior direita do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção da linha durante o estudo de [estabilidade](stability).
+Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção da linha durante o estudo de [estabilidade](stability).
 
 <img src={useBaseUrl("images/lineSw.png")} alt="Formulário de chaveamento da linha" title="Formulário de chaveamento da linha" />
 
