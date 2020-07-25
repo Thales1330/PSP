@@ -107,7 +107,7 @@ A tensão base é ignorada caso os dados inseridos estejam em $p.u.$
 :::
 
 #### Potência nominal
-Potência nominal da linha, inserida em MVA, kVA ou VA.
+Potência nominal do transformador, inserida em MVA, kVA ou VA.
 
 Esse campo é especialmente importante caso a opção "Utilizar a potência nominal como base" esteja marcada.
 

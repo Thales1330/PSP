@@ -156,6 +156,11 @@ Identificação do elemento elétrico. Podem ser inseridos quaisquer números de
 
 Todos os componentes de potência do PSP-UFU possuem esse campo.
 
+#### Potência nominal
+Potência nominal do gerador, inserida em MVA, kVA ou VA.
+
+Esse campo é especialmente importante caso a opção "Utilizar a potência nominal como base" esteja marcada.
+
 #### Potências ativa e reativa
 Potências ativa (inserida em W, kW, MW ou p.u.) e reativa (inserida em var, kvar, Mvar ou p.u.) do gerador.
 
@@ -236,4 +241,10 @@ O botão "Chaveamento" irá abrir um formulário, comum a vários outros element
 
 Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
 
-
+## Referências
+1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6
+2. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286
+3. KUNDUR, P. Power System Stability and Control. McGraw-Hill, New York, 1994.
+4. DOMMEL, H. W.; SATO, N. Fast Transient Stability Solutions. IEEE Transactions on Power Aparatus and Systems, v. PAS-91, n. 4, jul 1972, p. 1643-1650. doi: https://doi.org/10.1109/TPAS.1972.293341
+5. IEEE Std 1110-2002 IEEE Guide for Synchronous Generator Modeling Practices and Applications in Power System Stability Analyses. IEEE, New York, nov. 2003. doi: https://doi.org/10.1109/IEEESTD.2003.94408
+6. KIMBARK, E. W. Power System Stability: Volume III – Synchronous Machine. New York: Wiley-IEEE Press, 1995.

@@ -73,9 +73,9 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Thales Lima Oliveira. Built with Docusaurus.`,
     },
 	algolia: {
-      apiKey: 'api-key',
-      indexName: 'index-name',
-      appId: 'app-id', // Optional, if you run the DocSearch crawler on your own
+      apiKey: '2057c3eff4d2d1cb763e214020ce866d',
+      indexName: 'docs/',
+      //appId: 'app-id', // Optional, if you run the DocSearch crawler on your own
       algoliaOptions: {}, // Optional, if provided by Algolia
     },
   },
@@ -102,6 +102,11 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        sitemap: {
+            cacheTime: 600 * 1000, // 600 sec - cache purge period
+            changefreq: 'weekly',
+            priority: 0.5,
+		},
       },
     ],
   ],
