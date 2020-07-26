@@ -38,7 +38,7 @@ Caso o limite de potência reativa seja excedido, o programa automaticamente tra
 ### Gerador Síncrono no estudo de curto-circuito
 Enquanto os geradores no estudo de fluxo de carga são modelados somente por correntes injetadas nas barras, para o curto-circuito utiliza-se uma tensão atrás de uma impedância. A figura abaixo mostra o caminho da corrente e o circuito equivalente de cada sequência nos geradores.
 
-<img src={useBaseUrl("images/sycGeneratorSeq.svg")} alt="Caminho das correntes e circuito equivalente: (a) sequência positiva; (b) sequência negativa; (c) sequência zero" title="Caminho das correntes e circuito equivalente: (a) sequência positiva; (b) sequência negativa; (c) sequência zero" />
+<div><center><img src={useBaseUrl("images/sycGeneratorSeq.svg")} alt="Caminho das correntes e circuito equivalente: (a) sequência positiva; (b) sequência negativa; (c) sequência zero" title="Caminho das correntes e circuito equivalente: (a) sequência positiva; (b) sequência negativa; (c) sequência zero" /></center></div>
 
 As tensões geradas são somente de sequência positiva, uma vez que o gerador fornece sempre tensões trifásicas equilibradas. Portanto a rede de sequência positiva é composta de uma tensão pré-falta atrás de uma impedância de sequência positiva. As redes de sequência negativa e zero não contêm forças eletromotrizes, porém incluem as impedâncias do gerador de sequência negativa e zero.
 
@@ -100,19 +100,19 @@ Na sequência são apresentados tais modelos, incluídos os efeitos da saturaç�
 - **Modelo 1**: Corresponde a uma tensão constante atrás de uma reatância transitória de eixo direto ($x_{d}'$), não exigindo equações diferenciais;
 - **Modelo 2**: São representados os efeitos transitórios de eixo direto, sendo necessária a solução de uma equação diferencial ($\frac{dE_{q}'}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
 
-<img src={useBaseUrl("images/model2SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 2 das máquinas síncronas" title="Diagrama de blocos do Modelo 2 das máquinas síncronas" />
+<div><center><img src={useBaseUrl("images/model2SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 2 das máquinas síncronas" title="Diagrama de blocos do Modelo 2 das máquinas síncronas" /></center></div>
 
 - **Modelo 3**: São representados os efeitos transitórios de eixo direto e em quadratura, exigindo duas equações diferenciais ($\frac{dE_{q}'}{dt}$ e $\frac{dE_{d}'}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
 
-<img src={useBaseUrl("images/model3SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 3 das máquinas síncronas" title="Diagrama de blocos do Modelo 3 das máquinas síncronas" />
+<div><center><img src={useBaseUrl("images/model3SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 3 das máquinas síncronas" title="Diagrama de blocos do Modelo 3 das máquinas síncronas" /></center></div>
 
 - **Modelo 4**: São representados os efeitos subtransitórios de eixo direto e em quadratura, sendo necessária a solução de três equações diferenciais ($\frac{dE_{q}'}{dt}$, $\frac{dE_{q}''}{dt}$ e $\frac{dE_{d}''}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
 
-<img src={useBaseUrl("images/model4SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 4 das máquinas síncronas" title="Diagrama de blocos do Modelo 4 das máquinas síncronas" />
+<div><center><img src={useBaseUrl("images/model4SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 4 das máquinas síncronas" title="Diagrama de blocos do Modelo 4 das máquinas síncronas" /></center></div>
 
 - **Modelo 5**: São representados os efeitos subtransitórios de eixo direto e em quadratura, sendo necessária a solução de quatro equações diferenciais ($\frac{dE_{q}'}{dt}$, $\frac{dE_{d}'}{dt}$, $\frac{dE_{q}''}{dt}$ e $\frac{dE_{d}''}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
 
-<img src={useBaseUrl("images/model5SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 4 das máquinas síncronas" title="Diagrama de blocos do Modelo 4 das máquinas síncronas" />
+<div><center><img src={useBaseUrl("images/model5SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 4 das máquinas síncronas" title="Diagrama de blocos do Modelo 4 das máquinas síncronas" /></center></div>
 
 :::note Nota
 Em todos os modelos as equações diferenciais mecânicas são solucionadas.
@@ -134,19 +134,18 @@ $n$	é o número de máquinas síncronas **conectadas** no sistema.
 
 A aplicação do COI resulta em dados de saída, como o ângulo do rotor, mais fáceis de serem analisados. Na implementação realizada no programa a utilização ou não desse recurso é opcional e pode ser [definida pelo usuário](simulationConfig).
 
-
 ## Formulário de edição dos geradores síncronos
 A imagem abaixo apresenta o formulário de inserção/alteração de dados dos geradores síncronos:
 
-<img src={useBaseUrl("images/syncGeneratorForm.png")} alt="Formulário dos geradores síncronos no PSP-UFU" title="Formulário dos geradores síncronos no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/syncGeneratorForm.png")} alt="Formulário dos geradores síncronos no PSP-UFU" title="Formulário dos geradores síncronos no PSP-UFU" /></center></div>
 
 Um segundo pelos dados de estabilidade, como mostra a figura abaixo, acessado ao clicar no botão "Estabilidade" do formulário principal. Nele é possível também acessar aos controles das máquinas síncronas manipulados pelo [editor de controle](controlEditor).
 
-<img src={useBaseUrl("images/syncGeneratorStabForm.png")} alt="Formulário de estabilidade dos geradores síncronos no PSP-UFU" title="Formulário de estabilidade dos geradores síncronos no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/syncGeneratorStabForm.png")} alt="Formulário de estabilidade dos geradores síncronos no PSP-UFU" title="Formulário de estabilidade dos geradores síncronos no PSP-UFU" /></center></div>
 
 No formulário de estabilidade pode ser observado o botão "Chaveamento" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do gerador durante o estudo de [estabilidade](stability).
 
-<img src={useBaseUrl("images/syncGeneratorSw.png")} alt="Formulário de chaveamento do gerador síncrono" title="Formulário de chaveamento do gerador síncrono" />
+<div><center><img src={useBaseUrl("images/syncGeneratorSw.png")} alt="Formulário de chaveamento do gerador síncrono" title="Formulário de chaveamento do gerador síncrono" /></center></div>
 
 ---
 ### Geral

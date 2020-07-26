@@ -28,7 +28,7 @@ Não inclua esse elemento para os estudos de [estabilidade](stability). Versões
 ## Formulário de edição dos compensadores síncronos
 A imagem abaixo apresenta o formulário de inserção/alteração de dados dos compensadores síncronos:
 
-<img src={useBaseUrl("images/syncMotorForm.png")} alt="Formulário dos compensadores síncronos no PSP-UFU" title="Formulário dos compensadores síncronos no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/syncMotorForm.png")} alt="Formulário dos compensadores síncronos no PSP-UFU" title="Formulário dos compensadores síncronos no PSP-UFU" /></center></div>
 
 ---
 ### Geral

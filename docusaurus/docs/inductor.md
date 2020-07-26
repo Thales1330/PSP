@@ -7,7 +7,6 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-## Capacitor no PSP-UFU
 >Um reator destinado à conexão de derivação em uma rede para compensar a corrente capacitiva. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=421-01-03).
 
@@ -19,11 +18,11 @@ Os capacitores e reatores exigem somente sua potência reativa como parâmetro. 
 ## Formulário de edição dos indutores
 A imagem abaixo apresenta o formulário de inserção/alteração de dados dos indutores:
 
-<img src={useBaseUrl("images/indForm.png")} alt="Formulário dos indutores no PSP-UFU" title="Formulário dos indutores no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/indForm.png")} alt="Formulário dos indutores no PSP-UFU" title="Formulário dos indutores no PSP-UFU" /></center></div>
 
 Além do único contexto geral, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do indutor durante o estudo de [estabilidade](stability).
 
-<img src={useBaseUrl("images/indSw.png")} alt="Formulário de chaveamento do indutor" title="Formulário de chaveamento do indutor" />
+<div><center><img src={useBaseUrl("images/indSw.png")} alt="Formulário de chaveamento do indutor" title="Formulário de chaveamento do indutor" /></center></div>
 
 ---
 ### Geral

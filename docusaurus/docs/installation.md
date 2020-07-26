@@ -11,7 +11,7 @@ O download do PSP-UFU pode ser realizado pelo ["*last release*" do repositório 
 
 Ao acessar ao link, role a página até encontrar os *Assets*:
 
-<img src={useBaseUrl("images/download.png")} alt="Assets download" title="Informações da Figura" />
+<div><center><img src={useBaseUrl("images/download.png")} alt="Assets download" title="Informações da Figura" /></center></div>
 
 Como o PSP-UFU é um *software* multiplataforma, você deve baixar o arquivo correto:
 - Para o sistema operacional [Windows](installation#windows) baixe os arquivos *.exe* (recomendado) ou *.zip*.

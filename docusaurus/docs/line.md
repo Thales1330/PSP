@@ -15,7 +15,7 @@ As linhas no PSP-UFU são modelos $\pi$ equilibradas. Podem ser utilizadas como 
 
 A figura abaixo mostra o modelo $\pi$ implementado no PSP-UFU:
 
-<img src={useBaseUrl("images/lineModel.svg")} alt="Modelo PI da linha" title="Modelo PI da linha" />
+<div><center><img src={useBaseUrl("images/lineModel.svg")} alt="Modelo PI da linha" title="Modelo PI da linha" /></center></div>
 
 Em que:
 - $\bold{r_L}$	é a resistência da linha;
@@ -40,7 +40,7 @@ Um arranjo série de uma [linha](line) sem as susceptâncias *shunt*, um [barram
 
 A imagem abaixo apresenta o formulário de inserção/alteração de dados das linhas de transmissão:
 
-<img src={useBaseUrl("images/lineForm.png")} alt="Formulário das linhas no PSP-UFU" title="Formulário das linhas no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/lineForm.png")} alt="Formulário das linhas no PSP-UFU" title="Formulário das linhas no PSP-UFU" /></center></div>
 
 Esse formulário é subdividido em dois contextos distintos:
 - **Geral**: no qual são inseridas informações gerais da linha e informações do fluxo de carga;
@@ -54,7 +54,7 @@ Dados adicionais de impedâncias de sequência zero necessário para o cálculo 
 
 Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção da linha durante o estudo de [estabilidade](stability).
 
-<img src={useBaseUrl("images/lineSw.png")} alt="Formulário de chaveamento da linha" title="Formulário de chaveamento da linha" />
+<div><center><img src={useBaseUrl("images/lineSw.png")} alt="Formulário de chaveamento da linha" title="Formulário de chaveamento da linha" /></center></div>
 
 ---
 ### Geral

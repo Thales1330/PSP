@@ -7,7 +7,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-> (*Fonte de perturbação harmônica*) Parte do sistema elétrico de potência ou das instalações a ele conectadas, que causa distorção harmônica da forma de onda da corrente e / ou tensão. [*tradução livre* - IEC 60050](
+> (**Fonte de perturbação harmônica**) Parte do sistema elétrico de potência ou das instalações a ele conectadas, que causa distorção harmônica da forma de onda da corrente e / ou tensão. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=614-01-16).
 
 ## Fonte de corrente harmônica no PSP-UFU
@@ -20,7 +20,7 @@ A presença da fonte de corrente harmônica **não é considerada** nos estudos 
 ## Formulário de edição das fontes de corrente harmônica
 A imagem abaixo apresenta o formulário de inserção/alteração de dados da fonte de corrente harmônica:
 
-<img src={useBaseUrl("images/harmSourceForm.png")} alt="Formulário dos indutores no PSP-UFU" title="Formulário dos indutores no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/harmSourceForm.png")} alt="Formulário dos indutores no PSP-UFU" title="Formulário dos indutores no PSP-UFU" /></center></div>
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).

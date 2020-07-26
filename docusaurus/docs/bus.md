@@ -21,7 +21,7 @@ O barramento deve ser o **primeiro elemento elétrico a ser inserido no diagrama
 
 A imagem abaixo apresenta o formulário de inserção/alteração de dados das barras:
 
-<img src={useBaseUrl("images/busForm.png")} alt="Formulário dos barramentos no PSP-UFU" title="Formulário dos barramentos no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/busForm.png")} alt="Formulário dos barramentos no PSP-UFU" title="Formulário dos barramentos no PSP-UFU" /></center></div>
 
 Esse formulário é subdividido em quatro contextos distintos:
 - **Geral**: no qual são inseridas informações gerais da barra e informações do fluxo de carga;

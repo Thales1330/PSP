@@ -20,7 +20,7 @@ module.exports = {
 		{
 			type: 'category',
 			label: 'Elementos de Controle',
-			items: ['io', 'transferFunction'],
+			items: ['io', 'transferFunction', 'sum', 'multiplier', 'divider', 'exponential', 'limiter', 'rateLimiter', 'const', 'gain', 'mathExpression'],
 		},
 	],
     'Simulações': [

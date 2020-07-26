@@ -22,11 +22,11 @@ Os capacitores e reatores exigem somente sua potência reativa como parâmetro. 
 ## Formulário de edição dos capacitores
 A imagem abaixo apresenta o formulário de inserção/alteração de dados dos capacitores:
 
-<img src={useBaseUrl("images/capacitorForm.png")} alt="Formulário dos capacitores no PSP-UFU" title="Formulário dos capacitores no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/capacitorForm.png")} alt="Formulário dos capacitores no PSP-UFU" title="Formulário dos capacitores no PSP-UFU" /></center></div>
 
 Além do único contexto geral, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do capacitor durante o estudo de [estabilidade](stability).
 
-<img src={useBaseUrl("images/swCapacitor.png")} alt="Formulário de chaveamento do capacitor" title="Formulário de chaveamento do capacitor" />
+<div><center><img src={useBaseUrl("images/swCapacitor.png")} alt="Formulário de chaveamento do capacitor" title="Formulário de chaveamento do capacitor" /></center></div>
 
 ---
 ### Geral

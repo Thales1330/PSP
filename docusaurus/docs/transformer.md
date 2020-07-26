@@ -19,7 +19,7 @@ O modelo utilizado no PSP-UFU **não considera** o ramo magnetizante ou impedân
 
 A figura abaixo mostra o modelo do transformador implementado no PSP-UFU:
 
-<img src={useBaseUrl("images/transformerModel.svg")} alt="Modelo PI da linha" title="Modelo PI da linha" />
+<div><center><img src={useBaseUrl("images/transformerModel.svg")} alt="Modelo PI da linha" title="Modelo PI da linha" /></center></div>
 
 Em que:
 - $\bold{r_T}$	é a resistência total do transformador;
@@ -70,7 +70,7 @@ $$
 
 A impedância de sequência negativa nos transformadores deve ser tratada de maneira específica devido aos diferentes tipos de conexão. Na figura abaixo são mostrados os circuitos equivalentes para cada tipo de conexão de transformadores de dois enrolamentos. As setas indicam os caminhos possíveis para circulação da corrente de sequência zero.
 
-<img src={useBaseUrl("images/seqZeroTrafo.svg")} alt="Circuitos equivalentes de sequência zero dos transformadores" title="Circuitos equivalentes de sequência zero dos transformadores" />
+<div><center><img src={useBaseUrl("images/seqZeroTrafo.svg")} alt="Circuitos equivalentes de sequência zero dos transformadores" title="Circuitos equivalentes de sequência zero dos transformadores" /></center></div>
 
 Para os transformadores com conexão estrela aterrado, se a ligação do neutro para a terra apresentar uma impedância $\overline{z}_n$, o circuito equivalente de sequência zero deve ter impedância de $3\overline{z}_n$ em série com a resistência e reatância equivalentes do transformador.
 
@@ -78,7 +78,7 @@ Para os transformadores com conexão estrela aterrado, se a ligação do neutro 
 
 A imagem abaixo apresenta o formulário de inserção/alteração de dados dos transformadores:
 
-<img src={useBaseUrl("images/trafoForm.png")} alt="Formulário dos transformadores no PSP-UFU" title="Formulário dos transformadores no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/trafoForm.png")} alt="Formulário dos transformadores no PSP-UFU" title="Formulário dos transformadores no PSP-UFU" /></center></div>
 
 Esse formulário é subdividido em dois contextos distintos:
 - **Geral**: no qual são inseridas informações gerais dos transformadores, informações do fluxo de carga, sua conexão e defasagem;
@@ -86,7 +86,7 @@ Esse formulário é subdividido em dois contextos distintos:
 
 Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
 
-<img src={useBaseUrl("images/trafoSw.png")} alt="Formulário de chaveamento do transformador" title="Formulário de chaveamento do transformador" />
+<div><center><img src={useBaseUrl("images/trafoSw.png")} alt="Formulário de chaveamento do transformador" title="Formulário de chaveamento do transformador" /></center></div>
 
 ---
 ### Geral

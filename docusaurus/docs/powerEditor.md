@@ -3,6 +3,18 @@ id: powerEditor
 title: Editor de Potência
 sidebar_label: Editor de Potência
 ---
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
+<link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
+
+O Editor de Elementos de Potência no PSP-UFU permite a inserção, manipulação e edição de elementos elétricos de potência por meio de um diagrama unifilar.
+
+>(**Diagrama unifilar**) Um diagrama do sistema no qual as linhas polifásicas são representados por sua única linha equivalente. [*tradução livre* - IEC 60050](
+http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=601-02-04).
+
+:::info Informação
+Todos os elementos inseridos pode ser manipulados e editados utilizando as [Ferramentas CAD](cadTools).
+:::
 
 ## Novo projeto
 A criação de um novo projeto é realizada clicando no item **Novo projeto** no [submenu **Arquivo**](mainScreen#menu-ribbon). Essa ação cria um sistema em branco na área de trabalho, local onde é possível inserir os elementos elétricos por meio do [submenu **Ferramentas**](mainScreen#menu-ribbon) ou pelas [teclas de atalho](powerEditor#teclas-de-atalho).
@@ -22,17 +34,12 @@ Abaixo são apresentados os elementos elétricos de potência que podem ser inse
 	- [Compensador Síncrono](syncMotor)
 	- [Motor de Indução](indMotor)
 
-
-![Elementos de potência][powerElements]
-[powerElements]: /PSP/images/powerElements.svg 'Elementos de potência'
-
-Todos os elementos inseridos pode ser manipulados e editados utilizando as [Ferramentas CAD](cadTools).
+<div><center><img src={useBaseUrl("images/powerElements.svg")} alt="Elementos de potência" title="Elementos de potência" /></center></div>
 
 ## Inserindo elementos
 Por meio do submenu **Ferramentas** pode-se inserir os elementos de potência, como é apresentado na imagem abaixo.
 
-![Adicionar elementos de potência][addPowerElements]
-[addPowerElements]: /PSP/images/addPowerElements.png 'Adicionar elementos de potência'
+<div><center><img src={useBaseUrl("images/addPowerElements.png")} alt="Adicionar elementos de potência" title="Adicionar elementos de potência" /></center></div>
 
 No caso de inserção de um barramento, o usuário deve apenas clicar na posição desejada, já para os outros componentes será solicitado que o usuário selecione em uma ou duas barras, o qual o novo componente será conectado.
 

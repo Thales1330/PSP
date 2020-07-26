@@ -66,14 +66,14 @@ Os valores de $k_{PZ}$, $k_{PI}$ e $k_{PP}$ representam a composição em imped�
 
 O comportamento das potências, retiradas de simulações no PSP-UFU, de cada parcela que compõe a carga ZIP são evidenciadas na figura abaixo.
 
-<img src={useBaseUrl("images/loadModel.svg")} alt="Comportamento da carga ZIP implementada no software: (a) curva de Tensão x Potência; (b) Curva de Tensão x Corrente" title="Comportamento da carga ZIP implementada no software: (a) curva de Tensão x Potência; (b) Curva de Tensão x Corrente" />
+<div><center><img src={useBaseUrl("images/loadModel.svg")} alt="Comportamento da carga ZIP implementada no software: (a) curva de Tensão x Potência; (b) Curva de Tensão x Corrente" title="Comportamento da carga ZIP implementada no software: (a) curva de Tensão x Potência; (b) Curva de Tensão x Corrente" /></center></div>
 
 Cargas de corrente e potência constantes possuem problemas em tensões muito baixas. À medida que a tensão diminui as correntes dessas cargas não reduz, como pode ser observado na figura acima, resultando em perda de precisão e problemas na convergência de processos iterativos. Para contornar esse problema utiliza-se uma tensão pré-definida pelo usuário ($V_{low}$), a qual as cargas (ou parcelas) de corrente e potência constantes são modeladas como impedância constante, resultando no comportamento de potência e corrente apresentados na figura acima.
 
 ## Formulário de edição das cargas
 A imagem abaixo apresenta o formulário de inserção/alteração de dados das cargas:
 
-<img src={useBaseUrl("images/loadForm.png")} alt="Formulário das cargas no PSP-UFU" title="Formulário das cargas no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/loadForm.png")} alt="Formulário das cargas no PSP-UFU" title="Formulário das cargas no PSP-UFU" /></center></div>
 
 Esse formulário é subdividido em dois contextos distintos:
 - **Geral**: no qual são inseridas informações gerais das cargas, informações e o tipo de carga no fluxo de carga;
@@ -81,7 +81,7 @@ Esse formulário é subdividido em dois contextos distintos:
 
 Além desses dois contextos, pode ser observado o botão "Chaveamento" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção da carga durante o estudo de [estabilidade](stability).
 
-<img src={useBaseUrl("images/loadSw.png")} alt="Formulário de chaveamento da carga" title="Formulário de chaveamento da carga" />
+<div><center><img src={useBaseUrl("images/loadSw.png")} alt="Formulário de chaveamento da carga" title="Formulário de chaveamento da carga" /></center></div>
 
 ---
 ### Geral

@@ -24,7 +24,7 @@ Ao marcar a opção "Calcular a potência reativa no fluxo de carga", devem ser 
 ### Motor de indução trifásico no cálculo do fluxo de carga
 A figura abaixo apresenta o modelo do motor de indução trifásico (MIT) de gaiola simples.
 
-<img src={useBaseUrl("images/indMotorModel.svg")} alt="Circuito equivalente do motor de indução" title="Circuito equivalente do motor de indução" />
+<div><center><img src={useBaseUrl("images/indMotorModel.svg")} alt="Circuito equivalente do motor de indução" title="Circuito equivalente do motor de indução" /></center></div>
 
 As potências ativa e reativa podem ser calculadas em relação às variáveis e parâmetros do motor em $p.u.$ como:
 
@@ -128,11 +128,11 @@ $$
 ## Formulário de edição dos geradores síncronos
 A imagem abaixo apresenta o formulário de inserção/alteração de dados dos motores de indução:
 
-<img src={useBaseUrl("images/indMotorForm.png")} alt="Formulário dos motores de indução no PSP-UFU" title="Formulário dos motores de indução no PSP-UFU" />
+<div><center><img src={useBaseUrl("images/indMotorForm.png")} alt="Formulário dos motores de indução no PSP-UFU" title="Formulário dos motores de indução no PSP-UFU" /></center></div>
 
 No formulário pode ser observado o botão "Chaveamento" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do motor durante o estudo de [estabilidade](stability).
 
-<img src={useBaseUrl("images/indMotorSw.png")} alt="Formulário de chaveamento do motores de indução" title="Formulário de chaveamento do motores de indução" />
+<div><center><img src={useBaseUrl("images/indMotorSw.png")} alt="Formulário de chaveamento do motores de indução" title="Formulário de chaveamento do motores de indução" /></center></div>
 
 ---
 ### Geral
