@@ -7,6 +7,9 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 >1. a potência ativa, reativa ou aparente gerada, transmitida ou distribuída dentro de um sistema;
 1. a potência demandada por um grupo de consumidores classificados de acordo com suas particularidades e características, por exemplo, carga de aquecimento, carga reativa diurna, etc. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=601-01-15).
@@ -83,8 +86,16 @@ Além desses dois contextos, pode ser observado o botão "Chaveamento" na parte 
 
 <div><center><img src={useBaseUrl("images/loadSw.png")} alt="Formulário de chaveamento da carga" title="Formulário de chaveamento da carga" /></center></div>
 
----
-### Geral
+<Tabs
+  groupId="load-tabs"
+  defaultValue="general"
+  values={[
+    {label: 'Geral', value: 'general'},
+    {label: 'Estabilidade', value: 'stability'},
+    {label: 'Botão Chaveamento', value: 'switching'},
+  ]
+}>
+<TabItem value="general">
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
@@ -100,8 +111,8 @@ Parcela de potência reativa da carga. Pode ser inserido em Mvar, kvar var ou $p
 #### Tipo de carga (fluxo de carga)
 Tipo da carga para o estudo de fluxo de carga, podendo ser selecionado dois tipos: Potência constante e Impedância constante. As cargas de potência constantes são inseridas nos vetores de potência e permanecem invariantes no cálculo, enquanto que para as cargas de impedância constante determina-se o valor da impedância utilizando a potência e tensão nominal, a qual é inserida na matriz admitância.
 
----
-### Estabilidade
+</TabItem>
+<TabItem value="stability">
 
 #### Imprimir dados
 Exibe os dados da carga nos gráficos no tempo.
@@ -124,8 +135,12 @@ Caso todas as barras possuírem o mesmo comportamento de carga ZIP, a parametriz
 #### Composição de potência ativa e reativa
 Valores da composição da carga ZIP, inseridas para potência ativa e reativa separadamente, em porcentagem. A soma da composição deve ser igual a 100%, caso contrário será exibida uma mensagem de erro ao usuário.
 
----
-### Botão Chaveamento
+</TabItem>
+<TabItem value="switching">
+
 O botão "Chaveamento" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
 
 Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+
+</TabItem>
+</Tabs>

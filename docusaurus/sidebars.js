@@ -28,7 +28,13 @@ module.exports = {
 		'fault',
 		'harmonics',
 		'stability',
-		'simulationConfig'
+		'simulationConfig',
+	],
+	'Visualização dos Dados' : [
+		'text',
+		'tabularReport',
+		'graphViewer',
+		'heatmap'
 	],
   },
 };

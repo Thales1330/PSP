@@ -7,6 +7,9 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 >Aparelho estático com dois ou mais enrolamentos que, por indução eletromagnética, transforma um sistema de tensão e corrente alternada em outro sistema de tensão e corrente geralmente de valores diferentes e na mesma frequência com o objetivo de transmitir energia elétrica. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=421-01-01).
 
@@ -88,8 +91,16 @@ Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte
 
 <div><center><img src={useBaseUrl("images/trafoSw.png")} alt="Formulário de chaveamento do transformador" title="Formulário de chaveamento do transformador" /></center></div>
 
----
-### Geral
+<Tabs
+  groupId="transformer-tabs"
+  defaultValue="general"
+  values={[
+    {label: 'Geral', value: 'general'},
+    {label: 'Falta', value: 'fault'},
+    {label: 'Botão Estabilidade', value: 'stability'},
+  ]
+}>
+<TabItem value="general">
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
@@ -141,8 +152,8 @@ Defasagem do transformador em relação ao primário, em graus. Esse valor indep
 #### Utilizar potência nominal como base
 Caso essa opção seja marcada, o programa irá utilizar a potência nominal do transformador como base para a conversão das unidades, caso contrário será usada a [potência base do sistema](simulationConfig).
 
----
-### Falta
+</TabItem>
+<TabItem value="fault">
 
 #### Impedância de sequência zero do transformador
 Esses parâmetros são necessários para o correto cálculo das correntes de [falta desbalanceadas](fault) (fase-fase, fase-fase-terra e fase-terra) e devem ser inseridos em $p.u.$
@@ -154,8 +165,12 @@ A não inserção desses dados acarretarão em resultados incorretos para [falta
 #### Impedâncias de aterramento
 As impedâncias de aterramento são somente utilizadas para conexão $Y_{aterrado}$ e devem ser inseridas em $p.u.$
 
----
-### Botão Estabilidade
+</TabItem>
+<TabItem value="stability">
+
 O botão "Estabilidade" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
 
 Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+
+</TabItem>
+</Tabs>

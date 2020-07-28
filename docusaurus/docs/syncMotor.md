@@ -7,6 +7,9 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 > Uma máquina síncrona operando sem carga mecânica e fornecendo ou absorvendo energia reativa. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-34-03).
 
@@ -30,8 +33,16 @@ A imagem abaixo apresenta o formulário de inserção/alteração de dados dos c
 
 <div><center><img src={useBaseUrl("images/syncMotorForm.png")} alt="Formulário dos compensadores síncronos no PSP-UFU" title="Formulário dos compensadores síncronos no PSP-UFU" /></center></div>
 
----
-### Geral
+
+<Tabs
+  groupId="syncMotor-tabs"
+  defaultValue="general"
+  values={[
+    {label: 'Geral', value: 'general'},
+    {label: 'Falta', value: 'fault'},
+  ]
+}>
+<TabItem value="general">
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
@@ -58,8 +69,8 @@ Limites de potência reativa máxima e mínima do compensador para controle de t
 #### Utilizar potência nominal como base
 Caso essa opção seja marcada, o programa irá utilizar a potência nominal do compensador como base para a conversão das unidades, inclusive aqueles no formulário de estabilidade, caso contrário será usada a [potência base do sistema](simulationConfig).
 
----
-### Falta
+</TabItem>
+<TabItem value="fault">
 
 #### Impedâncias de sequência
 Valores de resistência e reatância para cálculo das correntes de falta. São inseridos dados de sequência positiva, negativa e zero.
@@ -69,3 +80,6 @@ Valores utilizados para o cálculo das correntes de falta do tipo fase-terra e f
 
 #### Neutro aterrado
 Indica se o neutro do gerador é aterrado.
+
+</TabItem>
+</Tabs>

@@ -7,6 +7,9 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 >Condutor de baixa impedância ao qual vários circuitos elétricos podem ser conectados em pontos separados.
 Nota - Em muitos casos, o barramento consiste em uma barra. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-12-30).
@@ -29,8 +32,17 @@ Esse formulário é subdividido em quatro contextos distintos:
 - **Estabilidade**: contendo opções de visualização de dados da barra em gráficos no tempo e inserção de faltas trifásicas no cálculo de estabilidade transitória;
 - **Qualidade de energia**: contém a opção de de visualização da impedância harmônica vista pela barra.
 
----
-### Geral
+<Tabs
+  groupId="bus-tabs"
+  defaultValue="general"
+  values={[
+    {label: 'Geral', value: 'general'},
+    {label: 'Falta', value: 'fault'},
+    {label: 'Estabilidade', value: 'stability'},
+    {label: 'Qualidade de energia', value: 'powerQuality'},
+  ]
+}>
+<TabItem value="general">
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
@@ -54,8 +66,8 @@ O valor poderá ser inserido em p.u. ou em volts (ou kV caso a tensão nominal e
 #### Barra de referência
 Caracteriza o barramento como **barra de referência ([Barra de oscilação](powerFlow))**. Essa opção é somente válida caso esteja conectado um gerador síncrono, caso contrário uma mensagem de erro será exibida ao usuário ao realizar algum dos cálculos do programa.
 
----
-### Falta
+</TabItem>
+<TabItem value="fault">
 
 #### Inserir falta
 
@@ -78,8 +90,8 @@ Seleciona a fase em que se situa a falta (ou combinação delas no caso de falha
 #### Resistência e reatância de falta
 Representam a impedância da falta. Curtos-circuitos francos (sem impedância de falta) são representados inserindo valor zero em ambos os campos.
 
----
-### Estabilidade
+</TabItem>
+<TabItem value="stability">
 
 #### Imprimir dados
 Mostra os dados da barra editada no gráfico gerado pelo estudo de estabilidade transitória. Os seguintes dados são exibidos:
@@ -101,8 +113,11 @@ Duração da falta inserida ($\Delta t_{falta}$) no estudo de estabilidade. A fa
 #### Resistência e reatância de falta
 Impedância de falta nos estudos de estabilidade. Uma falta franca é representada pela inserção de um valor de impedância shunt de valor muito baixo ($j10^{-5}  p.u.$).
 
----
-### Qualidade de energia
+</TabItem>
+<TabItem value="powerQuality">
 
 #### Imprimir impedância harmônica da barra
 Imprime a impedância harmônica vista por essa barra referente ao estudo de [Resposta na Frequência](harmonics).
+
+</TabItem>
+</Tabs>

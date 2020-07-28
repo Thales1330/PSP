@@ -7,6 +7,9 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 > Uma máquina de corrente alternada na qual a frequência das tensões geradas e a velocidade da máquina estão em uma proporção constante. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-31-08).
 
@@ -118,6 +121,23 @@ Na sequência são apresentados tais modelos, incluídos os efeitos da saturaç�
 Em todos os modelos as equações diferenciais mecânicas são solucionadas.
 :::
 
+#### Saturação
+Para representar matematicamente o efeito da saturação nas equações das máquinas síncronas são introduzidos “fatores de saturação” que modificam as impedâncias do circuito equivalente, os quais dependem de uma reatância de dispersão efetiva, chamada de reatância de Potier ($x_p$).
+
+Tal reatância pode ser obtida por meio de ensaios (utilizando curvas de saturação de circuito aberto e carga de fator de potência zero) ou estimadas de forma aproximada por outros parâmetros da máquina. A reatância de dispersão ($x_l$), aqui substituída de forma aproximada por $x_p$, representa a parcela da reatância da máquina originados do fluxo magnético que percorrem o ar na maioria de seu caminho e, portanto, é independente da saturação.
+
+O método implementado no programa permite reproduzir a saturação em ambos os eixos (direto e em quadratura), diferindo entre si devido à divergência no tamanho do entreferro. É assumido que a soma vetorial das duas componentes do fluxo magnético saturado está em fase com a f.m.m. e proporcional à Tensão de Potier ($E_p$, a qual é a tensão atrás da reatância de Potier).
+
+Para isso, são utilizados internamente dois fatores de saturação, sendo um no eixo direto ($s_d$) e outro no eixo em quadratura ($s_q$). Esses fatores de saturação são **automaticamente calculados** a cada passo de integração e dependem da curva de saturação da máquina definida pelo [fator de saturação inserido no formulário de edição de dados](syncGenerator#fator-de-saturação).
+
+Portanto as reatâncias saturadas, que devem ser inseridas nas equações algébricas da máquina, são definidas pelas seguintes equações:
+$$
+x_{ds}=\frac{x_d-x_p}{s_d +x_p}\\
+x_{qs}=\frac{x_q-x_p}{s_q +x_p}
+$$
+
+Essas equações também são utilizadas para as reatâncias transitórias e subtransitórias, visto que o valor da reatância de Potier (ou de dispersão) não é alterada.
+
 #### Barramento infinito
 Algumas referências incluem um modelo sem equações diferenciais, em que a máquina é somente representada por uma tensão constante atrás de uma reatância transitória de eixo direto. Tal é utilizado na representação de um **barramento infinito**, o qual é normalmente constituído de um subsistema muito maior àquele simulado.
 
@@ -147,8 +167,17 @@ No formulário de estabilidade pode ser observado o botão "Chaveamento" na part
 
 <div><center><img src={useBaseUrl("images/syncGeneratorSw.png")} alt="Formulário de chaveamento do gerador síncrono" title="Formulário de chaveamento do gerador síncrono" /></center></div>
 
----
-### Geral
+<Tabs
+  groupId="syncGenerator-tabs"
+  defaultValue="general"
+  values={[
+    {label: 'Geral', value: 'general'},
+    {label: 'Falta', value: 'fault'},
+    {label: 'Botão Estabilidade', value: 'stability'},
+    {label: 'Botão Chaveamento', value: 'switching'},
+  ]
+}>
+<TabItem value="general">
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
@@ -175,8 +204,8 @@ Limites de potência reativa máxima e mínima do gerador para controle de tens�
 #### Utilizar potência nominal como base
 Caso essa opção seja marcada, o programa irá utilizar a potência nominal do gerador como base para a conversão das unidades, inclusive aqueles no formulário de estabilidade, caso contrário será usada a [potência base do sistema](simulationConfig).
 
----
-### Falta
+</TabItem>
+<TabItem value="fault">
 
 #### Impedâncias de sequência
 Valores de resistência e reatância para cálculo das correntes de falta. São inseridos dados de sequência positiva, negativa e zero.
@@ -187,8 +216,8 @@ Valores utilizados para o cálculo das correntes de falta do tipo fase-terra e f
 #### Neutro aterrado
 Indica se o neutro do gerador é aterrado.
 
----
-### Botão Estabilidade
+</TabItem>
+<TabItem value="stability">
 
 #### Imprimir dados da máquina síncrona
 Exibe os dados do gerador síncrono nos gráficos no tempo. Os seguintes dados são exibidos:
@@ -219,6 +248,13 @@ Representa o valor (em $p.u.$) de corrente de campo necessária para atingir 1,2
 Esse valor deve ser **maior que 1,2**, ou irá gerar erros na simulação. Caso não seja informado, a saturação da máquina não é considerada nos cálculos.
 :::
 
+#### Frequência de circuito aberto
+Indica a velocidade da máquina no caso de início da simulação desconectada da rede.
+
+:::info Informação
+Essa informação é particularmente útil na análise de conexão de geradores dessincronizados na rede.
+:::
+
 #### Reatâncias síncronas
 Valores de reatância síncrona (regime permanente) da máquina. Os valores de eixo direto e em quadratura devem ser iguais ou muito próximos para representação de uma máquina de polos lisos, enquanto para polos salientes esses valores são distintos.
 
@@ -234,11 +270,28 @@ De acordo com a quantidade de parâmetros inseridos é definido internamente pel
 #### Reatâncias e constantes de tempo subtransitórias
 Parâmetros subtransitórios da máquina síncrona em $p.u.$ ou segundos, representando em detalhes a presença de enrolamentos amortecedores. Assim como os dados transitórios, esses parâmetros definem o modelo da máquina.
 
----
-### Botão Chaveamento
+</TabItem>
+<TabItem value="switching">
+
 O botão "Chaveamento" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do gerador durante o estudo de [estabilidade](stability).
 
 Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+
+</TabItem>
+</Tabs>
+
+## Acesso aos controles da máquina síncrona
+Como já [mencionado anteriormente](syncGenerator#utilizar-avr-e-regulador-de-velocidade), os reguladores de velocidade e tensão da máquina síncrona podem ser acionados ou inibidos por meio das caixas de seleção "[Utilizar AVR e regulador de velocidade](syncGenerator#utilizar-avr-e-regulador-de-velocidade)". Ambas as opções irão acessar o [editor de controles](controlEditor).
+
+O acesso aos controles do **AVR** poderão então ser criados e manipulados ao clicar no botão "Editar AVR", assim como o **Regulador de Velocidade** é acessado no botão "Editar regulador de velocidade".
+
+:::caution Atenção!
+No PSP-UFU a opção de editar o **AVR** engloba mais que somente o controle de tensão da máquina. Nele **deve** ser inserida a malha de controle da máquina assim como a **excitatriz da máquina síncrona**. Outras estratégias de controle (opcionais), como PSS (*Power System Stabilizer*) e/ou controles de sobre e sub excitação, são também implementadas em conjunto.
+:::
+
+:::caution Atenção!
+Assim como no AVR, o **Regulador de Velocidade** engloba mais que a regulação primária da máquina. Nessa opção **deve** ser inserida ao menos a malha de controle da regulação primária de velocidade, assim como o **modelo da turbina**. Estratégias opcionais de controle da velocidade também são inseridas nessa opção.
+:::
 
 ## Referências
 1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6

@@ -7,6 +7,9 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 >Um dispositivo constituído essencialmente por dois eletrodos separados por um dielétrico. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=436-01-03).
 
@@ -28,8 +31,15 @@ Além do único contexto geral, pode ser observado o botão "Estabilidade" na pa
 
 <div><center><img src={useBaseUrl("images/swCapacitor.png")} alt="Formulário de chaveamento do capacitor" title="Formulário de chaveamento do capacitor" /></center></div>
 
----
-### Geral
+<Tabs
+  groupId="transformer-tabs"
+  defaultValue="general"
+  values={[
+    {label: 'Geral', value: 'general'},
+    {label: 'Botão Estabilidade', value: 'stability'},
+  ]
+}>
+<TabItem value="general">
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
@@ -39,8 +49,12 @@ Todos os componentes de potência do PSP-UFU possuem esse campo.
 #### Potência reativa
 Os capacitores e reatores exigem somente sua potência reativa como parâmetro, inserida em Mvar, kvar, var ou $p.u.$ (na base de potência do sistema). 
 
----
-### Botão Estabilidade
+</TabItem>
+<TabItem value="stability">
+
 O botão "Estabilidade" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
 
 Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+
+</TabItem>
+</Tabs>

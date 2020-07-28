@@ -7,6 +7,9 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 > Uma máquina assíncrona da qual apenas um enrolamento é energizado. [*tradução livre* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-31-10).
 
@@ -134,8 +137,16 @@ No formulário pode ser observado o botão "Chaveamento" na parte inferior esque
 
 <div><center><img src={useBaseUrl("images/indMotorSw.png")} alt="Formulário de chaveamento do motores de indução" title="Formulário de chaveamento do motores de indução" /></center></div>
 
----
-### Geral
+<Tabs
+  groupId="indMotor-tabs"
+  defaultValue="general"
+  values={[
+    {label: 'Geral', value: 'general'},
+    {label: 'Estabilidade', value: 'stability'},
+    {label: 'Botão Chaveamento', value: 'switching'},
+  ]
+}>
+<TabItem value="general">
 
 #### Nome
 Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
@@ -163,11 +174,11 @@ Caso essa opção não seja utilizada o motor será considerado uma [carga de po
 A não utilização dessa opção poderá gerar erros de regime permamente no estudo de [estabilidade](stability).
 :::
 
-Utilizar potência nominal como base
+#### Utilizar potência nominal como base
 Caso essa opção seja marcada, o programa irá utilizar a potência nominal do gerador como base para a conversão das unidades, inclusive aqueles no formulário de estabilidade, caso contrário será usada a potência base do sistema.
 
----
-### Estabilidade
+</TabItem>
+<TabItem value="stability">
 
 #### Imprimir dados da máquina de indução
 Exibe os dados do gerador síncrono nos gráficos no tempo. Os seguintes dados são exibidos:
@@ -209,11 +220,15 @@ $$
 A soma dos coeficientes ($a + b + c$) deve ser unitária.
 :::
 
----
-### Botão Chaveamento
+</TabItem>
+<TabItem value="switching">
+
 O botão "Chaveamento" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do gerador durante o estudo de [estabilidade](stability).
 
 Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+
+</TabItem>
+</Tabs>
 
 ## Referências
 1. SÁNCHEZ, J. C.; OLIVARES, T. I. A.; ORTIZ, G. R.; VEGA, D. R. Induction Motor Static Models for Power Flow and Voltage Stability Studies. In: IEEE Power and Energy Society General Meeting, 2012, San Diego. doi: https://doi.org/10.1109/PESGM.2012.6345618

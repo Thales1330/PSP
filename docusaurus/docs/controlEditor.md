@@ -15,6 +15,14 @@ O acesso ao editor é realizado por meio de dois botões presentes no [formulár
 - [Editar AVR](syncGenerator#utilizar-avr-e-regulador-de-velocidade)
 - [Editar regulador de velocidade](syncGenerator#utilizar-avr-e-regulador-de-velocidade)
 
+:::caution Atenção!
+No PSP-UFU a opção de editar o **AVR** engloba mais que somente o controle de tensão da máquina. Nele **deve** ser inserida a malha de controle da máquina assim como a **excitatriz da máquina síncrona**. Outras estratégias de controle (opcionais), como PSS (*Power System Stabilizer*) e/ou controles de sobre e sub excitação, são também implementadas em conjunto (como apresentado na figura anterior).
+:::
+
+:::caution Atenção!
+Assim como no AVR, o **Regulador de Velocidade** engloba mais que a regulação primária da máquina. Nessa opção **deve** ser inserida ao menos a malha de controle da regulação primária de velocidade, assim como o **modelo da turbina**. Estratégias opcionais de controle da velocidade também são inseridas nessa opção.
+:::
+
 ## Elementos de Controle
 O acesso aos elementos de controle é realizado em uma janela (removível e encaixável) por meio de ícones relacionados.
 
@@ -91,6 +99,8 @@ Nesse formulário é possível inserir o comportamento de **todas as entradas do
 	
 - **Passo de integração ($h$)**: Passo do método de integração Trapezoidal Implícito;
 - **Tempo de simulação ($t_f$)**: Tempo total de simulação.
+
+Após a simulação os resultados são exibidos no [visualizador de gráficos](graphViewer).
 
 :::caution Atenção!
 A mesma parametrização de entrada é aplicada em todos os blocos de [entrada](io) do sistema.
