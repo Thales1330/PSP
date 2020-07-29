@@ -62,6 +62,8 @@ Evite construir o circuito com o cálculo contínuo habilitado, uma vez que conf
 Para desabilitar o cálculo contínuo clique no botão **Desabilitar solução**.
 :::
 
+Os resultados do fluxo de carga são exibidos nos [elementos de texto vinculado](text), ao posicionar o mouse sobre os elementos e em [relatórios tabulares](tabularReport).
+
 ### Erros comuns na execução do fluxo de carga
 A seguir são apresentados os erros mais comuns relacionados ao fluxo de carga.
 
@@ -224,8 +226,8 @@ A manutenção da potência reativa dentro dos limites é realizada pela troca d
 A verificação de violação e troca de tipo de barra pode ser realizada a cada iteração ou ao final da convergência do cálculo. No PSP-UFU foi implementada a última estratégia, uma vez que separa os conceitos de cálculo e de verificação de limites, tornando mais fácil o desenvolvimento de novos métodos numéricos e limites. Nessa abordagem, ao ajustar o sistema para a nova situação não violadora o cálculo iterativo deve ser retomado até que obtenha novamente a convergência.
 
 ## Referências
-- MONTICELLI, A. J. Fluxo de Carga em Redes de Energia Elétrica. São Paulo: Edgar Blücher, 1983.
-- STEVENSON JR.; WILLIAN, D. Elementos de Análise de Sistemas de Potência. 2ª ed. São Paulo: McGraw-Hill, 1986.
-- MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6
-- ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286
-- TINNEY, W. F.; HART, C. E. Power Flow Solution by Newton’s Method. IEEE Transaction on Power Apparatus and Systems, v. PAS-86, n. 11, nov. 1967. doi: https://doi.org/10.1109/TPAS.1967.291823
+1. MONTICELLI, A. J. Fluxo de Carga em Redes de Energia Elétrica. São Paulo: Edgar Blücher, 1983.
+1. STEVENSON JR.; WILLIAN, D. Elementos de Análise de Sistemas de Potência. 2ª ed. São Paulo: McGraw-Hill, 1986.
+1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6
+1. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286
+1. TINNEY, W. F.; HART, C. E. Power Flow Solution by Newton’s Method. IEEE Transaction on Power Apparatus and Systems, v. PAS-86, n. 11, nov. 1967. doi: https://doi.org/10.1109/TPAS.1967.291823
