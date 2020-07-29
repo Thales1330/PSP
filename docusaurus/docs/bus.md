@@ -32,6 +32,8 @@ Esse formulário é subdividido em quatro contextos distintos:
 - **Estabilidade**: contendo opções de visualização de dados da barra em gráficos no tempo e inserção de faltas trifásicas no cálculo de estabilidade transitória;
 - **Qualidade de energia**: contém a opção de de visualização da impedância harmônica vista pela barra.
 
+---
+
 <Tabs
   groupId="bus-tabs"
   defaultValue="general"
@@ -121,3 +123,16 @@ Imprime a impedância harmônica vista por essa barra referente ao estudo de [Re
 
 </TabItem>
 </Tabs>
+
+---
+
+:::tip Dica
+Resumo de como definir o tipo de barra:
+- Para definir o barramento como sendo uma **[Barra PQ](powerFlow)**, as opções "Barra de referência" e "Tensão controlada" devem estar **desmarcadas**; 
+- Para definir o barramento como sendo uma **[Barra PV](powerFlow)**, deve-se **marcar somente** a opção "Tensão controlada", mantendo a opção "Barra de referência" desmarcada;
+- Para definir o barramento como sendo uma **[Barra de Referência](powerFlow)**, deve-se marcar a opção "Barra de referência". Caso a opção "Tensão controlada" esteja desmarcada será admitido um valor de tensão controlada de $1{,}0~p.u.$
+:::
+
+:::warning Cuidado!
+**O sistema deve possuir somente uma barra de referência**.
+:::
