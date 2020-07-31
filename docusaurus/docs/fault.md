@@ -112,7 +112,7 @@ Considerando a matriz quadrada da equação anterior sendo $\left[ \bold{A} \rig
 
 Da mesma forma que no estudo de fluxo de carga, a representação dos elementos do sistema para o estudo de curto-circuito é realizada por meio de circuitos equivalentes inseridos na matriz admitância de barras. Nas faltas assimétricas (F-T, F-F e F-F-T) é necessário formar três matrizes admitância de sequência: positiva, negativa e zero.
 
-:::note Nota
+:::info Informação
 As informações a respeito das particularidades dos modelos para o estudo de curto-circuito são apresentados individualmente nos [elementos de potência](powerEditor#editando-dados-elétricos).
 :::
 

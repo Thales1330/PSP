@@ -117,7 +117,7 @@ Na sequência são apresentados tais modelos, incluídos os efeitos da saturaç�
 
 <div><center><img src={useBaseUrl("images/model5SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 4 das máquinas síncronas" title="Diagrama de blocos do Modelo 4 das máquinas síncronas" /></center></div>
 
-:::note Nota
+:::info Informação
 Em todos os modelos as equações diferenciais mecânicas são solucionadas.
 :::
 

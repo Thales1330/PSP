@@ -1,6 +1,6 @@
 {
   "name": "psp-ufu",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
@@ -9,8 +9,8 @@
     "deploy": "docusaurus deploy"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.58",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.58",
+    "@docusaurus/core": "^2.0.0-alpha.60",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.60",
     "clsx": "^1.1.1",
     "galleria": "^1.6.1",
     "react": "^16.8.4",

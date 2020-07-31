@@ -36,7 +36,7 @@ O usuário deve sinalizar o tipo de bloco entre entrada e saída e, então, sele
 	- $x_n$ e $x_{n-1}$	é a variável no passo atual e anterior, respectivamente;
 	- $h$	é o passo de integração.
 	
-	:::note Nota
+	:::info Informação
 	A normalização é necessária para a correta utilização da razão de passo de controle, definida nas [configurações de simulação](simulationConfig).
 	:::
 - **Tensão de campo** (*saída: AVR*): Define a tensão aplicada ao campo na máquina síncrona, em $p.u.$ Utilizada como saída dos AVRs, controlando principalmente tensão no barramento conectado e/ou fator de potência da máquina;

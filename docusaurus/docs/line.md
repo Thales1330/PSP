@@ -49,7 +49,7 @@ Esse formulário é subdividido em dois contextos distintos:
 - **Geral**: no qual são inseridas informações gerais da linha e informações do fluxo de carga;
 - **Falta**: local onde as impedâncias de sequência zero são inseridas.
 
-:::note Nota
+:::info Informação
 Os parâmetros necessários para construção da linha segundo seu modelo $\pi$ são inseridos na aba Geral, utilizados para construção da matriz admitância de sequência positiva e negativa.
 
 Dados adicionais de impedâncias de sequência zero necessário para o cálculo de curtos-circuitos desbalanceados são editados na aba Falta, utilizados na construção da matriz admitância de sequência zero.

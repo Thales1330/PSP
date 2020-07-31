@@ -16,7 +16,7 @@ module.exports = {
         alt: 'PSP-UFU logo',
         src: 'img/logo.svg',
       },
-      links: [
+      items: [
         {
           to: 'docs/',
           activeBasePath: 'docs',
@@ -75,8 +75,7 @@ module.exports = {
 	algolia: {
       apiKey: '2057c3eff4d2d1cb763e214020ce866d',
       indexName: 'docs/',
-      //appId: 'app-id', // Optional, if you run the DocSearch crawler on your own
-      algoliaOptions: {}, // Optional, if provided by Algolia
+      searchParameters: {}, // Optional (if provided by Algolia)
     },
   },
   presets: [

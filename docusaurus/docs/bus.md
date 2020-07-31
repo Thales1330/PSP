@@ -33,7 +33,6 @@ Esse formulário é subdividido em quatro contextos distintos:
 - **Qualidade de energia**: contém a opção de de visualização da impedância harmônica vista pela barra.
 
 ---
-
 <Tabs
   groupId="bus-tabs"
   defaultValue="general"
