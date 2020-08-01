@@ -20,7 +20,18 @@ Outra aplicação importante é a atualização de seu valor ao aplicar a “sol
 Também pode-se utilizar os resultados apresentados por esses elementos juntamente com o diagrama unifilar na criação de relatórios do projeto.
 :::
 
-<div><center><img src={useBaseUrl("images/textExp.png")} alt="Exemplo de elemento de texto no PSP-UFU" title="Exemplo de elemento de texto no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/textExp.png")} alt="Exemplo do elemento de texto no PSP-UFU" title="Exemplo de elemento de texto no PSP-UFU" /></center></div>
+
+## Inserindo elementos de texto no PSP-UFU
+Por meio do submenu **Ferramentas** pode-se inserir os elementos de texto, como é apresentado na imagem abaixo.
+
+<div><center><img src={useBaseUrl("images/addTextElement.svg")} alt="Adicionar elementos de texto" title="Adicionar elementos de texto" /></center></div>
+
+Ao selecionar o botão "Texto" ou utilizar a **tecla de atalho "A"**, o usuário deve clicar na posição desejada da [área de trabalho](powerEditor). Com isso, será adicionado um elemento temporário com o valor "Texto". Para parametrizar esse elemento clique duas vezes sobre ele.
+
+:::caution Atenção
+O elemento de texto, assim como os [elementos de controle](controlEditor) não exibem automaticamente o formulário de edição de dados ao inseri-lo pela primeira vez.
+:::
 
 ## Formulário de edição de dados do elemento de texto
 A figura abaixo apresenta o formulário de edição de dados desse componente gráfico.

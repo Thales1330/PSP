@@ -31,7 +31,7 @@ Mantendo pressionado a tecla Control (Ctrl) do teclado pode-se manter seleções
 
 Para desmarcar todos os objetos basta clicar em uma área sem objetos.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/select.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/select.webm")} type="video/webm" />
 </video>
@@ -41,7 +41,7 @@ Um elemento poderá ser movido para qualquer local por meio da ação *drag-and-
 
 Ao habilitar o “modo mover”, movendo todos os componentes selecionados à medida que a posição do mouse é alterada. Para desabilitar esse modo basta pressionar a tecla Escape do teclado.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/move.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/move.webm")} type="video/webm" />
 </video>
@@ -55,7 +55,7 @@ O menu de contexto somente será exibido se o elemento estiver selecionado.
 
 Ao utilizar essa ferramenta os objetos irão girar 45º a partir do seu ponto de origem. Para atingir a angulação pretendida basta repetir o processo de rotação.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/rotate.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/rotate.webm")} type="video/webm" />
 </video>
@@ -67,7 +67,7 @@ A ferramenta arrastar possibilita mover todo o circuito **preservando as posiç�
 
 Para sair do “modo arrastar” basta pressionar a tecla Escape do teclado.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/drag.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/drag.webm")} type="video/webm" />
 </video>
@@ -75,7 +75,7 @@ Para sair do “modo arrastar” basta pressionar a tecla Escape do teclado.
 ### Zoom
 O zoom será aplicado ao utilizar o **scroll do mouse** para mais ou menos zoom. A ferramenta zoom irá aproximar ou distanciar o circuito a partir da posição do ponteiro do mouse na tela para encontrar objetos ou destaca-los.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/zoom.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/zoom.webm")} type="video/webm" />
 </video>
@@ -83,7 +83,7 @@ O zoom será aplicado ao utilizar o **scroll do mouse** para mais ou menos zoom.
 ### Encaixar
 A ferramenta encaixar irá mover o circuito e aplicar o zoom necessário para que todos os componentes da rede sejam exibidos na tela. Esta ferramenta pode ser acessada através do submenu “Ferramentas” ou pela combinação de teclas “Shift + F”.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/fit.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/fit.webm")} type="video/webm" />
 </video>
@@ -93,7 +93,7 @@ Duas ferramentas importantes durante o processo de criação da rede elétrica d
 
 Para copiar basta selecionar os elementos que se deseja duplicar e acessar a ferramenta no submenu “Ferramentas” ou pressionando a combinação das teclas “Ctrl + C”, então os dados do circuito serão copiados para a área de transferência. Ao copiar um circuito ele poderá ser colado no mesmo projeto ou em um projeto distinto, utilizando o mesmo submenu ou pressionando a combinação das teclas “Ctrl + V”.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/copyPaste.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/copyPaste.webm")} type="video/webm" />
 </video>
@@ -101,7 +101,7 @@ Para copiar basta selecionar os elementos que se deseja duplicar e acessar a fer
 ### Excluir
 Qualquer objeto poderá ser excluído do projeto por meio da ferramenta deletar, presente no menu Ribbon, pela tecla de atalho Delete ou pelo acesso ao menu de contexto clicando com o botão direito sobre o elemento selecionado.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/delete.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/delete.webm")} type="video/webm" />
 </video>
@@ -120,7 +120,7 @@ Após a sua inserção, novos nós podem ser anexados pelo menu de contexto aces
 
 Assim como nos barramentos, a alteração da posição dos nós é obtida clicando e arrastando o *pickbox* exibido ao posicionar o ponteiro do mouse sobre esse elemento selecionado.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/graphicPropsChange.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/graphicPropsChange.webm")} type="video/webm" />
 </video>
@@ -138,7 +138,7 @@ No caso de desconexão, o elemento será automaticamente removido da simulação
 Ao reconectar o elemento ao circuito, deve-se **atentar para estado do seu "disjuntor"**, indicado por um quadrado próximo ao seu nó de conexão. Um elemento reconectado volta ao circuito com seu disjuntor aberto (<Highlight color="#ff1919">vermelho</Highlight>), sendo necessário clicar sobre o mesmo a fim de inserir o elemento no circuito.
 :::
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/disconnect.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/disconnect.webm")} type="video/webm" />
 </video>

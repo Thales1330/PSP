@@ -49,7 +49,7 @@ Sempre que são inseridos novos elementos, um formulário de dados é exibido e 
 O primeiro elemento que a ser inserido no projeto **deve** ser um barramento. Os demais elementos elétricos devem ser conectados em uma ou mais barras.
 :::
 
-Além dos elementos de potência pode-se inserir os elementos de *texto vinculado*, os quais estão associados a uma grandeza que se deseja vizualizar diretamente na [Área de Trabalho](mainScreen#área-de-trabalho).
+Além dos elementos de potência pode-se inserir os elementos de *[texto vinculado](text)*, os quais estão associados a uma grandeza que se deseja vizualizar diretamente na [Área de Trabalho](mainScreen#área-de-trabalho).
 
 :::warning Cuidado!
 Ao inserir um barramento, a mesma irá acompanhar o ponteiro do mouse até que você clique na posição desejada. Para os demais elementos **deve-se clicar em uma mais barras** para exibir o elemento inserido.
@@ -57,7 +57,7 @@ Ao inserir um barramento, a mesma irá acompanhar o ponteiro do mouse até que v
 **Sempre fique atento às instruções da [Barra de Status](mainScreen#barra-de-status).**
 :::
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= "/PSP/videos/timelapseBuild.mp4" type="video/mp4" />
 </video>
 

@@ -188,9 +188,13 @@ OpenGLText* OpenGLText::GetCopy()
 {
     OpenGLText* copy = new OpenGLText();
     *copy = *this;
+    copy->m_textCoord = nullptr;
+    copy->Init();
+
     copy->m_textureID = nullptr;
     copy->m_bitmapSize = wxSize(0, 0);
     copy->m_bitmap = wxNullBitmap;
+
     copy->SetText(copy->m_text);
     return copy;
 }

@@ -10,6 +10,23 @@ module.exports = {
   organizationName: 'thales1330', // Usually your GitHub org/user name.
   projectName: 'PSP', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+      switchConfig: {
+        darkIcon: '🌙',
+        darkIconStyle: {
+          // Style object passed to inline CSS
+          // For more information about styling options visit: https://reactjs.org/docs/dom-elements.html#style
+          marginLeft: '2px',
+        },
+        lightIcon: '\u2600',
+        lightIconStyle: {
+          marginLeft: '1px',
+        },
+      },
+    },
     navbar: {
       title: 'PSP-UFU',
       logo: {

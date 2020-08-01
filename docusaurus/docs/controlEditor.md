@@ -30,7 +30,7 @@ Uma vez que o usuário clicar no ícone desejado, o elemento de controle acompan
 
 As ferramentas de manipulação e navegação, como arrastar, mover e excluir são [herdadas](cadTools) do [editor de elementos de potência](powerEditor), possuindo comportamento idêntico. A **edição dos dados** dos componentes inseridos também é realizada com **duplo clique** sobre o elemento inserido, exibindo um formulário de edição de dados.
 
-<video autoPlay loop muted controls>
+<video autoPlay loop muted playsInline controls>
   <source src= "/PSP/videos/timelapseControlEditor.mp4" type="video/mp4" />
   <source src= "/PSP/videos/timelapseControlEditor.webm" type="video/webm" />
 </video>

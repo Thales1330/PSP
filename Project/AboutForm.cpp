@@ -22,7 +22,7 @@ AboutForm::~AboutForm() {}
 void AboutForm::Init()
 {
     // Set program version. Format: (Alpha/Beta/Release) (YEAR)w(WEEK)(a/b/c/...)
-    m_staticTextVersion->SetLabel("2020w28a-beta");
+    m_staticTextVersion->SetLabel("2020w31a-beta");
     
     // Create developers table
     m_gridCredits->EnableGridLines(false);

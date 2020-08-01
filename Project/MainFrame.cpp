@@ -387,7 +387,10 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
     }
 }
 
-void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnPSPGuideClick(wxRibbonButtonBarEvent& event)
+{
+    wxLaunchDefaultBrowser("https://thales1330.github.io/PSP/docs/");
+}
 void MainFrame::OnPasteClick(wxRibbonButtonBarEvent& event) {}
 void MainFrame::OnPowerFlowClick(wxRibbonButtonBarEvent& event)
 {
@@ -459,8 +462,10 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
     if (workspace) {
         if (workspace->GetWorkspaceMode() != Workspace::WorkspaceMode::MODE_INSERT) {
             auto elementList = workspace->GetElementList();
+            auto textList = workspace->GetTextList();
             wxString statusBarText = "";
             bool newElement = false;
+            bool isText = false;
 
             switch (event.GetId()) {
             case ID_ADDMENU_BUS: {
@@ -541,10 +546,21 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
                 statusBarText = _("Insert Synchronous Condenser: Click on a buses, ESC to cancel.");
                 newElement = true;
             } break;
+            case ID_ADDMENU_TEXT: {
+                Text* newText = new Text();
+                textList.push_back(newText);
+                statusBarText = _("Insert Text: Click to insert, ESC to cancel.");
+                newElement = true;
+                isText = true;
+            } break;
             }
             if (newElement) {
                 workspace->SetElementList(elementList);
-                workspace->SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT);
+                workspace->SetTextList(textList);
+                if(!isText)
+                    workspace->SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT);
+                else
+                    workspace->SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT_TEXT);
                 workspace->SetStatusBarText(statusBarText);
                 workspace->Redraw();
             }
