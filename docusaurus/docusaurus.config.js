@@ -90,8 +90,8 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Thales Lima Oliveira. Built with Docusaurus.`,
     },
 	algolia: {
-      apiKey: '2057c3eff4d2d1cb763e214020ce866d',
-      indexName: 'docs/',
+      apiKey: '810abe1ba98dec3f185d77a2dcf491d5',
+      indexName: 'psp-ufu',
       searchParameters: {}, // Optional (if provided by Algolia)
     },
   },
