@@ -48,16 +48,16 @@ All detailed descriptions of the source-code can be found at [**Online Documenta
 
 ## [](#header-2)Overview
 
-![](docs/img/ss_1.png)
+![](docs/images/ss_1.png)
 
-![](docs/img/ss_1_1.png)
+![](docs/images/ss_1_1.png)
 
-![](docs/img/ss_1_2.png)
+![](docs/images/ss_1_2.png)
 
-![](docs/img/ss_2.png)
+![](docs/images/ss_2.png)
 
-![](docs/img/ss_3.png)
+![](docs/images/ss_3.png)
 
-![](docs/img/ss_5.png)
+![](docs/images/ss_5.png)
 
-![](docs/img/ss_4.png)
+![](docs/images/ss_4.png)
