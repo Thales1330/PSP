@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>PSP-UFU Blog</title>
+        <link>https://thales1330.github.io/blog</link>
+        <description>PSP-UFU Blog</description>
+        <lastBuildDate>Sat, 01 Aug 2020 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[2020w31a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2020/08/01/2020w31a-beta</link>
+            <guid>2020w31a-beta</guid>
+            <pubDate>Sat, 01 Aug 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[- 🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on GitHub or Twitter);]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2020w28a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2020/07/09/2020w28a-beta</link>
+            <guid>2020w28a-beta</guid>
+            <pubDate>Thu, 09 Jul 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[- 🔥 Voltage heatmap implemented (OpenGL enabled);]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2020w24a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2020/06/13/2020w24a-beta</link>
+            <guid>2020w24a-beta</guid>
+            <pubDate>Sat, 13 Jun 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[- ✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);]]></description>
+        </item>
+        <item>
+            <title><![CDATA[22019w44a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2019/11/01/2019w44a-beta</link>
+            <guid>22019w44a-beta</guid>
+            <pubDate>Fri, 01 Nov 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[- ✔️ Minor changes to 32bit MSW version for compatibility;]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2019w42a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2019/10/13/2019w42a-beta</link>
+            <guid>2019w42a-beta</guid>
+            <pubDate>Sun, 13 Oct 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[- 🔥 Harmonic study implemented;]]></description>
+        </item>
+    </channel>
+</rss>

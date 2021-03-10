@@ -21,7 +21,7 @@ module.exports = {
           // For more information about styling options visit: https://reactjs.org/docs/dom-elements.html#style
           marginLeft: '2px',
         },
-        lightIcon: '\u2600',
+        lightIcon: '☀',
         lightIconStyle: {
           marginLeft: '1px',
         },
@@ -42,8 +42,12 @@ module.exports = {
         },
         {to: 'blog', label: 'Changelog', position: 'left'},
         {
+          type: 'localeDropdown',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/Thales1330/PSP',
-          label: 'PSP-UFU Source Code',
+          label: 'GitHub',
           position: 'right',
         },
       ],
@@ -101,7 +105,7 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'aboutPSP',
+          // homePageId: 'aboutPSP',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
@@ -119,11 +123,23 @@ module.exports = {
           customCss: require.resolve('./src/css/custom.css'),
         },
         sitemap: {
-            cacheTime: 600 * 1000, // 600 sec - cache purge period
+            //cacheTime: 600 * 1000, // 600 sec - cache purge period
             changefreq: 'weekly',
             priority: 0.5,
 		},
       },
     ],
   ],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'pt'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+      },
+      pt: {
+        label: 'Português',
+      },
+    },
+  },
 };

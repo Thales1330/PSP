@@ -4,8 +4,8 @@
   <ShortName>PSP-UFU</ShortName>
   <Description>Search PSP-UFU</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://thales1330.github.io/img/favicon.ico</Image>
-  <Url type="text/html" method="get" template="https://thales1330.github.io/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://thales1330.github.io/opensearch.xml" />
-  <moz:SearchForm>https://thales1330.github.io</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://thales1330.github.io/PSP/img/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://thales1330.github.io/PSP/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://thales1330.github.io/PSP/opensearch.xml" />
+  <moz:SearchForm>https://thales1330.github.io/PSP/</moz:SearchForm>
 </OpenSearchDescription>

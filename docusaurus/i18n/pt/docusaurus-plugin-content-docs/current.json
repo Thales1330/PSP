@@ -1,0 +1,34 @@
+{
+  "version.label": {
+    "message": "Próximo",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Introduction": {
+    "message": "Introdução",
+    "description": "The label for category Introduction in sidebar docs"
+  },
+  "sidebar.docs.category.Power Element Editor": {
+    "message": "Editor de Elementos de Potência",
+    "description": "The label for category Power Element Editor in sidebar docs"
+  },
+  "sidebar.docs.category.Control Element Editor": {
+    "message": "Editor de Elementos de Controle",
+    "description": "The label for category Control Element Editor in sidebar docs"
+  },
+  "sidebar.docs.category.Simulations": {
+    "message": "Simulações",
+    "description": "The label for category Simulations in sidebar docs"
+  },
+  "sidebar.docs.category.Data Visualization": {
+    "message": "Visualização dos Dados",
+    "description": "The label for category Data Visualization in sidebar docs"
+  },
+  "sidebar.docs.category.Power Elements": {
+    "message": "Eelementos de Potência",
+    "description": "The label for category Power Elements in sidebar docs"
+  },
+  "sidebar.docs.category.Control Elements": {
+    "message": "Elementos de Controle",
+    "description": "The label for category Control Elements in sidebar docs"
+  }
+}

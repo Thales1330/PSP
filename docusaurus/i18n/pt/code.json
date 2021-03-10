@@ -1,0 +1,338 @@
+{
+  "Complete Platform": {
+    "message": "Plataforma Completa"
+  },
+  "theme.NotFound.title": {
+    "message": "Página não encontrada",
+    "description": "The title of the 404 page"
+  },
+  "theme.NotFound.p1": {
+    "message": "Não pudemos encontrar o que você estava procurando.",
+    "description": "The first paragraph of the 404 page"
+  },
+  "theme.NotFound.p2": {
+    "message": "Entre em contato com o proprietário do site que o vinculou ao URL original e informe-o que o link está quebrado.",
+    "description": "The 2nd paragraph of the 404 page"
+  },
+  "theme.AnnouncementBar.closeButtonAriaLabel": {
+    "message": "Fechar",
+    "description": "The ARIA label for close button of announcement bar"
+  },
+  "theme.blog.paginator.navAriaLabel": {
+    "message": "Blog list page navigation",
+    "description": "The ARIA label for the blog pagination"
+  },
+  "theme.blog.paginator.newerEntries": {
+    "message": "Newer Entries",
+    "description": "The label used to navigate to the newer blog posts page (previous page)"
+  },
+  "theme.blog.paginator.olderEntries": {
+    "message": "Older Entries",
+    "description": "The label used to navigate to the older blog posts page (next page)"
+  },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "One min read|{readingTime} min read",
+    "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.tags.tagsListLabel": {
+    "message": "Tags:",
+    "description": "The label alongside a tag list"
+  },
+  "theme.blog.post.readMore": {
+    "message": "Read More",
+    "description": "The label used in blog post item excerpts to link to full blog posts"
+  },
+  "theme.blog.post.paginator.navAriaLabel": {
+    "message": "Blog post page navigation",
+    "description": "The ARIA label for the blog posts pagination"
+  },
+  "theme.blog.post.paginator.newerPost": {
+    "message": "Newer Post",
+    "description": "The blog post button label to navigate to the newer/previous post"
+  },
+  "theme.blog.post.paginator.olderPost": {
+    "message": "Older Post",
+    "description": "The blog post button label to navigate to the older/next post"
+  },
+  "theme.tags.tagsPageTitle": {
+    "message": "Tags",
+    "description": "The title of the tag list page"
+  },
+  "theme.blog.post.plurals": {
+    "message": "One post|{count} posts",
+    "description": "Pluralized label for \"{count} posts\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.blog.tagTitle": {
+    "message": "{nPosts} tagged with \"{tagName}\"",
+    "description": "The title of the page for a blog tag"
+  },
+  "theme.tags.tagsPageLink": {
+    "message": "View All Tags",
+    "description": "The label of the link targeting the tag list page"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "Copy code to clipboard",
+    "description": "The ARIA label for copy code blocks button"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "Copied",
+    "description": "The copied button label on code blocks"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "Copy",
+    "description": "The copy button label on code blocks"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "Expand sidebar",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "Expand sidebar",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.docs.paginator.navAriaLabel": {
+    "message": "Docs pages navigation",
+    "description": "The ARIA label for the docs pagination"
+  },
+  "theme.docs.paginator.previous": {
+    "message": "Previous",
+    "description": "The label used to navigate to the previous doc"
+  },
+  "theme.docs.paginator.next": {
+    "message": "Next",
+    "description": "The label used to navigate to the next doc"
+  },
+  "theme.docs.sidebar.responsiveCloseButtonLabel": {
+    "message": "Close menu",
+    "description": "The ARIA label for close button of mobile doc sidebar"
+  },
+  "theme.docs.sidebar.responsiveOpenButtonLabel": {
+    "message": "Open menu",
+    "description": "The ARIA label for open button of mobile doc sidebar"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "Collapse sidebar",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "Collapse sidebar",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.versions.unreleasedVersionLabel": {
+    "message": "This is unreleased documentation for {siteTitle} {versionLabel} version.",
+    "description": "The label used to tell the user that he's browsing an unreleased doc version"
+  },
+  "theme.docs.versions.unmaintainedVersionLabel": {
+    "message": "This is documentation for {siteTitle} {versionLabel}, which is no longer actively maintained.",
+    "description": "The label used to tell the user that he's browsing an unmaintained doc version"
+  },
+  "theme.docs.versions.latestVersionSuggestionLabel": {
+    "message": "For up-to-date documentation, see the {latestVersionLink} ({versionLabel}).",
+    "description": "The label userd to tell the user that he's browsing an unmaintained doc version"
+  },
+  "theme.docs.versions.latestVersionLinkLabel": {
+    "message": "latest version",
+    "description": "The label used for the latest version suggestion link label"
+  },
+  "theme.common.editThisPage": {
+    "message": "Edit this page",
+    "description": "The link label to edit the current page"
+  },
+  "theme.common.headingLinkTitle": {
+    "message": "Direct link to heading",
+    "description": "Title for link to heading"
+  },
+  "theme.lastUpdated.atDate": {
+    "message": " on {date}",
+    "description": "The words used to describe on which date a page has been last updated"
+  },
+  "theme.lastUpdated.byUser": {
+    "message": " by {user}",
+    "description": "The words used to describe by who the page has been last updated"
+  },
+  "theme.lastUpdated.lastUpdatedAtBy": {
+    "message": "Last updated{atDate}{byUser}",
+    "description": "The sentence used to display when a page has been last updated, and by who"
+  },
+  "theme.common.skipToMainContent": {
+    "message": "Skip to main content",
+    "description": "The skip to content label used for accessibility, allowing to rapidly navigate to main content with keyboard tab/enter navigation"
+  },
+  "theme.SearchPage.documentsFound.plurals": {
+    "message": "One document found|{count} documents found",
+    "description": "Pluralized label for \"{count} documents found\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.SearchPage.existingResultsTitle": {
+    "message": "Search results for \"{query}\"",
+    "description": "The search page title for non-empty query"
+  },
+  "theme.SearchPage.emptyResultsTitle": {
+    "message": "Search the documentation",
+    "description": "The search page title for empty query"
+  },
+  "theme.SearchPage.inputPlaceholder": {
+    "message": "Type your search here",
+    "description": "The placeholder for search page input"
+  },
+  "theme.SearchPage.inputLabel": {
+    "message": "Search",
+    "description": "The ARIA label for search page input"
+  },
+  "theme.SearchPage.algoliaLabel": {
+    "message": "Search by Algolia",
+    "description": "The ARIA label for Algolia mention"
+  },
+  "theme.SearchPage.noResultsText": {
+    "message": "No results were found",
+    "description": "The paragraph for empty search result"
+  },
+  "theme.SearchPage.fetchingNewResults": {
+    "message": "Fetching new results...",
+    "description": "The paragraph for fetching new search results"
+  },
+  "theme.SearchBar.label": {
+    "message": "Search",
+    "description": "The ARIA label and placeholder for search button"
+  },
+  "Advanced CAD Features": {
+    "message": "Recursos CAD avançados"
+  },
+  "Easy Visualization": {
+    "message": "Fácil Vizualização"
+  },
+  "For the visualization of results, the program offers linked text elements in the main screen, voltage heatmap display, and also table and graph editors.": {
+    "message": "Para a visualização dos resultados, o programa oferece elementos de texto vinculados na tela principal, mapa de calor de tensão e também editores de tabelas e gráficos."
+  },
+  "Application": {
+    "message": "Aplicação"
+  },
+  "Power Flow": {
+    "message": "Fluxo de carga"
+  },
+  "Hybrid Newton-Gauss": {
+    "message": "Newton-Gauss Híbrido"
+  },
+  "Three-phase induction motors included": {
+    "message": "Motores de indução trifásicos inclusos"
+  },
+  "PSP-UFU is a": {
+    "message": "O PSP-UFU é um"
+  },
+  "cross-platform, multilingual, Free and Open-Source Software (FOSS)": {
+    "message": "Software Livre e de Código Aberto (FOSS), multiplataforma e multi-idiomas"
+  },
+  "with": {
+    "message": "com"
+  },
+  "advanced GUI (Graphical User Interface) features": {
+    "message": "recursos de GUI (Interface Gráfica do Usuário) avançados"
+  },
+  "CAD (Computer-Aided Design) tools": {
+    "message": "ferramentas CAD (Desenho Assistido por Computador)"
+  },
+  "for electrical power system studies": {
+    "message": "para estudos de sistemas elétricos de potência."
+  },
+  "The software allows the construction of any": {
+    "message": "O software permite a construção de qualquer"
+  },
+  "electric transmission network": {
+    "message": "rede de transmissão elétrica"
+  },
+  "and": {
+    "message": "e"
+  },
+  "control systems": {
+    "message": "sistemas de controle"
+  },
+  "through the deployment of visual elements": {
+    "message": "por meio da inserção de elementos visuais"
+  },
+  "The PSP-UFU aims to provide efficient computer simulation tools for": {
+    "message": "O PSP-UFU tem como objetivo fornecer ferramentas eficientes de simulação computacional para"
+  },
+  "research and education purposes": {
+    "message": "fins de pesquisa e educação"
+  },
+  "in addition to": {
+    "message": "além de"
+  },
+  "industrial applications": {
+    "message": "aplicações industriais"
+  },
+  "in electrical power systems": {
+    "message": "no sistema elétrico de potência"
+  },
+  "Short-Circuit calculation": {
+    "message": "Cálculod e curto-circuito"
+  },
+  "Balanced": {
+    "message": "Balanceado"
+  },
+  "Unbalanced": {
+    "message": "Desbalanceado"
+  },
+  "Short-Circuit power in all system buses": {
+    "message": "Potência de curto-circuito em todas as barras"
+  },
+  "Harmonics": {
+    "message": "Harmônicos"
+  },
+  "Harmonic voltages and THD (Total Harmonic Distortion) calculation": {
+    "message": "Cálculo das tensões harmônicas e DHT (Distorção Harmônica de Tensão)"
+  },
+  "Frequency scan": {
+    "message": "Varredura de frequências"
+  },
+  "Transient and Dynamic Stability": {
+    "message": "Estabilidade transitória e dinâmica"
+  },
+  "Several synchronous machine models automatically selected": {
+    "message": "Vários modelos de máquinas síncronas selecionados automaticamente"
+  },
+  "Three-phase induction motors": {
+    "message": "Motores de indução trifásicos"
+  },
+  "User-defined machine controls, exciters and prime moves created using block diagrams (Exciters, AVR, PSS, Hydro and Thermal turbines, Speed Governor, etc.)": {
+    "message": "Controles de máquina definidos pelo usuário, excitatrizes e reguladores de velocidade criados usando diagramas de blocos (Excitatrizes, AVR, PSS, turbinas hidrelétricas e térmicas, regulador de velocidade, etc.)"
+  },
+  "Download": {
+    "message": "Download"
+  },
+  "User Guide": {
+    "message": "Manual do Usuário"
+  },
+  "Samples": {
+    "message": "Amostras"
+  },
+  "Studies Performed": {
+    "message": "Estudos Realizados"
+  },
+  "Published Papers": {
+    "message": "Artigos Publicados"
+  },
+  "Further details can be found in the published papers:": {
+    "message": "Maiores detalhes podem ser encontrados nos artigos publicados:"
+  },
+  "Code Documentation": {
+    "message": "Documentação do Código-Fonte"
+  },
+  "All detailed descriptions of the source-code can be found at": {
+    "message": "Todas as descrições detalhadas do código-fonte podem ser encontradas na"
+  },
+  "Online Documentation": {
+    "message": "Documentação Online"
+  },
+  "generated by": {
+    "message": "gerada pelo"
+  },
+  "Screenshots": {
+    "message": "Screenshots"
+  },
+  "Your browser doesn’t support the this feature.": {
+    "message": "Seu navegador não oferece suporte para esse recurso."
+  },
+  "Power System Platform of Federal University of Uberlândia": {
+    "message": "Plataforma de Sistemas de Potência da Universidade Federal de Uberlândia"
+  }
+}

@@ -1,36 +1,36 @@
 module.exports = {
   docs: {
-    'Introdução': [
+    'Introduction': [
 		'aboutPSP',
 		'installation',
 		'mainScreen',
 		'cadTools'
 	],
 		
-    'Editor de Elementos de Potência': [
+    'Power Element Editor': [
 		'powerEditor',
 		{
 			type: 'category',
-			label: 'Elementos de Potência',
+			label: 'Power Elements',
 			items: ['bus', 'line', 'transformer', 'load', 'capacitor', 'inductor', 'harmSource', 'syncGenerator', 'syncMotor', 'indMotor'],
 		},
 	],
-    'Editor de Elementos de Controle': [
+    'Control Element Editor': [
 	'controlEditor',
 		{
 			type: 'category',
-			label: 'Elementos de Controle',
+			label: 'Control Elements',
 			items: ['io', 'transferFunction', 'sum', 'multiplier', 'divider', 'exponential', 'limiter', 'rateLimiter', 'const', 'gain', 'mathExpression'],
 		},
 	],
-    'Simulações': [
+    'Simulations': [
 		'powerFlow',
 		'fault',
 		'harmonics',
 		'stability',
 		'simulationConfig',
 	],
-	'Visualização dos Dados' : [
+	'Data Visualization' : [
 		'text',
 		'tabularReport',
 		'graphViewer',

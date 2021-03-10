@@ -1,24 +1,24 @@
 ---
 id: installation
-title: Instalação
-sidebar_label: Instalação
+title: Installation
+sidebar_label: Installation
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 ## Download
 
-O download do PSP-UFU pode ser realizado pelo ["*last release*" do repositório do PSP-UFU no GitHub](https://github.com/Thales1330/PSP/releases/latest).
+The PSP-UFU can be downloaded from the [*last release* of the PSP-UFU repository on GitHub](https://github.com/Thales1330/PSP/releases/latest).
 
-Ao acessar ao link, role a página até encontrar os *Assets*:
+When accessing the link, scroll down the page until you find the * Assets *:
 
 <div><center><img src={useBaseUrl("images/download.png")} alt="Assets download" title="Informações da Figura" /></center></div>
 
-Como o PSP-UFU é um *software* multiplataforma, você deve baixar o arquivo correto:
-- Para o sistema operacional [Windows](installation#windows) baixe os arquivos *.exe* (recomendado) ou *.zip*.
-- Para os sistemas [Linux](installation#linux) baseados no Debian (por exemplo, Ubuntu, Mint) *64 bits* baixe o pacote de instalação *.deb*.
+As the PSP-UFU is a multiplatform software, you must download the correct file:
+- For the operating system [Windows](installation#windows) download the files *.exe* (recommended) or *.zip*.
+- For [Linux](installation#linux) systems based on Debian (for example, Ubuntu, Mint) *64 bits* download the installation package *.deb*.
 
-:::tip Dica
-Se você está interessado em contribuir com o PSP-UFU construindo-o para outros sistemas operacionais (principalmente macOS!) entre em contato pelo [GitHub](https://github.com/Thales1330/PSP/issues) ou [Twitter](https://twitter.com/PspUfu).
+:::tip Tip
+If you are interested in contributing to PSP-UFU by building it for other operating systems (mainly macOS!) Contact us at [GitHub](https://github.com/Thales1330/PSP/issues) or [Twitter](https://twitter.com/PspUfu).
 :::
 
 Na sequência são apresentados o passo-a-passo para instalação dos SOs [Windows](installation#windows) e [Linux](installation#linux). Também são apresentadas as soluções para os erros mais recorrentes.

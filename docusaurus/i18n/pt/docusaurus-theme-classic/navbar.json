@@ -1,0 +1,18 @@
+{
+  "title": {
+    "message": "PSP-UFU",
+    "description": "The title in the navbar"
+  },
+  "item.label.User Guide": {
+    "message": "Manual do Usuário",
+    "description": "Navbar item with label User Guide"
+  },
+  "item.label.Changelog": {
+    "message": "Registro de Alterações",
+    "description": "Navbar item with label Changelog"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

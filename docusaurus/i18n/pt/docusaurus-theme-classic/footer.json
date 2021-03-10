@@ -1,0 +1,38 @@
+{
+  "copyright": {
+    "message": "Copyright © 2021 Thales Lima Oliveira. Construído com Docusaurus.",
+    "description": "The footer copyright"
+  },
+  "link.title.Guide": {
+    "message": "Manual",
+    "description": "The title of the footer links column with title=Guide in the footer"
+  },
+  "link.title.Community": {
+    "message": "Comunidade",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.Site Image Credit": {
+    "message": "Crédito das Imagens do Site",
+    "description": "The title of the footer links column with title=Site Image Credit in the footer"
+  },
+  "link.item.label.PSP-UFU Guide": {
+    "message": "Manual do PSP-UFU",
+    "description": "The label of footer link with label=PSP-UFU Guide linking to docs/"
+  },
+  "link.item.label.Code Documentation": {
+    "message": "Documentação do Código",
+    "description": "The label of footer link with label=Code Documentation linking to https://thales1330.github.io/PSP/doxygen/html/index.html"
+  },
+  "link.item.label.Ask a question": {
+    "message": "Faça uma pergunta",
+    "description": "The label of footer link with label=Ask a question linking to https://github.com/Thales1330/PSP/issues"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://twitter.com/PspUfu"
+  },
+  "link.item.label.Images designed by upklyak / slidesgo / macrovector / Freepik": {
+    "message": "Imagens criadas por upklyak / slidesgo / macrovector / Freepik",
+    "description": "The label of footer link with label=Images designed by upklyak / slidesgo / macrovector / Freepik linking to http://www.freepik.com/"
+  }
+}
