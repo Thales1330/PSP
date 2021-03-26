@@ -16,7 +16,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 ## Menu Tools
 
-All objects created contain various graphic attributes, such as: position, orientation, color, size, etc. To modify them, some intuitive and easy-to-use tools were inserted, which are: [**select**](cadTools#select), [**move**](cadTools#move), [**rotate**](cadTools#rotate), [**drag**](cadTools#drag), [**zoom**](cadTools#zoom), [**snap**](cadTools#snap), [**copy , paste**](cadTools#copy-and-paste) and [**delete**](cadTools#delete).
+All objects created contain various graphic attributes, such as: position, orientation, color, size, etc. To modify them, some intuitive and easy-to-use tools were inserted, which are: [**select**](cadTools#select), [**move**](cadTools#move), [**rotate**](cadTools#rotate), [**drag**](cadTools#drag), [**zoom**](cadTools#zoom), [**fit**](cadTools#fit), [**copy , paste**](cadTools#copy-and-paste) and [**delete**](cadTools#delete).
 
 These tools can be accessed through their shortcut keys as well as through the [Tools submenu](mainScreen#menu-ribbon).
 
@@ -110,11 +110,11 @@ Any object can be deleted from the project using the delete tool, present in the
 ## Graphic customization of the elements
 Some elements allow its graphic customization, such as bars and lines.
 
-### Bar
-In the case of busbars, you can change the ** length of the bar ** by clicking and dragging on the * pickbox * displayed when placing the mouse pointer over that selected element.
+### Bus
+In the case of busbars, you can change the ** length of the bus ** by clicking and dragging on the * pickbox * displayed when placing the mouse pointer over that selected element.
 
 ### Line
-The lines can be inserted with ** "knots" (anchor points) **, customizing the arrangement of the lines in the single-line diagram. These nodes are inserted during the element creation process, prior to the selection of the second bar.
+The lines can be inserted with ** "knots" (anchor points) **, customizing the arrangement of the lines in the single-line diagram. These nodes are inserted during the element creation process, prior to the selection of the second bus.
 
 After insertion, new nodes can be attached via the context menu accessed by right clicking on the selected line. Its removal is also achieved by an option in the context menu.
 
@@ -125,11 +125,11 @@ As with buses, changing the position of the nodes is achieved by clicking and dr
   <source src = {useBaseUrl ("videos/graphicPropsChange.webm")} type = "video/webm" />
 </video>
 
-## Connection and disconnection of elements in the bar
+## Connection and disconnection of elements in the bus
 The elements can be disconnected and reconnected to the bars after their insertion only by the * drag-and-drop * tool. For this, the element must be selected and its connection node must be dragged to the required location.
 
 :::warning Watch out!
-The element to be disconnected / reconnected ** must be previously selected ** to carry out the operation. Otherwise, the bar will be moved or no operations will be performed.
+The element to be disconnected / reconnected ** must be previously selected ** to carry out the operation. Otherwise, the bus will be moved or no operations will be performed.
 :::
 
 In case of disconnection, the element will be automatically removed from the simulation, being indicated by its color (the element will change to color <Highlight color = "#7f7f7f"> gray</Highlight>).
