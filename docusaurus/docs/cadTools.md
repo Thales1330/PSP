@@ -1,7 +1,7 @@
 ---
 id: cadTools
-title: Ferramentas CAD
-sidebar_label: Ferramentas CAD
+title: CAD Tools
+sidebar_label: CAD Tools
 ---
 export const Highlight = ({children, color}) => ( <span style={{
       backgroundColor: color,
@@ -12,130 +12,130 @@ export const Highlight = ({children, color}) => ( <span style={{
 
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
->Desenho assistido por computador (DAC; em inglês: *computer aided design* - CAD) é o nome genérico de sistemas computacionais (*software*) utilizados pela engenharia, geologia, geografia, arquitetura e design para facilitar o projeto e desenho técnicos. No caso do *design*, este pode estar ligado especificamente a todas as suas vertentes (produtos como vestuário, eletroeletrônicos, automobilísticos, etc.), de modo que os jargões de cada especialidade são incorporados na interface de cada programa. [Wikipedia](https://pt.wikipedia.org/wiki/Desenho_assistido_por_computador)
+>Computer-aided design (CAD) is the use of computers (or workstations) to aid in the creation, modification, analysis, or optimization of a design. CAD software is used to increase the productivity of the designer, improve the quality of design, improve communications through documentation, and to create a database for manufacturing. Designs made through CAD software are helpful in protecting products and inventions when used in patent applications. CAD output is often in the form of electronic files for print, machining, or other manufacturing operations. [Wikipedia](https://en.wikipedia.org/wiki/Computer-aided_design)
 
-## Ferramentas do menu
+## Menu Tools
 
-Todos os objetos criados contêm vários atributos gráficos, como: posição, orientação, cor, tamanho, etc. Para modificá-los foram inseridas algumas ferramentas intuitivas e de fácil utilização, as quais são: [**selecionar**](cadTools#selecionar), [**mover**](cadTools#mover), [**girar**](cadTools#girar), [**arrastar**](cadTools#arrastar), [**zoom**](cadTools#zoom), [**encaixar**](cadTools#encaixar), [**copiar, colar**](cadTools#copiar-e-colar) e [**excluir**](cadTools#excluir).
+All objects created contain various graphic attributes, such as: position, orientation, color, size, etc. To modify them, some intuitive and easy-to-use tools were inserted, which are: [**select**](cadTools#select), [**move**](cadTools#move), [**rotate**](cadTools#rotate), [**drag**](cadTools#drag), [**zoom**](cadTools#zoom), [**snap**](cadTools#snap), [**copy , paste**](cadTools#copy-and-paste) and [**delete**](cadTools#delete).
 
-Essas ferramentas podem ser acessadas por suas teclas de atalho assim como pelo [submenu Ferramentas](mainScreen#menu-ribbon).
+These tools can be accessed through their shortcut keys as well as through the [Tools submenu](mainScreen#menu-ribbon).
 
-Tais ferramentas permitem a **personalização**, **navegação** e auxiliam a **criação** de redes elétricas de potência, assim como diagramas de controle na plataforma.
+Such tools allow ** personalization **, ** navigation ** and assist in the ** creation ** of electric power networks, as well as control diagrams on the platform.
 
-### Selecionar
-A seleção de um único objeto é realizada clicando com o botão esquerdo do mouse sobre o elemento, que será identificado pelo contorno em <Highlight color="#80bfff">azul</Highlight> do objeto.
+### Select
+The selection of a single object is carried out by clicking with the left mouse button on the element, which will be identified by the outline in <Highlight color = "#80bfff"> blue</Highlight> of the object.
 
-Para a seleção de vários objetos simultaneamente é necessário clicar com o botão esquerdo do mouse em um local vazio da tela e arrastá-lo, criando assim um **retângulo de seleção** que irá acompanhar o ponteiro do mouse enquanto o botão esquerdo estiver pressionado. Ao soltá-lo todos os objetos que intercederem o retângulo serão selecionados.
+To select multiple objects simultaneously, it is necessary to click the left mouse button on an empty spot on the screen and drag it, thus creating a ** selection rectangle ** that will accompany the mouse pointer while the left button is pressed . When you release it, all objects that intersect the rectangle will be selected.
 
-Mantendo pressionado a tecla Control (Ctrl) do teclado pode-se manter seleções anteriores enquanto novos elementos são selecionados.
+By holding down the Control (Ctrl) key on the keyboard, you can keep previous selections while new elements are selected.
 
-Para desmarcar todos os objetos basta clicar em uma área sem objetos.
-
-<video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/select.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/select.webm")} type="video/webm" />
-</video>
-
-### Mover
-Um elemento poderá ser movido para qualquer local por meio da ação *drag-and-drop* (clicando e arrastando) ou pela ferramenta mover.
-
-Ao habilitar o “modo mover”, movendo todos os componentes selecionados à medida que a posição do mouse é alterada. Para desabilitar esse modo basta pressionar a tecla Escape do teclado.
+To deselect all objects just click on an area without objects.
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/move.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/move.webm")} type="video/webm" />
+  <source src = {useBaseUrl("videos/select.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl("videos/select.webm")} type = "video/webm" />
 </video>
 
-### Girar
-Alguns objetos poderão ser rotacionados através da ferramenta girar, acessado pela tecla de atalho “R”, girando o objeto no sentido horário, ou “Shift + R”, para o sentido anti-horário (essa opção irá afetar todos os objetos selecionados). O elemento também pode ser rotacionado pelo [submenu Ferramentas](mainScreen#menu-ribbon) ou ao acessar o menu de contexto clicando com o botão direito sobre o elemento.
+### Move
+An element can be moved to any location by means of the drag-and-drop action (by clicking and dragging) or by the move tool.
 
-:::caution Atenção!
-O menu de contexto somente será exibido se o elemento estiver selecionado.
+By enabling “move mode”, moving all selected components as the position of the mouse is changed. To disable this mode, just press the Escape key on the keyboard.
+
+<video autoPlay loop muted playsInline controls>
+  <source src = {useBaseUrl("videos/move.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl("videos/move.webm")} type = "video/webm" />
+</video>
+
+### Rotate
+Some objects can be rotated using the rotate tool, accessed by the shortcut key "R", rotating the object clockwise, or "Shift + R", counterclockwise (this option will affect all selected objects). The element can also be rotated through the [Tools submenu](mainScreen#menu-ribbon) or when accessing the context menu by right clicking on the element.
+
+:::caution Attention!
+The context menu will only be displayed if the element is selected.
 :::
 
-Ao utilizar essa ferramenta os objetos irão girar 45º a partir do seu ponto de origem. Para atingir a angulação pretendida basta repetir o processo de rotação.
+When using this tool, objects will rotate 45º from their point of origin. To achieve the desired angle, simply repeat the rotation process.
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/rotate.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/rotate.webm")} type="video/webm" />
+  <source src = {useBaseUrl ("videos/rotate.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl ("videos/rotate.webm")} type = "video/webm" />
 </video>
 
-### Arrastar
-Três ferramentas muito úteis na navegação do circuito, principalmente em grandes redes, são: arrastar, zoom e encaixar.
+### Drag
+Three tools very useful in navigation of the circuit, mainly in large networks, are: drag, zoom and fit.
 
-A ferramenta arrastar possibilita mover todo o circuito **preservando as posições relativas entre os elementos**. Esta ferramenta pode ser acessada pelo submenu “Ferramentas” ou **mantendo pressionada o *scroll* do mouse**, ativando assim o “modo arrastar”. Ao ativá-lo todo o circuito será movido clicando e arrastando na direção desejada.
+The drag tool makes it possible to move the entire circuit ** preserving the relative positions between the elements **. This tool can be accessed through the submenu "Tools" or ** by holding down the * scroll * of the mouse **, thus activating the "drag mode". Upon activating it, the entire circuit will be moved by clicking and dragging in the desired direction.
 
-Para sair do “modo arrastar” basta pressionar a tecla Escape do teclado.
+To exit “drag mode” just press the Escape key on the keyboard.
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/drag.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/drag.webm")} type="video/webm" />
+  <source src = {useBaseUrl ("videos/drag.mp4")} type = "video mp4" />
+  <source src = {useBaseUrl ("videos/drag.webm")} type = "video/webm" />
 </video>
 
 ### Zoom
-O zoom será aplicado ao utilizar o **scroll do mouse** para mais ou menos zoom. A ferramenta zoom irá aproximar ou distanciar o circuito a partir da posição do ponteiro do mouse na tela para encontrar objetos ou destaca-los.
+The zoom will be applied when using the ** mouse scroll ** to zoom in or out. The zoom tool will zoom in or out of the circuit from the position of the mouse pointer on the screen to find objects or highlight them.
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/zoom.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/zoom.webm")} type="video/webm" />
+  <source src = {useBaseUrl ("videos/zoom.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl ("videos/zoom.webm")} type = "video/webm" />
 </video>
 
-### Encaixar
-A ferramenta encaixar irá mover o circuito e aplicar o zoom necessário para que todos os componentes da rede sejam exibidos na tela. Esta ferramenta pode ser acessada através do submenu “Ferramentas” ou pela combinação de teclas “Shift + F”.
+### Fit
+The snap tool will move the circuit and zoom.necessary for all network components to be displayed on the screen. This tool can be accessed through the “Tools” submenu or by using the “Shift + F” key combination.
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/fit.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/fit.webm")} type="video/webm" />
+  <source src = {useBaseUrl ("videos/fit.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl ("videos/fit.webm")} type = "video/webm" />
 </video>
 
-### Copiar e Colar
-Duas ferramentas importantes durante o processo de criação da rede elétrica de potência no *software* são copiar e colar. Qualquer circuito criado no PSP-UFU poderá ser duplicado completamente ou parcialmente no mesmo projeto ou em múltiplos através dessas ferramentas.
+### Copy and paste
+Two important tools during the process of creating the power grid in software are copy and paste. Any circuit created in the PSP-UFU can be duplicated completely or partially in the same project or in multiples using these tools.
 
-Para copiar basta selecionar os elementos que se deseja duplicar e acessar a ferramenta no submenu “Ferramentas” ou pressionando a combinação das teclas “Ctrl + C”, então os dados do circuito serão copiados para a área de transferência. Ao copiar um circuito ele poderá ser colado no mesmo projeto ou em um projeto distinto, utilizando o mesmo submenu ou pressionando a combinação das teclas “Ctrl + V”.
+To copy, just select the elements you want to duplicate and access the tool in the "Tools" submenu or by pressing the "Ctrl + C" key combination, then the circuit data will be copied to the clipboard. When copying a circuit it can be pasted in the same project or in a different project, using the same submenu or pressing the combination of the keys "Ctrl + V".
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/copyPaste.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/copyPaste.webm")} type="video/webm" />
+  <source src = {useBaseUrl ("videos/copyPaste.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl ("videos/copyPaste.webm")} type = "video/webm" />
 </video>
 
-### Excluir
-Qualquer objeto poderá ser excluído do projeto por meio da ferramenta deletar, presente no menu Ribbon, pela tecla de atalho Delete ou pelo acesso ao menu de contexto clicando com o botão direito sobre o elemento selecionado.
+### Delete
+Any object can be deleted from the project using the delete tool, present in the Ribbon menu, by the Delete shortcut key or by accessing the context menu by right-clicking on the selected element.
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/delete.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/delete.webm")} type="video/webm" />
+  <source src = {useBaseUrl ("videos/delete.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl ("videos/delete.webm")} type = "video/webm" />
 </video>
 
 
-## Personalização gráfica os elementos
-Alguns elementos permitem sua personalização gráfica, como as barras e linhas.
+## Graphic customization of the elements
+Some elements allow its graphic customization, such as bars and lines.
 
-### Barra
-No caso dos barramentos, pode-se alterar o **comprimento da barra** clicando e arrastando no *pickbox* exibido ao posicionar o ponteiro do mouse sobre esse elemento selecionado.
+### Bar
+In the case of busbars, you can change the ** length of the bar ** by clicking and dragging on the * pickbox * displayed when placing the mouse pointer over that selected element.
 
-### Linha
-As linhas podem ser inseridas com **"nós" (pontos de ancoragem)**, personalizando a disposição das linhas no diagrama unifilar. Esses nós são inseridos durante o processo de criação do elemento, anteriormente à seleção da segunda barra.
+### Line
+The lines can be inserted with ** "knots" (anchor points) **, customizing the arrangement of the lines in the single-line diagram. These nodes are inserted during the element creation process, prior to the selection of the second bar.
 
-Após a sua inserção, novos nós podem ser anexados pelo menu de contexto acessado ao clicar com o botão direito sobre a linha selecionada. Sua remoção também é alcançada por uma opção do menu de contexto.
+After insertion, new nodes can be attached via the context menu accessed by right clicking on the selected line. Its removal is also achieved by an option in the context menu.
 
-Assim como nos barramentos, a alteração da posição dos nós é obtida clicando e arrastando o *pickbox* exibido ao posicionar o ponteiro do mouse sobre esse elemento selecionado.
+As with buses, changing the position of the nodes is achieved by clicking and dragging the * pickbox * displayed when placing the mouse pointer over this selected element.
 
 <video autoPlay loop muted playsInline controls>
-  <source src= {useBaseUrl("videos/graphicPropsChange.mp4")} type="video/mp4" />
-  <source src= {useBaseUrl("videos/graphicPropsChange.webm")} type="video/webm" />
+  <source src = {useBaseUrl ("videos/graphicPropsChange.mp4")} type = "video/mp4" />
+  <source src = {useBaseUrl ("videos/graphicPropsChange.webm")} type = "video/webm" />
 </video>
 
-## Conexão e desconexão de elemetos na barra
-Os elementos podem ser desconectados e reconectados às barras após sua inserção somente pela ferramenta *drag-and-drop*. Para isso, o elemento deve ser selecionado e o seu nó de conexão deve ser arrastado para o local requerido.
+## Connection and disconnection of elements in the bar
+The elements can be disconnected and reconnected to the bars after their insertion only by the * drag-and-drop * tool. For this, the element must be selected and its connection node must be dragged to the required location.
 
-:::warning Cuidado!
-O elemento a ser desconectado/reconectado **deve ser previamente selecionado** para efetuar a operação. Caso contrário a barra será movida ou nenhuma operação será realizada.
+:::warning Watch out!
+The element to be disconnected / reconnected ** must be previously selected ** to carry out the operation. Otherwise, the bar will be moved or no operations will be performed.
 :::
 
-No caso de desconexão, o elemento será automaticamente removido da simulação, sendo indicado pela sua cor (o elemento passa a ter cor <Highlight color="#7f7f7f">cinza</Highlight>).
+In case of disconnection, the element will be automatically removed from the simulation, being indicated by its color (the element will change to color <Highlight color = "#7f7f7f"> gray</Highlight>).
 
-:::caution Atenção!
-Ao reconectar o elemento ao circuito, deve-se **atentar para estado do seu "disjuntor"**, indicado por um quadrado próximo ao seu nó de conexão. Um elemento reconectado volta ao circuito com seu disjuntor aberto (<Highlight color="#ff1919">vermelho</Highlight>), sendo necessário clicar sobre o mesmo a fim de inserir o elemento no circuito.
+:::caution Attention!
+When reconnecting the element to the circuit, one must ** pay attention to the status of its "circuit breaker" **, indicated by a square next to its connection node. A reconnected element returns to the circuit with its circuit breaker open (<Highlight color = "#ff1919"> red</Highlight>), and it is necessary to click on it to insert the element into the circuit.
 :::
 
 <video autoPlay loop muted playsInline controls>

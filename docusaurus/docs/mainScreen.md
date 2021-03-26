@@ -1,127 +1,127 @@
 ---
 id: mainScreen
-title: Tela Principal
-sidebar_label: Tela Principal
+title: Main Screen
+sidebar_label: Main Screen
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-## Organização da tela principal
-A tela principal do PSP-UFU é dividida em três seções: *[Menu "Ribbon"](mainScreen#menu-ribbon)*, *[Área de Trabalho](mainScreen#área-de-trabalho)* e *[Barra de Status](mainScreen#barra-de-status)*.
+## Organization of the main screen
+The main screen of the PSP-UFU is divided into three sections: *[Menu "Ribbon"](mainScreen#menu-ribbon)*, *[Desktop](mainScreen#desktop-area)* and *[Toolbar Status](mainScreen#status-bar)*.
 
-<div><center><img src={useBaseUrl("images/mainScreen.svg")} alt="Tela principal" title="Tela principal do PSP-UFU no Windows" /></center></div>
+<div> <center> <img src = {useBaseUrl ("images/mainScreen.svg")} alt = "Main screen" title = "PSP-UFU main screen on Windows" /> </center> </div>
 
-Resumidamente, no **Menu Ribbon** são acessadas as ferramentas do PSP-UFU; na **Área de Trabalho** são criados os diagramas unifilares de potência; e na **Barra de Status** são exibidas importantes informações acerca do estado da Área de Trabalho.
+Briefly, in the **Ribbon Menu** the PSP-UFU tools are accessed; in **Work Area** single-line power diagrams are created; and the **Status Bar** displays important information about the status of the Work Area.
 
 
-### Menu Ribbon
->Em informática o ribbon (faixa, em inglês) é um formato de apresentação de interface baseada na GUI onde a barra de ferramentas é mostrada através de uma barra mais larga com icones maiores possibilitando o uso dos aplicativos por dispositivos *touch screen*.
-[Wikipedia](https://pt.wikipedia.org/wiki/Ribbon_(inform%C3%A1tica))
+### Ribbon Menu
+> In computing, the ribbon menu is a GUI-based interface presentation format where the toolbar is shown through a wider bar with larger icons enabling applications to be used by *touch screen* devices.
+[Wikipedia](https://en.wikipedia.org/wiki/Ribbon_(computing))
 
-O menu Ribbon é composto de três submenus: “Arquivo”, “Ferramentas” e “Simulação”.
+The Ribbon menu consists of three submenus: "File", "Tools" and "Simulation".
 
-<div><center><img src={useBaseUrl("images/menuFile.png")} alt="Menu Arquivo" title="Menu Arquivo" /></center></div>
+<div> <center> <img src = {useBaseUrl ("images/menuFile.png")} alt = "File menu" title = "File menu" /> </center> </div>
 
-Em **Arquivo** estão as ferramentas gerais do programa, as quais permitem ao usuário criar e salvar novos projetos, além daquelas que possibilitam carregar os projetos já existentes e importar arquivos de outros programas. Esse submenu também possui opções gerais do programa e acesso a informações sobre o programa.
+In **File** are the general tools of the program, which allow the user to create and save new projects, in addition to those that make it possible to load existing projects and import files from other programs. This submenu also has general program options and access to information about the program.
 
-<div><center><img src={useBaseUrl("images/menuTools.png")} alt="Menu Ferramentas" title="Menu Ferramentas" /></center></div>
+<div> <center> <img src = {useBaseUrl ("images/menuTools.png")} alt = "Tools Menu" title = "Tools Menu" /> </center> </div>
 
-Em **Ferramentas** estão presentes os itens específicos, os quais estão relacionados à criação e manipulação da rede elétrica de potência, relatórios tabulares de saída de dados e acesso ao formulário de criação de gráficos no tempo. Algumas configurações específicas do projeto ativo são acessadas por esse menu.
+In **Tools** there are specific items, which are related to the creation and manipulation of the power grid, tabular data output reports and access to the form for creating graphs over time. Some settings specific to the active project are accessed through this menu.
 
-<div><center><img src={useBaseUrl("images/menuSimulation.png")} alt="Menu Simulação" title="Menu Simulação" /></center></div>
+<div> <center> <img src = {useBaseUrl ("images/menuSimulation.png")} alt = "Simulation Menu" title = "Simulation Menu" /> </center> </div>
 
-Finalmente, o submenu **Simulação** proporciona o acesso do usuário aos cálculos realizados pelo *software* e suas configurações, além da ferramenta de “solução contínua”, a qual resolve os cálculos estáticos (fluxo de potência, curto-circuito e harmônicos) após quaisquer mudanças na rede de potência, como remoção de componente ou alteração de seus dados. Todas as configurações de simulação do projeto ativo são acessadas por esse menu.
+Finally, the **Simulation** submenu provides user access to the calculations performed by the software and its settings, in addition to the “continuous solution” tool, which solves the static calculations (power flow, short circuit and harmonics) after any changes to the power grid, such as removing a component or changing its data. All simulation settings for the active project are accessed through this menu.
 
-### Área de Trabalho
-Na área de trabalho estão presentes os projetos em execução, os quais são divididos por abas identificadas pelo nome do projeto (caso já esteja gravado no disco). É nessa área que são inseridos e excluídos os elementos elétricos, cujas ferramentas são acessadas por meio do [Menu Ribbon](mainScreen#menu-ribbon).
+### Workspace
+In the work area are present the projects in execution, which are divided by tabs identified by the name of the project (if already recorded on the disc). It is in this area that the electrical elements are inserted and excluded, whose tools are accessed through the [Menu Ribbon](mainScreen#menu-ribbon).
 
-As edições gráficas dos elementos, como posição, conexão e tamanho dos barramentos, são realizadas por meio da ação *drag-and-drop* (arrastar e soltar) com a utilização do mouse. A edição dos dados elétricos é feita por meio de formulários de dados acessados clicando duas vezes sobre os elementos.
+The graphic edits of the elements, such as position, connection and size of the busbars, are performed through the action drag-and-drop using the mouse. The editing of the electrical data is done through data forms accessed by double clicking on the elements.
 
-<div><center><img src={useBaseUrl("images/workspace.png")} alt="Área de Trabalho" title="Área de Trabalho" /></center></div>
+<div> <center> <img src = {useBaseUrl ("images/workspace.png")} alt = "Workspace" title = "Workspace" /> </center> </div>
 
-### Barra de Status
-A barra de status é responsável por informações interessantes sobre as circunstâncias atuais do programa: modo de operação do mouse (editar, mover, arrastar), zoom aplicado e posição do mouse na área de trabalho, além de dados sobre as ações dos usuários, como: inserção de elementos, informação sobre copiar e colar, etc.
+### Status Bar
+The status bar is responsible for interesting information about the current circumstances of the program: mode of operation of the mouse (edit, move, drag), zoom applied and position of the mouse on the desktop, in addition to data on the actions of users, such as : insertion of elements, information about copying and pasting, etc.
 
-:::tip Dica
-**Sempre fique atendo à barra de status**, pois são fornecidas informações importantes acerca da operação do programa. Caso tenha alguma dúvida siga as instruções apresentadas nesse componente.
+:::tip Tip
+**Always keep an eye on the status bar**, as important information about the program's operation is provided. If you have any questions follow the instructions presented in that component.
 :::
 
-## Configurações gerais
-As configurações gerais do programa são acessadas no submenu Ribbon **Arquivo**. Essas configurações são aplicadas para todos os projetos e permanecem gravadas no disco.
+## General settings
+The general settings of the program are accessed in the Ribbon ** File ** submenu. These settings are applied to all projects and remain recorded on the disc.
 
-<div><center><img src={useBaseUrl("images/generalSettings.png")} alt="Configurações gerais" title="Configurações gerais" /></center></div>
+<div> <center> <img src = {useBaseUrl ("images/generalSettings.png")} alt = "General settings" title = "General settings" /> </center> </div>
 
-:::warning Cuidado
-Algumas configurações de segurança do seu computador (principalmente em sistemas Windows) podem gerar uma mensagem de erro ao confirmar as alterações das configurações gerais.
+:::warning Caution
+Some security settings on your computer (especially on Windows systems) may generate an error message when confirming changes to general settings.
 
-Para resolver esse problema basta **executar o PSP-UFU como administrador** (clicar com botão direito no atalho do programa e posteriormente em executar como administrador). Altere novamente as configurações e reinicie o programa.
+To solve this problem just **run PSP-UFU as an administrator** (right click on the program shortcut and then run as administrator). Change the settings again and restart the program.
 :::
 
-### Idioma
-Atualmente os seguintes idiomas estão disponíveis no PSP-UFU:
-- Inglês
-- Português
+### Language
+The following languages ​​are currently available on PSP-UFU:
+- English
+- Portuguese
 
-:::info Informação
-O programa deve ser reiniciado para surtir efeito da alteração do idioma.
+:::info Information
+The program must be restarted to have the effect of changing the language.
 :::
 
-### Renderização
-Define como os elementos gráficos do [editor de potência](powerEditor) e do [editor de controle](controlEditor) são desenhados na tela. Atualmente duas opções estão disponíveis:
+### Rendering
+Defines how the graphic elements of the [power editor] (powerEditor) and [control editor] (controlEditor) are drawn on the screen. Currently two options are available:
 - [OpenGL](https://www.opengl.org/about/)
 - [Device Context](https://docs.wxwidgets.org/3.0/classwx_graphics_context.html)
 
-:::warning Cuidado!
-o OpenGL pode não ser suportado pelo seu computador. Nesse caso, ao criar um novo projeto a tela de trabalho não é exibida ou é exibida uma tela preta. A solução é alterar o renderizador para "Device Context". 
+:::warning Watch out!
+OpenGL may not be supported by your computer. In this case, when creating a new project, the work screen is not displayed or a black screen is displayed. The solution is to change the renderer to "Device Context".
 
-Caso apareça uma mensagem de erro, execute o programa como administrador e repita o processo.
+If an error message appears, run the program as an administrator and repeat the process.
 :::
 
-:::info Informação
-O programa deve ser reiniciado para surtir efeito de alteração do renderizador.
+:::info Information
+The program must be restarted to have the effect of changing the renderer.
 :::
 
-## Arquivos de projeto do PSP-UFU
-As opções de criação, gravação e abertura de projetos no disco, assim como importação de arquivos de outros programas estão presentes no submenu Ribbon **Arquivo**.
+## PSP-UFU project files
+The options for creating, saving and opening projects on the disk, as well as importing files from other programs are present in the Ribbon **File** submenu.
 
-### Novo projeto
-A criação de um novo projeto é realizada clicando no botão **Novo projeto** no [submenu **Arquivo**](mainScreen#menu-ribbon). Essa ação cria um sistema em branco na área de trabalho, local onde é possível inserir os elementos elétricos por meio do [submenu **Ferramentas**](mainScreen#menu-ribbon) ou pelas [teclas de atalho](powerEditor#teclas-de-atalho).
+### New project
+The creation of a new project is done by clicking the **New project** button in the [submenu **File**](mainScreen # menu-ribbon). This action creates a blank system in the work area, where it is possible to insert the electrical elements through the [submenu **Tools**](mainScreen#menu-ribbon) or by the [shortcut keys](powerEditor#keys-shortcut).
 
-Esse sistema em branco pode ser ciado utilizando o [Editor de Potência](powerEditor).
+This blank system can be created using the [Power Editor](powerEditor).
 
-### Salvar e Salvar como...
-A opção "Salvar" sobrepõe as alterações realizadas no projeto aberto e grava no disco. A opção "Salvar como..." cria um novo arquivo e grava o projeto no disco com o auxílio de uma janela de seleção de pasta (e definição do nome do arquivo).
+### Save and Save As ...
+The "Save" option overrides the changes made to the open project and saves it to disk. The "Save as ..." option creates a new file and saves the project to the disk with the help of a folder selection window (and definition of the file name).
 
-:::info Informação
-Para projetos que estão sendo gravados pela primeira vez a opção "Salvar" se comporta de forma idêntica à opção "Salvar como...".
+:::info Information
+For projects that are being recorded for the first time, the "Save" option behaves in the same way as the "Save as ..." option.
 :::
 
-:::tip Dica
-O PSP-UFU grava os arquivos com a extensão *.psp*. Esses arquivos nada mais são que arquivos de texto utilizando a [linguagem de marcação](https://en.wikipedia.org/wiki/Markup_language) XML ([eXtensible Markup Language](https://en.wikipedia.org/wiki/XML)), que define uma série de regras de formatação dos dados de forma que eles são tanto legíveis por humanos quanto por máquinas.
+:::tip Tip
+PSP-UFU saves files with the extension * .psp *. These files are nothing more than text files using [markup language](https://en.wikipedia.org/wiki/Markup_language) XML ([eXtensible Markup Language](https://en.wikipedia.org/wiki/XML)), which defines a series of rules for formatting data so that it is both human and machine readable.
 
-Portanto, os dados elétricos contidos neles podem ser facilmente identificados e alterados, caso necessário.
+Therefore, the electrical data contained in them can be easily identified and changed, if necessary.
 :::
 
-### Abrir projeto
-Essa opção abre os projetos gravados no disco por meio com o auxílio de uma janela de seleção de arquivos. 
+### Open project
+This option opens the projects recorded on the disc through the aid of a file selection window.
 
-### Importar projeto
-O PSP-UFU permite a importação de arquivos dos seguintes programas:
+### Import project
+PSP-UFU allows the import of files from the following programs:
 - [ANAREDE](http://www.cepel.br/pt_br/produtos/programas-computacionais-por-categoria/menu/anarede-analise-de-redes-eletricas.htm)
 - [Matpower](https://matpower.org/)
 
-Para importação dos arquivos do **ANAREDE** são utilizados tanto o arquivo de dados elétricos (*.pwf*) quanto de dados gráficos dos elementos (*.lst*).
+To import **ANAREDE** files, both the electrical data file (*.pwf*) and the graphic data of the elements (*.lst*) are used.
 
-Uma vez que o arquivo do **Matpower** (*.m*) não possui dados gráficos dos elementos elétricos, o diagrama unifilar é automaticamente gerado pelo PSP-UFU ao importá-lo.
+Since the **Matpower** file (*.m*) does not have graphic data of the electrical elements, the single-line diagram is automatically generated by PSP-UFU when importing it.
 
-#### Geração automática do *layout* de diagramas unifilares
-Para criar o *layout* automático, utilizou-se a teoria dos grafos baseada no posicionamento direcionado à força e aplicação de grafos com arestas ponderadas. De acordo com a teoria dos grafos, o sistema é modelado como vértices e arestas. Nesse contexto, os barramentos são os vértices e os ramos do sistema (linhas e transformadores) são as arestas. As localizações de elementos de derivação, assim como os nós dos elementos, são automaticamente controladas pelo PSP-UFU.
+#### Automatic layout generation of single-line diagrams
+To create the automatic layout, we used the theory of graphs based on positioning directed to the force and application of graphs with weighted edges. According to graph theory, the system is modeled as vertices and edges. In this context, the busbars are the vertices and the branches of the system (lines and transformers) are the edges. The locations of branch elements, as well as the nodes of the elements, are automatically controlled by the PSP-UFU.
 
-A ferramenta de *layout* automático é composta por um processo iterativo e os resultados são mais refinados com um número maior de iterações. Os melhores resultados são obtidos utilizando o número de iterações igual ou superior a cinco vezes o número de barramentos do sistema.
+The automatic layout tool is composed of an iterative process and the results are more refined with a greater number of iterations. The best results are obtained using the number of iterations equal to or greater than five times the number of buses in the system.
 
-:::caution Atenção!
-O *layout* automático ainda está em desenvolvimento e algumas melhorias podem ser feitas para evitar cruzamentos e sobreposições, porém, em seu estado atual, é totalmente funcional e satisfatório.
+:::caution Attention!
+The automatic layout is still under development and some improvements can be made to avoid intersections and overlaps, however, in its current state, it is fully functional and satisfactory.
 :::
 
-:::tip Dica
-Uma vez que o Matpower pode converter os formatos CDF (*Common Data Format*) e PSS/E RAW para arquivos *.m*, estes podem ser importados de forma indireta para o PSP-UFU.
+:::tip Tip
+Since Matpower can convert CDF (Common Data Format) and PSS/E RAW formats to *.m* files, these can be imported indirectly into PSP-UFU.
 :::

@@ -96,6 +96,7 @@ module.exports = {
 	algolia: {
       apiKey: '810abe1ba98dec3f185d77a2dcf491d5',
       indexName: 'psp-ufu',
+      contextualSearch: true,
       searchParameters: {}, // Optional (if provided by Algolia)
     },
   },
@@ -142,4 +143,5 @@ module.exports = {
       },
     },
   },
+  
 };
