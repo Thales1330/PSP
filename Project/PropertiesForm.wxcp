@@ -3905,7 +3905,7 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "stability"
+           "m_value": "Stability"
           }, {
            "type": "bitmapPicker",
            "m_label": "Bitmap File:",

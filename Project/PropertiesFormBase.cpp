@@ -361,7 +361,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     m_textCtrlPFGaussTolerance->SetMinSize(wxSize(20,-1));
     
     m_panelStability = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
-    m_notebook->AddPage(m_panelStability, _("stability"), false);
+    m_notebook->AddPage(m_panelStability, _("Stability"), false);
     
     wxBoxSizer* boxSizerLvl2_3 = new wxBoxSizer(wxVERTICAL);
     m_panelStability->SetSizer(boxSizerLvl2_3);
