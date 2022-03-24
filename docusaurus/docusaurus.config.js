@@ -97,7 +97,7 @@ module.exports = {
     appId: 'U5AL8O8ZTH',
       apiKey: 'e4edceff843f25b52e67fd1ba74e1e7f',	  
       indexName: 'psp-ufu',
-      contextualSearch: false,
+      contextualSearch: true,
       //searchParameters: {}, // Optional (if provided by Algolia)
     },
   },
@@ -124,11 +124,11 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        sitemap: {
-            //cacheTime: 600 * 1000, // 600 sec - cache purge period
-            changefreq: 'weekly',
-            priority: 0.5,
-		},
+        //sitemap: {
+        //    //cacheTime: 600 * 1000, // 600 sec - cache purge period
+        //    changefreq: 'weekly',
+        //    priority: 0.5,
+		    //},
       },
     ],
   ],
