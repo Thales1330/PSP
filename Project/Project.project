@@ -929,7 +929,7 @@
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release_Windows_x32" CompilerType="MinGW ( TDM-GCC-32 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Release_Windows_x32" CompilerType="MinGW ( C:\TDM-GCC-64\bin\ )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O2;-std=gnu++17;-Wall;$(shell wx-config --cflags)" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <IncludePath Value="..\ExtLibs\GLEW\include"/>
@@ -938,7 +938,7 @@
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="UNICODE"/>
       </Compiler>
-      <Linker Options="-mwindows;$(shell wx-config --libs std,adv,ribbon,aui,propgrid,richtext,stc,gl);-static" Required="yes">
+      <Linker Options="-mwindows;$(shell wx-config --libs std,adv,ribbon,aui,propgrid,richtext,stc,gl);-static;-limm32" Required="yes">
         <LibraryPath Value="..\ExtLibs\GLEW\lib\Release\Win32"/>
         <LibraryPath Value="..\ExtLibs\GLFW\lib-mingw"/>
         <Library Value="glew32s.a"/>

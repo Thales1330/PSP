@@ -20,6 +20,8 @@
 #include "DegreesAndRadians.h"
 #endif
 
+#include <wx/clipbrd.h>
+
 ElectricCalculation::ElectricCalculation() {}
 ElectricCalculation::~ElectricCalculation() {}
 void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
@@ -90,12 +92,14 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         yBus.push_back(line);
     }
 
-    // Set buses numbers
+    // Set buses numbers and reset connection status
     int busNumber = 0;
     for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
         Bus* bus = *itb;
         BusElectricalData data = bus->GetElectricalData();
         data.number = busNumber;
+        data.isConnected = true;
+        //data.voltage = std::complex<double>(1.0, 0.0);
         bus->SetElectricalData(data);
         busNumber++;
     }
@@ -300,7 +304,79 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         }
     }
 
+    // Identify buses to slack bus
+    std::vector<bool> connectedToSlack(m_busList.size(),false);
+    busNumber = 0;
+    int slackBus = 0;
+    std::vector<int> checkBusVector;
+    for(auto* bus : m_busList)
+    {
+        if (bus->GetElectricalData().slackBus)
+        {
+            connectedToSlack[busNumber] = true;
+            slackBus = busNumber;
+            break;
+        }
+        busNumber++;
+    }
+    GetNextConnection(slackBus, yBus, connectedToSlack);
+
+    bool hasIsolatedBus = false;
+    for(auto isConnectedToSlack : connectedToSlack)
+    {
+        if (!isConnectedToSlack) hasIsolatedBus = true;
+    }
+
+    if (hasIsolatedBus) {
+        // Update isolated and connected buses status and numbers
+        busNumber = 0;
+        for (unsigned int i = 0; i < m_busList.size(); ++i)
+        {
+            auto data = m_busList[i]->GetElectricalData();
+            data.isConnected = connectedToSlack[i];
+            if (connectedToSlack[i])
+            {
+                data.number = busNumber;
+                busNumber++;
+            }
+            m_busList[i]->SetElectricalData(data);
+        }
+
+        // Create new Ybus without isolated buses (remove rows and columns)
+        std::vector< std::vector< std::complex<double> > > newYBus;
+        for (unsigned int i = 0; i < yBus.size(); ++i) {
+            if (connectedToSlack[i]) {
+                std::vector< std::complex<double> > newLine;
+                for (unsigned int j = 0; j < yBus.size(); ++j) {
+                    if (connectedToSlack[j]) {
+                        newLine.push_back(yBus[i][j]);
+                    }
+                }
+                newYBus.push_back(newLine);
+            }
+        }
+
+        yBus.clear();
+        yBus = newYBus;
+    }
+
     return true;
+}
+
+void ElectricCalculation::GetNextConnection(const unsigned int& checkBusNumber,
+                                            const std::vector< std::vector< std::complex<double> > >& yBus,
+                                            std::vector<bool>& connToSlack)
+{
+    for (unsigned int i = 0; i < yBus.size(); i++) {
+        
+        if (i != checkBusNumber && !connToSlack[i]) {
+            if (std::abs(yBus[i][checkBusNumber]) > 1e-6)
+            {
+                connToSlack[i] = true;
+                GetNextConnection(i, yBus, connToSlack);
+            }
+        }
+    }
 }
 
 void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<double> > voltage,
@@ -326,9 +402,15 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
     for(int i = 0; i < (int)m_busList.size(); i++) {
         Bus* bus = m_busList[i];
         BusElectricalData data = bus->GetElectricalData();
-        data.voltage = voltage[i];
-        data.power = power[i];
-        data.busType = busType[i];
+        if (data.isConnected) {
+            data.voltage = voltage[data.number];
+            data.power = power[data.number];
+            data.busType = busType[data.number];
+        }
+        else {
+            data.voltage = std::complex<double>(0.0, 0.0);
+            data.power = std::complex<double>(0.0, 0.0);
+        }
         bus->SetElectricalData(data);
     }
 
@@ -336,27 +418,32 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
     for(int i = 0; i < (int)m_lineList.size(); i++) {
         Line* line = m_lineList[i];
         if(line->IsOnline()) {
-            int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
-            int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
+            auto dataBus1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData();
+            auto dataBus2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData();
 
-            LineElectricalData data = line->GetElectricalData();
-            std::complex<double> v1 = voltage[n1];
-            std::complex<double> v2 = voltage[n2];
+            if (dataBus1.isConnected && dataBus2.isConnected) {
+                int n1 = dataBus1.number;
+                int n2 = dataBus2.number;
 
-            data.current[0] = (v1 - v2) / std::complex<double>(data.resistance, data.indReactance) +
-                              v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
-            data.current[1] = (v2 - v1) / std::complex<double>(data.resistance, data.indReactance) +
-                              v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+                LineElectricalData data = line->GetElectricalData();
+                std::complex<double> v1 = voltage[n1];
+                std::complex<double> v2 = voltage[n2];
 
-            data.powerFlow[0] = v1 * std::conj(data.current[0]);
-            data.powerFlow[1] = v2 * std::conj(data.current[1]);
+                data.current[0] = (v1 - v2) / std::complex<double>(data.resistance, data.indReactance) +
+                    v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+                data.current[1] = (v2 - v1) / std::complex<double>(data.resistance, data.indReactance) +
+                    v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
 
-            if(data.powerFlow[0].real() > data.powerFlow[1].real())
-                line->SetPowerFlowDirection(PowerFlowDirection::PF_BUS1_TO_BUS2);
-            else
-                line->SetPowerFlowDirection(PowerFlowDirection::PF_BUS2_TO_BUS1);
+                data.powerFlow[0] = v1 * std::conj(data.current[0]);
+                data.powerFlow[1] = v2 * std::conj(data.current[1]);
 
-            line->SetElectricalData(data);
+                if (data.powerFlow[0].real() > data.powerFlow[1].real())
+                    line->SetPowerFlowDirection(PowerFlowDirection::PF_BUS1_TO_BUS2);
+                else
+                    line->SetPowerFlowDirection(PowerFlowDirection::PF_BUS2_TO_BUS1);
+
+                line->SetElectricalData(data);
+            }
         }
     }
 
@@ -364,36 +451,43 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
     for(int i = 0; i < (int)m_transformerList.size(); i++) {
         Transformer* transformer = m_transformerList[i];
         if(transformer->IsOnline()) {
-            TransformerElectricalData data = transformer->GetElectricalData();
-            int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
-            int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
-            std::complex<double> v1 = voltage[n1];  // Primary voltage
-            std::complex<double> v2 = voltage[n2];  // Secondary voltage
+            auto dataBus1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData();
+            auto dataBus2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData();
 
-            // Transformer admitance
-            std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
+            if (dataBus1.isConnected && dataBus2.isConnected) {
+                TransformerElectricalData data = transformer->GetElectricalData();
+                int n1 = dataBus1.number;
+                int n2 = dataBus2.number;
 
-            if(data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
-                data.current[0] = (v1 - v2) * y;
-                data.current[1] = (v2 - v1) * y;
-            } else {
-                double radPS = wxDegToRad(data.phaseShift);
-                std::complex<double> a =
-                    std::complex<double>(data.turnsRatio * std::cos(radPS), -data.turnsRatio * std::sin(radPS));
+                std::complex<double> v1 = voltage[n1];  // Primary voltage
+                std::complex<double> v2 = voltage[n2];  // Secondary voltage
 
-                data.current[0] = v1 * (y / std::pow(std::abs(a), 2)) - v2 * (y / std::conj(a));
-                data.current[1] = -v1 * (y / a) + v2 * y;
+                // Transformer admitance
+                std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
+
+                if (data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
+                    data.current[0] = (v1 - v2) * y;
+                    data.current[1] = (v2 - v1) * y;
+                }
+                else {
+                    double radPS = wxDegToRad(data.phaseShift);
+                    std::complex<double> a =
+                        std::complex<double>(data.turnsRatio * std::cos(radPS), -data.turnsRatio * std::sin(radPS));
+
+                    data.current[0] = v1 * (y / std::pow(std::abs(a), 2)) - v2 * (y / std::conj(a));
+                    data.current[1] = -v1 * (y / a) + v2 * y;
+                }
+
+                data.powerFlow[0] = v1 * std::conj(data.current[0]);
+                data.powerFlow[1] = v2 * std::conj(data.current[1]);
+
+                if (data.powerFlow[0].real() > data.powerFlow[1].real())
+                    transformer->SetPowerFlowDirection(PowerFlowDirection::PF_BUS1_TO_BUS2);
+                else
+                    transformer->SetPowerFlowDirection(PowerFlowDirection::PF_BUS2_TO_BUS1);
+
+                transformer->SetElectricaData(data);
             }
-
-            data.powerFlow[0] = v1 * std::conj(data.current[0]);
-            data.powerFlow[1] = v2 * std::conj(data.current[1]);
-
-            if(data.powerFlow[0].real() > data.powerFlow[1].real())
-                transformer->SetPowerFlowDirection(PowerFlowDirection::PF_BUS1_TO_BUS2);
-            else
-                transformer->SetPowerFlowDirection(PowerFlowDirection::PF_BUS2_TO_BUS1);
-
-            transformer->SetElectricaData(data);
         }
     }
 
@@ -425,65 +519,66 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
     }
 
     // Synchronous machines
-    for(int i = 0; i < (int)m_busList.size(); i++) {
+    for (int i = 0; i < (int)m_busList.size(); i++) {
         Bus* bus = m_busList[i];
         BusElectricalData data = bus->GetElectricalData();
 
-        // Get the synchronous machines connected and calculate the load power on the bus.
-        std::vector<SyncGenerator*> syncGeneratorsOnBus;
-        std::vector<SyncMotor*> syncMotorsOnBus;
-        std::complex<double> loadPower(0.0, 0.0);
+        if (data.isConnected) {
+            // Get the synchronous machines connected and calculate the load power on the bus.
+            std::vector<SyncGenerator*> syncGeneratorsOnBus;
+            std::vector<SyncMotor*> syncMotorsOnBus;
+            std::complex<double> loadPower(0.0, 0.0);
 
-        for(auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
-            SyncGenerator* syncGenerator = *itsg;
-            if(bus == syncGenerator->GetParentList()[0] && syncGenerator->IsOnline())
-                syncGeneratorsOnBus.push_back(syncGenerator);
-        }
-        for(auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
-            SyncMotor* syncMotor = *itsm;
-            if(bus == syncMotor->GetParentList()[0] && syncMotor->IsOnline()) {
-                syncMotorsOnBus.push_back(syncMotor);
-                SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
-                loadPower += std::complex<double>(childData.activePower, 0.0);
+            for (auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
+                SyncGenerator* syncGenerator = *itsg;
+                if (bus == syncGenerator->GetParentList()[0] && syncGenerator->IsOnline())
+                    syncGeneratorsOnBus.push_back(syncGenerator);
             }
-        }
-        for(auto itlo = m_loadList.begin(); itlo != m_loadList.end(); itlo++) {
-            Load* load = *itlo;
-            if(bus == load->GetParentList()[0] && load->IsOnline()) {
-                LoadElectricalData childData = load->GetPUElectricalData(systemPowerBase);
-                if(childData.loadType == CONST_POWER)
+            for (auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
+                SyncMotor* syncMotor = *itsm;
+                if (bus == syncMotor->GetParentList()[0] && syncMotor->IsOnline()) {
+                    syncMotorsOnBus.push_back(syncMotor);
+                    SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
+                    loadPower += std::complex<double>(childData.activePower, 0.0);
+                }
+            }
+            for (auto itlo = m_loadList.begin(); itlo != m_loadList.end(); itlo++) {
+                Load* load = *itlo;
+                if (bus == load->GetParentList()[0] && load->IsOnline()) {
+                    LoadElectricalData childData = load->GetPUElectricalData(systemPowerBase);
+                    if (childData.loadType == CONST_POWER)
+                        loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
+
+                    if (childData.activePower >= 0.0)
+                        load->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
+                    else
+                        load->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
+                }
+            }
+            for (auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
+                IndMotor* indMotor = *itim;
+                if (bus == indMotor->GetParentList()[0] && indMotor->IsOnline()) {
+                    IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
                     loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
 
-                if(childData.activePower >= 0.0)
-                    load->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
-                else
-                    load->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
+                    if (childData.activePower >= 0.0)
+                        indMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
+                    else
+                        indMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
+                }
             }
-        }
-        for(auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
-            IndMotor* indMotor = *itim;
-            if(bus == indMotor->GetParentList()[0] && indMotor->IsOnline()) {
-                IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
-                loadPower += std::complex<double>(childData.activePower, childData.reactivePower);
 
-                if(childData.activePower >= 0.0)
-                    indMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
-                else
-                    indMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
-            }
-        }
+            // Set the sync generator power
+            for (auto itsg = syncGeneratorsOnBus.begin(); itsg != syncGeneratorsOnBus.end(); itsg++) {
+                SyncGenerator* generator = *itsg;
+                if (generator->IsOnline()) {
+                    SyncGeneratorElectricalData childData = generator->GetElectricalData();
 
-        // Set the sync generator power
-        for(auto itsg = syncGeneratorsOnBus.begin(); itsg != syncGeneratorsOnBus.end(); itsg++) {
-            SyncGenerator* generator = *itsg;
-            if(generator->IsOnline()) {
-                SyncGeneratorElectricalData childData = generator->GetElectricalData();
+                    if (busType[i] == BUS_SLACK) {
+                        double activePower =
+                            (power[i].real() + loadPower.real()) * systemPowerBase / (double)(syncGeneratorsOnBus.size());
 
-                if(busType[i] == BUS_SLACK) {
-                    double activePower =
-                        (power[i].real() + loadPower.real()) * systemPowerBase / (double)(syncGeneratorsOnBus.size());
-
-                    switch(childData.activePowerUnit) {
+                        switch (childData.activePowerUnit) {
                         case ElectricalUnit::UNIT_PU: {
                             activePower /= systemPowerBase;
                         } break;
@@ -495,27 +590,27 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                         } break;
                         default:
                             break;
+                        }
+
+                        childData.activePower = activePower;
                     }
+                    if (busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
+                        // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
+                        //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                        SyncGeneratorElectricalData childData_PU = generator->GetPUElectricalData(systemPowerBase);
 
-                    childData.activePower = activePower;
-                }
-                if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-                    // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-                    //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
-                    SyncGeneratorElectricalData childData_PU = generator->GetPUElectricalData(systemPowerBase);
+                        double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase;
 
-                    double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase;
+                        if (reactiveLimit[i].limitReached == RL_MAX_REACHED)
+                            reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
 
-                    if(reactiveLimit[i].limitReached == RL_MAX_REACHED)
-                        reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
+                        else if (reactiveLimit[i].limitReached == RL_MIN_REACHED)
+                            reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
 
-                    else if(reactiveLimit[i].limitReached == RL_MIN_REACHED)
-                        reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
+                        else
+                            reactivePower /= (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
 
-                    else
-                        reactivePower /= (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
-
-                    switch(childData.reactivePowerUnit) {
+                        switch (childData.reactivePowerUnit) {
                         case ElectricalUnit::UNIT_PU: {
                             reactivePower /= systemPowerBase;
                         } break;
@@ -527,64 +622,66 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                         } break;
                         default:
                             break;
+                        }
+                        childData.reactivePower = reactivePower;
                     }
-                    childData.reactivePower = reactivePower;
+
+                    if (childData.activePower >= 0.0)
+                        generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
+                    else
+                        generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
+
+                    generator->SetElectricalData(childData);
                 }
-
-                if(childData.activePower >= 0.0)
-                    generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
-                else
-                    generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
-
-                generator->SetElectricalData(childData);
             }
-        }
 
-        // Set the sync motor reactive power
-        double exceededReactive = 0.0;
-        int numMachines = syncGeneratorsOnBus.size() + syncMotorsOnBus.size();
-        for(auto itsm = syncMotorsOnBus.begin(); itsm != syncMotorsOnBus.end(); itsm++) {
-            SyncMotor* syncMotor = *itsm;
-            SyncMotorElectricalData childData = syncMotor->GetElectricalData();
+            // Set the sync motor reactive power
+            double exceededReactive = 0.0;
+            int numMachines = syncGeneratorsOnBus.size() + syncMotorsOnBus.size();
+            for (auto itsm = syncMotorsOnBus.begin(); itsm != syncMotorsOnBus.end(); itsm++) {
+                SyncMotor* syncMotor = *itsm;
+                SyncMotorElectricalData childData = syncMotor->GetElectricalData();
 
-            bool reachedMachineLimit = false;
+                bool reachedMachineLimit = false;
 
-            if(busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-                // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-                //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+                if (busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
+                    // double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
+                    //                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
 
-                SyncMotorElectricalData childData_PU = syncMotor->GetPUElectricalData(systemPowerBase);
+                    SyncMotorElectricalData childData_PU = syncMotor->GetPUElectricalData(systemPowerBase);
 
-                double reactivePower = power[i].imag() + loadPower.imag();
+                    double reactivePower = power[i].imag() + loadPower.imag();
 
-                // Bus reachd maximum reactive limit.
-                if(reactiveLimit[i].limitReached == RL_MAX_REACHED)
-                    reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
-                // Bus reached minimum reactive limit.
-                else if(reactiveLimit[i].limitReached == RL_MIN_REACHED)
-                    reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
-                // Bus didn't reach any limits
-                else {
-                    reactivePower /= (double)(numMachines);
-                    if(childData_PU.haveMaxReactive && (reactivePower > childData_PU.maxReactive)) {
-                        exceededReactive += reactivePower - childData_PU.maxReactive;
-                        reactivePower = childData_PU.maxReactive;
-                        reachedMachineLimit = true;
-                    } else if(childData_PU.haveMinReactive && (reactivePower < childData_PU.minReactive)) {
-                        exceededReactive += reactivePower - childData_PU.minReactive;
-                        reactivePower = childData_PU.minReactive;
-                        reachedMachineLimit = true;
-                    } else if((!childData_PU.haveMaxReactive && reactiveLimit[i].limitReached == RL_MAX_REACHED) ||
-                              (!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
-                              (!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
-                        reactivePower += exceededReactive;
-                        exceededReactive = 0.0;
+                    // Bus reachd maximum reactive limit.
+                    if (reactiveLimit[i].limitReached == RL_MAX_REACHED)
+                        reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
+                    // Bus reached minimum reactive limit.
+                    else if (reactiveLimit[i].limitReached == RL_MIN_REACHED)
+                        reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
+                    // Bus didn't reach any limits
+                    else {
+                        reactivePower /= (double)(numMachines);
+                        if (childData_PU.haveMaxReactive && (reactivePower > childData_PU.maxReactive)) {
+                            exceededReactive += reactivePower - childData_PU.maxReactive;
+                            reactivePower = childData_PU.maxReactive;
+                            reachedMachineLimit = true;
+                        }
+                        else if (childData_PU.haveMinReactive && (reactivePower < childData_PU.minReactive)) {
+                            exceededReactive += reactivePower - childData_PU.minReactive;
+                            reactivePower = childData_PU.minReactive;
+                            reachedMachineLimit = true;
+                        }
+                        else if ((!childData_PU.haveMaxReactive && reactiveLimit[i].limitReached == RL_MAX_REACHED) ||
+                            (!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
+                            (!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
+                            reactivePower += exceededReactive;
+                            exceededReactive = 0.0;
+                        }
                     }
-                }
 
-                reactivePower *= systemPowerBase;
+                    reactivePower *= systemPowerBase;
 
-                switch(childData.reactivePowerUnit) {
+                    switch (childData.reactivePowerUnit) {
                     case ElectricalUnit::UNIT_PU: {
                         reactivePower /= systemPowerBase;
                     } break;
@@ -596,20 +693,21 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
                     } break;
                     default:
                         break;
+                    }
+                    childData.reactivePower = reactivePower;
                 }
-                childData.reactivePower = reactivePower;
-            }
 
-            if(childData.activePower > 0.0)
-                syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
-            else
-                syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
+                if (childData.activePower > 0.0)
+                    syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
+                else
+                    syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
 
-            syncMotor->SetElectricalData(childData);
+                syncMotor->SetElectricalData(childData);
 
-            if(reachedMachineLimit) {
-                syncMotorsOnBus.erase(itsm);
-                itsm = syncMotorsOnBus.begin();
+                if (reachedMachineLimit) {
+                    syncMotorsOnBus.erase(itsm);
+                    itsm = syncMotorsOnBus.begin();
+                }
             }
         }
     }

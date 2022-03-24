@@ -21,7 +21,7 @@
 #include <GL/glew.h>
 
 #ifdef _MSC_VER
-#include <windows.h>
+//#include <windows.h>
 #endif // _MSC_VER
 
 //#include <GL/gl.h>

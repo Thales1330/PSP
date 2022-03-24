@@ -30,6 +30,7 @@ struct BusElectricalData {
     double controlledVoltage = 1.0;
     int controlledVoltageUnitChoice = 0;  // 0 = p.u., 1 = same as nominalVoltageUnit (ElectricalUnit::UNIT_V or ElectricalUnit::UNIT_kV).
     bool slackBus = false;
+    bool isConnected = true;
 
     // Power flow (p.u.)
     std::complex<double> voltage = std::complex<double>(1.0, 0.0);

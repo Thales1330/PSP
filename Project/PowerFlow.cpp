@@ -36,7 +36,8 @@ bool PowerFlow::InitPowerFlow(std::vector<BusType>& busType,
     }
 
     // Number of buses in the system.
-    m_numberOfBuses = static_cast<int>(m_busList.size());
+    //m_numberOfBuses = static_cast<int>(m_busList.size());
+    m_numberOfBuses = static_cast<int>(m_yBus.size());
 
     busType.clear();
     voltage.clear();
@@ -47,132 +48,143 @@ bool PowerFlow::InitPowerFlow(std::vector<BusType>& busType,
     reactiveLimit.resize(m_numberOfBuses);
 
     int busNumber = 0;
+    Bus* slackBus = nullptr;
     for(auto itb = m_busList.begin(); itb != m_busList.end(); itb++) {
         Bus* bus = *itb;
         BusElectricalData data = bus->GetElectricalData();
-
-        // Fill the bus type
-        if(data.slackBus) busType.push_back(BUS_SLACK);
-        // If the bus have controlled voltage, check if at least one synchronous machine is connected, then set the
-        // bus type.
-        else if(data.isVoltageControlled) {
-            bool hasSyncMachine = false;
-            // Synchronous generator
-            for(auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
-                SyncGenerator* syncGenerator = *itsg;
-                if(bus == syncGenerator->GetParentList()[0] && syncGenerator->IsOnline()) hasSyncMachine = true;
+        if (data.isConnected) {
+            // Fill the bus type
+            if (data.slackBus) {
+                busType.push_back(BUS_SLACK);
+                slackBus = bus;
             }
-            // Synchronous motor
-            for(auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
-                SyncMotor* syncMotor = *itsm;
-                if(bus == syncMotor->GetParentList()[0] && syncMotor->IsOnline()) hasSyncMachine = true;
+            // If the bus have controlled voltage, check if at least one synchronous machine is connected, then set the
+            // bus type.
+            else if (data.isVoltageControlled) {
+                bool hasSyncMachine = false;
+                // Synchronous generator
+                for (auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
+                    SyncGenerator* syncGenerator = *itsg;
+                    if (bus == syncGenerator->GetParentList()[0] && syncGenerator->IsOnline()) hasSyncMachine = true;
+                }
+                // Synchronous motor
+                for (auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
+                    SyncMotor* syncMotor = *itsm;
+                    if (bus == syncMotor->GetParentList()[0] && syncMotor->IsOnline()) hasSyncMachine = true;
+                }
+                if (hasSyncMachine)
+                    busType.push_back(BUS_PV);
+                else
+                    busType.push_back(BUS_PQ);
             }
-            if(hasSyncMachine)
-                busType.push_back(BUS_PV);
             else
                 busType.push_back(BUS_PQ);
-        } else
-            busType.push_back(BUS_PQ);
 
-        // Fill the voltages array
-        if(data.isVoltageControlled && busType[busNumber] != BUS_PQ) {
-            voltage.push_back(std::complex<double>(data.controlledVoltage * std::cos(radInitAngle),
-                                                   data.controlledVoltage * std::sin(radInitAngle)));
-        } else {
-            voltage.push_back(std::complex<double>(std::cos(radInitAngle), std::sin(radInitAngle)));
-        }
-
-        // Fill the power array
-        power.push_back(std::complex<double>(0.0, 0.0));  // Initial value
-        loadPower.push_back(std::complex<double>(0.0, 0.0));
-
-        // Synchronous generator
-        for(auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
-            SyncGenerator* syncGenerator = *itsg;
-            if(syncGenerator->IsOnline()) {
-                if(bus == syncGenerator->GetParentList()[0]) {
-                    SyncGeneratorElectricalData childData = syncGenerator->GetPUElectricalData(systemPowerBase);
-                    power[busNumber] += std::complex<double>(childData.activePower, childData.reactivePower);
-
-                    if(busType[busNumber] == BUS_PV) {
-                        if(childData.haveMaxReactive && reactiveLimit[busNumber].maxLimitType != RL_UNLIMITED_SOURCE) {
-                            reactiveLimit[busNumber].maxLimitType = RL_LIMITED;
-                            reactiveLimit[busNumber].maxLimit += childData.maxReactive;
-                        } else if(!childData.haveMaxReactive)
-                            reactiveLimit[busNumber].maxLimitType = RL_UNLIMITED_SOURCE;
-
-                        if(childData.haveMinReactive && reactiveLimit[busNumber].minLimitType != RL_UNLIMITED_SOURCE) {
-                            reactiveLimit[busNumber].minLimitType = RL_LIMITED;
-                            reactiveLimit[busNumber].minLimit += childData.minReactive;
-                        } else if(!childData.haveMinReactive)
-                            reactiveLimit[busNumber].minLimitType = RL_UNLIMITED_SOURCE;
-                    }
-                }
+            // Fill the voltages array
+            if (data.isVoltageControlled && busType[busNumber] != BUS_PQ) {
+                voltage.push_back(std::complex<double>(data.controlledVoltage * std::cos(radInitAngle),
+                    data.controlledVoltage * std::sin(radInitAngle)));
             }
-        }
-        // Synchronous motor
-        for(auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
-            SyncMotor* syncMotor = *itsm;
-            if(syncMotor->IsOnline()) {
-                if(bus == syncMotor->GetParentList()[0]) {
-                    SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
-                    power[busNumber] += std::complex<double>(-childData.activePower, childData.reactivePower);
-                    loadPower[busNumber] += std::complex<double>(-childData.activePower, 0.0);
-
-                    if(busType[busNumber] == BUS_PV) {
-                        if(childData.haveMaxReactive && reactiveLimit[busNumber].maxLimitType != RL_UNLIMITED_SOURCE) {
-                            reactiveLimit[busNumber].maxLimitType = RL_LIMITED;
-                            reactiveLimit[busNumber].maxLimit += childData.maxReactive;
-                        } else if(!childData.haveMaxReactive)
-                            reactiveLimit[busNumber].maxLimitType = RL_UNLIMITED_SOURCE;
-
-                        if(childData.haveMinReactive && reactiveLimit[busNumber].minLimitType != RL_UNLIMITED_SOURCE) {
-                            reactiveLimit[busNumber].minLimitType = RL_LIMITED;
-                            reactiveLimit[busNumber].minLimit += childData.minReactive;
-                        } else if(!childData.haveMinReactive)
-                            reactiveLimit[busNumber].minLimitType = RL_UNLIMITED_SOURCE;
-                    }
-                }
+            else {
+                voltage.push_back(std::complex<double>(std::cos(radInitAngle), std::sin(radInitAngle)));
             }
-        }
-        // Load
-        for(auto itl = m_loadList.begin(); itl != m_loadList.end(); itl++) {
-            Load* load = *itl;
-            if(load->IsOnline()) {
-                if(bus == load->GetParentList()[0]) {
-                    LoadElectricalData childData = load->GetPUElectricalData(systemPowerBase);
-                    if(childData.loadType == CONST_POWER) {
-                        power[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
-                        loadPower[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
-                    }
-                }
-            }
-        }
 
-        // Induction motor
-        for(auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
-            IndMotor* indMotor = *itim;
-            if(indMotor->IsOnline()) {
-                if(bus == indMotor->GetParentList()[0]) {
-                    IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
-                    double reactivePower = childData.reactivePower;
+            // Fill the power array
+            power.push_back(std::complex<double>(0.0, 0.0));  // Initial value
+            loadPower.push_back(std::complex<double>(0.0, 0.0));
 
-                    if(childData.calcQInPowerFlow) {
-                        indMotor->InitPowerFlowMotor(systemPowerBase, data.number);
-                        if(!indMotor->CalculateReactivePower(std::abs(voltage[childData.busNum]))) {
-                            m_errorMsg = _("It was not possible to solve the induction motors.");
-                            return false;
+            // Synchronous generator
+            for (auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
+                SyncGenerator* syncGenerator = *itsg;
+                if (syncGenerator->IsOnline()) {
+                    if (bus == syncGenerator->GetParentList()[0]) {
+                        SyncGeneratorElectricalData childData = syncGenerator->GetPUElectricalData(systemPowerBase);
+                        power[busNumber] += std::complex<double>(childData.activePower, childData.reactivePower);
+
+                        if (busType[busNumber] == BUS_PV) {
+                            if (childData.haveMaxReactive && reactiveLimit[busNumber].maxLimitType != RL_UNLIMITED_SOURCE) {
+                                reactiveLimit[busNumber].maxLimitType = RL_LIMITED;
+                                reactiveLimit[busNumber].maxLimit += childData.maxReactive;
+                            }
+                            else if (!childData.haveMaxReactive)
+                                reactiveLimit[busNumber].maxLimitType = RL_UNLIMITED_SOURCE;
+
+                            if (childData.haveMinReactive && reactiveLimit[busNumber].minLimitType != RL_UNLIMITED_SOURCE) {
+                                reactiveLimit[busNumber].minLimitType = RL_LIMITED;
+                                reactiveLimit[busNumber].minLimit += childData.minReactive;
+                            }
+                            else if (!childData.haveMinReactive)
+                                reactiveLimit[busNumber].minLimitType = RL_UNLIMITED_SOURCE;
                         }
-                        reactivePower = indMotor->GetElectricalData().qValue;
                     }
-
-                    power[busNumber] += std::complex<double>(-childData.activePower, -reactivePower);
-                    loadPower[busNumber] += std::complex<double>(-childData.activePower, -reactivePower);
                 }
             }
-        }
+            // Synchronous motor
+            for (auto itsm = m_syncMotorList.begin(); itsm != m_syncMotorList.end(); itsm++) {
+                SyncMotor* syncMotor = *itsm;
+                if (syncMotor->IsOnline()) {
+                    if (bus == syncMotor->GetParentList()[0]) {
+                        SyncMotorElectricalData childData = syncMotor->GetPUElectricalData(systemPowerBase);
+                        power[busNumber] += std::complex<double>(-childData.activePower, childData.reactivePower);
+                        loadPower[busNumber] += std::complex<double>(-childData.activePower, 0.0);
 
-        busNumber++;
+                        if (busType[busNumber] == BUS_PV) {
+                            if (childData.haveMaxReactive && reactiveLimit[busNumber].maxLimitType != RL_UNLIMITED_SOURCE) {
+                                reactiveLimit[busNumber].maxLimitType = RL_LIMITED;
+                                reactiveLimit[busNumber].maxLimit += childData.maxReactive;
+                            }
+                            else if (!childData.haveMaxReactive)
+                                reactiveLimit[busNumber].maxLimitType = RL_UNLIMITED_SOURCE;
+
+                            if (childData.haveMinReactive && reactiveLimit[busNumber].minLimitType != RL_UNLIMITED_SOURCE) {
+                                reactiveLimit[busNumber].minLimitType = RL_LIMITED;
+                                reactiveLimit[busNumber].minLimit += childData.minReactive;
+                            }
+                            else if (!childData.haveMinReactive)
+                                reactiveLimit[busNumber].minLimitType = RL_UNLIMITED_SOURCE;
+                        }
+                    }
+                }
+            }
+            // Load
+            for (auto itl = m_loadList.begin(); itl != m_loadList.end(); itl++) {
+                Load* load = *itl;
+                if (load->IsOnline()) {
+                    if (bus == load->GetParentList()[0]) {
+                        LoadElectricalData childData = load->GetPUElectricalData(systemPowerBase);
+                        if (childData.loadType == CONST_POWER) {
+                            power[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
+                            loadPower[busNumber] += std::complex<double>(-childData.activePower, -childData.reactivePower);
+                        }
+                    }
+                }
+            }
+
+            // Induction motor
+            for (auto itim = m_indMotorList.begin(); itim != m_indMotorList.end(); itim++) {
+                IndMotor* indMotor = *itim;
+                if (indMotor->IsOnline()) {
+                    if (bus == indMotor->GetParentList()[0]) {
+                        IndMotorElectricalData childData = indMotor->GetPUElectricalData(systemPowerBase);
+                        double reactivePower = childData.reactivePower;
+
+                        if (childData.calcQInPowerFlow) {
+                            indMotor->InitPowerFlowMotor(systemPowerBase, data.number);
+                            if (!indMotor->CalculateReactivePower(std::abs(voltage[childData.busNum]))) {
+                                m_errorMsg = _("It was not possible to solve the induction motors.");
+                                return false;
+                            }
+                            reactivePower = indMotor->GetElectricalData().qValue;
+                        }
+
+                        power[busNumber] += std::complex<double>(-childData.activePower, -reactivePower);
+                        loadPower[busNumber] += std::complex<double>(-childData.activePower, -reactivePower);
+                    }
+                }
+            }
+
+            busNumber++;
+        }
     }
 
     // Check if have slack bus and if have generation on the slack bus
@@ -180,13 +192,9 @@ bool PowerFlow::InitPowerFlow(std::vector<BusType>& busType,
     bool slackBusHaveGeneration = false;
     for(unsigned int i = 0; i < busType.size(); i++) {
         if(busType[i] == BUS_SLACK) {
-            auto itb = m_busList.begin();
-            std::advance(itb, i);
-            Bus* bus = *itb;
-
             for(auto itsg = m_syncGeneratorList.begin(); itsg != m_syncGeneratorList.end(); itsg++) {
                 SyncGenerator* syncGenerator = *itsg;
-                if(syncGenerator->IsOnline() && bus == syncGenerator->GetParentList()[0]) slackBusHaveGeneration = true;
+                if(syncGenerator->IsOnline() && slackBus == syncGenerator->GetParentList()[0]) slackBusHaveGeneration = true;
             }
             haveSlackBus = true;
         }
@@ -257,6 +265,7 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
         for(int j = 0; j < m_numberOfBuses; j++) sBus += voltage[i] * std::conj(voltage[j]) * std::conj(m_yBus[i][j]);
         power[i] = sBus;
     }
+
 
     UpdateElementsPowerFlow(voltage, power, oldBusType, reactiveLimit, systemPowerBase);
 

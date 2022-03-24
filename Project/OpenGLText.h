@@ -21,6 +21,7 @@
 #include <GL/glew.h>
 
 #ifdef _MSC_VER
+#define _WINSOCKAPI_ 
 #include <windows.h>
 #endif 
 //#include <GL/gl.h>

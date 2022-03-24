@@ -198,6 +198,7 @@ class ElectricCalculation
     const std::vector<HarmCurrent*> GetHarmCurrentList() const { return m_harmCurrentList; }
 
    protected:
+    void GetNextConnection(const unsigned int& checkBusNumber, const std::vector< std::vector< std::complex<double> > >& yBus, std::vector<bool>& connToSlack);
     std::vector<PowerElement*> m_powerElementList;
     std::vector<Bus*> m_busList;
     std::vector<Capacitor*> m_capacitorList;

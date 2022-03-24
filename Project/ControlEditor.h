@@ -27,7 +27,7 @@
 #include <wx/graphics.h>
 
 #ifdef _MSC_VER
-#include <windows.h>
+//#include <windows.h>
 #endif 
 //#include <GL/gl.h>
 #include <GL/glu.h>

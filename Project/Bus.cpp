@@ -73,10 +73,14 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
     glRotated(m_angle, 0.0, 0.0, 1.0);
     glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
 
-    if(m_dynEvent)
+    
+    if (!m_electricalData.isConnected)
+        glColor4dv(m_offlineElementColour.GetRGBA());
+    else if (m_dynEvent)
         glColor4dv(m_dynamicEventColour.GetRGBA());
     else
         glColor4dv(m_busColour.GetRGBA());
+
 
     DrawRectangle(m_position, m_width, m_height);
     // Pop the old matrix back.
@@ -140,9 +144,12 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
     gc->Rotate(wxDegToRad(m_angle));
     gc->Translate(-m_position.m_x, -m_position.m_y);
 
-	if (m_dynEvent)
+	
+    if(!m_electricalData.isConnected)
+        gc->SetBrush(wxBrush(m_offlineElementColour.GetDcRGBA()));
+    else if (m_dynEvent)
         gc->SetBrush(wxBrush(m_dynamicEventColour.GetDcRGBA()));
-	else
+    else
         gc->SetBrush(wxBrush(m_busColour.GetDcRGBA()));
 
     gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);

@@ -10,23 +10,23 @@ module.exports = {
   organizationName: 'thales1330', // Usually your GitHub org/user name.
   projectName: 'PSP', // Usually your repo name.
   themeConfig: {
-    colorMode: {
-      defaultMode: 'dark',
-      disableSwitch: false,
-      respectPrefersColorScheme: true,
-      switchConfig: {
-        darkIcon: '🌙',
-        darkIconStyle: {
-          // Style object passed to inline CSS
-          // For more information about styling options visit: https://reactjs.org/docs/dom-elements.html#style
-          marginLeft: '2px',
-        },
-        lightIcon: '☀',
-        lightIconStyle: {
-          marginLeft: '1px',
-        },
-      },
-    },
+    //colorMode: {
+    //  defaultMode: 'dark',
+    //  disableSwitch: false,
+    //  respectPrefersColorScheme: true,
+    // // switchConfig: {
+    // //   darkIcon: '🌙',
+    // //   darkIconStyle: {
+    // //     // Style object passed to inline CSS
+    // //     // For more information about styling options visit: https://reactjs.org/docs/dom-elements.html#style
+    // //     marginLeft: '2px',
+    // //   },
+    // //   lightIcon: '☀',
+    // //   lightIconStyle: {
+    // //     marginLeft: '1px',
+    // //   },
+    //  },
+    //},
     navbar: {
       title: 'PSP-UFU',
       logo: {
@@ -94,10 +94,11 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Thales Lima Oliveira. Built with Docusaurus.`,
     },
 	algolia: {
-      apiKey: '810abe1ba98dec3f185d77a2dcf491d5',
+      apiKey: 'e4edceff843f25b52e67fd1ba74e1e7f',
+	  appId: 'U5AL8O8ZTH',
       indexName: 'psp-ufu',
       contextualSearch: true,
-      searchParameters: {}, // Optional (if provided by Algolia)
+      //searchParameters: {}, // Optional (if provided by Algolia)
     },
   },
   presets: [

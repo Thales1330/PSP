@@ -40,7 +40,7 @@ public:
     void Push(unsigned int count)
     {
 #ifdef _MSC_VER
-        static_assert(false);
+        //static_assert(false);
 #endif
     }
 
