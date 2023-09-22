@@ -1766,11 +1766,18 @@ bool Workspace::RunHarmonicDistortion()
     else if (simProp.basePowerUnit == ElectricalUnit::UNIT_kVA)
         basePower *= 1e3;
     if (!RunPowerFlow()) return false;
+
     PowerQuality pq(GetElementList());
     bool result = pq.CalculateDistortions(basePower);
 
-    UpdateTextElements();
-    Redraw();
+    if (!result) {
+        wxMessageDialog msgDialog(this, pq.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+        msgDialog.ShowModal();
+    }
+    else {
+        UpdateTextElements();
+        Redraw();
+    }    
 
     return result;
 }

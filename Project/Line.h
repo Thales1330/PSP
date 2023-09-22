@@ -47,6 +47,10 @@ struct LineElectricalData {
     double zeroCapSusceptance = 0.0;
     // p.u. fault data
     std::complex<double> faultCurrent[2][3];
+
+    // Power Quality
+    std::vector<int> harmonicOrder;
+    std::vector< std::complex<double> > harmonicCurrent[2];
 };
 
 /**

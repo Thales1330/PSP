@@ -593,7 +593,7 @@ void PowerFlow::NewtonRaphson(std::vector<BusType> busType,
                               double inertia)
 {
     // Jacobian matrix
-    std::vector<std::vector<double> > jacobMatrix = CalculateJacobianMatrix(voltage, busType, numPV, numPQ);
+    std::vector<std::vector<double> > jacobMatrix = CalculateJacobianMatrix(voltage, power, busType, numPV, numPQ);
 
     // Apply inertia
     for(unsigned int i = 0; i < dPdQ.size(); ++i) { dPdQ[i] = inertia * dPdQ[i]; }
@@ -623,6 +623,7 @@ void PowerFlow::NewtonRaphson(std::vector<BusType> busType,
 }
 
 std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector<std::complex<double> > voltage,
+                                                                     std::vector<std::complex<double> > power,
                                                                      std::vector<BusType> busType,
                                                                      int numPV,
                                                                      int numPQ)
@@ -651,12 +652,22 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
                         double tj = std::arg(voltage[j]);
                         double yij = std::abs(m_yBus[i][j]);
                         double tij = std::arg(m_yBus[i][j]);
+#ifdef STD_NR
                         j11[busNumI][busNumJ] = -vi * vj * yij * std::sin(tij + tj - ti);
+#else
+                        double gij = m_yBus[i][j].real();
+                        double bij = m_yBus[i][j].imag();
+                        j11[busNumI][busNumJ] = vi * vj * (gij * std::sin(tij) - bij * std::cos(tij));
+#endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
+#ifdef STD_NR
                         j11[busNumI][busNumJ] = -sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
+#else
+                        j11[busNumI][busNumJ] = - power[i].imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
+#endif
                     }
                     busNumJ++;
                 }
@@ -685,13 +696,22 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
                         double tj = std::arg(voltage[j]);
                         double yij = std::abs(m_yBus[i][j]);
                         double tij = std::arg(m_yBus[i][j]);
-
+#ifdef STD_NR
                         j12[busNumI][busNumJ] = vj * vi * yij * std::cos(tij + tj - ti);
+#else
+                        double gij = m_yBus[i][j].real();
+                        double bij = m_yBus[i][j].imag();
+                        j12[busNumI][busNumJ] = vi * (gij * std::cos(tij) - bij * std::sin(tij));
+#endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
+#ifdef STD_NR
                         j12[busNumI][busNumJ] = sj.real() + m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
+#else
+                        j12[busNumI][busNumJ] = (power[i].real() + m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0)) / std::abs(voltage[j]);
+#endif
                     }
                     busNumJ++;
                 }
@@ -720,13 +740,23 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
                         double tj = std::arg(voltage[j]);
                         double yij = std::abs(m_yBus[i][j]);
                         double tij = std::arg(m_yBus[i][j]);
-
+           
+#ifdef STD_NR
                         j21[busNumI][busNumJ] = -vi * vj * yij * std::cos(tij + tj - ti);
+#else
+                        double gij = m_yBus[i][j].real();
+                        double bij = m_yBus[i][j].imag();
+                        j21[busNumI][busNumJ] = -vi * vj * (gij * std::cos(tij) + bij * std::sin(tij));
+#endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
+#ifdef STD_NR
                         j21[busNumI][busNumJ] = sj.real() - m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
+#else
+                        j21[busNumI][busNumJ] = power[i].real() - m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
+#endif
                     }
                     busNumJ++;
                 }
@@ -755,12 +785,22 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
                         double yij = std::abs(m_yBus[i][j]);
                         double tij = std::arg(m_yBus[i][j]);
 
+#ifdef STD_NR
                         j22[busNumI][busNumJ] = -vj * vi * yij * std::sin(tij + tj - ti);
+#else
+                        double gij = m_yBus[i][j].real();
+                        double bij = m_yBus[i][j].imag();
+                        j22[busNumI][busNumJ] = vi * (gij * std::sin(tij) - bij * std::cos(tij));
+#endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
                         for(int k = 0; k < m_numberOfBuses; k++)
                             sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
+#ifdef STD_NR
                         j22[busNumI][busNumJ] = sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
+#else
+                        j22[busNumI][busNumJ] = (power[i].imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0)) / std::abs(voltage[j]);
+#endif
                     }
                     busNumJ++;
                 }

@@ -18,6 +18,8 @@
 #ifndef POWERFLOW_H
 #define POWERFLOW_H
 
+#define STD_NR
+
 #include "ElectricCalculation.h"
 
 #include <wx/intl.h>  //_()
@@ -67,6 +69,7 @@ class PowerFlow : public ElectricCalculation
    protected:
     void GetNumPVPQ(std::vector<BusType> busType, int &numPQ, int &numPV);
     std::vector<std::vector<double> > CalculateJacobianMatrix(std::vector<std::complex<double> > voltage,
+                                                              std::vector<std::complex<double> > power,
                                                               std::vector<BusType> busType,
                                                               int numPV,
                                                               int numPQ);

@@ -527,6 +527,20 @@ wxString Transformer::GetTipText() const
                    wxString::FromDouble(m_electricalData.powerFlow[1].real(), 5) + _(" p.u.");
         tipText += _("\nQ") + wxString::Format("(%d-%d) = ", busNumber[1], busNumber[0]) +
                    wxString::FromDouble(m_electricalData.powerFlow[1].imag(), 5) + _(" p.u.");
+
+        if (!m_electricalData.harmonicOrder.empty()) {
+            tipText += _("\n\nHarmonic currents:");
+            int i = 0;
+            for (auto& hCurrent1 : m_electricalData.harmonicCurrent[0]) {
+                auto& hCurrent2 = m_electricalData.harmonicCurrent[1][i];
+                wxString i1, i2;
+                i1.Printf(_("\nIh(%d)(%d-%d) = %.5e%s%.2f%s p.u."), m_electricalData.harmonicOrder[i], busNumber[0], busNumber[1], std::abs(hCurrent1), wxString(L'\u2220'), wxRadToDeg(std::arg(hCurrent1)), wxString(L'\u00B0'));
+                i2.Printf(_("\nIh(%d)(%d-%d) = %.5e%s%.2f%s p.u."), m_electricalData.harmonicOrder[i], busNumber[1], busNumber[0], std::abs(hCurrent2), wxString(L'\u2220'), wxRadToDeg(std::arg(hCurrent2)), wxString(L'\u00B0'));
+
+                tipText += i1 + i2;
+                i++;
+            }
+        }
     }
 
     return tipText;

@@ -104,7 +104,7 @@ bool Branch::SetNodeParent(Element* parent)
 
 void Branch::RemoveParent(Element* parent)
 {
-    for(int i = 0; i < 2; i++) {
+    for(unsigned int i = 0; i < m_parentList.size(); i++) {
         if(parent == m_parentList[i]) {
             m_parentList[i] = nullptr;
             m_online = false;
@@ -155,16 +155,23 @@ void Branch::RotateNode(Element* parent, bool clockwise)
 
 void Branch::UpdateSwitchesPosition()
 {
-    if(m_parentList[0]) {
-        m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], m_pointList[2]);
-    } else {
-        m_pointList[1] = m_pointList[0];
+    if (m_parentList.size() >= 1) {
+        if (m_parentList[0]) {
+            m_pointList[1] = GetSwitchPoint(m_parentList[0], m_pointList[0], m_pointList[2]);
+        }
+        else {
+            m_pointList[1] = m_pointList[0];
+        }
     }
-    if(m_parentList[1]) {
-        m_pointList[m_pointList.size() - 2] =
-            GetSwitchPoint(m_parentList[1], m_pointList[m_pointList.size() - 1], m_pointList[m_pointList.size() - 3]);
-    } else {
-        m_pointList[m_pointList.size() - 2] = m_pointList[m_pointList.size() - 1];
+
+    if (m_parentList.size() >= 2) {
+        if (m_parentList[1]) {
+            m_pointList[m_pointList.size() - 2] =
+                GetSwitchPoint(m_parentList[1], m_pointList[m_pointList.size() - 1], m_pointList[m_pointList.size() - 3]);
+        }
+        else {
+            m_pointList[m_pointList.size() - 2] = m_pointList[m_pointList.size() - 1];
+        }
     }
     UpdateSwitches();
 }

@@ -6,20 +6,28 @@
 
 #include "DataReportBase.h"
 
+
 // Declare the bitmap loading function
 extern void wxC6A63InitBitmapResources();
 
-static bool bBitmapLoaded = false;
 
-DataReportBase::DataReportBase(wxWindow* parent,
-                               wxWindowID id,
-                               const wxString& title,
-                               const wxPoint& pos,
-                               const wxSize& size,
-                               long style)
+namespace {
+// return the wxBORDER_SIMPLE that matches the current application theme
+wxBorder get_border_simple_theme_aware_bit() {
+#if wxVERSION_NUMBER >= 3300 && defined(__WXMSW__)
+    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_STATIC;
+#else
+    return wxBORDER_DEFAULT;
+#endif
+} // DoGetBorderSimpleBit
+bool bBitmapLoaded = false;
+} // namespace
+
+
+DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
     : wxFrame(parent, id, title, pos, size, style)
 {
-    if(!bBitmapLoaded) {
+    if ( !bBitmapLoaded ) {
         // We need to initialise the default bitmap handler
         wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
         wxC6A63InitBitmapResources();
@@ -31,355 +39,392 @@ DataReportBase::DataReportBase(wxWindow* parent,
         wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart16"));
         wxIcon icn;
         icn.CopyFromBitmap(iconBmp);
-        app_icons.AddIcon(icn);
+        app_icons.AddIcon( icn );
     }
     {
         wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart32"));
         wxIcon icn;
         icn.CopyFromBitmap(iconBmp);
-        app_icons.AddIcon(icn);
+        app_icons.AddIcon( icn );
     }
     {
         wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart64"));
         wxIcon icn;
         icn.CopyFromBitmap(iconBmp);
-        app_icons.AddIcon(icn);
+        app_icons.AddIcon( icn );
     }
     {
         wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart128"));
         wxIcon icn;
         icn.CopyFromBitmap(iconBmp);
-        app_icons.AddIcon(icn);
+        app_icons.AddIcon( icn );
     }
     {
         wxBitmap iconBmp = wxXmlResource::Get()->LoadBitmap(wxT("chart256"));
         wxIcon icn;
         icn.CopyFromBitmap(iconBmp);
-        app_icons.AddIcon(icn);
+        app_icons.AddIcon( icn );
     }
-    SetIcons(app_icons);
+    SetIcons( app_icons );
 
+    
     wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizerLvl1_1);
-
+    
     wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxHORIZONTAL);
-
+    
     boxSizerLvl1_1->Add(boxSizerLvl2_1, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_notebookDataReport =
-        new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBK_DEFAULT);
+    
+    m_notebookDataReport = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
     m_notebookDataReport->SetName(wxT("m_notebookDataReport"));
-
+    
     boxSizerLvl2_1->Add(m_notebookDataReport, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelPowerFlowData = new wxPanel(m_notebookDataReport, wxID_ANY, wxDefaultPosition,
-                                       wxDLG_UNIT(m_notebookDataReport, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelPowerFlowData = new wxPanel(m_notebookDataReport, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookDataReport, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookDataReport->AddPage(m_panelPowerFlowData, _("Power flow data"), false);
-
+    
     wxBoxSizer* boxSizerLvl3_1 = new wxBoxSizer(wxVERTICAL);
     m_panelPowerFlowData->SetSizer(boxSizerLvl3_1);
-
-    m_notebookPowerFlow = new wxNotebook(m_panelPowerFlowData, wxID_ANY, wxDefaultPosition,
-                                         wxDLG_UNIT(m_panelPowerFlowData, wxSize(-1, -1)), wxBK_LEFT | wxBK_DEFAULT);
+    
+    m_notebookPowerFlow = new wxNotebook(m_panelPowerFlowData, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPowerFlowData, wxSize(-1,-1)), wxBK_LEFT|wxBK_DEFAULT);
     m_notebookPowerFlow->SetName(wxT("m_notebookPowerFlow"));
-
+    
     boxSizerLvl3_1->Add(m_notebookPowerFlow, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelPowerFlow = new wxPanel(m_notebookPowerFlow, wxID_ANY, wxDefaultPosition,
-                                   wxDLG_UNIT(m_notebookPowerFlow, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelPowerFlow = new wxPanel(m_notebookPowerFlow, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookPowerFlow, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookPowerFlow->AddPage(m_panelPowerFlow, _("Power flow"), false);
-
+    
     wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
     m_panelPowerFlow->SetSizer(boxSizerLvl4_1);
-
-    m_gridPowerFlow = new wxGrid(m_panelPowerFlow, wxID_ANY, wxDefaultPosition,
-                                 wxDLG_UNIT(m_panelPowerFlow, wxSize(-1, -1)), wxWANTS_CHARS);
+    
+    m_gridPowerFlow = new wxGrid(m_panelPowerFlow, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPowerFlow, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridPowerFlow->CreateGrid(0, 0);
     m_gridPowerFlow->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridPowerFlow->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridPowerFlow->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridPowerFlow->EnableEditing(true);
-
+    
     boxSizerLvl4_1->Add(m_gridPowerFlow, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelPFBuses = new wxPanel(m_notebookPowerFlow, wxID_ANY, wxDefaultPosition,
-                                 wxDLG_UNIT(m_notebookPowerFlow, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelPFBuses = new wxPanel(m_notebookPowerFlow, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookPowerFlow, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookPowerFlow->AddPage(m_panelPFBuses, _("Buses"), false);
-
+    
     wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
     m_panelPFBuses->SetSizer(boxSizerLvl4_2);
-
-    m_gridPFBuses = new wxGrid(m_panelPFBuses, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPFBuses, wxSize(-1, -1)),
-                               wxWANTS_CHARS);
+    
+    m_gridPFBuses = new wxGrid(m_panelPFBuses, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPFBuses, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridPFBuses->CreateGrid(0, 0);
     m_gridPFBuses->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridPFBuses->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridPFBuses->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridPFBuses->EnableEditing(true);
-
+    
     boxSizerLvl4_2->Add(m_gridPFBuses, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelPFBranches = new wxPanel(m_notebookPowerFlow, wxID_ANY, wxDefaultPosition,
-                                    wxDLG_UNIT(m_notebookPowerFlow, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelPFBranches = new wxPanel(m_notebookPowerFlow, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookPowerFlow, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookPowerFlow->AddPage(m_panelPFBranches, _("Branches"), false);
-
+    
     wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
     m_panelPFBranches->SetSizer(boxSizerLvl4_3);
-
-    m_gridPFBranches = new wxGrid(m_panelPFBranches, wxID_ANY, wxDefaultPosition,
-                                  wxDLG_UNIT(m_panelPFBranches, wxSize(-1, -1)), wxWANTS_CHARS);
+    
+    m_gridPFBranches = new wxGrid(m_panelPFBranches, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPFBranches, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridPFBranches->CreateGrid(0, 0);
     m_gridPFBranches->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridPFBranches->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridPFBranches->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridPFBranches->EnableEditing(true);
-
+    
     boxSizerLvl4_3->Add(m_gridPFBranches, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelFaultData = new wxPanel(m_notebookDataReport, wxID_ANY, wxDefaultPosition,
-                                   wxDLG_UNIT(m_notebookDataReport, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelFaultData = new wxPanel(m_notebookDataReport, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookDataReport, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookDataReport->AddPage(m_panelFaultData, _("Fault data"), false);
-
+    
     wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxVERTICAL);
     m_panelFaultData->SetSizer(boxSizerLvl3_2);
-
-    m_notebookFault = new wxNotebook(m_panelFaultData, wxID_ANY, wxDefaultPosition,
-                                     wxDLG_UNIT(m_panelFaultData, wxSize(-1, -1)), wxBK_LEFT | wxBK_DEFAULT);
+    
+    m_notebookFault = new wxNotebook(m_panelFaultData, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFaultData, wxSize(-1,-1)), wxBK_LEFT|wxBK_DEFAULT);
     m_notebookFault->SetName(wxT("m_notebookFault"));
-
+    
     boxSizerLvl3_2->Add(m_notebookFault, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelFault = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition,
-                               wxDLG_UNIT(m_notebookFault, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelFault = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookFault, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookFault->AddPage(m_panelFault, _("Fault"), false);
-
+    
     wxBoxSizer* boxSizerLvl4_4 = new wxBoxSizer(wxVERTICAL);
     m_panelFault->SetSizer(boxSizerLvl4_4);
-
-    m_gridFault =
-        new wxGrid(m_panelFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1, -1)), wxWANTS_CHARS);
+    
+    m_gridFault = new wxGrid(m_panelFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFault, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridFault->CreateGrid(0, 0);
     m_gridFault->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridFault->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridFault->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridFault->EnableEditing(true);
-
+    
     boxSizerLvl4_4->Add(m_gridFault, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelFaultBuses = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition,
-                                    wxDLG_UNIT(m_notebookFault, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelFaultBuses = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookFault, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookFault->AddPage(m_panelFaultBuses, _("Buses"), false);
-
+    
     wxBoxSizer* boxSizerLvl4_5 = new wxBoxSizer(wxVERTICAL);
     m_panelFaultBuses->SetSizer(boxSizerLvl4_5);
-
-    m_gridFaultBuses = new wxGrid(m_panelFaultBuses, wxID_ANY, wxDefaultPosition,
-                                  wxDLG_UNIT(m_panelFaultBuses, wxSize(-1, -1)), wxWANTS_CHARS);
+    
+    m_gridFaultBuses = new wxGrid(m_panelFaultBuses, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFaultBuses, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridFaultBuses->CreateGrid(0, 0);
     m_gridFaultBuses->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridFaultBuses->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridFaultBuses->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridFaultBuses->EnableEditing(true);
-
+    
     boxSizerLvl4_5->Add(m_gridFaultBuses, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelFaultBranches = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition,
-                                       wxDLG_UNIT(m_notebookFault, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelFaultBranches = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookFault, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookFault->AddPage(m_panelFaultBranches, _("Branches"), false);
-
+    
     wxBoxSizer* boxSizerLvl4_6 = new wxBoxSizer(wxVERTICAL);
     m_panelFaultBranches->SetSizer(boxSizerLvl4_6);
-
-    m_gridFaultBranches = new wxGrid(m_panelFaultBranches, wxID_ANY, wxDefaultPosition,
-                                     wxDLG_UNIT(m_panelFaultBranches, wxSize(-1, -1)), wxWANTS_CHARS);
+    
+    m_gridFaultBranches = new wxGrid(m_panelFaultBranches, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFaultBranches, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridFaultBranches->CreateGrid(0, 0);
     m_gridFaultBranches->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridFaultBranches->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridFaultBranches->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridFaultBranches->EnableEditing(true);
-
+    
     boxSizerLvl4_6->Add(m_gridFaultBranches, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_panelFaultGenerators = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition,
-                                         wxDLG_UNIT(m_notebookFault, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    
+    m_panelFaultGenerators = new wxPanel(m_notebookFault, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookFault, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebookFault->AddPage(m_panelFaultGenerators, _("Generators"), false);
-
+    
     wxBoxSizer* boxSizerLvl4_118 = new wxBoxSizer(wxVERTICAL);
     m_panelFaultGenerators->SetSizer(boxSizerLvl4_118);
-
-    m_gridFaultGenerators = new wxGrid(m_panelFaultGenerators, wxID_ANY, wxDefaultPosition,
-                                       wxDLG_UNIT(m_panelFaultGenerators, wxSize(-1, -1)), wxWANTS_CHARS);
+    
+    m_gridFaultGenerators = new wxGrid(m_panelFaultGenerators, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelFaultGenerators, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridFaultGenerators->CreateGrid(0, 0);
     m_gridFaultGenerators->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridFaultGenerators->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridFaultGenerators->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridFaultGenerators->EnableEditing(true);
-
+    
     boxSizerLvl4_118->Add(m_gridFaultGenerators, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-#if wxVERSION_NUMBER >= 2900
-    if(!wxPersistenceManager::Get().Find(m_notebookDataReport)) {
+    
+    m_panelHarmonicsData = new wxPanel(m_notebookDataReport, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookDataReport, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookDataReport->AddPage(m_panelHarmonicsData, _("Harmonics data"), false);
+    
+    wxBoxSizer* boxSizerLvl3_22 = new wxBoxSizer(wxVERTICAL);
+    m_panelHarmonicsData->SetSizer(boxSizerLvl3_22);
+    
+    m_notebookHarmCurrents = new wxNotebook(m_panelHarmonicsData, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelHarmonicsData, wxSize(-1,-1)), wxBK_LEFT|wxBK_DEFAULT);
+    m_notebookHarmCurrents->SetName(wxT("m_notebookHarmCurrents"));
+    
+    boxSizerLvl3_22->Add(m_notebookHarmCurrents, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelHarmCurrents = new wxPanel(m_notebookHarmCurrents, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookHarmCurrents, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookHarmCurrents->AddPage(m_panelHarmCurrents, _("Sources"), false);
+    
+    wxBoxSizer* boxSizerLvl4_45 = new wxBoxSizer(wxVERTICAL);
+    m_panelHarmCurrents->SetSizer(boxSizerLvl4_45);
+    
+    m_gridHarmCurrents = new wxGrid(m_panelHarmCurrents, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelHarmCurrents, wxSize(-1,-1)), wxWANTS_CHARS);
+    m_gridHarmCurrents->CreateGrid(0, 0);
+    m_gridHarmCurrents->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
+    m_gridHarmCurrents->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    #if wxVERSION_NUMBER >= 2904
+    m_gridHarmCurrents->UseNativeColHeader(true);
+    #endif
+    m_gridHarmCurrents->EnableEditing(true);
+    
+    boxSizerLvl4_45->Add(m_gridHarmCurrents, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelHarmBuses = new wxPanel(m_notebookHarmCurrents, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookHarmCurrents, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookHarmCurrents->AddPage(m_panelHarmBuses, _("Voltages"), false);
+    
+    wxBoxSizer* boxSizerLvl4_58 = new wxBoxSizer(wxVERTICAL);
+    m_panelHarmBuses->SetSizer(boxSizerLvl4_58);
+    
+    m_gridHarmBuses = new wxGrid(m_panelHarmBuses, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelHarmBuses, wxSize(-1,-1)), wxWANTS_CHARS);
+    m_gridHarmBuses->CreateGrid(0, 0);
+    m_gridHarmBuses->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
+    m_gridHarmBuses->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    #if wxVERSION_NUMBER >= 2904
+    m_gridHarmBuses->UseNativeColHeader(true);
+    #endif
+    m_gridHarmBuses->EnableEditing(true);
+    
+    boxSizerLvl4_58->Add(m_gridHarmBuses, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelHarmBranches = new wxPanel(m_notebookHarmCurrents, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookHarmCurrents, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookHarmCurrents->AddPage(m_panelHarmBranches, _("Currents"), false);
+    
+    wxBoxSizer* boxSizerLvl4_611 = new wxBoxSizer(wxVERTICAL);
+    m_panelHarmBranches->SetSizer(boxSizerLvl4_611);
+    
+    m_gridHarmBranches = new wxGrid(m_panelHarmBranches, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelHarmBranches, wxSize(-1,-1)), wxWANTS_CHARS);
+    m_gridHarmBranches->CreateGrid(0, 0);
+    m_gridHarmBranches->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
+    m_gridHarmBranches->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
+    #if wxVERSION_NUMBER >= 2904
+    m_gridHarmBranches->UseNativeColHeader(true);
+    #endif
+    m_gridHarmBranches->EnableEditing(true);
+    
+    boxSizerLvl4_611->Add(m_gridHarmBranches, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebookDataReport)){
         wxPersistenceManager::Get().RegisterAndRestore(m_notebookDataReport);
     } else {
         wxPersistenceManager::Get().Restore(m_notebookDataReport);
     }
-#endif
-
-#if wxVERSION_NUMBER >= 2900
-    if(!wxPersistenceManager::Get().Find(m_notebookPowerFlow)) {
+    #endif
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebookPowerFlow)){
         wxPersistenceManager::Get().RegisterAndRestore(m_notebookPowerFlow);
     } else {
         wxPersistenceManager::Get().Restore(m_notebookPowerFlow);
     }
-#endif
-
-#if wxVERSION_NUMBER >= 2900
-    if(!wxPersistenceManager::Get().Find(m_notebookFault)) {
+    #endif
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebookFault)){
         wxPersistenceManager::Get().RegisterAndRestore(m_notebookFault);
     } else {
         wxPersistenceManager::Get().Restore(m_notebookFault);
     }
-#endif
-
+    #endif
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebookHarmCurrents)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebookHarmCurrents);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebookHarmCurrents);
+    }
+    #endif
+    
     SetName(wxT("DataReportBase"));
-    SetMinClientSize(wxSize(500, 300));
-    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
-    if(GetSizer()) { GetSizer()->Fit(this); }
+    SetMinClientSize(wxSize(500,300));
+    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
     if(GetParent()) {
         CentreOnParent(wxBOTH);
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_gridPowerFlow->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPowerFlowGridChanged), NULL,
-                             this);
-    m_gridPowerFlow->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFKeyDown), NULL, this);
-    m_gridPFBuses->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBusGridChanged), NULL, this);
-    m_gridPFBuses->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBusesKeyDown), NULL, this);
-    m_gridPFBranches->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBranchesGridChanged),
-                              NULL, this);
-    m_gridPFBranches->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBranchesKeyDown), NULL, this);
-    m_gridFault->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaulrGridChanged), NULL, this);
-    m_gridFault->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultKeyDown), NULL, this);
-    m_gridFaultBuses->Connect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultBusesGridChanged),
-                              NULL, this);
-    m_gridFaultBuses->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBusesKeyDown), NULL, this);
-    m_gridFaultBranches->Connect(wxEVT_GRID_CELL_CHANGED,
-                                 wxGridEventHandler(DataReportBase::OnFaultBranchesGridChanged), NULL, this);
-    m_gridFaultBranches->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBranchesKeyDown), NULL,
-                                 this);
-    m_gridFaultGenerators->Connect(wxEVT_GRID_CELL_CHANGED,
-                                   wxGridEventHandler(DataReportBase::OnFaultGeneratorsGridChanged), NULL, this);
-    m_gridFaultGenerators->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultGeneratorsKeyDown),
-                                   NULL, this);
+    m_gridPowerFlow->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPowerFlowGridChanged, this);
+    m_gridPowerFlow->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFKeyDown, this);
+    m_gridPFBuses->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBusGridChanged, this);
+    m_gridPFBuses->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBusesKeyDown, this);
+    m_gridPFBranches->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBranchesGridChanged, this);
+    m_gridPFBranches->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBranchesKeyDown, this);
+    m_gridFault->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaulrGridChanged, this);
+    m_gridFault->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultKeyDown, this);
+    m_gridFaultBuses->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultBusesGridChanged, this);
+    m_gridFaultBuses->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultBusesKeyDown, this);
+    m_gridFaultBranches->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultBranchesGridChanged, this);
+    m_gridFaultBranches->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultBranchesKeyDown, this);
+    m_gridFaultGenerators->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultGeneratorsGridChanged, this);
+    m_gridFaultGenerators->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultGeneratorsKeyDown, this);
+    m_gridHarmCurrents->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmCurrentGridChanged, this);
+    m_gridHarmBuses->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBusesGridChanged, this);
+    m_gridHarmBranches->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBranchesGridChanged, this);
+    
 }
 
 DataReportBase::~DataReportBase()
 {
-    m_gridPowerFlow->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPowerFlowGridChanged),
-                                NULL, this);
-    m_gridPowerFlow->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFKeyDown), NULL, this);
-    m_gridPFBuses->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBusGridChanged), NULL,
-                              this);
-    m_gridPFBuses->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBusesKeyDown), NULL, this);
-    m_gridPFBranches->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnPFBranchesGridChanged),
-                                 NULL, this);
-    m_gridPFBranches->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridPFBranchesKeyDown), NULL,
-                                 this);
-    m_gridFault->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaulrGridChanged), NULL,
-                            this);
-    m_gridFault->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultKeyDown), NULL, this);
-    m_gridFaultBuses->Disconnect(wxEVT_GRID_CELL_CHANGED, wxGridEventHandler(DataReportBase::OnFaultBusesGridChanged),
-                                 NULL, this);
-    m_gridFaultBuses->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBusesKeyDown), NULL,
-                                 this);
-    m_gridFaultBranches->Disconnect(wxEVT_GRID_CELL_CHANGED,
-                                    wxGridEventHandler(DataReportBase::OnFaultBranchesGridChanged), NULL, this);
-    m_gridFaultBranches->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultBranchesKeyDown), NULL,
-                                    this);
-    m_gridFaultGenerators->Disconnect(wxEVT_GRID_CELL_CHANGED,
-                                      wxGridEventHandler(DataReportBase::OnFaultGeneratorsGridChanged), NULL, this);
-    m_gridFaultGenerators->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(DataReportBase::OnGridFaultGeneratorsKeyDown),
-                                      NULL, this);
+    m_gridPowerFlow->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPowerFlowGridChanged, this);
+    m_gridPowerFlow->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFKeyDown, this);
+    m_gridPFBuses->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBusGridChanged, this);
+    m_gridPFBuses->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBusesKeyDown, this);
+    m_gridPFBranches->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBranchesGridChanged, this);
+    m_gridPFBranches->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBranchesKeyDown, this);
+    m_gridFault->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaulrGridChanged, this);
+    m_gridFault->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultKeyDown, this);
+    m_gridFaultBuses->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultBusesGridChanged, this);
+    m_gridFaultBuses->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultBusesKeyDown, this);
+    m_gridFaultBranches->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultBranchesGridChanged, this);
+    m_gridFaultBranches->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultBranchesKeyDown, this);
+    m_gridFaultGenerators->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultGeneratorsGridChanged, this);
+    m_gridFaultGenerators->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultGeneratorsKeyDown, this);
+    m_gridHarmCurrents->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmCurrentGridChanged, this);
+    m_gridHarmBuses->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBusesGridChanged, this);
+    m_gridHarmBranches->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBranchesGridChanged, this);
+    
 }
 
-StabilityEventListBase::StabilityEventListBase(wxWindow* parent,
-                                               wxWindowID id,
-                                               const wxString& title,
-                                               const wxPoint& pos,
-                                               const wxSize& size,
-                                               long style)
+StabilityEventListBase::StabilityEventListBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
     : wxDialog(parent, id, title, pos, size, style)
 {
-    if(!bBitmapLoaded) {
+    if ( !bBitmapLoaded ) {
         // We need to initialise the default bitmap handler
         wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
         wxC6A63InitBitmapResources();
         bBitmapLoaded = true;
     }
-
+    
     wxBoxSizer* boxSizerLvl1_1 = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizerLvl1_1);
-
-    m_gridStabEventList =
-        new wxGrid(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxWANTS_CHARS);
+    
+    m_gridStabEventList = new wxGrid(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxWANTS_CHARS);
     m_gridStabEventList->CreateGrid(0, 0);
     m_gridStabEventList->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_gridStabEventList->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
-#if wxVERSION_NUMBER >= 2904
+    #if wxVERSION_NUMBER >= 2904
     m_gridStabEventList->UseNativeColHeader(true);
-#endif
+    #endif
     m_gridStabEventList->EnableEditing(true);
-
+    
     boxSizerLvl1_1->Add(m_gridStabEventList, 1, wxEXPAND, WXC_FROM_DIP(5));
-
-    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    boxSizerLvl1_1->Add(m_buttonOK, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, WXC_FROM_DIP(5));
-
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl1_1->Add(m_buttonOK, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, WXC_FROM_DIP(5));
+    
     SetName(wxT("StabilityEventListBase"));
-    SetSize(wxDLG_UNIT(this, wxSize(500, 300)));
-    if(GetSizer()) { GetSizer()->Fit(this); }
+    SetSize(wxDLG_UNIT(this, wxSize(500,300)));
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
     if(GetParent()) {
         CentreOnParent(wxBOTH);
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(StabilityEventListBase::OnOKButtonClick),
-                        NULL, this);
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &StabilityEventListBase::OnOKButtonClick, this);
+    
 }
 
 StabilityEventListBase::~StabilityEventListBase()
 {
-    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(StabilityEventListBase::OnOKButtonClick),
-                           NULL, this);
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &StabilityEventListBase::OnOKButtonClick, this);
+    
 }

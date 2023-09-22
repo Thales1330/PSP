@@ -42,6 +42,9 @@ class DataReport : public DataReportBase
         GRID_FAULTBUSES,
         GRID_FAULTBRANCHES,
         GRID_FAULTGENERATORS,
+        GRID_HARMCURRENT,
+        GRID_HARMBUSES,
+        GRID_HARMBRANCHES,
     };
 
     DataReport(wxWindow* parent, Workspace* workspace);
@@ -50,10 +53,13 @@ class DataReport : public DataReportBase
     virtual void SetHeaders();
     virtual void CreateGrids();
     virtual void FillValues(GridSelection gridToFill = GRID_ALL);
-    virtual void SetRowsColours(wxGrid* grid, int rowStart = 1);
+    virtual void SetRowsColours(wxGrid* grid, int rowStart = 1, int colStart = 0, int colEndTrim = 0);
     virtual void GridKeyHandler(wxGrid* grid, wxKeyEvent& event);
 
    protected:
+    virtual void OnHarmBranchesGridChanged(wxGridEvent& event);
+    virtual void OnHarmBusesGridChanged(wxGridEvent& event);
+    virtual void OnHarmCurrentGridChanged(wxGridEvent& event);
     virtual void OnFaulrGridChanged(wxGridEvent& event);
     virtual void OnFaultBranchesGridChanged(wxGridEvent& event);
     virtual void OnFaultBusesGridChanged(wxGridEvent& event);
