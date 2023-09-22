@@ -18,6 +18,7 @@
 #include "RateLimiter.h"
 #include "RateLimiterForm.h"
 #include <wx/pen.h>
+#include <wx/brush.h>
 
 RateLimiter::RateLimiter(int id) : ControlElement(id)
 {

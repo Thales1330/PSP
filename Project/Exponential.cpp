@@ -18,6 +18,7 @@
 #include "Exponential.h"
 #include "ExponentialForm.h"
 #include <wx/pen.h>
+#include <wx/brush.h>
 
 Exponential::Exponential(int id) : ControlElement(id)
 {
