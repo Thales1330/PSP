@@ -2,14 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://thales1330.github.io/PSP/pt/blog</id>
     <title>PSP-UFU Blog</title>
-    <updated>2020-08-01T00:00:00.000Z</updated>
+    <updated>2023-09-29T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://thales1330.github.io/PSP/pt/blog"/>
     <subtitle>PSP-UFU Blog</subtitle>
     <icon>https://thales1330.github.io/PSP/pt/img/favicon.ico</icon>
     <entry>
+        <title type="html"><![CDATA[2023w38a-beta]]></title>
+        <id>https://thales1330.github.io/PSP/pt/blog/2023/09/29/2023w38a-beta</id>
+        <link href="https://thales1330.github.io/PSP/pt/blog/2023/09/29/2023w38a-beta"/>
+        <updated>2023-09-29T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[- 🔥 Added harmonic voltages and currents calculation;]]></summary>
+        <content type="html"><![CDATA[<ul><li>🔥 Added harmonic voltages and currents calculation;</li><li>✔️ Added harmonic results in data form;</li><li>🐛 Fix program close suddenly on delete bus;</li><li>🐛 Fix problems related to disconnected buses;</li><li>🐛 Minor bugfixes.</li></ul>]]></content>
+        <author>
+            <name>Thales</name>
+            <uri>https://github.com/thales1330</uri>
+        </author>
+        <category label="psp-ufu" term="psp-ufu"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[2020w31a-beta]]></title>
-        <id>/2020/08/01/2020w31a-beta</id>
+        <id>https://thales1330.github.io/PSP/pt/blog/2020/08/01/2020w31a-beta</id>
         <link href="https://thales1330.github.io/PSP/pt/blog/2020/08/01/2020w31a-beta"/>
         <updated>2020-08-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on GitHub or Twitter);]]></summary>
@@ -22,7 +35,7 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[2020w28a-beta]]></title>
-        <id>/2020/07/09/2020w28a-beta</id>
+        <id>https://thales1330.github.io/PSP/pt/blog/2020/07/09/2020w28a-beta</id>
         <link href="https://thales1330.github.io/PSP/pt/blog/2020/07/09/2020w28a-beta"/>
         <updated>2020-07-09T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Voltage heatmap implemented (OpenGL enabled);]]></summary>
@@ -35,7 +48,7 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[2020w24a-beta]]></title>
-        <id>/2020/06/13/2020w24a-beta</id>
+        <id>https://thales1330.github.io/PSP/pt/blog/2020/06/13/2020w24a-beta</id>
         <link href="https://thales1330.github.io/PSP/pt/blog/2020/06/13/2020w24a-beta"/>
         <updated>2020-06-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- ✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);]]></summary>
@@ -48,7 +61,7 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[22019w44a-beta]]></title>
-        <id>/2019/11/01/2019w44a-beta</id>
+        <id>https://thales1330.github.io/PSP/pt/blog/2019/11/01/2019w44a-beta</id>
         <link href="https://thales1330.github.io/PSP/pt/blog/2019/11/01/2019w44a-beta"/>
         <updated>2019-11-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- ✔️ Minor changes to 32bit MSW version for compatibility;]]></summary>
@@ -61,7 +74,7 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[2019w42a-beta]]></title>
-        <id>/2019/10/13/2019w42a-beta</id>
+        <id>https://thales1330.github.io/PSP/pt/blog/2019/10/13/2019w42a-beta</id>
         <link href="https://thales1330.github.io/PSP/pt/blog/2019/10/13/2019w42a-beta"/>
         <updated>2019-10-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Harmonic study implemented;]]></summary>

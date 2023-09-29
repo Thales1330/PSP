@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpsp_ufu=self.webpackChunkpsp_ufu||[]).push([[4830],{6120:function(p){p.exports=JSON.parse('[{"label":"psp-ufu","permalink":"/PSP/pt/blog/tags/psp-ufu","count":6}]')}}]);

@@ -657,7 +657,7 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
 #else
                         double gij = m_yBus[i][j].real();
                         double bij = m_yBus[i][j].imag();
-                        j11[busNumI][busNumJ] = vi * vj * (gij * std::sin(tij) - bij * std::cos(tij));
+                        j11[busNumI][busNumJ] = vi * vj * (gij * std::sin(ti - tj) - bij * std::cos(ti - tj));
 #endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
@@ -701,7 +701,7 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
 #else
                         double gij = m_yBus[i][j].real();
                         double bij = m_yBus[i][j].imag();
-                        j12[busNumI][busNumJ] = vi * (gij * std::cos(tij) - bij * std::sin(tij));
+                        j12[busNumI][busNumJ] = vi * (gij * std::cos(ti - tj) - bij * std::sin(ti - tj));
 #endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
@@ -746,7 +746,7 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
 #else
                         double gij = m_yBus[i][j].real();
                         double bij = m_yBus[i][j].imag();
-                        j21[busNumI][busNumJ] = -vi * vj * (gij * std::cos(tij) + bij * std::sin(tij));
+                        j21[busNumI][busNumJ] = -vi * vj * (gij * std::cos(ti - tj) + bij * std::sin(ti - tj));
 #endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
@@ -790,7 +790,7 @@ std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector
 #else
                         double gij = m_yBus[i][j].real();
                         double bij = m_yBus[i][j].imag();
-                        j22[busNumI][busNumJ] = vi * (gij * std::sin(tij) - bij * std::cos(tij));
+                        j22[busNumI][busNumJ] = vi * (gij * std::sin(ti - tj) - bij * std::cos(ti - tj));
 #endif
                     } else {  // busNumI == busNumJ
                         std::complex<double> sj = std::complex<double>(0.0, 0.0);
