@@ -32,6 +32,40 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
         return false;
     }
 
+    // Pre-fault voltages (power flow solution).
+    std::vector<std::complex<double> > preFaultVoltages;
+    preFaultVoltages.resize(m_busList.size());
+
+    // Get fault parameters.
+    int fNumber = -1;
+    int nBusFaulted = 0;
+    FaultData fType = FaultData::FAULT_THREEPHASE;
+    FaultData fLocation = FaultData::FAULT_LINE_A;
+    std::complex<double> fImpedance = std::complex<double>(0.0, 0.0);
+    for (auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
+        Bus* bus = *it;
+        BusElectricalData data = bus->GetElectricalData();
+        preFaultVoltages[data.number] = data.voltage;
+        if (data.hasFault && data.isConnected) {
+            fNumber = data.number;
+            fType = data.faultType;
+            fLocation = data.faultLocation;
+            fImpedance = std::complex<double>(data.faultResistance, data.faultReactance);
+            nBusFaulted++;
+        }
+    }
+    if (fNumber == -1) {
+        m_errorMsg = _("There is no fault in the system or the faulty bus is disconnected.");
+        return false;
+    }
+    else if (nBusFaulted > 1) {
+        wxMessageDialog msgDialog(nullptr, _("There is more than one fault in the system, and this can lead to inconsistent results.\nDo you wish to proceed?"), _("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
+        if (msgDialog.ShowModal() == wxID_NO) {
+            m_errorMsg = _("Fault calculation was cancelled by the user.");
+            return false;
+        }
+    }
+
     // Get adimittance matrices.
     std::vector<std::vector<std::complex<double> > > yBusPos;
     GetYBus(yBusPos, systemPowerBase, POSITIVE_SEQ, true, true);
@@ -51,32 +85,6 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
     }
     if(!InvertMatrix(yBusZero, m_zBusZero)) {
         m_errorMsg = _("Fail to invert the zero sequence admittance matrix.");
-        return false;
-    }
-
-    // Pre-fault voltages (power flow solution).
-    std::vector<std::complex<double> > preFaultVoltages;
-    preFaultVoltages.resize(m_busList.size());
-
-    // Get fault parameters.
-    int fNumber = -1;
-    FaultData fType = FaultData::FAULT_THREEPHASE;
-    FaultData fLocation = FaultData::FAULT_LINE_A;
-    std::complex<double> fImpedance = std::complex<double>(0.0, 0.0);
-    for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
-        Bus* bus = *it;
-        BusElectricalData data = bus->GetElectricalData();
-        preFaultVoltages[data.number] = data.voltage;
-        if(data.hasFault) {
-            fNumber = data.number;
-            fType = data.faultType;
-            fLocation = data.faultLocation;
-            fImpedance = std::complex<double>(data.faultResistance, data.faultReactance);
-        }
-    }
-
-    if(fNumber == -1) {
-        m_errorMsg = _("There is no fault in the system.");
         return false;
     }
 
@@ -174,9 +182,16 @@ bool Fault::RunFaultCalculation(double systemPowerBase)
     m_posFaultVoltageC.clear();
 
     for(int i = 0; i < numberOfBuses; ++i) {
-        m_posFaultVoltagePos.push_back(preFaultVoltages[i] - m_zBusPos[i][fNumber] * fCurrentPos);
-        m_posFaultVoltageNeg.push_back(-m_zBusNeg[i][fNumber] * fCurrentNeg);
-        m_posFaultVoltageZero.push_back(-m_zBusZero[i][fNumber] * fCurrentZero);
+        if (std::abs(preFaultVoltages[i]) > 1e-6) { // Only connected buses
+            m_posFaultVoltagePos.push_back(preFaultVoltages[i] - m_zBusPos[i][fNumber] * fCurrentPos);
+            m_posFaultVoltageNeg.push_back(-m_zBusNeg[i][fNumber] * fCurrentNeg);
+            m_posFaultVoltageZero.push_back(-m_zBusZero[i][fNumber] * fCurrentZero);
+        }
+        else {
+            m_posFaultVoltagePos.push_back(std::complex<double>(0.0, 0.0));
+            m_posFaultVoltageNeg.push_back(std::complex<double>(0.0, 0.0));
+            m_posFaultVoltageZero.push_back(std::complex<double>(0.0, 0.0));
+        }
 
         // V012 -> Vabc
         m_posFaultVoltageA.push_back(m_posFaultVoltageZero[i] + m_posFaultVoltagePos[i] + m_posFaultVoltageNeg[i]);
@@ -412,9 +427,11 @@ bool Fault::RunSCPowerCalcutation(double systemPowerBase)
     for(auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
         Bus* bus = *it;
         auto data = bus->GetElectricalData();
-        int n = data.number;
-        data.scPower = 1.0 / std::abs(m_zBusPos[n][n]);
-        bus->SetElectricalData(data);
+        if (data.isConnected) {
+            int n = data.number;
+            data.scPower = 1.0 / std::abs(m_zBusPos[n][n]);
+            bus->SetElectricalData(data);
+        }
     }
 
     return true;

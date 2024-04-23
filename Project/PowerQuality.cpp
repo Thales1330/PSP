@@ -6,7 +6,7 @@ PowerQuality::~PowerQuality() {}
 
 PowerQuality::PowerQuality(std::vector<Element*> elementList) { GetElementsFromList(elementList); }
 
-void PowerQuality::CalculateHarmonicYbusList(double systemPowerBase)
+void PowerQuality::CalculateHarmonicYbusList(double systemPowerBase, HarmLoadConnection loadConnection)
 {
 	// Clear and fill with zeros all the harmonic Ybuses
 	for (auto it = m_harmYbusList.begin(), itEnd = m_harmYbusList.end(); it != itEnd; ++it) {
@@ -23,7 +23,7 @@ void PowerQuality::CalculateHarmonicYbusList(double systemPowerBase)
 	// Fill all Ybuses
 	for (auto itYbus = m_harmYbusList.begin(), itYbusEnd = m_harmYbusList.end(); itYbus != itYbusEnd; ++itYbus) {
 		HarmonicYbus harmYBus = *itYbus;
-		CalculateHarmonicYbus(harmYBus.yBus, systemPowerBase, harmYBus.order);
+		CalculateHarmonicYbus(harmYBus.yBus, systemPowerBase, harmYBus.order, false, loadConnection);
 		*itYbus = harmYBus;
 	}
 }
@@ -31,18 +31,42 @@ void PowerQuality::CalculateHarmonicYbusList(double systemPowerBase)
 void PowerQuality::CalculateHarmonicYbus(std::vector<std::vector<std::complex<double> > >& yBus,
 	double systemPowerBase,
 	double order,
-	bool ignoreTransformerConnection)
+	bool ignoreTransformerConnection,
+	HarmLoadConnection loadConnection)
 {
 	// Load
 	for (auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
 		Load* load = *it;
-		if (load->IsOnline()) {
-			int n = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().number;
-			LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
-			std::complex<double> yLoad = std::complex<double>(data.activePower, -data.reactivePower / order);
-			std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
-			yLoad /= (std::abs(v) * std::abs(v));
-			yBus[n][n] += yLoad;
+		if (load->IsOnline() && loadConnection != HarmLoadConnection::DISCONNECTED) {
+			auto busData = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData();
+			if (busData.isConnected) {
+				int n = busData.number;
+				LoadElectricalData data = load->GetPUElectricalData(systemPowerBase);
+
+				std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
+
+				//tex:
+				// $$\bar{Z}=\frac{V^2}{P-jQ}=R+jX_L \rightarrow \bar{Z}_h=R+jX_L \cdot h$$
+				std::complex<double> zLoad = (std::abs(v) * std::abs(v)) / std::complex<double>(data.activePower, -data.reactivePower);
+				zLoad = std::complex<double>(zLoad.real(), zLoad.imag() * order);
+				std::complex<double> yLoad = 0.0;
+
+				//tex:
+				//Parallel:
+				//$$\bar{Y}=\frac{1}{R}+\frac{1}{jX_L}$$
+				//Series:
+				//$$\bar{Y}=\frac{1}{R+jX_L}$$
+				if(loadConnection == HarmLoadConnection::PARALLEL)
+					yLoad = std::complex<double>(1.0, 0.0) / std::complex<double>(zLoad.real(), 0.0) + std::complex<double>(1.0, 0.0) / std::complex<double>(0.0, zLoad.imag());
+				else if (loadConnection == HarmLoadConnection::SERIES)
+					yLoad = std::complex<double>(1.0, 0.0) / zLoad;
+
+				/*std::complex<double> yLoad = std::complex<double>(data.activePower, -data.reactivePower / order);
+				std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
+				yLoad /= (std::abs(v) * std::abs(v));*/
+
+				yBus[n][n] += yLoad;
+			}
 		}
 	}
 
@@ -50,9 +74,12 @@ void PowerQuality::CalculateHarmonicYbus(std::vector<std::vector<std::complex<do
 	for (auto it = m_capacitorList.begin(), itEnd = m_capacitorList.end(); it != itEnd; ++it) {
 		Capacitor* capacitor = *it;
 		if (capacitor->IsOnline()) {
-			int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
-			CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
-			yBus[n][n] += std::complex<double>(0.0, data.reactivePower) * order;
+			auto busData = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData();
+			if (busData.isConnected) {
+				int n = busData.number;
+				CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
+				yBus[n][n] += std::complex<double>(0.0, data.reactivePower) * order;
+			}
 		}
 	}
 
@@ -60,9 +87,12 @@ void PowerQuality::CalculateHarmonicYbus(std::vector<std::vector<std::complex<do
 	for (auto it = m_inductorList.begin(), itEnd = m_inductorList.end(); it != itEnd; ++it) {
 		Inductor* inductor = *it;
 		if (inductor->IsOnline()) {
-			int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
-			InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
-			yBus[n][n] += std::complex<double>(0.0, -data.reactivePower) / order;
+			auto busData = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData();
+			if (busData.isConnected) {
+				int n = busData.number;
+				InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
+				yBus[n][n] += std::complex<double>(0.0, -data.reactivePower) / order;
+			}
 		}
 	}
 
@@ -125,7 +155,7 @@ void PowerQuality::CalculateHarmonicYbus(std::vector<std::vector<std::complex<do
 	}
 }
 
-bool PowerQuality::CalculateDistortions(double systemPowerBase)
+bool PowerQuality::CalculateDistortions(double systemPowerBase, HarmLoadConnection loadConnection)
 {
 	// Get harmonic orders
 	m_harmYbusList.clear();
@@ -137,7 +167,7 @@ bool PowerQuality::CalculateDistortions(double systemPowerBase)
 		newYbus.order = harmOrders[i];
 		m_harmYbusList.push_back(newYbus);
 	}
-	CalculateHarmonicYbusList(systemPowerBase);
+	CalculateHarmonicYbusList(systemPowerBase, loadConnection);
 
 	// Initialize current arrays with zeros
 	std::vector<std::vector<std::complex<double> > > iHarmInjList;

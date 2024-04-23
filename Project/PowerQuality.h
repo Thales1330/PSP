@@ -27,13 +27,14 @@ public:
 
 	virtual wxString GetErrorMessage() { return m_errorMsg; }
 
-	virtual void CalculateHarmonicYbusList(double systemPowerBase = 100e6);
+	virtual void CalculateHarmonicYbusList(double systemPowerBase = 100e6, HarmLoadConnection loadConnection = HarmLoadConnection::PARALLEL);
 	virtual void CalculateHarmonicYbus(std::vector<std::vector<std::complex<double> > >& yBus,
 		double systemPowerBase,
 		double order,
-		bool ignoreTransformerConnection = false);
+		bool ignoreTransformerConnection = false,
+		HarmLoadConnection loadConnection = HarmLoadConnection::PARALLEL);
 
-	virtual bool CalculateDistortions(double systemPowerBase = 100e6);
+	virtual bool CalculateDistortions(double systemPowerBase = 100e6, HarmLoadConnection loadConnection = HarmLoadConnection::PARALLEL);
 	virtual bool CalculateFrequencyResponse(double systemFreq = 60.0,
 		double initFreq = 0.0,
 		double endFreq = 1500.0,

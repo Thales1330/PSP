@@ -307,7 +307,7 @@ void Text::UpdateText(double systemPowerBase)
                         }
                     } break;
                     case DATA_PQ_THD: {
-                        SetText("THD = " + wxString::FromDouble(data.thd, m_decimalPlaces) + "%");
+                        SetText(_("THD = ") + wxString::FromDouble(data.thd, m_decimalPlaces) + "%");
                     } break;
                     default:
                         break;

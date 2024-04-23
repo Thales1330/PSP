@@ -7,6 +7,7 @@
 #ifndef _PSP_PROJECT_PROPERTIESFORM_BASE_CLASSES_H
 #define _PSP_PROJECT_PROPERTIESFORM_BASE_CLASSES_H
 
+// clang-format off
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/xrc/xh_bmp.h>
@@ -45,6 +46,7 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
+// clang-format on
 
 class GeneralPropertiesFormBase : public wxDialog
 {
@@ -154,6 +156,9 @@ protected:
     wxStaticText* m_staticTextUVPow;
     wxTextCtrl* m_textCtrlUVPow;
     wxStaticText* m_staticTextPerc_8;
+    wxPanel* m_panelHarmonics;
+    wxStaticText* m_staticTextLoadConnection;
+    wxChoice* m_choiceHarmLoadConn;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
@@ -234,6 +239,9 @@ public:
     wxTextCtrl* GetTextCtrlUVPow() { return m_textCtrlUVPow; }
     wxStaticText* GetStaticTextPerc_8() { return m_staticTextPerc_8; }
     wxPanel* GetPanelLoadComp() { return m_panelLoadComp; }
+    wxStaticText* GetStaticTextLoadConnection() { return m_staticTextLoadConnection; }
+    wxChoice* GetChoiceHarmLoadConn() { return m_choiceHarmLoadConn; }
+    wxPanel* GetPanelHarmonics() { return m_panelHarmonics; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }

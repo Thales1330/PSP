@@ -241,6 +241,9 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                             1.0 / std::complex<double>(data.zeroResistance + 3.0 * (data.secondaryGrndResistance),
                                                        data.zeroIndReactance + 3.0 * (data.secondaryGrndReactance));
                         yBus[n2][n2] += y;
+                        yBus[n1][n1] += 1e-4;
+                        yBus[n1][n2] += 1e-4;
+                        yBus[n2][n1] += 1e-4;
                         break;
                     }
                     case GWYE_DELTA: {
@@ -248,6 +251,9 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
                             1.0 / std::complex<double>(data.zeroResistance + 3.0 * (data.primaryGrndResistance),
                                                        data.zeroIndReactance + 3.0 * (data.primaryGrndReactance));
                         yBus[n1][n1] += y;
+                        yBus[n2][n2] += 1e-4;
+                        yBus[n1][n2] += 1e-4;
+                        yBus[n2][n1] += 1e-4;
                         break;
                     }
                     default:
@@ -304,61 +310,63 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
         }
     }
 
-    // Identify buses to slack bus
-    std::vector<bool> connectedToSlack(m_busList.size(),false);
-    busNumber = 0;
-    int slackBus = 0;
-    std::vector<int> checkBusVector;
-    for(auto* bus : m_busList)
-    {
-        if (bus->GetElectricalData().slackBus)
-        {
-            connectedToSlack[busNumber] = true;
-            slackBus = busNumber;
-            break;
-        }
-        busNumber++;
-    }
-    GetNextConnection(slackBus, yBus, connectedToSlack);
-
-    bool hasIsolatedBus = false;
-    for(auto isConnectedToSlack : connectedToSlack)
-    {
-        if (!isConnectedToSlack) hasIsolatedBus = true;
-    }
-
-    if (hasIsolatedBus) {
-        // Update isolated and connected buses status and numbers
+    // Identify buses to slack bus (power flow)
+    //if (sequence != ZERO_SEQ) {
+        std::vector<bool> connectedToSlack(m_busList.size(), false);
         busNumber = 0;
-        for (unsigned int i = 0; i < m_busList.size(); ++i)
+        int slackBus = 0;
+        std::vector<int> checkBusVector;
+        for (auto* bus : m_busList)
         {
-            auto data = m_busList[i]->GetElectricalData();
-            data.isConnected = connectedToSlack[i];
-            if (connectedToSlack[i])
+            if (bus->GetElectricalData().slackBus)
             {
-                data.number = busNumber;
-                busNumber++;
+                connectedToSlack[busNumber] = true;
+                slackBus = busNumber;
+                break;
             }
-            m_busList[i]->SetElectricalData(data);
+            busNumber++;
+        }
+        GetNextConnection(slackBus, yBus, connectedToSlack);
+
+        bool hasIsolatedBus = false;
+        for (auto isConnectedToSlack : connectedToSlack)
+        {
+            if (!isConnectedToSlack) hasIsolatedBus = true;
         }
 
-        // Create new Ybus without isolated buses (remove rows and columns)
-        std::vector< std::vector< std::complex<double> > > newYBus;
-        for (unsigned int i = 0; i < yBus.size(); ++i) {
-            if (connectedToSlack[i]) {
-                std::vector< std::complex<double> > newLine;
-                for (unsigned int j = 0; j < yBus.size(); ++j) {
-                    if (connectedToSlack[j]) {
-                        newLine.push_back(yBus[i][j]);
-                    }
+        if (hasIsolatedBus) {
+            // Update isolated and connected buses status and numbers
+            busNumber = 0;
+            for (unsigned int i = 0; i < m_busList.size(); ++i)
+            {
+                auto data = m_busList[i]->GetElectricalData();
+                data.isConnected = connectedToSlack[i];
+                if (connectedToSlack[i])
+                {
+                    data.number = busNumber;
+                    busNumber++;
                 }
-                newYBus.push_back(newLine);
+                m_busList[i]->SetElectricalData(data);
             }
-        }
 
-        yBus.clear();
-        yBus = newYBus;
-    }
+            // Create new Ybus without isolated buses (remove rows and columns)
+            std::vector< std::vector< std::complex<double> > > newYBus;
+            for (unsigned int i = 0; i < yBus.size(); ++i) {
+                if (connectedToSlack[i]) {
+                    std::vector< std::complex<double> > newLine;
+                    for (unsigned int j = 0; j < yBus.size(); ++j) {
+                        if (connectedToSlack[j]) {
+                            newLine.push_back(yBus[i][j]);
+                        }
+                    }
+                    newYBus.push_back(newLine);
+                }
+            }
+
+            yBus.clear();
+            yBus = newYBus;
+        }
+    //}
 
     return true;
 }

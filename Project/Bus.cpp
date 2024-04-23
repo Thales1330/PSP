@@ -103,6 +103,39 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
 
 		glPopMatrix();
 	}
+
+	// Draw faulted bus symbol (layer 4)
+	if (m_electricalData.hasFault) {
+		glPushMatrix();
+		glLoadIdentity();
+
+		wxPoint2DDouble screenPt = WorldToScreen(translation, scale);
+		glTranslated(screenPt.m_x, screenPt.m_y, 0.0);
+		glRotated(m_angle, 0.0, 0.0, 1.0);
+		glTranslated(-screenPt.m_x, -screenPt.m_y, 0.0);
+
+		wxPoint2DDouble fsPosition = WorldToScreen(translation, scale, + m_width / 2.0);
+
+		OpenGLColour faultSymbolColour(1.0, 0.0, 0.0, 1.0);
+		glColor4dv(faultSymbolColour.GetRGBA());
+		
+		double scale = 1.5;
+		glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
+		glEnd();
+		glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
+		glVertex2f(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);
+
+		glEnd();
+
+
+		glPopMatrix();
+	}
 }
 
 void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
@@ -170,6 +203,55 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 										 WorldToScreen(translation, scale, -m_width / 2.0) - wxPoint2DDouble(4, 4) };
 		DrawDCPickbox(pbPosition[0], gc);
 		DrawDCPickbox(pbPosition[1], gc);
+
+		gc->PopState();
+	}
+
+	// Draw faulted bus symbol (layer 4)
+	if (m_electricalData.hasFault) {
+		gc->PushState();
+		gc->SetTransform(identityMatrix);
+
+		wxPoint2DDouble screenPt = WorldToScreen(translation, scale);
+		gc->Translate(screenPt.m_x, screenPt.m_y);
+		gc->Rotate(wxDegToRad(m_angle));
+		gc->Translate(-screenPt.m_x, -screenPt.m_y);
+
+		wxPoint2DDouble fsPosition = WorldToScreen(translation, scale, m_width / 2.0);
+
+		OpenGLColour faultSymbolColour(1.0, 0.0, 0.0, 1.0);
+		glColor4dv(faultSymbolColour.GetRGBA());
+
+		double scale = 1.5;
+		/*glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
+		glEnd();
+		glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
+		glVertex2f(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);*/
+
+		gc->SetBrush(*wxRED_BRUSH);
+		gc->SetPen(*wxTRANSPARENT_PEN);
+
+		wxPoint2DDouble* points = new wxPoint2DDouble[4];
+		points[0] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
+		points[1] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);
+		points[2] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
+		points[3] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
+
+		gc->DrawLines(4, points);
+
+		points[0] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
+		points[1] = wxPoint2DDouble(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
+		points[2] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);
+
+		gc->DrawLines(3, points);
+
+		delete[] points;
 
 		gc->PopState();
 	}

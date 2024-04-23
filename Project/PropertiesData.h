@@ -24,6 +24,7 @@
 
 enum PowerFlowMethod { GAUSS_SEIDEL = 0, NEWTON_RAPHSON, GAUSS_NEWTON };
 enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
+enum class HarmLoadConnection { PARALLEL = 0, SERIES, DISCONNECTED};
 
 struct SimulationData {
     // General simulation data
@@ -42,7 +43,7 @@ struct SimulationData {
     double newtonInertia = 1.0;
     double gaussTolerance = 1e-2;
 
-    // stability
+    // Stability
     double stabilityFrequency = 60.0;
     double timeStep = 1e-2;
     double stabilitySimulationTime = 10.0;
@@ -62,6 +63,9 @@ struct SimulationData {
     double constPowerReactive = 0.0;
     double underVoltageConstCurrent = 70.0;
     double underVoltageConstPower = 70.0;
+
+    // Hamonics
+    HarmLoadConnection harmLoadConnection = HarmLoadConnection::PARALLEL;
 };
 
 struct GeneralData {

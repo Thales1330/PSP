@@ -764,6 +764,13 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
         case WXK_ESCAPE:  // Cancel operations.
         {
             if (m_mode == WorkspaceMode::MODE_INSERT) {
+                Element* elementToDelete = m_elementList[m_elementList.size() - 1];
+
+                // Remove child element that has to be deleted (specially buses)
+                for (auto* element : m_elementList) {
+                    element->RemoveChild(elementToDelete);
+                }
+
                 m_elementList.pop_back();  // Removes the last element being inserted.
                 m_mode = WorkspaceMode::MODE_EDIT;
                 Redraw();
@@ -1639,8 +1646,15 @@ std::vector<Element*> Workspace::GetAllElements() const
 
 bool Workspace::RunFault()
 {
+    auto simProp = m_properties->GetSimulationPropertiesData();
+    double basePower = simProp.basePower;
+    if (simProp.basePowerUnit == ElectricalUnit::UNIT_MVA)
+        basePower *= 1e6;
+    else if (simProp.basePowerUnit == ElectricalUnit::UNIT_kVA)
+        basePower *= 1e3;
+
     Fault fault(GetElementList());
-    bool result = fault.RunFaultCalculation(100e6);
+    bool result = fault.RunFaultCalculation(basePower);
     if (!result) {
         wxMessageDialog msgDialog(this, fault.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
         msgDialog.ShowModal();
@@ -1767,8 +1781,10 @@ bool Workspace::RunHarmonicDistortion()
         basePower *= 1e3;
     if (!RunPowerFlow()) return false;
 
+    HarmLoadConnection loadConnection = simProp.harmLoadConnection;
+
     PowerQuality pq(GetElementList());
-    bool result = pq.CalculateDistortions(basePower);
+    bool result = pq.CalculateDistortions(basePower, loadConnection);
 
     if (!result) {
         wxMessageDialog msgDialog(this, pq.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);

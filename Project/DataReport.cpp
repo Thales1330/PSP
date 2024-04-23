@@ -267,6 +267,10 @@ void DataReport::SetHeaders()
 	m_voltageChoices.Add(_("Voltage (V)"));
 	m_voltageChoices.Add(_("Voltage (kV)"));
 
+	m_phaseVoltageChoices.Add(_("Phase Voltage (p.u.)"));
+	m_phaseVoltageChoices.Add(_("Phase Voltage (V)"));
+	m_phaseVoltageChoices.Add(_("Phase Voltage (kV)"));
+
 	m_activePowerChoices.Add(_("Active Power (p.u.)"));
 	m_activePowerChoices.Add(_("Active Power (W)"));
 	m_activePowerChoices.Add(_("Active Power (kW)"));
@@ -403,8 +407,8 @@ void DataReport::SetHeaders()
 	m_gridHarmBuses->SetCellValue(0, 0, _("Name"));
 	m_gridHarmBuses->SetCellValue(0, 1, _("THD"));
 	m_gridHarmBuses->SetCellValue(0, 2, _("Harmonic"));
-	m_gridHarmBuses->SetCellEditor(0, 3, new wxGridCellChoiceEditor(m_voltageChoices));
-	m_gridHarmBuses->SetCellValue(0, 3, m_voltageChoices[0]);
+	m_gridHarmBuses->SetCellEditor(0, 3, new wxGridCellChoiceEditor(m_phaseVoltageChoices));
+	m_gridHarmBuses->SetCellValue(0, 3, m_phaseVoltageChoices[0]);
 	m_gridHarmBuses->SetCellValue(0, 4, _("Angle"));
 
 	// Harmonic branches currents
@@ -1148,14 +1152,14 @@ void DataReport::FillValues(GridSelection gridToFill)
 			for (auto& order : data.harmonicOrder) {
 				m_gridHarmBuses->SetCellValue(rowNumber, 2, wxString::Format(wxT("%d%s"), order, wxString(L'\u00BA')));
 				wxString voltageStr = "";
-				if (m_gridHarmBuses->GetCellValue(0, 3) == m_voltageChoices[0]) {
+				if (m_gridHarmBuses->GetCellValue(0, 3) == m_phaseVoltageChoices[0]) {
 					voltageStr.Printf(wxT("%.10e"), std::abs(data.harmonicVoltage[i]));
 				}
-				else if (m_gridHarmBuses->GetCellValue(0, 3) == m_voltageChoices[1]) {
-					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb);
+				else if (m_gridHarmBuses->GetCellValue(0, 3) == m_phaseVoltageChoices[1]) {
+					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb / sqrt(3.0));
 				}
-				else if (m_gridHarmBuses->GetCellValue(0, 3) == m_voltageChoices[2]) {
-					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb / 1e3);
+				else if (m_gridHarmBuses->GetCellValue(0, 3) == m_phaseVoltageChoices[2]) {
+					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb / (sqrt(3.0) * 1e3));
 				}
 				m_gridHarmBuses->SetCellValue(rowNumber, 3, voltageStr);
 				m_gridHarmBuses->SetCellValue(rowNumber, 4, bus->StringFromDouble(wxRadToDeg(std::arg(data.harmonicVoltage[i]))) + wxString(L'\u00B0'));
