@@ -35,7 +35,10 @@ public:
 	virtual wxGLContext* GetSharedGLContext() const { return nullptr; } // Prevent share any OpenGL context when use DC
 
 	protected:
+		wxColor MixColors(const wxColor& color1, const wxColor& color2, double factor);
+
 		virtual void OnPaint(wxPaintEvent& event);
-		virtual void OnIdle(wxIdleEvent& event) {} // Prevent OpenGL checks
+		virtual void OnIdle(wxIdleEvent& event);
+		virtual void OnResize(wxSizeEvent& event);
 };
 

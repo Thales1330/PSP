@@ -32,6 +32,7 @@
 #include <wx/clipbrd.h>
 #include <wx/tipwin.h>
 #include <wx/stopwatch.h>
+#include <map>
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -40,6 +41,10 @@
 #include "Bus.h"
 
 #include "ControlEditor.h"
+
+#ifdef _DEBUG
+#include "DebugMainFrame.hpp"
+#endif
 
 class Camera;
 class Element;
@@ -126,9 +131,12 @@ public:
 	Camera* GetCamera() const { return m_camera; }
 	void CopySelection();
 	bool Paste();
+	void SaveCurrentState();
+	void SetNextState();
+	void SetPreviousState();
 
 	wxFileName GetSavedPath() const { return m_savedPath; }
-	void SetName(wxString name) { m_name = name; }
+	void SetName(wxString name);
 	void SetElementList(std::vector<Element*> elementList);
 	void SetTextList(std::vector<Text*> textList);
 	void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
@@ -149,6 +157,7 @@ public:
 	HMPlane* GetHeatMap() const { return m_hmPlane; }
 	void EnableAutoHeatMapLabel(const bool& enable = true) { m_hmAutomaticLabel = enable; }
 	bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
+
 
 	void ValidateBusesVoltages(Element* initialBus);
 	void ValidateElementsVoltages();
@@ -185,12 +194,15 @@ public:
 	virtual void OnLeftClickDown(wxMouseEvent& event);
 	virtual void OnPaint(wxPaintEvent& event);
 	virtual void OnPopupClick(wxCommandEvent& event);
+	virtual void OnResize(wxSizeEvent& event);
 
 protected:
 	virtual void OnHeatMapTime(wxTimerEvent& event);
-	virtual void OnResize(wxSizeEvent& event);
+	
 	void SetViewport();
 	void UpdateStatusBar();
+	int GetElementNumberFromList(Element* element);
+	void GetStateListsCopy(const std::vector<PowerElement*>& elementsList, const std::vector<Text*>& textList, std::vector<PowerElement*>& elementsListCopy, std::vector<Text*>& textListCopy);
 
 	wxGLContext* m_glContext = nullptr;
 	wxStatusBar* m_statusBar = nullptr;
@@ -204,6 +216,11 @@ protected:
 	int m_elementNumber[NUM_ELEMENTS];
 
 	std::vector<Text*> m_textList;
+
+	std::vector< std::vector<PowerElement*> > m_elementListState;
+	std::vector< std::vector<Text*> > m_textListState;
+	int m_currenteState = -1;
+	int m_maxStates = 100;
 
 	wxFileName m_savedPath;
 
@@ -232,6 +249,12 @@ protected:
 	bool m_showHM = false;
 	bool m_showHMTimer = false;
 	bool m_hmAutomaticLabel = false;
+
+
+
+#ifdef _DEBUG
+	DebugMainFrame* m_debugFrame = nullptr;
+#endif
 };
 
 #endif  // WORKSPACE_H

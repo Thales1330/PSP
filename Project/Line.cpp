@@ -19,6 +19,7 @@
 
 Line::Line() : Branch()
 {
+	m_elementType = TYPE_LINE;
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 3; j++) { m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0); }
 	}
@@ -26,6 +27,7 @@ Line::Line() : Branch()
 
 Line::Line(wxString name) : Branch()
 {
+	m_elementType = TYPE_LINE;
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 3; j++) { m_electricalData.faultCurrent[i][j] = std::complex<double>(0.0, 0.0); }
 	}
@@ -354,6 +356,34 @@ bool Line::GetContextMenu(wxMenu& menu)
 	wxString exePath = exeFileName.GetPath();
 
 	menu.Append(ID_EDIT_ELEMENT, _("Edit line"));
+
+	wxString busName[2] = { "?", "?" };
+	if (m_parentList.size() == 2) {
+		int i = 0;
+		for (Element* element : m_parentList) {
+			if (element) {
+				Bus* bus = static_cast<Bus*>(element);
+				busName[i] = bus->GetElectricalData().name;
+			}
+			i++;
+		}
+	}
+
+	wxMenu* textMenu = new wxMenu();
+
+	textMenu->Append(ID_TXT_NAME, _("Name"));
+	textMenu->Append(ID_TXT_BRANCH_ACTIVE_POWER_1_2, _("Active power (") + busName[0] + _(" to ") + busName[1] + wxT(")"));
+	textMenu->Append(ID_TXT_BRANCH_ACTIVE_POWER_2_1, _("Active power (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
+	textMenu->Append(ID_TXT_BRANCH_REACTIVE_POWER_1_2, _("Reactive power (") + busName[0] + _(" to ") + busName[1] + wxT(")"));
+	textMenu->Append(ID_TXT_BRANCH_REACTIVE_POWER_2_1, _("Reactive power (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
+	textMenu->Append(ID_TXT_BRANCH_LOSSES, _("Losses"));
+	textMenu->Append(ID_TXT_BRANCH_CURRENT_1_2, _("Current (") + busName[0] + _(" to ") + busName[1] + wxT(")"));
+	textMenu->Append(ID_TXT_BRANCH_CURRENT_2_1, _("Current (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
+	textMenu->Append(ID_TXT_BRANCH_FAULT_CURRENT_1_2, _("Fault current (") + busName[0] + _(" to ") + busName[1] + wxT(")"));
+	textMenu->Append(ID_TXT_BRANCH_FAULT_CURRENT_2_1, _("Fault current (") + busName[1] + _(" to ") + busName[0] + wxT(")"));
+	textMenu->SetClientData(menu.GetClientData());
+	menu.AppendSubMenu(textMenu, _("Add text"));
+
 	if (m_activePickboxID == ID_PB_NONE) {
 		wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
 		addNodeItem->SetBitmap(

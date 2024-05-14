@@ -523,7 +523,7 @@ bool FileHanding::OpenProject(wxFileName path)
 
         if(!text->OpenElement(textNode)) return true;
 
-        switch(text->GetElementType()) {
+        switch(text->GetElementTypeText()) {
             case TYPE_NONE:
                 break;
             case TYPE_BUS: {

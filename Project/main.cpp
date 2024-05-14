@@ -39,6 +39,9 @@ class MainApp : public wxApp
     virtual ~MainApp() {}
     bool LoadInitFile(PropertiesData* propertiesData)
     {
+#ifdef _DEBUG
+        wxSizerFlags::DisableConsistencyChecks();
+#endif
         // Load configuration file, if don't exists create it.
         // Find the executable location path.
         wxFileName fn(wxStandardPaths::Get().GetExecutablePath());

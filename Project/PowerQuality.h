@@ -40,7 +40,8 @@ public:
 		double endFreq = 1500.0,
 		double stepFreq = 1.0,
 		int injBusNumber = 0,
-		double systemPowerBase = 100e6);
+		double systemPowerBase = 100e6,
+		HarmLoadConnection loadConnection = HarmLoadConnection::PARALLEL);
 	virtual std::vector<double> GetHarmonicOrdersList();
 	virtual std::vector<double> GetFrequencies() { return m_frequencyList; }
 

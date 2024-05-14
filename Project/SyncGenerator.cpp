@@ -20,9 +20,13 @@
 #include "SyncGenerator.h"
 #include "SyncMachineForm.h"
 
-SyncGenerator::SyncGenerator() : Machines() { Init(); }
+SyncGenerator::SyncGenerator() : Machines() {
+    m_elementType = TYPE_SYNC_GENERATOR;
+    Init();
+}
 SyncGenerator::SyncGenerator(wxString name) : Machines()
 {
+    m_elementType = TYPE_SYNC_GENERATOR;
     Init();
     m_electricalData.name = name;
 }
@@ -64,6 +68,16 @@ void SyncGenerator::DrawDCSymbol(wxGraphicsContext* gc) const
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
 {
     menu.Append(ID_EDIT_ELEMENT, _("Edit Generator"));
+
+    wxMenu* textMenu = new wxMenu();
+
+    textMenu->Append(ID_TXT_NAME, _("Name"));
+    textMenu->Append(ID_TXT_ACTIVE_POWER, _("Active power"));
+    textMenu->Append(ID_TXT_REACTIVE_POWER, _("Reactive power"));
+    textMenu->Append(ID_TXT_FAULTCURRENT, _("Fault current"));
+    textMenu->SetClientData(menu.GetClientData());
+    menu.AppendSubMenu(textMenu, _("Add text"));
+
     GeneralMenuItens(menu);
     return true;
 }
@@ -236,23 +250,26 @@ wxString SyncGenerator::GetTipText() const
 
 bool SyncGenerator::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 {
-    if(!m_electricalData.plotSyncMachine) return false;
-    plotData.SetName(m_electricalData.name);
-    plotData.SetCurveType(ElementPlotData::CurveType::CT_SYNC_GENERATOR);
+    if (study == PlotStudy::STABILITY) {
+        if (!m_electricalData.plotSyncMachine) return false;
+        plotData.SetName(m_electricalData.name);
+        plotData.SetCurveType(ElementPlotData::CurveType::CT_SYNC_GENERATOR);
 
-    std::vector<double> absTerminalVoltage, activePower, reactivePower;
-    for(unsigned int i = 0; i < m_electricalData.terminalVoltageVector.size(); ++i) {
-        activePower.push_back(std::real(m_electricalData.electricalPowerVector[i]));
-        reactivePower.push_back(std::imag(m_electricalData.electricalPowerVector[i]));
+        std::vector<double> absTerminalVoltage, activePower, reactivePower;
+        for (unsigned int i = 0; i < m_electricalData.terminalVoltageVector.size(); ++i) {
+            activePower.push_back(std::real(m_electricalData.electricalPowerVector[i]));
+            reactivePower.push_back(std::imag(m_electricalData.electricalPowerVector[i]));
+        }
+        plotData.AddData(m_electricalData.terminalVoltageVector, _("Terminal voltage"));
+        plotData.AddData(activePower, _("Active power"));
+        plotData.AddData(reactivePower, _("Reactive power"));
+        plotData.AddData(m_electricalData.mechanicalPowerVector, _("Mechanical power"));
+        plotData.AddData(m_electricalData.freqVector, _("Frequency"));
+        plotData.AddData(m_electricalData.fieldVoltageVector, _("Field voltage"));
+        plotData.AddData(m_electricalData.deltaVector, _("Delta"));
+        return true;
     }
-    plotData.AddData(m_electricalData.terminalVoltageVector, _("Terminal voltage"));
-    plotData.AddData(activePower, _("Active power"));
-    plotData.AddData(reactivePower, _("Reactive power"));
-    plotData.AddData(m_electricalData.mechanicalPowerVector, _("Mechanical power"));
-    plotData.AddData(m_electricalData.freqVector, _("Frequency"));
-    plotData.AddData(m_electricalData.fieldVoltageVector, _("Field voltage"));
-    plotData.AddData(m_electricalData.deltaVector, _("Delta"));
-    return true;
+    return false;
 }
 
 rapidxml::xml_node<>* SyncGenerator::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)

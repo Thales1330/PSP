@@ -20,9 +20,10 @@
 #include "DegreesAndRadians.h"
 #endif
 
-Bus::Bus() : PowerElement() {}
+Bus::Bus() : PowerElement() { m_elementType = TYPE_BUS; }
 Bus::Bus(wxPoint2DDouble position) : PowerElement()
 {
+	m_elementType = TYPE_BUS;
 	m_width = 100.0;
 	m_height = 5.0;
 	SetPosition(position);
@@ -30,6 +31,7 @@ Bus::Bus(wxPoint2DDouble position) : PowerElement()
 
 Bus::Bus(wxPoint2DDouble position, wxString name)
 {
+	m_elementType = TYPE_BUS;
 	m_width = 100.0;
 	m_height = 5.0;
 	SetPosition(position);
@@ -349,7 +351,21 @@ void Bus::Rotate(bool clockwise)
 
 bool Bus::GetContextMenu(wxMenu& menu)
 {
-	menu.Append(ID_EDIT_ELEMENT, _("Edit bus"));
+	menu.Append(ContextMenuID::ID_EDIT_ELEMENT, _("Edit bus"));
+
+	wxMenu* textMenu = new wxMenu();
+
+	textMenu->Append(ID_TXT_NAME, _("Name"));
+	textMenu->Append(ID_TXT_VOLTAGE, _("Voltage"));
+	textMenu->Append(ID_TXT_ANGLE, _("Angle"));
+	textMenu->Append(ID_TXT_FAULTCURRENT, _("Fault current"));
+	textMenu->Append(ID_TXT_FAULTVOLTAGE, _("Fault voltage"));
+	textMenu->Append(ID_TXT_SCC, _("Short-circuit power"));
+	textMenu->Append(ID_TXT_THD, _("Voltage THD"));
+	textMenu->SetClientData(menu.GetClientData());
+		
+
+	menu.AppendSubMenu(textMenu, _("Add text"));
 	GeneralMenuItens(menu);
 	return true;
 }
@@ -425,14 +441,16 @@ bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 		}
 		plotData.AddData(absVoltage, _("Voltage"));
 		plotData.AddData(argVoltage, _("Angle"));
+		return true;
 	}
 	else if (study == PlotStudy::FREQRESPONSE) {
 		if (!m_electricalData.plotPQData) return false;
 		plotData.SetName(m_electricalData.name);
 		plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);
 		plotData.AddData(m_electricalData.absImpedanceVector, _("Impedance"));
+		return true;
 	}
-	return true;
+	return false;
 }
 
 rapidxml::xml_node<>* Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)

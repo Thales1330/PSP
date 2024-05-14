@@ -49,6 +49,8 @@ void PowerQuality::CalculateHarmonicYbus(std::vector<std::vector<std::complex<do
 				// $$\bar{Z}=\frac{V^2}{P-jQ}=R+jX_L \rightarrow \bar{Z}_h=R+jX_L \cdot h$$
 				std::complex<double> zLoad = (std::abs(v) * std::abs(v)) / std::complex<double>(data.activePower, -data.reactivePower);
 				zLoad = std::complex<double>(zLoad.real(), zLoad.imag() * order);
+				if (std::abs(zLoad.real()) < 1e-6) zLoad = std::complex<double>(1e-6, zLoad.imag());
+				if (std::abs(zLoad.imag()) < 1e-6) zLoad = std::complex<double>(zLoad.real(), 1e-6);
 				std::complex<double> yLoad = 0.0;
 
 				//tex:
@@ -56,7 +58,7 @@ void PowerQuality::CalculateHarmonicYbus(std::vector<std::vector<std::complex<do
 				//$$\bar{Y}=\frac{1}{R}+\frac{1}{jX_L}$$
 				//Series:
 				//$$\bar{Y}=\frac{1}{R+jX_L}$$
-				if(loadConnection == HarmLoadConnection::PARALLEL)
+				if (loadConnection == HarmLoadConnection::PARALLEL)
 					yLoad = std::complex<double>(1.0, 0.0) / std::complex<double>(zLoad.real(), 0.0) + std::complex<double>(1.0, 0.0) / std::complex<double>(0.0, zLoad.imag());
 				else if (loadConnection == HarmLoadConnection::SERIES)
 					yLoad = std::complex<double>(1.0, 0.0) / zLoad;
@@ -408,7 +410,8 @@ bool PowerQuality::CalculateFrequencyResponse(double systemFreq,
 	double endFreq,
 	double stepFreq,
 	int injBusNumber,
-	double systemPowerBase)
+	double systemPowerBase,
+	HarmLoadConnection loadConnection)
 {
 	// Clear all previous data
 	for (unsigned int i = 0; i < m_busList.size(); i++) {
@@ -442,7 +445,7 @@ bool PowerQuality::CalculateFrequencyResponse(double systemFreq,
 			for (unsigned int j = 0; j < m_busList.size(); j++) { yBus[i][j] = std::complex<double>(0.0, 0.0); }
 		}
 
-		CalculateHarmonicYbus(yBus, systemPowerBase, order, true);
+		CalculateHarmonicYbus(yBus, systemPowerBase, order, true, loadConnection);
 
 		for (unsigned int i = 0; i < m_busList.size(); i++) {
 			auto data = m_busList[i]->GetElectricalData();
