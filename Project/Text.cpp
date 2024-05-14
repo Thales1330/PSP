@@ -376,15 +376,15 @@ void Text::UpdateText(double systemPowerBase)
 				} break;
 				case ElectricalUnit::UNIT_var: {
 					SetText(wxString::FromDouble(reactivePower * systemPowerBase, m_decimalPlaces) +
-						" VAr");
+						" var");
 				} break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(reactivePower * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				} break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(reactivePower * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				} break;
 				default:
 					break;
@@ -473,15 +473,15 @@ void Text::UpdateText(double systemPowerBase)
 					SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
 				} break;
 				case ElectricalUnit::UNIT_var: {
-					SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + " VAr");
+					SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + " var");
 				} break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				} break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				} break;
 				default:
 					break;
@@ -613,15 +613,15 @@ void Text::UpdateText(double systemPowerBase)
 					SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
 				} break;
 				case ElectricalUnit::UNIT_var: {
-					SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + " VAr");
+					SetText(wxString::FromDouble(reactivePF * systemPowerBase, m_decimalPlaces) + " var");
 				} break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				} break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(reactivePF * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				} break;
 				default:
 					break;
@@ -760,15 +760,15 @@ void Text::UpdateText(double systemPowerBase)
 				} break;
 				case ElectricalUnit::UNIT_var: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) +
-						" VAr");
+						" var");
 				} break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				} break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				} break;
 				default:
 					break;
@@ -816,15 +816,15 @@ void Text::UpdateText(double systemPowerBase)
 				} break;
 				case ElectricalUnit::UNIT_var: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) +
-						" VAr");
+						" var");
 				} break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				} break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				} break;
 				default:
 					break;
@@ -872,15 +872,15 @@ void Text::UpdateText(double systemPowerBase)
 				} break;
 				case ElectricalUnit::UNIT_var: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase, m_decimalPlaces) +
-						" VAr");
+						" var");
 				} break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				} break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(sPower.imag() * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				}break;
 				default:
 					break;
@@ -913,15 +913,15 @@ void Text::UpdateText(double systemPowerBase)
 					SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + " p.u.");
 				}break;
 				case ElectricalUnit::UNIT_var: {
-					SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
+					SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " var");
 				}break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				}break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				}break;
 				default:
 					break;
@@ -954,15 +954,15 @@ void Text::UpdateText(double systemPowerBase)
 					SetText(wxString::FromDouble(reativePower, m_decimalPlaces) + " p.u.");
 				}break;
 				case ElectricalUnit::UNIT_var: {
-					SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " VAr");
+					SetText(wxString::FromDouble(reativePower * systemPowerBase, m_decimalPlaces) + " var");
 				}break;
 				case ElectricalUnit::UNIT_kvar: {
 					SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e3, m_decimalPlaces) +
-						" kVAr");
+						" kvar");
 				}break;
 				case ElectricalUnit::UNIT_Mvar: {
 					SetText(wxString::FromDouble(reativePower * systemPowerBase / 1e6, m_decimalPlaces) +
-						" MVAr");
+						" Mvar");
 				} break;
 				default:
 					break;

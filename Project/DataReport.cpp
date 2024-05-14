@@ -277,9 +277,9 @@ void DataReport::SetHeaders()
 	m_activePowerChoices.Add(_("Active Power (MW)"));
 
 	m_reactivePowerChoices.Add(_("Reactive Power (p.u.)"));
-	m_reactivePowerChoices.Add(_("Reactive Power (VAr)"));
-	m_reactivePowerChoices.Add(_("Reactive Power (kVAr)"));
-	m_reactivePowerChoices.Add(_("Reactive Power (MVAr)"));
+	m_reactivePowerChoices.Add(_("Reactive Power (var)"));
+	m_reactivePowerChoices.Add(_("Reactive Power (kvar)"));
+	m_reactivePowerChoices.Add(_("Reactive Power (Mvar)"));
 
 	m_resistanceChoices.Add(_("R (p.u.)"));
 	m_resistanceChoices.Add(_("R (") + omega + wxT(")"));
