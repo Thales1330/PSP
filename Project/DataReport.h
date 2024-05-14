@@ -79,6 +79,7 @@ class DataReport : public DataReportBase
 
     // Headers choices
     wxArrayString m_voltageChoices;
+    wxArrayString m_phaseVoltageChoices;
     wxArrayString m_activePowerChoices;
     wxArrayString m_reactivePowerChoices;
     wxArrayString m_resistanceChoices;

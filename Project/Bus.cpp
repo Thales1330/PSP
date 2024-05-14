@@ -20,9 +20,10 @@
 #include "DegreesAndRadians.h"
 #endif
 
-Bus::Bus() : PowerElement() {}
+Bus::Bus() : PowerElement() { m_elementType = TYPE_BUS; }
 Bus::Bus(wxPoint2DDouble position) : PowerElement()
 {
+	m_elementType = TYPE_BUS;
 	m_width = 100.0;
 	m_height = 5.0;
 	SetPosition(position);
@@ -30,6 +31,7 @@ Bus::Bus(wxPoint2DDouble position) : PowerElement()
 
 Bus::Bus(wxPoint2DDouble position, wxString name)
 {
+	m_elementType = TYPE_BUS;
 	m_width = 100.0;
 	m_height = 5.0;
 	SetPosition(position);
@@ -103,6 +105,39 @@ void Bus::Draw(wxPoint2DDouble translation, double scale) const
 
 		glPopMatrix();
 	}
+
+	// Draw faulted bus symbol (layer 4)
+	if (m_electricalData.hasFault) {
+		glPushMatrix();
+		glLoadIdentity();
+
+		wxPoint2DDouble screenPt = WorldToScreen(translation, scale);
+		glTranslated(screenPt.m_x, screenPt.m_y, 0.0);
+		glRotated(m_angle, 0.0, 0.0, 1.0);
+		glTranslated(-screenPt.m_x, -screenPt.m_y, 0.0);
+
+		wxPoint2DDouble fsPosition = WorldToScreen(translation, scale, + m_width / 2.0);
+
+		OpenGLColour faultSymbolColour(1.0, 0.0, 0.0, 1.0);
+		glColor4dv(faultSymbolColour.GetRGBA());
+		
+		double scale = 1.5;
+		glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
+		glEnd();
+		glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
+		glVertex2f(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);
+
+		glEnd();
+
+
+		glPopMatrix();
+	}
 }
 
 void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
@@ -170,6 +205,55 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 										 WorldToScreen(translation, scale, -m_width / 2.0) - wxPoint2DDouble(4, 4) };
 		DrawDCPickbox(pbPosition[0], gc);
 		DrawDCPickbox(pbPosition[1], gc);
+
+		gc->PopState();
+	}
+
+	// Draw faulted bus symbol (layer 4)
+	if (m_electricalData.hasFault) {
+		gc->PushState();
+		gc->SetTransform(identityMatrix);
+
+		wxPoint2DDouble screenPt = WorldToScreen(translation, scale);
+		gc->Translate(screenPt.m_x, screenPt.m_y);
+		gc->Rotate(wxDegToRad(m_angle));
+		gc->Translate(-screenPt.m_x, -screenPt.m_y);
+
+		wxPoint2DDouble fsPosition = WorldToScreen(translation, scale, m_width / 2.0);
+
+		OpenGLColour faultSymbolColour(1.0, 0.0, 0.0, 1.0);
+		glColor4dv(faultSymbolColour.GetRGBA());
+
+		double scale = 1.5;
+		/*glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
+		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
+		glEnd();
+		glBegin(GL_POLYGON);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
+		glVertex2f(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
+		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);*/
+
+		gc->SetBrush(*wxRED_BRUSH);
+		gc->SetPen(*wxTRANSPARENT_PEN);
+
+		wxPoint2DDouble* points = new wxPoint2DDouble[4];
+		points[0] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
+		points[1] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);
+		points[2] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
+		points[3] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
+
+		gc->DrawLines(4, points);
+
+		points[0] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
+		points[1] = wxPoint2DDouble(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
+		points[2] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);
+
+		gc->DrawLines(3, points);
+
+		delete[] points;
 
 		gc->PopState();
 	}
@@ -267,7 +351,21 @@ void Bus::Rotate(bool clockwise)
 
 bool Bus::GetContextMenu(wxMenu& menu)
 {
-	menu.Append(ID_EDIT_ELEMENT, _("Edit bus"));
+	menu.Append(ContextMenuID::ID_EDIT_ELEMENT, _("Edit bus"));
+
+	wxMenu* textMenu = new wxMenu();
+
+	textMenu->Append(ID_TXT_NAME, _("Name"));
+	textMenu->Append(ID_TXT_VOLTAGE, _("Voltage"));
+	textMenu->Append(ID_TXT_ANGLE, _("Angle"));
+	textMenu->Append(ID_TXT_FAULTCURRENT, _("Fault current"));
+	textMenu->Append(ID_TXT_FAULTVOLTAGE, _("Fault voltage"));
+	textMenu->Append(ID_TXT_SCC, _("Short-circuit power"));
+	textMenu->Append(ID_TXT_THD, _("Voltage THD"));
+	textMenu->SetClientData(menu.GetClientData());
+		
+
+	menu.AppendSubMenu(textMenu, _("Add text"));
 	GeneralMenuItens(menu);
 	return true;
 }
@@ -343,14 +441,16 @@ bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 		}
 		plotData.AddData(absVoltage, _("Voltage"));
 		plotData.AddData(argVoltage, _("Angle"));
+		return true;
 	}
 	else if (study == PlotStudy::FREQRESPONSE) {
 		if (!m_electricalData.plotPQData) return false;
 		plotData.SetName(m_electricalData.name);
 		plotData.SetCurveType(ElementPlotData::CurveType::CT_BUS);
 		plotData.AddData(m_electricalData.absImpedanceVector, _("Impedance"));
+		return true;
 	}
-	return true;
+	return false;
 }
 
 rapidxml::xml_node<>* Bus::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)

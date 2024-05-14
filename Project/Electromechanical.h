@@ -60,6 +60,7 @@ public:
 
 	// For tests
 	std::vector<double> GetIterationVector() const { return m_iterationsNumVector; }
+	wxString GetDebugMessage() const { return m_debugMessage; }
 
 protected:
 	void SetEventTimeList();
@@ -143,6 +144,7 @@ protected:
 	// For tests
 	int m_iterationsNum = 0.0;
 	std::vector<double> m_iterationsNumVector;
+	wxString m_debugMessage = "";
 };
 
 #endif  // ELECTROMECHANICAL_H

@@ -2654,6 +2654,6 @@ void wxCDAD0InitBitmapResources()
     }
 
     XRC_ADD_FILE(wxT("XRC_resource/PropertiesFormBitmaps.cpp$data_images_About2017.png"), xml_res_file_0, xml_res_size_0, wxT("image/png"));
-    XRC_ADD_FILE(wxT("XRC_resource/PropertiesFormBitmaps.cpp$C__Users_thale_Documents_GitHub_PSP_Project_PropertiesFormBitmaps.xrc"), xml_res_file_1, xml_res_size_1, wxT("text/xml"));
-    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/PropertiesFormBitmaps.cpp$C__Users_thale_Documents_GitHub_PSP_Project_PropertiesFormBitmaps.xrc"));
+    XRC_ADD_FILE(wxT("XRC_resource/PropertiesFormBitmaps.cpp$C__Users_Pichau_Documents_GitHub_PSP_Project_PropertiesFormBitmaps.xrc"), xml_res_file_1, xml_res_size_1, wxT("text/xml"));
+    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/PropertiesFormBitmaps.cpp$C__Users_Pichau_Documents_GitHub_PSP_Project_PropertiesFormBitmaps.xrc"));
 }

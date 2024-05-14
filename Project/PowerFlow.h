@@ -18,7 +18,7 @@
 #ifndef POWERFLOW_H
 #define POWERFLOW_H
 
-//#define STD_NR
+#define STD_NR
 
 #include "ElectricCalculation.h"
 

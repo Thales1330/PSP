@@ -117,6 +117,88 @@ void HarmCurrent::Draw(wxPoint2DDouble translation, double scale) const
     }
 }
 
+void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+{
+    OpenGLColour elementColour;
+    if (m_online) {
+        if (m_dynEvent)
+            elementColour = m_dynamicEventColour;
+        else
+            elementColour = m_onlineElementColour;
+    }
+    else
+        elementColour = m_offlineElementColour;
+
+    if (m_inserted) {
+        std::vector<wxPoint2DDouble> arrowPts;
+        arrowPts.push_back(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0));
+        arrowPts.push_back(arrowPts[0] + wxPoint2DDouble(0, 40));
+
+        // Draw Selection (layer 1).
+        if (m_selected) {
+            gc->SetPen(wxPen(wxColour(m_selectionColour.GetDcRGBA()), 2 + m_borderSize * 2.0));
+            gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+            gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+            DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), gc);
+
+            gc->SetPen(*wxTRANSPARENT_PEN);
+            gc->SetBrush(wxBrush(wxColour(m_selectionColour.GetDcRGBA())));
+
+            // Push the current matrix on stack.
+            gc->PushState();
+            // Rotate the matrix around the object position.
+            gc->Translate(m_position.m_x, m_position.m_y);
+            gc->Rotate(wxDegToRad(m_angle));
+            gc->Translate(-m_position.m_x, -m_position.m_y);
+
+            DrawDCCircle(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20),
+                20.0 + (m_borderSize + 1.5) / scale, 20, gc);
+
+            gc->PopState();
+
+            // Draw node selection.
+            DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
+        }
+
+        // Draw Harmonic current source (layer 2).
+        gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+        gc->SetBrush(*wxTRANSPARENT_BRUSH);
+        gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+
+        // Draw node.
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+        DrawDCCircle(m_pointList[0], 5.0, 10, gc);
+
+        DrawDCSwitches(gc);
+
+        std::vector<wxPoint2DDouble> triangPts;
+        for (int i = 0; i < 3; i++) { triangPts.push_back(m_triangPts[i] + m_position); }
+
+        glColor4dv(elementColour.GetRGBA());
+        gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+        gc->SetBrush(*wxWHITE_BRUSH);
+        DrawDCCircle(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20), 20, 20, gc);
+
+        gc->PushState();
+        gc->Translate(m_position.m_x, m_position.m_y);
+        gc->Rotate(wxDegToRad(m_angle));
+        gc->Translate(-m_position.m_x, -m_position.m_y);
+        
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(wxColour(elementColour.GetDcRGBA())));
+
+        DrawDCTriangle(triangPts, gc);
+
+        gc->SetPen(wxPen(wxColour(elementColour.GetDcRGBA()), 2));
+        gc->DrawLines(arrowPts.size(), &arrowPts[0]);
+        DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), gc);
+
+        gc->PopState();
+    }
+}
+
 bool HarmCurrent::Contains(wxPoint2DDouble position) const
 {
     wxPoint2DDouble ptR = RotateAtPosition(position, -m_angle);

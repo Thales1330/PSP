@@ -21,7 +21,7 @@
 #include <GL/glew.h>
 
 #ifdef _MSC_VER
-//#include <windows.h>
+ //#include <windows.h>
 #endif 
 //#include <GL/gl.h>
 #include <wx/dcmemory.h>
@@ -43,34 +43,20 @@ class Inductor;
 class Capacitor;
 class HarmCurrent;
 
-enum ElementType {
-    TYPE_NONE = 0,
-    TYPE_BUS,
-    TYPE_CAPACITOR,
-    TYPE_IND_MOTOR,
-    TYPE_INDUCTOR,
-    TYPE_LINE,
-    TYPE_LOAD,
-    TYPE_SYNC_GENERATOR,
-    TYPE_SYNC_MOTOR,
-    TYPE_TRANSFORMER,
-    TYPE_HARMCURRENT
-};
-
 enum DataType {
-    DATA_NAME,
-    DATA_VOLTAGE,
-    DATA_ANGLE,
-    DATA_SC_CURRENT,
-    DATA_SC_VOLTAGE,
-    DATA_SC_POWER,
-    DATA_ACTIVE_POWER,
-    DATA_REACTIVE_POWER,
-    DATA_PF_ACTIVE,
-    DATA_PF_REACTIVE,
-    DATA_PF_LOSSES,
-    DATA_PF_CURRENT,
-    DATA_PQ_THD
+	DATA_NAME,
+	DATA_VOLTAGE,
+	DATA_ANGLE,
+	DATA_SC_CURRENT,
+	DATA_SC_VOLTAGE,
+	DATA_SC_POWER,
+	DATA_ACTIVE_POWER,
+	DATA_REACTIVE_POWER,
+	DATA_PF_ACTIVE,
+	DATA_PF_REACTIVE,
+	DATA_PF_LOSSES,
+	DATA_PF_CURRENT,
+	DATA_PQ_THD
 };
 
 /**
@@ -82,56 +68,60 @@ enum DataType {
  */
 class Text : public GraphicalElement
 {
-   public:
-    Text();
-    Text(wxPoint2DDouble position);
-    ~Text();
+public:
+	Text();
+	Text(wxPoint2DDouble position);
+	~Text();
 
-    virtual Element* GetCopy();
-    virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
-    virtual bool Contains(wxPoint2DDouble position) const;
-    virtual void Draw(wxPoint2DDouble translation, double scale);
-    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);
-    virtual bool Intersects(wxRect2DDouble rect) const;
-    virtual void Rotate(bool clockwise = true);
-    virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList);
-    virtual void UpdateText(double systemPowerBase);
-    virtual wxString GetText() const { return m_text; }
-    virtual void SetText(wxString text);
-    virtual bool IsGLTextOK();
+	virtual Element* GetCopy();
+	virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
+	virtual bool Contains(wxPoint2DDouble position) const;
+	virtual void Draw(wxPoint2DDouble translation, double scale);
+	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);
+	virtual bool Intersects(wxRect2DDouble rect) const;
+	virtual void Rotate(bool clockwise = true);
+	virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList);
+	virtual void UpdateText(double systemPowerBase);
+	virtual wxString GetText() const { return m_text; }
+	virtual void SetText(wxString text);
+	virtual void SetAltSelectionColour(bool useAltSelectionColour = true) { m_useAltSelectionColour = useAltSelectionColour; }
+	virtual void SetAllowRotation(bool allowRotation = true) { m_allowRotation = allowRotation; }
+	virtual bool IsGLTextOK();
 
-    void SetDataType(const DataType& dataType) { m_dataType = dataType; }
-    void SetDirection(int direction) { m_direction = direction; }
-    void SetElement(Element* element) { m_element = element; }
-    void SetElementNumber(int elementNumber) { m_elementNumber = elementNumber; }
-    void SetElementType(const ElementType elementType) { m_elementType = elementType; }
-    void SetUnit(const ElectricalUnit unit) { m_unit = unit; }
-    void SetDecimalPlaces(int decimalPlaces) { m_decimalPlaces = decimalPlaces; }
-    const DataType GetDataType() const { return m_dataType; }
-    int GetDirection() const { return m_direction; }
-    Element* GetElement() { return m_element; }
-    int GetElementNumber() const { return m_elementNumber; }
-    const ElementType GetElementType() const { return m_elementType; }
-    const ElectricalUnit GetUnit() const { return m_unit; }
-    int GetDecimalPlaces() const { return m_decimalPlaces; }
-    
-    virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
-    virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
-    
-   protected:
-    wxString m_text = _("Text");
-    int m_numberOfLines = 0;
-    bool m_isMultlineText = false;
+	void SetDataType(const DataType& dataType) { m_dataType = dataType; }
+	void SetDirection(int direction) { m_direction = direction; }
+	void SetElement(Element* element) { m_element = element; }
+	void SetElementNumber(int elementNumber) { m_elementNumber = elementNumber; }
+	void SetElementTypeText(const ElementType elementType) { m_elementTypeText = elementType; }
+	void SetUnit(const ElectricalUnit unit) { m_unit = unit; }
+	void SetDecimalPlaces(int decimalPlaces) { m_decimalPlaces = decimalPlaces; }
+	const DataType GetDataType() const { return m_dataType; }
+	int GetDirection() const { return m_direction; }
+	Element* GetElement() { return m_element; }
+	int GetElementNumber() const { return m_elementNumber; }
+	const ElementType GetElementTypeText() const { return m_elementTypeText; }
+	const ElectricalUnit GetUnit() const { return m_unit; }
+	int GetDecimalPlaces() const { return m_decimalPlaces; }
 
-    std::vector<OpenGLText*> m_openGLTextList;
+	virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
+	virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
 
-    Element* m_element = nullptr;
-    ElementType m_elementType = TYPE_NONE;
-    int m_elementNumber;
-    DataType m_dataType;
-    ElectricalUnit m_unit;
-    int m_direction = 0;
-    int m_decimalPlaces = 2;
+protected:
+	wxString m_text = _("Text");
+	int m_numberOfLines = 0;
+	bool m_isMultlineText = false;
+	bool m_useAltSelectionColour = false;
+	bool m_allowRotation = true;
+
+	std::vector<OpenGLText*> m_openGLTextList;
+
+	Element* m_element = nullptr;
+	ElementType m_elementTypeText = TYPE_NONE;
+	int m_elementNumber;
+	DataType m_dataType;
+	ElectricalUnit m_unit;
+	int m_direction = 0;
+	int m_decimalPlaces = 2;
 };
 
 #endif  // TEXT_H

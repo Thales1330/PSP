@@ -84,6 +84,8 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
     m_textCtrlUVCur->SetValue(Element::StringFromDouble(data.underVoltageConstCurrent));
     m_textCtrlUVPow->SetValue(Element::StringFromDouble(data.underVoltageConstPower));
 
+    m_choiceHarmLoadConn->SetSelection(static_cast<int>(data.harmLoadConnection));
+
     UpdateZIPLoadFieldStatus();
     UpdatePFFieldStatus();
 }
@@ -217,6 +219,8 @@ bool SimulationsSettingsForm::ValidateData()
         msgDialog.ShowModal();
         return false;
     }
+
+    data.harmLoadConnection = static_cast<HarmLoadConnection>(m_choiceHarmLoadConn->GetSelection());
 
     m_properties->SetSimulationPropertiesData(data);
     return true;

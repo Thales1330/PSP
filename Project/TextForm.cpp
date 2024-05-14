@@ -27,7 +27,7 @@ TextForm::TextForm(wxWindow* parent, Text* text, std::vector<Element*> elementLi
     m_systemPowerBase = systemPowerBase;
 
     m_text = new Text();
-    m_text->SetElementType(text->GetElementType());
+    m_text->SetElementTypeText(text->GetElementTypeText());
     m_text->SetElementNumber(text->GetElementNumber());
     m_text->SetElement(text->GetElement());
     m_text->SetDataType(text->GetDataType());
@@ -49,31 +49,31 @@ void TextForm::OnElementChoiceSelected(wxCommandEvent& event)
 {
     switch(m_choiceElement->GetSelection()) {
         case 0: {
-            m_text->SetElementType(TYPE_BUS);
+            m_text->SetElementTypeText(TYPE_BUS);
         } break;
         case 1: {
-            m_text->SetElementType(TYPE_SYNC_GENERATOR);
+            m_text->SetElementTypeText(TYPE_SYNC_GENERATOR);
         } break;
         case 2: {
-            m_text->SetElementType(TYPE_LINE);
+            m_text->SetElementTypeText(TYPE_LINE);
         } break;
         case 3: {
-            m_text->SetElementType(TYPE_TRANSFORMER);
+            m_text->SetElementTypeText(TYPE_TRANSFORMER);
         } break;
         case 4: {
-            m_text->SetElementType(TYPE_LOAD);
+            m_text->SetElementTypeText(TYPE_LOAD);
         } break;
         case 5: {
-            m_text->SetElementType(TYPE_CAPACITOR);
+            m_text->SetElementTypeText(TYPE_CAPACITOR);
         } break;
         case 6: {
-            m_text->SetElementType(TYPE_INDUCTOR);
+            m_text->SetElementTypeText(TYPE_INDUCTOR);
         } break;
         case 7: {
-            m_text->SetElementType(TYPE_SYNC_MOTOR);
+            m_text->SetElementTypeText(TYPE_SYNC_MOTOR);
         } break;
         case 8: {
-            m_text->SetElementType(TYPE_IND_MOTOR);
+            m_text->SetElementTypeText(TYPE_IND_MOTOR);
         } break;
 
         default:
@@ -110,7 +110,7 @@ void TextForm::OnUnitChoiceSelected(wxCommandEvent& event)
 
 void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
 {
-    switch(m_text->GetElementType()) {
+    switch(m_text->GetElementTypeText()) {
         case TYPE_BUS: {
             switch(m_choiceTextType->GetSelection()) {
                 case 0: {
@@ -211,7 +211,7 @@ void TextForm::OnTypeChoiceSelected(wxCommandEvent& event)
 
 bool TextForm::LoadChoices()
 {
-    if(m_text->GetElementType() == TYPE_NONE) return false;
+    if(m_text->GetElementTypeText() == TYPE_NONE) return false;
 
     // Fill the element possible choices.
     ElementTypeChoice();
@@ -220,7 +220,7 @@ bool TextForm::LoadChoices()
     DataTypeChoice();
 
     // Select the saved choices.
-    switch(m_text->GetElementType()) {
+    switch(m_text->GetElementTypeText()) {
         case TYPE_BUS: {
             m_choiceElement->SetSelection(0);
             switch(m_text->GetDataType()) {
@@ -793,7 +793,7 @@ void TextForm::ElementTypeChoice()
 
     m_choiceName->Clear();
     wxArrayString arrayString;
-    switch(m_text->GetElementType()) {
+    switch(m_text->GetElementTypeText()) {
         case TYPE_BUS: {
             for(int i = 0; i < (int)m_allElements.GetBusList().size(); i++) {
                 Bus* bus = m_allElements.GetBusList()[i];
@@ -870,7 +870,7 @@ void TextForm::ElementNumberChoice()
 
     m_choiceTextType->Clear();
     wxArrayString arrayString;
-    switch(m_text->GetElementType()) {
+    switch(m_text->GetElementTypeText()) {
         case TYPE_BUS: {
             Bus* bus = m_allElements.GetBusList()[index];
             m_text->SetElement(bus);
@@ -1021,12 +1021,13 @@ void TextForm::DataTypeChoice()
     }
     m_choiceTextUnit->Append(arrayString);
 
-    switch(m_text->GetElementType()) {
+    switch(m_text->GetElementTypeText()) {
         case TYPE_LINE: {
             if(m_text->GetDataType() != DATA_PF_LOSSES) {
-                auto it = m_allElements.GetLineList().begin();
-                std::advance(it, m_text->GetElementNumber());
-                Line* line = *it;
+                //auto it = m_allElements.GetLineList().begin();
+                //std::advance(it, m_text->GetElementNumber());
+                Line* line = m_allElements.GetLineList()[m_text->GetElementNumber()];
+                //Line* line = *it;
 
                 Bus* bus1 = static_cast<Bus*>(line->GetParentList()[0]);
                 Bus* bus2 = static_cast<Bus*>(line->GetParentList()[1]);
@@ -1046,9 +1047,9 @@ void TextForm::DataTypeChoice()
         } break;
         case TYPE_TRANSFORMER: {
             if(m_text->GetDataType() != DATA_PF_LOSSES) {
-                auto it = m_allElements.GetTransformerList().begin();
-                std::advance(it, m_text->GetElementNumber());
-                Transformer* transformer = *it;
+                //auto it = m_allElements.GetTransformerList().begin();
+                //std::advance(it, m_text->GetElementNumber());
+                Transformer* transformer = m_allElements.GetTransformerList()[m_text->GetElementNumber()];
 
                 Bus* bus1 = static_cast<Bus*>(transformer->GetParentList()[0]);
                 Bus* bus2 = static_cast<Bus*>(transformer->GetParentList()[1]);
@@ -1202,7 +1203,7 @@ bool TextForm::ValidateData()
     if(m_text->GetDataType() != DATA_NAME && m_text->GetDataType() != DATA_PQ_THD &&
        m_choiceTextUnit->GetSelection() == -1)
         return false;
-    if(m_text->GetElementType() == TYPE_LINE || m_text->GetElementType() == TYPE_TRANSFORMER) {
+    if(m_text->GetElementTypeText() == TYPE_LINE || m_text->GetElementTypeText() == TYPE_TRANSFORMER) {
         if(m_text->GetDataType() != DATA_PF_LOSSES && m_text->GetDataType() != DATA_NAME) {
             if(m_choiceTextFromBus->GetSelection() == -1) return false;
             if(m_choiceTextToBus->GetSelection() == -1) return false;
@@ -1214,7 +1215,7 @@ bool TextForm::ValidateData()
     double decimalPlaces = m_text->GetDecimalPlaces();
     if(m_textCtrlDecimal->GetValue().ToDouble(&decimalPlaces)) m_text->SetDecimalPlaces(decimalPlaces);
 
-    m_textToEdit->SetElementType(m_text->GetElementType());
+    m_textToEdit->SetElementTypeText(m_text->GetElementTypeText());
     m_textToEdit->SetElementNumber(m_text->GetElementNumber());
     m_textToEdit->SetElement(m_text->GetElement());
     m_textToEdit->SetDataType(m_text->GetDataType());

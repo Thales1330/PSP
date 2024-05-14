@@ -10,7 +10,18 @@
 // Declare the bitmap loading function
 extern void wxCDAD0InitBitmapResources();
 
-static bool bBitmapLoaded = false;
+
+namespace {
+// return the wxBORDER_SIMPLE that matches the current application theme
+wxBorder get_border_simple_theme_aware_bit() {
+#if wxVERSION_NUMBER >= 3300 && defined(__WXMSW__)
+    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_STATIC;
+#else
+    return wxBORDER_DEFAULT;
+#endif
+} // DoGetBorderSimpleBit
+bool bBitmapLoaded = false;
+} // namespace
 
 
 GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
@@ -46,8 +57,8 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     boxSizerLvl3_1->Add(m_staticTextLanguage, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceLanguageArr;
-    m_choiceLanguageArr.Add(wxT("English"));
-    m_choiceLanguageArr.Add(wxT("Portuguese"));
+    m_choiceLanguageArr.Add(_("English"));
+    m_choiceLanguageArr.Add(_("Portuguese"));
     m_choiceLanguage = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceLanguageArr, 0);
     m_choiceLanguage->SetSelection(0);
     
@@ -62,8 +73,8 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     boxSizerLvl3_2->Add(m_staticTextTheme, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceThemeArr;
-    m_choiceThemeArr.Add(wxT("Light"));
-    m_choiceThemeArr.Add(wxT("Dark"));
+    m_choiceThemeArr.Add(_("Light"));
+    m_choiceThemeArr.Add(_("Dark"));
     m_choiceTheme = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceThemeArr, 0);
     m_choiceTheme->SetSelection(0);
     
@@ -78,8 +89,8 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     boxSizerLvl3_3->Add(m_staticTextRender, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceRenderArr;
-    m_choiceRenderArr.Add(wxT("OpenGL"));
-    m_choiceRenderArr.Add(wxT("Device Context"));
+    m_choiceRenderArr.Add(_("OpenGL"));
+    m_choiceRenderArr.Add(_("Device Context"));
     m_choiceRender = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceRenderArr, 0);
     m_choiceRender->SetSelection(0);
     
@@ -118,23 +129,21 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneralPropertiesFormBase::OnButtonOKClick), NULL, this);
-    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneralPropertiesFormBase::OnButtonCancelClick), NULL, this);
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonOKClick, this);
+    m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonCancelClick, this);
     
 }
 
 GeneralPropertiesFormBase::~GeneralPropertiesFormBase()
 {
-    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneralPropertiesFormBase::OnButtonOKClick), NULL, this);
-    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GeneralPropertiesFormBase::OnButtonCancelClick), NULL, this);
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonOKClick, this);
+    m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonCancelClick, this);
     
 }
 
@@ -182,9 +191,9 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     boxSizerLvl4_1->Add(m_textCtrlbasePower, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceBasePowerArr;
-    m_choiceBasePowerArr.Add(wxT("VA"));
-    m_choiceBasePowerArr.Add(wxT("kVA"));
-    m_choiceBasePowerArr.Add(wxT("MVA"));
+    m_choiceBasePowerArr.Add(_("VA"));
+    m_choiceBasePowerArr.Add(_("kVA"));
+    m_choiceBasePowerArr.Add(_("MVA"));
     m_choiceBasePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceBasePowerArr, 0);
     m_choiceBasePower->SetSelection(2);
     
@@ -247,9 +256,9 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     boxSizerLvl3_3->Add(m_staticTextPFMethod, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choicePFMethodArr;
-    m_choicePFMethodArr.Add(wxT("Gauss-Seidel"));
-    m_choicePFMethodArr.Add(wxT("Newton-Raphson"));
-    m_choicePFMethodArr.Add(wxT("Hybrid Gauss-Newton"));
+    m_choicePFMethodArr.Add(_("Gauss-Seidel"));
+    m_choicePFMethodArr.Add(_("Newton-Raphson"));
+    m_choicePFMethodArr.Add(_("Hybrid Gauss-Newton"));
     m_choicePFMethod = new wxChoice(m_panelPF, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), m_choicePFMethodArr, 0);
     m_choicePFMethod->SetSelection(0);
     
@@ -361,7 +370,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     m_textCtrlPFGaussTolerance->SetMinSize(wxSize(20,-1));
     
     m_panelStability = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
-    m_notebook->AddPage(m_panelStability, _("stability"), false);
+    m_notebook->AddPage(m_panelStability, _("Stability"), false);
     
     wxBoxSizer* boxSizerLvl2_3 = new wxBoxSizer(wxVERTICAL);
     m_panelStability->SetSizer(boxSizerLvl2_3);
@@ -704,6 +713,29 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl5_16->Add(m_staticTextPerc_8, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
+    m_panelHarmonics = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook->AddPage(m_panelHarmonics, _("Harmonics"), false);
+    
+    wxBoxSizer* boxSizerLvl2_42 = new wxBoxSizer(wxVERTICAL);
+    m_panelHarmonics->SetSizer(boxSizerLvl2_42);
+    
+    wxBoxSizer* boxSizerLvl3_849 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_42->Add(boxSizerLvl3_849, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextLoadConnection = new wxStaticText(m_panelHarmonics, wxID_ANY, _("Load connection"), wxDefaultPosition, wxDLG_UNIT(m_panelHarmonics, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_849->Add(m_staticTextLoadConnection, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceHarmLoadConnArr;
+    m_choiceHarmLoadConnArr.Add(_("Parallel"));
+    m_choiceHarmLoadConnArr.Add(_("Series"));
+    m_choiceHarmLoadConnArr.Add(_("Disconnected"));
+    m_choiceHarmLoadConn = new wxChoice(m_panelHarmonics, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelHarmonics, wxSize(-1,-1)), m_choiceHarmLoadConnArr, 0);
+    m_choiceHarmLoadConn->SetSelection(0);
+    
+    boxSizerLvl3_849->Add(m_choiceHarmLoadConn, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
     wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
     
     boxSizer_lvl1_1->Add(boxSizer_bottonButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
@@ -737,27 +769,25 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_choicePFMethod->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SimulationsSettingsFormBase::OnPFMethodChoiceSelected), NULL, this);
-    m_checkBoxUseCompLoads->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick), NULL, this);
-    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonOKClick), NULL, this);
-    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonCancelClick), NULL, this);
+    m_choicePFMethod->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &SimulationsSettingsFormBase::OnPFMethodChoiceSelected, this);
+    m_checkBoxUseCompLoads->Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick, this);
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonOKClick, this);
+    m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonCancelClick, this);
     
 }
 
 SimulationsSettingsFormBase::~SimulationsSettingsFormBase()
 {
-    m_choicePFMethod->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SimulationsSettingsFormBase::OnPFMethodChoiceSelected), NULL, this);
-    m_checkBoxUseCompLoads->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick), NULL, this);
-    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonOKClick), NULL, this);
-    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SimulationsSettingsFormBase::OnButtonCancelClick), NULL, this);
+    m_choicePFMethod->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &SimulationsSettingsFormBase::OnPFMethodChoiceSelected, this);
+    m_checkBoxUseCompLoads->Unbind(wxEVT_COMMAND_CHECKBOX_CLICKED, &SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick, this);
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonOKClick, this);
+    m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonCancelClick, this);
     
 }
 
@@ -865,21 +895,19 @@ AboutFormBase::AboutFormBase(wxWindow* parent, wxWindowID id, const wxString& ti
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(AboutFormBase::OnOKButtonClick), NULL, this);
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &AboutFormBase::OnOKButtonClick, this);
     
 }
 
 AboutFormBase::~AboutFormBase()
 {
-    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(AboutFormBase::OnOKButtonClick), NULL, this);
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &AboutFormBase::OnOKButtonClick, this);
     
 }
 
@@ -1042,23 +1070,21 @@ ImportFormBase::ImportFormBase(wxWindow* parent, wxWindowID id, const wxString& 
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonOKClick), NULL, this);
-    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonCancelClick), NULL, this);
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ImportFormBase::OnButtonOKClick, this);
+    m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ImportFormBase::OnButtonCancelClick, this);
     
 }
 
 ImportFormBase::~ImportFormBase()
 {
-    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonOKClick), NULL, this);
-    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImportFormBase::OnButtonCancelClick), NULL, this);
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ImportFormBase::OnButtonOKClick, this);
+    m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ImportFormBase::OnButtonCancelClick, this);
     
 }
 
@@ -1185,23 +1211,21 @@ FrequencyResponseFormBase::FrequencyResponseFormBase(wxWindow* parent, wxWindowI
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_buttonRun->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(FrequencyResponseFormBase::OnRunButtonClick), NULL, this);
-    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(FrequencyResponseFormBase::OnCancelButtonClick), NULL, this);
+    m_buttonRun->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &FrequencyResponseFormBase::OnRunButtonClick, this);
+    m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &FrequencyResponseFormBase::OnCancelButtonClick, this);
     
 }
 
 FrequencyResponseFormBase::~FrequencyResponseFormBase()
 {
-    m_buttonRun->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(FrequencyResponseFormBase::OnRunButtonClick), NULL, this);
-    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(FrequencyResponseFormBase::OnCancelButtonClick), NULL, this);
+    m_buttonRun->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &FrequencyResponseFormBase::OnRunButtonClick, this);
+    m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &FrequencyResponseFormBase::OnCancelButtonClick, this);
     
 }
 
@@ -1317,24 +1341,22 @@ ProjectPropertiesFormBase::ProjectPropertiesFormBase(wxWindow* parent, wxWindowI
     } else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     } else {
         wxPersistenceManager::Get().Restore(this);
     }
-#endif
     // Connect events
-    m_checkBoxAutomaticLabel->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnAutomaticLabelClick), NULL, this);
-    m_buttonOK->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnOKClick), NULL, this);
-    m_buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnCancelClick), NULL, this);
+    m_checkBoxAutomaticLabel->Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &ProjectPropertiesFormBase::OnAutomaticLabelClick, this);
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ProjectPropertiesFormBase::OnOKClick, this);
+    m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ProjectPropertiesFormBase::OnCancelClick, this);
     
 }
 
 ProjectPropertiesFormBase::~ProjectPropertiesFormBase()
 {
-    m_checkBoxAutomaticLabel->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnAutomaticLabelClick), NULL, this);
-    m_buttonOK->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnOKClick), NULL, this);
-    m_buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ProjectPropertiesFormBase::OnCancelClick), NULL, this);
+    m_checkBoxAutomaticLabel->Unbind(wxEVT_COMMAND_CHECKBOX_CLICKED, &ProjectPropertiesFormBase::OnAutomaticLabelClick, this);
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ProjectPropertiesFormBase::OnOKClick, this);
+    m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ProjectPropertiesFormBase::OnCancelClick, this);
     
 }
