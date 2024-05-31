@@ -108,7 +108,7 @@ class OpenGLColour
 {
 public:
 	/**
-	 * @brief Default construnctor. Use SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha).
+	 * @brief Default constructor. Use SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha).
 	 */
 	OpenGLColour();
 
@@ -149,6 +149,7 @@ protected:
  * @author Thales Lima Oliveira <thales@ufu.br>
  * @date 19/09/2017
  * @brief Base class of all elements of the program. This class is responsible for manage graphical and his data.
+ * @warning Don't use this base class directly. Always create a derivative element to use it.
  * @file Element.h
  */
 class Element
@@ -162,7 +163,7 @@ public:
 	/**
 	 * @brief Destructor.
 	 */
-	virtual ~Element();
+	virtual ~Element() {}
 
 	/**
 	 * @brief Set if the element are being dragged.

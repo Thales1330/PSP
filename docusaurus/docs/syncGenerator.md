@@ -23,7 +23,7 @@ Somente barramentos que possuem esse elemento conectado podem ser considerados [
 O formulário de dados é dividido em dois, sendo o primeiro responsável pelos dados gerais, de [fluxo de carga](powerFlow) e de [falta](fault) e um segundo pelos dados de [estabilidade](stability) . Esse último também permite o acesso aos controles das máquinas síncronas manipulados pelo editor de controle.
 
 :::info Informação
-Os dados referentes às **impedâncias de sequência positiva do gerador síncrono** inseridas no [contexto (aba) "Falta"](syncGenerator#falta) são utilizados **tanto para os estudos de [curto-circuito](fault) quanto para os estudos de [harmônicos](harmonics)**.
+Os dados referentes às **impedâncias de sequência positiva do gerador síncrono** inseridas no [contexto (aba) "Falta"](syncGenerator#impedâncias-de-sequência) são utilizados **tanto para os estudos de [curto-circuito](fault) quanto para os estudos de [harmônicos](harmonics)**.
 
 Esses dados são ignorados nos estudos de [fluxo de carga](powerFlow) (*não são utilizado nesse estudo*) e [estabilidade](stability) (*são utilizados dados inseridos em formulário específico*).
 :::

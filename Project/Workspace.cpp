@@ -15,7 +15,8 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-//#define SHOW_DEBUG_PANEL;
+ //#define SHOW_DEBUG_PANEL;
+ //#define SHOW_SIMULATION_PARAMETERS;
 
 #include "Camera.h"
 #include "Element.h"
@@ -107,7 +108,7 @@ Workspace::~Workspace()
 		if (*it) delete* it;
 	}
 
-	if(m_hmPlane) delete m_hmPlane;
+	if (m_hmPlane) delete m_hmPlane;
 
 	if (m_camera) delete m_camera;
 	//if (m_isThisContextShared) {
@@ -1812,7 +1813,7 @@ bool Workspace::UpdateTextElements()
 	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
 		Text* text = *it;
 		text->UpdateText(basePower);
-		if (!text->IsGLTextOK()) isTexturesOK = false;
+		//if (!text->IsGLTextOK()) isTexturesOK = false;
 	}
 	return isTexturesOK;
 }
@@ -2310,13 +2311,13 @@ bool Workspace::RunStability()
 			ElementPlotData plotData;
 			if (element->GetPlotData(plotData)) plotDataList.push_back(plotData);
 		}
-
+#ifdef SHOW_SIMULATION_PARAMETERS
 		ElementPlotData plotData;
 		plotData.SetName(_("Simulation parameters"));
 		plotData.SetCurveType(ElementPlotData::CurveType::CT_TEST);
 		plotData.AddData(stability.GetIterationVector(), _("Iterations number"));
 		plotDataList.push_back(plotData);
-
+#endif
 		ChartView* cView = new ChartView(this, plotDataList, m_stabilityTimeVector);
 		cView->Show();
 	}

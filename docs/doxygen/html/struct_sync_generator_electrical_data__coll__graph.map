@@ -1,10 +1,7 @@
 <map id="SyncGeneratorElectricalData" name="SyncGeneratorElectricalData">
-<area shape="rect" id="node2" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="5,260,172,287"/>
-<area shape="rect" id="node3" href="$class_control_element_solver.html" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="161,365,307,392"/>
-<area shape="rect" id="node4" href="$class_i_o_control.html" title="Provides the communication with the power element. " alt="" coords="208,260,284,287"/>
-<area shape="rect" id="node5" href="$class_control_element.html" title="ControlElement" alt="" coords="96,171,207,197"/>
-<area shape="rect" id="node6" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="116,95,187,121"/>
-<area shape="rect" id="node7" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="98,5,205,32"/>
-<area shape="rect" id="node8" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="231,171,325,197"/>
-<area shape="rect" id="node9" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method..." alt="" coords="332,365,467,392"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="64,176,253,203"/>
+<area shape="rect" id="Node000002" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="5,5,139,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,45,155,174,150,177,83,47"/>
+<area shape="rect" id="Node000003" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="163,5,328,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,48,225,99,198,154,176,177,172,174,194,150,220,97,236,46"/>
 </map>

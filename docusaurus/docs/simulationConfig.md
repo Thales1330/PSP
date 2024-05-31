@@ -10,7 +10,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-As parametrizações e configurações das simulações são acessadas no [menu Simulação](mainScreen#menu-ribbon) clicando no ícone do botão **Configurações de simulação**.
+As parametrizações e configurações das simulações são acessadas no [menu Simulação](mainScreen#ribbon-menu) clicando no ícone do botão **Configurações de simulação**.
 
 <div><center><img src={useBaseUrl("images/menuSimulationSettings.svg")} alt="Menu Simulação" title="Menu Simulação" /></center></div>
 
@@ -57,7 +57,7 @@ Ao alterar a frequência nominal atente-se ao campo "[Frequência de circuito ab
 Habilita ou desabilita o cálculo contínuo para os cálculos de [curto-circuito](fault), [nível de curto-circuito](fault) e [distorções harmônicas](harmonics). O cálculo contínuo para o [fluxo de carga](powerFlow) é sempre habilitado.
 
 :::tip Dica
-Para habilitar o cálculo contínuo aperte o botão **Habilitar solução** presente no [menu Simulação](mainScreen#menu-ribbon).
+Para habilitar o cálculo contínuo aperte o botão **Habilitar solução** presente no [menu Simulação](mainScreen#ribbon-menu).
 
 Com essa opção, os cálculos estáticos selecionados são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
 :::

@@ -17,8 +17,10 @@
 
 #include "Workspace.h"
 #include "ControlElementContainer.h"
+#include "ControlElementSolver.h"
 #include "SyncGenerator.h"
 #include "SyncMachineForm.h"
+#include <memory>
 
 SyncGenerator::SyncGenerator() : Machines() {
     m_elementType = TYPE_SYNC_GENERATOR;
@@ -31,7 +33,14 @@ SyncGenerator::SyncGenerator(wxString name) : Machines()
     m_electricalData.name = name;
 }
 
-SyncGenerator::~SyncGenerator() {}
+SyncGenerator::~SyncGenerator()
+{
+    if (m_electricalData.avr) delete m_electricalData.avr;
+    if (m_electricalData.speedGov) delete m_electricalData.speedGov;
+    //if (m_electricalData.avrSolver) delete m_electricalData.avrSolver;
+    //if (m_electricalData.speedGovSolver) delete m_electricalData.speedGovSolver;
+}
+
 void SyncGenerator::Init()
 {
     int numPtsSine = 10;

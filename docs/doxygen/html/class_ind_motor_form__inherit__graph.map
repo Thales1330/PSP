@@ -1,2 +1,5 @@
 <map id="IndMotorForm" name="IndMotorForm">
+<area shape="rect" id="Node000001" title="Form to edit the induction motor power data." alt="" coords="20,80,122,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,137,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,48,74,80,68,80,68,48"/>
 </map>

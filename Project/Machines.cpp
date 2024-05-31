@@ -21,7 +21,6 @@
 #include "ControlElementSolver.h"
 
 Machines::Machines() : PowerElement() {}
-Machines::~Machines() {}
 bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 {
     if(parent) {

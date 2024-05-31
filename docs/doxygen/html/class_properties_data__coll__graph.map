@@ -1,4 +1,9 @@
 <map id="PropertiesData" name="PropertiesData">
-<area shape="rect" id="node2" href="$struct_general_data.html" title="GeneralData" alt="" coords="5,5,100,32"/>
-<area shape="rect" id="node3" href="$struct_simulation_data.html" title="SimulationData" alt="" coords="124,5,235,32"/>
+<area shape="rect" id="Node000001" title="General and simulation data manager." alt="" coords="132,96,239,123"/>
+<area shape="rect" id="Node000002" href="$struct_simulation_data.html" title=" " alt="" coords="5,5,115,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,44,102,70,123,83,145,93,143,98,120,88,98,74,74,47"/>
+<area shape="rect" id="Node000003" href="$struct_general_data.html" title=" " alt="" coords="139,5,232,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="188,48,188,95,183,95,183,48"/>
+<area shape="rect" id="Node000004" href="$struct_freq_response_data.html" title=" " alt="" coords="257,5,389,32"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="300,45,263,74,218,98,215,93,260,70,297,41"/>
 </map>

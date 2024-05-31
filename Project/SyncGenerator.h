@@ -125,8 +125,10 @@ struct SyncGeneratorElectricalData {
     ControlElementContainer* speedGov = nullptr;
 
     // Control solvers
-    ControlElementSolver* avrSolver = nullptr;
-    ControlElementSolver* speedGovSolver = nullptr;
+    //ControlElementSolver* avrSolver = nullptr;
+    std::shared_ptr<ControlElementSolver> avrSolver;
+    //ControlElementSolver* speedGovSolver = nullptr;
+    std::shared_ptr<ControlElementSolver> speedGovSolver;
 
     Machines::SyncMachineModel model = Machines::SM_MODEL_1;
 };
@@ -143,7 +145,7 @@ class SyncGenerator : public Machines
    public:
     SyncGenerator();
     SyncGenerator(wxString name);
-    ~SyncGenerator();
+    virtual ~SyncGenerator();
 
     virtual Element* GetCopy();
     virtual void Init();

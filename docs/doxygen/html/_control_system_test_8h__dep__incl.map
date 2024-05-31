@@ -1,6 +1,12 @@
 <map id="Project/ControlSystemTest.h" name="Project/ControlSystemTest.h">
-<area shape="rect" id="node2" href="$_control_editor_8h.html" title="Project/ControlEditor.h" alt="" coords="57,80,210,107"/>
-<area shape="rect" id="node3" href="$_workspace_8h.html" title="Project/Workspace.h" alt="" coords="116,155,260,181"/>
-<area shape="rect" id="node4" href="$_file_handing_8h.html" title="Project/FileHanding.h" alt="" coords="5,229,152,256"/>
-<area shape="rect" id="node5" href="$_element_data_object_8h.html" title="Project/ElementDataObject.h" alt="" coords="177,229,367,256"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="39,5,227,32"/>
+<area shape="rect" id="Node000002" href="$_control_editor_8h.html" title=" " alt="" coords="56,80,209,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,48,135,80,130,80,130,48"/>
+<area shape="rect" id="Node000003" href="$_file_handing_8h.html" title=" " alt="" coords="5,229,151,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,122,106,156,84,230,78,228,101,154,116,120"/>
+<area shape="rect" id="Node000004" href="$_workspace_8h.html" title=" " alt="" coords="116,155,259,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="154,118,180,153,176,156,149,121"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="157,193,99,231,96,226,154,188"/>
+<area shape="rect" id="Node000005" href="$_element_data_object_8h.html" title=" " alt="" coords="175,229,365,256"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="215,190,258,227,254,231,211,194"/>
 </map>

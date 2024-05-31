@@ -40,7 +40,12 @@ Sum::Sum(int id) : ControlElement(id)
     UpdatePoints();
 }
 
-Sum::~Sum() {}
+Sum::~Sum()
+{
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
+}
+
 void Sum::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);

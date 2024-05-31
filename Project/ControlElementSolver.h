@@ -51,7 +51,7 @@ class ControlElementSolver
                          double timeStep = 1e-3,
                          double integrationError = 1e-3,
                          wxWindow* parent = nullptr);
-    virtual ~ControlElementSolver() {}
+    virtual ~ControlElementSolver();
     virtual bool InitializeValues(bool startAllZero);
     virtual void SolveNextStep();
     virtual std::vector<double> GetSolutions() { return m_solutions; }

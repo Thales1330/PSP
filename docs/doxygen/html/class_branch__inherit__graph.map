@@ -1,6 +1,11 @@
 <map id="Branch" name="Branch">
-<area shape="rect" id="node4" href="$class_line.html" title="Power line element. " alt="" coords="5,229,52,256"/>
-<area shape="rect" id="node5" href="$class_transformer.html" title="Two&#45;winding transformer power element. " alt="" coords="77,229,167,256"/>
-<area shape="rect" id="node2" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="22,80,129,107"/>
-<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="40,5,111,32"/>
+<area shape="rect" id="Node000001" title="Abstract class for branch power elements." alt="" coords="42,155,105,181"/>
+<area shape="rect" id="Node000004" href="$class_line.html" title="Power line element." alt="" coords="5,229,51,256"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="60,196,38,230,34,228,55,193"/>
+<area shape="rect" id="Node000005" href="$class_transformer.html" title="Two&#45;winding transformer power element." alt="" coords="75,229,165,256"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="92,193,114,227,110,230,87,196"/>
+<area shape="rect" id="Node000002" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="21,80,126,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,122,76,154,71,154,71,122"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="39,5,108,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="76,48,76,80,71,80,71,48"/>
 </map>

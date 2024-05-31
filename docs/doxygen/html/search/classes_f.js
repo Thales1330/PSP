@@ -1,10 +1,20 @@
 var searchData=
 [
-  ['text',['Text',['../class_text.html',1,'']]],
-  ['textform',['TextForm',['../class_text_form.html',1,'']]],
-  ['transferfunction',['TransferFunction',['../class_transfer_function.html',1,'']]],
-  ['transferfunctionform',['TransferFunctionForm',['../class_transfer_function_form.html',1,'']]],
-  ['transformer',['Transformer',['../class_transformer.html',1,'']]],
-  ['transformerelectricaldata',['TransformerElectricalData',['../struct_transformer_electrical_data.html',1,'']]],
-  ['transformerform',['TransformerForm',['../class_transformer_form.html',1,'']]]
+  ['shader_0',['Shader',['../class_shader.html',1,'']]],
+  ['shadersource_1',['ShaderSource',['../struct_shader_source.html',1,'']]],
+  ['shunt_2',['Shunt',['../class_shunt.html',1,'']]],
+  ['simulationdata_3',['SimulationData',['../struct_simulation_data.html',1,'']]],
+  ['simulationssettingsform_4',['SimulationsSettingsForm',['../class_simulations_settings_form.html',1,'']]],
+  ['spacestate_5',['SpaceState',['../struct_transfer_function_1_1_space_state.html',1,'TransferFunction']]],
+  ['stabilityeventlist_6',['StabilityEventList',['../class_stability_event_list.html',1,'']]],
+  ['sum_7',['Sum',['../class_sum.html',1,'']]],
+  ['sumform_8',['SumForm',['../class_sum_form.html',1,'']]],
+  ['switchingdata_9',['SwitchingData',['../struct_switching_data.html',1,'']]],
+  ['switchingform_10',['SwitchingForm',['../class_switching_form.html',1,'']]],
+  ['syncgenerator_11',['SyncGenerator',['../class_sync_generator.html',1,'']]],
+  ['syncgeneratorelectricaldata_12',['SyncGeneratorElectricalData',['../struct_sync_generator_electrical_data.html',1,'']]],
+  ['syncmachineform_13',['SyncMachineForm',['../class_sync_machine_form.html',1,'']]],
+  ['syncmachinemodeldata_14',['SyncMachineModelData',['../struct_sync_machine_model_data.html',1,'']]],
+  ['syncmotor_15',['SyncMotor',['../class_sync_motor.html',1,'']]],
+  ['syncmotorelectricaldata_16',['SyncMotorElectricalData',['../struct_sync_motor_electrical_data.html',1,'']]]
 ];

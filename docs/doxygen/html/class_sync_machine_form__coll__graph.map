@@ -1,17 +1,41 @@
 <map id="SyncMachineForm" name="SyncMachineForm">
-<area shape="rect" id="node3" href="$class_sync_generator.html" title="Synchronous generator power element. " alt="" coords="355,708,464,735"/>
-<area shape="rect" id="node4" href="$class_machines.html" title="Abstract class for rotary machines power elements. " alt="" coords="577,619,655,645"/>
-<area shape="rect" id="node16" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="" coords="496,708,581,735"/>
-<area shape="rect" id="node5" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="461,260,568,287"/>
-<area shape="rect" id="node6" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="351,133,422,159"/>
-<area shape="rect" id="node13" href="$class_control_element.html" title="ControlElement" alt="" coords="286,260,397,287"/>
-<area shape="rect" id="node7" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="460,5,567,32"/>
-<area shape="rect" id="node8" href="$struct_switching_data.html" title="Switching data of power elements. " alt="" coords="446,133,551,159"/>
-<area shape="rect" id="node9" href="$struct_sync_generator_electrical_data.html" title="SyncGeneratorElectricalData" alt="" coords="163,619,354,645"/>
-<area shape="rect" id="node10" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="175,349,342,376"/>
-<area shape="rect" id="node11" href="$class_control_element_solver.html" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="5,455,152,481"/>
-<area shape="rect" id="node17" href="$struct_sync_motor_electrical_data.html" title="SyncMotorElectricalData" alt="" coords="378,619,545,645"/>
-<area shape="rect" id="node12" href="$class_i_o_control.html" title="Provides the communication with the power element. " alt="" coords="25,349,101,376"/>
-<area shape="rect" id="node14" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="15,260,110,287"/>
-<area shape="rect" id="node15" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method..." alt="" coords="345,455,479,481"/>
+<area shape="rect" id="Node000001" title="Form to edit the synchronous machine power data." alt="" coords="170,827,300,853"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,736,166,763"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,769,215,824,212,828,119,773"/>
+<area shape="rect" id="Node000003" href="$class_sync_generator.html" title="Synchronous generator power element." alt="" coords="190,736,298,763"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,778,238,787,237,826,232,826,233,786,235,778"/>
+<area shape="rect" id="Node000004" href="$class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="108,645,186,672"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="174,681,232,733,228,737,170,685"/>
+<area shape="rect" id="Node000012" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="330,736,414,763"/>
+<area shape="poly" id="edge13_Node000012_Node000004" title=" " alt="" coords="188,676,265,710,332,733,330,738,263,714,186,681"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="245,272,350,299"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="289,314,154,646,149,644,284,312"/>
+<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="319,139,388,165"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="347,181,320,249,307,273,303,270,315,247,342,179"/>
+<area shape="rect" id="Node000016" href="$class_control_element.html" title=" " alt="" coords="597,272,707,299"/>
+<area shape="poly" id="edge21_Node000016_Node000006" title=" " alt="" coords="381,173,432,206,521,243,603,269,602,274,520,248,430,210,379,177"/>
+<area shape="rect" id="Node000007" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="342,5,448,32"/>
+<area shape="poly" id="edge8_Node000005_Node000007" title=" " alt="" coords="433,41,444,55,467,108,478,155,477,178,471,201,460,225,443,250,429,260,406,269,351,280,350,275,405,264,426,256,440,246,456,222,466,200,472,178,473,156,462,110,439,57,429,44"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="346,42,333,57,327,78,330,99,347,137,343,139,325,101,322,77,328,55,343,39"/>
+<area shape="rect" id="Node000008" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="191,139,295,165"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="243,180,245,214,255,247,265,259,277,270,274,274,261,263,250,249,239,214,238,181"/>
+<area shape="rect" id="Node000009" href="$struct_sync_generator_electrical_data.html" title=" " alt="" coords="210,645,399,672"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="289,687,255,737,251,734,285,684"/>
+<area shape="rect" id="Node000010" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="315,472,448,499"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="347,510,331,527,317,558,310,591,306,645,301,645,305,590,312,556,327,524,343,506"/>
+<area shape="rect" id="Node000013" href="$struct_sync_motor_electrical_data.html" title=" " alt="" coords="423,645,588,672"/>
+<area shape="poly" id="edge15_Node000013_Node000010" title=" " alt="" coords="387,513,399,567,411,595,428,620,444,633,463,642,460,647,441,637,425,623,407,597,394,568,382,515"/>
+<area shape="rect" id="Node000011" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="414,363,579,389"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="399,389,357,400,316,416,278,439,248,471,238,493,235,516,239,541,247,566,272,611,296,643,291,646,267,613,242,568,234,542,230,517,233,491,244,468,275,435,313,411,355,395,397,384"/>
+<area shape="poly" id="edge16_Node000013_Node000011" title=" " alt="" coords="500,405,508,645,502,645,494,405"/>
+<area shape="rect" id="Node000014" href="$class_control_element_solver.html" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="577,472,722,499"/>
+<area shape="poly" id="edge18_Node000014_Node000011" title=" " alt="" coords="513,401,530,423,551,443,576,458,602,469,600,474,573,463,548,447,526,427,509,404"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="364,778,345,805,323,819,299,829,297,824,320,814,341,801,360,775"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="475,683,393,738,390,733,472,679"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="631,512,518,646,514,643,627,509"/>
+<area shape="rect" id="Node000015" href="$class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="615,363,690,389"/>
+<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="654,405,652,471,647,471,649,405"/>
+<area shape="poly" id="edge20_Node000015_Node000016" title=" " alt="" coords="655,314,655,362,650,362,650,314"/>
+<area shape="rect" id="Node000017" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="508,272,573,299"/>
+<area shape="poly" id="edge22_Node000015_Node000017" title=" " alt="" coords="560,309,587,337,626,360,623,365,584,341,556,313"/>
 </map>

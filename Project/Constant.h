@@ -21,7 +21,8 @@
 #include "ControlElement.h"
 
 #include <wx/dcscreen.h>
-#include "OpenGLText.h"
+//#include "OpenGLText.h"
+#include "GCText.h"
 
 class ConstantForm;
 
@@ -38,7 +39,7 @@ class Constant : public ControlElement
     Constant(int id);
     ~Constant();
 
-    virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
@@ -57,7 +58,7 @@ class Constant : public ControlElement
    protected:
     double m_value = 1.0;
 
-    OpenGLText* m_glText = nullptr;
+    GCText* m_gcText = nullptr;
 };
 
 #endif  // CONSTANT_H

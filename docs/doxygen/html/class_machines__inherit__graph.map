@@ -1,7 +1,13 @@
 <map id="Machines" name="Machines">
-<area shape="rect" id="node4" href="$class_ind_motor.html" title="Induction motor power element. " alt="" coords="5,229,77,256"/>
-<area shape="rect" id="node5" href="$class_sync_generator.html" title="Synchronous generator power element. " alt="" coords="101,229,211,256"/>
-<area shape="rect" id="node6" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element. " alt="" coords="235,229,320,256"/>
-<area shape="rect" id="node2" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="103,80,209,107"/>
-<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="121,5,191,32"/>
+<area shape="rect" id="Node000001" title="Abstract class for rotary machines power elements." alt="" coords="116,155,193,181"/>
+<area shape="rect" id="Node000004" href="$class_ind_motor.html" title="Induction motor power element." alt="" coords="5,229,77,256"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="123,192,62,231,59,226,120,188"/>
+<area shape="rect" id="Node000005" href="$class_sync_generator.html" title="Synchronous generator power element." alt="" coords="100,229,209,256"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="157,197,157,229,152,229,152,197"/>
+<area shape="rect" id="Node000006" href="$class_sync_motor.html" title="Synchronous motor (synchronous compensator) power element." alt="" coords="232,229,317,256"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="189,187,255,226,252,231,187,192"/>
+<area shape="rect" id="Node000002" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="102,80,207,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,122,157,154,152,154,152,122"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="120,5,189,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="157,48,157,80,152,80,152,48"/>
 </map>

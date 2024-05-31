@@ -108,10 +108,10 @@ Identificação do elemento elétrico. Podem ser inseridos quaisquer números de
 Todos os componentes de potência do PSP-UFU possuem esse campo.
 
 #### Tensão nominal
-Campo de informação *não editável* que apresenta a tensão primária e secundária do transformador. Para alterar esse campo é necessário editar o campo correspondente dos [barramento](bus#geral) conectados.
+Campo de informação *não editável* que apresenta a tensão primária e secundária do transformador. Para alterar esse campo é necessário editar o campo correspondente dos [barramento](bus#nome) conectados.
 
 #### Tensão base
-Tensão utilizada para converter os parâmetros de impedância inseridos em $\Omega$ para $p.u.$ As tensões selecionadas por uma caixa de escolha são editadas nos formulários dos [barramentos](bus#geral) conectados.
+Tensão utilizada para converter os parâmetros de impedância inseridos em $\Omega$ para $p.u.$ As tensões selecionadas por uma caixa de escolha são editadas nos formulários dos [barramentos](bus#nome) conectados.
 
 :::info Informação
 A tensão base é ignorada caso os dados inseridos estejam em $p.u.$

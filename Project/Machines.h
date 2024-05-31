@@ -36,7 +36,7 @@ class Machines : public PowerElement
     enum SyncMachineModel { SM_MODEL_1 = 0, SM_MODEL_2, SM_MODEL_3, SM_MODEL_4, SM_MODEL_5 };
 
     Machines();
-    ~Machines();
+    virtual ~Machines() {}
 
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }

@@ -23,7 +23,6 @@
 #include <wx/brush.h>
 
 Element::Element() { m_selectionColour.SetRGBA(0.0, 0.5, 1.0, 0.5); }
-Element::~Element() {}
 void Element::SetPosition(const wxPoint2DDouble position)
 {
     m_position = position;

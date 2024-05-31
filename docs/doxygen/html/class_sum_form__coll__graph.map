@@ -1,6 +1,13 @@
 <map id="SumForm" name="SumForm">
-<area shape="rect" id="node3" href="$class_sum.html" title="Sum the all inputs (can choose the input signal). " alt="" coords="139,247,189,273"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="109,171,219,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="129,95,199,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="111,5,217,32"/>
+<area shape="rect" id="Node000001" title="Form to edit the sum control data." alt="" coords="35,336,113,363"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,245,114,272"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,287,75,335,69,336,61,288"/>
+<area shape="rect" id="Node000003" href="$class_sum.html" title="Sum the all inputs (can choose the input signal)." alt="" coords="138,245,186,272"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,285,89,337,85,334,137,281"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="107,171,217,197"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="165,213,165,245,160,245,160,213"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="128,96,197,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="165,138,165,170,160,170,160,138"/>
+<area shape="rect" id="Node000006" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="109,5,215,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="165,48,165,95,160,95,160,48"/>
 </map>

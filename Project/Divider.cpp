@@ -21,7 +21,12 @@
 #include <wx/brush.h>
 
 Divider::Divider(int id) : MathOperation(id) {}
-Divider::~Divider() {}
+Divider::~Divider()
+{
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
+}
+
 void Divider::DrawSymbol() const
 {
     // Plot divider.

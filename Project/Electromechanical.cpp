@@ -757,9 +757,11 @@ bool Electromechanical::InitializeDynamicElements()
 
 		// Initialize controllers
 		if (data.useAVR) {
-			if (data.avrSolver) delete data.avrSolver;
-			data.avrSolver =
-				new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+			//if (data.avrSolver) delete data.avrSolver;
+			//data.avrSolver =
+			//	new ControlElementSolver(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+			data.avrSolver = std::make_shared<ControlElementSolver>(data.avr, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+
 			data.avrSolver->SetSwitchStatus(syncGenerator->IsOnline());
 			data.avrSolver->SetCurrentTime(m_currentTime);
 			data.avrSolver->SetTerminalVoltage(std::abs(data.terminalVoltage));
@@ -777,9 +779,11 @@ bool Electromechanical::InitializeDynamicElements()
 			}
 		}
 		if (data.useSpeedGovernor) {
-			if (data.speedGovSolver) delete data.speedGovSolver;
-			data.speedGovSolver =
-				new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+			//if (data.speedGovSolver) delete data.speedGovSolver;
+			//data.speedGovSolver =
+			//	new ControlElementSolver(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
+
+			data.speedGovSolver = std::make_shared<ControlElementSolver>(data.speedGov, m_timeStep * m_ctrlTimeStepMultiplier, m_tolerance, m_parent);
 			data.speedGovSolver->SetSwitchStatus(syncGenerator->IsOnline());
 			data.speedGovSolver->SetCurrentTime(m_currentTime);
 			data.speedGovSolver->SetActivePower(dataPU.activePower);

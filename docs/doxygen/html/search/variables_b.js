@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['shuntreactive',['shuntReactive',['../struct_parse_anarede_1_1_bus_data.html#a9725c7e9777693cd028878b1c3e1c32f',1,'ParseAnarede::BusData']]],
-  ['swtime',['swTime',['../struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df',1,'SwitchingData']]],
-  ['swtype',['swType',['../struct_switching_data.html#af78fb958137a0532ea2a584810708574',1,'SwitchingData']]]
+  ['ratedpower_0',['ratedPower',['../struct_parse_anarede_1_1_ind_gen_data.html#a589fbb59366ee93082e5607c1e6cde52',1,'ParseAnarede::IndGenData']]],
+  ['resistance_1',['resistance',['../struct_parse_anarede_1_1_branch_data.html#a30a2b114101bbff88ac75f8cc328f0b8',1,'ParseAnarede::BranchData::resistance'],['../struct_parse_matpower_1_1_branch_data.html#ab33bdcb41c5cf351e6f4f015fe4c44a8',1,'ParseMatpower::BranchData::resistance']]],
+  ['rotationid_2',['rotationID',['../struct_parse_anarede_1_1_component.html#ae19d20b15e75182db61b373ce738750b',1,'ParseAnarede::Component']]]
 ];

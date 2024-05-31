@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['machines',['Machines',['../class_machines.html',1,'']]],
-  ['mainapp',['MainApp',['../class_main_app.html',1,'']]],
-  ['mainframe',['MainFrame',['../class_main_frame.html',1,'']]],
-  ['mathexpression',['MathExpression',['../class_math_expression.html',1,'']]],
-  ['mathexpressionform',['MathExpressionForm',['../class_math_expression_form.html',1,'']]],
-  ['mathexprparser',['MathExprParser',['../class_math_expr_parser.html',1,'']]],
-  ['mathoperation',['MathOperation',['../class_math_operation.html',1,'']]],
-  ['multiplier',['Multiplier',['../class_multiplier.html',1,'']]]
+  ['limiter_0',['Limiter',['../class_limiter.html',1,'']]],
+  ['limiterform_1',['LimiterForm',['../class_limiter_form.html',1,'']]],
+  ['line_2',['Line',['../class_line.html',1,'']]],
+  ['lineelectricaldata_3',['LineElectricalData',['../struct_line_electrical_data.html',1,'']]],
+  ['lineform_4',['LineForm',['../class_line_form.html',1,'']]],
+  ['load_5',['Load',['../class_load.html',1,'']]],
+  ['loadelectricaldata_6',['LoadElectricalData',['../struct_load_electrical_data.html',1,'']]],
+  ['loadform_7',['LoadForm',['../class_load_form.html',1,'']]]
 ];

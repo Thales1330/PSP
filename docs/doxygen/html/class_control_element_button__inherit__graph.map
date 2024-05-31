@@ -1,2 +1,5 @@
 <map id="ControlElementButton" name="ControlElementButton">
+<area shape="rect" id="Node000001" title="This class is responsible to handle the user interaction with control elements." alt="" coords="5,80,154,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="38,5,121,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,48,82,80,77,80,77,48"/>
 </map>

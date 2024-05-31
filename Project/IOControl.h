@@ -20,8 +20,8 @@
 
 #include "ControlElement.h"
 
-#include <wx/dcscreen.h>
-#include "OpenGLText.h"
+//#include "OpenGLText.h"
+#include "GCText.h"
 
 class IOControlForm;
 
@@ -52,7 +52,7 @@ class IOControl : public ControlElement
     IOControl(int ioFlags, int id);
     ~IOControl();
 
-    virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
@@ -78,7 +78,8 @@ class IOControl : public ControlElement
 
     Node::NodeType m_ioNodeType = Node::NodeType::NODE_IN;
 
-    OpenGLText* m_glText = nullptr;
+    //OpenGLText* m_glText = nullptr;
+    GCText* m_gcText = nullptr;
 };
 
 #endif  // IOCONTROL_H

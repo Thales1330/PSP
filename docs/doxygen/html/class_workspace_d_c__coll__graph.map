@@ -1,0 +1,32 @@
+<map id="WorkspaceDC" name="WorkspaceDC">
+<area shape="rect" id="Node000001" title="A Workspace class that draws using Device Context." alt="" coords="665,141,771,168"/>
+<area shape="rect" id="Node000002" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="530,141,617,168"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="633,152,665,152,665,157,633,157"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="286,5,403,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,27,464,41,508,63,528,81,545,102,568,140,564,142,541,105,524,85,504,68,462,46,417,32"/>
+<area shape="rect" id="Node000004" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="311,56,378,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="394,75,449,89,507,110,555,138,553,143,505,114,447,94,392,80"/>
+<area shape="rect" id="Node000005" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="291,107,398,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="414,128,530,145,529,151,413,133"/>
+<area shape="rect" id="Node000006" href="$struct_simulation_data.html" title=" " alt="" coords="17,33,126,60"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="142,54,201,65,263,81,287,92,313,104,310,109,285,97,261,87,200,70,141,59"/>
+<area shape="rect" id="Node000007" href="$struct_general_data.html" title=" " alt="" coords="25,84,118,111"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="134,100,291,113,290,118,134,105"/>
+<area shape="rect" id="Node000008" href="$struct_freq_response_data.html" title=" " alt="" coords="5,135,138,161"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="153,142,261,132,290,128,291,133,262,137,153,147"/>
+<area shape="rect" id="Node000009" href="$class_h_m_plane.html" title=" " alt="" coords="307,291,382,317"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="395,282,449,256,504,222,536,194,560,167,564,170,540,197,508,226,452,261,397,287"/>
+<area shape="rect" id="Node000010" href="$class_shader.html" title=" " alt="" coords="40,205,103,232"/>
+<area shape="poly" id="edge14_Node000002_Node000010" title=" " alt="" coords="117,211,403,175,529,158,530,163,403,180,118,216"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="119,227,263,268,313,288,311,293,261,273,117,232"/>
+<area shape="rect" id="Node000011" href="$class_vertex_buffer.html" title=" " alt="" coords="25,291,118,317"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="133,301,307,301,307,307,133,307"/>
+<area shape="rect" id="Node000012" href="$class_vertex_buffer_layout.html" title=" " alt="" coords="6,353,137,380"/>
+<area shape="poly" id="edge11_Node000009_Node000012" title=" " alt="" coords="153,359,207,352,261,339,285,327,310,316,312,320,287,332,263,344,208,357,153,364"/>
+<area shape="rect" id="Node000013" href="$class_index_buffer.html" title=" " alt="" coords="29,416,114,443"/>
+<area shape="poly" id="edge12_Node000009_Node000013" title=" " alt="" coords="130,431,162,430,197,425,230,414,260,395,270,380,272,364,274,346,284,328,305,312,308,317,288,331,279,348,277,365,275,382,264,399,233,418,198,430,163,435,130,437"/>
+<area shape="rect" id="Node000014" href="$class_vertex_array.html" title=" " alt="" coords="26,479,117,505"/>
+<area shape="poly" id="edge13_Node000009_Node000014" title=" " alt="" coords="133,499,165,500,199,496,232,486,260,467,272,452,277,436,274,402,269,366,273,347,284,328,305,312,308,316,288,331,278,349,275,366,279,401,282,436,277,454,263,471,234,491,201,501,166,505,132,504"/>
+<area shape="rect" id="Node000015" href="$class_renderer.html" title=" " alt="" coords="308,341,381,368"/>
+<area shape="poly" id="edge15_Node000002_Node000015" title=" " alt="" coords="395,342,451,322,479,308,504,289,528,259,547,226,567,168,572,170,551,228,533,262,508,293,482,312,454,327,397,347"/>
+</map>

@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-31-10).
 
 ## Motor de indução trifásico no PSP-UFU
-No PSP-UFU, os motores de indução são contemplados nos estudos de [fluxo de carga](powerFLow) e no estudo de [estabilidade](stability).
+No PSP-UFU, os motores de indução são contemplados nos estudos de [fluxo de carga](powerFlow.md) e no estudo de [estabilidade](stability).
 
 :::info Informação
 Os dados de estabilidade da máquina de indução são utilizados em conjunto com o fluxo de carga, **calculando de forma correta a potência reativa das máquinas** e consequentemente a tensão no barramento conectado.
@@ -38,7 +38,7 @@ Q = \frac{-V^2 \left\{ K_1 \left[\left(\frac{r_2}{s} \right) r_1-x_1 K_1-x_2 x_m
 K_1=x_2+x_m
 $$
 
-Como pode ser observado nas equações acima, existem quatro variáveis e somente duas equações. Na prática, as variáveis podem ser reduzidas a três, uma vez que o módulo da tensão (V) é obtido nos resultados do [fluxo de potência](powerFlow). Para resolver as equações é necessário definir uma variável adicional. A variável escolhida como fixa no PSP-UFU é a potência ativa (P), por fornecer resultados numericamente corretos e adequados para motores em situações de estabilidade.
+Como pode ser observado nas equações acima, existem quatro variáveis e somente duas equações. Na prática, as variáveis podem ser reduzidas a três, uma vez que o módulo da tensão (V) é obtido nos resultados do [fluxo de potência](powerFlow.md). Para resolver as equações é necessário definir uma variável adicional. A variável escolhida como fixa no PSP-UFU é a potência ativa (P), por fornecer resultados numericamente corretos e adequados para motores em situações de estabilidade.
 
 Portanto, nesse modelo estático, a potência ativa é mantida constante durante o cálculo do fluxo de carga e o escorregamento (s) é atualizado em cada iteração. A equação da potência ativa pode ser reescrita em relação ao escorregamento:
 
@@ -55,7 +55,7 @@ K_3 = x_m + x_1\\
 K_4 = r_1 K_1
 $$
 
-Esse modelo pode ser inserido na solução do [fluxo de carga](powerFlow) seguindo os seguintes passos:
+Esse modelo pode ser inserido na solução do [fluxo de carga](powerFlow.md) seguindo os seguintes passos:
 
 1. As constantes $K_1$ a $K_4$ são inicialmente calculadas . Esses valores são mantidos constantes durante toda a solução;
 2. Em cada iteração são calculados os coeficientes $A$, $B$ e $C$ utilizando o valor atualizado de $V$;
@@ -169,7 +169,7 @@ Caso a opção “Calcular a potência reativa no fluxo de carga” esteja ativa
 Caso essa opção seja marcada, o programa irá utilizar os dados fornecidos no formulário de estabilidade para calcular a potência reativa do motor durante o processo iterativo do fluxo de carga.
 
 :::warning Cuidado!
-Caso essa opção não seja utilizada o motor será considerado uma [carga de potência constante](load) no estudo de [fluxo de carga](powerFlow).
+Caso essa opção não seja utilizada o motor será considerado uma [carga de potência constante](load) no estudo de [fluxo de carga](powerFlow.md).
 
 A não utilização dessa opção poderá gerar erros de regime permamente no estudo de [estabilidade](stability).
 :::

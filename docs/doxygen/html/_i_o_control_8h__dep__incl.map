@@ -1,8 +1,17 @@
 <map id="Project/IOControl.h" name="Project/IOControl.h">
-<area shape="rect" id="node2" href="$_control_editor_8h.html" title="Project/ControlEditor.h" alt="" coords="175,80,328,107"/>
-<area shape="rect" id="node6" href="$_control_element_container_8h.html" title="Project/ControlElementContainer.h" alt="" coords="289,155,512,181"/>
-<area shape="rect" id="node7" href="$_i_o_control_form_8h.html" title="Project/IOControlForm.h" alt="" coords="421,80,583,107"/>
-<area shape="rect" id="node3" href="$_workspace_8h.html" title="Project/Workspace.h" alt="" coords="70,155,214,181"/>
-<area shape="rect" id="node4" href="$_file_handing_8h.html" title="Project/FileHanding.h" alt="" coords="221,229,367,256"/>
-<area shape="rect" id="node5" href="$_element_data_object_8h.html" title="Project/ElementDataObject.h" alt="" coords="5,229,196,256"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="316,5,448,32"/>
+<area shape="rect" id="Node000002" href="$_control_editor_8h.html" title=" " alt="" coords="175,80,327,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="347,42,275,82,273,77,344,38"/>
+<area shape="rect" id="Node000006" href="$_control_element_container_8h.html" title=" " alt="" coords="289,155,510,181"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="388,47,400,154,395,155,382,48"/>
+<area shape="rect" id="Node000007" href="$_i_o_control_form_8h.html" title=" " alt="" coords="420,80,581,107"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="417,38,481,77,478,82,414,43"/>
+<area shape="rect" id="Node000003" href="$_file_handing_8h.html" title=" " alt="" coords="220,229,365,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="261,121,292,228,286,230,256,123"/>
+<area shape="rect" id="Node000004" href="$_workspace_8h.html" title=" " alt="" coords="70,155,214,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="221,118,162,156,160,152,218,113"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="183,186,267,226,265,231,180,191"/>
+<area shape="rect" id="Node000005" href="$_element_data_object_8h.html" title=" " alt="" coords="5,229,196,256"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="130,196,110,230,105,228,125,194"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="370,193,313,231,310,226,367,188"/>
 </map>

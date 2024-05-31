@@ -1,3 +1,7 @@
 <map id="ElementDataObject" name="ElementDataObject">
-<area shape="rect" id="node3" href="$struct_elements_lists.html" title="ElementsLists" alt="" coords="172,5,277,32"/>
+<area shape="rect" id="Node000001" title="Class to store the elements in the clipboard." alt="" coords="83,96,217,123"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,148,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,42,141,94,137,97,95,46"/>
+<area shape="rect" id="Node000003" href="$struct_elements_lists.html" title=" " alt="" coords="172,5,277,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,46,163,97,158,94,202,42"/>
 </map>

@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['_7eelectriccalculation',['~ElectricCalculation',['../class_electric_calculation.html#a1e70291bfa9a0850d9ffcbee44daa2f7',1,'ElectricCalculation']]],
-  ['_7eelement',['~Element',['../class_element.html#a13d54ba9c08b6bec651402f1c2bb002c',1,'Element']]],
-  ['_7efault',['~Fault',['../class_fault.html#a42019654142cd8187b314e43d70262eb',1,'Fault']]],
-  ['_7emainframe',['~MainFrame',['../class_main_frame.html#a0cfd88ece4836e0ea5430bd55370bf11',1,'MainFrame']]],
-  ['_7eopenglcolour',['~OpenGLColour',['../class_open_g_l_colour.html#a4b9a726773b4c82935f15add648ed2a0',1,'OpenGLColour']]],
-  ['_7epowerelement',['~PowerElement',['../class_power_element.html#a39be7c8e3bdb96b16c26ea7f7d6e6cbf',1,'PowerElement']]]
+  ['xd_0',['xd',['../struct_sync_machine_model_data.html#af75546805bf92eb7a8a7280f7964b330',1,'SyncMachineModelData::xd'],['../struct_parse_anarede_1_1_ind_gen_data.html#ad8b0741526b2228fafd333a74fac398a',1,'ParseAnarede::IndGenData::xd']]],
+  ['xl_1',['xl',['../struct_parse_anarede_1_1_ind_gen_data.html#a386c400028af05b6fd2959484a4c908e',1,'ParseAnarede::IndGenData']]],
+  ['xmlparser_2',['XMLParser',['../class_x_m_l_parser.html',1,'']]],
+  ['xmlparser_2eh_3',['XMLParser.h',['../_x_m_l_parser_8h.html',1,'']]],
+  ['xq_4',['xq',['../struct_sync_machine_model_data.html#af81596945918e86e56f5822a0ba97fbc',1,'SyncMachineModelData::xq'],['../struct_parse_anarede_1_1_ind_gen_data.html#a0f53c1548efecd0490e6d101fbada635',1,'ParseAnarede::IndGenData::xq']]],
+  ['xt_5',['xt',['../struct_parse_anarede_1_1_ind_gen_data.html#a8d6751cf15c986eafee56b1d9d56901b',1,'ParseAnarede::IndGenData']]]
 ];

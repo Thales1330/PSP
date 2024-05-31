@@ -1,2 +1,5 @@
 <map id="IOControlForm" name="IOControlForm">
+<area shape="rect" id="Node000001" title="Form to edit the input/output control data." alt="" coords="20,80,126,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,141,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,48,76,80,70,80,70,48"/>
 </map>

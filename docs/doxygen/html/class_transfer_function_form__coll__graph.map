@@ -1,8 +1,17 @@
 <map id="TransferFunctionForm" name="TransferFunctionForm">
-<area shape="rect" id="node3" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function. " alt="" coords="209,275,327,301"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="86,171,197,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="106,95,177,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="88,5,195,32"/>
-<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="221,171,315,197"/>
-<area shape="rect" id="node8" href="$struct_transfer_function_1_1_space_state.html" title="TransferFunction::SpaceState" alt="" coords="340,171,535,197"/>
+<area shape="rect" id="Node000001" title="Form to edit the transfer function control data." alt="" coords="35,368,182,395"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,277,183,304"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,319,109,367,104,368,96,320"/>
+<area shape="rect" id="Node000003" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function." alt="" coords="207,277,325,304"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,314,132,370,130,365,229,310"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="99,171,209,197"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="180,206,254,275,251,279,176,210"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="119,96,189,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="157,138,157,170,151,170,151,138"/>
+<area shape="rect" id="Node000006" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="101,5,207,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="157,48,157,95,151,95,151,48"/>
+<area shape="rect" id="Node000007" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="233,171,299,197"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="269,213,269,277,263,277,263,213"/>
+<area shape="rect" id="Node000008" href="$struct_transfer_function_1_1_space_state.html" title=" " alt="" coords="323,171,516,197"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="403,212,382,234,357,256,309,279,307,274,354,251,378,231,399,208"/>
 </map>

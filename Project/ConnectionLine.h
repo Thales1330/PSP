@@ -69,7 +69,7 @@ class ConnectionLine : public ControlElement
     ConnectionLineType m_type = ConnectionLineType::ELEMENT_ELEMENT;
     ConnectionLine* m_parentLine = nullptr;
 
-    double m_value;
+    double m_value = 0.0;
 };
 
 #endif  // CONNECTIONLINE_H

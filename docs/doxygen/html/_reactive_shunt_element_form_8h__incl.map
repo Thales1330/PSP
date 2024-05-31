@@ -1,2 +1,7 @@
 <map id="Project/ReactiveShuntElementForm.h" name="Project/ReactiveShuntElementForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="41,5,238,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,146,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,50,97,85,93,82,121,47"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="170,96,240,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="158,47,187,82,183,86,154,50"/>
 </map>

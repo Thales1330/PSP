@@ -33,9 +33,9 @@ class MathOperation : public ControlElement
 {
    public:
     MathOperation(int id);
-    ~MathOperation();
+    virtual ~MathOperation();
 
-    virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void DrawSymbol() const {}
     virtual void DrawDCSymbol(wxGraphicsContext* gc) const {}

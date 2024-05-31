@@ -32,7 +32,6 @@ PowerElement::PowerElement() : Element()
     m_dynamicEventColour.SetRGBA(1.0, 0.51, 0.0, 1.0);
 }
 
-PowerElement::~PowerElement() {}
 void PowerElement::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
 {
 }

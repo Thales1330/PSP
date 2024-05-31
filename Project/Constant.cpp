@@ -30,28 +30,31 @@ Constant::Constant(int id) : ControlElement(id)
 
 Constant::~Constant()
 {
-    if(m_glText) delete m_glText;
+    //if(m_glText) delete m_glText;
+    if(m_gcText) delete m_gcText;
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
 }
 
-void Constant::Draw(wxPoint2DDouble translation, double scale) const
-{
-    glLineWidth(1.0);
-    if(m_selected) {
-        glColor4dv(m_selectionColour.GetRGBA());
-        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-    }
-    glColor4d(1.0, 1.0, 1.0, 1.0);
-    DrawRectangle(m_position, m_width, m_height);
-    glColor4d(0.0, 0.0, 0.0, 1.0);
-    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-
-    // Plot number.
-    m_glText->Draw(m_position);
-
-    glColor4d(0.0, 0.0, 0.0, 1.0);
-    DrawNodes();
-}
+//void Constant::Draw(wxPoint2DDouble translation, double scale) const
+//{
+//    glLineWidth(1.0);
+//    if(m_selected) {
+//        glColor4dv(m_selectionColour.GetRGBA());
+//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
+//    }
+//    glColor4d(1.0, 1.0, 1.0, 1.0);
+//    DrawRectangle(m_position, m_width, m_height);
+//    glColor4d(0.0, 0.0, 0.0, 1.0);
+//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
+//
+//    // Plot number.
+//    m_glText->Draw(m_position);
+//
+//    glColor4d(0.0, 0.0, 0.0, 1.0);
+//    DrawNodes();
+//}
 
 void Constant::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
@@ -67,7 +70,7 @@ void Constant::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
     gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
     // Plot number.
-    m_glText->DrawDC(m_position + wxPoint2DDouble(-m_glText->GetWidth() / 2, - m_glText->GetHeight() / 2), gc);
+    m_gcText->Draw(m_position + wxPoint2DDouble(-m_gcText->GetWidth() / 2, -m_gcText->GetHeight() / 2), gc);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
     gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
@@ -124,13 +127,13 @@ void Constant::SetValue(double value)
     m_value = value;
     wxString text = StringFromDouble(m_value);
 
-    if(m_glText)
-        m_glText->SetText(text);
+    if(m_gcText)
+        m_gcText->SetText(text);
     else
-        m_glText = new OpenGLText(text);
+        m_gcText = new GCText(text);
 
-    m_width = m_glText->GetWidth() + 6 + 2 * m_borderSize;
-    m_height = m_glText->GetHeight() + 6 + 2 * m_borderSize;
+    m_width = m_gcText->GetWidth() + 6 + 2 * m_borderSize;
+    m_height = m_gcText->GetHeight() + 6 + 2 * m_borderSize;
 
     UpdatePoints();
 }
@@ -139,14 +142,14 @@ Element* Constant::GetCopy()
 {
     Constant* copy = new Constant(m_elementID);
     *copy = *this;
-    copy->m_glText = m_glText->GetCopy();
+    copy->m_gcText = m_gcText->GetCopy();
     return copy;
 }
 
 bool Constant::UpdateText()
 {
     SetValue(m_value);
-    if(!m_glText->IsTextureOK()) return false;
+    //if(!m_glText->IsTextureOK()) return false;
     return true;
 }
 

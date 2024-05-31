@@ -20,7 +20,13 @@
 #include <wx/pen.h>
 
 Multiplier::Multiplier(int id) : MathOperation(id) {}
-Multiplier::~Multiplier() {}
+
+Multiplier::~Multiplier()
+{
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
+}
+
 void Multiplier::DrawSymbol() const
 {
     // Plot x.

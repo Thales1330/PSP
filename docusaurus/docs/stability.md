@@ -25,7 +25,7 @@ O modelo para representação do SEP em um estudo de estabilidade transitória �
 Caso a solução no domínio do tempo, após alguma perturbação, leve um ou mais parâmetros do sistema a valores fisicamente impossíveis ou, até mesmo, a solução das equações diferenciais não obtenha convergência em processos iterativos, o sistema é dito **instável**. Em contrapartida, caso as variáveis de estado dos elementos do sistema oscilem após uma perturbação e se estabeleçam em um novo ponto de operação, mesmo que distinto dos valores iniciais, o sistema é considerado **estável**.
 
 ## Execução do estudo de estabilidade no PSP-UFU
-Após a construção do diagrama unifilar no [editor de potência](powerEditor), assim como os [controles](controlEditor) das [máquinas síncronas](syncGenerator), a execução da estabilidade é realizada no [menu Simulação](mainScreen#menu-ribbon) clicando no ícone do botão **Executar Estabilidade**. Ao clicar na parte inferior do botão "Executar Estabilidade" será exibido um menu suspenso com a opção **Lista de eventos de estabilidade**.
+Após a construção do diagrama unifilar no [editor de potência](powerEditor), assim como os [controles](controlEditor) das [máquinas síncronas](syncGenerator), a execução da estabilidade é realizada no [menu Simulação](mainScreen#ribbon-menu) clicando no ícone do botão **Executar Estabilidade**. Ao clicar na parte inferior do botão "Executar Estabilidade" será exibido um menu suspenso com a opção **Lista de eventos de estabilidade**.
 
 <div><center><img src={useBaseUrl("images/menuSimulationStability.svg")} alt="Menu Simulação" title="Menu Simulação" /></center></div>
 

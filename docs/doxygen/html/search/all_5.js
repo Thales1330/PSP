@@ -1,15 +1,18 @@
 var searchData=
 [
-  ['fault',['Fault',['../class_fault.html',1,'Fault'],['../class_fault.html#a8fbe3ce9f7288c4f8261db2d9a89adbb',1,'Fault::Fault(std::vector&lt; Element *&gt; elementList)'],['../class_fault.html#a77baeae2c3388de3f7bbeabf52c99bef',1,'Fault::Fault()']]],
-  ['fault_2eh',['Fault.h',['../_fault_8h.html',1,'']]],
-  ['fault_5f2line',['FAULT_2LINE',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cbad44688f1ea0a010d3c0fd37870e46512',1,'PowerElement.h']]],
-  ['fault_5f2line_5fground',['FAULT_2LINE_GROUND',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cbaafad40a772b78232a91fe61d606a323e',1,'PowerElement.h']]],
-  ['fault_5fline_5fa',['FAULT_LINE_A',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cbad7f3fd44a6a841106ba66d1adbd53fdd',1,'PowerElement.h']]],
-  ['fault_5fline_5fb',['FAULT_LINE_B',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cba6ab815fdf2ca1dc91c0dd3ec4c630245',1,'PowerElement.h']]],
-  ['fault_5fline_5fc',['FAULT_LINE_C',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cba836a7abab9ade9c28512ea3ee0737315',1,'PowerElement.h']]],
-  ['fault_5fline_5fground',['FAULT_LINE_GROUND',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cbaa8b6335aeec4befa68e4642a94026d0d',1,'PowerElement.h']]],
-  ['fault_5fthreephase',['FAULT_THREEPHASE',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cbac670e819e6d824b60cee62ca39ddc8d0',1,'PowerElement.h']]],
-  ['faultdata',['FaultData',['../_power_element_8h.html#a41a50717b1a7ef4caa3c499c164fc2cb',1,'PowerElement.h']]],
-  ['filehanding',['FileHanding',['../class_file_handing.html',1,'']]],
-  ['filehanding_2eh',['FileHanding.h',['../_file_handing_8h.html',1,'']]]
+  ['fault_0',['Fault',['../class_fault.html',1,'Fault'],['../class_fault.html#ae8a1d8a8843849f8f4746ec6c2208279',1,'Fault::Fault(std::vector&lt; Element * &gt; elementList)'],['../class_fault.html#a77baeae2c3388de3f7bbeabf52c99bef',1,'Fault::Fault()']]],
+  ['fault_2eh_1',['Fault.h',['../_fault_8h.html',1,'']]],
+  ['fault_5f2line_2',['FAULT_2LINE',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa82d0aae13e9f92f669e79b7746fbff48',1,'PowerElement.h']]],
+  ['fault_5f2line_5fground_3',['FAULT_2LINE_GROUND',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa132d629383b198a56a6b2d35f4d490cb',1,'PowerElement.h']]],
+  ['fault_5fline_5fa_4',['FAULT_LINE_A',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfad49281a8cad4dffab20e01a650e0fea4',1,'PowerElement.h']]],
+  ['fault_5fline_5fb_5',['FAULT_LINE_B',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0cd5954a19395d37bad445e1b608b393',1,'PowerElement.h']]],
+  ['fault_5fline_5fc_6',['FAULT_LINE_C',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa8712714ce4dce004864c37682dba8fde',1,'PowerElement.h']]],
+  ['fault_5fline_5fground_7',['FAULT_LINE_GROUND',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0abc9f277f73496a3a0e81647a5f0502',1,'PowerElement.h']]],
+  ['fault_5fthreephase_8',['FAULT_THREEPHASE',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa6f7405d8790f4650c1d5dac3f9dcf583',1,'PowerElement.h']]],
+  ['faultdata_9',['FaultData',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df',1,'PowerElement.h']]],
+  ['filehanding_10',['FileHanding',['../class_file_handing.html',1,'']]],
+  ['filehanding_2eh_11',['FileHanding.h',['../_file_handing_8h.html',1,'']]],
+  ['freqresponse_12',['FREQRESPONSE',['../_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3',1,'PowerElement.h']]],
+  ['freqresponsedata_13',['FreqResponseData',['../struct_freq_response_data.html',1,'']]],
+  ['frequencyresponseform_14',['FrequencyResponseForm',['../class_frequency_response_form.html',1,'']]]
 ];

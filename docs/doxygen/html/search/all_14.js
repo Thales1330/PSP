@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['xd',['xd',['../struct_sync_machine_model_data.html#af75546805bf92eb7a8a7280f7964b330',1,'SyncMachineModelData::xd()'],['../struct_parse_anarede_1_1_ind_gen_data.html#ad8b0741526b2228fafd333a74fac398a',1,'ParseAnarede::IndGenData::xd()']]],
-  ['xl',['xl',['../struct_parse_anarede_1_1_ind_gen_data.html#a386c400028af05b6fd2959484a4c908e',1,'ParseAnarede::IndGenData']]],
-  ['xmlparser',['XMLParser',['../class_x_m_l_parser.html',1,'']]],
-  ['xmlparser_2eh',['XMLParser.h',['../_x_m_l_parser_8h.html',1,'']]],
-  ['xq',['xq',['../struct_sync_machine_model_data.html#af81596945918e86e56f5822a0ba97fbc',1,'SyncMachineModelData::xq()'],['../struct_parse_anarede_1_1_ind_gen_data.html#a0f53c1548efecd0490e6d101fbada635',1,'ParseAnarede::IndGenData::xq()']]],
-  ['xt',['xt',['../struct_parse_anarede_1_1_ind_gen_data.html#a8d6751cf15c986eafee56b1d9d56901b',1,'ParseAnarede::IndGenData']]]
+  ['workspace_0',['Workspace',['../class_workspace.html',1,'']]],
+  ['workspace_2eh_1',['Workspace.h',['../_workspace_8h.html',1,'']]],
+  ['workspacedc_2',['WorkspaceDC',['../class_workspace_d_c.html',1,'WorkspaceDC'],['../class_workspace_d_c.html#ae2e1dbe508249ab80b582ce4315f8f76',1,'WorkspaceDC::WorkspaceDC()'],['../class_workspace_d_c.html#a9f349e68be899a74b5b2611f32068006',1,'WorkspaceDC::WorkspaceDC(wxWindow *parent, wxString name=wxEmptyString, wxStatusBar *statusBar=nullptr)']]],
+  ['worldtoscreen_3',['WorldToScreen',['../class_element.html#abfee7ea88f4689c2a6eb4d39452f84d8',1,'Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const'],['../class_element.html#a147dd55d902171b212168ffde7262343',1,'Element::WorldToScreen(wxPoint2DDouble position, wxPoint2DDouble translation, double scale, double offsetX=0.0, double offsetY=0.0) const']]]
 ];

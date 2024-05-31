@@ -1,6 +1,13 @@
 <map id="ExponentialForm" name="ExponentialForm">
-<area shape="rect" id="node3" href="$class_exponential.html" title="Generates an output following an exponential function. " alt="" coords="181,247,271,273"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="171,171,281,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="191,95,261,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="173,5,279,32"/>
+<area shape="rect" id="Node000001" title="Form to edit the exponential control data." alt="" coords="35,336,154,363"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,245,155,272"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,287,95,335,90,336,82,288"/>
+<area shape="rect" id="Node000003" href="$class_exponential.html" title="Generates an output following an exponential function." alt="" coords="179,245,269,272"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="195,283,115,338,112,333,192,279"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="169,171,279,197"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="227,213,227,245,221,245,221,213"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="189,96,259,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="227,138,227,170,221,170,221,138"/>
+<area shape="rect" id="Node000006" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="171,5,277,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="227,48,227,95,221,95,221,48"/>
 </map>

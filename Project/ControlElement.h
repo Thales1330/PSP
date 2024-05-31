@@ -58,6 +58,7 @@ class Node
     void SetConnected(bool connected = true) { m_connected = connected; }
     int GetID() const { return m_id; }
     void SetID(int id) { m_id = id; }
+    Node* GetCopy() const;
 
    protected:
     int m_id = -1;
@@ -86,7 +87,7 @@ class ControlElement : public Element
 {
    public:
     ControlElement(int id);
-    ~ControlElement();
+    virtual ~ControlElement();
 
     virtual void StartMove(wxPoint2DDouble position);
     virtual void Move(wxPoint2DDouble position);

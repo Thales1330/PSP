@@ -11,7 +11,7 @@ Para visualização de todos os resultados dos cálculos de [fluxo de carga](pow
 
 <div><center><img src={useBaseUrl("images/tabReport.png")} alt="Visualizador de dados tabulados no PSP-UFU" title="Visualizador de dados tabulados no PSP-UFU" /></center></div>
 
-Tal visualizador pode ser acessado no [submenu Ribbon](mainScreen#menu-ribbon) **Ferramentas** e então no botão **Relatório de dados**, sendo exibido o formulário organizado em abas.
+Tal visualizador pode ser acessado no [submenu Ribbon](mainScreen#ribbon-menu) **Ferramentas** e então no botão **Relatório de dados**, sendo exibido o formulário organizado em abas.
 
 As grandezas de alguns dados desse relatório podem ser modificadas, sendo selecionadas no cabeçalho da tabela, como mostra a figura acima.
 

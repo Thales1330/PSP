@@ -31,7 +31,7 @@ Na versão atual do programa não são consideradas as alterações das resistê
 :::
 
 ## Execução do cálculo de harmônicos no PSP-UFU
-Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do cálculo das distorções harmônicas é realizada no [menu Simulação](mainScreen#menu-ribbon) clicando no botão **Distorções Harmônicas**. Para acessar a ferramenta de de varredura de frequência, basta clicar no botão **Resposta na Frequência**.
+Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do cálculo das distorções harmônicas é realizada no [menu Simulação](mainScreen#ribbon-menu) clicando no botão **Distorções Harmônicas**. Para acessar a ferramenta de de varredura de frequência, basta clicar no botão **Resposta na Frequência**.
 
 <div><center><img src={useBaseUrl("images/menuSimulationHamonics.svg")} alt="Acesso às ferramentas de estudo harmônico" title="Acesso às ferramentas de estudo harmônico" /></center></div>
 
@@ -42,7 +42,7 @@ Ao clicar sobre o botão "Distorções Harmônicas" as distorções causadas pel
 Caso não forem inseridas [fontes de corrente harmônica](harmSource) no sistema de potência, a distorção de tensão de todas as barras será $0{,}0~\%$.
 :::
 
-**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#menu-ribbon) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
+**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#ribbon-menu) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
 
 :::warning Cuidado!
 Os cálculos dos níveis de THD **não são habilitados por padrão** no cálculo contínuo e devem ser inseridos nas [configurações de simulação](simulationConfig).

@@ -1,8 +1,15 @@
 <map id="ControlElementSolver" name="ControlElementSolver">
-<area shape="rect" id="node2" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="5,260,172,287"/>
-<area shape="rect" id="node3" href="$class_i_o_control.html" title="Provides the communication with the power element. " alt="" coords="196,260,272,287"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="95,171,205,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="115,95,185,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="97,5,203,32"/>
-<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="229,171,324,197"/>
+<area shape="rect" id="Node000001" title="Solves in the time the control system. Can solve the control system directly from a ControlEditor or ..." alt="" coords="78,368,223,395"/>
+<area shape="rect" id="Node000002" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="5,261,171,288"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,303,93,323,101,343,112,355,126,365,123,370,108,359,96,345,88,325,85,304"/>
+<area shape="rect" id="Node000003" href="$class_i_o_control.html" title="Provides the communication with the power element." alt="" coords="194,261,270,288"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,303,195,346,170,370,166,366,191,342,218,300"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="100,171,210,197"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="177,207,223,259,219,263,173,211"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="120,96,189,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="157,138,157,170,152,170,152,138"/>
+<area shape="rect" id="Node000006" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="102,5,208,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="157,48,157,95,152,95,152,48"/>
+<area shape="rect" id="Node000007" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="234,171,299,197"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="259,213,239,262,234,260,254,211"/>
 </map>

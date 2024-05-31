@@ -1,2 +1,17 @@
 <map id="Project/ChartView.h" name="Project/ChartView.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="393,5,529,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,160,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="395,35,164,79,163,74,394,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="183,80,278,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="422,35,286,77,285,72,420,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="301,80,392,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="443,35,381,74,378,69,440,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="416,80,507,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="464,33,464,64,459,64,459,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="531,80,637,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="484,30,550,69,548,74,481,35"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="661,80,747,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="504,30,648,73,646,78,503,35"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="771,80,861,107"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="525,30,756,77,755,82,524,35"/>
 </map>

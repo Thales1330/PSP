@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$struct_parse_anarede_1_1_branch_data.html" title="ParseAnarede::BranchData" alt="" coords="5,5,185,32"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,115,32"/>
+<area shape="rect" id="Node000001" href="$class_load_form.html" title="Form to edit the load power data." alt="" coords="163,5,242,32"/>
+<area shape="poly" id="edge54_Node000000_Node000001" title=" " alt="" coords="131,16,162,16,162,21,131,21"/>
 </map>

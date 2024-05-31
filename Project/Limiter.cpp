@@ -31,7 +31,12 @@ Limiter::Limiter(int id) : ControlElement(id)
     m_nodeList.push_back(nodeOut);
 }
 
-Limiter::~Limiter() {}
+Limiter::~Limiter()
+{
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
+}
+
 void Limiter::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);

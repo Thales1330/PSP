@@ -4,17 +4,40 @@
         <title>PSP-UFU Blog</title>
         <link>https://thales1330.github.io/PSP/blog</link>
         <description>PSP-UFU Blog</description>
-        <lastBuildDate>Fri, 29 Sep 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 30 May 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[2024w22a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/blog/2024/05/30/2024w12a-beta</link>
+            <guid>https://thales1330.github.io/PSP/blog/2024/05/30/2024w12a-beta</guid>
+            <pubDate>Thu, 30 May 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[- 🔥 Removed the OpenGL dependency and related errors;]]></description>
+            <content:encoded><![CDATA[<ul>
+<li>🔥 Removed the OpenGL dependency and related errors;</li>
+<li>🔥 Added undo and redo feature (finally!);</li>
+<li>✔️ Voltage map upgraded due to OpenGL dependency removal;</li>
+<li>✔️ Code documentation updated (<a href="https://thales1330.github.io/PSP/doxygen/html/index.html" target="_blank" rel="noopener noreferrer">check here</a>);</li>
+<li>🐛 Fixed a massive memory leak when using Synchronous Generator controls;</li>
+<li>🐛 Fixed simulation problems related to disconnected buses;</li>
+<li>🐛 Minor bugfixes.</li>
+</ul>]]></content:encoded>
+            <category>psp-ufu</category>
+        </item>
         <item>
             <title><![CDATA[2023w38a-beta]]></title>
             <link>https://thales1330.github.io/PSP/blog/2023/09/29/2023w38a-beta</link>
             <guid>https://thales1330.github.io/PSP/blog/2023/09/29/2023w38a-beta</guid>
             <pubDate>Fri, 29 Sep 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[- 🔥 Added harmonic voltages and currents calculation;]]></description>
-            <content:encoded><![CDATA[<ul><li>🔥 Added harmonic voltages and currents calculation;</li><li>✔️ Added harmonic results in data form;</li><li>🐛 Fix program close suddenly on delete bus;</li><li>🐛 Fix problems related to disconnected buses;</li><li>🐛 Minor bugfixes.</li></ul>]]></content:encoded>
+            <content:encoded><![CDATA[<ul>
+<li>🔥 Added harmonic voltages and currents calculation;</li>
+<li>✔️ Added harmonic results in data form;</li>
+<li>🐛 Fix program close suddenly on delete bus;</li>
+<li>🐛 Fix problems related to disconnected buses;</li>
+<li>🐛 Minor bugfixes.</li>
+</ul>]]></content:encoded>
             <category>psp-ufu</category>
         </item>
         <item>
@@ -23,7 +46,12 @@
             <guid>https://thales1330.github.io/PSP/blog/2020/08/01/2020w31a-beta</guid>
             <pubDate>Sat, 01 Aug 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[- 🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on GitHub or Twitter);]]></description>
-            <content:encoded><![CDATA[<ul><li>🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on <a href="https://github.com/Thales1330/PSP/issues" target="_blank" rel="noopener noreferrer">GitHub</a> or <a href="https://twitter.com/PspUfu" target="_blank" rel="noopener noreferrer">Twitter</a>);</li><li>✔️ New fancy <a href="https://thales1330.github.io/PSP/" target="_blank" rel="noopener noreferrer">PSP-UFU website</a> and <a href="https://thales1330.github.io/PSP/blog" target="_blank" rel="noopener noreferrer">changelog</a> using <a href="https://v2.docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a>;</li><li>✔️ Text element performance improved for OpenGL render;</li><li>🐛 Several major and minor bug fixes.</li></ul>]]></content:encoded>
+            <content:encoded><![CDATA[<ul>
+<li>🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on <a href="https://github.com/Thales1330/PSP/issues" target="_blank" rel="noopener noreferrer">GitHub</a> or <a href="https://twitter.com/PspUfu" target="_blank" rel="noopener noreferrer">Twitter</a>);</li>
+<li>✔️ New fancy <a href="https://thales1330.github.io/PSP/" target="_blank" rel="noopener noreferrer">PSP-UFU website</a> and <a href="https://thales1330.github.io/PSP/blog" target="_blank" rel="noopener noreferrer">changelog</a> using <a href="https://v2.docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a>;</li>
+<li>✔️ Text element performance improved for OpenGL render;</li>
+<li>🐛 Several major and minor bug fixes.</li>
+</ul>]]></content:encoded>
             <category>psp-ufu</category>
         </item>
         <item>
@@ -32,7 +60,10 @@
             <guid>https://thales1330.github.io/PSP/blog/2020/07/09/2020w28a-beta</guid>
             <pubDate>Thu, 09 Jul 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[- 🔥 Voltage heatmap implemented (OpenGL enabled);]]></description>
-            <content:encoded><![CDATA[<ul><li>🔥 Voltage heatmap implemented (OpenGL enabled);</li><li>🐛 Several major and minor bugfixes.</li></ul>]]></content:encoded>
+            <content:encoded><![CDATA[<ul>
+<li>🔥 Voltage heatmap implemented (OpenGL enabled);</li>
+<li>🐛 Several major and minor bugfixes.</li>
+</ul>]]></content:encoded>
             <category>psp-ufu</category>
         </item>
         <item>
@@ -41,7 +72,11 @@
             <guid>https://thales1330.github.io/PSP/blog/2020/06/13/2020w24a-beta</guid>
             <pubDate>Sat, 13 Jun 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[- ✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);]]></description>
-            <content:encoded><![CDATA[<ul><li>✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);</li><li>✔️ Added Visual Studio solution to the GitHub project;</li><li>🐛 Several major and minor bugfixes.</li></ul>]]></content:encoded>
+            <content:encoded><![CDATA[<ul>
+<li>✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);</li>
+<li>✔️ Added Visual Studio solution to the GitHub project;</li>
+<li>🐛 Several major and minor bugfixes.</li>
+</ul>]]></content:encoded>
             <category>psp-ufu</category>
         </item>
         <item>
@@ -50,7 +85,10 @@
             <guid>https://thales1330.github.io/PSP/blog/2019/11/01/2019w44a-beta</guid>
             <pubDate>Fri, 01 Nov 2019 00:00:00 GMT</pubDate>
             <description><![CDATA[- ✔️ Minor changes to 32bit MSW version for compatibility;]]></description>
-            <content:encoded><![CDATA[<ul><li>✔️ Minor changes to 32bit MSW version for compatibility;</li><li>✔️ Travis CI (Continuous Integration) implemented (Linux).</li></ul>]]></content:encoded>
+            <content:encoded><![CDATA[<ul>
+<li>✔️ Minor changes to 32bit MSW version for compatibility;</li>
+<li>✔️ Travis CI (Continuous Integration) implemented (Linux).</li>
+</ul>]]></content:encoded>
             <category>psp-ufu</category>
         </item>
         <item>
@@ -59,7 +97,12 @@
             <guid>https://thales1330.github.io/PSP/blog/2019/10/13/2019w42a-beta</guid>
             <pubDate>Sun, 13 Oct 2019 00:00:00 GMT</pubDate>
             <description><![CDATA[- 🔥 Harmonic study implemented;]]></description>
-            <content:encoded><![CDATA[<ul><li>🔥 Harmonic study implemented;</li><li>🔥 Autolayout from importation implemented;</li><li>🔥 Importation of Matpower files;</li><li>🐛 Several minor bugfixes.</li></ul>]]></content:encoded>
+            <content:encoded><![CDATA[<ul>
+<li>🔥 Harmonic study implemented;</li>
+<li>🔥 Autolayout from importation implemented;</li>
+<li>🔥 Importation of Matpower files;</li>
+<li>🐛 Several minor bugfixes.</li>
+</ul>]]></content:encoded>
             <category>psp-ufu</category>
         </item>
     </channel>

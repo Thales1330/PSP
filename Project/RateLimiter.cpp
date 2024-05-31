@@ -31,7 +31,12 @@ RateLimiter::RateLimiter(int id) : ControlElement(id)
     m_nodeList.push_back(nodeOut);
 }
 
-RateLimiter::~RateLimiter() {}
+RateLimiter::~RateLimiter()
+{
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
+}
+
 void RateLimiter::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);

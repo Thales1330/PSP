@@ -235,6 +235,7 @@
     <ClCompile Include="FrequencyResponseForm.cpp" />
     <ClCompile Include="Gain.cpp" />
     <ClCompile Include="GainForm.cpp" />
+    <ClCompile Include="GCText.cpp" />
     <ClCompile Include="GeneralPropertiesForm.cpp" />
     <ClCompile Include="GeneratorStabForm.cpp" />
     <ClCompile Include="GraphAutoLayout.cpp" />
@@ -343,6 +344,7 @@
     <ClInclude Include="FrequencyResponseForm.h" />
     <ClInclude Include="Gain.h" />
     <ClInclude Include="GainForm.h" />
+    <ClInclude Include="GCText.h" />
     <ClInclude Include="GeneralPropertiesForm.h" />
     <ClInclude Include="GeneratorStabForm.h" />
     <ClInclude Include="glm\common.hpp" />

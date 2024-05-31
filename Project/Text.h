@@ -18,17 +18,17 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include <GL/glew.h>
+//#include <GL/glew.h>
 
-#ifdef _MSC_VER
+//#ifdef _MSC_VER
  //#include <windows.h>
-#endif 
+//#endif 
 //#include <GL/gl.h>
 #include <wx/dcmemory.h>
 
 #include "GraphicalElement.h"
 #include "PowerElement.h"
-#include "OpenGLText.h"
+#include "GCText.h"
 
 class TextForm;
 
@@ -76,7 +76,7 @@ public:
 	virtual Element* GetCopy();
 	virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
 	virtual bool Contains(wxPoint2DDouble position) const;
-	virtual void Draw(wxPoint2DDouble translation, double scale);
+	//virtual void Draw(wxPoint2DDouble translation, double scale);
 	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);
 	virtual bool Intersects(wxRect2DDouble rect) const;
 	virtual void Rotate(bool clockwise = true);
@@ -86,7 +86,7 @@ public:
 	virtual void SetText(wxString text);
 	virtual void SetAltSelectionColour(bool useAltSelectionColour = true) { m_useAltSelectionColour = useAltSelectionColour; }
 	virtual void SetAllowRotation(bool allowRotation = true) { m_allowRotation = allowRotation; }
-	virtual bool IsGLTextOK();
+	//virtual bool IsGLTextOK();
 
 	void SetDataType(const DataType& dataType) { m_dataType = dataType; }
 	void SetDirection(int direction) { m_direction = direction; }
@@ -113,7 +113,7 @@ protected:
 	bool m_useAltSelectionColour = false;
 	bool m_allowRotation = true;
 
-	std::vector<OpenGLText*> m_openGLTextList;
+	std::vector<GCText*> m_gcTextList;
 
 	Element* m_element = nullptr;
 	ElementType m_elementTypeText = TYPE_NONE;

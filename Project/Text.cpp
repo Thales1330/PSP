@@ -46,10 +46,10 @@ Text::Text(wxPoint2DDouble position) : GraphicalElement()
 
 Text::~Text()
 {
-	for (auto& openGLText : m_openGLTextList) {
-		if (openGLText) delete openGLText;
-	}
-	m_openGLTextList.clear();
+	//for (auto& openGLText : m_openGLTextList) {
+	//	if (openGLText) delete openGLText;
+	//}
+	//m_openGLTextList.clear();
 }
 
 bool Text::Contains(wxPoint2DDouble position) const
@@ -58,40 +58,40 @@ bool Text::Contains(wxPoint2DDouble position) const
 	return m_rect.Contains(ptR);
 }
 
-void Text::Draw(wxPoint2DDouble translation, double scale)
-{
-	// Draw selection rectangle
-
-	// Push the current matrix on stack.
-	glPushMatrix();
-	// Rotate the matrix around the object position.
-	glTranslated(m_position.m_x, m_position.m_y, 0.0);
-	glRotated(m_angle, 0.0, 0.0, 1.0);
-	glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
-
-	if (m_selected) {
-		if (m_useAltSelectionColour) glColor4d(0.0, 0.8, 0.0, 0.5);
-		else glColor4d(0.0, 0.5, 1.0, 0.5);
-		DrawRectangle(m_position + wxPoint2DDouble(m_borderSize / 2.0, m_borderSize / 2.0), m_rect.m_width,
-			m_rect.m_height);
-	}
-
-	// Draw text (layer 2)
-	glColor4d(0.0, 0.0, 0.0, 1.0);
-	if (m_isMultlineText) {
-		for (unsigned int i = 0; i < m_openGLTextList.size(); ++i) {
-			m_openGLTextList[i]->Draw(
-				m_position +
-				wxPoint2DDouble(0.0, (m_height * static_cast<double>(i) / static_cast<double>(m_numberOfLines)) -
-					(m_height * static_cast<double>(m_numberOfLines - 1) /
-						static_cast<double>(2 * m_numberOfLines))));
-		}
-	}
-	else if (m_openGLTextList.size() > 0) {
-		m_openGLTextList[0]->Draw(m_position);
-	}
-	glPopMatrix();
-}
+//void Text::Draw(wxPoint2DDouble translation, double scale)
+//{
+//	// Draw selection rectangle
+//
+//	// Push the current matrix on stack.
+//	glPushMatrix();
+//	// Rotate the matrix around the object position.
+//	glTranslated(m_position.m_x, m_position.m_y, 0.0);
+//	glRotated(m_angle, 0.0, 0.0, 1.0);
+//	glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
+//
+//	if (m_selected) {
+//		if (m_useAltSelectionColour) glColor4d(0.0, 0.8, 0.0, 0.5);
+//		else glColor4d(0.0, 0.5, 1.0, 0.5);
+//		DrawRectangle(m_position + wxPoint2DDouble(m_borderSize / 2.0, m_borderSize / 2.0), m_rect.m_width,
+//			m_rect.m_height);
+//	}
+//
+//	// Draw text (layer 2)
+//	glColor4d(0.0, 0.0, 0.0, 1.0);
+//	if (m_isMultlineText) {
+//		for (unsigned int i = 0; i < m_openGLTextList.size(); ++i) {
+//			m_openGLTextList[i]->Draw(
+//				m_position +
+//				wxPoint2DDouble(0.0, (m_height * static_cast<double>(i) / static_cast<double>(m_numberOfLines)) -
+//					(m_height * static_cast<double>(m_numberOfLines - 1) /
+//						static_cast<double>(2 * m_numberOfLines))));
+//		}
+//	}
+//	else if (m_openGLTextList.size() > 0) {
+//		m_openGLTextList[0]->Draw(m_position);
+//	}
+//	glPopMatrix();
+//}
 
 void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc)
 {
@@ -119,14 +119,14 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	//gc->SetBrush(*wxTRANSPARENT_BRUSH);
 	wxPoint2DDouble pos = m_position - wxPoint2DDouble(m_width / 2, m_height / 2);
 	if (m_isMultlineText) {
-		for (unsigned int i = 0; i < m_openGLTextList.size(); ++i) {
-			m_openGLTextList[i]->DrawDC(
+		for (unsigned int i = 0; i < m_gcTextList.size(); ++i) {
+			m_gcTextList[i]->Draw(
 				pos +
 				wxPoint2DDouble(0.0, (m_height * static_cast<double>(i) / static_cast<double>(m_numberOfLines))), gc);
 		}
 	}
-	else if (m_openGLTextList.size() > 0) {
-		m_openGLTextList[0]->DrawDC(pos, gc);
+	else if (m_gcTextList.size() > 0) {
+		m_gcTextList[0]->Draw(pos, gc);
 	}
 	gc->PopState();
 }
@@ -141,12 +141,12 @@ void Text::SetText(wxString text)
 {
 	m_text = text;
 
-	// Clear OpenGL text list
-	//for (auto it = m_openGLTextList.begin(), itEnd = m_openGLTextList.end(); it != itEnd; ++it) { delete* it; }
-	for (auto& openGLText : m_openGLTextList) {
-		if (openGLText) delete openGLText;
+	// Clear text list
+	//for (auto it = m_gcTextList.begin(), itEnd = m_gcTextList.end(); it != itEnd; ++it) { delete* it; }
+	for (GCText* gcText : m_gcTextList) {
+		if (gcText) delete gcText;
 	}
-	m_openGLTextList.clear();
+	m_gcTextList.clear();
 
 	m_numberOfLines = m_text.Freq('\n') + 1;
 	if (m_numberOfLines > 1) m_isMultlineText = true;
@@ -157,9 +157,9 @@ void Text::SetText(wxString text)
 		wxString nextLine;
 		wxString currentLine = multText.BeforeFirst('\n', &nextLine);
 		multText = nextLine;
-		m_openGLTextList.push_back(new OpenGLText(currentLine));
-		if (m_openGLTextList[i]->GetWidth() > m_width) m_width = m_openGLTextList[i]->GetWidth();
-		m_height += m_openGLTextList[i]->GetHeight();
+		m_gcTextList.push_back(new GCText(currentLine));
+		if (m_gcTextList[i]->GetWidth() > m_width) m_width = m_gcTextList[i]->GetWidth();
+		m_height += m_gcTextList[i]->GetHeight();
 	}
 	SetPosition(m_position);  // Update element rectangle.
 }
@@ -993,22 +993,22 @@ Element* Text::GetCopy()
 {
 	Text* copy = new Text();
 	*copy = *this;
-	std::vector<OpenGLText*> copyList;
-	for (auto it = m_openGLTextList.begin(), itEnd = m_openGLTextList.end(); it != itEnd; ++it) {
+	std::vector<GCText*> copyList;
+	for (auto it = m_gcTextList.begin(), itEnd = m_gcTextList.end(); it != itEnd; ++it) {
 		copyList.push_back((*it)->GetCopy());
 	}
-	copy->m_openGLTextList = copyList;
+	copy->m_gcTextList = copyList;
 	return copy;
 }
 
-bool Text::IsGLTextOK()
-{
-	bool isOk = true;
-	for (auto it = m_openGLTextList.begin(), itEnd = m_openGLTextList.end(); it != itEnd; ++it) {
-		if (!(*it)->IsTextureOK()) isOk = false;
-	}
-	return isOk;
-}
+//bool Text::IsGLTextOK()
+//{
+//	bool isOk = true;
+//	for (auto it = m_openGLTextList.begin(), itEnd = m_openGLTextList.end(); it != itEnd; ++it) {
+//		if (!(*it)->IsTextureOK()) isOk = false;
+//	}
+//	return isOk;
+//}
 
 rapidxml::xml_node<>* Text::SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode)
 {

@@ -1,7 +1,16 @@
 <map id="TextForm" name="TextForm">
-<area shape="rect" id="node3" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods. " alt="" coords="136,247,267,273"/>
-<area shape="rect" id="node4" href="$class_text.html" title="Element that shows power element informations in workspace. " alt="" coords="299,247,346,273"/>
-<area shape="rect" id="node5" href="$class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace. " alt="" coords="368,171,493,197"/>
-<area shape="rect" id="node6" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="255,95,326,121"/>
-<area shape="rect" id="node7" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="237,5,344,32"/>
+<area shape="rect" id="Node000001" title="Form to edit the text graphical data." alt="" coords="120,355,197,381"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,248,112,275"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,284,149,352,145,356,79,288"/>
+<area shape="rect" id="Node000003" href="$class_text.html" title="Element that shows power element informations in workspace." alt="" coords="135,248,182,275"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,290,161,354,156,354,156,290"/>
+<area shape="rect" id="Node000004" href="$class_graphical_element.html" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="202,172,326,199"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="235,210,178,250,175,245,232,206"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="96,96,165,123"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="125,138,121,167,124,198,135,224,150,246,146,249,131,227,119,199,116,167,120,137"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="168,128,242,169,240,174,165,133"/>
+<area shape="rect" id="Node000006" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="77,5,184,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="133,48,133,95,128,95,128,48"/>
+<area shape="rect" id="Node000007" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods." alt="" coords="206,248,335,275"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="266,291,257,313,243,333,222,348,198,359,196,354,219,344,239,329,253,310,261,289"/>
 </map>

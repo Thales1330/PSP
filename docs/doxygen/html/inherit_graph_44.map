@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$struct_parse_anarede_1_1_bus_data.html" title="ParseAnarede::BusData" alt="" coords="5,5,168,32"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,122,32"/>
+<area shape="rect" id="Node000001" href="$class_main_frame.html" title="Main frame of the program. This class manage the ribbon menu and the notebook behavior." alt="" coords="170,5,256,32"/>
+<area shape="poly" id="edge55_Node000000_Node000001" title=" " alt="" coords="137,16,169,16,169,21,137,21"/>
 </map>

@@ -31,7 +31,11 @@ Exponential::Exponential(int id) : ControlElement(id)
     m_nodeList.push_back(nodeOut);
 }
 
-Exponential::~Exponential() {}
+Exponential::~Exponential()
+{
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
+}
 void Exponential::Draw(wxPoint2DDouble translation, double scale) const
 {
     glLineWidth(1.0);

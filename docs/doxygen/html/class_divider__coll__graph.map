@@ -1,6 +1,11 @@
 <map id="Divider" name="Divider">
-<area shape="rect" id="node2" href="$class_math_operation.html" title="Abstract class that define the general behavior of math operation control block. " alt="" coords="7,247,114,273"/>
-<area shape="rect" id="node3" href="$class_control_element.html" title="ControlElement" alt="" coords="5,171,116,197"/>
-<area shape="rect" id="node4" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="25,95,96,121"/>
-<area shape="rect" id="node5" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="7,5,114,32"/>
+<area shape="rect" id="Node000001" title="Control element that divides two inputs." alt="" coords="31,320,90,347"/>
+<area shape="rect" id="Node000002" href="$class_math_operation.html" title="Abstract class that define the general behavior of math operation control block." alt="" coords="7,245,114,272"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,288,63,320,58,320,58,288"/>
+<area shape="rect" id="Node000003" href="$class_control_element.html" title=" " alt="" coords="5,171,116,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="63,213,63,245,58,245,58,213"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="26,96,95,123"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="63,138,63,170,58,170,58,138"/>
+<area shape="rect" id="Node000005" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="7,5,114,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="63,48,63,95,58,95,58,48"/>
 </map>

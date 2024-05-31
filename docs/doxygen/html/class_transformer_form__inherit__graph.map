@@ -1,2 +1,5 @@
 <map id="TransformerForm" name="TransformerForm">
+<area shape="rect" id="Node000001" title="Form to edit the transformer power data." alt="" coords="20,80,140,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,155,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,48,83,80,77,80,77,48"/>
 </map>

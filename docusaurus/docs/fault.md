@@ -34,7 +34,7 @@ Existem duas formas de se calcular o curto-circuito no PSP-UFU:
 - **Falta**: Calcula a falta inserida nas [barras](bus). Nesse tipo de cálculo é possível calcular faltas *shunt* nos [barramentos](bus) balanceadas e desbalanceadas.
 - **Nível de curto-circuito**: Calcula o nível de curto-circuito (falta trifásica) em todos [barramentos](bus) do sistema.
 
-Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do cálculo de curto-circuito é realizada no [menu Simulação](mainScreen#menu-ribbon) clicando no botão **Falta**. Para calcular o nível de curto-circuito (falta trifásica) em todos [barramentos](bus) do sistema, basta clicar no botão **Nível de curto-circuito**.
+Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do cálculo de curto-circuito é realizada no [menu Simulação](mainScreen#ribbon-menu) clicando no botão **Falta**. Para calcular o nível de curto-circuito (falta trifásica) em todos [barramentos](bus) do sistema, basta clicar no botão **Nível de curto-circuito**.
 
 <div><center><img src={useBaseUrl("images/menuSimulationFaulta.svg")} alt="Execução dos cálculos de curto-circuito" title="Execução dos cálculos de curto-circuito" /></center></div>
 
@@ -42,7 +42,7 @@ Após a construção do diagrama unifilar no [editor de potência](powerEditor),
 É possível calcular as faltas sem a execução do [fluxo de carga](powerFlow), porém **não é recomendável**, visto que os valores das correntes de falta são significativamente alteradas.
 :::
 
-**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#menu-ribbon) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
+**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#ribbon-menu) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
 
 :::warning Cuidado!
 Os cálculos de curtos-circuitos não são habilitados por padrão no cálculo contínuo e devem ser inseridos nas [configurações de simulação](simulationConfig).

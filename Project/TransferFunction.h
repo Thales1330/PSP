@@ -21,7 +21,8 @@
 #include "ControlElement.h"
 
 #include <wx/dcscreen.h>
-#include "OpenGLText.h"
+//#include "OpenGLText.h"
+#include "GCText.h"
 
 class TransferFunctionForm;
 
@@ -45,7 +46,7 @@ class TransferFunction : public ControlElement
     TransferFunction(int id);
     ~TransferFunction();
 
-    virtual void Draw(wxPoint2DDouble translation, double scale) const;
+    //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
@@ -88,8 +89,10 @@ class TransferFunction : public ControlElement
 
     wchar_t m_supNumber[10];
 
-    OpenGLText* m_glTextNum = nullptr;
-    OpenGLText* m_glTextDen = nullptr;
+    //OpenGLText* m_glTextNum = nullptr;
+    //OpenGLText* m_glTextDen = nullptr;
+    GCText* m_gcTextNum = nullptr;
+    GCText* m_gcTextDen = nullptr;
     int m_fontSize = 10;
 
     std::vector<double> m_numerator;

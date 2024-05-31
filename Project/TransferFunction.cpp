@@ -50,33 +50,38 @@ TransferFunction::TransferFunction(int id) : ControlElement(id)
 
 TransferFunction::~TransferFunction()
 {
-    if (m_glTextDen) delete m_glTextDen;
-    if (m_glTextNum) delete m_glTextNum;
+    //if (m_glTextDen) delete m_glTextDen;
+    if (m_gcTextDen) delete m_gcTextDen;
+    if (m_gcTextNum) delete m_gcTextNum;
+    //if (m_glTextNum) delete m_glTextNum;
+    for (auto& node : m_nodeList) if (node) delete node;
+    m_nodeList.clear();
 }
-void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
-{
-    glLineWidth(1.0);
-    if (m_selected) {
-        glColor4dv(m_selectionColour.GetRGBA());
-        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-    }
-    glColor4d(1.0, 1.0, 1.0, 1.0);
-    DrawRectangle(m_position, m_width, m_height);
-    glColor4d(0.0, 0.0, 0.0, 1.0);
-    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
 
-    std::vector<wxPoint2DDouble> linePts;
-    linePts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2 + 5 + m_borderSize, m_position.m_y));
-    linePts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2 - 5 - m_borderSize, m_position.m_y));
-    DrawLine(linePts);
-
-    DrawNodes();
-
-    glColor4d(0.0, 0.0, 0.0, 1.0);
-    m_glTextNum->Draw(m_position + wxPoint2DDouble(0.0, -m_height / 4));
-    m_glTextDen->Draw(m_position + wxPoint2DDouble(0.0, m_height / 4));
-}
+//void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
+//{
+//    glLineWidth(1.0);
+//    if (m_selected) {
+//        glColor4dv(m_selectionColour.GetRGBA());
+//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
+//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
+//    }
+//    glColor4d(1.0, 1.0, 1.0, 1.0);
+//    DrawRectangle(m_position, m_width, m_height);
+//    glColor4d(0.0, 0.0, 0.0, 1.0);
+//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
+//
+//    std::vector<wxPoint2DDouble> linePts;
+//    linePts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2 + 5 + m_borderSize, m_position.m_y));
+//    linePts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2 - 5 - m_borderSize, m_position.m_y));
+//    DrawLine(linePts);
+//
+//    DrawNodes();
+//
+//    glColor4d(0.0, 0.0, 0.0, 1.0);
+//    m_glTextNum->Draw(m_position + wxPoint2DDouble(0.0, -m_height / 4));
+//    m_glTextDen->Draw(m_position + wxPoint2DDouble(0.0, m_height / 4));
+//}
 
 void TransferFunction::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
@@ -100,27 +105,27 @@ void TransferFunction::DrawDC(wxPoint2DDouble translation, double scale, wxGraph
     DrawDCNodes(gc);
 
     glColor4d(0.0, 0.0, 0.0, 1.0);
-    m_glTextNum->DrawDC(m_position + wxPoint2DDouble(-m_glTextNum->GetWidth() / 2, -m_height / 4 - m_glTextNum->GetHeight() / 2), gc);
-    m_glTextDen->DrawDC(m_position + wxPoint2DDouble(-m_glTextDen->GetWidth() / 2, m_height / 4 - m_glTextDen->GetHeight() / 2), gc);
+    m_gcTextNum->Draw(m_position + wxPoint2DDouble(-m_gcTextNum->GetWidth() / 2, -m_height / 4 - m_gcTextNum->GetHeight() / 2), gc);
+    m_gcTextDen->Draw(m_position + wxPoint2DDouble(-m_gcTextDen->GetWidth() / 2, m_height / 4 - m_gcTextDen->GetHeight() / 2), gc);
 }
 
 void TransferFunction::SetText(wxString numerator, wxString denominator)
 {
-    if (m_glTextNum)
-        m_glTextNum->SetText(numerator);
+    if (m_gcTextNum)
+        m_gcTextNum->SetText(numerator);
     else
-        m_glTextNum = new OpenGLText(numerator);
+        m_gcTextNum = new GCText(numerator);
 
-    if (m_glTextDen)
-        m_glTextDen->SetText(denominator);
+    if (m_gcTextDen)
+        m_gcTextDen->SetText(denominator);
     else
-        m_glTextDen = new OpenGLText(denominator);
+        m_gcTextDen = new GCText(denominator);
 
-    double nWidth = static_cast<double>(m_glTextNum->GetWidth()) + 5 + m_borderSize;
-    double dWidth = static_cast<double>(m_glTextDen->GetWidth()) + 5 + m_borderSize;
+    double nWidth = static_cast<double>(m_gcTextNum->GetWidth()) + 5 + m_borderSize;
+    double dWidth = static_cast<double>(m_gcTextDen->GetWidth()) + 5 + m_borderSize;
 
     m_width = nWidth > dWidth ? nWidth : dWidth;
-    m_height = static_cast<double>(m_glTextNum->GetHeight()) + static_cast<double>(m_glTextDen->GetHeight()) + 2 * m_borderSize;
+    m_height = static_cast<double>(m_gcTextNum->GetHeight()) + static_cast<double>(m_gcTextDen->GetHeight()) + 2 * m_borderSize;
     SetPosition(m_position);  // Update rect properly.
 }
 
@@ -417,16 +422,16 @@ Element* TransferFunction::GetCopy()
 {
     TransferFunction* copy = new TransferFunction(m_elementID);
     *copy = *this;
-    copy->m_glTextNum = m_glTextNum->GetCopy();
-    copy->m_glTextDen = m_glTextDen->GetCopy();
+    copy->m_gcTextNum = m_gcTextNum->GetCopy();
+    copy->m_gcTextDen = m_gcTextDen->GetCopy();
     return copy;
 }
 
 bool TransferFunction::UpdateText()
 {
     UpdateTFText();
-    if (!m_glTextDen->IsTextureOK()) return false;
-    if (!m_glTextNum->IsTextureOK()) return false;
+    //if (!m_glTextDen->IsTextureOK()) return false;
+    //if (!m_glTextNum->IsTextureOK()) return false;
     return true;
 }
 

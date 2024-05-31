@@ -129,7 +129,7 @@ class PowerElement : public Element
     /**
      * @brief Destructor.
      */
-    ~PowerElement();
+    virtual ~PowerElement() {}
 
     /**
      * @brief Get the correct switch position.

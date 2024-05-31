@@ -1,5 +1,13 @@
 <map id="GeneralPropertiesForm" name="GeneralPropertiesForm">
-<area shape="rect" id="node3" href="$class_properties_data.html" title="General and simulation data manager. " alt="" coords="217,95,325,121"/>
-<area shape="rect" id="node4" href="$struct_general_data.html" title="GeneralData" alt="" coords="159,5,254,32"/>
-<area shape="rect" id="node5" href="$struct_simulation_data.html" title="SimulationData" alt="" coords="278,5,389,32"/>
+<area shape="rect" id="Node000001" title="Form to edit the software&#39;s general data." alt="" coords="35,187,190,213"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,191,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,138,113,186,108,187,100,139"/>
+<area shape="rect" id="Node000003" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="215,96,322,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,133,136,188,134,184,232,128"/>
+<area shape="rect" id="Node000004" href="$struct_simulation_data.html" title=" " alt="" coords="89,5,198,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="161,44,185,70,206,83,228,93,226,98,203,88,182,74,157,47"/>
+<area shape="rect" id="Node000005" href="$struct_general_data.html" title=" " alt="" coords="222,5,315,32"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="271,48,271,95,266,95,266,48"/>
+<area shape="rect" id="Node000006" href="$struct_freq_response_data.html" title=" " alt="" coords="340,5,472,32"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="384,45,346,74,301,98,299,93,343,70,380,41"/>
 </map>
