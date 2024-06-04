@@ -48,7 +48,7 @@ PROJECT_NAME           = "Power System Platform"
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = 2024w22a
+PROJECT_NUMBER         = 2024w23a
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
