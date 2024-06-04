@@ -2,18 +2,47 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://thales1330.github.io/PSP/blog</id>
     <title>PSP-UFU Blog</title>
-    <updated>2023-09-29T00:00:00.000Z</updated>
+    <updated>2024-06-04T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://thales1330.github.io/PSP/blog"/>
     <subtitle>PSP-UFU Blog</subtitle>
     <icon>https://thales1330.github.io/PSP/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[2024w23a-beta]]></title>
+        <id>https://thales1330.github.io/PSP/blog/2024/06/04/2024w12a-beta</id>
+        <link href="https://thales1330.github.io/PSP/blog/2024/06/04/2024w12a-beta"/>
+        <updated>2024-06-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[- 🔥 Removed the OpenGL dependency and related errors;]]></summary>
+        <content type="html"><![CDATA[<ul>
+<li>🔥 Removed the OpenGL dependency and related errors;</li>
+<li>🔥 Added undo and redo feature (finally!);</li>
+<li>✔️ Voltage map upgraded due to OpenGL dependency removal;</li>
+<li>✔️ New feature to add a new text element via context menu;</li>
+<li>✔️ Selection and move elements improved;</li>
+<li>✔️ Code documentation updated (<a href="https://thales1330.github.io/PSP/doxygen/html/index.html" target="_blank" rel="noopener noreferrer">check here</a>);</li>
+<li>🐛 Fixed a massive memory leak when using Synchronous Generator controls;</li>
+<li>🐛 Fixed simulation problems related to disconnected buses;</li>
+<li>🐛 Minor bugfixes.</li>
+</ul>]]></content>
+        <author>
+            <name>Thales</name>
+            <uri>https://github.com/thales1330</uri>
+        </author>
+        <category label="psp-ufu" term="psp-ufu"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2023w38a-beta]]></title>
         <id>https://thales1330.github.io/PSP/blog/2023/09/29/2023w38a-beta</id>
         <link href="https://thales1330.github.io/PSP/blog/2023/09/29/2023w38a-beta"/>
         <updated>2023-09-29T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Added harmonic voltages and currents calculation;]]></summary>
-        <content type="html"><![CDATA[<ul><li>🔥 Added harmonic voltages and currents calculation;</li><li>✔️ Added harmonic results in data form;</li><li>🐛 Fix program close suddenly on delete bus;</li><li>🐛 Fix problems related to disconnected buses;</li><li>🐛 Minor bugfixes.</li></ul>]]></content>
+        <content type="html"><![CDATA[<ul>
+<li>🔥 Added harmonic voltages and currents calculation;</li>
+<li>✔️ Added harmonic results in data form;</li>
+<li>🐛 Fix program close suddenly on delete bus;</li>
+<li>🐛 Fix problems related to disconnected buses;</li>
+<li>🐛 Minor bugfixes.</li>
+</ul>]]></content>
         <author>
             <name>Thales</name>
             <uri>https://github.com/thales1330</uri>
@@ -26,7 +55,12 @@
         <link href="https://thales1330.github.io/PSP/blog/2020/08/01/2020w31a-beta"/>
         <updated>2020-08-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on GitHub or Twitter);]]></summary>
-        <content type="html"><![CDATA[<ul><li>🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on <a href="https://github.com/Thales1330/PSP/issues" target="_blank" rel="noopener noreferrer">GitHub</a> or <a href="https://twitter.com/PspUfu" target="_blank" rel="noopener noreferrer">Twitter</a>);</li><li>✔️ New fancy <a href="https://thales1330.github.io/PSP/" target="_blank" rel="noopener noreferrer">PSP-UFU website</a> and <a href="https://thales1330.github.io/PSP/blog" target="_blank" rel="noopener noreferrer">changelog</a> using <a href="https://v2.docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a>;</li><li>✔️ Text element performance improved for OpenGL render;</li><li>🐛 Several major and minor bug fixes.</li></ul>]]></content>
+        <content type="html"><![CDATA[<ul>
+<li>🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on <a href="https://github.com/Thales1330/PSP/issues" target="_blank" rel="noopener noreferrer">GitHub</a> or <a href="https://twitter.com/PspUfu" target="_blank" rel="noopener noreferrer">Twitter</a>);</li>
+<li>✔️ New fancy <a href="https://thales1330.github.io/PSP/" target="_blank" rel="noopener noreferrer">PSP-UFU website</a> and <a href="https://thales1330.github.io/PSP/blog" target="_blank" rel="noopener noreferrer">changelog</a> using <a href="https://v2.docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a>;</li>
+<li>✔️ Text element performance improved for OpenGL render;</li>
+<li>🐛 Several major and minor bug fixes.</li>
+</ul>]]></content>
         <author>
             <name>Thales</name>
             <uri>https://github.com/thales1330</uri>
@@ -39,7 +73,10 @@
         <link href="https://thales1330.github.io/PSP/blog/2020/07/09/2020w28a-beta"/>
         <updated>2020-07-09T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Voltage heatmap implemented (OpenGL enabled);]]></summary>
-        <content type="html"><![CDATA[<ul><li>🔥 Voltage heatmap implemented (OpenGL enabled);</li><li>🐛 Several major and minor bugfixes.</li></ul>]]></content>
+        <content type="html"><![CDATA[<ul>
+<li>🔥 Voltage heatmap implemented (OpenGL enabled);</li>
+<li>🐛 Several major and minor bugfixes.</li>
+</ul>]]></content>
         <author>
             <name>Thales</name>
             <uri>https://github.com/thales1330</uri>
@@ -52,7 +89,11 @@
         <link href="https://thales1330.github.io/PSP/blog/2020/06/13/2020w24a-beta"/>
         <updated>2020-06-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- ✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);]]></summary>
-        <content type="html"><![CDATA[<ul><li>✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);</li><li>✔️ Added Visual Studio solution to the GitHub project;</li><li>🐛 Several major and minor bugfixes.</li></ul>]]></content>
+        <content type="html"><![CDATA[<ul>
+<li>✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);</li>
+<li>✔️ Added Visual Studio solution to the GitHub project;</li>
+<li>🐛 Several major and minor bugfixes.</li>
+</ul>]]></content>
         <author>
             <name>Thales</name>
             <uri>https://github.com/thales1330</uri>
@@ -65,7 +106,10 @@
         <link href="https://thales1330.github.io/PSP/blog/2019/11/01/2019w44a-beta"/>
         <updated>2019-11-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- ✔️ Minor changes to 32bit MSW version for compatibility;]]></summary>
-        <content type="html"><![CDATA[<ul><li>✔️ Minor changes to 32bit MSW version for compatibility;</li><li>✔️ Travis CI (Continuous Integration) implemented (Linux).</li></ul>]]></content>
+        <content type="html"><![CDATA[<ul>
+<li>✔️ Minor changes to 32bit MSW version for compatibility;</li>
+<li>✔️ Travis CI (Continuous Integration) implemented (Linux).</li>
+</ul>]]></content>
         <author>
             <name>Thales</name>
             <uri>https://github.com/thales1330</uri>
@@ -78,7 +122,12 @@
         <link href="https://thales1330.github.io/PSP/blog/2019/10/13/2019w42a-beta"/>
         <updated>2019-10-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Harmonic study implemented;]]></summary>
-        <content type="html"><![CDATA[<ul><li>🔥 Harmonic study implemented;</li><li>🔥 Autolayout from importation implemented;</li><li>🔥 Importation of Matpower files;</li><li>🐛 Several minor bugfixes.</li></ul>]]></content>
+        <content type="html"><![CDATA[<ul>
+<li>🔥 Harmonic study implemented;</li>
+<li>🔥 Autolayout from importation implemented;</li>
+<li>🔥 Importation of Matpower files;</li>
+<li>🐛 Several minor bugfixes.</li>
+</ul>]]></content>
         <author>
             <name>Thales</name>
             <uri>https://github.com/thales1330</uri>

@@ -1,7 +1,13 @@
 <map id="MathExpression" name="MathExpression">
-<area shape="rect" id="node2" href="$class_control_element.html" title="ControlElement" alt="" coords="5,171,116,197"/>
-<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="25,95,96,121"/>
-<area shape="rect" id="node4" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="7,5,114,32"/>
-<area shape="rect" id="node5" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="140,171,235,197"/>
-<area shape="rect" id="node6" href="$class_math_expr_parser.html" title="MathExprParser" alt="" coords="259,171,375,197"/>
+<area shape="rect" id="Node000001" title="A generic math expression block that can perform math and conditional operations with the inputs." alt="" coords="140,171,256,197"/>
+<area shape="rect" id="Node000002" href="$class_control_element.html" title=" " alt="" coords="5,80,116,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,113,180,168,177,172,92,118"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="26,5,95,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="63,48,63,80,58,80,58,48"/>
+<area shape="rect" id="Node000004" href="$class_math_expr_parser.html" title=" " alt="" coords="140,80,256,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="201,122,201,170,195,170,195,122"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="143,5,253,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="201,48,201,80,195,80,195,48"/>
+<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="280,80,345,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="295,120,266,149,227,172,224,168,263,145,292,117"/>
 </map>

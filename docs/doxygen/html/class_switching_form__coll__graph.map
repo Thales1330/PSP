@@ -1,6 +1,11 @@
 <map id="SwitchingForm" name="SwitchingForm">
-<area shape="rect" id="node3" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="168,260,275,287"/>
-<area shape="rect" id="node4" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="186,133,257,159"/>
-<area shape="rect" id="node5" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="21,5,128,32"/>
-<area shape="rect" id="node6" href="$struct_switching_data.html" title="Switching data of power elements. " alt="" coords="281,133,386,159"/>
+<area shape="rect" id="Node000001" title="Form to edit the switching data of power elements for electromechanical transient studies." alt="" coords="64,187,172,213"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,143,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,136,114,185,109,187,85,138"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="167,96,272,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="195,135,134,188,131,184,192,131"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="129,5,198,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="182,44,214,94,209,97,177,47"/>
+<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="222,5,326,32"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="260,47,229,97,225,94,256,44"/>
 </map>

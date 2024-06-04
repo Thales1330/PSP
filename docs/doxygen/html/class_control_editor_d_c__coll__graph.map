@@ -1,0 +1,11 @@
+<map id="ControlEditorDC" name="ControlEditorDC">
+<area shape="rect" id="Node000001" title=" " alt="" coords="131,171,246,197"/>
+<area shape="rect" id="Node000002" href="$class_control_editor.html" title=" " alt="" coords="140,96,237,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,138,191,170,186,170,186,138"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,132,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,39,173,93,170,98,96,43"/>
+<area shape="rect" id="Node000004" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="155,5,222,32"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="191,48,191,95,186,95,186,48"/>
+<area shape="rect" id="Node000005" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="246,5,411,32"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="303,44,261,74,217,98,215,93,258,70,300,40"/>
+</map>

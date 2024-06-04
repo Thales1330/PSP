@@ -53,7 +53,7 @@ All detailed descriptions of the source-code can be found at [**Online Documenta
 
 ![](docs/images/ss_1_2.png)
 
-![](docs/images/ss_22.png)
+![](docs/images/ss_2.png)
 
 ![](docs/images/ss_3.png)
 

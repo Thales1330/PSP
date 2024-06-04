@@ -1,4 +1,7 @@
 <map id="TransferFunction" name="TransferFunction">
-<area shape="rect" id="node2" href="$class_control_element.html" title="ControlElement" alt="" coords="9,80,120,107"/>
-<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,100,32"/>
+<area shape="rect" id="Node000001" title="Calculates the time response by a frequency domain transfer function." alt="" coords="5,155,123,181"/>
+<area shape="rect" id="Node000002" href="$class_control_element.html" title=" " alt="" coords="9,80,119,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,122,67,154,61,154,61,122"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="29,5,99,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="67,48,67,80,61,80,61,48"/>
 </map>

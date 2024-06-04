@@ -1,6 +1,11 @@
 <map id="LimiterForm" name="LimiterForm">
-<area shape="rect" id="node3" href="$class_limiter.html" title="Limits the input value by superior and inferior values. " alt="" coords="151,247,213,273"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="127,171,237,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="147,95,217,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="129,5,235,32"/>
+<area shape="rect" id="Node000001" title="Form to edit the limit control data." alt="" coords="35,245,125,272"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,126,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,197,81,244,75,245,67,197"/>
+<area shape="rect" id="Node000003" href="$class_limiter.html" title="Limits the input value by superior and inferior values." alt="" coords="150,155,210,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,194,96,247,93,243,153,190"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="125,80,235,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="183,122,183,154,178,154,178,122"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="146,5,215,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="183,48,183,80,178,80,178,48"/>
 </map>

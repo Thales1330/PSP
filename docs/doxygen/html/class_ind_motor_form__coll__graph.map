@@ -1,9 +1,19 @@
 <map id="IndMotorForm" name="IndMotorForm">
-<area shape="rect" id="node3" href="$class_ind_motor.html" title="Induction motor power element. " alt="" coords="277,425,349,452"/>
-<area shape="rect" id="node4" href="$class_machines.html" title="Abstract class for rotary machines power elements. " alt="" coords="179,336,258,363"/>
-<area shape="rect" id="node5" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="165,260,272,287"/>
-<area shape="rect" id="node6" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="183,133,254,159"/>
-<area shape="rect" id="node7" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="18,5,125,32"/>
-<area shape="rect" id="node8" href="$struct_switching_data.html" title="Switching data of power elements. " alt="" coords="278,133,383,159"/>
-<area shape="rect" id="node9" href="$struct_ind_motor_electrical_data.html" title="IndMotorElectricalData" alt="" coords="282,336,435,363"/>
+<area shape="rect" id="Node000001" title="Form to edit the induction motor power data." alt="" coords="35,400,136,427"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,309,137,336"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,351,86,399,81,400,73,352"/>
+<area shape="rect" id="Node000003" href="$class_ind_motor.html" title="Induction motor power element." alt="" coords="161,309,232,336"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,348,103,402,100,397,167,344"/>
+<area shape="rect" id="Node000004" href="$class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="75,219,152,245"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="138,255,186,307,183,311,134,259"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="57,96,162,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="113,138,116,218,111,218,108,138"/>
+<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="20,5,90,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="73,44,104,94,100,97,69,47"/>
+<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="114,5,218,32"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="152,47,120,97,115,94,147,44"/>
+<area shape="rect" id="Node000008" href="$struct_ind_motor_electrical_data.html" title=" " alt="" coords="178,219,330,245"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="240,260,207,310,202,307,235,257"/>
+<area shape="rect" id="Node000009" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="187,96,320,123"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="256,138,256,218,251,218,251,138"/>
 </map>

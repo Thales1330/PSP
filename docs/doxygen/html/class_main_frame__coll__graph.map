@@ -1,5 +1,15 @@
 <map id="MainFrame" name="MainFrame">
-<area shape="rect" id="node3" href="$class_properties_data.html" title="General and simulation data manager. " alt="" coords="147,95,255,121"/>
-<area shape="rect" id="node4" href="$struct_general_data.html" title="GeneralData" alt="" coords="90,5,185,32"/>
-<area shape="rect" id="node5" href="$struct_simulation_data.html" title="SimulationData" alt="" coords="209,5,319,32"/>
+<area shape="rect" id="Node000001" title="Main frame of the program. This class manage the ribbon menu and the notebook behavior." alt="" coords="118,187,204,213"/>
+<area shape="rect" id="Node000002" href="$class_main_frame_base.html" title=" " alt="" coords="36,96,153,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,134,154,184,150,188,111,137"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,80,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="60,44,89,94,85,97,55,47"/>
+<area shape="rect" id="Node000004" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="204,96,311,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="234,135,177,188,173,184,231,131"/>
+<area shape="rect" id="Node000005" href="$struct_simulation_data.html" title=" " alt="" coords="104,5,213,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="169,45,184,70,201,83,220,93,217,98,198,88,181,74,164,48"/>
+<area shape="rect" id="Node000006" href="$struct_general_data.html" title=" " alt="" coords="237,5,331,32"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="278,48,264,96,258,95,273,46"/>
+<area shape="rect" id="Node000007" href="$struct_freq_response_data.html" title=" " alt="" coords="355,5,487,32"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="395,44,349,74,296,98,294,93,347,70,393,39"/>
 </map>

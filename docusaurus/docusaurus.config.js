@@ -9,6 +9,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'thales1330', // Usually your GitHub org/user name.
   projectName: 'PSP', // Usually your repo name.
+  //onBrokenLinks: 'warn',
   themeConfig: {
     //colorMode: {
     //  defaultMode: 'dark',

@@ -1,2 +1,5 @@
-<map id="Project/TransferFunctionForm.h" name="Project/TransferFunctionForm.h">
+<map id="Project/forms/TransferFunctionForm.h" name="Project/forms/TransferFunctionForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,204,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="34,96,175,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,49,107,80,102,80,102,49"/>
 </map>

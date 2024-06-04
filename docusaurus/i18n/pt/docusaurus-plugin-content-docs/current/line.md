@@ -36,7 +36,7 @@ A linha deve ser inserida entre duas barras de **mesma tensão nominal**. Caso v
 :::
 
 :::tip Dica
-Um arranjo série de uma [linha](line) sem as susceptâncias *shunt*, um [barramento](bus) e um [capacitor](capacitor) pode ser utilizado para fabricar um filtro passivo nos [estudos harmônicos](harmonics). Em versões futuras, um elemento de filtro passivo será implementado no PSP-UFU.
+Um arranjo série de uma [linha](line) sem as susceptâncias *shunt*, um [barramento](bus.md) e um [capacitor](capacitor) pode ser utilizado para fabricar um filtro passivo nos [estudos harmônicos](harmonics). Em versões futuras, um elemento de filtro passivo será implementado no PSP-UFU.
 :::
 
 ## Formulário de edição das linhas
@@ -76,7 +76,7 @@ Identificação do elemento elétrico. Podem ser inseridos quaisquer números de
 Todos os componentes de potência do PSP-UFU possuem esse campo.
 
 #### Tensão nominal
-Campo de informação *não editável* que apresenta a tensão nominal da linha. Para alterar esse campo é necessário editar o campo correspondente do [barramento](bus#geral) conectado.
+Campo de informação *não editável* que apresenta a tensão nominal da linha. Para alterar esse campo é necessário editar o campo correspondente do [barramento](bus#nome) conectado.
 
 
 #### Potência nominal

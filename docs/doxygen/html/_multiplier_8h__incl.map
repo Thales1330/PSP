@@ -1,6 +1,35 @@
-<map id="Project/Multiplier.h" name="Project/Multiplier.h">
-<area shape="rect" id="node2" href="$_math_operation_8h.html" title="MathOperation.h" alt="" coords="472,80,591,107"/>
-<area shape="rect" id="node3" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes. " alt="" coords="470,155,593,181"/>
-<area shape="rect" id="node4" href="$_element_8h.html" title="Element.h" alt="" coords="491,229,572,256"/>
-<area shape="rect" id="node13" href="$_x_m_l_parser_8h.html" title="XMLParser.h" alt="" coords="917,304,1013,331"/>
+<map id="Project/elements/controlElement/Multiplier.h" name="Project/elements/controlElement/Multiplier.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="445,5,607,48"/>
+<area shape="rect" id="Node000002" href="$_math_operation_8h.html" title=" " alt="" coords="467,96,585,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="529,49,529,80,523,80,523,49"/>
+<area shape="rect" id="Node000003" href="$_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes." alt="" coords="465,171,587,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="529,123,529,155,523,155,523,123"/>
+<area shape="rect" id="Node000004" href="$_element_8h.html" title=" " alt="" coords="480,245,572,272"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="529,198,529,230,523,230,523,198"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,320,100,347"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="479,269,322,290,115,322,114,317,321,285,479,263"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="123,320,230,347"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="480,272,245,321,244,315,479,267"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="254,320,342,347"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="487,275,353,317,352,312,485,270"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="366,320,451,347"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="507,275,443,314,440,309,504,270"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="475,320,577,347"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="529,273,529,304,523,304,523,273"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="601,320,701,347"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="549,270,618,310,615,314,546,275"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="726,320,827,347"/>
+<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="570,270,719,313,717,318,569,275"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="851,320,921,347"/>
+<area shape="poly" id="edge11_Node000004_Node000012" title=" " alt="" coords="573,265,836,317,835,322,572,271"/>
+<area shape="rect" id="Node000013" href="$_x_m_l_parser_8h.html" title=" " alt="" coords="945,320,1080,347"/>
+<area shape="poly" id="edge12_Node000004_Node000013" title=" " alt="" coords="573,264,930,317,929,322,572,269"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="712,395,844,437"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="977,350,853,392,852,387,975,345"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="868,395,1000,437"/>
+<area shape="poly" id="edge14_Node000013_Node000015" title=" " alt="" coords="1002,349,966,386,962,382,998,345"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1024,395,1156,437"/>
+<area shape="poly" id="edge15_Node000013_Node000016" title=" " alt="" coords="1027,345,1062,382,1058,386,1023,349"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1180,403,1264,429"/>
+<area shape="poly" id="edge16_Node000013_Node000017" title=" " alt="" coords="1046,345,1176,394,1174,399,1044,350"/>
 </map>

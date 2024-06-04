@@ -1,7 +1,13 @@
 <map id="GainForm" name="GainForm">
-<area shape="rect" id="node3" href="$class_gain.html" title="Provide an output multiplying the input by a constant. " alt="" coords="139,260,189,287"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="25,171,135,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="45,95,115,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="27,5,133,32"/>
-<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="159,171,254,197"/>
+<area shape="rect" id="Node000001" title="Form to edit the gain control data." alt="" coords="35,261,113,288"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,171,114,197"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,213,75,260,69,261,61,213"/>
+<area shape="rect" id="Node000003" href="$class_gain.html" title="Provide an output multiplying the input by a constant." alt="" coords="138,171,186,197"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,210,89,263,85,259,137,207"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="30,80,140,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="108,117,153,168,149,172,104,120"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="50,5,120,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="88,48,88,80,82,80,82,48"/>
+<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="164,80,230,107"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="189,122,170,171,165,169,184,120"/>
 </map>

@@ -1,0 +1,21 @@
+<map id="ProjectPropertiesForm" name="ProjectPropertiesForm">
+<area shape="rect" id="Node000001" title=" " alt="" coords="35,277,186,304"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,187,187,213"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,229,111,276,106,277,98,229"/>
+<area shape="rect" id="Node000003" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="211,187,298,213"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,224,133,279,130,274,220,220"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="28,96,145,123"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="125,128,232,184,229,188,123,133"/>
+<area shape="rect" id="Node000005" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="170,96,236,123"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="207,137,215,161,237,184,233,188,210,164,202,139"/>
+<area shape="rect" id="Node000006" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="260,96,367,123"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="299,137,265,188,261,185,294,134"/>
+<area shape="rect" id="Node000007" href="$struct_simulation_data.html" title=" " alt="" coords="133,5,243,32"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="205,44,230,70,251,83,273,93,271,98,248,88,226,74,202,47"/>
+<area shape="rect" id="Node000008" href="$struct_general_data.html" title=" " alt="" coords="267,5,360,32"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="316,48,316,95,311,95,311,48"/>
+<area shape="rect" id="Node000009" href="$struct_freq_response_data.html" title=" " alt="" coords="385,5,517,32"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="428,45,391,74,346,98,343,93,388,70,425,41"/>
+<area shape="rect" id="Node000010" href="$class_h_m_plane.html" title=" " alt="" coords="391,96,465,123"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="409,136,373,165,337,182,300,193,298,188,335,177,371,160,406,132"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="Project/extLibs/wxMathPlot/mathplot.h" name="Project/extLibs/wxMathPlot/mathplot.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="539,5,719,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,61,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="539,37,330,57,205,75,76,98,75,93,204,69,330,52,538,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="84,96,161,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="539,42,374,65,176,98,175,93,373,59,538,36"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="184,96,269,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="539,48,284,98,283,93,538,42"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="293,96,392,123"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="556,51,403,94,401,89,554,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="416,96,498,123"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="586,51,499,92,496,87,584,46"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="522,96,624,123"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="617,50,593,85,588,82,612,47"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="648,96,722,123"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="646,47,670,82,665,85,641,50"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="746,96,859,123"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="675,46,763,87,760,92,673,51"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="883,96,967,123"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="706,46,869,90,867,95,705,51"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="992,96,1069,123"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="720,42,977,93,976,98,719,47"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1093,96,1181,123"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="720,37,883,61,1079,93,1078,98,882,66,719,43"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1205,96,1261,123"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="720,31,931,52,1059,70,1190,93,1189,98,1058,75,931,58,719,37"/>
+</map>

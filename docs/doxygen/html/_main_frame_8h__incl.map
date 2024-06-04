@@ -1,2 +1,9 @@
 <map id="Project/MainFrame.h" name="Project/MainFrame.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="90,5,232,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,90,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,35,82,74,79,69,140,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="114,80,208,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,33,164,64,158,64,158,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="232,80,317,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="182,30,243,69,240,74,179,35"/>
 </map>

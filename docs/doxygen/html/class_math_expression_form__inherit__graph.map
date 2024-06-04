@@ -1,2 +1,5 @@
 <map id="MathExpressionForm" name="MathExpressionForm">
+<area shape="rect" id="Node000001" title=" " alt="" coords="20,80,166,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,181,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,48,96,80,90,80,90,48"/>
 </map>

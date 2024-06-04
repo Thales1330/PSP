@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,80,57"/>
+<area shape="rect" id="Node000001" href="$class_chart_view_base.html" title=" " alt="" coords="149,5,260,32"/>
+<area shape="poly" id="edge73_Node000000_Node000001" title=" " alt="" coords="95,33,148,25,149,30,95,38"/>
+<area shape="rect" id="Node000003" href="$class_debug_main_frame_base.html" title=" " alt="" coords="128,56,281,83"/>
+<area shape="poly" id="edge75_Node000000_Node000003" title=" " alt="" coords="95,50,128,55,127,60,95,55"/>
+<area shape="rect" id="Node000002" href="$class_chart_view.html" title="This class is responsible to manage the charts generated in the transient electromechanical studies." alt="" coords="351,5,431,32"/>
+<area shape="poly" id="edge74_Node000001_Node000002" title=" " alt="" coords="275,16,350,16,350,21,275,21"/>
+<area shape="rect" id="Node000004" href="$class_debug_main_frame.html" title=" " alt="" coords="329,56,452,83"/>
+<area shape="poly" id="edge76_Node000003_Node000004" title=" " alt="" coords="297,67,329,67,329,72,297,72"/>
+</map>

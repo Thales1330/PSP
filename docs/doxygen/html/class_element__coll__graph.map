@@ -1,3 +1,5 @@
 <map id="Element" name="Element">
-<area shape="rect" id="node2" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="5,5,112,32"/>
+<area shape="rect" id="Node000001" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="24,96,93,123"/>
+<area shape="rect" id="Node000002" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="5,5,112,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,48,61,95,56,95,56,48"/>
 </map>

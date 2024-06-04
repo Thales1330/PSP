@@ -1,7 +1,13 @@
 <map id="ConstantForm" name="ConstantForm">
-<area shape="rect" id="node3" href="$class_constant.html" title="A control element that provides a constant value. " alt="" coords="165,260,239,287"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="63,171,173,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="83,95,153,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="65,5,171,32"/>
-<area shape="rect" id="node7" href="$class_open_g_l_text.html" title="Class to draw text on OpenGL using wxWidgets. " alt="" coords="197,171,292,197"/>
+<area shape="rect" id="Node000001" title="Form to edit the constant control data." alt="" coords="35,261,138,288"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,171,139,197"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,213,87,260,82,261,74,213"/>
+<area shape="rect" id="Node000003" href="$class_constant.html" title="A control element that provides a constant value." alt="" coords="163,171,237,197"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,209,105,263,101,259,170,205"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="68,80,178,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="145,117,191,168,187,172,141,120"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="88,5,157,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="125,48,125,80,120,80,120,48"/>
+<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="202,80,267,107"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="227,122,207,171,202,169,222,120"/>
 </map>

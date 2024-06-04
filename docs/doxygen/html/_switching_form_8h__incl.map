@@ -1,2 +1,5 @@
-<map id="Project/SwitchingForm.h" name="Project/SwitchingForm.h">
+<map id="Project/forms/SwitchingForm.h" name="Project/forms/SwitchingForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,205,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="35,80,175,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,33,108,64,102,64,102,33"/>
 </map>

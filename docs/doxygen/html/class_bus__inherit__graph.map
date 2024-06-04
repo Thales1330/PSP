@@ -1,4 +1,7 @@
 <map id="Bus" name="Bus">
-<area shape="rect" id="node2" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="5,80,112,107"/>
-<area shape="rect" id="node3" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="23,5,94,32"/>
+<area shape="rect" id="Node000001" title="Node for power elements. All others power elements are connected through this." alt="" coords="36,155,80,181"/>
+<area shape="rect" id="Node000002" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="5,80,111,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,122,61,154,55,154,55,122"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="23,5,93,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="61,48,61,80,55,80,55,48"/>
 </map>

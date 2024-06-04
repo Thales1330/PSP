@@ -21,7 +21,7 @@
 #include <wx/menu.h>
 #include <wx/msgdlg.h>
 #include <wx/filedlg.h>
-#include <wx/glcanvas.h>
+//#include <wx/glcanvas.h>
 
 #include "MainFrameBase.h"
 
@@ -136,7 +136,7 @@ class MainFrame : public MainFrameBase
     wxMenu* m_stabilityMenu = nullptr;
     wxLocale* m_locale = nullptr;
     PropertiesData* m_generalProperties = nullptr;
-    wxGLContext* m_sharedGLContext = nullptr;
+    //wxGLContext* m_sharedGLContext = nullptr;
 
     void Init();
     void EnableCurrentProjectRibbon(bool enable = true);

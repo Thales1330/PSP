@@ -6,7 +6,7 @@ sidebar_label: Main Screen
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 ## Organization of the main screen
-The main screen of the PSP-UFU is divided into three sections: *[Menu "Ribbon"](mainScreen#menu-ribbon)*, *[Desktop](mainScreen#desktop-area)* and *[Toolbar Status](mainScreen#status-bar)*.
+The main screen of the PSP-UFU is divided into three sections: *[Menu "Ribbon"](mainScreen#ribbon-menu)*, *[Workspace](mainScreen#workspace)* and *[Toolbar Status](mainScreen#status-bar)*.
 
 <div> <center> <img src = {useBaseUrl ("images/mainScreen.svg")} alt = "Main screen" title = "PSP-UFU main screen on Windows" /> </center> </div>
 
@@ -32,7 +32,7 @@ In **Tools** there are specific items, which are related to the creation and man
 Finally, the **Simulation** submenu provides user access to the calculations performed by the software and its settings, in addition to the “continuous solution” tool, which solves the static calculations (power flow, short circuit and harmonics) after any changes to the power grid, such as removing a component or changing its data. All simulation settings for the active project are accessed through this menu.
 
 ### Workspace
-In the work area are present the projects in execution, which are divided by tabs identified by the name of the project (if already recorded on the disc). It is in this area that the electrical elements are inserted and excluded, whose tools are accessed through the [Menu Ribbon](mainScreen#menu-ribbon).
+In the work area are present the projects in execution, which are divided by tabs identified by the name of the project (if already recorded on the disc). It is in this area that the electrical elements are inserted and excluded, whose tools are accessed through the [Menu Ribbon](mainScreen#ribbon-menu).
 
 The graphic edits of the elements, such as position, connection and size of the busbars, are performed through the action drag-and-drop using the mouse. The editing of the electrical data is done through data forms accessed by double clicking on the elements.
 
@@ -84,7 +84,7 @@ The program must be restarted to have the effect of changing the renderer.
 The options for creating, saving and opening projects on the disk, as well as importing files from other programs are present in the Ribbon **File** submenu.
 
 ### New project
-The creation of a new project is done by clicking the **New project** button in the [submenu **File**](mainScreen # menu-ribbon). This action creates a blank system in the work area, where it is possible to insert the electrical elements through the [submenu **Tools**](mainScreen#menu-ribbon) or by the [shortcut keys](powerEditor#keys-shortcut).
+The creation of a new project is done by clicking the **New project** button in the [submenu **File**](mainScreen#ribbon-menu). This action creates a blank system in the work area, where it is possible to insert the electrical elements through the [submenu **Tools**](mainScreen#ribbon-menu) or by the [shortcut keys](powerEditor#teclas-de-atalho).
 
 This blank system can be created using the [Power Editor](powerEditor).
 

@@ -1,2 +1,9 @@
-<map id="Project/GeneralPropertiesForm.h" name="Project/GeneralPropertiesForm.h">
+<map id="Project/forms/GeneralPropertiesForm.h" name="Project/forms/GeneralPropertiesForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="123,5,330,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,157,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,51,118,90,116,86,188,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="181,96,272,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="229,49,229,80,224,80,224,49"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="295,96,390,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="258,46,313,85,310,89,255,51"/>
 </map>

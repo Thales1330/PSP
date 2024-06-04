@@ -154,4 +154,4 @@ i_f
 ```
 
 ## Referências
-- NIEMINEN, J.; YLILUOMA, J. Function Parser for C++ v4.5.2. Disponível em: <http://warp.povusers.org/FunctionParser/>. 
+- NIEMINEN, J.; YLILUOMA, J. Function Parser for C++ v4.5.2. Disponível em: \<http://warp.povusers.org/FunctionParser/\>. 

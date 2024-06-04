@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$class_sync_machine_form.html" title="Form to edit the synchronous machine power data. " alt="" coords="215,5,345,32"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,153,32"/>
+<area shape="rect" id="Node000001" href="$class_rate_limiter_form.html" title="Form to edit the rate limit control data." alt="" coords="201,5,318,32"/>
+<area shape="poly" id="edge58_Node000000_Node000001" title=" " alt="" coords="168,16,200,16,200,21,168,21"/>
 </map>

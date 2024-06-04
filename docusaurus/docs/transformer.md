@@ -51,7 +51,7 @@ $$
 Assim como nas [linhas](line), o transformador de dois enrolamentos deve ser inserido entre barras, porém não há a necessidade das tensões nominais desses barramentos serem idênticas.
 
 :::caution Atenção!
-A primeira barra selecionada será o lado **primário**, o qual é indicado por um círculo. Para alterar o lado primário após a inserção basta desconectar os nós dos transformadores e reconectá-los alternando as barras, utilizando as [ferramentas CAD](cadTools#conexão-e-desconexão-de-elemetos-na-barra).
+A primeira barra selecionada será o lado **primário**, o qual é indicado por um círculo. Para alterar o lado primário após a inserção basta desconectar os nós dos transformadores e reconectá-los alternando as barras, utilizando as [ferramentas CAD](cadTools#connection-and-disconnection-of-elements-in-the-bus).
 :::
 
 ### Transformadores no estudo de curto-circuito
@@ -108,10 +108,10 @@ Identificação do elemento elétrico. Podem ser inseridos quaisquer números de
 Todos os componentes de potência do PSP-UFU possuem esse campo.
 
 #### Tensão nominal
-Campo de informação *não editável* que apresenta a tensão primária e secundária do transformador. Para alterar esse campo é necessário editar o campo correspondente dos [barramento](bus#geral) conectados.
+Campo de informação *não editável* que apresenta a tensão primária e secundária do transformador. Para alterar esse campo é necessário editar o campo correspondente dos [barramento](bus#nome) conectados.
 
 #### Tensão base
-Tensão utilizada para converter os parâmetros de impedância inseridos em $\Omega$ para $p.u.$ As tensões selecionadas por uma caixa de escolha são editadas nos formulários dos [barramentos](bus#geral) conectados.
+Tensão utilizada para converter os parâmetros de impedância inseridos em $\Omega$ para $p.u.$ As tensões selecionadas por uma caixa de escolha são editadas nos formulários dos [barramentos](bus#nome) conectados.
 
 :::info Informação
 A tensão base é ignorada caso os dados inseridos estejam em $p.u.$

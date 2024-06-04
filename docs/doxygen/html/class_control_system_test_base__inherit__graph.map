@@ -1,0 +1,7 @@
+<map id="ControlSystemTestBase" name="ControlSystemTestBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,168,107"/>
+<area shape="rect" id="Node000003" href="$class_control_system_test.html" title="Form to edit properties to test the control system created." alt="" coords="20,155,153,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="89,122,89,154,84,154,84,122"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="50,5,123,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,48,89,80,84,80,84,48"/>
+</map>

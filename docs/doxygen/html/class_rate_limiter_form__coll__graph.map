@@ -1,6 +1,11 @@
 <map id="RateLimiterForm" name="RateLimiterForm">
-<area shape="rect" id="node3" href="$class_rate_limiter.html" title="Limits the rising and/or falling rate. &#160;" alt="" coords="178,247,266,273"/>
-<area shape="rect" id="node4" href="$class_control_element.html" title="ControlElement" alt="" coords="167,171,277,197"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="187,95,257,121"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="169,5,275,32"/>
+<area shape="rect" id="Node000001" title="Form to edit the rate limit control data." alt="" coords="63,245,180,272"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,153,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,194,118,244,113,246,89,197"/>
+<area shape="rect" id="Node000003" href="$class_rate_limiter.html" title="Limits the rising and/or falling rate." alt="" coords="177,155,264,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,194,138,247,134,243,193,190"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="165,80,276,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="223,122,223,154,218,154,218,122"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="186,5,255,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="223,48,223,80,218,80,218,48"/>
 </map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['psp_2dufu_20documentation',['PSP-UFU documentation',['../index.html',1,'']]]
+  ['psp_20ufu_0',['PSP-UFU',['../index.html',1,'']]]
 ];

@@ -1,8 +1,19 @@
-<map id="Project/PropertiesData.h" name="Project/PropertiesData.h">
-<area shape="rect" id="node2" href="$_electric_calculation_8h.html" title="Project/ElectricCalculation.h" alt="" coords="347,80,533,107"/>
-<area shape="rect" id="node3" href="$_file_handing_8h.html" title="Project/FileHanding.h" alt="" coords="5,155,152,181"/>
-<area shape="rect" id="node4" href="$_electromechanical_8h.html" title="Project/Electromechanical.h" alt="" coords="177,155,362,181"/>
-<area shape="rect" id="node5" href="$_fault_8h.html" title="Project/Fault.h" alt="" coords="387,155,493,181"/>
-<area shape="rect" id="node6" href="$_power_flow_8h.html" title="Project/PowerFlow.h" alt="" coords="517,155,659,181"/>
-<area shape="rect" id="node7" href="$_text_form_8h.html" title="Project/TextForm.h" alt="" coords="683,155,816,181"/>
+<map id="Project/utils/PropertiesData.h" name="Project/utils/PropertiesData.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="348,5,501,48"/>
+<area shape="rect" id="Node000002" href="$main_8cpp.html" title=" " alt="" coords="287,104,407,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="398,61,360,105,356,102,394,58"/>
+<area shape="rect" id="Node000003" href="$_electric_calculation_8h.html" title=" " alt="" coords="431,96,575,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="455,58,487,94,483,97,451,62"/>
+<area shape="rect" id="Node000004" href="$_text_form_8h.html" title=" " alt="" coords="5,195,174,221"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="416,142,186,189,150,197,149,191,185,184,415,137"/>
+<area shape="rect" id="Node000005" href="$_electromechanical_8h.html" title=" " alt="" coords="198,187,341,229"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="435,147,325,189,323,184,433,142"/>
+<area shape="rect" id="Node000006" href="$_fault_8h.html" title=" " alt="" coords="366,187,491,229"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="478,152,447,188,443,185,474,149"/>
+<area shape="rect" id="Node000007" href="$_power_flow_8h.html" title=" " alt="" coords="515,187,640,229"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="532,149,562,185,558,188,528,152"/>
+<area shape="rect" id="Node000008" href="$_power_quality_8h.html" title=" " alt="" coords="664,187,790,229"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="570,142,675,184,673,188,568,147"/>
+<area shape="rect" id="Node000009" href="$_file_handing_8h.html" title=" " alt="" coords="814,195,987,221"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="591,135,844,191,842,197,590,141"/>
 </map>

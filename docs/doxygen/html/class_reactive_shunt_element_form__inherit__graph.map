@@ -1,2 +1,5 @@
 <map id="ReactiveShuntElementForm" name="ReactiveShuntElementForm">
+<area shape="rect" id="Node000001" title="Form to edit the reactive shunt element power data." alt="" coords="20,80,203,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,218,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,48,114,80,109,80,109,48"/>
 </map>

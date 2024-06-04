@@ -22,9 +22,9 @@ A legenda que correlaciona os valores do módulo da tensão com as cores são ex
 
 ## Habilitando a ferramenta Mapa de Tensão
 
-A ferramenta pode ser habilitada ou desabilitada no [submenu Ribbon **Ferramentas**](mainScreen#menu-ribbon) clicando no botão **Mapa de tensão** ou pela tecla de atalho "Ctrl + Shift + H".
+A ferramenta pode ser habilitada ou desabilitada no [submenu Ribbon **Ferramentas**](mainScreen#ribbon-menu) clicando no botão **Mapa de tensão** ou pela tecla de atalho "Ctrl + Shift + H".
 
-As configurações da ferramenta podem ser também acessadas no [submenu Ribbon **Ferramentas**](mainScreen#menu-ribbon) clicando no botão **Configurações do projeto**
+As configurações da ferramenta podem ser também acessadas no [submenu Ribbon **Ferramentas**](mainScreen#ribbon-menu) clicando no botão **Configurações do projeto**
 
 <div><center><img src={useBaseUrl("images/heatmapForm.png")} alt="Configurações da ferramenta Mapa de Tensão" title="Configurações da ferramenta Mapa de Tensão" /></center></div>
 

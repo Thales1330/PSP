@@ -1,2 +1,5 @@
 <map id="LineForm" name="LineForm">
+<area shape="rect" id="Node000001" title="Form to edit the line power data." alt="" coords="20,80,96,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,111,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,48,61,80,55,80,55,48"/>
 </map>

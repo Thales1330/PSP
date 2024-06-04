@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpsp_ufu=self.webpackChunkpsp_ufu||[]).push([[6945],{6945:function(u,p,s){s.r(p)}}]);

@@ -18,7 +18,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 All objects created contain various graphic attributes, such as: position, orientation, color, size, etc. To modify them, some intuitive and easy-to-use tools were inserted, which are: [**select**](cadTools#select), [**move**](cadTools#move), [**rotate**](cadTools#rotate), [**drag**](cadTools#drag), [**zoom**](cadTools#zoom), [**fit**](cadTools#fit), [**copy , paste**](cadTools#copy-and-paste) and [**delete**](cadTools#delete).
 
-These tools can be accessed through their shortcut keys as well as through the [Tools submenu](mainScreen#menu-ribbon).
+These tools can be accessed through their shortcut keys as well as through the [Tools submenu](mainScreen#ribbon-menu).
 
 Such tools allow ** personalization **, ** navigation ** and assist in the ** creation ** of electric power networks, as well as control diagrams on the platform.
 
@@ -47,7 +47,7 @@ By enabling “move mode”, moving all selected components as the position of t
 </video>
 
 ### Rotate
-Some objects can be rotated using the rotate tool, accessed by the shortcut key "R", rotating the object clockwise, or "Shift + R", counterclockwise (this option will affect all selected objects). The element can also be rotated through the [Tools submenu](mainScreen#menu-ribbon) or when accessing the context menu by right clicking on the element.
+Some objects can be rotated using the rotate tool, accessed by the shortcut key "R", rotating the object clockwise, or "Shift + R", counterclockwise (this option will affect all selected objects). The element can also be rotated through the [Tools submenu](mainScreen#ribbon-menu) or when accessing the context menu by right clicking on the element.
 
 :::caution Attention!
 The context menu will only be displayed if the element is selected.

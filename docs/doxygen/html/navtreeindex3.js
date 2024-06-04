@@ -1,0 +1,22 @@
+var NAVTREEINDEX3 =
+{
+"struct_parse_matpower_1_1_gen_data.html#a9a308a508c87d1021f58e30b35022cc6":[1,0,75,2,1],
+"struct_parse_matpower_1_1_gen_data.html#abe7680c2eb362b7586111555a4de2da1":[1,0,75,2,6],
+"struct_parse_matpower_1_1_gen_data.html#ac113f1feb9b97dce4071e26910753844":[1,0,75,2,2],
+"struct_parse_matpower_1_1_gen_data.html#ac7a2a7d1dfec7018abce5ccc15897eec":[1,0,75,2,5],
+"struct_power_quality_1_1_harmonic_ybus.html":[1,0,79,0],
+"struct_reactive_limits.html":[1,0,84],
+"struct_simulation_data.html":[1,0,87],
+"struct_switching_data.html":[1,0,92],
+"struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df":[1,0,92,0],
+"struct_switching_data.html#af78fb958137a0532ea2a584810708574":[1,0,92,1],
+"struct_sync_generator_electrical_data.html":[1,0,95],
+"struct_sync_machine_model_data.html":[1,0,97],
+"struct_sync_machine_model_data.html#a810b9e3250ebb8f3d4176f6e5a2b1076":[1,0,97,1],
+"struct_sync_machine_model_data.html#ad2bda1ac696b664571e33f657f4a81b6":[1,0,97,0],
+"struct_sync_machine_model_data.html#af75546805bf92eb7a8a7280f7964b330":[1,0,97,2],
+"struct_sync_machine_model_data.html#af81596945918e86e56f5822a0ba97fbc":[1,0,97,3],
+"struct_sync_motor_electrical_data.html":[1,0,99],
+"struct_transfer_function_1_1_space_state.html":[1,0,102,0],
+"struct_transformer_electrical_data.html":[1,0,105]
+};

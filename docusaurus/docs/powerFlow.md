@@ -46,7 +46,7 @@ Como mencionado anteriormente, as equações são não-lineares e a solução an
 Na sequência, esse conjunto de valores para as tensões em cada barra é utilizado para novamente calcular outro grupo de tensões. Cada cálculo de um novo conjunto de tensões é chamado iteração. O processo iterativo é repetido até que as mudanças em todas as barras sejam menores do que um valor pré-estipulado, obtendo assim a convergência.
 
 ## Execução do fluxo de carga no PSP-UFU
-Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do fluxo de carga é realizada no [menu Simulação](mainScreen#menu-ribbon) clicando no botão **Fluxo de carga**.
+Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do fluxo de carga é realizada no [menu Simulação](mainScreen#ribbon-menu) clicando no botão **Fluxo de carga**.
 
 <div><center><img src={useBaseUrl("images/menuSimulationPF.svg")} alt="Menu Simulação" title="Menu Simulação" /></center></div>
 
@@ -54,7 +54,7 @@ Após a construção do diagrama unifilar no [editor de potência](powerEditor),
 Caso o fluxo de carga tenha sido executado com sucesso, as setas de potência serão exibidas, a barra de status indicará sucesso na operação e os [elementos de texto](text) serão atualizados.
 :::
 
-**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#menu-ribbon) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
+**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#ribbon-menu) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
 
 :::caution Atenção!
 Evite construir o circuito com o cálculo contínuo habilitado, uma vez que configurações temporárias podem levar a erros de execução da simulação.

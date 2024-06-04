@@ -1,2 +1,5 @@
-<map id="Project/IndMotorForm.h" name="Project/IndMotorForm.h">
+<map id="Project/forms/IndMotorForm.h" name="Project/forms/IndMotorForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,199,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="32,80,172,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,33,105,64,99,64,99,33"/>
 </map>

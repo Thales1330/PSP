@@ -1,8 +1,15 @@
 <map id="BusForm" name="BusForm">
-<area shape="rect" id="node3" href="$class_bus.html" title="Node for power elements. All others power elements are connected through this. " alt="" coords="290,349,336,376"/>
-<area shape="rect" id="node4" href="$class_power_element.html" title="Abstract class of power elements. " alt="" coords="165,260,272,287"/>
-<area shape="rect" id="node5" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="183,133,254,159"/>
-<area shape="rect" id="node6" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL. " alt="" coords="18,5,125,32"/>
-<area shape="rect" id="node7" href="$struct_switching_data.html" title="Switching data of power elements. " alt="" coords="278,133,383,159"/>
-<area shape="rect" id="node8" href="$struct_bus_electrical_data.html" title="BusElectricalData" alt="" coords="296,260,423,287"/>
+<area shape="rect" id="Node000001" title="Form to edit the bus power data." alt="" coords="71,277,145,304"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="41,187,146,213"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,229,109,276,103,277,95,229"/>
+<area shape="rect" id="Node000003" href="$class_bus.html" title="Node for power elements. All others power elements are connected through this." alt="" coords="170,187,214,213"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,227,122,279,118,275,167,223"/>
+<area shape="rect" id="Node000004" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="42,96,147,123"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="122,131,180,184,176,188,118,135"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,75,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="58,44,89,94,85,97,54,47"/>
+<area shape="rect" id="Node000006" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="99,5,203,32"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="137,47,105,97,100,94,132,44"/>
+<area shape="rect" id="Node000007" href="$struct_bus_electrical_data.html" title=" " alt="" coords="172,96,297,123"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="224,138,201,187,196,185,220,136"/>
 </map>

@@ -1,0 +1,9 @@
+<map id="mpPolygon" name="mpPolygon">
+<area shape="rect" id="Node000001" title=" " alt="" coords="24,229,111,256"/>
+<area shape="rect" id="Node000002" href="$classmp_movable_object.html" title=" " alt="" coords="5,155,130,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,197,70,229,65,229,65,197"/>
+<area shape="rect" id="Node000003" href="$classmp_layer.html" title=" " alt="" coords="32,80,103,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="70,122,70,154,65,154,65,122"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="30,5,105,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="70,48,70,80,65,80,65,48"/>
+</map>

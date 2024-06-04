@@ -1,0 +1,11 @@
+<map id="mpInfoLayer" name="mpInfoLayer">
+<area shape="rect" id="Node000001" title="Base class to create small rectangular info boxes mpInfoLayer is the base class to create a small rec..." alt="" coords="73,155,164,181"/>
+<area shape="rect" id="Node000004" href="$classmp_info_coords.html" title="Implements an overlay box which shows the mouse coordinates in plot units. When an mpInfoCoords layer..." alt="" coords="5,229,106,256"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="99,195,68,231,64,227,95,192"/>
+<area shape="rect" id="Node000005" href="$classmp_info_legend.html" title="Implements the legend to be added to the plot This layer allows you to add a legend to describe the p..." alt="" coords="130,229,232,256"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="141,192,172,227,168,231,137,195"/>
+<area shape="rect" id="Node000002" href="$classmp_layer.html" title=" " alt="" coords="83,80,154,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,122,121,154,116,154,116,122"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="81,5,156,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,48,121,80,116,80,116,48"/>
+</map>

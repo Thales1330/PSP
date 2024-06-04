@@ -28,7 +28,7 @@ After downloading the *.exe* file, proceed with each installer step. The executa
 
 If the executable fails to open, download the *.zip* file and unzip it to a folder on your system. In that case, it is necessary to manually download and install [**Microsoft Visual C ++ Redistributable 32 bits**](https://aka.ms/vs/16/release/vc_redist.x86.exe).
 
-After the installation is complete, open the PSP-UFU to verify the correct installation. The executable is present in the folder "*<instalation_path>/PSP-UFU/bin/PSP-UFU.exe*".
+After the installation is complete, open the PSP-UFU to verify the correct installation. The executable is present in the folder "*\<instalation_path\>/PSP-UFU/bin/PSP-UFU.exe*".
 
 ### Recurring Windows problems
 - When downloading the browser you can **falsely** signal that it is a dangerous file, just click on "Keep file";

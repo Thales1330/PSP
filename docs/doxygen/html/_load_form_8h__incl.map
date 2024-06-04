@@ -1,2 +1,5 @@
-<map id="Project/LoadForm.h" name="Project/LoadForm.h">
+<map id="Project/forms/LoadForm.h" name="Project/forms/LoadForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,177,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="21,80,161,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,33,94,64,88,64,88,33"/>
 </map>

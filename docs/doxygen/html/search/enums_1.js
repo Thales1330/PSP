@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['electricalunit',['ElectricalUnit',['../_power_element_8h.html#a398e3da742a726a8f2bacd8149220cca',1,'PowerElement.h']]],
-  ['elementtype',['ElementType',['../_text_8h.html#a16b11be27a8e9362dd122c4d879e01ae',1,'Text.h']]],
-  ['elementtypeanarede',['ElementTypeAnarede',['../_import_form_8h.html#af79b7ee434281f21c847fec3980be290',1,'ImportForm.h']]]
+  ['electricalunit_0',['ElectricalUnit',['../_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6',1,'PowerElement.h']]],
+  ['elementtypeanarede_1',['ElementTypeAnarede',['../_import_form_8h.html#af79b7ee434281f21c847fec3980be290',1,'ImportForm.h']]]
 ];

@@ -19,6 +19,8 @@ ExtLibs/GLEW/lib/
 ExtLibs/GLFW/lib-mingw/
 ExtLibs/GLFW/lib-vc2019/
 x64/
+compile_commands.json
+tags
 
 # Compiled source #
 ###################

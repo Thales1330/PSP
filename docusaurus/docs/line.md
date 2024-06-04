@@ -29,7 +29,7 @@ Em que:
 O modelo utilizado no PSP-UFU é **equilibrado** e **não possui impedâncias mútuas** entre as fases.
 :::
 
-A linha pode ser inseridas com pontos de ancoragem, ou "nós", para maior personalização gráfica do elemento, como apresentado nas [Ferramentas CAD](cadTools#linha).
+A linha pode ser inseridas com pontos de ancoragem, ou "nós", para maior personalização gráfica do elemento, como apresentado nas [Ferramentas CAD](cadTools#line).
 
 :::warning Cuidado!
 A linha deve ser inserida entre duas barras de **mesma tensão nominal**. Caso você tente inseri-la entre barras de tensão diferentes, uma mensagem de erro será exibida.
@@ -76,7 +76,7 @@ Identificação do elemento elétrico. Podem ser inseridos quaisquer números de
 Todos os componentes de potência do PSP-UFU possuem esse campo.
 
 #### Tensão nominal
-Campo de informação *não editável* que apresenta a tensão nominal da linha. Para alterar esse campo é necessário editar o campo correspondente do [barramento](bus#geral) conectado.
+Campo de informação *não editável* que apresenta a tensão nominal da linha. Para alterar esse campo é necessário editar o campo correspondente do [barramento](bus#nome) conectado.
 
 
 #### Potência nominal
