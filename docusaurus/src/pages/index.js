@@ -164,7 +164,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Thales1330/PSP/tree/master/Project/data/samples')}>
+              to={useBaseUrl('https://raw.githubusercontent.com/Thales1330/PSP/master/docs/samples.zip')}>
               <Translate>Samples</Translate>
             </Link>
           </div>
