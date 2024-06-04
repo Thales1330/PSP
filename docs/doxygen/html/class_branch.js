@@ -2,7 +2,6 @@ var class_branch =
 [
     [ "AddPoint", "class_branch.html#a8d6d80c50f849c5be2bccffd5b524e21", null ],
     [ "Contains", "class_branch.html#a691f94c3cd2abe1274e870d2882634d8", null ],
-    [ "Draw", "class_branch.html#a7037f496f9b9c9e64c74eb638debe278", null ],
     [ "GetBestPickboxCursor", "class_branch.html#a62418f767cc9bb894d6b7cc73645e43e", null ],
     [ "GetContextMenu", "class_branch.html#a6ddd901403c46f5d9aa179644467b088", null ],
     [ "Intersects", "class_branch.html#aa23b1014c947e46996f1c0c4caa187e1", null ],

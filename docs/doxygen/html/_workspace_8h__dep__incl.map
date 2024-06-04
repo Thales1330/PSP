@@ -1,7 +1,7 @@
-<map id="Project/Workspace.h" name="Project/Workspace.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="125,5,268,32"/>
-<area shape="rect" id="Node000002" href="$_element_data_object_8h.html" title=" " alt="" coords="5,80,196,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,44,119,82,115,77,166,39"/>
-<area shape="rect" id="Node000003" href="$_file_handing_8h.html" title=" " alt="" coords="220,80,365,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,39,278,77,274,82,223,44"/>
+<map id="Project/editors/Workspace.h" name="Project/editors/Workspace.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="95,5,282,32"/>
+<area shape="rect" id="Node000002" href="$_element_data_object_8h.html" title=" " alt="" coords="5,80,177,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,44,118,82,114,77,160,40"/>
+<area shape="rect" id="Node000003" href="$_file_handing_8h.html" title=" " alt="" coords="200,88,374,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,40,274,86,270,90,214,44"/>
 </map>

@@ -1,7 +1,6 @@
 var class_exponential =
 [
     [ "Contains", "class_exponential.html#a79eabfca357002f160b082a6df9f6f2b", null ],
-    [ "Draw", "class_exponential.html#af5f172e2f7ae7df0fc79b44b55355339", null ],
     [ "DrawDC", "class_exponential.html#a94208783819d886e963147f38c5b4b0e", null ],
     [ "GetCopy", "class_exponential.html#a85cda0dba6549828a9045e478e24609f", null ],
     [ "Intersects", "class_exponential.html#a540b1a43045b9bb7c96d32825d15c95e", null ],

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['fault_0',['Fault',['../class_fault.html#ae8a1d8a8843849f8f4746ec6c2208279',1,'Fault::Fault(std::vector&lt; Element * &gt; elementList)'],['../class_fault.html#a77baeae2c3388de3f7bbeabf52c99bef',1,'Fault::Fault()']]]
+  ['electriccalculation_0',['ElectricCalculation',['../class_electric_calculation.html#a6663e7a20e96ee975bd0f7d54b8a6f70',1,'ElectricCalculation']]],
+  ['element_1',['Element',['../class_element.html#ab0d0e20be9a36ae676202db753faeec9',1,'Element']]]
 ];

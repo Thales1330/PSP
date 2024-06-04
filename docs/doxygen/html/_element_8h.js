@@ -1,6 +1,5 @@
 var _element_8h =
 [
-    [ "OpenGLColour", "class_open_g_l_colour.html", "class_open_g_l_colour" ],
     [ "Element", "class_element.html", "class_element" ],
     [ "ContextMenuID", "_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049", [
       [ "ID_EDIT_ELEMENT", "_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42", null ],

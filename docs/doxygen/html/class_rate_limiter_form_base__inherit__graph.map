@@ -1,0 +1,7 @@
+<map id="RateLimiterFormBase" name="RateLimiterFormBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,153,107"/>
+<area shape="rect" id="Node000003" href="$class_rate_limiter_form.html" title="Form to edit the rate limit control data." alt="" coords="20,155,138,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="82,122,82,154,76,154,76,122"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="42,5,116,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,48,82,80,76,80,76,48"/>
+</map>

@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2024w22a</span>
+   &#160;<span id="projectnumber">2024w23a</span>
    </div>
   </td>
  </tr>
@@ -195,16 +195,6 @@ Inheritance diagram for Element:</div>
 <area shape="poly" title=" " alt="" coords="385,901,462,954,491,969,488,973,459,958,382,905"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for Element:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_element__coll__graph.png" border="0" usemap="#a_element_coll__map" alt="Collaboration graph"/></div>
-<map name="a_element_coll__map" id="a_element_coll__map">
-<area shape="rect" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="24,96,93,123"/>
-<area shape="rect" href="class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="5,5,112,32"/>
-<area shape="poly" title=" " alt="" coords="61,48,61,95,56,95,56,48"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -315,9 +305,6 @@ ElementType&#160;</td><td class="memItemRight" valign="bottom"><b>GetElementType
 <tr class="memitem:aa79db7f54ba9754e953b5059a1d79486" id="r_aa79db7f54ba9754e953b5059a1d79486"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa79db7f54ba9754e953b5059a1d79486">GetTipText</a> () const</td></tr>
 <tr class="memdesc:aa79db7f54ba9754e953b5059a1d79486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:aa79db7f54ba9754e953b5059a1d79486"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a551ed1eeab446b5366d56c2ee9dec187" id="r_a551ed1eeab446b5366d56c2ee9dec187"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a551ed1eeab446b5366d56c2ee9dec187">Draw</a> (wxPoint2DDouble translation, double scale) const</td></tr>
-<tr class="memdesc:a551ed1eeab446b5366d56c2ee9dec187"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using OpenGL.  <br /></td></tr>
-<tr class="separator:a551ed1eeab446b5366d56c2ee9dec187"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cca77f38afe3ade6d92294d0759427a" id="r_a6cca77f38afe3ade6d92294d0759427a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6cca77f38afe3ade6d92294d0759427a">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
 <tr class="memdesc:a6cca77f38afe3ade6d92294d0759427a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
 <tr class="separator:a6cca77f38afe3ade6d92294d0759427a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -389,41 +376,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetNodes</b
 <tr class="memitem:a01563b5b2fed2860132f4dd1593f9eea" id="r_a01563b5b2fed2860132f4dd1593f9eea"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a> (wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</td></tr>
 <tr class="memdesc:a01563b5b2fed2860132f4dd1593f9eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if two roteted rectangles intersect.  <br /></td></tr>
 <tr class="separator:a01563b5b2fed2860132f4dd1593f9eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35567bc1e306c6db9522ad05a87b98f5" id="r_a35567bc1e306c6db9522ad05a87b98f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35567bc1e306c6db9522ad05a87b98f5">DrawCircle</a> (wxPoint2DDouble position, double radius, int numSegments, GLenum mode=GL_LINE_LOOP) const</td></tr>
-<tr class="memdesc:a35567bc1e306c6db9522ad05a87b98f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a circle.  <br /></td></tr>
-<tr class="separator:a35567bc1e306c6db9522ad05a87b98f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1fd54d12f61f461111697d11cf10b9c" id="r_af1fd54d12f61f461111697d11cf10b9c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a> (wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:af1fd54d12f61f461111697d11cf10b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a circle using device context.  <br /></td></tr>
+<tr class="memdesc:af1fd54d12f61f461111697d11cf10b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a circle.  <br /></td></tr>
 <tr class="separator:af1fd54d12f61f461111697d11cf10b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac580673fdc15d41225ea20632def41e6" id="r_ac580673fdc15d41225ea20632def41e6"><td class="memItemLeft" align="right" valign="top"><a id="ac580673fdc15d41225ea20632def41e6" name="ac580673fdc15d41225ea20632def41e6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, GLenum mode=GL_LINE_LOOP) const</td></tr>
-<tr class="separator:ac580673fdc15d41225ea20632def41e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac14f4a519fd63069bbe8b3c30cc2284b" id="r_ac14f4a519fd63069bbe8b3c30cc2284b"><td class="memItemLeft" align="right" valign="top"><a id="ac14f4a519fd63069bbe8b3c30cc2284b" name="ac14f4a519fd63069bbe8b3c30cc2284b"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawDCArc</b> (wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, wxGraphicsContext *gc) const</td></tr>
 <tr class="separator:ac14f4a519fd63069bbe8b3c30cc2284b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c37e613808c5ee3bc37bb14a1fe85c8" id="r_a6c37e613808c5ee3bc37bb14a1fe85c8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c37e613808c5ee3bc37bb14a1fe85c8">DrawRectangle</a> (wxPoint2DDouble position, double width, double height, GLenum mode=GL_QUADS) const</td></tr>
-<tr class="memdesc:a6c37e613808c5ee3bc37bb14a1fe85c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw rectangle.  <br /></td></tr>
-<tr class="separator:a6c37e613808c5ee3bc37bb14a1fe85c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a971be2d4fab435d9657f88bae36e7cf3" id="r_a971be2d4fab435d9657f88bae36e7cf3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a971be2d4fab435d9657f88bae36e7cf3">DrawRectangle</a> (wxPoint2DDouble *points, GLenum mode=GL_QUADS) const</td></tr>
-<tr class="memdesc:a971be2d4fab435d9657f88bae36e7cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw rectangle.  <br /></td></tr>
-<tr class="separator:a971be2d4fab435d9657f88bae36e7cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae425d7e4f94bf7280d7d68c577d2019e" id="r_ae425d7e4f94bf7280d7d68c577d2019e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae425d7e4f94bf7280d7d68c577d2019e">DrawTriangle</a> (std::vector&lt; wxPoint2DDouble &gt; points, GLenum mode=GL_TRIANGLES) const</td></tr>
-<tr class="memdesc:ae425d7e4f94bf7280d7d68c577d2019e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a triangle.  <br /></td></tr>
-<tr class="separator:ae425d7e4f94bf7280d7d68c577d2019e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9332ba7b4ce2051a3935081cc890c03c" id="r_a9332ba7b4ce2051a3935081cc890c03c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9332ba7b4ce2051a3935081cc890c03c">DrawDCTriangle</a> (std::vector&lt; wxPoint2DDouble &gt; points, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a9332ba7b4ce2051a3935081cc890c03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a triangle.  <br /></td></tr>
+<tr class="memdesc:a9332ba7b4ce2051a3935081cc890c03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw rectangle.  <br /></td></tr>
 <tr class="separator:a9332ba7b4ce2051a3935081cc890c03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b6dd88902e04b52fe14dfc73c51fd50" id="r_a4b6dd88902e04b52fe14dfc73c51fd50"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b6dd88902e04b52fe14dfc73c51fd50">DrawPoint</a> (wxPoint2DDouble position, double size) const</td></tr>
-<tr class="memdesc:a4b6dd88902e04b52fe14dfc73c51fd50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a point.  <br /></td></tr>
-<tr class="separator:a4b6dd88902e04b52fe14dfc73c51fd50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a103b3cb2670012b2695940b094f63ab3" id="r_a103b3cb2670012b2695940b094f63ab3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a103b3cb2670012b2695940b094f63ab3">DrawLine</a> (std::vector&lt; wxPoint2DDouble &gt; points, GLenum mode=GL_LINE_STRIP) const</td></tr>
-<tr class="memdesc:a103b3cb2670012b2695940b094f63ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw line.  <br /></td></tr>
-<tr class="separator:a103b3cb2670012b2695940b094f63ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d0d803fe522d030e2be8dc99eb9b39" id="r_ad1d0d803fe522d030e2be8dc99eb9b39"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1d0d803fe522d030e2be8dc99eb9b39">DrawPickbox</a> (wxPoint2DDouble position) const</td></tr>
-<tr class="memdesc:ad1d0d803fe522d030e2be8dc99eb9b39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw pickbox.  <br /></td></tr>
-<tr class="separator:ad1d0d803fe522d030e2be8dc99eb9b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e0ee619f7429004eaeddb9040f6d70f" id="r_a9e0ee619f7429004eaeddb9040f6d70f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a> (wxPoint2DDouble position, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a9e0ee619f7429004eaeddb9040f6d70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw pickbox using direct context.  <br /></td></tr>
+<tr class="memdesc:a9e0ee619f7429004eaeddb9040f6d70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a point.  <br /></td></tr>
 <tr class="separator:a9e0ee619f7429004eaeddb9040f6d70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99b213010776b34a27eb814aff288a34" id="r_a99b213010776b34a27eb814aff288a34"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a> (wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</td></tr>
 <tr class="memdesc:a99b213010776b34a27eb814aff288a34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate a point as element position being the origin.  <br /></td></tr>
@@ -542,9 +505,9 @@ wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><b>m_movePos<
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top"><a id="a37ff451865d4852ffa8c54574a20cd0b" name="a37ff451865d4852ffa8c54574a20cd0b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0df145138fef6ed901ff4b1828439b0" id="r_ab0df145138fef6ed901ff4b1828439b0"><td class="memItemLeft" align="right" valign="top"><a id="ab0df145138fef6ed901ff4b1828439b0" name="ab0df145138fef6ed901ff4b1828439b0"></a>
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_selectionColour</b></td></tr>
-<tr class="separator:ab0df145138fef6ed901ff4b1828439b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top"><a id="a9692eec7ca16d6f81172788b4bf48072" name="a9692eec7ca16d6f81172788b4bf48072"></a>
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_selectionColour</b></td></tr>
+<tr class="separator:a9692eec7ca16d6f81172788b4bf48072"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class of all elements of the program. This class is responsible for manage graphical and his data. </p>
@@ -818,96 +781,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 
 </div>
 </div>
-<a id="a551ed1eeab446b5366d56c2ee9dec187" name="a551ed1eeab446b5366d56c2ee9dec187"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551ed1eeab446b5366d56c2ee9dec187">&#9670;&#160;</a></span>Draw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void Element::Draw </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble</td>          <td class="paramname"><span class="paramname"><em>translation</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>scale</em></span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw the element using OpenGL. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">translation</td><td>Translation of the system. </td></tr>
-    <tr><td class="paramname">scale</td><td>Scale of the system. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented in <a class="el" href="class_branch.html#a7037f496f9b9c9e64c74eb638debe278">Branch</a>, <a class="el" href="class_bus.html#ae9022ca29399377d2fe0082bb762107c">Bus</a>, <a class="el" href="class_capacitor.html#a94d378c922467214b394931ec0eb01c8">Capacitor</a>, <a class="el" href="class_connection_line.html#a71cb3502dd098e1d1ef541668789586e">ConnectionLine</a>, <a class="el" href="class_exponential.html#af5f172e2f7ae7df0fc79b44b55355339">Exponential</a>, <a class="el" href="class_harm_current.html#af2c3720b4a63604a2764663d0eab2e72">HarmCurrent</a>, <a class="el" href="class_inductor.html#a97761292fac4f0da7ae3dc6ca4b4de54">Inductor</a>, <a class="el" href="class_limiter.html#a2e2960936ebfcc6589181b7948fba242">Limiter</a>, <a class="el" href="class_line.html#a297e12aa8ff0be5d344e245732487bdd">Line</a>, <a class="el" href="class_load.html#aaef52b18cc53fa2db996fb9cad5db181">Load</a>, <a class="el" href="class_machines.html#af3279663c82de88e12f0487bfc633f7c">Machines</a>, <a class="el" href="class_rate_limiter.html#a6afc319e3a165776b8a429b9bbe38580">RateLimiter</a>, <a class="el" href="class_sum.html#a31dbb6867b17188b4a8cc650983da57b">Sum</a>, and <a class="el" href="class_transformer.html#a1e9e9ba48aa76bdd2ff2e973014ad422">Transformer</a>.</p>
-
-</div>
-</div>
-<a id="a35567bc1e306c6db9522ad05a87b98f5" name="a35567bc1e306c6db9522ad05a87b98f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35567bc1e306c6db9522ad05a87b98f5">&#9670;&#160;</a></span>DrawCircle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Element::DrawCircle </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble</td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>radius</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numSegments</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum</td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINE_LOOP</span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw a circle. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">position</td><td>Circle position. </td></tr>
-    <tr><td class="paramname">radius</td><td>Circle radius </td></tr>
-    <tr><td class="paramname">numSegments</td><td>Num of segments of the circle. </td></tr>
-    <tr><td class="paramname">mode</td><td>OpenGl primitive. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a6cca77f38afe3ade6d92294d0759427a" name="a6cca77f38afe3ade6d92294d0759427a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6cca77f38afe3ade6d92294d0759427a">&#9670;&#160;</a></span>DrawDC()</h2>
 
@@ -991,8 +864,17 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </table>
 </div><div class="memdoc">
 
-<p>Draw a circle using device context. </p>
+<p>Draw a circle. </p>
 <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Circle position. </td></tr>
+    <tr><td class="paramname">radius</td><td>Circle radius </td></tr>
+    <tr><td class="paramname">numSegments</td><td>Num of segments of the circle. </td></tr>
+    <tr><td class="paramname">mode</td><td>OpenGl primitive.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Draw a circle using device context. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">position</td><td>Circle position. </td></tr>
     <tr><td class="paramname">radius</td><td>Circle radius </td></tr>
@@ -1031,8 +913,28 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </table>
 </div><div class="memdoc">
 
-<p>Draw pickbox using direct context. </p>
+<p>Draw a point. </p>
 <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Point position. </td></tr>
+    <tr><td class="paramname">size</td><td>Point size.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Draw line. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">points</td><td><a class="el" href="class_line.html" title="Power line element.">Line</a> vertices. </td></tr>
+    <tr><td class="paramname">mode</td><td>OpenGl primitive.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Draw pickbox. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Pickbox position.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Draw pickbox using direct context. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">position</td><td>Pickbox position. </td></tr>
     <tr><td class="paramname">gc</td><td>Direct context. </td></tr>
@@ -1069,246 +971,34 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </table>
 </div><div class="memdoc">
 
-<p>Draw a triangle. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">points</td><td>Triangle vertices. </td></tr>
-    <tr><td class="paramname">gc</td><td>Device context. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a103b3cb2670012b2695940b094f63ab3" name="a103b3cb2670012b2695940b094f63ab3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a103b3cb2670012b2695940b094f63ab3">&#9670;&#160;</a></span>DrawLine()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Element::DrawLine </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; wxPoint2DDouble &gt;</td>          <td class="paramname"><span class="paramname"><em>points</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum</td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINE_STRIP</span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw line. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">points</td><td><a class="el" href="class_line.html" title="Power line element.">Line</a> vertices. </td></tr>
-    <tr><td class="paramname">mode</td><td>OpenGl primitive. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad1d0d803fe522d030e2be8dc99eb9b39" name="ad1d0d803fe522d030e2be8dc99eb9b39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1d0d803fe522d030e2be8dc99eb9b39">&#9670;&#160;</a></span>DrawPickbox()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Element::DrawPickbox </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble</td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw pickbox. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">position</td><td>Pickbox position. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4b6dd88902e04b52fe14dfc73c51fd50" name="a4b6dd88902e04b52fe14dfc73c51fd50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b6dd88902e04b52fe14dfc73c51fd50">&#9670;&#160;</a></span>DrawPoint()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Element::DrawPoint </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble</td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw a point. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">position</td><td>Point position. </td></tr>
-    <tr><td class="paramname">size</td><td>Point size. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a971be2d4fab435d9657f88bae36e7cf3" name="a971be2d4fab435d9657f88bae36e7cf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a971be2d4fab435d9657f88bae36e7cf3">&#9670;&#160;</a></span>DrawRectangle() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Element::DrawRectangle </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble *</td>          <td class="paramname"><span class="paramname"><em>points</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum</td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_QUADS</span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw rectangle. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">points</td><td>Rectangle vertices. </td></tr>
-    <tr><td class="paramname">mode</td><td>OpenGl primitive. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a6c37e613808c5ee3bc37bb14a1fe85c8" name="a6c37e613808c5ee3bc37bb14a1fe85c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c37e613808c5ee3bc37bb14a1fe85c8">&#9670;&#160;</a></span>DrawRectangle() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Element::DrawRectangle </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble</td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>height</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum</td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_QUADS</span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
 <p>Draw rectangle. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">position</td><td>Rectangle position. </td></tr>
     <tr><td class="paramname">width</td><td>Rectangle width. </td></tr>
     <tr><td class="paramname">height</td><td>Rectangle height. </td></tr>
-    <tr><td class="paramname">mode</td><td>OpenGl primitive. </td></tr>
+    <tr><td class="paramname">mode</td><td>OpenGl primitive.</td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="ae425d7e4f94bf7280d7d68c577d2019e" name="ae425d7e4f94bf7280d7d68c577d2019e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae425d7e4f94bf7280d7d68c577d2019e">&#9670;&#160;</a></span>DrawTriangle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Element::DrawTriangle </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; wxPoint2DDouble &gt;</td>          <td class="paramname"><span class="paramname"><em>points</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum</td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_TRIANGLES</span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw a triangle. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Draw rectangle. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">points</td><td>Rectangle vertices. </td></tr>
+    <tr><td class="paramname">mode</td><td>OpenGl primitive.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Draw a triangle. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">points</td><td>Triangle vertices. </td></tr>
-    <tr><td class="paramname">mode</td><td>OpenGl primitive. </td></tr>
+    <tr><td class="paramname">mode</td><td>OpenGl primitive.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Draw a triangle. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">points</td><td>Triangle vertices. </td></tr>
+    <tr><td class="paramname">gc</td><td>Device context. </td></tr>
   </table>
   </dd>
 </dl>
@@ -3120,8 +2810,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Project/<a class="el" href="_element_8h.html">Element.h</a></li>
-<li>Project/<b>Element.cpp</b></li>
+<li>Project/elements/<a class="el" href="_element_8h.html">Element.h</a></li>
+<li>Project/elements/<b>Element.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

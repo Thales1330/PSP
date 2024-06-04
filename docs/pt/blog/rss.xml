@@ -4,20 +4,22 @@
         <title>PSP-UFU Blog</title>
         <link>https://thales1330.github.io/PSP/pt/blog</link>
         <description>PSP-UFU Blog</description>
-        <lastBuildDate>Thu, 30 May 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 04 Jun 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>pt</language>
         <item>
-            <title><![CDATA[2024w22a-beta]]></title>
-            <link>https://thales1330.github.io/PSP/pt/blog/2024/05/30/2024w12a-beta</link>
-            <guid>https://thales1330.github.io/PSP/pt/blog/2024/05/30/2024w12a-beta</guid>
-            <pubDate>Thu, 30 May 2024 00:00:00 GMT</pubDate>
+            <title><![CDATA[2024w23a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2024/06/04/2024w12a-beta</link>
+            <guid>https://thales1330.github.io/PSP/pt/blog/2024/06/04/2024w12a-beta</guid>
+            <pubDate>Tue, 04 Jun 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[- 🔥 Removed the OpenGL dependency and related errors;]]></description>
             <content:encoded><![CDATA[<ul>
 <li>🔥 Removed the OpenGL dependency and related errors;</li>
 <li>🔥 Added undo and redo feature (finally!);</li>
 <li>✔️ Voltage map upgraded due to OpenGL dependency removal;</li>
+<li>✔️ New feature to add a new text element via context menu;</li>
+<li>✔️ Selection and move elements improved;</li>
 <li>✔️ Code documentation updated (<a href="https://thales1330.github.io/PSP/doxygen/html/index.html" target="_blank" rel="noopener noreferrer">check here</a>);</li>
 <li>🐛 Fixed a massive memory leak when using Synchronous Generator controls;</li>
 <li>🐛 Fixed simulation problems related to disconnected buses;</li>

@@ -2,7 +2,6 @@ var class_harm_current =
 [
     [ "AddParent", "class_harm_current.html#ad0d53fd562d5519bf006aa21f0f0247c", null ],
     [ "Contains", "class_harm_current.html#ac17b5168231ffff93915bf3d340e1754", null ],
-    [ "Draw", "class_harm_current.html#af2c3720b4a63604a2764663d0eab2e72", null ],
     [ "DrawDC", "class_harm_current.html#a9ef9a2a2003c1cdaebe8d2bffd196baa", null ],
     [ "GetContextMenu", "class_harm_current.html#a55d1dd3908936e4cfa301dd74ab10182", null ],
     [ "GetCopy", "class_harm_current.html#a3b73d7c63a873a80a43854748c831a4a", null ],

@@ -1,15 +1,13 @@
 <map id="ConstantForm" name="ConstantForm">
-<area shape="rect" id="Node000001" title="Form to edit the constant control data." alt="" coords="35,352,138,379"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,261,139,288"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,303,87,351,82,352,74,304"/>
-<area shape="rect" id="Node000003" href="$class_constant.html" title="A control element that provides a constant value." alt="" coords="163,261,237,288"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,300,105,354,101,349,170,296"/>
-<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="68,171,178,197"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="145,207,191,259,187,263,141,211"/>
-<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="88,96,157,123"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="125,138,125,170,120,170,120,138"/>
-<area shape="rect" id="Node000006" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="70,5,176,32"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="125,48,125,95,120,95,120,48"/>
-<area shape="rect" id="Node000007" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="202,171,267,197"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="227,213,207,262,202,260,222,211"/>
+<area shape="rect" id="Node000001" title="Form to edit the constant control data." alt="" coords="35,261,138,288"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,171,139,197"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,213,87,260,82,261,74,213"/>
+<area shape="rect" id="Node000003" href="$class_constant.html" title="A control element that provides a constant value." alt="" coords="163,171,237,197"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,209,105,263,101,259,170,205"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="68,80,178,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="145,117,191,168,187,172,141,120"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="88,5,157,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="125,48,125,80,120,80,120,48"/>
+<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="202,80,267,107"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="227,122,207,171,202,169,222,120"/>
 </map>

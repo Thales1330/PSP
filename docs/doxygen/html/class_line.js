@@ -4,7 +4,6 @@ var class_line =
     [ "AddPoint", "class_line.html#a046a7b2ebff50f237f73dbc182f7ff6f", null ],
     [ "CalculateBoundaries", "class_line.html#aa146d6b0c7f3b74204f2c88dcbd7f4b0", null ],
     [ "Contains", "class_line.html#a05eb3761f198a058045f85d6e685ca97", null ],
-    [ "Draw", "class_line.html#a297e12aa8ff0be5d344e245732487bdd", null ],
     [ "DrawDC", "class_line.html#a37f35cabf98de2806188cdf919d26e2a", null ],
     [ "GetBestPickboxCursor", "class_line.html#a7c72fc585eb96bf9565cca0ce300cfd9", null ],
     [ "GetContextMenu", "class_line.html#a978de0ff06b6f57401ade84045e1a55f", null ],

@@ -1,7 +1,6 @@
 var class_connection_line =
 [
     [ "Contains", "class_connection_line.html#a65c6d7139587c973a92dd1009909597f", null ],
-    [ "Draw", "class_connection_line.html#a71cb3502dd098e1d1ef541668789586e", null ],
     [ "DrawDC", "class_connection_line.html#a80b373ed176ce39e03eed4034ff61b67", null ],
     [ "GetCopy", "class_connection_line.html#a131a890bd54059c5370f1dc5156c192c", null ],
     [ "Intersects", "class_connection_line.html#aaa3e63c2e48338e324ee7b58911c86b6", null ],

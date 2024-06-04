@@ -1,12 +1,9 @@
 <map id="Shunt" name="Shunt">
-<area shape="rect" id="Node000001" title="Abstract class for shunt power elements." alt="" coords="218,347,273,373"/>
-<area shape="rect" id="Node000002" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="193,272,298,299"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,314,248,346,243,346,243,314"/>
-<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="211,139,280,165"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="248,181,248,272,243,272,243,181"/>
-<area shape="rect" id="Node000004" href="$class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="5,5,112,32"/>
-<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="51,47,40,82,34,124,36,167,42,188,52,206,80,236,117,256,156,269,193,277,192,282,154,275,114,261,77,240,47,210,37,190,31,168,28,123,35,81,45,46"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="100,37,146,62,194,94,237,136,233,140,190,98,143,67,98,42"/>
-<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="304,139,408,165"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="338,179,258,273,254,270,333,176"/>
+<area shape="rect" id="Node000001" title="Abstract class for shunt power elements." alt="" coords="67,171,122,197"/>
+<area shape="rect" id="Node000002" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="42,96,147,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,138,97,170,92,170,92,138"/>
+<area shape="rect" id="Node000003" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,75,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,44,89,94,85,97,54,47"/>
+<area shape="rect" id="Node000004" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="99,5,203,32"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="137,47,105,97,100,94,132,44"/>
 </map>

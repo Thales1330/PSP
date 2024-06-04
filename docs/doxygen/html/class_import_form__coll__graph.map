@@ -1,34 +1,21 @@
 <map id="ImportForm" name="ImportForm">
-<area shape="rect" id="Node000001" title="Form to import other programs files to PSP." alt="" coords="779,116,867,143"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="530,91,647,117"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="663,109,779,122,778,127,662,115"/>
-<area shape="rect" id="Node000003" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="545,141,632,168"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="647,150,755,141,779,137,779,142,756,147,648,156"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="286,5,403,32"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="419,23,466,37,488,48,508,64,519,80,521,96,523,112,532,128,547,139,544,143,528,131,518,114,516,97,514,82,504,67,485,53,464,42,418,28"/>
-<area shape="rect" id="Node000005" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="311,56,378,83"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="393,74,449,88,507,110,531,127,554,138,552,143,529,132,505,114,447,93,392,80"/>
-<area shape="rect" id="Node000006" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="291,107,398,133"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="413,127,545,146,544,151,413,132"/>
-<area shape="rect" id="Node000007" href="$struct_simulation_data.html" title=" " alt="" coords="17,33,126,60"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="142,54,201,65,263,81,287,92,313,104,310,109,285,97,261,87,200,70,141,59"/>
-<area shape="rect" id="Node000008" href="$struct_general_data.html" title=" " alt="" coords="25,84,118,111"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="134,100,291,113,290,118,134,105"/>
-<area shape="rect" id="Node000009" href="$struct_freq_response_data.html" title=" " alt="" coords="5,135,138,161"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="153,142,261,132,290,128,291,133,262,137,153,147"/>
-<area shape="rect" id="Node000010" href="$class_h_m_plane.html" title=" " alt="" coords="307,291,382,317"/>
-<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="392,282,447,255,505,222,542,194,571,167,575,171,545,198,507,226,449,260,394,287"/>
-<area shape="rect" id="Node000011" href="$class_shader.html" title=" " alt="" coords="40,205,103,232"/>
-<area shape="poly" id="edge15_Node000003_Node000011" title=" " alt="" coords="118,210,544,157,545,163,119,216"/>
-<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="119,227,263,268,313,288,311,293,261,273,117,232"/>
-<area shape="rect" id="Node000012" href="$class_vertex_buffer.html" title=" " alt="" coords="25,291,118,317"/>
-<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="133,301,307,301,307,307,133,307"/>
-<area shape="rect" id="Node000013" href="$class_vertex_buffer_layout.html" title=" " alt="" coords="6,353,137,380"/>
-<area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="153,359,207,352,261,339,285,327,310,316,312,320,287,332,263,344,208,357,153,364"/>
-<area shape="rect" id="Node000014" href="$class_index_buffer.html" title=" " alt="" coords="29,416,114,443"/>
-<area shape="poly" id="edge13_Node000010_Node000014" title=" " alt="" coords="130,431,162,430,197,425,230,414,260,395,270,380,272,364,274,346,284,328,305,312,308,317,288,331,279,348,277,365,275,382,264,399,233,418,198,430,163,435,130,437"/>
-<area shape="rect" id="Node000015" href="$class_vertex_array.html" title=" " alt="" coords="26,479,117,505"/>
-<area shape="poly" id="edge14_Node000010_Node000015" title=" " alt="" coords="133,499,165,500,199,496,232,486,260,467,272,452,277,436,274,402,269,366,273,347,284,328,305,312,308,316,288,331,278,349,275,366,279,401,282,436,277,454,263,471,234,491,201,501,166,505,132,504"/>
-<area shape="rect" id="Node000016" href="$class_renderer.html" title=" " alt="" coords="308,341,381,368"/>
-<area shape="poly" id="edge16_Node000003_Node000016" title=" " alt="" coords="395,341,451,320,479,305,504,287,531,258,553,225,580,167,585,170,558,227,536,261,508,291,482,310,453,325,397,346"/>
+<area shape="rect" id="Node000001" title="Form to import other programs files to PSP." alt="" coords="76,277,164,304"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="47,187,164,213"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,229,121,276,115,277,107,229"/>
+<area shape="rect" id="Node000003" href="$class_workspace.html" title="This class manages the graphical and power elements. It is responsible for handling the user&#39;s intera..." alt="" coords="188,187,276,213"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,225,138,279,134,275,203,221"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,96,123,123"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="103,128,209,184,207,188,100,133"/>
+<area shape="rect" id="Node000005" href="$class_camera.html" title="Class responsible for the correct visualization of the elements on screen." alt="" coords="147,96,213,123"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="184,137,192,161,214,184,210,188,187,164,179,139"/>
+<area shape="rect" id="Node000006" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="237,96,344,123"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="276,137,243,188,238,185,272,134"/>
+<area shape="rect" id="Node000007" href="$struct_simulation_data.html" title=" " alt="" coords="111,5,220,32"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="183,44,207,70,228,83,250,93,248,98,225,88,204,74,179,47"/>
+<area shape="rect" id="Node000008" href="$struct_general_data.html" title=" " alt="" coords="244,5,337,32"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="293,48,293,95,288,95,288,48"/>
+<area shape="rect" id="Node000009" href="$struct_freq_response_data.html" title=" " alt="" coords="362,5,494,32"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="406,45,368,74,323,98,321,93,365,70,402,41"/>
+<area shape="rect" id="Node000010" href="$class_h_m_plane.html" title=" " alt="" coords="368,96,443,123"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="386,136,351,165,314,182,277,193,276,188,312,177,348,160,383,132"/>
 </map>

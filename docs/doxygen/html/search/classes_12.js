@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['workspace_0',['Workspace',['../class_workspace.html',1,'']]],
-  ['workspacedc_1',['WorkspaceDC',['../class_workspace_d_c.html',1,'']]]
+  ['xmlparser_0',['XMLParser',['../class_x_m_l_parser.html',1,'']]]
 ];

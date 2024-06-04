@@ -1,0 +1,11 @@
+<map id="mpWindow" name="mpWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="19,245,104,272"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,89,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,197,62,244,57,245,49,197"/>
+<area shape="rect" id="Node000003" href="$classmp_info_layer.html" title="Base class to create small rectangular info boxes mpInfoLayer is the base class to create a small rec..." alt="" coords="113,155,205,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,194,77,247,74,243,132,190"/>
+<area shape="rect" id="Node000004" href="$classmp_layer.html" title=" " alt="" coords="123,80,195,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="162,122,162,154,156,154,156,122"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="121,5,197,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="162,48,162,80,156,80,156,48"/>
+</map>

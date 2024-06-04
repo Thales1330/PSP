@@ -67,7 +67,7 @@ PROJECT_LOGO           = C:/Users/Pichau/Documents/GitHub/PSP/Project/data/image
 # when the HTML document is shown. Doxygen will copy the logo to the output
 # directory.
 
-PROJECT_ICON           =
+PROJECT_ICON           = Project/logoIcon.ico
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -1039,7 +1039,7 @@ FILE_PATTERNS          = *.c \
 # be searched for input files as well.
 # The default value is: NO.
 
-RECURSIVE              = NO
+RECURSIVE              = YES
 
 # The EXCLUDE tag can be used to specify files and/or directories that should be
 # excluded from the INPUT source files. This way you can easily exclude a
@@ -1048,27 +1048,25 @@ RECURSIVE              = NO
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = Project/rapidXML \
-                         Project/wxMathPlot \
-                         Project/artProvider \
-                         Project/ControlEditorBase.cpp \
-                         Project/ControlEditorBase.h \
-                         Project/ControlEditorBitmaps.cpp \
-                         Project/DataReportBase.cpp \
-                         Project/DataReportBase.h \
-                         Project/DataReportBitmaps.cpp \
-                         Project/ElementFormBase.cpp \
-                         Project/ElementFormBase.h \
-                         Project/ElementFormBitmaps.cpp \
-                         Project/MainFrameBase.cpp \
-                         Project/MainFrameBase.h \
-                         Project/MainFrameBitmaps.cpp \
-                         Project/PropertiesFormBase.cpp \
-                         Project/PropertiesFormBase.h \
-                         Project/PropertiesFormBitmaps.cpp \
-                         Project/WorkspaceBase.cpp \
-                         Project/WorkspaceBase.h \
-                         Project/WorkspaceBitmaps.cpp
+EXCLUDE                = Project/extLibs \
+                         Project/forms/BusFormBitmaps.cpp \
+                         Project/forms/DataReportBase.cpp \
+                         Project/forms/DataReportBase.h \
+                         Project/forms/DataReportBitmaps.cpp \
+                         Project/forms/ElementFormBase.cpp \
+                         Project/forms/ElementFormBase.h \
+                         Project/forms/PropertiesFormBase.cpp \
+                         Project/forms/PropertiesFormBase.h \
+                         Project/forms/PropertiesFormBitmaps.cpp \
+                         Project/editors/ChartViewBase.cpp \
+                         Project/editors/ChartViewBase.h \
+                         Project/editors/ChartViewBitmaps.cpp \
+                         Project/editors/ControlEditorBase.cpp \
+                         Project/editors/ControlEditorBase.h \
+                         Project/editors/ControlEditorBitmaps.cpp \
+                         Project/editors/WorkspaceBase.cpp \
+                         Project/editors/WorkspaceBase.h \
+                         Project/editors/WorkspaceBitmaps.cpp
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded

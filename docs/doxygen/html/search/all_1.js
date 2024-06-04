@@ -7,7 +7,7 @@ var searchData=
   ['branchdata_4',['BranchData',['../struct_parse_anarede_1_1_branch_data.html',1,'ParseAnarede::BranchData'],['../struct_parse_matpower_1_1_branch_data.html',1,'ParseMatpower::BranchData']]],
   ['bs_5',['bs',['../struct_parse_matpower_1_1_bus_data.html#a6f9fb07dbca96a47f654bb13218cea32',1,'ParseMatpower::BusData']]],
   ['buffermeshcoords_6',['BufferMeshCoords',['../struct_buffer_mesh_coords.html',1,'']]],
-  ['bus_7',['Bus',['../class_bus.html',1,'']]],
+  ['bus_7',['Bus',['../class_bus.html',1,'Bus'],['../class_bus.html#aacf35e62456128245a02db34334f9a3d',1,'Bus::Bus()'],['../class_bus.html#a66ef970dc1edfa02f96cf8820920ef37',1,'Bus::Bus(wxPoint2DDouble position)'],['../class_bus.html#ae822df818deb09d54f6a3bf0794b6ffa',1,'Bus::Bus(wxPoint2DDouble position, wxString name)']]],
   ['bus_2eh_8',['Bus.h',['../_bus_8h.html',1,'']]],
   ['busconnection_9',['busConnection',['../struct_parse_anarede_1_1_ind_element_data.html#ac6ed43f623d98168b213b2fd724b6f91',1,'ParseAnarede::IndElementData']]],
   ['busconnectionid_10',['busConnectionID',['../struct_parse_anarede_1_1_component.html#adc6a8aa9d432a6c657d2447a315105c0',1,'ParseAnarede::Component::busConnectionID'],['../struct_parse_anarede_1_1_power_line.html#a343a795163614800ec83075bf0b7af8c',1,'ParseAnarede::PowerLine::busConnectionID']]],

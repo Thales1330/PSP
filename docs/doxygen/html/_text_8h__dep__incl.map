@@ -1,7 +1,7 @@
-<map id="Project/Text.h" name="Project/Text.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="108,5,211,32"/>
-<area shape="rect" id="Node000002" href="$_file_handing_8h.html" title=" " alt="" coords="5,80,151,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,44,94,82,90,78,132,41"/>
-<area shape="rect" id="Node000003" href="$_text_form_8h.html" title=" " alt="" coords="175,80,307,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,41,228,78,225,82,183,44"/>
+<map id="Project/elements/Text.h" name="Project/elements/Text.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="107,5,267,32"/>
+<area shape="rect" id="Node000002" href="$_text_form_8h.html" title=" " alt="" coords="5,80,174,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,44,108,82,105,77,156,39"/>
+<area shape="rect" id="Node000003" href="$_file_handing_8h.html" title=" " alt="" coords="198,80,371,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,39,269,77,266,82,214,44"/>
 </map>

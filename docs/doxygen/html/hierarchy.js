@@ -14,14 +14,15 @@ var hierarchy =
     ] ],
     [ "Camera", "class_camera.html", null ],
     [ "CapacitorElectricalData", "struct_capacitor_electrical_data.html", null ],
+    [ "ChartViewBase", null, [
+      [ "ChartView", "class_chart_view.html", null ]
+    ] ],
     [ "ParseAnarede::Component", "struct_parse_anarede_1_1_component.html", null ],
     [ "ConstantFormBase", null, [
       [ "ConstantForm", "class_constant_form.html", null ]
     ] ],
     [ "ControlEditorBase", null, [
-      [ "ControlEditor", "class_control_editor.html", [
-        [ "ControlEditorDC", "class_control_editor_d_c.html", null ]
-      ] ]
+      [ "ControlEditor", "class_control_editor.html", null ]
     ] ],
     [ "ControlElementContainer", "class_control_element_container.html", null ],
     [ "ControlElementSolver", "class_control_element_solver.html", null ],
@@ -116,7 +117,6 @@ var hierarchy =
     [ "ParseAnarede::IndElementData", "struct_parse_anarede_1_1_ind_element_data.html", [
       [ "ParseAnarede::IndGenData", "struct_parse_anarede_1_1_ind_gen_data.html", null ]
     ] ],
-    [ "IndexBuffer", "class_index_buffer.html", null ],
     [ "IndMotorElectricalData", "struct_ind_motor_electrical_data.html", null ],
     [ "IndMotorFormBase", null, [
       [ "IndMotorForm", "class_ind_motor_form.html", null ]
@@ -137,15 +137,10 @@ var hierarchy =
     [ "LoadFormBase", null, [
       [ "LoadForm", "class_load_form.html", null ]
     ] ],
-    [ "MainFrameBase", null, [
-      [ "MainFrame", "class_main_frame.html", null ]
-    ] ],
     [ "MathExpressionFormBase", null, [
       [ "MathExpressionForm", "class_math_expression_form.html", null ]
     ] ],
     [ "Node", "class_node.html", null ],
-    [ "OpenGLColour", "class_open_g_l_colour.html", null ],
-    [ "OpenGLText", "class_open_g_l_text.html", null ],
     [ "ParseAnarede", "class_parse_anarede.html", null ],
     [ "ParseMatpower", "class_parse_matpower.html", null ],
     [ "ParseAnarede::PowerLine", "struct_parse_anarede_1_1_power_line.html", null ],
@@ -160,9 +155,6 @@ var hierarchy =
     [ "ReactiveShuntElementFormBase", null, [
       [ "ReactiveShuntElementForm", "class_reactive_shunt_element_form.html", null ]
     ] ],
-    [ "Renderer", "class_renderer.html", null ],
-    [ "Shader", "class_shader.html", null ],
-    [ "ShaderSource", "struct_shader_source.html", null ],
     [ "SimulationData", "struct_simulation_data.html", null ],
     [ "SimulationsSettingsFormBase", null, [
       [ "SimulationsSettingsForm", "class_simulations_settings_form.html", null ]
@@ -194,14 +186,8 @@ var hierarchy =
     [ "TransformerFormBase", null, [
       [ "TransformerForm", "class_transformer_form.html", null ]
     ] ],
-    [ "VertexArray", "class_vertex_array.html", null ],
-    [ "VertexBuffer", "class_vertex_buffer.html", null ],
-    [ "VertexBufferElement", "struct_vertex_buffer_element.html", null ],
-    [ "VertexBufferLayout", "class_vertex_buffer_layout.html", null ],
     [ "WorkspaceBase", null, [
-      [ "Workspace", "class_workspace.html", [
-        [ "WorkspaceDC", "class_workspace_d_c.html", null ]
-      ] ]
+      [ "Workspace", "class_workspace.html", null ]
     ] ],
     [ "wxApp", null, [
       [ "MainApp", "class_main_app.html", null ]
@@ -210,11 +196,11 @@ var hierarchy =
       [ "ElementDataObject", "class_element_data_object.html", null ]
     ] ],
     [ "wxFrame", null, [
-      [ "ChartViewBase", "class_chart_view_base.html", [
-        [ "ChartView", "class_chart_view.html", null ]
-      ] ],
       [ "DebugMainFrameBase", "class_debug_main_frame_base.html", [
         [ "DebugMainFrame", "class_debug_main_frame.html", null ]
+      ] ],
+      [ "MainFrameBase", "class_main_frame_base.html", [
+        [ "MainFrame", "class_main_frame.html", null ]
       ] ]
     ] ],
     [ "wxTreeItemData", null, [

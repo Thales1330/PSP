@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Power System Platform: Project/Exponential.h File Reference</title>
+<title>Power System Platform: Project/elements/controlElement/Exponential.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2024w22a</span>
+   &#160;<span id="projectnumber">2024w23a</span>
    </div>
   </td>
  </tr>
@@ -123,53 +123,51 @@ $(function(){initNavTree('_exponential_8h.html',''); initResizable(true); });
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Exponential.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="_exponential_8h__incl.png" border="0" usemap="#a_project_2_exponential_8h" alt=""/></div>
-<map name="a_project_2_exponential_8h" id="a_project_2_exponential_8h">
-<area shape="rect" title=" " alt="" coords="516,5,661,32"/>
-<area shape="rect" href="_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes." alt="" coords="528,80,649,107"/>
-<area shape="poly" title=" " alt="" coords="591,33,591,64,586,64,586,33"/>
-<area shape="rect" href="_element_8h.html" title=" " alt="" coords="548,155,629,181"/>
-<area shape="poly" title=" " alt="" coords="591,107,591,139,586,139,586,107"/>
-<area shape="rect" title=" " alt="" coords="5,229,100,256"/>
-<area shape="poly" title=" " alt="" coords="548,176,365,197,115,232,114,226,364,191,548,171"/>
-<area shape="rect" title=" " alt="" coords="123,229,230,256"/>
-<area shape="poly" title=" " alt="" coords="548,179,246,231,245,226,547,174"/>
-<area shape="rect" title=" " alt="" coords="254,229,342,256"/>
-<area shape="poly" title=" " alt="" coords="549,182,357,229,356,224,547,177"/>
-<area shape="rect" title=" " alt="" coords="366,229,451,256"/>
-<area shape="poly" title=" " alt="" coords="558,184,455,226,453,221,556,179"/>
-<area shape="rect" title=" " alt="" coords="475,229,577,256"/>
-<area shape="poly" title=" " alt="" coords="580,184,549,219,545,216,576,180"/>
-<area shape="rect" title=" " alt="" coords="601,229,701,256"/>
-<area shape="poly" title=" " alt="" coords="601,180,632,216,628,219,597,184"/>
-<area shape="rect" title=" " alt="" coords="725,229,804,256"/>
-<area shape="poly" title=" " alt="" coords="620,179,720,220,718,225,618,184"/>
-<area shape="rect" title=" " alt="" coords="829,229,930,256"/>
-<area shape="poly" title=" " alt="" coords="630,177,814,223,813,228,628,182"/>
-<area shape="rect" title=" " alt="" coords="953,229,1024,256"/>
-<area shape="poly" title=" " alt="" coords="629,172,763,193,938,226,938,231,762,199,629,178"/>
-<area shape="rect" href="_x_m_l_parser_8h.html" title=" " alt="" coords="1048,229,1143,256"/>
-<area shape="poly" title=" " alt="" coords="630,171,801,192,1033,226,1032,232,800,198,629,177"/>
-<area shape="rect" title=" " alt="" coords="723,304,875,331"/>
-<area shape="poly" title=" " alt="" coords="1048,258,866,302,865,297,1046,253"/>
-<area shape="rect" title=" " alt="" coords="899,304,1083,331"/>
-<area shape="poly" title=" " alt="" coords="1079,259,1023,297,1020,293,1076,254"/>
-<area shape="rect" title=" " alt="" coords="1108,304,1291,331"/>
-<area shape="poly" title=" " alt="" coords="1115,254,1170,293,1167,297,1112,259"/>
-<area shape="rect" title=" " alt="" coords="1314,304,1399,331"/>
-<area shape="poly" title=" " alt="" coords="1141,254,1300,298,1299,303,1140,259"/>
+<div class="center"><img src="_exponential_8h__incl.png" border="0" usemap="#a_project_2elements_2control_element_2_exponential_8h" alt=""/></div>
+<map name="a_project_2elements_2control_element_2_exponential_8h" id="a_project_2elements_2control_element_2_exponential_8h">
+<area shape="rect" title=" " alt="" coords="445,5,607,48"/>
+<area shape="rect" href="_control_element_8h.html" title="Base class of a control element. Provide general methods to other control classes." alt="" coords="465,96,587,123"/>
+<area shape="poly" title=" " alt="" coords="529,49,529,80,523,80,523,49"/>
+<area shape="rect" href="_element_8h.html" title=" " alt="" coords="480,171,572,197"/>
+<area shape="poly" title=" " alt="" coords="529,123,529,155,523,155,523,123"/>
+<area shape="rect" title=" " alt="" coords="5,245,100,272"/>
+<area shape="poly" title=" " alt="" coords="479,194,322,215,115,247,114,242,321,210,479,189"/>
+<area shape="rect" title=" " alt="" coords="123,245,230,272"/>
+<area shape="poly" title=" " alt="" coords="480,198,245,246,244,241,479,192"/>
+<area shape="rect" title=" " alt="" coords="254,245,342,272"/>
+<area shape="poly" title=" " alt="" coords="487,200,353,243,352,238,485,195"/>
+<area shape="rect" title=" " alt="" coords="366,245,451,272"/>
+<area shape="poly" title=" " alt="" coords="507,200,443,239,440,235,504,196"/>
+<area shape="rect" title=" " alt="" coords="475,245,577,272"/>
+<area shape="poly" title=" " alt="" coords="529,198,529,230,523,230,523,198"/>
+<area shape="rect" title=" " alt="" coords="601,245,701,272"/>
+<area shape="poly" title=" " alt="" coords="549,196,618,235,615,240,546,200"/>
+<area shape="rect" title=" " alt="" coords="726,245,827,272"/>
+<area shape="poly" title=" " alt="" coords="570,195,719,238,717,243,569,200"/>
+<area shape="rect" title=" " alt="" coords="851,245,921,272"/>
+<area shape="poly" title=" " alt="" coords="573,191,836,242,835,247,572,196"/>
+<area shape="rect" href="_x_m_l_parser_8h.html" title=" " alt="" coords="945,245,1080,272"/>
+<area shape="poly" title=" " alt="" coords="573,189,930,242,929,248,572,195"/>
+<area shape="rect" title=" " alt="" coords="712,320,844,363"/>
+<area shape="poly" title=" " alt="" coords="977,275,853,317,852,312,975,270"/>
+<area shape="rect" title=" " alt="" coords="868,320,1000,363"/>
+<area shape="poly" title=" " alt="" coords="1002,274,966,311,962,307,998,271"/>
+<area shape="rect" title=" " alt="" coords="1024,320,1156,363"/>
+<area shape="poly" title=" " alt="" coords="1027,271,1062,307,1058,311,1023,274"/>
+<area shape="rect" title=" " alt="" coords="1180,328,1264,355"/>
+<area shape="poly" title=" " alt="" coords="1046,270,1176,320,1174,324,1044,275"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="_exponential_8h__dep__incl.png" border="0" usemap="#a_project_2_exponential_8hdep" alt=""/></div>
-<map name="a_project_2_exponential_8hdep" id="a_project_2_exponential_8hdep">
-<area shape="rect" title=" " alt="" coords="43,5,189,32"/>
-<area shape="rect" href="_control_element_container_8h.html" title=" " alt="" coords="5,80,227,107"/>
-<area shape="poly" title=" " alt="" coords="119,48,119,80,113,80,113,48"/>
-<area shape="rect" href="_file_handing_8h.html" title=" " alt="" coords="43,155,189,181"/>
-<area shape="poly" title=" " alt="" coords="119,122,119,154,113,154,113,122"/>
+<div class="center"><img src="_exponential_8h__dep__incl.png" border="0" usemap="#a_project_2elements_2control_element_2_exponential_8hdep" alt=""/></div>
+<map name="a_project_2elements_2control_element_2_exponential_8hdep" id="a_project_2elements_2control_element_2_exponential_8hdep">
+<area shape="rect" title=" " alt="" coords="38,5,201,48"/>
+<area shape="rect" href="_control_element_container_8h.html" title=" " alt="" coords="5,96,234,139"/>
+<area shape="poly" title=" " alt="" coords="122,64,122,96,117,96,117,64"/>
+<area shape="rect" href="_file_handing_8h.html" title=" " alt="" coords="33,187,206,213"/>
+<area shape="poly" title=" " alt="" coords="122,155,122,186,117,186,117,155"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -184,7 +182,7 @@ Classes</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_ffd1f789ec7bd0a45fc6ad92579c5070.html">Project</a></li><li class="navelem"><a class="el" href="_exponential_8h.html">Exponential.h</a></li>
+    <li class="navelem"><a class="el" href="dir_ffd1f789ec7bd0a45fc6ad92579c5070.html">Project</a></li><li class="navelem"><a class="el" href="dir_8769985d3bbbc837fa8f29fb97e5cf02.html">elements</a></li><li class="navelem"><a class="el" href="dir_f9bb4b9ba954539847076e91ec887623.html">controlElement</a></li><li class="navelem"><a class="el" href="_exponential_8h.html">Exponential.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0 </li>
   </ul>
 </div>

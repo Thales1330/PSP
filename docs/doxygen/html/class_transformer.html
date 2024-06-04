@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2024w22a</span>
+   &#160;<span id="projectnumber">2024w23a</span>
    </div>
   </td>
  </tr>
@@ -146,20 +146,17 @@ Collaboration diagram for Transformer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_transformer__coll__graph.png" border="0" usemap="#a_transformer_coll__map" alt="Collaboration graph"/></div>
 <map name="a_transformer_coll__map" id="a_transformer_coll__map">
-<area shape="rect" title="Two&#45;winding transformer power element." alt="" coords="270,437,359,464"/>
-<area shape="rect" href="class_branch.html" title="Abstract class for branch power elements." alt="" coords="214,347,276,373"/>
-<area shape="poly" title=" " alt="" coords="267,384,307,435,302,438,262,388"/>
-<area shape="rect" href="class_power_element.html" title="Abstract class of power elements." alt="" coords="193,272,298,299"/>
-<area shape="poly" title=" " alt="" coords="248,314,248,346,243,346,243,314"/>
-<area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="211,139,280,165"/>
-<area shape="poly" title=" " alt="" coords="248,181,248,272,243,272,243,181"/>
-<area shape="rect" href="class_open_g_l_colour.html" title="Class to manage color of OpenGL." alt="" coords="5,5,112,32"/>
-<area shape="poly" title=" " alt="" coords="51,47,40,82,34,124,36,167,42,188,52,206,80,236,117,256,156,269,193,277,192,282,154,275,114,261,77,240,47,210,37,190,31,168,28,123,35,81,45,46"/>
-<area shape="poly" title=" " alt="" coords="100,37,146,62,194,94,237,136,233,140,190,98,143,67,98,42"/>
-<area shape="rect" href="struct_switching_data.html" title="Switching data of power elements." alt="" coords="304,139,408,165"/>
-<area shape="poly" title=" " alt="" coords="338,179,258,273,254,270,333,176"/>
-<area shape="rect" href="struct_transformer_electrical_data.html" title=" " alt="" coords="300,347,470,373"/>
-<area shape="poly" title=" " alt="" coords="368,387,327,438,323,435,364,384"/>
+<area shape="rect" title="Two&#45;winding transformer power element." alt="" coords="154,261,243,288"/>
+<area shape="rect" href="class_branch.html" title="Abstract class for branch power elements." alt="" coords="64,171,126,197"/>
+<area shape="poly" title=" " alt="" coords="123,206,186,259,182,263,119,210"/>
+<area shape="rect" href="class_power_element.html" title="Abstract class of power elements." alt="" coords="42,96,147,123"/>
+<area shape="poly" title=" " alt="" coords="97,138,97,170,92,170,92,138"/>
+<area shape="rect" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,75,32"/>
+<area shape="poly" title=" " alt="" coords="58,44,89,94,85,97,54,47"/>
+<area shape="rect" href="struct_switching_data.html" title="Switching data of power elements." alt="" coords="99,5,203,32"/>
+<area shape="poly" title=" " alt="" coords="137,47,105,97,100,94,132,44"/>
+<area shape="rect" href="struct_transformer_electrical_data.html" title=" " alt="" coords="150,171,320,197"/>
+<area shape="poly" title=" " alt="" coords="226,213,206,262,201,260,221,211"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -177,9 +174,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a327ff3cf9194c18049e4feac6761ebc0" id="r_a327ff3cf9194c18049e4feac6761ebc0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a327ff3cf9194c18049e4feac6761ebc0">Contains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:a327ff3cf9194c18049e4feac6761ebc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element contains a position.  <br /></td></tr>
 <tr class="separator:a327ff3cf9194c18049e4feac6761ebc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e9e9ba48aa76bdd2ff2e973014ad422" id="r_a1e9e9ba48aa76bdd2ff2e973014ad422"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e9e9ba48aa76bdd2ff2e973014ad422">Draw</a> (wxPoint2DDouble translation, double scale) const</td></tr>
-<tr class="memdesc:a1e9e9ba48aa76bdd2ff2e973014ad422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using OpenGL.  <br /></td></tr>
-<tr class="separator:a1e9e9ba48aa76bdd2ff2e973014ad422"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3bef2ffe2f57b1943b621d9052d1458" id="r_aa3bef2ffe2f57b1943b621d9052d1458"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3bef2ffe2f57b1943b621d9052d1458">DrawDC</a> (wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</td></tr>
 <tr class="memdesc:aa3bef2ffe2f57b1943b621d9052d1458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the element using GDI+.  <br /></td></tr>
 <tr class="separator:aa3bef2ffe2f57b1943b621d9052d1458"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -236,6 +230,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetBestPositi
 <tr class="memitem:a22c8fc690da41d21483bba367b725454" id="r_a22c8fc690da41d21483bba367b725454"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22c8fc690da41d21483bba367b725454">OpenElement</a> (rapidxml::xml_node&lt;&gt; *elementNode, std::vector&lt; <a class="el" href="class_element.html">Element</a> * &gt; parentList)</td></tr>
 <tr class="separator:a22c8fc690da41d21483bba367b725454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_branch"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_branch')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_branch.html">Branch</a></td></tr>
+<tr class="memitem:a7037f496f9b9c9e64c74eb638debe278 inherit pub_methods_class_branch" id="r_a7037f496f9b9c9e64c74eb638debe278"><td class="memItemLeft" align="right" valign="top">
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Draw</b> (wxPoint2DDouble translation, double scale) const</td></tr>
+<tr class="separator:a7037f496f9b9c9e64c74eb638debe278 inherit pub_methods_class_branch"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a651769f183290af8a91494f5e9047b inherit pub_methods_class_branch" id="r_a3a651769f183290af8a91494f5e9047b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_branch.html#a3a651769f183290af8a91494f5e9047b">NodeContains</a> (wxPoint2DDouble position)</td></tr>
 <tr class="memdesc:a3a651769f183290af8a91494f5e9047b inherit pub_methods_class_branch"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a node contains a point. If contains, set the attributes related to node movement.  <br /></td></tr>
 <tr class="separator:a3a651769f183290af8a91494f5e9047b inherit pub_methods_class_branch"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -278,23 +275,14 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~PowerElement</b> 
 <tr class="memitem:a789105cc7c170330e7daf2a0453fde6d inherit pub_methods_class_power_element" id="r_a789105cc7c170330e7daf2a0453fde6d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a789105cc7c170330e7daf2a0453fde6d">SwitchesContains</a> (wxPoint2DDouble position) const</td></tr>
 <tr class="memdesc:a789105cc7c170330e7daf2a0453fde6d inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if switch contains position.  <br /></td></tr>
 <tr class="separator:a789105cc7c170330e7daf2a0453fde6d inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5799bdf1bff481670285d763572453c inherit pub_methods_class_power_element" id="r_ab5799bdf1bff481670285d763572453c"><td class="memItemLeft" align="right" valign="top">
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawSwitches</b> () const</td></tr>
-<tr class="memdesc:ab5799bdf1bff481670285d763572453c inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch. <br /></td></tr>
-<tr class="separator:ab5799bdf1bff481670285d763572453c inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element" id="r_a6e3940470ff76662ca7e4c552b12a9a6"><td class="memItemLeft" align="right" valign="top">
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawDCSwitches</b> (wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch using device context. <br /></td></tr>
+<tr class="memitem:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element" id="r_a6e3940470ff76662ca7e4c552b12a9a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6e3940470ff76662ca7e4c552b12a9a6">DrawDCSwitches</a> (wxGraphicsContext *gc) const</td></tr>
+<tr class="memdesc:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw switch.  <br /></td></tr>
 <tr class="separator:a6e3940470ff76662ca7e4c552b12a9a6 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element" id="r_a6c656ef223d36e96b19b0a9ec2115e9e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a6c656ef223d36e96b19b0a9ec2115e9e">CalculatePowerFlowPts</a> (std::vector&lt; wxPoint2DDouble &gt; edges)</td></tr>
 <tr class="memdesc:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the points of the power flow arrows.  <br /></td></tr>
 <tr class="separator:a6c656ef223d36e96b19b0a9ec2115e9e inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d6e92147c46501f592f67accc1af866 inherit pub_methods_class_power_element" id="r_a8d6e92147c46501f592f67accc1af866"><td class="memItemLeft" align="right" valign="top">
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawPowerFlowPts</b> () const</td></tr>
-<tr class="memdesc:a8d6e92147c46501f592f67accc1af866 inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw power flow arrows. <br /></td></tr>
-<tr class="separator:a8d6e92147c46501f592f67accc1af866 inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element" id="r_ae3aaa8bf4f030ba75e63c843e07bdefb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#ae3aaa8bf4f030ba75e63c843e07bdefb">DrawDCPowerFlowPts</a> (wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw power flow arrows using device context.  <br /></td></tr>
+<tr class="memdesc:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw power flow arrows.  <br /></td></tr>
 <tr class="separator:ae3aaa8bf4f030ba75e63c843e07bdefb inherit pub_methods_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d2e84b91ab7443b20a9d7eb6ab441f inherit pub_methods_class_power_element" id="r_a08d2e84b91ab7443b20a9d7eb6ab441f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_element.html#a08d2e84b91ab7443b20a9d7eb6ab441f">SetSwitchingData</a> (<a class="el" href="struct_switching_data.html">SwitchingData</a> data)</td></tr>
 <tr class="memdesc:a08d2e84b91ab7443b20a9d7eb6ab441f inherit pub_methods_class_power_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the switching data of the element.  <br /></td></tr>
@@ -448,41 +436,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetNodes</b
 <tr class="memitem:a01563b5b2fed2860132f4dd1593f9eea inherit pub_methods_class_element" id="r_a01563b5b2fed2860132f4dd1593f9eea"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a> (wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</td></tr>
 <tr class="memdesc:a01563b5b2fed2860132f4dd1593f9eea inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if two roteted rectangles intersect.  <br /></td></tr>
 <tr class="separator:a01563b5b2fed2860132f4dd1593f9eea inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35567bc1e306c6db9522ad05a87b98f5 inherit pub_methods_class_element" id="r_a35567bc1e306c6db9522ad05a87b98f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a35567bc1e306c6db9522ad05a87b98f5">DrawCircle</a> (wxPoint2DDouble position, double radius, int numSegments, GLenum mode=GL_LINE_LOOP) const</td></tr>
-<tr class="memdesc:a35567bc1e306c6db9522ad05a87b98f5 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a circle.  <br /></td></tr>
-<tr class="separator:a35567bc1e306c6db9522ad05a87b98f5 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1fd54d12f61f461111697d11cf10b9c inherit pub_methods_class_element" id="r_af1fd54d12f61f461111697d11cf10b9c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">DrawDCCircle</a> (wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:af1fd54d12f61f461111697d11cf10b9c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a circle using device context.  <br /></td></tr>
+<tr class="memdesc:af1fd54d12f61f461111697d11cf10b9c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a circle.  <br /></td></tr>
 <tr class="separator:af1fd54d12f61f461111697d11cf10b9c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac580673fdc15d41225ea20632def41e6 inherit pub_methods_class_element" id="r_ac580673fdc15d41225ea20632def41e6"><td class="memItemLeft" align="right" valign="top">
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawArc</b> (wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, GLenum mode=GL_LINE_LOOP) const</td></tr>
-<tr class="separator:ac580673fdc15d41225ea20632def41e6 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac14f4a519fd63069bbe8b3c30cc2284b inherit pub_methods_class_element" id="r_ac14f4a519fd63069bbe8b3c30cc2284b"><td class="memItemLeft" align="right" valign="top">
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawDCArc</b> (wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, wxGraphicsContext *gc) const</td></tr>
 <tr class="separator:ac14f4a519fd63069bbe8b3c30cc2284b inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c37e613808c5ee3bc37bb14a1fe85c8 inherit pub_methods_class_element" id="r_a6c37e613808c5ee3bc37bb14a1fe85c8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a6c37e613808c5ee3bc37bb14a1fe85c8">DrawRectangle</a> (wxPoint2DDouble position, double width, double height, GLenum mode=GL_QUADS) const</td></tr>
-<tr class="memdesc:a6c37e613808c5ee3bc37bb14a1fe85c8 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw rectangle.  <br /></td></tr>
-<tr class="separator:a6c37e613808c5ee3bc37bb14a1fe85c8 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a971be2d4fab435d9657f88bae36e7cf3 inherit pub_methods_class_element" id="r_a971be2d4fab435d9657f88bae36e7cf3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a971be2d4fab435d9657f88bae36e7cf3">DrawRectangle</a> (wxPoint2DDouble *points, GLenum mode=GL_QUADS) const</td></tr>
-<tr class="memdesc:a971be2d4fab435d9657f88bae36e7cf3 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw rectangle.  <br /></td></tr>
-<tr class="separator:a971be2d4fab435d9657f88bae36e7cf3 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae425d7e4f94bf7280d7d68c577d2019e inherit pub_methods_class_element" id="r_ae425d7e4f94bf7280d7d68c577d2019e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ae425d7e4f94bf7280d7d68c577d2019e">DrawTriangle</a> (std::vector&lt; wxPoint2DDouble &gt; points, GLenum mode=GL_TRIANGLES) const</td></tr>
-<tr class="memdesc:ae425d7e4f94bf7280d7d68c577d2019e inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a triangle.  <br /></td></tr>
-<tr class="separator:ae425d7e4f94bf7280d7d68c577d2019e inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9332ba7b4ce2051a3935081cc890c03c inherit pub_methods_class_element" id="r_a9332ba7b4ce2051a3935081cc890c03c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9332ba7b4ce2051a3935081cc890c03c">DrawDCTriangle</a> (std::vector&lt; wxPoint2DDouble &gt; points, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a9332ba7b4ce2051a3935081cc890c03c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a triangle.  <br /></td></tr>
+<tr class="memdesc:a9332ba7b4ce2051a3935081cc890c03c inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw rectangle.  <br /></td></tr>
 <tr class="separator:a9332ba7b4ce2051a3935081cc890c03c inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b6dd88902e04b52fe14dfc73c51fd50 inherit pub_methods_class_element" id="r_a4b6dd88902e04b52fe14dfc73c51fd50"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4b6dd88902e04b52fe14dfc73c51fd50">DrawPoint</a> (wxPoint2DDouble position, double size) const</td></tr>
-<tr class="memdesc:a4b6dd88902e04b52fe14dfc73c51fd50 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a point.  <br /></td></tr>
-<tr class="separator:a4b6dd88902e04b52fe14dfc73c51fd50 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a103b3cb2670012b2695940b094f63ab3 inherit pub_methods_class_element" id="r_a103b3cb2670012b2695940b094f63ab3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a103b3cb2670012b2695940b094f63ab3">DrawLine</a> (std::vector&lt; wxPoint2DDouble &gt; points, GLenum mode=GL_LINE_STRIP) const</td></tr>
-<tr class="memdesc:a103b3cb2670012b2695940b094f63ab3 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw line.  <br /></td></tr>
-<tr class="separator:a103b3cb2670012b2695940b094f63ab3 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d0d803fe522d030e2be8dc99eb9b39 inherit pub_methods_class_element" id="r_ad1d0d803fe522d030e2be8dc99eb9b39"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ad1d0d803fe522d030e2be8dc99eb9b39">DrawPickbox</a> (wxPoint2DDouble position) const</td></tr>
-<tr class="memdesc:ad1d0d803fe522d030e2be8dc99eb9b39 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw pickbox.  <br /></td></tr>
-<tr class="separator:ad1d0d803fe522d030e2be8dc99eb9b39 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element" id="r_a9e0ee619f7429004eaeddb9040f6d70f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a9e0ee619f7429004eaeddb9040f6d70f">DrawDCPickbox</a> (wxPoint2DDouble position, wxGraphicsContext *gc) const</td></tr>
-<tr class="memdesc:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw pickbox using direct context.  <br /></td></tr>
+<tr class="memdesc:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a point.  <br /></td></tr>
 <tr class="separator:a9e0ee619f7429004eaeddb9040f6d70f inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99b213010776b34a27eb814aff288a34 inherit pub_methods_class_element" id="r_a99b213010776b34a27eb814aff288a34"><td class="memItemLeft" align="right" valign="top">virtual wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a> (wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</td></tr>
 <tr class="memdesc:a99b213010776b34a27eb814aff288a34 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate a point as element position being the origin.  <br /></td></tr>
@@ -537,27 +501,27 @@ std::vector&lt; std::vector&lt; wxPoint2DDouble &gt; &gt;&#160;</td><td class="m
 <tr class="memitem:a71d355326194fcfdf3076efebb572e53 inherit pro_attribs_class_power_element" id="r_a71d355326194fcfdf3076efebb572e53"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949">PowerFlowDirection</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_pfDirection</b> = <a class="el" href="_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a06d679ea57938c356ac36623eab3da9a">PowerFlowDirection::PF_NONE</a></td></tr>
 <tr class="separator:a71d355326194fcfdf3076efebb572e53 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25e364f29ee05317b9718fbf41ebfdea inherit pro_attribs_class_power_element" id="r_a25e364f29ee05317b9718fbf41ebfdea"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_busColour</b></td></tr>
-<tr class="separator:a25e364f29ee05317b9718fbf41ebfdea inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83a8c2e13f6c05866ed523669342b455 inherit pro_attribs_class_power_element" id="r_a83a8c2e13f6c05866ed523669342b455"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_onlineElementColour</b></td></tr>
-<tr class="separator:a83a8c2e13f6c05866ed523669342b455 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ff875a022731551b9fa54ecebff46db inherit pro_attribs_class_power_element" id="r_a1ff875a022731551b9fa54ecebff46db"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_offlineElementColour</b></td></tr>
-<tr class="separator:a1ff875a022731551b9fa54ecebff46db inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0597483b0f8b1274bf9cf2d1b451d4f inherit pro_attribs_class_power_element" id="r_ad0597483b0f8b1274bf9cf2d1b451d4f"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_closedSwitchColour</b></td></tr>
-<tr class="separator:ad0597483b0f8b1274bf9cf2d1b451d4f inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b38b191eff7c7b246363d73d72f2252 inherit pro_attribs_class_power_element" id="r_a5b38b191eff7c7b246363d73d72f2252"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_openedSwitchColour</b></td></tr>
-<tr class="separator:a5b38b191eff7c7b246363d73d72f2252 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7899f3a54a58d83a60192e08eaca2511 inherit pro_attribs_class_power_element" id="r_a7899f3a54a58d83a60192e08eaca2511"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_powerFlowArrowColour</b></td></tr>
-<tr class="separator:a7899f3a54a58d83a60192e08eaca2511 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5340699c1cc77a74c777dfa4bd05d42 inherit pro_attribs_class_power_element" id="r_af5340699c1cc77a74c777dfa4bd05d42"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_dynamicEventColour</b></td></tr>
-<tr class="separator:af5340699c1cc77a74c777dfa4bd05d42 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7158096ba311bfe3a41843a20e1bf435 inherit pro_attribs_class_power_element" id="r_a7158096ba311bfe3a41843a20e1bf435"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_busColour</b></td></tr>
+<tr class="separator:a7158096ba311bfe3a41843a20e1bf435 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73847857cf2daf1a583eede55e8ee91b inherit pro_attribs_class_power_element" id="r_a73847857cf2daf1a583eede55e8ee91b"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_onlineElementColour</b></td></tr>
+<tr class="separator:a73847857cf2daf1a583eede55e8ee91b inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a597d3a3ed7001613f3c0c3f8f3679914 inherit pro_attribs_class_power_element" id="r_a597d3a3ed7001613f3c0c3f8f3679914"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_offlineElementColour</b></td></tr>
+<tr class="separator:a597d3a3ed7001613f3c0c3f8f3679914 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01b6d844c6af5bad5fa0aa7b3c5687aa inherit pro_attribs_class_power_element" id="r_a01b6d844c6af5bad5fa0aa7b3c5687aa"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_closedSwitchColour</b></td></tr>
+<tr class="separator:a01b6d844c6af5bad5fa0aa7b3c5687aa inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ebb7bf302d3238ce3ea2dbf53d767bd inherit pro_attribs_class_power_element" id="r_a4ebb7bf302d3238ce3ea2dbf53d767bd"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_openedSwitchColour</b></td></tr>
+<tr class="separator:a4ebb7bf302d3238ce3ea2dbf53d767bd inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2157b12946a16b45ddb3fbd4c7bf0f9a inherit pro_attribs_class_power_element" id="r_a2157b12946a16b45ddb3fbd4c7bf0f9a"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_powerFlowArrowColour</b></td></tr>
+<tr class="separator:a2157b12946a16b45ddb3fbd4c7bf0f9a inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7b2e4fdddd628164e2279a0c393165 inherit pro_attribs_class_power_element" id="r_afb7b2e4fdddd628164e2279a0c393165"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_dynamicEventColour</b></td></tr>
+<tr class="separator:afb7b2e4fdddd628164e2279a0c393165 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ee0e6a106d2fd5b9216ef53a4618214 inherit pro_attribs_class_power_element" id="r_a9ee0e6a106d2fd5b9216ef53a4618214"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_dynEvent</b> = false</td></tr>
 <tr class="separator:a9ee0e6a106d2fd5b9216ef53a4618214 inherit pro_attribs_class_power_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -631,9 +595,9 @@ wxPoint2DDouble&#160;</td><td class="memItemRight" valign="bottom"><b>m_movePos<
 <tr class="memitem:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element" id="r_a37ff451865d4852ffa8c54574a20cd0b"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_online</b> = true</td></tr>
 <tr class="separator:a37ff451865d4852ffa8c54574a20cd0b inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0df145138fef6ed901ff4b1828439b0 inherit pro_attribs_class_element" id="r_ab0df145138fef6ed901ff4b1828439b0"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="class_open_g_l_colour.html">OpenGLColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_selectionColour</b></td></tr>
-<tr class="separator:ab0df145138fef6ed901ff4b1828439b0 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element" id="r_a9692eec7ca16d6f81172788b4bf48072"><td class="memItemLeft" align="right" valign="top">
+wxColour&#160;</td><td class="memItemRight" valign="bottom"><b>m_selectionColour</b></td></tr>
+<tr class="separator:a9692eec7ca16d6f81172788b4bf48072 inherit pro_attribs_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -725,46 +689,6 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_branch.html#a691f94c3cd2abe1274e870d2882634d8">Branch</a>.</p>
-
-</div>
-</div>
-<a id="a1e9e9ba48aa76bdd2ff2e973014ad422" name="a1e9e9ba48aa76bdd2ff2e973014ad422"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e9e9ba48aa76bdd2ff2e973014ad422">&#9670;&#160;</a></span>Draw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Transformer::Draw </td>
-          <td>(</td>
-          <td class="paramtype">wxPoint2DDouble</td>          <td class="paramname"><span class="paramname"><em>translation</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>scale</em></span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw the element using OpenGL. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">translation</td><td>Translation of the system. </td></tr>
-    <tr><td class="paramname">scale</td><td>Scale of the system. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="class_branch.html#a7037f496f9b9c9e64c74eb638debe278">Branch</a>.</p>
 
 </div>
 </div>
@@ -1345,8 +1269,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Project/<a class="el" href="_transformer_8h.html">Transformer.h</a></li>
-<li>Project/<b>Transformer.cpp</b></li>
+<li>Project/elements/powerElement/<a class="el" href="_transformer_8h.html">Transformer.h</a></li>
+<li>Project/elements/powerElement/<b>Transformer.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

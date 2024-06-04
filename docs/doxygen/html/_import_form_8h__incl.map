@@ -1,5 +1,5 @@
-<map id="Project/ImportForm.h" name="Project/ImportForm.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="403,5,546,32"/>
+<map id="Project/forms/ImportForm.h" name="Project/forms/ImportForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="385,5,564,32"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,80,157,107"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="406,35,165,79,164,74,405,30"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="181,80,288,107"/>

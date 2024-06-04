@@ -25,8 +25,7 @@
 var NAVTREE =
 [
   [ "Power System Platform", "index.html", [
-    [ "PSP-UFU documentation", "index.html", null ],
-    [ "Todo List", "todo.html", null ],
+    [ "PSP-UFU", "index.html", "index" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -51,9 +50,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_about_form_8h.html",
-"class_electric_calculation.html#a6663e7a20e96ee975bd0f7d54b8a6f70",
-"class_multiplier.html#ab487232a96ed3c3f3a7c3628ddaa4c77",
-"struct_parse_anarede_1_1_power_line.html#a03af07387b8266b9fda1024fd854b372"
+"class_electric_calculation.html#a86905e3b92f69ad0a2d0f3029c00d805",
+"class_power_element.html#abd2cee52270374e17951782bdb571dce",
+"struct_parse_matpower_1_1_gen_data.html#a9a308a508c87d1021f58e30b35022cc6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

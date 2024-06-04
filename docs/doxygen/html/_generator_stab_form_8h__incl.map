@@ -1,9 +1,5 @@
-<map id="Project/GeneratorStabForm.h" name="Project/GeneratorStabForm.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="64,5,255,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,85,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,35,79,74,77,69,138,30"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="109,80,211,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,33,162,64,157,64,157,33"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="235,80,375,107"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="186,30,267,70,265,75,184,35"/>
+<map id="Project/forms/GeneratorStabForm.h" name="Project/forms/GeneratorStabForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,192,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="28,96,169,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,49,101,80,96,80,96,49"/>
 </map>

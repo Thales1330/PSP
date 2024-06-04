@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Power System Platform: Project/ElectricCalculation.h File Reference</title>
+<title>Power System Platform: Project/simulation/ElectricCalculation.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2024w22a</span>
+   &#160;<span id="projectnumber">2024w23a</span>
    </div>
   </td>
  </tr>
@@ -122,144 +122,141 @@ $(function(){initNavTree('_electric_calculation_8h.html',''); initResizable(true
 <div class="contents">
 <div class="textblock"><code>#include &lt;complex&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;<a class="el" href="_bus_8h.html">Bus.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_capacitor_8h.html">Capacitor.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_element_8h.html">Element.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_harm_current_8h.html">HarmCurrent.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_ind_motor_8h.html">IndMotor.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_inductor_8h.html">Inductor.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_line_8h.html">Line.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_load_8h.html">Load.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_power_element_8h.html">PowerElement.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_sync_generator_8h.html">SyncGenerator.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_sync_motor_8h.html">SyncMotor.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_transformer_8h.html">Transformer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_properties_data_8h.html">PropertiesData.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_bus_8h.html">../elements/powerElement/Bus.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_capacitor_8h.html">../elements/powerElement/Capacitor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_element_8h.html">../elements/Element.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_harm_current_8h.html">../elements/powerElement/HarmCurrent.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_ind_motor_8h.html">../elements/powerElement/IndMotor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_inductor_8h.html">../elements/powerElement/Inductor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_line_8h.html">../elements/powerElement/Line.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_load_8h.html">../elements/powerElement/Load.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_power_element_8h.html">../elements/powerElement/PowerElement.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_sync_generator_8h.html">../elements/powerElement/SyncGenerator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_sync_motor_8h.html">../elements/powerElement/SyncMotor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_transformer_8h.html">../elements/powerElement/Transformer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_properties_data_8h.html">../utils/PropertiesData.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ElectricCalculation.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="_electric_calculation_8h__incl.png" border="0" usemap="#a_project_2_electric_calculation_8h" alt=""/></div>
-<map name="a_project_2_electric_calculation_8h" id="a_project_2_electric_calculation_8h">
-<area shape="rect" title=" " alt="" coords="806,5,992,32"/>
-<area shape="rect" title=" " alt="" coords="6,453,77,480"/>
-<area shape="poly" title=" " alt="" coords="806,22,627,29,524,37,422,50,329,68,254,93,225,109,204,126,190,145,185,167,185,319,183,341,175,361,150,397,117,426,83,448,80,443,113,422,146,393,171,359,178,339,180,319,180,166,185,143,200,123,222,104,252,89,328,63,421,44,523,31,626,23,806,17"/>
-<area shape="rect" title=" " alt="" coords="1494,453,1549,480"/>
-<area shape="poly" title=" " alt="" coords="992,17,1121,20,1268,29,1403,47,1457,61,1496,78,1522,95,1540,114,1550,136,1553,167,1553,319,1546,384,1533,439,1528,438,1541,383,1548,319,1548,167,1545,138,1535,117,1518,99,1494,82,1455,66,1402,52,1267,34,1121,25,992,22"/>
-<area shape="rect" href="_bus_8h.html" title=" " alt="" coords="1198,229,1253,256"/>
-<area shape="poly" title=" " alt="" coords="992,20,1128,27,1280,38,1408,54,1452,65,1477,78,1483,93,1477,108,1464,124,1443,140,1388,173,1269,227,1267,222,1386,168,1440,136,1460,120,1473,105,1477,93,1473,82,1450,70,1407,60,1279,43,1128,32,992,26"/>
-<area shape="rect" href="_power_element_8h.html" title=" " alt="" coords="881,304,997,331"/>
-<area shape="poly" title=" " alt="" coords="883,34,862,55,845,81,843,93,845,106,861,159,882,210,925,290,921,292,878,212,856,161,840,107,838,93,840,79,858,51,880,31"/>
-<area shape="rect" href="_element_8h.html" title=" " alt="" coords="513,379,594,405"/>
-<area shape="poly" title=" " alt="" coords="806,25,700,30,583,40,478,57,436,69,405,82,380,99,362,117,352,138,348,167,348,244,352,270,363,292,379,312,400,330,450,357,499,375,497,380,447,362,397,334,376,316,358,295,347,271,343,244,343,167,347,136,358,113,377,95,403,78,434,64,476,52,583,35,700,25,806,20"/>
-<area shape="rect" href="_capacitor_8h.html" title=" " alt="" coords="855,80,943,107"/>
-<area shape="poly" title=" " alt="" coords="902,33,902,64,896,64,896,33"/>
-<area shape="rect" href="_harm_current_8h.html" title=" " alt="" coords="966,80,1072,107"/>
-<area shape="poly" title=" " alt="" coords="921,30,986,69,984,74,918,35"/>
-<area shape="rect" href="_ind_motor_8h.html" title=" " alt="" coords="698,80,780,107"/>
-<area shape="poly" title=" " alt="" coords="872,35,782,76,779,71,870,30"/>
-<area shape="rect" href="_inductor_8h.html" title=" " alt="" coords="1096,80,1174,107"/>
-<area shape="poly" title=" " alt="" coords="941,30,1082,73,1080,78,939,35"/>
-<area shape="rect" href="_line_8h.html" title=" " alt="" coords="1407,80,1463,107"/>
-<area shape="poly" title=" " alt="" coords="992,24,1173,42,1281,57,1392,77,1391,82,1280,63,1173,47,992,29"/>
-<area shape="rect" href="_load_8h.html" title=" " alt="" coords="1198,80,1258,107"/>
-<area shape="poly" title=" " alt="" coords="966,30,1183,77,1182,82,965,35"/>
-<area shape="rect" href="_sync_generator_8h.html" title=" " alt="" coords="434,80,553,107"/>
-<area shape="poly" title=" " alt="" coords="828,35,568,81,568,76,827,30"/>
-<area shape="rect" href="_sync_motor_8h.html" title=" " alt="" coords="578,80,673,107"/>
-<area shape="poly" title=" " alt="" coords="852,35,689,78,688,73,851,30"/>
-<area shape="rect" href="_transformer_8h.html" title=" " alt="" coords="1282,80,1382,107"/>
-<area shape="poly" title=" " alt="" coords="983,30,1268,77,1267,82,982,35"/>
-<area shape="rect" href="_properties_data_8h.html" title=" " alt="" coords="453,229,571,256"/>
-<area shape="poly" title=" " alt="" coords="806,28,574,48,474,63,441,72,423,82,414,98,412,115,416,134,426,152,454,188,486,217,482,221,450,192,421,155,411,136,407,116,409,96,420,78,439,67,473,58,573,42,806,23"/>
-<area shape="rect" href="_bus_form_8h.html" title=" " alt="" coords="1211,304,1296,331"/>
-<area shape="poly" title=" " alt="" coords="1233,256,1246,289,1241,290,1228,258"/>
-<area shape="poly" title=" " alt="" coords="1198,254,1004,302,1003,297,1197,248"/>
-<area shape="rect" title=" " alt="" coords="1315,379,1456,405"/>
-<area shape="poly" title=" " alt="" coords="1278,329,1351,369,1348,373,1275,334"/>
-<area shape="poly" title=" " alt="" coords="881,332,610,383,609,378,880,327"/>
-<area shape="rect" href="_element_plot_data_8h.html" title=" " alt="" coords="1160,379,1291,405"/>
-<area shape="poly" title=" " alt="" coords="989,329,1161,372,1160,377,988,334"/>
-<area shape="poly" title=" " alt="" coords="513,400,334,419,216,435,92,456,91,450,215,430,333,413,512,394"/>
-<area shape="rect" title=" " alt="" coords="449,453,543,480"/>
-<area shape="poly" title=" " alt="" coords="546,408,518,443,513,439,541,404"/>
-<area shape="rect" title=" " alt="" coords="567,453,673,480"/>
-<area shape="poly" title=" " alt="" coords="567,404,600,440,597,444,563,408"/>
-<area shape="rect" title=" " alt="" coords="697,453,786,480"/>
-<area shape="poly" title=" " alt="" coords="587,403,695,445,693,450,585,408"/>
-<area shape="rect" title=" " alt="" coords="810,453,894,480"/>
-<area shape="poly" title=" " alt="" coords="594,400,796,449,794,454,593,406"/>
-<area shape="rect" title=" " alt="" coords="918,453,1021,480"/>
-<area shape="poly" title=" " alt="" coords="594,397,903,450,902,455,593,403"/>
-<area shape="rect" title=" " alt="" coords="1045,453,1145,480"/>
-<area shape="poly" title=" " alt="" coords="594,395,778,416,1030,450,1029,456,778,421,594,400"/>
-<area shape="rect" title=" " alt="" coords="101,453,180,480"/>
-<area shape="poly" title=" " alt="" coords="513,402,376,423,196,455,195,450,376,418,512,397"/>
-<area shape="rect" title=" " alt="" coords="204,453,306,480"/>
-<area shape="poly" title=" " alt="" coords="514,406,321,452,320,447,513,400"/>
-<area shape="rect" href="_x_m_l_parser_8h.html" title=" " alt="" coords="330,453,425,480"/>
-<area shape="poly" title=" " alt="" coords="524,408,424,449,422,444,522,403"/>
-<area shape="rect" title=" " alt="" coords="5,528,158,555"/>
-<area shape="poly" title=" " alt="" coords="330,482,149,526,147,521,329,477"/>
-<area shape="rect" title=" " alt="" coords="181,528,366,555"/>
-<area shape="poly" title=" " alt="" coords="361,483,305,521,302,517,358,478"/>
-<area shape="rect" title=" " alt="" coords="390,528,573,555"/>
-<area shape="poly" title=" " alt="" coords="397,478,453,517,450,521,394,483"/>
-<area shape="rect" title=" " alt="" coords="597,528,681,555"/>
-<area shape="poly" title=" " alt="" coords="424,478,582,522,581,527,422,483"/>
-<area shape="poly" title=" " alt="" coords="1284,403,1480,450,1479,455,1283,409"/>
-<area shape="rect" title=" " alt="" coords="1266,453,1358,480"/>
-<area shape="poly" title=" " alt="" coords="1242,404,1287,441,1284,445,1239,408"/>
-<area shape="rect" title=" " alt="" coords="1382,453,1469,480"/>
-<area shape="poly" title=" " alt="" coords="1261,403,1377,445,1375,450,1259,408"/>
-<area shape="rect" title=" " alt="" coords="1169,453,1242,480"/>
-<area shape="poly" title=" " alt="" coords="1225,407,1216,439,1210,438,1219,405"/>
-<area shape="rect" href="_shunt_8h.html" title=" " alt="" coords="1043,155,1109,181"/>
-<area shape="poly" title=" " alt="" coords="931,105,1032,146,1030,151,929,110"/>
-<area shape="poly" title=" " alt="" coords="1103,179,1187,220,1184,224,1101,184"/>
-<area shape="poly" title=" " alt="" coords="1066,184,963,294,959,291,1063,180"/>
-<area shape="poly" title=" " alt="" coords="1031,106,1059,141,1055,144,1027,109"/>
-<area shape="rect" href="_machines_8h.html" title=" " alt="" coords="616,155,704,181"/>
-<area shape="poly" title=" " alt="" coords="727,109,687,146,683,142,723,105"/>
-<area shape="poly" title=" " alt="" coords="679,180,733,214,800,254,892,295,890,300,798,258,730,219,677,184"/>
-<area shape="poly" title=" " alt="" coords="1127,109,1098,144,1094,141,1123,106"/>
-<area shape="rect" href="_line_form_8h.html" title=" " alt="" coords="1392,229,1478,256"/>
-<area shape="poly" title=" " alt="" coords="1438,107,1438,214,1432,214,1432,107"/>
-<area shape="rect" href="_branch_8h.html" title=" " alt="" coords="1194,155,1268,181"/>
-<area shape="poly" title=" " alt="" coords="1407,107,1282,151,1280,146,1405,102"/>
-<area shape="poly" title=" " alt="" coords="1433,257,1397,365,1392,363,1428,256"/>
-<area shape="poly" title=" " alt="" coords="1233,182,1230,214,1225,213,1227,182"/>
-<area shape="poly" title=" " alt="" coords="1207,184,978,299,976,294,1205,179"/>
-<area shape="poly" title=" " alt="" coords="1203,110,1118,150,1115,145,1201,105"/>
-<area shape="rect" href="_load_form_8h.html" title=" " alt="" coords="1278,229,1368,256"/>
-<area shape="poly" title=" " alt="" coords="1243,106,1282,153,1314,214,1310,216,1278,156,1239,109"/>
-<area shape="poly" title=" " alt="" coords="1331,255,1377,363,1372,365,1326,258"/>
-<area shape="poly" title=" " alt="" coords="524,105,618,146,616,151,521,110"/>
-<area shape="poly" title=" " alt="" coords="634,106,650,139,645,142,629,108"/>
-<area shape="poly" title=" " alt="" coords="1316,109,1263,147,1259,143,1313,105"/>
-<area shape="poly" title=" " alt="" coords="572,251,866,301,865,306,571,257"/>
-<area shape="poly" title=" " alt="" coords="518,256,548,363,543,364,513,257"/>
-<area shape="rect" title=" " alt="" coords="412,304,516,331"/>
-<area shape="poly" title=" " alt="" coords="506,258,483,293,479,290,502,255"/>
+<div class="center"><img src="_electric_calculation_8h__incl.png" border="0" usemap="#a_project_2simulation_2_electric_calculation_8h" alt=""/></div>
+<map name="a_project_2simulation_2_electric_calculation_8h" id="a_project_2simulation_2_electric_calculation_8h">
+<area shape="rect" title=" " alt="" coords="832,5,977,48"/>
+<area shape="rect" title=" " alt="" coords="5,501,76,528"/>
+<area shape="poly" title=" " alt="" coords="832,33,649,41,422,55,219,74,148,85,107,98,78,118,58,139,47,164,43,199,43,367,43,486,38,486,38,367,38,199,42,163,54,136,74,114,105,94,146,80,219,68,422,49,649,36,832,28"/>
+<area shape="rect" title=" " alt="" coords="1882,501,1938,528"/>
+<area shape="poly" title=" " alt="" coords="977,25,1231,26,1565,33,1727,42,1869,54,1977,71,2014,82,2037,94,2057,117,2064,141,2063,199,2063,367,2060,389,2052,411,2025,447,1989,476,1953,497,1950,492,1986,471,2021,443,2047,408,2055,388,2058,366,2058,199,2059,141,2052,119,2034,98,2012,87,1976,76,1869,59,1727,47,1565,39,1231,31,977,30"/>
+<area shape="rect" href="_bus_8h.html" title=" " alt="" coords="653,261,825,304"/>
+<area shape="poly" title=" " alt="" coords="832,32,671,39,477,51,308,70,250,83,231,90,220,98,213,107,211,117,220,137,246,160,287,182,338,201,396,218,522,246,638,266,637,271,521,251,395,223,336,206,284,187,243,165,216,140,206,117,208,105,216,94,228,86,248,78,307,65,477,45,670,33,832,27"/>
+<area shape="rect" href="_power_element_8h.html" title=" " alt="" coords="937,352,1053,379"/>
+<area shape="poly" title=" " alt="" coords="977,24,1087,26,1213,36,1272,45,1325,57,1368,73,1397,94,1415,119,1425,143,1428,167,1421,191,1406,217,1382,244,1307,306,1265,325,1204,340,1069,360,1068,354,1203,335,1264,320,1304,302,1378,240,1402,214,1416,189,1422,166,1420,144,1411,121,1393,98,1366,78,1324,62,1271,50,1212,41,1087,32,977,30"/>
+<area shape="rect" href="_element_8h.html" title=" " alt="" coords="457,427,549,453"/>
+<area shape="poly" title=" " alt="" coords="832,31,678,34,488,44,394,52,308,64,235,79,182,98,145,117,118,137,100,162,94,199,94,284,96,297,104,309,131,333,173,355,224,374,339,405,442,426,441,431,338,411,223,379,171,359,128,337,99,312,91,299,89,284,89,198,95,160,114,133,142,113,179,94,233,74,307,59,393,47,488,38,678,28,832,25"/>
+<area shape="rect" href="_capacitor_8h.html" title=" " alt="" coords="622,96,795,139"/>
+<area shape="poly" title=" " alt="" coords="860,51,769,92,767,87,857,46"/>
+<area shape="rect" href="_harm_current_8h.html" title=" " alt="" coords="230,96,403,139"/>
+<area shape="poly" title=" " alt="" coords="832,39,648,63,418,98,417,93,648,58,832,34"/>
+<area shape="rect" href="_ind_motor_8h.html" title=" " alt="" coords="1654,96,1827,139"/>
+<area shape="poly" title=" " alt="" coords="977,29,1263,50,1449,69,1640,93,1639,98,1448,74,1263,56,977,35"/>
+<area shape="rect" href="_inductor_8h.html" title=" " alt="" coords="426,96,599,139"/>
+<area shape="poly" title=" " alt="" coords="832,47,615,96,613,91,831,42"/>
+<area shape="rect" href="_line_8h.html" title=" " alt="" coords="1210,96,1383,139"/>
+<area shape="poly" title=" " alt="" coords="978,42,1196,91,1194,96,977,47"/>
+<area shape="rect" href="_load_8h.html" title=" " alt="" coords="818,96,991,139"/>
+<area shape="poly" title=" " alt="" coords="907,48,907,81,902,81,902,48"/>
+<area shape="rect" href="_sync_generator_8h.html" title=" " alt="" coords="1850,96,2023,139"/>
+<area shape="poly" title=" " alt="" coords="977,27,1342,45,1585,65,1835,93,1835,98,1585,70,1341,51,977,33"/>
+<area shape="rect" href="_sync_motor_8h.html" title=" " alt="" coords="1458,96,1631,139"/>
+<area shape="poly" title=" " alt="" coords="977,33,1185,58,1440,93,1444,94,1443,99,1439,99,1185,63,977,38"/>
+<area shape="rect" href="_transformer_8h.html" title=" " alt="" coords="1014,96,1187,139"/>
+<area shape="poly" title=" " alt="" coords="952,46,1042,87,1040,92,949,51"/>
+<area shape="rect" href="_properties_data_8h.html" title=" " alt="" coords="380,269,538,296"/>
+<area shape="poly" title=" " alt="" coords="832,32,668,38,470,50,295,70,236,83,216,90,205,98,195,111,190,124,190,137,193,149,211,173,240,196,277,216,318,234,398,262,397,267,316,239,275,221,237,200,207,177,189,151,185,138,185,123,191,109,201,94,214,85,234,78,295,64,469,45,668,33,832,27"/>
+<area shape="rect" title=" " alt="" coords="673,352,806,379"/>
+<area shape="poly" title=" " alt="" coords="742,305,742,336,737,336,737,305"/>
+<area shape="poly" title=" " alt="" coords="806,302,941,344,939,349,804,307"/>
+<area shape="poly" title=" " alt="" coords="937,378,565,432,565,427,936,373"/>
+<area shape="rect" href="_element_plot_data_8h.html" title=" " alt="" coords="1308,427,1490,453"/>
+<area shape="poly" title=" " alt="" coords="1054,375,1314,421,1313,426,1053,380"/>
+<area shape="poly" title=" " alt="" coords="457,449,299,469,91,504,91,498,299,464,457,444"/>
+<area shape="rect" title=" " alt="" coords="100,501,194,528"/>
+<area shape="poly" title=" " alt="" coords="457,453,210,503,209,498,456,448"/>
+<area shape="rect" title=" " alt="" coords="218,501,324,528"/>
+<area shape="poly" title=" " alt="" coords="464,456,327,499,325,494,462,451"/>
+<area shape="rect" title=" " alt="" coords="348,501,437,528"/>
+<area shape="poly" title=" " alt="" coords="485,456,426,495,423,490,482,452"/>
+<area shape="rect" title=" " alt="" coords="461,501,545,528"/>
+<area shape="poly" title=" " alt="" coords="506,454,506,486,501,486,501,454"/>
+<area shape="rect" title=" " alt="" coords="569,501,672,528"/>
+<area shape="poly" title=" " alt="" coords="525,452,589,491,586,495,522,456"/>
+<area shape="rect" title=" " alt="" coords="696,501,796,528"/>
+<area shape="poly" title=" " alt="" coords="546,451,690,494,688,499,545,456"/>
+<area shape="rect" title=" " alt="" coords="821,501,922,528"/>
+<area shape="poly" title=" " alt="" coords="550,448,806,498,805,503,549,453"/>
+<area shape="rect" href="_x_m_l_parser_8h.html" title=" " alt="" coords="946,501,1082,528"/>
+<area shape="poly" title=" " alt="" coords="550,445,931,498,930,504,549,450"/>
+<area shape="rect" title=" " alt="" coords="713,576,845,619"/>
+<area shape="poly" title=" " alt="" coords="978,531,855,573,853,568,976,526"/>
+<area shape="rect" title=" " alt="" coords="869,576,1001,619"/>
+<area shape="poly" title=" " alt="" coords="1003,530,967,567,964,563,1000,527"/>
+<area shape="rect" title=" " alt="" coords="1025,576,1157,619"/>
+<area shape="poly" title=" " alt="" coords="1028,527,1063,563,1059,567,1024,530"/>
+<area shape="rect" title=" " alt="" coords="1181,584,1265,611"/>
+<area shape="poly" title=" " alt="" coords="1047,526,1177,576,1175,580,1046,531"/>
+<area shape="poly" title=" " alt="" coords="1489,451,1868,505,1867,510,1488,457"/>
+<area shape="rect" title=" " alt="" coords="1353,501,1445,528"/>
+<area shape="poly" title=" " alt="" coords="1402,454,1402,486,1397,486,1397,454"/>
+<area shape="rect" title=" " alt="" coords="1469,501,1556,528"/>
+<area shape="poly" title=" " alt="" coords="1420,452,1481,490,1478,495,1417,456"/>
+<area shape="rect" title=" " alt="" coords="1256,501,1329,528"/>
+<area shape="poly" title=" " alt="" coords="1382,456,1325,494,1322,490,1379,452"/>
+<area shape="rect" href="_shunt_8h.html" title=" " alt="" coords="695,187,762,213"/>
+<area shape="poly" title=" " alt="" coords="716,139,724,171,719,172,711,140"/>
+<area shape="poly" title=" " alt="" coords="733,213,737,246,732,246,728,214"/>
+<area shape="poly" title=" " alt="" coords="754,212,839,259,966,341,963,345,836,264,751,216"/>
+<area shape="poly" title=" " alt="" coords="404,134,414,136,680,187,679,192,413,141,402,139"/>
+<area shape="rect" href="_machines_8h.html" title=" " alt="" coords="1598,187,1686,213"/>
+<area shape="poly" title=" " alt="" coords="1717,141,1671,179,1667,175,1713,137"/>
+<area shape="poly" title=" " alt="" coords="1624,216,1546,261,1494,286,1440,307,1341,332,1241,348,1147,359,1069,364,1069,359,1146,353,1240,343,1340,326,1438,301,1492,281,1543,257,1621,212"/>
+<area shape="poly" title=" " alt="" coords="569,137,682,179,680,184,567,142"/>
+<area shape="rect" href="_line_form_8h.html" title=" " alt="" coords="1193,187,1339,213"/>
+<area shape="poly" title=" " alt="" coords="1291,140,1279,173,1274,171,1286,138"/>
+<area shape="rect" href="_branch_8h.html" title=" " alt="" coords="1035,187,1108,213"/>
+<area shape="poly" title=" " alt="" coords="1239,142,1122,184,1120,178,1238,137"/>
+<area shape="rect" title=" " alt="" coords="1153,269,1293,296"/>
+<area shape="poly" title=" " alt="" coords="1262,215,1239,257,1234,255,1257,213"/>
+<area shape="poly" title=" " alt="" coords="1035,213,840,260,839,255,1034,208"/>
+<area shape="poly" title=" " alt="" coords="1068,215,1010,339,1005,337,1063,212"/>
+<area shape="poly" title=" " alt="" coords="860,142,771,182,769,177,858,137"/>
+<area shape="rect" href="_load_form_8h.html" title=" " alt="" coords="844,187,994,213"/>
+<area shape="poly" title=" " alt="" coords="911,139,917,171,912,172,906,140"/>
+<area shape="poly" title=" " alt="" coords="968,211,1161,262,1160,267,966,217"/>
+<area shape="poly" title=" " alt="" coords="1861,142,1701,185,1700,180,1860,137"/>
+<area shape="poly" title=" " alt="" coords="1571,137,1617,175,1613,179,1568,141"/>
+<area shape="poly" title=" " alt="" coords="1095,140,1083,173,1078,171,1090,138"/>
+<area shape="poly" title=" " alt="" coords="539,293,922,350,921,356,538,299"/>
+<area shape="poly" title=" " alt="" coords="465,296,498,411,493,413,460,297"/>
+<area shape="rect" title=" " alt="" coords="362,352,466,379"/>
+<area shape="poly" title=" " alt="" coords="454,298,431,340,426,337,450,295"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="_electric_calculation_8h__dep__incl.png" border="0" usemap="#a_project_2_electric_calculation_8hdep" alt=""/></div>
-<map name="a_project_2_electric_calculation_8hdep" id="a_project_2_electric_calculation_8hdep">
-<area shape="rect" title=" " alt="" coords="406,5,592,32"/>
-<area shape="rect" href="_electromechanical_8h.html" title=" " alt="" coords="5,80,190,107"/>
-<area shape="poly" title=" " alt="" coords="414,38,168,82,167,77,413,33"/>
-<area shape="rect" href="_fault_8h.html" title=" " alt="" coords="214,80,320,107"/>
-<area shape="poly" title=" " alt="" coords="445,39,308,82,307,77,444,34"/>
-<area shape="rect" href="_file_handing_8h.html" title=" " alt="" coords="344,80,489,107"/>
-<area shape="poly" title=" " alt="" coords="475,45,432,82,429,78,471,40"/>
-<area shape="rect" href="_power_flow_8h.html" title=" " alt="" coords="513,80,653,107"/>
-<area shape="poly" title=" " alt="" coords="527,40,570,78,567,82,523,45"/>
-<area shape="rect" href="_power_quality_8h.html" title=" " alt="" coords="678,80,832,107"/>
-<area shape="poly" title=" " alt="" coords="559,34,711,77,709,82,557,39"/>
-<area shape="rect" href="_text_form_8h.html" title=" " alt="" coords="857,80,989,107"/>
-<area shape="poly" title=" " alt="" coords="589,33,857,78,856,83,588,38"/>
+<div class="center"><img src="_electric_calculation_8h__dep__incl.png" border="0" usemap="#a_project_2simulation_2_electric_calculation_8hdep" alt=""/></div>
+<map name="a_project_2simulation_2_electric_calculation_8hdep" id="a_project_2simulation_2_electric_calculation_8hdep">
+<area shape="rect" title=" " alt="" coords="431,5,575,48"/>
+<area shape="rect" href="_text_form_8h.html" title=" " alt="" coords="5,104,174,131"/>
+<area shape="poly" title=" " alt="" coords="416,49,149,106,148,101,415,44"/>
+<area shape="rect" href="_electromechanical_8h.html" title=" " alt="" coords="198,96,341,139"/>
+<area shape="poly" title=" " alt="" coords="435,56,325,98,323,93,433,51"/>
+<area shape="rect" href="_fault_8h.html" title=" " alt="" coords="366,96,491,139"/>
+<area shape="poly" title=" " alt="" coords="478,62,447,97,443,94,474,58"/>
+<area shape="rect" href="_power_flow_8h.html" title=" " alt="" coords="515,96,640,139"/>
+<area shape="poly" title=" " alt="" coords="532,58,562,94,558,97,528,62"/>
+<area shape="rect" href="_power_quality_8h.html" title=" " alt="" coords="664,96,790,139"/>
+<area shape="poly" title=" " alt="" coords="570,52,675,93,673,98,568,57"/>
+<area shape="rect" href="_file_handing_8h.html" title=" " alt="" coords="814,104,987,131"/>
+<area shape="poly" title=" " alt="" coords="591,45,844,101,842,106,590,50"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -300,7 +297,7 @@ Enumerations</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_ffd1f789ec7bd0a45fc6ad92579c5070.html">Project</a></li><li class="navelem"><a class="el" href="_electric_calculation_8h.html">ElectricCalculation.h</a></li>
+    <li class="navelem"><a class="el" href="dir_ffd1f789ec7bd0a45fc6ad92579c5070.html">Project</a></li><li class="navelem"><a class="el" href="dir_684ee06151bfbdca3c971174d4b226d5.html">simulation</a></li><li class="navelem"><a class="el" href="_electric_calculation_8h.html">ElectricCalculation.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0 </li>
   </ul>
 </div>

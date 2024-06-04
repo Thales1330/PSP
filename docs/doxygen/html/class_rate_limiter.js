@@ -1,7 +1,6 @@
 var class_rate_limiter =
 [
     [ "Contains", "class_rate_limiter.html#addf0eef395781b8584063a9061be59dc", null ],
-    [ "Draw", "class_rate_limiter.html#a6afc319e3a165776b8a429b9bbe38580", null ],
     [ "DrawDC", "class_rate_limiter.html#a4a1c40bd641d83ff3cfb86570fdf5e85", null ],
     [ "GetCopy", "class_rate_limiter.html#a4f1152238b97fcf76a0bee258e971823", null ],
     [ "Intersects", "class_rate_limiter.html#a7c1ce7440e82613b455054dd8447f147", null ],

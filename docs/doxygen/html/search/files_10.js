@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['workspace_2eh_0',['Workspace.h',['../_workspace_8h.html',1,'']]]
+  ['xmlparser_2eh_0',['XMLParser.h',['../_x_m_l_parser_8h.html',1,'']]]
 ];

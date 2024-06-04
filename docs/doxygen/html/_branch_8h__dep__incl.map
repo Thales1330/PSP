@@ -1,22 +1,22 @@
-<map id="Project/Branch.h" name="Project/Branch.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="440,5,558,32"/>
-<area shape="rect" id="Node000002" href="$_line_8h.html" title=" " alt="" coords="375,80,476,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,45,440,82,436,78,473,41"/>
-<area shape="rect" id="Node000010" href="$_transformer_8h.html" title=" " alt="" coords="501,80,646,107"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="524,41,562,78,559,82,521,45"/>
-<area shape="rect" id="Node000003" href="$_electric_calculation_8h.html" title=" " alt="" coords="406,155,592,181"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="451,116,488,152,484,156,447,120"/>
-<area shape="rect" id="Node000004" href="$_electromechanical_8h.html" title=" " alt="" coords="5,229,190,256"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="414,187,168,231,167,226,413,182"/>
-<area shape="rect" id="Node000005" href="$_fault_8h.html" title=" " alt="" coords="214,229,320,256"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="445,189,308,231,307,226,444,184"/>
-<area shape="rect" id="Node000006" href="$_file_handing_8h.html" title=" " alt="" coords="344,229,489,256"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="475,194,432,231,429,227,471,190"/>
-<area shape="rect" id="Node000007" href="$_power_flow_8h.html" title=" " alt="" coords="513,229,653,256"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="527,190,570,227,567,231,523,194"/>
-<area shape="rect" id="Node000008" href="$_power_quality_8h.html" title=" " alt="" coords="678,229,832,256"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="559,183,711,226,709,231,557,188"/>
-<area shape="rect" id="Node000009" href="$_text_form_8h.html" title=" " alt="" coords="857,229,989,256"/>
-<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="589,182,857,227,856,233,588,187"/>
-<area shape="poly" id="edge10_Node000010_Node000003" title=" " alt="" coords="552,119,514,156,510,152,548,116"/>
+<map id="Project/elements/powerElement/Branch.h" name="Project/elements/powerElement/Branch.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="400,5,606,48"/>
+<area shape="rect" id="Node000002" href="$_line_8h.html" title=" " alt="" coords="286,96,491,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="466,60,417,98,413,93,463,55"/>
+<area shape="rect" id="Node000010" href="$_transformer_8h.html" title=" " alt="" coords="515,96,720,139"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="543,55,592,93,589,98,540,60"/>
+<area shape="rect" id="Node000003" href="$_electric_calculation_8h.html" title=" " alt="" coords="431,187,575,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="428,146,478,184,474,188,425,150"/>
+<area shape="rect" id="Node000004" href="$_text_form_8h.html" title=" " alt="" coords="5,285,174,312"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="416,230,149,287,148,282,415,225"/>
+<area shape="rect" id="Node000005" href="$_electromechanical_8h.html" title=" " alt="" coords="198,277,341,320"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="435,238,325,279,323,274,433,233"/>
+<area shape="rect" id="Node000006" href="$_fault_8h.html" title=" " alt="" coords="366,277,491,320"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="478,243,447,279,443,275,474,239"/>
+<area shape="rect" id="Node000007" href="$_power_flow_8h.html" title=" " alt="" coords="515,277,640,320"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="532,239,562,275,558,279,528,243"/>
+<area shape="rect" id="Node000008" href="$_power_quality_8h.html" title=" " alt="" coords="664,277,790,320"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="570,233,675,274,673,279,568,238"/>
+<area shape="rect" id="Node000009" href="$_file_handing_8h.html" title=" " alt="" coords="814,285,987,312"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="591,226,844,282,842,287,590,231"/>
+<area shape="poly" id="edge10_Node000010_Node000003" title=" " alt="" coords="581,150,531,188,528,184,577,146"/>
 </map>

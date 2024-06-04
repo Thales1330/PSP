@@ -1,5 +1,5 @@
-<map id="Project/BusForm.h" name="Project/BusForm.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="10,5,141,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,146,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,33,78,64,73,64,73,33"/>
+<map id="Project/forms/BusForm.h" name="Project/forms/BusForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,172,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="18,80,159,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,33,91,64,86,64,86,33"/>
 </map>

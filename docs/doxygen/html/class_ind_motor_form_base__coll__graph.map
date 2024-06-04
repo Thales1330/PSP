@@ -1,0 +1,5 @@
+<map id="IndMotorFormBase" name="IndMotorFormBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,137,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="34,5,108,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,48,74,80,68,80,68,48"/>
+</map>

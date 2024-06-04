@@ -1,0 +1,7 @@
+<map id="AboutFormBase" name="AboutFormBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,121,107"/>
+<area shape="rect" id="Node000003" href="$class_about_form.html" title="Form to show some informations." alt="" coords="20,155,106,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="66,122,66,154,60,154,60,122"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="26,5,100,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,48,66,80,60,80,60,48"/>
+</map>

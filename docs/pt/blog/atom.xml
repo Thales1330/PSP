@@ -2,21 +2,23 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://thales1330.github.io/PSP/pt/blog</id>
     <title>PSP-UFU Blog</title>
-    <updated>2024-05-30T00:00:00.000Z</updated>
+    <updated>2024-06-04T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://thales1330.github.io/PSP/pt/blog"/>
     <subtitle>PSP-UFU Blog</subtitle>
     <icon>https://thales1330.github.io/PSP/pt/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[2024w22a-beta]]></title>
-        <id>https://thales1330.github.io/PSP/pt/blog/2024/05/30/2024w12a-beta</id>
-        <link href="https://thales1330.github.io/PSP/pt/blog/2024/05/30/2024w12a-beta"/>
-        <updated>2024-05-30T00:00:00.000Z</updated>
+        <title type="html"><![CDATA[2024w23a-beta]]></title>
+        <id>https://thales1330.github.io/PSP/pt/blog/2024/06/04/2024w12a-beta</id>
+        <link href="https://thales1330.github.io/PSP/pt/blog/2024/06/04/2024w12a-beta"/>
+        <updated>2024-06-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Removed the OpenGL dependency and related errors;]]></summary>
         <content type="html"><![CDATA[<ul>
 <li>🔥 Removed the OpenGL dependency and related errors;</li>
 <li>🔥 Added undo and redo feature (finally!);</li>
 <li>✔️ Voltage map upgraded due to OpenGL dependency removal;</li>
+<li>✔️ New feature to add a new text element via context menu;</li>
+<li>✔️ Selection and move elements improved;</li>
 <li>✔️ Code documentation updated (<a href="https://thales1330.github.io/PSP/doxygen/html/index.html" target="_blank" rel="noopener noreferrer">check here</a>);</li>
 <li>🐛 Fixed a massive memory leak when using Synchronous Generator controls;</li>
 <li>🐛 Fixed simulation problems related to disconnected buses;</li>

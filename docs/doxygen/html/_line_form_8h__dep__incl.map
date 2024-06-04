@@ -1,19 +1,19 @@
-<map id="Project/LineForm.h" name="Project/LineForm.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="433,5,565,32"/>
-<area shape="rect" id="Node000002" href="$_line_8h.html" title=" " alt="" coords="448,80,550,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="502,48,502,80,496,80,496,48"/>
-<area shape="rect" id="Node000003" href="$_electric_calculation_8h.html" title=" " alt="" coords="406,155,592,181"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="502,122,502,154,496,154,496,122"/>
-<area shape="rect" id="Node000004" href="$_electromechanical_8h.html" title=" " alt="" coords="5,229,190,256"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="414,187,168,231,167,226,413,182"/>
-<area shape="rect" id="Node000005" href="$_fault_8h.html" title=" " alt="" coords="214,229,320,256"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="445,189,308,231,307,226,444,184"/>
-<area shape="rect" id="Node000006" href="$_file_handing_8h.html" title=" " alt="" coords="344,229,489,256"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="475,194,432,231,429,227,471,190"/>
-<area shape="rect" id="Node000007" href="$_power_flow_8h.html" title=" " alt="" coords="513,229,653,256"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="527,190,570,227,567,231,523,194"/>
-<area shape="rect" id="Node000008" href="$_power_quality_8h.html" title=" " alt="" coords="678,229,832,256"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="559,183,711,226,709,231,557,188"/>
-<area shape="rect" id="Node000009" href="$_text_form_8h.html" title=" " alt="" coords="857,229,989,256"/>
-<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="589,182,857,227,856,233,588,187"/>
+<map id="Project/forms/LineForm.h" name="Project/forms/LineForm.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="419,5,587,32"/>
+<area shape="rect" id="Node000002" href="$_line_8h.html" title=" " alt="" coords="400,80,606,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="506,48,506,80,500,80,500,48"/>
+<area shape="rect" id="Node000003" href="$_electric_calculation_8h.html" title=" " alt="" coords="431,171,575,213"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="506,138,506,170,500,170,500,138"/>
+<area shape="rect" id="Node000004" href="$_text_form_8h.html" title=" " alt="" coords="5,269,174,296"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="416,214,149,271,148,266,415,209"/>
+<area shape="rect" id="Node000005" href="$_electromechanical_8h.html" title=" " alt="" coords="198,261,341,304"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="435,222,325,263,323,258,433,217"/>
+<area shape="rect" id="Node000006" href="$_fault_8h.html" title=" " alt="" coords="366,261,491,304"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="478,227,447,263,443,259,474,223"/>
+<area shape="rect" id="Node000007" href="$_power_flow_8h.html" title=" " alt="" coords="515,261,640,304"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="532,223,562,259,558,263,528,227"/>
+<area shape="rect" id="Node000008" href="$_power_quality_8h.html" title=" " alt="" coords="664,261,790,304"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="570,217,675,258,673,263,568,222"/>
+<area shape="rect" id="Node000009" href="$_file_handing_8h.html" title=" " alt="" coords="814,269,987,296"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="591,210,844,266,842,271,590,215"/>
 </map>

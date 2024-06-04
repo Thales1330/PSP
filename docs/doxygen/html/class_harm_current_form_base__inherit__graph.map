@@ -1,0 +1,7 @@
+<map id="HarmCurrentFormBase" name="HarmCurrentFormBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,160,107"/>
+<area shape="rect" id="Node000003" href="$class_harm_current_form.html" title=" " alt="" coords="20,155,145,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="85,122,85,154,80,154,80,122"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="46,5,119,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,48,85,80,80,80,80,48"/>
+</map>
