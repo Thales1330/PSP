@@ -2,11 +2,28 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://thales1330.github.io/PSP/blog</id>
     <title>PSP-UFU Blog</title>
-    <updated>2024-06-04T00:00:00.000Z</updated>
+    <updated>2024-06-19T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://thales1330.github.io/PSP/blog"/>
     <subtitle>PSP-UFU Blog</subtitle>
     <icon>https://thales1330.github.io/PSP/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[2024w25a-beta]]></title>
+        <id>https://thales1330.github.io/PSP/blog/2024/06/19/2024w25a-beta</id>
+        <link href="https://thales1330.github.io/PSP/blog/2024/06/19/2024w25a-beta"/>
+        <updated>2024-06-19T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[- 🔥 Added the support for Chart Director;]]></summary>
+        <content type="html"><![CDATA[<ul>
+<li>🔥 Added the support for <a href="https://www.advsofteng.com/index.html" target="_blank" rel="noopener noreferrer">Chart Director</a>;</li>
+<li>✔️ Fixed the necessity to run PSP-UFU in admin mode to change language;</li>
+<li>🐛 Minor bugfixes.</li>
+</ul>]]></content>
+        <author>
+            <name>Thales</name>
+            <uri>https://github.com/thales1330</uri>
+        </author>
+        <category label="psp-ufu" term="psp-ufu"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2024w23a-beta]]></title>
         <id>https://thales1330.github.io/PSP/blog/2024/06/04/2024w12a-beta</id>

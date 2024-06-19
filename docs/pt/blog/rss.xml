@@ -4,10 +4,23 @@
         <title>PSP-UFU Blog</title>
         <link>https://thales1330.github.io/PSP/pt/blog</link>
         <description>PSP-UFU Blog</description>
-        <lastBuildDate>Tue, 04 Jun 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 19 Jun 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>pt</language>
+        <item>
+            <title><![CDATA[2024w25a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/pt/blog/2024/06/19/2024w25a-beta</link>
+            <guid>https://thales1330.github.io/PSP/pt/blog/2024/06/19/2024w25a-beta</guid>
+            <pubDate>Wed, 19 Jun 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[- 🔥 Added the support for Chart Director;]]></description>
+            <content:encoded><![CDATA[<ul>
+<li>🔥 Added the support for <a href="https://www.advsofteng.com/index.html" target="_blank" rel="noopener noreferrer">Chart Director</a>;</li>
+<li>✔️ Fixed the necessity to run PSP-UFU in admin mode to change language;</li>
+<li>🐛 Minor bugfixes.</li>
+</ul>]]></content:encoded>
+            <category>psp-ufu</category>
+        </item>
         <item>
             <title><![CDATA[2024w23a-beta]]></title>
             <link>https://thales1330.github.io/PSP/pt/blog/2024/06/04/2024w12a-beta</link>
