@@ -1,4 +1,5 @@
 import React from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -138,16 +139,17 @@ function Home() {
 		  <p><center>
 		  <iframe src="https://ghbtns.com/github-btn.html?user=thales1330&repo=psp&type=star&count=true&size=large" frameborder="0" scrolling="0" width="130" height="30" title="GitHub"></iframe>
 			</center></p>
-		  <div className={styles.buttons}>
-			<Link
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('https://github.com/Thales1330/PSP/releases/latest')}>
-              <Translate>Download</Translate>
-            </Link>
-          </div>
+      <p><center><Dropdown className={styles.buttons} align={{ lg: 'start' }} autoClose={true}>
+      <Dropdown.Toggle className='button button--outline button--secondary button--lg'>
+      <Translate>⚡Download⚡</Translate>
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/download/2024w25a-beta/PSP-UFU_x86_32_VC.exe">Windows (.exe)</Dropdown.Item>
+        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/download/2024w25a-beta/PSP-UFU_x86_32_VC.zip">Windows (.zip)</Dropdown.Item>
+        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/download/2024w25a-beta/PSP-UFU_amd64_Alpha2018w15a.deb">Linux (.deb)</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown></center></p>
 		  <div className={styles.buttons}>
 			<Link
               className={clsx(
