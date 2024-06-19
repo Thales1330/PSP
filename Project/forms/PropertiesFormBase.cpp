@@ -64,6 +64,22 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     
     boxSizerLvl3_1->Add(m_choiceLanguage, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
+    wxBoxSizer* boxSizerLvl3_3 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(boxSizerLvl3_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPlotLib = new wxStaticText(m_panelGeneral, wxID_ANY, _("Plot library"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_3->Add(m_staticTextPlotLib, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choicePlotLibArr;
+    m_choicePlotLibArr.Add(_("Chart Director"));
+    m_choicePlotLibArr.Add(_("wxMathPlot"));
+    m_choicePlotLib = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choicePlotLibArr, 0);
+    m_choicePlotLib->SetSelection(0);
+    
+    boxSizerLvl3_3->Add(m_choicePlotLib, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
     wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxVERTICAL);
     
     boxSizerLvl2_1->Add(boxSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));

@@ -2268,7 +2268,7 @@ bool Workspace::RunStability()
 		plotData.AddData(stability.GetIterationVector(), _("Iterations number"));
 		plotDataList.push_back(plotData);
 #endif
-		ChartView* cView = new ChartView(this, plotDataList, m_stabilityTimeVector);
+		ChartView* cView = new ChartView(this, plotDataList, m_stabilityTimeVector, m_properties->GetGeneralPropertiesData().plotLib);
 		cView->Show();
 	}
 
@@ -2383,7 +2383,7 @@ bool Workspace::RunFrequencyResponse()
 			if (element->GetPlotData(plotData, PlotStudy::FREQRESPONSE)) plotDataList.push_back(plotData);
 		}
 
-		ChartView* cView = new ChartView(this, plotDataList, pq.GetFrequencies());
+		ChartView* cView = new ChartView(this, plotDataList, pq.GetFrequencies(), m_properties->GetGeneralPropertiesData().plotLib);
 		cView->Show();
 	}
 

@@ -38,7 +38,7 @@ class ControlElementContainer;
 class GeneratorStabForm : public GeneratorStabFormBase
 {
    public:
-    GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator);
+    GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator, int plotLib);
     virtual ~GeneratorStabForm();
 
    protected:
@@ -55,6 +55,7 @@ class GeneratorStabForm : public GeneratorStabFormBase
 
     SyncGenerator* m_syncGenerator = nullptr;
     wxWindow* m_parent = nullptr;
+    int m_plotLib = 0;
    // wxGLContext* m_sharedGLContext = nullptr;
 };
 #endif  // GENERATORSTABFORM_H

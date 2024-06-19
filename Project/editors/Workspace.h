@@ -39,7 +39,7 @@
 #include "ControlEditor.h"
 
 #ifdef _DEBUG
-#include "utils/DebugMainFrame.hpp"
+#include "../utils/DebugMainFrame.hpp"
 #endif
 
 class Camera;

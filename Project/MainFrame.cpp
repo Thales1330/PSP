@@ -674,6 +674,9 @@ void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 	GeneralPropertiesForm genPropForm(this, m_generalProperties);
 	genPropForm.SetInitialSize();
 	genPropForm.ShowModal();
+	for(auto& workspace : m_workspaceList) {
+		workspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+	}
 }
 
 void MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)

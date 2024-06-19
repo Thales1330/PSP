@@ -133,7 +133,7 @@ bool Electromechanical::RunStabilityCalculation()
 	m_currentTime = 0.0;
 	double currentPlotTime = 0.0;
 	double currentPbdTime = 0.0;
-	while (m_currentTime < m_simTime) {
+	while (m_currentTime <= (m_simTime + m_timeStep)) {
 		if (HasEvent(m_currentTime)) {
 			SetEvent(m_currentTime);
 			GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);

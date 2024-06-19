@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _PSP_PROJECT_PROPERTIESFORM_BASE_CLASSES_H
-#define _PSP_PROJECT_PROPERTIESFORM_BASE_CLASSES_H
+#ifndef _PROJECT_FORMS_PROPERTIESFORM_BASE_CLASSES_H
+#define _PROJECT_FORMS_PROPERTIESFORM_BASE_CLASSES_H
 
 // clang-format off
 #include <wx/settings.h>
@@ -55,6 +55,8 @@ protected:
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextLanguage;
     wxChoice* m_choiceLanguage;
+    wxStaticText* m_staticTextPlotLib;
+    wxChoice* m_choicePlotLib;
     wxStaticText* m_staticTextTheme;
     wxChoice* m_choiceTheme;
     wxButton* m_buttonOK;
@@ -67,6 +69,8 @@ protected:
 public:
     wxStaticText* GetStaticTextLanguage() { return m_staticTextLanguage; }
     wxChoice* GetChoiceLanguage() { return m_choiceLanguage; }
+    wxStaticText* GetStaticTextPlotLib() { return m_staticTextPlotLib; }
+    wxChoice* GetChoicePlotLib() { return m_choicePlotLib; }
     wxStaticText* GetStaticTextTheme() { return m_staticTextTheme; }
     wxChoice* GetChoiceTheme() { return m_choiceTheme; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }

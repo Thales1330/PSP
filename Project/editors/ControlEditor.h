@@ -139,6 +139,7 @@ class ControlEditor : public ControlEditorBase
     virtual void SetElementsList(std::vector<ControlElement*> elementList) { m_elementList = elementList; }
     virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
     virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
+    virtual void SetPlotLib(int plotLib) { m_plotLib = plotLib; }
 
     virtual void OnClose(wxCloseEvent& event);
     virtual void OnTestClick(wxCommandEvent& event);
@@ -186,5 +187,6 @@ class ControlEditor : public ControlEditorBase
     double m_slope = 1.0;
     double m_timeStep = 1e-4;
     double m_simTime = 10.0;
+    int m_plotLib = 0;
 };
 #endif  // CONTROLEDITOR_H

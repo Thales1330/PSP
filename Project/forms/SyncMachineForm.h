@@ -37,7 +37,7 @@ class SyncMotor;
 class SyncMachineForm : public SyncMachineFormBase
 {
    public:
-    SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator);
+    SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator, int plotLib);
     SyncMachineForm(wxWindow* parent, SyncMotor* syncMotor);
     virtual ~SyncMachineForm();
 
@@ -55,6 +55,7 @@ class SyncMachineForm : public SyncMachineFormBase
     SyncGenerator* m_syncGenerator = nullptr;
     SyncMotor* m_syncMotor = nullptr;
     wxWindow* m_parent = nullptr;
+    int m_plotLib = 0;
     //wxGLContext* m_sharedGLContext = nullptr;    
 };
 #endif  // SYNCMACHINEFORM_H

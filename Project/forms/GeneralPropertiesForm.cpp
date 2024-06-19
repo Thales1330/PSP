@@ -19,121 +19,147 @@
 #include "../utils/PropertiesData.h"
 
 GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* properties)
-    : GeneralPropertiesFormBase(parent)
+	: GeneralPropertiesFormBase(parent)
 {
-    m_properties = properties;
-    auto data = m_properties->GetGeneralPropertiesData();
+	m_properties = properties;
+	auto data = m_properties->GetGeneralPropertiesData();
 
-    // Clear the choices and rebuild to set the correct translations.
-    m_choiceLanguage->Clear();
-    m_choiceLanguage->Insert(_("English"), 0);
-    m_choiceLanguage->Insert(_("Portuguese"), 1);
-    m_choiceTheme->Clear();
-    m_choiceTheme->Insert(_("Light"), 0);
-    m_choiceTheme->Insert(_("Dark"), 1);
-    //m_choiceRender->Clear();
-    //m_choiceRender->Insert(_("OpenGL"), 0);
-    //m_choiceRender->Insert(_("Device Context"), 0);
+	// Clear the choices and rebuild to set the correct translations.
+	m_choiceLanguage->Clear();
+	m_choiceLanguage->Insert(_("English"), 0);
+	m_choiceLanguage->Insert(_("Portuguese"), 1);
+	m_choiceTheme->Clear();
+	m_choiceTheme->Insert(_("Light"), 0);
+	m_choiceTheme->Insert(_("Dark"), 1);
+	//m_choiceRender->Clear();
+	//m_choiceRender->Insert(_("OpenGL"), 0);
+	//m_choiceRender->Insert(_("Device Context"), 0);
+	m_choicePlotLib->Clear();
+	m_choicePlotLib->Insert(_("Chart Director"), 0);
+	m_choicePlotLib->Insert(_("wxMathPlot"), 1);
 
-    switch (data.language) {
-    case wxLANGUAGE_ENGLISH: {
-        m_choiceLanguage->SetSelection(0);
-    } break;
-    case wxLANGUAGE_PORTUGUESE_BRAZILIAN: {
-        m_choiceLanguage->SetSelection(1);
-    } break;
-    default: {
-        m_choiceLanguage->SetSelection(wxNOT_FOUND);
-    } break;
-    }
-    switch (data.theme) {
-    case THEME_LIGHT: {
-        m_choiceTheme->SetSelection(0);
-    } break;
-    case THEME_DARK: {
-        m_choiceTheme->SetSelection(1);
-    } break;
-    }
-    //if (data.useOpenGL) m_choiceRender->SetSelection(0);
-    //else m_choiceRender->SetSelection(1);
+
+	switch (data.language) {
+	case wxLANGUAGE_ENGLISH: {
+		m_choiceLanguage->SetSelection(0);
+	} break;
+	case wxLANGUAGE_PORTUGUESE_BRAZILIAN: {
+		m_choiceLanguage->SetSelection(1);
+	} break;
+	default: {
+		m_choiceLanguage->SetSelection(wxNOT_FOUND);
+	} break;
+	}
+	switch (data.plotLib) {
+	case PlotLib::wxCHART_DIR: {
+		m_choicePlotLib->SetSelection(0);
+	} break;
+	case PlotLib::wxMATH_PLOT: {
+		m_choicePlotLib->SetSelection(1);
+	} break;
+	}
+	switch (data.theme) {
+	case THEME_LIGHT: {
+		m_choiceTheme->SetSelection(0);
+	} break;
+	case THEME_DARK: {
+		m_choiceTheme->SetSelection(1);
+	} break;
+	}
+	//if (data.useOpenGL) m_choiceRender->SetSelection(0);
+	//else m_choiceRender->SetSelection(1);
 }
 
 GeneralPropertiesForm::~GeneralPropertiesForm() {}
 void GeneralPropertiesForm::OnButtonOKClick(wxCommandEvent& event)
 {
-    if (ValidateData()) EndModal(wxID_OK);
+	if (ValidateData()) EndModal(wxID_OK);
 }
 
 bool GeneralPropertiesForm::ValidateData()
 {
-    auto data = m_properties->GetGeneralPropertiesData();
-    auto checkData = m_properties->GetGeneralPropertiesData();
-    bool hasChanges = false;
+	auto data = m_properties->GetGeneralPropertiesData();
+	auto checkData = m_properties->GetGeneralPropertiesData();
+	bool hasChanges = false;
 
-    //wxTextFile file("config.ini");
-    wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-    wxTextFile file(fn.GetPath() + wxFileName::GetPathSeparator() + "config.ini");
-    if (!file.Create()) {
-        if (!file.Open()) {
-            // Fail to access the file.
-            wxMessageDialog msgDialog(this,
-                _("It was not possible to access the init file.\nThe settings won't be applied."),
-                _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
-            msgDialog.ShowModal();
-        }
-        file.Clear();
-    }
+	//wxTextFile file("config.ini");
+	wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
+	wxTextFile file(fn.GetFullPath());
+	if (!file.Create()) {
+		if (!file.Open()) {
+			// Fail to access the file.
+			wxMessageDialog msgDialog(this,
+				_("It was not possible to access the init file.\nThe settings won't be applied."),
+				_("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+			msgDialog.ShowModal();
+		}
+		file.Clear();
+	}
 
-    wxString line = "lang=";
-    switch (m_choiceLanguage->GetSelection()) {
-    case 0: {
-        line += "en";
-        data.language = wxLANGUAGE_ENGLISH;
-    } break;
-    case 1: {
-        line += "pt-br";
-        data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
-    } break;
-    }
-    file.AddLine(line);
-    if (data.language != checkData.language) hasChanges = true;
+	wxString line = "lang=";
+	switch (m_choiceLanguage->GetSelection()) {
+	case 0: {
+		line += "en";
+		data.language = wxLANGUAGE_ENGLISH;
+	} break;
+	case 1: {
+		line += "pt-br";
+		data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;
+	} break;
+	}
+	file.AddLine(line);
+	if (data.language != checkData.language) hasChanges = true;
 
-    line = "theme=";
-    switch (m_choiceTheme->GetSelection()) {
-    case 0: {
-        line += "light";
-        data.theme = THEME_LIGHT;
-    } break;
-    case 1: {
-        line += "dark";
-        data.theme = THEME_DARK;
-    } break;
-    }
-    file.AddLine(line);
-    if (data.theme != checkData.theme) hasChanges = true;
+	line = "plotlib=";
+	switch (m_choicePlotLib->GetSelection()) {
+	case 0: {
+		line += "chartdir";
+		data.plotLib = PlotLib::wxCHART_DIR;
+	} break;
+	case 1: {
+		line += "mathplot";
+		data.plotLib = PlotLib::wxMATH_PLOT;
+	} break;
+	}
+	file.AddLine(line);
+	//if (data.plotLib != checkData.plotLib) hasChanges = true;
 
-    //line = "useOpenGL=";
-    //switch (m_choiceRender->GetSelection()) {
-    //case 0: {
-    //    line += "yes";
-    //    data.useOpenGL = true;
-    //} break;
-    //case 1: {
-    //    line += "no";
-    //    data.useOpenGL = false;
-    //} break;
-    //}
-    //file.AddLine(line);
-    //if (data.useOpenGL != checkData.useOpenGL) hasChanges = true;
+	line = "theme=";
+	switch (m_choiceTheme->GetSelection()) {
+	case 0: {
+		line += "light";
+		data.theme = THEME_LIGHT;
+	} break;
+	case 1: {
+		line += "dark";
+		data.theme = THEME_DARK;
+	} break;
+	}
+	file.AddLine(line);
+	if (data.theme != checkData.theme) hasChanges = true;
 
-    file.Write();
-    file.Close();
+	//line = "useOpenGL=";
+	//switch (m_choiceRender->GetSelection()) {
+	//case 0: {
+	//    line += "yes";
+	//    data.useOpenGL = true;
+	//} break;
+	//case 1: {
+	//    line += "no";
+	//    data.useOpenGL = false;
+	//} break;
+	//}
+	//file.AddLine(line);
+	//if (data.useOpenGL != checkData.useOpenGL) hasChanges = true;
 
-    if (hasChanges) {
-        wxMessageDialog msgDialog(this, _("The application must be restarted to settings changes be applied."),
-            _("Info"), wxOK | wxCENTRE | wxICON_INFORMATION);
-        msgDialog.ShowModal();
-    }
-    m_properties->SetGeneralPropertiesData(data);
-    return true;
+	file.Write();
+	file.Close();
+
+	if (hasChanges) {
+		wxMessageDialog msgDialog(this, _("The application must be restarted to settings changes be applied."),
+			_("Info"), wxOK | wxCENTRE | wxICON_INFORMATION);
+		msgDialog.ShowModal();
+	}
+	m_properties->SetGeneralPropertiesData(data);
+	return true;
 }

@@ -78,8 +78,12 @@ class MainApp : public wxApp
 #endif
         // Load configuration file, if don't exists create it.
         // Find the executable location path.
-        wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-        wxTextFile file(fn.GetPath() + wxFileName::GetPathSeparator() + "config.ini");
+        //wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+        wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
+        if(!fn.DirExists()) {
+			fn.Mkdir();
+		}
+        wxTextFile file(fn.GetFullPath());
         auto data = propertiesData->GetGeneralPropertiesData();
 
         if(!file.Create()) {
@@ -115,6 +119,14 @@ class MainApp : public wxApp
                         data.theme = THEME_DARK;
                     }
                 }
+                if (tag == "plotlib") {
+                    if (tagValue == "chartdir") {
+                        data.plotLib = PlotLib::wxCHART_DIR;
+                    }
+                    else if (tagValue == "mathplot") {
+                        data.plotLib = PlotLib::wxMATH_PLOT;
+                    }
+                }
 				//if (tag == "useOpenGL") {
 				//	if (tagValue == "yes") {
 				//		data.useOpenGL = true;
@@ -130,6 +142,7 @@ class MainApp : public wxApp
 
             // Default parameters.
             file.AddLine("lang=en");
+            file.AddLine("plotlib=chartdir");
             file.AddLine("theme=light");
             //file.AddLine("useOpenGL=yes");
 
@@ -138,7 +151,8 @@ class MainApp : public wxApp
 
             data.language = wxLANGUAGE_ENGLISH;
             data.theme = THEME_LIGHT;
-            data.useOpenGL = true;
+            data.plotLib = PlotLib::wxCHART_DIR;
+            //data.useOpenGL = true;
             propertiesData->SetGeneralPropertiesData(data);
         }
 

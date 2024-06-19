@@ -4,9 +4,10 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _PSP_PROJECT_CHARTVIEW_BASE_CLASSES_H
-#define _PSP_PROJECT_CHARTVIEW_BASE_CLASSES_H
+#ifndef _PROJECT_EDITORS_CHARTVIEW_BASE_CLASSES_H
+#define _PROJECT_EDITORS_CHARTVIEW_BASE_CLASSES_H
 
+// clang-format off
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/xrc/xh_bmp.h>
@@ -35,6 +36,7 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
+// clang-format on
 
 class ChartViewBase : public wxFrame
 {
@@ -76,6 +78,7 @@ protected:
     wxPGProperty* m_pgPropYMax;
 
 protected:
+    virtual void OnResize(wxSizeEvent& event) { event.Skip(); }
     virtual void OnMenuSaveImageClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuSendClipClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuExpCSVClick(wxCommandEvent& event) { event.Skip(); }
