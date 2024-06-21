@@ -84,10 +84,12 @@ protected:
 	virtual void DrawTrackLine(XYChart* chartDir);
 	virtual char DotOrComma() { return wxString::Format("%.1f", 0.1)[1]; };
 	virtual wxString GetUnitFromMagText(wxString magText);
+	virtual wxTreeItemId CalcXYLimits(wxTreeItemId root, XYChart* chartDir);
 
 	wxPGProperty* m_pgPropColor = nullptr;
 
 	wxTreeItemId m_treeTimeID;
+	wxTreeItemId m_selectedItemID;
 
 	std::vector<ElementPlotData> m_epdList;
 	std::vector<double> m_time;

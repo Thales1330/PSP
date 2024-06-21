@@ -51,14 +51,17 @@ class PlotData : public wxTreeItemData
     bool IsPlot() const { return m_plot; }
     int GetThick() const { return m_thick; }
     std::vector<double> GetValues() const { return m_values; }
+    void SetHighlight(bool highlight) { m_highlight = highlight; }
+    bool IsHighlighted() const { return m_highlight; }
    protected:
     std::vector<double> m_values;
-    wxString m_name;
-    bool m_plot;
-    wxColour m_colour;
-    int m_thick;
-    wxPenStyle m_penType;
-    int m_axis;
+    wxString m_name = wxT("");
+    bool m_plot = false;
+    wxColour m_colour = *wxBLACK;
+    int m_thick = 2.0;
+    wxPenStyle m_penType = wxPenStyle::wxPENSTYLE_SOLID;
+    int m_axis = 0;
+    bool m_highlight = false;
 };
 
 class ElementPlotData

@@ -135,7 +135,7 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_pgPropDraw->SetHelpString(wxT(""));
     m_pgPropDraw->SetEditor( wxT("CheckBox") );
     
-    m_pgProplineThick = m_pgMgr->AppendIn( m_pgPropLineProp,  new wxIntProperty( _("Thickness"), wxPG_LABEL, 1) );
+    m_pgProplineThick = m_pgMgr->AppendIn( m_pgPropLineProp,  new wxIntProperty( _("Thickness"), wxPG_LABEL, 2) );
     m_pgProplineThick->SetHelpString(wxT(""));
     m_pgProplineThick->SetEditor( wxT("TextCtrl") );
     

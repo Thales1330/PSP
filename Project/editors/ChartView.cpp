@@ -524,7 +524,12 @@ void ChartView::OnTreeItemActivated(wxTreeEvent& event)
 
 void ChartView::OnTreeItemSelectionChanged(wxTreeEvent& event)
 {
-	if (PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(event.GetItem()))) {
+	if (PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(m_selectedItemID)))
+		data->SetHighlight(false);
+
+	m_selectedItemID = event.GetItem();
+
+	if (PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(m_selectedItemID))) {
 		m_pgPropDraw->SetValue(data->IsPlot());
 		wxVariant colour;
 		colour << data->GetColour();
@@ -532,6 +537,10 @@ void ChartView::OnTreeItemSelectionChanged(wxTreeEvent& event)
 		m_pgProplineThick->SetValue(data->GetThick());
 		m_pgProplineType->SetValue(data->GetPenType());
 		m_pgProplineAxis->SetValue(data->GetAxis());
+		data->SetHighlight(true);
+	}
+	if (m_plotLib == PlotLib::wxCHART_DIR) {
+		m_chartViewerDir->updateViewPort(true, false);
 	}
 	event.Skip();
 }
@@ -633,6 +642,8 @@ wxTreeItemId ChartView::UpdateAllPlotsCharDir(wxTreeItemId root, XYChart* chartD
 
 				std::vector<double> yValues = data->GetValues();
 
+				
+
 				LineLayer* layer = chartDir->addLineLayer();
 				layer->setFastLineMode();
 				layer->setLineWidth(data->GetThick());
@@ -652,20 +663,20 @@ wxTreeItemId ChartView::UpdateAllPlotsCharDir(wxTreeItemId root, XYChart* chartD
 
 				layer->addDataSet(DoubleArray(&yValues[0], yValues.size()), dataColour, data->GetName() + " (" + parentName + ")");
 
-				double minY = *std::min_element(yValues.begin(), yValues.end());
-				double maxY = *std::max_element(yValues.begin(), yValues.end());
+				if (data->IsHighlighted()) {
+					int hlColor = 0x80FFFF00;
+					LineLayer* hlLayer = chartDir->addLineLayer();
+					hlLayer->setFastLineMode();
+					hlLayer->setLineWidth(data->GetThick() * 3);
+					hlLayer->setXData(DoubleArray(&m_xAxisValues[0], m_xAxisValues.size()));
+					hlLayer->addDataSet(DoubleArray(&yValues[0], yValues.size()), hlColor);
+				}
+
 				if (m_firstPlot) {
 					m_firstPlot = false;
-					m_yMin = minY;
-					m_yMax = maxY;
 					m_sugestYLabel = data->GetName();
-
-					m_xMin = *std::min_element(m_xAxisValues.begin(), m_xAxisValues.end());
-					m_xMax = *std::max_element(m_xAxisValues.begin(), m_xAxisValues.end());
 				}
 				else {
-					if (minY < m_yMin) m_yMin = minY;
-					if (maxY > m_yMax) m_yMax = maxY;
 					if (m_sugestYLabel.IsEmpty() || (m_sugestYLabel != data->GetName())) m_sugestYLabel = "";
 				}
 			}
@@ -677,6 +688,7 @@ wxTreeItemId ChartView::UpdateAllPlotsCharDir(wxTreeItemId root, XYChart* chartD
 		}
 		item = m_treeCtrl->GetNextChild(root, cookie);
 	}
+
 
 	wxTreeItemId dummyID;
 	return dummyID;
@@ -820,7 +832,10 @@ void ChartView::DrawChartDir()
 		box->setLineStyleKey();
 	}
 	m_firstPlot = true;
+	CalcXYLimits(m_treeCtrl->GetRootItem(), chartDir);
+	m_firstPlot = true;
 	UpdateAllPlotsCharDir(m_treeCtrl->GetRootItem(), chartDir);
+
 
 	wxString xLabel = m_pgPropXLabel->GetValueAsString();
 	if (xLabel == _("auto")) xLabel = m_sugestXLabel;
@@ -1012,6 +1027,47 @@ wxString ChartView::GetUnitFromMagText(wxString magText)
 	else if (magText == _("Velocity")) unitText = " (rad/s)";
 	else if (magText == _("Slip")) unitText = " (%)";
 	return unitText;
+}
+
+wxTreeItemId ChartView::CalcXYLimits(wxTreeItemId root, XYChart* chartDir)
+{
+	wxTreeItemIdValue cookie;
+	wxTreeItemId item = m_treeCtrl->GetFirstChild(root, cookie);
+	wxTreeItemId child;
+
+	while (item.IsOk()) {
+		if (PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(item))) {
+			if (data->IsPlot()) {
+				wxString parentName = m_treeCtrl->GetItemText(m_treeCtrl->GetItemParent(item));
+
+				std::vector<double> yValues = data->GetValues();
+
+				double minY = *std::min_element(yValues.begin(), yValues.end());
+				double maxY = *std::max_element(yValues.begin(), yValues.end());
+				if (m_firstPlot) {
+					m_firstPlot = false;
+					m_yMin = minY;
+					m_yMax = maxY;
+
+					m_xMin = *std::min_element(m_xAxisValues.begin(), m_xAxisValues.end());
+					m_xMax = *std::max_element(m_xAxisValues.begin(), m_xAxisValues.end());
+				}
+				else {
+					if (minY < m_yMin) m_yMin = minY;
+					if (maxY > m_yMax) m_yMax = maxY;
+				}
+			}
+		}
+
+		if (m_treeCtrl->ItemHasChildren(item)) {
+			wxTreeItemId nextChild = CalcXYLimits(item, chartDir);
+			if (nextChild.IsOk()) return nextChild;
+		}
+		item = m_treeCtrl->GetNextChild(root, cookie);
+	}
+
+	wxTreeItemId dummyID;
+	return dummyID;
 }
 
 void ChartView::OnResize(wxSizeEvent& event)

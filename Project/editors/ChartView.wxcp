@@ -1165,7 +1165,7 @@
 														}, {
 															"type":	"string",
 															"m_label":	"String Value",
-															"m_value":	"1"
+															"m_value":	"2"
 														}, {
 															"type":	"multi-string",
 															"m_label":	"Choices:",
