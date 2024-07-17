@@ -109,8 +109,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)lib\$(wxOutDirName);$(SolutionDir)\vendors\chatdir\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>chartdir70.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;shell32.lib;shlwapi.lib;ole32.lib;oleaut32.lib;uuid.lib;advapi32.lib;version.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;wininet.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)lib\$(wxOutDirName);$(SolutionDir)\vendors\chatdir\win32;$(SolutionDir)\vendors\fftw\fftw-3.3.5-dll32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>chartdir70.lib;libfftw3-3.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;shell32.lib;shlwapi.lib;ole32.lib;oleaut32.lib;uuid.lib;advapi32.lib;version.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;wininet.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ManifestResourceCompile />
     <Manifest>
@@ -156,8 +156,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)lib\$(wxOutDirName);$(SolutionDir)\vendors\chatdir\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>chartdir70.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;shell32.lib;shlwapi.lib;ole32.lib;oleaut32.lib;uuid.lib;advapi32.lib;version.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;wininet.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)lib\$(wxOutDirName);$(SolutionDir)\vendors\chatdir\win32;$(SolutionDir)\vendors\fftw\fftw-3.3.5-dll32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>chartdir70.lib;libfftw3-3.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;shell32.lib;shlwapi.lib;ole32.lib;oleaut32.lib;uuid.lib;advapi32.lib;version.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;wininet.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>win_resources.rc</AdditionalManifestFiles>
@@ -190,12 +190,15 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="elements\powerElement\EMTElement.cpp" />
     <ClCompile Include="extLibs\wxChartDir\wxchartviewer.cpp" />
     <ClCompile Include="forms\AboutForm.cpp" />
     <ClCompile Include="elements\powerElement\Branch.cpp" />
     <ClCompile Include="elements\powerElement\Bus.cpp" />
+    <ClCompile Include="forms\ATPFileEditorForm.cpp" />
     <ClCompile Include="forms\BusForm.cpp" />
     <ClCompile Include="forms\BusFormBitmaps.cpp" />
+    <ClCompile Include="forms\EMTElementForm.cpp" />
     <ClCompile Include="utils\Camera.cpp" />
     <ClCompile Include="elements\powerElement\Capacitor.cpp" />
     <ClCompile Include="editors\ChartView.cpp" />
@@ -297,6 +300,8 @@
     <ClCompile Include="utils\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="elements\powerElement\EMTElement.h" />
+    <ClInclude Include="extLibs\fftw\fftw3.h" />
     <ClInclude Include="extLibs\wxChartDir\bchartdir.h" />
     <ClInclude Include="extLibs\wxChartDir\chartdir.h" />
     <ClInclude Include="extLibs\wxChartDir\memblock.h" />
@@ -306,7 +311,9 @@
     <ClInclude Include="forms\AboutForm.h" />
     <ClInclude Include="elements\powerElement\Branch.h" />
     <ClInclude Include="elements\powerElement\Bus.h" />
+    <ClInclude Include="forms\ATPFileEditorForm.h" />
     <ClInclude Include="forms\BusForm.h" />
+    <ClInclude Include="forms\EMTElementForm.h" />
     <ClInclude Include="utils\Camera.h" />
     <ClInclude Include="elements\powerElement\Capacitor.h" />
     <ClInclude Include="editors\ChartView.h" />

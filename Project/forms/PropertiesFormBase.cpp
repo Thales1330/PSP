@@ -45,12 +45,12 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelGeneral, _("General"), false);
     
-    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
-    m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    wxGridSizer* gridSizer1212 = new wxGridSizer(0, 2, 0, 0);
+    m_panelGeneral->SetSizer(gridSizer1212);
     
     wxBoxSizer* boxSizerLvl3_1 = new wxBoxSizer(wxVERTICAL);
     
-    boxSizerLvl2_1->Add(boxSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
+    gridSizer1212->Add(boxSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextLanguage = new wxStaticText(m_panelGeneral, wxID_ANY, _("Language"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
@@ -64,25 +64,9 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     
     boxSizerLvl3_1->Add(m_choiceLanguage, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizerLvl3_3 = new wxBoxSizer(wxVERTICAL);
-    
-    boxSizerLvl2_1->Add(boxSizerLvl3_3, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    m_staticTextPlotLib = new wxStaticText(m_panelGeneral, wxID_ANY, _("Plot library"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    
-    boxSizerLvl3_3->Add(m_staticTextPlotLib, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
-    wxArrayString m_choicePlotLibArr;
-    m_choicePlotLibArr.Add(_("Chart Director"));
-    m_choicePlotLibArr.Add(_("wxMathPlot"));
-    m_choicePlotLib = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choicePlotLibArr, 0);
-    m_choicePlotLib->SetSelection(0);
-    
-    boxSizerLvl3_3->Add(m_choicePlotLib, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
-    
     wxBoxSizer* boxSizerLvl3_2 = new wxBoxSizer(wxVERTICAL);
     
-    boxSizerLvl2_1->Add(boxSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));
+    gridSizer1212->Add(boxSizerLvl3_2, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextTheme = new wxStaticText(m_panelGeneral, wxID_ANY, _("Theme"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
@@ -96,6 +80,34 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     m_choiceTheme->SetSelection(0);
     
     boxSizerLvl3_2->Add(m_choiceTheme, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_3 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer1212->Add(boxSizerLvl3_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextPlotLib = new wxStaticText(m_panelGeneral, wxID_ANY, _("Plot library"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_3->Add(m_staticTextPlotLib, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choicePlotLibArr;
+    m_choicePlotLibArr.Add(_("Chart Director"));
+    m_choicePlotLibArr.Add(_("wxMathPlot"));
+    m_choicePlotLib = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choicePlotLibArr, 0);
+    m_choicePlotLib->SetSelection(0);
+    
+    boxSizerLvl3_3->Add(m_choicePlotLib, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_21 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer1212->Add(boxSizerLvl3_21, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextATPFolder = new wxStaticText(m_panelGeneral, wxID_ANY, _("ATP solver folder (.exe)"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_21->Add(m_staticTextATPFolder, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_filePickerATPFolder = new wxFilePickerCtrl(m_panelGeneral, wxID_ANY, wxEmptyString, _("Select the .exe file"), wxT("*.exe"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), wxFLP_DEFAULT_STYLE|wxFLP_SMALL);
+    
+    boxSizerLvl3_21->Add(m_filePickerATPFolder, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer_bottonButtons = new wxBoxSizer(wxHORIZONTAL);
     
@@ -376,15 +388,26 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     wxBoxSizer* boxSizerLvl2_3 = new wxBoxSizer(wxVERTICAL);
     m_panelStability->SetSizer(boxSizerLvl2_3);
     
+    m_notebookStab = new wxNotebook(m_panelStability, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebookStab->SetName(wxT("m_notebookStab"));
+    
+    boxSizerLvl2_3->Add(m_notebookStab, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelStabGeneral = new wxPanel(m_notebookStab, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookStab, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookStab->AddPage(m_panelStabGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizer1134 = new wxBoxSizer(wxVERTICAL);
+    m_panelStabGeneral->SetSizer(boxSizer1134);
+    
     wxGridSizer* gridSizerLvl_2_3 = new wxGridSizer(0, 2, 0, 0);
     
-    boxSizerLvl2_3->Add(gridSizerLvl_2_3, 0, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1134->Add(gridSizerLvl_2_3, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl3_6 = new wxBoxSizer(wxVERTICAL);
     
     gridSizerLvl_2_3->Add(boxSizerLvl3_6, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextTimeStep = new wxStaticText(m_panelStability, wxID_ANY, _("Time step"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextTimeStep = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("Time step"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl3_6->Add(m_staticTextTimeStep, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -392,14 +415,14 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl3_6->Add(boxSizerLvl4_6, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_textCtrlTimeStep = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("0,01"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_textCtrlTimeStep = new wxTextCtrl(m_panelStabGeneral, wxID_ANY, wxT("0,01"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlTimeStep->SetHint(wxT(""));
     #endif
     
     boxSizerLvl4_6->Add(m_textCtrlTimeStep, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticTextSec_1 = new wxStaticText(m_panelStability, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextSec_1 = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_6->Add(m_staticTextSec_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -407,7 +430,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     gridSizerLvl_2_3->Add(boxSizerLvl3_7, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextTSimTime = new wxStaticText(m_panelStability, wxID_ANY, _("Simulation time"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextTSimTime = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("Simulation time"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl3_7->Add(m_staticTextTSimTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -415,14 +438,14 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl3_7->Add(boxSizerLvl4_7, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_textCtrlSimTime = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("10"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_textCtrlSimTime = new wxTextCtrl(m_panelStabGeneral, wxID_ANY, wxT("10"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlSimTime->SetHint(wxT(""));
     #endif
     
     boxSizerLvl4_7->Add(m_textCtrlSimTime, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticTextSec_2 = new wxStaticText(m_panelStability, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextSec_2 = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_7->Add(m_staticTextSec_2, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -430,11 +453,11 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     gridSizerLvl_2_3->Add(boxSizerLvl3_8, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextTStabTolerance = new wxStaticText(m_panelStability, wxID_ANY, _("Tolerance"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextTStabTolerance = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("Tolerance"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl3_8->Add(m_staticTextTStabTolerance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_textCtrlStabTolerance = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("1e-8"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_textCtrlStabTolerance = new wxTextCtrl(m_panelStabGeneral, wxID_ANY, wxT("1e-8"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlStabTolerance->SetHint(wxT(""));
     #endif
@@ -445,11 +468,11 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     gridSizerLvl_2_3->Add(boxSizerLvl3_9, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextTStabMaxIterations = new wxStaticText(m_panelStability, wxID_ANY, _("Max. Iterations"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextTStabMaxIterations = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("Max. Iterations"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl3_9->Add(m_staticTextTStabMaxIterations, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_textCtrlStabMaxIterations = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("100"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_textCtrlStabMaxIterations = new wxTextCtrl(m_panelStabGeneral, wxID_ANY, wxT("100"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlStabMaxIterations->SetHint(wxT(""));
     #endif
@@ -460,11 +483,11 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     gridSizerLvl_2_3->Add(boxSizerLvl3_10, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextCtrlStepRation = new wxStaticText(m_panelStability, wxID_ANY, _("Controls step ratio"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextCtrlStepRation = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("Controls step ratio"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl3_10->Add(m_staticTextCtrlStepRation, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_textCtrlCtrlStepRatio = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("10"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_textCtrlCtrlStepRatio = new wxTextCtrl(m_panelStabGeneral, wxID_ANY, wxT("10"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlCtrlStepRatio->SetHint(wxT(""));
     #endif
@@ -475,7 +498,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     gridSizerLvl_2_3->Add(boxSizerLvl3_11, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextPrintTime = new wxStaticText(m_panelStability, wxID_ANY, _("Plot time"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextPrintTime = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("Plot time"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl3_11->Add(m_staticTextPrintTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -483,24 +506,24 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl3_11->Add(boxSizerLvl4_8, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_textCtrlPrintTime = new wxTextCtrl(m_panelStability, wxID_ANY, wxT("0,01"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_textCtrlPrintTime = new wxTextCtrl(m_panelStabGeneral, wxID_ANY, wxT("0,01"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlPrintTime->SetHint(wxT(""));
     #endif
     
     boxSizerLvl4_8->Add(m_textCtrlPrintTime, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticTextSec_4 = new wxStaticText(m_panelStability, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_staticTextSec_4 = new wxStaticText(m_panelStabGeneral, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_8->Add(m_staticTextSec_4, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_checkBoxUseCOI = new wxCheckBox(m_panelStability, wxID_ANY, _("Use center of inertia as reference"), wxDefaultPosition, wxDLG_UNIT(m_panelStability, wxSize(-1,-1)), 0);
+    m_checkBoxUseCOI = new wxCheckBox(m_panelStabGeneral, wxID_ANY, _("Use center of inertia as reference"), wxDefaultPosition, wxDLG_UNIT(m_panelStabGeneral, wxSize(-1,-1)), 0);
     m_checkBoxUseCOI->SetValue(true);
     
-    boxSizerLvl2_3->Add(m_checkBoxUseCOI, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer1134->Add(m_checkBoxUseCOI, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_panelLoadComp = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
-    m_notebook->AddPage(m_panelLoadComp, _("ZIP Load"), false);
+    m_panelLoadComp = new wxPanel(m_notebookStab, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookStab, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookStab->AddPage(m_panelLoadComp, _("ZIP Load"), false);
     
     wxBoxSizer* boxSizerLvl2_4 = new wxBoxSizer(wxVERTICAL);
     m_panelLoadComp->SetSizer(boxSizerLvl2_4);
@@ -714,6 +737,63 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl5_16->Add(m_staticTextPerc_8, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
+    m_panelStabBusFreq = new wxPanel(m_notebookStab, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebookStab, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebookStab->AddPage(m_panelStabBusFreq, _("Bus Frequency"), false);
+    
+    wxBoxSizer* boxSizer1136 = new wxBoxSizer(wxVERTICAL);
+    m_panelStabBusFreq->SetSizer(boxSizer1136);
+    
+    wxArrayString m_radioBoxBusFreqEstimationArr;
+    m_radioBoxBusFreqEstimationArr.Add(_("Angle derivation"));
+    m_radioBoxBusFreqEstimationArr.Add(_("Washout filter"));
+    m_radioBoxBusFreqEstimation = new wxRadioBox(m_panelStabBusFreq, wxID_ANY, _("Estimation method"), wxDefaultPosition, wxDLG_UNIT(m_panelStabBusFreq, wxSize(-1,-1)), m_radioBoxBusFreqEstimationArr, 1, wxRA_SPECIFY_ROWS);
+    m_radioBoxBusFreqEstimation->SetSelection(0);
+    
+    boxSizer1136->Add(m_radioBoxBusFreqEstimation, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxBusFreqIgnoreEvent = new wxCheckBox(m_panelStabBusFreq, wxID_ANY, _("Ignore event step"), wxDefaultPosition, wxDLG_UNIT(m_panelStabBusFreq, wxSize(-1,-1)), 0);
+    m_checkBoxBusFreqIgnoreEvent->SetValue(true);
+    
+    boxSizer1136->Add(m_checkBoxBusFreqIgnoreEvent, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizerLvl_3_41 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizer1136->Add(gridSizerLvl_3_41, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_222 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_3_41->Add(boxSizerLvl4_222, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTf = new wxStaticText(m_panelStabBusFreq, wxID_ANY, _("Time constant Tf"), wxDefaultPosition, wxDLG_UNIT(m_panelStabBusFreq, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_222->Add(m_staticTextTf, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlTf = new wxTextCtrl(m_panelStabBusFreq, wxID_ANY, wxT("0.05"), wxDefaultPosition, wxDLG_UNIT(m_panelStabBusFreq, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTf->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_222->Add(m_textCtrlTf, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_35 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizerLvl_3_41->Add(boxSizerLvl4_35, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextTw = new wxStaticText(m_panelStabBusFreq, wxID_ANY, _("Time constant Tw"), wxDefaultPosition, wxDLG_UNIT(m_panelStabBusFreq, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_35->Add(m_staticTextTw, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlTw = new wxTextCtrl(m_panelStabBusFreq, wxID_ANY, wxT("7.9577e-3"), wxDefaultPosition, wxDLG_UNIT(m_panelStabBusFreq, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlTw->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl4_35->Add(m_textCtrlTw, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticBitmapDiagram = new wxStaticBitmap(m_panelStabBusFreq, wxID_ANY, wxXmlResource::Get()->LoadBitmap(wxT("WF-en")), wxDefaultPosition, wxDLG_UNIT(m_panelStabBusFreq, wxSize(-1,-1)), 0 );
+    
+    boxSizer1136->Add(m_staticBitmapDiagram, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, WXC_FROM_DIP(5));
+    
     m_panelHarmonics = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelHarmonics, _("Harmonics"), false);
     
@@ -760,6 +840,14 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     }
     #endif
     
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebookStab)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebookStab);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebookStab);
+    }
+    #endif
+    
     SetName(wxT("SimulationsSettingsFormBase"));
     SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
     if (GetSizer()) {
@@ -778,6 +866,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     // Connect events
     m_choicePFMethod->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &SimulationsSettingsFormBase::OnPFMethodChoiceSelected, this);
     m_checkBoxUseCompLoads->Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick, this);
+    m_radioBoxBusFreqEstimation->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &SimulationsSettingsFormBase::OnBusFreqEstimationSelect, this);
     m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonOKClick, this);
     m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonCancelClick, this);
     
@@ -787,6 +876,7 @@ SimulationsSettingsFormBase::~SimulationsSettingsFormBase()
 {
     m_choicePFMethod->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &SimulationsSettingsFormBase::OnPFMethodChoiceSelected, this);
     m_checkBoxUseCompLoads->Unbind(wxEVT_COMMAND_CHECKBOX_CLICKED, &SimulationsSettingsFormBase::OnCheckboxUseCompLoadClick, this);
+    m_radioBoxBusFreqEstimation->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &SimulationsSettingsFormBase::OnBusFreqEstimationSelect, this);
     m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonOKClick, this);
     m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SimulationsSettingsFormBase::OnButtonCancelClick, this);
     

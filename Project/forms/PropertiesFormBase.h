@@ -21,15 +21,16 @@
 #include <wx/stattext.h>
 #include <wx/choice.h>
 #include <wx/arrstr.h>
+#include <wx/filepicker.h>
 #include <wx/button.h>
 #include <wx/textctrl.h>
 #include <wx/statbox.h>
 #include <wx/checkbox.h>
+#include <wx/radiobox.h>
 #include <wx/statbmp.h>
 #include <wx/grid.h>
 #include <wx/richtext/richtextctrl.h>
 #include <wx/hyperlink.h>
-#include <wx/filepicker.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -55,10 +56,12 @@ protected:
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextLanguage;
     wxChoice* m_choiceLanguage;
-    wxStaticText* m_staticTextPlotLib;
-    wxChoice* m_choicePlotLib;
     wxStaticText* m_staticTextTheme;
     wxChoice* m_choiceTheme;
+    wxStaticText* m_staticTextPlotLib;
+    wxChoice* m_choicePlotLib;
+    wxStaticText* m_staticTextATPFolder;
+    wxFilePickerCtrl* m_filePickerATPFolder;
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
@@ -69,10 +72,12 @@ protected:
 public:
     wxStaticText* GetStaticTextLanguage() { return m_staticTextLanguage; }
     wxChoice* GetChoiceLanguage() { return m_choiceLanguage; }
-    wxStaticText* GetStaticTextPlotLib() { return m_staticTextPlotLib; }
-    wxChoice* GetChoicePlotLib() { return m_choicePlotLib; }
     wxStaticText* GetStaticTextTheme() { return m_staticTextTheme; }
     wxChoice* GetChoiceTheme() { return m_choiceTheme; }
+    wxStaticText* GetStaticTextPlotLib() { return m_staticTextPlotLib; }
+    wxChoice* GetChoicePlotLib() { return m_choicePlotLib; }
+    wxStaticText* GetStaticTextATPFolder() { return m_staticTextATPFolder; }
+    wxFilePickerCtrl* GetFilePickerATPFolder() { return m_filePickerATPFolder; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
@@ -113,6 +118,8 @@ protected:
     wxStaticText* m_staticTextPFGaussTolerance;
     wxTextCtrl* m_textCtrlPFGaussTolerance;
     wxPanel* m_panelStability;
+    wxNotebook* m_notebookStab;
+    wxPanel* m_panelStabGeneral;
     wxStaticText* m_staticTextTimeStep;
     wxTextCtrl* m_textCtrlTimeStep;
     wxStaticText* m_staticTextSec_1;
@@ -156,6 +163,14 @@ protected:
     wxStaticText* m_staticTextUVPow;
     wxTextCtrl* m_textCtrlUVPow;
     wxStaticText* m_staticTextPerc_8;
+    wxPanel* m_panelStabBusFreq;
+    wxRadioBox* m_radioBoxBusFreqEstimation;
+    wxCheckBox* m_checkBoxBusFreqIgnoreEvent;
+    wxStaticText* m_staticTextTf;
+    wxTextCtrl* m_textCtrlTf;
+    wxStaticText* m_staticTextTw;
+    wxTextCtrl* m_textCtrlTw;
+    wxStaticBitmap* m_staticBitmapDiagram;
     wxPanel* m_panelHarmonics;
     wxStaticText* m_staticTextLoadConnection;
     wxChoice* m_choiceHarmLoadConn;
@@ -165,6 +180,7 @@ protected:
 protected:
     virtual void OnPFMethodChoiceSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCheckboxUseCompLoadClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnBusFreqEstimationSelect(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonCancelClick(wxCommandEvent& event) { event.Skip(); }
 
@@ -211,7 +227,7 @@ public:
     wxTextCtrl* GetTextCtrlPrintTime() { return m_textCtrlPrintTime; }
     wxStaticText* GetStaticTextSec_4() { return m_staticTextSec_4; }
     wxCheckBox* GetCheckBoxUseCOI() { return m_checkBoxUseCOI; }
-    wxPanel* GetPanelStability() { return m_panelStability; }
+    wxPanel* GetPanelStabGeneral() { return m_panelStabGeneral; }
     wxCheckBox* GetCheckBoxUseCompLoads() { return m_checkBoxUseCompLoads; }
     wxStaticText* GetStaticTextActivePowerImp() { return m_staticTextActivePowerImp; }
     wxTextCtrl* GetTextCtrlActivePowerImp() { return m_textCtrlActivePowerImp; }
@@ -239,6 +255,16 @@ public:
     wxTextCtrl* GetTextCtrlUVPow() { return m_textCtrlUVPow; }
     wxStaticText* GetStaticTextPerc_8() { return m_staticTextPerc_8; }
     wxPanel* GetPanelLoadComp() { return m_panelLoadComp; }
+    wxRadioBox* GetRadioBoxBusFreqEstimation() { return m_radioBoxBusFreqEstimation; }
+    wxCheckBox* GetCheckBoxBusFreqIgnoreEvent() { return m_checkBoxBusFreqIgnoreEvent; }
+    wxStaticText* GetStaticTextTf() { return m_staticTextTf; }
+    wxTextCtrl* GetTextCtrlTf() { return m_textCtrlTf; }
+    wxStaticText* GetStaticTextTw() { return m_staticTextTw; }
+    wxTextCtrl* GetTextCtrlTw() { return m_textCtrlTw; }
+    wxStaticBitmap* GetStaticBitmapDiagram() { return m_staticBitmapDiagram; }
+    wxPanel* GetPanelStabBusFreq() { return m_panelStabBusFreq; }
+    wxNotebook* GetNotebookStab() { return m_notebookStab; }
+    wxPanel* GetPanelStability() { return m_panelStability; }
     wxStaticText* GetStaticTextLoadConnection() { return m_staticTextLoadConnection; }
     wxChoice* GetChoiceHarmLoadConn() { return m_choiceHarmLoadConn; }
     wxPanel* GetPanelHarmonics() { return m_panelHarmonics; }

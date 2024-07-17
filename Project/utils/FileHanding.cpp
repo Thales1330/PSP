@@ -246,6 +246,17 @@ void FileHanding::SaveProject(wxFileName path)
     }
     //}
 
+    //{ EMTElement
+    auto emtElementNode = XMLParser::AppendNode(doc, elementsNode, "EMTElementList");
+    auto emtElementList = allElements.GetEMTElementList();
+    elementID = 0;
+    for (auto it = emtElementList.begin(), itEnd = emtElementList.end(); it != itEnd; ++it) {
+        (*it)->SetID(elementID);
+        (*it)->SaveElement(doc, emtElementNode);
+        elementID++;
+    }
+    //}
+
     //{ Text
     auto textsNode = XMLParser::AppendNode(doc, elementsNode, "TextList");
     auto textList = m_workspace->GetTextList();
@@ -349,6 +360,7 @@ bool FileHanding::OpenProject(wxFileName path)
     std::vector<SyncMotor*> syncMotorList;
     std::vector<Transformer*> transformerList;
     std::vector<HarmCurrent*> harmCurrentList;
+    std::vector<EMTElement*> emtElementList;
     std::vector<Text*> textList;
 
     // List of parents
@@ -509,6 +521,20 @@ bool FileHanding::OpenProject(wxFileName path)
             harmCurrentList.push_back(harmCurrent);
 
             harmCurrentNode = harmCurrentNode->next_sibling("HarmCurrent");
+        }
+    }  //}
+    //{ HarmCurrent
+    auto emtElementListNode = elementsNode->first_node("EMTElementList");
+    if (emtElementListNode) {
+        auto emtElementNode = emtElementListNode->first_node("EMTElement");
+        while (emtElementNode) {
+            EMTElement* emtElement = new EMTElement();
+
+            if (!emtElement->OpenElement(emtElementNode, parentList)) return false;
+            elementList.push_back(emtElement);
+            emtElementList.push_back(emtElement);
+
+            emtElementNode = emtElementNode->next_sibling("EMTElement");
         }
     }  //}
 

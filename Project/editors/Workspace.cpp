@@ -34,6 +34,7 @@
 #include "../elements/powerElement/SyncGenerator.h"
 #include "../elements/powerElement/SyncMotor.h"
 #include "../elements/powerElement/Transformer.h"
+#include "../elements/powerElement/EMTElement.h"
 
 #include "../simulation/Electromechanical.h"
 #include "../simulation/Fault.h"
@@ -863,7 +864,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					IncrementElementNumber(ID_LOAD);
 					m_elementList.push_back(newLoad);
 					m_mode = WorkspaceMode::MODE_INSERT;
-					m_statusBar->SetStatusText(_("Insert Load: Click on a buses, ESC to cancel."));
+					m_statusBar->SetStatusText(_("Insert Load: Click on a bus, ESC to cancel."));
 				}
 				else if (!event.ControlDown() && !event.ShiftDown()) {  // Insert a power line.
 					Line* newLine = new Line(wxString::Format(_("Line %d"), GetElementNumber(ID_LINE)));
@@ -902,7 +903,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				IncrementElementNumber(ID_SYNCGENERATOR);
 				m_elementList.push_back(newGenerator);
 				m_mode = WorkspaceMode::MODE_INSERT;
-				m_statusBar->SetStatusText(_("Insert Generator: Click on a buses, ESC to cancel."));
+				m_statusBar->SetStatusText(_("Insert Generator: Click on a bus, ESC to cancel."));
 				if (m_hmPlane && m_showHM) {
 					m_hmPlane->Clear();
 				}
@@ -917,7 +918,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					IncrementElementNumber(ID_INDUCTOR);
 					m_elementList.push_back(newInductor);
 					m_mode = WorkspaceMode::MODE_INSERT;
-					m_statusBar->SetStatusText(_("Insert Inductor: Click on a buses, ESC to cancel."));
+					m_statusBar->SetStatusText(_("Insert Inductor: Click on a bus, ESC to cancel."));
 				}
 				else  // Insert an induction motor.
 				{
@@ -926,7 +927,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					IncrementElementNumber(ID_INDMOTOR);
 					m_elementList.push_back(newIndMotor);
 					m_mode = WorkspaceMode::MODE_INSERT;
-					m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a buses, ESC to cancel."));
+					m_statusBar->SetStatusText(_("Insert Induction Motor: Click on a bus, ESC to cancel."));
 				}
 				if (m_hmPlane && m_showHM) {
 					m_hmPlane->Clear();
@@ -942,7 +943,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				IncrementElementNumber(ID_SYNCMOTOR);
 				m_elementList.push_back(newSyncCondenser);
 				m_mode = WorkspaceMode::MODE_INSERT;
-				m_statusBar->SetStatusText(_("Insert Synchronous Condenser: Click on a buses, ESC to cancel."));
+				m_statusBar->SetStatusText(_("Insert Synchronous Condenser: Click on a bus, ESC to cancel."));
 				if (m_hmPlane && m_showHM) {
 					m_hmPlane->Clear();
 				}
@@ -957,7 +958,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					IncrementElementNumber(ID_CAPACITOR);
 					m_elementList.push_back(newCapacitor);
 					m_mode = WorkspaceMode::MODE_INSERT;
-					m_statusBar->SetStatusText(_("Insert Capacitor: Click on a buses, ESC to cancel."));
+					m_statusBar->SetStatusText(_("Insert Capacitor: Click on a bus, ESC to cancel."));
 					if (m_hmPlane && m_showHM) {
 						m_hmPlane->Clear();
 					}
@@ -987,7 +988,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 					m_elementList.push_back(newHarmCurrent);
 					m_mode = WorkspaceMode::MODE_INSERT;
 					m_statusBar->SetStatusText(
-						_("Insert Harmonic Current Source: Click on a buses, ESC to cancel."));
+						_("Insert Harmonic Current Source: Click on a bus, ESC to cancel."));
 				}
 				if (m_hmPlane && m_showHM) {
 					m_hmPlane->Clear();
@@ -1009,6 +1010,24 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'Y': {
 			if (!insertingElement) {
 				if (event.GetModifiers() == wxMOD_CONTROL) { SetNextState(); }
+			}
+		} break;
+		case 'E': {
+			if (!insertingElement) {
+				if (event.GetModifiers() == wxMOD_SHIFT) {
+
+					if (!insertingElement) {
+						EMTElement* newEMTElement = new EMTElement(wxString::Format(_("Electromagnetic Element %d"), GetElementNumber(ID_EMTELEMENT)));
+						IncrementElementNumber(ID_EMTELEMENT);
+						m_elementList.push_back(newEMTElement);
+						m_mode = WorkspaceMode::MODE_INSERT;
+						m_statusBar->SetStatusText(_("Insert Electromagnetic Transient Element: Click on a bus, ESC to cancel."));
+						if (m_hmPlane && m_showHM) {
+							m_hmPlane->Clear();
+						}
+						Redraw();
+					}
+				}
 			}
 		} break;
 #ifdef _DEBUG
@@ -1092,7 +1111,7 @@ void Workspace::GetStateListsCopy(const std::vector<PowerElement*>& elementsList
 		PowerElement* copyElement = static_cast<PowerElement*>(element->GetCopy());
 		elementsListCopy.emplace_back(copyElement);
 		elementMap[element] = copyElement;
-	}
+}
 	// Correct the parent and child pointers
 	for (PowerElement*& copyElement : elementsListCopy) {
 		// Parent
@@ -2053,8 +2072,8 @@ void Workspace::SetPreviousState()
 	}
 	else {
 		m_currenteState++;
+		}
 	}
-}
 
 void Workspace::UnselectAll()
 {
@@ -2306,12 +2325,12 @@ bool Workspace::RunStaticStudies()
 	}
 	else {
 		harmStatus = true;
-	}
+}
 
 	if (pfStatus && faultStatus && scStatus && harmStatus) return true;
 
 	return false;
-}
+	}
 
 bool Workspace::RunHarmonicDistortion()
 {
@@ -2338,7 +2357,7 @@ bool Workspace::RunHarmonicDistortion()
 	}
 
 	return result;
-}
+	}
 
 bool Workspace::RunFrequencyResponse()
 {

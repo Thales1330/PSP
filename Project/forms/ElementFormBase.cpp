@@ -4302,3 +4302,356 @@ HarmCurrentFormBase::~HarmCurrentFormBase()
     m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &HarmCurrentFormBase::OnCancelButtonClick, this);
     
 }
+
+EMTElementFormBase::EMTElementFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer2193 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer2193);
+    
+    m_notebook20 = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_notebook20->SetName(wxT("m_notebook20"));
+    
+    boxSizer2193->Add(m_notebook20, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelEMTGeneral = new wxPanel(m_notebook20, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook20, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook20->AddPage(m_panelEMTGeneral, _("General"), false);
+    
+    wxBoxSizer* boxSizer2359 = new wxBoxSizer(wxVERTICAL);
+    m_panelEMTGeneral->SetSizer(boxSizer2359);
+    
+    wxBoxSizer* boxSizerLvl2_217 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizer2359->Add(boxSizerLvl2_217, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextName = new wxStaticText(m_panelEMTGeneral, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_217->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlName = new wxTextCtrl(m_panelEMTGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlName->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_217->Add(m_textCtrlName, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlName->SetMinSize(wxSize(300,-1));
+    
+    wxBoxSizer* boxSizerLvl2_14 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizer2359->Add(boxSizerLvl2_14, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextATPFile = new wxStaticText(m_panelEMTGeneral, wxID_ANY, _("ATP File (.atp)"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_14->Add(m_staticTextATPFile, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_filePickerATPFile = new wxFilePickerCtrl(m_panelEMTGeneral, wxID_ANY, wxEmptyString, _("Select an ATP file"), wxT("ATP files (*.atp)|*.atp"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), wxFLP_DEFAULT_STYLE|wxFLP_SMALL|wxFLP_OPEN);
+    
+    boxSizerLvl2_14->Add(m_filePickerATPFile, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxGridSizer* gridSizer2405 = new wxGridSizer(0, 2, 0, 0);
+    
+    boxSizer2359->Add(gridSizer2405, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl2_113 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2405->Add(boxSizerLvl2_113, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextNode = new wxStaticText(m_panelEMTGeneral, wxID_ANY, _("Node connection"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_113->Add(m_staticTextNode, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxArrayString m_choiceNodesArr;
+    m_choiceNodes = new wxChoice(m_panelEMTGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), m_choiceNodesArr, 0);
+    wxFont m_choiceNodesFont(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Courier New"));
+    m_choiceNodes->SetFont(m_choiceNodesFont);
+    
+    boxSizerLvl2_113->Add(m_choiceNodes, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_711 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2405->Add(boxSizerLvl4_711, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextStepSize = new wxStaticText(m_panelEMTGeneral, wxID_ANY, _("Step size"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_711->Add(m_staticTextStepSize, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_413 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_711->Add(boxSizerLvl5_413, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlStepSize = new wxTextCtrl(m_panelEMTGeneral, wxID_ANY, wxT("1e-6"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlStepSize->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_413->Add(m_textCtrlStepSize, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextSec2 = new wxStaticText(m_panelEMTGeneral, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_413->Add(m_staticTextSec2, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl2_1132 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2405->Add(boxSizerLvl2_1132, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextCyclesSS = new wxStaticText(m_panelEMTGeneral, wxID_ANY, _("Cycles simulated for steady-state"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_1132->Add(m_staticTextCyclesSS, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_spinCtrlCyclesToSS = new wxSpinCtrl(m_panelEMTGeneral, wxID_ANY, wxT("1"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), wxSP_ARROW_KEYS);
+    m_spinCtrlCyclesToSS->SetRange(1, 100);
+    m_spinCtrlCyclesToSS->SetValue(1);
+    
+    boxSizerLvl2_1132->Add(m_spinCtrlCyclesToSS, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl2_2174 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2405->Add(boxSizerLvl2_2174, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextRF = new wxStaticText(m_panelEMTGeneral, wxID_ANY, _("Steps to record data"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_2174->Add(m_staticTextRF, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlRecFreq = new wxTextCtrl(m_panelEMTGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlRecFreq->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl2_2174->Add(m_textCtrlRecFreq, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl2_21745 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer2405->Add(boxSizerLvl2_21745, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxUseFilter = new wxCheckBox(m_panelEMTGeneral, wxID_ANY, _("Use median filter"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    m_checkBoxUseFilter->SetValue(true);
+    
+    boxSizerLvl2_21745->Add(m_checkBoxUseFilter, 1, wxLEFT|wxRIGHT|wxEXPAND|wxALIGN_LEFT, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer2371 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer2359->Add(boxSizer2371, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizer2371->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_buttonEditATPFile = new wxButton(m_panelEMTGeneral, wxID_ANY, _("Edit ATP File"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizer2371->Add(m_buttonEditATPFile, 0, wxALL|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+    
+    m_buttonTest = new wxButton(m_panelEMTGeneral, wxID_ANY, _("Test"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizer2371->Add(m_buttonTest, 0, wxALL|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+    
+    m_panelEMTHarmonics = new wxPanel(m_notebook20, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook20, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_notebook20->AddPage(m_panelEMTHarmonics, _("Harmonics"), false);
+    
+    wxBoxSizer* boxSizer2423 = new wxBoxSizer(wxVERTICAL);
+    m_panelEMTHarmonics->SetSizer(boxSizer2423);
+    
+    wxBoxSizer* boxSizerLvl2_11321 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizer2423->Add(boxSizerLvl2_11321, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextNumHarmonics = new wxStaticText(m_panelEMTHarmonics, wxID_ANY, _("Maximum number of harmonics"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTHarmonics, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl2_11321->Add(m_staticTextNumHarmonics, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_spinCtrlMaxNumHarmonics = new wxSpinCtrl(m_panelEMTHarmonics, wxID_ANY, wxT("15"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTHarmonics, wxSize(-1,-1)), wxSP_ARROW_KEYS);
+    m_spinCtrlMaxNumHarmonics->SetRange(1, 100);
+    m_spinCtrlMaxNumHarmonics->SetValue(15);
+    
+    boxSizerLvl2_11321->Add(m_spinCtrlMaxNumHarmonics, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl4_7114 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizer2423->Add(boxSizerLvl4_7114, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextHarmThreshold = new wxStaticText(m_panelEMTHarmonics, wxID_ANY, _("Threshold to detect harmonics"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTHarmonics, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl4_7114->Add(m_staticTextHarmThreshold, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl5_4136 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerLvl4_7114->Add(boxSizerLvl5_4136, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_textCtrlHarmThreshold = new wxTextCtrl(m_panelEMTHarmonics, wxID_ANY, wxT("0,3"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTHarmonics, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlHarmThreshold->SetHint(wxT(""));
+    #endif
+    
+    boxSizerLvl5_4136->Add(m_textCtrlHarmThreshold, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticTextPercFund = new wxStaticText(m_panelEMTHarmonics, wxID_ANY, _("% of fundamental"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTHarmonics, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl5_4136->Add(m_staticTextPercFund, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons9 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer2193->Add(boxSizerBottomButtons9, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons9->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons9->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_ButtonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons9->Add(m_ButtonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_notebook20)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_notebook20);
+    } else {
+        wxPersistenceManager::Get().Restore(m_notebook20);
+    }
+    #endif
+    
+    SetName(wxT("EMTElementFormBase"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+    // Connect events
+    m_filePickerATPFile->Bind(wxEVT_COMMAND_FILEPICKER_CHANGED, &EMTElementFormBase::OnATPFileChange, this);
+    m_buttonEditATPFile->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnEditATPFileClick, this);
+    m_buttonTest->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnTestClick, this);
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnOKClick, this);
+    m_ButtonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnCancelClick, this);
+    
+}
+
+EMTElementFormBase::~EMTElementFormBase()
+{
+    m_filePickerATPFile->Unbind(wxEVT_COMMAND_FILEPICKER_CHANGED, &EMTElementFormBase::OnATPFileChange, this);
+    m_buttonEditATPFile->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnEditATPFileClick, this);
+    m_buttonTest->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnTestClick, this);
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnOKClick, this);
+    m_ButtonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &EMTElementFormBase::OnCancelClick, this);
+    
+}
+
+ATPFileEditorFormBase::ATPFileEditorFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9EE9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer2361 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer2361);
+    
+    m_stcATPFile = new wxStyledTextCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    wxFont m_stcATPFileFont(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Courier New"));
+    m_stcATPFile->SetFont(m_stcATPFileFont);
+    // Configure the fold margin
+    m_stcATPFile->SetMarginType     (4, wxSTC_MARGIN_SYMBOL);
+    m_stcATPFile->SetMarginMask     (4, wxSTC_MASK_FOLDERS);
+    m_stcATPFile->SetMarginSensitive(4, true);
+    m_stcATPFile->SetMarginWidth    (4, 16);
+    
+    m_stcATPFile->SetProperty(wxT("fold"),wxT("1"));
+    m_stcATPFile->MarkerDefine(wxSTC_MARKNUM_FOLDEROPEN,    wxSTC_MARK_ARROWDOWN);
+    m_stcATPFile->MarkerDefine(wxSTC_MARKNUM_FOLDER,        wxSTC_MARK_ARROW);
+    m_stcATPFile->MarkerDefine(wxSTC_MARKNUM_FOLDERSUB,     wxSTC_MARK_BACKGROUND);
+    m_stcATPFile->MarkerDefine(wxSTC_MARKNUM_FOLDERTAIL,    wxSTC_MARK_BACKGROUND);
+    m_stcATPFile->MarkerDefine(wxSTC_MARKNUM_FOLDEREND,     wxSTC_MARK_ARROW);
+    m_stcATPFile->MarkerDefine(wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_ARROWDOWN);
+    m_stcATPFile->MarkerDefine(wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_BACKGROUND);
+    // Configure the tracker margin
+    m_stcATPFile->SetMarginWidth(1, 0);
+    
+    // Configure the symbol margin
+    m_stcATPFile->SetMarginType (2, wxSTC_MARGIN_SYMBOL);
+    m_stcATPFile->SetMarginMask (2, ~(wxSTC_MASK_FOLDERS));
+    m_stcATPFile->SetMarginWidth(2, 0);
+    m_stcATPFile->SetMarginSensitive(2, true);
+    
+    // Configure the line numbers margin
+    int m_stcATPFile_PixelWidth = 4 + 5 *m_stcATPFile->TextWidth(wxSTC_STYLE_LINENUMBER, wxT("9"));
+    m_stcATPFile->SetMarginType(0, wxSTC_MARGIN_NUMBER);
+    m_stcATPFile->SetMarginWidth(0,m_stcATPFile_PixelWidth);
+    
+    // Configure the line symbol margin
+    m_stcATPFile->SetMarginType(3, wxSTC_MARGIN_FORE);
+    m_stcATPFile->SetMarginMask(3, 0);
+    m_stcATPFile->SetMarginWidth(3,0);
+    // Select the lexer
+    m_stcATPFile->SetLexer(wxSTC_LEX_F77);
+    // Set default font / styles
+    m_stcATPFile->StyleClearAll();
+    for(int i=0; i<wxSTC_STYLE_MAX; ++i) {
+        m_stcATPFile->StyleSetFont(i, m_stcATPFileFont);
+    }
+    m_stcATPFile->SetWrapMode(1);
+    m_stcATPFile->SetIndentationGuides(0);
+    m_stcATPFile->SetKeyWords(0, wxT(""));
+    m_stcATPFile->SetKeyWords(1, wxT(""));
+    m_stcATPFile->SetKeyWords(2, wxT(""));
+    m_stcATPFile->SetKeyWords(3, wxT(""));
+    m_stcATPFile->SetKeyWords(4, wxT(""));
+    
+    boxSizer2361->Add(m_stcATPFile, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerBottomButtons91 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer2361->Add(boxSizerBottomButtons91, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizerBottomButtons91->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons91->Add(m_buttonOK, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_ButtonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizerBottomButtons91->Add(m_ButtonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    SetName(wxT("ATPFileEditorFormBase"));
+    SetSize(wxDLG_UNIT(this, wxSize(500,300)));
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+    // Connect events
+    m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ATPFileEditorFormBase::OnOKClick, this);
+    m_ButtonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ATPFileEditorFormBase::OnCancelClick, this);
+    
+}
+
+ATPFileEditorFormBase::~ATPFileEditorFormBase()
+{
+    m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ATPFileEditorFormBase::OnOKClick, this);
+    m_ButtonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ATPFileEditorFormBase::OnCancelClick, this);
+    
+}

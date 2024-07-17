@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
-#define _PSP_PROJECT_ELEMENTFORM_BASE_CLASSES_H
+#ifndef _PROJECT_FORMS_ELEMENTFORM_BASE_CLASSES_H
+#define _PROJECT_FORMS_ELEMENTFORM_BASE_CLASSES_H
 
 // clang-format off
 #include <wx/settings.h>
@@ -31,6 +31,8 @@
 #include <wx/propgrid/advprops.h>
 #include <wx/listctrl.h>
 #include <wx/stc/stc.h>
+#include <wx/filepicker.h>
+#include <wx/spinctrl.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -1202,6 +1204,95 @@ public:
     wxButton* GetButtonCancel() { return m_buttonCancel; }
     HarmCurrentFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Switching"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~HarmCurrentFormBase();
+};
+
+
+class EMTElementFormBase : public wxDialog
+{
+protected:
+    wxNotebook* m_notebook20;
+    wxPanel* m_panelEMTGeneral;
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
+    wxStaticText* m_staticTextATPFile;
+    wxFilePickerCtrl* m_filePickerATPFile;
+    wxStaticText* m_staticTextNode;
+    wxChoice* m_choiceNodes;
+    wxStaticText* m_staticTextStepSize;
+    wxTextCtrl* m_textCtrlStepSize;
+    wxStaticText* m_staticTextSec2;
+    wxStaticText* m_staticTextCyclesSS;
+    wxSpinCtrl* m_spinCtrlCyclesToSS;
+    wxStaticText* m_staticTextRF;
+    wxTextCtrl* m_textCtrlRecFreq;
+    wxCheckBox* m_checkBoxUseFilter;
+    wxButton* m_buttonEditATPFile;
+    wxButton* m_buttonTest;
+    wxPanel* m_panelEMTHarmonics;
+    wxStaticText* m_staticTextNumHarmonics;
+    wxSpinCtrl* m_spinCtrlMaxNumHarmonics;
+    wxStaticText* m_staticTextHarmThreshold;
+    wxTextCtrl* m_textCtrlHarmThreshold;
+    wxStaticText* m_staticTextPercFund;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnATPFileChange(wxFileDirPickerEvent& event) { event.Skip(); }
+    virtual void OnEditATPFileClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnTestClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnOKClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
+    wxStaticText* GetStaticTextATPFile() { return m_staticTextATPFile; }
+    wxFilePickerCtrl* GetFilePickerATPFile() { return m_filePickerATPFile; }
+    wxStaticText* GetStaticTextNode() { return m_staticTextNode; }
+    wxChoice* GetChoiceNodes() { return m_choiceNodes; }
+    wxStaticText* GetStaticTextStepSize() { return m_staticTextStepSize; }
+    wxTextCtrl* GetTextCtrlStepSize() { return m_textCtrlStepSize; }
+    wxStaticText* GetStaticTextSec2() { return m_staticTextSec2; }
+    wxStaticText* GetStaticTextCyclesSS() { return m_staticTextCyclesSS; }
+    wxSpinCtrl* GetSpinCtrlCyclesToSS() { return m_spinCtrlCyclesToSS; }
+    wxStaticText* GetStaticTextRF() { return m_staticTextRF; }
+    wxTextCtrl* GetTextCtrlRecFreq() { return m_textCtrlRecFreq; }
+    wxCheckBox* GetCheckBoxUseFilter() { return m_checkBoxUseFilter; }
+    wxButton* GetButtonEditATPFile() { return m_buttonEditATPFile; }
+    wxButton* GetButtonTest() { return m_buttonTest; }
+    wxPanel* GetPanelEMTGeneral() { return m_panelEMTGeneral; }
+    wxStaticText* GetStaticTextNumHarmonics() { return m_staticTextNumHarmonics; }
+    wxSpinCtrl* GetSpinCtrlMaxNumHarmonics() { return m_spinCtrlMaxNumHarmonics; }
+    wxStaticText* GetStaticTextHarmThreshold() { return m_staticTextHarmThreshold; }
+    wxTextCtrl* GetTextCtrlHarmThreshold() { return m_textCtrlHarmThreshold; }
+    wxStaticText* GetStaticTextPercFund() { return m_staticTextPercFund; }
+    wxPanel* GetPanelEMTHarmonics() { return m_panelEMTHarmonics; }
+    wxNotebook* GetNotebook20() { return m_notebook20; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    EMTElementFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Electromagnetic Transient"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~EMTElementFormBase();
+};
+
+
+class ATPFileEditorFormBase : public wxDialog
+{
+protected:
+    wxStyledTextCtrl* m_stcATPFile;
+    wxButton* m_buttonOK;
+    wxButton* m_ButtonCancel;
+
+protected:
+    virtual void OnOKClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxStyledTextCtrl* GetStcATPFile() { return m_stcATPFile; }
+    wxButton* GetButtonOK() { return m_buttonOK; }
+    wxButton* GetButtonCancel() { return m_ButtonCancel; }
+    ATPFileEditorFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Edit ATP file"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
+    virtual ~ATPFileEditorFormBase();
 };
 
 #endif

@@ -37,6 +37,7 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	m_choicePlotLib->Clear();
 	m_choicePlotLib->Insert(_("Chart Director"), 0);
 	m_choicePlotLib->Insert(_("wxMathPlot"), 1);
+	
 
 
 	switch (data.language) {
@@ -68,6 +69,7 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	}
 	//if (data.useOpenGL) m_choiceRender->SetSelection(0);
 	//else m_choiceRender->SetSelection(1);
+	m_filePickerATPFolder->SetPath(data.atpPath.GetFullPath());
 }
 
 GeneralPropertiesForm::~GeneralPropertiesForm() {}
@@ -80,7 +82,8 @@ bool GeneralPropertiesForm::ValidateData()
 {
 	auto data = m_properties->GetGeneralPropertiesData();
 	auto checkData = m_properties->GetGeneralPropertiesData();
-	bool hasChanges = false;
+	bool needRestart = false;
+	data.atpPath = wxFileName(m_filePickerATPFolder->GetPath());
 
 	//wxTextFile file("config.ini");
 	wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
@@ -108,7 +111,7 @@ bool GeneralPropertiesForm::ValidateData()
 	} break;
 	}
 	file.AddLine(line);
-	if (data.language != checkData.language) hasChanges = true;
+	if (data.language != checkData.language) needRestart = true;
 
 	line = "plotlib=";
 	switch (m_choicePlotLib->GetSelection()) {
@@ -136,7 +139,7 @@ bool GeneralPropertiesForm::ValidateData()
 	} break;
 	}
 	file.AddLine(line);
-	if (data.theme != checkData.theme) hasChanges = true;
+	if (data.theme != checkData.theme) needRestart = true;
 
 	//line = "useOpenGL=";
 	//switch (m_choiceRender->GetSelection()) {
@@ -152,10 +155,14 @@ bool GeneralPropertiesForm::ValidateData()
 	//file.AddLine(line);
 	//if (data.useOpenGL != checkData.useOpenGL) hasChanges = true;
 
+	line = "atpfile=";
+	line += data.atpPath.GetFullPath();
+	file.AddLine(line);	
+
 	file.Write();
 	file.Close();
 
-	if (hasChanges) {
+	if (needRestart) {
 		wxMessageDialog msgDialog(this, _("The application must be restarted to settings changes be applied."),
 			_("Info"), wxOK | wxCENTRE | wxICON_INFORMATION);
 		msgDialog.ShowModal();

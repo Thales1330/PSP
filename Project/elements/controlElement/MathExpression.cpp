@@ -30,10 +30,11 @@ MathExpression::MathExpression(int id) : ControlElement(id)
 	}
 
 	// Symbol
-	m_symbol.SetFontSize(12);
-	m_symbol.SetFontWeight(wxFONTWEIGHT_BOLD);
-	m_symbol.SetFontStyle(wxFONTSTYLE_ITALIC);
-	m_symbol.SetFontFamily(wxFONTFAMILY_ROMAN);
+	//m_symbol.SetFontSize(12);
+	//m_symbol.SetFontWeight(wxFONTWEIGHT_BOLD);
+	//m_symbol.SetFontStyle(wxFONTSTYLE_ITALIC);
+	//m_symbol.SetFontFamily(wxFONTFAMILY_ROMAN);
+	m_symbol.SetFont(wxFont(12, wxFONTFAMILY_ROMAN, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_BOLD));
 	m_symbol.SetText("f(x)");
 	m_symbolSize = wxSize(m_symbol.GetWidth(), m_symbol.GetHeight());
 

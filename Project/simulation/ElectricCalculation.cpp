@@ -37,6 +37,7 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
 	m_syncMotorList.clear();
 	m_transformerList.clear();
 	m_harmCurrentList.clear();
+	m_emtElementList.clear();
 	// TODO: Bad design?
 	for (auto it = elementList.begin(); it != elementList.end(); it++) {
 		Element* element = *it;
@@ -62,6 +63,8 @@ void ElectricCalculation::GetElementsFromList(std::vector<Element*> elementList)
 			m_transformerList.push_back(transformer);
 		else if (HarmCurrent* harmCurrent = dynamic_cast<HarmCurrent*>(element))
 			m_harmCurrentList.push_back(harmCurrent);
+		else if (EMTElement* emtElement = dynamic_cast<EMTElement*>(element))
+			m_emtElementList.push_back(emtElement);
 	}
 
 	// Set buses numbers

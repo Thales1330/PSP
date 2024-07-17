@@ -32,10 +32,11 @@ class PropertiesData;
 class SimulationsSettingsForm : public SimulationsSettingsFormBase
 {
    public:
-    SimulationsSettingsForm(wxWindow* parent, PropertiesData* properties);
+    SimulationsSettingsForm(wxWindow* parent, PropertiesData* properties, wxLocale* locale);
     virtual ~SimulationsSettingsForm();
 
    protected:
+    virtual void OnBusFreqEstimationSelect(wxCommandEvent& event);
     virtual void OnCheckboxUseCompLoadClick(wxCommandEvent& event) { UpdateZIPLoadFieldStatus(); }
     virtual void OnPFMethodChoiceSelected(wxCommandEvent& event);
     virtual void OnButtonCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
@@ -43,6 +44,7 @@ class SimulationsSettingsForm : public SimulationsSettingsFormBase
     virtual bool ValidateData();
     virtual void UpdateZIPLoadFieldStatus();
     virtual void UpdatePFFieldStatus();
+    virtual void UpdateBusFreqFieldStatus();
 
     PropertiesData* m_properties;
 };

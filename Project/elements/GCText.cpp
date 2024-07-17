@@ -30,19 +30,33 @@ GCText::~GCText()
 
 void GCText::Draw(wxPoint2DDouble position, wxGraphicsContext* gc, double angle, wxColour colour) const
 {
-	gc->SetFont(wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight), colour);
+	//gc->SetFont(wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight), colour);
+
+	gc->SetFont(m_font, colour);
 	gc->DrawText(m_text, position.m_x, position.m_y, angle);
 }
 
 void GCText::SetText(wxString text)
 {
 	m_text = text;
+	if (!m_customFont) {
+		m_font.SetFaceName(wxT("CMU Serif"));
+		m_font.SetPointSize(m_fontSize);
+	}
 
-	wxFont font = wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight);
+
+	//wxFont font = wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight);
 
 	wxMemoryDC memDC;
-	memDC.SetFont(font);
+	//memDC.SetFont(font);
+	memDC.SetFont(m_font);
 	m_size = memDC.GetTextExtent(m_text);
+}
+
+void GCText::SetFont(wxFont font)
+{
+	m_font = font;
+	m_customFont = true;
 }
 
 

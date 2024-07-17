@@ -25,6 +25,7 @@ Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> ele
 	SetEventTimeList();
 
 	Bus dummyBus;
+	m_simData = data;
 	m_powerSystemBase = dummyBus.GetValueFromUnit(data.basePower, data.basePowerUnit);
 	m_systemFreq = data.stabilityFrequency;
 	m_simTime = data.stabilitySimulationTime;
@@ -65,8 +66,8 @@ Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> ele
 	}
 }
 
-Electromechanical::~Electromechanical() {
-}
+Electromechanical::~Electromechanical() { }
+
 bool Electromechanical::RunStabilityCalculation()
 {
 	wxProgressDialog pbd(_("Running simulation"), _("Initializing..."), 100, m_parent,
@@ -133,8 +134,10 @@ bool Electromechanical::RunStabilityCalculation()
 	m_currentTime = 0.0;
 	double currentPlotTime = 0.0;
 	double currentPbdTime = 0.0;
-	while (m_currentTime <= (m_simTime + m_timeStep)) {
+	while (m_currentTime <= m_simTime) {
+		bool hasEvent = false;
 		if (HasEvent(m_currentTime)) {
+			hasEvent = true;
 			SetEvent(m_currentTime);
 			GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);
 		}
@@ -155,6 +158,8 @@ bool Electromechanical::RunStabilityCalculation()
 		}
 
 		if (!SolveMachines()) return false;
+
+		CalculateBusesFrequency(hasEvent);
 
 		m_currentTime += m_timeStep;
 		currentPlotTime += m_timeStep;
@@ -543,6 +548,14 @@ bool Electromechanical::InitializeDynamicElements()
 		auto data = bus->GetElectricalData();
 		data.stabVoltageVector.clear();
 		data.stabVoltageVector.shrink_to_fit();
+		data.stabFreqVector.clear();
+		data.stabFreqVector.shrink_to_fit();
+		data.stabFreq = m_systemFreq;
+		data.oldAngle = std::arg(data.voltage);
+		data.filteredAngle = 0.0;
+		data.dxt = 0.0;
+		data.filteredVelocity = 0.0;
+		data.ddw = 0.0;
 		bus->SetElectricalData(data);
 	}
 	// Loads
@@ -1352,6 +1365,7 @@ void Electromechanical::SaveData()
 		auto data = bus->GetElectricalData();
 		if (data.plotBus) {
 			data.stabVoltageVector.emplace_back(data.number >= 0 ? m_vBus[data.number] : 0.0);
+			data.stabFreqVector.emplace_back(data.number >= 0 ? data.stabFreq : 0.0);
 			bus->SetElectricalData(data);
 		}
 	}
@@ -1754,6 +1768,91 @@ bool Electromechanical::CalculateSyncMachineSaturation(SyncGenerator* syncMachin
 	return true;
 }
 
+void Electromechanical::CalculateBusesFrequency(bool hasEvent)
+{
+	bool ignoreEventStep = true;
+	for (auto& bus : m_busList) {
+		auto data = bus->GetElectricalData();
+		if (!data.plotBus) continue;
+
+		if (m_simData.busFreqEstimation == BusFreqEstimation::WASHOUT_FILTER) {
+			//tex: 
+			// Low-pass filter:
+			// $$\frac{d}{dt}x_{\theta} = x_{\theta}' = \frac{\omega^{-1}(\theta_k - \theta_0) - x_{\theta}}{T_f}$$
+			// Washout filter:
+			// $$\frac{d}{dt}\Delta\omega_{k} = \Delta\omega_{k}' = \frac{x_{\theta}' - \Delta\omega_{k}}{T_w}$$
+			// Trapezoidal rule:
+			// $$ y_{k} = y_{k-1} + 0.5 h \cdot (y_{k-1}'+y_{k}') $$
+
+			double tf = m_simData.tf;
+			double tw = m_simData.tw;
+			double error = 1.0;
+			double theta0 = std::arg(data.number >= 0 ? data.voltage : 0.0);
+
+			// Low-pass filter
+			auto fdxt = [this, tf, theta0](double theta, double xt) {
+				return (1.0 / tf) * ((1.0 / (2.0 * M_PI * m_systemFreq)) * (theta - theta0) - xt);
+				};
+
+			// Washout filter
+			auto fddw = [this, tw](double dxt, double dw) {
+				return (1.0 / tw) * (dxt - dw);
+				};
+
+			double theta = std::arg(data.number >= 0 ? m_vBus[data.number] : theta0);
+
+			double xt = 0, dw = 0, dxt = 0, ddw = 0;
+			int iterations = 0;
+			while (error > 1e-6 && iterations <= 100) {
+				double oldXT = xt, oldDW = dw;
+
+				dxt = fdxt(theta, xt);
+				xt = data.filteredAngle + 0.5 * m_timeStep * (data.dxt + dxt); // Trapezoidal rule
+				error = std::abs(xt - oldXT);
+
+				ddw = fddw(dxt, dw);
+				dw = data.filteredVelocity + 0.5 * m_timeStep * (data.ddw + ddw); // Trapezoidal rule
+				error = std::max(error, std::abs(dw - oldDW));
+				iterations++;
+			}
+
+			//if (ignoreEventStep && hasEvent) {
+			//	xt = data.filteredAngle;
+			//	dw = 0.0;
+			//	dxt = 0.0;
+			//	ddw = 0.0;
+			//}
+
+			data.filteredAngle = xt;
+			data.filteredVelocity = dw;
+			data.dxt = dxt;
+			data.ddw = ddw;
+
+			double busVelocity = m_refSpeed + dw * (2.0 * M_PI * m_systemFreq);
+			data.stabFreq = busVelocity / (2.0 * M_PI);
+
+			bus->SetElectricalData(data);
+		}
+		else if (m_simData.busFreqEstimation == BusFreqEstimation::ANGLE_DERIVATION) {
+			double newAngle = std::arg(data.number >= 0 ? m_vBus[data.number] : 0.0);
+
+
+			//tex: $$\Delta \omega^k=\frac{\theta^k - \theta^{k-1}}{h}$$
+			double dw = (newAngle - data.oldAngle) / m_timeStep;
+			//double dw = (1.0 / (2.0 * M_PI * m_systemFreq)) * ((newAngle - data.oldAngle) / m_timeStep); // p.u.
+
+			if (m_simData.ignoreBusFreqEventStep && hasEvent) dw = 0.0;
+
+			//tex: $$f^k= \frac{\omega_{CoI}+\Delta \omega^k}{2\pi}$$
+			data.stabFreq = (m_refSpeed + dw) / (2.0 * M_PI);
+			//data.stabFreq = ((2.0 * M_PI * m_systemFreq) + dw) / (2.0 * M_PI);
+
+			data.oldAngle = newAngle;
+		}
+		bus->SetElectricalData(data);
+	}
+}
+
 SyncMachineModelData Electromechanical::GetSyncMachineModelData(SyncGenerator* syncMachine)
 {
 	SyncMachineModelData smModelData;
@@ -1825,6 +1924,7 @@ void Electromechanical::PreallocateVectors()
 		auto data = bus->GetElectricalData();
 		if (data.plotBus) {
 			data.stabVoltageVector.reserve(numPoints);
+			data.stabFreqVector.reserve(numPoints);
 			bus->SetElectricalData(data);
 		}
 	}

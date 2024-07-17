@@ -27,6 +27,7 @@
 #include "elements/powerElement/SyncGenerator.h"
 #include "elements/powerElement/SyncMotor.h"
 #include "elements/powerElement/Transformer.h"
+#include "elements/powerElement/EMTElement.h"
 
 #include "forms/AboutForm.h"
 #include "forms/DataReport.h"
@@ -175,8 +176,11 @@ void MainFrame::CreateDropdownMenus()
 	wxMenuItem* harmCurrentElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_HARMCURRENT, _("&Harmonic current\tShift-H"),
 			_("Adds a harmonic current source at the circuit"));
+	wxMenuItem* emtElement =
+		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_EMTELEMENT, _("&Electromagnetic Transient Element\tShift-E"), _("Adds an electromagnetic transient element that connects with ATP"));
 	wxMenuItem* textElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TEXT, _("&Text\tA"), _("Adds a linked text element"));
+
 
 	m_addElementsMenu->Append(busElement);
 	m_addElementsMenu->Append(lineElement);
@@ -188,6 +192,7 @@ void MainFrame::CreateDropdownMenus()
 	m_addElementsMenu->Append(capacitorElement);
 	m_addElementsMenu->Append(inductorElement);
 	m_addElementsMenu->Append(harmCurrentElement);
+	m_addElementsMenu->Append(emtElement);
 	m_addElementsMenu->Append(textElement);
 
 	m_addElementsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnAddElementsClick, this);
@@ -247,7 +252,7 @@ void MainFrame::OnChartsClick(wxRibbonButtonBarEvent& event)
 				if (powerElement->GetPlotData(plotData)) plotDataList.push_back(plotData);
 			}
 		}
-		ChartView* cView = new ChartView(workspace, plotDataList, workspace->GetStabilityTimeVector());
+		ChartView* cView = new ChartView(workspace, plotDataList, workspace->GetStabilityTimeVector(), m_generalProperties->GetGeneralPropertiesData().plotLib);
 		cView->Show();
 	}
 }
@@ -522,14 +527,14 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 					wxString::Format(_("Generator %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
 				workspace->IncrementElementNumber(ID_SYNCGENERATOR);
 				elementList.push_back(newGenerator);
-				statusBarText = _("Insert Generator: Click on a buses, ESC to cancel.");
+				statusBarText = _("Insert Generator: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_LOAD: {
 				Load* newLoad = new Load(wxString::Format(_("Load %d"), workspace->GetElementNumber(ID_LOAD)));
 				workspace->IncrementElementNumber(ID_LOAD);
 				elementList.push_back(newLoad);
-				statusBarText = _("Insert Load: Click on a buses, ESC to cancel.");
+				statusBarText = _("Insert Load: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_CAPACITOR: {
@@ -537,7 +542,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 					new Capacitor(wxString::Format(_("Capacitor %d"), workspace->GetElementNumber(ID_CAPACITOR)));
 				workspace->IncrementElementNumber(ID_CAPACITOR);
 				elementList.push_back(newCapacitor);
-				statusBarText = _("Insert Capacitor: Click on a buses, ESC to cancel.");
+				statusBarText = _("Insert Capacitor: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_INDUCTOR: {
@@ -545,7 +550,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 					new Inductor(wxString::Format(_("Inductor %d"), workspace->GetElementNumber(ID_INDUCTOR)));
 				workspace->IncrementElementNumber(ID_INDUCTOR);
 				elementList.push_back(newInductor);
-				statusBarText = _("Insert Inductor: Click on a buses, ESC to cancel.");
+				statusBarText = _("Insert Inductor: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_HARMCURRENT: {
@@ -553,7 +558,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 					wxString::Format(_("Harmonic Current %d"), workspace->GetElementNumber(ID_INDUCTOR)));
 				workspace->IncrementElementNumber(ID_HARMCURRENT);
 				elementList.push_back(newHarmCurrent);
-				statusBarText = _("Insert Harmonic Current Source: Click on a buses, ESC to cancel.");
+				statusBarText = _("Insert Harmonic Current Source: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_INDMOTOR: {
@@ -561,7 +566,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 					wxString::Format(_("Induction motor %d"), workspace->GetElementNumber(ID_INDMOTOR)));
 				workspace->IncrementElementNumber(ID_INDMOTOR);
 				elementList.push_back(newIndMotor);
-				statusBarText = _("Insert Induction Motor: Click on a buses, ESC to cancel.");
+				statusBarText = _("Insert Induction Motor: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_SYNCCOMP: {
@@ -569,7 +574,14 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 					wxString::Format(_("Synchronous condenser %d"), workspace->GetElementNumber(ID_SYNCMOTOR)));
 				workspace->IncrementElementNumber(ID_SYNCMOTOR);
 				elementList.push_back(newSyncCondenser);
-				statusBarText = _("Insert Synchronous Condenser: Click on a buses, ESC to cancel.");
+				statusBarText = _("Insert Synchronous Condenser: Click on a bus, ESC to cancel.");
+				newElement = true;
+			} break;
+			case ID_ADDMENU_EMTELEMENT: {
+				EMTElement* newEMTElement = new EMTElement(wxString::Format(_("Electromagnetic Transient %d"), workspace->GetElementNumber(ID_EMTELEMENT)));
+				workspace->IncrementElementNumber(ID_EMTELEMENT);
+				elementList.push_back(newEMTElement);
+				statusBarText = _("Insert Electromagnetic Transient Element: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_TEXT: {
@@ -674,7 +686,7 @@ void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 	GeneralPropertiesForm genPropForm(this, m_generalProperties);
 	genPropForm.SetInitialSize();
 	genPropForm.ShowModal();
-	for(auto& workspace : m_workspaceList) {
+	for (auto& workspace : m_workspaceList) {
 		workspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
 	}
 }
@@ -683,7 +695,7 @@ void MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent& event)
 {
 	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
 	if (workspace) {
-		SimulationsSettingsForm simulSettingsForm(this, workspace->GetProperties());
+		SimulationsSettingsForm simulSettingsForm(this, workspace->GetProperties(), m_locale);
 		simulSettingsForm.SetInitialSize();
 		simulSettingsForm.ShowModal();
 	}

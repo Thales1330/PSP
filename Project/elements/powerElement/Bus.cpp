@@ -342,6 +342,7 @@ bool Bus::GetPlotData(ElementPlotData& plotData, PlotStudy study)
 		}
 		plotData.AddData(absVoltage, _("Voltage"));
 		plotData.AddData(argVoltage, _("Angle"));
+		plotData.AddData(m_electricalData.stabFreqVector, _("Frequency"));
 		return true;
 	}
 	else if (study == PlotStudy::FREQRESPONSE) {

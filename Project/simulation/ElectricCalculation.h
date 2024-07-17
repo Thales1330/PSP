@@ -21,9 +21,9 @@
 #include <complex>
 #include <vector>
 
+#include "../elements/Element.h"
 #include "../elements/powerElement/Bus.h"
 #include "../elements/powerElement/Capacitor.h"
-#include "../elements/Element.h"
 #include "../elements/powerElement/HarmCurrent.h"
 #include "../elements/powerElement/IndMotor.h"
 #include "../elements/powerElement/Inductor.h"
@@ -33,6 +33,7 @@
 #include "../elements/powerElement/SyncGenerator.h"
 #include "../elements/powerElement/SyncMotor.h"
 #include "../elements/powerElement/Transformer.h"
+#include "../elements/powerElement/EMTElement.h"
 
 #include "../utils/PropertiesData.h"
 
@@ -199,6 +200,11 @@ public:
 	 * @return A list of harmonic current sources elements.
 	 */
 	const std::vector<HarmCurrent*> GetHarmCurrentList() const { return m_harmCurrentList; }
+	/**
+	 * @brief Get the electromagnetic element list of the system (use GetElementsFromList first).
+	 * @return A list of electromagnetic elements.
+	 */
+	const std::vector<EMTElement*> GetEMTElementList() const { return m_emtElementList; }
 
 protected:
 	void GetNextConnection(const unsigned int& checkBusNumber, const std::vector< std::vector< std::complex<double> > >& yBus, std::vector<bool>& connToSlack);
@@ -213,6 +219,7 @@ protected:
 	std::vector<SyncMotor*> m_syncMotorList;
 	std::vector<Transformer*> m_transformerList;
 	std::vector<HarmCurrent*> m_harmCurrentList;
+	std::vector<EMTElement*> m_emtElementList;
 };
 
 #endif  // ELECTRICCALCULATION_H

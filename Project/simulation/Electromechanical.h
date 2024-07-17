@@ -106,12 +106,14 @@ protected:
 		double& sq,
 		bool updateCurrents = true,
 		double k = 1.0);
+	void CalculateBusesFrequency(bool hasEvent);
 
 	void SaveData();
 	void PreallocateVectors();
 
 	wxWindow* m_parent = nullptr;
 	wxString m_errorMsg = _("Unknown error");
+	SimulationData m_simData;
 
 	double m_systemFreq = 60.0;
 	double m_refSpeed = 2.0 * M_PI * 60.0;

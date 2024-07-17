@@ -26,6 +26,7 @@ enum PowerFlowMethod { GAUSS_SEIDEL = 0, NEWTON_RAPHSON, GAUSS_NEWTON };
 enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
 enum class HarmLoadConnection { PARALLEL = 0, SERIES, DISCONNECTED };
 enum class PlotLib { wxMATH_PLOT = 0, wxCHART_DIR = 1 };
+enum class BusFreqEstimation { ANGLE_DERIVATION = 0, WASHOUT_FILTER = 1};
 
 struct SimulationData {
 	// General simulation data
@@ -53,6 +54,10 @@ struct SimulationData {
 	int controlTimeStepRatio = 10;
 	double plotTime = 1e-2;
 	bool useCOI = true;
+	BusFreqEstimation busFreqEstimation = BusFreqEstimation::ANGLE_DERIVATION;
+	bool ignoreBusFreqEventStep = true;
+	double tf = 0.05;
+	double tw = 3.0 / (2.0 * M_PI * 60.0);
 
 	// ZIP load
 	bool useCompLoads = false;
@@ -74,6 +79,8 @@ struct GeneralData {
 	GUITheme theme = THEME_LIGHT;
 	//bool useOpenGL = true;
 	PlotLib plotLib = PlotLib::wxCHART_DIR;
+	wxFileName atpPath;
+	wxString atpWorkFolder = "";
 };
 
 struct FreqResponseData {
