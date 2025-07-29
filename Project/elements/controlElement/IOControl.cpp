@@ -189,11 +189,11 @@ void IOControl::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 			selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);
 			selPts[4] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);
 		}
-		gc->DrawLines(5, &selPts[0]);
+		gc->StrokeLines(5, &selPts[0]);
 	}
 	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
 	gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
-	gc->DrawLines(6, &pts[0]);
+	gc->StrokeLines(6, &pts[0]);
 
 	// Plot number.
 	if (m_angle == 0.0) {

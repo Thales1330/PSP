@@ -129,17 +129,23 @@ void EMTElementForm::OnTestClick(wxCommandEvent& event)
 {
 	if (ValidateData()) {
 		wxString errorMsg;
-		if (!m_emtElement->CalculateCurrent(*m_properties, errorMsg, true)) {
+		m_emtElement->UpdateData(m_properties);
+		if (!m_emtElement->CalculateCurrent(errorMsg, true)) {
 			wxMessageDialog msgDialog(m_parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
 			msgDialog.ShowModal();
 			return;
 		}
-		std::vector<double> timeVec, inVec, outR, outI, outM, outP, freq;
+		std::vector<double> time, in, timeSamp, inSamp, outR, outI, outM, outP, freq;
+		auto atpData = m_emtElement->GetEMTElementData().atpData;
 		auto inFFTData = m_emtElement->GetEMTElementData().inFFTData;
 		auto outFFTData = m_emtElement->GetEMTElementData().outFFTData;
-		for(auto data : inFFTData) {
-			timeVec.emplace_back(data.first);
-			inVec.emplace_back(data.second);
+		for (auto data : atpData) {
+			time.emplace_back(data.first);
+			in.emplace_back(data.second);
+		}
+		for (auto data : inFFTData) {
+			timeSamp.emplace_back(data.first);
+			inSamp.emplace_back(data.second);
 		}
 		for (auto data : outFFTData) {
 			outR.emplace_back(data.second.real());
@@ -152,26 +158,33 @@ void EMTElementForm::OnTestClick(wxCommandEvent& event)
 
 		std::vector<double> currMag, currPha, harmOrder;
 		auto harmData = m_emtElement->GetEMTElementData().currHarmonics;
-		auto harmOrderData = m_emtElement->GetEMTElementData().currHarmonicsOrder;
-		for (size_t i = 0; i < harmData.size(); i++) {
-			currMag.emplace_back(abs(harmData[i]));
-			currPha.emplace_back(arg(harmData[i]) * 180.0 / M_PI);
-			harmOrder.emplace_back(static_cast<double>(harmOrderData[i]));
+		//auto harmOrderData = m_emtElement->GetEMTElementData().currHarmonicsOrder;
+		//for (size_t i = 0; i < harmData.size(); i++) {
+		//	currMag.emplace_back(abs(harmData[i]));
+		//	currPha.emplace_back(arg(harmData[i]) * 180.0 / M_PI);
+		//	harmOrder.emplace_back(static_cast<double>(harmOrderData[i]));
+		//}
+		for(auto const& data : harmData){
+			currMag.emplace_back(abs(data.second));
+			currPha.emplace_back(arg(data.second) * 180.0 / M_PI);
+			harmOrder.emplace_back(static_cast<double>(data.first));
 		}
 
 		std::vector<ElementPlotData> plotDataList;
-		ElementPlotData plotATPData("ATP", ElementPlotData::CurveType::CT_TEST);
-		ElementPlotData plotFFTData("Fourier", ElementPlotData::CurveType::CT_TEST);
-		ElementPlotData plotCurrData("Currents", ElementPlotData::CurveType::CT_TEST);
+		ElementPlotData plotATPData(_("ATP Output"), ElementPlotData::CurveType::CT_TEST);
+		ElementPlotData plotFFTData(_("Fourier Analysis"), ElementPlotData::CurveType::CT_TEST);
+		ElementPlotData plotCurrData(_("Current Phasor"), ElementPlotData::CurveType::CT_TEST);
 
-		plotATPData.AddData(inVec, _("Input"));
+		plotATPData.AddData(in, _("Data"));
 
+		plotFFTData.AddData(inSamp, _("Input"));
+		plotFFTData.AddData(timeSamp, _("Time Sampled"));
 		plotFFTData.AddData(outR, _("Real"));
 		plotFFTData.AddData(outI, _("Imaginary"));
 		plotFFTData.AddData(outM, _("Magnitude"));
 		plotFFTData.AddData(outP, _("Phase"));
 		plotFFTData.AddData(freq, _("Frequency"));
-		
+
 		plotCurrData.AddData(currMag, _("Magnitude"));
 		plotCurrData.AddData(currPha, _("Phase"));
 		plotCurrData.AddData(harmOrder, _("Harmonic Order"));
@@ -179,7 +192,7 @@ void EMTElementForm::OnTestClick(wxCommandEvent& event)
 		plotDataList.push_back(plotATPData);
 		plotDataList.push_back(plotFFTData);
 		plotDataList.push_back(plotCurrData);
-		ChartView* cView = new ChartView(this, plotDataList, timeVec, m_properties->GetGeneralPropertiesData().plotLib);
+		ChartView* cView = new ChartView(this, plotDataList, time, m_properties->GetGeneralPropertiesData().plotLib);
 		cView->Show();
 	}
 }

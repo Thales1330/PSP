@@ -145,6 +145,10 @@ public:
 	bool GetParentBus(Element* childElement, Bus*& parentBus);
 	bool GetParentBus(Element* childElement, Bus*& parentBus1, Bus*& parentBus2);
 
+	bool CalculateEMTElementsAdmittance(const double& basePower, wxString& errorMsg);
+	bool CalculateEMTElementsPower(const double& basePower, wxString& errorMsg, bool updateCurrent = true);
+	double CalculateEMTPowerError(const std::vector< std::complex<double> >& voltage, std::vector< std::complex<double> >& power, const double& basePower, wxString& errorMsg);
+
 	/**
 	 * @brief Get the power elements of the system (use GetElementsFromList first).
 	 * @return A list of power elements.

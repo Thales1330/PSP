@@ -144,6 +144,16 @@ bool ElectricCalculation::GetYBus(std::vector<std::vector<std::complex<double> >
 		}
 	}
 
+	//EMT Elements
+	for (EMTElement* emtElement : m_emtElementList) {
+		if (emtElement->IsOnline()) {
+			auto data = emtElement->GetEMTElementData();
+			int n = static_cast<Bus*>(emtElement->GetParentList()[0])->GetElectricalData().number;
+			yBus[n][n] += data.y0;
+			//wxMessageBox(wxString::Format("%f +j %f", data.y0.real(), data.y0.imag()));
+		}
+	}
+
 	// Power line
 	for (auto it = m_lineList.begin(), itEnd = m_lineList.end(); it != itEnd; ++it) {
 		Line* line = *it;
@@ -442,13 +452,14 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 				int n2 = dataBus2.number;
 
 				LineElectricalData data = line->GetElectricalData();
+				LineElectricalData dataPU = line->GetPUElectricalData(systemPowerBase);
 				std::complex<double> v1 = voltage[n1];
 				std::complex<double> v2 = voltage[n2];
 
-				data.current[0] = (v1 - v2) / std::complex<double>(data.resistance, data.indReactance) +
-					v1 * std::complex<double>(0.0, data.capSusceptance / 2.0);
-				data.current[1] = (v2 - v1) / std::complex<double>(data.resistance, data.indReactance) +
-					v2 * std::complex<double>(0.0, data.capSusceptance / 2.0);
+				data.current[0] = (v1 - v2) / std::complex<double>(dataPU.resistance, dataPU.indReactance) +
+					v1 * std::complex<double>(0.0, dataPU.capSusceptance / 2.0);
+				data.current[1] = (v2 - v1) / std::complex<double>(dataPU.resistance, dataPU.indReactance) +
+					v2 * std::complex<double>(0.0, dataPU.capSusceptance / 2.0);
 
 				data.powerFlow[0] = v1 * std::conj(data.current[0]);
 				data.powerFlow[1] = v2 * std::conj(data.current[1]);
@@ -472,6 +483,8 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 
 			if (dataBus1.isConnected && dataBus2.isConnected) {
 				TransformerElectricalData data = transformer->GetElectricalData();
+				TransformerElectricalData dataPU = transformer->GetPUElectricalData(systemPowerBase);
+
 				int n1 = dataBus1.number;
 				int n2 = dataBus2.number;
 
@@ -479,16 +492,16 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 				std::complex<double> v2 = voltage[n2];  // Secondary voltage
 
 				// Transformer admitance
-				std::complex<double> y = 1.0 / std::complex<double>(data.resistance, data.indReactance);
+				std::complex<double> y = 1.0 / std::complex<double>(dataPU.resistance, dataPU.indReactance);
 
-				if (data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
+				if (dataPU.turnsRatio == 1.0 && dataPU.phaseShift == 0.0) {
 					data.current[0] = (v1 - v2) * y;
 					data.current[1] = (v2 - v1) * y;
 				}
 				else {
-					double radPS = wxDegToRad(data.phaseShift);
+					double radPS = wxDegToRad(dataPU.phaseShift);
 					std::complex<double> a =
-						std::complex<double>(data.turnsRatio * std::cos(radPS), -data.turnsRatio * std::sin(radPS));
+						std::complex<double>(dataPU.turnsRatio * std::cos(radPS), -dataPU.turnsRatio * std::sin(radPS));
 
 					data.current[0] = v1 * (y / std::pow(std::abs(a), 2)) - v2 * (y / std::conj(a));
 					data.current[1] = -v1 * (y / a) + v2 * y;
@@ -531,6 +544,26 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 			data.reactivePower = reactivePower;
 
 			motor->SetElectricalData(data);
+		}
+	}
+
+	//EMT Elements
+	for (EMTElement* emtElement : m_emtElementList) {
+
+		if (!emtElement->IsOnline()) {
+			auto data = emtElement->GetEMTElementData();
+			data.power = std::complex<double>(0.0, 0.0);
+			data.currHarmonics[1] = std::complex<double>(0.0, 0.0);
+			emtElement->SetEMTElementData(data);
+		}
+		else {
+			emtElement->UpdateData();
+			auto data = emtElement->GetEMTElementData();
+			double baseCurrent = systemPowerBase / (sqrt(3.0) * data.baseVoltage);
+			std::complex<double> current = data.currHarmonics[1] / baseCurrent; // Fundamental frequency current
+			std::complex<double> power = data.puVoltage * std::conj(current);
+			data.power = power;
+			emtElement->SetEMTElementData(data);
 		}
 	}
 
@@ -1024,4 +1057,87 @@ bool ElectricCalculation::GetParentBus(Element* childElement, Bus*& parentBus1, 
 	if (parentBus1 == nullptr || parentBus2 == nullptr) return false;
 	if (parentBus1->GetElectricalData().number < 0 || parentBus2->GetElectricalData().number < 0) return false;
 	return true;
+}
+
+bool ElectricCalculation::CalculateEMTElementsAdmittance(const double& basePower, wxString& errorMsg)
+{
+	for (EMTElement* emtElement : m_emtElementList) {
+		if (!emtElement->IsOnline()) continue;
+
+		emtElement->UpdateData();
+		if (!emtElement->CalculateCurrent(errorMsg)) return false;
+		auto data = emtElement->GetEMTElementData();
+		double baseCurrent = basePower / (sqrt(3.0) * data.baseVoltage);
+		std::complex<double> current = data.currHarmonics[1] / baseCurrent; // Fundamental frequency current
+		std::complex<double> y0 = current / data.puVoltage;
+		data.y0 = y0;
+		data.power = std::complex<double>(0.0, 0.0);
+		emtElement->SetEMTElementData(data);
+	}
+	return true;
+}
+
+bool ElectricCalculation::CalculateEMTElementsPower(const double& basePower, wxString& errorMsg, bool updateCurrent)
+{
+	for (EMTElement* emtElement : m_emtElementList) {
+		if (!emtElement->IsOnline()) continue;
+
+		emtElement->UpdateData();
+		if (updateCurrent) {
+			if (!emtElement->CalculateCurrent(errorMsg)) return false;
+		}
+		auto data = emtElement->GetEMTElementData();
+		double baseCurrent = basePower / (sqrt(3.0) * data.baseVoltage);
+		//std::complex<double> current = data.currHarmonics[1];
+		std::complex<double> current = data.currHarmonics[1] / baseCurrent; // Fundamental frequency current
+		
+		std::complex<double> i0 = data.y0 * data.puVoltage; // Current already injected via admittance matrix
+		//std::complex<double> voltage = data.baseVoltage * data.puVoltage;
+		//std::complex<double> power = (sqrt(3.0) * voltage * std::conj(current)) / basePower;
+		std::complex<double> power = data.puVoltage * std::conj(current - i0);
+		data.powerDiff = power - data.power;
+		data.power = power;
+		emtElement->SetEMTElementData(data);
+
+		//wxString currentStr = data.name + ":\n";
+		//for (auto const& [harm, current] : data.currHarmonics)
+		//{
+		//	currentStr += wxString::Format("I(%dh) = %f p.u.\n", harm, abs(current) / baseCurrent);
+		//}
+		//currentStr += wxString::Format("S = %e + j%e p.u.\n", data.power.real(), data.power.imag());
+		//currentStr += wxString::Format("SDiff = %e p.u.\n", abs(data.powerDiff));
+		//wxMessageBox(currentStr);
+	}
+	return true;
+}
+
+double ElectricCalculation::CalculateEMTPowerError(const std::vector<std::complex<double>>& voltage, std::vector<std::complex<double>>& power, const double& basePower, wxString& errorMsg)
+{
+	// Update buses voltages
+	for (Bus* bus : m_busList) {
+		auto data = bus->GetElectricalData();
+		if (data.isConnected) {
+			data.voltage = voltage[data.number];
+			bus->SetElectricalData(data);
+		}
+	}
+
+	CalculateEMTElementsPower(basePower, errorMsg);
+	// Update power array and calculate error
+	double error = 0.0;
+	for (EMTElement* emtElement : m_emtElementList) {
+		if (!emtElement->IsOnline()) continue;
+
+		if (!emtElement->GetParentList().empty()) {
+			if (emtElement->GetParentList()[0] != nullptr) {
+				int numBus = static_cast<Bus*>(emtElement->GetParentList()[0])->GetElectricalData().number;
+				auto data = emtElement->GetEMTElementData();
+				power[numBus] += data.powerDiff;
+				if (error < std::abs(data.powerDiff))
+					error = std::abs(data.powerDiff);
+			}
+		}
+	}
+
+	return error;
 }

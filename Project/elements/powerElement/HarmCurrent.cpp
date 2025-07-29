@@ -139,7 +139,7 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
             gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
             gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
-            gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+            gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
             DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), gc);
 
             gc->SetPen(*wxTRANSPARENT_PEN);
@@ -164,7 +164,7 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
         // Draw Harmonic current source (layer 2).
         gc->SetPen(wxPen(wxColour(elementColour), 2));
         gc->SetBrush(*wxTRANSPARENT_BRUSH);
-        gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+        gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
         // Draw node.
         gc->SetPen(*wxTRANSPARENT_PEN);
@@ -192,7 +192,7 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
         DrawDCTriangle(triangPts, gc);
 
         gc->SetPen(wxPen(wxColour(elementColour), 2));
-        gc->DrawLines(arrowPts.size(), &arrowPts[0]);
+        gc->StrokeLines(arrowPts.size(), &arrowPts[0]);
         DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), gc);
 
         gc->PopState();

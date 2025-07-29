@@ -94,8 +94,8 @@ void Exponential::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
     axis[1] = m_position + wxPoint2DDouble(13, 13);
     axis[2] = m_position + wxPoint2DDouble(-13, -13);
     axis[3] = m_position + wxPoint2DDouble(-13, 13);
-    gc->DrawLines(2, &axis[0]);
-    gc->DrawLines(2, &axis[2]);
+    gc->StrokeLines(2, &axis[0]);
+    gc->StrokeLines(2, &axis[2]);
 
     gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
     gc->SetBrush(*wxTRANSPARENT_BRUSH);
@@ -109,7 +109,7 @@ void Exponential::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
     expSymbol[6] = m_position + wxPoint2DDouble(11, -1);
     expSymbol[7] = m_position + wxPoint2DDouble(12, -7);
     expSymbol[8] = m_position + wxPoint2DDouble(13, -13);
-    gc->DrawLines(9, expSymbol);
+    gc->StrokeLines(9, expSymbol);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
     gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));

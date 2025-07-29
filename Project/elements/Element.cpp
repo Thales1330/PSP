@@ -80,7 +80,7 @@ void Element::DrawDCArc(wxPoint2DDouble position, double radius, double initAngl
         points[i] = wxPoint2DDouble(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
 	}
 
-    gc->DrawLines(numSegments + 1, points);
+    gc->StrokeLines(numSegments + 1, points);
     delete[] points;
 }
 

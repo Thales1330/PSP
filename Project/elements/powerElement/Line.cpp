@@ -135,7 +135,7 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 		gc->SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		if (pointList.size() > 0)
-			gc->DrawLines(pointList.size(), &pointList[0]);
+			gc->StrokeLines(pointList.size(), &pointList[0]);
 
 		// Draw nodes selection.
 		gc->SetPen(*wxTRANSPARENT_PEN);
@@ -150,7 +150,7 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	gc->SetPen(wxPen(elementColour, 2));
 	gc->SetBrush(*wxTRANSPARENT_BRUSH);
 	if (pointList.size() > 0)
-		gc->DrawLines(pointList.size(), &pointList[0]);
+		gc->StrokeLines(pointList.size(), &pointList[0]);
 
 	if (m_inserted) {
 		DrawDCSwitches(gc);
@@ -646,34 +646,34 @@ LineElectricalData Line::GetPUElectricalData(double systemBasePower)
 
 	// Resistance
 	double r = data.resistance;
-	if (data.resistanceUnit == ElectricalUnit::UNIT_OHM_km) r *= data.lineSize;
-	if (data.resistanceUnit == ElectricalUnit::UNIT_PU) {
+	if (data.resistanceUnit == ElectricalUnit::UNIT_OHM_km) data.resistance = r * data.lineSize / systemBaseImpedance;
+	else if (data.resistanceUnit == ElectricalUnit::UNIT_PU) {
 		if (data.useLinePower) data.resistance = (r * lineBaseImpedance) / systemBaseImpedance;
 	}
-	else {
+	else { // Ohm
 		data.resistance = r / systemBaseImpedance;
 	}
 	data.resistanceUnit = ElectricalUnit::UNIT_PU;
 
 	// Inductive reactance
 	double x = data.indReactance;
-	if (data.indReactanceUnit == ElectricalUnit::UNIT_OHM_km) x *= data.lineSize;
-	if (data.indReactanceUnit == ElectricalUnit::UNIT_PU) {
+	if (data.indReactanceUnit == ElectricalUnit::UNIT_OHM_km) data.indReactance = x * data.lineSize / systemBaseImpedance;
+	else if (data.indReactanceUnit == ElectricalUnit::UNIT_PU) {
 		if (data.useLinePower) data.indReactance = (x * lineBaseImpedance) / systemBaseImpedance;
 	}
-	else {
+	else { // Ohm
 		data.indReactance = x / systemBaseImpedance;
 	}
 	data.indReactanceUnit = ElectricalUnit::UNIT_PU;
 
 	// Capacitive susceptance
 	double b = data.capSusceptance;
-	if (data.capSusceptanceUnit == ElectricalUnit::UNIT_OHM_km) b *= data.lineSize;
-	if (data.capSusceptanceUnit == ElectricalUnit::UNIT_PU) {
-		if (data.useLinePower) data.capSusceptance = (b * lineBaseImpedance) / systemBaseImpedance;
+	if (data.capSusceptanceUnit == ElectricalUnit::UNIT_S_km) data.capSusceptance = b * data.lineSize * systemBaseImpedance;
+	else if (data.capSusceptanceUnit == ElectricalUnit::UNIT_PU) {
+		if (data.useLinePower) data.capSusceptance = (b / lineBaseImpedance) * systemBaseImpedance;
 	}
-	else {
-		data.capSusceptance = b / systemBaseImpedance;
+	else { // S
+		data.capSusceptance = b * systemBaseImpedance;
 	}
 	data.capSusceptanceUnit = ElectricalUnit::UNIT_PU;
 
@@ -689,7 +689,7 @@ LineElectricalData Line::GetPUElectricalData(double systemBasePower)
 
 	// Zero seq. cap. susceptance
 	double b0 = data.zeroCapSusceptance;
-	if (data.useLinePower) data.zeroCapSusceptance = (b0 * lineBaseImpedance) / systemBaseImpedance;
+	if (data.useLinePower) data.zeroCapSusceptance = (b0 / lineBaseImpedance) * systemBaseImpedance;
 
 	if (!m_online) {
 		data.powerFlow[0] = std::complex<double>(0, 0);

@@ -98,7 +98,7 @@ void TransferFunction::DrawDC(wxPoint2DDouble translation, double scale, wxGraph
     wxPoint2DDouble linePts[2];
     linePts[0] = wxPoint2DDouble(m_position.m_x - m_width / 2 + 5 + m_borderSize, m_position.m_y);
     linePts[1] = wxPoint2DDouble(m_position.m_x + m_width / 2 - 5 - m_borderSize, m_position.m_y);
-    gc->DrawLines(2, linePts);
+    gc->StrokeLines(2, linePts);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
     gc->SetBrush(*wxBLACK_BRUSH);

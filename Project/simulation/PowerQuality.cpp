@@ -204,6 +204,29 @@ bool PowerQuality::CalculateDistortions(double systemPowerBase, HarmLoadConnecti
 				}
 			}
 		}
+		// EMT elements
+		for (auto* emtElement : m_emtElementList) {
+			if (!emtElement->IsOnline()) continue; // Skip offline elements
+			if (emtElement->GetParentList().size() > 0) {
+				if (emtElement->GetParentList()[0] != nullptr) {
+					auto data = emtElement->GetEMTElementData();
+					for (auto const& [order, current] : data.currHarmonics) {
+						if (order == 1) continue; // Skip fundamental
+						else if (order == static_cast<int>(harmOrders[i])) {
+							Bus* parentBus = static_cast<Bus*>(emtElement->GetParentList()[0]);
+							auto busData = parentBus->GetElectricalData();
+							int j = busData.number;
+
+							double voltage = busData.nominalVoltage;
+							if (busData.nominalVoltageUnit == ElectricalUnit::UNIT_kV) voltage *= 1e3;
+							double baseCurrent = systemPowerBase / (std::sqrt(3.0) * voltage);
+
+							iHarmInjList[i][j] += current / baseCurrent;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	// Calculate harmonic voltages
@@ -331,6 +354,24 @@ std::vector<double> PowerQuality::GetHarmonicOrdersList()
 			}
 		}
 	}
+	// Check all harmonic from EMT elements
+	for (auto* emtElement : m_emtElementList) {
+		if (!emtElement->IsOnline()) continue; // Skip offline elements
+
+		auto data = emtElement->GetEMTElementData();
+		for (auto const& [order, current] : data.currHarmonics) {
+			if (order == 1) continue; // Skip fundamental
+			bool newOrder = true;
+			for (int vecOrder : harmOrders) {
+				if (order == vecOrder) {
+					newOrder = false;
+					break;
+				}
+			}
+			if (newOrder) harmOrders.push_back(order);
+		}
+	}
+
 	std::vector<double> doubleHarmOrder;
 	for (unsigned int i = 0; i < harmOrders.size(); ++i) {
 		doubleHarmOrder.push_back(static_cast<double>(harmOrders[i]));

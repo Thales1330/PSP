@@ -65,6 +65,7 @@ Thumbs.db
 *.xrc
 #*.workspace
 #*.project
+*.atp
 Project/Project.mk
 Project/Project.txt
 Makefile

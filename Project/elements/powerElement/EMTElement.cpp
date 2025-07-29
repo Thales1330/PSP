@@ -2,7 +2,7 @@
 
 #include "../../forms/EMTElementForm.h"
 #include "../../utils/PropertiesData.h"
-#include "../extLibs/fftw/fftw3.h"
+#include "../../extLibs/fftw/fftw3.h"
 
 #include <wx/dcgraph.h>
 #include <wx/textfile.h>
@@ -60,7 +60,7 @@ bool EMTElement::AddParent(Element* parent, wxPoint2DDouble position)
 		// Base data
 		auto data = static_cast<Bus*>(parent)->GetElectricalData();
 		m_data.puVoltage = data.voltage;
-		m_data.baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit) * (std::sqrt(2) / std::sqrt(3)); // phase-ground, peak value
+		m_data.baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
 		m_data.frequency = data.stabFreq;
 
 		return true;
@@ -86,7 +86,7 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCon
 			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
-			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			// Push the current matrix on stack.
 			gc->PushState();
@@ -113,7 +113,7 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCon
 
 		gc->SetPen(wxPen(wxColour(elementColour), 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 		DrawDCSwitches(gc);
 
@@ -169,6 +169,28 @@ bool EMTElement::GetContextMenu(wxMenu& menu)
 	menu.Append(ID_EDIT_ELEMENT, _("Edit Electromagnetic Transient"));
 	GeneralMenuItens(menu);
 	return true;
+}
+
+wxString EMTElement::GetTipText() const
+{
+	wxString tipText = m_data.name;
+	tipText += wxT("\n");
+	tipText += _(wxString::Format("\nP = %.5f p.u.", m_data.power.real()));
+	tipText += _(wxString::Format("\nQ = %.5f p.u.", m_data.power.imag()));
+	if (auto itCurrrent = m_data.currHarmonics.find(1); itCurrrent != m_data.currHarmonics.end())
+		tipText += _(wxString::Format("\nI = %.5f A", std::abs(itCurrrent->second)));
+
+	wxString harmonicsInfo = _("\n\nHarmonics info:");
+	bool hasHarmonics = false;
+	for (auto& [order, current] : m_data.currHarmonics) {
+		if (order != 1) {
+			hasHarmonics = true;
+			harmonicsInfo += _(wxString::Format("\nIh(%d): %.5f%s%.2f%s A", order, std::abs(current), wxString(L'\u2220'), wxRadToDeg(std::arg(current)), wxString(L'\u00B0')));
+		}
+	}
+	if(hasHarmonics) tipText += harmonicsInfo;
+
+	return tipText;
 }
 
 bool EMTElement::ShowForm(wxWindow* parent, Element* element)
@@ -332,6 +354,17 @@ bool EMTElement::SetATPParameter(wxTextFile& atpFile, const wxString& card, cons
 
 bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 {
+	// Get connnected bus data
+	bool hasBusData = false;
+	BusElectricalData busData;
+	if (!m_parentList.empty()) {
+		if (m_parentList[0] != nullptr) {
+			Bus* bus = static_cast<Bus*>(m_parentList[0]);
+			busData = bus->GetElectricalData();
+			hasBusData = true;
+		}
+	}	
+
 	wxString switchMask = "  PSPNC%c%s%c                                        MEASURING                %d";
 	wxString sourceMask = "14PSPNC%c  %s%s%s                           -1.      100.";
 	wxString lineStr = "";
@@ -378,20 +411,56 @@ bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 	}
 	sourceCardPos += 3;
 
-	wxString amp = wxString::FromCDouble(std::abs(m_data.puVoltage) * m_data.baseVoltage, 3); // Amplitude in pu
-	wxString freq = wxString::FromCDouble(m_data.frequency, 6); // Frequency in Hz
+	double voltage = std::abs(m_data.puVoltage) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3)); // phase-ground, peak value
+	wxString ampl = wxString::FromCDouble(voltage, 3); // Amplitude in pu
+	wxString freq = wxString::FromCDouble(m_data.frequency, 5); // Frequency in Hz
 	// Insert spaces before to complete 10 characters
 	while (freq.Length() < 10) freq = " " + freq;
-	while (amp.Length() < 10) amp = " " + amp;
+	while (ampl.Length() < 10) ampl = " " + ampl;
 
+	int cardPos = sourceCardPos;
 	for (char i = 'A'; i <= 'C'; ++i) {
 		wxString angle = wxString::FromCDouble(std::arg(m_data.puVoltage) * 180.0 / M_PI - 120.0 * (i - 'A'), 5); // Angle in degrees
 
 		// Insert spaces before to complete 10 characters
 		while (angle.Length() < 10) angle = " " + angle;
 
-		lineStr = wxString::Format(sourceMask, i, amp, freq, angle);
-		atpFile.InsertLine(lineStr, sourceCardPos + (i - 'A'));
+		lineStr = wxString::Format(sourceMask, i, ampl, freq, angle);
+		atpFile.InsertLine(lineStr, cardPos);
+		cardPos++;
+
+		if (hasBusData) {
+			// Insert harmonic voltage
+			for (size_t j = 0; j < busData.harmonicOrder.size(); ++j) {
+				int order = busData.harmonicOrder[j];
+				if(order == 1) continue; // Skip fundamental
+
+				std::complex<double> harmVoltage = busData.harmonicVoltage[j];
+
+				voltage = std::abs(busData.harmonicVoltage[j]) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3));
+				wxString amplH = wxString::FromCDouble(voltage, 3);
+				while (amplH.Length() < 10) amplH = " " + amplH;
+
+				wxString freqH = wxString::FromCDouble(m_data.frequency * static_cast<double>(order), 5);
+				while (freqH.Length() < 10) freqH = " " + freqH;
+				
+				double angleValue = std::arg(harmVoltage) * 180.0 / M_PI;
+				if (order % 3 == 1) { // Positive sequence
+					angleValue += -120.0 * (i - 'A');
+				}
+				else if (order % 3 == 2) { // Negative sequence
+					angleValue += 120.0 * (i - 'A');
+				}
+				// Zero sequence doesn't change the angle because it's the same for all phases
+
+				wxString angleH = wxString::FromCDouble(angleValue, 5);
+				while (angleH.Length() < 10) angleH = " " + angleH;
+
+				lineStr = wxString::Format(sourceMask, i, amplH, freqH, angleH);
+				atpFile.InsertLine(lineStr, cardPos);
+				cardPos++;
+			}
+		}
 	}
 
 	return true;
@@ -433,27 +502,30 @@ std::vector<double> EMTElement::MedianFilter(const std::vector<double>& data)
 	return result;
 }
 
-bool EMTElement::CalculateCurrent(const PropertiesData& properties, wxString& errorMsg, const bool& saveFFTData)
+bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 {
 	wxFileName fileName(m_data.atpFile);
 	if (!fileName.IsOk()) {
-		errorMsg = wxString::Format(_("Invalid ATP file path for the electromagnetic element \"%s\".", m_data.name));
+		errorMsg = wxString::Format(_("Invalid ATP file path for the electromagnetic element \"%s\"."), m_data.name);
 		return false;
 	}
 
-	double fundFreq = properties.GetSimulationPropertiesData().stabilityFrequency;
+	//double fundFreq = properties.GetSimulationPropertiesData().stabilityFrequency;
+	double fundFreq = m_data.frequency;
 	double timeSim = (1.0 / fundFreq) * static_cast<double>(m_data.cyclesToSS);
 
-	wxString atpFolder = properties.GetGeneralPropertiesData().atpPath.GetPath();
+	//wxString atpFolder = properties.GetGeneralPropertiesData().atpPath.GetPath();
+	wxString atpFolder = m_data.atpPath.GetPath();
 	// Set fundamental frequency to EMT element
-	m_data.frequency = fundFreq;
+	//m_data.frequency = fundFreq;
 
 	wxExecuteEnv env;
 	env.cwd = atpFolder;
 
 	// Save the ATP file in ATP work folder
 	wxTextFile origFile(m_data.atpFile.GetFullPath());
-	fileName.SetPath(properties.GetGeneralPropertiesData().atpWorkFolder);
+	//fileName.SetPath(properties.GetGeneralPropertiesData().atpWorkFolder);
+	fileName.SetPath(m_data.atpWorkFolder);
 	wxString name = fileName.GetFullPath();
 	wxTextFile copyFile(fileName.GetFullPath());
 	if (origFile.Open()) {
@@ -478,12 +550,13 @@ bool EMTElement::CalculateCurrent(const PropertiesData& properties, wxString& er
 		copyFile.Write();
 	}
 	else {
-		errorMsg = wxString::Format(_("Fail to open ATP file of the electromagnetic element \"%s\".", m_data.name));
+		errorMsg = wxString::Format(_("Fail to open ATP file of the electromagnetic element \"%s\"."), m_data.name);
 		return false;
 	}
 
-	wxString cmd = properties.GetGeneralPropertiesData().atpPath.GetFullPath() + wxT(" both ") + fileName.GetFullPath() + wxT(" s -R");
-	wxExecute(cmd, wxEXEC_SYNC | wxEXEC_HIDE_CONSOLE, nullptr, &env);
+	//wxString cmd = properties.GetGeneralPropertiesData().atpPath.GetFullPath() + wxT(" both ") + fileName.GetFullPath() + wxT(" s -R");
+	wxString cmd = m_data.atpPath.GetFullPath() + wxT(" both ") + fileName.GetFullPath() + wxT(" s -R");
+	wxExecute(cmd, wxEXEC_SYNC | wxEXEC_HIDE_CONSOLE | wxEXEC_NODISABLE, nullptr, &env);
 
 	// Delete all .tmp files
 	wxDir dir(atpFolder);
@@ -591,7 +664,7 @@ bool EMTElement::CalculateCurrent(const PropertiesData& properties, wxString& er
 
 		// Fundamental and harmonics
 		m_data.currHarmonics.clear();
-		m_data.currHarmonicsOrder.clear();
+		//m_data.currHarmonicsOrder.clear();
 		for (size_t i = 0; i < (n / 2 + 1); i++) {
 			double freq = static_cast<double>(i) * df;
 			int order = static_cast<int>(round(freq / fundFreq));
@@ -600,14 +673,19 @@ bool EMTElement::CalculateCurrent(const PropertiesData& properties, wxString& er
 
 			double magnitude = sqrt(out[i][0] * out[i][0] + out[i][1] * out[i][1]) * ampCorrection;
 			if ((magnitude / fundMagnitude) > (m_data.harmonicsThreshold / 100.0)) {
-				m_data.currHarmonics.emplace_back(std::complex<double>(out[i][0], out[i][1]) * ampCorrection);
-				m_data.currHarmonicsOrder.emplace_back(order);
+				//m_data.currHarmonics.emplace_back(std::complex<double>(out[i][0], out[i][1]) * ampCorrection);
+				//m_data.currHarmonicsOrder.emplace_back(order);
+				m_data.currHarmonics[order] = std::complex<double>(out[i][0], out[i][1]) * ampCorrection / sqrt(2.0); // RMS value
 			}
 		}
 
 		if (saveFFTData) {
+			m_data.atpData.clear();
 			m_data.inFFTData.clear();
 			m_data.outFFTData.clear();
+			for (size_t i = 0; i < valueVec.size(); i++) {
+				m_data.atpData.emplace_back(std::make_pair(timeVec[i], valueVec[i]));
+			}
 			for (size_t i = 0; i < n; i++) {
 				m_data.inFFTData.emplace_back(std::make_pair(timeVec[i + timeVec.size() - n], in[i]));
 			}
@@ -629,7 +707,7 @@ bool EMTElement::CalculateCurrent(const PropertiesData& properties, wxString& er
 		wxTextFile lisFile(fileName.GetFullPath());
 
 		if (!lisFile.Exists()) {
-			errorMsg = wxString::Format(_("Fail to run ATP file of the eletromagnetic element \"%s\".\nThe ATP program doesn't return any error message."), m_data.name);
+			errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP program did not return any error messages."), m_data.name);
 			return false;
 		}
 		if (lisFile.Open()) {
@@ -654,14 +732,36 @@ bool EMTElement::CalculateCurrent(const PropertiesData& properties, wxString& er
 		}
 		else
 		{
-			errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP program doesn't return any error message."), m_data.name);
+			errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP program did not return any error messages."), m_data.name);
 			return false;
 		}
 
-		errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP return the following error message:\n\"%s\""), m_data.name, atpErrorMsg);
+		errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP returned the following error message:\n\"%s\""), m_data.name, atpErrorMsg);
 		return false;
 	}
 	return true;
+}
+
+void EMTElement::UpdateData(const PropertiesData* properties, bool updateVoltageBase)
+{
+	if (properties != nullptr) {
+		m_data.frequency = properties->GetSimulationPropertiesData().stabilityFrequency;
+		m_data.atpPath = properties->GetGeneralPropertiesData().atpPath;
+		m_data.atpWorkFolder = properties->GetGeneralPropertiesData().atpWorkFolder;
+	}
+	if (!m_parentList.empty()) {
+		Bus* bus = static_cast<Bus*>(m_parentList[0]);
+		if (bus != nullptr) {
+			auto busData = bus->GetElectricalData();
+			std::complex<double> voltage = std::complex<double>(1.0, 0.0);
+			if (abs(busData.voltage) > 1e-3)
+				m_data.puVoltage = busData.voltage;
+			if (updateVoltageBase) {
+				m_data.baseVoltage = GetValueFromUnit(busData.nominalVoltage, busData.nominalVoltageUnit);
+			}
+		}
+	}
+
 }
 
 std::vector<double> EMTElement::DoMedianFilter(double* extension, std::vector<double>& result, const int& n)

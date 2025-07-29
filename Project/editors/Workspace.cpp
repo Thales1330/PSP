@@ -49,6 +49,8 @@
 #include "../utils/PropertiesData.h"
 #include "../utils/HMPlane.h"
 
+#include <wx/busyinfo.h>
+
 // Workspace
 Workspace::Workspace() : WorkspaceBase(nullptr)
 {
@@ -314,7 +316,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 		}
 	}
 
-	if (!foundElement) {
+	if (!foundElement && !clickOnSwitch) {
 		m_mode = WorkspaceMode::MODE_SELECTION_RECT;
 		m_startSelRect = m_camera->ScreenToWorld(clickPoint);
 		if (m_hmPlane && m_showHM) {
@@ -1111,7 +1113,7 @@ void Workspace::GetStateListsCopy(const std::vector<PowerElement*>& elementsList
 		PowerElement* copyElement = static_cast<PowerElement*>(element->GetCopy());
 		elementsListCopy.emplace_back(copyElement);
 		elementMap[element] = copyElement;
-}
+	}
 	// Correct the parent and child pointers
 	for (PowerElement*& copyElement : elementsListCopy) {
 		// Parent
@@ -1719,7 +1721,7 @@ void Workspace::ValidateElementsVoltages()
 	}
 }
 
-bool Workspace::RunPowerFlow()
+bool Workspace::RunPowerFlow(bool resetVoltages, bool showBusyInfo)
 {
 	auto simProp = m_properties->GetSimulationPropertiesData();
 	double basePower = simProp.basePower;
@@ -1727,32 +1729,79 @@ bool Workspace::RunPowerFlow()
 		basePower *= 1e6;
 	else if (simProp.basePowerUnit == ElectricalUnit::UNIT_kVA)
 		basePower *= 1e3;
-	PowerFlow pf(GetElementList());
+
+	// Update EMTElements
+	for (auto* element : m_elementList) {
+		if (typeid(*element) == typeid(EMTElement)) {
+			EMTElement* emtElement = static_cast<EMTElement*>(element);
+			if (emtElement->IsOnline()) {
+				emtElement->UpdateData(m_properties, true);
+			}
+		}
+	}
 	bool result = false;
+	wxString errorMsg = "";
+	int numIt = 0;
+
 	wxStopWatch sw;
-	switch (simProp.powerFlowMethod) {
-	case GAUSS_SEIDEL: {
-		result = pf.RunGaussSeidel(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
-			simProp.initAngle, simProp.accFator);
-	} break;
-	case NEWTON_RAPHSON: {
-		result = pf.RunNewtonRaphson(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
-			simProp.initAngle, simProp.newtonInertia);
-	} break;
-	case GAUSS_NEWTON: {
-		result =
-			pf.RunGaussNewton(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
-				simProp.initAngle, simProp.accFator, simProp.gaussTolerance, simProp.newtonInertia);
-	} break;
+	{
+		wxBusyInfo* info = nullptr;
+		if(showBusyInfo)
+			info = new wxBusyInfo(
+				wxBusyInfoFlags()
+				.Parent(this)
+				.Icon(wxIcon(wxT("..\\data\\images\\ribbon\\powerFLow32.png"), wxBITMAP_TYPE_PNG))
+				.Title(_("<b>Calculating Power Flow</b>"))
+				.Text(_("Please wait..."))
+				.Foreground(*wxWHITE)
+				.Background(*wxBLACK)
+				.Transparency(4 * wxALPHA_OPAQUE / 5)
+			);
+		//wxBusyInfo info
+		//(
+		//	wxBusyInfoFlags()
+		//	.Parent(this)
+		//	.Icon(wxIcon(wxT("..\\data\\images\\ribbon\\powerFLow32.png"), wxBITMAP_TYPE_PNG))
+		//	.Title(_("<b>Calculating Power Flow</b>"))
+		//	.Text(_("Please wait..."))
+		//	.Foreground(*wxWHITE)
+		//	.Background(*wxBLACK)
+		//	.Transparency(4 * wxALPHA_OPAQUE / 5)
+		//);
+
+		PowerFlow pf(GetElementList());
+		if (resetVoltages) pf.ResetVoltages();
+
+		switch (simProp.powerFlowMethod) {
+		case GAUSS_SEIDEL: {
+			result = pf.RunGaussSeidel(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+				simProp.initAngle, simProp.accFator);
+		} break;
+		case NEWTON_RAPHSON: {
+			result = pf.RunNewtonRaphson(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+				simProp.initAngle, simProp.newtonInertia);
+		} break;
+		case GAUSS_NEWTON: {
+			result =
+				pf.RunGaussNewton(basePower, simProp.powerFlowMaxIterations, simProp.powerFlowTolerance,
+					simProp.initAngle, simProp.accFator, simProp.gaussTolerance, simProp.newtonInertia);
+		} break;
+		}
+
+		errorMsg = pf.GetErrorMessage();
+		numIt = pf.GetIterations();
+
+		if (showBusyInfo) delete info;
 	}
 	sw.Pause();
+
 	if (!result) {
-		wxMessageDialog msgDialog(this, pf.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+		wxMessageDialog msgDialog(this, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
 		msgDialog.ShowModal();
 	}
 	else {
 		m_statusBar->SetStatusText(
-			wxString::Format(_("Power flow converge with %d iterations (%ld ms)"), pf.GetIterations(), sw.Time()));
+			wxString::Format(_("Power flow converge with %d iterations (%ld ms)"), numIt, sw.Time()));
 	}
 
 	UpdateTextElements();
@@ -2072,8 +2121,8 @@ void Workspace::SetPreviousState()
 	}
 	else {
 		m_currenteState++;
-		}
 	}
+}
 
 void Workspace::UnselectAll()
 {
@@ -2304,7 +2353,9 @@ bool Workspace::RunStaticStudies()
 	bool pfStatus, faultStatus, scStatus, harmStatus;
 	pfStatus = faultStatus = scStatus = harmStatus = false;
 
-	pfStatus = RunPowerFlow();
+	bool runHarmDistortion = m_properties->GetSimulationPropertiesData().harmDistortionAfterPowerFlow;
+
+	pfStatus = RunPowerFlow(runHarmDistortion);
 
 	if (m_properties->GetSimulationPropertiesData().faultAfterPowerFlow) {
 		if (pfStatus) faultStatus = RunFault();
@@ -2320,19 +2371,19 @@ bool Workspace::RunStaticStudies()
 		scStatus = true;
 	}
 
-	if (m_properties->GetSimulationPropertiesData().harmDistortionAfterPowerFlow) {
-		if (pfStatus) harmStatus = RunHarmonicDistortion();
+	if (runHarmDistortion) {
+		if (pfStatus) harmStatus = RunHarmonicDistortion(false);
 	}
 	else {
 		harmStatus = true;
-}
+	}
 
 	if (pfStatus && faultStatus && scStatus && harmStatus) return true;
 
 	return false;
-	}
+}
 
-bool Workspace::RunHarmonicDistortion()
+bool Workspace::RunHarmonicDistortion(bool runPowerFlowBefore)
 {
 	auto simProp = m_properties->GetSimulationPropertiesData();
 	double basePower = simProp.basePower;
@@ -2340,12 +2391,60 @@ bool Workspace::RunHarmonicDistortion()
 		basePower *= 1e6;
 	else if (simProp.basePowerUnit == ElectricalUnit::UNIT_kVA)
 		basePower *= 1e3;
-	if (!RunPowerFlow()) return false;
+	if (runPowerFlowBefore) {
+		if (!RunPowerFlow(true)) return false;
+	}
+
+	bool hasEMTElement = false;
+	for (auto* element : m_elementList) {
+		if (typeid(*element) == typeid(EMTElement)) {
+			EMTElement* emtElement = static_cast<EMTElement*>(element);
+			if (emtElement->IsOnline()) hasEMTElement = true;
+		}
+	}
 
 	HarmLoadConnection loadConnection = simProp.harmLoadConnection;
 
 	PowerQuality pq(GetElementList());
 	bool result = pq.CalculateDistortions(basePower, loadConnection);
+
+	// If has EMT element, repeat the Power Flow and Harmonics calculation untion DHT converge.
+	if (hasEMTElement && result) {
+		wxBusyInfo info(
+			wxBusyInfoFlags()
+			.Parent(this)
+			.Icon(wxIcon(wxT("..\\data\\images\\ribbon\\harmDist32.png"), wxBITMAP_TYPE_PNG))
+			.Title(_("<b>Calculating Harmonic Flow</b>"))
+			.Text(_("Please wait..."))
+			.Foreground(*wxWHITE)
+			.Background(*wxBLACK)
+			.Transparency(4 * wxALPHA_OPAQUE / 5)
+		);
+		std::vector<double> thdList;
+		for (auto const& bus : pq.GetBusList())
+			thdList.emplace_back(bus->GetElectricalData().thd);
+		double error = 1e3;
+		while (error > 1e-3) {
+			// Run Power Flow
+			if (!RunPowerFlow(false, false)) return false;
+
+			// Run Harmonic Distortion
+			bool result = pq.CalculateDistortions(basePower, loadConnection);
+			if (!result) break;
+
+			// Calculate error
+			int i = 0;
+			for (auto const& bus : pq.GetBusList()) {
+				double errorBus = std::abs(bus->GetElectricalData().thd - thdList[i]);
+				if (i == 0)
+					error = errorBus;
+				else if (errorBus > error)
+					error = errorBus;
+				thdList[i] = bus->GetElectricalData().thd;
+				i++;
+			}
+		}
+	}
 
 	if (!result) {
 		wxMessageDialog msgDialog(this, pq.GetErrorMessage(), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
@@ -2357,7 +2456,7 @@ bool Workspace::RunHarmonicDistortion()
 	}
 
 	return result;
-	}
+}
 
 bool Workspace::RunFrequencyResponse()
 {

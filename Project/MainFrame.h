@@ -21,6 +21,7 @@
 #include <wx/menu.h>
 #include <wx/msgdlg.h>
 #include <wx/filedlg.h>
+#include <wx/msgout.h>
 //#include <wx/glcanvas.h>
 
 #include "MainFrameBase.h"

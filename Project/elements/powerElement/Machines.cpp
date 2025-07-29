@@ -114,7 +114,7 @@ void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 		if (m_selected) {
 			gc->SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
-			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
 			gc->SetBrush(wxBrush(m_selectionColour));
@@ -132,7 +132,7 @@ void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 
 		gc->SetPen(wxPen(wxColour(elementColour), 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 		DrawDCCircle(m_position, 25.0, 20.0, gc);
 
 		DrawDCSwitches(gc);

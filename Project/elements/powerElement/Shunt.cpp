@@ -177,10 +177,10 @@ void Shunt::DrawDCGround(wxPoint2DDouble position, wxGraphicsContext* gc) const
 	groundPts.push_back(position + wxPoint2DDouble(-3, 20));
 	groundPts.push_back(position + wxPoint2DDouble(3, 20));
 
-	gc->DrawLines(2, &groundPts[0]);
-	gc->DrawLines(2, &groundPts[2]);
-	gc->DrawLines(2, &groundPts[4]);
-	gc->DrawLines(2, &groundPts[6]);
+	gc->StrokeLines(2, &groundPts[0]);
+	gc->StrokeLines(2, &groundPts[2]);
+	gc->StrokeLines(2, &groundPts[4]);
+	gc->StrokeLines(2, &groundPts[6]);
 }
 
 void Shunt::UpdatePowerFlowArrowsPosition()

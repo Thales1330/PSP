@@ -138,7 +138,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
-			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			// Push the current matrix on stack.
 			gc->PushState();
@@ -167,7 +167,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 
 		gc->SetPen(wxPen(wxColour(elementColour), 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 		DrawDCSwitches(gc);
 

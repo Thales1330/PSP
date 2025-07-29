@@ -84,7 +84,7 @@ void Limiter::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContex
     limSymbol[1] = m_position + wxPoint2DDouble(2, -10);
     limSymbol[2] = m_position + wxPoint2DDouble(-2, 10);
     limSymbol[3] = m_position + wxPoint2DDouble(-10, 10);
-    gc->DrawLines(4, limSymbol);
+    gc->StrokeLines(4, limSymbol);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
     gc->SetBrush(*wxBLACK_BRUSH);

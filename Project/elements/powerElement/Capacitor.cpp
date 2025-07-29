@@ -144,7 +144,7 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
-			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			// Push the current matrix on stack.
 			gc->PushState();
@@ -153,8 +153,8 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 			gc->Rotate(wxDegToRad(m_angle));
 			gc->Translate(-m_position.m_x, -m_position.m_y);
 
-			gc->DrawLines(2, &capPts[0]);
-			gc->DrawLines(2, &capPts[2]);
+			gc->StrokeLines(2, &capPts[0]);
+			gc->StrokeLines(2, &capPts[2]);
 
 			DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), gc);
 
@@ -173,7 +173,7 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 
 		gc->SetPen(wxPen(wxColour(elementColour), 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 		DrawDCSwitches(gc);
 
@@ -186,8 +186,8 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 
 		gc->SetPen(wxPen(wxColour(elementColour), 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		gc->DrawLines(2, &capPts[0]);
-		gc->DrawLines(2, &capPts[2]);
+		gc->StrokeLines(2, &capPts[0]);
+		gc->StrokeLines(2, &capPts[2]);
 
 		DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), gc);
 

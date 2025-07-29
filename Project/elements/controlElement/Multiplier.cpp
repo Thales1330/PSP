@@ -50,8 +50,8 @@ void Multiplier::DrawDCSymbol(wxGraphicsContext* gc) const
     xSymbol[1] = m_position + wxPoint2DDouble(5, 5);
     xSymbol[2] = m_position + wxPoint2DDouble(-5, 5);
     xSymbol[3] = m_position + wxPoint2DDouble(5, -5);
-    gc->DrawLines(2, &xSymbol[0]);
-    gc->DrawLines(2, &xSymbol[2]);
+    gc->StrokeLines(2, &xSymbol[0]);
+    gc->StrokeLines(2, &xSymbol[2]);
 }
 
 bool Multiplier::Solve(double* input, double timeStep)

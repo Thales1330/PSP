@@ -164,12 +164,12 @@ void Sum::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
         wxPoint2DDouble hLine[2];
         hLine[0] = m_nodeList[i]->GetPosition() + signalOffset[0];
         hLine[1] = m_nodeList[i]->GetPosition() + signalOffset[1];
-        gc->DrawLines(2, hLine);
+        gc->StrokeLines(2, hLine);
         if (m_signalList[i] == SIGNAL_POSITIVE) {
             wxPoint2DDouble vLine[2];
             vLine[0] = m_nodeList[i]->GetPosition() + signalOffset[2];
             vLine[1] = m_nodeList[i]->GetPosition() + signalOffset[3];
-            gc->DrawLines(2, vLine);
+            gc->StrokeLines(2, vLine);
         }
     }
 
@@ -181,7 +181,7 @@ void Sum::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
     sigma[2] = m_position + wxPoint2DDouble(0, 0) + sigmaOffset;
     sigma[3] = m_position + wxPoint2DDouble(-6, -9) + sigmaOffset;
     sigma[4] = m_position + wxPoint2DDouble(4, -9) + sigmaOffset;
-    gc->DrawLines(5, sigma);
+    gc->StrokeLines(5, sigma);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
     gc->SetBrush(*wxBLACK_BRUSH);

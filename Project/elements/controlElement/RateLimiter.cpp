@@ -88,14 +88,14 @@ void RateLimiter::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
     axis[1] = m_position + wxPoint2DDouble(13, 0);
     axis[2] = m_position + wxPoint2DDouble(0, -13);
     axis[3] = m_position + wxPoint2DDouble(0, 13);
-    gc->DrawLines(2, &axis[0]);
-    gc->DrawLines(2, &axis[2]);
+    gc->StrokeLines(2, &axis[0]);
+    gc->StrokeLines(2, &axis[2]);
 
     gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
     wxPoint2DDouble limSymbol[2];
     limSymbol[0] = m_position + wxPoint2DDouble(10, -10);
     limSymbol[1] = m_position + wxPoint2DDouble(-10, 10);
-    gc->DrawLines(2, limSymbol);
+    gc->StrokeLines(2, limSymbol);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
     gc->SetBrush(*wxBLACK_BRUSH);

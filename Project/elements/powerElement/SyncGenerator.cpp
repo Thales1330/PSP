@@ -77,7 +77,7 @@ void SyncGenerator::DrawDCSymbol(wxGraphicsContext* gc) const
 	// Draw sine.
 	std::vector<wxPoint2DDouble> sinePts;
 	for (unsigned int i = 0; i < m_sinePts.size(); i++) { sinePts.push_back(m_sinePts[i] + m_position); }
-	gc->DrawLines(sinePts.size(), &sinePts[0]);
+	gc->StrokeLines(sinePts.size(), &sinePts[0]);
 }
 
 bool SyncGenerator::GetContextMenu(wxMenu& menu)

@@ -145,7 +145,7 @@ void Load::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 			gc->SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
-			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
 			gc->SetBrush(wxBrush(m_selectionColour));
@@ -173,7 +173,7 @@ void Load::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 		// Draw Load (layer 2).
 		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 		// Draw node.
 		gc->SetPen(*wxTRANSPARENT_PEN);

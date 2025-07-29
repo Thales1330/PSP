@@ -48,7 +48,7 @@ void Divider::DrawDCSymbol(wxGraphicsContext* gc) const
     wxPoint2DDouble mSymbol[2];
     mSymbol[0] = m_position + wxPoint2DDouble(-5, 0);
     mSymbol[1] = m_position + wxPoint2DDouble(5, 0);
-    gc->DrawLines(2, mSymbol);
+    gc->StrokeLines(2, mSymbol);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
     gc->SetBrush(wxBrush(wxColour(0, 77, 255, 255)));

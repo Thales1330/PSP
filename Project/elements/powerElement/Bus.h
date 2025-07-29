@@ -18,7 +18,7 @@
 #ifndef BUS_H
 #define BUS_H
 
-#include "../forms/BusForm.h"
+#include "../../forms/BusForm.h"
 #include "PowerElement.h"
 
 struct BusElectricalData {

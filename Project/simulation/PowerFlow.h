@@ -65,6 +65,7 @@ class PowerFlow : public ElectricCalculation
 
     virtual wxString GetErrorMessage() { return m_errorMsg; }
     virtual int GetIterations() { return m_iterations; }
+    virtual void ResetVoltages();
 
    protected:
     void GetNumPVPQ(std::vector<BusType> busType, int &numPQ, int &numPV);

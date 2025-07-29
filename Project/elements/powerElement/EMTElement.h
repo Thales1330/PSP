@@ -19,6 +19,7 @@
 #define EMTELEMENT_H
 
 #include "Shunt.h"
+#include <map>
 
 class wxTextFile;
 class PropertiesData;
@@ -34,11 +35,21 @@ struct EMTElementData {
 	std::complex<double> puVoltage = std::complex<double>(1.0, 0.0);
 	double baseVoltage = 138.0e3;
 	double frequency = 60.0;
+	wxString atpWorkFolder = "";
+	wxFileName atpPath;
+
+	// Power Flow
+	std::complex<double> y0 = std::complex<double>(0.0, 0.0); // Base admittance
+	std::complex<double> power = std::complex<double>(0.0, 0.0);
+	std::complex<double> powerDiff = std::complex<double>(0.0, 0.0);
+
 	// Harmonics
 	int numMaxHarmonics = 15;
 	double harmonicsThreshold = 0.3;
-	std::vector< std::complex<double> > currHarmonics;
-	std::vector<int> currHarmonicsOrder;
+	//std::vector< std::complex<double> > currHarmonics;
+	//std::vector<int> currHarmonicsOrder;
+	std::map<int, std::complex<double> > currHarmonics;
+	std::vector< std::pair<double, double> > atpData;
 	std::vector< std::pair<double, double> > inFFTData;
 	std::vector< std::pair<double ,std::complex<double> > > outFFTData;
 };
@@ -64,7 +75,7 @@ public:
 	virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
 	virtual void Rotate(bool clockwise = true);
 	virtual bool GetContextMenu(wxMenu& menu);
-	//virtual wxString GetTipText() const;
+	virtual wxString GetTipText() const;
 	virtual bool ShowForm(wxWindow* parent, Element* element);
 
 	virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
@@ -77,7 +88,8 @@ public:
 	bool SetATPParameter(wxTextFile& atpFile, const wxString& card, const int& line, const int& initPos, const int& size, const wxString& value);
 	bool AddConnectionToNode(wxTextFile& atpFile, const wxString& node);
 	std::vector<double> MedianFilter(const std::vector<double>& data);
-	bool CalculateCurrent(const PropertiesData& properties, wxString& errorMsg, const bool& saveFFTData = false);
+	bool CalculateCurrent( wxString& errorMsg, const bool& saveFFTData = false);
+	void UpdateData(const PropertiesData* properties = nullptr, bool updateVoltageBase = false);
 
 protected:
 	std::vector<double> DoMedianFilter(double* extension, std::vector<double>& result, const int& n);

@@ -71,7 +71,7 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 									  wxPoint2DDouble(-m_borderSize, -m_borderSize),
 								  WorldToScreen(translation, scale, (m_width / 2.0), -(m_height / 2.0)) -
 									  wxPoint2DDouble(-m_borderSize, m_borderSize) };
-		gc->DrawLines(4, pts);
+		gc->StrokeLines(4, pts);
 		gc->PopState();
 	}
 
@@ -146,13 +146,13 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 		points[2] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
 		points[3] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
 
-		gc->DrawLines(4, points);
+		gc->StrokeLines(4, points);
 
 		points[0] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
 		points[1] = wxPoint2DDouble(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
 		points[2] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);
 
-		gc->DrawLines(3, points);
+		gc->StrokeLines(3, points);
 
 		delete[] points;
 
@@ -315,15 +315,19 @@ wxString Bus::GetTipText() const
 	}
 
 	tipText += _("\n\nSsc = ") + wxString::FromDouble(std::abs(m_electricalData.scPower), 5) + _(" p.u.");
-	tipText += _("\n\nTHD = ") + wxString::FromDouble(std::abs(m_electricalData.thd), 5) + wxT("%");
+
+	wxString harmonicsInfo = _("\n\nHarmonics info:");
+	bool hasHarmonics = false;
+	harmonicsInfo += _("\nTHD = ") + wxString::FromDouble(std::abs(m_electricalData.thd), 5) + wxT("%");
 	int i = 0;
 	for (auto& hVoltage : m_electricalData.harmonicVoltage) {
+		hasHarmonics = true;
 		wxString hVoltageStr;
 		hVoltageStr.Printf(_("\nVh(%d) = %.5e%s%.2f%s p.u."), m_electricalData.harmonicOrder[i], std::abs(hVoltage), wxString(L'\u2220'), wxRadToDeg(std::arg(hVoltage)), wxString(L'\u00B0'));
-		tipText += hVoltageStr;
+		harmonicsInfo += hVoltageStr;
 		i++;
 	}
-
+	if (hasHarmonics) tipText += harmonicsInfo;
 
 	return tipText;
 }

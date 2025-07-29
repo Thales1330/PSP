@@ -200,7 +200,7 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 		if (m_selected) {
 			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
-			gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			// Push the current matrix on stack.
 			gc->PushState();
@@ -229,7 +229,7 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 		// Transformer line
 		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
-		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 		// Draw nodes.
 		gc->SetPen(*wxTRANSPARENT_PEN);

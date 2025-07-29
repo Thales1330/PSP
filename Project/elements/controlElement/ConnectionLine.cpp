@@ -58,12 +58,12 @@ void ConnectionLine::DrawDC(wxPoint2DDouble translation, double scale, wxGraphic
 	gc->SetBrush(*wxTRANSPARENT_BRUSH);
 	if (m_selected) {
 		gc->SetPen(wxPen(m_selectionColour, 1.5 + m_borderSize * 2.0));
-		gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 	}
 
 	// Draw line (Layer 2)
 	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 2.0));
-	gc->DrawLines(m_pointList.size(), &m_pointList[0]);
+	gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 	if (m_type == ConnectionLineType::ELEMENT_LINE) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
