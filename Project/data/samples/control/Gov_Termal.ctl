@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Control>
+	<Name>Gov_Termal</Name>
+	<ControlElements>
+		<ConstantList>
+			<Constant ID="14">
+				<CADProperties>
+					<Position>
+						<X>388.0000000000000</X>
+						<Y>333.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>35.0000000000000</Width>
+						<Height>26.0000000000000</Height>
+					</Size>
+					<Angle>90.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>388.0000000000000</X>
+							<Y>320.0000000000000</Y>
+						</Position>
+						<Angle>90.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Value>0.0500000000000</Value>
+			</Constant>
+		</ConstantList>
+		<ExponentialList/>
+		<GainList/>
+		<IOList>
+			<IO ID="1">
+				<CADProperties>
+					<Position>
+						<X>152.0000000000000</X>
+						<Y>195.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>28.0000000000000</Width>
+						<Height>30.0000000000000</Height>
+					</Size>
+					<Angle>90.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>152.0000000000000</X>
+							<Y>208.0000000000000</Y>
+						</Position>
+						<Angle>270.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Value>256</Value>
+				<IOFlags>430</IOFlags>
+			</IO>
+			<IO ID="2">
+				<CADProperties>
+					<Position>
+						<X>114.0000000000000</X>
+						<Y>260.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>23.0000000000000</Width>
+						<Height>30.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>123.5000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Value>2</Value>
+				<IOFlags>430</IOFlags>
+			</IO>
+			<IO ID="8">
+				<CADProperties>
+					<Position>
+						<X>222.0000000000000</X>
+						<Y>318.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>28.0000000000000</Width>
+						<Height>30.0000000000000</Height>
+					</Size>
+					<Angle>270.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>222.0000000000000</X>
+							<Y>305.0000000000000</Y>
+						</Position>
+						<Angle>90.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Value>256</Value>
+				<IOFlags>430</IOFlags>
+			</IO>
+			<IO ID="20">
+				<CADProperties>
+					<Position>
+						<X>563.0000000000000</X>
+						<Y>191.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>39.0000000000000</Width>
+						<Height>30.0000000000000</Height>
+					</Size>
+					<Angle>90.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>563.0000000000000</X>
+							<Y>204.0000000000000</Y>
+						</Position>
+						<Angle>270.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Value>128</Value>
+				<IOFlags>430</IOFlags>
+			</IO>
+			<IO ID="24">
+				<CADProperties>
+					<Position>
+						<X>809.0000000000000</X>
+						<Y>260.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>34.0000000000000</Width>
+						<Height>30.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>792.0000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+				</NodeList>
+				<Value>32</Value>
+				<IOFlags>430</IOFlags>
+			</IO>
+		</IOList>
+		<LimiterList>
+			<Limiter ID="25">
+				<CADProperties>
+					<Position>
+						<X>656.0000000000000</X>
+						<Y>260.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>36.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>638.0000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>674.0000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<UpperLimit>1.9200000000000</UpperLimit>
+				<LowerLimit>0.0000000000000</LowerLimit>
+			</Limiter>
+		</LimiterList>
+		<MultiplierList/>
+		<DividerList>
+			<Divider ID="6">
+				<CADProperties>
+					<Position>
+						<X>250.0000000000000</X>
+						<Y>260.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>36.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>232.0000000000000</X>
+							<Y>251.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>232.0000000000000</X>
+							<Y>269.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="2">
+						<Position>
+							<X>268.0000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+			</Divider>
+			<Divider ID="12">
+				<CADProperties>
+					<Position>
+						<X>416.0000000000000</X>
+						<Y>269.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>36.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>398.0000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>398.0000000000000</X>
+							<Y>278.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="2">
+						<Position>
+							<X>434.0000000000000</X>
+							<Y>269.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+			</Divider>
+		</DividerList>
+		<RateLimiterList/>
+		<SumList>
+			<Sum ID="3">
+				<CADProperties>
+					<Position>
+						<X>180.0000000000000</X>
+						<Y>251.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>36.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>162.0000000000000</X>
+							<Y>242.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>162.0000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="2">
+						<Position>
+							<X>198.0000000000000</X>
+							<Y>251.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Signs>
+					<Value>0</Value>
+					<Value>1</Value>
+				</Signs>
+			</Sum>
+			<Sum ID="18">
+				<CADProperties>
+					<Position>
+						<X>591.0000000000000</X>
+						<Y>260.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>36.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>573.0000000000000</X>
+							<Y>251.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>573.0000000000000</X>
+							<Y>269.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="2">
+						<Position>
+							<X>609.0000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Signs>
+					<Value>0</Value>
+					<Value>0</Value>
+				</Signs>
+			</Sum>
+		</SumList>
+		<MathExprList/>
+		<TransferFunctionList>
+			<TransferFunction ID="10">
+				<CADProperties>
+					<Position>
+						<X>328.0000000000000</X>
+						<Y>260.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>55.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>300.5000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>355.5000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Numerator>
+					<Value>1.0000000000000</Value>
+				</Numerator>
+				<Denominator>
+					<Value>0.2000000000000</Value>
+					<Value>1.0000000000000</Value>
+				</Denominator>
+			</TransferFunction>
+			<TransferFunction ID="16">
+				<CADProperties>
+					<Position>
+						<X>502.0000000000000</X>
+						<Y>269.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>55.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>474.5000000000000</X>
+							<Y>269.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>529.5000000000000</X>
+							<Y>269.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Numerator>
+					<Value>1.0000000000000</Value>
+				</Numerator>
+				<Denominator>
+					<Value>0.3000000000000</Value>
+					<Value>1.0000000000000</Value>
+				</Denominator>
+			</TransferFunction>
+			<TransferFunction ID="22">
+				<CADProperties>
+					<Position>
+						<X>731.0000000000000</X>
+						<Y>260.0000000000000</Y>
+					</Position>
+					<Size>
+						<Width>55.0000000000000</Width>
+						<Height>36.0000000000000</Height>
+					</Size>
+					<Angle>0.0000000000000</Angle>
+				</CADProperties>
+				<NodeList>
+					<Node ID="0">
+						<Position>
+							<X>703.5000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>0.0000000000000</Angle>
+						<Type>0</Type>
+					</Node>
+					<Node ID="1">
+						<Position>
+							<X>758.5000000000000</X>
+							<Y>260.0000000000000</Y>
+						</Position>
+						<Angle>180.0000000000000</Angle>
+						<Type>1</Type>
+					</Node>
+				</NodeList>
+				<Numerator>
+					<Value>1.0000000000000</Value>
+				</Numerator>
+				<Denominator>
+					<Value>0.2000000000000</Value>
+					<Value>1.0000000000000</Value>
+				</Denominator>
+			</TransferFunction>
+		</TransferFunctionList>
+		<ConnectionList>
+			<Connection ID="4">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>3</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>1</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="5">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>3</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>2</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="7">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>6</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>3</ElementID>
+						<NodeID>2</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="9">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>8</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>6</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="11">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>10</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>6</ElementID>
+						<NodeID>2</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="13">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>12</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>10</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="15">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>14</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>12</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="17">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>16</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>12</ElementID>
+						<NodeID>2</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="19">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>18</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>16</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="21">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>20</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>18</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="26">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>25</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>18</ElementID>
+						<NodeID>2</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="27">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>22</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>25</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+			<Connection ID="28">
+				<CADProperties>
+					<Offset>0.0000000000000</Offset>
+				</CADProperties>
+				<ParentList>
+					<Parent>
+						<ElementID>24</ElementID>
+						<NodeID>0</NodeID>
+					</Parent>
+					<Parent>
+						<ElementID>22</ElementID>
+						<NodeID>1</NodeID>
+					</Parent>
+				</ParentList>
+				<ParentLine ID="-1"/>
+			</Connection>
+		</ConnectionList>
+	</ControlElements>
+</Control>
+

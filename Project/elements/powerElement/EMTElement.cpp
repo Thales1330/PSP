@@ -175,19 +175,21 @@ wxString EMTElement::GetTipText() const
 {
 	wxString tipText = m_data.name;
 	tipText += wxT("\n");
-	tipText += _(wxString::Format("\nP = %.5f p.u.", m_data.power.real()));
-	tipText += _(wxString::Format("\nQ = %.5f p.u.", m_data.power.imag()));
+
+	tipText += wxString::Format(_("\nP = %.5f p.u."), m_data.power.real());
+	tipText += wxString::Format(_("\nQ = %.5f p.u."), m_data.power.imag());
 	if (auto itCurrrent = m_data.currHarmonics.find(1); itCurrrent != m_data.currHarmonics.end())
-		tipText += _(wxString::Format("\nI = %.5f A", std::abs(itCurrrent->second)));
+		tipText += wxString::Format(_("\nI = %.5f A"), std::abs(itCurrrent->second));
 
 	wxString harmonicsInfo = _("\n\nHarmonics info:");
 	bool hasHarmonics = false;
 	for (auto& [order, current] : m_data.currHarmonics) {
 		if (order != 1) {
 			hasHarmonics = true;
-			harmonicsInfo += _(wxString::Format("\nIh(%d): %.5f%s%.2f%s A", order, std::abs(current), wxString(L'\u2220'), wxRadToDeg(std::arg(current)), wxString(L'\u00B0')));
+			harmonicsInfo += wxString::Format(_("\nIh(%d): %.5f%s%.2f%s A"), order, std::abs(current), wxString(L'\u2220'), wxRadToDeg(std::arg(current)), wxString(L'\u00B0'));
 		}
 	}
+
 	if(hasHarmonics) tipText += harmonicsInfo;
 
 	return tipText;

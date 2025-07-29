@@ -11,8 +11,8 @@ Project/Debug_Ubuntu_x64/
 Project/x64
 Project/Debug
 Project/Release
+/data
 docs/doxygen/latex
-data/
 Debug/
 Release/
 ExtLibs/GLEW/lib/
