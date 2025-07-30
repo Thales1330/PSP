@@ -105,7 +105,7 @@ elseif(UNIX)
     wx::ribbon
     wx::xml
     wx::stc
-    chartdir70
+    chartdir
     fftw3
   )
 else()
