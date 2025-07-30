@@ -9,12 +9,11 @@
 
 ![PSP-UFU](docs/doxygen/html/logoHeader.png)
 
-| | |
-|:-:|:-:|
-| [**PSP-UFU website**](https://thales1330.github.io/PSP/) | [**PSP-UFU user guide**](https://thales1330.github.io/PSP/docs/) |
-|||
-
+  <a href="https://thales1330.github.io/PSP/"><strong>PSP-UFU website</strong></a> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  <a href="https://thales1330.github.io/PSP/docs/"><strong>PSP-UFU user guide</strong></a>
 </div>
+
+
 
 PSP-UFU (Power Systems Platform of Federal University of Uberlândia) is a **cross-platform**, **multilingual**, **Free and Open-Source Software** (FOSS) with **advanced GUI** (Graphical User Interface) features and **CAD** (Computer-Aided Design) tools for power system studies.
 

@@ -136,3 +136,4 @@ if(WIN32)
       $<TARGET_FILE_DIR:PSP-UFU>
   
     COMMAND ${CMAKE_COMMAND} -E copy_directory )
+endif()
