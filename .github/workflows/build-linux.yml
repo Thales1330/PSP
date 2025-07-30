@@ -1,4 +1,4 @@
-name: Build PSP-UFU (Linux)
+name: Linux Build
 
 on:
   push:
