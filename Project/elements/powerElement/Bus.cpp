@@ -71,7 +71,7 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 									  wxPoint2DDouble(-m_borderSize, -m_borderSize),
 								  WorldToScreen(translation, scale, (m_width / 2.0), -(m_height / 2.0)) -
 									  wxPoint2DDouble(-m_borderSize, m_borderSize) };
-		gc->StrokeLines(4, pts);
+		gc->DrawLines(4, pts);
 		gc->PopState();
 	}
 

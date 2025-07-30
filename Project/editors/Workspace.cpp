@@ -48,6 +48,7 @@
 #include "../utils/Camera.h"
 #include "../utils/PropertiesData.h"
 #include "../utils/HMPlane.h"
+#include "../utils/FileHanding.h"
 
 #include <wx/busyinfo.h>
 
@@ -66,7 +67,7 @@ Workspace::Workspace() : WorkspaceBase(nullptr)
 	SetBackgroundStyle(wxBG_STYLE_PAINT); // To allow wxBufferedPaintDC works properly.
 }
 
-Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar)
+Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wxAuiNotebook* auiNotebook)
 	: WorkspaceBase(parent)
 {
 #ifdef _DEBUG
@@ -81,6 +82,7 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar)
 	m_timer->Start();
 	m_name = name;
 	m_statusBar = statusBar;
+	m_auiNotebook = auiNotebook;
 	//m_glContext = new wxGLContext(m_glCanvas, sharedGLContext);
 	m_camera = new Camera();
 	m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
@@ -1003,6 +1005,29 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				if (event.GetModifiers() == wxMOD_CONTROL) { Paste(); }
 			}
 		} break;
+		case 'S': {
+			if (!insertingElement) {
+				if (event.GetModifiers() == wxMOD_CONTROL) {
+					// Save the workspace.
+					FileHanding fileHandling(this);
+
+					if (GetSavedPath().IsOk()) {
+						fileHandling.SaveProject(GetSavedPath());
+					}
+					else {
+						wxFileDialog saveFileDialog(this, _("Save PSP file"), "", "", "PSP files (*.psp)|*.psp",
+							wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+						if (saveFileDialog.ShowModal() == wxID_CANCEL) return;
+
+						fileHandling.SaveProject(saveFileDialog.GetPath());
+						wxFileName fileName(saveFileDialog.GetPath());
+						SetName(fileName.GetName());
+						if (m_auiNotebook) m_auiNotebook->SetPageText(m_auiNotebook->GetPageIndex(this), GetName());
+						SetSavedPath(fileName);
+					}
+				}
+			}
+		} break;
 		case 'Z': {
 			if (!insertingElement) {
 				if (event.ControlDown() && !event.ShiftDown()) { SetPreviousState(); }
@@ -1746,7 +1771,7 @@ bool Workspace::RunPowerFlow(bool resetVoltages, bool showBusyInfo)
 	wxStopWatch sw;
 	{
 		wxBusyInfo* info = nullptr;
-		if(showBusyInfo)
+		if (showBusyInfo)
 			info = new wxBusyInfo(
 				wxBusyInfoFlags()
 				.Parent(this)

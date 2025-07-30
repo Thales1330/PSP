@@ -26,6 +26,7 @@
 #include <wx/dcclient.h>
 #include <wx/msgdlg.h>
 #include <wx/statusbr.h>
+#include <wx/aui/auibook.h>
 #include <wx/clipbrd.h>
 #include <wx/tipwin.h>
 #include <wx/stopwatch.h>
@@ -117,7 +118,7 @@ public:
 	};
 
 	Workspace();
-	Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = nullptr);
+	Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = nullptr, wxAuiNotebook* auiNotebook = nullptr);
 	virtual ~Workspace();
 
 	wxString GetName() const { return m_name; }
@@ -204,6 +205,7 @@ protected:
 
 	//wxGLContext* m_glContext = nullptr;
 	wxStatusBar* m_statusBar = nullptr;
+	wxAuiNotebook* m_auiNotebook = nullptr;
 	Camera* m_camera = nullptr;
 	wxTipWindow* m_tipWindow = nullptr;
 	wxString m_name;

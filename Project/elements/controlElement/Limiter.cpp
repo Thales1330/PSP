@@ -18,6 +18,7 @@
 #include "Limiter.h"
 #include "../../forms/LimiterForm.h"
 #include <wx/pen.h>
+#include <wx/brush.h>
 
 Limiter::Limiter(int id) : ControlElement(id)
 {

@@ -19,6 +19,7 @@
 #include "MathExpression.h"
 #include "../../forms/MathExpressionForm.h"
 #include <wx/pen.h>
+#include <wx/brush.h>
 
 MathExpression::MathExpression(int id) : ControlElement(id)
 {

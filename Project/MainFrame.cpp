@@ -56,7 +56,7 @@ MainFrame::MainFrame(wxWindow* parent, wxLocale* locale, PropertiesData* initPro
 
 	if (openPath != "") {
 		EnableCurrentProjectRibbon();
-		Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar());
+		Workspace* newWorkspace = new Workspace(this, _("Open project"), this->GetStatusBar(), this->GetAuiNotebook());
 		//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
 
 		FileHanding fileHandling(newWorkspace);
@@ -213,7 +213,7 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 	Workspace* newWorkspace;
 	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
 	newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-		this->GetStatusBar());
+		this->GetStatusBar(), this->GetAuiNotebook());
 	//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
 //}
 //else {
@@ -364,7 +364,7 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
 	Workspace* newWorkspace;
 	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
 	newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-		this->GetStatusBar());
+		this->GetStatusBar(), this->GetAuiNotebook());
 	// If none shared OpenGL context is loaded, get from this workspace.
 	//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
 //}
@@ -617,7 +617,7 @@ void MainFrame::OnImportClick(wxRibbonButtonBarEvent& event)
 	Workspace* newWorkspace;
 	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
 	newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-		this->GetStatusBar());
+		this->GetStatusBar(), this->GetAuiNotebook());
 	//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
 //}
 //else {
@@ -737,7 +737,7 @@ int MainFrame::RunPSPTest()
 	EnableCurrentProjectRibbon();
 
 	Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-		this->GetStatusBar());
+		this->GetStatusBar(), this->GetAuiNotebook());
 	//if (!m_sharedGLContext) {
 	//	m_sharedGLContext = newWorkspace->GetSharedGLContext();
 	//}
