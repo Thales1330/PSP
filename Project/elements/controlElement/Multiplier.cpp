@@ -18,6 +18,7 @@
 #include "ConnectionLine.h"
 #include "Multiplier.h"
 #include <wx/pen.h>
+#include <wx/brush.h>
 
 Multiplier::Multiplier(int id) : MathOperation(id) {}
 

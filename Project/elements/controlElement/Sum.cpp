@@ -19,6 +19,7 @@
 #include "Sum.h"
 #include "../../forms/SumForm.h"
 #include <wx/pen.h>
+#include <wx/brush.h>
 
 Sum::Sum(int id) : ControlElement(id)
 {

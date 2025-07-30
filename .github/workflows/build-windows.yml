@@ -16,10 +16,30 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+        run: |
+          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+          choco install ccache -y
+          
+      - name: Setup ccache
+        run: |
+          ccache --max-size=5G
+          echo "set CCACHE_LOGFILE=%LOCALAPPDATA%\\ccache\\ccache.log" >> $GITHUB_ENV
+          echo "set CC=ccache cl" >> $GITHUB_ENV
+          echo "set CXX=ccache cl" >> $GITHUB_ENV
+
+      - name: Cache ccache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.LOCALAPPDATA }}\\ccache
+          key: windows-ccache-${{ hashFiles('CMakeLists.txt') }}
+          restore-keys: |
+            windows-ccache-
 
       - name: Configure CMake
         run: cmake -S . -B build -A Win32
 
       - name: Build with CMake
         run: cmake --build build --config Release
+      
+      - name: Show ccache statistics
+        run: ccache -s
