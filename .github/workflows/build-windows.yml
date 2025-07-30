@@ -24,7 +24,9 @@ jobs:
         run: powershell -Command "New-Item -ItemType Directory -Force -Path $env:LOCALAPPDATA\\ccache"
 
       - name: Set CCACHE_DIR
-        run: echo "CCACHE_DIR=$env:LOCALAPPDATA\\ccache" >> $env:GITHUB_ENV
+        shell: powershell
+        run: |
+          Add-Content -Path $Env:GITHUB_ENV -Value "CCACHE_DIR=$Env:LOCALAPPDATA\ccache"
 
       - name: Restore ccache
         uses: actions/cache@v3
@@ -35,9 +37,10 @@ jobs:
             windows-ccache-
 
       - name: Configure CMake with ccache
-        run: cmake -S . -B build -A Win32 \
-             -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+        run: cmake -S . -B build -A Win32 `
+             -DCMAKE_C_COMPILER_LAUNCHER=ccache `
              -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+        shell: powershell
 
       - name: Build with CMake
         run: cmake --build build --config Release
@@ -51,3 +54,5 @@ jobs:
         with:
           path: ${{ env.CCACHE_DIR }}
           key: windows-ccache-${{ hashFiles('CMakeLists.txt') }}
+          restore-keys: |
+            windows-ccache-

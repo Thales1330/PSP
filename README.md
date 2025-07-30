@@ -5,9 +5,16 @@
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![DOI](https://zenodo.org/badge/64333860.svg)](https://zenodo.org/badge/latestdoi/64333860)
 
+<div align="center">
+
 ![PSP-UFU](docs/doxygen/html/logoHeader.png)
 
-[**PSP-UFU website**](https://thales1330.github.io/PSP/)
+| | |
+|:-:|:-:|
+| [**PSP-UFU website**](https://thales1330.github.io/PSP/) | [**PSP-UFU user guide**](https://thales1330.github.io/PSP/docs/) |
+|||
+
+</div>
 
 PSP-UFU (Power Systems Platform of Federal University of Uberlândia) is a **cross-platform**, **multilingual**, **Free and Open-Source Software** (FOSS) with **advanced GUI** (Graphical User Interface) features and **CAD** (Computer-Aided Design) tools for power system studies.
 
