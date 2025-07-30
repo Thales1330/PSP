@@ -32,8 +32,8 @@ jobs:
       - name: Set up ccache
         run: |
           ccache --max-size=5G
-          echo 'export CC="ccache gcc"' >> $GITHUB_ENV
-          echo 'export CXX="ccache g++"' >> $GITHUB_ENV
+          echo "CC=ccache gcc" >> $GITHUB_ENV
+          echo "CXX=ccache g++" >> $GITHUB_ENV
 
       - name: Cache ccache
         uses: actions/cache@v3
@@ -42,6 +42,13 @@ jobs:
           key: linux-ccache-${{ hashFiles('CMakeLists.txt') }}
           restore-keys: |
             linux-ccache-
+
+      - name: Ensure chartdir symlink exists
+        run: |
+          cd vendors/chatdir/linux64
+          if [ ! -e libchartdir.so ]; then
+            ln -s libchartdir.so.7.0 libchartdir.so
+          fi
 
       - name: Configure CMake
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache

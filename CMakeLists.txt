@@ -105,8 +105,19 @@ elseif(UNIX)
     wx::ribbon
     wx::xml
     wx::stc
-    chartdir
     fftw3
+  )
+  
+  # ChartDirector
+  target_link_directories(PSP-UFU PRIVATE
+    "${CMAKE_SOURCE_DIR}/vendors/chatdir/linux64"
+  )
+  
+  target_link_libraries(PSP-UFU PRIVATE chartdir)
+  
+  # RUNTIME PATH to find .so in runtime
+  set_target_properties(PSP-UFU PROPERTIES
+    BUILD_RPATH "${CMAKE_SOURCE_DIR}/vendors/chatdir/linux64"
   )
 else()
   message(FATAL_ERROR "Unsupported platform or architecture")
