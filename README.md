@@ -9,8 +9,8 @@
 
 ![PSP-UFU](docs/doxygen/html/logoHeader.png)
 
-  <a href="https://thales1330.github.io/PSP/"><strong>PSP-UFU website</strong></a> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-  <a href="https://thales1330.github.io/PSP/docs/"><strong>PSP-UFU user guide</strong></a>
+  <a href="https://thales1330.github.io/PSP/" style="font-size: 20px;"><strong>Website</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://thales1330.github.io/PSP/docs/" style="font-size: 20px;"><strong>User Guide</strong></a>
 </div>
 
 
@@ -98,16 +98,10 @@ The executable will be generated at: build/bin/PSP-UFU
 
 ## [](#header-2)Overview
 
-![](docs/images/ss_1.png)
-
-![](docs/images/ss_1_1.png)
-
-![](docs/images/ss_1_2.png)
-
-![](docs/images/ss_2.png)
-
-![](docs/images/ss_3.png)
-
-![](docs/images/ss_5.png)
-
-![](docs/images/ss_4.png)
+<p align="center">
+  <img src="docs/images/ss_1.png" width="600"/>
+  <img src="docs/images/ss_2.png" width="600"/>
+  <img src="docs/images/ss_3.png" width="600"/>
+  <img src="docs/images/ss_5.png" width="600"/>
+  <img src="docs/images/ss_4.png" width="600"/>
+</p>

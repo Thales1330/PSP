@@ -92,9 +92,10 @@ if(WIN32)
   )
 elseif(UNIX)
   # Linux 64-bit
-  target_link_directories(PSP-UFU PRIVATE
-    "${CMAKE_SOURCE_DIR}/vendors/chatdir/linux64"
-  )
+  set(CHARTDIR_PATH "${CMAKE_SOURCE_DIR}/vendors/chatdir/linux64")
+  
+  target_link_directories(PSP-UFU PRIVATE "${CHARTDIR_PATH}")
+  
   target_link_libraries(PSP-UFU PRIVATE
     wx::core
     wx::base
@@ -106,18 +107,12 @@ elseif(UNIX)
     wx::xml
     wx::stc
     fftw3
+	"${CHARTDIR_PATH}/libchartdir.so.7.0.0"
   )
-  
-  # ChartDirector
-  target_link_directories(PSP-UFU PRIVATE
-    "${CMAKE_SOURCE_DIR}/vendors/chatdir/linux64"
-  )
-  
-  target_link_libraries(PSP-UFU PRIVATE chartdir)
   
   # RUNTIME PATH to find .so in runtime
   set_target_properties(PSP-UFU PROPERTIES
-    BUILD_RPATH "${CMAKE_SOURCE_DIR}/vendors/chatdir/linux64"
+    BUILD_RPATH "${CHARTDIR_PATH}"
   )
 else()
   message(FATAL_ERROR "Unsupported platform or architecture")

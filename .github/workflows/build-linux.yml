@@ -43,13 +43,6 @@ jobs:
           restore-keys: |
             linux-ccache-
 
-      - name: Ensure chartdir symlink exists
-        run: |
-          cd vendors/chatdir/linux64
-          if [ ! -e libchartdir.so ]; then
-            ln -s libchartdir.so.7.0 libchartdir.so
-          fi
-
       - name: Configure CMake
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
