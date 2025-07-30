@@ -23,26 +23,31 @@ jobs:
       - name: Create ccache directory
         run: powershell -Command "New-Item -ItemType Directory -Force -Path $env:LOCALAPPDATA\\ccache"
 
-      - name: Setup ccache
-        run: |
-          ccache --max-size=5G
-          echo "set CCACHE_LOGFILE=%LOCALAPPDATA%\\ccache\\ccache.log" >> $GITHUB_ENV
-          echo "set CC=ccache cl" >> $GITHUB_ENV
-          echo "set CXX=ccache cl" >> $GITHUB_ENV
+      - name: Set CCACHE_DIR
+        run: echo "CCACHE_DIR=$env:LOCALAPPDATA\\ccache" >> $env:GITHUB_ENV
 
-      - name: Cache ccache
+      - name: Restore ccache
         uses: actions/cache@v3
         with:
-          path: ${{ env.LOCALAPPDATA }}\\ccache
+          path: ${{ env.CCACHE_DIR }}
           key: windows-ccache-${{ hashFiles('CMakeLists.txt') }}
           restore-keys: |
             windows-ccache-
 
-      - name: Configure CMake
-        run: cmake -S . -B build -A Win32
+      - name: Configure CMake with ccache
+        run: cmake -S . -B build -A Win32 \
+             -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
       - name: Build with CMake
         run: cmake --build build --config Release
 
       - name: Show ccache statistics
         run: ccache -s
+
+      - name: Save ccache
+        if: success()
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: windows-ccache-${{ hashFiles('CMakeLists.txt') }}

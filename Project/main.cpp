@@ -203,7 +203,7 @@ public:
 		wxImage::AddHandler(new wxJPEGHandler);
 
 		// Load fonts
-#ifdef wxUSE_PRIVATE_FONTS
+#ifdef __WXMSW__
 		wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
 		wxString fontsPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\fonts", wxPATH_WIN).GetPath();
 		bool loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunrm.ttf");
