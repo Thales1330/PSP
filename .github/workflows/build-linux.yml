@@ -24,13 +24,16 @@ jobs:
             libwxgtk3.2-dev \
             libgtk-3-dev \
             libgl1-mesa-dev
-            
+
+      - name: Create ccache directory
+        run: mkdir -p ~/.ccache
+
       - name: Set up ccache
         run: |
           ccache --max-size=5G
           echo 'export CC="ccache gcc"' >> $GITHUB_ENV
           echo 'export CXX="ccache g++"' >> $GITHUB_ENV
-          
+
       - name: Cache ccache
         uses: actions/cache@v3
         with:
@@ -38,12 +41,12 @@ jobs:
           key: linux-ccache-${{ hashFiles('CMakeLists.txt') }}
           restore-keys: |
             linux-ccache-
-            
+
       - name: Configure CMake
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 
       - name: Build with CMake
         run: cmake --build build --config Release
-        
+
       - name: Show ccache statistics
         run: ccache -s

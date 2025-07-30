@@ -77,7 +77,7 @@ public:
 #ifdef _DEBUG
 		wxSizerFlags::DisableConsistencyChecks();
 #endif
-		
+
 		// Load configuration file, if don't exists create it.
 		wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
 		if (!fn.DirExists()) {
@@ -203,6 +203,7 @@ public:
 		wxImage::AddHandler(new wxJPEGHandler);
 
 		// Load fonts
+#ifdef wxUSE_PRIVATE_FONTS
 		wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
 		wxString fontsPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\fonts", wxPATH_WIN).GetPath();
 		bool loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunrm.ttf");
@@ -212,6 +213,7 @@ public:
 				wxOK | wxCENTRE | wxICON_ERROR);
 			msgDialog.ShowModal();
 		}
+#endif // wxUSE_PRIVATE_FONTS		
 
 		PropertiesData* propertiesData = new PropertiesData();
 		LoadInitFile(propertiesData);

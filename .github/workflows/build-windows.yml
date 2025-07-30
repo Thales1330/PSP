@@ -19,7 +19,10 @@ jobs:
         run: |
           choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
           choco install ccache -y
-          
+
+      - name: Create ccache directory
+        run: powershell -Command "New-Item -ItemType Directory -Force -Path $env:LOCALAPPDATA\\ccache"
+
       - name: Setup ccache
         run: |
           ccache --max-size=5G
@@ -40,6 +43,6 @@ jobs:
 
       - name: Build with CMake
         run: cmake --build build --config Release
-      
+
       - name: Show ccache statistics
         run: ccache -s
