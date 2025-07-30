@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5...4.0)
+cmake_minimum_required(VERSION 3.5)
 project(PSP-UFU VERSION 1.0 LANGUAGES CXX)
 
 # C++20
@@ -135,5 +135,8 @@ if(WIN32)
       "${CMAKE_SOURCE_DIR}/vendors/chatdir/win32/chartdir70.dll"
       $<TARGET_FILE_DIR:PSP-UFU>
   
-    COMMAND ${CMAKE_COMMAND} -E copy_directory )
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+      "${CMAKE_SOURCE_DIR}/Project/data"
+      "$<TARGET_FILE_DIR:PSP-UFU>/../data"
+  )
 endif()
