@@ -135,4 +135,4 @@ if(WIN32)
       "${CMAKE_SOURCE_DIR}/vendors/chatdir/win32/chartdir70.dll"
       $<TARGET_FILE_DIR:PSP-UFU>
   
-    COMMAND ${CMAKE_COMMAND} -E copy_directo
+    COMMAND ${CMAKE_COMMAND} -E copy_directory )
