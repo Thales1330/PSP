@@ -1,79 +1,84 @@
 ---
 id: powerEditor
-title: Editor de Potência
-sidebar_label: Editor de Potência
+title: Power Editor
+sidebar_label: Power Editor
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-O Editor de Elementos de Potência no PSP-UFU permite a inserção, manipulação e edição de elementos elétricos de potência por meio de um diagrama unifilar.
+The Power Elements Editor in PSP-UFU allows the insertion, manipulation, and editing of electric power elements through a single-line diagram.
 
->(**Diagrama unifilar**) Um diagrama do sistema no qual as linhas polifásicas são representados por sua única linha equivalente. [*tradução livre* - IEC 60050](
+>(**Single-line diagram**) A system diagram in which the polyphase links are represented by their equivalent single line [IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=601-02-04).
 
-:::info Informação
-Todos os elementos inseridos pode ser manipulados e editados utilizando as [Ferramentas CAD](cadTools).
+:::info Information
+All inserted elements can be manipulated and edited using the [CAD Tools](cadTools).
 :::
 
-## Novo projeto
-A criação de um novo projeto é realizada clicando no item **Novo projeto** no [submenu **Arquivo**](mainScreen#ribbon-menu). Essa ação cria um sistema em branco na área de trabalho, local onde é possível inserir os elementos elétricos por meio do [submenu **Ferramentas**](mainScreen#ribbon-menu) ou pelas [teclas de atalho](powerEditor#teclas-de-atalho).
+## New Project
+The creation of a new project is done by clicking on the **New Project** item in the [**File** submenu](mainScreen#ribbon-menu).  
+This action creates a blank system in the workspace, where it is possible to insert electric elements through the [**Tools** submenu](mainScreen#ribbon-menu) or using the [keyboard shortcuts](powerEditor#teclas-de-atalho).
 
-Abaixo são apresentados os elementos elétricos de potência que podem ser inseridos no PSP-UFU:
-- [Barramento](bus)
-- Elementos de ramo
-	- [Linha](line)
-	- [Transformador](transformer)
-- Elementos Shunt
-	- [Carga](load)
+Below are the electric power elements that can be inserted in PSP-UFU:
+- [Bus](bus)
+- Branch elements
+	- [Line](line)
+	- [Transformer](transformer)
+- Shunt elements
+	- [Load](load)
 	- [Capacitor](capacitor)
-	- [Indutor](inductor)
-	- [Fonte de Corrente Harmônica](harmSource)
-- Máquinas
-	- [Gerador Síncrono](syncGenerator)
-	- [Compensador Síncrono](syncMotor)
-	- [Motor de Indução](indMotor)
+	- [Inductor](inductor)
+	- [Harmonic Current Source](harmSource)
+	- Electromagnetic Transient (ATP)
+- Machines
+	- [Synchronous Generator](syncGenerator)
+	- [Synchronous Condenser](syncMotor)
+	- [Induction Motor](indMotor)
 
-<div><center><img src={useBaseUrl("images/powerElements.svg")} alt="Elementos de potência" title="Elementos de potência" /></center></div>
+<div><center><img src={useBaseUrl("images/powerElements.svg")} alt="Power elements" title="Power elements" /></center></div>
 
-## Inserindo elementos
-Por meio do submenu **Ferramentas** pode-se inserir os elementos de potência, como é apresentado na imagem abaixo.
+## Inserting elements
+Through the **Tools** submenu, power elements can be inserted, as shown in the image below.
 
-<div><center><img src={useBaseUrl("images/addPowerElements.png")} alt="Adicionar elementos de potência" title="Adicionar elementos de potência" /></center></div>
+<div><center><img src={useBaseUrl("images/addPowerElements.png")} alt="Add power elements" title="Add power elements" /></center></div>
 
-No caso de inserção de um barramento, o usuário deve apenas clicar na posição desejada, já para os outros componentes será solicitado que o usuário selecione em uma ou duas barras, o qual o novo componente será conectado.
+When inserting a bus, the user must only click on the desired position. For the other components, the user will be prompted to select one or two buses where the new component will be connected.
 
-Sempre que são inseridos novos elementos, um formulário de dados é exibido e pode-se editar os dados elétricos e acessar formulários adicionais, como dados de estabilidade.
+Whenever new elements are inserted, a data form is displayed, and it is possible to edit the electrical data and access additional forms, such as stability data.
 
-:::caution Atenção
-O primeiro elemento que a ser inserido no projeto **deve** ser um barramento. Os demais elementos elétricos devem ser conectados em uma ou mais barras.
+:::caution Attention
+The first element to be inserted in the project **must** be a bus. The other electrical elements must be connected to one or more buses.
 :::
 
-Além dos elementos de potência pode-se inserir os elementos de *[texto vinculado](text)*, os quais estão associados a uma grandeza que se deseja vizualizar diretamente na [Área de Trabalho](mainScreen#workspace).
+In addition to the power elements, it is possible to insert *[linked text](text)* elements, which are associated with a quantity to be visualized directly in the [Workspace](mainScreen#workspace).
 
-:::warning Cuidado!
-Ao inserir um barramento, a mesma irá acompanhar o ponteiro do mouse até que você clique na posição desejada. Para os demais elementos **deve-se clicar em uma mais barras** para exibir o elemento inserido.
+:::warning Warning!
+When inserting a bus, it will follow the mouse pointer until you click on the desired position.  
+For the other elements, **you must click on one or more buses** to display the inserted element.
 
-**Sempre fique atento às instruções da [Barra de Status](mainScreen#status-bar).**
+**Always pay attention to the instructions in the [Status Bar](mainScreen#status-bar).**
 :::
 
 <video autoPlay loop muted playsInline controls>
   <source src= "/PSP/videos/timelapseBuild.mp4" type="video/mp4" />
 </video>
 
-### Teclas de atalho
-É possível inserir todos os elementos de potência por meio de teclas de atalho, facilitando e agilizando a criação dos diagramas unifilares no PSP-UFU. A tabela abaixo apresenta tais atalhos:
+### Keyboard Shortcuts
+All power elements can be inserted using keyboard shortcuts, making the creation of single-line diagrams in PSP-UFU easier and faster. The table below shows these shortcuts:
 
-| Elemento             | Atalho    | Elemento             | Atalho    |
-| -------------------- | :-------: | -------------------- | :-------: |
-| Barramento           | B         | Carga                | Shift + L |
-| Linha                | L         | Capacitor            | Shift + C |
-| Transformador        | T         | Indutor              | Shift + I |
-| Gerador              | G         | Corrente harmônica   | Shift + H |
-| Motor de indução     | I         | Texto                | A         |
-| Compensador síncrono | K         |
+| Element               | Shortcut  | Element                   | Shortcut  |
+| --------------------- | :-------: | ------------------------ | :-------: |
+| Bus                   | B         | Load                      | Shift + L |
+| Line                  | L         | Capacitor                 | Shift + C |
+| Transformer           | T         | Inductor                  | Shift + I |
+| Generator             | G         | Harmonic current          | Shift + H |
+| Induction motor       | I         | Electromagnetic Transient | Shift + E |
+| Synchronous condenser | K         | Text                      | A         |
 
-## Editando dados elétricos
-Ao inserir um elemento, seu respectivo formulário de edição é exibido para inserção dos dados elétricos d elemento. Todos os dados podem ser **alterados** ao **clicar duas vezes sobre o elemento** ou por opção do **menu de contexto** exibido ao clicar com o botão direito sobre o elemento.
+## Editing Electrical Data
+When inserting an element, its corresponding editing form is displayed for entering the element's electrical data.  
+All data can be **modified** by **double-clicking the element** or using the **context menu** displayed by right-clicking the element.
 
-Cada formulário de edição de dados elétricos dos elementos possuem suas particularidades e são descritos em documentação específica: [Barramento](bus), [Linha](line), [Transformador](transformer), [Carga](load), [Capacitor](capacitor), [Indutor](inductor), [Fonte de Corrente Harmônica](harmSource), [Gerador Síncrono](syncGenerator), [Compensador Síncrono](syncMotor), [Motor de Indução](indMotor).
+Each element’s electrical data editing form has its own particularities and is described in its specific documentation:  
+[Bus](bus), [Line](line), [Transformer](transformer), [Load](load), [Capacitor](capacitor), [Inductor](inductor), [Harmonic Current Source](harmSource), [Synchronous Generator](syncGenerator), [Synchronous Condenser](syncMotor), [Induction Motor](indMotor).

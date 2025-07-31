@@ -17,9 +17,11 @@
 <li>🔥 Added the support for <a href="https://www.advsofteng.com/index.html" target="_blank" rel="noopener noreferrer">Chart Director</a>;</li>
 <li>✔️ Fixed the necessity to run PSP-UFU in admin mode to change language;</li>
 <li>🐛 Minor bugfixes.</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>
@@ -40,9 +42,11 @@
 <li>🐛 Fixed a massive memory leak when using Synchronous Generator controls;</li>
 <li>🐛 Fixed simulation problems related to disconnected buses;</li>
 <li>🐛 Minor bugfixes.</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>
@@ -59,9 +63,11 @@
 <li>🐛 Fix program close suddenly on delete bus;</li>
 <li>🐛 Fix problems related to disconnected buses;</li>
 <li>🐛 Minor bugfixes.</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>
@@ -77,9 +83,11 @@
 <li>✔️ New fancy <a href="https://thales1330.github.io/PSP/" target="_blank" rel="noopener noreferrer">PSP-UFU website</a> and <a href="https://thales1330.github.io/PSP/blog" target="_blank" rel="noopener noreferrer">changelog</a> using <a href="https://v2.docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a>;</li>
 <li>✔️ Text element performance improved for OpenGL render;</li>
 <li>🐛 Several major and minor bug fixes.</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>
@@ -93,9 +101,11 @@
         <content type="html"><![CDATA[<ul>
 <li>🔥 Voltage heatmap implemented (OpenGL enabled);</li>
 <li>🐛 Several major and minor bugfixes.</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>
@@ -110,15 +120,17 @@
 <li>✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);</li>
 <li>✔️ Added Visual Studio solution to the GitHub project;</li>
 <li>🐛 Several major and minor bugfixes.</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>
     </entry>
     <entry>
-        <title type="html"><![CDATA[22019w44a-beta]]></title>
+        <title type="html"><![CDATA[2019w44a-beta]]></title>
         <id>https://thales1330.github.io/PSP/blog/2019/11/01/2019w44a-beta</id>
         <link href="https://thales1330.github.io/PSP/blog/2019/11/01/2019w44a-beta"/>
         <updated>2019-11-01T00:00:00.000Z</updated>
@@ -126,9 +138,11 @@
         <content type="html"><![CDATA[<ul>
 <li>✔️ Minor changes to 32bit MSW version for compatibility;</li>
 <li>✔️ Travis CI (Continuous Integration) implemented (Linux).</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>
@@ -144,9 +158,11 @@
 <li>🔥 Autolayout from importation implemented;</li>
 <li>🔥 Importation of Matpower files;</li>
 <li>🐛 Several minor bugfixes.</li>
-</ul>]]></content>
+</ul>
+]]></content>
         <author>
-            <name>Thales</name>
+            <name>Thales Lima Oliveira</name>
+            <email>thaleslima.ufu@gmail.com</email>
             <uri>https://github.com/thales1330</uri>
         </author>
         <category label="psp-ufu" term="psp-ufu"/>

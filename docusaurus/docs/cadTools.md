@@ -20,12 +20,12 @@ All objects created contain various graphic attributes, such as: position, orien
 
 These tools can be accessed through their shortcut keys as well as through the [Tools submenu](mainScreen#ribbon-menu).
 
-Such tools allow ** personalization **, ** navigation ** and assist in the ** creation ** of electric power networks, as well as control diagrams on the platform.
+Such tools allow **personalization**, **navigation** and assist in the **creation** of electric power networks, as well as control diagrams on the platform.
 
 ### Select
 The selection of a single object is carried out by clicking with the left mouse button on the element, which will be identified by the outline in <Highlight color = "#80bfff"> blue</Highlight> of the object.
 
-To select multiple objects simultaneously, it is necessary to click the left mouse button on an empty spot on the screen and drag it, thus creating a ** selection rectangle ** that will accompany the mouse pointer while the left button is pressed . When you release it, all objects that intersect the rectangle will be selected.
+To select multiple objects simultaneously, it is necessary to click the left mouse button on an empty spot on the screen and drag it, thus creating a **selection rectangle** that will accompany the mouse pointer while the left button is pressed . When you release it, all objects that intersect the rectangle will be selected.
 
 By holding down the Control (Ctrl) key on the keyboard, you can keep previous selections while new elements are selected.
 
@@ -63,7 +63,7 @@ When using this tool, objects will rotate 45º from their point of origin. To ac
 ### Drag
 Three tools very useful in navigation of the circuit, mainly in large networks, are: drag, zoom and fit.
 
-The drag tool makes it possible to move the entire circuit ** preserving the relative positions between the elements **. This tool can be accessed through the submenu "Tools" or ** by holding down the * scroll * of the mouse **, thus activating the "drag mode". Upon activating it, the entire circuit will be moved by clicking and dragging in the desired direction.
+The drag tool makes it possible to move the entire circuit **preserving the relative positions between the elements**. This tool can be accessed through the submenu "Tools" or **by holding down the *scroll* of the mouse**, thus activating the "drag mode". Upon activating it, the entire circuit will be moved by clicking and dragging in the desired direction.
 
 To exit “drag mode” just press the Escape key on the keyboard.
 
@@ -73,7 +73,7 @@ To exit “drag mode” just press the Escape key on the keyboard.
 </video>
 
 ### Zoom
-The zoom will be applied when using the ** mouse scroll ** to zoom in or out. The zoom tool will zoom in or out of the circuit from the position of the mouse pointer on the screen to find objects or highlight them.
+The zoom will be applied when using the **mouse scroll** to zoom in or out. The zoom tool will zoom in or out of the circuit from the position of the mouse pointer on the screen to find objects or highlight them.
 
 <video autoPlay loop muted playsInline controls>
   <source src = {useBaseUrl ("videos/zoom.mp4")} type = "video/mp4" />
@@ -111,14 +111,14 @@ Any object can be deleted from the project using the delete tool, present in the
 Some elements allow its graphic customization, such as bars and lines.
 
 ### Bus
-In the case of busbars, you can change the ** length of the bus ** by clicking and dragging on the * pickbox * displayed when placing the mouse pointer over that selected element.
+In the case of busbars, you can change the **length of the bus** by clicking and dragging on the *pickbox* displayed when placing the mouse pointer over that selected element.
 
 ### Line
-The lines can be inserted with ** "knots" (anchor points) **, customizing the arrangement of the lines in the single-line diagram. These nodes are inserted during the element creation process, prior to the selection of the second bus.
+The lines can be inserted with **"knots" (anchor points)**, customizing the arrangement of the lines in the single-line diagram. These nodes are inserted during the element creation process, prior to the selection of the second bus.
 
 After insertion, new nodes can be attached via the context menu accessed by right clicking on the selected line. Its removal is also achieved by an option in the context menu.
 
-As with buses, changing the position of the nodes is achieved by clicking and dragging the * pickbox * displayed when placing the mouse pointer over this selected element.
+As with buses, changing the position of the nodes is achieved by clicking and dragging the *pickbox* displayed when placing the mouse pointer over this selected element.
 
 <video autoPlay loop muted playsInline controls>
   <source src = {useBaseUrl ("videos/graphicPropsChange.mp4")} type = "video/mp4" />
@@ -129,13 +129,13 @@ As with buses, changing the position of the nodes is achieved by clicking and dr
 The elements can be disconnected and reconnected to the bars after their insertion only by the * drag-and-drop * tool. For this, the element must be selected and its connection node must be dragged to the required location.
 
 :::warning Watch out!
-The element to be disconnected / reconnected ** must be previously selected ** to carry out the operation. Otherwise, the bus will be moved or no operations will be performed.
+The element to be disconnected / reconnected **must be previously selected** to carry out the operation. Otherwise, the bus will be moved or no operations will be performed.
 :::
 
-In case of disconnection, the element will be automatically removed from the simulation, being indicated by its color (the element will change to color <Highlight color = "#7f7f7f"> gray</Highlight>).
+In case of disconnection, the element will be automatically removed from the simulation, being indicated by its color (the element will change to color <Highlight color = "#7f7f7f">gray</Highlight>).
 
 :::caution Attention!
-When reconnecting the element to the circuit, one must ** pay attention to the status of its "circuit breaker" **, indicated by a square next to its connection node. A reconnected element returns to the circuit with its circuit breaker open (<Highlight color = "#ff1919"> red</Highlight>), and it is necessary to click on it to insert the element into the circuit.
+When reconnecting the element to the circuit, one must **pay attention to the status of its "circuit breaker"**, indicated by a square next to its connection node. A reconnected element returns to the circuit with its circuit breaker open (<Highlight color = "#ff1919">red</Highlight>), and it is necessary to click on it to insert the element into the circuit.
 :::
 
 <video autoPlay loop muted playsInline controls>

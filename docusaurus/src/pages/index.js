@@ -145,9 +145,9 @@ function Home() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/download/2024w25a-beta/PSP-UFU_x86_32_VC.exe">Windows (.exe)</Dropdown.Item>
-        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/download/2024w25a-beta/PSP-UFU_x86_32_VC.zip">Windows (.zip)</Dropdown.Item>
-        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/download/2024w25a-beta/PSP-UFU_amd64_Alpha2018w15a.deb">Linux (.deb)</Dropdown.Item>
+        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_x86_32_VC.exe">Windows (.exe)</Dropdown.Item>
+        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_x86_32_VC.zip">Windows (.zip)</Dropdown.Item>
+        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_amd64_Alpha2018w15a.deb">Linux (.deb)</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown></center></p>
 		  <div className={styles.buttons}>
@@ -205,10 +205,10 @@ function Home() {
 		<h2><Translate>Published Papers</Translate></h2>
 			<Translate>Further details can be found in the published papers:</Translate>
 			<blockquote cite="https://doi.org/10.1002/2050-7038.12185">
-			Oliveira, T. L., Guimarães, G. C., & Silva, L. R. C. (2019). PSP-UFU: An open-source, graphical, and multiplatform software for power system studies. <i>International Transactions on Electrical Energy Systems</i>, e12185. doi: <a href="https://doi.org/10.1002/2050-7038.12185">10.1002/2050-7038.12185</a>
-			</blockquote>
+			Oliveira, T. L., Guimarães, G. C., & Rosenthal, J. C. S. (2019). PSP-UFU: An open-source, graphical, and multiplatform software for power system studies. <i>International Transactions on Electrical Energy Systems</i>, e12185. doi: <a href="https://doi.org/10.1002/2050-7038.12185">10.1002/2050-7038.12185</a>
+      </blockquote>
 			<blockquote cite="https://doi.org/10.1177/0020720919879058">
-			Oliveira, T. L., Guimarães, G. C., Silva, L. R., & Rezende, J. O. (2019). Power system education and research applications using free and open-source, graphical and multiplatform PSP-UFU software. <i>The International Journal of Electrical Engineering & Education</i>, 0020720919879058. doi: <a href="https://doi.org/10.1177/0020720919879058">10.1177/0020720919879058</a>
+			Oliveira, T. L., Guimarães, G. C., Rosenthal, J. C. S., & Rezende, J. O. (2019). Power system education and research applications using free and open-source, graphical and multiplatform PSP-UFU software. <i>The International Journal of Electrical Engineering & Education</i>, 0020720919879058. doi: <a href="https://doi.org/10.1177/0020720919879058">10.1177/0020720919879058</a>
 			</blockquote>
 		</div>
 		
