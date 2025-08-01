@@ -1,26 +1,26 @@
 ---
 id: sum
-title: Somador
-sidebar_label: Somador
+title: Adder
+sidebar_label: Adder
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-Como o próprio nome sugere, os somadores são elementos de controle capazes de somar qualquer quantidade de valores reais.
+As the name suggests, adders are control elements capable of summing any number of real values.
 
-## Formulário de edição de dados do somador
+## Adder data edit form
 
-A quantidade de entradas, assim como seus sinais são definidas pelo usuário, como mostra a figura abaixo.
+The number of inputs, as well as their signs, are defined by the user, as shown in the figure below.
 
-<div><center><img src={useBaseUrl("images/sumForm.png")} alt="Formulário de edição de dados do somador no PSP-UFU" title="Formulário de edição de dados do somador no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/sumForm.png")} alt="Adder data edit form in PSP-UFU" title="Adder data edit form in PSP-UFU" /></center></div>
 
-No seu único campo “**Sinais**” é inserida uma lista de sinais **separados por espaços** contendo os símbolos “+” para uma entrada positiva e “-” para negativa.
+In its single field "**Signs**", a list of signs **separated by spaces** is entered, containing the symbols “+” for a positive input and “-” for a negative input.
 
-:::info Informação
-O usuário pode inserir duas ou mais entradas de sinais no bloco.
+:::info Information
+The user can insert two or more input signs in the block.
 :::
 
-Uma vez inseridas novas entradas, nós correspondentes serão incluídos no elemento gráfico do somador, o qual poderá ser conectado por meio das linhas de conexão.
+Once new inputs are added, corresponding nodes will be included in the graphical element of the adder, which can then be connected through connection lines.
 
-De forma semelhante, o usuário poderá excluir entradas de sinais pré-existentes, as quais serão removidas no ícone gráfico pela remoção do nó e da linha (caso exista alguma conectada).
+Similarly, the user may remove pre-existing input signs, which will be removed from the graphical icon by deleting the node and the line (if one is connected).

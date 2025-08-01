@@ -1,27 +1,27 @@
 ---
 id: exponential
-title: Exponencial
-sidebar_label: Exponencial
+title: Exponential
+sidebar_label: Exponential
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-A função exponencial dos elementos de controle realiza essa operação com uma entrada real, obedecendo a expressão:
+The exponential function block in the control elements performs this operation with a real input, following the expression:
 $$
 y_n = \bold{A} e^{\bold{B} u_n}
 $$
-Em que:
-- $u_n$ e $y_n$	é a entrada e a saída do bloco exponencial, respectivamente;
-- $\bold{A}$ e $\bold{B}$	são constantes definidas pelo usuário.
+Where:
+- $u_n$ and $y_n$ are the input and output of the exponential block, respectively;
+- $\bold{A}$ and $\bold{B}$ are constants defined by the user.
 
-## Formulário de edição de dados do bloco Exponencial
-A figura abaixo apresenta o formulário de edição de dados do bloco exponencial.
+## Exponential block data editing form
+The figure below shows the exponential block data editing form:
 
-<div><center><img src={useBaseUrl("images/expForm.png")} alt="Formulário de edição de dados do bloco exponencial no PSP-UFU" title="Formulário de edição de dados do bloco exponencial no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/expForm.png")} alt="Exponential block data editing form in PSP-UFU" title="Exponential block data editing form in PSP-UFU" /></center></div>
 
-Esse bloco não linear é definido pelas constantes A e B, inseridas pelo usuário.
+This nonlinear block is defined by the constants A and B, entered by the user.
 
-:::info Informação
-Tais blocos são úteis na representação de não linearidades, como, por exemplo, modelagem da saturação de máquinas de corrente contínuas presentes em alguns reguladores automáticos de tensão.
+:::info Information
+Such blocks are useful for representing nonlinearities, for example, modeling the saturation of DC machines present in some automatic voltage regulators.
 :::

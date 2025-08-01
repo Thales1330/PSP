@@ -1,7 +1,7 @@
 ---
 id: indMotor
-title: Motor de Indução
-sidebar_label: Motor de Indução
+title: Induction Motor
+sidebar_label: Induction Motor
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,26 +10,25 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-> Uma máquina assíncrona da qual apenas um enrolamento é energizado. [*tradução livre* - IEC 60050](
-http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-31-10).
+> An asynchronous machine of which only one winding is energized. [IEC 60050](http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-31-10).
 
-## Motor de indução trifásico no PSP-UFU
-No PSP-UFU, os motores de indução são contemplados nos estudos de [fluxo de carga](powerFlow.md) e no estudo de [estabilidade](stability).
+## Three-phase induction motor in PSP-UFU
+In PSP-UFU, induction motors are included in [load flow](powerFlow.md) and [stability](stability) studies.
 
-:::info Informação
-Os dados de estabilidade da máquina de indução são utilizados em conjunto com o fluxo de carga, **calculando de forma correta a potência reativa das máquinas** e consequentemente a tensão no barramento conectado.
+:::info Information
+The stability data of the induction machine are used together with the load flow, **correctly calculating the reactive power of the machines** and consequently the voltage at the connected bus.
 :::
 
-:::warning Cuidado!
-Ao marcar a opção "Calcular a potência reativa no fluxo de carga", devem ser inseridos os dados corretos na aba "Estabilidade", caso contrário, será atribuída uma potência reativa incorreta no motor.
+:::warning Warning!
+When selecting the option "Calculate reactive power in load flow", the correct data must be entered in the "Stability" tab, otherwise an incorrect reactive power will be assigned to the motor.
 :::
 
-### Motor de indução trifásico no cálculo do fluxo de carga
-A figura abaixo apresenta o modelo do motor de indução trifásico (MIT) de gaiola simples.
+### Three-phase induction motor in load flow calculation
+The figure below shows the model of a simple cage three-phase induction motor (IM).
 
-<div><center><img src={useBaseUrl("images/indMotorModel.svg")} alt="Circuito equivalente do motor de indução" title="Circuito equivalente do motor de indução" /></center></div>
+<div><center><img src={useBaseUrl("images/indMotorModel.svg")} alt="Equivalent circuit of the induction motor" title="Equivalent circuit of the induction motor" /></center></div>
 
-As potências ativa e reativa podem ser calculadas em relação às variáveis e parâmetros do motor em $p.u.$ como:
+The active and reactive powers can be calculated in relation to the motor variables and parameters in $p.u.$ as:
 
 $$
 P = \frac{V^2 \left\{ \left( \frac{r_2}{s} \right) \left[\left(\frac{r_2}{s} \right) r_1-x_1 K_1-x_2 x_m \right]+K_1 \left[\left(\frac{r_2}{s} \right) \left(x_m+x_1 \right) + r_1 K_1 \right] \right\} }{\left[\left( \frac{r_2}{s} \right) r_1-x_1 K_1-x_2 x_m \right]^2+\left[\left( \frac{r_2}{s} \right)(x_m+x_1 )+r_1 K_1 \right]^2}\\
@@ -38,14 +37,15 @@ Q = \frac{-V^2 \left\{ K_1 \left[\left(\frac{r_2}{s} \right) r_1-x_1 K_1-x_2 x_m
 K_1=x_2+x_m
 $$
 
-Como pode ser observado nas equações acima, existem quatro variáveis e somente duas equações. Na prática, as variáveis podem ser reduzidas a três, uma vez que o módulo da tensão (V) é obtido nos resultados do [fluxo de potência](powerFlow.md). Para resolver as equações é necessário definir uma variável adicional. A variável escolhida como fixa no PSP-UFU é a potência ativa (P), por fornecer resultados numericamente corretos e adequados para motores em situações de estabilidade.
+As seen in the above equations, there are four variables and only two equations. In practice, the variables can be reduced to three since the voltage magnitude (V) is obtained from the [power flow](powerFlow.md) results.  
+To solve the equations, one more variable must be defined. In PSP-UFU, the chosen fixed variable is active power (P), as it provides numerically correct and suitable results for motors under stability conditions.
 
-Portanto, nesse modelo estático, a potência ativa é mantida constante durante o cálculo do fluxo de carga e o escorregamento (s) é atualizado em cada iteração. A equação da potência ativa pode ser reescrita em relação ao escorregamento:
+Thus, in this static model, active power is kept constant during load flow calculation, and slip (s) is updated at each iteration. The active power equation can be rewritten in terms of slip:
 
 $$
 \left(\frac{r_2}{s} \right)^2 A + \left(\frac{r_2}{s} \right) B + C = 0
 $$
-Em que:
+Where:
 $$
 A = P \left( r_1^2 + K_3^2 \right) - V^2 r_1\\
 B = 2P(r_1 K_2 + K_3 K_4) - V^2 \left(K_2 + K_1 K_3 \right)\\
@@ -55,48 +55,49 @@ K_3 = x_m + x_1\\
 K_4 = r_1 K_1
 $$
 
-Esse modelo pode ser inserido na solução do [fluxo de carga](powerFlow.md) seguindo os seguintes passos:
+This model can be inserted into the [load flow](powerFlow.md) solution by following these steps:
 
-1. As constantes $K_1$ a $K_4$ são inicialmente calculadas . Esses valores são mantidos constantes durante toda a solução;
-2. Em cada iteração são calculados os coeficientes $A$, $B$ e $C$ utilizando o valor atualizado de $V$;
-3. A equação quadrática é resolvida e dois valores de $\left(\frac{r_2}{s} \right)$ são obtidos, em que o maior deles é escolhido por estar na região estável da característica toque-escorregamento do motor;
-4. Utilizando o novo valor de $\left(\frac{r_2}{s} \right)$, a potência reativa ($Q$) é obtida. O vetor de potências é então atualizado e os procedimentos convencionais de solução do fluxo de potência são realizados.
+1. Calculate constants $K_1$ to $K_4$. These values remain constant throughout the solution;
+2. In each iteration, calculate coefficients $A$, $B$, and $C$ using the updated value of $V$;
+3. Solve the quadratic equation to obtain two values of $\left(\frac{r_2}{s} \right)$; choose the larger one as it is in the stable region of the torque-slip characteristic;
+4. Using the new $\left(\frac{r_2}{s} \right)$ value, obtain the reactive power ($Q$). The power vector is updated and conventional load flow solution steps are executed.
 
-Os passos de 2 a 4 são repetidos até que se obtenha a convergência.
+Steps 2 to 4 are repeated until convergence is achieved.
 
-:::caution Atenção!
-No PSP-UFU, os motores de indução não são considerados no cálculo de curto-circuito.
+:::caution Attention!
+In PSP-UFU, induction motors are not considered in short-circuit calculations.
 :::
 
-### Motor de indução trifásico no estudo de estabilidade
-Uma importante carga dinâmica são os motores de indução, uma vez que correspondem a uma parcela significativa das cargas presentes no sistema elétrico. O [modelo da máquina de indução apresentado anteriormente](indMotor#motor-de-indução-trifásico-no-cálculo-do-fluxo-de-carga), a qual pode ser utilizada tanto como motor quanto como gerador, é bem estabelecida na literatura.
+### Three-phase induction motor in stability study
+An important dynamic load is the induction motor since it accounts for a significant share of system loads.  
+The [induction machine model presented earlier](indMotor#three-phase-induction-motor-in-load-flow-calculation), which can operate as both motor and generator, is well established in the literature.
 
-Como descrito na [seção anterior](indMotor#motor-de-indução-trifásico-no-cálculo-do-fluxo-de-carga), a inicialização dessa máquina é realizada em conjunto com o fluxo de potência, visto que a potência reativa exigida pela máquina de indução é dependente dos parâmetros do motor, assim como a tensão do seu barramento. Essa abordagem é necessária, pois métodos convencionais conduzem a resultados errôneos em sistemas altamente carregados.
+As described in the [previous section](indMotor#three-phase-induction-motor-in-load-flow-calculation), initialization of this machine is done together with the power flow since the reactive power required by the induction machine depends on motor parameters as well as bus voltage. This approach is necessary because conventional methods lead to incorrect results in heavily loaded systems.
 
-É necessário expressar a equação de movimento da máquina de indução em termos de torque e não potência, como é realizado com as máquinas síncronas. A simetria do rotor também faz com que a posição angular não seja importante e o escorregamento ($s$) é utilizado no lugar da velocidade ($\omega$), em que:
+The induction machine motion equation must be expressed in terms of torque, not power, as done with synchronous machines. Rotor symmetry means angular position is not important, and slip ($s$) is used instead of speed ($\omega$), where:
 
 $$
-s = frac{\Omega_0 - \omega}{\Omega_0}
+s = \frac{\Omega_0 - \omega}{\Omega_0}
 $$
 
-Desprezando as perdas por atrito e ventilação e a potência no eixo suave, as equações mecânicas do motor são expressas da seguinte forma:
+Neglecting friction and windage losses and shaft power, the mechanical equations of the motor are expressed as:
 
 $$
 T_m = A -Bs + Cs^2\\
 T_e = \frac{Re\left\{ \dot{E}\dot{I}^* \right\}}{\Omega_b}\\
 \frac{ds}{dt} = \frac{\left( T_m - T_e \right)}{2H}
 $$
-Em que:
-- $T_m$ é o torque mecânico;
-- $T_e$ é o torque elétrico;
-- $H$ é a inércia do conjunto motor - carga mecânica
+Where:
+- $T_m$ = mechanical torque
+- $T_e$ = electrical torque
+- $H$ = inertia of the motor–mechanical load set
 
-Os termos $A$, $B$ e $C$ são termos que definem o comportamento do torque mecânico da carga de acordo com o escorregamento. O torque mecânico normalmente varia com a **velocidade**, podendo ser expressa proporcionalmente com a seguinte equação quadrática:
+The terms $A$, $B$, and $C$ define the load mechanical torque behavior according to slip. Mechanical torque normally varies with **speed**, which can be expressed proportionally by the quadratic equation:
 
 $$
 T_m \propto a + b\omega + c\omega^2
 $$
-Em que:
+Where:
 $$
 \begin{cases}
 	A \propto a + b + c \\
@@ -105,133 +106,135 @@ $$
 \end{cases}
 $$
 
-As equações elétricas do motor de indução de gaiola simples são baseadas no circuito equivalente da [figura anterior](indMotor#motor-de-indução-trifásico-no-cálculo-do-fluxo-de-carga). De forma semelhante ao modelo transitório da máquina síncrona, o motor de indução pode ser modelado pelo circuito equivalente de Thevenin de tensão transitória $E'$ atrás de uma resistência do estator $r_1$ e uma reatância transitória $x'$. A reatância transitória aparente de rotor bloqueado é dada por:
+The electrical equations of the simple cage induction motor are based on the equivalent circuit from the [previous figure](indMotor#three-phase-induction-motor-in-load-flow-calculation).  
+Similarly to the synchronous machine transient model, the induction motor can be represented by the Thevenin equivalent circuit of transient voltage $E'$ behind a stator resistance $r_1$ and transient reactance $x'$. The blocked-rotor apparent transient reactance is:
 $$
 x' = x_1 + \frac{x_2 x_m}{x_2 + x_m}
 $$
 
-A constante de tempo de circuito aberto do rotor ($T_0'$) é:
+The rotor open-circuit time constant ($T_0'$) is:
 $$
 T_0' = \frac{x_2 + x_m}{\Omega_b r_2}
 $$
 
-E a reatância de circuito aberto é:
+And the open-circuit reactance is:
 $$
 x_0 = x_1 + x_m
 $$
 
-Uma vez que as reatâncias não são afetadas pela posição do rotor, as EADs do motor de indução podem ser expressar diretamente por componentes reais ($r$) e imaginárias ($m$). Portanto, a descrição completa desse modelo é representada pelo seguinte sistema de equações algébrico-diferenciais:
+Since the reactances are unaffected by rotor position, the DAEs of the induction motor can be expressed directly in real ($r$) and imaginary ($m$) components. The complete model is thus represented by the following system of differential-algebraic equations:
 $$
 V_r - E_r' = r_1 I_r - x' I_m\\
 V_m - E_m' = r_1 I_m - x' I_m\\
 \frac{dE_r'}{dt} = \Omega_b s E_m' - \frac{E_r' + \left( x_0 - x' \right) I_m}{T_0'}\\
-\frac{dE_m'}{dt} = \Omega_b s E_r' - \frac{E_m' i \left( x_0 - x' \right) I_r}{T_0'}
+\frac{dE_m'}{dt} = \Omega_b s E_r' - \frac{E_m' + \left( x_0 - x' \right) I_r}{T_0'}
 $$
 
-## Formulário de edição dos geradores síncronos
-A imagem abaixo apresenta o formulário de inserção/alteração de dados dos motores de indução:
+## Induction motor data editing form
+The figure below shows the data insertion/editing form for induction motors:
 
-<div><center><img src={useBaseUrl("images/indMotorForm.png")} alt="Formulário dos motores de indução no PSP-UFU" title="Formulário dos motores de indução no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/indMotorForm.png")} alt="Induction motor form in PSP-UFU" title="Induction motor form in PSP-UFU" /></center></div>
 
-No formulário pode ser observado o botão "Chaveamento" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do motor durante o estudo de [estabilidade](stability).
+The form includes the "Switching" button in the lower-left corner.  
+This form, common to several other elements, allows the insertion and/or removal of the motor during the [stability](stability) study.
 
-<div><center><img src={useBaseUrl("images/indMotorSw.png")} alt="Formulário de chaveamento do motores de indução" title="Formulário de chaveamento do motores de indução" /></center></div>
+<div><center><img src={useBaseUrl("images/indMotorSw.png")} alt="Induction motor switching form" title="Induction motor switching form" /></center></div>
 
 <Tabs
   groupId="indMotor-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Estabilidade', value: 'stability'},
-    {label: 'Botão Chaveamento', value: 'switching'},
+    {label: 'General', value: 'general'},
+    {label: 'Stability', value: 'stability'},
+    {label: 'Switching Button', value: 'switching'},
   ]
 }>
 <TabItem value="general">
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Electrical element identification. Any number of characters can be entered using the [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-Todos os componentes de potência do PSP-UFU possuem esse campo.
+All PSP-UFU power components have this field.
 
-#### Potência nominal
-Potência nominal do gerador, inserida em MVA, kVA ou VA.
+#### Rated power
+Motor rated power, entered in MVA, kVA, or VA.
 
-Esse campo é especialmente importante caso a opção "Utilizar a potência nominal como base" esteja marcada.
+This field is especially important if the "Use rated power as base" option is checked.
 
-#### Potências ativa e reativa
-Potências ativa (inserida em W, kW, MW ou $p.u.$) e reativa (inserida em var, kvar, Mvar ou $p.u.$) do motor.
+#### Active and reactive powers
+Motor active power (entered in W, kW, MW, or $p.u.$) and reactive power (entered in var, kvar, Mvar, or $p.u.$).
 
-:::caution Atenção!
-Caso a opção “Calcular a potência reativa no fluxo de carga” esteja ativada, o campo de potência reativa é desativado para edição.
+:::caution Attention!
+If the “Calculate reactive power in load flow” option is enabled, the reactive power field is disabled for editing.
 :::
 
-#### Calcular a potência reativa no fluxo de carga
-Caso essa opção seja marcada, o programa irá utilizar os dados fornecidos no formulário de estabilidade para calcular a potência reativa do motor durante o processo iterativo do fluxo de carga.
+#### Calculate reactive power in load flow
+If selected, the program uses the stability form data to calculate the motor’s reactive power during the iterative load flow process.
 
-:::warning Cuidado!
-Caso essa opção não seja utilizada o motor será considerado uma [carga de potência constante](load) no estudo de [fluxo de carga](powerFlow.md).
+:::warning Warning!
+If this option is not used, the motor will be considered a [constant power load](load) in the [load flow](powerFlow.md) study.
 
-A não utilização dessa opção poderá gerar erros de regime permamente no estudo de [estabilidade](stability).
+Not using this option may cause steady-state errors in the [stability](stability) study.
 :::
 
-#### Utilizar potência nominal como base
-Caso essa opção seja marcada, o programa irá utilizar a potência nominal do gerador como base para a conversão das unidades, inclusive aqueles no formulário de estabilidade, caso contrário será usada a potência base do sistema.
+#### Use rated power as base
+If selected, the program uses the motor’s rated power as the base for unit conversion, including those in the stability form; otherwise, the system base power is used.
 
 </TabItem>
 <TabItem value="stability">
 
-#### Imprimir dados da máquina de indução
-Exibe os dados do gerador síncrono nos gráficos no tempo. Os seguintes dados são exibidos:
-- tensão terminal
-- potências ativa e reativas
-- corrente, torque elétrico
-- torque mecânico
-- velocidade
-- escorregamento
+#### Print induction machine data
+Displays induction motor data in time-domain plots. The following data are shown:
+- terminal voltage
+- active and reactive powers
+- current, electrical torque
+- mechanical torque
+- speed
+- slip
 
-#### Inércia
-Inércia do conjunto motor-carga, em s.
+#### Inertia
+Inertia of the motor-load set, in seconds.
 
-#### Resistência e reatância do estator
-Resistência e reatância do estator do motor de indução, em $p.u.$
+#### Stator resistance and reactance
+Stator resistance and reactance of the induction motor, in $p.u.$
 
-#### Resistência e reatância do rotor
-Resistência e reatância do rotor do motor de indução, em $p.u.$
+#### Rotor resistance and reactance
+Rotor resistance and reactance of the induction motor, in $p.u.$
 
-#### Reatância de magnetização
-Reatância do ramo de magnetização do motor de indução, em $p.u.$
+#### Magnetizing reactance
+Magnetizing branch reactance of the induction motor, in $p.u.$
 
-#### Utilizar fator de gaiola
-Permite a inserção de um fator de gaiola ($K_g$) no motor de indução. Tal fator eleva o valor da resistência do rotor em condições de grande escorregamento, como ocorre em motores de gaiola dupla ou gaiola profunda. A resistência do rotor segue a seguinte equação:
-
+#### Use cage factor
+Allows inserting a cage factor ($K_g$) in the induction motor.  
+This factor increases rotor resistance under high slip conditions, as in double-cage or deep-bar motors. Rotor resistance follows:
 $$
 r_2 = r_{2_0} \left( 1+K_g s \right)
 $$
-Em que:
-- $r_{2_0}$ é a resistência do rotor inserida no formulário.
+Where:
+- $r_{2_0}$ = rotor resistance entered in the form.
 
-#### Característica da carga
-Descreve a característica do torque da carga mecânica no eixo do motor seguindo a equação do torque mecânico.
+#### Load characteristic
+Describes the mechanical load torque characteristic on the motor shaft according to the mechanical torque equation:
 $$
 T_m \propto \bold{a} + \bold{b}\omega + \bold{c}\omega^2
 $$
 
-:::warning Cuidado!
-A soma dos coeficientes ($a + b + c$) deve ser unitária.
+:::warning Warning!
+The sum of the coefficients ($a + b + c$) must be equal to one.
 :::
 
 </TabItem>
 <TabItem value="switching">
 
-O botão "Chaveamento" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do gerador durante o estudo de [estabilidade](stability).
+The "Switching" button opens a form, common to several other elements, allowing insertion and/or removal of the motor during the [stability](stability) study.
 
-Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+In this form, a generic list of insertions and removals over time can be created, customized by a switching properties context where the switching type (insertion or removal) and event time (in seconds) are edited. These properties are added or removed from the list using the "Add" and "Remove" buttons, respectively.
 
 </TabItem>
 </Tabs>
 
-## Referências
-1. SÁNCHEZ, J. C.; OLIVARES, T. I. A.; ORTIZ, G. R.; VEGA, D. R. Induction Motor Static Models for Power Flow and Voltage Stability Studies. In: IEEE Power and Energy Society General Meeting, 2012, San Diego. doi: https://doi.org/10.1109/PESGM.2012.6345618
-2. IEEE Std 399-1997. IEEE Recommended Practice for Industrial and Commercial Power Systems Analysis (Brown Book). IEEE, New York, ago. 1998. doi: https://doi.org/10.1109/IEEESTD.1998.88568
-3. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6
+## References
+1. SÁNCHEZ, J. C.; OLIVARES, T. I. A.; ORTIZ, G. R.; VEGA, D. R. Induction Motor Static Models for Power Flow and Voltage Stability Studies. In: IEEE Power and Energy Society General Meeting, 2012, San Diego. doi: https://doi.org/10.1109/PESGM.2012.6345618  
+2. IEEE Std 399-1997. IEEE Recommended Practice for Industrial and Commercial Power Systems Analysis (Brown Book). IEEE, New York, Aug. 1998. doi: https://doi.org/10.1109/IEEESTD.1998.88568  
+3. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6  
 4. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286

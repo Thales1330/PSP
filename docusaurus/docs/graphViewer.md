@@ -1,43 +1,46 @@
 ---
 id: graphViewer
-title: Visualizador de Gráficos
-sidebar_label: Visualizador de Gráficos
+title: Graph Viewer
+sidebar_label: Graph Viewer
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-Para exibição dos resultados originados dos cálculos de [estabilidade](stability) e [varredura de frequências](harmonics), desenvolveu-se um visualizador de gráficos, como mostra a figura abaixo:
+To display the results from [stability](stability) calculations and [frequency sweep](harmonics), a graph viewer was developed, as shown below:
 
-<div><center><img src={useBaseUrl("images/graphViewer.png")} alt="Visualizador de gráficos do PSP-UFU" title="Visualizador de gráficos do PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/graphViewer.png")} alt="PSP-UFU graph viewer" title="PSP-UFU graph viewer" /></center></div>
 
-## Criação, manipulação e navegação de curvas
-Tal visualizador utiliza a biblioteca [wxMathPlot](https://wxmathplot.sourceforge.io/), e permite ao usuário imprimir todas as curvas no tempo originadas dos resultados de [estabilidade](stability) e [varredura de frequências](harmonics), acessados em dados hierárquicos em forma de árvore, identificados pelo tipo e nome do elemento de potência, além do tipo de curva.
+## Curve creation, manipulation, and navigation
+This viewer uses the [wxMathPlot](https://wxmathplot.sourceforge.io/) library and allows the user to plot all time-domain curves from [stability](stability) and [frequency sweep](harmonics) results.  
+They are organized hierarchically in a tree structure, identified by the power element type and name, as well as the curve type.
 
-:::info Informação
-As curvas podem ser plotadas com **clique duplo** sobre ela ou ao selecionar a caixa "Plotar" nas propriedades do traço.
+:::info Information
+Curves can be plotted by **double-clicking** on them or by checking the "Plot" box in the trace properties.
 :::
 
-Os gráficos impressos podem ser caracterizados pela edição de suas propriedades do traço, ou seja, pode-se alterar a cor, espessura e tipo de traço (seis tipos disponíveis). Por padrão o eixo vertical é o tempo (em estabilidade) ou frequência (varredura de frequências), porém o usuário pode alterar para qualquer curva disponível.
+The printed graphs can be customized by editing their trace properties: color, thickness, and line style (six types available).  
+By default, the vertical axis is time (in stability) or frequency (frequency sweep), but the user can switch to any available curve.
 
-Várias propriedades gerais do gráfico podem ser editadas: título do gráfico, rótulos dos eixos x e y, margens e limites inferiores e superiores de ambos os eixos.
+Several general graph properties can be edited: title, x and y-axis labels, margins, and axis limits.
 
-O menu **Visualização** permite a inserção de exibição de legenda, linhas de grade e coordenadas do ponteiro do mouse (utilizada para destacar pontos na curva), além da possibilidade de alternar o tema de impressão entre escuro e claro, facilitando a visualização ou exportação do gráfico.
+The **View** menu allows enabling legends, grid lines, and mouse pointer coordinates (used to highlight points on the curve), as well as toggling between light and dark themes for better visualization or export.
 
-No menu **Arquivo**, pode-se salvar o gráfico na forma de imagem (*.png*, *.jpg* ou *.bmp*) ou enviá-lo diretamente para a área de transferência. No mesmo menu também é permitido a exportação no formato *[CSV (Comma-separated Values)](https://en.wikipedia.org/wiki/Comma-separated_values)*, o qual poderá ser utilizado em outros visualizadores de gráficos, como o Excel ou o [gnuplot](http://www.gnuplot.info/).
+In the **File** menu, the graph can be saved as an image (*.png*, *.jpg*, or *.bmp*) or copied directly to the clipboard.  
+The same menu also allows exporting in *[CSV (Comma-separated Values)](https://en.wikipedia.org/wiki/Comma-separated_values)* format, which can be used in other graph viewers, like Excel or [gnuplot](http://www.gnuplot.info/).
 
-A área de plotagem permite a navegação utilizando ferramentas de zoom, por área de seleção e comandos de mouse, e arrasto das curvas impressas.
+The plotting area allows navigation using zoom tools, selection areas, mouse commands, and curve dragging.
 
-:::tip Dica
-Ao clicar com o botão direito sobre a área de plotagem as opções de manipulação são exibidas por meio de um menu de contexto.
+:::tip Tip
+Right-clicking on the plotting area shows manipulation options through a context menu.
 :::
 
-Os seguintes **comandos de mouse** são utilizados para navegação das curvas:
+The following **mouse commands** are used to navigate curves:
 
-|Comando|Ação|
-|-------|----|
-|Botão esquerdo pressionado + Selecionar área|Seleciona a área de zoom|
-|Botão direito pressionado + Mover mouse|Arrasta a curva|
-|Roda do mouse|Arrasto vertical|
-|Roda do mouse + Shift|Arrasto horizontal|
-|Roda do mouse + Ctrl|Mais/menos zoom|
+|Command|Action|
+|-------|------|
+|Left button pressed + Select area|Selects zoom area|
+|Right button pressed + Move mouse|Drags the curve|
+|Mouse wheel|Vertical scroll|
+|Mouse wheel + Shift|Horizontal scroll|
+|Mouse wheel + Ctrl|Zoom in/out|

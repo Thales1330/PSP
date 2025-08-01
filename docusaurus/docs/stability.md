@@ -1,7 +1,7 @@
 ---
 id: stability
-title: Estabilidade
-sidebar_label: Estabilidade
+title: Stability
+sidebar_label: Stability
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,135 +10,135 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Estabilidade de sistemas de potência é a habilidade de um Sistema Elétrico de Potência (SEP), para uma certa condição de operação, de reestabelecer um estado de operação de equilíbrio após ser submetido a um distúrbio físico. A estabilidade é reconhecida como um importante problema para a segurança da operação desde a década de 1920. Muitos *blackouts* de grande porte causados pela instabilidade do SEP têm ilustrado a importância desse fenômeno.
+Power system stability is the ability of a Power System (PS) under a certain operating condition to re-establish an equilibrium operating state after being subjected to a physical disturbance. Stability has been recognized as an important issue for operational security since the 1920s. Many large-scale blackouts caused by power system instability have illustrated the importance of this phenomenon.
 
-<div><center><img src={useBaseUrl("images/stability.svg")} alt="Estabilidade" title="Estabilidade" /></center></div>
+<div><center><img src={useBaseUrl("images/stability.svg")} alt="Stability" title="Stability" /></center></div>
 
-Normalmente são realizados dois tipos de estudos de estabilidade (uma classificação mais aprofundada pode ser observada [nesse artigo](https://doi.org/10.1109/TPWRS.2004.825981)). A recuperação de uma rápida e brusca perturbação é chamada de **estabilidade transitória**, e sua solução é geralmente obtida no domínio do tempo. Outro estudo é denominado **estabilidade dinâmica**, utilizado para descrever a resposta do sistema frente a pequenas perturbações ao longo de muito tempo, o qual pode ser resolvido tanto no domínio da frequência quanto no domínio do tempo.
+Normally, two types of stability studies are performed (a more detailed classification can be found [in this paper](https://doi.org/10.1109/TPWRS.2004.825981)). The recovery from a sudden and severe disturbance is called **transient stability**, and its solution is generally obtained in the time domain. Another study is called **dynamic stability**, used to describe the system’s response to small disturbances over a long time, which can be solved either in the frequency domain or in the time domain.
 
-:::info Informação
-No PSP-UFU, a estabilidade dinâmica é tratada como uma extensão da estabilidade transitória, em que os efeitos de pequenas constantes de tempo devem ser ignorados.
+:::info Information
+In PSP-UFU, dynamic stability is treated as an extension of transient stability, where the effects of small time constants must be ignored.
 :::
 
-O modelo para representação do SEP em um estudo de estabilidade transitória é feito por meio do sistema de equações algébrico-diferenciais (EADs), em que o estado inicial é considerado estável e originado de um estudo de [fluxo de carga](powerFlow). A solução das equações se dá por meio de um [método de integração numérica](https://en.wikipedia.org/wiki/Numerical_integration) e, então, é observada a resposta do sistema de potência.
+The model for representing the PS in a transient stability study is built using a system of differential-algebraic equations (DAEs), in which the initial state is considered stable and obtained from a [power flow](powerFlow) study. The equations are solved using a [numerical integration method](https://en.wikipedia.org/wiki/Numerical_integration), and the power system’s response is then observed.
 
-Caso a solução no domínio do tempo, após alguma perturbação, leve um ou mais parâmetros do sistema a valores fisicamente impossíveis ou, até mesmo, a solução das equações diferenciais não obtenha convergência em processos iterativos, o sistema é dito **instável**. Em contrapartida, caso as variáveis de estado dos elementos do sistema oscilem após uma perturbação e se estabeleçam em um novo ponto de operação, mesmo que distinto dos valores iniciais, o sistema é considerado **estável**.
+If the solution in the time domain, after a disturbance, drives one or more system parameters to physically impossible values or if the solution of the differential equations does not converge in iterative processes, the system is said to be **unstable**. Conversely, if the system element state variables oscillate after a disturbance and settle at a new operating point, even if different from the initial values, the system is considered **stable**.
 
-## Execução do estudo de estabilidade no PSP-UFU
-Após a construção do diagrama unifilar no [editor de potência](powerEditor), assim como os [controles](controlEditor) das [máquinas síncronas](syncGenerator), a execução da estabilidade é realizada no [menu Simulação](mainScreen#ribbon-menu) clicando no ícone do botão **Executar Estabilidade**. Ao clicar na parte inferior do botão "Executar Estabilidade" será exibido um menu suspenso com a opção **Lista de eventos de estabilidade**.
+## Running the stability study in PSP-UFU
+After building the single-line diagram in the [power editor](powerEditor), as well as the [controls](controlEditor) of the [synchronous machines](syncGenerator), the stability analysis is performed in the [Simulation menu](mainScreen#ribbon-menu) by clicking the **Run Stability** button. Clicking on the lower part of the "Run Stability" button displays a dropdown menu with the option **Stability Event List**.
 
-<div><center><img src={useBaseUrl("images/menuSimulationStability.svg")} alt="Menu Simulação" title="Menu Simulação" /></center></div>
+<div><center><img src={useBaseUrl("images/menuSimulationStability.svg")} alt="Simulation Menu" title="Simulation Menu" /></center></div>
 
-Ao executar o cálculo de estabilidade, uma caixa com o status do processo de simulação será exibida, indicando primeiramente a inicialização do estudo e posteriormente o tempo de simulação calculado.
+When running the stability calculation, a box showing the status of the simulation process will be displayed, first indicating the initialization of the study and then the calculated simulation time.
 
-Ao clicar na lista de eventos de estabilidade, será exibida uma janela com a descrição dos eventos de estabilidade inseridos.
+Clicking on the stability event list will display a window with the description of the inserted stability events.
 
-<div><center><img src={useBaseUrl("images/stabList.png")} alt="Lista de eventos de estabilidade" title="Lista de eventos de estabilidade" /></center></div>
+<div><center><img src={useBaseUrl("images/stabList.png")} alt="Stability event list" title="Stability event list" /></center></div>
 
-### Inserindo um evento de estabilidade
-Os distúrbios mais comuns aplicados em estudos de estabilidade transitória são faltas e chaveamentos. Tais operações são facilmente realizadas no PSP-UFU:
-- **Faltas**: Curtos-circuitos trifásicos podem ser inseridos nos [barramentos](bus) do sistema por meio da inclusão da impedância de falta na matriz admitância de barras da mesma maneira realizada em um elemento *shunt*. Tal valor é definido pelo usuário e caso seja um curto-circuito franco, um valor não nulo, mas suficientemente próximo de zero, é aplicado, de forma que a tensão no barramento é levada a zero durante o distúrbio.
-- **Chaveamento de ramo**: Da mesma forma que as faltas, o chaveamento de ramos é realizado por meio da alteração na matriz admitância, removendo ou inserindo os parâmetros do elemento a ser chaveado.
-	Cada [elemento de potência](powerEditor) possui um botão de "Chaveamento" ou "Estabilidade", em que pode ser inserido os tempos de remoção e/ou inserção do componente.
-- **Chaveamento de máquinas**: A remoção de uma máquina síncrona é efetivada com a retirada de sua participação no vetor de correntes, além da remoção de sua admitância fictícia.
-	Assim como os [elementos de potência](powerEditor), as [máquinas síncronas](syncGenerator) possui um botão "Chaveamento", em que pode ser inserido os tempos de remoção e/ou inserção do componente.
+### Inserting a stability event
+The most common disturbances applied in transient stability studies are faults and switchings. Such operations are easily performed in PSP-UFU:
+- **Faults**: Three-phase short circuits can be inserted at system [buses](bus) by including the fault impedance in the bus admittance matrix, in the same way as a *shunt* element. This value is defined by the user, and in the case of a bolted fault, a non-zero value but sufficiently close to zero is applied so that the bus voltage is driven to zero during the disturbance.
+- **Branch switching**: As with faults, branch switching is performed by altering the admittance matrix, removing or inserting the parameters of the element to be switched.
+	Each [power element](powerEditor) has a "Switching" or "Stability" button, where the removal and/or insertion times of the component can be entered.
+- **Machine switching**: The removal of a synchronous machine is carried out by eliminating its participation in the current vector, as well as the removal of its fictitious admittance.  
+	As with [power elements](powerEditor), [synchronous machines](syncGenerator) have a "Switching" button, where the removal and/or insertion times of the component can be entered.
 	
-	:::caution Atenção!
-	Mesmo que removida da barra, os parâmetros das [máquinas síncronas](syncGenerator) continuam a ser calculados com a corrente do estator nula, podendo fornecer resultados em uma eventual reconexão.
+	:::caution Warning!
+	Even if removed from the bus, the [synchronous machines](syncGenerator) parameters continue to be calculated with zero stator current, potentially providing results upon reconnection.
 	:::
 
-:::tip Dica
-Eventos nos **sistemas de controle** podem ser facilmente introduzidos com o bloco de [expressão matemática](mathExpression). Nesse caso, tais eventos **não** serão exibidos na lista de eventos de estabilidade.
+:::tip Tip
+Events in **control systems** can be easily introduced with the [math expression](mathExpression) block. In this case, such events will **not** be displayed in the stability event list.
 :::
 
-### Erros comuns na execução do estudo de estabilidade
-A seguir são apresentados os erros mais comuns relacionados ao estudo de estabilidade.
+### Common errors when running the stability study
+The following are the most common errors related to the stability study.
 
-#### A seguinte mensagem de erro é exibida: "Não foi possível construir a matriz admitância"
-Essa mensagem de erro é exibida quando não é possível construir a matriz admitância de barras. As seguintes situações podem ocasionar esse erro:
-- **Os parâmetros do circuito estão incorretos**. Caso parâmetros muito fora dos valores padrão dos elementos elétricos sejam inseridos, o cálculo de fluxo de carga pode divergir. Verifique se os dados foram inseridos corretamente.
-- **Algum barramento está isolado**. Esse erro é bastante comum e pode ocorrer ao inserir um barramento sem conectá-lo ao sistema ou ao remover os elementos de ramo que conectam uma barra ao sistema. A solução é eliminar essa barra do diagrama.
-- **Algum elemento possui parâmetros discrepantes dos demais**. Caso um dos elementos inseridos possua um valor de impedância muito distinto dos demais, como por exemplo uma linha com impedância muito elevada ou uma carga muito pequena, pode levar à divergência do método numérico. Nesse caso, reconsidere a necessidade de representação desses elementos no circuito e alterne entre os métodos numéricos de solução disponíveis.
+#### The following error message is displayed: "Unable to build the admittance matrix"
+This error message is displayed when it is not possible to build the bus admittance matrix. The following situations may cause this error:
+- **Circuit parameters are incorrect**. If parameters far from typical values of electrical elements are entered, the power flow calculation may diverge. Check if the data was entered correctly.
+- **A bus is isolated**. This error is quite common and can occur when inserting a bus without connecting it to the system or removing branch elements that connect a bus to the system. The solution is to eliminate this bus from the diagram.
+- **An element has parameters very different from the others**. If one of the inserted elements has an impedance value very different from the others, such as a line with very high impedance or a very small load, it may lead to divergence of the numerical method. In this case, reconsider the need to represent these elements in the circuit and switch between available numerical solution methods.
 
-#### A seguinte mensagem de erro é exibida: "Erro ao inicializar os valores de saturação do..."
-Essa mensagem de erro é exibida quando não é possível calcular os fatores de saturação da [máquina síncrona](syncGenerator). As seguintes situações podem ocasionar esse erro:
-- **O fator de saturação é menor que 1,2**. Esse valor deve ser maior que 1,2, ou irá gerar erros na simulação. Caso não seja informado, a saturação da máquina não é considerada nos cálculos.
-- **Os parâmetros da máquina síncrona estão incorretos**. Caso parâmetros muito fora dos valores padrão das máquinas síncronas sejam inseridos, o cálculo dos fatores de saturação pode divergir. Verifique se os dados foram inseridos corretamente.
+#### The following error message is displayed: "Error initializing saturation values of..."
+This error message is displayed when it is not possible to calculate the saturation factors of the [synchronous machine](syncGenerator). The following situations may cause this error:
+- **The saturation factor is less than 1.2**. This value must be greater than 1.2, otherwise it will cause simulation errors. If not specified, the machine’s saturation is not considered in the calculations.
+- **Synchronous machine parameters are incorrect**. If parameters far from typical values of synchronous machines are entered, the calculation of saturation factors may diverge. Check if the data was entered correctly.
 
-#### A seguinte mensagem de erro é exibida: "Erro ao inicializar o AVR / regulador de velocidade..."
-Essa mensagem de erro é exibida quando não é possível [inicializar o sistema de controle](controlEditor#inicialização-do-sistema-de-controle) de uma [máquina síncrona](syncGenerator). As seguintes situações podem ocasionar esse erro:
-- **O sistema de controle está vazio**. Caso esteja habilitado o AVR e/ou o regulador de velocidade e o controle não foi inserido, esse erro pode ser acionado. Insira o controle da máquina ou desmarque a opção de utilização do AVR e/ou regulador de velocidade.
-- **O sistema de controle não possui ao menos uma entrada e uma saída**. O sistema de controle deve ter ao menos uma [entrada e uma saída](io), caso contrário apresentará erro de execução.
-- **O passo de integração está muito pequeno**. Caso o passo de integração esteja muito pequeno, os cálculos gerarão erros e irão divergir. Reduza o passo de integração nas [configurações de simulação](simulationConfig).
+#### The following error message is displayed: "Error initializing the AVR / speed governor..."
+This error message is displayed when it is not possible to [initialize the control system](controlEditor#inicialização-do-sistema-de-controle) of a [synchronous machine](syncGenerator). The following situations may cause this error:
+- **The control system is empty**. If the AVR and/or speed governor is enabled and the control has not been inserted, this error may occur. Insert the machine’s control or uncheck the AVR and/or speed governor usage option.
+- **The control system does not have at least one input and one output**. The control system must have at least one [input and one output](io), otherwise it will present an execution error.
+- **The integration step is too small**. If the integration step is too small, calculations will produce errors and diverge. Increase the integration step in the [simulation settings](simulationConfig).
 
-#### A seguinte mensagem de erro é exibida: "Impossível resolver as máquinas do sistema"
-Essa mensagem de erro é exibida quando não é possível resolver as EADs das máquinas síncronas inseridas no sistemas. As seguintes situações podem ocasionar esse erro:
-- **Os parâmetros da máquina síncrona estão incorretos**. Caso parâmetros muito fora dos valores padrão das máquinas síncronas sejam inseridos, o cálculo das EADs pode se tornar impossível. Verifique se os dados foram inseridos corretamente.
-- **O passo de integração está muito pequeno**. Caso o passo de integração esteja muito pequeno, os cálculos gerarão erros e irão divergir. Reduza o passo de integração nas [configurações de simulação](simulationConfig).
-- **Os parâmetros do circuito estão incorretos**. Caso parâmetros muito fora dos valores padrão dos elementos elétricos sejam inseridos, o cálculo de fluxo de carga pode divergir. Verifique se os dados foram inseridos corretamente.
-- **Algum barramento está isolado**. Esse erro é bastante comum e pode ocorrer ao inserir um barramento sem conectá-lo ao sistema ou ao remover os elementos de ramo que conectam uma barra ao sistema. A solução é eliminar essa barra do diagrama.
-- **Algum elemento possui parâmetros discrepantes dos demais**. Caso um dos elementos inseridos possua um valor de impedância muito distinto dos demais, como por exemplo uma linha com impedância muito elevada ou uma carga muito pequena, pode levar à divergência do método numérico. Nesse caso, reconsidere a necessidade de representação desses elementos no circuito e alterne entre os métodos numéricos de solução disponíveis.
+#### The following error message is displayed: "Unable to solve system machines"
+This error message is displayed when it is not possible to solve the DAEs of synchronous machines inserted in the system. The following situations may cause this error:
+- **Synchronous machine parameters are incorrect**. If parameters far from typical values of synchronous machines are entered, the calculation of the DAEs may become impossible. Check if the data was entered correctly.
+- **The integration step is too small**. If the integration step is too small, calculations will produce errors and diverge. Increase the integration step in the [simulation settings](simulationConfig).
+- **Circuit parameters are incorrect**. If parameters far from typical values of electrical elements are entered, the power flow calculation may diverge. Check if the data was entered correctly.
+- **A bus is isolated**. This error is quite common and can occur when inserting a bus without connecting it to the system or removing branch elements that connect a bus to the system. The solution is to eliminate this bus from the diagram.
+- **An element has parameters very different from the others**. If one of the inserted elements has an impedance value very different from the others, such as a line with very high impedance or a very small load, it may lead to divergence of the numerical method. In this case, reconsider the need to represent these elements in the circuit and switch between available numerical solution methods.
 
-#### A seguinte mensagem de erro é exibida: "Erro ao inicializar o escorregamento do motor..."
-Essa mensagem de erro é exibida quando não é possível calcular o valor de escorregamento inicial do motor de indução. As seguintes situações podem ocasionar esse erro:
-- **Os parâmetros de estabilidade do motor estão incorretos**. Caso parâmetros muito fora dos valores padrão dos motores de indução sejam inseridos, o cálculo do escorregamento pode se tornar impossível. Verifique se os dados foram inseridos corretamente.
+#### The following error message is displayed: "Error initializing motor slip..."
+This error message is displayed when it is not possible to calculate the initial slip value of the induction motor. The following situations may cause this error:
+- **Motor stability parameters are incorrect**. If parameters far from typical values of induction motors are entered, the calculation of slip may become impossible. Check if the data was entered correctly.
 
-## Estrutura da ferramenta de estabilidade
-A estabilidade de um SEP é um problema dinâmico e necessita de modelos mais elaborados de elementos de potência comparados àqueles apresentados nos outros estudos. Esses modelos são descritos individualmente, com destaque às [máquinas síncronas](syncGenerator#gerador-síncrono-no-estudo-de-estabilidade), [cargas ZIP](load#carga-no-estudo-de-estabilidade) e [motores de indução](indMotor#motor-de-indução-trifásico-no-estudo-de-estabilidade).
+## Stability tool structure
+Power system stability is a dynamic problem and requires more elaborate models of power elements compared to those presented in other studies. These models are described individually, with emphasis on [synchronous machines](syncGenerator#gerador-síncrono-no-estudo-de-estabilidade), [ZIP loads](load#carga-no-estudo-de-estabilidade), and [induction motors](indMotor#motor-de-indução-trifásico-no-estudo-de-estabilidade).
 
-A representação dos demais componentes do sistema elétrico: [linhas de transmissão](line), [transformadores](transformer) e elementos *shunt* (com exceção de cargas ZIP), que formam a rede de transmissão ou distribuição balanceada, é realizada utilizando os mesmos modelos do [fluxo de carga](powerFlow).
+The representation of other power system components: [transmission lines](line), [transformers](transformer), and *shunt* elements (except ZIP loads), which form the balanced transmission or distribution network, is carried out using the same models from [power flow](powerFlow).
 
-Os modelos dinâmicos para a análise no domínio do tempo são na forma de um sistema de equações algébrico-diferenciais (EADs), descritas a seguir:
+Dynamic models for time-domain analysis are in the form of a system of differential-algebraic equations (DAEs), described as follows:
 $$
 \dfrac{dx}{dt}= f(x,y,u)\\
 g = f(x,y)
 $$
-Em que:
-- $x$	são as variáveis de estado
-- $y$	são as variáveis de algébricas
-- $u$	são as variáveis de entrada
+Where:
+- $x$ are the state variables
+- $y$ are the algebraic variables
+- $u$ are the input variables
 
-As variáveis de entrada são inseridas pelo usuário e permanecem constantes durante todo o processo de cálculo. Para o problema de estabilidade, as variáveis algébricas iniciais correspondem às tensões e ângulos das barras calculadas no [fluxo de carga](powerFlow). As variáveis de estado iniciais são estimadas após a convergência do fluxo de potência (inicialização dos elementos dinâmicos).
+The input variables are provided by the user and remain constant throughout the calculation process. For the stability problem, the initial algebraic variables correspond to bus voltages and angles calculated in the [power flow](powerFlow). The initial state variables are estimated after the power flow convergence (initialization of dynamic elements).
 
-Na sequência é apresentado, na forma de fluxogramas, a estrutura do módulo de estabilidade implementado no PSP-UFU. O fluxograma abaixo mostra a estrutura geral da ferramenta de estabilidade.
+Next, the structure of the stability module implemented in PSP-UFU is presented in the form of flowcharts. The flowchart below shows the general structure of the stability tool.
 
-<div><center><img src={useBaseUrl("images/stabGeneral.svg")} alt="Estrutura geral da ferramenta de estabilidade" title="Estrutura geral da ferramenta de estabilidade" /></center></div>
+<div><center><img src={useBaseUrl("images/stabGeneral.svg")} alt="General structure of the stability tool" title="General structure of the stability tool" /></center></div>
 
-A inicialização da rede elétrica e dos elementos dinâmicos, assim como o precesso iterativo para solução das EADs são apresentados nos dois fluxogramas conseguintes.
+The initialization of the power grid and dynamic elements, as well as the iterative process for solving the DAEs, are shown in the two flowcharts below.
 
-<div><center><img src={useBaseUrl("images/stabInit.svg")} alt="Inicialização da ferramenta de estabilidade" title="Inicialização da ferramenta de estabilidade" /></center></div>
+<div><center><img src={useBaseUrl("images/stabInit.svg")} alt="Initialization of the stability tool" title="Initialization of the stability tool" /></center></div>
 
-<div><center><img src={useBaseUrl("images/stabIterative.svg")} alt="Processo iterativo para cálculo dos elementos dinâmicos" title="Estrutura geral da ferramenta de estabilidade" /></center></div>
+<div><center><img src={useBaseUrl("images/stabIterative.svg")} alt="Iterative process for calculating dynamic elements" title="Iterative process for calculating dynamic elements" /></center></div>
 
-### Integração numérica
-Para resolver as equações diferenciais da máquina é necessário um método de integração numérica. Tais métodos são classificados em dois grupos: métodos explícitos e métodos implícitos. Os métodos explícitos, devido à sua formulação, calculam diretamente o estado do sistema em um instante de tempo posterior, enquanto métodos implícitos envolvem estados atuais e posteriores em suas equações, exigindo, portanto, um processo iterativo.
+### Numerical integration
+To solve machine differential equations, a numerical integration method is required. Such methods are classified into two groups: explicit methods and implicit methods. Explicit methods, due to their formulation, directly calculate the system state at a later time instant, while implicit methods involve both current and future states in their equations, thus requiring an iterative process.
 
-As constantes de tempo presentes no estudo de estabilidade têm uma grande variação em seu valor (podem variar de $10^{-3}~s$ a $10~s$). Isso torna o sistema de equações diferenciais da máquina síncrona como um sistema rígido (*[stiff equation](https://en.wikipedia.org/wiki/Stiff_equation)*). Caso a análise da estabilidade numérica tanto das equações diferenciais rígidas quanto do método de integração obtenham o mesmo comportamento, o método é chamado de absolutamente estável, ou A-estável.
+The time constants present in the stability study vary greatly in their value (they can range from $10^{-3}~s$ to $10~s$). This makes the synchronous machine’s system of differential equations a stiff system (*[stiff equation](https://en.wikipedia.org/wiki/Stiff_equation)*). If the numerical stability analysis of both the stiff differential equations and the integration method shows the same behavior, the method is called absolutely stable, or A-stable.
 
-Métodos de integração numérica explícitos, como por exemplo o [Runge-Kutta](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods) de quarta ordem, não podem ser A-estáveis e, portanto, normalmente possuem comportamento ruim em problemas com equações diferenciais rígidas. Por outro lado, métodos implícitos podem ser A-estáveis. Um método implícito adequado para solução do comportamento dinâmico de sistemas elétricos é o **Trapezoidal Implícito**, por possuir as seguintes vantagens:
-- É numericamente estável (A-estável);
-- É bastante rápida;
-- Possui boa precisão (dependendo somente do passo de integração utilizado).
+Explicit numerical integration methods, such as the [fourth-order Runge-Kutta](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods), cannot be A-stable and therefore usually perform poorly in problems with stiff differential equations. On the other hand, implicit methods can be A-stable. A suitable implicit method for solving the dynamic behavior of power systems is the **Implicit Trapezoidal** method, as it has the following advantages:
+- It is numerically stable (A-stable);
+- It is very fast;
+- It has good accuracy (depending only on the integration step used).
 
-Tal método foi implementado no PSP-UFU tanto para solução das equações diferenciais da máquina síncrona quanto nas [funções transferência](transferFunction) do [sistema de controle](controlEditor). Sua formulação é dada pela seguinte expressão:
+This method was implemented in PSP-UFU both for solving the differential equations of the synchronous machine and in the [transfer functions](transferFunction) of the [control system](controlEditor). Its formulation is given by the following expression:
 $$
-y_{n+1}=y_n + 0{,}5 h \left(y_{n+1}' + y_{n}' \right)
+y_{n+1}=y_n + 0.5 h \left(y_{n+1}' + y_{n}' \right)
 $$
-Em que:
-- $h$	é o passo de integração
-- $y_n$	é o valor do estado no passo anterior (instante $t_n$)
-- $y_{n+1}$	é o valor do estado no passo atual (instante $t_{n+1}$)
-- $y_{n}'$	é a equação diferencial no passo anterior
-- $y_{n+1}'$	é a equação diferencial no passo atual
+Where:
+- $h$ is the integration step
+- $y_n$ is the state value at the previous step (instant $t_n$)
+- $y_{n+1}$ is the state value at the current step (instant $t_{n+1}$)
+- $y_{n}'$ is the differential equation at the previous step
+- $y_{n+1}'$ is the differential equation at the current step
 
-Nota-se nessa equação que o método é implícito devido ao termo $n+1$ aparecer em ambos os lados da equação, por isso é necessário um processo iterativo para sua solução.
+It can be seen in this equation that the method is implicit because the $n+1$ term appears on both sides of the equation, which is why an iterative process is necessary for its solution.
 
-## Referências
-1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6
-1. KUNDUR, P.; et al. Definition and classification of power system stability. IEEE Transactions Power Systems, v. 19, n. 2, mai 2004, p. 1387-1401. doi: https://doi.org/10.1109/TPWRS.2004.825981
-1. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286
-1. PARK, R. H. Two-reactions Theory of Synchronous Machine. Generalized Method of Analysis – Part I. AIEE Transactions, v. 48, n. 3, jul 1929. doi: https://doi.org/10.1109/T-AIEE.1929.5055275
-1. ANDERSON, P. M.; FOUAD, A. A. Power System Control and Stability. Wiley-IEEE Press, New York, 2002. doi: https://doi.org/10.1109/9780470545577
-1. SAUER, P. W.; PAI, M. A. Power System Dynamics and Stability. Pretience Hall, Upper Saddle River, 1998.
-1. KUNDUR, P. Power System Stability and Control. McGraw-Hill, New York, 1994.
-1. DOMMEL, H. W.; SATO, N. Fast Transient Stability Solutions. IEEE Transactions on Power Aparatus and Systems, v. PAS-91, n. 4, jul 1972, p. 1643-1650. doi: https://doi.org/10.1109/TPAS.1972.293341
+## References
+1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6  
+1. KUNDUR, P.; et al. Definition and classification of power system stability. IEEE Transactions Power Systems, v. 19, n. 2, May 2004, p. 1387-1401. doi: https://doi.org/10.1109/TPWRS.2004.825981  
+1. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286  
+1. PARK, R. H. Two-reactions Theory of Synchronous Machine. Generalized Method of Analysis – Part I. AIEE Transactions, v. 48, n. 3, Jul 1929. doi: https://doi.org/10.1109/T-AIEE.1929.5055275  
+1. ANDERSON, P. M.; FOUAD, A. A. Power System Control and Stability. Wiley-IEEE Press, New York, 2002. doi: https://doi.org/10.1109/9780470545577  
+1. SAUER, P. W.; PAI, M. A. Power System Dynamics and Stability. Prentice Hall, Upper Saddle River, 1998.  
+1. KUNDUR, P. Power System Stability and Control. McGraw-Hill, New York, 1994.  
+1. DOMMEL, H. W.; SATO, N. Fast Transient Stability Solutions. IEEE Transactions on Power Apparatus and Systems, v. PAS-91, n. 4, Jul 1972, p. 1643-1650. doi: https://doi.org/10.1109/TPAS.1972.293341  

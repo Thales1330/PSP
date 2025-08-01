@@ -1,41 +1,42 @@
 ---
 id: heatmap
-title: Mapa de Tensão
-sidebar_label: Mapa de Tensão
+title: Voltage Map
+sidebar_label: Voltage Map
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-A ferramenta Mapa de Tensão utiliza o concento de [mapa de calor](https://en.wikipedia.org/wiki/Heat_map) para exibir os valores de tensão de todas as barras do sistema por meio de cores.
+The Voltage Map tool uses the concept of a [heat map](https://en.wikipedia.org/wiki/Heat_map) to display the voltage values of all buses in the system using colors.
 
 <video autoPlay loop muted playsInline controls>
   <source src= {useBaseUrl("videos/heatmap.mp4")} type="video/mp4" />
   <source src= {useBaseUrl("videos/heatmap.webm")} type="video/webm" />
 </video>
 
-:::tip Dica
-Essa ferramenta é útil para identificação de barras com sub e sobretensões no sistema de potência, assim como o efeito da inserção / remoção de elementos do sistema.
+:::tip Tip
+This tool is useful for identifying buses with under- and overvoltages in the power system, as well as the effect of inserting/removing system elements.
 :::
 
-A legenda que correlaciona os valores do módulo da tensão com as cores são exibidas à esquerda da área de trabalho.
+The legend correlating the voltage magnitude values with colors is displayed on the left side of the workspace.
 
-## Habilitando a ferramenta Mapa de Tensão
+## Enabling the Voltage Map tool
 
-A ferramenta pode ser habilitada ou desabilitada no [submenu Ribbon **Ferramentas**](mainScreen#ribbon-menu) clicando no botão **Mapa de tensão** ou pela tecla de atalho "Ctrl + Shift + H".
+The tool can be enabled or disabled in the [**Tools** Ribbon submenu](mainScreen#ribbon-menu) by clicking the **Voltage Map** button or using the "Ctrl + Shift + H" keyboard shortcut.
 
-As configurações da ferramenta podem ser também acessadas no [submenu Ribbon **Ferramentas**](mainScreen#ribbon-menu) clicando no botão **Configurações do projeto**
+The tool settings can also be accessed in the [**Tools** Ribbon submenu](mainScreen#ribbon-menu) by clicking the **Project settings** button.
 
-<div><center><img src={useBaseUrl("images/heatmapForm.png")} alt="Configurações da ferramenta Mapa de Tensão" title="Configurações da ferramenta Mapa de Tensão" /></center></div>
+<div><center><img src={useBaseUrl("images/heatmapForm.png")} alt="Voltage Map tool settings" title="Voltage Map tool settings" /></center></div>
 
-:::info Informação
-Na versão atual do programa, somente as opções do mapa de tensão são exibidas nas configurações de projeto.
+:::info Information
+In the current program version, only the voltage map options are displayed in the project settings.
 :::
 
-Os limites superiores e inferiores, em $p.u.$ são editados nesse formulário.
+The upper and lower limits, in $p.u.$, are edited in this form.
 
-Alternativamente, o programa pode calcular automaticamente os limites. Nesse caso, o limite superior será a maior tensão do circuito e o limite inferior será a menor tensão do circuito.
+Alternatively, the program can automatically calculate the limits.  
+In this case, the upper limit will be the highest voltage in the circuit and the lower limit will be the lowest voltage in the circuit.
 
-:::warning Cuidado!
-O cálculo automático dos limites pode prejudicar a identificação de barras com sub e sobretensões no sistema.
+:::warning Warning!
+Automatic limit calculation may hinder the identification of buses with under- and overvoltages in the system.
 :::

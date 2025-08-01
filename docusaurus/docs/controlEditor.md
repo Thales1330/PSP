@@ -1,116 +1,116 @@
 ---
 id: controlEditor
-title: Editor de Controle
-sidebar_label: Editor de Controle
+title: Control Editor
+sidebar_label: Control Editor
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-Os controles das [máquinas síncronas](syncGenerator) são criados, modificados, importados e exportados em um editor distinto dos elementos de potência, apresentado na figura abaixo.
+The controls of [synchronous machines](syncGenerator) are created, modified, imported, and exported in a separate editor from the power elements, shown in the figure below.
 
-<div><center><img src={useBaseUrl("images/controlEditor.png")} alt="Editor de elementos de controle do PSP-UFU" title="Editor de elementos de controle do PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/controlEditor.png")} alt="PSP-UFU control element editor" title="PSP-UFU control element editor" /></center></div>
 
-O acesso ao editor é realizado por meio de dois botões presentes no [formulário de edição dos dados de estabilidade dos geradores síncronos](syncGenerator#formulário-de-edição-dos-geradores-síncronos):
-- [Editar AVR](syncGenerator#utilizar-avr-e-regulador-de-velocidade)
-- [Editar regulador de velocidade](syncGenerator#utilizar-avr-e-regulador-de-velocidade)
+Access to the editor is done through two buttons present in the [synchronous generator stability data editing form](syncGenerator#formulário-de-edição-dos-geradores-síncronos):
+- [Edit AVR](syncGenerator#utilizar-avr-e-regulador-de-velocidade)
+- [Edit speed governor](syncGenerator#utilizar-avr-e-regulador-de-velocidade)
 
-:::caution Atenção!
-No PSP-UFU a opção de editar o **AVR** engloba mais que somente o controle de tensão da máquina. Nele **deve** ser inserida a malha de controle da máquina assim como a **excitatriz da máquina síncrona**. Outras estratégias de controle (opcionais), como PSS (*Power System Stabilizer*) e/ou controles de sobre e sub excitação, são também implementadas em conjunto (como apresentado na figura anterior).
+:::caution Caution!
+In PSP-UFU, the **AVR** editing option involves more than just the machine voltage control. It **must** include the machine control loop as well as the **synchronous machine exciter**. Other (optional) control strategies, such as PSS (*Power System Stabilizer*) and/or over- and under-excitation controls, are also implemented together (as shown in the previous figure).
 :::
 
-:::caution Atenção!
-Assim como no AVR, o **Regulador de Velocidade** engloba mais que a regulação primária da máquina. Nessa opção **deve** ser inserida ao menos a malha de controle da regulação primária de velocidade, assim como o **modelo da turbina**. Estratégias opcionais de controle da velocidade também são inseridas nessa opção.
+:::caution Caution!
+As with the AVR, the **Speed Governor** involves more than just the primary regulation of the machine. In this option, you **must** include at least the primary speed regulation control loop as well as the **turbine model**. Optional speed control strategies are also added in this option.
 :::
 
-## Elementos de Controle
-O acesso aos elementos de controle é realizado em uma janela (removível e encaixável) por meio de ícones relacionados.
+## Control Elements
+Access to control elements is done in a (detachable and dockable) window via related icons.
 
-Uma vez que o usuário clicar no ícone desejado, o elemento de controle acompanhará o ponteiro do mouse até ser efetivamente inserido na posição desejada ao clicar novamente na área de trabalho. Os elementos são então conectados por “linhas de conexão” inseridas ao clicar nos nós dos componentes previamente adicionados, permitindo a construção da rede de controle genérica.
+Once the user clicks the desired icon, the control element follows the mouse pointer until it is placed in the desired position by clicking again in the workspace. The elements are then connected by “connection lines” inserted by clicking on the nodes of previously added components, allowing the construction of a generic control network.
 
-As ferramentas de manipulação e navegação, como arrastar, mover e excluir são [herdadas](cadTools) do [editor de elementos de potência](powerEditor), possuindo comportamento idêntico. A **edição dos dados** dos componentes inseridos também é realizada com **duplo clique** sobre o elemento inserido, exibindo um formulário de edição de dados.
+The manipulation and navigation tools, such as drag, move, and delete, are [inherited](cadTools) from the [power element editor](powerEditor), with identical behavior. **Editing the data** of inserted components is also done with a **double click** on the inserted element, displaying a data editing form.
 
 <video autoPlay loop muted playsInline controls>
   <source src= "/PSP/videos/timelapseControlEditor.mp4" type="video/mp4" />
   <source src= "/PSP/videos/timelapseControlEditor.webm" type="video/webm" />
 </video>
 
-Os seguintes blocos de controle estão presentes no PSP-UFU:
-- [Entrada e Saída](io)
-- [Função Transferência](transferFunction)
-- Matemática
-	- [Somador](sum)
-	- [Multiplicador](multiplier)
-	- [Divisor](divider)
-	- [Exponencial](exponential)
-- Limitadores
-	- [Limitador absoluto](limiter)
-	- [Limitador de taxa](rateLimiter)
-- Constantes
-	- [Constante](const)
-	- [Ganho](gain)
-- [Expressão Matemática](mathExpression)
+The following control blocks are present in PSP-UFU:
+- [Input and Output](io)
+- [Transfer Function](transferFunction)
+- Mathematics
+	- [Adder](sum)
+	- [Multiplier](multiplier)
+	- [Divider](divider)
+	- [Exponential](exponential)
+- Limiters
+	- [Absolute limiter](limiter)
+	- [Rate limiter](rateLimiter)
+- Constants
+	- [Constant](const)
+	- [Gain](gain)
+- [Mathematical Expression](mathExpression)
 
-## Inicialização do sistema de controle
-Caso as entradas do sistema de controle apresentem valores diferentes de zero ou a primeira operação entre elas não resulte em uma saída nula, o sistema necessita de inicialização, de forma a adequar os valores de entradas e saída dos blocos elementares e dos vetores de estado das [funções transferências](transferFunction) presentes. Tal procedimento é realizado por meio da solução de toda rede de controle até que se obtenha sua convergência, ou seja, a diferença absoluta entre as mesmas saídas de uma solução anterior e uma atual deve ser nula ou muito próxima de zero.
+## Control System Initialization
+If the control system inputs have nonzero values or the first operation between them does not result in a zero output, the system needs initialization, so as to adjust the input and output values of elementary blocks and the state vectors of the [transfer functions](transferFunction) present. This procedure is performed by solving the entire control network until convergence is achieved, i.e., the absolute difference between the same outputs from a previous and a current solution must be zero or very close to zero.
 
 :::info
-O processo de **inicialização é realizada automaticamente** pelo PSP-UFU.
+The **initialization process is performed automatically** by PSP-UFU.
 
-Uma vez que a inicialização é imposta pelas [entradas](io) do controle, erros de convergência podem ocorrer devido à má parametrização dos elementos dos sistemas de **potência e controle**.
+Since initialization is imposed by the control [inputs](io), convergence errors may occur due to poor parameterization of the **power and control** system elements.
 :::
 
-Para otimizar e melhorar a estabilidade do processo de inicialização utilizou-se um passo de integração variável dentro de limites, de forma que o passo aumenta em condições de diferenças menores entre as soluções do sistema de controle e diminui caso essa diferença se torne elevada. A implementação dessa abordagem reduziu significativamente o encerramento do processo com erro causado pela instabilidade numérica, além de acelerar a inicialização.
+To optimize and improve the stability of the initialization process, a variable integration step within limits is used, such that the step increases when the differences between the control system solutions are smaller, and decreases when this difference becomes large. Implementing this approach significantly reduced process termination with errors caused by numerical instability and sped up initialization.
 
-O fluxograma abaixo evidencia o processo de inicialização implementado no PSP-UFU:
+The flowchart below shows the initialization process implemented in PSP-UFU:
 
-<div><center><img src={useBaseUrl("images/controlInit.png")} alt="Estrutura da inicialização do sistema de controle" title="Estrutura da inicialização do sistema de controle" /></center></div>
+<div><center><img src={useBaseUrl("images/controlInit.png")} alt="Control system initialization structure" title="Control system initialization structure" /></center></div>
 
-## Teste do diagrama de controle
-Na parte inferior esquerda do Editor de Controle está presente o botão "**Testar Sistema...**". O botão acessa o formulário de teste de controles, como é indicado na figura abaixo:
+## Control Diagram Testing
+In the lower left corner of the Control Editor is the "**Test System...**" button. The button opens the control testing form, as shown in the figure below:
 
-<div><center><img src={useBaseUrl("images/testControl.png")} alt="Formulário de teste de controles" title="Formulário de teste de controles" /></center></div>
+<div><center><img src={useBaseUrl("images/testControl.png")} alt="Control testing form" title="Control testing form" /></center></div>
 
-Nesse formulário é possível inserir o comportamento de **todas as entradas do diagrama**:
-- **Tipo de entrada**: Define um dos tipos de entradas possíveis no PSP-UFU: "Passo (*Step*)", Rampa (*Ramp*) ou Quadrática (*Quadratic*);
-- **Tempo de início ($t_i$)**: Define o tempo de início na simulação da entrada definida. As entradas iniciais são sempre definidas como zero e assumem valores diferentes após o tempo de início;
-- **Inclinação ($\alpha$)**: Valor relacionado ao tipo de entrada:
-	- Para entrada do tipo "Passo" - O valor da inclinação define o valor final do passo:
+In this form, it is possible to define the behavior of **all diagram inputs**:
+- **Input type**: Defines one of the possible input types in PSP-UFU: "Step", "Ramp" or "Quadratic";
+- **Start time ($t_i$)**: Defines the start time in the simulation for the defined input. The initial inputs are always set to zero and take on different values after the start time;
+- **Slope ($\alpha$)**: Value related to the input type:
+	- For "Step" type input – The slope value defines the final value of the step:
 	$$
 	\begin{cases}
-		\text{Se~} t < t_i \rightarrow f(t) = 0,0\\
-		\text{Se~} t \ge t_i \rightarrow f(t) = \alpha
+		\text{If } t < t_i \rightarrow f(t) = 0.0\\
+		\text{If } t \ge t_i \rightarrow f(t) = \alpha
 	\end{cases}
 	$$
-	- Para entrada do tipo "Rampa" - define o coeficiente de inclinação da reta:
+	- For "Ramp" type input – defines the slope coefficient of the line:
 	$$
 	\begin{cases}
-		\text{Se~} t < t_i \rightarrow f(t) = 0,0\\
-		\text{Se~} t \ge t_i \rightarrow f(t) = \alpha \times t
+		\text{If } t < t_i \rightarrow f(t) = 0.0\\
+		\text{If } t \ge t_i \rightarrow f(t) = \alpha \times t
 	\end{cases}
 	$$
-	- Para entrada do tipo "Quadrática" - define o coeficiente de crescimento da curva:
+	- For "Quadratic" type input – defines the curve growth coefficient:
 	$$
 	\begin{cases}
-		\text{Se~} t < t_i \rightarrow f(t) = 0,0\\
-		\text{Se~} t \ge t_i \rightarrow f(t) = \alpha \times t^2
+		\text{If } t < t_i \rightarrow f(t) = 0.0\\
+		\text{If } t \ge t_i \rightarrow f(t) = \alpha \times t^2
 	\end{cases}
 	$$
 	
-- **Passo de integração ($h$)**: Passo do método de integração Trapezoidal Implícito;
-- **Tempo de simulação ($t_f$)**: Tempo total de simulação.
+- **Integration step ($h$)**: Step size for the Implicit Trapezoidal integration method;
+- **Simulation time ($t_f$)**: Total simulation time.
 
-Após a simulação os resultados são exibidos no [visualizador de gráficos](graphViewer).
+After the simulation, the results are displayed in the [graph viewer](graphViewer).
 
-:::caution Atenção!
-A mesma parametrização de entrada é aplicada em todos os blocos de [entrada](io) do sistema.
+:::caution Caution!
+The same input settings are applied to all [input](io) blocks in the system.
 :::
 
-:::tip Dica
-É possível aplicar **várias entradas distintas** (inclusive com condicionais!) utilizando o bloco de [expressão matemática](mathExpression).
+:::tip Tip
+It is possible to apply **multiple different inputs** (including with conditionals!) using the [mathematical expression](mathExpression) block.
 :::
 
-Utilizando o bloco de [expressão matemática](mathExpression) é possível inserir entradas complexas, como por exemplo testar o diagrama de blocos (AVR DC1C + PSS1A - [IEEE Std. 421.5-2016](https://doi.org/10.1109/IEEESTD.2016.7553421)) da figura abaixo:
+Using the [mathematical expression](mathExpression) block, it is possible to insert complex inputs, such as testing the block diagram (AVR DC1C + PSS1A – [IEEE Std. 421.5-2016](https://doi.org/10.1109/IEEESTD.2016.7553421)) shown in the figure below:
 
-<div><center><img src={useBaseUrl("images/exControl.svg")} alt="Sistema de controle sob teste" title="Sistema de controle sob teste" /></center></div>
-<div><center><img src={useBaseUrl("images/compControl.svg")} alt="Comparação do sistema de controle sob teste" title="Comparação do sistema de controle sob teste" /></center></div>
+<div><center><img src={useBaseUrl("images/exControl.svg")} alt="Control system under test" title="Control system under test" /></center></div>
+<div><center><img src={useBaseUrl("images/compControl.svg")} alt="Comparison of control system under test" title="Comparison of control system under test" /></center></div>

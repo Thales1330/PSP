@@ -1,7 +1,7 @@
 ---
 id: powerFlow
-title: Fluxo de Potência
-sidebar_label: Fluxo de Potência
+title: Power Flow
+sidebar_label: Power Flow
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,102 +10,103 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Um estudo fundamental no planejamento da expansão e operação de um sistema elétrico é o **fluxo de potência (ou fluxo de carga)** uma vez que a operação satisfatória desse sistema depende do conhecimento dos efeitos da interligação, de novas cargas, de novas centrais geradoras e de novas linhas antes que elas sejam instaladas. Esse estudo tem como objetivo encontrar o fluxo de potência nos ramos e as tensões nodais do Sistema Elétrico de Potência (SEP) impostas pela geração e a carga.
+A fundamental study in the planning of the expansion and operation of an electrical system is the **power flow (or load flow)** since the satisfactory operation of this system depends on the knowledge of the effects of interconnection, new loads, new generating plants, and new lines before they are installed. This study aims to find the power flow in the branches and the nodal voltages of the Power Electric System (PES) imposed by generation and load.
 
-As equações formuladas a partir dos modelos dos elementos presentes no estudo de fluxo de carga são não lineares e não possuem solução analítica explícita. Portanto é necessária a utilização de métodos numéricos iterativos para solução do problema de fluxo de carga.
+The equations formulated from the models of the elements present in the load flow study are nonlinear and do not have an explicit analytical solution. Therefore, it is necessary to use iterative numerical methods to solve the load flow problem.
 
-## Formulação do problema de fluxo de carga
-O problema de fluxo de carga pode ser representado por um sistema de equações e inequações algébricas não-lineares que correspondem às leis de Kirchhoff e a um conjunto de restrições de operação impostos pelos componentes de uma rede elétrica.
-Na formulação do problema a cada barra da rede são associadas quatro variáveis, sendo que duas delas surgem como dados e duas como incógnitas (em uma barra de índice $i$):
-- $V_i$	é a magnitude da tensão na barra $i$;
-- $θ_i$	é o ângulo da tensão na barra $i$;
-- $P_i$	é a injeção líquida de potência ativa na barra $i$;
-- $Q_i$	é a injeção líquida de potência reativa na barra $i$.
+## Formulation of the load flow problem
+The load flow problem can be represented by a system of nonlinear algebraic equations and inequalities that correspond to Kirchhoff's laws and a set of operational constraints imposed by the components of an electrical network.
+In the problem formulation, each bus of the network is associated with four variables, two of which are given data and two are unknowns (at a bus of index $i$):
+- $V_i$ is the voltage magnitude at bus $i$;
+- $θ_i$ is the voltage angle at bus $i$;
+- $P_i$ is the net active power injection at bus $i$;
+- $Q_i$ is the net reactive power injection at bus $i$.
 
-Relativo às variáveis que são incógnitas e os dados do sistema, podem ser definidos **três tipos de barras**:
-- **Barra PQ**:	$P_i$ e $Q_i$ são dados, $V_i$ e $θ_i$ são calculados;
-- **Barra PV**:	$P_i$ e $V_i$ são dados, $Q_i$ e $θ_i$ são calculados;
-- **Barra de Referência**	$V_i$ e $θ_i$ são dados, $P_i$ e $Q_i$ são calculados.
+Regarding the variables that are unknowns and the system data, **three types of buses** can be defined:
+- **PQ Bus**: $P_i$ and $Q_i$ are given, $V_i$ and $θ_i$ are calculated;
+- **PV Bus**: $P_i$ and $V_i$ are given, $Q_i$ and $θ_i$ are calculated;
+- **Reference Bus**: $V_i$ and $θ_i$ are given, $P_i$ and $Q_i$ are calculated.
 
-:::info Informação
-As **barras PQ** geralmente são representadas pelos barramentos de carga, os quais não há geração e controle de tensão.
+:::info Information
+**PQ buses** are generally represented by load buses, which have no generation and voltage control.
 
-As **barras PV** se caracterizam pelo controle de tensão mediante a injeção ou absorção de potência reativa por meio do controle da excitação de uma máquina síncrona.
+**PV buses** are characterized by voltage control through the injection or absorption of reactive power via excitation control of a synchronous machine.
 
-A **barra de Referência** (ou de folga, de oscilação) tem como função, assim como o próprio nome diz, servir de referência de tensão e ângulo do sistema. Essa barra é necessariamente geradora, uma vez que ela é responsável pelo equilíbrio do balanço de potência do sistema.
+The **Reference bus** (or slack bus) functions, as its name indicates, as a voltage and angle reference for the system. This bus is necessarily a generator because it is responsible for balancing the system power.
+
 :::
 
-:::caution Atenção!
-O tipo de barra deve ser definido no [elemento barramento](bus).
+:::caution Warning!
+The bus type must be defined in the [bus element](bus).
 
-Note que **o sistema deve possuir somente uma barra de referência**.
+Note that **the system must have only one reference bus**.
 :::
 
-Como mencionado anteriormente, as equações são não-lineares e a solução analítica não é prática. As soluções dessas equações seguem **[processos iterativos](https://en.wikipedia.org/wiki/Iterative_method)**, em que são atribuídos valores estimados (ou iniciais) para as barras com tensões desconhecidas e, baseado na potência ativa e reativa e módulo da tensão especificados, calcula-se por meio das equações previamente apresentadas as novas tensões complexas em cada nó do sistema.
+As mentioned earlier, the equations are nonlinear and the analytical solution is not practical. The solutions of these equations follow **[iterative processes](https://en.wikipedia.org/wiki/Iterative_method)**, where estimated (or initial) values are assigned to the buses with unknown voltages and, based on the specified active and reactive power and voltage magnitude, the new complex voltages at each system node are calculated using the previously presented equations.
 
-Na sequência, esse conjunto de valores para as tensões em cada barra é utilizado para novamente calcular outro grupo de tensões. Cada cálculo de um novo conjunto de tensões é chamado iteração. O processo iterativo é repetido até que as mudanças em todas as barras sejam menores do que um valor pré-estipulado, obtendo assim a convergência.
+Next, this set of voltage values at each bus is used again to calculate another group of voltages. Each calculation of a new set of voltages is called an iteration. The iterative process is repeated until the changes in all buses are less than a preset value, thus achieving convergence.
 
-## Execução do fluxo de carga no PSP-UFU
-Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do fluxo de carga é realizada no [menu Simulação](mainScreen#ribbon-menu) clicando no botão **Fluxo de carga**.
+## Running the load flow in PSP-UFU
+After constructing the one-line diagram in the [power editor](powerEditor), the load flow execution is performed in the [Simulation menu](mainScreen#ribbon-menu) by clicking the **Load Flow** button.
 
-<div><center><img src={useBaseUrl("images/menuSimulationPF.svg")} alt="Menu Simulação" title="Menu Simulação" /></center></div>
+<div><center><img src={useBaseUrl("images/menuSimulationPF.svg")} alt="Simulation Menu" title="Simulation Menu" /></center></div>
 
-:::tip Dica
-Caso o fluxo de carga tenha sido executado com sucesso, as setas de potência serão exibidas, a barra de status indicará sucesso na operação e os [elementos de texto](text) serão atualizados.
+:::tip Tip
+If the load flow has been successfully executed, the power arrows will be displayed, the status bar will indicate success, and the [text elements](text) will be updated.
 :::
 
-**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#ribbon-menu) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
+**Another option** is execution via continuous calculation, also present in the [Simulation menu](mainScreen#ribbon-menu), activated by clicking the **Enable Solution** button. With this option, the static calculations selected in the [simulation settings](simulationConfig) are automatically performed when any network parameters are modified, such as electrical data or circuit breaker operations (removal or insertion).
 
-:::caution Atenção!
-Evite construir o circuito com o cálculo contínuo habilitado, uma vez que configurações temporárias podem levar a erros de execução da simulação.
+:::caution Warning!
+Avoid building the circuit with continuous calculation enabled, as temporary configurations may lead to simulation execution errors.
 
-Para desabilitar o cálculo contínuo clique no botão **Desabilitar solução**.
+To disable continuous calculation, click the **Disable Solution** button.
 :::
 
-Os resultados do fluxo de carga são exibidos nos [elementos de texto vinculado](text), ao posicionar o mouse sobre os elementos e em [relatórios tabulares](tabularReport).
+The load flow results are displayed in the [linked text elements](text) when hovering over the elements and in [tabular reports](tabularReport).
 
-### Erros comuns na execução do fluxo de carga
-A seguir são apresentados os erros mais comuns relacionados ao fluxo de carga.
+### Common errors when running load flow
+The following are the most common errors related to load flow.
 
-#### A seguinte mensagem de erro é exibida: "O número máximo de iterações foi alcançado"
-Essa mensagem de erro é exibida quando o método de solução numérica selecionado nas [configurações de simulação](simulationConfig) atinge o número máximo de iterações inserido. As seguintes situações podem ocasionar esse erro:
-- **Os parâmetros do circuito estão incorretos**. caso parâmetros muito fora dos valores padrão dos elementos elétricos sejam inseridos, o cálculo de fluxo de carga pode divergir. Verifique se os dados foram inseridos corretamente.
-- **Algum elemento possui parâmetros discrepantes dos demais**. Caso um dos elementos inseridos possua um valor de impedância muito distinto dos demais, como por exemplo uma linha com impedância muito elevada ou uma carga muito pequena, pode levar à divergência do método numérico. Nesse caso, reconsidere a necessidade de representação desses elementos no circuito e alterne entre os métodos numéricos de solução disponíveis.
-- **O número máximo de iterações está muito baixo**. Alguns circuitos exigem um número maior de iterações, portanto altere o valor do máximo de iterações nas [configurações de simulação](simulationConfig). Também tente alternar entre os métodos numéricos de solução disponíveis.
-- **Os parâmetros de simulação estão inadequados**. Caso um parâmetro do método de solução esteja inadequado, como fator de aceleração ou tolerância, o cálculo pode não alcançar a convergência. Altere esses parâmetros nas [configurações de simulação](simulationConfig).
+#### The following error message is displayed: "Maximum number of iterations reached"
+This error message appears when the numerical solution method selected in the [simulation settings](simulationConfig) reaches the maximum number of iterations entered. The following situations may cause this error:
+- **Circuit parameters are incorrect.** If parameters far from the standard values of electrical elements are entered, the load flow calculation may diverge. Check if the data was correctly entered.
+- **Some element has parameters discrepant from others.** If an element inserted has an impedance value very different from others, for example, a line with very high impedance or a very small load, it can cause numerical method divergence. In this case, reconsider the need for representing these elements in the circuit and alternate between available numerical solution methods.
+- **The maximum number of iterations is too low.** Some circuits require a higher number of iterations, so change the maximum iterations value in the [simulation settings](simulationConfig). Also, try switching between available numerical solution methods.
+- **Simulation parameters are inadequate.** If a solution method parameter such as acceleration factor or tolerance is unsuitable, the calculation may not converge. Adjust these parameters in the [simulation settings](simulationConfig).
 
-#### Os dados de saída são exibidos como "NaN" ou "nan"
-Isso ocorre devido a erros de operações matemáticas nos cálculos de fluxo de carga. "NaN" significa *Not a Number*.
-- **Algum barramento está isolado**. Esse erro é bastante comum e pode ocorrer ao inserir um barramento sem conectá-lo ao sistema ou ao remover os elementos de ramo que conectam uma barra ao sistema. A solução é eliminar essa barra do diagrama.
-- **Os parâmetros do circuito estão incorretos**. caso parâmetros muito fora dos valores padrão dos elementos elétricos sejam inseridos, o cálculo de fluxo de carga pode divergir. Verifique se os dados foram inseridos corretamente.
-- **Algum elemento possui parâmetros discrepantes dos demais**. Caso um dos elementos inseridos possua um valor de impedância muito distinto dos demais, como por exemplo uma linha com impedância muito elevada ou uma carga muito pequena, pode levar à divergência do método numérico. Nesse caso, reconsidere a necessidade de representação desses elementos no circuito e alterne entre os métodos numéricos de solução disponíveis.
+#### Output data is displayed as "NaN" or "nan"
+This occurs due to errors in mathematical operations in the load flow calculations. "NaN" means *Not a Number*.
+- **Some bus is isolated.** This error is quite common and may occur when inserting a bus without connecting it to the system or when removing branch elements that connect a bus to the system. The solution is to eliminate this bus from the diagram.
+- **Circuit parameters are incorrect.** If parameters far from the standard values of electrical elements are entered, the load flow calculation may diverge. Check if the data was correctly entered.
+- **Some element has parameters discrepant from others.** If an element inserted has an impedance value very different from others, for example, a line with very high impedance or a very small load, it can cause numerical method divergence. In this case, reconsider the need for representing these elements in the circuit and alternate between available numerical solution methods.
 
-## Métodos de solução numérica do fluxo de carga no PSP-UFU
-Os métodos implementados no programa para solução do problema de fluxo de carga no PSP-UFU são **Gauss-Seidel (GS)** e **Newton-Raphson (NR)**. Além desses métodos clássicos, um método híbrido pode ser utilizado (definido nas [configurações de simulação](simulationConfig)), em que é utilizado inicialmente o GS e na sequência o NR, aumentando a chance de convergência do NR.
+## Numerical solution methods for load flow in PSP-UFU
+The methods implemented in the program for solving the load flow problem in PSP-UFU are **Gauss-Seidel (GS)** and **Newton-Raphson (NR)**. In addition to these classic methods, a hybrid method can be used (defined in the [simulation settings](simulationConfig)), where GS is initially used followed by NR, increasing the chance of NR convergence.
 
 ### Gauss-Seidel
-O método de Gauss-Seidel tem sido bastante utilizado nas últimas décadas para solução do problema de fluxo de carga, uma vez que não há a necessidade de fatorar a matrizes, reduzindo o esforço computacional. Atualmente, restrições computacionais são menos problemáticas e outros métodos são normalmente escolhidos, porém o Gauss-Seidel ainda possui valor didático e, visto que o PSP-UFU também possui fins educacionais, optou-se pela implementação desse método.
+The Gauss-Seidel method has been widely used in recent decades to solve the load flow problem, as there is no need to factorize matrices, reducing computational effort. Nowadays, computational constraints are less problematic and other methods are usually chosen, but Gauss-Seidel still has educational value, and since PSP-UFU also has educational purposes, this method was implemented.
 
-Para iniciar as iterações do método são necessários valores iniciais para as tensões ($\dot{V}_i^0$) que devem ser calculadas. Normalmente para barras do tipo PQ tem-se $\dot{V}_i^0=1{,}0+j0{,}0~p.u.$ e para barras do tipo PV $\dot{V}_i^0=V_i^{esp}+j0{,}0$ [p.u.], em que $V_i^{esp}$ é o módulo da tensão especificada para a barra PV. A barra de referência tem o módulo e ângulo de tensão fixos e não participam no processo iterativo.
+To start iterations of the method, initial values for voltages ($\dot{V}_i^0$) must be calculated. Normally for PQ buses $\dot{V}_i^0=1.0 + j0.0~p.u.$ and for PV buses $\dot{V}_i^0=V_i^{spec} + j0.0$ [p.u.], where $V_i^{spec}$ is the voltage magnitude specified for the PV bus. The reference bus has fixed voltage magnitude and angle and does not participate in the iterative process.
 
-O método de Gauss-Seidel mostra um **número excessivo de iterações** e, com o intuito reduzi-los, multiplicam-se as correções de tensões por uma constante. Essa operação amplia o valor da correção, trazendo a tensão para mais perto do valor do valor final. Os multiplicadores que realizam essa convergência melhorada são chamados de fatores de aceleração. Para qualquer sistema existem valores ótimos para os fatores de aceleração e uma escolha inadequada pode resultar em uma convergência mais lenta ou torná-la impossível. Normalmente é utilizado um fator de aceleração igual a 1,6, valor definido como padrão no programa. A utilização do fator de aceleração é realizada por meio da equação:
+The Gauss-Seidel method shows an **excessive number of iterations**, and to reduce them, voltage corrections are multiplied by a constant. This operation increases the correction value, bringing the voltage closer to the final value. The multipliers that perform this improved convergence are called acceleration factors. For any system, there are optimal values for acceleration factors, and an inadequate choice may result in slower convergence or make it impossible. Usually, an acceleration factor equal to 1.6 is used, which is the default value in the program. The use of the acceleration factor is done by the equation:
 $$
 \dot{V}_{i_{AC}}^{(v + 1)} = \alpha \left( \dot{V}_{i}^{(v + 1)}- \dot{V}_{i_{AC}}^{(v)} \right) + \dot{V}_{i_{AC}}^{(v)}
 $$
-Em que:
-- $\dot{V}_{i_{AC}}^{(v + 1)}$ é a tensão complexa da iteração atual com fator de aceleração aplicado
-- $\dot{V}_{i}^{(v + 1)}$ é a tensão complexa da iteração atual
-- $\dot{V}_{i_{AC}}^{(v)}$ é a tensão complexa da iteração anterior com fator de aceleração aplicado
-- $\alpha$ é o fator de aceleração
+Where:
+- $\dot{V}_{i_{AC}}^{(v + 1)}$ is the complex voltage of the current iteration with acceleration factor applied
+- $\dot{V}_{i}^{(v + 1)}$ is the complex voltage of the current iteration
+- $\dot{V}_{i_{AC}}^{(v)}$ is the complex voltage of the previous iteration with acceleration factor applied
+- $\alpha$ is the acceleration factor
 
-O fluxograma abaixo demonstra como o método de Gauss-Seidel foi implementado no PSP-UFU:
+The flowchart below shows how the Gauss-Seidel method was implemented in PSP-UFU:
 
-<div><center><img src={useBaseUrl("images/gaussSeidel.svg")} alt="Método numérico de Gauss-Seidel para fluxo de carga" title="Método numérico de Gauss-Seidel para fluxo de carga" /></center></div>
+<div><center><img src={useBaseUrl("images/gaussSeidel.svg")} alt="Gauss-Seidel numerical method for load flow" title="Gauss-Seidel numerical method for load flow" /></center></div>
 
 ### Newton-Raphson
-O método de Newton-Raphson (também conhecido como método de Newton ou Newton-Fourier) para solução do fluxo de carga é descrito em vários livros e artigos. Atualmente é o algoritmo mais utilizado para solução do fluxo de carga. Para casos bem condicionados, esse método geralmente converge em 4 a 5 iterações, porém existe a possibilidade da técnica contornar o ponto da solução sem nunca atingi-la, o que também justifica implementação do método de Gauss-Seidel no *software*.
+The Newton-Raphson method (also known as Newton or Newton-Fourier method) for load flow solution is described in many books and articles. It is currently the most used algorithm for load flow solution. For well-conditioned cases, this method generally converges in 4 to 5 iterations, but there is a possibility that the technique bypasses the solution point without ever reaching it, which also justifies the implementation of the Gauss-Seidel method in the software.
 
-A expansão da [série de Taylor](https://en.wikipedia.org/wiki/Taylor_series) para uma função de duas ou mais variáveis é a base do método de Newton-Raphson para resolver o problema do fluxo de carga. Fazendo a expansão em série de Taylor, para duas equações e duas incógnitas ($f_1\left( x_{1}, x_{2} \right)$ e $f_2\left( x_{1}, x_{2} \right)$), sem listar as derivadas parciais maiores que 1 na forma matricial, obtêm-se:
+The expansion of the [Taylor series](https://en.wikipedia.org/wiki/Taylor_series) for a function of two or more variables is the basis of the Newton-Raphson method to solve the load flow problem. Performing the Taylor series expansion for two equations and two unknowns ($f_1(x_1, x_2)$ and $f_2(x_1, x_2)$), without listing partial derivatives higher than 1 in matrix form, we get:
 $$
 \begin{bmatrix}
 K_1 - f_1\left( x_{1}^{(0)}, x_{2}^{(0)} \right)\\
@@ -121,12 +122,12 @@ K_2 - f_2\left( x_{1}^{(0)}, x_{2}^{(0)} \right)
 \Delta x_{2}^{(0)}
 \end{bmatrix}
 $$
-Em que:
-- $K$ é o resultado da equação $f\left( x_{1}, x_{2} \right)$
-- $x^{(0)}$ é a estimativa iniciais de $x$
-- $\Delta x$ é o valor acrescido de $x^{(0)}$ que resulta em $x$, ou seja: $f\left( x_{1}, x_{2} \right) = f_1\left( x_{1}^{(0)} + \Delta x_1, x_{2}^{(0)} + \Delta x_2 \right)$
+Where:
+- $K$ is the result of the equation $f(x_1, x_2)$
+- $x^{(0)}$ is the initial estimate of $x$
+- $\Delta x$ is the value added to $x^{(0)}$ that results in $x$, i.e., $f(x_1, x_2) = f_1(x_1^{(0)} + \Delta x_1, x_2^{(0)} + \Delta x_2)$
 
-Essa expressão pode ser resumida em:
+This expression can be summarized as:
 $$
 \begin{bmatrix}
 \Delta K_1^{(0)}\\
@@ -141,19 +142,19 @@ J
 \Delta x_{2}^{(0)}
 \end{bmatrix}
 $$
-Em que $[J]$ é a **Matriz Jacobiana**
+Where $[J]$ is the **Jacobian Matrix**
 
-Com a equação acima é possível calcular os valores de $\Delta x_{1}^{(0)}$ e $\Delta x_{2}^{(0)}$. Entretanto, esses valores somados às estimativas iniciais não determinam a solução correta, sendo necessário repetir o processo de determinação das constantes, formação da matriz jacobiana e solução da equação acima, o qual será refeito determinando novas estimativas $\Delta x_{1}^{(1)}$ e $\Delta x_{2}^{(1)}$.
+With the equation above, it is possible to calculate the values of $\Delta x_1^{(0)}$ and $\Delta x_2^{(0)}$. However, these values added to the initial estimates do not determine the correct solution, so the process of determining constants, forming the Jacobian matrix, and solving the above equation must be repeated, producing new estimates $\Delta x_1^{(1)}$ and $\Delta x_2^{(1)}$.
 
-Esse processo é repetido até que as correções se tornem tão pequenas que satisfaçam uma precisão escolhida.
+This process is repeated until the corrections become so small that they satisfy a chosen precision.
 
-Para aplicar o método de Newton-Raphson à solução das equações do fluxo de carga, utiliza-se as equações que representam as potências ativa e reativa injetadas em uma barra.
+To apply the Newton-Raphson method to solve the load flow equations, the equations representing active and reactive power injected at a bus are used.
 
-Assim como no método de Gauss-Seidel, a barra de referência é omitida da solução iterativa para determinar as tensões, pois a tensão complexa dessa barra é especificada. Como é conhecido o valor da potência ativa injetada ($P_i^{esp}$) nas barras do tipo PQ e PV, além da potência reativa injetada ($Q_i^{esp}$) nas barras PQ pode-se definir $P_i^{esp}$ e $Q_i^{esp}$ como os valores de $K$. Os valores estimados do módulo e ângulo da tensão correspondem aos valores estimados para $x_1$ e $x_2$.
+As in the Gauss-Seidel method, the reference bus is omitted from the iterative solution to determine voltages, since the complex voltage of this bus is specified. Since the value of injected active power ($P_i^{spec}$) at PQ and PV buses is known, as well as the injected reactive power ($Q_i^{spec}$) at PQ buses, $P_i^{spec}$ and $Q_i^{spec}$ can be defined as values of $K$. The estimated voltage magnitude and angle values correspond to estimates for $x_1$ and $x_2$.
 
-O jacobiano consiste nas derivadas parciais de $P_i$ e $Q_i$ em relação a cada uma das variáveis das equações injeção de potência líquida na barra $i$. A matriz coluna formada por $\Delta x_{1}$ e $\Delta x_{2}$ corresponde às correções de ângulo ($\Delta \theta_i$) e módulo ($\Delta V_i$) das tensões de barra.
+The Jacobian consists of the partial derivatives of $P_i$ and $Q_i$ with respect to each of the variables of the net power injection equations at bus $i$. The column matrix formed by $\Delta x_1$ and $\Delta x_2$ corresponds to the corrections of angle ($\Delta \theta_i$) and magnitude ($\Delta V_i$) of the bus voltages.
 
-Com isso pode-se escrever a equação matricial de um sistema de $n$ barras, em que a barra número 1 corresponde à barra de referência e as barras de número 2 a n são barras do tipo PQ:
+Thus, the matrix equation of a system with $n$ buses can be written, where bus number 1 is the reference bus and buses numbered 2 to n are PQ buses:
 $$
 \begin{array}{r}
 \text{NPQ} + \text{NPV}
@@ -188,46 +189,45 @@ $$
 \begin{bmatrix}
 \Delta \theta_2\\
 \vdots\\
-\Delta \theta_2\\
+\Delta \theta_n\\
 \Delta V_2\\
 \vdots\\
 \Delta V_n\\
 \end{bmatrix}
 $$
-Em que:
-- $\text{NPQ}$ é o número de barras PQ
-- $\text{NPV}$ é o número de barras PV
+Where:
+- $\text{NPQ}$ is the number of PQ buses
+- $\text{NPV}$ is the number of PV buses
 
-O processo iterativo se inicia calculando as potências ativas ($P_i^{calc}$) para as barras PQ e PV e as potências reativas ($Q_i^{calc}$) para as barras PQ, ambas as equações utilizando as estimativas iniciais das tensões complexas. Calcula-se, então, as correções de potência ($\Delta P$ e $\Delta Q$):
+The iterative process starts by calculating active powers ($P_i^{calc}$) for PQ and PV buses and reactive powers ($Q_i^{calc}$) for PQ buses, both using the initial estimates of the complex voltages. Then, the power corrections ($\Delta P$ and $\Delta Q$) are calculated:
 $$
-\Delta P = P_i^{esp} - P_i^{calc}\\
-\Delta Q = Q_i^{esp} - Q_i^{calc}
-$$
-
-O passo seguinte é a formação da matriz jacobiana. Com isso é possível calcular as correções de módulo e ângulo das tensões de todas as barras (com exceção da barra de referência). Para tanto, no PSP-UFU utiliza-se o método de [Eliminação Gaussiana](https://en.wikipedia.org/wiki/Gaussian_elimination) e em sequência a substituição regressiva. Esse procedimento diminui o esforço computacional, uma vez que a inversão da matriz jacobiana em todas as iterações é evitada.
-
-Com as correções de módulo e ângulo das tensões das barras calculados, aplicam-se as seguintes equações:
-$$
-	\theta_i^{(v+1)}=\theta_i^{(v)}+\Delta \theta_i^{(v)}\\
-	V_i^{(v+1)}=V_i^{(v)}+\Delta V_i^{(v)}
+\Delta P = P_i^{spec} - P_i^{calc}\\
+\Delta Q = Q_i^{spec} - Q_i^{calc}
 $$
 
-O processo é então reiniciado e será repetido até que se obtenha a convergência, quando as correções se tornam tão pequenas que satisfaçam uma tolerância pré-estipulada.
+The next step is the formation of the Jacobian matrix. With this, it is possible to calculate the corrections of magnitude and angle of the voltages of all buses (except the reference bus). For this, PSP-UFU uses the [Gaussian Elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) method followed by back substitution. This procedure reduces computational effort since the Jacobian matrix inversion at each iteration is avoided.
 
-O fluxograma abaixo mostra o método de Newton-Raphson para solução do fluxo de carga implementado.
+With the calculated corrections of voltage magnitude and angle, the following equations are applied:
+$$
+\theta_i^{(v+1)} = \theta_i^{(v)} + \Delta \theta_i^{(v)}\\
+V_i^{(v+1)} = V_i^{(v)} + \Delta V_i^{(v)}
+$$
 
-<div><center><img src={useBaseUrl("images/newtonRaphson.svg")} alt="Método numérico de Newton-Raphson para fluxo de carga" title="Método numérico de Newton-Raphson para fluxo de carga" /></center></div>
+The process is then restarted and repeated until convergence is achieved, i.e., when corrections become so small that they satisfy a predefined tolerance.
 
-## Controles e limites em um problema de fluxo de carga
-Nas barras de [geração](syncGenerator) e também naquelas em que se encontra um [compensador síncrono](syncMotor) conectado, o controle da magnitude da tensão no barramento é realizado por meio do ajuste da corrente de campo das máquinas síncronas, as quais podem operar sobrexcitadas (injetando reativos) ou subexcitadas (absorvendo reativos). Os valores limites de potência reativa que podem ser injetadas ou absorvidas dependem da máquina síncrona em estudo. Esses limites são incluídos no fluxo de carga com a criação de dois novos parâmetros, a potência reativa máxima ($Q_i^{máx}$) e potência reativa mínima ($Q_i^{min}$), sendo esses valores a soma dos limites individuais das máquinas em uma mesma barra genérica $i$.
+The flowchart below shows the Newton-Raphson method for load flow solution implemented.
 
-A manutenção da potência reativa dentro dos limites é realizada pela troca do tipo de barra, ou seja, as barras violadoras que controlam a tensão (PV), passam a ser barras de carga (PQ), cuja potência é fixada como o limite que seria ultrapassado ($Q_i^{máx}$ ou $Q_i^{min}$) e a tensão deixa de ser controlada partir de então.
+<div><center><img src={useBaseUrl("images/newtonRaphson.svg")} alt="Newton-Raphson numerical method for load flow" title="Newton-Raphson numerical method for load flow" /></center></div>
 
-A verificação de violação e troca de tipo de barra pode ser realizada a cada iteração ou ao final da convergência do cálculo. No PSP-UFU foi implementada a última estratégia, uma vez que separa os conceitos de cálculo e de verificação de limites, tornando mais fácil o desenvolvimento de novos métodos numéricos e limites. Nessa abordagem, ao ajustar o sistema para a nova situação não violadora o cálculo iterativo deve ser retomado até que obtenha novamente a convergência.
+## Controls and limits in a load flow problem
+At [generation](syncGenerator) buses and those with a connected [synchronous compensator](syncMotor), voltage magnitude control at the bus is performed by adjusting the field current of synchronous machines, which can operate overexcited (injecting reactive power) or underexcited (absorbing reactive power). The reactive power limits that can be injected or absorbed depend on the synchronous machine under study. These limits are included in the load flow with the creation of two new parameters: maximum reactive power ($Q_i^{max}$) and minimum reactive power ($Q_i^{min}$), and the voltage ceases to be controlled from then on.
 
-## Referências
-1. MONTICELLI, A. J. Fluxo de Carga em Redes de Energia Elétrica. São Paulo: Edgar Blücher, 1983.
-1. STEVENSON JR.; WILLIAN, D. Elementos de Análise de Sistemas de Potência. 2ª ed. São Paulo: McGraw-Hill, 1986.
-1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6
-1. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286
-1. TINNEY, W. F.; HART, C. E. Power Flow Solution by Newton’s Method. IEEE Transaction on Power Apparatus and Systems, v. PAS-86, n. 11, nov. 1967. doi: https://doi.org/10.1109/TPAS.1967.291823
+The violation check and bus type switching can be performed at each iteration or at the end of the convergence of the calculation. In PSP-UFU, the latter strategy has been implemented, since it separates the concepts of calculation and limit verification, making it easier to develop new numerical methods and limits. In this approach, when adjusting the system to the new non-violating situation, the iterative calculation must be resumed until convergence is achieved again.
+
+## References
+1. MONTICELLI, A. J. Power Flow in Electric Power Networks. São Paulo: Edgar Blücher, 1983.  
+1. STEVENSON JR.; WILLIAN, D. Elements of Power System Analysis. 2nd ed. São Paulo: McGraw-Hill, 1986.  
+1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6  
+1. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286  
+1. TINNEY, W. F.; HART, C. E. Power Flow Solution by Newton’s Method. IEEE Transaction on Power Apparatus and Systems, v. PAS-86, n. 11, Nov. 1967. doi: https://doi.org/10.1109/TPAS.1967.291823  
+

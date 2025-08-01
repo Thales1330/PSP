@@ -1,41 +1,43 @@
 ---
 id: harmSource
-title: Fonte de Corrente Harmônica
-sidebar_label: Fonte de Corrente Harmônica
+title: Harmonic Current Source
+sidebar_label: Harmonic Current Source
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-> (**Fonte de perturbação harmônica**) Parte do sistema elétrico de potência ou das instalações a ele conectadas, que causa distorção harmônica da forma de onda da corrente e / ou tensão. [*tradução livre* - IEC 60050](
-http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=614-01-16).
+> (**Harmonic disturbance source**) Part of the electric power system or the installations connected to it that causes harmonic distortion of the current and/or voltage waveform. [IEC 60050](http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=614-01-16).
 
-## Fonte de corrente harmônica no PSP-UFU
-As fontes de corrente harmônica são responsáveis pela injeção de correntes harmônicas e são utilizadas pela ferramenta de cálculo de [distorções harmônicas](harmonics). Uma lista de correntes harmônicas pode ser inserida em um mesmo elemento, conforme é exibido na o formulário de edição de dados.
+## Harmonic current source in PSP-UFU
+Harmonic current sources are responsible for injecting harmonic currents and are used by the [harmonic distortion](harmonics) calculation tool.  
+A list of harmonic currents can be inserted into the same element, as shown in the data editing form.
 
-:::caution Atenção!
-A presença da fonte de corrente harmônica **não é considerada** nos estudos de [fluxo de carga](powerFlow), [curto-circuito](fault) e [estabilidade](stability).
+:::caution Attention!
+The presence of a harmonic current source is **not considered** in [load flow](powerFlow), [short-circuit](fault), and [stability](stability) studies.
 :::
 
-## Formulário de edição das fontes de corrente harmônica
-A imagem abaixo apresenta o formulário de inserção/alteração de dados da fonte de corrente harmônica:
+## Harmonic current source editing form
+The figure below shows the insertion/editing form for the harmonic current source data:
 
-<div><center><img src={useBaseUrl("images/harmSourceForm.png")} alt="Formulário dos indutores no PSP-UFU" title="Formulário dos indutores no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/harmSourceForm.png")} alt="Inductor form in PSP-UFU" title="Inductor form in PSP-UFU" /></center></div>
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Electrical element identification. Any number of characters can be entered using the [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-#### Ordem
-Especifica a ordem harmônica a ser inserida na lista de correntes harmônicas do elemento. Caso a ordem harmônica já exista na lista, ela será substituída pelos novos parâmetros.
+#### Order
+Specifies the harmonic order to be inserted into the element’s harmonic current list.  
+If the harmonic order already exists in the list, it will be replaced with the new parameters.
 
-#### Corrente
-Módulo da corrente harmônica.
+#### Current
+Magnitude of the harmonic current.
 
-#### Unidade
-Unidade do módulo de corrente harmônica, em A ou $p.u.$
+#### Unit
+Unit of the harmonic current magnitude, in A or $p.u.$
 
-#### Ângulo
-Ângulo da corrente harmônica, em graus.
+#### Angle
+Angle of the harmonic current, in degrees.
 
-#### Adicionar / Remover
-Insere ou modifica a nova ordem harmônica ao clicar em “Adicionar”. Retira a ordem harmônica selecionada da lista ao clicar em “Remover”.
+#### Add / Remove
+Adds or modifies the new harmonic order when clicking “Add”.  
+Removes the selected harmonic order from the list when clicking “Remove”.

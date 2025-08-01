@@ -1,148 +1,156 @@
 ---
 id: mathExpression
-title: Expressão Matemática
-sidebar_label: Expressão Matemática
+title: Mathematical Expression
+sidebar_label: Mathematical Expression
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-O bloco de expressão matemática utiliza a biblioteca externa [fparser](http://warp.povusers.org/FunctionParser/) e permite ao usuário inserir expressões matemáticas genéricas de qualquer complexidade combinadas a estruturas condicionais em um diagrama de controle, aumentando significativamente a capacidade de generalização do programa.
+The mathematical expression block uses the external library [fparser](http://warp.povusers.org/FunctionParser/) and allows the user to insert generic mathematical expressions of any complexity combined with conditional structures in a control diagram, greatly increasing the program's generalization capability.
 
-## Sintaxe das expressões matemáticas
-As sintaxes das operações (para expressões `A` e `B`) são apresentadas na tabela abaixo:
+## Syntax of mathematical expressions
+The syntax of operations (for expressions `A` and `B`) are presented in the table below:
 
-|Operador|Expressão|
+|Operator|Expression|
 |--------|---------|
-|`( )`	|Expressão em parênteses primeiro
-|`A unit`	|Um multiplicador de unidade (se um estiver sido adicionado)
-|`A^B`	|Exponenciação (`A` elevado à potência `B`)
-|`-A`	|Operação unária de oposto
-|`!A`	|Operação lógica unária de negação (resulta em $1$ se `int(A)` é $0$, senão $0$)
-|`A*B` `A/B` `A%B`	|Multiplicação, divisão e módulo
-|`A+B` `A-B`	|Adição e subtração
-|`A=B` `A<B` `A<=B` `A!=B` `A>B` `A>=B`	|Comparação entre `A` e `B` (resulta em $1$ ou $0$)
-|`A&B`	|Resulta em $1$ se `int(A)` e `int(B)` forem diferentes de $0$, senão $0$
-|`A`\|`B`	|Resulta em $1$ se `int(A)` ou `int(B)` forem diferentes de $0$, senão $0$
+|`( )`	|Expression in parentheses first
+|`A unit`	|A unit multiplier (if one has been added)
+|`A^B`	|Exponentiation (`A` raised to the power `B`)
+|`-A`	|Unary negation
+|`!A`	|Unary logical negation (returns $1$ if `int(A)` is $0$, otherwise $0$)
+|`A*B` `A/B` `A%B`	|Multiplication, division, and modulo
+|`A+B` `A-B`	|Addition and subtraction
+|`A=B` `A<B` `A<=B` `A!=B` `A>B` `A>=B`	|Comparison between `A` and `B` (returns $1$ or $0$)
+|`A&B`	|Returns $1$ if `int(A)` and `int(B)` are both nonzero, else $0$
+|`A\|B`	|Returns $1$ if `int(A)` or `int(B)` is nonzero, else $0$
 
-As **funções matemáticas** suportadas pela biblioteca, as quais podem ser utilizadas na construção de diagrama de blocos, são descritas na tabela abaixo:
+The **mathematical functions** supported by the library, which can be used in building block diagrams, are described in the table below:
 
-|Expressão|Descrição
+|Expression|Description
 |---------|---------|
-|`abs(A)`|Valor absoluto de `A`. Para números reais, se `A` é negativo, retorna `–A`, senão retorna `A`. Para números complexos a expressão é equivalente a `hypot(real(x),imag(x))`.
-|`acos(A)`|Arco cosseno de `A`. Retorna o ângulo em radianos.
-|`acosh(A)`|O mesmo que `acos()` mas para cosseno hiperbólico
-|`arg(A)`|Ângulo de fase de um número complexo `A`.
-|`asin(A)`|Arco seno de `A`. Retorna o ângulo em radianos.
-|`asinh(A)`|Mesmo que `asin()`, mas para seno hiperbólico
-|`atan(A)`|Arco tangente de `A`. Retorna o ângulo em radianos.
-|`atan2(A,B)`|Arco tangente de `A/B`, a qual os sinais dos dois argumentos para determinar o quadrante do resultado. Retorna a solução de do seguinte sistema: `hypot(A,B)*sin(x)=A, hypot(A,B)*cos(x)=B`. O valor retornado varia de $-\pi$ a $\pi$.
-|`atanh(A)`|Mesmo que `atan()`, mas para tangente hiperbólica.
-|`cbrt(A)`|Raiz cúbica de `A`.
-|`conj(A)`|Conjugado complexo de `A`.
-|`ceil(A)`|Teto de `A`. Arredonda para o próximo maior inteiro.
-|`cos(A)`|Cosseno de `A`. Retorna o ângulo em radianos.
-|`cosh(A)`|Mesmo que `cos()`, mas para cosseno hiperbólico
-|`cot(A)`|Cotangente de `A`. Retorna o ângulo em radianos.
-|`csc(A)`|Cossecante de `A`. Retorna o ângulo em radianos.
-|`exp(A)`|Exponencial de `A`. Retorna o valor de e elevado a potência A.
-|`exp2(A)`|Exponencial de `A` na base $2$.
-|`floor(A)`|Piso de `A`. Arredonda para o próximo menor inteiro.
-|`hypot(A,B)`|Função de distância Euclidiana.
-|`if(A,B,C)`|Se `int(A)` é diferente de $0$, retorna o valor de `B`, senão retorna `C`.
-|`imag(A)`|Retorna a parte imaginária do número complexo `A`.
-|`int(A)`|Arredonda `A` para o inteiro mais próximo.
-|`log(A)`|Logaritmo natural (base $e$) de `A`.
-|`log2(A)`|Logaritmo na base $2$ de `A`.
-|`log10(A)`|Logaritmo na base $10$ de A.
-|`max(A,B)`|Se `A>B`, o resultado é `A`, senão é `B`.
-|`min(A,B)`|Se `A<B`, o resultado é `A`, senão é `B`.
-|`polar(A,B)`|Retorna o número complexo de magnitude `A` e ângulo de fase `B` (em radianos).
-|`pow(A,B)`|Exponenciação (`A` elevado à potência `B`)
-|`real(A,B)`|Retorna a parte real do número complexo `A`.
-|`sec(A)`|Secante de `A`.
-|`sin(A)`|Seno de `A`. Retorna o ângulo em radianos.
-|`sinh(A)`|Mesmo que `sin()`, mas para seno hiperbólico.
-|`sqrt(A)`|Raiz quadrada de `A`.
-|`tan(A)`|Tangente de `A`. Retorna o ângulo em radianos.
-|`tanh(A)`|Mesmo que `tan()`, mas para tangente hiperbólica.
-|`trunc(A)`|Valor truncado de `A`. Retorna o número inteiro de `A` sem a parcela fracionada.
+|`abs(A)`|Absolute value of `A`. For real numbers, if `A` is negative, returns `–A`, otherwise returns `A`. For complex numbers the expression is equivalent to `hypot(real(x),imag(x))`.
+|`acos(A)`|Arccosine of `A`. Returns the angle in radians.
+|`acosh(A)`|Same as `acos()` but for hyperbolic cosine
+|`arg(A)`|Phase angle of a complex number `A`.
+|`asin(A)`|Arcsine of `A`. Returns the angle in radians.
+|`asinh(A)`|Same as `asin()`, but for hyperbolic sine
+|`atan(A)`|Arctangent of `A`. Returns the angle in radians.
+|`atan2(A,B)`|Arctangent of `A/B`, where the signs of both arguments determine the quadrant of the result. Returns the solution of the system: `hypot(A,B)*sin(x)=A, hypot(A,B)*cos(x)=B`. The returned value ranges from $-\pi$ to $\pi$.
+|`atanh(A)`|Same as `atan()`, but for hyperbolic tangent.
+|`cbrt(A)`|Cube root of `A`.
+|`conj(A)`|Complex conjugate of `A`.
+|`ceil(A)`|Ceiling of `A`. Rounds up to the next highest integer.
+|`cos(A)`|Cosine of `A`. Returns the angle in radians.
+|`cosh(A)`|Same as `cos()`, but for hyperbolic cosine
+|`cot(A)`|Cotangent of `A`. Returns the angle in radians.
+|`csc(A)`|Cosecant of `A`. Returns the angle in radians.
+|`exp(A)`|Exponential of `A`. Returns e raised to the power of A.
+|`exp2(A)`|Exponential of `A` base 2.
+|`floor(A)`|Floor of `A`. Rounds down to the next lowest integer.
+|`hypot(A,B)`|Euclidean distance function.
+|`if(A,B,C)`|If `int(A)` is nonzero, returns `B`, else returns `C`.
+|`imag(A)`|Returns the imaginary part of complex number `A`.
+|`int(A)`|Rounds `A` to the nearest integer.
+|`log(A)`|Natural logarithm (base $e$) of `A`.
+|`log2(A)`|Base 2 logarithm of `A`.
+|`log10(A)`|Base 10 logarithm of `A`.
+|`max(A,B)`|If `A>B`, result is `A`, else `B`.
+|`min(A,B)`|If `A<B`, result is `A`, else `B`.
+|`polar(A,B)`|Returns the complex number with magnitude `A` and phase angle `B` (in radians).
+|`pow(A,B)`|Exponentiation (`A` raised to the power `B`)
+|`real(A,B)`|Returns the real part of complex number `A`.
+|`sec(A)`|Secant of `A`.
+|`sin(A)`|Sine of `A`. Returns the angle in radians.
+|`sinh(A)`|Same as `sin()`, but for hyperbolic sine.
+|`sqrt(A)`|Square root of `A`.
+|`tan(A)`|Tangent of `A`. Returns the angle in radians.
+|`tanh(A)`|Same as `tan()`, but for hyperbolic tangent.
+|`trunc(A)`|Truncated value of `A`. Returns the integer part of `A` without the fractional part.
 
-É possível atribuir novas variáveis utilizando a seguinte sintaxe: 
+It is possible to assign new variables using the following syntax:
 
 ``` cpp
-<nome da variável> := <expressão>; <função>
+<variable name> := <expression>; <function>
 ```
 
-Por exemplo:
+For example:
+
 ``` cpp
-comprimento := sqrt(x*x+y*y); 2*comprimento*sin(comprimento)
+length := sqrt(x*x+y*y); 2*length*sin(length)
 ```
 
-:::tip Dica
-O caractere de espaço e de nova linha são ignorados na interpretação da expressão, portanto para maior organização, o código anterior pode ser escrito da seguinte forma:
+:::tip Tip
+Spaces and newlines are ignored in expression parsing, so for better organization the previous code can be written as:
+
 ``` cpp
-comprimento := sqrt(x*x+y*y);
-2*comprimento*sin(comprimento)
+length := sqrt(x*x+y*y);
+2*length*sin(length)
 ```
+
 :::
 
-:::warning Cuidado!
-Note que a expressão que determina o valor de saída do bloco **não possui** o caractere `;` em seu final.
+:::warning Warning
+Note that the expression determining the block output value **does not have** a trailing `;`.
 :::
 
-## Formulário de edição de dados do bloco de Expressão Matemática
-O formulário de inserção e edição das entradas do bloco e da expressão matemática genérica, assim como ferramentas de auxílio de sua construção é apresentado na figura abaixo.
+## Mathematical Expression Block Data Editing Form
+The insertion and editing form for block inputs and the generic mathematical expression, as well as construction aid tools, is shown in the figure below.
 
-<div><center><img src={useBaseUrl("images/mathExpressionForm.png")} alt="Formulário de edição de dados do bloco de expressão matemática no PSP-UFU" title="Formulário de edição de dados do bloco de expressão matemática no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/mathExpressionForm.png")} alt="Mathematical expression block data editing form in PSP-UFU" title="Mathematical expression block data editing form in PSP-UFU" /></center></div>
 
-No campo de “Variáveis de entrada” é inserida uma lista com os nomes das entradas separados por espaços. Um número qualquer de entrada pode ser definido nessa lista esses nomes são apresentados no ícone gráfico presente no editor de controle, além de serem destacados na expressão inserida pelo usuário. O número de entradas e saídas se comporta de forma semelhante aos [blocos somadores](sum).
+In the “Input Variables” field a list of input names separated by spaces is entered. Any number of inputs can be defined in this list; these names are displayed on the graphical icon present in the control editor, as well as highlighted in the user-entered expression. The number of inputs and outputs behaves similarly to the [sum blocks](sum).
 
-Abaixo do campo das variáveis de entrada está presente o local para inserção da expressão matemática. A sintaxe da expressão inserida pelo usuário possui realce (por meio de diferentes formas e cores da fonte) para números, operadores, variáveis de entrada, funções e constantes, facilitando a criação, manipulação e identificação de erros de digitação e lógica.
+Below the input variables field there is a place for entering the mathematical expression. The syntax of the expression entered by the user has syntax highlighting (with different shapes and colors of the font) for numbers, operators, input variables, functions, and constants, facilitating creation, manipulation, and identification of typing and logic errors.
 
-:::info Informação
-Como ferramenta de auxílio ao usuário foi desenvolvida uma verificação da expressão inserida.
+:::info Information
+As a user aid tool, expression verification was developed.
 :::
 
-Tal ferramenta irá encontrar erros e indicará ao usuário qual o tipo do erro, além da sua localização, destacando-o. A figura anterior exemplifica a identificação automática do erro pelo PSP-UFU, assim como sua posição na expressão inserida.
+This tool will find errors and indicate to the user the type of error and its location, highlighting it. The previous figure exemplifies automatic error identification by PSP-UFU, as well as its position in the entered expression.
 
-## Exemplo de Expressão Matemática
-A corrente de campo em $p.u.$ pode ser estimada de forma aproximada utilizando as potências ativa ($P$) e reativa ($Q$), assim como as reatâncias transitórias de eixo direto ($x_d$) e em quadratura ($x_q$) e o módulo da tensão terminal ($V$) da máquina:
+## Mathematical Expression Example
+The field current in $p.u.$ can be approximately estimated using the active power ($P$) and reactive power ($Q$), as well as the direct axis transient reactance ($x_d$) and quadrature axis transient reactance ($x_q$) and the terminal voltage magnitude ($V$) of the machine:
 $$
-i_f \approx \sqrt{ \left( V + Q' \right)^2 + P^2} + \left(\frac{x_d}{x_q} +1{,}0 \right) \times \frac{Q' \left( V + Q' \right) + {P'}^2}{\sqrt{\left( V + Q'\right)^2 + P^2}}
+i_f \approx \sqrt{ \left( V + Q' \right)^2 + P^2} + \left(\frac{x_d}{x_q} +1.0 \right) \times \frac{Q' \left( V + Q' \right) + {P'}^2}{\sqrt{\left( V + Q'\right)^2 + P^2}}
 $$
-Em que:
+Where:
 - $P' = x_q \times \frac{P}{V}$
 - $Q' = x_q \times \frac{Q}{V}$
 
-Primeiramente, deve-se inserir no campo "variáveis de entrada" as grandezas fornecidas pelo PSP-UFU. Nesse caso, como pode ser observado no bloco de [entrada / saída](io), todas as variáveis necessárias são fornecidas: $P$, $Q$ e $V$. Essas variáveis devem ser inseridas separadas por espaço: `p q v`.
+First, the quantities provided by PSP-UFU must be inserted in the "input variables" field. In this case, as can be seen in the [input/output block](io), all necessary variables are provided: $P$, $Q$ and $V$. These variables must be inserted separated by spaces: `p q v`.
 
-Utilizando três blocos de [entrada / saída](io) pode-se fornecer tais dados ao conectá-los ao bloco de expressão matemática.
+Using three [input/output blocks](io), these data can be fed by connecting them to the mathematical expression block.
 
-As reatâncias transitórias de eixo direto ($x_d$) e em quadratura ($x_q$) podem ser definidas diretamente na expressão matemática:
+The direct axis transient reactance ($x_d$) and quadrature axis transient reactance ($x_q$) can be defined directly in the mathematical expression:
+
 ``` cpp
 xd := 0.146;
 xq := 0.0969;
 ```
 
-Os valores de $P'$ e $Q'$ podem ser também calculados:
+The values of $P'$ and $Q'$ can also be calculated:
+
 ``` cpp
 yp := xq * p / v;
 yq := xq * q / v;
 ```
 
-Com todos os dados necessários pode-se calcular a corrente de campo:
+With all the necessary data, the field current can be calculated:
+
 ``` cpp
 i_f := sqrt((v + yq)^2 + p^2) + (xd / xq + 1.0) *
        ((yq * (v + yq) + yp^2) / sqrt((v + yq)^2 + p^2));
 ```
 
-Finalmente, pode-se definir a saída do bloco (não inserindo `;`):
+Finally, the block output can be defined (without inserting `;`):
+
 ``` cpp
 i_f
 ```
 
-Portanto, para as entradas definidas como `p q v`, a expressão matemática total para cálculo da corrente de campo será:
+Therefore, for inputs defined as `p q v`, the total mathematical expression for calculating the field current will be:
+
 ``` cpp
 xd := 0.146;
 xq := 0.0969;
@@ -153,5 +161,5 @@ i_f := sqrt((v + yq)^2 + p^2) + (xd / xq + 1.0) *
 i_f
 ```
 
-## Referências
-- NIEMINEN, J.; YLILUOMA, J. Function Parser for C++ v4.5.2. Disponível em: \<http://warp.povusers.org/FunctionParser/\>. 
+## References
+- NIEMINEN, J.; YLILUOMA, J. Function Parser for C++ v4.5.2. Available at: \<http://warp.povusers.org/FunctionParser/\>.

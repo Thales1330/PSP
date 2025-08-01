@@ -1,7 +1,7 @@
 ---
 id: inductor
-title: Indutor
-sidebar_label: Indutor
+title: Inductor
+sidebar_label: Inductor
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,47 +10,49 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
->Um reator destinado à conexão de derivação em uma rede para compensar a corrente capacitiva. [*tradução livre* - IEC 60050](
-http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=421-01-03).
+>A reactor intended for shunt connection in a network to compensate the capacitive current. [IEC 60050](http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=421-01-03).
 
-## Indutor no PSP-UFU
-O elemento indutor (ou reator) representa, geralmente, reator *shunt* no circuito do PSP-UFU.
+## Inductor in PSP-UFU
+The inductor (or reactor) element generally represents a *shunt* reactor in the PSP-UFU circuit.
 
-Os capacitores e reatores exigem somente sua potência reativa como parâmetro. Esses elementos passivos são somente inseridos na matriz admitância cuja impedância é calculada a partir de sua potência e tensão nominais.
+Capacitors and reactors require only their reactive power as a parameter.  
+These passive elements are inserted into the admittance matrix, with impedance calculated from their rated power and voltage.
 
-## Formulário de edição dos indutores
-A imagem abaixo apresenta o formulário de inserção/alteração de dados dos indutores:
+## Inductor editing form
+The figure below shows the insertion/editing form for inductor data:
 
-<div><center><img src={useBaseUrl("images/indForm.png")} alt="Formulário dos indutores no PSP-UFU" title="Formulário dos indutores no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/indForm.png")} alt="Inductor form in PSP-UFU" title="Inductor form in PSP-UFU" /></center></div>
 
-Além do único contexto geral, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do indutor durante o estudo de [estabilidade](stability).
+In addition to the single general context, the "Stability" button can be seen in the lower-left corner of the form.  
+This form, common to several other elements, allows the insertion and/or removal of the inductor during the [stability](stability) study.
 
-<div><center><img src={useBaseUrl("images/indSw.png")} alt="Formulário de chaveamento do indutor" title="Formulário de chaveamento do indutor" /></center></div>
+<div><center><img src={useBaseUrl("images/indSw.png")} alt="Inductor switching form" title="Inductor switching form" /></center></div>
 
 <Tabs
   groupId="transformer-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Botão Estabilidade', value: 'stability'},
+    {label: 'General', value: 'general'},
+    {label: 'Stability Button', value: 'stability'},
   ]
 }>
 <TabItem value="general">
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Electrical element identification. Any number of characters can be entered using the [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-Todos os componentes de potência do PSP-UFU possuem esse campo.
+All PSP-UFU power components have this field.
 
-#### Potência reativa
-Os capacitores e reatores exigem somente sua potência reativa como parâmetro, inserida em Mvar, kvar, var ou $p.u.$ (na base de potência do sistema). 
+#### Reactive power
+Capacitors and reactors require only their reactive power as a parameter, entered in Mvar, kvar, var, or $p.u.$ (based on the system base power).
 
 </TabItem>
 <TabItem value="stability">
 
-O botão "Estabilidade" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
+The "Stability" button opens a form, common to several other elements, allowing the insertion and/or removal of the transformer during the [stability](stability) study.
 
-Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+In this form, a generic list of insertions and removals over time can be created, customized by a switching properties context where the switching type (insertion or removal) and the event time (in seconds) are edited.  
+These properties are added or removed from the list using the "Add" and "Remove" buttons, respectively.
 
 </TabItem>
 </Tabs>

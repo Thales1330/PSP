@@ -1,29 +1,29 @@
 ---
 id: transferFunction
-title: Função Transferência
-sidebar_label: Função Transferência
+title: Transfer Function
+sidebar_label: Transfer Function
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-A Função Transferência é um importante bloco elementar e essencial em um sistema de controle, visto que esse componente possibilita a representação de sistemas dinâmicos por meio de equações algébricas no domínio da frequência.
+The Transfer Function is an important elementary and essential block in a control system, as this component enables the representation of dynamic systems through algebraic equations in the frequency domain.
 
-:::info Informação
-Nesses blocos é utilizado a letra “**s**” para representação no domínio da frequência, pois essa é a terminologia mais utilizada em sistemas de controle.
+:::info Information
+In these blocks, the letter "**s**" is used for representation in the frequency domain, as this is the most commonly used terminology in control systems.
 :::
 
-## Função Transferência no PSP-UFU
+## Transfer Function in PSP-UFU
 
-Após a inserção da função transferência, o programa a transforma na representação em espaço de estado, visto que sua solução é sistemática tornando-a, assim, mais eficiente computacionalmente.
+After the transfer function is inserted, the program converts it into the state-space representation, since its solution is systematic, making it computationally more efficient.
 
-Dada uma função transferência genérica abaixo:
+Given a generic transfer function below:
 
 $$
 \frac{Y(\bold{s})}{U(\bold{s})} = \frac{b_0 \bold{s}^k + b_1 \bold{s}^{k-1} + \cdots + b_{k-1} \bold{s} + b_k}{\bold{s}^k + a_1 \bold{s}^{k-1} + \cdots + a_{k-1} \bold{s} + a_k}
 $$
 
-A transformação em espaço de estado na *forma canônica controlável* ficará da seguinte forma:
+The transformation into state-space in the *controllable canonical form* is as follows:
 
 $$
 \begin{bmatrix}
@@ -74,22 +74,22 @@ x_k
 b_0 u_n
 $$
 
-A equação diferencial matricial é resolvida pelo método **Trapezoidal Implícito**. Um processo iterativo é realizado até que o erro entre os cálculos se torne menor que uma tolerância pré-estipulada e caso as iterações se tornem excessivas, ultrapassando um número máximo definido pelo usuário, o processo é interrompido com erro. Com os valores do vetor de estado ($x$) calculados obtém-se o valor da saída do bloco ($y_n$).
+The matrix differential equation is solved by the **Implicit Trapezoidal** method. An iterative process is performed until the error between calculations becomes less than a pre-established tolerance, and if the iterations become excessive, surpassing a maximum number defined by the user, the process is interrupted with an error. With the calculated state vector values ($x$), the output value of the block ($y_n$) is obtained.
 
-## Formulário de edição de dados da Função Transferência
+## Transfer Function Data Editing Form
 
-A figura abaixo apresenta o formulário de edição de dados da função transferência.
+The figure below shows the data editing form of the transfer function.
 
-<div><center><img src={useBaseUrl("images/transferFunctionForm.png")} alt="Formulário de edição de dados da função transferência no PSP-UFU" title="Formulário de edição de dados da função transferência no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/transferFunctionForm.png")} alt="Transfer function data editing form in PSP-UFU" title="Transfer function data editing form in PSP-UFU" /></center></div>
 
-A função transferência é definida pelos coeficientes do numerador e denominador, **separados por espaço**.
+The transfer function is defined by the numerator and denominator coefficients, **separated by spaces**.
 
-:::caution Atenção!
-Os elementos não presentes são representados como coeficientes de valor zero.
+:::caution Caution!
+Non-present elements are represented as coefficients with zero value.
 
-Por exemplo, um parâmetro inserido igual a “$\begin{matrix} 1 & 0{,}5 & 0 & 2 \end{matrix}$” irá gerar: “$s^3+0{,}5s^2+2$”.
+For example, an entered parameter equal to “$\begin{matrix} 1 & 0.5 & 0 & 2 \end{matrix}$” will generate: “$s^3+0.5s^2+2$”.
 :::
 
-## Referências
+## References
 
 1. OGATA, K. Modern Control Engineering. Prentice Hall Inc., New Jersey, 2004.

@@ -1,20 +1,20 @@
 ---
 id: tabularReport
-title: Relatórios Tabulares
-sidebar_label: Relatórios Tabulares
+title: Tabular Reports
+sidebar_label: Tabular Reports
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-Para visualização de todos os resultados dos cálculos de [fluxo de carga](powerFlow) e [curto-circuito](fault), desenvolveu-se um visualizador de relatórios tabulares:
+To view all calculation results from [power flow](powerFlow) and [short-circuit](fault) studies, a tabular report viewer was developed:
 
-<div><center><img src={useBaseUrl("images/tabReport.png")} alt="Visualizador de dados tabulados no PSP-UFU" title="Visualizador de dados tabulados no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/tabReport.png")} alt="Tabular data viewer in PSP-UFU" title="Tabular data viewer in PSP-UFU" /></center></div>
 
-Tal visualizador pode ser acessado no [submenu Ribbon](mainScreen#ribbon-menu) **Ferramentas** e então no botão **Relatório de dados**, sendo exibido o formulário organizado em abas.
+This viewer can be accessed from the **Tools** [Ribbon submenu](mainScreen#ribbon-menu) and then by clicking the **Data Report** button, displaying the form organized into tabs.
 
-As grandezas de alguns dados desse relatório podem ser modificadas, sendo selecionadas no cabeçalho da tabela, como mostra a figura acima.
+The units of some data in this report can be modified by selecting them in the table header, as shown in the figure above.
 
-:::tip Dica
-Os valores podem ser exportados para editores de texto e tabelas externos, selecionando e copiando (Ctrl+C) para a área de transferência.
+:::tip Tip
+Values can be exported to external text and spreadsheet editors by selecting and copying (Ctrl+C) them to the clipboard.
 :::

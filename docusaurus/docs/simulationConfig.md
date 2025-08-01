@@ -1,7 +1,7 @@
 ---
 id: simulationConfig
-title: Configurações da Simulação
-sidebar_label: Configurações da Simulação
+title: Simulation Settings
+sidebar_label: Simulation Settings
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,168 +10,168 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-As parametrizações e configurações das simulações são acessadas no [menu Simulação](mainScreen#ribbon-menu) clicando no ícone do botão **Configurações de simulação**.
+Simulation parameterizations and settings are accessed in the [Simulation menu](mainScreen#ribbon-menu) by clicking the **Simulation Settings** button icon.
 
-<div><center><img src={useBaseUrl("images/menuSimulationSettings.svg")} alt="Menu Simulação" title="Menu Simulação" /></center></div>
+<div><center><img src={useBaseUrl("images/menuSimulationSettings.svg")} alt="Simulation Menu" title="Simulation Menu" /></center></div>
 
-## Formulário de edição das configurações de simulação
+## Simulation Settings Edit Form
 
-A imagem abaixo apresenta o formulário de edição das configurações de simulação:
+The image below shows the simulation settings edit form:
 
-<div><center><img src={useBaseUrl("images/simulationConfigForm.png")} alt="Configurações de simulação" title="Configurações de simulação" /></center></div>
+<div><center><img src={useBaseUrl("images/simulationConfigForm.png")} alt="Simulation Settings" title="Simulation Settings" /></center></div>
 
-Esse formulário é subdividido em quatro contextos distintos:
-- **Geral**: no qual são inseridas informações gerais e comuns a várias simulações;
-- **Fluxo de carga**: local onde é selecionado o [método de solução numérica](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu), assim como seus parâmetros;
-- **Estabilidade**: contendo opções de simulação no tempo e parâmetros do [método de integração](stability#integração-numérica);
-- **Carga ZIP**: contém as opções gerais das [cargas do tipo ZIP](load#carga-no-estudo-de-estabilidade) no estudo de [estabilidade](stability).
+This form is subdivided into four distinct contexts:
+- **General**: where general and common information to various simulations is entered;
+- **Power Flow**: where the [numerical solution method](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu) is selected, as well as its parameters;
+- **Stability**: containing time simulation options and parameters of the [integration method](stability#integração-numérica);
+- **ZIP Load**: contains general options of [ZIP loads](load#carga-no-estudo-de-estabilidade) in the [stability](stability) study.
 
 ---
 <Tabs
   groupId="simulationConfigs-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Fluxo de carga', value: 'powerFlow'},
-    {label: 'Estabilidade', value: 'stability'},
-    {label: 'Carga ZIP', value: 'zipLoad'},
+    {label: 'General', value: 'general'},
+    {label: 'Power Flow', value: 'powerFlow'},
+    {label: 'Stability', value: 'stability'},
+    {label: 'ZIP Load', value: 'zipLoad'},
   ]
 }>
 <TabItem value="general">
 
-#### Potência base
-Potência base do sistema utilizada para conversão dos dados reais em $p.u.$ e vice-versa. Pode ser inserido em VA, kVA ou MVA.
+#### Base Power
+Base power of the system used for conversion of real data into $p.u.$ and vice versa. Can be entered in VA, kVA, or MVA.
 
-:::tip Dica
-A potência base de cada elemento pode ser distinta da potência base do sistema. Para isso, basta marcar a opção "Utilizar potência nominal \[*do elemento*\] como base", presente em seus respectivos [formulários de edição da dados](powerEditor).
+:::tip Tip
+The base power of each element can be different from the system base power. To do this, just check the option "Use nominal power \[*of the element*\] as base," present in their respective [data edit forms](powerEditor).
 :::
 
-#### Frequência do sistema
-Define a frequência nominal do sistema.
+#### System Frequency
+Defines the nominal frequency of the system.
 
-:::warning Cuidado!
-Ao alterar a frequência nominal atente-se ao campo "[Frequência de circuito aberto](syncGenerator#frequência-de-circuito-aberto)" das máquinas síncronas.
+:::warning Warning!
+When changing the nominal frequency, pay attention to the "[Open Circuit Frequency](syncGenerator#frequência-de-circuito-aberto)" field of synchronous machines.
 :::
 
-#### Cálculo contínuo
-Habilita ou desabilita o cálculo contínuo para os cálculos de [curto-circuito](fault), [nível de curto-circuito](fault) e [distorções harmônicas](harmonics). O cálculo contínuo para o [fluxo de carga](powerFlow) é sempre habilitado.
+#### Continuous Calculation
+Enables or disables continuous calculation for [short circuit](fault), [short circuit level](fault), and [harmonic distortions](harmonics) calculations. Continuous calculation for [power flow](powerFlow) is always enabled.
 
-:::tip Dica
-Para habilitar o cálculo contínuo aperte o botão **Habilitar solução** presente no [menu Simulação](mainScreen#ribbon-menu).
+:::tip Tip
+To enable continuous calculation, press the **Enable Solution** button present in the [Simulation menu](mainScreen#ribbon-menu).
 
-Com essa opção, os cálculos estáticos selecionados são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
+With this option, the selected static calculations are automatically performed when modifying any network parameters, such as electrical data and breaker operation (removal or insertion).
 :::
 
 </TabItem>
 <TabItem value="powerFlow">
 
-#### Método de solução
-Define o método de solução numérica para o estudo de [fluxo de carga](powerFlow). Na versão atual, está presente no PSP-UFU os seguintes métodos:
+#### Solution Method
+Defines the numerical solution method for the [power flow](powerFlow) study. Currently, the PSP-UFU includes the following methods:
 - [Gauss-Seidel](powerFlow#gauss-seidel)
 - [Newton-Raphson](powerFlow#newton-raphson)
-- [Gauss-Newton híbrido](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu)
+- [Hybrid Gauss-Newton](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu)
 
-#### Fator de aceleração
-Fator utilizado para acelerar a convergência nos métodos de Gauss. A utilização do fator de aceleração é realizada por meio da equação:
+#### Acceleration Factor
+Factor used to speed up convergence in Gauss methods. The use of the acceleration factor is done through the equation:
 $$
 \dot{V}_{i_{AC}}^{(v + 1)} = \alpha \left( \dot{V}_{i}^{(v + 1)}- \dot{V}_{i_{AC}}^{(v)} \right) + \dot{V}_{i_{AC}}^{(v)}
 $$
-Em que:
-- $\dot{V}_{i_{AC}}^{(v + 1)}$ é a tensão complexa da iteração atual com fator de aceleração aplicado
-- $\dot{V}_{i}^{(v + 1)}$ é a tensão complexa da iteração atual
-- $\dot{V}_{i_{AC}}^{(v)}$ é a tensão complexa da iteração anterior com fator de aceleração aplicado
-- $\alpha$ é o fator de aceleração
+Where:
+- $\dot{V}_{i_{AC}}^{(v + 1)}$ is the complex voltage of the current iteration with acceleration factor applied
+- $\dot{V}_{i}^{(v + 1)}$ is the complex voltage of the current iteration
+- $\dot{V}_{i_{AC}}^{(v)}$ is the complex voltage of the previous iteration with acceleration factor applied
+- $\alpha$ is the acceleration factor
 
-Essa opção é habilitada somente para os métodos de [Gauss-Seidel](powerFlow#gauss-seidel) e [Gauss-Newton híbrido](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu).
+This option is enabled only for the [Gauss-Seidel](powerFlow#gauss-seidel) and [Hybrid Gauss-Newton](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu) methods.
 
-#### Tolerância
-É o valor de erro entre as iterações (em $p.u.$) no qual é obtida a convergência do método numérico.
+#### Tolerance
+It is the error value between iterations (in $p.u.$) at which the numerical method convergence is reached.
 
-Para o método de [Gauss-Seidel](powerFlow#gauss-seidel) o erro é calculado pelo maior valor do módulo da diferença entre a tensão na iteração anterior e atual ($e = \left| V_{i}^{(v + 1)} - V_{i}^{(v)} \right|$); enquanto que no método de [Newton-Raphson](powerFlow#newton-raphson) esse erro é o módulo do maior valor de ajuste de potência ($|\Delta P|$ ou $|\Delta Q|$).
+For the [Gauss-Seidel](powerFlow#gauss-seidel) method, the error is calculated by the largest magnitude of the difference between voltages in the previous and current iteration ($e = \left| V_{i}^{(v + 1)} - V_{i}^{(v)} \right|$); while for the [Newton-Raphson](powerFlow#newton-raphson) method, this error is the magnitude of the largest power adjustment ($|\Delta P|$ or $|\Delta Q|$).
 
-#### Iterações máx
-É o número máximo de iterações que um método poderá alcançar. Caso esse valor seja alcançado, o cálculo de [fluxo de carga](powerFlow) é interrompido com erro.
+#### Max Iterations
+Maximum number of iterations a method can reach. If this value is reached, the [power flow](powerFlow) calculation is stopped with an error.
 
-#### Ângulo da barra de referência
-É o valor do ângulo da [barra de referência](powerFlow), em graus.
+#### Reference Bus Angle
+The value of the angle of the [reference bus](powerFlow), in degrees.
 
-#### Inércia do Newton
-É o valor que multiplica as correções de potência. Valores maiores que $1{,}0$ incrementam a correção e menores que $1{,}0$ diminuem a correção.
+#### Newton Inertia
+Value that multiplies the power corrections. Values greater than $1.0$ increase the correction, and values less than $1.0$ decrease the correction.
 
-:::info Informação
-Valores menores que $1{,}0$ *podem* auxiliar na convergência, porém aumentam o número de iterações e consequentemente o tempo de processamento do método.
+:::info Information
+Values less than $1.0$ *may* help convergence, but increase the number of iterations and consequently the processing time of the method.
 :::
 
-Essa opção é habilitada somente para o método de [Newton-Raphson](powerFlow#newton-raphson).
+This option is enabled only for the [Newton-Raphson](powerFlow#newton-raphson) method.
 
-#### Tolerância do Gauss
-Define a tolerância do Gauss-Seidel para o método híbrido. Essa opção é habilitada somente para o método de [Gauss-Newton híbrido](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu).
+#### Gauss Tolerance
+Defines the tolerance of the Gauss-Seidel for the hybrid method. This option is enabled only for the [Hybrid Gauss-Newton](powerFlow#métodos-de-solução-numérica-do-fluxo-de-carga-no-psp-ufu) method.
 
-Uma vez que o Newton-Raphson é consideravelmente sensível às condições iniciais, as primeiras iterações são calculadas utilizado o Gauss-Seidel até que o erro fique menor que a tolerância especificada no campo “Tolerância do Gauss”. A partir desse ponto o cálculo é realizado utilizando o método de Newton-Raphson até que se obtenha a convergência com um erro menor que a tolerância estipulada no campo “Tolerância”.
+Since Newton-Raphson is considerably sensitive to initial conditions, the first iterations are calculated using Gauss-Seidel until the error is less than the tolerance specified in the “Gauss Tolerance” field. From that point, the calculation is done using the Newton-Raphson method until convergence is achieved with an error smaller than the tolerance stipulated in the “Tolerance” field.
 
-:::info Informação
-Tal opção auxilia na convergência de sistemas impossíveis de resolver utilizando Newton-Raphson convencional.
+:::info Information
+This option helps convergence of systems that cannot be solved using conventional Newton-Raphson.
 :::
 
 </TabItem>
 <TabItem value="stability">
 
-#### Passo de integração
-Define o passo de integração para o método de integração [Trapezoidal Implícito](stability#integração-numérica).
+#### Integration Step
+Defines the integration step for the [Implicit Trapezoidal](stability#integração-numérica) integration method.
 
-:::caution Atenção!
-Valores muito elevados poderão gerar erros de simulação, enquanto valores muito pequenos aumentarão significativamente o tempo de processamento do cálculo de estabilidade.
+:::caution Caution!
+Very high values may generate simulation errors, while very small values will significantly increase the processing time of the stability calculation.
 :::
 
-#### Tempo de simulação
-Define o tempo total de simulação, em segundos.
+#### Simulation Time
+Defines the total simulation time, in seconds.
 
-#### Tolerância
-Tolerância do processo iterativo (em $p.u.$) do método de integração [Trapezoidal Implícito](stability#integração-numérica).
+#### Tolerance
+Tolerance of the iterative process (in $p.u.$) of the [Implicit Trapezoidal](stability#integração-numérica) integration method.
 
-#### Iterações máx
-Número máximo de iterações do processo iterativo do método de integração [Trapezoidal Implícito](stability#integração-numérica). Caso o número de iterações ultrapasse esse valor, o cálculo de estabilidade será encerrado com erro.
+#### Max Iterations
+Maximum number of iterations of the iterative process of the [Implicit Trapezoidal](stability#integração-numérica) integration method. If the number of iterations exceeds this value, the stability calculation will be stopped with an error.
 
-#### Razão de passo dos controles
-Define a quantidade passos de integração que o sistema de controle será submetido para $1$ passo de integração do sistema de potência.
+#### Control Step Ratio
+Defines the number of integration steps the control system will undergo for each integration step of the power system.
 
-Por exemplo, se o passo de integração for definido em $0{,}01~s$ e a razão de passo como $10$, o valor efetivo do passo de integração para os sistemas de controle será de $0{,}001~s$ (10 vezes menor).
+For example, if the integration step is set to $0.01~s$ and the step ratio is $10$, the effective integration step for the control systems will be $0.001~s$ (10 times smaller).
 
-:::info Informação
-A utilização desse campo se justifica em situações de grandes diferenças nas constantes de tempo das máquinas síncronas (geralmente maiores) e dos sistemas de controle (geralmente menores).
+:::info Information
+The use of this field is justified in situations of large differences in the time constants of synchronous machines (usually larger) and control systems (usually smaller).
 :::
 
-:::tip Dica
-Um valor de razão de passo de controles igual a $1$ não irá alterar o passo de integração do sistema de controle.
+:::tip Tip
+A control step ratio value of $1$ will not alter the control system's integration step.
 :::
 
-#### Tempo de impressão
-É o intervalo de tempo o qual o programa irá armazenar os dados para impressão em [gráficos no tempo](graphViewer).
+#### Printing Time
+Interval at which the program will store data for printing in [time graphs](graphViewer).
 
-:::warning Cuidado!
-Valores muito pequenos (menores que $0{,}001~s$) podem aumentar significativamente o tempo de processamento do cálculo de estabilidade.
+:::warning Warning!
+Very small values (less than $0.001~s$) may significantly increase the processing time of the stability calculation.
 
-O tempo de impressão **deve ser maior ou igual** ao passo de integração.
+The printing time **must be greater than or equal to** the integration step.
 :::
 
 </TabItem>
 <TabItem value="zipLoad">
 
-#### Utilizar composição geral para todas as cargas do sistema
-Habilita a composição da [carga ZIP](load#carga-no-estudo-de-estabilidade) para todas as cargas que **não** possuem parametrização individual.
+#### Use general composition for all system loads
+Enables the composition of the [ZIP load](load#carga-no-estudo-de-estabilidade) for all loads that **do not** have individual parameterization.
 
-#### Composição da carga (potências ativa e reativa)
-Define a composição, em porcentagem, das parcelas de Impedância, Corrente e Potência constantes da carga. Essa composição pode ser implementada individualmente para a potência ativa e reativa.
+#### Load Composition (active and reactive powers)
+Defines the composition, in percentage, of the Impedance, Current, and Constant Power components of the load. This composition can be implemented individually for active and reactive power.
 
-:::caution Atenção!
-A soma das parcelas da carga ZIP para uma potência deve ser 100%, caso contrário será exibida uma mensagem de erro.
+:::caution Caution!
+The sum of the ZIP load components for a power must be 100%, otherwise an error message will be displayed.
 :::
 
-#### Subtensão a qual as cargas serão modeladas como impedância constante
-Define o valor percentual da tensão ($V_{low}$) que, para valores inferiores a esse, a carga passa a ser considerada como impedância constante pura.
+#### Undervoltage at which loads are modeled as constant impedance
+Defines the percentage voltage value ($V_{low}$) below which the load is considered as pure constant impedance.
 
-:::info Informação
-Cargas de corrente e potência constantes possuem problemas em tensões muito baixas. À medida que a tensão diminui as correntes dessas cargas não reduz, resultando em perda de precisão e problemas na convergência de processos iterativos. Para contornar esse problema utiliza-se uma tensão pré-definida ($V_{low}$), a qual as cargas (ou parcelas) de corrente e potência constantes são modeladas como impedância constante.
+:::info Information
+Constant current and power loads have problems at very low voltages. As the voltage decreases, the currents of these loads do not decrease, resulting in loss of precision and problems in convergence of iterative processes. To circumvent this problem, a predefined voltage ($V_{low}$) is used, at which constant current and power loads (or components) are modeled as constant impedance.
 :::
 
 </TabItem>

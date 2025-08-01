@@ -1,7 +1,7 @@
 ---
 id: line
-title: Linha
-sidebar_label: Linha
+title: Line
+sidebar_label: Line
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,111 +10,109 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
->Um meio de transmissão fabricado usado para transmitir energia eletromagnética entre dois pontos com um mínimo de radiação. [*tradução livre* - IEC 60050](
-http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=704-02-02).
+>A manufactured transmission medium used to transmit electromagnetic energy between two points with minimal radiation. [*free translation* - IEC 60050](http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=704-02-02).
 
-## Linha no PSP-UFU
-As linhas no PSP-UFU são modelos $\pi$ equilibradas. Podem ser utilizadas como linhas de transmissão e distribuição de sistemas elétricos de potência.
+## Line in PSP-UFU
+Lines in PSP-UFU are balanced $\pi$ models. They can be used as transmission and distribution lines in power systems.
 
-A figura abaixo mostra o modelo $\pi$ implementado no PSP-UFU:
+The figure below shows the $\pi$ model implemented in PSP-UFU:
 
-<div><center><img src={useBaseUrl("images/lineModel.svg")} alt="Modelo PI da linha" title="Modelo PI da linha" /></center></div>
+<div><center><img src={useBaseUrl("images/lineModel.svg")} alt="Line PI Model" title="Line PI Model" /></center></div>
 
-Em que:
-- $\bold{r_L}$	é a resistência da linha;
-- $\bold{x_L}$	é a reatância indutiva da linha;
-- $\bold{b_{L}^{d}}$	é a susceptância capacitiva *shunt* da linha.
+Where:
+- $\bold{r_L}$	is the line resistance;
+- $\bold{x_L}$	is the line inductive reactance;
+- $\bold{b_{L}^{d}}$	is the line *shunt* capacitive susceptance.
 
-:::caution Atenção
-O modelo utilizado no PSP-UFU é **equilibrado** e **não possui impedâncias mútuas** entre as fases.
+:::caution Caution
+The model used in PSP-UFU is **balanced** and **does not have mutual impedances** between phases.
 :::
 
-A linha pode ser inseridas com pontos de ancoragem, ou "nós", para maior personalização gráfica do elemento, como apresentado nas [Ferramentas CAD](cadTools#line).
+The line can be inserted with anchoring points, or "nodes," for greater graphical customization of the element, as shown in the [CAD Tools](cadTools#line).
 
-:::warning Cuidado!
-A linha deve ser inserida entre duas barras de **mesma tensão nominal**. Caso você tente inseri-la entre barras de tensão diferentes, uma mensagem de erro será exibida.
+:::warning Warning!
+The line must be inserted between two buses of **the same nominal voltage**. If you try to insert it between buses of different voltages, an error message will be displayed.
 :::
 
-:::tip Dica
-Um arranjo série de uma [linha](line) sem as susceptâncias *shunt*, um [barramento](bus) e um [capacitor](capacitor) pode ser utilizado para fabricar um filtro passivo nos [estudos harmônicos](harmonics). Em versões futuras, um elemento de filtro passivo será implementado no PSP-UFU.
+:::tip Tip
+A series arrangement of a [line](line) without the *shunt* susceptances, a [bus](bus), and a [capacitor](capacitor) can be used to build a passive filter in [harmonic studies](harmonics). In future versions, a passive filter element will be implemented in PSP-UFU.
 :::
 
-## Formulário de edição das linhas
+## Line editing form
 
-A imagem abaixo apresenta o formulário de inserção/alteração de dados das linhas de transmissão:
+The image below shows the insertion/modification form for transmission line data:
 
-<div><center><img src={useBaseUrl("images/lineForm.png")} alt="Formulário das linhas no PSP-UFU" title="Formulário das linhas no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/lineForm.png")} alt="Lines form in PSP-UFU" title="Lines form in PSP-UFU" /></center></div>
 
-Esse formulário é subdividido em dois contextos distintos:
-- **Geral**: no qual são inseridas informações gerais da linha e informações do fluxo de carga;
-- **Falta**: local onde as impedâncias de sequência zero são inseridas.
+This form is subdivided into two distinct contexts:
+- **General**: where general line information and load flow data are entered;
+- **Fault**: where zero sequence impedances are entered.
 
-:::info Informação
-Os parâmetros necessários para construção da linha segundo seu modelo $\pi$ são inseridos na aba Geral, utilizados para construção da matriz admitância de sequência positiva e negativa.
+:::info Information
+The parameters needed to build the line according to its $\pi$ model are entered in the General tab, used to build the positive and negative sequence admittance matrix.
 
-Dados adicionais de impedâncias de sequência zero necessário para o cálculo de curtos-circuitos desbalanceados são editados na aba Falta, utilizados na construção da matriz admitância de sequência zero.
+Additional zero sequence impedance data necessary for unbalanced short-circuit calculations are edited in the Fault tab, used in the construction of the zero sequence admittance matrix.
 :::
 
-Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção da linha durante o estudo de [estabilidade](stability).
+Besides these two contexts, there is a "Stability" button at the bottom left of the form. This form, common to several other elements, allows insertion and/or removal of the line during [stability](stability) studies.
 
-<div><center><img src={useBaseUrl("images/lineSw.png")} alt="Formulário de chaveamento da linha" title="Formulário de chaveamento da linha" /></center></div>
+<div><center><img src={useBaseUrl("images/lineSw.png")} alt="Line switching form" title="Line switching form" /></center></div>
 
 <Tabs
   groupId="line-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Falta', value: 'fault'},
-    {label: 'Botão Estabilidade', value: 'stability'},
-  ]
-}>
+    {label: 'General', value: 'general'},
+    {label: 'Fault', value: 'fault'},
+    {label: 'Stability Button', value: 'stability'},
+  ]}
+>
 <TabItem value="general">
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Identification of the electrical element. Any number of characters can be entered using the [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-Todos os componentes de potência do PSP-UFU possuem esse campo.
+All power components in PSP-UFU have this field.
 
-#### Tensão nominal
-Campo de informação *não editável* que apresenta a tensão nominal da linha. Para alterar esse campo é necessário editar o campo correspondente do [barramento](bus#nome) conectado.
+#### Nominal voltage
+*Non-editable* field showing the nominal voltage of the line. To change this field, it is necessary to edit the corresponding field of the connected [bus](bus#name).
 
+#### Nominal power
+Nominal power of the line, entered in MVA, kVA, or VA.
 
-#### Potência nominal
-Potência nominal da linha, inserida em MVA, kVA ou VA.
+This field is especially important if the option "Use nominal power as base" is checked.
 
-Esse campo é especialmente importante caso a opção "Utilizar a potência nominal como base" esteja marcada.
+#### Parameters of the $\pi$ model
+Resistance ($r_L$), series inductive reactance ($x_L$), and **total** shunt capacitive susceptance ($2b_{L}^{d}$) present in the line's $\pi$ model.
 
-#### Parâmetros do modelo $\pi$
-Resistência ($r_L$), Reatância indutiva ($x_L$) série e Susceptância capacitiva shunt **total** ($2b_{L}^{d}$) presentes no modelo $\pi$ da linha.
+These parameters are entered in $p.u.$, $\Omega$ or $\Omega/km$ ($S$ or $S/km$ for $b_{L}^{d}$).
 
-Esses parâmetros são inseridos em $p.u.$, $\Omega$ ou $\Omega/km$ ($S$ ou $S/km$ para $b_{L}^{d}$).
+#### Line length
+Used to calculate the value of line parameters entered in $\Omega/km$ (or $S/km$).
 
-#### Comprimento da linha
-Utilizado para calcular o valor dos parâmetros da linha inseridos em $\Omega/km$ (ou $S/km$).
-
-:::info Informação
-O comprimento da linha é ignorado caso não sejam utilizadas as unidades por quilometro.
+:::info Information
+The line length is ignored if units per kilometer are not used.
 :::
 
-#### Utilizar potência nominal como base
-Caso essa opção seja marcada, o programa irá utilizar a potência nominal da linha como base para a conversão das unidades, caso contrário será usada a [potência base do sistema](simulationConfig).
+#### Use nominal power as base
+If this option is checked, the program will use the nominal power of the line as the base for unit conversion; otherwise, the [system base power](simulationConfig) will be used.
 
 </TabItem>
 <TabItem value="fault">
 
-#### Parâmetros do modelo $\pi$ de sequência zero
-Esses parâmetros são necessários para o correto cálculo das correntes de [falta desbalanceadas](fault) (fase-fase, fase-fase-terra e fase-terra) e devem ser inseridos em $p.u.$
+#### Zero sequence $\pi$ model parameters
+These parameters are necessary for the correct calculation of [unbalanced faults](fault) (phase-phase, phase-phase-ground, and phase-ground) currents and must be entered in $p.u.$
 
-:::warning Cuidado!
-A não inserção desses dados acarretarão em resultados incorretos para [faltas desbalanceadas](fault).
+:::warning Warning!
+Failure to enter these data will result in incorrect results for [unbalanced faults](fault).
 :::
 
 </TabItem>
 <TabItem value="stability">
 
-O botão "Estabilidade" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção da linha durante o estudo de [estabilidade](stability).
+The "Stability" button will open a form, common to several other elements, that allows insertion and/or removal of the line during [stability](stability) studies.
 
-Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+In this form, a generic list of line insertions and removals over time can be created, customized by a switching property context where the switching type (insertion or removal) and the event instant (in seconds) are edited. These properties are added to and removed from the generic list via the "Add" and "Remove" buttons, respectively.
 
 </TabItem>
 </Tabs>

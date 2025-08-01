@@ -1,7 +1,7 @@
 ---
 id: harmonics
-title: Harmônicos
-sidebar_label: Harmônicos
+title: Harmonics
+sidebar_label: Harmonics
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,107 +10,112 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Duas ferramentas relacionadas a harmônicos foram desenvolvidas no PSP-UFU:
-- Distorção Harmônica Total de Tensão (THD, do inglês *Total Harmonic Distortion*);
-- Resposta na Frequência.
+Two harmonic-related tools were developed in PSP-UFU:
+- Total Harmonic Distortion of Voltage (THD);
+- Frequency Response.
 
-A ferramenta de **[Distorção Harmônica Total](https://en.wikipedia.org/wiki/Total_harmonic_distortion)** calcula as tensões harmônicas causadas por [fontes de corrente harmônicas](harmSource), assim como o THD de todos os barramentos do sistema.
+The **[Total Harmonic Distortion](https://en.wikipedia.org/wiki/Total_harmonic_distortion)** tool calculates the harmonic voltages caused by [harmonic current sources](harmSource), as well as the THD of all buses in the system.
 
-A ferramenta de **Resposta na Frequência** (ou análise de varredura de frequência) envolve a variação da impedância da rede em um espectro de frequências observado a partir de um certo barramento.
+The **Frequency Response** tool (or frequency sweep analysis) involves varying the network impedance over a frequency spectrum observed from a certain bus.
 
-:::info Informação
-A análise de varredura de frequência é amplamente usada no projeto de filtros harmônicos.
+:::info Information
+Frequency sweep analysis is widely used in harmonic filter design.
 :::
 
-:::tip Dica
-Um arranjo série de uma [linha](line) sem as susceptâncias *shunt*, um [barramento](bus) e um [capacitor](capacitor) pode ser utilizado para fabricar um filtro passivo nos [estudos harmônicos](harmonics). Em versões futuras, um elemento de filtro passivo será implementado no PSP-UFU.
+:::tip Tip
+A series arrangement of a [line](line) without *shunt* susceptances, a [bus](bus), and a [capacitor](capacitor) can be used to create a passive filter in [harmonic studies](harmonics). In future versions, a passive filter element will be implemented in PSP-UFU.
 :::
 
-:::caution Atenção!
-Na versão atual do programa não são consideradas as alterações das resistências do sistema causado pelo efeito pelicular. Versões futuras irão contemplar tal característica.
+:::caution Attention!
+In the current version, changes in system resistance caused by skin effect are not considered. Future versions will include this feature.
 :::
 
-## Execução do cálculo de harmônicos no PSP-UFU
-Após a construção do diagrama unifilar no [editor de potência](powerEditor), a execução do cálculo das distorções harmônicas é realizada no [menu Simulação](mainScreen#ribbon-menu) clicando no botão **Distorções Harmônicas**. Para acessar a ferramenta de de varredura de frequência, basta clicar no botão **Resposta na Frequência**.
+## Running the harmonic calculation in PSP-UFU
+After building the single-line diagram in the [power editor](powerEditor), the harmonic distortion calculation is executed in the [Simulation menu](mainScreen#ribbon-menu) by clicking the **Harmonic Distortions** button.  
+To access the frequency sweep tool, click the **Frequency Response** button.
 
-<div><center><img src={useBaseUrl("images/menuSimulationHamonics.svg")} alt="Acesso às ferramentas de estudo harmônico" title="Acesso às ferramentas de estudo harmônico" /></center></div>
+<div><center><img src={useBaseUrl("images/menuSimulationHamonics.svg")} alt="Access to harmonic study tools" title="Access to harmonic study tools" /></center></div>
 
-### Distorções Harmônicas
-Ao clicar sobre o botão "Distorções Harmônicas" as distorções causadas pelas [fontes de corrente harmônica](harmSource) são calculadas em todos os barramentos do sistema.
+### Harmonic Distortions
+Clicking the "Harmonic Distortions" button calculates the distortions caused by [harmonic current sources](harmSource) in all system buses.
 
-:::caution Atenção!
-Caso não forem inseridas [fontes de corrente harmônica](harmSource) no sistema de potência, a distorção de tensão de todas as barras será $0{,}0~\%$.
+:::caution Attention!
+If no [harmonic current sources](harmSource) are inserted into the power system, the voltage distortion of all buses will be $0{,}0~\%$.
 :::
 
-**Outra possibilidade** é a execução por meio do cálculo contínuo, também presente no [menu Simulação](mainScreen#ribbon-menu) e seu acionamento é realizado co clicar no botão **Habilitar solução**. Com essa opção, os cálculos estáticos selecionados nas [configurações de simulação](simulationConfig) são automaticamente realizados ao modificar quaisquer parâmetros da rede, como dados elétricos e acionamento dos disjuntores dos elementos (remoção ou inserção).
+**Another possibility** is execution via continuous calculation, also available in the [Simulation menu](mainScreen#ribbon-menu) by clicking **Enable solution**.  
+With this option, the selected static calculations in [simulation settings](simulationConfig) are automatically executed when any network parameter is modified, such as electrical data or breaker operations (insertion/removal of elements).
 
-:::warning Cuidado!
-Os cálculos dos níveis de THD **não são habilitados por padrão** no cálculo contínuo e devem ser inseridos nas [configurações de simulação](simulationConfig).
+:::warning Warning!
+THD level calculations are **not enabled by default** in continuous calculation and must be selected in the [simulation settings](simulationConfig).
 :::
 
-Os resultados das distorções harmônicas são exibidos nos [elementos de texto vinculados](text) e ao posicionar o mouse sobre um barramento.
+The harmonic distortion results are displayed in [linked text elements](text) and when hovering the mouse over a bus.
 
-### Resposta na Frequência
-Ao clicar sobre o botão "Resposta na Frequência" será exibido um formulário para inserção dos parâmetros da ferramenta:
+### Frequency Response
+Clicking the "Frequency Response" button opens a form to enter tool parameters:
 
-<div><center><img src={useBaseUrl("images/injHarmCurrent.png")} alt="Acesso à ferramentas resposta na frequência" title="Acesso à ferramentas resposta na frequência" /></center></div>
+<div><center><img src={useBaseUrl("images/injHarmCurrent.png")} alt="Frequency response tool access" title="Frequency response tool access" /></center></div>
 
-#### Frequência inicial
-Define a frequência inicial da varredura.
+#### Initial frequency
+Defines the initial sweep frequency.
 
-#### Frequência final
-Define a frequência final da varredura.
+#### Final frequency
+Defines the final sweep frequency.
 
-#### Passo de frequência
-Define o passo de incremento da frequência. Passos menores irão gerar gráficos mais precisos, porém podem aumentar muito o tempo de execução.
+#### Frequency step
+Defines the step increment of the frequency.  
+Smaller steps generate more precise plots but may increase execution time.
 
-#### Corrente injetada
-Define o barramento o qual será injetada a corrente harmônica para análise.
-:::tip Dica
-Esse campo pode ser entendido como: "*A resposta das impedâncias harmônicas vistas pelos barramentos do sistema caso tenha uma fonte de corrente harmônica na barra selecionada*".
+#### Injected current
+Defines the bus where the harmonic current will be injected for analysis.
+:::tip Tip
+This field can be interpreted as:  
+"*The response of the harmonic impedances seen by the system buses if a harmonic current source exists at the selected bus*".
 :::
 
-#### Botão Executar
-Ao clicar no botão executar a varredura será executada e os resultados exibidos no [vizualizador de gráficos](graphViewer), como mostra a imagem abaixo.
+#### Execute button
+Clicking the execute button performs the sweep and displays results in the [graph viewer](graphViewer), as shown below:
 
-<div><center><img src={useBaseUrl("images/freqScanPlot.png")} alt="Exemplo de resposta na frequência" title="Exemplo de resposta na frequência" /></center></div>
+<div><center><img src={useBaseUrl("images/freqScanPlot.png")} alt="Frequency response example" title="Frequency response example" /></center></div>
 
-:::warning Cuidado!
-Para visualizar a varredura da impedância harmônica de um barramento, essa opção deve ser habilitada em seu [formulário de edição de dados](bus#imprimir-impedância-harmônica-da-barra).
+:::warning Warning!
+To view the harmonic impedance sweep of a bus, this option must be enabled in its [data edit form](bus#imprimir-impedância-harmônica-da-barra).
 :::
 
-## Cálculos das ferramentas harmônicas
+## Harmonic tool calculations
 
-Ambos cálculos são realizados a partir da seguinte equação matricial:
+Both calculations are based on the following matrix equation:
 $$
 [\dot{I}]^h= [Y_{bus}]^h [\dot{V}]^h
 $$
-Em que:
-- $[\dot{I}]^h$	Vetor das correntes harmônicas injetadas nas barras
-- $[Y_{bus}]^h$	Matriz admitância harmônica de barras
-- $[\dot{V}]^h$	Vetor das tensões harmônicas nas barras
-- $h$	Ordem harmônica
+Where:
+- $[\dot{I}]^h$ = Vector of harmonic currents injected into buses
+- $[Y_{bus}]^h$ = Harmonic bus admittance matrix
+- $[\dot{V}]^h$ = Vector of harmonic voltages at buses
+- $h$ = Harmonic order
 
-O vetor das correntes harmônicas injetadas é definido no programa utilizando um elemento de potência, chamado “fonte de corrente harmônica”, em que o usuário pode criar uma lista de correntes injetadas (em A e/ou $p.u.$) em um barramento.
+The harmonic current vector is defined in the program using the “harmonic current source” element, where the user can create a list of currents (in A and/or $p.u.$) injected into a bus.
 
-O programa define automaticamente as ordens harmônicas na simulação analisando todas as listas de fontes de corrente harmônicas previamente aos cálculos. Com isso são calculadas as admitâncias harmônicas necessárias de cada elemento pela multiplicação das reatâncias indutivas ($x_{l}^1$) e susceptâncias capacitivas ($b_{c}^1$) fundamentais de cada elemento pelas ordens harmônicas:
+The program automatically defines harmonic orders in the simulation by analyzing all harmonic current source lists before calculations.  
+Harmonic admittances are calculated by multiplying the fundamental inductive reactances ($x_{l}^1$) and capacitive susceptances ($b_{c}^1$) of each element by the harmonic orders:
 $$
 x_{l}^h=h×x_l^1\\
 b_{c}^h=h×b_c^1
 $$
 
-Uma vez calculadas as admitâncias harmônicas, são utilizados os mesmos modelos e algoritmos convencionais para construção da $Y_{bus}^h$.
+Once harmonic admittances are calculated, the same conventional models and algorithms are used to construct $Y_{bus}^h$.
 
-A equação matricial é resolvida usando o método de eliminação gaussiana para evitar a inversão de cada matriz de admitância harmônica. Este procedimento torna o cálculo das tensões harmônicas computacionalmente eficiente.
+The matrix equation is solved using Gaussian elimination to avoid inverting each harmonic admittance matrix, making the calculation computationally efficient.
 
-Uma vez calculadas as tensões harmônicas, a THD em uma barra genérica $i$ pode ser definida por:
+Once harmonic voltages are calculated, the THD at a generic bus $i$ can be defined as:
 $$
 \text{THD}_i=\dfrac{\sum_{h=2}^{n} V_{i}^h}{V_i^1}
 $$
 
-Na ferramenta de Resposta na Frequência uma corrente senoidal é injetada na barra em uma faixa de frequências e o conjunto de equações matriciais é usado para calcular a resposta da tensão. Este cálculo é repetido em etapas discretas cobrindo o espectro de frequência especificado.
+In the Frequency Response tool, a sinusoidal current is injected into the bus across a frequency range, and the matrix equations are used to calculate the voltage response. This is repeated at discrete steps over the specified spectrum.
 
-O programa usa a matriz admitância de sequência positiva e uma corrente injetada de $1{,}0 p.u.$ também de sequência positiva na equação matricial para calcular diretamente as impedâncias em p.u.
+The program uses the positive-sequence admittance matrix and a $1{,}0 p.u.$ positive-sequence injected current to calculate impedances directly in p.u.
 
-## Referências
+## References
 1. ARRILLAGA, J.; WATSON, N. R. Power System Harmonics. John Wiley & Sons; Chichester, 2003. doi: https://doi.org/10.1002/0470871229

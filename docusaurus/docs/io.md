@@ -1,43 +1,43 @@
 ---
 id: io
-title: Entrada / Saída
-sidebar_label: Entrada / Saída
+title: Input / Output
+sidebar_label: Input / Output
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-As entradas e saída são variáveis relacionadas às máquinas síncronas. Cada tipo de entrada e saída está relacionada a um regulador da máquina: **Regulador de Tensão (AVR, do inglês *Automatic Voltage Regulator*)** e **Regulador de Velocidade (RV)**.
+Inputs and outputs are variables related to synchronous machines. Each type of input and output is associated with a machine regulator: **Automatic Voltage Regulator (AVR)** and **Speed Governor (GOV)**.
 
-:::warning Cuidado!
-O sistema de controle deve ter **ao menos uma entrada e uma saída**.
+:::warning Warning!
+The control system must have **at least one input and one output**.
 :::
 
-As entradas e saídas do sistema de controle são definidas por esses blocos, os quais são distintos para cada tipo de escopo. A figura abaixo apresenta um exemplo de um formulário de edição das entradas e saídas de um AVR:
+The inputs and outputs of the control system are defined by these blocks, which differ for each type of scope. The figure below shows an example of a form for editing the inputs and outputs of an AVR:
 
-<div><center><img src={useBaseUrl("images/ioForm.png")} alt="Formulário de edição de entradas e saídas de sistemas de controle de um AVR" title="Formulário de edição de entradas e saídas de sistemas de controle de um AVR" /></center></div>
+<div><center><img src={useBaseUrl("images/ioForm.png")} alt="Form for editing inputs and outputs of AVR control systems" title="Form for editing inputs and outputs of AVR control systems" /></center></div>
 
-## Variáveis de entrada e saída
+## Input and Output Variables
 
-O usuário deve sinalizar o tipo de bloco entre entrada e saída e, então, selecionar em uma lista a variável desejada. As seguintes variáveis de controle estão atualmente disponíveis no programa:
+The user must specify the block type as input or output and then select the desired variable from a list. The following control variables are currently available in the program:
 
-- **Tensão terminal** (*entrada: AVR*): Módulo da tensão no barramento da máquina síncrona, em $p.u.$, variável no tempo. Essa variável é normalmente utilizada no cálculo do erro da tensão de referência do AVR;
-- **Velocidade** (*entrada: AVR e RV*): Velocidade da máquina síncrona, em rad/s, variável no tempo. Normalmente utilizada no cálculo do erro de velocidade nos reguladores de velocidade, além de entrada do PSS em AVRs;
-- **Potência ativa e reativa** (*entrada: AVR*): Potência ativa fornecida pela máquina síncrona, em $p.u.$, variável no tempo. Normalmente utilizada como entrada do PSS (potência ativa) e controle de sub e sobrecorrente de excitação nos AVRs;
-- **Tensão terminal inicial** (*entrada: AVR*): Módulo da tensão no barramento da máquina síncrona prévia ao estudo dinâmico originado do fluxo de carga, em $p.u.$, fixo no tempo. Essa variável está normalmente associada à referência de tensão do AVR;
-- **Velocidade inicial** (*entrada: AVR e RV*): Velocidade do sistema ($2 \pi f_{ref}$), definida nas [opções de simulação](simulationConfig), em rad/s, fixa no tempo. Normalmente utiliza-se essa variável como referência de velocidade em RVs e normalização da velocidade;
-- **Potência mecânica inicial** (*entrada: RV*): Potência mecânica inicial, calculada após a inicialização das máquinas síncronas com os dados originados do fluxo de carga, em $p.u.$, fixa no tempo. Normalmente é utilizada como referência de potência mecânica nos reguladores de velocidade;
-- **Variação de velocidade e potência ativa** (*entrada: AVR*): Cálculo da variação dessas entradas entre os passos de integração normalizada pelo passo de integração, conforme a equação:
+- **Terminal voltage** (*input: AVR*): Magnitude of the voltage at the synchronous machine bus, in $p.u.$, time-varying. This variable is normally used in calculating the error of the AVR reference voltage;
+- **Speed** (*input: AVR and GOV*): Speed of the synchronous machine, in rad/s, time-varying. Commonly used in calculating the speed error in speed regulators, as well as input to the PSS in AVRs;
+- **Active and reactive power** (*input: AVR*): Active power supplied by the synchronous machine, in $p.u.$, time-varying. Usually used as input to the PSS (active power) and for excitation under- and overcurrent control in AVRs;
+- **Initial terminal voltage** (*input: AVR*): Magnitude of the voltage at the synchronous machine bus prior to the dynamic study, derived from load flow, in $p.u.$, fixed over time. This variable is normally associated with the AVR voltage reference;
+- **Initial speed** (*input: AVR and GOV*): System speed ($2 \pi f_{ref}$), defined in the [simulation options](simulationConfig), in rad/s, fixed over time. This variable is typically used as the speed reference in SRs and for speed normalization;
+- **Initial mechanical power** (*input: GOV*): Initial mechanical power, calculated after initialization of synchronous machines using data from the load flow, in $p.u.$, fixed over time. Usually used as the mechanical power reference in speed regulators;
+- **Variation of speed and active power** (*input: AVR*): Calculation of the variation of these inputs between integration steps normalized by the integration step, according to the equation:
 	$$
-	\Delta x = \frac{x_n-x_{n-1}}{h}
+	\Delta x = \frac{x_n - x_{n-1}}{h}
 	$$
-	Em que:
-	- $\Delta x$	é a variação da entrada (velocidade ou potência ativa);
-	- $x_n$ e $x_{n-1}$	é a variável no passo atual e anterior, respectivamente;
-	- $h$	é o passo de integração.
+	Where:
+	- $\Delta x$	is the variation of the input (speed or active power);
+	- $x_n$ and $x_{n-1}$	are the variable at the current and previous step, respectively;
+	- $h$	is the integration step.
 	
-	:::info Informação
-	A normalização é necessária para a correta utilização da razão de passo de controle, definida nas [configurações de simulação](simulationConfig).
+	:::info Information
+	Normalization is necessary for the correct use of the control step ratio, defined in the [simulation settings](simulationConfig).
 	:::
-- **Tensão de campo** (*saída: AVR*): Define a tensão aplicada ao campo na máquina síncrona, em $p.u.$ Utilizada como saída dos AVRs, controlando principalmente tensão no barramento conectado e/ou fator de potência da máquina;
-- **Potência mecânica** (*saída: RV*): Define qual a potência mecânica aplicada no eixo da máquina síncrona. Utilizada como saída dos reguladores de velocidade, controlando principalmente a potência ativa injetada pela máquina e sua frequência.
+- **Field voltage** (*output: AVR*): Defines the voltage applied to the synchronous machine field, in $p.u.$ Used as an output of AVRs, mainly controlling the voltage at the connected bus and/or the machine's power factor;
+- **Mechanical power** (*output: SR*): Defines the mechanical power applied to the synchronous machine shaft. Used as an output of speed regulators, mainly controlling the active power injected by the machine and its frequency.

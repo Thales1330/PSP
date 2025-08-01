@@ -1,16 +1,17 @@
 ---
 id: divider
-title: Divisor
-sidebar_label: Divisor
+title: Divider
+sidebar_label: Divider
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-Esse elemento é bastante simples e cumpre com a função matemáticas de seu nome.
+This element is quite simple and performs the mathematical function of its name.
 
-Possui duas entradas de valores reais e sua saída é computada na sequência do nó superior pelo inferior, ou seja, a saída será o valor presente no nó 1 dividido pelo nó 2.
+It has two real-value inputs, and its output is computed as the top node value divided by the bottom node value, i.e., output = node 1 ÷ node 2.
 
-:::caution Atenção!
-Nós não conectados no divisor são considerados como valor nulo. Caso a divisão possua numerador zero, o valor da saída é definida como sendo $10^{15}$.
+:::caution Attention!
+Unconnected nodes in the divider are considered as zero.  
+If the division has a zero numerator, the output value is defined as $10^{15}$.
 :::

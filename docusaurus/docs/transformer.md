@@ -1,7 +1,7 @@
 ---
 id: transformer
-title: Transformador
-sidebar_label: Transformador
+title: Transformer
+sidebar_label: Transformer
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,26 +10,26 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
->Aparelho estático com dois ou mais enrolamentos que, por indução eletromagnética, transforma um sistema de tensão e corrente alternada em outro sistema de tensão e corrente geralmente de valores diferentes e na mesma frequência com o objetivo de transmitir energia elétrica. [*tradução livre* - IEC 60050](
+>A static device with two or more windings that, by electromagnetic induction, transforms a system of alternating voltage and current into another system of voltage and current generally of different values and at the same frequency, with the purpose of transmitting electrical energy. [*free translation* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=421-01-01).
 
-## Transformador no PSP-UFU
-Transformadores com quaisquer conexões e defasagens entre as tensões primárias e secundárias podem ser inseridos no PSP-UFU. Para isso, os transformadores devem ser modelados representando seu tape ($t$) e defasagem ($\phi$), utilizando um transformador ideal de relação de transformação $\overline{t}:1$ em série com sua impedância ($\overline{y}_T = r_T + jx_T$), em que $\overline{t}$ é um número complexo ($t\angle\phi$)
+## Transformer in PSP-UFU
+Transformers with any connections and phase shifts between primary and secondary voltages can be inserted in PSP-UFU. For this, transformers must be modeled representing their tap ($t$) and phase shift ($\phi$), using an ideal transformer with transformation ratio $\overline{t}:1$ in series with its impedance ($\overline{y}_T = r_T + jx_T$), where $\overline{t}$ is a complex number ($t\angle\phi$).
 
-:::caution Atenção
-O modelo utilizado no PSP-UFU **não considera** o ramo magnetizante ou impedâncias mútuas entre as fases.
+:::caution Caution
+The model used in PSP-UFU **does not consider** the magnetizing branch or mutual impedances between phases.
 :::
 
-A figura abaixo mostra o modelo do transformador implementado no PSP-UFU:
+The figure below shows the transformer model implemented in PSP-UFU:
 
-<div><center><img src={useBaseUrl("images/transformerModel.svg")} alt="Modelo PI da linha" title="Modelo PI da linha" /></center></div>
+<div><center><img src={useBaseUrl("images/transformerModel.svg")} alt="PI Model of the line" title="PI Model of the line" /></center></div>
 
-Em que:
-- $\bold{r_T}$	é a resistência total do transformador;
-- $\bold{x_T}$	é a reatância indutiva total do transformador;
-- $\bold{\overline{t}}$	é a o tape complexo do transformador.
+Where:
+- $\bold{r_T}$ is the total transformer resistance;
+- $\bold{x_T}$ is the total inductive reactance of the transformer;
+- $\bold{\overline{t}}$ is the complex tap of the transformer.
 
-A relação entre as tensões e correntes das barras genéricas $i$ e $j$ é obtida pela equação matricial:
+The relationship between the voltages and currents of generic buses $i$ and $j$ is given by the matrix equation:
 
 $$
 \begin{bmatrix}
@@ -48,16 +48,16 @@ $$
 \end{bmatrix}
 $$
 
-Assim como nas [linhas](line), o transformador de dois enrolamentos deve ser inserido entre barras, porém não há a necessidade das tensões nominais desses barramentos serem idênticas.
+As in [lines](line), the two-winding transformer must be inserted between buses, but the nominal voltages of these buses do not need to be identical.
 
-:::caution Atenção!
-A primeira barra selecionada será o lado **primário**, o qual é indicado por um círculo. Para alterar o lado primário após a inserção basta desconectar os nós dos transformadores e reconectá-los alternando as barras, utilizando as [ferramentas CAD](cadTools#connection-and-disconnection-of-elements-in-the-bus).
+:::caution Caution!
+The first selected bus will be the **primary** side, which is indicated by a circle. To change the primary side after insertion, simply disconnect the transformer nodes and reconnect them switching the buses, using the [CAD tools](cadTools#connection-and-disconnection-of-elements-in-the-bus).
 :::
 
-### Transformadores no estudo de curto-circuito
-Da mesma forma que no estudo de fluxo de carga, a representação dos elementos do sistema para o estudo de curto-circuito é realizada por meio de circuitos equivalentes inseridos na matriz admitância de barras. Nas [faltas desbalanceadas](fault) é necessário formar três matrizes admitância de sequência: positiva, negativa e zero.
+### Transformers in short-circuit studies
+Just as in load flow studies, the representation of system elements for short-circuit studies is done through equivalent circuits inserted into the bus admittance matrix. In [unbalanced faults](fault) it is necessary to form three sequence admittance matrices: positive, negative, and zero.
 
-A matriz admitância de sequência positiva é construída da mesma forma que os estudos de fluxo de carga. Na sequência negativa o ângulo de defasagem entre tensões primária e secundária ($\phi$) deve ser invertido, uma vez que os fasores da sequência negativa **são deslocados na direção oposta**. Com isso, a matriz que representa as admitâncias da equação anterior deve ser substituída pela seguinte expressão:
+The positive sequence admittance matrix is built the same way as in load flow studies. In the negative sequence, the phase shift angle between primary and secondary voltages ($\phi$) must be inverted, since negative sequence phasors **are displaced in the opposite direction**. Thus, the matrix representing the admittances in the previous equation must be replaced by the following expression:
 
 $$
 \begin{bmatrix}
@@ -71,106 +71,106 @@ $$
 \end{bmatrix}
 $$
 
-A impedância de sequência negativa nos transformadores deve ser tratada de maneira específica devido aos diferentes tipos de conexão. Na figura abaixo são mostrados os circuitos equivalentes para cada tipo de conexão de transformadores de dois enrolamentos. As setas indicam os caminhos possíveis para circulação da corrente de sequência zero.
+The negative sequence impedance in transformers must be treated specifically due to different types of connections. The figure below shows the equivalent circuits for each type of two-winding transformer connection. The arrows indicate possible paths for zero-sequence current flow.
 
-<div><center><img src={useBaseUrl("images/seqZeroTrafo.svg")} alt="Circuitos equivalentes de sequência zero dos transformadores" title="Circuitos equivalentes de sequência zero dos transformadores" /></center></div>
+<div><center><img src={useBaseUrl("images/seqZeroTrafo.svg")} alt="Zero sequence equivalent circuits of transformers" title="Zero sequence equivalent circuits of transformers" /></center></div>
 
-Para os transformadores com conexão estrela aterrado, se a ligação do neutro para a terra apresentar uma impedância $\overline{z}_n$, o circuito equivalente de sequência zero deve ter impedância de $3\overline{z}_n$ em série com a resistência e reatância equivalentes do transformador.
+For transformers with grounded wye connection, if the neutral-to-ground connection has an impedance $\overline{z}_n$, the zero sequence equivalent circuit must have an impedance of $3\overline{z}_n$ in series with the equivalent resistance and reactance of the transformer.
 
-## Formulário de edição dos transformadores
+## Transformer Data Editing Form
 
-A imagem abaixo apresenta o formulário de inserção/alteração de dados dos transformadores:
+The image below shows the data insertion/modification form for transformers:
 
-<div><center><img src={useBaseUrl("images/trafoForm.png")} alt="Formulário dos transformadores no PSP-UFU" title="Formulário dos transformadores no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/trafoForm.png")} alt="Transformer form in PSP-UFU" title="Transformer form in PSP-UFU" /></center></div>
 
-Esse formulário é subdividido em dois contextos distintos:
-- **Geral**: no qual são inseridas informações gerais dos transformadores, informações do fluxo de carga, sua conexão e defasagem;
-- **Falta**: local onde as impedâncias de sequência zero e impedâncias de aterramento são inseridas.
+This form is subdivided into two distinct contexts:
+- **General**: where general transformer information, load flow data, its connection, and phase shift are entered;
+- **Fault**: where zero sequence impedances and grounding impedances are entered.
 
-Além desses dois contextos, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
+Besides these two contexts, the "Stability" button can be seen in the lower left of the form. This form, common to several other elements, allows insertion and/or removal of the transformer during the [stability](stability) study.
 
-<div><center><img src={useBaseUrl("images/trafoSw.png")} alt="Formulário de chaveamento do transformador" title="Formulário de chaveamento do transformador" /></center></div>
+<div><center><img src={useBaseUrl("images/trafoSw.png")} alt="Transformer switching form" title="Transformer switching form" /></center></div>
 
 <Tabs
   groupId="transformer-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Falta', value: 'fault'},
-    {label: 'Botão Estabilidade', value: 'stability'},
-  ]
-}>
+    {label: 'General', value: 'general'},
+    {label: 'Fault', value: 'fault'},
+    {label: 'Stability Button', value: 'stability'},
+  ]}
+>
 <TabItem value="general">
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Identification of the electrical element. Any number of characters can be entered in [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-Todos os componentes de potência do PSP-UFU possuem esse campo.
+All power components in PSP-UFU have this field.
 
-#### Tensão nominal
-Campo de informação *não editável* que apresenta a tensão primária e secundária do transformador. Para alterar esse campo é necessário editar o campo correspondente dos [barramento](bus#nome) conectados.
+#### Nominal voltage
+*Non-editable* field showing the primary and secondary voltage of the transformer. To change this field, the corresponding field in the connected [bus](bus#name) must be edited.
 
-#### Tensão base
-Tensão utilizada para converter os parâmetros de impedância inseridos em $\Omega$ para $p.u.$ As tensões selecionadas por uma caixa de escolha são editadas nos formulários dos [barramentos](bus#nome) conectados.
+#### Base voltage
+Voltage used to convert the entered impedance parameters from $\Omega$ to $p.u.$ The voltages selected by a dropdown box are edited in the connected [bus](bus#name) forms.
 
-:::info Informação
-A tensão base é ignorada caso os dados inseridos estejam em $p.u.$
+:::info Information
+Base voltage is ignored if the data entered is already in $p.u.$
 :::
 
-#### Potência nominal
-Potência nominal do transformador, inserida em MVA, kVA ou VA.
+#### Rated power
+Transformer rated power, entered in MVA, kVA, or VA.
 
-Esse campo é especialmente importante caso a opção "Utilizar a potência nominal como base" esteja marcada.
+This field is especially important if the option "Use rated power as base" is selected.
 
-#### Impedância do transformador
-Impedância série do transformador (resistência e reatância indutiva), inserida em $p.u.$ ou $\Omega$. Caso as impedâncias sejam inseridas em $\Omega$ será utilizada a tensão base selecionada para conversão para $p.u.$
+#### Transformer impedance
+Transformer series impedance (resistance and inductive reactance), entered in $p.u.$ or $\Omega$. If impedances are entered in $\Omega$, the selected base voltage will be used for conversion to $p.u.$
 
-#### Conexão
-Conexão do transformador utilizada para cálculo das correntes de sequência zero nas faltas desbalanceadas com presença de terra (fase-terra e fase-fase-terra).
+#### Connection
+Transformer connection used for zero sequence current calculation in unbalanced faults involving ground (phase-ground and phase-phase-ground).
 
-As seguintes conexões estão disponíveis:
-1. $Y_{aterrado}-Y_{aterrado}$
-1. $Y-Y_{aterrado}$
-1. $Y_{aterrado}-Y$
-1. $Y-Y$
-1. $\Delta-Y_{aterrado}$
-1. $\Delta-Y$
-1. $Y_{aterrado}-\Delta$
-1. $Y-\Delta$
-1. $\Delta-\Delta$
+The following connections are available:
+1. $Y_{grounded}-Y_{grounded}$
+2. $Y-Y_{grounded}$
+3. $Y_{grounded}-Y$
+4. $Y-Y$
+5. $\Delta-Y_{grounded}$
+6. $\Delta-Y$
+7. $Y_{grounded}-\Delta$
+8. $Y-\Delta$
+9. $\Delta-\Delta$
 
 #### TAP
-Tape do transformador **em relação ao primário**.
+Transformer tap **relative to the primary**.
 
-:::caution Atenção!
-O tape no PSP-UFU deve ser inserido pela relação entre a tensão primária nominal e a tensão de tape $\left(\text{TAP} = \frac{V_{nominal}}{V_{tape}}\right)$.
+:::caution Caution!
+The tap in PSP-UFU must be entered as the ratio between the nominal primary voltage and the tap voltage $\left(\text{TAP} = \frac{V_{nominal}}{V_{tap}}\right)$.
 :::
 
-#### Defasagem
-Defasagem do transformador em relação ao primário, em graus. Esse valor independe do tipo de conexão, portanto para conexões diferentes de $Y-Y$(aterrado ou não) e $\Delta-\Delta$, deve-se inserir o ângulo de defasagem correto.
+#### Phase shift
+Transformer phase shift relative to the primary, in degrees. This value is independent of the connection type, so for connections other than $Y-Y$ (grounded or not) and $\Delta-\Delta$, the correct phase angle must be entered.
 
-#### Utilizar potência nominal como base
-Caso essa opção seja marcada, o programa irá utilizar a potência nominal do transformador como base para a conversão das unidades, caso contrário será usada a [potência base do sistema](simulationConfig).
+#### Use rated power as base
+If this option is selected, the program will use the transformer's rated power as the base for unit conversion; otherwise, the [system base power](simulationConfig) will be used.
 
 </TabItem>
 <TabItem value="fault">
 
-#### Impedância de sequência zero do transformador
-Esses parâmetros são necessários para o correto cálculo das correntes de [falta desbalanceadas](fault) (fase-fase, fase-fase-terra e fase-terra) e devem ser inseridos em $p.u.$
+#### Zero sequence impedance of transformer
+These parameters are necessary for the correct calculation of currents in [unbalanced faults](fault) (phase-phase, phase-phase-ground, and phase-ground) and must be entered in $p.u.$
 
-:::warning Cuidado!
-A não inserção desses dados acarretarão em resultados incorretos para [faltas desbalanceadas](fault).
+:::warning Warning!
+Failure to enter these data will result in incorrect results for [unbalanced faults](fault).
 :::
 
-#### Impedâncias de aterramento
-As impedâncias de aterramento são somente utilizadas para conexão $Y_{aterrado}$ e devem ser inseridas em $p.u.$
+#### Grounding impedances
+Grounding impedances are only used for $Y_{grounded}$ connection and must be entered in $p.u.$
 
 </TabItem>
 <TabItem value="stability">
 
-O botão "Estabilidade" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
+The "Stability" button will open a form, common to several other elements, which allows insertion and/or removal of the transformer during the [stability](stability) study.
 
-Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+In this form, a generic list of insertions and removals of the line over time can be created, customized by a switching property context where the switching type (insertion or removal) and the instant (in seconds) of the event are edited. These properties are added and removed from the generic list using the "Add" and "Remove" buttons, respectively.
 
 </TabItem>
 </Tabs>

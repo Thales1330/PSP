@@ -1,7 +1,7 @@
 ---
 id: syncMotor
-title: Compensador Síncrono
-sidebar_label: Compensador Síncrono
+title: Synchronous Condenser
+sidebar_label: Synchronous Condenser
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,76 +10,75 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-> Uma máquina síncrona operando sem carga mecânica e fornecendo ou absorvendo energia reativa. [*tradução livre* - IEC 60050](
+> A synchronous machine operating without mechanical load and supplying or absorbing reactive power. [*free translation* - IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-34-03).
 
-## Compensador Síncrono no PSP-UFU
-O compensador síncrono nada mais é que um motor síncrono operando sem carga em seu eixo com o intuito de fornecer ou absorver potência reativa na rede. Em relação ao [fluxo de carga](powerFlow), no PSP-UFU esse elemento tem comportamento idêntico ao [gerador síncrono](syncGenerator), porém a sua potência ativa é inserida nos algoritmos de solução com sinal negativo.
+## Synchronous Condenser in PSP-UFU
+The synchronous condenser is simply a synchronous motor operating without load on its shaft with the purpose of supplying or absorbing reactive power in the network. Regarding [load flow](powerFlow), in PSP-UFU this element behaves identically to the [synchronous generator](syncGenerator), but its active power is entered into the solution algorithms with a negative sign.
 
-Sua parametrização para o estudo de [fluxo de carga](powerFlow), [falta](fault) e [harmônicos](harmonics) é idêntica ao [gerador síncrono](syncGenerator).
+Its parameterization for [load flow](powerFlow), [fault](fault), and [harmonics](harmonics) studies is identical to that of the [synchronous generator](syncGenerator).
 
-:::warning Cuidado!
-O compensador síncrono **não foi implementado no estudo de [estabilidade](stability)** e sua presença no circuito pode causar erros durante os cálculos.
+:::warning Caution!
+The synchronous condenser **has not been implemented in the [stability](stability) study**, and its presence in the circuit may cause errors during calculations.
 
-Não inclua esse elemento para os estudos de [estabilidade](stability). Versões futuras do PSP-UFU irão contemplar esse elemento para esse estudo.
+Do not include this element for [stability](stability) studies. Future versions of PSP-UFU will include this element in such studies.
 :::
 
-:::tip Dica
-É possível utilizar um [gerador síncrono](syncGenerator) com potência ativa *nula* ou *negativa* para representar o compensador síncrono nos estudos de [estabilidade](stability).
+:::tip Tip
+It is possible to use a [synchronous generator](syncGenerator) with *zero* or *negative* active power to represent the synchronous condenser in [stability](stability) studies.
 :::
 
-## Formulário de edição dos compensadores síncronos
-A imagem abaixo apresenta o formulário de inserção/alteração de dados dos compensadores síncronos:
+## Synchronous Condenser Data Form
+The image below shows the insertion/editing form for synchronous condenser data:
 
-<div><center><img src={useBaseUrl("images/syncMotorForm.png")} alt="Formulário dos compensadores síncronos no PSP-UFU" title="Formulário dos compensadores síncronos no PSP-UFU" /></center></div>
-
+<div><center><img src={useBaseUrl("images/syncMotorForm.png")} alt="Synchronous condenser form in PSP-UFU" title="Synchronous condenser form in PSP-UFU" /></center></div>
 
 <Tabs
   groupId="syncMotor-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Falta', value: 'fault'},
+    {label: 'General', value: 'general'},
+    {label: 'Fault', value: 'fault'},
   ]
 }>
 <TabItem value="general">
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Identification of the electrical element. Any number of characters can be entered in the [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-Todos os componentes de potência do PSP-UFU possuem esse campo.
+All PSP-UFU power components have this field.
 
-#### Potência nominal
-Potência nominal do compensador, inserida em MVA, kVA ou VA.
+#### Rated power
+Rated power of the condenser, entered in MVA, kVA, or VA.
 
-Esse campo é especialmente importante caso a opção "Utilizar a potência nominal como base" esteja marcada.
+This field is especially important if the "Use nominal power as base" option is checked.
 
-#### Potências ativa e reativa
-Potências ativa (inserida em W, kW, MW ou p.u.) e reativa (inserida em var, kvar, Mvar ou p.u.) do compensador.
+#### Active and reactive power
+Active power (entered in W, kW, MW, or p.u.) and reactive power (entered in var, kvar, Mvar, or p.u.) of the condenser.
 
-Caso a barra conectada seja PV o valor de potência reativa será ignorado e caso seja de referência ambos os valores inseridos serão desprezados.
+If the connected bus is PV, the reactive power value is ignored; if it is a reference bus, both entered values are ignored.
 
-:::caution Atenção!
-Caso mais de um compensador esteja conectado na mesma barra, os valores de potência reativa (nas barras de referência e PV) e ativa (nas barras de referência) são igualmente distribuídas, respeitando os limites individuais de potência reativa.
+:::caution Attention!
+If more than one condenser is connected to the same bus, the reactive power values (in reference and PV buses) and active power values (in reference buses) are equally distributed, respecting the individual reactive power limits.
 :::
 
-#### Potências reativas máxima e mínima
-Limites de potência reativa máxima e mínima do compensador para controle de tensão em barras PV. Caso esses valores sejam ultrapassados, o reativo gerado pela unidade será limitado ao valor inserido e a barra conectada será transformada em PQ, não controlando a tensão estabelecida.
+#### Maximum and minimum reactive power
+Maximum and minimum reactive power limits of the condenser for voltage control on PV buses. If these values are exceeded, the reactive power generated by the unit will be limited to the entered value, and the connected bus will be converted to PQ, no longer controlling the set voltage.
 
-#### Utilizar potência nominal como base
-Caso essa opção seja marcada, o programa irá utilizar a potência nominal do compensador como base para a conversão das unidades, inclusive aqueles no formulário de estabilidade, caso contrário será usada a [potência base do sistema](simulationConfig).
+#### Use nominal power as base
+If this option is checked, the program will use the condenser's nominal power as the base for unit conversion, including those in the stability form; otherwise, the [system base power](simulationConfig) is used.
 
 </TabItem>
 <TabItem value="fault">
 
-#### Impedâncias de sequência
-Valores de resistência e reatância para cálculo das correntes de falta. São inseridos dados de sequência positiva, negativa e zero.
+#### Sequence impedances
+Resistance and reactance values for fault current calculations. Positive, negative, and zero sequence data are entered.
 
-#### Impedância de aterramento
-Valores utilizados para o cálculo das correntes de falta do tipo fase-terra e fase-fase-terra. Caso o neutro do gerador não seja aterrado, o valor inserido nesse campo é ignorado.
+#### Grounding impedance
+Values used for phase-to-ground and double-phase-to-ground fault calculations. If the generator neutral is not grounded, the value entered in this field is ignored.
 
-#### Neutro aterrado
-Indica se o neutro do gerador é aterrado.
+#### Neutral grounded
+Indicates whether the generator neutral is grounded.
 
 </TabItem>
 </Tabs>

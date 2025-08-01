@@ -1,7 +1,7 @@
 ---
 id: syncGenerator
-title: Gerador Síncrono
-sidebar_label: Gerador Síncrono
+title: Synchronous Generator
+sidebar_label: Synchronous Generator
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,69 +10,69 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-> Uma máquina de corrente alternada na qual a frequência das tensões geradas e a velocidade da máquina estão em uma proporção constante. [*tradução livre* - IEC 60050](
+> An alternating current machine in which the frequency of the generated voltages and the speed of the machine are in a constant ratio. [IEC 60050](
 http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=411-31-08).
 
-## Gerador Síncrono no PSP-UFU
-Os geradores síncronos são a fonte de potência para o cálculo do fluxo de carga e estabilidade, além de serem um dos principais contribuintes para as correntes de falta.
+## Synchronous Generator in PSP-UFU
+Synchronous generators are the power source for load flow and stability calculations, and they are also one of the main contributors to fault currents.
 
-:::caution Atenção!
-Somente barramentos que possuem esse elemento conectado podem ser considerados [barras de referência](powerFlow). [Barras do tipo PV](powerFlow) devem conter um gerador síncrono ou um [motor síncrono (compensador síncrono)](syncMotor).
+:::caution Attention!
+Only buses that have this element connected can be considered [reference buses](powerFlow). [PV buses](powerFlow) must contain either a synchronous generator or a [synchronous motor (synchronous condenser)](syncMotor).
 :::
 
-O formulário de dados é dividido em dois, sendo o primeiro responsável pelos dados gerais, de [fluxo de carga](powerFlow) e de [falta](fault) e um segundo pelos dados de [estabilidade](stability) . Esse último também permite o acesso aos controles das máquinas síncronas manipulados pelo editor de controle.
+The data form is divided into two sections: the first for general, [load flow](powerFlow), and [fault](fault) data, and the second for [stability](stability) data. The latter also allows access to synchronous machine controls handled by the control editor.
 
-:::info Informação
-Os dados referentes às **impedâncias de sequência positiva do gerador síncrono** inseridas no [contexto (aba) "Falta"](syncGenerator#impedâncias-de-sequência) são utilizados **tanto para os estudos de [curto-circuito](fault) quanto para os estudos de [harmônicos](harmonics)**.
+:::info Information
+The data regarding the **positive sequence impedances of the synchronous generator** entered in the [“Fault” tab](syncGenerator#sequence-impedances) are used **both for [short-circuit](fault) studies and for [harmonic](harmonics) studies**.
 
-Esses dados são ignorados nos estudos de [fluxo de carga](powerFlow) (*não são utilizado nesse estudo*) e [estabilidade](stability) (*são utilizados dados inseridos em formulário específico*).
+These data are ignored in [load flow](powerFlow) studies (*not used in this study*) and in [stability](stability) studies (*data entered in a specific stability form are used*).
 :::
 
-### Gerador Síncrono no fluxo de carga
-O gerador síncrono é a fonte de potência do PSP-UFU no estudo de fluxo de carga. Seu comportamento difere de acordo com o tipo de barra conectada:
-- [Barra de referência](powerFlow): Os dados de potência ativa e reativa inseridos são desprezados, uma vez que esse elemento será utilizado para completar o balanço de potência do estudo de fluxo d carga;
-- [Barra PV](powerFlow): O dado de potência ativa é considerado, porém o dados de potência reativa são desprezados. O valor da potência reativa é utilizado para manter o módulo da tensão constante no barramento conectado;
-- [Barra PQ](powerFlow): Para os geradores conectados a essa barra tanto a potência ativa quanto reativa inseridas são consideradas.
+### Synchronous Generator in load flow
+The synchronous generator is the power source in PSP-UFU’s load flow study. Its behavior differs depending on the type of bus connected:
+- [Reference bus](powerFlow): The entered active and reactive power data are ignored, as this element will be used to complete the power balance in the load flow study;
+- [PV bus](powerFlow): The active power data is considered, but the reactive power data is ignored. The reactive power value is used to keep the voltage magnitude constant at the connected bus;
+- [PQ bus](powerFlow): For generators connected to this bus, both the entered active and reactive power values are considered.
 
-:::caution Atenção
-Caso o limite de potência reativa seja excedido, o programa automaticamente transforma a [Barra PV](powerFlow) conectada em uma [Barra PQ](powerFlow), utilizando o valor limite de potência reativa que seria ultrapassado.
-::: 
+:::caution Attention
+If the reactive power limit is exceeded, the program automatically converts the connected [PV bus](powerFlow) into a [PQ bus](powerFlow), using the reactive power limit value that would have been exceeded.
+:::
 
-### Gerador Síncrono no estudo de curto-circuito
-Enquanto os geradores no estudo de fluxo de carga são modelados somente por correntes injetadas nas barras, para o curto-circuito utiliza-se uma tensão atrás de uma impedância. A figura abaixo mostra o caminho da corrente e o circuito equivalente de cada sequência nos geradores.
+### Synchronous Generator in short-circuit study
+While generators in the load flow study are modeled only by currents injected into the buses, for short-circuit analysis a voltage behind an impedance is used. The figure below shows the current path and equivalent circuit of each sequence in the generators.
 
-<div><center><img src={useBaseUrl("images/sycGeneratorSeq.svg")} alt="Caminho das correntes e circuito equivalente: (a) sequência positiva; (b) sequência negativa; (c) sequência zero" title="Caminho das correntes e circuito equivalente: (a) sequência positiva; (b) sequência negativa; (c) sequência zero" /></center></div>
+<div><center><img src={useBaseUrl("images/sycGeneratorSeq.svg")} alt="Current paths and equivalent circuit: (a) positive sequence; (b) negative sequence; (c) zero sequence" title="Current paths and equivalent circuit: (a) positive sequence; (b) negative sequence; (c) zero sequence" /></center></div>
 
-As tensões geradas são somente de sequência positiva, uma vez que o gerador fornece sempre tensões trifásicas equilibradas. Portanto a rede de sequência positiva é composta de uma tensão pré-falta atrás de uma impedância de sequência positiva. As redes de sequência negativa e zero não contêm forças eletromotrizes, porém incluem as impedâncias do gerador de sequência negativa e zero.
+The generated voltages are only positive sequence, since the generator always supplies balanced three-phase voltages. Therefore, the positive sequence network consists of a pre-fault voltage behind a positive sequence impedance. The negative and zero sequence networks contain no electromotive forces but include the generator’s negative and zero sequence impedances.
 
-A corrente que circula na impedância $\overline{z}_n$ entre o neutro e a terra é $3\dot{I}_{a0}$. Pela figura acima (c), observa-se que a queda de tensão de sequência zero do ponto a para terra ($\dot{V}_{a0}$) é:
+The current flowing through the impedance $\overline{z}_n$ between neutral and ground is $3\dot{I}_{a0}$. From figure (c) above, it can be seen that the zero sequence voltage drop from point a to ground ($\dot{V}_{a0}$) is:
 
 $$
 \dot{V}_{a0} = -3\dot{I}_{a0}\overline{z}_n - \dot{I}_{a0}\overline{z}_{g0}
 $$
 
-A rede de sequência zero, que é um circuito monofásico pelo qual se supõe que circule apenas corrente de sequência zero e deve, portanto, ter uma impedância definida pela seguinte equação:
+The zero sequence network, which is a single-phase circuit assumed to carry only zero sequence current, must therefore have an impedance defined by the following equation:
 
 $$
 \overline{z}_{0} = 3\overline{z}_n + \overline{z}_{g0}
 $$
 
-:::tip Dica
-Caso o gerador não seja aterrado, não circulará corrente de sequência zero por ele. Nesse caso, dependendo da conexão do transformador próximo ao gerador sem aterramento, a seguinte mensagem de erro pode ser exibida:
+:::tip Tip
+If the generator is not grounded, no zero sequence current will flow through it. In this case, depending on the transformer connection near the ungrounded generator, the following error message may be displayed:
 
-<p><center>"<i>Falha ao inverter a matriz admitância de sequência zero</i>"</center></p>
+<p><center>"<i>Failed to invert zero sequence admittance matrix</i>"</center></p>
 
-Isso ocorre porque a matriz admitância de sequência zero é singular. Para contornar esse problema escolha **uma** das duas soluções abaixo:
-1. Marque a opção "Neutro aterrado" e insira um alto valor de reatância de aterramento ($j9999~p.u.$, por exemplo);
-2. **Ou**, na barra do gerador, insira um [reator](inductor) de baixo valor de potência reativa ($1,0~var$, por exemplo).
+This happens because the zero sequence admittance matrix is singular. To work around this issue, choose **one** of the two solutions below:
+1. Check the "Neutral grounded" option and enter a high grounding reactance value ($j9999~p.u.$, for example);
+2. **Or**, at the generator bus, insert a [reactor](inductor) with a low reactive power value ($1.0~var$, for example).
 :::
 
-### Gerador Síncrono no estudo de estabilidade
-A relação de valores observados em testes adequados (definidos na [IEEE Std. 115-2019](https://doi.org/10.1109/IEEESTD.2020.9050934)), denominados parâmetros padrões, são utilizados para modelar a máquina síncrona no estudo de estabilidade do PSP-UFU.
+### Synchronous Generator in stability study
+The relationship of values observed in proper tests (defined in [IEEE Std. 115-2019](https://doi.org/10.1109/IEEESTD.2020.9050934)), called standard parameters, are used to model the synchronous machine in PSP-UFU’s stability study.
 
-Os parâmetros da máquina síncrona que influenciam rapidamente no decaimento de valores são chamados **subtransitórios** (indicados por $''$), aqueles que influenciam mais lentamente são chamados **transitórios** (indicados por $'$) e, finalmente, aqueles que influenciam continuamente são chamados de parâmetros **síncronos** (sem indicação de sobrescrito).
+Parameters of the synchronous machine that influence quickly the decay of values are called **subtransient** (denoted by $''$), those that influence more slowly are called **transient** (denoted by $'$), and those that influence continuously are called **synchronous** parameters (without superscript).
 
-Um conjunto de equações algébrico-diferenciais determinam o comportamento da máquina síncrona no estudo de estabilidade:
+A set of algebraic-differential equations determines the synchronous machine’s behavior in the stability study:
 
 $$
 E_{q}' - V_q = r_aI_q - x_{ds}'Id\\
@@ -90,213 +90,213 @@ E_{d}'' - V_d = r_aI_d - x_{qs}''Iq\\
 \frac{d\delta}{dt} = \Omega_b\left( \omega - \omega_r \right)
 $$
 
-As duas últimas equações diferenciais são as equações mecânicas da máquina; e as demais são equações elétricas (consulte essa [tese](https://dx.doi.org/10.14393/ufu.te.2019.2444) para maiores detalhes acerca dos parâmetros dessas equações).
+The last two differential equations are the mechanical equations of the machine; the others are electrical equations (see this [thesis](https://dx.doi.org/10.14393/ufu.te.2019.2444) for more details on these parameters).
 
-Utilizando as equações transitórias e subtransitórias podem-se definir cinco modelos de distintas complexidades.
+Using the transient and subtransient equations, five models of varying complexity can be defined.
 
-:::caution Atenção!
-O modelo da máquina síncrona é **selecionado automaticamente** de acordo com os dados fornecidos ao programa.
+:::caution Attention!
+The synchronous machine model is **automatically selected** based on the data provided to the program.
 :::
 
-Na sequência são apresentados tais modelos, incluídos os efeitos da saturação magnética, em conjunto com seus diagramas de blocos:
+The following models are presented below, including magnetic saturation effects, along with their block diagrams:
 
-- **Modelo 1**: Corresponde a uma tensão constante atrás de uma reatância transitória de eixo direto ($x_{d}'$), não exigindo equações diferenciais;
-- **Modelo 2**: São representados os efeitos transitórios de eixo direto, sendo necessária a solução de uma equação diferencial ($\frac{dE_{q}'}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
+- **Model 1**: Corresponds to a constant voltage behind a direct-axis transient reactance ($x_{d}'$), requiring no differential equations;
+- **Model 2**: Represents direct-axis transient effects, requiring one differential equation ($\frac{dE_{q}'}{dt}$), block diagram shown below:
 
-<div><center><img src={useBaseUrl("images/model2SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 2 das máquinas síncronas" title="Diagrama de blocos do Modelo 2 das máquinas síncronas" /></center></div>
+<div><center><img src={useBaseUrl("images/model2SyncGenerator.svg")} alt="Block diagram of Synchronous Machine Model 2" title="Block diagram of Synchronous Machine Model 2" /></center></div>
 
-- **Modelo 3**: São representados os efeitos transitórios de eixo direto e em quadratura, exigindo duas equações diferenciais ($\frac{dE_{q}'}{dt}$ e $\frac{dE_{d}'}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
+- **Model 3**: Represents direct and quadrature-axis transient effects, requiring two differential equations ($\frac{dE_{q}'}{dt}$ and $\frac{dE_{d}'}{dt}$), block diagram shown below:
 
-<div><center><img src={useBaseUrl("images/model3SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 3 das máquinas síncronas" title="Diagrama de blocos do Modelo 3 das máquinas síncronas" /></center></div>
+<div><center><img src={useBaseUrl("images/model3SyncGenerator.svg")} alt="Block diagram of Synchronous Machine Model 3" title="Block diagram of Synchronous Machine Model 3" /></center></div>
 
-- **Modelo 4**: São representados os efeitos subtransitórios de eixo direto e em quadratura, sendo necessária a solução de três equações diferenciais ($\frac{dE_{q}'}{dt}$, $\frac{dE_{q}''}{dt}$ e $\frac{dE_{d}''}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
+- **Model 4**: Represents direct and quadrature-axis subtransient effects, requiring three differential equations ($\frac{dE_{q}'}{dt}$, $\frac{dE_{q}''}{dt}$, and $\frac{dE_{d}''}{dt}$), block diagram shown below:
 
-<div><center><img src={useBaseUrl("images/model4SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 4 das máquinas síncronas" title="Diagrama de blocos do Modelo 4 das máquinas síncronas" /></center></div>
+<div><center><img src={useBaseUrl("images/model4SyncGenerator.svg")} alt="Block diagram of Synchronous Machine Model 4" title="Block diagram of Synchronous Machine Model 4" /></center></div>
 
-- **Modelo 5**: São representados os efeitos subtransitórios de eixo direto e em quadratura, sendo necessária a solução de quatro equações diferenciais ($\frac{dE_{q}'}{dt}$, $\frac{dE_{d}'}{dt}$, $\frac{dE_{q}''}{dt}$ e $\frac{dE_{d}''}{dt}$), cujo diagrama de blocos é apresentado na figura abaixo:
+- **Model 5**: Represents direct and quadrature-axis subtransient effects, requiring four differential equations ($\frac{dE_{q}'}{dt}$, $\frac{dE_{d}'}{dt}$, $\frac{dE_{q}''}{dt}$, and $\frac{dE_{d}''}{dt}$), block diagram shown below:
 
-<div><center><img src={useBaseUrl("images/model5SyncGenerator.svg")} alt="Diagrama de blocos do Modelo 4 das máquinas síncronas" title="Diagrama de blocos do Modelo 4 das máquinas síncronas" /></center></div>
+<div><center><img src={useBaseUrl("images/model5SyncGenerator.svg")} alt="Block diagram of Synchronous Machine Model 5" title="Block diagram of Synchronous Machine Model 5" /></center></div>
 
-:::info Informação
-Em todos os modelos as equações diferenciais mecânicas são solucionadas.
+:::info Information
+In all models, the mechanical differential equations are solved.
 :::
 
-#### Saturação
-Para representar matematicamente o efeito da saturação nas equações das máquinas síncronas são introduzidos “fatores de saturação” que modificam as impedâncias do circuito equivalente, os quais dependem de uma reatância de dispersão efetiva, chamada de reatância de Potier ($x_p$).
+#### Saturation
+To mathematically represent the effect of saturation in synchronous machine equations, “saturation factors” are introduced that modify the impedances of the equivalent circuit, depending on an effective leakage reactance called Potier reactance ($x_p$).
 
-Tal reatância pode ser obtida por meio de ensaios (utilizando curvas de saturação de circuito aberto e carga de fator de potência zero) ou estimadas de forma aproximada por outros parâmetros da máquina. A reatância de dispersão ($x_l$), aqui substituída de forma aproximada por $x_p$, representa a parcela da reatância da máquina originados do fluxo magnético que percorrem o ar na maioria de seu caminho e, portanto, é independente da saturação.
+This reactance can be obtained through tests (using open-circuit and zero power factor load saturation curves) or approximately estimated from other machine parameters. The leakage reactance ($x_l$), here approximated by $x_p$, represents the portion of the machine reactance originating from magnetic flux traveling mostly through air, and therefore independent of saturation.
 
-O método implementado no programa permite reproduzir a saturação em ambos os eixos (direto e em quadratura), diferindo entre si devido à divergência no tamanho do entreferro. É assumido que a soma vetorial das duas componentes do fluxo magnético saturado está em fase com a f.m.m. e proporcional à Tensão de Potier ($E_p$, a qual é a tensão atrás da reatância de Potier).
+The implemented method reproduces saturation in both axes (direct and quadrature), which differ due to air gap size differences. It is assumed that the vector sum of the two saturated flux components is in phase with the m.m.f. and proportional to the Potier Voltage ($E_p$, i.e., voltage behind Potier reactance).
 
-Para isso, são utilizados internamente dois fatores de saturação, sendo um no eixo direto ($s_d$) e outro no eixo em quadratura ($s_q$). Esses fatores de saturação são **automaticamente calculados** a cada passo de integração e dependem da curva de saturação da máquina definida pelo [fator de saturação inserido no formulário de edição de dados](syncGenerator#fator-de-saturação).
+Thus, two saturation factors are used internally: one in the direct axis ($s_d$) and another in the quadrature axis ($s_q$). These saturation factors are **automatically calculated** at each integration step and depend on the machine’s saturation curve defined by the [saturation factor entered in the data form](syncGenerator#saturation-factor).
 
-Portanto as reatâncias saturadas, que devem ser inseridas nas equações algébricas da máquina, são definidas pelas seguintes equações:
+Therefore, the saturated reactances, to be entered into the machine’s algebraic equations, are defined by the following equations:
 $$
 x_{ds}=\frac{x_d-x_p}{s_d +x_p}\\
 x_{qs}=\frac{x_q-x_p}{s_q +x_p}
 $$
 
-Essas equações também são utilizadas para as reatâncias transitórias e subtransitórias, visto que o valor da reatância de Potier (ou de dispersão) não é alterada.
+These equations are also used for transient and subtransient reactances, since the Potier (or leakage) reactance value is not altered.
 
-#### Barramento infinito
-Algumas referências incluem um modelo sem equações diferenciais, em que a máquina é somente representada por uma tensão constante atrás de uma reatância transitória de eixo direto. Tal é utilizado na representação de um **barramento infinito**, o qual é normalmente constituído de um subsistema muito maior àquele simulado.
+#### Infinite bus
+Some references include a model without differential equations, where the machine is represented only by a constant voltage behind a direct-axis transient reactance. This is used to represent an **infinite bus**, which is usually a subsystem much larger than the one being simulated.
 
-No PSP-UFU a **representação de um barramento infinito** pode ser obtido por meio da utilização de uma máquina representada pelo Modelo 1 cujo valor da constante de inércia (H) é infinito ou muito grande ($9999~s$, por exemplo) em relação às demais máquinas do sistema, e o valor de $x_{d}'$ deve ser um valor muito pequeno ($10^{-3}~p.u.$, por exemplo).
+In PSP-UFU, an **infinite bus** can be represented by a machine modeled as Model 1 whose inertia constant (H) is infinite or much larger ($9999~s$, for example) compared to the rest of the system, and the value of $x_{d}'$ is very small ($10^{-3}~p.u.$, for example).
 
-#### Centro de inércia
-Normalmente utiliza-se a velocidade de referência como sendo a síncrona e portanto, nesse caso, $\omega_r = \omega_b = 1,0~p.u.$ Essa abordagem, adotada por vários livros de estabilidade, considera como referência uma máquina fictícia girando sempre na velocidade síncrona independente das perturbações aplicadas no sistema. No PSP-UFU foi implementado o conceito de centro de inércia (COI, do inglês, *Center of Inertia*), que constitui uma soma ponderada das velocidades das máquinas presentes no sistema:
+#### Center of inertia
+The reference speed is usually taken as synchronous, so in this case $\omega_r = \omega_b = 1.0~p.u.$ This approach, adopted by many stability textbooks, considers as reference a fictitious machine always running at synchronous speed regardless of disturbances applied to the system. In PSP-UFU, the concept of Center of Inertia (COI) is implemented, which is a weighted sum of the speeds of the machines present in the system:
 
 $$
 \omega_r=\frac{\left( \sum_{i=1}^{n} H_i \omega_i \right)}{\left( \sum_{i=1}^{n} H_i \right)}
 $$
-Em que:
-$n$	é o número de máquinas síncronas **conectadas** no sistema.
+Where:
+$n$ is the number of **connected** synchronous machines in the system.
 
-A aplicação do COI resulta em dados de saída, como o ângulo do rotor, mais fáceis de serem analisados. Na implementação realizada no programa a utilização ou não desse recurso é opcional e pode ser [definida pelo usuário](simulationConfig).
+Applying the COI results in output data, such as rotor angle, that are easier to analyze. In the program’s implementation, the use of this feature is optional and can be [set by the user](simulationConfig).
 
-## Formulário de edição dos geradores síncronos
-A imagem abaixo apresenta o formulário de inserção/alteração de dados dos geradores síncronos:
+## Synchronous generator data form
+The image below shows the insertion/editing form for synchronous generator data:
 
-<div><center><img src={useBaseUrl("images/syncGeneratorForm.png")} alt="Formulário dos geradores síncronos no PSP-UFU" title="Formulário dos geradores síncronos no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/syncGeneratorForm.png")} alt="Synchronous generator form in PSP-UFU" title="Synchronous generator form in PSP-UFU" /></center></div>
 
-Um segundo pelos dados de estabilidade, como mostra a figura abaixo, acessado ao clicar no botão "Estabilidade" do formulário principal. Nele é possível também acessar aos controles das máquinas síncronas manipulados pelo [editor de controle](controlEditor).
+The second section contains stability data, as shown below, accessed by clicking the "Stability" button in the main form. Here you can also access synchronous machine controls managed by the [control editor](controlEditor).
 
-<div><center><img src={useBaseUrl("images/syncGeneratorStabForm.png")} alt="Formulário de estabilidade dos geradores síncronos no PSP-UFU" title="Formulário de estabilidade dos geradores síncronos no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/syncGeneratorStabForm.png")} alt="Synchronous generator stability form in PSP-UFU" title="Synchronous generator stability form in PSP-UFU" /></center></div>
 
-No formulário de estabilidade pode ser observado o botão "Chaveamento" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do gerador durante o estudo de [estabilidade](stability).
+In the stability form, the "Switching" button can be seen in the lower left corner. This form, common to several other elements, allows inserting and/or removing the generator during the [stability](stability) study.
 
-<div><center><img src={useBaseUrl("images/syncGeneratorSw.png")} alt="Formulário de chaveamento do gerador síncrono" title="Formulário de chaveamento do gerador síncrono" /></center></div>
+<div><center><img src={useBaseUrl("images/syncGeneratorSw.png")} alt="Synchronous generator switching form" title="Synchronous generator switching form" /></center></div>
 
 <Tabs
   groupId="syncGenerator-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Falta', value: 'fault'},
-    {label: 'Botão Estabilidade', value: 'stability'},
-    {label: 'Botão Chaveamento', value: 'switching'},
+    {label: 'General', value: 'general'},
+    {label: 'Fault', value: 'fault'},
+    {label: 'Stability Button', value: 'stability'},
+    {label: 'Switching Button', value: 'switching'},
   ]
 }>
 <TabItem value="general">
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Identification of the electrical element. Any number of characters can be entered in the [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-Todos os componentes de potência do PSP-UFU possuem esse campo.
+All PSP-UFU power components have this field.
 
-#### Potência nominal
-Potência nominal do gerador, inserida em MVA, kVA ou VA.
+#### Rated power
+Rated power of the generator, entered in MVA, kVA, or VA.
 
-Esse campo é especialmente importante caso a opção "Utilizar a potência nominal como base" esteja marcada.
+This field is especially important if the "Use nominal power as base" option is checked.
 
-#### Potências ativa e reativa
-Potências ativa (inserida em W, kW, MW ou p.u.) e reativa (inserida em var, kvar, Mvar ou p.u.) do gerador.
+#### Active and reactive power
+Active (entered in W, kW, MW, or p.u.) and reactive (entered in var, kvar, Mvar, or p.u.) power of the generator.
 
-Caso a barra conectada seja PV o valor de potência reativa será ignorado e caso seja de referência ambos os valores inseridos serão desprezados.
+If the connected bus is PV, the reactive power value is ignored; if it is a reference bus, both values are ignored.
 
-:::caution Atenção!
-Caso mais de um gerador esteja conectado na mesma barra, os valores de potência reativa (nas barras de referência e PV) e ativa (nas barras de referência) são igualmente distribuídas, respeitando os limites individuais de potência reativa.
+:::caution Attention!
+If more than one generator is connected to the same bus, the reactive power (in reference and PV buses) and active power (in reference buses) values are equally distributed, respecting the individual reactive power limits.
 :::
 
-#### Potências reativas máxima e mínima
-Limites de potência reativa máxima e mínima do gerador para controle de tensão em barras PV. Caso esses valores sejam ultrapassados, o reativo gerado pela unidade será limitado ao valor inserido e a barra conectada será transformada em PQ, não controlando a tensão estabelecida.
+#### Maximum and minimum reactive power
+Maximum and minimum reactive power limits of the generator for voltage control on PV buses. If these values are exceeded, the unit’s reactive power will be limited to the entered value and the connected bus will be converted to PQ, no longer controlling the set voltage.
 
-#### Utilizar potência nominal como base
-Caso essa opção seja marcada, o programa irá utilizar a potência nominal do gerador como base para a conversão das unidades, inclusive aqueles no formulário de estabilidade, caso contrário será usada a [potência base do sistema](simulationConfig).
+#### Use nominal power as base
+If this option is checked, the program will use the generator’s nominal power as the base for unit conversion, including those in the stability form; otherwise, the [system base power](simulationConfig) is used.
 
 </TabItem>
 <TabItem value="fault">
 
-#### Impedâncias de sequência
-Valores de resistência e reatância para cálculo das correntes de falta. São inseridos dados de sequência positiva, negativa e zero.
+#### Sequence impedances
+Resistance and reactance values for fault current calculations. Positive, negative, and zero sequence data are entered.
 
-#### Impedância de aterramento
-Valores utilizados para o cálculo das correntes de falta do tipo fase-terra e fase-fase-terra. Caso o neutro do gerador não seja aterrado, o valor inserido nesse campo é ignorado.
+#### Grounding impedance
+Values used for phase-to-ground and double-phase-to-ground fault calculations. If the generator neutral is not grounded, the value entered in this field is ignored.
 
-#### Neutro aterrado
-Indica se o neutro do gerador é aterrado.
+#### Neutral grounded
+Indicates whether the generator neutral is grounded.
 
 </TabItem>
 <TabItem value="stability">
 
-#### Imprimir dados da máquina síncrona
-Exibe os dados do gerador síncrono nos gráficos no tempo. Os seguintes dados são exibidos:
-- tensão terminal
-- potências ativa e reativas
-- potência mecânica
-- frequência
-- tensão de campo
-- ângulo $\delta$.
+#### Print synchronous machine data
+Displays synchronous generator data in time-domain plots. The following data are displayed:
+- terminal voltage
+- active and reactive powers
+- mechanical power
+- frequency
+- field voltage
+- angle $\delta$.
 
-#### Utilizar AVR e regulador de velocidade
-Esses campos acionam ou inibem os controles da máquina síncrona, assim como modelos de turbina e excitatrizes.
+#### Use AVR and speed governor
+These fields enable or disable the synchronous machine controls, such as turbine and exciter models.
 
-Caso selecionadas os controles podem ser inseridos e modificados pelos botões “Editar AVR” e “Editar regulador de velocidade”, os quais acessam o [editor de controle do PSP-UFU](controlEditor).
+If selected, the controls can be inserted and modified via the “Edit AVR” and “Edit speed governor” buttons, which access the [PSP-UFU control editor](controlEditor).
 
-#### Resistência de armadura
-Resistência de armadura da máquina síncrona, em $p.u.$
+#### Armature resistance
+Synchronous machine armature resistance, in $p.u.$
 
-#### Reatância de Potier
-Reatância de Potier para cálculo da saturação da máquina, em $p.u.$
+#### Potier reactance
+Potier reactance for saturation calculation, in $p.u.$
 
-#### Fator de saturação
-Valor utilizado no cálculo da curva de saturação.
+#### Saturation factor
+Value used in the calculation of the saturation curve.
 
-Representa o valor (em $p.u.$) de corrente de campo necessária para atingir 1,2 p.u. de tensão terminal.
+Represents the field current value (in $p.u.$) required to reach 1.2 p.u. terminal voltage.
 
-:::caution Atenção!
-Esse valor deve ser **maior que 1,2**, ou irá gerar erros na simulação. Caso não seja informado, a saturação da máquina não é considerada nos cálculos.
+:::caution Attention!
+This value must be **greater than 1.2**, or it will cause simulation errors. If not specified, the machine saturation is not considered in calculations.
 :::
 
-#### Frequência de circuito aberto
-Indica a velocidade da máquina no caso de início da simulação desconectada da rede.
+#### Open-circuit frequency
+Indicates the machine speed when starting the simulation disconnected from the grid.
 
-:::info Informação
-Essa informação é particularmente útil na análise de conexão de geradores dessincronizados na rede.
+:::info Information
+This information is particularly useful for analyzing the connection of out-of-step generators to the grid.
 :::
 
-#### Reatâncias síncronas
-Valores de reatância síncrona (regime permanente) da máquina. Os valores de eixo direto e em quadratura devem ser iguais ou muito próximos para representação de uma máquina de polos lisos, enquanto para polos salientes esses valores são distintos.
+#### Synchronous reactances
+Steady-state synchronous reactance values of the machine. Direct and quadrature-axis values should be equal or very close for cylindrical-rotor machines, while salient-pole machines have distinct values.
 
-#### Reatâncias e constantes de tempo transitórias
-Parâmetros transitórios da máquina síncrona em $p.u.$ ou segundos.
+#### Transient reactances and time constants
+Transient parameters of the synchronous machine in $p.u.$ or seconds.
 
-:::warning Cuidado!
-O valor da reatância transitória de eixo direto deve ser diferente de zero ou levará o programa a erro.
+:::warning Warning!
+The direct-axis transient reactance value must be nonzero, or the program will produce an error.
 :::
 
-De acordo com a quantidade de parâmetros inseridos é definido internamente pelo programa qual o modelo a ser utilizado.
+The number of entered parameters determines the model used internally by the program.
 
-#### Reatâncias e constantes de tempo subtransitórias
-Parâmetros subtransitórios da máquina síncrona em $p.u.$ ou segundos, representando em detalhes a presença de enrolamentos amortecedores. Assim como os dados transitórios, esses parâmetros definem o modelo da máquina.
+#### Subtransient reactances and time constants
+Subtransient parameters of the synchronous machine in $p.u.$ or seconds, detailing the presence of damper windings. Like transient data, these parameters define the machine model.
 
 </TabItem>
 <TabItem value="switching">
 
-O botão "Chaveamento" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do gerador durante o estudo de [estabilidade](stability).
+The "Switching" button opens a form, common to several other elements, that allows inserting and/or removing the generator during the [stability](stability) study.
 
-Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+In this form, a generic list of line insertions and removals over time can be created, customized by switching property contexts where the switching type (insertion or removal) and the event time (in seconds) are edited. These properties are added and removed from the generic list via the "Add" and "Remove" buttons, respectively.
 
 </TabItem>
 </Tabs>
 
-## Acesso aos controles da máquina síncrona
-Como já [mencionado anteriormente](syncGenerator#utilizar-avr-e-regulador-de-velocidade), os reguladores de velocidade e tensão da máquina síncrona podem ser acionados ou inibidos por meio das caixas de seleção "[Utilizar AVR e regulador de velocidade](syncGenerator#utilizar-avr-e-regulador-de-velocidade)". Ambas as opções irão acessar o [editor de controles](controlEditor).
+## Access to synchronous machine controls
+As [mentioned earlier](syncGenerator#use-avr-and-speed-governor), the synchronous machine’s voltage and speed regulators can be enabled or disabled via the "[Use AVR and speed governor](syncGenerator#use-avr-and-speed-governor)" checkboxes. Both options will access the [control editor](controlEditor).
 
-O acesso aos controles do **AVR** poderão então ser criados e manipulados ao clicar no botão "Editar AVR", assim como o **Regulador de Velocidade** é acessado no botão "Editar regulador de velocidade".
+Access to **AVR** controls can then be created and manipulated by clicking the "Edit AVR" button, and the **Speed Governor** is accessed via the "Edit speed governor" button.
 
-:::caution Atenção!
-No PSP-UFU a opção de editar o **AVR** engloba mais que somente o controle de tensão da máquina. Nele **deve** ser inserida a malha de controle da máquina assim como a **excitatriz da máquina síncrona**. Outras estratégias de controle (opcionais), como PSS (*Power System Stabilizer*) e/ou controles de sobre e sub excitação, são também implementadas em conjunto.
+:::caution Attention!
+In PSP-UFU, the option to edit the **AVR** covers more than just the machine’s voltage control. It **must** include the synchronous machine’s control loop as well as the **synchronous machine exciter**. Optional control strategies, such as PSS (*Power System Stabilizer*) and/or over- and under-excitation controls, are also implemented together.
 :::
 
-:::caution Atenção!
-Assim como no AVR, o **Regulador de Velocidade** engloba mais que a regulação primária da máquina. Nessa opção **deve** ser inserida ao menos a malha de controle da regulação primária de velocidade, assim como o **modelo da turbina**. Estratégias opcionais de controle da velocidade também são inseridas nessa opção.
+:::caution Attention!
+As with the AVR, the **Speed Governor** covers more than just primary speed regulation. This option **must** include at least the primary speed control loop as well as the **turbine model**. Optional speed control strategies are also inserted here.
 :::
 
-## Referências
+## References
 1. MILANO, F. Power System Modelling and Scripting. London: Springer, 2010. doi: https://doi.org/10.1007/978-3-642-13669-6
 2. ARRILLAGA, J.; WATSON, N. R. Computer Modelling of Electrical Power Systems. Wiley & Sons, New York, 2001. doi: https://doi.org/10.1002/9781118878286
 3. KUNDUR, P. Power System Stability and Control. McGraw-Hill, New York, 1994.
-4. DOMMEL, H. W.; SATO, N. Fast Transient Stability Solutions. IEEE Transactions on Power Aparatus and Systems, v. PAS-91, n. 4, jul 1972, p. 1643-1650. doi: https://doi.org/10.1109/TPAS.1972.293341
-5. IEEE Std 1110-2002 IEEE Guide for Synchronous Generator Modeling Practices and Applications in Power System Stability Analyses. IEEE, New York, nov. 2003. doi: https://doi.org/10.1109/IEEESTD.2003.94408
+4. DOMMEL, H. W.; SATO, N. Fast Transient Stability Solutions. IEEE Transactions on Power Apparatus and Systems, v. PAS-91, n. 4, Jul 1972, p. 1643-1650. doi: https://doi.org/10.1109/TPAS.1972.293341
+5. IEEE Std 1110-2002 IEEE Guide for Synchronous Generator Modeling Practices and Applications in Power System Stability Analyses. IEEE, New York, Nov. 2003. doi: https://doi.org/10.1109/IEEESTD.2003.94408
 6. KIMBARK, E. W. Power System Stability: Volume III – Synchronous Machine. New York: Wiley-IEEE Press, 1995.

@@ -1,7 +1,7 @@
 ---
 id: text
-title: Texto Vinculado
-sidebar_label: Texto Vinculado
+title: Linked Text
+sidebar_label: Linked Text
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
@@ -10,48 +10,48 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-O elemento de texto vinculado (ao elemento de potência) pode ser inserido no editor de [elementos de potência](powerEditor). Esse elemento de texto pode ser vinculado a inúmeros resultados e parâmetros do sistema de potência.
+The linked text element (to the power element) can be inserted in the [power elements editor](powerEditor). This text element can be linked to numerous results and parameters of the power system.
 
-Esse elemento é útil para identificação e análise dos resultados de elementos de potência.
+This element is useful for identifying and analyzing the results of power elements.
 
-:::tip Dica
-Outra aplicação importante é a atualização de seu valor ao aplicar a “solução contínua” no projeto, auxiliando na visualização das mudanças de estado da rede elétrica.
+:::tip Tip
+Another important application is updating its value when applying “continuous solution” in the project, helping visualize changes in the power grid’s state.
 
-Também pode-se utilizar os resultados apresentados por esses elementos juntamente com o diagrama unifilar na criação de relatórios do projeto.
+The results presented by these elements can also be used together with the single-line diagram when creating project reports.
 :::
 
-<div><center><img src={useBaseUrl("images/textExp.png")} alt="Exemplo do elemento de texto no PSP-UFU" title="Exemplo de elemento de texto no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/textExp.png")} alt="Example of the text element in PSP-UFU" title="Example of text element in PSP-UFU" /></center></div>
 
-## Inserindo elementos de texto no PSP-UFU
-Por meio do submenu **Ferramentas** pode-se inserir os elementos de texto, como é apresentado na imagem abaixo.
+## Inserting text elements in PSP-UFU
+Through the **Tools** submenu, you can insert text elements, as shown in the image below.
 
-<div><center><img src={useBaseUrl("images/addTextElement.svg")} alt="Adicionar elementos de texto" title="Adicionar elementos de texto" /></center></div>
+<div><center><img src={useBaseUrl("images/addTextElement.svg")} alt="Add text elements" title="Add text elements" /></center></div>
 
-Ao selecionar o botão "Texto" ou utilizar a **tecla de atalho "A"**, o usuário deve clicar na posição desejada da [área de trabalho](powerEditor). Com isso, será adicionado um elemento temporário com o valor "Texto". Para parametrizar esse elemento clique duas vezes sobre ele.
+By selecting the "Text" button or using the **"A" shortcut key**, the user must click the desired position in the [workspace](powerEditor). This will add a temporary element with the value "Text". To configure this element, double-click on it.
 
-:::caution Atenção
-O elemento de texto, assim como os [elementos de controle](controlEditor) não exibem automaticamente o formulário de edição de dados ao inseri-lo pela primeira vez.
+:::caution Caution
+The text element, like [control elements](controlEditor), does not automatically display the data editing form when inserted for the first time.
 :::
 
-## Formulário de edição de dados do elemento de texto
-A figura abaixo apresenta o formulário de edição de dados desse componente gráfico.
+## Text element data editing form
+The figure below shows the data editing form for this graphic component.
 
-<div><center><img src={useBaseUrl("images/textForm.png")} alt="Formulário do elemento de texto no PSP-UFU" title="Formulário do elemento de texto no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/textForm.png")} alt="Text element form in PSP-UFU" title="Text element form in PSP-UFU" /></center></div>
 
-Sua parametrização é realizada por campos que associam o componente aos elementos elétricos de potência, além do formato dos resultados numéricos. Os campos são liberados a medida que os dados anteriores são inseridos e uma mensagem de erro é apresentada ao usuário caso algum parâmetro necessário não seja preenchido.
+Its configuration is carried out through fields that associate the component with the electrical power elements, in addition to the numeric result format. The fields are enabled as previous data is entered, and an error message is displayed if any required parameter is not filled in.
 
-O processo de associação se inicia na escolha do tipo de elemento de potência será vinculado ao texto. Em seguida é exibida uma lista com o nome de todos os componentes previamente inseridos no editor de elementos de potência do tipo definido no campo anterior, associando, assim, o texto ao elemento.
+The association process begins by choosing the type of power element that will be linked to the text. Next, a list is displayed with the name of all components previously inserted in the power elements editor of the type defined in the previous field, thus associating the text with the element.
 
-Em “Tipo de texto” define-se qual será a saída apresentada. Tal campo depende do tipo de elemento selecionado, como mostra a tabela abaixo. Alguns outros dados são necessários para os elementos de ramo, como barra de origem e destino, com o intuito de representar o fluxo correto de potência e corrente. Finalmente o usuário deve inserir a quantidade de casas decimais para dados numéricos. A pré-visualização pode ser observada no formulário.
+In “Text type” you define what output will be displayed. This field depends on the type of element selected, as shown in the table below. Some other data are required for branch elements, such as source and destination buses, to represent the correct power and current flow. Finally, the user must enter the number of decimal places for numeric data. A preview can be seen in the form.
 
-|Elemento de potência|Tipo de texto|Unidades disponíveis|
-|:------------------:|-------------|--------------------|
-|[Barra](bus)|Nome<br/>Tensão<br/>Ângulo<br/>Corrente de falta<br/>Tensão de falta<br/>Nível de curto-circuito<br/>THD de tensão|-<br/>$p.u.$, V, kV<br/>Graus, Radianos<br/>$p.u.$, A, kA<br/>$p.u.$, V, kV<br/>$p.u.$, VA, kVA, MVA<br/>%|
-|[Gerador](syncGenerator)|Nome<br/>Potência ativa<br/>Potência reativa<br/>Corrente de falta|-<br/>$p.u.$, W, kW, MW<br/>$p.u.$, var, kvar, Mvar<br/>$p.u.$, A, kA|
-|[Linha](line) e [transformador](transformer)|Nome<br/>Fluxo de potência ativo<br/>Fluxo de potência reativo<br/>Perdas<br/>Corrente<br/>Corrente de falta|-<br/>$p.u.$, W, kW, MW<br/>$p.u.$, var, kvar, Mvar<br/>$p.u.$, W, kW, MW<br/>$p.u.$, A, kA<br/>$p.u.$, A, kA|
-|[Carga](load), [Motor de indução](indMotor)<br/>e [Compensador síncrono](syncMotor)|Nome<br/>Potência ativa<br/>Potência reativa|-<br/>$p.u.$, W, kW, MW<br/>$p.u.$, var, kvar, Mvar|
-|[Capacitor](capacitor) e [Indutor](inductor)|Nome<br/>Potência reativa|-<br/>$p.u.$, var, kvar, Mvar|
+|Power Element|Text Type|Available Units|
+|:-----------:|---------|---------------|
+|[Bus](bus)|Name<br/>Voltage<br/>Angle<br/>Fault current<br/>Fault voltage<br/>Short-circuit level<br/>Voltage THD|-<br/>$p.u.$, V, kV<br/>Degrees, Radians<br/>$p.u.$, A, kA<br/>$p.u.$, V, kV<br/>$p.u.$, VA, kVA, MVA<br/>%|
+|[Generator](syncGenerator)|Name<br/>Active power<br/>Reactive power<br/>Fault current|-<br/>$p.u.$, W, kW, MW<br/>$p.u.$, var, kvar, Mvar<br/>$p.u.$, A, kA|
+|[Line](line) and [transformer](transformer)|Name<br/>Active power flow<br/>Reactive power flow<br/>Losses<br/>Current<br/>Fault current|-<br/>$p.u.$, W, kW, MW<br/>$p.u.$, var, kvar, Mvar<br/>$p.u.$, W, kW, MW<br/>$p.u.$, A, kA<br/>$p.u.$, A, kA|
+|[Load](load), [Induction Motor](indMotor)<br/>and [Synchronous Condenser](syncMotor)|Name<br/>Active power<br/>Reactive power|-<br/>$p.u.$, W, kW, MW<br/>$p.u.$, var, kvar, Mvar|
+|[Capacitor](capacitor) and [Inductor](inductor)|Name<br/>Reactive power|-<br/>$p.u.$, var, kvar, Mvar|
 
-:::info Informação
-Uma vez inseridos, esses elementos de texto podem ser manipulados da [mesma forma que os elementos de potência](cadTools).
+:::info Information
+Once inserted, these text elements can be manipulated in the [same way as power elements](cadTools).
 :::

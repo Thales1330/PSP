@@ -1,12 +1,12 @@
 ---
 id: gain
-title: Ganho
-sidebar_label: Ganho
+title: Gain
+sidebar_label: Gain
 ---
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
 <link rel="stylesheet" href={useBaseUrl("katex/katex.min.css")} />
 
-O bloco de ganho multiplica o valor de entrada por uma constante definida pelo usuário, possuindo comportamento idêntico à combinação de uma [constante](const) e um bloco [multiplicador](multiplier).
+The gain block multiplies the input value by a constant defined by the user, behaving identically to a combination of a [constant](const) and a [multiplier](multiplier) block.
 
-Esse valor de ganho permanece fixo durante todo o tempo de simulação e é identificado no elemento gráfico exibido no editor de elementos de controle.
+This gain value remains fixed during the entire simulation time and is displayed on the graphic element in the control elements editor.

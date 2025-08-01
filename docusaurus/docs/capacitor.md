@@ -10,51 +10,54 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
->Um dispositivo constituído essencialmente por dois eletrodos separados por um dielétrico. [*tradução livre* - IEC 60050](
-http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=436-01-03).
+>A device consisting essentially of two electrodes separated by a dielectric. [IEC 60050](http://www.electropedia.org/iev/iev.nsf/display?openform&ievref=436-01-03).
 
-## Capacitor no PSP-UFU
-O elemento capacitor representa, geralmente, um banco de capacitores *shunt* no circuito do PSP-UFU.
+## Capacitor in PSP-UFU
+The capacitor element usually represents a *shunt* capacitor bank in the PSP-UFU circuit.
 
-:::tip Dica
-Um arranjo série de uma [linha](line) sem as susceptâncias *shunt*, um [barramento](bus) e um [capacitor](capacitor) pode ser utilizado para fabricar um filtro passivo nos [estudos harmônicos](harmonics). Em versões futuras, um elemento de filtro passivo será implementado no PSP-UFU.
+:::tip Tip
+A series arrangement of a [line](line) without *shunt* susceptances, a [bus](bus), and a [capacitor](capacitor) can be used to create a passive filter in [harmonic studies](harmonics).  
+In future versions, a passive filter element will be implemented in PSP-UFU.
 :::
 
-Os capacitores e reatores exigem somente sua potência reativa como parâmetro. Esses elementos passivos são somente inseridos na matriz admitância cuja impedância é calculada a partir de sua potência e tensão nominais.
+Capacitors and reactors require only their reactive power as a parameter.  
+These passive elements are only inserted into the admittance matrix, and their impedance is calculated from their nominal power and voltage.
 
-## Formulário de edição dos capacitores
-A imagem abaixo apresenta o formulário de inserção/alteração de dados dos capacitores:
+## Capacitor editing form
+The figure below shows the capacitor data insertion/editing form:
 
-<div><center><img src={useBaseUrl("images/capacitorForm.png")} alt="Formulário dos capacitores no PSP-UFU" title="Formulário dos capacitores no PSP-UFU" /></center></div>
+<div><center><img src={useBaseUrl("images/capacitorForm.png")} alt="Capacitor form in PSP-UFU" title="Capacitor form in PSP-UFU" /></center></div>
 
-Além do único contexto geral, pode ser observado o botão "Estabilidade" na parte inferior esquerda do formulário. Esse formulário, comum a vários outros elementos, permite a inserção e/ou remoção do capacitor durante o estudo de [estabilidade](stability).
+Besides the single general context, the "Stability" button can be seen in the lower-left corner of the form.  
+This form, common to several other elements, allows the insertion and/or removal of the capacitor during the [stability](stability) study.
 
-<div><center><img src={useBaseUrl("images/swCapacitor.png")} alt="Formulário de chaveamento do capacitor" title="Formulário de chaveamento do capacitor" /></center></div>
+<div><center><img src={useBaseUrl("images/swCapacitor.png")} alt="Capacitor switching form" title="Capacitor switching form" /></center></div>
 
 <Tabs
   groupId="transformer-tabs"
   defaultValue="general"
   values={[
-    {label: 'Geral', value: 'general'},
-    {label: 'Botão Estabilidade', value: 'stability'},
+    {label: 'General', value: 'general'},
+    {label: 'Stability Button', value: 'stability'},
   ]
 }>
 <TabItem value="general">
 
-#### Nome
-Identificação do elemento elétrico. Podem ser inseridos quaisquer números de caracteres no padrão [Unicode](https://pt.wikipedia.org/wiki/Unicode).
+#### Name
+Electrical element identification. Any number of characters can be entered using the [Unicode](https://en.wikipedia.org/wiki/Unicode) standard.
 
-Todos os componentes de potência do PSP-UFU possuem esse campo.
+All PSP-UFU power components have this field.
 
-#### Potência reativa
-Os capacitores e reatores exigem somente sua potência reativa como parâmetro, inserida em Mvar, kvar, var ou $p.u.$ (na base de potência do sistema). 
+#### Reactive power
+Capacitors and reactors only require their reactive power as a parameter, entered in Mvar, kvar, var, or $p.u.$ (in the system base power).
 
 </TabItem>
 <TabItem value="stability">
 
-O botão "Estabilidade" irá abrir um formulário, comum a vários outros elementos, que permite a inserção e/ou remoção do transformador durante o estudo de [estabilidade](stability).
+The "Stability" button opens a form, common to several other elements, that allows the insertion and/or removal of the transformer during the [stability](stability) study.
 
-Nesse formulário pode ser criada uma lista genérica de inserções e remoções da linha no tempo, personalizada por um contexto de propriedades de chaveamento que são editados o tipo de chaveamento (inserção ou remoção) e o instante (em segundos) do evento. Essas propriedades são atribuídas e retiradas da lista genérica por meio dos botões "Adicionar" e "Remover", respectivamente.
+In this form, a generic list of insertions and removals over time can be created, customized by a switching properties context where the switching type (insertion or removal) and the event time (in seconds) are edited.  
+These properties are added to or removed from the list using the "Add" and "Remove" buttons, respectively.
 
 </TabItem>
 </Tabs>
