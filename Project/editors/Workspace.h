@@ -120,6 +120,7 @@ public:
 	Workspace();
 	Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = nullptr, wxAuiNotebook* auiNotebook = nullptr);
 	virtual ~Workspace();
+	
 
 	wxString GetName() const { return m_name; }
 	std::vector<Element*> GetElementList() const;
@@ -164,6 +165,7 @@ public:
 	void UpdateElementsID();
 	bool UpdateTextElements();
 	void UpdateHeatMap();
+	void UpdateElementNumbersFromList();
 
 	int GetElementNumber(ElementID elementID) { return m_elementNumber[elementID]; }
 	void IncrementElementNumber(ElementID elementID) { m_elementNumber[elementID]++; }

@@ -87,7 +87,7 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
 	m_camera = new Camera();
 	m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 
-	for (int i = 0; i < NUM_ELEMENTS; ++i) { m_elementNumber[i] = 1; }
+	// for (int i = 0; i < NUM_ELEMENTS; ++i) { m_elementNumber[i] = 1; }
 
 	const int widths[4] = { -3, -1, 100, 100 };
 	m_statusBar->SetStatusWidths(4, widths);
@@ -125,6 +125,21 @@ Workspace::~Workspace()
 	//}
 	if (m_tipWindow) delete m_tipWindow;
 	if (m_properties) delete m_properties;
+}
+void Workspace::UpdateElementNumbersFromList()
+{
+    // Reset counters
+    for (int i = 0; i < NUM_ELEMENTS; ++i) {
+        m_elementNumber[i] = 1;
+    }
+
+    // Scan existing elements
+    for (auto* element : m_elementList) {
+        int type = element->GetElementType();
+        if (type >= 0 && type < NUM_ELEMENTS) {
+            m_elementNumber[type]++;
+        }
+    }
 }
 
 void Workspace::OnPaint(wxPaintEvent& event)
@@ -2005,6 +2020,9 @@ bool Workspace::Paste()
 	}
 
 	UpdateElementsID();
+
+	UpdateElementNumbersFromList();
+
 	m_mode = WorkspaceMode::MODE_PASTE;
 	m_statusBar->SetStatusText(_("Click to paste."));
 	UpdateStatusBar();
@@ -2231,6 +2249,8 @@ void Workspace::SetElementList(std::vector<Element*> elementList)
 	m_elementList.clear();
 	for (auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it)
 		m_elementList.push_back(static_cast<PowerElement*>(*it));
+		    UpdateElementNumbersFromList();
+
 }
 
 void Workspace::OnIdle(wxIdleEvent& event)
