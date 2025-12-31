@@ -1050,5 +1050,6 @@ bool Text::OpenElement(rapidxml::xml_node<>* elementNode)
 	SetDirection(XMLParser::GetNodeValueDouble(textProperties, "Direction"));
 	SetDecimalPlaces(XMLParser::GetNodeValueDouble(textProperties, "DecimalPlaces"));
 	SetElementNumber(XMLParser::GetNodeValueInt(textProperties, "ElementNumber"));
+	SetInserted();
 	return true;
 }

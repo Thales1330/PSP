@@ -53,8 +53,8 @@ class Branch : public PowerElement
     virtual void UpdateSwitchesPosition();
     virtual void UpdateSwitches();
 
-   protected:
-    bool m_inserted = false;
+   //protected:
+    //bool m_inserted = false;
 };
 
 #endif  // BRANCH_H

@@ -59,7 +59,7 @@ class Machines : public PowerElement
    protected:
     void UpdateSwitchesPosition();
     void UpdatePowerFlowArrowsPosition();
-    bool m_inserted = false;
+    //bool m_inserted = false;
 };
 
 #endif  // MACHINES_H

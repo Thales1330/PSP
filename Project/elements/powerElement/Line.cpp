@@ -257,7 +257,7 @@ bool Line::AddParent(Element* parent, wxPoint2DDouble position)
 			m_switchRect.push_back(genRect);
 			UpdateSwitches();
 
-			m_inserted = true;
+			SetInserted();
 			UpdatePowerFlowArrowsPosition();
 			return true;
 		}

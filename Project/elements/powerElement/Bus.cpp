@@ -449,5 +449,6 @@ bool Bus::OpenElement(rapidxml::xml_node<>* elementNode)
 	if (powerQuality) m_electricalData.plotPQData = XMLParser::GetNodeValueInt(powerQuality, "Plot");
 
 	if (m_electricalData.stabHasFault) SetDynamicEvent(true);
+	SetInserted();
 	return true;
 }

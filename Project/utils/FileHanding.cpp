@@ -128,10 +128,12 @@ void FileHanding::SaveProject(wxFileName path)
     //{ Buses
     auto busesNode = XMLParser::AppendNode(doc, elementsNode, "BusList");
     auto busList = allElements.GetBusList();
-    for(auto it = busList.begin(), itEnd = busList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, busesNode);
-        elementID++;
+    for(auto* bus :  busList) {
+        if (bus->IsInserted()) {
+            bus->SetID(elementID);
+            bus->SaveElement(doc, busesNode);
+            elementID++;
+        }
     }
     //}
 
@@ -139,10 +141,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto capacitorsNode = XMLParser::AppendNode(doc, elementsNode, "CapacitorList");
     auto capacitorList = allElements.GetCapacitorList();
     elementID = 0;
-    for(auto it = capacitorList.begin(), itEnd = capacitorList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, capacitorsNode);
-        elementID++;
+    for(auto* capacitor : capacitorList) {
+        if (capacitor->IsInserted()) {
+            capacitor->SetID(elementID);
+            capacitor->SaveElement(doc, capacitorsNode);
+            elementID++;
+        }
     }
     //}
 
@@ -150,10 +154,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto indMotorsNode = XMLParser::AppendNode(doc, elementsNode, "IndMotorList");
     auto indMotorList = allElements.GetIndMotorList();
     elementID = 0;
-    for(auto it = indMotorList.begin(), itEnd = indMotorList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, indMotorsNode);
-        elementID++;
+    for(auto* indMotor : indMotorList) {
+        if (indMotor->IsInserted()) {
+            indMotor->SetID(elementID);
+            indMotor->SaveElement(doc, indMotorsNode);
+            elementID++;
+        }
     }
     //}
 
@@ -161,10 +167,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto inductorsNode = XMLParser::AppendNode(doc, elementsNode, "InductorList");
     auto inductorList = allElements.GetInductorList();
     elementID = 0;
-    for(auto it = inductorList.begin(), itEnd = inductorList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, inductorsNode);
-        elementID++;
+    for(auto* inductor : inductorList) {
+        if (inductor->IsInserted()) {
+            inductor->SetID(elementID);
+            inductor->SaveElement(doc, inductorsNode);
+            elementID++;
+        }
     }
     //}
 
@@ -172,10 +180,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto linesNode = XMLParser::AppendNode(doc, elementsNode, "LineList");
     auto lineList = allElements.GetLineList();
     elementID = 0;
-    for(auto it = lineList.begin(), itEnd = lineList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, linesNode);
-        elementID++;
+    for(auto* line : lineList) {
+        if (line->IsInserted()) {
+            line->SetID(elementID);
+            line->SaveElement(doc, linesNode);
+            elementID++;
+        }
     }
     //}
 
@@ -183,10 +193,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto loadsNode = XMLParser::AppendNode(doc, elementsNode, "LoadList");
     auto loadList = allElements.GetLoadList();
     elementID = 0;
-    for(auto it = loadList.begin(), itEnd = loadList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, loadsNode);
-        elementID++;
+    for(auto* load : loadList) {
+        if(load->IsInserted()) {
+            load->SetID(elementID);
+            load->SaveElement(doc, loadsNode);
+            elementID++;
+		}
     }
     //}
 
@@ -194,22 +206,24 @@ void FileHanding::SaveProject(wxFileName path)
     auto syncGeneratorsNode = XMLParser::AppendNode(doc, elementsNode, "SyncGeneratorList");
     auto syncGeneratorList = allElements.GetSyncGeneratorList();
     elementID = 0;
-    for(auto it = syncGeneratorList.begin(), itEnd = syncGeneratorList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        auto elementNode = (*it)->SaveElement(doc, syncGeneratorsNode);
+    for(auto syncGen : syncGeneratorList) {
+        if (syncGen->IsInserted()) {
+            syncGen->SetID(elementID);
+            auto elementNode = syncGen->SaveElement(doc, syncGeneratorsNode);
 
-        // Save controls
-        auto data = (*it)->GetElectricalData();
-        auto electricalProp = elementNode->first_node("ElectricalProperties");
-        auto stability = electricalProp->first_node("Stability");
+            // Save controls
+            auto data = syncGen->GetElectricalData();
+            auto electricalProp = elementNode->first_node("ElectricalProperties");
+            auto stability = electricalProp->first_node("Stability");
 
-        auto avr = XMLParser::AppendNode(doc, stability, "AVR");
-        if(data.avr) SaveControlElements(doc, avr, data.avr);
+            auto avr = XMLParser::AppendNode(doc, stability, "AVR");
+            if (data.avr) SaveControlElements(doc, avr, data.avr);
 
-        auto speedGov = XMLParser::AppendNode(doc, stability, "SpeedGovernor");
-        if(data.speedGov) SaveControlElements(doc, speedGov, data.speedGov);
+            auto speedGov = XMLParser::AppendNode(doc, stability, "SpeedGovernor");
+            if (data.speedGov) SaveControlElements(doc, speedGov, data.speedGov);
 
-        elementID++;
+            elementID++;
+        }
     }
     //}
 
@@ -217,10 +231,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto syncMotorsNode = XMLParser::AppendNode(doc, elementsNode, "SyncMotorList");
     auto syncMotorList = allElements.GetSyncMotorList();
     elementID = 0;
-    for(auto it = syncMotorList.begin(), itEnd = syncMotorList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, syncMotorsNode);
-        elementID++;
+    for(auto* syncMotor : syncMotorList) {
+        if(syncMotor->IsInserted()) {
+            syncMotor->SetID(elementID);
+            syncMotor->SaveElement(doc, syncMotorsNode);
+            elementID++;
+		}
     }
     //}
 
@@ -228,10 +244,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto transformersNode = XMLParser::AppendNode(doc, elementsNode, "TransformerList");
     auto transformerList = allElements.GetTransformerList();
     elementID = 0;
-    for(auto it = transformerList.begin(), itEnd = transformerList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, transformersNode);
-        elementID++;
+    for(auto* transformer : transformerList) {
+        if (transformer->IsInserted()) {
+            transformer->SetID(elementID);
+            transformer->SaveElement(doc, transformersNode);
+            elementID++;
+        }
     }
     //}
 
@@ -239,10 +257,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto harmCurrentNode = XMLParser::AppendNode(doc, elementsNode, "HarmCurrentList");
     auto harmCurrentList = allElements.GetHarmCurrentList();
     elementID = 0;
-    for(auto it = harmCurrentList.begin(), itEnd = harmCurrentList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, harmCurrentNode);
-        elementID++;
+    for(auto* harmCurrent : harmCurrentList) {
+        if (harmCurrent->IsInserted()) {
+            harmCurrent->SetID(elementID);
+            harmCurrent->SaveElement(doc, harmCurrentNode);
+            elementID++;
+        }
     }
     //}
 
@@ -250,10 +270,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto emtElementNode = XMLParser::AppendNode(doc, elementsNode, "EMTElementList");
     auto emtElementList = allElements.GetEMTElementList();
     elementID = 0;
-    for (auto it = emtElementList.begin(), itEnd = emtElementList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, emtElementNode);
-        elementID++;
+    for (auto* emtElement : emtElementList) {
+        if(emtElement->IsInserted()) {
+            emtElement->SetID(elementID);
+            emtElement->SaveElement(doc, emtElementNode);
+            elementID++;
+		}
     }
     //}
 
@@ -261,10 +283,12 @@ void FileHanding::SaveProject(wxFileName path)
     auto textsNode = XMLParser::AppendNode(doc, elementsNode, "TextList");
     auto textList = m_workspace->GetTextList();
     elementID = 0;
-    for(auto it = textList.begin(), itEnd = textList.end(); it != itEnd; ++it) {
-        (*it)->SetID(elementID);
-        (*it)->SaveElement(doc, textsNode);
-        elementID++;
+    for(auto* text : textList) {
+        if(text->IsInserted()) {
+            text->SetID(elementID);
+            text->SaveElement(doc, textsNode);
+            elementID++;
+		}
     }
     //}
 

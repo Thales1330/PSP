@@ -205,6 +205,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 						m_timer->Stop();
 						showNewElementForm = true;
 						m_mode = WorkspaceMode::MODE_EDIT;
+						element->SetInserted();
 					}
 				}
 			}

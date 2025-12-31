@@ -592,6 +592,18 @@ public:
 	 */
 	virtual double PointToLineDistance(wxPoint2DDouble point, int* segmentNumber = nullptr) const;
 
+	/**
+	 * @brief Check if the element is properly inserted in the workspace.
+	 * @return true if is inserted properly, false otherwise
+	 */
+	bool IsInserted() const { return m_inserted; }
+
+	/**
+	 * @brief Set if the element is properly inserted in the workspace.
+	 * @param inserted true if is inserted properly, false otherwise
+	 */
+	void SetInserted(bool inserted = true) { m_inserted = inserted; }
+
 	virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode) { return nullptr; }
 	virtual bool OpenElement(rapidxml::xml_node<>* elementNode) { return true; }
 	void SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
@@ -617,6 +629,7 @@ protected:
 	bool m_selected = false;
 	bool m_dragging = false;
 	bool m_showPickbox = false;
+	bool m_inserted = false;
 
 	int m_activePickboxID = ID_PB_NONE;
 	int m_activeNodeID = 0;
