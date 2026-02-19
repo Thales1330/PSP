@@ -3,6 +3,7 @@
 #include "../../forms/EMTElementForm.h"
 #include "../../utils/PropertiesData.h"
 #include "../../extLibs/fftw/fftw3.h"
+#include "../../elements/GCText.h"
 
 #include <wx/dcgraph.h>
 #include <wx/textfile.h>
@@ -152,6 +153,81 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCon
 	}
 }
 
+void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+{
+	wxColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	std::vector<wxPoint> pointListInt;
+	for (auto& pt : m_pointList) {
+		pointListInt.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
+	}
+
+	if (m_inserted) {
+
+		if (m_selected) {
+			dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			dc.SetBrush(*wxTRANSPARENT_BRUSH);
+
+			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+
+			DrawDCRoundedRectRotated(dc, m_position, m_width, m_height, 10.0, m_angle);
+
+			// Draw node selection.
+			dc.SetPen(*wxTRANSPARENT_PEN);
+			dc.SetBrush(wxBrush(wxColour(m_selectionColour)));
+			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
+		}
+		// Draw EMTElement (layer 2).
+		// Draw node.
+		dc.SetPen(*wxTRANSPARENT_PEN);
+		dc.SetBrush(wxBrush(wxColour(elementColour)));
+		DrawDCCircle(pointListInt[0], 5.0, dc);
+
+		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetBrush(*wxTRANSPARENT_BRUSH);
+		dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+
+		DrawDCSwitches(dc);
+
+		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetBrush(*wxWHITE_BRUSH);
+		DrawDCRoundedRectRotated(dc, m_position, m_width, m_height, 10.0, m_angle);
+
+		wxFont font;
+		font.SetFaceName(wxT("CMU Serif"));
+		font.SetPointSize(10);
+		font.MakeBold();
+		GCText gcText;
+		gcText.SetFont(font);
+		gcText.SetText(_("EMT"));
+		wxPoint pt = RotateAround(m_position + wxPoint2DDouble(0.0, 20.0), m_position, m_angle);
+		gcText.Draw(pt, gcText.GetWidth(), gcText.GetHeight(), dc, m_angle, m_online ? wxColour(255, 60, 0) : m_offlineElementColour);
+		//dc.SetFont(font);
+		//dc.SetTextForeground(m_online ? wxColour(255, 60, 0) : m_offlineElementColour);
+		//int textWidth, textHeight;
+		//dc.GetTextExtent(_("EMT"), &textWidth, &textHeight);
+		//wxPoint pt = RotateAround(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20.0), m_position, m_angle);
+		//dc.DrawRotatedText(_("EMT"), pt.x, pt.y, -m_angle);
+
+		//wxGCDC* gcdc = new wxGCDC(gc);
+		dc.SetPen(wxPen(m_online ? wxColour(0, 60, 255) : m_offlineElementColour, 2));
+		std::vector<wxPoint> ptList;
+		for (double x = m_position.m_x - m_width / 2.0 + 2; x < (m_position.m_x + m_width / 2.0); x += (m_width - 4.0) / 6.0) {
+			wxPoint pt = RotateAround(wxPoint2DDouble(x, m_position.m_y + std::sin((x - (m_position.m_x - m_width / 2.0 + 2)) / m_width * 6 * M_PI) * 20.0), m_position, m_angle);
+			ptList.emplace_back(pt);
+		}
+		dc.DrawSpline(ptList.size(), ptList.data());
+	}
+}
+
 void EMTElement::Rotate(bool clockwise)
 {
 	double rotAngle = m_rotationAngle;
@@ -190,7 +266,7 @@ wxString EMTElement::GetTipText() const
 		}
 	}
 
-	if(hasHarmonics) tipText += harmonicsInfo;
+	if (hasHarmonics) tipText += harmonicsInfo;
 
 	return tipText;
 }
@@ -365,7 +441,7 @@ bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 			busData = bus->GetElectricalData();
 			hasBusData = true;
 		}
-	}	
+	}
 
 	wxString switchMask = "  PSPNC%c%s%c                                        MEASURING                %d";
 	wxString sourceMask = "14PSPNC%c  %s%s%s                           -1.      100.";
@@ -435,7 +511,7 @@ bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 			// Insert harmonic voltage
 			for (size_t j = 0; j < busData.harmonicOrder.size(); ++j) {
 				int order = busData.harmonicOrder[j];
-				if(order == 1) continue; // Skip fundamental
+				if (order == 1) continue; // Skip fundamental
 
 				std::complex<double> harmVoltage = busData.harmonicVoltage[j];
 
@@ -445,7 +521,7 @@ bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 
 				wxString freqH = wxString::FromCDouble(m_data.frequency * static_cast<double>(order), 5);
 				while (freqH.Length() < 10) freqH = " " + freqH;
-				
+
 				double angleValue = std::arg(harmVoltage) * 180.0 / M_PI;
 				if (order % 3 == 1) { // Positive sequence
 					angleValue += -120.0 * (i - 'A');

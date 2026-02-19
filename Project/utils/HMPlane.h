@@ -33,8 +33,10 @@ public:
 
     //virtual void Draw(const Renderer& renderer, const glm::mat4& projectionViewMatrix) const;
     virtual void DrawDC(wxGraphicsContext* gc) const;
+    virtual void DrawDC(wxDC& dc) const;
     //virtual void DrawLabel(const Renderer& renderer, const glm::mat4& projectionViewMatrix, const float& x = 0.0, const float& y = 0.0) const;
     virtual void DrawLabelDC(wxGraphicsContext* gc) const;
+    virtual void DrawLabelDC(wxDC& dc) const;
 
     virtual void SetLabelLimits(const float& min, const float& max);
     virtual float GetMaxLimit() { return m_limits[0]; }

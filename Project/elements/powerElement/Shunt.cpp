@@ -183,6 +183,34 @@ void Shunt::DrawDCGround(wxPoint2DDouble position, wxGraphicsContext* gc) const
 	gc->StrokeLines(2, &groundPts[6]);
 }
 
+void Shunt::DrawDCGround(wxPoint2DDouble position, wxDC& dc) const
+{
+    wxPoint groundPts[8];
+    wxPoint2DDouble p;
+
+    p = position;
+    groundPts[0] = RotateAround(p, m_position, m_angle);
+    p = position + wxPoint2DDouble(0, 10);
+    groundPts[1] = RotateAround(p, m_position, m_angle);
+    p = position + wxPoint2DDouble(-10, 10);
+    groundPts[2] = RotateAround(p, m_position, m_angle);
+    p = position + wxPoint2DDouble(10, 10);
+    groundPts[3] = RotateAround(p, m_position, m_angle);
+    p = position + wxPoint2DDouble(-6, 15);
+    groundPts[4] = RotateAround(p, m_position, m_angle);
+    p = position + wxPoint2DDouble(6, 15);
+    groundPts[5] = RotateAround(p, m_position, m_angle);
+    p = position + wxPoint2DDouble(-3, 20);
+    groundPts[6] = RotateAround(p, m_position, m_angle);
+    p = position + wxPoint2DDouble(3, 20);
+    groundPts[7] = RotateAround(p, m_position, m_angle);
+
+    dc.DrawLines(2, &groundPts[0]);
+    dc.DrawLines(2, &groundPts[2]);
+    dc.DrawLines(2, &groundPts[4]);
+    dc.DrawLines(2, &groundPts[6]);
+}
+
 void Shunt::UpdatePowerFlowArrowsPosition()
 {
     std::vector<wxPoint2DDouble> edges;

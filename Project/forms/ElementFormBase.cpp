@@ -15,11 +15,11 @@ namespace {
 // return the wxBORDER_SIMPLE that matches the current application theme
 wxBorder get_border_simple_theme_aware_bit() {
 #if wxVERSION_NUMBER >= 3300 && defined(__WXMSW__)
-    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_STATIC;
+    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_DEFAULT;
 #else
     return wxBORDER_DEFAULT;
 #endif
-} // DoGetBorderSimpleBit
+} // get_border_simple_theme_aware_bit
 bool bBitmapLoaded = false;
 } // namespace
 
@@ -3938,6 +3938,22 @@ IOControlFormBase::IOControlFormBase(wxWindow* parent, wxWindowID id, const wxSt
     
     wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
     m_panelGeneral->SetSizer(boxSizerLvl2_1);
+    
+    wxBoxSizer* boxSizer2440 = new wxBoxSizer(wxVERTICAL);
+    
+    boxSizerLvl2_1->Add(boxSizer2440, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextName = new wxStaticText(m_panelGeneral, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizer2440->Add(m_staticTextName, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlName = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlName->SetHint(wxT(""));
+    #endif
+    
+    boxSizer2440->Add(m_textCtrlName, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    m_textCtrlName->SetMinSize(wxSize(300,-1));
     
     m_checkBoxInput = new wxCheckBox(m_panelGeneral, wxID_ANY, _("Input"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     m_checkBoxInput->SetValue(false);

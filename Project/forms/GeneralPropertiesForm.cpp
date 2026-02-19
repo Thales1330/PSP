@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,10 @@
  */
 
 #include "GeneralPropertiesForm.h"
+#include <wx/fontenum.h>
+#include <wx/font.h>
 #include "../utils/PropertiesData.h"
+
 
 GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* properties)
 	: GeneralPropertiesFormBase(parent)
@@ -38,8 +41,6 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	m_choicePlotLib->Insert(_("Chart Director"), 0);
 	m_choicePlotLib->Insert(_("wxMathPlot"), 1);
 	
-
-
 	switch (data.language) {
 	case wxLANGUAGE_ENGLISH: {
 		m_choiceLanguage->SetSelection(0);
@@ -70,6 +71,10 @@ GeneralPropertiesForm::GeneralPropertiesForm(wxWindow* parent, PropertiesData* p
 	//if (data.useOpenGL) m_choiceRender->SetSelection(0);
 	//else m_choiceRender->SetSelection(1);
 	m_filePickerATPFolder->SetPath(data.atpPath.GetFullPath());
+
+
+	wxFont currentFont(data.labelFontSize, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, data.labelFont);
+	m_fontPickerText->SetSelectedFont(currentFont);
 }
 
 GeneralPropertiesForm::~GeneralPropertiesForm() {}
@@ -84,6 +89,9 @@ bool GeneralPropertiesForm::ValidateData()
 	auto checkData = m_properties->GetGeneralPropertiesData();
 	bool needRestart = false;
 	data.atpPath = wxFileName(m_filePickerATPFolder->GetPath());
+	wxFont slectedFont = m_fontPickerText->GetSelectedFont();
+	data.labelFont = slectedFont.GetFaceName();
+	data.labelFontSize = slectedFont.GetPointSize();
 
 	//wxTextFile file("config.ini");
 	wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
@@ -154,6 +162,15 @@ bool GeneralPropertiesForm::ValidateData()
 	//}
 	//file.AddLine(line);
 	//if (data.useOpenGL != checkData.useOpenGL) hasChanges = true;
+
+	line = "labelfont=";
+	line += data.labelFont;
+	file.AddLine(line);
+
+	line = "labelfontsize=";
+	line += wxString::Format("%d", data.labelFontSize);
+	file.AddLine(line);
+
 
 	line = "atpfile=";
 	line += data.atpPath.GetFullPath();

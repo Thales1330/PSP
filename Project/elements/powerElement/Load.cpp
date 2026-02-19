@@ -196,6 +196,77 @@ void Load::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	}
 }
 
+void Load::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+{
+	wxColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	std::vector<wxPoint> pointListInt;
+	for (auto& pt : m_pointList) {
+		pointListInt.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
+	}
+	wxPoint pos = wxPoint(static_cast<int>(m_position.m_x), static_cast<int>(m_position.m_y));
+
+	if (m_inserted) {
+		// Draw Selection (layer 1).
+		if (m_selected) {
+			dc.SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+			dc.SetBrush(*wxTRANSPARENT_BRUSH);
+
+			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+
+			dc.SetPen(*wxTRANSPARENT_PEN);
+			dc.SetBrush(wxBrush(m_selectionColour));
+
+			wxPoint2DDouble p;
+			wxPoint selTriangPts[3];
+			p = m_triangPts[0] + m_position + wxPoint2DDouble(-m_borderSize / scale, -m_borderSize / scale);
+			selTriangPts[0] = RotateAround(p, m_position, m_angle);
+			p = m_triangPts[1] + m_position + wxPoint2DDouble(m_borderSize / scale, -m_borderSize / scale);
+			selTriangPts[1] = RotateAround(p, m_position, m_angle);
+			p = m_triangPts[2] + m_position + wxPoint2DDouble(0.0, m_borderSize / scale);
+			selTriangPts[2] = RotateAround(p, m_position, m_angle);
+
+			dc.DrawPolygon(3, selTriangPts);
+
+			// Draw node selection.
+			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
+		}
+
+		// Draw Load (layer 2).
+		dc.SetPen(wxPen(elementColour, 2));
+		dc.SetBrush(*wxTRANSPARENT_BRUSH);
+		dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+
+		// Draw node.
+		dc.SetPen(*wxTRANSPARENT_PEN);
+		dc.SetBrush(wxBrush(elementColour));
+		DrawDCCircle(m_pointList[0], 5.0, dc);
+
+		DrawDCSwitches(dc);
+		DrawDCPowerFlowPts(dc);
+
+		wxPoint2DDouble p;
+		wxPoint triangPts[3];
+
+		//std::vector<wxPoint2DDouble> triangPts;
+		for (int i = 0; i < 3; i++) {
+			p = m_triangPts[i] + m_position;
+			triangPts[i] = RotateAround(p, m_position, m_angle);
+		}
+		dc.SetPen(*wxTRANSPARENT_PEN);
+		dc.SetBrush(wxBrush(elementColour));
+		dc.DrawPolygon(3, triangPts);
+	}
+}
+
 void Load::Rotate(bool clockwise)
 {
 	double rotAngle = m_rotationAngle;

@@ -79,6 +79,8 @@ struct GeneralData {
 	GUITheme theme = THEME_LIGHT;
 	//bool useOpenGL = true;
 	PlotLib plotLib = PlotLib::wxCHART_DIR;
+	wxString labelFont = "CMU Serif";
+	int labelFontSize = 10;
 	wxFileName atpPath;
 	wxString atpWorkFolder = "";
 };

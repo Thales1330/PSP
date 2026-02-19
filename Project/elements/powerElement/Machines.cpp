@@ -151,6 +151,65 @@ void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 	}
 }
 
+void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+{
+    wxColour elementColour;
+    if (m_online) {
+        if (m_dynEvent)
+            elementColour = m_dynamicEventColour;
+        else
+            elementColour = m_onlineElementColour;
+    }
+    else
+        elementColour = m_offlineElementColour;
+
+	std::vector<wxPoint> pointListInt;
+    for(auto& pt : m_pointList) {
+        pointListInt.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
+	}
+
+    if (m_inserted) {
+        // Draw Selection (layer 1).
+        if (m_selected) {
+            dc.SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+            dc.SetBrush(*wxTRANSPARENT_BRUSH);
+            dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+
+            dc.SetPen(*wxTRANSPARENT_PEN);
+            dc.SetBrush(wxBrush(m_selectionColour));
+            DrawDCCircle(m_position, 25.0 + (m_borderSize + 1.5) / scale, dc);
+
+            // Draw nodes selection.
+            DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
+        }
+
+        // Draw Machines (layer 2).
+        // Draw node.
+        dc.SetPen(*wxTRANSPARENT_PEN);
+        dc.SetBrush(wxBrush(elementColour));
+        DrawDCCircle(m_pointList[0], 5.0, dc);
+
+        dc.SetPen(wxPen(wxColour(elementColour), 2));
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+        DrawDCCircle(m_position, 25.0, dc);
+
+        DrawDCSwitches(dc);
+        DrawDCPowerFlowPts(dc);
+
+        dc.SetPen(*wxTRANSPARENT_PEN);
+        dc.SetBrush(*wxWHITE_BRUSH);
+        DrawDCCircle(m_position, 25.0, dc);
+
+        dc.SetPen(wxPen(elementColour, 2));
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        DrawDCCircle(m_position, 25.0, dc);
+
+        // Draw machine symbol.
+        DrawDCSymbol(dc);
+    }
+}
+
 void Machines::UpdateSwitchesPosition()
 {
     if(m_parentList[0]) {

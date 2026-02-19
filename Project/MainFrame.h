@@ -53,7 +53,9 @@ enum {
     ID_ADDMENU_EMTELEMENT,
     ID_ADDMENU_TEXT,
     
-    ID_STABMENU_LIST
+    ID_STABMENU_LIST,
+
+    ID_SNAPSHOTMENU_LIST
 };
 
 /**
@@ -87,6 +89,7 @@ class MainFrame : public MainFrameBase
     int RunPSPTest();
 
    protected:
+    virtual void OnSnapshotDropdown(wxRibbonButtonBarEvent& event);
     virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event);
     virtual void OnNotebookPageChanged(wxAuiNotebookEvent& event);
     virtual void OnHeatmapClick(wxRibbonButtonBarEvent& event);
@@ -136,6 +139,7 @@ class MainFrame : public MainFrameBase
     wxRibbonMetroArtProvider* m_artMetro = nullptr;
     wxMenu* m_addElementsMenu = nullptr;
     wxMenu* m_stabilityMenu = nullptr;
+    wxMenu* m_snapshotMenu = nullptr;
     wxLocale* m_locale = nullptr;
     PropertiesData* m_generalProperties = nullptr;
     //wxGLContext* m_sharedGLContext = nullptr;
@@ -146,6 +150,7 @@ class MainFrame : public MainFrameBase
 
     void OnAddElementsClick(wxCommandEvent& event);
     void OnStabilityMenuClick(wxCommandEvent& event);
+	void OnSnapshotMenuClick(wxCommandEvent& event);
 };
 
 #endif  // MAINFRAME_H

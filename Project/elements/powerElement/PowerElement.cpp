@@ -137,6 +137,39 @@ void PowerElement::DrawDCSwitches(wxGraphicsContext* gc) const
     }
 }
 
+void PowerElement::DrawDCSwitches(wxDC& dc) const
+{
+    dc.SetPen(*wxTRANSPARENT_PEN);
+
+    int i = 0;
+    for (auto parent : m_parentList) {
+        if (parent) {
+            if (m_online) {
+                dc.SetBrush(wxBrush(m_closedSwitchColour));
+            }
+            else {
+                dc.SetBrush(wxBrush(m_openedSwitchColour));
+            }
+
+            //gc->PushState();
+            //gc->Translate(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
+            //    m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0);
+            //gc->Rotate(wxDegToRad(parent->GetAngle()));
+            //gc->Translate(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
+            //    -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0);
+            //
+            //wxPoint2DDouble switchPos = m_switchRect[i].GetPosition();
+            //gc->DrawRectangle(switchPos.m_x, switchPos.m_y, m_switchSize, m_switchSize);
+            //
+            //gc->PopState();
+
+            DrawDCRectangle(m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
+				m_switchSize, m_switchSize, parent->GetAngle(), dc);
+        }
+        i++;
+    }
+}
+
 void PowerElement::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 {
     double arrowRate = 100.0;  // One arrow to each "arrowRate" distance in pixels.
@@ -196,6 +229,21 @@ void PowerElement::DrawDCPowerFlowPts(wxGraphicsContext* gc) const
         gc->SetBrush(wxBrush(m_powerFlowArrowColour));
 		for (auto arrow : m_powerFlowArrow) { DrawDCTriangle(arrow, gc); }
 	}
+}
+
+void PowerElement::DrawDCPowerFlowPts(wxDC& dc) const
+{
+    dc.SetPen(*wxTRANSPARENT_PEN);
+    if (m_online) {
+        dc.SetBrush(wxBrush(m_powerFlowArrowColour));
+        for (auto arrow : m_powerFlowArrow) { 
+			std::vector<wxPoint> arrowPts;
+            for (auto& pt : arrow) {
+				arrowPts.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
+			}
+            DrawDCTriangle(arrowPts, dc);
+        }
+    }
 }
 
 double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit)

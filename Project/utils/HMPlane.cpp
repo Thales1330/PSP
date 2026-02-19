@@ -11,6 +11,7 @@
 //#include "OpenGLText.h"
 
 #include <wx/msgdlg.h>
+#include <wx/dc.h>
 
 //HMPlane::HMPlane(Shader* shader, Shader* labelShader, const float& width, const float& height, const float limits[2])
 //	: m_width(width), m_height(height), m_shader(shader), m_labelShader(labelShader)
@@ -147,6 +148,111 @@ void HMPlane::DrawDC(wxGraphicsContext* gc) const
 	}
 }
 
+void HMPlane::DrawDC(wxDC& dc) const
+{
+	if (m_isClear) return;
+	dc.SetPen(*wxTRANSPARENT_PEN);
+	//for (const auto& line : m_coords)
+	//{
+	//	int y = wxRound(line[0]->y);
+	//
+	//	wxColour prevColour(255, 255, 255);
+	//	int prevX = 0;
+	//
+	//	for (size_t i = 0; i < line.size(); ++i)
+	//	{
+	//		const BufferMeshCoords* coords = line[i];
+	//
+	//		int currentX = wxRound(coords->x);
+	//		wxColour currentColour = VoltToColour(coords->z);
+	//
+	//		int width = currentX - prevX;
+	//
+	//		if (width > 0)
+	//		{
+	//			wxRect rect(prevX, y, width, m_meshSize);
+	//
+	//			dc.GradientFillLinear(rect,
+	//				prevColour,
+	//				currentColour,
+	//				wxEAST);
+	//		}
+	//
+	//		prevX = currentX;
+	//		prevColour = currentColour;
+	//	}
+	//}
+
+	for (const auto& line : m_coords)
+	{
+		int y = wxRound(line[0]->y);
+
+		struct Stop {
+			double pos;
+			wxColour color;
+		};
+
+		std::vector<Stop> stops;
+
+		stops.push_back({ 0.0, wxColour(255,255,255) });
+
+		for (const BufferMeshCoords* coords : line)
+		{
+			double pos = coords->x / m_width;
+			stops.push_back({ pos, VoltToColour(coords->z) });
+		}
+
+		auto ColorAt = [&](double t) -> wxColour
+			{
+				if (t <= stops.front().pos)
+					return stops.front().color;
+
+				if (t >= stops.back().pos)
+					return stops.back().color;
+
+				for (size_t i = 0; i < stops.size() - 1; ++i)
+				{
+					if (t >= stops[i].pos && t <= stops[i + 1].pos)
+					{
+						double localT =
+							(t - stops[i].pos) /
+							(stops[i + 1].pos - stops[i].pos);
+
+						const wxColour& c1 = stops[i].color;
+						const wxColour& c2 = stops[i + 1].color;
+
+						return wxColour(
+							c1.Red() + localT * (c2.Red() - c1.Red()),
+							c1.Green() + localT * (c2.Green() - c1.Green()),
+							c1.Blue() + localT * (c2.Blue() - c1.Blue())
+						);
+					}
+				}
+
+				return stops.back().color;
+			};
+
+		for (size_t i = 0; i < stops.size() - 1; ++i)
+		{
+			int x1 = wxRound(stops[i].pos * m_width);
+			int x2 = wxRound(stops[i + 1].pos * m_width);
+
+			if (x2 <= x1)
+				continue;
+
+			double t1 = stops[i].pos;
+			double t2 = stops[i + 1].pos;
+
+			wxColour c1 = ColorAt(t1);
+			wxColour c2 = ColorAt(t2);
+
+			wxRect rect(x1, y, x2 - x1, m_meshSize);
+
+			dc.GradientFillLinear(rect, c1, c2, wxEAST);
+		}
+	}
+}
+
 //void HMPlane::DrawLabel(const Renderer& renderer, const glm::mat4& projectionViewMatrix, const float& x, const float& y) const
 //{
 //	const glm::mat4 mvp = projectionViewMatrix * glm::translate(glm::mat4(1.0f), glm::vec3(x, y, 0.0f));
@@ -229,6 +335,106 @@ void HMPlane::DrawLabelDC(wxGraphicsContext* gc) const
 	gc->DrawText(voltageText, 30 - textWidth / 2, m_height - 65);
 
 	gc->PopState();
+}
+
+void HMPlane::DrawLabelDC(wxDC& dc) const
+{
+	dc.SetUserScale(1.0, 1.0);
+	dc.SetDeviceOrigin(0, 0);
+
+	dc.SetPen(*wxBLACK_PEN);
+	int xStart = 30;
+	int yStart = m_height - 45;
+	int width = 300;
+	int height = 30;
+
+	struct Stop {
+		double pos;
+		wxColour color;
+	};
+
+	std::vector<Stop> stops = {
+		{0.00, VoltToColour(-1.0, 210)},
+		{0.25, VoltToColour(-0.5, 210)},
+		{0.50, VoltToColour(0.0, 210)},
+		{0.75, VoltToColour(0.5, 210)},
+		{1.00, VoltToColour(1.0, 210)}
+	};
+
+	auto ColorAt = [&](double t) -> wxColour
+		{
+			for (size_t i = 0; i < stops.size() - 1; ++i)
+			{
+				if (t >= stops[i].pos && t <= stops[i + 1].pos)
+				{
+					double localT =
+						(t - stops[i].pos) /
+						(stops[i + 1].pos - stops[i].pos);
+
+					const wxColour& c1 = stops[i].color;
+					const wxColour& c2 = stops[i + 1].color;
+
+					return wxColour(
+						c1.Red() + localT * (c2.Red() - c1.Red()),
+						c1.Green() + localT * (c2.Green() - c1.Green()),
+						c1.Blue() + localT * (c2.Blue() - c1.Blue())
+					);
+				}
+			}
+			return stops.back().color;
+		};
+
+	for (int x = 0; x < width; ++x)
+	{
+		double t = (double)x / width;
+
+		wxColour c = ColorAt(t);
+
+		dc.SetPen(wxPen(c));
+		dc.DrawLine(xStart + x,
+			yStart,
+			xStart + x,
+			yStart + height);
+	}
+
+	dc.SetPen(*wxBLACK_PEN);
+	dc.SetBrush(*wxTRANSPARENT_BRUSH);
+	dc.DrawRectangle(xStart, yStart, width, height);
+	wxPoint2DDouble lines[10];
+	lines[0] = wxPoint2DDouble(30, m_height - 50);
+	lines[1] = wxPoint2DDouble(30, m_height - 40);
+	lines[2] = wxPoint2DDouble(105, m_height - 50);
+	lines[3] = wxPoint2DDouble(105, m_height - 40);
+	lines[4] = wxPoint2DDouble(180, m_height - 50);
+	lines[5] = wxPoint2DDouble(180, m_height - 40);
+	lines[6] = wxPoint2DDouble(255, m_height - 50);
+	lines[7] = wxPoint2DDouble(255, m_height - 40);
+	lines[8] = wxPoint2DDouble(330, m_height - 50);
+	lines[9] = wxPoint2DDouble(330, m_height - 40);
+	//gc->DrawLines(10, lines, wxWINDING_RULE);
+	for (size_t i = 0; i < 10; i += 2) {
+		dc.DrawLine(lines[i].m_x, lines[i].m_y, lines[i + 1].m_x, lines[i + 1].m_y);
+	}
+
+	dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+	dc.DrawText(_("Voltage (p.u.)"), 30, m_height - 15);
+	wxString voltageText = "";
+	int textWidth, textHeight;
+	voltageText = wxString::Format("%.3f", m_limits[0]);
+	dc.GetTextExtent(voltageText, &textWidth, &textHeight);
+	dc.DrawText(voltageText, 330 - textWidth / 2, m_height - 65);
+	voltageText = wxString::Format("%.3f", m_limits[0] * 0.75 + m_limits[1] * 0.25);
+	dc.GetTextExtent(voltageText, &textWidth, &textHeight);
+	dc.DrawText(voltageText, 255 - textWidth / 2, m_height - 65);
+	voltageText = wxString::Format("%.3f", m_limits[0] * 0.5 + m_limits[1] * 0.5);
+	dc.GetTextExtent(voltageText, &textWidth, &textHeight);
+	dc.DrawText(voltageText, 180 - textWidth / 2, m_height - 65);
+	voltageText = wxString::Format("%.3f", m_limits[0] * 0.25 + m_limits[1] * 0.75);
+	dc.GetTextExtent(voltageText, &textWidth, &textHeight);
+	dc.DrawText(voltageText, 105 - textWidth / 2, m_height - 65);
+	voltageText = wxString::Format("%.3f", m_limits[1]);
+	dc.GetTextExtent(voltageText, &textWidth, &textHeight);
+	dc.DrawText(voltageText, 30 - textWidth / 2, m_height - 65);
 }
 
 void HMPlane::SetLabelLimits(const float& min, const float& max)

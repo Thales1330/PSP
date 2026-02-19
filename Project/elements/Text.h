@@ -70,7 +70,7 @@ class Text : public GraphicalElement
 {
 public:
 	Text();
-	Text(wxPoint2DDouble position);
+	Text(wxPoint2DDouble position, wxString fontName = wxT("Arial"), int fontSize = 10);
 	~Text();
 
 	virtual Element* GetCopy();
@@ -78,12 +78,15 @@ public:
 	virtual bool Contains(wxPoint2DDouble position) const;
 	//virtual void Draw(wxPoint2DDouble translation, double scale);
 	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);
+	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc);
 	virtual bool Intersects(wxRect2DDouble rect) const;
 	virtual void Rotate(bool clockwise = true);
 	virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList);
 	virtual void UpdateText(double systemPowerBase);
 	virtual wxString GetText() const { return m_text; }
 	virtual void SetText(wxString text);
+	virtual void SetFontName(wxString fontName) { m_fontName = fontName; }
+	virtual void SetFontSize(int fontSize) { m_fontSize = fontSize; }
 	virtual void SetAltSelectionColour(bool useAltSelectionColour = true) { m_useAltSelectionColour = useAltSelectionColour; }
 	virtual void SetAllowRotation(bool allowRotation = true) { m_allowRotation = allowRotation; }
 	//virtual bool IsGLTextOK();
@@ -108,10 +111,13 @@ public:
 
 protected:
 	wxString m_text = _("Text");
+	wxString m_fontName = wxT("Arial");
+	int m_fontSize = 10;
 	int m_numberOfLines = 0;
 	bool m_isMultlineText = false;
 	bool m_useAltSelectionColour = false;
 	bool m_allowRotation = true;
+	bool m_updateTextRectangle = true;
 
 	std::vector<GCText*> m_gcTextList;
 

@@ -15,11 +15,11 @@ namespace {
 // return the wxBORDER_SIMPLE that matches the current application theme
 wxBorder get_border_simple_theme_aware_bit() {
 #if wxVERSION_NUMBER >= 3300 && defined(__WXMSW__)
-    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_STATIC;
+    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_DEFAULT;
 #else
     return wxBORDER_DEFAULT;
 #endif
-} // DoGetBorderSimpleBit
+} // get_border_simple_theme_aware_bit
 bool bBitmapLoaded = false;
 } // namespace
 
@@ -215,63 +215,25 @@ ControlSystemTestBase::ControlSystemTestBase(wxWindow* parent, wxWindowID id, co
     m_panelGeneral = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panelGeneral, _("General"), false);
     
-    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* boxSizerLvl2_1 = new wxBoxSizer(wxHORIZONTAL);
     m_panelGeneral->SetSizer(boxSizerLvl2_1);
     
-    m_staticTextInput = new wxStaticText(m_panelGeneral, wxID_ANY, _("Input type:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    wxBoxSizer* boxSizer426 = new wxBoxSizer(wxVERTICAL);
     
-    boxSizerLvl2_1->Add(m_staticTextInput, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizerLvl2_1->Add(boxSizer426, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextInput = new wxStaticText(m_panelGeneral, wxID_ANY, _("Input:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizer426->Add(m_staticTextInput, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceInputArr;
-    m_choiceInputArr.Add(_("Step"));
-    m_choiceInputArr.Add(_("Ramp"));
-    m_choiceInputArr.Add(_("Quadratic"));
     m_choiceInput = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceInputArr, 0);
-    m_choiceInput->SetSelection(0);
     
-    boxSizerLvl2_1->Add(m_choiceInput, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer426->Add(m_choiceInput, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
     wxGridSizer* gridSizerLvl3_1 = new wxGridSizer(0, 2, 0, 0);
     
-    boxSizerLvl2_1->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxBoxSizer* boxSizerLvl4_1 = new wxBoxSizer(wxVERTICAL);
-    
-    gridSizerLvl3_1->Add(boxSizerLvl4_1, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    m_staticTextStartTime = new wxStaticText(m_panelGeneral, wxID_ANY, _("Start time"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    
-    boxSizerLvl4_1->Add(m_staticTextStartTime, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
-    wxBoxSizer* boxSizerLvl5_1 = new wxBoxSizer(wxHORIZONTAL);
-    
-    boxSizerLvl4_1->Add(boxSizerLvl5_1, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    m_textCtrlStartTime = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("1,0"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    #if wxVERSION_NUMBER >= 3000
-    m_textCtrlStartTime->SetHint(wxT(""));
-    #endif
-    
-    boxSizerLvl5_1->Add(m_textCtrlStartTime, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
-    m_staticTextSec_1 = new wxStaticText(m_panelGeneral, wxID_ANY, _("s"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    
-    boxSizerLvl5_1->Add(m_staticTextSec_1, 0, wxRIGHT|wxTOP|wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
-    
-    wxBoxSizer* boxSizerLvl4_2 = new wxBoxSizer(wxVERTICAL);
-    
-    gridSizerLvl3_1->Add(boxSizerLvl4_2, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    m_staticTextSlope = new wxStaticText(m_panelGeneral, wxID_ANY, _("Slope"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    
-    boxSizerLvl4_2->Add(m_staticTextSlope, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
-    m_textCtrlSlope = new wxTextCtrl(m_panelGeneral, wxID_ANY, wxT("1,0"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
-    #if wxVERSION_NUMBER >= 3000
-    m_textCtrlSlope->SetHint(wxT(""));
-    #endif
-    
-    boxSizerLvl4_2->Add(m_textCtrlSlope, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer426->Add(gridSizerLvl3_1, 0, wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl4_3 = new wxBoxSizer(wxVERTICAL);
     
@@ -311,6 +273,36 @@ ControlSystemTestBase::ControlSystemTestBase(wxWindow* parent, wxWindowID id, co
     
     boxSizerLvl5_2->Add(m_staticTextSec_2, 0, wxRIGHT|wxTOP|wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
     
+    wxArrayString m_pgMgrArr;
+    wxUnusedVar(m_pgMgrArr);
+    wxArrayInt m_pgMgrIntArr;
+    wxUnusedVar(m_pgMgrIntArr);
+    m_pgMgr = new wxPropertyGridManager(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), wxPG_DESCRIPTION|wxPG_SPLITTER_AUTO_CENTER|wxPG_BOLD_MODIFIED);
+    
+    boxSizerLvl2_1->Add(m_pgMgr, 1, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_pgPropStartTime = m_pgMgr->Append(  new wxFloatProperty( _("Start time (s)"), wxPG_LABEL, 1) );
+    m_pgPropStartTime->SetHelpString(_("Start time in seconds"));
+    m_pgPropStartTime->SetEditor( wxT("TextCtrl") );
+    
+    m_pgPropInitialValue = m_pgMgr->Append(  new wxFloatProperty( _("Initial value (p.u.)"), wxPG_LABEL, 0) );
+    m_pgPropInitialValue->SetHelpString(_("Initial value in p.u."));
+    m_pgPropInitialValue->SetEditor( wxT("TextCtrl") );
+    
+    m_pgPropSlope = m_pgMgr->Append(  new wxFloatProperty( _("Slope (p.u.)"), wxPG_LABEL, 1) );
+    m_pgPropSlope->SetHelpString(_("Slope in p.u. applied to the input equation:\n- Step: input = slope\n- Ramp: input = slope \u00D7 (t - t0)\n- Quadratic: input = slope \u00D7  (t - t0)\u00B2"));
+    m_pgPropSlope->SetEditor( wxT("TextCtrl") );
+    
+    m_pgMgrArr.Clear();
+    m_pgMgrIntArr.Clear();
+    m_pgMgrArr.Add(_("Step"));
+    m_pgMgrArr.Add(_("Ramp"));
+    m_pgMgrArr.Add(_("Quadratic"));
+    m_pgPropInputType = m_pgMgr->Append(  new wxEnumProperty( _("Input type"), wxPG_LABEL, m_pgMgrArr, m_pgMgrIntArr, 0) );
+    m_pgPropInputType->SetHelpString(_("Type of aplied input"));
+    m_pgPropInputType->SetEditor( wxT("Choice") );
+    m_pgMgr->SetMinSize(wxSize(-1,250));
+    
     wxBoxSizer* boxSizerBotomButtons = new wxBoxSizer(wxHORIZONTAL);
     
     boxSizerLvl1_1->Add(boxSizerBotomButtons, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
@@ -348,6 +340,8 @@ ControlSystemTestBase::ControlSystemTestBase(wxWindow* parent, wxWindowID id, co
         wxPersistenceManager::Get().Restore(this);
     }
     // Connect events
+    m_choiceInput->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &ControlSystemTestBase::OnInputSelected, this);
+    m_pgMgr->Bind(wxEVT_PG_CHANGED, &ControlSystemTestBase::OnPGValueChange, this);
     m_buttonRun->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlSystemTestBase::OnRunButtonClick, this);
     m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlSystemTestBase::OnCancelButtonClick, this);
     
@@ -355,6 +349,8 @@ ControlSystemTestBase::ControlSystemTestBase(wxWindow* parent, wxWindowID id, co
 
 ControlSystemTestBase::~ControlSystemTestBase()
 {
+    m_choiceInput->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &ControlSystemTestBase::OnInputSelected, this);
+    m_pgMgr->Unbind(wxEVT_PG_CHANGED, &ControlSystemTestBase::OnPGValueChange, this);
     m_buttonRun->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlSystemTestBase::OnRunButtonClick, this);
     m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlSystemTestBase::OnCancelButtonClick, this);
     

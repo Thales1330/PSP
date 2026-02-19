@@ -19,16 +19,17 @@
 #ifdef USING_WX_3_0_X
 #include "../utils/DegreesAndRadians.h"
 #endif
+
 #include <wx/pen.h>
 #include <wx/brush.h>
 
 Element::Element() { m_selectionColour.Set(0, 128, 255, 128); }
 void Element::SetPosition(const wxPoint2DDouble position)
 {
-    m_position = position;
-    m_rect =
-        wxRect2DDouble(m_position.m_x - m_width / 2.0 - m_borderSize, m_position.m_y - m_height / 2.0 - m_borderSize,
-                       m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
+	m_position = position;
+	m_rect =
+		wxRect2DDouble(m_position.m_x - m_width / 2.0 - m_borderSize, m_position.m_y - m_height / 2.0 - m_borderSize,
+			m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
 }
 
 //void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode) const
@@ -41,16 +42,153 @@ void Element::SetPosition(const wxPoint2DDouble position)
 //    glEnd();
 //}
 
+void Element::DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC& dc) const
+{
+	if (angle == 0.0) {
+		wxPoint poly[4] = {
+			wxPoint((int)(position.m_x - width / 2.0), (int)(position.m_y - height / 2.0)),
+			wxPoint((int)(position.m_x + width / 2.0), (int)(position.m_y - height / 2.0)),
+			wxPoint((int)(position.m_x + width / 2.0), (int)(position.m_y + height / 2.0)),
+			wxPoint((int)(position.m_x - width / 2.0), (int)(position.m_y + height / 2.0))
+		};
+		dc.DrawPolygon(4, poly);
+		return;
+	}
+
+	double hw = width / 2.0;
+	double hh = height / 2.0;
+	double angleRad = wxDegToRad(angle);
+
+	// Retângulo centrado na origem
+	wxPoint2DDouble pts[4] = {
+		{-hw, -hh},
+		{ hw, -hh},
+		{ hw,  hh},
+		{-hw,  hh}
+	};
+
+	wxPoint poly[4];
+
+	for (int i = 0; i < 4; ++i)
+	{
+		double x = pts[i].m_x;
+		double y = pts[i].m_y;
+
+		// Rotação
+		double xr = x * cos(angleRad) - y * sin(angleRad);
+		double yr = x * sin(angleRad) + y * cos(angleRad);
+
+		// Translação para centro
+		poly[i].x = (int)(xr + position.m_x);
+		poly[i].y = (int)(yr + position.m_y);
+	}
+
+	dc.DrawPolygon(4, poly);
+
+}
+
+void Element::DrawDCRoundedRectRotated(wxDC& dc, const wxPoint2DDouble& center, double width, double height, double radius, double angleDeg, int arcSegments) const
+{
+	radius = std::min(radius, std::min(width, height) / 2.0);
+
+	double hw = width / 2.0;
+	double hh = height / 2.0;
+
+	double rad = wxDegToRad(angleDeg);
+	double c = std::cos(rad);
+	double s = std::sin(rad);
+
+	auto rotate = [&](double x, double y)
+		{
+			double xr = c * x - s * y + center.m_x;
+			double yr = s * x + c * y + center.m_y;
+			return wxPoint2DDouble(xr, yr);
+		};
+
+	auto drawArc = [&](double cx, double cy,
+		double startDeg)
+		{
+			wxPoint2DDouble arcCenterLocal(cx, cy);
+			wxPoint2DDouble arcCenter = rotate(arcCenterLocal.m_x,
+				arcCenterLocal.m_y);
+
+			double start = startDeg + angleDeg;
+			double end = start + 90.0;
+
+			dc.DrawEllipticArc(
+				wxRound(arcCenter.m_x - radius),
+				wxRound(arcCenter.m_y - radius),
+				wxRound(radius * 2),
+				wxRound(radius * 2),
+				start,
+				end
+			);
+		};
+
+	auto line = [&](double x1, double y1,
+		double x2, double y2,
+		wxPoint& p1, wxPoint& p2)
+		{
+			wxPoint2DDouble p1d = rotate(x1, y1);
+			wxPoint2DDouble p2d = rotate(x2, y2);
+			p1 = wxPoint(wxRound(p1d.m_x), wxRound(p1d.m_y));
+			p2 = wxPoint(wxRound(p2d.m_x), wxRound(p2d.m_y));
+
+			//dc.DrawLine(p1.x, p1.y, p2.x, p2.y);
+		};
+
+	wxPen pen = dc.GetPen();
+
+	wxPoint pts[4];
+	line(-hw + radius, -hh,
+		hw - radius, -hh,
+		pts[0], pts[1]);
+
+	line(hw - radius, hh,
+		-hw + radius, hh,
+		pts[2], pts[3]);
+
+	dc.SetPen(*wxTRANSPARENT_PEN);
+	dc.DrawPolygon(4, pts);
+	dc.SetPen(pen);
+	dc.DrawLine(pts[0].x, pts[0].y, pts[1].x, pts[1].y);
+	dc.DrawLine(pts[2].x, pts[2].y, pts[3].x, pts[3].y);
+
+	line(hw, -hh + radius,
+		hw, hh - radius,
+		pts[0], pts[1]);
+
+	line(-hw, hh - radius,
+		-hw, -hh + radius,
+		pts[2], pts[3]);
+
+	dc.SetPen(*wxTRANSPARENT_PEN);
+	dc.DrawPolygon(4, pts);
+	dc.SetPen(pen);
+	dc.DrawLine(pts[0].x, pts[0].y, pts[1].x, pts[1].y);
+	dc.DrawLine(pts[2].x, pts[2].y, pts[3].x, pts[3].y);
+
+	drawArc(hw - radius, -hh + radius, 0 - angleDeg * 2); 
+	drawArc(hw - radius, hh - radius, 270 - angleDeg * 2);
+	drawArc(-hw + radius, hh - radius, 180 - angleDeg * 2);
+	drawArc(-hw + radius, -hh + radius, 90 - angleDeg * 2);
+}
+
 void Element::DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext* gc) const
 {
-    wxPoint2DDouble* pts = new wxPoint2DDouble[numSegments + 1];
+	wxPoint2DDouble* pts = new wxPoint2DDouble[numSegments + 1];
 	for (int i = 0; i < numSegments; i++) {
 		double theta = 2.0 * 3.1415926 * double(i) / double(numSegments);
-        pts[i] = wxPoint2DDouble(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
+		pts[i] = wxPoint2DDouble(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
 	}
-    pts[numSegments] = pts[0];
-    gc->DrawLines(numSegments + 1, pts);
-    delete[] pts;
+	pts[numSegments] = pts[0];
+	gc->DrawLines(numSegments + 1, pts);
+	delete[] pts;
+}
+
+void Element::DrawDCCircle(wxPoint2DDouble position, double radius, wxDC& dc) const
+{
+	dc.DrawCircle(wxRound(position.m_x), wxRound(position.m_y), wxRound(radius));
 }
 
 //void Element::DrawArc(wxPoint2DDouble position,
@@ -74,14 +212,19 @@ void Element::DrawDCArc(wxPoint2DDouble position, double radius, double initAngl
 {
 	double initAngRad = wxDegToRad(initAngle);
 	double finalAngRad = wxDegToRad(finalAngle);
-    wxPoint2DDouble* points =  new wxPoint2DDouble[numSegments + 2];
+	wxPoint2DDouble* points = new wxPoint2DDouble[numSegments + 2];
 	for (int i = 0; i <= numSegments; i++) {
 		double theta = initAngRad + (finalAngRad - initAngRad) * double(i) / double(numSegments);
-        points[i] = wxPoint2DDouble(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
+		points[i] = wxPoint2DDouble(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
 	}
 
-    gc->StrokeLines(numSegments + 1, points);
-    delete[] points;
+	gc->StrokeLines(numSegments + 1, points);
+	delete[] points;
+}
+
+void Element::DrawDCArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, wxDC& dc) const
+{
+	dc.DrawEllipticArc(wxRound(position.m_x - radius), wxRound(position.m_y - radius), wxRound(2 * radius), wxRound(2 * radius), initAngle, finalAngle);
 }
 
 //void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) const
@@ -93,8 +236,14 @@ void Element::DrawDCArc(wxPoint2DDouble position, double radius, double initAngl
 
 void Element::DrawDCTriangle(std::vector<wxPoint2DDouble> points, wxGraphicsContext* gc) const
 {
-    points.emplace_back(points[0]);
-    gc->DrawLines(4, &points[0]);
+	points.emplace_back(points[0]);
+	gc->DrawLines(4, &points[0]);
+}
+
+void Element::DrawDCTriangle(std::vector<wxPoint> points, wxDC& dc) const
+{
+	points.emplace_back(points[0]);
+	dc.DrawPolygon(4, &points[0]);
 }
 
 //void Element::DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode) const
@@ -135,41 +284,68 @@ void Element::DrawDCTriangle(std::vector<wxPoint2DDouble> points, wxGraphicsCont
 
 void Element::DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext* gc) const
 {
-    gc->SetPen(wxPen(wxColour(0, 0, 0, 255)));
-    gc->SetBrush(wxBrush(wxColour(255, 255, 255, 204)));
-    gc->DrawRectangle(position.m_x, position.m_y, 8, 8);
+	gc->SetPen(wxPen(wxColour(0, 0, 0, 255)));
+	gc->SetBrush(wxBrush(wxColour(255, 255, 255, 204)));
+	gc->DrawRectangle(position.m_x, position.m_y, 8, 8);
 }
 
 wxPoint2DDouble Element::RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees) const
 {
-    double radAngle = angle;
-    if(degrees) radAngle = wxDegToRad(angle);
-    return wxPoint2DDouble(std::cos(radAngle) * (pointToRotate.m_x - m_position.m_x) -
-                               std::sin(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_x,
-                           std::sin(radAngle) * (pointToRotate.m_x - m_position.m_x) +
-                               std::cos(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_y);
+	double radAngle = angle;
+	if (degrees) radAngle = wxDegToRad(angle);
+	return wxPoint2DDouble(std::cos(radAngle) * (pointToRotate.m_x - m_position.m_x) -
+		std::sin(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_x,
+		std::sin(radAngle) * (pointToRotate.m_x - m_position.m_x) +
+		std::cos(radAngle) * (pointToRotate.m_y - m_position.m_y) + m_position.m_y);
+}
+
+wxPoint2DDouble Element::RotateLocal(wxPoint2DDouble local, double angleDeg) const
+{
+	double rad = wxDegToRad(angleDeg);
+	double c = std::cos(rad);
+	double s = std::sin(rad);
+
+	return wxPoint2DDouble(
+		c * local.m_x - s * local.m_y,
+		s * local.m_x + c * local.m_y
+	);
+}
+
+wxPoint Element::RotateAround(const wxPoint2DDouble& p, const wxPoint2DDouble& center, double angleDeg) const
+{
+	double rad = wxDegToRad(angleDeg);
+	double c = std::cos(rad);
+	double s = std::sin(rad);
+
+	double dx = p.m_x - center.m_x;
+	double dy = p.m_y - center.m_y;
+
+	double xr = c * dx - s * dy + center.m_x;
+	double yr = s * dx + c * dy + center.m_y;
+
+	return wxPoint(wxRound(xr), wxRound(yr));
 }
 
 void Element::StartMove(wxPoint2DDouble position)
 {
-    this->m_moveStartPt = position;
-    this->m_movePos = m_position;
+	this->m_moveStartPt = position;
+	this->m_movePos = m_position;
 }
 
 void Element::Move(wxPoint2DDouble position) { SetPosition(m_movePos + position - m_moveStartPt); }
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble translation, double scale, double offsetX, double offsetY) const
 {
-    return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *
-           scale;
+	return wxPoint2DDouble(m_position.m_x + offsetX + translation.m_x, m_position.m_y + offsetY + translation.m_y) *
+		scale;
 }
 
 wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble position,
-                                       wxPoint2DDouble translation,
-                                       double scale,
-                                       double offsetX,
-                                       double offsetY) const
+	wxPoint2DDouble translation,
+	double scale,
+	double offsetX,
+	double offsetY) const
 {
-    return wxPoint2DDouble(position.m_x + offsetX + translation.m_x, position.m_y + offsetY + translation.m_y) * scale;
+	return wxPoint2DDouble(position.m_x + offsetX + translation.m_x, position.m_y + offsetY + translation.m_y) * scale;
 }
 
 //void Element::DrawPoint(wxPoint2DDouble position, double size) const
@@ -181,226 +357,226 @@ wxPoint2DDouble Element::WorldToScreen(wxPoint2DDouble position,
 //}
 
 bool Element::RotatedRectanglesIntersects(wxRect2DDouble rect1,
-                                          wxRect2DDouble rect2,
-                                          double angle1,
-                                          double angle2) const
+	wxRect2DDouble rect2,
+	double angle1,
+	double angle2) const
 {
-    wxPoint2DDouble rect1Corners[4] = {rect1.GetLeftTop(), rect1.GetLeftBottom(), rect1.GetRightBottom(),
-                                       rect1.GetRightTop()};
-    wxPoint2DDouble rect2Corners[4] = {rect2.GetLeftTop(), rect2.GetLeftBottom(), rect2.GetRightBottom(),
-                                       rect2.GetRightTop()};
-    wxPoint2DDouble rect1Center(rect1.m_x + rect1.m_width / 2.0, rect1.m_y + rect1.m_height / 2.0);
-    wxPoint2DDouble rect2Center(rect2.m_x + rect2.m_width / 2.0, rect2.m_y + rect2.m_height / 2.0);
+	wxPoint2DDouble rect1Corners[4] = { rect1.GetLeftTop(), rect1.GetLeftBottom(), rect1.GetRightBottom(),
+									   rect1.GetRightTop() };
+	wxPoint2DDouble rect2Corners[4] = { rect2.GetLeftTop(), rect2.GetLeftBottom(), rect2.GetRightBottom(),
+									   rect2.GetRightTop() };
+	wxPoint2DDouble rect1Center(rect1.m_x + rect1.m_width / 2.0, rect1.m_y + rect1.m_height / 2.0);
+	wxPoint2DDouble rect2Center(rect2.m_x + rect2.m_width / 2.0, rect2.m_y + rect2.m_height / 2.0);
 
-    // Rotate the corners.
-    double radAngle1 = wxDegToRad(angle1);
-    double radAngle2 = wxDegToRad(angle2);
+	// Rotate the corners.
+	double radAngle1 = wxDegToRad(angle1);
+	double radAngle2 = wxDegToRad(angle2);
 
-    for(int i = 0; i < 4; i++) {
-        rect1Corners[i] =
-            wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
-                                std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
-                            std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
-                                std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
+	for (int i = 0; i < 4; i++) {
+		rect1Corners[i] =
+			wxPoint2DDouble(std::cos(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) -
+				std::sin(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_x,
+				std::sin(radAngle1) * (rect1Corners[i].m_x - rect1Center.m_x) +
+				std::cos(radAngle1) * (rect1Corners[i].m_y - rect1Center.m_y) + rect1Center.m_y);
 
-        rect2Corners[i] =
-            wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
-                                std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
-                            std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
-                                std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
-    }
+		rect2Corners[i] =
+			wxPoint2DDouble(std::cos(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) -
+				std::sin(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_x,
+				std::sin(radAngle2) * (rect2Corners[i].m_x - rect2Center.m_x) +
+				std::cos(radAngle2) * (rect2Corners[i].m_y - rect2Center.m_y) + rect2Center.m_y);
+	}
 
-    //[Ref] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
+	//[Ref] http://www.gamedev.net/page/resources/_/technical/game-programming/2d-rotated-rectangle-collision-r2604
 
-    // Find the rectangles axis to project
-    wxPoint2DDouble axis[4] = {rect1Corners[3] - rect1Corners[0], rect1Corners[3] - rect1Corners[2],
-                               rect2Corners[3] - rect2Corners[0], rect2Corners[3] - rect2Corners[2]};
+	// Find the rectangles axis to project
+	wxPoint2DDouble axis[4] = { rect1Corners[3] - rect1Corners[0], rect1Corners[3] - rect1Corners[2],
+							   rect2Corners[3] - rect2Corners[0], rect2Corners[3] - rect2Corners[2] };
 
-    // Calculate the projected points to each axis
-    wxPoint2DDouble rect1ProjPts[4][4];  // [axis][corner]
-    wxPoint2DDouble rect2ProjPts[4][4];  // [axis][corner]
-    for(int i = 0; i < 4; i++) {
-        double den = axis[i].m_x * axis[i].m_x + axis[i].m_y * axis[i].m_y;
-        for(int j = 0; j < 4; j++) {
-            double m_rectProj = (rect1Corners[j].m_x * axis[i].m_x + rect1Corners[j].m_y * axis[i].m_y) / den;
-            double rectProj = (rect2Corners[j].m_x * axis[i].m_x + rect2Corners[j].m_y * axis[i].m_y) / den;
+	// Calculate the projected points to each axis
+	wxPoint2DDouble rect1ProjPts[4][4];  // [axis][corner]
+	wxPoint2DDouble rect2ProjPts[4][4];  // [axis][corner]
+	for (int i = 0; i < 4; i++) {
+		double den = axis[i].m_x * axis[i].m_x + axis[i].m_y * axis[i].m_y;
+		for (int j = 0; j < 4; j++) {
+			double m_rectProj = (rect1Corners[j].m_x * axis[i].m_x + rect1Corners[j].m_y * axis[i].m_y) / den;
+			double rectProj = (rect2Corners[j].m_x * axis[i].m_x + rect2Corners[j].m_y * axis[i].m_y) / den;
 
-            rect1ProjPts[i][j] = wxPoint2DDouble(m_rectProj * axis[i].m_x, m_rectProj * axis[i].m_y);
-            rect2ProjPts[i][j] = wxPoint2DDouble(rectProj * axis[i].m_x, rectProj * axis[i].m_y);
-        }
-    }
+			rect1ProjPts[i][j] = wxPoint2DDouble(m_rectProj * axis[i].m_x, m_rectProj * axis[i].m_y);
+			rect2ProjPts[i][j] = wxPoint2DDouble(rectProj * axis[i].m_x, rectProj * axis[i].m_y);
+		}
+	}
 
-    // Calculate the scalar value to identify the max and min values on projections
-    double rect1Scalar[4][4];  //[axis][corner]
-    double rect2Scalar[4][4];  //[axis][corner]
-    for(int i = 0; i < 4; i++) {
-        for(int j = 0; j < 4; j++) {
-            rect1Scalar[i][j] = rect1ProjPts[i][j].m_x * axis[i].m_x + rect1ProjPts[i][j].m_y * axis[i].m_y;
-            rect2Scalar[i][j] = rect2ProjPts[i][j].m_x * axis[i].m_x + rect2ProjPts[i][j].m_y * axis[i].m_y;
-        }
-    }
-    // Identify the max and min scalar values
-    double rect1Min[4];
-    double rect1Max[4];
-    double rect2Min[4];
-    double rect2Max[4];
+	// Calculate the scalar value to identify the max and min values on projections
+	double rect1Scalar[4][4];  //[axis][corner]
+	double rect2Scalar[4][4];  //[axis][corner]
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			rect1Scalar[i][j] = rect1ProjPts[i][j].m_x * axis[i].m_x + rect1ProjPts[i][j].m_y * axis[i].m_y;
+			rect2Scalar[i][j] = rect2ProjPts[i][j].m_x * axis[i].m_x + rect2ProjPts[i][j].m_y * axis[i].m_y;
+		}
+	}
+	// Identify the max and min scalar values
+	double rect1Min[4];
+	double rect1Max[4];
+	double rect2Min[4];
+	double rect2Max[4];
 
-    for(int i = 0; i < 4; i++) {
-        rect1Max[i] = rect1Scalar[i][0];
-        rect2Max[i] = rect2Scalar[i][0];
-        rect1Min[i] = rect1Scalar[i][0];
-        rect2Min[i] = rect2Scalar[i][0];
+	for (int i = 0; i < 4; i++) {
+		rect1Max[i] = rect1Scalar[i][0];
+		rect2Max[i] = rect2Scalar[i][0];
+		rect1Min[i] = rect1Scalar[i][0];
+		rect2Min[i] = rect2Scalar[i][0];
 
-        for(int j = 1; j < 4; j++) {
-            if(rect1Max[i] < rect1Scalar[i][j]) rect1Max[i] = rect1Scalar[i][j];
-            if(rect2Max[i] < rect2Scalar[i][j]) rect2Max[i] = rect2Scalar[i][j];
+		for (int j = 1; j < 4; j++) {
+			if (rect1Max[i] < rect1Scalar[i][j]) rect1Max[i] = rect1Scalar[i][j];
+			if (rect2Max[i] < rect2Scalar[i][j]) rect2Max[i] = rect2Scalar[i][j];
 
-            if(rect1Min[i] > rect1Scalar[i][j]) rect1Min[i] = rect1Scalar[i][j];
-            if(rect2Min[i] > rect2Scalar[i][j]) rect2Min[i] = rect2Scalar[i][j];
-        }
-    }
+			if (rect1Min[i] > rect1Scalar[i][j]) rect1Min[i] = rect1Scalar[i][j];
+			if (rect2Min[i] > rect2Scalar[i][j]) rect2Min[i] = rect2Scalar[i][j];
+		}
+	}
 
-    // Check if any segment don't overlap
-    for(int i = 0; i < 4; i++) {
-        if(!(rect2Min[i] <= rect1Max[i] && rect2Max[i] >= rect1Min[i])) return false;
-    }
+	// Check if any segment don't overlap
+	for (int i = 0; i < 4; i++) {
+		if (!(rect2Min[i] <= rect1Max[i] && rect2Max[i] >= rect1Min[i])) return false;
+	}
 
-    return true;
+	return true;
 }
 
 bool Element::SetOnline(bool online)
 {
-    // Check if any parent is null.
-    for(auto it = m_parentList.begin(); it != m_parentList.end(); it++) {
-        if(!(*it)) return false;
-    }
-    m_online = online;
-    return true;
+	// Check if any parent is null.
+	for (auto it = m_parentList.begin(); it != m_parentList.end(); it++) {
+		if (!(*it)) return false;
+	}
+	m_online = online;
+	return true;
 }
 
 void Element::GeneralMenuItens(wxMenu& menu)
 {
-    wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
-    wxString exePath = exeFileName.GetPath();
+	wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
+	wxString exePath = exeFileName.GetPath();
 
-    wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
-    clockItem->SetBitmap(
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateClock16.png", wxPATH_WIN).GetPath()));
-    menu.Append(clockItem);
+	wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
+	clockItem->SetBitmap(
+		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateClock16.png", wxPATH_WIN).GetPath()));
+	menu.Append(clockItem);
 
-    wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-    counterClockItem->SetBitmap(wxImage(
-        exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateCounterClock16.png", wxPATH_WIN).GetPath()));
-    menu.Append(counterClockItem);
+	wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
+	counterClockItem->SetBitmap(wxImage(
+		exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateCounterClock16.png", wxPATH_WIN).GetPath()));
+	menu.Append(counterClockItem);
 
-    wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-    deleteItem->SetBitmap(
-        wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
-    menu.Append(deleteItem);
+	wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
+	deleteItem->SetBitmap(
+		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
+	menu.Append(deleteItem);
 }
 
 void Element::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const
 {
-    // Check rect corners boundaries.
+	// Check rect corners boundaries.
 
-    // Get rectangle corners
-    wxPoint2DDouble rectCorner[4] = {m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
-                                     m_rect.GetRightTop()};
-    // Rotate corners.
-    for(int i = 0; i < 4; ++i) { rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle); }
-    leftUp = rectCorner[0];
-    rightBottom = rectCorner[0];
-    for(int i = 1; i < 4; ++i) {
-        if(rectCorner[i].m_x < leftUp.m_x) leftUp.m_x = rectCorner[i].m_x;
-        if(rectCorner[i].m_y < leftUp.m_y) leftUp.m_y = rectCorner[i].m_y;
-        if(rectCorner[i].m_x > rightBottom.m_x) rightBottom.m_x = rectCorner[i].m_x;
-        if(rectCorner[i].m_y > rightBottom.m_y) rightBottom.m_y = rectCorner[i].m_y;
-    }
+	// Get rectangle corners
+	wxPoint2DDouble rectCorner[4] = { m_rect.GetLeftTop(), m_rect.GetLeftBottom(), m_rect.GetRightBottom(),
+									 m_rect.GetRightTop() };
+	// Rotate corners.
+	for (int i = 0; i < 4; ++i) { rectCorner[i] = RotateAtPosition(rectCorner[i], m_angle); }
+	leftUp = rectCorner[0];
+	rightBottom = rectCorner[0];
+	for (int i = 1; i < 4; ++i) {
+		if (rectCorner[i].m_x < leftUp.m_x) leftUp.m_x = rectCorner[i].m_x;
+		if (rectCorner[i].m_y < leftUp.m_y) leftUp.m_y = rectCorner[i].m_y;
+		if (rectCorner[i].m_x > rightBottom.m_x) rightBottom.m_x = rectCorner[i].m_x;
+		if (rectCorner[i].m_y > rightBottom.m_y) rightBottom.m_y = rectCorner[i].m_y;
+	}
 
-    // Check points list boundaries.
-    for(int i = 0; i < (int)m_pointList.size(); i++) {
-        if(m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
-        if(m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
-        if(m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
-        if(m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
-    }
+	// Check points list boundaries.
+	for (int i = 0; i < (int)m_pointList.size(); i++) {
+		if (m_pointList[i].m_x < leftUp.m_x) leftUp.m_x = m_pointList[i].m_x;
+		if (m_pointList[i].m_y < leftUp.m_y) leftUp.m_y = m_pointList[i].m_y;
+		if (m_pointList[i].m_x > rightBottom.m_x) rightBottom.m_x = m_pointList[i].m_x;
+		if (m_pointList[i].m_y > rightBottom.m_y) rightBottom.m_y = m_pointList[i].m_y;
+	}
 }
 
 bool Element::DoubleFromString(wxWindow* parent, wxString strValue, double& value, wxString errorMsg)
 {
-    double dValue = 0.0;
+	double dValue = 0.0;
 
-    if(!strValue.ToDouble(&dValue)) {
-        wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
-        msgDialog.ShowModal();
-        return false;
-    }
+	if (!strValue.ToDouble(&dValue)) {
+		wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+		msgDialog.ShowModal();
+		return false;
+	}
 
-    value = dValue;
-    return true;
+	value = dValue;
+	return true;
 }
 
 bool Element::IntFromString(wxWindow* parent, wxString strValue, int& value, wxString errorMsg)
 {
-    long int iValue = 0;
+	long int iValue = 0;
 
-    if(!strValue.ToLong(&iValue)) {
-        wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
-        msgDialog.ShowModal();
-        return false;
-    }
+	if (!strValue.ToLong(&iValue)) {
+		wxMessageDialog msgDialog(parent, errorMsg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+		msgDialog.ShowModal();
+		return false;
+	}
 
-    value = iValue;
-    return true;
+	value = iValue;
+	return true;
 }
 
 wxString Element::StringFromDouble(double value, int minDecimal)
 {
-    wxString str = wxString::FromCDouble(value, 13);
-    int cutNumber = 0;
-    int numDecimal = 0;
-    bool foundCut = false;
-    for(int i = (int)str.length() - 1; i >= 0; i--) {
-        if(str[i] != '0' && !foundCut) {
-            cutNumber = i;
-            foundCut = true;
-        }
-        if(str[i] == '.') {
-            numDecimal = i;
-            break;
-        }
-    }
+	wxString str = wxString::FromCDouble(value, 13);
+	int cutNumber = 0;
+	int numDecimal = 0;
+	bool foundCut = false;
+	for (int i = (int)str.length() - 1; i >= 0; i--) {
+		if (str[i] != '0' && !foundCut) {
+			cutNumber = i;
+			foundCut = true;
+		}
+		if (str[i] == '.') {
+			numDecimal = i;
+			break;
+		}
+	}
 
-    wxString formatedStr = "";
-    if(cutNumber - numDecimal > minDecimal)
-        formatedStr = wxString::FromDouble(value, cutNumber - numDecimal);
-    else
-        formatedStr = wxString::FromDouble(value, minDecimal);
+	wxString formatedStr = "";
+	if (cutNumber - numDecimal > minDecimal)
+		formatedStr = wxString::FromDouble(value, cutNumber - numDecimal);
+	else
+		formatedStr = wxString::FromDouble(value, minDecimal);
 
-    return formatedStr;
+	return formatedStr;
 }
 
 void Element::ReplaceParent(Element* oldParent, Element* newParent)
 {
-    for(int i = 0; i < (int)m_parentList.size(); i++) {
-        if(m_parentList[i] == oldParent) m_parentList[i] = newParent;
-    }
+	for (int i = 0; i < (int)m_parentList.size(); i++) {
+		if (m_parentList[i] == oldParent) m_parentList[i] = newParent;
+	}
 }
 
 void Element::AddChild(Element* child) { m_childList.push_back(child); }
 void Element::RemoveChild(Element* child)
 {
-    for(auto it = m_childList.begin(); it != m_childList.end();) {
-        if (*it == child) it = m_childList.erase(it);
-        else ++it;
-    }
+	for (auto it = m_childList.begin(); it != m_childList.end();) {
+		if (*it == child) it = m_childList.erase(it);
+		else ++it;
+	}
 }
 
 void Element::ReplaceChild(Element* oldChild, Element* newChild)
 {
-    for(int i = 0; i < (int)m_childList.size(); i++) {
-        if(m_childList[i] == oldChild) m_childList[i] = newChild;
-    }
+	for (int i = 0; i < (int)m_childList.size(); i++) {
+		if (m_childList[i] == oldChild) m_childList[i] = newChild;
+	}
 }
 
 //void OpenGLColour::SetRGBA(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
@@ -424,68 +600,70 @@ void Element::ReplaceChild(Element* oldChild, Element* newChild)
 
 double Element::PointToLineDistance(wxPoint2DDouble point, int* segmentNumber) const
 {
-    //[Ref] http://geomalgorithms.com/a02-_lines.html
-    double distance = 100.0;  // Big initial distance.
-    wxPoint2DDouble p0 = point;
+	//[Ref] http://geomalgorithms.com/a02-_lines.html
+	double distance = 100.0;  // Big initial distance.
+	wxPoint2DDouble p0 = point;
 
-    for(int i = 1; i < (int)m_pointList.size() - 2; i++) {
-        double d = 0.0;
+	for (int i = 1; i < (int)m_pointList.size() - 2; i++) {
+		double d = 0.0;
 
-        wxPoint2DDouble p1 = m_pointList[i];
-        wxPoint2DDouble p2 = m_pointList[i + 1];
+		wxPoint2DDouble p1 = m_pointList[i];
+		wxPoint2DDouble p2 = m_pointList[i + 1];
 
-        wxPoint2DDouble v = p2 - p1;
-        wxPoint2DDouble w = p0 - p1;
+		wxPoint2DDouble v = p2 - p1;
+		wxPoint2DDouble w = p0 - p1;
 
-        double c1 = w.m_x * v.m_x + w.m_y * v.m_y;
-        double c2 = v.m_x * v.m_x + v.m_y * v.m_y;
+		double c1 = w.m_x * v.m_x + w.m_y * v.m_y;
+		double c2 = v.m_x * v.m_x + v.m_y * v.m_y;
 
-        if(c1 <= 0.0) {
-            d = std::sqrt(std::pow(p0.m_y - p1.m_y, 2) + std::pow(p0.m_x - p1.m_x, 2));
-        } else if(c2 <= c1) {
-            d = std::sqrt(std::pow(p0.m_y - p2.m_y, 2) + std::pow(p0.m_x - p2.m_x, 2));
-        } else {
-            d = std::abs((p2.m_y - p1.m_y) * p0.m_x - (p2.m_x - p1.m_x) * p0.m_y + p2.m_x * p1.m_y - p2.m_y * p1.m_x) /
-                std::sqrt(std::pow(p2.m_y - p1.m_y, 2) + std::pow(p2.m_x - p1.m_x, 2));
-        }
-        if(d < distance) {
-            distance = d;
-            if(segmentNumber) *segmentNumber = i;
-        }
-    }
+		if (c1 <= 0.0) {
+			d = std::sqrt(std::pow(p0.m_y - p1.m_y, 2) + std::pow(p0.m_x - p1.m_x, 2));
+		}
+		else if (c2 <= c1) {
+			d = std::sqrt(std::pow(p0.m_y - p2.m_y, 2) + std::pow(p0.m_x - p2.m_x, 2));
+		}
+		else {
+			d = std::abs((p2.m_y - p1.m_y) * p0.m_x - (p2.m_x - p1.m_x) * p0.m_y + p2.m_x * p1.m_y - p2.m_y * p1.m_x) /
+				std::sqrt(std::pow(p2.m_y - p1.m_y, 2) + std::pow(p2.m_x - p1.m_x, 2));
+		}
+		if (d < distance) {
+			distance = d;
+			if (segmentNumber) *segmentNumber = i;
+		}
+	}
 
-    return distance;
+	return distance;
 }
 
 void Element::SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode)
 {
-    auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
-    auto position = XMLParser::AppendNode(doc, cadProp, "Position");
-    auto posX = XMLParser::AppendNode(doc, position, "X");
-    XMLParser::SetNodeValue(doc, posX, m_position.m_x);
-    auto posY = XMLParser::AppendNode(doc, position, "Y");
-    XMLParser::SetNodeValue(doc, posY, m_position.m_y);
-    auto size = XMLParser::AppendNode(doc, cadProp, "Size");
-    auto width = XMLParser::AppendNode(doc, size, "Width");
-    XMLParser::SetNodeValue(doc, width, m_width);
-    auto height = XMLParser::AppendNode(doc, size, "Height");
-    XMLParser::SetNodeValue(doc, height, m_height);
-    auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
-    XMLParser::SetNodeValue(doc, angle, m_angle);
+	auto cadProp = XMLParser::AppendNode(doc, elementNode, "CADProperties");
+	auto position = XMLParser::AppendNode(doc, cadProp, "Position");
+	auto posX = XMLParser::AppendNode(doc, position, "X");
+	XMLParser::SetNodeValue(doc, posX, m_position.m_x);
+	auto posY = XMLParser::AppendNode(doc, position, "Y");
+	XMLParser::SetNodeValue(doc, posY, m_position.m_y);
+	auto size = XMLParser::AppendNode(doc, cadProp, "Size");
+	auto width = XMLParser::AppendNode(doc, size, "Width");
+	XMLParser::SetNodeValue(doc, width, m_width);
+	auto height = XMLParser::AppendNode(doc, size, "Height");
+	XMLParser::SetNodeValue(doc, height, m_height);
+	auto angle = XMLParser::AppendNode(doc, cadProp, "Angle");
+	XMLParser::SetNodeValue(doc, angle, m_angle);
 }
 
 bool Element::OpenCADProperties(rapidxml::xml_node<>* elementNode)
 {
-    auto cadPropNode = elementNode->first_node("CADProperties");
-    if(!cadPropNode) return false;
+	auto cadPropNode = elementNode->first_node("CADProperties");
+	if (!cadPropNode) return false;
 
-    auto position = cadPropNode->first_node("Position");
-    double posX = XMLParser::GetNodeValueDouble(position, "X");
-    double posY = XMLParser::GetNodeValueDouble(position, "Y");
-    auto size = cadPropNode->first_node("Size");
-    m_width = XMLParser::GetNodeValueDouble(size, "Width");
-    m_height = XMLParser::GetNodeValueDouble(size, "Height");
-    m_angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
-    SetPosition(wxPoint2DDouble(posX, posY));
-    return true;
+	auto position = cadPropNode->first_node("Position");
+	double posX = XMLParser::GetNodeValueDouble(position, "X");
+	double posY = XMLParser::GetNodeValueDouble(position, "Y");
+	auto size = cadPropNode->first_node("Size");
+	m_width = XMLParser::GetNodeValueDouble(size, "Width");
+	m_height = XMLParser::GetNodeValueDouble(size, "Height");
+	m_angle = XMLParser::GetNodeValueDouble(cadPropNode, "Angle");
+	SetPosition(wxPoint2DDouble(posX, posY));
+	return true;
 }

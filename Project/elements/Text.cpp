@@ -39,12 +39,16 @@ Text::Text() : GraphicalElement()
 {
 	m_elementType = TYPE_TEXT;
 	SetText(m_text);
+	m_inserted = true;
 }
-Text::Text(wxPoint2DDouble position) : GraphicalElement()
+Text::Text(wxPoint2DDouble position, wxString fontName, int fontSize) : GraphicalElement()
 {
 	m_elementType = TYPE_TEXT;
 	m_position = position;
+	m_fontName = fontName;
+	m_fontSize = fontSize;
 	SetText(m_text);
+	m_inserted = true;
 }
 
 Text::~Text()
@@ -98,6 +102,43 @@ bool Text::Contains(wxPoint2DDouble position) const
 
 void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc)
 {
+	// Update text extent using correct context
+	if (m_updateTextRectangle) {
+		for (GCText* gcText : m_gcTextList) {
+			if (gcText) delete gcText;
+		}
+		m_gcTextList.clear();
+
+		m_numberOfLines = m_text.Freq('\n') + 1;
+		if (m_numberOfLines > 1) m_isMultlineText = true;
+		m_width = 0.0;
+		m_height = 0.0;
+		wxString multText = m_text;
+		for (int i = 0; i < m_numberOfLines; ++i) {
+			wxString nextLine;
+			wxString currentLine = multText.BeforeFirst('\n', &nextLine);
+			multText = nextLine;
+
+			GCText* gcText = new GCText(currentLine);
+			wxFont font = wxFont(m_fontSize,
+				wxFONTFAMILY_UNKNOWN,
+				wxFONTSTYLE_NORMAL,
+				wxFONTWEIGHT_NORMAL,
+				false,
+				m_fontName);
+			gcText->SetFont(font);
+			m_gcTextList.push_back(gcText);
+
+			double w, h;
+			gc->GetTextExtent(currentLine, &w, &h);
+
+			if (w > m_width) m_width = w;
+			m_height += h;
+		}
+		SetPosition(m_position);  // Update element rectangle.
+		m_updateTextRectangle = false;
+	}
+
 	// Draw selection rectangle
 
 	// Push the current matrix on stack.
@@ -134,6 +175,68 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	gc->PopState();
 }
 
+void Text::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc)
+{
+	// Update text extent using correct context
+	if (m_updateTextRectangle) {
+		for (GCText* gcText : m_gcTextList) {
+			if (gcText) delete gcText;
+		}
+		m_gcTextList.clear();
+
+		m_numberOfLines = m_text.Freq('\n') + 1;
+		if (m_numberOfLines > 1) m_isMultlineText = true;
+		m_width = 0.0;
+		m_height = 0.0;
+		wxString multText = m_text;
+		for (int i = 0; i < m_numberOfLines; ++i) {
+			wxString nextLine;
+			wxString currentLine = multText.BeforeFirst('\n', &nextLine);
+			multText = nextLine;
+
+			GCText* gcText = new GCText(currentLine);
+			wxFont font = wxFont(m_fontSize,
+				wxFONTFAMILY_UNKNOWN,
+				wxFONTSTYLE_NORMAL,
+				wxFONTWEIGHT_NORMAL,
+				false,
+				m_fontName);
+			gcText->SetFont(font);
+			m_gcTextList.push_back(gcText);
+
+			double w, h;
+			wxSize txtSize = dc.GetTextExtent(currentLine);
+
+			if (txtSize.GetWidth() > m_width) m_width = txtSize.GetWidth();
+			m_height += txtSize.GetHeight();
+		}
+		SetPosition(m_position);  // Update element rectangle.
+		m_updateTextRectangle = false;
+	}
+
+	// Draw selection rectangle
+	if (m_selected) {
+		dc.SetPen(*wxTRANSPARENT_PEN);
+		if (m_useAltSelectionColour) dc.SetBrush(wxBrush(wxColour(0, 230, 0, 125)));
+		else dc.SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
+
+		DrawDCRectangle(m_position, m_rect.m_width, m_rect.m_height, m_angle, dc);
+	}
+
+	// Draw text (layer 2)
+	//wxPoint2DDouble pos = m_position - wxPoint2DDouble(m_width / 2, m_height / 2);
+	if (m_isMultlineText) {
+		for (unsigned int i = 0; i < m_gcTextList.size(); ++i) {
+			m_gcTextList[i]->Draw(
+				m_position +
+				wxPoint2DDouble(0.0, (m_height * static_cast<double>(i) / static_cast<double>(m_numberOfLines))), m_width, m_height, dc, m_angle);
+		}
+	}
+	else if (m_gcTextList.size() > 0) {
+		m_gcTextList[0]->Draw(m_position, m_width, m_height, dc, m_angle);
+	}
+}
+
 bool Text::Intersects(wxRect2DDouble rect) const
 {
 	if (m_angle == 0.0 || m_angle == 180.0) return m_rect.Intersects(rect);
@@ -143,28 +246,7 @@ bool Text::Intersects(wxRect2DDouble rect) const
 void Text::SetText(wxString text)
 {
 	m_text = text;
-
-	// Clear text list
-	//for (auto it = m_gcTextList.begin(), itEnd = m_gcTextList.end(); it != itEnd; ++it) { delete* it; }
-	for (GCText* gcText : m_gcTextList) {
-		if (gcText) delete gcText;
-	}
-	m_gcTextList.clear();
-
-	m_numberOfLines = m_text.Freq('\n') + 1;
-	if (m_numberOfLines > 1) m_isMultlineText = true;
-	m_width = 0.0;
-	m_height = 0.0;
-	wxString multText = m_text;
-	for (int i = 0; i < m_numberOfLines; ++i) {
-		wxString nextLine;
-		wxString currentLine = multText.BeforeFirst('\n', &nextLine);
-		multText = nextLine;
-		m_gcTextList.push_back(new GCText(currentLine));
-		if (m_gcTextList[i]->GetWidth() > m_width) m_width = m_gcTextList[i]->GetWidth();
-		m_height += m_gcTextList[i]->GetHeight();
-	}
-	SetPosition(m_position);  // Update element rectangle.
+	m_updateTextRectangle = true;
 }
 
 void Text::Rotate(bool clockwise)

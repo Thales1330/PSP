@@ -139,6 +139,14 @@ public:
 				//		data.useOpenGL = false;
 				//	}
 				//}
+				if (tag == "labelfont") {
+					data.labelFont = tagValue;
+				}
+				if (tag == "labelfontsize") {
+					long size = 10;
+					tagValue.ToLong(&size);
+					data.labelFontSize = static_cast<int>(size);
+				}
 				if (tag == "atpfile") {
 					data.atpPath = wxFileName(tagValue);
 				}
@@ -152,6 +160,8 @@ public:
 			file.AddLine("lang=en");
 			file.AddLine("plotlib=chartdir");
 			file.AddLine("theme=light");
+			file.AddLine("labelfont=Arial");
+			file.AddLine("labelfontsize=10");
 			file.AddLine("atpfile=");
 			//file.AddLine("useOpenGL=yes");
 
@@ -206,8 +216,8 @@ public:
 #ifdef __WXMSW__
 		wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
 		wxString fontsPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\fonts", wxPATH_WIN).GetPath();
-		bool loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunrm.ttf");
-		if (loadFont) loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunbx.ttf");
+		bool loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunrm.ttf"); // regular
+		if (loadFont) loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunbx.ttf"); // bold
 		if (!loadFont) {
 			wxMessageDialog msgDialog(nullptr, _("Fail to load local font."), _("Error"),
 				wxOK | wxCENTRE | wxICON_ERROR);

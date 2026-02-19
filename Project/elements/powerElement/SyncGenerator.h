@@ -151,6 +151,7 @@ class SyncGenerator : public Machines
     virtual void Init();
     //virtual void DrawSymbol() const;
     virtual void DrawDCSymbol(wxGraphicsContext* gc) const;
+    virtual void DrawDCSymbol(wxDC& dc) const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual bool ShowForm(wxWindow* parent, Element* element);
     virtual wxString GetTipText() const;

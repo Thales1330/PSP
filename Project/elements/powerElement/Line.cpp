@@ -178,6 +178,80 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	}
 }
 
+void Line::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+{
+
+	wxColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	std::vector<wxPoint> pointList;
+	for(auto pt : m_pointList) {
+		pointList.emplace_back(pt.m_x, pt.m_y);
+	}
+	//if (!m_inserted && pointList.size() > 0) {
+	//	wxPoint secondPoint = wxPoint(m_position.m_x, m_position.m_y);
+	//	if (pointList.size() > 2) { secondPoint = pointList[2]; }
+	//	wxPoint2DDouble swPoint = GetSwitchPoint(m_parentList[0], pointList[0], secondPoint)
+	//	pointList[1] = wxPoint(m_position.m_x, m_position.m_y);
+	//	pointList.push_back(m_position);
+	//}
+
+	// Line selected (Layer 1).
+	if (m_selected) {
+		dc.SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+		dc.SetBrush(*wxTRANSPARENT_BRUSH);
+		if (pointList.size() > 0)
+			dc.DrawLines(pointList.size(), &pointList[0]);
+
+		// Draw nodes selection.
+		dc.SetPen(*wxTRANSPARENT_PEN);
+		dc.SetBrush(wxBrush(m_selectionColour));
+		if (pointList.size() > 0) {
+			DrawDCCircle(pointList[0], 5.0 + m_borderSize / scale, dc);
+			if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, dc); }
+		}
+	}
+
+	// Draw line (Layer 2)
+	dc.SetPen(wxPen(elementColour, 2));
+	dc.SetBrush(*wxTRANSPARENT_BRUSH);
+	if (pointList.size() > 0)
+		dc.DrawLines(pointList.size(), &pointList[0]);
+
+	if (m_inserted) {
+		DrawDCSwitches(dc);
+		DrawDCPowerFlowPts(dc);
+	}
+
+	// Draw nodes.
+	dc.SetPen(*wxTRANSPARENT_PEN);
+	dc.SetBrush(wxBrush(elementColour));
+	if (pointList.size() > 0) {
+		DrawDCCircle(pointList[0], 5.0, dc);
+		if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0, dc); }
+	}
+
+	// Draw pickboxes (Layer 3).
+	//if (m_showPickbox) {
+	//	gc->PushState();
+	//	gc->SetTransform(identityMatrix);
+	//
+	//	for (int i = 2; i < (int)m_pointList.size() - 2; i++) {
+	//		DrawDCPickbox(WorldToScreen(m_pointList[i], translation - wxPoint2DDouble(4 / scale, 4 / scale), scale), gc);
+	//	}
+	//
+	//	gc->PopState();
+	//}
+}
+
 void Line::Move(wxPoint2DDouble position)
 {
 	if (!m_parentList[0]) {

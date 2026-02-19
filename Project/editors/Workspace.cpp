@@ -51,6 +51,7 @@
 #include "../utils/FileHanding.h"
 
 #include <wx/busyinfo.h>
+#include <wx/dcsvg.h>
 
 // Workspace
 Workspace::Workspace() : WorkspaceBase(nullptr)
@@ -133,7 +134,15 @@ void Workspace::OnPaint(wxPaintEvent& event)
 	dc.Clear();
 	wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
 
+	// Draw
+	DrawScene(gc);
+	delete gc;
 
+	event.Skip();
+}
+
+void Workspace::DrawScene(wxGraphicsContext* gc)
+{
 	// Draw
 	if (gc) {
 
@@ -151,6 +160,13 @@ void Workspace::OnPaint(wxPaintEvent& event)
 			element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		}
 
+		// Dummy Text to set correct context
+		// TODO: Find a better way to do this.
+		Text* text = new Text(wxPoint2DDouble(0.0, 0.0), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		text->SetText("");
+		text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
+		delete text;
+
 		// Texts
 		for (auto it = m_textList.begin(); it != m_textList.end(); ++it) {
 			Text* text = *it;
@@ -165,10 +181,81 @@ void Workspace::OnPaint(wxPaintEvent& event)
 		if (m_hmPlane && m_showHM) {
 			m_hmPlane->DrawLabelDC(gc);
 		}
-
-		delete gc;
 	}
-	event.Skip();
+}
+
+void Workspace::DrawScene(wxDC& dc)
+{
+	// HMPlane
+	if (m_hmPlane && m_showHM) {
+		m_hmPlane->DrawDC(dc);
+	}
+
+	dc.SetUserScale(m_camera->GetScale(), m_camera->GetScale());
+	dc.SetDeviceOrigin(m_camera->GetTranslation().m_x * m_camera->GetScale(), m_camera->GetTranslation().m_y * m_camera->GetScale());
+	//dc.SetLogicalOrigin(-m_camera->GetTranslation().m_x, -m_camera->GetTranslation().m_y);
+
+	// Elements
+	for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
+		Element* element = *it;
+		element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
+	}
+
+	// Dummy Text to set correct context
+	// TODO: Find a better way to do this.
+	Text* text = new Text(wxPoint2DDouble(0.0, 0.0), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+	text->SetText("");
+	text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
+	delete text;
+
+	// Texts
+	for (auto it = m_textList.begin(); it != m_textList.end(); ++it) {
+		Text* text = *it;
+		text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
+	}
+
+	if (m_hmPlane && m_showHM) {
+		m_hmPlane->DrawLabelDC(dc);
+	}
+}
+
+void Workspace::CopyToClipboard()
+{
+	wxSize size = GetClientSize();
+
+	int scale = 2;
+
+	wxBitmap bitmap(size.x * scale, size.y * scale);
+	wxMemoryDC memDC(bitmap);
+
+	memDC.SetBackground(*wxWHITE_BRUSH);
+	memDC.Clear();
+
+	wxGraphicsContext* gc = wxGraphicsContext::Create(memDC);
+	if (!gc) return;
+	gc->Scale(scale, scale); // Increase the scale to improve the quality of the copied image.
+
+	DrawScene(gc);
+	delete gc;
+
+	memDC.SelectObject(wxNullBitmap);
+
+	if (wxTheClipboard->Open())
+	{
+		wxTheClipboard->SetData(new wxBitmapDataObject(bitmap));
+		wxTheClipboard->Close();
+	}
+}
+
+void Workspace::ExportAsSVG(wxString path)
+{
+	wxSize size = GetClientSize();
+
+	wxSVGFileDC svgDC(path, size.x, size.y);	
+
+	svgDC.SetClippingRegion(wxRect(0, 0, size.x, size.y));
+
+	DrawScene(svgDC);
 }
 
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
@@ -830,7 +917,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		} break;
 		case 'A': {
 			if (!insertingElement) {
-				Text* newText = new Text(m_camera->ScreenToWorld(event.GetPosition()));
+				Text* newText = new Text(m_camera->ScreenToWorld(event.GetPosition()), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 				m_textList.push_back(newText);
 				m_mode = WorkspaceMode::MODE_INSERT_TEXT;
 				m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
@@ -1316,7 +1403,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_NAME: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, -30));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_NAME);
 		newText->SetElementTypeText(element->GetElementType());
@@ -1328,7 +1415,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_VOLTAGE: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, 15));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, 15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_VOLTAGE);
 		newText->SetUnit(ElectricalUnit::UNIT_PU);
@@ -1341,7 +1428,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_ANGLE: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, 30));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_ANGLE);
 		newText->SetUnit(ElectricalUnit::UNIT_DEGREE);
@@ -1354,7 +1441,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_FAULTCURRENT: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-70, 30));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-70, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_SC_CURRENT);
 		newText->SetUnit(ElectricalUnit::UNIT_A);
@@ -1367,7 +1454,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_FAULTVOLTAGE: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-70, 75));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-70, 75), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_SC_VOLTAGE);
 		newText->SetUnit(ElectricalUnit::UNIT_PU);
@@ -1380,7 +1467,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_SCC: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-50, -30));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-50, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_SC_POWER);
 		newText->SetUnit(ElectricalUnit::UNIT_MVA);
@@ -1393,7 +1480,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_THD: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-50, -15));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-50, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_PQ_THD);
 		newText->SetElementTypeText(element->GetElementType());
@@ -1405,7 +1492,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_ACTIVE_POWER: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(0, 35));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(0, 35), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_ACTIVE_POWER);
 		newText->SetUnit(ElectricalUnit::UNIT_MW);
@@ -1418,7 +1505,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		SaveCurrentState();
 	} break;
 	case ID_TXT_REACTIVE_POWER: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(0, 50));
+		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(0, 50), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_REACTIVE_POWER);
 		newText->SetUnit(ElectricalUnit::UNIT_Mvar);
@@ -1438,7 +1525,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		else
 			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
 
-		Text* newText = new Text(position);
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_PF_ACTIVE);
 		newText->SetUnit(ElectricalUnit::UNIT_MW);
@@ -1460,7 +1547,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		else
 			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
 
-		Text* newText = new Text(position);
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_PF_REACTIVE);
 		newText->SetUnit(ElectricalUnit::UNIT_Mvar);
@@ -1476,7 +1563,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 	} break;
 	case ID_TXT_BRANCH_LOSSES: {
 		wxPoint2DDouble position = wxPoint2DDouble(0, 35) + (element->GetPointList()[0] + element->GetPointList()[element->GetPointList().size() - 1]) / 2.0;
-		Text* newText = new Text(position);
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_PF_LOSSES);
 		newText->SetUnit(ElectricalUnit::UNIT_MW);
@@ -1496,7 +1583,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		else
 			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
 
-		Text* newText = new Text(position);
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_PF_CURRENT);
 		newText->SetUnit(ElectricalUnit::UNIT_A);
@@ -1518,7 +1605,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		else
 			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
 
-		Text* newText = new Text(position);
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(element);
 		newText->SetDataType(DATA_SC_CURRENT);
 		newText->SetUnit(ElectricalUnit::UNIT_kA);
@@ -1847,6 +1934,8 @@ bool Workspace::UpdateTextElements()
 		basePower *= 1e6;
 	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
 		Text* text = *it;
+		text->SetFontName(m_properties->GetGeneralPropertiesData().labelFont);
+		text->SetFontSize(m_properties->GetGeneralPropertiesData().labelFontSize);
 		text->UpdateText(basePower);
 		//if (!text->IsGLTextOK()) isTexturesOK = false;
 	}

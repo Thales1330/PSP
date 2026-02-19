@@ -18,9 +18,10 @@
 #ifndef CONTROLSYSTEMTEST_H
 #define CONTROLSYSTEMTEST_H
 
-//#include <GL/glew.h>
+ //#include <GL/glew.h>
 
 #include "ControlEditorBase.h"
+#include "../elements/controlElement/IOControl.h"
 
 class ControlEditor;
 
@@ -33,22 +34,26 @@ class ControlEditor;
  */
 class ControlSystemTest : public ControlSystemTestBase
 {
-   public:
-    ControlSystemTest(ControlEditor* parent,
-                      int* inputType,
-                      double* startTime,
-                      double* slope,
-                      double* timeStep,
-                      double* simTime);
-    virtual ~ControlSystemTest();
+public:
+	ControlSystemTest(ControlEditor* parent,
+		std::vector<IOControl*> ioList,
+		int* inputType,
+		double* startTime,
+		double* slope,
+		double* timeStep,
+		double* simTime);
+	virtual ~ControlSystemTest();
 
-   protected:
-    virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
-    virtual void OnRunButtonClick(wxCommandEvent& event);
-    int* m_inputType = nullptr;
-    double* m_startTime = nullptr;
-    double* m_slope = nullptr;
-    double* m_timeStep = nullptr;
-    double* m_simTime = nullptr;
+protected:
+	virtual void OnCancelButtonClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
+	virtual void OnRunButtonClick(wxCommandEvent& event);
+	virtual void OnInputSelected(wxCommandEvent& event);
+	virtual void OnPGValueChange(wxPropertyGridEvent& event);
+	virtual void UpdatePGValues();
+	int* m_inputType = nullptr;
+	//double* m_startTime = nullptr;
+	//double* m_slope = nullptr;
+	double* m_timeStep = nullptr;
+	double* m_simTime = nullptr;
 };
 #endif  // CONTROLSYSTEMTEST_H

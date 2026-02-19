@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _PSP_PROJECT_CONTROLEDITOR_BASE_CLASSES_H
-#define _PSP_PROJECT_CONTROLEDITOR_BASE_CLASSES_H
+#ifndef _PROJECT_EDITORS_CONTROLEDITOR_BASE_CLASSES_H
+#define _PROJECT_EDITORS_CONTROLEDITOR_BASE_CLASSES_H
 
 // clang-format off
 #include <wx/settings.h>
@@ -27,6 +27,9 @@
 #include <wx/choice.h>
 #include <wx/arrstr.h>
 #include <wx/textctrl.h>
+#include <wx/propgrid/manager.h>
+#include <wx/propgrid/property.h>
+#include <wx/propgrid/advprops.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -100,36 +103,34 @@ protected:
     wxPanel* m_panelGeneral;
     wxStaticText* m_staticTextInput;
     wxChoice* m_choiceInput;
-    wxStaticText* m_staticTextStartTime;
-    wxTextCtrl* m_textCtrlStartTime;
-    wxStaticText* m_staticTextSec_1;
-    wxStaticText* m_staticTextSlope;
-    wxTextCtrl* m_textCtrlSlope;
     wxStaticText* m_staticTextStep;
     wxTextCtrl* m_textCtrlTimeStep;
     wxStaticText* m_staticTextSimTime;
     wxTextCtrl* m_textCtrlSimTime;
     wxStaticText* m_staticTextSec_2;
+    wxPropertyGridManager* m_pgMgr;
+    wxPGProperty* m_pgPropStartTime;
+    wxPGProperty* m_pgPropInitialValue;
+    wxPGProperty* m_pgPropSlope;
+    wxPGProperty* m_pgPropInputType;
     wxButton* m_buttonRun;
     wxButton* m_buttonCancel;
 
 protected:
+    virtual void OnInputSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnPGValueChange(wxPropertyGridEvent& event) { event.Skip(); }
     virtual void OnRunButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
 public:
     wxStaticText* GetStaticTextInput() { return m_staticTextInput; }
     wxChoice* GetChoiceInput() { return m_choiceInput; }
-    wxStaticText* GetStaticTextStartTime() { return m_staticTextStartTime; }
-    wxTextCtrl* GetTextCtrlStartTime() { return m_textCtrlStartTime; }
-    wxStaticText* GetStaticTextSec_1() { return m_staticTextSec_1; }
-    wxStaticText* GetStaticTextSlope() { return m_staticTextSlope; }
-    wxTextCtrl* GetTextCtrlSlope() { return m_textCtrlSlope; }
     wxStaticText* GetStaticTextStep() { return m_staticTextStep; }
     wxTextCtrl* GetTextCtrlTimeStep() { return m_textCtrlTimeStep; }
     wxStaticText* GetStaticTextSimTime() { return m_staticTextSimTime; }
     wxTextCtrl* GetTextCtrlSimTime() { return m_textCtrlSimTime; }
     wxStaticText* GetStaticTextSec_2() { return m_staticTextSec_2; }
+    wxPropertyGridManager* GetPgMgr() { return m_pgMgr; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonRun() { return m_buttonRun; }

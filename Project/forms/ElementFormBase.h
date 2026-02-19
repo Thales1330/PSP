@@ -1105,6 +1105,8 @@ class IOControlFormBase : public wxDialog
 protected:
     wxNotebook* m_notebook;
     wxPanel* m_panelGeneral;
+    wxStaticText* m_staticTextName;
+    wxTextCtrl* m_textCtrlName;
     wxCheckBox* m_checkBoxInput;
     wxChoice* m_choiceInput;
     wxCheckBox* m_checkBoxOutput;
@@ -1119,6 +1121,8 @@ protected:
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
 public:
+    wxStaticText* GetStaticTextName() { return m_staticTextName; }
+    wxTextCtrl* GetTextCtrlName() { return m_textCtrlName; }
     wxCheckBox* GetCheckBoxInput() { return m_checkBoxInput; }
     wxChoice* GetChoiceInput() { return m_choiceInput; }
     wxCheckBox* GetCheckBoxOutput() { return m_checkBoxOutput; }

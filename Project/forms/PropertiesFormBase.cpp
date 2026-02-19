@@ -15,11 +15,11 @@ namespace {
 // return the wxBORDER_SIMPLE that matches the current application theme
 wxBorder get_border_simple_theme_aware_bit() {
 #if wxVERSION_NUMBER >= 3300 && defined(__WXMSW__)
-    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_STATIC;
+    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_DEFAULT;
 #else
     return wxBORDER_DEFAULT;
 #endif
-} // DoGetBorderSimpleBit
+} // get_border_simple_theme_aware_bit
 bool bBitmapLoaded = false;
 } // namespace
 
@@ -96,6 +96,18 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     m_choicePlotLib->SetSelection(0);
     
     boxSizerLvl3_3->Add(m_choicePlotLib, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizerLvl3_214 = new wxBoxSizer(wxVERTICAL);
+    
+    gridSizer1212->Add(boxSizerLvl3_214, 0, wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticTextSize = new wxStaticText(m_panelGeneral, wxID_ANY, _("Text font"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    
+    boxSizerLvl3_214->Add(m_staticTextSize, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_fontPickerText = new wxFontPickerCtrl(m_panelGeneral, wxID_ANY, wxNullFont, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), wxFNTP_DEFAULT_STYLE);
+    
+    boxSizerLvl3_214->Add(m_fontPickerText, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizerLvl3_21 = new wxBoxSizer(wxVERTICAL);
     

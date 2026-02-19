@@ -132,6 +132,8 @@ public:
 	void SaveCurrentState();
 	void SetNextState();
 	void SetPreviousState();
+	void CopyToClipboard();
+	void ExportAsSVG(wxString path);
 
 	wxFileName GetSavedPath() const { return m_savedPath; }
 	void SetName(wxString name);
@@ -202,6 +204,9 @@ protected:
 	void UpdateStatusBar();
 	int GetElementNumberFromList(Element* element);
 	void GetStateListsCopy(const std::vector<PowerElement*>& elementsList, const std::vector<Text*>& textList, std::vector<PowerElement*>& elementsListCopy, std::vector<Text*>& textListCopy);
+
+	void DrawScene(wxGraphicsContext* gc);
+	void DrawScene(wxDC& dc);
 
 	//wxGLContext* m_glContext = nullptr;
 	wxStatusBar* m_statusBar = nullptr;

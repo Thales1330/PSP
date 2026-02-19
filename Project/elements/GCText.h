@@ -43,6 +43,8 @@ public:
 	 * \param colour Text colour.
 	 */
 	virtual void Draw(wxPoint2DDouble position, wxGraphicsContext* gc, double angle = 0.0, wxColour colour = *wxBLACK) const;
+
+	virtual void Draw(wxPoint2DDouble position, double width, double height, wxDC& dc, double angle = 0.0, wxColour colour = *wxBLACK) const;
 	/**
 	 * \brief Get a deep text copy.
 	 * \warning The original object is not freed.
@@ -60,10 +62,13 @@ public:
 	virtual int GetWidth() const { return m_size.GetWidth(); }
 	virtual int GetHeight() const { return m_size.GetHeight(); }
 	virtual void SetFontSize(int fontSize) { m_fontSize = fontSize; }
+	virtual int GetFontSize() { return m_fontSize; }
 	//virtual void SetFontWeight(wxFontWeight fontWeight) { m_fontWeight = fontWeight; }
 	//virtual void SetFontStyle(wxFontStyle fontStyle) { m_fontStyle = fontStyle; }
 	//virtual void SetFontFamily(wxFontFamily fontFamily) { m_fontFamily = fontFamily; }
 	virtual void SetFont(wxFont font);
+	virtual wxFont GetFont() { return m_font; }
+	//virtual wxSize CalculateTextExtend();
 
 protected:
 

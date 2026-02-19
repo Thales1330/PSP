@@ -118,6 +118,7 @@ public:
 	virtual bool Intersects(wxRect2DDouble rect) const;
 	//virtual void Draw(wxPoint2DDouble translation, double scale) const;
 	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
+	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const;
 	virtual void Rotate(bool clockwise = true);
 	virtual wxCursor GetBestPickboxCursor() const;
 	virtual void MovePickbox(wxPoint2DDouble position);

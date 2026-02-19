@@ -250,6 +250,9 @@ void ControlElementSolver::SolveNextStep()
 			case IOControl::IN_DELTA_ACTIVE_POWER: {
 				child->SetValue(m_deltaPe);
 			} break;
+			case IOControl::IN_TEST: {
+				child->SetValue(io->GetTestValue());
+			} break;
 			default: {
 				inputType = false;
 				io->SetSolved(false);
@@ -350,7 +353,7 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
 				if (!cLine->IsSolved()) {  // Only check unsolved lines
 					// Check if the connection line have the output node on the list
 					auto lineNodeList = cLine->GetNodeList();
-					for (auto itCN = nodeList.begin(), itCNEnd = nodeList.end(); itCN != itCNEnd; ++itCN) {
+					for (auto itCN = lineNodeList.begin(), itCNEnd = lineNodeList.end(); itCN != itCNEnd; ++itCN) {
 						Node* childNode = *itCN;
 						if (childNode == outNode) {
 							// Check if the line connect two elements, otherwise return nullptr

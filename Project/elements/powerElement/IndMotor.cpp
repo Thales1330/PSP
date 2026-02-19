@@ -53,6 +53,18 @@ void IndMotor::DrawDCSymbol(wxGraphicsContext* gc) const
 	gc->StrokeLines(mPts.size(), &mPts[0]);
 }
 
+void IndMotor::DrawDCSymbol(wxDC& dc) const
+{
+	wxPoint mPts[5];
+	wxPoint pos = wxPoint((int)m_position.m_x, (int)m_position.m_y);
+	mPts[0] = wxPoint(-10, 13) + pos;
+	mPts[1] = wxPoint(-10, -13) + pos;
+	mPts[2] = wxPoint(0, 2) + pos;
+	mPts[3] = wxPoint(10, -13) + pos;
+	mPts[4] = wxPoint(10, 13) + pos;
+	dc.DrawLines(5, mPts);
+}
+
 bool IndMotor::GetContextMenu(wxMenu& menu)
 {
 	menu.Append(ID_EDIT_ELEMENT, _("Edit induction motor"));

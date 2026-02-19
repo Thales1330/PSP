@@ -59,8 +59,10 @@ Constant::~Constant()
 void Constant::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
     if (m_selected) {
-        gc->SetPen(wxPen(wxColour(m_selectionColour)));
-        gc->SetBrush(*wxTRANSPARENT_BRUSH);
+        //gc->SetPen(wxPen(wxColour(m_selectionColour)));
+        //gc->SetBrush(*wxTRANSPARENT_BRUSH);
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->SetBrush(wxBrush(wxColour(m_selectionColour)));
         double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
         gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
     }

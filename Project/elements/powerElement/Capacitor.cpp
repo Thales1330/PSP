@@ -195,6 +195,75 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 	}
 }
 
+void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+{
+	wxColour elementColour;
+	if (m_online) {
+		if (m_dynEvent)
+			elementColour = m_dynamicEventColour;
+		else
+			elementColour = m_onlineElementColour;
+	}
+	else
+		elementColour = m_offlineElementColour;
+
+	if (m_inserted) {
+		wxPoint2DDouble p;
+		wxPoint capPts[4];
+		p = wxPoint2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0);
+		capPts[0] = RotateAround(p, m_position, m_angle);
+
+		p = wxPoint2DDouble(m_position.m_x + m_width / 2.0, m_position.m_y - m_height / 2.0);
+		capPts[1] = RotateAround(p, m_position, m_angle);
+
+		p = wxPoint2DDouble(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0 + 10.0);
+		capPts[2] = RotateAround(p, m_position, m_angle);
+		p = wxPoint2DDouble(m_position.m_x + m_width / 2.0, m_position.m_y - m_height / 2.0 + 10.0);
+		capPts[3] = RotateAround(p, m_position, m_angle);
+
+		std::vector<wxPoint> pointListInt;
+		for(auto& pt : m_pointList) {
+			pointListInt.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
+		}
+
+		if (m_selected) {
+			dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			dc.SetBrush(*wxTRANSPARENT_BRUSH);
+
+			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+
+
+			dc.DrawLines(2, &capPts[0]);
+			dc.DrawLines(2, &capPts[2]);
+
+			DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), dc);
+
+			// Draw node selection.
+			dc.SetPen(*wxTRANSPARENT_PEN);
+			dc.SetBrush(wxBrush(wxColour(m_selectionColour)));
+			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
+		}
+		// Draw Capacitor (layer 2).
+		// Draw node.
+		dc.SetPen(*wxTRANSPARENT_PEN);
+		dc.SetBrush(wxBrush(wxColour(elementColour)));
+		DrawDCCircle(m_pointList[0], 5.0, dc);
+
+		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetBrush(*wxTRANSPARENT_BRUSH);
+		dc.DrawLines(pointListInt.size(), &pointListInt[0]);
+
+		DrawDCSwitches(dc);
+
+		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetBrush(*wxTRANSPARENT_BRUSH);
+		dc.DrawLines(2, &capPts[0]);
+		dc.DrawLines(2, &capPts[2]);
+
+		DrawDCGround(m_position + wxPoint2DDouble(0, -m_height / 2.0 + 10.0), dc);
+	}
+}
+
 void Capacitor::Rotate(bool clockwise)
 {
 	double rotAngle = m_rotationAngle;

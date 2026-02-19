@@ -36,6 +36,12 @@ void SyncMotor::DrawDCSymbol(wxGraphicsContext* gc) const
 {
 	DrawDCArc(m_position, 12, 30, 330, 10, gc);
 }
+
+void SyncMotor::DrawDCSymbol(wxDC& dc) const
+{
+	DrawDCArc(m_position, 12, 30, 330, dc);
+}
+
 bool SyncMotor::GetContextMenu(wxMenu& menu)
 {
 	menu.Append(ID_EDIT_ELEMENT, _("Edit Synchronous Condenser"));

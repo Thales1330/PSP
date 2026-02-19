@@ -144,6 +144,8 @@ ControlEditor::ControlEditor(wxWindow* parent, int ioflags) : ControlEditorBase(
 	m_cePanel->SetBackgroundStyle(wxBG_STYLE_PAINT);  // To allow wxBufferedPaintDC works properly.
 	// m_camera->SetScale(1.2);
 	m_ioFlags = ioflags;
+
+	BuildColourList();
 }
 ControlEditor::~ControlEditor()
 {
@@ -850,10 +852,40 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
 
 void ControlEditor::OnTestClick(wxCommandEvent& event)
 {
-	ControlSystemTest csTest(this, &m_inputType, &m_startTime, &m_slope, &m_timeStep, &m_simTime);
+	// Reset colour list position for the test plot.
+	m_itColourList = --m_colourList.end();
+
+	std::vector<IOControl*> ioList;
+
+	for (auto* element : m_elementList) {
+		if (auto* io = dynamic_cast<IOControl*>(element)) {
+			ioList.push_back(io);
+		}
+	}
+
+	ControlSystemTest csTest(this, ioList, &m_inputType, &m_startTime, &m_slope, &m_timeStep, &m_simTime);
 	if (csTest.ShowModal() == wxID_OK) {
 		double printStep = 1e-3;
 		double pdbStep = 1e-1;
+
+		struct InputData {
+			wxString name;
+			std::vector<double> values;
+		};
+
+		std::vector<InputData> inputList;
+
+		// Store real flags for restoring after the test and set initial value.
+		std::vector<IOControl::IOFlags> realFlagValue;
+		for (auto* io : ioList) {
+			realFlagValue.push_back(io->GetValue());
+			if (io->GetType() == Node::NodeType::NODE_OUT) {
+				SimTestData testData = io->GetSimTestData();
+				io->SetValue(IOControl::IN_TEST);
+				io->SetTestValue(testData.initialValue);
+				inputList.push_back({ io->GetName(), {} });
+			}
+		}
 
 		wxProgressDialog pbd(_("Test"), _("Initializing..."), 100, this,
 			wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
@@ -865,42 +897,71 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 			double pdbTime = 0.0;
 			std::vector<double> time;
 			std::vector<double> solution;
-			std::vector<double> inputV;
+			
 			while (currentTime <= m_simTime) {
-				double input = 0.0;
-				if (currentTime >= m_startTime) {
-					switch (m_inputType) {
-					case 0: {
-						input = m_slope;
-					} break;
-					case 1: {
-						input = m_slope * (currentTime - m_startTime);
-					} break;
-					case 2: {
-						input = m_slope * std::pow(currentTime - m_startTime, 2);
-					} break;
-					default: {
-						input = 0.0;
-						break;
-					}
+				for (auto* io : ioList) {
+					SimTestData testData = io->GetSimTestData();
+					if (currentTime >= testData.startTime) {
+						switch (testData.type) {
+						case 0: {
+							io->SetTestValue(testData.slope);
+						} break;
+						case 1: {
+							io->SetTestValue(testData.slope * (currentTime - testData.startTime));
+						} break;
+						case 2: {
+							io->SetTestValue(testData.slope * std::pow(currentTime - testData.startTime, 2));
+						} break;
+						default: {
+							io->SetTestValue(0.0);
+							break;
+						}
+						}
 					}
 				}
 
+
+				//double input = 0.0;
+				//if (currentTime >= m_startTime) {
+				//	switch (m_inputType) {
+				//	case 0: {
+				//		input = m_slope;
+				//	} break;
+				//	case 1: {
+				//		input = m_slope * (currentTime - m_startTime);
+				//	} break;
+				//	case 2: {
+				//		input = m_slope * std::pow(currentTime - m_startTime, 2);
+				//	} break;
+				//	default: {
+				//		input = 0.0;
+				//		break;
+				//	}
+				//	}
+				//}
+
 				// solver.SolveNextStep(input);
 				solver.SetCurrentTime(currentTime);
-				solver.SetInitialTerminalVoltage(input);
-				solver.SetActivePower(input);
-				solver.SetInitialMecPower(input);
-				solver.SetInitialVelocity(input);
-				solver.SetReactivePower(input);
-				solver.SetTerminalVoltage(input);
-				solver.SetVelocity(input);
+				//solver.SetInitialTerminalVoltage(input);
+				//solver.SetActivePower(input);
+				//solver.SetInitialMecPower(input);
+				//solver.SetInitialVelocity(input);
+				//solver.SetReactivePower(input);
+				//solver.SetTerminalVoltage(input);
+				//solver.SetVelocity(input);
 				solver.SolveNextStep();
 
 				if (printTime >= printStep) {
 					time.push_back(currentTime);
 					solution.push_back(solver.GetLastSolution());
-					inputV.push_back(input);
+					//inputV.push_back(input);
+					int i = 0;
+					for (auto* io : ioList) {
+						if (io->GetType() == Node::NodeType::NODE_OUT) {
+							inputList[i].values.push_back(io->GetTestValue());
+							i++;
+						}
+					}
 					printTime = 0.0;
 				}
 
@@ -917,16 +978,26 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 				currentTime += m_timeStep;
 				pdbTime += m_timeStep;
 			}
+
 			if (!simStopped) {
 				std::vector<ElementPlotData> epdList;
 				ElementPlotData curveData(_("I/O"), ElementPlotData::CurveType::CT_TEST);
-				curveData.AddData(inputV, _("Input"));
+				int i = 0;
+				for (const auto& input : inputList) {
+					curveData.AddData(input.values, input.name);
+					curveData.SetPlot(i);
+					curveData.SetColour(i, GetNextColour());
+					i++;
+				}
+				//curveData.AddData(inputV, _("Input"));
 				curveData.AddData(solution, _("Output"));
+				curveData.SetPlot(i);
+				curveData.SetColour(i, GetNextColour());
 
-				curveData.SetPlot(0);
-				curveData.SetColour(0, *wxRED);
-				curveData.SetPlot(1);
-				curveData.SetColour(1, *wxBLUE);
+				//curveData.SetPlot(0);
+				//curveData.SetColour(0, *wxRED);
+				//curveData.SetPlot(1);
+				//curveData.SetColour(1, *wxBLUE);
 
 				epdList.push_back(curveData);
 
@@ -939,6 +1010,12 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 			wxMessageDialog msgDialog(this, _("It was not possible to solve the control system"), _("Error"),
 				wxOK | wxCENTRE | wxICON_ERROR);
 			msgDialog.ShowModal();
+		}
+
+		// Restore real flags.
+		for (size_t i = 0; i < ioList.size(); i++) {
+			if (ioList[i]->GetType() == Node::NodeType::NODE_OUT)
+				ioList[i]->SetValue(realFlagValue[i]);
 		}
 	}
 }
@@ -962,4 +1039,34 @@ int ControlEditor::GetNextID()
 	}
 	id++;
 	return id;
+}
+
+void ControlEditor::BuildColourList()
+{
+	m_colourList.push_back(wxColour(255, 30, 0));
+	m_colourList.push_back(wxColour(0, 30, 255));
+	m_colourList.push_back(wxColour(0, 128, 0));
+	m_colourList.push_back(wxColour(100, 100, 100));
+	m_colourList.push_back(wxColour(255, 128, 0));
+	m_colourList.push_back(wxColour(128, 0, 255));
+	m_colourList.push_back(wxColour(0, 255, 128));
+	m_colourList.push_back(wxColour(255, 255, 0));
+	m_colourList.push_back(wxColour(255, 0, 255));
+	m_colourList.push_back(wxColour(0, 255, 255));
+	m_colourList.push_back(wxColour(128, 255, 0));
+	m_colourList.push_back(wxColour(255, 0, 128));
+	m_colourList.push_back(wxColour(0, 128, 255));
+	m_colourList.push_back(wxColour(128, 128, 128));
+	m_colourList.push_back(*wxBLACK);
+	m_itColourList = --m_colourList.end();
+}
+
+wxColour ControlEditor::GetNextColour()
+{
+	if (*m_itColourList == *wxBLACK)
+		m_itColourList = m_colourList.begin();
+	else
+		++m_itColourList;
+
+	return *m_itColourList;
 }

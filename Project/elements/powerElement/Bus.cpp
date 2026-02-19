@@ -126,19 +126,10 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 		//glColor4dv(faultSymbolColour);
 
 		double scale = 1.5;
-		/*glBegin(GL_POLYGON);
-		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
-		glVertex2f(fsPosition.m_x + 1 * scale, fsPosition.m_y - 3 * scale);
-		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
-		glVertex2f(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
-		glEnd();
-		glBegin(GL_POLYGON);
-		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
-		glVertex2f(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
-		glVertex2f(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);*/
 
 		gc->SetBrush(*wxRED_BRUSH);
 		gc->SetPen(*wxTRANSPARENT_PEN);
+		//gc->SetPen(*wxRED_PEN);
 
 		wxPoint2DDouble* points = new wxPoint2DDouble[4];
 		points[0] = wxPoint2DDouble(fsPosition.m_x + 1 * scale, fsPosition.m_y + 3 * scale);
@@ -146,17 +137,92 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 		points[2] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y - 1 * scale);
 		points[3] = wxPoint2DDouble(fsPosition.m_x + 11 * scale, fsPosition.m_y + 5 * scale);
 
-		gc->StrokeLines(4, points);
+		gc->DrawLines(4, points);
 
 		points[0] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y - 5 * scale);
 		points[1] = wxPoint2DDouble(fsPosition.m_x + 21 * scale, fsPosition.m_y + 3 * scale);
 		points[2] = wxPoint2DDouble(fsPosition.m_x + 7 * scale, fsPosition.m_y + 1 * scale);
 
-		gc->StrokeLines(3, points);
+		gc->DrawLines(3, points);
 
 		delete[] points;
 
 		gc->PopState();
+	}
+}
+
+void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+{
+	//wxPoint2DDouble gcPosition = m_position - wxPoint2DDouble(m_width / 2.0, m_height / 2.0);
+	wxPoint2DDouble gcPosition = m_position;
+
+	dc.SetPen(*wxTRANSPARENT_PEN);
+
+	// Draw selection (layer 1)
+	if (m_selected) {
+		dc.SetBrush(wxBrush(m_selectionColour));
+
+		wxPoint2DDouble pts[4] = { WorldToScreen(translation, scale, -(m_width / 2.0), -(m_height / 2.0)) -
+									  wxPoint2DDouble(m_borderSize, m_borderSize),
+								  WorldToScreen(translation, scale, -(m_width / 2.0), (m_height / 2.0)) -
+									  wxPoint2DDouble(m_borderSize, -m_borderSize),
+								  WorldToScreen(translation, scale, (m_width / 2.0), (m_height / 2.0)) -
+									  wxPoint2DDouble(-m_borderSize, -m_borderSize),
+								  WorldToScreen(translation, scale, (m_width / 2.0), -(m_height / 2.0)) -
+									  wxPoint2DDouble(-m_borderSize, m_borderSize) };
+
+		DrawDCRectangle(gcPosition, m_width + 2 * m_borderSize, m_height + 2 * m_borderSize, m_angle, dc);
+	}
+
+
+	if (!m_electricalData.isConnected)
+		dc.SetBrush(wxBrush(m_offlineElementColour));
+	else if (m_dynEvent)
+		dc.SetBrush(wxBrush(m_dynamicEventColour));
+	else
+		dc.SetBrush(wxBrush(m_busColour));
+
+	DrawDCRectangle(gcPosition, m_width, m_height, m_angle, dc);
+
+
+	// Draw faulted bus symbol (layer 4)
+	if (m_electricalData.hasFault) {
+
+		wxPoint2DDouble center = m_position;
+		wxPoint2DDouble fsPosition = center + wxPoint2DDouble(m_width / 2.0, 0.0);
+
+		wxColour faultSymbolColour(255, 0, 0, 255);
+
+		double localScale = 1.5;
+
+		dc.SetBrush(*wxRED_BRUSH);
+		dc.SetPen(*wxTRANSPARENT_PEN);
+		//gc->SetPen(*wxRED_PEN);
+
+		wxPoint points[4];
+		
+		wxPoint2DDouble p;
+
+		// Primeiro polígono
+		p = wxPoint2DDouble(fsPosition.m_x + 1 * localScale, fsPosition.m_y + 3 * localScale);
+		points[0] = RotateAround(p, center, m_angle);
+		p = wxPoint2DDouble(fsPosition.m_x + 1 * localScale, fsPosition.m_y - 3 * localScale);
+		points[1] = RotateAround(p, center, m_angle);
+		p = wxPoint2DDouble(fsPosition.m_x + 11 * localScale, fsPosition.m_y - 1 * localScale);
+		points[2] = RotateAround(p, center, m_angle);
+		p = wxPoint2DDouble(fsPosition.m_x + 11 * localScale, fsPosition.m_y + 5 * localScale);
+		points[3] = RotateAround(p, center, m_angle);
+
+		dc.DrawPolygon(4, points);
+
+		p = wxPoint2DDouble(fsPosition.m_x + 7 * localScale, fsPosition.m_y - 5 * localScale);
+		points[0] = RotateAround(p, center, m_angle);
+		p = wxPoint2DDouble(fsPosition.m_x + 21 * localScale, fsPosition.m_y + 3 * localScale);
+		points[1] = RotateAround(p, center, m_angle);
+		p = wxPoint2DDouble(fsPosition.m_x + 7 * localScale, fsPosition.m_y + 1 * localScale);
+		points[2] = RotateAround(p, center, m_angle);
+
+		dc.DrawPolygon(3, points);
 	}
 }
 

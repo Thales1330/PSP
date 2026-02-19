@@ -7,6 +7,7 @@
 #ifndef _PSP_PROJECT_MAINFRAME_BASE_CLASSES_H
 #define _PSP_PROJECT_MAINFRAME_BASE_CLASSES_H
 
+// clang-format off
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/xrc/xh_bmp.h>
@@ -37,46 +38,47 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
+// clang-format on
 
 class MainFrameBase : public wxFrame
 {
 public:
     enum {
-        ID_RIBBON_FREQRESP = 10001,
-        ID_RIBBON_SCPOWER = 10002,
-        ID_RIBBON_FAULT = 10003,
-        ID_RIBBON_RUNSTAB = 10004,
-        ID_RIBBON_POWERFLOW = 10005,
-        ID_RIBBON_DISABLESOL = 10006,
-        ID_RIBBON_ENABLESOL = 10007,
-        ID_RIBBON_SNAPSHOT = 10008,
-        ID_RIBBON_HEATMAP = 10009,
-        ID_RIBBON_PROJSETTINGS = 10010,
-        ID_RIBBON_CHARTS = 10011,
+        ID_RIBBON_SIMULSETTINGS = 10001,
+        ID_RIBBON_HARMDIST = 10002,
+        ID_RIBBON_POWERFLOW = 10003,
+        ID_RIBBON_FREQRESP = 10004,
+        ID_RIBBON_DISABLESOL = 10005,
+        ID_RIBBON_ENABLESOL = 10006,
+        ID_RIBBON_SNAPSHOT = 10007,
+        ID_RIBBON_CHARTS = 10008,
+        ID_RIBBON_PROJSETTINGS = 10009,
+        ID_RIBBON_ROTATECC = 10010,
+        ID_RIBBON_FAULT = 10011,
         ID_RIBBON_ROTATEC = 10012,
-        ID_RIBBON_SIMULSETTINGS = 10013,
-        ID_RIBBON_DATAREPORT = 10014,
-        ID_RIBBON_FIT = 10015,
-        ID_RIBBON_MOVE = 10016,
-        ID_RIBBON_DRAG = 10017,
-        ID_RIBBON_ADDELEMENT = 10018,
-        ID_RIBBON_DELETE = 10019,
-        ID_RIBBON_REDO = 10020,
-        ID_RIBBON_UNDO = 10021,
-        ID_RIBBON_PASTE = 10022,
-        ID_RIBBON_ABOUT = 10023,
-        ID_RIBBON_GUIDE = 10024,
-        ID_RIBBON_HARMDIST = 10025,
-        ID_RIBBON_CLOSE = 10026,
-        ID_RIBBON_SAVEAS = 10027,
+        ID_RIBBON_DELETE = 10013,
+        ID_RIBBON_MOVE = 10014,
+        ID_RIBBON_DRAG = 10015,
+        ID_RIBBON_ADDELEMENT = 10016,
+        ID_RIBBON_RUNSTAB = 10017,
+        ID_RIBBON_UNDO = 10018,
+        ID_RIBBON_HEATMAP = 10019,
+        ID_RIBBON_ABOUT = 10020,
+        ID_RIBBON_GUIDE = 10021,
+        ID_RIBBON_FIT = 10022,
+        ID_RIBBON_CLOSE = 10023,
+        ID_RIBBON_RESETVOLT = 10024,
+        ID_RIBBON_PASTE = 10025,
+        ID_RIBBON_SAVEAS = 10026,
+        ID_RIBBON_SCPOWER = 10027,
         ID_RIBBON_SAVE = 10028,
         ID_RIBBON_EXIT = 10029,
         ID_RIBBON_GENSETTINGS = 10030,
-        ID_RIBBON_ROTATECC = 10031,
-        ID_RIBBON_COPY = 10032,
+        ID_RIBBON_DATAREPORT = 10031,
+        ID_RIBBON_REDO = 10032,
         ID_RIBBON_IMPORT = 10033,
-        ID_RIBBON_OPEN = 10034,
-        ID_RIBBON_RESETVOLT = 10035,
+        ID_RIBBON_COPY = 10034,
+        ID_RIBBON_OPEN = 10035,
         ID_RIBBON_NEW = 10036,
     };
 protected:
@@ -131,6 +133,7 @@ protected:
     virtual void OnChartsClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnHeatmapClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnSnapshotClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
+    virtual void OnSnapshotDropdown(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnEnableSolutionClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnDisableSolutionClick(wxRibbonButtonBarEvent& event) { event.Skip(); }
     virtual void OnResetVoltagesClick(wxRibbonButtonBarEvent& event) { event.Skip(); }

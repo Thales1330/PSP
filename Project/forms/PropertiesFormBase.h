@@ -21,6 +21,7 @@
 #include <wx/stattext.h>
 #include <wx/choice.h>
 #include <wx/arrstr.h>
+#include <wx/fontpicker.h>
 #include <wx/filepicker.h>
 #include <wx/button.h>
 #include <wx/textctrl.h>
@@ -60,6 +61,8 @@ protected:
     wxChoice* m_choiceTheme;
     wxStaticText* m_staticTextPlotLib;
     wxChoice* m_choicePlotLib;
+    wxStaticText* m_staticTextSize;
+    wxFontPickerCtrl* m_fontPickerText;
     wxStaticText* m_staticTextATPFolder;
     wxFilePickerCtrl* m_filePickerATPFolder;
     wxButton* m_buttonOK;
@@ -76,6 +79,8 @@ public:
     wxChoice* GetChoiceTheme() { return m_choiceTheme; }
     wxStaticText* GetStaticTextPlotLib() { return m_staticTextPlotLib; }
     wxChoice* GetChoicePlotLib() { return m_choicePlotLib; }
+    wxStaticText* GetStaticTextSize() { return m_staticTextSize; }
+    wxFontPickerCtrl* GetFontPickerText() { return m_fontPickerText; }
     wxStaticText* GetStaticTextATPFolder() { return m_staticTextATPFolder; }
     wxFilePickerCtrl* GetFilePickerATPFolder() { return m_filePickerATPFolder; }
     wxPanel* GetPanelGeneral() { return m_panelGeneral; }

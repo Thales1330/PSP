@@ -157,6 +157,9 @@ class ControlEditor : public ControlEditorBase
     virtual void OnMouseMotion(wxMouseEvent& event);
     virtual void OnPaint(wxPaintEvent& event);
     virtual void LeftClickDown(wxMouseEvent& event);
+
+    virtual void BuildColourList();
+    virtual wxColour GetNextColour();
     
     void BuildControlElementPanel();
 
@@ -188,5 +191,8 @@ class ControlEditor : public ControlEditorBase
     double m_timeStep = 1e-4;
     double m_simTime = 10.0;
     int m_plotLib = 0;
+
+    std::vector<wxColour> m_colourList;
+    std::vector<wxColour>::iterator m_itColourList;
 };
 #endif  // CONTROLEDITOR_H

@@ -93,6 +93,12 @@ MainFrame::~MainFrame()
 			nullptr, this);
 		delete m_stabilityMenu;
 	}
+	if(m_snapshotMenu) {
+		m_snapshotMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnSnapshotMenuClick),
+			nullptr, this);
+		delete m_snapshotMenu;
+	}
+
 	if (m_locale) delete m_locale;
 	if (m_generalProperties) delete m_generalProperties;
 }
@@ -204,6 +210,14 @@ void MainFrame::CreateDropdownMenus()
 	m_stabilityMenu->Append(stabilityList);
 
 	m_stabilityMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnStabilityMenuClick, this);
+
+	m_snapshotMenu = new wxMenu();
+
+	wxMenuItem* snapshotList = new wxMenuItem(m_stabilityMenu, ID_SNAPSHOTMENU_LIST, _("&Export as SVG"),
+		_("Export the diagram as SVG file."));
+	m_snapshotMenu->Append(snapshotList);
+
+	m_snapshotMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnSnapshotMenuClick, this);
 }
 
 void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
@@ -303,7 +317,14 @@ void MainFrame::OnDisableSolutionClick(wxRibbonButtonBarEvent& event)
 	m_ribbonButtonBarContinuous->ToggleButton(ID_RIBBON_ENABLESOL, false);
 }
 
-void MainFrame::OnDragClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnDragClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) {
+		workspace->SetWorkspaceMode(Workspace::WorkspaceMode::MODE_DRAG);
+	}
+}
+
 void MainFrame::OnEnableSolutionClick(wxRibbonButtonBarEvent& event)
 {
 	if (Workspace* workspace = dynamic_cast<Workspace*>(m_auiNotebook->GetCurrentPage())) {
@@ -477,7 +498,14 @@ void MainFrame::OnSaveClick(wxRibbonButtonBarEvent& event)
 	}
 }
 
-void MainFrame::OnSnapshotClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnSnapshotClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) {
+		workspace->CopyToClipboard();
+	}
+}
+
 void MainFrame::OnUndoClick(wxRibbonButtonBarEvent& event)
 {
 	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
@@ -688,6 +716,8 @@ void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 	genPropForm.ShowModal();
 	for (auto& workspace : m_workspaceList) {
 		workspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+		workspace->UpdateTextElements();
+		workspace->Redraw();
 	}
 }
 
@@ -724,6 +754,25 @@ void MainFrame::OnStabilityMenuClick(wxCommandEvent& event)
 		case ID_STABMENU_LIST: {
 			StabilityEventList stabEventList(this, elementList);
 			stabEventList.ShowModal();
+		} break;
+		}
+	}
+}
+
+void MainFrame::OnSnapshotMenuClick(wxCommandEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+
+	if (workspace) {
+		auto elementList = workspace->GetElementList();
+
+		switch (event.GetId()) {
+		case ID_SNAPSHOTMENU_LIST: {
+			// Save SVG file
+			wxFileDialog saveFileDialog(this, _("Save diagram as SVG"), "", "", "SVG files (*.svg)|*.svg",
+				wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+			if (saveFileDialog.ShowModal() == wxID_CANCEL) return;
+			workspace->ExportAsSVG(saveFileDialog.GetPath());
 		} break;
 		}
 	}
@@ -797,4 +846,8 @@ void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event)
 		workspace->UpdateHeatMap();
 		workspace->Redraw();
 	}
+}
+void MainFrame::OnSnapshotDropdown(wxRibbonButtonBarEvent& event)
+{
+	event.PopupMenu(m_snapshotMenu);
 }

@@ -30,6 +30,7 @@
 #endif 
 //#include <GL/gl.h>
 #include <wx/graphics.h>
+#include <wx/dc.h>
 
 #include <complex>
 
@@ -299,6 +300,13 @@ public:
 	 */
 	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const {}
 	/**
+	 * @brief Draw the element using wxDC.
+	 * @param translation Translation of the system.
+	 * @param scale Scale of the system.
+	 * @param dc Device context.
+	 */
+	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const {}
+	/**
 	 * @brief Rotate the element.
 	 * @param clockwise True to rotate clockwise, false to rotate counter-clockwise.
 	 */
@@ -443,6 +451,10 @@ public:
 	 */
 	//virtual void DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode = GL_LINE_LOOP) const;
 
+	virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height,	double angle, wxDC& dc) const;
+
+	virtual void DrawDCRoundedRectRotated(wxDC& dc, const wxPoint2DDouble& center, double width, double height, double radius, double angleDeg, int arcSegments = 8) const;
+
 	/**
 	 * @brief Draw a circle using device context.
 	 * @param position Circle position.
@@ -451,6 +463,9 @@ public:
 	 * @param gl Device context.
 	 */
 	virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext* gc) const;
+
+	virtual void DrawDCCircle(wxPoint2DDouble position, double radius, wxDC& dc) const;
+
 	//virtual void DrawArc(wxPoint2DDouble position,
 	//	double radius,
 	//	double initAngle,
@@ -459,6 +474,8 @@ public:
 	//	GLenum mode = GL_LINE_LOOP) const;
 
 	virtual void DrawDCArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, wxGraphicsContext* gc) const;
+
+	virtual void DrawDCArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, wxDC& dc) const;
 
 	/**
 	 * @brief Draw rectangle.
@@ -490,6 +507,8 @@ public:
 	 * @param gc Device context.
 	 */
 	virtual void DrawDCTriangle(std::vector<wxPoint2DDouble> points, wxGraphicsContext* gc) const;
+
+	virtual void DrawDCTriangle(std::vector<wxPoint> points, wxDC& dc) const;
 
 	/**
 	 * @brief Draw a point.
@@ -525,6 +544,10 @@ public:
 	 * @param degrees True if the angle is in degrees, false if radians.
 	 */
 	virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees = true) const;
+
+	virtual wxPoint2DDouble RotateLocal(wxPoint2DDouble local, double angleDeg) const;
+
+	virtual wxPoint RotateAround(const wxPoint2DDouble& p, const wxPoint2DDouble& center, double angleDeg) const;
 
 	/**
 	 * @brief Get the parent list.

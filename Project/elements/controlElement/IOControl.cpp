@@ -189,11 +189,11 @@ void IOControl::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 			selPts[3] += wxPoint2DDouble(-borderSize / 2, borderSize / 2);
 			selPts[4] += wxPoint2DDouble(-borderSize / 2, -borderSize / 2);
 		}
-		gc->StrokeLines(5, &selPts[0]);
+		gc->DrawLines(5, &selPts[0]);
 	}
 	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
 	gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
-	gc->StrokeLines(6, &pts[0]);
+	gc->DrawLines(6, &pts[0]);
 
 	// Plot number.
 	if (m_angle == 0.0) {
@@ -378,6 +378,8 @@ rapidxml::xml_node<>* IOControl::SaveElement(rapidxml::xml_document<>& doc, rapi
 	SaveControlNodes(doc, elementNode);
 
 	// Element properties
+	auto name = XMLParser::AppendNode(doc, elementNode, "Name");
+	XMLParser::SetNodeValue(doc, name, m_name);
 	auto value = XMLParser::AppendNode(doc, elementNode, "Value");
 	XMLParser::SetNodeValue(doc, value, m_value);
 	auto ioFlags = XMLParser::AppendNode(doc, elementNode, "IOFlags");
@@ -394,6 +396,8 @@ bool IOControl::OpenElement(rapidxml::xml_node<>* elementNode)
 	// Element properties
 	IOControl::IOFlags value = static_cast<IOControl::IOFlags>(XMLParser::GetNodeValueInt(elementNode, "Value"));
 	SetValue(value);
+	auto name = elementNode->first_node("Name");
+	if (name) m_name = name->value();
 
 	return true;
 }

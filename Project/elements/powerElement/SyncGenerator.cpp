@@ -80,6 +80,14 @@ void SyncGenerator::DrawDCSymbol(wxGraphicsContext* gc) const
 	gc->StrokeLines(sinePts.size(), &sinePts[0]);
 }
 
+void SyncGenerator::DrawDCSymbol(wxDC& dc) const
+{
+	std::vector<wxPoint> sinePts;
+	wxPoint pos = wxPoint(wxRound(m_position.m_x), wxRound(m_position.m_y));
+	for (unsigned int i = 0; i < m_sinePts.size(); i++) { sinePts.push_back(wxPoint(wxRound(m_sinePts[i].m_x), wxRound(m_sinePts[i].m_y)) + pos); }
+	dc.DrawLines(sinePts.size(), &sinePts[0]);
+}
+
 bool SyncGenerator::GetContextMenu(wxMenu& menu)
 {
 	menu.Append(ID_EDIT_ELEMENT, _("Edit Generator"));
