@@ -15,11 +15,11 @@ namespace {
 // return the wxBORDER_SIMPLE that matches the current application theme
 wxBorder get_border_simple_theme_aware_bit() {
 #if wxVERSION_NUMBER >= 3300 && defined(__WXMSW__)
-    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_STATIC;
+    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_DEFAULT;
 #else
     return wxBORDER_DEFAULT;
 #endif
-} // DoGetBorderSimpleBit
+} // get_border_simple_theme_aware_bit
 bool bBitmapLoaded = false;
 } // namespace
 
@@ -283,6 +283,43 @@ DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& 
     
     boxSizerLvl4_611->Add(m_gridHarmBranches, 1, wxEXPAND, WXC_FROM_DIP(5));
     
+    m_toolbar139 = this->CreateToolBar(wxTB_TEXT|wxTB_FLAT, wxID_ANY);
+    m_toolbar139->SetToolBitmapSize(wxSize(16,16));
+    
+    m_toolbar139->AddTool(TOOL_EXPCSV, _("Export CSV"), wxXmlResource::Get()->LoadBitmap(wxT("save16")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    
+    m_toolbar139->AddTool(TOOL_CLIPBOARD, _("Copy Data"), wxXmlResource::Get()->LoadBitmap(wxT("copy16")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    
+    m_toolbar139->AddSeparator();
+    
+    m_staticText146 = new wxStaticText(m_toolbar139, wxID_ANY, _("Font size:"), wxDefaultPosition, wxDLG_UNIT(m_toolbar139, wxSize(-1,-1)), 0);
+    m_toolbar139->AddControl(m_staticText146);
+    
+    wxArrayString m_choiceFontSizeArr;
+    m_choiceFontSizeArr.Add(_("8"));
+    m_choiceFontSizeArr.Add(_("9"));
+    m_choiceFontSizeArr.Add(_("10"));
+    m_choiceFontSizeArr.Add(_("11"));
+    m_choiceFontSizeArr.Add(_("12"));
+    m_choiceFontSizeArr.Add(_("14"));
+    m_choiceFontSizeArr.Add(_("16"));
+    m_choiceFontSizeArr.Add(_("18"));
+    m_choiceFontSizeArr.Add(_("20"));
+    m_choiceFontSizeArr.Add(_("22"));
+    m_choiceFontSize = new wxChoice(m_toolbar139, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_toolbar139, wxSize(-1,-1)), m_choiceFontSizeArr, 0);
+    m_choiceFontSize->SetSelection(2);
+    m_toolbar139->AddControl(m_choiceFontSize);
+    
+    m_staticText1461 = new wxStaticText(m_toolbar139, wxID_ANY, _("Precision:"), wxDefaultPosition, wxDLG_UNIT(m_toolbar139, wxSize(-1,-1)), 0);
+    m_toolbar139->AddControl(m_staticText1461);
+    
+    m_textCtrlPrecision = new wxTextCtrl(m_toolbar139, wxID_ANY, wxT("4"), wxDefaultPosition, wxDLG_UNIT(m_toolbar139, wxSize(50,-1)), wxTE_CENTRE);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPrecision->SetHint(wxT(""));
+    #endif
+    m_toolbar139->AddControl(m_textCtrlPrecision);
+    m_toolbar139->Realize();
+    
     
     #if wxVERSION_NUMBER >= 2900
     if(!wxPersistenceManager::Get().Find(m_notebookDataReport)){
@@ -333,12 +370,16 @@ DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& 
         wxPersistenceManager::Get().Restore(this);
     }
     // Connect events
+    this->Bind(wxEVT_MOUSEWHEEL, &DataReportBase::OnMouseWheel, this);
+    m_notebookDataReport->Bind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnMainNotebookChanged, this);
+    m_notebookPowerFlow->Bind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnPFNotebookChanged, this);
     m_gridPowerFlow->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPowerFlowGridChanged, this);
     m_gridPowerFlow->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFKeyDown, this);
     m_gridPFBuses->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBusGridChanged, this);
     m_gridPFBuses->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBusesKeyDown, this);
     m_gridPFBranches->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBranchesGridChanged, this);
     m_gridPFBranches->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBranchesKeyDown, this);
+    m_notebookFault->Bind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnFaultNotebookChanged, this);
     m_gridFault->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaulrGridChanged, this);
     m_gridFault->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultKeyDown, this);
     m_gridFaultBuses->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultBusesGridChanged, this);
@@ -347,20 +388,29 @@ DataReportBase::DataReportBase(wxWindow* parent, wxWindowID id, const wxString& 
     m_gridFaultBranches->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultBranchesKeyDown, this);
     m_gridFaultGenerators->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultGeneratorsGridChanged, this);
     m_gridFaultGenerators->Bind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultGeneratorsKeyDown, this);
+    m_notebookHarmCurrents->Bind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnHarmNotebookChanged, this);
     m_gridHarmCurrents->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmCurrentGridChanged, this);
     m_gridHarmBuses->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBusesGridChanged, this);
     m_gridHarmBranches->Bind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBranchesGridChanged, this);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &DataReportBase::ExportCSVButtonClick, this, TOOL_EXPCSV);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &DataReportBase::ClipboardButtonClick, this, TOOL_CLIPBOARD);
+    m_choiceFontSize->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &DataReportBase::OnFontSizeSelected, this);
+    m_textCtrlPrecision->Bind(wxEVT_COMMAND_TEXT_UPDATED, &DataReportBase::OnTextPrecisionUpdate, this);
     
 }
 
 DataReportBase::~DataReportBase()
 {
+    this->Unbind(wxEVT_MOUSEWHEEL, &DataReportBase::OnMouseWheel, this);
+    m_notebookDataReport->Unbind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnMainNotebookChanged, this);
+    m_notebookPowerFlow->Unbind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnPFNotebookChanged, this);
     m_gridPowerFlow->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPowerFlowGridChanged, this);
     m_gridPowerFlow->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFKeyDown, this);
     m_gridPFBuses->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBusGridChanged, this);
     m_gridPFBuses->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBusesKeyDown, this);
     m_gridPFBranches->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnPFBranchesGridChanged, this);
     m_gridPFBranches->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridPFBranchesKeyDown, this);
+    m_notebookFault->Unbind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnFaultNotebookChanged, this);
     m_gridFault->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaulrGridChanged, this);
     m_gridFault->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultKeyDown, this);
     m_gridFaultBuses->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultBusesGridChanged, this);
@@ -369,9 +419,14 @@ DataReportBase::~DataReportBase()
     m_gridFaultBranches->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultBranchesKeyDown, this);
     m_gridFaultGenerators->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnFaultGeneratorsGridChanged, this);
     m_gridFaultGenerators->Unbind(wxEVT_KEY_DOWN, &DataReportBase::OnGridFaultGeneratorsKeyDown, this);
+    m_notebookHarmCurrents->Unbind(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, &DataReportBase::OnHarmNotebookChanged, this);
     m_gridHarmCurrents->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmCurrentGridChanged, this);
     m_gridHarmBuses->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBusesGridChanged, this);
     m_gridHarmBranches->Unbind(wxEVT_GRID_CELL_CHANGED, &DataReportBase::OnHarmBranchesGridChanged, this);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &DataReportBase::ExportCSVButtonClick, this, TOOL_EXPCSV);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &DataReportBase::ClipboardButtonClick, this, TOOL_CLIPBOARD);
+    m_choiceFontSize->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &DataReportBase::OnFontSizeSelected, this);
+    m_textCtrlPrecision->Unbind(wxEVT_COMMAND_TEXT_UPDATED, &DataReportBase::OnTextPrecisionUpdate, this);
     
 }
 
@@ -426,5 +481,120 @@ StabilityEventListBase::StabilityEventListBase(wxWindow* parent, wxWindowID id, 
 StabilityEventListBase::~StabilityEventListBase()
 {
     m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &StabilityEventListBase::OnOKButtonClick, this);
+    
+}
+
+ExportCSVFormBase::ExportCSVFormBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC6A63InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer151 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer151);
+    
+    wxStaticBoxSizer* staticBoxSizer155 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Power flow data")), wxHORIZONTAL);
+    
+    boxSizer151->Add(staticBoxSizer155, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxPFPowerFlow = new wxCheckBox(this, wxID_ANY, _("Power flow"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxPFPowerFlow->SetValue(false);
+    
+    staticBoxSizer155->Add(m_checkBoxPFPowerFlow, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxPFBuses = new wxCheckBox(this, wxID_ANY, _("Buses"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxPFBuses->SetValue(true);
+    
+    staticBoxSizer155->Add(m_checkBoxPFBuses, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxPFBranches = new wxCheckBox(this, wxID_ANY, _("Branches"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxPFBranches->SetValue(false);
+    
+    staticBoxSizer155->Add(m_checkBoxPFBranches, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizer156 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Fault data")), wxHORIZONTAL);
+    
+    boxSizer151->Add(staticBoxSizer156, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxCCFault = new wxCheckBox(this, wxID_ANY, _("Fault"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxCCFault->SetValue(false);
+    
+    staticBoxSizer156->Add(m_checkBoxCCFault, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxCCBuses = new wxCheckBox(this, wxID_ANY, _("Buses"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxCCBuses->SetValue(false);
+    
+    staticBoxSizer156->Add(m_checkBoxCCBuses, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxCCBranches = new wxCheckBox(this, wxID_ANY, _("Branches"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxCCBranches->SetValue(false);
+    
+    staticBoxSizer156->Add(m_checkBoxCCBranches, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxCCGenerators = new wxCheckBox(this, wxID_ANY, _("Generators"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxCCGenerators->SetValue(false);
+    
+    staticBoxSizer156->Add(m_checkBoxCCGenerators, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizer157 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Harmonics data")), wxHORIZONTAL);
+    
+    boxSizer151->Add(staticBoxSizer157, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxHarmSources = new wxCheckBox(this, wxID_ANY, _("Sources"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxHarmSources->SetValue(false);
+    
+    staticBoxSizer157->Add(m_checkBoxHarmSources, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxHarmVoltages = new wxCheckBox(this, wxID_ANY, _("Voltages"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxHarmVoltages->SetValue(false);
+    
+    staticBoxSizer157->Add(m_checkBoxHarmVoltages, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_checkBoxharmCurrents = new wxCheckBox(this, wxID_ANY, _("Currents"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxharmCurrents->SetValue(false);
+    
+    staticBoxSizer157->Add(m_checkBoxharmCurrents, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer152 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer151->Add(boxSizer152, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonExport = new wxButton(this, wxID_ANY, _("Export selected"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer152->Add(m_buttonExport, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer152->Add(m_buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
+    
+    SetName(wxT("ExportCSVFormBase"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+    // Connect events
+    m_buttonExport->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ExportCSVFormBase::OnExportButtonClick, this);
+    m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ExportCSVFormBase::OnCancelButtonClick, this);
+    
+}
+
+ExportCSVFormBase::~ExportCSVFormBase()
+{
+    m_buttonExport->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ExportCSVFormBase::OnExportButtonClick, this);
+    m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ExportCSVFormBase::OnCancelButtonClick, this);
     
 }

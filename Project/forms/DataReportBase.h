@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _PSP_PROJECT_DATAREPORT_BASE_CLASSES_H
-#define _PSP_PROJECT_DATAREPORT_BASE_CLASSES_H
+#ifndef _PROJECT_FORMS_DATAREPORT_BASE_CLASSES_H
+#define _PROJECT_FORMS_DATAREPORT_BASE_CLASSES_H
 
 // clang-format off
 #include <wx/settings.h>
@@ -19,8 +19,15 @@
 #include <wx/panel.h>
 #include <wx/imaglist.h>
 #include <wx/grid.h>
+#include <wx/toolbar.h>
+#include <wx/stattext.h>
+#include <wx/choice.h>
+#include <wx/arrstr.h>
+#include <wx/textctrl.h>
 #include <wx/dialog.h>
 #include <wx/button.h>
+#include <wx/statbox.h>
+#include <wx/checkbox.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -41,6 +48,11 @@
 
 class DataReportBase : public wxFrame
 {
+public:
+    enum {
+        TOOL_CLIPBOARD = 10001,
+        TOOL_EXPCSV = 10002,
+    };
 protected:
     wxNotebook* m_notebookDataReport;
     wxPanel* m_panelPowerFlowData;
@@ -69,14 +81,23 @@ protected:
     wxGrid* m_gridHarmBuses;
     wxPanel* m_panelHarmBranches;
     wxGrid* m_gridHarmBranches;
+    wxToolBar* m_toolbar139;
+    wxStaticText* m_staticText146;
+    wxChoice* m_choiceFontSize;
+    wxStaticText* m_staticText1461;
+    wxTextCtrl* m_textCtrlPrecision;
 
 protected:
+    virtual void OnMouseWheel(wxMouseEvent& event) { event.Skip(); }
+    virtual void OnMainNotebookChanged(wxNotebookEvent& event) { event.Skip(); }
+    virtual void OnPFNotebookChanged(wxNotebookEvent& event) { event.Skip(); }
     virtual void OnPowerFlowGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnGridPFKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnPFBusGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnGridPFBusesKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnPFBranchesGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnGridPFBranchesKeyDown(wxKeyEvent& event) { event.Skip(); }
+    virtual void OnFaultNotebookChanged(wxNotebookEvent& event) { event.Skip(); }
     virtual void OnFaulrGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnGridFaultKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnFaultBusesGridChanged(wxGridEvent& event) { event.Skip(); }
@@ -85,9 +106,14 @@ protected:
     virtual void OnGridFaultBranchesKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnFaultGeneratorsGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnGridFaultGeneratorsKeyDown(wxKeyEvent& event) { event.Skip(); }
+    virtual void OnHarmNotebookChanged(wxNotebookEvent& event) { event.Skip(); }
     virtual void OnHarmCurrentGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnHarmBusesGridChanged(wxGridEvent& event) { event.Skip(); }
     virtual void OnHarmBranchesGridChanged(wxGridEvent& event) { event.Skip(); }
+    virtual void ExportCSVButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void ClipboardButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnFontSizeSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnTextPrecisionUpdate(wxCommandEvent& event) { event.Skip(); }
 
 public:
     wxGrid* GetGridPowerFlow() { return m_gridPowerFlow; }
@@ -117,6 +143,11 @@ public:
     wxNotebook* GetNotebookHarmCurrents() { return m_notebookHarmCurrents; }
     wxPanel* GetPanelHarmonicsData() { return m_panelHarmonicsData; }
     wxNotebook* GetNotebookDataReport() { return m_notebookDataReport; }
+    wxStaticText* GetStaticText146() { return m_staticText146; }
+    wxChoice* GetChoiceFontSize() { return m_choiceFontSize; }
+    wxStaticText* GetStaticText1461() { return m_staticText1461; }
+    wxTextCtrl* GetTextCtrlPrecision() { return m_textCtrlPrecision; }
+    wxToolBar* GetToolbar139() { return m_toolbar139; }
     DataReportBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Data report"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_FRAME_STYLE);
     virtual ~DataReportBase();
 };
@@ -136,6 +167,44 @@ public:
     wxButton* GetButtonOK() { return m_buttonOK; }
     StabilityEventListBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Stability event list"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~StabilityEventListBase();
+};
+
+
+class ExportCSVFormBase : public wxDialog
+{
+protected:
+    wxCheckBox* m_checkBoxPFPowerFlow;
+    wxCheckBox* m_checkBoxPFBuses;
+    wxCheckBox* m_checkBoxPFBranches;
+    wxCheckBox* m_checkBoxCCFault;
+    wxCheckBox* m_checkBoxCCBuses;
+    wxCheckBox* m_checkBoxCCBranches;
+    wxCheckBox* m_checkBoxCCGenerators;
+    wxCheckBox* m_checkBoxHarmSources;
+    wxCheckBox* m_checkBoxHarmVoltages;
+    wxCheckBox* m_checkBoxharmCurrents;
+    wxButton* m_buttonExport;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnExportButtonClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxCheckBox* GetCheckBoxPFPowerFlow() { return m_checkBoxPFPowerFlow; }
+    wxCheckBox* GetCheckBoxPFBuses() { return m_checkBoxPFBuses; }
+    wxCheckBox* GetCheckBoxPFBranches() { return m_checkBoxPFBranches; }
+    wxCheckBox* GetCheckBoxCCFault() { return m_checkBoxCCFault; }
+    wxCheckBox* GetCheckBoxCCBuses() { return m_checkBoxCCBuses; }
+    wxCheckBox* GetCheckBoxCCBranches() { return m_checkBoxCCBranches; }
+    wxCheckBox* GetCheckBoxCCGenerators() { return m_checkBoxCCGenerators; }
+    wxCheckBox* GetCheckBoxHarmSources() { return m_checkBoxHarmSources; }
+    wxCheckBox* GetCheckBoxHarmVoltages() { return m_checkBoxHarmVoltages; }
+    wxCheckBox* GetCheckBoxharmCurrents() { return m_checkBoxharmCurrents; }
+    wxButton* GetButtonExport() { return m_buttonExport; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    ExportCSVFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Export CSV"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~ExportCSVFormBase();
 };
 
 #endif

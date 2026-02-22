@@ -605,7 +605,7 @@ public:
 	 * @param value Value to be converted.
 	 * @param minDecimal Minimum number of decimal places.
 	 */
-	static wxString StringFromDouble(double value, int minDecimal = 1);
+	static wxString StringFromDouble(double value, int minDecimal = 1, int maxDecimals = 13);
 
 	/**
 	 * @brief Calculate the distance between a line (formed by point list) and a point.

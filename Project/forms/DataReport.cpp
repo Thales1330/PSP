@@ -18,16 +18,25 @@
 #include "DataReport.h"
 #include "../simulation/ElectricCalculation.h"
 #include "../editors/Workspace.h"
+#include "ExportCSVForm.h"
 
 DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(parent)
 {
 	m_workspace = workspace;
 
-	m_headerColour = wxColour(150, 150, 150);
+	m_headerColour = wxColour(191, 223, 255);
 	m_offlineColour = wxColour(100, 100, 100);
 	m_oddRowColour = wxColour(220, 220, 220);
 	m_evenRowColour = wxColour(255, 255, 255);
 
+	m_fontSize = wxAtoi(m_choiceFontSize->GetStringSelection());
+	m_precision = wxAtoi(m_textCtrlPrecision->GetValue());
+
+	wxGrid* grids[] = { m_gridPowerFlow, m_gridPFBuses, m_gridPFBranches, m_gridFault, m_gridFaultBuses, m_gridFaultBranches, m_gridFaultGenerators, m_gridHarmCurrents, m_gridHarmBuses, m_gridHarmBranches };
+	for (auto grid : grids)
+		grid->Bind(wxEVT_MOUSEWHEEL, &DataReport::OnMouseWheel, this);
+
+	UpdateFontSize();
 	CreateGrids();
 	SetHeaders();
 	FillValues();
@@ -43,10 +52,16 @@ DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(
 	SetRowsColours(m_gridHarmBuses, 1, 2);
 	SetRowsColours(m_gridHarmBranches, 1, 4, 1);
 
-	//SetSize(GetBestSize());
+	UpdateCurrentGrid();
 }
 
-DataReport::~DataReport() {}
+DataReport::~DataReport()
+{
+	wxGrid* grids[] = { m_gridPowerFlow, m_gridPFBuses, m_gridPFBranches, m_gridFault, m_gridFaultBuses, m_gridFaultBranches, m_gridFaultGenerators, m_gridHarmCurrents, m_gridHarmBuses, m_gridHarmBranches };
+	for (auto grid : grids)
+		grid->Unbind(wxEVT_MOUSEWHEEL, &DataReport::OnMouseWheel, this);
+}
+
 void DataReport::CreateGrids()
 {
 	wxFont headerFont = m_gridPowerFlow->GetLabelFont();
@@ -493,9 +508,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 			m_gridPowerFlow->SetCellValue(rowNumber, 2, busName1);
 			m_gridPowerFlow->SetCellValue(rowNumber, 3, busName2);
 			m_gridPowerFlow->SetCellValue(rowNumber, 4,
-				line->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower));
+				line->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 5,
-				line->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower));
+				line->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
 			rowNumber++;
 
@@ -504,9 +519,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 			m_gridPowerFlow->SetCellValue(rowNumber, 2, busName2);
 			m_gridPowerFlow->SetCellValue(rowNumber, 3, busName1);
 			m_gridPowerFlow->SetCellValue(rowNumber, 4,
-				line->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower));
+				line->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 5,
-				line->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower));
+				line->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
 			rowNumber++;
 		}
@@ -537,9 +552,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 			m_gridPowerFlow->SetCellValue(rowNumber, 2, busName1);
 			m_gridPowerFlow->SetCellValue(rowNumber, 3, busName2);
 			m_gridPowerFlow->SetCellValue(rowNumber, 4,
-				transformer->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower));
+				transformer->StringFromDouble(std::real(data.powerFlow[0]) * kActivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 5,
-				transformer->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower));
+				transformer->StringFromDouble(std::imag(data.powerFlow[0]) * kReactivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
 			rowNumber++;
 
@@ -548,9 +563,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 			m_gridPowerFlow->SetCellValue(rowNumber, 2, busName2);
 			m_gridPowerFlow->SetCellValue(rowNumber, 3, busName1);
 			m_gridPowerFlow->SetCellValue(rowNumber, 4,
-				transformer->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower));
+				transformer->StringFromDouble(std::real(data.powerFlow[1]) * kActivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 5,
-				transformer->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower));
+				transformer->StringFromDouble(std::imag(data.powerFlow[1]) * kReactivePower, 0, m_precision));
 			m_gridPowerFlow->SetCellValue(rowNumber, 6, isOnline);
 			rowNumber++;
 		}
@@ -603,10 +618,10 @@ void DataReport::FillValues(GridSelection gridToFill)
 			} break;
 			}
 			m_gridPFBuses->SetCellValue(rowNumber, 1, busTypeString);
-			m_gridPFBuses->SetCellValue(rowNumber, 2, bus->StringFromDouble(std::abs(data.voltage) * kVoltage));
-			m_gridPFBuses->SetCellValue(rowNumber, 3, bus->StringFromDouble(wxRadToDeg(std::arg(data.voltage))));
-			m_gridPFBuses->SetCellValue(rowNumber, 4, bus->StringFromDouble(std::real(data.power) * kActivePower));
-			m_gridPFBuses->SetCellValue(rowNumber, 5, bus->StringFromDouble(std::imag(data.power) * kReactivePower));
+			m_gridPFBuses->SetCellValue(rowNumber, 2, bus->StringFromDouble(std::abs(data.voltage) * kVoltage, 0, m_precision));
+			m_gridPFBuses->SetCellValue(rowNumber, 3, bus->StringFromDouble(wxRadToDeg(std::arg(data.voltage)), 0, m_precision));
+			m_gridPFBuses->SetCellValue(rowNumber, 4, bus->StringFromDouble(std::real(data.power) * kActivePower, 0, m_precision));
+			m_gridPFBuses->SetCellValue(rowNumber, 5, bus->StringFromDouble(std::imag(data.power) * kReactivePower, 0, m_precision));
 			rowNumber++;
 		}
 		m_gridPFBuses->AutoSize();
@@ -646,13 +661,13 @@ void DataReport::FillValues(GridSelection gridToFill)
 
 			double k = 1.0;
 			if (m_gridPFBranches->GetCellValue(0, 4) == m_resistanceChoices[1]) k = zb;
-			m_gridPFBranches->SetCellValue(rowNumber, 4, line->StringFromDouble(data.resistance * k));
+			m_gridPFBranches->SetCellValue(rowNumber, 4, line->StringFromDouble(data.resistance * k, 0, m_precision));
 			k = 1.0;
 			if (m_gridPFBranches->GetCellValue(0, 5) == m_indReactanceChoices[1]) k = zb;
-			m_gridPFBranches->SetCellValue(rowNumber, 5, line->StringFromDouble(data.indReactance * k));
+			m_gridPFBranches->SetCellValue(rowNumber, 5, line->StringFromDouble(data.indReactance * k, 0, m_precision));
 			k = 1.0;
 			if (m_gridPFBranches->GetCellValue(0, 6) == m_capSusceptanceChoices[1]) k = zb;
-			m_gridPFBranches->SetCellValue(rowNumber, 6, line->StringFromDouble(data.capSusceptance / k));
+			m_gridPFBranches->SetCellValue(rowNumber, 6, line->StringFromDouble(data.capSusceptance / k, 0, m_precision));
 			m_gridPFBranches->SetCellValue(rowNumber, 7, "-");
 			m_gridPFBranches->SetCellValue(rowNumber, 8, "-");
 			m_gridPFBranches->SetCellValue(rowNumber, 9, isOnline);
@@ -695,13 +710,13 @@ void DataReport::FillValues(GridSelection gridToFill)
 
 			double k = 1.0;
 			if (m_gridPFBranches->GetCellValue(0, 4) == m_resistanceChoices[1]) k = zb;
-			m_gridPFBranches->SetCellValue(rowNumber, 4, transformer->StringFromDouble(data.resistance * k));
+			m_gridPFBranches->SetCellValue(rowNumber, 4, transformer->StringFromDouble(data.resistance * k, 0, m_precision));
 			k = 1.0;
 			if (m_gridPFBranches->GetCellValue(0, 5) == m_indReactanceChoices[1]) k = zb;
-			m_gridPFBranches->SetCellValue(rowNumber, 5, transformer->StringFromDouble(data.indReactance * k));
+			m_gridPFBranches->SetCellValue(rowNumber, 5, transformer->StringFromDouble(data.indReactance * k, 0, m_precision));
 			m_gridPFBranches->SetCellValue(rowNumber, 6, "-");
-			m_gridPFBranches->SetCellValue(rowNumber, 7, transformer->StringFromDouble(data.turnsRatio));
-			m_gridPFBranches->SetCellValue(rowNumber, 8, transformer->StringFromDouble(data.phaseShift));
+			m_gridPFBranches->SetCellValue(rowNumber, 7, transformer->StringFromDouble(data.turnsRatio, 0, m_precision));
+			m_gridPFBranches->SetCellValue(rowNumber, 8, transformer->StringFromDouble(data.phaseShift, 0, m_precision));
 			m_gridPFBranches->SetCellValue(rowNumber, 9, isOnline);
 			rowNumber++;
 		}
@@ -729,10 +744,10 @@ void DataReport::FillValues(GridSelection gridToFill)
 					kCurrent = ib / 1e3;
 				}
 				m_gridFault->SetCellValue(rowNumber, 1,
-					bus->StringFromDouble(std::abs(data.faultCurrent[0]) * kCurrent));
+					bus->StringFromDouble(std::abs(data.faultCurrent[0]) * kCurrent, 0, m_precision));
 
 				m_gridFault->SetCellValue(rowNumber, 2,
-					bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0]))));
+					bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0])), 0, m_precision));
 
 				kCurrent = 1.0;
 				if (m_gridFault->GetCellValue(1, 3) == m_currentChoices[1]) {
@@ -742,10 +757,10 @@ void DataReport::FillValues(GridSelection gridToFill)
 					kCurrent = ib / 1e3;
 				}
 				m_gridFault->SetCellValue(rowNumber, 3,
-					bus->StringFromDouble(std::abs(data.faultCurrent[1]) * kCurrent));
+					bus->StringFromDouble(std::abs(data.faultCurrent[1]) * kCurrent, 0, m_precision));
 
 				m_gridFault->SetCellValue(rowNumber, 4,
-					bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1]))));
+					bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1])), 0, m_precision));
 
 				kCurrent = 1.0;
 				if (m_gridFault->GetCellValue(1, 5) == m_currentChoices[1]) {
@@ -755,10 +770,10 @@ void DataReport::FillValues(GridSelection gridToFill)
 					kCurrent = ib / 1e3;
 				}
 				m_gridFault->SetCellValue(rowNumber, 5,
-					bus->StringFromDouble(std::abs(data.faultCurrent[2]) * kCurrent));
+					bus->StringFromDouble(std::abs(data.faultCurrent[2]) * kCurrent, 0, m_precision));
 
 				m_gridFault->SetCellValue(rowNumber, 6,
-					bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[2]))));
+					bus->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[2])), 0, m_precision));
 
 				rowNumber++;
 			}
@@ -784,9 +799,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kVoltage = vb / 1e3;
 			}
 			m_gridFaultBuses->SetCellValue(rowNumber, 1,
-				bus->StringFromDouble(std::abs(data.faultVoltage[0]) * kVoltage));
+				bus->StringFromDouble(std::abs(data.faultVoltage[0]) * kVoltage, 0, m_precision));
 			m_gridFaultBuses->SetCellValue(rowNumber, 2,
-				bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[0]))));
+				bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[0])), 0, m_precision));
 
 			kVoltage = 1.0;
 			if (m_gridFaultBuses->GetCellValue(1, 3) == m_voltageChoices[1]) {
@@ -796,9 +811,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kVoltage = vb / 1e3;
 			}
 			m_gridFaultBuses->SetCellValue(rowNumber, 3,
-				bus->StringFromDouble(std::abs(data.faultVoltage[1]) * kVoltage));
+				bus->StringFromDouble(std::abs(data.faultVoltage[1]) * kVoltage, 0, m_precision));
 			m_gridFaultBuses->SetCellValue(rowNumber, 4,
-				bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[1]))));
+				bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[1])), 0, m_precision));
 
 			kVoltage = 1.0;
 			if (m_gridFaultBuses->GetCellValue(1, 5) == m_voltageChoices[1]) {
@@ -808,9 +823,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kVoltage = vb / 1e3;
 			}
 			m_gridFaultBuses->SetCellValue(rowNumber, 5,
-				bus->StringFromDouble(std::abs(data.faultVoltage[2]) * kVoltage));
+				bus->StringFromDouble(std::abs(data.faultVoltage[2]) * kVoltage, 0, m_precision));
 			m_gridFaultBuses->SetCellValue(rowNumber, 6,
-				bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[2]))));
+				bus->StringFromDouble(wxRadToDeg(std::arg(data.faultVoltage[2])), 0, m_precision));
 
 			rowNumber++;
 		}
@@ -858,9 +873,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ib / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(rowNumber, 4,
-				line->StringFromDouble(std::abs(data.faultCurrent[0][0]) * kCurrent));
+				line->StringFromDouble(std::abs(data.faultCurrent[0][0]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 5,
-				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][0]))));
+				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][0])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
 				kCurrent = ib;
@@ -869,9 +884,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ib / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(rowNumber, 6,
-				line->StringFromDouble(std::abs(data.faultCurrent[0][1]) * kCurrent));
+				line->StringFromDouble(std::abs(data.faultCurrent[0][1]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 7,
-				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][1]))));
+				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][1])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
 				kCurrent = ib;
@@ -880,9 +895,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ib / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(rowNumber, 8,
-				line->StringFromDouble(std::abs(data.faultCurrent[0][2]) * kCurrent));
+				line->StringFromDouble(std::abs(data.faultCurrent[0][2]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 9,
-				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][2]))));
+				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][2])), 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
 			rowNumber++;
 
@@ -898,9 +913,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ib / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(rowNumber, 4,
-				line->StringFromDouble(std::abs(data.faultCurrent[1][0]) * kCurrent));
+				line->StringFromDouble(std::abs(data.faultCurrent[1][0]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 5,
-				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][0]))));
+				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][0])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
 				kCurrent = ib;
@@ -909,9 +924,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ib / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(rowNumber, 6,
-				line->StringFromDouble(std::abs(data.faultCurrent[1][1]) * kCurrent));
+				line->StringFromDouble(std::abs(data.faultCurrent[1][1]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 7,
-				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][1]))));
+				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][1])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
 				kCurrent = ib;
@@ -920,9 +935,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ib / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(rowNumber, 8,
-				line->StringFromDouble(std::abs(data.faultCurrent[1][2]) * kCurrent));
+				line->StringFromDouble(std::abs(data.faultCurrent[1][2]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 9,
-				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][2]))));
+				line->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][2])), 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
 			rowNumber++;
 		}
@@ -966,9 +981,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ibp / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 4, transformer->StringFromDouble(std::abs(data.faultCurrent[0][0]) * kCurrent));
+				rowNumber, 4, transformer->StringFromDouble(std::abs(data.faultCurrent[0][0]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 5, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][0]))));
+				rowNumber, 5, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][0])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
 				kCurrent = ibp;
@@ -977,9 +992,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ibp / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 6, transformer->StringFromDouble(std::abs(data.faultCurrent[0][1]) * kCurrent));
+				rowNumber, 6, transformer->StringFromDouble(std::abs(data.faultCurrent[0][1]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 7, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][1]))));
+				rowNumber, 7, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][1])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
 				kCurrent = ibp;
@@ -988,9 +1003,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ibp / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 8, transformer->StringFromDouble(std::abs(data.faultCurrent[0][2]) * kCurrent));
+				rowNumber, 8, transformer->StringFromDouble(std::abs(data.faultCurrent[0][2]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 9, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][2]))));
+				rowNumber, 9, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0][2])), 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
 			rowNumber++;
 
@@ -1006,9 +1021,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ibs / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 4, transformer->StringFromDouble(std::abs(data.faultCurrent[1][0]) * kCurrent));
+				rowNumber, 4, transformer->StringFromDouble(std::abs(data.faultCurrent[1][0]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 5, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][0]))));
+				rowNumber, 5, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][0])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 6) == m_currentChoices[1]) {
 				kCurrent = ibs;
@@ -1017,9 +1032,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ibs / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 6, transformer->StringFromDouble(std::abs(data.faultCurrent[1][1]) * kCurrent));
+				rowNumber, 6, transformer->StringFromDouble(std::abs(data.faultCurrent[1][1]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 7, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][1]))));
+				rowNumber, 7, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][1])), 0, m_precision));
 			kCurrent = 1.0;
 			if (m_gridFaultBranches->GetCellValue(1, 8) == m_currentChoices[1]) {
 				kCurrent = ibs;
@@ -1028,9 +1043,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 				kCurrent = ibs / 1e3;
 			}
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 8, transformer->StringFromDouble(std::abs(data.faultCurrent[1][2]) * kCurrent));
+				rowNumber, 8, transformer->StringFromDouble(std::abs(data.faultCurrent[1][2]) * kCurrent, 0, m_precision));
 			m_gridFaultBranches->SetCellValue(
-				rowNumber, 9, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][2]))));
+				rowNumber, 9, transformer->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1][2])), 0, m_precision));
 			m_gridFaultBranches->SetCellValue(rowNumber, 10, isOnline);
 			rowNumber++;
 		}
@@ -1056,9 +1071,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 			else if (m_gridFaultGenerators->GetCellValue(1, 1) == m_currentChoices[2])
 				kCurrent = ib / 1e3;
 			m_gridFaultGenerators->SetCellValue(rowNumber, 1,
-				generator->StringFromDouble(std::abs(data.faultCurrent[0]) * kCurrent));
+				generator->StringFromDouble(std::abs(data.faultCurrent[0]) * kCurrent, 0, m_precision));
 			m_gridFaultGenerators->SetCellValue(
-				rowNumber, 2, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0]))));
+				rowNumber, 2, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[0])), 0, m_precision));
 
 			kCurrent = 1.0;
 			if (m_gridFaultGenerators->GetCellValue(1, 3) == m_currentChoices[1])
@@ -1066,9 +1081,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 			else if (m_gridFaultGenerators->GetCellValue(1, 3) == m_currentChoices[2])
 				kCurrent = ib / 1e3;
 			m_gridFaultGenerators->SetCellValue(rowNumber, 3,
-				generator->StringFromDouble(std::abs(data.faultCurrent[1]) * kCurrent));
+				generator->StringFromDouble(std::abs(data.faultCurrent[1]) * kCurrent, 0, m_precision));
 			m_gridFaultGenerators->SetCellValue(
-				rowNumber, 4, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1]))));
+				rowNumber, 4, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[1])), 0, m_precision));
 
 			kCurrent = 1.0;
 			if (m_gridFaultGenerators->GetCellValue(1, 5) == m_currentChoices[1])
@@ -1076,9 +1091,9 @@ void DataReport::FillValues(GridSelection gridToFill)
 			else if (m_gridFaultGenerators->GetCellValue(1, 5) == m_currentChoices[2])
 				kCurrent = ib / 1e3;
 			m_gridFaultGenerators->SetCellValue(rowNumber, 5,
-				generator->StringFromDouble(std::abs(data.faultCurrent[2]) * kCurrent));
+				generator->StringFromDouble(std::abs(data.faultCurrent[2]) * kCurrent, 0, m_precision));
 			m_gridFaultGenerators->SetCellValue(
-				rowNumber, 6, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[2]))));
+				rowNumber, 6, generator->StringFromDouble(wxRadToDeg(std::arg(data.faultCurrent[2])), 0, m_precision));
 
 			rowNumber++;
 		}
@@ -1110,8 +1125,8 @@ void DataReport::FillValues(GridSelection gridToFill)
 					else if (m_gridHarmCurrents->GetCellValue(0, 3) == m_currentChoices[2]) {
 						kCurrent = ib / 1e3;
 					}
-					m_gridHarmCurrents->SetCellValue(rowNumber, 3, hCurrent->StringFromDouble(data.injHarmCurrent[i] * kCurrent));
-					m_gridHarmCurrents->SetCellValue(rowNumber, 4, hCurrent->StringFromDouble(data.injHarmAngle[i]) + wxString(L'\u00B0'));
+					m_gridHarmCurrents->SetCellValue(rowNumber, 3, hCurrent->StringFromDouble(data.injHarmCurrent[i] * kCurrent, 0, m_precision));
+					m_gridHarmCurrents->SetCellValue(rowNumber, 4, hCurrent->StringFromDouble(data.injHarmAngle[i], 0, m_precision) + wxString(L'\u00B0'));
 					i++;
 					rowNumber++;
 				}
@@ -1126,7 +1141,7 @@ void DataReport::FillValues(GridSelection gridToFill)
 				for (auto& order : data.harmonicOrder) {
 					m_gridHarmCurrents->SetCellValue(rowNumber, 2, wxString::Format(wxT("%d%s"), order, wxString(L'\u00BA')));
 					m_gridHarmCurrents->SetCellValue(rowNumber, 3, "?");
-					m_gridHarmCurrents->SetCellValue(rowNumber, 4, hCurrent->StringFromDouble(data.injHarmAngle[i]) + wxString(L'\u00B0'));
+					m_gridHarmCurrents->SetCellValue(rowNumber, 4, hCurrent->StringFromDouble(data.injHarmAngle[i], 0, m_precision) + wxString(L'\u00B0'));
 					i++;
 					rowNumber++;
 				}
@@ -1147,22 +1162,22 @@ void DataReport::FillValues(GridSelection gridToFill)
 			m_gridHarmBuses->SetCellSize(rowNumber, 0, data.harmonicOrder.size(), 1);
 			m_gridHarmBuses->SetCellValue(rowNumber, 0, data.name);
 			m_gridHarmBuses->SetCellSize(rowNumber, 1, data.harmonicOrder.size(), 1);
-			m_gridHarmBuses->SetCellValue(rowNumber, 1, bus->StringFromDouble(data.thd) + wxT("%"));
+			m_gridHarmBuses->SetCellValue(rowNumber, 1, bus->StringFromDouble(data.thd, 0, m_precision) + wxT("%"));
 			int i = 0;
 			for (auto& order : data.harmonicOrder) {
 				m_gridHarmBuses->SetCellValue(rowNumber, 2, wxString::Format(wxT("%d%s"), order, wxString(L'\u00BA')));
 				wxString voltageStr = "";
 				if (m_gridHarmBuses->GetCellValue(0, 3) == m_phaseVoltageChoices[0]) {
-					voltageStr.Printf(wxT("%.10e"), std::abs(data.harmonicVoltage[i]));
+					voltageStr.Printf(wxString::Format("%%.%de", m_precision), std::abs(data.harmonicVoltage[i]));
 				}
 				else if (m_gridHarmBuses->GetCellValue(0, 3) == m_phaseVoltageChoices[1]) {
-					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb / sqrt(3.0));
+					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb / sqrt(3.0), 0, m_precision);
 				}
 				else if (m_gridHarmBuses->GetCellValue(0, 3) == m_phaseVoltageChoices[2]) {
-					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb / (sqrt(3.0) * 1e3));
+					voltageStr = bus->StringFromDouble(std::abs(data.harmonicVoltage[i]) * vb / (sqrt(3.0) * 1e3), 0, m_precision);
 				}
 				m_gridHarmBuses->SetCellValue(rowNumber, 3, voltageStr);
-				m_gridHarmBuses->SetCellValue(rowNumber, 4, bus->StringFromDouble(wxRadToDeg(std::arg(data.harmonicVoltage[i]))) + wxString(L'\u00B0'));
+				m_gridHarmBuses->SetCellValue(rowNumber, 4, bus->StringFromDouble(wxRadToDeg(std::arg(data.harmonicVoltage[i])), 0, m_precision) + wxString(L'\u00B0'));
 
 				i++;
 				rowNumber++;
@@ -1172,7 +1187,7 @@ void DataReport::FillValues(GridSelection gridToFill)
 		m_gridHarmBuses->GetContainingSizer()->Layout();
 	}
 
-	// Fault branches
+	// Harmonic current branches
 	if (gridToFill == GRID_ALL || gridToFill == GRID_HARMBRANCHES) {
 		rowNumber = 1;
 		for (auto* line : lineList) {
@@ -1217,19 +1232,19 @@ void DataReport::FillValues(GridSelection gridToFill)
 					wxString angleStr = "";
 					if (line->IsOnline()) {
 						if (m_gridHarmBranches->GetCellValue(0, 5) == m_currentChoices[0]) {
-							currentStr.Printf(wxT("%.10e"), std::abs(data.harmonicCurrent[side][i]));
+							currentStr.Printf(wxString::Format("%%.%de", m_precision), std::abs(data.harmonicCurrent[side][i]));
 						}
 						else if (m_gridHarmBranches->GetCellValue(0, 5) == m_currentChoices[1]) {
-							currentStr = line->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib);
+							currentStr = line->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib, 0, m_precision);
 						}
 						else if (m_gridHarmBranches->GetCellValue(0, 5) == m_currentChoices[2]) {
-							currentStr = line->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib / 1e3);
+							currentStr = line->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib / 1e3, 0, m_precision);
 						}
-						angleStr = line->StringFromDouble(wxRadToDeg(std::arg(data.harmonicCurrent[side][i]))) + wxString(L'\u00B0');
+						angleStr = line->StringFromDouble(wxRadToDeg(std::arg(data.harmonicCurrent[side][i])), 0, m_precision) + wxString(L'\u00B0');
 					}
 					else {
-						currentStr = line->StringFromDouble(0.0);
-						angleStr = line->StringFromDouble(0.0);
+						currentStr = line->StringFromDouble(0.0, 0, m_precision);
+						angleStr = line->StringFromDouble(0.0, 0, m_precision);
 					}
 
 					m_gridHarmBranches->SetCellValue(rowNumber, 5, currentStr);
@@ -1286,19 +1301,19 @@ void DataReport::FillValues(GridSelection gridToFill)
 					wxString angleStr = "";
 					if (transformer->IsOnline()) {
 						if (m_gridHarmBranches->GetCellValue(0, 5) == m_currentChoices[0]) {
-							currentStr.Printf(wxT("%.10e"), std::abs(data.harmonicCurrent[side][i]));
+							currentStr.Printf(wxString::Format("%%.%de", m_precision), std::abs(data.harmonicCurrent[side][i]));
 						}
 						else if (m_gridHarmBranches->GetCellValue(0, 5) == m_currentChoices[1]) {
-							currentStr = transformer->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib);
+							currentStr = transformer->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib, 0, m_precision);
 						}
 						else if (m_gridHarmBranches->GetCellValue(0, 5) == m_currentChoices[2]) {
-							currentStr = transformer->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib / 1e3);
+							currentStr = transformer->StringFromDouble(std::abs(data.harmonicCurrent[side][i]) * ib / 1e3, 0, m_precision);
 						}
-						angleStr = transformer->StringFromDouble(wxRadToDeg(std::arg(data.harmonicCurrent[side][i]))) + wxString(L'\u00B0');
+						angleStr = transformer->StringFromDouble(wxRadToDeg(std::arg(data.harmonicCurrent[side][i])), 0, m_precision) + wxString(L'\u00B0');
 					}
 					else {
-						currentStr = transformer->StringFromDouble(0.0);
-						angleStr = transformer->StringFromDouble(0.0);
+						currentStr = transformer->StringFromDouble(0.0, 0, m_precision);
+						angleStr = transformer->StringFromDouble(0.0, 0, m_precision);
 					}
 
 					m_gridHarmBranches->SetCellValue(rowNumber, 5, currentStr);
@@ -1317,16 +1332,36 @@ void DataReport::FillValues(GridSelection gridToFill)
 	m_changingValues = false;
 }
 
+//void DataReport::SetRowsColours(wxGrid* grid, int rowStart, int colStart, int colEndTrim)
+//{
+//	for (int i = rowStart; i < grid->GetNumberRows(); ++i) {
+//		wxGridCellAttr* attr = grid->GetOrCreateCellAttr(i, colStart);
+//		if ((i - rowStart) % 2 == 0)
+//			attr->SetBackgroundColour(m_evenRowColour);
+//		else
+//			attr->SetBackgroundColour(m_oddRowColour);
+//		//grid->SetRowAttr(i, attr);
+//		for (int j = colStart; j < (grid->GetNumberCols() - colEndTrim); ++j) {
+//			grid->SetAttr(i, j, attr);
+//		}
+//	}
+//}
+
 void DataReport::SetRowsColours(wxGrid* grid, int rowStart, int colStart, int colEndTrim)
 {
-	for (int i = rowStart; i < grid->GetNumberRows(); ++i) {
-		wxGridCellAttr* attr = grid->GetOrCreateCellAttr(i, colStart);
-		if ((i - rowStart) % 2 == 0)
-			attr->SetBackgroundColour(m_evenRowColour);
-		else
-			attr->SetBackgroundColour(m_oddRowColour);
-		//grid->SetRowAttr(i, attr);
-		for (int j = colStart; j < (grid->GetNumberCols() - colEndTrim); ++j) {
+	for (int i = rowStart; i < grid->GetNumberRows(); ++i)
+	{
+		wxColour colour =
+			((i - rowStart) % 2 == 0) ?
+			m_evenRowColour :
+			m_oddRowColour;
+
+		for (int j = colStart; j < (grid->GetNumberCols() - colEndTrim); ++j)
+		{
+			wxGridCellAttr* attr = new wxGridCellAttr;
+
+			attr->SetBackgroundColour(colour);
+
 			grid->SetAttr(i, j, attr);
 		}
 	}
@@ -1397,6 +1432,91 @@ void DataReport::GridKeyHandler(wxGrid* grid, wxKeyEvent& event)
 	}
 	event.Skip();
 }
+void DataReport::UpdateFontSize()
+{
+	wxFont font = m_gridPowerFlow->GetFont();
+	font.SetPointSize(m_fontSize);
+
+	wxFont headerFont = font;
+	headerFont.SetWeight(wxFONTWEIGHT_BOLD);
+
+	wxGrid* grids[] = { m_gridPowerFlow, m_gridPFBuses, m_gridPFBranches, m_gridFault, m_gridFaultBuses, m_gridFaultBranches, m_gridFaultGenerators, m_gridHarmCurrents, m_gridHarmBuses, m_gridHarmBranches };
+
+	for (auto* grid : grids) {
+		grid->SetLabelFont(headerFont);
+		grid->SetDefaultCellFont(font);
+		// Set font for all cells in header (first row)
+		for (int col = 0; col < grid->GetNumberCols(); ++col) {
+			grid->SetCellFont(0, col, headerFont);
+			if (grid == m_gridFault ||
+				grid == m_gridFaultBuses ||
+				grid == m_gridFaultBranches ||
+				grid == m_gridFaultGenerators)
+			{
+				grid->SetCellFont(1, col, headerFont);
+			}
+		}
+		grid->SetFont(font);
+		grid->AutoSize();
+		grid->GetContainingSizer()->Layout();
+		grid->ForceRefresh();
+	}
+}
+
+void DataReport::UpdateCurrentGrid()
+{
+	int mainSlection = m_notebookDataReport->GetSelection();
+	if (mainSlection != wxNOT_FOUND) {
+		switch (mainSlection) {
+		case 0:  // Power Flow 
+		{
+			int selection = m_notebookPowerFlow->GetSelection();
+			if (selection == 0) {
+				m_currentGrid = m_gridPowerFlow;
+			}
+			else if (selection == 1) {
+				m_currentGrid = m_gridPFBuses;
+			}
+			else if (selection == 2) {
+				m_currentGrid = m_gridPFBranches;
+			}
+			break;
+		}
+		case 1:  // Fault
+		{
+			int selection = m_notebookFault->GetSelection();
+			if (selection == 0) {
+				m_currentGrid = m_gridFault;
+			}
+			else if (selection == 1) {
+				m_currentGrid = m_gridFaultBuses;
+			}
+			else if (selection == 2) {
+				m_currentGrid = m_gridFaultBranches;
+			}
+			else if (selection == 3) {
+				m_currentGrid = m_gridFaultGenerators;
+			}
+			break;
+		}
+		case 2:  // Harmonics
+		{
+			int selection = m_notebookHarmCurrents->GetSelection();
+			if (selection == 0) {
+				m_currentGrid = m_gridHarmCurrents;
+			}
+			else if (selection == 1) {
+				m_currentGrid = m_gridHarmBuses;
+			}
+			else if (selection == 2) {
+				m_currentGrid = m_gridHarmBranches;
+			}
+			break;
+		}
+		}
+	}
+}
+
 void DataReport::OnHarmCurrentGridChanged(wxGridEvent& event)
 {
 	if (!m_changingValues) FillValues(GRID_HARMCURRENT);
@@ -1408,4 +1528,195 @@ void DataReport::OnHarmBusesGridChanged(wxGridEvent& event)
 void DataReport::OnHarmBranchesGridChanged(wxGridEvent& event)
 {
 	if (!m_changingValues) FillValues(GRID_HARMBRANCHES);
+}
+void DataReport::ClipboardButtonClick(wxCommandEvent& event)
+{
+	wxString plainText;
+	wxString html;
+	wxGrid* grid = m_currentGrid;
+
+	if (grid == nullptr) {
+		wxMessageDialog msgDialog(this, _("Unable to copy to clipboard."), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+		msgDialog.ShowModal();
+		return;
+	}
+
+	int headerRows = 1;
+
+	if (grid == m_gridFault ||
+		grid == m_gridFaultBuses ||
+		grid == m_gridFaultBranches ||
+		grid == m_gridFaultGenerators)
+	{
+		headerRows = 2;
+	}
+
+	html << "<table style='border-collapse:collapse; "
+		"font-family:Segoe UI, Arial, sans-serif; "
+		"font-size:10pt;'>";
+
+	int rows = grid->GetNumberRows();
+	int cols = grid->GetNumberCols();
+
+	for (int row = 0; row < rows; row++)
+	{
+		html << "<tr>";
+
+		for (int col = 0; col < cols; )
+		{
+			int rowspan = 1;
+			int colspan = 1;
+
+			grid->GetCellSize(row, col, &rowspan, &colspan);
+
+			// Skip covered cells
+			if (rowspan == 0 || colspan == 0)
+			{
+				col++;
+				continue;
+			}
+
+			wxString value = grid->GetCellValue(row, col);
+
+			// Plain text
+			if (col > 0)
+				plainText << "\t";
+			plainText << value;
+
+			// Repeat value in plain text if merged horizontally
+			for (int c = 1; c < colspan; c++)
+				plainText << "\t" << value;
+
+			// Escape HTML
+			wxString escaped = value;
+			escaped.Replace("&", "&amp;");
+			escaped.Replace("<", "&lt;");
+			escaped.Replace(">", "&gt;");
+
+			bool isHeader = (row < headerRows);
+
+			if (isHeader)
+			{
+				html << "<th style='"
+					"border:1px solid #c9d1e6;"
+					"background-color:#BFDFFF;"
+					"color:black;"
+					"padding:5px 8px;"
+					"text-align:center;'";
+
+				if (rowspan > 1)
+					html << " rowspan='" << rowspan << "'";
+				if (colspan > 1)
+					html << " colspan='" << colspan << "'";
+
+				html << ">" << escaped << "</th>";
+			}
+			else
+			{
+				html << "<td style='"
+					"border:1px solid #c9d1e6;"
+					"padding:4px 8px;"
+					"text-align:center;'";
+
+				if (rowspan > 1)
+					html << " rowspan='" << rowspan << "'";
+				if (colspan > 1)
+					html << " colspan='" << colspan << "'";
+
+				html << ">" << escaped << "</td>";
+			}
+
+			col += colspan;
+		}
+
+		plainText << "\r\n";
+		html << "</tr>";
+	}
+
+	html << "</table>";
+
+
+	if (wxTheClipboard->Open())
+	{
+		wxDataObjectComposite* data = new wxDataObjectComposite();
+
+		data->Add(new wxHTMLDataObject(html));
+		data->Add(new wxTextDataObject(plainText));
+
+		wxTheClipboard->SetData(data);
+		wxTheClipboard->Close();
+	}
+	else {
+		wxMessageDialog msgDialog(this, _("Unable to copy to clipboard."), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+		msgDialog.ShowModal();
+	}
+}
+void DataReport::ExportCSVButtonClick(wxCommandEvent& event)
+{
+	std::vector<wxGrid*> grids = { m_gridPowerFlow, m_gridPFBuses, m_gridPFBranches,
+		m_gridFault, m_gridFaultBuses, m_gridFaultBranches, m_gridFaultGenerators,
+		m_gridHarmCurrents, m_gridHarmBuses, m_gridHarmBranches };
+	ExportCSVForm expCSV(this, grids);
+	expCSV.ShowModal();
+}
+
+void DataReport::OnPFNotebookChanged(wxNotebookEvent& event)
+{
+	UpdateCurrentGrid();
+}
+
+void DataReport::OnFaultNotebookChanged(wxNotebookEvent& event)
+{
+	UpdateCurrentGrid();
+}
+
+void DataReport::OnHarmNotebookChanged(wxNotebookEvent& event)
+{
+	UpdateCurrentGrid();
+}
+
+void DataReport::OnMainNotebookChanged(wxNotebookEvent& event)
+{
+	UpdateCurrentGrid();
+}
+
+void DataReport::OnFontSizeSelected(wxCommandEvent& event)
+{
+	m_fontSize = wxAtoi(m_choiceFontSize->GetStringSelection());
+	UpdateFontSize();
+}
+
+void DataReport::OnTextPrecisionUpdate(wxCommandEvent& event)
+{
+	long precision = m_precision;
+	if (m_textCtrlPrecision->GetValue().ToLong(&precision)) {
+		if (precision >= 0) {
+			m_precision = precision;
+			FillValues(GRID_ALL);
+		}
+	}
+
+}
+void DataReport::OnMouseWheel(wxMouseEvent& event)
+{
+	if (event.ControlDown()) {
+		if (event.GetWheelRotation() > 0) {
+			int newSelection = m_choiceFontSize->GetSelection() + 1;
+			if (newSelection < m_choiceFontSize->GetCount()) {
+				m_choiceFontSize->SetSelection(newSelection);
+				m_fontSize = wxAtoi(m_choiceFontSize->GetStringSelection());
+				UpdateFontSize();
+			}
+		}
+		else {
+			int newSelection = m_choiceFontSize->GetSelection() - 1;
+			if (newSelection >= 0) {
+				m_choiceFontSize->SetSelection(newSelection);
+				m_fontSize = wxAtoi(m_choiceFontSize->GetStringSelection());
+				UpdateFontSize();
+			}
+		}
+	}
+
+	event.Skip();
 }

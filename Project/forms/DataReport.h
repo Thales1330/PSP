@@ -55,8 +55,19 @@ class DataReport : public DataReportBase
     virtual void FillValues(GridSelection gridToFill = GRID_ALL);
     virtual void SetRowsColours(wxGrid* grid, int rowStart = 1, int colStart = 0, int colEndTrim = 0);
     virtual void GridKeyHandler(wxGrid* grid, wxKeyEvent& event);
+	virtual void UpdateFontSize();
+    virtual void UpdateCurrentGrid();
 
    protected:
+    virtual void OnMouseWheel(wxMouseEvent& event);
+    virtual void OnTextPrecisionUpdate(wxCommandEvent& event);
+    virtual void OnMainNotebookChanged(wxNotebookEvent& event);
+    virtual void OnFontSizeSelected(wxCommandEvent& event);
+    virtual void OnHarmNotebookChanged(wxNotebookEvent& event);
+    virtual void OnFaultNotebookChanged(wxNotebookEvent& event);
+    virtual void OnPFNotebookChanged(wxNotebookEvent& event);
+    virtual void ClipboardButtonClick(wxCommandEvent& event);
+    virtual void ExportCSVButtonClick(wxCommandEvent& event);
     virtual void OnHarmBranchesGridChanged(wxGridEvent& event);
     virtual void OnHarmBusesGridChanged(wxGridEvent& event);
     virtual void OnHarmCurrentGridChanged(wxGridEvent& event);
@@ -76,6 +87,10 @@ class DataReport : public DataReportBase
     virtual void OnGridPFKeyDown(wxKeyEvent& event) { GridKeyHandler(m_gridPowerFlow, event); }
     Workspace* m_workspace = nullptr;
     bool m_changingValues = false;
+
+	wxGrid* m_currentGrid = nullptr;
+	int m_fontSize = 10;
+	int m_precision = 4;
 
     // Headers choices
     wxArrayString m_voltageChoices;

@@ -530,9 +530,9 @@ bool Element::IntFromString(wxWindow* parent, wxString strValue, int& value, wxS
 	return true;
 }
 
-wxString Element::StringFromDouble(double value, int minDecimal)
+wxString Element::StringFromDouble(double value, int minDecimal, int maxDecimals)
 {
-	wxString str = wxString::FromCDouble(value, 13);
+	wxString str = wxString::FromCDouble(value, maxDecimals);
 	int cutNumber = 0;
 	int numDecimal = 0;
 	bool foundCut = false;
