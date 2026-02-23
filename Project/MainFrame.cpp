@@ -444,7 +444,12 @@ void MainFrame::OnRedoClick(wxRibbonButtonBarEvent& event)
 		workspace->SetNextState();
 	}
 }
-void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event) {}
+void MainFrame::OnResetVoltagesClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) { workspace->ResetAllVoltages(); }
+}
+
 void MainFrame::OnRunStabilityClick(wxRibbonButtonBarEvent& event)
 {
 	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());

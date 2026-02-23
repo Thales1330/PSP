@@ -88,13 +88,30 @@ bool PowerFlow::InitPowerFlow(std::vector<BusType>& busType,
 				busType.push_back(BUS_PQ);
 
 			// Fill the voltages array
-			if (data.isVoltageControlled && busType[busNumber] != BUS_PQ) {
-				voltage.push_back(std::complex<double>(data.controlledVoltage * std::cos(radInitAngle),
-					data.controlledVoltage * std::sin(radInitAngle)));
+			double v = 1.0;
+			double t = 0.0;
+			if (data.slackBus) {
+				v = data.controlledVoltage;
+				t = radInitAngle;
 			}
-			else {
-				voltage.push_back(std::complex<double>(std::cos(radInitAngle), std::sin(radInitAngle)));
+			else if (busType[busNumber] == BUS_PV) {
+				v = data.controlledVoltage;
+				t = std::arg(data.voltage);
 			}
+			else{
+				v = std::abs(data.voltage);
+				if (v <= 0.1) v = 1.0; // Avoid very low voltage magnitude that can cause convergence problems.
+				t = std::arg(data.voltage);
+			}
+			voltage.push_back(std::complex<double>(v * std::cos(t), v * std::sin(t)));
+
+			//if (data.isVoltageControlled && busType[busNumber] != BUS_PQ) {
+			//	voltage.push_back(std::complex<double>(data.controlledVoltage * std::cos(radInitAngle),
+			//		data.controlledVoltage * std::sin(radInitAngle)));
+			//}
+			//else {
+			//	voltage.push_back(std::complex<double>(std::cos(radInitAngle), std::sin(radInitAngle)));
+			//}
 
 			// Fill the power array
 			power.push_back(std::complex<double>(0.0, 0.0));  // Initial value
@@ -270,6 +287,17 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
 		double iterationError = GaussSeidel(busType, voltage, oldVoltage, power, accFactor);
 
+		if (HasInvalidValue(voltage)) {
+			m_errorMsg = _("The power flow solution have invalid voltage values.");
+			ResetVoltages();
+			return false;
+		}
+		if (HasInvalidValue(power)) {
+			m_errorMsg = _("The power flow solution have invalid power values.");
+			ResetVoltages();
+			return false;
+		}
+
 		if (iterationError < error) {
 			// Calculate power error in EMT elements.
 			double oldError = emtPowerError;
@@ -298,6 +326,19 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 	UpdateElementsPowerFlow(voltage, power, oldBusType, reactiveLimit, systemPowerBase);
 
 	return true;
+}
+
+bool PowerFlow::HasInvalidValue(const std::vector< std::complex<double> >& value)
+{
+	for (size_t i = 0; i < value.size(); i++)
+	{
+		if (!std::isfinite(value[i].real()) ||
+			!std::isfinite(value[i].imag()))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 bool PowerFlow::RunNewtonRaphson(double systemPowerBase,
@@ -390,9 +431,22 @@ bool PowerFlow::RunNewtonRaphson(double systemPowerBase,
 
 		NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);
 
+		if (HasInvalidValue(voltage)) {
+			m_errorMsg = _("The power flow solution have invalid voltage values.");
+			ResetVoltages();
+			return false;
+		}
+		if (HasInvalidValue(power)) {
+			m_errorMsg = _("The power flow solution have invalid power values.");
+			ResetVoltages();
+			return false;
+		}
+
 		iteration++;
 	}
 	m_iterations = iteration;
+
+	
 
 	// Adjust the power array.
 	for (int i = 0; i < m_numberOfBuses; i++) {
@@ -547,7 +601,14 @@ void PowerFlow::ResetVoltages()
 {
 	for (auto* bus : m_busList) {
 		BusElectricalData data = bus->GetElectricalData();
-		data.voltage = std::complex<double>(1.0, 0.0);
+		if (bus->IsOnline()) {
+			data.voltage = std::complex<double>(1.0, 0.0);
+			if (data.isVoltageControlled) {
+				data.voltage = std::complex<double>(data.controlledVoltage, 0.0);
+			}
+		}
+		else
+			data.voltage = std::complex<double>(0.0, 0.0);
 		data.harmonicOrder.clear();
 		data.harmonicVoltage.clear();
 		data.thd = 0.0;
@@ -892,8 +953,7 @@ PowerFlow::CalculateJacobianMatrix(
 {
 	int nvar = 2 * numPQ + numPV;
 
-	std::vector<std::vector<double>> J(nvar,
-		std::vector<double>(nvar, 0.0));
+	std::vector<std::vector<double>> J(nvar, std::vector<double>(nvar, 0.0));
 
 	int n = m_numberOfBuses;
 
@@ -913,7 +973,6 @@ PowerFlow::CalculateJacobianMatrix(
 	for (int i = 0; i < n; i++)
 	{
 		I[i] = 0;
-
 		for (int k = 0; k < n; k++)
 			I[i] += m_yBus[i][k] * voltage[k];
 	}
@@ -951,32 +1010,19 @@ PowerFlow::CalculateJacobianMatrix(
 				double Qi = S[i].imag();
 
 				// J11
-				J[rowP][colTheta] =
-					-Qi - B * V[i] * V[i];
+				J[rowP][colTheta] = -Qi - B * V[i] * V[i];
 
 				// J12 only PQ
 				if (busType[i] == BUS_PQ)
-				{
-					J[rowQ][colTheta] =
-						Pi - G * V[i] * V[i];
-				}
+					J[rowQ][colTheta] = Pi - G * V[i] * V[i];
 			}
 			else
 			{
 				// J11
-				J[rowP][colTheta] =
-					V[i] * V[j] *
-					(G * sin(dtheta)
-						- B * cos(dtheta));
+				J[rowP][colTheta] = V[i] * V[j] * (G * sin(dtheta) - B * cos(dtheta));
 
-				if (busType[i] == BUS_PQ)
-				{
-					// J21
-					J[rowQ][colTheta] =
-						-V[i] * V[j] *
-						(G * cos(dtheta)
-							+ B * sin(dtheta));
-				}
+				if (busType[i] == BUS_PQ)// J21					
+					J[rowQ][colTheta] = -V[i] * V[j] * (G * cos(dtheta) + B * sin(dtheta));
 			}
 
 			colTheta++;
@@ -1000,37 +1046,21 @@ PowerFlow::CalculateJacobianMatrix(
 				double Qi = S[i].imag();
 
 				// J12
-				J[rowP][colV] =
-					Pi / V[i] + G * V[i];
+				J[rowP][colV] = Pi / V[i] + G * V[i];
 
-				if (busType[i] == BUS_PQ)
-				{
-					// J22
-					J[rowQ][colV] =
-						Qi / V[i] - B * V[i];
-				}
+				if (busType[i] == BUS_PQ) // J22
+					J[rowQ][colV] = Qi / V[i] - B * V[i];
 			}
 			else
 			{
 				// J12
-				J[rowP][colV] =
-					V[i] *
-					(G * cos(dtheta)
-						+ B * sin(dtheta));
+				J[rowP][colV] = V[i] * (G * cos(dtheta) + B * sin(dtheta));
 
-				if (busType[i] == BUS_PQ)
-				{
-					// J22
-					J[rowQ][colV] =
-						V[i] *
-						(G * sin(dtheta)
-							- B * cos(dtheta));
-				}
+				if (busType[i] == BUS_PQ) // J22
+					J[rowQ][colV] = V[i] * (G * sin(dtheta) - B * cos(dtheta));
 			}
-
 			colV++;
 		}
-
 		rowP++;
 
 		if (busType[i] == BUS_PQ)

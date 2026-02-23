@@ -204,7 +204,7 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc)
 			gcText->SetFont(font);
 			m_gcTextList.push_back(gcText);
 
-			double w, h;
+			//double w, h;
 			wxSize txtSize = dc.GetTextExtent(currentLine);
 
 			if (txtSize.GetWidth() > m_width) m_width = txtSize.GetWidth();
@@ -262,12 +262,10 @@ void Text::Rotate(bool clockwise)
 
 bool Text::ShowForm(wxWindow* parent, std::vector<Element*> elementList)
 {
-	TextForm* textForm = new TextForm(parent, this, elementList);
-	if (textForm->ShowModal() == wxID_OK) {
-		textForm->Destroy();
+	TextForm textForm(parent, this, elementList);
+	if (textForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	textForm->Destroy();
 	return false;
 }
 
@@ -393,19 +391,21 @@ void Text::UpdateText(double systemPowerBase)
 				}
 			} break;
 			case DATA_SC_POWER: {
+				double scPower = data.scPower;
+				if (!data.isConnected) scPower = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
-					SetText(wxString::FromDouble(data.scPower, m_decimalPlaces) + " p.u.");
+					SetText(wxString::FromDouble(scPower, m_decimalPlaces) + " p.u.");
 				} break;
 				case ElectricalUnit::UNIT_VA: {
-					SetText(wxString::FromDouble(data.scPower * systemPowerBase, m_decimalPlaces) + " VA");
+					SetText(wxString::FromDouble(scPower * systemPowerBase, m_decimalPlaces) + " VA");
 				} break;
 				case ElectricalUnit::UNIT_kVA: {
-					SetText(wxString::FromDouble(data.scPower * systemPowerBase / 1e3, m_decimalPlaces) +
+					SetText(wxString::FromDouble(scPower * systemPowerBase / 1e3, m_decimalPlaces) +
 						" kVA");
 				} break;
 				case ElectricalUnit::UNIT_MVA: {
-					SetText(wxString::FromDouble(data.scPower * systemPowerBase / 1e6, m_decimalPlaces) +
+					SetText(wxString::FromDouble(scPower * systemPowerBase / 1e6, m_decimalPlaces) +
 						" MVA");
 				} break;
 				default:
@@ -426,13 +426,19 @@ void Text::UpdateText(double systemPowerBase)
 			SyncGeneratorElectricalData data = syncGenerator->GetPUElectricalData(systemPowerBase);
 			double baseVoltage = syncGenerator->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
 			double baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);
+			bool busParentOnline = false;
+			auto parentList = syncGenerator->GetParentList();
+			if (parentList.size() == 1) {
+				Bus* busParent = dynamic_cast<Bus*>(parentList[0]);
+				if (busParent) busParentOnline = busParent->GetElectricalData().isConnected;
+			}
 			switch (m_dataType) {
 			case DATA_NAME: {
 				SetText(data.name);
 			} break;
 			case DATA_ACTIVE_POWER: {
 				double activePower = data.activePower;
-				if (!syncGenerator->IsOnline()) activePower = 0.0;
+				if (!syncGenerator->IsOnline() || !busParentOnline) activePower = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(activePower, m_decimalPlaces) + " p.u.");
@@ -454,7 +460,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_REACTIVE_POWER: {
 				double reactivePower = data.reactivePower;
-				if (!syncGenerator->IsOnline()) reactivePower = 0.0;
+				if (!syncGenerator->IsOnline() || !busParentOnline) reactivePower = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(reactivePower, m_decimalPlaces) + " p.u.");
@@ -524,13 +530,23 @@ void Text::UpdateText(double systemPowerBase)
 			double baseVoltage = data.nominalVoltage;
 			if (data.nominalVoltageUnit == ElectricalUnit::UNIT_kV) baseVoltage *= 1e3;
 			double baseCurrent = systemPowerBase / (std::sqrt(3.0) * baseVoltage);
+			bool busParentOnline = false;
+			auto parentList = line->GetParentList();
+			if (parentList.size() == 2) {
+				Bus* busParent1 = dynamic_cast<Bus*>(parentList[0]);
+				Bus* busParent2 = dynamic_cast<Bus*>(parentList[1]);
+				if (busParent1 && busParent2) {
+					if (busParent1->GetElectricalData().isConnected && busParent1->GetElectricalData().isConnected)
+						busParentOnline = true;
+				}
+			}
 			switch (m_dataType) {
 			case DATA_NAME: {
 				SetText(data.name);
 			} break;
 			case DATA_PF_ACTIVE: {
 				double activePF = std::real(data.powerFlow[m_direction]);
-				if (!line->IsOnline()) activePF = 0.0;
+				if (!line->IsOnline() || !busParentOnline) activePF = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(activePF, m_decimalPlaces) + " p.u.");
@@ -552,7 +568,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_PF_REACTIVE: {
 				double reactivePF = std::imag(data.powerFlow[m_direction]);
-				if (!line->IsOnline()) reactivePF = 0.0;
+				if (!line->IsOnline() || !busParentOnline) reactivePF = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
@@ -574,7 +590,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_PF_LOSSES: {
 				double losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));
-				if (!line->IsOnline()) losses = 0.0;
+				if (!line->IsOnline() || !busParentOnline) losses = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(losses, m_decimalPlaces) + " p.u.");
@@ -594,7 +610,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_PF_CURRENT: {
 				double current = std::abs(data.current[m_direction]);
-				if (!line->IsOnline()) current = 0.0;
+				if (!line->IsOnline() || !busParentOnline) current = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(current, m_decimalPlaces) + " p.u.");
@@ -658,6 +674,16 @@ void Text::UpdateText(double systemPowerBase)
 		if (transformer) {
 			TransformerElectricalData data = transformer->GetElectricalData();
 			double baseVoltage[2] = { data.primaryNominalVoltage, data.secondaryNominalVoltage };
+			bool busParentOnline = false;
+			auto parentList = transformer->GetParentList();
+			if (parentList.size() == 2) {
+				Bus* busParent1 = dynamic_cast<Bus*>(parentList[0]);
+				Bus* busParent2 = dynamic_cast<Bus*>(parentList[1]);
+				if (busParent1 && busParent2) {
+					if (busParent1->GetElectricalData().isConnected && busParent1->GetElectricalData().isConnected)
+						busParentOnline = true;
+				}
+			}
 
 			if (data.primaryNominalVoltageUnit == ElectricalUnit::UNIT_kV) baseVoltage[0] *= 1e3;
 			if (data.secondaryNominalVoltageUnit == ElectricalUnit::UNIT_kV) baseVoltage[1] *= 1e3;
@@ -670,7 +696,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_PF_ACTIVE: {
 				double activePF = std::real(data.powerFlow[m_direction]);
-				if (!transformer->IsOnline()) activePF = 0.0;
+				if (!transformer->IsOnline() || !busParentOnline) activePF = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(activePF, m_decimalPlaces) + " p.u.");
@@ -692,7 +718,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_PF_REACTIVE: {
 				double reactivePF = std::imag(data.powerFlow[m_direction]);
-				if (!transformer->IsOnline()) reactivePF = 0.0;
+				if (!transformer->IsOnline() || !busParentOnline) reactivePF = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(reactivePF, m_decimalPlaces) + " p.u.");
@@ -714,7 +740,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_PF_LOSSES: {
 				double losses = std::abs(std::real(data.powerFlow[0]) + std::real(data.powerFlow[1]));
-				if (!transformer->IsOnline()) losses = 0.0;
+				if (!transformer->IsOnline() || !busParentOnline) losses = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(losses, m_decimalPlaces) + " p.u.");
@@ -734,7 +760,7 @@ void Text::UpdateText(double systemPowerBase)
 			} break;
 			case DATA_PF_CURRENT: {
 				double current = std::abs(data.current[m_direction]);
-				if (!transformer->IsOnline()) current = 0.0;
+				if (!transformer->IsOnline() || !busParentOnline) current = 0.0;
 				switch (m_unit) {
 				case ElectricalUnit::UNIT_PU: {
 					SetText(wxString::FromDouble(current, m_decimalPlaces) + " p.u.");
@@ -813,7 +839,15 @@ void Text::UpdateText(double systemPowerBase)
 				std::complex<double> v = static_cast<Bus*>(load->GetParentList()[0])->GetElectricalData().voltage;
 				sPower = std::pow(std::abs(v), 2) * sPower;
 			}
-			if (!load->IsOnline()) sPower = std::complex<double>(0.0, 0.0);
+			bool busParentOnline = false;
+			auto parentList = load->GetParentList();
+			if (parentList.size() == 1) {
+				Bus* busParent = dynamic_cast<Bus*>(parentList[0]);
+				if (busParent)
+					busParentOnline = busParent->GetElectricalData().isConnected;
+			}
+
+			if (!load->IsOnline() || !busParentOnline) sPower = std::complex<double>(0.0, 0.0);
 			switch (m_dataType) {
 			case DATA_NAME: {
 				SetText(data.name);
@@ -866,10 +900,18 @@ void Text::UpdateText(double systemPowerBase)
 	} break;
 	case TYPE_SYNC_MOTOR: {
 		SyncMotor* syncMotor = static_cast<SyncMotor*>(m_element);
+		
 		if (syncMotor) {
 			SyncMotorElectricalData data = syncMotor->GetPUElectricalData(systemPowerBase);
+			bool busParentOnline = false;
+			auto parentList = syncMotor->GetParentList();
+			if (parentList.size() == 1) {
+				Bus* busParent = dynamic_cast<Bus*>(parentList[0]);
+				if (busParent)
+					busParentOnline = busParent->GetElectricalData().isConnected;
+			}
 			std::complex<double> sPower(data.activePower, data.reactivePower);
-			if (!syncMotor->IsOnline()) sPower = std::complex<double>(0.0, 0.0);
+			if (!syncMotor->IsOnline() || !busParentOnline) sPower = std::complex<double>(0.0, 0.0);
 			switch (m_dataType) {
 			case DATA_NAME: {
 				SetText(data.name);
@@ -924,8 +966,15 @@ void Text::UpdateText(double systemPowerBase)
 		IndMotor* indMotor = static_cast<IndMotor*>(m_element);
 		if (indMotor) {
 			IndMotorElectricalData data = indMotor->GetPUElectricalData(systemPowerBase);
+			bool busParentOnline = false;
+			auto parentList = indMotor->GetParentList();
+			if (parentList.size() == 1) {
+				Bus* busParent = dynamic_cast<Bus*>(parentList[0]);
+				if (busParent)
+					busParentOnline = busParent->GetElectricalData().isConnected;
+			}
 			std::complex<double> sPower(data.activePower, data.reactivePower);
-			if (!indMotor->IsOnline()) sPower = std::complex<double>(0.0, 0.0);
+			if (!indMotor->IsOnline() || !busParentOnline) sPower = std::complex<double>(0.0, 0.0);
 			switch (m_dataType) {
 			case DATA_NAME: {
 				SetText(data.name);
@@ -981,7 +1030,16 @@ void Text::UpdateText(double systemPowerBase)
 		if (capacitor) {
 			CapacitorElectricalData data = capacitor->GetPUElectricalData(systemPowerBase);
 			double reativePower = data.reactivePower;
-			if (!capacitor->IsOnline())
+
+			bool busParentOnline = false;
+			auto parentList = capacitor->GetParentList();
+			if (parentList.size() == 1) {
+				Bus* busParent = dynamic_cast<Bus*>(parentList[0]);
+				if (busParent)
+					busParentOnline = busParent->GetElectricalData().isConnected;
+			}
+
+			if (!capacitor->IsOnline() || !busParentOnline)
 				reativePower = 0.0;
 			else {
 				std::complex<double> v =
@@ -1022,7 +1080,16 @@ void Text::UpdateText(double systemPowerBase)
 		if (inductor) {
 			InductorElectricalData data = inductor->GetPUElectricalData(systemPowerBase);
 			double reativePower = data.reactivePower;
-			if (!inductor->IsOnline())
+
+			bool busParentOnline = false;
+			auto parentList = inductor->GetParentList();
+			if (parentList.size() == 1) {
+				Bus* busParent = dynamic_cast<Bus*>(parentList[0]);
+				if (busParent)
+					busParentOnline = busParent->GetElectricalData().isConnected;
+			}
+
+			if (!inductor->IsOnline() || !busParentOnline)
 				reativePower = 0.0;
 			else {
 				std::complex<double> v =

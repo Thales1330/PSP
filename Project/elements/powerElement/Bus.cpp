@@ -80,7 +80,7 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 	gc->Rotate(wxDegToRad(m_angle));
 	gc->Translate(-m_position.m_x, -m_position.m_y);
 
-
+	
 	if (!m_electricalData.isConnected)
 		gc->SetBrush(wxBrush(m_offlineElementColour));
 	else if (m_dynEvent)
@@ -89,6 +89,11 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 		gc->SetBrush(wxBrush(m_busColour));
 
 	gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
+
+	if (m_electricalData.slackBus) {
+		gc->SetBrush(wxBrush(*wxBLACK, wxBRUSHSTYLE_CROSSDIAG_HATCH));
+		gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
+	}
 
 	gc->PopState();
 

@@ -173,6 +173,7 @@ public:
 	std::vector<double> GetStabilityTimeVector() const { return m_stabilityTimeVector; }
 	bool IsContinuousCalculationActive() const { return m_continuousCalc; }
 	void SetContinuousCalculationActive(bool value = true) { m_continuousCalc = value; }
+	void ResetAllVoltages();
 	bool RunPowerFlow(bool resetVoltages = false, bool showBusyInfo = true);
 	bool RunFault();
 	bool RunSCPower();
@@ -216,6 +217,7 @@ protected:
 	wxString m_name;
 
 	WorkspaceMode m_mode = WorkspaceMode::MODE_EDIT;
+	WorkspaceMode m_oldStatusMode = WorkspaceMode::MODE_EDIT;
 
 	std::vector<PowerElement*> m_elementList;
 	int m_elementNumber[NUM_ELEMENTS];

@@ -103,6 +103,8 @@ protected:
 	bool CalculateMotorsReactivePower(std::vector<std::complex<double> > voltage,
 		std::vector<std::complex<double> >& power);
 
+	bool HasInvalidValue(const std::vector< std::complex<double> >& voltage);
+
 	std::vector<std::vector<std::complex<double> > > m_yBus;
 	wxString m_errorMsg = "";
 	int m_numberOfBuses = 0;

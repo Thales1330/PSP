@@ -22,7 +22,7 @@
 #include "../elements/powerElement/PowerElement.h"
 #include "wx/language.h"
 
-enum PowerFlowMethod { GAUSS_SEIDEL = 0, NEWTON_RAPHSON, GAUSS_NEWTON };
+enum PowerFlowMethod { NEWTON_RAPHSON = 0, GAUSS_SEIDEL, GAUSS_NEWTON };
 enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
 enum class HarmLoadConnection { PARALLEL = 0, SERIES, DISCONNECTED };
 enum class PlotLib { wxMATH_PLOT = 0, wxCHART_DIR = 1 };

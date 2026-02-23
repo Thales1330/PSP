@@ -2975,7 +2975,7 @@
 																}, {
 																	"type":	"multi-string",
 																	"m_label":	"Choices:",
-																	"m_value":	"Gauss-Seidel;Newton-Raphson;Hybrid Gauss-Newton"
+																	"m_value":	"Newton-Raphson;Gauss-Seidel;Hybrid Gauss-Newton"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Selection:",
@@ -3403,7 +3403,7 @@
 																		}, {
 																			"type":	"string",
 																			"m_label":	"Value:",
-																			"m_value":	"1e-7"
+																			"m_value":	"1e-6"
 																		}, {
 																			"type":	"string",
 																			"m_label":	"Text Hint",
@@ -3601,7 +3601,7 @@
 																		}, {
 																			"type":	"string",
 																			"m_label":	"Value:",
-																			"m_value":	"5000"
+																			"m_value":	"500"
 																		}, {
 																			"type":	"string",
 																			"m_label":	"Text Hint",

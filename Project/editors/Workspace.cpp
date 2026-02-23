@@ -1189,7 +1189,8 @@ void Workspace::UpdateStatusBar()
 	case WorkspaceMode::MODE_MOVE_NODE:
 	case WorkspaceMode::MODE_SELECTION_RECT:
 	case WorkspaceMode::MODE_EDIT: {
-		m_statusBar->SetStatusText(wxT(""));
+		if (m_oldStatusMode != m_mode)
+			m_statusBar->SetStatusText(wxT(""));
 		m_statusBar->SetStatusText(_("MODE: EDIT"), 1);
 	} break;
 	}
@@ -1198,6 +1199,7 @@ void Workspace::UpdateStatusBar()
 	m_statusBar->SetStatusText(
 		wxString::Format(wxT("X: %.1f  Y: %.1f"), m_camera->GetMousePosition().m_x, m_camera->GetMousePosition().m_y),
 		3);
+	m_oldStatusMode = m_mode;
 }
 
 int Workspace::GetElementNumberFromList(Element* element)
@@ -1832,6 +1834,14 @@ void Workspace::ValidateElementsVoltages()
 		}
 		child->SetNominalVoltage(nominalVoltage, nominalVoltageUnit);
 	}
+}
+
+void Workspace::ResetAllVoltages()
+{
+	PowerFlow pf(GetElementList());
+	pf.ResetVoltages();
+	UpdateTextElements();
+	Redraw();
 }
 
 bool Workspace::RunPowerFlow(bool resetVoltages, bool showBusyInfo)

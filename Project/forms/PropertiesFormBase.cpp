@@ -281,8 +281,8 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     boxSizerLvl3_3->Add(m_staticTextPFMethod, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choicePFMethodArr;
-    m_choicePFMethodArr.Add(_("Gauss-Seidel"));
     m_choicePFMethodArr.Add(_("Newton-Raphson"));
+    m_choicePFMethodArr.Add(_("Gauss-Seidel"));
     m_choicePFMethodArr.Add(_("Hybrid Gauss-Newton"));
     m_choicePFMethod = new wxChoice(m_panelPF, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), m_choicePFMethodArr, 0);
     m_choicePFMethod->SetSelection(0);
@@ -316,7 +316,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl4_3->Add(m_staticTextPFTolerance, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_textCtrlPFTolerance = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("1e-7"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    m_textCtrlPFTolerance = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("1e-6"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlPFTolerance->SetHint(wxT(""));
     #endif
@@ -331,7 +331,7 @@ SimulationsSettingsFormBase::SimulationsSettingsFormBase(wxWindow* parent, wxWin
     
     boxSizerLvl4_4->Add(m_staticTextPFMaxIterations, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_textCtrlPFMaxIterations = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("5000"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
+    m_textCtrlPFMaxIterations = new wxTextCtrl(m_panelPF, wxID_ANY, wxT("500"), wxDefaultPosition, wxDLG_UNIT(m_panelPF, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlPFMaxIterations->SetHint(wxT(""));
     #endif
