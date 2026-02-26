@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -80,7 +80,7 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 	gc->Rotate(wxDegToRad(m_angle));
 	gc->Translate(-m_position.m_x, -m_position.m_y);
 
-	
+
 	if (!m_electricalData.isConnected)
 		gc->SetBrush(wxBrush(m_offlineElementColour));
 	else if (m_dynEvent)
@@ -90,10 +90,10 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 
 	gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
 
-	if (m_electricalData.slackBus) {
-		gc->SetBrush(wxBrush(*wxBLACK, wxBRUSHSTYLE_CROSSDIAG_HATCH));
-		gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
-	}
+	//if (m_electricalData.slackBus) {
+	//	gc->SetBrush(wxBrush(*wxBLACK, wxBRUSHSTYLE_CROSSDIAG_HATCH));
+	//	gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
+	//}
 
 	gc->PopState();
 
@@ -205,10 +205,10 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		//gc->SetPen(*wxRED_PEN);
 
 		wxPoint points[4];
-		
+
 		wxPoint2DDouble p;
 
-		// Primeiro pol�gono
+		// Primeiro polígono
 		p = wxPoint2DDouble(fsPosition.m_x + 1 * localScale, fsPosition.m_y + 3 * localScale);
 		points[0] = RotateAround(p, center, m_angle);
 		p = wxPoint2DDouble(fsPosition.m_x + 1 * localScale, fsPosition.m_y - 3 * localScale);
@@ -335,7 +335,7 @@ bool Bus::GetContextMenu(wxMenu& menu)
 	textMenu->Append(ID_TXT_SCC, _("Short-circuit power"));
 	textMenu->Append(ID_TXT_THD, _("Voltage THD"));
 	textMenu->SetClientData(menu.GetClientData());
-		
+
 
 	menu.AppendSubMenu(textMenu, _("Add text"));
 	GeneralMenuItens(menu);
@@ -344,13 +344,11 @@ bool Bus::GetContextMenu(wxMenu& menu)
 
 bool Bus::ShowForm(wxWindow* parent, Element* element)
 {
-	BusForm* busForm = new BusForm(parent, this);
-	if (busForm->ShowModal() == wxID_OK) {
-		busForm->Destroy();
+	BusForm busForm(parent, this);
+	busForm.CentreOnParent();
+	if (busForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-
-	busForm->Destroy();
 	return false;
 }
 

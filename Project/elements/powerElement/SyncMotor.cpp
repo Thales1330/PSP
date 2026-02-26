@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -61,14 +61,12 @@ bool SyncMotor::GetContextMenu(wxMenu& menu)
 
 bool SyncMotor::ShowForm(wxWindow* parent, Element* element)
 {
-	SyncMachineForm* syncMotorForm = new SyncMachineForm(parent, this);
-	syncMotorForm->SetTitle(_("Synchronous Condenser"));
-	if (syncMotorForm->ShowModal() == wxID_OK) {
-		syncMotorForm->Destroy();
+	SyncMachineForm syncMotorForm(parent, this);
+	syncMotorForm.SetTitle(_("Synchronous Condenser"));
+	syncMotorForm.CenterOnParent();
+	if (syncMotorForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-
-	syncMotorForm->Destroy();
 	return false;
 }
 
@@ -191,13 +189,13 @@ wxString SyncMotor::GetTipText() const
 		tipText += _(" p.u.");
 	} break;
 	case ElectricalUnit::UNIT_var: {
-		tipText += _(" VAr");
+		tipText += _(" var");
 	} break;
 	case ElectricalUnit::UNIT_kvar: {
-		tipText += _(" kVAr");
+		tipText += _(" kvar");
 	} break;
 	case ElectricalUnit::UNIT_Mvar: {
-		tipText += _(" MVAr");
+		tipText += _(" Mvar");
 	} break;
 	default:
 		break;

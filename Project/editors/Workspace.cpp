@@ -420,6 +420,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 	if (showNewElementForm) {
 		if (newElement) {
 			newElement->ShowForm(this, newElement);
+			CheckSlackBusDuplication(newElement);
 			SaveCurrentState();
 			if (m_continuousCalc) RunStaticStudies();
 		}
@@ -448,7 +449,10 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 				oldBus = *currentBus;
 			}
 			m_timer->Stop();
-			if (element->ShowForm(this, element)) SaveCurrentState();
+			if (element->ShowForm(this, element)) {
+				CheckSlackBusDuplication(element);
+				SaveCurrentState();
+			}
 			elementEdited = true;
 			redraw = true;
 
@@ -1324,6 +1328,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 	switch (eventID) {
 	case ID_EDIT_ELEMENT: {
 		if (element->ShowForm(this, element)) {
+			CheckSlackBusDuplication(element);
 			UpdateTextElements();
 			SaveCurrentState();
 		}
@@ -1579,6 +1584,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 {
 	switch (textID) {
 	case ID_TXT_NAME: {
+		if (FindTextElement(parentElement, DATA_NAME)) return false; // Avoid inserting more than one text element of the same type for an element.
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_NAME);
@@ -1588,6 +1594,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_VOLTAGE: {
+		if (FindTextElement(parentElement, DATA_VOLTAGE)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_VOLTAGE);
@@ -1602,6 +1609,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_ANGLE: {
+		if (FindTextElement(parentElement, DATA_ANGLE)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_ANGLE);
@@ -1616,6 +1624,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_FAULTCURRENT: {
+		if (FindTextElement(parentElement, DATA_SC_CURRENT)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_SC_CURRENT);
@@ -1630,6 +1639,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_FAULTVOLTAGE: {
+		if (FindTextElement(parentElement, DATA_SC_VOLTAGE)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 75), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_SC_VOLTAGE);
@@ -1644,6 +1654,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_SCC: {
+		if (FindTextElement(parentElement, DATA_SC_POWER)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-50, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_SC_POWER);
@@ -1659,6 +1670,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_THD: {
+		if (FindTextElement(parentElement, DATA_PQ_THD)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-50, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_PQ_THD);
@@ -1669,6 +1681,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_ACTIVE_POWER: {
+		if (FindTextElement(parentElement, DATA_ACTIVE_POWER)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(0, 35), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_ACTIVE_POWER);
@@ -1683,6 +1696,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_REACTIVE_POWER: {
+		if (FindTextElement(parentElement, DATA_REACTIVE_POWER)) return false;
 		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(0, 50), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_REACTIVE_POWER);
@@ -1698,6 +1712,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_BRANCH_ACTIVE_POWER_1_2:
 	case ID_TXT_BRANCH_ACTIVE_POWER_2_1: {
+		if (FindTextElement(parentElement, DATA_PF_ACTIVE)) return false;
 		wxPoint2DDouble position(0.0, -10.0);
 		if (textID == ID_TXT_BRANCH_ACTIVE_POWER_1_2)
 			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
@@ -1721,6 +1736,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_BRANCH_REACTIVE_POWER_1_2:
 	case ID_TXT_BRANCH_REACTIVE_POWER_2_1: {
+		if (FindTextElement(parentElement, DATA_PF_REACTIVE)) return false;
 		wxPoint2DDouble position(0.0, 10.0);
 		if (textID == ID_TXT_BRANCH_REACTIVE_POWER_1_2)
 			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
@@ -1743,6 +1759,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		m_textList.emplace_back(newText);
 	} break;
 	case ID_TXT_BRANCH_LOSSES: {
+		if (FindTextElement(parentElement, DATA_PF_LOSSES)) return false;
 		wxPoint2DDouble position = wxPoint2DDouble(0, 35) + (parentElement->GetPointList()[0] + parentElement->GetPointList()[parentElement->GetPointList().size() - 1]) / 2.0;
 		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
@@ -1759,6 +1776,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_BRANCH_CURRENT_1_2:
 	case ID_TXT_BRANCH_CURRENT_2_1: {
+		if (FindTextElement(parentElement, DATA_PF_CURRENT)) return false;
 		wxPoint2DDouble position(0.0, 10.0);
 		if (textID == ID_TXT_BRANCH_CURRENT_1_2)
 			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
@@ -1782,6 +1800,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_BRANCH_FAULT_CURRENT_1_2:
 	case ID_TXT_BRANCH_FAULT_CURRENT_2_1: {
+		if (FindTextElement(parentElement, DATA_SC_CURRENT)) return false;
 		wxPoint2DDouble position(0.0, 25.0);
 		if (textID == ID_TXT_BRANCH_FAULT_CURRENT_1_2)
 			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
@@ -1808,6 +1827,44 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		break;
 	}
 	return true;
+}
+
+Element* Workspace::FindTextElement(Element* parentElement, int dataType)
+{
+	for (auto* text : m_textList) {
+		if (text->GetElement() == parentElement && text->GetDataType() == dataType)
+			return text;
+	}
+	return nullptr;
+}
+
+void Workspace::CheckSlackBusDuplication(Element* newSlackBus)
+{
+	Bus* newBus = dynamic_cast<Bus*>(newSlackBus);
+	if (newBus) {
+		if (!newBus->GetElectricalData().slackBus) return; // If the new bus is not set as slack bus, no need to check for duplication.
+
+		for (auto* element : m_elementList) {
+			Bus* bus = dynamic_cast<Bus*>(element);
+			if (bus && bus->GetElectricalData().slackBus && bus != newSlackBus) {
+				wxMessageDialog msgDialog(this,
+					wxString::Format(_("The system already has %s as the slack bus.\nDo you want to set %s as the new slack bus?"), bus->GetElectricalData().name, newBus->GetElectricalData().name),
+					_("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
+				if (msgDialog.ShowModal() == wxID_YES) {
+					auto data = bus->GetElectricalData();
+					data.slackBus = false;
+					bus->SetElectricalData(data);
+					return;
+				}
+				else {
+					auto data = newBus->GetElectricalData();
+					data.slackBus = false;
+					newBus->SetElectricalData(data);
+					return;
+				}
+			}
+		}
+	}
 }
 
 void Workspace::ValidateBusesVoltages(Element* initialBus)

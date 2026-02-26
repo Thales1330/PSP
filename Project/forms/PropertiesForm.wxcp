@@ -19340,7 +19340,7 @@
 									"m_events":	[{
 											"m_eventName":	"wxEVT_COMMAND_BUTTON_CLICKED",
 											"m_eventClass":	"wxCommandEvent",
-											"m_functionNameAndSignature":	"OnApplyButtonCliick(wxCommandEvent& event)",
+											"m_functionNameAndSignature":	"OnApplyButtonClick(wxCommandEvent& event)",
 											"m_description":	"Process a wxEVT_COMMAND_BUTTON_CLICKED event, when the button is clicked.",
 											"m_noBody":	false
 										}],

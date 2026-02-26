@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -108,14 +108,12 @@ bool SyncGenerator::GetContextMenu(wxMenu& menu)
 bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
 {
 	Workspace* ws = static_cast<Workspace*>(parent);
-	SyncMachineForm* generatorForm = new SyncMachineForm(parent, this, static_cast<int>(ws->GetProperties()->GetGeneralPropertiesData().plotLib));
-	generatorForm->SetTitle(_("Generator"));
-	if (generatorForm->ShowModal() == wxID_OK) {
-		generatorForm->Destroy();
+	SyncMachineForm generatorForm(parent, this, static_cast<int>(ws->GetProperties()->GetGeneralPropertiesData().plotLib));
+	generatorForm.SetTitle(_("Generator"));
+	generatorForm.CenterOnParent();
+	if (generatorForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-
-	generatorForm->Destroy();
 	return false;
 }
 
@@ -260,13 +258,13 @@ wxString SyncGenerator::GetTipText() const
 		tipText += _(" p.u.");
 	} break;
 	case ElectricalUnit::UNIT_var: {
-		tipText += _(" VAr");
+		tipText += _(" var");
 	} break;
 	case ElectricalUnit::UNIT_kvar: {
-		tipText += _(" kVAr");
+		tipText += _(" kvar");
 	} break;
 	case ElectricalUnit::UNIT_Mvar: {
-		tipText += _(" MVAr");
+		tipText += _(" Mvar");
 	} break;
 	default:
 		break;

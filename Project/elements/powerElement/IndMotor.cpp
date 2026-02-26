@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -83,12 +83,11 @@ bool IndMotor::GetContextMenu(wxMenu& menu)
 
 bool IndMotor::ShowForm(wxWindow* parent, Element* element)
 {
-	IndMotorForm* indMotorForm = new IndMotorForm(parent, this);
-	if (indMotorForm->ShowModal() == wxID_OK) {
-		indMotorForm->Destroy();
+	IndMotorForm indMotorForm(parent, this);
+	indMotorForm.CentreOnParent();
+	if (indMotorForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	indMotorForm->Destroy();
 	return false;
 }
 
@@ -170,13 +169,13 @@ wxString IndMotor::GetTipText() const
 		tipText += _(" p.u.");
 	} break;
 	case ElectricalUnit::UNIT_var: {
-		tipText += _(" VAr");
+		tipText += _(" var");
 	} break;
 	case ElectricalUnit::UNIT_kvar: {
-		tipText += _(" kVAr");
+		tipText += _(" kvar");
 	} break;
 	case ElectricalUnit::UNIT_Mvar: {
-		tipText += _(" MVAr");
+		tipText += _(" Mvar");
 	} break;
 	default:
 		break;

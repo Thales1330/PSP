@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -140,12 +140,11 @@ void Gain::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 
 bool Gain::ShowForm(wxWindow* parent, Element* element)
 {
-	GainForm* form = new GainForm(parent, this);
-	if (form->ShowModal() == wxID_OK) {
-		form->Destroy();
+	GainForm form(parent, this);
+	form.CenterOnParent();
+	if (form.ShowModal() == wxID_OK) {
 		return true;
 	}
-	form->Destroy();
 	return false;
 }
 

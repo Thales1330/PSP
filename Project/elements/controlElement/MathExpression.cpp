@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -192,12 +192,11 @@ void MathExpression::DrawDC(wxPoint2DDouble translation, double scale, wxGraphic
 
 bool MathExpression::ShowForm(wxWindow* parent, Element* element)
 {
-	MathExpressionForm* mathExprForm = new MathExpressionForm(parent, this);
-	if (mathExprForm->ShowModal() == wxID_OK) {
-		mathExprForm->Destroy();
+	MathExpressionForm mathExprForm(parent, this);
+	mathExprForm.CenterOnParent();
+	if (mathExprForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	mathExprForm->Destroy();
 	return false;
 }
 

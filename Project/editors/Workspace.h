@@ -159,6 +159,8 @@ public:
 	void EnableAutoHeatMapLabel(const bool& enable = true) { m_hmAutomaticLabel = enable; }
 	bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
 	bool InsertTextElement(int textID, Element* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, int precision = 2);
+	Element* FindTextElement(Element* parentElement, int dataType);
+	void CheckSlackBusDuplication(Element* newSlackBus);
 
 	void ValidateBusesVoltages(Element* initialBus);
 	void ValidateElementsVoltages();

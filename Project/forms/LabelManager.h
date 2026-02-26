@@ -10,7 +10,7 @@ public:
     LabelManager(wxWindow* parent, Workspace* workspace);
     virtual ~LabelManager();
 protected:
-    virtual void OnApplyButtonCliick(wxCommandEvent& event);
+    virtual void OnApplyButtonClick(wxCommandEvent& event);
     virtual void OnCancelButtonClick(wxCommandEvent& event);
     virtual void OnPrecisionTextUpdate(wxCommandEvent& event);
     virtual void OnUnitChanged(wxCommandEvent& event);

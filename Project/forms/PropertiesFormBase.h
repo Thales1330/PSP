@@ -496,7 +496,7 @@ protected:
     virtual void OnCheckListSelected(wxCommandEvent& event) { event.Skip(); }
     virtual void OnUnitChanged(wxCommandEvent& event) { event.Skip(); }
     virtual void OnPrecisionTextUpdate(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnApplyButtonCliick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnApplyButtonClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
 
 public:

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -300,12 +300,11 @@ bool Load::GetContextMenu(wxMenu& menu)
 
 bool Load::ShowForm(wxWindow* parent, Element* element)
 {
-	LoadForm* loadForm = new LoadForm(parent, this);
-	if (loadForm->ShowModal() == wxID_OK) {
-		loadForm->Destroy();
+	LoadForm loadForm(parent, this);
+	loadForm.CenterOnParent();
+	if (loadForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	loadForm->Destroy();
 	return false;
 }
 
@@ -395,13 +394,13 @@ wxString Load::GetTipText() const
 		tipText += _(" p.u.");
 	} break;
 	case ElectricalUnit::UNIT_var: {
-		tipText += _(" VAr");
+		tipText += _(" var");
 	} break;
 	case ElectricalUnit::UNIT_kvar: {
-		tipText += _(" kVAr");
+		tipText += _(" kvar");
 	} break;
 	case ElectricalUnit::UNIT_Mvar: {
-		tipText += _(" MVAr");
+		tipText += _(" Mvar");
 	} break;
 	default:
 		break;

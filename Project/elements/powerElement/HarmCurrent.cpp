@@ -1,4 +1,4 @@
-#include "HarmCurrent.h"
+﻿#include "HarmCurrent.h"
 
 #include "../../forms/HarmCurrentForm.h"
 
@@ -322,13 +322,12 @@ wxString HarmCurrent::GetTipText() const
 
 bool HarmCurrent::ShowForm(wxWindow* parent, Element* element)
 {
-	HarmCurrentForm* harmCurrentForm = new HarmCurrentForm(parent, this);
-	harmCurrentForm->SetTitle(_("Harmonic Current Source"));
-	if (harmCurrentForm->ShowModal() == wxID_OK) {
-		harmCurrentForm->Destroy();
+	HarmCurrentForm harmCurrentForm(parent, this);
+	harmCurrentForm.SetTitle(_("Harmonic Current Source"));
+	harmCurrentForm.CenterOnParent();
+	if (harmCurrentForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	harmCurrentForm->Destroy();
 	return false;
 }
 

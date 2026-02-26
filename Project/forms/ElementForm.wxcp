@@ -5861,7 +5861,7 @@
 																				}, {
 																					"type":	"multi-string",
 																					"m_label":	"Choices:",
-																					"m_value":	"p.u.;VAr;kVAr;MVAr"
+																					"m_value":	"p.u.;var;kvar;Mvar"
 																				}, {
 																					"type":	"string",
 																					"m_label":	"Selection:",
@@ -6172,7 +6172,7 @@
 																				}, {
 																					"type":	"multi-string",
 																					"m_label":	"Choices:",
-																					"m_value":	"p.u.;VAr;kVAr;MVAr"
+																					"m_value":	"p.u.;var;kvar;Mvar"
 																				}, {
 																					"type":	"string",
 																					"m_label":	"Selection:",
@@ -6483,7 +6483,7 @@
 																				}, {
 																					"type":	"multi-string",
 																					"m_label":	"Choices:",
-																					"m_value":	"p.u.;VAr;kVAr;MVAr"
+																					"m_value":	"p.u.;var;kvar;Mvar"
 																				}, {
 																					"type":	"string",
 																					"m_label":	"Selection:",
@@ -24231,7 +24231,7 @@
 																				}, {
 																					"type":	"multi-string",
 																					"m_label":	"Choices:",
-																					"m_value":	"p.u.;VAr;kVAr;MVAr"
+																					"m_value":	"p.u.;var;kvar;Mvar"
 																				}, {
 																					"type":	"string",
 																					"m_label":	"Selection:",
@@ -27770,7 +27770,7 @@
 																				}, {
 																					"type":	"multi-string",
 																					"m_label":	"Choices:",
-																					"m_value":	"p.u.;VAr;kVAr;MVAr"
+																					"m_value":	"p.u.;var;kvar;Mvar"
 																				}, {
 																					"type":	"string",
 																					"m_label":	"Selection:",
@@ -30864,7 +30864,7 @@
 																				}, {
 																					"type":	"multi-string",
 																					"m_label":	"Choices:",
-																					"m_value":	"p.u.;VAr;kVAr;MVAr"
+																					"m_value":	"p.u.;var;kvar;Mvar"
 																				}, {
 																					"type":	"string",
 																					"m_label":	"Selection:",

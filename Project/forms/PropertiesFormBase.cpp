@@ -1731,7 +1731,7 @@ LabelManagerBase::LabelManagerBase(wxWindow* parent, wxWindowID id, const wxStri
     m_radioBoxPower->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
     m_radioBoxAngle->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
     m_textCtrlPrecision->Bind(wxEVT_COMMAND_TEXT_UPDATED, &LabelManagerBase::OnPrecisionTextUpdate, this);
-    m_buttonApply->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnApplyButtonCliick, this);
+    m_buttonApply->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnApplyButtonClick, this);
     m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnCancelButtonClick, this);
     
 }
@@ -1753,7 +1753,7 @@ LabelManagerBase::~LabelManagerBase()
     m_radioBoxPower->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
     m_radioBoxAngle->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
     m_textCtrlPrecision->Unbind(wxEVT_COMMAND_TEXT_UPDATED, &LabelManagerBase::OnPrecisionTextUpdate, this);
-    m_buttonApply->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnApplyButtonCliick, this);
+    m_buttonApply->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnApplyButtonClick, this);
     m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnCancelButtonClick, this);
     
 }

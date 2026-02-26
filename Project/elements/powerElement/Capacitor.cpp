@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -222,7 +222,7 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) cons
 		capPts[3] = RotateAround(p, m_position, m_angle);
 
 		std::vector<wxPoint> pointListInt;
-		for(auto& pt : m_pointList) {
+		for (auto& pt : m_pointList) {
 			pointListInt.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
 		}
 
@@ -304,13 +304,12 @@ bool Capacitor::Intersects(wxRect2DDouble rect) const
 
 bool Capacitor::ShowForm(wxWindow* parent, Element* element)
 {
-	ReactiveShuntElementForm* capacitorForm = new ReactiveShuntElementForm(parent, this);
-	capacitorForm->SetTitle(_("Capacitor"));
-	if (capacitorForm->ShowModal() == wxID_OK) {
-		capacitorForm->Destroy();
+	ReactiveShuntElementForm capacitorForm(parent, this);
+	capacitorForm.SetTitle(_("Capacitor"));
+	capacitorForm.CenterOnParent();
+	if (capacitorForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	capacitorForm->Destroy();
 	return false;
 }
 
@@ -363,13 +362,13 @@ wxString Capacitor::GetTipText() const
 		tipText += _(" p.u.");
 	} break;
 	case ElectricalUnit::UNIT_var: {
-		tipText += _(" VAr");
+		tipText += _(" var");
 	} break;
 	case ElectricalUnit::UNIT_kvar: {
-		tipText += _(" kVAr");
+		tipText += _(" kvar");
 	} break;
 	case ElectricalUnit::UNIT_Mvar: {
-		tipText += _(" MVAr");
+		tipText += _(" Mvar");
 	} break;
 	default:
 		break;

@@ -522,9 +522,9 @@ SyncMachineFormBase::SyncMachineFormBase(wxWindow* parent, wxWindowID id, const 
     
     wxArrayString m_choiceReactivePowerArr;
     m_choiceReactivePowerArr.Add(_("p.u."));
-    m_choiceReactivePowerArr.Add(_("VAr"));
-    m_choiceReactivePowerArr.Add(_("kVAr"));
-    m_choiceReactivePowerArr.Add(_("MVAr"));
+    m_choiceReactivePowerArr.Add(_("var"));
+    m_choiceReactivePowerArr.Add(_("kvar"));
+    m_choiceReactivePowerArr.Add(_("Mvar"));
     m_choiceReactivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceReactivePowerArr, 0);
     m_choiceReactivePower->SetSelection(3);
     
@@ -552,9 +552,9 @@ SyncMachineFormBase::SyncMachineFormBase(wxWindow* parent, wxWindowID id, const 
     
     wxArrayString m_choiceMaxRectivePowerArr;
     m_choiceMaxRectivePowerArr.Add(_("p.u."));
-    m_choiceMaxRectivePowerArr.Add(_("VAr"));
-    m_choiceMaxRectivePowerArr.Add(_("kVAr"));
-    m_choiceMaxRectivePowerArr.Add(_("MVAr"));
+    m_choiceMaxRectivePowerArr.Add(_("var"));
+    m_choiceMaxRectivePowerArr.Add(_("kvar"));
+    m_choiceMaxRectivePowerArr.Add(_("Mvar"));
     m_choiceMaxRectivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceMaxRectivePowerArr, 0);
     m_choiceMaxRectivePower->SetSelection(3);
     
@@ -582,9 +582,9 @@ SyncMachineFormBase::SyncMachineFormBase(wxWindow* parent, wxWindowID id, const 
     
     wxArrayString m_choiceMinRectivePowerArr;
     m_choiceMinRectivePowerArr.Add(_("p.u."));
-    m_choiceMinRectivePowerArr.Add(_("VAr"));
-    m_choiceMinRectivePowerArr.Add(_("kVAr"));
-    m_choiceMinRectivePowerArr.Add(_("MVAr"));
+    m_choiceMinRectivePowerArr.Add(_("var"));
+    m_choiceMinRectivePowerArr.Add(_("kvar"));
+    m_choiceMinRectivePowerArr.Add(_("Mvar"));
     m_choiceMinRectivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceMinRectivePowerArr, 0);
     m_choiceMinRectivePower->SetSelection(3);
     
@@ -2118,9 +2118,9 @@ LoadFormBase::LoadFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     
     wxArrayString m_choiceReactivePowerArr;
     m_choiceReactivePowerArr.Add(_("p.u."));
-    m_choiceReactivePowerArr.Add(_("VAr"));
-    m_choiceReactivePowerArr.Add(_("kVAr"));
-    m_choiceReactivePowerArr.Add(_("MVAr"));
+    m_choiceReactivePowerArr.Add(_("var"));
+    m_choiceReactivePowerArr.Add(_("kvar"));
+    m_choiceReactivePowerArr.Add(_("Mvar"));
     m_choiceReactivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceReactivePowerArr, 0);
     m_choiceReactivePower->SetSelection(3);
     
@@ -2424,9 +2424,9 @@ ReactiveShuntElementFormBase::ReactiveShuntElementFormBase(wxWindow* parent, wxW
     
     wxArrayString m_choiceReactivePowerArr;
     m_choiceReactivePowerArr.Add(_("p.u."));
-    m_choiceReactivePowerArr.Add(_("VAr"));
-    m_choiceReactivePowerArr.Add(_("kVAr"));
-    m_choiceReactivePowerArr.Add(_("MVAr"));
+    m_choiceReactivePowerArr.Add(_("var"));
+    m_choiceReactivePowerArr.Add(_("kvar"));
+    m_choiceReactivePowerArr.Add(_("Mvar"));
     m_choiceReactivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceReactivePowerArr, 0);
     m_choiceReactivePower->SetSelection(3);
     
@@ -2736,9 +2736,9 @@ IndMotorFormBase::IndMotorFormBase(wxWindow* parent, wxWindowID id, const wxStri
     
     wxArrayString m_choiceReactivePowerArr;
     m_choiceReactivePowerArr.Add(_("p.u."));
-    m_choiceReactivePowerArr.Add(_("VAr"));
-    m_choiceReactivePowerArr.Add(_("kVAr"));
-    m_choiceReactivePowerArr.Add(_("MVAr"));
+    m_choiceReactivePowerArr.Add(_("var"));
+    m_choiceReactivePowerArr.Add(_("kvar"));
+    m_choiceReactivePowerArr.Add(_("Mvar"));
     m_choiceReactivePower = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceReactivePowerArr, 0);
     m_choiceReactivePower->SetSelection(3);
     

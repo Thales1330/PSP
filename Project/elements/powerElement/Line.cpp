@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -193,7 +193,7 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		elementColour = m_offlineElementColour;
 
 	std::vector<wxPoint> pointList;
-	for(auto pt : m_pointList) {
+	for (auto pt : m_pointList) {
 		pointList.emplace_back(pt.m_x, pt.m_y);
 	}
 	//if (!m_inserted && pointList.size() > 0) {
@@ -519,12 +519,11 @@ void Line::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBo
 
 bool Line::ShowForm(wxWindow* parent, Element* element)
 {
-	LineForm* lineForm = new LineForm(parent, this);
-	if (lineForm->ShowModal() == wxID_OK) {
-		lineForm->Destroy();
+	LineForm lineForm(parent, this);
+	lineForm.CenterOnParent();
+	if (lineForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	lineForm->Destroy();
 	return false;
 }
 

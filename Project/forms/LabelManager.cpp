@@ -3,7 +3,7 @@
 #include <wx/msgdlg.h>
 #include <array>
 
-#include <../editors/Workspace.h>
+#include "../editors/Workspace.h"
 
 LabelManager::LabelManager(wxWindow* parent, Workspace* workspace)
 	: LabelManagerBase(parent), m_workspace(workspace)
@@ -494,7 +494,7 @@ void LabelManager::OnPrecisionTextUpdate(wxCommandEvent& event)
 	event.Skip();
 }
 
-void LabelManager::OnApplyButtonCliick(wxCommandEvent& event)
+void LabelManager::OnApplyButtonClick(wxCommandEvent& event)
 {
 	ElectricalUnit voltageUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_V, ElectricalUnit::UNIT_kV };
 	ElectricalUnit currentUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_A, ElectricalUnit::UNIT_kA };
@@ -517,36 +517,91 @@ void LabelManager::OnApplyButtonCliick(wxCommandEvent& event)
 		wxArrayInt checked;
 		switch (elementType)
 		{
-		case TYPE_BUS:
-		{
-			TextID busTextOptions[7] = { ID_TXT_NAME, ID_TXT_VOLTAGE, ID_TXT_ANGLE, ID_TXT_FAULTCURRENT, ID_TXT_FAULTVOLTAGE, ID_TXT_SCC, ID_TXT_THD };
-			ElectricalUnit busTextUnits[7] = { ElectricalUnit::UNIT_NONE, voltageUnit, angleUnit, currentUnit, voltageUnit, sUnit, ElectricalUnit::UNIT_NONE };
+		case TYPE_BUS: {
+			TextID textOptions[7] = { ID_TXT_NAME, ID_TXT_VOLTAGE, ID_TXT_ANGLE, ID_TXT_FAULTCURRENT, ID_TXT_FAULTVOLTAGE, ID_TXT_SCC, ID_TXT_THD };
+			ElectricalUnit textUnits[7] = { ElectricalUnit::UNIT_NONE, voltageUnit, angleUnit, currentUnit, voltageUnit, sUnit, ElectricalUnit::UNIT_NONE };
 			m_checkListBoxBus->GetCheckedItems(checked);
 			for (int i : checked) {
-				m_workspace->InsertTextElement(busTextOptions[i], element, busTextUnits[i], m_precision);
+				m_workspace->InsertTextElement(textOptions[i], element, textUnits[i], m_precision);
 				numTxtElements++;
 			}
 		} break;
-		case TYPE_CAPACITOR:
-			break;
-		case TYPE_IND_MOTOR:
-			break;
-		case TYPE_INDUCTOR:
-			break;
-		case TYPE_LINE:
-			break;
-		case TYPE_LOAD:
-			break;
-		case TYPE_SYNC_GENERATOR:
-			break;
-		case TYPE_SYNC_MOTOR:
-			break;
-		case TYPE_TRANSFORMER:
-			break;
-		case TYPE_HARMCURRENT:
-			break;
-		case TYPE_TEXT:
-			break;
+		case TYPE_CAPACITOR: {
+			TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };
+			ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };
+			m_checkListBoxCapacitor->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(textOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
+		case TYPE_IND_MOTOR: {
+			TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };
+			ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };
+			m_checkListBoxIndMotor->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(textOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
+		case TYPE_INDUCTOR: {
+			TextID textOptions[2] = { ID_TXT_NAME, ID_TXT_REACTIVE_POWER };
+			ElectricalUnit textUnits[2] = { ElectricalUnit::UNIT_NONE, qUnit };
+			m_checkListBoxInductor->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(textOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
+		case TYPE_LINE: {
+			TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,
+				ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,
+				ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };
+			ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };
+			m_checkListBoxLine->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
+		case TYPE_LOAD: {
+			TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };
+			ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };
+			m_checkListBoxLoad->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(textOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
+		case TYPE_SYNC_GENERATOR: {
+			TextID textOptions[4] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER, ID_TXT_FAULTCURRENT };
+			ElectricalUnit textUnits[4] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit, currentUnit };
+			m_checkListBoxGenerator->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(textOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
+		case TYPE_SYNC_MOTOR: {
+			TextID textOptions[3] = { ID_TXT_NAME, ID_TXT_ACTIVE_POWER, ID_TXT_REACTIVE_POWER };
+			ElectricalUnit textUnits[3] = { ElectricalUnit::UNIT_NONE, pUnit, qUnit };
+			m_checkListBoxSyncMotor->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(textOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
+		case TYPE_TRANSFORMER: {
+			TextID lineTextOptions[10] = { ID_TXT_NAME, ID_TXT_BRANCH_ACTIVE_POWER_1_2, ID_TXT_BRANCH_ACTIVE_POWER_2_1,
+				ID_TXT_BRANCH_REACTIVE_POWER_1_2, ID_TXT_BRANCH_REACTIVE_POWER_2_1, ID_TXT_BRANCH_LOSSES,
+				ID_TXT_BRANCH_CURRENT_1_2, ID_TXT_BRANCH_CURRENT_2_1, ID_TXT_BRANCH_FAULT_CURRENT_1_2, ID_TXT_BRANCH_FAULT_CURRENT_2_1 };
+			ElectricalUnit textUnits[10] = { ElectricalUnit::UNIT_NONE, pUnit, pUnit, qUnit, qUnit, pUnit, currentUnit, currentUnit, currentUnit, currentUnit };
+			m_checkListBoxTransformer->GetCheckedItems(checked);
+			for (int i : checked) {
+				m_workspace->InsertTextElement(lineTextOptions[i], element, textUnits[i], m_precision);
+				numTxtElements++;
+			}
+		} break;
 		default:
 			break;
 		}

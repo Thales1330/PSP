@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -459,12 +459,11 @@ bool Transformer::GetContextMenu(wxMenu& menu)
 
 bool Transformer::ShowForm(wxWindow* parent, Element* element)
 {
-	TransformerForm* transfForm = new TransformerForm(parent, this);
-	if (transfForm->ShowModal() == wxID_OK) {
-		transfForm->Destroy();
+	TransformerForm transfForm(parent, this);
+	transfForm.CenterOnParent();
+	if (transfForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	transfForm->Destroy();
 	return false;
 }
 

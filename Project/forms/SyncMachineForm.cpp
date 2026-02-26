@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -287,13 +287,11 @@ void SyncMachineForm::OnStabilityButtonClick(wxCommandEvent& event)
 {
 	if (ValidateData()) {
 		if (m_syncGenerator) {
-			GeneratorStabForm* stabForm = new GeneratorStabForm(m_parent, m_syncGenerator, m_plotLib);
-			if (stabForm->ShowModal() == wxID_OK) {
-				stabForm->Destroy();
+			GeneratorStabForm stabForm(m_parent, m_syncGenerator, m_plotLib);
+			stabForm.CenterOnParent();
+			if (stabForm.ShowModal() == wxID_OK) {
 				EndModal(wxID_OK);
 			}
-
-			stabForm->Destroy();
 			EndModal(wxID_CANCEL);
 		}
 	}

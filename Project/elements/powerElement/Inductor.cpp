@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -203,7 +203,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		elementColour = m_offlineElementColour;
 
 	std::vector<wxPoint> pointListInt;
-	for(auto& pt : m_pointList) {
+	for (auto& pt : m_pointList) {
 		pointListInt.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y));
 	}
 
@@ -291,13 +291,12 @@ bool Inductor::Contains(wxPoint2DDouble position) const
 bool Inductor::Intersects(wxRect2DDouble rect) const { return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0); }
 bool Inductor::ShowForm(wxWindow* parent, Element* element)
 {
-	ReactiveShuntElementForm* capacitorForm = new ReactiveShuntElementForm(parent, this);
-	capacitorForm->SetTitle(_("Inductor"));
-	if (capacitorForm->ShowModal() == wxID_OK) {
-		capacitorForm->Destroy();
+	ReactiveShuntElementForm inductorForm(parent, this);
+	inductorForm.SetTitle(_("Inductor"));
+	inductorForm.CenterOnParent();
+	if (inductorForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	capacitorForm->Destroy();
 	return false;
 }
 
@@ -350,13 +349,13 @@ wxString Inductor::GetTipText() const
 		tipText += _(" p.u.");
 	} break;
 	case ElectricalUnit::UNIT_var: {
-		tipText += _(" VAr");
+		tipText += _(" var");
 	} break;
 	case ElectricalUnit::UNIT_kvar: {
-		tipText += _(" kVAr");
+		tipText += _(" kvar");
 	} break;
 	case ElectricalUnit::UNIT_Mvar: {
-		tipText += _(" MVAr");
+		tipText += _(" Mvar");
 	} break;
 	default:
 		break;

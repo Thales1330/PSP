@@ -1,4 +1,4 @@
-#include "EMTElement.h"
+﻿#include "EMTElement.h"
 
 #include "../../forms/EMTElementForm.h"
 #include "../../utils/PropertiesData.h"
@@ -273,13 +273,12 @@ wxString EMTElement::GetTipText() const
 
 bool EMTElement::ShowForm(wxWindow* parent, Element* element)
 {
-	EMTElementForm* emtForm = new EMTElementForm(parent, this);
-	emtForm->SetTitle(_("Electromagnetic Transient"));
-	if (emtForm->ShowModal() == wxID_OK) {
-		emtForm->Destroy();
+	EMTElementForm emtForm(parent, this);
+	emtForm.SetTitle(_("Electromagnetic Transient"));
+	emtForm.CenterOnParent();
+	if (emtForm.ShowModal() == wxID_OK) {
 		return true;
 	}
-	emtForm->Destroy();
 	return false;
 }
 
