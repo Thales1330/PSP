@@ -198,6 +198,7 @@
     <ClCompile Include="forms\BusFormBitmaps.cpp" />
     <ClCompile Include="forms\EMTElementForm.cpp" />
     <ClCompile Include="forms\ExportCSVForm.cpp" />
+    <ClCompile Include="forms\LabelManager.cpp" />
     <ClCompile Include="utils\Camera.cpp" />
     <ClCompile Include="elements\powerElement\Capacitor.cpp" />
     <ClCompile Include="editors\ChartView.cpp" />
@@ -314,6 +315,7 @@
     <ClInclude Include="forms\BusForm.h" />
     <ClInclude Include="forms\EMTElementForm.h" />
     <ClInclude Include="forms\ExportCSVForm.h" />
+    <ClInclude Include="forms\LabelManager.h" />
     <ClInclude Include="utils\Camera.h" />
     <ClInclude Include="elements\powerElement\Capacitor.h" />
     <ClInclude Include="editors\ChartView.h" />

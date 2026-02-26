@@ -3113,7 +3113,7 @@ TextFormBase::TextFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     
     gridSizerLvl3_1->Add(boxSizerLvl4_3, 0, wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextType = new wxStaticText(m_panelGeneral, wxID_ANY, _("Text type"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextType = new wxStaticText(m_panelGeneral, wxID_ANY, _("Label type"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl4_3->Add(m_staticTextType, 0, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
@@ -3165,7 +3165,7 @@ TextFormBase::TextFormBase(wxWindow* parent, wxWindowID id, const wxString& titl
     
     boxSizerLvl2_1->Add(boxSizerLvl3_2, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticTextDecimal = new wxStaticText(m_panelGeneral, wxID_ANY, _("Decimal places:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
+    m_staticTextDecimal = new wxStaticText(m_panelGeneral, wxID_ANY, _("Precision:"), wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), 0);
     
     boxSizerLvl3_2->Add(m_staticTextDecimal, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     

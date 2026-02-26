@@ -32,6 +32,8 @@
 #include <wx/grid.h>
 #include <wx/richtext/richtextctrl.h>
 #include <wx/hyperlink.h>
+#include <wx/choicebk.h>
+#include <wx/checklst.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -440,6 +442,96 @@ public:
     wxButton* GetButtonCancel() { return m_buttonCancel; }
     ProjectPropertiesFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Project properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~ProjectPropertiesFormBase();
+};
+
+
+class LabelManagerBase : public wxDialog
+{
+public:
+    enum {
+        ID_CL_SYNCMOTOR = 10001,
+        ID_CL_INDMOTOR = 10002,
+        ID_CL_INDUCTOR = 10003,
+        ID_CL_TRANSFORMER = 10004,
+        ID_CL_LOAD = 10005,
+        ID_CL_GENERATOR = 10006,
+        ID_CL_LINE = 10007,
+        ID_CL_CAPACITOR = 10008,
+        ID_CL_BUS = 10009,
+    };
+protected:
+    wxChoicebook* m_choicebook;
+    wxPanel* m_panelBus;
+    wxCheckListBox* m_checkListBoxBus;
+    wxPanel* m_panelGenerator;
+    wxCheckListBox* m_checkListBoxGenerator;
+    wxPanel* m_panelLoad;
+    wxCheckListBox* m_checkListBoxLoad;
+    wxPanel* m_panelLine;
+    wxCheckListBox* m_checkListBoxLine;
+    wxPanel* m_panelTransformer;
+    wxCheckListBox* m_checkListBoxTransformer;
+    wxPanel* m_panelSyncCapacitor;
+    wxCheckListBox* m_checkListBoxCapacitor;
+    wxPanel* m_panelSyncInductor;
+    wxCheckListBox* m_checkListBoxInductor;
+    wxPanel* m_panelIndMotor;
+    wxCheckListBox* m_checkListBoxIndMotor;
+    wxPanel* m_panelSyncMotor;
+    wxCheckListBox* m_checkListBoxSyncMotor;
+    wxRadioBox* m_radioBoxVoltage;
+    wxRadioBox* m_radioBoxCurrent;
+    wxRadioBox* m_radioBoxPower;
+    wxRadioBox* m_radioBoxAngle;
+    wxStaticText* m_staticText1313;
+    wxTextCtrl* m_textCtrlPrecision;
+    wxStaticText* m_staticText1310;
+    wxRichTextCtrl* m_richTextCtrlPreview;
+    wxCheckBox* m_checkBoxReplace;
+    wxButton* m_buttonApply;
+    wxButton* m_buttonCancel;
+
+protected:
+    virtual void OnChoicebookChanged(wxChoicebookEvent& event) { event.Skip(); }
+    virtual void OnCheckListSelected(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnUnitChanged(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnPrecisionTextUpdate(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnApplyButtonCliick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCancelButtonClick(wxCommandEvent& event) { event.Skip(); }
+
+public:
+    wxCheckListBox* GetCheckListBoxBus() { return m_checkListBoxBus; }
+    wxPanel* GetPanelBus() { return m_panelBus; }
+    wxCheckListBox* GetCheckListBoxGenerator() { return m_checkListBoxGenerator; }
+    wxPanel* GetPanelGenerator() { return m_panelGenerator; }
+    wxCheckListBox* GetCheckListBoxLoad() { return m_checkListBoxLoad; }
+    wxPanel* GetPanelLoad() { return m_panelLoad; }
+    wxCheckListBox* GetCheckListBoxLine() { return m_checkListBoxLine; }
+    wxPanel* GetPanelLine() { return m_panelLine; }
+    wxCheckListBox* GetCheckListBoxTransformer() { return m_checkListBoxTransformer; }
+    wxPanel* GetPanelTransformer() { return m_panelTransformer; }
+    wxCheckListBox* GetCheckListBoxCapacitor() { return m_checkListBoxCapacitor; }
+    wxPanel* GetPanelSyncCapacitor() { return m_panelSyncCapacitor; }
+    wxCheckListBox* GetCheckListBoxInductor() { return m_checkListBoxInductor; }
+    wxPanel* GetPanelSyncInductor() { return m_panelSyncInductor; }
+    wxCheckListBox* GetCheckListBoxIndMotor() { return m_checkListBoxIndMotor; }
+    wxPanel* GetPanelIndMotor() { return m_panelIndMotor; }
+    wxCheckListBox* GetCheckListBoxSyncMotor() { return m_checkListBoxSyncMotor; }
+    wxPanel* GetPanelSyncMotor() { return m_panelSyncMotor; }
+    wxChoicebook* GetChoicebook() { return m_choicebook; }
+    wxRadioBox* GetRadioBoxVoltage() { return m_radioBoxVoltage; }
+    wxRadioBox* GetRadioBoxCurrent() { return m_radioBoxCurrent; }
+    wxRadioBox* GetRadioBoxPower() { return m_radioBoxPower; }
+    wxRadioBox* GetRadioBoxAngle() { return m_radioBoxAngle; }
+    wxStaticText* GetStaticText1313() { return m_staticText1313; }
+    wxTextCtrl* GetTextCtrlPrecision() { return m_textCtrlPrecision; }
+    wxStaticText* GetStaticText1310() { return m_staticText1310; }
+    wxRichTextCtrl* GetRichTextCtrlPreview() { return m_richTextCtrlPreview; }
+    wxCheckBox* GetCheckBoxReplace() { return m_checkBoxReplace; }
+    wxButton* GetButtonApply() { return m_buttonApply; }
+    wxButton* GetButtonCancel() { return m_buttonCancel; }
+    LabelManagerBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Label Manager"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~LabelManagerBase();
 };
 
 #endif

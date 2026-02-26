@@ -34466,7 +34466,7 @@
 				}, {
 					"type":	"string",
 					"m_label":	"Title:",
-					"m_value":	"Text"
+					"m_value":	"Label"
 				}, {
 					"type":	"virtualFolderPicker",
 					"m_label":	"Virtual Folder:",
@@ -35236,7 +35236,7 @@
 																		}, {
 																			"type":	"multi-string",
 																			"m_label":	"Label:",
-																			"m_value":	"Text type"
+																			"m_value":	"Label type"
 																		}, {
 																			"type":	"string",
 																			"m_label":	"Wrap:",
@@ -35989,7 +35989,7 @@
 																}, {
 																	"type":	"multi-string",
 																	"m_label":	"Label:",
-																	"m_value":	"Decimal places:"
+																	"m_value":	"Precision:"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Wrap:",

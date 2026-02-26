@@ -162,6 +162,8 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_ROTATECC, _("Rotate Counter-clockwise"), wxXmlResource::Get()->LoadBitmap(wxT("rotateCounterClock32")), _("Rotate the selected elements counter-clockwise"), wxRIBBON_BUTTON_NORMAL);
     
+    m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_LABELMNGR, _("Label Manager"), wxXmlResource::Get()->LoadBitmap(wxT("labelMngr32")), _("Automatically insert labels into multiple elements at once"), wxRIBBON_BUTTON_NORMAL);
+    
     m_ribbonButtonBarCircuit->AddButton(ID_RIBBON_PROJSETTINGS, _("Project Settings"), wxXmlResource::Get()->LoadBitmap(wxT("settings32")), _("Opens a dialog to set the main settings of the current project"), wxRIBBON_BUTTON_NORMAL);
     m_ribbonButtonBarCircuit->Realize();
     
@@ -275,6 +277,7 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnFitClick, this, ID_RIBBON_FIT);
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotClockClick, this, ID_RIBBON_ROTATEC);
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotCounterClockClick, this, ID_RIBBON_ROTATECC);
+    m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnLabelMngrClick, this, ID_RIBBON_LABELMNGR);
     m_ribbonButtonBarCircuit->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnProjectSettingsClick, this, ID_RIBBON_PROJSETTINGS);
     m_ribbonButtonBarReports->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnDataReportClick, this, ID_RIBBON_DATAREPORT);
     m_ribbonButtonBarReports->Bind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnChartsClick, this, ID_RIBBON_CHARTS);
@@ -322,6 +325,7 @@ MainFrameBase::~MainFrameBase()
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnFitClick, this, ID_RIBBON_FIT);
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotClockClick, this, ID_RIBBON_ROTATEC);
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnRotCounterClockClick, this, ID_RIBBON_ROTATECC);
+    m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnLabelMngrClick, this, ID_RIBBON_LABELMNGR);
     m_ribbonButtonBarCircuit->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnProjectSettingsClick, this, ID_RIBBON_PROJSETTINGS);
     m_ribbonButtonBarReports->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnDataReportClick, this, ID_RIBBON_DATAREPORT);
     m_ribbonButtonBarReports->Unbind(wxEVT_COMMAND_RIBBONBUTTON_CLICKED, &MainFrameBase::OnChartsClick, this, ID_RIBBON_CHARTS);

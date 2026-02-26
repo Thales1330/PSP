@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -77,8 +77,11 @@ enum ContextMenuID {
 	ID_LINE_REMOVE_NODE,    /**< Remove power line node */
 	ID_ROTATE_CLOCK,        /**< Rotate the element clockwise */
 	ID_ROTATE_COUNTERCLOCK, /**< Rotate the element counter-clockwise */
-	ID_DELETE,              /**< Delete the element */
-	ID_TXT_NAME,
+	ID_DELETE              /**< Delete the element */
+};
+
+enum TextID {
+	ID_TXT_NAME = 1000,
 	ID_TXT_VOLTAGE,
 	ID_TXT_ANGLE,
 	ID_TXT_FAULTCURRENT,

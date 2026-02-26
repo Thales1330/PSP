@@ -89,6 +89,7 @@ class MainFrame : public MainFrameBase
     int RunPSPTest();
 
    protected:
+    virtual void OnLabelMngrClick(wxRibbonButtonBarEvent& event);
     virtual void OnSnapshotDropdown(wxRibbonButtonBarEvent& event);
     virtual void OnProjectSettingsClick(wxRibbonButtonBarEvent& event);
     virtual void OnNotebookPageChanged(wxAuiNotebookEvent& event);

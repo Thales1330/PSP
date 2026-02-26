@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -271,7 +271,7 @@ void SimulationsSettingsForm::UpdateZIPLoadFieldStatus()
 
 void SimulationsSettingsForm::UpdatePFFieldStatus()
 {
-	if (m_choicePFMethod->GetSelection() == 0 || m_choicePFMethod->GetSelection() == 2)
+	if (m_choicePFMethod->GetSelection() == 1 || m_choicePFMethod->GetSelection() == 2)
 		m_textCtrlAccFactor->Enable();
 	else
 		m_textCtrlAccFactor->Enable(false);
@@ -279,7 +279,7 @@ void SimulationsSettingsForm::UpdatePFFieldStatus()
 		m_textCtrlPFGaussTolerance->Enable();
 	else
 		m_textCtrlPFGaussTolerance->Enable(false);
-	if (m_choicePFMethod->GetSelection() == 1 || m_choicePFMethod->GetSelection() == 2)
+	if (m_choicePFMethod->GetSelection() == 0 || m_choicePFMethod->GetSelection() == 2)
 		m_textCtrlPFNewtonInertia->Enable();
 	else
 		m_textCtrlPFNewtonInertia->Enable(false);

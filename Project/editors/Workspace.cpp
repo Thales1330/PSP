@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -251,7 +251,7 @@ void Workspace::ExportAsSVG(wxString path)
 {
 	wxSize size = GetClientSize();
 
-	wxSVGFileDC svgDC(path, size.x, size.y);	
+	wxSVGFileDC svgDC(path, size.x, size.y);
 
 	svgDC.SetClippingRegion(wxRect(0, 0, size.x, size.y));
 
@@ -1404,223 +1404,12 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		}
 		SaveCurrentState();
 	} break;
-	case ID_TXT_NAME: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_NAME);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_VOLTAGE: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, 15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_VOLTAGE);
-		newText->SetUnit(ElectricalUnit::UNIT_PU);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_ANGLE: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(40, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_ANGLE);
-		newText->SetUnit(ElectricalUnit::UNIT_DEGREE);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_FAULTCURRENT: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-70, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_SC_CURRENT);
-		newText->SetUnit(ElectricalUnit::UNIT_A);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_FAULTVOLTAGE: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-70, 75), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_SC_VOLTAGE);
-		newText->SetUnit(ElectricalUnit::UNIT_PU);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_SCC: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-50, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_SC_POWER);
-		newText->SetUnit(ElectricalUnit::UNIT_MVA);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_THD: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(-50, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_PQ_THD);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_ACTIVE_POWER: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(0, 35), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_ACTIVE_POWER);
-		newText->SetUnit(ElectricalUnit::UNIT_MW);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_REACTIVE_POWER: {
-		Text* newText = new Text(element->GetPosition() + wxPoint2DDouble(0, 50), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_REACTIVE_POWER);
-		newText->SetUnit(ElectricalUnit::UNIT_Mvar);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_BRANCH_ACTIVE_POWER_1_2:
-	case ID_TXT_BRANCH_ACTIVE_POWER_2_1: {
-		wxPoint2DDouble position(0.0, -10.0);
-		if (eventID == ID_TXT_BRANCH_ACTIVE_POWER_1_2)
-			position += 2.0 * element->GetPointList()[1] - element->GetPointList()[0];
-		else
-			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
-
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_PF_ACTIVE);
-		newText->SetUnit(ElectricalUnit::UNIT_MW);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-		if (eventID == ID_TXT_BRANCH_ACTIVE_POWER_2_1)
-			newText->SetDirection(1); // std is 0
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_BRANCH_REACTIVE_POWER_1_2:
-	case ID_TXT_BRANCH_REACTIVE_POWER_2_1: {
-		wxPoint2DDouble position(0.0, 10.0);
-		if (eventID == ID_TXT_BRANCH_REACTIVE_POWER_1_2)
-			position += 2.0 * element->GetPointList()[1] - element->GetPointList()[0];
-		else
-			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
-
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_PF_REACTIVE);
-		newText->SetUnit(ElectricalUnit::UNIT_Mvar);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-		if (eventID == ID_TXT_BRANCH_REACTIVE_POWER_2_1)
-			newText->SetDirection(1); // std is 0
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_BRANCH_LOSSES: {
-		wxPoint2DDouble position = wxPoint2DDouble(0, 35) + (element->GetPointList()[0] + element->GetPointList()[element->GetPointList().size() - 1]) / 2.0;
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_PF_LOSSES);
-		newText->SetUnit(ElectricalUnit::UNIT_MW);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_BRANCH_CURRENT_1_2:
-	case ID_TXT_BRANCH_CURRENT_2_1: {
-		wxPoint2DDouble position(0.0, 10.0);
-		if (eventID == ID_TXT_BRANCH_CURRENT_1_2)
-			position += 2.0 * element->GetPointList()[1] - element->GetPointList()[0];
-		else
-			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
-
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_PF_CURRENT);
-		newText->SetUnit(ElectricalUnit::UNIT_A);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-		if (eventID == ID_TXT_BRANCH_CURRENT_2_1)
-			newText->SetDirection(1); // std is 0
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
-	case ID_TXT_BRANCH_FAULT_CURRENT_1_2:
-	case ID_TXT_BRANCH_FAULT_CURRENT_2_1: {
-		wxPoint2DDouble position(0.0, 25.0);
-		if (eventID == ID_TXT_BRANCH_FAULT_CURRENT_1_2)
-			position += 2.0 * element->GetPointList()[1] - element->GetPointList()[0];
-		else
-			position += 2.0 * element->GetPointList()[element->GetPointList().size() - 2] - element->GetPointList()[element->GetPointList().size() - 1];
-
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
-		newText->SetElement(element);
-		newText->SetDataType(DATA_SC_CURRENT);
-		newText->SetUnit(ElectricalUnit::UNIT_kA);
-		newText->SetElementTypeText(element->GetElementType());
-		newText->SetElementNumber(GetElementNumberFromList(element));
-		if (eventID == ID_TXT_BRANCH_FAULT_CURRENT_2_1)
-			newText->SetDirection(1); // std is 0
-
-		m_textList.emplace_back(newText);
-
-		UpdateTextElements();
-		SaveCurrentState();
-	} break;
+	default:
+		if (InsertTextElement(eventID, element)) {
+			UpdateTextElements();
+			SaveCurrentState();
+		}
+		break;
 	}
 	if (redrawHM && m_hmPlane && m_showHM) {
 		m_hmPlane->Clear();
@@ -1784,6 +1573,241 @@ void Workspace::Fit()
 	}
 
 	Redraw();
+}
+
+bool Workspace::InsertTextElement(int textID, Element* parentElement, ElectricalUnit unit, int precision)
+{
+	switch (textID) {
+	case ID_TXT_NAME: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_NAME);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_VOLTAGE: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_VOLTAGE);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_PU);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_ANGLE: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_ANGLE);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_DEGREE);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_FAULTCURRENT: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_SC_CURRENT);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_A);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_FAULTVOLTAGE: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 75), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_SC_VOLTAGE);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_PU);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_SCC: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-50, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_SC_POWER);
+		newText->SetUnit(ElectricalUnit::UNIT_MVA);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_MVA);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_THD: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-50, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_PQ_THD);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_ACTIVE_POWER: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(0, 35), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_ACTIVE_POWER);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_MW);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_REACTIVE_POWER: {
+		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(0, 50), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_REACTIVE_POWER);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_Mvar);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_BRANCH_ACTIVE_POWER_1_2:
+	case ID_TXT_BRANCH_ACTIVE_POWER_2_1: {
+		wxPoint2DDouble position(0.0, -10.0);
+		if (textID == ID_TXT_BRANCH_ACTIVE_POWER_1_2)
+			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
+		else
+			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
+
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_PF_ACTIVE);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_MW);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+		if (textID == ID_TXT_BRANCH_ACTIVE_POWER_2_1)
+			newText->SetDirection(1); // std is 0
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_BRANCH_REACTIVE_POWER_1_2:
+	case ID_TXT_BRANCH_REACTIVE_POWER_2_1: {
+		wxPoint2DDouble position(0.0, 10.0);
+		if (textID == ID_TXT_BRANCH_REACTIVE_POWER_1_2)
+			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
+		else
+			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
+
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_PF_REACTIVE);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_Mvar);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+		if (textID == ID_TXT_BRANCH_REACTIVE_POWER_2_1)
+			newText->SetDirection(1); // std is 0
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_BRANCH_LOSSES: {
+		wxPoint2DDouble position = wxPoint2DDouble(0, 35) + (parentElement->GetPointList()[0] + parentElement->GetPointList()[parentElement->GetPointList().size() - 1]) / 2.0;
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_PF_LOSSES);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_MW);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_BRANCH_CURRENT_1_2:
+	case ID_TXT_BRANCH_CURRENT_2_1: {
+		wxPoint2DDouble position(0.0, 10.0);
+		if (textID == ID_TXT_BRANCH_CURRENT_1_2)
+			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
+		else
+			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
+
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_PF_CURRENT);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_A);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+		if (textID == ID_TXT_BRANCH_CURRENT_2_1)
+			newText->SetDirection(1); // std is 0
+
+		m_textList.emplace_back(newText);
+	} break;
+	case ID_TXT_BRANCH_FAULT_CURRENT_1_2:
+	case ID_TXT_BRANCH_FAULT_CURRENT_2_1: {
+		wxPoint2DDouble position(0.0, 25.0);
+		if (textID == ID_TXT_BRANCH_FAULT_CURRENT_1_2)
+			position += 2.0 * parentElement->GetPointList()[1] - parentElement->GetPointList()[0];
+		else
+			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
+
+		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		newText->SetElement(parentElement);
+		newText->SetDataType(DATA_SC_CURRENT);
+		if (unit == ElectricalUnit::UNIT_NONE)
+			newText->SetUnit(ElectricalUnit::UNIT_kA);
+		else
+			newText->SetUnit(unit);
+		newText->SetDecimalPlaces(precision);
+		newText->SetElementTypeText(parentElement->GetElementType());
+		newText->SetElementNumber(GetElementNumberFromList(parentElement));
+		if (textID == ID_TXT_BRANCH_FAULT_CURRENT_2_1)
+			newText->SetDirection(1); // std is 0
+
+		m_textList.emplace_back(newText);
+	} break;
+	default:
+		return false;
+		break;
+	}
+	return true;
 }
 
 void Workspace::ValidateBusesVoltages(Element* initialBus)

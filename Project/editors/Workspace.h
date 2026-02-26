@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -158,7 +158,7 @@ public:
 	HMPlane* GetHeatMap() const { return m_hmPlane; }
 	void EnableAutoHeatMapLabel(const bool& enable = true) { m_hmAutomaticLabel = enable; }
 	bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
-
+	bool InsertTextElement(int textID, Element* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, int precision = 2);
 
 	void ValidateBusesVoltages(Element* initialBus);
 	void ValidateElementsVoltages();

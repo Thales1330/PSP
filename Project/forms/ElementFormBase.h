@@ -895,7 +895,7 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     wxButton* GetButtonOK() { return m_buttonOK; }
     wxButton* GetButtonCancel() { return m_ButtonCancel; }
-    TextFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Text"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    TextFormBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Label"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~TextFormBase();
 };
 

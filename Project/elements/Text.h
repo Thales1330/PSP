@@ -110,7 +110,7 @@ public:
 	virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
 
 protected:
-	wxString m_text = _("Text");
+	wxString m_text = _("Label");
 	wxString m_fontName = wxT("Arial");
 	int m_fontSize = 10;
 	int m_numberOfLines = 0;

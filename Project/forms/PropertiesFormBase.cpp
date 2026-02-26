@@ -1463,3 +1463,297 @@ ProjectPropertiesFormBase::~ProjectPropertiesFormBase()
     m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ProjectPropertiesFormBase::OnCancelClick, this);
     
 }
+
+LabelManagerBase::LabelManagerBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxCDAD0InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer1226 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer1226);
+    
+    wxBoxSizer* boxSizer1309 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer1226->Add(boxSizer1309, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_choicebook = new wxChoicebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+    m_choicebook->SetName(wxT("m_choicebook"));
+    
+    boxSizer1309->Add(m_choicebook, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelBus = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelBus, _("Bus"), false);
+    
+    wxBoxSizer* boxSizer1245 = new wxBoxSizer(wxVERTICAL);
+    m_panelBus->SetSizer(boxSizer1245);
+    
+    wxArrayString m_checkListBoxBusArr;
+    m_checkListBoxBusArr.Add(_("Name"));
+    m_checkListBoxBusArr.Add(_("Voltage"));
+    m_checkListBoxBusArr.Add(_("Angle"));
+    m_checkListBoxBusArr.Add(_("Fault current"));
+    m_checkListBoxBusArr.Add(_("Fault voltage"));
+    m_checkListBoxBusArr.Add(_("Short-circuit power"));
+    m_checkListBoxBusArr.Add(_("Voltage THD"));
+    m_checkListBoxBus = new wxCheckListBox(m_panelBus, ID_CL_BUS, wxDefaultPosition, wxDLG_UNIT(m_panelBus, wxSize(-1,-1)), m_checkListBoxBusArr, wxLB_SINGLE);
+    
+    boxSizer1245->Add(m_checkListBoxBus, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelGenerator = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelGenerator, _("Generator"), false);
+    
+    wxBoxSizer* boxSizer12451114 = new wxBoxSizer(wxVERTICAL);
+    m_panelGenerator->SetSizer(boxSizer12451114);
+    
+    wxArrayString m_checkListBoxGeneratorArr;
+    m_checkListBoxGeneratorArr.Add(_("Name"));
+    m_checkListBoxGeneratorArr.Add(_("Active power"));
+    m_checkListBoxGeneratorArr.Add(_("Reactive power"));
+    m_checkListBoxGeneratorArr.Add(_("Fault current"));
+    m_checkListBoxGenerator = new wxCheckListBox(m_panelGenerator, ID_CL_GENERATOR, wxDefaultPosition, wxDLG_UNIT(m_panelGenerator, wxSize(-1,-1)), m_checkListBoxGeneratorArr, wxLB_SINGLE);
+    
+    boxSizer12451114->Add(m_checkListBoxGenerator, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelLoad = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelLoad, _("Load"), false);
+    
+    wxBoxSizer* boxSizer124511 = new wxBoxSizer(wxVERTICAL);
+    m_panelLoad->SetSizer(boxSizer124511);
+    
+    wxArrayString m_checkListBoxLoadArr;
+    m_checkListBoxLoadArr.Add(_("Name"));
+    m_checkListBoxLoadArr.Add(_("Active power"));
+    m_checkListBoxLoadArr.Add(_("Reactive power"));
+    m_checkListBoxLoad = new wxCheckListBox(m_panelLoad, ID_CL_LOAD, wxDefaultPosition, wxDLG_UNIT(m_panelLoad, wxSize(-1,-1)), m_checkListBoxLoadArr, wxLB_SINGLE);
+    
+    boxSizer124511->Add(m_checkListBoxLoad, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelLine = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelLine, _("Line"), false);
+    
+    wxBoxSizer* boxSizer12451 = new wxBoxSizer(wxVERTICAL);
+    m_panelLine->SetSizer(boxSizer12451);
+    
+    wxArrayString m_checkListBoxLineArr;
+    m_checkListBoxLine = new wxCheckListBox(m_panelLine, ID_CL_LINE, wxDefaultPosition, wxDLG_UNIT(m_panelLine, wxSize(-1,-1)), m_checkListBoxLineArr, wxLB_SINGLE);
+    
+    boxSizer12451->Add(m_checkListBoxLine, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelTransformer = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelTransformer, _("Transformer"), false);
+    
+    wxBoxSizer* boxSizer124518 = new wxBoxSizer(wxVERTICAL);
+    m_panelTransformer->SetSizer(boxSizer124518);
+    
+    wxArrayString m_checkListBoxTransformerArr;
+    m_checkListBoxTransformer = new wxCheckListBox(m_panelTransformer, ID_CL_TRANSFORMER, wxDefaultPosition, wxDLG_UNIT(m_panelTransformer, wxSize(-1,-1)), m_checkListBoxTransformerArr, wxLB_SINGLE);
+    
+    boxSizer124518->Add(m_checkListBoxTransformer, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelSyncCapacitor = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelSyncCapacitor, _("Capacitor"), false);
+    
+    wxBoxSizer* boxSizer124511172023 = new wxBoxSizer(wxVERTICAL);
+    m_panelSyncCapacitor->SetSizer(boxSizer124511172023);
+    
+    wxArrayString m_checkListBoxCapacitorArr;
+    m_checkListBoxCapacitorArr.Add(_("Name"));
+    m_checkListBoxCapacitorArr.Add(_("Reactive power"));
+    m_checkListBoxCapacitor = new wxCheckListBox(m_panelSyncCapacitor, ID_CL_CAPACITOR, wxDefaultPosition, wxDLG_UNIT(m_panelSyncCapacitor, wxSize(-1,-1)), m_checkListBoxCapacitorArr, wxLB_SINGLE);
+    
+    boxSizer124511172023->Add(m_checkListBoxCapacitor, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelSyncInductor = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelSyncInductor, _("Inductor"), false);
+    
+    wxBoxSizer* boxSizer12451117202326 = new wxBoxSizer(wxVERTICAL);
+    m_panelSyncInductor->SetSizer(boxSizer12451117202326);
+    
+    wxArrayString m_checkListBoxInductorArr;
+    m_checkListBoxInductorArr.Add(_("Name"));
+    m_checkListBoxInductorArr.Add(_("Reactive power"));
+    m_checkListBoxInductor = new wxCheckListBox(m_panelSyncInductor, ID_CL_INDUCTOR, wxDefaultPosition, wxDLG_UNIT(m_panelSyncInductor, wxSize(-1,-1)), m_checkListBoxInductorArr, wxLB_SINGLE);
+    
+    boxSizer12451117202326->Add(m_checkListBoxInductor, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelIndMotor = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelIndMotor, _("Induction motor"), false);
+    
+    wxBoxSizer* boxSizer12451117 = new wxBoxSizer(wxVERTICAL);
+    m_panelIndMotor->SetSizer(boxSizer12451117);
+    
+    wxArrayString m_checkListBoxIndMotorArr;
+    m_checkListBoxIndMotorArr.Add(_("Name"));
+    m_checkListBoxIndMotorArr.Add(_("Active power"));
+    m_checkListBoxIndMotorArr.Add(_("Reactive power"));
+    m_checkListBoxIndMotor = new wxCheckListBox(m_panelIndMotor, ID_CL_INDMOTOR, wxDefaultPosition, wxDLG_UNIT(m_panelIndMotor, wxSize(-1,-1)), m_checkListBoxIndMotorArr, wxLB_SINGLE);
+    
+    boxSizer12451117->Add(m_checkListBoxIndMotor, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_panelSyncMotor = new wxPanel(m_choicebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_choicebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+    m_choicebook->AddPage(m_panelSyncMotor, _("Synchronous compensator"), false);
+    
+    wxBoxSizer* boxSizer1245111720 = new wxBoxSizer(wxVERTICAL);
+    m_panelSyncMotor->SetSizer(boxSizer1245111720);
+    
+    wxArrayString m_checkListBoxSyncMotorArr;
+    m_checkListBoxSyncMotorArr.Add(_("Name"));
+    m_checkListBoxSyncMotorArr.Add(_("Active power"));
+    m_checkListBoxSyncMotorArr.Add(_("Reactive power"));
+    m_checkListBoxSyncMotor = new wxCheckListBox(m_panelSyncMotor, ID_CL_SYNCMOTOR, wxDefaultPosition, wxDLG_UNIT(m_panelSyncMotor, wxSize(-1,-1)), m_checkListBoxSyncMotorArr, wxLB_SINGLE);
+    
+    boxSizer1245111720->Add(m_checkListBoxSyncMotor, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxStaticBoxSizer* staticBoxSizer1251 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Units")), wxVERTICAL);
+    
+    boxSizer1309->Add(staticBoxSizer1251, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxArrayString m_radioBoxVoltageArr;
+    m_radioBoxVoltageArr.Add(_("p.u."));
+    m_radioBoxVoltageArr.Add(_("V"));
+    m_radioBoxVoltageArr.Add(_("kV"));
+    m_radioBoxVoltage = new wxRadioBox(this, wxID_ANY, _("Voltage"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_radioBoxVoltageArr, 1, wxRA_SPECIFY_ROWS);
+    m_radioBoxVoltage->SetSelection(0);
+    
+    staticBoxSizer1251->Add(m_radioBoxVoltage, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxArrayString m_radioBoxCurrentArr;
+    m_radioBoxCurrentArr.Add(_("p.u."));
+    m_radioBoxCurrentArr.Add(_("A"));
+    m_radioBoxCurrentArr.Add(_("kA"));
+    m_radioBoxCurrent = new wxRadioBox(this, wxID_ANY, _("Current"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_radioBoxCurrentArr, 1, wxRA_SPECIFY_ROWS);
+    m_radioBoxCurrent->SetSelection(1);
+    
+    staticBoxSizer1251->Add(m_radioBoxCurrent, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxArrayString m_radioBoxPowerArr;
+    m_radioBoxPowerArr.Add(_("p.u."));
+    m_radioBoxPowerArr.Add(_("VA"));
+    m_radioBoxPowerArr.Add(_("kVA"));
+    m_radioBoxPowerArr.Add(_("MVA"));
+    m_radioBoxPower = new wxRadioBox(this, wxID_ANY, _("Power (aparent, active and reactive)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_radioBoxPowerArr, 1, wxRA_SPECIFY_ROWS);
+    m_radioBoxPower->SetSelection(3);
+    
+    staticBoxSizer1251->Add(m_radioBoxPower, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxArrayString m_radioBoxAngleArr;
+    m_radioBoxAngleArr.Add(_("Degrees"));
+    m_radioBoxAngleArr.Add(_("Radians"));
+    m_radioBoxAngle = new wxRadioBox(this, wxID_ANY, _("Angle"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_radioBoxAngleArr, 1, wxRA_SPECIFY_ROWS);
+    m_radioBoxAngle->SetSelection(0);
+    
+    staticBoxSizer1251->Add(m_radioBoxAngle, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer1312 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer1251->Add(boxSizer1312, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_staticText1313 = new wxStaticText(this, wxID_ANY, _("Precision:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer1312->Add(m_staticText1313, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_textCtrlPrecision = new wxTextCtrl(this, wxID_ANY, wxT("2"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlPrecision->SetHint(wxT(""));
+    #endif
+    
+    boxSizer1312->Add(m_textCtrlPrecision, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    
+    m_staticText1310 = new wxStaticText(this, wxID_ANY, _("Preview:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer1226->Add(m_staticText1310, 0, wxALL, WXC_FROM_DIP(5));
+    
+    m_richTextCtrlPreview = new wxRichTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTE_READONLY|wxTE_MULTILINE|wxWANTS_CHARS);
+    
+    boxSizer1226->Add(m_richTextCtrlPreview, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    m_checkBoxReplace = new wxCheckBox(this, wxID_ANY, _("Replace existing labels"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_checkBoxReplace->SetValue(false);
+    
+    boxSizer1226->Add(m_checkBoxReplace, 0, wxALL, WXC_FROM_DIP(5));
+    
+    wxBoxSizer* boxSizer_bottonButtons1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer1226->Add(boxSizer_bottonButtons1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    
+    boxSizer_bottonButtons1->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    
+    m_buttonApply = new wxButton(this, wxID_ANY, _("Apply"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer_bottonButtons1->Add(m_buttonApply, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    m_buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    
+    boxSizer_bottonButtons1->Add(m_buttonCancel, 0, wxALL|wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_choicebook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_choicebook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_choicebook);
+    }
+    #endif
+    
+    SetName(wxT("LabelManagerBase"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+    // Connect events
+    m_choicebook->Bind(wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED, &LabelManagerBase::OnChoicebookChanged, this);
+    m_checkListBoxBus->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxGenerator->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxLoad->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxLine->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxTransformer->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxCapacitor->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxInductor->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxIndMotor->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxSyncMotor->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_radioBoxVoltage->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_radioBoxCurrent->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_radioBoxPower->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_radioBoxAngle->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_textCtrlPrecision->Bind(wxEVT_COMMAND_TEXT_UPDATED, &LabelManagerBase::OnPrecisionTextUpdate, this);
+    m_buttonApply->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnApplyButtonCliick, this);
+    m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnCancelButtonClick, this);
+    
+}
+
+LabelManagerBase::~LabelManagerBase()
+{
+    m_choicebook->Unbind(wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED, &LabelManagerBase::OnChoicebookChanged, this);
+    m_checkListBoxBus->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxGenerator->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxLoad->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxLine->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxTransformer->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxCapacitor->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxInductor->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxIndMotor->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_checkListBoxSyncMotor->Unbind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &LabelManagerBase::OnCheckListSelected, this);
+    m_radioBoxVoltage->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_radioBoxCurrent->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_radioBoxPower->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_radioBoxAngle->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &LabelManagerBase::OnUnitChanged, this);
+    m_textCtrlPrecision->Unbind(wxEVT_COMMAND_TEXT_UPDATED, &LabelManagerBase::OnPrecisionTextUpdate, this);
+    m_buttonApply->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnApplyButtonCliick, this);
+    m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &LabelManagerBase::OnCancelButtonClick, this);
+    
+}

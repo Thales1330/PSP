@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -45,7 +45,8 @@ enum class ElectricalUnit : int {
     UNIT_S,      /**< Siemens */
     UNIT_S_km,   /**< Siemens/km */
     UNIT_DEGREE, /**< Degree */
-    UNIT_RADIAN  /**< Radian */
+    UNIT_RADIAN,  /**< Radian */
+    UNIT_NONE
 };
 
 /**

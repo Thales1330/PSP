@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -36,6 +36,7 @@
 #include "forms/ProjectPropertiesForm.h"
 #include "forms/SimulationsSettingsForm.h"
 #include "forms/StabilityEventList.h"
+#include "forms/LabelManager.h" 
 
 #include "utils/FileHanding.h"
 #include "utils/PropertiesData.h"
@@ -93,7 +94,7 @@ MainFrame::~MainFrame()
 			nullptr, this);
 		delete m_stabilityMenu;
 	}
-	if(m_snapshotMenu) {
+	if (m_snapshotMenu) {
 		m_snapshotMenu->Disconnect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnSnapshotMenuClick),
 			nullptr, this);
 		delete m_snapshotMenu;
@@ -185,7 +186,7 @@ void MainFrame::CreateDropdownMenus()
 	wxMenuItem* emtElement =
 		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_EMTELEMENT, _("&Electromagnetic Transient Element\tShift-E"), _("Adds an electromagnetic transient element that connects with ATP"));
 	wxMenuItem* textElement =
-		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TEXT, _("&Text\tA"), _("Adds a linked text element"));
+		new wxMenuItem(m_addElementsMenu, ID_ADDMENU_TEXT, _("&Label\tA"), _("Adds a linked element label"));
 
 
 	m_addElementsMenu->Append(busElement);
@@ -620,7 +621,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 			case ID_ADDMENU_TEXT: {
 				Text* newText = new Text();
 				textList.push_back(newText);
-				statusBarText = _("Insert Text: Click to insert, ESC to cancel.");
+				statusBarText = _("Insert Label: Click to insert, ESC to cancel.");
 				newElement = true;
 				isText = true;
 			} break;
@@ -855,4 +856,16 @@ void MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent& event)
 void MainFrame::OnSnapshotDropdown(wxRibbonButtonBarEvent& event)
 {
 	event.PopupMenu(m_snapshotMenu);
+}
+void MainFrame::OnLabelMngrClick(wxRibbonButtonBarEvent& event)
+{
+	Workspace* workspace = static_cast<Workspace*>(m_auiNotebook->GetCurrentPage());
+	if (workspace) {
+		LabelManager labelMngr(this, workspace);
+
+		if (labelMngr.ShowModal() == wxID_OK) {
+			workspace->UpdateTextElements();
+			workspace->Redraw();
+		}
+	}
 }

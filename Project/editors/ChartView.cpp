@@ -642,7 +642,7 @@ wxTreeItemId ChartView::UpdateAllPlotsCharDir(wxTreeItemId root, XYChart* chartD
 
 				std::vector<double> yValues = data->GetValues();
 
-				
+
 
 				LineLayer* layer = chartDir->addLineLayer();
 				layer->setFastLineMode();
@@ -1041,6 +1041,10 @@ wxTreeItemId ChartView::CalcXYLimits(wxTreeItemId root, XYChart* chartDir)
 				wxString parentName = m_treeCtrl->GetItemText(m_treeCtrl->GetItemParent(item));
 
 				std::vector<double> yValues = data->GetValues();
+				if (yValues.size() == 0) {
+					item = m_treeCtrl->GetNextChild(root, cookie);
+					continue;
+				}
 
 				double minY = *std::min_element(yValues.begin(), yValues.end());
 				double maxY = *std::max_element(yValues.begin(), yValues.end());
