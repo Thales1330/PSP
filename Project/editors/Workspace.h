@@ -237,7 +237,7 @@ protected:
 	//std::vector< std::vector<Text*> > m_textListState;
 	std::vector< std::vector< std::shared_ptr<Text> > > m_textListState;
 	int m_currenteState = -1;
-	int m_maxStates = 5;
+	int m_maxStates = 100;
 
 	wxFileName m_savedPath;
 
