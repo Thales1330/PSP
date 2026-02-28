@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -54,7 +54,9 @@ public:
     bool OpenProject(wxFileName path);
     
     void SaveControl(wxFileName path);
-    bool OpenControl(wxFileName path, std::vector<ControlElement*>& ctrlElementList, std::vector<ConnectionLine*>& ctrlConnectionList);
+    bool OpenControl(wxFileName path,
+        std::vector< std::shared_ptr<ControlElement> >& ctrlElementList,
+        std::vector< std::shared_ptr<ConnectionLine> >& ctrlConnectionList);
     
     void SaveControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = nullptr);
     bool OpenControlElements(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementsNode, ControlElementContainer* ctrlContainer = nullptr);

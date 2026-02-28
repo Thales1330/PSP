@@ -123,7 +123,7 @@ public:
 
 	wxString GetName() const { return m_name; }
 	std::vector<Element*> GetElementList() const;
-	std::vector<Text*> GetTextList() const { return m_textList; }
+	std::vector< std::shared_ptr<Text> > GetTextList() const { return m_textList; }
 	std::vector<Element*> GetAllElements() const;
 	WorkspaceMode GetWorkspaceMode() const { return m_mode; }
 	Camera* GetCamera() const { return m_camera; }
@@ -138,7 +138,7 @@ public:
 	wxFileName GetSavedPath() const { return m_savedPath; }
 	void SetName(wxString name);
 	void SetElementList(std::vector<Element*> elementList);
-	void SetTextList(std::vector<Text*> textList);
+	void SetTextList(const std::vector< std::shared_ptr<Text> >& textList);
 	void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
 	void SetWorkspaceMode(WorkspaceMode mode) { m_mode = mode; }
 	void SetSavedPath(wxFileName savedPath) { m_savedPath = savedPath; }
@@ -160,6 +160,7 @@ public:
 	bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
 	bool InsertTextElement(int textID, Element* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, int precision = 2);
 	Element* FindTextElement(Element* parentElement, int dataType);
+	void RemoveAllTextElements();
 	void CheckSlackBusDuplication(Element* newSlackBus);
 
 	void ValidateBusesVoltages(Element* initialBus);
@@ -206,7 +207,10 @@ protected:
 	//void SetViewport();
 	void UpdateStatusBar();
 	int GetElementNumberFromList(Element* element);
-	void GetStateListsCopy(const std::vector<PowerElement*>& elementsList, const std::vector<Text*>& textList, std::vector<PowerElement*>& elementsListCopy, std::vector<Text*>& textListCopy);
+	void GetStateListsCopy(const std::vector< std::shared_ptr<PowerElement> >& elementsList,
+		const std::vector< std::shared_ptr<Text> >& textList,
+		std::vector< std::shared_ptr<PowerElement> >& elementsListCopy,
+		std::vector< std::shared_ptr<Text> >& textListCopy);
 
 	void DrawScene(wxGraphicsContext* gc);
 	void DrawScene(wxDC& dc);
@@ -221,15 +225,19 @@ protected:
 	WorkspaceMode m_mode = WorkspaceMode::MODE_EDIT;
 	WorkspaceMode m_oldStatusMode = WorkspaceMode::MODE_EDIT;
 
-	std::vector<PowerElement*> m_elementList;
+	//std::vector<PowerElement*> m_elementList;
+	std::vector< std::shared_ptr<PowerElement> > m_elementList;
 	int m_elementNumber[NUM_ELEMENTS];
 
-	std::vector<Text*> m_textList;
+	//std::vector<Text*> m_textList;
+	std::vector< std::shared_ptr<Text> > m_textList;
 
-	std::vector< std::vector<PowerElement*> > m_elementListState;
-	std::vector< std::vector<Text*> > m_textListState;
+	//std::vector< std::vector<PowerElement*> > m_elementListState;
+	std::vector< std::vector< std::shared_ptr<PowerElement> > > m_elementListState;
+	//std::vector< std::vector<Text*> > m_textListState;
+	std::vector< std::vector< std::shared_ptr<Text> > > m_textListState;
 	int m_currenteState = -1;
-	int m_maxStates = 100;
+	int m_maxStates = 5;
 
 	wxFileName m_savedPath;
 

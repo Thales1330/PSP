@@ -496,6 +496,9 @@ void LabelManager::OnPrecisionTextUpdate(wxCommandEvent& event)
 
 void LabelManager::OnApplyButtonClick(wxCommandEvent& event)
 {
+	if (m_checkBoxReplace->GetValue()) {
+		m_workspace->RemoveAllTextElements();
+	}
 	ElectricalUnit voltageUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_V, ElectricalUnit::UNIT_kV };
 	ElectricalUnit currentUnitList[3] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_A, ElectricalUnit::UNIT_kA };
 	ElectricalUnit sUnitList[4] = { ElectricalUnit::UNIT_PU, ElectricalUnit::UNIT_VA, ElectricalUnit::UNIT_kVA, ElectricalUnit::UNIT_MVA };

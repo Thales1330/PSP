@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -160,10 +160,10 @@ void ControlElement::ReplaceNode(Node* oldNode, Node* newNode)
 	}
 }
 
-ControlElement* ControlElement::GetControlElementFromID(std::vector<ControlElement*> elementList, int id)
+ControlElement* ControlElement::GetControlElementFromID(std::vector< std::shared_ptr<ControlElement> > elementList, int id)
 {
 	for (auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
-		ControlElement* element = *it;
+		ControlElement* element = it->get();
 		if (element->GetID() == id) return element;
 	}
 	return nullptr;

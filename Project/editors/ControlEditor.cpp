@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -275,57 +275,57 @@ void ControlEditor::AddElement(ControlElementButtonID id)
 	switch (id) {
 	case ControlElementButtonID::ID_IO: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		IOControl* io = new IOControl(m_ioFlags, GetNextID());
+		auto io = std::make_shared<IOControl>(m_ioFlags, GetNextID());
 		m_elementList.push_back(io);
 	} break;
 	case ControlElementButtonID::ID_TF: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		TransferFunction* tf = new TransferFunction(GetNextID());
+		auto tf = std::make_shared<TransferFunction>(GetNextID());
 		m_elementList.push_back(tf);
 	} break;
 	case ControlElementButtonID::ID_SUM: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		Sum* sum = new Sum(GetNextID());
+		auto sum = std::make_shared<Sum>(GetNextID());
 		m_elementList.push_back(sum);
 	} break;
 	case ControlElementButtonID::ID_CONST: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		Constant* constant = new Constant(GetNextID());
+		auto constant = std::make_shared<Constant>(GetNextID());
 		m_elementList.push_back(constant);
 	} break;
 	case ControlElementButtonID::ID_LIMITER: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		Limiter* limiter = new Limiter(GetNextID());
+		auto limiter = std::make_shared<Limiter>(GetNextID());
 		m_elementList.push_back(limiter);
 	} break;
 	case ControlElementButtonID::ID_GAIN: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		Gain* gain = new Gain(GetNextID());
+		auto gain = std::make_shared<Gain>(GetNextID());
 		m_elementList.push_back(gain);
 	} break;
 	case ControlElementButtonID::ID_MULT: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		Multiplier* mult = new Multiplier(GetNextID());
+		auto mult = std::make_shared<Multiplier>(GetNextID());
 		m_elementList.push_back(mult);
 	} break;
 	case ControlElementButtonID::ID_EXP: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		Exponential* exp = new Exponential(GetNextID());
+		auto exp = std::make_shared<Exponential>(GetNextID());
 		m_elementList.push_back(exp);
 	} break;
 	case ControlElementButtonID::ID_RATELIM: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		RateLimiter* rateLim = new RateLimiter(GetNextID());
+		auto rateLim = std::make_shared<RateLimiter>(GetNextID());
 		m_elementList.push_back(rateLim);
 	} break;
 	case ControlElementButtonID::ID_MATH_DIV: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		Divider* divider = new Divider(GetNextID());
+		auto divider = std::make_shared<Divider>(GetNextID());
 		m_elementList.push_back(divider);
 	} break;
 	case ControlElementButtonID::ID_MATH_EXPR: {
 		m_mode = ControlEditorMode::MODE_INSERT;
-		MathExpression* mathExpr = new MathExpression(GetNextID());
+		auto mathExpr = std::make_shared<MathExpression>(GetNextID());
 		m_elementList.push_back(mathExpr);
 	} break;
 	}
@@ -406,10 +406,9 @@ void ControlEditor::OnDoubleClick(wxMouseEvent& event)
 	bool redraw = false;
 
 	if (m_mode == ControlEditor::ControlEditorMode::MODE_EDIT) {
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			if (element->Contains(m_camera->ScreenToWorld(clickPoint))) {
-				element->ShowForm(this, element);
+				element->ShowForm(this, element.get());
 				CheckConnections();
 				auto childList = element->GetChildList();
 				for (auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; ++itC) {
@@ -433,18 +432,17 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 		m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 	}
 	else {
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			ControlElement* element = *it;
+		for (auto& element : m_elementList) {
 			bool foundNode = false;
 			auto nodeList = element->GetNodeList();
 			for (auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
 				Node* node = *itN;
 				if (node->Contains(m_camera->ScreenToWorld(clickPoint))) {
 					m_mode = ControlEditorMode::MODE_INSERT_LINE;
-					ConnectionLine* line = new ConnectionLine(node, GetNextID());
+					auto line = std::make_shared<ConnectionLine>(node, GetNextID());
 					m_connectionList.push_back(line);
-					element->AddChild(line);
-					line->AddParent(element);
+					element->AddChild(line.get());
+					line->AddParent(element.get());
 					foundElement = true;
 					foundNode = true;
 				}
@@ -465,8 +463,7 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 			}
 		}
 		if (m_mode != ControlEditorMode::MODE_INSERT_LINE) {
-			for (auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-				ConnectionLine* line = *it;
+			for (auto& line : m_connectionList) {
 				line->StartMove(m_camera->ScreenToWorld(clickPoint));
 				if (line->Contains(m_camera->ScreenToWorld(clickPoint))) {
 					line->SetSelected();
@@ -489,17 +486,16 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 {
 	bool foundNode = false;
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
-		ControlElement* element = *it;
+	for (auto& element : m_elementList) {
 		if (m_mode == ControlEditorMode::MODE_INSERT_LINE) {
 			auto nodeList = element->GetNodeList();
-			for (auto itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {
-				Node* node = *itN;
+			for (auto node : nodeList) {
 				if (node->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-					ConnectionLine* line = *(m_connectionList.end() - 1);
-					if (line->AppendNode(node, element)) {
-						line->AddParent(element);
-						element->AddChild(line);
+					//ConnectionLine* line = *(m_connectionList.end() - 1);
+					auto line = m_connectionList.back();
+					if (line->AppendNode(node, element.get())) {
+						line->AddParent(element.get());
+						element->AddChild(line.get());
 						line->UpdatePoints();
 						m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 						foundNode = true;
@@ -519,13 +515,15 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 			if (!element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) { element->SetSelected(false); }
 		}
 	}
-	for (auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-		ConnectionLine* cLine = *it;
-		if (m_mode == ControlEditorMode::MODE_INSERT_LINE && !foundNode && it != (itEnd - 1)) {
+
+	auto& lastLine = m_connectionList.back();
+	for (auto& cLine : m_connectionList) {
+		if (m_mode == ControlEditorMode::MODE_INSERT_LINE && !foundNode && cLine.get() != lastLine.get()) {
 			if (cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-				ConnectionLine* iLine = *(m_connectionList.end() - 1);
-				if (iLine->SetParentLine(cLine)) {
-					cLine->AddChild(iLine);
+				//ConnectionLine* iLine = *(m_connectionList.end() - 1);
+				auto iLine = m_connectionList.back();
+				if (iLine->SetParentLine(cLine.get())) {
+					cLine->AddChild(iLine.get());
 					iLine->UpdatePoints();
 					m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 					foundNode = true;
@@ -548,7 +546,8 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 	m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
 
 	if (m_mode == ControlEditorMode::MODE_INSERT_LINE && !foundNode) {
-		ConnectionLine* cLine = *(m_connectionList.end() - 1);
+		//ConnectionLine* cLine = *(m_connectionList.end() - 1);
+		auto cLine = m_connectionList.back();
 		// Free nodes
 		auto nodeList = cLine->GetNodeList();
 		for (auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
@@ -559,10 +558,10 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 		auto parentList = cLine->GetParentList();
 		for (auto it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {
 			Element* element = *it;
-			element->RemoveChild(cLine);
+			element->RemoveChild(cLine.get());
 		}
 		m_connectionList.pop_back();
-		if (cLine) delete cLine;
+		//if (cLine) delete cLine;
 		m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 	}
 	else if (m_mode != ControlEditorMode::MODE_INSERT) {
@@ -616,12 +615,14 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
 
 	switch (m_mode) {
 	case ControlEditorMode::MODE_INSERT: {
-		Element* newElement = *(m_elementList.end() - 1);  // Get the last element in the list.
+		//Element* newElement = *(m_elementList.end() - 1);  // Get the last element in the list.
+		auto newElement = m_elementList.back();
 		newElement->Move(m_camera->ScreenToWorld(clickPoint));
 		redraw = true;
 	} break;
 	case ControlEditorMode::MODE_INSERT_LINE: {
-		ConnectionLine* line = *(m_connectionList.end() - 1);
+		//ConnectionLine* line = *(m_connectionList.end() - 1);
+		auto line = m_connectionList.back();
 		line->SetTemporarySecondPoint(m_camera->ScreenToWorld(clickPoint));
 		line->UpdatePoints();
 		redraw = true;
@@ -633,8 +634,7 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
 		redraw = true;
 	} break;
 	case ControlEditor::ControlEditorMode::MODE_MOVE_ELEMENT: {
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			if (element->IsSelected()) {
 				element->Move(m_camera->ScreenToWorld(clickPoint));
 				auto childList = element->GetChildList();
@@ -647,8 +647,7 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
 		}
 	} break;
 	case ControlEditorMode::MODE_MOVE_LINE: {
-		for (auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; it++) {
-			ConnectionLine* line = *it;
+		for (auto& line : m_connectionList) {
 			if (line->IsSelected()) {
 				line->Move(m_camera->ScreenToWorld(clickPoint));
 				redraw = true;
@@ -732,8 +731,7 @@ void ControlEditor::OnKeyDown(wxKeyEvent& event)
 
 void ControlEditor::RotateSelectedElements(bool clockwise)
 {
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-		Element* element = *it;
+	for (auto& element : m_elementList) {
 		if (element->IsSelected()) {
 			element->Rotate(clockwise);
 			auto childList = element->GetChildList();
@@ -748,68 +746,76 @@ void ControlEditor::RotateSelectedElements(bool clockwise)
 
 void ControlEditor::DeleteSelectedElements()
 {
-	for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-		Element* element = *it;
+	for (auto it = m_elementList.begin(); it != m_elementList.end();) {
+		Element* element = it->get();
 		if (element->IsSelected()) {
 			// Remove child/parent.
 			auto childList = element->GetChildList();
-			for (auto itC = childList.begin(), itEnd = childList.end(); itC != itEnd; ++itC) {
-				// The child is always a connection line.
-				ConnectionLine* child = static_cast<ConnectionLine*>(*itC);
-				// Delete the connection line.
-				for (auto itCo = m_connectionList.begin(); itCo != m_connectionList.end(); ++itCo) {
-					ConnectionLine* line = *itCo;
-					if (line == child) {
-						itCo = DeleteLineFromList(itCo);
-						break;
+			for (auto child : childList) {
+				// The child is always a connection line, but check it.
+				//ConnectionLine* child = static_cast<ConnectionLine*>(*itC);
+				if (auto childLine = dynamic_cast<ConnectionLine*>(child)) {
+					// Delete the connection line.
+					for (auto itCo = m_connectionList.begin(); itCo != m_connectionList.end(); ) {
+						if (itCo->get() == childLine)
+							itCo = DeleteLineFromList(itCo);
+						else
+							++itCo;
 					}
 				}
+
 			}
-			m_elementList.erase(it--);
-			if (element) delete element;
+			m_elementList.erase(it);
+			//if (element) delete element;
+		}
+		else {
+			++it;
 		}
 	}
 
-	for (auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
-		ConnectionLine* line = *it;
-		if (line->IsSelected()) { it = DeleteLineFromList(it); }
+	for (auto it = m_connectionList.begin(); it != m_connectionList.end(); ) {
+		ConnectionLine* line = it->get();
+		if (line->IsSelected())
+			it = DeleteLineFromList(it);
+		else
+			++it;
 	}
 	Redraw();
 }
 
-std::vector<ConnectionLine*>::iterator ControlEditor::DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it)
+std::vector< std::shared_ptr<ConnectionLine> >::iterator ControlEditor::DeleteLineFromList(std::vector< std::shared_ptr<ConnectionLine> >::iterator& it)
 {
-	ConnectionLine* cLine = *it;
+	ConnectionLine* cLine = it->get();
+
+	// Delete children recursively
 	auto childList = cLine->GetLineChildList();
-	for (auto itC = childList.begin(), itEndC = childList.end(); itC != itEndC; ++itC) {
-		ConnectionLine* child = *itC;
-		for (auto itL = m_connectionList.begin(); itL != m_connectionList.end(); ++itL) {
-			ConnectionLine* childOnList = *itL;
-			if (childOnList == child) { itL = DeleteLineFromList(itL); }
+	for (auto child : childList) {
+		for (auto itL = m_connectionList.begin(); itL != m_connectionList.end(); ) {
+			if (itL->get() == child)
+				itL = DeleteLineFromList(itL);
+			else
+				++itL;
 		}
 	}
-	// Remove
+	// Remove parents
 	auto parentList = cLine->GetParentList();
-	for (auto itP = parentList.begin(), itEnd = parentList.end(); itP != itEnd; ++itP) {
-		Element* parent = *itP;
+	for (auto parent : parentList) {
 		if (parent) parent->RemoveChild(cLine);
 	}
 	if (cLine->GetParentLine()) cLine->GetParentLine()->RemoveChild(cLine);
+
 	// Free nodes
 	auto nodeList = cLine->GetNodeList();
-	for (auto itN = nodeList.begin(), itEndN = nodeList.end(); itN != itEndN; ++itN) {
-		Node* node = *itN;
+	for (auto node : nodeList)
 		node->SetConnected(false);
-	}
-	m_connectionList.erase(it--);
-	if (cLine) delete cLine;
-	return it;
+
+	return m_connectionList.erase(it);
 }
 
 void ControlEditor::CheckConnections()
 {
 	for (auto it = m_connectionList.begin(); it != m_connectionList.end(); ++it) {
-		ConnectionLine* cLine = *it;
+		ConnectionLine* cLine = it->get();
 		if (cLine->GetType() == ConnectionLine::ConnectionLineType::ELEMENT_ELEMENT) {
 			if (cLine->GetParentList().size() < 2) { it = DeleteLineFromList(it); }
 		}
@@ -857,8 +863,8 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 
 	std::vector<IOControl*> ioList;
 
-	for (auto* element : m_elementList) {
-		if (auto* io = dynamic_cast<IOControl*>(element)) {
+	for (auto& element : m_elementList) {
+		if (auto io = dynamic_cast<IOControl*>(element.get())) {
 			ioList.push_back(io);
 		}
 	}
@@ -897,7 +903,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 			double pdbTime = 0.0;
 			std::vector<double> time;
 			std::vector<double> solution;
-			
+
 			while (currentTime <= m_simTime) {
 				for (auto* io : ioList) {
 					SimTestData testData = io->GetSimTestData();
@@ -1029,12 +1035,10 @@ void ControlEditor::OnClose(wxCloseEvent& event)
 int ControlEditor::GetNextID()
 {
 	int id = 0;
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-		ControlElement* element = *it;
+	for (auto& element : m_elementList) {
 		if (element->GetID() > id) id = element->GetID();
 	}
-	for (auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-		ConnectionLine* line = *it;
+	for (auto& line : m_connectionList) {
 		if (line->GetID() > id) id = line->GetID();
 	}
 	id++;

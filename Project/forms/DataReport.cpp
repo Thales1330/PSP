@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -1701,7 +1701,7 @@ void DataReport::OnMouseWheel(wxMouseEvent& event)
 {
 	if (event.ControlDown()) {
 		if (event.GetWheelRotation() > 0) {
-			int newSelection = m_choiceFontSize->GetSelection() + 1;
+			size_t newSelection = m_choiceFontSize->GetSelection() + 1;
 			if (newSelection < m_choiceFontSize->GetCount()) {
 				m_choiceFontSize->SetSelection(newSelection);
 				m_fontSize = wxAtoi(m_choiceFontSize->GetStringSelection());
@@ -1709,7 +1709,7 @@ void DataReport::OnMouseWheel(wxMouseEvent& event)
 			}
 		}
 		else {
-			int newSelection = m_choiceFontSize->GetSelection() - 1;
+			size_t newSelection = m_choiceFontSize->GetSelection() - 1;
 			if (newSelection >= 0) {
 				m_choiceFontSize->SetSelection(newSelection);
 				m_fontSize = wxAtoi(m_choiceFontSize->GetStringSelection());

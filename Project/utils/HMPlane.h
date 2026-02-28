@@ -1,4 +1,4 @@
-#ifndef HMPLANE_H
+﻿#ifndef HMPLANE_H
 #define HMPLANE_H
 
 #include <vector>
@@ -19,16 +19,16 @@
 
 struct BufferMeshCoords
 {
-    float x = 0.0;
-    float y = 0.0;
-    float z = 0.0;
+    double x = 0.0;
+    double y = 0.0;
+    double z = 0.0;
 };
 
 class HMPlane
 {
 public:
     //HMPlane(Shader* shader, Shader* labelShader, const float& width, const float& height, const float limits[2]);
-    HMPlane(const float& width, const float& height, const float limits[2]);
+    HMPlane(const double& width, const double& height, const double limits[2]);
     virtual ~HMPlane();
 
     //virtual void Draw(const Renderer& renderer, const glm::mat4& projectionViewMatrix) const;
@@ -38,14 +38,14 @@ public:
     virtual void DrawLabelDC(wxGraphicsContext* gc) const;
     virtual void DrawLabelDC(wxDC& dc) const;
 
-    virtual void SetLabelLimits(const float& min, const float& max);
-    virtual float GetMaxLimit() { return m_limits[0]; }
-    virtual float GetMinLimit() { return m_limits[1]; }
+    virtual void SetLabelLimits(const double& min, const double& max);
+    virtual double GetMaxLimit() { return m_limits[0]; }
+    virtual double GetMinLimit() { return m_limits[1]; }
 
-    virtual void SetRectSlope(const wxRect2DDouble& rect, const float& angle, const float& depth);
+    virtual void SetRectSlope(const wxRect2DDouble& rect, const double& angle, const double& depth);
     //virtual void UpdateCoords() { FillIndexBuffer(); }
-    virtual void Resize(const float& width, const float& height);
-    virtual void ResizeDC(const float& width, const float& height);
+    virtual void Resize(const double& width, const double& height);
+    virtual void ResizeDC(const double& width, const double& height);
 
     virtual void SmoothPlane(const unsigned int& iterations);
     virtual void Clear();
@@ -60,16 +60,16 @@ protected:
     wxColour VoltToColour(double volt, int alpha = 160) const;
     
 
-    const float m_meshSize = 15.0f;
-    unsigned int m_meshTickX = 0;
-    unsigned int m_meshTickY = 0;
-    float m_width = 0.0;
-    float m_height = 0.0;
+    const double m_meshSize = 15.0f;
+    size_t m_meshTickX = 0;
+    size_t m_meshTickY = 0;
+    double m_width = 0.0;
+    double m_height = 0.0;
 
     std::vector< std::vector<BufferMeshCoords*> > m_coords;
     std::vector< std::vector<BufferMeshCoords*> > m_coordsT;
-    std::vector<float> m_bufferCoords;
-    std::vector<unsigned int> m_indexBuffer;
+    std::vector<double> m_bufferCoords;
+    std::vector<size_t> m_indexBuffer;
 
     // OpenGL shader
     //Shader* m_shader = nullptr;
@@ -91,7 +91,7 @@ protected:
     //VertexArray* m_vaL = nullptr;
     //
     //std::vector<OpenGLText*> m_glTexts;
-    float m_limits[2] = {1.1, 0.9};
+    double m_limits[2] = {1.1, 0.9};
 
     bool m_isClear = true;
 };

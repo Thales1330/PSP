@@ -411,6 +411,7 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
 		m_auiNotebook->Layout();
 		newWorkspace->Redraw();
 		newWorkspace->SetJustOpened(true);
+		newWorkspace->SaveCurrentState();
 		newWorkspace->Fit();
 		m_projectNumber++;
 	}
@@ -619,7 +620,8 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				newElement = true;
 			} break;
 			case ID_ADDMENU_TEXT: {
-				Text* newText = new Text();
+				//Text* newText = new Text();
+				auto newText = std::make_shared<Text>();
 				textList.push_back(newText);
 				statusBarText = _("Insert Label: Click to insert, ESC to cancel.");
 				newElement = true;

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -169,13 +169,11 @@ void ControlElementSolver::SolveNextStep()
 {
 	// Set all elements as not solved
 	auto elementList = m_ctrlContainer->GetControlElementsList();
-	for (auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {
-		ControlElement* element = *it;
+	for (auto& element : elementList) {
 		element->SetSolved(false);
 	}
 	auto connectionLineList = m_ctrlContainer->GetConnectionLineList();
-	for (auto it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {
-		ConnectionLine* cLine = *it;
+	for (auto& cLine : connectionLineList) {
 		cLine->SetSolved(false);
 	}
 
@@ -272,8 +270,7 @@ void ControlElementSolver::SolveNextStep()
 	while (haveUnsolvedElement) {
 		haveUnsolvedElement = false;
 		// Get the solved line connected with unsolved element (elements not connected in the main branch).
-		for (auto it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {
-			ConnectionLine* cLine = *it;
+		for (auto& cLine : connectionLineList) {
 			if (cLine->IsSolved()) {
 				auto parentList = cLine->GetParentList();
 				for (auto itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {
@@ -281,7 +278,7 @@ void ControlElementSolver::SolveNextStep()
 					if (!parent->IsSolved()) {
 						haveUnsolvedElement = true;
 						// Solve secondary branch.
-						currentLine = cLine;
+						currentLine = cLine.get();
 						while (currentLine) { currentLine = SolveNextElement(currentLine); }
 						break;
 					}

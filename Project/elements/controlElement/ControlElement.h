@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -110,7 +110,7 @@ class ControlElement : public Element
     virtual double GetOutput() const { return m_output; }
     virtual void SetOutput(double output) { m_output = output; }
     
-    static ControlElement* GetControlElementFromID(std::vector<ControlElement*> elementList, int id);
+    static ControlElement* GetControlElementFromID(std::vector< std::shared_ptr<ControlElement> > elementList, int id);
 
    protected:
     std::vector<Node*> m_nodeList;

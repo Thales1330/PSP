@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -28,7 +28,7 @@
 #include <wx/progdlg.h>
 
 #ifdef _MSC_VER
-//#include <windows.h>
+ //#include <windows.h>
 #endif 
 
 #include "../elements/controlElement/IOControl.h"
@@ -58,17 +58,17 @@ class ChartView;
 class ElementDataObject;
 
 enum class ControlElementButtonID : int {
-    ID_IO = 0,
-    ID_TF,
-    ID_SUM,
-    ID_CONST,
-    ID_LIMITER,
-    ID_GAIN,
-    ID_MULT,
-    ID_EXP,
-    ID_RATELIM,
-    ID_MATH_DIV,
-    ID_MATH_EXPR
+	ID_IO = 0,
+	ID_TF,
+	ID_SUM,
+	ID_CONST,
+	ID_LIMITER,
+	ID_GAIN,
+	ID_MULT,
+	ID_EXP,
+	ID_RATELIM,
+	ID_MATH_DIV,
+	ID_MATH_EXPR
 };
 
 /**
@@ -80,119 +80,121 @@ enum class ControlElementButtonID : int {
  */
 class ControlElementButton : public wxWindow
 {
-   public:
-    ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id = wxID_ANY);
-    ~ControlElementButton();
+public:
+	ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id = wxID_ANY);
+	~ControlElementButton();
 
-   protected:
-    virtual void OnPaint(wxPaintEvent& event);
-    virtual void OnMouseEnter(wxMouseEvent& event);
-    virtual void OnMouseLeave(wxMouseEvent& event);
-    virtual void OnLeftClickDown(wxMouseEvent& event);
-    virtual void OnLeftClickUp(wxMouseEvent& event);
+protected:
+	virtual void OnPaint(wxPaintEvent& event);
+	virtual void OnMouseEnter(wxMouseEvent& event);
+	virtual void OnMouseLeave(wxMouseEvent& event);
+	virtual void OnLeftClickDown(wxMouseEvent& event);
+	virtual void OnLeftClickUp(wxMouseEvent& event);
 
-    wxString m_label;
-    wxFont m_font;
-    wxPoint m_labelPosition;
+	wxString m_label;
+	wxFont m_font;
+	wxPoint m_labelPosition;
 
-    wxImage m_image;
-    wxSize m_imageSize;
-    wxPoint m_imagePosition;
+	wxImage m_image;
+	wxSize m_imageSize;
+	wxPoint m_imagePosition;
 
-    int m_borderSize = 2;
-    bool m_mouseAbove = false;
-    bool m_selected = false;
+	int m_borderSize = 2;
+	bool m_mouseAbove = false;
+	bool m_selected = false;
 
-    wxSize m_buttonSize;
+	wxSize m_buttonSize;
 };
 
 class ControlEditor : public ControlEditorBase
 {
-   public:
-    enum class ControlEditorMode : int {
-        MODE_EDIT = 0,
-        MODE_MOVE_ELEMENT,
-        MODE_MOVE_LINE,
-        MODE_DRAG,
-        MODE_DRAG_INSERT,
-        MODE_INSERT,
-        MODE_INSERT_LINE,
-        MODE_SELECTION_RECT,
-        MODE_PASTE,
-        MODE_DRAG_PASTE
-    };
-    ControlEditor(wxWindow* parent) : ControlEditorBase (parent) {}
-    ControlEditor(wxWindow* parent,
-                  int ioflags = IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY | IOControl::OUT_FIELD_VOLTAGE |
-                                IOControl::OUT_MEC_POWER);
-    virtual ~ControlEditor();
+public:
+	enum class ControlEditorMode : int {
+		MODE_EDIT = 0,
+		MODE_MOVE_ELEMENT,
+		MODE_MOVE_LINE,
+		MODE_DRAG,
+		MODE_DRAG_INSERT,
+		MODE_INSERT,
+		MODE_INSERT_LINE,
+		MODE_SELECTION_RECT,
+		MODE_PASTE,
+		MODE_DRAG_PASTE
+	};
+	ControlEditor(wxWindow* parent) : ControlEditorBase(parent) {}
+	ControlEditor(wxWindow* parent,
+		int ioflags = IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY | IOControl::OUT_FIELD_VOLTAGE |
+		IOControl::OUT_MEC_POWER);
+	virtual ~ControlEditor();
 
-    virtual void AddElement(ControlElementButtonID id);
-    //virtual void Redraw() { m_glCanvas->Refresh(); }
-    virtual void Redraw() { m_cePanel->Refresh(); }
-    virtual void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
-    virtual void RotateSelectedElements(bool clockwise);
-    virtual void DeleteSelectedElements();
-    virtual void CheckConnections();
-    virtual std::vector<ConnectionLine*> GetConnectionLineList() const { return m_connectionList; }
-    virtual std::vector<ControlElement*> GetControlElementList() const { return m_elementList; }
-    virtual void SetElementsList(std::vector<ControlElement*> elementList) { m_elementList = elementList; }
-    virtual void SetConnectionsList(std::vector<ConnectionLine*> connectionList) { m_connectionList = connectionList; }
-    virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
-    virtual void SetPlotLib(int plotLib) { m_plotLib = plotLib; }
+	virtual void AddElement(ControlElementButtonID id);
+	//virtual void Redraw() { m_glCanvas->Refresh(); }
+	virtual void Redraw() { m_cePanel->Refresh(); }
+	virtual void SetJustOpened(bool justOpened) { m_justOpened = justOpened; }
+	virtual void RotateSelectedElements(bool clockwise);
+	virtual void DeleteSelectedElements();
+	virtual void CheckConnections();
+	virtual std::vector< std::shared_ptr<ConnectionLine> > GetConnectionLineList() const { return m_connectionList; }
+	virtual std::vector< std::shared_ptr<ControlElement> >  GetControlElementList() const { return m_elementList;  }
+	virtual void SetElementsList(const std::vector< std::shared_ptr<ControlElement> >& elementList) { m_elementList = elementList; }
+	virtual void SetConnectionsList(const std::vector< std::shared_ptr<ConnectionLine> >& connectionList) { m_connectionList = connectionList; }
+	virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
+	virtual void SetPlotLib(int plotLib) { m_plotLib = plotLib; }
 
-    virtual void OnClose(wxCloseEvent& event);
-    virtual void OnTestClick(wxCommandEvent& event);
-    virtual void OnButtonOKClick(wxCommandEvent& event) { Close(); }
-    virtual void OnImportClick(wxCommandEvent& event);
-    virtual void OnExportClick(wxCommandEvent& event);
-    virtual void OnKeyDown(wxKeyEvent& event);
-    virtual void OnIdle(wxIdleEvent& event);
-    virtual void OnScroll(wxMouseEvent& event);
-    virtual void OnDoubleClick(wxMouseEvent& event);
-    virtual void OnLeftClickDown(wxMouseEvent& event);
-    virtual void OnLeftClickUp(wxMouseEvent& event);
-    virtual void OnMiddleDown(wxMouseEvent& event);
-    virtual void OnMiddleUp(wxMouseEvent& event);
-    virtual void OnMouseMotion(wxMouseEvent& event);
-    virtual void OnPaint(wxPaintEvent& event);
-    virtual void LeftClickDown(wxMouseEvent& event);
+	virtual void OnClose(wxCloseEvent& event);
+	virtual void OnTestClick(wxCommandEvent& event);
+	virtual void OnButtonOKClick(wxCommandEvent& event) { Close(); }
+	virtual void OnImportClick(wxCommandEvent& event);
+	virtual void OnExportClick(wxCommandEvent& event);
+	virtual void OnKeyDown(wxKeyEvent& event);
+	virtual void OnIdle(wxIdleEvent& event);
+	virtual void OnScroll(wxMouseEvent& event);
+	virtual void OnDoubleClick(wxMouseEvent& event);
+	virtual void OnLeftClickDown(wxMouseEvent& event);
+	virtual void OnLeftClickUp(wxMouseEvent& event);
+	virtual void OnMiddleDown(wxMouseEvent& event);
+	virtual void OnMiddleUp(wxMouseEvent& event);
+	virtual void OnMouseMotion(wxMouseEvent& event);
+	virtual void OnPaint(wxPaintEvent& event);
+	virtual void LeftClickDown(wxMouseEvent& event);
 
-    virtual void BuildColourList();
-    virtual wxColour GetNextColour();
-    
-    void BuildControlElementPanel();
+	virtual void BuildColourList();
+	virtual wxColour GetNextColour();
 
-   protected:
-    //void SetViewport();
-    int GetNextID();
+	void BuildControlElementPanel();
 
-    std::vector<ConnectionLine*>::iterator DeleteLineFromList(std::vector<ConnectionLine*>::iterator& it);
+protected:
+	//void SetViewport();
+	int GetNextID();
 
-    //wxGLContext* m_glContext = nullptr;
-    Camera* m_camera = nullptr;
+	std::vector< std::shared_ptr<ConnectionLine> >::iterator DeleteLineFromList(std::vector< std::shared_ptr<ConnectionLine> >::iterator& it);
 
-    ControlEditorMode m_mode = ControlEditorMode::MODE_EDIT;
+	//wxGLContext* m_glContext = nullptr;
+	Camera* m_camera = nullptr;
 
-    wxRect2DDouble m_selectionRect;
-    wxPoint2DDouble m_startSelRect;
+	ControlEditorMode m_mode = ControlEditorMode::MODE_EDIT;
 
-    std::vector<ControlElement*> m_elementList;
-    std::vector<ConnectionLine*> m_connectionList;
+	wxRect2DDouble m_selectionRect;
+	wxPoint2DDouble m_startSelRect;
 
-    ControlElementContainer* m_ctrlContainer = nullptr;
+	//std::vector<ControlElement*> m_elementList;
+	std::vector< std::shared_ptr<ControlElement> > m_elementList;
+	//std::vector<ConnectionLine*> m_connectionList;
+	std::vector< std::shared_ptr<ConnectionLine> > m_connectionList;
 
-    bool m_justOpened = false;
-    int m_ioFlags = 0;
+	ControlElementContainer* m_ctrlContainer = nullptr;
 
-    int m_inputType = 0;
-    double m_startTime = 1.0;
-    double m_slope = 1.0;
-    double m_timeStep = 1e-4;
-    double m_simTime = 10.0;
-    int m_plotLib = 0;
+	bool m_justOpened = false;
+	int m_ioFlags = 0;
 
-    std::vector<wxColour> m_colourList;
-    std::vector<wxColour>::iterator m_itColourList;
+	int m_inputType = 0;
+	double m_startTime = 1.0;
+	double m_slope = 1.0;
+	double m_timeStep = 1e-4;
+	double m_simTime = 10.0;
+	int m_plotLib = 0;
+
+	std::vector<wxColour> m_colourList;
+	std::vector<wxColour>::iterator m_itColourList;
 };
 #endif  // CONTROLEDITOR_H

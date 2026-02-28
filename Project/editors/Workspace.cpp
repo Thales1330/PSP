@@ -110,12 +110,12 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
 
 Workspace::~Workspace()
 {
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-		if (*it) delete* it;
-	}
-	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
-		if (*it) delete* it;
-	}
+	//for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
+	//	if (*it) delete* it;
+	//}
+	//for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
+	//	if (*it) delete* it;
+	//}
 
 	if (m_hmPlane) delete m_hmPlane;
 
@@ -155,8 +155,7 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 		gc->Translate(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y);
 
 		// Elements
-		for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		}
 
@@ -168,8 +167,7 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 		delete text;
 
 		// Texts
-		for (auto it = m_textList.begin(); it != m_textList.end(); ++it) {
-			Text* text = *it;
+		for (auto& text : m_textList) {
 			text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		}
 
@@ -196,8 +194,7 @@ void Workspace::DrawScene(wxDC& dc)
 	//dc.SetLogicalOrigin(-m_camera->GetTranslation().m_x, -m_camera->GetTranslation().m_y);
 
 	// Elements
-	for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-		Element* element = *it;
+	for (auto& element : m_elementList) {
 		element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
 	}
 
@@ -209,8 +206,7 @@ void Workspace::DrawScene(wxDC& dc)
 	delete text;
 
 	// Texts
-	for (auto it = m_textList.begin(); it != m_textList.end(); ++it) {
-		Text* text = *it;
+	for (auto& text : m_textList) {
 		text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
 	}
 
@@ -274,42 +270,45 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 		SaveCurrentState();
 	}
 	else if (m_mode == WorkspaceMode::MODE_INSERT || m_mode == WorkspaceMode::MODE_DRAG_INSERT || m_mode == WorkspaceMode::MODE_DRAG_INSERT_TEXT) {
-		// Get the last element inserted on the list.
-		newElement = *(m_elementList.end() - 1);
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			Element* element = *it;
-			// Clicked in any element.
-			if (element->Contains(m_camera->ScreenToWorld(clickPoint))) {
-				// Click at a bus.
-				if (typeid(*element) == typeid(Bus)) {
-					// Select the bus.
-					element->SetSelected();
-					foundElement = true;  // Element found.
-					// Add the new element's parent. If the element being inserted returns true, back to
-					// edit mode.
-					if (newElement->AddParent(element, m_camera->ScreenToWorld(clickPoint))) {
-						ValidateElementsVoltages();
-						m_timer->Stop();
-						showNewElementForm = true;
-						m_mode = WorkspaceMode::MODE_EDIT;
-						element->SetInserted();
+		wxPoint2DDouble clickPointWorld = m_camera->ScreenToWorld(clickPoint);
+
+		if (!m_elementList.empty()) {
+			// Get the last element inserted on the list.
+			auto& newElement = m_elementList.back();
+			for (auto& element : m_elementList) {
+				// Clicked in any element.
+				if (element->Contains(clickPointWorld)) {
+					// Click at a bus.
+					if (auto bus = dynamic_cast<Bus*>(element.get())) {
+						// Select the bus.
+						bus->SetSelected();
+						foundElement = true;  // Element found.
+						// Add the new element's parent. If the element being inserted returns true, back to
+						// edit mode.
+						if (newElement->AddParent(bus, clickPointWorld)) {
+							ValidateElementsVoltages();
+							m_timer->Stop();
+							showNewElementForm = true;
+							m_mode = WorkspaceMode::MODE_EDIT;
+							bus->SetInserted();
+						}
 					}
 				}
 			}
+
+			// The line element can have an undefined number of points.
+			if (!foundElement) {
+				if (auto line = dynamic_cast<Line*>(newElement.get())) { line->AddPoint(clickPointWorld); }
+			}
+			foundElement = true;
+			unselectAll = false;
 		}
-		// The line element can have an undefined number of points.
-		if (!foundElement) {
-			if (typeid(*newElement) == typeid(Line)) { newElement->AddPoint(m_camera->ScreenToWorld(clickPoint)); }
-		}
-		foundElement = true;
-		unselectAll = false;
 	}
 	else {
 
 		bool clickPickbox = false;
 
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			PowerElement* element = *it;
+		for (auto& element : m_elementList) {
 			element->ResetPickboxes();  // Reset pickbox state.
 
 			// Set movement initial position (not necessarily will be moved).
@@ -328,7 +327,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 			// Click in an element.
 			else if (element->Contains(m_camera->ScreenToWorld(clickPoint))) {
-				notUnselectElementList.emplace_back(element);
+				notUnselectElementList.emplace_back(element.get());
 				if (!foundElement) {
 					if (element->IsSelected()) unselectAll = false;
 					// Select and show pickbox.
@@ -336,9 +335,9 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 					element->ShowPickbox();
 					foundElement = true;
 					// Select the associated text
-					for (Text* text : m_textList) {
-						if (text->GetElement() == element) {
-							notUnselectTextList.emplace_back(text);
+					for (auto& text : m_textList) {
+						if (text->GetElement() == element.get()) {
+							notUnselectTextList.emplace_back(text.get());
 							text->SetSelected();
 							text->SetAllowRotation(false);
 							if (unselectAll) text->SetAltSelectionColour();
@@ -366,13 +365,11 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 		}
 
 		// Text element
-		for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
-			Text* text = *it;
-
+		for (auto& text : m_textList) {
 			text->StartMove(m_camera->ScreenToWorld(clickPoint));
 
 			if (text->Contains(m_camera->ScreenToWorld(clickPoint))) {
-				notUnselectTextList.emplace_back(text);
+				notUnselectTextList.emplace_back(text.get());
 				if (!foundElement) {
 					if (text->IsSelected()) unselectAll = false;
 					text->SetSelected();
@@ -390,17 +387,17 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 	// Unselect all elements
 	if (!event.ControlDown() && unselectAll) {
-		for (Element* element : m_elementList) {
+		for (auto& element : m_elementList) {
 			bool select = false;
 			for (Element* notUnselectElement : notUnselectElementList) {
-				if (notUnselectElement == element) select = true;
+				if (notUnselectElement == element.get()) select = true;
 			}
 			element->SetSelected(select);
 		}
-		for (Text* text : m_textList) {
+		for (auto& text : m_textList) {
 			bool select = false;
-			for (Text* notUnselectText : notUnselectTextList) {
-				if (notUnselectText == text) select = true;
+			for (auto& notUnselectText : notUnselectTextList) {
+				if (notUnselectText == text.get()) select = true;
 			}
 			text->SetSelected(select);
 		}
@@ -436,21 +433,19 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 	bool clickOnSwitch = false;
 	bool redraw = false;
 
-	for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-		PowerElement* element = *it;
-
+	for (auto& element : m_elementList) {
 		// Click in an element.
 		if (element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
 			bool elementIsBus = false;
 			Bus oldBus;
 			Bus* currentBus = nullptr;
-			if ((currentBus = dynamic_cast<Bus*>(element))) {
+			if ((currentBus = dynamic_cast<Bus*>(element.get()))) {
 				elementIsBus = true;
 				oldBus = *currentBus;
 			}
 			m_timer->Stop();
-			if (element->ShowForm(this, element)) {
-				CheckSlackBusDuplication(element);
+			if (element->ShowForm(this, element.get())) {
+				CheckSlackBusDuplication(element.get());
 				SaveCurrentState();
 			}
 			elementEdited = true;
@@ -471,7 +466,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 							wxMessageDialog msgDialog(this, _("Do you want to change the rated voltage of the path?"),
 								_("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
 							if (msgDialog.ShowModal() == wxID_YES)
-								ValidateBusesVoltages(element);
+								ValidateBusesVoltages(element.get());
 							else {
 								auto data = currentBus->GetElectricalData();
 								data.nominalVoltage = oldBus.GetElectricalData().nominalVoltage;
@@ -494,8 +489,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 	}
 
 	// Text element
-	for (auto it = m_textList.begin(); it != m_textList.end(); ++it) {
-		Text* text = *it;
+	for (auto& text : m_textList) {
 		if (text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
 			if (text->ShowForm(this, GetElementList())) SaveCurrentState();
 			redraw = true;
@@ -515,14 +509,13 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
 {
 	bool redraw = false;
 	if (m_mode == WorkspaceMode::MODE_EDIT) {
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			if (element->IsSelected()) {
 				// Show context menu.
 				if (element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
 					element->ShowPickbox(false);
 					wxMenu menu;
-					menu.SetClientData(element);
+					menu.SetClientData(element.get());
 					if (element->GetContextMenu(menu)) {
 						m_timer->Stop();
 						menu.Bind(wxEVT_COMMAND_MENU_SELECTED, &Workspace::OnPopupClick, this);
@@ -551,27 +544,35 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
 	auto itnp = m_elementList.begin();
 
 	for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-		Element* element = *it;
-
+		auto& element = *it;
 		// The user was moving a pickbox.
 		if (m_mode == WorkspaceMode::MODE_MOVE_PICKBOX) {
 			// Catch only the element that have the pickbox shown.
 			if (element->IsPickboxShown()) {
 				saveCurrentState = true;
 				// If the element is a bus, check if a node is outside.
-				if (typeid(*element) == typeid(Bus)) {
+				if (auto bus = dynamic_cast<Bus*>(element.get())) {
 					// Get all the bus children.
-					for (int i = 0; i < (int)m_elementList.size(); i++) {
-						Element* child = m_elementList[i];
-						for (int j = 0; j < (int)child->GetParentList().size(); j++) {
-							Element* parent = child->GetParentList()[j];
-							// The child have a parent that is the element.
-							if (parent == element) {
+					for (auto child : m_elementList) {
+						for (auto parent : child->GetParentList()) {
+							// The child have a parent that is the element (bus).
+							if (parent == bus) {
 								child->UpdateNodes();
 								m_disconnectedElement = true;
 							}
 						}
 					}
+					//for (int i = 0; i < (int)m_elementList.size(); i++) {
+					//	Element* child = m_elementList[i];
+					//	for (int j = 0; j < (int)child->GetParentList().size(); j++) {
+					//		Element* parent = child->GetParentList()[j];
+					//		// The child have a parent that is the element.
+					//		if (parent == element) {
+					//			child->UpdateNodes();
+					//			m_disconnectedElement = true;
+					//		}
+					//	}
+					//}
 				}
 			}
 		}
@@ -580,8 +581,8 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
 			if (element->Intersects(m_selectionRect)) {
 				element->SetSelected();
 				// Select the associated text
-				for (Text* text : m_textList) {
-					if (text->GetElement() == element) {
+				for (auto& text : m_textList) {
+					if (text->GetElement() == element.get()) {
 						text->SetSelected();
 						text->SetAltSelectionColour(false);
 						text->SetAllowRotation();
@@ -595,11 +596,10 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
 		else if (m_mode == WorkspaceMode::MODE_MOVE_NODE) {
 			if (element->IsSelected()) {
 				saveCurrentState = true;
-				for (int i = 0; i < (int)m_elementList.size(); i++) {
-					Element* parent = m_elementList[i];
-					if (typeid(*parent) == typeid(Bus)) {
-						if (element->SetNodeParent(parent)) {
-							parent->AddChild(element);
+				for (auto parent : m_elementList) {
+					if (auto bus = dynamic_cast<Bus*>(parent.get())) {
+						if (element->SetNodeParent(bus)) {
+							parent->AddChild(element.get());
 							findNewParent = true;
 							itnp = it;
 							element->ResetNodes();
@@ -627,8 +627,7 @@ void Workspace::OnLeftClickUp(wxMouseEvent& event)
 	}
 
 	// Text element
-	for (auto it = m_textList.begin(); it != m_textList.end(); it++) {
-		Text* text = *it;
+	for (auto& text : m_textList) {
 		if (m_mode == WorkspaceMode::MODE_SELECTION_RECT) {
 			if (text->Intersects(m_selectionRect)) {
 				text->SetSelected();
@@ -678,13 +677,13 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	bool redraw = false;
 	switch (m_mode) {
 	case WorkspaceMode::MODE_INSERT: {
-		Element* newElement = *(m_elementList.end() - 1);  // Get the last element in the list.
+		auto& newElement = m_elementList.back();  // Get the last element in the list.
 		newElement->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
 		redraw = true;
 	} break;
 
 	case WorkspaceMode::MODE_INSERT_TEXT: {
-		Text* newText = *(m_textList.end() - 1);
+		auto& newText = m_textList.back();
 		newText->SetPosition(m_camera->ScreenToWorld(event.GetPosition()));
 		redraw = true;
 	} break;
@@ -699,8 +698,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 	case WorkspaceMode::MODE_EDIT: {
 		bool foundPickbox = false;
-		for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			if (element->IsSelected()) {
 				// Show element pickbox (when it has) if the mouse is over the selected object.
 				if (element->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
@@ -729,8 +727,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	} break;
 
 	case WorkspaceMode::MODE_MOVE_NODE: {
-		for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			if (element->IsSelected()) {
 				element->MoveNode(nullptr, m_camera->ScreenToWorld(event.GetPosition()));
 				redraw = true;
@@ -739,8 +736,7 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	} break;
 
 	case WorkspaceMode::MODE_MOVE_PICKBOX: {
-		for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			if (element->IsSelected()) {
 				element->MovePickbox(m_camera->ScreenToWorld(event.GetPosition()));
 				redraw = true;
@@ -754,20 +750,19 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 	case WorkspaceMode::MODE_MOVE_ELEMENT:
 	case WorkspaceMode::MODE_PASTE: {
 		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			Element* element = *it;
+			auto element = *it;
 			if (element->IsSelected()) {
 				element->Move(m_camera->ScreenToWorld(event.GetPosition()));
 				// Move child nodes
 				std::vector<Element*> childList = element->GetChildList();
 				for (auto it = childList.begin(), itEnd = childList.end(); it != itEnd; ++it) {
-					(*it)->MoveNode(element, m_camera->ScreenToWorld(event.GetPosition()));
+					(*it)->MoveNode(element.get(), m_camera->ScreenToWorld(event.GetPosition()));
 				}
 				redraw = true;
 			}
 		}
 		// Text element motion
-		for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; it++) {
-			Text* text = *it;
+		for (auto& text : m_textList) {
 			if (text->IsSelected()) {
 				text->Move(m_camera->ScreenToWorld(event.GetPosition()));
 				redraw = true;
@@ -898,11 +893,12 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case WXK_ESCAPE:  // Cancel operations.
 		{
 			if (m_mode == WorkspaceMode::MODE_INSERT) {
-				Element* elementToDelete = m_elementList[m_elementList.size() - 1];
+				//Element* elementToDelete = m_elementList[m_elementList.size() - 1];
+				auto elementToDelete = m_elementList.back();
 
 				// Remove child element that has to be deleted (specially buses)
-				for (auto* element : m_elementList) {
-					element->RemoveChild(elementToDelete);
+				for (auto& element : m_elementList) {
+					element->RemoveChild(elementToDelete.get());
 				}
 
 				m_elementList.pop_back();  // Removes the last element being inserted.
@@ -921,7 +917,11 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		} break;
 		case 'A': {
 			if (!insertingElement) {
-				Text* newText = new Text(m_camera->ScreenToWorld(event.GetPosition()), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+				//Text* newText = new Text(m_camera->ScreenToWorld(event.GetPosition()), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+				auto newText = std::make_shared<Text>(
+					m_camera->ScreenToWorld(event.GetPosition()),
+					m_properties->GetGeneralPropertiesData().labelFont,
+					m_properties->GetGeneralPropertiesData().labelFontSize);
 				m_textList.push_back(newText);
 				m_mode = WorkspaceMode::MODE_INSERT_TEXT;
 				m_statusBar->SetStatusText(_("Insert Text: Click to insert, ESC to cancel."));
@@ -941,7 +941,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'B':  // Insert a bus.
 		{
 			if (!insertingElement) {
-				Bus* newBus = new Bus(m_camera->ScreenToWorld(event.GetPosition()),
+				auto newBus = std::make_shared<Bus>(m_camera->ScreenToWorld(event.GetPosition()),
 					wxString::Format(_("Bus %d"), GetElementNumber(ID_BUS)));
 				IncrementElementNumber(ID_BUS);
 				m_elementList.push_back(newBus);
@@ -956,14 +956,14 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'L': {
 			if (!insertingElement) {
 				if (!event.ControlDown() && event.ShiftDown()) {  // Insert a load.
-					Load* newLoad = new Load(wxString::Format(_("Load %d"), GetElementNumber(ID_LOAD)));
+					auto newLoad = std::make_shared<Load>(wxString::Format(_("Load %d"), GetElementNumber(ID_LOAD)));
 					IncrementElementNumber(ID_LOAD);
 					m_elementList.push_back(newLoad);
 					m_mode = WorkspaceMode::MODE_INSERT;
 					m_statusBar->SetStatusText(_("Insert Load: Click on a bus, ESC to cancel."));
 				}
 				else if (!event.ControlDown() && !event.ShiftDown()) {  // Insert a power line.
-					Line* newLine = new Line(wxString::Format(_("Line %d"), GetElementNumber(ID_LINE)));
+					auto newLine = std::make_shared<Line>(wxString::Format(_("Line %d"), GetElementNumber(ID_LINE)));
 					IncrementElementNumber(ID_LINE);
 					m_elementList.push_back(newLine);
 					m_mode = WorkspaceMode::MODE_INSERT;
@@ -979,8 +979,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'T':  // Insert a transformer.
 		{
 			if (!insertingElement) {
-				Transformer* newTransformer =
-					new Transformer(wxString::Format(_("Transformer %d"), GetElementNumber(ID_TRANSFORMER)));
+				auto newTransformer = std::make_shared<Transformer>(wxString::Format(_("Transformer %d"), GetElementNumber(ID_TRANSFORMER)));
 				IncrementElementNumber(ID_TRANSFORMER);
 				m_elementList.push_back(newTransformer);
 				m_mode = WorkspaceMode::MODE_INSERT;
@@ -994,8 +993,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'G':  // Insert a generator.
 		{
 			if (!insertingElement) {
-				SyncGenerator* newGenerator =
-					new SyncGenerator(wxString::Format(_("Generator %d"), GetElementNumber(ID_SYNCGENERATOR)));
+				auto newGenerator = std::make_shared<SyncGenerator>(wxString::Format(_("Generator %d"), GetElementNumber(ID_SYNCGENERATOR)));
 				IncrementElementNumber(ID_SYNCGENERATOR);
 				m_elementList.push_back(newGenerator);
 				m_mode = WorkspaceMode::MODE_INSERT;
@@ -1009,8 +1007,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'I': {
 			if (!insertingElement) {
 				if (event.GetModifiers() == wxMOD_SHIFT) {  // Insert an inductor.
-					Inductor* newInductor =
-						new Inductor(wxString::Format(_("Inductor %d"), GetElementNumber(ID_INDUCTOR)));
+					auto newInductor = std::make_shared<Inductor>(wxString::Format(_("Inductor %d"), GetElementNumber(ID_INDUCTOR)));
 					IncrementElementNumber(ID_INDUCTOR);
 					m_elementList.push_back(newInductor);
 					m_mode = WorkspaceMode::MODE_INSERT;
@@ -1018,8 +1015,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				}
 				else  // Insert an induction motor.
 				{
-					IndMotor* newIndMotor =
-						new IndMotor(wxString::Format(_("Induction motor %d"), GetElementNumber(ID_INDMOTOR)));
+					auto newIndMotor = std::make_shared<IndMotor>(wxString::Format(_("Induction motor %d"), GetElementNumber(ID_INDMOTOR)));
 					IncrementElementNumber(ID_INDMOTOR);
 					m_elementList.push_back(newIndMotor);
 					m_mode = WorkspaceMode::MODE_INSERT;
@@ -1034,8 +1030,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'K':  // Insert a synchronous condenser.
 		{
 			if (!insertingElement) {
-				SyncMotor* newSyncCondenser =
-					new SyncMotor(wxString::Format(_("Synchronous condenser %d"), GetElementNumber(ID_SYNCMOTOR)));
+				auto newSyncCondenser = std::make_shared<SyncMotor>(wxString::Format(_("Synchronous condenser %d"), GetElementNumber(ID_SYNCMOTOR)));
 				IncrementElementNumber(ID_SYNCMOTOR);
 				m_elementList.push_back(newSyncCondenser);
 				m_mode = WorkspaceMode::MODE_INSERT;
@@ -1049,8 +1044,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 		case 'C': {
 			if (!insertingElement) {
 				if (event.GetModifiers() == wxMOD_SHIFT) {  // Insert a capacitor.
-					Capacitor* newCapacitor =
-						new Capacitor(wxString::Format(_("Capacitor %d"), GetElementNumber(ID_CAPACITOR)));
+					auto newCapacitor = std::make_shared<Capacitor>(wxString::Format(_("Capacitor %d"), GetElementNumber(ID_CAPACITOR)));
 					IncrementElementNumber(ID_CAPACITOR);
 					m_elementList.push_back(newCapacitor);
 					m_mode = WorkspaceMode::MODE_INSERT;
@@ -1078,7 +1072,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 
 				}
 				else if (event.GetModifiers() == wxMOD_SHIFT) {  // Insert an harmonic current source.
-					HarmCurrent* newHarmCurrent = new HarmCurrent(
+					auto newHarmCurrent = std::make_shared<HarmCurrent>(
 						wxString::Format(_("Harmonic Current %d"), GetElementNumber(ID_HARMCURRENT)));
 					IncrementElementNumber(ID_HARMCURRENT);
 					m_elementList.push_back(newHarmCurrent);
@@ -1136,7 +1130,7 @@ void Workspace::OnKeyDown(wxKeyEvent& event)
 				if (event.GetModifiers() == wxMOD_SHIFT) {
 
 					if (!insertingElement) {
-						EMTElement* newEMTElement = new EMTElement(wxString::Format(_("Electromagnetic Element %d"), GetElementNumber(ID_EMTELEMENT)));
+						auto newEMTElement = std::make_shared<EMTElement>(wxString::Format(_("Electromagnetic Element %d"), GetElementNumber(ID_EMTELEMENT)));
 						IncrementElementNumber(ID_EMTELEMENT);
 						m_elementList.push_back(newEMTElement);
 						m_mode = WorkspaceMode::MODE_INSERT;
@@ -1209,50 +1203,66 @@ void Workspace::UpdateStatusBar()
 int Workspace::GetElementNumberFromList(Element* element)
 {
 	int elementNum = 0;
-	for (auto* elementFromList : m_elementList) {
+	for (auto& elementFromList : m_elementList) {
 		if (element->GetElementType() == elementFromList->GetElementType()) {
-			if (element == elementFromList) return elementNum;
+			if (element == elementFromList.get()) return elementNum;
 			elementNum++;
 		}
 	}
 	return 0;
 }
 
-void Workspace::GetStateListsCopy(const std::vector<PowerElement*>& elementsList, const std::vector<Text*>& textList, std::vector<PowerElement*>& elementsListCopy, std::vector<Text*>& textListCopy)
+void Workspace::GetStateListsCopy(const std::vector< std::shared_ptr<PowerElement> >& elementsList,
+	const std::vector< std::shared_ptr<Text> >& textList,
+	std::vector< std::shared_ptr<PowerElement> >& elementsListCopy,
+	std::vector< std::shared_ptr<Text> >& textListCopy)
 {
 	// Free copy lists first
-	for (PowerElement*& element : elementsListCopy) delete element;
-	for (Text*& text : textListCopy) delete text;
+	//for (auto& element : elementsListCopy) delete element;
+	//for (auto& text : textListCopy) delete text;
 	elementsListCopy.clear();
 	textListCopy.clear();
 
 	std::map<Element*, Element*> elementMap;
 
-	for (PowerElement* element : elementsList) {
+	for (auto& element : elementsList) {
 		PowerElement* copyElement = static_cast<PowerElement*>(element->GetCopy());
 		elementsListCopy.emplace_back(copyElement);
-		elementMap[element] = copyElement;
+		elementMap[element.get()] = copyElement;
 	}
 	// Correct the parent and child pointers
-	for (PowerElement*& copyElement : elementsListCopy) {
+	for (auto& copyElement : elementsListCopy) {
 		// Parent
 		int i = 0;
 		for (Element* parent : copyElement->GetParentList()) {
-			copyElement->SetParent(elementMap[parent], i);
+			auto it = elementMap.find(parent);
+
+			if (it != elementMap.end())
+				copyElement->SetParent(it->second, i);
+
 			i++;
 		}
 		// Child
 		i = 0;
 		for (Element* child : copyElement->GetChildList()) {
-			copyElement->SetChild(elementMap[child], i);
+			auto it = elementMap.find(child);
+
+			if (it != elementMap.end())
+				copyElement->SetChild(it->second, i);
+
 			i++;
 		}
 	}
 
-	for (Text* text : textList) {
-		Text* copyText = static_cast<Text*>(text->GetCopy());
+	for (const auto& text : textList) {
+		auto copyText = static_cast<Text*>(text->GetCopy());
 		// Set text the correct element associated with the text
-		copyText->SetElement(elementMap[copyText->GetElement()]);
+		auto it = elementMap.find(copyText->GetElement());
+
+		if (it != elementMap.end())
+			copyText->SetElement(it->second);
+		else
+			copyText->SetElement(nullptr);
 		textListCopy.emplace_back(copyText);
 	}
 }
@@ -1276,8 +1286,8 @@ void Workspace::UpdateHeatMap()
 			maxVoltage = m_hmPlane->GetMaxLimit();
 		}
 
-		for (auto* element : m_elementList) {
-			if (Bus* bus = dynamic_cast<Bus*>(element)) {
+		for (auto& element : m_elementList) {
+			if (Bus* bus = dynamic_cast<Bus*>(element.get())) {
 				if (m_hmAutomaticLabel) {
 					const float voltage = std::abs(bus->GetElectricalData().voltage);
 					if (minVoltage > voltage) minVoltage = voltage;
@@ -1347,8 +1357,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 	} break;
 	case ID_ROTATE_CLOCK: {
 		element->Rotate();
-		for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-			Element* iElement = *it;
+		for (auto& iElement : m_elementList) {
 			// Parent's element rotating...
 			for (int i = 0; i < (int)iElement->GetParentList().size(); i++) {
 				Element* parent = iElement->GetParentList()[i];
@@ -1361,8 +1370,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 	} break;
 	case ID_ROTATE_COUNTERCLOCK: {
 		element->Rotate(false);
-		for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-			Element* iElement = *it;
+		for (auto& iElement : m_elementList) {
 			// Parent's element rotating...
 			for (int i = 0; i < (int)iElement->GetParentList().size(); i++) {
 				Element* parent = iElement->GetParentList()[i];
@@ -1374,39 +1382,68 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 		Redraw();
 	} break;
 	case ID_DELETE: {
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			Element* iElement = *it;
+		//for (auto& iElement : m_elementList) {
+		//	if (element == iElement.get()) {
+		//		// Remove child/parent.
+		//		std::vector<Element*> childList = element->GetChildList();
+		//		for (auto& child : childList) {
+		//			if (child) {
+		//				child->RemoveParent(element);
+		//				element->RemoveChild(child);
+		//			}
+		//		}
+		//		std::vector<Element*> parentList = element->GetParentList();
+		//		for (auto& parent : parentList) {
+		//			if (parent) { parent->RemoveChild(element); }
+		//		}
+		//
+		//		//for (auto itt = m_textList.begin(); itt != m_textList.end(); ++itt) {
+		//		//	Text* text = *itt;
+		//		//	if (text->GetElement() == element) {
+		//		//		m_textList.erase(itt--);
+		//		//		if (text) delete text;
+		//		//	}
+		//		//}
+		//		std::erase_if(m_textList, [&](const auto& text) {
+		//			return text->GetElement() == element;
+		//			});
+		//
+		//		std::erase_if(m_elementList, [&](const auto& delElement) {
+		//			return delElement.get() == element;
+		//			});
+		//
+		//		//m_elementList.erase(it);
+		//		//if (element) delete element;
+		//		menu->SetClientData(nullptr);
+		//		break;
+		//	}
+		//}
+		//SaveCurrentState();
 
-			if (element == iElement) {
-				// Remove child/parent.
-				std::vector<Element*> childList = element->GetChildList();
-				for (auto itc = childList.begin(), itEnd = childList.end(); itc != itEnd; ++itc) {
-					Element* child = *itc;
-					if (child) {
-						child->RemoveParent(element);
-						element->RemoveChild(child);
-					}
-				}
-				std::vector<Element*> parentList = element->GetParentList();
-				for (auto itp = parentList.begin(), itEnd = parentList.end(); itp != itEnd; ++itp) {
-					Element* parent = *itp;
-					if (parent) { parent->RemoveChild(element); }
-				}
-
-				for (auto itt = m_textList.begin(); itt != m_textList.end(); ++itt) {
-					Text* text = *itt;
-					if (text->GetElement() == element) {
-						m_textList.erase(itt--);
-						if (text) delete text;
-					}
-				}
-
-				m_elementList.erase(it);
-				if (element) delete element;
-				menu->SetClientData(nullptr);
-				break;
+		// Remove child/parent.
+		std::vector<Element*> childList = element->GetChildList();
+		for (auto child : childList) {
+			if (child) {
+				child->RemoveParent(element);
+				element->RemoveChild(child);
 			}
 		}
+
+		std::vector<Element*> parentList = element->GetParentList();
+		for (auto parent : parentList) {
+			if (parent)
+				parent->RemoveChild(element);
+		}
+
+		std::erase_if(m_textList, [&](const auto& text) {
+			return text->GetElement() == element;
+			});
+
+		std::erase_if(m_elementList, [&](const auto& delElement) {
+			return delElement.get() == element;
+			});
+
+		menu->SetClientData(nullptr);
 		SaveCurrentState();
 	} break;
 	default:
@@ -1426,8 +1463,7 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 void Workspace::RotateSelectedElements(bool clockwise)
 {
 	bool saveCurrrentState = false;
-	for (auto it = m_elementList.begin(); it != m_elementList.end(); ++it) {
-		Element* element = *it;
+	for (auto& element : m_elementList) {
 		// Parent's element rotating...
 		for (int i = 0; i < (int)element->GetParentList().size(); i++) {
 			Element* parent = element->GetParentList()[i];
@@ -1448,8 +1484,7 @@ void Workspace::RotateSelectedElements(bool clockwise)
 	}
 
 	// Rotate text element
-	for (auto it = m_textList.begin(); it != m_textList.end(); it++) {
-		Text* text = *it;
+	for (auto& text : m_textList) {
 		if (text->IsSelected()) {
 			saveCurrrentState = true;
 			text->Rotate(clockwise);
@@ -1470,7 +1505,7 @@ void Workspace::DeleteSelectedElements()
 {
 	// Don't set the end of the list at the loop's begin.
 	for (auto it = m_elementList.begin(); it != m_elementList.end();) {
-		Element* element = *it;
+		Element* element = it->get();
 
 		if (element->IsSelected()) {
 			// Remove child/parent.
@@ -1488,35 +1523,41 @@ void Workspace::DeleteSelectedElements()
 				if (parent) { parent->RemoveChild(element); }
 			}
 
-			for (auto itt = m_textList.begin(); itt != m_textList.end(); ++itt) {
-				Text* text = *itt;
-				if (text->GetElement() == element) {
-					if (m_textList.size() == 1) {
-						m_textList.erase(itt);
-						break;
-					}
-					else  m_textList.erase(itt--);
-					if (text) delete text;
-				}
-			}
+			//for (auto& text : m_textList) {
+			//	if (text->GetElement() == element) {
+			//		if (m_textList.size() == 1) {
+			//			m_textList.erase(itt);
+			//			break;
+			//		}
+			//		else  m_textList.erase(itt--);
+			//		if (text) delete text;
+			//	}
+			//}
+			std::erase_if(m_textList, [&](const auto& text) {
+				return text->GetElement() == element;
+				});
 
 			it = m_elementList.erase(it);
-			if (element) delete element;
+			//if (element) delete element;
 		}
 		else it++;
 	}
 
-	for (auto it = m_textList.begin(); it != m_textList.end(); ++it) {
-		Text* text = *it;
-		if (text->IsSelected()) {
-			if (m_textList.size() == 1) {
-				m_textList.erase(it);
-				break;
-			}
-			else  m_textList.erase(it--);
-			if (text) delete text;
-		}
-	}
+	//for (auto it = m_textList.begin(); it != m_textList.end(); ++it) {
+	//	Text* text = *it;
+	//	if (text->IsSelected()) {
+	//		if (m_textList.size() == 1) {
+	//			m_textList.erase(it);
+	//			break;
+	//		}
+	//		else  m_textList.erase(it--);
+	//		if (text) delete text;
+	//	}
+	//}
+	std::erase_if(m_textList, [](const auto& text) {
+		return text->IsSelected();
+		});
+
 	if (m_hmPlane && m_showHM) {
 		m_hmPlane->Clear();
 		m_showHMTimer = true;
@@ -1552,7 +1593,7 @@ void Workspace::Fit()
 	wxPoint2DDouble leftUpCorner(0, 0);
 	wxPoint2DDouble rightDownCorner(0, 0);
 	std::vector<Element*> elementList = GetElementList();
-	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) { elementList.push_back(*it); }
+	for (const auto& text : m_textList) { elementList.push_back(text.get()); }
 
 	if (!GetElementsCorners(leftUpCorner, rightDownCorner, elementList)) return;
 	wxPoint2DDouble middleCoords = (leftUpCorner + rightDownCorner) / 2.0;
@@ -1585,17 +1626,19 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	switch (textID) {
 	case ID_TXT_NAME: {
 		if (FindTextElement(parentElement, DATA_NAME)) return false; // Avoid inserting more than one text element of the same type for an element.
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		//Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(40, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_NAME);
 		newText->SetElementTypeText(parentElement->GetElementType());
 		newText->SetElementNumber(GetElementNumberFromList(parentElement));
 
-		m_textList.emplace_back(newText);
+		m_textList.push_back(newText);
 	} break;
 	case ID_TXT_VOLTAGE: {
 		if (FindTextElement(parentElement, DATA_VOLTAGE)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		//Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(40, 15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_VOLTAGE);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1610,7 +1653,8 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_ANGLE: {
 		if (FindTextElement(parentElement, DATA_ANGLE)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		//Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(40, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(40, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_ANGLE);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1625,7 +1669,8 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_FAULTCURRENT: {
 		if (FindTextElement(parentElement, DATA_SC_CURRENT)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		//Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(-70, 30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_SC_CURRENT);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1640,7 +1685,8 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_FAULTVOLTAGE: {
 		if (FindTextElement(parentElement, DATA_SC_VOLTAGE)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 75), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		//Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-70, 75), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(-70, 75), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_SC_VOLTAGE);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1655,7 +1701,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_SCC: {
 		if (FindTextElement(parentElement, DATA_SC_POWER)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-50, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(-50, -30), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_SC_POWER);
 		newText->SetUnit(ElectricalUnit::UNIT_MVA);
@@ -1671,7 +1717,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_THD: {
 		if (FindTextElement(parentElement, DATA_PQ_THD)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(-50, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(-50, -15), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_PQ_THD);
 		newText->SetDecimalPlaces(precision);
@@ -1682,7 +1728,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_ACTIVE_POWER: {
 		if (FindTextElement(parentElement, DATA_ACTIVE_POWER)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(0, 35), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(0, 35), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_ACTIVE_POWER);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1697,7 +1743,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	} break;
 	case ID_TXT_REACTIVE_POWER: {
 		if (FindTextElement(parentElement, DATA_REACTIVE_POWER)) return false;
-		Text* newText = new Text(parentElement->GetPosition() + wxPoint2DDouble(0, 50), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(parentElement->GetPosition() + wxPoint2DDouble(0, 50), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_REACTIVE_POWER);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1719,7 +1765,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		else
 			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
 
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_PF_ACTIVE);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1743,7 +1789,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		else
 			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
 
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_PF_REACTIVE);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1761,7 +1807,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 	case ID_TXT_BRANCH_LOSSES: {
 		if (FindTextElement(parentElement, DATA_PF_LOSSES)) return false;
 		wxPoint2DDouble position = wxPoint2DDouble(0, 35) + (parentElement->GetPointList()[0] + parentElement->GetPointList()[parentElement->GetPointList().size() - 1]) / 2.0;
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_PF_LOSSES);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1783,7 +1829,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		else
 			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
 
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_PF_CURRENT);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1807,7 +1853,7 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 		else
 			position += 2.0 * parentElement->GetPointList()[parentElement->GetPointList().size() - 2] - parentElement->GetPointList()[parentElement->GetPointList().size() - 1];
 
-		Text* newText = new Text(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
+		auto newText = std::make_shared<Text>(position, m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		newText->SetElement(parentElement);
 		newText->SetDataType(DATA_SC_CURRENT);
 		if (unit == ElectricalUnit::UNIT_NONE)
@@ -1831,11 +1877,20 @@ bool Workspace::InsertTextElement(int textID, Element* parentElement, Electrical
 
 Element* Workspace::FindTextElement(Element* parentElement, int dataType)
 {
-	for (auto* text : m_textList) {
+	for (auto& text : m_textList) {
 		if (text->GetElement() == parentElement && text->GetDataType() == dataType)
-			return text;
+			return text.get();
 	}
 	return nullptr;
+}
+
+void Workspace::RemoveAllTextElements()
+{
+	//for (auto* text : m_textList) {
+	//	if (text) delete text;
+	//}
+	m_textList.clear();
+	SaveCurrentState();
 }
 
 void Workspace::CheckSlackBusDuplication(Element* newSlackBus)
@@ -1844,9 +1899,10 @@ void Workspace::CheckSlackBusDuplication(Element* newSlackBus)
 	if (newBus) {
 		if (!newBus->GetElectricalData().slackBus) return; // If the new bus is not set as slack bus, no need to check for duplication.
 
-		for (auto* element : m_elementList) {
-			Bus* bus = dynamic_cast<Bus*>(element);
-			if (bus && bus->GetElectricalData().slackBus && bus != newSlackBus) {
+		for (auto& element : m_elementList) {
+			Bus* bus = dynamic_cast<Bus*>(element.get());
+			if (!bus) continue;
+			if (bus->GetElectricalData().slackBus && bus != newSlackBus) {
 				wxMessageDialog msgDialog(this,
 					wxString::Format(_("The system already has %s as the slack bus.\nDo you want to set %s as the new slack bus?"), bus->GetElectricalData().name, newBus->GetElectricalData().name),
 					_("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
@@ -1873,12 +1929,12 @@ void Workspace::ValidateBusesVoltages(Element* initialBus)
 	ElectricalUnit nominalVoltageUnit = static_cast<Bus*>(initialBus)->GetElectricalData().nominalVoltageUnit;
 
 	for (auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
-		Element* child = *it;
+		Element* child = it->get();
 
-		if (typeid(*child) == typeid(Line)) {
-			if (child->GetParentList()[0] && child->GetParentList()[1]) {
-				BusElectricalData data1 = static_cast<Bus*>(child->GetParentList()[0])->GetElectricalData();
-				BusElectricalData data2 = static_cast<Bus*>(child->GetParentList()[1])->GetElectricalData();
+		if (auto line = dynamic_cast<Line*>(child)) {
+			if (line->GetParentList()[0] && line->GetParentList()[1]) {
+				BusElectricalData data1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData();
+				BusElectricalData data2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData();
 
 				if (data1.nominalVoltage != data2.nominalVoltage ||
 					data1.nominalVoltageUnit != data2.nominalVoltageUnit) {
@@ -1887,8 +1943,8 @@ void Workspace::ValidateBusesVoltages(Element* initialBus)
 					data1.nominalVoltageUnit = nominalVoltageUnit;
 					data2.nominalVoltageUnit = nominalVoltageUnit;
 
-					static_cast<Bus*>(child->GetParentList()[0])->SetElectricalData(data1);
-					static_cast<Bus*>(child->GetParentList()[1])->SetElectricalData(data2);
+					static_cast<Bus*>(line->GetParentList()[0])->SetElectricalData(data1);
+					static_cast<Bus*>(line->GetParentList()[1])->SetElectricalData(data2);
 
 					it = m_elementList.begin();  // Restart search.
 				}
@@ -1901,9 +1957,7 @@ void Workspace::ValidateBusesVoltages(Element* initialBus)
 
 void Workspace::ValidateElementsVoltages()
 {
-	for (auto it = m_elementList.begin(); it != m_elementList.end(); it++) {
-		PowerElement* child = *it;
-
+	for (auto& child : m_elementList) {
 		std::vector<double> nominalVoltage;
 		std::vector<ElectricalUnit> nominalVoltageUnit;
 		for (int i = 0; i < (int)child->GetParentList().size(); i++) {
@@ -1935,9 +1989,8 @@ bool Workspace::RunPowerFlow(bool resetVoltages, bool showBusyInfo)
 		basePower *= 1e3;
 
 	// Update EMTElements
-	for (auto* element : m_elementList) {
-		if (typeid(*element) == typeid(EMTElement)) {
-			EMTElement* emtElement = static_cast<EMTElement*>(element);
+	for (auto& element : m_elementList) {
+		if (auto emtElement = dynamic_cast<EMTElement*>(element.get())) {
 			if (emtElement->IsOnline()) {
 				emtElement->UpdateData(m_properties, true);
 			}
@@ -2023,8 +2076,7 @@ bool Workspace::UpdateTextElements()
 		basePower *= 1e3;
 	else if (m_properties->GetSimulationPropertiesData().basePowerUnit == ElectricalUnit::UNIT_MVA)
 		basePower *= 1e6;
-	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
-		Text* text = *it;
+	for (auto& text : m_textList) {
 		text->SetFontName(m_properties->GetGeneralPropertiesData().labelFont);
 		text->SetFontSize(m_properties->GetGeneralPropertiesData().labelFontSize);
 		text->UpdateText(basePower);
@@ -2039,20 +2091,17 @@ void Workspace::CopySelection()
 	std::vector<Element*> selectedElements;
 	// The buses need to be numerated to associate the child's parents to the copies.
 	int busNumber = 0;
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-		Element* element = *it;
-		if (typeid(*element) == typeid(Bus)) {
-			Bus* bus = static_cast<Bus*>(element);
+	for (auto& element : m_elementList) {
+		if (auto bus = dynamic_cast<Bus*>(element.get())) {
 			auto data = bus->GetElectricalData();
 			data.number = busNumber;
 			bus->SetElectricalData(data);
 			busNumber++;
 		}
-		if (element->IsSelected()) { selectedElements.push_back(element); }
+		if (element->IsSelected()) { selectedElements.push_back(element.get()); }
 	}
-	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
-		Text* text = *it;
-		if (text->IsSelected()) { selectedElements.push_back(text); }
+	for (auto& text : m_textList) {
+		if (text->IsSelected()) { selectedElements.push_back(text.get()); }
 	}
 	ElementDataObject* dataObject = new ElementDataObject(selectedElements);
 	if (wxTheClipboard->Open()) {
@@ -2094,7 +2143,7 @@ bool Workspace::Paste()
 			if (copy) {
 				pastedElements.push_back(copy);
 				pastedBusList.push_back(static_cast<Bus*>(copy));
-				m_elementList.push_back(static_cast<PowerElement*>(copy));
+				m_elementList.emplace_back(static_cast<PowerElement*>(copy));
 			}
 		}
 
@@ -2107,25 +2156,25 @@ bool Workspace::Paste()
 				if (Text* text = dynamic_cast<Text*>(copy)) {
 					// Check if element associated with the text exists.
 					bool elementExist = false;
-					for (int i = 0; i < (int)m_elementList.size(); i++) {
-						if (text->GetElement() == m_elementList[i]) {
+					for (auto& element : m_elementList) {
+						if (text->GetElement() == element.get()) {
 							elementExist = true;
 							break;
 						}
 					}
 					if (elementExist) {
 						pastedElements.push_back(copy);
-						m_textList.push_back(text);
+						m_textList.emplace_back(text);
 					}
 				}
 				else {
 					// Change the parent if copied, otherwise remove it.
-					for (unsigned int j = 0; j < copy->GetParentList().size(); j++) {
+					for (size_t j = 0; j < copy->GetParentList().size(); j++) {
 						Bus* currentParent = static_cast<Bus*>(copy->GetParentList()[j]);
 						if (currentParent) {
 							int parentID = currentParent->GetID();
 							bool parentCopied = false;
-							for (int k = 0; k < (int)pastedBusList.size(); k++) {
+							for (size_t k = 0; k < pastedBusList.size(); k++) {
 								Bus* newParent = pastedBusList[k];
 								if (parentID == newParent->GetID()) {
 									parentCopied = true;
@@ -2138,7 +2187,7 @@ bool Workspace::Paste()
 					}
 
 					pastedElements.push_back(copy);
-					m_elementList.push_back(static_cast<PowerElement*>(copy));
+					m_elementList.emplace_back(static_cast<PowerElement*>(copy));
 				}
 			}
 		}
@@ -2196,45 +2245,47 @@ bool Workspace::Paste()
 void Workspace::SaveCurrentState()
 {
 	// Setup current state
-	std::vector<PowerElement*> currentStateElementList;
-	std::vector<Text*> currentStateTextList;
+	std::vector< std::shared_ptr<PowerElement> > currentStateElementList;
+	std::vector< std::shared_ptr<Text> > currentStateTextList;
 
 	GetStateListsCopy(m_elementList, m_textList, currentStateElementList, currentStateTextList);
 
 	// Delete all states after the current one
-	auto itE = m_elementListState.begin();
-	std::advance(itE, m_currenteState + 1);
-	for (; itE != m_elementListState.end(); ++itE) {
-		auto& elementList = *itE;
-		for (auto& element : elementList) delete element;
-		elementList.clear();
-	}
+	//auto itE = m_elementListState.begin();
+	//std::advance(itE, m_currenteState + 1);
+	//for (; itE != m_elementListState.end(); ++itE) {
+	//	auto& elementList = *itE;
+	//	for (auto& element : elementList) delete element;
+	//	elementList.clear();
+	//}
 	m_elementListState.resize(m_currenteState + 1);
 
-	auto itT = m_textListState.begin();
-	std::advance(itT, m_currenteState + 1);
-	for (; itT != m_textListState.end(); ++itT) {
-		auto& textList = *itT;
-		for (auto& text : textList) delete text;
-		textList.clear();
-	}
+	//auto itT = m_textListState.begin();
+	//std::advance(itT, m_currenteState + 1);
+	//for (; itT != m_textListState.end(); ++itT) {
+	//	auto& textList = *itT;
+	//	for (auto& text : textList) delete text;
+	//	textList.clear();
+	//}
 	m_textListState.resize(m_currenteState + 1);
 
 	m_currenteState++;
 	if (m_currenteState >= m_maxStates) {
 		m_currenteState = m_maxStates - 1;
 		// Erase the first sate on the list
-		auto itE = m_elementListState.begin();
-		auto itT = m_textListState.begin();
-		auto& elementList = *itE;
-		auto& textList = *itT;
-		for (auto& element : elementList) delete element;
-		elementList.clear();
-		for (auto& text : textList) delete text;
-		textList.clear();
-
-		m_elementListState.erase(itE);
-		m_textListState.erase(itT);
+		//auto itE = m_elementListState.begin();
+		////auto itT = m_textListState.begin();
+		//auto& elementList = *itE;
+		////auto& textList = *itT;
+		//for (auto& element : elementList) delete element;
+		//elementList.clear();
+		////for (auto& text : textList) delete text;
+		////textList.clear();
+		//
+		//m_elementListState.erase(itE);
+		//m_textListState.erase(itT);
+		m_elementListState.erase(m_elementListState.begin());
+		m_textListState.erase(m_textListState.begin());
 	}
 
 	m_elementListState.emplace_back(currentStateElementList);
@@ -2245,15 +2296,15 @@ void Workspace::SaveCurrentState()
 	wxString pointerStr;
 	pointerStr.Printf("[%d S saved s%d] ", m_currenteState, m_elementListState.size());
 	msg += pointerStr;
-	for (Element* element : currentStateElementList) {
-		pointerStr.Printf("%p ", element);
+	for (auto& element : currentStateElementList) {
+		pointerStr.Printf("%p ", element.get());
 		msg += pointerStr;
 	}
 	msg += "\n";
 	pointerStr.Printf("[%d S curr s%d] ", m_currenteState, m_elementListState.size());
 	msg += pointerStr;
-	for (Element* element : m_elementList) {
-		pointerStr.Printf("%p ", element);
+	for (auto& element : m_elementList) {
+		pointerStr.Printf("%p ", element.get());
 		msg += pointerStr;
 	}
 	msg += "\n";
@@ -2264,7 +2315,9 @@ void Workspace::SaveCurrentState()
 void Workspace::SetNextState()
 {
 	m_currenteState++;
-	if ((m_currenteState < m_elementListState.size()) && (m_currenteState < m_textListState.size())) {
+	if (m_currenteState >= 0 &&
+		static_cast<size_t>(m_currenteState) < m_elementListState.size() &&
+		static_cast<size_t>(m_currenteState) < m_textListState.size()) {
 		//m_elementList = m_elementListState[m_currenteState];
 		//m_textList = m_textListState[m_currenteState];
 		GetStateListsCopy(m_elementListState[m_currenteState], m_textListState[m_currenteState], m_elementList, m_textList);
@@ -2332,12 +2385,10 @@ void Workspace::SetPreviousState()
 
 void Workspace::UnselectAll()
 {
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; it++) {
-		Element* element = *it;
+	for (auto& element : m_elementList) {
 		element->SetSelected(false);
 	}
-	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; it++) {
-		Text* text = *it;
+	for (auto& text : m_textList) {
 		text->SetSelected(false);
 	}
 }
@@ -2354,13 +2405,11 @@ void Workspace::EnableHeatMap(const bool& enable)
 void Workspace::UpdateElementsID()
 {
 	int id = 0;
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-		Element* element = *it;
+	for (auto& element : m_elementList) {
 		element->SetID(id);
 		id++;
 	}
-	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
-		Text* text = *it;
+	for (auto& text : m_textList) {
 		text->SetID(id);
 		id++;
 	}
@@ -2372,8 +2421,7 @@ void Workspace::OnTimer(wxTimerEvent& event)
 		m_tipWindow = nullptr;
 	}
 	if (m_mode == WorkspaceMode::MODE_EDIT) {
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			Element* element = *it;
+		for (auto& element : m_elementList) {
 			if (element->Contains(m_camera->GetMousePosition())) {
 				wxString tipText = element->GetTipText();
 				if (!tipText.IsEmpty()) {
@@ -2389,10 +2437,11 @@ void Workspace::OnTimer(wxTimerEvent& event)
 	m_timer->Stop();
 }
 
-void Workspace::SetTextList(std::vector<Text*> textList)
+void Workspace::SetTextList(const std::vector< std::shared_ptr<Text> >& textList)
 {
-	m_textList.clear();
-	for (auto it = textList.begin(), itEnd = textList.end(); it != itEnd; ++it) m_textList.push_back(*it);
+	//m_textList.clear();
+	//for (auto it = textList.begin(), itEnd = textList.end(); it != itEnd; ++it) m_textList.push_back(*it);
+	m_textList = std::move(textList);
 
 	UpdateTextElements();
 }
@@ -2411,7 +2460,7 @@ void Workspace::SetElementList(std::vector<Element*> elementList)
 {
 	m_elementList.clear();
 	for (auto it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it)
-		m_elementList.push_back(static_cast<PowerElement*>(*it));
+		m_elementList.emplace_back(static_cast<PowerElement*>(*it));
 }
 
 void Workspace::OnIdle(wxIdleEvent& event)
@@ -2437,7 +2486,7 @@ void Workspace::OnIdle(wxIdleEvent& event)
 	*/
 	if (m_justOpened) {
 		m_justOpened = false;
-		float limits[2] = { 1.05, 0.95 };
+		double limits[2] = { 1.05, 0.95 };
 		m_hmPlane = new HMPlane(m_width, m_height, limits);
 
 		Redraw();
@@ -2448,8 +2497,8 @@ std::vector<Element*> Workspace::GetAllElements() const
 {
 	std::vector<Element*> allElements;
 
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) allElements.push_back(*it);
-	for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) allElements.push_back(*it);
+	for (auto& element : m_elementList) allElements.push_back(element.get());
+	for (auto& text : m_textList) allElements.push_back(text.get());
 
 	return allElements;
 }
@@ -2479,7 +2528,7 @@ bool Workspace::RunFault()
 std::vector<Element*> Workspace::GetElementList() const
 {
 	std::vector<Element*> elementList;
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) elementList.push_back(*it);
+	for (auto& element : m_elementList) elementList.push_back(element.get());
 	return elementList;
 }
 
@@ -2530,8 +2579,7 @@ bool Workspace::RunStability()
 		_("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
 	if (msgDialog.ShowModal() == wxID_YES) {
 		std::vector<ElementPlotData> plotDataList;
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			PowerElement* element = *it;
+		for (auto& element : m_elementList) {
 			ElementPlotData plotData;
 			if (element->GetPlotData(plotData)) plotDataList.push_back(plotData);
 		}
@@ -2602,9 +2650,8 @@ bool Workspace::RunHarmonicDistortion(bool runPowerFlowBefore)
 	}
 
 	bool hasEMTElement = false;
-	for (auto* element : m_elementList) {
-		if (typeid(*element) == typeid(EMTElement)) {
-			EMTElement* emtElement = static_cast<EMTElement*>(element);
+	for (auto& element : m_elementList) {
+		if (auto emtElement = dynamic_cast<EMTElement*>(element.get())) {
 			if (emtElement->IsOnline()) hasEMTElement = true;
 		}
 	}
@@ -2668,8 +2715,8 @@ bool Workspace::RunFrequencyResponse()
 {
 	// Get bus list
 	std::vector<Bus*> busList;
-	for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-		if (Bus* bus = dynamic_cast<Bus*>(*it)) { busList.push_back(bus); }
+	for (auto& element : m_elementList) {
+		if (Bus* bus = dynamic_cast<Bus*>(element.get())) { busList.push_back(bus); }
 	}
 
 	auto data = m_properties->GetFreqRespData();
@@ -2701,8 +2748,7 @@ bool Workspace::RunFrequencyResponse()
 		_("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
 	if (msgDialog.ShowModal() == wxID_YES) {
 		std::vector<ElementPlotData> plotDataList;
-		for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-			PowerElement* element = *it;
+		for (auto& element :  m_elementList) {
 			ElementPlotData plotData;
 			if (element->GetPlotData(plotData, PlotStudy::FREQRESPONSE)) plotDataList.push_back(plotData);
 		}

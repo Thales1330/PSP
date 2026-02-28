@@ -201,29 +201,45 @@ void SyncGenerator::SetNominalVoltage(std::vector<double> nominalVoltage,
 
 Element* SyncGenerator::GetCopy()
 {
-	SyncGenerator* copy = new SyncGenerator();
-	*copy = *this;
+	auto copy = new SyncGenerator(*this);
+
 	auto data = copy->GetElectricalData();
 
-	// Copy AVR
-	std::vector<ConnectionLine*> cLineList;
-	std::vector<ControlElement*> elementList;
-	m_electricalData.avr->GetContainerCopy(elementList, cLineList);
+	// AVR
+	if (m_electricalData.avr)
+	{
+		std::vector<std::shared_ptr<ConnectionLine>> cLineList;
+		std::vector<std::shared_ptr<ControlElement>> elementList;
 
-	ControlElementContainer* avrCopy = new ControlElementContainer();
-	avrCopy->FillContainer(elementList, cLineList);
-	data.avr = avrCopy;
+		m_electricalData.avr->GetContainerCopy(elementList, cLineList);
 
-	// Copy Speed Governor
-	cLineList.clear();
-	elementList.clear();
-	m_electricalData.speedGov->GetContainerCopy(elementList, cLineList);
+		auto avrCopy = new ControlElementContainer();
+		avrCopy->FillContainer(elementList, cLineList);
 
-	ControlElementContainer* speedGovCopy = new ControlElementContainer();
-	speedGovCopy->FillContainer(elementList, cLineList);
-	data.speedGov = speedGovCopy;
+		data.avr = avrCopy;
+	}
+	else
+		data.avr = nullptr;
+
+
+	// Speed governor
+	if (m_electricalData.speedGov)
+	{
+		std::vector<std::shared_ptr<ConnectionLine>> cLineList;
+		std::vector<std::shared_ptr<ControlElement>> elementList;
+
+		m_electricalData.speedGov->GetContainerCopy(elementList, cLineList);
+
+		auto speedGovCopy = new ControlElementContainer();
+		speedGovCopy->FillContainer(elementList, cLineList);
+
+		data.speedGov = speedGovCopy;
+	}
+	else
+		data.speedGov = nullptr;
 
 	copy->SetElectricalData(data);
+
 	return copy;
 }
 

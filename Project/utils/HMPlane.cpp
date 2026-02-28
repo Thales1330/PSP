@@ -1,4 +1,4 @@
-#include "HMPlane.h"
+﻿#include "HMPlane.h"
 
 //#include "Renderer.h"
 
@@ -43,7 +43,7 @@
 //	CreateLabel();
 //}
 
-HMPlane::HMPlane(const float& width, const float& height, const float limits[2]) : m_width(width), m_height(height)
+HMPlane::HMPlane(const double& width, const double& height, const double limits[2]) : m_width(width), m_height(height)
 {
 	// Fill mesh coords
 	for (auto accHeight = 0; accHeight <= m_height + m_meshSize; accHeight += m_meshSize) {
@@ -437,7 +437,7 @@ void HMPlane::DrawLabelDC(wxDC& dc) const
 	dc.DrawText(voltageText, 30 - textWidth / 2, m_height - 65);
 }
 
-void HMPlane::SetLabelLimits(const float& min, const float& max)
+void HMPlane::SetLabelLimits(const double& min, const double& max)
 {
 	m_limits[0] = max;
 	m_limits[1] = min;
@@ -449,7 +449,7 @@ void HMPlane::SetLabelLimits(const float& min, const float& max)
 	//}
 }
 
-void HMPlane::SetRectSlope(const wxRect2DDouble& rect, const float& angle, const float& depth)
+void HMPlane::SetRectSlope(const wxRect2DDouble& rect, const double& angle, const double& depth)
 {
 	for (const auto& line : m_coords) {
 		for (auto* coord : line) {
@@ -475,7 +475,7 @@ void HMPlane::SetRectSlope(const wxRect2DDouble& rect, const float& angle, const
 	//SmoothPlane();
 }
 
-void HMPlane::Resize(const float& width, const float& height)
+void HMPlane::Resize(const double& width, const double& height)
 {
 	//Clear();
 	m_width = width;
@@ -519,7 +519,7 @@ void HMPlane::Resize(const float& width, const float& height)
 	m_isClear = false;
 }
 
-void HMPlane::ResizeDC(const float& width, const float& height)
+void HMPlane::ResizeDC(const double& width, const double& height)
 {
 	m_width = width;
 	m_height = height;
@@ -605,14 +605,14 @@ void HMPlane::SmoothPlane(const unsigned int& iterations)
 	  {1.0f / 256.0f, 4.0f / 256.0f, 6 / 256.0f, 4.0f / 256, 1.0f / 256.0f}
 	};
 
-	for (unsigned int it = 0; it < iterations; ++it) {
-		for (int i = 0; i < m_meshTickY; ++i) {
-			for (int j = 0; j < m_meshTickX; ++j) {
+	for (size_t it = 0; it < iterations; ++it) {
+		for (size_t i = 0; i < m_meshTickY; ++i) {
+			for (size_t j = 0; j < m_meshTickX; ++j) {
 				// Get the 24 neighbors and smooth z
 				float value = 0.0f;
 
-				for (int ii = i - 2; ii <= i + 2; ++ii) {
-					for (int jj = j - 2; jj <= j + 2; ++jj) {
+				for (size_t ii = i - 2; ii <= i + 2; ++ii) {
+					for (size_t jj = j - 2; jj <= j + 2; ++jj) {
 
 						if (ii >= 0 && ii < m_meshTickY && jj >= 0 && jj < m_meshTickX) {
 							value += tmpCoords[ii][jj].z * gaussianKernel[ii - i + 2][jj - j + 2];
@@ -623,8 +623,8 @@ void HMPlane::SmoothPlane(const unsigned int& iterations)
 			}
 		}
 		if (it < iterations - 1) {
-			for (int i = 0; i < m_meshTickY; ++i) {
-				for (int j = 0; j < m_meshTickX; ++j) {
+			for (size_t i = 0; i < m_meshTickY; ++i) {
+				for (size_t j = 0; j < m_meshTickX; ++j) {
 					tmpCoords[i][j].z = m_coords[i][j]->z;
 				}
 			}

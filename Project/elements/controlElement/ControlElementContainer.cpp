@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -29,58 +29,58 @@ ControlElementContainer::ControlElementContainer()
 }
 ControlElementContainer::~ControlElementContainer()
 {
-	for (auto* cElement : m_cLineList) delete cElement;
-	for (auto* cElement : m_constantList) delete cElement;
-	for (auto* cElement : m_exponentialList) delete cElement;
-	for (auto* cElement : m_gainList) delete cElement;
-	for (auto* cElement : m_ioControlList) delete cElement;
-	for (auto* cElement : m_limiterList) delete cElement;
-	for (auto* cElement : m_multiplierList) delete cElement;
-	for (auto* cElement : m_rateLimiterList) delete cElement;
-	for (auto* cElement : m_sumList) delete cElement;
-	for (auto* cElement : m_tfList) delete cElement;
-	for (auto* cElement : m_dividerList) delete cElement;
-	for (auto* cElement : m_mathExprList) delete cElement;
-	ClearContainer();
+	//for (auto* cElement : m_cLineList) delete cElement;
+	//for (auto* cElement : m_constantList) delete cElement;
+	//for (auto* cElement : m_exponentialList) delete cElement;
+	//for (auto* cElement : m_gainList) delete cElement;
+	//for (auto* cElement : m_ioControlList) delete cElement;
+	//for (auto* cElement : m_limiterList) delete cElement;
+	//for (auto* cElement : m_multiplierList) delete cElement;
+	//for (auto* cElement : m_rateLimiterList) delete cElement;
+	//for (auto* cElement : m_sumList) delete cElement;
+	//for (auto* cElement : m_tfList) delete cElement;
+	//for (auto* cElement : m_dividerList) delete cElement;
+	//for (auto* cElement : m_mathExprList) delete cElement;
+	//ClearContainer();
 }
 void ControlElementContainer::FillContainer(ControlEditor* editor)
 {
 	ClearContainer();
 	m_ctrlElementsList = editor->GetControlElementList();
 	m_cLineList = editor->GetConnectionLineList();
-	auto cElementList = editor->GetControlElementList();
-	for (auto it = cElementList.begin(), itEnd = cElementList.end(); it != itEnd; ++it) {
-		if (Constant* constant = dynamic_cast<Constant*>(*it)) {
+
+	for (auto& cElement : m_ctrlElementsList) {
+		if (Constant* constant = dynamic_cast<Constant*>(cElement.get())) {
 			m_constantList.push_back(constant);
 		}
-		else if (Exponential* exponential = dynamic_cast<Exponential*>(*it)) {
+		else if (Exponential* exponential = dynamic_cast<Exponential*>(cElement.get())) {
 			m_exponentialList.push_back(exponential);
 		}
-		else if (Gain* gain = dynamic_cast<Gain*>(*it)) {
+		else if (Gain* gain = dynamic_cast<Gain*>(cElement.get())) {
 			m_gainList.push_back(gain);
 		}
-		else if (IOControl* ioControl = dynamic_cast<IOControl*>(*it)) {
+		else if (IOControl* ioControl = dynamic_cast<IOControl*>(cElement.get())) {
 			m_ioControlList.push_back(ioControl);
 		}
-		else if (Limiter* limiter = dynamic_cast<Limiter*>(*it)) {
+		else if (Limiter* limiter = dynamic_cast<Limiter*>(cElement.get())) {
 			m_limiterList.push_back(limiter);
 		}
-		else if (Multiplier* multiplier = dynamic_cast<Multiplier*>(*it)) {
+		else if (Multiplier* multiplier = dynamic_cast<Multiplier*>(cElement.get())) {
 			m_multiplierList.push_back(multiplier);
 		}
-		else if (RateLimiter* rateLimiter = dynamic_cast<RateLimiter*>(*it)) {
+		else if (RateLimiter* rateLimiter = dynamic_cast<RateLimiter*>(cElement.get())) {
 			m_rateLimiterList.push_back(rateLimiter);
 		}
-		else if (Sum* sum = dynamic_cast<Sum*>(*it)) {
+		else if (Sum* sum = dynamic_cast<Sum*>(cElement.get())) {
 			m_sumList.push_back(sum);
 		}
-		else if (TransferFunction* tf = dynamic_cast<TransferFunction*>(*it)) {
+		else if (TransferFunction* tf = dynamic_cast<TransferFunction*>(cElement.get())) {
 			m_tfList.push_back(tf);
 		}
-		else if (Divider* divider = dynamic_cast<Divider*>(*it)) {
+		else if (Divider* divider = dynamic_cast<Divider*>(cElement.get())) {
 			m_dividerList.push_back(divider);
 		}
-		else if (MathExpression* mathExpr = dynamic_cast<MathExpression*>(*it)) {
+		else if (MathExpression* mathExpr = dynamic_cast<MathExpression*>(cElement.get())) {
 			m_mathExprList.push_back(mathExpr);
 		}
 	}
@@ -102,52 +102,52 @@ void ControlElementContainer::ClearContainer()
 	m_mathExprList.clear();
 }
 
-void ControlElementContainer::FillContainer(std::vector<ControlElement*> controlElementList,
-	std::vector<ConnectionLine*> connectionLineList)
+void ControlElementContainer::FillContainer(std::vector< std::shared_ptr<ControlElement> > controlElementList,
+	std::vector< std::shared_ptr<ConnectionLine> > connectionLineList)
 {
 	ClearContainer();
 	m_ctrlElementsList = controlElementList;
 	m_cLineList = connectionLineList;
 
 	for (auto it = controlElementList.begin(), itEnd = controlElementList.end(); it != itEnd; ++it) {
-		if (Constant* constant = dynamic_cast<Constant*>(*it)) {
+		if (Constant* constant = dynamic_cast<Constant*>(it->get())) {
 			m_constantList.push_back(constant);
 		}
-		else if (Exponential* exponential = dynamic_cast<Exponential*>(*it)) {
+		else if (Exponential* exponential = dynamic_cast<Exponential*>(it->get())) {
 			m_exponentialList.push_back(exponential);
 		}
-		else if (Gain* gain = dynamic_cast<Gain*>(*it)) {
+		else if (Gain* gain = dynamic_cast<Gain*>(it->get())) {
 			m_gainList.push_back(gain);
 		}
-		else if (IOControl* ioControl = dynamic_cast<IOControl*>(*it)) {
+		else if (IOControl* ioControl = dynamic_cast<IOControl*>(it->get())) {
 			m_ioControlList.push_back(ioControl);
 		}
-		else if (Limiter* limiter = dynamic_cast<Limiter*>(*it)) {
+		else if (Limiter* limiter = dynamic_cast<Limiter*>(it->get())) {
 			m_limiterList.push_back(limiter);
 		}
-		else if (Multiplier* multiplier = dynamic_cast<Multiplier*>(*it)) {
+		else if (Multiplier* multiplier = dynamic_cast<Multiplier*>(it->get())) {
 			m_multiplierList.push_back(multiplier);
 		}
-		else if (RateLimiter* rateLimiter = dynamic_cast<RateLimiter*>(*it)) {
+		else if (RateLimiter* rateLimiter = dynamic_cast<RateLimiter*>(it->get())) {
 			m_rateLimiterList.push_back(rateLimiter);
 		}
-		else if (Sum* sum = dynamic_cast<Sum*>(*it)) {
+		else if (Sum* sum = dynamic_cast<Sum*>(it->get())) {
 			m_sumList.push_back(sum);
 		}
-		else if (TransferFunction* tf = dynamic_cast<TransferFunction*>(*it)) {
+		else if (TransferFunction* tf = dynamic_cast<TransferFunction*>(it->get())) {
 			m_tfList.push_back(tf);
 		}
-		else if (Divider* divider = dynamic_cast<Divider*>(*it)) {
+		else if (Divider* divider = dynamic_cast<Divider*>(it->get())) {
 			m_dividerList.push_back(divider);
 		}
-		else if (MathExpression* mathExpr = dynamic_cast<MathExpression*>(*it)) {
+		else if (MathExpression* mathExpr = dynamic_cast<MathExpression*>(it->get())) {
 			m_mathExprList.push_back(mathExpr);
 		}
 	}
 }
 
-void ControlElementContainer::GetContainerCopy(std::vector<ControlElement*>& controlElementList,
-	std::vector<ConnectionLine*>& connectionLineList)
+void ControlElementContainer::GetContainerCopy(std::vector< std::shared_ptr<ControlElement> >& controlElementList,
+	std::vector< std::shared_ptr<ConnectionLine> >& connectionLineList)
 {
 	controlElementList.clear();
 	connectionLineList.clear();
@@ -156,18 +156,18 @@ void ControlElementContainer::GetContainerCopy(std::vector<ControlElement*>& con
 	std::map<Element*, Element*> cElementMap;
 
 	// Copy connection lines
-	for (ControlElement* cLine : m_cLineList) {
+	for (auto& cLine : m_cLineList) {
 		ConnectionLine* copyLine = static_cast<ConnectionLine*>(cLine->GetCopy());
-		connectionLineList.push_back(copyLine);
-		cLineMap[cLine] = copyLine;
+		connectionLineList.emplace_back(copyLine);
+		cLineMap[cLine.get()] = copyLine;
 	}
 
 	// Copy elements (exept connection line).
 	std::map<Node*, Node*> nodeMap;
-	for (ControlElement* cElement : m_ctrlElementsList) {
+	for (auto& cElement : m_ctrlElementsList) {
 		ControlElement* copyElement = static_cast<ControlElement*>(cElement->GetCopy());
-		cElementMap[cElement] = copyElement;
-		controlElementList.push_back(copyElement);
+		cElementMap[cElement.get()] = copyElement;
+		controlElementList.emplace_back(copyElement);
 		// Copy nodes.
 		std::vector<Node*> nodeListCopy;
 		for (Node* node : copyElement->GetNodeList()) {
@@ -179,29 +179,42 @@ void ControlElementContainer::GetContainerCopy(std::vector<ControlElement*>& con
 	}
 
 	// Correct the parent and child pointers
-	for (ControlElement*& copyElement : controlElementList) {
+	for (auto& copyElement : controlElementList) {
 		// Child
 		for (Element* child : copyElement->GetChildList()) {
-			copyElement->ReplaceChild(child, cLineMap[child]);
+			auto it = cLineMap.find(child);
+			if (it != cLineMap.end())
+				copyElement->ReplaceChild(child, it->second);
 		}
 	}
-	for (ConnectionLine* copyLine : connectionLineList) {
+	for (auto& copyLine : connectionLineList) {
 		// Nodes
 		for (Node* node : copyLine->GetNodeList()) {
-			copyLine->ReplaceNode(node, nodeMap[node]);
+			auto it = nodeMap.find(node);
+			if (it != nodeMap.end())
+				copyLine->ReplaceNode(node, it->second);
 		}
 
 		// Parent element
 		for (Element* parent : copyLine->GetParentList()) {
-			copyLine->ReplaceParent(parent, cElementMap[parent]);
+			auto it = cElementMap.find(parent);
+			if (it != cElementMap.end())
+				copyLine->ReplaceParent(parent, it->second);
 		}
 		// Parent cLine
 		Element* parentLine = static_cast<Element*>(copyLine->GetParentLine());
-		copyLine->SetParentLine(static_cast<ConnectionLine*>(cLineMap[parentLine]));
+		auto it = cLineMap.find(parentLine);
+		if (it != cLineMap.end())
+			copyLine->SetParentLine(static_cast<ConnectionLine*>(it->second));
+		else
+			copyLine->SetParentLine(nullptr);
 
 		// Childs
 		for (Element* child : copyLine->GetChildList()) {
-			copyLine->ReplaceChild(child, cLineMap[child]);
+			auto it = cLineMap.find(child);
+
+			if (it != cLineMap.end())
+				copyLine->ReplaceChild(child, it->second);
 		}
 	}
 

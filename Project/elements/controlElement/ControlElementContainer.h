@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -46,44 +46,45 @@ class ControlElement;
  */
 class ControlElementContainer
 {
-   public:
-    ControlElementContainer();
-    ~ControlElementContainer();
+public:
+	ControlElementContainer();
+	~ControlElementContainer();
 
-    virtual void FillContainer(ControlEditor* editor);
-    virtual void FillContainer(std::vector<ControlElement*> controlElementList,
-                               std::vector<ConnectionLine*> connectionLineList);
-    virtual void GetContainerCopy(std::vector<ControlElement*>& controlElementList,
-                                  std::vector<ConnectionLine*>& connectionLineList);
-    virtual void ClearContainer();
+	virtual void FillContainer(ControlEditor* editor);
+	virtual void FillContainer(std::vector< std::shared_ptr<ControlElement> > controlElementList,
+		std::vector< std::shared_ptr<ConnectionLine> > connectionLineList);
+	virtual void GetContainerCopy(std::vector< std::shared_ptr<ControlElement> >& controlElementList,
+		std::vector< std::shared_ptr<ConnectionLine> >& connectionLineList);
+	virtual void ClearContainer();
 
-    std::vector<ControlElement*> GetControlElementsList() const { return m_ctrlElementsList; }
-    std::vector<ConnectionLine*> GetConnectionLineList() const { return m_cLineList; }
-    std::vector<Constant*> GetConstantList() const { return m_constantList; }
-    std::vector<Exponential*> GetExponentialList() const { return m_exponentialList; }
-    std::vector<Gain*> GetGainList() const { return m_gainList; }
-    std::vector<IOControl*> GetIOControlList() const { return m_ioControlList; }
-    std::vector<Limiter*> GetLimiterList() const { return m_limiterList; }
-    std::vector<Multiplier*> GetMultiplierList() const { return m_multiplierList; }
-    std::vector<RateLimiter*> GetRateLimiterList() const { return m_rateLimiterList; }
-    std::vector<Sum*> GetSumList() const { return m_sumList; }
-    std::vector<TransferFunction*> GetTFList() const { return m_tfList; }
-    std::vector<Divider*> GetDividerList() const { return m_dividerList; }
-    std::vector<MathExpression*> GetMathExprList() const { return m_mathExprList; }
-   protected:
-    std::vector<ControlElement*> m_ctrlElementsList;
-    std::vector<Constant*> m_constantList;
-    std::vector<ConnectionLine*> m_cLineList;
-    std::vector<Exponential*> m_exponentialList;
-    std::vector<Gain*> m_gainList;
-    std::vector<IOControl*> m_ioControlList;
-    std::vector<Limiter*> m_limiterList;
-    std::vector<Multiplier*> m_multiplierList;
-    std::vector<RateLimiter*> m_rateLimiterList;
-    std::vector<Sum*> m_sumList;
-    std::vector<TransferFunction*> m_tfList;
-    std::vector<Divider*> m_dividerList;
-    std::vector<MathExpression*> m_mathExprList;
+	std::vector< std::shared_ptr<ControlElement> > GetControlElementsList() const { return m_ctrlElementsList; }
+	std::vector< std::shared_ptr<ConnectionLine> > GetConnectionLineList() const { return m_cLineList; }
+	std::vector<Constant*> GetConstantList() const { return m_constantList; }
+	std::vector<Exponential*> GetExponentialList() const { return m_exponentialList; }
+	std::vector<Gain*> GetGainList() const { return m_gainList; }
+	std::vector<IOControl*> GetIOControlList() const { return m_ioControlList; }
+	std::vector<Limiter*> GetLimiterList() const { return m_limiterList; }
+	std::vector<Multiplier*> GetMultiplierList() const { return m_multiplierList; }
+	std::vector<RateLimiter*> GetRateLimiterList() const { return m_rateLimiterList; }
+	std::vector<Sum*> GetSumList() const { return m_sumList; }
+	std::vector<TransferFunction*> GetTFList() const { return m_tfList; }
+	std::vector<Divider*> GetDividerList() const { return m_dividerList; }
+	std::vector<MathExpression*> GetMathExprList() const { return m_mathExprList; }
+protected:
+	std::vector< std::shared_ptr<ControlElement> > m_ctrlElementsList;
+	std::vector< std::shared_ptr<ConnectionLine> > m_cLineList;
+
+	std::vector<Constant*> m_constantList;
+	std::vector<Exponential*> m_exponentialList;
+	std::vector<Gain*> m_gainList;
+	std::vector<IOControl*> m_ioControlList;
+	std::vector<Limiter*> m_limiterList;
+	std::vector<Multiplier*> m_multiplierList;
+	std::vector<RateLimiter*> m_rateLimiterList;
+	std::vector<Sum*> m_sumList;
+	std::vector<TransferFunction*> m_tfList;
+	std::vector<Divider*> m_dividerList;
+	std::vector<MathExpression*> m_mathExprList;
 };
 
 #endif  // CONTROLELEMENTCONTAINER_H
