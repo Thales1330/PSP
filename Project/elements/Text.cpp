@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -121,13 +121,15 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 
 			GCText* gcText = new GCText(currentLine);
 			wxFont font = wxFont(m_fontSize,
-				wxFONTFAMILY_UNKNOWN,
+				wxFONTFAMILY_DEFAULT,
 				wxFONTSTYLE_NORMAL,
 				wxFONTWEIGHT_NORMAL,
 				false,
 				m_fontName);
 			gcText->SetFont(font);
 			m_gcTextList.push_back(gcText);
+
+			gc->SetFont(font, *wxBLACK);
 
 			double w, h;
 			gc->GetTextExtent(currentLine, &w, &h);
@@ -900,7 +902,7 @@ void Text::UpdateText(double systemPowerBase)
 	} break;
 	case TYPE_SYNC_MOTOR: {
 		SyncMotor* syncMotor = static_cast<SyncMotor*>(m_element);
-		
+
 		if (syncMotor) {
 			SyncMotorElectricalData data = syncMotor->GetPUElectricalData(systemPowerBase);
 			bool busParentOnline = false;

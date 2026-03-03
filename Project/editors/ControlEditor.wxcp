@@ -2791,7 +2791,7 @@
 																}, {
 																	"type":	"multi-string",
 																	"m_label":	"Tooltip:",
-																	"m_value":	"Type of aplied input"
+																	"m_value":	"Type of applied input"
 																}, {
 																	"type":	"colour",
 																	"m_label":	"Bg Colour:",

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -76,6 +76,7 @@ class TransferFunction : public ControlElement
      * @return true if the calculation converges, false otherwise.
      */
     virtual bool Solve(double* input, double timeStep);
+    virtual void GetTFString(wxString& numerator, wxString& denominator);
     
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode);
@@ -85,7 +86,6 @@ class TransferFunction : public ControlElement
    protected:
     virtual void SetText(wxString numerator, wxString denominator);
     virtual wxString GetSuperscriptNumber(int number);
-    virtual void GetTFString(wxString& numerator, wxString& denominator);
 
     wchar_t m_supNumber[10];
 

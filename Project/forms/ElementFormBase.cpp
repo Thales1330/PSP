@@ -4504,7 +4504,7 @@ EMTElementFormBase::EMTElementFormBase(wxWindow* parent, wxWindowID id, const wx
     
     boxSizerLvl5_4136->Add(m_textCtrlHarmThreshold, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticTextPercFund = new wxStaticText(m_panelEMTHarmonics, wxID_ANY, _("% of fundamental"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTHarmonics, wxSize(-1,-1)), 0);
+    m_staticTextPercFund = new wxStaticText(m_panelEMTHarmonics, wxID_ANY, _("%% of fundamental"), wxDefaultPosition, wxDLG_UNIT(m_panelEMTHarmonics, wxSize(-1,-1)), 0);
     
     boxSizerLvl5_4136->Add(m_staticTextPercFund, 0, wxALL, WXC_FROM_DIP(5));
     

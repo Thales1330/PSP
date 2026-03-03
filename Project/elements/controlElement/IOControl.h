@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -80,6 +80,7 @@ public:
 	virtual void SetSimTestData(const SimTestData& simTestData) { m_simTestData = simTestData; }
 	virtual double GetTestValue() const { return m_testValue; }
 	virtual void SetTestValue(const double& testValue) { m_testValue = testValue; }
+	virtual bool Initialize();
 
 	virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
 	virtual bool OpenElement(rapidxml::xml_node<>* elementNode);

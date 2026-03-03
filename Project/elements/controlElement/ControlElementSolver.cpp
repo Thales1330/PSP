@@ -264,7 +264,10 @@ void ControlElementSolver::SolveNextStep()
 	}
 
 	ConnectionLine* currentLine = firstConn;
-	while (currentLine) { currentLine = SolveNextElement(currentLine); }
+	while (currentLine) {
+		currentLine = SolveNextElement(currentLine);
+		if (!m_isOK) return;
+	}
 
 	bool haveUnsolvedElement = true;
 	while (haveUnsolvedElement) {
@@ -279,7 +282,10 @@ void ControlElementSolver::SolveNextStep()
 						haveUnsolvedElement = true;
 						// Solve secondary branch.
 						currentLine = cLine.get();
-						while (currentLine) { currentLine = SolveNextElement(currentLine); }
+						while (currentLine) {
+							currentLine = SolveNextElement(currentLine);
+							if (!m_isOK) return;
+						}
 						break;
 					}
 				}
@@ -329,9 +335,23 @@ ConnectionLine* ControlElementSolver::SolveNextElement(ConnectionLine* currentLi
 		// Solve the unsolved parent.
 		if (!element->IsSolved()) {
 			m_inputToSolve[0] = currentLine->GetValue();
+			if (!std::isfinite(m_inputToSolve[0])) {
+				m_inputToSolve[0] = 0.0;
+				m_isOK = false;
+				m_failMessage = _("The control system solution is diverging. Try to reduce the time step.");
+				return nullptr;
+			}
 			m_inputToSolve[1] = m_currentTime;
 			m_inputToSolve[2] = m_switchStatus;
-			if (!element->Solve(m_inputToSolve, m_timeStep)) return nullptr;
+			if (!element->Solve(m_inputToSolve, m_timeStep)) {
+				m_isOK = false;
+				if(auto tf = dynamic_cast<TransferFunction*>(element)) {
+					wxString numerator, denominator;
+					tf->GetTFString(numerator, denominator);
+					m_failMessage = wxString::Format(_("Unable to compute the transfer function: (%s)/(%s)"), numerator, denominator);
+				}
+				return nullptr;
+			}
 			element->SetSolved();
 
 			// Get the output node (must have one or will result nullptr).

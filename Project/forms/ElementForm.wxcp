@@ -48479,7 +48479,7 @@
 																		}, {
 																			"type":	"multi-string",
 																			"m_label":	"Label:",
-																			"m_value":	"% of fundamental"
+																			"m_value":	"%% of fundamental"
 																		}, {
 																			"type":	"string",
 																			"m_label":	"Wrap:",

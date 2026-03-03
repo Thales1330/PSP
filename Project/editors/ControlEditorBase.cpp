@@ -299,7 +299,7 @@ ControlSystemTestBase::ControlSystemTestBase(wxWindow* parent, wxWindowID id, co
     m_pgMgrArr.Add(_("Ramp"));
     m_pgMgrArr.Add(_("Quadratic"));
     m_pgPropInputType = m_pgMgr->Append(  new wxEnumProperty( _("Input type"), wxPG_LABEL, m_pgMgrArr, m_pgMgrIntArr, 0) );
-    m_pgPropInputType->SetHelpString(_("Type of aplied input"));
+    m_pgPropInputType->SetHelpString(_("Type of applied input"));
     m_pgPropInputType->SetEditor( wxT("Choice") );
     m_pgMgr->SetMinSize(wxSize(-1,250));
     

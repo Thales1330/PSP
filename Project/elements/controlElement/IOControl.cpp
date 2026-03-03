@@ -399,3 +399,13 @@ bool IOControl::OpenElement(rapidxml::xml_node<>* elementNode)
 
 	return true;
 }
+
+bool IOControl::Initialize()
+{
+	m_solved = false;
+	m_output = 0.0;
+	if(m_value == IOControl::IN_TEST) {
+		m_output = m_testValue;
+	}
+	return true;
+}

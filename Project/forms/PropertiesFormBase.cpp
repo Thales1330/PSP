@@ -1636,7 +1636,7 @@ LabelManagerBase::LabelManagerBase(wxWindow* parent, wxWindowID id, const wxStri
     m_radioBoxPowerArr.Add(_("VA"));
     m_radioBoxPowerArr.Add(_("kVA"));
     m_radioBoxPowerArr.Add(_("MVA"));
-    m_radioBoxPower = new wxRadioBox(this, wxID_ANY, _("Power (aparent, active and reactive)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_radioBoxPowerArr, 1, wxRA_SPECIFY_ROWS);
+    m_radioBoxPower = new wxRadioBox(this, wxID_ANY, _("Power (apparent, active and reactive)"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_radioBoxPowerArr, 1, wxRA_SPECIFY_ROWS);
     m_radioBoxPower->SetSelection(3);
     
     staticBoxSizer1251->Add(m_radioBoxPower, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));

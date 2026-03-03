@@ -257,9 +257,6 @@ protected:
 
 	// Modern OpenGL
 	HMPlane* m_hmPlane = nullptr;
-	Shader* m_basicShader = nullptr;
-	Shader* m_hmLabelShader = nullptr;
-	Renderer* m_renderer = nullptr;
 
 	//glm::mat4 m_projMatrix;
 

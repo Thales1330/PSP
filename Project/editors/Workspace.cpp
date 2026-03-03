@@ -274,7 +274,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 		if (!m_elementList.empty()) {
 			// Get the last element inserted on the list.
-			auto& newElement = m_elementList.back();
+			newElement = m_elementList.back().get();
 			for (auto& element : m_elementList) {
 				// Clicked in any element.
 				if (element->Contains(clickPointWorld)) {
@@ -298,7 +298,7 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 			// The line element can have an undefined number of points.
 			if (!foundElement) {
-				if (auto line = dynamic_cast<Line*>(newElement.get())) { line->AddPoint(clickPointWorld); }
+				if (auto line = dynamic_cast<Line*>(newElement)) { line->AddPoint(clickPointWorld); }
 			}
 			foundElement = true;
 			unselectAll = false;

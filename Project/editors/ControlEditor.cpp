@@ -896,6 +896,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 		wxProgressDialog pbd(_("Test"), _("Initializing..."), 100, this,
 			wxPD_APP_MODAL | wxPD_AUTO_HIDE | wxPD_CAN_ABORT | wxPD_SMOOTH);
 		ControlElementSolver solver(this, m_timeStep, 1e-5);
+		solver.InitializeValues(false);
 		if (solver.IsOK()) {
 			bool simStopped = false;
 			double currentTime = 0.0;
@@ -926,36 +927,15 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 					}
 				}
 
-
-				//double input = 0.0;
-				//if (currentTime >= m_startTime) {
-				//	switch (m_inputType) {
-				//	case 0: {
-				//		input = m_slope;
-				//	} break;
-				//	case 1: {
-				//		input = m_slope * (currentTime - m_startTime);
-				//	} break;
-				//	case 2: {
-				//		input = m_slope * std::pow(currentTime - m_startTime, 2);
-				//	} break;
-				//	default: {
-				//		input = 0.0;
-				//		break;
-				//	}
-				//	}
-				//}
-
-				// solver.SolveNextStep(input);
 				solver.SetCurrentTime(currentTime);
-				//solver.SetInitialTerminalVoltage(input);
-				//solver.SetActivePower(input);
-				//solver.SetInitialMecPower(input);
-				//solver.SetInitialVelocity(input);
-				//solver.SetReactivePower(input);
-				//solver.SetTerminalVoltage(input);
-				//solver.SetVelocity(input);
 				solver.SolveNextStep();
+				if (!solver.IsOK()) {
+					wxMessageDialog msgDialog(this, _("Failed to solve the control system.\n" + solver.GetErrorMessage()), _("Error"),
+						wxOK | wxCENTRE | wxICON_ERROR);
+					msgDialog.ShowModal();
+					simStopped = true;
+					currentTime = m_simTime;
+				}
 
 				if (printTime >= printStep) {
 					time.push_back(currentTime);
@@ -1013,7 +993,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 			}
 		}
 		else {
-			wxMessageDialog msgDialog(this, _("It was not possible to solve the control system"), _("Error"),
+			wxMessageDialog msgDialog(this, _("Failed to solve the control system.\n" + solver.GetErrorMessage()), _("Error"),
 				wxOK | wxCENTRE | wxICON_ERROR);
 			msgDialog.ShowModal();
 		}

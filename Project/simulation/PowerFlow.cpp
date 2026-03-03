@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -288,12 +288,12 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 		double iterationError = GaussSeidel(busType, voltage, oldVoltage, power, accFactor);
 
 		if (HasInvalidValue(voltage)) {
-			m_errorMsg = _("The power flow solution have invalid voltage values.");
+			m_errorMsg = _("The power flow solution has invalid voltage values.");
 			ResetVoltages();
 			return false;
 		}
 		if (HasInvalidValue(power)) {
-			m_errorMsg = _("The power flow solution have invalid power values.");
+			m_errorMsg = _("The power flow solution has invalid power values.");
 			ResetVoltages();
 			return false;
 		}
@@ -432,12 +432,12 @@ bool PowerFlow::RunNewtonRaphson(double systemPowerBase,
 		NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);
 
 		if (HasInvalidValue(voltage)) {
-			m_errorMsg = _("The power flow solution have invalid voltage values.");
+			m_errorMsg = _("The power flow solution has invalid voltage values.");
 			ResetVoltages();
 			return false;
 		}
 		if (HasInvalidValue(power)) {
-			m_errorMsg = _("The power flow solution have invalid power values.");
+			m_errorMsg = _("The power flow solution has invalid power values.");
 			ResetVoltages();
 			return false;
 		}

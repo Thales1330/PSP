@@ -72,7 +72,7 @@ void GCText::SetText(wxString text)
 		//m_font.SetFaceName(wxT("CMU Serif"));
 		//m_font.SetPointSize(m_fontSize);
 		m_font = wxFont(m_fontSize,
-			wxFONTFAMILY_UNKNOWN,
+			wxFONTFAMILY_DEFAULT,
 			wxFONTSTYLE_NORMAL,
 			wxFONTWEIGHT_NORMAL,
 			false,

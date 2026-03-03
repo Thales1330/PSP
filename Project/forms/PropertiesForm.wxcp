@@ -18663,7 +18663,7 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Label:",
-													"m_value":	"Power (aparent, active and reactive)"
+													"m_value":	"Power (apparent, active and reactive)"
 												}, {
 													"type":	"multi-string",
 													"m_label":	"Choices:",
