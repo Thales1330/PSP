@@ -4,10 +4,52 @@
         <title>PSP-UFU Blog</title>
         <link>https://thales1330.github.io/PSP/blog</link>
         <description>PSP-UFU Blog</description>
-        <lastBuildDate>Wed, 19 Jun 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 07 Mar 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[2026w10a-beta]]></title>
+            <link>https://thales1330.github.io/PSP/blog/2026/03/07/2026w10a</link>
+            <guid>https://thales1330.github.io/PSP/blog/2026/03/07/2026w10a</guid>
+            <pubDate>Sat, 07 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[🔥 Major Changes]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-major-changes">🔥 Major Changes<a href="https://thales1330.github.io/PSP/blog/2026/03/07/2026w10a#-major-changes" class="hash-link" aria-label="Direct link to 🔥 Major Changes" title="Direct link to 🔥 Major Changes" translate="no">​</a></h2>
+<ul>
+<li class="">Removed legacy dependencies and improved internal architecture;</li>
+<li class="">Added <strong>Label Manager</strong> for diagram label management;</li>
+<li class="">Added <strong>snapshot tools</strong> for control system analysis;</li>
+<li class="">Major improvements in <strong>Data Report</strong>, including precision control, font selection, CSV export and clipboard copy;</li>
+<li class="">Initial implementation of <strong>EMT (Electromagnetic Transient) elements</strong>;</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-new-features-and-improvements">✔️ New Features and Improvements<a href="https://thales1330.github.io/PSP/blog/2026/03/07/2026w10a#%EF%B8%8F-new-features-and-improvements" class="hash-link" aria-label="Direct link to ✔️ New Features and Improvements" title="Direct link to ✔️ New Features and Improvements" translate="no">​</a></h2>
+<ul>
+<li class="">Added <strong>Ctrl+S shortcut</strong> to save the workspace;</li>
+<li class="">Added <strong>sample control files and data assets</strong>;</li>
+<li class="">Improved <strong>power flow robustness</strong>;</li>
+<li class="">Improved <strong>control solver initialization and stability</strong>;</li>
+<li class="">Migrated editor memory management from <strong>raw pointers to <code>shared_ptr</code></strong>;</li>
+<li class="">Improved <strong>Control Editor interface and usability</strong>;</li>
+<li class="">Prevented creation of <strong>duplicate labels and multiple slack buses</strong>;</li>
+<li class="">Improved cross-platform build system using <strong>CMake</strong>;</li>
+<li class="">Added <strong>CI workflows for Linux and Windows builds</strong>;</li>
+<li class="">Added <strong>ccache support</strong> to accelerate builds;</li>
+<li class="">Updated documentation with <strong>complete English translation</strong>;</li>
+<li class="">Updated project website and documentation (<strong>Docusaurus updates</strong>);</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes">🐛 Bug Fixes<a href="https://thales1330.github.io/PSP/blog/2026/03/07/2026w10a#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
+<ul>
+<li class="">Fixed a major bug in <strong>Jacobian matrix construction</strong>;</li>
+<li class="">Fixed several issues in <strong>dynamic control systems</strong>;</li>
+<li class="">Fixed <strong>ChartDirector linking issues on Linux builds</strong>;</li>
+<li class="">Various minor UI and stability fixes.</li>
+</ul>
+]]></content:encoded>
+            <author>thaleslima.ufu@gmail.com (Thales Lima Oliveira)</author>
+            <category>psp-ufu</category>
+        </item>
         <item>
             <title><![CDATA[2024w25a-beta]]></title>
             <link>https://thales1330.github.io/PSP/blog/2024/06/19/2024w25a-beta</link>
