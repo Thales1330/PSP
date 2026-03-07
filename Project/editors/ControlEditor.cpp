@@ -931,7 +931,7 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 				solver.SolveNextStep();
 				if (!solver.IsOK()) {
 					wxString msg = wxString::Format(_("Failed to solve the control system.\n%s"), solver.GetErrorMessage());
-					wxMessageDialog msgDialog(this,	msg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
+					wxMessageDialog msgDialog(this, msg, _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
 					msgDialog.ShowModal();
 					simStopped = true;
 					currentTime = m_simTime;
@@ -993,8 +993,13 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 			}
 		}
 		else {
-			wxMessageDialog msgDialog(this, _("Failed to solve the control system.\n" + solver.GetErrorMessage()), _("Error"),
-				wxOK | wxCENTRE | wxICON_ERROR);
+			wxMessageDialog msgDialog(
+				this,
+				wxString::Format(_("Failed to solve the control system.\n%s"), solver.GetErrorMessage()),
+				_("Error"),
+				wxOK | wxCENTRE | wxICON_ERROR
+			);
+
 			msgDialog.ShowModal();
 		}
 

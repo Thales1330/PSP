@@ -14,9 +14,9 @@
         <updated>2024-06-19T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Added the support for Chart Director;]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>🔥 Added the support for <a href="https://www.advsofteng.com/index.html" target="_blank" rel="noopener noreferrer">Chart Director</a>;</li>
-<li>✔️ Fixed the necessity to run PSP-UFU in admin mode to change language;</li>
-<li>🐛 Minor bugfixes.</li>
+<li class="">🔥 Added the support for <a href="https://www.advsofteng.com/index.html" target="_blank" rel="noopener noreferrer" class="">Chart Director</a>;</li>
+<li class="">✔️ Fixed the necessity to run PSP-UFU in admin mode to change language;</li>
+<li class="">🐛 Minor bugfixes.</li>
 </ul>
 ]]></content>
         <author>
@@ -33,15 +33,15 @@
         <updated>2024-06-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Removed the OpenGL dependency and related errors;]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>🔥 Removed the OpenGL dependency and related errors;</li>
-<li>🔥 Added undo and redo feature (finally!);</li>
-<li>✔️ Voltage map upgraded due to OpenGL dependency removal;</li>
-<li>✔️ New feature to add a new text element via context menu;</li>
-<li>✔️ Selection and move elements improved;</li>
-<li>✔️ Code documentation updated (<a href="https://thales1330.github.io/PSP/doxygen/html/index.html" target="_blank" rel="noopener noreferrer">check here</a>);</li>
-<li>🐛 Fixed a massive memory leak when using Synchronous Generator controls;</li>
-<li>🐛 Fixed simulation problems related to disconnected buses;</li>
-<li>🐛 Minor bugfixes.</li>
+<li class="">🔥 Removed the OpenGL dependency and related errors;</li>
+<li class="">🔥 Added undo and redo feature (finally!);</li>
+<li class="">✔️ Voltage map upgraded due to OpenGL dependency removal;</li>
+<li class="">✔️ New feature to add a new text element via context menu;</li>
+<li class="">✔️ Selection and move elements improved;</li>
+<li class="">✔️ Code documentation updated (<a href="https://thales1330.github.io/PSP/doxygen/html/index.html" target="_blank" rel="noopener noreferrer" class="">check here</a>);</li>
+<li class="">🐛 Fixed a massive memory leak when using Synchronous Generator controls;</li>
+<li class="">🐛 Fixed simulation problems related to disconnected buses;</li>
+<li class="">🐛 Minor bugfixes.</li>
 </ul>
 ]]></content>
         <author>
@@ -58,11 +58,11 @@
         <updated>2023-09-29T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Added harmonic voltages and currents calculation;]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>🔥 Added harmonic voltages and currents calculation;</li>
-<li>✔️ Added harmonic results in data form;</li>
-<li>🐛 Fix program close suddenly on delete bus;</li>
-<li>🐛 Fix problems related to disconnected buses;</li>
-<li>🐛 Minor bugfixes.</li>
+<li class="">🔥 Added harmonic voltages and currents calculation;</li>
+<li class="">✔️ Added harmonic results in data form;</li>
+<li class="">🐛 Fix program close suddenly on delete bus;</li>
+<li class="">🐛 Fix problems related to disconnected buses;</li>
+<li class="">🐛 Minor bugfixes.</li>
 </ul>
 ]]></content>
         <author>
@@ -79,10 +79,10 @@
         <updated>2020-08-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on GitHub or Twitter);]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on <a href="https://github.com/Thales1330/PSP/issues" target="_blank" rel="noopener noreferrer">GitHub</a> or <a href="https://twitter.com/PspUfu" target="_blank" rel="noopener noreferrer">Twitter</a>);</li>
-<li>✔️ New fancy <a href="https://thales1330.github.io/PSP/" target="_blank" rel="noopener noreferrer">PSP-UFU website</a> and <a href="https://thales1330.github.io/PSP/blog" target="_blank" rel="noopener noreferrer">changelog</a> using <a href="https://v2.docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a>;</li>
-<li>✔️ Text element performance improved for OpenGL render;</li>
-<li>🐛 Several major and minor bug fixes.</li>
+<li class="">🔥 PSP-UFU online user guide finally written (only in Brazilian Portuguese, if you want to help me translate this guide, contact-me on <a href="https://github.com/Thales1330/PSP/issues" target="_blank" rel="noopener noreferrer" class="">GitHub</a> or <a href="https://twitter.com/PspUfu" target="_blank" rel="noopener noreferrer" class="">Twitter</a>);</li>
+<li class="">✔️ New fancy <a href="https://thales1330.github.io/PSP/" target="_blank" rel="noopener noreferrer" class="">PSP-UFU website</a> and <a href="https://thales1330.github.io/PSP/blog" target="_blank" rel="noopener noreferrer" class="">changelog</a> using <a href="https://v2.docusaurus.io/" target="_blank" rel="noopener noreferrer" class="">docusaurus</a>;</li>
+<li class="">✔️ Text element performance improved for OpenGL render;</li>
+<li class="">🐛 Several major and minor bug fixes.</li>
 </ul>
 ]]></content>
         <author>
@@ -99,8 +99,8 @@
         <updated>2020-07-09T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Voltage heatmap implemented (OpenGL enabled);]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>🔥 Voltage heatmap implemented (OpenGL enabled);</li>
-<li>🐛 Several major and minor bugfixes.</li>
+<li class="">🔥 Voltage heatmap implemented (OpenGL enabled);</li>
+<li class="">🐛 Several major and minor bugfixes.</li>
 </ul>
 ]]></content>
         <author>
@@ -117,9 +117,9 @@
         <updated>2020-06-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- ✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);</li>
-<li>✔️ Added Visual Studio solution to the GitHub project;</li>
-<li>🐛 Several major and minor bugfixes.</li>
+<li class="">✔️ Device context render implemented (to avoid use OpenGL - some machines can't use it properly);</li>
+<li class="">✔️ Added Visual Studio solution to the GitHub project;</li>
+<li class="">🐛 Several major and minor bugfixes.</li>
 </ul>
 ]]></content>
         <author>
@@ -136,8 +136,8 @@
         <updated>2019-11-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- ✔️ Minor changes to 32bit MSW version for compatibility;]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>✔️ Minor changes to 32bit MSW version for compatibility;</li>
-<li>✔️ Travis CI (Continuous Integration) implemented (Linux).</li>
+<li class="">✔️ Minor changes to 32bit MSW version for compatibility;</li>
+<li class="">✔️ Travis CI (Continuous Integration) implemented (Linux).</li>
 </ul>
 ]]></content>
         <author>
@@ -154,10 +154,10 @@
         <updated>2019-10-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[- 🔥 Harmonic study implemented;]]></summary>
         <content type="html"><![CDATA[<ul>
-<li>🔥 Harmonic study implemented;</li>
-<li>🔥 Autolayout from importation implemented;</li>
-<li>🔥 Importation of Matpower files;</li>
-<li>🐛 Several minor bugfixes.</li>
+<li class="">🔥 Harmonic study implemented;</li>
+<li class="">🔥 Autolayout from importation implemented;</li>
+<li class="">🔥 Importation of Matpower files;</li>
+<li class="">🐛 Several minor bugfixes.</li>
 </ul>
 ]]></content>
         <author>

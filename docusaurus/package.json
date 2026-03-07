@@ -1,6 +1,6 @@
 {
   "name": "psp-ufu",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
@@ -10,8 +10,8 @@
     "write-translations": "docusaurus write-translations"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.1",
-    "@docusaurus/preset-classic": "^3.8.1",
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^1.1.1",
     "hast-util-is-element": "^1.1.0",
@@ -22,6 +22,11 @@
     "rehype-katex": "^7.0.0",
     "remark-math": "^6.0.0"
   },
+  
+  "overrides": {
+    "serialize-javascript": "^7.0.3"
+  },
+  
   "browserslist": {
     "production": [
       ">0.2%",
