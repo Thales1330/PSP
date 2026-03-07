@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -22,7 +22,7 @@ AboutForm::~AboutForm() {}
 void AboutForm::Init()
 {
     // Set program version. Format: (Alpha/Beta/Release) (YEAR)w(WEEK)(a/b/c/...)
-    m_staticTextVersion->SetLabel("2025w31a-beta");
+    m_staticTextVersion->SetLabel("2026w10a-beta");
     
     // Create developers table
     m_gridCredits->EnableGridLines(false);
