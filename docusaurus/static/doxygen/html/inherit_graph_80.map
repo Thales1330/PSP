@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,80,57"/>
+<area shape="rect" id="Node000001" href="$class_debug_main_frame_base.html" title=" " alt="" coords="128,5,281,32"/>
+<area shape="poly" id="edge71_Node000000_Node000001" title=" " alt="" coords="95,33,127,28,128,33,95,38"/>
+<area shape="rect" id="Node000003" href="$class_main_frame_base.html" title=" " alt="" coords="146,56,263,83"/>
+<area shape="poly" id="edge73_Node000000_Node000003" title=" " alt="" coords="95,49,146,58,145,63,94,55"/>
+<area shape="rect" id="Node000002" href="$class_debug_main_frame.html" title=" " alt="" coords="329,5,452,32"/>
+<area shape="poly" id="edge72_Node000001_Node000002" title=" " alt="" coords="297,16,329,16,329,21,297,21"/>
+<area shape="rect" id="Node000004" href="$class_main_frame.html" title="Main frame of the program. This class manage the ribbon menu and the notebook behavior." alt="" coords="348,56,434,83"/>
+<area shape="poly" id="edge74_Node000003_Node000004" title=" " alt="" coords="278,67,347,67,347,72,278,72"/>
+</map>

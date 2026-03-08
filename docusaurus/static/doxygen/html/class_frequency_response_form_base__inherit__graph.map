@@ -1,0 +1,7 @@
+<map id="FrequencyResponseFormBase" name="FrequencyResponseFormBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,206,107"/>
+<area shape="rect" id="Node000003" href="$class_frequency_response_form.html" title=" " alt="" coords="20,155,191,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="108,122,108,154,103,154,103,122"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="69,5,142,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,48,108,80,103,80,103,48"/>
+</map>

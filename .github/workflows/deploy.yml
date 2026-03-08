@@ -1,0 +1,48 @@
+name: Build and Deploy Site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docusaurus/**'
+      - '.github/workflows/deploy.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: docusaurus/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd docusaurus
+          npm ci
+
+      - name: Build site
+        run: |
+          cd docusaurus
+          npm run build
+
+      - name: Replace docs with build
+        run: |
+          rm -rf docs/*
+          cp -r docusaurus/build/* docs/
+
+      - name: Commit deploy
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email actions@github.com
+          git add docs
+          git commit -m "Auto deploy site" || echo "No changes"
+          git push

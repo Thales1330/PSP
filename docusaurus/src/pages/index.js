@@ -166,7 +166,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('https://raw.githubusercontent.com/Thales1330/PSP/master/docs/samples.zip')}>
+              to={useBaseUrl('https://raw.githubusercontent.com/Thales1330/PSP/master/docs/downloads/samples.zip')}>
               <Translate>Samples</Translate>
             </Link>
           </div>

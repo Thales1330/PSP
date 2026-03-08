@@ -5,10 +5,6 @@ title: PSP-UFU
 sidebar_label: PSP-UFU
 ---
 
-:::important
-Most of this user guide was written in Brazilian Portuguese. If you want to help me translate this guide, contact-me on [GitHub](https://github.com/Thales1330/PSP/issues) or [Twitter](https://twitter.com/PspUfu).
-:::
-
 ## About PSP-UFU
 
 PSP-UFU (Power Systems Platform of Federal University of Uberlândia) is a **multi-platform**, **multilingual**, **free and open source (FOSS)** software with **advanced GUI (Graphical User Interface) features** and **CAD (Computer Aided Design) tools** for studies of electrical power systems.
