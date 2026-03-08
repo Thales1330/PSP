@@ -1,0 +1,7 @@
+<map id="LineFormBase" name="LineFormBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,111,107"/>
+<area shape="rect" id="Node000003" href="$class_line_form.html" title="Form to edit the line power data." alt="" coords="20,155,96,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="61,122,61,154,55,154,55,122"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="21,5,95,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,48,61,80,55,80,55,48"/>
+</map>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="indMotorModel.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="svg1245"
+   version="1.1"
+   viewBox="0 0 92.050247 45.073463"
+   height="45.073463mm"
+   width="92.050247mm">
+  <defs
+     id="defs1239" />
+  <sodipodi:namedview
+     inkscape:window-maximized="1"
+     inkscape:window-y="-9"
+     inkscape:window-x="-9"
+     inkscape:window-height="1001"
+     inkscape:window-width="1920"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="36.319404"
+     inkscape:cx="150.62177"
+     inkscape:zoom="1.4"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata1242">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-60.564165,-115.80255)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       style="fill:none;stroke:#808080;stroke-width:0.486235;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 62.036118,125.37593 h 7.23999 l 1.178409,-2.55368 2.208289,5.29242 2.211763,-5.29242 2.217894,5.29242 2.11623,-5.29242 1.981647,5.29242 1.141743,-2.51772 4.82533,0.0274 c -0.0088,-1.44407 1.220668,-2.4999 2.737321,-2.4999 1.516647,0 2.746134,1.22949 2.746134,2.74614 0,0.72832 -0.289327,1.42681 -0.625774,1.93159 -0.882597,-1.09382 -0.864388,-2.83248 0.21921,-3.89363 1.083604,-1.06113 2.822271,-1.04293 3.883409,0.0407 1.053295,1.07559 1.044276,2.79869 0.16234,3.85295 -0.878583,-1.09384 -0.860377,-2.8325 0.223224,-3.89365 1.083604,-1.06113 2.822265,-1.04293 3.883413,0.0407 1.05329,1.07559 1.04427,2.79869 0.16111,3.85807 -0.879813,-1.08873 -0.861607,-2.82739 0.22199,-3.88853 1.08361,-1.06114 2.82227,-1.04293 3.88341,0.0407 0.50261,0.51325 0.7841,1.20301 0.81198,1.84365 l 7.48753,-0.0777"
+       id="path3777-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccsscsscsscsscc"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\linhaPi.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:0.486235;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 112.95271,125.85394 -0.0274,9.24018 c 1.44406,-0.009 2.49989,1.22067 2.49989,2.73732 0,1.51665 -1.22948,2.74613 -2.74613,2.74613 -0.72832,0 -1.42681,-0.28933 -1.9316,-0.62577 1.09383,-0.8826 2.83249,-0.8644 3.89363,0.21921 1.06114,1.0836 1.04293,2.82227 -0.0407,3.88341 -1.07559,1.05329 -2.79868,1.04427 -3.85295,0.16234 1.09384,-0.87858 2.83251,-0.86038 3.89365,0.22322 1.06114,1.0836 1.04294,2.82227 -0.0407,3.88341 -1.07559,1.0533 -2.79868,1.04427 -3.85806,0.16111 1.08872,-0.87981 2.82739,-0.8616 3.88853,0.222 1.06114,1.0836 1.04293,2.82227 -0.0407,3.88341 -0.51325,0.50261 -1.20301,0.7841 -1.84365,0.81197 l 0.0777,5.90314"
+       id="path3777-0-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccsscsscsscsscc"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\linhaPi.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:0.486235;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 112.95271,125.72545 4.82534,0.0274 c -0.009,-1.44406 1.22067,-2.49989 2.73732,-2.49989 1.51665,0 2.74613,1.22949 2.74613,2.74614 0,0.72832 -0.28933,1.42681 -0.62577,1.9316 -0.8826,-1.09383 -0.8644,-2.8325 0.21921,-3.89364 1.0836,-1.06114 2.82227,-1.04293 3.88341,0.0407 1.05329,1.07559 1.04427,2.79868 0.16234,3.85295 -0.87859,-1.09384 -0.86038,-2.83251 0.22322,-3.89365 1.08361,-1.06114 2.82227,-1.04294 3.88341,0.0407 1.0533,1.07559 1.04427,2.79868 0.16111,3.85807 -0.87981,-1.08873 -0.8616,-2.82739 0.222,-3.88853 1.0836,-1.06114 2.82226,-1.04294 3.88341,0.0407 0.50261,0.51324 0.7841,1.203 0.81197,1.84365 l 5.40006,-0.0777"
+       id="path3777-0-6-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccsscsscsscsscc"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\linhaPi.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:0.486235;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 62.036115,159.30502 h 79.201315 v -8.92828 l -2.55368,-1.1784 5.29242,-2.20829 -5.29242,-2.21177 5.29242,-2.21789 -5.29242,-2.11623 5.29242,-1.98165 -2.51773,-1.14174 0.0274,-11.46683"
+       id="path3777-0-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\linhaPi.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486235;"
+       x="73.918022"
+       y="119.50913"
+       id="text4006-2"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\linhaPi.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"><tspan
+         sodipodi:role="line"
+         id="tspan4008-33"
+         x="73.918022"
+         y="119.50913"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486235;fill:#808080;">r<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79262px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486235;fill:#808080;"
+   id="tspan4136-4">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486235;"
+       x="94.591988"
+       y="119.50913"
+       id="text4006-7-9-6"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo_v2.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"><tspan
+         sodipodi:role="line"
+         id="tspan4008-6-8-9"
+         x="94.591988"
+         y="119.50913"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486235;fill:#808080;">jx<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79267px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486235;fill:#808080;"
+   id="tspan4014-1-6-4">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486235;"
+       x="125.16097"
+       y="119.50913"
+       id="text4006-7-9-6-7"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo_v2.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"><tspan
+         sodipodi:role="line"
+         id="tspan4008-6-8-9-1"
+         x="125.16097"
+         y="119.50913"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486235;fill:#808080;">jx<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79267px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486235;fill:#808080;"
+   id="tspan4014-1-6-4-0">2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486235;"
+       x="117.85707"
+       y="144.92819"
+       id="text4006-7-9-6-7-8"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo_v2.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"><tspan
+         sodipodi:role="line"
+         id="tspan4008-6-8-9-1-2"
+         x="117.85707"
+         y="144.92819"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486235;fill:#808080;">jx<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79267px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486235;fill:#808080;"
+   id="tspan4014-1-6-4-0-4">m</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.83481px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486234;"
+       x="147.68991"
+       y="142.40976"
+       id="text4006-2-8"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\linhaPi.png"
+       inkscape:export-xdpi="200.15489"
+       inkscape:export-ydpi="200.15489"><tspan
+         sodipodi:role="line"
+         id="tspan4008-33-3"
+         x="147.68991"
+         y="142.40976"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.83481px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486234;fill:#808080;">r<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79263px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486234;fill:#808080;"
+   id="tspan4136-4-0">2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.83481px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486234;"
+       x="148.43422"
+       y="148.58965"
+       id="text4006-2-6"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\linhaPi.png"
+       inkscape:export-xdpi="200.15489"
+       inkscape:export-ydpi="200.15489"><tspan
+         sodipodi:role="line"
+         id="tspan4008-33-5"
+         x="148.43422"
+         y="148.58965"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.83481px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486234;fill:#808080;">s<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79263px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486234;fill:#808080;"
+   id="tspan4136-4-3" /></tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:0.486234px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 146.35198,144.45028 h 6.26243"
+       id="path1132"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:0.486235px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 62.322315,133.49558 v 18.32803"
+       id="path4668-9-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486235;"
+       x="63.033428"
+       y="143.92957"
+       id="text4006-79-6-9-1-5-0"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"><tspan
+         sodipodi:role="line"
+         id="tspan4008-3-1-7-6-4-0"
+         x="63.033428"
+         y="143.92957"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486235;fill:#808080;">V<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79267px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486235;fill:#808080;"
+   id="tspan4136-1-8-3-5-1-8" /></tspan></text>
+    <path
+       sodipodi:type="star"
+       style="fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path4664-1-0-7-0-9"
+       sodipodi:sides="3"
+       sodipodi:cx="128.92857"
+       sodipodi:cy="413.43362"
+       sodipodi:r1="3.8835683"
+       sodipodi:r2="3.2781358"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 132.29184,415.37541 -6.72654,0 3.36327,-5.82535 z"
+       inkscape:transform-center-y="1.9623822e-05"
+       transform="matrix(-0.35388592,0,0,0.56638367,107.94832,-101.14254)"
+       inkscape:transform-center-x="-2.1922728"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ff1400;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path4664-1-4"
+       sodipodi:sides="3"
+       sodipodi:cx="128.92857"
+       sodipodi:cy="413.43362"
+       sodipodi:r1="3.8835683"
+       sodipodi:r2="3.2781358"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       inkscape:transform-center-y="-1.1929261"
+       transform="matrix(0,0.35388592,-0.56638368,0,326.5596,87.268735)"
+       inkscape:transform-center-x="-1.6290529e-05"
+       d="m 132.29184,415.37541 -6.72654,0 3.36327,-5.82535 z" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;stroke:#ff1400;stroke-width:0.486234px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 92.753331,132.9382 H 79.4613"
+       id="path4668-3-4"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:0%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.486235;"
+       x="82.869629"
+       y="139.8206"
+       id="text4006-79-6-4-0"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"><tspan
+         sodipodi:role="line"
+         id="tspan4008-3-1-0-3"
+         x="82.869629"
+         y="139.8206"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.8348px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';stroke-width:0.486235;fill:#808080;">P,Q<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.79267px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';baseline-shift:sub;stroke-width:0.486235;fill:#808080;"
+   id="tspan4136-1-8-7-25" /></tspan></text>
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#808080;stroke-width:0.486235;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3834-7-3-6-0-6"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"
+       cx="62.022869"
+       cy="125.29408"
+       r="1.2155862" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#808080;stroke-width:0.486235;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3834-7-3-6-0-7"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200.0538"
+       inkscape:export-ydpi="200.0538"
+       cx="62.196526"
+       cy="159.41731"
+       r="1.2155862" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:0.486234px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 146.71844,138.12009 -11.05659,11.05659"
+       id="path4668-8-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       sodipodi:type="star"
+       style="fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path4664-1-0-7-6"
+       sodipodi:sides="3"
+       sodipodi:cx="128.92857"
+       sodipodi:cy="413.43362"
+       sodipodi:r1="3.8835683"
+       sodipodi:r2="3.2781358"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       inkscape:transform-center-y="1.6629646e-05"
+       transform="matrix(-0.25023513,-0.25023513,-0.40049374,0.40049374,344.63271,4.6587609)"
+       inkscape:transform-center-x="-1.1929238"
+       inkscape:export-filename="C:\Users\User\Dropbox\UFU\Dissertação\Imagens\trafo2_v3.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       d="m 132.29184,415.37541 -6.72654,0 3.36327,-5.82535 z" />
+  </g>
+</svg>
