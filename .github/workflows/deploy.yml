@@ -3,10 +3,7 @@ name: Build and Deploy Site
 on:
   push:
     branches:
-      - main
-    paths:
-      - 'docusaurus/**'
-      - '.github/workflows/deploy.yml'
+      - master
 
 permissions:
   contents: write
@@ -25,18 +22,17 @@ jobs:
           cache-dependency-path: docusaurus/package-lock.json
 
       - name: Install dependencies
-        run: |
-          cd docusaurus
-          npm ci
+        working-directory: docusaurus
+        run: npm ci
 
       - name: Build site
-        run: |
-          cd docusaurus
-          npm run build
+        working-directory: docusaurus
+        run: npm run build
 
-      - name: Replace docs with build
+      - name: Copy build to docs
         run: |
-          rm -rf docs/*
+          rm -rf docs
+          mkdir docs
           cp -r docusaurus/build/* docs/
 
       - name: Commit deploy
