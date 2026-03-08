@@ -36,7 +36,7 @@
 <li class="">Added <strong>CI workflows for Linux and Windows builds</strong>;</li>
 <li class="">Added <strong>ccache support</strong> to accelerate builds;</li>
 <li class="">Updated documentation with <strong>complete English translation</strong>;</li>
-<li class="">Updated project website and documentation (<strong>Docusaurus updates</strong>);</li>
+<li class="">Updated project website and documentation deployed on the gh-pages branch (<strong>Docusaurus updates</strong>);</li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes">🐛 Bug Fixes<a href="https://thales1330.github.io/PSP/blog/2026/03/07/2026w10a-beta#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes" translate="no">​</a></h2>
