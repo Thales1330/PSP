@@ -1,5 +1,5 @@
-const remarkMath = require("remark-math");
-const rehypeKatex = require("rehype-katex");
+const remarkMath = require("remark-math").default;
+const rehypeKatex = require("rehype-katex").default;
 
 module.exports = {
   title: 'PSP-UFU',
