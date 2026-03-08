@@ -7,7 +7,7 @@
 
 <div align="center">
 
-![PSP-UFU](docs/doxygen/html/logoHeader.png)
+![PSP-UFU](docusaurus/static/doxygen/html/logoHeader.png)
 
   <a href="https://thales1330.github.io/PSP/" style="font-size: 20px;"><strong>Website</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://thales1330.github.io/PSP/docs/" style="font-size: 20px;"><strong>User Guide</strong></a>
@@ -99,9 +99,9 @@ The executable will be generated at: build/bin/PSP-UFU
 ## [](#header-2)Overview
 
 <p align="center">
-  <img src="docs/images/ss_1.png" width="600"/>
-  <img src="docs/images/ss_2.png" width="600"/>
-  <img src="docs/images/ss_3.png" width="600"/>
-  <img src="docs/images/ss_5.png" width="600"/>
-  <img src="docs/images/ss_4.png" width="600"/>
+  <img src="docusaurus/static/images/ss_1.png" width="600"/>
+  <img src="docusaurus/static/images/ss_2.png" width="600"/>
+  <img src="docusaurus/static/images/ss_3.png" width="600"/>
+  <img src="docusaurus/static/images/ss_5.png" width="600"/>
+  <img src="docusaurus/static/images/ss_4.png" width="600"/>
 </p>
