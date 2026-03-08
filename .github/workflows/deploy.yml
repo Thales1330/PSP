@@ -1,21 +1,26 @@
-name: Build and Deploy Site
+name: Deploy Docusaurus
 
 on:
   push:
     branches:
       - master
+    paths:
+      - 'docusaurus/**'
+      - '.github/workflows/deploy.yml'
 
 permissions:
   contents: write
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
@@ -29,16 +34,8 @@ jobs:
         working-directory: docusaurus
         run: npm run build
 
-      - name: Copy build to docs
-        run: |
-          rm -rf docs
-          mkdir docs
-          cp -r docusaurus/build/* docs/
-
-      - name: Commit deploy
-        run: |
-          git config --global user.name github-actions
-          git config --global user.email actions@github.com
-          git add docs
-          git commit -m "Auto deploy site" || echo "No changes"
-          git push
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docusaurus/build
