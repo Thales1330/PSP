@@ -1,0 +1,9 @@
+<map id="mpInfoCoords" name="mpInfoCoords">
+<area shape="rect" id="Node000001" title="Implements an overlay box which shows the mouse coordinates in plot units. When an mpInfoCoords layer..." alt="" coords="5,229,106,256"/>
+<area shape="rect" id="Node000002" href="$classmp_info_layer.html" title="Base class to create small rectangular info boxes mpInfoLayer is the base class to create a small rec..." alt="" coords="10,155,101,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="58,197,58,229,53,229,53,197"/>
+<area shape="rect" id="Node000003" href="$classmp_layer.html" title=" " alt="" coords="20,80,91,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,122,58,154,53,154,53,122"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="18,5,93,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="58,48,58,80,53,80,53,48"/>
+</map>

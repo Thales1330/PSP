@@ -1,0 +1,7 @@
+<map id="SimulationsSettingsFormBase" name="SimulationsSettingsFormBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,203,107"/>
+<area shape="rect" id="Node000003" href="$class_simulations_settings_form.html" title="Form to edit the simulation data." alt="" coords="20,155,188,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="107,122,107,154,101,154,101,122"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="67,5,141,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,48,107,80,101,80,101,48"/>
+</map>

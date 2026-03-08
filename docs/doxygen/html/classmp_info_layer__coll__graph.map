@@ -1,0 +1,7 @@
+<map id="mpInfoLayer" name="mpInfoLayer">
+<area shape="rect" id="Node000001" title="Base class to create small rectangular info boxes mpInfoLayer is the base class to create a small rec..." alt="" coords="5,155,97,181"/>
+<area shape="rect" id="Node000002" href="$classmp_layer.html" title=" " alt="" coords="15,80,87,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,122,54,154,48,154,48,122"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="13,5,89,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="54,48,54,80,48,80,48,48"/>
+</map>
