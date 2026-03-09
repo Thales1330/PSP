@@ -1,0 +1,9 @@
+<map id="Element::StringFromDouble" name="Element::StringFromDouble">
+<area shape="rect" id="Node000001" title="Convert a double value to string." alt="" coords="237,55,439,80"/>
+<area shape="rect" id="Node000002" href="$class_bus.html#a0cf17a7aec23d436ff1eeb9834eb2b70" title="Get the tip text." alt="" coords="35,5,159,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="262,54,159,33,160,28,263,49"/>
+<area shape="rect" id="Node000003" href="$class_harm_current.html#a11b533e8bcede98f3618eb3a5f20657d" title="Get the tip text." alt="" coords="5,55,189,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,70,189,70,189,65,224,65"/>
+<area shape="rect" id="Node000004" href="$class_transformer.html#a169064f996341f8f8b6881c6a3909f0b" title="Get the tip text." alt="" coords="8,104,187,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="263,85,161,107,160,101,262,80"/>
+</map>

@@ -1,0 +1,71 @@
+<map id="Element::RotateAtPosition" name="Element::RotateAtPosition">
+<area shape="rect" id="Node000001" title="Rotate a point as element position being the origin." alt="" coords="272,820,465,845"/>
+<area shape="rect" id="Node000002" href="$class_capacitor.html#ace755e5bc3cc72b491ce31c24c54a5cf" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="35,5,194,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="364,806,355,651,331,420,313,301,289,192,259,103,241,69,222,44,209,34,193,26,196,21,212,29,226,40,246,66,264,101,294,191,318,300,337,420,360,650,369,806"/>
+<area shape="rect" id="Node000003" href="$class_e_m_t_element.html#a9793391b74f11de7211fd7bb4b8d5778" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="25,55,204,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="363,806,353,659,328,444,310,333,286,231,257,148,240,117,222,93,203,80,206,75,226,89,245,114,262,146,291,230,315,332,334,443,358,658,369,806"/>
+<area shape="rect" id="Node000004" href="$class_harm_current.html#ad0d53fd562d5519bf006aa21f0f0247c" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="25,104,205,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="363,807,351,668,325,468,306,365,283,271,255,194,239,164,222,143,203,129,206,125,226,139,244,161,260,191,288,269,312,363,330,467,356,667,368,806"/>
+<area shape="rect" id="Node000005" href="$class_inductor.html#a4e404c6e15f206fe0f5de06fc19dedf5" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="40,153,189,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="363,807,349,677,322,491,303,396,280,310,253,239,238,212,222,192,207,181,189,173,191,168,209,176,226,188,242,209,258,237,285,308,308,395,327,490,354,676,368,806"/>
+<area shape="rect" id="Node000006" href="$class_line.html#a26c69f7f703dca718edc28d5093934a3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="53,203,176,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="362,806,347,685,319,514,300,428,277,348,251,284,237,260,222,241,201,227,175,219,177,214,203,222,226,237,241,257,256,282,282,347,305,426,324,513,352,684,367,806"/>
+<area shape="rect" id="Node000007" href="$class_load.html#ac9f449be9b919b36924a844324bf37ee" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="51,252,178,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="361,807,345,695,315,539,296,460,274,388,249,329,222,291,202,277,177,269,179,264,204,272,226,287,254,327,279,386,301,458,321,538,350,694,367,806"/>
+<area shape="rect" id="Node000008" href="$class_machines.html#aaaf1b86dcbfd8f4a4c082a77d72b1fe3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="35,301,194,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="366,806,363,717,357,657,346,591,328,522,303,456,268,394,222,340,193,323,196,318,226,336,272,391,308,453,334,521,351,589,363,656,369,716,371,806"/>
+<area shape="rect" id="Node000009" href="$class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="27,351,202,376"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="365,807,359,725,352,671,340,612,322,551,297,492,264,437,222,389,201,376,204,371,226,385,269,434,302,489,327,549,345,610,357,670,365,724,370,806"/>
+<area shape="rect" id="Node000010" href="$class_element.html#a57f5771fd003020fef3866a1d1dc7487" title="Calculate the element boundaries." alt="" coords="5,400,224,425"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="363,807,355,733,334,633,315,580,291,528,261,480,222,439,206,428,209,423,226,435,265,477,296,525,320,578,339,632,361,732,369,806"/>
+<area shape="rect" id="Node000011" href="$class_bus.html#ad2b960058be6e990463b53d79c74c7a3" title="Checks if the element contains a position." alt="" coords="59,449,170,475"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="362,807,351,741,327,655,309,609,285,564,257,523,222,488,198,474,170,467,171,461,200,469,226,484,261,520,290,562,313,607,332,653,356,740,367,806"/>
+<area shape="rect" id="Node000012" href="$class_capacitor.html#a994039e59a8ae0ec3fe7cf7f5b66e4e5" title="Checks if the element contains a position." alt="" coords="40,499,189,524"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="360,807,346,750,320,676,302,638,280,601,253,567,222,538,189,521,191,516,226,533,257,563,284,598,306,635,325,674,351,748,365,805"/>
+<area shape="rect" id="Node000013" href="$class_harm_current.html#ac17b5168231ffff93915bf3d340e1754" title="Checks if the element contains a position." alt="" coords="29,548,200,573"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="358,808,341,760,313,699,274,638,250,610,222,587,199,574,202,570,226,582,254,607,278,635,318,697,346,758,363,806"/>
+<area shape="rect" id="Node000014" href="$class_inductor.html#ac3ba7de94a328b20ff86e968a6228f60" title="Checks if the element contains a position." alt="" coords="45,597,185,623"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="354,809,335,770,306,723,268,676,223,636,184,620,186,615,225,632,272,672,310,720,339,768,359,807"/>
+<area shape="rect" id="Node000015" href="$class_transformer.html#a327ff3cf9194c18049e4feac6761ebc0" title="Checks if the element contains a position." alt="" coords="32,647,197,672"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="349,811,298,747,263,714,223,686,197,674,199,670,225,681,266,709,302,744,354,807"/>
+<area shape="rect" id="Node000016" href="$class_text.html#a51c55b9272f653cfc3cdafe665d5dde0" title="Checks if the element contains a position." alt="" coords="57,696,172,721"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="341,813,289,773,223,735,171,719,173,714,225,730,292,768,344,809"/>
+<area shape="rect" id="Node000017" href="$class_bus.html#ad569e2192bf95efe668d401583382a04" title="Move the pickbox." alt="" coords="44,745,185,771"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="321,818,223,785,178,773,180,768,225,779,323,813"/>
+<area shape="rect" id="Node000018" href="$class_bus.html#a0b8f3ed6e0049dafca8c52358f96bf4b" title="Check if a pickbox contains a point. If contains the attributes related to pickbox movement will be c..." alt="" coords="33,795,196,820"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="258,824,196,818,196,813,259,819"/>
+<area shape="rect" id="Node000019" href="$class_capacitor.html#a2c3f0949c2b791c6a0b69866e9aaff7a" title="Rotate the element." alt="" coords="47,844,182,869"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="259,846,182,853,182,848,258,840"/>
+<area shape="rect" id="Node000020" href="$class_e_m_t_element.html#a107c392ddd234897c5f24706401bebe9" title="Rotate the element." alt="" coords="37,893,192,919"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="320,853,225,883,175,896,174,891,223,878,319,847"/>
+<area shape="rect" id="Node000021" href="$class_harm_current.html#a8dd58d17259839e9f8ec449595cb8712" title="Rotate the element." alt="" coords="36,943,193,968"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="344,856,291,895,225,932,188,945,186,940,223,928,288,891,340,852"/>
+<area shape="rect" id="Node000022" href="$class_inductor.html#a801bb445c01059558902c0eca4d38cdd" title="Rotate the element." alt="" coords="51,992,178,1017"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="353,859,301,921,265,954,225,982,179,999,177,994,223,977,262,950,297,917,349,855"/>
+<area shape="rect" id="Node000023" href="$class_load.html#a46e9f2e0935ecca77b3a46568404d8e3" title="Rotate the element." alt="" coords="63,1041,167,1067"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="358,860,338,898,309,945,271,992,225,1031,197,1045,167,1052,166,1047,195,1040,223,1026,268,988,305,942,334,895,354,857"/>
+<area shape="rect" id="Node000024" href="$class_machines.html#acff264f0c80d97a966ff97401f2f142a" title="Rotate the element." alt="" coords="47,1091,182,1116"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="362,860,345,908,317,968,278,1029,253,1056,226,1080,205,1092,183,1099,182,1094,203,1087,222,1076,249,1052,273,1025,312,965,340,906,357,858"/>
+<area shape="rect" id="Node000025" href="$class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de" title="Rotate the element." alt="" coords="39,1140,190,1165"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="365,860,351,916,324,989,306,1028,284,1065,257,1100,226,1130,192,1147,189,1142,222,1125,253,1096,279,1062,301,1025,319,987,346,915,360,858"/>
+<area shape="rect" id="Node000026" href="$class_transformer.html#adf0b20286f3de359346b8877d65c1996" title="Rotate a node." alt="" coords="22,1189,207,1215"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="367,859,356,924,331,1011,313,1057,290,1101,261,1143,226,1179,205,1191,202,1187,222,1175,257,1139,285,1099,308,1054,326,1009,350,923,362,858"/>
+<area shape="rect" id="Node000027" href="$class_branch.html#a190d3da81276751c5b9ab23c5d3f37df" title="Rotate a node." alt="" coords="39,1239,191,1264"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="369,859,360,933,338,1032,320,1086,295,1138,264,1186,226,1228,210,1239,192,1246,190,1241,207,1234,222,1224,260,1183,291,1135,315,1084,333,1031,355,932,363,859"/>
+<area shape="rect" id="Node000028" href="$class_line.html#ab73d74778b5aa9807d21f156d15fadf7" title="Rotate a node." alt="" coords="47,1288,182,1313"/>
+<area shape="poly" id="edge27_Node000001_Node000028" title=" " alt="" coords="370,859,364,941,357,995,344,1054,326,1114,301,1174,268,1229,226,1277,206,1291,183,1299,181,1294,203,1286,222,1273,264,1226,296,1171,321,1113,339,1052,351,994,359,940,365,859"/>
+<area shape="rect" id="Node000029" href="$class_machines.html#a914faa054440402cad74c3b70f62ad92" title="Rotate a node." alt="" coords="30,1337,199,1363"/>
+<area shape="poly" id="edge28_Node000001_Node000029" title=" " alt="" coords="371,859,368,949,362,1009,351,1075,333,1143,307,1210,272,1272,226,1327,201,1342,198,1338,222,1323,267,1269,302,1208,328,1141,345,1074,357,1008,363,948,366,859"/>
+<area shape="rect" id="Node000030" href="$class_shunt.html#a7a732f1fb5f54b89e33957194fefd703" title="Rotate a node." alt="" coords="43,1387,187,1412"/>
+<area shape="poly" id="edge29_Node000001_Node000030" title=" " alt="" coords="367,859,350,971,320,1126,301,1205,279,1277,254,1336,226,1376,208,1389,188,1397,186,1392,206,1384,222,1372,249,1333,274,1275,296,1204,315,1125,345,970,361,859"/>
+<area shape="rect" id="Node000031" href="$class_branch.html#aaf64ea58631438e3a16b1b2ede793875" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="29,1436,200,1461"/>
+<area shape="poly" id="edge30_Node000001_Node000031" title=" " alt="" coords="367,860,352,980,324,1150,304,1237,282,1316,256,1381,241,1406,226,1425,202,1441,199,1437,222,1421,237,1403,251,1379,277,1314,299,1236,318,1149,347,979,362,859"/>
+<area shape="rect" id="Node000032" href="$class_line.html#a6d35082da4d30bd432b73b72dd86fadb" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="38,1485,191,1511"/>
+<area shape="poly" id="edge31_Node000001_Node000032" title=" " alt="" coords="368,860,354,989,327,1174,308,1269,285,1355,258,1426,242,1454,226,1475,210,1486,192,1494,190,1489,208,1482,222,1471,238,1451,253,1424,280,1354,302,1268,322,1173,349,989,362,859"/>
+<area shape="rect" id="Node000033" href="$class_machines.html#aed7664d5b85585fc13f4a1ad48457901" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="21,1535,209,1560"/>
+<area shape="poly" id="edge32_Node000001_Node000033" title=" " alt="" coords="368,859,356,997,330,1197,311,1300,288,1394,260,1471,243,1501,226,1524,209,1537,205,1532,222,1520,239,1498,255,1469,283,1392,306,1299,325,1196,351,997,363,859"/>
+<area shape="rect" id="Node000034" href="$class_shunt.html#aacb9fdd05533a8322596b130c70774ef" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="33,1584,196,1609"/>
+<area shape="poly" id="edge33_Node000001_Node000034" title=" " alt="" coords="369,859,358,1006,333,1221,314,1332,291,1433,261,1516,244,1549,226,1573,198,1591,195,1587,222,1569,240,1546,257,1514,285,1432,309,1331,328,1220,353,1006,363,859"/>
+<area shape="rect" id="Node000035" href="$class_transformer.html#a4f9137e6190fb630167f671a0da51ab6" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="13,1633,217,1659"/>
+<area shape="poly" id="edge34_Node000001_Node000035" title=" " alt="" coords="369,860,360,1015,336,1245,318,1363,294,1472,263,1562,246,1596,226,1623,209,1635,206,1631,222,1619,241,1593,258,1559,288,1471,312,1362,331,1244,354,1015,364,859"/>
+</map>

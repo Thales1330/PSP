@@ -5,6 +5,7 @@ var class_electric_calculation =
     [ "GetBusList", "class_electric_calculation.html#abf058074f18c5115a85e0d6ed472d858", null ],
     [ "GetCapacitorList", "class_electric_calculation.html#a862ff8ad26563a600a4e2210f2e5b5bc", null ],
     [ "GetElementsFromList", "class_electric_calculation.html#acfcaa3ac1917e250734abccc2d0c7f02", null ],
+    [ "GetEMTElementList", "class_electric_calculation.html#aafd64a30aeb57ee82875081ca9220a8c", null ],
     [ "GetHarmCurrentList", "class_electric_calculation.html#afaa9dfb3d9a9c3acbf9f32a6da4bae6e", null ],
     [ "GetIndMotorList", "class_electric_calculation.html#a0f3897dd498266cf6114ed3b2e284a24", null ],
     [ "GetInductorList", "class_electric_calculation.html#a86905e3b92f69ad0a2d0f3029c00d805", null ],

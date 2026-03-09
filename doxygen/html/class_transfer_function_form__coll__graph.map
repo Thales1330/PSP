@@ -1,15 +1,15 @@
 <map id="TransferFunctionForm" name="TransferFunctionForm">
-<area shape="rect" id="Node000001" title="Form to edit the transfer function control data." alt="" coords="35,277,182,304"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,187,183,213"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,229,109,276,104,277,96,229"/>
-<area shape="rect" id="Node000003" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function." alt="" coords="207,187,325,213"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,224,132,279,130,274,229,219"/>
-<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="99,80,209,107"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="180,115,254,184,251,188,176,119"/>
-<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="119,5,189,32"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="157,48,157,80,151,80,151,48"/>
-<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="233,80,299,107"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="269,122,269,186,263,186,263,122"/>
-<area shape="rect" id="Node000007" href="$struct_transfer_function_1_1_space_state.html" title=" " alt="" coords="323,80,516,107"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="403,121,382,144,357,165,309,188,307,184,354,160,378,140,399,117"/>
+<area shape="rect" id="Node000001" title="Form to edit the transfer function control data." alt="" coords="123,2520,341,2759"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="117,2041,304,2106"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,2119,230,2520,225,2520,210,2120"/>
+<area shape="rect" id="Node000003" href="$class_transfer_function.html" title="Calculates the time response by a frequency domain transfer function." alt="" coords="329,1689,578,2457"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="331,2427,318,2458,298,2506,293,2504,314,2456,326,2425"/>
+<area shape="rect" id="Node000004" href="$class_control_element.html" title=" " alt="" coords="5,844,291,1612"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="295,1624,319,1688,331,1723,326,1725,313,1690,290,1626"/>
+<area shape="rect" id="Node000005" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="7,5,289,795"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="151,809,151,844,145,844,145,809"/>
+<area shape="rect" id="Node000006" href="$class_g_c_text.html" title="Class to draw text on Graphics Context using wxWidgets." alt="" coords="315,930,591,1526"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="456,1526,456,1673,451,1673,451,1526"/>
+<area shape="rect" id="Node000007" href="$struct_transfer_function_1_1_space_state.html" title=" " alt="" coords="616,1158,819,1298"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="700,1299,607,1613,586,1679,581,1678,601,1611,695,1298"/>
 </map>

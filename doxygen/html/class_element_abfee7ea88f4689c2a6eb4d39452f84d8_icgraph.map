@@ -1,0 +1,9 @@
+<map id="Element::WorldToScreen" name="Element::WorldToScreen">
+<area shape="rect" id="Node000001" title="Convert the element position to screen position." alt="" coords="164,55,343,80"/>
+<area shape="rect" id="Node000002" href="$class_bus.html#a2ad52f49760139090d3576b8015f7536" title="Draw the element using wxDC." alt="" coords="7,5,114,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,54,111,33,112,28,191,49"/>
+<area shape="rect" id="Node000003" href="$class_bus.html#a8aa123d9b4704f44bda044187fb6c431" title="Draw the element using GDI+." alt="" coords="7,55,114,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,70,114,70,114,65,150,65"/>
+<area shape="rect" id="Node000004" href="$class_line.html#a37f35cabf98de2806188cdf919d26e2a" title="Draw the element using GDI+." alt="" coords="5,104,116,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,86,112,106,111,101,189,81"/>
+</map>

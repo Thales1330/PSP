@@ -1,0 +1,23 @@
+<map id="Element::GeneralMenuItens" name="Element::GeneralMenuItens">
+<area shape="rect" id="Node000001" title="Insert general itens to context menu." alt="" coords="289,228,492,253"/>
+<area shape="rect" id="Node000002" href="$class_bus.html#ae731d57078982f0bd08e92e6a24f3057" title="Get the element contex menu." alt="" coords="41,5,205,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="376,217,355,178,326,131,287,83,240,44,204,29,207,24,243,40,291,80,330,128,360,175,381,214"/>
+<area shape="rect" id="Node000003" href="$class_capacitor.html#a05d5517b64dd8a8888817ca28b72294d" title="Get the element contex menu." alt="" coords="22,55,225,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="371,218,317,155,281,121,240,94,213,83,216,78,243,89,284,117,321,151,375,215"/>
+<area shape="rect" id="Node000004" href="$class_e_m_t_element.html#a1309a05bfbbf81ec1a6c88218d99f50d" title="Get the element contex menu." alt="" coords="12,104,235,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="362,221,308,181,275,160,240,143,206,132,208,127,242,138,278,156,311,176,366,217"/>
+<area shape="rect" id="Node000005" href="$class_harm_current.html#a55d1dd3908936e4cfa301dd74ab10182" title="Get the element contex menu." alt="" coords="11,153,235,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="343,226,241,193,193,181,195,176,242,187,344,221"/>
+<area shape="rect" id="Node000006" href="$class_ind_motor.html#a87666565ae1380993d94e7886e9a1f59" title="Get the element contex menu." alt="" coords="24,203,223,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="276,232,222,227,223,222,276,227"/>
+<area shape="rect" id="Node000007" href="$class_inductor.html#aa0ae00d91b40307141a8bd3aebf1a0c2" title="Get the element contex menu." alt="" coords="27,252,220,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="276,254,220,259,220,253,276,248"/>
+<area shape="rect" id="Node000008" href="$class_load.html#a25b4a3e553f8400114ac8effa11287da" title="Get the element contex menu." alt="" coords="38,301,209,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="341,261,242,291,190,304,189,299,241,286,339,255"/>
+<area shape="rect" id="Node000009" href="$class_sync_generator.html#a24b9894fa42473dfb8bcf82221401a97" title="Get the element contex menu." alt="" coords="5,351,241,376"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="365,264,311,303,242,340,203,353,202,348,240,336,308,299,362,260"/>
+<area shape="rect" id="Node000010" href="$class_sync_motor.html#a7b3102220ea5f7e19690af045a6c8278" title="Get the element contex menu." alt="" coords="19,400,228,425"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="374,266,321,329,284,362,243,390,212,402,210,397,240,385,281,358,317,325,370,263"/>
+<area shape="rect" id="Node000011" href="$class_transformer.html#adfe51a2198cfc10e1095af9c034681bd" title="Get the element contex menu." alt="" coords="14,449,233,475"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="380,267,359,306,329,353,290,400,243,439,216,452,214,447,240,434,286,396,325,349,355,303,375,265"/>
+</map>

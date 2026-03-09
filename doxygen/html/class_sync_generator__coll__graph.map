@@ -1,17 +1,17 @@
 <map id="SyncGenerator" name="SyncGenerator">
-<area shape="rect" id="Node000001" title="Synchronous generator power element." alt="" coords="118,357,226,384"/>
-<area shape="rect" id="Node000002" href="$class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="56,267,133,293"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,303,163,355,159,359,113,307"/>
-<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="42,96,147,123"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,138,97,266,92,266,92,138"/>
-<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,75,32"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="58,44,89,94,85,97,54,47"/>
-<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="99,5,203,32"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="137,47,105,97,100,94,132,44"/>
-<area shape="rect" id="Node000006" href="$struct_sync_generator_electrical_data.html" title=" " alt="" coords="157,267,347,293"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="232,307,185,359,181,355,229,303"/>
-<area shape="rect" id="Node000007" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="179,96,312,123"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="249,138,254,266,249,266,244,138"/>
-<area shape="rect" id="Node000008" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="336,96,501,123"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="403,137,362,189,308,245,275,268,272,264,305,241,358,185,399,133"/>
+<area shape="rect" id="Node000001" title="Synchronous generator power element." alt="" coords="304,2600,535,2983"/>
+<area shape="rect" id="Node000002" href="$class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="147,2012,412,2537"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="357,2550,370,2599,365,2600,352,2551"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="137,1012,422,1721"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="282,1736,282,2012,277,2012,277,1736"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,287,795"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="205,808,233,1011,228,1012,200,809"/>
+<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="311,343,517,457"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="409,458,334,996,328,995,403,457"/>
+<area shape="rect" id="Node000006" href="$struct_sync_generator_electrical_data.html" title=" " alt="" coords="436,2142,685,2407"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="527,2408,478,2585,473,2584,522,2407"/>
+<area shape="rect" id="Node000007" href="$struct_integration_constant.html" title="Integration constants to calculate dynamic elements through trapezoidal integration method." alt="" coords="467,1324,609,1409"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="542,1410,560,2126,554,2126,536,1410"/>
+<area shape="rect" id="Node000008" href="$class_control_element_container.html" title="Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li..." alt="" coords="633,857,947,1876"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="664,1877,601,2127,595,2125,659,1876"/>
 </map>

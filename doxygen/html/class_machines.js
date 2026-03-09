@@ -2,6 +2,7 @@ var class_machines =
 [
     [ "AddParent", "class_machines.html#aaaf1b86dcbfd8f4a4c082a77d72b1fe3", null ],
     [ "Contains", "class_machines.html#acda27b0ea8a7b0fb00d647d8744f346e", null ],
+    [ "DrawDC", "class_machines.html#a154f53dfa581a4445538a6a8304dcc1c", null ],
     [ "DrawDC", "class_machines.html#a4d8259faa01d5f9cec09c84f326820aa", null ],
     [ "Intersects", "class_machines.html#a0a825ccdbd5059f9ae9f869d4b6e3ec4", null ],
     [ "Move", "class_machines.html#a2f7450283dd36f4fc0847dfd50385c44", null ],

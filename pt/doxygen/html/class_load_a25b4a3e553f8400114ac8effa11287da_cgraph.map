@@ -1,0 +1,5 @@
+<map id="Load::GetContextMenu" name="Load::GetContextMenu">
+<area shape="rect" id="Node000001" title="Get the element contex menu." alt="" coords="5,5,176,31"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a35f55626a29d5256f8dc07cf92655e64" title="Insert general itens to context menu." alt="" coords="224,5,427,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,15,210,15,210,21,176,21"/>
+</map>

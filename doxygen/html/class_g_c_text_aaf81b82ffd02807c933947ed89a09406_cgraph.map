@@ -1,0 +1,5 @@
+<map id="GCText::GetCopy" name="GCText::GetCopy">
+<area shape="rect" id="Node000001" title="Get a deep text copy." alt="" coords="5,5,137,31"/>
+<area shape="rect" id="Node000002" href="$class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085" title="Set correctly a new text string." alt="" coords="185,5,309,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,15,172,15,172,21,138,21"/>
+</map>

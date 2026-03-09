@@ -3,6 +3,9 @@ var hierarchy =
     [ "AboutFormBase", null, [
       [ "AboutForm", "class_about_form.html", null ]
     ] ],
+    [ "ATPFileEditorFormBase", null, [
+      [ "ATPFileEditorForm", "class_a_t_p_file_editor_form.html", null ]
+    ] ],
     [ "ParseAnarede::BranchData", "struct_parse_anarede_1_1_branch_data.html", null ],
     [ "ParseMatpower::BranchData", "struct_parse_matpower_1_1_branch_data.html", null ],
     [ "BufferMeshCoords", "struct_buffer_mesh_coords.html", null ],
@@ -71,6 +74,7 @@ var hierarchy =
         ] ],
         [ "Shunt", "class_shunt.html", [
           [ "Capacitor", "class_capacitor.html", null ],
+          [ "EMTElement", "class_e_m_t_element.html", null ],
           [ "HarmCurrent", "class_harm_current.html", null ],
           [ "Inductor", "class_inductor.html", null ],
           [ "Load", "class_load.html", null ]
@@ -79,8 +83,15 @@ var hierarchy =
     ] ],
     [ "ElementPlotData", "class_element_plot_data.html", null ],
     [ "ElementsLists", "struct_elements_lists.html", null ],
+    [ "EMTElementData", "struct_e_m_t_element_data.html", null ],
+    [ "EMTElementFormBase", null, [
+      [ "EMTElementForm", "class_e_m_t_element_form.html", null ]
+    ] ],
     [ "ExponentialFormBase", null, [
       [ "ExponentialForm", "class_exponential_form.html", null ]
+    ] ],
+    [ "ExportCSVFormBase", null, [
+      [ "ExportCSVForm", "class_export_c_s_v_form.html", null ]
     ] ],
     [ "FileHanding", "class_file_handing.html", null ],
     [ "FreqResponseData", "struct_freq_response_data.html", null ],
@@ -126,6 +137,9 @@ var hierarchy =
     [ "IOControlFormBase", null, [
       [ "IOControlForm", "class_i_o_control_form.html", null ]
     ] ],
+    [ "LabelManagerBase", null, [
+      [ "LabelManager", "class_label_manager.html", null ]
+    ] ],
     [ "LimiterFormBase", null, [
       [ "LimiterForm", "class_limiter_form.html", null ]
     ] ],
@@ -155,6 +169,7 @@ var hierarchy =
     [ "ReactiveShuntElementFormBase", null, [
       [ "ReactiveShuntElementForm", "class_reactive_shunt_element_form.html", null ]
     ] ],
+    [ "SimTestData", "struct_sim_test_data.html", null ],
     [ "SimulationData", "struct_simulation_data.html", null ],
     [ "SimulationsSettingsFormBase", null, [
       [ "SimulationsSettingsForm", "class_simulations_settings_form.html", null ]

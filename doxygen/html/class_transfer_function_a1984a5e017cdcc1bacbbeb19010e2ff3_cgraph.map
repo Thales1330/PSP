@@ -1,0 +1,5 @@
+<map id="TransferFunction::DrawDC" name="TransferFunction::DrawDC">
+<area shape="rect" id="Node000001" title="Draw the element using GDI+." alt="" coords="5,5,196,31"/>
+<area shape="rect" id="Node000002" href="$class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8" title="Draw the text in wxGraphicsContext." alt="" coords="244,5,355,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,15,230,15,230,21,197,21"/>
+</map>

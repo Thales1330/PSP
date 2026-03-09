@@ -1,0 +1,17 @@
+<map id="GCText::SetText" name="GCText::SetText">
+<area shape="rect" id="Node000001" title="Set correctly a new text string." alt="" coords="503,80,627,105"/>
+<area shape="rect" id="Node000002" href="$class_e_m_t_element.html#a7366ae456a7b5d9d2a54d6f6eefce057" title="Draw the element using wxDC." alt="" coords="268,31,433,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="495,79,406,59,407,53,496,74"/>
+<area shape="rect" id="Node000003" href="$class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="285,80,417,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="489,95,417,95,417,90,489,90"/>
+<area shape="rect" id="Node000008" href="$class_math_expression.html#a7430d1f92978843de5f1bd171f09def6" title="Update the OpenGL text in the element (if present)." alt="" coords="247,129,455,155"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="496,111,407,132,406,127,495,106"/>
+<area shape="rect" id="Node000004" href="$class_constant.html#ac566e3a63326d3f543a55af14ae0f8fa" title="Get a the element copy." alt="" coords="30,5,174,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="273,79,246,70,221,57,198,44,162,33,164,28,200,40,224,52,248,65,275,74"/>
+<area shape="rect" id="Node000005" href="$class_gain.html#a489572e289935d7256c037af682b9351" title="Get a the element copy." alt="" coords="44,55,160,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="270,87,160,76,160,71,271,82"/>
+<area shape="rect" id="Node000006" href="$class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7" title="Get a the element copy." alt="" coords="29,104,175,129"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="271,103,176,112,175,107,271,98"/>
+<area shape="rect" id="Node000007" href="$class_transfer_function.html#a3312f7e9499aa99742093d3b60547862" title="Get a the element copy." alt="" coords="5,153,199,179"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="272,111,248,119,224,131,200,143,160,156,158,151,198,138,221,126,246,114,271,106"/>
+</map>

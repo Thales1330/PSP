@@ -1,0 +1,5 @@
+<map id="ConnectionLine::Contains" name="ConnectionLine::Contains">
+<area shape="rect" id="Node000001" title="Checks if the element contains a position." alt="" coords="5,5,192,31"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a4e3c28dabc2ab55cde6f5bf4d9732073" title="Calculate the distance between a line (formed by point list) and a point." alt="" coords="240,5,455,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,15,226,15,226,21,192,21"/>
+</map>

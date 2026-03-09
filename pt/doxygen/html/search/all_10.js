@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tap_0',['tap',['../struct_parse_anarede_1_1_branch_data.html#a701d37e2dbdb8241e3065ffa544f2281',1,'ParseAnarede::BranchData::tap'],['../struct_parse_matpower_1_1_branch_data.html#a768b3c0d538b2055de4d838ff3d6f635',1,'ParseMatpower::BranchData::tap']]],
+  ['tap_0',['tap',['../struct_parse_matpower_1_1_branch_data.html#a768b3c0d538b2055de4d838ff3d6f635',1,'ParseMatpower::BranchData::tap'],['../struct_parse_anarede_1_1_branch_data.html#a701d37e2dbdb8241e3065ffa544f2281',1,'ParseAnarede::BranchData::tap']]],
   ['text_1',['Text',['../class_text.html',1,'']]],
   ['text_2eh_2',['Text.h',['../_text_8h.html',1,'']]],
   ['textform_3',['TextForm',['../class_text_form.html',1,'']]],

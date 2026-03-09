@@ -1,0 +1,5 @@
+<map id="Machines::UpdateNodes" name="Machines::UpdateNodes">
+<area shape="rect" id="Node000001" title="Update the nodes according to the parents. If a parent is removed, use this method." alt="" coords="5,5,185,31"/>
+<area shape="rect" id="Node000002" href="$class_machines.html#a0a825ccdbd5059f9ae9f869d4b6e3ec4" title="Check if the element&#39;s rect intersects other rect." alt="" coords="233,5,389,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,15,220,15,220,21,186,21"/>
+</map>

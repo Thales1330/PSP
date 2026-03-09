@@ -1,0 +1,5 @@
+<map id="MathExpression::UpdateText" name="MathExpression::UpdateText">
+<area shape="rect" id="Node000001" title="Update the OpenGL text in the element (if present)." alt="" coords="5,5,213,31"/>
+<area shape="rect" id="Node000002" href="$class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085" title="Set correctly a new text string." alt="" coords="261,5,385,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,15,247,15,247,21,214,21"/>
+</map>

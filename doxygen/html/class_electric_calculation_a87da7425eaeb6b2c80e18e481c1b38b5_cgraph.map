@@ -1,0 +1,7 @@
+<map id="ElectricCalculation::GetYBus" name="ElectricCalculation::GetYBus">
+<area shape="rect" id="Node000001" title="Get the admittance matrix from the list of elements (use GetElementsFromList first)." alt="" coords="5,23,148,63"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a1150aef1610cdc2a28d96570dbac805a" title="Get the parent list." alt="" coords="196,5,367,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,32,182,28,183,33,148,37"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa" title="Checks if the element is online or offline." alt="" coords="213,55,350,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,49,199,55,199,60,148,54"/>
+</map>

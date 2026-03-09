@@ -1,0 +1,7 @@
+<map id="ElectricCalculation::InvertMatrix" name="ElectricCalculation::InvertMatrix">
+<area shape="rect" id="Node000001" title="Invert a matrix." alt="" coords="271,23,413,63"/>
+<area shape="rect" id="Node000002" href="$class_fault.html#a4120f861b073783b4fb82385171fbd0f" title="Calculate the fault of the system. Return true if was possible the calculation." alt="" coords="19,5,209,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,37,209,31,210,26,257,31"/>
+<area shape="rect" id="Node000003" href="$class_fault.html#ac7942a558f3ecdb8c06ddb49567c487a" title="Calculate the short&#45;circuit power of the system. Return true if was possible the calculation." alt="" coords="5,55,223,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="258,55,223,59,223,53,257,50"/>
+</map>

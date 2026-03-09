@@ -1,0 +1,7 @@
+<map id="Fault::UpdateElementsFault" name="Fault::UpdateElementsFault">
+<area shape="rect" id="Node000001" title="Update the data of the elements." alt="" coords="5,31,205,56"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a1150aef1610cdc2a28d96570dbac805a" title="Get the parent list." alt="" coords="253,5,424,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,30,239,26,240,31,206,35"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa" title="Checks if the element is online or offline." alt="" coords="270,55,407,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,51,256,56,256,62,205,56"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="GCText::GetCopy" name="GCText::GetCopy">
+<area shape="rect" id="Node000001" title="Get a deep text copy." alt="" coords="247,80,379,105"/>
+<area shape="rect" id="Node000002" href="$class_constant.html#ac566e3a63326d3f543a55af14ae0f8fa" title="Get a the element copy." alt="" coords="30,5,174,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,76,198,45,160,33,162,28,200,39,275,71"/>
+<area shape="rect" id="Node000003" href="$class_gain.html#a489572e289935d7256c037af682b9351" title="Get a the element copy." alt="" coords="44,55,160,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="233,86,160,77,161,72,234,81"/>
+<area shape="rect" id="Node000004" href="$class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7" title="Get a the element copy." alt="" coords="29,104,175,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="233,104,176,111,175,106,233,99"/>
+<area shape="rect" id="Node000005" href="$class_transfer_function.html#a3312f7e9499aa99742093d3b60547862" title="Get a the element copy." alt="" coords="5,153,199,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="273,114,200,143,157,156,156,151,198,138,271,109"/>
+</map>

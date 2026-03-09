@@ -1,0 +1,5 @@
+<map id="Transformer::Move" name="Transformer::Move">
+<area shape="rect" id="Node000001" title="Move the element other position." alt="" coords="5,5,149,31"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a920fe7ba1563615857618f01e64b3284" title="Set the element position and update the rectangle." alt="" coords="197,5,355,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,15,184,15,184,21,149,21"/>
+</map>

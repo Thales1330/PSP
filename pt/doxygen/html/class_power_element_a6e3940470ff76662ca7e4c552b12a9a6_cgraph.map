@@ -1,0 +1,5 @@
+<map id="PowerElement::DrawDCSwitches" name="PowerElement::DrawDCSwitches">
+<area shape="rect" id="Node000001" title="Draw switch." alt="" coords="5,5,240,31"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="288,5,447,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,15,274,15,274,21,240,21"/>
+</map>

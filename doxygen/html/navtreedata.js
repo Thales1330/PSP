@@ -49,10 +49,10 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_about_form_8h.html",
-"class_electric_calculation.html#a86905e3b92f69ad0a2d0f3029c00d805",
-"class_power_element.html#abd2cee52270374e17951782bdb571dce",
-"struct_parse_matpower_1_1_gen_data.html#a9a308a508c87d1021f58e30b35022cc6"
+"_a_t_p_file_editor_form_8cpp_source.html",
+"_power_element_8h.html#ae3647532013a87e6261507e77a364581",
+"class_element.html#ad1f153a87797633ab310d07e1d06eba9",
+"class_text.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

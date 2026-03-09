@@ -1,0 +1,5 @@
+<map id="Element::SetInserted" name="Element::SetInserted">
+<area shape="rect" id="Node000001" title="Set if the element is properly inserted in the workspace." alt="" coords="176,5,335,31"/>
+<area shape="rect" id="Node000002" href="$class_line.html#a26c69f7f703dca718edc28d5093934a3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,5,128,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,21,128,21,128,15,162,15"/>
+</map>

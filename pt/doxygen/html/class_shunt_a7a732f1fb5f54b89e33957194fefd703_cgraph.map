@@ -1,0 +1,5 @@
+<map id="Shunt::RotateNode" name="Shunt::RotateNode">
+<area shape="rect" id="Node000001" title="Rotate a node." alt="" coords="5,5,149,31"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a99b213010776b34a27eb814aff288a34" title="Rotate a point as element position being the origin." alt="" coords="197,5,391,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,15,184,15,184,21,150,21"/>
+</map>

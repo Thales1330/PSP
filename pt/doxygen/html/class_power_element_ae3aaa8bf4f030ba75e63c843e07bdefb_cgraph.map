@@ -1,0 +1,5 @@
+<map id="PowerElement::DrawDCPowerFlowPts" name="PowerElement::DrawDCPowerFlowPts">
+<area shape="rect" id="Node000001" title="Draw power flow arrows." alt="" coords="5,5,223,45"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a9332ba7b4ce2051a3935081cc890c03c" title="Draw rectangle." alt="" coords="271,13,459,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,23,257,23,257,28,223,28"/>
+</map>

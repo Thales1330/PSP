@@ -1,5 +1,5 @@
 <map id="Fault" name="Fault">
-<area shape="rect" id="Node000001" title="Calculate the fault of the system and update the elements data." alt="" coords="45,80,95,107"/>
-<area shape="rect" id="Node000002" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods." alt="" coords="5,5,135,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,48,73,80,67,80,67,48"/>
+<area shape="rect" id="Node000001" title="Calculate the fault of the system and update the elements data." alt="" coords="32,1321,307,2060"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods." alt="" coords="5,5,333,1273"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,1287,172,1321,167,1321,167,1287"/>
 </map>

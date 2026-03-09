@@ -23,7 +23,8 @@ var _power_element_8h =
       [ "UNIT_S", "_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a78a88fba8df3c248d316b122b2796643", null ],
       [ "UNIT_S_km", "_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aaf10cf4a7763255f30b4f9c3a06d2223", null ],
       [ "UNIT_DEGREE", "_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a8e20a7e2f59792413829256e99562282", null ],
-      [ "UNIT_RADIAN", "_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4", null ]
+      [ "UNIT_RADIAN", "_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6adebc11185cac8efb37bd3b633e12f1c4", null ],
+      [ "UNIT_NONE", "_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6afb16e9af9a972ad5e609b2051ada933e", null ]
     ] ],
     [ "FaultData", "_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df", [
       [ "FAULT_THREEPHASE", "_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa6f7405d8790f4650c1d5dac3f9dcf583", null ],

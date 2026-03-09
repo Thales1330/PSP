@@ -1,0 +1,25 @@
+<map id="EMTElementForm" name="EMTElementForm">
+<area shape="rect" id="Node000001" title=" " alt="" coords="400,2876,668,3204"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="216,2521,377,2586"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="312,2598,344,2698,391,2812,425,2874,420,2877,386,2814,339,2700,307,2600"/>
+<area shape="rect" id="Node000003" href="$class_e_m_t_element.html" title="Element to connect ATP&#45;EMTP." alt="" coords="401,2293,667,2813"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="537,2814,537,2860,531,2860,531,2814"/>
+<area shape="rect" id="Node000004" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="141,1616,417,2231"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="411,2243,431,2292,426,2294,406,2245"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="137,857,422,1567"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="282,1580,282,1616,277,1616,277,1580"/>
+<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,287,795"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="216,808,224,856,218,857,210,809"/>
+<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="311,343,517,457"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="407,458,344,841,338,840,402,457"/>
+<area shape="rect" id="Node000008" href="$struct_e_m_t_element_data.html" title=" " alt="" coords="442,1783,626,2063"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="537,2064,537,2277,531,2277,531,2064"/>
+<area shape="rect" id="Node000009" href="$class_properties_data.html" title="General and simulation data manager." alt="" coords="775,2399,1050,2707"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="795,2709,674,2864,669,2861,791,2706"/>
+<area shape="rect" id="Node000010" href="$struct_simulation_data.html" title=" " alt="" coords="650,1776,874,2071"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="798,2070,845,2269,873,2383,867,2384,839,2270,793,2071"/>
+<area shape="rect" id="Node000011" href="$struct_general_data.html" title=" " alt="" coords="898,1831,1082,2016"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="981,2017,936,2383,931,2383,976,2016"/>
+<area shape="rect" id="Node000012" href="$struct_freq_response_data.html" title=" " alt="" coords="1106,1861,1247,1986"/>
+<area shape="poly" id="edge11_Node000009_Node000012" title=" " alt="" coords="1167,1987,1140,2102,1120,2168,1096,2232,1060,2310,1020,2386,1015,2384,1056,2308,1092,2230,1115,2166,1134,2101,1162,1986"/>
+</map>

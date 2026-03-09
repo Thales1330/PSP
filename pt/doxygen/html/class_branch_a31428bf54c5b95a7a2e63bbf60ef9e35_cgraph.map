@@ -1,0 +1,5 @@
+<map id="Branch::UpdateNodes" name="Branch::UpdateNodes">
+<area shape="rect" id="Node000001" title="Update the nodes according to the parents. If a parent is removed, use this method." alt="" coords="5,5,168,31"/>
+<area shape="rect" id="Node000002" href="$class_branch.html#aa23b1014c947e46996f1c0c4caa187e1" title="Check if the element&#39;s rect intersects other rect." alt="" coords="216,5,355,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,15,202,15,202,21,168,21"/>
+</map>

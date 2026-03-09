@@ -1,0 +1,7 @@
+<map id="Branch::UpdateSwitches" name="Branch::UpdateSwitches">
+<area shape="rect" id="Node000001" title="Update the switch position." alt="" coords="228,31,408,56"/>
+<area shape="rect" id="Node000002" href="$class_line.html#a26c69f7f703dca718edc28d5093934a3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="31,5,154,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,34,154,28,155,22,214,29"/>
+<area shape="rect" id="Node000003" href="$class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,55,180,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,57,180,61,180,55,214,52"/>
+</map>

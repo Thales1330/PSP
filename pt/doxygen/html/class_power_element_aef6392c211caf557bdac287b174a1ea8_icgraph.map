@@ -1,0 +1,21 @@
+<map id="PowerElement::GetSwitchPoint" name="PowerElement::GetSwitchPoint">
+<area shape="rect" id="Node000001" title="Get the correct switch position." alt="" coords="233,203,456,228"/>
+<area shape="rect" id="Node000002" href="$class_capacitor.html#ace755e5bc3cc72b491ce31c24c54a5cf" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="16,5,175,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="326,193,269,119,229,79,184,44,160,33,162,28,187,40,233,75,273,115,330,190"/>
+<area shape="rect" id="Node000003" href="$class_e_m_t_element.html#a9793391b74f11de7211fd7bb4b8d5778" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="6,55,185,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="319,195,261,144,224,117,184,94,156,82,158,78,186,89,227,112,264,140,323,191"/>
+<area shape="rect" id="Node000004" href="$class_harm_current.html#ad0d53fd562d5519bf006aa21f0f0247c" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,104,185,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="307,199,250,171,184,143,149,132,150,127,186,138,252,166,309,194"/>
+<area shape="rect" id="Node000005" href="$class_inductor.html#a4e404c6e15f206fe0f5de06fc19dedf5" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="21,153,170,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="266,203,160,181,161,176,267,197"/>
+<area shape="rect" id="Node000006" href="$class_line.html#a26c69f7f703dca718edc28d5093934a3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="34,203,157,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="219,218,157,218,157,213,219,213"/>
+<area shape="rect" id="Node000007" href="$class_load.html#ac9f449be9b919b36924a844324bf37ee" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="32,252,159,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="267,233,159,255,158,250,266,228"/>
+<area shape="rect" id="Node000008" href="$class_machines.html#aaaf1b86dcbfd8f4a4c082a77d72b1fe3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="16,301,175,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="308,237,251,264,186,291,147,304,146,299,184,286,249,259,305,232"/>
+<area shape="rect" id="Node000009" href="$class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="8,351,183,376"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="322,240,264,290,226,317,187,340,155,353,153,348,184,336,223,313,260,286,319,236"/>
+<area shape="rect" id="Node000010" href="$class_line.html#a37f35cabf98de2806188cdf919d26e2a" title="Draw the element using GDI+." alt="" coords="40,400,151,425"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="330,241,273,315,232,355,187,390,152,405,150,400,184,385,229,351,269,311,326,238"/>
+</map>

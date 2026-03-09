@@ -1,0 +1,7 @@
+<map id="Gain::DrawDC" name="Gain::DrawDC">
+<area shape="rect" id="Node000001" title="Draw the element using GDI+." alt="" coords="5,31,119,56"/>
+<area shape="rect" id="Node000002" href="$class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8" title="Draw the text in wxGraphicsContext." alt="" coords="205,5,316,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,33,191,24,192,29,119,39"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a9332ba7b4ce2051a3935081cc890c03c" title="Draw rectangle." alt="" coords="167,55,355,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="119,47,153,52,153,57,119,53"/>
+</map>

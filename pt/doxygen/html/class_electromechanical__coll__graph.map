@@ -1,5 +1,7 @@
 <map id="Electromechanical" name="Electromechanical">
-<area shape="rect" id="Node000001" title="Calculates the electromechanical transient based on disturbances (e.g. system fault)." alt="" coords="6,80,134,107"/>
-<area shape="rect" id="Node000002" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods." alt="" coords="5,5,135,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,48,73,80,67,80,67,48"/>
+<area shape="rect" id="Node000001" title="Calculates the electromechanical transient based on disturbances (e.g. system fault)." alt="" coords="190,1336,447,2337"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html" title="Base class of electric calculations, with general methods." alt="" coords="5,5,333,1273"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,1287,259,1335,254,1336,247,1287"/>
+<area shape="rect" id="Node000003" href="$struct_simulation_data.html" title=" " alt="" coords="357,492,581,787"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="454,787,386,1320,381,1319,448,787"/>
 </map>

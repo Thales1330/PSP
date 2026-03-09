@@ -1,0 +1,7 @@
+<map id="MathExpression::DrawDC" name="MathExpression::DrawDC">
+<area shape="rect" id="Node000001" title="Draw the element using GDI+." alt="" coords="5,31,192,56"/>
+<area shape="rect" id="Node000002" href="$class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8" title="Draw the text in wxGraphicsContext." alt="" coords="264,5,375,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,30,250,23,251,29,193,35"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="240,55,399,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,51,227,55,226,60,192,56"/>
+</map>

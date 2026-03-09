@@ -6,5 +6,9 @@ var dir_ffd1f789ec7bd0a45fc6ad92579c5070 =
     [ "simulation", "dir_684ee06151bfbdca3c971174d4b226d5.html", "dir_684ee06151bfbdca3c971174d4b226d5" ],
     [ "utils", "dir_751b8c0f4ded4e9a4f23702db0023e1f.html", "dir_751b8c0f4ded4e9a4f23702db0023e1f" ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
-    [ "MainFrame.h", "_main_frame_8h.html", "_main_frame_8h" ]
+    [ "MainFrame.cpp", "_main_frame_8cpp_source.html", null ],
+    [ "MainFrame.h", "_main_frame_8h.html", "_main_frame_8h" ],
+    [ "MainFrameBase.cpp", "_main_frame_base_8cpp_source.html", null ],
+    [ "MainFrameBase.h", "_main_frame_base_8h_source.html", null ],
+    [ "MainFrameBitmaps.cpp", "_main_frame_bitmaps_8cpp_source.html", null ]
 ];

@@ -1,0 +1,41 @@
+<map id="Element::GetAngle" name="Element::GetAngle">
+<area shape="rect" id="Node000001" title="Get the element angle." alt="" coords="504,334,648,359"/>
+<area shape="rect" id="Node000002" href="$class_capacitor.html#ace755e5bc3cc72b491ce31c24c54a5cf" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="16,6,175,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="569,321,560,266,540,197,525,161,506,126,483,95,454,68,423,48,388,33,352,22,314,14,241,8,175,11,175,5,241,3,315,9,353,17,390,28,425,43,458,64,487,91,511,123,530,158,545,195,565,265,575,320"/>
+<area shape="rect" id="Node000003" href="$class_e_m_t_element.html#a9793391b74f11de7211fd7bb4b8d5778" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="6,56,185,82"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="567,321,555,275,533,218,500,161,479,136,454,115,424,97,390,83,320,65,249,59,185,61,185,55,249,54,321,60,392,78,426,92,458,111,483,132,505,158,538,216,560,273,572,319"/>
+<area shape="rect" id="Node000004" href="$class_harm_current.html#ad0d53fd562d5519bf006aa21f0f0247c" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,107,185,132"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="564,321,550,283,527,238,495,193,476,174,455,158,423,141,390,129,319,113,249,108,186,110,185,105,249,103,320,108,391,123,425,136,457,153,480,170,499,190,531,235,554,281,569,319"/>
+<area shape="rect" id="Node000005" href="$class_inductor.html#a4e404c6e15f206fe0f5de06fc19dedf5" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="21,158,170,183"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="561,322,544,292,521,257,491,223,455,197,420,181,384,170,308,158,234,156,170,161,170,156,234,151,308,153,385,165,422,176,457,192,494,219,525,253,549,289,566,320"/>
+<area shape="rect" id="Node000006" href="$class_line.html#a26c69f7f703dca718edc28d5093934a3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="34,258,157,283"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="517,333,455,318,294,293,157,278,157,273,294,288,457,313,519,327"/>
+<area shape="rect" id="Node000007" href="$class_load.html#ac9f449be9b919b36924a844324bf37ee" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="32,308,159,334"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="490,344,159,327,159,322,490,339"/>
+<area shape="rect" id="Node000008" href="$class_machines.html#aaaf1b86dcbfd8f4a4c082a77d72b1fe3" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="16,359,175,384"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="490,353,175,370,175,365,490,348"/>
+<area shape="rect" id="Node000009" href="$class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="8,408,183,434"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="502,364,456,373,183,413,183,408,456,368,501,359"/>
+<area shape="rect" id="Node000010" href="$class_power_element.html#aef6392c211caf557bdac287b174a1ea8" title="Get the correct switch position." alt="" coords="233,207,456,232"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="550,326,508,289,455,254,404,235,406,230,457,249,511,285,554,322"/>
+<area shape="rect" id="Node000012" href="$class_branch.html#aaf64ea58631438e3a16b1b2ede793875" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="259,460,430,486"/>
+<area shape="poly" id="edge19_Node000001_Node000012" title=" " alt="" coords="554,371,511,408,457,443,406,463,404,458,455,439,508,404,550,367"/>
+<area shape="rect" id="Node000013" href="$class_line.html#a6d35082da4d30bd432b73b72dd86fadb" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="268,510,421,535"/>
+<area shape="poly" id="edge20_Node000001_Node000013" title=" " alt="" coords="564,373,523,437,493,472,457,501,423,516,420,511,455,496,489,468,519,434,560,370"/>
+<area shape="rect" id="Node000014" href="$class_machines.html#aed7664d5b85585fc13f4a1ad48457901" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="251,559,439,584"/>
+<area shape="poly" id="edge21_Node000001_Node000014" title=" " alt="" coords="570,373,555,413,532,461,499,509,480,531,458,550,437,561,435,556,454,545,476,527,495,506,527,458,550,410,565,371"/>
+<area shape="rect" id="Node000015" href="$class_shunt.html#aacb9fdd05533a8322596b130c70774ef" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="263,608,426,634"/>
+<area shape="poly" id="edge22_Node000001_Node000015" title=" " alt="" coords="573,373,561,422,539,483,506,546,484,574,458,599,427,615,425,610,454,595,480,571,501,543,534,481,556,420,568,372"/>
+<area shape="rect" id="Node000016" href="$class_transformer.html#a4f9137e6190fb630167f671a0da51ab6" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="243,658,447,683"/>
+<area shape="poly" id="edge23_Node000001_Node000016" title=" " alt="" coords="575,373,566,431,546,505,531,545,511,583,487,618,458,648,440,660,437,655,454,644,483,614,507,580,526,542,541,504,561,430,570,373"/>
+<area shape="poly" id="edge10_Node000010_Node000002" title=" " alt="" coords="326,197,269,122,229,81,184,46,157,33,159,29,187,41,233,77,273,118,330,194"/>
+<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="319,199,261,147,224,120,184,97,153,84,155,79,187,92,227,116,264,143,323,195"/>
+<area shape="poly" id="edge12_Node000010_Node000004" title=" " alt="" coords="306,203,249,175,184,147,146,135,148,130,186,142,252,170,308,198"/>
+<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="266,207,160,186,161,180,267,202"/>
+<area shape="poly" id="edge14_Node000010_Node000006" title=" " alt="" coords="268,238,157,261,156,255,267,233"/>
+<area shape="poly" id="edge15_Node000010_Node000007" title=" " alt="" coords="308,241,252,269,186,297,144,311,143,306,184,292,249,264,306,236"/>
+<area shape="poly" id="edge16_Node000010_Node000008" title=" " alt="" coords="322,244,264,296,226,323,187,347,152,361,150,356,184,343,223,319,260,291,319,240"/>
+<area shape="poly" id="edge17_Node000010_Node000009" title=" " alt="" coords="330,246,307,280,274,322,233,364,187,399,163,411,160,406,184,395,230,360,270,318,302,277,326,243"/>
+<area shape="rect" id="Node000011" href="$class_line.html#a37f35cabf98de2806188cdf919d26e2a" title="Draw the element using GDI+." alt="" coords="40,207,151,232"/>
+<area shape="poly" id="edge18_Node000010_Node000011" title=" " alt="" coords="220,222,151,222,151,217,220,217"/>
+</map>

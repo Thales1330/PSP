@@ -1,0 +1,14 @@
+<map id="Element::GetParentList" name="Element::GetParentList">
+<area shape="rect" id="Node000001" title="Get the parent list." alt="" coords="528,63,699,88"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5" title="Get the admittance matrix from the list of elements (use GetElementsFromList first)." alt="" coords="304,55,447,95"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="514,78,447,78,447,73,514,73"/>
+<area shape="rect" id="Node000005" href="$class_fault.html#af1bb91359dfe8df0251a2031957d3ddf" title="Update the data of the elements." alt="" coords="275,5,475,31"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="546,62,428,33,429,28,547,57"/>
+<area shape="rect" id="Node000006" href="$class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049" title="Update the elements after the power flow calculation." alt="" coords="271,119,480,159"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="552,94,451,122,450,117,551,89"/>
+<area shape="rect" id="Node000003" href="$class_fault.html#a4120f861b073783b4fb82385171fbd0f" title="Calculate the fault of the system. Return true if was possible the calculation." alt="" coords="19,9,209,35"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="290,61,176,37,177,32,291,55"/>
+<area shape="rect" id="Node000004" href="$class_fault.html#ac7942a558f3ecdb8c06ddb49567c487a" title="Calculate the short&#45;circuit power of the system. Return true if was possible the calculation." alt="" coords="5,63,223,88"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="290,78,223,78,223,73,290,73"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="261,22,210,23,209,18,261,17"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Bus::Intersects" name="Bus::Intersects">
+<area shape="rect" id="Node000001" title="Check if the element&#39;s rect intersects other rect." alt="" coords="5,13,124,38"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a01563b5b2fed2860132f4dd1593f9eea" title="Check if two roteted rectangles intersect." alt="" coords="172,5,379,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,23,158,23,158,28,124,28"/>
+</map>

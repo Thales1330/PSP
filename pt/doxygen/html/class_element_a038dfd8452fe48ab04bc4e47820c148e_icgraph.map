@@ -1,0 +1,13 @@
+<map id="Element::Intersects" name="Element::Intersects">
+<area shape="rect" id="Node000001" title="Check if the element&#39;s rect intersects other rect." alt="" coords="257,104,405,129"/>
+<area shape="rect" id="Node000002" href="$class_branch.html#aaf64ea58631438e3a16b1b2ede793875" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="22,5,193,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,98,258,70,208,44,175,33,177,28,210,40,261,66,304,94"/>
+<area shape="rect" id="Node000003" href="$class_line.html#a6d35082da4d30bd432b73b72dd86fadb" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="31,55,184,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="259,104,165,83,166,77,260,98"/>
+<area shape="rect" id="Node000004" href="$class_machines.html#aed7664d5b85585fc13f4a1ad48457901" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="13,104,201,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="243,119,201,119,201,114,243,114"/>
+<area shape="rect" id="Node000005" href="$class_shunt.html#aacb9fdd05533a8322596b130c70774ef" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="26,153,189,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="260,135,166,156,165,151,259,130"/>
+<area shape="rect" id="Node000006" href="$class_transformer.html#a4f9137e6190fb630167f671a0da51ab6" title="Set a perent to the node. If all conditions are met, a new parent are added to the element and the po..." alt="" coords="5,203,209,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="303,140,261,167,210,192,172,205,171,200,208,188,258,162,300,135"/>
+</map>

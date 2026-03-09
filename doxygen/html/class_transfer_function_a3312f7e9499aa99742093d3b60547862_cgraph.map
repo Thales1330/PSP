@@ -1,0 +1,7 @@
+<map id="TransferFunction::GetCopy" name="TransferFunction::GetCopy">
+<area shape="rect" id="Node000001" title="Get a the element copy." alt="" coords="5,5,199,31"/>
+<area shape="rect" id="Node000002" href="$class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="247,5,379,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,15,232,15,232,21,199,21"/>
+<area shape="rect" id="Node000003" href="$class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085" title="Set correctly a new text string." alt="" coords="427,5,551,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="379,15,413,15,413,21,379,21"/>
+</map>

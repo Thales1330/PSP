@@ -1,0 +1,16 @@
+<map id="Inductor::AddParent" name="Inductor::AddParent">
+<area shape="rect" id="Node000001" title="Add a parent to the element. This method must be used on power elements that connect to a bus,..." alt="" coords="5,132,155,157"/>
+<area shape="rect" id="Node000002" href="$class_element.html#ac38d6707d08cb5c057032aa94b511a62" title="Add a child to the child list." alt="" coords="246,5,389,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,130,138,89,169,67,201,48,240,32,242,37,204,52,172,72,142,94,96,134"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a5c75d8a6e28326dd568104a4d9d3473f" title="Get the element angle." alt="" coords="480,107,624,132"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="103,129,148,108,202,91,266,81,317,80,432,91,489,101,489,106,432,97,317,85,267,87,203,97,150,113,105,134"/>
+<area shape="rect" id="Node000004" href="$class_element.html#a536ad18a847dcc979c984b3cb287f238" title="Get the element position." alt="" coords="238,107,397,132"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="155,134,224,127,225,132,155,139"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html#aef6392c211caf557bdac287b174a1ea8" title="Get the correct switch position." alt="" coords="206,156,429,181"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="155,150,193,153,192,159,155,155"/>
+<area shape="rect" id="Node000006" href="$class_element.html#a99b213010776b34a27eb814aff288a34" title="Rotate a point as element position being the origin." alt="" coords="221,205,414,231"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="111,155,203,190,238,200,237,205,202,195,109,160"/>
+<area shape="rect" id="Node000007" href="$class_power_element.html#abd2cee52270374e17951782bdb571dce" title="Update the switch position." alt="" coords="203,255,432,280"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="95,156,140,198,171,220,204,240,225,248,223,253,201,244,168,225,137,202,92,160"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="378,153,477,132,478,138,379,159"/>
+</map>
