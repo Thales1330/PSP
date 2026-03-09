@@ -33,7 +33,10 @@ jobs:
         run: mkdir -p docusaurus/static/doxygen
 
       - name: Generate Doxygen docs
-        run: doxygen -D PROJECT_NUMBER=$VERSION docs/doxygen/Doxyfile
+        run: |
+            cp docs/doxygen/Doxyfile Doxyfile.tmp
+            sed -i "s/^PROJECT_NUMBER.*/PROJECT_NUMBER = $VERSION/" Doxyfile.tmp
+            doxygen Doxyfile.tmp
 
       - name: Setup Node
         uses: actions/setup-node@v4
