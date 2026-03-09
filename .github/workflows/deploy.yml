@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'docusaurus/**'
+      - 'docs/doxygen/**'
       - '.github/workflows/deploy.yml'
 
 permissions:
