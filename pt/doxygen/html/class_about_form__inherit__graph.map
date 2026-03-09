@@ -1,5 +1,5 @@
 <map id="AboutForm" name="AboutForm">
-<area shape="rect" id="Node000001" title="Form to show some informations." alt="" coords="5,119,224,273"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="56,5,173,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,84,117,118,112,118,112,84"/>
+<area shape="rect" id="Node000001" title="Form to show some informations." alt="" coords="20,80,106,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,121,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,48,66,80,60,80,60,48"/>
 </map>

@@ -1,17 +1,17 @@
 <map id="HarmCurrentForm" name="HarmCurrentForm">
-<area shape="rect" id="Node000001" title=" " alt="" coords="111,2812,383,3111"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="145,2489,307,2554"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,2568,243,2812,237,2812,226,2568"/>
-<area shape="rect" id="Node000003" href="$class_harm_current.html" title="Shunt Harmonic Corrent Source." alt="" coords="332,2293,597,2749"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="354,2751,331,2798,326,2796,349,2748"/>
-<area shape="rect" id="Node000004" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="141,1616,417,2231"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="381,2243,397,2292,392,2294,376,2245"/>
-<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="137,857,422,1567"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="282,1580,282,1616,277,1616,277,1580"/>
-<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,287,795"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="216,808,224,856,218,857,210,809"/>
-<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="311,343,517,457"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="407,458,344,841,338,840,402,457"/>
-<area shape="rect" id="Node000008" href="$struct_harm_current_electrical_data.html" title=" " alt="" coords="442,1821,642,2025"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="532,2026,499,2277,494,2276,526,2025"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="35,352,159,379"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,261,160,288"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,303,98,351,92,352,84,304"/>
+<area shape="rect" id="Node000003" href="$class_harm_current.html" title="Shunt Harmonic Corrent Source." alt="" coords="183,261,278,288"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,299,118,354,115,349,197,295"/>
+<area shape="rect" id="Node000004" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="106,171,161,197"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="160,206,218,259,215,263,156,210"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="81,96,186,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="136,138,136,170,131,170,131,138"/>
+<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="44,5,113,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="97,44,128,94,123,97,92,47"/>
+<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="137,5,241,32"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="175,47,143,97,139,94,171,44"/>
+<area shape="rect" id="Node000008" href="$struct_harm_current_electrical_data.html" title=" " alt="" coords="186,171,361,197"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="263,213,239,262,234,260,258,210"/>
 </map>

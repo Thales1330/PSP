@@ -1,5 +1,5 @@
 <map id="RateLimiterForm" name="RateLimiterForm">
-<area shape="rect" id="Node000001" title="Form to edit the rate limit control data." alt="" coords="5,119,259,328"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="55,5,209,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,84,135,118,129,118,129,84"/>
+<area shape="rect" id="Node000001" title="Form to edit the rate limit control data." alt="" coords="20,80,138,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,153,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,48,82,80,76,80,76,48"/>
 </map>

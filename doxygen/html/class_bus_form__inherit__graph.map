@@ -1,5 +1,5 @@
 <map id="BusForm" name="BusForm">
-<area shape="rect" id="Node000001" title="Form to edit the bus power data." alt="" coords="5,119,263,664"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="83,5,185,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,85,137,119,131,119,131,85"/>
+<area shape="rect" id="Node000001" title="Form to edit the bus power data." alt="" coords="20,80,95,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,110,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,48,60,80,55,80,55,48"/>
 </map>

@@ -1,9 +1,0 @@
-<map id="Project/forms/ReactiveShuntElementForm.h" name="Project/forms/ReactiveShuntElementForm.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="272,5,479,45"/>
-<area shape="rect" id="Node000002" href="$_capacitor_8cpp_source.html" title=" " alt="" coords="5,93,236,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="307,52,177,96,176,91,306,47"/>
-<area shape="rect" id="Node000003" href="$_inductor_8cpp_source.html" title=" " alt="" coords="260,93,491,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="378,59,378,93,373,93,373,59"/>
-<area shape="rect" id="Node000004" href="$_reactive_shunt_element_form_8cpp_source.html" title=" " alt="" coords="515,93,721,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="442,47,566,91,564,96,440,52"/>
-</map>

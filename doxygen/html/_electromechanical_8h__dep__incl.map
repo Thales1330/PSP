@@ -1,7 +1,0 @@
-<map id="Project/simulation/Electromechanical.h" name="Project/simulation/Electromechanical.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="145,5,303,45"/>
-<area shape="rect" id="Node000002" href="$_workspace_8cpp_source.html" title=" " alt="" coords="5,101,224,126"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,56,131,102,128,98,187,52"/>
-<area shape="rect" id="Node000003" href="$_electromechanical_8cpp_source.html" title=" " alt="" coords="248,93,421,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="261,52,312,91,309,95,258,56"/>
-</map>

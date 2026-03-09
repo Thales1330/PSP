@@ -1,7 +1,0 @@
-<map id="Project/forms/RateLimiterForm.h" name="Project/forms/RateLimiterForm.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="107,5,297,45"/>
-<area shape="rect" id="Node000002" href="$_rate_limiter_8cpp_source.html" title=" " alt="" coords="5,93,188,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,56,122,95,118,91,167,52"/>
-<area shape="rect" id="Node000003" href="$_rate_limiter_form_8cpp_source.html" title=" " alt="" coords="213,93,402,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="237,52,286,91,282,95,234,56"/>
-</map>

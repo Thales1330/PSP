@@ -1,9 +1,0 @@
-<map id="Project/forms/SyncMachineForm.h" name="Project/forms/SyncMachineForm.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="276,5,475,45"/>
-<area shape="rect" id="Node000002" href="$_sync_generator_8cpp_source.html" title=" " alt="" coords="5,93,236,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="307,52,177,96,176,91,306,47"/>
-<area shape="rect" id="Node000003" href="$_sync_motor_8cpp_source.html" title=" " alt="" coords="260,93,491,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="378,59,378,93,373,93,373,59"/>
-<area shape="rect" id="Node000004" href="$_sync_machine_form_8cpp_source.html" title=" " alt="" coords="515,93,713,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="442,48,563,91,561,96,440,53"/>
-</map>

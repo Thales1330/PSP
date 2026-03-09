@@ -1,5 +1,5 @@
 <map id="GraphicalElement" name="GraphicalElement">
-<area shape="rect" id="Node000001" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="63,843,229,928"/>
-<area shape="rect" id="Node000002" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,287,795"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,808,149,842,143,842,143,808"/>
+<area shape="rect" id="Node000001" title="Abstract class for graphical elements shown with power elements in workspace." alt="" coords="5,80,130,107"/>
+<area shape="rect" id="Node000002" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="33,5,102,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,48,70,80,65,80,65,48"/>
 </map>

@@ -1,7 +1,0 @@
-<map id="Project/simulation/PowerFlow.h" name="Project/simulation/PowerFlow.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="146,5,286,45"/>
-<area shape="rect" id="Node000002" href="$_workspace_8cpp_source.html" title=" " alt="" coords="5,101,224,126"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,56,130,102,127,98,181,52"/>
-<area shape="rect" id="Node000003" href="$_power_flow_8cpp_source.html" title=" " alt="" coords="249,93,389,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="251,52,298,91,294,95,248,56"/>
-</map>

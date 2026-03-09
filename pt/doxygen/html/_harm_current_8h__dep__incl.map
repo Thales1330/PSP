@@ -1,54 +1,17 @@
 <map id="Project/elements/powerElement/HarmCurrent.h" name="Project/elements/powerElement/HarmCurrent.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="1227,5,1458,45"/>
-<area shape="rect" id="Node000002" href="$_main_frame_8cpp_source.html" title=" " alt="" coords="1997,277,2168,302"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1280,53,1247,70,1221,90,1214,100,1210,111,1211,121,1218,131,1234,141,1262,149,1345,159,1456,164,1580,166,1818,166,1907,170,1960,179,1997,200,2031,226,2076,275,2072,278,2027,230,1994,204,1958,184,1907,175,1818,172,1580,171,1456,169,1345,165,1260,154,1232,146,1214,135,1206,123,1205,110,1209,98,1218,86,1244,66,1277,49"/>
-<area shape="rect" id="Node000003" href="$_workspace_8cpp_source.html" title=" " alt="" coords="1104,277,1323,302"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1472,32,1539,40,1605,52,1659,69,1680,79,1694,92,1715,125,1722,158,1715,190,1694,223,1666,243,1626,255,1577,263,1524,266,1418,268,1336,272,1287,279,1286,274,1336,267,1417,263,1524,261,1577,257,1625,250,1664,238,1690,219,1710,188,1717,158,1710,127,1690,95,1677,84,1657,73,1603,57,1538,45,1471,37"/>
-<area shape="rect" id="Node000004" href="$_harm_current_8cpp_source.html" title=" " alt="" coords="1227,93,1458,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1345,59,1345,93,1340,93,1340,59"/>
-<area shape="rect" id="Node000005" href="$_harm_current_form_8cpp_source.html" title=" " alt="" coords="1483,93,1680,133"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1409,48,1530,91,1528,96,1407,53"/>
-<area shape="rect" id="Node000006" href="$_electric_calculation_8h.html" title=" " alt="" coords="963,93,1122,133"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1264,52,1109,96,1108,91,1263,47"/>
-<area shape="rect" id="Node000007" href="$_text_8cpp_source.html" title=" " alt="" coords="230,277,421,302"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="950,120,787,128,600,140,438,159,383,170,352,183,337,205,329,230,327,277,322,276,324,229,332,202,349,179,381,165,437,153,600,135,787,122,949,115"/>
-<area shape="rect" id="Node000008" href="$_data_report_8cpp_source.html" title=" " alt="" coords="1465,189,1679,214"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="1137,127,1502,186,1501,191,1136,132"/>
-<area shape="rect" id="Node000009" href="$_stability_event_list_8cpp_source.html" title=" " alt="" coords="363,181,567,221"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="950,130,579,184,568,186,567,180,578,179,949,125"/>
-<area shape="rect" id="Node000010" href="$_text_form_8h.html" title=" " alt="" coords="102,189,287,214"/>
-<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="950,124,662,146,307,184,258,191,258,186,306,179,662,141,949,118"/>
-<area shape="rect" id="Node000012" href="$_electric_calculation_8cpp_source.html" title=" " alt="" coords="774,181,949,221"/>
-<area shape="poly" id="edge12_Node000006_Node000012" title=" " alt="" coords="992,142,902,184,900,179,990,137"/>
-<area shape="rect" id="Node000013" href="$_electromechanical_8h.html" title=" " alt="" coords="591,181,750,221"/>
-<area shape="poly" id="edge13_Node000006_Node000013" title=" " alt="" coords="951,138,751,184,750,179,950,133"/>
-<area shape="rect" id="Node000015" href="$_fault_8h.html" title=" " alt="" coords="973,181,1113,221"/>
-<area shape="poly" id="edge16_Node000006_Node000015" title=" " alt="" coords="1045,147,1045,181,1040,181,1040,147"/>
-<area shape="rect" id="Node000017" href="$_power_flow_8h.html" title=" " alt="" coords="1137,181,1277,221"/>
-<area shape="poly" id="edge19_Node000006_Node000017" title=" " alt="" coords="1092,137,1172,179,1170,184,1090,142"/>
-<area shape="rect" id="Node000019" href="$_power_quality_8h.html" title=" " alt="" coords="1301,181,1441,221"/>
-<area shape="poly" id="edge22_Node000006_Node000019" title=" " alt="" coords="1128,134,1301,179,1300,184,1127,139"/>
-<area shape="rect" id="Node000021" href="$_file_handing_8h.html" title=" " alt="" coords="1755,189,1947,214"/>
-<area shape="poly" id="edge25_Node000006_Node000021" title=" " alt="" coords="1136,126,1171,131,1431,156,1692,179,1758,186,1757,191,1692,184,1431,161,1170,136,1135,131"/>
-<area shape="poly" id="edge10_Node000010_Node000007" title=" " alt="" coords="225,219,309,274,306,279,222,224"/>
-<area shape="rect" id="Node000011" href="$_text_form_8cpp_source.html" title=" " alt="" coords="5,277,205,302"/>
-<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="175,225,120,278,116,274,171,222"/>
-<area shape="poly" id="edge14_Node000013_Node000003" title=" " alt="" coords="764,219,929,244,1091,267,1139,274,1138,279,1090,272,928,250,763,224"/>
-<area shape="rect" id="Node000014" href="$_electromechanical_8cpp_source.html" title=" " alt="" coords="577,269,751,309"/>
-<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="671,235,668,269,663,269,665,235"/>
-<area shape="poly" id="edge17_Node000015_Node000003" title=" " alt="" coords="1093,225,1192,274,1189,279,1091,230"/>
-<area shape="rect" id="Node000016" href="$_fault_8cpp_source.html" title=" " alt="" coords="775,269,915,309"/>
-<area shape="poly" id="edge18_Node000015_Node000016" title=" " alt="" coords="988,229,890,272,887,267,986,224"/>
-<area shape="poly" id="edge20_Node000017_Node000003" title=" " alt="" coords="1212,235,1215,276,1210,276,1207,235"/>
-<area shape="rect" id="Node000018" href="$_power_flow_8cpp_source.html" title=" " alt="" coords="939,269,1079,309"/>
-<area shape="poly" id="edge21_Node000017_Node000018" title=" " alt="" coords="1152,229,1054,272,1051,267,1150,224"/>
-<area shape="poly" id="edge23_Node000019_Node000003" title=" " alt="" coords="1326,230,1236,279,1233,274,1323,225"/>
-<area shape="rect" id="Node000020" href="$_power_quality_8cpp_source.html" title=" " alt="" coords="1347,269,1487,309"/>
-<area shape="poly" id="edge24_Node000019_Node000020" title=" " alt="" coords="1390,232,1409,268,1405,270,1385,235"/>
-<area shape="poly" id="edge26_Node000021_Node000002" title=" " alt="" coords="1896,216,2052,274,2051,279,1894,221"/>
-<area shape="poly" id="edge28_Node000021_Node000003" title=" " alt="" coords="1771,219,1736,224,1536,248,1336,272,1286,279,1285,274,1336,267,1536,243,1736,219,1770,214"/>
-<area shape="rect" id="Node000022" href="$_control_editor_8cpp_source.html" title=" " alt="" coords="1511,277,1742,302"/>
-<area shape="poly" id="edge27_Node000021_Node000022" title=" " alt="" coords="1808,222,1658,279,1656,274,1807,217"/>
-<area shape="rect" id="Node000023" href="$_file_handing_8cpp_source.html" title=" " alt="" coords="1766,277,1973,302"/>
-<area shape="poly" id="edge29_Node000021_Node000023" title=" " alt="" coords="1859,227,1869,276,1864,277,1853,228"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="400,5,606,48"/>
+<area shape="rect" id="Node000002" href="$_electric_calculation_8h.html" title=" " alt="" coords="431,96,575,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="506,64,506,96,500,96,500,64"/>
+<area shape="rect" id="Node000003" href="$_text_form_8h.html" title=" " alt="" coords="5,195,174,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="416,140,149,197,148,191,415,135"/>
+<area shape="rect" id="Node000004" href="$_electromechanical_8h.html" title=" " alt="" coords="198,187,341,229"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="435,147,325,189,323,184,433,142"/>
+<area shape="rect" id="Node000005" href="$_fault_8h.html" title=" " alt="" coords="366,187,491,229"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="478,152,447,188,443,185,474,149"/>
+<area shape="rect" id="Node000006" href="$_power_flow_8h.html" title=" " alt="" coords="515,187,640,229"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="532,149,562,185,558,188,528,152"/>
+<area shape="rect" id="Node000007" href="$_power_quality_8h.html" title=" " alt="" coords="664,187,790,229"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="570,142,675,184,673,188,568,147"/>
+<area shape="rect" id="Node000008" href="$_file_handing_8h.html" title=" " alt="" coords="814,195,987,221"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="591,135,844,191,842,197,590,141"/>
 </map>
