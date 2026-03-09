@@ -16,8 +16,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Doxygen
+        run: sudo apt-get install -y doxygen graphviz
+
+      - name: Get latest tag
+        run: |
+          VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "development")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Prepare Doxygen folder
+        run: mkdir -p docusaurus/static/doxygen
+
+      - name: Generate Doxygen docs
+        run: doxygen -D PROJECT_NUMBER=$VERSION docs/doxygen/Doxyfile
 
       - name: Setup Node
         uses: actions/setup-node@v4
