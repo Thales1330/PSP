@@ -1,17 +1,17 @@
 <map id="LoadForm" name="LoadForm">
-<area shape="rect" id="Node000001" title="Form to edit the load power data." alt="" coords="47,352,126,379"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="17,261,127,288"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,303,87,351,82,352,74,304"/>
-<area shape="rect" id="Node000003" href="$class_load.html" title="Loas shunt power element." alt="" coords="151,261,201,288"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,301,101,353,98,350,151,297"/>
-<area shape="rect" id="Node000004" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="67,171,122,197"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="118,207,166,259,162,263,115,211"/>
-<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="42,96,147,123"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="97,138,97,170,92,170,92,138"/>
-<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,75,32"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="58,44,89,94,85,97,54,47"/>
-<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="99,5,203,32"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="137,47,105,97,100,94,132,44"/>
-<area shape="rect" id="Node000008" href="$struct_load_electrical_data.html" title=" " alt="" coords="147,171,277,197"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="204,213,184,262,179,260,199,211"/>
+<area shape="rect" id="Node000001" title="Form to edit the load power data." alt="" coords="53,344,140,369"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="16,256,135,281"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,294,96,343,91,344,79,295"/>
+<area shape="rect" id="Node000003" href="$class_load.html" title="Loas shunt power element." alt="" coords="159,256,213,281"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,293,111,345,107,342,162,289"/>
+<area shape="rect" id="Node000004" href="$class_shunt.html" title="Abstract class for shunt power elements." alt="" coords="74,168,133,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="126,202,176,254,173,257,122,205"/>
+<area shape="rect" id="Node000005" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,93,161,119"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="106,133,106,168,101,168,101,133"/>
+<area shape="rect" id="Node000006" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="62,41,97,91,93,94,57,44"/>
+<area shape="rect" id="Node000007" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,31"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="149,44,114,94,110,91,145,41"/>
+<area shape="rect" id="Node000008" href="$struct_load_electrical_data.html" title=" " alt="" coords="157,168,301,193"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="219,207,194,257,190,254,214,205"/>
 </map>

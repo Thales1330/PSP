@@ -1,5 +1,5 @@
 <map id="TextForm" name="TextForm">
-<area shape="rect" id="Node000001" title="Form to edit the text graphical data." alt="" coords="20,80,97,107"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,112,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,48,61,80,56,80,56,48"/>
+<area shape="rect" id="Node000001" title="Form to edit the text graphical data." alt="" coords="21,79,104,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,120,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,44,65,79,60,79,60,44"/>
 </map>
