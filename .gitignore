@@ -15,9 +15,6 @@ Project/Release
 docs/doxygen/latex
 Debug/
 Release/
-ExtLibs/GLEW/lib/
-ExtLibs/GLFW/lib-mingw/
-ExtLibs/GLFW/lib-vc2019/
 x64/
 compile_commands.json
 tags
@@ -63,10 +60,13 @@ Thumbs.db
 # Other files #
 ###############
 *.xrc
-#*.workspace
-#*.project
+*.workspace
+#*.sln
+*.vcxproj.user
+*.project
 *.atp
 Project/Project.mk
 Project/Project.txt
+Project/compile_flags.txt
 Makefile
 .vs
