@@ -7,7 +7,7 @@
 
 <div align="center">
 
-![PSP-UFU](docusaurus/static/doxygen/html/logoHeader.png)
+![PSP-UFU](docusaurus/static/images/logoHeader.png)
 
   <a href="https://thales1330.github.io/PSP/" style="font-size: 20px;"><strong>Website</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://thales1330.github.io/PSP/docs/" style="font-size: 20px;"><strong>User Guide</strong></a>
