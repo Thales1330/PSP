@@ -1,7 +1,0 @@
--IC:\Users\Pichau\Documents\GitHub\PSP\Project
--IC:\Users\Pichau\Documents\GitHub\PSP\ExtLibs\GLEW\include
--IC:\Users\Pichau\Documents\GitHub\PSP\ExtLibs\GLFW\include
--DUNICODE
--DNDEBUG
--DGLEW_STATIC
--std=gnu++17
