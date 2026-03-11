@@ -2456,6 +2456,11 @@ void Workspace::SetName(wxString name)
 #endif
 }
 
+void Workspace::SetElementList(std::vector< std::shared_ptr<PowerElement> > elementList)
+{
+	m_elementList = std::move(elementList);
+}
+
 void Workspace::SetElementList(std::vector<Element*> elementList)
 {
 	m_elementList.clear();

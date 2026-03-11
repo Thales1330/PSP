@@ -421,14 +421,20 @@ bool PowerFlow::RunNewtonRaphson(double systemPowerBase,
 		// Check if the iteration error is less than tolerance, also check if any reactive limit was reached.
 		// If any reactive limit was reached, change the bus type.
 		if (iterationError < error) {
+			for (int i = 0; i < m_numberOfBuses; i++) {
+				std::complex<double> sBus(0.0, 0.0);
+				for (int j = 0; j < m_numberOfBuses; j++)
+					sBus += voltage[i] * std::conj(voltage[j]) * std::conj(m_yBus[i][j]);
+				power[i] = sBus;
+			}
+
 			double emtPowerError = CalculateEMTPowerError(voltage, power, systemPowerBase, m_errorMsg);
 
 			if (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) && emtPowerError < error)
 				break;
 			else {
 				GetNumPVPQ(busType, numPQ, numPV);
-				dPdQ.clear();
-				dPdQ.resize(numPV + 2 * numPQ, 0.0);
+				dPdQ.assign(numPV + 2 * numPQ, 0.0);
 			}
 		}
 
@@ -731,220 +737,6 @@ void PowerFlow::NewtonRaphson(std::vector<BusType> busType,
 		}
 	}
 }
-
-//std::vector<std::vector<double> > PowerFlow::CalculateJacobianMatrix(std::vector<std::complex<double> >& voltage,
-//	std::vector<std::complex<double> >& power,
-//	std::vector<BusType>& busType,
-//	int& numPV,
-//	int& numPQ)
-//{
-//	// Jacobian matrix
-//	std::vector<std::vector<double> > jacobMatrix;
-//	jacobMatrix.resize(2 * numPQ + numPV);  // Jabobian matrix size
-//	for (int i = 0; i < (2 * numPQ + numPV); i++) jacobMatrix[i].resize(2 * numPQ + numPV);
-//
-//	// Calculate the submatrices
-//	//{ J11
-//	std::vector<std::vector<double> > j11;
-//	j11.resize(numPQ + numPV);  // submatrix j11 size
-//	for (int i = 0; i < (numPQ + numPV); i++) j11[i].resize(numPQ + numPV);
-//
-//	int busNumI = 0;
-//	int busNumJ = 0;
-//	for (int i = 0; i < m_numberOfBuses; i++) {
-//		if (busType[i] != BUS_SLACK) {
-//			for (int j = 0; j < m_numberOfBuses; j++) {
-//				if (busType[j] != BUS_SLACK) {
-//					if (busNumI != busNumJ) {
-//						double vi = std::abs(voltage[i]);
-//						double ti = std::arg(voltage[i]);
-//						double vj = std::abs(voltage[j]);
-//						double tj = std::arg(voltage[j]);
-//						double yij = std::abs(m_yBus[i][j]);
-//						double tij = std::arg(m_yBus[i][j]);
-//#ifdef STD_NR
-//						j11[busNumI][busNumJ] = -vi * vj * yij * std::sin(tij + tj - ti);
-//#else
-//						double gij = m_yBus[i][j].real();
-//						double bij = m_yBus[i][j].imag();
-//						j11[busNumI][busNumJ] = vi * vj * (gij * std::sin(ti - tj) - bij * std::cos(ti - tj));
-//#endif
-//					}
-//					else {  // busNumI == busNumJ
-//						std::complex<double> sj = std::complex<double>(0.0, 0.0);
-//						for (int k = 0; k < m_numberOfBuses; k++)
-//							sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-//#ifdef STD_NR
-//						j11[busNumI][busNumJ] = -sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
-//#else
-//						j11[busNumI][busNumJ] = -power[i].imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
-//#endif
-//					}
-//					busNumJ++;
-//				}
-//			}
-//			busNumI++;
-//			busNumJ = 0;
-//		}
-//	}
-//	//}
-//	//{ J12
-//	std::vector<std::vector<double> > j12;
-//	j12.resize(numPQ + numPV);  // submatrix j12 size
-//	for (int i = 0; i < (numPQ + numPV); i++) j12[i].resize(numPQ);
-//
-//	busNumI = 0;
-//	busNumJ = 0;
-//	for (int i = 0; i < m_numberOfBuses; i++) {
-//		if (busType[i] != BUS_SLACK) {
-//			for (int j = 0; j < m_numberOfBuses; j++) {
-//				if (busType[j] == BUS_PQ)  // Only PQ buses
-//				{
-//					if (busNumI != busNumJ) {
-//						double vi = std::abs(voltage[i]);
-//						double ti = std::arg(voltage[i]);
-//						double vj = std::abs(voltage[j]);
-//						double tj = std::arg(voltage[j]);
-//						double yij = std::abs(m_yBus[i][j]);
-//						double tij = std::arg(m_yBus[i][j]);
-//#ifdef STD_NR
-//						j12[busNumI][busNumJ] = vj * vi * yij * std::cos(tij + tj - ti);
-//#else
-//						double gij = m_yBus[i][j].real();
-//						double bij = m_yBus[i][j].imag();
-//						j12[busNumI][busNumJ] = vi * (gij * std::cos(ti - tj) - bij * std::sin(ti - tj));
-//#endif
-//					}
-//					else {  // busNumI == busNumJ
-//						std::complex<double> sj = std::complex<double>(0.0, 0.0);
-//						for (int k = 0; k < m_numberOfBuses; k++)
-//							sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-//#ifdef STD_NR
-//						j12[busNumI][busNumJ] = sj.real() + m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
-//#else
-//						j12[busNumI][busNumJ] = (power[i].real() + m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0)) / std::abs(voltage[j]);
-//#endif
-//					}
-//					busNumJ++;
-//				}
-//			}
-//			busNumI++;
-//			busNumJ = 0;
-//		}
-//	}
-//	//}
-//	//{ J21
-//	std::vector<std::vector<double> > j21;
-//	j21.resize(numPQ);  // submatrix j21 size
-//	for (int i = 0; i < (numPQ); i++) j21[i].resize(numPQ + numPV);
-//
-//	busNumI = 0;
-//	busNumJ = 0;
-//	for (int i = 0; i < m_numberOfBuses; i++) {
-//		if (busType[i] == BUS_PQ)  // Only PQ
-//		{
-//			for (int j = 0; j < m_numberOfBuses; j++) {
-//				//if (busType[j] == BUS_SLACK) {
-//				if (busType[j] != BUS_SLACK) {
-//					if (busNumI != busNumJ) {
-//						double vi = std::abs(voltage[i]);
-//						double ti = std::arg(voltage[i]);
-//						double vj = std::abs(voltage[j]);
-//						double tj = std::arg(voltage[j]);
-//						double yij = std::abs(m_yBus[i][j]);
-//						double tij = std::arg(m_yBus[i][j]);
-//
-//#ifdef STD_NR
-//						j21[busNumI][busNumJ] = -vi * vj * yij * std::cos(tij + tj - ti);
-//#else
-//						double gij = m_yBus[i][j].real();
-//						double bij = m_yBus[i][j].imag();
-//						j21[busNumI][busNumJ] = -vi * vj * (gij * std::cos(ti - tj) + bij * std::sin(ti - tj));
-//#endif
-//					}
-//					else {  // busNumI == busNumJ
-//						std::complex<double> sj = std::complex<double>(0.0, 0.0);
-//						for (int k = 0; k < m_numberOfBuses; k++)
-//							sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-//#ifdef STD_NR
-//						j21[busNumI][busNumJ] = sj.real() - m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
-//#else
-//						j21[busNumI][busNumJ] = power[i].real() - m_yBus[j][j].real() * std::pow(std::abs(voltage[j]), 2.0);
-//#endif
-//					}
-//					busNumJ++;
-//				}
-//			}
-//			busNumI++;
-//			busNumJ = 0;
-//		}
-//	}
-//	//}
-//	//{ J22
-//	std::vector<std::vector<double> > j22;
-//	j22.resize(numPQ);  // submatrix j22 size
-//	for (int i = 0; i < (numPQ); i++) j22[i].resize(numPQ);
-//
-//	busNumI = 0;
-//	busNumJ = 0;
-//	for (int i = 0; i < m_numberOfBuses; i++) {
-//		if (busType[i] == BUS_PQ) {
-//			for (int j = 0; j < m_numberOfBuses; j++) {
-//				if (busType[j] == BUS_PQ) {
-//					if (busNumI != busNumJ) {
-//						double vi = std::abs(voltage[i]);
-//						double ti = std::arg(voltage[i]);
-//						double vj = std::abs(voltage[j]);
-//						double tj = std::arg(voltage[j]);
-//						double yij = std::abs(m_yBus[i][j]);
-//						double tij = std::arg(m_yBus[i][j]);
-//
-//#ifdef STD_NR
-//						j22[busNumI][busNumJ] = -vj * vi * yij * std::sin(tij + tj - ti);
-//#else
-//						double gij = m_yBus[i][j].real();
-//						double bij = m_yBus[i][j].imag();
-//						j22[busNumI][busNumJ] = vi * (gij * std::sin(ti - tj) - bij * std::cos(ti - tj));
-//#endif
-//					}
-//					else {  // busNumI == busNumJ
-//						std::complex<double> sj = std::complex<double>(0.0, 0.0);
-//						for (int k = 0; k < m_numberOfBuses; k++)
-//							sj += voltage[j] * std::conj(m_yBus[j][k]) * std::conj(voltage[k]);
-//#ifdef STD_NR
-//						j22[busNumI][busNumJ] = sj.imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0);
-//#else
-//						j22[busNumI][busNumJ] = (power[i].imag() - m_yBus[j][j].imag() * std::pow(std::abs(voltage[j]), 2.0)) / std::abs(voltage[j]);
-//#endif
-//					}
-//					busNumJ++;
-//				}
-//			}
-//			busNumI++;
-//			busNumJ = 0;
-//		}
-//	}
-//	//}
-//
-//	// Fill Jacobian matrix
-//	for (int i = 0; i < (2 * numPQ + numPV); i++) {
-//		for (int j = 0; j < (2 * numPQ + numPV); j++) {
-//			if (i < (numPQ + numPV)) {
-//				if (j < (numPQ + numPV))
-//					jacobMatrix[i][j] = j11[i][j];
-//				else  // j >= numPQ + numPV
-//					jacobMatrix[i][j] = j12[i][j - (numPQ + numPV)];
-//			}
-//			else {  // i >= numPQ + numPV
-//				if (j < (numPQ + numPV))
-//					jacobMatrix[i][j] = j21[i - (numPQ + numPV)][j];
-//				else  // j >= numPQ + numPV
-//					jacobMatrix[i][j] = j22[i - (numPQ + numPV)][j - (numPQ + numPV)];
-//			}
-//		}
-//	}
-//	return jacobMatrix;
-//}
 
 std::vector<std::vector<double>>
 PowerFlow::CalculateJacobianMatrix(

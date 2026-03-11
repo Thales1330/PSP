@@ -123,6 +123,7 @@ public:
 
 	wxString GetName() const { return m_name; }
 	std::vector<Element*> GetElementList() const;
+	std::vector< std::shared_ptr<PowerElement> > GetElementSharedList() const { return m_elementList; }
 	std::vector< std::shared_ptr<Text> > GetTextList() const { return m_textList; }
 	std::vector<Element*> GetAllElements() const;
 	WorkspaceMode GetWorkspaceMode() const { return m_mode; }
@@ -137,6 +138,7 @@ public:
 
 	wxFileName GetSavedPath() const { return m_savedPath; }
 	void SetName(wxString name);
+	void SetElementList(std::vector< std::shared_ptr<PowerElement> > elementList);
 	void SetElementList(std::vector<Element*> elementList);
 	void SetTextList(const std::vector< std::shared_ptr<Text> >& textList);
 	void SetStatusBarText(wxString text) { m_statusBar->SetStatusText(text); }
@@ -203,7 +205,7 @@ public:
 
 protected:
 	virtual void OnHeatMapTime(wxTimerEvent& event);
-	
+
 	//void SetViewport();
 	void UpdateStatusBar();
 	int GetElementNumberFromList(Element* element);

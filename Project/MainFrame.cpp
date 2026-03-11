@@ -527,7 +527,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 
 	if (workspace) {
 		if (workspace->GetWorkspaceMode() != Workspace::WorkspaceMode::MODE_INSERT) {
-			auto elementList = workspace->GetElementList();
+			auto elementList = workspace->GetElementSharedList();
 			auto textList = workspace->GetTextList();
 			wxString statusBarText = "";
 			bool newElement = false;
@@ -535,7 +535,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 
 			switch (event.GetId()) {
 			case ID_ADDMENU_BUS: {
-				Bus* newBus = new Bus(wxPoint2DDouble(0, 0),
+				auto newBus = std::make_shared<Bus>(wxPoint2DDouble(0, 0),
 					wxString::Format(_("Bus %d"), workspace->GetElementNumber(ID_BUS)));
 				workspace->IncrementElementNumber(ID_BUS);
 				elementList.push_back(newBus);
@@ -543,14 +543,14 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				newElement = true;
 			} break;
 			case ID_ADDMENU_LINE: {
-				Line* newLine = new Line(wxString::Format(_("Line %d"), workspace->GetElementNumber(ID_LINE)));
+				auto newLine = std::make_shared<Line>(wxString::Format(_("Line %d"), workspace->GetElementNumber(ID_LINE)));
 				elementList.push_back(newLine);
 				workspace->IncrementElementNumber(ID_LINE);
 				statusBarText = _("Insert Line: Click on two buses, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_TRANSFORMER: {
-				Transformer* newTransformer = new Transformer(
+				auto newTransformer = std::make_shared <Transformer>(
 					wxString::Format(_("Transformer %d"), workspace->GetElementNumber(ID_TRANSFORMER)));
 				workspace->IncrementElementNumber(ID_TRANSFORMER);
 				elementList.push_back(newTransformer);
@@ -558,7 +558,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				newElement = true;
 			} break;
 			case ID_ADDMENU_GENERATOR: {
-				SyncGenerator* newGenerator = new SyncGenerator(
+				auto newGenerator = std::make_shared<SyncGenerator>(
 					wxString::Format(_("Generator %d"), workspace->GetElementNumber(ID_SYNCGENERATOR)));
 				workspace->IncrementElementNumber(ID_SYNCGENERATOR);
 				elementList.push_back(newGenerator);
@@ -566,30 +566,28 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				newElement = true;
 			} break;
 			case ID_ADDMENU_LOAD: {
-				Load* newLoad = new Load(wxString::Format(_("Load %d"), workspace->GetElementNumber(ID_LOAD)));
+				auto newLoad = std::make_shared<Load>(wxString::Format(_("Load %d"), workspace->GetElementNumber(ID_LOAD)));
 				workspace->IncrementElementNumber(ID_LOAD);
 				elementList.push_back(newLoad);
 				statusBarText = _("Insert Load: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_CAPACITOR: {
-				Capacitor* newCapacitor =
-					new Capacitor(wxString::Format(_("Capacitor %d"), workspace->GetElementNumber(ID_CAPACITOR)));
+				auto newCapacitor = std::make_shared<Capacitor>(wxString::Format(_("Capacitor %d"), workspace->GetElementNumber(ID_CAPACITOR)));
 				workspace->IncrementElementNumber(ID_CAPACITOR);
 				elementList.push_back(newCapacitor);
 				statusBarText = _("Insert Capacitor: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_INDUCTOR: {
-				Inductor* newInductor =
-					new Inductor(wxString::Format(_("Inductor %d"), workspace->GetElementNumber(ID_INDUCTOR)));
+				auto newInductor = std::make_shared<Inductor>(wxString::Format(_("Inductor %d"), workspace->GetElementNumber(ID_INDUCTOR)));
 				workspace->IncrementElementNumber(ID_INDUCTOR);
 				elementList.push_back(newInductor);
 				statusBarText = _("Insert Inductor: Click on a bus, ESC to cancel.");
 				newElement = true;
 			} break;
 			case ID_ADDMENU_HARMCURRENT: {
-				HarmCurrent* newHarmCurrent = new HarmCurrent(
+				auto newHarmCurrent = std::make_shared<HarmCurrent>(
 					wxString::Format(_("Harmonic Current %d"), workspace->GetElementNumber(ID_INDUCTOR)));
 				workspace->IncrementElementNumber(ID_HARMCURRENT);
 				elementList.push_back(newHarmCurrent);
@@ -597,7 +595,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				newElement = true;
 			} break;
 			case ID_ADDMENU_INDMOTOR: {
-				IndMotor* newIndMotor = new IndMotor(
+				auto newIndMotor = std::make_shared<IndMotor>(
 					wxString::Format(_("Induction motor %d"), workspace->GetElementNumber(ID_INDMOTOR)));
 				workspace->IncrementElementNumber(ID_INDMOTOR);
 				elementList.push_back(newIndMotor);
@@ -605,7 +603,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				newElement = true;
 			} break;
 			case ID_ADDMENU_SYNCCOMP: {
-				SyncMotor* newSyncCondenser = new SyncMotor(
+				auto newSyncCondenser = std::make_shared<SyncMotor>(
 					wxString::Format(_("Synchronous condenser %d"), workspace->GetElementNumber(ID_SYNCMOTOR)));
 				workspace->IncrementElementNumber(ID_SYNCMOTOR);
 				elementList.push_back(newSyncCondenser);
@@ -613,7 +611,7 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 				newElement = true;
 			} break;
 			case ID_ADDMENU_EMTELEMENT: {
-				EMTElement* newEMTElement = new EMTElement(wxString::Format(_("Electromagnetic Transient %d"), workspace->GetElementNumber(ID_EMTELEMENT)));
+				auto newEMTElement = std::make_shared<EMTElement>(wxString::Format(_("Electromagnetic Transient %d"), workspace->GetElementNumber(ID_EMTELEMENT)));
 				workspace->IncrementElementNumber(ID_EMTELEMENT);
 				elementList.push_back(newEMTElement);
 				statusBarText = _("Insert Electromagnetic Transient Element: Click on a bus, ESC to cancel.");
