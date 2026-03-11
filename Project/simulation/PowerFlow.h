@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -85,7 +85,7 @@ protected:
 
 	bool CheckReactiveLimits(std::vector<BusType>& busType,
 		std::vector<ReactiveLimits>& reactiveLimit,
-		std::vector<std::complex<double> > power,
+		std::vector<std::complex<double> >& power,
 		std::vector<std::complex<double> > loadPower);
 
 	double GaussSeidel(std::vector<BusType> busType,

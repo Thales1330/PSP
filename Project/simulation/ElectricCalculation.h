@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -56,6 +56,21 @@ struct ReactiveLimits {
 	ReactiveLimitsType maxLimitType = RL_UNLIMITED;
 	ReactiveLimitsType minLimitType = RL_UNLIMITED;
 	ReactiveLimitsType limitReached = RL_NONE_REACHED;
+};
+
+struct ReactiveMachine {
+	double qMax;
+	double qMin;
+
+	bool hasMax;
+	bool hasMin;
+
+	bool fixed = false;
+
+	double q = 0.0;
+
+	Machines* machine; // Pointer to generator or motor element
+	bool isGenerator;
 };
 
 /**
@@ -122,31 +137,121 @@ public:
 		std::vector<ReactiveLimits> reactiveLimit,
 		double systemPowerBase);
 
+	/**
+	 * @brief Convert a complex phasor in ABC representation to DQ components.
+	 * @param complexValue Complex phasor value in ABC reference frame.
+	 * @param angle Electrical angle used for the transformation.
+	 * @param dValue Resulting direct-axis component.
+	 * @param qValue Resulting quadrature-axis component.
+	 */
 	void ABCtoDQ0(std::complex<double> complexValue, double angle, double& dValue, double& qValue);
+
+	/**
+	 * @brief Convert DQ components to a complex phasor in ABC representation.
+	 * @param dValue Direct-axis component.
+	 * @param qValue Quadrature-axis component.
+	 * @param angle Electrical angle used for the transformation.
+	 * @param complexValue Resulting complex phasor in ABC reference frame.
+	 */
 	void DQ0toABC(double dValue, double qValue, double angle, std::complex<double>& complexValue);
 
+	/**
+	 * @brief Solve a linear system using Gaussian elimination (complex version).
+	 * @param matrix Coefficient matrix of the system.
+	 * @param array Right-hand side vector.
+	 * @return Solution vector of the linear system.
+	 */
 	std::vector<std::complex<double> > GaussianElimination(std::vector<std::vector<std::complex<double> > > matrix,
 		std::vector<std::complex<double> > array);
+
+	/**
+	 * @brief Solve a linear system using Gaussian elimination (real version).
+	 * @param matrix Coefficient matrix of the system.
+	 * @param array Right-hand side vector.
+	 * @return Solution vector of the linear system.
+	 */
 	std::vector<double> GaussianElimination(std::vector<std::vector<double> > matrix, std::vector<double> array);
 
+	/**
+	 * @brief Get the synchronous machine model used by the generator based on user-defined parameters.
+	 * @param generator Pointer to the synchronous generator.
+	 * @return Enumeration indicating the synchronous machine model.
+	 */
 	Machines::SyncMachineModel GetMachineModel(SyncGenerator* generator);
 
+	/**
+	 * @brief Multiply a complex matrix by a complex vector.
+	 * @param matrix Complex matrix.
+	 * @param vector Complex vector.
+	 * @return Resulting complex vector.
+	 */
 	std::vector<std::complex<double> > ComplexMatrixTimesVector(std::vector<std::vector<std::complex<double> > > matrix,
 		std::vector<std::complex<double> > vector);
 
+	/**
+	 * @brief Compute the LU decomposition of a matrix.
+	 * @param matrix Matrix to be decomposed.
+	 * @param matrixL Lower triangular matrix.
+	 * @param matrixU Upper triangular matrix.
+	 */
 	void GetLUDecomposition(std::vector<std::vector<std::complex<double> > > matrix,
 		std::vector<std::vector<std::complex<double> > >& matrixL,
 		std::vector<std::vector<std::complex<double> > >& matrixU);
 
+	/**
+	 * @brief Solve a linear system using LU decomposition.
+	 * @param u Upper triangular matrix.
+	 * @param l Lower triangular matrix.
+	 * @param b Right-hand side vector.
+	 * @return Solution vector.
+	 */
 	std::vector<std::complex<double> > LUEvaluate(std::vector<std::vector<std::complex<double> > > u,
 		std::vector<std::vector<std::complex<double> > > l,
 		std::vector<std::complex<double> > b);
 
+	/**
+	 * @brief Get the parent bus of a given shunt element.
+	 * @param childElement Pointer to the element.
+	 * @param parentBus Pointer to the parent bus.
+	 * @return True if the parent bus was successfully found.
+	 */
 	bool GetParentBus(Element* childElement, Bus*& parentBus);
+
+	/**
+	 * @brief Get the parent buses of a two-terminal element (branch).
+	 * @param childElement Pointer to the element.
+	 * @param parentBus1 Pointer to the first parent bus.
+	 * @param parentBus2 Pointer to the second parent bus.
+	 * @return True if both parent buses were successfully found.
+	 */
 	bool GetParentBus(Element* childElement, Bus*& parentBus1, Bus*& parentBus2);
 
+	/**
+	 * @brief Calculate the admittance of EMT elements.
+	 * @param basePower System base power.
+	 * @param errorMsg Error message in case of failure.
+	 * @return True if the calculation was successful.
+	 */
 	bool CalculateEMTElementsAdmittance(const double& basePower, wxString& errorMsg);
+
+	/**
+	 * @brief Calculate the power of EMT elements.
+	 * @param basePower System base power.
+	 * @param errorMsg Error message in case of failure.
+	 * @param updateCurrent If true, update the element currents during the calculation unsing
+	 *		  \ref EMTElement::CalculateCurrent(wxString&, const bool&).
+	 * @return True if the calculation was successful.
+	 */
 	bool CalculateEMTElementsPower(const double& basePower, wxString& errorMsg, bool updateCurrent = true);
+
+	/**
+	 * @brief Calculate the power mismatch error for EMT simulation.
+	 * @param voltage Vector with bus voltages.
+	 * @param power Vector with injected powers.
+	 * @param basePower System base power.
+	 * @param errorMsg Error message in case of failure.
+	 * @return The calculated power error.
+	 */
 	double CalculateEMTPowerError(const std::vector< std::complex<double> >& voltage, std::vector< std::complex<double> >& power, const double& basePower, wxString& errorMsg);
 
 	/**
@@ -212,6 +317,8 @@ public:
 
 protected:
 	void GetNextConnection(const unsigned int& checkBusNumber, const std::vector< std::vector< std::complex<double> > >& yBus, std::vector<bool>& connToSlack);
+	void DistributeReactivePower(std::vector<ReactiveMachine>& machines, double qTotal);
+
 	std::vector<PowerElement*> m_powerElementList;
 	std::vector<Bus*> m_busList;
 	std::vector<Capacitor*> m_capacitorList;

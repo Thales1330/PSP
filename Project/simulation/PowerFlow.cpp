@@ -98,7 +98,7 @@ bool PowerFlow::InitPowerFlow(std::vector<BusType>& busType,
 				v = data.controlledVoltage;
 				t = std::arg(data.voltage);
 			}
-			else{
+			else {
 				v = std::abs(data.voltage);
 				if (v <= 0.1) v = 1.0; // Avoid very low voltage magnitude that can cause convergence problems.
 				t = std::arg(data.voltage);
@@ -300,13 +300,16 @@ bool PowerFlow::RunGaussSeidel(double systemPowerBase,
 
 		if (iterationError < error) {
 			// Calculate power error in EMT elements.
-			double oldError = emtPowerError;
-			emtPowerError = CalculateEMTPowerError(voltage, power, systemPowerBase, m_errorMsg);
-			//wxMessageBox(wxString::Format(wxT("It %d, EMT Power Error: %e (base = %e)"), iteration, emtPowerError, error));
-			if (abs(emtPowerError - oldError) < 1e-12) { // Without change in error the convergence is impossible
-				m_errorMsg = _("Impossible to reach a convergence with the current Electromagnetic Transient Elements.");
-				return false;
+			if (!m_emtElementList.empty()) {
+				double oldError = emtPowerError;
+				emtPowerError = CalculateEMTPowerError(voltage, power, systemPowerBase, m_errorMsg);
+				//wxMessageBox(wxString::Format(wxT("It %d, EMT Power Error: %e (base = %e)"), iteration, emtPowerError, error));
+				if (abs(emtPowerError - oldError) < 1e-12) { // Without change in error the convergence is impossible
+					m_errorMsg = _("Impossible to reach a convergence with the current Electromagnetic Transient Elements.");
+					return false;
+				}
 			}
+			else emtPowerError = 0.0;
 
 			if (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) && emtPowerError < error) break;
 		}
@@ -446,7 +449,7 @@ bool PowerFlow::RunNewtonRaphson(double systemPowerBase,
 	}
 	m_iterations = iteration;
 
-	
+
 
 	// Adjust the power array.
 	for (int i = 0; i < m_numberOfBuses; i++) {
@@ -1072,7 +1075,7 @@ PowerFlow::CalculateJacobianMatrix(
 
 bool PowerFlow::CheckReactiveLimits(std::vector<BusType>& busType,
 	std::vector<ReactiveLimits>& reactiveLimit,
-	std::vector<std::complex<double> > power,
+	std::vector<std::complex<double> >& power,
 	std::vector<std::complex<double> > loadPower)
 {
 	bool limitReach = false;

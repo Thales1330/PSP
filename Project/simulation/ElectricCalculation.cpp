@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -405,6 +405,51 @@ void ElectricCalculation::GetNextConnection(const unsigned int& checkBusNumber,
 	}
 }
 
+void ElectricCalculation::DistributeReactivePower(std::vector<ReactiveMachine>& machines, double qTotal)
+{
+	int freeMachines = machines.size();
+	double qRemaining = qTotal;
+
+	bool changed = true;
+
+	while (changed && freeMachines > 0) {
+		changed = false;
+
+		double qShare = qRemaining / freeMachines;
+
+		for (auto& m : machines) {
+			if (m.fixed)
+				continue;
+
+			if (m.hasMax && qShare > m.qMax) {
+				m.q = m.qMax;
+				m.fixed = true;
+				qRemaining -= m.qMax;
+				freeMachines--;
+				changed = true;
+			}
+			else if (m.hasMin && qShare < m.qMin) {
+				m.q = m.qMin;
+				m.fixed = true;
+				qRemaining -= m.qMin;
+				freeMachines--;
+				changed = true;
+			}
+			else {
+				m.q = qShare;
+			}
+		}
+	}
+
+	if (freeMachines > 0) {
+		double qShare = qRemaining / freeMachines;
+		for (auto& m : machines) {
+			if (!m.fixed)
+				m.q = qShare;
+		}
+	}
+}
+
 void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<double> > voltage,
 	std::vector<std::complex<double> > power,
 	std::vector<BusType> busType,
@@ -617,145 +662,95 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 				}
 			}
 
-			// Set the sync generator power
-			for (auto itsg = syncGeneratorsOnBus.begin(); itsg != syncGeneratorsOnBus.end(); itsg++) {
-				SyncGenerator* generator = *itsg;
-				if (generator->IsOnline()) {
-					SyncGeneratorElectricalData childData = generator->GetElectricalData();
+			// Setup the reactive machines vector for the distribution of reactive power
+			std::vector<ReactiveMachine> machines;
+			for (auto* gen : syncGeneratorsOnBus) {
 
-					if (busType[i] == BUS_SLACK) {
-						double activePower =
-							(power[i].real() + loadPower.real()) * systemPowerBase / (double)(syncGeneratorsOnBus.size());
+				auto data = gen->GetPUElectricalData(systemPowerBase);
 
-						switch (childData.activePowerUnit) {
-						case ElectricalUnit::UNIT_PU: {
-							activePower /= systemPowerBase;
-						} break;
-						case ElectricalUnit::UNIT_kW: {
-							activePower /= 1e3;
-						} break;
-						case ElectricalUnit::UNIT_MW: {
-							activePower /= 1e6;
-						} break;
-						default:
-							break;
-						}
+				ReactiveMachine m;
+				m.qMax = data.maxReactive;
+				m.qMin = data.minReactive;
 
-						childData.activePower = activePower;
-					}
-					if (busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-						// double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-						//                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
-						SyncGeneratorElectricalData childData_PU = generator->GetPUElectricalData(systemPowerBase);
+				m.hasMax = data.haveMaxReactive;
+				m.hasMin = data.haveMinReactive;
 
-						double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase;
+				m.machine = gen;
+				m.isGenerator = true;
 
-						if (reactiveLimit[i].limitReached == RL_MAX_REACHED)
-							reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
+				machines.push_back(m);
+			}
+			for (auto* mot : syncMotorsOnBus) {
 
-						else if (reactiveLimit[i].limitReached == RL_MIN_REACHED)
-							reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
+				auto data = mot->GetPUElectricalData(systemPowerBase);
 
-						else
-							reactivePower /= (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+				ReactiveMachine m;
+				m.qMax = data.maxReactive;
+				m.qMin = data.minReactive;
 
-						switch (childData.reactivePowerUnit) {
-						case ElectricalUnit::UNIT_PU: {
-							reactivePower /= systemPowerBase;
-						} break;
-						case ElectricalUnit::UNIT_kvar: {
-							reactivePower /= 1e3;
-						} break;
-						case ElectricalUnit::UNIT_Mvar: {
-							reactivePower /= 1e6;
-						} break;
-						default:
-							break;
-						}
-						childData.reactivePower = reactivePower;
-					}
+				m.hasMax = data.haveMaxReactive;
+				m.hasMin = data.haveMinReactive;
 
-					if (childData.activePower >= 0.0)
-						generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
-					else
-						generator->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
+				m.machine = mot;
+				m.isGenerator = false;
 
-					generator->SetElectricalData(childData);
-				}
+				machines.push_back(m);
 			}
 
-			// Set the sync motor reactive power
-			double exceededReactive = 0.0;
-			int numMachines = syncGeneratorsOnBus.size() + syncMotorsOnBus.size();
-			for (auto itsm = syncMotorsOnBus.begin(); itsm != syncMotorsOnBus.end(); itsm++) {
-				SyncMotor* syncMotor = *itsm;
-				SyncMotorElectricalData childData = syncMotor->GetElectricalData();
+			// Distribute the reactive power among the synchronous machines and set their reactive power
+			double qTotal = power[i].imag() + loadPower.imag();
+			DistributeReactivePower(machines, qTotal);
 
-				bool reachedMachineLimit = false;
+			// Set the reactive power on the machines
+			for (auto& m : machines) {
 
-				if (busType[i] == BUS_PV || busType[i] == BUS_SLACK) {
-					// double reactivePower = (power[i].imag() + loadPower.imag()) * systemPowerBase /
-					//                       (double)(syncGeneratorsOnBus.size() + syncMotorsOnBus.size());
+				if (m.isGenerator) {
 
-					SyncMotorElectricalData childData_PU = syncMotor->GetPUElectricalData(systemPowerBase);
+					SyncGenerator* gen = static_cast<SyncGenerator*>(m.machine);
+					auto data = gen->GetElectricalData();
 
-					double reactivePower = power[i].imag() + loadPower.imag();
+					double reactivePower = m.q * systemPowerBase;
 
-					// Bus reachd maximum reactive limit.
-					if (reactiveLimit[i].limitReached == RL_MAX_REACHED)
-						reactivePower *= (childData_PU.maxReactive / reactiveLimit[i].maxLimit);
-					// Bus reached minimum reactive limit.
-					else if (reactiveLimit[i].limitReached == RL_MIN_REACHED)
-						reactivePower *= (childData_PU.minReactive / reactiveLimit[i].minLimit);
-					// Bus didn't reach any limits
-					else {
-						reactivePower /= (double)(numMachines);
-						if (childData_PU.haveMaxReactive && (reactivePower > childData_PU.maxReactive)) {
-							exceededReactive += reactivePower - childData_PU.maxReactive;
-							reactivePower = childData_PU.maxReactive;
-							reachedMachineLimit = true;
-						}
-						else if (childData_PU.haveMinReactive && (reactivePower < childData_PU.minReactive)) {
-							exceededReactive += reactivePower - childData_PU.minReactive;
-							reactivePower = childData_PU.minReactive;
-							reachedMachineLimit = true;
-						}
-						else if ((!childData_PU.haveMaxReactive && reactiveLimit[i].limitReached == RL_MAX_REACHED) ||
-							(!childData_PU.haveMinReactive && reactiveLimit[i].limitReached == RL_MIN_REACHED) ||
-							(!childData_PU.haveMaxReactive && !childData_PU.haveMaxReactive)) {
-							reactivePower += exceededReactive;
-							exceededReactive = 0.0;
-						}
-					}
-
-					reactivePower *= systemPowerBase;
-
-					switch (childData.reactivePowerUnit) {
-					case ElectricalUnit::UNIT_PU: {
+					switch (data.reactivePowerUnit) {
+					case ElectricalUnit::UNIT_PU:
 						reactivePower /= systemPowerBase;
-					} break;
-					case ElectricalUnit::UNIT_kvar: {
+						break;
+					case ElectricalUnit::UNIT_kvar:
 						reactivePower /= 1e3;
-					} break;
-					case ElectricalUnit::UNIT_Mvar: {
+						break;
+					case ElectricalUnit::UNIT_Mvar:
 						reactivePower /= 1e6;
-					} break;
+						break;
 					default:
 						break;
 					}
-					childData.reactivePower = reactivePower;
+
+					data.reactivePower = reactivePower;
+					gen->SetElectricalData(data);
 				}
+				else {
 
-				if (childData.activePower > 0.0)
-					syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_ELEMENT);
-				else
-					syncMotor->SetPowerFlowDirection(PowerFlowDirection::PF_TO_BUS);
+					SyncMotor* mot = static_cast<SyncMotor*>(m.machine);
+					auto data = mot->GetElectricalData();
 
-				syncMotor->SetElectricalData(childData);
+					double reactivePower = m.q * systemPowerBase;
 
-				if (reachedMachineLimit) {
-					syncMotorsOnBus.erase(itsm);
-					itsm = syncMotorsOnBus.begin();
+					switch (data.reactivePowerUnit) {
+					case ElectricalUnit::UNIT_PU:
+						reactivePower /= systemPowerBase;
+						break;
+					case ElectricalUnit::UNIT_kvar:
+						reactivePower /= 1e3;
+						break;
+					case ElectricalUnit::UNIT_Mvar:
+						reactivePower /= 1e6;
+						break;
+					default:
+						break;
+					}
+
+					data.reactivePower = reactivePower;
+					mot->SetElectricalData(data);
 				}
 			}
 		}
