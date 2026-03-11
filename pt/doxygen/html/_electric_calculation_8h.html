@@ -137,33 +137,40 @@ $(document).ready(function(){initNavTree('_electric_calculation_8h.html',''); in
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_reactive_limits.html">ReactiveLimits</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores reactive power limits and their status for a bus.  <a href="struct_reactive_limits.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_reactive_machine.html">ReactiveMachine</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auxiliary structure used to distribute reactive power among machines connected to a bus.  <a href="struct_reactive_machine.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html">ElectricCalculation</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class of electric calculations, with general methods.  <a href="class_electric_calculation.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for electrical calculations providing general utility methods.  <a href="class_electric_calculation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a5e19c75c2809d2f27eb33a29d1971b46" id="r_a5e19c75c2809d2f27eb33a29d1971b46"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>BusType</b> { <b>BUS_SLACK</b> = 0
-, <b>BUS_PV</b>
-, <b>BUS_PQ</b>
+<tr class="memitem:a5e19c75c2809d2f27eb33a29d1971b46" id="r_a5e19c75c2809d2f27eb33a29d1971b46"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46">BusType</a> { <a class="el" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a> = 0
+, <a class="el" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>
+, <a class="el" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>
  }</td></tr>
+<tr class="memdesc:a5e19c75c2809d2f27eb33a29d1971b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of buses used in power flow analysis.  <a href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46">More...</a><br /></td></tr>
 <tr class="separator:a5e19c75c2809d2f27eb33a29d1971b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa48d3d150889a89c491c9792ca3bc8a5" id="r_aa48d3d150889a89c491c9792ca3bc8a5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>ReactiveLimitsType</b> { <br />
-&#160;&#160;<b>RL_UNLIMITED</b> = 0
-, <b>RL_LIMITED</b>
-, <b>RL_UNLIMITED_SOURCE</b>
-, <b>RL_MAX_REACHED</b>
+<tr class="memitem:aa48d3d150889a89c491c9792ca3bc8a5" id="r_aa48d3d150889a89c491c9792ca3bc8a5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5">ReactiveLimitsType</a> { <br />
+&#160;&#160;<a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5af7f144f6e36ccb2e09f39f5b9df6ef18">RL_UNLIMITED</a> = 0
+, <a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb">RL_LIMITED</a>
+, <a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5afe82ead3835d251dfa6f0e453465caec">RL_UNLIMITED_SOURCE</a>
+, <a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf">RL_MAX_REACHED</a>
 , <br />
-&#160;&#160;<b>RL_MIN_REACHED</b>
-, <b>RL_NONE_REACHED</b>
+&#160;&#160;<a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44">RL_MIN_REACHED</a>
+, <a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a9635d4cfa6b2fc11d090759fbb3f1eff">RL_NONE_REACHED</a>
 <br />
  }</td></tr>
+<tr class="memdesc:aa48d3d150889a89c491c9792ca3bc8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of reactive power limit conditions for buses.  <a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5">More...</a><br /></td></tr>
 <tr class="separator:aa48d3d150889a89c491c9792ca3bc8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73321f98d9ea4582f9de005ef5ed8594" id="r_a73321f98d9ea4582f9de005ef5ed8594"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>YBusSequence</b> { <b>POSITIVE_SEQ</b> = 0
-, <b>NEGATIVE_SEQ</b>
-, <b>ZERO_SEQ</b>
+<tr class="memitem:a73321f98d9ea4582f9de005ef5ed8594" id="r_a73321f98d9ea4582f9de005ef5ed8594"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594">YBusSequence</a> { <a class="el" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932">POSITIVE_SEQ</a> = 0
+, <a class="el" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579">NEGATIVE_SEQ</a>
+, <a class="el" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e">ZERO_SEQ</a>
  }</td></tr>
+<tr class="memdesc:a73321f98d9ea4582f9de005ef5ed8594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence type used when building the system admittance matrix.  <a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594">More...</a><br /></td></tr>
 <tr class="separator:a73321f98d9ea4582f9de005ef5ed8594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -174,13 +181,30 @@ Enumerations</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum BusType</td>
+          <td class="memname">enum <a class="el" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46">BusType</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8h_source.html#l00040">40</a> of file <a class="el" href="_electric_calculation_8h_source.html">ElectricCalculation.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   40</span>{ BUS_SLACK = 0, BUS_PV, BUS_PQ };</div>
+<p>Types of buses used in power flow analysis. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6" name="a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6"></a>BUS_SLACK&#160;</td><td class="fielddoc"><p>Slack (reference) bus. Voltage magnitude and angle are specified. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923" name="a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923"></a>BUS_PV&#160;</td><td class="fielddoc"><p>PV bus (generator bus). Active power and voltage magnitude are specified. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83" name="a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83"></a>BUS_PQ&#160;</td><td class="fielddoc"><p>PQ bus (load bus). Active and reactive powers are specified. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8h_source.html#l00044">44</a> of file <a class="el" href="_electric_calculation_8h_source.html">ElectricCalculation.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   44</span>             {</div>
+<div class="line"><span class="lineno">   45</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a> = 0, </div>
+<div class="line"><span class="lineno">   46</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>,        </div>
+<div class="line"><span class="lineno">   47</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>         </div>
+<div class="line"><span class="lineno">   48</span>};</div>
+<div class="ttc" id="a_electric_calculation_8h_html_a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6"><div class="ttname"><a href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a></div><div class="ttdeci">@ BUS_SLACK</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00045">ElectricCalculation.h:45</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923"><div class="ttname"><a href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a></div><div class="ttdeci">@ BUS_PV</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00046">ElectricCalculation.h:46</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83"><div class="ttname"><a href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a></div><div class="ttdeci">@ BUS_PQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00048">ElectricCalculation.h:47</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -191,20 +215,42 @@ Enumerations</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum ReactiveLimitsType</td>
+          <td class="memname">enum <a class="el" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5">ReactiveLimitsType</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8h_source.html#l00042">42</a> of file <a class="el" href="_electric_calculation_8h_source.html">ElectricCalculation.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   42</span>                        {</div>
-<div class="line"><span class="lineno">   43</span>    RL_UNLIMITED = 0,     <span class="comment">// The bus can generate any ammount of reactive power.</span></div>
-<div class="line"><span class="lineno">   44</span>    RL_LIMITED,           <span class="comment">// The bus reactive power generation is limited.</span></div>
-<div class="line"><span class="lineno">   45</span>    RL_UNLIMITED_SOURCE,  <span class="comment">// The bus have at least one source of infinite reative power.</span></div>
-<div class="line"><span class="lineno">   46</span>    RL_MAX_REACHED,       <span class="comment">// Max limit reached</span></div>
-<div class="line"><span class="lineno">   47</span>    RL_MIN_REACHED,       <span class="comment">// Min limit reached</span></div>
-<div class="line"><span class="lineno">   48</span>    RL_NONE_REACHED       <span class="comment">// No limits reached</span></div>
-<div class="line"><span class="lineno">   49</span>};</div>
+<p>Types of reactive power limit conditions for buses. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa48d3d150889a89c491c9792ca3bc8a5af7f144f6e36ccb2e09f39f5b9df6ef18" name="aa48d3d150889a89c491c9792ca3bc8a5af7f144f6e36ccb2e09f39f5b9df6ef18"></a>RL_UNLIMITED&#160;</td><td class="fielddoc"><p>The bus can generate any amount of reactive power. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb" name="aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb"></a>RL_LIMITED&#160;</td><td class="fielddoc"><p>The bus reactive power generation is limited. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa48d3d150889a89c491c9792ca3bc8a5afe82ead3835d251dfa6f0e453465caec" name="aa48d3d150889a89c491c9792ca3bc8a5afe82ead3835d251dfa6f0e453465caec"></a>RL_UNLIMITED_SOURCE&#160;</td><td class="fielddoc"><p>The bus has at least one source capable of unlimited reactive power. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf" name="aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf"></a>RL_MAX_REACHED&#160;</td><td class="fielddoc"><p>Maximum reactive power limit reached. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44" name="aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44"></a>RL_MIN_REACHED&#160;</td><td class="fielddoc"><p>Minimum reactive power limit reached. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa48d3d150889a89c491c9792ca3bc8a5a9635d4cfa6b2fc11d090759fbb3f1eff" name="aa48d3d150889a89c491c9792ca3bc8a5a9635d4cfa6b2fc11d090759fbb3f1eff"></a>RL_NONE_REACHED&#160;</td><td class="fielddoc"><p>No reactive power limits reached. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8h_source.html#l00054">54</a> of file <a class="el" href="_electric_calculation_8h_source.html">ElectricCalculation.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   54</span>                        {</div>
+<div class="line"><span class="lineno">   55</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5af7f144f6e36ccb2e09f39f5b9df6ef18">RL_UNLIMITED</a> = 0,     </div>
+<div class="line"><span class="lineno">   56</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb">RL_LIMITED</a>,           </div>
+<div class="line"><span class="lineno">   57</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5afe82ead3835d251dfa6f0e453465caec">RL_UNLIMITED_SOURCE</a>,  </div>
+<div class="line"><span class="lineno">   58</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf">RL_MAX_REACHED</a>,       </div>
+<div class="line"><span class="lineno">   59</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44">RL_MIN_REACHED</a>,       </div>
+<div class="line"><span class="lineno">   60</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a9635d4cfa6b2fc11d090759fbb3f1eff">RL_NONE_REACHED</a>       </div>
+<div class="line"><span class="lineno">   61</span>};</div>
+<div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf">RL_MAX_REACHED</a></div><div class="ttdeci">@ RL_MAX_REACHED</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00058">ElectricCalculation.h:58</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44">RL_MIN_REACHED</a></div><div class="ttdeci">@ RL_MIN_REACHED</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00059">ElectricCalculation.h:59</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5a9635d4cfa6b2fc11d090759fbb3f1eff"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a9635d4cfa6b2fc11d090759fbb3f1eff">RL_NONE_REACHED</a></div><div class="ttdeci">@ RL_NONE_REACHED</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00061">ElectricCalculation.h:60</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb">RL_LIMITED</a></div><div class="ttdeci">@ RL_LIMITED</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00056">ElectricCalculation.h:56</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5af7f144f6e36ccb2e09f39f5b9df6ef18"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5af7f144f6e36ccb2e09f39f5b9df6ef18">RL_UNLIMITED</a></div><div class="ttdeci">@ RL_UNLIMITED</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00055">ElectricCalculation.h:55</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5afe82ead3835d251dfa6f0e453465caec"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5afe82ead3835d251dfa6f0e453465caec">RL_UNLIMITED_SOURCE</a></div><div class="ttdeci">@ RL_UNLIMITED_SOURCE</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00057">ElectricCalculation.h:57</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -215,13 +261,30 @@ Enumerations</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum YBusSequence</td>
+          <td class="memname">enum <a class="el" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594">YBusSequence</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_electric_calculation_8h_source.html#l00051">51</a> of file <a class="el" href="_electric_calculation_8h_source.html">ElectricCalculation.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>{ POSITIVE_SEQ = 0, NEGATIVE_SEQ, ZERO_SEQ };</div>
+<p>Sequence type used when building the system admittance matrix. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932" name="a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932"></a>POSITIVE_SEQ&#160;</td><td class="fielddoc"><p>Positive sequence admittance matrix. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579" name="a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579"></a>NEGATIVE_SEQ&#160;</td><td class="fielddoc"><p>Negative sequence admittance matrix. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e" name="a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e"></a>ZERO_SEQ&#160;</td><td class="fielddoc"><p>Zero sequence admittance matrix. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_electric_calculation_8h_source.html#l00067">67</a> of file <a class="el" href="_electric_calculation_8h_source.html">ElectricCalculation.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>                  {</div>
+<div class="line"><span class="lineno">   68</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932">POSITIVE_SEQ</a> = 0, </div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579">NEGATIVE_SEQ</a>,     </div>
+<div class="line"><span class="lineno">   70</span>    <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e">ZERO_SEQ</a>          </div>
+<div class="line"><span class="lineno">   71</span>};</div>
+<div class="ttc" id="a_electric_calculation_8h_html_a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932"><div class="ttname"><a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932">POSITIVE_SEQ</a></div><div class="ttdeci">@ POSITIVE_SEQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00068">ElectricCalculation.h:68</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579"><div class="ttname"><a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a1e62759b7c2cceb121f3888cd0581579">NEGATIVE_SEQ</a></div><div class="ttdeci">@ NEGATIVE_SEQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00069">ElectricCalculation.h:69</a></div></div>
+<div class="ttc" id="a_electric_calculation_8h_html_a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e"><div class="ttname"><a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a5e496f6aa3a618c364e3ca1b7e01a15e">ZERO_SEQ</a></div><div class="ttdeci">@ ZERO_SEQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00071">ElectricCalculation.h:70</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

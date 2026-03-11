@@ -1,8 +1,16 @@
 var searchData=
 [
-  ['pf_5fbus1_5fto_5fbus2_0',['PF_BUS1_TO_BUS2',['../_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949aaa9cc0242e6b75def5c498ea5fbf43e5',1,'PowerElement.h']]],
-  ['pf_5fbus2_5fto_5fbus1_1',['PF_BUS2_TO_BUS1',['../_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949ab1812fe35312d53da73aeb7d3412a395',1,'PowerElement.h']]],
-  ['pf_5fnone_2',['PF_NONE',['../_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a06d679ea57938c356ac36623eab3da9a',1,'PowerElement.h']]],
-  ['pf_5fto_5fbus_3',['PF_TO_BUS',['../_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949abf41f386cac17c87c32a6466f807e98a',1,'PowerElement.h']]],
-  ['pf_5fto_5felement_4',['PF_TO_ELEMENT',['../_power_element_8h.html#a73d8987af477cf1cb7e6d5285444a949a066ea9ca0ff862cf903ac7f85e66c607',1,'PowerElement.h']]]
+  ['id_5fdelete_0',['ID_DELETE',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a',1,'Element.h']]],
+  ['id_5fedit_5felement_1',['ID_EDIT_ELEMENT',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42',1,'Element.h']]],
+  ['id_5fline_5fadd_5fnode_2',['ID_LINE_ADD_NODE',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960',1,'Element.h']]],
+  ['id_5fline_5fremove_5fnode_3',['ID_LINE_REMOVE_NODE',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803',1,'Element.h']]],
+  ['id_5fpb_5fleft_4',['ID_PB_LEFT',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721',1,'Element.h']]],
+  ['id_5fpb_5fleft_5fbottom_5',['ID_PB_LEFT_BOTTOM',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f',1,'Element.h']]],
+  ['id_5fpb_5fleft_5ftop_6',['ID_PB_LEFT_TOP',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb',1,'Element.h']]],
+  ['id_5fpb_5fnone_7',['ID_PB_NONE',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433',1,'Element.h']]],
+  ['id_5fpb_5fright_8',['ID_PB_RIGHT',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0',1,'Element.h']]],
+  ['id_5fpb_5fright_5fbottom_9',['ID_PB_RIGHT_BOTTOM',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d',1,'Element.h']]],
+  ['id_5fpb_5fright_5ftop_10',['ID_PB_RIGHT_TOP',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c',1,'Element.h']]],
+  ['id_5frotate_5fclock_11',['ID_ROTATE_CLOCK',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8',1,'Element.h']]],
+  ['id_5frotate_5fcounterclock_12',['ID_ROTATE_COUNTERCLOCK',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551',1,'Element.h']]]
 ];

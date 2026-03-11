@@ -12,7 +12,8 @@ var searchData=
   ['faultdata_9',['FaultData',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df',1,'PowerElement.h']]],
   ['filehanding_10',['FileHanding',['../class_file_handing.html',1,'']]],
   ['filehanding_2eh_11',['FileHanding.h',['../_file_handing_8h.html',1,'']]],
-  ['freqresponse_12',['FREQRESPONSE',['../_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3',1,'PowerElement.h']]],
-  ['freqresponsedata_13',['FreqResponseData',['../struct_freq_response_data.html',1,'']]],
-  ['frequencyresponseform_14',['FrequencyResponseForm',['../class_frequency_response_form.html',1,'']]]
+  ['fixed_12',['fixed',['../struct_reactive_machine.html#a1da317501fef696f2e0bace6681c2a5d',1,'ReactiveMachine']]],
+  ['freqresponse_13',['FREQRESPONSE',['../_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3',1,'PowerElement.h']]],
+  ['freqresponsedata_14',['FreqResponseData',['../struct_freq_response_data.html',1,'']]],
+  ['frequencyresponseform_15',['FrequencyResponseForm',['../class_frequency_response_form.html',1,'']]]
 ];

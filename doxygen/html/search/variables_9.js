@@ -1,8 +1,24 @@
 var searchData=
 [
-  ['pd_0',['pd',['../struct_parse_matpower_1_1_bus_data.html#adf693c58468a2b1209452f61782be3b0',1,'ParseMatpower::BusData']]],
-  ['pg_1',['pg',['../struct_parse_matpower_1_1_gen_data.html#ac7a2a7d1dfec7018abce5ccc15897eec',1,'ParseMatpower::GenData']]],
-  ['phaseshift_2',['phaseshift',['../struct_parse_anarede_1_1_branch_data.html#a04927e47eb216892106ac401efdf211a',1,'ParseAnarede::BranchData::phaseShift'],['../struct_parse_matpower_1_1_branch_data.html#ad3c0dc412ff8fa831f1fe719ad81903f',1,'ParseMatpower::BranchData::phaseShift']]],
-  ['position_3',['position',['../struct_parse_anarede_1_1_component.html#ad2139e6d1bf119460ed3fb3b09bb59c0',1,'ParseAnarede::Component']]],
-  ['power_4',['power',['../struct_parse_anarede_1_1_ind_element_data.html#a60298e212445a317ad607eea31e3a0b6',1,'ParseAnarede::IndElementData']]]
+  ['m_0',['m',['../struct_integration_constant.html#adafabd0d37a52d4ed054a800cbce3d65',1,'IntegrationConstant']]],
+  ['m_5fbuslist_1',['m_busList',['../class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22',1,'ElectricCalculation']]],
+  ['m_5fcapacitorlist_2',['m_capacitorList',['../class_electric_calculation.html#a4bf7c82e4e8bc87a4e42ad9b124ea9e5',1,'ElectricCalculation']]],
+  ['m_5femtelementlist_3',['m_emtElementList',['../class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558',1,'ElectricCalculation']]],
+  ['m_5fharmcurrentlist_4',['m_harmCurrentList',['../class_electric_calculation.html#acd2059f84b2c124b1400677d5adeea12',1,'ElectricCalculation']]],
+  ['m_5findmotorlist_5',['m_indMotorList',['../class_electric_calculation.html#a689622805bdea60428e6eea19795dff9',1,'ElectricCalculation']]],
+  ['m_5finductorlist_6',['m_inductorList',['../class_electric_calculation.html#ad7bfee2d7cba726ff6aa7605a969d49a',1,'ElectricCalculation']]],
+  ['m_5finputcontrol_7',['m_inputControl',['../class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831',1,'ControlElementSolver']]],
+  ['m_5flinelist_8',['m_lineList',['../class_electric_calculation.html#a06ce7fe37ee6cc2c786573f094493659',1,'ElectricCalculation']]],
+  ['m_5floadlist_9',['m_loadList',['../class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86',1,'ElectricCalculation']]],
+  ['m_5fpowerelementlist_10',['m_powerElementList',['../class_electric_calculation.html#a0c88feb4f01309795e8a0cf5064a7d90',1,'ElectricCalculation']]],
+  ['m_5fsyncgeneratorlist_11',['m_syncGeneratorList',['../class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697',1,'ElectricCalculation']]],
+  ['m_5fsyncmotorlist_12',['m_syncMotorList',['../class_electric_calculation.html#a8dcbf4f2468a5b55680ba4c17d909102',1,'ElectricCalculation']]],
+  ['m_5ftransformerlist_13',['m_transformerList',['../class_electric_calculation.html#a6cca6be3c0b79741a49b1631e38fc3be',1,'ElectricCalculation']]],
+  ['machine_14',['machine',['../struct_reactive_machine.html#a3e1bec38f525b234787878afdb92c747',1,'ReactiveMachine']]],
+  ['maxlimit_15',['maxLimit',['../struct_reactive_limits.html#ab6b953f8c1dec53d2fe5d0e8ac8d42cd',1,'ReactiveLimits']]],
+  ['maxlimittype_16',['maxLimitType',['../struct_reactive_limits.html#a75d18e88f580e6573923139fc7736f14',1,'ReactiveLimits']]],
+  ['maxreactivepower_17',['maxreactivepower',['../struct_parse_anarede_1_1_bus_data.html#afc1680fc19492b5e7b136f4e9bfbef87',1,'ParseAnarede::BusData::maxReactivePower'],['../struct_parse_anarede_1_1_ind_gen_data.html#ac9ab19734f67d4e87580f77cc2bcbcb6',1,'ParseAnarede::IndGenData::maxReactivePower'],['../struct_parse_matpower_1_1_gen_data.html#a5c79785c36f90f0442b33dcffd898506',1,'ParseMatpower::GenData::maxReactivePower']]],
+  ['minlimit_18',['minLimit',['../struct_reactive_limits.html#ae74269f642fb45328b112762c39613c0',1,'ReactiveLimits']]],
+  ['minlimittype_19',['minLimitType',['../struct_reactive_limits.html#a91673f0f2c3d93f376265931ff2f6ee5',1,'ReactiveLimits']]],
+  ['minreactivepower_20',['minreactivepower',['../struct_parse_anarede_1_1_bus_data.html#aaf1417a9c20902c827ed6851a0f3283f',1,'ParseAnarede::BusData::minReactivePower'],['../struct_parse_anarede_1_1_ind_gen_data.html#a987fdd5c084d55c5339f492a00fb6d1a',1,'ParseAnarede::IndGenData::minReactivePower'],['../struct_parse_matpower_1_1_gen_data.html#a0d651743c280ebabff0bd52dd4e9b07e',1,'ParseMatpower::GenData::minReactivePower']]]
 ];

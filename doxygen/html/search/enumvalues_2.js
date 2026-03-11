@@ -1,16 +1,11 @@
 var searchData=
 [
-  ['id_5fdelete_0',['ID_DELETE',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a80c989d88bc686137e96564dfad6166a',1,'Element.h']]],
-  ['id_5fedit_5felement_1',['ID_EDIT_ELEMENT',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42',1,'Element.h']]],
-  ['id_5fline_5fadd_5fnode_2',['ID_LINE_ADD_NODE',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049af05f38a3b3fea5d6da036dce48e9d960',1,'Element.h']]],
-  ['id_5fline_5fremove_5fnode_3',['ID_LINE_REMOVE_NODE',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a1a8f8c62fc201993f6a605ff06314803',1,'Element.h']]],
-  ['id_5fpb_5fleft_4',['ID_PB_LEFT',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa8b70955f3c623a35fb64e0d95531721',1,'Element.h']]],
-  ['id_5fpb_5fleft_5fbottom_5',['ID_PB_LEFT_BOTTOM',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316aa962fdbb47309de8b6f16025e2d46b2f',1,'Element.h']]],
-  ['id_5fpb_5fleft_5ftop_6',['ID_PB_LEFT_TOP',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a49b276646725b598a6b3a24ee74e8afb',1,'Element.h']]],
-  ['id_5fpb_5fnone_7',['ID_PB_NONE',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a2efa051c0a3f23f2324cef5bc930f433',1,'Element.h']]],
-  ['id_5fpb_5fright_8',['ID_PB_RIGHT',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316af6c9b66260adb71ded1407f62d5eceb0',1,'Element.h']]],
-  ['id_5fpb_5fright_5fbottom_9',['ID_PB_RIGHT_BOTTOM',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a982b811b9fa895eb15a3f8400ffa385d',1,'Element.h']]],
-  ['id_5fpb_5fright_5ftop_10',['ID_PB_RIGHT_TOP',['../_element_8h.html#a7b88da333c092757d91d7492dfa8e316a34118762cdb912e35698c4550edf470c',1,'Element.h']]],
-  ['id_5frotate_5fclock_11',['ID_ROTATE_CLOCK',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049a9d58b2fe374676b88029d401da0d77a8',1,'Element.h']]],
-  ['id_5frotate_5fcounterclock_12',['ID_ROTATE_COUNTERCLOCK',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049adeee9ba1a6f37ff0622ca94a52e40551',1,'Element.h']]]
+  ['fault_5f2line_0',['FAULT_2LINE',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa82d0aae13e9f92f669e79b7746fbff48',1,'PowerElement.h']]],
+  ['fault_5f2line_5fground_1',['FAULT_2LINE_GROUND',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa132d629383b198a56a6b2d35f4d490cb',1,'PowerElement.h']]],
+  ['fault_5fline_5fa_2',['FAULT_LINE_A',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfad49281a8cad4dffab20e01a650e0fea4',1,'PowerElement.h']]],
+  ['fault_5fline_5fb_3',['FAULT_LINE_B',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0cd5954a19395d37bad445e1b608b393',1,'PowerElement.h']]],
+  ['fault_5fline_5fc_4',['FAULT_LINE_C',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa8712714ce4dce004864c37682dba8fde',1,'PowerElement.h']]],
+  ['fault_5fline_5fground_5',['FAULT_LINE_GROUND',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0abc9f277f73496a3a0e81647a5f0502',1,'PowerElement.h']]],
+  ['fault_5fthreephase_6',['FAULT_THREEPHASE',['../_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa6f7405d8790f4650c1d5dac3f9dcf583',1,'PowerElement.h']]],
+  ['freqresponse_7',['FREQRESPONSE',['../_power_element_8h.html#aa6ba1b31b31a1cc802b6b3b3051a83a4a82def898ef073a3756ebf164d30768d3',1,'PowerElement.h']]]
 ];

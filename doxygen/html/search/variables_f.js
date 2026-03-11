@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['xd_0',['xd',['../struct_parse_anarede_1_1_ind_gen_data.html#ad8b0741526b2228fafd333a74fac398a',1,'ParseAnarede::IndGenData::xd'],['../struct_sync_machine_model_data.html#af75546805bf92eb7a8a7280f7964b330',1,'SyncMachineModelData::xd']]],
-  ['xl_1',['xl',['../struct_parse_anarede_1_1_ind_gen_data.html#a386c400028af05b6fd2959484a4c908e',1,'ParseAnarede::IndGenData']]],
-  ['xq_2',['xq',['../struct_parse_anarede_1_1_ind_gen_data.html#a0f53c1548efecd0490e6d101fbada635',1,'ParseAnarede::IndGenData::xq'],['../struct_sync_machine_model_data.html#af81596945918e86e56f5822a0ba97fbc',1,'SyncMachineModelData::xq']]],
-  ['xt_3',['xt',['../struct_parse_anarede_1_1_ind_gen_data.html#a8d6751cf15c986eafee56b1d9d56901b',1,'ParseAnarede::IndGenData']]]
+  ['tap_0',['tap',['../struct_parse_anarede_1_1_branch_data.html#a701d37e2dbdb8241e3065ffa544f2281',1,'ParseAnarede::BranchData::tap'],['../struct_parse_matpower_1_1_branch_data.html#a768b3c0d538b2055de4d838ff3d6f635',1,'ParseMatpower::BranchData::tap']]],
+  ['type_1',['type',['../struct_parse_anarede_1_1_component.html#a99ae2a9b42cc4e7687439d814a354001',1,'ParseAnarede::Component::type'],['../struct_parse_anarede_1_1_power_line.html#a9d35e1ecb4b794e8851659823e21cca6',1,'ParseAnarede::PowerLine::type'],['../struct_parse_anarede_1_1_bus_data.html#a3b0eba8dfa8d9341e6e6f057c4bb5496',1,'ParseAnarede::BusData::type'],['../struct_parse_anarede_1_1_branch_data.html#ac01cc1e3106dee2db7e35e03a6b7e48c',1,'ParseAnarede::BranchData::type'],['../struct_parse_anarede_1_1_ind_element_data.html#abcfc3eb5dcea27035a266ecb9243f78c',1,'ParseAnarede::IndElementData::type'],['../struct_parse_matpower_1_1_bus_data.html#aea70fcd8ce932c8a1c126c21bb0d0313',1,'ParseMatpower::BusData::type']]]
 ];

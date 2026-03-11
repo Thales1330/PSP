@@ -1,0 +1,5 @@
+<map id="ElectricCalculation::CalculateEMTElementsPower" name="ElectricCalculation::CalculateEMTElementsPower">
+<area shape="rect" id="Node000001" title="Calculate the power of EMT elements." alt="" coords="244,5,464,45"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html#a6841d70b9458fec69972d3abe3b80f02" title="Calculate the power mismatch error for EMT simulation." alt="" coords="5,5,196,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,28,196,28,196,23,230,23"/>
+</map>

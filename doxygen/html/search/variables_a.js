@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['qd_0',['qd',['../struct_parse_matpower_1_1_bus_data.html#aaffe3cf907ee9464a7279d583dbd55f4',1,'ParseMatpower::BusData']]],
-  ['qg_1',['qg',['../struct_parse_matpower_1_1_gen_data.html#abe7680c2eb362b7586111555a4de2da1',1,'ParseMatpower::GenData']]]
+  ['nodesposition_0',['nodesPosition',['../struct_parse_anarede_1_1_power_line.html#a03af07387b8266b9fda1024fd854b372',1,'ParseAnarede::PowerLine']]],
+  ['numunits_1',['numUnits',['../struct_parse_anarede_1_1_ind_element_data.html#a914f92a4f5c30e01e0470b2012a1f8d3',1,'ParseAnarede::IndElementData']]]
 ];

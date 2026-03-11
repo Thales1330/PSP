@@ -166,6 +166,7 @@ var hierarchy =
       [ "RateLimiterForm", "class_rate_limiter_form.html", null ]
     ] ],
     [ "ReactiveLimits", "struct_reactive_limits.html", null ],
+    [ "ReactiveMachine", "struct_reactive_machine.html", null ],
     [ "ReactiveShuntElementFormBase", null, [
       [ "ReactiveShuntElementForm", "class_reactive_shunt_element_form.html", null ]
     ] ],

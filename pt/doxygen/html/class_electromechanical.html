@@ -128,7 +128,7 @@ Inheritance diagram for Electromechanical:</div>
 <div class="center"><img src="class_electromechanical__inherit__graph.png" border="0" usemap="#a_electromechanical_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_electromechanical_inherit__map" id="a_electromechanical_inherit__map">
 <area shape="rect" title="Calculates the electromechanical transient based on disturbances (e.g. system fault)." alt="" coords="5,79,148,104"/>
-<area shape="rect" href="class_electric_calculation.html" title="Base class of electric calculations, with general methods." alt="" coords="5,5,148,31"/>
+<area shape="rect" href="class_electric_calculation.html" title="Base class for electrical calculations providing general utility methods." alt="" coords="5,5,148,31"/>
 <area shape="poly" title=" " alt="" coords="79,44,79,79,74,79,74,44"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -138,7 +138,7 @@ Collaboration diagram for Electromechanical:</div>
 <div class="center"><img src="class_electromechanical__coll__graph.png" border="0" usemap="#a_electromechanical_coll__map" alt="Collaboration graph"/></div>
 <map name="a_electromechanical_coll__map" id="a_electromechanical_coll__map">
 <area shape="rect" title="Calculates the electromechanical transient based on disturbances (e.g. system fault)." alt="" coords="84,93,227,119"/>
-<area shape="rect" href="class_electric_calculation.html" title="Base class of electric calculations, with general methods." alt="" coords="5,5,148,31"/>
+<area shape="rect" href="class_electric_calculation.html" title="Base class for electrical calculations providing general utility methods." alt="" coords="5,5,148,31"/>
 <area shape="poly" title=" " alt="" coords="98,39,146,91,142,95,94,43"/>
 <area shape="rect" href="struct_simulation_data.html" title=" " alt="" coords="173,5,295,31"/>
 <area shape="poly" title=" " alt="" coords="216,43,168,95,164,91,212,39"/>
@@ -169,40 +169,53 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acfcaa3ac1917e250734abccc2d0c7f02 inherit pub_methods_class_electric_calculation" id="r_acfcaa3ac1917e250734abccc2d0c7f02"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#acfcaa3ac1917e250734abccc2d0c7f02">GetElementsFromList</a> (std::vector&lt; <a class="el" href="class_element.html">Element</a> * &gt; elementList)</td></tr>
 <tr class="memdesc:acfcaa3ac1917e250734abccc2d0c7f02 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Separate the power elements from a generic list.  <br /></td></tr>
 <tr class="separator:acfcaa3ac1917e250734abccc2d0c7f02 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87da7425eaeb6b2c80e18e481c1b38b5 inherit pub_methods_class_electric_calculation" id="r_a87da7425eaeb6b2c80e18e481c1b38b5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5">GetYBus</a> (std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;yBus, double systemPowerBase, YBusSequence sequence=POSITIVE_SEQ, bool includeSyncMachines=false, bool allLoadsAsImpedances=false, bool usePowerFlowVoltagesOnImpedances=false)</td></tr>
+<tr class="memitem:a87da7425eaeb6b2c80e18e481c1b38b5 inherit pub_methods_class_electric_calculation" id="r_a87da7425eaeb6b2c80e18e481c1b38b5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5">GetYBus</a> (std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;yBus, double systemPowerBase, <a class="el" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594">YBusSequence</a> sequence=<a class="el" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932">POSITIVE_SEQ</a>, bool includeSyncMachines=false, bool allLoadsAsImpedances=false, bool usePowerFlowVoltagesOnImpedances=false)</td></tr>
 <tr class="memdesc:a87da7425eaeb6b2c80e18e481c1b38b5 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the admittance matrix from the list of elements (use GetElementsFromList first).  <br /></td></tr>
 <tr class="separator:a87da7425eaeb6b2c80e18e481c1b38b5 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af00a6599f2b0b4e35bf0f8c70195447c inherit pub_methods_class_electric_calculation" id="r_af00a6599f2b0b4e35bf0f8c70195447c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#af00a6599f2b0b4e35bf0f8c70195447c">InvertMatrix</a> (std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;inverse)</td></tr>
 <tr class="memdesc:af00a6599f2b0b4e35bf0f8c70195447c inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invert a matrix.  <br /></td></tr>
 <tr class="separator:af00a6599f2b0b4e35bf0f8c70195447c inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d417da6eeb8c12f7be6501fff6f7049 inherit pub_methods_class_electric_calculation" id="r_a1d417da6eeb8c12f7be6501fff6f7049"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049">UpdateElementsPowerFlow</a> (std::vector&lt; std::complex&lt; double &gt; &gt; voltage, std::vector&lt; std::complex&lt; double &gt; &gt; power, std::vector&lt; BusType &gt; busType, std::vector&lt; <a class="el" href="struct_reactive_limits.html">ReactiveLimits</a> &gt; reactiveLimit, double systemPowerBase)</td></tr>
+<tr class="memitem:a1d417da6eeb8c12f7be6501fff6f7049 inherit pub_methods_class_electric_calculation" id="r_a1d417da6eeb8c12f7be6501fff6f7049"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049">UpdateElementsPowerFlow</a> (std::vector&lt; std::complex&lt; double &gt; &gt; voltage, std::vector&lt; std::complex&lt; double &gt; &gt; power, std::vector&lt; <a class="el" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46">BusType</a> &gt; busType, std::vector&lt; <a class="el" href="struct_reactive_limits.html">ReactiveLimits</a> &gt; reactiveLimit, double systemPowerBase)</td></tr>
 <tr class="memdesc:a1d417da6eeb8c12f7be6501fff6f7049 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the elements after the power flow calculation.  <br /></td></tr>
 <tr class="separator:a1d417da6eeb8c12f7be6501fff6f7049 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a458ecbb5afd86d9049ed3508256d8fe1 inherit pub_methods_class_electric_calculation" id="r_a458ecbb5afd86d9049ed3508256d8fe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a> (std::complex&lt; double &gt; complexValue, double angle, double &amp;dValue, double &amp;qValue)</td></tr>
+<tr class="memdesc:a458ecbb5afd86d9049ed3508256d8fe1 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a complex phasor in ABC representation to DQ components.  <br /></td></tr>
 <tr class="separator:a458ecbb5afd86d9049ed3508256d8fe1 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4e5f37f8a06d0ad305334d2847cd7f inherit pub_methods_class_electric_calculation" id="r_aed4e5f37f8a06d0ad305334d2847cd7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#aed4e5f37f8a06d0ad305334d2847cd7f">DQ0toABC</a> (double dValue, double qValue, double angle, std::complex&lt; double &gt; &amp;complexValue)</td></tr>
+<tr class="memdesc:aed4e5f37f8a06d0ad305334d2847cd7f inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert DQ components to a complex phasor in ABC representation.  <br /></td></tr>
 <tr class="separator:aed4e5f37f8a06d0ad305334d2847cd7f inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c01b0f6b2f656db999ff4933d86d19d inherit pub_methods_class_electric_calculation" id="r_a7c01b0f6b2f656db999ff4933d86d19d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::complex&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a7c01b0f6b2f656db999ff4933d86d19d">GaussianElimination</a> (std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::complex&lt; double &gt; &gt; array)</td></tr>
+<tr class="memdesc:a7c01b0f6b2f656db999ff4933d86d19d inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a linear system using Gaussian elimination (complex version).  <br /></td></tr>
 <tr class="separator:a7c01b0f6b2f656db999ff4933d86d19d inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a425f1328f1bfa051df20fd8f52bf94c0 inherit pub_methods_class_electric_calculation" id="r_a425f1328f1bfa051df20fd8f52bf94c0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a425f1328f1bfa051df20fd8f52bf94c0">GaussianElimination</a> (std::vector&lt; std::vector&lt; double &gt; &gt; matrix, std::vector&lt; double &gt; array)</td></tr>
+<tr class="memdesc:a425f1328f1bfa051df20fd8f52bf94c0 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a linear system using Gaussian elimination (real version).  <br /></td></tr>
 <tr class="separator:a425f1328f1bfa051df20fd8f52bf94c0 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade330c7267088dcbdd7c8e7f8c302da3 inherit pub_methods_class_electric_calculation" id="r_ade330c7267088dcbdd7c8e7f8c302da3"><td class="memItemLeft" align="right" valign="top">Machines::SyncMachineModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#ade330c7267088dcbdd7c8e7f8c302da3">GetMachineModel</a> (<a class="el" href="class_sync_generator.html">SyncGenerator</a> *generator)</td></tr>
+<tr class="memdesc:ade330c7267088dcbdd7c8e7f8c302da3 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the synchronous machine model used by the generator based on user-defined parameters.  <br /></td></tr>
 <tr class="separator:ade330c7267088dcbdd7c8e7f8c302da3 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a044a85b589d5eee879de3348248fc612 inherit pub_methods_class_electric_calculation" id="r_a044a85b589d5eee879de3348248fc612"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::complex&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a044a85b589d5eee879de3348248fc612">ComplexMatrixTimesVector</a> (std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::complex&lt; double &gt; &gt; vector)</td></tr>
+<tr class="memdesc:a044a85b589d5eee879de3348248fc612 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a complex matrix by a complex vector.  <br /></td></tr>
 <tr class="separator:a044a85b589d5eee879de3348248fc612 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae721d26e05b66887bfb7125f76ec9e9c inherit pub_methods_class_electric_calculation" id="r_ae721d26e05b66887bfb7125f76ec9e9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#ae721d26e05b66887bfb7125f76ec9e9c">GetLUDecomposition</a> (std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;matrixL, std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;matrixU)</td></tr>
+<tr class="memdesc:ae721d26e05b66887bfb7125f76ec9e9c inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the LU decomposition of a matrix.  <br /></td></tr>
 <tr class="separator:ae721d26e05b66887bfb7125f76ec9e9c inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55cd49ca9c2771533e6e2f16bb9ec1fc inherit pub_methods_class_electric_calculation" id="r_a55cd49ca9c2771533e6e2f16bb9ec1fc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::complex&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a55cd49ca9c2771533e6e2f16bb9ec1fc">LUEvaluate</a> (std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; u, std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; l, std::vector&lt; std::complex&lt; double &gt; &gt; b)</td></tr>
+<tr class="memdesc:a55cd49ca9c2771533e6e2f16bb9ec1fc inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a linear system using LU decomposition.  <br /></td></tr>
 <tr class="separator:a55cd49ca9c2771533e6e2f16bb9ec1fc inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b05b05a852f973067c0d86e0766578b inherit pub_methods_class_electric_calculation" id="r_a6b05b05a852f973067c0d86e0766578b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a6b05b05a852f973067c0d86e0766578b">GetParentBus</a> (<a class="el" href="class_element.html">Element</a> *childElement, <a class="el" href="class_bus.html">Bus</a> *&amp;parentBus)</td></tr>
+<tr class="memdesc:a6b05b05a852f973067c0d86e0766578b inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the parent bus of a given shunt element.  <br /></td></tr>
 <tr class="separator:a6b05b05a852f973067c0d86e0766578b inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5dcb2c76921bf3ace46bc5dee7cbcbe5 inherit pub_methods_class_electric_calculation" id="r_a5dcb2c76921bf3ace46bc5dee7cbcbe5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a5dcb2c76921bf3ace46bc5dee7cbcbe5">GetParentBus</a> (<a class="el" href="class_element.html">Element</a> *childElement, <a class="el" href="class_bus.html">Bus</a> *&amp;parentBus1, <a class="el" href="class_bus.html">Bus</a> *&amp;parentBus2)</td></tr>
+<tr class="memdesc:a5dcb2c76921bf3ace46bc5dee7cbcbe5 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the parent buses of a two-terminal element (branch).  <br /></td></tr>
 <tr class="separator:a5dcb2c76921bf3ace46bc5dee7cbcbe5 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c65e6494c61cf1bb79223181e96bbeb inherit pub_methods_class_electric_calculation" id="r_a4c65e6494c61cf1bb79223181e96bbeb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a4c65e6494c61cf1bb79223181e96bbeb">CalculateEMTElementsAdmittance</a> (const double &amp;basePower, wxString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a4c65e6494c61cf1bb79223181e96bbeb inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the admittance of EMT elements.  <br /></td></tr>
 <tr class="separator:a4c65e6494c61cf1bb79223181e96bbeb inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eb2c7b6ce908a98ae9a848a6424b546 inherit pub_methods_class_electric_calculation" id="r_a6eb2c7b6ce908a98ae9a848a6424b546"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a6eb2c7b6ce908a98ae9a848a6424b546">CalculateEMTElementsPower</a> (const double &amp;basePower, wxString &amp;errorMsg, bool updateCurrent=true)</td></tr>
+<tr class="memdesc:a6eb2c7b6ce908a98ae9a848a6424b546 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the power of EMT elements.  <br /></td></tr>
 <tr class="separator:a6eb2c7b6ce908a98ae9a848a6424b546 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6841d70b9458fec69972d3abe3b80f02 inherit pub_methods_class_electric_calculation" id="r_a6841d70b9458fec69972d3abe3b80f02"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a6841d70b9458fec69972d3abe3b80f02">CalculateEMTPowerError</a> (const std::vector&lt; std::complex&lt; double &gt; &gt; &amp;voltage, std::vector&lt; std::complex&lt; double &gt; &gt; &amp;power, const double &amp;basePower, wxString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a6841d70b9458fec69972d3abe3b80f02 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the power mismatch error for EMT simulation.  <br /></td></tr>
 <tr class="separator:a6841d70b9458fec69972d3abe3b80f02 inherit pub_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25b9d881b6e0ac09d08f6844cde312b7 inherit pub_methods_class_electric_calculation" id="r_a25b9d881b6e0ac09d08f6844cde312b7"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="class_power_element.html">PowerElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a25b9d881b6e0ac09d08f6844cde312b7">GetPowerElementList</a> () const</td></tr>
 <tr class="memdesc:a25b9d881b6e0ac09d08f6844cde312b7 inherit pub_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the power elements of the system (use GetElementsFromList first).  <br /></td></tr>
@@ -295,7 +308,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a9fbd85a083299f136b036c1d53547e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_electric_calculation"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_electric_calculation')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_electric_calculation.html">ElectricCalculation</a></td></tr>
 <tr class="memitem:a7d88fcbba15c27dd2adbedc4fc374624 inherit pro_methods_class_electric_calculation" id="r_a7d88fcbba15c27dd2adbedc4fc374624"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a7d88fcbba15c27dd2adbedc4fc374624">GetNextConnection</a> (const unsigned int &amp;checkBusNumber, const std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;yBus, std::vector&lt; bool &gt; &amp;connToSlack)</td></tr>
+<tr class="memdesc:a7d88fcbba15c27dd2adbedc4fc374624 inherit pro_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively check if a bus is electrically connected to the slack bus.  <br /></td></tr>
 <tr class="separator:a7d88fcbba15c27dd2adbedc4fc374624 inherit pro_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0115a1ea5beda3dcb0565d84c9e06de1 inherit pro_methods_class_electric_calculation" id="r_a0115a1ea5beda3dcb0565d84c9e06de1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a0115a1ea5beda3dcb0565d84c9e06de1">DistributeReactivePower</a> (std::vector&lt; <a class="el" href="struct_reactive_machine.html">ReactiveMachine</a> &gt; &amp;machines, double qTotal)</td></tr>
+<tr class="memdesc:a0115a1ea5beda3dcb0565d84c9e06de1 inherit pro_methods_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute reactive power among synchronous machines connected to the same bus.  <br /></td></tr>
+<tr class="separator:a0115a1ea5beda3dcb0565d84c9e06de1 inherit pro_methods_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -355,28 +372,40 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0eb61abf17f89762c07b07b29da30a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_electric_calculation"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_electric_calculation')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_electric_calculation.html">ElectricCalculation</a></td></tr>
 <tr class="memitem:a0c88feb4f01309795e8a0cf5064a7d90 inherit pro_attribs_class_electric_calculation" id="r_a0c88feb4f01309795e8a0cf5064a7d90"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_power_element.html">PowerElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a0c88feb4f01309795e8a0cf5064a7d90">m_powerElementList</a></td></tr>
+<tr class="memdesc:a0c88feb4f01309795e8a0cf5064a7d90 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of power elements in the system.  <br /></td></tr>
 <tr class="separator:a0c88feb4f01309795e8a0cf5064a7d90 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0eeb4b5afc082617247351857af26c22 inherit pro_attribs_class_electric_calculation" id="r_a0eeb4b5afc082617247351857af26c22"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_bus.html">Bus</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a></td></tr>
+<tr class="memdesc:a0eeb4b5afc082617247351857af26c22 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of buses in the system.  <br /></td></tr>
 <tr class="separator:a0eeb4b5afc082617247351857af26c22 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bf7c82e4e8bc87a4e42ad9b124ea9e5 inherit pro_attribs_class_electric_calculation" id="r_a4bf7c82e4e8bc87a4e42ad9b124ea9e5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_capacitor.html">Capacitor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a4bf7c82e4e8bc87a4e42ad9b124ea9e5">m_capacitorList</a></td></tr>
+<tr class="memdesc:a4bf7c82e4e8bc87a4e42ad9b124ea9e5 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of capacitor elements in the system.  <br /></td></tr>
 <tr class="separator:a4bf7c82e4e8bc87a4e42ad9b124ea9e5 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a689622805bdea60428e6eea19795dff9 inherit pro_attribs_class_electric_calculation" id="r_a689622805bdea60428e6eea19795dff9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_ind_motor.html">IndMotor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a></td></tr>
+<tr class="memdesc:a689622805bdea60428e6eea19795dff9 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of induction motors in the system.  <br /></td></tr>
 <tr class="separator:a689622805bdea60428e6eea19795dff9 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7bfee2d7cba726ff6aa7605a969d49a inherit pro_attribs_class_electric_calculation" id="r_ad7bfee2d7cba726ff6aa7605a969d49a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_inductor.html">Inductor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#ad7bfee2d7cba726ff6aa7605a969d49a">m_inductorList</a></td></tr>
+<tr class="memdesc:ad7bfee2d7cba726ff6aa7605a969d49a inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of inductors in the system.  <br /></td></tr>
 <tr class="separator:ad7bfee2d7cba726ff6aa7605a969d49a inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06ce7fe37ee6cc2c786573f094493659 inherit pro_attribs_class_electric_calculation" id="r_a06ce7fe37ee6cc2c786573f094493659"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_line.html">Line</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a06ce7fe37ee6cc2c786573f094493659">m_lineList</a></td></tr>
+<tr class="memdesc:a06ce7fe37ee6cc2c786573f094493659 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of transmission lines in the system.  <br /></td></tr>
 <tr class="separator:a06ce7fe37ee6cc2c786573f094493659 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a370884bcb0b406d8c9151ed064620a86 inherit pro_attribs_class_electric_calculation" id="r_a370884bcb0b406d8c9151ed064620a86"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_load.html">Load</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a></td></tr>
+<tr class="memdesc:a370884bcb0b406d8c9151ed064620a86 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of load elements in the system.  <br /></td></tr>
 <tr class="separator:a370884bcb0b406d8c9151ed064620a86 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72386789cd0ff595e937d70e18cad697 inherit pro_attribs_class_electric_calculation" id="r_a72386789cd0ff595e937d70e18cad697"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_sync_generator.html">SyncGenerator</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a></td></tr>
+<tr class="memdesc:a72386789cd0ff595e937d70e18cad697 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of synchronous generators in the system.  <br /></td></tr>
 <tr class="separator:a72386789cd0ff595e937d70e18cad697 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dcbf4f2468a5b55680ba4c17d909102 inherit pro_attribs_class_electric_calculation" id="r_a8dcbf4f2468a5b55680ba4c17d909102"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_sync_motor.html">SyncMotor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a8dcbf4f2468a5b55680ba4c17d909102">m_syncMotorList</a></td></tr>
+<tr class="memdesc:a8dcbf4f2468a5b55680ba4c17d909102 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of synchronous motors in the system.  <br /></td></tr>
 <tr class="separator:a8dcbf4f2468a5b55680ba4c17d909102 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cca6be3c0b79741a49b1631e38fc3be inherit pro_attribs_class_electric_calculation" id="r_a6cca6be3c0b79741a49b1631e38fc3be"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_transformer.html">Transformer</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a6cca6be3c0b79741a49b1631e38fc3be">m_transformerList</a></td></tr>
+<tr class="memdesc:a6cca6be3c0b79741a49b1631e38fc3be inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of transformers in the system.  <br /></td></tr>
 <tr class="separator:a6cca6be3c0b79741a49b1631e38fc3be inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd2059f84b2c124b1400677d5adeea12 inherit pro_attribs_class_electric_calculation" id="r_acd2059f84b2c124b1400677d5adeea12"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_harm_current.html">HarmCurrent</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#acd2059f84b2c124b1400677d5adeea12">m_harmCurrentList</a></td></tr>
+<tr class="memdesc:acd2059f84b2c124b1400677d5adeea12 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of harmonic current sources in the system.  <br /></td></tr>
 <tr class="separator:acd2059f84b2c124b1400677d5adeea12 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a776b2178a331b362a0ca3d379c1ec558 inherit pro_attribs_class_electric_calculation" id="r_a776b2178a331b362a0ca3d379c1ec558"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_e_m_t_element.html">EMTElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_electric_calculation.html#a776b2178a331b362a0ca3d379c1ec558">m_emtElementList</a></td></tr>
+<tr class="memdesc:a776b2178a331b362a0ca3d379c1ec558 inherit pro_attribs_class_electric_calculation"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of electromagnetic transient (EMT) elements in the system.  <br /></td></tr>
 <tr class="separator:a776b2178a331b362a0ca3d379c1ec558 inherit pro_attribs_class_electric_calculation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -438,7 +467,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   38</span>    m_plotTime = data.plotTime;</div>
 <div class="line"><span class="lineno">   39</span>    m_useCOI = data.useCOI;</div>
 <div class="line"><span class="lineno">   40</span>    <span class="comment">// If the user use all load as ZIP, updates the portions of each model, otherwise use constant impedance only.</span></div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">   42</span>        <a class="code hl_class" href="class_load.html">Load</a>* load = *it;</div>
 <div class="line"><span class="lineno">   43</span>        <span class="keyword">auto</span> loadData = load-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">   44</span>        <span class="keywordflow">if</span> (!loadData.useCompLoad) {  <span class="comment">// If no individual load composition defined.</span></div>
@@ -466,6 +495,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   66</span>    }</div>
 <div class="line"><span class="lineno">   67</span>}</div>
 <div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a370884bcb0b406d8c9151ed064620a86"><div class="ttname"><a href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">ElectricCalculation::m_loadList</a></div><div class="ttdeci">std::vector&lt; Load * &gt; m_loadList</div><div class="ttdoc">List of load elements in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00380">ElectricCalculation.h:380</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_acfcaa3ac1917e250734abccc2d0c7f02"><div class="ttname"><a href="class_electric_calculation.html#acfcaa3ac1917e250734abccc2d0c7f02">ElectricCalculation::GetElementsFromList</a></div><div class="ttdeci">virtual void GetElementsFromList(std::vector&lt; Element * &gt; elementList)</div><div class="ttdoc">Separate the power elements from a generic list.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00027">ElectricCalculation.cpp:27</a></div></div>
 <div class="ttc" id="aclass_load_html"><div class="ttname"><a href="class_load.html">Load</a></div><div class="ttdoc">Loas shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_load_8h_source.html#l00073">Load.h:74</a></div></div>
 </div><!-- fragment -->
@@ -519,7 +549,7 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l01771">1771</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno"> 1772</span>{</div>
 <div class="line"><span class="lineno"> 1773</span>    <span class="keywordtype">bool</span> ignoreEventStep = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1774</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; bus : m_busList) {</div>
+<div class="line"><span class="lineno"> 1774</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; bus : <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>) {</div>
 <div class="line"><span class="lineno"> 1775</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1776</span>        <span class="keywordflow">if</span> (!data.plotBus) <span class="keywordflow">continue</span>;</div>
 <div class="line"><span class="lineno"> 1777</span> </div>
@@ -600,6 +630,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1852</span>        bus-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno"> 1853</span>    }</div>
 <div class="line"><span class="lineno"> 1854</span>}</div>
+<div class="ttc" id="aclass_electric_calculation_html_a0eeb4b5afc082617247351857af26c22"><div class="ttname"><a href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">ElectricCalculation::m_busList</a></div><div class="ttdeci">std::vector&lt; Bus * &gt; m_busList</div><div class="ttdoc">List of buses in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00370">ElectricCalculation.h:370</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -728,7 +759,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  913</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_iBus.size(); ++i) m_iBus[i] = std::complex&lt;double&gt;(0.0, 0.0);</div>
 <div class="line"><span class="lineno">  914</span> </div>
 <div class="line"><span class="lineno">  915</span>    <span class="comment">// Synchronous machines</span></div>
-<div class="line"><span class="lineno">  916</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  916</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  917</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno">  918</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  919</span>        <span class="keywordflow">if</span> (syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
@@ -748,7 +779,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  933</span>            std::complex&lt;double&gt; iInj = m_iBus[n];</div>
 <div class="line"><span class="lineno">  934</span> </div>
 <div class="line"><span class="lineno">  935</span>            <span class="keyword">auto</span> smModelData = GetSyncMachineModelData(syncGenerator);</div>
-<div class="line"><span class="lineno">  936</span>            DQ0toABC(smModelData.ed, smModelData.eq, data.delta, e);</div>
+<div class="line"><span class="lineno">  936</span>            <a class="code hl_function" href="class_electric_calculation.html#aed4e5f37f8a06d0ad305334d2847cd7f">DQ0toABC</a>(smModelData.ed, smModelData.eq, data.delta, e);</div>
 <div class="line"><span class="lineno">  937</span>            <span class="keywordtype">double</span> xd = smModelData.xd;</div>
 <div class="line"><span class="lineno">  938</span>            <span class="keywordtype">double</span> xq = smModelData.xq;</div>
 <div class="line"><span class="lineno">  939</span> </div>
@@ -791,7 +822,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  976</span>            std::complex&lt;double&gt; iMachine = iInj - iUnadjusted;</div>
 <div class="line"><span class="lineno">  977</span>            data.electricalPower = v * std::conj(iMachine);</div>
 <div class="line"><span class="lineno">  978</span> </div>
-<div class="line"><span class="lineno">  979</span>            ABCtoDQ0(iMachine, data.delta, <span class="keywordtype">id</span>, iq);</div>
+<div class="line"><span class="lineno">  979</span>            <a class="code hl_function" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a>(iMachine, data.delta, <span class="keywordtype">id</span>, iq);</div>
 <div class="line"><span class="lineno">  980</span> </div>
 <div class="line"><span class="lineno">  981</span>            data.id = id;</div>
 <div class="line"><span class="lineno">  982</span>            data.iq = iq;</div>
@@ -805,7 +836,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  990</span>        syncGenerator-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno">  991</span>    }</div>
 <div class="line"><span class="lineno">  992</span>    <span class="comment">// Induction motors</span></div>
-<div class="line"><span class="lineno">  993</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  993</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  994</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* motor = *it;</div>
 <div class="line"><span class="lineno">  995</span>        <span class="keyword">auto</span> data = motor-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  996</span>        <span class="keywordflow">if</span> (motor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
@@ -829,11 +860,11 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1014</span>    }</div>
 <div class="line"><span class="lineno"> 1015</span> </div>
 <div class="line"><span class="lineno"> 1016</span>    <span class="comment">// Loads</span></div>
-<div class="line"><span class="lineno"> 1017</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1017</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1018</span>        <a class="code hl_class" href="class_load.html">Load</a>* load = *it;</div>
 <div class="line"><span class="lineno"> 1019</span>        <span class="keyword">auto</span> data = load-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1020</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1021</span>        <span class="keywordflow">if</span> (!GetParentBus(load, bus)) {</div>
+<div class="line"><span class="lineno"> 1021</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="class_electric_calculation.html#a6b05b05a852f973067c0d86e0766578b">GetParentBus</a>(load, bus)) {</div>
 <div class="line"><span class="lineno"> 1022</span>            load-&gt;<a class="code hl_function" href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">SetOnline</a>(<span class="keyword">false</span>);</div>
 <div class="line"><span class="lineno"> 1023</span>        }</div>
 <div class="line"><span class="lineno"> 1024</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (load-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
@@ -876,6 +907,11 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1061</span>    }</div>
 <div class="line"><span class="lineno"> 1062</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno"> 1063</span>}</div>
+<div class="ttc" id="aclass_electric_calculation_html_a458ecbb5afd86d9049ed3508256d8fe1"><div class="ttname"><a href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ElectricCalculation::ABCtoDQ0</a></div><div class="ttdeci">void ABCtoDQ0(std::complex&lt; double &gt; complexValue, double angle, double &amp;dValue, double &amp;qValue)</div><div class="ttdoc">Convert a complex phasor in ABC representation to DQ components.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00829">ElectricCalculation.cpp:829</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a689622805bdea60428e6eea19795dff9"><div class="ttname"><a href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">ElectricCalculation::m_indMotorList</a></div><div class="ttdeci">std::vector&lt; IndMotor * &gt; m_indMotorList</div><div class="ttdoc">List of induction motors in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00374">ElectricCalculation.h:374</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a6b05b05a852f973067c0d86e0766578b"><div class="ttname"><a href="class_electric_calculation.html#a6b05b05a852f973067c0d86e0766578b">ElectricCalculation::GetParentBus</a></div><div class="ttdeci">bool GetParentBus(Element *childElement, Bus *&amp;parentBus)</div><div class="ttdoc">Get the parent bus of a given shunt element.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l01036">ElectricCalculation.cpp:1036</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a72386789cd0ff595e937d70e18cad697"><div class="ttname"><a href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">ElectricCalculation::m_syncGeneratorList</a></div><div class="ttdeci">std::vector&lt; SyncGenerator * &gt; m_syncGeneratorList</div><div class="ttdoc">List of synchronous generators in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00382">ElectricCalculation.h:382</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_aed4e5f37f8a06d0ad305334d2847cd7f"><div class="ttname"><a href="class_electric_calculation.html#aed4e5f37f8a06d0ad305334d2847cd7f">ElectricCalculation::DQ0toABC</a></div><div class="ttdeci">void DQ0toABC(double dValue, double qValue, double angle, std::complex&lt; double &gt; &amp;complexValue)</div><div class="ttdoc">Convert DQ components to a complex phasor in ABC representation.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00835">ElectricCalculation.cpp:835</a></div></div>
 <div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00447">Element.cpp:447</a></div></div>
 <div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
 <div class="ttc" id="aclass_sync_generator_html"><div class="ttname"><a href="class_sync_generator.html">SyncGenerator</a></div><div class="ttdoc">Synchronous generator power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00145">SyncGenerator.h:146</a></div></div>
@@ -1300,7 +1336,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1532</span> </div>
 <div class="line"><span class="lineno"> 1533</span>        <span class="keywordflow">if</span> (!syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
 <div class="line"><span class="lineno"> 1534</span>            std::complex&lt;double&gt; e;</div>
-<div class="line"><span class="lineno"> 1535</span>            DQ0toABC(data.tranEd, data.tranEq, data.delta, e);</div>
+<div class="line"><span class="lineno"> 1535</span>            <a class="code hl_function" href="class_electric_calculation.html#aed4e5f37f8a06d0ad305334d2847cd7f">DQ0toABC</a>(data.tranEd, data.tranEq, data.delta, e);</div>
 <div class="line"><span class="lineno"> 1536</span>            data.terminalVoltage = e;</div>
 <div class="line"><span class="lineno"> 1537</span>        }</div>
 <div class="line"><span class="lineno"> 1538</span>    } <span class="keywordflow">break</span>;</div>
@@ -1517,10 +1553,10 @@ Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno"> 1422</span>{</div>
 <div class="line"><span class="lineno"> 1423</span>    <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1424</span>    <a class="code hl_class" href="class_bus.html">Bus</a>* bus = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1425</span>    <span class="keywordflow">if</span> (GetParentBus(syncGenerator, bus)) { data.terminalVoltage = m_vBus[bus-&gt;GetElectricalData().number]; }</div>
+<div class="line"><span class="lineno"> 1425</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="class_electric_calculation.html#a6b05b05a852f973067c0d86e0766578b">GetParentBus</a>(syncGenerator, bus)) { data.terminalVoltage = m_vBus[bus-&gt;GetElectricalData().number]; }</div>
 <div class="line"><span class="lineno"> 1426</span> </div>
 <div class="line"><span class="lineno"> 1427</span>    <span class="keywordtype">double</span> vd, vq;</div>
-<div class="line"><span class="lineno"> 1428</span>    ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);</div>
+<div class="line"><span class="lineno"> 1428</span>    <a class="code hl_function" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a>(data.terminalVoltage, data.delta, vd, vq);</div>
 <div class="line"><span class="lineno"> 1429</span> </div>
 <div class="line"><span class="lineno"> 1430</span>    <span class="keywordflow">if</span> (data.satFactor != 0.0) {</div>
 <div class="line"><span class="lineno"> 1431</span>        <span class="keywordflow">if</span> (!CalculateSyncMachineSaturation(syncGenerator, <span class="keywordtype">id</span>, iq, sd, sq, <span class="keyword">true</span>, k)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -1577,7 +1613,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1650</span>    <span class="keywordflow">if</span> (m_useCOI) {</div>
 <div class="line"><span class="lineno"> 1651</span>        <span class="keywordtype">double</span> sumHW = 0.0;</div>
 <div class="line"><span class="lineno"> 1652</span>        <span class="keywordtype">double</span> sumH = 0.0;</div>
-<div class="line"><span class="lineno"> 1653</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1653</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1654</span>            <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno"> 1655</span>            <span class="keywordflow">if</span> (syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
 <div class="line"><span class="lineno"> 1656</span>                <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
@@ -1670,7 +1706,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1683</span>    <span class="keyword">auto</span> smDataModel = GetSyncMachineModelData(syncMachine);</div>
 <div class="line"><span class="lineno"> 1684</span> </div>
 <div class="line"><span class="lineno"> 1685</span>    <a class="code hl_class" href="class_bus.html">Bus</a>* bus = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1686</span>    <span class="keywordflow">if</span> (GetParentBus(syncMachine, bus)) { data.terminalVoltage = m_vBus[bus-&gt;GetElectricalData().number]; }</div>
+<div class="line"><span class="lineno"> 1686</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="class_electric_calculation.html#a6b05b05a852f973067c0d86e0766578b">GetParentBus</a>(syncMachine, bus)) { data.terminalVoltage = m_vBus[bus-&gt;GetElectricalData().number]; }</div>
 <div class="line"><span class="lineno"> 1687</span>    <span class="comment">//else {</span></div>
 <div class="line"><span class="lineno"> 1688</span>        <span class="comment">//data.terminalVoltage = 0.0;</span></div>
 <div class="line"><span class="lineno"> 1689</span>        <span class="comment">//return true;</span></div>
@@ -1681,7 +1717,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1694</span>    <span class="keywordtype">double</span> sqCalc = sq;</div>
 <div class="line"><span class="lineno"> 1695</span> </div>
 <div class="line"><span class="lineno"> 1696</span>    <span class="keywordtype">double</span> vd, vq;</div>
-<div class="line"><span class="lineno"> 1697</span>    ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);</div>
+<div class="line"><span class="lineno"> 1697</span>    <a class="code hl_function" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a>(data.terminalVoltage, data.delta, vd, vq);</div>
 <div class="line"><span class="lineno"> 1698</span>    <span class="keywordtype">double</span> deltaVd = smDataModel.ed - vd;</div>
 <div class="line"><span class="lineno"> 1699</span>    <span class="keywordtype">double</span> deltaVq = smDataModel.eq - vq;</div>
 <div class="line"><span class="lineno"> 1700</span> </div>
@@ -2134,7 +2170,7 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l00543">543</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  544</span>{</div>
 <div class="line"><span class="lineno">  545</span>    <span class="comment">// Buses</span></div>
-<div class="line"><span class="lineno">  546</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  546</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  547</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = *it;</div>
 <div class="line"><span class="lineno">  548</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  549</span>        data.stabVoltageVector.clear();</div>
@@ -2150,7 +2186,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  559</span>        bus-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno">  560</span>    }</div>
 <div class="line"><span class="lineno">  561</span>    <span class="comment">// Loads</span></div>
-<div class="line"><span class="lineno">  562</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* load : m_loadList) {</div>
+<div class="line"><span class="lineno">  562</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* load : <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>) {</div>
 <div class="line"><span class="lineno">  563</span>        <span class="keyword">auto</span> dataPU = load-&gt;GetPUElectricalData(m_powerSystemBase);</div>
 <div class="line"><span class="lineno">  564</span>        <span class="keyword">auto</span> data = load-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  565</span> </div>
@@ -2158,7 +2194,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  567</span>        <span class="keywordtype">double</span> reactivePower = dataPU.reactivePower;</div>
 <div class="line"><span class="lineno">  568</span> </div>
 <div class="line"><span class="lineno">  569</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  570</span>        <span class="keywordflow">if</span> (GetParentBus(load, bus))</div>
+<div class="line"><span class="lineno">  570</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="class_electric_calculation.html#a6b05b05a852f973067c0d86e0766578b">GetParentBus</a>(load, bus))</div>
 <div class="line"><span class="lineno">  571</span>        {</div>
 <div class="line"><span class="lineno">  572</span>            data.voltage = bus-&gt;GetElectricalData().voltage;</div>
 <div class="line"><span class="lineno">  573</span>        }</div>
@@ -2198,7 +2234,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  607</span>        load-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno">  608</span>    }</div>
 <div class="line"><span class="lineno">  609</span>    <span class="comment">// Synchronous generators</span></div>
-<div class="line"><span class="lineno">  610</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  610</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  611</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno">  612</span>        <span class="keyword">auto</span> dataPU = syncGenerator-&gt;GetPUElectricalData(m_powerSystemBase);</div>
 <div class="line"><span class="lineno">  613</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
@@ -2208,7 +2244,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  617</span>            k = m_powerSystemBase / oldBase;</div>
 <div class="line"><span class="lineno">  618</span>        }</div>
 <div class="line"><span class="lineno">  619</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  620</span>        <span class="keywordflow">if</span> (GetParentBus(syncGenerator, bus))</div>
+<div class="line"><span class="lineno">  620</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="class_electric_calculation.html#a6b05b05a852f973067c0d86e0766578b">GetParentBus</a>(syncGenerator, bus))</div>
 <div class="line"><span class="lineno">  621</span>            data.terminalVoltage = bus-&gt;GetElectricalData().voltage;</div>
 <div class="line"><span class="lineno">  622</span>        <span class="keywordflow">else</span></div>
 <div class="line"><span class="lineno">  623</span>            data.terminalVoltage = std::complex&lt;double&gt;(1.0, 0.0);</div>
@@ -2244,8 +2280,8 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  653</span>        <span class="keywordtype">double</span> delta = std::arg(eq0);</div>
 <div class="line"><span class="lineno">  654</span> </div>
 <div class="line"><span class="lineno">  655</span>        <span class="keywordtype">double</span> id0, iq0, vd0, vq0;</div>
-<div class="line"><span class="lineno">  656</span>        ABCtoDQ0(ia, delta, id0, iq0);</div>
-<div class="line"><span class="lineno">  657</span>        ABCtoDQ0(vt, delta, vd0, vq0);</div>
+<div class="line"><span class="lineno">  656</span>        <a class="code hl_function" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a>(ia, delta, id0, iq0);</div>
+<div class="line"><span class="lineno">  657</span>        <a class="code hl_function" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a>(vt, delta, vd0, vq0);</div>
 <div class="line"><span class="lineno">  658</span> </div>
 <div class="line"><span class="lineno">  659</span>        <span class="comment">// Initialize saturation</span></div>
 <div class="line"><span class="lineno">  660</span>        <span class="keywordtype">double</span> xqs = xq;</div>
@@ -2256,8 +2292,8 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  665</span>            <span class="keywordtype">int</span> numIt = 0;</div>
 <div class="line"><span class="lineno">  666</span>            <span class="keywordflow">while</span> (!exit) {</div>
 <div class="line"><span class="lineno">  667</span>                oldDelta = delta;</div>
-<div class="line"><span class="lineno">  668</span>                ABCtoDQ0(ia, delta, id0, iq0);</div>
-<div class="line"><span class="lineno">  669</span>                ABCtoDQ0(vt, delta, vd0, vq0);</div>
+<div class="line"><span class="lineno">  668</span>                <a class="code hl_function" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a>(ia, delta, id0, iq0);</div>
+<div class="line"><span class="lineno">  669</span>                <a class="code hl_function" href="class_electric_calculation.html#a458ecbb5afd86d9049ed3508256d8fe1">ABCtoDQ0</a>(vt, delta, vd0, vq0);</div>
 <div class="line"><span class="lineno">  670</span> </div>
 <div class="line"><span class="lineno">  671</span>                <span class="comment">// Direct-axis Potier voltage.</span></div>
 <div class="line"><span class="lineno">  672</span>                <span class="keywordtype">double</span> epd = vd0 + ra * id0 + xp * iq0;</div>
@@ -2424,7 +2460,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  833</span>        syncGenerator-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno">  834</span>    }</div>
 <div class="line"><span class="lineno">  835</span>    <span class="comment">// Induction motors</span></div>
-<div class="line"><span class="lineno">  836</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  836</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  837</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* indMotor = *it;</div>
 <div class="line"><span class="lineno">  838</span>        <span class="keyword">auto</span> dataPU = indMotor-&gt;GetPUElectricalData(m_powerSystemBase);</div>
 <div class="line"><span class="lineno">  839</span>        <span class="keyword">auto</span> data = indMotor-&gt;GetElectricalData();</div>
@@ -2525,7 +2561,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l01962">1962</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno"> 1963</span>{</div>
-<div class="line"><span class="lineno"> 1964</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1964</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1965</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* motor = *it;</div>
 <div class="line"><span class="lineno"> 1966</span>        <span class="keywordflow">if</span> (!CalculateIndMachinesTransientValues(motor)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno"> 1967</span>        <span class="keywordflow">if</span> (motor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
@@ -2563,7 +2599,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l00498">498</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  499</span>{</div>
-<div class="line"><span class="lineno">  500</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  500</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  501</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno">  502</span>        <span class="keywordflow">if</span> (syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>()) {</div>
 <div class="line"><span class="lineno">  503</span>            <a class="code hl_class" href="class_bus.html">Bus</a>* connBus = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_bus.html">Bus</a>*<span class="keyword">&gt;</span>(syncGenerator-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>()[0]);</div>
@@ -2614,7 +2650,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1906</span>    <span class="keywordtype">int</span> numPoints = <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_simTime / m_plotTime);</div>
 <div class="line"><span class="lineno"> 1907</span> </div>
 <div class="line"><span class="lineno"> 1908</span>    m_timeVector.reserve(numPoints);</div>
-<div class="line"><span class="lineno"> 1909</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1909</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1910</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno"> 1911</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1912</span>        <span class="keywordflow">if</span> (data.plotSyncMachine) {</div>
@@ -2627,7 +2663,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1919</span>            syncGenerator-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno"> 1920</span>        }</div>
 <div class="line"><span class="lineno"> 1921</span>    }</div>
-<div class="line"><span class="lineno"> 1922</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1922</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1923</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = *it;</div>
 <div class="line"><span class="lineno"> 1924</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1925</span>        <span class="keywordflow">if</span> (data.plotBus) {</div>
@@ -2636,7 +2672,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1928</span>            bus-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno"> 1929</span>        }</div>
 <div class="line"><span class="lineno"> 1930</span>    }</div>
-<div class="line"><span class="lineno"> 1931</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1931</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1932</span>        <a class="code hl_class" href="class_load.html">Load</a>* load = *it;</div>
 <div class="line"><span class="lineno"> 1933</span>        <span class="keyword">auto</span> data = load-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1934</span>        <span class="keywordflow">if</span> (data.plotLoad) {</div>
@@ -2645,7 +2681,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1937</span>            load-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno"> 1938</span>        }</div>
 <div class="line"><span class="lineno"> 1939</span>    }</div>
-<div class="line"><span class="lineno"> 1940</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1940</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1941</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* motor = *it;</div>
 <div class="line"><span class="lineno"> 1942</span>        <span class="keyword">auto</span> data = motor-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1943</span>        <span class="keywordflow">if</span> (data.plotIndMachine) {</div>
@@ -2681,18 +2717,18 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   76</span>    SetSyncMachinesModel();</div>
 <div class="line"><span class="lineno">   77</span> </div>
 <div class="line"><span class="lineno">   78</span>    <span class="comment">// Calculate the admittance matrix with the synchronous machines.</span></div>
-<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5">GetYBus</a>(m_yBus, m_powerSystemBase, POSITIVE_SEQ, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">true</span>)) {</div>
+<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5">GetYBus</a>(m_yBus, m_powerSystemBase, <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932">POSITIVE_SEQ</a>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">true</span>)) {</div>
 <div class="line"><span class="lineno">   80</span>        m_errorMsg = _(<span class="stringliteral">&quot;It was not possible to build the admittance matrix.&quot;</span>);</div>
 <div class="line"><span class="lineno">   81</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">   82</span>    }</div>
 <div class="line"><span class="lineno">   83</span>    InsertSyncMachinesOnYBus();</div>
 <div class="line"><span class="lineno">   84</span>    <span class="keywordflow">if</span> (!InsertIndMachinesOnYBus()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   85</span>    GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);</div>
+<div class="line"><span class="lineno">   85</span>    <a class="code hl_function" href="class_electric_calculation.html#ae721d26e05b66887bfb7125f76ec9e9c">GetLUDecomposition</a>(m_yBus, m_yBusL, m_yBusU);</div>
 <div class="line"><span class="lineno">   86</span> </div>
 <div class="line"><span class="lineno">   87</span>    <span class="comment">// Get buses voltages.</span></div>
 <div class="line"><span class="lineno">   88</span>    m_vBus.clear();</div>
 <div class="line"><span class="lineno">   89</span>    m_vBus.resize(m_yBus.size());</div>
-<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">   91</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = *it;</div>
 <div class="line"><span class="lineno">   92</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">   93</span>        <span class="keywordflow">if</span> (data.number &gt;= 0) m_vBus[data.number] = data.voltage;</div>
@@ -2700,7 +2736,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   95</span>    m_vBus.shrink_to_fit();</div>
 <div class="line"><span class="lineno">   96</span> </div>
 <div class="line"><span class="lineno">   97</span>    <span class="comment">// Calculate injected currents</span></div>
-<div class="line"><span class="lineno">   98</span>    m_iBus = ComplexMatrixTimesVector(m_yBus, m_vBus);</div>
+<div class="line"><span class="lineno">   98</span>    m_iBus = <a class="code hl_function" href="class_electric_calculation.html#a044a85b589d5eee879de3348248fc612">ComplexMatrixTimesVector</a>(m_yBus, m_vBus);</div>
 <div class="line"><span class="lineno">   99</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_iBus.size(); ++i) {</div>
 <div class="line"><span class="lineno">  100</span>        <span class="keywordflow">if</span> (std::abs(m_iBus[i]) &lt; 1e-5) m_iBus[i] = std::complex&lt;double&gt;(0.0, 0.0);</div>
 <div class="line"><span class="lineno">  101</span>    }</div>
@@ -2709,7 +2745,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  104</span>    PreallocateVectors();  <span class="comment">// Reserve the vectors&#39; memory with a estimated size, this can optimize the simulation.</span></div>
 <div class="line"><span class="lineno">  105</span> </div>
 <div class="line"><span class="lineno">  106</span><span class="preprocessor">#ifdef _DEBUG</span></div>
-<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* syncGenerator : m_syncGeneratorList) {</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* syncGenerator : <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>) {</div>
 <div class="line"><span class="lineno">  108</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetPUElectricalData(m_powerSystemBase);</div>
 <div class="line"><span class="lineno">  109</span>        m_debugMessage += <span class="stringliteral">&quot;------\n&quot;</span>;</div>
 <div class="line"><span class="lineno">  110</span>        m_debugMessage += data.name + <span class="stringliteral">&quot;:\n&quot;</span>;</div>
@@ -2744,7 +2780,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  139</span>        <span class="keywordflow">if</span> (HasEvent(m_currentTime)) {</div>
 <div class="line"><span class="lineno">  140</span>            hasEvent = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  141</span>            SetEvent(m_currentTime);</div>
-<div class="line"><span class="lineno">  142</span>            GetLUDecomposition(m_yBus, m_yBusL, m_yBusU);</div>
+<div class="line"><span class="lineno">  142</span>            <a class="code hl_function" href="class_electric_calculation.html#ae721d26e05b66887bfb7125f76ec9e9c">GetLUDecomposition</a>(m_yBus, m_yBusL, m_yBusU);</div>
 <div class="line"><span class="lineno">  143</span>        }</div>
 <div class="line"><span class="lineno">  144</span> </div>
 <div class="line"><span class="lineno">  145</span>        <span class="keywordflow">if</span> (currentPlotTime &gt;= m_plotTime || m_currentTime == 0.0) {</div>
@@ -2773,7 +2809,10 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  168</span> </div>
 <div class="line"><span class="lineno">  169</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  170</span>}</div>
+<div class="ttc" id="a_electric_calculation_8h_html_a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932"><div class="ttname"><a href="_electric_calculation_8h.html#a73321f98d9ea4582f9de005ef5ed8594a0144b06216b82fd068983a2852d0a932">POSITIVE_SEQ</a></div><div class="ttdeci">@ POSITIVE_SEQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00068">ElectricCalculation.h:68</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a044a85b589d5eee879de3348248fc612"><div class="ttname"><a href="class_electric_calculation.html#a044a85b589d5eee879de3348248fc612">ElectricCalculation::ComplexMatrixTimesVector</a></div><div class="ttdeci">std::vector&lt; std::complex&lt; double &gt; &gt; ComplexMatrixTimesVector(std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::complex&lt; double &gt; &gt; vector)</div><div class="ttdoc">Multiply a complex matrix by a complex vector.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00946">ElectricCalculation.cpp:946</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a87da7425eaeb6b2c80e18e481c1b38b5"><div class="ttname"><a href="class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5">ElectricCalculation::GetYBus</a></div><div class="ttdeci">virtual bool GetYBus(std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;yBus, double systemPowerBase, YBusSequence sequence=POSITIVE_SEQ, bool includeSyncMachines=false, bool allLoadsAsImpedances=false, bool usePowerFlowVoltagesOnImpedances=false)</div><div class="ttdoc">Get the admittance matrix from the list of elements (use GetElementsFromList first).</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00081">ElectricCalculation.cpp:81</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_ae721d26e05b66887bfb7125f76ec9e9c"><div class="ttname"><a href="class_electric_calculation.html#ae721d26e05b66887bfb7125f76ec9e9c">ElectricCalculation::GetLUDecomposition</a></div><div class="ttdeci">void GetLUDecomposition(std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;matrixL, std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; &amp;matrixU)</div><div class="ttdoc">Compute the LU decomposition of a matrix.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00960">ElectricCalculation.cpp:960</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2802,12 +2841,12 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l01356">1356</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno"> 1357</span>{</div>
-<div class="line"><span class="lineno"> 1358</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1358</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1359</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno"> 1360</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1361</span>        <span class="keywordflow">if</span> (data.plotSyncMachine) { syncGenerator-&gt;SavePlotData(); }</div>
 <div class="line"><span class="lineno"> 1362</span>    }</div>
-<div class="line"><span class="lineno"> 1363</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1363</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1364</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = *it;</div>
 <div class="line"><span class="lineno"> 1365</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1366</span>        <span class="keywordflow">if</span> (data.plotBus) {</div>
@@ -2816,7 +2855,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1369</span>            bus-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno"> 1370</span>        }</div>
 <div class="line"><span class="lineno"> 1371</span>    }</div>
-<div class="line"><span class="lineno"> 1372</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1372</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1373</span>        <a class="code hl_class" href="class_load.html">Load</a>* load = *it;</div>
 <div class="line"><span class="lineno"> 1374</span>        <span class="keyword">auto</span> data = load-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1375</span>        <span class="keywordflow">if</span> (data.plotLoad) {</div>
@@ -2825,7 +2864,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1378</span>            load-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno"> 1379</span>        }</div>
 <div class="line"><span class="lineno"> 1380</span>    }</div>
-<div class="line"><span class="lineno"> 1381</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1381</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1382</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* motor = *it;</div>
 <div class="line"><span class="lineno"> 1383</span>        <span class="keyword">auto</span> data = motor-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1384</span>        <span class="keywordflow">if</span> (data.plotIndMachine) {</div>
@@ -2878,7 +2917,7 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l00209">209</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  210</span>{</div>
 <div class="line"><span class="lineno">  211</span>    <span class="comment">// Fault</span></div>
-<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  213</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = *it;</div>
 <div class="line"><span class="lineno">  214</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  215</span>        <span class="keywordtype">int</span> n = data.number;</div>
@@ -2905,7 +2944,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  236</span>    }</div>
 <div class="line"><span class="lineno">  237</span> </div>
 <div class="line"><span class="lineno">  238</span>    <span class="comment">// SyncGenerator switching</span></div>
-<div class="line"><span class="lineno">  239</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  239</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  240</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* generator = *it;</div>
 <div class="line"><span class="lineno">  241</span>        <span class="keyword">auto</span> swData = generator-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  242</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.swType.size(); ++i) {</div>
@@ -2929,7 +2968,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  260</span>    }</div>
 <div class="line"><span class="lineno">  261</span> </div>
 <div class="line"><span class="lineno">  262</span>    <span class="comment">// Induction motor switching</span></div>
-<div class="line"><span class="lineno">  263</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  263</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  264</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* motor = *it;</div>
 <div class="line"><span class="lineno">  265</span>        <span class="keyword">auto</span> swData = motor-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  266</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.swType.size(); ++i) {</div>
@@ -2955,7 +2994,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  286</span>    }</div>
 <div class="line"><span class="lineno">  287</span> </div>
 <div class="line"><span class="lineno">  288</span>    <span class="comment">// Load switching</span></div>
-<div class="line"><span class="lineno">  289</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  289</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a370884bcb0b406d8c9151ed064620a86">m_loadList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  290</span>        <a class="code hl_class" href="class_load.html">Load</a>* load = *it;</div>
 <div class="line"><span class="lineno">  291</span>        <span class="keyword">auto</span> swData = load-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  292</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.swType.size(); ++i) {</div>
@@ -2991,7 +3030,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  322</span>    }</div>
 <div class="line"><span class="lineno">  323</span> </div>
 <div class="line"><span class="lineno">  324</span>    <span class="comment">// Line switching</span></div>
-<div class="line"><span class="lineno">  325</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_lineList.begin(), itEnd = m_lineList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  325</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a06ce7fe37ee6cc2c786573f094493659">m_lineList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a06ce7fe37ee6cc2c786573f094493659">m_lineList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  326</span>        <a class="code hl_class" href="class_line.html">Line</a>* line = *it;</div>
 <div class="line"><span class="lineno">  327</span>        <span class="keyword">auto</span> swData = line-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  328</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.swType.size(); ++i) {</div>
@@ -3039,7 +3078,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  370</span>    }</div>
 <div class="line"><span class="lineno">  371</span> </div>
 <div class="line"><span class="lineno">  372</span>    <span class="comment">// Transformer switching</span></div>
-<div class="line"><span class="lineno">  373</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_transformerList.begin(), itEnd = m_transformerList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  373</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a6cca6be3c0b79741a49b1631e38fc3be">m_transformerList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a6cca6be3c0b79741a49b1631e38fc3be">m_transformerList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  374</span>        <a class="code hl_class" href="class_transformer.html">Transformer</a>* transformer = *it;</div>
 <div class="line"><span class="lineno">  375</span>        <span class="keyword">auto</span> swData = transformer-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  376</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.swType.size(); ++i) {</div>
@@ -3112,7 +3151,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  443</span>    }</div>
 <div class="line"><span class="lineno">  444</span> </div>
 <div class="line"><span class="lineno">  445</span>    <span class="comment">// Capacitor switching</span></div>
-<div class="line"><span class="lineno">  446</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_capacitorList.begin(), itEnd = m_capacitorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  446</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a4bf7c82e4e8bc87a4e42ad9b124ea9e5">m_capacitorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a4bf7c82e4e8bc87a4e42ad9b124ea9e5">m_capacitorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  447</span>        <a class="code hl_class" href="class_capacitor.html">Capacitor</a>* capacitor = *it;</div>
 <div class="line"><span class="lineno">  448</span>        <span class="keyword">auto</span> swData = capacitor-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  449</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.swType.size(); ++i) {</div>
@@ -3138,7 +3177,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  469</span>    }</div>
 <div class="line"><span class="lineno">  470</span> </div>
 <div class="line"><span class="lineno">  471</span>    <span class="comment">// Inductor switching</span></div>
-<div class="line"><span class="lineno">  472</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_inductorList.begin(), itEnd = m_inductorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  472</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#ad7bfee2d7cba726ff6aa7605a969d49a">m_inductorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#ad7bfee2d7cba726ff6aa7605a969d49a">m_inductorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  473</span>        <a class="code hl_class" href="class_inductor.html">Inductor</a>* inductor = *it;</div>
 <div class="line"><span class="lineno">  474</span>        <span class="keyword">auto</span> swData = inductor-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  475</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.swType.size(); ++i) {</div>
@@ -3166,6 +3205,10 @@ Protected Attributes</h2></td></tr>
 <div class="ttc" id="a_power_element_8h_html_ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95"><div class="ttname"><a href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a4472bf099547f0b7560a5adac80e3a95">SwitchingType::SW_INSERT</a></div><div class="ttdeci">@ SW_INSERT</div></div>
 <div class="ttc" id="a_power_element_8h_html_ae3647532013a87e6261507e77a364581a67d6e621dc66064ab748f842899c6d3c"><div class="ttname"><a href="_power_element_8h.html#ae3647532013a87e6261507e77a364581a67d6e621dc66064ab748f842899c6d3c">SwitchingType::SW_REMOVE</a></div><div class="ttdeci">@ SW_REMOVE</div></div>
 <div class="ttc" id="aclass_capacitor_html"><div class="ttname"><a href="class_capacitor.html">Capacitor</a></div><div class="ttdoc">Shunt capactior power element.</div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00038">Capacitor.h:39</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a06ce7fe37ee6cc2c786573f094493659"><div class="ttname"><a href="class_electric_calculation.html#a06ce7fe37ee6cc2c786573f094493659">ElectricCalculation::m_lineList</a></div><div class="ttdeci">std::vector&lt; Line * &gt; m_lineList</div><div class="ttdoc">List of transmission lines in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00378">ElectricCalculation.h:378</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a4bf7c82e4e8bc87a4e42ad9b124ea9e5"><div class="ttname"><a href="class_electric_calculation.html#a4bf7c82e4e8bc87a4e42ad9b124ea9e5">ElectricCalculation::m_capacitorList</a></div><div class="ttdeci">std::vector&lt; Capacitor * &gt; m_capacitorList</div><div class="ttdoc">List of capacitor elements in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00372">ElectricCalculation.h:372</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_a6cca6be3c0b79741a49b1631e38fc3be"><div class="ttname"><a href="class_electric_calculation.html#a6cca6be3c0b79741a49b1631e38fc3be">ElectricCalculation::m_transformerList</a></div><div class="ttdeci">std::vector&lt; Transformer * &gt; m_transformerList</div><div class="ttdoc">List of transformers in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00386">ElectricCalculation.h:386</a></div></div>
+<div class="ttc" id="aclass_electric_calculation_html_ad7bfee2d7cba726ff6aa7605a969d49a"><div class="ttname"><a href="class_electric_calculation.html#ad7bfee2d7cba726ff6aa7605a969d49a">ElectricCalculation::m_inductorList</a></div><div class="ttdeci">std::vector&lt; Inductor * &gt; m_inductorList</div><div class="ttdoc">List of inductors in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00376">ElectricCalculation.h:376</a></div></div>
 <div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
 <div class="ttc" id="aclass_line_html"><div class="ttname"><a href="class_line.html">Line</a></div><div class="ttdoc">Power line element.</div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00063">Line.h:64</a></div></div>
 <div class="ttc" id="aclass_power_element_html_ab78269f9b66fbf90ae09050083e9dbe1"><div class="ttname"><a href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">PowerElement::GetSwitchingData</a></div><div class="ttdeci">virtual SwitchingData GetSwitchingData()</div><div class="ttdoc">Returns the switching data of the element.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00203">PowerElement.h:203</a></div></div>
@@ -3199,7 +3242,7 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l00172">172</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  173</span>{</div>
 <div class="line"><span class="lineno">  174</span>    <span class="comment">// Fault</span></div>
-<div class="line"><span class="lineno">  175</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  175</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  176</span>        <a class="code hl_class" href="class_bus.html">Bus</a>* bus = *it;</div>
 <div class="line"><span class="lineno">  177</span>        <span class="keyword">auto</span> data = bus-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno">  178</span>        <span class="keywordflow">if</span> (data.stabHasFault) {</div>
@@ -3210,7 +3253,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  183</span>        }</div>
 <div class="line"><span class="lineno">  184</span>    }</div>
 <div class="line"><span class="lineno">  185</span>    <span class="comment">// Switching</span></div>
-<div class="line"><span class="lineno">  186</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_powerElementList.begin(), itEnd = m_powerElementList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  186</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a0c88feb4f01309795e8a0cf5064a7d90">m_powerElementList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a0c88feb4f01309795e8a0cf5064a7d90">m_powerElementList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno">  187</span>        <a class="code hl_class" href="class_power_element.html">PowerElement</a>* element = *it;</div>
 <div class="line"><span class="lineno">  188</span>        <a class="code hl_class" href="struct_switching_data.html">SwitchingData</a> swData = element-&gt;<a class="code hl_function" href="class_power_element.html#ab78269f9b66fbf90ae09050083e9dbe1">GetSwitchingData</a>();</div>
 <div class="line"><span class="lineno">  189</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size(); ++i) {</div>
@@ -3219,6 +3262,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  192</span>        }</div>
 <div class="line"><span class="lineno">  193</span>    }</div>
 <div class="line"><span class="lineno">  194</span>}</div>
+<div class="ttc" id="aclass_electric_calculation_html_a0c88feb4f01309795e8a0cf5064a7d90"><div class="ttname"><a href="class_electric_calculation.html#a0c88feb4f01309795e8a0cf5064a7d90">ElectricCalculation::m_powerElementList</a></div><div class="ttdeci">std::vector&lt; PowerElement * &gt; m_powerElementList</div><div class="ttdoc">List of power elements in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00368">ElectricCalculation.h:368</a></div></div>
 <div class="ttc" id="aclass_power_element_html"><div class="ttname"><a href="class_power_element.html">PowerElement</a></div><div class="ttdoc">Abstract class of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00123">PowerElement.h:124</a></div></div>
 <div class="ttc" id="astruct_switching_data_html"><div class="ttname"><a href="struct_switching_data.html">SwitchingData</a></div><div class="ttdoc">Switching data of power elements.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00099">PowerElement.h:99</a></div></div>
 <div class="ttc" id="astruct_switching_data_html_a3323745bf0a3f6461fbc19bc76a189df"><div class="ttname"><a href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">SwitchingData::swTime</a></div><div class="ttdeci">std::vector&lt; double &gt; swTime</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00101">PowerElement.h:101</a></div></div>
@@ -3250,13 +3294,14 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_electromechanical_8cpp_source.html#l01405">1405</a> of file <a class="el" href="_electromechanical_8cpp_source.html">Electromechanical.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno"> 1406</span>{</div>
-<div class="line"><span class="lineno"> 1407</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1407</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1408</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno"> 1409</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno"> 1410</span>        data.model = GetMachineModel(syncGenerator);</div>
+<div class="line"><span class="lineno"> 1410</span>        data.model = <a class="code hl_function" href="class_electric_calculation.html#ade330c7267088dcbdd7c8e7f8c302da3">GetMachineModel</a>(syncGenerator);</div>
 <div class="line"><span class="lineno"> 1411</span>        syncGenerator-&gt;SetElectricalData(data);</div>
 <div class="line"><span class="lineno"> 1412</span>    }</div>
 <div class="line"><span class="lineno"> 1413</span>}</div>
+<div class="ttc" id="aclass_electric_calculation_html_ade330c7267088dcbdd7c8e7f8c302da3"><div class="ttname"><a href="class_electric_calculation.html#ade330c7267088dcbdd7c8e7f8c302da3">ElectricCalculation::GetMachineModel</a></div><div class="ttdeci">Machines::SyncMachineModel GetMachineModel(SyncGenerator *generator)</div><div class="ttdoc">Get the synchronous machine model used by the generator based on user-defined parameters.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00929">ElectricCalculation.cpp:929</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -3287,7 +3332,7 @@ Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno"> 1175</span>{</div>
 <div class="line"><span class="lineno"> 1176</span>    <span class="comment">// First interation values and extrapolations</span></div>
 <div class="line"><span class="lineno"> 1177</span>    <span class="comment">// Synchronous machines</span></div>
-<div class="line"><span class="lineno"> 1178</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1178</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1179</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno"> 1180</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1181</span> </div>
@@ -3323,7 +3368,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1211</span>        }</div>
 <div class="line"><span class="lineno"> 1212</span>    }</div>
 <div class="line"><span class="lineno"> 1213</span>    <span class="comment">// Induction machines</span></div>
-<div class="line"><span class="lineno"> 1214</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1214</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1215</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* indMotor = *it;</div>
 <div class="line"><span class="lineno"> 1216</span>        <span class="keyword">auto</span> data = indMotor-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1217</span> </div>
@@ -3363,10 +3408,10 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1251</span>        <span class="keywordflow">if</span> (!CalculateInjectedCurrents()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno"> 1252</span> </div>
 <div class="line"><span class="lineno"> 1253</span>        <span class="comment">// Calculate the buses voltages.</span></div>
-<div class="line"><span class="lineno"> 1254</span>        m_vBus = LUEvaluate(m_yBusU, m_yBusL, m_iBus);</div>
+<div class="line"><span class="lineno"> 1254</span>        m_vBus = <a class="code hl_function" href="class_electric_calculation.html#a55cd49ca9c2771533e6e2f16bb9ec1fc">LUEvaluate</a>(m_yBusU, m_yBusL, m_iBus);</div>
 <div class="line"><span class="lineno"> 1255</span> </div>
 <div class="line"><span class="lineno"> 1256</span>        <span class="comment">// Solve synchronous machine equations.</span></div>
-<div class="line"><span class="lineno"> 1257</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1257</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1258</span>            <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno"> 1259</span> </div>
 <div class="line"><span class="lineno"> 1260</span>            <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
@@ -3393,7 +3438,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1281</span>        }</div>
 <div class="line"><span class="lineno"> 1282</span> </div>
 <div class="line"><span class="lineno"> 1283</span>        <span class="comment">// Solve induction machine equation</span></div>
-<div class="line"><span class="lineno"> 1284</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1284</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1285</span>            <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* indMotor = *it;</div>
 <div class="line"><span class="lineno"> 1286</span> </div>
 <div class="line"><span class="lineno"> 1287</span>            <span class="keyword">auto</span> data = indMotor-&gt;GetElectricalData();</div>
@@ -3429,7 +3474,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1317</span> </div>
 <div class="line"><span class="lineno"> 1318</span>    <span class="comment">// Solve controllers.</span></div>
 <div class="line"><span class="lineno"> 1319</span>    <span class="keywordtype">int</span> ctrlRatio = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(1 / m_ctrlTimeStepMultiplier);</div>
-<div class="line"><span class="lineno"> 1320</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1320</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.begin(), itEnd = <a class="code hl_variable" href="class_electric_calculation.html#a72386789cd0ff595e937d70e18cad697">m_syncGeneratorList</a>.end(); it != itEnd; ++it) {</div>
 <div class="line"><span class="lineno"> 1321</span>        <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* syncGenerator = *it;</div>
 <div class="line"><span class="lineno"> 1322</span>        <span class="keyword">auto</span> data = syncGenerator-&gt;GetElectricalData();</div>
 <div class="line"><span class="lineno"> 1323</span>        <span class="keywordflow">if</span> (data.useAVR &amp;&amp; data.avrSolver) {</div>
@@ -3464,6 +3509,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno"> 1352</span> </div>
 <div class="line"><span class="lineno"> 1353</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno"> 1354</span>}</div>
+<div class="ttc" id="aclass_electric_calculation_html_a55cd49ca9c2771533e6e2f16bb9ec1fc"><div class="ttname"><a href="class_electric_calculation.html#a55cd49ca9c2771533e6e2f16bb9ec1fc">ElectricCalculation::LUEvaluate</a></div><div class="ttdeci">std::vector&lt; std::complex&lt; double &gt; &gt; LUEvaluate(std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; u, std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; l, std::vector&lt; std::complex&lt; double &gt; &gt; b)</div><div class="ttdoc">Solve a linear system using LU decomposition.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l01011">ElectricCalculation.cpp:1011</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>

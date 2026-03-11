@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['ratedpower_0',['ratedPower',['../struct_parse_anarede_1_1_ind_gen_data.html#a589fbb59366ee93082e5607c1e6cde52',1,'ParseAnarede::IndGenData']]],
-  ['resistance_1',['resistance',['../struct_parse_anarede_1_1_branch_data.html#a30a2b114101bbff88ac75f8cc328f0b8',1,'ParseAnarede::BranchData::resistance'],['../struct_parse_matpower_1_1_branch_data.html#ab33bdcb41c5cf351e6f4f015fe4c44a8',1,'ParseMatpower::BranchData::resistance']]],
-  ['rotationid_2',['rotationID',['../struct_parse_anarede_1_1_component.html#ae19d20b15e75182db61b373ce738750b',1,'ParseAnarede::Component']]]
+  ['pd_0',['pd',['../struct_parse_matpower_1_1_bus_data.html#adf693c58468a2b1209452f61782be3b0',1,'ParseMatpower::BusData']]],
+  ['pg_1',['pg',['../struct_parse_matpower_1_1_gen_data.html#ac7a2a7d1dfec7018abce5ccc15897eec',1,'ParseMatpower::GenData']]],
+  ['phaseshift_2',['phaseshift',['../struct_parse_anarede_1_1_branch_data.html#a04927e47eb216892106ac401efdf211a',1,'ParseAnarede::BranchData::phaseShift'],['../struct_parse_matpower_1_1_branch_data.html#ad3c0dc412ff8fa831f1fe719ad81903f',1,'ParseMatpower::BranchData::phaseShift']]],
+  ['position_3',['position',['../struct_parse_anarede_1_1_component.html#ad2139e6d1bf119460ed3fb3b09bb59c0',1,'ParseAnarede::Component']]],
+  ['power_4',['power',['../struct_parse_anarede_1_1_ind_element_data.html#a60298e212445a317ad607eea31e3a0b6',1,'ParseAnarede::IndElementData']]]
 ];

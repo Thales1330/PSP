@@ -1,0 +1,5 @@
+<map id="ElectricCalculation::GetParentBus" name="ElectricCalculation::GetParentBus">
+<area shape="rect" id="Node000001" title="Get the parent buses of a two&#45;terminal element (branch)." alt="" coords="5,5,148,45"/>
+<area shape="rect" id="Node000002" href="$class_element.html#a1150aef1610cdc2a28d96570dbac805a" title="Get the parent list." alt="" coords="196,13,367,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,23,182,23,182,28,148,28"/>
+</map>

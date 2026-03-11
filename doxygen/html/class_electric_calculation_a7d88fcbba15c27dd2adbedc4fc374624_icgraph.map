@@ -1,0 +1,10 @@
+<map id="ElectricCalculation::GetNextConnection" name="ElectricCalculation::GetNextConnection">
+<area shape="rect" id="Node000001" title="Recursively check if a bus is electrically connected to the slack bus." alt="" coords="461,29,619,69"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="573,18,562,11,540,8,521,10,510,15,506,21,508,28,503,30,501,20,506,11,520,5,540,3,563,6,576,13"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html#a87da7425eaeb6b2c80e18e481c1b38b5" title="Get the admittance matrix from the list of elements (use GetElementsFromList first)." alt="" coords="271,29,413,69"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="447,52,414,52,414,47,447,47"/>
+<area shape="rect" id="Node000003" href="$class_fault.html#a4120f861b073783b4fb82385171fbd0f" title="Calculate the fault of the system. Return true if was possible the calculation." alt="" coords="19,11,209,37"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="257,43,209,37,210,32,257,37"/>
+<area shape="rect" id="Node000004" href="$class_fault.html#ac7942a558f3ecdb8c06ddb49567c487a" title="Calculate the short&#45;circuit power of the system. Return true if was possible the calculation." alt="" coords="5,61,223,86"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="258,61,223,65,223,59,257,56"/>
+</map>

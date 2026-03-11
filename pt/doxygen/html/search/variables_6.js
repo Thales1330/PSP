@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['length_0',['length',['../struct_parse_anarede_1_1_component.html#a40533fa2666a27b311f7d6972f1b38c8',1,'ParseAnarede::Component']]],
-  ['loadpower_1',['loadPower',['../struct_parse_anarede_1_1_bus_data.html#a7d88013f23f3730343a8e83beba2a604',1,'ParseAnarede::BusData']]]
+  ['hasmax_0',['hasMax',['../struct_reactive_machine.html#a2c954dbbf0a254cb2eadff4825bb4027',1,'ReactiveMachine']]],
+  ['hasmin_1',['hasMin',['../struct_reactive_machine.html#a3446a4d1176c46673d311f1913b3b3ab',1,'ReactiveMachine']]]
 ];

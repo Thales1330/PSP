@@ -1,0 +1,5 @@
+<map id="ElectricCalculation::DistributeReactivePower" name="ElectricCalculation::DistributeReactivePower">
+<area shape="rect" id="Node000001" title="Distribute reactive power among synchronous machines connected to the same bus." alt="" coords="263,5,453,45"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049" title="Update the elements after the power flow calculation." alt="" coords="5,5,215,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,28,215,28,215,23,249,23"/>
+</map>

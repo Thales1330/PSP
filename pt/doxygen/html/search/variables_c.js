@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['shuntreactive_0',['shuntReactive',['../struct_parse_anarede_1_1_bus_data.html#a9725c7e9777693cd028878b1c3e1c32f',1,'ParseAnarede::BusData']]],
-  ['swtime_1',['swTime',['../struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df',1,'SwitchingData']]],
-  ['swtype_2',['swType',['../struct_switching_data.html#af78fb958137a0532ea2a584810708574',1,'SwitchingData']]]
+  ['q_0',['q',['../struct_reactive_machine.html#a1a2573e9299bcd94d1c9db96191f9a19',1,'ReactiveMachine']]],
+  ['qd_1',['qd',['../struct_parse_matpower_1_1_bus_data.html#aaffe3cf907ee9464a7279d583dbd55f4',1,'ParseMatpower::BusData']]],
+  ['qg_2',['qg',['../struct_parse_matpower_1_1_gen_data.html#abe7680c2eb362b7586111555a4de2da1',1,'ParseMatpower::GenData']]],
+  ['qmax_3',['qMax',['../struct_reactive_machine.html#aa4b8f3e336f314d296322493361db8dd',1,'ReactiveMachine']]],
+  ['qmin_4',['qMin',['../struct_reactive_machine.html#acfc047755dcbc3e2a798987355a62036',1,'ReactiveMachine']]]
 ];

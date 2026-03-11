@@ -1,7 +1,10 @@
 <map id="ElectricCalculation::GetYBus" name="ElectricCalculation::GetYBus">
-<area shape="rect" id="Node000001" title="Get the admittance matrix from the list of elements (use GetElementsFromList first)." alt="" coords="5,23,148,63"/>
-<area shape="rect" id="Node000002" href="$class_element.html#a1150aef1610cdc2a28d96570dbac805a" title="Get the parent list." alt="" coords="196,5,367,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,32,182,28,183,33,148,37"/>
-<area shape="rect" id="Node000003" href="$class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa" title="Checks if the element is online or offline." alt="" coords="213,55,350,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,49,199,55,199,60,148,54"/>
+<area shape="rect" id="Node000001" title="Get the admittance matrix from the list of elements (use GetElementsFromList first)." alt="" coords="5,87,148,127"/>
+<area shape="rect" id="Node000002" href="$class_electric_calculation.html#a7d88fcbba15c27dd2adbedc4fc374624" title="Recursively check if a bus is electrically connected to the slack bus." alt="" coords="203,29,360,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,84,195,71,197,76,149,89"/>
+<area shape="rect" id="Node000003" href="$class_element.html#a1150aef1610cdc2a28d96570dbac805a" title="Get the parent list." alt="" coords="196,94,367,119"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="148,104,182,104,182,109,148,109"/>
+<area shape="rect" id="Node000004" href="$class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa" title="Checks if the element is online or offline." alt="" coords="213,143,350,169"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="149,121,215,137,214,143,147,126"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="243,30,241,20,247,11,261,5,281,3,305,6,318,13,315,18,303,11,281,8,262,10,250,15,246,21,248,28"/>
 </map>

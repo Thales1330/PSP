@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['contextmenuid_0',['ContextMenuID',['../_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049',1,'Element.h']]]
+  ['bustype_0',['BusType',['../_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46',1,'ElectricCalculation.h']]]
 ];

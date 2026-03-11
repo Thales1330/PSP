@@ -1,0 +1,11 @@
+<map id="ReactiveMachine" name="ReactiveMachine">
+<area shape="rect" id="Node000001" title="Auxiliary structure used to distribute reactive power among machines connected to a bus." alt="" coords="36,256,171,281"/>
+<area shape="rect" id="Node000002" href="$class_machines.html" title="Abstract class for rotary machines power elements." alt="" coords="61,168,145,193"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,207,106,255,101,255,101,207"/>
+<area shape="rect" id="Node000003" href="$class_power_element.html" title="Abstract class of power elements." alt="" coords="45,93,161,119"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,133,106,168,101,168,101,133"/>
+<area shape="rect" id="Node000004" href="$class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat..." alt="" coords="5,5,81,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="62,41,97,91,93,94,57,44"/>
+<area shape="rect" id="Node000005" href="$struct_switching_data.html" title="Switching data of power elements." alt="" coords="105,5,221,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="149,44,114,94,110,91,145,41"/>
+</map>
