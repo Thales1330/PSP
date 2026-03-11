@@ -37,47 +37,79 @@
 
 #include "../utils/PropertiesData.h"
 
-enum BusType { BUS_SLACK = 0, BUS_PV, BUS_PQ };
+ /**
+  * @enum BusType
+  * @brief Types of buses used in power flow analysis.
+  */
+enum BusType {
+	BUS_SLACK = 0, /**< Slack (reference) bus. Voltage magnitude and angle are specified. */
+	BUS_PV,        /**< PV bus (generator bus). Active power and voltage magnitude are specified. */
+	BUS_PQ         /**< PQ bus (load bus). Active and reactive powers are specified. */
+};
 
+/**
+ * @enum ReactiveLimitsType
+ * @brief Types of reactive power limit conditions for buses.
+ */
 enum ReactiveLimitsType {
-	RL_UNLIMITED = 0,     // The bus can generate any ammount of reactive power.
-	RL_LIMITED,           // The bus reactive power generation is limited.
-	RL_UNLIMITED_SOURCE,  // The bus have at least one source of infinite reative power.
-	RL_MAX_REACHED,       // Max limit reached
-	RL_MIN_REACHED,       // Min limit reached
-	RL_NONE_REACHED       // No limits reached
+	RL_UNLIMITED = 0,     /**< The bus can generate any amount of reactive power. */
+	RL_LIMITED,           /**< The bus reactive power generation is limited. */
+	RL_UNLIMITED_SOURCE,  /**< The bus has at least one source capable of unlimited reactive power. */
+	RL_MAX_REACHED,       /**< Maximum reactive power limit reached. */
+	RL_MIN_REACHED,       /**< Minimum reactive power limit reached. */
+	RL_NONE_REACHED       /**< No reactive power limits reached. */
 };
 
-enum YBusSequence { POSITIVE_SEQ = 0, NEGATIVE_SEQ, ZERO_SEQ };
+/**
+ * @enum YBusSequence
+ * @brief Sequence type used when building the system admittance matrix.
+ */
+enum YBusSequence {
+	POSITIVE_SEQ = 0, /**< Positive sequence admittance matrix. */
+	NEGATIVE_SEQ,     /**< Negative sequence admittance matrix. */
+	ZERO_SEQ          /**< Zero sequence admittance matrix. */
+};
 
+/**
+ * @struct ReactiveLimits
+ * @brief Stores reactive power limits and their status for a bus.
+ */
 struct ReactiveLimits {
-	double maxLimit = 0.0;
-	double minLimit = 0.0;
-	ReactiveLimitsType maxLimitType = RL_UNLIMITED;
-	ReactiveLimitsType minLimitType = RL_UNLIMITED;
-	ReactiveLimitsType limitReached = RL_NONE_REACHED;
+	double maxLimit = 0.0; /**< Maximum reactive power limit. */
+	double minLimit = 0.0; /**< Minimum reactive power limit. */
+
+	ReactiveLimitsType maxLimitType = RL_UNLIMITED; /**< Type of maximum reactive power limit. */
+	ReactiveLimitsType minLimitType = RL_UNLIMITED; /**< Type of minimum reactive power limit. */
+
+	ReactiveLimitsType limitReached = RL_NONE_REACHED; /**< Indicates whether a reactive limit has been reached. */
 };
 
+/**
+ * @struct ReactiveMachine
+ * @brief Auxiliary structure used to distribute reactive power among machines connected to a bus.
+ */
 struct ReactiveMachine {
-	double qMax;
-	double qMin;
+	double qMax; /**< Maximum reactive power capability. */
+	double qMin; /**< Minimum reactive power capability. */
 
-	bool hasMax;
-	bool hasMin;
+	bool hasMax; /**< Indicates if the machine has a maximum reactive power limit. */
+	bool hasMin; /**< Indicates if the machine has a minimum reactive power limit. */
 
-	bool fixed = false;
+	bool fixed = false; /**< Indicates whether the machine reactive power has been fixed during distribution. */
 
-	double q = 0.0;
+	double q = 0.0; /**< Reactive power assigned to the machine. */
 
-	Machines* machine; // Pointer to generator or motor element
-	bool isGenerator;
+	Machines* machine; /**< Pointer to the machine element (generator or motor). */
+	bool isGenerator;  /**< True if the machine is a generator, false if it is a motor. */
 };
 
 /**
  * @class ElectricCalculation
  * @author Thales Lima Oliveira
  * @date 09/01/2017
- * @brief Base class of electric calculations, with general methods.
+ * @brief Base class for electrical calculations providing general utility methods.
+ * @details
+ * This class provides common utilities used by different electrical calculations such as power flow, short-circuit analysis and EMT simulations.
  * @file ElectricCalculation.h
  */
 class ElectricCalculation
@@ -316,20 +348,45 @@ public:
 	const std::vector<EMTElement*> GetEMTElementList() const { return m_emtElementList; }
 
 protected:
+	/**
+	 * @brief Recursively check if a bus is electrically connected to the slack bus.
+	 * @param checkBusNumber Index of the bus being checked.
+	 * @param yBus Admittance matrix of the system.
+	 * @param connToSlack Boolean vector indicating if each bus is connected to the slack bus.
+	 */
 	void GetNextConnection(const unsigned int& checkBusNumber, const std::vector< std::vector< std::complex<double> > >& yBus, std::vector<bool>& connToSlack);
+
+	/**
+	 * @brief Distribute reactive power among synchronous machines connected to the same bus.
+	 * @details The method ensures that reactive power limits of individual machines are respected during the distribution process.
+	 * @param machines List of machines participating in the reactive power sharing.
+	 * @param qTotal Total reactive power to be distributed.
+	 */
 	void DistributeReactivePower(std::vector<ReactiveMachine>& machines, double qTotal);
 
+	/** @brief List of power elements in the system. */
 	std::vector<PowerElement*> m_powerElementList;
+	/** @brief List of buses in the system. */
 	std::vector<Bus*> m_busList;
+	/** @brief List of capacitor elements in the system. */
 	std::vector<Capacitor*> m_capacitorList;
+	/** @brief List of induction motors in the system. */
 	std::vector<IndMotor*> m_indMotorList;
+	/** @brief List of inductors in the system. */
 	std::vector<Inductor*> m_inductorList;
+	/** @brief List of transmission lines in the system. */
 	std::vector<Line*> m_lineList;
+	/** @brief List of load elements in the system. */
 	std::vector<Load*> m_loadList;
+	/** @brief List of synchronous generators in the system. */
 	std::vector<SyncGenerator*> m_syncGeneratorList;
+	/** @brief List of synchronous motors in the system. */
 	std::vector<SyncMotor*> m_syncMotorList;
+	/** @brief List of transformers in the system. */
 	std::vector<Transformer*> m_transformerList;
+	/** @brief List of harmonic current sources in the system. */
 	std::vector<HarmCurrent*> m_harmCurrentList;
+	/** @brief List of electromagnetic transient (EMT) elements in the system. */
 	std::vector<EMTElement*> m_emtElementList;
 };
 

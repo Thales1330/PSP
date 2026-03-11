@@ -22,9 +22,9 @@ Briefly, software can perform the following studies:
 
 ### Papers
 The articles below have more details about the PSP-UFU:
->Oliveira, T. L., Guimarães, G. C., & Silva, L. R. C. (2019). PSP-UFU: An open-source, graphical, and multiplatform software for power system studies. *International Transactions on Electrical Energy Systems*, e12185. doi: [10.1002/2050-7038.12185](https://doi.org/10.1002/2050-7038.12185)
+>Oliveira, T. L., Guimarães, G. C., & Silva, J. R. C. (2019). PSP-UFU: An open-source, graphical, and multiplatform software for power system studies. *International Transactions on Electrical Energy Systems*, e12185. doi: [10.1002/2050-7038.12185](https://doi.org/10.1002/2050-7038.12185)
 
->Oliveira, T. L., Guimarães, G. C., Silva, L. R., & Rezende, J. O. (2019). Power system education and research applications using free and open-source, graphical and multiplatform PSP-UFU software. *The International Journal of Electrical Engineering & Education*, 0020720919879058. doi: [10.1177/0020720919879058](https://doi.org/10.1177/0020720919879058)
+>Oliveira, T. L., Guimarães, G. C., Silva, J. R., & Rezende, J. O. (2019). Power system education and research applications using free and open-source, graphical and multiplatform PSP-UFU software. *The International Journal of Electrical Engineering & Education*, 0020720919879058. doi: [10.1177/0020720919879058](https://doi.org/10.1177/0020720919879058)
 
 The PhD. Thesis below details in depth the calculations involved, software architecture and tools implemented in the PSP-UFU:
 >Oliveira, T. L. (2019). Desenvolvimento de um programa computacional livre, gráfico, e multiplataforma para analisar sistemas elétricos de potência em regime permanente e dinâmico. doi: [10.14393/ufu.te.2019.2444](https://dx.doi.org/10.14393/ufu.te.2019.2444)
