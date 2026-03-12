@@ -451,126 +451,126 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00950">950</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  956</span>{</div>
-<div class="line"><span class="lineno">  957</span>    <span class="keywordtype">int</span> nvar = 2 * numPQ + numPV;</div>
-<div class="line"><span class="lineno">  958</span> </div>
-<div class="line"><span class="lineno">  959</span>    std::vector&lt;std::vector&lt;double&gt;&gt; J(nvar, std::vector&lt;double&gt;(nvar, 0.0));</div>
-<div class="line"><span class="lineno">  960</span> </div>
-<div class="line"><span class="lineno">  961</span>    <span class="keywordtype">int</span> n = m_numberOfBuses;</div>
-<div class="line"><span class="lineno">  962</span> </div>
-<div class="line"><span class="lineno">  963</span>    <span class="comment">// Precompute magnitudes and angles</span></div>
-<div class="line"><span class="lineno">  964</span>    std::vector&lt;double&gt; V(n);</div>
-<div class="line"><span class="lineno">  965</span>    std::vector&lt;double&gt; T(n);</div>
-<div class="line"><span class="lineno">  966</span> </div>
-<div class="line"><span class="lineno">  967</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><span class="lineno">  968</span>    {</div>
-<div class="line"><span class="lineno">  969</span>        V[i] = std::abs(voltage[i]);</div>
-<div class="line"><span class="lineno">  970</span>        T[i] = std::arg(voltage[i]);</div>
-<div class="line"><span class="lineno">  971</span>    }</div>
-<div class="line"><span class="lineno">  972</span> </div>
-<div class="line"><span class="lineno">  973</span>    <span class="comment">// Compute currents</span></div>
-<div class="line"><span class="lineno">  974</span>    std::vector&lt;std::complex&lt;double&gt;&gt; I(n);</div>
-<div class="line"><span class="lineno">  975</span> </div>
-<div class="line"><span class="lineno">  976</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><span class="lineno">  977</span>    {</div>
-<div class="line"><span class="lineno">  978</span>        I[i] = 0;</div>
-<div class="line"><span class="lineno">  979</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; n; k++)</div>
-<div class="line"><span class="lineno">  980</span>            I[i] += m_yBus[i][k] * voltage[k];</div>
-<div class="line"><span class="lineno">  981</span>    }</div>
-<div class="line"><span class="lineno">  982</span> </div>
-<div class="line"><span class="lineno">  983</span>    <span class="comment">// Compute power injections</span></div>
-<div class="line"><span class="lineno">  984</span>    std::vector&lt;std::complex&lt;double&gt;&gt; S(n);</div>
-<div class="line"><span class="lineno">  985</span> </div>
-<div class="line"><span class="lineno">  986</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><span class="lineno">  987</span>        S[i] = voltage[i] * std::conj(I[i]);</div>
-<div class="line"><span class="lineno">  988</span> </div>
-<div class="line"><span class="lineno">  989</span>    <span class="keywordtype">int</span> rowP = 0;</div>
-<div class="line"><span class="lineno">  990</span>    <span class="keywordtype">int</span> rowQ = numPV + numPQ;</div>
-<div class="line"><span class="lineno">  991</span> </div>
-<div class="line"><span class="lineno">  992</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><span class="lineno">  993</span>    {</div>
-<div class="line"><span class="lineno">  994</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>)</div>
-<div class="line"><span class="lineno">  995</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  996</span> </div>
-<div class="line"><span class="lineno">  997</span>        <span class="keywordtype">int</span> colTheta = 0;</div>
-<div class="line"><span class="lineno">  998</span>        <span class="keywordtype">int</span> colV = numPV + numPQ;</div>
-<div class="line"><span class="lineno">  999</span> </div>
-<div class="line"><span class="lineno"> 1000</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
-<div class="line"><span class="lineno"> 1001</span>        {</div>
-<div class="line"><span class="lineno"> 1002</span>            <span class="keywordflow">if</span> (busType[j] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>)</div>
-<div class="line"><span class="lineno"> 1003</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1004</span> </div>
-<div class="line"><span class="lineno"> 1005</span>            <span class="keywordtype">double</span> G = m_yBus[i][j].real();</div>
-<div class="line"><span class="lineno"> 1006</span>            <span class="keywordtype">double</span> B = m_yBus[i][j].imag();</div>
-<div class="line"><span class="lineno"> 1007</span> </div>
-<div class="line"><span class="lineno"> 1008</span>            <span class="keywordtype">double</span> dtheta = T[i] - T[j];</div>
-<div class="line"><span class="lineno"> 1009</span> </div>
-<div class="line"><span class="lineno"> 1010</span>            <span class="keywordflow">if</span> (i == j)</div>
-<div class="line"><span class="lineno"> 1011</span>            {</div>
-<div class="line"><span class="lineno"> 1012</span>                <span class="keywordtype">double</span> Pi = S[i].real();</div>
-<div class="line"><span class="lineno"> 1013</span>                <span class="keywordtype">double</span> Qi = S[i].imag();</div>
-<div class="line"><span class="lineno"> 1014</span> </div>
-<div class="line"><span class="lineno"> 1015</span>                <span class="comment">// J11</span></div>
-<div class="line"><span class="lineno"> 1016</span>                J[rowP][colTheta] = -Qi - B * V[i] * V[i];</div>
-<div class="line"><span class="lineno"> 1017</span> </div>
-<div class="line"><span class="lineno"> 1018</span>                <span class="comment">// J12 only PQ</span></div>
-<div class="line"><span class="lineno"> 1019</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
-<div class="line"><span class="lineno"> 1020</span>                    J[rowQ][colTheta] = Pi - G * V[i] * V[i];</div>
-<div class="line"><span class="lineno"> 1021</span>            }</div>
-<div class="line"><span class="lineno"> 1022</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 1023</span>            {</div>
-<div class="line"><span class="lineno"> 1024</span>                <span class="comment">// J11</span></div>
-<div class="line"><span class="lineno"> 1025</span>                J[rowP][colTheta] = V[i] * V[j] * (G * sin(dtheta) - B * cos(dtheta));</div>
-<div class="line"><span class="lineno"> 1026</span> </div>
-<div class="line"><span class="lineno"> 1027</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)<span class="comment">// J21                 </span></div>
-<div class="line"><span class="lineno"> 1028</span>                    J[rowQ][colTheta] = -V[i] * V[j] * (G * cos(dtheta) + B * sin(dtheta));</div>
-<div class="line"><span class="lineno"> 1029</span>            }</div>
-<div class="line"><span class="lineno"> 1030</span> </div>
-<div class="line"><span class="lineno"> 1031</span>            colTheta++;</div>
-<div class="line"><span class="lineno"> 1032</span>        }</div>
-<div class="line"><span class="lineno"> 1033</span> </div>
-<div class="line"><span class="lineno"> 1034</span>        colTheta = 0;</div>
-<div class="line"><span class="lineno"> 1035</span> </div>
-<div class="line"><span class="lineno"> 1036</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
-<div class="line"><span class="lineno"> 1037</span>        {</div>
-<div class="line"><span class="lineno"> 1038</span>            <span class="keywordflow">if</span> (busType[j] != <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
-<div class="line"><span class="lineno"> 1039</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1040</span> </div>
-<div class="line"><span class="lineno"> 1041</span>            <span class="keywordtype">double</span> G = m_yBus[i][j].real();</div>
-<div class="line"><span class="lineno"> 1042</span>            <span class="keywordtype">double</span> B = m_yBus[i][j].imag();</div>
-<div class="line"><span class="lineno"> 1043</span> </div>
-<div class="line"><span class="lineno"> 1044</span>            <span class="keywordtype">double</span> dtheta = T[i] - T[j];</div>
-<div class="line"><span class="lineno"> 1045</span> </div>
-<div class="line"><span class="lineno"> 1046</span>            <span class="keywordflow">if</span> (i == j)</div>
-<div class="line"><span class="lineno"> 1047</span>            {</div>
-<div class="line"><span class="lineno"> 1048</span>                <span class="keywordtype">double</span> Pi = S[i].real();</div>
-<div class="line"><span class="lineno"> 1049</span>                <span class="keywordtype">double</span> Qi = S[i].imag();</div>
-<div class="line"><span class="lineno"> 1050</span> </div>
-<div class="line"><span class="lineno"> 1051</span>                <span class="comment">// J12</span></div>
-<div class="line"><span class="lineno"> 1052</span>                J[rowP][colV] = Pi / V[i] + G * V[i];</div>
-<div class="line"><span class="lineno"> 1053</span> </div>
-<div class="line"><span class="lineno"> 1054</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) <span class="comment">// J22</span></div>
-<div class="line"><span class="lineno"> 1055</span>                    J[rowQ][colV] = Qi / V[i] - B * V[i];</div>
-<div class="line"><span class="lineno"> 1056</span>            }</div>
-<div class="line"><span class="lineno"> 1057</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 1058</span>            {</div>
-<div class="line"><span class="lineno"> 1059</span>                <span class="comment">// J12</span></div>
-<div class="line"><span class="lineno"> 1060</span>                J[rowP][colV] = V[i] * (G * cos(dtheta) + B * sin(dtheta));</div>
-<div class="line"><span class="lineno"> 1061</span> </div>
-<div class="line"><span class="lineno"> 1062</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) <span class="comment">// J22</span></div>
-<div class="line"><span class="lineno"> 1063</span>                    J[rowQ][colV] = V[i] * (G * sin(dtheta) - B * cos(dtheta));</div>
-<div class="line"><span class="lineno"> 1064</span>            }</div>
-<div class="line"><span class="lineno"> 1065</span>            colV++;</div>
-<div class="line"><span class="lineno"> 1066</span>        }</div>
-<div class="line"><span class="lineno"> 1067</span>        rowP++;</div>
-<div class="line"><span class="lineno"> 1068</span> </div>
-<div class="line"><span class="lineno"> 1069</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
-<div class="line"><span class="lineno"> 1070</span>            rowQ++;</div>
-<div class="line"><span class="lineno"> 1071</span>    }</div>
-<div class="line"><span class="lineno"> 1072</span> </div>
-<div class="line"><span class="lineno"> 1073</span>    <span class="keywordflow">return</span> J;</div>
-<div class="line"><span class="lineno"> 1074</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00742">742</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  748</span>{</div>
+<div class="line"><span class="lineno">  749</span>    <span class="keywordtype">int</span> nvar = 2 * numPQ + numPV;</div>
+<div class="line"><span class="lineno">  750</span> </div>
+<div class="line"><span class="lineno">  751</span>    std::vector&lt;std::vector&lt;double&gt;&gt; J(nvar, std::vector&lt;double&gt;(nvar, 0.0));</div>
+<div class="line"><span class="lineno">  752</span> </div>
+<div class="line"><span class="lineno">  753</span>    <span class="keywordtype">int</span> n = m_numberOfBuses;</div>
+<div class="line"><span class="lineno">  754</span> </div>
+<div class="line"><span class="lineno">  755</span>    <span class="comment">// Precompute magnitudes and angles</span></div>
+<div class="line"><span class="lineno">  756</span>    std::vector&lt;double&gt; V(n);</div>
+<div class="line"><span class="lineno">  757</span>    std::vector&lt;double&gt; T(n);</div>
+<div class="line"><span class="lineno">  758</span> </div>
+<div class="line"><span class="lineno">  759</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><span class="lineno">  760</span>    {</div>
+<div class="line"><span class="lineno">  761</span>        V[i] = std::abs(voltage[i]);</div>
+<div class="line"><span class="lineno">  762</span>        T[i] = std::arg(voltage[i]);</div>
+<div class="line"><span class="lineno">  763</span>    }</div>
+<div class="line"><span class="lineno">  764</span> </div>
+<div class="line"><span class="lineno">  765</span>    <span class="comment">// Compute currents</span></div>
+<div class="line"><span class="lineno">  766</span>    std::vector&lt;std::complex&lt;double&gt;&gt; I(n);</div>
+<div class="line"><span class="lineno">  767</span> </div>
+<div class="line"><span class="lineno">  768</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><span class="lineno">  769</span>    {</div>
+<div class="line"><span class="lineno">  770</span>        I[i] = 0;</div>
+<div class="line"><span class="lineno">  771</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; n; k++)</div>
+<div class="line"><span class="lineno">  772</span>            I[i] += m_yBus[i][k] * voltage[k];</div>
+<div class="line"><span class="lineno">  773</span>    }</div>
+<div class="line"><span class="lineno">  774</span> </div>
+<div class="line"><span class="lineno">  775</span>    <span class="comment">// Compute power injections</span></div>
+<div class="line"><span class="lineno">  776</span>    std::vector&lt;std::complex&lt;double&gt;&gt; S(n);</div>
+<div class="line"><span class="lineno">  777</span> </div>
+<div class="line"><span class="lineno">  778</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><span class="lineno">  779</span>        S[i] = voltage[i] * std::conj(I[i]);</div>
+<div class="line"><span class="lineno">  780</span> </div>
+<div class="line"><span class="lineno">  781</span>    <span class="keywordtype">int</span> rowP = 0;</div>
+<div class="line"><span class="lineno">  782</span>    <span class="keywordtype">int</span> rowQ = numPV + numPQ;</div>
+<div class="line"><span class="lineno">  783</span> </div>
+<div class="line"><span class="lineno">  784</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><span class="lineno">  785</span>    {</div>
+<div class="line"><span class="lineno">  786</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>)</div>
+<div class="line"><span class="lineno">  787</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  788</span> </div>
+<div class="line"><span class="lineno">  789</span>        <span class="keywordtype">int</span> colTheta = 0;</div>
+<div class="line"><span class="lineno">  790</span>        <span class="keywordtype">int</span> colV = numPV + numPQ;</div>
+<div class="line"><span class="lineno">  791</span> </div>
+<div class="line"><span class="lineno">  792</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
+<div class="line"><span class="lineno">  793</span>        {</div>
+<div class="line"><span class="lineno">  794</span>            <span class="keywordflow">if</span> (busType[j] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>)</div>
+<div class="line"><span class="lineno">  795</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  796</span> </div>
+<div class="line"><span class="lineno">  797</span>            <span class="keywordtype">double</span> G = m_yBus[i][j].real();</div>
+<div class="line"><span class="lineno">  798</span>            <span class="keywordtype">double</span> B = m_yBus[i][j].imag();</div>
+<div class="line"><span class="lineno">  799</span> </div>
+<div class="line"><span class="lineno">  800</span>            <span class="keywordtype">double</span> dtheta = T[i] - T[j];</div>
+<div class="line"><span class="lineno">  801</span> </div>
+<div class="line"><span class="lineno">  802</span>            <span class="keywordflow">if</span> (i == j)</div>
+<div class="line"><span class="lineno">  803</span>            {</div>
+<div class="line"><span class="lineno">  804</span>                <span class="keywordtype">double</span> Pi = S[i].real();</div>
+<div class="line"><span class="lineno">  805</span>                <span class="keywordtype">double</span> Qi = S[i].imag();</div>
+<div class="line"><span class="lineno">  806</span> </div>
+<div class="line"><span class="lineno">  807</span>                <span class="comment">// J11</span></div>
+<div class="line"><span class="lineno">  808</span>                J[rowP][colTheta] = -Qi - B * V[i] * V[i];</div>
+<div class="line"><span class="lineno">  809</span> </div>
+<div class="line"><span class="lineno">  810</span>                <span class="comment">// J12 only PQ</span></div>
+<div class="line"><span class="lineno">  811</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
+<div class="line"><span class="lineno">  812</span>                    J[rowQ][colTheta] = Pi - G * V[i] * V[i];</div>
+<div class="line"><span class="lineno">  813</span>            }</div>
+<div class="line"><span class="lineno">  814</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  815</span>            {</div>
+<div class="line"><span class="lineno">  816</span>                <span class="comment">// J11</span></div>
+<div class="line"><span class="lineno">  817</span>                J[rowP][colTheta] = V[i] * V[j] * (G * sin(dtheta) - B * cos(dtheta));</div>
+<div class="line"><span class="lineno">  818</span> </div>
+<div class="line"><span class="lineno">  819</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)<span class="comment">// J21                 </span></div>
+<div class="line"><span class="lineno">  820</span>                    J[rowQ][colTheta] = -V[i] * V[j] * (G * cos(dtheta) + B * sin(dtheta));</div>
+<div class="line"><span class="lineno">  821</span>            }</div>
+<div class="line"><span class="lineno">  822</span> </div>
+<div class="line"><span class="lineno">  823</span>            colTheta++;</div>
+<div class="line"><span class="lineno">  824</span>        }</div>
+<div class="line"><span class="lineno">  825</span> </div>
+<div class="line"><span class="lineno">  826</span>        colTheta = 0;</div>
+<div class="line"><span class="lineno">  827</span> </div>
+<div class="line"><span class="lineno">  828</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
+<div class="line"><span class="lineno">  829</span>        {</div>
+<div class="line"><span class="lineno">  830</span>            <span class="keywordflow">if</span> (busType[j] != <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
+<div class="line"><span class="lineno">  831</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  832</span> </div>
+<div class="line"><span class="lineno">  833</span>            <span class="keywordtype">double</span> G = m_yBus[i][j].real();</div>
+<div class="line"><span class="lineno">  834</span>            <span class="keywordtype">double</span> B = m_yBus[i][j].imag();</div>
+<div class="line"><span class="lineno">  835</span> </div>
+<div class="line"><span class="lineno">  836</span>            <span class="keywordtype">double</span> dtheta = T[i] - T[j];</div>
+<div class="line"><span class="lineno">  837</span> </div>
+<div class="line"><span class="lineno">  838</span>            <span class="keywordflow">if</span> (i == j)</div>
+<div class="line"><span class="lineno">  839</span>            {</div>
+<div class="line"><span class="lineno">  840</span>                <span class="keywordtype">double</span> Pi = S[i].real();</div>
+<div class="line"><span class="lineno">  841</span>                <span class="keywordtype">double</span> Qi = S[i].imag();</div>
+<div class="line"><span class="lineno">  842</span> </div>
+<div class="line"><span class="lineno">  843</span>                <span class="comment">// J12</span></div>
+<div class="line"><span class="lineno">  844</span>                J[rowP][colV] = Pi / V[i] + G * V[i];</div>
+<div class="line"><span class="lineno">  845</span> </div>
+<div class="line"><span class="lineno">  846</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) <span class="comment">// J22</span></div>
+<div class="line"><span class="lineno">  847</span>                    J[rowQ][colV] = Qi / V[i] - B * V[i];</div>
+<div class="line"><span class="lineno">  848</span>            }</div>
+<div class="line"><span class="lineno">  849</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  850</span>            {</div>
+<div class="line"><span class="lineno">  851</span>                <span class="comment">// J12</span></div>
+<div class="line"><span class="lineno">  852</span>                J[rowP][colV] = V[i] * (G * cos(dtheta) + B * sin(dtheta));</div>
+<div class="line"><span class="lineno">  853</span> </div>
+<div class="line"><span class="lineno">  854</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) <span class="comment">// J22</span></div>
+<div class="line"><span class="lineno">  855</span>                    J[rowQ][colV] = V[i] * (G * sin(dtheta) - B * cos(dtheta));</div>
+<div class="line"><span class="lineno">  856</span>            }</div>
+<div class="line"><span class="lineno">  857</span>            colV++;</div>
+<div class="line"><span class="lineno">  858</span>        }</div>
+<div class="line"><span class="lineno">  859</span>        rowP++;</div>
+<div class="line"><span class="lineno">  860</span> </div>
+<div class="line"><span class="lineno">  861</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
+<div class="line"><span class="lineno">  862</span>            rowQ++;</div>
+<div class="line"><span class="lineno">  863</span>    }</div>
+<div class="line"><span class="lineno">  864</span> </div>
+<div class="line"><span class="lineno">  865</span>    <span class="keywordflow">return</span> J;</div>
+<div class="line"><span class="lineno">  866</span>}</div>
 <div class="ttc" id="a_electric_calculation_8h_html_a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6"><div class="ttname"><a href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a></div><div class="ttdeci">@ BUS_SLACK</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00045">ElectricCalculation.h:45</a></div></div>
 <div class="ttc" id="a_electric_calculation_8h_html_a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83"><div class="ttname"><a href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a></div><div class="ttdeci">@ BUS_PQ</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00048">ElectricCalculation.h:47</a></div></div>
 </div><!-- fragment -->
@@ -610,20 +610,20 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l01105">1105</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1107</span>{</div>
-<div class="line"><span class="lineno"> 1108</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.size(); ++i) {</div>
-<div class="line"><span class="lineno"> 1109</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* motor = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>[i];</div>
-<div class="line"><span class="lineno"> 1110</span>        <span class="keyword">auto</span> data = motor-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno"> 1111</span>        <span class="keywordflow">if</span> (motor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() &amp;&amp; data.calcQInPowerFlow) {</div>
-<div class="line"><span class="lineno"> 1112</span>            <span class="keywordtype">double</span> oldQ = data.qValue;</div>
-<div class="line"><span class="lineno"> 1113</span>            <span class="keywordflow">if</span> (!motor-&gt;CalculateReactivePower(std::abs(voltage[data.busNum]))) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1114</span>            <span class="keywordtype">double</span> dQ = oldQ - motor-&gt;GetElectricalData().qValue;</div>
-<div class="line"><span class="lineno"> 1115</span>            power[data.busNum] += std::complex&lt;double&gt;(0.0, dQ);</div>
-<div class="line"><span class="lineno"> 1116</span>        }</div>
-<div class="line"><span class="lineno"> 1117</span>    }</div>
-<div class="line"><span class="lineno"> 1118</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1119</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00897">897</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  899</span>{</div>
+<div class="line"><span class="lineno">  900</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>.size(); ++i) {</div>
+<div class="line"><span class="lineno">  901</span>        <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* motor = <a class="code hl_variable" href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">m_indMotorList</a>[i];</div>
+<div class="line"><span class="lineno">  902</span>        <span class="keyword">auto</span> data = motor-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  903</span>        <span class="keywordflow">if</span> (motor-&gt;<a class="code hl_function" href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">IsOnline</a>() &amp;&amp; data.calcQInPowerFlow) {</div>
+<div class="line"><span class="lineno">  904</span>            <span class="keywordtype">double</span> oldQ = data.qValue;</div>
+<div class="line"><span class="lineno">  905</span>            <span class="keywordflow">if</span> (!motor-&gt;CalculateReactivePower(std::abs(voltage[data.busNum]))) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  906</span>            <span class="keywordtype">double</span> dQ = oldQ - motor-&gt;GetElectricalData().qValue;</div>
+<div class="line"><span class="lineno">  907</span>            power[data.busNum] += std::complex&lt;double&gt;(0.0, dQ);</div>
+<div class="line"><span class="lineno">  908</span>        }</div>
+<div class="line"><span class="lineno">  909</span>    }</div>
+<div class="line"><span class="lineno">  910</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  911</span>}</div>
 <div class="ttc" id="aclass_electric_calculation_html_a689622805bdea60428e6eea19795dff9"><div class="ttname"><a href="class_electric_calculation.html#a689622805bdea60428e6eea19795dff9">ElectricCalculation::m_indMotorList</a></div><div class="ttdeci">std::vector&lt; IndMotor * &gt; m_indMotorList</div><div class="ttdoc">List of induction motors in the system.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00374">ElectricCalculation.h:374</a></div></div>
 <div class="ttc" id="aclass_element_html_a57c84a8e6eb80f0fea6e23cdd439d5aa"><div class="ttname"><a href="class_element.html#a57c84a8e6eb80f0fea6e23cdd439d5aa">Element::IsOnline</a></div><div class="ttdeci">bool IsOnline() const</div><div class="ttdoc">Checks if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00226">Element.h:226</a></div></div>
 <div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
@@ -676,31 +676,31 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l01076">1076</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1080</span>{</div>
-<div class="line"><span class="lineno"> 1081</span>    <span class="keywordtype">bool</span> limitReach = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1082</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
-<div class="line"><span class="lineno"> 1083</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>) {</div>
-<div class="line"><span class="lineno"> 1084</span>            <span class="keywordflow">if</span> (reactiveLimit[i].maxLimitType == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb">RL_LIMITED</a>) {</div>
-<div class="line"><span class="lineno"> 1085</span>                <span class="keywordflow">if</span> (power[i].imag() - loadPower[i].imag() &gt; reactiveLimit[i].maxLimit) {</div>
-<div class="line"><span class="lineno"> 1086</span>                    power[i] = std::complex&lt;double&gt;(power[i].real(), reactiveLimit[i].maxLimit + loadPower[i].imag());</div>
-<div class="line"><span class="lineno"> 1087</span>                    busType[i] = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>;</div>
-<div class="line"><span class="lineno"> 1088</span>                    reactiveLimit[i].limitReached = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf">RL_MAX_REACHED</a>;</div>
-<div class="line"><span class="lineno"> 1089</span>                    limitReach = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1090</span>                }</div>
-<div class="line"><span class="lineno"> 1091</span>            }</div>
-<div class="line"><span class="lineno"> 1092</span>            <span class="keywordflow">if</span> (reactiveLimit[i].minLimitType == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb">RL_LIMITED</a>) {</div>
-<div class="line"><span class="lineno"> 1093</span>                <span class="keywordflow">if</span> (power[i].imag() - loadPower[i].imag() &lt; reactiveLimit[i].minLimit) {</div>
-<div class="line"><span class="lineno"> 1094</span>                    power[i] = std::complex&lt;double&gt;(power[i].real(), reactiveLimit[i].minLimit + loadPower[i].imag());</div>
-<div class="line"><span class="lineno"> 1095</span>                    busType[i] = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>;</div>
-<div class="line"><span class="lineno"> 1096</span>                    reactiveLimit[i].limitReached = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44">RL_MIN_REACHED</a>;</div>
-<div class="line"><span class="lineno"> 1097</span>                    limitReach = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1098</span>                }</div>
-<div class="line"><span class="lineno"> 1099</span>            }</div>
-<div class="line"><span class="lineno"> 1100</span>        }</div>
-<div class="line"><span class="lineno"> 1101</span>    }</div>
-<div class="line"><span class="lineno"> 1102</span>    <span class="keywordflow">return</span> limitReach;</div>
-<div class="line"><span class="lineno"> 1103</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00868">868</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  872</span>{</div>
+<div class="line"><span class="lineno">  873</span>    <span class="keywordtype">bool</span> limitReach = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  874</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
+<div class="line"><span class="lineno">  875</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>) {</div>
+<div class="line"><span class="lineno">  876</span>            <span class="keywordflow">if</span> (reactiveLimit[i].maxLimitType == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb">RL_LIMITED</a>) {</div>
+<div class="line"><span class="lineno">  877</span>                <span class="keywordflow">if</span> (power[i].imag() - loadPower[i].imag() &gt; reactiveLimit[i].maxLimit) {</div>
+<div class="line"><span class="lineno">  878</span>                    power[i] = std::complex&lt;double&gt;(power[i].real(), reactiveLimit[i].maxLimit + loadPower[i].imag());</div>
+<div class="line"><span class="lineno">  879</span>                    busType[i] = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>;</div>
+<div class="line"><span class="lineno">  880</span>                    reactiveLimit[i].limitReached = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf">RL_MAX_REACHED</a>;</div>
+<div class="line"><span class="lineno">  881</span>                    limitReach = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  882</span>                }</div>
+<div class="line"><span class="lineno">  883</span>            }</div>
+<div class="line"><span class="lineno">  884</span>            <span class="keywordflow">if</span> (reactiveLimit[i].minLimitType == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5ab5a1a790b2ca08fc88022b3064974bbb">RL_LIMITED</a>) {</div>
+<div class="line"><span class="lineno">  885</span>                <span class="keywordflow">if</span> (power[i].imag() - loadPower[i].imag() &lt; reactiveLimit[i].minLimit) {</div>
+<div class="line"><span class="lineno">  886</span>                    power[i] = std::complex&lt;double&gt;(power[i].real(), reactiveLimit[i].minLimit + loadPower[i].imag());</div>
+<div class="line"><span class="lineno">  887</span>                    busType[i] = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>;</div>
+<div class="line"><span class="lineno">  888</span>                    reactiveLimit[i].limitReached = <a class="code hl_enumvalue" href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44">RL_MIN_REACHED</a>;</div>
+<div class="line"><span class="lineno">  889</span>                    limitReach = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  890</span>                }</div>
+<div class="line"><span class="lineno">  891</span>            }</div>
+<div class="line"><span class="lineno">  892</span>        }</div>
+<div class="line"><span class="lineno">  893</span>    }</div>
+<div class="line"><span class="lineno">  894</span>    <span class="keywordflow">return</span> limitReach;</div>
+<div class="line"><span class="lineno">  895</span>}</div>
 <div class="ttc" id="a_electric_calculation_8h_html_a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923"><div class="ttname"><a href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a></div><div class="ttdeci">@ BUS_PV</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00046">ElectricCalculation.h:46</a></div></div>
 <div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a44cfc2c558ec78c54440a7ca4648ffdf">RL_MAX_REACHED</a></div><div class="ttdeci">@ RL_MAX_REACHED</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00058">ElectricCalculation.h:58</a></div></div>
 <div class="ttc" id="a_electric_calculation_8h_html_aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44"><div class="ttname"><a href="_electric_calculation_8h.html#aa48d3d150889a89c491c9792ca3bc8a5a733a0e8704a7a915b09f3d05e2a4bc44">RL_MIN_REACHED</a></div><div class="ttdeci">@ RL_MIN_REACHED</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8h_source.html#l00059">ElectricCalculation.h:59</a></div></div>
@@ -760,62 +760,62 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00634">634</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  639</span>{</div>
-<div class="line"><span class="lineno">  640</span>    <span class="keywordtype">double</span> error = 0.0;</div>
-<div class="line"><span class="lineno">  641</span> </div>
-<div class="line"><span class="lineno">  642</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
-<div class="line"><span class="lineno">  643</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) {</div>
-<div class="line"><span class="lineno">  644</span>            std::complex&lt;double&gt; yeSum(0.0, 0.0);</div>
-<div class="line"><span class="lineno">  645</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; m_numberOfBuses; k++) {</div>
-<div class="line"><span class="lineno">  646</span>                <span class="keywordflow">if</span> (i != k) {</div>
-<div class="line"><span class="lineno">  647</span>                    <span class="comment">// Sum { Y[i,k] * E[k] } | k = 1-&gt;n; k diff i</span></div>
-<div class="line"><span class="lineno">  648</span>                    yeSum += m_yBus[i][k] * voltage[k];</div>
-<div class="line"><span class="lineno">  649</span>                }</div>
-<div class="line"><span class="lineno">  650</span>            }</div>
-<div class="line"><span class="lineno">  651</span> </div>
-<div class="line"><span class="lineno">  652</span>            <span class="comment">// E[i] = (1/Y[i,i])*((P[i]-jQ[i])/E*[i] - Sum { Y[i,k] * E[k] (k diff i) })</span></div>
-<div class="line"><span class="lineno">  653</span>            std::complex&lt;double&gt; newVolt = (1.0 / m_yBus[i][i]) * (std::conj(power[i]) / std::conj(voltage[i]) - yeSum);</div>
-<div class="line"><span class="lineno">  654</span> </div>
-<div class="line"><span class="lineno">  655</span>            <span class="comment">// Apply the acceleration factor.</span></div>
-<div class="line"><span class="lineno">  656</span>            newVolt = std::complex&lt;double&gt;(accFactor * (newVolt.real() - voltage[i].real()) + voltage[i].real(),</div>
-<div class="line"><span class="lineno">  657</span>                accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());</div>
-<div class="line"><span class="lineno">  658</span> </div>
-<div class="line"><span class="lineno">  659</span>            voltage[i] = newVolt;</div>
-<div class="line"><span class="lineno">  660</span>        }</div>
-<div class="line"><span class="lineno">  661</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>) {</div>
-<div class="line"><span class="lineno">  662</span>            std::complex&lt;double&gt; yeSum(0.0, 0.0);</div>
-<div class="line"><span class="lineno">  663</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; m_numberOfBuses; k++) {</div>
-<div class="line"><span class="lineno">  664</span>                <span class="keywordflow">if</span> (i != k) {</div>
-<div class="line"><span class="lineno">  665</span>                    <span class="comment">// Sum { Y[i,k] * E[k] } | k = 1-&gt;n; k diff i</span></div>
-<div class="line"><span class="lineno">  666</span>                    yeSum += m_yBus[i][k] * voltage[k];</div>
-<div class="line"><span class="lineno">  667</span>                }</div>
-<div class="line"><span class="lineno">  668</span>            }</div>
-<div class="line"><span class="lineno">  669</span>            std::complex&lt;double&gt; yeSumT = yeSum + (m_yBus[i][i] * voltage[i]);</div>
-<div class="line"><span class="lineno">  670</span> </div>
-<div class="line"><span class="lineno">  671</span>            <span class="comment">// Q[i] = - Im( E*[i] * Sum { Y[i,k] * E[k] } )</span></div>
-<div class="line"><span class="lineno">  672</span>            std::complex&lt;double&gt; qCalc = std::conj(voltage[i]) * yeSumT;</div>
-<div class="line"><span class="lineno">  673</span>            power[i] = std::complex&lt;double&gt;(power[i].real(), -qCalc.imag());</div>
-<div class="line"><span class="lineno">  674</span> </div>
-<div class="line"><span class="lineno">  675</span>            <span class="comment">// E[i] = (1/Y[i,i])*((P[i]-jQ[i])/E*[i] - Sum { Y[i,k] * E[k] (k diff i) })</span></div>
-<div class="line"><span class="lineno">  676</span>            std::complex&lt;double&gt; newVolt = (1.0 / m_yBus[i][i]) * (std::conj(power[i]) / std::conj(voltage[i]) - yeSum);</div>
-<div class="line"><span class="lineno">  677</span> </div>
-<div class="line"><span class="lineno">  678</span>            <span class="comment">// Apply the acceleration factor.</span></div>
-<div class="line"><span class="lineno">  679</span>            newVolt = std::complex&lt;double&gt;(accFactor * (newVolt.real() - voltage[i].real()) + voltage[i].real(),</div>
-<div class="line"><span class="lineno">  680</span>                accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());</div>
-<div class="line"><span class="lineno">  681</span> </div>
-<div class="line"><span class="lineno">  682</span>            <span class="comment">// Keep the same voltage magnitude.</span></div>
-<div class="line"><span class="lineno">  683</span>            voltage[i] = std::complex&lt;double&gt;(std::abs(voltage[i]) * std::cos(std::arg(newVolt)),</div>
-<div class="line"><span class="lineno">  684</span>                std::abs(voltage[i]) * std::sin(std::arg(newVolt)));</div>
-<div class="line"><span class="lineno">  685</span>        }</div>
-<div class="line"><span class="lineno">  686</span> </div>
-<div class="line"><span class="lineno">  687</span>        <span class="keywordtype">double</span> busError = std::max(std::abs(voltage[i].real() - oldVoltage[i].real()),</div>
-<div class="line"><span class="lineno">  688</span>            std::abs(voltage[i].imag() - oldVoltage[i].imag()));</div>
-<div class="line"><span class="lineno">  689</span> </div>
-<div class="line"><span class="lineno">  690</span>        <span class="keywordflow">if</span> (busError &gt; error) error = busError;</div>
-<div class="line"><span class="lineno">  691</span>    }</div>
-<div class="line"><span class="lineno">  692</span>    <span class="keywordflow">return</span> error;</div>
-<div class="line"><span class="lineno">  693</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00640">640</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  645</span>{</div>
+<div class="line"><span class="lineno">  646</span>    <span class="keywordtype">double</span> error = 0.0;</div>
+<div class="line"><span class="lineno">  647</span> </div>
+<div class="line"><span class="lineno">  648</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
+<div class="line"><span class="lineno">  649</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) {</div>
+<div class="line"><span class="lineno">  650</span>            std::complex&lt;double&gt; yeSum(0.0, 0.0);</div>
+<div class="line"><span class="lineno">  651</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; m_numberOfBuses; k++) {</div>
+<div class="line"><span class="lineno">  652</span>                <span class="keywordflow">if</span> (i != k) {</div>
+<div class="line"><span class="lineno">  653</span>                    <span class="comment">// Sum { Y[i,k] * E[k] } | k = 1-&gt;n; k diff i</span></div>
+<div class="line"><span class="lineno">  654</span>                    yeSum += m_yBus[i][k] * voltage[k];</div>
+<div class="line"><span class="lineno">  655</span>                }</div>
+<div class="line"><span class="lineno">  656</span>            }</div>
+<div class="line"><span class="lineno">  657</span> </div>
+<div class="line"><span class="lineno">  658</span>            <span class="comment">// E[i] = (1/Y[i,i])*((P[i]-jQ[i])/E*[i] - Sum { Y[i,k] * E[k] (k diff i) })</span></div>
+<div class="line"><span class="lineno">  659</span>            std::complex&lt;double&gt; newVolt = (1.0 / m_yBus[i][i]) * (std::conj(power[i]) / std::conj(voltage[i]) - yeSum);</div>
+<div class="line"><span class="lineno">  660</span> </div>
+<div class="line"><span class="lineno">  661</span>            <span class="comment">// Apply the acceleration factor.</span></div>
+<div class="line"><span class="lineno">  662</span>            newVolt = std::complex&lt;double&gt;(accFactor * (newVolt.real() - voltage[i].real()) + voltage[i].real(),</div>
+<div class="line"><span class="lineno">  663</span>                accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());</div>
+<div class="line"><span class="lineno">  664</span> </div>
+<div class="line"><span class="lineno">  665</span>            voltage[i] = newVolt;</div>
+<div class="line"><span class="lineno">  666</span>        }</div>
+<div class="line"><span class="lineno">  667</span>        <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>) {</div>
+<div class="line"><span class="lineno">  668</span>            std::complex&lt;double&gt; yeSum(0.0, 0.0);</div>
+<div class="line"><span class="lineno">  669</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; m_numberOfBuses; k++) {</div>
+<div class="line"><span class="lineno">  670</span>                <span class="keywordflow">if</span> (i != k) {</div>
+<div class="line"><span class="lineno">  671</span>                    <span class="comment">// Sum { Y[i,k] * E[k] } | k = 1-&gt;n; k diff i</span></div>
+<div class="line"><span class="lineno">  672</span>                    yeSum += m_yBus[i][k] * voltage[k];</div>
+<div class="line"><span class="lineno">  673</span>                }</div>
+<div class="line"><span class="lineno">  674</span>            }</div>
+<div class="line"><span class="lineno">  675</span>            std::complex&lt;double&gt; yeSumT = yeSum + (m_yBus[i][i] * voltage[i]);</div>
+<div class="line"><span class="lineno">  676</span> </div>
+<div class="line"><span class="lineno">  677</span>            <span class="comment">// Q[i] = - Im( E*[i] * Sum { Y[i,k] * E[k] } )</span></div>
+<div class="line"><span class="lineno">  678</span>            std::complex&lt;double&gt; qCalc = std::conj(voltage[i]) * yeSumT;</div>
+<div class="line"><span class="lineno">  679</span>            power[i] = std::complex&lt;double&gt;(power[i].real(), -qCalc.imag());</div>
+<div class="line"><span class="lineno">  680</span> </div>
+<div class="line"><span class="lineno">  681</span>            <span class="comment">// E[i] = (1/Y[i,i])*((P[i]-jQ[i])/E*[i] - Sum { Y[i,k] * E[k] (k diff i) })</span></div>
+<div class="line"><span class="lineno">  682</span>            std::complex&lt;double&gt; newVolt = (1.0 / m_yBus[i][i]) * (std::conj(power[i]) / std::conj(voltage[i]) - yeSum);</div>
+<div class="line"><span class="lineno">  683</span> </div>
+<div class="line"><span class="lineno">  684</span>            <span class="comment">// Apply the acceleration factor.</span></div>
+<div class="line"><span class="lineno">  685</span>            newVolt = std::complex&lt;double&gt;(accFactor * (newVolt.real() - voltage[i].real()) + voltage[i].real(),</div>
+<div class="line"><span class="lineno">  686</span>                accFactor * (newVolt.imag() - voltage[i].imag()) + voltage[i].imag());</div>
+<div class="line"><span class="lineno">  687</span> </div>
+<div class="line"><span class="lineno">  688</span>            <span class="comment">// Keep the same voltage magnitude.</span></div>
+<div class="line"><span class="lineno">  689</span>            voltage[i] = std::complex&lt;double&gt;(std::abs(voltage[i]) * std::cos(std::arg(newVolt)),</div>
+<div class="line"><span class="lineno">  690</span>                std::abs(voltage[i]) * std::sin(std::arg(newVolt)));</div>
+<div class="line"><span class="lineno">  691</span>        }</div>
+<div class="line"><span class="lineno">  692</span> </div>
+<div class="line"><span class="lineno">  693</span>        <span class="keywordtype">double</span> busError = std::max(std::abs(voltage[i].real() - oldVoltage[i].real()),</div>
+<div class="line"><span class="lineno">  694</span>            std::abs(voltage[i].imag() - oldVoltage[i].imag()));</div>
+<div class="line"><span class="lineno">  695</span> </div>
+<div class="line"><span class="lineno">  696</span>        <span class="keywordflow">if</span> (busError &gt; error) error = busError;</div>
+<div class="line"><span class="lineno">  697</span>    }</div>
+<div class="line"><span class="lineno">  698</span>    <span class="keywordflow">return</span> error;</div>
+<div class="line"><span class="lineno">  699</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -915,17 +915,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00622">622</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  623</span>{</div>
-<div class="line"><span class="lineno">  624</span>    numPQ = 0;</div>
-<div class="line"><span class="lineno">  625</span>    numPV = 0;</div>
-<div class="line"><span class="lineno">  626</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = busType.begin(), itEnd = busType.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  627</span>        <span class="keywordflow">if</span> (*it == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
-<div class="line"><span class="lineno">  628</span>            numPQ++;</div>
-<div class="line"><span class="lineno">  629</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*it == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>)</div>
-<div class="line"><span class="lineno">  630</span>            numPV++;</div>
-<div class="line"><span class="lineno">  631</span>    }</div>
-<div class="line"><span class="lineno">  632</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00628">628</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  629</span>{</div>
+<div class="line"><span class="lineno">  630</span>    numPQ = 0;</div>
+<div class="line"><span class="lineno">  631</span>    numPV = 0;</div>
+<div class="line"><span class="lineno">  632</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = busType.begin(), itEnd = busType.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  633</span>        <span class="keywordflow">if</span> (*it == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>)</div>
+<div class="line"><span class="lineno">  634</span>            numPQ++;</div>
+<div class="line"><span class="lineno">  635</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*it == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>)</div>
+<div class="line"><span class="lineno">  636</span>            numPV++;</div>
+<div class="line"><span class="lineno">  637</span>    }</div>
+<div class="line"><span class="lineno">  638</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1339,39 +1339,39 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00695">695</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  702</span>{</div>
-<div class="line"><span class="lineno">  703</span>    <span class="comment">// Jacobian matrix</span></div>
-<div class="line"><span class="lineno">  704</span>    std::vector&lt;std::vector&lt;double&gt; &gt; jacobMatrix = CalculateJacobianMatrix(voltage, power, busType, numPV, numPQ);</div>
-<div class="line"><span class="lineno">  705</span> </div>
-<div class="line"><span class="lineno">  706</span>    <span class="comment">// Apply inertia</span></div>
-<div class="line"><span class="lineno">  707</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dPdQ.size(); ++i) { dPdQ[i] = inertia * dPdQ[i]; }</div>
-<div class="line"><span class="lineno">  708</span> </div>
-<div class="line"><span class="lineno">  709</span>    <span class="comment">// Calculate DeltaTheta DeltaV array</span></div>
-<div class="line"><span class="lineno">  710</span>    std::vector&lt;double&gt; dTdV = <a class="code hl_function" href="class_electric_calculation.html#a7c01b0f6b2f656db999ff4933d86d19d">GaussianElimination</a>(jacobMatrix, dPdQ);</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00701">701</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  708</span>{</div>
+<div class="line"><span class="lineno">  709</span>    <span class="comment">// Jacobian matrix</span></div>
+<div class="line"><span class="lineno">  710</span>    std::vector&lt;std::vector&lt;double&gt; &gt; jacobMatrix = CalculateJacobianMatrix(voltage, power, busType, numPV, numPQ);</div>
 <div class="line"><span class="lineno">  711</span> </div>
-<div class="line"><span class="lineno">  712</span>    <span class="comment">// Update voltage array</span></div>
-<div class="line"><span class="lineno">  713</span>    <span class="keywordtype">int</span> indexDT = 0;</div>
-<div class="line"><span class="lineno">  714</span>    <span class="keywordtype">int</span> indexDV = numPQ + numPV;</div>
-<div class="line"><span class="lineno">  715</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
-<div class="line"><span class="lineno">  716</span>        <span class="keywordflow">if</span> (busType[i] != <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>) {</div>
-<div class="line"><span class="lineno">  717</span>            <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>) {</div>
-<div class="line"><span class="lineno">  718</span>                <span class="keywordtype">double</span> newV = std::abs(voltage[i]);</div>
-<div class="line"><span class="lineno">  719</span>                <span class="keywordtype">double</span> newT = std::arg(voltage[i]) + dTdV[indexDT];</div>
-<div class="line"><span class="lineno">  720</span>                voltage[i] = std::complex&lt;double&gt;(newV * std::cos(newT), newV * std::sin(newT));</div>
-<div class="line"><span class="lineno">  721</span>                indexDT++;</div>
-<div class="line"><span class="lineno">  722</span>            }</div>
-<div class="line"><span class="lineno">  723</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  724</span>                <span class="comment">//double newV = std::abs(voltage[i]) * (1.0 + dTdV[indexDV]);</span></div>
-<div class="line"><span class="lineno">  725</span>                <span class="keywordtype">double</span> newV = std::abs(voltage[i]) + dTdV[indexDV];</div>
-<div class="line"><span class="lineno">  726</span>                <span class="keywordtype">double</span> newT = std::arg(voltage[i]) + dTdV[indexDT];</div>
-<div class="line"><span class="lineno">  727</span>                voltage[i] = std::complex&lt;double&gt;(newV * std::cos(newT), newV * std::sin(newT));</div>
-<div class="line"><span class="lineno">  728</span>                indexDV++;</div>
-<div class="line"><span class="lineno">  729</span>                indexDT++;</div>
-<div class="line"><span class="lineno">  730</span>            }</div>
-<div class="line"><span class="lineno">  731</span>        }</div>
-<div class="line"><span class="lineno">  732</span>    }</div>
-<div class="line"><span class="lineno">  733</span>}</div>
+<div class="line"><span class="lineno">  712</span>    <span class="comment">// Apply inertia</span></div>
+<div class="line"><span class="lineno">  713</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dPdQ.size(); ++i) { dPdQ[i] = inertia * dPdQ[i]; }</div>
+<div class="line"><span class="lineno">  714</span> </div>
+<div class="line"><span class="lineno">  715</span>    <span class="comment">// Calculate DeltaTheta DeltaV array</span></div>
+<div class="line"><span class="lineno">  716</span>    std::vector&lt;double&gt; dTdV = <a class="code hl_function" href="class_electric_calculation.html#a7c01b0f6b2f656db999ff4933d86d19d">GaussianElimination</a>(jacobMatrix, dPdQ);</div>
+<div class="line"><span class="lineno">  717</span> </div>
+<div class="line"><span class="lineno">  718</span>    <span class="comment">// Update voltage array</span></div>
+<div class="line"><span class="lineno">  719</span>    <span class="keywordtype">int</span> indexDT = 0;</div>
+<div class="line"><span class="lineno">  720</span>    <span class="keywordtype">int</span> indexDV = numPQ + numPV;</div>
+<div class="line"><span class="lineno">  721</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
+<div class="line"><span class="lineno">  722</span>        <span class="keywordflow">if</span> (busType[i] != <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>) {</div>
+<div class="line"><span class="lineno">  723</span>            <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a82584a6aa91d3c5104441f8de8635923">BUS_PV</a>) {</div>
+<div class="line"><span class="lineno">  724</span>                <span class="keywordtype">double</span> newV = std::abs(voltage[i]);</div>
+<div class="line"><span class="lineno">  725</span>                <span class="keywordtype">double</span> newT = std::arg(voltage[i]) + dTdV[indexDT];</div>
+<div class="line"><span class="lineno">  726</span>                voltage[i] = std::complex&lt;double&gt;(newV * std::cos(newT), newV * std::sin(newT));</div>
+<div class="line"><span class="lineno">  727</span>                indexDT++;</div>
+<div class="line"><span class="lineno">  728</span>            }</div>
+<div class="line"><span class="lineno">  729</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  730</span>                <span class="comment">//double newV = std::abs(voltage[i]) * (1.0 + dTdV[indexDV]);</span></div>
+<div class="line"><span class="lineno">  731</span>                <span class="keywordtype">double</span> newV = std::abs(voltage[i]) + dTdV[indexDV];</div>
+<div class="line"><span class="lineno">  732</span>                <span class="keywordtype">double</span> newT = std::arg(voltage[i]) + dTdV[indexDT];</div>
+<div class="line"><span class="lineno">  733</span>                voltage[i] = std::complex&lt;double&gt;(newV * std::cos(newT), newV * std::sin(newT));</div>
+<div class="line"><span class="lineno">  734</span>                indexDV++;</div>
+<div class="line"><span class="lineno">  735</span>                indexDT++;</div>
+<div class="line"><span class="lineno">  736</span>            }</div>
+<div class="line"><span class="lineno">  737</span>        }</div>
+<div class="line"><span class="lineno">  738</span>    }</div>
+<div class="line"><span class="lineno">  739</span>}</div>
 <div class="ttc" id="aclass_electric_calculation_html_a7c01b0f6b2f656db999ff4933d86d19d"><div class="ttname"><a href="class_electric_calculation.html#a7c01b0f6b2f656db999ff4933d86d19d">ElectricCalculation::GaussianElimination</a></div><div class="ttdeci">std::vector&lt; std::complex&lt; double &gt; &gt; GaussianElimination(std::vector&lt; std::vector&lt; std::complex&lt; double &gt; &gt; &gt; matrix, std::vector&lt; std::complex&lt; double &gt; &gt; array)</div><div class="ttdoc">Solve a linear system using Gaussian elimination (complex version).</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00842">ElectricCalculation.cpp:842</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1399,24 +1399,24 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00603">603</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  604</span>{</div>
-<div class="line"><span class="lineno">  605</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* bus : <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>) {</div>
-<div class="line"><span class="lineno">  606</span>        <a class="code hl_struct" href="struct_bus_electrical_data.html">BusElectricalData</a> data = bus-&gt;GetElectricalData();</div>
-<div class="line"><span class="lineno">  607</span>        <span class="keywordflow">if</span> (bus-&gt;IsOnline()) {</div>
-<div class="line"><span class="lineno">  608</span>            data.voltage = std::complex&lt;double&gt;(1.0, 0.0);</div>
-<div class="line"><span class="lineno">  609</span>            <span class="keywordflow">if</span> (data.isVoltageControlled) {</div>
-<div class="line"><span class="lineno">  610</span>                data.voltage = std::complex&lt;double&gt;(data.controlledVoltage, 0.0);</div>
-<div class="line"><span class="lineno">  611</span>            }</div>
-<div class="line"><span class="lineno">  612</span>        }</div>
-<div class="line"><span class="lineno">  613</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  614</span>            data.voltage = std::complex&lt;double&gt;(0.0, 0.0);</div>
-<div class="line"><span class="lineno">  615</span>        data.harmonicOrder.clear();</div>
-<div class="line"><span class="lineno">  616</span>        data.harmonicVoltage.clear();</div>
-<div class="line"><span class="lineno">  617</span>        data.thd = 0.0;</div>
-<div class="line"><span class="lineno">  618</span>        bus-&gt;SetElectricalData(data);</div>
-<div class="line"><span class="lineno">  619</span>    }</div>
-<div class="line"><span class="lineno">  620</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00609">609</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  610</span>{</div>
+<div class="line"><span class="lineno">  611</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* bus : <a class="code hl_variable" href="class_electric_calculation.html#a0eeb4b5afc082617247351857af26c22">m_busList</a>) {</div>
+<div class="line"><span class="lineno">  612</span>        <a class="code hl_struct" href="struct_bus_electrical_data.html">BusElectricalData</a> data = bus-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  613</span>        <span class="keywordflow">if</span> (bus-&gt;IsOnline()) {</div>
+<div class="line"><span class="lineno">  614</span>            data.voltage = std::complex&lt;double&gt;(1.0, 0.0);</div>
+<div class="line"><span class="lineno">  615</span>            <span class="keywordflow">if</span> (data.isVoltageControlled) {</div>
+<div class="line"><span class="lineno">  616</span>                data.voltage = std::complex&lt;double&gt;(data.controlledVoltage, 0.0);</div>
+<div class="line"><span class="lineno">  617</span>            }</div>
+<div class="line"><span class="lineno">  618</span>        }</div>
+<div class="line"><span class="lineno">  619</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  620</span>            data.voltage = std::complex&lt;double&gt;(0.0, 0.0);</div>
+<div class="line"><span class="lineno">  621</span>        data.harmonicOrder.clear();</div>
+<div class="line"><span class="lineno">  622</span>        data.harmonicVoltage.clear();</div>
+<div class="line"><span class="lineno">  623</span>        data.thd = 0.0;</div>
+<div class="line"><span class="lineno">  624</span>        bus-&gt;SetElectricalData(data);</div>
+<div class="line"><span class="lineno">  625</span>    }</div>
+<div class="line"><span class="lineno">  626</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1484,136 +1484,136 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00466">466</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  473</span>{</div>
-<div class="line"><span class="lineno">  474</span>    std::vector&lt;BusType&gt; busType;                  <span class="comment">// Bus type</span></div>
-<div class="line"><span class="lineno">  475</span>    std::vector&lt;std::complex&lt;double&gt; &gt; voltage;    <span class="comment">// Voltage of buses</span></div>
-<div class="line"><span class="lineno">  476</span>    std::vector&lt;std::complex&lt;double&gt; &gt; power;      <span class="comment">// Injected power</span></div>
-<div class="line"><span class="lineno">  477</span>    std::vector&lt;std::complex&lt;double&gt; &gt; loadPower;  <span class="comment">// Only the load power</span></div>
-<div class="line"><span class="lineno">  478</span>    std::vector&lt;ReactiveLimits&gt; reactiveLimit;     <span class="comment">// Limit of reactive power on PV buses</span></div>
-<div class="line"><span class="lineno">  479</span> </div>
-<div class="line"><span class="lineno">  480</span>    <span class="keywordflow">if</span> (!InitPowerFlow(busType, voltage, power, loadPower, reactiveLimit, systemPowerBase, initAngle)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  481</span> </div>
-<div class="line"><span class="lineno">  482</span>    <span class="comment">// Gauss-Seidel method</span></div>
-<div class="line"><span class="lineno">  483</span>    std::vector&lt;std::complex&lt;double&gt; &gt; oldVoltage;  <span class="comment">// Old voltage array.</span></div>
-<div class="line"><span class="lineno">  484</span>    oldVoltage.resize(voltage.size());</div>
+<p class="definition">Definition at line <a class="el" href="_power_flow_8cpp_source.html#l00472">472</a> of file <a class="el" href="_power_flow_8cpp_source.html">PowerFlow.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  479</span>{</div>
+<div class="line"><span class="lineno">  480</span>    std::vector&lt;BusType&gt; busType;                  <span class="comment">// Bus type</span></div>
+<div class="line"><span class="lineno">  481</span>    std::vector&lt;std::complex&lt;double&gt; &gt; voltage;    <span class="comment">// Voltage of buses</span></div>
+<div class="line"><span class="lineno">  482</span>    std::vector&lt;std::complex&lt;double&gt; &gt; power;      <span class="comment">// Injected power</span></div>
+<div class="line"><span class="lineno">  483</span>    std::vector&lt;std::complex&lt;double&gt; &gt; loadPower;  <span class="comment">// Only the load power</span></div>
+<div class="line"><span class="lineno">  484</span>    std::vector&lt;ReactiveLimits&gt; reactiveLimit;     <span class="comment">// Limit of reactive power on PV buses</span></div>
 <div class="line"><span class="lineno">  485</span> </div>
-<div class="line"><span class="lineno">  486</span>    <span class="keyword">auto</span> oldBusType = busType;</div>
+<div class="line"><span class="lineno">  486</span>    <span class="keywordflow">if</span> (!InitPowerFlow(busType, voltage, power, loadPower, reactiveLimit, systemPowerBase, initAngle)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  487</span> </div>
-<div class="line"><span class="lineno">  488</span>    <span class="keywordtype">int</span> iteration = 0;  <span class="comment">// Current itaration number.</span></div>
-<div class="line"><span class="lineno">  489</span> </div>
-<div class="line"><span class="lineno">  490</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line"><span class="lineno">  491</span>        <span class="comment">// Reach the max number of iterations.</span></div>
-<div class="line"><span class="lineno">  492</span>        <span class="keywordflow">if</span> (iteration &gt;= maxIteration) {</div>
-<div class="line"><span class="lineno">  493</span>            m_errorMsg = _(<span class="stringliteral">&quot;The maximum number of iterations was reached.&quot;</span>);</div>
-<div class="line"><span class="lineno">  494</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  495</span>        }</div>
-<div class="line"><span class="lineno">  496</span> </div>
-<div class="line"><span class="lineno">  497</span>        <span class="comment">// Calculate induction motor reactive power</span></div>
-<div class="line"><span class="lineno">  498</span>        <span class="keywordflow">if</span> (!CalculateMotorsReactivePower(voltage, power)) {</div>
-<div class="line"><span class="lineno">  499</span>            m_errorMsg = _(<span class="stringliteral">&quot;It was not possible to solve the induction motors.&quot;</span>);</div>
+<div class="line"><span class="lineno">  488</span>    <span class="comment">// Gauss-Seidel method</span></div>
+<div class="line"><span class="lineno">  489</span>    std::vector&lt;std::complex&lt;double&gt; &gt; oldVoltage;  <span class="comment">// Old voltage array.</span></div>
+<div class="line"><span class="lineno">  490</span>    oldVoltage.resize(voltage.size());</div>
+<div class="line"><span class="lineno">  491</span> </div>
+<div class="line"><span class="lineno">  492</span>    <span class="keyword">auto</span> oldBusType = busType;</div>
+<div class="line"><span class="lineno">  493</span> </div>
+<div class="line"><span class="lineno">  494</span>    <span class="keywordtype">int</span> iteration = 0;  <span class="comment">// Current itaration number.</span></div>
+<div class="line"><span class="lineno">  495</span> </div>
+<div class="line"><span class="lineno">  496</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><span class="lineno">  497</span>        <span class="comment">// Reach the max number of iterations.</span></div>
+<div class="line"><span class="lineno">  498</span>        <span class="keywordflow">if</span> (iteration &gt;= maxIteration) {</div>
+<div class="line"><span class="lineno">  499</span>            m_errorMsg = _(<span class="stringliteral">&quot;The maximum number of iterations was reached.&quot;</span>);</div>
 <div class="line"><span class="lineno">  500</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  501</span>        }</div>
 <div class="line"><span class="lineno">  502</span> </div>
-<div class="line"><span class="lineno">  503</span>        <span class="comment">// Update the old voltage array to current iteration values.</span></div>
-<div class="line"><span class="lineno">  504</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) oldVoltage[i] = voltage[i];</div>
-<div class="line"><span class="lineno">  505</span> </div>
-<div class="line"><span class="lineno">  506</span>        <span class="keywordtype">double</span> iterationError = GaussSeidel(busType, voltage, oldVoltage, power, accFactor);</div>
-<div class="line"><span class="lineno">  507</span> </div>
-<div class="line"><span class="lineno">  508</span>        <span class="keywordflow">if</span> (iterationError &lt; gaussTol) <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  509</span> </div>
-<div class="line"><span class="lineno">  510</span>        iteration++;</div>
-<div class="line"><span class="lineno">  511</span>    }</div>
-<div class="line"><span class="lineno">  512</span> </div>
-<div class="line"><span class="lineno">  513</span>    <span class="comment">// Newton-Raphson method</span></div>
-<div class="line"><span class="lineno">  514</span>    <span class="keywordtype">int</span> numPQ = 0;  <span class="comment">// Number of PQ buses</span></div>
-<div class="line"><span class="lineno">  515</span>    <span class="keywordtype">int</span> numPV = 0;  <span class="comment">// Number of PV buses</span></div>
-<div class="line"><span class="lineno">  516</span>    GetNumPVPQ(busType, numPQ, numPV);</div>
-<div class="line"><span class="lineno">  517</span> </div>
-<div class="line"><span class="lineno">  518</span>    <span class="comment">// DeltaP and DeltaQ array</span></div>
-<div class="line"><span class="lineno">  519</span>    std::vector&lt;double&gt; dPdQ;</div>
-<div class="line"><span class="lineno">  520</span>    dPdQ.resize(numPV + 2 * numPQ, 0.0);</div>
-<div class="line"><span class="lineno">  521</span> </div>
-<div class="line"><span class="lineno">  522</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line"><span class="lineno">  523</span>        <span class="comment">// Reach the max number of iterations.</span></div>
-<div class="line"><span class="lineno">  524</span>        <span class="keywordflow">if</span> (iteration &gt;= maxIteration) {</div>
-<div class="line"><span class="lineno">  525</span>            m_errorMsg = _(<span class="stringliteral">&quot;The maximum number of iterations was reached.&quot;</span>);</div>
-<div class="line"><span class="lineno">  526</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  527</span>        }</div>
-<div class="line"><span class="lineno">  528</span> </div>
-<div class="line"><span class="lineno">  529</span>        <span class="comment">// Calculate induction motor reactive power</span></div>
-<div class="line"><span class="lineno">  530</span>        <span class="keywordflow">if</span> (!CalculateMotorsReactivePower(voltage, power)) {</div>
-<div class="line"><span class="lineno">  531</span>            m_errorMsg = _(<span class="stringliteral">&quot;It was not possible to solve the induction motors.&quot;</span>);</div>
+<div class="line"><span class="lineno">  503</span>        <span class="comment">// Calculate induction motor reactive power</span></div>
+<div class="line"><span class="lineno">  504</span>        <span class="keywordflow">if</span> (!CalculateMotorsReactivePower(voltage, power)) {</div>
+<div class="line"><span class="lineno">  505</span>            m_errorMsg = _(<span class="stringliteral">&quot;It was not possible to solve the induction motors.&quot;</span>);</div>
+<div class="line"><span class="lineno">  506</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  507</span>        }</div>
+<div class="line"><span class="lineno">  508</span> </div>
+<div class="line"><span class="lineno">  509</span>        <span class="comment">// Update the old voltage array to current iteration values.</span></div>
+<div class="line"><span class="lineno">  510</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) oldVoltage[i] = voltage[i];</div>
+<div class="line"><span class="lineno">  511</span> </div>
+<div class="line"><span class="lineno">  512</span>        <span class="keywordtype">double</span> iterationError = GaussSeidel(busType, voltage, oldVoltage, power, accFactor);</div>
+<div class="line"><span class="lineno">  513</span> </div>
+<div class="line"><span class="lineno">  514</span>        <span class="keywordflow">if</span> (iterationError &lt; gaussTol) <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  515</span> </div>
+<div class="line"><span class="lineno">  516</span>        iteration++;</div>
+<div class="line"><span class="lineno">  517</span>    }</div>
+<div class="line"><span class="lineno">  518</span> </div>
+<div class="line"><span class="lineno">  519</span>    <span class="comment">// Newton-Raphson method</span></div>
+<div class="line"><span class="lineno">  520</span>    <span class="keywordtype">int</span> numPQ = 0;  <span class="comment">// Number of PQ buses</span></div>
+<div class="line"><span class="lineno">  521</span>    <span class="keywordtype">int</span> numPV = 0;  <span class="comment">// Number of PV buses</span></div>
+<div class="line"><span class="lineno">  522</span>    GetNumPVPQ(busType, numPQ, numPV);</div>
+<div class="line"><span class="lineno">  523</span> </div>
+<div class="line"><span class="lineno">  524</span>    <span class="comment">// DeltaP and DeltaQ array</span></div>
+<div class="line"><span class="lineno">  525</span>    std::vector&lt;double&gt; dPdQ;</div>
+<div class="line"><span class="lineno">  526</span>    dPdQ.resize(numPV + 2 * numPQ, 0.0);</div>
+<div class="line"><span class="lineno">  527</span> </div>
+<div class="line"><span class="lineno">  528</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><span class="lineno">  529</span>        <span class="comment">// Reach the max number of iterations.</span></div>
+<div class="line"><span class="lineno">  530</span>        <span class="keywordflow">if</span> (iteration &gt;= maxIteration) {</div>
+<div class="line"><span class="lineno">  531</span>            m_errorMsg = _(<span class="stringliteral">&quot;The maximum number of iterations was reached.&quot;</span>);</div>
 <div class="line"><span class="lineno">  532</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  533</span>        }</div>
 <div class="line"><span class="lineno">  534</span> </div>
-<div class="line"><span class="lineno">  535</span>        <span class="comment">// Calculate dPdQ array</span></div>
-<div class="line"><span class="lineno">  536</span> </div>
-<div class="line"><span class="lineno">  537</span>        <span class="comment">// Fill it with zeros</span></div>
-<div class="line"><span class="lineno">  538</span>        std::fill(dPdQ.begin(), dPdQ.end(), 0.0);</div>
-<div class="line"><span class="lineno">  539</span> </div>
-<div class="line"><span class="lineno">  540</span>        <span class="keywordtype">int</span> indexDP = 0;</div>
-<div class="line"><span class="lineno">  541</span>        <span class="keywordtype">int</span> indexDQ = numPQ + numPV;</div>
-<div class="line"><span class="lineno">  542</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
-<div class="line"><span class="lineno">  543</span>            <span class="keywordflow">if</span> (busType[i] != <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>) {</div>
-<div class="line"><span class="lineno">  544</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m_numberOfBuses; j++) {</div>
-<div class="line"><span class="lineno">  545</span>                    <span class="comment">// PV ou PQ bus</span></div>
-<div class="line"><span class="lineno">  546</span>                    std::complex&lt;double&gt; sInj = std::conj(m_yBus[i][j]) * voltage[i] * std::conj(voltage[j]);</div>
-<div class="line"><span class="lineno">  547</span>                    dPdQ[indexDP] += sInj.real();</div>
-<div class="line"><span class="lineno">  548</span> </div>
-<div class="line"><span class="lineno">  549</span>                    <span class="comment">// PQ bus</span></div>
-<div class="line"><span class="lineno">  550</span>                    <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) dPdQ[indexDQ] += sInj.imag();</div>
-<div class="line"><span class="lineno">  551</span>                }</div>
-<div class="line"><span class="lineno">  552</span> </div>
-<div class="line"><span class="lineno">  553</span>                <span class="comment">// PQ or PV bus</span></div>
-<div class="line"><span class="lineno">  554</span>                dPdQ[indexDP] = power[i].real() - dPdQ[indexDP];</div>
-<div class="line"><span class="lineno">  555</span>                indexDP++;</div>
-<div class="line"><span class="lineno">  556</span> </div>
-<div class="line"><span class="lineno">  557</span>                <span class="comment">// PQ bus</span></div>
-<div class="line"><span class="lineno">  558</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) {</div>
-<div class="line"><span class="lineno">  559</span>                    dPdQ[indexDQ] = power[i].imag() - dPdQ[indexDQ];</div>
-<div class="line"><span class="lineno">  560</span>                    indexDQ++;</div>
-<div class="line"><span class="lineno">  561</span>                }</div>
-<div class="line"><span class="lineno">  562</span>            }</div>
-<div class="line"><span class="lineno">  563</span>        }</div>
-<div class="line"><span class="lineno">  564</span> </div>
-<div class="line"><span class="lineno">  565</span>        <span class="comment">// Calculate the iteration error</span></div>
-<div class="line"><span class="lineno">  566</span>        <span class="keywordtype">double</span> iterationError = 0.0;</div>
-<div class="line"><span class="lineno">  567</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dPdQ.size(); ++i) {</div>
-<div class="line"><span class="lineno">  568</span>            <span class="keywordflow">if</span> (iterationError &lt; std::abs(dPdQ[i])) iterationError = std::abs(dPdQ[i]);</div>
+<div class="line"><span class="lineno">  535</span>        <span class="comment">// Calculate induction motor reactive power</span></div>
+<div class="line"><span class="lineno">  536</span>        <span class="keywordflow">if</span> (!CalculateMotorsReactivePower(voltage, power)) {</div>
+<div class="line"><span class="lineno">  537</span>            m_errorMsg = _(<span class="stringliteral">&quot;It was not possible to solve the induction motors.&quot;</span>);</div>
+<div class="line"><span class="lineno">  538</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  539</span>        }</div>
+<div class="line"><span class="lineno">  540</span> </div>
+<div class="line"><span class="lineno">  541</span>        <span class="comment">// Calculate dPdQ array</span></div>
+<div class="line"><span class="lineno">  542</span> </div>
+<div class="line"><span class="lineno">  543</span>        <span class="comment">// Fill it with zeros</span></div>
+<div class="line"><span class="lineno">  544</span>        std::fill(dPdQ.begin(), dPdQ.end(), 0.0);</div>
+<div class="line"><span class="lineno">  545</span> </div>
+<div class="line"><span class="lineno">  546</span>        <span class="keywordtype">int</span> indexDP = 0;</div>
+<div class="line"><span class="lineno">  547</span>        <span class="keywordtype">int</span> indexDQ = numPQ + numPV;</div>
+<div class="line"><span class="lineno">  548</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
+<div class="line"><span class="lineno">  549</span>            <span class="keywordflow">if</span> (busType[i] != <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46a502b94576742ccd5df46407ac01bbcd6">BUS_SLACK</a>) {</div>
+<div class="line"><span class="lineno">  550</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m_numberOfBuses; j++) {</div>
+<div class="line"><span class="lineno">  551</span>                    <span class="comment">// PV ou PQ bus</span></div>
+<div class="line"><span class="lineno">  552</span>                    std::complex&lt;double&gt; sInj = std::conj(m_yBus[i][j]) * voltage[i] * std::conj(voltage[j]);</div>
+<div class="line"><span class="lineno">  553</span>                    dPdQ[indexDP] += sInj.real();</div>
+<div class="line"><span class="lineno">  554</span> </div>
+<div class="line"><span class="lineno">  555</span>                    <span class="comment">// PQ bus</span></div>
+<div class="line"><span class="lineno">  556</span>                    <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) dPdQ[indexDQ] += sInj.imag();</div>
+<div class="line"><span class="lineno">  557</span>                }</div>
+<div class="line"><span class="lineno">  558</span> </div>
+<div class="line"><span class="lineno">  559</span>                <span class="comment">// PQ or PV bus</span></div>
+<div class="line"><span class="lineno">  560</span>                dPdQ[indexDP] = power[i].real() - dPdQ[indexDP];</div>
+<div class="line"><span class="lineno">  561</span>                indexDP++;</div>
+<div class="line"><span class="lineno">  562</span> </div>
+<div class="line"><span class="lineno">  563</span>                <span class="comment">// PQ bus</span></div>
+<div class="line"><span class="lineno">  564</span>                <span class="keywordflow">if</span> (busType[i] == <a class="code hl_enumvalue" href="_electric_calculation_8h.html#a5e19c75c2809d2f27eb33a29d1971b46ad34e8d84ffe84ee6201c93fd25a1db83">BUS_PQ</a>) {</div>
+<div class="line"><span class="lineno">  565</span>                    dPdQ[indexDQ] = power[i].imag() - dPdQ[indexDQ];</div>
+<div class="line"><span class="lineno">  566</span>                    indexDQ++;</div>
+<div class="line"><span class="lineno">  567</span>                }</div>
+<div class="line"><span class="lineno">  568</span>            }</div>
 <div class="line"><span class="lineno">  569</span>        }</div>
 <div class="line"><span class="lineno">  570</span> </div>
-<div class="line"><span class="lineno">  571</span>        <span class="comment">// Check if the iteration error is less than tolerance, also check if any reactive limit was reached.</span></div>
-<div class="line"><span class="lineno">  572</span>        <span class="comment">// If any reactive limit was reached, change the bus type.</span></div>
-<div class="line"><span class="lineno">  573</span>        <span class="keywordflow">if</span> (iterationError &lt; error) {</div>
-<div class="line"><span class="lineno">  574</span>            <span class="keywordtype">double</span> emtPowerError = <a class="code hl_function" href="class_electric_calculation.html#a6841d70b9458fec69972d3abe3b80f02">CalculateEMTPowerError</a>(voltage, power, systemPowerBase, m_errorMsg);</div>
-<div class="line"><span class="lineno">  575</span> </div>
-<div class="line"><span class="lineno">  576</span>            <span class="keywordflow">if</span> (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) &amp;&amp; emtPowerError &lt; error)</div>
-<div class="line"><span class="lineno">  577</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  578</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  579</span>                GetNumPVPQ(busType, numPQ, numPV);</div>
-<div class="line"><span class="lineno">  580</span>                dPdQ.clear();</div>
-<div class="line"><span class="lineno">  581</span>                dPdQ.resize(numPV + 2 * numPQ, 0.0);</div>
-<div class="line"><span class="lineno">  582</span>            }</div>
-<div class="line"><span class="lineno">  583</span>        }</div>
-<div class="line"><span class="lineno">  584</span> </div>
-<div class="line"><span class="lineno">  585</span>        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);</div>
-<div class="line"><span class="lineno">  586</span> </div>
-<div class="line"><span class="lineno">  587</span>        iteration++;</div>
-<div class="line"><span class="lineno">  588</span>    }</div>
-<div class="line"><span class="lineno">  589</span>    m_iterations = iteration;</div>
+<div class="line"><span class="lineno">  571</span>        <span class="comment">// Calculate the iteration error</span></div>
+<div class="line"><span class="lineno">  572</span>        <span class="keywordtype">double</span> iterationError = 0.0;</div>
+<div class="line"><span class="lineno">  573</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dPdQ.size(); ++i) {</div>
+<div class="line"><span class="lineno">  574</span>            <span class="keywordflow">if</span> (iterationError &lt; std::abs(dPdQ[i])) iterationError = std::abs(dPdQ[i]);</div>
+<div class="line"><span class="lineno">  575</span>        }</div>
+<div class="line"><span class="lineno">  576</span> </div>
+<div class="line"><span class="lineno">  577</span>        <span class="comment">// Check if the iteration error is less than tolerance, also check if any reactive limit was reached.</span></div>
+<div class="line"><span class="lineno">  578</span>        <span class="comment">// If any reactive limit was reached, change the bus type.</span></div>
+<div class="line"><span class="lineno">  579</span>        <span class="keywordflow">if</span> (iterationError &lt; error) {</div>
+<div class="line"><span class="lineno">  580</span>            <span class="keywordtype">double</span> emtPowerError = <a class="code hl_function" href="class_electric_calculation.html#a6841d70b9458fec69972d3abe3b80f02">CalculateEMTPowerError</a>(voltage, power, systemPowerBase, m_errorMsg);</div>
+<div class="line"><span class="lineno">  581</span> </div>
+<div class="line"><span class="lineno">  582</span>            <span class="keywordflow">if</span> (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) &amp;&amp; emtPowerError &lt; error)</div>
+<div class="line"><span class="lineno">  583</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  584</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  585</span>                GetNumPVPQ(busType, numPQ, numPV);</div>
+<div class="line"><span class="lineno">  586</span>                dPdQ.clear();</div>
+<div class="line"><span class="lineno">  587</span>                dPdQ.resize(numPV + 2 * numPQ, 0.0);</div>
+<div class="line"><span class="lineno">  588</span>            }</div>
+<div class="line"><span class="lineno">  589</span>        }</div>
 <div class="line"><span class="lineno">  590</span> </div>
-<div class="line"><span class="lineno">  591</span>    <span class="comment">// Adjust the power array.</span></div>
-<div class="line"><span class="lineno">  592</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
-<div class="line"><span class="lineno">  593</span>        std::complex&lt;double&gt; sBus = std::complex&lt;double&gt;(0.0, 0.0);</div>
-<div class="line"><span class="lineno">  594</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m_numberOfBuses; j++) sBus += voltage[i] * std::conj(voltage[j]) * std::conj(m_yBus[i][j]);</div>
-<div class="line"><span class="lineno">  595</span>        power[i] = sBus;</div>
-<div class="line"><span class="lineno">  596</span>    }</div>
-<div class="line"><span class="lineno">  597</span> </div>
-<div class="line"><span class="lineno">  598</span>    <a class="code hl_function" href="class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049">UpdateElementsPowerFlow</a>(voltage, power, oldBusType, reactiveLimit, systemPowerBase);</div>
-<div class="line"><span class="lineno">  599</span> </div>
-<div class="line"><span class="lineno">  600</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  601</span>}</div>
+<div class="line"><span class="lineno">  591</span>        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);</div>
+<div class="line"><span class="lineno">  592</span> </div>
+<div class="line"><span class="lineno">  593</span>        iteration++;</div>
+<div class="line"><span class="lineno">  594</span>    }</div>
+<div class="line"><span class="lineno">  595</span>    m_iterations = iteration;</div>
+<div class="line"><span class="lineno">  596</span> </div>
+<div class="line"><span class="lineno">  597</span>    <span class="comment">// Adjust the power array.</span></div>
+<div class="line"><span class="lineno">  598</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
+<div class="line"><span class="lineno">  599</span>        std::complex&lt;double&gt; sBus = std::complex&lt;double&gt;(0.0, 0.0);</div>
+<div class="line"><span class="lineno">  600</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m_numberOfBuses; j++) sBus += voltage[i] * std::conj(voltage[j]) * std::conj(m_yBus[i][j]);</div>
+<div class="line"><span class="lineno">  601</span>        power[i] = sBus;</div>
+<div class="line"><span class="lineno">  602</span>    }</div>
+<div class="line"><span class="lineno">  603</span> </div>
+<div class="line"><span class="lineno">  604</span>    <a class="code hl_function" href="class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049">UpdateElementsPowerFlow</a>(voltage, power, oldBusType, reactiveLimit, systemPowerBase);</div>
+<div class="line"><span class="lineno">  605</span> </div>
+<div class="line"><span class="lineno">  606</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  607</span>}</div>
 <div class="ttc" id="aclass_electric_calculation_html_a1d417da6eeb8c12f7be6501fff6f7049"><div class="ttname"><a href="class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049">ElectricCalculation::UpdateElementsPowerFlow</a></div><div class="ttdeci">virtual void UpdateElementsPowerFlow(std::vector&lt; std::complex&lt; double &gt; &gt; voltage, std::vector&lt; std::complex&lt; double &gt; &gt; power, std::vector&lt; BusType &gt; busType, std::vector&lt; ReactiveLimits &gt; reactiveLimit, double systemPowerBase)</div><div class="ttdoc">Update the elements after the power flow calculation.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l00453">ElectricCalculation.cpp:453</a></div></div>
 <div class="ttc" id="aclass_electric_calculation_html_a6841d70b9458fec69972d3abe3b80f02"><div class="ttname"><a href="class_electric_calculation.html#a6841d70b9458fec69972d3abe3b80f02">ElectricCalculation::CalculateEMTPowerError</a></div><div class="ttdeci">double CalculateEMTPowerError(const std::vector&lt; std::complex&lt; double &gt; &gt; &amp;voltage, std::vector&lt; std::complex&lt; double &gt; &gt; &amp;power, const double &amp;basePower, wxString &amp;errorMsg)</div><div class="ttdoc">Calculate the power mismatch error for EMT simulation.</div><div class="ttdef"><b>Definition</b> <a href="_electric_calculation_8cpp_source.html#l01109">ElectricCalculation.cpp:1109</a></div></div>
 </div><!-- fragment -->
@@ -1879,47 +1879,53 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  421</span>        <span class="comment">// Check if the iteration error is less than tolerance, also check if any reactive limit was reached.</span></div>
 <div class="line"><span class="lineno">  422</span>        <span class="comment">// If any reactive limit was reached, change the bus type.</span></div>
 <div class="line"><span class="lineno">  423</span>        <span class="keywordflow">if</span> (iterationError &lt; error) {</div>
-<div class="line"><span class="lineno">  424</span>            <span class="keywordtype">double</span> emtPowerError = <a class="code hl_function" href="class_electric_calculation.html#a6841d70b9458fec69972d3abe3b80f02">CalculateEMTPowerError</a>(voltage, power, systemPowerBase, m_errorMsg);</div>
-<div class="line"><span class="lineno">  425</span> </div>
-<div class="line"><span class="lineno">  426</span>            <span class="keywordflow">if</span> (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) &amp;&amp; emtPowerError &lt; error)</div>
-<div class="line"><span class="lineno">  427</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  428</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  429</span>                GetNumPVPQ(busType, numPQ, numPV);</div>
-<div class="line"><span class="lineno">  430</span>                dPdQ.clear();</div>
-<div class="line"><span class="lineno">  431</span>                dPdQ.resize(numPV + 2 * numPQ, 0.0);</div>
-<div class="line"><span class="lineno">  432</span>            }</div>
-<div class="line"><span class="lineno">  433</span>        }</div>
-<div class="line"><span class="lineno">  434</span> </div>
-<div class="line"><span class="lineno">  435</span>        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);</div>
-<div class="line"><span class="lineno">  436</span> </div>
-<div class="line"><span class="lineno">  437</span>        <span class="keywordflow">if</span> (HasInvalidValue(voltage)) {</div>
-<div class="line"><span class="lineno">  438</span>            m_errorMsg = _(<span class="stringliteral">&quot;The power flow solution has invalid voltage values.&quot;</span>);</div>
-<div class="line"><span class="lineno">  439</span>            ResetVoltages();</div>
-<div class="line"><span class="lineno">  440</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  441</span>        }</div>
-<div class="line"><span class="lineno">  442</span>        <span class="keywordflow">if</span> (HasInvalidValue(power)) {</div>
-<div class="line"><span class="lineno">  443</span>            m_errorMsg = _(<span class="stringliteral">&quot;The power flow solution has invalid power values.&quot;</span>);</div>
-<div class="line"><span class="lineno">  444</span>            ResetVoltages();</div>
-<div class="line"><span class="lineno">  445</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  446</span>        }</div>
-<div class="line"><span class="lineno">  447</span> </div>
-<div class="line"><span class="lineno">  448</span>        iteration++;</div>
-<div class="line"><span class="lineno">  449</span>    }</div>
-<div class="line"><span class="lineno">  450</span>    m_iterations = iteration;</div>
-<div class="line"><span class="lineno">  451</span> </div>
-<div class="line"><span class="lineno">  452</span> </div>
+<div class="line"><span class="lineno">  424</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
+<div class="line"><span class="lineno">  425</span>                std::complex&lt;double&gt; sBus(0.0, 0.0);</div>
+<div class="line"><span class="lineno">  426</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m_numberOfBuses; j++)</div>
+<div class="line"><span class="lineno">  427</span>                    sBus += voltage[i] * std::conj(voltage[j]) * std::conj(m_yBus[i][j]);</div>
+<div class="line"><span class="lineno">  428</span>                power[i] = sBus;</div>
+<div class="line"><span class="lineno">  429</span>            }</div>
+<div class="line"><span class="lineno">  430</span> </div>
+<div class="line"><span class="lineno">  431</span>            <span class="keywordtype">double</span> emtPowerError = <a class="code hl_function" href="class_electric_calculation.html#a6841d70b9458fec69972d3abe3b80f02">CalculateEMTPowerError</a>(voltage, power, systemPowerBase, m_errorMsg);</div>
+<div class="line"><span class="lineno">  432</span> </div>
+<div class="line"><span class="lineno">  433</span>            <span class="keywordflow">if</span> (!CheckReactiveLimits(busType, reactiveLimit, power, loadPower) &amp;&amp; emtPowerError &lt; error)</div>
+<div class="line"><span class="lineno">  434</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  435</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  436</span>                GetNumPVPQ(busType, numPQ, numPV);</div>
+<div class="line"><span class="lineno">  437</span>                dPdQ.assign(numPV + 2 * numPQ, 0.0);</div>
+<div class="line"><span class="lineno">  438</span>            }</div>
+<div class="line"><span class="lineno">  439</span>        }</div>
+<div class="line"><span class="lineno">  440</span> </div>
+<div class="line"><span class="lineno">  441</span>        NewtonRaphson(busType, voltage, power, numPV, numPQ, dPdQ, inertia);</div>
+<div class="line"><span class="lineno">  442</span> </div>
+<div class="line"><span class="lineno">  443</span>        <span class="keywordflow">if</span> (HasInvalidValue(voltage)) {</div>
+<div class="line"><span class="lineno">  444</span>            m_errorMsg = _(<span class="stringliteral">&quot;The power flow solution has invalid voltage values.&quot;</span>);</div>
+<div class="line"><span class="lineno">  445</span>            ResetVoltages();</div>
+<div class="line"><span class="lineno">  446</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  447</span>        }</div>
+<div class="line"><span class="lineno">  448</span>        <span class="keywordflow">if</span> (HasInvalidValue(power)) {</div>
+<div class="line"><span class="lineno">  449</span>            m_errorMsg = _(<span class="stringliteral">&quot;The power flow solution has invalid power values.&quot;</span>);</div>
+<div class="line"><span class="lineno">  450</span>            ResetVoltages();</div>
+<div class="line"><span class="lineno">  451</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  452</span>        }</div>
 <div class="line"><span class="lineno">  453</span> </div>
-<div class="line"><span class="lineno">  454</span>    <span class="comment">// Adjust the power array.</span></div>
-<div class="line"><span class="lineno">  455</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
-<div class="line"><span class="lineno">  456</span>        std::complex&lt;double&gt; sBus = std::complex&lt;double&gt;(0.0, 0.0);</div>
-<div class="line"><span class="lineno">  457</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m_numberOfBuses; j++) sBus += voltage[i] * std::conj(voltage[j]) * std::conj(m_yBus[i][j]);</div>
-<div class="line"><span class="lineno">  458</span>        power[i] = sBus;</div>
-<div class="line"><span class="lineno">  459</span>    }</div>
-<div class="line"><span class="lineno">  460</span> </div>
-<div class="line"><span class="lineno">  461</span>    <a class="code hl_function" href="class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049">UpdateElementsPowerFlow</a>(voltage, power, oldBusType, reactiveLimit, systemPowerBase);</div>
-<div class="line"><span class="lineno">  462</span> </div>
-<div class="line"><span class="lineno">  463</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  464</span>}</div>
+<div class="line"><span class="lineno">  454</span>        iteration++;</div>
+<div class="line"><span class="lineno">  455</span>    }</div>
+<div class="line"><span class="lineno">  456</span>    m_iterations = iteration;</div>
+<div class="line"><span class="lineno">  457</span> </div>
+<div class="line"><span class="lineno">  458</span> </div>
+<div class="line"><span class="lineno">  459</span> </div>
+<div class="line"><span class="lineno">  460</span>    <span class="comment">// Adjust the power array.</span></div>
+<div class="line"><span class="lineno">  461</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_numberOfBuses; i++) {</div>
+<div class="line"><span class="lineno">  462</span>        std::complex&lt;double&gt; sBus = std::complex&lt;double&gt;(0.0, 0.0);</div>
+<div class="line"><span class="lineno">  463</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m_numberOfBuses; j++) sBus += voltage[i] * std::conj(voltage[j]) * std::conj(m_yBus[i][j]);</div>
+<div class="line"><span class="lineno">  464</span>        power[i] = sBus;</div>
+<div class="line"><span class="lineno">  465</span>    }</div>
+<div class="line"><span class="lineno">  466</span> </div>
+<div class="line"><span class="lineno">  467</span>    <a class="code hl_function" href="class_electric_calculation.html#a1d417da6eeb8c12f7be6501fff6f7049">UpdateElementsPowerFlow</a>(voltage, power, oldBusType, reactiveLimit, systemPowerBase);</div>
+<div class="line"><span class="lineno">  468</span> </div>
+<div class="line"><span class="lineno">  469</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  470</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -775,11 +775,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00685">685</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  686</span>{</div>
-<div class="line"><span class="lineno">  687</span>    <span class="keywordflow">if</span> (m_auiNotebook-&gt;GetPageCount() == 0) EnableCurrentProjectRibbon(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  688</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  689</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00683">683</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  684</span>{</div>
+<div class="line"><span class="lineno">  685</span>    <span class="keywordflow">if</span> (m_auiNotebook-&gt;GetPageCount() == 0) EnableCurrentProjectRibbon(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  686</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  687</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -809,22 +809,22 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00691">691</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  692</span>{</div>
-<div class="line"><span class="lineno">  693</span>    <span class="keyword">auto</span> it = m_workspaceList.begin();</div>
-<div class="line"><span class="lineno">  694</span>    <span class="keywordflow">while</span> (it != m_workspaceList.end()) {</div>
-<div class="line"><span class="lineno">  695</span>        <span class="keywordflow">if</span> (*it == m_auiNotebook-&gt;GetCurrentPage()) {</div>
-<div class="line"><span class="lineno">  696</span>            <span class="comment">//if ((*it)-&gt;GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = nullptr;</span></div>
-<div class="line"><span class="lineno">  697</span>            m_workspaceList.erase(it);</div>
-<div class="line"><span class="lineno">  698</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  699</span>        }</div>
-<div class="line"><span class="lineno">  700</span>        ++it;</div>
-<div class="line"><span class="lineno">  701</span>    }</div>
-<div class="line"><span class="lineno">  702</span>    <span class="comment">//if (!m_sharedGLContext &amp;&amp; m_workspaceList.size() != 0) {</span></div>
-<div class="line"><span class="lineno">  703</span>    <span class="comment">//  m_sharedGLContext = m_workspaceList[0]-&gt;GetSharedGLContext();</span></div>
-<div class="line"><span class="lineno">  704</span>    <span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  705</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  706</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00689">689</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  690</span>{</div>
+<div class="line"><span class="lineno">  691</span>    <span class="keyword">auto</span> it = m_workspaceList.begin();</div>
+<div class="line"><span class="lineno">  692</span>    <span class="keywordflow">while</span> (it != m_workspaceList.end()) {</div>
+<div class="line"><span class="lineno">  693</span>        <span class="keywordflow">if</span> (*it == m_auiNotebook-&gt;GetCurrentPage()) {</div>
+<div class="line"><span class="lineno">  694</span>            <span class="comment">//if ((*it)-&gt;GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = nullptr;</span></div>
+<div class="line"><span class="lineno">  695</span>            m_workspaceList.erase(it);</div>
+<div class="line"><span class="lineno">  696</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  697</span>        }</div>
+<div class="line"><span class="lineno">  698</span>        ++it;</div>
+<div class="line"><span class="lineno">  699</span>    }</div>
+<div class="line"><span class="lineno">  700</span>    <span class="comment">//if (!m_sharedGLContext &amp;&amp; m_workspaceList.size() != 0) {</span></div>
+<div class="line"><span class="lineno">  701</span>    <span class="comment">//  m_sharedGLContext = m_workspaceList[0]-&gt;GetSharedGLContext();</span></div>
+<div class="line"><span class="lineno">  702</span>    <span class="comment">//}</span></div>
+<div class="line"><span class="lineno">  703</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  704</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -924,7 +924,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  527</span> </div>
 <div class="line"><span class="lineno">  528</span>    <span class="keywordflow">if</span> (workspace) {</div>
 <div class="line"><span class="lineno">  529</span>        <span class="keywordflow">if</span> (workspace-&gt;GetWorkspaceMode() != Workspace::WorkspaceMode::MODE_INSERT) {</div>
-<div class="line"><span class="lineno">  530</span>            <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
+<div class="line"><span class="lineno">  530</span>            <span class="keyword">auto</span> elementList = workspace-&gt;GetElementSharedList();</div>
 <div class="line"><span class="lineno">  531</span>            <span class="keyword">auto</span> textList = workspace-&gt;GetTextList();</div>
 <div class="line"><span class="lineno">  532</span>            wxString statusBarText = <span class="stringliteral">&quot;&quot;</span>;</div>
 <div class="line"><span class="lineno">  533</span>            <span class="keywordtype">bool</span> newElement = <span class="keyword">false</span>;</div>
@@ -932,7 +932,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  535</span> </div>
 <div class="line"><span class="lineno">  536</span>            <span class="keywordflow">switch</span> (event.GetId()) {</div>
 <div class="line"><span class="lineno">  537</span>            <span class="keywordflow">case</span> ID_ADDMENU_BUS: {</div>
-<div class="line"><span class="lineno">  538</span>                <a class="code hl_class" href="class_bus.html">Bus</a>* newBus = <span class="keyword">new</span> <a class="code hl_class" href="class_bus.html">Bus</a>(wxPoint2DDouble(0, 0),</div>
+<div class="line"><span class="lineno">  538</span>                <span class="keyword">auto</span> newBus = std::make_shared&lt;Bus&gt;(wxPoint2DDouble(0, 0),</div>
 <div class="line"><span class="lineno">  539</span>                    wxString::Format(_(<span class="stringliteral">&quot;Bus %d&quot;</span>), workspace-&gt;GetElementNumber(ID_BUS)));</div>
 <div class="line"><span class="lineno">  540</span>                workspace-&gt;IncrementElementNumber(ID_BUS);</div>
 <div class="line"><span class="lineno">  541</span>                elementList.push_back(newBus);</div>
@@ -940,14 +940,14 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  543</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  544</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  545</span>            <span class="keywordflow">case</span> ID_ADDMENU_LINE: {</div>
-<div class="line"><span class="lineno">  546</span>                <a class="code hl_class" href="class_line.html">Line</a>* newLine = <span class="keyword">new</span> <a class="code hl_class" href="class_line.html">Line</a>(wxString::Format(_(<span class="stringliteral">&quot;Line %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LINE)));</div>
+<div class="line"><span class="lineno">  546</span>                <span class="keyword">auto</span> newLine = std::make_shared&lt;Line&gt;(wxString::Format(_(<span class="stringliteral">&quot;Line %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LINE)));</div>
 <div class="line"><span class="lineno">  547</span>                elementList.push_back(newLine);</div>
 <div class="line"><span class="lineno">  548</span>                workspace-&gt;IncrementElementNumber(ID_LINE);</div>
 <div class="line"><span class="lineno">  549</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Line: Click on two buses, ESC to cancel.&quot;</span>);</div>
 <div class="line"><span class="lineno">  550</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  551</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  552</span>            <span class="keywordflow">case</span> ID_ADDMENU_TRANSFORMER: {</div>
-<div class="line"><span class="lineno">  553</span>                <a class="code hl_class" href="class_transformer.html">Transformer</a>* newTransformer = <span class="keyword">new</span> <a class="code hl_class" href="class_transformer.html">Transformer</a>(</div>
+<div class="line"><span class="lineno">  553</span>                <span class="keyword">auto</span> newTransformer = std::make_shared &lt;Transformer&gt;(</div>
 <div class="line"><span class="lineno">  554</span>                    wxString::Format(_(<span class="stringliteral">&quot;Transformer %d&quot;</span>), workspace-&gt;GetElementNumber(ID_TRANSFORMER)));</div>
 <div class="line"><span class="lineno">  555</span>                workspace-&gt;IncrementElementNumber(ID_TRANSFORMER);</div>
 <div class="line"><span class="lineno">  556</span>                elementList.push_back(newTransformer);</div>
@@ -955,7 +955,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  558</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  559</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  560</span>            <span class="keywordflow">case</span> ID_ADDMENU_GENERATOR: {</div>
-<div class="line"><span class="lineno">  561</span>                <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* newGenerator = <span class="keyword">new</span> <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>(</div>
+<div class="line"><span class="lineno">  561</span>                <span class="keyword">auto</span> newGenerator = std::make_shared&lt;SyncGenerator&gt;(</div>
 <div class="line"><span class="lineno">  562</span>                    wxString::Format(_(<span class="stringliteral">&quot;Generator %d&quot;</span>), workspace-&gt;GetElementNumber(ID_SYNCGENERATOR)));</div>
 <div class="line"><span class="lineno">  563</span>                workspace-&gt;IncrementElementNumber(ID_SYNCGENERATOR);</div>
 <div class="line"><span class="lineno">  564</span>                elementList.push_back(newGenerator);</div>
@@ -963,92 +963,79 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">  566</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  567</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  568</span>            <span class="keywordflow">case</span> ID_ADDMENU_LOAD: {</div>
-<div class="line"><span class="lineno">  569</span>                <a class="code hl_class" href="class_load.html">Load</a>* newLoad = <span class="keyword">new</span> <a class="code hl_class" href="class_load.html">Load</a>(wxString::Format(_(<span class="stringliteral">&quot;Load %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LOAD)));</div>
+<div class="line"><span class="lineno">  569</span>                <span class="keyword">auto</span> newLoad = std::make_shared&lt;Load&gt;(wxString::Format(_(<span class="stringliteral">&quot;Load %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LOAD)));</div>
 <div class="line"><span class="lineno">  570</span>                workspace-&gt;IncrementElementNumber(ID_LOAD);</div>
 <div class="line"><span class="lineno">  571</span>                elementList.push_back(newLoad);</div>
 <div class="line"><span class="lineno">  572</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Load: Click on a bus, ESC to cancel.&quot;</span>);</div>
 <div class="line"><span class="lineno">  573</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  574</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  575</span>            <span class="keywordflow">case</span> ID_ADDMENU_CAPACITOR: {</div>
-<div class="line"><span class="lineno">  576</span>                <a class="code hl_class" href="class_capacitor.html">Capacitor</a>* newCapacitor =</div>
-<div class="line"><span class="lineno">  577</span>                    <span class="keyword">new</span> <a class="code hl_class" href="class_capacitor.html">Capacitor</a>(wxString::Format(_(<span class="stringliteral">&quot;Capacitor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_CAPACITOR)));</div>
-<div class="line"><span class="lineno">  578</span>                workspace-&gt;IncrementElementNumber(ID_CAPACITOR);</div>
-<div class="line"><span class="lineno">  579</span>                elementList.push_back(newCapacitor);</div>
-<div class="line"><span class="lineno">  580</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Capacitor: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><span class="lineno">  581</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  582</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  583</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDUCTOR: {</div>
-<div class="line"><span class="lineno">  584</span>                <a class="code hl_class" href="class_inductor.html">Inductor</a>* newInductor =</div>
-<div class="line"><span class="lineno">  585</span>                    <span class="keyword">new</span> <a class="code hl_class" href="class_inductor.html">Inductor</a>(wxString::Format(_(<span class="stringliteral">&quot;Inductor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
-<div class="line"><span class="lineno">  586</span>                workspace-&gt;IncrementElementNumber(ID_INDUCTOR);</div>
-<div class="line"><span class="lineno">  587</span>                elementList.push_back(newInductor);</div>
-<div class="line"><span class="lineno">  588</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Inductor: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><span class="lineno">  589</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  590</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  591</span>            <span class="keywordflow">case</span> ID_ADDMENU_HARMCURRENT: {</div>
-<div class="line"><span class="lineno">  592</span>                <a class="code hl_class" href="class_harm_current.html">HarmCurrent</a>* newHarmCurrent = <span class="keyword">new</span> <a class="code hl_class" href="class_harm_current.html">HarmCurrent</a>(</div>
-<div class="line"><span class="lineno">  593</span>                    wxString::Format(_(<span class="stringliteral">&quot;Harmonic Current %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
-<div class="line"><span class="lineno">  594</span>                workspace-&gt;IncrementElementNumber(ID_HARMCURRENT);</div>
-<div class="line"><span class="lineno">  595</span>                elementList.push_back(newHarmCurrent);</div>
-<div class="line"><span class="lineno">  596</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Harmonic Current Source: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><span class="lineno">  597</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  598</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  599</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDMOTOR: {</div>
-<div class="line"><span class="lineno">  600</span>                <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* newIndMotor = <span class="keyword">new</span> <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>(</div>
-<div class="line"><span class="lineno">  601</span>                    wxString::Format(_(<span class="stringliteral">&quot;Induction motor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDMOTOR)));</div>
-<div class="line"><span class="lineno">  602</span>                workspace-&gt;IncrementElementNumber(ID_INDMOTOR);</div>
-<div class="line"><span class="lineno">  603</span>                elementList.push_back(newIndMotor);</div>
-<div class="line"><span class="lineno">  604</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Induction Motor: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><span class="lineno">  605</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  606</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  607</span>            <span class="keywordflow">case</span> ID_ADDMENU_SYNCCOMP: {</div>
-<div class="line"><span class="lineno">  608</span>                <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* newSyncCondenser = <span class="keyword">new</span> <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>(</div>
-<div class="line"><span class="lineno">  609</span>                    wxString::Format(_(<span class="stringliteral">&quot;Synchronous condenser %d&quot;</span>), workspace-&gt;GetElementNumber(ID_SYNCMOTOR)));</div>
-<div class="line"><span class="lineno">  610</span>                workspace-&gt;IncrementElementNumber(ID_SYNCMOTOR);</div>
-<div class="line"><span class="lineno">  611</span>                elementList.push_back(newSyncCondenser);</div>
-<div class="line"><span class="lineno">  612</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Synchronous Condenser: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><span class="lineno">  613</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  614</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  615</span>            <span class="keywordflow">case</span> ID_ADDMENU_EMTELEMENT: {</div>
-<div class="line"><span class="lineno">  616</span>                <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* newEMTElement = <span class="keyword">new</span> <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>(wxString::Format(_(<span class="stringliteral">&quot;Electromagnetic Transient %d&quot;</span>), workspace-&gt;GetElementNumber(ID_EMTELEMENT)));</div>
-<div class="line"><span class="lineno">  617</span>                workspace-&gt;IncrementElementNumber(ID_EMTELEMENT);</div>
-<div class="line"><span class="lineno">  618</span>                elementList.push_back(newEMTElement);</div>
-<div class="line"><span class="lineno">  619</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Electromagnetic Transient Element: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><span class="lineno">  620</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  621</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  622</span>            <span class="keywordflow">case</span> ID_ADDMENU_TEXT: {</div>
-<div class="line"><span class="lineno">  623</span>                <span class="comment">//Text* newText = new Text();</span></div>
-<div class="line"><span class="lineno">  624</span>                <span class="keyword">auto</span> newText = std::make_shared&lt;Text&gt;();</div>
-<div class="line"><span class="lineno">  625</span>                textList.push_back(newText);</div>
-<div class="line"><span class="lineno">  626</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Label: Click to insert, ESC to cancel.&quot;</span>);</div>
-<div class="line"><span class="lineno">  627</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  628</span>                isText = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  629</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  630</span>            }</div>
-<div class="line"><span class="lineno">  631</span>            <span class="keywordflow">if</span> (newElement) {</div>
-<div class="line"><span class="lineno">  632</span>                workspace-&gt;SetElementList(elementList);</div>
-<div class="line"><span class="lineno">  633</span>                workspace-&gt;SetTextList(textList);</div>
-<div class="line"><span class="lineno">  634</span>                <span class="keywordflow">if</span> (!isText)</div>
-<div class="line"><span class="lineno">  635</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT);</div>
-<div class="line"><span class="lineno">  636</span>                <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  637</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT_TEXT);</div>
-<div class="line"><span class="lineno">  638</span>                workspace-&gt;SetStatusBarText(statusBarText);</div>
-<div class="line"><span class="lineno">  639</span>                workspace-&gt;Redraw();</div>
-<div class="line"><span class="lineno">  640</span>            }</div>
-<div class="line"><span class="lineno">  641</span>        }</div>
-<div class="line"><span class="lineno">  642</span>    }</div>
-<div class="line"><span class="lineno">  643</span>}</div>
-<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
-<div class="ttc" id="aclass_capacitor_html"><div class="ttname"><a href="class_capacitor.html">Capacitor</a></div><div class="ttdoc">Shunt capactior power element.</div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00038">Capacitor.h:39</a></div></div>
-<div class="ttc" id="aclass_e_m_t_element_html"><div class="ttname"><a href="class_e_m_t_element.html">EMTElement</a></div><div class="ttdoc">Element to connect ATP-EMTP.</div><div class="ttdef"><b>Definition</b> <a href="_e_m_t_element_8h_source.html#l00064">EMTElement.h:65</a></div></div>
-<div class="ttc" id="aclass_harm_current_html"><div class="ttname"><a href="class_harm_current.html">HarmCurrent</a></div><div class="ttdoc">Shunt Harmonic Corrent Source.</div><div class="ttdef"><b>Definition</b> <a href="_harm_current_8h_source.html#l00023">HarmCurrent.h:24</a></div></div>
-<div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
-<div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
-<div class="ttc" id="aclass_line_html"><div class="ttname"><a href="class_line.html">Line</a></div><div class="ttdoc">Power line element.</div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00063">Line.h:64</a></div></div>
-<div class="ttc" id="aclass_load_html"><div class="ttname"><a href="class_load.html">Load</a></div><div class="ttdoc">Loas shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_load_8h_source.html#l00073">Load.h:74</a></div></div>
-<div class="ttc" id="aclass_sync_generator_html"><div class="ttname"><a href="class_sync_generator.html">SyncGenerator</a></div><div class="ttdoc">Synchronous generator power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00145">SyncGenerator.h:146</a></div></div>
-<div class="ttc" id="aclass_sync_motor_html"><div class="ttname"><a href="class_sync_motor.html">SyncMotor</a></div><div class="ttdoc">Synchronous motor (synchronous compensator) power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00134">SyncMotor.h:135</a></div></div>
-<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
+<div class="line"><span class="lineno">  576</span>                <span class="keyword">auto</span> newCapacitor = std::make_shared&lt;Capacitor&gt;(wxString::Format(_(<span class="stringliteral">&quot;Capacitor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_CAPACITOR)));</div>
+<div class="line"><span class="lineno">  577</span>                workspace-&gt;IncrementElementNumber(ID_CAPACITOR);</div>
+<div class="line"><span class="lineno">  578</span>                elementList.push_back(newCapacitor);</div>
+<div class="line"><span class="lineno">  579</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Capacitor: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><span class="lineno">  580</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  581</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  582</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDUCTOR: {</div>
+<div class="line"><span class="lineno">  583</span>                <span class="keyword">auto</span> newInductor = std::make_shared&lt;Inductor&gt;(wxString::Format(_(<span class="stringliteral">&quot;Inductor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
+<div class="line"><span class="lineno">  584</span>                workspace-&gt;IncrementElementNumber(ID_INDUCTOR);</div>
+<div class="line"><span class="lineno">  585</span>                elementList.push_back(newInductor);</div>
+<div class="line"><span class="lineno">  586</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Inductor: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><span class="lineno">  587</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  588</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  589</span>            <span class="keywordflow">case</span> ID_ADDMENU_HARMCURRENT: {</div>
+<div class="line"><span class="lineno">  590</span>                <span class="keyword">auto</span> newHarmCurrent = std::make_shared&lt;HarmCurrent&gt;(</div>
+<div class="line"><span class="lineno">  591</span>                    wxString::Format(_(<span class="stringliteral">&quot;Harmonic Current %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
+<div class="line"><span class="lineno">  592</span>                workspace-&gt;IncrementElementNumber(ID_HARMCURRENT);</div>
+<div class="line"><span class="lineno">  593</span>                elementList.push_back(newHarmCurrent);</div>
+<div class="line"><span class="lineno">  594</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Harmonic Current Source: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><span class="lineno">  595</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  596</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  597</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDMOTOR: {</div>
+<div class="line"><span class="lineno">  598</span>                <span class="keyword">auto</span> newIndMotor = std::make_shared&lt;IndMotor&gt;(</div>
+<div class="line"><span class="lineno">  599</span>                    wxString::Format(_(<span class="stringliteral">&quot;Induction motor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDMOTOR)));</div>
+<div class="line"><span class="lineno">  600</span>                workspace-&gt;IncrementElementNumber(ID_INDMOTOR);</div>
+<div class="line"><span class="lineno">  601</span>                elementList.push_back(newIndMotor);</div>
+<div class="line"><span class="lineno">  602</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Induction Motor: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><span class="lineno">  603</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  604</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  605</span>            <span class="keywordflow">case</span> ID_ADDMENU_SYNCCOMP: {</div>
+<div class="line"><span class="lineno">  606</span>                <span class="keyword">auto</span> newSyncCondenser = std::make_shared&lt;SyncMotor&gt;(</div>
+<div class="line"><span class="lineno">  607</span>                    wxString::Format(_(<span class="stringliteral">&quot;Synchronous condenser %d&quot;</span>), workspace-&gt;GetElementNumber(ID_SYNCMOTOR)));</div>
+<div class="line"><span class="lineno">  608</span>                workspace-&gt;IncrementElementNumber(ID_SYNCMOTOR);</div>
+<div class="line"><span class="lineno">  609</span>                elementList.push_back(newSyncCondenser);</div>
+<div class="line"><span class="lineno">  610</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Synchronous Condenser: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><span class="lineno">  611</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  612</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  613</span>            <span class="keywordflow">case</span> ID_ADDMENU_EMTELEMENT: {</div>
+<div class="line"><span class="lineno">  614</span>                <span class="keyword">auto</span> newEMTElement = std::make_shared&lt;EMTElement&gt;(wxString::Format(_(<span class="stringliteral">&quot;Electromagnetic Transient %d&quot;</span>), workspace-&gt;GetElementNumber(ID_EMTELEMENT)));</div>
+<div class="line"><span class="lineno">  615</span>                workspace-&gt;IncrementElementNumber(ID_EMTELEMENT);</div>
+<div class="line"><span class="lineno">  616</span>                elementList.push_back(newEMTElement);</div>
+<div class="line"><span class="lineno">  617</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Electromagnetic Transient Element: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><span class="lineno">  618</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  619</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  620</span>            <span class="keywordflow">case</span> ID_ADDMENU_TEXT: {</div>
+<div class="line"><span class="lineno">  621</span>                <span class="comment">//Text* newText = new Text();</span></div>
+<div class="line"><span class="lineno">  622</span>                <span class="keyword">auto</span> newText = std::make_shared&lt;Text&gt;();</div>
+<div class="line"><span class="lineno">  623</span>                textList.push_back(newText);</div>
+<div class="line"><span class="lineno">  624</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Label: Click to insert, ESC to cancel.&quot;</span>);</div>
+<div class="line"><span class="lineno">  625</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  626</span>                isText = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  627</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  628</span>            }</div>
+<div class="line"><span class="lineno">  629</span>            <span class="keywordflow">if</span> (newElement) {</div>
+<div class="line"><span class="lineno">  630</span>                workspace-&gt;SetElementList(elementList);</div>
+<div class="line"><span class="lineno">  631</span>                workspace-&gt;SetTextList(textList);</div>
+<div class="line"><span class="lineno">  632</span>                <span class="keywordflow">if</span> (!isText)</div>
+<div class="line"><span class="lineno">  633</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT);</div>
+<div class="line"><span class="lineno">  634</span>                <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  635</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT_TEXT);</div>
+<div class="line"><span class="lineno">  636</span>                workspace-&gt;SetStatusBarText(statusBarText);</div>
+<div class="line"><span class="lineno">  637</span>                workspace-&gt;Redraw();</div>
+<div class="line"><span class="lineno">  638</span>            }</div>
+<div class="line"><span class="lineno">  639</span>        }</div>
+<div class="line"><span class="lineno">  640</span>    }</div>
+<div class="line"><span class="lineno">  641</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1125,22 +1112,22 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00814">814</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  815</span>{</div>
-<div class="line"><span class="lineno">  816</span>    <span class="comment">// Setup the workspace closing correctly</span></div>
-<div class="line"><span class="lineno">  817</span> </div>
-<div class="line"><span class="lineno">  818</span>    wxMessageDialog dialog(<span class="keyword">this</span>,</div>
-<div class="line"><span class="lineno">  819</span>        _(<span class="stringliteral">&quot;Are you sure you want to close the program?\nAny unsaved changes will be lost.&quot;</span>),</div>
-<div class="line"><span class="lineno">  820</span>        _(<span class="stringliteral">&quot;Closing PSP-UFU...&quot;</span>),</div>
-<div class="line"><span class="lineno">  821</span>        wxYES_NO | wxICON_EXCLAMATION);</div>
-<div class="line"><span class="lineno">  822</span> </div>
-<div class="line"><span class="lineno">  823</span>    <span class="keywordflow">if</span> (dialog.ShowModal() == wxID_YES) {</div>
-<div class="line"><span class="lineno">  824</span>        <span class="keywordflow">if</span> (!m_workspaceList.empty())</div>
-<div class="line"><span class="lineno">  825</span>            m_workspaceList[m_workspaceList.size() - 1]-&gt;Show();</div>
-<div class="line"><span class="lineno">  826</span>        <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  827</span>    }</div>
-<div class="line"><span class="lineno">  828</span>    <span class="keywordflow">else</span> <span class="keyword">event</span>.Skip(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  829</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00812">812</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  813</span>{</div>
+<div class="line"><span class="lineno">  814</span>    <span class="comment">// Setup the workspace closing correctly</span></div>
+<div class="line"><span class="lineno">  815</span> </div>
+<div class="line"><span class="lineno">  816</span>    wxMessageDialog dialog(<span class="keyword">this</span>,</div>
+<div class="line"><span class="lineno">  817</span>        _(<span class="stringliteral">&quot;Are you sure you want to close the program?\nAny unsaved changes will be lost.&quot;</span>),</div>
+<div class="line"><span class="lineno">  818</span>        _(<span class="stringliteral">&quot;Closing PSP-UFU...&quot;</span>),</div>
+<div class="line"><span class="lineno">  819</span>        wxYES_NO | wxICON_EXCLAMATION);</div>
+<div class="line"><span class="lineno">  820</span> </div>
+<div class="line"><span class="lineno">  821</span>    <span class="keywordflow">if</span> (dialog.ShowModal() == wxID_YES) {</div>
+<div class="line"><span class="lineno">  822</span>        <span class="keywordflow">if</span> (!m_workspaceList.empty())</div>
+<div class="line"><span class="lineno">  823</span>            m_workspaceList[m_workspaceList.size() - 1]-&gt;Show();</div>
+<div class="line"><span class="lineno">  824</span>        <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  825</span>    }</div>
+<div class="line"><span class="lineno">  826</span>    <span class="keywordflow">else</span> <span class="keyword">event</span>.Skip(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  827</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1532,11 +1519,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00741">741</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  742</span>{</div>
-<div class="line"><span class="lineno">  743</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  744</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunFrequencyResponse(); }</div>
-<div class="line"><span class="lineno">  745</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00739">739</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  740</span>{</div>
+<div class="line"><span class="lineno">  741</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  742</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunFrequencyResponse(); }</div>
+<div class="line"><span class="lineno">  743</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1566,17 +1553,17 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00720">720</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  721</span>{</div>
-<div class="line"><span class="lineno">  722</span>    <a class="code hl_class" href="class_general_properties_form.html">GeneralPropertiesForm</a> genPropForm(<span class="keyword">this</span>, m_generalProperties);</div>
-<div class="line"><span class="lineno">  723</span>    genPropForm.SetInitialSize();</div>
-<div class="line"><span class="lineno">  724</span>    genPropForm.ShowModal();</div>
-<div class="line"><span class="lineno">  725</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; workspace : m_workspaceList) {</div>
-<div class="line"><span class="lineno">  726</span>        workspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
-<div class="line"><span class="lineno">  727</span>        workspace-&gt;UpdateTextElements();</div>
-<div class="line"><span class="lineno">  728</span>        workspace-&gt;Redraw();</div>
-<div class="line"><span class="lineno">  729</span>    }</div>
-<div class="line"><span class="lineno">  730</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00718">718</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  719</span>{</div>
+<div class="line"><span class="lineno">  720</span>    <a class="code hl_class" href="class_general_properties_form.html">GeneralPropertiesForm</a> genPropForm(<span class="keyword">this</span>, m_generalProperties);</div>
+<div class="line"><span class="lineno">  721</span>    genPropForm.SetInitialSize();</div>
+<div class="line"><span class="lineno">  722</span>    genPropForm.ShowModal();</div>
+<div class="line"><span class="lineno">  723</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; workspace : m_workspaceList) {</div>
+<div class="line"><span class="lineno">  724</span>        workspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
+<div class="line"><span class="lineno">  725</span>        workspace-&gt;UpdateTextElements();</div>
+<div class="line"><span class="lineno">  726</span>        workspace-&gt;Redraw();</div>
+<div class="line"><span class="lineno">  727</span>    }</div>
+<div class="line"><span class="lineno">  728</span>}</div>
 <div class="ttc" id="aclass_general_properties_form_html"><div class="ttname"><a href="class_general_properties_form.html">GeneralPropertiesForm</a></div><div class="ttdoc">Form to edit the software's general data.</div><div class="ttdef"><b>Definition</b> <a href="_general_properties_form_8h_source.html#l00037">GeneralPropertiesForm.h:38</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1607,11 +1594,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00746">746</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  747</span>{</div>
-<div class="line"><span class="lineno">  748</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  749</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunHarmonicDistortion(); }</div>
-<div class="line"><span class="lineno">  750</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00744">744</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  745</span>{</div>
+<div class="line"><span class="lineno">  746</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  747</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunHarmonicDistortion(); }</div>
+<div class="line"><span class="lineno">  748</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1641,15 +1628,15 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00830">830</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  831</span>{</div>
-<div class="line"><span class="lineno">  832</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  833</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><span class="lineno">  834</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled = workspace-&gt;IsHeatMapEnable();</div>
-<div class="line"><span class="lineno">  835</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, !enabled);</div>
-<div class="line"><span class="lineno">  836</span>        workspace-&gt;EnableHeatMap(!enabled);</div>
-<div class="line"><span class="lineno">  837</span>    }</div>
-<div class="line"><span class="lineno">  838</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00828">828</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  829</span>{</div>
+<div class="line"><span class="lineno">  830</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  831</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><span class="lineno">  832</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled = workspace-&gt;IsHeatMapEnable();</div>
+<div class="line"><span class="lineno">  833</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, !enabled);</div>
+<div class="line"><span class="lineno">  834</span>        workspace-&gt;EnableHeatMap(!enabled);</div>
+<div class="line"><span class="lineno">  835</span>    }</div>
+<div class="line"><span class="lineno">  836</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1679,45 +1666,45 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00645">645</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  646</span>{</div>
-<div class="line"><span class="lineno">  647</span>    <span class="comment">// Create a new workspace to import</span></div>
-<div class="line"><span class="lineno">  648</span>    <span class="comment">//Workspace* impWorkspace = new Workspace(this, _(&quot;Imported project&quot;), this-&gt;GetStatusBar(), m_sharedGLContext);</span></div>
-<div class="line"><span class="lineno">  649</span> </div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00643">643</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  644</span>{</div>
+<div class="line"><span class="lineno">  645</span>    <span class="comment">// Create a new workspace to import</span></div>
+<div class="line"><span class="lineno">  646</span>    <span class="comment">//Workspace* impWorkspace = new Workspace(this, _(&quot;Imported project&quot;), this-&gt;GetStatusBar(), m_sharedGLContext);</span></div>
+<div class="line"><span class="lineno">  647</span> </div>
+<div class="line"><span class="lineno">  648</span> </div>
+<div class="line"><span class="lineno">  649</span>    EnableCurrentProjectRibbon();</div>
 <div class="line"><span class="lineno">  650</span> </div>
-<div class="line"><span class="lineno">  651</span>    EnableCurrentProjectRibbon();</div>
-<div class="line"><span class="lineno">  652</span> </div>
-<div class="line"><span class="lineno">  653</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace;</div>
-<div class="line"><span class="lineno">  654</span>    <span class="comment">//if (m_generalProperties-&gt;GetGeneralPropertiesData().useOpenGL) {</span></div>
-<div class="line"><span class="lineno">  655</span>    newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
-<div class="line"><span class="lineno">  656</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
-<div class="line"><span class="lineno">  657</span>    <span class="comment">//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
-<div class="line"><span class="lineno">  658</span><span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  659</span><span class="comment">//else {</span></div>
-<div class="line"><span class="lineno">  660</span><span class="comment">//  newWorkspace = new WorkspaceDC(this, wxString::Format(_(&quot;New project %d&quot;), m_projectNumber),</span></div>
-<div class="line"><span class="lineno">  661</span><span class="comment">//      this-&gt;GetStatusBar());</span></div>
-<div class="line"><span class="lineno">  662</span><span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  663</span><span class="comment">// Set general properties in new Workspace</span></div>
-<div class="line"><span class="lineno">  664</span>    newWorkspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
+<div class="line"><span class="lineno">  651</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace;</div>
+<div class="line"><span class="lineno">  652</span>    <span class="comment">//if (m_generalProperties-&gt;GetGeneralPropertiesData().useOpenGL) {</span></div>
+<div class="line"><span class="lineno">  653</span>    newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
+<div class="line"><span class="lineno">  654</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
+<div class="line"><span class="lineno">  655</span>    <span class="comment">//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
+<div class="line"><span class="lineno">  656</span><span class="comment">//}</span></div>
+<div class="line"><span class="lineno">  657</span><span class="comment">//else {</span></div>
+<div class="line"><span class="lineno">  658</span><span class="comment">//  newWorkspace = new WorkspaceDC(this, wxString::Format(_(&quot;New project %d&quot;), m_projectNumber),</span></div>
+<div class="line"><span class="lineno">  659</span><span class="comment">//      this-&gt;GetStatusBar());</span></div>
+<div class="line"><span class="lineno">  660</span><span class="comment">//}</span></div>
+<div class="line"><span class="lineno">  661</span><span class="comment">// Set general properties in new Workspace</span></div>
+<div class="line"><span class="lineno">  662</span>    newWorkspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
+<div class="line"><span class="lineno">  663</span> </div>
+<div class="line"><span class="lineno">  664</span>    m_workspaceList.push_back(newWorkspace);</div>
 <div class="line"><span class="lineno">  665</span> </div>
-<div class="line"><span class="lineno">  666</span>    m_workspaceList.push_back(newWorkspace);</div>
-<div class="line"><span class="lineno">  667</span> </div>
-<div class="line"><span class="lineno">  668</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  669</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  670</span> </div>
-<div class="line"><span class="lineno">  671</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  672</span>    newWorkspace-&gt;Redraw();</div>
-<div class="line"><span class="lineno">  673</span>    m_projectNumber++;</div>
-<div class="line"><span class="lineno">  674</span> </div>
-<div class="line"><span class="lineno">  675</span> </div>
-<div class="line"><span class="lineno">  676</span>    <a class="code hl_class" href="class_import_form.html">ImportForm</a> importForm(<span class="keyword">this</span>, newWorkspace);</div>
-<div class="line"><span class="lineno">  677</span>    <span class="keywordflow">if</span> (importForm.ShowModal() == wxID_OK) {</div>
-<div class="line"><span class="lineno">  678</span>        m_auiNotebook-&gt;Layout();</div>
-<div class="line"><span class="lineno">  679</span>        newWorkspace-&gt;Redraw();</div>
-<div class="line"><span class="lineno">  680</span>        newWorkspace-&gt;SetJustOpened(<span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  681</span>        newWorkspace-&gt;Fit();</div>
-<div class="line"><span class="lineno">  682</span>    }</div>
-<div class="line"><span class="lineno">  683</span>}</div>
+<div class="line"><span class="lineno">  666</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  667</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  668</span> </div>
+<div class="line"><span class="lineno">  669</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  670</span>    newWorkspace-&gt;Redraw();</div>
+<div class="line"><span class="lineno">  671</span>    m_projectNumber++;</div>
+<div class="line"><span class="lineno">  672</span> </div>
+<div class="line"><span class="lineno">  673</span> </div>
+<div class="line"><span class="lineno">  674</span>    <a class="code hl_class" href="class_import_form.html">ImportForm</a> importForm(<span class="keyword">this</span>, newWorkspace);</div>
+<div class="line"><span class="lineno">  675</span>    <span class="keywordflow">if</span> (importForm.ShowModal() == wxID_OK) {</div>
+<div class="line"><span class="lineno">  676</span>        m_auiNotebook-&gt;Layout();</div>
+<div class="line"><span class="lineno">  677</span>        newWorkspace-&gt;Redraw();</div>
+<div class="line"><span class="lineno">  678</span>        newWorkspace-&gt;SetJustOpened(<span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  679</span>        newWorkspace-&gt;Fit();</div>
+<div class="line"><span class="lineno">  680</span>    }</div>
+<div class="line"><span class="lineno">  681</span>}</div>
 <div class="ttc" id="aclass_import_form_html"><div class="ttname"><a href="class_import_form.html">ImportForm</a></div><div class="ttdoc">Form to import other programs files to PSP.</div><div class="ttdef"><b>Definition</b> <a href="_import_form_8h_source.html#l00052">ImportForm.h:53</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1748,18 +1735,18 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00862">862</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  863</span>{</div>
-<div class="line"><span class="lineno">  864</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  865</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><span class="lineno">  866</span>        <a class="code hl_class" href="class_label_manager.html">LabelManager</a> labelMngr(<span class="keyword">this</span>, workspace);</div>
-<div class="line"><span class="lineno">  867</span> </div>
-<div class="line"><span class="lineno">  868</span>        <span class="keywordflow">if</span> (labelMngr.ShowModal() == wxID_OK) {</div>
-<div class="line"><span class="lineno">  869</span>            workspace-&gt;UpdateTextElements();</div>
-<div class="line"><span class="lineno">  870</span>            workspace-&gt;Redraw();</div>
-<div class="line"><span class="lineno">  871</span>        }</div>
-<div class="line"><span class="lineno">  872</span>    }</div>
-<div class="line"><span class="lineno">  873</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00860">860</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  861</span>{</div>
+<div class="line"><span class="lineno">  862</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  863</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><span class="lineno">  864</span>        <a class="code hl_class" href="class_label_manager.html">LabelManager</a> labelMngr(<span class="keyword">this</span>, workspace);</div>
+<div class="line"><span class="lineno">  865</span> </div>
+<div class="line"><span class="lineno">  866</span>        <span class="keywordflow">if</span> (labelMngr.ShowModal() == wxID_OK) {</div>
+<div class="line"><span class="lineno">  867</span>            workspace-&gt;UpdateTextElements();</div>
+<div class="line"><span class="lineno">  868</span>            workspace-&gt;Redraw();</div>
+<div class="line"><span class="lineno">  869</span>        }</div>
+<div class="line"><span class="lineno">  870</span>    }</div>
+<div class="line"><span class="lineno">  871</span>}</div>
 <div class="ttc" id="aclass_label_manager_html"><div class="ttname"><a href="class_label_manager.html">LabelManager</a></div><div class="ttdef"><b>Definition</b> <a href="_label_manager_8h_source.html#l00007">LabelManager.h:8</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1903,15 +1890,15 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00839">839</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  840</span>{</div>
-<div class="line"><span class="lineno">  841</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  842</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><span class="lineno">  843</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, workspace-&gt;IsHeatMapEnable());</div>
-<div class="line"><span class="lineno">  844</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, workspace-&gt;IsContinuousCalculationActive());</div>
-<div class="line"><span class="lineno">  845</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, !workspace-&gt;IsContinuousCalculationActive());</div>
-<div class="line"><span class="lineno">  846</span>    }</div>
-<div class="line"><span class="lineno">  847</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00837">837</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  838</span>{</div>
+<div class="line"><span class="lineno">  839</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  840</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><span class="lineno">  841</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, workspace-&gt;IsHeatMapEnable());</div>
+<div class="line"><span class="lineno">  842</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, workspace-&gt;IsContinuousCalculationActive());</div>
+<div class="line"><span class="lineno">  843</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, !workspace-&gt;IsContinuousCalculationActive());</div>
+<div class="line"><span class="lineno">  844</span>    }</div>
+<div class="line"><span class="lineno">  845</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2087,16 +2074,16 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00848">848</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  849</span>{</div>
-<div class="line"><span class="lineno">  850</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  851</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><span class="lineno">  852</span>        <a class="code hl_class" href="class_project_properties_form.html">ProjectPropertiesForm</a> ppf(<span class="keyword">this</span>, workspace);</div>
-<div class="line"><span class="lineno">  853</span>        ppf.ShowModal();</div>
-<div class="line"><span class="lineno">  854</span>        workspace-&gt;UpdateHeatMap();</div>
-<div class="line"><span class="lineno">  855</span>        workspace-&gt;Redraw();</div>
-<div class="line"><span class="lineno">  856</span>    }</div>
-<div class="line"><span class="lineno">  857</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00846">846</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  847</span>{</div>
+<div class="line"><span class="lineno">  848</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  849</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><span class="lineno">  850</span>        <a class="code hl_class" href="class_project_properties_form.html">ProjectPropertiesForm</a> ppf(<span class="keyword">this</span>, workspace);</div>
+<div class="line"><span class="lineno">  851</span>        ppf.ShowModal();</div>
+<div class="line"><span class="lineno">  852</span>        workspace-&gt;UpdateHeatMap();</div>
+<div class="line"><span class="lineno">  853</span>        workspace-&gt;Redraw();</div>
+<div class="line"><span class="lineno">  854</span>    }</div>
+<div class="line"><span class="lineno">  855</span>}</div>
 <div class="ttc" id="aclass_project_properties_form_html"><div class="ttname"><a href="class_project_properties_form.html">ProjectPropertiesForm</a></div><div class="ttdef"><b>Definition</b> <a href="_project_properties_form_8h_source.html#l00007">ProjectPropertiesForm.h:8</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -2230,11 +2217,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00708">708</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  709</span>{</div>
-<div class="line"><span class="lineno">  710</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  711</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(); }</div>
-<div class="line"><span class="lineno">  712</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00706">706</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  707</span>{</div>
+<div class="line"><span class="lineno">  708</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  709</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(); }</div>
+<div class="line"><span class="lineno">  710</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2264,11 +2251,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00714">714</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  715</span>{</div>
-<div class="line"><span class="lineno">  716</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  717</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(<span class="keyword">false</span>); }</div>
-<div class="line"><span class="lineno">  718</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00712">712</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  713</span>{</div>
+<div class="line"><span class="lineno">  714</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  715</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(<span class="keyword">false</span>); }</div>
+<div class="line"><span class="lineno">  716</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2463,15 +2450,15 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00732">732</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  733</span>{</div>
-<div class="line"><span class="lineno">  734</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  735</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><span class="lineno">  736</span>        <a class="code hl_class" href="class_simulations_settings_form.html">SimulationsSettingsForm</a> simulSettingsForm(<span class="keyword">this</span>, workspace-&gt;GetProperties(), m_locale);</div>
-<div class="line"><span class="lineno">  737</span>        simulSettingsForm.SetInitialSize();</div>
-<div class="line"><span class="lineno">  738</span>        simulSettingsForm.ShowModal();</div>
-<div class="line"><span class="lineno">  739</span>    }</div>
-<div class="line"><span class="lineno">  740</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00730">730</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  731</span>{</div>
+<div class="line"><span class="lineno">  732</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  733</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><span class="lineno">  734</span>        <a class="code hl_class" href="class_simulations_settings_form.html">SimulationsSettingsForm</a> simulSettingsForm(<span class="keyword">this</span>, workspace-&gt;GetProperties(), m_locale);</div>
+<div class="line"><span class="lineno">  735</span>        simulSettingsForm.SetInitialSize();</div>
+<div class="line"><span class="lineno">  736</span>        simulSettingsForm.ShowModal();</div>
+<div class="line"><span class="lineno">  737</span>    }</div>
+<div class="line"><span class="lineno">  738</span>}</div>
 <div class="ttc" id="aclass_simulations_settings_form_html"><div class="ttname"><a href="class_simulations_settings_form.html">SimulationsSettingsForm</a></div><div class="ttdoc">Form to edit the simulation data.</div><div class="ttdef"><b>Definition</b> <a href="_simulations_settings_form_8h_source.html#l00032">SimulationsSettingsForm.h:33</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -2538,10 +2525,10 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00858">858</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  859</span>{</div>
-<div class="line"><span class="lineno">  860</span>    <span class="keyword">event</span>.PopupMenu(m_snapshotMenu);</div>
-<div class="line"><span class="lineno">  861</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00856">856</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  857</span>{</div>
+<div class="line"><span class="lineno">  858</span>    <span class="keyword">event</span>.PopupMenu(m_snapshotMenu);</div>
+<div class="line"><span class="lineno">  859</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2569,24 +2556,24 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00770">770</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  771</span>{</div>
-<div class="line"><span class="lineno">  772</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  773</span> </div>
-<div class="line"><span class="lineno">  774</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><span class="lineno">  775</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
-<div class="line"><span class="lineno">  776</span> </div>
-<div class="line"><span class="lineno">  777</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
-<div class="line"><span class="lineno">  778</span>        <span class="keywordflow">case</span> ID_SNAPSHOTMENU_LIST: {</div>
-<div class="line"><span class="lineno">  779</span>            <span class="comment">// Save SVG file</span></div>
-<div class="line"><span class="lineno">  780</span>            wxFileDialog saveFileDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;Save diagram as SVG&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;SVG files (*.svg)|*.svg&quot;</span>,</div>
-<div class="line"><span class="lineno">  781</span>                wxFD_SAVE | wxFD_OVERWRITE_PROMPT);</div>
-<div class="line"><span class="lineno">  782</span>            <span class="keywordflow">if</span> (saveFileDialog.ShowModal() == wxID_CANCEL) <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  783</span>            workspace-&gt;ExportAsSVG(saveFileDialog.GetPath());</div>
-<div class="line"><span class="lineno">  784</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  785</span>        }</div>
-<div class="line"><span class="lineno">  786</span>    }</div>
-<div class="line"><span class="lineno">  787</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00768">768</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  769</span>{</div>
+<div class="line"><span class="lineno">  770</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  771</span> </div>
+<div class="line"><span class="lineno">  772</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><span class="lineno">  773</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
+<div class="line"><span class="lineno">  774</span> </div>
+<div class="line"><span class="lineno">  775</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
+<div class="line"><span class="lineno">  776</span>        <span class="keywordflow">case</span> ID_SNAPSHOTMENU_LIST: {</div>
+<div class="line"><span class="lineno">  777</span>            <span class="comment">// Save SVG file</span></div>
+<div class="line"><span class="lineno">  778</span>            wxFileDialog saveFileDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;Save diagram as SVG&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;SVG files (*.svg)|*.svg&quot;</span>,</div>
+<div class="line"><span class="lineno">  779</span>                wxFD_SAVE | wxFD_OVERWRITE_PROMPT);</div>
+<div class="line"><span class="lineno">  780</span>            <span class="keywordflow">if</span> (saveFileDialog.ShowModal() == wxID_CANCEL) <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  781</span>            workspace-&gt;ExportAsSVG(saveFileDialog.GetPath());</div>
+<div class="line"><span class="lineno">  782</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  783</span>        }</div>
+<div class="line"><span class="lineno">  784</span>    }</div>
+<div class="line"><span class="lineno">  785</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2616,8 +2603,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_main_frame_base.html">MainFrameBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00752">752</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  752</span>{ <span class="keyword">event</span>.PopupMenu(m_stabilityMenu); }</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00750">750</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  750</span>{ <span class="keyword">event</span>.PopupMenu(m_stabilityMenu); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2645,21 +2632,21 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00754">754</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  755</span>{</div>
-<div class="line"><span class="lineno">  756</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><span class="lineno">  757</span> </div>
-<div class="line"><span class="lineno">  758</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><span class="lineno">  759</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
-<div class="line"><span class="lineno">  760</span> </div>
-<div class="line"><span class="lineno">  761</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
-<div class="line"><span class="lineno">  762</span>        <span class="keywordflow">case</span> ID_STABMENU_LIST: {</div>
-<div class="line"><span class="lineno">  763</span>            <a class="code hl_class" href="class_stability_event_list.html">StabilityEventList</a> stabEventList(<span class="keyword">this</span>, elementList);</div>
-<div class="line"><span class="lineno">  764</span>            stabEventList.ShowModal();</div>
-<div class="line"><span class="lineno">  765</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  766</span>        }</div>
-<div class="line"><span class="lineno">  767</span>    }</div>
-<div class="line"><span class="lineno">  768</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00752">752</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  753</span>{</div>
+<div class="line"><span class="lineno">  754</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><span class="lineno">  755</span> </div>
+<div class="line"><span class="lineno">  756</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><span class="lineno">  757</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
+<div class="line"><span class="lineno">  758</span> </div>
+<div class="line"><span class="lineno">  759</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
+<div class="line"><span class="lineno">  760</span>        <span class="keywordflow">case</span> ID_STABMENU_LIST: {</div>
+<div class="line"><span class="lineno">  761</span>            <a class="code hl_class" href="class_stability_event_list.html">StabilityEventList</a> stabEventList(<span class="keyword">this</span>, elementList);</div>
+<div class="line"><span class="lineno">  762</span>            stabEventList.ShowModal();</div>
+<div class="line"><span class="lineno">  763</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  764</span>        }</div>
+<div class="line"><span class="lineno">  765</span>    }</div>
+<div class="line"><span class="lineno">  766</span>}</div>
 <div class="ttc" id="aclass_stability_event_list_html"><div class="ttname"><a href="class_stability_event_list.html">StabilityEventList</a></div><div class="ttdef"><b>Definition</b> <a href="_stability_event_list_8h_source.html#l00010">StabilityEventList.h:11</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -2715,31 +2702,31 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00789">789</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  790</span>{</div>
-<div class="line"><span class="lineno">  791</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Main frame setup OK!\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  792</span> </div>
-<div class="line"><span class="lineno">  793</span>    <span class="comment">// Emulate new project creation</span></div>
-<div class="line"><span class="lineno">  794</span>    EnableCurrentProjectRibbon();</div>
-<div class="line"><span class="lineno">  795</span> </div>
-<div class="line"><span class="lineno">  796</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
-<div class="line"><span class="lineno">  797</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
-<div class="line"><span class="lineno">  798</span>    <span class="comment">//if (!m_sharedGLContext) {</span></div>
-<div class="line"><span class="lineno">  799</span>    <span class="comment">//  m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
-<div class="line"><span class="lineno">  800</span>    <span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  801</span>    m_workspaceList.push_back(newWorkspace);</div>
-<div class="line"><span class="lineno">  802</span> </div>
-<div class="line"><span class="lineno">  803</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  804</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  805</span> </div>
-<div class="line"><span class="lineno">  806</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  807</span>    newWorkspace-&gt;Redraw();</div>
-<div class="line"><span class="lineno">  808</span> </div>
-<div class="line"><span class="lineno">  809</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Project creation OK!\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  810</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Test done!\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  811</span> </div>
-<div class="line"><span class="lineno">  812</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  813</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_main_frame_8cpp_source.html#l00787">787</a> of file <a class="el" href="_main_frame_8cpp_source.html">MainFrame.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  788</span>{</div>
+<div class="line"><span class="lineno">  789</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Main frame setup OK!\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  790</span> </div>
+<div class="line"><span class="lineno">  791</span>    <span class="comment">// Emulate new project creation</span></div>
+<div class="line"><span class="lineno">  792</span>    EnableCurrentProjectRibbon();</div>
+<div class="line"><span class="lineno">  793</span> </div>
+<div class="line"><span class="lineno">  794</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
+<div class="line"><span class="lineno">  795</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
+<div class="line"><span class="lineno">  796</span>    <span class="comment">//if (!m_sharedGLContext) {</span></div>
+<div class="line"><span class="lineno">  797</span>    <span class="comment">//  m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
+<div class="line"><span class="lineno">  798</span>    <span class="comment">//}</span></div>
+<div class="line"><span class="lineno">  799</span>    m_workspaceList.push_back(newWorkspace);</div>
+<div class="line"><span class="lineno">  800</span> </div>
+<div class="line"><span class="lineno">  801</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  802</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  803</span> </div>
+<div class="line"><span class="lineno">  804</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  805</span>    newWorkspace-&gt;Redraw();</div>
+<div class="line"><span class="lineno">  806</span> </div>
+<div class="line"><span class="lineno">  807</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Project creation OK!\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  808</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Test done!\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  809</span> </div>
+<div class="line"><span class="lineno">  810</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  811</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -8,12 +8,12 @@
     <subtitle>PSP-UFU Blog</subtitle>
     <icon>https://thales1330.github.io/PSP/pt/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[2026w10a-beta]]></title>
-        <id>https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w10a-beta</id>
-        <link href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w10a-beta"/>
+        <title type="html"><![CDATA[2026w11a-beta]]></title>
+        <id>https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w11a-beta</id>
+        <link href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w11a-beta"/>
         <updated>2026-03-07T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[🔥 Major Changes]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-major-changes">🔥 Major Changes<a href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w10a-beta#-major-changes" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-major-changes">🔥 Major Changes<a href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w11a-beta#-major-changes" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
 <ul>
 <li class="">Removed legacy dependencies and improved internal architecture;</li>
 <li class="">Added <strong>Label Manager</strong> for diagram label management;</li>
@@ -22,7 +22,7 @@
 <li class="">Initial implementation of <strong>EMT (Electromagnetic Transient) elements</strong>;</li>
 </ul>
 <hr>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-new-features-and-improvements">✔️ New Features and Improvements<a href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w10a-beta#%EF%B8%8F-new-features-and-improvements" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-new-features-and-improvements">✔️ New Features and Improvements<a href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w11a-beta#%EF%B8%8F-new-features-and-improvements" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
 <ul>
 <li class="">Added <strong>Ctrl+S shortcut</strong> to save the workspace;</li>
 <li class="">Added <strong>sample control files and data assets</strong>;</li>
@@ -38,11 +38,13 @@
 <li class="">Updated project website and documentation deployed on the gh-pages branch (<strong>Docusaurus updates</strong>);</li>
 </ul>
 <hr>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes">🐛 Bug Fixes<a href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w10a-beta#-bug-fixes" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-fixes">🐛 Bug Fixes<a href="https://thales1330.github.io/PSP/pt/blog/2026/03/07/2026w11a-beta#-bug-fixes" class="hash-link" aria-label="Direct link to heading" title="Direct link to heading" translate="no">​</a></h2>
 <ul>
 <li class="">Fixed a major bug in <strong>Jacobian matrix construction</strong>;</li>
 <li class="">Fixed several issues in <strong>dynamic control systems</strong>;</li>
 <li class="">Fixed <strong>ChartDirector linking issues on Linux builds</strong>;</li>
+<li class="">Fixed program crash when adding elements via menu;</li>
+<li class="">Fixe reactive power wrong distribution in limited generators;</li>
 <li class="">Various minor UI and stability fixes.</li>
 </ul>
 ]]></content>

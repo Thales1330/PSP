@@ -650,7 +650,7 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span> </div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    <span class="keywordflow">if</span> (workspace) {</div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>        <span class="keywordflow">if</span> (workspace-&gt;GetWorkspaceMode() != Workspace::WorkspaceMode::MODE_INSERT) {</div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>            <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>            <span class="keyword">auto</span> elementList = workspace-&gt;GetElementSharedList();</div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>            <span class="keyword">auto</span> textList = workspace-&gt;GetTextList();</div>
 <div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>            wxString statusBarText = <span class="stringliteral">&quot;&quot;</span>;</div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>            <span class="keywordtype">bool</span> newElement = <span class="keyword">false</span>;</div>
@@ -658,7 +658,7 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span> </div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>            <span class="keywordflow">switch</span> (event.GetId()) {</div>
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>            <span class="keywordflow">case</span> ID_ADDMENU_BUS: {</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>                <a class="code hl_class" href="class_bus.html">Bus</a>* newBus = <span class="keyword">new</span> <a class="code hl_class" href="class_bus.html">Bus</a>(wxPoint2DDouble(0, 0),</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>                <span class="keyword">auto</span> newBus = std::make_shared&lt;Bus&gt;(wxPoint2DDouble(0, 0),</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>                    wxString::Format(_(<span class="stringliteral">&quot;Bus %d&quot;</span>), workspace-&gt;GetElementNumber(ID_BUS)));</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>                workspace-&gt;IncrementElementNumber(ID_BUS);</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>                elementList.push_back(newBus);</div>
@@ -666,14 +666,14 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>            <span class="keywordflow">case</span> ID_ADDMENU_LINE: {</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>                <a class="code hl_class" href="class_line.html">Line</a>* newLine = <span class="keyword">new</span> <a class="code hl_class" href="class_line.html">Line</a>(wxString::Format(_(<span class="stringliteral">&quot;Line %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LINE)));</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>                <span class="keyword">auto</span> newLine = std::make_shared&lt;Line&gt;(wxString::Format(_(<span class="stringliteral">&quot;Line %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LINE)));</div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>                elementList.push_back(newLine);</div>
 <div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>                workspace-&gt;IncrementElementNumber(ID_LINE);</div>
 <div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Line: Click on two buses, ESC to cancel.&quot;</span>);</div>
 <div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>            <span class="keywordflow">case</span> ID_ADDMENU_TRANSFORMER: {</div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>                <a class="code hl_class" href="class_transformer.html">Transformer</a>* newTransformer = <span class="keyword">new</span> <a class="code hl_class" href="class_transformer.html">Transformer</a>(</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>                <span class="keyword">auto</span> newTransformer = std::make_shared &lt;Transformer&gt;(</div>
 <div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>                    wxString::Format(_(<span class="stringliteral">&quot;Transformer %d&quot;</span>), workspace-&gt;GetElementNumber(ID_TRANSFORMER)));</div>
 <div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>                workspace-&gt;IncrementElementNumber(ID_TRANSFORMER);</div>
 <div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>                elementList.push_back(newTransformer);</div>
@@ -681,7 +681,7 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>            <span class="keywordflow">case</span> ID_ADDMENU_GENERATOR: {</div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>                <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>* newGenerator = <span class="keyword">new</span> <a class="code hl_class" href="class_sync_generator.html">SyncGenerator</a>(</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>                <span class="keyword">auto</span> newGenerator = std::make_shared&lt;SyncGenerator&gt;(</div>
 <div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>                    wxString::Format(_(<span class="stringliteral">&quot;Generator %d&quot;</span>), workspace-&gt;GetElementNumber(ID_SYNCGENERATOR)));</div>
 <div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>                workspace-&gt;IncrementElementNumber(ID_SYNCGENERATOR);</div>
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>                elementList.push_back(newGenerator);</div>
@@ -689,311 +689,309 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>            <span class="keywordflow">case</span> ID_ADDMENU_LOAD: {</div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>                <a class="code hl_class" href="class_load.html">Load</a>* newLoad = <span class="keyword">new</span> <a class="code hl_class" href="class_load.html">Load</a>(wxString::Format(_(<span class="stringliteral">&quot;Load %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LOAD)));</div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>                <span class="keyword">auto</span> newLoad = std::make_shared&lt;Load&gt;(wxString::Format(_(<span class="stringliteral">&quot;Load %d&quot;</span>), workspace-&gt;GetElementNumber(ID_LOAD)));</div>
 <div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>                workspace-&gt;IncrementElementNumber(ID_LOAD);</div>
 <div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>                elementList.push_back(newLoad);</div>
 <div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Load: Click on a bus, ESC to cancel.&quot;</span>);</div>
 <div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>                newElement = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>            } <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>            <span class="keywordflow">case</span> ID_ADDMENU_CAPACITOR: {</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>                <a class="code hl_class" href="class_capacitor.html">Capacitor</a>* newCapacitor =</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>                    <span class="keyword">new</span> <a class="code hl_class" href="class_capacitor.html">Capacitor</a>(wxString::Format(_(<span class="stringliteral">&quot;Capacitor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_CAPACITOR)));</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>                workspace-&gt;IncrementElementNumber(ID_CAPACITOR);</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>                elementList.push_back(newCapacitor);</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Capacitor: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDUCTOR: {</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>                <a class="code hl_class" href="class_inductor.html">Inductor</a>* newInductor =</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>                    <span class="keyword">new</span> <a class="code hl_class" href="class_inductor.html">Inductor</a>(wxString::Format(_(<span class="stringliteral">&quot;Inductor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>                workspace-&gt;IncrementElementNumber(ID_INDUCTOR);</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>                elementList.push_back(newInductor);</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Inductor: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>            <span class="keywordflow">case</span> ID_ADDMENU_HARMCURRENT: {</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>                <a class="code hl_class" href="class_harm_current.html">HarmCurrent</a>* newHarmCurrent = <span class="keyword">new</span> <a class="code hl_class" href="class_harm_current.html">HarmCurrent</a>(</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>                    wxString::Format(_(<span class="stringliteral">&quot;Harmonic Current %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>                workspace-&gt;IncrementElementNumber(ID_HARMCURRENT);</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>                elementList.push_back(newHarmCurrent);</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Harmonic Current Source: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDMOTOR: {</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>                <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>* newIndMotor = <span class="keyword">new</span> <a class="code hl_class" href="class_ind_motor.html">IndMotor</a>(</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>                    wxString::Format(_(<span class="stringliteral">&quot;Induction motor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDMOTOR)));</div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>                workspace-&gt;IncrementElementNumber(ID_INDMOTOR);</div>
-<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>                elementList.push_back(newIndMotor);</div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Induction Motor: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>            <span class="keywordflow">case</span> ID_ADDMENU_SYNCCOMP: {</div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>                <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* newSyncCondenser = <span class="keyword">new</span> <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>(</div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>                    wxString::Format(_(<span class="stringliteral">&quot;Synchronous condenser %d&quot;</span>), workspace-&gt;GetElementNumber(ID_SYNCMOTOR)));</div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>                workspace-&gt;IncrementElementNumber(ID_SYNCMOTOR);</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>                elementList.push_back(newSyncCondenser);</div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Synchronous Condenser: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>            <span class="keywordflow">case</span> ID_ADDMENU_EMTELEMENT: {</div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>                <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>* newEMTElement = <span class="keyword">new</span> <a class="code hl_class" href="class_e_m_t_element.html">EMTElement</a>(wxString::Format(_(<span class="stringliteral">&quot;Electromagnetic Transient %d&quot;</span>), workspace-&gt;GetElementNumber(ID_EMTELEMENT)));</div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>                workspace-&gt;IncrementElementNumber(ID_EMTELEMENT);</div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>                elementList.push_back(newEMTElement);</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Electromagnetic Transient Element: Click on a bus, ESC to cancel.&quot;</span>);</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>            <span class="keywordflow">case</span> ID_ADDMENU_TEXT: {</div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>                <span class="comment">//Text* newText = new Text();</span></div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>                <span class="keyword">auto</span> newText = std::make_shared&lt;Text&gt;();</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>                textList.push_back(newText);</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Label: Click to insert, ESC to cancel.&quot;</span>);</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>                newElement = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>                isText = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>            }</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>            <span class="keywordflow">if</span> (newElement) {</div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>                workspace-&gt;SetElementList(elementList);</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>                workspace-&gt;SetTextList(textList);</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>                <span class="keywordflow">if</span> (!isText)</div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT);</div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>                <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT_TEXT);</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>                workspace-&gt;SetStatusBarText(statusBarText);</div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>                workspace-&gt;Redraw();</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>            }</div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>        }</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    }</div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>}</div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span> </div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span><span class="keywordtype">void</span> MainFrame::OnImportClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>{</div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>    <span class="comment">// Create a new workspace to import</span></div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    <span class="comment">//Workspace* impWorkspace = new Workspace(this, _(&quot;Imported project&quot;), this-&gt;GetStatusBar(), m_sharedGLContext);</span></div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span> </div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>                <span class="keyword">auto</span> newCapacitor = std::make_shared&lt;Capacitor&gt;(wxString::Format(_(<span class="stringliteral">&quot;Capacitor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_CAPACITOR)));</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>                workspace-&gt;IncrementElementNumber(ID_CAPACITOR);</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>                elementList.push_back(newCapacitor);</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Capacitor: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDUCTOR: {</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>                <span class="keyword">auto</span> newInductor = std::make_shared&lt;Inductor&gt;(wxString::Format(_(<span class="stringliteral">&quot;Inductor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>                workspace-&gt;IncrementElementNumber(ID_INDUCTOR);</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>                elementList.push_back(newInductor);</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Inductor: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>            <span class="keywordflow">case</span> ID_ADDMENU_HARMCURRENT: {</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>                <span class="keyword">auto</span> newHarmCurrent = std::make_shared&lt;HarmCurrent&gt;(</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>                    wxString::Format(_(<span class="stringliteral">&quot;Harmonic Current %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDUCTOR)));</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>                workspace-&gt;IncrementElementNumber(ID_HARMCURRENT);</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>                elementList.push_back(newHarmCurrent);</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Harmonic Current Source: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>            <span class="keywordflow">case</span> ID_ADDMENU_INDMOTOR: {</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>                <span class="keyword">auto</span> newIndMotor = std::make_shared&lt;IndMotor&gt;(</div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>                    wxString::Format(_(<span class="stringliteral">&quot;Induction motor %d&quot;</span>), workspace-&gt;GetElementNumber(ID_INDMOTOR)));</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>                workspace-&gt;IncrementElementNumber(ID_INDMOTOR);</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>                elementList.push_back(newIndMotor);</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Induction Motor: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>            <span class="keywordflow">case</span> ID_ADDMENU_SYNCCOMP: {</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>                <span class="keyword">auto</span> newSyncCondenser = std::make_shared&lt;SyncMotor&gt;(</div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>                    wxString::Format(_(<span class="stringliteral">&quot;Synchronous condenser %d&quot;</span>), workspace-&gt;GetElementNumber(ID_SYNCMOTOR)));</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>                workspace-&gt;IncrementElementNumber(ID_SYNCMOTOR);</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>                elementList.push_back(newSyncCondenser);</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Synchronous Condenser: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>            <span class="keywordflow">case</span> ID_ADDMENU_EMTELEMENT: {</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>                <span class="keyword">auto</span> newEMTElement = std::make_shared&lt;EMTElement&gt;(wxString::Format(_(<span class="stringliteral">&quot;Electromagnetic Transient %d&quot;</span>), workspace-&gt;GetElementNumber(ID_EMTELEMENT)));</div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>                workspace-&gt;IncrementElementNumber(ID_EMTELEMENT);</div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>                elementList.push_back(newEMTElement);</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Electromagnetic Transient Element: Click on a bus, ESC to cancel.&quot;</span>);</div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>            <span class="keywordflow">case</span> ID_ADDMENU_TEXT: {</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>                <span class="comment">//Text* newText = new Text();</span></div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>                <span class="keyword">auto</span> newText = std::make_shared&lt;Text&gt;();</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>                textList.push_back(newText);</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>                statusBarText = _(<span class="stringliteral">&quot;Insert Label: Click to insert, ESC to cancel.&quot;</span>);</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>                newElement = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>                isText = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>            }</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>            <span class="keywordflow">if</span> (newElement) {</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>                workspace-&gt;SetElementList(elementList);</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>                workspace-&gt;SetTextList(textList);</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>                <span class="keywordflow">if</span> (!isText)</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT);</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>                    workspace-&gt;SetWorkspaceMode(Workspace::WorkspaceMode::MODE_INSERT_TEXT);</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>                workspace-&gt;SetStatusBarText(statusBarText);</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>                workspace-&gt;Redraw();</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>            }</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>        }</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    }</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>}</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span> </div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span><span class="keywordtype">void</span> MainFrame::OnImportClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>{</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    <span class="comment">// Create a new workspace to import</span></div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="comment">//Workspace* impWorkspace = new Workspace(this, _(&quot;Imported project&quot;), this-&gt;GetStatusBar(), m_sharedGLContext);</span></div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span> </div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span> </div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>    EnableCurrentProjectRibbon();</div>
 <div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span> </div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    EnableCurrentProjectRibbon();</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span> </div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace;</div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    <span class="comment">//if (m_generalProperties-&gt;GetGeneralPropertiesData().useOpenGL) {</span></div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    <span class="comment">//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span><span class="comment">//}</span></div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span><span class="comment">//else {</span></div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span><span class="comment">//  newWorkspace = new WorkspaceDC(this, wxString::Format(_(&quot;New project %d&quot;), m_projectNumber),</span></div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span><span class="comment">//      this-&gt;GetStatusBar());</span></div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span><span class="comment">//}</span></div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span><span class="comment">// Set general properties in new Workspace</span></div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    newWorkspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace;</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    <span class="comment">//if (m_generalProperties-&gt;GetGeneralPropertiesData().useOpenGL) {</span></div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    <span class="comment">//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span><span class="comment">//}</span></div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span><span class="comment">//else {</span></div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span><span class="comment">//  newWorkspace = new WorkspaceDC(this, wxString::Format(_(&quot;New project %d&quot;), m_projectNumber),</span></div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span><span class="comment">//      this-&gt;GetStatusBar());</span></div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span><span class="comment">//}</span></div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span><span class="comment">// Set general properties in new Workspace</span></div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    newWorkspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    m_workspaceList.push_back(newWorkspace);</div>
 <div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span> </div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>    m_workspaceList.push_back(newWorkspace);</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span> </div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span> </div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>    newWorkspace-&gt;Redraw();</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>    m_projectNumber++;</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span> </div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span> </div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    <a class="code hl_class" href="class_import_form.html">ImportForm</a> importForm(<span class="keyword">this</span>, newWorkspace);</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>    <span class="keywordflow">if</span> (importForm.ShowModal() == wxID_OK) {</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        m_auiNotebook-&gt;Layout();</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        newWorkspace-&gt;Redraw();</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>        newWorkspace-&gt;SetJustOpened(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>        newWorkspace-&gt;Fit();</div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    }</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>}</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span> </div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span><span class="keywordtype">void</span> MainFrame::NotebookPageClosed(wxAuiNotebookEvent&amp; event)</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>{</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    <span class="keywordflow">if</span> (m_auiNotebook-&gt;GetPageCount() == 0) EnableCurrentProjectRibbon(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>}</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span> </div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span><span class="keywordtype">void</span> MainFrame::NotebookPageClosing(wxAuiNotebookEvent&amp; event)</div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>{</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <span class="keyword">auto</span> it = m_workspaceList.begin();</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <span class="keywordflow">while</span> (it != m_workspaceList.end()) {</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>        <span class="keywordflow">if</span> (*it == m_auiNotebook-&gt;GetCurrentPage()) {</div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>            <span class="comment">//if ((*it)-&gt;GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = nullptr;</span></div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>            m_workspaceList.erase(it);</div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>        }</div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>        ++it;</div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    }</div>
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>    <span class="comment">//if (!m_sharedGLContext &amp;&amp; m_workspaceList.size() != 0) {</span></div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>    <span class="comment">//  m_sharedGLContext = m_workspaceList[0]-&gt;GetSharedGLContext();</span></div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>    <span class="comment">//}</span></div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>}</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span> </div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span><span class="keywordtype">void</span> MainFrame::OnRotClockClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>{</div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(); }</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>}</div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span> </div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span><span class="keywordtype">void</span> MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>{</div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(<span class="keyword">false</span>); }</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>}</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span> </div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span><span class="keywordtype">void</span> MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>{</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    <a class="code hl_class" href="class_general_properties_form.html">GeneralPropertiesForm</a> genPropForm(<span class="keyword">this</span>, m_generalProperties);</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    genPropForm.SetInitialSize();</div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>    genPropForm.ShowModal();</div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; workspace : m_workspaceList) {</div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>        workspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>        workspace-&gt;UpdateTextElements();</div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>        workspace-&gt;Redraw();</div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>    }</div>
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>}</div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span> </div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span><span class="keywordtype">void</span> MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>{</div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>        <a class="code hl_class" href="class_simulations_settings_form.html">SimulationsSettingsForm</a> simulSettingsForm(<span class="keyword">this</span>, workspace-&gt;GetProperties(), m_locale);</div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>        simulSettingsForm.SetInitialSize();</div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>        simulSettingsForm.ShowModal();</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    }</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>}</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span><span class="keywordtype">void</span> MainFrame::OnFreqResponseClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>{</div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunFrequencyResponse(); }</div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>}</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span><span class="keywordtype">void</span> MainFrame::OnHarmDistortionsClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>{</div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunHarmonicDistortion(); }</div>
-<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>}</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span> </div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    newWorkspace-&gt;Redraw();</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>    m_projectNumber++;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span> </div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span> </div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    <a class="code hl_class" href="class_import_form.html">ImportForm</a> importForm(<span class="keyword">this</span>, newWorkspace);</div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>    <span class="keywordflow">if</span> (importForm.ShowModal() == wxID_OK) {</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>        m_auiNotebook-&gt;Layout();</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>        newWorkspace-&gt;Redraw();</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        newWorkspace-&gt;SetJustOpened(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        newWorkspace-&gt;Fit();</div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>    }</div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>}</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span> </div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span><span class="keywordtype">void</span> MainFrame::NotebookPageClosed(wxAuiNotebookEvent&amp; event)</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>{</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    <span class="keywordflow">if</span> (m_auiNotebook-&gt;GetPageCount() == 0) EnableCurrentProjectRibbon(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>}</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span> </div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span><span class="keywordtype">void</span> MainFrame::NotebookPageClosing(wxAuiNotebookEvent&amp; event)</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>{</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>    <span class="keyword">auto</span> it = m_workspaceList.begin();</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    <span class="keywordflow">while</span> (it != m_workspaceList.end()) {</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>        <span class="keywordflow">if</span> (*it == m_auiNotebook-&gt;GetCurrentPage()) {</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>            <span class="comment">//if ((*it)-&gt;GetSharedGLContext() == m_sharedGLContext) m_sharedGLContext = nullptr;</span></div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>            m_workspaceList.erase(it);</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>        }</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>        ++it;</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    }</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    <span class="comment">//if (!m_sharedGLContext &amp;&amp; m_workspaceList.size() != 0) {</span></div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    <span class="comment">//  m_sharedGLContext = m_workspaceList[0]-&gt;GetSharedGLContext();</span></div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>    <span class="comment">//}</span></div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>}</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span> </div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span><span class="keywordtype">void</span> MainFrame::OnRotClockClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>{</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(); }</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>}</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span> </div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span><span class="keywordtype">void</span> MainFrame::OnRotCounterClockClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>{</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RotateSelectedElements(<span class="keyword">false</span>); }</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>}</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span> </div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span><span class="keywordtype">void</span> MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>{</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    <a class="code hl_class" href="class_general_properties_form.html">GeneralPropertiesForm</a> genPropForm(<span class="keyword">this</span>, m_generalProperties);</div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    genPropForm.SetInitialSize();</div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    genPropForm.ShowModal();</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; workspace : m_workspaceList) {</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>        workspace-&gt;GetProperties()-&gt;SetGeneralPropertiesData(m_generalProperties-&gt;GetGeneralPropertiesData());</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>        workspace-&gt;UpdateTextElements();</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>        workspace-&gt;Redraw();</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>    }</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>}</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span> </div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span><span class="keywordtype">void</span> MainFrame::OnSimulationSettingsClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>{</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>        <a class="code hl_class" href="class_simulations_settings_form.html">SimulationsSettingsForm</a> simulSettingsForm(<span class="keyword">this</span>, workspace-&gt;GetProperties(), m_locale);</div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>        simulSettingsForm.SetInitialSize();</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>        simulSettingsForm.ShowModal();</div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>    }</div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>}</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span><span class="keywordtype">void</span> MainFrame::OnFreqResponseClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>{</div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunFrequencyResponse(); }</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>}</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span><span class="keywordtype">void</span> MainFrame::OnHarmDistortionsClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>{</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    <span class="keywordflow">if</span> (workspace) { workspace-&gt;RunHarmonicDistortion(); }</div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>}</div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span> </div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span><span class="keywordtype">void</span> MainFrame::OnStabilityDropdown(wxRibbonButtonBarEvent&amp; event) { <span class="keyword">event</span>.PopupMenu(m_stabilityMenu); }</div>
 <div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span> </div>
-<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span><span class="keywordtype">void</span> MainFrame::OnStabilityDropdown(wxRibbonButtonBarEvent&amp; event) { <span class="keyword">event</span>.PopupMenu(m_stabilityMenu); }</div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span> </div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span><span class="keywordtype">void</span> MainFrame::OnStabilityMenuClick(wxCommandEvent&amp; event)</div>
-<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>{</div>
-<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span> </div>
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
-<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span> </div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>        <span class="keywordflow">case</span> ID_STABMENU_LIST: {</div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>            <a class="code hl_class" href="class_stability_event_list.html">StabilityEventList</a> stabEventList(<span class="keyword">this</span>, elementList);</div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>            stabEventList.ShowModal();</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>        }</div>
-<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>    }</div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>}</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span> </div>
-<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="keywordtype">void</span> MainFrame::OnSnapshotMenuClick(wxCommandEvent&amp; event)</div>
-<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>{</div>
-<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span> </div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span> </div>
-<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
-<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>        <span class="keywordflow">case</span> ID_SNAPSHOTMENU_LIST: {</div>
-<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>            <span class="comment">// Save SVG file</span></div>
-<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>            wxFileDialog saveFileDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;Save diagram as SVG&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;SVG files (*.svg)|*.svg&quot;</span>,</div>
-<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>                wxFD_SAVE | wxFD_OVERWRITE_PROMPT);</div>
-<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>            <span class="keywordflow">if</span> (saveFileDialog.ShowModal() == wxID_CANCEL) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>            workspace-&gt;ExportAsSVG(saveFileDialog.GetPath());</div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>        } <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>        }</div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    }</div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>}</div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span> </div>
-<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span><span class="keywordtype">int</span> MainFrame::RunPSPTest()</div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>{</div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Main frame setup OK!\n&quot;</span>);</div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span> </div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>    <span class="comment">// Emulate new project creation</span></div>
-<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>    EnableCurrentProjectRibbon();</div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span> </div>
-<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
-<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
-<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    <span class="comment">//if (!m_sharedGLContext) {</span></div>
-<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    <span class="comment">//  m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
-<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>    <span class="comment">//}</span></div>
-<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>    m_workspaceList.push_back(newWorkspace);</div>
-<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span> </div>
-<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span> </div>
-<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>    newWorkspace-&gt;Redraw();</div>
-<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span> </div>
-<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Project creation OK!\n&quot;</span>);</div>
-<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Test done!\n&quot;</span>);</div>
-<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span> </div>
-<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>}</div>
-<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span><span class="keywordtype">void</span> MainFrame::OnClose(wxCloseEvent&amp; event)</div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>{</div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>    <span class="comment">// Setup the workspace closing correctly</span></div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span> </div>
-<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>    wxMessageDialog dialog(<span class="keyword">this</span>,</div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>        _(<span class="stringliteral">&quot;Are you sure you want to close the program?\nAny unsaved changes will be lost.&quot;</span>),</div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>        _(<span class="stringliteral">&quot;Closing PSP-UFU...&quot;</span>),</div>
-<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>        wxYES_NO | wxICON_EXCLAMATION);</div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span> </div>
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>    <span class="keywordflow">if</span> (dialog.ShowModal() == wxID_YES) {</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>        <span class="keywordflow">if</span> (!m_workspaceList.empty())</div>
-<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>            m_workspaceList[m_workspaceList.size() - 1]-&gt;Show();</div>
-<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>        <span class="keyword">event</span>.Skip();</div>
-<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    }</div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>    <span class="keywordflow">else</span> <span class="keyword">event</span>.Skip(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>}</div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span><span class="keywordtype">void</span> MainFrame::OnHeatmapClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>{</div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled = workspace-&gt;IsHeatMapEnable();</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, !enabled);</div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>        workspace-&gt;EnableHeatMap(!enabled);</div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>    }</div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>}</div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span><span class="keywordtype">void</span> MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent&amp; event)</div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>{</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, workspace-&gt;IsHeatMapEnable());</div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, workspace-&gt;IsContinuousCalculationActive());</div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, !workspace-&gt;IsContinuousCalculationActive());</div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>    }</div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>}</div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span><span class="keywordtype">void</span> MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>{</div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>        <a class="code hl_class" href="class_project_properties_form.html">ProjectPropertiesForm</a> ppf(<span class="keyword">this</span>, workspace);</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>        ppf.ShowModal();</div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>        workspace-&gt;UpdateHeatMap();</div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>        workspace-&gt;Redraw();</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>    }</div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>}</div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span><span class="keywordtype">void</span> MainFrame::OnSnapshotDropdown(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>{</div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>    <span class="keyword">event</span>.PopupMenu(m_snapshotMenu);</div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>}</div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span><span class="keywordtype">void</span> MainFrame::OnLabelMngrClick(wxRibbonButtonBarEvent&amp; event)</div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>{</div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>    <span class="keywordflow">if</span> (workspace) {</div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>        <a class="code hl_class" href="class_label_manager.html">LabelManager</a> labelMngr(<span class="keyword">this</span>, workspace);</div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span> </div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>        <span class="keywordflow">if</span> (labelMngr.ShowModal() == wxID_OK) {</div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>            workspace-&gt;UpdateTextElements();</div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>            workspace-&gt;Redraw();</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>        }</div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>    }</div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>}</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span><span class="keywordtype">void</span> MainFrame::OnStabilityMenuClick(wxCommandEvent&amp; event)</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>{</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span> </div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span> </div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>        <span class="keywordflow">case</span> ID_STABMENU_LIST: {</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>            <a class="code hl_class" href="class_stability_event_list.html">StabilityEventList</a> stabEventList(<span class="keyword">this</span>, elementList);</div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>            stabEventList.ShowModal();</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>        }</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>    }</div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>}</div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span> </div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span><span class="keywordtype">void</span> MainFrame::OnSnapshotMenuClick(wxCommandEvent&amp; event)</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>{</div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span> </div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>        <span class="keyword">auto</span> elementList = workspace-&gt;GetElementList();</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span> </div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>        <span class="keywordflow">switch</span> (event.GetId()) {</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>        <span class="keywordflow">case</span> ID_SNAPSHOTMENU_LIST: {</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>            <span class="comment">// Save SVG file</span></div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>            wxFileDialog saveFileDialog(<span class="keyword">this</span>, _(<span class="stringliteral">&quot;Save diagram as SVG&quot;</span>), <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;SVG files (*.svg)|*.svg&quot;</span>,</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>                wxFD_SAVE | wxFD_OVERWRITE_PROMPT);</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>            <span class="keywordflow">if</span> (saveFileDialog.ShowModal() == wxID_CANCEL) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>            workspace-&gt;ExportAsSVG(saveFileDialog.GetPath());</div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>        } <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>        }</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>    }</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>}</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span> </div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span><span class="keywordtype">int</span> MainFrame::RunPSPTest()</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>{</div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Main frame setup OK!\n&quot;</span>);</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span> </div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>    <span class="comment">// Emulate new project creation</span></div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>    EnableCurrentProjectRibbon();</div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span> </div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* newWorkspace = <span class="keyword">new</span> <a class="code hl_class" href="class_workspace.html">Workspace</a>(<span class="keyword">this</span>, wxString::Format(_(<span class="stringliteral">&quot;New project %d&quot;</span>), m_projectNumber),</div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>        this-&gt;GetStatusBar(), this-&gt;GetAuiNotebook());</div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>    <span class="comment">//if (!m_sharedGLContext) {</span></div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>    <span class="comment">//  m_sharedGLContext = newWorkspace-&gt;GetSharedGLContext();</span></div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    <span class="comment">//}</span></div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    m_workspaceList.push_back(newWorkspace);</div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span> </div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>    m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span> </div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    m_auiNotebook-&gt;AddPage(newWorkspace, newWorkspace-&gt;GetName(), <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>    newWorkspace-&gt;Redraw();</div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span> </div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Project creation OK!\n&quot;</span>);</div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>    wxMessageOutput::Get()-&gt;Printf(<span class="stringliteral">&quot;Test done!\n&quot;</span>);</div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span> </div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>}</div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span><span class="keywordtype">void</span> MainFrame::OnClose(wxCloseEvent&amp; event)</div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>{</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    <span class="comment">// Setup the workspace closing correctly</span></div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span> </div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>    wxMessageDialog dialog(<span class="keyword">this</span>,</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>        _(<span class="stringliteral">&quot;Are you sure you want to close the program?\nAny unsaved changes will be lost.&quot;</span>),</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>        _(<span class="stringliteral">&quot;Closing PSP-UFU...&quot;</span>),</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>        wxYES_NO | wxICON_EXCLAMATION);</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span> </div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>    <span class="keywordflow">if</span> (dialog.ShowModal() == wxID_YES) {</div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>        <span class="keywordflow">if</span> (!m_workspaceList.empty())</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>            m_workspaceList[m_workspaceList.size() - 1]-&gt;Show();</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>        <span class="keyword">event</span>.Skip();</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    }</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    <span class="keywordflow">else</span> <span class="keyword">event</span>.Skip(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>}</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span><span class="keywordtype">void</span> MainFrame::OnHeatmapClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>{</div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled = workspace-&gt;IsHeatMapEnable();</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, !enabled);</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>        workspace-&gt;EnableHeatMap(!enabled);</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>    }</div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>}</div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span><span class="keywordtype">void</span> MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent&amp; event)</div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>{</div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>        m_ribbonButtonBarReports-&gt;ToggleButton(ID_RIBBON_HEATMAP, workspace-&gt;IsHeatMapEnable());</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_ENABLESOL, workspace-&gt;IsContinuousCalculationActive());</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>        m_ribbonButtonBarContinuous-&gt;ToggleButton(ID_RIBBON_DISABLESOL, !workspace-&gt;IsContinuousCalculationActive());</div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>    }</div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>}</div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span><span class="keywordtype">void</span> MainFrame::OnProjectSettingsClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>{</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>        <a class="code hl_class" href="class_project_properties_form.html">ProjectPropertiesForm</a> ppf(<span class="keyword">this</span>, workspace);</div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>        ppf.ShowModal();</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>        workspace-&gt;UpdateHeatMap();</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>        workspace-&gt;Redraw();</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>    }</div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>}</div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span><span class="keywordtype">void</span> MainFrame::OnSnapshotDropdown(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>{</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>    <span class="keyword">event</span>.PopupMenu(m_snapshotMenu);</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>}</div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span><span class="keywordtype">void</span> MainFrame::OnLabelMngrClick(wxRibbonButtonBarEvent&amp; event)</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>{</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>    <a class="code hl_class" href="class_workspace.html">Workspace</a>* workspace = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_workspace.html">Workspace</a>*<span class="keyword">&gt;</span>(m_auiNotebook-&gt;GetCurrentPage());</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>    <span class="keywordflow">if</span> (workspace) {</div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>        <a class="code hl_class" href="class_label_manager.html">LabelManager</a> labelMngr(<span class="keyword">this</span>, workspace);</div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span> </div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>        <span class="keywordflow">if</span> (labelMngr.ShowModal() == wxID_OK) {</div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>            workspace-&gt;UpdateTextElements();</div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>            workspace-&gt;Redraw();</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>        }</div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    }</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>}</div>
 <div class="ttc" id="a_about_form_8h_html"><div class="ttname"><a href="_about_form_8h.html">AboutForm.h</a></div></div>
 <div class="ttc" id="a_bus_8h_html"><div class="ttname"><a href="_bus_8h.html">Bus.h</a></div></div>
 <div class="ttc" id="a_capacitor_8h_html"><div class="ttname"><a href="_capacitor_8h.html">Capacitor.h</a></div></div>
@@ -1016,11 +1014,8 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="ttc" id="a_transformer_8h_html"><div class="ttname"><a href="_transformer_8h.html">Transformer.h</a></div></div>
 <div class="ttc" id="a_workspace_8h_html"><div class="ttname"><a href="_workspace_8h.html">Workspace.h</a></div></div>
 <div class="ttc" id="aclass_about_form_html"><div class="ttname"><a href="class_about_form.html">AboutForm</a></div><div class="ttdoc">Form to show some informations.</div><div class="ttdef"><b>Definition</b> <a href="_about_form_8h_source.html#l00032">AboutForm.h:33</a></div></div>
-<div class="ttc" id="aclass_bus_html"><div class="ttname"><a href="class_bus.html">Bus</a></div><div class="ttdoc">Node for power elements. All others power elements are connected through this.</div><div class="ttdef"><b>Definition</b> <a href="_bus_8h_source.html#l00085">Bus.h:86</a></div></div>
-<div class="ttc" id="aclass_capacitor_html"><div class="ttname"><a href="class_capacitor.html">Capacitor</a></div><div class="ttdoc">Shunt capactior power element.</div><div class="ttdef"><b>Definition</b> <a href="_capacitor_8h_source.html#l00038">Capacitor.h:39</a></div></div>
 <div class="ttc" id="aclass_chart_view_html"><div class="ttname"><a href="class_chart_view.html">ChartView</a></div><div class="ttdoc">This class is responsible to manage the charts generated in the transient electromechanical studies.</div><div class="ttdef"><b>Definition</b> <a href="_chart_view_8h_source.html#l00048">ChartView.h:49</a></div></div>
 <div class="ttc" id="aclass_data_report_html"><div class="ttname"><a href="class_data_report.html">DataReport</a></div><div class="ttdoc">Form that shows the results of power flow and fault calculations.</div><div class="ttdef"><b>Definition</b> <a href="_data_report_8h_source.html#l00033">DataReport.h:34</a></div></div>
-<div class="ttc" id="aclass_e_m_t_element_html"><div class="ttname"><a href="class_e_m_t_element.html">EMTElement</a></div><div class="ttdoc">Element to connect ATP-EMTP.</div><div class="ttdef"><b>Definition</b> <a href="_e_m_t_element_8h_source.html#l00064">EMTElement.h:65</a></div></div>
 <div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00111">Element.h:112</a></div></div>
 <div class="ttc" id="aclass_element_html_a536ad18a847dcc979c984b3cb287f238"><div class="ttname"><a href="class_element.html#a536ad18a847dcc979c984b3cb287f238">Element::GetPosition</a></div><div class="ttdeci">wxPoint2DDouble GetPosition() const</div><div class="ttdoc">Get the element position.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00186">Element.h:186</a></div></div>
 <div class="ttc" id="aclass_element_html_a846a2a51780a99363b4d4b1812ca16b4"><div class="ttname"><a href="class_element.html#a846a2a51780a99363b4d4b1812ca16b4">Element::StartMove</a></div><div class="ttdeci">virtual void StartMove(wxPoint2DDouble position)</div><div class="ttdoc">Update the element attributes related to the movement.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00329">Element.cpp:329</a></div></div>
@@ -1028,13 +1023,8 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="ttc" id="aclass_element_plot_data_html"><div class="ttname"><a href="class_element_plot_data.html">ElementPlotData</a></div><div class="ttdef"><b>Definition</b> <a href="_element_plot_data_8h_source.html#l00067">ElementPlotData.h:68</a></div></div>
 <div class="ttc" id="aclass_file_handing_html"><div class="ttname"><a href="class_file_handing.html">FileHanding</a></div><div class="ttdoc">Save and opens the projects created on disk.</div><div class="ttdef"><b>Definition</b> <a href="_file_handing_8h_source.html#l00042">FileHanding.h:43</a></div></div>
 <div class="ttc" id="aclass_general_properties_form_html"><div class="ttname"><a href="class_general_properties_form.html">GeneralPropertiesForm</a></div><div class="ttdoc">Form to edit the software's general data.</div><div class="ttdef"><b>Definition</b> <a href="_general_properties_form_8h_source.html#l00037">GeneralPropertiesForm.h:38</a></div></div>
-<div class="ttc" id="aclass_harm_current_html"><div class="ttname"><a href="class_harm_current.html">HarmCurrent</a></div><div class="ttdoc">Shunt Harmonic Corrent Source.</div><div class="ttdef"><b>Definition</b> <a href="_harm_current_8h_source.html#l00023">HarmCurrent.h:24</a></div></div>
 <div class="ttc" id="aclass_import_form_html"><div class="ttname"><a href="class_import_form.html">ImportForm</a></div><div class="ttdoc">Form to import other programs files to PSP.</div><div class="ttdef"><b>Definition</b> <a href="_import_form_8h_source.html#l00052">ImportForm.h:53</a></div></div>
-<div class="ttc" id="aclass_ind_motor_html"><div class="ttname"><a href="class_ind_motor.html">IndMotor</a></div><div class="ttdoc">Induction motor power element.</div><div class="ttdef"><b>Definition</b> <a href="_ind_motor_8h_source.html#l00118">IndMotor.h:119</a></div></div>
-<div class="ttc" id="aclass_inductor_html"><div class="ttname"><a href="class_inductor.html">Inductor</a></div><div class="ttdoc">Inductor shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_inductor_8h_source.html#l00038">Inductor.h:39</a></div></div>
 <div class="ttc" id="aclass_label_manager_html"><div class="ttname"><a href="class_label_manager.html">LabelManager</a></div><div class="ttdef"><b>Definition</b> <a href="_label_manager_8h_source.html#l00007">LabelManager.h:8</a></div></div>
-<div class="ttc" id="aclass_line_html"><div class="ttname"><a href="class_line.html">Line</a></div><div class="ttdoc">Power line element.</div><div class="ttdef"><b>Definition</b> <a href="_line_8h_source.html#l00063">Line.h:64</a></div></div>
-<div class="ttc" id="aclass_load_html"><div class="ttname"><a href="class_load.html">Load</a></div><div class="ttdoc">Loas shunt power element.</div><div class="ttdef"><b>Definition</b> <a href="_load_8h_source.html#l00073">Load.h:74</a></div></div>
 <div class="ttc" id="aclass_main_frame_base_html"><div class="ttname"><a href="class_main_frame_base.html">MainFrameBase</a></div><div class="ttdef"><b>Definition</b> <a href="_main_frame_base_8h_source.html#l00043">MainFrameBase.h:44</a></div></div>
 <div class="ttc" id="aclass_main_frame_html_a0cfd88ece4836e0ea5430bd55370bf11"><div class="ttname"><a href="class_main_frame.html#a0cfd88ece4836e0ea5430bd55370bf11">MainFrame::~MainFrame</a></div><div class="ttdeci">~MainFrame()</div><div class="ttdoc">Default destructor.</div><div class="ttdef"><b>Definition</b> <a href="_main_frame_8cpp_source.html#l00082">MainFrame.cpp:82</a></div></div>
 <div class="ttc" id="aclass_main_frame_html_a667b44053cae174a361cfd21124ef995"><div class="ttname"><a href="class_main_frame.html#a667b44053cae174a361cfd21124ef995">MainFrame::MainFrame</a></div><div class="ttdeci">MainFrame()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition</b> <a href="_main_frame_8cpp_source.html#l00049">MainFrame.cpp:49</a></div></div>
@@ -1043,9 +1033,6 @@ $(document).ready(function(){initNavTree('_main_frame_8cpp_source.html',''); ini
 <div class="ttc" id="aclass_properties_data_html"><div class="ttname"><a href="class_properties_data.html">PropertiesData</a></div><div class="ttdoc">General and simulation data manager.</div><div class="ttdef"><b>Definition</b> <a href="_properties_data_8h_source.html#l00102">PropertiesData.h:103</a></div></div>
 <div class="ttc" id="aclass_simulations_settings_form_html"><div class="ttname"><a href="class_simulations_settings_form.html">SimulationsSettingsForm</a></div><div class="ttdoc">Form to edit the simulation data.</div><div class="ttdef"><b>Definition</b> <a href="_simulations_settings_form_8h_source.html#l00032">SimulationsSettingsForm.h:33</a></div></div>
 <div class="ttc" id="aclass_stability_event_list_html"><div class="ttname"><a href="class_stability_event_list.html">StabilityEventList</a></div><div class="ttdef"><b>Definition</b> <a href="_stability_event_list_8h_source.html#l00010">StabilityEventList.h:11</a></div></div>
-<div class="ttc" id="aclass_sync_generator_html"><div class="ttname"><a href="class_sync_generator.html">SyncGenerator</a></div><div class="ttdoc">Synchronous generator power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_generator_8h_source.html#l00145">SyncGenerator.h:146</a></div></div>
-<div class="ttc" id="aclass_sync_motor_html"><div class="ttname"><a href="class_sync_motor.html">SyncMotor</a></div><div class="ttdoc">Synchronous motor (synchronous compensator) power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00134">SyncMotor.h:135</a></div></div>
-<div class="ttc" id="aclass_transformer_html"><div class="ttname"><a href="class_transformer.html">Transformer</a></div><div class="ttdoc">Two-winding transformer power element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8h_source.html#l00083">Transformer.h:84</a></div></div>
 <div class="ttc" id="aclass_workspace_html"><div class="ttname"><a href="class_workspace.html">Workspace</a></div><div class="ttdoc">This class manages the graphical and power elements. It is responsible for handling the user's intera...</div><div class="ttdef"><b>Definition</b> <a href="_workspace_8h_source.html#l00102">Workspace.h:103</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
