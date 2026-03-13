@@ -146,3 +146,16 @@ if(WIN32)
       "$<TARGET_FILE_DIR:PSP-UFU>/../data"
   )
 endif()
+
+# Linux
+if(UNIX AND NOT APPLE)
+  add_custom_command(TARGET PSP-UFU POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E rm -f ${CHARTDIR_PATH}/libchartdir.so.7.0
+  COMMAND ${CMAKE_COMMAND} -E create_symlink
+    ${CHARTDIR_PATH}/libchartdir.so.7.0.0
+    ${CHARTDIR_PATH}/libchartdir.so.7.0
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_SOURCE_DIR}/Project/data"
+    "$<TARGET_FILE_DIR:PSP-UFU>/../data"
+  )
+endif()

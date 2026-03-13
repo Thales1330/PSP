@@ -84,7 +84,7 @@ The executable will be located at: build/bin/Release/PSP-UFU.exe
 ### [](#header-3)🐧 Linux (GCC or Clang)
 ```bash
 sudo apt update
-sudo apt install build-essential cmake git libgtk-3-dev libx11-dev libglu1-mesa-dev
+sudo apt install build-essential cmake git libgtk-3-dev libx11-dev libglu1-mesa-dev libfftw3-dev
 
 git clone https://github.com/Thales1330/PSP.git
 cd PSP
