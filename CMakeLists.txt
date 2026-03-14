@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 project(PSP-UFU VERSION 1.0 LANGUAGES CXX)
 
+# Standard install directories (bin, share, lib, etc)
+include(GNUInstallDirs)
+
 # C++20
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -73,10 +76,12 @@ add_executable(PSP-UFU
 
 # Link directories and libraries depending on OS and architecture
 if(WIN32)
+
   target_link_directories(PSP-UFU PRIVATE
     "${CMAKE_SOURCE_DIR}/vendors/fftw/fftw-3.3.5-dll32"
     "${CMAKE_SOURCE_DIR}/vendors/chatdir/win32"
   )
+
   target_link_libraries(PSP-UFU PRIVATE
     wx::core
     wx::base
@@ -90,12 +95,14 @@ if(WIN32)
     chartdir70.lib
     libfftw3-3.lib
   )
+
 elseif(UNIX)
+
   # Linux 64-bit
   set(CHARTDIR_PATH "${CMAKE_SOURCE_DIR}/vendors/chatdir/linux64")
-  
+
   target_link_directories(PSP-UFU PRIVATE "${CHARTDIR_PATH}")
-  
+
   target_link_libraries(PSP-UFU PRIVATE
     wx::core
     wx::base
@@ -107,13 +114,15 @@ elseif(UNIX)
     wx::xml
     wx::stc
     fftw3
-	"${CHARTDIR_PATH}/libchartdir.so.7.0.0"
+    "${CHARTDIR_PATH}/libchartdir.so.7.0.0"
   )
-  
+
   # RUNTIME PATH to find .so in runtime
   set_target_properties(PSP-UFU PROPERTIES
     BUILD_RPATH "${CHARTDIR_PATH}"
+    INSTALL_RPATH "$ORIGIN"
   )
+
 else()
   message(FATAL_ERROR "Unsupported platform or architecture")
 endif()
@@ -132,30 +141,48 @@ target_include_directories(PSP-UFU PRIVATE
 
 # Post build commands: copy DLLs and data folder on Windows
 if(WIN32)
+
   add_custom_command(TARGET PSP-UFU POST_BUILD
+
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
       "${CMAKE_SOURCE_DIR}/vendors/fftw/fftw-3.3.5-dll32/libfftw3-3.dll"
       $<TARGET_FILE_DIR:PSP-UFU>
-  
+
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
       "${CMAKE_SOURCE_DIR}/vendors/chatdir/win32/chartdir70.dll"
       $<TARGET_FILE_DIR:PSP-UFU>
-  
+
     COMMAND ${CMAKE_COMMAND} -E copy_directory
       "${CMAKE_SOURCE_DIR}/Project/data"
       "$<TARGET_FILE_DIR:PSP-UFU>/../data"
   )
+
 endif()
 
-# Linux
+# Linux build layout
 if(UNIX AND NOT APPLE)
+
   add_custom_command(TARGET PSP-UFU POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E rm -f ${CHARTDIR_PATH}/libchartdir.so.7.0
-  COMMAND ${CMAKE_COMMAND} -E create_symlink
-    ${CHARTDIR_PATH}/libchartdir.so.7.0.0
-    ${CHARTDIR_PATH}/libchartdir.so.7.0
-  COMMAND ${CMAKE_COMMAND} -E copy_directory
-    "${CMAKE_SOURCE_DIR}/Project/data"
-    "$<TARGET_FILE_DIR:PSP-UFU>/../data"
+
+    COMMAND ${CMAKE_COMMAND} -E rm -f ${CHARTDIR_PATH}/libchartdir.so.7.0
+
+    COMMAND ${CMAKE_COMMAND} -E create_symlink
+      ${CHARTDIR_PATH}/libchartdir.so.7.0.0
+      ${CHARTDIR_PATH}/libchartdir.so.7.0
+
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+      "${CMAKE_SOURCE_DIR}/Project/data"
+      "$<TARGET_FILE_DIR:PSP-UFU>/../data"
   )
+
 endif()
+
+# --------------------------------------------------
+# Installation rules (needed for .deb and AppImage)
+# --------------------------------------------------
+
+install(TARGETS PSP-UFU
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/Project/data
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/psp-ufu)
