@@ -35,46 +35,46 @@ wxString Paths::GetExecutableDir()
 
 wxString Paths::GetDataPath()
 {
-	// macOS / AppImage resources
-	wxString resources = wxStandardPaths::Get().GetResourcesDir();
-	wxString systemData = resources + "/data";
+    wxFileName exe(wxStandardPaths::Get().GetExecutablePath());
 
-	if (wxDirExists(systemData))
-		return systemData;
+    // 1. Installed layout (bin/../share/psp-ufu/data)
+    wxString installData = exe.GetPath() + "/../share/psp-ufu/data";
 
-	// Standard Linux install
-	wxString dataDir = wxStandardPaths::Get().GetDataDir() + "/data";
+    wxFileName fnInstall(installData);
+    fnInstall.Normalize(wxPATH_NORM_DOTS);
 
-	if (wxDirExists(dataDir))
-		return dataDir;
+    if (wxDirExists(fnInstall.GetFullPath()))
+        return fnInstall.GetFullPath();
 
-	// Local install layout (bin/../share/psp-ufu/data)
-	wxFileName exe(wxStandardPaths::Get().GetExecutablePath());
-	wxString installData = exe.GetPath() + "/../share/psp-ufu/data";
+    // 2. macOS / AppImage resources
+    wxString resources = wxStandardPaths::Get().GetResourcesDir() + "/data";
 
-	wxFileName fnInstall(installData);
-	fnInstall.Normalize(wxPATH_NORM_DOTS);
+    if (wxDirExists(resources))
+        return resources;
 
-	if (wxDirExists(fnInstall.GetFullPath()))
-		return fnInstall.GetFullPath();
+    // 3. Standard Linux install (/usr/share/psp-ufu/data)
+    wxString dataDir = wxStandardPaths::Get().GetDataDir() + "/data";
 
-	// Portable layout (Windows or development build)
-	wxString portable = exe.GetPath() + "/../data";
+    if (wxDirExists(dataDir))
+        return dataDir;
 
-	wxFileName fn(portable);
-	fn.Normalize(wxPATH_NORM_DOTS);
+    // 4. Portable layout (Windows or development build)
+    wxString portable = exe.GetPath() + "/../data";
 
-	if (wxDirExists(fn.GetFullPath()))
-		return fn.GetFullPath();
+    wxFileName fn(portable);
+    fn.Normalize(wxPATH_NORM_DOTS);
 
-	wxMessageDialog msgDialog(nullptr,
-		_("Data directory not found."),
-		_("Error"),
-		wxOK | wxCENTRE | wxICON_ERROR);
+    if (wxDirExists(fn.GetFullPath()))
+        return fn.GetFullPath();
 
-	msgDialog.ShowModal();
+    wxMessageDialog msgDialog(nullptr,
+        _("Data directory not found."),
+        _("Error"),
+        wxOK | wxCENTRE | wxICON_ERROR);
 
-	return "";
+    msgDialog.ShowModal();
+
+    return "";
 }
 
 wxString Paths::GetDocumentsPath()
