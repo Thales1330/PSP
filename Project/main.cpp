@@ -214,7 +214,7 @@ public:
 		wxImage::AddHandler(new wxJPEGHandler);
 
 		// Load fonts
-#if defined(__WXMSW__) || defined(__WXGTK__)
+#ifdef __WXMSW__
 		//wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
 		wxString fontsPath = Paths::GetDataPath() + "/fonts";
 		bool loadFont = wxFont::AddPrivateFont(fontsPath + "/cmunrm.ttf"); // regular
@@ -224,7 +224,7 @@ public:
 				wxOK | wxCENTRE | wxICON_ERROR);
 			msgDialog.ShowModal();
 		}
-#endif // defined(__WXMSW__) || defined(__WXGTK__)	
+#endif // __WXMSW__
 
 		PropertiesData* propertiesData = new PropertiesData();
 		LoadInitFile(propertiesData);
