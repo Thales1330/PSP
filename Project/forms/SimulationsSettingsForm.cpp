@@ -17,6 +17,7 @@
 
 #include "SimulationsSettingsForm.h"
 #include "../utils/PropertiesData.h"
+#include "../utils/Path.h"
 
 SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesData* properties, wxLocale* locale)
 	: SimulationsSettingsFormBase(parent)
@@ -93,7 +94,7 @@ SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesDat
 
 	if (locale->GetCanonicalName() == wxT("pt_BR")) {
 		wxBitmap wfDiagram;
-		wfDiagram.LoadFile(wxT("../data/images/WF-pt.png"), wxBITMAP_TYPE_PNG);
+		wfDiagram.LoadFile(Paths::GetDataPath() + "/images/WF-pt.png", wxBITMAP_TYPE_PNG);
 		m_staticBitmapDiagram->SetBitmap(wfDiagram);
 	}
 

@@ -16,6 +16,7 @@
  */
 
 #include "Line.h"
+#include "../utils/Path.h"
 
 Line::Line() : Branch()
 {
@@ -426,8 +427,8 @@ void Line::MoveNode(Element* parent, wxPoint2DDouble position)
 
 bool Line::GetContextMenu(wxMenu& menu)
 {
-	wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
-	wxString exePath = exeFileName.GetPath();
+	//wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
+	//wxString exePath = exeFileName.GetPath();
 
 	menu.Append(ID_EDIT_ELEMENT, _("Edit line"));
 
@@ -460,19 +461,16 @@ bool Line::GetContextMenu(wxMenu& menu)
 
 	if (m_activePickboxID == ID_PB_NONE) {
 		wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_ADD_NODE, _("Insert node"));
-		addNodeItem->SetBitmap(
-			wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\addNode16.png", wxPATH_WIN).GetPath()));
+		addNodeItem->SetBitmap(wxImage(Paths::GetDataPath() + "/images/menu/addNode16.png"));
 		menu.Append(addNodeItem);
 	}
 	else {
 		wxMenuItem* addNodeItem = new wxMenuItem(&menu, ID_LINE_REMOVE_NODE, _("Remove node"));
-		addNodeItem->SetBitmap(
-			wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\removeNode16.png", wxPATH_WIN).GetPath()));
+		addNodeItem->SetBitmap(wxImage(Paths::GetDataPath() + "/images/menu/removeNode16.png"));
 		menu.Append(addNodeItem);
 	}
 	wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-	deleteItem->SetBitmap(
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
+	deleteItem->SetBitmap(wxImage(Paths::GetDataPath() + "/images/menu/delete16.png"));
 	menu.Append(deleteItem);
 	return true;
 }

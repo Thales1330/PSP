@@ -20,6 +20,7 @@
 
 #include "MainFrame.h"
 #include "utils/PropertiesData.h"
+#include "utils/Path.h"
 
 /** @file main.cpp */
 /** @mainpage PSP-UFU
@@ -79,7 +80,7 @@ public:
 #endif
 
 		// Load configuration file, if don't exists create it.
-		wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "config.ini");
+		wxFileName fn(Paths::GetDocumentsPath() + "/PSP-UFU/config.ini");
 		if (!fn.DirExists()) {
 			fn.Mkdir();
 		}
@@ -176,7 +177,7 @@ public:
 		}
 
 		// Check if the atp folder exists, if not create it.
-		wxString atpFolder = wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + "PSP-UFU" + wxFileName::GetPathSeparator() + "atp";
+		wxString atpFolder = Paths::GetDocumentsPath() + "/PSP-UFU/atp";
 		if (!wxDir::Exists(atpFolder)) wxDir::Make(atpFolder);
 		data.atpWorkFolder = atpFolder;
 
@@ -193,8 +194,8 @@ public:
 			msgDialog.ShowModal();
 		}
 
-		wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-		wxString langPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\lang", wxPATH_WIN).GetPath();
+		//wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+		wxString langPath = Paths::GetDataPath() + "/lang";
 		locale->AddCatalogLookupPathPrefix(langPath);
 		// pt_BR
 		if (propertiesData->GetGeneralPropertiesData().language == wxLANGUAGE_PORTUGUESE_BRAZILIAN) {
@@ -213,17 +214,17 @@ public:
 		wxImage::AddHandler(new wxJPEGHandler);
 
 		// Load fonts
-#ifdef __WXMSW__
-		wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-		wxString fontsPath = fn.GetPath() + wxFileName::DirName("\\..\\data\\fonts", wxPATH_WIN).GetPath();
-		bool loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunrm.ttf"); // regular
-		if (loadFont) loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + "cmunbx.ttf"); // bold
+#if defined(__WXMSW__) || defined(__WXGTK__)
+		//wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+		wxString fontsPath = Paths::GetDataPath() + "/fonts";
+		bool loadFont = wxFont::AddPrivateFont(fontsPath + "/cmunrm.ttf"); // regular
+		if (loadFont) loadFont = wxFont::AddPrivateFont(fontsPath + "/cmunbx.ttf"); // bold
 		if (!loadFont) {
-			wxMessageDialog msgDialog(nullptr, _("Fail to load local font."), _("Error"),
+			wxMessageDialog msgDialog(nullptr, _("Failed to load local font."), _("Error"),
 				wxOK | wxCENTRE | wxICON_ERROR);
 			msgDialog.ShowModal();
 		}
-#endif // wxUSE_PRIVATE_FONTS		
+#endif // defined(__WXMSW__) || defined(__WXGTK__)	
 
 		PropertiesData* propertiesData = new PropertiesData();
 		LoadInitFile(propertiesData);

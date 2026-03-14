@@ -19,6 +19,7 @@
 #ifdef USING_WX_3_0_X
 #include "../utils/DegreesAndRadians.h"
 #endif
+#include "../utils/Path.h"
 
 #include <wx/pen.h>
 #include <wx/brush.h>
@@ -31,16 +32,6 @@ void Element::SetPosition(const wxPoint2DDouble position)
 		wxRect2DDouble(m_position.m_x - m_width / 2.0 - m_borderSize, m_position.m_y - m_height / 2.0 - m_borderSize,
 			m_width + 2.0 * m_borderSize, m_height + 2.0 * m_borderSize);
 }
-
-//void Element::DrawCircle(wxPoint2DDouble position, double radius, int numSegments, GLenum mode) const
-//{
-//    glBegin(mode);
-//    for(int i = 0; i < numSegments; i++) {
-//        double theta = 2.0 * 3.1415926 * double(i) / double(numSegments);
-//        glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
-//    }
-//    glEnd();
-//}
 
 void Element::DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC& dc) const
 {
@@ -168,7 +159,7 @@ void Element::DrawDCRoundedRectRotated(wxDC& dc, const wxPoint2DDouble& center, 
 	dc.DrawLine(pts[0].x, pts[0].y, pts[1].x, pts[1].y);
 	dc.DrawLine(pts[2].x, pts[2].y, pts[3].x, pts[3].y);
 
-	drawArc(hw - radius, -hh + radius, 0 - angleDeg * 2); 
+	drawArc(hw - radius, -hh + radius, 0 - angleDeg * 2);
 	drawArc(hw - radius, hh - radius, 270 - angleDeg * 2);
 	drawArc(-hw + radius, hh - radius, 180 - angleDeg * 2);
 	drawArc(-hw + radius, -hh + radius, 90 - angleDeg * 2);
@@ -191,23 +182,6 @@ void Element::DrawDCCircle(wxPoint2DDouble position, double radius, wxDC& dc) co
 	dc.DrawCircle(wxRound(position.m_x), wxRound(position.m_y), wxRound(radius));
 }
 
-//void Element::DrawArc(wxPoint2DDouble position,
-//                      double radius,
-//                      double initAngle,
-//                      double finalAngle,
-//                      int numSegments,
-//                      GLenum mode) const
-//{
-//    double initAngRad = wxDegToRad(initAngle);
-//    double finalAngRad = wxDegToRad(finalAngle);
-//    glBegin(mode);
-//    for(int i = 0; i <= numSegments; i++) {
-//        double theta = initAngRad + (finalAngRad - initAngRad) * double(i) / double(numSegments);
-//        glVertex2f(radius * std::cos(theta) + position.m_x, radius * std::sin(theta) + position.m_y);
-//    }
-//    glEnd();
-//}
-
 void Element::DrawDCArc(wxPoint2DDouble position, double radius, double initAngle, double finalAngle, int numSegments, wxGraphicsContext* gc) const
 {
 	double initAngRad = wxDegToRad(initAngle);
@@ -227,13 +201,6 @@ void Element::DrawDCArc(wxPoint2DDouble position, double radius, double initAngl
 	dc.DrawEllipticArc(wxRound(position.m_x - radius), wxRound(position.m_y - radius), wxRound(2 * radius), wxRound(2 * radius), initAngle, finalAngle);
 }
 
-//void Element::DrawTriangle(std::vector<wxPoint2DDouble> points, GLenum mode) const
-//{
-//    glBegin(mode);
-//    for(int i = 0; i < 3; i++) { glVertex2d(points[i].m_x, points[i].m_y); }
-//    glEnd();
-//}
-
 void Element::DrawDCTriangle(std::vector<wxPoint2DDouble> points, wxGraphicsContext* gc) const
 {
 	points.emplace_back(points[0]);
@@ -245,42 +212,6 @@ void Element::DrawDCTriangle(std::vector<wxPoint> points, wxDC& dc) const
 	points.emplace_back(points[0]);
 	dc.DrawPolygon(4, &points[0]);
 }
-
-//void Element::DrawRectangle(wxPoint2DDouble position, double width, double height, GLenum mode) const
-//{
-//    glBegin(mode);  // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
-//    glVertex2d(position.m_x - width / 2.0, position.m_y - height / 2.0);
-//    glVertex2d(position.m_x - width / 2.0, position.m_y + height / 2.0);
-//    glVertex2d(position.m_x + width / 2.0, position.m_y + height / 2.0);
-//    glVertex2d(position.m_x + width / 2.0, position.m_y - height / 2.0);
-//    glEnd();
-//}
-
-//void Element::DrawRectangle(wxPoint2DDouble* points, GLenum mode) const
-//{
-//    glBegin(mode);  // TODO: GL_QUADS é obsoleto (OpenGL 3.0+), encontrar outra solução.
-//    glVertex2d(points[0].m_x, points[0].m_y);
-//    glVertex2d(points[1].m_x, points[1].m_y);
-//    glVertex2d(points[2].m_x, points[2].m_y);
-//    glVertex2d(points[3].m_x, points[3].m_y);
-//    glEnd();
-//}
-
-//void Element::DrawLine(std::vector<wxPoint2DDouble> points, GLenum mode) const
-//{
-//    glBegin(mode);
-//    for(auto it = points.begin(); it != points.end(); ++it) { glVertex2d((*it).m_x, (*it).m_y); }
-//    glEnd();
-//}
-
-//void Element::DrawPickbox(wxPoint2DDouble position) const
-//{
-//    glLineWidth(1.0);
-//    glColor4d(1.0, 1.0, 1.0, 0.8);
-//    DrawRectangle(position, 8.0, 8.0);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawRectangle(position, 8.0, 8.0, GL_LINE_LOOP);
-//}
 
 void Element::DrawDCPickbox(wxPoint2DDouble position, wxGraphicsContext* gc) const
 {
@@ -457,21 +388,18 @@ bool Element::SetOnline(bool online)
 void Element::GeneralMenuItens(wxMenu& menu)
 {
 	wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
-	wxString exePath = exeFileName.GetPath();
+	//wxString exePath = exeFileName.GetPath();
 
 	wxMenuItem* clockItem = new wxMenuItem(&menu, ID_ROTATE_CLOCK, _("Rotate clockwise"));
-	clockItem->SetBitmap(
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateClock16.png", wxPATH_WIN).GetPath()));
+	clockItem->SetBitmap(wxImage(Paths::GetDataPath() + "/images/menu/rotateClock16.png"));
 	menu.Append(clockItem);
 
 	wxMenuItem* counterClockItem = new wxMenuItem(&menu, ID_ROTATE_COUNTERCLOCK, _("Rotate counter-clockwise"));
-	counterClockItem->SetBitmap(wxImage(
-		exePath + wxFileName::DirName("\\..\\data\\images\\menu\\rotateCounterClock16.png", wxPATH_WIN).GetPath()));
+	counterClockItem->SetBitmap(wxImage(Paths::GetDataPath() + "/images/menu/rotateCounterClock16.png"));
 	menu.Append(counterClockItem);
 
 	wxMenuItem* deleteItem = new wxMenuItem(&menu, ID_DELETE, _("Delete"));
-	deleteItem->SetBitmap(
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\menu\\delete16.png", wxPATH_WIN).GetPath()));
+	deleteItem->SetBitmap(wxImage(Paths::GetDataPath() + "/images/menu/delete16.png"));
 	menu.Append(deleteItem);
 }
 

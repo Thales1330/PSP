@@ -49,6 +49,7 @@
 #include "../utils/PropertiesData.h"
 #include "../utils/HMPlane.h"
 #include "../utils/FileHanding.h"
+#include "../utils/Path.h"
 
 #include <wx/busyinfo.h>
 #include <wx/dcsvg.h>
@@ -2007,7 +2008,7 @@ bool Workspace::RunPowerFlow(bool resetVoltages, bool showBusyInfo)
 			info = new wxBusyInfo(
 				wxBusyInfoFlags()
 				.Parent(this)
-				.Icon(wxIcon(wxFileName::DirName("..\\data\\images\\ribbon\\powerFLow32.png", wxPATH_WIN).GetPath(), wxBITMAP_TYPE_PNG))
+				.Icon(wxIcon(Paths::GetDataPath() + "/images/ribbon/powerFLow32.png", wxBITMAP_TYPE_PNG))
 				.Title(_("<b>Calculating Power Flow</b>"))
 				.Text(_("Please wait..."))
 				.Foreground(*wxWHITE)
@@ -2671,7 +2672,7 @@ bool Workspace::RunHarmonicDistortion(bool runPowerFlowBefore)
 		wxBusyInfo info(
 			wxBusyInfoFlags()
 			.Parent(this)
-			.Icon(wxIcon(wxFileName::DirName("..\\data\\images\\ribbon\\harmDist32.png", wxPATH_WIN).GetPath(), wxBITMAP_TYPE_PNG))
+			.Icon(wxIcon(Paths::GetDataPath() + "/images/ribbon/harmDist32.png", wxBITMAP_TYPE_PNG))
 			.Title(_("<b>Calculating Harmonic Flow</b>"))
 			.Text(_("Please wait..."))
 			.Foreground(*wxWHITE)

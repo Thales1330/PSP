@@ -16,13 +16,14 @@
  */
 
 #include "AboutForm.h"
+#include "../utils/Path.h"
 
 AboutForm::AboutForm(wxWindow* parent) : AboutFormBase(parent) { Init(); }
 AboutForm::~AboutForm() {}
 void AboutForm::Init()
 {
     // Set program version. Format: (Alpha/Beta/Release) (YEAR)w(WEEK)(a/b/c/...)
-    m_staticTextVersion->SetLabel("2026w11a-beta");
+    m_staticTextVersion->SetLabel("2026w11b-beta");
     
     // Create developers table
     m_gridCredits->EnableGridLines(false);
@@ -58,7 +59,8 @@ void AboutForm::Init()
     m_gridCredits->SetCellValue(4, 1, _("Chief advisor"));
     m_gridCredits->SetCellValue(4, 2, wxT("gcaixeta@ufu.br"));
     // Marcio Tamashiro
-    m_gridCredits->SetCellValue(5, 0, wxT("M") + static_cast<wxString>(L'\u00E1') + wxT("rcio Augusto Tamashiro"));
+    //m_gridCredits->SetCellValue(5, 0, wxT("M") + static_cast<wxString>(L'\u00E1') + wxT("rcio Augusto Tamashiro"));
+    m_gridCredits->SetCellValue(5, 0, wxT("Márcio Augusto Tamashiro"));
     m_gridCredits->SetCellValue(5, 1, "");
     m_gridCredits->SetCellValue(5, 2, wxT("tamashiro@ifto.edu.br"));
 
@@ -80,8 +82,8 @@ void AboutForm::Init()
     // Load license file
     wxString licenseStr = "";
     wxTextFile file;
-    wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
-    wxString licensePath = fn.GetPath() + wxFileName::DirName("\\..\\data\\LICENSE", wxPATH_WIN).GetPath();
+    //wxFileName fn(wxStandardPaths::Get().GetExecutablePath());
+    wxString licensePath = Paths::GetDataPath() + "/LICENSE";
     if(!file.Open(licensePath)) {
         // Error message
     } else {

@@ -38,6 +38,7 @@
 #endif
 #include "../utils/Camera.h"
 #include "../utils/FileHanding.h"
+#include "../utils/Path.h"
 
 #include "ChartView.h"
 #include "../utils/ElementPlotData.h"
@@ -159,81 +160,81 @@ void ControlEditor::BuildControlElementPanel()
 	m_panelControlElements->SetSizer(wrapSizer);
 
 	wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
-	wxString exePath = exeFileName.GetPath();
+	//wxString exePath = exeFileName.GetPath();
 
 	ControlElementButton* ioButton = new ControlElementButton(
 		m_panelControlElements, _("In/Out"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\io.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/io.png"),
 		static_cast<int>(ControlElementButtonID::ID_IO));
 	wrapSizer->Add(ioButton, 0, wxALL, 5);
 	ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* tfButton = new ControlElementButton(
 		m_panelControlElements, _("Transfer fcn"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\transferFunc.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/transferFunc.png"),
 		static_cast<int>(ControlElementButtonID::ID_TF));
 	wrapSizer->Add(tfButton, 0, wxALL, 5);
 	tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* sumButton = new ControlElementButton(
 		m_panelControlElements, _("Sum"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sum.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/sum.png"),
 		static_cast<int>(ControlElementButtonID::ID_SUM));
 	wrapSizer->Add(sumButton, 0, wxALL, 5);
 	sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* constButton = new ControlElementButton(
 		m_panelControlElements, _("Constant"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\value.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/value.png"),
 		static_cast<int>(ControlElementButtonID::ID_CONST));
 	wrapSizer->Add(constButton, 0, wxALL, 5);
 	constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* gainButton = new ControlElementButton(
 		m_panelControlElements, _("Gain"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\gain.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/gain.png"),
 		static_cast<int>(ControlElementButtonID::ID_GAIN));
 	wrapSizer->Add(gainButton, 0, wxALL, 5);
 	gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* limButton = new ControlElementButton(
 		m_panelControlElements, _("Limiter"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\limiter.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/limiter.png"),
 		static_cast<int>(ControlElementButtonID::ID_LIMITER));
 	wrapSizer->Add(limButton, 0, wxALL, 5);
 	limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* rateLimButton = new ControlElementButton(
 		m_panelControlElements, _("Rate limiter"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\rateLimiter.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/rateLimiter.png"),
 		static_cast<int>(ControlElementButtonID::ID_RATELIM));
 	wrapSizer->Add(rateLimButton, 0, wxALL, 5);
 	rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* multButton = new ControlElementButton(
 		m_panelControlElements, _("Multiplier"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mult.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/mult.png"),
 		static_cast<int>(ControlElementButtonID::ID_MULT));
 	wrapSizer->Add(multButton, 0, wxALL, 5);
 	multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* divButton = new ControlElementButton(
 		m_panelControlElements, _("Divider"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\div.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/div.png"),
 		static_cast<int>(ControlElementButtonID::ID_MATH_DIV));
 	wrapSizer->Add(divButton, 0, wxALL, 5);
 	divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* mathExprButton = new ControlElementButton(
 		m_panelControlElements, _("Math Expression"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\mathExpr.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/mathExpr.png"),
 		static_cast<int>(ControlElementButtonID::ID_MATH_EXPR));
 	wrapSizer->Add(mathExprButton, 0, wxALL, 5);
 	mathExprButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* satButton = new ControlElementButton(
 		m_panelControlElements, _("Exponential"),
-		wxImage(exePath + wxFileName::DirName("\\..\\data\\images\\control\\sat.png", wxPATH_WIN).GetPath()),
+		wxImage(Paths::GetDataPath() + "/images/control/sat.png"),
 		static_cast<int>(ControlElementButtonID::ID_EXP));
 	wrapSizer->Add(satButton, 0, wxALL, 5);
 	satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
