@@ -23,7 +23,6 @@ FetchContent_Declare(
   GIT_TAG v3.3.1
 )
 
-# Force build of required modules
 set(wxBUILD_SHARED OFF CACHE BOOL "" FORCE)
 set(wxBUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(wxBUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -74,7 +73,10 @@ add_executable(PSP-UFU
   ${WIN_RESOURCES}
 )
 
-# Link directories and libraries depending on OS and architecture
+# --------------------------------------------------
+# Linking
+# --------------------------------------------------
+
 if(WIN32)
 
   target_link_directories(PSP-UFU PRIVATE
@@ -117,10 +119,10 @@ elseif(UNIX)
     "${CHARTDIR_PATH}/libchartdir.so.7.0.0"
   )
 
-  # RUNTIME PATH to find .so in runtime
+  # runtime path configuration
   set_target_properties(PSP-UFU PROPERTIES
     BUILD_RPATH "${CHARTDIR_PATH}"
-    INSTALL_RPATH "$ORIGIN"
+    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}/psp-ufu"
   )
 
 else()
@@ -139,7 +141,10 @@ target_include_directories(PSP-UFU PRIVATE
   ${CMAKE_SOURCE_DIR}/vendors/include
 )
 
-# Post build commands: copy DLLs and data folder on Windows
+# --------------------------------------------------
+# Windows post build
+# --------------------------------------------------
+
 if(WIN32)
 
   add_custom_command(TARGET PSP-UFU POST_BUILD
@@ -159,7 +164,10 @@ if(WIN32)
 
 endif()
 
+# --------------------------------------------------
 # Linux build layout
+# --------------------------------------------------
+
 if(UNIX AND NOT APPLE)
 
   add_custom_command(TARGET PSP-UFU POST_BUILD
@@ -178,7 +186,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 # --------------------------------------------------
-# Installation rules (needed for .deb and AppImage)
+# Installation rules
 # --------------------------------------------------
 
 install(TARGETS PSP-UFU
@@ -186,3 +194,21 @@ install(TARGETS PSP-UFU
 
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/Project/data
         DESTINATION ${CMAKE_INSTALL_DATADIR}/psp-ufu)
+
+# Install ChartDirector library
+if(UNIX AND NOT APPLE)
+
+  install(FILES
+    ${CHARTDIR_PATH}/libchartdir.so.7.0.0
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/psp-ufu
+  )
+
+  install(CODE "
+    execute_process(
+      COMMAND \${CMAKE_COMMAND} -E create_symlink
+      libchartdir.so.7.0.0
+      \${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/psp-ufu/libchartdir.so.7.0
+    )
+  ")
+
+endif()
