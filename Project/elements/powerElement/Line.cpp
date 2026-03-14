@@ -16,7 +16,7 @@
  */
 
 #include "Line.h"
-#include "../utils/Path.h"
+#include "../../utils/Path.h"
 
 Line::Line() : Branch()
 {
