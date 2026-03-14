@@ -24,46 +24,60 @@
 
 wxString Paths::GetExecutablePath()
 {
-    return wxStandardPaths::Get().GetExecutablePath();
+	return wxStandardPaths::Get().GetExecutablePath();
 }
 
 wxString Paths::GetExecutableDir()
 {
-    wxFileName exe(wxStandardPaths::Get().GetExecutablePath());
-    return exe.GetPath();
+	wxFileName exe(wxStandardPaths::Get().GetExecutablePath());
+	return exe.GetPath();
 }
 
 wxString Paths::GetDataPath()
 {
-    // First attempt: resources directory (works on macOS bundles and AppImage)
-    wxString resources = wxStandardPaths::Get().GetResourcesDir();
-    wxString systemData = resources + "/data";
+	// macOS / AppImage resources
+	wxString resources = wxStandardPaths::Get().GetResourcesDir();
+	wxString systemData = resources + "/data";
 
-    if (wxDirExists(systemData))
-        return systemData;
+	if (wxDirExists(systemData))
+		return systemData;
 
-    // Second attempt: standard Linux installation path
-    wxString dataDir = wxStandardPaths::Get().GetDataDir() + "/data";
+	// Standard Linux install
+	wxString dataDir = wxStandardPaths::Get().GetDataDir() + "/data";
 
-    if (wxDirExists(dataDir))
-        return dataDir;
+	if (wxDirExists(dataDir))
+		return dataDir;
 
-    // Fallback: portable layout (Windows or development builds)
-    wxFileName exe(wxStandardPaths::Get().GetExecutablePath());
-    wxString portable = exe.GetPath() + "/../data";
+	// Local install layout (bin/../share/psp-ufu/data)
+	wxFileName exe(wxStandardPaths::Get().GetExecutablePath());
+	wxString installData = exe.GetPath() + "/../share/psp-ufu/data";
 
-    wxFileName fn(portable);
-    fn.Normalize(wxPATH_NORM_DOTS);
+	wxFileName fnInstall(installData);
+	fnInstall.Normalize(wxPATH_NORM_DOTS);
 
-    if (wxDirExists(fn.GetFullPath()))
-        return fn.GetFullPath();
+	if (wxDirExists(fnInstall.GetFullPath()))
+		return fnInstall.GetFullPath();
 
-    wxMessageDialog msgDialog(nullptr, _("Data directory not found."), _("Error"), wxOK | wxCENTRE | wxICON_ERROR);
-    msgDialog.ShowModal();
-    return "";
+	// Portable layout (Windows or development build)
+	wxString portable = exe.GetPath() + "/../data";
+
+	wxFileName fn(portable);
+	fn.Normalize(wxPATH_NORM_DOTS);
+
+	if (wxDirExists(fn.GetFullPath()))
+		return fn.GetFullPath();
+
+	wxMessageDialog msgDialog(nullptr,
+		_("Data directory not found."),
+		_("Error"),
+		wxOK | wxCENTRE | wxICON_ERROR);
+
+	msgDialog.ShowModal();
+
+	return "";
 }
 
 wxString Paths::GetDocumentsPath()
 {
-    return wxStandardPaths::Get().GetDocumentsDir();
+	return wxStandardPaths::Get().GetDocumentsDir();
 }
