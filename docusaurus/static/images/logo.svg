@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.36901682"
-     inkscape:cx="274.17908"
-     inkscape:cy="225.14478"
+     inkscape:zoom="1.4760673"
+     inkscape:cx="209.72652"
+     inkscape:cy="100.91199"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -51,47 +51,65 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-33.290118,-88.597112)">
+    <circle
+       r="13.687778"
+       cy="105.39832"
+       cx="50.223309"
+       inkscape:export-ydpi="24.190001"
+       inkscape:export-xdpi="24.190001"
+       inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
+       id="path3766-8-4"
+       style="fill:#0081cb;fill-opacity:1;stroke:none;stroke-width:0.306647" />
+    <path
+       inkscape:export-ydpi="24.190001"
+       inkscape:export-xdpi="24.190001"
+       inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
+       inkscape:connector-curvature="0"
+       id="path2996-1-5"
+       d="M 55.41934,91.589589 H 66.733161 L 53.709113,100.9634 h 7.498696 l -14.076499,9.07143 h 6.840913 l -20.522742,9.17222 8.156474,-7.15635 h -4.867571 l 12.234709,-9.37381 h -6.446248 z"
+       style="fill:#ff8200;fill-opacity:1;stroke:none;stroke-width:0.282223" />
+    <rect
+       inkscape:export-ydpi="24.190001"
+       inkscape:export-xdpi="24.190001"
+       inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
+       y="88.597115"
+       x="33.290119"
+       height="33.602413"
+       width="33.602413"
+       id="rect3845-5-5-0"
+       style="fill:none;stroke:none;stroke-width:0.339034;stroke-opacity:1" />
     <g
-       id="g1478"
-       transform="matrix(0.26458333,0,0,0.26458333,-17.743253,134.19826)">
-      <circle
-         r="51.733334"
-         cy="-108.85017"
-         cx="256.8815"
-         inkscape:export-ydpi="24.190001"
-         inkscape:export-xdpi="24.190001"
-         inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
-         id="path3766-8-4"
-         style="fill:#0081cb;fill-opacity:1;stroke:none;stroke-width:1.15898" />
+       aria-label="PSP-UFU"
+       id="text1455"
+       style="font-size:31.6447px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
       <path
-         inkscape:export-ydpi="24.190001"
-         inkscape:export-xdpi="24.190001"
-         inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
-         inkscape:connector-curvature="0"
-         id="path2996-1-5"
-         d="m 276.52004,-161.04065 h 42.7609 l -49.22475,35.42857 h 28.34153 l -53.20252,34.285713 h 25.85542 l -77.56627,34.66667 30.82762,-27.04761 h -18.39712 l 46.24142,-35.428583 H 227.7925 Z"
-         style="fill:#ff8200;fill-opacity:1;stroke:none;stroke-width:1.06667" />
-      <rect
-         inkscape:export-ydpi="24.190001"
-         inkscape:export-xdpi="24.190001"
-         inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
-         y="-172.3508"
-         x="192.88203"
-         height="127.00124"
-         width="127.00124"
-         id="rect3845-5-5-0"
-         style="fill:none;stroke:none;stroke-width:1.28139;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-size:119.602px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;stroke:#fcffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         x="516.69678"
-         y="-61.57584"
-         id="text1455"><tspan
-           sodipodi:role="line"
-           id="tspan1453"
-           x="516.69678"
-           y="-61.57584"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">PSP-UFU</tspan></text>
+         d="m 67.93748,92.890319 h 6.551442 q 2.65766,0 4.079199,0.417191 1.436991,0.41719 2.147761,1.205218 0.726221,0.788027 0.973445,1.915987 0.262676,1.112509 0.262676,3.461139 v 2.178666 q 0,2.39498 -0.494449,3.49204 -0.494448,1.09706 -1.823278,1.68421 -1.313379,0.58716 -3.445688,0.58716 h -1.746021 v 10.07439 H 67.93748 Z m 6.505087,4.280069 v 6.366022 q 0.278127,0.0155 0.478997,0.0155 0.896188,0 1.236121,-0.43264 0.355385,-0.44809 0.355385,-1.83873 v -2.055051 q 0,-1.282475 -0.401739,-1.668763 -0.40174,-0.386288 -1.668764,-0.386288 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2099" />
+      <path
+         d="m 97.604385,100.46156 h -6.041541 v -1.854181 q 0,-1.297927 -0.231773,-1.653312 -0.231773,-0.355385 -0.772576,-0.355385 -0.587157,0 -0.896188,0.478997 -0.293578,0.478997 -0.293578,1.452442 0,1.251573 0.339933,1.885089 0.324482,0.63351 1.83873,1.5297 4.341875,2.5804 5.469836,4.23371 1.12796,1.65331 1.12796,5.33077 0,2.67311 -0.633512,3.94014 -0.61806,1.26702 -2.410436,2.13231 -1.792375,0.84983 -4.171908,0.84983 -2.611306,0 -4.465488,-0.9889 -1.83873,-0.98889 -2.410436,-2.51859 -0.571706,-1.5297 -0.571706,-4.34188 v -1.63786 h 6.041542 v 3.04395 q 0,1.40609 0.247224,1.80783 0.262676,0.40174 0.911639,0.40174 0.648964,0 0.957994,-0.5099 0.324482,-0.5099 0.324482,-1.51425 0,-2.20957 -0.602609,-2.88944 -0.618061,-0.67986 -3.043948,-2.27137 -2.425888,-1.60696 -3.213915,-2.33318 -0.788027,-0.72622 -1.313379,-2.00869 -0.5099,-1.28248 -0.5099,-3.275724 0,-2.873982 0.726222,-4.202812 0.741672,-1.32883 2.379533,-2.070503 1.63786,-0.757124 3.955587,-0.757124 2.534048,0 4.310972,0.81893 1.792376,0.818931 2.364082,2.070503 0.587157,1.236121 0.587157,4.218263 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2101" />
+      <path
+         d="m 100.18479,92.890319 h 6.55144 q 2.65766,0 4.0792,0.417191 1.43699,0.41719 2.14776,1.205218 0.72622,0.788027 0.97344,1.915987 0.26268,1.112509 0.26268,3.461139 v 2.178666 q 0,2.39498 -0.49445,3.49204 -0.49445,1.09706 -1.82328,1.68421 -1.31338,0.58716 -3.44568,0.58716 h -1.74603 v 10.07439 h -6.50508 z m 6.50508,4.280069 v 6.366022 q 0.27813,0.0155 0.479,0.0155 0.89619,0 1.23612,-0.43264 0.35539,-0.44809 0.35539,-1.83873 v -2.055051 q 0,-1.282475 -0.40174,-1.668763 -0.40174,-0.386288 -1.66877,-0.386288 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2103" />
+      <path
+         d="m 123.53202,105.49875 v 4.31098 h -8.20475 v -4.31098 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2105" />
+      <path
+         d="m 140.1733,92.890319 v 16.718541 q 0,2.84307 -0.18541,4.00194 -0.18542,1.14341 -1.09706,2.36408 -0.91164,1.20522 -2.41044,1.83873 -1.48334,0.61806 -3.50749,0.61806 -2.24047,0 -3.95559,-0.74167 -1.71512,-0.74168 -2.56495,-1.93144 -0.84983,-1.18977 -1.00435,-2.50315 -0.15451,-1.32883 -0.15451,-5.56254 V 92.890319 h 6.50508 v 18.758141 q 0,1.63786 0.16997,2.1014 0.18542,0.4481 0.72622,0.4481 0.61806,0 0.78803,-0.49445 0.18542,-0.5099 0.18542,-2.37954 V 92.890319 Z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2107" />
+      <path
+         d="m 142.69191,92.890319 h 11.01692 v 5.00629 h -4.51184 v 4.743611 h 4.0174 v 4.75907 h -4.0174 v 10.50703 h -6.50508 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2109" />
+      <path
+         d="m 170.07198,92.890319 v 16.718541 q 0,2.84307 -0.18542,4.00194 -0.18541,1.14341 -1.09705,2.36408 -0.91164,1.20522 -2.41044,1.83873 -1.48334,0.61806 -3.50749,0.61806 -2.24047,0 -3.95559,-0.74167 -1.71512,-0.74168 -2.56495,-1.93144 -0.84983,-1.18977 -1.00435,-2.50315 -0.15451,-1.32883 -0.15451,-5.56254 V 92.890319 h 6.50508 v 18.758141 q 0,1.63786 0.16997,2.1014 0.18542,0.4481 0.72622,0.4481 0.61806,0 0.78803,-0.49445 0.18542,-0.5099 0.18542,-2.37954 V 92.890319 Z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2111" />
     </g>
   </g>
 </svg>
