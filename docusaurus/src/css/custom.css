@@ -16,6 +16,31 @@
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
 }
+.hero--primary {
+  background: linear-gradient(135deg, #ff8c00, #1cb6d5, #2e8de6);
+  background-size: 200% 200%;
+  animation: heroGradient 12s ease infinite;
+}
+
+@keyframes heroGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 60%);
+  pointer-events: none;
+}
 
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);

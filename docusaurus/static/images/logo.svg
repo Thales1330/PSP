@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="137.04643mm"
+   height="33.602413mm"
+   viewBox="0 0 137.04643 33.602413"
+   version="1.1"
+   id="svg1502"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs1496" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.36901682"
+     inkscape:cx="274.17908"
+     inkscape:cy="225.14478"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata1499">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-33.290118,-88.597112)">
+    <g
+       id="g1478"
+       transform="matrix(0.26458333,0,0,0.26458333,-17.743253,134.19826)">
+      <circle
+         r="51.733334"
+         cy="-108.85017"
+         cx="256.8815"
+         inkscape:export-ydpi="24.190001"
+         inkscape:export-xdpi="24.190001"
+         inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
+         id="path3766-8-4"
+         style="fill:#0081cb;fill-opacity:1;stroke:none;stroke-width:1.15898" />
+      <path
+         inkscape:export-ydpi="24.190001"
+         inkscape:export-xdpi="24.190001"
+         inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
+         inkscape:connector-curvature="0"
+         id="path2996-1-5"
+         d="m 276.52004,-161.04065 h 42.7609 l -49.22475,35.42857 h 28.34153 l -53.20252,34.285713 h 25.85542 l -77.56627,34.66667 30.82762,-27.04761 h -18.39712 l 46.24142,-35.428583 H 227.7925 Z"
+         style="fill:#ff8200;fill-opacity:1;stroke:none;stroke-width:1.06667" />
+      <rect
+         inkscape:export-ydpi="24.190001"
+         inkscape:export-xdpi="24.190001"
+         inkscape:export-filename="C:\Users\Thales\Dropbox\Imagens\PSSP\logo32.png"
+         y="-172.3508"
+         x="192.88203"
+         height="127.00124"
+         width="127.00124"
+         id="rect3845-5-5-0"
+         style="fill:none;stroke:none;stroke-width:1.28139;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:119.602px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;stroke:#fcffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="516.69678"
+         y="-61.57584"
+         id="text1455"><tspan
+           sodipodi:role="line"
+           id="tspan1453"
+           x="516.69678"
+           y="-61.57584"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;stroke:#fcffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">PSP-UFU</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -129,47 +129,164 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="<Translate>Power System Platform</Translate>">
-      <header className={clsx('hero hero--primary', styles.heroBanner)}>
-        <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle"><Translate>Power System Platform of Federal University of Uberlândia</Translate></p>
-		  
-		  <p><center>
-		  <iframe src="https://ghbtns.com/github-btn.html?user=thales1330&repo=psp&type=star&count=true&size=large" frameborder="0" scrolling="0" width="130" height="30" title="GitHub"></iframe>
-			</center></p>
-      <p><center><Dropdown className={styles.buttons} align={{ lg: 'start' }} autoClose={true}>
-      <Dropdown.Toggle className='button button--outline button--secondary button--lg'>
-      <Translate>⚡Download⚡</Translate>
-      </Dropdown.Toggle>
+  title={`${siteConfig.title}`}
+  description="<Translate>Power System Platform</Translate>">
 
-      <Dropdown.Menu>
-        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_x86_32_VC.exe">Windows (.exe)</Dropdown.Item>
-        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_x86_32_VC.zip">Windows (.zip)</Dropdown.Item>
-        <Dropdown.Item className='button button--outline button--secondary button--lg' href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_amd64_Alpha2018w15a.deb">Linux (.deb)</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown></center></p>
-		  <div className={styles.buttons}>
-			<Link
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('docs/')}>
-              <Translate>User Guide</Translate>
-            </Link>
-          </div>
-		  <div className={styles.buttons}>
-			<Link
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('https://raw.githubusercontent.com/Thales1330/PSP/master/docs/downloads/samples.zip')}>
-              <Translate>Samples</Translate>
-            </Link>
-          </div>
+  <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <div className="container">
+
+      <img
+        src={useBaseUrl('/images/logo.svg')}
+        alt={siteConfig.title}
+        className={styles.heroLogo}
+      />
+
+      <p style={{textAlign:"center"}}>
+        <iframe
+          src="https://ghbtns.com/github-btn.html?user=thales1330&repo=psp&type=star&count=true&size=large"
+          frameBorder="0"
+          scrolling="0"
+          width="130"
+          height="30"
+          title="GitHub">
+        </iframe>
+      </p>
+
+      <div style={{marginTop:"20px"}}>
+
+<h2
+  style={{
+    textAlign:"center",
+    marginBottom:"15px",
+    fontWeight:"700"
+  }}
+>
+⚡ <Translate>Download</Translate> ⚡
+</h2>
+
+<div
+  style={{
+    display:"flex",
+    justifyContent:"center",
+    gap:"40px",
+    flexWrap:"wrap"
+  }}
+>
+
+{/* WINDOWS */}
+<div
+  style={{
+    background:"rgba(255, 255, 255, 0.4)",
+    borderRadius:"14px",
+    padding:"28px",
+    width:"250px",
+    textAlign:"center",
+    boxShadow:"0 8px 25px rgba(0,0,0,0.15)",
+    transition:"transform 0.15s ease"
+  }}
+  onMouseEnter={(e)=>e.currentTarget.style.transform="translateY(-4px)"}
+  onMouseLeave={(e)=>e.currentTarget.style.transform="translateY(0)"}
+>
+
+<img
+  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg"
+  width="42"
+/>
+
+<h3 style={{marginTop:"10px"}}>Windows</h3>
+
+<div style={{display:"flex", flexDirection:"column", gap:"12px", marginTop:"18px"}}>
+
+<a
+  className="button button--primary"
+  href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_x86_32_VC.exe">
+  Installer (.exe)
+</a>
+
+<a
+  className="button button--outline button--secondary button--sm"
+  href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU_x86_32_VC.zip">
+  Portable (.zip)
+</a>
+
+</div>
+
+</div>
+
+
+{/* LINUX */}
+<div
+  style={{
+    background:"rgba(255, 255, 255, 0.4)",
+    borderRadius:"14px",
+    padding:"28px",
+    width:"250px",
+    textAlign:"center",
+    boxShadow:"0 8px 25px rgba(0,0,0,0.15)",
+    transition:"transform 0.15s ease"
+  }}
+  onMouseEnter={(e)=>e.currentTarget.style.transform="translateY(-4px)"}
+  onMouseLeave={(e)=>e.currentTarget.style.transform="translateY(0)"}
+>
+
+<img
+  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+  width="42"
+/>
+
+<h3 style={{marginTop:"10px"}}>Linux</h3>
+
+<div style={{display:"flex", flexDirection:"column", gap:"12px", marginTop:"18px"}}>
+
+<a
+  className="button button--primary"
+  href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU-x86_64.deb">
+  Ubuntu / Debian (.deb)
+</a>
+
+<a
+  className="button button--outline button--secondary button--sm"
+  href="https://github.com/Thales1330/PSP/releases/latest/download/PSP-UFU-x86_64.AppImage">
+  AppImage (portable)
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+  style={{
+    display:"flex",
+    justifyContent:"center",
+    gap:"15px",
+    marginTop:"30px",
+    flexWrap:"wrap"
+  }}
+>
+
+<Link
+  className={clsx(
+    'button button--outline button--secondary button--lg',
+    styles.getStarted,
+  )}
+  to={useBaseUrl('docs/')}>
+  <Translate>User Guide</Translate>
+</Link>
+
+<Link
+  className={clsx(
+    'button button--outline button--secondary button--lg',
+    styles.getStarted,
+  )}
+  to={useBaseUrl('https://raw.githubusercontent.com/Thales1330/PSP/master/docs/downloads/samples.zip')}>
+  <Translate>Samples</Translate>
+</Link>
+
+</div>
+
+</div>
         </div>
       </header>
       <main>
