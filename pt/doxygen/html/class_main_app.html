@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w10a-beta</span>
+   &#160;<span id="projectnumber">2026w11a-beta</span>
    </div>
   </td>
  </tr>
@@ -149,7 +149,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00069">69</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00070">70</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a62488418e2bc66492d3d5bcc836a7103" name="a62488418e2bc66492d3d5bcc836a7103"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a62488418e2bc66492d3d5bcc836a7103">&#9670;&#160;</a></span>MainApp()</h2>
@@ -174,8 +174,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00073">73</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00074">74</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -202,8 +202,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00074">74</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   74</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00075">75</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   75</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -242,27 +242,27 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00187">187</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  188</span>    {</div>
-<div class="line"><span class="lineno">  189</span>        <span class="comment">// Load language catalogs according the propertiesData attribute.</span></div>
-<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">if</span> (!locale-&gt;Init(propertiesData-&gt;GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT)) {</div>
-<div class="line"><span class="lineno">  191</span>            wxMessageDialog msgDialog(<span class="keyword">nullptr</span>, _(<span class="stringliteral">&quot;This language is not supported by the system.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
-<div class="line"><span class="lineno">  192</span>                wxOK | wxCENTRE | wxICON_ERROR);</div>
-<div class="line"><span class="lineno">  193</span>            msgDialog.ShowModal();</div>
-<div class="line"><span class="lineno">  194</span>        }</div>
-<div class="line"><span class="lineno">  195</span> </div>
-<div class="line"><span class="lineno">  196</span>        wxFileName fn(wxStandardPaths::Get().GetExecutablePath());</div>
-<div class="line"><span class="lineno">  197</span>        wxString langPath = fn.GetPath() + wxFileName::DirName(<span class="stringliteral">&quot;\\..\\data\\lang&quot;</span>, wxPATH_WIN).GetPath();</div>
-<div class="line"><span class="lineno">  198</span>        locale-&gt;AddCatalogLookupPathPrefix(langPath);</div>
-<div class="line"><span class="lineno">  199</span>        <span class="comment">// pt_BR</span></div>
-<div class="line"><span class="lineno">  200</span>        <span class="keywordflow">if</span> (propertiesData-&gt;GetGeneralPropertiesData().language == wxLANGUAGE_PORTUGUESE_BRAZILIAN) {</div>
-<div class="line"><span class="lineno">  201</span>            <span class="keywordflow">if</span> (!locale-&gt;AddCatalog(wxT(<span class="stringliteral">&quot;pt_BR&quot;</span>))) {</div>
-<div class="line"><span class="lineno">  202</span>                wxMessageDialog msgDialog(<span class="keyword">nullptr</span>, _(<span class="stringliteral">&quot;Fail to load brazilian portuguese language catalog.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
-<div class="line"><span class="lineno">  203</span>                    wxOK | wxCENTRE | wxICON_ERROR);</div>
-<div class="line"><span class="lineno">  204</span>                msgDialog.ShowModal();</div>
-<div class="line"><span class="lineno">  205</span>            }</div>
-<div class="line"><span class="lineno">  206</span>        }</div>
-<div class="line"><span class="lineno">  207</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00188">188</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  189</span>    {</div>
+<div class="line"><span class="lineno">  190</span>        <span class="comment">// Load language catalogs according the propertiesData attribute.</span></div>
+<div class="line"><span class="lineno">  191</span>        <span class="keywordflow">if</span> (!locale-&gt;Init(propertiesData-&gt;GetGeneralPropertiesData().language, wxLOCALE_DONT_LOAD_DEFAULT)) {</div>
+<div class="line"><span class="lineno">  192</span>            wxMessageDialog msgDialog(<span class="keyword">nullptr</span>, _(<span class="stringliteral">&quot;This language is not supported by the system.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
+<div class="line"><span class="lineno">  193</span>                wxOK | wxCENTRE | wxICON_ERROR);</div>
+<div class="line"><span class="lineno">  194</span>            msgDialog.ShowModal();</div>
+<div class="line"><span class="lineno">  195</span>        }</div>
+<div class="line"><span class="lineno">  196</span> </div>
+<div class="line"><span class="lineno">  197</span>        <span class="comment">//wxFileName fn(wxStandardPaths::Get().GetExecutablePath());</span></div>
+<div class="line"><span class="lineno">  198</span>        wxString langPath = Paths::GetDataPath() + <span class="stringliteral">&quot;/lang&quot;</span>;</div>
+<div class="line"><span class="lineno">  199</span>        locale-&gt;AddCatalogLookupPathPrefix(langPath);</div>
+<div class="line"><span class="lineno">  200</span>        <span class="comment">// pt_BR</span></div>
+<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">if</span> (propertiesData-&gt;GetGeneralPropertiesData().language == wxLANGUAGE_PORTUGUESE_BRAZILIAN) {</div>
+<div class="line"><span class="lineno">  202</span>            <span class="keywordflow">if</span> (!locale-&gt;AddCatalog(wxT(<span class="stringliteral">&quot;pt_BR&quot;</span>))) {</div>
+<div class="line"><span class="lineno">  203</span>                wxMessageDialog msgDialog(<span class="keyword">nullptr</span>, _(<span class="stringliteral">&quot;Fail to load brazilian portuguese language catalog.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
+<div class="line"><span class="lineno">  204</span>                    wxOK | wxCENTRE | wxICON_ERROR);</div>
+<div class="line"><span class="lineno">  205</span>                msgDialog.ShowModal();</div>
+<div class="line"><span class="lineno">  206</span>            }</div>
+<div class="line"><span class="lineno">  207</span>        }</div>
+<div class="line"><span class="lineno">  208</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -290,117 +290,117 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00075">75</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   76</span>    {</div>
-<div class="line"><span class="lineno">   77</span><span class="preprocessor">#ifdef _DEBUG</span></div>
-<div class="line"><span class="lineno">   78</span>        wxSizerFlags::DisableConsistencyChecks();</div>
-<div class="line"><span class="lineno">   79</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">   80</span> </div>
-<div class="line"><span class="lineno">   81</span>        <span class="comment">// Load configuration file, if don&#39;t exists create it.</span></div>
-<div class="line"><span class="lineno">   82</span>        wxFileName fn(wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;PSP-UFU&quot;</span> + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;config.ini&quot;</span>);</div>
-<div class="line"><span class="lineno">   83</span>        <span class="keywordflow">if</span> (!fn.DirExists()) {</div>
-<div class="line"><span class="lineno">   84</span>            fn.Mkdir();</div>
-<div class="line"><span class="lineno">   85</span>        }</div>
-<div class="line"><span class="lineno">   86</span> </div>
-<div class="line"><span class="lineno">   87</span>        wxTextFile file(fn.GetFullPath());</div>
-<div class="line"><span class="lineno">   88</span>        <span class="keyword">auto</span> data = propertiesData-&gt;GetGeneralPropertiesData();</div>
-<div class="line"><span class="lineno">   89</span> </div>
-<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">if</span> (!file.Create()) {</div>
-<div class="line"><span class="lineno">   91</span>            <span class="keywordflow">if</span> (!file.Open()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>            wxString line;</div>
-<div class="line"><span class="lineno">   94</span>            <span class="keywordflow">for</span> (line = file.GetFirstLine(); !file.Eof(); line = file.GetNextLine()) {</div>
-<div class="line"><span class="lineno">   95</span>                wxString tag = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">   96</span>                wxString tagValue = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">   97</span>                <span class="keywordtype">bool</span> parseValue = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   98</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; line.Len(); ++i) {</div>
-<div class="line"><span class="lineno">   99</span>                    <span class="keywordflow">if</span> (line[i] == <span class="charliteral">&#39;=&#39;</span>) {</div>
-<div class="line"><span class="lineno">  100</span>                        parseValue = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  101</span>                    }</div>
-<div class="line"><span class="lineno">  102</span>                    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  103</span>                        <span class="keywordflow">if</span> (parseValue)</div>
-<div class="line"><span class="lineno">  104</span>                            tagValue += line[i];</div>
-<div class="line"><span class="lineno">  105</span>                        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  106</span>                            tag += line[i];</div>
-<div class="line"><span class="lineno">  107</span>                    }</div>
-<div class="line"><span class="lineno">  108</span>                }</div>
-<div class="line"><span class="lineno">  109</span>                <span class="comment">// Language</span></div>
-<div class="line"><span class="lineno">  110</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;lang&quot;</span>) {</div>
-<div class="line"><span class="lineno">  111</span>                    <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;pt-br&quot;</span> || tagValue == <span class="stringliteral">&quot;pt&quot;</span>) {</div>
-<div class="line"><span class="lineno">  112</span>                        data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;</div>
-<div class="line"><span class="lineno">  113</span>                    }</div>
-<div class="line"><span class="lineno">  114</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;en&quot;</span> || tagValue == <span class="stringliteral">&quot;en-us&quot;</span> || tagValue == <span class="stringliteral">&quot;en-uk&quot;</span>) {</div>
-<div class="line"><span class="lineno">  115</span>                        data.language = wxLANGUAGE_ENGLISH;</div>
-<div class="line"><span class="lineno">  116</span>                    }</div>
-<div class="line"><span class="lineno">  117</span>                }</div>
-<div class="line"><span class="lineno">  118</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;theme&quot;</span>) {</div>
-<div class="line"><span class="lineno">  119</span>                    <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;light&quot;</span>) {</div>
-<div class="line"><span class="lineno">  120</span>                        data.theme = THEME_LIGHT;</div>
-<div class="line"><span class="lineno">  121</span>                    }</div>
-<div class="line"><span class="lineno">  122</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;dark&quot;</span>) {</div>
-<div class="line"><span class="lineno">  123</span>                        data.theme = THEME_DARK;</div>
-<div class="line"><span class="lineno">  124</span>                    }</div>
-<div class="line"><span class="lineno">  125</span>                }</div>
-<div class="line"><span class="lineno">  126</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;plotlib&quot;</span>) {</div>
-<div class="line"><span class="lineno">  127</span>                    <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;chartdir&quot;</span>) {</div>
-<div class="line"><span class="lineno">  128</span>                        data.plotLib = PlotLib::wxCHART_DIR;</div>
-<div class="line"><span class="lineno">  129</span>                    }</div>
-<div class="line"><span class="lineno">  130</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;mathplot&quot;</span>) {</div>
-<div class="line"><span class="lineno">  131</span>                        data.plotLib = PlotLib::wxMATH_PLOT;</div>
-<div class="line"><span class="lineno">  132</span>                    }</div>
-<div class="line"><span class="lineno">  133</span>                }</div>
-<div class="line"><span class="lineno">  134</span>                <span class="comment">//if (tag == &quot;useOpenGL&quot;) {</span></div>
-<div class="line"><span class="lineno">  135</span>                <span class="comment">//  if (tagValue == &quot;yes&quot;) {</span></div>
-<div class="line"><span class="lineno">  136</span>                <span class="comment">//      data.useOpenGL = true;</span></div>
-<div class="line"><span class="lineno">  137</span>                <span class="comment">//  }</span></div>
-<div class="line"><span class="lineno">  138</span>                <span class="comment">//  else if (tagValue == &quot;no&quot;) {</span></div>
-<div class="line"><span class="lineno">  139</span>                <span class="comment">//      data.useOpenGL = false;</span></div>
-<div class="line"><span class="lineno">  140</span>                <span class="comment">//  }</span></div>
-<div class="line"><span class="lineno">  141</span>                <span class="comment">//}</span></div>
-<div class="line"><span class="lineno">  142</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;labelfont&quot;</span>) {</div>
-<div class="line"><span class="lineno">  143</span>                    data.labelFont = tagValue;</div>
-<div class="line"><span class="lineno">  144</span>                }</div>
-<div class="line"><span class="lineno">  145</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;labelfontsize&quot;</span>) {</div>
-<div class="line"><span class="lineno">  146</span>                    <span class="keywordtype">long</span> size = 10;</div>
-<div class="line"><span class="lineno">  147</span>                    tagValue.ToLong(&amp;size);</div>
-<div class="line"><span class="lineno">  148</span>                    data.labelFontSize = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(size);</div>
-<div class="line"><span class="lineno">  149</span>                }</div>
-<div class="line"><span class="lineno">  150</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;atpfile&quot;</span>) {</div>
-<div class="line"><span class="lineno">  151</span>                    data.atpPath = wxFileName(tagValue);</div>
-<div class="line"><span class="lineno">  152</span>                }</div>
-<div class="line"><span class="lineno">  153</span>            }</div>
-<div class="line"><span class="lineno">  154</span>            file.Close();</div>
-<div class="line"><span class="lineno">  155</span>        }</div>
-<div class="line"><span class="lineno">  156</span>        <span class="keywordflow">else</span> {  <span class="comment">// Create default init file.</span></div>
-<div class="line"><span class="lineno">  157</span>            <span class="keywordflow">if</span> (!file.Open()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  158</span> </div>
-<div class="line"><span class="lineno">  159</span>            <span class="comment">// Default parameters.</span></div>
-<div class="line"><span class="lineno">  160</span>            file.AddLine(<span class="stringliteral">&quot;lang=en&quot;</span>);</div>
-<div class="line"><span class="lineno">  161</span>            file.AddLine(<span class="stringliteral">&quot;plotlib=chartdir&quot;</span>);</div>
-<div class="line"><span class="lineno">  162</span>            file.AddLine(<span class="stringliteral">&quot;theme=light&quot;</span>);</div>
-<div class="line"><span class="lineno">  163</span>            file.AddLine(<span class="stringliteral">&quot;labelfont=Arial&quot;</span>);</div>
-<div class="line"><span class="lineno">  164</span>            file.AddLine(<span class="stringliteral">&quot;labelfontsize=10&quot;</span>);</div>
-<div class="line"><span class="lineno">  165</span>            file.AddLine(<span class="stringliteral">&quot;atpfile=&quot;</span>);</div>
-<div class="line"><span class="lineno">  166</span>            <span class="comment">//file.AddLine(&quot;useOpenGL=yes&quot;);</span></div>
-<div class="line"><span class="lineno">  167</span> </div>
-<div class="line"><span class="lineno">  168</span>            file.Write();</div>
-<div class="line"><span class="lineno">  169</span>            file.Close();</div>
-<div class="line"><span class="lineno">  170</span> </div>
-<div class="line"><span class="lineno">  171</span>            data.language = wxLANGUAGE_ENGLISH;</div>
-<div class="line"><span class="lineno">  172</span>            data.theme = THEME_LIGHT;</div>
-<div class="line"><span class="lineno">  173</span>            data.plotLib = PlotLib::wxCHART_DIR;</div>
-<div class="line"><span class="lineno">  174</span>            <span class="comment">//data.useOpenGL = true;</span></div>
-<div class="line"><span class="lineno">  175</span>            propertiesData-&gt;SetGeneralPropertiesData(data);</div>
-<div class="line"><span class="lineno">  176</span>        }</div>
-<div class="line"><span class="lineno">  177</span> </div>
-<div class="line"><span class="lineno">  178</span>        <span class="comment">// Check if the atp folder exists, if not create it.</span></div>
-<div class="line"><span class="lineno">  179</span>        wxString atpFolder = wxStandardPaths::Get().GetDocumentsDir() + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;PSP-UFU&quot;</span> + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;atp&quot;</span>;</div>
-<div class="line"><span class="lineno">  180</span>        <span class="keywordflow">if</span> (!wxDir::Exists(atpFolder)) wxDir::Make(atpFolder);</div>
-<div class="line"><span class="lineno">  181</span>        data.atpWorkFolder = atpFolder;</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>        propertiesData-&gt;SetGeneralPropertiesData(data);</div>
-<div class="line"><span class="lineno">  184</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  185</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00076">76</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   77</span>    {</div>
+<div class="line"><span class="lineno">   78</span><span class="preprocessor">#ifdef _DEBUG</span></div>
+<div class="line"><span class="lineno">   79</span>        wxSizerFlags::DisableConsistencyChecks();</div>
+<div class="line"><span class="lineno">   80</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>        <span class="comment">// Load configuration file, if don&#39;t exists create it.</span></div>
+<div class="line"><span class="lineno">   83</span>        wxFileName fn(Paths::GetDocumentsPath() + <span class="stringliteral">&quot;/PSP-UFU/config.ini&quot;</span>);</div>
+<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">if</span> (!fn.DirExists()) {</div>
+<div class="line"><span class="lineno">   85</span>            fn.Mkdir();</div>
+<div class="line"><span class="lineno">   86</span>        }</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span>        wxTextFile file(fn.GetFullPath());</div>
+<div class="line"><span class="lineno">   89</span>        <span class="keyword">auto</span> data = propertiesData-&gt;GetGeneralPropertiesData();</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">if</span> (!file.Create()) {</div>
+<div class="line"><span class="lineno">   92</span>            <span class="keywordflow">if</span> (!file.Open()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>            wxString line;</div>
+<div class="line"><span class="lineno">   95</span>            <span class="keywordflow">for</span> (line = file.GetFirstLine(); !file.Eof(); line = file.GetNextLine()) {</div>
+<div class="line"><span class="lineno">   96</span>                wxString tag = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">   97</span>                wxString tagValue = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">   98</span>                <span class="keywordtype">bool</span> parseValue = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   99</span>                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; line.Len(); ++i) {</div>
+<div class="line"><span class="lineno">  100</span>                    <span class="keywordflow">if</span> (line[i] == <span class="charliteral">&#39;=&#39;</span>) {</div>
+<div class="line"><span class="lineno">  101</span>                        parseValue = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  102</span>                    }</div>
+<div class="line"><span class="lineno">  103</span>                    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  104</span>                        <span class="keywordflow">if</span> (parseValue)</div>
+<div class="line"><span class="lineno">  105</span>                            tagValue += line[i];</div>
+<div class="line"><span class="lineno">  106</span>                        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  107</span>                            tag += line[i];</div>
+<div class="line"><span class="lineno">  108</span>                    }</div>
+<div class="line"><span class="lineno">  109</span>                }</div>
+<div class="line"><span class="lineno">  110</span>                <span class="comment">// Language</span></div>
+<div class="line"><span class="lineno">  111</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;lang&quot;</span>) {</div>
+<div class="line"><span class="lineno">  112</span>                    <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;pt-br&quot;</span> || tagValue == <span class="stringliteral">&quot;pt&quot;</span>) {</div>
+<div class="line"><span class="lineno">  113</span>                        data.language = wxLANGUAGE_PORTUGUESE_BRAZILIAN;</div>
+<div class="line"><span class="lineno">  114</span>                    }</div>
+<div class="line"><span class="lineno">  115</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;en&quot;</span> || tagValue == <span class="stringliteral">&quot;en-us&quot;</span> || tagValue == <span class="stringliteral">&quot;en-uk&quot;</span>) {</div>
+<div class="line"><span class="lineno">  116</span>                        data.language = wxLANGUAGE_ENGLISH;</div>
+<div class="line"><span class="lineno">  117</span>                    }</div>
+<div class="line"><span class="lineno">  118</span>                }</div>
+<div class="line"><span class="lineno">  119</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;theme&quot;</span>) {</div>
+<div class="line"><span class="lineno">  120</span>                    <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;light&quot;</span>) {</div>
+<div class="line"><span class="lineno">  121</span>                        data.theme = THEME_LIGHT;</div>
+<div class="line"><span class="lineno">  122</span>                    }</div>
+<div class="line"><span class="lineno">  123</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;dark&quot;</span>) {</div>
+<div class="line"><span class="lineno">  124</span>                        data.theme = THEME_DARK;</div>
+<div class="line"><span class="lineno">  125</span>                    }</div>
+<div class="line"><span class="lineno">  126</span>                }</div>
+<div class="line"><span class="lineno">  127</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;plotlib&quot;</span>) {</div>
+<div class="line"><span class="lineno">  128</span>                    <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;chartdir&quot;</span>) {</div>
+<div class="line"><span class="lineno">  129</span>                        data.plotLib = PlotLib::wxCHART_DIR;</div>
+<div class="line"><span class="lineno">  130</span>                    }</div>
+<div class="line"><span class="lineno">  131</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tagValue == <span class="stringliteral">&quot;mathplot&quot;</span>) {</div>
+<div class="line"><span class="lineno">  132</span>                        data.plotLib = PlotLib::wxMATH_PLOT;</div>
+<div class="line"><span class="lineno">  133</span>                    }</div>
+<div class="line"><span class="lineno">  134</span>                }</div>
+<div class="line"><span class="lineno">  135</span>                <span class="comment">//if (tag == &quot;useOpenGL&quot;) {</span></div>
+<div class="line"><span class="lineno">  136</span>                <span class="comment">//  if (tagValue == &quot;yes&quot;) {</span></div>
+<div class="line"><span class="lineno">  137</span>                <span class="comment">//      data.useOpenGL = true;</span></div>
+<div class="line"><span class="lineno">  138</span>                <span class="comment">//  }</span></div>
+<div class="line"><span class="lineno">  139</span>                <span class="comment">//  else if (tagValue == &quot;no&quot;) {</span></div>
+<div class="line"><span class="lineno">  140</span>                <span class="comment">//      data.useOpenGL = false;</span></div>
+<div class="line"><span class="lineno">  141</span>                <span class="comment">//  }</span></div>
+<div class="line"><span class="lineno">  142</span>                <span class="comment">//}</span></div>
+<div class="line"><span class="lineno">  143</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;labelfont&quot;</span>) {</div>
+<div class="line"><span class="lineno">  144</span>                    data.labelFont = tagValue;</div>
+<div class="line"><span class="lineno">  145</span>                }</div>
+<div class="line"><span class="lineno">  146</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;labelfontsize&quot;</span>) {</div>
+<div class="line"><span class="lineno">  147</span>                    <span class="keywordtype">long</span> size = 10;</div>
+<div class="line"><span class="lineno">  148</span>                    tagValue.ToLong(&amp;size);</div>
+<div class="line"><span class="lineno">  149</span>                    data.labelFontSize = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(size);</div>
+<div class="line"><span class="lineno">  150</span>                }</div>
+<div class="line"><span class="lineno">  151</span>                <span class="keywordflow">if</span> (tag == <span class="stringliteral">&quot;atpfile&quot;</span>) {</div>
+<div class="line"><span class="lineno">  152</span>                    data.atpPath = wxFileName(tagValue);</div>
+<div class="line"><span class="lineno">  153</span>                }</div>
+<div class="line"><span class="lineno">  154</span>            }</div>
+<div class="line"><span class="lineno">  155</span>            file.Close();</div>
+<div class="line"><span class="lineno">  156</span>        }</div>
+<div class="line"><span class="lineno">  157</span>        <span class="keywordflow">else</span> {  <span class="comment">// Create default init file.</span></div>
+<div class="line"><span class="lineno">  158</span>            <span class="keywordflow">if</span> (!file.Open()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  159</span> </div>
+<div class="line"><span class="lineno">  160</span>            <span class="comment">// Default parameters.</span></div>
+<div class="line"><span class="lineno">  161</span>            file.AddLine(<span class="stringliteral">&quot;lang=en&quot;</span>);</div>
+<div class="line"><span class="lineno">  162</span>            file.AddLine(<span class="stringliteral">&quot;plotlib=chartdir&quot;</span>);</div>
+<div class="line"><span class="lineno">  163</span>            file.AddLine(<span class="stringliteral">&quot;theme=light&quot;</span>);</div>
+<div class="line"><span class="lineno">  164</span>            file.AddLine(<span class="stringliteral">&quot;labelfont=Arial&quot;</span>);</div>
+<div class="line"><span class="lineno">  165</span>            file.AddLine(<span class="stringliteral">&quot;labelfontsize=10&quot;</span>);</div>
+<div class="line"><span class="lineno">  166</span>            file.AddLine(<span class="stringliteral">&quot;atpfile=&quot;</span>);</div>
+<div class="line"><span class="lineno">  167</span>            <span class="comment">//file.AddLine(&quot;useOpenGL=yes&quot;);</span></div>
+<div class="line"><span class="lineno">  168</span> </div>
+<div class="line"><span class="lineno">  169</span>            file.Write();</div>
+<div class="line"><span class="lineno">  170</span>            file.Close();</div>
+<div class="line"><span class="lineno">  171</span> </div>
+<div class="line"><span class="lineno">  172</span>            data.language = wxLANGUAGE_ENGLISH;</div>
+<div class="line"><span class="lineno">  173</span>            data.theme = THEME_LIGHT;</div>
+<div class="line"><span class="lineno">  174</span>            data.plotLib = PlotLib::wxCHART_DIR;</div>
+<div class="line"><span class="lineno">  175</span>            <span class="comment">//data.useOpenGL = true;</span></div>
+<div class="line"><span class="lineno">  176</span>            propertiesData-&gt;SetGeneralPropertiesData(data);</div>
+<div class="line"><span class="lineno">  177</span>        }</div>
+<div class="line"><span class="lineno">  178</span> </div>
+<div class="line"><span class="lineno">  179</span>        <span class="comment">// Check if the atp folder exists, if not create it.</span></div>
+<div class="line"><span class="lineno">  180</span>        wxString atpFolder = Paths::GetDocumentsPath() + <span class="stringliteral">&quot;/PSP-UFU/atp&quot;</span>;</div>
+<div class="line"><span class="lineno">  181</span>        <span class="keywordflow">if</span> (!wxDir::Exists(atpFolder)) wxDir::Make(atpFolder);</div>
+<div class="line"><span class="lineno">  182</span>        data.atpWorkFolder = atpFolder;</div>
+<div class="line"><span class="lineno">  183</span> </div>
+<div class="line"><span class="lineno">  184</span>        propertiesData-&gt;SetGeneralPropertiesData(data);</div>
+<div class="line"><span class="lineno">  185</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  186</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -427,11 +427,11 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00265">265</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  266</span>    {</div>
-<div class="line"><span class="lineno">  267</span>        <span class="comment">// clean up</span></div>
-<div class="line"><span class="lineno">  268</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  269</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00266">266</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  267</span>    {</div>
+<div class="line"><span class="lineno">  268</span>        <span class="comment">// clean up</span></div>
+<div class="line"><span class="lineno">  269</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  270</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -458,61 +458,61 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00209">209</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  210</span>    {</div>
-<div class="line"><span class="lineno">  211</span>        <span class="comment">// Add image handlers</span></div>
-<div class="line"><span class="lineno">  212</span>        wxImage::AddHandler(<span class="keyword">new</span> wxPNGHandler);</div>
-<div class="line"><span class="lineno">  213</span>        wxImage::AddHandler(<span class="keyword">new</span> wxJPEGHandler);</div>
-<div class="line"><span class="lineno">  214</span> </div>
-<div class="line"><span class="lineno">  215</span>        <span class="comment">// Load fonts</span></div>
-<div class="line"><span class="lineno">  216</span><span class="preprocessor">#ifdef __WXMSW__</span></div>
-<div class="line"><span class="lineno">  217</span>        wxFileName fn(wxStandardPaths::Get().GetExecutablePath());</div>
-<div class="line"><span class="lineno">  218</span>        wxString fontsPath = fn.GetPath() + wxFileName::DirName(<span class="stringliteral">&quot;\\..\\data\\fonts&quot;</span>, wxPATH_WIN).GetPath();</div>
-<div class="line"><span class="lineno">  219</span>        <span class="keywordtype">bool</span> loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;cmunrm.ttf&quot;</span>); <span class="comment">// regular</span></div>
-<div class="line"><span class="lineno">  220</span>        <span class="keywordflow">if</span> (loadFont) loadFont = wxFont::AddPrivateFont(fontsPath + wxFileName::GetPathSeparator() + <span class="stringliteral">&quot;cmunbx.ttf&quot;</span>); <span class="comment">// bold</span></div>
-<div class="line"><span class="lineno">  221</span>        <span class="keywordflow">if</span> (!loadFont) {</div>
-<div class="line"><span class="lineno">  222</span>            wxMessageDialog msgDialog(<span class="keyword">nullptr</span>, _(<span class="stringliteral">&quot;Fail to load local font.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
-<div class="line"><span class="lineno">  223</span>                wxOK | wxCENTRE | wxICON_ERROR);</div>
-<div class="line"><span class="lineno">  224</span>            msgDialog.ShowModal();</div>
-<div class="line"><span class="lineno">  225</span>        }</div>
-<div class="line"><span class="lineno">  226</span><span class="preprocessor">#endif </span><span class="comment">// wxUSE_PRIVATE_FONTS       </span></div>
-<div class="line"><span class="lineno">  227</span> </div>
-<div class="line"><span class="lineno">  228</span>        <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* propertiesData = <span class="keyword">new</span> <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>();</div>
-<div class="line"><span class="lineno">  229</span>        LoadInitFile(propertiesData);</div>
-<div class="line"><span class="lineno">  230</span> </div>
-<div class="line"><span class="lineno">  231</span>        wxLocale* locale = <span class="keyword">new</span> wxLocale();</div>
-<div class="line"><span class="lineno">  232</span>        LoadCatalogs(locale, propertiesData);</div>
-<div class="line"><span class="lineno">  233</span> </div>
-<div class="line"><span class="lineno">  234</span>        wxString openFilePath = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno">  235</span> </div>
-<div class="line"><span class="lineno">  236</span>        <span class="comment">// Load command line attributes. This is used to directly open saved files (.psp).</span></div>
-<div class="line"><span class="lineno">  237</span>        wxCmdLineParser cmdLineParser(wxApp::argc, wxApp::argv);</div>
-<div class="line"><span class="lineno">  238</span>        <span class="comment">//cmdLineParser.SetDesc(cmdLineDesc);</span></div>
-<div class="line"><span class="lineno">  239</span>        cmdLineParser.AddParam(<span class="stringliteral">&quot;&quot;</span>, wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);</div>
-<div class="line"><span class="lineno">  240</span>        cmdLineParser.AddSwitch(<span class="stringliteral">&quot;t&quot;</span>, <span class="stringliteral">&quot;test&quot;</span>, <span class="stringliteral">&quot;Run PSP-UFU tests&quot;</span>);</div>
-<div class="line"><span class="lineno">  241</span> </div>
-<div class="line"><span class="lineno">  242</span>        <span class="keywordtype">bool</span> test = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  243</span>        <span class="keywordflow">if</span> (cmdLineParser.Parse() == 0) {</div>
-<div class="line"><span class="lineno">  244</span>            wxCmdLineArgs args = cmdLineParser.GetArguments();</div>
-<div class="line"><span class="lineno">  245</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  246</span>                <span class="keywordflow">if</span> (it-&gt;GetKind() == wxCMD_LINE_PARAM) { openFilePath = it-&gt;GetStrVal(); }</div>
-<div class="line"><span class="lineno">  247</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it-&gt;GetShortName() == <span class="stringliteral">&quot;t&quot;</span>) {</div>
-<div class="line"><span class="lineno">  248</span>                    test = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  249</span>                }</div>
-<div class="line"><span class="lineno">  250</span>            }</div>
-<div class="line"><span class="lineno">  251</span>        }</div>
-<div class="line"><span class="lineno">  252</span>        <a class="code hl_class" href="class_main_frame.html">MainFrame</a>* mainFrame = <span class="keyword">new</span> <a class="code hl_class" href="class_main_frame.html">MainFrame</a>(<span class="keyword">nullptr</span>, locale, propertiesData, openFilePath);</div>
-<div class="line"><span class="lineno">  253</span><span class="preprocessor">#ifdef __WXMSW__</span></div>
-<div class="line"><span class="lineno">  254</span>        <span class="comment">// Set application icon for windows</span></div>
-<div class="line"><span class="lineno">  255</span>        mainFrame-&gt;SetIcon(wxICON(aaaaprogicon));</div>
-<div class="line"><span class="lineno">  256</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  257</span>        SetTopWindow(mainFrame);</div>
-<div class="line"><span class="lineno">  258</span>        <span class="keywordflow">if</span> (test) {</div>
-<div class="line"><span class="lineno">  259</span>            GetTopWindow()-&gt;Show();</div>
-<div class="line"><span class="lineno">  260</span>            exit(mainFrame-&gt;RunPSPTest());</div>
-<div class="line"><span class="lineno">  261</span>        }</div>
-<div class="line"><span class="lineno">  262</span>        <span class="keywordflow">return</span> GetTopWindow()-&gt;Show();</div>
-<div class="line"><span class="lineno">  263</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00210">210</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  211</span>    {</div>
+<div class="line"><span class="lineno">  212</span>        <span class="comment">// Add image handlers</span></div>
+<div class="line"><span class="lineno">  213</span>        wxImage::AddHandler(<span class="keyword">new</span> wxPNGHandler);</div>
+<div class="line"><span class="lineno">  214</span>        wxImage::AddHandler(<span class="keyword">new</span> wxJPEGHandler);</div>
+<div class="line"><span class="lineno">  215</span> </div>
+<div class="line"><span class="lineno">  216</span>        <span class="comment">// Load fonts</span></div>
+<div class="line"><span class="lineno">  217</span><span class="preprocessor">#ifdef __WXMSW__</span></div>
+<div class="line"><span class="lineno">  218</span>        <span class="comment">//wxFileName fn(wxStandardPaths::Get().GetExecutablePath());</span></div>
+<div class="line"><span class="lineno">  219</span>        wxString fontsPath = Paths::GetDataPath() + <span class="stringliteral">&quot;/fonts&quot;</span>;</div>
+<div class="line"><span class="lineno">  220</span>        <span class="keywordtype">bool</span> loadFont = wxFont::AddPrivateFont(fontsPath + <span class="stringliteral">&quot;/cmunrm.ttf&quot;</span>); <span class="comment">// regular</span></div>
+<div class="line"><span class="lineno">  221</span>        <span class="keywordflow">if</span> (loadFont) loadFont = wxFont::AddPrivateFont(fontsPath + <span class="stringliteral">&quot;/cmunbx.ttf&quot;</span>); <span class="comment">// bold</span></div>
+<div class="line"><span class="lineno">  222</span>        <span class="keywordflow">if</span> (!loadFont) {</div>
+<div class="line"><span class="lineno">  223</span>            wxMessageDialog msgDialog(<span class="keyword">nullptr</span>, _(<span class="stringliteral">&quot;Failed to load local font.&quot;</span>), _(<span class="stringliteral">&quot;Error&quot;</span>),</div>
+<div class="line"><span class="lineno">  224</span>                wxOK | wxCENTRE | wxICON_ERROR);</div>
+<div class="line"><span class="lineno">  225</span>            msgDialog.ShowModal();</div>
+<div class="line"><span class="lineno">  226</span>        }</div>
+<div class="line"><span class="lineno">  227</span><span class="preprocessor">#endif </span><span class="comment">// __WXMSW__</span></div>
+<div class="line"><span class="lineno">  228</span> </div>
+<div class="line"><span class="lineno">  229</span>        <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>* propertiesData = <span class="keyword">new</span> <a class="code hl_class" href="class_properties_data.html">PropertiesData</a>();</div>
+<div class="line"><span class="lineno">  230</span>        LoadInitFile(propertiesData);</div>
+<div class="line"><span class="lineno">  231</span> </div>
+<div class="line"><span class="lineno">  232</span>        wxLocale* locale = <span class="keyword">new</span> wxLocale();</div>
+<div class="line"><span class="lineno">  233</span>        LoadCatalogs(locale, propertiesData);</div>
+<div class="line"><span class="lineno">  234</span> </div>
+<div class="line"><span class="lineno">  235</span>        wxString openFilePath = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno">  236</span> </div>
+<div class="line"><span class="lineno">  237</span>        <span class="comment">// Load command line attributes. This is used to directly open saved files (.psp).</span></div>
+<div class="line"><span class="lineno">  238</span>        wxCmdLineParser cmdLineParser(wxApp::argc, wxApp::argv);</div>
+<div class="line"><span class="lineno">  239</span>        <span class="comment">//cmdLineParser.SetDesc(cmdLineDesc);</span></div>
+<div class="line"><span class="lineno">  240</span>        cmdLineParser.AddParam(<span class="stringliteral">&quot;&quot;</span>, wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);</div>
+<div class="line"><span class="lineno">  241</span>        cmdLineParser.AddSwitch(<span class="stringliteral">&quot;t&quot;</span>, <span class="stringliteral">&quot;test&quot;</span>, <span class="stringliteral">&quot;Run PSP-UFU tests&quot;</span>);</div>
+<div class="line"><span class="lineno">  242</span> </div>
+<div class="line"><span class="lineno">  243</span>        <span class="keywordtype">bool</span> test = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  244</span>        <span class="keywordflow">if</span> (cmdLineParser.Parse() == 0) {</div>
+<div class="line"><span class="lineno">  245</span>            wxCmdLineArgs args = cmdLineParser.GetArguments();</div>
+<div class="line"><span class="lineno">  246</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = args.begin(), itEnd = args.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  247</span>                <span class="keywordflow">if</span> (it-&gt;GetKind() == wxCMD_LINE_PARAM) { openFilePath = it-&gt;GetStrVal(); }</div>
+<div class="line"><span class="lineno">  248</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it-&gt;GetShortName() == <span class="stringliteral">&quot;t&quot;</span>) {</div>
+<div class="line"><span class="lineno">  249</span>                    test = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  250</span>                }</div>
+<div class="line"><span class="lineno">  251</span>            }</div>
+<div class="line"><span class="lineno">  252</span>        }</div>
+<div class="line"><span class="lineno">  253</span>        <a class="code hl_class" href="class_main_frame.html">MainFrame</a>* mainFrame = <span class="keyword">new</span> <a class="code hl_class" href="class_main_frame.html">MainFrame</a>(<span class="keyword">nullptr</span>, locale, propertiesData, openFilePath);</div>
+<div class="line"><span class="lineno">  254</span><span class="preprocessor">#ifdef __WXMSW__</span></div>
+<div class="line"><span class="lineno">  255</span>        <span class="comment">// Set application icon for windows</span></div>
+<div class="line"><span class="lineno">  256</span>        mainFrame-&gt;SetIcon(wxICON(aaaaprogicon));</div>
+<div class="line"><span class="lineno">  257</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  258</span>        SetTopWindow(mainFrame);</div>
+<div class="line"><span class="lineno">  259</span>        <span class="keywordflow">if</span> (test) {</div>
+<div class="line"><span class="lineno">  260</span>            GetTopWindow()-&gt;Show();</div>
+<div class="line"><span class="lineno">  261</span>            exit(mainFrame-&gt;RunPSPTest());</div>
+<div class="line"><span class="lineno">  262</span>        }</div>
+<div class="line"><span class="lineno">  263</span>        <span class="keywordflow">return</span> GetTopWindow()-&gt;Show();</div>
+<div class="line"><span class="lineno">  264</span>    }</div>
 <div class="ttc" id="aclass_main_frame_html"><div class="ttname"><a href="class_main_frame.html">MainFrame</a></div><div class="ttdoc">Main frame of the program. This class manage the ribbon menu and the notebook behavior.</div><div class="ttdef"><b>Definition</b> <a href="_main_frame_8h_source.html#l00068">MainFrame.h:69</a></div></div>
 <div class="ttc" id="aclass_properties_data_html"><div class="ttname"><a href="class_properties_data.html">PropertiesData</a></div><div class="ttdoc">General and simulation data manager.</div><div class="ttdef"><b>Definition</b> <a href="_properties_data_8h_source.html#l00102">PropertiesData.h:103</a></div></div>
 </div><!-- fragment -->

@@ -16,6 +16,8 @@ var dir_751b8c0f4ded4e9a4f23702db0023e1f =
     [ "GraphAutoLayout.h", "_graph_auto_layout_8h_source.html", null ],
     [ "HMPlane.cpp", "_h_m_plane_8cpp_source.html", null ],
     [ "HMPlane.h", "_h_m_plane_8h_source.html", null ],
+    [ "Path.cpp", "_path_8cpp_source.html", null ],
+    [ "Path.h", "_path_8h_source.html", null ],
     [ "PropertiesData.cpp", "_properties_data_8cpp_source.html", null ],
     [ "PropertiesData.h", "_properties_data_8h.html", "_properties_data_8h" ],
     [ "XMLParser.cpp", "_x_m_l_parser_8cpp_source.html", null ],

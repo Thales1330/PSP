@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0df":[2,0,0,1,1,21,4],
+"_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0abc9f277f73496a3a0e81647a5f0502":[2,0,0,1,1,21,4,3],
 "_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa0cd5954a19395d37bad445e1b608b393":[2,0,0,1,1,21,4,5],
 "_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa132d629383b198a56a6b2d35f4d490cb":[2,0,0,1,1,21,4,2],
 "_power_element_8h.html#a70fd34766a0e92aa6761f871a3d1f0dfa6f7405d8790f4650c1d5dac3f9dcf583":[2,0,0,1,1,21,4,0],
@@ -27,9 +29,9 @@ var NAVTREEINDEX1 =
 "_power_quality_8h_source.html":[2,0,0,3,9],
 "_project_properties_form_8cpp_source.html":[2,0,0,2,43],
 "_project_properties_form_8h_source.html":[2,0,0,2,44],
-"_properties_data_8cpp_source.html":[2,0,0,4,16],
-"_properties_data_8h.html":[2,0,0,4,17],
-"_properties_data_8h_source.html":[2,0,0,4,17],
+"_properties_data_8cpp_source.html":[2,0,0,4,18],
+"_properties_data_8h.html":[2,0,0,4,19],
+"_properties_data_8h_source.html":[2,0,0,4,19],
 "_rate_limiter_8cpp_source.html":[2,0,0,1,0,28],
 "_rate_limiter_8h.html":[2,0,0,1,0,29],
 "_rate_limiter_8h_source.html":[2,0,0,1,0,29],
@@ -86,9 +88,9 @@ var NAVTREEINDEX1 =
 "_workspace_8cpp_source.html":[2,0,0,0,6],
 "_workspace_8h.html":[2,0,0,0,7],
 "_workspace_8h_source.html":[2,0,0,0,7],
-"_x_m_l_parser_8cpp_source.html":[2,0,0,4,18],
-"_x_m_l_parser_8h.html":[2,0,0,4,19],
-"_x_m_l_parser_8h_source.html":[2,0,0,4,19],
+"_x_m_l_parser_8cpp_source.html":[2,0,0,4,20],
+"_x_m_l_parser_8h.html":[2,0,0,4,21],
+"_x_m_l_parser_8h_source.html":[2,0,0,4,21],
 "annotated.html":[1,0],
 "class_a_t_p_file_editor_form.html":[1,0,1],
 "class_about_form.html":[1,0,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX1 =
 "class_element.html#a3687fe2558f6a27ee068fa7244f855eb":[1,0,26,27],
 "class_element.html#a3be3ed2876d3bb547c43caab95353f33":[1,0,26,48],
 "class_element.html#a44877d44d6e548c24f466913d118f61b":[1,0,26,9],
-"class_element.html#a499c3b52be27d2bf436a13b6f5353b9c":[1,0,26,69],
-"class_element.html#a4a4840007087b2abb7fcdda29ca7dcad":[1,0,26,24],
-"class_element.html#a4c93a9e20ed0ca0c376cf412b4347159":[1,0,26,31]
+"class_element.html#a499c3b52be27d2bf436a13b6f5353b9c":[1,0,26,69]
 };

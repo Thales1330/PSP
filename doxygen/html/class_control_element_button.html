@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w10a-beta</span>
+   &#160;<span id="projectnumber">2026w11a-beta</span>
    </div>
   </td>
  </tr>
@@ -229,43 +229,43 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00045">45</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>    : wxWindow(parent, <span class="keywordtype">id</span>)</div>
-<div class="line"><span class="lineno">   47</span>{</div>
-<div class="line"><span class="lineno">   48</span>    SetBackgroundColour(*wxWHITE);</div>
-<div class="line"><span class="lineno">   49</span>    m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);</div>
-<div class="line"><span class="lineno">   50</span>    m_label = label;</div>
-<div class="line"><span class="lineno">   51</span>    m_image = image;</div>
-<div class="line"><span class="lineno">   52</span>    m_imageSize = wxSize(image.GetWidth(), image.GetHeight());</div>
-<div class="line"><span class="lineno">   53</span> </div>
-<div class="line"><span class="lineno">   54</span>    <span class="comment">// Calculate label size.</span></div>
-<div class="line"><span class="lineno">   55</span>    wxScreenDC dc;</div>
-<div class="line"><span class="lineno">   56</span>    dc.SetFont(m_font);</div>
-<div class="line"><span class="lineno">   57</span>    wxSize textSize = dc.GetTextExtent(label);</div>
-<div class="line"><span class="lineno">   58</span> </div>
-<div class="line"><span class="lineno">   59</span>    <span class="keywordtype">int</span> buttonWidth = 0;</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">if</span> (textSize.GetWidth() &gt; m_imageSize.GetWidth()) {</div>
-<div class="line"><span class="lineno">   61</span>        buttonWidth = textSize.GetWidth();</div>
-<div class="line"><span class="lineno">   62</span>        m_imagePosition = wxPoint((buttonWidth - m_imageSize.GetWidth()) / 2 + m_borderSize, m_borderSize);</div>
-<div class="line"><span class="lineno">   63</span>        m_labelPosition = wxPoint(m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
-<div class="line"><span class="lineno">   64</span>    }</div>
-<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   66</span>        buttonWidth = m_imageSize.GetWidth();</div>
-<div class="line"><span class="lineno">   67</span>        m_imagePosition = wxPoint(m_borderSize, m_borderSize);</div>
-<div class="line"><span class="lineno">   68</span>        m_labelPosition =</div>
-<div class="line"><span class="lineno">   69</span>            wxPoint((buttonWidth - textSize.GetWidth()) / 2 + m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
-<div class="line"><span class="lineno">   70</span>    }</div>
-<div class="line"><span class="lineno">   71</span>    m_buttonSize =</div>
-<div class="line"><span class="lineno">   72</span>        wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);</div>
-<div class="line"><span class="lineno">   73</span>    SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));</div>
-<div class="line"><span class="lineno">   74</span> </div>
-<div class="line"><span class="lineno">   75</span>    <span class="comment">// Events.</span></div>
-<div class="line"><span class="lineno">   76</span>    Bind(wxEVT_PAINT, &amp;ControlElementButton::OnPaint, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   77</span>    Bind(wxEVT_ENTER_WINDOW, &amp;ControlElementButton::OnMouseEnter, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   78</span>    Bind(wxEVT_LEAVE_WINDOW, &amp;ControlElementButton::OnMouseLeave, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   79</span>    Bind(wxEVT_LEFT_DOWN, &amp;ControlElementButton::OnLeftClickDown, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   80</span>    Bind(wxEVT_LEFT_UP, &amp;ControlElementButton::OnLeftClickUp, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   81</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00046">46</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>    : wxWindow(parent, <span class="keywordtype">id</span>)</div>
+<div class="line"><span class="lineno">   48</span>{</div>
+<div class="line"><span class="lineno">   49</span>    SetBackgroundColour(*wxWHITE);</div>
+<div class="line"><span class="lineno">   50</span>    m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);</div>
+<div class="line"><span class="lineno">   51</span>    m_label = label;</div>
+<div class="line"><span class="lineno">   52</span>    m_image = image;</div>
+<div class="line"><span class="lineno">   53</span>    m_imageSize = wxSize(image.GetWidth(), image.GetHeight());</div>
+<div class="line"><span class="lineno">   54</span> </div>
+<div class="line"><span class="lineno">   55</span>    <span class="comment">// Calculate label size.</span></div>
+<div class="line"><span class="lineno">   56</span>    wxScreenDC dc;</div>
+<div class="line"><span class="lineno">   57</span>    dc.SetFont(m_font);</div>
+<div class="line"><span class="lineno">   58</span>    wxSize textSize = dc.GetTextExtent(label);</div>
+<div class="line"><span class="lineno">   59</span> </div>
+<div class="line"><span class="lineno">   60</span>    <span class="keywordtype">int</span> buttonWidth = 0;</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">if</span> (textSize.GetWidth() &gt; m_imageSize.GetWidth()) {</div>
+<div class="line"><span class="lineno">   62</span>        buttonWidth = textSize.GetWidth();</div>
+<div class="line"><span class="lineno">   63</span>        m_imagePosition = wxPoint((buttonWidth - m_imageSize.GetWidth()) / 2 + m_borderSize, m_borderSize);</div>
+<div class="line"><span class="lineno">   64</span>        m_labelPosition = wxPoint(m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
+<div class="line"><span class="lineno">   65</span>    }</div>
+<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   67</span>        buttonWidth = m_imageSize.GetWidth();</div>
+<div class="line"><span class="lineno">   68</span>        m_imagePosition = wxPoint(m_borderSize, m_borderSize);</div>
+<div class="line"><span class="lineno">   69</span>        m_labelPosition =</div>
+<div class="line"><span class="lineno">   70</span>            wxPoint((buttonWidth - textSize.GetWidth()) / 2 + m_borderSize, m_imageSize.GetHeight() + m_borderSize);</div>
+<div class="line"><span class="lineno">   71</span>    }</div>
+<div class="line"><span class="lineno">   72</span>    m_buttonSize =</div>
+<div class="line"><span class="lineno">   73</span>        wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);</div>
+<div class="line"><span class="lineno">   74</span>    SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));</div>
+<div class="line"><span class="lineno">   75</span> </div>
+<div class="line"><span class="lineno">   76</span>    <span class="comment">// Events.</span></div>
+<div class="line"><span class="lineno">   77</span>    Bind(wxEVT_PAINT, &amp;ControlElementButton::OnPaint, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   78</span>    Bind(wxEVT_ENTER_WINDOW, &amp;ControlElementButton::OnMouseEnter, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   79</span>    Bind(wxEVT_LEAVE_WINDOW, &amp;ControlElementButton::OnMouseLeave, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   80</span>    Bind(wxEVT_LEFT_DOWN, &amp;ControlElementButton::OnLeftClickDown, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   81</span>    Bind(wxEVT_LEFT_UP, &amp;ControlElementButton::OnLeftClickUp, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   82</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -284,8 +284,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00083">83</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   83</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00084">84</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -314,12 +314,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00122">122</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  123</span>{</div>
-<div class="line"><span class="lineno">  124</span>    m_selected = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  125</span>    Refresh();</div>
-<div class="line"><span class="lineno">  126</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  127</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00123">123</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  124</span>{</div>
+<div class="line"><span class="lineno">  125</span>    m_selected = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  126</span>    Refresh();</div>
+<div class="line"><span class="lineno">  127</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  128</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -347,12 +347,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00129">129</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  130</span>{</div>
-<div class="line"><span class="lineno">  131</span>    m_selected = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  132</span>    Refresh();</div>
-<div class="line"><span class="lineno">  133</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  134</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00130">130</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  131</span>{</div>
+<div class="line"><span class="lineno">  132</span>    m_selected = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  133</span>    Refresh();</div>
+<div class="line"><span class="lineno">  134</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  135</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -380,12 +380,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00108">108</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  109</span>{</div>
-<div class="line"><span class="lineno">  110</span>    m_mouseAbove = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  111</span>    Refresh();</div>
-<div class="line"><span class="lineno">  112</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  113</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00109">109</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  110</span>{</div>
+<div class="line"><span class="lineno">  111</span>    m_mouseAbove = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  112</span>    Refresh();</div>
+<div class="line"><span class="lineno">  113</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  114</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -413,12 +413,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00115">115</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>{</div>
-<div class="line"><span class="lineno">  117</span>    m_mouseAbove = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  118</span>    Refresh();</div>
-<div class="line"><span class="lineno">  119</span>    <span class="keyword">event</span>.Skip();</div>
-<div class="line"><span class="lineno">  120</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00116">116</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{</div>
+<div class="line"><span class="lineno">  118</span>    m_mouseAbove = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  119</span>    Refresh();</div>
+<div class="line"><span class="lineno">  120</span>    <span class="keyword">event</span>.Skip();</div>
+<div class="line"><span class="lineno">  121</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -446,29 +446,29 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00084">84</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   85</span>{</div>
-<div class="line"><span class="lineno">   86</span>    wxPaintDC dc(<span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   87</span>    wxGraphicsContext* gc = wxGraphicsContext::Create(dc);</div>
-<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">if</span> (gc) {</div>
-<div class="line"><span class="lineno">   89</span>        <span class="keywordflow">if</span> (m_mouseAbove) {</div>
-<div class="line"><span class="lineno">   90</span>            <span class="keywordflow">if</span> (m_selected) {</div>
-<div class="line"><span class="lineno">   91</span>                gc-&gt;SetPen(wxPen(wxColour(0, 125, 255, 255), m_borderSize - 1));</div>
-<div class="line"><span class="lineno">   92</span>                gc-&gt;SetBrush(wxBrush(wxColour(0, 125, 255, 100)));</div>
-<div class="line"><span class="lineno">   93</span>            }</div>
-<div class="line"><span class="lineno">   94</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   95</span>                gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
-<div class="line"><span class="lineno">   96</span>                gc-&gt;SetBrush(wxBrush(wxColour(0, 125, 255, 70)));</div>
-<div class="line"><span class="lineno">   97</span>            }</div>
-<div class="line"><span class="lineno">   98</span>            gc-&gt;DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());</div>
-<div class="line"><span class="lineno">   99</span>        }</div>
-<div class="line"><span class="lineno">  100</span>        gc-&gt;DrawBitmap(gc-&gt;CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),</div>
-<div class="line"><span class="lineno">  101</span>            m_imageSize.GetHeight());</div>
-<div class="line"><span class="lineno">  102</span>        gc-&gt;SetFont(m_font, *wxBLACK);</div>
-<div class="line"><span class="lineno">  103</span>        gc-&gt;DrawText(m_label, m_labelPosition.x, m_labelPosition.y);</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keyword">delete</span> gc;</div>
-<div class="line"><span class="lineno">  105</span>    }</div>
-<div class="line"><span class="lineno">  106</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_editor_8cpp_source.html#l00085">85</a> of file <a class="el" href="_control_editor_8cpp_source.html">ControlEditor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>{</div>
+<div class="line"><span class="lineno">   87</span>    wxPaintDC dc(<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   88</span>    wxGraphicsContext* gc = wxGraphicsContext::Create(dc);</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> (gc) {</div>
+<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">if</span> (m_mouseAbove) {</div>
+<div class="line"><span class="lineno">   91</span>            <span class="keywordflow">if</span> (m_selected) {</div>
+<div class="line"><span class="lineno">   92</span>                gc-&gt;SetPen(wxPen(wxColour(0, 125, 255, 255), m_borderSize - 1));</div>
+<div class="line"><span class="lineno">   93</span>                gc-&gt;SetBrush(wxBrush(wxColour(0, 125, 255, 100)));</div>
+<div class="line"><span class="lineno">   94</span>            }</div>
+<div class="line"><span class="lineno">   95</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   96</span>                gc-&gt;SetPen(*wxTRANSPARENT_PEN);</div>
+<div class="line"><span class="lineno">   97</span>                gc-&gt;SetBrush(wxBrush(wxColour(0, 125, 255, 70)));</div>
+<div class="line"><span class="lineno">   98</span>            }</div>
+<div class="line"><span class="lineno">   99</span>            gc-&gt;DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());</div>
+<div class="line"><span class="lineno">  100</span>        }</div>
+<div class="line"><span class="lineno">  101</span>        gc-&gt;DrawBitmap(gc-&gt;CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),</div>
+<div class="line"><span class="lineno">  102</span>            m_imageSize.GetHeight());</div>
+<div class="line"><span class="lineno">  103</span>        gc-&gt;SetFont(m_font, *wxBLACK);</div>
+<div class="line"><span class="lineno">  104</span>        gc-&gt;DrawText(m_label, m_labelPosition.x, m_labelPosition.y);</div>
+<div class="line"><span class="lineno">  105</span>        <span class="keyword">delete</span> gc;</div>
+<div class="line"><span class="lineno">  106</span>    }</div>
+<div class="line"><span class="lineno">  107</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

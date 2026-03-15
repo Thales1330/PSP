@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w10a-beta</span>
+   &#160;<span id="projectnumber">2026w11a-beta</span>
    </div>
   </td>
  </tr>
@@ -728,7 +728,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><span class="lineno">   64</span>    wxPoint2DDouble ptR = <a class="code hl_function" href="class_element.html#a99b213010776b34a27eb814aff288a34">RotateAtPosition</a>(position, -m_angle);</div>
 <div class="line"><span class="lineno">   65</span>    <span class="keywordflow">return</span> m_rect.Contains(ptR);</div>
 <div class="line"><span class="lineno">   66</span>}</div>
-<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00292">Element.cpp:292</a></div></div>
+<div class="ttc" id="aclass_element_html_a99b213010776b34a27eb814aff288a34"><div class="ttname"><a href="class_element.html#a99b213010776b34a27eb814aff288a34">Element::RotateAtPosition</a></div><div class="ttdeci">virtual wxPoint2DDouble RotateAtPosition(wxPoint2DDouble pointToRotate, double angle, bool degrees=true) const</div><div class="ttdoc">Rotate a point as element position being the origin.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00223">Element.cpp:223</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -843,8 +843,8 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  238</span>        m_gcTextList[0]-&gt;Draw(m_position, m_width, m_height, dc, m_angle);</div>
 <div class="line"><span class="lineno">  239</span>    }</div>
 <div class="line"><span class="lineno">  240</span>}</div>
-<div class="ttc" id="aclass_element_html_a79e18ae8f29cea9cec00bf11f21f5241"><div class="ttname"><a href="class_element.html#a79e18ae8f29cea9cec00bf11f21f5241">Element::DrawDCRectangle</a></div><div class="ttdeci">virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC &amp;dc) const</div><div class="ttdoc">Draw a circle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00045">Element.cpp:45</a></div></div>
-<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00027">Element.cpp:27</a></div></div>
+<div class="ttc" id="aclass_element_html_a79e18ae8f29cea9cec00bf11f21f5241"><div class="ttname"><a href="class_element.html#a79e18ae8f29cea9cec00bf11f21f5241">Element::DrawDCRectangle</a></div><div class="ttdeci">virtual void DrawDCRectangle(wxPoint2DDouble position, double width, double height, double angle, wxDC &amp;dc) const</div><div class="ttdoc">Draw a circle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00036">Element.cpp:36</a></div></div>
+<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html"><div class="ttname"><a href="class_g_c_text.html">GCText</a></div><div class="ttdoc">Class to draw text on Graphics Context using wxWidgets.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8h_source.html#l00031">GCText.h:32</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1274,7 +1274,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  244</span>    <span class="keywordflow">if</span> (m_angle == 0.0 || m_angle == 180.0) <span class="keywordflow">return</span> m_rect.Intersects(rect);</div>
 <div class="line"><span class="lineno">  245</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">RotatedRectanglesIntersects</a>(m_rect, rect, m_angle, 0.0);</div>
 <div class="line"><span class="lineno">  246</span>}</div>
-<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00359">Element.cpp:359</a></div></div>
+<div class="ttc" id="aclass_element_html_a01563b5b2fed2860132f4dd1593f9eea"><div class="ttname"><a href="class_element.html#a01563b5b2fed2860132f4dd1593f9eea">Element::RotatedRectanglesIntersects</a></div><div class="ttdeci">virtual bool RotatedRectanglesIntersects(wxRect2DDouble rect1, wxRect2DDouble rect2, double angle1, double angle2) const</div><div class="ttdoc">Check if two roteted rectangles intersect.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00290">Element.cpp:290</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">

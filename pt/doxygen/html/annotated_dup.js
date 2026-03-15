@@ -82,6 +82,7 @@ var annotated_dup =
     [ "Node", "class_node.html", null ],
     [ "ParseAnarede", "class_parse_anarede.html", "class_parse_anarede" ],
     [ "ParseMatpower", "class_parse_matpower.html", "class_parse_matpower" ],
+    [ "Paths", "class_paths.html", null ],
     [ "PlotData", "class_plot_data.html", null ],
     [ "PowerElement", "class_power_element.html", "class_power_element" ],
     [ "PowerFlow", "class_power_flow.html", null ],

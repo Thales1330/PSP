@@ -157,6 +157,7 @@ var hierarchy =
     [ "Node", "class_node.html", null ],
     [ "ParseAnarede", "class_parse_anarede.html", null ],
     [ "ParseMatpower", "class_parse_matpower.html", null ],
+    [ "Paths", "class_paths.html", null ],
     [ "ParseAnarede::PowerLine", "struct_parse_anarede_1_1_power_line.html", null ],
     [ "ProjectPropertiesFormBase", null, [
       [ "ProjectPropertiesForm", "class_project_properties_form.html", null ]

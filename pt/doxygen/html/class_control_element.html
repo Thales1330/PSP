@@ -45,7 +45,7 @@ window.MathJax = {
   <td id="projectlogo"><img alt="Logo" src="logoHeader.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Power System Platform
-   &#160;<span id="projectnumber">2026w10a-beta</span>
+   &#160;<span id="projectnumber">2026w11a-beta</span>
    </div>
   </td>
  </tr>
@@ -537,7 +537,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_control_element_8cpp_source.html#l00111">111</a> of file <a class="el" href="_control_element_8cpp_source.html">ControlElement.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  111</span>: <a class="code hl_function" href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element</a>() { m_elementID = id; }</div>
-<div class="ttc" id="aclass_element_html_ab0d0e20be9a36ae676202db753faeec9"><div class="ttname"><a href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element::Element</a></div><div class="ttdeci">Element()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00026">Element.cpp:26</a></div></div>
+<div class="ttc" id="aclass_element_html_ab0d0e20be9a36ae676202db753faeec9"><div class="ttname"><a href="class_element.html#ab0d0e20be9a36ae676202db753faeec9">Element::Element</a></div><div class="ttdeci">Element()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00027">Element.cpp:27</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -602,8 +602,8 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  130</span>        <span class="keywordflow">if</span> (node-&gt;GetNodeType() == Node::NodeType::NODE_IN) { <a class="code hl_function" href="class_element.html#a9332ba7b4ce2051a3935081cc890c03c">DrawDCTriangle</a>(node-&gt;GetInTrianglePts(), gc); }</div>
 <div class="line"><span class="lineno">  131</span>    }</div>
 <div class="line"><span class="lineno">  132</span>}</div>
-<div class="ttc" id="aclass_element_html_a9332ba7b4ce2051a3935081cc890c03c"><div class="ttname"><a href="class_element.html#a9332ba7b4ce2051a3935081cc890c03c">Element::DrawDCTriangle</a></div><div class="ttdeci">virtual void DrawDCTriangle(std::vector&lt; wxPoint2DDouble &gt; points, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00237">Element.cpp:237</a></div></div>
-<div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00177">Element.cpp:177</a></div></div>
+<div class="ttc" id="aclass_element_html_a9332ba7b4ce2051a3935081cc890c03c"><div class="ttname"><a href="class_element.html#a9332ba7b4ce2051a3935081cc890c03c">Element::DrawDCTriangle</a></div><div class="ttdeci">virtual void DrawDCTriangle(std::vector&lt; wxPoint2DDouble &gt; points, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00204">Element.cpp:204</a></div></div>
+<div class="ttc" id="aclass_element_html_af1fd54d12f61f461111697d11cf10b9c"><div class="ttname"><a href="class_element.html#af1fd54d12f61f461111697d11cf10b9c">Element::DrawDCCircle</a></div><div class="ttdeci">virtual void DrawDCCircle(wxPoint2DDouble position, double radius, int numSegments, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw a circle using device context.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00168">Element.cpp:168</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -811,7 +811,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  143</span>    <a class="code hl_function" href="class_element.html#a920fe7ba1563615857618f01e64b3284">SetPosition</a>(m_movePos + position - m_moveStartPt);</div>
 <div class="line"><span class="lineno">  144</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)m_nodeList.size(); ++i) { m_nodeList[i]-&gt;Move(position); }</div>
 <div class="line"><span class="lineno">  145</span>}</div>
-<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00027">Element.cpp:27</a></div></div>
+<div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
