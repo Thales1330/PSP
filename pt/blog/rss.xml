@@ -45,7 +45,7 @@
 <li class="">Fixed several issues in <strong>dynamic control systems</strong>;</li>
 <li class="">Fixed <strong>ChartDirector linking issues on Linux builds</strong>;</li>
 <li class="">Fixed program crash when adding elements via menu;</li>
-<li class="">Fixe reactive power wrong distribution in limited generators;</li>
+<li class="">Fixed reactive power wrong distribution in limited generators;</li>
 <li class="">Various minor UI and stability fixes.</li>
 </ul>
 ]]></content:encoded>
