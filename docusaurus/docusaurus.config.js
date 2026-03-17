@@ -61,7 +61,7 @@ module.exports = {
           items: [
             {
               label: 'PSP-UFU Guide',
-              to: 'docs/',
+              to: '/docs/',
             },
 			{
               label: 'Code Documentation',
@@ -83,14 +83,14 @@ module.exports = {
           ],
         },
         {
-          title: 'Site Image Credit',
+          title: 'More',
           items: [
-			{
-				label: 'Images designed by upklyak / slidesgo / macrovector / Freepik',
-				href: 'http://www.freepik.com/',
-			},
+            {
+              label: 'GitHub',
+              href: 'https://github.com/Thales1330/PSP',
+            },
           ],
-        },
+        }
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Thales Lima Oliveira. Built with Docusaurus.`,
     },

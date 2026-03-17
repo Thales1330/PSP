@@ -10,17 +10,17 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <Translate>Complete Platform</Translate>,
-    imageUrl: 'img/complete-platform.svg',
+    title: <Translate>Complete Platform for Research & Industry</Translate>,
+    imageUrl: 'img/applicationv2.png',
     description: (
       <>
-        <Translate>PSP-UFU is a</Translate> <b><Translate>cross-platform, multilingual, Free and Open-Source Software (FOSS)</Translate></b> <Translate>with</Translate> <b><Translate>advanced GUI (Graphical User Interface) features</Translate></b> <Translate>and</Translate> <b><Translate>CAD (Computer-Aided Design) tools</Translate></b> <Translate>for electrical power system studies</Translate>.
+        <Translate>A</Translate> <b><Translate>complete</Translate></b>, <b><Translate>cross-platform</Translate></b>, <b><Translate>multilingual</Translate></b> and <b><Translate>open-source environment</Translate></b> <Translate>for electrical power system simulation, supporting research, education, and real-world industrial applications.</Translate>
       </>
     ),
   },
   {
     title: <><Translate>Advanced CAD Features</Translate></>,
-    imageUrl: 'img/advanced-cad.svg',
+    imageUrl: 'img/advancedCAD.png',
     description: (
       <>
         <Translate>The software allows the construction of any</Translate> <b><Translate>electric transmission network</Translate></b> <Translate>and</Translate> <b><Translate>control systems</Translate></b> <Translate>through the deployment of visual elements</Translate>.
@@ -29,7 +29,7 @@ const features = [
   },
   {
     title: <><Translate>Easy Visualization</Translate></>,
-    imageUrl: 'img/visualization.svg',
+    imageUrl: 'img/easyView.png',
     description: (
       <>
         <Translate>For the visualization of results, the program offers linked text elements in the main screen, voltage heatmap display, and also table and graph editors.</Translate>
@@ -37,62 +37,59 @@ const features = [
     ),
   },
   {
-    title: <><Translate>Application</Translate></>,
-    imageUrl: 'img/application.svg',
+    title: <><Translate>Power Flow</Translate></>,
+    imageUrl: 'img/powerFlow.png',
     description: (
       <>
-        <Translate>The PSP-UFU aims to provide efficient computer simulation tools for</Translate> <b><Translate>research and education purposes</Translate></b>, <Translate>in addition to</Translate> <b><Translate>industrial applications</Translate></b> <Translate>in electrical power systems</Translate>.
+        <Translate>
+          Steady-state analysis of electrical networks using robust numerical methods.
+        </Translate>
+        <ul>
+          <li>Newton-Raphson</li>
+          <li>Gauss-Seidel</li>
+          <li><Translate>Hybrid Newton-Gauss</Translate></li>
+          <li><Translate>Three-phase induction motors supported</Translate></li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    title: <><Translate>Short-Circuit & Harmonics</Translate></>,
+    imageUrl: 'img/faultHarm.png',
+    description: (
+      <>
+        <Translate>
+         Fault analysis and power quality evaluation for system protection and design.
+        </Translate>
+        <ul>
+          <li><Translate>Balanced faults</Translate></li>
+          <li><Translate>Unbalanced faults</Translate></li>
+          <li><Translate>Short-circuit power in all buses</Translate></li>
+          <li><Translate>Harmonic voltages and THD calculation</Translate></li>
+          <li><Translate>Frequency scan</Translate></li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    title: <><Translate>Transient & Dynamic Stability</Translate></>,
+    imageUrl: 'img/stability.png',
+    description: (
+      <>
+        <Translate>
+         Time-domain simulation of system dynamics under disturbances and control actions.
+        </Translate>
+        <ul>
+          <li><Translate>Automatic selection of synchronous machine models</Translate></li>
+          <li><Translate>Three-phase induction motors</Translate></li>
+          <li><Translate>User-defined control systems via block diagrams</Translate></li>
+          <li><Translate>Exciters, AVR, PSS, turbines and speed governors</Translate></li>
+        </ul>
       </>
     ),
   },
 ];
 
-const studies = [
-	{
-    title: <><Translate>Power Flow</Translate></>,
-    //imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: (
-      <ul>
-        <li>Newton-Raphson</li>
-		    <li>Gauss-Seidel</li>
-		    <li><Translate>Hybrid Newton-Gauss</Translate></li>
-		    <li><Translate>Three-phase induction motors included</Translate></li>
-      </ul>
-    ),
-  },
-  {
-    title: <><Translate>Short-Circuit calculation</Translate></>,
-    //imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: (
-      <ul>
-        <li><Translate>Balanced</Translate></li>
-		    <li><Translate>Unbalanced</Translate></li>
-		    <li><Translate>Short-Circuit power in all system buses</Translate></li>
-      </ul>
-    ),
-  },
-  {
-    title: <><Translate>Harmonics</Translate></>,
-    //imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: (
-      <ul>
-        <li><Translate>Harmonic voltages and THD (Total Harmonic Distortion) calculation</Translate></li>
-		    <li><Translate>Frequency scan</Translate></li>
-      </ul>
-    ),
-  },
-  {
-    title: <><Translate>Transient and Dynamic Stability</Translate></>,
-    //imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: (
-      <ul>
-        <li><Translate>Several synchronous machine models automatically selected</Translate></li>
-		    <li><Translate>Three-phase induction motors</Translate></li>
-		    <li><Translate>User-defined machine controls, exciters and prime moves created using block diagrams (Exciters, AVR, PSS, Hydro and Thermal turbines, Speed Governor, etc.)</Translate></li>
-      </ul>
-    ),
-  },
-];
 
 function Feature({imageUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
@@ -302,21 +299,7 @@ function Home() {
           </section>
         )}
 		
-		<div className="container">
-		<h2><Translate>Studies Performed</Translate></h2>
-		</div>
 		
-		{studies && studies.length > 0 && (
-          <section className={styles.features}>
-            <div className="container">
-              <div className="row">
-                {studies.map((props, idx) => (
-                  <Studies key={idx} {...props} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 		
 		<div className="container">
 		<h2><Translate>Published Papers</Translate></h2>
