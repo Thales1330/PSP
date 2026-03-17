@@ -15,7 +15,27 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
+  --ifm-background-color: #f3efde; /* off-white */
+  --ifm-background-surface-color: #f7f6f2;
+  --ifm-font-color-base: #2b2b2b;
+  --ifm-color-emphasis-200: #e6dcc2;
 }
+
+[data-theme='dark'] {
+  --ifm-font-color-base: #e8e6df;
+}
+
+[data-theme='dark'] body,
+[data-theme='dark'] main {
+  background-color: #1f1e1a;
+}
+
+[data-theme='dark'] .navbar,
+[data-theme='dark'] .footer,
+[data-theme='dark'] .card {
+  background-color: #2a2925;
+}
+
 .hero--primary {
   background: linear-gradient(135deg, #ff8c00, #1cb6d5, #2e8de6);
   background-size: 200% 200%;
