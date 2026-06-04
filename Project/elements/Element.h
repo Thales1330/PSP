@@ -584,7 +584,7 @@ public:
 	 * @param element Element that will be edited.
 	 * @return True if the form is shown, false otherwise.
 	 */
-	virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }
+	virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr) { return false; }
 	/**
 	 * @brief Get a double value from a string. Show a error message if the conversion fail.
 	 * @param parent Message box parent.

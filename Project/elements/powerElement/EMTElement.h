@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2024  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -77,7 +77,7 @@ public:
 	virtual void Rotate(bool clockwise = true);
 	virtual bool GetContextMenu(wxMenu& menu);
 	virtual wxString GetTipText() const;
-	virtual bool ShowForm(wxWindow* parent, Element* element);
+	virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
 
 	virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
 	virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

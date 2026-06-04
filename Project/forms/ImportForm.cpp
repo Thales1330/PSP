@@ -113,6 +113,7 @@ bool ImportForm::ImportCEPELFiles()
         switch((*it)->type) {
             case ANA_BUS: {
                 Bus* bus = new Bus(wxPoint2DDouble((*it)->position.m_x * scale, (*it)->position.m_y * scale));
+                bus->SetInserted();
                 bus->SetID((*it)->id);
                 bus->SetWidth((*it)->length * scale);
                 bus->StartMove(bus->GetPosition());

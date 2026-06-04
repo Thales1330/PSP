@@ -18,6 +18,7 @@
 #include "SyncGenerator.h"
 
 #include <memory>
+#include <wx/log.h> 
 
 #include "../controlElement/ControlElementContainer.h"
 #include "../controlElement/ControlElementSolver.h"
@@ -105,9 +106,11 @@ bool SyncGenerator::GetContextMenu(wxMenu& menu)
 	return true;
 }
 
-bool SyncGenerator::ShowForm(wxWindow* parent, Element* element)
+bool SyncGenerator::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
-	Workspace* ws = static_cast<Workspace*>(parent);
+	Workspace* ws = dynamic_cast<Workspace*>(workspace);
+	if (!ws) return false;
+
 	SyncMachineForm generatorForm(parent, this, static_cast<int>(ws->GetProperties()->GetGeneralPropertiesData().plotLib));
 	generatorForm.SetTitle(_("Generator"));
 	generatorForm.CenterOnParent();
@@ -204,6 +207,8 @@ Element* SyncGenerator::GetCopy()
 	auto copy = new SyncGenerator(*this);
 
 	auto data = copy->GetElectricalData();
+	data.avrSolver.reset();
+	data.speedGovSolver.reset();
 
 	// AVR
 	if (m_electricalData.avr)

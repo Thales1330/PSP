@@ -79,6 +79,7 @@ class ControlElementSolver
     ConnectionLine* SolveNextElement(ConnectionLine* currentLine);
 
     ControlElementContainer* m_ctrlContainer = nullptr;
+    bool m_ownsCtrlContainer = false;
     double m_timeStep = 1e-3;
     double m_integrationError = 1e-5;
     std::vector<double> m_solutions;

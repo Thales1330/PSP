@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -148,7 +148,7 @@ class SyncMotor : public Machines
     virtual SyncMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetElectricalData(SyncMotorElectricalData electricalData) { m_electricalData = electricalData; }
-    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
 
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);
     virtual bool OpenElement(rapidxml::xml_node<>* elementNode, std::vector<Element*> parentList);

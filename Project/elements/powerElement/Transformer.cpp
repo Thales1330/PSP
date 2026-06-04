@@ -457,7 +457,7 @@ bool Transformer::GetContextMenu(wxMenu& menu)
 	return true;
 }
 
-bool Transformer::ShowForm(wxWindow* parent, Element* element)
+bool Transformer::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	TransformerForm transfForm(parent, this);
 	transfForm.CenterOnParent();

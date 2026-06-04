@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -103,7 +103,7 @@ class Transformer : public Branch
     virtual void RotateNode(Element* parent, bool clockwise);
     virtual bool SetNodeParent(Element* parent);
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
-    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual TransformerElectricalData GetElectricalData() const { return m_electricalData; }
     virtual TransformerElectricalData GetPUElectricalData(double systemBasePower);
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }

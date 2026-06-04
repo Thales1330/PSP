@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -85,8 +85,9 @@ class Load : public Shunt
     virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
-    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     LoadElectricalData GetElectricalData() { return m_electricalData; }
+    LoadElectricalData& GetElectricalDataRef() { return m_electricalData; }
     LoadElectricalData GetPUElectricalData(double systemPowerBase);
     void SetElectricalData(const LoadElectricalData& electricalData) { m_electricalData = electricalData; }
     virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = PlotStudy::STABILITY);

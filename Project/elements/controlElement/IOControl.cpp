@@ -214,7 +214,7 @@ void IOControl::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 	DrawDCNodes(gc);
 }
 
-bool IOControl::ShowForm(wxWindow* parent, Element* element)
+bool IOControl::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	IOControlForm form(parent, this);
 	if (form.ShowModal() == wxID_OK) {
@@ -354,9 +354,8 @@ void IOControl::UpdatePoints()
 
 Element* IOControl::GetCopy()
 {
-	IOControl* copy = new IOControl(m_ioFlags, m_elementID);
-	*copy = *this;
-	copy->m_gcText = m_gcText->GetCopy();
+	IOControl* copy = new IOControl(*this);
+	copy->m_gcText = m_gcText ? m_gcText->GetCopy() : nullptr;
 	return copy;
 }
 

@@ -103,7 +103,7 @@ void RateLimiter::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 	DrawDCNodes(gc);
 }
 
-bool RateLimiter::ShowForm(wxWindow* parent, Element* element)
+bool RateLimiter::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	RateLimiterForm form(parent, this);
 	form.CenterOnParent();
@@ -179,8 +179,7 @@ bool RateLimiter::Solve(double* input, double timeStep)
 
 Element* RateLimiter::GetCopy()
 {
-	RateLimiter* copy = new RateLimiter(m_elementID);
-	*copy = *this;
+	RateLimiter* copy = new RateLimiter(*this);
 	return copy;
 }
 

@@ -1,4 +1,4 @@
-#ifndef HARMCURRENT_H
+﻿#ifndef HARMCURRENT_H
 #define HARMCURRENT_H
 
 #include "Shunt.h"
@@ -37,7 +37,7 @@ class HarmCurrent : public Shunt
     virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
-    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual HarmCurrentElectricalData GetElectricalData() { return m_electricalData; }
     virtual HarmCurrentElectricalData GetPUElectricalData(double systemPowerBase, double voltage);
     virtual void SetElectricalData(HarmCurrentElectricalData electricalData) { m_electricalData = electricalData; }

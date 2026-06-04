@@ -16,6 +16,8 @@
  */
 
 #include "../../forms/SyncMachineForm.h"
+#include <memory>
+#include "../controlElement/ControlElementContainer.h"
 #include "SyncMotor.h"
 
 SyncMotor::SyncMotor() : Machines()
@@ -29,7 +31,13 @@ SyncMotor::SyncMotor(wxString name) : Machines()
 	m_electricalData.name = name;
 }
 
-SyncMotor::~SyncMotor() {}
+SyncMotor::~SyncMotor()
+{
+	if (m_electricalData.avr) delete m_electricalData.avr;
+	if (m_electricalData.speedGov) delete m_electricalData.speedGov;
+	if (m_electricalData.avrSolver) delete m_electricalData.avrSolver;
+	if (m_electricalData.speedGovSolver) delete m_electricalData.speedGovSolver;
+}
 
 //void SyncMotor::DrawSymbol() const { DrawArc(m_position, 12, 30, 330, 10, GL_LINE_STRIP); }
 void SyncMotor::DrawDCSymbol(wxGraphicsContext* gc) const
@@ -59,7 +67,7 @@ bool SyncMotor::GetContextMenu(wxMenu& menu)
 	return true;
 }
 
-bool SyncMotor::ShowForm(wxWindow* parent, Element* element)
+bool SyncMotor::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	SyncMachineForm syncMotorForm(parent, this);
 	syncMotorForm.SetTitle(_("Synchronous Condenser"));
@@ -153,8 +161,44 @@ void SyncMotor::SetNominalVoltage(std::vector<double> nominalVoltage, std::vecto
 
 Element* SyncMotor::GetCopy()
 {
-	SyncMotor* copy = new SyncMotor();
-	*copy = *this;
+	auto copy = new SyncMotor(*this);
+
+	auto data = copy->GetElectricalData();
+	data.avrSolver = nullptr;
+	data.speedGovSolver = nullptr;
+
+	if (m_electricalData.avr) {
+		std::vector<std::shared_ptr<ConnectionLine>> cLineList;
+		std::vector<std::shared_ptr<ControlElement>> elementList;
+
+		m_electricalData.avr->GetContainerCopy(elementList, cLineList);
+
+		auto avrCopy = new ControlElementContainer();
+		avrCopy->FillContainer(elementList, cLineList);
+
+		data.avr = avrCopy;
+	}
+	else {
+		data.avr = nullptr;
+	}
+
+	if (m_electricalData.speedGov) {
+		std::vector<std::shared_ptr<ConnectionLine>> cLineList;
+		std::vector<std::shared_ptr<ControlElement>> elementList;
+
+		m_electricalData.speedGov->GetContainerCopy(elementList, cLineList);
+
+		auto speedGovCopy = new ControlElementContainer();
+		speedGovCopy->FillContainer(elementList, cLineList);
+
+		data.speedGov = speedGovCopy;
+	}
+	else {
+		data.speedGov = nullptr;
+	}
+
+	copy->SetElectricalData(data);
+
 	return copy;
 }
 

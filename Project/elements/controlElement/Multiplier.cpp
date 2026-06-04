@@ -87,8 +87,7 @@ bool Multiplier::Solve(double* input, double timeStep)
 
 Element* Multiplier::GetCopy()
 {
-    Multiplier* copy = new Multiplier(m_elementID);
-    *copy = *this;
+    Multiplier* copy = new Multiplier(*this);
     return copy;
 }
 

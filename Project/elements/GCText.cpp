@@ -118,6 +118,12 @@ void GCText::SetText(wxString text)
 	//}
 }
 
+void GCText::SetText(wxString text, wxSize size)
+{
+	m_text = text;
+	m_size = size;
+}
+
 void GCText::SetFont(wxFont font)
 {
 	m_font = font;
@@ -162,7 +168,5 @@ GCText* GCText::GetCopy()
 {
 	GCText* copy = new GCText();
 	*copy = *this;
-
-	copy->SetText(copy->m_text);
 	return copy;
 }

@@ -54,6 +54,30 @@
 #include <wx/busyinfo.h>
 #include <wx/dcsvg.h>
 
+#ifdef __WXMSW__
+#include <windows.h>
+
+namespace
+{
+DWORD GetWorkspaceGDIObjects()
+{
+	return GetGuiResources(GetCurrentProcess(), GR_GDIOBJECTS);
+}
+
+void LogWorkspaceGDIDelta(const wxString& tag, DWORD before)
+{
+	const DWORD after = GetWorkspaceGDIObjects();
+	if (after != before) {
+		wxLogDebug("%s: GDI %lu -> %lu (%+ld)",
+			tag,
+			before,
+			after,
+			static_cast<long>(after) - static_cast<long>(before));
+	}
+}
+}
+#endif
+
 // Workspace
 Workspace::Workspace() : WorkspaceBase(nullptr)
 {
@@ -131,13 +155,21 @@ Workspace::~Workspace()
 
 void Workspace::OnPaint(wxPaintEvent& event)
 {
-	wxBufferedPaintDC dc(m_workspacePanel);
-	dc.Clear();
-	wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
+#ifdef __WXMSW__
+	const DWORD beforePaint = GetWorkspaceGDIObjects();
+#endif
+	{
+		wxBufferedPaintDC dc(m_workspacePanel);
+		dc.Clear();
+		wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
 
-	// Draw
-	DrawScene(gc);
-	delete gc;
+		// Draw
+		DrawScene(gc);
+		delete gc;
+	}
+#ifdef __WXMSW__
+	LogWorkspaceGDIDelta("Workspace::OnPaint", beforePaint);
+#endif
 
 	event.Skip();
 }
@@ -149,7 +181,13 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 
 		// HMPlane
 		if (m_hmPlane && m_showHM) {
+#ifdef __WXMSW__
+			const DWORD beforeHMPlane = GetWorkspaceGDIObjects();
+#endif
 			m_hmPlane->DrawDC(gc);
+#ifdef __WXMSW__
+			LogWorkspaceGDIDelta("Workspace::DrawScene HMPlane", beforeHMPlane);
+#endif
 		}
 
 		gc->Scale(m_camera->GetScale(), m_camera->GetScale());
@@ -157,28 +195,58 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 
 		// Elements
 		for (auto& element : m_elementList) {
+#ifdef __WXMSW__
+			const DWORD beforeElement = GetWorkspaceGDIObjects();
+#endif
 			element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
+#ifdef __WXMSW__
+			LogWorkspaceGDIDelta(wxString::Format("Workspace::DrawScene element type %d", element->GetElementType()), beforeElement);
+#endif
 		}
 
 		// Dummy Text to set correct context
 		// TODO: Find a better way to do this.
+#ifdef __WXMSW__
+		const DWORD beforeDummyText = GetWorkspaceGDIObjects();
+#endif
 		Text* text = new Text(wxPoint2DDouble(0.0, 0.0), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		text->SetText("");
 		text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		delete text;
+#ifdef __WXMSW__
+		LogWorkspaceGDIDelta("Workspace::DrawScene dummy text", beforeDummyText);
+#endif
 
 		// Texts
 		for (auto& text : m_textList) {
+#ifdef __WXMSW__
+			const DWORD beforeText = GetWorkspaceGDIObjects();
+#endif
 			text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
+#ifdef __WXMSW__
+			LogWorkspaceGDIDelta("Workspace::DrawScene text", beforeText);
+#endif
 		}
 
 		// Selection rectangle
+#ifdef __WXMSW__
+		const DWORD beforeSelectionRect = GetWorkspaceGDIObjects();
+#endif
 		gc->SetPen(wxPen(wxColour(0, 125, 255, 255)));
 		gc->SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
 		gc->DrawRectangle(m_selectionRect.m_x, m_selectionRect.m_y, m_selectionRect.m_width, m_selectionRect.m_height);
+#ifdef __WXMSW__
+		LogWorkspaceGDIDelta("Workspace::DrawScene selection rectangle", beforeSelectionRect);
+#endif
 
 		if (m_hmPlane && m_showHM) {
+#ifdef __WXMSW__
+			const DWORD beforeHMLabel = GetWorkspaceGDIObjects();
+#endif
 			m_hmPlane->DrawLabelDC(gc);
+#ifdef __WXMSW__
+			LogWorkspaceGDIDelta("Workspace::DrawScene heatmap label", beforeHMLabel);
+#endif
 		}
 	}
 }
@@ -257,6 +325,10 @@ void Workspace::ExportAsSVG(wxString path)
 
 void Workspace::OnLeftClickDown(wxMouseEvent& event)
 {
+	wxWindow* dialogParent = wxGetTopLevelParent(this);
+	if (!dialogParent) dialogParent = this;
+	//wxWindow* dialogParent = this;
+
 	wxPoint clickPoint = event.GetPosition();
 	bool foundElement = false;
 	Element* newElement = nullptr;
@@ -417,7 +489,9 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 	if (showNewElementForm) {
 		if (newElement) {
-			newElement->ShowForm(this, newElement);
+			newElement->ShowForm(dialogParent, newElement, this);
+			// Modal dialogs can steal focus; restore it to the workspace panel to keep mouse/keyboard handling consistent.
+			if (m_workspacePanel) m_workspacePanel->SetFocus();
 			CheckSlackBusDuplication(newElement);
 			SaveCurrentState();
 			if (m_continuousCalc) RunStaticStudies();
@@ -430,6 +504,10 @@ void Workspace::OnLeftClickDown(wxMouseEvent& event)
 
 void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 {
+	wxWindow* dialogParent = wxGetTopLevelParent(this);
+	if (!dialogParent) dialogParent = this;
+	//wxWindow* dialogParent = this;
+
 	bool elementEdited = false;
 	bool clickOnSwitch = false;
 	bool redraw = false;
@@ -445,10 +523,12 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 				oldBus = *currentBus;
 			}
 			m_timer->Stop();
-			if (element->ShowForm(this, element.get())) {
+			if (element->ShowForm(dialogParent, element.get(), this)) {
 				CheckSlackBusDuplication(element.get());
 				SaveCurrentState();
 			}
+			// Modal dialogs can steal focus; restore it to the workspace panel to keep mouse/keyboard handling consistent.
+			if (m_workspacePanel) m_workspacePanel->SetFocus();
 			elementEdited = true;
 			redraw = true;
 
@@ -464,7 +544,7 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 					for (auto itc = childList.begin(), itcEnd = childList.end(); itc != itcEnd; ++itc) {
 						Element* child = *itc;
 						if (typeid(*child) == typeid(Line)) {
-							wxMessageDialog msgDialog(this, _("Do you want to change the rated voltage of the path?"),
+							wxMessageDialog msgDialog(dialogParent, _("Do you want to change the rated voltage of the path?"),
 								_("Warning"), wxYES_NO | wxCENTRE | wxICON_WARNING);
 							if (msgDialog.ShowModal() == wxID_YES)
 								ValidateBusesVoltages(element.get());
@@ -480,6 +560,9 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 				}
 				ValidateElementsVoltages();
 			}
+
+			// Handle only one element per double-click to avoid opening multiple modals in sequence.
+			break;
 		}
 
 		// Click in a switch.
@@ -492,8 +575,11 @@ void Workspace::OnLeftDoubleClick(wxMouseEvent& event)
 	// Text element
 	for (auto& text : m_textList) {
 		if (text->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-			if (text->ShowForm(this, GetElementList())) SaveCurrentState();
+			if (text->ShowForm(dialogParent, GetElementList())) SaveCurrentState();
+			// Modal dialogs can steal focus; restore it to the workspace panel to keep mouse/keyboard handling consistent.
+			if (m_workspacePanel) m_workspacePanel->SetFocus();
 			redraw = true;
+			break;
 		}
 	}
 	if (elementEdited) {
@@ -521,6 +607,8 @@ void Workspace::OnRightClickDown(wxMouseEvent& event)
 						m_timer->Stop();
 						menu.Bind(wxEVT_COMMAND_MENU_SELECTED, &Workspace::OnPopupClick, this);
 						PopupMenu(&menu);
+						// Context menus can steal focus; restore it so subsequent mouse events keep working.
+						if (m_workspacePanel) m_workspacePanel->SetFocus();
 						redraw = true;
 
 						if (!menu.GetClientData()) break;
@@ -709,10 +797,22 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 					// If the mouse is over a pickbox set correct mouse cursor.
 					if (element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
 						foundPickbox = true;
+#ifdef __WXMSW__
+						const DWORD beforeCursor = GetWorkspaceGDIObjects();
+#endif
 						SetCursor(element->GetBestPickboxCursor());
+#ifdef __WXMSW__
+						LogWorkspaceGDIDelta(wxString::Format("Workspace::OnMouseMotion pickbox cursor type %d", element->GetElementType()), beforeCursor);
+#endif
 					}
 					else if (!foundPickbox) {
+#ifdef __WXMSW__
+						const DWORD beforeCursor = GetWorkspaceGDIObjects();
+#endif
 						SetCursor(wxCURSOR_ARROW);
+#ifdef __WXMSW__
+						LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
+#endif
 						element->ResetPickboxes();
 					}
 				}
@@ -721,7 +821,13 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 					element->ShowPickbox(false);
 					element->ResetPickboxes();
+#ifdef __WXMSW__
+					const DWORD beforeCursor = GetWorkspaceGDIObjects();
+#endif
 					SetCursor(wxCURSOR_ARROW);
+#ifdef __WXMSW__
+					LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
+#endif
 				}
 			}
 		}
@@ -1227,7 +1333,13 @@ void Workspace::GetStateListsCopy(const std::vector< std::shared_ptr<PowerElemen
 	std::map<Element*, Element*> elementMap;
 
 	for (auto& element : elementsList) {
+#ifdef __WXMSW__
+		const DWORD beforeElementCopy = GetWorkspaceGDIObjects();
+#endif
 		PowerElement* copyElement = static_cast<PowerElement*>(element->GetCopy());
+#ifdef __WXMSW__
+		LogWorkspaceGDIDelta(wxString::Format("Workspace::GetStateListsCopy element copy type %d", element->GetElementType()), beforeElementCopy);
+#endif
 		elementsListCopy.emplace_back(copyElement);
 		elementMap[element.get()] = copyElement;
 	}
@@ -1256,7 +1368,13 @@ void Workspace::GetStateListsCopy(const std::vector< std::shared_ptr<PowerElemen
 	}
 
 	for (const auto& text : textList) {
+#ifdef __WXMSW__
+		const DWORD beforeTextCopy = GetWorkspaceGDIObjects();
+#endif
 		auto copyText = static_cast<Text*>(text->GetCopy());
+#ifdef __WXMSW__
+		LogWorkspaceGDIDelta("Workspace::GetStateListsCopy text copy", beforeTextCopy);
+#endif
 		// Set text the correct element associated with the text
 		auto it = elementMap.find(copyText->GetElement());
 
@@ -1331,6 +1449,10 @@ void Workspace::UpdateHeatMap()
 
 void Workspace::OnPopupClick(wxCommandEvent& event)
 {
+	wxWindow* dialogParent = wxGetTopLevelParent(this);
+	if (!dialogParent) dialogParent = this;
+	//wxWindow* dialogParent = this;
+
 	bool redrawHM = false;
 
 	wxMenu* menu = static_cast<wxMenu*>(event.GetEventObject());
@@ -1338,11 +1460,13 @@ void Workspace::OnPopupClick(wxCommandEvent& event)
 	int eventID = event.GetId();
 	switch (eventID) {
 	case ID_EDIT_ELEMENT: {
-		if (element->ShowForm(this, element)) {
+		if (element->ShowForm(dialogParent, element, this)) {
 			CheckSlackBusDuplication(element);
 			UpdateTextElements();
 			SaveCurrentState();
 		}
+		// Modal dialogs can steal focus; restore it to the workspace panel to keep mouse/keyboard handling consistent.
+		if (m_workspacePanel) m_workspacePanel->SetFocus();
 	} break;
 	case ID_LINE_ADD_NODE: {
 		Line* line = static_cast<Line*>(element);
@@ -2245,11 +2369,18 @@ bool Workspace::Paste()
 
 void Workspace::SaveCurrentState()
 {
+	//return;
+#ifdef __WXMSW__
+	const DWORD beforeSaveState = GetWorkspaceGDIObjects();
+#endif
 	// Setup current state
 	std::vector< std::shared_ptr<PowerElement> > currentStateElementList;
 	std::vector< std::shared_ptr<Text> > currentStateTextList;
 
 	GetStateListsCopy(m_elementList, m_textList, currentStateElementList, currentStateTextList);
+#ifdef __WXMSW__
+	LogWorkspaceGDIDelta("Workspace::SaveCurrentState after copy", beforeSaveState);
+#endif
 
 	// Delete all states after the current one
 	//auto itE = m_elementListState.begin();
@@ -2291,6 +2422,13 @@ void Workspace::SaveCurrentState()
 
 	m_elementListState.emplace_back(currentStateElementList);
 	m_textListState.emplace_back(currentStateTextList);
+#ifdef __WXMSW__
+	LogWorkspaceGDIDelta(wxString::Format("Workspace::SaveCurrentState stored states=%zu elements=%zu texts=%zu",
+		m_elementListState.size(),
+		currentStateElementList.size(),
+		currentStateTextList.size()),
+		beforeSaveState);
+#endif
 
 #ifdef _DEBUG
 	wxString msg = "";

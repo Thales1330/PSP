@@ -85,8 +85,8 @@ public:
 	virtual void UpdateText(double systemPowerBase);
 	virtual wxString GetText() const { return m_text; }
 	virtual void SetText(wxString text);
-	virtual void SetFontName(wxString fontName) { m_fontName = fontName; }
-	virtual void SetFontSize(int fontSize) { m_fontSize = fontSize; }
+	virtual void SetFontName(wxString fontName) { m_fontName = fontName; m_updateTextRectangle = true; }
+	virtual void SetFontSize(int fontSize) { m_fontSize = fontSize; m_updateTextRectangle = true; }
 	virtual void SetAltSelectionColour(bool useAltSelectionColour = true) { m_useAltSelectionColour = useAltSelectionColour; }
 	virtual void SetAllowRotation(bool allowRotation = true) { m_allowRotation = allowRotation; }
 	//virtual bool IsGLTextOK();

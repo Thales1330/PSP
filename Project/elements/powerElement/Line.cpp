@@ -515,7 +515,7 @@ void Line::CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBo
 	}
 }
 
-bool Line::ShowForm(wxWindow* parent, Element* element)
+bool Line::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	LineForm lineForm(parent, this);
 	lineForm.CenterOnParent();

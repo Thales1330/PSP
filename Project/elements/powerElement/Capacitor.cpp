@@ -302,7 +302,7 @@ bool Capacitor::Intersects(wxRect2DDouble rect) const
 	return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0);
 }
 
-bool Capacitor::ShowForm(wxWindow* parent, Element* element)
+bool Capacitor::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	ReactiveShuntElementForm capacitorForm(parent, this);
 	capacitorForm.SetTitle(_("Capacitor"));

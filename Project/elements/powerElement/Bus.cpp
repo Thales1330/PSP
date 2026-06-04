@@ -342,7 +342,7 @@ bool Bus::GetContextMenu(wxMenu& menu)
 	return true;
 }
 
-bool Bus::ShowForm(wxWindow* parent, Element* element)
+bool Bus::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	BusForm busForm(parent, this);
 	busForm.CentreOnParent();

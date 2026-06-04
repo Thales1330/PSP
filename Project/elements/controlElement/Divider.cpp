@@ -94,8 +94,7 @@ bool Divider::Solve(double* input, double timeStep)
 
 Element* Divider::GetCopy()
 {
-    Divider* copy = new Divider(m_elementID);
-    *copy = *this;
+    Divider* copy = new Divider(*this);
     return copy;
 }
 

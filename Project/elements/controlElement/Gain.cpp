@@ -138,7 +138,7 @@ void Gain::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	DrawDCNodes(gc);
 }
 
-bool Gain::ShowForm(wxWindow* parent, Element* element)
+bool Gain::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	GainForm form(parent, this);
 	form.CenterOnParent();
@@ -246,10 +246,8 @@ bool Gain::Solve(double* input, double timeStep)
 
 Element* Gain::GetCopy()
 {
-	Gain* copy = new Gain(m_elementID);
-	*copy = *this;
-	//copy->m_glText = m_glText->GetCopy();
-	copy->m_gcText = m_gcText->GetCopy();
+	Gain* copy = new Gain(*this);
+	copy->m_gcText = m_gcText ? m_gcText->GetCopy() : nullptr;
 	return copy;
 }
 

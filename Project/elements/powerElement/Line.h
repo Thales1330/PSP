@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -88,7 +88,7 @@ class Line : public Branch
     virtual void RotateNode(Element* parent, bool clockwise = true);
     virtual void CalculateBoundaries(wxPoint2DDouble& leftUp, wxPoint2DDouble& rightBottom) const;
     virtual void SetPowerFlowDirection(PowerFlowDirection pfDirection);
-    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual LineElectricalData GetElectricalData() const { return m_electricalData; }
     virtual LineElectricalData GetPUElectricalData(double systemBasePower);
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricalData = electricalData; }

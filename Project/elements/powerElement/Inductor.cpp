@@ -289,7 +289,7 @@ bool Inductor::Contains(wxPoint2DDouble position) const
 }
 
 bool Inductor::Intersects(wxRect2DDouble rect) const { return RotatedRectanglesIntersects(m_rect, rect, m_angle, 0.0); }
-bool Inductor::ShowForm(wxWindow* parent, Element* element)
+bool Inductor::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	ReactiveShuntElementForm inductorForm(parent, this);
 	inductorForm.SetTitle(_("Inductor"));

@@ -81,7 +81,7 @@ bool IndMotor::GetContextMenu(wxMenu& menu)
 	return true;
 }
 
-bool IndMotor::ShowForm(wxWindow* parent, Element* element)
+bool IndMotor::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	IndMotorForm indMotorForm(parent, this);
 	indMotorForm.CentreOnParent();

@@ -57,6 +57,11 @@ Text::~Text()
 	//	if (openGLText) delete openGLText;
 	//}
 	//m_openGLTextList.clear();
+
+	for (auto& gcText : m_gcTextList) {
+		if (gcText) delete gcText;
+	}
+	m_gcTextList.clear();
 }
 
 bool Text::Contains(wxPoint2DDouble position) const
@@ -110,32 +115,33 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 		m_gcTextList.clear();
 
 		m_numberOfLines = m_text.Freq('\n') + 1;
-		if (m_numberOfLines > 1) m_isMultlineText = true;
+		m_isMultlineText = m_numberOfLines > 1;
 		m_width = 0.0;
 		m_height = 0.0;
+		wxFont font = wxFont(m_fontSize,
+			wxFONTFAMILY_DEFAULT,
+			wxFONTSTYLE_NORMAL,
+			wxFONTWEIGHT_NORMAL,
+			false,
+			m_fontName);
+		gc->SetFont(font, *wxBLACK);
+
 		wxString multText = m_text;
 		for (int i = 0; i < m_numberOfLines; ++i) {
 			wxString nextLine;
 			wxString currentLine = multText.BeforeFirst('\n', &nextLine);
 			multText = nextLine;
 
-			GCText* gcText = new GCText(currentLine);
-			wxFont font = wxFont(m_fontSize,
-				wxFONTFAMILY_DEFAULT,
-				wxFONTSTYLE_NORMAL,
-				wxFONTWEIGHT_NORMAL,
-				false,
-				m_fontName);
-			gcText->SetFont(font);
-			m_gcTextList.push_back(gcText);
-
-			gc->SetFont(font, *wxBLACK);
-
 			double w, h;
 			gc->GetTextExtent(currentLine, &w, &h);
 
 			if (w > m_width) m_width = w;
 			m_height += h;
+
+			GCText* gcText = new GCText();
+			gcText->SetFont(font);
+			gcText->SetText(currentLine, wxSize(static_cast<int>(w), static_cast<int>(h)));
+			m_gcTextList.push_back(gcText);
 		}
 		SetPosition(m_position);  // Update element rectangle.
 		m_updateTextRectangle = false;
@@ -187,30 +193,32 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc)
 		m_gcTextList.clear();
 
 		m_numberOfLines = m_text.Freq('\n') + 1;
-		if (m_numberOfLines > 1) m_isMultlineText = true;
+		m_isMultlineText = m_numberOfLines > 1;
 		m_width = 0.0;
 		m_height = 0.0;
+		wxFont font = wxFont(m_fontSize,
+			wxFONTFAMILY_DEFAULT,
+			wxFONTSTYLE_NORMAL,
+			wxFONTWEIGHT_NORMAL,
+			false,
+			m_fontName);
+		dc.SetFont(font);
+
 		wxString multText = m_text;
 		for (int i = 0; i < m_numberOfLines; ++i) {
 			wxString nextLine;
 			wxString currentLine = multText.BeforeFirst('\n', &nextLine);
 			multText = nextLine;
 
-			GCText* gcText = new GCText(currentLine);
-			wxFont font = wxFont(m_fontSize,
-				wxFONTFAMILY_UNKNOWN,
-				wxFONTSTYLE_NORMAL,
-				wxFONTWEIGHT_NORMAL,
-				false,
-				m_fontName);
-			gcText->SetFont(font);
-			m_gcTextList.push_back(gcText);
-
-			//double w, h;
 			wxSize txtSize = dc.GetTextExtent(currentLine);
 
 			if (txtSize.GetWidth() > m_width) m_width = txtSize.GetWidth();
 			m_height += txtSize.GetHeight();
+
+			GCText* gcText = new GCText();
+			gcText->SetFont(font);
+			gcText->SetText(currentLine, txtSize);
+			m_gcTextList.push_back(gcText);
 		}
 		SetPosition(m_position);  // Update element rectangle.
 		m_updateTextRectangle = false;
@@ -247,6 +255,8 @@ bool Text::Intersects(wxRect2DDouble rect) const
 
 void Text::SetText(wxString text)
 {
+	if (m_text == text) return;
+
 	m_text = text;
 	m_updateTextRectangle = true;
 }
@@ -1147,11 +1157,8 @@ Element* Text::GetCopy()
 {
 	Text* copy = new Text();
 	*copy = *this;
-	std::vector<GCText*> copyList;
-	for (auto it = m_gcTextList.begin(), itEnd = m_gcTextList.end(); it != itEnd; ++it) {
-		copyList.push_back((*it)->GetCopy());
-	}
-	copy->m_gcTextList = copyList;
+	copy->m_gcTextList.clear();
+	copy->m_updateTextRectangle = true;
 	return copy;
 }
 

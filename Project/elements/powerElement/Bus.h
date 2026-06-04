@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -126,8 +126,9 @@ public:
 	virtual bool GetContextMenu(wxMenu& menu);
 	virtual wxString GetTipText() const;
 	virtual BusElectricalData GetElectricalData() const { return m_electricalData; }
+	virtual BusElectricalData& GetElectricalDataRef() { return m_electricalData; }
 	virtual void SetElectricalData(const BusElectricalData& electricalData) { m_electricalData = electricalData; }
-	virtual bool ShowForm(wxWindow* parent, Element* element);
+	virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
 	virtual bool GetPlotData(ElementPlotData& plotData, PlotStudy study = PlotStudy::STABILITY);
 
 	virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);

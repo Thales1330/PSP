@@ -155,9 +155,10 @@ public:
 	virtual void DrawDCSymbol(wxGraphicsContext* gc) const;
 	virtual void DrawDCSymbol(wxDC& dc) const;
 	virtual bool GetContextMenu(wxMenu& menu);
-	virtual bool ShowForm(wxWindow* parent, Element* element);
+	virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
 	virtual wxString GetTipText() const;
 	virtual SyncGeneratorElectricalData GetElectricalData() { return m_electricalData; }
+	virtual SyncGeneratorElectricalData& GetElectricalDataRef() { return m_electricalData; }
 	virtual SyncGeneratorElectricalData GetPUElectricalData(double systemPowerBase);
 	virtual void SetElectricalData(SyncGeneratorElectricalData electricalData) { m_electricalData = electricalData; }
 	virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);

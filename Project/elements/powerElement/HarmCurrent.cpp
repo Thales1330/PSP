@@ -320,7 +320,7 @@ wxString HarmCurrent::GetTipText() const
 	return tipText;
 }
 
-bool HarmCurrent::ShowForm(wxWindow* parent, Element* element)
+bool HarmCurrent::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	HarmCurrentForm harmCurrentForm(parent, this);
 	harmCurrentForm.SetTitle(_("Harmonic Current Source"));

@@ -189,7 +189,7 @@ void Sum::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 	DrawDCNodes(gc);
 }
 
-bool Sum::ShowForm(wxWindow* parent, Element* element)
+bool Sum::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	SumForm sumForm(parent, this);
 	sumForm.CenterOnParent();
@@ -322,8 +322,7 @@ bool Sum::Solve(double* input, double timeStep)
 
 Element* Sum::GetCopy()
 {
-	Sum* copy = new Sum(m_elementID);
-	*copy = *this;
+	Sum* copy = new Sum(*this);
 	return copy;
 }
 

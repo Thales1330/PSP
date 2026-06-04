@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -128,8 +128,9 @@ class IndMotor : public Machines
     virtual void DrawDCSymbol(wxDC& dc) const;
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
-    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual IndMotorElectricalData GetElectricalData() { return m_electricalData; }
+    virtual IndMotorElectricalData& GetElectricalDataRef() { return m_electricalData; }
     virtual IndMotorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(IndMotorElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void InitPowerFlowMotor(double systemPowerBase, int busNumber);

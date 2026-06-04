@@ -271,7 +271,7 @@ wxString EMTElement::GetTipText() const
 	return tipText;
 }
 
-bool EMTElement::ShowForm(wxWindow* parent, Element* element)
+bool EMTElement::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	EMTElementForm emtForm(parent, this);
 	emtForm.SetTitle(_("Electromagnetic Transient"));

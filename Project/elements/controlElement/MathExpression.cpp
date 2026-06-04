@@ -190,7 +190,7 @@ void MathExpression::DrawDC(wxPoint2DDouble translation, double scale, wxGraphic
 	DrawDCNodes(gc);
 }
 
-bool MathExpression::ShowForm(wxWindow* parent, Element* element)
+bool MathExpression::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	MathExpressionForm mathExprForm(parent, this);
 	mathExprForm.CenterOnParent();
@@ -262,8 +262,7 @@ bool MathExpression::Solve(double* input, double timeStep)
 
 Element* MathExpression::GetCopy()
 {
-	MathExpression* copy = new MathExpression(m_elementID);
-	*copy = *this;
+	MathExpression* copy = new MathExpression(*this);
 	copy->m_gcTextInputVector.clear();
 	for (auto it = m_gcTextInputVector.begin(), itEnd = m_gcTextInputVector.end(); it != itEnd; ++it) {
 		copy->m_gcTextInputVector.push_back((*it)->GetCopy());

@@ -79,7 +79,7 @@ void Constant::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
     DrawDCNodes(gc);
 }
 
-bool Constant::ShowForm(wxWindow* parent, Element* element)
+bool Constant::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
     ConstantForm form(parent, this);
     form.CenterOnParent();
@@ -141,9 +141,8 @@ void Constant::SetValue(double value)
 
 Element* Constant::GetCopy()
 {
-    Constant* copy = new Constant(m_elementID);
-    *copy = *this;
-    copy->m_gcText = m_gcText->GetCopy();
+    Constant* copy = new Constant(*this);
+    copy->m_gcText = m_gcText ? m_gcText->GetCopy() : nullptr;
     return copy;
 }
 

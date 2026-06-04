@@ -64,7 +64,7 @@ public:
 	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
 	virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
 	virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
-	virtual bool ShowForm(wxWindow* parent, Element* element);
+	virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
 	virtual void Rotate(bool clockwise = true);
 	virtual bool UpdateText();
 	virtual wxString GenerateText();

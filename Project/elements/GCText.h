@@ -58,6 +58,7 @@ public:
 	 * \param text New text string.
 	 */
 	virtual void SetText(wxString text);
+	virtual void SetText(wxString text, wxSize size);
 	virtual wxString GetText() const { return m_text; }
 	virtual int GetWidth() const { return m_size.GetWidth(); }
 	virtual int GetHeight() const { return m_size.GetHeight(); }

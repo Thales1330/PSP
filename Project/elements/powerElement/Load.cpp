@@ -16,6 +16,7 @@
  */
 
 #include "Load.h"
+#include <wx/log.h> 
 
 Load::Load() : Shunt()
 {
@@ -298,11 +299,14 @@ bool Load::GetContextMenu(wxMenu& menu)
 	return true;
 }
 
-bool Load::ShowForm(wxWindow* parent, Element* element)
+bool Load::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
+	wxLogDebug("Before form constructor");
 	LoadForm loadForm(parent, this);
 	loadForm.CenterOnParent();
+	wxLogDebug("Before ShowModal");
 	if (loadForm.ShowModal() == wxID_OK) {
+		wxLogDebug("After ShowModal");
 		return true;
 	}
 	return false;

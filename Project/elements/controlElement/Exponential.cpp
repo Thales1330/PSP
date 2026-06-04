@@ -117,7 +117,7 @@ void Exponential::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 	DrawDCNodes(gc);
 }
 
-bool Exponential::ShowForm(wxWindow* parent, Element* element)
+bool Exponential::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	ExponentialForm form(parent, this);
 	form.CenterOnParent();
@@ -190,8 +190,7 @@ bool Exponential::Solve(double* input, double timeStep)
 
 Element* Exponential::GetCopy()
 {
-	Exponential* copy = new Exponential(m_elementID);
-	*copy = *this;
+	Exponential* copy = new Exponential(*this);
 	return copy;
 }
 

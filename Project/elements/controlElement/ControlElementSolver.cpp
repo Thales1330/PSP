@@ -34,6 +34,7 @@
 ControlElementSolver::ControlElementSolver(ControlEditor* controlEditor, double timeStep, double integrationError)
 {
 	m_ctrlContainer = new ControlElementContainer();
+	m_ownsCtrlContainer = true;
 	m_ctrlContainer->FillContainer(controlEditor);
 	Initialize(controlEditor, timeStep, integrationError);
 }
@@ -44,13 +45,14 @@ ControlElementSolver::ControlElementSolver(ControlElementContainer* ctrlContaine
 	wxWindow* parent)
 {
 	m_ctrlContainer = ctrlContainer;
+	m_ownsCtrlContainer = false;
 	Initialize(parent, timeStep, integrationError);
 }
 
 ControlElementSolver::~ControlElementSolver()
 {
 	if (m_inputToSolve) delete[] m_inputToSolve;
-	//if (m_ctrlContainer) delete m_ctrlContainer;
+	if (m_ownsCtrlContainer && m_ctrlContainer) delete m_ctrlContainer;
 }
 
 void ControlElementSolver::Initialize(wxWindow* parent, double timeStep, double integrationError)

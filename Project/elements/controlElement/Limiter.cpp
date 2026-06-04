@@ -92,7 +92,7 @@ void Limiter::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContex
 	DrawDCNodes(gc);
 }
 
-bool Limiter::ShowForm(wxWindow* parent, Element* element)
+bool Limiter::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	LimiterForm limiter(parent, this);
 	limiter.CenterOnParent();
@@ -158,8 +158,7 @@ bool Limiter::Solve(double* input, double timeStep)
 
 Element* Limiter::GetCopy()
 {
-	Limiter* copy = new Limiter(m_elementID);
-	*copy = *this;
+	Limiter* copy = new Limiter(*this);
 	return copy;
 }
 

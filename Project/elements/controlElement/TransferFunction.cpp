@@ -258,7 +258,7 @@ void TransferFunction::UpdateTFText()
 	}
 }
 
-bool TransferFunction::ShowForm(wxWindow* parent, Element* element)
+bool TransferFunction::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
 	TransferFunctionForm tfForm(parent, this);
 	tfForm.CenterOnParent();
@@ -419,10 +419,9 @@ bool TransferFunction::Solve(double* input, double timeStep)
 
 Element* TransferFunction::GetCopy()
 {
-	TransferFunction* copy = new TransferFunction(m_elementID);
-	*copy = *this;
-	copy->m_gcTextNum = m_gcTextNum->GetCopy();
-	copy->m_gcTextDen = m_gcTextDen->GetCopy();
+	TransferFunction* copy = new TransferFunction(*this);
+	copy->m_gcTextNum = m_gcTextNum ? m_gcTextNum->GetCopy() : nullptr;
+	copy->m_gcTextDen = m_gcTextDen ? m_gcTextDen->GetCopy() : nullptr;
 	return copy;
 }
 

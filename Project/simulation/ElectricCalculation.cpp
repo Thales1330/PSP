@@ -666,14 +666,35 @@ void ElectricCalculation::UpdateElementsPowerFlow(std::vector<std::complex<doubl
 			std::vector<ReactiveMachine> machines;
 			for (auto* gen : syncGeneratorsOnBus) {
 
-				auto data = gen->GetPUElectricalData(systemPowerBase);
+				if (data.slackBus) {
+					auto dataG = gen->GetElectricalData();
+					double activePower = (power[data.number].real() + loadPower.real()) * (systemPowerBase / static_cast<double>(syncGeneratorsOnBus.size()));
+					switch (dataG.activePowerUnit) {
+					case ElectricalUnit::UNIT_PU:
+						activePower /= systemPowerBase;
+						break;
+					case ElectricalUnit::UNIT_kW:
+						activePower /= 1e3;
+						break;
+					case ElectricalUnit::UNIT_MW:
+						activePower /= 1e6;
+						break;
+					default:
+						break;
+					}
+
+					dataG.activePower = activePower;
+					gen->SetElectricalData(dataG);
+				}
+
+				auto dataG = gen->GetPUElectricalData(systemPowerBase);
 
 				ReactiveMachine m;
-				m.qMax = data.maxReactive;
-				m.qMin = data.minReactive;
+				m.qMax = dataG.maxReactive;
+				m.qMin = dataG.minReactive;
 
-				m.hasMax = data.haveMaxReactive;
-				m.hasMin = data.haveMinReactive;
+				m.hasMax = dataG.haveMaxReactive;
+				m.hasMin = dataG.haveMinReactive;
 
 				m.machine = gen;
 				m.isGenerator = true;
@@ -1085,7 +1106,7 @@ bool ElectricCalculation::CalculateEMTElementsPower(const double& basePower, wxS
 		double baseCurrent = basePower / (sqrt(3.0) * data.baseVoltage);
 		//std::complex<double> current = data.currHarmonics[1];
 		std::complex<double> current = data.currHarmonics[1] / baseCurrent; // Fundamental frequency current
-		
+
 		std::complex<double> i0 = data.y0 * data.puVoltage; // Current already injected via admittance matrix
 		//std::complex<double> voltage = data.baseVoltage * data.puVoltage;
 		//std::complex<double> power = (sqrt(3.0) * voltage * std::conj(current)) / basePower;

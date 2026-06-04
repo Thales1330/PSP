@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -52,7 +52,7 @@ class Inductor : public Shunt
     virtual void Rotate(bool clockwise = true);
     virtual bool GetContextMenu(wxMenu& menu);
     virtual wxString GetTipText() const;
-    virtual bool ShowForm(wxWindow* parent, Element* element);
+    virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual InductorElectricalData GetElectricalData() { return m_electricalData; }
     virtual InductorElectricalData GetPUElectricalData(double systemPowerBase);
     virtual void SetElectricalData(InductorElectricalData electricalData) { m_electricalData = electricalData; }

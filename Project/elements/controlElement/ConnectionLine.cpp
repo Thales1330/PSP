@@ -220,8 +220,7 @@ void ConnectionLine::RemoveParent(Element* parent)
 
 Element* ConnectionLine::GetCopy()
 {
-	ConnectionLine* copy = new ConnectionLine();
-	*copy = *this;
+	ConnectionLine* copy = new ConnectionLine(*this);
 	return copy;
 }
 
