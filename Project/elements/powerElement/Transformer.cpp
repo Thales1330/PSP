@@ -656,7 +656,47 @@ wxString Transformer::GetTipText() const
 
 TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePower)
 {
-	TransformerElectricalData data = m_electricalData;
+	TransformerElectricalData data;
+
+	data.nominalPower = m_electricalData.nominalPower;
+	data.nominalPowerUnit = m_electricalData.nominalPowerUnit;
+
+	data.primaryNominalVoltage = m_electricalData.primaryNominalVoltage;
+	data.primaryNominalVoltageUnit =
+		m_electricalData.primaryNominalVoltageUnit;
+
+	data.secondaryNominalVoltage =
+		m_electricalData.secondaryNominalVoltage;
+	data.secondaryNominalVoltageUnit =
+		m_electricalData.secondaryNominalVoltageUnit;
+
+	data.useTransformerPower =
+		m_electricalData.useTransformerPower;
+
+	data.baseVoltage = m_electricalData.baseVoltage;
+
+	data.resistance = m_electricalData.resistance;
+	data.resistanceUnit = m_electricalData.resistanceUnit;
+
+	data.indReactance = m_electricalData.indReactance;
+	data.indReactanceUnit = m_electricalData.indReactanceUnit;
+
+	data.zeroResistance = m_electricalData.zeroResistance;
+	data.zeroIndReactance = m_electricalData.zeroIndReactance;
+
+	data.primaryGrndResistance =
+		m_electricalData.primaryGrndResistance;
+	data.primaryGrndReactance =
+		m_electricalData.primaryGrndReactance;
+
+	data.secondaryGrndResistance =
+		m_electricalData.secondaryGrndResistance;
+	data.secondaryGrndReactance =
+		m_electricalData.secondaryGrndReactance;
+
+	data.powerFlow[0] = m_electricalData.powerFlow[0];
+	data.powerFlow[1] = m_electricalData.powerFlow[1];
+
 	double transformerBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
 	double baseVoltage = 0.0;
 	if (data.baseVoltage == 0) {

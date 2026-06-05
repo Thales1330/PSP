@@ -122,7 +122,51 @@ bool SyncGenerator::ShowForm(wxWindow* parent, Element* element, wxWindow* works
 
 SyncGeneratorElectricalData SyncGenerator::GetPUElectricalData(double systemPowerBase)
 {
-	SyncGeneratorElectricalData data = m_electricalData;
+	SyncGeneratorElectricalData data;
+
+	data.name = m_electricalData.name;
+
+	data.nominalPower = m_electricalData.nominalPower;
+	data.nominalPowerUnit = m_electricalData.nominalPowerUnit;
+
+	data.nominalVoltage = m_electricalData.nominalVoltage;
+	data.nominalVoltageUnit = m_electricalData.nominalVoltageUnit;
+
+	data.activePower = m_electricalData.activePower;
+	data.activePowerUnit = m_electricalData.activePowerUnit;
+
+	data.reactivePower = m_electricalData.reactivePower;
+	data.reactivePowerUnit = m_electricalData.reactivePowerUnit;
+
+	data.haveMaxReactive = m_electricalData.haveMaxReactive;
+	data.maxReactive = m_electricalData.maxReactive;
+	data.maxReactiveUnit = m_electricalData.maxReactiveUnit;
+
+	data.haveMinReactive = m_electricalData.haveMinReactive;
+	data.minReactive = m_electricalData.minReactive;
+	data.minReactiveUnit = m_electricalData.minReactiveUnit;
+
+	data.useMachineBase = m_electricalData.useMachineBase;
+
+	data.positiveResistance = m_electricalData.positiveResistance;
+	data.positiveReactance = m_electricalData.positiveReactance;
+
+	data.negativeResistance = m_electricalData.negativeResistance;
+	data.negativeReactance = m_electricalData.negativeReactance;
+
+	data.zeroResistance = m_electricalData.zeroResistance;
+	data.zeroReactance = m_electricalData.zeroReactance;
+
+	data.groundResistance = m_electricalData.groundResistance;
+	data.groundReactance = m_electricalData.groundReactance;
+
+	data.groundNeutral = m_electricalData.groundNeutral;
+
+	data.faultCurrent[0] = m_electricalData.faultCurrent[0];
+	data.faultCurrent[1] = m_electricalData.faultCurrent[1];
+	data.faultCurrent[2] = m_electricalData.faultCurrent[2];
+
+
 	double machineBasePower = 1.0;
 	if (data.useMachineBase) { machineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit); }
 

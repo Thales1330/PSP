@@ -709,7 +709,34 @@ wxString Line::GetTipText() const
 
 LineElectricalData Line::GetPUElectricalData(double systemBasePower)
 {
-	LineElectricalData data = m_electricalData;
+	LineElectricalData data;
+
+	data.nominalPower = m_electricalData.nominalPower;
+	data.nominalPowerUnit = m_electricalData.nominalPowerUnit;
+
+	data.nominalVoltage = m_electricalData.nominalVoltage;
+	data.nominalVoltageUnit = m_electricalData.nominalVoltageUnit;
+
+	data.useLinePower = m_electricalData.useLinePower;
+
+	data.lineSize = m_electricalData.lineSize;
+
+	data.resistance = m_electricalData.resistance;
+	data.resistanceUnit = m_electricalData.resistanceUnit;
+
+	data.indReactance = m_electricalData.indReactance;
+	data.indReactanceUnit = m_electricalData.indReactanceUnit;
+
+	data.capSusceptance = m_electricalData.capSusceptance;
+	data.capSusceptanceUnit = m_electricalData.capSusceptanceUnit;
+
+	data.zeroResistance = m_electricalData.zeroResistance;
+	data.zeroIndReactance = m_electricalData.zeroIndReactance;
+	data.zeroCapSusceptance = m_electricalData.zeroCapSusceptance;
+
+	data.powerFlow[0] = m_electricalData.powerFlow[0];
+	data.powerFlow[1] = m_electricalData.powerFlow[1];
+
 	double lineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
 	double baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
 	double systemBaseImpedance = (baseVoltage * baseVoltage) / systemBasePower;

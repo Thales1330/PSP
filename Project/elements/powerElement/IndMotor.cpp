@@ -93,7 +93,14 @@ bool IndMotor::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 
 IndMotorElectricalData IndMotor::GetPUElectricalData(double systemPowerBase)
 {
-	IndMotorElectricalData data = m_electricalData;
+	//IndMotorElectricalData data
+	IndMotorElectricalData data;
+	data.name = m_electricalData.name;
+	data.activePower = m_electricalData.activePower;
+	data.activePowerUnit = m_electricalData.activePowerUnit;
+	data.reactivePower = m_electricalData.reactivePower;
+	data.reactivePowerUnit = m_electricalData.reactivePowerUnit;
+
 
 	switch (data.activePowerUnit) {
 	case ElectricalUnit::UNIT_W: {

@@ -17,7 +17,18 @@
 
 #include "../elements/controlElement/ControlElementSolver.h"
 #include "Electromechanical.h"
+
+#ifdef _DEBUG
 #include <chrono>
+
+double totalSaveData = 0.0;
+double totalSolveMachines = 0.0;
+double totalCalcFreq = 0.0;
+
+size_t saveDataCalls = 0;
+size_t solveMachinesCalls = 0;
+size_t calcFreqCalls = 0;
+#endif //_DEBUG
 
 Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> elementList, SimulationData data)
 {
@@ -41,7 +52,7 @@ Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> ele
 	// If the user use all load as ZIP, updates the portions of each model, otherwise use constant impedance only.
 	for (auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
 		Load* load = *it;
-		auto loadData = load->GetElectricalData();
+		auto& loadData = load->GetElectricalDataRef();
 		if (!loadData.useCompLoad) {  // If no individual load composition defined.
 			if (data.useCompLoads) {  // Use general composition, if defined.
 				loadData.constImpedanceActive = data.constImpedanceActive;
@@ -63,7 +74,7 @@ Electromechanical::Electromechanical(wxWindow* parent, std::vector<Element*> ele
 
 		loadData.constCurrentUV = data.underVoltageConstCurrent / 100.0;
 		loadData.constPowerUV = data.underVoltageConstPower / 100.0;
-		load->SetElectricalData(loadData);
+		//load->SetElectricalData(loadData);
 	}
 }
 
@@ -90,7 +101,7 @@ bool Electromechanical::RunStabilityCalculation()
 	m_vBus.resize(m_yBus.size());
 	for (auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
 		Bus* bus = *it;
-		auto data = bus->GetElectricalData();
+		const auto& data = bus->GetElectricalDataRef();
 		if (data.number >= 0) m_vBus[data.number] = data.voltage;
 	}
 	m_vBus.shrink_to_fit();
@@ -147,7 +158,19 @@ bool Electromechanical::RunStabilityCalculation()
 
 		if (currentPlotTime >= m_plotTime || m_currentTime == 0.0) {
 			m_timeVector.emplace_back(m_currentTime);
+
+			#ifdef _DEBUG
+			auto t0 = std::chrono::high_resolution_clock::now();
+			#endif //_DEBUG
+
 			SaveData();
+
+			#ifdef _DEBUG
+			auto t1 = std::chrono::high_resolution_clock::now();
+			totalSaveData += std::chrono::duration<double, std::milli>(t1 - t0).count();
+			saveDataCalls++;
+			#endif //_DEBUG
+
 			currentPlotTime = 0.0;
 		}
 
@@ -160,14 +183,37 @@ bool Electromechanical::RunStabilityCalculation()
 			currentPbdTime = 0.0;
 		}
 
+		#ifdef _DEBUG
+		auto t0 = std::chrono::high_resolution_clock::now();
+		#endif //_DEBUG
+
 		if (!SolveMachines()) return false;
 
+		#ifdef _DEBUG
+		auto t1 = std::chrono::high_resolution_clock::now();
+		totalSolveMachines += std::chrono::duration<double, std::milli>(t1 - t0).count();
+		solveMachinesCalls++;
+
+		t0 = std::chrono::high_resolution_clock::now();
+		#endif //_DEBUG
+
 		CalculateBusesFrequency(hasEvent);
+
+		#ifdef _DEBUG
+		t1 = std::chrono::high_resolution_clock::now();
+		totalCalcFreq += std::chrono::duration<double, std::milli>(t1 - t0).count();
+		calcFreqCalls++;
+		#endif //_DEBUG
 
 		m_currentTime += m_timeStep;
 		currentPlotTime += m_timeStep;
 		currentPbdTime += m_timeStep;
 	}
+	#ifdef _DEBUG
+	wxLogMessage("SaveData: chamadas=%zu total=%.2f ms media=%.3f ms", saveDataCalls, totalSaveData, totalSaveData / saveDataCalls);
+	wxLogMessage("SolveMachines: chamadas=%zu total=%.2f ms media=%.3f ms", solveMachinesCalls, totalSolveMachines, totalSolveMachines / solveMachinesCalls);
+	wxLogMessage("CalculateBusesFrequency: chamadas=%zu total=%.2f ms media=%.3f ms", calcFreqCalls, totalCalcFreq, totalCalcFreq / calcFreqCalls);
+	#endif //_DEBUG
 
 	return true;
 }
@@ -177,7 +223,7 @@ void Electromechanical::SetEventTimeList()
 	// Fault
 	for (auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
 		Bus* bus = *it;
-		auto data = bus->GetElectricalData();
+		const auto& data = bus->GetElectricalDataRef();
 		if (data.stabHasFault) {
 			m_eventTimeList.emplace_back(data.stabFaultTime);
 			m_eventOccurrenceList.push_back(false);
@@ -214,7 +260,7 @@ void Electromechanical::SetEvent(double currentTime)
 	// Fault
 	for (auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
 		Bus* bus = *it;
-		auto data = bus->GetElectricalData();
+		const auto& data = bus->GetElectricalDataRef();
 		int n = data.number;
 		if (data.stabHasFault && n >= 0) {
 
@@ -247,14 +293,14 @@ void Electromechanical::SetEvent(double currentTime)
 				// Remove machine (only connected machines)
 				if (swData.swType[i] == SwitchingType::SW_REMOVE && generator->IsOnline()) {
 					generator->SetOnline(false);
-					int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
+					int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalDataRef().number;
 					if (n >= 0) m_yBus[n][n] -= GetSyncMachineAdmittance(generator);
 				}
 
 				// Insert machine (only disconnected machines)
 				if (swData.swType[i] == SwitchingType::SW_INSERT && !generator->IsOnline() && generator->GetParentList().size() == 1) {
 					if (generator->SetOnline(true)) {
-						int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalData().number;
+						int n = static_cast<Bus*>(generator->GetParentList()[0])->GetElectricalDataRef().number;
 						if (n >= 0) m_yBus[n][n] += GetSyncMachineAdmittance(generator);
 					}
 				}
@@ -270,17 +316,17 @@ void Electromechanical::SetEvent(double currentTime)
 			if (EventTrigger(swData.swTime[i], currentTime)) {
 				// Remove machine (only connected machines)
 				if (swData.swType[i] == SwitchingType::SW_REMOVE && motor->IsOnline() && motor->GetParentList().size() == 1) {
-					auto data = motor->GetElectricalData();
+					const auto& data = motor->GetElectricalDataRef();
 					motor->SetOnline(false);
-					int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+					int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalDataRef().number;
 					if (n >= 0) m_yBus[n][n] -= (std::complex<double>(1, 0) / std::complex<double>(data.r1t, data.xt));
 				}
 
 				// Insert machine (only disconnected machines)
 				if (swData.swType[i] == SwitchingType::SW_INSERT && !motor->IsOnline() && motor->GetParentList().size() == 1) {
-					auto data = motor->GetElectricalData();
+					const auto& data = motor->GetElectricalDataRef();
 					if (motor->SetOnline(true)) {
-						int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+						int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalDataRef().number;
 						if (n >= 0) m_yBus[n][n] += (std::complex<double>(1, 0) / std::complex<double>(data.r1t, data.xt));
 					}
 				}
@@ -299,8 +345,8 @@ void Electromechanical::SetEvent(double currentTime)
 					load->SetOnline(false);
 					auto data = load->GetPUElectricalData(m_powerSystemBase);
 					Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
-					int n = parentBus->GetElectricalData().number;
-					std::complex<double> v = parentBus->GetElectricalData().voltage;
+					int n = parentBus->GetElectricalDataRef().number;
+					std::complex<double> v = parentBus->GetElectricalDataRef().voltage;
 					if (n >= 0) {
 						m_yBus[n][n] -=
 							std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
@@ -312,8 +358,8 @@ void Electromechanical::SetEvent(double currentTime)
 					if (load->SetOnline(true)) {
 						auto data = load->GetPUElectricalData(m_powerSystemBase);
 						Bus* parentBus = static_cast<Bus*>(load->GetParentList()[0]);
-						int n = parentBus->GetElectricalData().number;
-						std::complex<double> v = parentBus->GetElectricalData().voltage;
+						int n = parentBus->GetElectricalDataRef().number;
+						std::complex<double> v = parentBus->GetElectricalDataRef().voltage;
 						if (n >= 0) {
 							m_yBus[n][n] +=
 								std::complex<double>(data.activePower, -data.reactivePower) / (std::abs(v) * std::abs(v));
@@ -333,10 +379,10 @@ void Electromechanical::SetEvent(double currentTime)
 				// Remove line (only connected lines)
 				if (swData.swType[i] == SwitchingType::SW_REMOVE && line->IsOnline()) {
 					line->SetOnline(false);
-					auto data = line->GetElectricalData();
+					const auto& data = line->GetElectricalDataRef();
 
-					int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
-					int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
+					int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalDataRef().number;
+					int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalDataRef().number;
 					if (n1 >= 0 && n2 >= 0) {
 						m_yBus[n1][n2] += 1.0 / std::complex<double>(data.resistance, data.indReactance);
 						m_yBus[n2][n1] += 1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -352,10 +398,10 @@ void Electromechanical::SetEvent(double currentTime)
 				// Insert line (only disconnected lines)
 				if (swData.swType[i] == SwitchingType::SW_INSERT && !line->IsOnline() && line->GetParentList().size() == 2) {
 					if (line->SetOnline(true)) {
-						auto data = line->GetElectricalData();
+						auto& data = line->GetElectricalDataRef();
 
-						int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData().number;
-						int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData().number;
+						int n1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalDataRef().number;
+						int n2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalDataRef().number;
 						if (n1 >= 0 && n2 >= 0) {
 							m_yBus[n1][n2] -= 1.0 / std::complex<double>(data.resistance, data.indReactance);
 							m_yBus[n2][n1] -= 1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -381,10 +427,10 @@ void Electromechanical::SetEvent(double currentTime)
 				// Remove transformer (only connected transformers)
 				if (swData.swType[i] == SwitchingType::SW_REMOVE && transformer->IsOnline()) {
 					transformer->SetOnline(false);
-					auto data = transformer->GetElectricalData();
+					const auto& data = transformer->GetElectricalDataRef();
 
-					int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
-					int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
+					int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalDataRef().number;
+					int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalDataRef().number;
 					if (n1 >= 0 && n2 >= 0) {
 						if (data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
 							m_yBus[n1][n2] -= -1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -413,10 +459,10 @@ void Electromechanical::SetEvent(double currentTime)
 				if (swData.swType[i] == SwitchingType::SW_INSERT && !transformer->IsOnline() &&
 					transformer->GetParentList().size() == 2) {
 					if (transformer->SetOnline(true)) {
-						auto data = transformer->GetElectricalData();
+						const auto& data = transformer->GetElectricalDataRef();
 
-						int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData().number;
-						int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData().number;
+						int n1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalDataRef().number;
+						int n2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalDataRef().number;
 						if (n1 >= 0 && n2 >= 0) {
 							if (data.turnsRatio == 1.0 && data.phaseShift == 0.0) {
 								m_yBus[n1][n2] += -1.0 / std::complex<double>(data.resistance, data.indReactance);
@@ -455,7 +501,7 @@ void Electromechanical::SetEvent(double currentTime)
 				if (swData.swType[i] == SwitchingType::SW_REMOVE && capacitor->IsOnline()) {
 					capacitor->SetOnline(false);
 					auto data = capacitor->GetPUElectricalData(m_powerSystemBase);
-					int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
+					int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalDataRef().number;
 					if (n >= 0)  m_yBus[n][n] -= std::complex<double>(0.0, data.reactivePower);
 				}
 
@@ -463,7 +509,7 @@ void Electromechanical::SetEvent(double currentTime)
 				if (swData.swType[i] == SwitchingType::SW_INSERT && !capacitor->IsOnline() && capacitor->GetParentList().size() == 1) {
 					if (capacitor->SetOnline(true)) {
 						auto data = capacitor->GetPUElectricalData(m_powerSystemBase);
-						int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalData().number;
+						int n = static_cast<Bus*>(capacitor->GetParentList()[0])->GetElectricalDataRef().number;
 						if (n >= 0)  m_yBus[n][n] += std::complex<double>(0.0, data.reactivePower);
 					}
 				}
@@ -481,7 +527,7 @@ void Electromechanical::SetEvent(double currentTime)
 				if (swData.swType[i] == SwitchingType::SW_REMOVE && inductor->IsOnline()) {
 					inductor->SetOnline(false);
 					auto data = inductor->GetPUElectricalData(m_powerSystemBase);
-					int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
+					int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalDataRef().number;
 					if (n >= 0) m_yBus[n][n] -= std::complex<double>(0.0, -data.reactivePower);
 				}
 
@@ -489,7 +535,7 @@ void Electromechanical::SetEvent(double currentTime)
 				if (swData.swType[i] == SwitchingType::SW_INSERT && !inductor->IsOnline() && inductor->GetParentList().size() == 1) {
 					if (inductor->SetOnline(true)) {
 						auto data = inductor->GetPUElectricalData(m_powerSystemBase);
-						int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalData().number;
+						int n = static_cast<Bus*>(inductor->GetParentList()[0])->GetElectricalDataRef().number;
 						if (n >= 0) m_yBus[n][n] += std::complex<double>(0.0, -data.reactivePower);
 					}
 				}
@@ -504,7 +550,7 @@ void Electromechanical::InsertSyncMachinesOnYBus()
 		SyncGenerator* syncGenerator = *it;
 		if (syncGenerator->IsOnline()) {
 			Bus* connBus = static_cast<Bus*>(syncGenerator->GetParentList()[0]);
-			if (connBus->GetElectricalData().number < 0) {
+			if (connBus->GetElectricalDataRef().number < 0) {
 				syncGenerator->SetOnline(false);
 				//auto data = syncGenerator->GetElectricalData();
 				//data.activePower = 0.0;
@@ -514,7 +560,7 @@ void Electromechanical::InsertSyncMachinesOnYBus()
 
 			if (syncGenerator->IsOnline()) {
 				const auto& data = syncGenerator->GetElectricalDataRef();
-				int n = connBus->GetElectricalData().number;
+				int n = connBus->GetElectricalDataRef().number;
 				m_yBus[n][n] += GetSyncMachineAdmittance(syncGenerator);
 			}
 		}
@@ -528,7 +574,7 @@ bool Electromechanical::EventTrigger(double eventTime, double currentTime)
 
 std::complex<double> Electromechanical::GetSyncMachineAdmittance(SyncGenerator* generator)
 {
-	auto data = generator->GetElectricalData();
+	const auto& data = generator->GetElectricalDataRef();
 	double k = 1.0;  // Power base change factor.
 	if (data.useMachineBase) {
 		double oldBase = generator->GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
@@ -548,7 +594,7 @@ bool Electromechanical::InitializeDynamicElements()
 	// Buses
 	for (auto it = m_busList.begin(), itEnd = m_busList.end(); it != itEnd; ++it) {
 		Bus* bus = *it;
-		auto data = bus->GetElectricalData();
+		auto& data = bus->GetElectricalDataRef();
 		data.stabVoltageVector.clear();
 		data.stabVoltageVector.shrink_to_fit();
 		data.stabFreqVector.clear();
@@ -559,12 +605,12 @@ bool Electromechanical::InitializeDynamicElements()
 		data.dxt = 0.0;
 		data.filteredVelocity = 0.0;
 		data.ddw = 0.0;
-		bus->SetElectricalData(data);
+		//bus->SetElectricalData(data);
 	}
 	// Loads
 	for (auto* load : m_loadList) {
 		auto dataPU = load->GetPUElectricalData(m_powerSystemBase);
-		auto data = load->GetElectricalData();
+		auto& data = load->GetElectricalDataRef();
 
 		double activePower = dataPU.activePower;
 		double reactivePower = dataPU.reactivePower;
@@ -572,7 +618,7 @@ bool Electromechanical::InitializeDynamicElements()
 		Bus* bus = nullptr;
 		if (GetParentBus(load, bus))
 		{
-			data.voltage = bus->GetElectricalData().voltage;
+			data.voltage = bus->GetElectricalDataRef().voltage;
 		}
 		else {
 			load->SetOnline(false);
@@ -607,7 +653,7 @@ bool Electromechanical::InitializeDynamicElements()
 			data.voltage = std::complex<double>(0.0, 0.0);
 		}
 
-		load->SetElectricalData(data);
+		//load->SetElectricalData(data);
 	}
 	// Synchronous generators
 	for (auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
@@ -621,7 +667,7 @@ bool Electromechanical::InitializeDynamicElements()
 		}
 		Bus* bus = nullptr;
 		if (GetParentBus(syncGenerator, bus))
-			data.terminalVoltage = bus->GetElectricalData().voltage;
+			data.terminalVoltage = bus->GetElectricalDataRef().voltage;
 		else
 			data.terminalVoltage = std::complex<double>(1.0, 0.0);
 
@@ -839,10 +885,10 @@ bool Electromechanical::InitializeDynamicElements()
 	for (auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
 		IndMotor* indMotor = *it;
 		auto dataPU = indMotor->GetPUElectricalData(m_powerSystemBase);
-		auto data = indMotor->GetElectricalData();
+		auto& data = indMotor->GetElectricalDataRef();
 
 		Bus* connBus = static_cast<Bus*>(indMotor->GetParentList()[0]);
-		if (connBus->GetElectricalData().number < 0) indMotor->SetOnline(false);
+		if (connBus->GetElectricalDataRef().number < 0) indMotor->SetOnline(false);
 
 		double w0 = 2.0 * M_PI * m_systemFreq;
 		std::complex<double> i1 = std::complex<double>(dataPU.activePower, -data.q0) / std::conj(data.terminalVoltage);
@@ -904,7 +950,7 @@ bool Electromechanical::InitializeDynamicElements()
 		data.reactivePowerVector.clear();
 		data.reactivePowerVector.shrink_to_fit();
 
-		indMotor->SetElectricalData(data);
+		//indMotor->SetElectricalData(data);
 	}
 	CalculateReferenceSpeed();
 	return true;
@@ -930,7 +976,7 @@ bool Electromechanical::CalculateInjectedCurrents()
 			double xp = data.potierReactance * k;
 			if (xp == 0.0) xp = 0.8 * data.transXd * k;
 
-			int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalData().number;
+			int n = static_cast<Bus*>(syncGenerator->GetParentList()[0])->GetElectricalDataRef().number;
 			std::complex<double> e = std::complex<double>(0.0, 0.0);
 			std::complex<double> v = m_vBus[n];
 			std::complex<double> iInj = m_iBus[n];
@@ -995,9 +1041,9 @@ bool Electromechanical::CalculateInjectedCurrents()
 	// Induction motors
 	for (auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
 		IndMotor* motor = *it;
-		auto data = motor->GetElectricalData();
+		auto& data = motor->GetElectricalDataRef();
 		if (motor->IsOnline()) {
-			int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+			int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalDataRef().number;
 			std::complex<double> y0 = std::complex<double>(1.0, 0.0) / std::complex<double>(data.r1t, data.xt);
 			std::complex<double> v = m_vBus[n];
 			std::complex<double> e = std::complex<double>(data.tranEr, data.tranEm);
@@ -1013,20 +1059,20 @@ bool Electromechanical::CalculateInjectedCurrents()
 			data.ir = 0.0;
 			data.im = 0.0;
 		}
-		motor->SetElectricalData(data);
+		//motor->SetElectricalData(data);
 	}
 
 	// Loads
 	for (auto it = m_loadList.begin(), itEnd = m_loadList.end(); it != itEnd; ++it) {
 		Load* load = *it;
-		auto data = load->GetElectricalData();
+		auto& data = load->GetElectricalDataRef();
 		Bus* bus = nullptr;
 		if (!GetParentBus(load, bus)) {
 			load->SetOnline(false);
 		}
 		else if (load->IsOnline()) {
 
-			data.voltage = m_vBus[bus->GetElectricalData().number];
+			data.voltage = m_vBus[bus->GetElectricalDataRef().number];
 			double vAbs = std::abs(data.voltage);
 
 			double pz, pi, pp, qz, qi, qp;
@@ -1051,7 +1097,7 @@ bool Electromechanical::CalculateInjectedCurrents()
 			double reactivePower = qz + qi + qp;
 
 			std::complex<double> newY = std::complex<double>(activePower, -reactivePower) / (vAbs * vAbs);
-			m_iBus[bus->GetElectricalData().number] += (data.y0 - newY) * data.voltage;
+			m_iBus[bus->GetElectricalDataRef().number] += (data.y0 - newY) * data.voltage;
 
 			data.electricalPower = std::complex<double>(activePower, reactivePower);
 		}
@@ -1060,7 +1106,7 @@ bool Electromechanical::CalculateInjectedCurrents()
 			data.electricalPower = std::complex<double>(0.0, 0.0);
 		}
 
-		load->SetElectricalData(data);
+		//load->SetElectricalData(data);
 	}
 	return true;
 }
@@ -1141,7 +1187,7 @@ void Electromechanical::CalculateIntegrationConstants(IndMotor* indMotor, double
 {
 	double w0 = 2.0 * M_PI * m_systemFreq;
 
-	auto data = indMotor->GetElectricalData();
+	auto& data = indMotor->GetElectricalDataRef();
 
 	// If the velocity is too low set mechanical torque to zero (a, b and c coeficients)
 	if (data.slip > 0.99999) {
@@ -1171,7 +1217,7 @@ void Electromechanical::CalculateIntegrationConstants(IndMotor* indMotor, double
 	data.icTranEm.c = data.tranEm * (1.0 - 2.0 * data.icTranEm.m) -
 		data.icTranEm.m * (w0 * data.t0 * data.slip * data.tranEr - (data.x0 - data.xt) * ir);
 
-	indMotor->SetElectricalData(data);
+	//indMotor->SetElectricalData(data);
 }
 
 bool Electromechanical::SolveMachines()
@@ -1216,7 +1262,7 @@ bool Electromechanical::SolveMachines()
 	// Induction machines
 	for (auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
 		IndMotor* indMotor = *it;
-		auto data = indMotor->GetElectricalData();
+		const auto& data = indMotor->GetElectricalDataRef();
 
 		//if(indMotor->IsOnline()) {
 		double ir, im, te;
@@ -1287,7 +1333,7 @@ bool Electromechanical::SolveMachines()
 		for (auto it = m_indMotorList.begin(), itEnd = m_indMotorList.end(); it != itEnd; ++it) {
 			IndMotor* indMotor = *it;
 
-			auto data = indMotor->GetElectricalData();
+			const auto& data = indMotor->GetElectricalDataRef();
 
 			double ir = data.ir;
 			double im = data.im;
@@ -1363,6 +1409,7 @@ void Electromechanical::SaveData()
 		auto& data = syncGenerator->GetElectricalDataRef();
 		if (data.plotSyncMachine) { syncGenerator->SavePlotData(); }
 	}
+
 	for(auto& bus : m_busList) {
 		auto& data = bus->GetElectricalDataRef();
 		if (data.plotBus) {
@@ -1370,6 +1417,7 @@ void Electromechanical::SaveData()
 			data.stabFreqVector.emplace_back(data.number >= 0 ? data.stabFreq : 0.0);
 		}
 	}
+
 	for(auto& load : m_loadList) {
 		auto& data = load->GetElectricalDataRef();
 		if (data.plotLoad) {
@@ -1390,7 +1438,7 @@ void Electromechanical::SaveData()
 			data.velocityVector.emplace_back(w);
 			std::complex<double> i1 = std::complex<double>(data.ir, data.im);
 			data.currentVector.emplace_back(std::abs(i1));
-			int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+			int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalDataRef().number;
 			std::complex<double> v = n >= 0 ? m_vBus[n] : 0.0;
 			data.terminalVoltageVector.emplace_back(std::abs(v));
 			std::complex<double> s = v * std::conj(i1);
@@ -1406,9 +1454,9 @@ void Electromechanical::SetSyncMachinesModel()
 {
 	for (auto it = m_syncGeneratorList.begin(), itEnd = m_syncGeneratorList.end(); it != itEnd; ++it) {
 		SyncGenerator* syncGenerator = *it;
-		auto data = syncGenerator->GetElectricalData();
+		auto& data = syncGenerator->GetElectricalDataRef();
 		data.model = GetMachineModel(syncGenerator);
-		syncGenerator->SetElectricalData(data);
+		//syncGenerator->SetElectricalData(data);
 	}
 }
 
@@ -1422,7 +1470,7 @@ bool Electromechanical::CalculateNonIntVariables(SyncGenerator* syncGenerator,
 {
 	auto& data = syncGenerator->GetElectricalDataRef();
 	Bus* bus = nullptr;
-	if (GetParentBus(syncGenerator, bus)) { data.terminalVoltage = m_vBus[bus->GetElectricalData().number]; }
+	if (GetParentBus(syncGenerator, bus)) { data.terminalVoltage = m_vBus[bus->GetElectricalDataRef().number]; }
 
 	double vd, vq;
 	ABCtoDQ0(data.terminalVoltage, data.delta, vd, vq);
@@ -1606,7 +1654,7 @@ double Electromechanical::CalculateIntVariables(SyncGenerator* syncGenerator,
 double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, double im, double te, double k)
 {
 	double error = 0.0;
-	auto data = indMotor->GetElectricalData();
+	auto& data = indMotor->GetElectricalDataRef();
 	double w0 = 2.0 * M_PI * m_systemFreq;
 
 	// Mechanical differential equations
@@ -1641,7 +1689,7 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
 	data.tranEr = tranEr;
 	data.tranEm = tranEm;
 
-	indMotor->SetElectricalData(data);
+	//indMotor->SetElectricalData(data);
 	return error;
 }
 
@@ -1679,11 +1727,11 @@ bool Electromechanical::CalculateSyncMachineSaturation(SyncGenerator* syncMachin
 	double k)
 {
 	// [Ref] Arrillaga, J.; Arnold, C. P.. "Computer Modelling of Electrical Power Systems". Pg. 254-260
-	auto data = syncMachine->GetElectricalData();
+	auto& data = syncMachine->GetElectricalDataRef();
 	auto smDataModel = GetSyncMachineModelData(syncMachine);
 
 	Bus* bus = nullptr;
-	if (GetParentBus(syncMachine, bus)) { data.terminalVoltage = m_vBus[bus->GetElectricalData().number]; }
+	if (GetParentBus(syncMachine, bus)) { data.terminalVoltage = m_vBus[bus->GetElectricalDataRef().number]; }
 	//else {
 		//data.terminalVoltage = 0.0;
 		//return true;
@@ -1772,7 +1820,7 @@ void Electromechanical::CalculateBusesFrequency(bool hasEvent)
 {
 	bool ignoreEventStep = true;
 	for (auto& bus : m_busList) {
-		auto data = bus->GetElectricalData();
+		auto& data = bus->GetElectricalDataRef();
 		if (!data.plotBus) continue;
 
 		if (m_simData.busFreqEstimation == BusFreqEstimation::WASHOUT_FILTER) {
@@ -1831,7 +1879,7 @@ void Electromechanical::CalculateBusesFrequency(bool hasEvent)
 			double busVelocity = m_refSpeed + dw * (2.0 * M_PI * m_systemFreq);
 			data.stabFreq = busVelocity / (2.0 * M_PI);
 
-			bus->SetElectricalData(data);
+			//bus->SetElectricalData(data);
 		}
 		else if (m_simData.busFreqEstimation == BusFreqEstimation::ANGLE_DERIVATION) {
 			double newAngle = std::arg(data.number >= 0 ? m_vBus[data.number] : 0.0);
@@ -1857,7 +1905,7 @@ SyncMachineModelData Electromechanical::GetSyncMachineModelData(SyncGenerator* s
 {
 	SyncMachineModelData smModelData;
 
-	auto data = syncMachine->GetElectricalData();
+	const auto& data = syncMachine->GetElectricalDataRef();
 	double k = 1.0;  // Power base change factor.
 	if (data.useMachineBase) {
 		double oldBase = syncMachine->GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
@@ -1958,9 +2006,9 @@ void Electromechanical::PreallocateVectors()
 
 std::complex<double> Electromechanical::GetIndMachineAdmittance(IndMotor* motor)
 {
-	auto data = motor->GetElectricalData();
+	const auto& data = motor->GetElectricalDataRef();
 	auto dataPU = motor->GetPUElectricalData(m_powerSystemBase);
-	std::complex<double> v = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().voltage;
+	std::complex<double> v = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalDataRef().voltage;
 	std::complex<double> y0 = (std::complex<double>(1, 0) / std::complex<double>(data.r1t, data.xt));
 	// The difference between calculated and defined reactive power
 	std::complex<double> yq = std::complex<double>(0.0, data.q0 - dataPU.reactivePower) / (std::abs(v) * std::abs(v));
@@ -1973,7 +2021,7 @@ bool Electromechanical::InsertIndMachinesOnYBus()
 		IndMotor* motor = *it;
 		if (!CalculateIndMachinesTransientValues(motor)) return false;
 		if (motor->IsOnline()) {
-			int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().number;
+			int n = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalDataRef().number;
 			m_yBus[n][n] += GetIndMachineAdmittance(motor);
 		}
 	}
@@ -1982,7 +2030,7 @@ bool Electromechanical::InsertIndMachinesOnYBus()
 
 bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
 {
-	auto data = motor->GetElectricalData();
+	auto& data = motor->GetElectricalDataRef();
 	auto dataPU = motor->GetPUElectricalData(m_powerSystemBase);
 	double k = 1.0;  // Power base change factor.
 	if (data.useMachinePowerAsBase) {
@@ -1990,7 +2038,7 @@ bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
 		k = m_powerSystemBase / oldBase;
 	}
 
-	data.terminalVoltage = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalData().voltage;
+	data.terminalVoltage = static_cast<Bus*>(motor->GetParentList()[0])->GetElectricalDataRef().voltage;
 
 	// Calculate the induction machine transient constants at the machine base
 	double r1t = data.r1 * k;
@@ -2044,6 +2092,6 @@ bool Electromechanical::CalculateIndMachinesTransientValues(IndMotor* motor)
 
 	data.t0 = (x2t + xmt) / (2.0 * M_PI * m_systemFreq * r2);
 
-	motor->SetElectricalData(data);
+	//motor->SetElectricalData(data);
 	return true;
 }

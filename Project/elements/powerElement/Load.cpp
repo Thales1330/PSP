@@ -314,7 +314,14 @@ bool Load::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 
 LoadElectricalData Load::GetPUElectricalData(double systemPowerBase)
 {
-	LoadElectricalData data = m_electricalData;
+	LoadElectricalData data;
+
+	data.activePower = m_electricalData.activePower;
+	data.activePowerUnit = m_electricalData.activePowerUnit;
+
+	data.reactivePower = m_electricalData.reactivePower;
+	data.reactivePowerUnit = m_electricalData.reactivePowerUnit;
+
 	switch (data.activePowerUnit) {
 	case ElectricalUnit::UNIT_W: {
 		data.activePower = data.activePower / systemPowerBase;
