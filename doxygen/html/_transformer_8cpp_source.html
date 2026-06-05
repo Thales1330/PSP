@@ -597,7 +597,7 @@ $(document).ready(function(){initNavTree('_transformer_8cpp_source.html',''); in
 </div>
 <div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span> </div>
 <div class="foldopen" id="foldopen00460" data-start="{" data-end="}">
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno"><a class="line" href="class_transformer.html#acb55f182a7f6d7af0feb6a94cb62af4f">  460</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_transformer.html#acb55f182a7f6d7af0feb6a94cb62af4f">Transformer::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element)</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno"><a class="line" href="class_transformer.html#a99ab24e0d2b1383f831ccbf5a66211c5">  460</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_transformer.html#a99ab24e0d2b1383f831ccbf5a66211c5">Transformer::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element, wxWindow* workspace)</div>
 <div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>{</div>
 <div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    <a class="code hl_class" href="class_transformer_form.html">TransformerForm</a> transfForm(parent, <span class="keyword">this</span>);</div>
 <div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    transfForm.CenterOnParent();</div>
@@ -809,292 +809,332 @@ $(document).ready(function(){initNavTree('_transformer_8cpp_source.html',''); in
 <div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span> </div>
 <div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span><a class="code hl_struct" href="struct_transformer_electrical_data.html">TransformerElectricalData</a> Transformer::GetPUElectricalData(<span class="keywordtype">double</span> systemBasePower)</div>
 <div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>{</div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    <a class="code hl_struct" href="struct_transformer_electrical_data.html">TransformerElectricalData</a> data = m_electricalData;</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    <span class="keywordtype">double</span> transformerBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);</div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    <span class="keywordtype">double</span> baseVoltage = 0.0;</div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    <span class="keywordflow">if</span> (data.baseVoltage == 0) {</div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>        baseVoltage = GetValueFromUnit(data.primaryNominalVoltage, data.primaryNominalVoltageUnit);</div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    }</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>        baseVoltage = GetValueFromUnit(data.secondaryNominalVoltage, data.secondaryNominalVoltageUnit);</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    }</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    <span class="keywordtype">double</span> systemBaseImpedance = (baseVoltage * baseVoltage) / systemBasePower;</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    <span class="keywordtype">double</span> transformerBaseImpedance = (baseVoltage * baseVoltage) / transformerBasePower;</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span> </div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>    <span class="comment">// Resistance</span></div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>    <span class="keywordtype">double</span> r = data.resistance;</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>    <span class="keywordflow">if</span> (data.resistanceUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>        <span class="keywordflow">if</span> (data.useTransformerPower) data.resistance = (r * transformerBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>    }</div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>        data.resistance = r / systemBaseImpedance;</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>    }</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>    data.resistanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    <a class="code hl_struct" href="struct_transformer_electrical_data.html">TransformerElectricalData</a> data;</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span> </div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    data.nominalPower = m_electricalData.nominalPower;</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    data.nominalPowerUnit = m_electricalData.nominalPowerUnit;</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    data.primaryNominalVoltage = m_electricalData.primaryNominalVoltage;</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>    data.primaryNominalVoltageUnit =</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>        m_electricalData.primaryNominalVoltageUnit;</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span> </div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    data.secondaryNominalVoltage =</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>        m_electricalData.secondaryNominalVoltage;</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    data.secondaryNominalVoltageUnit =</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        m_electricalData.secondaryNominalVoltageUnit;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span> </div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>    data.useTransformerPower =</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>        m_electricalData.useTransformerPower;</div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span> </div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    data.baseVoltage = m_electricalData.baseVoltage;</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span> </div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>    data.resistance = m_electricalData.resistance;</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>    data.resistanceUnit = m_electricalData.resistanceUnit;</div>
 <div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span> </div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>    <span class="comment">// Indutive reactance</span></div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    <span class="keywordtype">double</span> x = data.indReactance;</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>    <span class="keywordflow">if</span> (data.indReactanceUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>        <span class="keywordflow">if</span> (data.useTransformerPower) data.indReactance = (x * transformerBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    }</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>        data.indReactance = x / systemBaseImpedance;</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    }</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    data.indReactanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span> </div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>    <span class="comment">// Fault</span></div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span> </div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <span class="comment">// Zero seq. resistance</span></div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <span class="keywordtype">double</span> r0 = data.zeroResistance;</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.zeroResistance = (r0 * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>    data.indReactance = m_electricalData.indReactance;</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    data.indReactanceUnit = m_electricalData.indReactanceUnit;</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span> </div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>    data.zeroResistance = m_electricalData.zeroResistance;</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    data.zeroIndReactance = m_electricalData.zeroIndReactance;</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span> </div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    data.primaryGrndResistance =</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>        m_electricalData.primaryGrndResistance;</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    data.primaryGrndReactance =</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>        m_electricalData.primaryGrndReactance;</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span> </div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    data.secondaryGrndResistance =</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>        m_electricalData.secondaryGrndResistance;</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    data.secondaryGrndReactance =</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>        m_electricalData.secondaryGrndReactance;</div>
 <div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span> </div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>    <span class="comment">// Zero seq. ind. reactance</span></div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    <span class="keywordtype">double</span> x0 = data.zeroIndReactance;</div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.zeroIndReactance = (x0 * transformerBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span> </div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    <span class="comment">// Primary ground resistance</span></div>
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>    <span class="keywordtype">double</span> rgp = data.primaryGrndResistance;</div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.primaryGrndResistance = (rgp * transformerBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span> </div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>    <span class="comment">// Primary ground ind reactance</span></div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>    <span class="keywordtype">double</span> xgp = data.primaryGrndReactance;</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.primaryGrndReactance = (xgp * transformerBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span> </div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>    <span class="comment">// Secondary ground resistance</span></div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>    <span class="keywordtype">double</span> rgs = data.secondaryGrndResistance;</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.secondaryGrndResistance = (rgs * transformerBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span> </div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>    <span class="comment">// Secondary ground ind reactance</span></div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>    <span class="keywordtype">double</span> xgs = data.secondaryGrndReactance;</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.secondaryGrndReactance = (xgs * transformerBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span> </div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>    <span class="keywordflow">if</span> (!m_online) {</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>        data.powerFlow[0] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>        data.powerFlow[1] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>        data.faultCurrent[0][0] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>        data.faultCurrent[0][1] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>        data.faultCurrent[0][2] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>        data.faultCurrent[1][0] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>        data.faultCurrent[1][1] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>        data.faultCurrent[1][2] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>    }</div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span> </div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>    <span class="keywordflow">return</span> data;</div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>}</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>    data.powerFlow[0] = m_electricalData.powerFlow[0];</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    data.powerFlow[1] = m_electricalData.powerFlow[1];</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span> </div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    <span class="keywordtype">double</span> transformerBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    <span class="keywordtype">double</span> baseVoltage = 0.0;</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>    <span class="keywordflow">if</span> (data.baseVoltage == 0) {</div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>        baseVoltage = GetValueFromUnit(data.primaryNominalVoltage, data.primaryNominalVoltageUnit);</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>    }</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>        baseVoltage = GetValueFromUnit(data.secondaryNominalVoltage, data.secondaryNominalVoltageUnit);</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    }</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>    <span class="keywordtype">double</span> systemBaseImpedance = (baseVoltage * baseVoltage) / systemBasePower;</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>    <span class="keywordtype">double</span> transformerBaseImpedance = (baseVoltage * baseVoltage) / transformerBasePower;</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span> </div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    <span class="comment">// Resistance</span></div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>    <span class="keywordtype">double</span> r = data.resistance;</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>    <span class="keywordflow">if</span> (data.resistanceUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>        <span class="keywordflow">if</span> (data.useTransformerPower) data.resistance = (r * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    }</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>        data.resistance = r / systemBaseImpedance;</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>    }</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>    data.resistanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span> </div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    <span class="comment">// Indutive reactance</span></div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    <span class="keywordtype">double</span> x = data.indReactance;</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    <span class="keywordflow">if</span> (data.indReactanceUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>        <span class="keywordflow">if</span> (data.useTransformerPower) data.indReactance = (x * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>    }</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>        data.indReactance = x / systemBaseImpedance;</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>    }</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>    data.indReactanceUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
 <div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span> </div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>rapidxml::xml_node&lt;&gt;* Transformer::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>{</div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Transfomer&quot;</span>);</div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>    <span class="keyword">auto</span> cadProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;CADProperties&quot;</span>);</div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>    <span class="keyword">auto</span> position = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;Position&quot;</span>);</div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>    <span class="keyword">auto</span> posX = XMLParser::AppendNode(doc, position, <span class="stringliteral">&quot;X&quot;</span>);</div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>    XMLParser::SetNodeValue(doc, posX, m_position.m_x);</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    <span class="keyword">auto</span> posY = XMLParser::AppendNode(doc, position, <span class="stringliteral">&quot;Y&quot;</span>);</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    XMLParser::SetNodeValue(doc, posY, m_position.m_y);</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    <span class="keyword">auto</span> size = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;Size&quot;</span>);</div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    <span class="keyword">auto</span> width = XMLParser::AppendNode(doc, size, <span class="stringliteral">&quot;Width&quot;</span>);</div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    XMLParser::SetNodeValue(doc, width, m_width);</div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>    <span class="keyword">auto</span> height = XMLParser::AppendNode(doc, size, <span class="stringliteral">&quot;Height&quot;</span>);</div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    XMLParser::SetNodeValue(doc, height, m_height);</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    <span class="keyword">auto</span> angle = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;Angle&quot;</span>);</div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    XMLParser::SetNodeValue(doc, angle, m_angle);</div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    <span class="keyword">auto</span> nodeList = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;NodeList&quot;</span>);</div>
-<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>    <span class="keyword">auto</span> nodePos1 = XMLParser::AppendNode(doc, nodeList, <span class="stringliteral">&quot;Node&quot;</span>);</div>
-<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>    XMLParser::SetNodeAttribute(doc, nodePos1, <span class="stringliteral">&quot;ID&quot;</span>, 0);</div>
-<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>    <span class="keyword">auto</span> nodePosX1 = XMLParser::AppendNode(doc, nodePos1, <span class="stringliteral">&quot;X&quot;</span>);</div>
-<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>    XMLParser::SetNodeValue(doc, nodePosX1, m_pointList[0].m_x);</div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>    <span class="keyword">auto</span> nodePosY1 = XMLParser::AppendNode(doc, nodePos1, <span class="stringliteral">&quot;Y&quot;</span>);</div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>    XMLParser::SetNodeValue(doc, nodePosY1, m_pointList[0].m_y);</div>
-<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>    <span class="keyword">auto</span> nodePos2 = XMLParser::AppendNode(doc, nodeList, <span class="stringliteral">&quot;Node&quot;</span>);</div>
-<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>    XMLParser::SetNodeAttribute(doc, nodePos2, <span class="stringliteral">&quot;ID&quot;</span>, 1);</div>
-<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>    <span class="keyword">auto</span> nodePosX2 = XMLParser::AppendNode(doc, nodePos2, <span class="stringliteral">&quot;X&quot;</span>);</div>
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>    XMLParser::SetNodeValue(doc, nodePosX2, m_pointList[m_pointList.size() - 1].m_x);</div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>    <span class="keyword">auto</span> nodePosY2 = XMLParser::AppendNode(doc, nodePos2, <span class="stringliteral">&quot;Y&quot;</span>);</div>
-<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>    XMLParser::SetNodeValue(doc, nodePosY2, m_pointList[m_pointList.size() - 1].m_y);</div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span> </div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>    <span class="keyword">auto</span> parentIDList = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;ParentIDList&quot;</span>);</div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_parentList.size(); i++) {</div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>        <a class="code hl_class" href="class_element.html">Element</a>* parent = m_parentList[i];</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>        <span class="keywordflow">if</span> (parent) {</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>            <span class="keyword">auto</span> parentID = XMLParser::AppendNode(doc, parentIDList, <span class="stringliteral">&quot;ParentID&quot;</span>);</div>
-<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>            XMLParser::SetNodeAttribute(doc, parentID, <span class="stringliteral">&quot;ID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i));</div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>            XMLParser::SetNodeValue(doc, parentID, parent-&gt;<a class="code hl_function" href="class_element.html#a20693eda52fae0b42d6fa6a70fd0a0ee">GetID</a>());</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>        }</div>
-<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>    }</div>
-<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span> </div>
-<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    <span class="keyword">auto</span> isOnline = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>);</div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    XMLParser::SetNodeValue(doc, isOnline, m_online);</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
-<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>    <span class="keyword">auto</span> primaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;PrimaryNominalVoltage&quot;</span>);</div>
-<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>    XMLParser::SetNodeValue(doc, primaryNominalVoltage, m_electricalData.primaryNominalVoltage);</div>
-<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>    XMLParser::SetNodeAttribute(doc, primaryNominalVoltage, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.primaryNominalVoltageUnit));</div>
-<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>    <span class="keyword">auto</span> secondaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;SecondaryNominalVoltage&quot;</span>);</div>
-<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>    XMLParser::SetNodeValue(doc, secondaryNominalVoltage, m_electricalData.secondaryNominalVoltage);</div>
-<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>    XMLParser::SetNodeAttribute(doc, secondaryNominalVoltage, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.secondaryNominalVoltageUnit));</div>
-<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>    <span class="keyword">auto</span> nominalPower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>    XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);</div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    XMLParser::SetNodeAttribute(doc, nominalPower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.nominalPowerUnit));</div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    <span class="keyword">auto</span> resistance = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    XMLParser::SetNodeValue(doc, resistance, m_electricalData.resistance);</div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>    XMLParser::SetNodeAttribute(doc, resistance, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.resistanceUnit));</div>
-<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>    <span class="keyword">auto</span> indReactance = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IndReactance&quot;</span>);</div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>    XMLParser::SetNodeValue(doc, indReactance, m_electricalData.indReactance);</div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>    XMLParser::SetNodeAttribute(doc, indReactance, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.indReactanceUnit));</div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>    <span class="keyword">auto</span> connection = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Connection&quot;</span>);</div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>    XMLParser::SetNodeValue(doc, connection, m_electricalData.connection);</div>
-<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>    <span class="keyword">auto</span> turnsRatio = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;TurnsRatio&quot;</span>);</div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>    XMLParser::SetNodeValue(doc, turnsRatio, m_electricalData.turnsRatio);</div>
-<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>    <span class="keyword">auto</span> phaseShift = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;PhaseShift&quot;</span>);</div>
-<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>    XMLParser::SetNodeValue(doc, phaseShift, m_electricalData.phaseShift);</div>
-<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    <span class="keyword">auto</span> useTransformerPower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;UseTransfomerPower&quot;</span>);</div>
-<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    XMLParser::SetNodeValue(doc, useTransformerPower, m_electricalData.useTransformerPower);</div>
-<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span> </div>
-<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>    <span class="keyword">auto</span> fault = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Fault&quot;</span>);</div>
-<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>    <span class="keyword">auto</span> zeroResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
-<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);</div>
-<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    <span class="keyword">auto</span> zeroIndReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroIndReactance&quot;</span>);</div>
-<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>    XMLParser::SetNodeValue(doc, zeroIndReactance, m_electricalData.zeroIndReactance);</div>
-<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>    <span class="keyword">auto</span> primaryGrndResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PrimaryGrndResistance&quot;</span>);</div>
-<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>    XMLParser::SetNodeValue(doc, primaryGrndResistance, m_electricalData.primaryGrndResistance);</div>
-<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>    <span class="keyword">auto</span> primaryGrndReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PrimaryGrndReactance&quot;</span>);</div>
-<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>    XMLParser::SetNodeValue(doc, primaryGrndReactance, m_electricalData.primaryGrndReactance);</div>
-<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    <span class="keyword">auto</span> secondaryGrndResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;SecondaryGrndResistance&quot;</span>);</div>
-<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>    XMLParser::SetNodeValue(doc, secondaryGrndResistance, m_electricalData.secondaryGrndResistance);</div>
-<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    <span class="keyword">auto</span> secondaryGrndReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;SecondaryGrndReactance&quot;</span>);</div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>    XMLParser::SetNodeValue(doc, secondaryGrndReactance, m_electricalData.secondaryGrndReactance);</div>
-<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span> </div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    SaveSwitchingData(doc, electricalProp);</div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span> </div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>}</div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span> </div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span><span class="keywordtype">bool</span> Transformer::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode, std::vector&lt;Element*&gt; parentList)</div>
-<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>{</div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>    <span class="keyword">auto</span> cadPropNode = elementNode-&gt;first_node(<span class="stringliteral">&quot;CADProperties&quot;</span>);</div>
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>    <span class="keywordflow">if</span> (!cadPropNode) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span> </div>
-<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    <span class="keyword">auto</span> position = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;Position&quot;</span>);</div>
-<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    <span class="keywordtype">double</span> posX = XMLParser::GetNodeValueDouble(position, <span class="stringliteral">&quot;X&quot;</span>);</div>
-<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    <span class="keywordtype">double</span> posY = XMLParser::GetNodeValueDouble(position, <span class="stringliteral">&quot;Y&quot;</span>);</div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>    <span class="keyword">auto</span> size = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;Size&quot;</span>);</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>    m_width = XMLParser::GetNodeValueDouble(size, <span class="stringliteral">&quot;Width&quot;</span>);</div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    m_height = XMLParser::GetNodeValueDouble(size, <span class="stringliteral">&quot;Height&quot;</span>);</div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>    <span class="keywordtype">double</span> angle = XMLParser::GetNodeValueDouble(cadPropNode, <span class="stringliteral">&quot;Angle&quot;</span>);</div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span> </div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>    <span class="comment">// Get nodes points</span></div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>    std::vector&lt;wxPoint2DDouble&gt; ptsList;</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>    <span class="keyword">auto</span> nodePosList = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;NodeList&quot;</span>);</div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>    <span class="keywordflow">if</span> (!nodePosList) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>    <span class="keyword">auto</span> nodePos = nodePosList-&gt;first_node(<span class="stringliteral">&quot;Node&quot;</span>);</div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>    <span class="keywordflow">while</span> (nodePos) {</div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>        <span class="keywordtype">double</span> nodePosX = XMLParser::GetNodeValueDouble(nodePos, <span class="stringliteral">&quot;X&quot;</span>);</div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>        <span class="keywordtype">double</span> nodePosY = XMLParser::GetNodeValueDouble(nodePos, <span class="stringliteral">&quot;Y&quot;</span>);</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>        ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>        nodePos = nodePos-&gt;next_sibling(<span class="stringliteral">&quot;Node&quot;</span>);</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>    }</div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span> </div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>    <span class="comment">// Get parents IDs</span></div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>    <span class="keyword">auto</span> parentIDList = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;ParentIDList&quot;</span>);</div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>    <span class="keywordflow">if</span> (!parentIDList) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>    <span class="keyword">auto</span> parentNode = parentIDList-&gt;first_node(<span class="stringliteral">&quot;ParentID&quot;</span>);</div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>    <span class="keywordtype">long</span> parentID[2] = { -1, -1 };</div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>    <span class="keywordflow">while</span> (parentNode) {</div>
-<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>        <span class="keywordtype">long</span> index = 0;</div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>        wxString(parentNode-&gt;first_attribute(<span class="stringliteral">&quot;ID&quot;</span>)-&gt;value()).ToLong(&amp;index);</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>        wxString(parentNode-&gt;value()).ToCLong(&amp;parentID[index]);</div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>        parentNode = parentNode-&gt;next_sibling(<span class="stringliteral">&quot;ParentID&quot;</span>);</div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>    }</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>    <span class="comment">// Fault</span></div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span> </div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    <span class="comment">// Zero seq. resistance</span></div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>    <span class="keywordtype">double</span> r0 = data.zeroResistance;</div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.zeroResistance = (r0 * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span> </div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>    <span class="comment">// Zero seq. ind. reactance</span></div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>    <span class="keywordtype">double</span> x0 = data.zeroIndReactance;</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.zeroIndReactance = (x0 * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span> </div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    <span class="comment">// Primary ground resistance</span></div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    <span class="keywordtype">double</span> rgp = data.primaryGrndResistance;</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.primaryGrndResistance = (rgp * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span> </div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    <span class="comment">// Primary ground ind reactance</span></div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    <span class="keywordtype">double</span> xgp = data.primaryGrndReactance;</div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.primaryGrndReactance = (xgp * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span> </div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>    <span class="comment">// Secondary ground resistance</span></div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>    <span class="keywordtype">double</span> rgs = data.secondaryGrndResistance;</div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.secondaryGrndResistance = (rgs * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span> </div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>    <span class="comment">// Secondary ground ind reactance</span></div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>    <span class="keywordtype">double</span> xgs = data.secondaryGrndReactance;</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>    <span class="keywordflow">if</span> (data.useTransformerPower) data.secondaryGrndReactance = (xgs * transformerBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span> </div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>    <span class="keywordflow">if</span> (!m_online) {</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>        data.powerFlow[0] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>        data.powerFlow[1] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>        data.faultCurrent[0][0] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>        data.faultCurrent[0][1] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>        data.faultCurrent[0][2] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>        data.faultCurrent[1][0] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>        data.faultCurrent[1][1] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>        data.faultCurrent[1][2] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>    }</div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span> </div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>    <span class="keywordflow">return</span> data;</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>}</div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span> </div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>rapidxml::xml_node&lt;&gt;* Transformer::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>{</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Transfomer&quot;</span>);</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>    <span class="keyword">auto</span> cadProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;CADProperties&quot;</span>);</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    <span class="keyword">auto</span> position = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;Position&quot;</span>);</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>    <span class="keyword">auto</span> posX = XMLParser::AppendNode(doc, position, <span class="stringliteral">&quot;X&quot;</span>);</div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>    XMLParser::SetNodeValue(doc, posX, m_position.m_x);</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>    <span class="keyword">auto</span> posY = XMLParser::AppendNode(doc, position, <span class="stringliteral">&quot;Y&quot;</span>);</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>    XMLParser::SetNodeValue(doc, posY, m_position.m_y);</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>    <span class="keyword">auto</span> size = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;Size&quot;</span>);</div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>    <span class="keyword">auto</span> width = XMLParser::AppendNode(doc, size, <span class="stringliteral">&quot;Width&quot;</span>);</div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>    XMLParser::SetNodeValue(doc, width, m_width);</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>    <span class="keyword">auto</span> height = XMLParser::AppendNode(doc, size, <span class="stringliteral">&quot;Height&quot;</span>);</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    XMLParser::SetNodeValue(doc, height, m_height);</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    <span class="keyword">auto</span> angle = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;Angle&quot;</span>);</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    XMLParser::SetNodeValue(doc, angle, m_angle);</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>    <span class="keyword">auto</span> nodeList = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;NodeList&quot;</span>);</div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>    <span class="keyword">auto</span> nodePos1 = XMLParser::AppendNode(doc, nodeList, <span class="stringliteral">&quot;Node&quot;</span>);</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>    XMLParser::SetNodeAttribute(doc, nodePos1, <span class="stringliteral">&quot;ID&quot;</span>, 0);</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>    <span class="keyword">auto</span> nodePosX1 = XMLParser::AppendNode(doc, nodePos1, <span class="stringliteral">&quot;X&quot;</span>);</div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>    XMLParser::SetNodeValue(doc, nodePosX1, m_pointList[0].m_x);</div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>    <span class="keyword">auto</span> nodePosY1 = XMLParser::AppendNode(doc, nodePos1, <span class="stringliteral">&quot;Y&quot;</span>);</div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>    XMLParser::SetNodeValue(doc, nodePosY1, m_pointList[0].m_y);</div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>    <span class="keyword">auto</span> nodePos2 = XMLParser::AppendNode(doc, nodeList, <span class="stringliteral">&quot;Node&quot;</span>);</div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>    XMLParser::SetNodeAttribute(doc, nodePos2, <span class="stringliteral">&quot;ID&quot;</span>, 1);</div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>    <span class="keyword">auto</span> nodePosX2 = XMLParser::AppendNode(doc, nodePos2, <span class="stringliteral">&quot;X&quot;</span>);</div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    XMLParser::SetNodeValue(doc, nodePosX2, m_pointList[m_pointList.size() - 1].m_x);</div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    <span class="keyword">auto</span> nodePosY2 = XMLParser::AppendNode(doc, nodePos2, <span class="stringliteral">&quot;Y&quot;</span>);</div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>    XMLParser::SetNodeValue(doc, nodePosY2, m_pointList[m_pointList.size() - 1].m_y);</div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span> </div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>    <span class="keyword">auto</span> parentIDList = XMLParser::AppendNode(doc, cadProp, <span class="stringliteral">&quot;ParentIDList&quot;</span>);</div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_parentList.size(); i++) {</div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>        <a class="code hl_class" href="class_element.html">Element</a>* parent = m_parentList[i];</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>        <span class="keywordflow">if</span> (parent) {</div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>            <span class="keyword">auto</span> parentID = XMLParser::AppendNode(doc, parentIDList, <span class="stringliteral">&quot;ParentID&quot;</span>);</div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>            XMLParser::SetNodeAttribute(doc, parentID, <span class="stringliteral">&quot;ID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i));</div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>            XMLParser::SetNodeValue(doc, parentID, parent-&gt;<a class="code hl_function" href="class_element.html#a20693eda52fae0b42d6fa6a70fd0a0ee">GetID</a>());</div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>        }</div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    }</div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span> </div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>    <span class="keyword">auto</span> isOnline = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>);</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    XMLParser::SetNodeValue(doc, isOnline, m_online);</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>    <span class="keyword">auto</span> primaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;PrimaryNominalVoltage&quot;</span>);</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>    XMLParser::SetNodeValue(doc, primaryNominalVoltage, m_electricalData.primaryNominalVoltage);</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>    XMLParser::SetNodeAttribute(doc, primaryNominalVoltage, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.primaryNominalVoltageUnit));</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>    <span class="keyword">auto</span> secondaryNominalVoltage = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;SecondaryNominalVoltage&quot;</span>);</div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>    XMLParser::SetNodeValue(doc, secondaryNominalVoltage, m_electricalData.secondaryNominalVoltage);</div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>    XMLParser::SetNodeAttribute(doc, secondaryNominalVoltage, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.secondaryNominalVoltageUnit));</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>    <span class="keyword">auto</span> nominalPower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>    XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    XMLParser::SetNodeAttribute(doc, nominalPower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.nominalPowerUnit));</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    <span class="keyword">auto</span> resistance = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    XMLParser::SetNodeValue(doc, resistance, m_electricalData.resistance);</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>    XMLParser::SetNodeAttribute(doc, resistance, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.resistanceUnit));</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>    <span class="keyword">auto</span> indReactance = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IndReactance&quot;</span>);</div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    XMLParser::SetNodeValue(doc, indReactance, m_electricalData.indReactance);</div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>    XMLParser::SetNodeAttribute(doc, indReactance, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.indReactanceUnit));</div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    <span class="keyword">auto</span> connection = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Connection&quot;</span>);</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>    XMLParser::SetNodeValue(doc, connection, m_electricalData.connection);</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>    <span class="keyword">auto</span> turnsRatio = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;TurnsRatio&quot;</span>);</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>    XMLParser::SetNodeValue(doc, turnsRatio, m_electricalData.turnsRatio);</div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>    <span class="keyword">auto</span> phaseShift = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;PhaseShift&quot;</span>);</div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>    XMLParser::SetNodeValue(doc, phaseShift, m_electricalData.phaseShift);</div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>    <span class="keyword">auto</span> useTransformerPower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;UseTransfomerPower&quot;</span>);</div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>    XMLParser::SetNodeValue(doc, useTransformerPower, m_electricalData.useTransformerPower);</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span> </div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>    <span class="keyword">auto</span> fault = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Fault&quot;</span>);</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>    <span class="keyword">auto</span> zeroResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>    XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);</div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>    <span class="keyword">auto</span> zeroIndReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroIndReactance&quot;</span>);</div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>    XMLParser::SetNodeValue(doc, zeroIndReactance, m_electricalData.zeroIndReactance);</div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>    <span class="keyword">auto</span> primaryGrndResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PrimaryGrndResistance&quot;</span>);</div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>    XMLParser::SetNodeValue(doc, primaryGrndResistance, m_electricalData.primaryGrndResistance);</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>    <span class="keyword">auto</span> primaryGrndReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PrimaryGrndReactance&quot;</span>);</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>    XMLParser::SetNodeValue(doc, primaryGrndReactance, m_electricalData.primaryGrndReactance);</div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>    <span class="keyword">auto</span> secondaryGrndResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;SecondaryGrndResistance&quot;</span>);</div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>    XMLParser::SetNodeValue(doc, secondaryGrndResistance, m_electricalData.secondaryGrndResistance);</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>    <span class="keyword">auto</span> secondaryGrndReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;SecondaryGrndReactance&quot;</span>);</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>    XMLParser::SetNodeValue(doc, secondaryGrndReactance, m_electricalData.secondaryGrndReactance);</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span> </div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>    SaveSwitchingData(doc, electricalProp);</div>
 <div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span> </div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>    std::vector&lt;wxPoint2DDouble&gt; nodePtsList;            <span class="comment">// List of node points</span></div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>    nodePtsList.push_back(ptsList[0]);                   <span class="comment">// First point on the list</span></div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>    nodePtsList.push_back(ptsList[ptsList.size() - 1]);  <span class="comment">// Last point on the list</span></div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span> </div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>    <span class="comment">// List of dummy buses to set not connected nodes properly</span></div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>    std::vector&lt;Bus*&gt; dummyBusList;</div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>    <span class="comment">// Set parents (if have)</span></div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>        <span class="keywordflow">if</span> (parentID[i] == -1)  <span class="comment">// No parent connected</span></div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>        {</div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>            <a class="code hl_class" href="class_bus.html">Bus</a>* dummyBus = <span class="keyword">new</span> <a class="code hl_class" href="class_bus.html">Bus</a>(nodePtsList[i]);</div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>            dummyBusList.push_back(dummyBus);</div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>            <a class="code hl_function" href="class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6">AddParent</a>(dummyBus, nodePtsList[i]);</div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>        }</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>        <span class="keywordflow">else</span> {  <span class="comment">// Parent connected (necessarily a bus, get from bus list)</span></div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>            <a class="code hl_function" href="class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6">AddParent</a>(parentList[parentID[i]], nodePtsList[i]);</div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>        }</div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>    }</div>
-<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span> </div>
-<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>    <a class="code hl_function" href="class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5">StartMove</a>(m_position);</div>
-<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>    <a class="code hl_function" href="class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8">Move</a>(wxPoint2DDouble(posX, posY));</div>
-<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span> </div>
-<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>    <span class="comment">// Remove dummy buses</span></div>
-<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = dummyBusList.begin(), itEnd = dummyBusList.end(); it != itEnd; ++it) {</div>
-<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>        <a class="code hl_function" href="class_branch.html#aa0328a743090b2b7b3f33d57a867b6dc">RemoveParent</a>(*it);</div>
-<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>        <span class="keyword">delete</span>* it;</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>}</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span> </div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span><span class="keywordtype">bool</span> Transformer::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode, std::vector&lt;Element*&gt; parentList)</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>{</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>    <span class="keyword">auto</span> cadPropNode = elementNode-&gt;first_node(<span class="stringliteral">&quot;CADProperties&quot;</span>);</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>    <span class="keywordflow">if</span> (!cadPropNode) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span> </div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>    <span class="keyword">auto</span> position = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;Position&quot;</span>);</div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>    <span class="keywordtype">double</span> posX = XMLParser::GetNodeValueDouble(position, <span class="stringliteral">&quot;X&quot;</span>);</div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>    <span class="keywordtype">double</span> posY = XMLParser::GetNodeValueDouble(position, <span class="stringliteral">&quot;Y&quot;</span>);</div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>    <span class="keyword">auto</span> size = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;Size&quot;</span>);</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    m_width = XMLParser::GetNodeValueDouble(size, <span class="stringliteral">&quot;Width&quot;</span>);</div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    m_height = XMLParser::GetNodeValueDouble(size, <span class="stringliteral">&quot;Height&quot;</span>);</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>    <span class="keywordtype">double</span> angle = XMLParser::GetNodeValueDouble(cadPropNode, <span class="stringliteral">&quot;Angle&quot;</span>);</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span> </div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>    <span class="comment">// Get nodes points</span></div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>    std::vector&lt;wxPoint2DDouble&gt; ptsList;</div>
+<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>    <span class="keyword">auto</span> nodePosList = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;NodeList&quot;</span>);</div>
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>    <span class="keywordflow">if</span> (!nodePosList) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>    <span class="keyword">auto</span> nodePos = nodePosList-&gt;first_node(<span class="stringliteral">&quot;Node&quot;</span>);</div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>    <span class="keywordflow">while</span> (nodePos) {</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>        <span class="keywordtype">double</span> nodePosX = XMLParser::GetNodeValueDouble(nodePos, <span class="stringliteral">&quot;X&quot;</span>);</div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>        <span class="keywordtype">double</span> nodePosY = XMLParser::GetNodeValueDouble(nodePos, <span class="stringliteral">&quot;Y&quot;</span>);</div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>        ptsList.push_back(wxPoint2DDouble(nodePosX, nodePosY));</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>        nodePos = nodePos-&gt;next_sibling(<span class="stringliteral">&quot;Node&quot;</span>);</div>
 <div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>    }</div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>    dummyBusList.clear();</div>
-<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span> </div>
-<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>    <span class="comment">// Set rotation properly.</span></div>
-<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>    <span class="keywordtype">int</span> numRot = angle / <a class="code hl_function" href="class_element.html#a3687fe2558f6a27ee068fa7244f855eb">GetRotationAngle</a>();</div>
-<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>    <span class="keywordtype">bool</span> clockwise = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>    <span class="keywordflow">if</span> (numRot &lt; 0) {</div>
-<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>        numRot = std::abs(numRot);</div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>        clockwise = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>    }</div>
-<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numRot; i++) <a class="code hl_function" href="class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de">Rotate</a>(clockwise);</div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span> </div>
-<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span> </div>
-<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    <a class="code hl_function" href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">SetOnline</a>(XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>));</div>
-<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
-<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>    m_electricalData.primaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;PrimaryNominalVoltage&quot;</span>);</div>
-<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>    m_electricalData.primaryNominalVoltageUnit =</div>
-<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;PrimaryNominalVoltage&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>    m_electricalData.secondaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;SecondaryNominalVoltage&quot;</span>);</div>
-<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>    m_electricalData.secondaryNominalVoltageUnit = <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(</div>
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>        XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;SecondaryNominalVoltage&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
-<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>    m_electricalData.nominalPowerUnit =</div>
-<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>    m_electricalData.resistance = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
-<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>    m_electricalData.resistanceUnit =</div>
-<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;Resistance&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>    m_electricalData.indReactance = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;IndReactance&quot;</span>);</div>
-<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>    m_electricalData.indReactanceUnit =</div>
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;IndReactance&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>    m_electricalData.connection = (TransformerConnection)XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;Connection&quot;</span>);</div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>    m_electricalData.turnsRatio = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;TurnsRatio&quot;</span>);</div>
-<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>    m_electricalData.phaseShift = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;PhaseShift&quot;</span>);</div>
-<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>    m_electricalData.useTransformerPower = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;UseTransfomerPower&quot;</span>);</div>
-<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span> </div>
-<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>    <span class="keyword">auto</span> fault = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Fault&quot;</span>);</div>
-<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>    m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
-<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>    m_electricalData.zeroIndReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroIndReactance&quot;</span>);</div>
-<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>    m_electricalData.primaryGrndResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PrimaryGrndResistance&quot;</span>);</div>
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>    m_electricalData.primaryGrndReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PrimaryGrndReactance&quot;</span>);</div>
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>    m_electricalData.secondaryGrndResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;SecondaryGrndResistance&quot;</span>);</div>
-<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>    m_electricalData.secondaryGrndReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;SecondaryGrndReactance&quot;</span>);</div>
-<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span> </div>
-<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>    <span class="keywordflow">if</span> (!OpenSwitchingData(electricalProp)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>    <span class="keywordflow">if</span> (m_swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size() != 0) <a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span> </div>
-<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>}</div>
-<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span> </div>
-<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span><span class="keywordtype">void</span> Transformer::SetBestPositionAndRotation()</div>
-<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>{</div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>    wxPoint2DDouble p1 = m_pointList[0];</div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>    wxPoint2DDouble p2 = m_pointList[m_pointList.size() - 1];</div>
-<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    wxPoint2DDouble mid = (p1 + p2) / 2.0;</div>
-<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    <a class="code hl_function" href="class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5">StartMove</a>(m_position);</div>
-<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    <a class="code hl_function" href="class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8">Move</a>(mid);</div>
-<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>    <span class="keywordtype">double</span> bestAngle = wxRadToDeg(std::atan2(p2.m_y - p1.m_y, p2.m_x - p1.m_x));</div>
-<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>    <span class="keywordtype">bool</span> clockwise = bestAngle &gt; 0 ? true : <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>    <span class="keywordflow">while</span> (std::abs(m_angle) &lt; std::abs(bestAngle)) { <a class="code hl_function" href="class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de">Rotate</a>(clockwise); }</div>
-<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>}</div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span> </div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>    <span class="comment">// Get parents IDs</span></div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>    <span class="keyword">auto</span> parentIDList = cadPropNode-&gt;first_node(<span class="stringliteral">&quot;ParentIDList&quot;</span>);</div>
+<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>    <span class="keywordflow">if</span> (!parentIDList) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>    <span class="keyword">auto</span> parentNode = parentIDList-&gt;first_node(<span class="stringliteral">&quot;ParentID&quot;</span>);</div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>    <span class="keywordtype">long</span> parentID[2] = { -1, -1 };</div>
+<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>    <span class="keywordflow">while</span> (parentNode) {</div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>        <span class="keywordtype">long</span> index = 0;</div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>        wxString(parentNode-&gt;first_attribute(<span class="stringliteral">&quot;ID&quot;</span>)-&gt;value()).ToLong(&amp;index);</div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>        wxString(parentNode-&gt;value()).ToCLong(&amp;parentID[index]);</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>        parentNode = parentNode-&gt;next_sibling(<span class="stringliteral">&quot;ParentID&quot;</span>);</div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>    }</div>
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span> </div>
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>    std::vector&lt;wxPoint2DDouble&gt; nodePtsList;            <span class="comment">// List of node points</span></div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    nodePtsList.push_back(ptsList[0]);                   <span class="comment">// First point on the list</span></div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>    nodePtsList.push_back(ptsList[ptsList.size() - 1]);  <span class="comment">// Last point on the list</span></div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span> </div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>    <span class="comment">// List of dummy buses to set not connected nodes properly</span></div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>    std::vector&lt;Bus*&gt; dummyBusList;</div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>    <span class="comment">// Set parents (if have)</span></div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>        <span class="keywordflow">if</span> (parentID[i] == -1)  <span class="comment">// No parent connected</span></div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>        {</div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>            <a class="code hl_class" href="class_bus.html">Bus</a>* dummyBus = <span class="keyword">new</span> <a class="code hl_class" href="class_bus.html">Bus</a>(nodePtsList[i]);</div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>            dummyBusList.push_back(dummyBus);</div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>            <a class="code hl_function" href="class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6">AddParent</a>(dummyBus, nodePtsList[i]);</div>
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>        }</div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>        <span class="keywordflow">else</span> {  <span class="comment">// Parent connected (necessarily a bus, get from bus list)</span></div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>            <a class="code hl_function" href="class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6">AddParent</a>(parentList[parentID[i]], nodePtsList[i]);</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>        }</div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>    }</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span> </div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>    <a class="code hl_function" href="class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5">StartMove</a>(m_position);</div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>    <a class="code hl_function" href="class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8">Move</a>(wxPoint2DDouble(posX, posY));</div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span> </div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span>    <span class="comment">// Remove dummy buses</span></div>
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = dummyBusList.begin(), itEnd = dummyBusList.end(); it != itEnd; ++it) {</div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>        <a class="code hl_function" href="class_branch.html#aa0328a743090b2b7b3f33d57a867b6dc">RemoveParent</a>(*it);</div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>        <span class="keyword">delete</span>* it;</div>
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>    }</div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>    dummyBusList.clear();</div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span> </div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>    <span class="comment">// Set rotation properly.</span></div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>    <span class="keywordtype">int</span> numRot = angle / <a class="code hl_function" href="class_element.html#a3687fe2558f6a27ee068fa7244f855eb">GetRotationAngle</a>();</div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>    <span class="keywordtype">bool</span> clockwise = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>    <span class="keywordflow">if</span> (numRot &lt; 0) {</div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>        numRot = std::abs(numRot);</div>
+<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>        clockwise = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>    }</div>
+<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numRot; i++) <a class="code hl_function" href="class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de">Rotate</a>(clockwise);</div>
+<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span> </div>
+<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span> </div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    <a class="code hl_function" href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">SetOnline</a>(XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>));</div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    m_electricalData.primaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;PrimaryNominalVoltage&quot;</span>);</div>
+<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>    m_electricalData.primaryNominalVoltageUnit =</div>
+<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;PrimaryNominalVoltage&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>    m_electricalData.secondaryNominalVoltage = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;SecondaryNominalVoltage&quot;</span>);</div>
+<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>    m_electricalData.secondaryNominalVoltageUnit = <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(</div>
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>        XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;SecondaryNominalVoltage&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span>    m_electricalData.nominalPowerUnit =</div>
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>    m_electricalData.resistance = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;Resistance&quot;</span>);</div>
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>    m_electricalData.resistanceUnit =</div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;Resistance&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>    m_electricalData.indReactance = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;IndReactance&quot;</span>);</div>
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>    m_electricalData.indReactanceUnit =</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;IndReactance&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>    m_electricalData.connection = (TransformerConnection)XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;Connection&quot;</span>);</div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>    m_electricalData.turnsRatio = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;TurnsRatio&quot;</span>);</div>
+<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>    m_electricalData.phaseShift = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;PhaseShift&quot;</span>);</div>
+<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>    m_electricalData.useTransformerPower = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;UseTransfomerPower&quot;</span>);</div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span> </div>
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>    <span class="keyword">auto</span> fault = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Fault&quot;</span>);</div>
+<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>    m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
+<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>    m_electricalData.zeroIndReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroIndReactance&quot;</span>);</div>
+<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>    m_electricalData.primaryGrndResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PrimaryGrndResistance&quot;</span>);</div>
+<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span>    m_electricalData.primaryGrndReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PrimaryGrndReactance&quot;</span>);</div>
+<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span>    m_electricalData.secondaryGrndResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;SecondaryGrndResistance&quot;</span>);</div>
+<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>    m_electricalData.secondaryGrndReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;SecondaryGrndReactance&quot;</span>);</div>
+<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span> </div>
+<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span>    <span class="keywordflow">if</span> (!OpenSwitchingData(electricalProp)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span>    <span class="keywordflow">if</span> (m_swData.<a class="code hl_variable" href="struct_switching_data.html#a3323745bf0a3f6461fbc19bc76a189df">swTime</a>.size() != 0) <a class="code hl_function" href="class_power_element.html#a4dbd26d0a7987c30729efffa860debc4">SetDynamicEvent</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span> </div>
+<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span>}</div>
+<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span> </div>
+<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span><span class="keywordtype">void</span> Transformer::SetBestPositionAndRotation()</div>
+<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>{</div>
+<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>    wxPoint2DDouble p1 = m_pointList[0];</div>
+<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span>    wxPoint2DDouble p2 = m_pointList[m_pointList.size() - 1];</div>
+<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>    wxPoint2DDouble mid = (p1 + p2) / 2.0;</div>
+<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span>    <a class="code hl_function" href="class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5">StartMove</a>(m_position);</div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span>    <a class="code hl_function" href="class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8">Move</a>(mid);</div>
+<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>    <span class="keywordtype">double</span> bestAngle = wxRadToDeg(std::atan2(p2.m_y - p1.m_y, p2.m_x - p1.m_x));</div>
+<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>    <span class="keywordtype">bool</span> clockwise = bestAngle &gt; 0 ? true : <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>    <span class="keywordflow">while</span> (std::abs(m_angle) &lt; std::abs(bestAngle)) { <a class="code hl_function" href="class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de">Rotate</a>(clockwise); }</div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>}</div>
 <div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00075">Element.h:75</a></div></div>
 <div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
 <div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a7d32814b887d1d4d54c08dc1fab22c97">ElectricalUnit::UNIT_kV</a></div><div class="ttdeci">@ UNIT_kV</div></div>
@@ -1140,9 +1180,9 @@ $(document).ready(function(){initNavTree('_transformer_8cpp_source.html',''); in
 <div class="ttc" id="aclass_transformer_html_a67f1e2686932700fe8a83fdc232ea1e8"><div class="ttname"><a href="class_transformer.html#a67f1e2686932700fe8a83fdc232ea1e8">Transformer::Move</a></div><div class="ttdeci">virtual void Move(wxPoint2DDouble position)</div><div class="ttdoc">Move the element other position.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00366">Transformer.cpp:366</a></div></div>
 <div class="ttc" id="aclass_transformer_html_a7e3cd54e20d795ab9b0b8533ce03b728"><div class="ttname"><a href="class_transformer.html#a7e3cd54e20d795ab9b0b8533ce03b728">Transformer::SetNominalVoltage</a></div><div class="ttdeci">virtual void SetNominalVoltage(std::vector&lt; double &gt; nominalVoltage, std::vector&lt; ElectricalUnit &gt; nominalVoltageUnit)</div><div class="ttdoc">Set nominal voltage of the element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00470">Transformer.cpp:470</a></div></div>
 <div class="ttc" id="aclass_transformer_html_a9652232a076cca0fe3753477ec88f63a"><div class="ttname"><a href="class_transformer.html#a9652232a076cca0fe3753477ec88f63a">Transformer::MoveNode</a></div><div class="ttdeci">virtual void MoveNode(Element *parent, wxPoint2DDouble position)</div><div class="ttdoc">Move a node. StartMove(wxPoint2DDouble position) before start moving.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00382">Transformer.cpp:382</a></div></div>
+<div class="ttc" id="aclass_transformer_html_a99ab24e0d2b1383f831ccbf5a66211c5"><div class="ttname"><a href="class_transformer.html#a99ab24e0d2b1383f831ccbf5a66211c5">Transformer::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element, wxWindow *workspace=nullptr)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00460">Transformer.cpp:460</a></div></div>
 <div class="ttc" id="aclass_transformer_html_aa3bef2ffe2f57b1943b621d9052d1458"><div class="ttname"><a href="class_transformer.html#aa3bef2ffe2f57b1943b621d9052d1458">Transformer::DrawDC</a></div><div class="ttdeci">virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw the element using GDI+.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00186">Transformer.cpp:186</a></div></div>
 <div class="ttc" id="aclass_transformer_html_aaa6cc999eb77a94dafaec5debb4db3de"><div class="ttname"><a href="class_transformer.html#aaa6cc999eb77a94dafaec5debb4db3de">Transformer::Rotate</a></div><div class="ttdeci">virtual void Rotate(bool clockwise=true)</div><div class="ttdoc">Rotate the element.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00350">Transformer.cpp:350</a></div></div>
-<div class="ttc" id="aclass_transformer_html_acb55f182a7f6d7af0feb6a94cb62af4f"><div class="ttname"><a href="class_transformer.html#acb55f182a7f6d7af0feb6a94cb62af4f">Transformer::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00460">Transformer.cpp:460</a></div></div>
 <div class="ttc" id="aclass_transformer_html_adf0b20286f3de359346b8877d65c1996"><div class="ttname"><a href="class_transformer.html#adf0b20286f3de359346b8877d65c1996">Transformer::RotateNode</a></div><div class="ttdeci">virtual void RotateNode(Element *parent, bool clockwise)</div><div class="ttdoc">Rotate a node.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00503">Transformer.cpp:503</a></div></div>
 <div class="ttc" id="aclass_transformer_html_adfe51a2198cfc10e1095af9c034681bd"><div class="ttname"><a href="class_transformer.html#adfe51a2198cfc10e1095af9c034681bd">Transformer::GetContextMenu</a></div><div class="ttdeci">virtual bool GetContextMenu(wxMenu &amp;menu)</div><div class="ttdoc">Get the element contex menu.</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00425">Transformer.cpp:425</a></div></div>
 <div class="ttc" id="aclass_transformer_html_aea52a4562ec5b4a79bf82b8ede32ecc6"><div class="ttname"><a href="class_transformer.html#aea52a4562ec5b4a79bf82b8ede32ecc6">Transformer::AddParent</a></div><div class="ttdeci">virtual bool AddParent(Element *parent, wxPoint2DDouble position)</div><div class="ttdoc">Add a parent to the element. This method must be used on power elements that connect to a bus,...</div><div class="ttdef"><b>Definition</b> <a href="_transformer_8cpp_source.html#l00038">Transformer.cpp:38</a></div></div>

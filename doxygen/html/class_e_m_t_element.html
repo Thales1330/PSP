@@ -186,9 +186,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a85106b52581395a4f3e539330847d335" id="r_a85106b52581395a4f3e539330847d335"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_m_t_element.html#a85106b52581395a4f3e539330847d335">GetTipText</a> () const</td></tr>
 <tr class="memdesc:a85106b52581395a4f3e539330847d335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:a85106b52581395a4f3e539330847d335"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ae6cd43fcec24c746c69e1f41f670f8" id="r_a9ae6cd43fcec24c746c69e1f41f670f8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_m_t_element.html#a9ae6cd43fcec24c746c69e1f41f670f8">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:a9ae6cd43fcec24c746c69e1f41f670f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
-<tr class="separator:a9ae6cd43fcec24c746c69e1f41f670f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a637facd268ac46d9f1786389a434baac" id="r_a637facd268ac46d9f1786389a434baac"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_m_t_element.html#a637facd268ac46d9f1786389a434baac">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element, wxWindow *workspace=nullptr)</td></tr>
+<tr class="memdesc:a637facd268ac46d9f1786389a434baac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
+<tr class="separator:a637facd268ac46d9f1786389a434baac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b27bafcc8ee2e418a5d13848ed21bea" id="r_a9b27bafcc8ee2e418a5d13848ed21bea"><td class="memItemLeft" align="right" valign="top">virtual rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_m_t_element.html#a9b27bafcc8ee2e418a5d13848ed21bea">SaveElement</a> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementListNode)</td></tr>
 <tr class="separator:a9b27bafcc8ee2e418a5d13848ed21bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ad92fb68ed7869b18917714ac993c8d" id="r_a2ad92fb68ed7869b18917714ac993c8d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_m_t_element.html#a2ad92fb68ed7869b18917714ac993c8d">OpenElement</a> (rapidxml::xml_node&lt;&gt; *elementNode, std::vector&lt; <a class="el" href="class_element.html">Element</a> * &gt; parentList)</td></tr>
@@ -2243,8 +2243,8 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a9ae6cd43fcec24c746c69e1f41f670f8" name="a9ae6cd43fcec24c746c69e1f41f670f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ae6cd43fcec24c746c69e1f41f670f8">&#9670;&#160;</a></span>ShowForm()</h2>
+<a id="a637facd268ac46d9f1786389a434baac" name="a637facd268ac46d9f1786389a434baac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a637facd268ac46d9f1786389a434baac">&#9670;&#160;</a></span>ShowForm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2262,7 +2262,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_element.html">Element</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxWindow *&#160;</td>
+          <td class="paramname"><em>workspace</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2287,7 +2293,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_e_m_t_element_8cpp_source.html#l00274">274</a> of file <a class="el" href="_e_m_t_element_8cpp_source.html">EMTElement.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  275</span>{</div>

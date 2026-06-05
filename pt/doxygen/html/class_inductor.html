@@ -185,9 +185,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac16663899a076f0e84722b27193fe530" id="r_ac16663899a076f0e84722b27193fe530"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inductor.html#ac16663899a076f0e84722b27193fe530">GetTipText</a> () const</td></tr>
 <tr class="memdesc:ac16663899a076f0e84722b27193fe530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:ac16663899a076f0e84722b27193fe530"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfaf28fc70a71f3f85940eef7d1551c9" id="r_abfaf28fc70a71f3f85940eef7d1551c9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inductor.html#abfaf28fc70a71f3f85940eef7d1551c9">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:abfaf28fc70a71f3f85940eef7d1551c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
-<tr class="separator:abfaf28fc70a71f3f85940eef7d1551c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cb9979b9fcd8aff31ae4118e28c4132" id="r_a2cb9979b9fcd8aff31ae4118e28c4132"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element, wxWindow *workspace=nullptr)</td></tr>
+<tr class="memdesc:a2cb9979b9fcd8aff31ae4118e28c4132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
+<tr class="separator:a2cb9979b9fcd8aff31ae4118e28c4132"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33a975de522a26e2b11288a375526a4c" id="r_a33a975de522a26e2b11288a375526a4c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_inductor_electrical_data.html">InductorElectricalData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inductor.html#a33a975de522a26e2b11288a375526a4c">GetElectricalData</a> ()</td></tr>
 <tr class="separator:a33a975de522a26e2b11288a375526a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdce746cc18ce3f84f2f270ca6989ba1" id="r_afdce746cc18ce3f84f2f270ca6989ba1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_inductor_electrical_data.html">InductorElectricalData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inductor.html#afdce746cc18ce3f84f2f270ca6989ba1">GetPUElectricalData</a> (double systemPowerBase)</td></tr>
@@ -1581,8 +1581,8 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="abfaf28fc70a71f3f85940eef7d1551c9" name="abfaf28fc70a71f3f85940eef7d1551c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfaf28fc70a71f3f85940eef7d1551c9">&#9670;&#160;</a></span>ShowForm()</h2>
+<a id="a2cb9979b9fcd8aff31ae4118e28c4132" name="a2cb9979b9fcd8aff31ae4118e28c4132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cb9979b9fcd8aff31ae4118e28c4132">&#9670;&#160;</a></span>ShowForm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1600,7 +1600,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_element.html">Element</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxWindow *&#160;</td>
+          <td class="paramname"><em>workspace</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1625,7 +1631,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_inductor_8cpp_source.html#l00292">292</a> of file <a class="el" href="_inductor_8cpp_source.html">Inductor.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  293</span>{</div>

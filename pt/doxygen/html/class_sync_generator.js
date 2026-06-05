@@ -5,5 +5,5 @@ var class_sync_generator =
     [ "GetPlotData", "class_sync_generator.html#a50747aadfcfe1417b3bdd691f4bb9cf2", null ],
     [ "GetTipText", "class_sync_generator.html#a9454438d059269c194e1aa648e122f7e", null ],
     [ "SetNominalVoltage", "class_sync_generator.html#aaa4c5978dc6d344747d74e36fb3e71d8", null ],
-    [ "ShowForm", "class_sync_generator.html#a4a9dd07d901f26cc8304399fe241afec", null ]
+    [ "ShowForm", "class_sync_generator.html#ae28fc245b01357ffeb24e42c6b048bb2", null ]
 ];

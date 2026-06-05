@@ -65,7 +65,7 @@ var class_element =
     [ "SetPosition", "class_element.html#a920fe7ba1563615857618f01e64b3284", null ],
     [ "SetSelected", "class_element.html#a5279e5a513391d399d576bcb83df736b", null ],
     [ "SetWidth", "class_element.html#a5da121470a0c26c6b5c57a7c4eeac48b", null ],
-    [ "ShowForm", "class_element.html#ae1652eded3ccbd241a783691117418b2", null ],
+    [ "ShowForm", "class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4", null ],
     [ "ShowPickbox", "class_element.html#ab8bf35b4a205fa58772402cea7fad89c", null ],
     [ "StartMove", "class_element.html#a846a2a51780a99363b4d4b1812ca16b4", null ],
     [ "StringFromDouble", "class_element.html#ad4eaa67d8313f6caa3a607cc500c4b44", null ],

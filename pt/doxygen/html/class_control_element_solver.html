@@ -205,6 +205,8 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad3af5a426df58bb1c8ae975ec4f35207" id="r_ad3af5a426df58bb1c8ae975ec4f35207"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_control_element_container.html">ControlElementContainer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_solver.html#ad3af5a426df58bb1c8ae975ec4f35207">m_ctrlContainer</a> = nullptr</td></tr>
 <tr class="separator:ad3af5a426df58bb1c8ae975ec4f35207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8b9c2bf6ae2e7e2fdf6ca98cfc893d" id="r_a7d8b9c2bf6ae2e7e2fdf6ca98cfc893d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_solver.html#a7d8b9c2bf6ae2e7e2fdf6ca98cfc893d">m_ownsCtrlContainer</a> = false</td></tr>
+<tr class="separator:a7d8b9c2bf6ae2e7e2fdf6ca98cfc893d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ad46af105b0800f18a31c0e7fd0572c" id="r_a7ad46af105b0800f18a31c0e7fd0572c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_solver.html#a7ad46af105b0800f18a31c0e7fd0572c">m_timeStep</a> = 1e-3</td></tr>
 <tr class="separator:a7ad46af105b0800f18a31c0e7fd0572c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e4987bdffb2187479f68b167719469d" id="r_a8e4987bdffb2187479f68b167719469d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_element_solver.html#a8e4987bdffb2187479f68b167719469d">m_integrationError</a> = 1e-5</td></tr>
@@ -318,9 +320,10 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00034">34</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   35</span>{</div>
 <div class="line"><span class="lineno">   36</span>    m_ctrlContainer = <span class="keyword">new</span> <a class="code hl_class" href="class_control_element_container.html">ControlElementContainer</a>();</div>
-<div class="line"><span class="lineno">   37</span>    m_ctrlContainer-&gt;FillContainer(controlEditor);</div>
-<div class="line"><span class="lineno">   38</span>    Initialize(controlEditor, timeStep, integrationError);</div>
-<div class="line"><span class="lineno">   39</span>}</div>
+<div class="line"><span class="lineno">   37</span>    m_ownsCtrlContainer = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   38</span>    m_ctrlContainer-&gt;FillContainer(controlEditor);</div>
+<div class="line"><span class="lineno">   39</span>    Initialize(controlEditor, timeStep, integrationError);</div>
+<div class="line"><span class="lineno">   40</span>}</div>
 <div class="ttc" id="aclass_control_element_container_html"><div class="ttname"><a href="class_control_element_container.html">ControlElementContainer</a></div><div class="ttdoc">Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li...</div><div class="ttdef"><b>Definition</b> <a href="_control_element_container_8h_source.html#l00047">ControlElementContainer.h:48</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -363,11 +366,12 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00041">41</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>{</div>
-<div class="line"><span class="lineno">   46</span>    m_ctrlContainer = ctrlContainer;</div>
-<div class="line"><span class="lineno">   47</span>    Initialize(parent, timeStep, integrationError);</div>
-<div class="line"><span class="lineno">   48</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00042">42</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>{</div>
+<div class="line"><span class="lineno">   47</span>    m_ctrlContainer = ctrlContainer;</div>
+<div class="line"><span class="lineno">   48</span>    m_ownsCtrlContainer = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   49</span>    Initialize(parent, timeStep, integrationError);</div>
+<div class="line"><span class="lineno">   50</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -394,11 +398,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00050">50</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>{</div>
-<div class="line"><span class="lineno">   52</span>    <span class="keywordflow">if</span> (m_inputToSolve) <span class="keyword">delete</span>[] m_inputToSolve;</div>
-<div class="line"><span class="lineno">   53</span>    <span class="comment">//if (m_ctrlContainer) delete m_ctrlContainer;</span></div>
-<div class="line"><span class="lineno">   54</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00052">52</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>{</div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">if</span> (m_inputToSolve) <span class="keyword">delete</span>[] m_inputToSolve;</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> (m_ownsCtrlContainer &amp;&amp; m_ctrlContainer) <span class="keyword">delete</span> m_ctrlContainer;</div>
+<div class="line"><span class="lineno">   56</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -427,16 +431,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00319">319</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  320</span>{</div>
-<div class="line"><span class="lineno">  321</span>    <span class="keyword">auto</span> childList = parent-&gt;GetLineChildList();</div>
-<div class="line"><span class="lineno">  322</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = childList.begin(), itEnd = childList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  323</span>        <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = *it;</div>
-<div class="line"><span class="lineno">  324</span>        child-&gt;SetValue(parent-&gt;GetValue());</div>
-<div class="line"><span class="lineno">  325</span>        child-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  326</span>        FillAllConnectedChildren(child);</div>
-<div class="line"><span class="lineno">  327</span>    }</div>
-<div class="line"><span class="lineno">  328</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00321">321</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  322</span>{</div>
+<div class="line"><span class="lineno">  323</span>    <span class="keyword">auto</span> childList = parent-&gt;GetLineChildList();</div>
+<div class="line"><span class="lineno">  324</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = childList.begin(), itEnd = childList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  325</span>        <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = *it;</div>
+<div class="line"><span class="lineno">  326</span>        child-&gt;SetValue(parent-&gt;GetValue());</div>
+<div class="line"><span class="lineno">  327</span>        child-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  328</span>        FillAllConnectedChildren(child);</div>
+<div class="line"><span class="lineno">  329</span>    }</div>
+<div class="line"><span class="lineno">  330</span>}</div>
 <div class="ttc" id="aclass_connection_line_html"><div class="ttname"><a href="class_connection_line.html">ConnectionLine</a></div><div class="ttdoc">Connection between two control elements or other connection line and an element.</div><div class="ttdef"><b>Definition</b> <a href="_connection_line_8h_source.html#l00030">ConnectionLine.h:31</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -677,64 +681,64 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00056">56</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   57</span>{</div>
-<div class="line"><span class="lineno">   58</span>    <span class="comment">// Init the input array size</span></div>
-<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">if</span> (m_inputToSolve) <span class="keyword">delete</span>[] m_inputToSolve;</div>
-<div class="line"><span class="lineno">   60</span>    m_inputToSolve = <span class="keyword">new</span> <span class="keywordtype">double</span>[3];</div>
-<div class="line"><span class="lineno">   61</span>    <span class="comment">// Check if the sistem have one input and one output</span></div>
-<div class="line"><span class="lineno">   62</span>    <span class="keywordtype">bool</span> fail = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   63</span>    <span class="keyword">auto</span> ioList = m_ctrlContainer-&gt;GetIOControlList();</div>
-<div class="line"><span class="lineno">   64</span>    <span class="keywordflow">if</span> (ioList.size() &lt; 2) {</div>
-<div class="line"><span class="lineno">   65</span>        fail = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   66</span>        m_failMessage = _(<span class="stringliteral">&quot;The control system must have at least one input and one output.&quot;</span>);</div>
-<div class="line"><span class="lineno">   67</span>    }</div>
-<div class="line"><span class="lineno">   68</span>    <span class="keywordtype">bool</span> haveInput, haveOutput;</div>
-<div class="line"><span class="lineno">   69</span>    haveInput = haveOutput = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">   71</span>        <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* io = *it;</div>
-<div class="line"><span class="lineno">   72</span>        <span class="keywordflow">if</span> (io-&gt;GetType() == Node::NodeType::NODE_OUT &amp;&amp; !haveInput) {</div>
-<div class="line"><span class="lineno">   73</span>            <a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a> = io;</div>
-<div class="line"><span class="lineno">   74</span>            haveInput = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   75</span>        }</div>
-<div class="line"><span class="lineno">   76</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (io-&gt;GetType() == Node::NodeType::NODE_IN) {</div>
-<div class="line"><span class="lineno">   77</span>            m_outputControl = io;</div>
-<div class="line"><span class="lineno">   78</span>            haveOutput = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   79</span>        }</div>
-<div class="line"><span class="lineno">   80</span>    }</div>
-<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">if</span> (!fail &amp;&amp; !haveInput) {</div>
-<div class="line"><span class="lineno">   82</span>        fail = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   83</span>        m_failMessage = _(<span class="stringliteral">&quot;There is no input in the control system.&quot;</span>);</div>
-<div class="line"><span class="lineno">   84</span>    }</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> (!fail &amp;&amp; !haveOutput) {</div>
-<div class="line"><span class="lineno">   86</span>        fail = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   87</span>        m_failMessage = _(<span class="stringliteral">&quot;There is no output in the control system.&quot;</span>);</div>
-<div class="line"><span class="lineno">   88</span>    }</div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> (!fail) {</div>
-<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a>-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 0) {</div>
-<div class="line"><span class="lineno">   91</span>            fail = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   92</span>            m_failMessage = _(<span class="stringliteral">&quot;Input not connected.&quot;</span>);</div>
-<div class="line"><span class="lineno">   93</span>        }</div>
-<div class="line"><span class="lineno">   94</span>    }</div>
-<div class="line"><span class="lineno">   95</span> </div>
-<div class="line"><span class="lineno">   96</span>    m_timeStep = timeStep;</div>
-<div class="line"><span class="lineno">   97</span>    m_integrationError = integrationError;</div>
-<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">if</span> (!fail) {</div>
-<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">if</span> (!InitializeValues(<span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno">  100</span>            fail = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  101</span>            m_failMessage = _(<span class="stringliteral">&quot;It was not possible to initialize the control system.&quot;</span>);</div>
-<div class="line"><span class="lineno">  102</span>        }</div>
-<div class="line"><span class="lineno">  103</span>    }</div>
-<div class="line"><span class="lineno">  104</span> </div>
-<div class="line"><span class="lineno">  105</span>    <span class="keywordflow">if</span> (fail) {</div>
-<div class="line"><span class="lineno">  106</span>        wxMessageDialog msgDialog(parent, m_failMessage, _(<span class="stringliteral">&quot;Error&quot;</span>), wxOK | wxCENTRE | wxICON_ERROR);</div>
-<div class="line"><span class="lineno">  107</span>        msgDialog.ShowModal();</div>
-<div class="line"><span class="lineno">  108</span>    }</div>
-<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  110</span>        m_isOK = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  111</span>    }</div>
-<div class="line"><span class="lineno">  112</span>}</div>
-<div class="ttc" id="aclass_control_element_solver_html_a2048b5988e5edc2dfd73f349bfceb831"><div class="ttname"><a href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">ControlElementSolver::m_inputControl</a></div><div class="ttdeci">IOControl * m_inputControl</div><div class="ttdef"><b>Definition</b> <a href="_control_element_solver_8h_source.html#l00088">ControlElementSolver.h:88</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00058">58</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   59</span>{</div>
+<div class="line"><span class="lineno">   60</span>    <span class="comment">// Init the input array size</span></div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">if</span> (m_inputToSolve) <span class="keyword">delete</span>[] m_inputToSolve;</div>
+<div class="line"><span class="lineno">   62</span>    m_inputToSolve = <span class="keyword">new</span> <span class="keywordtype">double</span>[3];</div>
+<div class="line"><span class="lineno">   63</span>    <span class="comment">// Check if the sistem have one input and one output</span></div>
+<div class="line"><span class="lineno">   64</span>    <span class="keywordtype">bool</span> fail = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keyword">auto</span> ioList = m_ctrlContainer-&gt;GetIOControlList();</div>
+<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">if</span> (ioList.size() &lt; 2) {</div>
+<div class="line"><span class="lineno">   67</span>        fail = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   68</span>        m_failMessage = _(<span class="stringliteral">&quot;The control system must have at least one input and one output.&quot;</span>);</div>
+<div class="line"><span class="lineno">   69</span>    }</div>
+<div class="line"><span class="lineno">   70</span>    <span class="keywordtype">bool</span> haveInput, haveOutput;</div>
+<div class="line"><span class="lineno">   71</span>    haveInput = haveOutput = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   72</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">   73</span>        <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* io = *it;</div>
+<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">if</span> (io-&gt;GetType() == Node::NodeType::NODE_OUT &amp;&amp; !haveInput) {</div>
+<div class="line"><span class="lineno">   75</span>            <a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a> = io;</div>
+<div class="line"><span class="lineno">   76</span>            haveInput = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   77</span>        }</div>
+<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (io-&gt;GetType() == Node::NodeType::NODE_IN) {</div>
+<div class="line"><span class="lineno">   79</span>            m_outputControl = io;</div>
+<div class="line"><span class="lineno">   80</span>            haveOutput = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   81</span>        }</div>
+<div class="line"><span class="lineno">   82</span>    }</div>
+<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">if</span> (!fail &amp;&amp; !haveInput) {</div>
+<div class="line"><span class="lineno">   84</span>        fail = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   85</span>        m_failMessage = _(<span class="stringliteral">&quot;There is no input in the control system.&quot;</span>);</div>
+<div class="line"><span class="lineno">   86</span>    }</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">if</span> (!fail &amp;&amp; !haveOutput) {</div>
+<div class="line"><span class="lineno">   88</span>        fail = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   89</span>        m_failMessage = _(<span class="stringliteral">&quot;There is no output in the control system.&quot;</span>);</div>
+<div class="line"><span class="lineno">   90</span>    }</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">if</span> (!fail) {</div>
+<div class="line"><span class="lineno">   92</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a>-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 0) {</div>
+<div class="line"><span class="lineno">   93</span>            fail = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   94</span>            m_failMessage = _(<span class="stringliteral">&quot;Input not connected.&quot;</span>);</div>
+<div class="line"><span class="lineno">   95</span>        }</div>
+<div class="line"><span class="lineno">   96</span>    }</div>
+<div class="line"><span class="lineno">   97</span> </div>
+<div class="line"><span class="lineno">   98</span>    m_timeStep = timeStep;</div>
+<div class="line"><span class="lineno">   99</span>    m_integrationError = integrationError;</div>
+<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">if</span> (!fail) {</div>
+<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">if</span> (!InitializeValues(<span class="keyword">true</span>)) {</div>
+<div class="line"><span class="lineno">  102</span>            fail = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  103</span>            m_failMessage = _(<span class="stringliteral">&quot;It was not possible to initialize the control system.&quot;</span>);</div>
+<div class="line"><span class="lineno">  104</span>        }</div>
+<div class="line"><span class="lineno">  105</span>    }</div>
+<div class="line"><span class="lineno">  106</span> </div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">if</span> (fail) {</div>
+<div class="line"><span class="lineno">  108</span>        wxMessageDialog msgDialog(parent, m_failMessage, _(<span class="stringliteral">&quot;Error&quot;</span>), wxOK | wxCENTRE | wxICON_ERROR);</div>
+<div class="line"><span class="lineno">  109</span>        msgDialog.ShowModal();</div>
+<div class="line"><span class="lineno">  110</span>    }</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  112</span>        m_isOK = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  113</span>    }</div>
+<div class="line"><span class="lineno">  114</span>}</div>
+<div class="ttc" id="aclass_control_element_solver_html_a2048b5988e5edc2dfd73f349bfceb831"><div class="ttname"><a href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">ControlElementSolver::m_inputControl</a></div><div class="ttdeci">IOControl * m_inputControl</div><div class="ttdef"><b>Definition</b> <a href="_control_element_solver_8h_source.html#l00089">ControlElementSolver.h:89</a></div></div>
 <div class="ttc" id="aclass_element_html_a5bf79b05af0dd1bbb62b352f293e1421"><div class="ttname"><a href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">Element::GetChildList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetChildList() const</div><div class="ttdoc">Get the Child list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00564">Element.h:564</a></div></div>
 <div class="ttc" id="aclass_i_o_control_html"><div class="ttname"><a href="class_i_o_control.html">IOControl</a></div><div class="ttdoc">Provides the communication with the power element.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8h_source.html#l00042">IOControl.h:43</a></div></div>
 </div><!-- fragment -->
@@ -764,59 +768,59 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00114">114</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  115</span>{</div>
-<div class="line"><span class="lineno">  116</span>    <span class="comment">// Reset Elements values</span></div>
-<div class="line"><span class="lineno">  117</span>    <span class="keyword">auto</span> elementList = m_ctrlContainer-&gt;GetControlElementsList();</div>
-<div class="line"><span class="lineno">  118</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  119</span>        <span class="keywordflow">if</span> (!(*it)-&gt;Initialize()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  120</span>    }</div>
-<div class="line"><span class="lineno">  121</span>    <span class="keyword">auto</span> connectionLineList = m_ctrlContainer-&gt;GetConnectionLineList();</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  123</span>        <span class="keywordflow">if</span> (!(*it)-&gt;Initialize()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  124</span>    }</div>
-<div class="line"><span class="lineno">  125</span>    <span class="keyword">auto</span> tfList = m_ctrlContainer-&gt;GetTFList();</div>
-<div class="line"><span class="lineno">  126</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  127</span>        (*it)-&gt;CalculateSpaceState(100, m_integrationError);</div>
-<div class="line"><span class="lineno">  128</span>    }</div>
-<div class="line"><span class="lineno">  129</span> </div>
-<div class="line"><span class="lineno">  130</span>    <span class="keywordflow">if</span> (!startAllZero) {</div>
-<div class="line"><span class="lineno">  131</span>        <span class="keywordtype">double</span> origTimeStep = m_timeStep;</div>
-<div class="line"><span class="lineno">  132</span>        <span class="keywordtype">double</span> minStep = m_timeStep / 10;</div>
-<div class="line"><span class="lineno">  133</span>        <span class="keywordtype">double</span> maxStep = m_timeStep * 10;</div>
-<div class="line"><span class="lineno">  134</span>        <span class="comment">// Calculate the steady-state results according to the input.</span></div>
-<div class="line"><span class="lineno">  135</span>        <span class="keywordtype">double</span> minError = 1e-7 * m_timeStep;</div>
-<div class="line"><span class="lineno">  136</span>        <span class="keywordtype">int</span> maxIteration = 100 / m_timeStep;</div>
-<div class="line"><span class="lineno">  137</span> </div>
-<div class="line"><span class="lineno">  138</span>        <span class="keywordtype">double</span> prevSol = 0.0;</div>
-<div class="line"><span class="lineno">  139</span>        <span class="keywordtype">double</span> currentSol = 1.0;</div>
-<div class="line"><span class="lineno">  140</span>        <span class="keywordtype">double</span> error = 1.0;</div>
-<div class="line"><span class="lineno">  141</span>        <span class="keywordtype">double</span> prevError = 1.0;</div>
-<div class="line"><span class="lineno">  142</span>        <span class="keywordtype">int</span> numIt = 0;</div>
-<div class="line"><span class="lineno">  143</span>        <span class="keywordflow">while</span> (error &gt; minError) {</div>
-<div class="line"><span class="lineno">  144</span>            prevSol = currentSol;</div>
-<div class="line"><span class="lineno">  145</span>            prevError = error;</div>
-<div class="line"><span class="lineno">  146</span>            SolveNextStep();</div>
-<div class="line"><span class="lineno">  147</span>            currentSol = GetLastSolution();</div>
-<div class="line"><span class="lineno">  148</span>            numIt++;</div>
-<div class="line"><span class="lineno">  149</span>            error = std::abs(prevSol - currentSol);</div>
-<div class="line"><span class="lineno">  150</span>            <span class="keywordflow">if</span> (std::abs(error - prevError) &lt; 1e-1) {</div>
-<div class="line"><span class="lineno">  151</span>                <span class="keywordflow">if</span> (m_timeStep &lt; maxStep) { m_timeStep *= 1.5; }</div>
-<div class="line"><span class="lineno">  152</span>            }</div>
-<div class="line"><span class="lineno">  153</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::abs(error - prevError) &gt; 10) {</div>
-<div class="line"><span class="lineno">  154</span>                <span class="keywordflow">if</span> (m_timeStep &gt; minStep) { m_timeStep /= 1.5; }</div>
-<div class="line"><span class="lineno">  155</span>            }</div>
-<div class="line"><span class="lineno">  156</span>            <span class="keywordflow">if</span> (numIt &gt;= maxIteration) {</div>
-<div class="line"><span class="lineno">  157</span>                m_failMessage = _(<span class="stringliteral">&quot;It was not possible to initialize the control system.&quot;</span>);</div>
-<div class="line"><span class="lineno">  158</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  159</span>            }</div>
-<div class="line"><span class="lineno">  160</span>        }</div>
-<div class="line"><span class="lineno">  161</span>        m_timeStep = origTimeStep;</div>
-<div class="line"><span class="lineno">  162</span>        m_solutions.clear();</div>
-<div class="line"><span class="lineno">  163</span>    }</div>
-<div class="line"><span class="lineno">  164</span> </div>
-<div class="line"><span class="lineno">  165</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  166</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00116">116</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>{</div>
+<div class="line"><span class="lineno">  118</span>    <span class="comment">// Reset Elements values</span></div>
+<div class="line"><span class="lineno">  119</span>    <span class="keyword">auto</span> elementList = m_ctrlContainer-&gt;GetControlElementsList();</div>
+<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = elementList.begin(), itEnd = elementList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">if</span> (!(*it)-&gt;Initialize()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  122</span>    }</div>
+<div class="line"><span class="lineno">  123</span>    <span class="keyword">auto</span> connectionLineList = m_ctrlContainer-&gt;GetConnectionLineList();</div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = connectionLineList.begin(), itEnd = connectionLineList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">if</span> (!(*it)-&gt;Initialize()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  126</span>    }</div>
+<div class="line"><span class="lineno">  127</span>    <span class="keyword">auto</span> tfList = m_ctrlContainer-&gt;GetTFList();</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = tfList.begin(), itEnd = tfList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  129</span>        (*it)-&gt;CalculateSpaceState(100, m_integrationError);</div>
+<div class="line"><span class="lineno">  130</span>    }</div>
+<div class="line"><span class="lineno">  131</span> </div>
+<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">if</span> (!startAllZero) {</div>
+<div class="line"><span class="lineno">  133</span>        <span class="keywordtype">double</span> origTimeStep = m_timeStep;</div>
+<div class="line"><span class="lineno">  134</span>        <span class="keywordtype">double</span> minStep = m_timeStep / 10;</div>
+<div class="line"><span class="lineno">  135</span>        <span class="keywordtype">double</span> maxStep = m_timeStep * 10;</div>
+<div class="line"><span class="lineno">  136</span>        <span class="comment">// Calculate the steady-state results according to the input.</span></div>
+<div class="line"><span class="lineno">  137</span>        <span class="keywordtype">double</span> minError = 1e-7 * m_timeStep;</div>
+<div class="line"><span class="lineno">  138</span>        <span class="keywordtype">int</span> maxIteration = 100 / m_timeStep;</div>
+<div class="line"><span class="lineno">  139</span> </div>
+<div class="line"><span class="lineno">  140</span>        <span class="keywordtype">double</span> prevSol = 0.0;</div>
+<div class="line"><span class="lineno">  141</span>        <span class="keywordtype">double</span> currentSol = 1.0;</div>
+<div class="line"><span class="lineno">  142</span>        <span class="keywordtype">double</span> error = 1.0;</div>
+<div class="line"><span class="lineno">  143</span>        <span class="keywordtype">double</span> prevError = 1.0;</div>
+<div class="line"><span class="lineno">  144</span>        <span class="keywordtype">int</span> numIt = 0;</div>
+<div class="line"><span class="lineno">  145</span>        <span class="keywordflow">while</span> (error &gt; minError) {</div>
+<div class="line"><span class="lineno">  146</span>            prevSol = currentSol;</div>
+<div class="line"><span class="lineno">  147</span>            prevError = error;</div>
+<div class="line"><span class="lineno">  148</span>            SolveNextStep();</div>
+<div class="line"><span class="lineno">  149</span>            currentSol = GetLastSolution();</div>
+<div class="line"><span class="lineno">  150</span>            numIt++;</div>
+<div class="line"><span class="lineno">  151</span>            error = std::abs(prevSol - currentSol);</div>
+<div class="line"><span class="lineno">  152</span>            <span class="keywordflow">if</span> (std::abs(error - prevError) &lt; 1e-1) {</div>
+<div class="line"><span class="lineno">  153</span>                <span class="keywordflow">if</span> (m_timeStep &lt; maxStep) { m_timeStep *= 1.5; }</div>
+<div class="line"><span class="lineno">  154</span>            }</div>
+<div class="line"><span class="lineno">  155</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::abs(error - prevError) &gt; 10) {</div>
+<div class="line"><span class="lineno">  156</span>                <span class="keywordflow">if</span> (m_timeStep &gt; minStep) { m_timeStep /= 1.5; }</div>
+<div class="line"><span class="lineno">  157</span>            }</div>
+<div class="line"><span class="lineno">  158</span>            <span class="keywordflow">if</span> (numIt &gt;= maxIteration) {</div>
+<div class="line"><span class="lineno">  159</span>                m_failMessage = _(<span class="stringliteral">&quot;It was not possible to initialize the control system.&quot;</span>);</div>
+<div class="line"><span class="lineno">  160</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  161</span>            }</div>
+<div class="line"><span class="lineno">  162</span>        }</div>
+<div class="line"><span class="lineno">  163</span>        m_timeStep = origTimeStep;</div>
+<div class="line"><span class="lineno">  164</span>        m_solutions.clear();</div>
+<div class="line"><span class="lineno">  165</span>    }</div>
+<div class="line"><span class="lineno">  166</span> </div>
+<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  168</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1191,68 +1195,68 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00330">330</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  331</span>{</div>
-<div class="line"><span class="lineno">  332</span>    <span class="keyword">auto</span> parentList = currentLine-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>();</div>
-<div class="line"><span class="lineno">  333</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  334</span>        <a class="code hl_class" href="class_control_element.html">ControlElement</a>* element = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_control_element.html">ControlElement</a>*<span class="keyword">&gt;</span>(*it);</div>
-<div class="line"><span class="lineno">  335</span>        <span class="comment">// Solve the unsolved parent.</span></div>
-<div class="line"><span class="lineno">  336</span>        <span class="keywordflow">if</span> (!element-&gt;IsSolved()) {</div>
-<div class="line"><span class="lineno">  337</span>            m_inputToSolve[0] = currentLine-&gt;GetValue();</div>
-<div class="line"><span class="lineno">  338</span>            <span class="keywordflow">if</span> (!std::isfinite(m_inputToSolve[0])) {</div>
-<div class="line"><span class="lineno">  339</span>                m_inputToSolve[0] = 0.0;</div>
-<div class="line"><span class="lineno">  340</span>                m_isOK = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  341</span>                m_failMessage = _(<span class="stringliteral">&quot;The control system solution is diverging. Try to reduce the time step.&quot;</span>);</div>
-<div class="line"><span class="lineno">  342</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  343</span>            }</div>
-<div class="line"><span class="lineno">  344</span>            m_inputToSolve[1] = m_currentTime;</div>
-<div class="line"><span class="lineno">  345</span>            m_inputToSolve[2] = m_switchStatus;</div>
-<div class="line"><span class="lineno">  346</span>            <span class="keywordflow">if</span> (!element-&gt;Solve(m_inputToSolve, m_timeStep)) {</div>
-<div class="line"><span class="lineno">  347</span>                m_isOK = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  348</span>                <span class="keywordflow">if</span>(<span class="keyword">auto</span> tf = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_transfer_function.html">TransferFunction</a>*<span class="keyword">&gt;</span>(element)) {</div>
-<div class="line"><span class="lineno">  349</span>                    wxString numerator, denominator;</div>
-<div class="line"><span class="lineno">  350</span>                    tf-&gt;GetTFString(numerator, denominator);</div>
-<div class="line"><span class="lineno">  351</span>                    m_failMessage = wxString::Format(_(<span class="stringliteral">&quot;Unable to compute the transfer function: (%s)/(%s)&quot;</span>), numerator, denominator);</div>
-<div class="line"><span class="lineno">  352</span>                }</div>
-<div class="line"><span class="lineno">  353</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  354</span>            }</div>
-<div class="line"><span class="lineno">  355</span>            element-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  356</span> </div>
-<div class="line"><span class="lineno">  357</span>            <span class="comment">// Get the output node (must have one or will result nullptr).</span></div>
-<div class="line"><span class="lineno">  358</span>            <a class="code hl_class" href="class_node.html">Node</a>* outNode = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  359</span>            <span class="keyword">auto</span> nodeList = element-&gt;GetNodeList();</div>
-<div class="line"><span class="lineno">  360</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {</div>
-<div class="line"><span class="lineno">  361</span>                <a class="code hl_class" href="class_node.html">Node</a>* node = *itN;</div>
-<div class="line"><span class="lineno">  362</span>                <span class="keywordflow">if</span> (node-&gt;GetNodeType() == Node::NodeType::NODE_OUT) outNode = node;</div>
-<div class="line"><span class="lineno">  363</span>            }</div>
-<div class="line"><span class="lineno">  364</span>            <span class="keywordflow">if</span> (!outNode) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  365</span> </div>
-<div class="line"><span class="lineno">  366</span>            <span class="comment">// Set connection line value associated with the output node.</span></div>
-<div class="line"><span class="lineno">  367</span>            <span class="keyword">auto</span> childList = element-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>();</div>
-<div class="line"><span class="lineno">  368</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itC = childList.begin(), itCEnd = childList.end(); itC != itCEnd; ++itC) {</div>
-<div class="line"><span class="lineno">  369</span>                <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* cLine = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(*itC);</div>
-<div class="line"><span class="lineno">  370</span>                <span class="keywordflow">if</span> (!cLine-&gt;IsSolved()) {  <span class="comment">// Only check unsolved lines</span></div>
-<div class="line"><span class="lineno">  371</span>                    <span class="comment">// Check if the connection line have the output node on the list</span></div>
-<div class="line"><span class="lineno">  372</span>                    <span class="keyword">auto</span> lineNodeList = cLine-&gt;GetNodeList();</div>
-<div class="line"><span class="lineno">  373</span>                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> itCN = lineNodeList.begin(), itCNEnd = lineNodeList.end(); itCN != itCNEnd; ++itCN) {</div>
-<div class="line"><span class="lineno">  374</span>                        <a class="code hl_class" href="class_node.html">Node</a>* childNode = *itCN;</div>
-<div class="line"><span class="lineno">  375</span>                        <span class="keywordflow">if</span> (childNode == outNode) {</div>
-<div class="line"><span class="lineno">  376</span>                            <span class="comment">// Check if the line connect two elements, otherwise return nullptr</span></div>
-<div class="line"><span class="lineno">  377</span>                            <span class="keywordflow">if</span> (cLine-&gt;GetType() != ConnectionLine::ConnectionLineType::ELEMENT_ELEMENT) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  378</span> </div>
-<div class="line"><span class="lineno">  379</span>                            <span class="comment">// Set the connection line value and return it.</span></div>
-<div class="line"><span class="lineno">  380</span>                            cLine-&gt;SetValue(element-&gt;GetOutput());</div>
-<div class="line"><span class="lineno">  381</span>                            cLine-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  382</span>                            FillAllConnectedChildren(cLine);</div>
-<div class="line"><span class="lineno">  383</span>                            <span class="keywordflow">return</span> cLine;</div>
-<div class="line"><span class="lineno">  384</span>                        }</div>
-<div class="line"><span class="lineno">  385</span>                    }</div>
-<div class="line"><span class="lineno">  386</span>                }</div>
-<div class="line"><span class="lineno">  387</span>            }</div>
-<div class="line"><span class="lineno">  388</span>        }</div>
-<div class="line"><span class="lineno">  389</span>    }</div>
-<div class="line"><span class="lineno">  390</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  391</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00332">332</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  333</span>{</div>
+<div class="line"><span class="lineno">  334</span>    <span class="keyword">auto</span> parentList = currentLine-&gt;<a class="code hl_function" href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">GetParentList</a>();</div>
+<div class="line"><span class="lineno">  335</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = parentList.begin(), itEnd = parentList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  336</span>        <a class="code hl_class" href="class_control_element.html">ControlElement</a>* element = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_control_element.html">ControlElement</a>*<span class="keyword">&gt;</span>(*it);</div>
+<div class="line"><span class="lineno">  337</span>        <span class="comment">// Solve the unsolved parent.</span></div>
+<div class="line"><span class="lineno">  338</span>        <span class="keywordflow">if</span> (!element-&gt;IsSolved()) {</div>
+<div class="line"><span class="lineno">  339</span>            m_inputToSolve[0] = currentLine-&gt;GetValue();</div>
+<div class="line"><span class="lineno">  340</span>            <span class="keywordflow">if</span> (!std::isfinite(m_inputToSolve[0])) {</div>
+<div class="line"><span class="lineno">  341</span>                m_inputToSolve[0] = 0.0;</div>
+<div class="line"><span class="lineno">  342</span>                m_isOK = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  343</span>                m_failMessage = _(<span class="stringliteral">&quot;The control system solution is diverging. Try to reduce the time step.&quot;</span>);</div>
+<div class="line"><span class="lineno">  344</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  345</span>            }</div>
+<div class="line"><span class="lineno">  346</span>            m_inputToSolve[1] = m_currentTime;</div>
+<div class="line"><span class="lineno">  347</span>            m_inputToSolve[2] = m_switchStatus;</div>
+<div class="line"><span class="lineno">  348</span>            <span class="keywordflow">if</span> (!element-&gt;Solve(m_inputToSolve, m_timeStep)) {</div>
+<div class="line"><span class="lineno">  349</span>                m_isOK = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  350</span>                <span class="keywordflow">if</span>(<span class="keyword">auto</span> tf = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="class_transfer_function.html">TransferFunction</a>*<span class="keyword">&gt;</span>(element)) {</div>
+<div class="line"><span class="lineno">  351</span>                    wxString numerator, denominator;</div>
+<div class="line"><span class="lineno">  352</span>                    tf-&gt;GetTFString(numerator, denominator);</div>
+<div class="line"><span class="lineno">  353</span>                    m_failMessage = wxString::Format(_(<span class="stringliteral">&quot;Unable to compute the transfer function: (%s)/(%s)&quot;</span>), numerator, denominator);</div>
+<div class="line"><span class="lineno">  354</span>                }</div>
+<div class="line"><span class="lineno">  355</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  356</span>            }</div>
+<div class="line"><span class="lineno">  357</span>            element-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  358</span> </div>
+<div class="line"><span class="lineno">  359</span>            <span class="comment">// Get the output node (must have one or will result nullptr).</span></div>
+<div class="line"><span class="lineno">  360</span>            <a class="code hl_class" href="class_node.html">Node</a>* outNode = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  361</span>            <span class="keyword">auto</span> nodeList = element-&gt;GetNodeList();</div>
+<div class="line"><span class="lineno">  362</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itN = nodeList.begin(), itNEnd = nodeList.end(); itN != itNEnd; ++itN) {</div>
+<div class="line"><span class="lineno">  363</span>                <a class="code hl_class" href="class_node.html">Node</a>* node = *itN;</div>
+<div class="line"><span class="lineno">  364</span>                <span class="keywordflow">if</span> (node-&gt;GetNodeType() == Node::NodeType::NODE_OUT) outNode = node;</div>
+<div class="line"><span class="lineno">  365</span>            }</div>
+<div class="line"><span class="lineno">  366</span>            <span class="keywordflow">if</span> (!outNode) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  367</span> </div>
+<div class="line"><span class="lineno">  368</span>            <span class="comment">// Set connection line value associated with the output node.</span></div>
+<div class="line"><span class="lineno">  369</span>            <span class="keyword">auto</span> childList = element-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>();</div>
+<div class="line"><span class="lineno">  370</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> itC = childList.begin(), itCEnd = childList.end(); itC != itCEnd; ++itC) {</div>
+<div class="line"><span class="lineno">  371</span>                <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* cLine = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(*itC);</div>
+<div class="line"><span class="lineno">  372</span>                <span class="keywordflow">if</span> (!cLine-&gt;IsSolved()) {  <span class="comment">// Only check unsolved lines</span></div>
+<div class="line"><span class="lineno">  373</span>                    <span class="comment">// Check if the connection line have the output node on the list</span></div>
+<div class="line"><span class="lineno">  374</span>                    <span class="keyword">auto</span> lineNodeList = cLine-&gt;GetNodeList();</div>
+<div class="line"><span class="lineno">  375</span>                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> itCN = lineNodeList.begin(), itCNEnd = lineNodeList.end(); itCN != itCNEnd; ++itCN) {</div>
+<div class="line"><span class="lineno">  376</span>                        <a class="code hl_class" href="class_node.html">Node</a>* childNode = *itCN;</div>
+<div class="line"><span class="lineno">  377</span>                        <span class="keywordflow">if</span> (childNode == outNode) {</div>
+<div class="line"><span class="lineno">  378</span>                            <span class="comment">// Check if the line connect two elements, otherwise return nullptr</span></div>
+<div class="line"><span class="lineno">  379</span>                            <span class="keywordflow">if</span> (cLine-&gt;GetType() != ConnectionLine::ConnectionLineType::ELEMENT_ELEMENT) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  380</span> </div>
+<div class="line"><span class="lineno">  381</span>                            <span class="comment">// Set the connection line value and return it.</span></div>
+<div class="line"><span class="lineno">  382</span>                            cLine-&gt;SetValue(element-&gt;GetOutput());</div>
+<div class="line"><span class="lineno">  383</span>                            cLine-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  384</span>                            FillAllConnectedChildren(cLine);</div>
+<div class="line"><span class="lineno">  385</span>                            <span class="keywordflow">return</span> cLine;</div>
+<div class="line"><span class="lineno">  386</span>                        }</div>
+<div class="line"><span class="lineno">  387</span>                    }</div>
+<div class="line"><span class="lineno">  388</span>                }</div>
+<div class="line"><span class="lineno">  389</span>            }</div>
+<div class="line"><span class="lineno">  390</span>        }</div>
+<div class="line"><span class="lineno">  391</span>    }</div>
+<div class="line"><span class="lineno">  392</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  393</span>}</div>
 <div class="ttc" id="aclass_control_element_html"><div class="ttname"><a href="class_control_element.html">ControlElement</a></div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00086">ControlElement.h:87</a></div></div>
 <div class="ttc" id="aclass_element_html_a1150aef1610cdc2a28d96570dbac805a"><div class="ttname"><a href="class_element.html#a1150aef1610cdc2a28d96570dbac805a">Element::GetParentList</a></div><div class="ttdeci">virtual std::vector&lt; Element * &gt; GetParentList() const</div><div class="ttdoc">Get the parent list.</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00559">Element.h:559</a></div></div>
 <div class="ttc" id="aclass_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">Node of a control element. This class manages the user interaction with the connection and control el...</div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00030">ControlElement.h:31</a></div></div>
@@ -1283,156 +1287,156 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00168">168</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  169</span>{</div>
-<div class="line"><span class="lineno">  170</span>    <span class="comment">// Set all elements as not solved</span></div>
-<div class="line"><span class="lineno">  171</span>    <span class="keyword">auto</span> elementList = m_ctrlContainer-&gt;GetControlElementsList();</div>
-<div class="line"><span class="lineno">  172</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; element : elementList) {</div>
-<div class="line"><span class="lineno">  173</span>        element-&gt;SetSolved(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  174</span>    }</div>
-<div class="line"><span class="lineno">  175</span>    <span class="keyword">auto</span> connectionLineList = m_ctrlContainer-&gt;GetConnectionLineList();</div>
-<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; cLine : connectionLineList) {</div>
-<div class="line"><span class="lineno">  177</span>        cLine-&gt;SetSolved(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  178</span>    }</div>
-<div class="line"><span class="lineno">  179</span> </div>
-<div class="line"><span class="lineno">  180</span>    <span class="comment">// Get first node connection</span></div>
-<div class="line"><span class="lineno">  181</span>    <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* firstConn = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(<a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a>-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>    <span class="comment">// Set value to the connected lines in constants</span></div>
-<div class="line"><span class="lineno">  184</span>    <span class="keyword">auto</span> constantList = m_ctrlContainer-&gt;GetConstantList();</div>
-<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = constantList.begin(), itEnd = constantList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  186</span>        <a class="code hl_class" href="class_constant.html">Constant</a>* constant = *it;</div>
-<div class="line"><span class="lineno">  187</span>        <span class="keywordflow">if</span> (constant-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 1) {</div>
-<div class="line"><span class="lineno">  188</span>            constant-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  189</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(constant-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
-<div class="line"><span class="lineno">  190</span>            child-&gt;SetValue(constant-&gt;GetValue());</div>
-<div class="line"><span class="lineno">  191</span>            child-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  192</span>            FillAllConnectedChildren(child);</div>
-<div class="line"><span class="lineno">  193</span>        }</div>
-<div class="line"><span class="lineno">  194</span>    }</div>
-<div class="line"><span class="lineno">  195</span> </div>
-<div class="line"><span class="lineno">  196</span>    <span class="comment">// Solve math expression without inputs (but connected)</span></div>
-<div class="line"><span class="lineno">  197</span>    <span class="keyword">auto</span> mathExprList = m_ctrlContainer-&gt;GetMathExprList();</div>
-<div class="line"><span class="lineno">  198</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  199</span>        <a class="code hl_class" href="class_math_expression.html">MathExpression</a>* mathExpr = *it;</div>
-<div class="line"><span class="lineno">  200</span>        <span class="keywordflow">if</span> (mathExpr-&gt;GetVariables().size() == 0) {  <span class="comment">// No variables, no inputs.</span></div>
-<div class="line"><span class="lineno">  201</span>            m_inputToSolve[0] = 0.0;</div>
-<div class="line"><span class="lineno">  202</span>            m_inputToSolve[1] = m_currentTime;</div>
-<div class="line"><span class="lineno">  203</span>            m_inputToSolve[2] = m_switchStatus;</div>
-<div class="line"><span class="lineno">  204</span>            mathExpr-&gt;Solve(m_inputToSolve, m_timeStep);</div>
-<div class="line"><span class="lineno">  205</span>            mathExpr-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  206</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(mathExpr-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
-<div class="line"><span class="lineno">  207</span>            child-&gt;SetValue(mathExpr-&gt;GetOutput());</div>
-<div class="line"><span class="lineno">  208</span>            child-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  209</span>            FillAllConnectedChildren(child);</div>
-<div class="line"><span class="lineno">  210</span>        }</div>
-<div class="line"><span class="lineno">  211</span>    }</div>
-<div class="line"><span class="lineno">  212</span> </div>
-<div class="line"><span class="lineno">  213</span>    <span class="comment">// Set value to the connected lines in inputs</span></div>
-<div class="line"><span class="lineno">  214</span>    <span class="keyword">auto</span> ioList = m_ctrlContainer-&gt;GetIOControlList();</div>
-<div class="line"><span class="lineno">  215</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  216</span>        <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* io = *it;</div>
-<div class="line"><span class="lineno">  217</span>        <span class="keywordflow">if</span> (io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 1) {</div>
-<div class="line"><span class="lineno">  218</span>            io-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  219</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
-<div class="line"><span class="lineno">  220</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a> == io) firstConn = child;</div>
-<div class="line"><span class="lineno">  221</span>            <span class="keywordtype">bool</span> inputType = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  222</span>            io-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  223</span>            <span class="keywordflow">switch</span> (io-&gt;GetValue()) {</div>
-<div class="line"><span class="lineno">  224</span>            <span class="keywordflow">case</span> IOControl::IN_TERMINAL_VOLTAGE: {</div>
-<div class="line"><span class="lineno">  225</span>                child-&gt;SetValue(m_terminalVoltage);</div>
-<div class="line"><span class="lineno">  226</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  227</span>            <span class="keywordflow">case</span> IOControl::IN_VELOCITY: {</div>
-<div class="line"><span class="lineno">  228</span>                child-&gt;SetValue(m_velocity);</div>
-<div class="line"><span class="lineno">  229</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  230</span>            <span class="keywordflow">case</span> IOControl::IN_ACTIVE_POWER: {</div>
-<div class="line"><span class="lineno">  231</span>                child-&gt;SetValue(m_activePower);</div>
-<div class="line"><span class="lineno">  232</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  233</span>            <span class="keywordflow">case</span> IOControl::IN_REACTIVE_POWER: {</div>
-<div class="line"><span class="lineno">  234</span>                child-&gt;SetValue(m_reactivePower);</div>
-<div class="line"><span class="lineno">  235</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  236</span>            <span class="keywordflow">case</span> IOControl::IN_INITIAL_TERMINAL_VOLTAGE: {</div>
-<div class="line"><span class="lineno">  237</span>                child-&gt;SetValue(m_initTerminalVoltage);</div>
-<div class="line"><span class="lineno">  238</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  239</span>            <span class="keywordflow">case</span> IOControl::IN_INITIAL_MEC_POWER: {</div>
-<div class="line"><span class="lineno">  240</span>                child-&gt;SetValue(m_initMecPower);</div>
-<div class="line"><span class="lineno">  241</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  242</span>            <span class="keywordflow">case</span> IOControl::IN_INITIAL_VELOCITY: {</div>
-<div class="line"><span class="lineno">  243</span>                child-&gt;SetValue(m_initVelocity);</div>
-<div class="line"><span class="lineno">  244</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  245</span>            <span class="keywordflow">case</span> IOControl::IN_DELTA_VELOCITY: {</div>
-<div class="line"><span class="lineno">  246</span>                child-&gt;SetValue(m_deltaVelocity);</div>
-<div class="line"><span class="lineno">  247</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  248</span>            <span class="keywordflow">case</span> IOControl::IN_DELTA_ACTIVE_POWER: {</div>
-<div class="line"><span class="lineno">  249</span>                child-&gt;SetValue(m_deltaPe);</div>
-<div class="line"><span class="lineno">  250</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  251</span>            <span class="keywordflow">case</span> IOControl::IN_TEST: {</div>
-<div class="line"><span class="lineno">  252</span>                child-&gt;SetValue(io-&gt;GetTestValue());</div>
-<div class="line"><span class="lineno">  253</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  254</span>            <span class="keywordflow">default</span>: {</div>
-<div class="line"><span class="lineno">  255</span>                inputType = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  256</span>                io-&gt;SetSolved(<span class="keyword">false</span>);</div>
-<div class="line"><span class="lineno">  257</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  258</span>            }</div>
-<div class="line"><span class="lineno">  259</span>            <span class="keywordflow">if</span> (inputType) {</div>
-<div class="line"><span class="lineno">  260</span>                child-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  261</span>                FillAllConnectedChildren(child);</div>
-<div class="line"><span class="lineno">  262</span>            }</div>
-<div class="line"><span class="lineno">  263</span>        }</div>
-<div class="line"><span class="lineno">  264</span>    }</div>
-<div class="line"><span class="lineno">  265</span> </div>
-<div class="line"><span class="lineno">  266</span>    <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* currentLine = firstConn;</div>
-<div class="line"><span class="lineno">  267</span>    <span class="keywordflow">while</span> (currentLine) {</div>
-<div class="line"><span class="lineno">  268</span>        currentLine = SolveNextElement(currentLine);</div>
-<div class="line"><span class="lineno">  269</span>        <span class="keywordflow">if</span> (!m_isOK) <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  270</span>    }</div>
-<div class="line"><span class="lineno">  271</span> </div>
-<div class="line"><span class="lineno">  272</span>    <span class="keywordtype">bool</span> haveUnsolvedElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  273</span>    <span class="keywordflow">while</span> (haveUnsolvedElement) {</div>
-<div class="line"><span class="lineno">  274</span>        haveUnsolvedElement = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  275</span>        <span class="comment">// Get the solved line connected with unsolved element (elements not connected in the main branch).</span></div>
-<div class="line"><span class="lineno">  276</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; cLine : connectionLineList) {</div>
-<div class="line"><span class="lineno">  277</span>            <span class="keywordflow">if</span> (cLine-&gt;IsSolved()) {</div>
-<div class="line"><span class="lineno">  278</span>                <span class="keyword">auto</span> parentList = cLine-&gt;GetParentList();</div>
-<div class="line"><span class="lineno">  279</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span> itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {</div>
-<div class="line"><span class="lineno">  280</span>                    <a class="code hl_class" href="class_control_element.html">ControlElement</a>* parent = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_control_element.html">ControlElement</a>*<span class="keyword">&gt;</span>(*itP);</div>
-<div class="line"><span class="lineno">  281</span>                    <span class="keywordflow">if</span> (!parent-&gt;IsSolved()) {</div>
-<div class="line"><span class="lineno">  282</span>                        haveUnsolvedElement = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  283</span>                        <span class="comment">// Solve secondary branch.</span></div>
-<div class="line"><span class="lineno">  284</span>                        currentLine = cLine.get();</div>
-<div class="line"><span class="lineno">  285</span>                        <span class="keywordflow">while</span> (currentLine) {</div>
-<div class="line"><span class="lineno">  286</span>                            currentLine = SolveNextElement(currentLine);</div>
-<div class="line"><span class="lineno">  287</span>                            <span class="keywordflow">if</span> (!m_isOK) <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  288</span>                        }</div>
-<div class="line"><span class="lineno">  289</span>                        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  290</span>                    }</div>
-<div class="line"><span class="lineno">  291</span>                }</div>
-<div class="line"><span class="lineno">  292</span>            }</div>
-<div class="line"><span class="lineno">  293</span>            <span class="keywordflow">if</span> (haveUnsolvedElement) <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  294</span>        }</div>
-<div class="line"><span class="lineno">  295</span>    }</div>
-<div class="line"><span class="lineno">  296</span> </div>
-<div class="line"><span class="lineno">  297</span>    <span class="comment">// Set the control system output.</span></div>
-<div class="line"><span class="lineno">  298</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno">  299</span>        <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* io = *it;</div>
-<div class="line"><span class="lineno">  300</span>        <span class="keywordflow">if</span> (io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 1) {</div>
-<div class="line"><span class="lineno">  301</span>            io-&gt;SetSolved();</div>
-<div class="line"><span class="lineno">  302</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
-<div class="line"><span class="lineno">  303</span>            <span class="keywordflow">switch</span> (io-&gt;GetValue()) {</div>
-<div class="line"><span class="lineno">  304</span>            <span class="keywordflow">case</span> IOControl::OUT_MEC_POWER: {</div>
-<div class="line"><span class="lineno">  305</span>                m_mecPower = child-&gt;GetValue();</div>
-<div class="line"><span class="lineno">  306</span>                m_solutions.push_back(m_mecPower);</div>
-<div class="line"><span class="lineno">  307</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  308</span>            <span class="keywordflow">case</span> IOControl::OUT_FIELD_VOLTAGE: {</div>
-<div class="line"><span class="lineno">  309</span>                m_fieldVoltage = child-&gt;GetValue();</div>
-<div class="line"><span class="lineno">  310</span>                m_solutions.push_back(m_fieldVoltage);</div>
-<div class="line"><span class="lineno">  311</span>            } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  312</span>            <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  313</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  314</span>            }</div>
-<div class="line"><span class="lineno">  315</span>        }</div>
-<div class="line"><span class="lineno">  316</span>    }</div>
-<div class="line"><span class="lineno">  317</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8cpp_source.html#l00170">170</a> of file <a class="el" href="_control_element_solver_8cpp_source.html">ControlElementSolver.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  171</span>{</div>
+<div class="line"><span class="lineno">  172</span>    <span class="comment">// Set all elements as not solved</span></div>
+<div class="line"><span class="lineno">  173</span>    <span class="keyword">auto</span> elementList = m_ctrlContainer-&gt;GetControlElementsList();</div>
+<div class="line"><span class="lineno">  174</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; element : elementList) {</div>
+<div class="line"><span class="lineno">  175</span>        element-&gt;SetSolved(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  176</span>    }</div>
+<div class="line"><span class="lineno">  177</span>    <span class="keyword">auto</span> connectionLineList = m_ctrlContainer-&gt;GetConnectionLineList();</div>
+<div class="line"><span class="lineno">  178</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; cLine : connectionLineList) {</div>
+<div class="line"><span class="lineno">  179</span>        cLine-&gt;SetSolved(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  180</span>    }</div>
+<div class="line"><span class="lineno">  181</span> </div>
+<div class="line"><span class="lineno">  182</span>    <span class="comment">// Get first node connection</span></div>
+<div class="line"><span class="lineno">  183</span>    <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* firstConn = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(<a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a>-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
+<div class="line"><span class="lineno">  184</span> </div>
+<div class="line"><span class="lineno">  185</span>    <span class="comment">// Set value to the connected lines in constants</span></div>
+<div class="line"><span class="lineno">  186</span>    <span class="keyword">auto</span> constantList = m_ctrlContainer-&gt;GetConstantList();</div>
+<div class="line"><span class="lineno">  187</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = constantList.begin(), itEnd = constantList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  188</span>        <a class="code hl_class" href="class_constant.html">Constant</a>* constant = *it;</div>
+<div class="line"><span class="lineno">  189</span>        <span class="keywordflow">if</span> (constant-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 1) {</div>
+<div class="line"><span class="lineno">  190</span>            constant-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  191</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(constant-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
+<div class="line"><span class="lineno">  192</span>            child-&gt;SetValue(constant-&gt;GetValue());</div>
+<div class="line"><span class="lineno">  193</span>            child-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  194</span>            FillAllConnectedChildren(child);</div>
+<div class="line"><span class="lineno">  195</span>        }</div>
+<div class="line"><span class="lineno">  196</span>    }</div>
+<div class="line"><span class="lineno">  197</span> </div>
+<div class="line"><span class="lineno">  198</span>    <span class="comment">// Solve math expression without inputs (but connected)</span></div>
+<div class="line"><span class="lineno">  199</span>    <span class="keyword">auto</span> mathExprList = m_ctrlContainer-&gt;GetMathExprList();</div>
+<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = mathExprList.begin(), itEnd = mathExprList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  201</span>        <a class="code hl_class" href="class_math_expression.html">MathExpression</a>* mathExpr = *it;</div>
+<div class="line"><span class="lineno">  202</span>        <span class="keywordflow">if</span> (mathExpr-&gt;GetVariables().size() == 0) {  <span class="comment">// No variables, no inputs.</span></div>
+<div class="line"><span class="lineno">  203</span>            m_inputToSolve[0] = 0.0;</div>
+<div class="line"><span class="lineno">  204</span>            m_inputToSolve[1] = m_currentTime;</div>
+<div class="line"><span class="lineno">  205</span>            m_inputToSolve[2] = m_switchStatus;</div>
+<div class="line"><span class="lineno">  206</span>            mathExpr-&gt;Solve(m_inputToSolve, m_timeStep);</div>
+<div class="line"><span class="lineno">  207</span>            mathExpr-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  208</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(mathExpr-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
+<div class="line"><span class="lineno">  209</span>            child-&gt;SetValue(mathExpr-&gt;GetOutput());</div>
+<div class="line"><span class="lineno">  210</span>            child-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  211</span>            FillAllConnectedChildren(child);</div>
+<div class="line"><span class="lineno">  212</span>        }</div>
+<div class="line"><span class="lineno">  213</span>    }</div>
+<div class="line"><span class="lineno">  214</span> </div>
+<div class="line"><span class="lineno">  215</span>    <span class="comment">// Set value to the connected lines in inputs</span></div>
+<div class="line"><span class="lineno">  216</span>    <span class="keyword">auto</span> ioList = m_ctrlContainer-&gt;GetIOControlList();</div>
+<div class="line"><span class="lineno">  217</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  218</span>        <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* io = *it;</div>
+<div class="line"><span class="lineno">  219</span>        <span class="keywordflow">if</span> (io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 1) {</div>
+<div class="line"><span class="lineno">  220</span>            io-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  221</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
+<div class="line"><span class="lineno">  222</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_control_element_solver.html#a2048b5988e5edc2dfd73f349bfceb831">m_inputControl</a> == io) firstConn = child;</div>
+<div class="line"><span class="lineno">  223</span>            <span class="keywordtype">bool</span> inputType = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  224</span>            io-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  225</span>            <span class="keywordflow">switch</span> (io-&gt;GetValue()) {</div>
+<div class="line"><span class="lineno">  226</span>            <span class="keywordflow">case</span> IOControl::IN_TERMINAL_VOLTAGE: {</div>
+<div class="line"><span class="lineno">  227</span>                child-&gt;SetValue(m_terminalVoltage);</div>
+<div class="line"><span class="lineno">  228</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  229</span>            <span class="keywordflow">case</span> IOControl::IN_VELOCITY: {</div>
+<div class="line"><span class="lineno">  230</span>                child-&gt;SetValue(m_velocity);</div>
+<div class="line"><span class="lineno">  231</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  232</span>            <span class="keywordflow">case</span> IOControl::IN_ACTIVE_POWER: {</div>
+<div class="line"><span class="lineno">  233</span>                child-&gt;SetValue(m_activePower);</div>
+<div class="line"><span class="lineno">  234</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  235</span>            <span class="keywordflow">case</span> IOControl::IN_REACTIVE_POWER: {</div>
+<div class="line"><span class="lineno">  236</span>                child-&gt;SetValue(m_reactivePower);</div>
+<div class="line"><span class="lineno">  237</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  238</span>            <span class="keywordflow">case</span> IOControl::IN_INITIAL_TERMINAL_VOLTAGE: {</div>
+<div class="line"><span class="lineno">  239</span>                child-&gt;SetValue(m_initTerminalVoltage);</div>
+<div class="line"><span class="lineno">  240</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  241</span>            <span class="keywordflow">case</span> IOControl::IN_INITIAL_MEC_POWER: {</div>
+<div class="line"><span class="lineno">  242</span>                child-&gt;SetValue(m_initMecPower);</div>
+<div class="line"><span class="lineno">  243</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  244</span>            <span class="keywordflow">case</span> IOControl::IN_INITIAL_VELOCITY: {</div>
+<div class="line"><span class="lineno">  245</span>                child-&gt;SetValue(m_initVelocity);</div>
+<div class="line"><span class="lineno">  246</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  247</span>            <span class="keywordflow">case</span> IOControl::IN_DELTA_VELOCITY: {</div>
+<div class="line"><span class="lineno">  248</span>                child-&gt;SetValue(m_deltaVelocity);</div>
+<div class="line"><span class="lineno">  249</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  250</span>            <span class="keywordflow">case</span> IOControl::IN_DELTA_ACTIVE_POWER: {</div>
+<div class="line"><span class="lineno">  251</span>                child-&gt;SetValue(m_deltaPe);</div>
+<div class="line"><span class="lineno">  252</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  253</span>            <span class="keywordflow">case</span> IOControl::IN_TEST: {</div>
+<div class="line"><span class="lineno">  254</span>                child-&gt;SetValue(io-&gt;GetTestValue());</div>
+<div class="line"><span class="lineno">  255</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  256</span>            <span class="keywordflow">default</span>: {</div>
+<div class="line"><span class="lineno">  257</span>                inputType = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  258</span>                io-&gt;SetSolved(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  259</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  260</span>            }</div>
+<div class="line"><span class="lineno">  261</span>            <span class="keywordflow">if</span> (inputType) {</div>
+<div class="line"><span class="lineno">  262</span>                child-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  263</span>                FillAllConnectedChildren(child);</div>
+<div class="line"><span class="lineno">  264</span>            }</div>
+<div class="line"><span class="lineno">  265</span>        }</div>
+<div class="line"><span class="lineno">  266</span>    }</div>
+<div class="line"><span class="lineno">  267</span> </div>
+<div class="line"><span class="lineno">  268</span>    <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* currentLine = firstConn;</div>
+<div class="line"><span class="lineno">  269</span>    <span class="keywordflow">while</span> (currentLine) {</div>
+<div class="line"><span class="lineno">  270</span>        currentLine = SolveNextElement(currentLine);</div>
+<div class="line"><span class="lineno">  271</span>        <span class="keywordflow">if</span> (!m_isOK) <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  272</span>    }</div>
+<div class="line"><span class="lineno">  273</span> </div>
+<div class="line"><span class="lineno">  274</span>    <span class="keywordtype">bool</span> haveUnsolvedElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  275</span>    <span class="keywordflow">while</span> (haveUnsolvedElement) {</div>
+<div class="line"><span class="lineno">  276</span>        haveUnsolvedElement = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  277</span>        <span class="comment">// Get the solved line connected with unsolved element (elements not connected in the main branch).</span></div>
+<div class="line"><span class="lineno">  278</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; cLine : connectionLineList) {</div>
+<div class="line"><span class="lineno">  279</span>            <span class="keywordflow">if</span> (cLine-&gt;IsSolved()) {</div>
+<div class="line"><span class="lineno">  280</span>                <span class="keyword">auto</span> parentList = cLine-&gt;GetParentList();</div>
+<div class="line"><span class="lineno">  281</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span> itP = parentList.begin(), itPEnd = parentList.end(); itP != itPEnd; ++itP) {</div>
+<div class="line"><span class="lineno">  282</span>                    <a class="code hl_class" href="class_control_element.html">ControlElement</a>* parent = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_control_element.html">ControlElement</a>*<span class="keyword">&gt;</span>(*itP);</div>
+<div class="line"><span class="lineno">  283</span>                    <span class="keywordflow">if</span> (!parent-&gt;IsSolved()) {</div>
+<div class="line"><span class="lineno">  284</span>                        haveUnsolvedElement = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  285</span>                        <span class="comment">// Solve secondary branch.</span></div>
+<div class="line"><span class="lineno">  286</span>                        currentLine = cLine.get();</div>
+<div class="line"><span class="lineno">  287</span>                        <span class="keywordflow">while</span> (currentLine) {</div>
+<div class="line"><span class="lineno">  288</span>                            currentLine = SolveNextElement(currentLine);</div>
+<div class="line"><span class="lineno">  289</span>                            <span class="keywordflow">if</span> (!m_isOK) <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  290</span>                        }</div>
+<div class="line"><span class="lineno">  291</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  292</span>                    }</div>
+<div class="line"><span class="lineno">  293</span>                }</div>
+<div class="line"><span class="lineno">  294</span>            }</div>
+<div class="line"><span class="lineno">  295</span>            <span class="keywordflow">if</span> (haveUnsolvedElement) <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  296</span>        }</div>
+<div class="line"><span class="lineno">  297</span>    }</div>
+<div class="line"><span class="lineno">  298</span> </div>
+<div class="line"><span class="lineno">  299</span>    <span class="comment">// Set the control system output.</span></div>
+<div class="line"><span class="lineno">  300</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = ioList.begin(), itEnd = ioList.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno">  301</span>        <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* io = *it;</div>
+<div class="line"><span class="lineno">  302</span>        <span class="keywordflow">if</span> (io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>().size() == 1) {</div>
+<div class="line"><span class="lineno">  303</span>            io-&gt;SetSolved();</div>
+<div class="line"><span class="lineno">  304</span>            <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* child = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>*<span class="keyword">&gt;</span>(io-&gt;<a class="code hl_function" href="class_element.html#a5bf79b05af0dd1bbb62b352f293e1421">GetChildList</a>()[0]);</div>
+<div class="line"><span class="lineno">  305</span>            <span class="keywordflow">switch</span> (io-&gt;GetValue()) {</div>
+<div class="line"><span class="lineno">  306</span>            <span class="keywordflow">case</span> IOControl::OUT_MEC_POWER: {</div>
+<div class="line"><span class="lineno">  307</span>                m_mecPower = child-&gt;GetValue();</div>
+<div class="line"><span class="lineno">  308</span>                m_solutions.push_back(m_mecPower);</div>
+<div class="line"><span class="lineno">  309</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  310</span>            <span class="keywordflow">case</span> IOControl::OUT_FIELD_VOLTAGE: {</div>
+<div class="line"><span class="lineno">  311</span>                m_fieldVoltage = child-&gt;GetValue();</div>
+<div class="line"><span class="lineno">  312</span>                m_solutions.push_back(m_fieldVoltage);</div>
+<div class="line"><span class="lineno">  313</span>            } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  314</span>            <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  315</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  316</span>            }</div>
+<div class="line"><span class="lineno">  317</span>        }</div>
+<div class="line"><span class="lineno">  318</span>    }</div>
+<div class="line"><span class="lineno">  319</span>}</div>
 <div class="ttc" id="aclass_constant_html"><div class="ttname"><a href="class_constant.html">Constant</a></div><div class="ttdoc">A control element that provides a constant value.</div><div class="ttdef"><b>Definition</b> <a href="_constant_8h_source.html#l00036">Constant.h:37</a></div></div>
 <div class="ttc" id="aclass_math_expression_html"><div class="ttname"><a href="class_math_expression.html">MathExpression</a></div><div class="ttdoc">A generic math expression block that can perform math and conditional operations with the inputs.</div><div class="ttdef"><b>Definition</b> <a href="_math_expression_8h_source.html#l00037">MathExpression.h:38</a></div></div>
 </div><!-- fragment -->
@@ -1459,7 +1463,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00095">95</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00096">96</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1507,7 +1511,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00092">92</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00093">93</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1531,7 +1535,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00101">101</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00102">102</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1555,7 +1559,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00100">100</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00101">101</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1579,7 +1583,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00086">86</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00087">87</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1603,7 +1607,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00110">110</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00111">111</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1627,7 +1631,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00098">98</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00099">99</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1651,7 +1655,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00097">97</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00098">98</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1675,7 +1679,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00099">99</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00100">100</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1700,7 +1704,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>First input control to be solved </p>
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00088">88</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00089">89</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1724,7 +1728,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00108">108</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00109">109</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1748,7 +1752,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00083">83</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00084">84</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1772,7 +1776,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00085">85</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00086">86</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1796,7 +1800,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00111">111</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00112">112</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1820,7 +1824,31 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00089">89</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00090">90</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+
+</div>
+</div>
+<a id="a7d8b9c2bf6ae2e7e2fdf6ca98cfc893d" name="a7d8b9c2bf6ae2e7e2fdf6ca98cfc893d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d8b9c2bf6ae2e7e2fdf6ca98cfc893d">&#9670;&#160;</a></span>m_ownsCtrlContainer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ControlElementSolver::m_ownsCtrlContainer = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00082">82</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1844,7 +1872,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00096">96</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00097">97</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1868,7 +1896,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00084">84</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00085">85</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1892,7 +1920,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00091">91</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00092">92</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1916,7 +1944,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00093">93</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00094">94</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1940,7 +1968,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00082">82</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00083">83</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>
@@ -1964,7 +1992,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00094">94</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_element_solver_8h_source.html#l00095">95</a> of file <a class="el" href="_control_element_solver_8h_source.html">ControlElementSolver.h</a>.</p>
 
 </div>
 </div>

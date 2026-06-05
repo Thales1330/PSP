@@ -311,7 +311,7 @@ $(document).ready(function(){initNavTree('_sum_8cpp_source.html',''); initResiza
 </div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
 <div class="foldopen" id="foldopen00192" data-start="{" data-end="}">
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="class_sum.html#a8c4bfb1dc965d8ac246de59d1f10888b">  192</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_sum.html#a8c4bfb1dc965d8ac246de59d1f10888b">Sum::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element)</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="class_sum.html#a0076e13fd8cf6b5052c5d750580a9264">  192</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_sum.html#a0076e13fd8cf6b5052c5d750580a9264">Sum::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element, wxWindow* workspace)</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>{</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_class" href="class_sum_form.html">SumForm</a> sumForm(parent, <span class="keyword">this</span>);</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    sumForm.CenterOnParent();</div>
@@ -448,50 +448,49 @@ $(document).ready(function(){initNavTree('_sum_8cpp_source.html',''); initResiza
 <div class="foldopen" id="foldopen00323" data-start="{" data-end="}">
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="class_sum.html#a0da96514e0462e47d3f57b79ddc457b6">  323</a></span><a class="code hl_class" href="class_element.html">Element</a>* <a class="code hl_function" href="class_sum.html#a0da96514e0462e47d3f57b79ddc457b6">Sum::GetCopy</a>()</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>{</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <a class="code hl_class" href="class_sum.html">Sum</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_sum.html">Sum</a>(m_elementID);</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>}</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <a class="code hl_class" href="class_sum.html">Sum</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_sum.html">Sum</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>}</div>
 </div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>rapidxml::xml_node&lt;&gt;* Sum::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>{</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Sum&quot;</span>);</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    SaveCADProperties(doc, elementNode);</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    SaveControlNodes(doc, elementNode);</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keyword">auto</span> signsNode = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Signs&quot;</span>);</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_signalList.size(); ++i) {</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, signsNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        XMLParser::SetNodeValue(doc, value, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_signalList[i]));</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    }</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>}</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="keywordtype">bool</span> Sum::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode)</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>{</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    m_signalList.clear();</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keyword">auto</span> signsNode = elementNode-&gt;first_node(<span class="stringliteral">&quot;Signs&quot;</span>);</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keyword">auto</span> sign = signsNode-&gt;first_node(<span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="keywordflow">while</span> (sign) {</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <span class="keywordtype">long</span> value;</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        wxString(sign-&gt;value()).ToCLong(&amp;value);</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        m_signalList.push_back(<span class="keyword">static_cast&lt;</span>Sum::Signal<span class="keyword">&gt;</span>(value));</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        sign = sign-&gt;next_sibling(<span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    }</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span> </div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    <a class="code hl_function" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">StartMove</a>(m_position);</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    UpdatePoints();</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>}</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>rapidxml::xml_node&lt;&gt;* Sum::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>{</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Sum&quot;</span>);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    SaveCADProperties(doc, elementNode);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    SaveControlNodes(doc, elementNode);</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keyword">auto</span> signsNode = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Signs&quot;</span>);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_signalList.size(); ++i) {</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, signsNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        XMLParser::SetNodeValue(doc, value, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_signalList[i]));</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    }</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>}</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="keywordtype">bool</span> Sum::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode)</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>{</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    m_signalList.clear();</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keyword">auto</span> signsNode = elementNode-&gt;first_node(<span class="stringliteral">&quot;Signs&quot;</span>);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keyword">auto</span> sign = signsNode-&gt;first_node(<span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keywordflow">while</span> (sign) {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        <span class="keywordtype">long</span> value;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        wxString(sign-&gt;value()).ToCLong(&amp;value);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        m_signalList.push_back(<span class="keyword">static_cast&lt;</span>Sum::Signal<span class="keyword">&gt;</span>(value));</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        sign = sign-&gt;next_sibling(<span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    }</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <a class="code hl_function" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">StartMove</a>(m_position);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    UpdatePoints();</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>}</div>
 <div class="ttc" id="a_connection_line_8h_html"><div class="ttname"><a href="_connection_line_8h.html">ConnectionLine.h</a></div></div>
 <div class="ttc" id="a_sum_8h_html"><div class="ttname"><a href="_sum_8h.html">Sum.h</a></div></div>
 <div class="ttc" id="aclass_connection_line_html"><div class="ttname"><a href="class_connection_line.html">ConnectionLine</a></div><div class="ttdoc">Connection between two control elements or other connection line and an element.</div><div class="ttdef"><b>Definition</b> <a href="_connection_line_8h_source.html#l00030">ConnectionLine.h:31</a></div></div>
@@ -504,10 +503,10 @@ $(document).ready(function(){initNavTree('_sum_8cpp_source.html',''); initResiza
 <div class="ttc" id="aclass_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">Node of a control element. This class manages the user interaction with the connection and control el...</div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00030">ControlElement.h:31</a></div></div>
 <div class="ttc" id="aclass_sum_form_html"><div class="ttname"><a href="class_sum_form.html">SumForm</a></div><div class="ttdoc">Form to edit the sum control data.</div><div class="ttdef"><b>Definition</b> <a href="_sum_form_8h_source.html#l00032">SumForm.h:33</a></div></div>
 <div class="ttc" id="aclass_sum_html"><div class="ttname"><a href="class_sum.html">Sum</a></div><div class="ttdoc">Sum the all inputs (can choose the input signal).</div><div class="ttdef"><b>Definition</b> <a href="_sum_8h_source.html#l00033">Sum.h:34</a></div></div>
+<div class="ttc" id="aclass_sum_html_a0076e13fd8cf6b5052c5d750580a9264"><div class="ttname"><a href="class_sum.html#a0076e13fd8cf6b5052c5d750580a9264">Sum::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element, wxWindow *workspace=nullptr)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_sum_8cpp_source.html#l00192">Sum.cpp:192</a></div></div>
 <div class="ttc" id="aclass_sum_html_a0da96514e0462e47d3f57b79ddc457b6"><div class="ttname"><a href="class_sum.html#a0da96514e0462e47d3f57b79ddc457b6">Sum::GetCopy</a></div><div class="ttdeci">virtual Element * GetCopy()</div><div class="ttdoc">Get a the element copy.</div><div class="ttdef"><b>Definition</b> <a href="_sum_8cpp_source.html#l00323">Sum.cpp:323</a></div></div>
 <div class="ttc" id="aclass_sum_html_a2119e29fa0286f06316fa8434f14fd70"><div class="ttname"><a href="class_sum.html#a2119e29fa0286f06316fa8434f14fd70">Sum::DrawDC</a></div><div class="ttdeci">virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw the element using GDI+.</div><div class="ttdef"><b>Definition</b> <a href="_sum_8cpp_source.html#l00119">Sum.cpp:119</a></div></div>
 <div class="ttc" id="aclass_sum_html_a738bcb564fec2764055e4785227b5eea"><div class="ttname"><a href="class_sum.html#a738bcb564fec2764055e4785227b5eea">Sum::Rotate</a></div><div class="ttdeci">virtual void Rotate(bool clockwise=true)</div><div class="ttdoc">Rotate the element.</div><div class="ttdef"><b>Definition</b> <a href="_sum_8cpp_source.html#l00263">Sum.cpp:263</a></div></div>
-<div class="ttc" id="aclass_sum_html_a8c4bfb1dc965d8ac246de59d1f10888b"><div class="ttname"><a href="class_sum.html#a8c4bfb1dc965d8ac246de59d1f10888b">Sum::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_sum_8cpp_source.html#l00192">Sum.cpp:192</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

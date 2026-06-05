@@ -239,7 +239,7 @@ $(document).ready(function(){initNavTree('_exponential_8cpp_source.html',''); in
 </div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
 <div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="class_exponential.html#abdf1c3c1d8e7839fc2a8fc914acff68d">  120</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_exponential.html#abdf1c3c1d8e7839fc2a8fc914acff68d">Exponential::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="class_exponential.html#a746037be673114c85a0838dddcf4b2ef">  120</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_exponential.html#a746037be673114c85a0838dddcf4b2ef">Exponential::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element, wxWindow* workspace)</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>{</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_class" href="class_exponential_form.html">ExponentialForm</a> form(parent, <span class="keyword">this</span>);</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    form.CenterOnParent();</div>
@@ -318,43 +318,42 @@ $(document).ready(function(){initNavTree('_exponential_8cpp_source.html',''); in
 <div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="class_exponential.html#a85cda0dba6549828a9045e478e24609f">  191</a></span><a class="code hl_class" href="class_element.html">Element</a>* <a class="code hl_function" href="class_exponential.html#a85cda0dba6549828a9045e478e24609f">Exponential::GetCopy</a>()</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>{</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <a class="code hl_class" href="class_exponential.html">Exponential</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_exponential.html">Exponential</a>(m_elementID);</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>}</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <a class="code hl_class" href="class_exponential.html">Exponential</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_exponential.html">Exponential</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
 </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>rapidxml::xml_node&lt;&gt;* Exponential::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>{</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Exponential&quot;</span>);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    SaveCADProperties(doc, elementNode);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    SaveControlNodes(doc, elementNode);</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keyword">auto</span> aValue = XMLParser::AppendNode(doc, value, <span class="stringliteral">&quot;A&quot;</span>);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    XMLParser::SetNodeValue(doc, aValue, m_aValue);</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keyword">auto</span> bValue = XMLParser::AppendNode(doc, value, <span class="stringliteral">&quot;B&quot;</span>);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    XMLParser::SetNodeValue(doc, bValue, m_bValue);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>}</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="keywordtype">bool</span> Exponential::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode)</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>{</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keyword">auto</span> value = elementNode-&gt;first_node(<span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    m_aValue = XMLParser::GetNodeValueDouble(value, <span class="stringliteral">&quot;A&quot;</span>);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    m_bValue = XMLParser::GetNodeValueDouble(value, <span class="stringliteral">&quot;B&quot;</span>);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <a class="code hl_function" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">StartMove</a>(m_position);</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    UpdatePoints();</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>}</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>rapidxml::xml_node&lt;&gt;* Exponential::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>{</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;Exponential&quot;</span>);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    SaveCADProperties(doc, elementNode);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    SaveControlNodes(doc, elementNode);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keyword">auto</span> aValue = XMLParser::AppendNode(doc, value, <span class="stringliteral">&quot;A&quot;</span>);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    XMLParser::SetNodeValue(doc, aValue, m_aValue);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keyword">auto</span> bValue = XMLParser::AppendNode(doc, value, <span class="stringliteral">&quot;B&quot;</span>);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    XMLParser::SetNodeValue(doc, bValue, m_bValue);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>}</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keywordtype">bool</span> Exponential::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>{</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keyword">auto</span> value = elementNode-&gt;first_node(<span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    m_aValue = XMLParser::GetNodeValueDouble(value, <span class="stringliteral">&quot;A&quot;</span>);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    m_bValue = XMLParser::GetNodeValueDouble(value, <span class="stringliteral">&quot;B&quot;</span>);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <a class="code hl_function" href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">StartMove</a>(m_position);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    UpdatePoints();</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>}</div>
 <div class="ttc" id="a_exponential_8h_html"><div class="ttname"><a href="_exponential_8h.html">Exponential.h</a></div></div>
 <div class="ttc" id="aclass_control_element_html"><div class="ttname"><a href="class_control_element.html">ControlElement</a></div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00086">ControlElement.h:87</a></div></div>
 <div class="ttc" id="aclass_control_element_html_a61440a392d438de163bfe9ffb8e9efec"><div class="ttname"><a href="class_control_element.html#a61440a392d438de163bfe9ffb8e9efec">ControlElement::StartMove</a></div><div class="ttdeci">virtual void StartMove(wxPoint2DDouble position)</div><div class="ttdoc">Update the element attributes related to the movement.</div><div class="ttdef"><b>Definition</b> <a href="_control_element_8cpp_source.html#l00134">ControlElement.cpp:134</a></div></div>
@@ -363,9 +362,9 @@ $(document).ready(function(){initNavTree('_exponential_8cpp_source.html',''); in
 <div class="ttc" id="aclass_exponential_html"><div class="ttname"><a href="class_exponential.html">Exponential</a></div><div class="ttdoc">Generates an output following an exponential function.</div><div class="ttdef"><b>Definition</b> <a href="_exponential_8h_source.html#l00032">Exponential.h:33</a></div></div>
 <div class="ttc" id="aclass_exponential_html_a0714869ee8815119a6d76431bac767ea"><div class="ttname"><a href="class_exponential.html#a0714869ee8815119a6d76431bac767ea">Exponential::Rotate</a></div><div class="ttdeci">virtual void Rotate(bool clockwise=true)</div><div class="ttdoc">Rotate the element.</div><div class="ttdef"><b>Definition</b> <a href="_exponential_8cpp_source.html#l00130">Exponential.cpp:130</a></div></div>
 <div class="ttc" id="aclass_exponential_html_a25e0f1e7faf81e4e16fb95aabe84b54d"><div class="ttname"><a href="class_exponential.html#a25e0f1e7faf81e4e16fb95aabe84b54d">Exponential::Solve</a></div><div class="ttdeci">virtual bool Solve(double *input, double timeStep)</div><div class="ttdoc">Calculates the exponential.</div><div class="ttdef"><b>Definition</b> <a href="_exponential_8cpp_source.html#l00181">Exponential.cpp:181</a></div></div>
+<div class="ttc" id="aclass_exponential_html_a746037be673114c85a0838dddcf4b2ef"><div class="ttname"><a href="class_exponential.html#a746037be673114c85a0838dddcf4b2ef">Exponential::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element, wxWindow *workspace=nullptr)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_exponential_8cpp_source.html#l00120">Exponential.cpp:120</a></div></div>
 <div class="ttc" id="aclass_exponential_html_a85cda0dba6549828a9045e478e24609f"><div class="ttname"><a href="class_exponential.html#a85cda0dba6549828a9045e478e24609f">Exponential::GetCopy</a></div><div class="ttdeci">virtual Element * GetCopy()</div><div class="ttdoc">Get a the element copy.</div><div class="ttdef"><b>Definition</b> <a href="_exponential_8cpp_source.html#l00191">Exponential.cpp:191</a></div></div>
 <div class="ttc" id="aclass_exponential_html_a94208783819d886e963147f38c5b4b0e"><div class="ttname"><a href="class_exponential.html#a94208783819d886e963147f38c5b4b0e">Exponential::DrawDC</a></div><div class="ttdeci">virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw the element using GDI+.</div><div class="ttdef"><b>Definition</b> <a href="_exponential_8cpp_source.html#l00079">Exponential.cpp:79</a></div></div>
-<div class="ttc" id="aclass_exponential_html_abdf1c3c1d8e7839fc2a8fc914acff68d"><div class="ttname"><a href="class_exponential.html#abdf1c3c1d8e7839fc2a8fc914acff68d">Exponential::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_exponential_8cpp_source.html#l00120">Exponential.cpp:120</a></div></div>
 <div class="ttc" id="aclass_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">Node of a control element. This class manages the user interaction with the connection and control el...</div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00030">ControlElement.h:31</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -20,6 +20,6 @@ var class_line =
     [ "SetNominalVoltage", "class_line.html#a1f3ef94716c52a357ecbcbdf00b0e072", null ],
     [ "SetPointList", "class_line.html#af9a931bdb7e0693cacae010a19b744e6", null ],
     [ "SetPowerFlowDirection", "class_line.html#a400c8d0397ecdfe6c0a8380ee6bc7e1e", null ],
-    [ "ShowForm", "class_line.html#a24c6a659148f063c78e080a18f4517a1", null ],
+    [ "ShowForm", "class_line.html#a8cadfc48c7340be8538d79a63a93164a", null ],
     [ "StartMove", "class_line.html#abb812387508a9971570bfa1d38e41041", null ]
 ];

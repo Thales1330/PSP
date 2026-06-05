@@ -190,8 +190,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01377">1377</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1377</span>{ m_mFile = mFile; }</div>
+<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01378">1378</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1378</span>{ m_mFile = mFile; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -239,22 +239,22 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01379">1379</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1380</span>{</div>
-<div class="line"><span class="lineno"> 1381</span>    <span class="comment">// Clear data to avoid memory leak</span></div>
-<div class="line"><span class="lineno"> 1382</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_branchData.begin(), itEnd = m_branchData.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno"> 1383</span>        <span class="keywordflow">if</span>(*it) <span class="keyword">delete</span> *it;</div>
-<div class="line"><span class="lineno"> 1384</span>    }</div>
-<div class="line"><span class="lineno"> 1385</span>    m_branchData.clear();</div>
-<div class="line"><span class="lineno"> 1386</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_branchData.begin(), itEnd = m_branchData.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno"> 1387</span>        <span class="keywordflow">if</span>(*it) <span class="keyword">delete</span> *it;</div>
-<div class="line"><span class="lineno"> 1388</span>    }</div>
-<div class="line"><span class="lineno"> 1389</span>    m_branchData.clear();</div>
-<div class="line"><span class="lineno"> 1390</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_genData.begin(), itEnd = m_genData.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno"> 1391</span>        <span class="keywordflow">if</span>(*it) <span class="keyword">delete</span> *it;</div>
-<div class="line"><span class="lineno"> 1392</span>    }</div>
-<div class="line"><span class="lineno"> 1393</span>    m_genData.clear();</div>
-<div class="line"><span class="lineno"> 1394</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01380">1380</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1381</span>{</div>
+<div class="line"><span class="lineno"> 1382</span>    <span class="comment">// Clear data to avoid memory leak</span></div>
+<div class="line"><span class="lineno"> 1383</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_branchData.begin(), itEnd = m_branchData.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1384</span>        <span class="keywordflow">if</span>(*it) <span class="keyword">delete</span> *it;</div>
+<div class="line"><span class="lineno"> 1385</span>    }</div>
+<div class="line"><span class="lineno"> 1386</span>    m_branchData.clear();</div>
+<div class="line"><span class="lineno"> 1387</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_branchData.begin(), itEnd = m_branchData.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1388</span>        <span class="keywordflow">if</span>(*it) <span class="keyword">delete</span> *it;</div>
+<div class="line"><span class="lineno"> 1389</span>    }</div>
+<div class="line"><span class="lineno"> 1390</span>    m_branchData.clear();</div>
+<div class="line"><span class="lineno"> 1391</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_genData.begin(), itEnd = m_genData.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1392</span>        <span class="keywordflow">if</span>(*it) <span class="keyword">delete</span> *it;</div>
+<div class="line"><span class="lineno"> 1393</span>    }</div>
+<div class="line"><span class="lineno"> 1394</span>    m_genData.clear();</div>
+<div class="line"><span class="lineno"> 1395</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -330,13 +330,13 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01528">1528</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1529</span>{</div>
-<div class="line"><span class="lineno"> 1530</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno"> 1531</span>        <span class="keywordflow">if</span>((*it)-&gt;id == <span class="keywordtype">id</span>) <span class="keywordflow">return</span> *it;</div>
-<div class="line"><span class="lineno"> 1532</span>    }</div>
-<div class="line"><span class="lineno"> 1533</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1534</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01529">1529</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1530</span>{</div>
+<div class="line"><span class="lineno"> 1531</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1532</span>        <span class="keywordflow">if</span>((*it)-&gt;id == <span class="keywordtype">id</span>) <span class="keywordflow">return</span> *it;</div>
+<div class="line"><span class="lineno"> 1533</span>    }</div>
+<div class="line"><span class="lineno"> 1534</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1535</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -402,20 +402,20 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01513">1513</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1514</span>{</div>
-<div class="line"><span class="lineno"> 1515</span>    wxString dataStr = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1516</span>    <span class="keywordflow">while</span>(currentLine.Find(<span class="charliteral">&#39;]&#39;</span>, <span class="keyword">true</span>) == wxNOT_FOUND) {  <span class="comment">// Concatenate all lines until find &#39;]&#39;</span></div>
-<div class="line"><span class="lineno"> 1517</span>        dataStr += currentLine;</div>
-<div class="line"><span class="lineno"> 1518</span>        <span class="keywordflow">if</span>(currentLine.Find(<span class="stringliteral">&quot;mpc&quot;</span>) == wxNOT_FOUND &amp;&amp; currentLine.Find(<span class="charliteral">&#39;;&#39;</span>) == wxNOT_FOUND) dataStr += <span class="charliteral">&#39;;&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1519</span>        currentLine = mFile.GetNextLine();</div>
-<div class="line"><span class="lineno"> 1520</span>    }</div>
-<div class="line"><span class="lineno"> 1521</span>    dataStr += currentLine + <span class="stringliteral">&quot;;&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1522</span>    <span class="keywordflow">if</span>(currentLine.Find(<span class="charliteral">&#39;;&#39;</span>) == wxNOT_FOUND) dataStr += <span class="charliteral">&#39;;&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1523</span>    dataStr = dataStr.AfterFirst(<span class="charliteral">&#39;[&#39;</span>).BeforeFirst(<span class="charliteral">&#39;]&#39;</span>);  <span class="comment">// Get only the element data</span></div>
-<div class="line"><span class="lineno"> 1524</span>    wxStringTokenizer dataStrTok(dataStr, <span class="charliteral">&#39;;&#39;</span>);          <span class="comment">// Tokenize using &#39;;&#39; char (one element data)</span></div>
-<div class="line"><span class="lineno"> 1525</span>    <span class="keywordflow">return</span> dataStrTok;</div>
-<div class="line"><span class="lineno"> 1526</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01514">1514</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1515</span>{</div>
+<div class="line"><span class="lineno"> 1516</span>    wxString dataStr = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1517</span>    <span class="keywordflow">while</span>(currentLine.Find(<span class="charliteral">&#39;]&#39;</span>, <span class="keyword">true</span>) == wxNOT_FOUND) {  <span class="comment">// Concatenate all lines until find &#39;]&#39;</span></div>
+<div class="line"><span class="lineno"> 1518</span>        dataStr += currentLine;</div>
+<div class="line"><span class="lineno"> 1519</span>        <span class="keywordflow">if</span>(currentLine.Find(<span class="stringliteral">&quot;mpc&quot;</span>) == wxNOT_FOUND &amp;&amp; currentLine.Find(<span class="charliteral">&#39;;&#39;</span>) == wxNOT_FOUND) dataStr += <span class="charliteral">&#39;;&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1520</span>        currentLine = mFile.GetNextLine();</div>
+<div class="line"><span class="lineno"> 1521</span>    }</div>
+<div class="line"><span class="lineno"> 1522</span>    dataStr += currentLine + <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1523</span>    <span class="keywordflow">if</span>(currentLine.Find(<span class="charliteral">&#39;;&#39;</span>) == wxNOT_FOUND) dataStr += <span class="charliteral">&#39;;&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1524</span>    dataStr = dataStr.AfterFirst(<span class="charliteral">&#39;[&#39;</span>).BeforeFirst(<span class="charliteral">&#39;]&#39;</span>);  <span class="comment">// Get only the element data</span></div>
+<div class="line"><span class="lineno"> 1525</span>    wxStringTokenizer dataStrTok(dataStr, <span class="charliteral">&#39;;&#39;</span>);          <span class="comment">// Tokenize using &#39;;&#39; char (one element data)</span></div>
+<div class="line"><span class="lineno"> 1526</span>    <span class="keywordflow">return</span> dataStrTok;</div>
+<div class="line"><span class="lineno"> 1527</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -462,122 +462,122 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01396">1396</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1397</span>{</div>
-<div class="line"><span class="lineno"> 1398</span>    wxTextFile mFile(m_mFile.GetFullPath());</div>
-<div class="line"><span class="lineno"> 1399</span>    <span class="keywordflow">if</span>(!mFile.Open()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1400</span> </div>
-<div class="line"><span class="lineno"> 1401</span>    <span class="comment">// Parse M file</span></div>
-<div class="line"><span class="lineno"> 1402</span>    wxString fileTxt = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1403</span>    <span class="keywordflow">for</span>(wxString line = mFile.GetFirstLine(); !mFile.Eof(); line = mFile.GetNextLine()) {</div>
-<div class="line"><span class="lineno"> 1404</span>        <span class="comment">// Current line</span></div>
-<div class="line"><span class="lineno"> 1405</span>        <span class="keywordflow">if</span>(line.Trim()[0] != <span class="charliteral">&#39;%&#39;</span>) {  <span class="comment">// Check if the line is commented (with %)</span></div>
-<div class="line"><span class="lineno"> 1406</span>            <span class="comment">// Parse data:</span></div>
-<div class="line"><span class="lineno"> 1407</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.baseMVA&quot;</span>) != wxNOT_FOUND) {                                       <span class="comment">// Found baseMVA</span></div>
-<div class="line"><span class="lineno"> 1408</span>                <span class="keywordflow">if</span>(!line.AfterFirst(<span class="charliteral">&#39;=&#39;</span>).BeforeFirst(<span class="charliteral">&#39;;&#39;</span>).ToCDouble(&amp;m_mvaBase)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// No Trim() needed?</span></div>
-<div class="line"><span class="lineno"> 1409</span>            }</div>
-<div class="line"><span class="lineno"> 1410</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.bus &quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found bus</span></div>
-<div class="line"><span class="lineno"> 1411</span>                wxStringTokenizer busStrTok = GetMFileTokenData(mFile, line);</div>
-<div class="line"><span class="lineno"> 1412</span>                <span class="keywordflow">while</span>(busStrTok.HasMoreTokens()) {</div>
-<div class="line"><span class="lineno"> 1413</span>                    BusData* busData = <span class="keyword">new</span> BusData();</div>
-<div class="line"><span class="lineno"> 1414</span>                    wxString busDataStr = busStrTok.GetNextToken();</div>
-<div class="line"><span class="lineno"> 1415</span>                    <span class="keywordtype">char</span> tokenChar = <span class="charliteral">&#39;\t&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1416</span>                    <span class="keywordflow">if</span>(busDataStr.Find(<span class="charliteral">&#39;\t&#39;</span>) == wxNOT_FOUND) { tokenChar = <span class="charliteral">&#39; &#39;</span>; }</div>
-<div class="line"><span class="lineno"> 1417</span>                    <span class="comment">// Tokenize using tabulation or space (each branch data)</span></div>
-<div class="line"><span class="lineno"> 1418</span>                    wxStringTokenizer busDataStrTok(busDataStr, tokenChar);</div>
-<div class="line"><span class="lineno"> 1419</span> </div>
-<div class="line"><span class="lineno"> 1420</span>                    busData-&gt;id = wxAtoi(busDataStrTok.GetNextToken());                      <span class="comment">// Bus number</span></div>
-<div class="line"><span class="lineno"> 1421</span>                    busData-&gt;type = wxAtoi(busDataStrTok.GetNextToken());                    <span class="comment">// Bus type</span></div>
-<div class="line"><span class="lineno"> 1422</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;pd)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Real power demand</span></div>
-<div class="line"><span class="lineno"> 1423</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;qd)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Reactive power demand</span></div>
-<div class="line"><span class="lineno"> 1424</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;gs)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Shunt condutance</span></div>
-<div class="line"><span class="lineno"> 1425</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;bs)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Shunt susceptance</span></div>
-<div class="line"><span class="lineno"> 1426</span>                    busData-&gt;area = wxAtoi(busDataStrTok.GetNextToken());                    <span class="comment">// Bus area</span></div>
-<div class="line"><span class="lineno"> 1427</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;voltage)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Bus abs voltage</span></div>
-<div class="line"><span class="lineno"> 1428</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;angle)) <span class="keywordflow">return</span> <span class="keyword">false</span>;    <span class="comment">// Angle of voltage</span></div>
-<div class="line"><span class="lineno"> 1429</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;baseVoltage)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Base Voltage</span></div>
-<div class="line"><span class="lineno"> 1430</span> </div>
-<div class="line"><span class="lineno"> 1431</span>                    m_busData.push_back(busData);  <span class="comment">// Save new bus data at vector</span></div>
-<div class="line"><span class="lineno"> 1432</span>                }</div>
-<div class="line"><span class="lineno"> 1433</span>            }</div>
-<div class="line"><span class="lineno"> 1434</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.gen &quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found generator</span></div>
-<div class="line"><span class="lineno"> 1435</span>                wxStringTokenizer genStrTok = GetMFileTokenData(mFile, line);</div>
-<div class="line"><span class="lineno"> 1436</span>                <span class="keywordflow">while</span>(genStrTok.HasMoreTokens()) {</div>
-<div class="line"><span class="lineno"> 1437</span>                    GenData* genData = <span class="keyword">new</span> GenData();</div>
-<div class="line"><span class="lineno"> 1438</span>                    wxString genDataStr = genStrTok.GetNextToken();</div>
-<div class="line"><span class="lineno"> 1439</span>                    <span class="keywordtype">char</span> tokenChar = <span class="charliteral">&#39;\t&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1440</span>                    <span class="keywordflow">if</span>(genDataStr.Find(<span class="charliteral">&#39;\t&#39;</span>) == wxNOT_FOUND) { tokenChar = <span class="charliteral">&#39; &#39;</span>; }</div>
-<div class="line"><span class="lineno"> 1441</span>                    <span class="comment">// Tokenize using tabulation or space (each branch data)</span></div>
-<div class="line"><span class="lineno"> 1442</span>                    wxStringTokenizer genDataStrTok(genDataStr, tokenChar);</div>
-<div class="line"><span class="lineno"> 1443</span>                    genData-&gt;busID = wxAtoi(genDataStrTok.GetNextToken());                   <span class="comment">// Bus number</span></div>
-<div class="line"><span class="lineno"> 1444</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;pg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Real power output</span></div>
-<div class="line"><span class="lineno"> 1445</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;qg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Reative power output</span></div>
-<div class="line"><span class="lineno"> 1446</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;maxReactivePower))</div>
-<div class="line"><span class="lineno"> 1447</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Maximum reactive power (MVAr)</span></div>
-<div class="line"><span class="lineno"> 1448</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;minReactivePower))</div>
-<div class="line"><span class="lineno"> 1449</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;              <span class="comment">// Minumum reactive power (MVAr)</span></div>
-<div class="line"><span class="lineno"> 1450</span>                    genDataStrTok.GetNextToken();  <span class="comment">// Voltage magnitude setpoint (p.u.), skip</span></div>
-<div class="line"><span class="lineno"> 1451</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;baseMVA)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Power base (MVA)</span></div>
-<div class="line"><span class="lineno"> 1452</span>                    <span class="keywordtype">double</span> machineStatus = 0;</div>
-<div class="line"><span class="lineno"> 1453</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;machineStatus))</div>
-<div class="line"><span class="lineno"> 1454</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Machine status (&gt; 0 = machine in-service; &lt;= 0 = machine out-of-service)</span></div>
-<div class="line"><span class="lineno"> 1455</span>                    genData-&gt;isOnline = machineStatus &gt; 1e-3 ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1456</span> </div>
-<div class="line"><span class="lineno"> 1457</span>                    m_genData.push_back(genData);</div>
-<div class="line"><span class="lineno"> 1458</span>                }</div>
-<div class="line"><span class="lineno"> 1459</span>            }</div>
-<div class="line"><span class="lineno"> 1460</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.branch&quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found branch</span></div>
-<div class="line"><span class="lineno"> 1461</span>                wxStringTokenizer branchStrTok = GetMFileTokenData(mFile, line);</div>
-<div class="line"><span class="lineno"> 1462</span>                <span class="keywordflow">while</span>(branchStrTok.HasMoreTokens()) {</div>
-<div class="line"><span class="lineno"> 1463</span>                    BranchData* branchData = <span class="keyword">new</span> BranchData();</div>
-<div class="line"><span class="lineno"> 1464</span>                    wxString branchDataStr = branchStrTok.GetNextToken();</div>
-<div class="line"><span class="lineno"> 1465</span>                    <span class="keywordtype">char</span> tokenChar = <span class="charliteral">&#39;\t&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1466</span>                    <span class="keywordflow">if</span>(branchDataStr.Find(<span class="charliteral">&#39;\t&#39;</span>) == wxNOT_FOUND) { tokenChar = <span class="charliteral">&#39; &#39;</span>; }</div>
-<div class="line"><span class="lineno"> 1467</span>                    <span class="comment">// Tokenize using tabulation or space (each branch data)</span></div>
-<div class="line"><span class="lineno"> 1468</span>                    wxStringTokenizer branchDataStrTok(branchDataStr, tokenChar);</div>
-<div class="line"><span class="lineno"> 1469</span> </div>
-<div class="line"><span class="lineno"> 1470</span>                    <span class="keywordtype">int</span> fromBus = wxAtoi(branchDataStrTok.GetNextToken());  <span class="comment">// From bus number</span></div>
-<div class="line"><span class="lineno"> 1471</span>                    <span class="keywordtype">int</span> toBus = wxAtoi(branchDataStrTok.GetNextToken());    <span class="comment">// To bus number</span></div>
-<div class="line"><span class="lineno"> 1472</span>                    branchData-&gt;busConnections = std::make_pair(fromBus, toBus);</div>
-<div class="line"><span class="lineno"> 1473</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;resistance)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Resistance</span></div>
-<div class="line"><span class="lineno"> 1474</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;indReactance))</div>
-<div class="line"><span class="lineno"> 1475</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Reactance</span></div>
-<div class="line"><span class="lineno"> 1476</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;capSusceptance))</div>
-<div class="line"><span class="lineno"> 1477</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;                 <span class="comment">// Line charging susceptance</span></div>
-<div class="line"><span class="lineno"> 1478</span>                    branchDataStrTok.GetNextToken();  <span class="comment">// MVA rating A, skip</span></div>
-<div class="line"><span class="lineno"> 1479</span>                    branchDataStrTok.GetNextToken();  <span class="comment">// MVA rating B, skip</span></div>
-<div class="line"><span class="lineno"> 1480</span>                    branchDataStrTok.GetNextToken();  <span class="comment">// MVA rating C, skip</span></div>
-<div class="line"><span class="lineno"> 1481</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;tap)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// TAP</span></div>
-<div class="line"><span class="lineno"> 1482</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;phaseShift))</div>
-<div class="line"><span class="lineno"> 1483</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Transformer phase-shift angle</span></div>
-<div class="line"><span class="lineno"> 1484</span>                    <span class="keywordtype">double</span> branchStatus = 0;</div>
-<div class="line"><span class="lineno"> 1485</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchStatus))</div>
-<div class="line"><span class="lineno"> 1486</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Branch status (&gt; 0 = machine in-service; &lt;= 0 = machine out-of-service)</span></div>
-<div class="line"><span class="lineno"> 1487</span>                    branchData-&gt;isOnline = branchStatus &gt; 1e-3 ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1488</span> </div>
-<div class="line"><span class="lineno"> 1489</span>                    m_branchData.push_back(branchData);</div>
-<div class="line"><span class="lineno"> 1490</span>                }</div>
-<div class="line"><span class="lineno"> 1491</span>            }</div>
-<div class="line"><span class="lineno"> 1492</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.bus_name&quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found buses names</span></div>
-<div class="line"><span class="lineno"> 1493</span>                wxString dataStr = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1494</span>                <span class="keywordflow">while</span>(line.Find(<span class="charliteral">&#39;}&#39;</span>, <span class="keyword">true</span>) == wxNOT_FOUND) {  <span class="comment">// Concatenate all lines until find &#39;]&#39;</span></div>
-<div class="line"><span class="lineno"> 1495</span>                    dataStr += line;</div>
-<div class="line"><span class="lineno"> 1496</span>                    line = mFile.GetNextLine();</div>
-<div class="line"><span class="lineno"> 1497</span>                }</div>
-<div class="line"><span class="lineno"> 1498</span>                dataStr += line;</div>
-<div class="line"><span class="lineno"> 1499</span>                dataStr = dataStr.AfterFirst(<span class="charliteral">&#39;{&#39;</span>).BeforeFirst(<span class="charliteral">&#39;}&#39;</span>);  <span class="comment">// Get only the element data</span></div>
-<div class="line"><span class="lineno"> 1500</span>                wxStringTokenizer dataStrTok(dataStr, <span class="stringliteral">&quot;;&quot;</span>);          <span class="comment">// Tokenize using &#39;;&#39; char (one element data)</span></div>
-<div class="line"><span class="lineno"> 1501</span>                <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {</div>
-<div class="line"><span class="lineno"> 1502</span>                    <span class="keywordflow">if</span>(dataStrTok.HasMoreTokens())</div>
-<div class="line"><span class="lineno"> 1503</span>                        (*it)-&gt;busName = dataStrTok.GetNextToken().AfterFirst(<span class="charliteral">&#39;\&#39;&#39;</span>).BeforeFirst(<span class="charliteral">&#39;\&#39;&#39;</span>);</div>
-<div class="line"><span class="lineno"> 1504</span>                }</div>
-<div class="line"><span class="lineno"> 1505</span>            }</div>
-<div class="line"><span class="lineno"> 1506</span>        }</div>
-<div class="line"><span class="lineno"> 1507</span>    }</div>
-<div class="line"><span class="lineno"> 1508</span>    <span class="comment">// Last line</span></div>
-<div class="line"><span class="lineno"> 1509</span> </div>
-<div class="line"><span class="lineno"> 1510</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1511</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_import_form_8cpp_source.html#l01397">1397</a> of file <a class="el" href="_import_form_8cpp_source.html">ImportForm.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1398</span>{</div>
+<div class="line"><span class="lineno"> 1399</span>    wxTextFile mFile(m_mFile.GetFullPath());</div>
+<div class="line"><span class="lineno"> 1400</span>    <span class="keywordflow">if</span>(!mFile.Open()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1401</span> </div>
+<div class="line"><span class="lineno"> 1402</span>    <span class="comment">// Parse M file</span></div>
+<div class="line"><span class="lineno"> 1403</span>    wxString fileTxt = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1404</span>    <span class="keywordflow">for</span>(wxString line = mFile.GetFirstLine(); !mFile.Eof(); line = mFile.GetNextLine()) {</div>
+<div class="line"><span class="lineno"> 1405</span>        <span class="comment">// Current line</span></div>
+<div class="line"><span class="lineno"> 1406</span>        <span class="keywordflow">if</span>(line.Trim()[0] != <span class="charliteral">&#39;%&#39;</span>) {  <span class="comment">// Check if the line is commented (with %)</span></div>
+<div class="line"><span class="lineno"> 1407</span>            <span class="comment">// Parse data:</span></div>
+<div class="line"><span class="lineno"> 1408</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.baseMVA&quot;</span>) != wxNOT_FOUND) {                                       <span class="comment">// Found baseMVA</span></div>
+<div class="line"><span class="lineno"> 1409</span>                <span class="keywordflow">if</span>(!line.AfterFirst(<span class="charliteral">&#39;=&#39;</span>).BeforeFirst(<span class="charliteral">&#39;;&#39;</span>).ToCDouble(&amp;m_mvaBase)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// No Trim() needed?</span></div>
+<div class="line"><span class="lineno"> 1410</span>            }</div>
+<div class="line"><span class="lineno"> 1411</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.bus &quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found bus</span></div>
+<div class="line"><span class="lineno"> 1412</span>                wxStringTokenizer busStrTok = GetMFileTokenData(mFile, line);</div>
+<div class="line"><span class="lineno"> 1413</span>                <span class="keywordflow">while</span>(busStrTok.HasMoreTokens()) {</div>
+<div class="line"><span class="lineno"> 1414</span>                    BusData* busData = <span class="keyword">new</span> BusData();</div>
+<div class="line"><span class="lineno"> 1415</span>                    wxString busDataStr = busStrTok.GetNextToken();</div>
+<div class="line"><span class="lineno"> 1416</span>                    <span class="keywordtype">char</span> tokenChar = <span class="charliteral">&#39;\t&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1417</span>                    <span class="keywordflow">if</span>(busDataStr.Find(<span class="charliteral">&#39;\t&#39;</span>) == wxNOT_FOUND) { tokenChar = <span class="charliteral">&#39; &#39;</span>; }</div>
+<div class="line"><span class="lineno"> 1418</span>                    <span class="comment">// Tokenize using tabulation or space (each branch data)</span></div>
+<div class="line"><span class="lineno"> 1419</span>                    wxStringTokenizer busDataStrTok(busDataStr, tokenChar);</div>
+<div class="line"><span class="lineno"> 1420</span> </div>
+<div class="line"><span class="lineno"> 1421</span>                    busData-&gt;id = wxAtoi(busDataStrTok.GetNextToken());                      <span class="comment">// Bus number</span></div>
+<div class="line"><span class="lineno"> 1422</span>                    busData-&gt;type = wxAtoi(busDataStrTok.GetNextToken());                    <span class="comment">// Bus type</span></div>
+<div class="line"><span class="lineno"> 1423</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;pd)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Real power demand</span></div>
+<div class="line"><span class="lineno"> 1424</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;qd)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Reactive power demand</span></div>
+<div class="line"><span class="lineno"> 1425</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;gs)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Shunt condutance</span></div>
+<div class="line"><span class="lineno"> 1426</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;bs)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Shunt susceptance</span></div>
+<div class="line"><span class="lineno"> 1427</span>                    busData-&gt;area = wxAtoi(busDataStrTok.GetNextToken());                    <span class="comment">// Bus area</span></div>
+<div class="line"><span class="lineno"> 1428</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;voltage)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Bus abs voltage</span></div>
+<div class="line"><span class="lineno"> 1429</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;angle)) <span class="keywordflow">return</span> <span class="keyword">false</span>;    <span class="comment">// Angle of voltage</span></div>
+<div class="line"><span class="lineno"> 1430</span>                    <span class="keywordflow">if</span>(!busDataStrTok.GetNextToken().ToCDouble(&amp;busData-&gt;baseVoltage)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Base Voltage</span></div>
+<div class="line"><span class="lineno"> 1431</span> </div>
+<div class="line"><span class="lineno"> 1432</span>                    m_busData.push_back(busData);  <span class="comment">// Save new bus data at vector</span></div>
+<div class="line"><span class="lineno"> 1433</span>                }</div>
+<div class="line"><span class="lineno"> 1434</span>            }</div>
+<div class="line"><span class="lineno"> 1435</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.gen &quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found generator</span></div>
+<div class="line"><span class="lineno"> 1436</span>                wxStringTokenizer genStrTok = GetMFileTokenData(mFile, line);</div>
+<div class="line"><span class="lineno"> 1437</span>                <span class="keywordflow">while</span>(genStrTok.HasMoreTokens()) {</div>
+<div class="line"><span class="lineno"> 1438</span>                    GenData* genData = <span class="keyword">new</span> GenData();</div>
+<div class="line"><span class="lineno"> 1439</span>                    wxString genDataStr = genStrTok.GetNextToken();</div>
+<div class="line"><span class="lineno"> 1440</span>                    <span class="keywordtype">char</span> tokenChar = <span class="charliteral">&#39;\t&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1441</span>                    <span class="keywordflow">if</span>(genDataStr.Find(<span class="charliteral">&#39;\t&#39;</span>) == wxNOT_FOUND) { tokenChar = <span class="charliteral">&#39; &#39;</span>; }</div>
+<div class="line"><span class="lineno"> 1442</span>                    <span class="comment">// Tokenize using tabulation or space (each branch data)</span></div>
+<div class="line"><span class="lineno"> 1443</span>                    wxStringTokenizer genDataStrTok(genDataStr, tokenChar);</div>
+<div class="line"><span class="lineno"> 1444</span>                    genData-&gt;busID = wxAtoi(genDataStrTok.GetNextToken());                   <span class="comment">// Bus number</span></div>
+<div class="line"><span class="lineno"> 1445</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;pg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Real power output</span></div>
+<div class="line"><span class="lineno"> 1446</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;qg)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Reative power output</span></div>
+<div class="line"><span class="lineno"> 1447</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;maxReactivePower))</div>
+<div class="line"><span class="lineno"> 1448</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Maximum reactive power (MVAr)</span></div>
+<div class="line"><span class="lineno"> 1449</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;minReactivePower))</div>
+<div class="line"><span class="lineno"> 1450</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;              <span class="comment">// Minumum reactive power (MVAr)</span></div>
+<div class="line"><span class="lineno"> 1451</span>                    genDataStrTok.GetNextToken();  <span class="comment">// Voltage magnitude setpoint (p.u.), skip</span></div>
+<div class="line"><span class="lineno"> 1452</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;genData-&gt;baseMVA)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Power base (MVA)</span></div>
+<div class="line"><span class="lineno"> 1453</span>                    <span class="keywordtype">double</span> machineStatus = 0;</div>
+<div class="line"><span class="lineno"> 1454</span>                    <span class="keywordflow">if</span>(!genDataStrTok.GetNextToken().ToCDouble(&amp;machineStatus))</div>
+<div class="line"><span class="lineno"> 1455</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Machine status (&gt; 0 = machine in-service; &lt;= 0 = machine out-of-service)</span></div>
+<div class="line"><span class="lineno"> 1456</span>                    genData-&gt;isOnline = machineStatus &gt; 1e-3 ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1457</span> </div>
+<div class="line"><span class="lineno"> 1458</span>                    m_genData.push_back(genData);</div>
+<div class="line"><span class="lineno"> 1459</span>                }</div>
+<div class="line"><span class="lineno"> 1460</span>            }</div>
+<div class="line"><span class="lineno"> 1461</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.branch&quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found branch</span></div>
+<div class="line"><span class="lineno"> 1462</span>                wxStringTokenizer branchStrTok = GetMFileTokenData(mFile, line);</div>
+<div class="line"><span class="lineno"> 1463</span>                <span class="keywordflow">while</span>(branchStrTok.HasMoreTokens()) {</div>
+<div class="line"><span class="lineno"> 1464</span>                    BranchData* branchData = <span class="keyword">new</span> BranchData();</div>
+<div class="line"><span class="lineno"> 1465</span>                    wxString branchDataStr = branchStrTok.GetNextToken();</div>
+<div class="line"><span class="lineno"> 1466</span>                    <span class="keywordtype">char</span> tokenChar = <span class="charliteral">&#39;\t&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1467</span>                    <span class="keywordflow">if</span>(branchDataStr.Find(<span class="charliteral">&#39;\t&#39;</span>) == wxNOT_FOUND) { tokenChar = <span class="charliteral">&#39; &#39;</span>; }</div>
+<div class="line"><span class="lineno"> 1468</span>                    <span class="comment">// Tokenize using tabulation or space (each branch data)</span></div>
+<div class="line"><span class="lineno"> 1469</span>                    wxStringTokenizer branchDataStrTok(branchDataStr, tokenChar);</div>
+<div class="line"><span class="lineno"> 1470</span> </div>
+<div class="line"><span class="lineno"> 1471</span>                    <span class="keywordtype">int</span> fromBus = wxAtoi(branchDataStrTok.GetNextToken());  <span class="comment">// From bus number</span></div>
+<div class="line"><span class="lineno"> 1472</span>                    <span class="keywordtype">int</span> toBus = wxAtoi(branchDataStrTok.GetNextToken());    <span class="comment">// To bus number</span></div>
+<div class="line"><span class="lineno"> 1473</span>                    branchData-&gt;busConnections = std::make_pair(fromBus, toBus);</div>
+<div class="line"><span class="lineno"> 1474</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;resistance)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Resistance</span></div>
+<div class="line"><span class="lineno"> 1475</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;indReactance))</div>
+<div class="line"><span class="lineno"> 1476</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Reactance</span></div>
+<div class="line"><span class="lineno"> 1477</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;capSusceptance))</div>
+<div class="line"><span class="lineno"> 1478</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;                 <span class="comment">// Line charging susceptance</span></div>
+<div class="line"><span class="lineno"> 1479</span>                    branchDataStrTok.GetNextToken();  <span class="comment">// MVA rating A, skip</span></div>
+<div class="line"><span class="lineno"> 1480</span>                    branchDataStrTok.GetNextToken();  <span class="comment">// MVA rating B, skip</span></div>
+<div class="line"><span class="lineno"> 1481</span>                    branchDataStrTok.GetNextToken();  <span class="comment">// MVA rating C, skip</span></div>
+<div class="line"><span class="lineno"> 1482</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;tap)) <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// TAP</span></div>
+<div class="line"><span class="lineno"> 1483</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchData-&gt;phaseShift))</div>
+<div class="line"><span class="lineno"> 1484</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Transformer phase-shift angle</span></div>
+<div class="line"><span class="lineno"> 1485</span>                    <span class="keywordtype">double</span> branchStatus = 0;</div>
+<div class="line"><span class="lineno"> 1486</span>                    <span class="keywordflow">if</span>(!branchDataStrTok.GetNextToken().ToCDouble(&amp;branchStatus))</div>
+<div class="line"><span class="lineno"> 1487</span>                        <span class="keywordflow">return</span> <span class="keyword">false</span>;  <span class="comment">// Branch status (&gt; 0 = machine in-service; &lt;= 0 = machine out-of-service)</span></div>
+<div class="line"><span class="lineno"> 1488</span>                    branchData-&gt;isOnline = branchStatus &gt; 1e-3 ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno"> 1489</span> </div>
+<div class="line"><span class="lineno"> 1490</span>                    m_branchData.push_back(branchData);</div>
+<div class="line"><span class="lineno"> 1491</span>                }</div>
+<div class="line"><span class="lineno"> 1492</span>            }</div>
+<div class="line"><span class="lineno"> 1493</span>            <span class="keywordflow">if</span>(line.Find(<span class="stringliteral">&quot;mpc.bus_name&quot;</span>) != wxNOT_FOUND) {  <span class="comment">// Found buses names</span></div>
+<div class="line"><span class="lineno"> 1494</span>                wxString dataStr = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><span class="lineno"> 1495</span>                <span class="keywordflow">while</span>(line.Find(<span class="charliteral">&#39;}&#39;</span>, <span class="keyword">true</span>) == wxNOT_FOUND) {  <span class="comment">// Concatenate all lines until find &#39;]&#39;</span></div>
+<div class="line"><span class="lineno"> 1496</span>                    dataStr += line;</div>
+<div class="line"><span class="lineno"> 1497</span>                    line = mFile.GetNextLine();</div>
+<div class="line"><span class="lineno"> 1498</span>                }</div>
+<div class="line"><span class="lineno"> 1499</span>                dataStr += line;</div>
+<div class="line"><span class="lineno"> 1500</span>                dataStr = dataStr.AfterFirst(<span class="charliteral">&#39;{&#39;</span>).BeforeFirst(<span class="charliteral">&#39;}&#39;</span>);  <span class="comment">// Get only the element data</span></div>
+<div class="line"><span class="lineno"> 1501</span>                wxStringTokenizer dataStrTok(dataStr, <span class="stringliteral">&quot;;&quot;</span>);          <span class="comment">// Tokenize using &#39;;&#39; char (one element data)</span></div>
+<div class="line"><span class="lineno"> 1502</span>                <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = m_busData.begin(), itEnd = m_busData.end(); it != itEnd; ++it) {</div>
+<div class="line"><span class="lineno"> 1503</span>                    <span class="keywordflow">if</span>(dataStrTok.HasMoreTokens())</div>
+<div class="line"><span class="lineno"> 1504</span>                        (*it)-&gt;busName = dataStrTok.GetNextToken().AfterFirst(<span class="charliteral">&#39;\&#39;&#39;</span>).BeforeFirst(<span class="charliteral">&#39;\&#39;&#39;</span>);</div>
+<div class="line"><span class="lineno"> 1505</span>                }</div>
+<div class="line"><span class="lineno"> 1506</span>            }</div>
+<div class="line"><span class="lineno"> 1507</span>        }</div>
+<div class="line"><span class="lineno"> 1508</span>    }</div>
+<div class="line"><span class="lineno"> 1509</span>    <span class="comment">// Last line</span></div>
+<div class="line"><span class="lineno"> 1510</span> </div>
+<div class="line"><span class="lineno"> 1511</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1512</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

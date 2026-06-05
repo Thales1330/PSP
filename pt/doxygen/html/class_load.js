@@ -8,5 +8,5 @@ var class_load =
     [ "GetPlotData", "class_load.html#a6d508be2bbf3910956bba7c86013414c", null ],
     [ "GetTipText", "class_load.html#a00acfbf7dc907e5de79ceb4803632279", null ],
     [ "Rotate", "class_load.html#a46e9f2e0935ecca77b3a46568404d8e3", null ],
-    [ "ShowForm", "class_load.html#a792367f35c97324328816fee156e5ecf", null ]
+    [ "ShowForm", "class_load.html#a72fff8738ff8ed63d76409acbc32cb6f", null ]
 ];

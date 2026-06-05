@@ -427,9 +427,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a35f55626a29d5256f8dc07cf92655e64 inherit pub_methods_class_element" id="r_a35f55626a29d5256f8dc07cf92655e64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a> (wxMenu &amp;menu)</td></tr>
 <tr class="memdesc:a35f55626a29d5256f8dc07cf92655e64 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert general itens to context menu.  <br /></td></tr>
 <tr class="separator:a35f55626a29d5256f8dc07cf92655e64 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1652eded3ccbd241a783691117418b2 inherit pub_methods_class_element" id="r_ae1652eded3ccbd241a783691117418b2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:ae1652eded3ccbd241a783691117418b2 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
-<tr class="separator:ae1652eded3ccbd241a783691117418b2 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a85fc79d65df4cf0fc02467e7a38f4 inherit pub_methods_class_element" id="r_a72a85fc79d65df4cf0fc02467e7a38f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element, wxWindow *workspace=nullptr)</td></tr>
+<tr class="memdesc:a72a85fc79d65df4cf0fc02467e7a38f4 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
+<tr class="separator:a72a85fc79d65df4cf0fc02467e7a38f4 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e3c28dabc2ab55cde6f5bf4d9732073 inherit pub_methods_class_element" id="r_a4e3c28dabc2ab55cde6f5bf4d9732073"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4e3c28dabc2ab55cde6f5bf4d9732073">PointToLineDistance</a> (wxPoint2DDouble point, int *segmentNumber=nullptr) const</td></tr>
 <tr class="memdesc:a4e3c28dabc2ab55cde6f5bf4d9732073 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between a line (formed by point list) and a point.  <br /></td></tr>
 <tr class="separator:a4e3c28dabc2ab55cde6f5bf4d9732073 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -878,10 +878,9 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00221">221</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  222</span>{</div>
-<div class="line"><span class="lineno">  223</span>    <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>();</div>
-<div class="line"><span class="lineno">  224</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><span class="lineno">  226</span>}</div>
+<div class="line"><span class="lineno">  223</span>    <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_connection_line.html">ConnectionLine</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  224</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><span class="lineno">  225</span>}</div>
 <div class="ttc" id="aclass_connection_line_html"><div class="ttname"><a href="class_connection_line.html">ConnectionLine</a></div><div class="ttdoc">Connection between two control elements or other connection line and an element.</div><div class="ttdef"><b>Definition</b> <a href="_connection_line_8h_source.html#l00030">ConnectionLine.h:31</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1086,13 +1085,13 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00228">228</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  229</span>{</div>
-<div class="line"><span class="lineno">  230</span>    m_solved = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  231</span>    m_output = 0.0;</div>
-<div class="line"><span class="lineno">  232</span>    m_value = 0.0;</div>
-<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  234</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_connection_line_8cpp_source.html#l00227">227</a> of file <a class="el" href="_connection_line_8cpp_source.html">ConnectionLine.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  228</span>{</div>
+<div class="line"><span class="lineno">  229</span>    m_solved = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  230</span>    m_output = 0.0;</div>
+<div class="line"><span class="lineno">  231</span>    m_value = 0.0;</div>
+<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  233</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

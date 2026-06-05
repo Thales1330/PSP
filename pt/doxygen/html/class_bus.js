@@ -16,5 +16,5 @@ var class_bus =
     [ "MovePickbox", "class_bus.html#ad569e2192bf95efe668d401583382a04", null ],
     [ "PickboxContains", "class_bus.html#a0b8f3ed6e0049dafca8c52358f96bf4b", null ],
     [ "Rotate", "class_bus.html#ace039d00c23d36a7c14d7e4155c94791", null ],
-    [ "ShowForm", "class_bus.html#a93dbd8f80b11123395093f561d5241d0", null ]
+    [ "ShowForm", "class_bus.html#ad735a7663df96504c312c87b398ab22d", null ]
 ];

@@ -9,5 +9,5 @@ var class_inductor =
     [ "GetTipText", "class_inductor.html#ac16663899a076f0e84722b27193fe530", null ],
     [ "Intersects", "class_inductor.html#a3d331d2a725275a12489401180d4c1d1", null ],
     [ "Rotate", "class_inductor.html#a801bb445c01059558902c0eca4d38cdd", null ],
-    [ "ShowForm", "class_inductor.html#abfaf28fc70a71f3f85940eef7d1551c9", null ]
+    [ "ShowForm", "class_inductor.html#a2cb9979b9fcd8aff31ae4118e28c4132", null ]
 ];

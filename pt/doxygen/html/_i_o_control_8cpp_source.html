@@ -336,7 +336,7 @@ $(document).ready(function(){initNavTree('_i_o_control_8cpp_source.html',''); in
 </div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
 <div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="class_i_o_control.html#abbd3054700825f9c4ac1b7c813f7b439">  217</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_i_o_control.html#abbd3054700825f9c4ac1b7c813f7b439">IOControl::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="class_i_o_control.html#a5e7b0bd7c101aba4a12b95d885b7ce16">  217</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_i_o_control.html#a5e7b0bd7c101aba4a12b95d885b7ce16">IOControl::ShowForm</a>(wxWindow* parent, <a class="code hl_class" href="class_element.html">Element</a>* element, wxWindow* workspace)</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>{</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <a class="code hl_class" href="class_i_o_control_form.html">IOControlForm</a> form(parent, <span class="keyword">this</span>);</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordflow">if</span> (form.ShowModal() == wxID_OK) {</div>
@@ -480,78 +480,77 @@ $(document).ready(function(){initNavTree('_i_o_control_8cpp_source.html',''); in
 <div class="foldopen" id="foldopen00355" data-start="{" data-end="}">
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno"><a class="line" href="class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7">  355</a></span><a class="code hl_class" href="class_element.html">Element</a>* <a class="code hl_function" href="class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7">IOControl::GetCopy</a>()</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>{</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_i_o_control.html">IOControl</a>(m_ioFlags, m_elementID);</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    copy-&gt;m_gcText = m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GetCopy</a>();</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>}</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_i_o_control.html">IOControl</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    copy-&gt;m_gcText = m_gcText ? m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GetCopy</a>() : <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>}</div>
 </div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span> </div>
-<div class="foldopen" id="foldopen00363" data-start="{" data-end="}">
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno"><a class="line" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">  363</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl::UpdateText</a>()</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>{</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    SetValue(m_value);</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="comment">//if (!m_glText-&gt;IsTextureOK()) return false;</span></div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>}</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="foldopen" id="foldopen00362" data-start="{" data-end="}">
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno"><a class="line" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">  362</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl::UpdateText</a>()</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>{</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    SetValue(m_value);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="comment">//if (!m_glText-&gt;IsTextureOK()) return false;</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>}</div>
 </div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>rapidxml::xml_node&lt;&gt;* IOControl::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>{</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;IO&quot;</span>);</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    SaveCADProperties(doc, elementNode);</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    SaveControlNodes(doc, elementNode);</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    XMLParser::SetNodeValue(doc, name, m_name);</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    XMLParser::SetNodeValue(doc, value, m_value);</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <span class="keyword">auto</span> ioFlags = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;IOFlags&quot;</span>);</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>}</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span><span class="keywordtype">bool</span> IOControl::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode)</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>{</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    IOControl::IOFlags value = <span class="keyword">static_cast&lt;</span>IOControl::IOFlags<span class="keyword">&gt;</span>(XMLParser::GetNodeValueInt(elementNode, <span class="stringliteral">&quot;Value&quot;</span>));</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    SetValue(value);</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keyword">auto</span> name = elementNode-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    <span class="keywordflow">if</span> (name) m_name = name-&gt;value();</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span> </div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>}</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="keywordtype">bool</span> IOControl::Initialize()</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>{</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    m_solved = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    m_output = 0.0;</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    <span class="keywordflow">if</span>(m_value == IOControl::IN_TEST) {</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        m_output = m_testValue;</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    }</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>}</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>rapidxml::xml_node&lt;&gt;* IOControl::SaveElement(rapidxml::xml_document&lt;&gt;&amp; doc, rapidxml::xml_node&lt;&gt;* elementListNode)</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>{</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;IO&quot;</span>);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    SaveCADProperties(doc, elementNode);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    SaveControlNodes(doc, elementNode);</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    XMLParser::SetNodeValue(doc, name, m_name);</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    XMLParser::SetNodeValue(doc, value, m_value);</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    <span class="keyword">auto</span> ioFlags = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;IOFlags&quot;</span>);</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>}</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span><span class="keywordtype">bool</span> IOControl::OpenElement(rapidxml::xml_node&lt;&gt;* elementNode)</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>{</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    IOControl::IOFlags value = <span class="keyword">static_cast&lt;</span>IOControl::IOFlags<span class="keyword">&gt;</span>(XMLParser::GetNodeValueInt(elementNode, <span class="stringliteral">&quot;Value&quot;</span>));</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    SetValue(value);</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    <span class="keyword">auto</span> name = elementNode-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keywordflow">if</span> (name) m_name = name-&gt;value();</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>}</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span> </div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="keywordtype">bool</span> IOControl::Initialize()</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>{</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    m_solved = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    m_output = 0.0;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    <span class="keywordflow">if</span>(m_value == IOControl::IN_TEST) {</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>        m_output = m_testValue;</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>    }</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>}</div>
 <div class="ttc" id="a_i_o_control_8h_html"><div class="ttname"><a href="_i_o_control_8h.html">IOControl.h</a></div></div>
 <div class="ttc" id="aclass_control_element_html"><div class="ttname"><a href="class_control_element.html">ControlElement</a></div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00086">ControlElement.h:87</a></div></div>
 <div class="ttc" id="aclass_element_html"><div class="ttname"><a href="class_element.html">Element</a></div><div class="ttdoc">Base class of all elements of the program. This class is responsible for manage graphical and his dat...</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00111">Element.h:112</a></div></div>
 <div class="ttc" id="aclass_element_html_a920fe7ba1563615857618f01e64b3284"><div class="ttname"><a href="class_element.html#a920fe7ba1563615857618f01e64b3284">Element::SetPosition</a></div><div class="ttdeci">void SetPosition(const wxPoint2DDouble position)</div><div class="ttdoc">Set the element position and update the rectangle.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00028">Element.cpp:28</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html"><div class="ttname"><a href="class_g_c_text.html">GCText</a></div><div class="ttdoc">Class to draw text on Graphics Context using wxWidgets.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8h_source.html#l00031">GCText.h:32</a></div></div>
-<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00161">GCText.cpp:161</a></div></div>
+<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00167">GCText.cpp:167</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html_ac5c116072e505e28b726bdf4b8b249a8"><div class="ttname"><a href="class_g_c_text.html#ac5c116072e505e28b726bdf4b8b249a8">GCText::Draw</a></div><div class="ttdeci">virtual void Draw(wxPoint2DDouble position, wxGraphicsContext *gc, double angle=0.0, wxColour colour= *wxBLACK) const</div><div class="ttdoc">Draw the text in wxGraphicsContext.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00035">GCText.cpp:35</a></div></div>
 <div class="ttc" id="aclass_g_c_text_html_aff3fa347bf6cab992c5768c88210a085"><div class="ttname"><a href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">GCText::SetText</a></div><div class="ttdeci">virtual void SetText(wxString text)</div><div class="ttdoc">Set correctly a new text string.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00068">GCText.cpp:68</a></div></div>
 <div class="ttc" id="aclass_i_o_control_form_html"><div class="ttname"><a href="class_i_o_control_form.html">IOControlForm</a></div><div class="ttdoc">Form to edit the input/output control data.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_form_8h_source.html#l00031">IOControlForm.h:32</a></div></div>
 <div class="ttc" id="aclass_i_o_control_html"><div class="ttname"><a href="class_i_o_control.html">IOControl</a></div><div class="ttdoc">Provides the communication with the power element.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8h_source.html#l00042">IOControl.h:43</a></div></div>
-<div class="ttc" id="aclass_i_o_control_html_a19372719e4f316f5cd49e2f289e3d4d9"><div class="ttname"><a href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl::UpdateText</a></div><div class="ttdeci">virtual bool UpdateText()</div><div class="ttdoc">Update the OpenGL text in the element (if present).</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00363">IOControl.cpp:363</a></div></div>
+<div class="ttc" id="aclass_i_o_control_html_a19372719e4f316f5cd49e2f289e3d4d9"><div class="ttname"><a href="class_i_o_control.html#a19372719e4f316f5cd49e2f289e3d4d9">IOControl::UpdateText</a></div><div class="ttdeci">virtual bool UpdateText()</div><div class="ttdoc">Update the OpenGL text in the element (if present).</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00362">IOControl.cpp:362</a></div></div>
 <div class="ttc" id="aclass_i_o_control_html_a47a5633ed68ef0648623b9733dc5dab9"><div class="ttname"><a href="class_i_o_control.html#a47a5633ed68ef0648623b9733dc5dab9">IOControl::Rotate</a></div><div class="ttdeci">virtual void Rotate(bool clockwise=true)</div><div class="ttdoc">Rotate the element.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00226">IOControl.cpp:226</a></div></div>
+<div class="ttc" id="aclass_i_o_control_html_a5e7b0bd7c101aba4a12b95d885b7ce16"><div class="ttname"><a href="class_i_o_control.html#a5e7b0bd7c101aba4a12b95d885b7ce16">IOControl::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element, wxWindow *workspace=nullptr)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00217">IOControl.cpp:217</a></div></div>
 <div class="ttc" id="aclass_i_o_control_html_a99303b5e9bd32affaed8f4e4084fc9f7"><div class="ttname"><a href="class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7">IOControl::GetCopy</a></div><div class="ttdeci">virtual Element * GetCopy()</div><div class="ttdoc">Get a the element copy.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00355">IOControl.cpp:355</a></div></div>
-<div class="ttc" id="aclass_i_o_control_html_abbd3054700825f9c4ac1b7c813f7b439"><div class="ttname"><a href="class_i_o_control.html#abbd3054700825f9c4ac1b7c813f7b439">IOControl::ShowForm</a></div><div class="ttdeci">virtual bool ShowForm(wxWindow *parent, Element *element)</div><div class="ttdoc">Show element data form.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00217">IOControl.cpp:217</a></div></div>
 <div class="ttc" id="aclass_i_o_control_html_ad7e36c345fba92199c745ffa8e1ffa7f"><div class="ttname"><a href="class_i_o_control.html#ad7e36c345fba92199c745ffa8e1ffa7f">IOControl::DrawDC</a></div><div class="ttdeci">virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext *gc) const</div><div class="ttdoc">Draw the element using GDI+.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8cpp_source.html#l00126">IOControl.cpp:126</a></div></div>
 <div class="ttc" id="aclass_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">Node of a control element. This class manages the user interaction with the connection and control el...</div><div class="ttdef"><b>Definition</b> <a href="_control_element_8h_source.html#l00030">ControlElement.h:31</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

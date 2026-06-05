@@ -196,9 +196,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a038162c828595f58782fe97dea2c864d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca41191da8383d577e3717d3e38cdf2b" id="r_aca41191da8383d577e3717d3e38cdf2b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#aca41191da8383d577e3717d3e38cdf2b">SetElectricalData</a> (<a class="el" href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a> electricalData)</td></tr>
 <tr class="separator:aca41191da8383d577e3717d3e38cdf2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3201b22e0271517f5ed3df85da6cee6f" id="r_a3201b22e0271517f5ed3df85da6cee6f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#a3201b22e0271517f5ed3df85da6cee6f">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:a3201b22e0271517f5ed3df85da6cee6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
-<tr class="separator:a3201b22e0271517f5ed3df85da6cee6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab991ae127d8f2a5e50129180f24ae8b8" id="r_ab991ae127d8f2a5e50129180f24ae8b8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#ab991ae127d8f2a5e50129180f24ae8b8">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element, wxWindow *workspace=nullptr)</td></tr>
+<tr class="memdesc:ab991ae127d8f2a5e50129180f24ae8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
+<tr class="separator:ab991ae127d8f2a5e50129180f24ae8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81c23de57a95db2b34c4a053290901d5" id="r_a81c23de57a95db2b34c4a053290901d5"><td class="memItemLeft" align="right" valign="top">virtual rapidxml::xml_node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#a81c23de57a95db2b34c4a053290901d5">SaveElement</a> (rapidxml::xml_document&lt;&gt; &amp;doc, rapidxml::xml_node&lt;&gt; *elementListNode)</td></tr>
 <tr class="separator:a81c23de57a95db2b34c4a053290901d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7182dd3288bdc2887c31de2551145191" id="r_a7182dd3288bdc2887c31de2551145191"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sync_motor.html#a7182dd3288bdc2887c31de2551145191">OpenElement</a> (rapidxml::xml_node&lt;&gt; *elementNode, std::vector&lt; <a class="el" href="class_element.html">Element</a> * &gt; parentList)</td></tr>
@@ -617,11 +617,11 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00021">21</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   21</span>                     : <a class="code hl_class" href="class_machines.html">Machines</a>()</div>
-<div class="line"><span class="lineno">   22</span>{</div>
-<div class="line"><span class="lineno">   23</span>    m_elementType = TYPE_SYNC_MOTOR;</div>
-<div class="line"><span class="lineno">   24</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00023">23</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                     : <a class="code hl_class" href="class_machines.html">Machines</a>()</div>
+<div class="line"><span class="lineno">   24</span>{</div>
+<div class="line"><span class="lineno">   25</span>    m_elementType = TYPE_SYNC_MOTOR;</div>
+<div class="line"><span class="lineno">   26</span>}</div>
 <div class="ttc" id="aclass_machines_html"><div class="ttname"><a href="class_machines.html">Machines</a></div><div class="ttdoc">Abstract class for rotary machines power elements.</div><div class="ttdef"><b>Definition</b> <a href="_machines_8h_source.html#l00033">Machines.h:34</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -642,12 +642,12 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00026">26</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   26</span>                                  : <a class="code hl_class" href="class_machines.html">Machines</a>()</div>
-<div class="line"><span class="lineno">   27</span>{</div>
-<div class="line"><span class="lineno">   28</span>    m_elementType = TYPE_SYNC_MOTOR;</div>
-<div class="line"><span class="lineno">   29</span>    m_electricalData.name = name;</div>
-<div class="line"><span class="lineno">   30</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00028">28</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>                                  : <a class="code hl_class" href="class_machines.html">Machines</a>()</div>
+<div class="line"><span class="lineno">   29</span>{</div>
+<div class="line"><span class="lineno">   30</span>    m_elementType = TYPE_SYNC_MOTOR;</div>
+<div class="line"><span class="lineno">   31</span>    m_electricalData.name = name;</div>
+<div class="line"><span class="lineno">   32</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -666,8 +666,13 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00032">32</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   32</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00034">34</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>{</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">if</span> (m_electricalData.avr) <span class="keyword">delete</span> m_electricalData.avr;</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">if</span> (m_electricalData.speedGov) <span class="keyword">delete</span> m_electricalData.speedGov;</div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordflow">if</span> (m_electricalData.avrSolver) <span class="keyword">delete</span> m_electricalData.avrSolver;</div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> (m_electricalData.speedGovSolver) <span class="keyword">delete</span> m_electricalData.speedGovSolver;</div>
+<div class="line"><span class="lineno">   40</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -698,10 +703,10 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_machines.html">Machines</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00040">40</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>{</div>
-<div class="line"><span class="lineno">   42</span>    DrawDCArc(m_position, 12, 30, 330, dc);</div>
-<div class="line"><span class="lineno">   43</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00048">48</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>{</div>
+<div class="line"><span class="lineno">   50</span>    DrawDCArc(m_position, 12, 30, 330, dc);</div>
+<div class="line"><span class="lineno">   51</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -731,10 +736,10 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_machines.html">Machines</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00035">35</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   36</span>{</div>
-<div class="line"><span class="lineno">   37</span>    DrawDCArc(m_position, 12, 30, 330, 10, gc);</div>
-<div class="line"><span class="lineno">   38</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00043">43</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   44</span>{</div>
+<div class="line"><span class="lineno">   45</span>    DrawDCArc(m_position, 12, 30, 330, 10, gc);</div>
+<div class="line"><span class="lineno">   46</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -773,22 +778,22 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a2a436b0497017a1c3d03dba5e59f037e">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00045">45</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>{</div>
-<div class="line"><span class="lineno">   47</span>    menu.Append(<a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a>, _(<span class="stringliteral">&quot;Edit Synchronous Condenser&quot;</span>));</div>
-<div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>    wxMenu* textMenu = <span class="keyword">new</span> wxMenu();</div>
-<div class="line"><span class="lineno">   50</span> </div>
-<div class="line"><span class="lineno">   51</span>    textMenu-&gt;Append(ID_TXT_NAME, _(<span class="stringliteral">&quot;Name&quot;</span>));</div>
-<div class="line"><span class="lineno">   52</span>    textMenu-&gt;Append(ID_TXT_ACTIVE_POWER, _(<span class="stringliteral">&quot;Active power&quot;</span>));</div>
-<div class="line"><span class="lineno">   53</span>    textMenu-&gt;Append(ID_TXT_REACTIVE_POWER, _(<span class="stringliteral">&quot;Reactive power&quot;</span>));</div>
-<div class="line"><span class="lineno">   54</span>    textMenu-&gt;SetClientData(menu.GetClientData());</div>
-<div class="line"><span class="lineno">   55</span>    menu.AppendSubMenu(textMenu, _(<span class="stringliteral">&quot;Add text&quot;</span>));</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00053">53</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   54</span>{</div>
+<div class="line"><span class="lineno">   55</span>    menu.Append(<a class="code hl_enumvalue" href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a>, _(<span class="stringliteral">&quot;Edit Synchronous Condenser&quot;</span>));</div>
 <div class="line"><span class="lineno">   56</span> </div>
-<div class="line"><span class="lineno">   57</span>    <a class="code hl_function" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a>(menu);</div>
+<div class="line"><span class="lineno">   57</span>    wxMenu* textMenu = <span class="keyword">new</span> wxMenu();</div>
 <div class="line"><span class="lineno">   58</span> </div>
-<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   60</span>}</div>
+<div class="line"><span class="lineno">   59</span>    textMenu-&gt;Append(ID_TXT_NAME, _(<span class="stringliteral">&quot;Name&quot;</span>));</div>
+<div class="line"><span class="lineno">   60</span>    textMenu-&gt;Append(ID_TXT_ACTIVE_POWER, _(<span class="stringliteral">&quot;Active power&quot;</span>));</div>
+<div class="line"><span class="lineno">   61</span>    textMenu-&gt;Append(ID_TXT_REACTIVE_POWER, _(<span class="stringliteral">&quot;Reactive power&quot;</span>));</div>
+<div class="line"><span class="lineno">   62</span>    textMenu-&gt;SetClientData(menu.GetClientData());</div>
+<div class="line"><span class="lineno">   63</span>    menu.AppendSubMenu(textMenu, _(<span class="stringliteral">&quot;Add text&quot;</span>));</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>    <a class="code hl_function" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a>(menu);</div>
+<div class="line"><span class="lineno">   66</span> </div>
+<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   68</span>}</div>
 <div class="ttc" id="a_element_8h_html_a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42"><div class="ttname"><a href="_element_8h.html#a0a9284bee7d4ad748c4a740fdeb3f049ad3186b31000d6bac43a0a20725e26b42">ID_EDIT_ELEMENT</a></div><div class="ttdeci">@ ID_EDIT_ELEMENT</div><div class="ttdef"><b>Definition</b> <a href="_element_8h_source.html#l00075">Element.h:75</a></div></div>
 <div class="ttc" id="aclass_element_html_a35f55626a29d5256f8dc07cf92655e64"><div class="ttname"><a href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">Element::GeneralMenuItens</a></div><div class="ttdeci">virtual void GeneralMenuItens(wxMenu &amp;menu)</div><div class="ttdoc">Insert general itens to context menu.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00388">Element.cpp:388</a></div></div>
 </div><!-- fragment --><div class="dynheader">
@@ -832,12 +837,49 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#a09cef76a09ba34330ede838eaddbc740">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00154">154</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  155</span>{</div>
-<div class="line"><span class="lineno">  156</span>    <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>();</div>
-<div class="line"><span class="lineno">  157</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><span class="lineno">  159</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00162">162</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  163</span>{</div>
+<div class="line"><span class="lineno">  164</span>    <span class="keyword">auto</span> copy = <span class="keyword">new</span> <a class="code hl_class" href="class_sync_motor.html">SyncMotor</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  165</span> </div>
+<div class="line"><span class="lineno">  166</span>    <span class="keyword">auto</span> data = copy-&gt;GetElectricalData();</div>
+<div class="line"><span class="lineno">  167</span>    data.avrSolver = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  168</span>    data.speedGovSolver = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  169</span> </div>
+<div class="line"><span class="lineno">  170</span>    <span class="keywordflow">if</span> (m_electricalData.avr) {</div>
+<div class="line"><span class="lineno">  171</span>        std::vector&lt;std::shared_ptr&lt;ConnectionLine&gt;&gt; cLineList;</div>
+<div class="line"><span class="lineno">  172</span>        std::vector&lt;std::shared_ptr&lt;ControlElement&gt;&gt; elementList;</div>
+<div class="line"><span class="lineno">  173</span> </div>
+<div class="line"><span class="lineno">  174</span>        m_electricalData.avr-&gt;GetContainerCopy(elementList, cLineList);</div>
+<div class="line"><span class="lineno">  175</span> </div>
+<div class="line"><span class="lineno">  176</span>        <span class="keyword">auto</span> avrCopy = <span class="keyword">new</span> <a class="code hl_class" href="class_control_element_container.html">ControlElementContainer</a>();</div>
+<div class="line"><span class="lineno">  177</span>        avrCopy-&gt;FillContainer(elementList, cLineList);</div>
+<div class="line"><span class="lineno">  178</span> </div>
+<div class="line"><span class="lineno">  179</span>        data.avr = avrCopy;</div>
+<div class="line"><span class="lineno">  180</span>    }</div>
+<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  182</span>        data.avr = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  183</span>    }</div>
+<div class="line"><span class="lineno">  184</span> </div>
+<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">if</span> (m_electricalData.speedGov) {</div>
+<div class="line"><span class="lineno">  186</span>        std::vector&lt;std::shared_ptr&lt;ConnectionLine&gt;&gt; cLineList;</div>
+<div class="line"><span class="lineno">  187</span>        std::vector&lt;std::shared_ptr&lt;ControlElement&gt;&gt; elementList;</div>
+<div class="line"><span class="lineno">  188</span> </div>
+<div class="line"><span class="lineno">  189</span>        m_electricalData.speedGov-&gt;GetContainerCopy(elementList, cLineList);</div>
+<div class="line"><span class="lineno">  190</span> </div>
+<div class="line"><span class="lineno">  191</span>        <span class="keyword">auto</span> speedGovCopy = <span class="keyword">new</span> <a class="code hl_class" href="class_control_element_container.html">ControlElementContainer</a>();</div>
+<div class="line"><span class="lineno">  192</span>        speedGovCopy-&gt;FillContainer(elementList, cLineList);</div>
+<div class="line"><span class="lineno">  193</span> </div>
+<div class="line"><span class="lineno">  194</span>        data.speedGov = speedGovCopy;</div>
+<div class="line"><span class="lineno">  195</span>    }</div>
+<div class="line"><span class="lineno">  196</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  197</span>        data.speedGov = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  198</span>    }</div>
+<div class="line"><span class="lineno">  199</span> </div>
+<div class="line"><span class="lineno">  200</span>    copy-&gt;SetElectricalData(data);</div>
+<div class="line"><span class="lineno">  201</span> </div>
+<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><span class="lineno">  203</span>}</div>
+<div class="ttc" id="aclass_control_element_container_html"><div class="ttname"><a href="class_control_element_container.html">ControlElementContainer</a></div><div class="ttdoc">Class that can contain all control elements. Can identify (using RTTI) the elements from a generic li...</div><div class="ttdef"><b>Definition</b> <a href="_control_element_container_8h_source.html#l00047">ControlElementContainer.h:48</a></div></div>
 <div class="ttc" id="aclass_sync_motor_html"><div class="ttname"><a href="class_sync_motor.html">SyncMotor</a></div><div class="ttdoc">Synchronous motor (synchronous compensator) power element.</div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00134">SyncMotor.h:135</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -894,78 +936,78 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00073">73</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   74</span>{</div>
-<div class="line"><span class="lineno">   75</span>    <a class="code hl_struct" href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a> data = m_electricalData;</div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordtype">double</span> machineBasePower = 1.0;</div>
-<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">if</span> (data.useMachineBase) { machineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit); }</div>
-<div class="line"><span class="lineno">   78</span> </div>
-<div class="line"><span class="lineno">   79</span>    <span class="comment">// Active power</span></div>
-<div class="line"><span class="lineno">   80</span>    <span class="keywordtype">double</span> activePower = GetValueFromUnit(data.activePower, data.activePowerUnit);</div>
-<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">if</span> (!m_online) activePower = 0.0;</div>
-<div class="line"><span class="lineno">   82</span>    <span class="keywordflow">if</span> (data.activePowerUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
-<div class="line"><span class="lineno">   83</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.activePower = (activePower * machineBasePower) / systemPowerBase;</div>
-<div class="line"><span class="lineno">   84</span>    }</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   86</span>        data.activePower = activePower / systemPowerBase;</div>
-<div class="line"><span class="lineno">   87</span>    }</div>
-<div class="line"><span class="lineno">   88</span>    data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
-<div class="line"><span class="lineno">   89</span> </div>
-<div class="line"><span class="lineno">   90</span>    <span class="comment">// Reactive power</span></div>
-<div class="line"><span class="lineno">   91</span>    <span class="keywordtype">double</span> reactivePower = GetValueFromUnit(data.reactivePower, data.reactivePowerUnit);</div>
-<div class="line"><span class="lineno">   92</span>    <span class="keywordflow">if</span> (!m_online) reactivePower = 0.0;</div>
-<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">if</span> (data.reactivePowerUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
-<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.reactivePower = (reactivePower * machineBasePower) / systemPowerBase;</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00081">81</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>{</div>
+<div class="line"><span class="lineno">   83</span>    <a class="code hl_struct" href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a> data = m_electricalData;</div>
+<div class="line"><span class="lineno">   84</span>    <span class="keywordtype">double</span> machineBasePower = 1.0;</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> (data.useMachineBase) { machineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit); }</div>
+<div class="line"><span class="lineno">   86</span> </div>
+<div class="line"><span class="lineno">   87</span>    <span class="comment">// Active power</span></div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordtype">double</span> activePower = GetValueFromUnit(data.activePower, data.activePowerUnit);</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> (!m_online) activePower = 0.0;</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">if</span> (data.activePowerUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.activePower = (activePower * machineBasePower) / systemPowerBase;</div>
+<div class="line"><span class="lineno">   92</span>    }</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   94</span>        data.activePower = activePower / systemPowerBase;</div>
 <div class="line"><span class="lineno">   95</span>    }</div>
-<div class="line"><span class="lineno">   96</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   97</span>        data.reactivePower = reactivePower / systemPowerBase;</div>
-<div class="line"><span class="lineno">   98</span>    }</div>
-<div class="line"><span class="lineno">   99</span>    data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>    <span class="comment">// Max reactive power</span></div>
-<div class="line"><span class="lineno">  102</span>    <span class="keywordtype">double</span> maxReactive = GetValueFromUnit(data.maxReactive, data.maxReactiveUnit);</div>
-<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">if</span> (data.maxReactiveUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.maxReactive = (maxReactive * machineBasePower) / systemPowerBase;</div>
-<div class="line"><span class="lineno">  105</span>    }</div>
-<div class="line"><span class="lineno">  106</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  107</span>        data.maxReactive = maxReactive / systemPowerBase;</div>
-<div class="line"><span class="lineno">  108</span>    }</div>
-<div class="line"><span class="lineno">  109</span>    data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
-<div class="line"><span class="lineno">  110</span> </div>
-<div class="line"><span class="lineno">  111</span>    <span class="comment">// Min reactive power</span></div>
-<div class="line"><span class="lineno">  112</span>    <span class="keywordtype">double</span> minReactive = GetValueFromUnit(data.minReactive, data.minReactiveUnit);</div>
-<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">if</span> (data.minReactiveUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
-<div class="line"><span class="lineno">  114</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.minReactive = (minReactive * machineBasePower) / systemPowerBase;</div>
-<div class="line"><span class="lineno">  115</span>    }</div>
-<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  117</span>        data.minReactive = minReactive / systemPowerBase;</div>
-<div class="line"><span class="lineno">  118</span>    }</div>
-<div class="line"><span class="lineno">  119</span>    data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
-<div class="line"><span class="lineno">  120</span> </div>
-<div class="line"><span class="lineno">  121</span>    <span class="keywordtype">double</span> baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordtype">double</span> systemBaseImpedance = (baseVoltage * baseVoltage) / systemPowerBase;</div>
-<div class="line"><span class="lineno">  123</span>    <span class="keywordtype">double</span> machineBaseImpedance = (baseVoltage * baseVoltage) / machineBasePower;</div>
-<div class="line"><span class="lineno">  124</span> </div>
-<div class="line"><span class="lineno">  125</span>    <span class="comment">// Fault data</span></div>
-<div class="line"><span class="lineno">  126</span>    <span class="keywordflow">if</span> (data.useMachineBase) {</div>
-<div class="line"><span class="lineno">  127</span>        data.positiveResistance = (data.positiveResistance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  128</span>        data.positiveReactance = (data.positiveReactance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  129</span>        data.negativeResistance = (data.negativeResistance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  130</span>        data.negativeReactance = (data.negativeReactance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  131</span>        data.zeroResistance = (data.zeroResistance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  132</span>        data.zeroReactance = (data.zeroReactance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  133</span>        data.groundResistance = (data.groundResistance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  134</span>        data.groundReactance = (data.groundReactance * machineBaseImpedance) / systemBaseImpedance;</div>
-<div class="line"><span class="lineno">  135</span>    }</div>
-<div class="line"><span class="lineno">  136</span> </div>
-<div class="line"><span class="lineno">  137</span>    <span class="keywordflow">if</span> (!m_online) {</div>
-<div class="line"><span class="lineno">  138</span>        data.faultCurrent[0] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><span class="lineno">  139</span>        data.faultCurrent[1] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><span class="lineno">  140</span>        data.faultCurrent[2] = std::complex&lt;double&gt;(0, 0);</div>
-<div class="line"><span class="lineno">  141</span>    }</div>
-<div class="line"><span class="lineno">  142</span> </div>
-<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">return</span> data;</div>
-<div class="line"><span class="lineno">  144</span>}</div>
+<div class="line"><span class="lineno">   96</span>    data.activePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">   97</span> </div>
+<div class="line"><span class="lineno">   98</span>    <span class="comment">// Reactive power</span></div>
+<div class="line"><span class="lineno">   99</span>    <span class="keywordtype">double</span> reactivePower = GetValueFromUnit(data.reactivePower, data.reactivePowerUnit);</div>
+<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">if</span> (!m_online) reactivePower = 0.0;</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">if</span> (data.reactivePowerUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.reactivePower = (reactivePower * machineBasePower) / systemPowerBase;</div>
+<div class="line"><span class="lineno">  103</span>    }</div>
+<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  105</span>        data.reactivePower = reactivePower / systemPowerBase;</div>
+<div class="line"><span class="lineno">  106</span>    }</div>
+<div class="line"><span class="lineno">  107</span>    data.reactivePowerUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  108</span> </div>
+<div class="line"><span class="lineno">  109</span>    <span class="comment">// Max reactive power</span></div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordtype">double</span> maxReactive = GetValueFromUnit(data.maxReactive, data.maxReactiveUnit);</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">if</span> (data.maxReactiveUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.maxReactive = (maxReactive * machineBasePower) / systemPowerBase;</div>
+<div class="line"><span class="lineno">  113</span>    }</div>
+<div class="line"><span class="lineno">  114</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  115</span>        data.maxReactive = maxReactive / systemPowerBase;</div>
+<div class="line"><span class="lineno">  116</span>    }</div>
+<div class="line"><span class="lineno">  117</span>    data.maxReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  118</span> </div>
+<div class="line"><span class="lineno">  119</span>    <span class="comment">// Min reactive power</span></div>
+<div class="line"><span class="lineno">  120</span>    <span class="keywordtype">double</span> minReactive = GetValueFromUnit(data.minReactive, data.minReactiveUnit);</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keywordflow">if</span> (data.minReactiveUnit == <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>) {</div>
+<div class="line"><span class="lineno">  122</span>        <span class="keywordflow">if</span> (data.useMachineBase) data.minReactive = (minReactive * machineBasePower) / systemPowerBase;</div>
+<div class="line"><span class="lineno">  123</span>    }</div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  125</span>        data.minReactive = minReactive / systemPowerBase;</div>
+<div class="line"><span class="lineno">  126</span>    }</div>
+<div class="line"><span class="lineno">  127</span>    data.minReactiveUnit = <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>;</div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>    <span class="keywordtype">double</span> baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);</div>
+<div class="line"><span class="lineno">  130</span>    <span class="keywordtype">double</span> systemBaseImpedance = (baseVoltage * baseVoltage) / systemPowerBase;</div>
+<div class="line"><span class="lineno">  131</span>    <span class="keywordtype">double</span> machineBaseImpedance = (baseVoltage * baseVoltage) / machineBasePower;</div>
+<div class="line"><span class="lineno">  132</span> </div>
+<div class="line"><span class="lineno">  133</span>    <span class="comment">// Fault data</span></div>
+<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">if</span> (data.useMachineBase) {</div>
+<div class="line"><span class="lineno">  135</span>        data.positiveResistance = (data.positiveResistance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  136</span>        data.positiveReactance = (data.positiveReactance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  137</span>        data.negativeResistance = (data.negativeResistance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  138</span>        data.negativeReactance = (data.negativeReactance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  139</span>        data.zeroResistance = (data.zeroResistance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  140</span>        data.zeroReactance = (data.zeroReactance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  141</span>        data.groundResistance = (data.groundResistance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  142</span>        data.groundReactance = (data.groundReactance * machineBaseImpedance) / systemBaseImpedance;</div>
+<div class="line"><span class="lineno">  143</span>    }</div>
+<div class="line"><span class="lineno">  144</span> </div>
+<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">if</span> (!m_online) {</div>
+<div class="line"><span class="lineno">  146</span>        data.faultCurrent[0] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><span class="lineno">  147</span>        data.faultCurrent[1] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><span class="lineno">  148</span>        data.faultCurrent[2] = std::complex&lt;double&gt;(0, 0);</div>
+<div class="line"><span class="lineno">  149</span>    }</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">return</span> data;</div>
+<div class="line"><span class="lineno">  152</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a></div><div class="ttdeci">@ UNIT_PU</div></div>
 <div class="ttc" id="astruct_sync_motor_electrical_data_html"><div class="ttname"><a href="struct_sync_motor_electrical_data.html">SyncMotorElectricalData</a></div><div class="ttdef"><b>Definition</b> <a href="_sync_motor_8h_source.html#l00025">SyncMotor.h:25</a></div></div>
 </div><!-- fragment -->
@@ -999,51 +1041,51 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html#aa79db7f54ba9754e953b5059a1d79486">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00161">161</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  162</span>{</div>
-<div class="line"><span class="lineno">  163</span>    wxString tipText = m_electricalData.name;</div>
-<div class="line"><span class="lineno">  164</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  165</span>    <span class="keywordtype">double</span> activePower = m_electricalData.activePower;</div>
-<div class="line"><span class="lineno">  166</span>    <span class="keywordflow">if</span> (!m_online) activePower = 0.0;</div>
-<div class="line"><span class="lineno">  167</span>    tipText += _(<span class="stringliteral">&quot;\nP = &quot;</span>) + wxString::FromDouble(activePower, 5);</div>
-<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">switch</span> (m_electricalData.activePowerUnit) {</div>
-<div class="line"><span class="lineno">  169</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
-<div class="line"><span class="lineno">  170</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  171</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  172</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
-<div class="line"><span class="lineno">  173</span>        tipText += _(<span class="stringliteral">&quot; W&quot;</span>);</div>
-<div class="line"><span class="lineno">  174</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  175</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
-<div class="line"><span class="lineno">  176</span>        tipText += _(<span class="stringliteral">&quot; kW&quot;</span>);</div>
-<div class="line"><span class="lineno">  177</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  178</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
-<div class="line"><span class="lineno">  179</span>        tipText += _(<span class="stringliteral">&quot; MW&quot;</span>);</div>
-<div class="line"><span class="lineno">  180</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  182</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  183</span>    }</div>
-<div class="line"><span class="lineno">  184</span>    <span class="keywordtype">double</span> reactivePower = m_electricalData.reactivePower;</div>
-<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">if</span> (!m_online) reactivePower = 0.0;</div>
-<div class="line"><span class="lineno">  186</span>    tipText += _(<span class="stringliteral">&quot;\nQ = &quot;</span>) + wxString::FromDouble(reactivePower, 5);</div>
-<div class="line"><span class="lineno">  187</span>    <span class="keywordflow">switch</span> (m_electricalData.reactivePowerUnit) {</div>
-<div class="line"><span class="lineno">  188</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
-<div class="line"><span class="lineno">  189</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
-<div class="line"><span class="lineno">  190</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
-<div class="line"><span class="lineno">  192</span>        tipText += _(<span class="stringliteral">&quot; var&quot;</span>);</div>
-<div class="line"><span class="lineno">  193</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  194</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
-<div class="line"><span class="lineno">  195</span>        tipText += _(<span class="stringliteral">&quot; kvar&quot;</span>);</div>
-<div class="line"><span class="lineno">  196</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  197</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
-<div class="line"><span class="lineno">  198</span>        tipText += _(<span class="stringliteral">&quot; Mvar&quot;</span>);</div>
-<div class="line"><span class="lineno">  199</span>    } <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  202</span>    }</div>
-<div class="line"><span class="lineno">  203</span> </div>
-<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">return</span> tipText;</div>
-<div class="line"><span class="lineno">  205</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00205">205</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  206</span>{</div>
+<div class="line"><span class="lineno">  207</span>    wxString tipText = m_electricalData.name;</div>
+<div class="line"><span class="lineno">  208</span>    tipText += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  209</span>    <span class="keywordtype">double</span> activePower = m_electricalData.activePower;</div>
+<div class="line"><span class="lineno">  210</span>    <span class="keywordflow">if</span> (!m_online) activePower = 0.0;</div>
+<div class="line"><span class="lineno">  211</span>    tipText += _(<span class="stringliteral">&quot;\nP = &quot;</span>) + wxString::FromDouble(activePower, 5);</div>
+<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">switch</span> (m_electricalData.activePowerUnit) {</div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  214</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  215</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a856ebaf36f2329e7267076b687d4767d">ElectricalUnit::UNIT_W</a>: {</div>
+<div class="line"><span class="lineno">  217</span>        tipText += _(<span class="stringliteral">&quot; W&quot;</span>);</div>
+<div class="line"><span class="lineno">  218</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a>: {</div>
+<div class="line"><span class="lineno">  220</span>        tipText += _(<span class="stringliteral">&quot; kW&quot;</span>);</div>
+<div class="line"><span class="lineno">  221</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6aee170b85635bc6bf80cee077c2912584">ElectricalUnit::UNIT_MW</a>: {</div>
+<div class="line"><span class="lineno">  223</span>        tipText += _(<span class="stringliteral">&quot; MW&quot;</span>);</div>
+<div class="line"><span class="lineno">  224</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  226</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  227</span>    }</div>
+<div class="line"><span class="lineno">  228</span>    <span class="keywordtype">double</span> reactivePower = m_electricalData.reactivePower;</div>
+<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">if</span> (!m_online) reactivePower = 0.0;</div>
+<div class="line"><span class="lineno">  230</span>    tipText += _(<span class="stringliteral">&quot;\nQ = &quot;</span>) + wxString::FromDouble(reactivePower, 5);</div>
+<div class="line"><span class="lineno">  231</span>    <span class="keywordflow">switch</span> (m_electricalData.reactivePowerUnit) {</div>
+<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af7c76155a5c14b37ca54b0247b73ac9f">ElectricalUnit::UNIT_PU</a>: {</div>
+<div class="line"><span class="lineno">  233</span>        tipText += _(<span class="stringliteral">&quot; p.u.&quot;</span>);</div>
+<div class="line"><span class="lineno">  234</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  235</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a>: {</div>
+<div class="line"><span class="lineno">  236</span>        tipText += _(<span class="stringliteral">&quot; var&quot;</span>);</div>
+<div class="line"><span class="lineno">  237</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6af39b3faa962eade9383e16f6264b34c1">ElectricalUnit::UNIT_kvar</a>: {</div>
+<div class="line"><span class="lineno">  239</span>        tipText += _(<span class="stringliteral">&quot; kvar&quot;</span>);</div>
+<div class="line"><span class="lineno">  240</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a>: {</div>
+<div class="line"><span class="lineno">  242</span>        tipText += _(<span class="stringliteral">&quot; Mvar&quot;</span>);</div>
+<div class="line"><span class="lineno">  243</span>    } <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  244</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  245</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  246</span>    }</div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span>    <span class="keywordflow">return</span> tipText;</div>
+<div class="line"><span class="lineno">  249</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a0e646a1b027c84e1cf14cc9a9d92c9f7">ElectricalUnit::UNIT_Mvar</a></div><div class="ttdeci">@ UNIT_Mvar</div></div>
 <div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a4eeec97655d0f4162c3c92821d311fe1">ElectricalUnit::UNIT_var</a></div><div class="ttdeci">@ UNIT_var</div></div>
 <div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6a5352ff475cc7badab55ab55ecb4195f9">ElectricalUnit::UNIT_kW</a></div><div class="ttdeci">@ UNIT_kW</div></div>
@@ -1089,50 +1131,50 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_power_element.html">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00264">264</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  265</span>{</div>
-<div class="line"><span class="lineno">  266</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode, parentList)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  267</span> </div>
-<div class="line"><span class="lineno">  268</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><span class="lineno">  269</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  270</span> </div>
-<div class="line"><span class="lineno">  271</span>    <a class="code hl_function" href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">SetOnline</a>(XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>));</div>
-<div class="line"><span class="lineno">  272</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
-<div class="line"><span class="lineno">  273</span>    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
-<div class="line"><span class="lineno">  274</span>    m_electricalData.nominalPowerUnit =</div>
-<div class="line"><span class="lineno">  275</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><span class="lineno">  276</span>    m_electricalData.activePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>);</div>
-<div class="line"><span class="lineno">  277</span>    m_electricalData.activePowerUnit =</div>
-<div class="line"><span class="lineno">  278</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><span class="lineno">  279</span>    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
-<div class="line"><span class="lineno">  280</span>    m_electricalData.reactivePowerUnit =</div>
-<div class="line"><span class="lineno">  281</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><span class="lineno">  282</span>    m_electricalData.haveMaxReactive = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;HaveMaxReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  283</span>    m_electricalData.maxReactive = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  284</span>    m_electricalData.maxReactiveUnit =</div>
-<div class="line"><span class="lineno">  285</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><span class="lineno">  286</span>    m_electricalData.haveMinReactive = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;HaveMinReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  287</span>    m_electricalData.minReactive = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  288</span>    m_electricalData.minReactiveUnit =</div>
-<div class="line"><span class="lineno">  289</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
-<div class="line"><span class="lineno">  290</span>    m_electricalData.useMachineBase = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;UseMachineBase&quot;</span>);</div>
-<div class="line"><span class="lineno">  291</span> </div>
-<div class="line"><span class="lineno">  292</span>    <span class="keyword">auto</span> fault = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Fault&quot;</span>);</div>
-<div class="line"><span class="lineno">  293</span>    <span class="keywordflow">if</span> (!fault) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  294</span>    m_electricalData.positiveResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PositiveResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  295</span>    m_electricalData.positiveReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PositiveReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  296</span>    m_electricalData.negativeResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;NegativeResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  297</span>    m_electricalData.negativeReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;NegativeReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  298</span>    m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  299</span>    m_electricalData.zeroReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  300</span>    m_electricalData.groundResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;GroundResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  301</span>    m_electricalData.groundReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;GroundReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  302</span>    m_electricalData.groundNeutral = XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;GroundNeutral&quot;</span>);</div>
-<div class="line"><span class="lineno">  303</span> </div>
-<div class="line"><span class="lineno">  304</span>    m_inserted = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  305</span> </div>
-<div class="line"><span class="lineno">  306</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  307</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00308">308</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  309</span>{</div>
+<div class="line"><span class="lineno">  310</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode, parentList)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  311</span> </div>
+<div class="line"><span class="lineno">  312</span>    <span class="keyword">auto</span> electricalProp = elementNode-&gt;first_node(<span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><span class="lineno">  313</span>    <span class="keywordflow">if</span> (!electricalProp) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  314</span> </div>
+<div class="line"><span class="lineno">  315</span>    <a class="code hl_function" href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">SetOnline</a>(XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>));</div>
+<div class="line"><span class="lineno">  316</span>    m_electricalData.name = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>)-&gt;value();</div>
+<div class="line"><span class="lineno">  317</span>    m_electricalData.nominalPower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
+<div class="line"><span class="lineno">  318</span>    m_electricalData.nominalPowerUnit =</div>
+<div class="line"><span class="lineno">  319</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  320</span>    m_electricalData.activePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>);</div>
+<div class="line"><span class="lineno">  321</span>    m_electricalData.activePowerUnit =</div>
+<div class="line"><span class="lineno">  322</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  323</span>    m_electricalData.reactivePower = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
+<div class="line"><span class="lineno">  324</span>    m_electricalData.reactivePowerUnit =</div>
+<div class="line"><span class="lineno">  325</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  326</span>    m_electricalData.haveMaxReactive = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;HaveMaxReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  327</span>    m_electricalData.maxReactive = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  328</span>    m_electricalData.maxReactiveUnit =</div>
+<div class="line"><span class="lineno">  329</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  330</span>    m_electricalData.haveMinReactive = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;HaveMinReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  331</span>    m_electricalData.minReactive = XMLParser::GetNodeValueDouble(electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  332</span>    m_electricalData.minReactiveUnit =</div>
+<div class="line"><span class="lineno">  333</span>        <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a><span class="keyword">&gt;</span>(XMLParser::GetAttributeValueInt(electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>, <span class="stringliteral">&quot;UnitID&quot;</span>));</div>
+<div class="line"><span class="lineno">  334</span>    m_electricalData.useMachineBase = XMLParser::GetNodeValueInt(electricalProp, <span class="stringliteral">&quot;UseMachineBase&quot;</span>);</div>
+<div class="line"><span class="lineno">  335</span> </div>
+<div class="line"><span class="lineno">  336</span>    <span class="keyword">auto</span> fault = electricalProp-&gt;first_node(<span class="stringliteral">&quot;Fault&quot;</span>);</div>
+<div class="line"><span class="lineno">  337</span>    <span class="keywordflow">if</span> (!fault) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  338</span>    m_electricalData.positiveResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PositiveResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  339</span>    m_electricalData.positiveReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;PositiveReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  340</span>    m_electricalData.negativeResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;NegativeResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  341</span>    m_electricalData.negativeReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;NegativeReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  342</span>    m_electricalData.zeroResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  343</span>    m_electricalData.zeroReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;ZeroReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  344</span>    m_electricalData.groundResistance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;GroundResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  345</span>    m_electricalData.groundReactance = XMLParser::GetNodeValueDouble(fault, <span class="stringliteral">&quot;GroundReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  346</span>    m_electricalData.groundNeutral = XMLParser::GetNodeValueInt(fault, <span class="stringliteral">&quot;GroundNeutral&quot;</span>);</div>
+<div class="line"><span class="lineno">  347</span> </div>
+<div class="line"><span class="lineno">  348</span>    m_inserted = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  349</span> </div>
+<div class="line"><span class="lineno">  350</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  351</span>}</div>
 <div class="ttc" id="a_power_element_8h_html_a377b4dd1510b07ae19c5d2b2159ff0a6"><div class="ttname"><a href="_power_element_8h.html#a377b4dd1510b07ae19c5d2b2159ff0a6">ElectricalUnit</a></div><div class="ttdeci">ElectricalUnit</div><div class="ttdoc">Electrical units.</div><div class="ttdef"><b>Definition</b> <a href="_power_element_8h_source.html#l00028">PowerElement.h:28</a></div></div>
 <div class="ttc" id="aclass_element_html_aeb786f831736af82b74c1393ee4cd2bb"><div class="ttname"><a href="class_element.html#aeb786f831736af82b74c1393ee4cd2bb">Element::SetOnline</a></div><div class="ttdeci">bool SetOnline(bool online=true)</div><div class="ttdoc">Set if the element is online or offline.</div><div class="ttdef"><b>Definition</b> <a href="_element_8cpp_source.html#l00378">Element.cpp:378</a></div></div>
 </div><!-- fragment -->
@@ -1174,62 +1216,62 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00207">207</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  208</span>{</div>
-<div class="line"><span class="lineno">  209</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;SyncMotor&quot;</span>);</div>
-<div class="line"><span class="lineno">  210</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><span class="lineno">  211</span> </div>
-<div class="line"><span class="lineno">  212</span>    SaveCADProperties(doc, elementNode);</div>
-<div class="line"><span class="lineno">  213</span> </div>
-<div class="line"><span class="lineno">  214</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
-<div class="line"><span class="lineno">  215</span>    <span class="keyword">auto</span> isOnline = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>);</div>
-<div class="line"><span class="lineno">  216</span>    XMLParser::SetNodeValue(doc, isOnline, m_online);</div>
-<div class="line"><span class="lineno">  217</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><span class="lineno">  218</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
-<div class="line"><span class="lineno">  219</span>    <span class="keyword">auto</span> nominalPower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
-<div class="line"><span class="lineno">  220</span>    XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);</div>
-<div class="line"><span class="lineno">  221</span>    XMLParser::SetNodeAttribute(doc, nominalPower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.nominalPowerUnit));</div>
-<div class="line"><span class="lineno">  222</span>    <span class="keyword">auto</span> activePower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>);</div>
-<div class="line"><span class="lineno">  223</span>    XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);</div>
-<div class="line"><span class="lineno">  224</span>    XMLParser::SetNodeAttribute(doc, activePower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.activePowerUnit));</div>
-<div class="line"><span class="lineno">  225</span>    <span class="keyword">auto</span> reactivePower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
-<div class="line"><span class="lineno">  226</span>    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);</div>
-<div class="line"><span class="lineno">  227</span>    XMLParser::SetNodeAttribute(doc, reactivePower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.reactivePowerUnit));</div>
-<div class="line"><span class="lineno">  228</span>    <span class="keyword">auto</span> haveMaxReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;HaveMaxReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  229</span>    XMLParser::SetNodeValue(doc, haveMaxReactive, m_electricalData.haveMaxReactive);</div>
-<div class="line"><span class="lineno">  230</span>    <span class="keyword">auto</span> maxReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  231</span>    XMLParser::SetNodeValue(doc, maxReactive, m_electricalData.maxReactive);</div>
-<div class="line"><span class="lineno">  232</span>    XMLParser::SetNodeAttribute(doc, maxReactive, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.maxReactiveUnit));</div>
-<div class="line"><span class="lineno">  233</span>    <span class="keyword">auto</span> haveMinReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;HaveMinReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  234</span>    XMLParser::SetNodeValue(doc, haveMinReactive, m_electricalData.haveMinReactive);</div>
-<div class="line"><span class="lineno">  235</span>    <span class="keyword">auto</span> minReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>);</div>
-<div class="line"><span class="lineno">  236</span>    XMLParser::SetNodeValue(doc, minReactive, m_electricalData.minReactive);</div>
-<div class="line"><span class="lineno">  237</span>    XMLParser::SetNodeAttribute(doc, minReactive, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.minReactiveUnit));</div>
-<div class="line"><span class="lineno">  238</span>    <span class="keyword">auto</span> useMachineBase = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;UseMachineBase&quot;</span>);</div>
-<div class="line"><span class="lineno">  239</span>    XMLParser::SetNodeValue(doc, useMachineBase, m_electricalData.useMachineBase);</div>
-<div class="line"><span class="lineno">  240</span> </div>
-<div class="line"><span class="lineno">  241</span>    <span class="keyword">auto</span> fault = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Fault&quot;</span>);</div>
-<div class="line"><span class="lineno">  242</span>    <span class="keyword">auto</span> positiveResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PositiveResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  243</span>    XMLParser::SetNodeValue(doc, positiveResistance, m_electricalData.positiveResistance);</div>
-<div class="line"><span class="lineno">  244</span>    <span class="keyword">auto</span> positiveReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PositiveReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  245</span>    XMLParser::SetNodeValue(doc, positiveReactance, m_electricalData.positiveReactance);</div>
-<div class="line"><span class="lineno">  246</span>    <span class="keyword">auto</span> negativeResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;NegativeResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  247</span>    XMLParser::SetNodeValue(doc, negativeResistance, m_electricalData.negativeResistance);</div>
-<div class="line"><span class="lineno">  248</span>    <span class="keyword">auto</span> negativeReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;NegativeReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  249</span>    XMLParser::SetNodeValue(doc, negativeReactance, m_electricalData.negativeReactance);</div>
-<div class="line"><span class="lineno">  250</span>    <span class="keyword">auto</span> zeroResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  251</span>    XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);</div>
-<div class="line"><span class="lineno">  252</span>    <span class="keyword">auto</span> zeroReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  253</span>    XMLParser::SetNodeValue(doc, zeroReactance, m_electricalData.zeroReactance);</div>
-<div class="line"><span class="lineno">  254</span>    <span class="keyword">auto</span> groundResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;GroundResistance&quot;</span>);</div>
-<div class="line"><span class="lineno">  255</span>    XMLParser::SetNodeValue(doc, groundResistance, m_electricalData.groundResistance);</div>
-<div class="line"><span class="lineno">  256</span>    <span class="keyword">auto</span> groundReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;GroundReactance&quot;</span>);</div>
-<div class="line"><span class="lineno">  257</span>    XMLParser::SetNodeValue(doc, groundReactance, m_electricalData.groundReactance);</div>
-<div class="line"><span class="lineno">  258</span>    <span class="keyword">auto</span> groundNeutral = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;GroundNeutral&quot;</span>);</div>
-<div class="line"><span class="lineno">  259</span>    XMLParser::SetNodeValue(doc, groundNeutral, m_electricalData.groundNeutral);</div>
-<div class="line"><span class="lineno">  260</span> </div>
-<div class="line"><span class="lineno">  261</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><span class="lineno">  262</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00251">251</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  252</span>{</div>
+<div class="line"><span class="lineno">  253</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;SyncMotor&quot;</span>);</div>
+<div class="line"><span class="lineno">  254</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><span class="lineno">  255</span> </div>
+<div class="line"><span class="lineno">  256</span>    SaveCADProperties(doc, elementNode);</div>
+<div class="line"><span class="lineno">  257</span> </div>
+<div class="line"><span class="lineno">  258</span>    <span class="keyword">auto</span> electricalProp = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;ElectricalProperties&quot;</span>);</div>
+<div class="line"><span class="lineno">  259</span>    <span class="keyword">auto</span> isOnline = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;IsOnline&quot;</span>);</div>
+<div class="line"><span class="lineno">  260</span>    XMLParser::SetNodeValue(doc, isOnline, m_online);</div>
+<div class="line"><span class="lineno">  261</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><span class="lineno">  262</span>    XMLParser::SetNodeValue(doc, name, m_electricalData.name);</div>
+<div class="line"><span class="lineno">  263</span>    <span class="keyword">auto</span> nominalPower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;NominalPower&quot;</span>);</div>
+<div class="line"><span class="lineno">  264</span>    XMLParser::SetNodeValue(doc, nominalPower, m_electricalData.nominalPower);</div>
+<div class="line"><span class="lineno">  265</span>    XMLParser::SetNodeAttribute(doc, nominalPower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.nominalPowerUnit));</div>
+<div class="line"><span class="lineno">  266</span>    <span class="keyword">auto</span> activePower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ActivePower&quot;</span>);</div>
+<div class="line"><span class="lineno">  267</span>    XMLParser::SetNodeValue(doc, activePower, m_electricalData.activePower);</div>
+<div class="line"><span class="lineno">  268</span>    XMLParser::SetNodeAttribute(doc, activePower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.activePowerUnit));</div>
+<div class="line"><span class="lineno">  269</span>    <span class="keyword">auto</span> reactivePower = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;ReactivePower&quot;</span>);</div>
+<div class="line"><span class="lineno">  270</span>    XMLParser::SetNodeValue(doc, reactivePower, m_electricalData.reactivePower);</div>
+<div class="line"><span class="lineno">  271</span>    XMLParser::SetNodeAttribute(doc, reactivePower, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.reactivePowerUnit));</div>
+<div class="line"><span class="lineno">  272</span>    <span class="keyword">auto</span> haveMaxReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;HaveMaxReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  273</span>    XMLParser::SetNodeValue(doc, haveMaxReactive, m_electricalData.haveMaxReactive);</div>
+<div class="line"><span class="lineno">  274</span>    <span class="keyword">auto</span> maxReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;MaxReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  275</span>    XMLParser::SetNodeValue(doc, maxReactive, m_electricalData.maxReactive);</div>
+<div class="line"><span class="lineno">  276</span>    XMLParser::SetNodeAttribute(doc, maxReactive, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.maxReactiveUnit));</div>
+<div class="line"><span class="lineno">  277</span>    <span class="keyword">auto</span> haveMinReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;HaveMinReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  278</span>    XMLParser::SetNodeValue(doc, haveMinReactive, m_electricalData.haveMinReactive);</div>
+<div class="line"><span class="lineno">  279</span>    <span class="keyword">auto</span> minReactive = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;MinReactive&quot;</span>);</div>
+<div class="line"><span class="lineno">  280</span>    XMLParser::SetNodeValue(doc, minReactive, m_electricalData.minReactive);</div>
+<div class="line"><span class="lineno">  281</span>    XMLParser::SetNodeAttribute(doc, minReactive, <span class="stringliteral">&quot;UnitID&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(m_electricalData.minReactiveUnit));</div>
+<div class="line"><span class="lineno">  282</span>    <span class="keyword">auto</span> useMachineBase = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;UseMachineBase&quot;</span>);</div>
+<div class="line"><span class="lineno">  283</span>    XMLParser::SetNodeValue(doc, useMachineBase, m_electricalData.useMachineBase);</div>
+<div class="line"><span class="lineno">  284</span> </div>
+<div class="line"><span class="lineno">  285</span>    <span class="keyword">auto</span> fault = XMLParser::AppendNode(doc, electricalProp, <span class="stringliteral">&quot;Fault&quot;</span>);</div>
+<div class="line"><span class="lineno">  286</span>    <span class="keyword">auto</span> positiveResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PositiveResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  287</span>    XMLParser::SetNodeValue(doc, positiveResistance, m_electricalData.positiveResistance);</div>
+<div class="line"><span class="lineno">  288</span>    <span class="keyword">auto</span> positiveReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;PositiveReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  289</span>    XMLParser::SetNodeValue(doc, positiveReactance, m_electricalData.positiveReactance);</div>
+<div class="line"><span class="lineno">  290</span>    <span class="keyword">auto</span> negativeResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;NegativeResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  291</span>    XMLParser::SetNodeValue(doc, negativeResistance, m_electricalData.negativeResistance);</div>
+<div class="line"><span class="lineno">  292</span>    <span class="keyword">auto</span> negativeReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;NegativeReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  293</span>    XMLParser::SetNodeValue(doc, negativeReactance, m_electricalData.negativeReactance);</div>
+<div class="line"><span class="lineno">  294</span>    <span class="keyword">auto</span> zeroResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  295</span>    XMLParser::SetNodeValue(doc, zeroResistance, m_electricalData.zeroResistance);</div>
+<div class="line"><span class="lineno">  296</span>    <span class="keyword">auto</span> zeroReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;ZeroReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  297</span>    XMLParser::SetNodeValue(doc, zeroReactance, m_electricalData.zeroReactance);</div>
+<div class="line"><span class="lineno">  298</span>    <span class="keyword">auto</span> groundResistance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;GroundResistance&quot;</span>);</div>
+<div class="line"><span class="lineno">  299</span>    XMLParser::SetNodeValue(doc, groundResistance, m_electricalData.groundResistance);</div>
+<div class="line"><span class="lineno">  300</span>    <span class="keyword">auto</span> groundReactance = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;GroundReactance&quot;</span>);</div>
+<div class="line"><span class="lineno">  301</span>    XMLParser::SetNodeValue(doc, groundReactance, m_electricalData.groundReactance);</div>
+<div class="line"><span class="lineno">  302</span>    <span class="keyword">auto</span> groundNeutral = XMLParser::AppendNode(doc, fault, <span class="stringliteral">&quot;GroundNeutral&quot;</span>);</div>
+<div class="line"><span class="lineno">  303</span>    XMLParser::SetNodeValue(doc, groundNeutral, m_electricalData.groundNeutral);</div>
+<div class="line"><span class="lineno">  304</span> </div>
+<div class="line"><span class="lineno">  305</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><span class="lineno">  306</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1307,18 +1349,18 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_power_element.html#a0730506d0417089d69f7ce64b05daed4">PowerElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00146">146</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  147</span>{</div>
-<div class="line"><span class="lineno">  148</span>    <span class="keywordflow">if</span> (nominalVoltage.size() &gt; 0) {</div>
-<div class="line"><span class="lineno">  149</span>        m_electricalData.nominalVoltage = nominalVoltage[0];</div>
-<div class="line"><span class="lineno">  150</span>        m_electricalData.nominalVoltageUnit = nominalVoltageUnit[0];</div>
-<div class="line"><span class="lineno">  151</span>    }</div>
-<div class="line"><span class="lineno">  152</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00154">154</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  155</span>{</div>
+<div class="line"><span class="lineno">  156</span>    <span class="keywordflow">if</span> (nominalVoltage.size() &gt; 0) {</div>
+<div class="line"><span class="lineno">  157</span>        m_electricalData.nominalVoltage = nominalVoltage[0];</div>
+<div class="line"><span class="lineno">  158</span>        m_electricalData.nominalVoltageUnit = nominalVoltageUnit[0];</div>
+<div class="line"><span class="lineno">  159</span>    }</div>
+<div class="line"><span class="lineno">  160</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a3201b22e0271517f5ed3df85da6cee6f" name="a3201b22e0271517f5ed3df85da6cee6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3201b22e0271517f5ed3df85da6cee6f">&#9670;&#160;</a></span>ShowForm()</h2>
+<a id="ab991ae127d8f2a5e50129180f24ae8b8" name="ab991ae127d8f2a5e50129180f24ae8b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab991ae127d8f2a5e50129180f24ae8b8">&#9670;&#160;</a></span>ShowForm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1336,7 +1378,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_element.html">Element</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxWindow *&#160;</td>
+          <td class="paramname"><em>workspace</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1361,18 +1409,18 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00062">62</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>{</div>
-<div class="line"><span class="lineno">   64</span>    <a class="code hl_class" href="class_sync_machine_form.html">SyncMachineForm</a> syncMotorForm(parent, <span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   65</span>    syncMotorForm.SetTitle(_(<span class="stringliteral">&quot;Synchronous Condenser&quot;</span>));</div>
-<div class="line"><span class="lineno">   66</span>    syncMotorForm.CenterOnParent();</div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">if</span> (syncMotorForm.ShowModal() == wxID_OK) {</div>
-<div class="line"><span class="lineno">   68</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   69</span>    }</div>
-<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   71</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_sync_motor_8cpp_source.html#l00070">70</a> of file <a class="el" href="_sync_motor_8cpp_source.html">SyncMotor.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>{</div>
+<div class="line"><span class="lineno">   72</span>    <a class="code hl_class" href="class_sync_machine_form.html">SyncMachineForm</a> syncMotorForm(parent, <span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">   73</span>    syncMotorForm.SetTitle(_(<span class="stringliteral">&quot;Synchronous Condenser&quot;</span>));</div>
+<div class="line"><span class="lineno">   74</span>    syncMotorForm.CenterOnParent();</div>
+<div class="line"><span class="lineno">   75</span>    <span class="keywordflow">if</span> (syncMotorForm.ShowModal() == wxID_OK) {</div>
+<div class="line"><span class="lineno">   76</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   77</span>    }</div>
+<div class="line"><span class="lineno">   78</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   79</span>}</div>
 <div class="ttc" id="aclass_sync_machine_form_html"><div class="ttname"><a href="class_sync_machine_form.html">SyncMachineForm</a></div><div class="ttdoc">Form to edit the synchronous machine power data.</div><div class="ttdef"><b>Definition</b> <a href="_sync_machine_form_8h_source.html#l00037">SyncMachineForm.h:38</a></div></div>
 </div><!-- fragment -->
 </div>

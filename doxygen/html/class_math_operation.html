@@ -167,7 +167,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0fdd533e844f6cd9d852e64f5fa9edc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the element's rect intersects other rect.  <br /></td></tr>
 <tr class="separator:a0fdd533e844f6cd9d852e64f5fa9edc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb3f4d562963a40a605a2d026129bf79" id="r_acb3f4d562963a40a605a2d026129bf79"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_math_operation.html#acb3f4d562963a40a605a2d026129bf79">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:acb3f4d562963a40a605a2d026129bf79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
 <tr class="separator:acb3f4d562963a40a605a2d026129bf79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a7ee572ca3787ff537cfc0fea3df7cd" id="r_a7a7ee572ca3787ff537cfc0fea3df7cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_math_operation.html#a7a7ee572ca3787ff537cfc0fea3df7cd">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:a7a7ee572ca3787ff537cfc0fea3df7cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <br /></td></tr>
@@ -404,6 +403,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a35f55626a29d5256f8dc07cf92655e64 inherit pub_methods_class_element" id="r_a35f55626a29d5256f8dc07cf92655e64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a35f55626a29d5256f8dc07cf92655e64">GeneralMenuItens</a> (wxMenu &amp;menu)</td></tr>
 <tr class="memdesc:a35f55626a29d5256f8dc07cf92655e64 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert general itens to context menu.  <br /></td></tr>
 <tr class="separator:a35f55626a29d5256f8dc07cf92655e64 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a85fc79d65df4cf0fc02467e7a38f4 inherit pub_methods_class_element" id="r_a72a85fc79d65df4cf0fc02467e7a38f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element, wxWindow *workspace=nullptr)</td></tr>
+<tr class="memdesc:a72a85fc79d65df4cf0fc02467e7a38f4 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
+<tr class="separator:a72a85fc79d65df4cf0fc02467e7a38f4 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e3c28dabc2ab55cde6f5bf4d9732073 inherit pub_methods_class_element" id="r_a4e3c28dabc2ab55cde6f5bf4d9732073"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_element.html#a4e3c28dabc2ab55cde6f5bf4d9732073">PointToLineDistance</a> (wxPoint2DDouble point, int *segmentNumber=nullptr) const</td></tr>
 <tr class="memdesc:a4e3c28dabc2ab55cde6f5bf4d9732073 inherit pub_methods_class_element"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between a line (formed by point list) and a point.  <br /></td></tr>
 <tr class="separator:a4e3c28dabc2ab55cde6f5bf4d9732073 inherit pub_methods_class_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -871,18 +873,6 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Show element data form. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">parent</td><td>Form parent </td></tr>
-    <tr><td class="paramname">element</td><td><a class="el" href="class_element.html" title="Base class of all elements of the program. This class is responsible for manage graphical and his dat...">Element</a> that will be edited. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
-
-<p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_math_operation_8h_source.html#l00044">44</a> of file <a class="el" href="_math_operation_8h_source.html">MathOperation.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   44</span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>

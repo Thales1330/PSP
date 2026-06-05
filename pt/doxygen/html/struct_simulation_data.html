@@ -144,15 +144,15 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a233fa8d294fc3265915b025ac8c9a880"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a845385f5d00d4f2481782cbc5bb8d77f" id="r_a845385f5d00d4f2481782cbc5bb8d77f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#a845385f5d00d4f2481782cbc5bb8d77f">stabilityFrequency</a> = 60.0</td></tr>
 <tr class="separator:a845385f5d00d4f2481782cbc5bb8d77f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0ca3cdcc810fcba377e5c6e2bcd71b5" id="r_af0ca3cdcc810fcba377e5c6e2bcd71b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#af0ca3cdcc810fcba377e5c6e2bcd71b5">timeStep</a> = 1e-2</td></tr>
+<tr class="memitem:af0ca3cdcc810fcba377e5c6e2bcd71b5" id="r_af0ca3cdcc810fcba377e5c6e2bcd71b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#af0ca3cdcc810fcba377e5c6e2bcd71b5">timeStep</a> = 1e-3</td></tr>
 <tr class="separator:af0ca3cdcc810fcba377e5c6e2bcd71b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9bad1814e79451a2fd2f6afcee7016b" id="r_ac9bad1814e79451a2fd2f6afcee7016b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#ac9bad1814e79451a2fd2f6afcee7016b">stabilitySimulationTime</a> = 10.0</td></tr>
 <tr class="separator:ac9bad1814e79451a2fd2f6afcee7016b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8073342d75faf98fb15ff5100fdc711" id="r_ac8073342d75faf98fb15ff5100fdc711"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#ac8073342d75faf98fb15ff5100fdc711">stabilityTolerance</a> = 1e-8</td></tr>
+<tr class="memitem:ac8073342d75faf98fb15ff5100fdc711" id="r_ac8073342d75faf98fb15ff5100fdc711"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#ac8073342d75faf98fb15ff5100fdc711">stabilityTolerance</a> = 1e-6</td></tr>
 <tr class="separator:ac8073342d75faf98fb15ff5100fdc711"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b7408c3a9f2dacc35099bbce451c261" id="r_a2b7408c3a9f2dacc35099bbce451c261"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#a2b7408c3a9f2dacc35099bbce451c261">stabilityMaxIterations</a> = 100</td></tr>
 <tr class="separator:a2b7408c3a9f2dacc35099bbce451c261"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5b66ffff262e5d7c49835c1fb57b302" id="r_af5b66ffff262e5d7c49835c1fb57b302"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#af5b66ffff262e5d7c49835c1fb57b302">controlTimeStepRatio</a> = 10</td></tr>
+<tr class="memitem:af5b66ffff262e5d7c49835c1fb57b302" id="r_af5b66ffff262e5d7c49835c1fb57b302"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#af5b66ffff262e5d7c49835c1fb57b302">controlTimeStepRatio</a> = 1</td></tr>
 <tr class="separator:af5b66ffff262e5d7c49835c1fb57b302"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cf2e7f71bf62e323b60e0ddb997266a" id="r_a3cf2e7f71bf62e323b60e0ddb997266a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simulation_data.html#a3cf2e7f71bf62e323b60e0ddb997266a">plotTime</a> = 1e-2</td></tr>
 <tr class="separator:a3cf2e7f71bf62e323b60e0ddb997266a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -358,7 +358,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int SimulationData::controlTimeStepRatio = 10</td>
+          <td class="memname">int SimulationData::controlTimeStepRatio = 1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -614,7 +614,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double SimulationData::stabilityTolerance = 1e-8</td>
+          <td class="memname">double SimulationData::stabilityTolerance = 1e-6</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -646,7 +646,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double SimulationData::timeStep = 1e-2</td>
+          <td class="memname">double SimulationData::timeStep = 1e-3</td>
         </tr>
       </table>
 </div><div class="memdoc">

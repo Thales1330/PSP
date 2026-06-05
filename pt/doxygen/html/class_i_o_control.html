@@ -185,9 +185,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adebd59a32fd699ba4dff4dff44dfbf90" id="r_adebd59a32fd699ba4dff4dff44dfbf90"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#adebd59a32fd699ba4dff4dff44dfbf90">Intersects</a> (wxRect2DDouble rect) const</td></tr>
 <tr class="memdesc:adebd59a32fd699ba4dff4dff44dfbf90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the element's rect intersects other rect.  <br /></td></tr>
 <tr class="separator:adebd59a32fd699ba4dff4dff44dfbf90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbd3054700825f9c4ac1b7c813f7b439" id="r_abbd3054700825f9c4ac1b7c813f7b439"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#abbd3054700825f9c4ac1b7c813f7b439">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:abbd3054700825f9c4ac1b7c813f7b439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
-<tr class="separator:abbd3054700825f9c4ac1b7c813f7b439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e7b0bd7c101aba4a12b95d885b7ce16" id="r_a5e7b0bd7c101aba4a12b95d885b7ce16"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a5e7b0bd7c101aba4a12b95d885b7ce16">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element, wxWindow *workspace=nullptr)</td></tr>
+<tr class="memdesc:a5e7b0bd7c101aba4a12b95d885b7ce16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
+<tr class="separator:a5e7b0bd7c101aba4a12b95d885b7ce16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47a5633ed68ef0648623b9733dc5dab9" id="r_a47a5633ed68ef0648623b9733dc5dab9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_control.html#a47a5633ed68ef0648623b9733dc5dab9">Rotate</a> (bool clockwise=true)</td></tr>
 <tr class="memdesc:a47a5633ed68ef0648623b9733dc5dab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the element.  <br /></td></tr>
 <tr class="separator:a47a5633ed68ef0648623b9733dc5dab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -973,12 +973,11 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00355">355</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  356</span>{</div>
-<div class="line"><span class="lineno">  357</span>    <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_i_o_control.html">IOControl</a>(m_ioFlags, m_elementID);</div>
-<div class="line"><span class="lineno">  358</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  359</span>    copy-&gt;m_gcText = m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GetCopy</a>();</div>
-<div class="line"><span class="lineno">  360</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><span class="lineno">  361</span>}</div>
-<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00161">GCText.cpp:161</a></div></div>
+<div class="line"><span class="lineno">  357</span>    <a class="code hl_class" href="class_i_o_control.html">IOControl</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_i_o_control.html">IOControl</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  358</span>    copy-&gt;m_gcText = m_gcText ? m_gcText-&gt;<a class="code hl_function" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GetCopy</a>() : <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  359</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><span class="lineno">  360</span>}</div>
+<div class="ttc" id="aclass_g_c_text_html_aaf81b82ffd02807c933947ed89a09406"><div class="ttname"><a href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406">GCText::GetCopy</a></div><div class="ttdeci">virtual GCText * GetCopy()</div><div class="ttdoc">Get a deep text copy.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8cpp_source.html#l00167">GCText.cpp:167</a></div></div>
 <div class="ttc" id="aclass_i_o_control_html"><div class="ttname"><a href="class_i_o_control.html">IOControl</a></div><div class="ttdoc">Provides the communication with the power element.</div><div class="ttdef"><b>Definition</b> <a href="_i_o_control_8h_source.html#l00042">IOControl.h:43</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -988,8 +987,6 @@ Here is the call graph for this function:</div>
 <area shape="rect" title="Get a the element copy." alt="" coords="5,5,152,31"/>
 <area shape="rect" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="200,5,332,31"/>
 <area shape="poly" title=" " alt="" coords="152,15,186,15,186,21,152,21"/>
-<area shape="rect" href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085" title="Set correctly a new text string." alt="" coords="380,5,504,31"/>
-<area shape="poly" title=" " alt="" coords="332,15,366,15,366,21,332,21"/>
 </map>
 </div>
 
@@ -1188,15 +1185,15 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00403">403</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  404</span>{</div>
-<div class="line"><span class="lineno">  405</span>    m_solved = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  406</span>    m_output = 0.0;</div>
-<div class="line"><span class="lineno">  407</span>    <span class="keywordflow">if</span>(m_value == IOControl::IN_TEST) {</div>
-<div class="line"><span class="lineno">  408</span>        m_output = m_testValue;</div>
-<div class="line"><span class="lineno">  409</span>    }</div>
-<div class="line"><span class="lineno">  410</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  411</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00402">402</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  403</span>{</div>
+<div class="line"><span class="lineno">  404</span>    m_solved = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  405</span>    m_output = 0.0;</div>
+<div class="line"><span class="lineno">  406</span>    <span class="keywordflow">if</span>(m_value == IOControl::IN_TEST) {</div>
+<div class="line"><span class="lineno">  407</span>        m_output = m_testValue;</div>
+<div class="line"><span class="lineno">  408</span>    }</div>
+<div class="line"><span class="lineno">  409</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  410</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1265,19 +1262,19 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00389">389</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  390</span>{</div>
-<div class="line"><span class="lineno">  391</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  392</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  393</span> </div>
-<div class="line"><span class="lineno">  394</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><span class="lineno">  395</span>    IOControl::IOFlags value = <span class="keyword">static_cast&lt;</span>IOControl::IOFlags<span class="keyword">&gt;</span>(XMLParser::GetNodeValueInt(elementNode, <span class="stringliteral">&quot;Value&quot;</span>));</div>
-<div class="line"><span class="lineno">  396</span>    SetValue(value);</div>
-<div class="line"><span class="lineno">  397</span>    <span class="keyword">auto</span> name = elementNode-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><span class="lineno">  398</span>    <span class="keywordflow">if</span> (name) m_name = name-&gt;value();</div>
-<div class="line"><span class="lineno">  399</span> </div>
-<div class="line"><span class="lineno">  400</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  401</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00388">388</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  389</span>{</div>
+<div class="line"><span class="lineno">  390</span>    <span class="keywordflow">if</span> (!OpenCADProperties(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  391</span>    <span class="keywordflow">if</span> (!OpenControlNodes(elementNode)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  392</span> </div>
+<div class="line"><span class="lineno">  393</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><span class="lineno">  394</span>    IOControl::IOFlags value = <span class="keyword">static_cast&lt;</span>IOControl::IOFlags<span class="keyword">&gt;</span>(XMLParser::GetNodeValueInt(elementNode, <span class="stringliteral">&quot;Value&quot;</span>));</div>
+<div class="line"><span class="lineno">  395</span>    SetValue(value);</div>
+<div class="line"><span class="lineno">  396</span>    <span class="keyword">auto</span> name = elementNode-&gt;first_node(<span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><span class="lineno">  397</span>    <span class="keywordflow">if</span> (name) m_name = name-&gt;value();</div>
+<div class="line"><span class="lineno">  398</span> </div>
+<div class="line"><span class="lineno">  399</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  400</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1372,24 +1369,24 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_element.html">Element</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00370">370</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  371</span>{</div>
-<div class="line"><span class="lineno">  372</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;IO&quot;</span>);</div>
-<div class="line"><span class="lineno">  373</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
-<div class="line"><span class="lineno">  374</span> </div>
-<div class="line"><span class="lineno">  375</span>    SaveCADProperties(doc, elementNode);</div>
-<div class="line"><span class="lineno">  376</span>    SaveControlNodes(doc, elementNode);</div>
-<div class="line"><span class="lineno">  377</span> </div>
-<div class="line"><span class="lineno">  378</span>    <span class="comment">// Element properties</span></div>
-<div class="line"><span class="lineno">  379</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Name&quot;</span>);</div>
-<div class="line"><span class="lineno">  380</span>    XMLParser::SetNodeValue(doc, name, m_name);</div>
-<div class="line"><span class="lineno">  381</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
-<div class="line"><span class="lineno">  382</span>    XMLParser::SetNodeValue(doc, value, m_value);</div>
-<div class="line"><span class="lineno">  383</span>    <span class="keyword">auto</span> ioFlags = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;IOFlags&quot;</span>);</div>
-<div class="line"><span class="lineno">  384</span>    XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);</div>
-<div class="line"><span class="lineno">  385</span> </div>
-<div class="line"><span class="lineno">  386</span>    <span class="keywordflow">return</span> elementNode;</div>
-<div class="line"><span class="lineno">  387</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00369">369</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  370</span>{</div>
+<div class="line"><span class="lineno">  371</span>    <span class="keyword">auto</span> elementNode = XMLParser::AppendNode(doc, elementListNode, <span class="stringliteral">&quot;IO&quot;</span>);</div>
+<div class="line"><span class="lineno">  372</span>    XMLParser::SetNodeAttribute(doc, elementNode, <span class="stringliteral">&quot;ID&quot;</span>, m_elementID);</div>
+<div class="line"><span class="lineno">  373</span> </div>
+<div class="line"><span class="lineno">  374</span>    SaveCADProperties(doc, elementNode);</div>
+<div class="line"><span class="lineno">  375</span>    SaveControlNodes(doc, elementNode);</div>
+<div class="line"><span class="lineno">  376</span> </div>
+<div class="line"><span class="lineno">  377</span>    <span class="comment">// Element properties</span></div>
+<div class="line"><span class="lineno">  378</span>    <span class="keyword">auto</span> name = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Name&quot;</span>);</div>
+<div class="line"><span class="lineno">  379</span>    XMLParser::SetNodeValue(doc, name, m_name);</div>
+<div class="line"><span class="lineno">  380</span>    <span class="keyword">auto</span> value = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;Value&quot;</span>);</div>
+<div class="line"><span class="lineno">  381</span>    XMLParser::SetNodeValue(doc, value, m_value);</div>
+<div class="line"><span class="lineno">  382</span>    <span class="keyword">auto</span> ioFlags = XMLParser::AppendNode(doc, elementNode, <span class="stringliteral">&quot;IOFlags&quot;</span>);</div>
+<div class="line"><span class="lineno">  383</span>    XMLParser::SetNodeValue(doc, ioFlags, m_ioFlags);</div>
+<div class="line"><span class="lineno">  384</span> </div>
+<div class="line"><span class="lineno">  385</span>    <span class="keywordflow">return</span> elementNode;</div>
+<div class="line"><span class="lineno">  386</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1527,8 +1524,8 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="abbd3054700825f9c4ac1b7c813f7b439" name="abbd3054700825f9c4ac1b7c813f7b439"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbd3054700825f9c4ac1b7c813f7b439">&#9670;&#160;</a></span>ShowForm()</h2>
+<a id="a5e7b0bd7c101aba4a12b95d885b7ce16" name="a5e7b0bd7c101aba4a12b95d885b7ce16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e7b0bd7c101aba4a12b95d885b7ce16">&#9670;&#160;</a></span>ShowForm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1546,7 +1543,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_element.html">Element</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxWindow *&#160;</td>
+          <td class="paramname"><em>workspace</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1571,7 +1574,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00217">217</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  218</span>{</div>
@@ -1675,12 +1678,12 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_control_element.html#acab65259365622f1d4a2a1915ee93431">ControlElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00363">363</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  364</span>{</div>
-<div class="line"><span class="lineno">  365</span>    SetValue(m_value);</div>
-<div class="line"><span class="lineno">  366</span>    <span class="comment">//if (!m_glText-&gt;IsTextureOK()) return false;</span></div>
-<div class="line"><span class="lineno">  367</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  368</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_i_o_control_8cpp_source.html#l00362">362</a> of file <a class="el" href="_i_o_control_8cpp_source.html">IOControl.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  363</span>{</div>
+<div class="line"><span class="lineno">  364</span>    SetValue(m_value);</div>
+<div class="line"><span class="lineno">  365</span>    <span class="comment">//if (!m_glText-&gt;IsTextureOK()) return false;</span></div>
+<div class="line"><span class="lineno">  366</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  367</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

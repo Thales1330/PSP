@@ -185,9 +185,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a11b533e8bcede98f3618eb3a5f20657d" id="r_a11b533e8bcede98f3618eb3a5f20657d"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#a11b533e8bcede98f3618eb3a5f20657d">GetTipText</a> () const</td></tr>
 <tr class="memdesc:a11b533e8bcede98f3618eb3a5f20657d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the tip text.  <br /></td></tr>
 <tr class="separator:a11b533e8bcede98f3618eb3a5f20657d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd4f329c65a4f2765d71dce21134f161" id="r_abd4f329c65a4f2765d71dce21134f161"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#abd4f329c65a4f2765d71dce21134f161">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element)</td></tr>
-<tr class="memdesc:abd4f329c65a4f2765d71dce21134f161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
-<tr class="separator:abd4f329c65a4f2765d71dce21134f161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9478e90849b00219406f6b06908338c" id="r_ad9478e90849b00219406f6b06908338c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#ad9478e90849b00219406f6b06908338c">ShowForm</a> (wxWindow *parent, <a class="el" href="class_element.html">Element</a> *element, wxWindow *workspace=nullptr)</td></tr>
+<tr class="memdesc:ad9478e90849b00219406f6b06908338c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show element data form.  <br /></td></tr>
+<tr class="separator:ad9478e90849b00219406f6b06908338c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad74639556189f99bbbdb704ac5184f17" id="r_ad74639556189f99bbbdb704ac5184f17"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_harm_current_electrical_data.html">HarmCurrentElectricalData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#ad74639556189f99bbbdb704ac5184f17">GetElectricalData</a> ()</td></tr>
 <tr class="separator:ad74639556189f99bbbdb704ac5184f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfa454ec436bc4dac3de6905f35ae7c7" id="r_adfa454ec436bc4dac3de6905f35ae7c7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_harm_current_electrical_data.html">HarmCurrentElectricalData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harm_current.html#adfa454ec436bc4dac3de6905f35ae7c7">GetPUElectricalData</a> (double systemPowerBase, double voltage)</td></tr>
@@ -1601,8 +1601,8 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="abd4f329c65a4f2765d71dce21134f161" name="abd4f329c65a4f2765d71dce21134f161"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd4f329c65a4f2765d71dce21134f161">&#9670;&#160;</a></span>ShowForm()</h2>
+<a id="ad9478e90849b00219406f6b06908338c" name="ad9478e90849b00219406f6b06908338c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9478e90849b00219406f6b06908338c">&#9670;&#160;</a></span>ShowForm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1620,7 +1620,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_element.html">Element</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxWindow *&#160;</td>
+          <td class="paramname"><em>workspace</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1645,7 +1651,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the form is shown, false otherwise. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_element.html#ae1652eded3ccbd241a783691117418b2">Element</a>.</p>
+<p>Reimplemented from <a class="el" href="class_element.html#a72a85fc79d65df4cf0fc02467e7a38f4">Element</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_harm_current_8cpp_source.html#l00323">323</a> of file <a class="el" href="_harm_current_8cpp_source.html">HarmCurrent.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  324</span>{</div>

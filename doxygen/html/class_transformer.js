@@ -15,6 +15,6 @@ var class_transformer =
     [ "SetNodeParent", "class_transformer.html#a4f9137e6190fb630167f671a0da51ab6", null ],
     [ "SetNominalVoltage", "class_transformer.html#a7e3cd54e20d795ab9b0b8533ce03b728", null ],
     [ "SetPowerFlowDirection", "class_transformer.html#a328c419af15701734168c8db62eefa36", null ],
-    [ "ShowForm", "class_transformer.html#acb55f182a7f6d7af0feb6a94cb62af4f", null ],
+    [ "ShowForm", "class_transformer.html#a99ab24e0d2b1383f831ccbf5a66211c5", null ],
     [ "StartMove", "class_transformer.html#a0395a11dc8173e511a0596ac96bf05e5", null ]
 ];

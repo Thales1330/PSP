@@ -137,6 +137,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aff3fa347bf6cab992c5768c88210a085" id="r_aff3fa347bf6cab992c5768c88210a085"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">SetText</a> (wxString text)</td></tr>
 <tr class="memdesc:aff3fa347bf6cab992c5768c88210a085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set correctly a new text string.  <br /></td></tr>
 <tr class="separator:aff3fa347bf6cab992c5768c88210a085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b6ec0345c9ec81a6d5cca645d142117" id="r_a3b6ec0345c9ec81a6d5cca645d142117"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_c_text.html#a3b6ec0345c9ec81a6d5cca645d142117">SetText</a> (wxString text, wxSize size)</td></tr>
+<tr class="separator:a3b6ec0345c9ec81a6d5cca645d142117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21dbf91b72a6c52f4ae7439767c6708e" id="r_a21dbf91b72a6c52f4ae7439767c6708e"><td class="memItemLeft" align="right" valign="top">virtual wxString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_c_text.html#a21dbf91b72a6c52f4ae7439767c6708e">GetText</a> () const</td></tr>
 <tr class="separator:a21dbf91b72a6c52f4ae7439767c6708e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a487f28cd8d791acaf5ad75b4537dec9c" id="r_a487f28cd8d791acaf5ad75b4537dec9c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_c_text.html#a487f28cd8d791acaf5ad75b4537dec9c">GetWidth</a> () const</td></tr>
@@ -445,26 +447,14 @@ Here is the caller graph for this function:</div>
 <dl class="section warning"><dt>Warning</dt><dd>The original object is not freed. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>New text pointer. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8cpp_source.html#l00161">161</a> of file <a class="el" href="_g_c_text_8cpp_source.html">GCText.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  162</span>{</div>
-<div class="line"><span class="lineno">  163</span>    <a class="code hl_class" href="class_g_c_text.html">GCText</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_g_c_text.html">GCText</a>();</div>
-<div class="line"><span class="lineno">  164</span>    *copy = *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  165</span> </div>
-<div class="line"><span class="lineno">  166</span>    copy-&gt;<a class="code hl_function" href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085">SetText</a>(copy-&gt;m_text);</div>
-<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><span class="lineno">  168</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8cpp_source.html#l00167">167</a> of file <a class="el" href="_g_c_text_8cpp_source.html">GCText.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  168</span>{</div>
+<div class="line"><span class="lineno">  169</span>    <a class="code hl_class" href="class_g_c_text.html">GCText</a>* copy = <span class="keyword">new</span> <a class="code hl_class" href="class_g_c_text.html">GCText</a>();</div>
+<div class="line"><span class="lineno">  170</span>    *copy = *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  171</span>    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><span class="lineno">  172</span>}</div>
 <div class="ttc" id="aclass_g_c_text_html"><div class="ttname"><a href="class_g_c_text.html">GCText</a></div><div class="ttdoc">Class to draw text on Graphics Context using wxWidgets.</div><div class="ttdef"><b>Definition</b> <a href="_g_c_text_8h_source.html#l00031">GCText.h:32</a></div></div>
 </div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_g_c_text_aaf81b82ffd02807c933947ed89a09406_cgraph.png" border="0" usemap="#aclass_g_c_text_aaf81b82ffd02807c933947ed89a09406_cgraph" alt=""/></div>
-<map name="aclass_g_c_text_aaf81b82ffd02807c933947ed89a09406_cgraph" id="aclass_g_c_text_aaf81b82ffd02807c933947ed89a09406_cgraph">
-<area shape="rect" title="Get a deep text copy." alt="" coords="5,5,137,31"/>
-<area shape="rect" href="class_g_c_text.html#aff3fa347bf6cab992c5768c88210a085" title="Set correctly a new text string." alt="" coords="185,5,309,31"/>
-<area shape="poly" title=" " alt="" coords="138,15,172,15,172,21,138,21"/>
-</map>
-</div>
-<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_g_c_text_aaf81b82ffd02807c933947ed89a09406_icgraph.png" border="0" usemap="#aclass_g_c_text_aaf81b82ffd02807c933947ed89a09406_icgraph" alt=""/></div>
@@ -506,8 +496,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00070">70</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   70</span>{ <span class="keywordflow">return</span> m_font; }</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00071">71</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>{ <span class="keywordflow">return</span> m_font; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -534,8 +524,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00065">65</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   65</span>{ <span class="keywordflow">return</span> m_fontSize; }</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00066">66</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>{ <span class="keywordflow">return</span> m_fontSize; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -562,8 +552,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00063">63</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>{ <span class="keywordflow">return</span> m_size.GetHeight(); }</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00064">64</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span>{ <span class="keywordflow">return</span> m_size.GetHeight(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -590,8 +580,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00061">61</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   61</span>{ <span class="keywordflow">return</span> m_text; }</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00062">62</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>{ <span class="keywordflow">return</span> m_text; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -618,8 +608,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00062">62</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>{ <span class="keywordflow">return</span> m_size.GetWidth(); }</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00063">63</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>{ <span class="keywordflow">return</span> m_size.GetWidth(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -647,11 +637,11 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8cpp_source.html#l00121">121</a> of file <a class="el" href="_g_c_text_8cpp_source.html">GCText.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  122</span>{</div>
-<div class="line"><span class="lineno">  123</span>    m_font = font;</div>
-<div class="line"><span class="lineno">  124</span>    m_customFont = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  125</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8cpp_source.html#l00127">127</a> of file <a class="el" href="_g_c_text_8cpp_source.html">GCText.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  128</span>{</div>
+<div class="line"><span class="lineno">  129</span>    m_font = font;</div>
+<div class="line"><span class="lineno">  130</span>    m_customFont = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  131</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -679,13 +669,13 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00064">64</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   64</span>{ m_fontSize = fontSize; }</div>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00065">65</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>{ m_fontSize = fontSize; }</div>
 </div><!-- fragment -->
 </div>
 </div>
 <a id="aff3fa347bf6cab992c5768c88210a085" name="aff3fa347bf6cab992c5768c88210a085"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff3fa347bf6cab992c5768c88210a085">&#9670;&#160;</a></span>SetText()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aff3fa347bf6cab992c5768c88210a085">&#9670;&#160;</a></span>SetText() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -772,24 +762,56 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_g_c_text_aff3fa347bf6cab992c5768c88210a085_icgraph.png" border="0" usemap="#aclass_g_c_text_aff3fa347bf6cab992c5768c88210a085_icgraph" alt=""/></div>
 <map name="aclass_g_c_text_aff3fa347bf6cab992c5768c88210a085_icgraph" id="aclass_g_c_text_aff3fa347bf6cab992c5768c88210a085_icgraph">
-<area shape="rect" title="Set correctly a new text string." alt="" coords="503,80,627,105"/>
-<area shape="rect" href="class_e_m_t_element.html#a7366ae456a7b5d9d2a54d6f6eefce057" title="Draw the element using wxDC." alt="" coords="268,31,433,56"/>
-<area shape="poly" title=" " alt="" coords="495,79,406,59,407,53,496,74"/>
-<area shape="rect" href="class_g_c_text.html#aaf81b82ffd02807c933947ed89a09406" title="Get a deep text copy." alt="" coords="285,80,417,105"/>
-<area shape="poly" title=" " alt="" coords="489,95,417,95,417,90,489,90"/>
-<area shape="rect" href="class_math_expression.html#a7430d1f92978843de5f1bd171f09def6" title="Update the OpenGL text in the element (if present)." alt="" coords="247,129,455,155"/>
-<area shape="poly" title=" " alt="" coords="496,111,407,132,406,127,495,106"/>
-<area shape="rect" href="class_constant.html#ac566e3a63326d3f543a55af14ae0f8fa" title="Get a the element copy." alt="" coords="30,5,174,31"/>
-<area shape="poly" title=" " alt="" coords="273,79,246,70,221,57,198,44,162,33,164,28,200,40,224,52,248,65,275,74"/>
-<area shape="rect" href="class_gain.html#a489572e289935d7256c037af682b9351" title="Get a the element copy." alt="" coords="44,55,160,80"/>
-<area shape="poly" title=" " alt="" coords="270,87,160,76,160,71,271,82"/>
-<area shape="rect" href="class_i_o_control.html#a99303b5e9bd32affaed8f4e4084fc9f7" title="Get a the element copy." alt="" coords="29,104,175,129"/>
-<area shape="poly" title=" " alt="" coords="271,103,176,112,175,107,271,98"/>
-<area shape="rect" href="class_transfer_function.html#a3312f7e9499aa99742093d3b60547862" title="Get a the element copy." alt="" coords="5,153,199,179"/>
-<area shape="poly" title=" " alt="" coords="272,111,248,119,224,131,200,143,160,156,158,151,198,138,221,126,246,114,271,106"/>
+<area shape="rect" title="Set correctly a new text string." alt="" coords="261,31,385,56"/>
+<area shape="rect" href="class_e_m_t_element.html#a7366ae456a7b5d9d2a54d6f6eefce057" title="Draw the element using wxDC." alt="" coords="27,5,192,31"/>
+<area shape="poly" title=" " alt="" coords="247,37,192,30,192,25,248,32"/>
+<area shape="rect" href="class_math_expression.html#a7430d1f92978843de5f1bd171f09def6" title="Update the OpenGL text in the element (if present)." alt="" coords="5,55,213,80"/>
+<area shape="poly" title=" " alt="" coords="248,54,214,58,213,53,247,49"/>
 </map>
 </div>
 
+</div>
+</div>
+<a id="a3b6ec0345c9ec81a6d5cca645d142117" name="a3b6ec0345c9ec81a6d5cca645d142117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b6ec0345c9ec81a6d5cca645d142117">&#9670;&#160;</a></span>SetText() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GCText::SetText </td>
+          <td>(</td>
+          <td class="paramtype">wxString&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxSize&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8cpp_source.html#l00121">121</a> of file <a class="el" href="_g_c_text_8cpp_source.html">GCText.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>{</div>
+<div class="line"><span class="lineno">  123</span>    m_text = text;</div>
+<div class="line"><span class="lineno">  124</span>    m_size = size;</div>
+<div class="line"><span class="lineno">  125</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -813,7 +835,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00081">81</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00082">82</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
 
 </div>
 </div>
@@ -837,7 +859,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00080">80</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00081">81</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
 
 </div>
 </div>
@@ -861,7 +883,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00076">76</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00077">77</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
 
 </div>
 </div>
@@ -885,7 +907,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00083">83</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00084">84</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
 
 </div>
 </div>
@@ -909,7 +931,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00075">75</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_g_c_text_8h_source.html#l00076">76</a> of file <a class="el" href="_g_c_text_8h_source.html">GCText.h</a>.</p>
 
 </div>
 </div>
