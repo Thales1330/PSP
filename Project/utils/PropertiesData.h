@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -47,11 +47,11 @@ struct SimulationData {
 
 	// Stability
 	double stabilityFrequency = 60.0;
-	double timeStep = 1e-2;
+	double timeStep = 1e-3;
 	double stabilitySimulationTime = 10.0;
-	double stabilityTolerance = 1e-8;
+	double stabilityTolerance = 1e-6;
 	int stabilityMaxIterations = 100;
-	int controlTimeStepRatio = 10;
+	int controlTimeStepRatio = 1;
 	double plotTime = 1e-2;
 	bool useCOI = true;
 	BusFreqEstimation busFreqEstimation = BusFreqEstimation::ANGLE_DERIVATION;
