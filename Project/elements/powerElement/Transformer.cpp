@@ -654,24 +654,22 @@ wxString Transformer::GetTipText() const
 	return tipText;
 }
 
-TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePower)
+TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePower) const
 {
 	TransformerElectricalData data;
+
+	data.name = m_electricalData.name;
 
 	data.nominalPower = m_electricalData.nominalPower;
 	data.nominalPowerUnit = m_electricalData.nominalPowerUnit;
 
 	data.primaryNominalVoltage = m_electricalData.primaryNominalVoltage;
-	data.primaryNominalVoltageUnit =
-		m_electricalData.primaryNominalVoltageUnit;
+	data.primaryNominalVoltageUnit = m_electricalData.primaryNominalVoltageUnit;
 
-	data.secondaryNominalVoltage =
-		m_electricalData.secondaryNominalVoltage;
-	data.secondaryNominalVoltageUnit =
-		m_electricalData.secondaryNominalVoltageUnit;
+	data.secondaryNominalVoltage = m_electricalData.secondaryNominalVoltage;
+	data.secondaryNominalVoltageUnit = m_electricalData.secondaryNominalVoltageUnit;
 
-	data.useTransformerPower =
-		m_electricalData.useTransformerPower;
+	data.useTransformerPower = m_electricalData.useTransformerPower;
 
 	data.baseVoltage = m_electricalData.baseVoltage;
 
@@ -681,18 +679,18 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
 	data.indReactance = m_electricalData.indReactance;
 	data.indReactanceUnit = m_electricalData.indReactanceUnit;
 
+	data.connection = m_electricalData.connection;
+	data.turnsRatio = m_electricalData.turnsRatio;
+	data.phaseShift = m_electricalData.phaseShift;
+
 	data.zeroResistance = m_electricalData.zeroResistance;
 	data.zeroIndReactance = m_electricalData.zeroIndReactance;
 
-	data.primaryGrndResistance =
-		m_electricalData.primaryGrndResistance;
-	data.primaryGrndReactance =
-		m_electricalData.primaryGrndReactance;
+	data.primaryGrndResistance = m_electricalData.primaryGrndResistance;
+	data.primaryGrndReactance = m_electricalData.primaryGrndReactance;
 
-	data.secondaryGrndResistance =
-		m_electricalData.secondaryGrndResistance;
-	data.secondaryGrndReactance =
-		m_electricalData.secondaryGrndReactance;
+	data.secondaryGrndResistance = m_electricalData.secondaryGrndResistance;
+	data.secondaryGrndReactance = m_electricalData.secondaryGrndReactance;
 
 	data.powerFlow[0] = m_electricalData.powerFlow[0];
 	data.powerFlow[1] = m_electricalData.powerFlow[1];

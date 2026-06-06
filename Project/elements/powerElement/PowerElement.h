@@ -227,7 +227,7 @@ class PowerElement : public Element
      * @param dynEvent Event occurrence.
      */
     virtual void SetDynamicEvent(bool dynEvent = true) { m_dynEvent = dynEvent; }
-    virtual double GetValueFromUnit(double value, ElectricalUnit valueUnit);
+    virtual double GetValueFromUnit(double value, ElectricalUnit valueUnit) const;
 
     virtual void SaveCADProperties(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementNode);
     virtual void SaveSwitchingData(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* electricalNode);

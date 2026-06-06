@@ -106,7 +106,7 @@ class Transformer : public Branch
     virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual TransformerElectricalData GetElectricalData() const { return m_electricalData; }
     virtual TransformerElectricalData& GetElectricalDataRef() { return m_electricalData; }
-    virtual TransformerElectricalData GetPUElectricalData(double systemBasePower);
+    virtual TransformerElectricalData GetPUElectricalData(double systemBasePower) const;
     virtual void SetElectricaData(TransformerElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetBestPositionAndRotation();

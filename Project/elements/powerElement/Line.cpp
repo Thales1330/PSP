@@ -707,7 +707,7 @@ wxString Line::GetTipText() const
 	return tipText;
 }
 
-LineElectricalData Line::GetPUElectricalData(double systemBasePower)
+LineElectricalData Line::GetPUElectricalData(double systemBasePower) const
 {
 	LineElectricalData data;
 
@@ -736,6 +736,7 @@ LineElectricalData Line::GetPUElectricalData(double systemBasePower)
 
 	data.powerFlow[0] = m_electricalData.powerFlow[0];
 	data.powerFlow[1] = m_electricalData.powerFlow[1];
+
 
 	double lineBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
 	double baseVoltage = GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);

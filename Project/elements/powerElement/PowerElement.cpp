@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -246,7 +246,7 @@ void PowerElement::DrawDCPowerFlowPts(wxDC& dc) const
     }
 }
 
-double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit)
+double PowerElement::GetValueFromUnit(double value, ElectricalUnit valueUnit) const
 {
     switch(valueUnit) {
         case ElectricalUnit::UNIT_kV:

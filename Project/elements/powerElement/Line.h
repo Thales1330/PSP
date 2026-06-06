@@ -91,7 +91,7 @@ class Line : public Branch
     virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual LineElectricalData GetElectricalData() const { return m_electricalData; }
     virtual LineElectricalData& GetElectricalDataRef() { return m_electricalData; }
-    virtual LineElectricalData GetPUElectricalData(double systemBasePower);
+    virtual LineElectricalData GetPUElectricalData(double systemBasePower) const;
     virtual void SetElectricalData(LineElectricalData electricalData) { m_electricalData = electricalData; }
     virtual void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
     virtual void SetPointList(std::vector<wxPoint2DDouble> pointList);
