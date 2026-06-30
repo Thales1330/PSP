@@ -111,7 +111,7 @@ bool SyncGenerator::ShowForm(wxWindow* parent, Element* element, wxWindow* works
 	Workspace* ws = dynamic_cast<Workspace*>(workspace);
 	if (!ws) return false;
 
-	SyncMachineForm generatorForm(parent, this, static_cast<int>(ws->GetProperties()->GetGeneralPropertiesData().plotLib));
+	SyncMachineForm generatorForm(parent, this, ws);
 	generatorForm.SetTitle(_("Generator"));
 	generatorForm.CenterOnParent();
 	if (generatorForm.ShowModal() == wxID_OK) {

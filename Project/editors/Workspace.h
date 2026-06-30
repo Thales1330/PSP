@@ -38,6 +38,7 @@
 #include "../elements/powerElement/Bus.h"
 
 #include "ControlEditor.h"
+#include "ControlEditorManager.h"
 
 #ifdef _DEBUG
 #include "../utils/DebugMainFrame.hpp"
@@ -160,9 +161,12 @@ public:
 	HMPlane* GetHeatMap() const { return m_hmPlane; }
 	void EnableAutoHeatMapLabel(const bool& enable = true) { m_hmAutomaticLabel = enable; }
 	bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
+	ControlEditorManager& GetControlEditorManager() const { return *m_CEMngr; }
+
 	bool InsertTextElement(int textID, Element* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, int precision = 2);
 	Element* FindTextElement(Element* parentElement, int dataType);
 	void RemoveAllTextElements();
+
 	void CheckSlackBusDuplication(Element* newSlackBus);
 
 	void ValidateBusesVoltages(Element* initialBus);
@@ -221,7 +225,7 @@ protected:
 	wxStatusBar* m_statusBar = nullptr;
 	wxAuiNotebook* m_auiNotebook = nullptr;
 	Camera* m_camera = nullptr;
-	wxTipWindow* m_tipWindow = nullptr;
+	wxTipWindow::Ref m_tipWindow;
 	wxString m_name;
 
 	WorkspaceMode m_mode = WorkspaceMode::MODE_EDIT;
@@ -266,6 +270,7 @@ protected:
 	bool m_showHMTimer = false;
 	bool m_hmAutomaticLabel = false;
 
+	std::unique_ptr<ControlEditorManager> m_CEMngr;
 
 
 #ifdef _DEBUG

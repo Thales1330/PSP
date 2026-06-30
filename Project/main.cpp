@@ -157,9 +157,14 @@ public:
 		else {  // Create default init file.
 			if (!file.Open()) return false;
 
+			wxString plotLibProp = "plotlib=chartdir";
+#ifdef __WXGTK__
+			plotLibProp = "plotlib=mathplot";
+#endif
+
 			// Default parameters.
 			file.AddLine("lang=en");
-			file.AddLine("plotlib=chartdir");
+			file.AddLine(plotLibProp);
 			file.AddLine("theme=light");
 			file.AddLine("labelfont=Arial");
 			file.AddLine("labelfontsize=10");
@@ -172,6 +177,9 @@ public:
 			data.language = wxLANGUAGE_ENGLISH;
 			data.theme = THEME_LIGHT;
 			data.plotLib = PlotLib::wxCHART_DIR;
+#ifdef __WXGTK__
+			data.plotLib = PlotLib::wxMATH_PLOT;
+#endif
 			//data.useOpenGL = true;
 			propertiesData->SetGeneralPropertiesData(data);
 		}
@@ -268,36 +276,6 @@ public:
 		// clean up
 		return 0;
 	}
-
-	/*virtual int OnRun()
-	{
-		int exitcode = wxApp::OnRun();
-		// wxTheClipboard->Flush();
-		if(exitcode != 0) return exitcode;
-	}
-
-	virtual void OnInitCmdLine(wxCmdLineParser& parser)
-	{
-		parser.SetDesc(g_cmdLineDesc);
-		// must refuse '/' as parameter starter or cannot use "/path" style paths
-		parser.SetSwitchChars(wxT("-"));
-	}
-
-	virtual bool OnCmdLineParsed(wxCmdLineParser& parser)
-	{
-		//silent_mode = parser.Found(wxT("s"));
-
-		// to get at your unnamed parameters use
-		wxArrayString files;
-		for(unsigned int i = 0; i < parser.GetParamCount(); i++) { files.Add(parser.GetParam(i));
-wxMessageBox(parser.GetParam(i)); }
-
-		// and other command line parameters
-
-		// then do what you need with them.
-
-		return true;
-	}*/
 };
 
 DECLARE_APP(MainApp)

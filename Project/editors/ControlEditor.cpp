@@ -1015,7 +1015,10 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 void ControlEditor::OnClose(wxCloseEvent& event)
 {
 	if (m_ctrlContainer) { m_ctrlContainer->FillContainer(this); }
-	event.Skip();
+	if (m_ctrlManager)
+		m_ctrlManager->Remove(this);
+	Destroy();
+	//event.Skip();
 }
 
 int ControlEditor::GetNextID()

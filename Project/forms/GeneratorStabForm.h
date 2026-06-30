@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 //#include <wx/glcanvas.h>
 #include "ElementFormBase.h"
 
+class Workspace;
 class SwitchingForm;
 class SyncGenerator;
 class ControlEditor;
@@ -38,7 +39,7 @@ class ControlElementContainer;
 class GeneratorStabForm : public GeneratorStabFormBase
 {
    public:
-    GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator, int plotLib);
+    GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator, Workspace* workspace);
     virtual ~GeneratorStabForm();
 
    protected:
@@ -55,7 +56,7 @@ class GeneratorStabForm : public GeneratorStabFormBase
 
     SyncGenerator* m_syncGenerator = nullptr;
     wxWindow* m_parent = nullptr;
-    int m_plotLib = 0;
+    Workspace* m_workspace = nullptr;
    // wxGLContext* m_sharedGLContext = nullptr;
 };
 #endif  // GENERATORSTABFORM_H

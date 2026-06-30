@@ -130,6 +130,8 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
 	m_height = static_cast<float>(m_workspacePanel->GetSize().y) - 1.0;
 	//m_renderer = new Renderer();
 
+	m_CEMngr = std::make_unique<ControlEditorManager>(this);
+
 	SaveCurrentState();
 }
 
@@ -149,7 +151,7 @@ Workspace::~Workspace()
 	//delete m_glContext;
 	//m_glContext = nullptr;
 	//}
-	if (m_tipWindow) delete m_tipWindow;
+	//if (m_tipWindow) delete m_tipWindow;
 	if (m_properties) delete m_properties;
 }
 
@@ -2564,7 +2566,8 @@ void Workspace::OnTimer(wxTimerEvent& event)
 			if (element->Contains(m_camera->GetMousePosition())) {
 				wxString tipText = element->GetTipText();
 				if (!tipText.IsEmpty()) {
-					m_tipWindow = new wxTipWindow(this, tipText, 10000, &m_tipWindow);
+					//m_tipWindow = new wxTipWindow(this, tipText, 10000, &m_tipWindow);
+					m_tipWindow = wxTipWindow::New(this, tipText, 10000);
 					// Creates a very tiny bounding rect to remove the tip on any mouse movement.
 					m_tipWindow->SetBoundingRect(wxRect(wxGetMousePosition(), wxSize(1, 1)));
 					break;

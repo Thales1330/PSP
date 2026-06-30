@@ -58,19 +58,17 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\wxWidgets-3.2.2.1\wxwidgets.props" />
+    <Import Project="..\..\..\..\..\..\wxWidgets-3.3.2\wxwidgets.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\wxWidgets-3.2.2.1\wxwidgets.props" />
+    <Import Project="..\..\..\..\..\..\wxWidgets-3.3.2\wxwidgets.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\wxWidgets-3.2.2.1\wxwidgets.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\wxWidgets-3.2.2.1\wxwidgets.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -188,6 +186,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="editors\ControlEditorManager.cpp" />
     <ClCompile Include="elements\powerElement\EMTElement.cpp" />
     <ClCompile Include="extLibs\wxChartDir\wxchartviewer.cpp" />
     <ClCompile Include="forms\AboutForm.cpp" />
@@ -301,6 +300,7 @@
     <ClCompile Include="utils\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="editors\ControlEditorManager.h" />
     <ClInclude Include="elements\powerElement\EMTElement.h" />
     <ClInclude Include="extLibs\fftw\fftw3.h" />
     <ClInclude Include="extLibs\wxChartDir\bchartdir.h" />

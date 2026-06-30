@@ -57,6 +57,8 @@ class ControlElementContainer;
 class ChartView;
 class ElementDataObject;
 
+class ControlEditorManager;
+
 enum class ControlElementButtonID : int {
 	ID_IO = 0,
 	ID_TF,
@@ -139,7 +141,9 @@ public:
 	virtual void SetElementsList(const std::vector< std::shared_ptr<ControlElement> >& elementList) { m_elementList = elementList; }
 	virtual void SetConnectionsList(const std::vector< std::shared_ptr<ConnectionLine> >& connectionList) { m_connectionList = connectionList; }
 	virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
+	virtual ControlElementContainer* GetControlContainer() { return m_ctrlContainer; }
 	virtual void SetPlotLib(int plotLib) { m_plotLib = plotLib; }
+	virtual void SetManager(ControlEditorManager* manager) { m_ctrlManager = manager; }
 
 	virtual void OnClose(wxCloseEvent& event);
 	virtual void OnTestClick(wxCommandEvent& event);
@@ -183,6 +187,7 @@ protected:
 	std::vector< std::shared_ptr<ConnectionLine> > m_connectionList;
 
 	ControlElementContainer* m_ctrlContainer = nullptr;
+	ControlEditorManager* m_ctrlManager = nullptr;
 
 	bool m_justOpened = false;
 	int m_ioFlags = 0;

@@ -711,6 +711,8 @@ LineElectricalData Line::GetPUElectricalData(double systemBasePower) const
 {
 	LineElectricalData data;
 
+	data.name = m_electricalData.name;
+
 	data.nominalPower = m_electricalData.nominalPower;
 	data.nominalPowerUnit = m_electricalData.nominalPowerUnit;
 

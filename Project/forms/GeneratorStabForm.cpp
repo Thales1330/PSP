@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -17,15 +17,18 @@
 
 #include "GeneratorStabForm.h"
 
+#include "../editors/Workspace.h"
 #include "../editors/ControlEditor.h"
+#include "../editors/ControlEditorManager.h"
 
 #include "SwitchingForm.h"
 
 #include "../elements/controlElement/ControlElementContainer.h"
 #include "../elements/powerElement/SyncGenerator.h"
+#include "../utils/PropertiesData.h"
 
-GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator, int plotLib)
-	: GeneratorStabFormBase(parent), m_parent(parent), m_syncGenerator(syncGenerator), m_plotLib(plotLib)
+GeneratorStabForm::GeneratorStabForm(wxWindow* parent, SyncGenerator* syncGenerator, Workspace* workspace)
+	: GeneratorStabFormBase(parent), m_parent(parent), m_syncGenerator(syncGenerator), m_workspace(workspace)
 {
 	SetSize(GetBestSize());
 	//m_syncGenerator = syncGenerator;
@@ -80,33 +83,15 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
 			m_syncGenerator->SetElectricalData(data);
 		}
 
-		ControlEditor* cEditor = nullptr;
-
-		//if (m_sharedGLContext) {
-		//	cEditor = new ControlEditor(nullptr, m_sharedGLContext, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
-		//		IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
-		//		IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
-		//		IOControl::OUT_FIELD_VOLTAGE);
-		//}
-		//else {
-		//	cEditor = new ControlEditorDC(nullptr, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
-		//		IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
-		//		IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
-		//		IOControl::OUT_FIELD_VOLTAGE);
-		//}
-		cEditor = new ControlEditor(nullptr, IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
+		int ioFlags = IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_ACTIVE_POWER |
 			IOControl::IN_REACTIVE_POWER | IOControl::IN_INITIAL_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY |
 			IOControl::IN_INITIAL_VELOCITY | IOControl::IN_DELTA_VELOCITY | IOControl::IN_DELTA_ACTIVE_POWER |
-			IOControl::OUT_FIELD_VOLTAGE);
+			IOControl::OUT_FIELD_VOLTAGE;
+		auto& ceManager = m_workspace->GetControlEditorManager();
+		ceManager.Open(data.avr, static_cast<int>(m_workspace->GetProperties()->GetGeneralPropertiesData().plotLib), ioFlags);
 
-		cEditor->SetElementsList(data.avr->GetControlElementsList());
-		cEditor->SetConnectionsList(data.avr->GetConnectionLineList());
-		cEditor->SetControlContainer(data.avr);
-		cEditor->SetPlotLib(m_plotLib);
-		cEditor->Show();
-		cEditor->SetJustOpened(true);
 #ifdef __WXGTK__
-		EndModal(wxID_OK);
+		//EndModal(wxID_OK);
 #endif
 	}
 }
@@ -125,27 +110,14 @@ void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
 			data.speedGov = new ControlElementContainer();
 			m_syncGenerator->SetElectricalData(data);
 		}
-		ControlEditor* cEditor = nullptr;
 
-		//if (m_sharedGLContext) {
-		//    cEditor = new ControlEditor(nullptr, m_sharedGLContext, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
-		//        IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER);
-		//}
-		//else {
-		//	cEditor = new ControlEditorDC(nullptr, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
-		//		IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER);
-		//}
-		cEditor = new ControlEditor(nullptr, IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
-			IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER);
+		int ioFlags = IOControl::IN_VELOCITY | IOControl::IN_ACTIVE_POWER | IOControl::IN_REACTIVE_POWER |
+			IOControl::IN_INITIAL_VELOCITY | IOControl::IN_INITIAL_MEC_POWER | IOControl::OUT_MEC_POWER;
+		auto& ceManager = m_workspace->GetControlEditorManager();
+		ceManager.Open(data.speedGov, static_cast<int>(m_workspace->GetProperties()->GetGeneralPropertiesData().plotLib), ioFlags);
 
-		cEditor->SetElementsList(data.speedGov->GetControlElementsList());
-		cEditor->SetConnectionsList(data.speedGov->GetConnectionLineList());
-		cEditor->SetControlContainer(data.speedGov);
-		cEditor->SetPlotLib(m_plotLib);
-		cEditor->Show();
-		cEditor->SetJustOpened(true);
 #ifdef __WXGTK__
-		EndModal(wxID_OK);
+		//EndModal(wxID_OK);
 #endif
 	}
 }

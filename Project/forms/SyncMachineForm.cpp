@@ -20,7 +20,7 @@
 #include "../elements/powerElement/SyncGenerator.h"
 #include "../elements/powerElement/SyncMotor.h"
 
-SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator, int plotLib) : SyncMachineFormBase(parent), m_parent(parent), m_syncGenerator(syncGenerator), m_plotLib(plotLib)
+SyncMachineForm::SyncMachineForm(wxWindow* parent, SyncGenerator* syncGenerator, Workspace* workspace) : SyncMachineFormBase(parent), m_parent(parent), m_syncGenerator(syncGenerator), m_workspace(workspace)
 {
 	SetSize(GetBestSize());
 	ReplaceStaticTextLabelChar(m_staticTextPosResistance, L'\u2081');
@@ -287,7 +287,7 @@ void SyncMachineForm::OnStabilityButtonClick(wxCommandEvent& event)
 {
 	if (ValidateData()) {
 		if (m_syncGenerator) {
-			GeneratorStabForm stabForm(m_parent, m_syncGenerator, m_plotLib);
+			GeneratorStabForm stabForm(m_parent, m_syncGenerator, m_workspace);
 			stabForm.CenterOnParent();
 			if (stabForm.ShowModal() == wxID_OK) {
 				EndModal(wxID_OK);

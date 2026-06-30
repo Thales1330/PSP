@@ -316,6 +316,8 @@ LoadElectricalData Load::GetPUElectricalData(double systemPowerBase)
 {
 	LoadElectricalData data;
 
+	data.name = m_electricalData.name;
+
 	data.activePower = m_electricalData.activePower;
 	data.activePowerUnit = m_electricalData.activePowerUnit;
 
