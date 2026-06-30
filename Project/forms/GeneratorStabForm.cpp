@@ -91,7 +91,7 @@ void GeneratorStabForm::OnEditAVRButtonClick(wxCommandEvent& event)
 		ceManager.Open(data.avr, static_cast<int>(m_workspace->GetProperties()->GetGeneralPropertiesData().plotLib), ioFlags);
 
 #ifdef __WXGTK__
-		//EndModal(wxID_OK);
+		EndModal(wxID_OK);
 #endif
 	}
 }
@@ -117,7 +117,7 @@ void GeneratorStabForm::OnSpeedGovernorButtonClick(wxCommandEvent& event)
 		ceManager.Open(data.speedGov, static_cast<int>(m_workspace->GetProperties()->GetGeneralPropertiesData().plotLib), ioFlags);
 
 #ifdef __WXGTK__
-		//EndModal(wxID_OK);
+		EndModal(wxID_OK);
 #endif
 	}
 }
