@@ -59,22 +59,22 @@
 
 namespace
 {
-DWORD GetWorkspaceGDIObjects()
-{
-	return GetGuiResources(GetCurrentProcess(), GR_GDIOBJECTS);
-}
-
-void LogWorkspaceGDIDelta(const wxString& tag, DWORD before)
-{
-	const DWORD after = GetWorkspaceGDIObjects();
-	if (after != before) {
-		wxLogDebug("%s: GDI %lu -> %lu (%+ld)",
-			tag,
-			before,
-			after,
-			static_cast<long>(after) - static_cast<long>(before));
+	DWORD GetWorkspaceGDIObjects()
+	{
+		return GetGuiResources(GetCurrentProcess(), GR_GDIOBJECTS);
 	}
-}
+
+	void LogWorkspaceGDIDelta(const wxString& tag, DWORD before)
+	{
+		const DWORD after = GetWorkspaceGDIObjects();
+		if (after != before) {
+			wxLogDebug("%s: GDI %lu -> %lu (%+ld)",
+				tag,
+				before,
+				after,
+				static_cast<long>(after) - static_cast<long>(before));
+		}
+	}
 }
 #endif
 
@@ -89,8 +89,8 @@ Workspace::Workspace() : WorkspaceBase(nullptr)
 	//m_debugFrame->SetSize(m_debugFrame->GetBestVirtualSize());
 #endif
 #endif
-	SetBackgroundColour(wxColour(255, 255, 255));
-	SetBackgroundStyle(wxBG_STYLE_PAINT); // To allow wxBufferedPaintDC works properly.
+	SetColourTheme();
+	m_workspacePanel->SetBackgroundStyle(wxBG_STYLE_PAINT); // To allow wxBufferedPaintDC works properly.
 }
 
 Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wxAuiNotebook* auiNotebook)
@@ -121,7 +121,7 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
 	m_properties = new PropertiesData();
 
 	//m_glCanvas->SetBackgroundStyle(wxBG_STYLE_CUSTOM);
-	m_workspacePanel->SetBackgroundColour(wxColour(255, 255, 255));
+	SetColourTheme();
 	m_workspacePanel->SetBackgroundStyle(wxBG_STYLE_PAINT); // To allow wxBufferedPaintDC works properly.
 
 	//m_width = static_cast<float>(m_glCanvas->GetSize().x) - 1.0;
@@ -137,41 +137,34 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
 
 Workspace::~Workspace()
 {
-	//for (auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-	//	if (*it) delete* it;
-	//}
-	//for (auto it = m_textList.begin(), itEnd = m_textList.end(); it != itEnd; ++it) {
-	//	if (*it) delete* it;
-	//}
-
 	if (m_hmPlane) delete m_hmPlane;
-
 	if (m_camera) delete m_camera;
-	//if (m_isThisContextShared) {
-	//delete m_glContext;
-	//m_glContext = nullptr;
-	//}
-	//if (m_tipWindow) delete m_tipWindow;
 	if (m_properties) delete m_properties;
+}
+
+void Workspace::SetColourTheme()
+{
+	m_properties->SetGUIColourTheme();
+	m_workspacePanel->SetBackgroundColour(m_properties->GetGUIColour()->background);
 }
 
 void Workspace::OnPaint(wxPaintEvent& event)
 {
-#ifdef __WXMSW__
-	const DWORD beforePaint = GetWorkspaceGDIObjects();
-#endif
-	{
-		wxBufferedPaintDC dc(m_workspacePanel);
-		dc.Clear();
-		wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
+	//#ifdef __WXMSW__
+	//	const DWORD beforePaint = GetWorkspaceGDIObjects();
+	//#endif
+		//{
+	wxAutoBufferedPaintDC dc(m_workspacePanel);
+	dc.Clear();
+	wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
 
-		// Draw
-		DrawScene(gc);
-		delete gc;
-	}
-#ifdef __WXMSW__
-	LogWorkspaceGDIDelta("Workspace::OnPaint", beforePaint);
-#endif
+	// Draw
+	DrawScene(gc);
+	delete gc;
+	//}
+//#ifdef __WXMSW__
+//	LogWorkspaceGDIDelta("Workspace::OnPaint", beforePaint);
+//#endif
 
 	event.Skip();
 }
@@ -183,13 +176,13 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 
 		// HMPlane
 		if (m_hmPlane && m_showHM) {
-#ifdef __WXMSW__
-			const DWORD beforeHMPlane = GetWorkspaceGDIObjects();
-#endif
+			//#ifdef __WXMSW__
+			//			const DWORD beforeHMPlane = GetWorkspaceGDIObjects();
+			//#endif
 			m_hmPlane->DrawDC(gc);
-#ifdef __WXMSW__
-			LogWorkspaceGDIDelta("Workspace::DrawScene HMPlane", beforeHMPlane);
-#endif
+			//#ifdef __WXMSW__
+			//			LogWorkspaceGDIDelta("Workspace::DrawScene HMPlane", beforeHMPlane);
+			//#endif
 		}
 
 		gc->Scale(m_camera->GetScale(), m_camera->GetScale());
@@ -197,58 +190,59 @@ void Workspace::DrawScene(wxGraphicsContext* gc)
 
 		// Elements
 		for (auto& element : m_elementList) {
-#ifdef __WXMSW__
-			const DWORD beforeElement = GetWorkspaceGDIObjects();
-#endif
-			element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
-#ifdef __WXMSW__
-			LogWorkspaceGDIDelta(wxString::Format("Workspace::DrawScene element type %d", element->GetElementType()), beforeElement);
-#endif
+			//#ifdef __WXMSW__
+			//			const DWORD beforeElement = GetWorkspaceGDIObjects();
+			//#endif
+			element->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
+			//#ifdef __WXMSW__
+			//			LogWorkspaceGDIDelta(wxString::Format("Workspace::DrawScene element type %d", element->GetElementType()), beforeElement);
+			//#endif
 		}
 
 		// Dummy Text to set correct context
 		// TODO: Find a better way to do this.
-#ifdef __WXMSW__
-		const DWORD beforeDummyText = GetWorkspaceGDIObjects();
-#endif
+//#ifdef __WXMSW__
+//		const DWORD beforeDummyText = GetWorkspaceGDIObjects();
+//#endif
 		Text* text = new Text(wxPoint2DDouble(0.0, 0.0), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 		text->SetText("");
-		text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
+		text->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		delete text;
-#ifdef __WXMSW__
-		LogWorkspaceGDIDelta("Workspace::DrawScene dummy text", beforeDummyText);
-#endif
+		//#ifdef __WXMSW__
+		//		LogWorkspaceGDIDelta("Workspace::DrawScene dummy text", beforeDummyText);
+		//#endif
 
-		// Texts
+				// Texts
 		for (auto& text : m_textList) {
-#ifdef __WXMSW__
-			const DWORD beforeText = GetWorkspaceGDIObjects();
-#endif
-			text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
-#ifdef __WXMSW__
-			LogWorkspaceGDIDelta("Workspace::DrawScene text", beforeText);
-#endif
+			//#ifdef __WXMSW__
+			//			const DWORD beforeText = GetWorkspaceGDIObjects();
+			//#endif
+			text->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
+			//#ifdef __WXMSW__
+			//			LogWorkspaceGDIDelta("Workspace::DrawScene text", beforeText);
+			//#endif
 		}
 
 		// Selection rectangle
-#ifdef __WXMSW__
-		const DWORD beforeSelectionRect = GetWorkspaceGDIObjects();
-#endif
-		gc->SetPen(wxPen(wxColour(0, 125, 255, 255)));
-		gc->SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
+//#ifdef __WXMSW__
+//		const DWORD beforeSelectionRect = GetWorkspaceGDIObjects();
+//#endif
+		wxColour selectionColour = m_properties->GetGUIColour()->selection;
+		gc->SetPen(wxPen(selectionColour));
+		gc->SetBrush(wxBrush(selectionColour));
 		gc->DrawRectangle(m_selectionRect.m_x, m_selectionRect.m_y, m_selectionRect.m_width, m_selectionRect.m_height);
-#ifdef __WXMSW__
-		LogWorkspaceGDIDelta("Workspace::DrawScene selection rectangle", beforeSelectionRect);
-#endif
+		//#ifdef __WXMSW__
+		//		LogWorkspaceGDIDelta("Workspace::DrawScene selection rectangle", beforeSelectionRect);
+		//#endif
 
 		if (m_hmPlane && m_showHM) {
-#ifdef __WXMSW__
-			const DWORD beforeHMLabel = GetWorkspaceGDIObjects();
-#endif
+			//#ifdef __WXMSW__
+			//			const DWORD beforeHMLabel = GetWorkspaceGDIObjects();
+			//#endif
 			m_hmPlane->DrawLabelDC(gc);
-#ifdef __WXMSW__
-			LogWorkspaceGDIDelta("Workspace::DrawScene heatmap label", beforeHMLabel);
-#endif
+			//#ifdef __WXMSW__
+			//			LogWorkspaceGDIDelta("Workspace::DrawScene heatmap label", beforeHMLabel);
+			//#endif
 		}
 	}
 }
@@ -266,19 +260,19 @@ void Workspace::DrawScene(wxDC& dc)
 
 	// Elements
 	for (auto& element : m_elementList) {
-		element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
+		element->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), dc);
 	}
 
 	// Dummy Text to set correct context
 	// TODO: Find a better way to do this.
 	Text* text = new Text(wxPoint2DDouble(0.0, 0.0), m_properties->GetGeneralPropertiesData().labelFont, m_properties->GetGeneralPropertiesData().labelFontSize);
 	text->SetText("");
-	text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
+	text->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), dc);
 	delete text;
 
 	// Texts
 	for (auto& text : m_textList) {
-		text->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), dc);
+		text->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), dc);
 	}
 
 	if (m_hmPlane && m_showHM) {
@@ -799,22 +793,22 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 					// If the mouse is over a pickbox set correct mouse cursor.
 					if (element->PickboxContains(m_camera->ScreenToWorld(event.GetPosition()))) {
 						foundPickbox = true;
-#ifdef __WXMSW__
-						const DWORD beforeCursor = GetWorkspaceGDIObjects();
-#endif
+//#ifdef __WXMSW__
+//						const DWORD beforeCursor = GetWorkspaceGDIObjects();
+//#endif
 						SetCursor(element->GetBestPickboxCursor());
-#ifdef __WXMSW__
-						LogWorkspaceGDIDelta(wxString::Format("Workspace::OnMouseMotion pickbox cursor type %d", element->GetElementType()), beforeCursor);
-#endif
+//#ifdef __WXMSW__
+//						LogWorkspaceGDIDelta(wxString::Format("Workspace::OnMouseMotion pickbox cursor type %d", element->GetElementType()), beforeCursor);
+//#endif
 					}
 					else if (!foundPickbox) {
-#ifdef __WXMSW__
-						const DWORD beforeCursor = GetWorkspaceGDIObjects();
-#endif
+//#ifdef __WXMSW__
+//						const DWORD beforeCursor = GetWorkspaceGDIObjects();
+//#endif
 						SetCursor(wxCURSOR_ARROW);
-#ifdef __WXMSW__
-						LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
-#endif
+//#ifdef __WXMSW__
+//						LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
+//#endif
 						element->ResetPickboxes();
 					}
 				}
@@ -823,13 +817,13 @@ void Workspace::OnMouseMotion(wxMouseEvent& event)
 
 					element->ShowPickbox(false);
 					element->ResetPickboxes();
-#ifdef __WXMSW__
-					const DWORD beforeCursor = GetWorkspaceGDIObjects();
-#endif
+//#ifdef __WXMSW__
+//					const DWORD beforeCursor = GetWorkspaceGDIObjects();
+//#endif
 					SetCursor(wxCURSOR_ARROW);
-#ifdef __WXMSW__
-					LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
-#endif
+//#ifdef __WXMSW__
+//					LogWorkspaceGDIDelta("Workspace::OnMouseMotion arrow cursor", beforeCursor);
+//#endif
 				}
 			}
 		}
@@ -1335,13 +1329,13 @@ void Workspace::GetStateListsCopy(const std::vector< std::shared_ptr<PowerElemen
 	std::map<Element*, Element*> elementMap;
 
 	for (auto& element : elementsList) {
-#ifdef __WXMSW__
-		const DWORD beforeElementCopy = GetWorkspaceGDIObjects();
-#endif
+//#ifdef __WXMSW__
+//		const DWORD beforeElementCopy = GetWorkspaceGDIObjects();
+//#endif
 		PowerElement* copyElement = static_cast<PowerElement*>(element->GetCopy());
-#ifdef __WXMSW__
-		LogWorkspaceGDIDelta(wxString::Format("Workspace::GetStateListsCopy element copy type %d", element->GetElementType()), beforeElementCopy);
-#endif
+//#ifdef __WXMSW__
+//		LogWorkspaceGDIDelta(wxString::Format("Workspace::GetStateListsCopy element copy type %d", element->GetElementType()), beforeElementCopy);
+//#endif
 		elementsListCopy.emplace_back(copyElement);
 		elementMap[element.get()] = copyElement;
 	}
@@ -1370,13 +1364,13 @@ void Workspace::GetStateListsCopy(const std::vector< std::shared_ptr<PowerElemen
 	}
 
 	for (const auto& text : textList) {
-#ifdef __WXMSW__
-		const DWORD beforeTextCopy = GetWorkspaceGDIObjects();
-#endif
+//#ifdef __WXMSW__
+//		const DWORD beforeTextCopy = GetWorkspaceGDIObjects();
+//#endif
 		auto copyText = static_cast<Text*>(text->GetCopy());
-#ifdef __WXMSW__
-		LogWorkspaceGDIDelta("Workspace::GetStateListsCopy text copy", beforeTextCopy);
-#endif
+//#ifdef __WXMSW__
+//		LogWorkspaceGDIDelta("Workspace::GetStateListsCopy text copy", beforeTextCopy);
+//#endif
 		// Set text the correct element associated with the text
 		auto it = elementMap.find(copyText->GetElement());
 
@@ -2372,17 +2366,17 @@ bool Workspace::Paste()
 void Workspace::SaveCurrentState()
 {
 	//return;
-#ifdef __WXMSW__
-	const DWORD beforeSaveState = GetWorkspaceGDIObjects();
-#endif
+//#ifdef __WXMSW__
+//	const DWORD beforeSaveState = GetWorkspaceGDIObjects();
+//#endif
 	// Setup current state
 	std::vector< std::shared_ptr<PowerElement> > currentStateElementList;
 	std::vector< std::shared_ptr<Text> > currentStateTextList;
 
 	GetStateListsCopy(m_elementList, m_textList, currentStateElementList, currentStateTextList);
-#ifdef __WXMSW__
-	LogWorkspaceGDIDelta("Workspace::SaveCurrentState after copy", beforeSaveState);
-#endif
+//#ifdef __WXMSW__
+//	LogWorkspaceGDIDelta("Workspace::SaveCurrentState after copy", beforeSaveState);
+//#endif
 
 	// Delete all states after the current one
 	//auto itE = m_elementListState.begin();
@@ -2424,13 +2418,13 @@ void Workspace::SaveCurrentState()
 
 	m_elementListState.emplace_back(currentStateElementList);
 	m_textListState.emplace_back(currentStateTextList);
-#ifdef __WXMSW__
-	LogWorkspaceGDIDelta(wxString::Format("Workspace::SaveCurrentState stored states=%zu elements=%zu texts=%zu",
-		m_elementListState.size(),
-		currentStateElementList.size(),
-		currentStateTextList.size()),
-		beforeSaveState);
-#endif
+//#ifdef __WXMSW__
+//	LogWorkspaceGDIDelta(wxString::Format("Workspace::SaveCurrentState stored states=%zu elements=%zu texts=%zu",
+//		m_elementListState.size(),
+//		currentStateElementList.size(),
+//		currentStateTextList.size()),
+//		beforeSaveState);
+//#endif
 
 #ifdef _DEBUG
 	wxString msg = "";
@@ -2895,7 +2889,7 @@ bool Workspace::RunFrequencyResponse()
 		_("Question"), wxYES_NO | wxCENTRE | wxICON_QUESTION);
 	if (msgDialog.ShowModal() == wxID_YES) {
 		std::vector<ElementPlotData> plotDataList;
-		for (auto& element :  m_elementList) {
+		for (auto& element : m_elementList) {
 			ElementPlotData plotData;
 			if (element->GetPlotData(plotData, PlotStudy::FREQRESPONSE)) plotDataList.push_back(plotData);
 		}

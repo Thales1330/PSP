@@ -18,6 +18,7 @@
 #include "SimulationsSettingsForm.h"
 #include "../utils/PropertiesData.h"
 #include "../utils/Path.h"
+#include "../elements/Element.h"
 
 SimulationsSettingsForm::SimulationsSettingsForm(wxWindow* parent, PropertiesData* properties, wxLocale* locale)
 	: SimulationsSettingsFormBase(parent)

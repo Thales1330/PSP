@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -41,8 +41,8 @@ class Machines : public PowerElement
     virtual bool AddParent(Element* parent, wxPoint2DDouble position);
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     //virtual void Draw(wxPoint2DDouble translation, double scale) const;
-    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext*  gc) const;
-    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const;
+    virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext*  gc) const;
+    virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const;
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual void Move(wxPoint2DDouble position);
     virtual void MoveNode(Element* element, wxPoint2DDouble position);

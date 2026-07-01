@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -36,7 +36,7 @@ class MathOperation : public ControlElement
     virtual ~MathOperation();
 
     //virtual void Draw(wxPoint2DDouble translation, double scale) const;
-    virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
+    virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void DrawSymbol() const {}
     virtual void DrawDCSymbol(wxGraphicsContext* gc) const {}
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }

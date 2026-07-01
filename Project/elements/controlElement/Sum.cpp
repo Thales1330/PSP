@@ -47,80 +47,11 @@ Sum::~Sum()
 	m_nodeList.clear();
 }
 
-//void Sum::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//    glLineWidth(1.0);
-//    if(m_selected) {
-//        glColor4dv(m_selectionColour.GetRGBA());
-//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-//    }
-//    glColor4d(1.0, 1.0, 1.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-//
-//    // Plot signals.
-//    glLineWidth(2.0);
-//    wxPoint2DDouble signalOffset[4];
-//    wxPoint2DDouble sigmaOffset;
-//    if(m_angle == 0.0) {
-//        signalOffset[0] = wxPoint2DDouble(6, 0);
-//        signalOffset[1] = wxPoint2DDouble(12, 0);
-//        signalOffset[2] = wxPoint2DDouble(9, -3);
-//        signalOffset[3] = wxPoint2DDouble(9, 3);
-//        sigmaOffset = wxPoint2DDouble(6, 0);
-//    } else if(m_angle == 90.0) {
-//        signalOffset[0] = wxPoint2DDouble(-3, 9);
-//        signalOffset[1] = wxPoint2DDouble(3, 9);
-//        signalOffset[2] = wxPoint2DDouble(0, 6);
-//        signalOffset[3] = wxPoint2DDouble(0, 12);
-//        sigmaOffset = wxPoint2DDouble(0, 6);
-//    } else if(m_angle == 180.0) {
-//        signalOffset[0] = wxPoint2DDouble(-6, 0);
-//        signalOffset[1] = wxPoint2DDouble(-12, 0);
-//        signalOffset[2] = wxPoint2DDouble(-9, -3);
-//        signalOffset[3] = wxPoint2DDouble(-9, 3);
-//        sigmaOffset = wxPoint2DDouble(-6, 0);
-//    } else if(m_angle == 270.0) {
-//        signalOffset[0] = wxPoint2DDouble(-3, -9);
-//        signalOffset[1] = wxPoint2DDouble(3, -9);
-//        signalOffset[2] = wxPoint2DDouble(0, -6);
-//        signalOffset[3] = wxPoint2DDouble(0, -12);
-//        sigmaOffset = wxPoint2DDouble(0, -6);
-//    }
-//    for(int i = 0; i < (int)m_nodeList.size() - 1; ++i) {
-//        std::vector<wxPoint2DDouble> hLine;
-//        hLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[0]);
-//        hLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[1]);
-//        DrawLine(hLine);
-//        if(m_signalList[i] == SIGNAL_POSITIVE) {
-//            std::vector<wxPoint2DDouble> vLine;
-//            vLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[2]);
-//            vLine.push_back(m_nodeList[i]->GetPosition() + signalOffset[3]);
-//            DrawLine(vLine);
-//        }
-//    }
-//
-//    // Plot sigma.
-//    std::vector<wxPoint2DDouble> sigma;
-//    sigma.push_back(m_position + wxPoint2DDouble(4, 9) + sigmaOffset);
-//    sigma.push_back(m_position + wxPoint2DDouble(-6, 9) + sigmaOffset);
-//    sigma.push_back(m_position + wxPoint2DDouble(0, 0) + sigmaOffset);
-//    sigma.push_back(m_position + wxPoint2DDouble(-6, -9) + sigmaOffset);
-//    sigma.push_back(m_position + wxPoint2DDouble(4, -9) + sigmaOffset);
-//    glColor4d(0.0, 0.3, 1.0, 1.0);
-//    DrawLine(sigma);
-//
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawNodes();
-//}
-
-void Sum::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Sum::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(m_selectionColour));
+		gc->SetBrush(wxBrush(guiColour->selection));
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}

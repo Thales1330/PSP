@@ -22,34 +22,6 @@
 #include "../../utils/ElementPlotData.h"
 
 /**
- * @enum ElectricalUnit
- * @brief Electrical units.
- */
-enum class ElectricalUnit : int {
-    UNIT_PU = 0, /**< Per unit (p.u.) */
-    UNIT_V,      /**< Volt */
-    UNIT_kV,     /**< Kilovolts */
-    UNIT_A,      /**< Ampere */
-    UNIT_kA,     /**< Kiloampere */
-    UNIT_W,      /**< Watts */
-    UNIT_kW,     /**< Kilowatts */
-    UNIT_MW,     /**< Megawatts */
-    UNIT_VA,     /**< Volt-ampere */
-    UNIT_kVA,    /**< Kilovolt-ampere */
-    UNIT_MVA,    /**< Megavolt-ampere */
-    UNIT_var,    /**< Volt-ampere reactive */
-    UNIT_kvar,   /**< Kilovolt-ampere reactive */
-    UNIT_Mvar,   /**< Megavolt-ampere reactive */
-    UNIT_OHM,    /**< Ohm */
-    UNIT_OHM_km, /**< Ohm/km */
-    UNIT_S,      /**< Siemens */
-    UNIT_S_km,   /**< Siemens/km */
-    UNIT_DEGREE, /**< Degree */
-    UNIT_RADIAN,  /**< Radian */
-    UNIT_NONE
-};
-
-/**
  * @enum FaultData
  * @brief Information about fault (type and location).
  */
@@ -161,9 +133,9 @@ class PowerElement : public Element
     /**
      * @brief Draw switch using device context.
      */
-    virtual void DrawDCSwitches(wxGraphicsContext* gc) const;
+    virtual void DrawDCSwitches(GUIColour* guiColour, wxGraphicsContext* gc) const;
 
-    virtual void DrawDCSwitches(wxDC& dc) const;
+    virtual void DrawDCSwitches(GUIColour* guiColour, wxDC& dc) const;
 
     /**
      * @brief Calculate the points of the power flow arrows.
@@ -180,9 +152,9 @@ class PowerElement : public Element
      * @brief Draw power flow arrows using device context.
      * @param gc Device context.
      */
-    virtual void DrawDCPowerFlowPts(wxGraphicsContext* gc) const;
+    virtual void DrawDCPowerFlowPts(GUIColour* guiColour, wxGraphicsContext* gc) const;
 
-    virtual void DrawDCPowerFlowPts(wxDC& dc) const;
+    virtual void DrawDCPowerFlowPts(GUIColour* guiColour, wxDC& dc) const;
 
     /**
      * @brief Set nominal voltage of the element.

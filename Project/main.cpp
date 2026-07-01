@@ -232,10 +232,18 @@ public:
 				wxOK | wxCENTRE | wxICON_ERROR);
 			msgDialog.ShowModal();
 		}
+		//MSWEnableDarkMode();
 #endif // __WXMSW__
 
 		PropertiesData* propertiesData = new PropertiesData();
 		LoadInitFile(propertiesData);
+
+		if (propertiesData->GetGeneralPropertiesData().theme == THEME_LIGHT)
+			SetAppearance(Appearance::Light);
+		else if (propertiesData->GetGeneralPropertiesData().theme == THEME_DARK)
+			SetAppearance(Appearance::Dark);
+		else
+			SetAppearance(Appearance::System);
 
 		wxLocale* locale = new wxLocale();
 		LoadCatalogs(locale, propertiesData);

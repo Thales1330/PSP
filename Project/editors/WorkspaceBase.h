@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _PSP_PROJECT_WORKSPACE_BASE_CLASSES_H
-#define _PSP_PROJECT_WORKSPACE_BASE_CLASSES_H
+#ifndef _PROJECT_EDITORS_WORKSPACE_BASE_CLASSES_H
+#define _PROJECT_EDITORS_WORKSPACE_BASE_CLASSES_H
 
 // clang-format off
 #include <wx/settings.h>

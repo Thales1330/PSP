@@ -317,6 +317,7 @@
     <ClInclude Include="forms\EMTElementForm.h" />
     <ClInclude Include="forms\ExportCSVForm.h" />
     <ClInclude Include="forms\LabelManager.h" />
+    <ClInclude Include="utils\CommomTypes.h" />
     <ClInclude Include="utils\Path.h" />
     <ClInclude Include="utils\Camera.h" />
     <ClInclude Include="elements\powerElement\Capacitor.h" />

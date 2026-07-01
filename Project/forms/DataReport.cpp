@@ -16,6 +16,7 @@
  */
 
 #include "DataReport.h"
+#include <wx/settings.h>
 #include "../simulation/ElectricCalculation.h"
 #include "../editors/Workspace.h"
 #include "ExportCSVForm.h"
@@ -24,10 +25,21 @@ DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(
 {
 	m_workspace = workspace;
 
-	m_headerColour = wxColour(191, 223, 255);
-	m_offlineColour = wxColour(100, 100, 100);
-	m_oddRowColour = wxColour(220, 220, 220);
-	m_evenRowColour = wxColour(255, 255, 255);
+	
+
+	if (wxSystemSettings::GetAppearance().IsDark())
+	{
+		m_headerColour = wxColour(50, 50, 50);
+		m_offlineColour = wxColour(100, 100, 100);
+		m_oddRowColour = wxColour(70, 70, 70);
+		m_evenRowColour = wxColour(40, 40, 40);
+	} else
+	{
+		m_headerColour = wxColour(191, 223, 255);
+		m_offlineColour = wxColour(100, 100, 100);
+		m_oddRowColour = wxColour(220, 220, 220);
+		m_evenRowColour = wxColour(255, 255, 255);
+	}
 
 	m_fontSize = wxAtoi(m_choiceFontSize->GetStringSelection());
 	m_precision = wxAtoi(m_textCtrlPrecision->GetValue());

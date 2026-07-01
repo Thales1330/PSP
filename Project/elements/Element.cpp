@@ -20,11 +20,16 @@
 #include "../utils/DegreesAndRadians.h"
 #endif
 #include "../utils/Path.h"
+#include "../utils/PropertiesData.h"
 
 #include <wx/pen.h>
 #include <wx/brush.h>
 
-Element::Element() { m_selectionColour.Set(0, 128, 255, 128); }
+Element::Element()
+{
+	//m_selectionColour.Set(0, 128, 255, 128);
+}
+
 void Element::SetPosition(const wxPoint2DDouble position)
 {
 	m_position = position;

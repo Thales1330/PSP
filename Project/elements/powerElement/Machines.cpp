@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -97,27 +97,27 @@ bool Machines::AddParent(Element* parent, wxPoint2DDouble position)
 //    }
 //}
 
-void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxColour elementColour;
-	if (m_online) {
-		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
-		else
-			elementColour = m_onlineElementColour;
-	}
-	else
-		elementColour = m_offlineElementColour;
+    if (m_online) {
+        if (m_dynEvent)
+            elementColour = guiColour->eventElement;
+        else
+            elementColour = guiColour->enabled;
+    }
+    else
+        elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		// Draw Selection (layer 1).
 		if (m_selected) {
-			gc->SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(m_selectionColour));
+			gc->SetBrush(wxBrush(guiColour->selection));
             DrawDCCircle(m_position, 25.0 + (m_borderSize + 1.5) / scale, 20, gc);
 
             // Draw nodes selection.
@@ -135,11 +135,11 @@ void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 		DrawDCCircle(m_position, 25.0, 20.0, gc);
 
-		DrawDCSwitches(gc);
-		DrawDCPowerFlowPts(gc);
+		DrawDCSwitches(guiColour, gc);
+		DrawDCPowerFlowPts(guiColour, gc);
 
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(*wxWHITE_BRUSH);
+		gc->SetBrush(wxBrush(guiColour->background));
 		DrawDCCircle(m_position, 25.0, 20.0, gc);
 
 		gc->SetPen(wxPen(elementColour, 2));
@@ -151,17 +151,17 @@ void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 	}
 }
 
-void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void Machines::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
     wxColour elementColour;
     if (m_online) {
         if (m_dynEvent)
-            elementColour = m_dynamicEventColour;
+            elementColour = guiColour->eventElement;
         else
-            elementColour = m_onlineElementColour;
+            elementColour = guiColour->enabled;
     }
     else
-        elementColour = m_offlineElementColour;
+        elementColour = guiColour->disable;
 
 	std::vector<wxPoint> pointListInt;
     for(auto& pt : m_pointList) {
@@ -171,12 +171,12 @@ void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
     if (m_inserted) {
         // Draw Selection (layer 1).
         if (m_selected) {
-            dc.SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+            dc.SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
             dc.SetBrush(*wxTRANSPARENT_BRUSH);
             dc.DrawLines(pointListInt.size(), &pointListInt[0]);
 
             dc.SetPen(*wxTRANSPARENT_PEN);
-            dc.SetBrush(wxBrush(m_selectionColour));
+            dc.SetBrush(wxBrush(guiColour->selection));
             DrawDCCircle(m_position, 25.0 + (m_borderSize + 1.5) / scale, dc);
 
             // Draw nodes selection.
@@ -194,11 +194,11 @@ void Machines::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
         dc.DrawLines(pointListInt.size(), &pointListInt[0]);
         DrawDCCircle(m_position, 25.0, dc);
 
-        DrawDCSwitches(dc);
-        DrawDCPowerFlowPts(dc);
+        DrawDCSwitches(guiColour, dc);
+        DrawDCPowerFlowPts(guiColour, dc);
 
         dc.SetPen(*wxTRANSPARENT_PEN);
-        dc.SetBrush(*wxWHITE_BRUSH);
+        dc.SetBrush(wxBrush(guiColour->background));
         DrawDCCircle(m_position, 25.0, dc);
 
         dc.SetPen(wxPen(elementColour, 2));

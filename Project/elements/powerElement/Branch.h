@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -35,7 +35,7 @@ class Branch : public PowerElement
     ~Branch();
 
     virtual bool Contains(wxPoint2DDouble position) const { return false; }
-    virtual void Draw(wxPoint2DDouble translation, double scale) const {}
+    //virtual void Draw(wxPoint2DDouble translation, double scale) const {}
     virtual void Move(wxPoint2DDouble position) {}
     virtual void StartMove(wxPoint2DDouble position) {}
     virtual void MoveNode(Element* parent, wxPoint2DDouble position) {}

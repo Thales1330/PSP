@@ -107,7 +107,7 @@ void PowerElement::UpdateSwitches()
 //    }
 //}
 
-void PowerElement::DrawDCSwitches(wxGraphicsContext* gc) const
+void PowerElement::DrawDCSwitches(GUIColour* guiColour, wxGraphicsContext* gc) const
 {
 	gc->SetPen(*wxTRANSPARENT_PEN);
 	
@@ -115,10 +115,10 @@ void PowerElement::DrawDCSwitches(wxGraphicsContext* gc) const
     for (auto parent : m_parentList) {
 		if (parent) {
 			if (m_online) {
-                gc->SetBrush(wxBrush(m_closedSwitchColour));
+                gc->SetBrush(wxBrush(guiColour->swClose));
 			}
 			else {
-                gc->SetBrush(wxBrush(m_openedSwitchColour));
+                gc->SetBrush(wxBrush(guiColour->swOpen));
 			}
 
             gc->PushState();
@@ -137,7 +137,7 @@ void PowerElement::DrawDCSwitches(wxGraphicsContext* gc) const
     }
 }
 
-void PowerElement::DrawDCSwitches(wxDC& dc) const
+void PowerElement::DrawDCSwitches(GUIColour* guiColour, wxDC& dc) const
 {
     dc.SetPen(*wxTRANSPARENT_PEN);
 
@@ -145,23 +145,11 @@ void PowerElement::DrawDCSwitches(wxDC& dc) const
     for (auto parent : m_parentList) {
         if (parent) {
             if (m_online) {
-                dc.SetBrush(wxBrush(m_closedSwitchColour));
+                dc.SetBrush(wxBrush(guiColour->swClose));
             }
             else {
-                dc.SetBrush(wxBrush(m_openedSwitchColour));
+                dc.SetBrush(wxBrush(guiColour->swOpen));
             }
-
-            //gc->PushState();
-            //gc->Translate(m_switchRect[i].GetPosition().m_x + m_switchSize / 2.0,
-            //    m_switchRect[i].GetPosition().m_y + m_switchSize / 2.0);
-            //gc->Rotate(wxDegToRad(parent->GetAngle()));
-            //gc->Translate(-m_switchRect[i].GetPosition().m_x - m_switchSize / 2.0,
-            //    -m_switchRect[i].GetPosition().m_y - m_switchSize / 2.0);
-            //
-            //wxPoint2DDouble switchPos = m_switchRect[i].GetPosition();
-            //gc->DrawRectangle(switchPos.m_x, switchPos.m_y, m_switchSize, m_switchSize);
-            //
-            //gc->PopState();
 
             DrawDCRectangle(m_switchRect[i].GetPosition() + wxPoint2DDouble(m_switchSize / 2.0, m_switchSize / 2.0),
 				m_switchSize, m_switchSize, parent->GetAngle(), dc);
@@ -222,20 +210,20 @@ void PowerElement::CalculatePowerFlowPts(std::vector<wxPoint2DDouble> edges)
 //    }
 //}
 
-void PowerElement::DrawDCPowerFlowPts(wxGraphicsContext* gc) const
+void PowerElement::DrawDCPowerFlowPts(GUIColour* guiColour, wxGraphicsContext* gc) const
 {
     gc->SetPen(*wxTRANSPARENT_PEN);
 	if (m_online) {
-        gc->SetBrush(wxBrush(m_powerFlowArrowColour));
+        gc->SetBrush(wxBrush(guiColour->pfArrow));
 		for (auto arrow : m_powerFlowArrow) { DrawDCTriangle(arrow, gc); }
 	}
 }
 
-void PowerElement::DrawDCPowerFlowPts(wxDC& dc) const
+void PowerElement::DrawDCPowerFlowPts(GUIColour* guiColour, wxDC& dc) const
 {
     dc.SetPen(*wxTRANSPARENT_PEN);
     if (m_online) {
-        dc.SetBrush(wxBrush(m_powerFlowArrowColour));
+        dc.SetBrush(wxBrush(guiColour->pfArrow));
         for (auto arrow : m_powerFlowArrow) { 
 			std::vector<wxPoint> arrowPts;
             for (auto& pt : arrow) {

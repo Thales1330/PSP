@@ -76,7 +76,6 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
     m_choiceThemeArr.Add(_("Light"));
     m_choiceThemeArr.Add(_("Dark"));
     m_choiceTheme = new wxChoice(m_panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelGeneral, wxSize(-1,-1)), m_choiceThemeArr, 0);
-    m_choiceTheme->Enable(false);
     m_choiceTheme->SetSelection(0);
     
     boxSizerLvl3_2->Add(m_choiceTheme, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));

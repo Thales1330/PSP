@@ -134,14 +134,13 @@ void ControlElementButton::OnLeftClickUp(wxMouseEvent& event)
 	event.Skip();
 }
 
-ControlEditor::ControlEditor(wxWindow* parent, int ioflags) : ControlEditorBase(parent)
+ControlEditor::ControlEditor(wxWindow* parent, PropertiesData* properties, int ioflags) : ControlEditorBase(parent), m_properties(properties)
 {
 	BuildControlElementPanel();
-	//m_glContext = new wxGLContext(m_glCanvas, sharedGLContext);
-	//m_glContext->SetCurrent(*m_glCanvas);
 	m_camera = new Camera();
 	m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
-	m_cePanel->SetBackgroundColour(wxColour(255, 255, 255));
+	//m_cePanel->SetBackgroundColour(wxColour(255, 255, 255));
+	m_cePanel->SetBackgroundColour(properties->GetGUIColour()->background);
 	m_cePanel->SetBackgroundStyle(wxBG_STYLE_PAINT);  // To allow wxBufferedPaintDC works properly.
 	// m_camera->SetScale(1.2);
 	m_ioFlags = ioflags;
@@ -384,11 +383,11 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
 
 		for (auto line : m_connectionList) {
 			//ConnectionLine* line = *it;
-			line->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
+			line->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		}
 
 		for (auto element : m_elementList) {
-			element->DrawDC(m_camera->GetTranslation(), m_camera->GetScale(), gc);
+			element->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		}
 
 		// Selection rectangle

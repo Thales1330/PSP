@@ -123,7 +123,7 @@ IOControl::~IOControl()
 //    DrawNodes();
 //}
 
-void IOControl::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void IOControl::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	std::vector<wxPoint2DDouble> pts;
 	if (m_angle == 0.0) {
@@ -158,7 +158,7 @@ void IOControl::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(m_selectionColour));
+		gc->SetBrush(wxBrush(guiColour->selection));
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		std::vector<wxPoint2DDouble> selPts = pts;
 		if (m_angle == 0.0) {

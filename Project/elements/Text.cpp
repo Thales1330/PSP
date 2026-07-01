@@ -105,7 +105,7 @@ bool Text::Contains(wxPoint2DDouble position) const
 //	glPopMatrix();
 //}
 
-void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc)
+void Text::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc)
 {
 	// Update text extent using correct context
 	if (m_updateTextRectangle) {
@@ -124,7 +124,7 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 			wxFONTWEIGHT_NORMAL,
 			false,
 			m_fontName);
-		gc->SetFont(font, *wxBLACK);
+		gc->SetFont(font, guiColour->text);
 
 		wxString multText = m_text;
 		for (int i = 0; i < m_numberOfLines; ++i) {
@@ -159,8 +159,8 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	if (m_selected) {
 		//glColor4d(0.0, 0.5, 1.0, 0.5);
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		if (m_useAltSelectionColour) gc->SetBrush(wxBrush(wxColour(0, 230, 0, 125)));
-		else gc->SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
+		if (m_useAltSelectionColour) gc->SetBrush(wxBrush(guiColour->altSelection));
+		else gc->SetBrush(wxBrush(guiColour->selection));
 
 		wxPoint2DDouble pos = m_position - wxPoint2DDouble(m_borderSize / 2.0 + m_width / 2, m_borderSize / 2.0 + m_height / 2);
 		gc->DrawRectangle(pos.m_x, pos.m_y, m_rect.m_width, m_rect.m_height);
@@ -174,16 +174,16 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 		for (unsigned int i = 0; i < m_gcTextList.size(); ++i) {
 			m_gcTextList[i]->Draw(
 				pos +
-				wxPoint2DDouble(0.0, (m_height * static_cast<double>(i) / static_cast<double>(m_numberOfLines))), gc);
+				wxPoint2DDouble(0.0, (m_height * static_cast<double>(i) / static_cast<double>(m_numberOfLines))), gc, 0, guiColour->text);
 		}
 	}
 	else if (m_gcTextList.size() > 0) {
-		m_gcTextList[0]->Draw(pos, gc);
+		m_gcTextList[0]->Draw(pos, gc, 0, guiColour->text);
 	}
 	gc->PopState();
 }
 
-void Text::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc)
+void Text::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc)
 {
 	// Update text extent using correct context
 	if (m_updateTextRectangle) {
@@ -227,8 +227,8 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc)
 	// Draw selection rectangle
 	if (m_selected) {
 		dc.SetPen(*wxTRANSPARENT_PEN);
-		if (m_useAltSelectionColour) dc.SetBrush(wxBrush(wxColour(0, 230, 0, 125)));
-		else dc.SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
+		if (m_useAltSelectionColour) dc.SetBrush(wxBrush(guiColour->altSelection));
+		else dc.SetBrush(wxBrush(guiColour->selection));
 
 		DrawDCRectangle(m_position, m_rect.m_width, m_rect.m_height, m_angle, dc);
 	}
@@ -243,7 +243,7 @@ void Text::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc)
 		}
 	}
 	else if (m_gcTextList.size() > 0) {
-		m_gcTextList[0]->Draw(m_position, m_width, m_height, dc, m_angle);
+		m_gcTextList[0]->Draw(m_position, m_width, m_height, dc, m_angle, guiColour->text);
 	}
 }
 

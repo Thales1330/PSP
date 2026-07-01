@@ -35,6 +35,8 @@
 #include <complex>
 
 #include "../utils/XMLParser.h"
+//#include "../utils/PropertiesData.h"
+#include "../utils/CommomTypes.h"
 
 //#include <wx/log.h>
 
@@ -294,21 +296,22 @@ public:
 	 */
 	virtual wxString GetTipText() const { return wxEmptyString; }
 
-	//virtual void Draw(wxPoint2DDouble translation, double scale) const {}
 	/**
 	 * @brief Draw the element using GDI+.
+	 * @param guiColour Colours of the system defined in properties.
 	 * @param translation Translation of the system.
 	 * @param scale Scale of the system.
 	 * @param gc Graphics context
 	 */
-	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const {}
+	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const {}
 	/**
 	 * @brief Draw the element using wxDC.
+	 * @param guiColour Colours of the system defined in properties.
 	 * @param translation Translation of the system.
 	 * @param scale Scale of the system.
 	 * @param dc Device context.
 	 */
-	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const {}
+	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const {}
 	/**
 	 * @brief Rotate the element.
 	 * @param clockwise True to rotate clockwise, false to rotate counter-clockwise.
@@ -669,7 +672,7 @@ protected:
 	bool m_online = true;
 
 	//OpenGLColour m_selectionColour;
-	wxColour m_selectionColour;
+	//wxColour m_selectionColour;
 };
 
 #endif  // ELEMENT_H

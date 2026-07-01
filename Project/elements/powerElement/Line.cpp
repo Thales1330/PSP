@@ -105,7 +105,7 @@ bool Line::Contains(wxPoint2DDouble position) const
 //	}
 //}
 
-void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Line::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	//gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
@@ -115,13 +115,12 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
-
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	std::vector<wxPoint2DDouble> pointList = m_pointList;
 	if (!m_inserted && pointList.size() > 0) {
@@ -133,14 +132,14 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 
 	// Line selected (Layer 1).
 	if (m_selected) {
-		gc->SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+		gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		if (pointList.size() > 0)
 			gc->StrokeLines(pointList.size(), &pointList[0]);
 
 		// Draw nodes selection.
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(m_selectionColour));
+		gc->SetBrush(wxBrush(guiColour->selection));
 		if (pointList.size() > 0) {
 			DrawDCCircle(pointList[0], 5.0 + m_borderSize / scale, 10, gc);
 			if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, 10, gc); }
@@ -154,8 +153,8 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 		gc->StrokeLines(pointList.size(), &pointList[0]);
 
 	if (m_inserted) {
-		DrawDCSwitches(gc);
-		DrawDCPowerFlowPts(gc);
+		DrawDCSwitches(guiColour, gc);
+		DrawDCPowerFlowPts(guiColour, gc);
 	}
 
 	// Draw nodes.
@@ -179,42 +178,34 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	}
 }
 
-void Line::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void Line::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
-
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	std::vector<wxPoint> pointList;
 	for (auto pt : m_pointList) {
 		pointList.emplace_back(pt.m_x, pt.m_y);
 	}
-	//if (!m_inserted && pointList.size() > 0) {
-	//	wxPoint secondPoint = wxPoint(m_position.m_x, m_position.m_y);
-	//	if (pointList.size() > 2) { secondPoint = pointList[2]; }
-	//	wxPoint2DDouble swPoint = GetSwitchPoint(m_parentList[0], pointList[0], secondPoint)
-	//	pointList[1] = wxPoint(m_position.m_x, m_position.m_y);
-	//	pointList.push_back(m_position);
-	//}
 
 	// Line selected (Layer 1).
 	if (m_selected) {
-		dc.SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+		dc.SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 		dc.SetBrush(*wxTRANSPARENT_BRUSH);
 		if (pointList.size() > 0)
 			dc.DrawLines(pointList.size(), &pointList[0]);
 
 		// Draw nodes selection.
 		dc.SetPen(*wxTRANSPARENT_PEN);
-		dc.SetBrush(wxBrush(m_selectionColour));
+		dc.SetBrush(wxBrush(guiColour->selection));
 		if (pointList.size() > 0) {
 			DrawDCCircle(pointList[0], 5.0 + m_borderSize / scale, dc);
 			if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, dc); }
@@ -228,8 +219,8 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		dc.DrawLines(pointList.size(), &pointList[0]);
 
 	if (m_inserted) {
-		DrawDCSwitches(dc);
-		DrawDCPowerFlowPts(dc);
+		DrawDCSwitches(guiColour, dc);
+		DrawDCPowerFlowPts(guiColour, dc);
 	}
 
 	// Draw nodes.
@@ -239,18 +230,6 @@ void Line::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		DrawDCCircle(pointList[0], 5.0, dc);
 		if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0, dc); }
 	}
-
-	// Draw pickboxes (Layer 3).
-	//if (m_showPickbox) {
-	//	gc->PushState();
-	//	gc->SetTransform(identityMatrix);
-	//
-	//	for (int i = 2; i < (int)m_pointList.size() - 2; i++) {
-	//		DrawDCPickbox(WorldToScreen(m_pointList[i], translation - wxPoint2DDouble(4 / scale, 4 / scale), scale), gc);
-	//	}
-	//
-	//	gc->PopState();
-	//}
 }
 
 void Line::Move(wxPoint2DDouble position)

@@ -183,22 +183,22 @@ bool Transformer::Contains(wxPoint2DDouble position) const
 //	}
 //}
 
-void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		// Draw selection (layer 1).
 		if (m_selected) {
-			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
@@ -210,7 +210,7 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 			gc->Translate(-m_position.m_x, -m_position.m_y);
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(m_selectionColour));
+			gc->SetBrush(wxBrush(guiColour->selection));
 			DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
 			DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, 20, gc);
 
@@ -218,7 +218,7 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 
 			// Draw nodes selection.
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(m_selectionColour));
+			gc->SetBrush(wxBrush(guiColour->selection));
 			if (m_pointList.size() > 0) {
 				DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
 				if (m_inserted) { DrawDCCircle(m_pointList[m_pointList.size() - 1], 5.0 + m_borderSize / scale, 10, gc); }
@@ -239,8 +239,8 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 			if (m_inserted) { DrawDCCircle(m_pointList[m_pointList.size() - 1], 5.0, 10, gc); }
 		}
 
-		DrawDCSwitches(gc);
-		DrawDCPowerFlowPts(gc);
+		DrawDCSwitches(guiColour, gc);
+		DrawDCPowerFlowPts(guiColour, gc);
 
 		// Push the current matrix on stack.
 		gc->PushState();
@@ -251,7 +251,7 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 
 		//glColor4d(1.0, 1.0, 1.0, 1.0);
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(*wxWHITE_BRUSH);
+		gc->SetBrush(wxBrush(guiColour->background));
 		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20, 20, gc);
 		DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20, 20, gc);
 
@@ -269,17 +269,17 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 	}
 }
 
-void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void Transformer::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	std::vector<wxPoint> pointList;
 	for (auto& pt : m_pointList) { pointList.emplace_back(static_cast<int>(pt.m_x), static_cast<int>(pt.m_y)); }
@@ -287,12 +287,12 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) co
 	if (m_inserted) {
 		// Draw selection (layer 1).
 		if (m_selected) {
-			dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			dc.SetPen(wxPen(wxColour(guiColour->selection), 2 + m_borderSize * 2.0));
 			dc.SetBrush(*wxTRANSPARENT_BRUSH);
 			dc.DrawLines(pointList.size(), &pointList[0]);
 
 			dc.SetPen(*wxTRANSPARENT_PEN);
-			dc.SetBrush(wxBrush(m_selectionColour));
+			dc.SetBrush(wxBrush(guiColour->selection));
 			//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(20.0, 20.0), 20 + (m_borderSize + 1.5) / scale, dc);
 			//DrawDCCircle(m_rect.GetPosition() + wxPoint2DDouble(50.0, 20.0), 20 + (m_borderSize + 1.5) / scale, dc);
 			DrawDCCircle(m_position + RotateLocal(wxPoint2DDouble(15.0, 0.0), m_angle), 20 + (m_borderSize + 1.5) / scale, dc);
@@ -300,7 +300,7 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) co
 
 			// Draw nodes selection.
 			dc.SetPen(*wxTRANSPARENT_PEN);
-			dc.SetBrush(wxBrush(m_selectionColour));
+			dc.SetBrush(wxBrush(guiColour->selection));
 			if (pointList.size() > 0) {
 				DrawDCCircle(pointList[0], 5.0 + m_borderSize / scale, dc);
 				if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0 + m_borderSize / scale, dc); }
@@ -321,11 +321,11 @@ void Transformer::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) co
 			if (m_inserted) { DrawDCCircle(pointList[pointList.size() - 1], 5.0, dc); }
 		}
 
-		DrawDCSwitches(dc);
-		DrawDCPowerFlowPts(dc);
+		DrawDCSwitches(guiColour, dc);
+		DrawDCPowerFlowPts(guiColour, dc);
 
 		dc.SetPen(*wxTRANSPARENT_PEN);
-		dc.SetBrush(*wxWHITE_BRUSH);
+		dc.SetBrush(wxBrush(guiColour->background));
 		DrawDCCircle(m_position + RotateLocal(wxPoint2DDouble(15.0, 0.0), m_angle), 20, dc);
 		DrawDCCircle(m_position + RotateLocal(wxPoint2DDouble(-15.0, 0.0), m_angle), 20, dc);
 

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -77,8 +77,8 @@ public:
 	virtual bool AddParent(Element* parent, wxPoint2DDouble position) { return true; };
 	virtual bool Contains(wxPoint2DDouble position) const;
 	//virtual void Draw(wxPoint2DDouble translation, double scale);
-	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);
-	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc);
+	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc);
+	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc);
 	virtual bool Intersects(wxRect2DDouble rect) const;
 	virtual void Rotate(bool clockwise = true);
 	virtual bool ShowForm(wxWindow* parent, std::vector<Element*> elementList);

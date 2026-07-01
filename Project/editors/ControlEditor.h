@@ -32,6 +32,7 @@
 #endif 
 
 #include "../elements/controlElement/IOControl.h"
+#include "../utils/PropertiesData.h"
 #include "ControlSystemTest.h"
 
 class FileHanding;
@@ -123,8 +124,8 @@ public:
 		MODE_PASTE,
 		MODE_DRAG_PASTE
 	};
-	ControlEditor(wxWindow* parent) : ControlEditorBase(parent) {}
-	ControlEditor(wxWindow* parent,
+	ControlEditor(wxWindow* parent, PropertiesData* properties) : ControlEditorBase(parent), m_properties(properties) {}
+	ControlEditor(wxWindow* parent, PropertiesData* properties,
 		int ioflags = IOControl::IN_TERMINAL_VOLTAGE | IOControl::IN_VELOCITY | IOControl::OUT_FIELD_VOLTAGE |
 		IOControl::OUT_MEC_POWER);
 	virtual ~ControlEditor();
@@ -173,8 +174,9 @@ protected:
 
 	std::vector< std::shared_ptr<ConnectionLine> >::iterator DeleteLineFromList(std::vector< std::shared_ptr<ConnectionLine> >::iterator& it);
 
-	//wxGLContext* m_glContext = nullptr;
 	Camera* m_camera = nullptr;
+
+	PropertiesData* m_properties = nullptr;
 
 	ControlEditorMode m_mode = ControlEditorMode::MODE_EDIT;
 

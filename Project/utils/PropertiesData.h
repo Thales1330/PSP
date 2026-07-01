@@ -18,15 +18,15 @@
 #ifndef PROPERTIESDATA_H
 #define PROPERTIESDATA_H
 
-#include "../elements/Element.h"
-#include "../elements/powerElement/PowerElement.h"
-#include "wx/language.h"
+//#include "../elements/Element.h"
+//#include "../elements/powerElement/PowerElement.h"
 
-enum PowerFlowMethod { NEWTON_RAPHSON = 0, GAUSS_SEIDEL, GAUSS_NEWTON };
-enum GUITheme { THEME_LIGHT = 0, THEME_DARK };
-enum class HarmLoadConnection { PARALLEL = 0, SERIES, DISCONNECTED };
-enum class PlotLib { wxMATH_PLOT = 0, wxCHART_DIR = 1 };
-enum class BusFreqEstimation { ANGLE_DERIVATION = 0, WASHOUT_FILTER = 1};
+#include "wx/language.h"
+#include <wx/colour.h>
+#include <wx/filename.h>
+#include <wx/math.h>
+
+#include "CommomTypes.h"
 
 struct SimulationData {
 	// General simulation data
@@ -105,6 +105,8 @@ public:
 	PropertiesData();
 	~PropertiesData();
 
+	GUIColour* GetGUIColour() { return &m_guiColour; }
+	void SetGUIColourTheme();
 	SimulationData GetSimulationPropertiesData() const { return m_simulData; }
 	void SetSimulationPropertiesData(SimulationData simulationData) { m_simulData = simulationData; }
 	GeneralData GetGeneralPropertiesData() const { return m_genData; }
@@ -114,6 +116,7 @@ public:
 	const FreqResponseData& GetFreqRespData() const { return m_freqRespData; }
 
 protected:
+	GUIColour m_guiColour;
 	SimulationData m_simulData;
 	GeneralData m_genData;
 	FreqResponseData m_freqRespData;

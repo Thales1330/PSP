@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -53,11 +53,11 @@ ConnectionLine::~ConnectionLine()
 //	}
 //}
 
-void ConnectionLine::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void ConnectionLine::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	gc->SetBrush(*wxTRANSPARENT_BRUSH);
 	if (m_selected) {
-		gc->SetPen(wxPen(m_selectionColour, 1.5 + m_borderSize * 2.0));
+		gc->SetPen(wxPen(guiColour->selection, 1.5 + m_borderSize * 2.0));
 		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 	}
 

@@ -18,6 +18,7 @@
 #include "GeneralPropertiesForm.h"
 #include <wx/fontenum.h>
 #include <wx/font.h>
+#include <wx/stdpaths.h>
 #include "../utils/PropertiesData.h"
 
 

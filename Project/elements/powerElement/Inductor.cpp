@@ -121,21 +121,21 @@ bool Inductor::AddParent(Element* parent, wxPoint2DDouble position)
 //	}
 //}
 
-void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Inductor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		if (m_selected) {
-			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
@@ -157,7 +157,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 
 			// Draw node selection.
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(wxColour(m_selectionColour)));
+			gc->SetBrush(wxBrush(guiColour->selection));
 			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
 		}
 		// Draw Inductor (layer 2).
@@ -169,7 +169,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
-		DrawDCSwitches(gc);
+		DrawDCSwitches(guiColour, gc);
 
 		// Push the current matrix on stack.
 		gc->PushState();
@@ -190,17 +190,17 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsConte
 	}
 }
 
-void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void Inductor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	std::vector<wxPoint> pointListInt;
 	for (auto& pt : m_pointList) {
@@ -218,7 +218,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		arcPts[2] = RotateAround(p, m_position, m_angle);
 
 		if (m_selected) {
-			dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			dc.SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
 			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
@@ -231,7 +231,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 
 			// Draw node selection.
 			dc.SetPen(*wxTRANSPARENT_PEN);
-			dc.SetBrush(wxBrush(wxColour(m_selectionColour)));
+			dc.SetBrush(wxBrush(guiColour->selection));
 			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
 		}
 		// Draw Inductor (layer 2).
@@ -243,7 +243,7 @@ void Inductor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		dc.SetBrush(*wxTRANSPARENT_BRUSH);
 		dc.DrawLines(pointListInt.size(), &pointListInt[0]);
 
-		DrawDCSwitches(dc);
+		DrawDCSwitches(guiColour, dc);
 
 		dc.SetPen(wxPen(wxColour(elementColour), 2));
 		dc.SetBrush(*wxTRANSPARENT_BRUSH);

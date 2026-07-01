@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -17,5 +17,51 @@
 
 #include "PropertiesData.h"
 
-PropertiesData::PropertiesData() {}
+#include <wx/msgdlg.h>
+
+PropertiesData::PropertiesData() { SetGUIColourTheme(); }
 PropertiesData::~PropertiesData() {}
+
+void PropertiesData::SetGUIColourTheme()
+{
+	if (m_genData.theme == THEME_LIGHT)
+	{
+		m_guiColour.background = wxColour(250, 249, 246);
+
+		m_guiColour.text = wxColour(35, 35, 35);
+		m_guiColour.enabled = wxColour(20, 20, 20);
+		m_guiColour.disable = wxColour(145, 145, 145);
+
+		m_guiColour.selection = wxColour(40, 120, 255, 90);
+		m_guiColour.altSelection = wxColour(40, 200, 70, 90);
+
+		m_guiColour.bus = wxColour(40, 105, 235);
+		m_guiColour.slackBus = wxColour(40, 105, 235);
+
+		m_guiColour.eventElement = wxColour(255, 120, 0);
+		m_guiColour.pfArrow = wxColour(255, 120, 0);
+
+		m_guiColour.swClose = wxColour(35, 150, 45);
+		m_guiColour.swOpen = wxColour(225, 55, 55);
+	}
+	else if (m_genData.theme == THEME_DARK)
+	{
+		m_guiColour.background = wxColour(43, 46, 52);
+
+		m_guiColour.text = wxColour(205, 210, 215);
+		m_guiColour.enabled = wxColour(220, 224, 228);
+		m_guiColour.disable = wxColour(125, 130, 136);
+
+		m_guiColour.selection = wxColour(70, 140, 255, 90);
+		m_guiColour.altSelection = wxColour(70, 200, 90, 90);
+
+		m_guiColour.bus = wxColour(70, 135, 255);
+		m_guiColour.slackBus = wxColour(95, 155, 255);
+
+		m_guiColour.eventElement = wxColour(240, 165, 60);
+		m_guiColour.pfArrow = wxColour(240, 165, 60);
+
+		m_guiColour.swClose = wxColour(60, 180, 70);
+		m_guiColour.swOpen = wxColour(235, 85, 85);
+	}
+}

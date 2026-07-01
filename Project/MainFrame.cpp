@@ -17,6 +17,8 @@
 
 #include "MainFrame.h"
 
+#include <wx/settings.h>
+
 #include "elements/powerElement/Bus.h"
 #include "elements/powerElement/Capacitor.h"
 #include "elements/powerElement/HarmCurrent.h"
@@ -108,13 +110,52 @@ void MainFrame::Init()
 {
 	this->SetSize(800, 600);
 
+	m_generalProperties->SetGUIColourTheme();
+
 	CreateDropdownMenus();
 
 	EnableCurrentProjectRibbon(false);
 
-	m_artMetro = new wxRibbonMetroArtProvider();
-	m_ribbonBar->SetArtProvider(m_artMetro);
-	m_ribbonBar->Realize();
+	if (wxSystemSettings::GetAppearance().IsDark())
+	{
+		auto* darkArt = m_ribbonBar->GetArtProvider();
+		wxColour stdBlue = wxColour(53, 132, 228);
+		wxColour darkBlue = wxColour(6, 68, 140);
+		wxColour stdGrey = wxColour(59, 59, 59);
+		wxColour darkGrey = wxColour(40, 40, 40);
+
+		darkArt->SetColor(wxRIBBON_ART_PAGE_BACKGROUND_TOP_COLOUR, stdGrey);
+		darkArt->SetColor(wxRIBBON_ART_PAGE_BACKGROUND_TOP_GRADIENT_COLOUR, stdGrey);
+		darkArt->SetColor(wxRIBBON_ART_PAGE_BACKGROUND_COLOUR, stdGrey);
+		darkArt->SetColor(wxRIBBON_ART_PAGE_BACKGROUND_GRADIENT_COLOUR, stdGrey);
+
+		darkArt->SetColor(wxRIBBON_ART_PAGE_HOVER_BACKGROUND_TOP_COLOUR, darkGrey);
+		darkArt->SetColor(wxRIBBON_ART_PAGE_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR, darkGrey);
+		darkArt->SetColor(wxRIBBON_ART_PAGE_HOVER_BACKGROUND_COLOUR, darkGrey);
+		darkArt->SetColor(wxRIBBON_ART_PAGE_HOVER_BACKGROUND_GRADIENT_COLOUR, darkGrey);
+
+		darkArt->SetColor(wxRIBBON_ART_TAB_HOVER_BACKGROUND_TOP_COLOUR, stdBlue);
+		darkArt->SetColor(wxRIBBON_ART_TAB_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR, stdBlue);
+		darkArt->SetColor(wxRIBBON_ART_TAB_HOVER_BACKGROUND_COLOUR, stdBlue);
+		darkArt->SetColor(wxRIBBON_ART_TAB_HOVER_BACKGROUND_GRADIENT_COLOUR, stdBlue);
+
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_TOP_COLOUR, stdBlue);
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR, stdBlue);
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_COLOUR, stdBlue);
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_GRADIENT_COLOUR, stdBlue);
+
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_TOP_COLOUR, darkBlue);
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR, darkBlue);
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_COLOUR, darkBlue);
+		darkArt->SetColor(wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_GRADIENT_COLOUR, darkBlue);
+		m_ribbonBar->Realize();
+	}
+	else
+	{
+		m_artMetro = new wxRibbonMetroArtProvider();
+		m_ribbonBar->SetArtProvider(m_artMetro);
+		m_ribbonBar->Realize();
+	}
 
 	this->Layout();
 }
@@ -142,11 +183,13 @@ void MainFrame::EnableCurrentProjectRibbon(bool enable)
 	m_ribbonButtonBarCProject->EnableButton(ID_RIBBON_SAVEAS, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_SCPOWER, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_PROJSETTINGS, enable);
+	m_ribbonButtonBarReports->EnableButton(ID_RIBBON_HEATMAP, enable);
 	m_ribbonButtonBarReports->EnableButton(ID_RIBBON_SNAPSHOT, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_SIMULSETTINGS, enable);
 	m_ribbonButtonBarClipboard->EnableButton(ID_RIBBON_UNDO, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATEC, enable);
 	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_ROTATECC, enable);
+	m_ribbonButtonBarCircuit->EnableButton(ID_RIBBON_LABELMNGR, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_HARMDIST, enable);
 	m_ribbonButtonBarSimulations->EnableButton(ID_RIBBON_FREQRESP, enable);
 
@@ -226,17 +269,11 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 	EnableCurrentProjectRibbon();
 
 	Workspace* newWorkspace;
-	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
 	newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
 		this->GetStatusBar(), this->GetAuiNotebook());
-	//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
-//}
-//else {
-//	newWorkspace = new WorkspaceDC(this, wxString::Format(_("New project %d"), m_projectNumber),
-//		this->GetStatusBar());
-//}
-// Set general properties in new Workspace
+	// Set general properties in new Workspace
 	newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+	newWorkspace->SetColourTheme();
 
 	m_workspaceList.push_back(newWorkspace);
 
@@ -383,20 +420,12 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
 
 	EnableCurrentProjectRibbon();
 
-	Workspace* newWorkspace;
-	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
-	newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
+	Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
 		this->GetStatusBar(), this->GetAuiNotebook());
-	// If none shared OpenGL context is loaded, get from this workspace.
-	//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
-//}
-//else {
-//	newWorkspace = new WorkspaceDC(this, wxString::Format(_("New project %d"), m_projectNumber),
-//		this->GetStatusBar());
-//}
 
-// Set general properties in new workspace.
+	// Set general properties in new workspace.
 	newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+	newWorkspace->SetColourTheme();
 
 	FileHanding fileHandling(newWorkspace);
 	if (fileHandling.OpenProject(fileName)) {
@@ -643,23 +672,13 @@ void MainFrame::OnAddElementsClick(wxCommandEvent& event)
 void MainFrame::OnImportClick(wxRibbonButtonBarEvent& event)
 {
 	// Create a new workspace to import
-	//Workspace* impWorkspace = new Workspace(this, _("Imported project"), this->GetStatusBar(), m_sharedGLContext);
-
-
 	EnableCurrentProjectRibbon();
 
-	Workspace* newWorkspace;
-	//if (m_generalProperties->GetGeneralPropertiesData().useOpenGL) {
-	newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
+	Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
 		this->GetStatusBar(), this->GetAuiNotebook());
-	//if (!m_sharedGLContext) m_sharedGLContext = newWorkspace->GetSharedGLContext();
-//}
-//else {
-//	newWorkspace = new WorkspaceDC(this, wxString::Format(_("New project %d"), m_projectNumber),
-//		this->GetStatusBar());
-//}
-// Set general properties in new Workspace
+	// Set general properties in new Workspace
 	newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+	newWorkspace->SetColourTheme();
 
 	m_workspaceList.push_back(newWorkspace);
 
@@ -722,6 +741,8 @@ void MainFrame::OnGeneralSettingsClick(wxRibbonButtonBarEvent& event)
 	genPropForm.ShowModal();
 	for (auto& workspace : m_workspaceList) {
 		workspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
+		workspace->GetProperties()->SetGUIColourTheme();
+		workspace->SetColourTheme();
 		workspace->UpdateTextElements();
 		workspace->Redraw();
 	}

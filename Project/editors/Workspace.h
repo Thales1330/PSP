@@ -122,6 +122,7 @@ public:
 	Workspace(wxWindow* parent, wxString name = wxEmptyString, wxStatusBar* statusBar = nullptr, wxAuiNotebook* auiNotebook = nullptr);
 	virtual ~Workspace();
 
+	void SetColourTheme();
 	wxString GetName() const { return m_name; }
 	std::vector<Element*> GetElementList() const;
 	std::vector< std::shared_ptr<PowerElement> > GetElementSharedList() const { return m_elementList; }

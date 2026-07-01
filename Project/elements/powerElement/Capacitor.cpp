@@ -121,17 +121,17 @@ bool Capacitor::AddParent(Element* parent, wxPoint2DDouble position)
 //	}
 //}
 
-void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Capacitor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		std::vector<wxPoint2DDouble> capPts;
@@ -141,7 +141,7 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 		capPts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2.0, m_position.m_y - m_height / 2.0 + 10.0));
 
 		if (m_selected) {
-			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
@@ -162,20 +162,20 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 
 			// Draw node selection.
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(wxColour(m_selectionColour)));
+			gc->SetBrush(wxBrush(guiColour->selection));
 			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
 		}
 		// Draw Capacitor (layer 2).
 		// Draw node.
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(wxColour(elementColour)));
+		gc->SetBrush(wxBrush(elementColour));
 		DrawDCCircle(m_pointList[0], 5.0, 10, gc);
 
-		gc->SetPen(wxPen(wxColour(elementColour), 2));
+		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
-		DrawDCSwitches(gc);
+		DrawDCSwitches(guiColour, gc);
 
 		// Push the current matrix on stack.
 		gc->PushState();
@@ -184,7 +184,7 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 		gc->Rotate(wxDegToRad(m_angle));
 		gc->Translate(-m_position.m_x, -m_position.m_y);
 
-		gc->SetPen(wxPen(wxColour(elementColour), 2));
+		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		gc->StrokeLines(2, &capPts[0]);
 		gc->StrokeLines(2, &capPts[2]);
@@ -195,17 +195,17 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCont
 	}
 }
 
-void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void Capacitor::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		wxPoint2DDouble p;
@@ -227,7 +227,7 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) cons
 		}
 
 		if (m_selected) {
-			dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			dc.SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
 			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
@@ -240,22 +240,22 @@ void Capacitor::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) cons
 
 			// Draw node selection.
 			dc.SetPen(*wxTRANSPARENT_PEN);
-			dc.SetBrush(wxBrush(wxColour(m_selectionColour)));
+			dc.SetBrush(wxBrush(guiColour->selection));
 			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
 		}
 		// Draw Capacitor (layer 2).
 		// Draw node.
 		dc.SetPen(*wxTRANSPARENT_PEN);
-		dc.SetBrush(wxBrush(wxColour(elementColour)));
+		dc.SetBrush(wxBrush(elementColour));
 		DrawDCCircle(m_pointList[0], 5.0, dc);
 
-		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetPen(wxPen(elementColour, 2));
 		dc.SetBrush(*wxTRANSPARENT_BRUSH);
 		dc.DrawLines(pointListInt.size(), &pointListInt[0]);
 
-		DrawDCSwitches(dc);
+		DrawDCSwitches(guiColour, dc);
 
-		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetPen(wxPen(elementColour, 2));
 		dc.SetBrush(*wxTRANSPARENT_BRUSH);
 		dc.DrawLines(2, &capPts[0]);
 		dc.DrawLines(2, &capPts[2]);

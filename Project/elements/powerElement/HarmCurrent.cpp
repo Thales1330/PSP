@@ -117,17 +117,17 @@ bool HarmCurrent::AddParent(Element* parent, wxPoint2DDouble position)
 //    }
 //}
 
-void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void HarmCurrent::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		std::vector<wxPoint2DDouble> arrowPts;
@@ -136,7 +136,7 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 
 		// Draw Selection (layer 1).
 		if (m_selected) {
-			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
@@ -150,7 +150,7 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 			DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), gc);
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(wxColour(m_selectionColour)));
+			gc->SetBrush(wxBrush(guiColour->selection));
 
 			DrawDCCircle(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20),
 				20.0 + (m_borderSize + 1.5) / scale, 20, gc);
@@ -162,16 +162,16 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 		}
 
 		// Draw Harmonic current source (layer 2).
-		gc->SetPen(wxPen(wxColour(elementColour), 2));
+		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 		// Draw node.
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(wxColour(elementColour)));
+		gc->SetBrush(wxBrush(elementColour));
 		DrawDCCircle(m_pointList[0], 5.0, 10, gc);
 
-		DrawDCSwitches(gc);
+		DrawDCSwitches(guiColour, gc);
 
 		std::vector<wxPoint2DDouble> triangPts;
 		for (int i = 0; i < 3; i++) { triangPts.push_back(m_triangPts[i] + m_position); }
@@ -182,16 +182,16 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 		gc->Translate(-m_position.m_x, -m_position.m_y);
 
 		//glColor4dv(elementColour);
-		gc->SetPen(wxPen(wxColour(elementColour), 2));
-		gc->SetBrush(*wxWHITE_BRUSH);
+		gc->SetPen(wxPen(elementColour, 2));
+		gc->SetBrush(wxBrush(guiColour->background));
 		DrawDCCircle(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20), 20, 20, gc);
 
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(wxColour(elementColour)));
+		gc->SetBrush(wxBrush(elementColour));
 
 		DrawDCTriangle(triangPts, gc);
 
-		gc->SetPen(wxPen(wxColour(elementColour), 2));
+		gc->SetPen(wxPen(elementColour, 2));
 		gc->StrokeLines(arrowPts.size(), &arrowPts[0]);
 		DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), gc);
 
@@ -199,17 +199,17 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCo
 	}
 }
 
-void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void HarmCurrent::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		wxPoint arrowPts[2];
@@ -224,14 +224,14 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) co
 
 		// Draw Selection (layer 1).
 		if (m_selected) {
-			dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			dc.SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			dc.SetBrush(*wxTRANSPARENT_BRUSH);
 			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
 
 			DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), dc);
 
 			dc.SetPen(*wxTRANSPARENT_PEN);
-			dc.SetBrush(wxBrush(wxColour(m_selectionColour)));
+			dc.SetBrush(wxBrush(guiColour->selection));
 
 			p = RotateAround(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20), m_position, m_angle);
 			DrawDCCircle(p, 20.0 + (m_borderSize + 1.5) / scale, dc);
@@ -241,16 +241,16 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) co
 		}
 
 		// Draw Harmonic current source (layer 2).
-		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetPen(wxPen(elementColour, 2));
 		dc.SetBrush(*wxTRANSPARENT_BRUSH);
 		dc.DrawLines(pointListInt.size(), &pointListInt[0]);
 
 		// Draw node.
 		dc.SetPen(*wxTRANSPARENT_PEN);
-		dc.SetBrush(wxBrush(wxColour(elementColour)));
+		dc.SetBrush(wxBrush(elementColour));
 		DrawDCCircle(pointListInt[0], 5.0, dc);
 
-		DrawDCSwitches(dc);
+		DrawDCSwitches(guiColour, dc);
 
 		wxPoint triangPts[3];
 
@@ -260,16 +260,16 @@ void HarmCurrent::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) co
 			triangPts[i] = RotateAround(p, m_position, m_angle);
 		}
 
-		dc.SetPen(wxPen(wxColour(elementColour), 2));
-		dc.SetBrush(*wxWHITE_BRUSH);
+		dc.SetPen(wxPen(elementColour, 2));
+		dc.SetBrush(wxBrush(guiColour->background));
 		p = RotateAround(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20), m_position, m_angle);
 		DrawDCCircle(p, 20.0, dc);
 
 		dc.SetPen(*wxTRANSPARENT_PEN);
-		dc.SetBrush(wxBrush(wxColour(elementColour)));
+		dc.SetBrush(wxBrush(elementColour));
 		dc.DrawPolygon(3, triangPts);
 
-		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetPen(wxPen(elementColour, 2));
 		dc.DrawLines(2, arrowPts);
 		DrawDCGround(m_position + wxPoint2DDouble(0, 10.0), dc);
 	}

@@ -70,8 +70,8 @@ public:
 
 	virtual Element* GetCopy();
 	virtual bool AddParent(Element* parent, wxPoint2DDouble position);
-	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
-	virtual void DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const;
+	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
+	virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const;
 	virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
 	virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
 	virtual void Rotate(bool clockwise = true);

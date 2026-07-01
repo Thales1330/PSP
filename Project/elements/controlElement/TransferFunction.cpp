@@ -58,36 +58,11 @@ TransferFunction::~TransferFunction()
 	m_nodeList.clear();
 }
 
-//void TransferFunction::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//    glLineWidth(1.0);
-//    if (m_selected) {
-//        glColor4dv(m_selectionColour.GetRGBA());
-//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-//    }
-//    glColor4d(1.0, 1.0, 1.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-//
-//    std::vector<wxPoint2DDouble> linePts;
-//    linePts.push_back(wxPoint2DDouble(m_position.m_x - m_width / 2 + 5 + m_borderSize, m_position.m_y));
-//    linePts.push_back(wxPoint2DDouble(m_position.m_x + m_width / 2 - 5 - m_borderSize, m_position.m_y));
-//    DrawLine(linePts);
-//
-//    DrawNodes();
-//
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    m_glTextNum->Draw(m_position + wxPoint2DDouble(0.0, -m_height / 4));
-//    m_glTextDen->Draw(m_position + wxPoint2DDouble(0.0, m_height / 4));
-//}
-
-void TransferFunction::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void TransferFunction::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(m_selectionColour));
+		gc->SetBrush(wxBrush(guiColour->selection));
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}

@@ -67,89 +67,28 @@ bool Load::AddParent(Element* parent, wxPoint2DDouble position)
 	return false;
 }
 
-//void Load::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//	OpenGLColour elementColour;
-//	if (m_online) {
-//		if (m_dynEvent)
-//			elementColour = m_dynamicEventColour;
-//		else
-//			elementColour = m_onlineElementColour;
-//	}
-//	else
-//		elementColour = m_offlineElementColour;
-//
-//	if (m_inserted) {
-//		// Draw Selection (layer 1).
-//		if (m_selected) {
-//			glLineWidth(1.5 + m_borderSize * 2.0);
-//			glColor4dv(m_selectionColour.GetRGBA());
-//			std::vector<wxPoint2DDouble> selTriangPts;
-//			selTriangPts.push_back(m_triangPts[0] + m_position +
-//				wxPoint2DDouble(-m_borderSize / scale, -m_borderSize / scale));
-//			selTriangPts.push_back(m_triangPts[1] + m_position +
-//				wxPoint2DDouble(m_borderSize / scale, -m_borderSize / scale));
-//			selTriangPts.push_back(m_triangPts[2] + m_position + wxPoint2DDouble(0.0, m_borderSize / scale));
-//
-//			glPushMatrix();
-//			glTranslated(m_position.m_x, m_position.m_y, 0.0);
-//			glRotated(m_angle, 0.0, 0.0, 1.0);
-//			glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
-//			DrawTriangle(selTriangPts);
-//			glPopMatrix();
-//
-//			DrawLine(m_pointList);
-//
-//			// Draw node selection.
-//			DrawCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, GL_POLYGON);
-//		}
-//
-//		// Draw Load (layer 2).
-//		glLineWidth(1.5);
-//
-//		// Draw node.
-//		glColor4dv(elementColour.GetRGBA());
-//		DrawCircle(m_pointList[0], 5.0, 10, GL_POLYGON);
-//
-//		DrawLine(m_pointList);
-//
-//		DrawSwitches();
-//		DrawPowerFlowPts();
-//
-//		std::vector<wxPoint2DDouble> triangPts;
-//		for (int i = 0; i < 3; i++) { triangPts.push_back(m_triangPts[i] + m_position); }
-//		glPushMatrix();
-//		glTranslated(m_position.m_x, m_position.m_y, 0.0);
-//		glRotated(m_angle, 0.0, 0.0, 1.0);
-//		glTranslated(-m_position.m_x, -m_position.m_y, 0.0);
-//		glColor4dv(elementColour.GetRGBA());
-//		DrawTriangle(triangPts);
-//		glPopMatrix();
-//	}
-//}
-
-void Load::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Load::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 		// Draw Selection (layer 1).
 		if (m_selected) {
-			gc->SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(m_selectionColour));
+			gc->SetBrush(wxBrush(guiColour->selection));
 
 			std::vector<wxPoint2DDouble> selTriangPts;
 			selTriangPts.push_back(m_triangPts[0] + m_position +
@@ -181,8 +120,8 @@ void Load::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 		gc->SetBrush(wxBrush(elementColour));
 		DrawDCCircle(m_pointList[0], 5.0, 10, gc);
 
-		DrawDCSwitches(gc);
-		DrawDCPowerFlowPts(gc);
+		DrawDCSwitches(guiColour, gc);
+		DrawDCPowerFlowPts(guiColour, gc);
 
 		std::vector<wxPoint2DDouble> triangPts;
 		for (int i = 0; i < 3; i++) { triangPts.push_back(m_triangPts[i] + m_position); }
@@ -197,17 +136,17 @@ void Load::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* 
 	}
 }
 
-void Load::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void Load::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	std::vector<wxPoint> pointListInt;
 	for (auto& pt : m_pointList) {
@@ -218,13 +157,13 @@ void Load::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 	if (m_inserted) {
 		// Draw Selection (layer 1).
 		if (m_selected) {
-			dc.SetPen(wxPen(m_selectionColour, 2 + m_borderSize * 2.0));
+			dc.SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
 			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
 
 			dc.SetPen(*wxTRANSPARENT_PEN);
-			dc.SetBrush(wxBrush(m_selectionColour));
+			dc.SetBrush(wxBrush(guiColour->selection));
 
 			wxPoint2DDouble p;
 			wxPoint selTriangPts[3];
@@ -251,8 +190,8 @@ void Load::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 		dc.SetBrush(wxBrush(elementColour));
 		DrawDCCircle(m_pointList[0], 5.0, dc);
 
-		DrawDCSwitches(dc);
-		DrawDCPowerFlowPts(dc);
+		DrawDCSwitches(guiColour, dc);
+		DrawDCPowerFlowPts(guiColour, dc);
 
 		wxPoint2DDouble p;
 		wxPoint triangPts[3];

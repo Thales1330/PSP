@@ -69,73 +69,13 @@ MathExpression::~MathExpression()
 	m_nodeList.clear();
 }
 
-//void MathExpression::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//    glLineWidth(1.0);
-//    if (m_selected) {
-//        glColor4dv(m_selectionColour.GetRGBA());
-//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-//    }
-//    glColor4d(1.0, 1.0, 1.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-//
-//    // Plot input variables and symbol.
-//    glColor4d(0.0, 0.3, 1.0, 1.0);
-//    if (m_angle == 0.0) {
-//        m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() -
-//            wxPoint2DDouble(m_symbolSize.GetWidth() / 2.0 + 6.0, 0));
-//        glColor4d(0.0, 0.0, 0.0, 1.0);
-//        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
-//            m_glTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() +
-//                wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + 6, 0));
-//        }
-//    }
-//    else if (m_angle == 90.0) {
-//        m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() -
-//            wxPoint2DDouble(0, m_symbolSize.GetHeight() / 2.0 + 6.0));
-//        glColor4d(0.0, 0.0, 0.0, 1.0);
-//        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
-//            m_glTextInputVector[i]->Draw(
-//                m_nodeList[i]->GetPosition() +
-//                wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + m_glTextInputVector[i]->GetHeight() / 2,
-//                    15),
-//                90);
-//        }
-//    }
-//    else if (m_angle == 180.0) {
-//        m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() +
-//            wxPoint2DDouble(m_symbolSize.GetWidth() / 2.0 + 6.0, 0));
-//        glColor4d(0.0, 0.0, 0.0, 1.0);
-//        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
-//            m_glTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() -
-//                wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + 6, 0));
-//        }
-//    }
-//    else if (m_angle == 270.0) {
-//        m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() +
-//            wxPoint2DDouble(0, m_symbolSize.GetHeight() / 2.0 + 6.0));
-//        glColor4d(0.0, 0.0, 0.0, 1.0);
-//        for (unsigned int i = 0; i < m_glTextInputVector.size(); ++i) {
-//            m_glTextInputVector[i]->Draw(
-//                m_nodeList[i]->GetPosition() + wxPoint2DDouble(m_glTextInputVector[i]->GetWidth() / 2.0 + m_glTextInputVector[i]->GetHeight() / 2.0,
-//                    -m_glTextInputVector[i]->GetWidth()),
-//                90);
-//        }
-//    }
-//
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawNodes();
-//}
 
-void MathExpression::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void MathExpression::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	double pi = 3.1415926535897932;
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(m_selectionColour));
+		gc->SetBrush(wxBrush(guiColour->selection));
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}

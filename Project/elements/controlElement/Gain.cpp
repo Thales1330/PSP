@@ -84,11 +84,11 @@ Gain::~Gain()
 //    DrawNodes();
 //}
 
-void Gain::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Gain::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(m_selectionColour));
+		gc->SetBrush(wxBrush(guiColour->selection));
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		std::vector<wxPoint2DDouble> m_triSelectedPts;
 		if (m_angle == 0.0) {

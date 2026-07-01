@@ -41,7 +41,7 @@ Bus::Bus(wxPoint2DDouble position, wxString name)
 
 Bus::~Bus() {}
 
-void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxPoint2DDouble gcPosition = m_position - wxPoint2DDouble(m_width / 2.0, m_height / 2.0);
 	wxGraphicsMatrix identityMatrix = gc->GetTransform();
@@ -61,7 +61,7 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 		gc->Rotate(wxDegToRad(m_angle));
 		gc->Translate(-screenPt.m_x, -screenPt.m_y);
 
-		gc->SetBrush(wxBrush(m_selectionColour));
+		gc->SetBrush(wxBrush(guiColour->selection));
 
 		wxPoint2DDouble pts[4] = { WorldToScreen(translation, scale, -(m_width / 2.0), -(m_height / 2.0)) -
 									  wxPoint2DDouble(m_borderSize, m_borderSize),
@@ -82,18 +82,18 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 
 
 	if (!m_electricalData.isConnected)
-		gc->SetBrush(wxBrush(m_offlineElementColour));
+		gc->SetBrush(wxBrush(guiColour->disable));
 	else if (m_dynEvent)
-		gc->SetBrush(wxBrush(m_dynamicEventColour));
+		gc->SetBrush(wxBrush(guiColour->eventElement));
 	else
-		gc->SetBrush(wxBrush(m_busColour));
+		gc->SetBrush(wxBrush(guiColour->bus));
 
 	gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
 
-	//if (m_electricalData.slackBus) {
-	//	gc->SetBrush(wxBrush(*wxBLACK, wxBRUSHSTYLE_CROSSDIAG_HATCH));
-	//	gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
-	//}
+	if (m_electricalData.slackBus) {
+		gc->SetBrush(wxBrush(guiColour->slackBus));
+		gc->DrawRectangle(gcPosition.m_x, gcPosition.m_y, m_width, m_height);
+	}
 
 	gc->PopState();
 
@@ -156,7 +156,7 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* g
 	}
 }
 
-void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void Bus::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 	//wxPoint2DDouble gcPosition = m_position - wxPoint2DDouble(m_width / 2.0, m_height / 2.0);
 	wxPoint2DDouble gcPosition = m_position;
@@ -165,7 +165,7 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 
 	// Draw selection (layer 1)
 	if (m_selected) {
-		dc.SetBrush(wxBrush(m_selectionColour));
+		dc.SetBrush(wxBrush(guiColour->selection));
 
 		wxPoint2DDouble pts[4] = { WorldToScreen(translation, scale, -(m_width / 2.0), -(m_height / 2.0)) -
 									  wxPoint2DDouble(m_borderSize, m_borderSize),
@@ -181,11 +181,11 @@ void Bus::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
 
 
 	if (!m_electricalData.isConnected)
-		dc.SetBrush(wxBrush(m_offlineElementColour));
+		dc.SetBrush(wxBrush(guiColour->disable));
 	else if (m_dynEvent)
-		dc.SetBrush(wxBrush(m_dynamicEventColour));
+		dc.SetBrush(wxBrush(guiColour->eventElement));
 	else
-		dc.SetBrush(wxBrush(m_busColour));
+		dc.SetBrush(wxBrush(guiColour->bus));
 
 	DrawDCRectangle(gcPosition, m_width, m_height, m_angle, dc);
 

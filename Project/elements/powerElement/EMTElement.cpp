@@ -69,22 +69,22 @@ bool EMTElement::AddParent(Element* parent, wxPoint2DDouble position)
 	return false;
 }
 
-void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void EMTElement::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	if (m_inserted) {
 
 		if (m_selected) {
-			gc->SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
@@ -103,20 +103,20 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCon
 
 			// Draw node selection.
 			gc->SetPen(*wxTRANSPARENT_PEN);
-			gc->SetBrush(wxBrush(wxColour(m_selectionColour)));
+			gc->SetBrush(wxBrush(guiColour->selection));
 			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, 10, gc);
 		}
 		// Draw EMTElement (layer 2).
 		// Draw node.
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(wxColour(elementColour)));
+		gc->SetBrush(wxBrush(elementColour));
 		DrawDCCircle(m_pointList[0], 5.0, 10, gc);
 
-		gc->SetPen(wxPen(wxColour(elementColour), 2));
+		gc->SetPen(wxPen(elementColour, 2));
 		gc->SetBrush(*wxTRANSPARENT_BRUSH);
 		gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
-		DrawDCSwitches(gc);
+		DrawDCSwitches(guiColour, gc);
 
 		// Push the current matrix on stack.
 		gc->PushState();
@@ -125,8 +125,8 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCon
 		gc->Rotate(wxDegToRad(m_angle));
 		gc->Translate(-m_position.m_x, -m_position.m_y);
 
-		gc->SetPen(wxPen(wxColour(elementColour), 2));
-		gc->SetBrush(*wxWHITE_BRUSH);
+		gc->SetPen(wxPen(elementColour, 2));
+		gc->SetBrush(wxBrush(guiColour->background));
 		//gc->DrawRectangle(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0, m_width, m_height);
 		gc->DrawRoundedRectangle(m_position.m_x - m_width / 2.0, m_position.m_y - m_height / 2.0, m_width, m_height, 10.0);
 
@@ -153,17 +153,17 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsCon
 	}
 }
 
-void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) const
+void EMTElement::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxDC& dc) const
 {
 	wxColour elementColour;
 	if (m_online) {
 		if (m_dynEvent)
-			elementColour = m_dynamicEventColour;
+			elementColour = guiColour->eventElement;
 		else
-			elementColour = m_onlineElementColour;
+			elementColour = guiColour->enabled;
 	}
 	else
-		elementColour = m_offlineElementColour;
+		elementColour = guiColour->disable;
 
 	std::vector<wxPoint> pointListInt;
 	for (auto& pt : m_pointList) {
@@ -173,7 +173,7 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) con
 	if (m_inserted) {
 
 		if (m_selected) {
-			dc.SetPen(wxPen(wxColour(m_selectionColour), 2 + m_borderSize * 2.0));
+			dc.SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
 			dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
 			dc.DrawLines(pointListInt.size(), &pointListInt[0]);
@@ -182,23 +182,23 @@ void EMTElement::DrawDC(wxPoint2DDouble translation, double scale, wxDC& dc) con
 
 			// Draw node selection.
 			dc.SetPen(*wxTRANSPARENT_PEN);
-			dc.SetBrush(wxBrush(wxColour(m_selectionColour)));
+			dc.SetBrush(wxBrush(guiColour->selection));
 			DrawDCCircle(m_pointList[0], 5.0 + m_borderSize / scale, dc);
 		}
 		// Draw EMTElement (layer 2).
 		// Draw node.
 		dc.SetPen(*wxTRANSPARENT_PEN);
-		dc.SetBrush(wxBrush(wxColour(elementColour)));
+		dc.SetBrush(wxBrush(elementColour));
 		DrawDCCircle(pointListInt[0], 5.0, dc);
 
-		dc.SetPen(wxPen(wxColour(elementColour), 2));
+		dc.SetPen(wxPen(elementColour, 2));
 		dc.SetBrush(*wxTRANSPARENT_BRUSH);
 		dc.DrawLines(pointListInt.size(), &pointListInt[0]);
 
-		DrawDCSwitches(dc);
+		DrawDCSwitches(guiColour, dc);
 
-		dc.SetPen(wxPen(wxColour(elementColour), 2));
-		dc.SetBrush(*wxWHITE_BRUSH);
+		dc.SetPen(wxPen(elementColour, 2));
+		dc.SetBrush(wxBrush(guiColour->background));
 		DrawDCRoundedRectRotated(dc, m_position, m_width, m_height, 10.0, m_angle);
 
 		wxFont font;

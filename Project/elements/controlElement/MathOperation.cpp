@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -36,31 +36,12 @@ MathOperation::MathOperation(int id) : ControlElement(id)
 }
 
 MathOperation::~MathOperation() {}
-//void MathOperation::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//    glLineWidth(1.0);
-//    if(m_selected) {
-//        glColor4dv(m_selectionColour.GetRGBA());
-//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-//    }
-//    glColor4d(1.0, 1.0, 1.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-//
-//    // Draw personalized element symbol.
-//    DrawSymbol();
-//
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawNodes();
-//}
 
-void MathOperation::DrawDC(wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
+void MathOperation::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
     if (m_selected) {
         gc->SetPen(*wxTRANSPARENT_PEN);
-        gc->SetBrush(wxBrush(m_selectionColour));
+        gc->SetBrush(wxBrush(guiColour->selection));
         double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
         gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
     }
