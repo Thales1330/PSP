@@ -13,6 +13,8 @@
 #include <wx/msgdlg.h>
 #include <wx/dc.h>
 
+#include <algorithm>
+
 //HMPlane::HMPlane(Shader* shader, Shader* labelShader, const float& width, const float& height, const float limits[2])
 //	: m_width(width), m_height(height), m_shader(shader), m_labelShader(labelShader)
 //{
@@ -287,6 +289,10 @@ void HMPlane::DrawLabelDC(wxGraphicsContext* gc) const
 	gc->PushState();
 	gc->SetTransform(identityMatrix);
 	gc->SetPen(*wxBLACK_PEN);
+	if (wxSystemSettings::GetAppearance().IsDark())
+	{
+		gc->SetPen(wxPen(wxColour(205, 210, 215)));
+	}
 	wxGraphicsGradientStops gStops;
 	gStops.Add(VoltToColour(-1.0, 210), 0.0);
 	gStops.Add(VoltToColour(-0.5, 210), 0.25);
@@ -313,8 +319,13 @@ void HMPlane::DrawLabelDC(wxGraphicsContext* gc) const
 	for (size_t i = 0; i < 10; i += 2) {
 		gc->StrokeLine(lines[i].m_x, lines[i].m_y, lines[i + 1].m_x, lines[i + 1].m_y);
 	}
+	wxColour fontColour = *wxBLACK;
+	if (wxSystemSettings::GetAppearance().IsDark())
+	{
+		fontColour = wxColour(205, 210, 215);
+	}
 
-	gc->SetFont(gc->CreateFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL)));
+	gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), fontColour);
 	gc->DrawText(_("Voltage (p.u.)"), 30, m_height - 15);
 	wxString voltageText = "";
 	double textWidth, textHeight;
@@ -343,6 +354,10 @@ void HMPlane::DrawLabelDC(wxDC& dc) const
 	dc.SetDeviceOrigin(0, 0);
 
 	dc.SetPen(*wxBLACK_PEN);
+	if (wxSystemSettings::GetAppearance().IsDark())
+	{
+		dc.SetPen(wxPen(wxColour(205, 210, 215)));
+	}
 	int xStart = 30;
 	int yStart = m_height - 45;
 	int width = 300;
@@ -398,6 +413,10 @@ void HMPlane::DrawLabelDC(wxDC& dc) const
 	}
 
 	dc.SetPen(*wxBLACK_PEN);
+	if (wxSystemSettings::GetAppearance().IsDark())
+	{
+		dc.SetPen(wxPen(wxColour(205, 210, 215)));
+	}
 	dc.SetBrush(*wxTRANSPARENT_BRUSH);
 	dc.DrawRectangle(xStart, yStart, width, height);
 	wxPoint2DDouble lines[10];
@@ -441,12 +460,6 @@ void HMPlane::SetLabelLimits(const double& min, const double& max)
 {
 	m_limits[0] = max;
 	m_limits[1] = min;
-
-	//if (m_glTexts.size() > 0) {
-	//	m_glTexts[0]->SetText(wxString::Format("%.2f p.u.", m_limits[0]));
-	//	m_glTexts[1]->SetText(wxString::Format("%.2f p.u.", (m_limits[0] + m_limits[1]) / 2.0f));
-	//	m_glTexts[2]->SetText(wxString::Format("%.2f p.u.", m_limits[1]));
-	//}
 }
 
 void HMPlane::SetRectSlope(const wxRect2DDouble& rect, const double& angle, const double& depth)
@@ -464,15 +477,13 @@ void HMPlane::SetRectSlope(const wxRect2DDouble& rect, const double& angle, cons
 			}
 			if (rect.Contains(pt)) {
 				coord->z += depth;
-				if (coord->z > 1.0f) coord->z = 1.0f;
-				if (coord->z < -1.0f) coord->z = -1.0f;
+				coord->z = std::min<double>(coord->z, 1.0f);
+				coord->z = std::max<double>(coord->z, -1.0f);
 			}
 
 		}
 	}
 	m_isClear = false;
-	//FillCoordsBuffer();
-	//SmoothPlane();
 }
 
 void HMPlane::Resize(const double& width, const double& height)
@@ -506,16 +517,6 @@ void HMPlane::Resize(const double& width, const double& height)
 		m_coords.emplace_back(line);
 	}
 	FillCoordsBuffer();
-	//FillIndexBuffer();
-
-	//BindOpenGLBuffers();
-
-	//m_va->Bind();
-	//m_vb->Bind();
-	//
-	//delete m_ib;
-	//m_ib = new IndexBuffer(m_indexBuffer.data(), m_indexBuffer.size());
-	//m_ib->Unbind();
 	m_isClear = false;
 }
 
@@ -661,117 +662,58 @@ void HMPlane::FillCoordsBuffer()
 	}
 }
 
-//void HMPlane::FillIndexBuffer()
-//{
-//	m_indexBuffer.clear();
-//	for (auto i = 0; i < m_meshTickY - 1; ++i) {
-//		for (auto j = 0; j < m_meshTickX - 1; ++j) {
-//			m_indexBuffer.push_back(i * m_meshTickX + j);
-//			m_indexBuffer.push_back(i * m_meshTickX + j + 1);
-//			m_indexBuffer.push_back((i + 1) * m_meshTickX + j + 1);
-//			m_indexBuffer.push_back(i * m_meshTickX + j);
-//			m_indexBuffer.push_back((i + 1) * m_meshTickX + j);
-//			m_indexBuffer.push_back((i + 1) * m_meshTickX + j + 1);
-//		}
-//	}
-//}
-
-//void HMPlane::BindOpenGLBuffers()
-//{
-//	delete m_va;
-//	delete m_vb;
-//	delete m_ib;
-//	// Generate vertex array (this will bind vertex buffer with its layout)
-//	m_va = new VertexArray();
-//
-//	// Generate vertex buffer
-//	m_vb = new VertexBuffer(m_bufferCoords.data(), m_bufferCoords.size() * sizeof(float), GL_DYNAMIC_DRAW);
-//
-//	m_layout = new VertexBufferLayout();
-//	m_layout->Push<float>(3); // 3 = each triplet from array set the coords -> [x1, y1, z1, x2, y2, z2, ...]
-//	m_va->AddBuffer(*m_vb, *m_layout); // Add buffer and bind vertex array
-//
-//	// Set index buffer
-//	m_ib = new IndexBuffer(m_indexBuffer.data(), m_indexBuffer.size());
-//
-//	// Unbind
-//	m_va->Unbind();
-//	m_vb->Unbind();
-//	m_ib->Unbind();
-//}
-
-//void HMPlane::CreateLabel()
-//{
-//	float vertexBufferLabel[4 * 3] =
-//	{
-//		0.0f, 0.0f, 1.0f,
-//		30.0f, 0.0f, 1.0f,
-//		0.0f, 300.0f, -1.0f,
-//		30.0f, 300.0f, -1.0f
-//	};
-//	std::copy(vertexBufferLabel, vertexBufferLabel + 3 * 4, m_vertexBufferLabel);
-//
-//	unsigned int indexBufferLabel[6] =
-//	{
-//		0, 1, 2,
-//		1, 2, 3
-//	};
-//	std::copy(indexBufferLabel, indexBufferLabel + 6, m_indexBufferLabel);
-//
-//	delete m_vaL;
-//	delete m_vbL;
-//	delete m_ibL;
-//	// Generate vertex array (this will bind vertex buffer with its layout)
-//	m_vaL = new VertexArray();
-//
-//	// Generate vertex buffer
-//	m_vbL = new VertexBuffer(m_vertexBufferLabel, 4 * 3 * sizeof(float), GL_STATIC_DRAW);
-//
-//	m_layoutL = new VertexBufferLayout();
-//	m_layoutL->Push<float>(3); // 3 = each triplet from array set the coords -> [x1, y1, z1, x2, y2, z2, ...]
-//	m_vaL->AddBuffer(*m_vbL, *m_layoutL); // Add buffer and bind vertex array
-//
-//	// Set index buffer
-//	m_ibL = new IndexBuffer(m_indexBufferLabel, 6);
-//
-//	// Unbind
-//	m_vaL->Unbind();
-//	m_vbL->Unbind();
-//	m_ibL->Unbind();
-//
-//	m_glTexts.emplace_back(new OpenGLText(wxString::Format("%.2f p.u.", m_limits[0])));
-//	m_glTexts.emplace_back(new OpenGLText(wxString::Format("%.2f p.u.", (m_limits[0] + m_limits[1]) / 2.0)));
-//	m_glTexts.emplace_back(new OpenGLText(wxString::Format("%.2f p.u.", m_limits[1])));
-//}
-
 wxColor HMPlane::VoltToColour(double volt, int alpha) const
 {
-	//int red = 255 + 255 * (volt < 0 ? volt : 0);
-	//int green = 255;
-	//int blue = 255 - 255 * (volt >= 0 ? volt : 0);
-	//int red = volt >= 0 ? 255 : 255 - 255 * (std::abs(volt));
-	//int green = 255 - 205 * (std::abs(volt));
-	//int blue = volt <= 0 ? 255 : 255 - 255 * (std::abs(volt));
 	int red = 255, green = 255, blue = 255;
-	if (volt <= -0.5) {
-		red = -100 * volt - 50;
-		green = 200 * volt + 300;
-		blue = 255;
+	if (wxSystemSettings::GetAppearance().IsDark())
+	{
+		red = 43;
+		green = 46;
+		blue = 52;
+
+		if (volt <= -0.5) {
+			red = 100 * volt + 100;
+			green = -160 * volt + 40;
+			blue = -150 * volt + 105;
+		}
+		else if (volt > -0.5 && volt < 0.0) {
+			red = -14 * volt + 43;
+			green = -148 * volt + 46;
+			blue = -256 * volt + 52;
+		}
+		else if (volt >= 0.0 && volt < 0.5) {
+			red = 304 * volt + 43;
+			green = 198 * volt + 46;
+			blue = -44 * volt + 52;
+		}
+		else { 
+			red = 80 * volt + 155;
+			green = 70 * volt + 110;
+			blue = 30 * volt + 15;
+		}
+
 	}
-	else if (volt > -0.5 && volt < 0) {
-		red = 510 * volt + 255;
-		green = 110 * volt + 255;
-		blue = 255;
-	}
-	else if (volt >= 0.0 && volt < 0.5) {
-		red = 255;
-		green = -110 * volt + 255;
-		blue = -510 * volt + 255;
-	}
-	else if (volt >= 0.5) {
-		red = 255;
-		green = -200 * volt + 300;
-		blue = 100 * volt - 50;
+	else {
+		if (volt <= -0.5) {
+			red = -100 * volt - 50;
+			green = 200 * volt + 300;
+			blue = 255;
+		}
+		else if (volt > -0.5 && volt < 0) {
+			red = 510 * volt + 255;
+			green = 110 * volt + 255;
+			blue = 255;
+		}
+		else if (volt >= 0.0 && volt < 0.5) {
+			red = 255;
+			green = -110 * volt + 255;
+			blue = -510 * volt + 255;
+		}
+		else if (volt >= 0.5) {
+			red = 255;
+			green = -200 * volt + 300;
+			blue = 100 * volt - 50;
+		}
 	}
 	return wxColor(red, green, blue, alpha);
 }

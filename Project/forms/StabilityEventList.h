@@ -1,4 +1,4 @@
-#ifndef STABILITYEVENTLIST_H
+﻿#ifndef STABILITYEVENTLIST_H
 #define STABILITYEVENTLIST_H
 #include "DataReportBase.h"
 
@@ -14,7 +14,7 @@ class StabilityEventList : public StabilityEventListBase
     virtual ~StabilityEventList();
 
    protected:
-    virtual void OnOKButtonClick(wxCommandEvent& event) { EndModal(wxID_OK); };
+    virtual void OnOKButtonClick(wxCommandEvent& event) { EndModal(wxID_OK); }
     virtual void GetTimeEventsList();
     virtual void AddEvent(double eventTime, wxString eventType, wxString eventDescription, wxColour eventColour);
     virtual void FillGrid();

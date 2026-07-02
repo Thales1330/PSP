@@ -1,4 +1,4 @@
-#include "StabilityEventList.h"
+﻿#include "StabilityEventList.h"
 
 #include "../simulation/ElectricCalculation.h"
 
@@ -10,6 +10,23 @@ StabilityEventList::StabilityEventList(wxWindow* parent, std::vector<Element*> e
     : StabilityEventListBase(parent)
 {
     m_elementList = elementList;
+
+    if (wxSystemSettings::GetAppearance().IsDark())
+    {
+        m_headerColour = wxColour(50, 50, 50);
+        m_oddRowColour = wxColour(70, 70, 70);
+        m_evenRowColour = wxColour(40, 40, 40);
+        m_redColour = wxColour(255, 110, 110);
+        m_blueColour = wxColour(120, 170, 255);
+    }
+    else
+    {
+        m_headerColour = wxColour(191, 223, 255);
+        m_oddRowColour = wxColour(220, 220, 220);
+        m_evenRowColour = wxColour(255, 255, 255);
+        m_redColour = wxColour(210, 35, 35);
+        m_blueColour = wxColour(25, 90, 220);
+    }
 
     m_time.clear();
     m_eventType.clear();

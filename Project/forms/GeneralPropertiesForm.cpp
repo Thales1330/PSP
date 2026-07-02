@@ -150,20 +150,6 @@ bool GeneralPropertiesForm::ValidateData()
 	file.AddLine(line);
 	if (data.theme != checkData.theme) needRestart = true;
 
-	//line = "useOpenGL=";
-	//switch (m_choiceRender->GetSelection()) {
-	//case 0: {
-	//    line += "yes";
-	//    data.useOpenGL = true;
-	//} break;
-	//case 1: {
-	//    line += "no";
-	//    data.useOpenGL = false;
-	//} break;
-	//}
-	//file.AddLine(line);
-	//if (data.useOpenGL != checkData.useOpenGL) hasChanges = true;
-
 	line = "labelfont=";
 	line += data.labelFont;
 	file.AddLine(line);

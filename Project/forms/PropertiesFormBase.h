@@ -453,9 +453,9 @@ public:
         ID_CL_INDMOTOR = 10002,
         ID_CL_INDUCTOR = 10003,
         ID_CL_TRANSFORMER = 10004,
-        ID_CL_LOAD = 10005,
-        ID_CL_GENERATOR = 10006,
-        ID_CL_LINE = 10007,
+        ID_CL_LINE = 10005,
+        ID_CL_LOAD = 10006,
+        ID_CL_GENERATOR = 10007,
         ID_CL_CAPACITOR = 10008,
         ID_CL_BUS = 10009,
     };
@@ -530,7 +530,7 @@ public:
     wxCheckBox* GetCheckBoxReplace() { return m_checkBoxReplace; }
     wxButton* GetButtonApply() { return m_buttonApply; }
     wxButton* GetButtonCancel() { return m_buttonCancel; }
-    LabelManagerBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Label Manager"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    LabelManagerBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Label Manager"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
     virtual ~LabelManagerBase();
 };
 

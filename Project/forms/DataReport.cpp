@@ -25,8 +25,6 @@ DataReport::DataReport(wxWindow* parent, Workspace* workspace) : DataReportBase(
 {
 	m_workspace = workspace;
 
-	
-
 	if (wxSystemSettings::GetAppearance().IsDark())
 	{
 		m_headerColour = wxColour(50, 50, 50);

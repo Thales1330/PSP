@@ -16451,7 +16451,7 @@
 			"border":	5,
 			"gbSpan":	"1,1",
 			"gbPosition":	"0,0",
-			"m_styles":	["wxDEFAULT_DIALOG_STYLE"],
+			"m_styles":	["wxDEFAULT_DIALOG_STYLE", "wxRESIZE_BORDER"],
 			"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
 			"m_properties":	[{
 					"type":	"string",
@@ -16589,7 +16589,7 @@
 					"m_events":	[],
 					"m_children":	[{
 							"m_type":	4401,
-							"proportion":	1,
+							"proportion":	60,
 							"border":	5,
 							"gbSpan":	"1,1",
 							"gbPosition":	"0,0",
@@ -19057,7 +19057,7 @@
 							"m_children":	[]
 						}, {
 							"m_type":	4424,
-							"proportion":	1,
+							"proportion":	40,
 							"border":	5,
 							"gbSpan":	"1,1",
 							"gbPosition":	"0,0",

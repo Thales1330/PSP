@@ -1478,7 +1478,7 @@ LabelManagerBase::LabelManagerBase(wxWindow* parent, wxWindowID id, const wxStri
     
     wxBoxSizer* boxSizer1309 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer1226->Add(boxSizer1309, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1226->Add(boxSizer1309, 60, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     m_choicebook = new wxChoicebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
     m_choicebook->SetName(wxT("m_choicebook"));
@@ -1669,7 +1669,7 @@ LabelManagerBase::LabelManagerBase(wxWindow* parent, wxWindowID id, const wxStri
     
     m_richTextCtrlPreview = new wxRichTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTE_READONLY|wxTE_MULTILINE|wxWANTS_CHARS);
     
-    boxSizer1226->Add(m_richTextCtrlPreview, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1226->Add(m_richTextCtrlPreview, 40, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     m_checkBoxReplace = new wxCheckBox(this, wxID_ANY, _("Replace existing labels"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     m_checkBoxReplace->SetValue(false);
