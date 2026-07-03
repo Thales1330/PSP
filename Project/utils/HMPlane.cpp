@@ -12,38 +12,10 @@
 
 #include <wx/msgdlg.h>
 #include <wx/dc.h>
+#include <wx/settings.h>
 
 #include <algorithm>
 
-//HMPlane::HMPlane(Shader* shader, Shader* labelShader, const float& width, const float& height, const float limits[2])
-//	: m_width(width), m_height(height), m_shader(shader), m_labelShader(labelShader)
-//{
-//	// Fill mesh coords
-//	for (auto accHeight = 0; accHeight <= m_height + m_meshSize; accHeight += m_meshSize) {
-//		std::vector<BufferMeshCoords*> line;
-//		for (auto accWidth = 0; accWidth <= m_width + m_meshSize; accWidth += m_meshSize) {
-//			auto* bmc = new BufferMeshCoords;
-//			bmc->x = accWidth;
-//			bmc->y = accHeight;
-//			bmc->z = 0.0f;
-//			line.emplace_back(bmc);
-//
-//			if (accHeight < 0.1f) m_meshTickX++;
-//		}
-//		m_meshTickY++;
-//		m_coords.emplace_back(line);
-//	}
-//
-//
-//	m_limits[0] = limits[0];
-//	m_limits[1] = limits[1];
-//
-//	FillCoordsBuffer();
-//	FillIndexBuffer();
-//	BindOpenGLBuffers();
-//
-//	CreateLabel();
-//}
 
 HMPlane::HMPlane(const double& width, const double& height, const double limits[2]) : m_width(width), m_height(height)
 {
@@ -77,21 +49,6 @@ HMPlane::HMPlane(const double& width, const double& height, const double limits[
 
 HMPlane::~HMPlane()
 {
-	//delete m_ib;
-	//delete m_vb;
-	//delete m_layout;
-	//delete m_va;
-	//
-	//delete m_ibL;
-	//delete m_vbL;
-	//delete m_layoutL;
-	//delete m_vaL;
-	//
-	//for (auto glText : m_glTexts) {
-	//	delete glText;
-	//}
-	//m_glTexts.clear();
-
 	for (const auto& line : m_coords) {
 		for (auto* bmv : line) {
 			delete bmv;
@@ -99,29 +56,6 @@ HMPlane::~HMPlane()
 	}
 	m_coords.clear();
 }
-
-//void HMPlane::Draw(const Renderer& renderer, const glm::mat4& projectionViewMatrix) const
-//{
-//	//const glm::mat4 mvp = projectionViewMatrix * glm::translate(glm::mat4(1.0f), glm::vec3(m_width / 2.0f, m_height / 2.0f, 0.0f));
-//	const glm::mat4 mvp = projectionViewMatrix;
-//
-//	m_shader->Bind();
-//	//m_shader->SetUniform1f("u_scale", m_scale);
-//	m_shader->SetUniformMatrix4fv("u_mvpMatrix", mvp);
-//
-//	m_va->UpdateBuffer(*m_vb, m_bufferCoords.data(), m_bufferCoords.size() * sizeof(float));
-//
-//	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-//	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//	renderer.Draw(*m_va, *m_ib, *m_shader);
-//
-//	// Unbind
-//	m_va->Unbind();
-//	m_vb->Unbind();
-//	m_ib->Unbind();
-//
-//	m_shader->Unbind();
-//}
 
 void HMPlane::DrawDC(wxGraphicsContext* gc) const
 {
@@ -154,36 +88,6 @@ void HMPlane::DrawDC(wxDC& dc) const
 {
 	if (m_isClear) return;
 	dc.SetPen(*wxTRANSPARENT_PEN);
-	//for (const auto& line : m_coords)
-	//{
-	//	int y = wxRound(line[0]->y);
-	//
-	//	wxColour prevColour(255, 255, 255);
-	//	int prevX = 0;
-	//
-	//	for (size_t i = 0; i < line.size(); ++i)
-	//	{
-	//		const BufferMeshCoords* coords = line[i];
-	//
-	//		int currentX = wxRound(coords->x);
-	//		wxColour currentColour = VoltToColour(coords->z);
-	//
-	//		int width = currentX - prevX;
-	//
-	//		if (width > 0)
-	//		{
-	//			wxRect rect(prevX, y, width, m_meshSize);
-	//
-	//			dc.GradientFillLinear(rect,
-	//				prevColour,
-	//				currentColour,
-	//				wxEAST);
-	//		}
-	//
-	//		prevX = currentX;
-	//		prevColour = currentColour;
-	//	}
-	//}
 
 	for (const auto& line : m_coords)
 	{
@@ -254,33 +158,6 @@ void HMPlane::DrawDC(wxDC& dc) const
 		}
 	}
 }
-
-//void HMPlane::DrawLabel(const Renderer& renderer, const glm::mat4& projectionViewMatrix, const float& x, const float& y) const
-//{
-//	const glm::mat4 mvp = projectionViewMatrix * glm::translate(glm::mat4(1.0f), glm::vec3(x, y, 0.0f));
-//	//const glm::mat4 mvp = projectionViewMatrix;
-//
-//	m_labelShader->Bind();
-//	//m_shader->SetUniform1f("u_scale", m_scale);
-//	m_labelShader->SetUniformMatrix4fv("u_mvpMatrix", mvp);
-//	m_labelShader->SetUniform4f("u_offset", x, y, m_width, m_height);
-//
-//	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-//	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//	renderer.Draw(*m_vaL, *m_ibL, *m_labelShader);
-//
-//	// Unbind
-//	m_vaL->Unbind();
-//	m_vbL->Unbind();
-//	m_ibL->Unbind();
-//
-//	m_labelShader->Unbind();
-//
-//	glColor4d(0.0, 0.0, 0.0, 1.0);
-//	m_glTexts[0]->Draw(wxPoint2DDouble(x + 35.0 + m_glTexts[0]->GetWidth() / 2.0, y));
-//	m_glTexts[1]->Draw(wxPoint2DDouble(x + 35.0 + m_glTexts[1]->GetWidth() / 2.0, y + 150.0));
-//	m_glTexts[2]->Draw(wxPoint2DDouble(x + 35.0 + m_glTexts[2]->GetWidth() / 2.0, y + 300.0));
-//}
 
 void HMPlane::DrawLabelDC(wxGraphicsContext* gc) const
 {
