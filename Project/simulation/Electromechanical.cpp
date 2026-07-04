@@ -1677,7 +1677,7 @@ double Electromechanical::CalculateIntVariables(IndMotor* indMotor, double ir, d
 
 	// Change T'0 with the cage factor
 	if (data.useKf)
-		data.t0 = (data.x2t + data.xmt) / (2.0 * M_PI * m_systemFreq * data.r2t * (1.0 + data.kf * data.r2t));
+		data.t0 = (data.x2t + data.xmt) / (2.0 * M_PI * m_systemFreq * data.r2t * (1.0 + data.kf * data.slip));
 
 	// Electrical differential equations
 	double tranEr = data.icTranEr.c + data.icTranEr.m * (w0 * data.t0 * slip * data.tranEm - (data.x0 - data.xt) * im);
