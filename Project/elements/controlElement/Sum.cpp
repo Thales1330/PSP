@@ -55,12 +55,12 @@ void Sum::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}
-	gc->SetPen(*wxBLACK_PEN);
-	gc->SetBrush(*wxWHITE_BRUSH);
+	gc->SetPen(wxPen(guiColour->enabled));
+	gc->SetBrush(wxBrush(guiColour->background));
 	gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
 	// Plot signals.
-	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 2));
+	gc->SetPen(wxPen(guiColour->enabled, 2));
 	gc->SetBrush(*wxTRANSPARENT_BRUSH);
 	wxPoint2DDouble signalOffset[4];
 	wxPoint2DDouble sigmaOffset;
@@ -106,7 +106,7 @@ void Sum::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 	}
 
 	// Plot sigma.
-	gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+	gc->SetPen(wxPen(guiColour->bus, 2));
 	wxPoint2DDouble sigma[5];
 	sigma[0] = m_position + wxPoint2DDouble(4, 9) + sigmaOffset;
 	sigma[1] = m_position + wxPoint2DDouble(-6, 9) + sigmaOffset;
@@ -116,7 +116,7 @@ void Sum::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale
 	gc->StrokeLines(5, sigma);
 
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	gc->SetBrush(*wxBLACK_BRUSH);
+	gc->SetBrush(wxBrush(guiColour->enabled));
 	DrawDCNodes(gc);
 }
 

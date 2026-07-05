@@ -45,16 +45,16 @@ void MathOperation::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, do
         double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
         gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
     }
-    gc->SetPen(*wxBLACK_PEN);
-    gc->SetBrush(*wxWHITE_BRUSH);
+    gc->SetPen(guiColour->enabled);
+    gc->SetBrush(guiColour->background);
     //DrawRectangle(m_position, m_width, m_height);
     gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
     // Draw personalized element symbol.
-    DrawDCSymbol(gc);
+    DrawDCSymbol(guiColour, gc);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
-    gc->SetBrush(*wxBLACK_BRUSH);
+    gc->SetBrush(guiColour->enabled);
     DrawDCNodes(gc);
 }
 

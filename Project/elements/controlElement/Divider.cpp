@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,23 +27,10 @@ Divider::~Divider()
     m_nodeList.clear();
 }
 
-//void Divider::DrawSymbol() const
-//{
-//    // Plot divider.
-//    glLineWidth(2.0);
-//    std::vector<wxPoint2DDouble> mSymbol;
-//    mSymbol.push_back(m_position + wxPoint2DDouble(-5, 0));
-//    mSymbol.push_back(m_position + wxPoint2DDouble(5, 0));
-//    glColor4d(0.0, 0.3, 1.0, 1.0);
-//    DrawLine(mSymbol, GL_LINES);
-//    DrawCircle(m_position + wxPoint2DDouble(0, -3), 2, 10, GL_POLYGON);
-//    DrawCircle(m_position + wxPoint2DDouble(0, 3), 2, 10, GL_POLYGON);
-//}
-
-void Divider::DrawDCSymbol(wxGraphicsContext* gc) const
+void Divider::DrawDCSymbol(GUIColour* guiColour, wxGraphicsContext* gc) const
 {
     // Plot divider.
-    gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+    gc->SetPen(wxPen(guiColour->bus, 2));
     gc->SetBrush(*wxTRANSPARENT_BRUSH);
     wxPoint2DDouble mSymbol[2];
     mSymbol[0] = m_position + wxPoint2DDouble(-5, 0);
@@ -51,7 +38,7 @@ void Divider::DrawDCSymbol(wxGraphicsContext* gc) const
     gc->StrokeLines(2, mSymbol);
 
     gc->SetPen(*wxTRANSPARENT_PEN);
-    gc->SetBrush(wxBrush(wxColour(0, 77, 255, 255)));
+    gc->SetBrush(wxBrush(guiColour->bus));
     DrawDCCircle(m_position + wxPoint2DDouble(0, -3), 2, 10, gc);
     DrawDCCircle(m_position + wxPoint2DDouble(0, 3), 2, 10, gc);
 }

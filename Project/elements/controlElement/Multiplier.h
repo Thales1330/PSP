@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -36,7 +36,7 @@ class Multiplier : public MathOperation
     ~Multiplier();
 
     //virtual void DrawSymbol() const;
-    virtual void DrawDCSymbol(wxGraphicsContext* gc) const;
+    virtual void DrawDCSymbol(GUIColour* guiColour, wxGraphicsContext* gc) const;
     virtual bool Solve(double* input, double timeStep);
     
     virtual rapidxml::xml_node<>* SaveElement(rapidxml::xml_document<>& doc, rapidxml::xml_node<>* elementListNode);

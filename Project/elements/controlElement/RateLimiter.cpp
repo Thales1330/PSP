@@ -42,12 +42,12 @@ void RateLimiter::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 {
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(guiColour->selection));
+		gc->SetBrush(guiColour->selection);
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}
-	gc->SetPen(*wxBLACK_PEN);
-	gc->SetBrush(*wxWHITE_BRUSH);
+	gc->SetPen(guiColour->enabled);
+	gc->SetBrush(guiColour->background);
 	gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
 	// Plot symbol.
@@ -60,14 +60,14 @@ void RateLimiter::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 	gc->StrokeLines(2, &axis[0]);
 	gc->StrokeLines(2, &axis[2]);
 
-	gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+	gc->SetPen(wxPen(guiColour->bus, 2));
 	wxPoint2DDouble limSymbol[2];
 	limSymbol[0] = m_position + wxPoint2DDouble(10, -10);
 	limSymbol[1] = m_position + wxPoint2DDouble(-10, 10);
 	gc->StrokeLines(2, limSymbol);
 
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	gc->SetBrush(*wxBLACK_BRUSH);
+	gc->SetBrush(guiColour->enabled);
 	DrawDCNodes(gc);
 }
 

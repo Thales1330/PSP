@@ -31,10 +31,6 @@ MathExpression::MathExpression(int id) : ControlElement(id)
 	}
 
 	// Symbol
-	//m_symbol.SetFontSize(12);
-	//m_symbol.SetFontWeight(wxFONTWEIGHT_BOLD);
-	//m_symbol.SetFontStyle(wxFONTSTYLE_ITALIC);
-	//m_symbol.SetFontFamily(wxFONTFAMILY_ROMAN);
 	m_symbol.SetFont(wxFont(12, wxFONTFAMILY_ROMAN, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_BOLD));
 	m_symbol.SetText("f(x)");
 	m_symbolSize = wxSize(m_symbol.GetWidth(), m_symbol.GetHeight());
@@ -75,58 +71,58 @@ void MathExpression::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, d
 	double pi = 3.1415926535897932;
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(guiColour->selection));
+		gc->SetBrush(guiColour->selection);
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}
-	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
-	gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
+	gc->SetPen(wxPen(guiColour->enabled, 1));
+	gc->SetBrush(guiColour->background);
 	gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
 	// Plot input variables and symbol.
 	if (m_angle == 0.0) {
 		double w = static_cast<double>(m_symbolSize.GetWidth());
 		double h = static_cast<double>(m_symbolSize.GetHeight());
-		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc, 0, wxColour(0, 77, 255, 255));
+		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc, 0, guiColour->bus);
 		for (unsigned int i = 0; i < m_gcTextInputVector.size(); ++i) {
 			w = static_cast<double>(m_gcTextInputVector[i]->GetWidth());
 			h = static_cast<double>(m_gcTextInputVector[i]->GetHeight());
-			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() + wxPoint2DDouble(6.0, -h / 2.0), gc);
+			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() + wxPoint2DDouble(6.0, -h / 2.0), gc, 0, guiColour->enabled);
 		}
 	}
 	else if (m_angle == 90.0) {
 		double w = static_cast<double>(m_symbolSize.GetWidth());
 		double h = static_cast<double>(m_symbolSize.GetHeight());
-		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() - wxPoint2DDouble(w / 2, h + 6.0), gc, 0, wxColour(0, 77, 255, 255));
+		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() - wxPoint2DDouble(w / 2, h + 6.0), gc, 0, guiColour->bus);
 		for (unsigned int i = 0; i < m_gcTextInputVector.size(); ++i) {
 			w = static_cast<double>(m_gcTextInputVector[i]->GetWidth());
 			h = static_cast<double>(m_gcTextInputVector[i]->GetHeight());
-			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() + wxPoint2DDouble(-h / 2, w + 6.0), gc, pi / 2.0);
+			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() + wxPoint2DDouble(-h / 2, w + 6.0), gc, pi / 2.0, guiColour->enabled);
 		}
 	}
 	else if (m_angle == 180.0) {
 		double w = static_cast<double>(m_symbolSize.GetWidth());
 		double h = static_cast<double>(m_symbolSize.GetHeight());
-		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() + wxPoint2DDouble(6.0, -h / 2.0), gc, 0, wxColour(0, 77, 255, 255));
+		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() + wxPoint2DDouble(6.0, -h / 2.0), gc, 0, guiColour->bus);
 		for (unsigned int i = 0; i < m_gcTextInputVector.size(); ++i) {
 			w = static_cast<double>(m_gcTextInputVector[i]->GetWidth());
 			h = static_cast<double>(m_gcTextInputVector[i]->GetHeight());
-			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc);
+			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc, 0,  guiColour->enabled);
 		}
 	}
 	else if (m_angle == 270.0) {
 		double w = static_cast<double>(m_symbolSize.GetWidth());
 		double h = static_cast<double>(m_symbolSize.GetHeight());
-		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() + wxPoint2DDouble(-w / 2, 6.0), gc, 0, wxColour(0, 77, 255, 255));
+		m_symbol.Draw(m_nodeList[m_nodeList.size() - 1]->GetPosition() + wxPoint2DDouble(-w / 2, 6.0), gc, 0, guiColour->bus);
 		for (unsigned int i = 0; i < m_gcTextInputVector.size(); ++i) {
 			w = static_cast<double>(m_gcTextInputVector[i]->GetWidth());
 			h = static_cast<double>(m_gcTextInputVector[i]->GetHeight());
-			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() - wxPoint2DDouble(-h / 2, w + 6.0), gc, -pi / 2.0);
+			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() - wxPoint2DDouble(-h / 2, w + 6.0), gc, -pi / 2.0, guiColour->enabled);
 		}
 	}
 
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	gc->SetBrush(*wxBLACK_BRUSH);
+	gc->SetBrush(guiColour->enabled);
 	DrawDCNodes(gc);
 }
 

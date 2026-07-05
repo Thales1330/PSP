@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -28,23 +28,10 @@ Multiplier::~Multiplier()
     m_nodeList.clear();
 }
 
-//void Multiplier::DrawSymbol() const
-//{
-//    // Plot x.
-//    glLineWidth(2.0);
-//    std::vector<wxPoint2DDouble> xSymbol;
-//    xSymbol.push_back(m_position + wxPoint2DDouble(-5, -5));
-//    xSymbol.push_back(m_position + wxPoint2DDouble(5, 5));
-//    xSymbol.push_back(m_position + wxPoint2DDouble(-5, 5));
-//    xSymbol.push_back(m_position + wxPoint2DDouble(5, -5));
-//    glColor4d(0.0, 0.3, 1.0, 1.0);
-//    DrawLine(xSymbol, GL_LINES);
-//}
-
-void Multiplier::DrawDCSymbol(wxGraphicsContext* gc) const
+void Multiplier::DrawDCSymbol(GUIColour* guiColour, wxGraphicsContext* gc) const
 {
     // Plot x.
-    gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+    gc->SetPen(wxPen(guiColour->bus, 2));
     gc->SetBrush(*wxTRANSPARENT_BRUSH);
     wxPoint2DDouble xSymbol[4];
     xSymbol[0] = m_position + wxPoint2DDouble(-5, -5);

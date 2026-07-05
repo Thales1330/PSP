@@ -38,7 +38,7 @@ class MathOperation : public ControlElement
     //virtual void Draw(wxPoint2DDouble translation, double scale) const;
     virtual void DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const;
     virtual void DrawSymbol() const {}
-    virtual void DrawDCSymbol(wxGraphicsContext* gc) const {}
+    virtual void DrawDCSymbol(GUIColour* guiColour, wxGraphicsContext* gc) const {}
     virtual bool Contains(wxPoint2DDouble position) const { return m_rect.Contains(position); }
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element) { return false; }

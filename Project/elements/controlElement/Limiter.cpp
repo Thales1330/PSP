@@ -38,47 +38,20 @@ Limiter::~Limiter()
 	m_nodeList.clear();
 }
 
-//void Limiter::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//    glLineWidth(1.0);
-//    if(m_selected) {
-//        glColor4dv(m_selectionColour.GetRGBA());
-//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-//    }
-//    glColor4d(1.0, 1.0, 1.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-//
-//    // Plot symbol.
-//    glLineWidth(2.0);
-//    std::vector<wxPoint2DDouble> limSymbol;
-//    limSymbol.push_back(m_position + wxPoint2DDouble(10, -10));
-//    limSymbol.push_back(m_position + wxPoint2DDouble(2, -10));
-//    limSymbol.push_back(m_position + wxPoint2DDouble(-2, 10));
-//    limSymbol.push_back(m_position + wxPoint2DDouble(-10, 10));
-//    glColor4d(0.0, 0.3, 1.0, 1.0);
-//    DrawLine(limSymbol);
-//
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawNodes();
-//}
-
 void Limiter::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
 	if (m_selected) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(guiColour->selection));
+		gc->SetBrush(guiColour->selection);
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}
-	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
-	gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
+	gc->SetPen(wxPen(guiColour->enabled, 1));
+	gc->SetBrush(guiColour->background);
 	gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
 	// Plot symbol.
-	gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+	gc->SetPen(wxPen(guiColour->bus, 2));
 	gc->SetBrush(*wxTRANSPARENT_BRUSH);
 	wxPoint2DDouble limSymbol[4];
 	limSymbol[0] = m_position + wxPoint2DDouble(10, -10);
@@ -88,7 +61,7 @@ void Limiter::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double s
 	gc->StrokeLines(4, limSymbol);
 
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	gc->SetBrush(*wxBLACK_BRUSH);
+	gc->SetBrush(guiColour->enabled);
 	DrawDCNodes(gc);
 }
 

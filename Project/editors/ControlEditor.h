@@ -84,7 +84,7 @@ enum class ControlElementButtonID : int {
 class ControlElementButton : public wxWindow
 {
 public:
-	ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id = wxID_ANY);
+	ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id, GUIColour* guiColour);
 	~ControlElementButton();
 
 protected:
@@ -93,6 +93,8 @@ protected:
 	virtual void OnMouseLeave(wxMouseEvent& event);
 	virtual void OnLeftClickDown(wxMouseEvent& event);
 	virtual void OnLeftClickUp(wxMouseEvent& event);
+
+	GUIColour* m_guiColour = nullptr;
 
 	wxString m_label;
 	wxFont m_font;

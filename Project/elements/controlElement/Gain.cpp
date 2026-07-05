@@ -38,51 +38,6 @@ Gain::~Gain()
 	for (auto& node : m_nodeList) if (node) delete node;
 	m_nodeList.clear();
 }
-//void Gain::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//    if(m_selected) {
-//        glColor4dv(m_selectionColour.GetRGBA());
-//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-//        std::vector<wxPoint2DDouble> m_triSelectedPts;
-//        if(m_angle == 0.0) {
-//            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(borderSize / 2, borderSize / 1.5));
-//            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(borderSize / 2, -borderSize / 1.5));
-//            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(-borderSize, 0));
-//        } else if(m_angle == 90.0) {
-//            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(borderSize / 1.5, borderSize / 2));
-//            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(-borderSize / 1.5, borderSize / 2));
-//            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(0, -borderSize));
-//        } else if(m_angle == 180.0) {
-//            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(borderSize, 0));
-//            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(-borderSize / 2, borderSize / 1.5));
-//            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(-borderSize / 2, -borderSize / 1.5));
-//        } else if(m_angle == 270.0) {
-//            m_triSelectedPts.push_back(m_triPts[0] - wxPoint2DDouble(0, borderSize));
-//            m_triSelectedPts.push_back(m_triPts[1] - wxPoint2DDouble(-borderSize / 1.5, -borderSize / 2));
-//            m_triSelectedPts.push_back(m_triPts[2] - wxPoint2DDouble(borderSize / 1.5, -borderSize / 2));
-//        }
-//        DrawTriangle(m_triSelectedPts);
-//    }
-//    glLineWidth(1.0);
-//    glColor4d(1.0, 1.0, 1.0, 1.0);
-//    DrawTriangle(m_triPts);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawTriangle(m_triPts, GL_LINE_LOOP);
-//
-//    // Plot number.
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    if(m_angle == 0.0)
-//        m_glText->Draw(m_position + wxPoint2DDouble(-m_width / 2 + m_glText->GetWidth() / 2 + 2 + m_borderSize, 0.0));
-//    else if(m_angle == 90.0)
-//        m_glText->Draw(m_position + wxPoint2DDouble(0.0, -m_height / 2 + m_glText->GetHeight() / 2 + 2 + m_borderSize));
-//    else if(m_angle == 180.0)
-//        m_glText->Draw(m_position + wxPoint2DDouble(m_width / 2 - m_glText->GetWidth() / 2 - 2 - m_borderSize, 0.0));
-//    else if(m_angle == 270.0)
-//        m_glText->Draw(m_position + wxPoint2DDouble(0.0, m_height / 2 - m_glText->GetHeight() / 2 - 2 - m_borderSize));
-//
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawNodes();
-//}
 
 void Gain::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
@@ -113,28 +68,23 @@ void Gain::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scal
 		}
 		DrawDCTriangle(m_triSelectedPts, gc);
 	}
-	//glLineWidth(1.0);
-	//glColor4d(1.0, 1.0, 1.0, 1.0);
-	//DrawTriangle(m_triPts);
-	//glColor4d(0.0, 0.0, 0.0, 1.0);
-	//DrawTriangle(m_triPts, GL_LINE_LOOP);
 
-	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 1));
-	gc->SetBrush(wxBrush(wxColour(255, 255, 255, 255)));
+	gc->SetPen(wxPen(guiColour->enabled, 1));
+	gc->SetBrush(guiColour->background);
 	DrawDCTriangle(m_triPts, gc);
 
 	// Plot number.
 	if (m_angle == 0.0)
-		m_gcText->Draw(m_position + wxPoint2DDouble(-m_width / 2 + 2 + m_borderSize, -m_gcText->GetHeight() / 2), gc);
+		m_gcText->Draw(m_position + wxPoint2DDouble(-m_width / 2 + 2 + m_borderSize, -m_gcText->GetHeight() / 2), gc, 0, guiColour->text);
 	else if (m_angle == 90.0)
-		m_gcText->Draw(m_position + wxPoint2DDouble(-m_gcText->GetWidth() / 2, -m_height / 2 + 2 + m_borderSize), gc);
+		m_gcText->Draw(m_position + wxPoint2DDouble(-m_gcText->GetWidth() / 2, -m_height / 2 + 2 + m_borderSize), gc, 0, guiColour->text);
 	else if (m_angle == 180.0)
-		m_gcText->Draw(m_position + wxPoint2DDouble(m_width / 2 - m_gcText->GetWidth() - 2 - m_borderSize, -m_gcText->GetHeight() / 2), gc);
+		m_gcText->Draw(m_position + wxPoint2DDouble(m_width / 2 - m_gcText->GetWidth() - 2 - m_borderSize, -m_gcText->GetHeight() / 2), gc, 0, guiColour->text);
 	else if (m_angle == 270.0)
-		m_gcText->Draw(m_position + wxPoint2DDouble(-m_gcText->GetWidth() / 2, m_height / 2 - m_gcText->GetHeight() - 2 - m_borderSize), gc);
+		m_gcText->Draw(m_position + wxPoint2DDouble(-m_gcText->GetWidth() / 2, m_height / 2 - m_gcText->GetHeight() - 2 - m_borderSize), gc, 0, guiColour->text);
 
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
+	gc->SetBrush(guiColour->enabled);
 	DrawDCNodes(gc);
 }
 

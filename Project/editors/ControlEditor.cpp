@@ -17,6 +17,8 @@
 
 #include "ControlEditor.h"
 
+#include<wx/settings.h>
+
 #include "../elements/controlElement/ConnectionLine.h"
 #include "../elements/controlElement/Constant.h"
 #include "../elements/controlElement/ControlElement.h"
@@ -43,8 +45,8 @@
 #include "ChartView.h"
 #include "../utils/ElementPlotData.h"
 
-ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id)
-	: wxWindow(parent, id)
+ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id, GUIColour* guiColour)
+	: wxWindow(parent, id), m_guiColour(guiColour)
 {
 	SetBackgroundColour(*wxWHITE);
 	m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
@@ -89,8 +91,8 @@ void ControlElementButton::OnPaint(wxPaintEvent& event)
 	if (gc) {
 		if (m_mouseAbove) {
 			if (m_selected) {
-				gc->SetPen(wxPen(wxColour(0, 125, 255, 255), m_borderSize - 1));
-				gc->SetBrush(wxBrush(wxColour(0, 125, 255, 100)));
+				gc->SetPen(wxPen(m_guiColour->selection, m_borderSize - 1));
+				gc->SetBrush(m_guiColour->selection);
 			}
 			else {
 				gc->SetPen(*wxTRANSPARENT_PEN);
@@ -157,6 +159,7 @@ void ControlEditor::BuildControlElementPanel()
 	m_panelControlElements->SetDoubleBuffered(true);
 	wxWrapSizer* wrapSizer = new wxWrapSizer();
 	m_panelControlElements->SetSizer(wrapSizer);
+	auto* guiColour = m_properties->GetGUIColour();
 
 	wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
 	//wxString exePath = exeFileName.GetPath();
@@ -164,77 +167,88 @@ void ControlEditor::BuildControlElementPanel()
 	ControlElementButton* ioButton = new ControlElementButton(
 		m_panelControlElements, _("In/Out"),
 		wxImage(Paths::GetDataPath() + "/images/control/io.png"),
-		static_cast<int>(ControlElementButtonID::ID_IO));
+		static_cast<int>(ControlElementButtonID::ID_IO),
+		guiColour);
 	wrapSizer->Add(ioButton, 0, wxALL, 5);
 	ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* tfButton = new ControlElementButton(
 		m_panelControlElements, _("Transfer fcn"),
 		wxImage(Paths::GetDataPath() + "/images/control/transferFunc.png"),
-		static_cast<int>(ControlElementButtonID::ID_TF));
+		static_cast<int>(ControlElementButtonID::ID_TF),
+		guiColour);
 	wrapSizer->Add(tfButton, 0, wxALL, 5);
 	tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* sumButton = new ControlElementButton(
 		m_panelControlElements, _("Sum"),
 		wxImage(Paths::GetDataPath() + "/images/control/sum.png"),
-		static_cast<int>(ControlElementButtonID::ID_SUM));
+		static_cast<int>(ControlElementButtonID::ID_SUM),
+		guiColour);
 	wrapSizer->Add(sumButton, 0, wxALL, 5);
 	sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* constButton = new ControlElementButton(
 		m_panelControlElements, _("Constant"),
 		wxImage(Paths::GetDataPath() + "/images/control/value.png"),
-		static_cast<int>(ControlElementButtonID::ID_CONST));
+		static_cast<int>(ControlElementButtonID::ID_CONST),
+		guiColour);
 	wrapSizer->Add(constButton, 0, wxALL, 5);
 	constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* gainButton = new ControlElementButton(
 		m_panelControlElements, _("Gain"),
 		wxImage(Paths::GetDataPath() + "/images/control/gain.png"),
-		static_cast<int>(ControlElementButtonID::ID_GAIN));
+		static_cast<int>(ControlElementButtonID::ID_GAIN),
+		guiColour);
 	wrapSizer->Add(gainButton, 0, wxALL, 5);
 	gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* limButton = new ControlElementButton(
 		m_panelControlElements, _("Limiter"),
 		wxImage(Paths::GetDataPath() + "/images/control/limiter.png"),
-		static_cast<int>(ControlElementButtonID::ID_LIMITER));
+		static_cast<int>(ControlElementButtonID::ID_LIMITER),
+		guiColour);
 	wrapSizer->Add(limButton, 0, wxALL, 5);
 	limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* rateLimButton = new ControlElementButton(
 		m_panelControlElements, _("Rate limiter"),
 		wxImage(Paths::GetDataPath() + "/images/control/rateLimiter.png"),
-		static_cast<int>(ControlElementButtonID::ID_RATELIM));
+		static_cast<int>(ControlElementButtonID::ID_RATELIM),
+		guiColour);
 	wrapSizer->Add(rateLimButton, 0, wxALL, 5);
 	rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* multButton = new ControlElementButton(
 		m_panelControlElements, _("Multiplier"),
 		wxImage(Paths::GetDataPath() + "/images/control/mult.png"),
-		static_cast<int>(ControlElementButtonID::ID_MULT));
+		static_cast<int>(ControlElementButtonID::ID_MULT),
+		guiColour);
 	wrapSizer->Add(multButton, 0, wxALL, 5);
 	multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* divButton = new ControlElementButton(
 		m_panelControlElements, _("Divider"),
 		wxImage(Paths::GetDataPath() + "/images/control/div.png"),
-		static_cast<int>(ControlElementButtonID::ID_MATH_DIV));
+		static_cast<int>(ControlElementButtonID::ID_MATH_DIV),
+		guiColour);
 	wrapSizer->Add(divButton, 0, wxALL, 5);
 	divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* mathExprButton = new ControlElementButton(
 		m_panelControlElements, _("Math Expression"),
 		wxImage(Paths::GetDataPath() + "/images/control/mathExpr.png"),
-		static_cast<int>(ControlElementButtonID::ID_MATH_EXPR));
+		static_cast<int>(ControlElementButtonID::ID_MATH_EXPR),
+		guiColour);
 	wrapSizer->Add(mathExprButton, 0, wxALL, 5);
 	mathExprButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
 	ControlElementButton* satButton = new ControlElementButton(
 		m_panelControlElements, _("Exponential"),
 		wxImage(Paths::GetDataPath() + "/images/control/sat.png"),
-		static_cast<int>(ControlElementButtonID::ID_EXP));
+		static_cast<int>(ControlElementButtonID::ID_EXP),
+		guiColour);
 	wrapSizer->Add(satButton, 0, wxALL, 5);
 	satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }
@@ -244,31 +258,6 @@ void ControlEditor::LeftClickDown(wxMouseEvent& event)
 	AddElement(static_cast<ControlElementButtonID>(event.GetId()));
 	event.Skip();
 }
-
-//void ControlEditor::SetViewport()
-//{
-//    glClearColor(1.0, 1.0, 1.0, 1.0);  // White background.
-//    glClear(GL_COLOR_BUFFER_BIT);
-//    glDisable(GL_DEPTH_TEST);
-//    glDisable(GL_TEXTURE_2D);
-//    glEnable(GL_COLOR_MATERIAL);
-//    glEnable(GL_BLEND);
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    glEnable(GL_LINE_SMOOTH);
-//
-//    double width = static_cast<double>(m_glCanvas->GetSize().x) - 1;
-//    double height = static_cast<double>(m_glCanvas->GetSize().y) - 1;
-//
-//    // Viewport fit the screen.
-//    glViewport(0, 0, width, height);
-//
-//    glMatrixMode(GL_PROJECTION);
-//    glLoadIdentity();
-//    gluOrtho2D(0.0, width, height, 0.0);
-//
-//    glMatrixMode(GL_MODELVIEW);
-//    glLoadIdentity();
-//}
 
 void ControlEditor::AddElement(ControlElementButtonID id)
 {
@@ -333,44 +322,6 @@ void ControlEditor::AddElement(ControlElementButtonID id)
 
 void ControlEditor::OnPaint(wxPaintEvent& event)
 {
-	//wxPaintDC dc(m_glCanvas);
-	////m_glContext->SetCurrent(*m_glCanvas);
-	//SetViewport();
-	//
-	//// Set GLCanvas scale and translation.
-	//glScaled(m_camera->GetScale(), m_camera->GetScale(), 0.0);                          // Scale
-	//glTranslated(m_camera->GetTranslation().m_x, m_camera->GetTranslation().m_y, 0.0);  // Translation
-	//
-	//for(auto it = m_connectionList.begin(), itEnd = m_connectionList.end(); it != itEnd; ++it) {
-	//    ConnectionLine* line = *it;
-	//    line->Draw(m_camera->GetTranslation(), m_camera->GetScale());
-	//}
-	//
-	//for(auto it = m_elementList.begin(), itEnd = m_elementList.end(); it != itEnd; ++it) {
-	//    Element* element = *it;
-	//    element->Draw(m_camera->GetTranslation(), m_camera->GetScale());
-	//}
-	//
-	//// Selection rectangle
-	//glLineWidth(1.0);
-	//glColor4d(0.0, 0.5, 1.0, 1.0);
-	//glBegin(GL_LINE_LOOP);
-	//glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y);
-	//glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y + m_selectionRect.m_height);
-	//glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y + m_selectionRect.m_height);
-	//glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y);
-	//glEnd();
-	//glColor4d(0.0, 0.5, 1.0, 0.3);
-	//glBegin(GL_QUADS);
-	//glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y);
-	//glVertex2d(m_selectionRect.m_x, m_selectionRect.m_y + m_selectionRect.m_height);
-	//glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y + m_selectionRect.m_height);
-	//glVertex2d(m_selectionRect.m_x + m_selectionRect.m_width, m_selectionRect.m_y);
-	//glEnd();
-	//
-	//glFlush();  // Sends all pending information directly to the GPU.
-	//m_glCanvas->SwapBuffers();
-	//event.Skip();
 	wxBufferedPaintDC dc(m_cePanel);
 	dc.Clear();
 	wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
@@ -391,8 +342,8 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
 		}
 
 		// Selection rectangle
-		gc->SetPen(wxPen(wxColour(0, 125, 255, 255)));
-		gc->SetBrush(wxBrush(wxColour(0, 125, 255, 125)));
+		gc->SetPen(wxPen(m_properties->GetGUIColour()->selection));
+		gc->SetBrush(wxBrush(m_properties->GetGUIColour()->selection));
 		gc->DrawRectangle(m_selectionRect.m_x, m_selectionRect.m_y, m_selectionRect.m_width, m_selectionRect.m_height);
 
 		delete gc;

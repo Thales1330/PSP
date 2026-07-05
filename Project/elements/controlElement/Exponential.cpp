@@ -37,44 +37,6 @@ Exponential::~Exponential()
 	for (auto& node : m_nodeList) if (node) delete node;
 	m_nodeList.clear();
 }
-//void Exponential::Draw(wxPoint2DDouble translation, double scale) const
-//{
-//    glLineWidth(1.0);
-//    if(m_selected) {
-//        glColor4dv(m_selectionColour.GetRGBA());
-//        double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
-//        DrawRectangle(m_position, m_width + borderSize, m_height + borderSize);
-//    }
-//    glColor4d(1.0, 1.0, 1.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height);
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawRectangle(m_position, m_width, m_height, GL_LINE_LOOP);
-//
-//    // Plot symbol.
-//    std::vector<wxPoint2DDouble> axis;
-//    axis.push_back(m_position + wxPoint2DDouble(-13, 13));
-//    axis.push_back(m_position + wxPoint2DDouble(13, 13));
-//    axis.push_back(m_position + wxPoint2DDouble(-13, -13));
-//    axis.push_back(m_position + wxPoint2DDouble(-13, 13));
-//    DrawLine(axis, GL_LINES);
-//
-//    glLineWidth(2.0);
-//    std::vector<wxPoint2DDouble> expSymbol;
-//    expSymbol.push_back(m_position + wxPoint2DDouble(-13, 13));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(-6, 13));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(2, 12));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(4, 11));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(6, 10));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(8, 7));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(11, -1));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(12, -7));
-//    expSymbol.push_back(m_position + wxPoint2DDouble(13, -13));
-//    glColor4d(0.0, 0.3, 1.0, 1.0);
-//    DrawLine(expSymbol);
-//
-//    glColor4d(0.0, 0.0, 0.0, 1.0);
-//    DrawNodes();
-//}
 
 void Exponential::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, double scale, wxGraphicsContext* gc) const
 {
@@ -84,8 +46,8 @@ void Exponential::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}
-	gc->SetPen(*wxBLACK_PEN);
-	gc->SetBrush(*wxWHITE_BRUSH);
+	gc->SetPen(guiColour->enabled);
+	gc->SetBrush(guiColour->background);
 	//DrawRectangle(m_position, m_width, m_height);
 	gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
@@ -98,7 +60,7 @@ void Exponential::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 	gc->StrokeLines(2, &axis[0]);
 	gc->StrokeLines(2, &axis[2]);
 
-	gc->SetPen(wxPen(wxColour(0, 77, 255, 255), 2));
+	gc->SetPen(wxPen(guiColour->bus, 2));
 	gc->SetBrush(*wxTRANSPARENT_BRUSH);
 	wxPoint2DDouble expSymbol[9];
 	expSymbol[0] = m_position + wxPoint2DDouble(-13, 13);
@@ -113,7 +75,7 @@ void Exponential::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doub
 	gc->StrokeLines(9, expSymbol);
 
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
+	gc->SetBrush(guiColour->enabled);
 	DrawDCNodes(gc);
 }
 

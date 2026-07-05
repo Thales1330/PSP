@@ -66,8 +66,8 @@ void TransferFunction::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation,
 		double borderSize = (m_borderSize * 2.0 + 1.0) / scale;
 		gc->DrawRectangle(m_position.m_x - m_width / 2 - borderSize / 2, m_position.m_y - m_height / 2 - borderSize / 2, m_width + borderSize, m_height + borderSize);
 	}
-	gc->SetPen(*wxBLACK_PEN);
-	gc->SetBrush(*wxWHITE_BRUSH);
+	gc->SetPen(wxPen(guiColour->enabled));
+	gc->SetBrush(wxBrush(guiColour->background));
 	gc->DrawRectangle(m_position.m_x - m_width / 2, m_position.m_y - m_height / 2, m_width, m_height);
 
 	wxPoint2DDouble linePts[2];
@@ -76,12 +76,12 @@ void TransferFunction::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation,
 	gc->StrokeLines(2, linePts);
 
 	gc->SetPen(*wxTRANSPARENT_PEN);
-	gc->SetBrush(*wxBLACK_BRUSH);
+	gc->SetBrush(wxBrush(guiColour->enabled));
 	DrawDCNodes(gc);
 
 	//glColor4d(0.0, 0.0, 0.0, 1.0);
-	m_gcTextNum->Draw(m_position + wxPoint2DDouble(-m_gcTextNum->GetWidth() / 2, -m_height / 4 - m_gcTextNum->GetHeight() / 2), gc);
-	m_gcTextDen->Draw(m_position + wxPoint2DDouble(-m_gcTextDen->GetWidth() / 2, m_height / 4 - m_gcTextDen->GetHeight() / 2), gc);
+	m_gcTextNum->Draw(m_position + wxPoint2DDouble(-m_gcTextNum->GetWidth() / 2, -m_height / 4 - m_gcTextNum->GetHeight() / 2), gc,0.0, guiColour->text);
+	m_gcTextDen->Draw(m_position + wxPoint2DDouble(-m_gcTextDen->GetWidth() / 2, m_height / 4 - m_gcTextDen->GetHeight() / 2), gc, 0.0, guiColour->text);
 }
 
 void TransferFunction::SetText(wxString numerator, wxString denominator)

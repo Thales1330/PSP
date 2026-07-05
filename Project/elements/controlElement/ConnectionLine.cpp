@@ -62,12 +62,12 @@ void ConnectionLine::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, d
 	}
 
 	// Draw line (Layer 2)
-	gc->SetPen(wxPen(wxColour(0, 0, 0, 255), 2.0));
+	gc->SetPen(wxPen(guiColour->enabled, 2.0));
 	gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
 
 	if (m_type == ConnectionLineType::ELEMENT_LINE) {
 		gc->SetPen(*wxTRANSPARENT_PEN);
-		gc->SetBrush(wxBrush(wxColour(0, 0, 0, 255)));
+		gc->SetBrush(wxBrush(guiColour->enabled));
 		DrawDCCircle(m_pointList[5], 3, 10, gc);
 	}
 }
