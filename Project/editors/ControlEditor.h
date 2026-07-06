@@ -85,6 +85,7 @@ class ControlElementButton : public wxWindow
 {
 public:
 	ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id, GUIColour* guiColour);
+	ControlElementButton(wxWindow* parent, wxString label, ControlElement* iconElement, wxWindowID id, GUIColour* guiColour);
 	~ControlElementButton();
 
 protected:
@@ -95,6 +96,8 @@ protected:
 	virtual void OnLeftClickUp(wxMouseEvent& event);
 
 	GUIColour* m_guiColour = nullptr;
+
+	ControlElement* m_iconElement = nullptr;
 
 	wxString m_label;
 	wxFont m_font;

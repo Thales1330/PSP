@@ -48,7 +48,7 @@
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id, GUIColour* guiColour)
 	: wxWindow(parent, id), m_guiColour(guiColour)
 {
-	SetBackgroundColour(*wxWHITE);
+	SetBackgroundColour(m_guiColour->background);
 	m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
 	m_label = label;
 	m_image = image;
@@ -83,6 +83,46 @@ ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxI
 	Bind(wxEVT_LEFT_UP, &ControlElementButton::OnLeftClickUp, this);
 }
 
+ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, ControlElement* iconElement,
+	wxWindowID id, GUIColour* guiColour) : wxWindow(parent, id), m_guiColour(guiColour), m_iconElement(iconElement)
+{
+	SetBackgroundColour(m_guiColour->background);
+	m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+	m_label = label;
+
+	// Calculate label size.
+	wxScreenDC dc;
+	dc.SetFont(m_font);
+	wxSize textSize = dc.GetTextExtent(label);
+
+	m_imageSize = wxSize(static_cast<int>(m_iconElement->GetWidth()), static_cast<int>(m_iconElement->GetHeight()));
+
+	int buttonWidth = 0;
+	if (textSize.GetWidth() > m_imageSize.GetWidth()) {
+		buttonWidth = textSize.GetWidth();
+		m_imagePosition = wxPoint((buttonWidth - m_imageSize.GetWidth()) / 2 + m_borderSize, m_borderSize);
+		m_labelPosition = wxPoint(m_borderSize, m_imageSize.GetHeight() + m_borderSize);
+	}
+	else {
+		buttonWidth = m_imageSize.GetWidth();
+		m_imagePosition = wxPoint(m_borderSize, m_borderSize);
+		m_labelPosition =
+			wxPoint((buttonWidth - textSize.GetWidth()) / 2 + m_borderSize, m_imageSize.GetHeight() + m_borderSize);
+	}
+	m_buttonSize =
+		wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);
+	SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));
+
+	m_iconElement->Move(wxPoint2DDouble(m_buttonSize.GetWidth() / 2.0, m_buttonSize.GetHeight() / 2.0));
+
+	// Events.
+	Bind(wxEVT_PAINT, &ControlElementButton::OnPaint, this);
+	Bind(wxEVT_ENTER_WINDOW, &ControlElementButton::OnMouseEnter, this);
+	Bind(wxEVT_LEAVE_WINDOW, &ControlElementButton::OnMouseLeave, this);
+	Bind(wxEVT_LEFT_DOWN, &ControlElementButton::OnLeftClickDown, this);
+	Bind(wxEVT_LEFT_UP, &ControlElementButton::OnLeftClickUp, this);
+}
+
 ControlElementButton::~ControlElementButton() {}
 void ControlElementButton::OnPaint(wxPaintEvent& event)
 {
@@ -91,18 +131,23 @@ void ControlElementButton::OnPaint(wxPaintEvent& event)
 	if (gc) {
 		if (m_mouseAbove) {
 			if (m_selected) {
-				gc->SetPen(wxPen(m_guiColour->selection, m_borderSize - 1));
-				gc->SetBrush(m_guiColour->selection);
+				gc->SetPen(wxPen(m_guiColour->altSelection, m_borderSize - 1));
+				gc->SetBrush(m_guiColour->altSelection);
 			}
 			else {
 				gc->SetPen(*wxTRANSPARENT_PEN);
-				gc->SetBrush(wxBrush(wxColour(0, 125, 255, 70)));
+				gc->SetBrush(m_guiColour->selection);
 			}
 			gc->DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
 		}
-		gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),
-			m_imageSize.GetHeight());
-		gc->SetFont(m_font, *wxBLACK);
+		if (m_iconElement) {
+			m_iconElement->DrawDC(m_guiColour, wxPoint2DDouble(0, 0), 1.0, gc);
+		}
+		else {
+			gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),
+				m_imageSize.GetHeight());
+		}
+		gc->SetFont(m_font, m_guiColour->text);
 		gc->DrawText(m_label, m_labelPosition.x, m_labelPosition.y);
 		delete gc;
 	}
@@ -157,16 +202,29 @@ ControlEditor::~ControlEditor()
 void ControlEditor::BuildControlElementPanel()
 {
 	m_panelControlElements->SetDoubleBuffered(true);
+
 	wxWrapSizer* wrapSizer = new wxWrapSizer();
 	m_panelControlElements->SetSizer(wrapSizer);
+
 	auto* guiColour = m_properties->GetGUIColour();
+
+	m_panelControlElements->SetBackgroundColour(guiColour->background);
 
 	wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
 	//wxString exePath = exeFileName.GetPath();
 
+
+	//ControlElementButton* ioButton = new ControlElementButton(
+	//	m_panelControlElements, _("In/Out"),
+	//	wxImage(Paths::GetDataPath() + "/images/control/io.png"),
+	//	static_cast<int>(ControlElementButtonID::ID_IO),
+	//	guiColour);
+
+	IOControl* iconIOControl = new IOControl(IOControl::IN_TERMINAL_VOLTAGE, -1);
+	
 	ControlElementButton* ioButton = new ControlElementButton(
 		m_panelControlElements, _("In/Out"),
-		wxImage(Paths::GetDataPath() + "/images/control/io.png"),
+		iconIOControl,
 		static_cast<int>(ControlElementButtonID::ID_IO),
 		guiColour);
 	wrapSizer->Add(ioButton, 0, wxALL, 5);
