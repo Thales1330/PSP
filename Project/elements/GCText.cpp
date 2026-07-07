@@ -69,8 +69,6 @@ void GCText::SetText(wxString text)
 {
 	m_text = text;
 	if (!m_customFont) {
-		//m_font.SetFaceName(wxT("CMU Serif"));
-		//m_font.SetPointSize(m_fontSize);
 		m_font = wxFont(m_fontSize,
 			wxFONTFAMILY_DEFAULT,
 			wxFONTSTYLE_NORMAL,
@@ -79,43 +77,10 @@ void GCText::SetText(wxString text)
 			wxT("Arial"));
 	}
 
-	//wxFont font = wxFont(m_fontSize, m_fontFamily, m_fontStyle, m_fontWeight);
-	//wxBitmap bmp(1, 1);
-	//wxMemoryDC mdc(bmp);
-	//
-	//wxGraphicsContext* gc = wxGraphicsContext::Create(mdc);
-	//
-	//gc->SetFont(m_font, *wxBLACK);
-	//
-	//wxDouble w, h, descent, extLead;
-	//gc->GetTextExtent(text, &w, &h, &descent, &extLead);
-	//
-	//delete gc;
-	//
-	//m_size =  wxSize((int)w, (int)h);
 
 	wxScreenDC dc;
 	dc.SetFont(m_font);
 	m_size = dc.GetTextExtent(m_text);
-
-	//m_size = CalculateTextExtend();
-
-
-	//wxMemoryDC memDC;
-	////memDC.SetFont(font);
-	//
-	//wxGraphicsContext* gc = wxGraphicsContext::Create(memDC);
-	//if (gc) {
-	//	gc->SetFont(m_font, *wxBLACK);
-	//	double width, height, descent, externalLeading;
-	//	gc->GetTextExtent(m_text, &width, &height, &descent, &externalLeading);
-	//	m_size = wxSize(std::ceil(width + descent), std::ceil(height + externalLeading));
-	//	delete gc;
-	//}
-	//else {
-	//	memDC.SetFont(m_font);
-	//	m_size = memDC.GetTextExtent(m_text);
-	//}
 }
 
 void GCText::SetText(wxString text, wxSize size)
@@ -128,41 +93,8 @@ void GCText::SetFont(wxFont font)
 {
 	m_font = font;
 	m_customFont = true;
+	SetText(m_text); // Recalculate the size with the new font
 }
-
-//wxSize GCText::CalculateTextExtend()
-//{
-//	// DC offscreen
-//	wxBitmap bmp(1, 1);
-//	wxMemoryDC mdc(bmp);
-//
-//	mdc.SetFont(m_font);
-//
-//	wxGCDC dc(mdc);
-//	dc.SetFont(m_font);
-//
-//	wxCoord w, h;
-//	dc.GetTextExtent(m_text, &w, &h);
-//
-//	wxArrayInt partial;
-//	dc.GetPartialTextExtents(m_text, partial);
-//
-//	int leftOffset = 0;
-//
-//	if (!m_text.empty() && partial.size() >= 1)
-//	{
-//		wxCoord firstGlyphW, firstGlyphH;
-//		dc.GetTextExtent(m_text.Mid(0, 1), &firstGlyphW, &firstGlyphH);
-//
-//		int advanceFirst = partial[0];
-//
-//		// se o glifo invade a esquerda → bearing negativo
-//		leftOffset = firstGlyphW - advanceFirst;
-//	}
-//
-//	return wxSize(w + leftOffset, h);
-//}
-
 
 GCText* GCText::GetCopy()
 {

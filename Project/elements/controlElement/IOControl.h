@@ -54,7 +54,8 @@ public:
 		IN_INITIAL_VELOCITY = 1 << 8,
 		IN_DELTA_VELOCITY = 1 << 9,
 		IN_DELTA_ACTIVE_POWER = 1 << 10,
-		IN_TEST = 1 << 11,
+		IN_IO = 1 << 11,
+		IN_TEST = 1 << 12,
 	};
 
 	IOControl(int ioFlags, int id);
@@ -66,6 +67,7 @@ public:
 	virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
 	virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
 	virtual void Rotate(bool clockwise = true);
+	virtual void SetFont(wxFont& font);
 	virtual bool UpdateText();
 	virtual wxString GenerateText();
 	virtual void UpdatePoints();

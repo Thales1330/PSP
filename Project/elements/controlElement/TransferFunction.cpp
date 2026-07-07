@@ -277,6 +277,14 @@ void TransferFunction::Rotate(bool clockwise)
 	}
 }
 
+void TransferFunction::SetFont(wxFont& font)
+{
+	if (m_gcTextNum) m_gcTextNum->SetFont(font);
+	if (m_gcTextDen) m_gcTextDen->SetFont(font);
+	StartMove(m_position);
+	UpdateTFText();
+}
+
 void TransferFunction::CalculateSpaceState(int maxIteration, double error)
 {
 	m_maxIteration = maxIteration;

@@ -52,6 +52,7 @@ class TransferFunction : public ControlElement
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual void Rotate(bool clockwise = true);
+    virtual void SetFont(wxFont& font);
 
     virtual std::vector<double> GetNumerator() const { return m_numerator; }
     virtual std::vector<double> GetDenominator() const { return m_denominator; }
@@ -89,11 +90,8 @@ class TransferFunction : public ControlElement
 
     wchar_t m_supNumber[10];
 
-    //OpenGLText* m_glTextNum = nullptr;
-    //OpenGLText* m_glTextDen = nullptr;
     GCText* m_gcTextNum = nullptr;
     GCText* m_gcTextDen = nullptr;
-    int m_fontSize = 10;
 
     std::vector<double> m_numerator;
     std::vector<double> m_denominator;

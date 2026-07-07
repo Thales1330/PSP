@@ -86,6 +86,12 @@ void Constant::Rotate(bool clockwise)
 	}
 }
 
+void Constant::SetFont(wxFont& font)
+{
+	if (m_gcText) m_gcText->SetFont(font);
+	UpdateText();
+}
+
 void Constant::UpdatePoints()
 {
 	if (m_nodeList.size() != 0) {

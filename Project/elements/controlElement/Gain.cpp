@@ -184,6 +184,12 @@ void Gain::Move(wxPoint2DDouble position)
 	UpdatePoints();
 }
 
+void Gain::SetFont(wxFont& font)
+{
+	if (m_gcText) m_gcText->SetFont(font);
+	UpdateText();
+}
+
 bool Gain::Solve(double* input, double timeStep)
 {
 	if (!input) {

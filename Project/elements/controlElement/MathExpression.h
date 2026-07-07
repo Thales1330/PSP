@@ -46,6 +46,7 @@ class MathExpression : public ControlElement
     virtual bool Intersects(wxRect2DDouble rect) const { return m_rect.Intersects(rect); }
     virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual void Rotate(bool clockwise = true);
+    virtual void SetFont(wxFont& font);
 
     virtual bool Solve(double* input, double timeStep);
     virtual bool Initialize();
@@ -73,6 +74,7 @@ class MathExpression : public ControlElement
     wxString m_variables = "time,step,x,y";
     std::vector<wxString> m_variablesVector;
     double* m_inputValues = nullptr;
+    wxFont m_font;
     std::vector<GCText*> m_gcTextInputVector;
     GCText m_symbol;
     wxSize m_symbolSize;

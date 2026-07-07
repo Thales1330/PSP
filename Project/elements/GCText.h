@@ -64,9 +64,6 @@ public:
 	virtual int GetHeight() const { return m_size.GetHeight(); }
 	virtual void SetFontSize(int fontSize) { m_fontSize = fontSize; }
 	virtual int GetFontSize() { return m_fontSize; }
-	//virtual void SetFontWeight(wxFontWeight fontWeight) { m_fontWeight = fontWeight; }
-	//virtual void SetFontStyle(wxFontStyle fontStyle) { m_fontStyle = fontStyle; }
-	//virtual void SetFontFamily(wxFontFamily fontFamily) { m_fontFamily = fontFamily; }
 	virtual void SetFont(wxFont font);
 	virtual wxFont GetFont() { return m_font; }
 	//virtual wxSize CalculateTextExtend();
@@ -75,9 +72,6 @@ protected:
 
 	wxString m_text = _("Text");
 	int m_fontSize = 10;
-	//wxFontWeight m_fontWeight = wxFONTWEIGHT_NORMAL;
-	//wxFontStyle m_fontStyle = wxFONTSTYLE_NORMAL;
-	//wxFontFamily m_fontFamily = wxFONTFAMILY_DEFAULT;
 	wxFont m_font;
 	bool m_customFont = false;
 

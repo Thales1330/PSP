@@ -49,14 +49,14 @@ ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxI
 	: wxWindow(parent, id), m_guiColour(guiColour)
 {
 	SetBackgroundColour(m_guiColour->background);
-	m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+	m_buttonFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
 	m_label = label;
 	m_image = image;
 	m_imageSize = wxSize(image.GetWidth(), image.GetHeight());
 
 	// Calculate label size.
 	wxScreenDC dc;
-	dc.SetFont(m_font);
+	dc.SetFont(m_buttonFont);
 	wxSize textSize = dc.GetTextExtent(label);
 
 	int buttonWidth = 0;
@@ -83,19 +83,22 @@ ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxI
 	Bind(wxEVT_LEFT_UP, &ControlElementButton::OnLeftClickUp, this);
 }
 
-ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, ControlElement* iconElement,
-	wxWindowID id, GUIColour* guiColour) : wxWindow(parent, id), m_guiColour(guiColour), m_iconElement(iconElement)
+ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, std::unique_ptr<ControlElement> iconElement,
+	wxWindowID id, GUIColour* guiColour, double buttonScale) :
+	wxWindow(parent, id), m_guiColour(guiColour), m_iconElement(std::move(iconElement)), m_buttonScale(buttonScale)
 {
 	SetBackgroundColour(m_guiColour->background);
-	m_font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+	m_buttonFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+	//m_buttonFont.SetPointSize(static_cast<int>(m_buttonFont.GetPointSize() * (1.0 / m_buttonScale)));
 	m_label = label;
 
 	// Calculate label size.
 	wxScreenDC dc;
-	dc.SetFont(m_font);
+	dc.SetFont(m_buttonFont);
+	//wxSize textSize = dc.GetTextExtent(label) * m_buttonScale;
 	wxSize textSize = dc.GetTextExtent(label);
 
-	m_imageSize = wxSize(static_cast<int>(m_iconElement->GetWidth()), static_cast<int>(m_iconElement->GetHeight()));
+	m_imageSize = wxSize(static_cast<int>(m_iconElement->GetWidth()), static_cast<int>(m_iconElement->GetHeight())) * m_buttonScale;
 
 	int buttonWidth = 0;
 	if (textSize.GetWidth() > m_imageSize.GetWidth()) {
@@ -113,7 +116,8 @@ ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, Con
 		wxSize(buttonWidth + 2 * m_borderSize, textSize.GetHeight() + m_imageSize.GetHeight() + 2 * m_borderSize);
 	SetMinSize(m_buttonSize + wxSize(m_borderSize, m_borderSize));
 
-	m_iconElement->Move(wxPoint2DDouble(m_buttonSize.GetWidth() / 2.0, m_buttonSize.GetHeight() / 2.0));
+	m_iconElement->StartMove(m_iconElement->GetPosition());
+	m_iconElement->Move(wxPoint2DDouble(m_buttonSize.GetWidth() / 2.0, (m_buttonSize.GetHeight() - textSize.GetHeight()) / 2.0));
 
 	// Events.
 	Bind(wxEVT_PAINT, &ControlElementButton::OnPaint, this);
@@ -129,6 +133,7 @@ void ControlElementButton::OnPaint(wxPaintEvent& event)
 	wxPaintDC dc(this);
 	wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
 	if (gc) {
+
 		if (m_mouseAbove) {
 			if (m_selected) {
 				gc->SetPen(wxPen(m_guiColour->altSelection, m_borderSize - 1));
@@ -140,15 +145,21 @@ void ControlElementButton::OnPaint(wxPaintEvent& event)
 			}
 			gc->DrawRectangle(m_borderSize / 2, m_borderSize / 2, m_buttonSize.GetWidth(), m_buttonSize.GetHeight());
 		}
+
+		gc->SetFont(m_buttonFont, m_guiColour->text);
+		gc->DrawText(m_label, m_labelPosition.x, m_labelPosition.y);
+
 		if (m_iconElement) {
+			gc->Translate(m_buttonSize.GetWidth() / 2.0, m_buttonSize.GetHeight() / 2.0);
+			gc->Scale(m_buttonScale, m_buttonScale);
+			gc->Translate(-m_buttonSize.GetWidth() / 2.0, -m_buttonSize.GetHeight() / 2.0);
 			m_iconElement->DrawDC(m_guiColour, wxPoint2DDouble(0, 0), 1.0, gc);
 		}
 		else {
 			gc->DrawBitmap(gc->CreateBitmapFromImage(m_image), m_imagePosition.x, m_imagePosition.y, m_imageSize.GetWidth(),
 				m_imageSize.GetHeight());
 		}
-		gc->SetFont(m_font, m_guiColour->text);
-		gc->DrawText(m_label, m_labelPosition.x, m_labelPosition.y);
+
 		delete gc;
 	}
 }
@@ -185,12 +196,16 @@ ControlEditor::ControlEditor(wxWindow* parent, PropertiesData* properties, int i
 {
 	BuildControlElementPanel();
 	m_camera = new Camera();
-	m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
-	//m_cePanel->SetBackgroundColour(wxColour(255, 255, 255));
+	m_selectionRect = wxRect2DDouble(0, 0, 0, 0);;
 	m_cePanel->SetBackgroundColour(properties->GetGUIColour()->background);
 	m_cePanel->SetBackgroundStyle(wxBG_STYLE_PAINT);  // To allow wxBufferedPaintDC works properly.
-	// m_camera->SetScale(1.2);
 	m_ioFlags = ioflags;
+	m_font = wxFont(m_properties->GetGeneralPropertiesData().labelFontSize,
+		wxFONTFAMILY_DEFAULT,
+		wxFONTSTYLE_NORMAL,
+		wxFONTWEIGHT_NORMAL,
+		false,
+		m_properties->GetGeneralPropertiesData().labelFont);
 
 	BuildColourList();
 }
@@ -211,102 +226,117 @@ void ControlEditor::BuildControlElementPanel()
 	m_panelControlElements->SetBackgroundColour(guiColour->background);
 
 	wxFileName exeFileName(wxStandardPaths::Get().GetExecutablePath());
-	//wxString exePath = exeFileName.GetPath();
 
+	auto iconIOControl = std::make_unique<IOControl>(IOControl::IOFlags::IN_IO, -1);
+	iconIOControl->SetValue(IOControl::IOFlags::IN_IO);
 
-	//ControlElementButton* ioButton = new ControlElementButton(
-	//	m_panelControlElements, _("In/Out"),
-	//	wxImage(Paths::GetDataPath() + "/images/control/io.png"),
-	//	static_cast<int>(ControlElementButtonID::ID_IO),
-	//	guiColour);
-
-	IOControl* iconIOControl = new IOControl(IOControl::IN_TERMINAL_VOLTAGE, -1);
-	
 	ControlElementButton* ioButton = new ControlElementButton(
 		m_panelControlElements, _("In/Out"),
-		iconIOControl,
+		std::move(iconIOControl),
 		static_cast<int>(ControlElementButtonID::ID_IO),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(ioButton, 0, wxALL, 5);
 	ioButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconTF = std::make_unique<TransferFunction>(-1);
+
 	ControlElementButton* tfButton = new ControlElementButton(
 		m_panelControlElements, _("Transfer fcn"),
-		wxImage(Paths::GetDataPath() + "/images/control/transferFunc.png"),
+		std::move(iconTF),
 		static_cast<int>(ControlElementButtonID::ID_TF),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(tfButton, 0, wxALL, 5);
 	tfButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconSum = std::make_unique<Sum>(-1);
+
 	ControlElementButton* sumButton = new ControlElementButton(
 		m_panelControlElements, _("Sum"),
-		wxImage(Paths::GetDataPath() + "/images/control/sum.png"),
+		std::move(iconSum),
 		static_cast<int>(ControlElementButtonID::ID_SUM),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(sumButton, 0, wxALL, 5);
 	sumButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconConstant = std::make_unique<Constant>(-1);
+	iconConstant->SetValue(3.14);
+
 	ControlElementButton* constButton = new ControlElementButton(
 		m_panelControlElements, _("Constant"),
-		wxImage(Paths::GetDataPath() + "/images/control/value.png"),
+		std::move(iconConstant),
 		static_cast<int>(ControlElementButtonID::ID_CONST),
 		guiColour);
 	wrapSizer->Add(constButton, 0, wxALL, 5);
 	constButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconGain = std::make_unique<Gain>(-1);
+	iconGain->SetValue(0.5);
+
 	ControlElementButton* gainButton = new ControlElementButton(
 		m_panelControlElements, _("Gain"),
-		wxImage(Paths::GetDataPath() + "/images/control/gain.png"),
+		std::move(iconGain),
 		static_cast<int>(ControlElementButtonID::ID_GAIN),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(gainButton, 0, wxALL, 5);
 	gainButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconLimiter = std::make_unique<Limiter>(-1);
+
 	ControlElementButton* limButton = new ControlElementButton(
 		m_panelControlElements, _("Limiter"),
-		wxImage(Paths::GetDataPath() + "/images/control/limiter.png"),
+		std::move(iconLimiter),
 		static_cast<int>(ControlElementButtonID::ID_LIMITER),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(limButton, 0, wxALL, 5);
 	limButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconRateLim = std::make_unique<RateLimiter>(-1);
+
 	ControlElementButton* rateLimButton = new ControlElementButton(
 		m_panelControlElements, _("Rate limiter"),
-		wxImage(Paths::GetDataPath() + "/images/control/rateLimiter.png"),
+		std::move(iconRateLim),
 		static_cast<int>(ControlElementButtonID::ID_RATELIM),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(rateLimButton, 0, wxALL, 5);
 	rateLimButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconMult = std::make_unique<Multiplier>(-1);
+
 	ControlElementButton* multButton = new ControlElementButton(
 		m_panelControlElements, _("Multiplier"),
-		wxImage(Paths::GetDataPath() + "/images/control/mult.png"),
+		std::move(iconMult),
 		static_cast<int>(ControlElementButtonID::ID_MULT),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(multButton, 0, wxALL, 5);
 	multButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconDiv = std::make_unique<Divider>(-1);
+
 	ControlElementButton* divButton = new ControlElementButton(
 		m_panelControlElements, _("Divider"),
-		wxImage(Paths::GetDataPath() + "/images/control/div.png"),
+		std::move(iconDiv),
 		static_cast<int>(ControlElementButtonID::ID_MATH_DIV),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(divButton, 0, wxALL, 5);
 	divButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconMathExpr = std::make_unique<MathExpression>(-1);
+
 	ControlElementButton* mathExprButton = new ControlElementButton(
 		m_panelControlElements, _("Math Expression"),
-		wxImage(Paths::GetDataPath() + "/images/control/mathExpr.png"),
+		std::move(iconMathExpr),
 		static_cast<int>(ControlElementButtonID::ID_MATH_EXPR),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(mathExprButton, 0, wxALL, 5);
 	mathExprButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 
+	auto iconExp = std::make_unique<Exponential>(-1);
+
 	ControlElementButton* satButton = new ControlElementButton(
 		m_panelControlElements, _("Exponential"),
-		wxImage(Paths::GetDataPath() + "/images/control/sat.png"),
+		std::move(iconExp),
 		static_cast<int>(ControlElementButtonID::ID_EXP),
-		guiColour);
+		guiColour, 0.8);
 	wrapSizer->Add(satButton, 0, wxALL, 5);
 	satButton->Bind(wxEVT_LEFT_DOWN, &ControlEditor::LeftClickDown, this);
 }
@@ -376,6 +406,10 @@ void ControlEditor::AddElement(ControlElementButtonID id)
 		m_elementList.push_back(mathExpr);
 	} break;
 	}
+	for (auto& cElement : m_elementList)
+	{
+		cElement->SetFont(m_font);
+	}
 }
 
 void ControlEditor::OnPaint(wxPaintEvent& event)
@@ -438,6 +472,9 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 	bool foundElement = false;
 
 	if (m_mode == ControlEditorMode::MODE_INSERT) {
+		// Update the font of the last element in the list.
+		auto cElement = m_elementList.back();
+		cElement->SetFont(m_font);
 		m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 	}
 	else {
@@ -525,30 +562,32 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 		}
 	}
 
-	auto& lastLine = m_connectionList.back();
-	for (auto& cLine : m_connectionList) {
-		if (m_mode == ControlEditorMode::MODE_INSERT_LINE && !foundNode && cLine.get() != lastLine.get()) {
-			if (cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
-				//ConnectionLine* iLine = *(m_connectionList.end() - 1);
-				auto iLine = m_connectionList.back();
-				if (iLine->SetParentLine(cLine.get())) {
-					cLine->AddChild(iLine.get());
-					iLine->UpdatePoints();
-					m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
-					foundNode = true;
+	if (!m_connectionList.empty()) {
+		auto& lastLine = m_connectionList.back();
+		for (auto& cLine : m_connectionList) {
+			if (m_mode == ControlEditorMode::MODE_INSERT_LINE && !foundNode && cLine.get() != lastLine.get()) {
+				if (cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) {
+					//ConnectionLine* iLine = *(m_connectionList.end() - 1);
+					auto iLine = m_connectionList.back();
+					if (iLine->SetParentLine(cLine.get())) {
+						cLine->AddChild(iLine.get());
+						iLine->UpdatePoints();
+						m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
+						foundNode = true;
+					}
 				}
 			}
-		}
-		else if (m_mode == ControlEditorMode::MODE_SELECTION_RECT) {
-			if (cLine->Intersects(m_selectionRect)) {
-				cLine->SetSelected();
+			else if (m_mode == ControlEditorMode::MODE_SELECTION_RECT) {
+				if (cLine->Intersects(m_selectionRect)) {
+					cLine->SetSelected();
+				}
+				else if (!event.ControlDown()) {
+					cLine->SetSelected(false);
+				}
 			}
 			else if (!event.ControlDown()) {
-				cLine->SetSelected(false);
+				if (!cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) { cLine->SetSelected(false); }
 			}
-		}
-		else if (!event.ControlDown()) {
-			if (!cLine->Contains(m_camera->ScreenToWorld(event.GetPosition()))) { cLine->SetSelected(false); }
 		}
 	}
 
@@ -834,6 +873,15 @@ void ControlEditor::CheckConnections()
 	}
 }
 
+void ControlEditor::SetElementsList(const std::vector<std::shared_ptr<ControlElement>>& elementList)
+{
+	m_elementList = elementList;
+	for (auto& cElement : m_elementList)
+	{
+		cElement->SetFont(m_font);
+	}
+}
+
 void ControlEditor::OnExportClick(wxCommandEvent& event)
 {
 	FileHanding fileHandling(this);
@@ -860,6 +908,10 @@ void ControlEditor::OnImportClick(wxCommandEvent& event)
 		wxMessageDialog msgDialog(this, _("It was not possible to open the selected file."), _("Error"),
 			wxOK | wxCENTRE | wxICON_ERROR);
 		msgDialog.ShowModal();
+	}
+	for (auto cElement : m_elementList)
+	{
+		cElement->SetFont(m_font);
 	}
 	Redraw();
 	event.Skip();

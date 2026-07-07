@@ -46,6 +46,7 @@ class Gain : public ControlElement
     virtual bool ShowForm(wxWindow* parent, Element* element, wxWindow* workspace = nullptr);
     virtual void Rotate(bool clockwise = true);
     virtual void Move(wxPoint2DDouble position);
+    virtual void SetFont(wxFont& font);
     virtual bool UpdateText();
     virtual void SetValue(double value);
     virtual double GetValue() const { return m_value; }

@@ -85,7 +85,7 @@ class ControlElementButton : public wxWindow
 {
 public:
 	ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id, GUIColour* guiColour);
-	ControlElementButton(wxWindow* parent, wxString label, ControlElement* iconElement, wxWindowID id, GUIColour* guiColour);
+	ControlElementButton(wxWindow* parent, wxString label, std::unique_ptr<ControlElement> iconElement, wxWindowID id, GUIColour* guiColour, double buttonScale = 1.0);
 	~ControlElementButton();
 
 protected:
@@ -97,10 +97,11 @@ protected:
 
 	GUIColour* m_guiColour = nullptr;
 
-	ControlElement* m_iconElement = nullptr;
+	std::unique_ptr<ControlElement> m_iconElement;
 
 	wxString m_label;
-	wxFont m_font;
+	wxFont m_buttonFont;
+	double m_buttonScale = 1.0;
 	wxPoint m_labelPosition;
 
 	wxImage m_image;
@@ -143,8 +144,8 @@ public:
 	virtual void DeleteSelectedElements();
 	virtual void CheckConnections();
 	virtual std::vector< std::shared_ptr<ConnectionLine> > GetConnectionLineList() const { return m_connectionList; }
-	virtual std::vector< std::shared_ptr<ControlElement> >  GetControlElementList() const { return m_elementList;  }
-	virtual void SetElementsList(const std::vector< std::shared_ptr<ControlElement> >& elementList) { m_elementList = elementList; }
+	virtual std::vector< std::shared_ptr<ControlElement> >  GetControlElementList() const { return m_elementList; }
+	virtual void SetElementsList(const std::vector< std::shared_ptr<ControlElement> >& elementList);
 	virtual void SetConnectionsList(const std::vector< std::shared_ptr<ConnectionLine> >& connectionList) { m_connectionList = connectionList; }
 	virtual void SetControlContainer(ControlElementContainer* ctrlContainer) { m_ctrlContainer = ctrlContainer; }
 	virtual ControlElementContainer* GetControlContainer() { return m_ctrlContainer; }
@@ -182,6 +183,7 @@ protected:
 	Camera* m_camera = nullptr;
 
 	PropertiesData* m_properties = nullptr;
+	wxFont m_font;
 
 	ControlEditorMode m_mode = ControlEditorMode::MODE_EDIT;
 

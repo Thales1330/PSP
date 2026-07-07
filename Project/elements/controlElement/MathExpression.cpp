@@ -107,7 +107,7 @@ void MathExpression::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, d
 		for (unsigned int i = 0; i < m_gcTextInputVector.size(); ++i) {
 			w = static_cast<double>(m_gcTextInputVector[i]->GetWidth());
 			h = static_cast<double>(m_gcTextInputVector[i]->GetHeight());
-			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc, 0,  guiColour->enabled);
+			m_gcTextInputVector[i]->Draw(m_nodeList[i]->GetPosition() - wxPoint2DDouble(w + 6.0, h / 2.0), gc, 0, guiColour->enabled);
 		}
 	}
 	else if (m_angle == 270.0) {
@@ -153,6 +153,15 @@ void MathExpression::Rotate(bool clockwise)
 		Node* node = *it;
 		node->Rotate(clockwise);
 	}
+}
+
+void MathExpression::SetFont(wxFont& font)
+{
+	m_font = font;
+	for (auto& txtInput : m_gcTextInputVector) {
+		if (txtInput) txtInput->SetFont(font);
+	}
+	UpdateText();
 }
 
 bool MathExpression::Solve(double* input, double timeStep)
@@ -295,10 +304,9 @@ bool MathExpression::UpdateText()
 {
 	bool isTextureOK = true;
 	m_symbol.SetText(m_symbol.GetText());
-	//if (!m_symbol.IsTextureOK()) isTextureOK = false;
-	for (auto it = m_gcTextInputVector.begin(), itEnd = m_gcTextInputVector.end(); it != itEnd; ++it) {
-		(*it)->SetText((*it)->GetText());
-		//if (!(*it)->IsTextureOK()) isTextureOK = false;
+	for (auto& txtInput : m_gcTextInputVector)
+	{
+		txtInput->SetText(txtInput->GetText());
 	}
 	return isTextureOK;
 }
@@ -306,12 +314,16 @@ bool MathExpression::UpdateText()
 void MathExpression::SetVariables(std::vector<wxString> variablesVector)
 {
 	m_variablesVector = variablesVector;
-	// Clear old glTextVector
 	for (auto it = m_gcTextInputVector.begin(), itEnd = m_gcTextInputVector.end(); it != itEnd; ++it) { delete* it; }
 	m_gcTextInputVector.clear();
 
-	for (auto it = m_variablesVector.begin(), itEnd = m_variablesVector.end(); it != itEnd; ++it)
-		m_gcTextInputVector.push_back(new GCText(*(it)));
+	for (auto& it : m_variablesVector) {
+		GCText* newInputText = new GCText(it);
+		newInputText->SetFont(m_font);
+		m_gcTextInputVector.push_back(newInputText);
+	}
+	UpdateText();
+	UpdatePoints();
 }
 
 bool MathExpression::Initialize()

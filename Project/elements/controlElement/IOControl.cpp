@@ -160,6 +160,12 @@ void IOControl::Rotate(bool clockwise)
 	}
 }
 
+void IOControl::SetFont(wxFont& font)
+{
+	m_gcText->SetFont(font);
+	UpdateText();
+}
+
 wxString IOControl::GenerateText()
 {
 	wxString omega = wxString::FromUTF8("\xCF\x89");
@@ -210,6 +216,10 @@ wxString IOControl::GenerateText()
 	case IN_DELTA_ACTIVE_POWER: {
 		m_ioNodeType = Node::NodeType::NODE_OUT;
 		return capDelta + _("P");
+	} break;
+	case IN_IO: {
+		m_ioNodeType = Node::NodeType::NODE_OUT;
+		return _("I/O");
 	} break;
 	}
 	return "";
