@@ -1723,17 +1723,17 @@ void Workspace::Fit()
 	int height = 0.0;
 	GetSize(&width, &height);
 
-	double scaleX = double(width) / (rightDownCorner.m_x - leftUpCorner.m_x);
-	double scaleY = double(height) / (rightDownCorner.m_y - leftUpCorner.m_y);
+	const double scaleX = static_cast<double>(width) / (rightDownCorner.m_x - leftUpCorner.m_x);
+	const double scaleY = static_cast<double>(height) / (rightDownCorner.m_y - leftUpCorner.m_y);
 
 	double scale = scaleX < scaleY ? scaleX : scaleY;
-	if (scale > m_camera->GetZoomMax()) scale = m_camera->GetZoomMax();
-	if (scale < m_camera->GetZoomMin()) scale = m_camera->GetZoomMin();
+	scale = std::min(scale, m_camera->GetZoomMax());
+	scale = std::max(scale, m_camera->GetZoomMin());
 
 	m_camera->SetScale(scale);
 
 	m_camera->StartTranslation(middleCoords);
-	m_camera->SetTranslation(wxPoint2DDouble(width / 2, height / 2));
+	m_camera->SetTranslation(wxPoint2DDouble(width / 2.0, height / 2.0));
 
 	if (m_hmPlane && m_showHM) {
 		UpdateHeatMap();
@@ -2905,16 +2905,6 @@ bool Workspace::RunFrequencyResponse()
 }
 void Workspace::OnResize(wxSizeEvent& event)
 {
-	//m_width = static_cast<float>(m_glCanvas->GetSize().x) - 1.0f;
-	//m_height = static_cast<float>(m_glCanvas->GetSize().y) - 1.0f;
-	//
-	//if (m_hmPlane && m_showHM) {
-	//	m_hmPlane->Resize(m_width, m_height);
-	//	m_showHMTimer = true;
-	//	m_timerHeatMap->Start();
-	//}
-	//
-	//event.Skip();
 	m_width = static_cast<float>(GetSize().x) - 1.0f;
 	m_height = static_cast<float>(GetSize().y) - 1.0f;
 

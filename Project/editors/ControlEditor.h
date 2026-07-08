@@ -35,6 +35,8 @@
 #include "../utils/PropertiesData.h"
 #include "ControlSystemTest.h"
 
+#include <unordered_set>
+
 class FileHanding;
 class Camera;
 class Element;
@@ -57,6 +59,7 @@ class ControlElementContainer;
 
 class ChartView;
 class ElementDataObject;
+class ControlElementDataObject;
 
 class ControlEditorManager;
 
@@ -151,6 +154,8 @@ public:
 	virtual ControlElementContainer* GetControlContainer() { return m_ctrlContainer; }
 	virtual void SetPlotLib(int plotLib) { m_plotLib = plotLib; }
 	virtual void SetManager(ControlEditorManager* manager) { m_ctrlManager = manager; }
+	virtual std::vector<Element*> GetElementList() const;
+	virtual void Fit();
 
 	virtual void OnClose(wxCloseEvent& event);
 	virtual void OnTestClick(wxCommandEvent& event);
@@ -175,10 +180,40 @@ public:
 	void BuildControlElementPanel();
 
 protected:
+    virtual void OnMiddleDoubleClick(wxMouseEvent& event);
+    virtual void OnFitClick(wxCommandEvent& event);
+    virtual void OnCopyClick(wxCommandEvent& event);
+    virtual void OnDeleteClick(wxCommandEvent& event);
+    virtual void OnDragClick(wxCommandEvent& event);
+    virtual void OnMoveClick(wxCommandEvent& event);
+    virtual void OnNewClick(wxCommandEvent& event);
+    virtual void OnPasteClick(wxCommandEvent& event);
+    virtual void OnRedoClick(wxCommandEvent& event);
+    virtual void OnUndoClick(wxCommandEvent& event);
 	//void SetViewport();
 	int GetNextID();
 
 	std::vector< std::shared_ptr<ConnectionLine> >::iterator DeleteLineFromList(std::vector< std::shared_ptr<ConnectionLine> >::iterator& it);
+
+	// ---------------------------------------------------------------------
+	// Clipboard + Undo/Redo helpers (mirrors Workspace patterns)
+	// ---------------------------------------------------------------------
+	void UnselectAll();
+	void CopySelectionToClipboard();
+	bool PasteFromClipboard();
+
+	void SaveCurrentState();
+	void SetPreviousState();
+	void SetNextState();
+	void ClearStates();
+
+	bool GetElementsCorners(wxPoint2DDouble& leftUpCorner,
+		wxPoint2DDouble& rightDownCorner,
+		const std::vector<Element*>& elementList) const;
+
+	void ApplyFontToElements();
+	wxPoint GetEditorMouseClientPoint() const;
+	wxPoint2DDouble GetEditorMouseWorldPoint() const;
 
 	Camera* m_camera = nullptr;
 
@@ -210,5 +245,11 @@ protected:
 
 	std::vector<wxColour> m_colourList;
 	std::vector<wxColour>::iterator m_itColourList;
+
+	// Undo / Redo state (deep copies of the whole control system)
+	std::vector<std::vector<std::shared_ptr<ControlElement>>> m_elementListState;
+	std::vector<std::vector<std::shared_ptr<ConnectionLine>>> m_connectionListState;
+	int m_currentState = -1;
+	int m_maxStates = 100;
 };
 #endif  // CONTROLEDITOR_H

@@ -45,6 +45,55 @@
 #include "ChartView.h"
 #include "../utils/ElementPlotData.h"
 
+#include "../elements/ControlElementDataObject.h"
+
+namespace {
+void SanitizeControlGraph(const std::vector<std::shared_ptr<ControlElement>>& elementList,
+	const std::vector<std::shared_ptr<ConnectionLine>>& connectionList)
+{
+	std::unordered_set<Element*> elementSet;
+	std::unordered_set<ConnectionLine*> lineSet;
+	elementSet.reserve(elementList.size());
+	lineSet.reserve(connectionList.size());
+
+	for (const auto& element : elementList) elementSet.insert(element.get());
+	for (const auto& line : connectionList) lineSet.insert(line.get());
+
+	for (const auto& element : elementList) {
+		std::vector<Element*> children = element->GetChildList();
+		for (Element* child : children) {
+			auto* childLine = dynamic_cast<ConnectionLine*>(child);
+			if (!childLine || !lineSet.contains(childLine)) {
+				element->RemoveChild(child);
+			}
+		}
+	}
+
+	for (const auto& line : connectionList) {
+		std::vector<Element*> parents = line->GetParentList();
+		for (Element* parent : parents) {
+			auto* parentElement = dynamic_cast<ControlElement*>(parent);
+			if (!parentElement || !elementSet.contains(parentElement)) {
+				line->RemoveParent(parent);
+			}
+		}
+
+		ConnectionLine* parentLine = line->GetParentLine();
+		if (parentLine && !lineSet.contains(parentLine)) {
+			line->SetParentLine(nullptr);
+		}
+
+		std::vector<Element*> children = line->GetChildList();
+		for (Element* child : children) {
+			auto* childLine = dynamic_cast<ConnectionLine*>(child);
+			if (!childLine || !lineSet.contains(childLine)) {
+				line->RemoveChild(child);
+			}
+		}
+	}
+}
+}  // namespace
+
 ControlElementButton::ControlElementButton(wxWindow* parent, wxString label, wxImage image, wxWindowID id, GUIColour* guiColour)
 	: wxWindow(parent, id), m_guiColour(guiColour)
 {
@@ -211,7 +260,25 @@ ControlEditor::ControlEditor(wxWindow* parent, PropertiesData* properties, int i
 }
 ControlEditor::~ControlEditor()
 {
+	ClearStates();
+	delete m_camera;
+	m_camera = nullptr;
 	// m_tfButton->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(ControlEditor::LeftClickDown), m_tfButton, this);
+}
+
+wxPoint ControlEditor::GetEditorMouseClientPoint() const
+{
+	if (!m_cePanel) return wxPoint(0, 0);
+	return m_cePanel->ScreenToClient(wxGetMousePosition());
+}
+
+wxPoint2DDouble ControlEditor::GetEditorMouseWorldPoint() const
+{
+	if (!m_camera) return wxPoint2DDouble(0, 0);
+	wxPoint clientMouse = GetEditorMouseClientPoint();
+	if (m_cePanel && m_cePanel->GetClientRect().Contains(clientMouse))
+		return m_camera->ScreenToWorld(clientMouse);
+	return m_camera->GetMousePosition();
 }
 
 void ControlEditor::BuildControlElementPanel()
@@ -409,6 +476,9 @@ void ControlEditor::AddElement(ControlElementButtonID id)
 	for (auto& cElement : m_elementList)
 	{
 		cElement->SetFont(m_font);
+		cElement->StartMove(wxPoint2DDouble(0, 0));
+		cElement->Move(wxPoint2DDouble(0, 0));
+
 	}
 }
 
@@ -430,6 +500,7 @@ void ControlEditor::OnPaint(wxPaintEvent& event)
 		}
 
 		for (auto element : m_elementList) {
+			
 			element->DrawDC(m_properties->GetGUIColour(), m_camera->GetTranslation(), m_camera->GetScale(), gc);
 		}
 
@@ -459,6 +530,8 @@ void ControlEditor::OnDoubleClick(wxMouseEvent& event)
 					line->UpdatePoints();
 				}
 				redraw = true;
+				SaveCurrentState();
+				break;
 			}
 		}
 	}
@@ -471,10 +544,14 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 	wxPoint2DDouble clickPoint = event.GetPosition();
 	bool foundElement = false;
 
-	if (m_mode == ControlEditorMode::MODE_INSERT) {
+	if (m_mode == ControlEditorMode::MODE_PASTE || m_mode == ControlEditorMode::MODE_DRAG_PASTE) {
+		m_mode = ControlEditorMode::MODE_EDIT;
+		SaveCurrentState();
+	}
+	else if (m_mode == ControlEditorMode::MODE_INSERT) {
 		// Update the font of the last element in the list.
-		auto cElement = m_elementList.back();
-		cElement->SetFont(m_font);
+		//auto cElement = m_elementList.back();
+		//cElement->SetFont(m_font);
 		m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 	}
 	else {
@@ -532,6 +609,8 @@ void ControlEditor::OnLeftClickDown(wxMouseEvent& event)
 void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 {
 	bool foundNode = false;
+	bool saveCurrentState = false;
+
 	for (auto& element : m_elementList) {
 		if (m_mode == ControlEditorMode::MODE_INSERT_LINE) {
 			auto nodeList = element->GetNodeList();
@@ -545,6 +624,7 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 						line->UpdatePoints();
 						m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 						foundNode = true;
+						saveCurrentState = true;
 					}
 				}
 			}
@@ -613,8 +693,13 @@ void ControlEditor::OnLeftClickUp(wxMouseEvent& event)
 		m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 	}
 	else if (m_mode != ControlEditorMode::MODE_INSERT) {
+		if (m_mode == ControlEditorMode::MODE_MOVE_ELEMENT || m_mode == ControlEditorMode::MODE_MOVE_LINE) {
+			saveCurrentState = true;
+		}
 		m_mode = ControlEditor::ControlEditorMode::MODE_EDIT;
 	}
+
+	if (saveCurrentState) SaveCurrentState();
 
 	Redraw();
 	event.Skip();
@@ -634,7 +719,7 @@ void ControlEditor::OnMiddleDown(wxMouseEvent& event)
 		m_mode = ControlEditorMode::MODE_DRAG;
 	} break;
 	}
-	m_camera->StartTranslation(m_camera->ScreenToWorld(event.GetPosition()));
+	m_camera->StartTranslation(GetEditorMouseWorldPoint());
 }
 
 void ControlEditor::OnMiddleUp(wxMouseEvent& event)
@@ -680,6 +765,30 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
 	case ControlEditorMode::MODE_DRAG_PASTE: {
 		m_camera->SetTranslation(clickPoint);
 		redraw = true;
+	} break;
+	case ControlEditorMode::MODE_PASTE: {
+		bool movedSelectedElement = false;
+		for (auto& element : m_elementList) {
+			if (element->IsSelected()) {
+				movedSelectedElement = true;
+				element->Move(m_camera->ScreenToWorld(clickPoint));
+				auto childList = element->GetChildList();
+				for (Element* child : childList) {
+					if (auto line = dynamic_cast<ConnectionLine*>(child)) line->UpdatePoints();
+				}
+				redraw = true;
+			}
+		}
+		// Only move lines directly when no element is selected; otherwise line movement would
+		// be applied twice and corrupt offsets.
+		if (!movedSelectedElement) {
+			for (auto& line : m_connectionList) {
+				if (line->IsSelected()) {
+					line->Move(m_camera->ScreenToWorld(clickPoint));
+					redraw = true;
+				}
+			}
+		}
 	} break;
 	case ControlEditor::ControlEditorMode::MODE_MOVE_ELEMENT: {
 		for (auto& element : m_elementList) {
@@ -729,6 +838,7 @@ void ControlEditor::OnMouseMotion(wxMouseEvent& event)
 		break;
 	}
 
+	m_camera->UpdateMousePosition(clickPoint);
 	if (redraw) Redraw();
 	event.Skip();
 }
@@ -759,16 +869,56 @@ void ControlEditor::OnIdle(wxIdleEvent& event)
 }
 void ControlEditor::OnKeyDown(wxKeyEvent& event)
 {
+	bool hasInsertInProgress = (m_mode == ControlEditorMode::MODE_INSERT ||
+		m_mode == ControlEditorMode::MODE_INSERT_LINE);
 	char key = event.GetUnicodeKey();
 	if (key != WXK_NONE) {
 		switch (key) {
 		case WXK_DELETE:  // Delete selected elements.
 		{
-			DeleteSelectedElements();
+			if (!hasInsertInProgress) {
+				wxCommandEvent dummyEvent;
+				OnDeleteClick(dummyEvent);
+			}
 		} break;
 		case 'R':  // Rotate the selected elements.
 		{
 			RotateSelectedElements(event.GetModifiers() != wxMOD_SHIFT);
+			SaveCurrentState();
+		} break;
+		case 'C': {
+			if (!hasInsertInProgress && event.GetModifiers() == wxMOD_CONTROL) {
+				wxCommandEvent dummyEvent;
+				OnCopyClick(dummyEvent);
+			}
+		} break;
+		case 'V': {
+			if (!hasInsertInProgress && event.GetModifiers() == wxMOD_CONTROL) {
+				wxCommandEvent dummyEvent;
+				OnPasteClick(dummyEvent);
+			}
+		} break;
+		case 'Z': {
+			if (!hasInsertInProgress && event.ControlDown() && !event.ShiftDown()) {
+				wxCommandEvent dummyEvent;
+				OnUndoClick(dummyEvent);
+			}
+			if (!hasInsertInProgress && event.ControlDown() && event.ShiftDown()) {
+				wxCommandEvent dummyEvent;
+				OnRedoClick(dummyEvent);
+			}
+		} break;
+		case 'Y': {
+			if (!hasInsertInProgress && event.GetModifiers() == wxMOD_CONTROL) {
+				wxCommandEvent dummyEvent;
+				OnRedoClick(dummyEvent);
+			}
+		} break;
+		case 'N': {
+			if (!hasInsertInProgress && event.GetModifiers() == wxMOD_CONTROL) {
+				wxCommandEvent dummyEvent;
+				OnNewClick(dummyEvent);
+			}
 		} break;
 		case 'L': {
 			// tests
@@ -1072,13 +1222,285 @@ void ControlEditor::OnTestClick(wxCommandEvent& event)
 	}
 }
 
+std::vector<Element*> ControlEditor::GetElementList() const
+{
+	std::vector<Element*> elementList;
+	for (auto& element : m_elementList) {
+		elementList.push_back(element.get());
+	}
+	return elementList;
+}
+
+void ControlEditor::Fit()
+{
+	wxPoint2DDouble leftUpCorner(0, 0);
+	wxPoint2DDouble rightDownCorner(0, 0);
+	std::vector<Element*> elementList = GetElementList();
+
+	if (!GetElementsCorners(leftUpCorner, rightDownCorner, elementList)) return;
+	wxPoint2DDouble middleCoords = (leftUpCorner + rightDownCorner) / 2.0;
+
+	int width = 0.0;
+	int height = 0.0;
+	m_cePanel->GetSize(&width, &height);
+
+	const double scaleX = static_cast<double>(width) / (rightDownCorner.m_x - leftUpCorner.m_x);
+	const double scaleY = static_cast<double>(height) / (rightDownCorner.m_y - leftUpCorner.m_y);
+
+	double scale = scaleX < scaleY ? scaleX : scaleY;
+	scale = std::min(scale, m_camera->GetZoomMax());
+	scale = std::max(scale, m_camera->GetZoomMin());
+
+	m_camera->SetScale(scale);
+
+	m_camera->StartTranslation(middleCoords);
+	m_camera->SetTranslation(wxPoint2DDouble(width / 2.0, height / 2.0));
+
+	Redraw();
+}
+
 void ControlEditor::OnClose(wxCloseEvent& event)
 {
 	if (m_ctrlContainer) { m_ctrlContainer->FillContainer(this); }
+	ClearStates();
 	if (m_ctrlManager)
 		m_ctrlManager->Remove(this);
 	Destroy();
 	//event.Skip();
+}
+
+void ControlEditor::UnselectAll()
+{
+	for (auto& element : m_elementList) element->SetSelected(false);
+	for (auto& line : m_connectionList) line->SetSelected(false);
+}
+
+void ControlEditor::ApplyFontToElements()
+{
+	for (auto& element : m_elementList) {
+		element->SetFont(m_font);
+	}
+}
+
+bool ControlEditor::GetElementsCorners(wxPoint2DDouble& leftUpCorner,
+	wxPoint2DDouble& rightDownCorner,
+	const std::vector<Element*>& elementList) const
+{
+	if (elementList.empty()) return false;
+	elementList[0]->CalculateBoundaries(leftUpCorner, rightDownCorner);
+	for (size_t i = 1; i < elementList.size(); i++) {
+		wxPoint2DDouble lu, rd;
+		elementList[i]->CalculateBoundaries(lu, rd);
+		if (lu.m_x < leftUpCorner.m_x) leftUpCorner.m_x = lu.m_x;
+		if (lu.m_y < leftUpCorner.m_y) leftUpCorner.m_y = lu.m_y;
+		if (rd.m_x > rightDownCorner.m_x) rightDownCorner.m_x = rd.m_x;
+		if (rd.m_y > rightDownCorner.m_y) rightDownCorner.m_y = rd.m_y;
+	}
+	return true;
+}
+
+void ControlEditor::ClearStates()
+{
+	m_elementListState.clear();
+	m_connectionListState.clear();
+	m_currentState = -1;
+}
+
+void ControlEditor::SaveCurrentState()
+{
+	std::vector<std::shared_ptr<ControlElement>> stateElements;
+	std::vector<std::shared_ptr<ConnectionLine>> stateLines;
+
+	// Deep copy via ControlElementContainer (same remapping logic used by generators).
+	ControlElementContainer container;
+	container.FillContainer(m_elementList, m_connectionList);
+	container.GetContainerCopy(stateElements, stateLines);
+
+	// Drop redo states
+	m_elementListState.resize(m_currentState + 1);
+	m_connectionListState.resize(m_currentState + 1);
+
+	m_currentState++;
+	if (m_currentState >= m_maxStates) {
+		m_currentState = m_maxStates - 1;
+		m_elementListState.erase(m_elementListState.begin());
+		m_connectionListState.erase(m_connectionListState.begin());
+	}
+
+	m_elementListState.emplace_back(std::move(stateElements));
+	m_connectionListState.emplace_back(std::move(stateLines));
+}
+
+void ControlEditor::SetPreviousState()
+{
+	m_currentState--;
+	if (m_currentState < 0) {
+		m_currentState = 0;
+		return;
+	}
+	if (static_cast<size_t>(m_currentState) >= m_elementListState.size() ||
+		static_cast<size_t>(m_currentState) >= m_connectionListState.size()) {
+		return;
+	}
+
+	std::vector<std::shared_ptr<ControlElement>> newElements;
+	std::vector<std::shared_ptr<ConnectionLine>> newLines;
+	ControlElementContainer container;
+	container.FillContainer(m_elementListState[m_currentState], m_connectionListState[m_currentState]);
+	container.GetContainerCopy(newElements, newLines);
+
+	m_elementList = std::move(newElements);
+	m_connectionList = std::move(newLines);
+	ApplyFontToElements();
+	Redraw();
+}
+
+void ControlEditor::SetNextState()
+{
+	m_currentState++;
+	if (m_currentState < 0) m_currentState = 0;
+	if (static_cast<size_t>(m_currentState) >= m_elementListState.size() ||
+		static_cast<size_t>(m_currentState) >= m_connectionListState.size()) {
+		m_currentState--;
+		return;
+	}
+
+	std::vector<std::shared_ptr<ControlElement>> newElements;
+	std::vector<std::shared_ptr<ConnectionLine>> newLines;
+	ControlElementContainer container;
+	container.FillContainer(m_elementListState[m_currentState], m_connectionListState[m_currentState]);
+	container.GetContainerCopy(newElements, newLines);
+
+	m_elementList = std::move(newElements);
+	m_connectionList = std::move(newLines);
+	ApplyFontToElements();
+	Redraw();
+}
+
+void ControlEditor::CopySelectionToClipboard()
+{
+	std::vector<std::shared_ptr<ControlElement>> selectedElements;
+	std::vector<std::shared_ptr<ConnectionLine>> selectedLines;
+
+	for (auto& el : m_elementList) {
+		if (el->IsSelected()) selectedElements.push_back(el);
+	}
+	for (auto& ln : m_connectionList) {
+		if (ln->IsSelected()) selectedLines.push_back(ln);
+	}
+
+	// If user selected only elements, include the connection lines between them (and children) to keep the
+	// copied system consistent.
+	if (!selectedElements.empty() && selectedLines.empty()) {
+		std::unordered_set<Element*> selectedSet;
+		selectedSet.reserve(selectedElements.size());
+		for (auto& el : selectedElements) selectedSet.insert(el.get());
+
+		for (auto& ln : m_connectionList) {
+			auto parents = ln->GetParentList();
+			if (parents.size() >= 2 &&
+				selectedSet.contains(parents[0]) &&
+				selectedSet.contains(parents[1])) {
+				selectedLines.push_back(ln);
+			}
+		}
+	}
+
+	// Deep copy into clipboard payload
+	ControlElementContainer container;
+	container.FillContainer(selectedElements, selectedLines);
+	std::vector<std::shared_ptr<ControlElement>> copyElements;
+	std::vector<std::shared_ptr<ConnectionLine>> copyLines;
+	container.GetContainerCopy(copyElements, copyLines);
+	SanitizeControlGraph(copyElements, copyLines);
+
+	auto* dataObject = new ControlElementDataObject(copyElements, copyLines);
+	if (wxTheClipboard->Open()) {
+		wxTheClipboard->SetData(dataObject);
+		wxTheClipboard->Close();
+	}
+}
+
+bool ControlEditor::PasteFromClipboard()
+{
+	if (!wxTheClipboard->Open()) {
+		wxMessageDialog dialog(this, _("It was not possible to paste from clipboard."), _("Error"),
+			wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
+		dialog.ShowModal();
+		return false;
+	}
+
+	ControlElementDataObject dataObject;
+	if (!wxTheClipboard->IsSupported(dataObject.GetFormat())) {
+		wxTheClipboard->Close();
+		return false;
+	}
+	if (!wxTheClipboard->GetData(dataObject)) {
+		wxMessageDialog dialog(this, _("It was not possible to paste from clipboard."), _("Error"),
+			wxOK | wxCENTER | wxICON_ERROR, wxDefaultPosition);
+		dialog.ShowModal();
+		wxTheClipboard->Close();
+		return false;
+	}
+	wxTheClipboard->Close();
+
+	auto* lists = dataObject.GetElementsLists();
+	if (!lists) return false;
+
+	// Deep copy again (clipboard payload must remain immutable)
+	std::vector<std::shared_ptr<ControlElement>> pastedElements;
+	std::vector<std::shared_ptr<ConnectionLine>> pastedLines;
+	ControlElementContainer container;
+	container.FillContainer(lists->elementList, lists->connectionList);
+	container.GetContainerCopy(pastedElements, pastedLines);
+	SanitizeControlGraph(pastedElements, pastedLines);
+
+	if (pastedElements.empty() && pastedLines.empty()) return false;
+
+	UnselectAll();
+
+	// Assign new unique IDs
+	for (auto& el : pastedElements) {
+		el->SetID(GetNextID());
+		el->SetSelected(true);
+	}
+	for (auto& ln : pastedLines) {
+		ln->SetID(GetNextID());
+		ln->SetSelected(true);
+	}
+
+	// Insert
+	for (auto& el : pastedElements) {
+		el->SetFont(m_font);
+		m_elementList.push_back(el);
+	}
+	for (auto& ln : pastedLines) {
+		m_connectionList.push_back(ln);
+		ln->UpdatePoints();
+	}
+
+	// Move the pasted objects to the mouse position (center them at mouse, like Workspace).
+	wxPoint2DDouble mouseWorld = GetEditorMouseWorldPoint();
+
+	std::vector<Element*> pastedAsElements;
+	pastedAsElements.reserve(pastedElements.size() + pastedLines.size());
+	for (auto& el : pastedElements) pastedAsElements.push_back(el.get());
+	for (auto& ln : pastedLines) pastedAsElements.push_back(ln.get());
+
+	wxPoint2DDouble leftUpCorner, rightDownCorner;
+	if (GetElementsCorners(leftUpCorner, rightDownCorner, pastedAsElements)) {
+		wxPoint2DDouble startPosition = (leftUpCorner + rightDownCorner) / 2.0;
+		for (auto& e : pastedElements) {
+			e->StartMove(startPosition);
+			e->Move(mouseWorld);
+		}
+		// Ensure lines follow moved elements; do not move lines directly to avoid offset corruption.
+		for (auto& ln : pastedLines) ln->UpdatePoints();
+	}
+
+	m_mode = ControlEditorMode::MODE_PASTE;
+	Redraw();
+	return true;
 }
 
 int ControlEditor::GetNextID()
@@ -1122,4 +1544,107 @@ wxColour ControlEditor::GetNextColour()
 		++m_itColourList;
 
 	return *m_itColourList;
+}
+void ControlEditor::OnCopyClick(wxCommandEvent& event)
+{
+	CopySelectionToClipboard();
+}
+void ControlEditor::OnDeleteClick(wxCommandEvent& event)
+{
+	DeleteSelectedElements();
+	SaveCurrentState();
+}
+void ControlEditor::OnDragClick(wxCommandEvent& event)
+{
+	// Same behavior as middle mouse drag: anchor at current mouse, pan only on motion (no jump).
+	m_mode = ControlEditorMode::MODE_DRAG;
+	m_camera->StartTranslation(GetEditorMouseWorldPoint());
+	if (m_cePanel) m_cePanel->SetFocus();
+}
+void ControlEditor::OnMoveClick(wxCommandEvent& event)
+{
+	bool hasSelectedElement = false;
+	bool hasSelectedLine = false;
+	std::vector<Element*> selectedObjects;
+
+	for (auto& element : m_elementList) {
+		if (element->IsSelected()) {
+			hasSelectedElement = true;
+			selectedObjects.push_back(element.get());
+		}
+	}
+	for (auto& line : m_connectionList) {
+		if (line->IsSelected()) {
+			hasSelectedLine = true;
+			selectedObjects.push_back(line.get());
+		}
+	}
+	if (!hasSelectedElement && !hasSelectedLine) return;
+
+	m_mode = hasSelectedElement ? ControlEditorMode::MODE_MOVE_ELEMENT : ControlEditorMode::MODE_MOVE_LINE;
+
+	wxPoint2DDouble mouseWorld = GetEditorMouseWorldPoint();
+
+	wxPoint2DDouble leftUp, rightDown;
+	if (!GetElementsCorners(leftUp, rightDown, selectedObjects)) return;
+	wxPoint2DDouble startWorld = (leftUp + rightDown) / 2.0;
+
+	if (hasSelectedElement) {
+		for (auto& element : m_elementList) {
+			if (element->IsSelected()) {
+				element->StartMove(startWorld);
+				element->Move(mouseWorld);
+				auto childList = element->GetChildList();
+				for (Element* child : childList) {
+					if (auto line = dynamic_cast<ConnectionLine*>(child)) line->UpdatePoints();
+				}
+			}
+		}
+	}
+	else {
+		for (auto& line : m_connectionList) {
+			if (line->IsSelected()) {
+				line->StartMove(startWorld);
+				line->Move(mouseWorld);
+			}
+		}
+	}
+	Redraw();
+}
+void ControlEditor::OnNewClick(wxCommandEvent& event)
+{
+	wxMessageDialog msgDialog(this,
+		_("Do you want to create a new control system?\n\nAll elements will be removed."),
+		_("Warning"),
+		wxYES_NO | wxCENTRE | wxICON_WARNING);
+	if (msgDialog.ShowModal() != wxID_YES) return;
+
+	m_elementList.clear();
+	m_connectionList.clear();
+	m_selectionRect = wxRect2DDouble(0, 0, 0, 0);
+	m_mode = ControlEditorMode::MODE_EDIT;
+	ClearStates();
+	SaveCurrentState();
+	Redraw();
+}
+void ControlEditor::OnPasteClick(wxCommandEvent& event)
+{
+	PasteFromClipboard();
+}
+void ControlEditor::OnRedoClick(wxCommandEvent& event)
+{
+	SetNextState();
+}
+void ControlEditor::OnUndoClick(wxCommandEvent& event)
+{
+	SetPreviousState();
+}
+void ControlEditor::OnFitClick(wxCommandEvent& event)
+{
+	Fit();
+}
+void ControlEditor::OnMiddleDoubleClick(wxMouseEvent& event)
+{
+	Fit();
+	event.Skip();
 }

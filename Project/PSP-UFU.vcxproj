@@ -187,6 +187,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="editors\ControlEditorManager.cpp" />
+    <ClCompile Include="elements\ControlElementDataObject.cpp" />
     <ClCompile Include="elements\powerElement\EMTElement.cpp" />
     <ClCompile Include="extLibs\wxChartDir\wxchartviewer.cpp" />
     <ClCompile Include="forms\AboutForm.cpp" />
@@ -301,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="editors\ControlEditorManager.h" />
+    <ClInclude Include="elements\ControlElementDataObject.h" />
     <ClInclude Include="elements\powerElement\EMTElement.h" />
     <ClInclude Include="extLibs\fftw\fftw3.h" />
     <ClInclude Include="extLibs\wxChartDir\bchartdir.h" />

@@ -52,8 +52,17 @@ class ControlEditorBase : public wxFrame
 {
 public:
     enum {
-        ID_RIBBON_EXPORT = 10001,
-        ID_RIBBON_IMPORT = 10002,
+        ID_RIBBON_DELETE = 10001,
+        ID_RIBBON_REDO = 10002,
+        ID_RIBBON_UNDO = 10003,
+        ID_RIBBON_MOVE = 10004,
+        ID_RIBBON_DRAG = 10005,
+        ID_RIBBON_PASTE = 10006,
+        ID_RIBBON_EXPORT = 10007,
+        ID_RIBBON_FIT = 10008,
+        ID_RIBBON_COPY = 10009,
+        ID_RIBBON_IMPORT = 10010,
+        ID_RIBBON_NEW = 10011,
     };
 protected:
     wxToolBar* m_toolbarMain;
@@ -68,8 +77,17 @@ protected:
 protected:
     virtual void OnKeyDown(wxKeyEvent& event) { event.Skip(); }
     virtual void OnClose(wxCloseEvent& event) { event.Skip(); }
+    virtual void OnNewClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnImportClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnExportClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCopyClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnPasteClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnUndoClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRedoClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnDragClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMoveClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnDeleteClick(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnFitClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnLeftClickDown(wxMouseEvent& event) { event.Skip(); }
     virtual void OnLeftClickUp(wxMouseEvent& event) { event.Skip(); }
     virtual void OnDoubleClick(wxMouseEvent& event) { event.Skip(); }
@@ -79,6 +97,7 @@ protected:
     virtual void OnScroll(wxMouseEvent& event) { event.Skip(); }
     virtual void OnPaint(wxPaintEvent& event) { event.Skip(); }
     virtual void OnIdle(wxIdleEvent& event) { event.Skip(); }
+    virtual void OnMiddleDoubleClick(wxMouseEvent& event) { event.Skip(); }
     virtual void OnTestClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnButtonOKClick(wxCommandEvent& event) { event.Skip(); }
 

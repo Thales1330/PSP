@@ -71,7 +71,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     m_toolbarMain = this->CreateToolBar(wxTB_TEXT|wxTB_FLAT, wxID_ANY);
     m_toolbarMain->SetToolBitmapSize(wxSize(32,32));
     
-    m_toolbarMain->AddTool(wxID_ANY, _("New"), wxXmlResource::Get()->LoadBitmap(wxT("new32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_NEW, _("New"), wxXmlResource::Get()->LoadBitmap(wxT("new32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
     m_toolbarMain->AddTool(ID_RIBBON_IMPORT, _("Import"), wxXmlResource::Get()->LoadBitmap(wxT("imp32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
@@ -79,21 +79,23 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     
     m_toolbarMain->AddSeparator();
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Copy"), wxXmlResource::Get()->LoadBitmap(wxT("copy32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_COPY, _("Copy"), wxXmlResource::Get()->LoadBitmap(wxT("copy32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Paste"), wxXmlResource::Get()->LoadBitmap(wxT("paste32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_PASTE, _("Paste"), wxXmlResource::Get()->LoadBitmap(wxT("paste32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Undo"), wxXmlResource::Get()->LoadBitmap(wxT("undo32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_UNDO, _("Undo"), wxXmlResource::Get()->LoadBitmap(wxT("undo32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Redo"), wxXmlResource::Get()->LoadBitmap(wxT("redo32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_REDO, _("Redo"), wxXmlResource::Get()->LoadBitmap(wxT("redo32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
     m_toolbarMain->AddSeparator();
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Drag"), wxXmlResource::Get()->LoadBitmap(wxT("drag32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_DRAG, _("Drag"), wxXmlResource::Get()->LoadBitmap(wxT("drag32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Move"), wxXmlResource::Get()->LoadBitmap(wxT("move32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_MOVE, _("Move"), wxXmlResource::Get()->LoadBitmap(wxT("move32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     
-    m_toolbarMain->AddTool(wxID_ANY, _("Delete"), wxXmlResource::Get()->LoadBitmap(wxT("delete32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    m_toolbarMain->AddTool(ID_RIBBON_DELETE, _("Delete"), wxXmlResource::Get()->LoadBitmap(wxT("delete32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    
+    m_toolbarMain->AddTool(ID_RIBBON_FIT, _("Fit"), wxXmlResource::Get()->LoadBitmap(wxT("fit32")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
     m_toolbarMain->Realize();
     
     m_auimgr = new wxAuiManager;
@@ -153,8 +155,17 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     // Connect events
     this->Bind(wxEVT_KEY_DOWN, &ControlEditorBase::OnKeyDown, this);
     this->Bind(wxEVT_CLOSE_WINDOW, &ControlEditorBase::OnClose, this);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnNewClick, this, ID_RIBBON_NEW);
     this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnImportClick, this, ID_RIBBON_IMPORT);
     this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnExportClick, this, ID_RIBBON_EXPORT);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnCopyClick, this, ID_RIBBON_COPY);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnPasteClick, this, ID_RIBBON_PASTE);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnUndoClick, this, ID_RIBBON_UNDO);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnRedoClick, this, ID_RIBBON_REDO);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnDragClick, this, ID_RIBBON_DRAG);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnMoveClick, this, ID_RIBBON_MOVE);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnDeleteClick, this, ID_RIBBON_DELETE);
+    this->Bind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnFitClick, this, ID_RIBBON_FIT);
     m_cePanel->Bind(wxEVT_KEY_DOWN, &ControlEditorBase::OnKeyDown, this);
     m_cePanel->Bind(wxEVT_LEFT_DOWN, &ControlEditorBase::OnLeftClickDown, this);
     m_cePanel->Bind(wxEVT_LEFT_UP, &ControlEditorBase::OnLeftClickUp, this);
@@ -165,6 +176,7 @@ ControlEditorBase::ControlEditorBase(wxWindow* parent, wxWindowID id, const wxSt
     m_cePanel->Bind(wxEVT_MOUSEWHEEL, &ControlEditorBase::OnScroll, this);
     m_cePanel->Bind(wxEVT_PAINT, &ControlEditorBase::OnPaint, this);
     m_cePanel->Bind(wxEVT_IDLE, &ControlEditorBase::OnIdle, this);
+    m_cePanel->Bind(wxEVT_MIDDLE_DCLICK, &ControlEditorBase::OnMiddleDoubleClick, this);
     m_buttonTest->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlEditorBase::OnTestClick, this);
     m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlEditorBase::OnButtonOKClick, this);
     
@@ -174,8 +186,17 @@ ControlEditorBase::~ControlEditorBase()
 {
     this->Unbind(wxEVT_KEY_DOWN, &ControlEditorBase::OnKeyDown, this);
     this->Unbind(wxEVT_CLOSE_WINDOW, &ControlEditorBase::OnClose, this);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnNewClick, this, ID_RIBBON_NEW);
     this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnImportClick, this, ID_RIBBON_IMPORT);
     this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnExportClick, this, ID_RIBBON_EXPORT);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnCopyClick, this, ID_RIBBON_COPY);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnPasteClick, this, ID_RIBBON_PASTE);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnUndoClick, this, ID_RIBBON_UNDO);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnRedoClick, this, ID_RIBBON_REDO);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnDragClick, this, ID_RIBBON_DRAG);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnMoveClick, this, ID_RIBBON_MOVE);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnDeleteClick, this, ID_RIBBON_DELETE);
+    this->Unbind(wxEVT_COMMAND_TOOL_CLICKED, &ControlEditorBase::OnFitClick, this, ID_RIBBON_FIT);
     m_cePanel->Unbind(wxEVT_KEY_DOWN, &ControlEditorBase::OnKeyDown, this);
     m_cePanel->Unbind(wxEVT_LEFT_DOWN, &ControlEditorBase::OnLeftClickDown, this);
     m_cePanel->Unbind(wxEVT_LEFT_UP, &ControlEditorBase::OnLeftClickUp, this);
@@ -186,6 +207,7 @@ ControlEditorBase::~ControlEditorBase()
     m_cePanel->Unbind(wxEVT_MOUSEWHEEL, &ControlEditorBase::OnScroll, this);
     m_cePanel->Unbind(wxEVT_PAINT, &ControlEditorBase::OnPaint, this);
     m_cePanel->Unbind(wxEVT_IDLE, &ControlEditorBase::OnIdle, this);
+    m_cePanel->Unbind(wxEVT_MIDDLE_DCLICK, &ControlEditorBase::OnMiddleDoubleClick, this);
     m_buttonTest->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlEditorBase::OnTestClick, this);
     m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ControlEditorBase::OnButtonOKClick, this);
     
