@@ -1,4 +1,4 @@
-#include "EMTElementForm.h"
+﻿#include "EMTElementForm.h"
 #include "../elements/powerElement/EMTElement.h"
 #include "../editors/ChartView.h"
 #include "../editors/Workspace.h"
@@ -10,8 +10,8 @@
 #include <wx/dir.h>
 #include <wx/process.h>
 
-EMTElementForm::EMTElementForm(wxWindow* parent, EMTElement* emtElement)
-	: EMTElementFormBase(parent), m_parent(parent), m_emtElement(emtElement)
+EMTElementForm::EMTElementForm(wxWindow* parent, EMTElement* emtElement, Workspace* workspace)
+	: EMTElementFormBase(parent), m_parent(parent), m_emtElement(emtElement), m_workspace(workspace)
 {
 	m_staticTextNode->SetLabel(m_staticTextNode->GetLabel() + wxT(" (3\u0278)"));
 
@@ -27,7 +27,7 @@ EMTElementForm::EMTElementForm(wxWindow* parent, EMTElement* emtElement)
 	m_spinCtrlMaxNumHarmonics->SetValue(data.numMaxHarmonics);
 	m_textCtrlHarmThreshold->SetValue(wxString::Format(wxT("%.2f"), data.harmonicsThreshold));
 
-	m_properties = static_cast<Workspace*>(parent)->GetProperties();
+	m_properties = workspace->GetProperties();
 
 	SetSize(DoGetBestSize());
 }
@@ -136,12 +136,21 @@ void EMTElementForm::OnTestClick(wxCommandEvent& event)
 			return;
 		}
 		std::vector<double> time, in, timeSamp, inSamp, outR, outI, outM, outP, freq;
+		std::vector <double> timeThreePhase, currentA, currentB, currentC;
 		auto atpData = m_emtElement->GetEMTElementData().atpData;
 		auto inFFTData = m_emtElement->GetEMTElementData().inFFTData;
 		auto outFFTData = m_emtElement->GetEMTElementData().outFFTData;
 		for (auto data : atpData) {
 			time.emplace_back(data.first);
 			in.emplace_back(data.second);
+		}
+		for (auto& data : m_emtElement->GetEMTElementData().atpSampleData)
+		{
+			timeThreePhase.emplace_back(data.t);
+			currentA.emplace_back(data.current[0]);
+			currentB.emplace_back(data.current[1]);
+			currentC.emplace_back(data.current[2]);
+
 		}
 		for (auto data : inFFTData) {
 			timeSamp.emplace_back(data.first);
@@ -164,7 +173,7 @@ void EMTElementForm::OnTestClick(wxCommandEvent& event)
 		//	currPha.emplace_back(arg(harmData[i]) * 180.0 / M_PI);
 		//	harmOrder.emplace_back(static_cast<double>(harmOrderData[i]));
 		//}
-		for(auto const& data : harmData){
+		for (auto const& data : harmData) {
 			currMag.emplace_back(abs(data.second));
 			currPha.emplace_back(arg(data.second) * 180.0 / M_PI);
 			harmOrder.emplace_back(static_cast<double>(data.first));
@@ -172,10 +181,16 @@ void EMTElementForm::OnTestClick(wxCommandEvent& event)
 
 		std::vector<ElementPlotData> plotDataList;
 		ElementPlotData plotATPData(_("ATP Output"), ElementPlotData::CurveType::CT_TEST);
+		ElementPlotData plot3PATPData(_("ATP Three-phase output"), ElementPlotData::CurveType::CT_TEST);
 		ElementPlotData plotFFTData(_("Fourier Analysis"), ElementPlotData::CurveType::CT_TEST);
 		ElementPlotData plotCurrData(_("Current Phasor"), ElementPlotData::CurveType::CT_TEST);
 
 		plotATPData.AddData(in, _("Data"));
+
+		plot3PATPData.AddData(currentA, _("Phase A Current"));
+		plot3PATPData.AddData(currentB, _("Phase B Current"));
+		plot3PATPData.AddData(currentC, _("Phase C Current"));
+		plot3PATPData.AddData(timeThreePhase, _("Time 3f"));
 
 		plotFFTData.AddData(inSamp, _("Input"));
 		plotFFTData.AddData(timeSamp, _("Time Sampled"));
@@ -190,10 +205,13 @@ void EMTElementForm::OnTestClick(wxCommandEvent& event)
 		plotCurrData.AddData(harmOrder, _("Harmonic Order"));
 
 		plotDataList.push_back(plotATPData);
+		plotDataList.push_back(plot3PATPData);
 		plotDataList.push_back(plotFFTData);
 		plotDataList.push_back(plotCurrData);
-		ChartView* cView = new ChartView(this, plotDataList, time, m_properties->GetGeneralPropertiesData().plotLib);
-		cView->Show();
+		//ChartView* cView = new ChartView(m_parent, plotDataList, time, m_properties->GetGeneralPropertiesData().plotLib);
+		//cView->Show();
+		auto& cwMngr = m_workspace->GetChartWindowManager();
+		cwMngr.Open(plotDataList, time);
 	}
 }
 void EMTElementForm::OnATPFileChange(wxFileDirPickerEvent& event)

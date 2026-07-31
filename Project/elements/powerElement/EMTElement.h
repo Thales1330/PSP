@@ -20,15 +20,23 @@
 
 #include "Shunt.h"
 #include <map>
+#include <array>
 
 class wxTextFile;
 class PropertiesData;
+
+struct ATPSample
+{
+	double t;
+	std::array<double, 3> current;
+};
 
 struct EMTElementData {
 	wxString name = "";
 	wxFileName atpFile;
 	wxString atpNodeName = "";
 	double stepSize = 1e-6;
+	double pspStepSize = 1e-3;
 	int cyclesToSS = 1;
 	int recordFrequency = 1;
 	bool useMedianFilter = true;
@@ -50,6 +58,8 @@ struct EMTElementData {
 	//std::vector<int> currHarmonicsOrder;
 	std::map<int, std::complex<double> > currHarmonics;
 	std::vector< std::pair<double, double> > atpData;
+	std::vector<ATPSample> atpSampleData;
+	double nPhases = 3;
 	std::vector< std::pair<double, double> > inFFTData;
 	std::vector< std::pair<double ,std::complex<double> > > outFFTData;
 };
@@ -91,9 +101,12 @@ public:
 	std::vector<double> MedianFilter(const std::vector<double>& data);
 	bool CalculateCurrent( wxString& errorMsg, const bool& saveFFTData = false);
 	void UpdateData(const PropertiesData* properties = nullptr, bool updateVoltageBase = false);
+	void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
 
 protected:
 	std::vector<double> DoMedianFilter(double* extension, std::vector<double>& result, const int& n);
+	wxString ATPField(double value, size_t width);
+	bool CheckLISFile(wxFileName fileName, wxString& errorMsg) const;
 	EMTElementData m_data;
 };
 

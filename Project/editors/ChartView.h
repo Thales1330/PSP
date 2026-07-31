@@ -55,6 +55,7 @@ public:
 	void UpdatePlot(bool fit = true);
 
 protected:
+    virtual void OnClose(wxCloseEvent& event);
 	virtual void OnResize(wxSizeEvent& event);
 	virtual void OnMenuExpCSVClick(wxCommandEvent& event);
 	virtual void OnTreeItemActivated(wxTreeEvent& event);

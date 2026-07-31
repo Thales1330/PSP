@@ -186,6 +186,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="editors\ChartWindowManager.cpp" />
+    <ClCompile Include="utils\ATPPSPBridge.cpp" />
     <ClCompile Include="editors\ControlEditorManager.cpp" />
     <ClCompile Include="elements\ControlElementDataObject.cpp" />
     <ClCompile Include="elements\powerElement\EMTElement.cpp" />
@@ -301,6 +303,8 @@
     <ClCompile Include="utils\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="editors\ChartWindowManager.h" />
+    <ClInclude Include="utils\ATPPSPBridge.h" />
     <ClInclude Include="editors\ControlEditorManager.h" />
     <ClInclude Include="elements\ControlElementDataObject.h" />
     <ClInclude Include="elements\powerElement\EMTElement.h" />

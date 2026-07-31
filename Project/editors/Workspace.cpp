@@ -131,6 +131,7 @@ Workspace::Workspace(wxWindow* parent, wxString name, wxStatusBar* statusBar, wx
 	//m_renderer = new Renderer();
 
 	m_CEMngr = std::make_unique<ControlEditorManager>(this);
+	m_CWMngr = std::make_unique<ChartWindowManager>(this);
 
 	SaveCurrentState();
 }

@@ -39,6 +39,7 @@
 
 #include "ControlEditor.h"
 #include "ControlEditorManager.h"
+#include "ChartWindowManager.h"
 
 #ifdef _DEBUG
 #include "../utils/DebugMainFrame.hpp"
@@ -163,6 +164,7 @@ public:
 	void EnableAutoHeatMapLabel(const bool& enable = true) { m_hmAutomaticLabel = enable; }
 	bool IsHeatMapAutoLabelEnable() const { return m_hmAutomaticLabel; }
 	ControlEditorManager& GetControlEditorManager() const { return *m_CEMngr; }
+	ChartWindowManager& GetChartWindowManager() const { return *m_CWMngr; }
 
 	bool InsertTextElement(int textID, Element* parentElement, ElectricalUnit unit = ElectricalUnit::UNIT_NONE, int precision = 2);
 	Element* FindTextElement(Element* parentElement, int dataType);
@@ -272,6 +274,7 @@ protected:
 	bool m_hmAutomaticLabel = false;
 
 	std::unique_ptr<ControlEditorManager> m_CEMngr;
+	std::unique_ptr<ChartWindowManager> m_CWMngr;
 
 
 #ifdef _DEBUG

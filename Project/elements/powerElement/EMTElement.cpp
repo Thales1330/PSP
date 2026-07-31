@@ -1,9 +1,14 @@
 ﻿#include "EMTElement.h"
 
+#include <wx/app.h>
+
 #include "../../forms/EMTElementForm.h"
+#include "../../editors/Workspace.h"
 #include "../../utils/PropertiesData.h"
 #include "../../extLibs/fftw/fftw3.h"
 #include "../../elements/GCText.h"
+#include "../../utils/Path.h"
+#include "../../utils/ATPPSPBridge.h"
 
 #include <wx/dcgraph.h>
 #include <wx/textfile.h>
@@ -11,6 +16,7 @@
 #include <wx/process.h>
 #include <wx/wfstream.h>
 #include <wx/datstrm.h>
+#include <wx/busyinfo.h>
 
 EMTElement::EMTElement()
 {
@@ -84,7 +90,7 @@ void EMTElement::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doubl
 	if (m_inserted) {
 
 		if (m_selected) {
-			gc->SetPen(wxPen(guiColour->selection, 2 + m_borderSize * 2.0));
+			gc->SetPen(wxPen(guiColour->selection, 2.0 + m_borderSize * 2.0));
 			gc->SetBrush(*wxTRANSPARENT_BRUSH);
 
 			gc->StrokeLines(m_pointList.size(), &m_pointList[0]);
@@ -210,14 +216,7 @@ void EMTElement::DrawDC(GUIColour* guiColour, wxPoint2DDouble translation, doubl
 		gcText.SetText(_("EMT"));
 		wxPoint pt = RotateAround(m_position + wxPoint2DDouble(0.0, 20.0), m_position, m_angle);
 		gcText.Draw(pt, gcText.GetWidth(), gcText.GetHeight(), dc, m_angle, m_online ? wxColour(255, 60, 0) : m_offlineElementColour);
-		//dc.SetFont(font);
-		//dc.SetTextForeground(m_online ? wxColour(255, 60, 0) : m_offlineElementColour);
-		//int textWidth, textHeight;
-		//dc.GetTextExtent(_("EMT"), &textWidth, &textHeight);
-		//wxPoint pt = RotateAround(wxPoint2DDouble(m_position.m_x, m_position.m_y - m_height / 2.0 + 20.0), m_position, m_angle);
-		//dc.DrawRotatedText(_("EMT"), pt.x, pt.y, -m_angle);
 
-		//wxGCDC* gcdc = new wxGCDC(gc);
 		dc.SetPen(wxPen(m_online ? wxColour(0, 60, 255) : m_offlineElementColour, 2));
 		std::vector<wxPoint> ptList;
 		for (double x = m_position.m_x - m_width / 2.0 + 2; x < (m_position.m_x + m_width / 2.0); x += (m_width - 4.0) / 6.0) {
@@ -273,7 +272,10 @@ wxString EMTElement::GetTipText() const
 
 bool EMTElement::ShowForm(wxWindow* parent, Element* element, wxWindow* workspace)
 {
-	EMTElementForm emtForm(parent, this);
+	Workspace* ws = dynamic_cast<Workspace*>(workspace);
+	if (!ws) return false;
+
+	EMTElementForm emtForm(parent, this, ws);
 	emtForm.SetTitle(_("Electromagnetic Transient"));
 	emtForm.CenterOnParent();
 	if (emtForm.ShowModal() == wxID_OK) {
@@ -442,10 +444,55 @@ bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 		}
 	}
 
-	wxString switchMask = "  PSPNC%c%s%c                                        MEASURING                %d";
-	wxString sourceMask = "14PSPNC%c  %s%s%s                           -1.      100.";
+	std::map<wxString, wxString> masks;
+
+	// Load masks from T94.atp file
+	wxTextFile t94File(Paths::GetDataPath() + "/atp/T94.atp");
+	if (t94File.Open()) {
+		wxString current;
+
+		for (size_t i = 0; i < t94File.GetLineCount(); i++) {
+			wxString line = t94File.GetLine(i);
+
+			if (line.StartsWith("[[") && line.EndsWith("]]")) {
+				current = line.Mid(2, line.Length() - 4);
+				masks[current].Clear();
+				continue;
+			}
+
+			if (!current.IsEmpty())
+				masks[current] += line + "\n";
+		}
+	}
+	t94File.Close();
+
+	for (const auto& [key, value] : masks) {
+		masks[key].RemoveLast(); // remove last newline character
+	}
+
+	// Load the FOREIGN MODELS from PSPMOD.mod file
+	wxTextFile pspmodFile(Paths::GetDataPath() + "/atp/PSPMOD.mod");
+	wxString pspmodString = "";
+	if (pspmodFile.Open()) {
+		pspmodString = pspmodFile.GetFirstLine();
+		while (!pspmodFile.Eof())
+		{
+			pspmodString += pspmodFile.GetNextLine() + "\n";
+		}
+	}
+	pspmodFile.Close();
+
+	masks["BRANCH"].Replace("T94L_", "PSPNC");
+	masks["BRANCH"].Replace("<STEP>", ATPField(m_data.pspStepSize, 6));
+
+	masks["SWITCH"].Replace("T94L_", "PSPNC");
+
+	//wxString switchMask = "  PSPNC%c%s%c                                        MEASURING                %d";
+	//wxString sourceMask = "14PSPNC%c  %s%s%s                           -1.      100.";
+
 	wxString lineStr = "";
-	int outCardPos = -1, switchCardPos = -1, sourceCardPos = -1;
+	int branchCardPos = -1, switchCardPos = -1, sourceCardPos = -1, modelsCardPos = -1, outputCardPos = -1;
+	int blankBranchCardPos = -1, blankModelsCardPos = -1;
 	lineStr = atpFile.GetFirstLine();
 	while (!atpFile.Eof())
 	{
@@ -458,87 +505,174 @@ bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 			continue; // Skip comments
 		}
 
-		if (lineStr.Find("/SWITCH") != wxNOT_FOUND)
+		if (lineStr.Find("/SWITCH") != wxNOT_FOUND) {
 			switchCardPos = atpFile.GetCurrentLine() + 1;
-
-		if (lineStr.Find("/SOURCE") != wxNOT_FOUND)
+		}
+		if (lineStr.Find("/SOURCE") != wxNOT_FOUND) {
 			sourceCardPos = atpFile.GetCurrentLine() + 1;
-
-		if (lineStr.Find("/OUTPUT") != wxNOT_FOUND)
-			outCardPos = atpFile.GetCurrentLine();
+		}
+		if (lineStr.Find("/BRANCH") != wxNOT_FOUND) {
+			branchCardPos = atpFile.GetCurrentLine() + 1;
+		}
+		if (lineStr.Find("/MODELS") != wxNOT_FOUND) {
+			modelsCardPos = atpFile.GetCurrentLine() + 1;
+		}
+		if (lineStr.Find("/OUTPUT") != wxNOT_FOUND) {
+			outputCardPos = atpFile.GetCurrentLine() + 1;
+		}
+		if (lineStr.Find("BLANK BRANCH") != wxNOT_FOUND) {
+			blankBranchCardPos = atpFile.GetCurrentLine() + 1;
+		}
+		if (lineStr.Find("BLANK MODELS") != wxNOT_FOUND) {
+			blankModelsCardPos = atpFile.GetCurrentLine() + 1;
+		}
 
 		lineStr = atpFile.GetNextLine();
 	}
 
-	if (outCardPos < 0) return false;
+	if (branchCardPos < 0) return false;
+	if (outputCardPos < 0) return false;
 
-	if (switchCardPos < 0 && outCardPos > 0) {
-		atpFile.InsertLine("/SWITCH", outCardPos);
-		switchCardPos = outCardPos + 1;
-	}
+	if (modelsCardPos < 0 && branchCardPos > 0) {
+		// Models card must be the first card
+		atpFile.InsertLine("/MODELS", branchCardPos - 1);
+		atpFile.InsertLine("MODELS", branchCardPos);
+		atpFile.InsertLine("ENDMODELS", branchCardPos + 1);
+		modelsCardPos = branchCardPos - 1;
+		outputCardPos += 3;
+		blankBranchCardPos += 3;
+		if (blankModelsCardPos < 0)
+		{
+			atpFile.InsertLine("BLANK MODELS", blankBranchCardPos - 1);
+			blankModelsCardPos = blankBranchCardPos;
+			blankBranchCardPos++;
 
-	if (sourceCardPos < 0 && outCardPos > 0) {
-		atpFile.InsertLine("/SOURCE", outCardPos);
-		sourceCardPos = outCardPos + 1;
-	}
-
-	for (char i = 'A'; i <= 'C'; ++i) {
-		lineStr = wxString::Format(switchMask, i, node, i, i == 'A' ? 1 : 0);
-		atpFile.InsertLine(lineStr, switchCardPos + (i - 'A'));
-	}
-	sourceCardPos += 3;
-
-	double voltage = std::abs(m_data.puVoltage) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3)); // phase-ground, peak value
-	wxString ampl = wxString::FromCDouble(voltage, 3); // Amplitude in pu
-	wxString freq = wxString::FromCDouble(m_data.frequency, 5); // Frequency in Hz
-	// Insert spaces before to complete 10 characters
-	while (freq.Length() < 10) freq = " " + freq;
-	while (ampl.Length() < 10) ampl = " " + ampl;
-
-	int cardPos = sourceCardPos;
-	for (char i = 'A'; i <= 'C'; ++i) {
-		wxString angle = wxString::FromCDouble(std::arg(m_data.puVoltage) * 180.0 / M_PI - 120.0 * (i - 'A'), 5); // Angle in degrees
-
-		// Insert spaces before to complete 10 characters
-		while (angle.Length() < 10) angle = " " + angle;
-
-		lineStr = wxString::Format(sourceMask, i, ampl, freq, angle);
-		atpFile.InsertLine(lineStr, cardPos);
-		cardPos++;
-
-		if (hasBusData) {
-			// Insert harmonic voltage
-			for (size_t j = 0; j < busData.harmonicOrder.size(); ++j) {
-				int order = busData.harmonicOrder[j];
-				if (order == 1) continue; // Skip fundamental
-
-				std::complex<double> harmVoltage = busData.harmonicVoltage[j];
-
-				voltage = std::abs(busData.harmonicVoltage[j]) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3));
-				wxString amplH = wxString::FromCDouble(voltage, 3);
-				while (amplH.Length() < 10) amplH = " " + amplH;
-
-				wxString freqH = wxString::FromCDouble(m_data.frequency * static_cast<double>(order), 5);
-				while (freqH.Length() < 10) freqH = " " + freqH;
-
-				double angleValue = std::arg(harmVoltage) * 180.0 / M_PI;
-				if (order % 3 == 1) { // Positive sequence
-					angleValue += -120.0 * (i - 'A');
-				}
-				else if (order % 3 == 2) { // Negative sequence
-					angleValue += 120.0 * (i - 'A');
-				}
-				// Zero sequence doesn't change the angle because it's the same for all phases
-
-				wxString angleH = wxString::FromCDouble(angleValue, 5);
-				while (angleH.Length() < 10) angleH = " " + angleH;
-
-				lineStr = wxString::Format(sourceMask, i, amplH, freqH, angleH);
-				atpFile.InsertLine(lineStr, cardPos);
-				cardPos++;
-			}
 		}
 	}
+
+	if (switchCardPos < 0 && outputCardPos > 0) {
+		atpFile.InsertLine("/SWITCH", outputCardPos - 1);
+		switchCardPos = outputCardPos;
+		outputCardPos++;
+		blankBranchCardPos++;
+	}
+
+	if (sourceCardPos < 0 && outputCardPos > 0) {
+		atpFile.InsertLine("/SOURCE", outputCardPos - 1);
+		sourceCardPos = outputCardPos;
+		outputCardPos++;
+		blankBranchCardPos++;
+	}
+
+	//for (char i = 'A'; i <= 'C'; ++i) {
+	//	lineStr = wxString::Format(switchMask, i, node, i, i == 'A' ? 1 : 0);
+	//	atpFile.InsertLine(lineStr, switchCardPos + (i - 'A'));
+	//}
+	//sourceCardPos += 3;
+
+	double voltage = std::abs(m_data.puVoltage) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3)); // phase-ground, peak value
+	//wxString ampl = wxString::FromCDouble(voltage, 3); // Amplitude in pu
+	//wxString freq = wxString::FromCDouble(m_data.frequency, 5); // Frequency in Hz
+	// Insert spaces before to complete 10 characters
+	//while (freq.Length() < 10) freq = " " + freq;
+	//while (ampl.Length() < 10) ampl = " " + ampl;
+	for (char i = 'A'; i <= 'C'; ++i) {
+		wxString tag = wxString::Format("<AMP.%c   >", i);
+		masks["SOURCE"].Replace(tag, ATPField(voltage, 10));
+
+		tag = wxString::Format("<FREQ.%c  >", i);
+		masks["SOURCE"].Replace(tag, ATPField(m_data.frequency, 10));
+
+		double angle = std::arg(m_data.puVoltage) * 180.0 / M_PI - 120.0 * (i - 'A'); // Angle in degrees
+		tag = wxString::Format("<PHASE.%c >", i);
+		masks["SOURCE"].Replace(tag, ATPField(angle, 10));
+	}
+
+	lineStr = atpFile.GetFirstLine();
+	while (!atpFile.Eof())
+	{
+		if (lineStr.IsEmpty()) {
+			lineStr = atpFile.GetNextLine();
+			continue;
+		}
+		if (tolower(lineStr[0]) == 'c') {
+			lineStr = atpFile.GetNextLine();
+			continue; // Skip comments
+		}
+
+		if (lineStr.Find(node) != wxNOT_FOUND) {
+			lineStr.Replace(node, "PSPNC");
+			atpFile.RemoveLine(atpFile.GetCurrentLine());
+			atpFile.InsertLine(lineStr, atpFile.GetCurrentLine());
+		}
+
+		if (lineStr.Find("/MODELS") != wxNOT_FOUND)
+			atpFile.InsertLine(pspmodString, atpFile.GetCurrentLine() + 2);
+
+		if (lineStr.Find("/SWITCH") != wxNOT_FOUND)
+			atpFile.InsertLine(masks["SWITCH"], atpFile.GetCurrentLine() + 1);
+
+		if (lineStr.Find("/SOURCE") != wxNOT_FOUND)
+			atpFile.InsertLine(masks["SOURCE"], atpFile.GetCurrentLine() + 1);
+
+		if (lineStr.Find("/BRANCH") != wxNOT_FOUND)
+			atpFile.InsertLine(masks["BRANCH"], atpFile.GetCurrentLine() + 1);
+
+		lineStr = atpFile.GetNextLine();
+	}
+
+	lineStr = atpFile.GetFirstLine();
+	while (!atpFile.Eof())
+	{
+		lineStr += atpFile.GetNextLine() + "\n";
+
+	}
+
+
+	//int cardPos = sourceCardPos;
+	//for (char i = 'A'; i <= 'C'; ++i) {
+	//	wxString angle = wxString::FromCDouble(std::arg(m_data.puVoltage) * 180.0 / M_PI - 120.0 * (i - 'A'), 5); // Angle in degrees
+	//
+	//	// Insert spaces before to complete 10 characters
+	//	while (angle.Length() < 10) angle = " " + angle;
+	//
+	//	//lineStr = wxString::Format(sourceMask, i, ampl, freq, angle);
+	//	atpFile.InsertLine(lineStr, cardPos);
+	//	cardPos++;
+	//
+	//	if (hasBusData) {
+	//		// Insert harmonic voltage
+	//		for (size_t j = 0; j < busData.harmonicOrder.size(); ++j) {
+	//			int order = busData.harmonicOrder[j];
+	//			if (order == 1) continue; // Skip fundamental
+	//
+	//			std::complex<double> harmVoltage = busData.harmonicVoltage[j];
+	//
+	//			voltage = std::abs(busData.harmonicVoltage[j]) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3));
+	//			wxString amplH = wxString::FromCDouble(voltage, 3);
+	//			while (amplH.Length() < 10) amplH = " " + amplH;
+	//
+	//			wxString freqH = wxString::FromCDouble(m_data.frequency * static_cast<double>(order), 5);
+	//			while (freqH.Length() < 10) freqH = " " + freqH;
+	//
+	//			double angleValue = std::arg(harmVoltage) * 180.0 / M_PI;
+	//			if (order % 3 == 1) { // Positive sequence
+	//				angleValue += -120.0 * (i - 'A');
+	//			}
+	//			else if (order % 3 == 2) { // Negative sequence
+	//				angleValue += 120.0 * (i - 'A');
+	//			}
+	//			// Zero sequence doesn't change the angle because it's the same for all phases
+	//
+	//			wxString angleH = wxString::FromCDouble(angleValue, 5);
+	//			while (angleH.Length() < 10) angleH = " " + angleH;
+	//
+	//			//lineStr = wxString::Format(sourceMask, i, amplH, freqH, angleH);
+	//			atpFile.InsertLine(lineStr, cardPos);
+	//			cardPos++;
+	//		}
+	//	}
+	//}
 
 	return true;
 }
@@ -621,7 +755,7 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 		SetATPParameter(copyFile, wxT("BEGIN NEW DATA CASE"), 2, 0, 8, wxT("99999999"));
 		SetATPParameter(copyFile, wxT("BEGIN NEW DATA CASE"), 2, 8, 8, wxString::Format("%8d", m_data.recordFrequency));
 
-		// Add source and switch to selectec node
+		// Add source and switch to selected node
 		AddConnectionToNode(copyFile, m_data.atpNodeName);
 
 		copyFile.Write();
@@ -631,9 +765,81 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 		return false;
 	}
 
+
+	ATPPSPBridge bridge;
+
+	//wxProcess* proc = new wxProcess();
+
 	//wxString cmd = properties.GetGeneralPropertiesData().atpPath.GetFullPath() + wxT(" both ") + fileName.GetFullPath() + wxT(" s -R");
 	wxString cmd = m_data.atpPath.GetFullPath() + wxT(" both ") + fileName.GetFullPath() + wxT(" s -R");
-	wxExecute(cmd, wxEXEC_SYNC | wxEXEC_HIDE_CONSOLE | wxEXEC_NODISABLE, nullptr, &env);
+	long pid = wxExecute(cmd, wxEXEC_ASYNC | wxEXEC_HIDE_CONSOLE | wxEXEC_NODISABLE, nullptr, &env);
+	//long pid = wxExecute(cmd, wxEXEC_SYNC | wxEXEC_HIDE_CONSOLE | wxEXEC_NODISABLE, nullptr, &env);
+	//long pid = wxExecute(cmd, wxEXEC_ASYNC | wxEXEC_NODISABLE, nullptr, &env);
+	//long pid = wxExecute(cmd, wxEXEC_ASYNC | wxEXEC_NODISABLE, proc, &env);
+
+	HANDLE hProcess = OpenProcess(SYNCHRONIZE, FALSE, static_cast<DWORD>(pid));
+	bridge.SetProcessHandle(hProcess);
+
+
+	//wxBusyInfo wait(_("Connecting to ATP..."));
+	//wxBeginBusyCursor();
+
+	wxStopWatch sw;
+
+	if (!bridge.Connect(5000, 100))
+	{
+		if (!CheckLISFile(fileName, errorMsg))
+		{
+			errorMsg = _("Unable to connect to ATP.\n"
+				"Please make sure you are using an ATP version with PSP support.");
+		}
+
+		return false;
+	}
+	//wxEndBusyCursor();
+
+
+	auto& data = bridge.GetSharedData();
+	data.vrms = std::abs(m_data.puVoltage) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3));
+	data.phase = std::arg(m_data.puVoltage) * 180.0 / M_PI;
+	data.mode = Mode::Both;
+	m_data.atpData.clear();
+	m_data.atpSampleData.clear();
+
+
+	while (bridge.WaitATP())
+	{
+		data = bridge.GetSharedData();
+
+		// Process ATP data
+		if (data.stepCount > 0)
+		{
+			double dt = data.atpStepsize;
+
+			double t0 = data.t - (data.stepCount - 1) * dt;
+
+			m_data.atpData.reserve(m_data.atpData.size() + data.stepCount);
+
+			for (uint32_t i = 0; i < data.stepCount; ++i)
+			{
+				double t = t0 + i * dt;
+				double ia = data.samples[i].current[0];
+				double ib = data.samples[i].current[1];
+				double ic = data.samples[i].current[2];
+
+				m_data.atpData.emplace_back(t, ia);
+				m_data.atpSampleData.push_back({.t = t, .current = { ia, ib, ic } });
+			}
+		}
+
+		bridge.ReleaseATP();
+	}
+
+	if (data.terminate < 0)
+	{
+		CheckLISFile(fileName, errorMsg);
+		return false;
+	}
 
 	// Delete all .tmp files
 	wxDir dir(atpFolder);
@@ -645,6 +851,10 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 			cont = dir.GetNext(&file);
 		}
 	}
+	return true;
+
+	errorMsg = "Not implemented yet.\n EMTElement.cpp, line 772ish";
+	return false;
 
 	fileName.SetFullName(fileName.GetName() + wxT(".pl4"));
 	wxFileInputStream pl4File(fileName.GetFullPath());
@@ -825,6 +1035,7 @@ void EMTElement::UpdateData(const PropertiesData* properties, bool updateVoltage
 		m_data.frequency = properties->GetSimulationPropertiesData().stabilityFrequency;
 		m_data.atpPath = properties->GetGeneralPropertiesData().atpPath;
 		m_data.atpWorkFolder = properties->GetGeneralPropertiesData().atpWorkFolder;
+		m_data.pspStepSize = properties->GetSimulationPropertiesData().timeStep;
 	}
 	if (!m_parentList.empty()) {
 		Bus* bus = static_cast<Bus*>(m_parentList[0]);
@@ -839,6 +1050,13 @@ void EMTElement::UpdateData(const PropertiesData* properties, bool updateVoltage
 		}
 	}
 
+}
+
+void EMTElement::SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit)
+{
+	if (!nominalVoltage.empty()) {
+		m_data.baseVoltage = GetValueFromUnit(nominalVoltage[0], nominalVoltageUnit[0]);
+	}
 }
 
 std::vector<double> EMTElement::DoMedianFilter(double* extension, std::vector<double>& result, const int& n)
@@ -867,4 +1085,93 @@ std::vector<double> EMTElement::DoMedianFilter(double* extension, std::vector<do
 		result[i - 2] = window[2];
 	}
 	return result;
+}
+
+wxString EMTElement::ATPField(double value, size_t width)
+{
+	wxString best;
+
+	// Try fixed-point notation
+	for (int prec = 15; prec >= 0; --prec)
+	{
+		wxString s = wxString::Format("%.*f", prec, value);
+		s.Replace(",", ".");
+
+		while (s.Contains(".") && s.EndsWith("0"))
+			s.RemoveLast();
+		if (s.EndsWith("."))
+			s.RemoveLast();
+
+		if (s.Length() <= width)
+		{
+			best = s;
+			break;
+		}
+	}
+
+	// Try scientific notation
+	for (int prec = 15; prec >= 0; --prec)
+	{
+		wxString s = wxString::Format("%.*E", prec, value);
+		s.Replace(",", ".");
+
+		if (prec == 0)
+			s.Replace("E", ".E");
+
+		if (s.Length() <= width)
+		{
+			// Keep the representation with the highest useful precision
+			if (best.empty() || s.Length() > best.Length())
+				best = s;
+
+			break;
+		}
+	}
+
+	if (best.empty())
+		return wxString('*', width);
+
+	best.Prepend(wxString(' ', width - best.Length()));
+	return best;
+}
+
+bool EMTElement::CheckLISFile(wxFileName fileName, wxString& errorMsg) const
+{
+	wxString atpErrorMsg = _("No error found.");
+
+	fileName.SetFullName(fileName.GetName() + wxT(".lis"));
+	wxTextFile lisFile(fileName.GetFullPath());
+
+	if (!lisFile.Exists()) {
+		errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP program did not return any error messages."), m_data.name);
+		return false;
+	}
+	if (lisFile.Open()) {
+		wxString line = lisFile.GetFirstLine() + "\n";
+		bool foundError = false;
+		int lineCount = -1;
+		atpErrorMsg.Clear();
+		while (!lisFile.Eof())
+		{
+			if (line.Find(wxT("KILL ")) != wxNOT_FOUND) {
+				foundError = true;
+				lineCount++;
+			}
+			if (line.Find(wxT("----------")) != wxNOT_FOUND) {
+				foundError = false;
+			}
+			if (foundError && lineCount == 1)
+				atpErrorMsg += line + " ";
+			line = lisFile.GetNextLine();
+		}
+		lisFile.Close();
+	}
+	else
+	{
+		errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP program did not return any error messages."), m_data.name);
+		return true;
+	}
+
+	errorMsg = wxString::Format(_("Fail to run ATP file of the electromagnetic element \"%s\".\nThe ATP returned the following error message:\n\"%s\""), m_data.name, atpErrorMsg);
+	return true;
 }

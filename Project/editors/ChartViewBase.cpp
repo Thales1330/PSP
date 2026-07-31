@@ -15,11 +15,11 @@ namespace {
 // return the wxBORDER_SIMPLE that matches the current application theme
 wxBorder get_border_simple_theme_aware_bit() {
 #if wxVERSION_NUMBER >= 3300 && defined(__WXMSW__)
-    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_STATIC;
+    return wxSystemSettings::GetAppearance().IsDark() ? wxBORDER_SIMPLE : wxBORDER_DEFAULT;
 #else
     return wxBORDER_DEFAULT;
 #endif
-} // DoGetBorderSimpleBit
+} // get_border_simple_theme_aware_bit
 bool bBitmapLoaded = false;
 } // namespace
 
@@ -216,6 +216,7 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
     }
     // Connect events
     this->Bind(wxEVT_SIZE, &ChartViewBase::OnResize, this);
+    this->Bind(wxEVT_CLOSE_WINDOW, &ChartViewBase::OnClose, this);
     this->Bind(wxEVT_COMMAND_MENU_SELECTED, &ChartViewBase::OnMenuSaveImageClick, this,m_menuItemSaveImage->GetId());
     this->Bind(wxEVT_COMMAND_MENU_SELECTED, &ChartViewBase::OnMenuSendClipClick, this,m_menuItemSendToClipboard->GetId());
     this->Bind(wxEVT_COMMAND_MENU_SELECTED, &ChartViewBase::OnMenuExpCSVClick, this,m_menuItemExportCSV->GetId());
@@ -234,6 +235,7 @@ ChartViewBase::ChartViewBase(wxWindow* parent, wxWindowID id, const wxString& ti
 ChartViewBase::~ChartViewBase()
 {
     this->Unbind(wxEVT_SIZE, &ChartViewBase::OnResize, this);
+    this->Unbind(wxEVT_CLOSE_WINDOW, &ChartViewBase::OnClose, this);
     this->Unbind(wxEVT_COMMAND_MENU_SELECTED, &ChartViewBase::OnMenuSaveImageClick, this,m_menuItemSaveImage->GetId());
     this->Unbind(wxEVT_COMMAND_MENU_SELECTED, &ChartViewBase::OnMenuSendClipClick, this,m_menuItemSendToClipboard->GetId());
     this->Unbind(wxEVT_COMMAND_MENU_SELECTED, &ChartViewBase::OnMenuExpCSVClick, this,m_menuItemExportCSV->GetId());

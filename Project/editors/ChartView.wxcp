@@ -134,6 +134,12 @@
 					"m_functionNameAndSignature":	"OnResize(wxSizeEvent& event)",
 					"m_description":	"Process a wxEVT_SIZE event",
 					"m_noBody":	false
+				}, {
+					"m_eventName":	"wxEVT_CLOSE_WINDOW",
+					"m_eventClass":	"wxCloseEvent",
+					"m_functionNameAndSignature":	"OnClose(wxCloseEvent& event)",
+					"m_description":	"Process a close event. This event applies to wxFrame and wxDialog classes",
+					"m_noBody":	false
 				}],
 			"m_children":	[{
 					"m_type":	4457,

@@ -1,14 +1,15 @@
-#ifndef EMTELEMENTFORM_H
+﻿#ifndef EMTELEMENTFORM_H
 #define EMTELEMENTFORM_H
 #include "ElementFormBase.h"
 
 class EMTElement;
 class PropertiesData;
+class Workspace;
 
 class EMTElementForm : public EMTElementFormBase
 {
 public:
-    EMTElementForm(wxWindow* parent, EMTElement* emtElement);
+    EMTElementForm(wxWindow* parent, EMTElement* emtElement, Workspace* workspace);
     virtual ~EMTElementForm();
     virtual bool ValidateData();
 protected:
@@ -22,6 +23,7 @@ protected:
 
     wxWindow* m_parent;
     EMTElement* m_emtElement = nullptr;
+    Workspace* m_workspace = nullptr;
     PropertiesData* m_properties = nullptr;
 };
 #endif // EMTELEMENTFORM_H

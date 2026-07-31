@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  *  Copyright (C) 2017  Thales Lima Oliveira <thales@ufu.br>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -1021,8 +1021,8 @@ wxString ChartView::GetUnitFromMagText(wxString magText)
 {
 	wxString unitText = " (p.u.)";
 	if (magText.IsEmpty()) unitText = "";
-	else if (magText == _("Angle")) unitText = " (°)";
-	else if (magText == _("Delta")) unitText = " (°)";
+	else if (magText == _("Angle")) unitText = " (Â°)";
+	else if (magText == _("Delta")) unitText = " (Â°)";
 	else if (magText == _("Frequency")) unitText = " (Hz)";
 	else if (magText == _("Velocity")) unitText = " (rad/s)";
 	else if (magText == _("Slip")) unitText = " (%)";
@@ -1083,4 +1083,8 @@ void ChartView::OnResize(wxSizeEvent& event)
 		//DrawChartDir();
 	}
 	event.Skip();
+}
+void ChartView::OnClose(wxCloseEvent& event)
+{
+	Destroy();
 }

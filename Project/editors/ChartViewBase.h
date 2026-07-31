@@ -79,6 +79,7 @@ protected:
 
 protected:
     virtual void OnResize(wxSizeEvent& event) { event.Skip(); }
+    virtual void OnClose(wxCloseEvent& event) { event.Skip(); }
     virtual void OnMenuSaveImageClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuSendClipClick(wxCommandEvent& event) { event.Skip(); }
     virtual void OnMenuExpCSVClick(wxCommandEvent& event) { event.Skip(); }
