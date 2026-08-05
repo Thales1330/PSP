@@ -22,50 +22,60 @@
 #include <wx/app.h>
 #include <wx/stopwatch.h>
 #include <wx/progdlg.h>
+#ifdef _WIN32
 #include <windows.h>
+#else
+#include <semaphore.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <cerrno>
+#endif
 
 enum class Mode
 {
-    RawCurrent = 0,
-    Phasor = 1,
-    Both = 2
+	RawCurrent = 0,
+	Phasor = 1,
+	Both = 2
 };
 
 struct Sample
 {
-    double current[3];
+	double current[3];
 };
 
 struct Phasor
 {
-    double Id[3];
-    double Iq[3];
+	double Id[3];
+	double Iq[3];
 };
 
 struct SharedData
 {
 	std::uint32_t nPh;
 
-    double t;
+	double t;
 
-    double vrms;
-    double freq;
-    double theta;
-    double phase;
+	double vrms;
+	double freq;
+	double theta;
+	double phase;
 
-    double stoptime;
-    double atpStepsize;
-    double pspStepsize;
+	double stoptime;
+	double atpStepsize;
+	double pspStepsize;
 
-    Mode mode;
-    int terminate;
+	Mode mode;
+	int terminate;
 
-    Phasor phasor;
+	Phasor phasor;
 
-    std::uint32_t stepCount;
-    std::uint32_t syncSteps;
+	std::uint32_t stepCount;
+	std::uint32_t syncSteps;
 
-    Sample samples[];
+	Sample samples[];
 };
 
 class ATPPSPBridge
@@ -75,13 +85,14 @@ public:
 	ATPPSPBridge();
 	~ATPPSPBridge();
 
-	bool Connect(DWORD timeout, DWORD retryInterval);
+	bool Connect(unsigned timeout, unsigned retryInterval);
 	void Disconnect();
 
 	bool WaitATP();
 	bool ReleaseATP();
 
-    void SetProcessHandle(HANDLE hProcess) { m_hATPProcess = hProcess; }
+	//void SetProcessHandle(HANDLE hProcess) { m_hATPProcess = hProcess; }
+	void SetProcessId(long pid) { m_atpPid = pid; }
 
 	SharedData& GetSharedData() const;
 
@@ -89,10 +100,17 @@ public:
 
 private:
 
+#ifdef _WIN32
 	HANDLE m_hATPReady = nullptr;
 	HANDLE m_hPSPReady = nullptr;
 	HANDLE m_hMapFile = nullptr;
-    HANDLE m_hATPProcess = nullptr;
+#else
+	sem_t* m_hATPReady = SEM_FAILED;
+	sem_t* m_hPSPReady = SEM_FAILED;
+	int m_hMapFile = -1;
+#endif
+
+	long m_atpPid = 0;
 
 	SharedData* m_data = nullptr;
 };

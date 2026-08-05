@@ -777,14 +777,15 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 	//long pid = wxExecute(cmd, wxEXEC_ASYNC | wxEXEC_NODISABLE, nullptr, &env);
 	//long pid = wxExecute(cmd, wxEXEC_ASYNC | wxEXEC_NODISABLE, proc, &env);
 
-	HANDLE hProcess = OpenProcess(SYNCHRONIZE, FALSE, static_cast<DWORD>(pid));
-	bridge.SetProcessHandle(hProcess);
+	//HANDLE hProcess = OpenProcess(SYNCHRONIZE, FALSE, static_cast<DWORD>(pid));
+	//bridge.SetProcessHandle(hProcess);
 
+	
 
 	//wxBusyInfo wait(_("Connecting to ATP..."));
 	//wxBeginBusyCursor();
 
-	wxStopWatch sw;
+	//wxStopWatch sw;
 
 	if (!bridge.Connect(5000, 100))
 	{
@@ -797,6 +798,7 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 		return false;
 	}
 	//wxEndBusyCursor();
+	bridge.SetProcessId(pid);
 
 
 	auto& data = bridge.GetSharedData();
@@ -806,7 +808,7 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 	m_data.atpData.clear();
 	m_data.atpSampleData.clear();
 
-
+	//bridge.ReleaseATP();
 	while (bridge.WaitATP())
 	{
 		data = bridge.GetSharedData();

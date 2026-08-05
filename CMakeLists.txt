@@ -47,6 +47,7 @@ file(GLOB_RECURSE PROJECT_SOURCES
   "${CMAKE_SOURCE_DIR}/Project/*.cpp"
   "${CMAKE_SOURCE_DIR}/Project/*.h"
 )
+list(FILTER PROJECT_SOURCES EXCLUDE REGEX ".*/Project/data/atp/.*")
 
 file(GLOB_RECURSE VENDOR_SOURCES
   "${CMAKE_SOURCE_DIR}/vendors/*.cpp"
