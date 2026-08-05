@@ -34,20 +34,15 @@ OUTPUT i[1..n]
  | Next, declarations provate to this model                            |
  -------------------------------------------------------------endcomment
 
-VAR
-    rmd[1..n]
-    
 DATA
     pspSS
     
+-- Use n2 instead of n*n in ixin.
+-- The MODELS runtime does not correctly evaluate n*n in the FOREIGN declaration.
 MODEL PSP FOREIGN PSP_MODEL
-{ixdata:4,ixin:2*n+1,ixout:n,ixvar:2}
+{ixdata:4,ixin:n+n2+1,ixout:n,ixvar:2}
 
 EXEC
-for i := 1 to n do
-    rmd[i] := rth[(i-1)*n + i]
-endfor
-
 USE PSP AS PSP
 
     DATA
@@ -58,8 +53,8 @@ USE PSP AS PSP
 
     INPUT
         xin[1..n] := vth[1..n]
-        xin[n+1..2*n] := rmd[1..n]
-        xin[2*n+1] := t
+        xin[n+1..n+n2] := gth[1..n2]
+        xin[n+n2+1] := t
 
     OUTPUT
         i[1..n] := xout[1..n]
