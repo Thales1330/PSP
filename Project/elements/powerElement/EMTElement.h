@@ -19,6 +19,7 @@
 #define EMTELEMENT_H
 
 #include "Shunt.h"
+#include "../../utils/ATPPSPBridge.h"
 #include <map>
 #include <array>
 
@@ -29,6 +30,8 @@ struct ATPSample
 {
 	double t;
 	std::array<double, 3> current;
+	std::array<double, 3> mag;
+	std::array<double, 3> angle;
 };
 
 struct EMTElementData {
@@ -46,6 +49,9 @@ struct EMTElementData {
 	wxString atpWorkFolder = "";
 	wxFileName atpPath;
 
+	// Last phasor current calculated inn ATP
+	std::complex<double> current = std::complex<double>(0.0, 0.0);
+
 	// Power Flow
 	std::complex<double> y0 = std::complex<double>(0.0, 0.0); // Base admittance
 	std::complex<double> power = std::complex<double>(0.0, 0.0);
@@ -57,7 +63,9 @@ struct EMTElementData {
 	//std::vector< std::complex<double> > currHarmonics;
 	//std::vector<int> currHarmonicsOrder;
 	std::map<int, std::complex<double> > currHarmonics;
-	std::vector< std::pair<double, double> > atpData;
+	//std::vector< std::pair<double, double> > atpData;
+
+	// Sample data
 	std::vector<ATPSample> atpSampleData;
 	double nPhases = 3;
 	std::vector< std::pair<double, double> > inFFTData;
@@ -98,13 +106,13 @@ public:
 	wxArrayString GetATPNodes(wxArrayString atpFile);
 	bool SetATPParameter(wxTextFile& atpFile, const wxString& card, const int& line, const int& initPos, const int& size, const wxString& value);
 	bool AddConnectionToNode(wxTextFile& atpFile, const wxString& node);
-	std::vector<double> MedianFilter(const std::vector<double>& data);
-	bool CalculateCurrent( wxString& errorMsg, const bool& saveFFTData = false);
+	void MedianFilter(std::vector<double>& data);
+	bool CalculateCurrent( wxString& errorMsg, const Mode& mode = Mode::Phasor, const bool& saveRawData = false, const bool& saveFFTData = false);
 	void UpdateData(const PropertiesData* properties = nullptr, bool updateVoltageBase = false);
 	void SetNominalVoltage(std::vector<double> nominalVoltage, std::vector<ElectricalUnit> nominalVoltageUnit);
 
 protected:
-	std::vector<double> DoMedianFilter(double* extension, std::vector<double>& result, const int& n);
+	void DoMedianFilter(double* extension, std::vector<double>& result, const int& n);
 	wxString ATPField(double value, size_t width);
 	bool CheckLISFile(wxFileName fileName, wxString& errorMsg) const;
 	EMTElementData m_data;

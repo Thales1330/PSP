@@ -1,5 +1,6 @@
 ﻿#include "EMTElement.h"
 
+#include <ranges>
 #include <wx/app.h>
 
 #include "../../forms/EMTElementForm.h"
@@ -8,7 +9,6 @@
 #include "../../extLibs/fftw/fftw3.h"
 #include "../../elements/GCText.h"
 #include "../../utils/Path.h"
-#include "../../utils/ATPPSPBridge.h"
 
 #include <wx/dcgraph.h>
 #include <wx/textfile.h>
@@ -677,43 +677,60 @@ bool EMTElement::AddConnectionToNode(wxTextFile& atpFile, const wxString& node)
 	return true;
 }
 
-std::vector<double> EMTElement::MedianFilter(const std::vector<double>& data)
+void EMTElement::MedianFilter(std::vector<double>& data)
 {
 	// Based on: http://www.librow.com/articles/article-1
 
-	size_t n = data.size();
-	std::vector<double> result(data);
+	const size_t n = data.size();
 
-	//   Check arguments
-	if (data.empty() || n < 1)
-		return result;
-	//   Treat special case N = 1
-	if (n == 1)
-	{
-		result[0] = data[0];
-		return result;
-	}
-	//   Allocate memory for signal extension
-	double* extension = new double[n + 4];
-	//   Check memory allocation
-	//if (!extension)
-	//	return;
-	//   Create signal extension
-	memcpy(extension + 2, data.data(), n * sizeof(double));
-	for (int i = 0; i < 2; ++i)
-	{
-		extension[i] = data[1 - i];
-		extension[n + 2 + i] = data[n - 1 - i];
-	}
-	//   Call median filter implementation
-	result = DoMedianFilter(extension, result, n + 4);
-	//   Free memory
-	delete[] extension;
+	if (n < 2)
+		return;
 
-	return result;
+	std::vector<double> extension(n + 4);
+
+	std::memcpy(extension.data() + 2, data.data(), n * sizeof(double));
+
+	extension[0] = data[1];
+	extension[1] = data[0];
+	extension[n + 2] = data[n - 1];
+	extension[n + 3] = data[n - 2];
+
+	DoMedianFilter(extension.data(), data, static_cast<int>(n + 4));
+
+	//size_t n = data.size();
+	//std::vector<double> result(data);
+	//
+	////   Check arguments
+	//if (data.empty() || n < 1)
+	//	return result;
+	////   Treat special case N = 1
+	//if (n == 1)
+	//{
+	//	result[0] = data[0];
+	//	return result;
+	//}
+	////   Allocate memory for signal extension
+	//double* extension = new double[n + 4];
+	////   Check memory allocation
+	////if (!extension)
+	////	return;
+	////   Create signal extension
+	//memcpy(extension + 2, data.data(), n * sizeof(double));
+	//for (int i = 0; i < 2; ++i)
+	//{
+	//	extension[i] = data[1 - i];
+	//	extension[n + 2 + i] = data[n - 1 - i];
+	//}
+	////   Call median filter implementation
+	// DoMedianFilter(extension, result, n + 4);
+	////result = DoMedianFilter(extension, result, n + 4);
+	////   Free memory
+	//delete[] extension;
+	//
+	//return result;
 }
 
-bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
+bool EMTElement::CalculateCurrent(wxString& errorMsg, const Mode& mode, const bool& saveRawData, const bool& saveFFTData)
 {
 	wxFileName fileName(m_data.atpFile);
 	if (!fileName.IsOk()) {
@@ -777,16 +794,6 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 	//long pid = wxExecute(cmd, wxEXEC_ASYNC | wxEXEC_NODISABLE, nullptr, &env);
 	//long pid = wxExecute(cmd, wxEXEC_ASYNC | wxEXEC_NODISABLE, proc, &env);
 
-	//HANDLE hProcess = OpenProcess(SYNCHRONIZE, FALSE, static_cast<DWORD>(pid));
-	//bridge.SetProcessHandle(hProcess);
-
-	
-
-	//wxBusyInfo wait(_("Connecting to ATP..."));
-	//wxBeginBusyCursor();
-
-	//wxStopWatch sw;
-
 	if (!bridge.Connect(5000, 100))
 	{
 		if (!CheckLISFile(fileName, errorMsg))
@@ -802,35 +809,74 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 
 
 	auto& data = bridge.GetSharedData();
-	data.vrms = std::abs(m_data.puVoltage) * m_data.baseVoltage * (std::sqrt(2) / std::sqrt(3));
+	data.vrms = std::abs(m_data.puVoltage) * m_data.baseVoltage / std::sqrt(3);
 	data.phase = std::arg(m_data.puVoltage) * 180.0 / M_PI;
-	data.mode = Mode::Both;
-	m_data.atpData.clear();
+	data.mode = mode;
+	//m_data.atpData.clear();
 	m_data.atpSampleData.clear();
 
 	//bridge.ReleaseATP();
 	while (bridge.WaitATP())
 	{
+		if (!saveRawData || !saveFFTData) {
+			bridge.ReleaseATP();
+			continue;
+		}
+
 		data = bridge.GetSharedData();
+
 
 		// Process ATP data
 		if (data.stepCount > 0)
 		{
-			double dt = data.atpStepsize;
+			const double dt = data.atpStepsize;
+			const double t0 = data.t - (data.stepCount - 1) * dt;
 
-			double t0 = data.t - (data.stepCount - 1) * dt;
+			//m_data.atpData.reserve(m_data.atpData.size() + data.stepCount);
+			m_data.atpSampleData.reserve(m_data.atpSampleData.size() + data.stepCount);
 
-			m_data.atpData.reserve(m_data.atpData.size() + data.stepCount);
+			std::vector<double> ia, ib, ic;
+
+			if (m_data.useMedianFilter)
+			{
+				ia.reserve(data.stepCount);
+				ib.reserve(data.stepCount);
+				ic.reserve(data.stepCount);
+
+				for (uint32_t i = 0; i < data.stepCount; ++i)
+				{
+					ia.push_back(data.samples[i].current[0]);
+					ib.push_back(data.samples[i].current[1]);
+					ic.push_back(data.samples[i].current[2]);
+				}
+
+				MedianFilter(ia);
+				MedianFilter(ib);
+				MedianFilter(ic);
+			}
 
 			for (uint32_t i = 0; i < data.stepCount; ++i)
 			{
-				double t = t0 + i * dt;
-				double ia = data.samples[i].current[0];
-				double ib = data.samples[i].current[1];
-				double ic = data.samples[i].current[2];
+				const double t = t0 + i * dt;
 
-				m_data.atpData.emplace_back(t, ia);
-				m_data.atpSampleData.push_back({.t = t, .current = { ia, ib, ic } });
+				const double currentA = m_data.useMedianFilter ? -ia[i] : -data.samples[i].current[0];
+				const double currentB = m_data.useMedianFilter ? -ib[i] : -data.samples[i].current[1];
+				const double currentC = m_data.useMedianFilter ? -ic[i] : -data.samples[i].current[2];
+
+				const double iaMag = std::hypot(-data.phasor.Id[0], -data.phasor.Iq[0]);
+				const double ibMag = std::hypot(-data.phasor.Id[1], -data.phasor.Iq[1]);
+				const double icMag = std::hypot(-data.phasor.Id[2], -data.phasor.Iq[2]);
+				const double iaAng = std::atan2(-data.phasor.Iq[0], -data.phasor.Id[0]);
+				const double ibAng = std::atan2(-data.phasor.Iq[1], -data.phasor.Id[1]);
+				const double icAng = std::atan2(-data.phasor.Iq[2], -data.phasor.Id[2]);
+
+				//m_data.atpData.emplace_back(t, currentA);
+				m_data.atpSampleData.push_back({
+					.t = t,
+					.current = { currentA, currentB, currentC },
+					.mag = {iaMag, ibMag, icMag},
+					.angle = {iaAng, ibAng, icAng}
+					});
 			}
 		}
 
@@ -842,6 +888,10 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 		CheckLISFile(fileName, errorMsg);
 		return false;
 	}
+	constexpr size_t phase = 0; // 0 = A, 1 = B, 2 = C
+
+	// Save current
+	m_data.current = std::complex<double>(-data.phasor.Id[phase], -data.phasor.Iq[phase]);
 
 	// Delete all .tmp files
 	wxDir dir(atpFolder);
@@ -853,6 +903,129 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 			cont = dir.GetNext(&file);
 		}
 	}
+
+	if (saveFFTData)
+	{
+		// FFT
+		double dataStepSize = m_data.atpSampleData[1].t - m_data.atpSampleData[0].t;
+		bool useRemainder = false;
+		size_t sampleCount = m_data.atpSampleData.size();
+		size_t n = static_cast<size_t>(std::ceil(1.0 / (dataStepSize * fundFreq)));
+
+		// Due to ATP logic, the number of samples can be greater than the number
+		// of samples stored. In this case, follow the remainder approach.
+		if (n > sampleCount)
+		{
+			n = sampleCount;
+			useRemainder = true;
+		}
+
+		double fs = 1.0 / dataStepSize;
+		double df = fs / static_cast<double>(n);
+
+		if (useRemainder) {
+			double rmder = std::abs(std::remainder(fundFreq, df));
+			size_t minRmderN = n;
+
+			while (rmder > 1e-3)
+			{
+				--n;
+				df = fs / static_cast<double>(n);
+				if (std::abs(std::remainder(fundFreq, df)) < rmder)
+					minRmderN = n;
+
+				rmder = std::abs(std::remainder(fundFreq, df));
+				if (n == 0) {
+					n = minRmderN;
+					df = fs / static_cast<double>(n);
+					break;
+				}
+			}
+		}
+
+		double dtWindow = m_data.atpSampleData.back().t - m_data.atpSampleData[sampleCount - n].t;
+
+		fftw_complex* out = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (n / 2 + 1));
+
+		double* in = (double*)fftw_malloc(sizeof(double) * n);
+
+		// Populate FFT input
+		const size_t first = sampleCount - n;
+		for (size_t i = 0; i < n; ++i) {
+			in[i] = m_data.atpSampleData[first + i].current[phase];
+		}
+
+		fftw_plan p = fftw_plan_dft_r2c_1d(n, in, out, FFTW_ESTIMATE);
+
+		fftw_execute(p);
+		fftw_destroy_plan(p);
+
+		double ampCorrection = 2.0 / static_cast<double>(n);
+
+		// Identify fundamental frequency
+		int fundIndex = -1;
+		double fundMagnitude = 0.0;
+
+		for (size_t i = 0; i < (n / 2 + 1); ++i) {
+			double freq = static_cast<double>(i) * df;
+
+			if (std::remainder(freq, fundFreq)) {
+				fundIndex = static_cast<int>(i);
+
+				fundMagnitude =
+					std::hypot(out[i][0], out[i][1]) * ampCorrection;
+
+				break;
+			}
+		}
+
+		if (fundIndex < 0) {
+			errorMsg = wxString::Format(_("Fail to identify the fundamental frequency of the electromagnetic element \"%s\"."), m_data.name);
+
+			fftw_free(in);
+			fftw_free(out);
+
+			return false;
+		}
+
+		// Fundamental and harmonics
+		m_data.currHarmonics.clear();
+
+		for (size_t i = 0; i < (n / 2 + 1); ++i) {
+			double freq = static_cast<double>(i) * df;
+			int order = static_cast<int>(std::round(freq / fundFreq));
+
+			if (order > m_data.numMaxHarmonics)
+				break;
+
+			double magnitude = std::hypot(out[i][0], out[i][1]) * ampCorrection;
+
+			if ((magnitude / fundMagnitude) > (m_data.harmonicsThreshold / 100.0)) {
+				m_data.currHarmonics[order] =
+					std::complex<double>(out[i][0], out[i][1]) *
+					ampCorrection / std::sqrt(2.0);
+			}
+		}
+
+		m_data.inFFTData.clear();
+		m_data.outFFTData.clear();
+
+		for (size_t i = 0; i < n; ++i)
+		{
+			m_data.inFFTData.emplace_back(m_data.atpSampleData[first + i].t, in[i]);
+		}
+
+		for (size_t i = 0; i < (n / 2 + 1); ++i)
+		{
+			std::complex<double> value(out[i][0] * ampCorrection, out[i][1] * ampCorrection);
+			double freq = static_cast<double>(i) * df;
+			m_data.outFFTData.emplace_back(freq, value);
+		}
+
+		fftw_free(in);
+		fftw_free(out);
+	}
+
 	return true;
 
 	errorMsg = "Not implemented yet.\n EMTElement.cpp, line 772ish";
@@ -881,7 +1054,7 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 		delete[] buffer;
 
 		if (m_data.useMedianFilter)
-			valueVec = MedianFilter(valueVec);
+			MedianFilter(valueVec);
 
 		// FFT
 		double dataStepSize = timeVec[1] - timeVec[0]; // Real sampling time from data
@@ -968,23 +1141,23 @@ bool EMTElement::CalculateCurrent(wxString& errorMsg, const bool& saveFFTData)
 			}
 		}
 
-		if (saveFFTData) {
-			m_data.atpData.clear();
-			m_data.inFFTData.clear();
-			m_data.outFFTData.clear();
-			for (size_t i = 0; i < valueVec.size(); i++) {
-				m_data.atpData.emplace_back(std::make_pair(timeVec[i], valueVec[i]));
-			}
-			for (size_t i = 0; i < n; i++) {
-				m_data.inFFTData.emplace_back(std::make_pair(timeVec[i + timeVec.size() - n], in[i]));
-			}
-			for (size_t i = 0; i < (n / 2 + 1); i++) {
-				std::complex<double> value(out[i][0] * ampCorrection, out[i][1] * ampCorrection);
-				double freq = static_cast<double>(i) * df;
-				m_data.outFFTData.emplace_back(std::make_pair(freq, value));
-			}
-		}
-
+		//if (saveFFTData) {
+		//	m_data.atpData.clear();
+		//	m_data.inFFTData.clear();
+		//	m_data.outFFTData.clear();
+		//	for (size_t i = 0; i < valueVec.size(); i++) {
+		//		m_data.atpData.emplace_back(std::make_pair(timeVec[i], valueVec[i]));
+		//	}
+		//	for (size_t i = 0; i < n; i++) {
+		//		m_data.inFFTData.emplace_back(std::make_pair(timeVec[i + timeVec.size() - n], in[i]));
+		//	}
+		//	for (size_t i = 0; i < (n / 2 + 1); i++) {
+		//		std::complex<double> value(out[i][0] * ampCorrection, out[i][1] * ampCorrection);
+		//		double freq = static_cast<double>(i) * df;
+		//		m_data.outFFTData.emplace_back(std::make_pair(freq, value));
+		//	}
+		//}
+		//
 		fftw_free(in);
 		fftw_free(out);
 
@@ -1061,7 +1234,7 @@ void EMTElement::SetNominalVoltage(std::vector<double> nominalVoltage, std::vect
 	}
 }
 
-std::vector<double> EMTElement::DoMedianFilter(double* extension, std::vector<double>& result, const int& n)
+void EMTElement::DoMedianFilter(double* extension, std::vector<double>& result, const int& n)
 {
 	//   Move window through all elements of the signal
 	for (int i = 2; i < n - 2; ++i)
@@ -1079,14 +1252,12 @@ std::vector<double> EMTElement::DoMedianFilter(double* extension, std::vector<do
 				if (window[k] < window[min])
 					min = k;
 			//   Put found minimum element in its place
-			const double temp = window[j];
-			window[j] = window[min];
-			window[min] = temp;
+			std::swap(window[j], window[min]);
 		}
 		//   Get result - the middle element
 		result[i - 2] = window[2];
 	}
-	return result;
+	//return result;
 }
 
 wxString EMTElement::ATPField(double value, size_t width)
