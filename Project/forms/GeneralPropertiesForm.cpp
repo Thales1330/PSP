@@ -19,6 +19,7 @@
 #include <wx/fontenum.h>
 #include <wx/font.h>
 #include <wx/stdpaths.h>
+#include <wx/app.h>
 #include "../utils/PropertiesData.h"
 
 
@@ -141,10 +142,12 @@ bool GeneralPropertiesForm::ValidateData()
 	case 0: {
 		line += "light";
 		data.theme = THEME_LIGHT;
+		wxTheApp->SetAppearance(wxApp::Appearance::Light);
 	} break;
 	case 1: {
 		line += "dark";
 		data.theme = THEME_DARK;
+		wxTheApp->SetAppearance(wxApp::Appearance::Dark);
 	} break;
 	}
 	file.AddLine(line);
@@ -173,4 +176,17 @@ bool GeneralPropertiesForm::ValidateData()
 	}
 	m_properties->SetGeneralPropertiesData(data);
 	return true;
+}
+
+void GeneralPropertiesForm::OnThemeSelected(wxCommandEvent& event)
+{
+	switch (event.GetSelection())
+	{
+	case 0:
+		wxTheApp->SetAppearance(wxApp::Appearance::Light);
+		break;
+	case 1:
+		wxTheApp->SetAppearance(wxApp::Appearance::Dark);
+		break;
+	}
 }

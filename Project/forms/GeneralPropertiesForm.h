@@ -41,6 +41,7 @@ public:
 	virtual ~GeneralPropertiesForm();
 
 protected:
+    virtual void OnThemeSelected(wxCommandEvent& event);
 	virtual void OnButtonCancelClick(wxCommandEvent& event) { EndModal(wxID_CANCEL); }
 	virtual void OnButtonOKClick(wxCommandEvent& event);
 	virtual bool ValidateData();

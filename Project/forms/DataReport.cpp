@@ -1169,9 +1169,13 @@ void DataReport::FillValues(GridSelection gridToFill)
 			auto data = bus->GetElectricalData();
 			double vb = bus->GetValueFromUnit(data.nominalVoltage, data.nominalVoltageUnit);
 
-			m_gridHarmBuses->SetCellSize(rowNumber, 0, data.harmonicOrder.size(), 1);
+			const int harmonicCount = static_cast<int>(data.harmonicOrder.size());
+			if (harmonicCount == 0)
+				continue;
+
+			m_gridHarmBuses->SetCellSize(rowNumber, 0, harmonicCount, 1);
 			m_gridHarmBuses->SetCellValue(rowNumber, 0, data.name);
-			m_gridHarmBuses->SetCellSize(rowNumber, 1, data.harmonicOrder.size(), 1);
+			m_gridHarmBuses->SetCellSize(rowNumber, 1, harmonicCount, 1);
 			m_gridHarmBuses->SetCellValue(rowNumber, 1, bus->StringFromDouble(data.thd, 0, m_precision) + wxT("%"));
 			int i = 0;
 			for (auto& order : data.harmonicOrder) {
@@ -1219,20 +1223,25 @@ void DataReport::FillValues(GridSelection gridToFill)
 				isOnline = _("No");
 				textColour = m_offlineColour;
 			}
+
+			const int harmonicCount = static_cast<int>(data.harmonicOrder.size());
+			if (harmonicCount == 0)
+				continue;
+
 			for (int side = 0; side < 2; ++side) {
-				for (unsigned int i = 0; i < data.harmonicOrder.size(); ++i) {
+				for (unsigned int i = 0; i < harmonicCount; ++i) {
 					for (int j = 0; j < 8; ++j) { m_gridHarmBranches->SetCellTextColour(rowNumber + i, j, textColour); }
 				}
 
-				m_gridHarmBranches->SetCellSize(rowNumber, 0, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 0, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 0, _("Line"));
-				m_gridHarmBranches->SetCellSize(rowNumber, 1, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 1, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 1, data.name);
-				m_gridHarmBranches->SetCellSize(rowNumber, 2, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 2, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 2, side == 0 ? busName1 : busName2);
-				m_gridHarmBranches->SetCellSize(rowNumber, 3, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 3, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 3, side == 0 ? busName2 : busName1);
-				m_gridHarmBranches->SetCellSize(rowNumber, 7, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 7, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 7, isOnline);
 
 				int i = 0;
@@ -1287,21 +1296,26 @@ void DataReport::FillValues(GridSelection gridToFill)
 				isOnline = _("No");
 				textColour = m_offlineColour;
 			}
+
+			const int harmonicCount = static_cast<int>(data.harmonicOrder.size());
+			if (harmonicCount == 0)
+				continue;
+
 			for (int side = 0; side < 2; ++side) {
-				for (unsigned int i = 0; i < data.harmonicOrder.size(); ++i) {
+				for (unsigned int i = 0; i < harmonicCount; ++i) {
 					for (int j = 0; j < 8; ++j) { m_gridHarmBranches->SetCellTextColour(rowNumber + i, j, textColour); }
 				}
 				double ib = side == 0 ? ibp : ibs;
 
-				m_gridHarmBranches->SetCellSize(rowNumber, 0, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 0, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 0, _("Transformer"));
-				m_gridHarmBranches->SetCellSize(rowNumber, 1, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 1, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 1, data.name);
-				m_gridHarmBranches->SetCellSize(rowNumber, 2, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 2, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 2, side == 0 ? busName1 : busName2);
-				m_gridHarmBranches->SetCellSize(rowNumber, 3, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 3, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 3, side == 0 ? busName2 : busName1);
-				m_gridHarmBranches->SetCellSize(rowNumber, 7, data.harmonicOrder.size(), 1);
+				m_gridHarmBranches->SetCellSize(rowNumber, 7, harmonicCount, 1);
 				m_gridHarmBranches->SetCellValue(rowNumber, 7, isOnline);
 
 				int i = 0;

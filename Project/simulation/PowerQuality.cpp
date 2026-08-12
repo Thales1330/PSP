@@ -256,7 +256,7 @@ bool PowerQuality::CalculateDistortions(double systemPowerBase, HarmLoadConnecti
 	// Lines
 	for (auto* line : m_lineList) {
 		if (line->IsOnline()) {
-			LineElectricalData data = line->GetElectricalDataRef();
+			auto& data = line->GetElectricalDataRef();
 
 			auto busData1 = static_cast<Bus*>(line->GetParentList()[0])->GetElectricalData();
 			auto busData2 = static_cast<Bus*>(line->GetParentList()[1])->GetElectricalData();
@@ -292,7 +292,7 @@ bool PowerQuality::CalculateDistortions(double systemPowerBase, HarmLoadConnecti
 	// Transformers
 	for (auto* transformer : m_transformerList) {
 		if (transformer->IsOnline()) {
-			TransformerElectricalData data = transformer->GetElectricalDataRef();
+			auto& data = transformer->GetElectricalDataRef();
 
 			auto busData1 = static_cast<Bus*>(transformer->GetParentList()[0])->GetElectricalData();
 			auto busData2 = static_cast<Bus*>(transformer->GetParentList()[1])->GetElectricalData();

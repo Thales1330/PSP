@@ -159,6 +159,7 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
         wxPersistenceManager::Get().Restore(this);
     }
     // Connect events
+    m_choiceTheme->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &GeneralPropertiesFormBase::OnThemeSelected, this);
     m_buttonOK->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonOKClick, this);
     m_buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonCancelClick, this);
     
@@ -166,6 +167,7 @@ GeneralPropertiesFormBase::GeneralPropertiesFormBase(wxWindow* parent, wxWindowI
 
 GeneralPropertiesFormBase::~GeneralPropertiesFormBase()
 {
+    m_choiceTheme->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &GeneralPropertiesFormBase::OnThemeSelected, this);
     m_buttonOK->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonOKClick, this);
     m_buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &GeneralPropertiesFormBase::OnButtonCancelClick, this);
     

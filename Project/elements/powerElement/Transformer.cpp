@@ -695,6 +695,10 @@ TransformerElectricalData Transformer::GetPUElectricalData(double systemBasePowe
 	data.powerFlow[0] = m_electricalData.powerFlow[0];
 	data.powerFlow[1] = m_electricalData.powerFlow[1];
 
+	data.harmonicOrder = m_electricalData.harmonicOrder;
+	data.harmonicCurrent[0] = m_electricalData.harmonicCurrent[0];
+	data.harmonicCurrent[1] = m_electricalData.harmonicCurrent[1];
+
 	double transformerBasePower = GetValueFromUnit(data.nominalPower, data.nominalPowerUnit);
 	double baseVoltage = 0.0;
 	if (data.baseVoltage == 0) {

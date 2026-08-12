@@ -561,10 +561,10 @@ void wxRibbonMetroArtProvider::DrawPanelBackground(
                 dc.SetPen(m_panel_hover_button_border_pen);
                 dc.SetBrush(m_panel_hover_button_background_brush);
                 dc.DrawRectangle(label_rect.GetRight(), label_rect.GetBottom() - 14, 14, 14);
-                dc.DrawBitmap(m_panel_extension_bitmap[1], label_rect.GetRight() + 3, label_rect.GetBottom() - 10, true);
+                dc.DrawBitmap(m_panel_extension_bundle[1].GetBitmapFor(wnd), label_rect.GetRight() + 3, label_rect.GetBottom() - 10, true);
             }
             else
-                dc.DrawBitmap(m_panel_extension_bitmap[0], label_rect.GetRight() + 3, label_rect.GetBottom() - 10, true);
+                dc.DrawBitmap(m_panel_extension_bundle[0].GetBitmapFor(wnd), label_rect.GetRight() + 3, label_rect.GetBottom() - 10, true);
         }
     }
 	
@@ -996,7 +996,7 @@ void wxRibbonMetroArtProvider::DrawToolGroupBackground(
 
 void wxRibbonMetroArtProvider::DrawTool(
                 wxDC& dc,
-                wxWindow* WXUNUSED(wnd),
+                wxWindow* wnd,
                 const wxRect& rect,
                 const wxBitmap& bitmap,
                 wxRibbonButtonKind kind,
@@ -1059,7 +1059,7 @@ void wxRibbonMetroArtProvider::DrawTool(
             dc.DrawLine(rect.x + avail_width + 1, rect.y,
                 rect.x + avail_width + 1, rect.y + rect.height);
         }
-        dc.DrawBitmap(m_toolbar_drop_bitmap, bg_rect.x + avail_width + 2,
+        dc.DrawBitmap(m_toolbar_drop_bundle.GetBitmapFor(wnd), bg_rect.x + avail_width + 2,
             bg_rect.y + (bg_rect.height / 2) - 2, true);
     }
     dc.DrawBitmap(bitmap, bg_rect.x + (avail_width - bitmap.GetWidth()) / 2,

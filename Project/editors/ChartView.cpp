@@ -524,8 +524,13 @@ void ChartView::OnTreeItemActivated(wxTreeEvent& event)
 
 void ChartView::OnTreeItemSelectionChanged(wxTreeEvent& event)
 {
-	if (PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(m_selectedItemID)))
-		data->SetHighlight(false);
+	//if (PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(m_selectedItemID)))
+	//	data->SetHighlight(false);
+	if (m_selectedItemID.IsOk()) {
+		if (PlotData* data = dynamic_cast<PlotData*>(m_treeCtrl->GetItemData(m_selectedItemID))) {
+			data->SetHighlight(false);
+		}
+	}
 
 	m_selectedItemID = event.GetItem();
 

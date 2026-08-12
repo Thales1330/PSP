@@ -269,8 +269,8 @@ void MainFrame::OnNewClick(wxRibbonButtonBarEvent& event)
 	EnableCurrentProjectRibbon();
 
 	Workspace* newWorkspace;
-	newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-		this->GetStatusBar(), this->GetAuiNotebook());
+	//newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), this->GetAuiNotebook());
+	newWorkspace = new Workspace(m_auiNotebook, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), this->GetAuiNotebook());
 	// Set general properties in new Workspace
 	newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
 	newWorkspace->SetColourTheme();
@@ -420,8 +420,8 @@ void MainFrame::OnOpenClick(wxRibbonButtonBarEvent& event)
 
 	EnableCurrentProjectRibbon();
 
-	Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-		this->GetStatusBar(), this->GetAuiNotebook());
+	//Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), this->GetAuiNotebook());
+	Workspace* newWorkspace = new Workspace(m_auiNotebook, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), this->GetAuiNotebook());
 
 	// Set general properties in new workspace.
 	newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
@@ -674,8 +674,8 @@ void MainFrame::OnImportClick(wxRibbonButtonBarEvent& event)
 	// Create a new workspace to import
 	EnableCurrentProjectRibbon();
 
-	Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber),
-		this->GetStatusBar(), this->GetAuiNotebook());
+	//Workspace* newWorkspace = new Workspace(this, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), this->GetAuiNotebook());
+	Workspace* newWorkspace = new Workspace(m_auiNotebook, wxString::Format(_("New project %d"), m_projectNumber), this->GetStatusBar(), this->GetAuiNotebook());
 	// Set general properties in new Workspace
 	newWorkspace->GetProperties()->SetGeneralPropertiesData(m_generalProperties->GetGeneralPropertiesData());
 	newWorkspace->SetColourTheme();
