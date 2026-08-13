@@ -20,7 +20,7 @@ include(FetchContent)
 FetchContent_Declare(
   wxwidgets
   GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-  GIT_TAG v3.3.2
+  GIT_TAG v3.3.3
 )
 
 set(wxBUILD_SHARED OFF CACHE BOOL "" FORCE)
